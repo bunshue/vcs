@@ -37,7 +37,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.bt_exit = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -131,15 +131,15 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // button10
+            // bt_exit
             // 
-            this.button10.Location = new System.Drawing.Point(1092, 12);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(89, 35);
-            this.button10.TabIndex = 11;
-            this.button10.Text = "離開";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.bt_exit.Location = new System.Drawing.Point(1092, 12);
+            this.bt_exit.Name = "bt_exit";
+            this.bt_exit.Size = new System.Drawing.Size(89, 35);
+            this.bt_exit.TabIndex = 11;
+            this.bt_exit.Text = "離開";
+            this.bt_exit.UseVisualStyleBackColor = true;
+            this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
             // 
             // button6
             // 
@@ -179,7 +179,7 @@
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button6);
-            this.Controls.Add(this.button10);
+            this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button5);
@@ -208,7 +208,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button bt_exit;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
