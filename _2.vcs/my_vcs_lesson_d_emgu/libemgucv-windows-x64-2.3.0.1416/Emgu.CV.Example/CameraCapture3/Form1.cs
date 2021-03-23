@@ -16,12 +16,12 @@ using Emgu.Util;
 
 namespace CameraCapture
 {
-    public partial class CameraCapture : Form
+    public partial class Form1 : Form
     {
         private Capture cap = null;             // Webcam物件
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
-        public CameraCapture()
+        public Form1()
         {
             InitializeComponent();
         }
@@ -35,10 +35,12 @@ namespace CameraCapture
             Image<Gray, Byte> smoothedGrayFrame = smallGrayFrame.PyrUp();
             Image<Gray, Byte> cannyFrame = smoothedGrayFrame.Canny(new Gray(100), new Gray(60));
 
-            captureImageBox.Image = frame;
+            //captureImageBox.Image = frame;
             //grayscaleImageBox.Image = grayFrame;
             //smoothedGrayscaleImageBox.Image = smoothedGrayFrame;
             //cannyImageBox.Image = cannyFrame;
+
+            pictureBox1.Image = cannyFrame.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
         }
 
         private void button1_Click(object sender, EventArgs e)

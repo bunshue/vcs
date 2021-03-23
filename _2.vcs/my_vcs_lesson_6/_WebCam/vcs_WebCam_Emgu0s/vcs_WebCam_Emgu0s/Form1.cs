@@ -18,8 +18,7 @@ namespace vcs_WebCam_Emgu0s
         private Capture cap = null;             // Webcam物件
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
-        bool _isRecording = false;
-        string _fileName;
+        bool flag_recording = false;
         Timer _timer;
         VideoWriter video;
 
@@ -32,10 +31,12 @@ namespace vcs_WebCam_Emgu0s
         {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            /*
             //宣告Timer 0.1秒執行一次
             _timer = new Timer();
             _timer.Interval = 100;
             _timer.Tick += new EventHandler(TimerEventProcessor);
+            */
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -43,17 +44,30 @@ namespace vcs_WebCam_Emgu0s
             richTextBox1.Clear();
         }
 
-        private void TimerEventProcessor(object sender, EventArgs e)
+        void Application_Idle(object sender, EventArgs e)
         {
-            Image<Bgr, Byte> frame = cap.QueryFrame(); // Query 攝影機的畫面
-
-            pictureBox1.Image = frame.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+            pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
 
             //錄影模式
-            if (_isRecording == true)
+            if (flag_recording == true)
             {
                 //將影格寫入影片中
-                video.WriteFrame<Bgr, byte>(frame);
+                video.WriteFrame<Bgr, byte>(image);
+            }
+        }
+
+        private void TimerEventProcessor(object sender, EventArgs e)
+        {
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+
+            pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
+
+            //錄影模式
+            if (flag_recording == true)
+            {
+                //將影格寫入影片中
+                video.WriteFrame<Bgr, byte>(image);
             }
         }
 
@@ -81,24 +95,23 @@ namespace vcs_WebCam_Emgu0s
         {
             openWebCam();
 
-            //webcam啟動
-            if (cap != null)
+            if (cap != null)    //webcam啟動
             {
-                //frame啟動
-                if (flag_webcam_ok == true)
+                if (flag_webcam_ok == false)
                 {
-                    //stop the capture
-                    flag_webcam_ok = false;
-                    button1.Text = "開啟";
-                    _timer.Stop();
-                }
-                //frame關閉
-                else
-                {
-                    //start the capture
+                    //啟動
                     flag_webcam_ok = true;
                     button1.Text = "關閉";
-                    _timer.Start();
+                    //_timer.Start();
+                    Application.Idle += Application_Idle;
+                }
+                else
+                {
+                    //關閉
+                    flag_webcam_ok = false;
+                    button1.Text = "開啟";
+                    //_timer.Stop();
+                    Application.Idle -= Application_Idle;
                 }
             }
         }
@@ -108,33 +121,35 @@ namespace vcs_WebCam_Emgu0s
         {
             openWebCam();
 
-            _timer.Start();
+            //_timer.Start();
 
-            _fileName = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+            string filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
 
-            richTextBox1.Text += "filename : " + _fileName + "\n";
+            richTextBox1.Text += "filename : " + filename + "\n";
             richTextBox1.Text += "Width : " + cap.Width.ToString() + "\n";
             richTextBox1.Text += "Height : " + cap.Height.ToString() + "\n";
 
             //cap.Width 取得攝影機可支援的最大寬度
             //cap.Height 取得攝影機可支援的最大高度
-            video = new VideoWriter(_fileName, 0, 10, cap.Width, cap.Height, true);
+            video = new VideoWriter(filename, 0, 10, cap.Width, cap.Height, true);
 
             //開啟錄影模式
-            _isRecording = true;
+            flag_recording = true;
 
             richTextBox1.Text += "開始錄影\n";
+            Application.Idle += Application_Idle;
         }
 
-        //停止錄影
         private void button3_Click(object sender, EventArgs e)
         {
-            if (_isRecording == true)
+            //停止錄影
+            if (flag_recording == true)
             {
                 //錄影完需將影像停止不然會出錯
-                _isRecording = false;
+                flag_recording = false;
                 video.Dispose();
                 richTextBox1.Text += "停止錄影\n";
+                Application.Idle -= Application_Idle;
             }
         }
 
@@ -143,8 +158,7 @@ namespace vcs_WebCam_Emgu0s
         {
             openWebCam();
 
-            // Query 攝影機的畫面
-            Image<Bgr, Byte> image = cap.QueryFrame();
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
 
             //儲存路徑
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
@@ -163,9 +177,8 @@ namespace vcs_WebCam_Emgu0s
 
         private void button5_Click(object sender, EventArgs e)
         {
-            // Query 攝影機的畫面
             // Bitmap -> Image
-            Image<Bgr, Byte> image = cap.QueryFrame();
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
 
             /*
             //儲存路徑
@@ -370,6 +383,22 @@ namespace vcs_WebCam_Emgu0s
             {
                 cap.FlipHorizontal = !cap.FlipHorizontal;
             }
+        }
+
+        //關閉程式
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            //停止錄影
+            if (flag_recording == true)
+            {
+                //錄影完需將影像停止不然會出錯
+                flag_recording = false;
+                video.Dispose();
+                richTextBox1.Text += "停止錄影\n";
+                Application.Idle -= Application_Idle;
+            }
+            cap.Dispose();
+            Application.Exit();
         }
     }
 }

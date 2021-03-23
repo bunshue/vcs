@@ -18,11 +18,8 @@ namespace vcs_WebCam_Emgu3k
 {
     public partial class Form1 : Form
     {
-        //全區域變數宣告
-        //攝影機的變量
-        private Capture cap;
-        //判斷是否啟動webcam的frame旗標
-        private bool _captureInProgress = false;
+        private Capture cap = null;             // Webcam物件
+        private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
         public Form1()
         {
@@ -42,8 +39,8 @@ namespace vcs_WebCam_Emgu3k
 
         void Application_Idle(object sender, EventArgs e)
         {
-            Image<Bgr, Byte> image = cap.QueryFrame();
-            pictureBox1.Image = image.ToBitmap();
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+            pictureBox1.Image = image.ToBitmap();           // 把畫面轉換成bitmap型態，在丟給pictureBox元件
         }
 
         //啟動webcam
@@ -63,26 +60,23 @@ namespace vcs_WebCam_Emgu3k
                 }
             }
 
-            //webcam啟動
-            if (cap != null)
+            if (cap != null)    //webcam啟動
             {
-                //frame啟動
-                if (_captureInProgress)
-                { //stop the capture
-                    _captureInProgress = false;
-                    button1.Text = "開始";
-                    Application.Idle -= Application_Idle;
-                }
-                //frame關閉
-                else
+                if (flag_webcam_ok == false)
                 {
-                    //start the capture
-                    _captureInProgress = true;
-                    button1.Text = "結束";
+                    //啟動
+                    flag_webcam_ok = true;
+                    button1.Text = "關閉";
                     Application.Idle += Application_Idle;
                 }
+                else
+                {
+                    //關閉
+                    flag_webcam_ok = false;
+                    button1.Text = "開啟";
+                    Application.Idle -= Application_Idle;
+                }
             }
-
         }
 
         //錄製影像
@@ -95,7 +89,7 @@ namespace vcs_WebCam_Emgu3k
             {
                 MessageBox.Show("can't find a camera", "error");
             }
-            Image<Bgr, byte> temp = cap.QueryFrame();
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
 
             SaveFileDialog SaveFileDialog1 = new SaveFileDialog();
             SaveFileDialog1.FileName = DateTime.Now.ToString("yyyyMMddhhmmss");
@@ -107,19 +101,19 @@ namespace vcs_WebCam_Emgu3k
 
             VideoWriter video = new VideoWriter(SaveFileDialog1.FileName, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 20, 800, 600, true);
 
-            while (temp != null)
+            while (image != null)
             {
-                CvInvoke.cvShowImage("camera", temp.Ptr);
-                temp = cap.QueryFrame();
+                CvInvoke.cvShowImage("camera", image.Ptr);
+                image = cap.QueryFrame(); // Query WebCam 的畫面
                 int c = CvInvoke.cvWaitKey(20);
-                video.WriteFrame<Bgr, byte>(temp);
+                video.WriteFrame<Bgr, byte>(image);
                 if (c == 27) break;
             }
             video.Dispose();
             CvInvoke.cvDestroyWindow("camera");
 
             //錄影完需將影像停止不然會出錯
-            _captureInProgress = false;
+            flag_webcam_ok = false;
             button1.Text = "開始";
             Application.Idle -= Application_Idle;
         }
@@ -129,13 +123,12 @@ namespace vcs_WebCam_Emgu3k
         {
             cap.Dispose();
             Application.Exit();
-
         }
 
         //截圖
         private void button4_Click(object sender, EventArgs e)
         {
-            Image<Bgr, Byte> image = cap.QueryFrame();
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
 
             string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
 

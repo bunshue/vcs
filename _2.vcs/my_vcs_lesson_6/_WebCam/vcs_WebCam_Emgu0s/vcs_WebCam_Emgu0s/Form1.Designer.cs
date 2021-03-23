@@ -40,7 +40,7 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.bt_exit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -161,21 +161,22 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // button10
+            // bt_exit
             // 
-            this.button10.Location = new System.Drawing.Point(1045, 11);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
-            this.button10.TabIndex = 39;
-            this.button10.Text = "離開";
-            this.button10.UseVisualStyleBackColor = true;
+            this.bt_exit.Location = new System.Drawing.Point(1045, 11);
+            this.bt_exit.Name = "bt_exit";
+            this.bt_exit.Size = new System.Drawing.Size(75, 23);
+            this.bt_exit.TabIndex = 39;
+            this.bt_exit.Text = "離開";
+            this.bt_exit.UseVisualStyleBackColor = true;
+            this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1132, 777);
-            this.Controls.Add(this.button10);
+            this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.bt_clear);
@@ -210,7 +211,7 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button bt_exit;
     }
 }
 
