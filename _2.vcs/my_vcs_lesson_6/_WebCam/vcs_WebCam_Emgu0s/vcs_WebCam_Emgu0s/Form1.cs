@@ -15,7 +15,7 @@ namespace vcs_WebCam_Emgu0s
 {
     public partial class Form1 : Form
     {
-        private Capture cap = null;             // Webcam物件
+        private Capture cap = null;             // 宣告一個Webcam物件
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
         bool flag_recording = false;
@@ -60,7 +60,7 @@ namespace vcs_WebCam_Emgu0s
                 try
                 {
                     //打開預設的webcam
-                    cap = new Capture();
+                    cap = new Capture(0);
                 }
                 catch (NullReferenceException excpt)
                 {
@@ -80,7 +80,8 @@ namespace vcs_WebCam_Emgu0s
                     //啟動
                     flag_webcam_ok = true;
                     button1.Text = "關閉";
-                    Application.Idle += Application_Idle;
+                    //Application.Idle += Application_Idle;
+                    Application.Idle += new EventHandler(Application_Idle);
                 }
                 else
                 {

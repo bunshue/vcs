@@ -136,12 +136,6 @@
     <Compile Include="matchNumbers.Designer.cs">
       <DependentUpon>matchNumbers.cs</DependentUpon>
     </Compile>
-    <Compile Include="memory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="memory.Designer.cs">
-      <DependentUpon>memory.cs</DependentUpon>
-    </Compile>
     <Compile Include="Midterm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,9 +176,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="matchNumbers.resx">
       <DependentUpon>matchNumbers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="memory.resx">
-      <DependentUpon>memory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Midterm.resx">
       <DependentUpon>Midterm.cs</DependentUpon>

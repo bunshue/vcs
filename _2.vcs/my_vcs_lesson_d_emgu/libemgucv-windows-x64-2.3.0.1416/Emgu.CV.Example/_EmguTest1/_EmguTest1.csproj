@@ -8,8 +8,8 @@
     <ProjectGuid>{5F6B97F8-7EA6-4B5D-9A5D-F5581505C303}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_EmguLoadImage</RootNamespace>
-    <AssemblyName>_EmguLoadImage</AssemblyName>
+    <RootNamespace>_EmguTest1</RootNamespace>
+    <AssemblyName>_EmguTest1</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>

@@ -6,24 +6,25 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Threading;
 
-namespace vcs_programming
+namespace vcs_MatchGame
 {
-    public partial class memory : Form
+    public partial class Form1 : Form
     {
-        public memory()
-        {
-            InitializeComponent();
-        }
-
         PictureBox[] picArray = new PictureBox[16];
         int[] imageId = new int[16];
         int firstPicPos = -1; //尚未有任何翻開的圖片
         int counter = 0;
         DateTime start;
 
-        private void memory_Load(object sender, EventArgs e)
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
             picArray[0] = pictureBox1;
             picArray[1] = pictureBox2;
@@ -60,7 +61,7 @@ namespace vcs_programming
                 imageId[i] = imageId[t];
                 imageId[t] = temp;
             }
-        
+
             /*for (int i = 0; i < 16; i++)
             {
                 int id = imageId[i];
@@ -69,24 +70,25 @@ namespace vcs_programming
 
             start = DateTime.Now;
 
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            PictureBox s= (PictureBox) sender;
+            PictureBox s = (PictureBox)sender;
 
             int picPos = 0;
             // 取得目前被按的PictureBox，將其位置記錄在picPos
-            for(int i = 0; i < 16; i++)
+            for (int i = 0; i < 16; i++)
                 if (s == picArray[i])
                 {
                     picPos = i;
                     break;
                 }
             // 取得目前的圖像Id
-            int id = imageId[ picPos ];
+            int id = imageId[picPos];
             if (id == -1) return; //已取走圖片
-            
+
             // 是否為第一張?
             if (firstPicPos == -1)
             {   //此是第一張, 記錄其位置並打開圖片
@@ -136,9 +138,9 @@ namespace vcs_programming
                 }
 
                 firstPicPos = -1;
-                
+
             }
-           
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -155,7 +157,7 @@ namespace vcs_programming
 
             for (int i = 0; i < 16; i++)
             {
-                if(imageId[i] != -1)
+                if (imageId[i] != -1)
                     picArray[i].Image = imageList1.Images[8];
             }
         }

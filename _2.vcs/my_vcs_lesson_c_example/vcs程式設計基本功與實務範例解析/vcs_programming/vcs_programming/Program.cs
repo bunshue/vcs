@@ -19,9 +19,6 @@ namespace vcs_programming
             /* 第 9 章 */
             //Application.Run(new matchNumbers());        //1A1B猜數字遊戲
 
-            /* 第 10 章 */
-            //Application.Run(new memory());      //配對遊戲
-
             /* 第 12 章 */
             //Application.Run(new jaggedArray());     //有點多
 
