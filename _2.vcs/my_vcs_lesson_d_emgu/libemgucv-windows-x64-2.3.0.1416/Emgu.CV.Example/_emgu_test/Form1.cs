@@ -1,8 +1,4 @@
-﻿//----------------------------------------------------------------------------
-//  Copyright (C) 2004-2011 by EMGU. All rights reserved.       
-//----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +14,7 @@ namespace _emgu_test
 {
     public partial class Form1 : Form
     {
+		string filename = @"C:\______test_files\picture1.jpg";
         private Capture cap = null;             // Webcam物件
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
@@ -151,8 +148,6 @@ namespace _emgu_test
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
-
             //3. EmguCV 影像格式 Image<Gray, Byte>: 宣告一個EmguCV灰階影像格式
 
             Image<Gray, Byte> inputImage = new Image<Gray, byte>(filename);
@@ -165,8 +160,6 @@ namespace _emgu_test
         private void button7_Click(object sender, EventArgs e)
         {
             //輸入PictureBox 讀入影像, 將PictureBox.Image轉型Bitmpap丟給Image<Bgr, Byte>
-
-            string filename = @"C:\______test_files\picture1.jpg";
 
             pictureBox1.Load(filename);
             Image<Bgr, Byte> inputImage = new Image<Bgr, Byte>((Bitmap)(pictureBox1.Image));
@@ -191,8 +184,6 @@ namespace _emgu_test
         private void button10_Click(object sender, EventArgs e)
         {
             //利用Bitmap讀入一張圖片, 並傳給Image<Bgr, Byte>影像格式
-
-            string filename = @"C:\______test_files\picture1.jpg";
 
             Bitmap bmp = new Bitmap(filename);
             System.Drawing.Imaging.BitmapData bd;

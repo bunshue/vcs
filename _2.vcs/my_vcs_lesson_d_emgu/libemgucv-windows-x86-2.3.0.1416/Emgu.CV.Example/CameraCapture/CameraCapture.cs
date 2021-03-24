@@ -15,79 +15,82 @@ using Emgu.Util;
 
 namespace CameraCapture
 {
-   public partial class CameraCapture : Form
-   {
-      private Capture _capture;
-      private bool _captureInProgress;
+    public partial class CameraCapture : Form
+    {
+        private Capture cap = null;             // Webcam物件
+        private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
-      public CameraCapture()
-      {
-         InitializeComponent();
-      }
+        public CameraCapture()
+        {
+            InitializeComponent();
+        }
 
-      private void ProcessFrame(object sender, EventArgs arg)
-      {
-         Image<Bgr, Byte> frame = _capture.QueryFrame();
+        private void ProcessFrame(object sender, EventArgs arg)
+        {
+            Image<Bgr, Byte> frame = cap.QueryFrame();
 
-         Image<Gray, Byte> grayFrame = frame.Convert<Gray, Byte>();
-         Image<Gray, Byte> smallGrayFrame = grayFrame.PyrDown();
-         Image<Gray, Byte> smoothedGrayFrame = smallGrayFrame.PyrUp();
-         Image<Gray, Byte> cannyFrame = smoothedGrayFrame.Canny(new Gray(100), new Gray(60));
+            Image<Gray, Byte> grayFrame = frame.Convert<Gray, Byte>();
+            Image<Gray, Byte> smallGrayFrame = grayFrame.PyrDown();
+            Image<Gray, Byte> smoothedGrayFrame = smallGrayFrame.PyrUp();
+            Image<Gray, Byte> cannyFrame = smoothedGrayFrame.Canny(new Gray(100), new Gray(60));
 
-         captureImageBox.Image = frame;
-         grayscaleImageBox.Image = grayFrame;
-         smoothedGrayscaleImageBox.Image = smoothedGrayFrame;
-         cannyImageBox.Image = cannyFrame;
-      }
+            //captureImageBox.Image = frame;
+            //grayscaleImageBox.Image = grayFrame;
+            //smoothedGrayscaleImageBox.Image = smoothedGrayFrame;
+            //cannyImageBox.Image = cannyFrame;
 
-      private void captureButtonClick(object sender, EventArgs e)
-      {
-         #region if capture is not created, create it now
-         if (_capture == null)
-         {
-            try
+            pictureBox1.Image = cannyFrame.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
+        }
+
+        private void ReleaseData()
+        {
+            if (cap != null)
+                cap.Dispose();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            #region if capture is not created, create it now
+            if (cap == null)
             {
-               _capture = new Capture();
+                try
+                {
+                    cap = new Capture();
+                }
+                catch (NullReferenceException excpt)
+                {
+                    MessageBox.Show(excpt.Message);
+                }
             }
-            catch (NullReferenceException excpt)
+            #endregion
+
+            if (cap != null)
             {
-               MessageBox.Show(excpt.Message);
+                if (flag_webcam_ok)
+                {  //stop the capture
+                    button1.Text = "Start Capture";
+                    Application.Idle -= ProcessFrame;
+                }
+                else
+                {
+                    //start the capture
+                    button1.Text = "Stop";
+                    Application.Idle += ProcessFrame;
+                }
+
+                flag_webcam_ok = !flag_webcam_ok;
             }
-         }
-         #endregion
 
-         if (_capture != null)
-         {
-            if (_captureInProgress)
-            {  //stop the capture
-               captureButton.Text = "Start Capture";
-               Application.Idle -= ProcessFrame;
-            }
-            else
-            {
-               //start the capture
-               captureButton.Text = "Stop";
-               Application.Idle += ProcessFrame;
-            }
-            
-            _captureInProgress = !_captureInProgress;
-         }
-      }
+        }
 
-      private void ReleaseData()
-      {
-         if (_capture != null)
-            _capture.Dispose();
-      }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (cap != null) cap.FlipHorizontal = !cap.FlipHorizontal;
+        }
 
-      private void FlipHorizontalButtonClick(object sender, EventArgs e)
-      {
-         if (_capture != null) _capture.FlipHorizontal = !_capture.FlipHorizontal;
-      }
-
-      private void FlipVerticalButtonClick(object sender, EventArgs e)
-      {
-         if (_capture != null) _capture.FlipVertical = !_capture.FlipVertical;
-      }
-   }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (cap != null) cap.FlipVertical = !cap.FlipVertical;
+        }
+    }
 }
