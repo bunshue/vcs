@@ -58,6 +58,11 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer_status_strip = new System.Windows.Forms.Timer(this.components);
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.bt_stop = new System.Windows.Forms.Button();
+            this.bt_start = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -65,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -354,11 +360,71 @@
             this.timer_status_strip.Interval = 1000;
             this.timer_status_strip.Tick += new System.EventHandler(this.timer_status_strip_Tick);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.bt_stop);
+            this.groupBox4.Controls.Add(this.bt_start);
+            this.groupBox4.Controls.Add(this.button7);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox4.Location = new System.Drawing.Point(12, 457);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(649, 106);
+            this.groupBox4.TabIndex = 34;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "由程式內部設置timer";
+            // 
+            // bt_stop
+            // 
+            this.bt_stop.Enabled = false;
+            this.bt_stop.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_stop.Location = new System.Drawing.Point(554, 29);
+            this.bt_stop.Name = "bt_stop";
+            this.bt_stop.Size = new System.Drawing.Size(77, 34);
+            this.bt_stop.TabIndex = 35;
+            this.bt_stop.Text = "停止";
+            this.bt_stop.UseVisualStyleBackColor = true;
+            this.bt_stop.Click += new System.EventHandler(this.bt_stop_Click);
+            // 
+            // bt_start
+            // 
+            this.bt_start.Enabled = false;
+            this.bt_start.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_start.Location = new System.Drawing.Point(469, 29);
+            this.bt_start.Name = "bt_start";
+            this.bt_start.Size = new System.Drawing.Size(79, 34);
+            this.bt_start.TabIndex = 34;
+            this.bt_start.Text = "開始";
+            this.bt_start.UseVisualStyleBackColor = true;
+            this.bt_start.Click += new System.EventHandler(this.bt_start_Click);
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(380, 29);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(79, 34);
+            this.button7.TabIndex = 33;
+            this.button7.Text = "設置";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label5.Location = new System.Drawing.Point(18, 47);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(147, 27);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "讀取進度：";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1089, 588);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -379,6 +445,8 @@
             this.groupBox3.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -415,6 +483,11 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Timer timer_status_strip;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button bt_stop;
+        private System.Windows.Forms.Button bt_start;
     }
 }
 

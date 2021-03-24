@@ -19,7 +19,6 @@ namespace vcs_WebCam_Emgu0s
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
         bool flag_recording = false;
-        Timer _timer;
         VideoWriter video;
 
         public Form1()
@@ -30,13 +29,6 @@ namespace vcs_WebCam_Emgu0s
         private void Form1_Load(object sender, EventArgs e)
         {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            /*
-            //宣告Timer 0.1秒執行一次
-            _timer = new Timer();
-            _timer.Interval = 100;
-            _timer.Tick += new EventHandler(TimerEventProcessor);
-            */
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -47,20 +39,6 @@ namespace vcs_WebCam_Emgu0s
         void Application_Idle(object sender, EventArgs e)
         {
             Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
-            pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
-
-            //錄影模式
-            if (flag_recording == true)
-            {
-                //將影格寫入影片中
-                video.WriteFrame<Bgr, byte>(image);
-            }
-        }
-
-        private void TimerEventProcessor(object sender, EventArgs e)
-        {
-            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
-
             pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
 
             //錄影模式
@@ -102,7 +80,6 @@ namespace vcs_WebCam_Emgu0s
                     //啟動
                     flag_webcam_ok = true;
                     button1.Text = "關閉";
-                    //_timer.Start();
                     Application.Idle += Application_Idle;
                 }
                 else
@@ -110,7 +87,6 @@ namespace vcs_WebCam_Emgu0s
                     //關閉
                     flag_webcam_ok = false;
                     button1.Text = "開啟";
-                    //_timer.Stop();
                     Application.Idle -= Application_Idle;
                 }
             }
@@ -120,8 +96,6 @@ namespace vcs_WebCam_Emgu0s
         private void button2_Click(object sender, EventArgs e)
         {
             openWebCam();
-
-            //_timer.Start();
 
             string filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
 

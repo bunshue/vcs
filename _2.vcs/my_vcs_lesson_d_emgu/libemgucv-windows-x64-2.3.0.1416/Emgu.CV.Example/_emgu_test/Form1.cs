@@ -80,73 +80,128 @@ namespace _emgu_test
         private void ReleaseData()
         {
             if (cap != null)
+            {
                 cap.Dispose();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (cap != null) cap.FlipHorizontal = !cap.FlipHorizontal;
+            if (cap != null)
+            {
+                cap.FlipHorizontal = !cap.FlipHorizontal;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (cap != null) cap.FlipVertical = !cap.FlipVertical;
+            if (cap != null)
+            {
+                cap.FlipVertical = !cap.FlipVertical;
+            }
         }
-
-
-
 
         public void TestRun(Bitmap bitmap)
         {
-            Image<Bgr, Byte> img = new Image<Bgr, Byte>(bitmap);
-            //灰階
-            Image<Gray, Byte> gray = img.Convert<Gray, Byte>().PyrDown().PyrUp();
-            //二值化
-            Image<Gray, Byte> gray1 = gray.ThresholdToZero(new Gray(100));
+            int W = bitmap.Width;
+            int H = bitmap.Height;
+            Image<Bgr, Byte> img = new Image<Bgr, Byte>(bitmap);    //原圖
+            Image<Gray, Byte> gray = img.Convert<Gray, Byte>().PyrDown().PyrUp();   //原圖轉灰階
+            Image<Gray, Byte> gray1 = gray.ThresholdToZero(new Gray(100));      //灰階轉二值化
             //http://www.cnblogs.com/xrwang/archive/2010/03/03/ImageFeatureDetection.html.
-            //Canny算子也可以用作边缘检测
-            Image<Gray, Byte> gray2 = gray1.Canny(new Gray(150), new Gray(200));
+            Image<Gray, Byte> gray2 = gray1.Canny(new Gray(150), new Gray(200));    //二值化轉Canny邊緣檢測
 
-            int iiW = bitmap.Width;
-            int iiH = bitmap.Height;
             Bitmap image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             using (Graphics g = Graphics.FromImage(image))
             {
-                Rectangle rct1 = new Rectangle(new Point(0, 0), new Size(iiW / 2, iiH / 2));
-                g.DrawImage(img.Bitmap, rct1, new Rectangle(new Point(0, 0), new Size(iiW, iiH)), GraphicsUnit.Pixel);
+                Rectangle rct1 = new Rectangle(new Point(0, 0), new Size(W / 2, H / 2));
+                g.DrawImage(img.Bitmap, rct1, new Rectangle(new Point(0, 0), new Size(W, H)), GraphicsUnit.Pixel);
                 g.DrawRectangle(new Pen(Color.Black), rct1);
 
-                Rectangle rct2 = new Rectangle(new Point(0, iiW / 2), new Size(iiW / 2, iiH / 2));
-                g.DrawImage(gray.Bitmap, rct2, new Rectangle(new Point(0, 0), new Size(iiW, iiH)), GraphicsUnit.Pixel);
+                Rectangle rct2 = new Rectangle(new Point(0, W / 2), new Size(W / 2, H / 2));
+                g.DrawImage(gray.Bitmap, rct2, new Rectangle(new Point(0, 0), new Size(W, H)), GraphicsUnit.Pixel);
                 g.DrawRectangle(new Pen(Color.Black), rct2);
 
-                Rectangle rct3 = new Rectangle(new Point(iiH / 2, 0), new Size(iiW / 2, iiH / 2));
-                g.DrawImage(gray1.Bitmap, rct3, new Rectangle(new Point(0, 0), new Size(iiW, iiH)), GraphicsUnit.Pixel);
+                Rectangle rct3 = new Rectangle(new Point(H / 2, 0), new Size(W / 2, H / 2));
+                g.DrawImage(gray1.Bitmap, rct3, new Rectangle(new Point(0, 0), new Size(W, H)), GraphicsUnit.Pixel);
                 g.DrawRectangle(new Pen(Color.Black), rct3);
 
-                Rectangle rct4 = new Rectangle(new Point(iiH / 2, iiW / 2), new Size(iiW / 2, iiH / 2));
+                Rectangle rct4 = new Rectangle(new Point(H / 2, W / 2), new Size(W / 2, H / 2));
 
-                g.DrawImage(gray2.Bitmap, rct4, new Rectangle(new Point(0, 0), new Size(iiW, iiH)), GraphicsUnit.Pixel);
+                g.DrawImage(gray2.Bitmap, rct4, new Rectangle(new Point(0, 0), new Size(W, H)), GraphicsUnit.Pixel);
                 g.DrawRectangle(new Pen(Color.Black), rct4);
             }
             pictureBox1.Image = image;
-
         }
- 
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(@"C:\______test_files\picture1.jpg");
-            TestRun(bmp);
+            Bitmap bitmap1 = new Bitmap(@"C:\______test_files\picture1.jpg");
+            TestRun(bitmap1);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\picture1.jpg";
 
+            //EmguCV 影像格式 Image<Bgr, Byte>: a wrapper to IplImage of OpenCV
+            Image<Bgr, Byte> inputImage = new Image<Bgr, byte>(filename);
+            CvInvoke.cvShowImage("Image<Bgr, Byte>", inputImage);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            //3. EmguCV 影像格式 Image<Gray, Byte>: 宣告一個EmguCV灰階影像格式
+
+            Image<Gray, Byte> inputImage = new Image<Gray, byte>(filename);
+            CvInvoke.cvShowImage("Image<Gray, Byte>", inputImage);
+
+            //內建判斷, 直接自動將輸入彩色的照片轉成灰階
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //輸入PictureBox 讀入影像, 將PictureBox.Image轉型Bitmpap丟給Image<Bgr, Byte>
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            pictureBox1.Load(filename);
+            Image<Bgr, Byte> inputImage = new Image<Bgr, Byte>((Bitmap)(pictureBox1.Image));
+            CvInvoke.cvShowImage("Image<Bgr, Byte>", inputImage);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+             //開啟一張空的影像(黑底), 大小為640X480
+
+            Image<Gray, Byte> inputImage = new Image<Gray, byte>(new Size(640, 480));
+            pictureBox1.Image = inputImage.ToBitmap();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            // 自己定義一塊影像大小和像素值
+            Image<Bgr, Byte> inputImage = new Image<Bgr, byte>(640, 480, new Bgr(255, 0, 255));
+            pictureBox1.Image = inputImage.ToBitmap();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //利用Bitmap讀入一張圖片, 並傳給Image<Bgr, Byte>影像格式
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            Bitmap bmp = new Bitmap(filename);
+            System.Drawing.Imaging.BitmapData bd;
+            bd = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height),
+                              System.Drawing.Imaging.ImageLockMode.ReadWrite,
+                              System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            Image<Bgr, Byte> inputImage = new Image<Bgr, Byte>(bd.Width, bd.Height, bd.Stride, bd.Scan0);
+            pictureBox1.Image = inputImage.ToBitmap();
+            bmp.UnlockBits(bd);
 
         }
     }

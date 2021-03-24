@@ -159,8 +159,53 @@ namespace vcs_Timer
         {
             toolStripStatusLabel1.Text = DateTime.Now.ToString();
         }
+
         //progress bar SP
 
+        Timer _timer;
 
+
+        int percentage = 0;
+
+        private void TimerEventProcessor(object sender, EventArgs e)
+        {
+            label5.Text = "讀取進度： " + percentage.ToString() + " %";
+            percentage++;
+            if (percentage > 100)
+                percentage = 0;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //宣告Timer 0.2秒執行一次
+            _timer = new Timer();
+            _timer.Interval = 200;
+            _timer.Tick += new EventHandler(TimerEventProcessor);
+
+            percentage = 0;
+            label5.Text = "讀取進度： " + percentage.ToString() + " %";
+            bt_start.Enabled = true;
+            bt_stop.Enabled = false;
+        }
+
+        private void bt_start_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Start();
+                bt_start.Enabled = false;
+                bt_stop.Enabled = true;
+            }
+        }
+
+        private void bt_stop_Click(object sender, EventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Stop();
+                bt_start.Enabled = true;
+                bt_stop.Enabled = false;
+            }
+        }
     }
 }
