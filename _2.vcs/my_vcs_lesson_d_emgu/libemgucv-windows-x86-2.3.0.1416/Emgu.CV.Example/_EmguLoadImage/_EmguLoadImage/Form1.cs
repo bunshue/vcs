@@ -94,13 +94,25 @@ namespace _EmguLoadImage
 
         private void button8_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 256; i++)
+            bool flag_increase = false;
+            for (int j = 0; j < 10; j++)
             {
-                Image<Gray, Byte> inputImage = new Image<Gray, byte>(640, 480, new Gray(i));
-                pictureBox1.Image = inputImage.ToBitmap();
-                this.Text = i.ToString();
-                Application.DoEvents();
-                Thread.Sleep(10);
+                for (int i = 0; i < 256; i++)
+                {
+                    Image<Gray, Byte> inputImage;
+                    if (flag_increase == false)
+                    {
+                        inputImage = new Image<Gray, byte>(640, 480, new Gray(i));
+                    }
+                    else
+                    {
+                        inputImage = new Image<Gray, byte>(640, 480, new Gray(255 - i));
+                    }
+                    pictureBox1.Image = inputImage.ToBitmap();
+                    Application.DoEvents();
+                    Thread.Sleep(10);
+                }
+                flag_increase = !flag_increase;
             }
         }
     }

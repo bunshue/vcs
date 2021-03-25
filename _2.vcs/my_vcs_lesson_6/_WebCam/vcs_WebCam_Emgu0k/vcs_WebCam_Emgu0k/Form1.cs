@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
-
 using Emgu.CV;
 using Emgu.CV.Structure;
 
@@ -16,12 +14,11 @@ namespace vcs_WebCam_Emgu0k
 {
     public partial class Form1 : Form
     {
-        private Capture cap = null;             // Webcam物件
+        private Capture cap = null;             //宣告一個Webcam物件
         private Capture cap2 = null;
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
         bool flag_recording = false;
-        Timer _timer;
         VideoWriter video;
 
         public Form1()
@@ -32,13 +29,6 @@ namespace vcs_WebCam_Emgu0k
         private void Form1_Load(object sender, EventArgs e)
         {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            /*
-            //宣告Timer 0.1秒執行一次
-            _timer = new Timer();
-            _timer.Interval = 100;
-            _timer.Tick += new EventHandler(TimerEventProcessor);
-            */
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -49,20 +39,6 @@ namespace vcs_WebCam_Emgu0k
         void Application_Idle(object sender, EventArgs e)
         {
             Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
-            pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
-
-            //錄影模式
-            if (flag_recording == true)
-            {
-                //將影格寫入影片中
-                video.WriteFrame<Bgr, byte>(image);
-            }
-        }
-
-        private void TimerEventProcessor(object sender, EventArgs e)
-        {
-            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
-
             pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
 
             //錄影模式
@@ -84,7 +60,8 @@ namespace vcs_WebCam_Emgu0k
                 try
                 {
                     //打開預設的webcam
-                    cap = new Capture();
+                    //cap = new Capture();
+                    cap = new Capture(0);
                 }
                 catch (NullReferenceException excpt)
                 {
@@ -125,8 +102,6 @@ namespace vcs_WebCam_Emgu0k
         private void button2_Click(object sender, EventArgs e)
         {
             openWebCam();
-
-            //_timer.Start();
 
             string filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
 
@@ -325,7 +300,6 @@ namespace vcs_WebCam_Emgu0k
                 richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
                 richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
             }
-
         }
 
         //上下顛倒
@@ -366,7 +340,6 @@ namespace vcs_WebCam_Emgu0k
                 richTextBox1.Text += "停止錄影\n";
                 Application.Idle -= Application_Idle;
             }
-
             Application.Exit();
         }
     }
