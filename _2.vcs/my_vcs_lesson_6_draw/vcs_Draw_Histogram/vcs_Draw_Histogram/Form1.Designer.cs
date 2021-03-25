@@ -37,6 +37,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button6 = new System.Windows.Forms.Button();
             this.pictureBox_old = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_histogram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_old)).BeginInit();
@@ -44,25 +45,32 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 25);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(700, 150);
+            this.pictureBox1.Size = new System.Drawing.Size(830, 258);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 219);
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Location = new System.Drawing.Point(633, 465);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(700, 205);
+            this.richTextBox1.Size = new System.Drawing.Size(362, 174);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(637, 379);
+            this.bt_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_clear.Location = new System.Drawing.Point(908, 476);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(75, 23);
             this.bt_clear.TabIndex = 4;
@@ -72,21 +80,23 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(751, 25);
+            this.button5.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button5.Location = new System.Drawing.Point(893, 23);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(90, 35);
             this.button5.TabIndex = 7;
-            this.button5.Text = "my int";
+            this.button5.Text = "my int   數字很小";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // pictureBox_histogram
             // 
+            this.pictureBox_histogram.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pictureBox_histogram.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox_histogram.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_histogram.Location = new System.Drawing.Point(751, 493);
+            this.pictureBox_histogram.Location = new System.Drawing.Point(860, 333);
             this.pictureBox_histogram.Name = "pictureBox_histogram";
-            this.pictureBox_histogram.Size = new System.Drawing.Size(99, 79);
+            this.pictureBox_histogram.Size = new System.Drawing.Size(135, 126);
             this.pictureBox_histogram.TabIndex = 8;
             this.pictureBox_histogram.TabStop = false;
             // 
@@ -98,7 +108,8 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(751, 82);
+            this.button6.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button6.Location = new System.Drawing.Point(893, 138);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(90, 35);
             this.button6.TabIndex = 9;
@@ -108,19 +119,34 @@
             // 
             // pictureBox_old
             // 
+            this.pictureBox_old.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_old.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox_old.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_old.Location = new System.Drawing.Point(12, 445);
+            this.pictureBox_old.Location = new System.Drawing.Point(12, 465);
             this.pictureBox_old.Name = "pictureBox_old";
-            this.pictureBox_old.Size = new System.Drawing.Size(700, 150);
+            this.pictureBox_old.Size = new System.Drawing.Size(615, 177);
             this.pictureBox_old.TabIndex = 10;
             this.pictureBox_old.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button1.Location = new System.Drawing.Point(893, 83);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(90, 35);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "my int   數字很大";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(877, 597);
+            this.ClientSize = new System.Drawing.Size(1007, 644);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox_old);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.pictureBox_histogram);
@@ -148,6 +174,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.PictureBox pictureBox_old;
+        private System.Windows.Forms.Button button1;
     }
 }
 

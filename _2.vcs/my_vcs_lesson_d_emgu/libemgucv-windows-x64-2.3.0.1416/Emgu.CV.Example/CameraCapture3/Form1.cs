@@ -21,6 +21,11 @@ namespace CameraCapture
         private Capture cap = null;             // Webcam物件
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
+        Emgu.CV.UI.ImageBox ib1 = new Emgu.CV.UI.ImageBox();
+        Emgu.CV.UI.ImageBox ib2 = new Emgu.CV.UI.ImageBox();
+        Emgu.CV.UI.ImageBox ib3 = new Emgu.CV.UI.ImageBox();
+        Emgu.CV.UI.ImageBox ib4 = new Emgu.CV.UI.ImageBox();
+
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +35,7 @@ namespace CameraCapture
         {
             Image<Bgr, Byte> frame = cap.QueryFrame();
 
-            Image<Gray, Byte> grayFrame = frame.Convert<Gray, Byte>();
+            Image<Gray, Byte> grayFrame = frame.Convert<Gray, Byte>();      //彩色轉灰階
             Image<Gray, Byte> smallGrayFrame = grayFrame.PyrDown();
             Image<Gray, Byte> smoothedGrayFrame = smallGrayFrame.PyrUp();
             Image<Gray, Byte> cannyFrame = smoothedGrayFrame.Canny(new Gray(100), new Gray(60));
@@ -41,6 +46,49 @@ namespace CameraCapture
             //cannyImageBox.Image = cannyFrame;
 
             pictureBox1.Image = cannyFrame.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
+
+            ib1.Image = frame;
+            ib2.Image = grayFrame;
+            ib3.Image = smoothedGrayFrame;
+            ib4.Image = cannyFrame;
+        }
+
+        private void ReleaseData()
+        {
+            if (cap != null)
+                cap.Dispose();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            int W = 640;
+            int H = 480;
+            int w = W / 2;
+            int h = H / 2;
+            int dx = w + 50;
+            int dy = h + 50;
+            int x_st = 700;
+            int y_st = 50;
+
+            ib1.SizeMode = PictureBoxSizeMode.Zoom;
+            ib1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            ib1.Size = new Size(w, h);
+            this.Controls.Add(ib1);
+
+            ib2.SizeMode = PictureBoxSizeMode.Zoom;
+            ib2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            ib2.Size = new Size(w, h);
+            this.Controls.Add(ib2);
+
+            ib3.SizeMode = PictureBoxSizeMode.Zoom;
+            ib3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            ib3.Size = new Size(w, h);
+            this.Controls.Add(ib3);
+
+            ib4.SizeMode = PictureBoxSizeMode.Zoom;
+            ib4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            ib4.Size = new Size(w, h);
+            this.Controls.Add(ib4);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -77,12 +125,6 @@ namespace CameraCapture
             }
         }
 
-        private void ReleaseData()
-        {
-            if (cap != null)
-                cap.Dispose();
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             if (cap != null) cap.FlipHorizontal = !cap.FlipHorizontal;
@@ -92,5 +134,6 @@ namespace CameraCapture
         {
             if (cap != null) cap.FlipVertical = !cap.FlipVertical;
         }
+
     }
 }

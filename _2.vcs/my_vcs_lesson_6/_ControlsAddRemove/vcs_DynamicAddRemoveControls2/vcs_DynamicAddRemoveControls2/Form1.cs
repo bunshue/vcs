@@ -37,9 +37,6 @@ namespace vcs_DynamicAddRemoveControls2
                     this.Controls.Add(btn[x, y]);
                 }
             }
-
-
-
         }
 
         private void ButtonsClick(object sender, EventArgs e)
@@ -69,8 +66,5 @@ namespace vcs_DynamicAddRemoveControls2
             }
             */
         }
-
-
-
     }
 }

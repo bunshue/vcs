@@ -7,14 +7,17 @@ using System.Text;
 using System.Windows.Forms;
 
 using Emgu.CV;
+using Emgu.CV.UI;
 using Emgu.CV.Structure;
+using Emgu.CV.CvEnum;
 using Emgu.Util;
+
 
 namespace _emgu_test
 {
     public partial class Form1 : Form
     {
-		string filename = @"C:\______test_files\picture1.jpg";
+        string filename = @"C:\______test_files\picture1.jpg";
         private Capture cap = null;             // Webcam物件
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
@@ -37,7 +40,7 @@ namespace _emgu_test
             //smoothedGrayscaleImageBox.Image = smoothedGrayFrame;
             //cannyImageBox.Image = cannyFrame;
 
-            pictureBox1.Image = cannyFrame.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
+            pictureBox1.Image = frame.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -139,61 +142,44 @@ namespace _emgu_test
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            //Image方法
+            Image<Bgr, Byte> img = new Image<Bgr, byte>(320, 240, new Bgr(100, 0, 255));
 
-            //EmguCV 影像格式 Image<Bgr, Byte>: a wrapper to IplImage of OpenCV
-            Image<Bgr, Byte> inputImage = new Image<Bgr, byte>(filename);
-            CvInvoke.cvShowImage("Image<Bgr, Byte>", inputImage);
+            //Matrix
+
+            //Mat方法 
+            //Matrix img2 = new Matrix(200, 400, DepthType.Cv8U, 3);
+            //img2.SetTo(new Bgr(255, 0, 0).MCvScalar);
+
+            //imageBox1.Image = img;
+
+            pictureBox1.Image = img.ToBitmap();
+
+
+            //Mat B = new Mat(3, 1, Emgu.CV.CvEnum.DepthType.Cv64F, 1);
+
+
+        
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //3. EmguCV 影像格式 Image<Gray, Byte>: 宣告一個EmguCV灰階影像格式
-
-            Image<Gray, Byte> inputImage = new Image<Gray, byte>(filename);
-            CvInvoke.cvShowImage("Image<Gray, Byte>", inputImage);
-
-            //內建判斷, 直接自動將輸入彩色的照片轉成灰階
-
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //輸入PictureBox 讀入影像, 將PictureBox.Image轉型Bitmpap丟給Image<Bgr, Byte>
-
-            pictureBox1.Load(filename);
-            Image<Bgr, Byte> inputImage = new Image<Bgr, Byte>((Bitmap)(pictureBox1.Image));
-            CvInvoke.cvShowImage("Image<Bgr, Byte>", inputImage);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-             //開啟一張空的影像(黑底), 大小為640X480
-
-            Image<Gray, Byte> inputImage = new Image<Gray, byte>(new Size(640, 480));
-            pictureBox1.Image = inputImage.ToBitmap();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            // 自己定義一塊影像大小和像素值
-            Image<Bgr, Byte> inputImage = new Image<Bgr, byte>(640, 480, new Bgr(255, 0, 255));
-            pictureBox1.Image = inputImage.ToBitmap();
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //利用Bitmap讀入一張圖片, 並傳給Image<Bgr, Byte>影像格式
-
-            Bitmap bmp = new Bitmap(filename);
-            System.Drawing.Imaging.BitmapData bd;
-            bd = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height),
-                              System.Drawing.Imaging.ImageLockMode.ReadWrite,
-                              System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-            Image<Bgr, Byte> inputImage = new Image<Bgr, Byte>(bd.Width, bd.Height, bd.Stride, bd.Scan0);
-            pictureBox1.Image = inputImage.ToBitmap();
-            bmp.UnlockBits(bd);
-
         }
     }
 }

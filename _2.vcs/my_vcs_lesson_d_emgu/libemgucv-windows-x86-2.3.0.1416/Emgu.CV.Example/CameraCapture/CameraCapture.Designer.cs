@@ -85,6 +85,7 @@ namespace CameraCapture
             this.Controls.Add(this.button3);
             this.Name = "CameraCapture";
             this.Text = "Camera Capture";
+            this.Load += new System.EventHandler(this.CameraCapture_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
