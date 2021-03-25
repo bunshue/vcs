@@ -130,7 +130,6 @@ namespace vcs_DynamicAddRemoveControls4
             {
                 lbl.BackColor = Color.Red;
             }
-
         }
     }
 }

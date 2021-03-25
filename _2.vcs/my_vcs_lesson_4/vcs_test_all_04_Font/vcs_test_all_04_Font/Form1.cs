@@ -29,7 +29,6 @@ namespace vcs_test_all_04_Font
             SizeLabelFont(label3);
             SizeLabelFont(label4);
             SizeLabelFont(label5);
-
         }
 
         // Copy this text into the Label using the biggest font that will fit.
@@ -56,8 +55,7 @@ namespace vcs_test_all_04_Font
                             // See how much space the text would
                             // need, specifying a maximum width.
                             SizeF text_size = gr.MeasureString(txt, test_font);
-                            if ((text_size.Width > wid) ||
-                                (text_size.Height > hgt))
+                            if ((text_size.Width > wid) || (text_size.Height > hgt))
                             {
                                 best_size = i - 1;
                                 break;
@@ -77,35 +75,30 @@ namespace vcs_test_all_04_Font
             label1.Font = new Font("標楷體", WordSize);
             //label1.Font.Size = 10F;
             //this.comboBox_drive.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             WordSize = 20;
             label1.Font = new Font("標楷體", WordSize);
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             WordSize = 30;
             label1.Font = new Font("標楷體", WordSize);
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             WordSize = 40;
             label1.Font = new Font("標楷體", WordSize);
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             WordSize = 50;
             label1.Font = new Font("標楷體", WordSize);
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -124,8 +117,8 @@ namespace vcs_test_all_04_Font
         {
             if ((checkBox1.Checked == true) && (checkBox2.Checked == true) && (checkBox3.Checked == true))
             {
-                if(SelectFont == 1)
-                    label1.Font = new Font("標楷體", WordSize, FontStyle.Bold|FontStyle.Italic|FontStyle.Underline);
+                if (SelectFont == 1)
+                    label1.Font = new Font("標楷體", WordSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
                 else if (SelectFont == 2)
                     label1.Font = new Font("新細明體", WordSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
             }
@@ -178,8 +171,6 @@ namespace vcs_test_all_04_Font
                 else if (SelectFont == 2)
                     label1.Font = new Font("新細明體", WordSize, FontStyle.Regular);
             }
-
-        
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -197,7 +188,6 @@ namespace vcs_test_all_04_Font
                 label1.Font = fontDialog1.Font;
                 label1.ForeColor = fontDialog1.Color;
             }
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -241,7 +231,6 @@ namespace vcs_test_all_04_Font
             {
                 richTextBox1.Text += (i + 1).ToString() + "\t" + FontFamily.Families[i].Name + "\n";
             }
-
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -254,7 +243,6 @@ namespace vcs_test_all_04_Font
             }
             comboBox_font.SelectedIndex = 0;
             //在Visual Studio 2012下編譯執行後就會在comboBox中顯示目前安裝的所有字體。
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -264,8 +252,6 @@ namespace vcs_test_all_04_Font
             {
                 richTextBox1.AppendText(family.Name + "\n");
             }
-
         }
-
     }
 }

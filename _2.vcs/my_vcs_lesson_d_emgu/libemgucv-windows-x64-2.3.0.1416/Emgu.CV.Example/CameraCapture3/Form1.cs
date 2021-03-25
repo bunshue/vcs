@@ -26,6 +26,8 @@ namespace CameraCapture
         Emgu.CV.UI.ImageBox ib3 = new Emgu.CV.UI.ImageBox();
         Emgu.CV.UI.ImageBox ib4 = new Emgu.CV.UI.ImageBox();
 
+        Label[] camera_function = new Label[4];
+
         public Form1()
         {
             InitializeComponent();
@@ -89,6 +91,25 @@ namespace CameraCapture
             ib4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             ib4.Size = new Size(w, h);
             this.Controls.Add(ib4);
+
+
+            //動態產生元件並指定屬性與事件
+            for (int i = 0; i < camera_function.Length; i++)
+            {
+                camera_function[i] = new Label();
+                //camera_function[i].AutoSize = false;
+                camera_function[i].Name = "label" + i.ToString();
+                //camera_function[i].Text = "XXXXXXXX";
+                camera_function[i].Location = new Point(x_st + dx * (i % 2), y_st + dy * (i / 2) - 20);
+
+                //ib1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+                //camera_function[i].Size = new Size(W, H);
+                camera_function[i].Tag = "sample : " + i.ToString() + " is " + "empty";
+                //camera_function[i].BackColor = Color.Gray;
+                this.Controls.Add(camera_function[i]);
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -109,16 +130,26 @@ namespace CameraCapture
 
             if (cap != null)
             {
-                if (flag_webcam_ok)
+                if (flag_webcam_ok == true)
                 {  //stop the capture
                     button1.Text = "Start Capture";
                     Application.Idle -= ProcessFrame;
+
+                    camera_function[0].Text = "";
+                    camera_function[1].Text = "";
+                    camera_function[2].Text = "";
+                    camera_function[3].Text = "";
                 }
                 else
                 {
                     //start the capture
                     button1.Text = "Stop";
                     Application.Idle += ProcessFrame;
+
+                    camera_function[0].Text = "Captured Image";
+                    camera_function[1].Text = "Grayscale Image";
+                    camera_function[2].Text = "Smoothed Grayscale";
+                    camera_function[3].Text = "Canny Edges";
                 }
 
                 flag_webcam_ok = !flag_webcam_ok;
