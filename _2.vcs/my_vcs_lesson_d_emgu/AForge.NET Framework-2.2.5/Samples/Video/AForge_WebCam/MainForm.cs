@@ -10,7 +10,7 @@ using System.Diagnostics;
 using AForge.Video;
 using AForge.Video.DirectShow;
 
-namespace Player
+namespace AForge_WebCam
 {
     public partial class MainForm : Form
     {
@@ -25,89 +25,6 @@ namespace Player
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             CloseCurrentVideoSource();
-        }
-
-        // "Exit" menu item clicked
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        // Open local video capture device
-        private void localVideoCaptureDeviceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            VideoCaptureDeviceForm form = new VideoCaptureDeviceForm();
-
-            if (form.ShowDialog(this) == DialogResult.OK)
-            {
-                // create video source
-                VideoCaptureDevice videoSource = form.VideoDevice;
-
-                // open it
-                OpenVideoSource(videoSource);
-            }
-        }
-
-        // Open video file using DirectShow
-        private void openVideofileusingDirectShowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                // create video source
-                FileVideoSource fileSource = new FileVideoSource(openFileDialog.FileName);
-
-                // open it
-                OpenVideoSource(fileSource);
-            }
-        }
-
-        // Open JPEG URL
-        private void openJPEGURLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            URLForm form = new URLForm();
-
-            form.Description = "Enter URL of an updating JPEG from a web camera:";
-            form.URLs = new string[]
-				{
-					"http://195.243.185.195/axis-cgi/jpg/image.cgi?camera=1",
-				};
-
-            if (form.ShowDialog(this) == DialogResult.OK)
-            {
-                // create video source
-                JPEGStream jpegSource = new JPEGStream(form.URL);
-
-                // open it
-                OpenVideoSource(jpegSource);
-            }
-        }
-
-        // Open MJPEG URL
-        private void openMJPEGURLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            URLForm form = new URLForm();
-
-            form.Description = "Enter URL of an MJPEG video stream:";
-            form.URLs = new string[]
-				{
-					"http://195.243.185.195/axis-cgi/mjpg/video.cgi?camera=4",
-					"http://195.243.185.195/axis-cgi/mjpg/video.cgi?camera=3",
-				};
-
-            if (form.ShowDialog(this) == DialogResult.OK)
-            {
-                // create video source
-                MJPEGStream mjpegSource = new MJPEGStream(form.URL);
-
-                // open it
-                OpenVideoSource(mjpegSource);
-            }
-        }
-
-        // Capture 1st display in the system
-        private void capture1stDisplayToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenVideoSource(new ScreenCaptureStream(Screen.AllScreens[0].Bounds, 100));
         }
 
         // Open video source
@@ -159,10 +76,10 @@ namespace Player
         // New frame received by the player
         private void videoSourcePlayer_NewFrame(object sender, ref Bitmap image)
         {
-            //畫上目前的時間
             DateTime now = DateTime.Now;
             Graphics g = Graphics.FromImage(image);
 
+            // paint current time
             SolidBrush brush = new SolidBrush(Color.Red);
             g.DrawString(now.ToString(), this.Font, brush, new PointF(5, 5));
             brush.Dispose();
@@ -195,6 +112,21 @@ namespace Player
                     stopWatch.Reset();
                     stopWatch.Start();
                 }
+            }
+        }
+
+        // Open local video capture device
+        private void button1_Click(object sender, EventArgs e)
+        {
+            VideoCaptureDeviceForm form = new VideoCaptureDeviceForm();
+
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                // create video source
+                VideoCaptureDevice videoSource = form.VideoDevice;
+
+                // open it
+                OpenVideoSource(videoSource);
             }
         }
     }

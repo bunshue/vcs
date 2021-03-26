@@ -16,6 +16,11 @@ namespace Snapshot_Maker
             InitializeComponent( );
         }
 
+        private void SnapshotForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public void SetImage( Bitmap bitmap )
         {
             timeBox.Text = DateTime.Now.ToLongTimeString( );
@@ -64,5 +69,6 @@ namespace Snapshot_Maker
                 }
             }
         }
+
     }
 }

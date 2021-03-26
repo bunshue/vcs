@@ -43,6 +43,7 @@
             this.videoSourcePlayer = new AForge.Controls.VideoSourcePlayer();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.mainMenuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +54,7 @@
             this.fileToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(809, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(989, 24);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
@@ -124,14 +125,14 @@
             this.fpsLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 506);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(809, 22);
+            this.statusStrip.Size = new System.Drawing.Size(989, 22);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
             // fpsLabel
             // 
             this.fpsLabel.Name = "fpsLabel";
-            this.fpsLabel.Size = new System.Drawing.Size(794, 17);
+            this.fpsLabel.Size = new System.Drawing.Size(974, 17);
             this.fpsLabel.Spring = true;
             this.fpsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -140,7 +141,7 @@
             this.videoSourcePlayer.AutoSizeControl = true;
             this.videoSourcePlayer.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.videoSourcePlayer.ForeColor = System.Drawing.Color.White;
-            this.videoSourcePlayer.Location = new System.Drawing.Point(243, 143);
+            this.videoSourcePlayer.Location = new System.Drawing.Point(333, 143);
             this.videoSourcePlayer.Name = "videoSourcePlayer";
             this.videoSourcePlayer.Size = new System.Drawing.Size(322, 242);
             this.videoSourcePlayer.TabIndex = 0;
@@ -157,11 +158,20 @@
             this.openFileDialog.Filter = "AVI files (*.avi)|*.avi|All files (*.*)|*.*";
             this.openFileDialog.Title = "Opem movie";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(761, 37);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(216, 466);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 528);
+            this.ClientSize = new System.Drawing.Size(989, 528);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.videoSourcePlayer);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.mainMenuStrip);
@@ -194,6 +204,7 @@
         private System.Windows.Forms.ToolStripMenuItem openJPEGURLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openMJPEGURLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem capture1stDisplayToolStripMenuItem;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

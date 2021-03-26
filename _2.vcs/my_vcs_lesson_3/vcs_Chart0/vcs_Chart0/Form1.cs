@@ -25,25 +25,78 @@ namespace vcs_Chart0
 
         private void drawLine() //繪圖
         {
-            //---------------------
+            int i;
+            int N = 10;
+            Random r = new Random();
+            int[] number = new int[N];
+            for (i = 0; i < N; i++)
+            {
+                number[i] = r.Next(350);
+            }
+
             chart1.Series.Clear();  //每次使用此function前先清除圖表
             Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
             series1.Color = Color.Blue; //設定線條顏色
             series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
             series1.ChartType = SeriesChartType.Line; //設定線條種類
-            chart1.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
-            chart1.ChartAreas[0].AxisY.Maximum = 500;//設定Y軸最大值
             //chart1.ChartAreas[0].AxisY.Enabled= AxisEnabled.False; //隱藏Y 軸標示
             //chart1.ChartAreas[0].AxisY.MajorGrid.Enabled= true;  //隱藏Y軸標線
             series1.IsValueShownAsLabel = true; //是否把數值顯示在線上
             //把值加入X 軸Y 軸
-            series1.Points.AddXY("A", 200);
-            series1.Points.AddXY("B", 100);
-            series1.Points.AddXY("C", 100);
-            series1.Points.AddXY("D", 30);
-            series1.Points.AddXY("E", 300);
-            series1.Points.AddXY("F", 70);
-            this.chart1.Series.Add(series1);//將線畫在圖上
+            series1.Points.AddXY("A", number[0]);
+            series1.Points.AddXY("B", number[1]);
+            series1.Points.AddXY("C", number[2]);
+            series1.Points.AddXY("D", number[3]);
+            series1.Points.AddXY("E", number[4]);
+            series1.Points.AddXY("F", number[5]);
+            chart1.Series.Add(series1);//將線畫在圖上
+
+            //大小位置
+            chart1.Size = new Size(600, 600);
+            chart1.Location = new Point(200, 20);
+            //固定邊界
+            chart1.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
+            chart1.ChartAreas[0].AxisY.Maximum = 500;//設定Y軸最大值
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int i;
+            int N = 10;
+            Random r = new Random();
+            int[] number = new int[N];
+            for (i = 0; i < N; i++)
+            {
+                number[i] = r.Next(100);
+            }
+
+            chart1.Series.Clear();  //每次使用此function前先清除圖表
+            Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
+            series1.Color = Color.Blue; //設定線條顏色
+            series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
+            series1.ChartType = SeriesChartType.Line; //設定線條種類
+            //chart1.ChartAreas[0].AxisY.Enabled= AxisEnabled.False; //隱藏Y 軸標示
+            //chart1.ChartAreas[0].AxisY.MajorGrid.Enabled= true;  //隱藏Y軸標線
+            series1.IsValueShownAsLabel = true; //是否把數值顯示在線上
+            //把值加入X 軸Y 軸
+            series1.Points.AddXY("A", number[0]);
+            series1.Points.AddXY("B", number[1]);
+            series1.Points.AddXY("C", number[2]);
+            series1.Points.AddXY("D", number[3]);
+            series1.Points.AddXY("E", number[4]);
+            series1.Points.AddXY("F", number[5]);
+            series1.Points.AddXY("G", number[6]);
+            series1.Points.AddXY("H", number[7]);
+            series1.Points.AddXY("I", number[8]);
+            series1.Points.AddXY("J", number[9]);
+            chart1.Series.Add(series1);//將線畫在圖上
+
+            //大小位置
+            chart1.Size = new Size(600, 600);
+            chart1.Location = new Point(200, 20);
+            //變動邊界
+            chart1.ChartAreas[0].AxisY.Minimum = number.Min() - 10;//設定Y軸最小值
+            chart1.ChartAreas[0].AxisY.Maximum = number.Max() + 10;//設定Y軸最大值
         }
     }
 }
