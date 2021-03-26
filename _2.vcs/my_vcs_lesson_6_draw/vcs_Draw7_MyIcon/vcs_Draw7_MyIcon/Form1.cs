@@ -23,6 +23,7 @@ namespace vcs_Draw7_MyIcon
         Color background_color = Color.White;
 
         string FileName = "";
+        string word = "唐";
 
         public Form1()
         {
@@ -129,6 +130,7 @@ namespace vcs_Draw7_MyIcon
             //button52.Location = new Point(x_st + dx * 4, y_st + dy * 6);
             //button53.Location = new Point(x_st + dx * 5, y_st + dy * 6);
 
+            button9.Text = word;
 
             //richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             //richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
@@ -345,7 +347,7 @@ namespace vcs_Draw7_MyIcon
             f = new Font("Arial", 88);
 
             g.DrawString("2", f, sb, new PointF(10, 0));
-            
+
             pictureBox1.Image = bitmap1;
         }
 
@@ -602,7 +604,7 @@ namespace vcs_Draw7_MyIcon
             //previous
             Point[] points = new Point[3];
             points[0] = new Point(width * 6 / 8, height * 2 / 8);
-            points[1] = new Point(width / 8 + width / 8 + width /8, height / 2);
+            points[1] = new Point(width / 8 + width / 8 + width / 8, height / 2);
             points[2] = new Point(width * 6 / 8, height * 6 / 8);
             g.FillPolygon(sb, points);
 
@@ -791,7 +793,7 @@ namespace vcs_Draw7_MyIcon
             width = 128;
             height = 128;
 
-            if(bitmap1 == null)
+            if (bitmap1 == null)
                 bitmap1 = new Bitmap(width, height);
             g = Graphics.FromImage(bitmap1);
 
@@ -1153,7 +1155,7 @@ namespace vcs_Draw7_MyIcon
             p = new Pen(foreground_color, 20);
             p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
             p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-            g.DrawArc(p, 20, 20, 90, 90, -45, 180+45+45);
+            g.DrawArc(p, 20, 20, 90, 90, -45, 180 + 45 + 45);
 
             Point pointa;
             Point pointb;
@@ -1404,10 +1406,7 @@ namespace vcs_Draw7_MyIcon
             pointb = new Point(width * 5 / 16, height * 8 / 16);
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
-
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button38_Click(object sender, EventArgs e)
@@ -1839,7 +1838,7 @@ namespace vcs_Draw7_MyIcon
                 g.DrawString((xx / 256 + 1).ToString() + "/" + (width / 256).ToString(), f, sb, new PointF(xx, 100));
             }
 
-            g.DrawRectangle(p, new Rectangle(0, 0, width-1, height-1));
+            g.DrawRectangle(p, new Rectangle(0, 0, width - 1, height - 1));
 
 
             pictureBox1.Image = bitmap1;
@@ -2046,7 +2045,6 @@ namespace vcs_Draw7_MyIcon
                     }
                 }
             }
-
         }
 
         private void bt4_Click(object sender, EventArgs e)
@@ -2084,7 +2082,42 @@ namespace vcs_Draw7_MyIcon
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //寫字畫框
 
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 128;
+            height = 128;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+
+
+            int dd = 5;
+            p = new Pen(Color.SkyBlue, 20);
+            g.DrawRectangle(p, new Rectangle(width / 6 + dd, height / 6 + dd, width * 4 / 6 - dd * 2, height * 4 / 6 - dd * 2));
+
+            Font f;
+            f = new Font("標楷體", 100);
+            sb = new SolidBrush(Color.Red);
+            g.DrawString(word, f, sb, new PointF(-29, -7));
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -2138,12 +2171,12 @@ namespace vcs_Draw7_MyIcon
             Point pointa;
             Point pointb;
 
-            pointa = new Point(width * 0 / 4 + 10, height / 3+s);
-            pointb = new Point(width * 4 / 4 - 10, height / 3-s);
+            pointa = new Point(width * 0 / 4 + 10, height / 3 + s);
+            pointb = new Point(width * 4 / 4 - 10, height / 3 - s);
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
-            pointa = new Point(width * 0 / 4 + 10, height * 2 / 3+s);
-            pointb = new Point(width * 4 / 4 - 10, height * 2 / 3-s);
+            pointa = new Point(width * 0 / 4 + 10, height * 2 / 3 + s);
+            pointb = new Point(width * 4 / 4 - 10, height * 2 / 3 - s);
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
             pointa = new Point(width * 1 / 3, height * 0 / 4 + 10);
@@ -2196,8 +2229,6 @@ namespace vcs_Draw7_MyIcon
             pointa = new Point(cx - r, cy - r);
             pointb = new Point(cx + r, cy + r);
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
-
         }
-
     }
 }

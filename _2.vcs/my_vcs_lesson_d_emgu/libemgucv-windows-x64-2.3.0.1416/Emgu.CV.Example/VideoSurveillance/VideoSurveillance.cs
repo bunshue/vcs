@@ -1,7 +1,3 @@
-//----------------------------------------------------------------------------
-//  Copyright (C) 2004-2011 by EMGU. All rights reserved.       
-//----------------------------------------------------------------------------
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,16 +12,16 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.VideoSurveillance;
 
-namespace VideoSurveilance
+namespace VideoSurveillance
 {
-   public partial class VideoSurveilance : Form
+   public partial class VideoSurveillance : Form
    {
       private static MCvFont _font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_SIMPLEX, 1.0, 1.0);
       private static Capture _cameraCapture;
       private static BlobTrackerAuto<Bgr> _tracker;
       private static IBGFGDetector<Bgr> _detector;
 
-      public VideoSurveilance()
+      public VideoSurveillance()
       {
          InitializeComponent();
          Run();
