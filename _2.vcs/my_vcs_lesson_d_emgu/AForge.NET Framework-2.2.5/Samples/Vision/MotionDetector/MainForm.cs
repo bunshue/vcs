@@ -2,7 +2,7 @@
 // AForge.NET Framework
 // http://www.aforgenet.com/framework/
 //
-// Copyright © AForge.NET, 2006-2012
+// Copyright ?AForge.NET, 2006-2012
 // contacts@aforgenet.com
 //
 
@@ -152,6 +152,7 @@ namespace MotionDetectorSample
         // Open video file using DirectShow
         private void openVideoFileusingDirectShowToolStripMenuItem_Click( object sender, EventArgs e )
         {
+            openFileDialog.InitialDirectory = Application.StartupPath;
             if ( openFileDialog.ShowDialog( ) == DialogResult.OK )
             {
                 // create video source

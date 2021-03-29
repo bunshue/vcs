@@ -2,7 +2,7 @@
 // AForge.NET framework
 // http://www.aforgenet.com/framework/
 //
-// Copyright © AForge.NET, 2006-2011
+// Copyright ?AForge.NET, 2006-2011
 // contacts@aforgenet.com
 //
 
@@ -105,245 +105,248 @@ namespace TSP
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.generateMapButton = new System.Windows.Forms.Button();
-			this.citiesCountBox = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.mapControl = new AForge.Controls.Chart();
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.greedyCrossoverBox = new System.Windows.Forms.CheckBox();
-			this.label5 = new System.Windows.Forms.Label();
-			this.iterationsBox = new System.Windows.Forms.TextBox();
-			this.label4 = new System.Windows.Forms.Label();
-			this.selectionBox = new System.Windows.Forms.ComboBox();
-			this.label3 = new System.Windows.Forms.Label();
-			this.populationSizeBox = new System.Windows.Forms.TextBox();
-			this.label2 = new System.Windows.Forms.Label();
-			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.pathLengthBox = new System.Windows.Forms.TextBox();
-			this.label7 = new System.Windows.Forms.Label();
-			this.currentIterationBox = new System.Windows.Forms.TextBox();
-			this.label6 = new System.Windows.Forms.Label();
-			this.startButton = new System.Windows.Forms.Button();
-			this.stopButton = new System.Windows.Forms.Button();
-			this.groupBox1.SuspendLayout();
-			this.groupBox2.SuspendLayout();
-			this.groupBox3.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// groupBox1
-			// 
-			this.groupBox1.Controls.Add(this.generateMapButton);
-			this.groupBox1.Controls.Add(this.citiesCountBox);
-			this.groupBox1.Controls.Add(this.label1);
-			this.groupBox1.Controls.Add(this.mapControl);
-			this.groupBox1.Location = new System.Drawing.Point(10, 10);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(300, 340);
-			this.groupBox1.TabIndex = 0;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Map";
-			// 
-			// generateMapButton
-			// 
-			this.generateMapButton.Location = new System.Drawing.Point(110, 309);
-			this.generateMapButton.Name = "generateMapButton";
-			this.generateMapButton.Size = new System.Drawing.Size(75, 22);
-			this.generateMapButton.TabIndex = 3;
-			this.generateMapButton.Text = "&Generate";
-			this.generateMapButton.Click += new System.EventHandler(this.generateMapButton_Click);
-			// 
-			// citiesCountBox
-			// 
-			this.citiesCountBox.Location = new System.Drawing.Point(50, 310);
-			this.citiesCountBox.Name = "citiesCountBox";
-			this.citiesCountBox.Size = new System.Drawing.Size(50, 20);
-			this.citiesCountBox.TabIndex = 2;
-			this.citiesCountBox.Text = "";
-			// 
-			// label1
-			// 
-			this.label1.Location = new System.Drawing.Point(10, 312);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(40, 16);
-			this.label1.TabIndex = 1;
-			this.label1.Text = "Cities:";
-			// 
-			// mapControl
-			// 
-			this.mapControl.Location = new System.Drawing.Point(10, 20);
-			this.mapControl.Name = "mapControl";
-			this.mapControl.Size = new System.Drawing.Size(280, 280);
-			this.mapControl.TabIndex = 0;
-			// 
-			// groupBox2
-			// 
-			this.groupBox2.Controls.Add(this.greedyCrossoverBox);
-			this.groupBox2.Controls.Add(this.label5);
-			this.groupBox2.Controls.Add(this.iterationsBox);
-			this.groupBox2.Controls.Add(this.label4);
-			this.groupBox2.Controls.Add(this.selectionBox);
-			this.groupBox2.Controls.Add(this.label3);
-			this.groupBox2.Controls.Add(this.populationSizeBox);
-			this.groupBox2.Controls.Add(this.label2);
-			this.groupBox2.Location = new System.Drawing.Point(320, 10);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(185, 225);
-			this.groupBox2.TabIndex = 1;
-			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "Settings";
-			// 
-			// greedyCrossoverBox
-			// 
-			this.greedyCrossoverBox.Location = new System.Drawing.Point(10, 70);
-			this.greedyCrossoverBox.Name = "greedyCrossoverBox";
-			this.greedyCrossoverBox.Size = new System.Drawing.Size(120, 24);
-			this.greedyCrossoverBox.TabIndex = 7;
-			this.greedyCrossoverBox.Text = "Greedy crossover";
-			// 
-			// label5
-			// 
-			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.label5.Location = new System.Drawing.Point(125, 200);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(58, 15);
-			this.label5.TabIndex = 6;
-			this.label5.Text = "( 0 - inifinity )";
-			// 
-			// iterationsBox
-			// 
-			this.iterationsBox.Location = new System.Drawing.Point(125, 180);
-			this.iterationsBox.Name = "iterationsBox";
-			this.iterationsBox.Size = new System.Drawing.Size(50, 20);
-			this.iterationsBox.TabIndex = 5;
-			this.iterationsBox.Text = "";
-			// 
-			// label4
-			// 
-			this.label4.Location = new System.Drawing.Point(10, 182);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(60, 16);
-			this.label4.TabIndex = 4;
-			this.label4.Text = "Iterations:";
-			// 
-			// selectionBox
-			// 
-			this.selectionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.selectionBox.Items.AddRange(new object[] {
-															  "Elite",
-															  "Rank",
-															  "Roulette"});
-			this.selectionBox.Location = new System.Drawing.Point(110, 45);
-			this.selectionBox.Name = "selectionBox";
-			this.selectionBox.Size = new System.Drawing.Size(65, 21);
-			this.selectionBox.TabIndex = 3;
-			// 
-			// label3
-			// 
-			this.label3.Location = new System.Drawing.Point(10, 47);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(100, 16);
-			this.label3.TabIndex = 2;
-			this.label3.Text = "Selection method:";
-			// 
-			// populationSizeBox
-			// 
-			this.populationSizeBox.Location = new System.Drawing.Point(125, 20);
-			this.populationSizeBox.Name = "populationSizeBox";
-			this.populationSizeBox.Size = new System.Drawing.Size(50, 20);
-			this.populationSizeBox.TabIndex = 1;
-			this.populationSizeBox.Text = "";
-			// 
-			// label2
-			// 
-			this.label2.Location = new System.Drawing.Point(10, 22);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(90, 16);
-			this.label2.TabIndex = 0;
-			this.label2.Text = "Population size:";
-			// 
-			// groupBox3
-			// 
-			this.groupBox3.Controls.Add(this.pathLengthBox);
-			this.groupBox3.Controls.Add(this.label7);
-			this.groupBox3.Controls.Add(this.currentIterationBox);
-			this.groupBox3.Controls.Add(this.label6);
-			this.groupBox3.Location = new System.Drawing.Point(320, 240);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(185, 75);
-			this.groupBox3.TabIndex = 2;
-			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "Current iteration";
-			// 
-			// pathLengthBox
-			// 
-			this.pathLengthBox.Location = new System.Drawing.Point(125, 45);
-			this.pathLengthBox.Name = "pathLengthBox";
-			this.pathLengthBox.ReadOnly = true;
-			this.pathLengthBox.Size = new System.Drawing.Size(50, 20);
-			this.pathLengthBox.TabIndex = 3;
-			this.pathLengthBox.Text = "";
-			// 
-			// label7
-			// 
-			this.label7.Location = new System.Drawing.Point(10, 47);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(80, 16);
-			this.label7.TabIndex = 2;
-			this.label7.Text = "Path length:";
-			// 
-			// currentIterationBox
-			// 
-			this.currentIterationBox.Location = new System.Drawing.Point(125, 20);
-			this.currentIterationBox.Name = "currentIterationBox";
-			this.currentIterationBox.ReadOnly = true;
-			this.currentIterationBox.Size = new System.Drawing.Size(50, 20);
-			this.currentIterationBox.TabIndex = 1;
-			this.currentIterationBox.Text = "";
-			// 
-			// label6
-			// 
-			this.label6.Location = new System.Drawing.Point(10, 22);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(50, 16);
-			this.label6.TabIndex = 0;
-			this.label6.Text = "Iteration:";
-			// 
-			// startButton
-			// 
-			this.startButton.Location = new System.Drawing.Point(340, 325);
-			this.startButton.Name = "startButton";
-			this.startButton.TabIndex = 3;
-			this.startButton.Text = "&Start";
-			this.startButton.Click += new System.EventHandler(this.startButton_Click);
-			// 
-			// stopButton
-			// 
-			this.stopButton.Enabled = false;
-			this.stopButton.Location = new System.Drawing.Point(430, 325);
-			this.stopButton.Name = "stopButton";
-			this.stopButton.TabIndex = 4;
-			this.stopButton.Text = "S&top";
-			this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
-			// 
-			// MainForm
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(514, 360);
-			this.Controls.Add(this.stopButton);
-			this.Controls.Add(this.startButton);
-			this.Controls.Add(this.groupBox3);
-			this.Controls.Add(this.groupBox2);
-			this.Controls.Add(this.groupBox1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.MaximizeBox = false;
-			this.Name = "MainForm";
-			this.Text = "Traveling Salesman Problem using Genetic Algorithms";
-			this.Closing += new System.ComponentModel.CancelEventHandler(this.MainForm_Closing);
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox2.ResumeLayout(false);
-			this.groupBox3.ResumeLayout(false);
-			this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.generateMapButton = new System.Windows.Forms.Button();
+            this.citiesCountBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.mapControl = new AForge.Controls.Chart();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.greedyCrossoverBox = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.iterationsBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.selectionBox = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.populationSizeBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.pathLengthBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.currentIterationBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.startButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.generateMapButton);
+            this.groupBox1.Controls.Add(this.citiesCountBox);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.mapControl);
+            this.groupBox1.Location = new System.Drawing.Point(10, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(300, 392);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Map";
+            // 
+            // generateMapButton
+            // 
+            this.generateMapButton.Location = new System.Drawing.Point(110, 357);
+            this.generateMapButton.Name = "generateMapButton";
+            this.generateMapButton.Size = new System.Drawing.Size(75, 25);
+            this.generateMapButton.TabIndex = 3;
+            this.generateMapButton.Text = "&Generate";
+            this.generateMapButton.Click += new System.EventHandler(this.generateMapButton_Click);
+            // 
+            // citiesCountBox
+            // 
+            this.citiesCountBox.Location = new System.Drawing.Point(50, 358);
+            this.citiesCountBox.Name = "citiesCountBox";
+            this.citiesCountBox.Size = new System.Drawing.Size(50, 22);
+            this.citiesCountBox.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(10, 360);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 18);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Cities:";
+            // 
+            // mapControl
+            // 
+            this.mapControl.Location = new System.Drawing.Point(10, 23);
+            this.mapControl.Name = "mapControl";
+            this.mapControl.RangeX = ((AForge.Range)(resources.GetObject("mapControl.RangeX")));
+            this.mapControl.RangeY = ((AForge.Range)(resources.GetObject("mapControl.RangeY")));
+            this.mapControl.Size = new System.Drawing.Size(280, 323);
+            this.mapControl.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.greedyCrossoverBox);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.iterationsBox);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.selectionBox);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.populationSizeBox);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Location = new System.Drawing.Point(320, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(185, 259);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Settings";
+            // 
+            // greedyCrossoverBox
+            // 
+            this.greedyCrossoverBox.Location = new System.Drawing.Point(10, 81);
+            this.greedyCrossoverBox.Name = "greedyCrossoverBox";
+            this.greedyCrossoverBox.Size = new System.Drawing.Size(120, 27);
+            this.greedyCrossoverBox.TabIndex = 7;
+            this.greedyCrossoverBox.Text = "Greedy crossover";
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(125, 231);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(58, 17);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "( 0 - inifinity )";
+            // 
+            // iterationsBox
+            // 
+            this.iterationsBox.Location = new System.Drawing.Point(125, 208);
+            this.iterationsBox.Name = "iterationsBox";
+            this.iterationsBox.Size = new System.Drawing.Size(50, 22);
+            this.iterationsBox.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(10, 210);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 18);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Iterations:";
+            // 
+            // selectionBox
+            // 
+            this.selectionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.selectionBox.Items.AddRange(new object[] {
+            "Elite",
+            "Rank",
+            "Roulette"});
+            this.selectionBox.Location = new System.Drawing.Point(110, 52);
+            this.selectionBox.Name = "selectionBox";
+            this.selectionBox.Size = new System.Drawing.Size(65, 20);
+            this.selectionBox.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(10, 54);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 19);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Selection method:";
+            // 
+            // populationSizeBox
+            // 
+            this.populationSizeBox.Location = new System.Drawing.Point(125, 23);
+            this.populationSizeBox.Name = "populationSizeBox";
+            this.populationSizeBox.Size = new System.Drawing.Size(50, 22);
+            this.populationSizeBox.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(10, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 19);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Population size:";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.pathLengthBox);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.currentIterationBox);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Location = new System.Drawing.Point(320, 277);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(185, 86);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Current iteration";
+            // 
+            // pathLengthBox
+            // 
+            this.pathLengthBox.Location = new System.Drawing.Point(125, 52);
+            this.pathLengthBox.Name = "pathLengthBox";
+            this.pathLengthBox.ReadOnly = true;
+            this.pathLengthBox.Size = new System.Drawing.Size(50, 22);
+            this.pathLengthBox.TabIndex = 3;
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(10, 54);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(80, 19);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Path length:";
+            // 
+            // currentIterationBox
+            // 
+            this.currentIterationBox.Location = new System.Drawing.Point(125, 23);
+            this.currentIterationBox.Name = "currentIterationBox";
+            this.currentIterationBox.ReadOnly = true;
+            this.currentIterationBox.Size = new System.Drawing.Size(50, 22);
+            this.currentIterationBox.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(10, 25);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 19);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Iteration:";
+            // 
+            // startButton
+            // 
+            this.startButton.Location = new System.Drawing.Point(340, 375);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(75, 27);
+            this.startButton.TabIndex = 3;
+            this.startButton.Text = "&Start";
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // stopButton
+            // 
+            this.stopButton.Enabled = false;
+            this.stopButton.Location = new System.Drawing.Point(430, 375);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(75, 27);
+            this.stopButton.TabIndex = 4;
+            this.stopButton.Text = "S&top";
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // MainForm
+            // 
+            this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
+            this.ClientSize = new System.Drawing.Size(553, 441);
+            this.Controls.Add(this.stopButton);
+            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.Name = "MainForm";
+            this.Text = "Traveling Salesman Problem using Genetic Algorithms";
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.MainForm_Closing);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.ResumeLayout(false);
 
 		}
 		#endregion

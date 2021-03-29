@@ -107,7 +107,7 @@ namespace AForge_WebCam
                     stopWatch.Stop();
 
                     float fps = 1000.0f * framesReceived / stopWatch.ElapsedMilliseconds;
-                    fpsLabel.Text = fps.ToString("F2") + " fps";
+                    lb_fps.Text = fps.ToString("F2") + " fps";
 
                     stopWatch.Reset();
                     stopWatch.Start();

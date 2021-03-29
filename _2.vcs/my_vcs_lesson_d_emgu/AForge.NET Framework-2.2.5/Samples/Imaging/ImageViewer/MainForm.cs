@@ -14,13 +14,14 @@ namespace ImageViewer
     public partial class MainForm : Form
     {
         // Class constructor
-        public MainForm( )
+        public MainForm()
         {
-            InitializeComponent( );
+            InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            openFileDialog.InitialDirectory = @"C:\______test_files\";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -48,7 +49,6 @@ namespace ImageViewer
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
         }
     }
 }

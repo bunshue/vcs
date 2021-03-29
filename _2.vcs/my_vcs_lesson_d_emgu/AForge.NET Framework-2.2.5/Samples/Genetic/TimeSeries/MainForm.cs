@@ -2,7 +2,7 @@
 // AForge.NET framework
 // http://www.aforgenet.com/framework/
 //
-// Copyright © AForge.NET, 2006-2011
+// Copyright ?AForge.NET, 2006-2011
 // contacts@aforgenet.com
 //
 
@@ -622,6 +622,7 @@ namespace TimeSeries
 		private void loadDataButton_Click(object sender, System.EventArgs e)
 		{
 			// show file selection dialog
+            openFileDialog.InitialDirectory = Application.StartupPath;
 			if ( openFileDialog.ShowDialog( ) == DialogResult.OK )
 			{
 				StreamReader reader = null;
