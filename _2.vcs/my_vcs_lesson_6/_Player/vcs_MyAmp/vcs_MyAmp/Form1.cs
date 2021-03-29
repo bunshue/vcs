@@ -186,7 +186,7 @@ namespace vcs_MyAmp
             return str;
         }
 
-        //參考/加入參考/COM 選W indows Media Player (wmp.dll)
+        //參考/加入參考/COM 選Windows Media Player (wmp.dll)
         //using WMPLib;
         private void button5_Click(object sender, EventArgs e)
         {
@@ -609,6 +609,5 @@ namespace vcs_MyAmp
             richTextBox1.Text += "FileType: " + wplayer.currentMedia.getItemInfo("FileType").ToString() + "\n";
             richTextBox1.Text += "sourceURL: " + wplayer.currentMedia.getItemInfo("sourceURL").ToString() + "\n";
         }
-
     }
 }

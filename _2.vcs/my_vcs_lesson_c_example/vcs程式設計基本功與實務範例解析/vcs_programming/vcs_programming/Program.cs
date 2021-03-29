@@ -33,7 +33,7 @@ namespace vcs_programming
 
             /* 第 18 章 */
             //Application.Run(new Form1());           //有使用到 MyClass.cs
-            //Application.Run(new MyForm());
+            Application.Run(new MyForm());
 
             /* 第 19 章 */
             //Application.Run(new MainForm());
@@ -41,7 +41,6 @@ namespace vcs_programming
             /* 第 20 章 */
             //Application.Run(new ShapeManagerForm());
 
-            Application.Run(new Midterm());
         }
     }
 }

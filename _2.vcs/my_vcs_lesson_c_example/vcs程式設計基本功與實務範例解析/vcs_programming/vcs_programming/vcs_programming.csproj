@@ -136,12 +136,6 @@
     <Compile Include="matchNumbers.Designer.cs">
       <DependentUpon>matchNumbers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Midterm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Midterm.Designer.cs">
-      <DependentUpon>Midterm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="jaggedArray.resx">
@@ -176,9 +170,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="matchNumbers.resx">
       <DependentUpon>matchNumbers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Midterm.resx">
-      <DependentUpon>Midterm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

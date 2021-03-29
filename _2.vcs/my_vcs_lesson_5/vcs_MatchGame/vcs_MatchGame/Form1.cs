@@ -13,11 +13,15 @@ namespace vcs_MatchGame
 {
     public partial class Form1 : Form
     {
-        int[] imageId = new int[16];
+        int C = 4;  //Column
+        int R = 4;  //Row
+        int total_items = 0;
+
+        int[] imageId;
         int firstPicPos = -1; //尚未有任何翻開的圖片
         int counter = 0;
         DateTime start;
-        PictureBox[] pbx = new PictureBox[16];
+        PictureBox[] pbx;
 
         public Form1()
         {
@@ -45,7 +49,7 @@ namespace vcs_MatchGame
                 pbx[i].Name = "pbx" + i.ToString();
                 pbx[i].Text = (i + 1).ToString();
                 pbx[i].Click += pbx_Click;
-                pbx[i].Location = new Point(x_st + dx * (i % 4), y_st + dy * (i / 4));
+                pbx[i].Location = new Point(x_st + dx * (i % C), y_st + dy * (i / C));
                 pbx[i].Size = new Size(w, h);
                 pbx[i].Tag = "pbx : " + i.ToString();
                 pbx[i].BackColor = Color.Gray;
@@ -55,6 +59,10 @@ namespace vcs_MatchGame
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            total_items = R * C;
+            imageId = new int[total_items];
+            pbx = new PictureBox[total_items];
+
             show_item_location();
 
             for (int i = 0; i < pbx.Length; i++)
@@ -63,10 +71,12 @@ namespace vcs_MatchGame
             }
 
             // 顯示背面圖像
-            for (int i = 0; i < 16; i++)
-                pbx[i].Image = imageList1.Images[8];
+            for (int i = 0; i < total_items; i++)
+            {
+                pbx[i].Image = imageList1.Images[8];    //背面圖像
+            }
             // 產生隨機打散的圖像資料
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < (total_items / 2); i++)
             {
                 imageId[i * 2] = i;
                 imageId[i * 2 + 1] = i;
@@ -74,15 +84,15 @@ namespace vcs_MatchGame
 
             Random rd = new Random();
 
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < total_items; i++)
             {
-                int t = rd.Next(0, 16);
+                int t = rd.Next(0, total_items);
                 int temp = imageId[i];
                 imageId[i] = imageId[t];
                 imageId[t] = temp;
             }
 
-            /*for (int i = 0; i < 16; i++)
+            /*for (int i = 0; i < total_items; i++)
             {
                 int id = imageId[i];
                 pbx[i].Image = imageList1.Images[id];
@@ -97,7 +107,7 @@ namespace vcs_MatchGame
 
             int picPos = 0;
             // 取得目前被按的PictureBox，將其位置記錄在picPos
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < total_items; i++)
                 if (s == pbx[i])
                 {
                     picPos = i;
@@ -135,7 +145,7 @@ namespace vcs_MatchGame
 
                     counter += 2;
 
-                    if (counter == 16)
+                    if (counter == total_items)
                     {   // 計算所花的時間
                         DateTime end = DateTime.Now;
 
@@ -155,7 +165,7 @@ namespace vcs_MatchGame
 
         private void button1_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < total_items; i++)
             {
                 int id = imageId[i];
                 if (id == -1) continue;
@@ -165,7 +175,7 @@ namespace vcs_MatchGame
 
             Thread.Sleep(2000);
 
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < total_items; i++)
             {
                 if (imageId[i] != -1)
                 {

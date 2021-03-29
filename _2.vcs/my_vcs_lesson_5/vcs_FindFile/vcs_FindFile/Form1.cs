@@ -15,8 +15,12 @@ namespace vcs_FindFile
     {
         List<string> all_filenames = new List<String>();
         List<String> all_strings = new List<String>();
+        List<String> favorite_strings = new List<String>();
         int filenames_count = 0;
         int strings_count = 0;
+        int favorite_strings_count = 0;
+
+        string favorite_filename = @"C:\______test_files\__RW\_txt\favorite_list.txt";
 
         public Form1()
         {
@@ -46,6 +50,7 @@ namespace vcs_FindFile
 
             find_files();
             load_data();
+            find_favorite_files();
         }
 
         //在Form1_FormClosing時把資料存起來     // Save current settings.
@@ -65,7 +70,6 @@ namespace vcs_FindFile
             {
                 richTextBox2.Text += all_strings[i] + "\n";
             }
-
         }
 
         // Search for files matching the patterns.
@@ -173,18 +177,56 @@ namespace vcs_FindFile
 
                     for (i = 0; i < strings_count; i++)
                     {
-                        richTextBox1.Text += all_strings[i] + "\n";
+                        //這裡打印所有資料 會很久
+                        //richTextBox1.Text += all_strings[i] + "\n";
                     }
+                }
+            }
+
+            if (File.Exists(favorite_filename) == false)
+            {
+                richTextBox1.Text += "檔案 " + favorite_filename + " 不存在，離開。\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案 " + favorite_filename + " 存在, 開啟，並讀入文字資料\n";
+
+                string line;
+                StreamReader sr = new StreamReader(favorite_filename, Encoding.Default);
+
+                int i = 0;
+                while (!sr.EndOfStream)
+                {               // 每次讀取一行，直到檔尾
+                    i++;
+                    line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
+
+                    if (line.Length < 2)
+                        continue;
+
+                    //richTextBox1.Text += i.ToString() + "\t" + line + "\tlen = " + line.Length.ToString() + "\n";
+                    favorite_strings.Add(line);
+                }
+
+                favorite_strings_count = favorite_strings.Count;
+                sr.Close();
+
+                richTextBox1.Text += "b可用行數 " + favorite_strings_count.ToString() + "\n";
+
+
+                for (i = 0; i < favorite_strings_count; i++)
+                {
+                    richTextBox1.Text += favorite_strings[i] + "\n";
                 }
             }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            richTextBox2.Clear();
+
             if (textBox1.Text.Length < 2)
                 return;
 
-            richTextBox2.Clear();
             int i;
             string pattern = textBox1.Text;
 
@@ -193,7 +235,8 @@ namespace vcs_FindFile
                 //richTextBox1.Text += all_strings[i] + "\n";
                 if (all_strings[i].Contains(pattern) == true)
                 {
-                    richTextBox2.Text += "符合條件\t" + all_strings[i] + "\n";
+                    //最終打印搜尋結果
+                    //richTextBox2.Text += "符合條件\t" + all_strings[i] + "\n";
                 }
             }
         }
@@ -219,6 +262,25 @@ namespace vcs_FindFile
                 richTextBox1.Text = "未選取資料夾\n";
             }
         }
+
+        void find_favorite_files()
+        {
+            richTextBox3.Clear();
+
+            int i;
+            int j;
+
+            for (i = 0; i < strings_count; i++)
+            {
+                for (j = 0; j < favorite_strings_count; j++)
+                {
+                    if (all_strings[i].Contains(favorite_strings[j]) == true)
+                    {
+                        //最終打印搜尋結果
+                        richTextBox3.Text += "符合條件\t" + all_strings[i] + "\n";
+                    }
+                }
+            }
+        }
     }
 }
-

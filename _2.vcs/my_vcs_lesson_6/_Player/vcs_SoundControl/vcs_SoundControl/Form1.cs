@@ -18,9 +18,8 @@ namespace vcs_SoundControl
             InitializeComponent();
         }
 
-
-        //C# 控制電腦靜音與音量 
-        //使用Windows API控制電腦靜音與音量
+        // C# 控制電腦靜音與音量 
+        // 使用Windows API控制電腦靜音與音量
         // 宣告常式 
         private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
         private const int APPCOMMAND_VOLUME_UP = 0x0a0000;
@@ -28,28 +27,25 @@ namespace vcs_SoundControl
         private const int WM_APPCOMMAND = 0x319;
 
         [DllImport("user32.dll")]
-        public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam); 
+        public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
 
         private void button1_Click(object sender, EventArgs e)
         {
             // 聲音變大 
             SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_UP);
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             // 聲音變小 
             SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             // 靜音 
-            SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_MUTE); 
-
+            SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
         }
     }
 }

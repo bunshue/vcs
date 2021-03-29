@@ -10,7 +10,7 @@ using System.Diagnostics;
 using AForge.Video;
 using AForge.Video.DirectShow;
 
-namespace AForge_WebCam
+namespace AForge_PlayAVI
 {
     public partial class MainForm : Form
     {
@@ -76,10 +76,10 @@ namespace AForge_WebCam
         // New frame received by the player
         private void videoSourcePlayer_NewFrame(object sender, ref Bitmap image)
         {
+            //畫上目前的時間
             DateTime now = DateTime.Now;
             Graphics g = Graphics.FromImage(image);
 
-            // paint current time
             SolidBrush brush = new SolidBrush(Color.Red);
             g.DrawString(now.ToString(), this.Font, brush, new PointF(5, 5));
             brush.Dispose();
@@ -107,8 +107,7 @@ namespace AForge_WebCam
                     stopWatch.Stop();
 
                     float fps = 1000.0f * framesReceived / stopWatch.ElapsedMilliseconds;
-                    lb_fps.Text = fps.ToString("F2") + " fps";
-                    this.Text = fps.ToString("F2") + " fps";
+                    fpsLabel.Text = fps.ToString("F2") + " fps";
 
                     stopWatch.Reset();
                     stopWatch.Start();
@@ -116,21 +115,20 @@ namespace AForge_WebCam
             }
         }
 
-        // Open local video capture device
+        // Open video file using DirectShow
         private void button1_Click(object sender, EventArgs e)
         {
-            VideoCaptureDeviceForm form = new VideoCaptureDeviceForm();
-
-            if (form.ShowDialog(this) == DialogResult.OK)
+            openFileDialog.InitialDirectory = @"C:\______test_files\";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 // create video source
-                VideoCaptureDevice videoSource = form.VideoDevice;
-
-                richTextBox1.Text += "FrameRate = " + videoSource.VideoResolution.FrameRate.ToString() + "\n";
+                FileVideoSource fileSource = new FileVideoSource(openFileDialog.FileName);
 
                 // open it
-                OpenVideoSource(videoSource);
+                OpenVideoSource(fileSource);
             }
+
+
         }
     }
 }

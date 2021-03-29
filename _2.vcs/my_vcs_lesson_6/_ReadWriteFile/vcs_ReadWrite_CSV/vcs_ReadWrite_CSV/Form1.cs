@@ -186,7 +186,7 @@ namespace vcs_ReadWrite_CSV
 
                 //k++;
                 //if (k == LENGTH)
-                    //break;
+                //break;
 
             }
 
@@ -241,7 +241,7 @@ namespace vcs_ReadWrite_CSV
             // Draw curve to screen.
             g.DrawCurve(p, curvePoints); //畫曲線
 
-            
+
             pictureBox1.Image = bitmap1;
 
 
@@ -266,8 +266,62 @@ namespace vcs_ReadWrite_CSV
                 richTextBox1.Text += "csv : " + csv + "\n";
             }
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
-
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string filename = "C:\\______test_files\\__RW\\_csv\\vcs_ReadWrite_CSV_station.csv";
+
+            Encoding enc = Encoding.GetEncoding("big5"); //設定檔案的編碼
+            //一維字串陣列
+            string[] readText = System.IO.File.ReadAllLines(filename, enc); //以指定的編碼方式讀取檔案
+
+            //資料處理
+            string[] name = new string[readText.Length];//宣告一個1維字串陣列，來儲存所有的姓名
+            //double[][] allData = new double[readText.Length][]; //宣告一個2維double陣列，用來儲存所有的成績資料，第一維的大小是資料的列數(筆數)
+            double[,] allData = new double[readText.Length, 4]; //宣告一個2維double陣列，用來儲存所有的成績資料，第一維的大小是資料的列數(筆數)
+            //Point[][] colonPoints = new Point[2][];
+            int line = 0; //表第幾行(第幾列，每一列為一個學生的資料)
+
+            foreach (string s in readText)
+            {
+                //一, 未分割資料, 只打印每行資料
+                richTextBox1.Text += s + "\r\n";
+
+                //二, 分割資料, 分割資料後印出
+                /*
+                string[] ss = s.Split(',');         //將一列的資料，以逗號的方式進行資料切割，並將資料放入一個字串陣列
+                int len = ss.Length;
+                int i;
+                for (i = 0; i < len; i++)
+                {
+                    //richTextBox1.Text += ss[0] + "  " + ss[1] + "  " + ss[2] + "  " + ss[3] + "  " + ss[4] + "\r\n";
+                    //資料分別在取出的字串陣列裏，姓名->ss[0], 成績1->ss[1], 成績2->ss[2], 成績3->ss[3], 成績4->ss[4]
+                    richTextBox1.Text += ss[i];
+                    if (i != (len - 1))
+                        richTextBox1.Text += "  ";
+                    else
+                        richTextBox1.Text += "\n";
+                }
+                */
+
+                /*
+                //三, 資料處理
+                string[] ss = s.Split(','); //將一列的資料，以逗號的方式進行資料切割，並將資料放入一個字串陣列
+                name[line] = ss[0]; //切出來的字串，第0個元素是姓名
+
+
+                allData[line, 0] = double.Parse(ss[1]);
+                allData[line, 1] = double.Parse(ss[2]);
+                allData[line, 2] = double.Parse(ss[3]);
+                allData[line, 3] = double.Parse(ss[4]);
+                allData[line, 4] = allData[line, 0] + allData[line, 1] + allData[line, 2] + allData[line, 3]; //將每個人的成績加起來放在最後一欄
+
+                richTextBox1.Text += name[line] + "  " + allData[line, 0] + "  " + allData[line, 1] + "  " + allData[line, 2] + "  " + allData[line, 3] + "  " + allData[line, 4] + "\r\n";
+                line++; //進行下一筆資料的處理
+                //資料分別在取出的字串陣列裏，姓名->ss[0], 成績1->ss[1], 成績2->ss[2], 成績3->ss[3], 成績4->ss[4]
+                */
+            }
+        }
     }
 }

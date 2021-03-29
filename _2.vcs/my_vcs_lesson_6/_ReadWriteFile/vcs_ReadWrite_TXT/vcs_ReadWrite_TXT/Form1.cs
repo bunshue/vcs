@@ -32,7 +32,7 @@ namespace vcs_ReadWrite_TXT
             {
                 richTextBox2.Text += "i = " + i.ToString() + "\t" + richTextBox1.Lines[i].Trim() + "\tlen = \t" + richTextBox1.Lines[i].Trim().Length.ToString() + "\n";
             }
-            
+
             for (i = 0; i < richTextBox1.Lines.Length; i++)
             {
                 sw.WriteLine(richTextBox1.Lines[i]);
@@ -352,7 +352,7 @@ namespace vcs_ReadWrite_TXT
 
             for (i = 0; i < 16; i++)
                 data[i] = data_2[i];
-            
+
             //寫資料
             File.WriteAllBytes(filename2, data);
 
@@ -522,6 +522,45 @@ namespace vcs_ReadWrite_TXT
                 richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 完全相同\n";
             else
                 richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 不相同\n";
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            int i;
+            int N = 10;
+            //建立一個txt檔
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+
+            richTextBox1.Text += "建立一個txt檔, 檔名 : " + filename + "\n";
+
+            FileInfo finfo1 = new FileInfo(filename);
+            StreamWriter sw = finfo1.CreateText();
+            for (i = 0; i < N; i++)
+            {
+                sw.WriteLine("aaa" + i.ToString());
+                sw.WriteLine("bbb" + i.ToString());
+                sw.WriteLine("ccc" + i.ToString());
+            }
+            sw.Flush();
+            sw.Close();
+
+
+            richTextBox1.Text += "讀取一個txt檔, 檔名 : " + filename + "\n";
+
+            FileInfo finfo2 = new FileInfo(filename);
+            StreamReader sr = finfo2.OpenText();
+
+            i = 0;
+            while (sr.Peek() >= 0)
+            {
+                richTextBox1.Text += "第1筆資料 : " + sr.ReadLine() + "\n";
+                richTextBox1.Text += "第2筆資料 : " + sr.ReadLine() + "\n";
+                richTextBox1.Text += "第3筆資料 : " + sr.ReadLine() + "\n";
+
+                i++;
+            }
+            sr.Close();
+            richTextBox1.Text += "共取得了 " + i.ToString() + " 筆資料\n";
         }
     }
 }
