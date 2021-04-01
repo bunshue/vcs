@@ -1,0 +1,11 @@
+﻿<Window x:Class="PeopleNearMe.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="近端分享" Height="270" Width="275" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid>
+    <Button HorizontalAlignment="Left" Margin="30,20,0,0" Name="btnSignIn" Width="80" Height="30" VerticalAlignment="Top" Click="btnSignIn_Click">登入近端分享</Button>
+    <Button HorizontalAlignment="Right" Margin="0,20,30,0" Name="btnSignOut" Width="80" Height="30" VerticalAlignment="Top" Click="btnSignOut_Click">登出近端分享</Button>
+    <ListBox Margin="20,65,20,60" Name="lstPeer" />
+    <Button Height="30" Margin="85,0,85,15" Name="btnGet" VerticalAlignment="Bottom" Click="btnGet_Click">搜尋</Button>
+  </Grid>
+</Window>

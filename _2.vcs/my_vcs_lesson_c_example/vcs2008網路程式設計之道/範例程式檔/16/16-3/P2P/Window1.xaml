@@ -1,0 +1,13 @@
+﻿<Window x:Class="P2P.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Peer Name Resolver" Height="370" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded">
+    <Grid>
+    <Label Height="25" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label1" VerticalAlignment="Top" Width="70">Peer Name:</Label>
+    <TextBox Height="22" Margin="75,10,10,0" Name="txtPeerName" VerticalAlignment="Top" />
+    <ListBox Margin="10,75" Name="lstPeerNameRecord" />
+    <Label Height="25" HorizontalAlignment="Left" Margin="10,45,0,0" Name="label2" VerticalAlignment="Top" Width="111">Peer Name Records:</Label>
+    <Button Height="30" Margin="100,0,100,30" Name="btnResolve" VerticalAlignment="Bottom" Click="btnResolve_Click">解析</Button>
+    <ProgressBar Height="20" Margin="0,0,0,0" Name="progressBar" VerticalAlignment="Bottom" Visibility="Hidden" />
+  </Grid>
+</Window>

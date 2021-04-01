@@ -1,0 +1,15 @@
+﻿<Window x:Class="P2P.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="P2P" Height="340" Width="300" Closing="Window_Closing">
+    <Grid>
+    <Label Height="25" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label1" VerticalAlignment="Top" Width="86">Peer Name:</Label>
+    <TextBox Height="22" Margin="80,12,10,0" Name="txtPeerName" VerticalAlignment="Top" />
+    <Label Height="25" HorizontalAlignment="Left" Margin="10,40,0,0" Name="label2" VerticalAlignment="Top" Width="78">Port:</Label>
+    <TextBox Height="22" Margin="80,42,10,0" Name="txtPort" VerticalAlignment="Top" />
+    <Button Height="30" Width="120" Margin="70,80,70,0" Name="btnRegister" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btnRegister_Click">註冊PNRP Peer Name</Button>
+    <ListBox Margin="10,145,10,55" Name="lstCloud" />
+    <Label Height="25" HorizontalAlignment="Left" Margin="10,120,0,0" Name="label3" VerticalAlignment="Top" Width="110">PRNP Cloud:</Label>
+    <Button Height="30" Width="120" Margin="75,0,75,12" Name="btnCloud" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="btnCloud_Click">取得PNRP Cloud</Button>
+  </Grid>
+</Window>
