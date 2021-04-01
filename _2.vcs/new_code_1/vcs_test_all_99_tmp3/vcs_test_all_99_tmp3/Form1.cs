@@ -32,27 +32,8 @@ namespace vcs_test_all_99_tmp3
         {
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            string Username;
-            string Password;
-            Username = textBox1.Text;	//取得textBox1的內容為名字
-            Password = textBox2.Text;	//取得textBox2的內容為密碼
-            if (Username == "root" && Password == "123456")
-                MessageBox.Show("您是合法的使用者！！");
-            else
-                MessageBox.Show("滾蛋！！！！");
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            textBox1.Clear();
-            textBox2.Text = "";
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.AcceptButton = button5;            //在表單按enter就執行button1按鈕的動作
         }
 
         private void button7_Click(object sender, EventArgs e)

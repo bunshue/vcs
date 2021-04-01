@@ -18,13 +18,11 @@ namespace vcs_PictureSpilit
             InitializeComponent();
         }
 
-
         PictureBox[,] pbox = new PictureBox[3, 3];
         Font font = new Font("微軟正黑體", 12);
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             string filename = @"C:\______test_files\picture1.jpg";
             //pictureBox1.Image = Image.FromFile(filename);
 
@@ -44,6 +42,8 @@ namespace vcs_PictureSpilit
             RectangleF rect;
             pbox = new PictureBox[C, R];
 
+            Random r = new Random();
+
             for (int x = 0; x < pbox.GetLength(0); x++)
             {
                 for (int y = 0; y < pbox.GetLength(1); y++)
@@ -55,9 +55,11 @@ namespace vcs_PictureSpilit
                     pbox[x, y].Size = new Size(w, h);
                     pbox[x, y].Text = "";
                     pbox[x, y].Location = new Point(x_st + x * dx, y_st + y * dy);
+                    //pbox[x, y].Location = new Point(x_st + r.Next(400), y_st + r.Next(400));
                     pbox[x, y].Font = font;
                     pbox[x, y].Name = "( " + x.ToString() + ", " + y.ToString() + ")";
                     pbox[x, y].BackColor = Color.Pink;
+                    pbox[x, y].BorderStyle = BorderStyle.Fixed3D;
                     pbox[x, y].SizeMode = PictureBoxSizeMode.Normal;   //圖片Zoom的方法
                     pbox[x, y].Image = bitmap2;
                     //pbox[x, y].Click += PictureBoxClick;
@@ -65,8 +67,6 @@ namespace vcs_PictureSpilit
                     this.Controls.Add(pbox[x, y]);
                 }
             }
-
-
         }
     }
 }

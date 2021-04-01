@@ -622,7 +622,7 @@ namespace TimeSeries
 		private void loadDataButton_Click(object sender, System.EventArgs e)
 		{
 			// show file selection dialog
-            openFileDialog.InitialDirectory = Application.StartupPath;
+            openFileDialog.InitialDirectory = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..\\Data Samples"));
 			if ( openFileDialog.ShowDialog( ) == DialogResult.OK )
 			{
 				StreamReader reader = null;

@@ -36,7 +36,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(727, 36);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(79, 33);
+            this.button1.Size = new System.Drawing.Size(88, 40);
             this.button1.TabIndex = 0;
             this.button1.Text = "picture spilit";
             this.button1.UseVisualStyleBackColor = true;

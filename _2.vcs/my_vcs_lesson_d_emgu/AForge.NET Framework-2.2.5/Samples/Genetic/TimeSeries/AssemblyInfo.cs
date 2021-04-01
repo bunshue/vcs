@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "AForge" )]
 [assembly: AssemblyProduct( "AForge.NET" )]
-[assembly: AssemblyCopyright( "AForge © 2009" )]
+[assembly: AssemblyCopyright( "AForge ?2009" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 

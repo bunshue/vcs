@@ -28,6 +28,8 @@ namespace vcs_TextBox
 
             // Make the TextBox fit its initial text.
             AutoSizeTextBox(textBox2);
+
+            this.AcceptButton = button5;            //在表單按enter就執行button5按鈕的動作
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -101,6 +103,23 @@ namespace vcs_TextBox
                 new Size(size.Width + x_margin, size.Height + y_margin);
         }
 
+        //登入
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string Username;
+            string Password;
+            Username = tb_id.Text;	        //取得textBox的內容為名字
+            Password = tb_password.Text;	//取得textBox的內容為密碼
+            if (Username == "root" && Password == "123456")
+                MessageBox.Show("您是合法的使用者！！");
+            else
+                MessageBox.Show("滾蛋！！！！");
+        }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            tb_id.Clear();
+            tb_password.Text = "";
+        }
     }
 }
