@@ -16,27 +16,22 @@ namespace vcs_programming
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            /* 第 9 章 */
-            //Application.Run(new matchNumbers());        //1A1B猜數字遊戲
-
             /* 第 12 章 */
             //Application.Run(new jaggedArray());     //有點多
 
             /* 第 14 章 */
             //Application.Run(new ScoreFile());   //看存成二進位檔 與 讀出二進位檔
 
-            /* 第 15 章 */
-            //Application.Run(new SimpleEditor());
-
             /* 第 16 章 */
             //Application.Run(new keyevent());
 
             /* 第 18 章 */
             //Application.Run(new Form1());           //有使用到 MyClass.cs
-            Application.Run(new MyForm());
+
+            //Application.Run(new MyForm());
 
             /* 第 19 章 */
-            //Application.Run(new MainForm());
+            Application.Run(new MainForm());
 
             /* 第 20 章 */
             //Application.Run(new ShapeManagerForm());
