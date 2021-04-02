@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsertTrigger", "InsertTrigger\InsertTrigger.csproj", "{100BB966-4435-4D47-8084-5B820B532ECE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{100BB966-4435-4D47-8084-5B820B532ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{100BB966-4435-4D47-8084-5B820B532ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{100BB966-4435-4D47-8084-5B820B532ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{100BB966-4435-4D47-8084-5B820B532ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

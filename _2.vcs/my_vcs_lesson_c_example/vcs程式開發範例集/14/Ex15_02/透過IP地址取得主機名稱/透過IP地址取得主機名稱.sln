@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "透過IP地址取得主機名稱", "透過IP地址取得主機名稱.csproj", "{040C4D43-CD04-4E29-B65D-9B0D50FEBA83}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{040C4D43-CD04-4E29-B65D-9B0D50FEBA83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{040C4D43-CD04-4E29-B65D-9B0D50FEBA83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{040C4D43-CD04-4E29-B65D-9B0D50FEBA83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{040C4D43-CD04-4E29-B65D-9B0D50FEBA83}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

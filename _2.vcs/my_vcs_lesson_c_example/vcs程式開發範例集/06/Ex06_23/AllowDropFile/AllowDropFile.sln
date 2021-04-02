@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllowDropFile", "AllowDropFile\AllowDropFile.csproj", "{347252EE-5C59-4C68-92D9-D7E8E5774CD6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{347252EE-5C59-4C68-92D9-D7E8E5774CD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{347252EE-5C59-4C68-92D9-D7E8E5774CD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{347252EE-5C59-4C68-92D9-D7E8E5774CD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{347252EE-5C59-4C68-92D9-D7E8E5774CD6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

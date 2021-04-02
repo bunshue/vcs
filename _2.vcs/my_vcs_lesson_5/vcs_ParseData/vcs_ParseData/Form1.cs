@@ -114,6 +114,7 @@ namespace vcs_ParseData
         {
             try
             {   //可能會產生錯誤的程式區段
+                //將IP位址字串轉換為IPAddress類別
                 IPAddress ipAddr = IPAddress.Parse(textBox5.Text);
                 richTextBox1.Text += ipAddr.ToString() + "\n";
             }
@@ -130,9 +131,9 @@ namespace vcs_ParseData
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //DateTime dt = DateTime.Now;
-            //DateTime dt = DateTime.Now;
             IPAddress ipAddr;
+
+            //將IP位址字串轉換為IPAddress類別
             bool conversionSuccessful = IPAddress.TryParse(textBox5.Text, out ipAddr);    //out為必須
             if (conversionSuccessful == true)
                 richTextBox1.Text += "得到IPAddress資料： " + ipAddr.ToString() + "\n";
@@ -204,6 +205,5 @@ namespace vcs_ParseData
             else
                 richTextBox1.Text += "long.TryParse 失敗\n";
         }
-
     }
 }

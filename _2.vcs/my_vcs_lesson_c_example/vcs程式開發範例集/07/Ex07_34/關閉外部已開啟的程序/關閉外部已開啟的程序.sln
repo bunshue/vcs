@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "關閉外部已開啟的程序", "關閉外部已開啟的程序\關閉外部已開啟的程序.csproj", "{966AF5D6-3365-429B-9873-B627554E12BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{966AF5D6-3365-429B-9873-B627554E12BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{966AF5D6-3365-429B-9873-B627554E12BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{966AF5D6-3365-429B-9873-B627554E12BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{966AF5D6-3365-429B-9873-B627554E12BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

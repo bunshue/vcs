@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordWindows", "WordWindows\WordWindows.csproj", "{711A98F8-5583-4532-BF5B-74CAB6E961DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{711A98F8-5583-4532-BF5B-74CAB6E961DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{711A98F8-5583-4532-BF5B-74CAB6E961DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{711A98F8-5583-4532-BF5B-74CAB6E961DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{711A98F8-5583-4532-BF5B-74CAB6E961DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

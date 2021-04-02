@@ -23,7 +23,7 @@ namespace vcs_programming
             //Application.Run(new ScoreFile());   //看存成二進位檔 與 讀出二進位檔
 
             /* 第 16 章 */
-            //Application.Run(new keyevent());
+            Application.Run(new keyevent());
 
             /* 第 18 章 */
             //Application.Run(new Form1());           //有使用到 MyClass.cs
@@ -31,7 +31,7 @@ namespace vcs_programming
             //Application.Run(new MyForm());
 
             /* 第 19 章 */
-            Application.Run(new MainForm());
+            //Application.Run(new MainForm());
 
             /* 第 20 章 */
             //Application.Run(new ShapeManagerForm());

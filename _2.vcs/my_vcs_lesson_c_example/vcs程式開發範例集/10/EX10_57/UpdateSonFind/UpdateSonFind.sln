@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateSonFind", "UpdateSonFind\UpdateSonFind.csproj", "{A5C4BA78-9AAE-4FDD-8C75-66D6C6A67815}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5C4BA78-9AAE-4FDD-8C75-66D6C6A67815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5C4BA78-9AAE-4FDD-8C75-66D6C6A67815}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5C4BA78-9AAE-4FDD-8C75-66D6C6A67815}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5C4BA78-9AAE-4FDD-8C75-66D6C6A67815}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

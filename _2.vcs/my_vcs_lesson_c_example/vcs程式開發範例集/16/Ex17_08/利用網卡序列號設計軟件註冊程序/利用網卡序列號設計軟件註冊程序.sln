@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "利用網卡序列號設計軟件註冊程序", "利用網卡序列號設計軟件註冊程序.csproj", "{D268B5CF-C3C8-4780-AAA9-42C3012A634E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D268B5CF-C3C8-4780-AAA9-42C3012A634E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D268B5CF-C3C8-4780-AAA9-42C3012A634E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D268B5CF-C3C8-4780-AAA9-42C3012A634E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D268B5CF-C3C8-4780-AAA9-42C3012A634E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

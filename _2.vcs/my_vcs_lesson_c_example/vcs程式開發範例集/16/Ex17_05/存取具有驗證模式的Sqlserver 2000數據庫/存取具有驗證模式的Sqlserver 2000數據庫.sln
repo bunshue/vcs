@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "存取具有驗證模式的Sqlserver 2000數據庫", "存取具有驗證模式的Sqlserver 2000數據庫.csproj", "{CCC5C699-3B8B-49AE-AB39-23640E26F2DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCC5C699-3B8B-49AE-AB39-23640E26F2DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCC5C699-3B8B-49AE-AB39-23640E26F2DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCC5C699-3B8B-49AE-AB39-23640E26F2DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCC5C699-3B8B-49AE-AB39-23640E26F2DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

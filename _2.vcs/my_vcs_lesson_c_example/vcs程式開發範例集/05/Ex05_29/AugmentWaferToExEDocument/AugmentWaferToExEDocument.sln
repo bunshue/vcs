@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AugmentWaferToExEDocument", "AugmentWaferToExEDocument\AugmentWaferToExEDocument.csproj", "{4E0D4478-5FEB-41D0-8E19-1EF947C9A7CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E0D4478-5FEB-41D0-8E19-1EF947C9A7CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0D4478-5FEB-41D0-8E19-1EF947C9A7CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0D4478-5FEB-41D0-8E19-1EF947C9A7CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0D4478-5FEB-41D0-8E19-1EF947C9A7CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

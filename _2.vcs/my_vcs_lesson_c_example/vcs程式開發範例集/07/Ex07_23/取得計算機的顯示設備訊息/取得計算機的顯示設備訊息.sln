@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "取得計算機的顯示設備訊息", "取得計算機的顯示設備訊息\取得計算機的顯示設備訊息.csproj", "{2A35EFD5-B7F1-4EDD-BAD2-92DC031ECCDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A35EFD5-B7F1-4EDD-BAD2-92DC031ECCDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A35EFD5-B7F1-4EDD-BAD2-92DC031ECCDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A35EFD5-B7F1-4EDD-BAD2-92DC031ECCDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A35EFD5-B7F1-4EDD-BAD2-92DC031ECCDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

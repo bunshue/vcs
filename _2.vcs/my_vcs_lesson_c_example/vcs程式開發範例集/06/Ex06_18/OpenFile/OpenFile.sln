@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenFile", "OpenFile\OpenFile.csproj", "{B80B797D-F334-43C8-8E73-B28BF8087BAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B80B797D-F334-43C8-8E73-B28BF8087BAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B80B797D-F334-43C8-8E73-B28BF8087BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B80B797D-F334-43C8-8E73-B28BF8087BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B80B797D-F334-43C8-8E73-B28BF8087BAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

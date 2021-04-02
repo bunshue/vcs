@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayVoice", "PlayBeepVoice\PlayVoice.csproj", "{35BFE948-8434-40F3-84A3-63883C7D9BEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35BFE948-8434-40F3-84A3-63883C7D9BEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35BFE948-8434-40F3-84A3-63883C7D9BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35BFE948-8434-40F3-84A3-63883C7D9BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35BFE948-8434-40F3-84A3-63883C7D9BEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
