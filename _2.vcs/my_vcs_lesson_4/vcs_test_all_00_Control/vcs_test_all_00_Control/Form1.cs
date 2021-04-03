@@ -631,6 +631,15 @@ namespace vcs_test_all_00_Control
             bt_exit.BringToFront();     //移到最上層
         }
 
+        private void button37_Click(object sender, EventArgs e)
+        {
+            // Show About dialog
+            AboutForm form = new AboutForm();
+
+            form.ShowDialog();
+
+        }
+
     }
 
     class MyRecordControlClass

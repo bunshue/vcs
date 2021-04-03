@@ -88,12 +88,8 @@ namespace BlobsExplorer
             ProcessImage( image );
         }
 
-        // Show about form
         private void aboutToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            AboutForm form = new AboutForm( );
-
-            form.ShowDialog( );
         }
 
         // Change type of blobs' highlighting

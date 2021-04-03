@@ -518,6 +518,7 @@ namespace FiltersDemo
             try
             {
                 // show file open dialog
+                openFileDialog.InitialDirectory = @"C:\______test_files\";
                 if ( openFileDialog.ShowDialog( ) == DialogResult.OK )
                 {
                     // load image

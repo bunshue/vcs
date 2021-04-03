@@ -16793,12 +16793,12 @@
   <data name="pbRobot.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk12AQAAAAAAADYAAAAoAAAACgAAAAoAAAABABgAAAAAAAAAAADEDgAAxA4AAAAAAAAAAAAA////////
-        ////////gAAAgAAA////////////////AAD///////+AAACAAACAAACAAACAAACAAAD///////8AAP//
-        /4AAAIAAAIAAAIAAAIAAAIAAAIAAAIAAAP///wAA////gAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAA////
-        AACAAACAAACAAACAAACAAACAAACAAACAAACAAACAAAAAAIAAAIAAAIAAAIAAAIAAAIAAAIAAAIAAAIAA
-        AIAAAAAA////gAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAA////AAD///+AAACAAACAAACAAACAAACAAACA
-        AACAAAD///8AAP///////4AAAIAAAIAAAIAAAIAAAIAAAP///////wAA////////////////gAAAgAAA
-        ////////////////AAA=
+        ////////gAAAgAAA////////////////gg7///////+AAACAAACAAACAAACAAACAAAD///////+CDv//
+        /4AAAIAAAIAAAIAAAIAAAIAAAIAAAIAAAP///4IO////gAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAA////
+        gg6AAACAAACAAACAAACAAACAAACAAACAAACAAACAAACCDoAAAIAAAIAAAIAAAIAAAIAAAIAAAIAAAIAA
+        AIAAAIIO////gAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAA////gg7///+AAACAAACAAACAAACAAACAAACA
+        AACAAAD///+CDv///////4AAAIAAAIAAAIAAAIAAAIAAAP///////4IO////////////////gAAAgAAA
+        ////////////////gg4=
 </value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

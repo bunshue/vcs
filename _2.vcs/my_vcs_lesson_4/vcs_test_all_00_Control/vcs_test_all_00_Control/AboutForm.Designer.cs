@@ -1,4 +1,4 @@
-﻿namespace FuzzyAGV
+﻿namespace vcs_test_all_00_Control
 {
     partial class AboutForm
     {

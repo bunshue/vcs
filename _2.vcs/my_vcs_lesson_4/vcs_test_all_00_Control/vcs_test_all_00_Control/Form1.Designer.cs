@@ -138,6 +138,7 @@
             this.button36 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.button37 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -638,7 +639,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.50746F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.49254F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 97F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
             this.tableLayoutPanel1.Controls.Add(this.button32, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.button31, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.button30, 1, 3);
@@ -678,7 +679,7 @@
             // button31
             // 
             this.button31.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button31.Location = new System.Drawing.Point(119, 164);
+            this.button31.Location = new System.Drawing.Point(118, 164);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(55, 30);
             this.button31.TabIndex = 34;
@@ -688,7 +689,7 @@
             // button30
             // 
             this.button30.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button30.Location = new System.Drawing.Point(56, 164);
+            this.button30.Location = new System.Drawing.Point(55, 164);
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(50, 30);
             this.button30.TabIndex = 33;
@@ -700,7 +701,7 @@
             this.button29.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button29.Location = new System.Drawing.Point(3, 164);
             this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(47, 30);
+            this.button29.Size = new System.Drawing.Size(46, 30);
             this.button29.TabIndex = 32;
             this.button29.Text = "tlp12";
             this.button29.UseVisualStyleBackColor = true;
@@ -718,7 +719,7 @@
             // button27
             // 
             this.button27.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button27.Location = new System.Drawing.Point(119, 117);
+            this.button27.Location = new System.Drawing.Point(118, 117);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(55, 30);
             this.button27.TabIndex = 30;
@@ -728,7 +729,7 @@
             // button26
             // 
             this.button26.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button26.Location = new System.Drawing.Point(56, 117);
+            this.button26.Location = new System.Drawing.Point(55, 117);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(50, 30);
             this.button26.TabIndex = 29;
@@ -740,7 +741,7 @@
             this.button25.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button25.Location = new System.Drawing.Point(3, 117);
             this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(47, 30);
+            this.button25.Size = new System.Drawing.Size(46, 30);
             this.button25.TabIndex = 28;
             this.button25.Text = "tlp8";
             this.button25.UseVisualStyleBackColor = true;
@@ -758,7 +759,7 @@
             // button23
             // 
             this.button23.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button23.Location = new System.Drawing.Point(119, 66);
+            this.button23.Location = new System.Drawing.Point(118, 66);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(55, 30);
             this.button23.TabIndex = 26;
@@ -768,7 +769,7 @@
             // button22
             // 
             this.button22.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button22.Location = new System.Drawing.Point(56, 66);
+            this.button22.Location = new System.Drawing.Point(55, 66);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(50, 30);
             this.button22.TabIndex = 25;
@@ -780,7 +781,7 @@
             this.button21.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button21.Location = new System.Drawing.Point(3, 66);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(47, 30);
+            this.button21.Size = new System.Drawing.Size(46, 30);
             this.button21.TabIndex = 24;
             this.button21.Text = "tlp4";
             this.button21.UseVisualStyleBackColor = true;
@@ -798,7 +799,7 @@
             // button19
             // 
             this.button19.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button19.Location = new System.Drawing.Point(119, 12);
+            this.button19.Location = new System.Drawing.Point(118, 12);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(55, 30);
             this.button19.TabIndex = 22;
@@ -810,7 +811,7 @@
             this.tlp0.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tlp0.Location = new System.Drawing.Point(3, 12);
             this.tlp0.Name = "tlp0";
-            this.tlp0.Size = new System.Drawing.Size(47, 30);
+            this.tlp0.Size = new System.Drawing.Size(46, 30);
             this.tlp0.TabIndex = 20;
             this.tlp0.Text = "tlp0";
             this.tlp0.UseVisualStyleBackColor = true;
@@ -818,7 +819,7 @@
             // tlp1
             // 
             this.tlp1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tlp1.Location = new System.Drawing.Point(56, 12);
+            this.tlp1.Location = new System.Drawing.Point(55, 12);
             this.tlp1.Name = "tlp1";
             this.tlp1.Size = new System.Drawing.Size(50, 30);
             this.tlp1.TabIndex = 21;
@@ -1225,13 +1226,24 @@
             this.label11.TabIndex = 30;
             this.label11.Text = "Label";
             // 
+            // button37
+            // 
+            this.button37.Location = new System.Drawing.Point(29, 688);
+            this.button37.Name = "button37";
+            this.button37.Size = new System.Drawing.Size(81, 37);
+            this.button37.TabIndex = 11;
+            this.button37.Text = "About 1";
+            this.button37.UseVisualStyleBackColor = true;
+            this.button37.Click += new System.EventHandler(this.button37_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.bt_accept_button;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bt_cancel_button;
-            this.ClientSize = new System.Drawing.Size(1333, 697);
+            this.ClientSize = new System.Drawing.Size(1333, 750);
+            this.Controls.Add(this.button37);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.button36);
@@ -1399,6 +1411,7 @@
         private System.Windows.Forms.Button button36;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button37;
     }
 }
 
