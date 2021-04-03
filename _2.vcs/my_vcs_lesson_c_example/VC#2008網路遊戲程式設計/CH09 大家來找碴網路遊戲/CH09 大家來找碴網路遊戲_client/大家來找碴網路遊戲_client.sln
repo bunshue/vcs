@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "大家來找碴網路遊戲_client", "大家來找碴網路遊戲_client.csproj", "{4C8B598D-D312-4A6B-B8C9-D3ABFB16791C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C8B598D-D312-4A6B-B8C9-D3ABFB16791C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C8B598D-D312-4A6B-B8C9-D3ABFB16791C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C8B598D-D312-4A6B-B8C9-D3ABFB16791C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C8B598D-D312-4A6B-B8C9-D3ABFB16791C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

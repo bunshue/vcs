@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "打地鼠網路遊戲_client", "打地鼠網路遊戲_client.csproj", "{A46BADDC-0625-4B7F-835E-31E3934A59EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A46BADDC-0625-4B7F-835E-31E3934A59EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A46BADDC-0625-4B7F-835E-31E3934A59EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A46BADDC-0625-4B7F-835E-31E3934A59EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A46BADDC-0625-4B7F-835E-31E3934A59EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
