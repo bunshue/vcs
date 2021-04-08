@@ -324,10 +324,177 @@ namespace vcs_Draw9_Example5b_vcsh
         #endregion epitrochoid長短輻圓外旋輪線；外旋輪線
 
 
-        private void tmrDraw_Tick(object sender, EventArgs e)
+        // The angle from one circle's center to the other.
+        private float theta = 0;
+        private float dtheta;
+
+        // Drawing parameters.
+        private int AA, BB, CC, wid2, hgt2, cx2, cy2;
+        private double max_t2;
+        private List<PointF> points2;
+
+        // Draw the hypotrochoid.
+        private void btnDraw_Click(object sender, EventArgs e)
         {
+            int A = int.Parse(txtAA.Text);
+            int B = int.Parse(txtBB.Text);
+            int C = int.Parse(txtCC.Text);
+            int iter = int.Parse(txtIter.Text);
+
+            int wid = pictureBox2.ClientSize.Width;
+            int hgt = pictureBox2.ClientSize.Height;
+            Bitmap bm = new Bitmap(wid, hgt);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                int cx = wid / 2;
+                int cy = hgt / 2;
+                double t = 0;
+                double dt = Math.PI / iter;
+                double max_t = 2 * Math.PI * B / GCD(A, B);
+                double x1 = cx + X(t, A, B, C);
+                double y1 = cy + Y(t, A, B, C);
+                List<PointF> points1 = new List<PointF>();
+                points1.Add(new PointF((float)x1, (float)y1));
+                while (t <= max_t)
+                {
+                    t += dt;
+                    x1 = cx + X(t, A, B, C);
+                    y1 = cy + Y(t, A, B, C);
+                    points1.Add(new PointF((float)x1, (float)y1));
+                }
+                // Draw the polygon.
+                gr.DrawPolygon(Pens.Red, points1.ToArray());
+            }
+
+            pictureBox2.Image = bm;
+
+
+
+
+            AA = int.Parse(txtAA.Text);
+            BB = int.Parse(txtBB.Text);
+            CC = int.Parse(txtCC.Text);
+            max_t2 = 2 * Math.PI * BB / GCD(AA, BB);
+
+            wid2 = pictureBox3.ClientSize.Width;
+            hgt2 = pictureBox3.ClientSize.Height;
+            cx2 = wid2 / 2;
+            cy2 = hgt2 / 2;
+
+            points2 = new List<PointF>();
+            points2.Add(new PointF(cx2 + AA - BB + CC, cy2));
+            theta = 0;
+            dtheta = (float)(Math.PI * 2 / int.Parse(txtFrPerRev.Text));
+
+            tmrDraw.Enabled = true;
+
+
+
+
 
         }
+
+
+
+
+
+
+
+
+
+
+        // The parametric function X(t).
+        private double X(double t, double A, double B, double C)
+        {
+            return (A - B) * Math.Cos(t) + C * Math.Cos((A - B) / B * t);
+        }
+
+        // The parametric function Y(t).
+        private double Y(double t, double A, double B, double C)
+        {
+            return (A - B) * Math.Sin(t) - C * Math.Sin((A - B) / B * t);
+        }
+
+        // Use Euclid's algorithm to calculate the
+        // greatest common divisor (GCD) of two numbers.
+        private long GCD(long a, long b)
+        {
+            // Make a >= b.
+            a = Math.Abs(a);
+            b = Math.Abs(b);
+            if (a < b)
+            {
+                long tmp = a;
+                a = b;
+                b = tmp;
+            }
+
+            // Pull out remainders.
+            for (; ; )
+            {
+                long remainder = a % b;
+                if (remainder == 0) return b;
+                a = b;
+                b = remainder;
+            };
+        }
+
+        // Return the least common multiple
+        // (LCM) of two numbers.
+        private long LCM(long a, long b)
+        {
+            return a * b / GCD(a, b);
+        }
+
+
+
+
+
+
+        // Redraw the curve.
+        private void tmrDraw_Tick(object sender, EventArgs e)
+        {
+            theta += dtheta;
+            DrawCurve();
+        }
+
+        // Draw the curve.
+        private void DrawCurve()
+        {
+            Bitmap bm = new Bitmap(wid2, hgt2);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Draw the outer circle.
+                gr.DrawEllipse(Pens.Blue, cx2 - AA, cy2 - AA, 2 * AA, 2 * AA);
+
+                // Draw the inner circle.
+                int r = AA - BB;
+                float cx1 = (float)(cx2 + r * Math.Cos(theta));
+                float cy1 = (float)(cy2 + r * Math.Sin(theta));
+                gr.DrawEllipse(Pens.Blue, cx1 - BB, cy1 - BB, 2 * BB, 2 * BB);
+
+                // Add the next point.
+                PointF new_point = new PointF(
+                    (float)(cx2 + X(theta, AA, BB, CC)),
+                    (float)(cy2 + Y(theta, AA, BB, CC)));
+                points2.Add(new_point);
+
+                // Draw the line.
+                gr.DrawLine(Pens.Blue, new PointF(cx1, cy1), new_point);
+
+                // Draw the points.
+                if (points2.Count > 1) gr.DrawLines(Pens.Red, points2.ToArray());
+            }
+
+            pictureBox3.Image = bm;
+
+            if (theta > max_t2) tmrDraw.Enabled = false;
+        }
+
 
 
 

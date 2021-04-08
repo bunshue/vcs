@@ -53,6 +53,18 @@
             this.txtA = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.timer_epitrochoid = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtIter = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtCC = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtBB = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtAA = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtFrPerRev = new System.Windows.Forms.TextBox();
+            this.btnDraw = new System.Windows.Forms.Button();
+            this.tmrDraw = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -60,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.groupBox6.SuspendLayout();
@@ -124,9 +137,20 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnDraw);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.txtFrPerRev);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.txtIter);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.txtCC);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.txtBB);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.txtAA);
             this.groupBox3.Location = new System.Drawing.Point(12, 465);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(448, 56);
+            this.groupBox3.Size = new System.Drawing.Size(469, 56);
             this.groupBox3.TabIndex = 70;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Hypotrochoid";
@@ -290,6 +314,110 @@
             this.timer_epitrochoid.Interval = 10;
             this.timer_epitrochoid.Tick += new System.EventHandler(this.timer_epitrochoid_Tick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(221, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(24, 12);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Iter:";
+            // 
+            // txtIter
+            // 
+            this.txtIter.Location = new System.Drawing.Point(252, 21);
+            this.txtIter.Name = "txtIter";
+            this.txtIter.Size = new System.Drawing.Size(49, 22);
+            this.txtIter.TabIndex = 16;
+            this.txtIter.Text = "100";
+            this.txtIter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(153, 24);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(16, 12);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "C:";
+            // 
+            // txtCC
+            // 
+            this.txtCC.Location = new System.Drawing.Point(170, 21);
+            this.txtCC.Name = "txtCC";
+            this.txtCC.Size = new System.Drawing.Size(49, 22);
+            this.txtCC.TabIndex = 14;
+            this.txtCC.Text = "30";
+            this.txtCC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(85, 24);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(16, 12);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "B:";
+            // 
+            // txtBB
+            // 
+            this.txtBB.Location = new System.Drawing.Point(102, 21);
+            this.txtBB.Name = "txtBB";
+            this.txtBB.Size = new System.Drawing.Size(49, 22);
+            this.txtBB.TabIndex = 12;
+            this.txtBB.Text = "14";
+            this.txtBB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(11, 24);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(16, 12);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "A:";
+            // 
+            // txtAA
+            // 
+            this.txtAA.Location = new System.Drawing.Point(34, 21);
+            this.txtAA.Name = "txtAA";
+            this.txtAA.Size = new System.Drawing.Size(49, 22);
+            this.txtAA.TabIndex = 10;
+            this.txtAA.Text = "80";
+            this.txtAA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(304, 24);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(36, 12);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Fr/rev:";
+            // 
+            // txtFrPerRev
+            // 
+            this.txtFrPerRev.Location = new System.Drawing.Point(342, 21);
+            this.txtFrPerRev.Name = "txtFrPerRev";
+            this.txtFrPerRev.Size = new System.Drawing.Size(49, 22);
+            this.txtFrPerRev.TabIndex = 18;
+            this.txtFrPerRev.Text = "20";
+            this.txtFrPerRev.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // btnDraw
+            // 
+            this.btnDraw.Location = new System.Drawing.Point(398, 21);
+            this.btnDraw.Name = "btnDraw";
+            this.btnDraw.Size = new System.Drawing.Size(56, 21);
+            this.btnDraw.TabIndex = 20;
+            this.btnDraw.Text = "Draw";
+            this.btnDraw.UseVisualStyleBackColor = true;
+            this.btnDraw.Click += new System.EventHandler(this.btnDraw_Click);
+            // 
+            // tmrDraw
+            // 
+            this.tmrDraw.Tick += new System.EventHandler(this.tmrDraw_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -319,6 +447,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.groupBox6.ResumeLayout(false);
@@ -355,6 +485,18 @@
         private System.Windows.Forms.TextBox txtA;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Timer timer_epitrochoid;
+        private System.Windows.Forms.Button btnDraw;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtFrPerRev;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtIter;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtCC;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtBB;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtAA;
+        private System.Windows.Forms.Timer tmrDraw;
         private System.Windows.Forms.ToolTip toolTip1;
     }
 }

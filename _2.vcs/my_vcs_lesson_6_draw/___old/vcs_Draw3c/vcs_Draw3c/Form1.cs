@@ -321,15 +321,7 @@ namespace vcs_Draw3c
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            timer1.Enabled = true;
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            timer1.Enabled = false;
-        }
 
     }
 }
