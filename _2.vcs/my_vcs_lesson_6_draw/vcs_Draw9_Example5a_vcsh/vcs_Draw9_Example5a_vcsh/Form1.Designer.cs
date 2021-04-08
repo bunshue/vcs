@@ -80,15 +80,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.lblBackColor = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.nudDtheta = new System.Windows.Forms.NumericUpDown();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtLengthScale = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.nudLength = new System.Windows.Forms.NumericUpDown();
-            this.label19 = new System.Windows.Forms.Label();
-            this.nudDepth = new System.Windows.Forms.NumericUpDown();
-            this.label20 = new System.Windows.Forms.Label();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -103,6 +94,7 @@
             this.txtWidth = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.tmrShowWalk = new System.Windows.Forms.Timer(this.components);
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -113,10 +105,6 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudDtheta)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLength)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudDepth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.groupBox6.SuspendLayout();
@@ -181,8 +169,6 @@
             this.pictureBox5.Size = new System.Drawing.Size(100, 100);
             this.pictureBox5.TabIndex = 68;
             this.pictureBox5.TabStop = false;
-            this.pictureBox5.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox5_Paint);
-            this.pictureBox5.Resize += new System.EventHandler(this.pictureBox5_Resize);
             // 
             // groupBox0
             // 
@@ -657,141 +643,6 @@
             this.lblBackColor.TabIndex = 33;
             this.lblBackColor.Click += new System.EventHandler(this.ColorSample_Click);
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.nudDtheta);
-            this.groupBox5.Controls.Add(this.label17);
-            this.groupBox5.Controls.Add(this.txtLengthScale);
-            this.groupBox5.Controls.Add(this.label18);
-            this.groupBox5.Controls.Add(this.nudLength);
-            this.groupBox5.Controls.Add(this.label19);
-            this.groupBox5.Controls.Add(this.nudDepth);
-            this.groupBox5.Controls.Add(this.label20);
-            this.groupBox5.Location = new System.Drawing.Point(487, 118);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(303, 74);
-            this.groupBox5.TabIndex = 74;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "queue_breadth_first_tree";
-            // 
-            // nudDtheta
-            // 
-            this.nudDtheta.Location = new System.Drawing.Point(238, 40);
-            this.nudDtheta.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.nudDtheta.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudDtheta.Name = "nudDtheta";
-            this.nudDtheta.Size = new System.Drawing.Size(42, 22);
-            this.nudDtheta.TabIndex = 25;
-            this.nudDtheta.Value = new decimal(new int[] {
-            35,
-            0,
-            0,
-            0});
-            this.nudDtheta.ValueChanged += new System.EventHandler(this.parameter_ValueChanged);
-            this.nudDtheta.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nud_KeyUp);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(158, 42);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(42, 12);
-            this.label17.TabIndex = 24;
-            this.label17.Text = "DTheta:";
-            // 
-            // txtLengthScale
-            // 
-            this.txtLengthScale.Location = new System.Drawing.Point(237, 16);
-            this.txtLengthScale.Name = "txtLengthScale";
-            this.txtLengthScale.Size = new System.Drawing.Size(43, 22);
-            this.txtLengthScale.TabIndex = 23;
-            this.txtLengthScale.Text = "0.75";
-            this.txtLengthScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtLengthScale.TextChanged += new System.EventHandler(this.parameter_ValueChanged);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(158, 19);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(68, 12);
-            this.label18.TabIndex = 22;
-            this.label18.Text = "Length Scale:";
-            // 
-            // nudLength
-            // 
-            this.nudLength.Location = new System.Drawing.Point(92, 43);
-            this.nudLength.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.nudLength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudLength.Name = "nudLength";
-            this.nudLength.Size = new System.Drawing.Size(42, 22);
-            this.nudLength.TabIndex = 21;
-            this.nudLength.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.nudLength.ValueChanged += new System.EventHandler(this.parameter_ValueChanged);
-            this.nudLength.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nud_KeyUp);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(12, 45);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(41, 12);
-            this.label19.TabIndex = 20;
-            this.label19.Text = "Length:";
-            // 
-            // nudDepth
-            // 
-            this.nudDepth.Location = new System.Drawing.Point(92, 19);
-            this.nudDepth.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.nudDepth.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudDepth.Name = "nudDepth";
-            this.nudDepth.Size = new System.Drawing.Size(42, 22);
-            this.nudDepth.TabIndex = 19;
-            this.nudDepth.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.nudDepth.ValueChanged += new System.EventHandler(this.parameter_ValueChanged);
-            this.nudDepth.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nud_KeyUp);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(12, 21);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(36, 12);
-            this.label20.TabIndex = 18;
-            this.label20.Text = "Depth:";
-            // 
             // pictureBox6
             // 
             this.pictureBox6.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -926,6 +777,15 @@
             this.tmrShowWalk.Interval = 500;
             this.tmrShowWalk.Tick += new System.EventHandler(this.tmrShowWalk_Tick);
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Location = new System.Drawing.Point(487, 118);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(303, 74);
+            this.groupBox5.TabIndex = 74;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "queue_breadth_first_tree";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -965,11 +825,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudDtheta)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLength)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudDepth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.groupBox6.ResumeLayout(false);
@@ -1032,15 +887,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label lblBackColor;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.NumericUpDown nudDtheta;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox txtLengthScale;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.NumericUpDown nudLength;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.NumericUpDown nudDepth;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.GroupBox groupBox6;
@@ -1055,6 +901,7 @@
         private System.Windows.Forms.HScrollBar scrSpeed;
         private System.Windows.Forms.Label lblWalkNum2;
         private System.Windows.Forms.Timer tmrShowWalk;
+        private System.Windows.Forms.GroupBox groupBox5;
     }
 }
 
