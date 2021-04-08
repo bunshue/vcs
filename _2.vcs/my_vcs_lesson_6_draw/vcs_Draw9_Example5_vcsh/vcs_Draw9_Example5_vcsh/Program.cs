@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace howto_epitrochoid_animated
+namespace vcs_Draw9_Example5_vcsh
 {
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// 應用程式的主要進入點。
         /// </summary>
         [STAThread]
         static void Main()

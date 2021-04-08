@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace howto_phi_spiral2.Properties {
+namespace vcs_Draw9_Example5_vcsh.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
