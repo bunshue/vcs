@@ -5536,9 +5536,28 @@ namespace vcs_Draw9_Example
         }
         //Pie Chart 4 SP
 
+        //Pie Chart 5 ST
         private void button29_Click(object sender, EventArgs e)
         {
+            Graphics g = Graphics.FromImage(pictureBox1.Image);
+            g.Clear(Color.White);
+            draw_hall_map();
         }
+
+        private void draw_hall_map()
+        {
+            Graphics g = Graphics.FromImage(pictureBox1.Image);
+            g.DrawRectangle(new Pen(Color.Black), new Rectangle(100, 100, 300, 300));
+            g.FillEllipse(new SolidBrush(Color.Lime), new Rectangle(90, 90, 320, 320));
+            g.FillPie(new SolidBrush(Color.Red), new Rectangle(100, 100, 300, 300), 0, 60);
+            g.FillPie(new SolidBrush(Color.Green), new Rectangle(100, 100, 300, 300), 60, 60);
+            g.FillPie(new SolidBrush(Color.Blue), new Rectangle(100, 100, 300, 300), 120, 60);
+            g.FillPie(new SolidBrush(Color.Yellow), new Rectangle(100, 100, 300, 300), 180, 60);
+            g.FillPie(new SolidBrush(Color.Lime), new Rectangle(100, 100, 300, 300), 240, 60);
+            g.FillPie(new SolidBrush(Color.Navy), new Rectangle(100, 100, 300, 300), 300, 60);
+            pictureBox1.Refresh();
+        }
+        //Pie Chart 5 SP
 
         private void button30_Click(object sender, EventArgs e)
         {

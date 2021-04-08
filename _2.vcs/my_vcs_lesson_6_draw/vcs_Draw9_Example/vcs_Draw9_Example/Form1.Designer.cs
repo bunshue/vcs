@@ -465,6 +465,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(100, 40);
             this.button29.TabIndex = 59;
+            this.button29.Text = "Pie Chart 5";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 

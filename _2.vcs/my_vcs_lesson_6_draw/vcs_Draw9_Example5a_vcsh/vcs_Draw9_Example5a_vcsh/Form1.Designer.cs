@@ -55,16 +55,6 @@
             this.chkFill = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtDt = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.txtH = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtB = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtA = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.timer_epitrochoid = new System.Windows.Forms.Timer(this.components);
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtZ0 = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
@@ -79,9 +69,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtC = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtB = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtA = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.lblForeColor = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -102,6 +92,8 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.scrSpeed = new System.Windows.Forms.HScrollBar();
+            this.lblWalkNum2 = new System.Windows.Forms.Label();
             this.lblWalkNum = new System.Windows.Forms.Label();
             this.trkWalk = new System.Windows.Forms.TrackBar();
             this.lblResults = new System.Windows.Forms.Label();
@@ -110,8 +102,6 @@
             this.label21 = new System.Windows.Forms.Label();
             this.txtWidth = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
-            this.lblWalkNum2 = new System.Windows.Forms.Label();
-            this.scrSpeed = new System.Windows.Forms.HScrollBar();
             this.tmrShowWalk = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -122,7 +112,6 @@
             this.groupBox0.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudDtheta)).BeginInit();
@@ -155,7 +144,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 60;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // pictureBox2
             // 
@@ -416,108 +404,12 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtDt);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.txtH);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtB);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtA);
-            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(12, 385);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(448, 57);
             this.groupBox1.TabIndex = 74;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Epitrochoid";
-            // 
-            // txtDt
-            // 
-            this.txtDt.Location = new System.Drawing.Point(301, 22);
-            this.txtDt.Name = "txtDt";
-            this.txtDt.Size = new System.Drawing.Size(44, 22);
-            this.txtDt.TabIndex = 25;
-            this.txtDt.Text = "0.05";
-            this.txtDt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(276, 25);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 12);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "dt:";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(360, 20);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 21);
-            this.button2.TabIndex = 26;
-            this.button2.Text = "Draw";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // txtH
-            // 
-            this.txtH.Location = new System.Drawing.Point(210, 22);
-            this.txtH.Name = "txtH";
-            this.txtH.Size = new System.Drawing.Size(44, 22);
-            this.txtH.TabIndex = 24;
-            this.txtH.Text = "4";
-            this.txtH.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(188, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(14, 12);
-            this.label3.TabIndex = 29;
-            this.label3.Text = "h:";
-            // 
-            // txtB
-            // 
-            this.txtB.Location = new System.Drawing.Point(122, 22);
-            this.txtB.Name = "txtB";
-            this.txtB.Size = new System.Drawing.Size(44, 22);
-            this.txtB.TabIndex = 23;
-            this.txtB.Text = "3";
-            this.txtB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(100, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(14, 12);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "b:";
-            // 
-            // txtA
-            // 
-            this.txtA.Location = new System.Drawing.Point(34, 22);
-            this.txtA.Name = "txtA";
-            this.txtA.Size = new System.Drawing.Size(44, 22);
-            this.txtA.TabIndex = 22;
-            this.txtA.Text = "5";
-            this.txtA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 25);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(13, 12);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "a:";
-            // 
-            // timer_epitrochoid
-            // 
-            this.timer_epitrochoid.Interval = 10;
-            this.timer_epitrochoid.Tick += new System.EventHandler(this.timer_epitrochoid_Tick);
             // 
             // groupBox4
             // 
@@ -534,9 +426,9 @@
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.txtC);
             this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.txtB);
             this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Controls.Add(this.textBox2);
+            this.groupBox4.Controls.Add(this.txtA);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.lblForeColor);
             this.groupBox4.Controls.Add(this.label14);
@@ -669,14 +561,14 @@
             this.label6.TabIndex = 42;
             this.label6.Text = "C";
             // 
-            // textBox1
+            // txtB
             // 
-            this.textBox1.Location = new System.Drawing.Point(214, 18);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(33, 22);
-            this.textBox1.TabIndex = 28;
-            this.textBox1.Text = "0.5";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtB.Location = new System.Drawing.Point(214, 18);
+            this.txtB.Name = "txtB";
+            this.txtB.Size = new System.Drawing.Size(33, 22);
+            this.txtB.TabIndex = 28;
+            this.txtB.Text = "0.5";
+            this.txtB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label12
             // 
@@ -687,14 +579,14 @@
             this.label12.TabIndex = 41;
             this.label12.Text = "B";
             // 
-            // textBox2
+            // txtA
             // 
-            this.textBox2.Location = new System.Drawing.Point(144, 18);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(33, 22);
-            this.textBox2.TabIndex = 26;
-            this.textBox2.Text = "2.0";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtA.Location = new System.Drawing.Point(144, 18);
+            this.txtA.Name = "txtA";
+            this.txtA.Size = new System.Drawing.Size(33, 22);
+            this.txtA.TabIndex = 26;
+            this.txtA.Text = "2.0";
+            this.txtA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label13
             // 
@@ -937,6 +829,26 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "self_avoiding_corner_walk";
             // 
+            // scrSpeed
+            // 
+            this.scrSpeed.LargeChange = 1;
+            this.scrSpeed.Location = new System.Drawing.Point(453, 65);
+            this.scrSpeed.Minimum = 1;
+            this.scrSpeed.Name = "scrSpeed";
+            this.scrSpeed.Size = new System.Drawing.Size(248, 21);
+            this.scrSpeed.TabIndex = 32;
+            this.scrSpeed.Value = 2;
+            this.scrSpeed.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scrSpeed_Scroll);
+            // 
+            // lblWalkNum2
+            // 
+            this.lblWalkNum2.AutoSize = true;
+            this.lblWalkNum2.Location = new System.Drawing.Point(451, 26);
+            this.lblWalkNum2.Name = "lblWalkNum2";
+            this.lblWalkNum2.Size = new System.Drawing.Size(45, 12);
+            this.lblWalkNum2.TabIndex = 33;
+            this.lblWalkNum2.Text = "XXXXX";
+            // 
             // lblWalkNum
             // 
             this.lblWalkNum.AutoSize = true;
@@ -1009,26 +921,6 @@
             this.label22.TabIndex = 18;
             this.label22.Text = "Width:";
             // 
-            // lblWalkNum2
-            // 
-            this.lblWalkNum2.AutoSize = true;
-            this.lblWalkNum2.Location = new System.Drawing.Point(451, 26);
-            this.lblWalkNum2.Name = "lblWalkNum2";
-            this.lblWalkNum2.Size = new System.Drawing.Size(45, 12);
-            this.lblWalkNum2.TabIndex = 33;
-            this.lblWalkNum2.Text = "XXXXX";
-            // 
-            // scrSpeed
-            // 
-            this.scrSpeed.LargeChange = 1;
-            this.scrSpeed.Location = new System.Drawing.Point(453, 65);
-            this.scrSpeed.Minimum = 1;
-            this.scrSpeed.Name = "scrSpeed";
-            this.scrSpeed.Size = new System.Drawing.Size(248, 21);
-            this.scrSpeed.TabIndex = 32;
-            this.scrSpeed.Value = 2;
-            this.scrSpeed.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scrSpeed_Scroll);
-            // 
             // tmrShowWalk
             // 
             this.tmrShowWalk.Interval = 500;
@@ -1071,8 +963,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -1117,16 +1007,6 @@
         private System.Windows.Forms.CheckBox chkFill;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtDt;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox txtH;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtB;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtA;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Timer timer_epitrochoid;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox txtZ0;
         private System.Windows.Forms.Button btnStart;
@@ -1141,9 +1021,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtC;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtB;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtA;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lblForeColor;
         private System.Windows.Forms.Label label14;
