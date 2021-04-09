@@ -18,7 +18,7 @@ namespace vcs_WebCam_Emgu3k
 {
     public partial class Form1 : Form
     {
-        private Capture cap = null;             // Webcam物件
+        private Capture cap = null;             //宣告一個Webcam物件
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
         public Form1()
@@ -28,13 +28,6 @@ namespace vcs_WebCam_Emgu3k
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            cap = new Capture(0);   //預設使用第一台的webcam
-            //cap = new Capture("D:\\aaaa.mp4");
-            richTextBox1.Text += "Width = " + cap.Width.ToString() + "\n";
-            richTextBox1.Text += "Height = " + cap.Height.ToString() + "\n";
-            richTextBox1.Text += "FRAME_COUNT = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT).ToString() + "\n";
-            richTextBox1.Text += "FPS = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS).ToString() + "\n";
-            richTextBox1.Text += "FORMAT = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FORMAT) + "\n";
         }
 
         void Application_Idle(object sender, EventArgs e)
@@ -43,39 +36,41 @@ namespace vcs_WebCam_Emgu3k
             pictureBox1.Image = image.ToBitmap();           // 把畫面轉換成bitmap型態，在丟給pictureBox元件
         }
 
-        //啟動webcam
         private void button1_Click(object sender, EventArgs e)
         {
-            //如果webcam沒啟動
-            if (cap == null)
+            if (flag_webcam_ok == false)
             {
-                try
-                {
-                    //打開預設的webcam
-                    cap = new Capture();
-                }
-                catch (NullReferenceException excpt)
-                {
-                    MessageBox.Show(excpt.Message);
-                }
-            }
+                richTextBox1.Text += "開啟Webcam ......\n";
+                button1.Text = "關閉Webcam";
+                flag_webcam_ok = true;
 
-            if (cap != null)    //webcam啟動
+                cap = new Capture(0);   //預設使用第一台的webcam
+                //cap = new Capture("C:\\______test_files\\aaaa.mp4");
+                Application.Idle += new EventHandler(Application_Idle);
+
+                //  information
+                double W;
+                double H;
+                double frame_count;
+                double fps;
+                W = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
+                H = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
+                frame_count = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+                fps = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
+
+                richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+                richTextBox1.Text += "frame_count = " + frame_count.ToString() + "\n";
+                richTextBox1.Text += "fps = " + fps.ToString() + "\n";
+            }
+            else
             {
-                if (flag_webcam_ok == false)
-                {
-                    //啟動
-                    flag_webcam_ok = true;
-                    button1.Text = "關閉";
-                    Application.Idle += Application_Idle;
-                }
-                else
-                {
-                    //關閉
-                    flag_webcam_ok = false;
-                    button1.Text = "開啟";
-                    Application.Idle -= Application_Idle;
-                }
+                richTextBox1.Text += "關閉Webcam ......\n";
+                button1.Text = "開啟Webcam";
+                flag_webcam_ok = false;
+                pictureBox1.Image = null;
+
+                Application.Idle -= new EventHandler(Application_Idle);
+                cap.Dispose();
             }
         }
 
