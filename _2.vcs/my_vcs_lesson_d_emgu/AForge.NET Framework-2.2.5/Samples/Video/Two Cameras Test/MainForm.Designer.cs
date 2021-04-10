@@ -40,6 +40,7 @@
             this.startButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -124,7 +125,7 @@
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(415, 508);
+            this.startButton.Location = new System.Drawing.Point(415, 503);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(75, 21);
             this.startButton.TabIndex = 4;
@@ -135,7 +136,7 @@
             // stopButton
             // 
             this.stopButton.Enabled = false;
-            this.stopButton.Location = new System.Drawing.Point(496, 508);
+            this.stopButton.Location = new System.Drawing.Point(496, 503);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(75, 21);
             this.stopButton.TabIndex = 5;
@@ -148,11 +149,20 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(20, 537);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(956, 252);
+            this.richTextBox1.TabIndex = 6;
+            this.richTextBox1.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1059, 557);
+            this.ClientSize = new System.Drawing.Size(1059, 801);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.groupBox2);
@@ -181,6 +191,7 @@
         private System.Windows.Forms.Label camera1FpsLabel;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label camera2FpsLabel;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

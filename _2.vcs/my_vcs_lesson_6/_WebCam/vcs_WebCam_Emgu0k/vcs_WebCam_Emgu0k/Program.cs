@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace EmguVS2008LoadImage
+namespace vcs_WebCam_Emgu0k
 {
     static class Program
     {
