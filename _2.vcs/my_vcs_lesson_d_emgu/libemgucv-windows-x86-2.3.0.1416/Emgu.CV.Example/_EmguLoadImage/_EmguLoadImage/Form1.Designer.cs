@@ -33,7 +33,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -74,7 +73,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(60, 184);
+            this.button4.Location = new System.Drawing.Point(46, 185);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(182, 33);
             this.button4.TabIndex = 3;
@@ -89,14 +88,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(500, 596);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(108, 203);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(8, 4);
-            this.checkedListBox1.TabIndex = 5;
             // 
             // button5
             // 
@@ -156,7 +147,6 @@
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -176,7 +166,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
