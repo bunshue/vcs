@@ -101,11 +101,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="license-plate.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="LicensePlateRecognitionForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LicensePlateRecognitionForm.cs</DependentUpon>

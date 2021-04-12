@@ -1,7 +1,3 @@
-//----------------------------------------------------------------------------
-//  Copyright (C) 2004-2011 by EMGU. All rights reserved.       
-//----------------------------------------------------------------------------
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,8 +19,11 @@ namespace TrafficSignRecognition
 
       public StopSignDetector()
       {
+            string filename = @"C:\______test_files\_emgu\stop-sign-model.png";
+
          _detector = new SURFDetector(500, false);
-         using (Image<Bgr, Byte> stopSignModel = new Image<Bgr, Byte>("stop-sign-model.png"))
+            using (Image<Bgr, Byte> stopSignModel = new Image<Bgr, Byte>(filename))
+
          using (Image<Gray, Byte> redMask = GetRedPixelMask(stopSignModel))
          {
             _tracker = new Features2DTracker(_detector.DetectFeatures(redMask, null));  

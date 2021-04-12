@@ -39,6 +39,7 @@ namespace _EmguLoadImage
             this.button1 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -144,14 +145,24 @@ namespace _EmguLoadImage
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(143, 36);
             this.button9.TabIndex = 19;
+            this.button9.Text = "用Image類別開啟一圖檔至picturebox";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(834, 31);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(386, 596);
+            this.richTextBox1.TabIndex = 20;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1080, 639);
+            this.ClientSize = new System.Drawing.Size(1232, 639);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -183,6 +194,7 @@ namespace _EmguLoadImage
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.RichTextBox richTextBox1;
 
     }
 }

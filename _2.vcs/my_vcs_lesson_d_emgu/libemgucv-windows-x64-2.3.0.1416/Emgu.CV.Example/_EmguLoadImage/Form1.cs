@@ -115,7 +115,11 @@ namespace _EmguLoadImage
 
         private void button9_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "用Image類別開啟一圖檔至picturebox\n";
+            Image<Bgr, byte> img;
+            img = new Image<Bgr, byte>(filename);
+            //imageBox1.Image = img;
+            pictureBox1.Image = img.ToBitmap();
         }
     }
 }
