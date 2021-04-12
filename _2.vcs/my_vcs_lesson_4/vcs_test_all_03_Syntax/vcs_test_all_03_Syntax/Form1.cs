@@ -1492,6 +1492,13 @@ namespace vcs_test_all_03_Syntax
                 richTextBox2.Text += "計算結束\n";
             }
         }
+
+        private void bt_parse_data_Click(object sender, EventArgs e)
+        {
+            //各種Parse範例
+            ParseData parse = new ParseData();
+            parse.Show();
+        }
     }
 }
 

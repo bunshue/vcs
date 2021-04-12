@@ -1,7 +1,3 @@
-//----------------------------------------------------------------------------
-//  Copyright (C) 2004-2011 by EMGU. All rights reserved.       
-//----------------------------------------------------------------------------
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,23 +29,17 @@ namespace CameraCapture
             InitializeComponent();
         }
 
-        private void ProcessFrame(object sender, EventArgs arg)
+        private void Application_Idle(object sender, EventArgs arg)
         {
-            Image<Bgr, Byte> frame = cap.QueryFrame();
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
 
-            Image<Gray, Byte> grayFrame = frame.Convert<Gray, Byte>();      //彩色轉灰階
+            Image<Gray, Byte> grayFrame = image.Convert<Gray, Byte>();      //彩色轉灰階
             Image<Gray, Byte> smallGrayFrame = grayFrame.PyrDown();
             Image<Gray, Byte> smoothedGrayFrame = smallGrayFrame.PyrUp();
             Image<Gray, Byte> cannyFrame = smoothedGrayFrame.Canny(new Gray(100), new Gray(60));
 
-            //captureImageBox.Image = frame;
-            //grayscaleImageBox.Image = grayFrame;
-            //smoothedGrayscaleImageBox.Image = smoothedGrayFrame;
-            //cannyImageBox.Image = cannyFrame;
-
-            pictureBox1.Image = cannyFrame.ToBitmap(); // 把畫面轉換成bitmap型態，在丟給pictureBox元件
-
-            ib1.Image = frame;
+            pictureBox1.Image = cannyFrame.ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
+            ib1.Image = image;
             ib2.Image = grayFrame;
             ib3.Image = smoothedGrayFrame;
             ib4.Image = cannyFrame;
@@ -92,7 +82,6 @@ namespace CameraCapture
             ib4.Size = new Size(w, h);
             this.Controls.Add(ib4);
 
-
             //動態產生元件並指定屬性與事件
             for (int i = 0; i < camera_function.Length; i++)
             {
@@ -109,7 +98,6 @@ namespace CameraCapture
                 //camera_function[i].BackColor = Color.Gray;
                 this.Controls.Add(camera_function[i]);
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -130,29 +118,34 @@ namespace CameraCapture
 
             if (cap != null)
             {
-                if (flag_webcam_ok == true)
-                {  //stop the capture
-                    button1.Text = "Start Capture";
-                    Application.Idle -= ProcessFrame;
-
-                    camera_function[0].Text = "";
-                    camera_function[1].Text = "";
-                    camera_function[2].Text = "";
-                    camera_function[3].Text = "";
-                }
-                else
+                if (flag_webcam_ok == false)
                 {
-                    //start the capture
-                    button1.Text = "Stop";
-                    Application.Idle += ProcessFrame;
+                    button1.Text = "關閉Webcam";
+                    flag_webcam_ok = true;
+                    Application.Idle += Application_Idle;
 
                     camera_function[0].Text = "Captured Image";
                     camera_function[1].Text = "Grayscale Image";
                     camera_function[2].Text = "Smoothed Grayscale";
                     camera_function[3].Text = "Canny Edges";
                 }
+                else
+                {
+                    button1.Text = "開啟Webcam";
+                    flag_webcam_ok = false;
+                    Application.Idle -= Application_Idle;
 
-                flag_webcam_ok = !flag_webcam_ok;
+                    camera_function[0].Text = "";
+                    camera_function[1].Text = "";
+                    camera_function[2].Text = "";
+                    camera_function[3].Text = "";
+
+                    pictureBox1.Image = null;
+                    ib1.Image = null;
+                    ib2.Image = null;
+                    ib3.Image = null;
+                    ib4.Image = null;
+                }
             }
         }
 
@@ -165,6 +158,6 @@ namespace CameraCapture
         {
             if (cap != null) cap.FlipVertical = !cap.FlipVertical;
         }
-
     }
 }
+

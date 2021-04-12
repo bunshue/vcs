@@ -119,6 +119,7 @@
             this.button41 = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.bt_parse_data = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1104,11 +1105,24 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "groupBox7";
             // 
+            // bt_parse_data
+            // 
+            this.bt_parse_data.BackColor = System.Drawing.Color.Pink;
+            this.bt_parse_data.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_parse_data.Location = new System.Drawing.Point(8, 326);
+            this.bt_parse_data.Name = "bt_parse_data";
+            this.bt_parse_data.Size = new System.Drawing.Size(180, 40);
+            this.bt_parse_data.TabIndex = 77;
+            this.bt_parse_data.Text = "各種Parse範例";
+            this.bt_parse_data.UseVisualStyleBackColor = false;
+            this.bt_parse_data.Click += new System.EventHandler(this.bt_parse_data_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1550, 958);
+            this.Controls.Add(this.bt_parse_data);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.button41);
@@ -1276,6 +1290,7 @@
         private System.Windows.Forms.Button button41;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Button bt_parse_data;
     }
 }
 
