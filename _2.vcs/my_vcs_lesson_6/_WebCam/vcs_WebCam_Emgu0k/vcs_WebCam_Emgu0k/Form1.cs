@@ -42,7 +42,7 @@ namespace vcs_WebCam_Emgu0k
 
                 cap = new Capture(0);   //預設使用第一台的webcam
                 //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
-                Application.Idle += new EventHandler(Application_Idle);
+                Application.Idle += new EventHandler(Application_Idle); // 在Idle的event下，把畫面設定到pictureBox上
 
                 //  information
                 double W;

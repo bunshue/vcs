@@ -33,7 +33,7 @@ namespace vcs_WebCam_Emgu3k
         void Application_Idle(object sender, EventArgs e)
         {
             Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
-            pictureBox1.Image = image.ToBitmap();           // 把畫面轉換成bitmap型態，在丟給pictureBox元件
+            pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,8 +45,8 @@ namespace vcs_WebCam_Emgu3k
                 flag_webcam_ok = true;
 
                 cap = new Capture(0);   //預設使用第一台的webcam
-                //cap = new Capture("C:\\______test_files\\aaaa.mp4");
-                Application.Idle += new EventHandler(Application_Idle);
+                //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
+                Application.Idle += new EventHandler(Application_Idle); // 在Idle的event下，把畫面設定到pictureBox上
 
                 //  information
                 double W;
