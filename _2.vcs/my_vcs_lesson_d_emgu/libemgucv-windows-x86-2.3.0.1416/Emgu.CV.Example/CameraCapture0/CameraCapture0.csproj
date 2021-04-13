@@ -8,8 +8,8 @@
     <ProjectGuid>{5F6B97F8-7EA6-4B5D-9A5D-F5581505C303}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CameraCapture</RootNamespace>
-    <AssemblyName>Example.CameraCapture</AssemblyName>
+    <RootNamespace>CameraCapture0</RootNamespace>
+    <AssemblyName>CameraCapture0</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -62,18 +62,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CameraCapture.cs">
+    <Compile Include="CameraCapture0.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CameraCapture.Designer.cs">
-      <DependentUpon>CameraCapture.cs</DependentUpon>
+    <Compile Include="CameraCapture0.Designer.cs">
+      <DependentUpon>CameraCapture0.cs</DependentUpon>
     </Compile>
     <Compile Include="..\..\CommonAssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CameraCapture.resx">
+    <EmbeddedResource Include="CameraCapture0.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>CameraCapture.cs</DependentUpon>
+      <DependentUpon>CameraCapture0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraCapture", "CameraCapture.csproj", "{5F6B97F8-7EA6-4B5D-9A5D-F5581505C303}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraCapture3", "CameraCapture3.csproj", "{5F6B97F8-7EA6-4B5D-9A5D-F5581505C303}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

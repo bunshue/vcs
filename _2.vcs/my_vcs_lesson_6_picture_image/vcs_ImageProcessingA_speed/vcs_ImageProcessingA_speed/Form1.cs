@@ -13,7 +13,7 @@ namespace vcs_ImageProcessingA_speed
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\11112222.bmp";
+        string filename = @"C:\______test_files\doraemon.jpg";
 
         public Form1()
         {
@@ -31,41 +31,47 @@ namespace vcs_ImageProcessingA_speed
             var bmp = new Bitmap(filename);
             pictureBox1.Image = bmp;
             var sw = new System.Diagnostics.Stopwatch();
-            richTextBox1.Text += "Start\n";
+            richTextBox1.Text += "各種影像處理速度比較 ST\n";
+            Application.DoEvents();
             sw.Start();
             // GetPixel、SetPixel
             NegativeImage1(bmp);
             sw.Stop();
             pictureBox1.Refresh();
-            richTextBox1.Text += "NegativeImage1: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + " msec\n";
+            richTextBox1.Text += "NegativeImage1: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            Application.DoEvents();
             sw.Reset();
             sw.Start();
             // Method in consideration of the arrangement
             NegativeImage2(bmp);
             sw.Stop();
             pictureBox1.Refresh();
-            richTextBox1.Text += "NegativeImage2: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + " msec\n";
+            richTextBox1.Text += "NegativeImage2: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            Application.DoEvents();
             sw.Reset();
             sw.Start();
             // MershalのReadByte、WriteByte
             NegativeImage3(bmp);
             sw.Stop();
             pictureBox1.Refresh();
-            richTextBox1.Text += "NegativeImage3: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + " msec\n";
+            richTextBox1.Text += "NegativeImage3: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            Application.DoEvents();
             sw.Reset();
             sw.Start();
             // usafe pointer
             NegativeImage4(bmp);
             sw.Stop();
             pictureBox1.Refresh();
-            richTextBox1.Text += "NegativeImage4: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + " msec\n";
+            richTextBox1.Text += "NegativeImage4: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            Application.DoEvents();
             sw.Reset();
             sw.Start();
             // parallel processing of usafe pointer
             NegativeImage5(bmp);
             sw.Stop();
             pictureBox1.Refresh();
-            richTextBox1.Text += "NegativeImage5: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + " msec\n";
+            richTextBox1.Text += "NegativeImage5: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            richTextBox1.Text += "各種影像處理速度比較 SP\n\n";
         }
 
 

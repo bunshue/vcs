@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Emgu.CV;
 
-namespace CameraCapture
+namespace CameraCapture0
 {
    static class Program
    {
@@ -21,7 +21,7 @@ namespace CameraCapture
          if (!IsPlaformCompatable()) return;
          Application.EnableVisualStyles();
          Application.SetCompatibleTextRenderingDefault(false);
-         Application.Run(new CameraCapture());
+         Application.Run(new CameraCapture0());
       }
 
       /// <summary>

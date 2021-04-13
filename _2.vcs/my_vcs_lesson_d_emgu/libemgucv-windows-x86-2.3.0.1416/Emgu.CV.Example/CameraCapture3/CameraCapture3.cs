@@ -1,7 +1,3 @@
-//----------------------------------------------------------------------------
-//  Copyright (C) 2004-2011 by EMGU. All rights reserved.       
-//----------------------------------------------------------------------------
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +9,9 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
 
-namespace CameraCapture
+namespace CameraCapture3
 {
-    public partial class CameraCapture : Form
+    public partial class CameraCapture3 : Form
     {
         private Capture cap = null;             // Webcam物件
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
@@ -27,7 +23,7 @@ namespace CameraCapture
 
         Label[] camera_function = new Label[4];
 
-        public CameraCapture()
+        public CameraCapture3()
         {
             InitializeComponent();
         }
@@ -60,7 +56,7 @@ namespace CameraCapture
                 cap.Dispose();
         }
 
-        private void CameraCapture_Load(object sender, EventArgs e)
+        private void CameraCapture3_Load(object sender, EventArgs e)
         {
             int W = 640;
             int H = 480;

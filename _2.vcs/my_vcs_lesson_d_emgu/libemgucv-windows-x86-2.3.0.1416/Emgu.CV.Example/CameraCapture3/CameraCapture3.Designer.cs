@@ -1,6 +1,6 @@
-namespace CameraCapture
+namespace CameraCapture3
 {
-    partial class CameraCapture
+    partial class CameraCapture3
     {
         /// <summary>
         /// Required designer variable.
@@ -74,7 +74,7 @@ namespace CameraCapture
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
-            // CameraCapture
+            // CameraCapture3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -83,9 +83,9 @@ namespace CameraCapture
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button3);
-            this.Name = "CameraCapture";
-            this.Text = "Camera Capture";
-            this.Load += new System.EventHandler(this.CameraCapture_Load);
+            this.Name = "CameraCapture3";
+            this.Text = "CameraCapture3";
+            this.Load += new System.EventHandler(this.CameraCapture3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
