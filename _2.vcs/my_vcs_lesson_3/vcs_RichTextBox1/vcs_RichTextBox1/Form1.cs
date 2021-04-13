@@ -264,46 +264,6 @@ namespace vcs_RichTextBox1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            int a, b, c, d, ee, f;
-
-            a = 123456;
-            b = 2006;
-            c = 3;
-            d = 11;
-            ee = 1234567890;
-            f = 2468;
-
-            richTextBox1.Text += "數字保留10位, 向左靠齊\n";
-            richTextBox1.Text += string.Format("{0,-10}{1,-10}{2,-10}{3,-10}{4,-10}{5,-10}", a.ToString(), b.ToString(), c.ToString(), d.ToString(), ee.ToString(), f.ToString()) + "\n";
-            richTextBox1.Text += "數字保留10位, 向右靠齊\n";
-            richTextBox1.Text += string.Format("{0,10}{1,10}{2,10}{3,10}{4,10}{5,10}", a.ToString(), b.ToString(), c.ToString(), d.ToString(), ee.ToString(), f.ToString()) + "\n";
-            richTextBox1.Text += "字串保留10位, 向左靠齊\n";
-            richTextBox1.Text += string.Format("{0,-10}{1,-10}{2,-10}{3,-10}{4,-10}{5,-10}", "David", "Mary", "Doraemon", "Cat", "Dog", "Lion") + "\n";
-
-            Random rnd = new Random();
-            // Create new thread and display three random numbers.
-            richTextBox1.Text += "Some currency values:\n";
-            for (int ctr = 0; ctr <= 3; ctr++)
-            {
-                richTextBox1.Text += string.Format("{0:C2}", rnd.NextDouble() * 100) + "\n";
-            }
-
-            double aa = 123456789012345.456789;
-            richTextBox1.Text += aa.ToString("N0", CultureInfo.InvariantCulture) + "\n";
-
-            int bb = 1234567890;
-            richTextBox1.Text += bb.ToString("N0", CultureInfo.InvariantCulture) + "\n";
-
-
-            double used = 197594525696;
-
-            double used2 = 184.02;
-
-            //已使用空間 :	197,593,485,312 個位元組	184.02 GB
-            richTextBox1.Text += string.Format("{0,-15}{1,20}{2,-10}{3,-10}",
-                "已使用空間 :", used.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", used2.ToString() + " GB") + "\n";
-
-            //richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture) + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -315,6 +275,10 @@ namespace vcs_RichTextBox1
             richTextBox1.Text += "顯示一位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P1", CultureInfo.InvariantCulture) + "\n";
             richTextBox1.Text += "顯示兩位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P", CultureInfo.InvariantCulture) + "\n";
             richTextBox1.Text += "顯示十位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P10", CultureInfo.InvariantCulture) + "\n";
+
+            //表示錢號的方法
+            int n = 12345;
+            richTextBox1.Text += "新台幣 " + n.ToString("C") + " 元\n";
         }
 
         #region 日誌記錄、支援其他執行緒訪問
@@ -501,23 +465,7 @@ namespace vcs_RichTextBox1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            // 將數字前面補0，補足長度為6 
-            String snum = "5";
-            String pnum = snum.PadLeft(5, '0');
-            String fnum = String.Format("{0:00000}", Convert.ToInt16(snum));
-            //MessageBox.Show("原始字串 : " + snum + "\n 透過 PadLeft : " + pnum + "\n 透過 String.Format : " + fnum);
 
-
-            int n = 123;
-            string zz1 = n.ToString().PadLeft(10, '0');
-            richTextBox1.Text += "\nzz1 = " + zz1 + "\n";
-
-            //string zz2 = Convert.ToInt32(n);
-            string zz2 = String.Format("{0:0000000000}", Convert.ToInt16(n));
-            richTextBox1.Text += "zz2 = " + zz2 + "\n";
-
-            string zz3 = n.ToString("D10");
-            richTextBox1.Text += "zz3 = " + zz3 + "\n";
         }
 
         private void button20_Click(object sender, EventArgs e)

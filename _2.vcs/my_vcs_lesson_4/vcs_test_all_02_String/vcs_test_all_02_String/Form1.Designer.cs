@@ -210,13 +210,14 @@
             // 
             // button13
             // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button13.Location = new System.Drawing.Point(235, 12);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(154, 42);
             this.button13.TabIndex = 14;
-            this.button13.Text = "xxx";
+            this.button13.Text = "格式化列印 String.Format";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 
@@ -225,18 +226,20 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(154, 42);
             this.button14.TabIndex = 15;
-            this.button14.Text = "xxx";
+            this.button14.Text = "將數字前面補0";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button15
             // 
-            this.button15.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button15.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button15.Location = new System.Drawing.Point(235, 108);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(154, 42);
             this.button15.TabIndex = 16;
-            this.button15.Text = "xxx";
+            this.button15.Text = "string.Format 的用法";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button16
             // 

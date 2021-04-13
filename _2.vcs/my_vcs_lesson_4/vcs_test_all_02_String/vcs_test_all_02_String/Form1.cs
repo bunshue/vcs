@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Globalization;//for CultureInfo
+
 namespace vcs_test_all_02_String
 {
     public partial class Form1 : Form
@@ -160,6 +162,90 @@ namespace vcs_test_all_02_String
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //格式化列印 String.Format
+
+            int a, b, c, d, ee, f;
+
+            a = 123456;
+            b = 2006;
+            c = 3;
+            d = 11;
+            ee = 1234567890;
+            f = 2468;
+
+            richTextBox1.Text += "數字保留10位, 向左靠齊\n";
+            richTextBox1.Text += string.Format("{0,-10}{1,-10}{2,-10}{3,-10}{4,-10}{5,-10}", a.ToString(), b.ToString(), c.ToString(), d.ToString(), ee.ToString(), f.ToString()) + "\n";
+            richTextBox1.Text += "數字保留10位, 向右靠齊\n";
+            richTextBox1.Text += string.Format("{0,10}{1,10}{2,10}{3,10}{4,10}{5,10}", a.ToString(), b.ToString(), c.ToString(), d.ToString(), ee.ToString(), f.ToString()) + "\n";
+            richTextBox1.Text += "字串保留10位, 向左靠齊\n";
+            richTextBox1.Text += string.Format("{0,-10}{1,-10}{2,-10}{3,-10}{4,-10}{5,-10}", "David", "Mary", "Doraemon", "Cat", "Dog", "Lion") + "\n";
+
+            Random rnd = new Random();
+            // Create new thread and display three random numbers.
+            richTextBox1.Text += "Some currency values:\n";
+            for (int ctr = 0; ctr <= 3; ctr++)
+            {
+                richTextBox1.Text += string.Format("{0:C2}", rnd.NextDouble() * 100) + "\n";
+            }
+
+            double aa = 123456789012345.456789;
+            richTextBox1.Text += aa.ToString("N0", CultureInfo.InvariantCulture) + "\n";
+
+            int bb = 1234567890;
+            richTextBox1.Text += bb.ToString("N0", CultureInfo.InvariantCulture) + "\n";
+
+
+            double used = 197594525696;
+
+            double used2 = 184.02;
+
+            //已使用空間 :	197,593,485,312 個位元組	184.02 GB
+            richTextBox1.Text += string.Format("{0,-15}{1,20}{2,-10}{3,-10}",
+                "已使用空間 :", used.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", used2.ToString() + " GB") + "\n";
+
+            //richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture) + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            //將數字前面補0
+
+            // 將數字前面補0，補足長度為6 
+            String snum = "5";
+            String pnum = snum.PadLeft(5, '0');
+            String fnum = String.Format("{0:00000}", Convert.ToInt16(snum));
+            //MessageBox.Show("原始字串 : " + snum + "\n 透過 PadLeft : " + pnum + "\n 透過 String.Format : " + fnum);
+
+
+            int n = 123;
+            string zz1 = n.ToString().PadLeft(10, '0');
+            richTextBox1.Text += "\nzz1 = " + zz1 + "\n";
+
+            //string zz2 = Convert.ToInt32(n);
+            string zz2 = String.Format("{0:0000000000}", Convert.ToInt16(n));
+            richTextBox1.Text += "zz2 = " + zz2 + "\n";
+
+            string zz3 = n.ToString("D10");
+            richTextBox1.Text += "zz3 = " + zz3 + "\n";
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //string.Format 的用法
+            string animal1 = "Cats";
+            string animal2 = "dogs";
+            string result = string.Format("{0} and {1} are animals.", animal1, animal2);
+            richTextBox1.Text += "string.Format 的用法\n結果 : " + result + "\n";
+
+            string filename = string.Format("bmp_{0:yyyyMMdd_HHmmss}.bmp", DateTime.Now);
+            richTextBox1.Text += "用string.Format製作依時檔案\n結果 : " + filename + "\n";
+
         }
 
 

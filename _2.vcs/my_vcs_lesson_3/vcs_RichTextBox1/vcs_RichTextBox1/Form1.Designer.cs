@@ -216,18 +216,17 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(220, 40);
             this.button10.TabIndex = 11;
-            this.button10.Text = "格式化列印";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
-            this.button11.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button11.Location = new System.Drawing.Point(12, 524);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(220, 40);
             this.button11.TabIndex = 12;
-            this.button11.Text = "顯示百分比";
+            this.button11.Text = "顯示百分比 錢號的方法";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -404,7 +403,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(220, 40);
             this.button19.TabIndex = 47;
-            this.button19.Text = "將數字前面補0";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 

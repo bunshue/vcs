@@ -381,7 +381,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(150, 50);
             this.button26.TabIndex = 81;
-            this.button26.Text = "string.Format 的用法";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -392,7 +391,6 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(150, 50);
             this.button27.TabIndex = 82;
-            this.button27.Text = "表示錢號的方法";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 

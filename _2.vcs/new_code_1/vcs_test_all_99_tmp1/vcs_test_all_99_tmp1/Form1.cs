@@ -768,20 +768,10 @@ namespace vcs_test_all_99_tmp1
 
         private void button26_Click(object sender, EventArgs e)
         {
-            string animal1 = "Cats";
-            string animal2 = "dogs";
-            string result = string.Format("{0} and {1} are animals.", animal1, animal2);
-            richTextBox1.Text += "string.Format 的用法\n結果 : " + result + "\n";
-
-            string filename = string.Format("bmp_{0:yyyyMMdd_HHmmss}.bmp", DateTime.Now);
-            richTextBox1.Text += "用string.Format製作依時檔案\n結果 : " + filename + "\n";
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-            //表示錢號的方法
-            int n = 12345;
-            richTextBox1.Text += "新台幣 " + n.ToString("C") + " 元\n";
         }
 
         private void button28_Click(object sender, EventArgs e)
