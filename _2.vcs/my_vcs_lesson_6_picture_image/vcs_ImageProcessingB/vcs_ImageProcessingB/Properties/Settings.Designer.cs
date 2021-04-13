@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_EdgeDetection.Properties {
+namespace vcs_ImageProcessingB.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;
+using System.Drawing.Imaging;   //for BitmapData
 
 namespace vcs_Mosaic
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\naruto.jpg";
+
         int borderwidth = 1;
         int mosaicwidth = 3;
         Color bordercolor = Color.FromArgb(211, 172, 158);
@@ -22,18 +24,19 @@ namespace vcs_Mosaic
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            Bitmap bmp = new Bitmap(filename);
-
-
-
-            pictureBox1.Image = CreateMosaicImage(bmp);
-
+            pictureBox1.Image = Image.FromFile(filename);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = CreateMosaicImage(bitmap1);
+            pictureBox1.Image = bitmap2;
+        }
+
+        //重設大小
         public Bitmap Resize(Bitmap source, Size size)
         {
             int widthskip = source.Width / size.Width;
@@ -113,9 +116,9 @@ namespace vcs_Mosaic
             newpbmp.UnlockBits();
             return bmp;
         }
-
     }
 
+    //指針法
     public class PointBitmap
     {
         Bitmap source = null;
