@@ -90,6 +90,11 @@ namespace vcs_ImageProcessingB
             pictureBox1.Image = bitmap2;
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Image.FromFile(filename);
+        }
+
         //旋转90,180,270
         public Bitmap RotateImage(Bitmap bmp, int angle)
         {
@@ -412,7 +417,6 @@ namespace vcs_ImageProcessingB
             newlbmp.UnlockBits();
             return newbmp;
         }
-
 
 
 

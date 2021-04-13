@@ -38,6 +38,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,9 +54,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(610, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(627, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(316, 591);
+            this.richTextBox1.Size = new System.Drawing.Size(299, 591);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -131,17 +132,28 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(178, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(200, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(426, 591);
+            this.pictureBox1.Size = new System.Drawing.Size(400, 500);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(12, 714);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(160, 49);
+            this.button9.TabIndex = 10;
+            this.button9.Text = "Reset";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(938, 775);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -172,6 +184,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button9;
     }
 }
 

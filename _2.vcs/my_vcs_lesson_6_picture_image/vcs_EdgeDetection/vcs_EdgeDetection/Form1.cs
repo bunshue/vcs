@@ -518,10 +518,10 @@ namespace vcs_EdgeDetection
             return newbmp;
         }
 
-
-
-
-
+        private void button9_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Image.FromFile(filename);
+        }
     }
 
     //內存法
