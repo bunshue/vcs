@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rb1 = new System.Windows.Forms.RadioButton();
-            this.rb2 = new System.Windows.Forms.RadioButton();
-            this.rb3 = new System.Windows.Forms.RadioButton();
             this.rb4 = new System.Windows.Forms.RadioButton();
+            this.rb3 = new System.Windows.Forms.RadioButton();
+            this.rb2 = new System.Windows.Forms.RadioButton();
+            this.rb1 = new System.Windows.Forms.RadioButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -69,6 +71,37 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
+            // rb4
+            // 
+            this.rb4.AutoSize = true;
+            this.rb4.Location = new System.Drawing.Point(27, 147);
+            this.rb4.Name = "rb4";
+            this.rb4.Size = new System.Drawing.Size(85, 16);
+            this.rb4.TabIndex = 3;
+            this.rb4.Text = "radioButton1";
+            this.rb4.UseVisualStyleBackColor = true;
+            // 
+            // rb3
+            // 
+            this.rb3.AutoSize = true;
+            this.rb3.Location = new System.Drawing.Point(27, 109);
+            this.rb3.Name = "rb3";
+            this.rb3.Size = new System.Drawing.Size(85, 16);
+            this.rb3.TabIndex = 2;
+            this.rb3.Text = "radioButton1";
+            this.rb3.UseVisualStyleBackColor = true;
+            // 
+            // rb2
+            // 
+            this.rb2.AutoSize = true;
+            this.rb2.Location = new System.Drawing.Point(27, 70);
+            this.rb2.Name = "rb2";
+            this.rb2.Size = new System.Drawing.Size(64, 16);
+            this.rb2.TabIndex = 1;
+            this.rb2.Text = "QR code";
+            this.rb2.UseVisualStyleBackColor = true;
+            this.rb2.CheckedChanged += new System.EventHandler(this.rb2_CheckedChanged);
+            // 
             // rb1
             // 
             this.rb1.AutoSize = true;
@@ -81,35 +114,10 @@
             this.rb1.Text = "正常";
             this.rb1.UseVisualStyleBackColor = true;
             // 
-            // rb2
+            // timer1
             // 
-            this.rb2.AutoSize = true;
-            this.rb2.Location = new System.Drawing.Point(27, 70);
-            this.rb2.Name = "rb2";
-            this.rb2.Size = new System.Drawing.Size(85, 16);
-            this.rb2.TabIndex = 1;
-            this.rb2.Text = "radioButton1";
-            this.rb2.UseVisualStyleBackColor = true;
-            // 
-            // rb3
-            // 
-            this.rb3.AutoSize = true;
-            this.rb3.Location = new System.Drawing.Point(27, 109);
-            this.rb3.Name = "rb3";
-            this.rb3.Size = new System.Drawing.Size(85, 16);
-            this.rb3.TabIndex = 2;
-            this.rb3.Text = "radioButton1";
-            this.rb3.UseVisualStyleBackColor = true;
-            // 
-            // rb4
-            // 
-            this.rb4.AutoSize = true;
-            this.rb4.Location = new System.Drawing.Point(27, 147);
-            this.rb4.Name = "rb4";
-            this.rb4.Size = new System.Drawing.Size(85, 16);
-            this.rb4.TabIndex = 3;
-            this.rb4.Text = "radioButton1";
-            this.rb4.UseVisualStyleBackColor = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -139,6 +147,7 @@
         private System.Windows.Forms.RadioButton rb3;
         private System.Windows.Forms.RadioButton rb2;
         private System.Windows.Forms.RadioButton rb1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
