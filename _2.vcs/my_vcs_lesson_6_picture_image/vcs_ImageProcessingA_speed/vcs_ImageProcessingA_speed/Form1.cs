@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Threading.Tasks;   //for Parallel
+using System.Drawing.Imaging;   //BitmapData
 
 namespace vcs_ImageProcessingA_speed
 {
@@ -71,6 +72,18 @@ namespace vcs_ImageProcessingA_speed
             sw.Stop();
             pictureBox1.Refresh();
             richTextBox1.Text += "NegativeImage5: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            Application.DoEvents();
+            sw.Reset();
+            sw.Start();
+            // parallel processing of usafe pointer
+            NegativeImage6(bmp);
+            sw.Stop();
+            pictureBox1.Refresh();
+            richTextBox1.Text += "NegativeImage6: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+
+
+
+
             richTextBox1.Text += "各種影像處理速度比較 SP\n\n";
         }
 
@@ -84,13 +97,13 @@ namespace vcs_ImageProcessingA_speed
         /// <param name="bmp"></param>
         private void NegativeImage1(Bitmap bmp)
         {
-            var width = bmp.Width;
-            var height = bmp.Height;
+            var W = bmp.Width;
+            var H = bmp.Height;
             Color col;
             int r, g, b;
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < H; y++)
             {
-                for (int x = 0; x < width; x++)
+                for (int x = 0; x < W; x++)
                 {
                     // Obtaining brightness value
                     col = bmp.GetPixel(x, y);
@@ -111,11 +124,11 @@ namespace vcs_ImageProcessingA_speed
         /// <param name="bmp"></param>
         private void NegativeImage2(Bitmap bmp)
         {
-            var width = bmp.Width;
-            var height = bmp.Height;
+            var W = bmp.Width;
+            var H = bmp.Height;
             // Lock Bitmap
             var bmpData = bmp.LockBits(
-            new Rectangle(0, 0, width, height),
+            new Rectangle(0, 0, W, H),
             System.Drawing.Imaging.ImageLockMode.ReadWrite,
             bmp.PixelFormat
             );
@@ -132,9 +145,9 @@ namespace vcs_ImageProcessingA_speed
             );
             byte r, g, b;
             int lineIndex = 0;
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < H; y++)
             {
-                for (int x = 0; x < width * 3; x += 3)
+                for (int x = 0; x < W * 3; x += 3)
                 {
                     // Obtain the brightness value
                     r = data[lineIndex + x + 2];
@@ -164,11 +177,11 @@ namespace vcs_ImageProcessingA_speed
         /// <param name="bmp"></param>
         private void NegativeImage3(Bitmap bmp)
         {
-            var width = bmp.Width;
-            var height = bmp.Height;
+            var W = bmp.Width;
+            var H = bmp.Height;
             // Lock the Bitmap
             var bmpData = bmp.LockBits(
-            new Rectangle(0, 0, width, height),
+            new Rectangle(0, 0, W, H),
             System.Drawing.Imaging.ImageLockMode.ReadWrite,
             bmp.PixelFormat
             );
@@ -177,9 +190,9 @@ namespace vcs_ImageProcessingA_speed
             byte r, g, b;
             int lineIndex = 0;
             var ptr = bmpData.Scan0;
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < H; y++)
             {
-                for (int x = 0; x < width * 3; x += 3)
+                for (int x = 0; x < W * 3; x += 3)
                 {
                     // Obtain brightness value
                     r = System.Runtime.InteropServices.Marshal.ReadByte(ptr, lineIndex + x + 2);
@@ -202,11 +215,11 @@ namespace vcs_ImageProcessingA_speed
         /// <param name="bmp"></param>
         private void NegativeImage4(Bitmap bmp)
         {
-            var width = bmp.Width;
-            var height = bmp.Height;
+            var W = bmp.Width;
+            var H = bmp.Height;
             // Bitmap Lock
             var bmpData = bmp.LockBits(
-            new Rectangle(0, 0, width, height),
+            new Rectangle(0, 0, W, H),
             System.Drawing.Imaging.ImageLockMode.ReadWrite,
             bmp.PixelFormat
             );
@@ -218,11 +231,11 @@ namespace vcs_ImageProcessingA_speed
                 var ptr = (byte*)bmpData.Scan0;
                 byte r, g, b;
                 byte* pLine = ptr;
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < H; y++)
                 {
                     // The first point of the line
                     ptr = pLine;
-                    for (int x = 0; x < width; x++)
+                    for (int x = 0; x < W; x++)
                     {
                         // Obtain brightness value
                         r = ptr[2];
@@ -249,11 +262,11 @@ namespace vcs_ImageProcessingA_speed
         /// <param name="bmp"></param>
         private void NegativeImage5(Bitmap bmp)
         {
-            var width = bmp.Width;
-            var height = bmp.Height;
-            // Bitmap을 Lock
+            var W = bmp.Width;
+            var H = bmp.Height;
+            // Bitmap Lock
             var bmpData = bmp.LockBits(
-            new Rectangle(0, 0, width, height),
+            new Rectangle(0, 0, W, H),
             System.Drawing.Imaging.ImageLockMode.ReadWrite,
             bmp.PixelFormat
             );
@@ -263,11 +276,11 @@ namespace vcs_ImageProcessingA_speed
             {
                 // Arrange image data for saving
                 var ptr = (byte*)bmpData.Scan0;
-                Parallel.For(0, height, y =>
+                Parallel.For(0, H, y =>
                 {
                     // The first pointer of the line
                     byte* pLine = ptr + y * stride;
-                    for (int x = 0; x < width; x++)
+                    for (int x = 0; x < W; x++)
                     {
                         // Obtain brightness value
                         byte r = pLine[2];
@@ -286,5 +299,53 @@ namespace vcs_ImageProcessingA_speed
             // Unlock
             bmp.UnlockBits(bmpData);
         }
+
+        /// <summary>
+        /// 使用BitmapData處理
+        /// </summary>
+        /// <param name="bmp"></param>
+        private void NegativeImage6(Bitmap bmp)
+        {
+            var W = bmp.Width;
+            var H = bmp.Height;
+
+            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            BitmapData bData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            unsafe
+            {
+                byte* p = (byte*)bData.Scan0.ToPointer();
+                for (int y = 0; y < H; y++)
+                {
+                    for (int x = 0; x < W; x++)
+                    {
+                        //檢查圖片是否全白或全黑
+                        if ((p[0] != 255 && p[0] != 0) || (p[1] != 255 && p[1] != 0) || (p[2] != 255 && p[2] != 0))
+                        {
+                            //NotNULL = true;
+                            //break;
+                        }
+
+                        /*
+                        //修改圖片的數值
+                        p[0] -= 50;
+                        p[1] -= 50;
+                        p[2] -= 50;
+                        */
+
+                        //反相
+                        p[0] = (byte)(255 - p[0]);
+                        p[1] = (byte)(255 - p[1]);
+                        p[2] = (byte)(255 - p[2]);
+
+                        p += 3;
+                    }
+                    //if (NotNULL == true)
+                    //break;
+                }
+                bmp.UnlockBits(bData);
+            }
+        }
     }
 }
+

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs進行圖像處理的幾種方法.Properties
+namespace CameraCapture0n.Properties
 {
 
 

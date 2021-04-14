@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs進行圖像處理的幾種方法
+namespace vcs_BitmapData
 {
     static class Program
     {
