@@ -5,15 +5,14 @@ using System.Text;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-namespace WinFormCharpWebCam
+
+namespace vcs_WebCam_Capture
 {
     //Design by Pongsakorn Poosankam
     class Helper
     {
-
         public static void SaveImageCapture(System.Drawing.Image image)
         {
-
             SaveFileDialog s = new SaveFileDialog();
             s.FileName = "Image";// Default file name
             s.DefaultExt = ".Jpg";// Default file extension
@@ -21,16 +20,14 @@ namespace WinFormCharpWebCam
 
             // Show save file dialog box
             // Process save file dialog box results
-            if (s.ShowDialog()==DialogResult.OK)
+            if (s.ShowDialog() == DialogResult.OK)
             {
                 // Save Image
                 string filename = s.FileName;
                 FileStream fstream = new FileStream(filename, FileMode.Create);
                 image.Save(fstream, System.Drawing.Imaging.ImageFormat.Jpeg);
                 fstream.Close();
-
             }
-
         }
     }
 }

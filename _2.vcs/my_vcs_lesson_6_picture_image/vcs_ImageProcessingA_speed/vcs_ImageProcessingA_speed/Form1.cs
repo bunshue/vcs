@@ -8,7 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Threading.Tasks;   //for Parallel
-using System.Drawing.Imaging;   //BitmapData
+using System.Drawing.Imaging;   //BitmapData, ImageLockMode
+using System.Runtime.InteropServices;   //for Marshal
+using System.Diagnostics;   //for Stopwatch
 
 namespace vcs_ImageProcessingA_speed
 {
@@ -31,65 +33,65 @@ namespace vcs_ImageProcessingA_speed
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             var bmp = new Bitmap(filename);
             pictureBox1.Image = bmp;
-            var sw = new System.Diagnostics.Stopwatch();
+            var sw = new Stopwatch();
             richTextBox1.Text += "各種影像處理速度比較 ST\n";
             Application.DoEvents();
+
+            richTextBox1.Text += "方法1: 使用GetPixel、SetPixel\n";
             sw.Start();
-            // GetPixel、SetPixel
             NegativeImage1(bmp);
             sw.Stop();
             pictureBox1.Refresh();
-            richTextBox1.Text += "NegativeImage1: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
             Application.DoEvents();
+
+            richTextBox1.Text += "方法2: Method in consideration of the arrangement\n";
             sw.Reset();
             sw.Start();
-            // Method in consideration of the arrangement
             NegativeImage2(bmp);
             sw.Stop();
             pictureBox1.Refresh();
-            richTextBox1.Text += "NegativeImage2: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
             Application.DoEvents();
+
+            richTextBox1.Text += "方法3: Mershal ReadByte、WriteByte\n";
             sw.Reset();
             sw.Start();
-            // MershalのReadByte、WriteByte
             NegativeImage3(bmp);
             sw.Stop();
             pictureBox1.Refresh();
-            richTextBox1.Text += "NegativeImage3: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
             Application.DoEvents();
+
+            richTextBox1.Text += "方法4: usafe pointer\n";
             sw.Reset();
             sw.Start();
             // usafe pointer
             NegativeImage4(bmp);
             sw.Stop();
             pictureBox1.Refresh();
-            richTextBox1.Text += "NegativeImage4: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
             Application.DoEvents();
+
+            richTextBox1.Text += "方法5: parallel processing of usafe pointer\n";
             sw.Reset();
             sw.Start();
-            // parallel processing of usafe pointer
             NegativeImage5(bmp);
             sw.Stop();
             pictureBox1.Refresh();
             richTextBox1.Text += "NegativeImage5: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
             Application.DoEvents();
+
+            richTextBox1.Text += "方法6: use BitmapData\n";
             sw.Reset();
             sw.Start();
-            // parallel processing of usafe pointer
             NegativeImage6(bmp);
             sw.Stop();
             pictureBox1.Refresh();
-            richTextBox1.Text += "NegativeImage6: " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-
-
-
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
 
             richTextBox1.Text += "各種影像處理速度比較 SP\n\n";
         }
-
-
-
-
 
         /// <summary>
         /// Set up the brightness value with GetPixel、SetPixel
@@ -129,7 +131,7 @@ namespace vcs_ImageProcessingA_speed
             // Lock Bitmap
             var bmpData = bmp.LockBits(
             new Rectangle(0, 0, W, H),
-            System.Drawing.Imaging.ImageLockMode.ReadWrite,
+            ImageLockMode.ReadWrite,
             bmp.PixelFormat
             );
             // Obtain Bytes of memory width
@@ -137,12 +139,7 @@ namespace vcs_ImageProcessingA_speed
             // Arrange image data for saving
             var data = new byte[stride * bmpData.Height];
             // Copy Bitmap data
-            System.Runtime.InteropServices.Marshal.Copy(
-            bmpData.Scan0,
-            data,
-            0,
-            stride * bmpData.Height
-            );
+            Marshal.Copy(bmpData.Scan0, data, 0, stride * bmpData.Height);
             byte r, g, b;
             int lineIndex = 0;
             for (int y = 0; y < H; y++)
@@ -161,12 +158,7 @@ namespace vcs_ImageProcessingA_speed
                 lineIndex += stride;
             }
             // Copy the arrangement as Bitmap data
-            System.Runtime.InteropServices.Marshal.Copy(
-            data,
-            0,
-            bmpData.Scan0,
-            stride * bmpData.Height
-            );
+            Marshal.Copy(data, 0, bmpData.Scan0, stride * bmpData.Height);
             // Unlock
             bmp.UnlockBits(bmpData);
         }
@@ -180,11 +172,7 @@ namespace vcs_ImageProcessingA_speed
             var W = bmp.Width;
             var H = bmp.Height;
             // Lock the Bitmap
-            var bmpData = bmp.LockBits(
-            new Rectangle(0, 0, W, H),
-            System.Drawing.Imaging.ImageLockMode.ReadWrite,
-            bmp.PixelFormat
-            );
+            var bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
             // Obtain Bytes of memory width
             var stride = Math.Abs(bmpData.Stride);
             byte r, g, b;
@@ -195,13 +183,13 @@ namespace vcs_ImageProcessingA_speed
                 for (int x = 0; x < W * 3; x += 3)
                 {
                     // Obtain brightness value
-                    r = System.Runtime.InteropServices.Marshal.ReadByte(ptr, lineIndex + x + 2);
-                    g = System.Runtime.InteropServices.Marshal.ReadByte(ptr, lineIndex + x + 1);
-                    b = System.Runtime.InteropServices.Marshal.ReadByte(ptr, lineIndex + x);
+                    r = Marshal.ReadByte(ptr, lineIndex + x + 2);
+                    g = Marshal.ReadByte(ptr, lineIndex + x + 1);
+                    b = Marshal.ReadByte(ptr, lineIndex + x);
                     // Set up brightness value
-                    System.Runtime.InteropServices.Marshal.WriteByte(ptr, lineIndex + x + 2, (byte)(255 - r));
-                    System.Runtime.InteropServices.Marshal.WriteByte(ptr, lineIndex + x + 1, (byte)(255 - g));
-                    System.Runtime.InteropServices.Marshal.WriteByte(ptr, lineIndex + x, (byte)(255 - b));
+                    Marshal.WriteByte(ptr, lineIndex + x + 2, (byte)(255 - r));
+                    Marshal.WriteByte(ptr, lineIndex + x + 1, (byte)(255 - g));
+                    Marshal.WriteByte(ptr, lineIndex + x, (byte)(255 - b));
                 }
                 lineIndex += stride;
             }
@@ -218,11 +206,7 @@ namespace vcs_ImageProcessingA_speed
             var W = bmp.Width;
             var H = bmp.Height;
             // Bitmap Lock
-            var bmpData = bmp.LockBits(
-            new Rectangle(0, 0, W, H),
-            System.Drawing.Imaging.ImageLockMode.ReadWrite,
-            bmp.PixelFormat
-            );
+            var bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
             // Obtain Bytes of memory width
             var stride = Math.Abs(bmpData.Stride);
             unsafe
@@ -265,11 +249,7 @@ namespace vcs_ImageProcessingA_speed
             var W = bmp.Width;
             var H = bmp.Height;
             // Bitmap Lock
-            var bmpData = bmp.LockBits(
-            new Rectangle(0, 0, W, H),
-            System.Drawing.Imaging.ImageLockMode.ReadWrite,
-            bmp.PixelFormat
-            );
+            var bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
             // Obtain Bytes of memory width
             var stride = Math.Abs(bmpData.Stride);
             unsafe
@@ -348,4 +328,3 @@ namespace vcs_ImageProcessingA_speed
         }
     }
 }
-

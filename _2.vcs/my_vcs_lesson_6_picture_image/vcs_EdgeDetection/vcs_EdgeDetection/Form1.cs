@@ -9,12 +9,14 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for BitmapData
 using System.Runtime.InteropServices;   //for Marshal
+using System.Diagnostics;   //for Stopwatch
 
 namespace vcs_EdgeDetection
 {
     public partial class Form1 : Form
     {
         string filename = @"C:\______test_files\naruto.jpg";
+        Stopwatch sw = new Stopwatch();
 
         public Form1()
         {
@@ -29,60 +31,92 @@ namespace vcs_EdgeDetection
         private void button1_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
             Bitmap bitmap2 = Roberts(bitmap1);
+            sw.Stop();
             pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Roberts 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
             Bitmap bitmap2 = Sobel(bitmap1);
+            sw.Stop();
             pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Sobel 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
             Bitmap bitmap2 = Laplace4(bitmap1);
             Bitmap bitmap3 = Laplace8(bitmap1);
+            sw.Stop();
 
             pictureBox1.Image = bitmap2;
             pictureBox1.Image = bitmap3;
+            richTextBox1.Text += "Laplace 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
             Bitmap bitmap2 = RightBottomEdge(bitmap1);
+            sw.Stop();
             pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "RightBottomEdge 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
             Bitmap bitmap2 = Prewitt(bitmap1);
+            sw.Stop();
             pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Prewitt 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
             Bitmap bitmap2 = Robinson(bitmap1);
+            sw.Stop();
             pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Robinson 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
             Bitmap bitmap2 = Kirsch(bitmap1);
+            sw.Stop();
             pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Kirsch 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
             Bitmap bitmap2 = Smoothed(bitmap1);
+            sw.Stop();
             pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Smoothed 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
 
 

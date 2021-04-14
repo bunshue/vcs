@@ -5,9 +5,7 @@ using System.Text;
 using WebCam_Capture;
 using System.Collections.Generic;
 
-
-
-namespace WinFormCharpWebCam
+namespace vcs_WebCam_Capture
 {
     //Design by Pongsakorn Poosankam
     class WebCam
@@ -58,6 +56,5 @@ namespace WinFormCharpWebCam
         {
             webcam.Config2();
         }
-
     }
 }
