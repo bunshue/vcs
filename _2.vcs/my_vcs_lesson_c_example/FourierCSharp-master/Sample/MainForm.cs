@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Numerics;  // System.Numericsへの参照が必要
 
 namespace FourierTransform
@@ -30,7 +31,7 @@ namespace FourierTransform
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "CSV(*.csv;*.htm)|*.csv";
-            ofd.InitialDirectory = Application.StartupPath;
+            ofd.InitialDirectory = Path.Combine(Application.StartupPath, @"..\..\csv");
 
             if (ofd.ShowDialog() == DialogResult.Cancel) return;
 

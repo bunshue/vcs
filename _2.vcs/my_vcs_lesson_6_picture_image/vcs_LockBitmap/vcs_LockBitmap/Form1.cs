@@ -23,6 +23,9 @@ namespace vcs_LockBitmap
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "内存法\t";
+            Application.DoEvents();
+
             //内存法
             //定义一个类LockBitmap，通过把Bitmap数据拷贝出来，在内存上直接操作，操作完成后在拷贝到Bitmap中
 
@@ -47,15 +50,18 @@ namespace vcs_LockBitmap
             lockBitmap.UnlockBits();    //从内存解锁Bitmap
             Benchmark.End();
             double seconds = Benchmark.GetSeconds();
-            richTextBox1.Text += "time = " + seconds.ToString() + " seconds\n";
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", seconds.ToString()) + "\tsec\n";
 
             string filename_png = Application.StartupPath + "\\png_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
             bmp.Save(filename_png);
-
+            pictureBox1.Image = bmp;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "指針法\t";
+            Application.DoEvents();
+
             //指針法
             Bitmap bmp = (Bitmap)Image.FromFile(filename);
             Benchmark.Start();
@@ -77,11 +83,11 @@ namespace vcs_LockBitmap
             lockBitmap.UnlockBits();    //从内存解锁Bitmap
             Benchmark.End();
             double seconds = Benchmark.GetSeconds();
-            richTextBox1.Text += "time = " + seconds.ToString() + " seconds\n";
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", seconds.ToString()) + "\tsec\n";
 
             string filename_png = Application.StartupPath + "\\png_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
             bmp.Save(filename_png);
-
+            pictureBox1.Image = bmp;
         }
     }
 

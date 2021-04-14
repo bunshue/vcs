@@ -9,13 +9,16 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //BitmapData
 using System.Runtime.InteropServices;   //for Marshal
+using System.Diagnostics;   //for Stopwatch
 
 namespace vcs_BitmapData
 {
     public partial class Form1 : Form
     {
-        string filename = "c:\\______test_files\\ims_image.bmp";
+        string filename = "c:\\______test_files\\doraemon.jpg";
         //string filename = "c:\\______test_files\\pic_256X100.bmp";
+
+        Stopwatch sw = new Stopwatch();
 
         public Form1()
         {
@@ -29,6 +32,9 @@ namespace vcs_BitmapData
 
         private void button1_Click(object sender, EventArgs e)
         {
+            sw.Reset();
+            sw.Start();
+
             int i;
             Bitmap bmp = new Bitmap(filename);
 
@@ -60,7 +66,8 @@ namespace vcs_BitmapData
             richTextBox1.Text += "\n\n\n";
             */
 
-            for (i = 0; i < len; i += 4)
+            ////jpg檔要加 3, bmp檔要加4
+            for (i = 0; i < len; i += 3)
             {
                 /*
                 //只存紅
@@ -103,10 +110,15 @@ namespace vcs_BitmapData
             bmp.UnlockBits(bmpData);        // Unlock the bits.
 
             pictureBox1.Image = bmp;
+            sw.Stop();
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            sw.Reset();
+            sw.Start();
+
             int i;
             int j;
             Bitmap bmp = new Bitmap(filename);
@@ -124,7 +136,7 @@ namespace vcs_BitmapData
             {
                 byte* ptr = (byte*)(bmpData.Scan0);
 
-                richTextBox1.Text += "W = " + W.ToString() + "\n";
+                //richTextBox1.Text += "W = " + W.ToString() + "\n";
                 for (j = 0; j < H; j++)
                 {
                     for (i = 0; i < W; i++)
@@ -171,7 +183,7 @@ namespace vcs_BitmapData
                         *(ptr + 2) = avg;     //每個點的R改成三色平均
                         //*(ptr + 3) = 0;     //每個點的A改成三色平均
 
-                        ptr += 4;
+                        ptr += 3;   //jpg檔要加 3, bmp檔要加4
                     }
                 }
                 //richTextBox1.Text += "\n\n\n";
@@ -179,6 +191,8 @@ namespace vcs_BitmapData
                 bmp.UnlockBits(bmpData);        // Unlock the bits.
 
                 pictureBox1.Image = bmp;
+                sw.Stop();
+                richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
             }
             //毫無疑問，採用這種方式是最快的，所以在實際工程中都是採用指針的方式來訪問圖像像素的。
         }
