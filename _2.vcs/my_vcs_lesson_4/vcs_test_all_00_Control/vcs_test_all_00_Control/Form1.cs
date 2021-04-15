@@ -338,7 +338,7 @@ namespace vcs_test_all_00_Control
             e.Graphics.DrawLine(Pens.Red, e.Graphics.MeasureString(groupBox1.Text, groupBox1.Font).Width + 8, 7, groupBox1.Width - 2, 7);
             e.Graphics.DrawLine(Pens.Red, 1, 7, 1, groupBox1.Height - 2);
             e.Graphics.DrawLine(Pens.Red, 1, groupBox1.Height - 2, groupBox1.Width - 2, groupBox1.Height - 2);
-            e.Graphics.DrawLine(Pens.Red, groupBox1.Width - 2, 7, groupBox1.Width - 2, groupBox1.Height - 2); 
+            e.Graphics.DrawLine(Pens.Red, groupBox1.Width - 2, 7, groupBox1.Width - 2, groupBox1.Height - 2);
         }
 
         private void button14_MouseMove(object sender, MouseEventArgs e)
@@ -637,9 +637,17 @@ namespace vcs_test_all_00_Control
             AboutForm form = new AboutForm();
 
             form.ShowDialog();
-
         }
 
+        private void button38_Click(object sender, EventArgs e)
+        {
+            MainForm.Instance().ShowForm();//顯示訊息表單
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            MainForm.Instance().CloseForm();//隱藏訊息表單
+        }
     }
 
     class MyRecordControlClass
@@ -794,10 +802,4 @@ namespace vcs_test_all_00_Control
             }
         }
     }
-
-
-
-
-
-
 }

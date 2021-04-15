@@ -477,7 +477,17 @@ namespace vcs_test_all_09_Form
 
         private void button29_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "xxx\n";
+            if (button29.Text == "閃爍外框")
+            {
+                button29.Text = "停止閃爍外框";
+                timer1.Enabled = true;
+
+            }
+            else
+            {
+                button29.Text = "閃爍外框";
+                timer1.Enabled = false;
+            }
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -667,6 +677,15 @@ namespace vcs_test_all_09_Form
         {
             AnimateWindow(this.Handle, 300, AW_SLIDE + AW_VER_NEGATIVE + AW_HIDE);
         }
+
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern bool FlashWindow(IntPtr handle, bool bInvert);
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            FlashWindow(this.Handle, true);
+        }
+
     }
 }
 
