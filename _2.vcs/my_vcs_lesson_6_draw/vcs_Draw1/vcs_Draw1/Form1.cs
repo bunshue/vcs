@@ -48,6 +48,20 @@ namespace vcs_Draw1
             draw_gradient_color();
         }
 
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            int x_st = this.ClientRectangle.X;
+            int y_st = this.ClientRectangle.Y;
+            int W = this.ClientRectangle.Width;
+            int H = this.ClientRectangle.Height;
+
+            e.Graphics.FillRectangle(new SolidBrush(Color.White), x_st, y_st, W, H);
+
+            e.Graphics.DrawEllipse(new Pen(Color.Green, 10), x_st + W - 500, y_st + H - 150, 300, 100);
+
+            e.Graphics.DrawString("OnPaintBackground", new Font("標楷體", 30), new SolidBrush(Color.Red), x_st + W - 530, y_st + H - 120);
+        }
+
         void show_item_location()
         {
             int x_st;

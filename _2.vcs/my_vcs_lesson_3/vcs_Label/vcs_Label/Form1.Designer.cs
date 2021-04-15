@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label4 = new System.Windows.Forms.Label();
             this.lblRotated3 = new System.Windows.Forms.Label();
             this.lblRotated2 = new System.Windows.Forms.Label();
@@ -37,6 +38,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label_AutoSizeFalse = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.lb_moving = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label4
@@ -124,11 +127,28 @@
             this.label5.Text = "Label Fixed3D + TextAlign置中";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lb_moving
+            // 
+            this.lb_moving.AutoSize = true;
+            this.lb_moving.Font = new System.Drawing.Font("標楷體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_moving.Location = new System.Drawing.Point(473, 577);
+            this.lb_moving.Name = "lb_moving";
+            this.lb_moving.Size = new System.Drawing.Size(1167, 35);
+            this.lb_moving.TabIndex = 23;
+            this.lb_moving.Text = "青山隱隱水迢迢，秋盡江南草未凋。二十四橋明月夜，玉人何處教吹簫。";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 150;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 567);
+            this.ClientSize = new System.Drawing.Size(764, 628);
+            this.Controls.Add(this.lb_moving);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label_AutoSizeFalse);
             this.Controls.Add(this.label4);
@@ -158,6 +178,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_AutoSizeFalse;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lb_moving;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

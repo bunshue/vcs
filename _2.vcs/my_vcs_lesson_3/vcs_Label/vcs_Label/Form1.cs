@@ -63,5 +63,14 @@ namespace vcs_Label
             // Draw the text.
             gr.DrawString(txt, font, brush, rotated_bounds, string_format);
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lb_moving.Left -= 2;
+            if (lb_moving.Right < 0)
+            {
+                lb_moving.Left = this.Width;
+            }
+        }
     }
 }
