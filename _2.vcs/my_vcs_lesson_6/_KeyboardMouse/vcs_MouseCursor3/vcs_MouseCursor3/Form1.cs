@@ -57,7 +57,7 @@ namespace vcs_MouseCursor3
             }
             else
             {
-                this.Text = "滑鼠";
+                this.Text = "其他按鍵";
             }
         }
 
@@ -73,6 +73,11 @@ namespace vcs_MouseCursor3
             {
                 this.Text = "滑鼠左鍵";
                 mouse_event(MOUSEEVENTF_MOVE, 0, -20, 0, 0);
+            }
+            else if (e.Button == MouseButtons.Middle)
+            {
+                this.Text = "滑鼠中鍵";
+                mouse_event(MOUSEEVENTF_MOVE, -20, 0, 0, 0);
             }
             else
             {
