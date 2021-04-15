@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
 using Emgu.CV;
-using Emgu.CV.UI;
 using Emgu.CV.Structure;
-using Emgu.CV.CvEnum;
 using Emgu.Util;
 
 namespace CameraCapture0n
@@ -67,6 +64,7 @@ namespace CameraCapture0n
                     button1.Text = "開啟Webcam";
                     flag_webcam_ok = false;
                     Application.Idle -= Application_Idle;
+                    pictureBox1.Image = null;
                 }
             }
         }

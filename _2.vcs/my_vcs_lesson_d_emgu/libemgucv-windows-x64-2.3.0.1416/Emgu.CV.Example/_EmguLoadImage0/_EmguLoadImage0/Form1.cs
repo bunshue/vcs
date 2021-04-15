@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +13,7 @@ using Emgu.CV.Structure;
 using Emgu.Util;
 using Emgu.CV.CvEnum;
 
-namespace _EmguLoadImage
+namespace _EmguLoadImage0
 {
     public partial class Form1 : Form
     {
@@ -31,15 +31,15 @@ namespace _EmguLoadImage
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "¥ÎOpenCV¶}±Ò¤@­Ó¹ÏÀÉ\n";
+            richTextBox1.Text += "ç”¨OpenCVé–‹å•Ÿä¸€å€‹åœ–æª”\n";
             IntPtr inputImage = CvInvoke.cvLoadImage(filename, LOAD_IMAGE_TYPE.CV_LOAD_IMAGE_COLOR);
             CvInvoke.cvShowImage("IntPtr", inputImage);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "¥ÎOpenCV¶}±Ò¤@­Ó¹ÏÀÉ\n";
-            //EmguCV ¼v¹³®æ¦¡ Image<Bgr, Byte>: a wrapper to IplImage of OpenCV
+            richTextBox1.Text += "ç”¨OpenCVé–‹å•Ÿä¸€å€‹åœ–æª”\n";
+            //EmguCV å½±åƒæ ¼å¼ Image<Bgr, Byte>: a wrapper to IplImage of OpenCV
             Image<Bgr, Byte> image = new Image<Bgr, byte>(filename);
             CvInvoke.cvShowImage("Image<Bgr, Byte>", image);
 
@@ -53,11 +53,11 @@ namespace _EmguLoadImage
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "¥ÎOpenCV¶}±Ò¤@­Ó¹ÏÀÉ¡A¨ÃÂà¦¨¦Ç¶¥¼v¹³®æ¦¡\n";
-            //EmguCV ¼v¹³®æ¦¡ Image<Gray, Byte>: «Å§i¤@­ÓEmguCV¦Ç¶¥¼v¹³®æ¦¡
-            Image<Gray, Byte> image = new Image<Gray, byte>(filename);     //±m¦â·|¦Û°ÊÂà¦Ç¶¥
+            richTextBox1.Text += "ç”¨OpenCVé–‹å•Ÿä¸€å€‹åœ–æª”ï¼Œä¸¦è½‰æˆç°éšå½±åƒæ ¼å¼\n";
+            //EmguCV å½±åƒæ ¼å¼ Image<Gray, Byte>: å®£å‘Šä¸€å€‹EmguCVç°éšå½±åƒæ ¼å¼
+            Image<Gray, Byte> image = new Image<Gray, byte>(filename);     //å½©è‰²æœƒè‡ªå‹•è½‰ç°éš
             CvInvoke.cvShowImage("Image<Gray, Byte>", image);
-            //¤º«Ø§PÂ_, ª½±µ¦Û°Ê±N¿é¤J±m¦âªº·Ó¤ùÂà¦¨¦Ç¶¥
+            //å…§å»ºåˆ¤æ–·, ç›´æ¥è‡ªå‹•å°‡è¼¸å…¥å½©è‰²çš„ç…§ç‰‡è½‰æˆç°éš
 
             //same
             /*
@@ -69,8 +69,8 @@ namespace _EmguLoadImage
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "±NPictureBox.ImageÂà«¬Bitmpap¥áµ¹Image\n";
-            //¿é¤JPictureBox Åª¤J¼v¹³, ±NPictureBox.ImageÂà«¬Bitmpap¥áµ¹Image<Bgr, Byte>
+            richTextBox1.Text += "å°‡PictureBox.Imageè½‰å‹Bitmpapä¸Ÿçµ¦Image\n";
+            //è¼¸å…¥PictureBox è®€å…¥å½±åƒ, å°‡PictureBox.Imageè½‰å‹Bitmpapä¸Ÿçµ¦Image<Bgr, Byte>
             pictureBox1.Load(filename);
             Image<Bgr, Byte> image = new Image<Bgr, Byte>((Bitmap)(pictureBox1.Image));
             CvInvoke.cvShowImage("Image<Bgr, Byte>", image);
@@ -78,23 +78,23 @@ namespace _EmguLoadImage
 
         private void button5_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "¶}±Ò¤@±iªÅªº¼v¹³(¶Â©³), ¤j¤p¬° 640 X 480\n";
+            richTextBox1.Text += "é–‹å•Ÿä¸€å¼µç©ºçš„å½±åƒ(é»‘åº•), å¤§å°ç‚º 640 X 480\n";
             Image<Gray, Byte> image = new Image<Gray, byte>(new Size(640, 480));
             pictureBox1.Image = image.ToBitmap();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "¦Û¤v©w¸q¤@¶ô¼v¹³¤j¤p©M¹³¯À­È, ¤j¤p¬° 640 X 480\n";
-            Image<Bgr, Byte> image = new Image<Bgr, byte>(640, 480, new Bgr(255, 0, 255)); //¦Û©w¸qÃC¦â
-            //Image<Bgr, Byte> image = new Image<Bgr, byte>(new Size(640, 480));    //¶Â¦â
+            richTextBox1.Text += "è‡ªå·±å®šç¾©ä¸€å¡Šå½±åƒå¤§å°å’Œåƒç´ å€¼, å¤§å°ç‚º 640 X 480\n";
+            Image<Bgr, Byte> image = new Image<Bgr, byte>(640, 480, new Bgr(255, 0, 255)); //è‡ªå®šç¾©é¡è‰²
+            //Image<Bgr, Byte> image = new Image<Bgr, byte>(new Size(640, 480));    //é»‘è‰²
 
             pictureBox1.Image = image.ToBitmap();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "§Q¥ÎBitmapÅª¤J¤@±i¹Ï¤ù, ¨Ã¶Çµ¹Image<Bgr, Byte>¼v¹³®æ¦¡\n";
+            richTextBox1.Text += "åˆ©ç”¨Bitmapè®€å…¥ä¸€å¼µåœ–ç‰‡, ä¸¦å‚³çµ¦Image<Bgr, Byte>å½±åƒæ ¼å¼\n";
             Bitmap bmp = new Bitmap(filename);
             System.Drawing.Imaging.BitmapData bd;
             bd = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height),
@@ -107,7 +107,7 @@ namespace _EmguLoadImage
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //¦Ç¶¥0->255
+            //ç°éš0->255
             for (int i = 0; i < 256; i++)
             {
                 Image<Gray, Byte> image = new Image<Gray, byte>(640, 480, new Gray(i));
@@ -120,7 +120,7 @@ namespace _EmguLoadImage
 
         private void button9_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "¥ÎImageÃş§O¶}±Ò¤@¹ÏÀÉ¦Üpicturebox\n";
+            richTextBox1.Text += "ç”¨Imageé¡åˆ¥é–‹å•Ÿä¸€åœ–æª”è‡³picturebox\n";
             Image<Bgr, byte> img;
             img = new Image<Bgr, byte>(filename);
             //imageBox1.Image = img;
@@ -129,7 +129,7 @@ namespace _EmguLoadImage
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //¦UºØImageÃş§O³B²z
+            //å„ç¨®Imageé¡åˆ¥è™•ç†
             Bitmap bitmap1 = new Bitmap(filename);
             TestRun(bitmap1);
         }
@@ -138,11 +138,11 @@ namespace _EmguLoadImage
         {
             int W = bitmap.Width;
             int H = bitmap.Height;
-            Image<Bgr, Byte> img = new Image<Bgr, Byte>(bitmap);    //­ì¹Ï
-            Image<Gray, Byte> gray = img.Convert<Gray, Byte>().PyrDown().PyrUp();   //­ì¹ÏÂà¦Ç¶¥
-            Image<Gray, Byte> gray1 = gray.ThresholdToZero(new Gray(100));      //¦Ç¶¥Âà¤G­È¤Æ
+            Image<Bgr, Byte> img = new Image<Bgr, Byte>(bitmap);    //åŸåœ–
+            Image<Gray, Byte> gray = img.Convert<Gray, Byte>().PyrDown().PyrUp();   //åŸåœ–è½‰ç°éš
+            Image<Gray, Byte> gray1 = gray.ThresholdToZero(new Gray(100));      //ç°éšè½‰äºŒå€¼åŒ–
             //http://www.cnblogs.com/xrwang/archive/2010/03/03/ImageFeatureDetection.html.
-            Image<Gray, Byte> gray2 = gray1.Canny(new Gray(150), new Gray(200));    //¤G­È¤ÆÂàCannyÃä½tÀË´ú
+            Image<Gray, Byte> gray2 = gray1.Canny(new Gray(150), new Gray(200));    //äºŒå€¼åŒ–è½‰Cannyé‚Šç·£æª¢æ¸¬
 
             Bitmap image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             using (Graphics g = Graphics.FromImage(image))
@@ -166,6 +166,5 @@ namespace _EmguLoadImage
             }
             pictureBox1.Image = image;
         }
-
     }
 }

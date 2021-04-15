@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,12 +10,12 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
 
-namespace CameraCapture
+namespace CameraCapture1n
 {
     public partial class Form1 : Form
     {
-        private Capture cap = null;             // Webcamª«¥ó
-        private bool flag_webcam_ok = false;    //§PÂ_¬O§_±Ò°ÊwebcamªººX¼Ğ
+        private Capture cap = null;             // Webcamç‰©ä»¶
+        private bool flag_webcam_ok = false;    //åˆ¤æ–·æ˜¯å¦å•Ÿå‹•webcamçš„æ——æ¨™
 
         Emgu.CV.UI.ImageBox ib1 = new Emgu.CV.UI.ImageBox();
         Emgu.CV.UI.ImageBox ib2 = new Emgu.CV.UI.ImageBox();
@@ -61,7 +61,7 @@ namespace CameraCapture
             ib4.Size = new Size(w, h);
             this.Controls.Add(ib4);
 
-            //°ÊºA²£¥Í¤¸¥ó¨Ã«ü©wÄİ©Ê»P¨Æ¥ó
+            //å‹•æ…‹ç”¢ç”Ÿå…ƒä»¶ä¸¦æŒ‡å®šå±¬æ€§èˆ‡äº‹ä»¶
             for (int i = 0; i < camera_function.Length; i++)
             {
                 camera_function[i] = new Label();
@@ -82,14 +82,14 @@ namespace CameraCapture
 
         private void Application_Idle(object sender, EventArgs arg)
         {
-            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam ªºµe­±
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam çš„ç•«é¢
 
-            Image<Gray, Byte> grayFrame = image.Convert<Gray, Byte>();      //±m¦âÂà¦Ç¶¥
+            Image<Gray, Byte> grayFrame = image.Convert<Gray, Byte>();      //å½©è‰²è½‰ç°éš
             Image<Gray, Byte> smallGrayFrame = grayFrame.PyrDown();
             Image<Gray, Byte> smoothedGrayFrame = smallGrayFrame.PyrUp();
             Image<Gray, Byte> cannyFrame = smoothedGrayFrame.Canny(new Gray(100), new Gray(60));
 
-            pictureBox1.Image = cannyFrame.ToBitmap(); // §âµe­±Âà´«¦¨bitmap«¬ºA¡A¦A¥áµ¹pictureBox¤¸¥ó
+            pictureBox1.Image = cannyFrame.ToBitmap(); // æŠŠç•«é¢è½‰æ›æˆbitmapå‹æ…‹ï¼Œå†ä¸Ÿçµ¦pictureBoxå…ƒä»¶
             ib1.Image = image;
             ib2.Image = grayFrame;
             ib3.Image = smoothedGrayFrame;
@@ -122,7 +122,7 @@ namespace CameraCapture
             {
                 if (flag_webcam_ok == false)
                 {
-                    button1.Text = "Ãö³¬Webcam";
+                    button1.Text = "é—œé–‰Webcam";
                     flag_webcam_ok = true;
                     Application.Idle += Application_Idle;
 
@@ -133,7 +133,7 @@ namespace CameraCapture
                 }
                 else
                 {
-                    button1.Text = "¶}±ÒWebcam";
+                    button1.Text = "é–‹å•ŸWebcam";
                     flag_webcam_ok = false;
                     Application.Idle -= Application_Idle;
 
@@ -168,4 +168,3 @@ namespace CameraCapture
         }
     }
 }
-

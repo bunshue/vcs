@@ -1,0 +1,22 @@
+重製專案的方法_Sugar
+
+1. 新建專案
+開啟 CameraCapture0n.csproj
+把
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+改成
+	<PlatformTarget>x64</PlatformTarget>
+
+2. 到 C:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x64-2.3.0.1416\bin 拷貝5個dll到dll子目錄
+
+3. 專案/參考/加入參考, 選擇Emgu那3個dll
+
+4. 專案/加入/現有項目, 選擇opencv那2個dll, 屬性之"複製到輸出目錄" 改成 "有更新時才複製"
+
+5. 編輯檔案
+
+
+
+
+
