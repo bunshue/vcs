@@ -174,7 +174,7 @@ namespace vcs_Remove_Bin_Obj
                     {
                         continue;
                     }
-                    else if (folder_name[i].Contains("libemgucv"))
+                    else if ((folder_name[i].Contains("libemgucv")) && (!folder_name[i].Contains("Emgu.CV.Example")))
                     {
                         continue;
                     }

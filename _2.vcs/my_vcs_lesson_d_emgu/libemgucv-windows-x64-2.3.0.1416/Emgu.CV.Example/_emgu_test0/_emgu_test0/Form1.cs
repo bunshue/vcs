@@ -17,6 +17,8 @@ namespace _emgu_test0
     {
         string filename = @"C:\______test_files\picture1.jpg";
 
+        Emgu.CV.UI.ImageBox ibox = new Emgu.CV.UI.ImageBox();
+
         public Form1()
         {
             InitializeComponent();
@@ -24,7 +26,48 @@ namespace _emgu_test0
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            int W = 640;
+            int H = 480;
+            int w = W / 2;
+            int h = H / 2;
+            int dx = w + 50;
+            int dy = h + 50;
+            int x_st = 700;
+            int y_st = 12;
+
+            ibox.SizeMode = PictureBoxSizeMode.Zoom;
+            ibox.Location = new Point(x_st, y_st);
+            ibox.Size = new Size(w, h);
+            this.Controls.Add(ibox);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 130;
+            dy = 50;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -53,23 +96,6 @@ namespace _emgu_test0
             //Bitmap bmp = new Bitmap(@"C:\______test_files\picture1.jpg");
 
 
-
-            /*
-
-            //Bitmap 轉成 Image
-            Image<Bgr, Byte> image = new Image<Rgb, Byte>(bmp);
-
-            //Image(RGB) 轉成 Image(Gray), 彩色轉成灰階
-            Image<Gray, Byte> gimage = image.Convert<Gray, Byte>();
-
-
-            //灰階轉成彩色
-            Image<Rgb, Byte> newimage = gimage.Convert<Rgb, Byte>();
-
-            //Image 轉成 Bitmap
-            Bitmap result = image.ToBitmap();
-
-            */
 
             richTextBox1.Text += "建立一張灰階圖到Image裏\n";
             Image<Gray, Byte> img1 = new Image<Gray, Byte>(480, 320);
@@ -267,21 +293,49 @@ namespace _emgu_test0
 
         private void button9_Click(object sender, EventArgs e)
         {
+            Bitmap bmp = new Bitmap(filename);
 
+            //Bitmap 轉成 Image
+            Image<Bgr, Byte> image = new Image<Bgr, Byte>(bmp);
+
+            pictureBox1.Image = image.ToBitmap();
+
+            //Image(RGB) 轉成 Image(Gray), 彩色轉成灰階
+            Image<Gray, Byte> gimage = image.Convert<Gray, Byte>();
+
+            pictureBox1.Image = gimage.ToBitmap();
+
+            //灰階轉成彩色
+            Image<Rgb, Byte> newimage = gimage.Convert<Rgb, Byte>();
+
+            pictureBox1.Image = newimage.ToBitmap();
+
+            //Image 轉成 Bitmap
+            Bitmap result = image.ToBitmap();
+            pictureBox1.Image = result;
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //test
+            //使用ImageBox
             Bitmap bmp = new Bitmap(filename);
 
-            //傳檔名或傳Bitmap都可以
-            Image<Bgr, Byte> img1 = new Image<Bgr, Byte>(bmp);
-            Image<Bgr, Byte> img2 = new Image<Bgr, Byte>(filename); //same
-            
-            pictureBox1.Image = img2.ToBitmap();
+            //Bitmap 轉成 Image
+            Image<Bgr, Byte> image = new Image<Bgr, Byte>(bmp);
+
+            ibox.Image = image;
+            //pictureBox1.Image = image.ToBitmap();
+
 
         }
 
     }
 }
+
+/*
+            Bitmap bmp = new Bitmap(filename);
+
+            //傳檔名或傳Bitmap都可以
+            Image<Bgr, Byte> img1 = new Image<Bgr, Byte>(bmp);
+            Image<Bgr, Byte> img2 = new Image<Bgr, Byte>(filename); //same
+*/

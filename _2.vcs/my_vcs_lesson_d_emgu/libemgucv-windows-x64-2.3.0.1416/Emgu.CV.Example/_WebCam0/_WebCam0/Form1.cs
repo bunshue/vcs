@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
 using Emgu.CV;
 using Emgu.CV.Structure;
+using Emgu.Util;
 
-namespace vcs_WebCam_Emgu0
+namespace _WebCam0
 {
     public partial class Form1 : Form
     {
@@ -22,20 +22,17 @@ namespace vcs_WebCam_Emgu0
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         void Application_Idle(object sender, EventArgs e)
         {
             Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
             pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
+
+            /*  其他處理
+            Image<Gray, Byte> grayFrame = image.Convert<Gray, Byte>();      //彩色轉灰階
+            Image<Gray, Byte> smallGrayFrame = grayFrame.PyrDown();
+            Image<Gray, Byte> smoothedGrayFrame = smallGrayFrame.PyrUp();
+            Image<Gray, Byte> cannyFrame = smoothedGrayFrame.Canny(new Gray(100), new Gray(60));
+            */
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -88,16 +85,6 @@ namespace vcs_WebCam_Emgu0
                 cap.Dispose();
                 cap = null;
             }
-        }
-
-        //關閉程式
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            if (cap != null)
-            {
-                cap.Dispose();
-            }
-            Application.Exit();
         }
     }
 }
