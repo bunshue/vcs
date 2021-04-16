@@ -265,6 +265,20 @@ namespace vcs_WebCam_Emgu1
             richTextBox1.Text += "NumberOfChannels = " + image.NumberOfChannels.ToString() + "\n";
             richTextBox1.Text += "ROI = " + image.ROI.ToString() + "\n";
 
+            double W;
+            double H;
+            double frame_count;
+            double fps;
+
+            W = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
+            H = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
+            frame_count = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+            fps = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
+
+            richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
+            richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
+            richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
+            richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
         }
     }
 }
