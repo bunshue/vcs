@@ -253,8 +253,17 @@ namespace _emgu_test0
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //灰階
+            richTextBox1.Text += "開啟一圖檔到Image裏\n";
+            Image<Bgr, Byte> img = new Image<Bgr, Byte>(filename);
+            pictureBox1.Image = img.ToBitmap();
 
+            //灰階, 需要 opencv_imgproc231.dll
+            Image<Gray, Byte> gray = img.Convert<Gray, Byte>().PyrDown().PyrUp();
+            pictureBox1.Image = gray.ToBitmap();
         }
+
+
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -263,6 +272,15 @@ namespace _emgu_test0
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //test
+            Bitmap bmp = new Bitmap(filename);
+
+            //傳檔名或傳Bitmap都可以
+            Image<Bgr, Byte> img1 = new Image<Bgr, Byte>(bmp);
+            Image<Bgr, Byte> img2 = new Image<Bgr, Byte>(filename); //same
+            
+            pictureBox1.Image = img2.ToBitmap();
+
         }
 
     }

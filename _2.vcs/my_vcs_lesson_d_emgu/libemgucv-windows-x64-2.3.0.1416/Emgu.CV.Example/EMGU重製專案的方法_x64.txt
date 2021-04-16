@@ -1,0 +1,48 @@
+EMGU重製專案的方法_x64
+
+取得 4個Emgu.XX.dll 與 3個opencv.XX.dll
+需把路徑指到C:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x64-2.3.0.1416\bin
+或者到此路徑把檔案拷貝出來
+
+1. 新建專案
+2. 開啟 *.csproj
+	把
+	  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+		<PlatformTarget>x86</PlatformTarget>
+	改成
+		<PlatformTarget>x64</PlatformTarget>
+
+3. 專案/參考/加入參考, 選擇Emgu那4個Emgu.XX.dll
+
+4. 專案/加入/現有項目, 選擇opencv那3個dll, 屬性之"複製到輸出目錄" 改成 "有更新時才複製"
+   
+5. 編輯Form1.cs
+
+4個Emgu.XX.dll
+
+Emgu.CV.dll
+Emgu.CV.ML.dll (不用也可以)
+Emgu.CV.UI.dll
+Emgu.Util.dll
+
+3個opencv.XX.dll
+opencv_core231.dll		(必要)
+opencv_highgui231.dll	(必要)
+opencv_imgproc231.dll	(做特別的影像處理才需要)
+
+CameraCapture1	要多 opencv_imgproc231.dll
+MotionDetection	要多 opencv_imgproc231.dll, opencv_video231.dll
+
+----------------------------------------------------------------------------------
+
+若是已有x64的專案，要在x86上運行，
+
+要改：
+1. 把*.csproj
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x64</PlatformTarget>
+改
+    <PlatformTarget>x86</PlatformTarget>
+
+2. 改 4個Emgu.XX.dll 與 3個opencv.XX.dll 的路徑
+

@@ -50,6 +50,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(120, 40);
             this.button10.TabIndex = 33;
+            this.button10.Text = "test";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -76,6 +77,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(120, 40);
             this.button8.TabIndex = 30;
+            this.button8.Text = "灰階";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
