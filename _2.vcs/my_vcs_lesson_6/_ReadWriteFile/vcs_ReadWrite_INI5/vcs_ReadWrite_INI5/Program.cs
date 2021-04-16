@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace MyWebCam
+namespace vcs_ReadWrite_INI5
 {
     static class Program
     {

@@ -19,6 +19,9 @@ namespace vcs_WebCam_Emgu0
         private bool flag_recording = false;    //判斷是否啟動錄影的旗標
         VideoWriter video;
 
+        private bool flag_interrupt_mode = true;    //true : 中斷模式, false : 輪詢模式
+        Timer timer1;   //準備給輪詢模式用
+
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +30,11 @@ namespace vcs_WebCam_Emgu0
         private void Form1_Load(object sender, EventArgs e)
         {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //宣告Timer 1秒執行一次
+            timer1 = new Timer();
+            timer1.Interval = 1000;
+            timer1.Tick += new EventHandler(TimerEventProcessor);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -42,43 +50,68 @@ namespace vcs_WebCam_Emgu0
             //錄影模式
             if (flag_recording == true)
             {
-                //將影格寫入影片中
-                video.WriteFrame<Bgr, byte>(image);
+                video.WriteFrame<Bgr, byte>(image); //將影格寫入影片中
+            }
+        }
+
+        private void TimerEventProcessor(object sender, EventArgs e)
+        {
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+            pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
+
+            //錄影模式
+            if (flag_recording == true)
+            {
+                video.WriteFrame<Bgr, byte>(image); //將影格寫入影片中
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (flag_webcam_ok == false)
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
             {
-                richTextBox1.Text += "開啟Webcam ......\n";
-                button1.Text = "關閉Webcam";
-                flag_webcam_ok = true;
+                try
+                {
+                    richTextBox1.Text += "開啟Webcam ......\n";
+                    button1.Text = "關閉Webcam";
+                    flag_webcam_ok = true;
 
-                cap = new Capture(0);   //預設使用第一台的webcam
-                //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
+                    cap = new Capture(0);   //預設使用第一台的webcam
+                    //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
 
-                //cap.FlipHorizontal = true;  //左右相反
-                //cap.FlipVertical = true;    //上下顛倒
+                    //cap.FlipHorizontal = true;  //左右相反
+                    //cap.FlipVertical = true;    //上下顛倒
 
-                richTextBox1.Text += "W = " + cap.Width.ToString() + ", ";
-                richTextBox1.Text += "H = " + cap.Height.ToString() + "\n";
+                    richTextBox1.Text += "W = " + cap.Width.ToString() + ", ";
+                    richTextBox1.Text += "H = " + cap.Height.ToString() + "\n";
 
-                Application.Idle += new EventHandler(Application_Idle); // 在Idle的event下，把畫面設定到pictureBox上
+                    if (flag_interrupt_mode == true)
+                    {
+                        Application.Idle += new EventHandler(Application_Idle); // 在Idle的event下，把畫面設定到pictureBox上
+                    }
+                    else
+                    {
+                        timer1.Start();
+                    }
 
-                //  information
-                double W;
-                double H;
-                double frame_count;
-                double fps;
-                W = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
-                H = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
-                frame_count = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-                fps = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
+                    //  information
+                    double W;
+                    double H;
+                    double frame_count;
+                    double fps;
+                    W = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
+                    H = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
+                    frame_count = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+                    fps = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
 
-                richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-                richTextBox1.Text += "frame_count = " + frame_count.ToString() + "\n";
-                richTextBox1.Text += "fps = " + fps.ToString() + "\n";
+                    richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+                    richTextBox1.Text += "frame_count = " + frame_count.ToString() + "\n";
+                    richTextBox1.Text += "fps = " + fps.ToString() + "\n";
+                }
+                catch (NullReferenceException excpt)
+                {
+                    MessageBox.Show(excpt.Message);
+                }
             }
             else
             {
@@ -87,7 +120,14 @@ namespace vcs_WebCam_Emgu0
                 flag_webcam_ok = false;
                 pictureBox1.Image = null;
 
-                Application.Idle -= new EventHandler(Application_Idle);
+                if (flag_interrupt_mode == true)
+                {
+                    Application.Idle -= new EventHandler(Application_Idle);
+                }
+                else
+                {
+                    timer1.Stop();
+                }
                 cap.Dispose();
                 cap = null;
             }
@@ -103,7 +143,14 @@ namespace vcs_WebCam_Emgu0
                 flag_recording = false;
                 video.Dispose();
                 richTextBox1.Text += "停止錄影\n";
-                Application.Idle -= Application_Idle;
+                if (flag_interrupt_mode == true)
+                {
+                    Application.Idle -= Application_Idle;
+                }
+                else
+                {
+                    timer1.Stop();
+                }
             }
 
             if (cap != null)
@@ -219,6 +266,5 @@ namespace vcs_WebCam_Emgu0
             richTextBox1.Text += "ROI = " + image.ROI.ToString() + "\n";
 
         }
-
     }
 }
