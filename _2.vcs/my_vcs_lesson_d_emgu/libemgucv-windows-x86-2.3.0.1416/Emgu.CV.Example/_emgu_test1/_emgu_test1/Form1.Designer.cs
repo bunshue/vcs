@@ -1,4 +1,4 @@
-﻿namespace _emgu_test0
+﻿namespace _emgu_test1
 {
     partial class Form1
     {
@@ -42,31 +42,21 @@
             this.button1 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(138, 14);
+            this.button10.Location = new System.Drawing.Point(12, 581);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(120, 40);
             this.button10.TabIndex = 33;
-            this.button10.Text = "使用ImageBox";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(812, 316);
+            this.richTextBox1.Location = new System.Drawing.Point(700, 328);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(386, 292);
             this.richTextBox1.TabIndex = 32;
@@ -74,41 +64,37 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(12, 455);
+            this.button9.Location = new System.Drawing.Point(12, 520);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(120, 40);
             this.button9.TabIndex = 31;
-            this.button9.Text = "各種轉換";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(12, 409);
+            this.button8.Location = new System.Drawing.Point(12, 458);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(120, 40);
             this.button8.TabIndex = 30;
-            this.button8.Text = "灰階";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(12, 363);
+            this.button7.Location = new System.Drawing.Point(12, 390);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(120, 40);
             this.button7.TabIndex = 29;
-            this.button7.Text = "讀取圖片檔案";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(12, 317);
+            this.button6.Location = new System.Drawing.Point(12, 328);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(120, 40);
             this.button6.TabIndex = 28;
-            this.button6.Text = "寫字";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -118,13 +104,12 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(120, 40);
             this.button5.TabIndex = 27;
-            this.button5.Text = "Matrix";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(282, 14);
+            this.pictureBox1.Location = new System.Drawing.Point(164, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(500, 608);
             this.pictureBox1.TabIndex = 26;
@@ -136,7 +121,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(120, 40);
             this.button4.TabIndex = 25;
-            this.button4.Text = "Not 操作";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -146,7 +130,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 40);
             this.button3.TabIndex = 24;
-            this.button3.Text = "對Image結構進行操作";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -156,7 +139,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 40);
             this.button2.TabIndex = 23;
-            this.button2.Text = "對像素進行直接操作";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -166,7 +148,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 40);
             this.button1.TabIndex = 22;
-            this.button1.Text = "使用Image結構";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -186,100 +167,15 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(120, 40);
             this.button0.TabIndex = 35;
-            this.button0.Text = "開啟cvShowImage";
+            this.button0.Text = "開啟新視窗";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(138, 60);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(120, 40);
-            this.button11.TabIndex = 36;
-            this.button11.Text = "用Image製作一圖";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(138, 111);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(120, 40);
-            this.button12.TabIndex = 37;
-            this.button12.Text = "從Image存檔";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(138, 164);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(120, 40);
-            this.button13.TabIndex = 38;
-            this.button13.UseVisualStyleBackColor = true;
-            // 
-            // button14
-            // 
-            this.button14.Location = new System.Drawing.Point(138, 218);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(120, 40);
-            this.button14.TabIndex = 39;
-            this.button14.UseVisualStyleBackColor = true;
-            // 
-            // button15
-            // 
-            this.button15.Location = new System.Drawing.Point(138, 264);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(120, 40);
-            this.button15.TabIndex = 40;
-            this.button15.UseVisualStyleBackColor = true;
-            // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(138, 317);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(120, 40);
-            this.button16.TabIndex = 41;
-            this.button16.UseVisualStyleBackColor = true;
-            // 
-            // button17
-            // 
-            this.button17.Location = new System.Drawing.Point(138, 363);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(120, 40);
-            this.button17.TabIndex = 42;
-            this.button17.UseVisualStyleBackColor = true;
-            // 
-            // button18
-            // 
-            this.button18.Location = new System.Drawing.Point(138, 409);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(120, 40);
-            this.button18.TabIndex = 43;
-            this.button18.UseVisualStyleBackColor = true;
-            // 
-            // button19
-            // 
-            this.button19.Location = new System.Drawing.Point(138, 455);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(120, 40);
-            this.button19.TabIndex = 44;
-            this.button19.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1244, 704);
-            this.Controls.Add(this.button19);
-            this.Controls.Add(this.button18);
-            this.Controls.Add(this.button17);
-            this.Controls.Add(this.button16);
-            this.Controls.Add(this.button15);
-            this.Controls.Add(this.button14);
-            this.Controls.Add(this.button13);
-            this.Controls.Add(this.button12);
-            this.Controls.Add(this.button11);
+            this.ClientSize = new System.Drawing.Size(1098, 704);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button10);
@@ -318,15 +214,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button19;
     }
 }
 

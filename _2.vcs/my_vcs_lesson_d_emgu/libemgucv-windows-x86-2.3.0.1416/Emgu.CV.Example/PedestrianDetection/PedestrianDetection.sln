@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedestrianDetection", "PedestrianDetection.csproj", "{7F6AA856-B9EF-4F86-BDD4-1D9DB596C8FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedestrianDetection", "PedestrianDetection\PedestrianDetection.csproj", "{06A64B31-39B0-4CEA-B914-059C45D9056E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7F6AA856-B9EF-4F86-BDD4-1D9DB596C8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F6AA856-B9EF-4F86-BDD4-1D9DB596C8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F6AA856-B9EF-4F86-BDD4-1D9DB596C8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F6AA856-B9EF-4F86-BDD4-1D9DB596C8FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06A64B31-39B0-4CEA-B914-059C45D9056E}.Debug|x86.ActiveCfg = Debug|x86
+		{06A64B31-39B0-4CEA-B914-059C45D9056E}.Debug|x86.Build.0 = Debug|x86
+		{06A64B31-39B0-4CEA-B914-059C45D9056E}.Release|x86.ActiveCfg = Release|x86
+		{06A64B31-39B0-4CEA-B914-059C45D9056E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

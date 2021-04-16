@@ -1,9 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
-using System.Runtime.InteropServices;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
+
+using System.Diagnostics;
+
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.UI;
@@ -11,22 +16,16 @@ using Emgu.CV.GPU;
 
 namespace FaceDetection
 {
-    static class Program
+    public partial class Form1 : Form
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        public Form1()
         {
-            if (!IsPlaformCompatable()) return;
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Run();
+            InitializeComponent();
         }
 
-        static void Run()
+        private void button1_Click(object sender, EventArgs e)
         {
+
             string filename = @"C:\______test_files\_emgu\lena.jpg";
 
             Image<Bgr, Byte> image = new Image<Bgr, byte>(filename); //Read the files as an 8-bit Bgr image  
@@ -57,9 +56,9 @@ namespace FaceDetection
                                 {
                                     Rectangle[] eyeRegion = eye.DetectMultiScale(clone, 1.1, 10, Size.Empty);
 
-                                    foreach (Rectangle e in eyeRegion)
+                                    foreach (Rectangle rec in eyeRegion)
                                     {
-                                        Rectangle eyeRect = e;
+                                        Rectangle eyeRect = rec;
                                         eyeRect.Offset(f.X, f.Y);
                                         image.Draw(eyeRect, new Bgr(Color.Red), 2);
                                     }
@@ -107,9 +106,9 @@ namespace FaceDetection
                                new Size(20, 20));
                             gray.ROI = Rectangle.Empty;
 
-                            foreach (MCvAvgComp e in eyesDetected)
+                            foreach (MCvAvgComp ee in eyesDetected)
                             {
-                                Rectangle eyeRect = e.rect;
+                                Rectangle eyeRect = ee.rect;
                                 eyeRect.Offset(f.rect.X, f.rect.Y);
                                 image.Draw(eyeRect, new Bgr(Color.Red), 2);
                             }
@@ -120,27 +119,10 @@ namespace FaceDetection
             }
 
             //display the image 
-            ImageViewer.Show(image, String.Format(
-               "Completed face and eye detection using {0} in {1} milliseconds",
-               GpuInvoke.HasCuda ? "GPU" : "CPU",
-               watch.ElapsedMilliseconds));
-        }
+            pictureBox1.Image = image.ToBitmap();
 
-        /// <summary>
-        /// Check if both the managed and unmanaged code are compiled for the same architecture
-        /// </summary>
-        /// <returns>Returns true if both the managed and unmanaged code are compiled for the same architecture</returns>
-        static bool IsPlaformCompatable()
-        {
-            int clrBitness = Marshal.SizeOf(typeof(IntPtr)) * 8;
-            if (clrBitness != CvInvoke.UnmanagedCodeBitness)
-            {
-                MessageBox.Show(String.Format("Platform mismatched: CLR is {0} bit, C++ code is {1} bit."
-                   + " Please consider recompiling the executable with the same platform target as C++ code.",
-                   clrBitness, CvInvoke.UnmanagedCodeBitness));
-                return false;
-            }
-            return true;
+            string str = String.Format("Completed face and eye detection using {0} in {1} milliseconds", GpuInvoke.HasCuda ? "GPU" : "CPU", watch.ElapsedMilliseconds);
+            richTextBox1.Text += str + "\n";
         }
     }
 }

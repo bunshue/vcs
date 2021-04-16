@@ -1,31 +1,31 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
-using System.Runtime.InteropServices;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
+
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+
 using Emgu.CV;
 using Emgu.CV.GPU;
 using Emgu.CV.Structure;
 using Emgu.CV.UI;
 
+
 namespace PedestrianDetection
 {
-    static class Program
+    public partial class Form1 : Form
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        public Form1()
         {
-            if (!IsPlaformCompatable()) return;
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Run();
+            InitializeComponent();
         }
 
-        static void Run()
+        private void button1_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\_emgu\pedestrian.png";
 
@@ -66,29 +66,22 @@ namespace PedestrianDetection
                 image.Draw(pedestrain, new Bgr(Color.Red), 1);
             }
 
+            /*
             ImageViewer.Show(
                image,
-               String.Format("Pedestrain detection using {0} in {1} milliseconds.",
-                  GpuInvoke.HasCuda ? "GPU" : "CPU",
-                  watch.ElapsedMilliseconds));
-        }
+               String.Format("Pedestrain detection using {0} in {1} milliseconds.",GpuInvoke.HasCuda ? "GPU" : "CPU",watch.ElapsedMilliseconds)
+            */
 
-        /// <summary>
-        /// Check if both the managed and unmanaged code are compiled for the same architecture
-        /// </summary>
-        /// <returns>Returns true if both the managed and unmanaged code are compiled for the same architecture</returns>
-        static bool IsPlaformCompatable()
-        {
-            int clrBitness = Marshal.SizeOf(typeof(IntPtr)) * 8;
-            if (clrBitness != CvInvoke.UnmanagedCodeBitness)
-            {
-                MessageBox.Show(String.Format("Platform mismatched: CLR is {0} bit, C++ code is {1} bit."
-                   + " Please consider recompiling the executable with the same platform target as C++ code.",
-                   clrBitness, CvInvoke.UnmanagedCodeBitness));
-                return false;
-            }
-            return true;
+
+            //display the image 
+            pictureBox1.Image = image.ToBitmap();
+
+            string str = String.Format("Pedestrain detection using {0} in {1} milliseconds.", GpuInvoke.HasCuda ? "GPU" : "CPU", watch.ElapsedMilliseconds);
+            richTextBox1.Text += str + "\n";
+
+
+
+
         }
     }
 }
-

@@ -35,7 +35,7 @@ namespace _emgu_test0
             int h = H / 2;
             int dx = w + 50;
             int dy = h + 50;
-            int x_st = 700;
+            int x_st = 800;
             int y_st = 12;
 
             ibox.SizeMode = PictureBoxSizeMode.Zoom;
@@ -67,7 +67,16 @@ namespace _emgu_test0
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -75,28 +84,24 @@ namespace _emgu_test0
             richTextBox1.Clear();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button0_Click(object sender, EventArgs e)
         {
-            /*
-            richTextBox1.Text += "用OpenCV開啟一個圖檔\n";
+            richTextBox1.Text += "用OpenCV開啟一個圖檔\t開啟cvShowImage\n";
+
             //EmguCV 影像格式 Image<Bgr, Byte>: a wrapper to IplImage of OpenCV
             Image<Bgr, Byte> image = new Image<Bgr, byte>(filename);
             CvInvoke.cvShowImage("Image<Bgr, Byte>", image);
-            */
 
-            //same
             /*
+            //same
             pictureBox1.Load(filename);
             Image<Bgr, Byte> image2 = new Image<Bgr, Byte>((Bitmap)(pictureBox1.Image));
             CvInvoke.cvShowImage("Image<Bgr, Byte>", image2);
             */
+        }
 
-            //讀圖片檔案至記憶體
-            //read image
-            //Bitmap bmp = new Bitmap(@"C:\______test_files\picture1.jpg");
-
-
-
+        private void button1_Click(object sender, EventArgs e)
+        {
             richTextBox1.Text += "建立一張灰階圖到Image裏\n";
             Image<Gray, Byte> img1 = new Image<Gray, Byte>(480, 320);
 
@@ -166,6 +171,7 @@ namespace _emgu_test0
 
         private void button3_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "對Image結構進行操作\n";
             //Image<TColor, TDepth>还对操作运算符进行了重载（ + - * / ）
 
             Image<Bgr, byte> img1 = new Image<Bgr, byte>(480, 320, new Bgr(255, 0, 0));
@@ -189,8 +195,6 @@ namespace _emgu_test0
             //same
             Image<Bgr, Byte> img3 = img1.Convert<byte>(delegate(Byte b) { return (Byte)(255 - b); });
             pictureBox1.Image = img1.ToBitmap();
-
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -274,7 +278,6 @@ namespace _emgu_test0
             Image<Bgr, Byte> img4 = img1.Flip(Emgu.CV.CvEnum.FLIP.HORIZONTAL).Flip(Emgu.CV.CvEnum.FLIP.VERTICAL);
             pictureBox4.Image = img4.ToBitmap();
             */
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -288,8 +291,6 @@ namespace _emgu_test0
             Image<Gray, Byte> gray = img.Convert<Gray, Byte>().PyrDown().PyrUp();
             pictureBox1.Image = gray.ToBitmap();
         }
-
-
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -329,6 +330,40 @@ namespace _emgu_test0
 
         }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Image<Gray, byte> inputImage = new Image<Gray, byte>(new Size(640, 480));
+            pictureBox1.Image = inputImage.ToBitmap();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "開檔到Image、存檔、轉成灰階、存檔、顯示\n";
+
+            richTextBox1.Text += "讀圖片檔案至記憶體(Bitmap結構)\n";
+            Bitmap bmp = new Bitmap(filename);
+
+            richTextBox1.Text += "Bitmap 轉成 Image\t存檔\n";
+            Image<Bgr, Byte> image = new Image<Bgr, Byte>(bmp);
+            image.Save("file1.bmp");
+
+            richTextBox1.Text += "轉成灰階\t存檔\n";
+            //Image(RGB) -> Image(Gray)
+            Image<Gray, Byte> gimage = image.Convert<Gray, Byte>();
+            gimage.Save("file2.bmp");
+
+            richTextBox1.Text += "灰階轉回彩色\t存檔\n";
+            Image<Rgb, Byte> newimage = gimage.Convert<Rgb, Byte>();
+            newimage.Save("file3.bmp");
+
+            richTextBox1.Text += "Image 轉成 Bitmap\t存檔\n";
+            Bitmap result = image.ToBitmap();
+            result.Save("file4.bmp");
+
+            pictureBox1.Image = gimage.ToBitmap();
+        }
+
+
     }
 }
 
@@ -338,4 +373,6 @@ namespace _emgu_test0
             //傳檔名或傳Bitmap都可以
             Image<Bgr, Byte> img1 = new Image<Bgr, Byte>(bmp);
             Image<Bgr, Byte> img2 = new Image<Bgr, Byte>(filename); //same
+
+
 */
