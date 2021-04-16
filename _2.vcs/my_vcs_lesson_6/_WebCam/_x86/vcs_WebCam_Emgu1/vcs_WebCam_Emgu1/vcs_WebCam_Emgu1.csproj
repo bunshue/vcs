@@ -8,8 +8,8 @@
     <ProjectGuid>{CA5E874A-31B3-4438-8F64-6E27BEFDBD64}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_WebCam_Emgu0</RootNamespace>
-    <AssemblyName>vcs_WebCam_Emgu0</AssemblyName>
+    <RootNamespace>vcs_WebCam_Emgu1</RootNamespace>
+    <AssemblyName>vcs_WebCam_Emgu1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

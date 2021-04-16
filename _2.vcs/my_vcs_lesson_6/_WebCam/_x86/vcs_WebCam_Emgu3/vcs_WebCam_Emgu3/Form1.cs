@@ -46,6 +46,13 @@ namespace vcs_WebCam_Emgu3
 
                 cap = new Capture(0);   //預設使用第一台的webcam
                 //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
+
+                //cap.FlipHorizontal = true;  //左右相反
+                //cap.FlipVertical = true;    //上下顛倒
+
+                richTextBox1.Text += "W = " + cap.Width.ToString() + ", ";
+                richTextBox1.Text += "H = " + cap.Height.ToString() + "\n";
+
                 Application.Idle += new EventHandler(Application_Idle); // 在Idle的event下，把畫面設定到pictureBox上
 
                 //  information
@@ -113,29 +120,14 @@ namespace vcs_WebCam_Emgu3
             Application.Idle -= Application_Idle;
         }
 
-        //關閉程式
         private void button3_Click(object sender, EventArgs e)
         {
-            cap.Dispose();
+            //關閉程式
+            if (cap != null)
+            {
+                cap.Dispose();
+            }
             Application.Exit();
-        }
-
-        //截圖
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
-
-            string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-            try
-            {
-                image.Save(filename);
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
         }
     }
 }
