@@ -22,7 +22,6 @@ namespace MyWebCam
 
         bool _isRecording = false;
         string _movieDirectory = @"d:\Test\movies\";
-        string _phtoDirectory = @"d:\Test\photos\";
         string _fileName;
         Timer _timer;
         VideoWriter video;
@@ -101,21 +100,6 @@ namespace MyWebCam
             _isRecording = false;
             video.Dispose();
 
-        }
-
-        //拍攝照片
-        private void button4_Click(object sender, EventArgs e)
-        {
-            openWebCam();
-
-            // Query 攝影機的畫面
-            Image<Bgr, Byte> phtoFrame = cap.QueryFrame();
-
-            //儲存路徑
-            _fileName = string.Format("{0}{1}{2}", _phtoDirectory, DateTime.Now.ToString("yyyyMMddHmmss"), ".JPG");
-
-            //儲存影像
-            phtoFrame.Save(_fileName);
         }
 
         /// <summary>

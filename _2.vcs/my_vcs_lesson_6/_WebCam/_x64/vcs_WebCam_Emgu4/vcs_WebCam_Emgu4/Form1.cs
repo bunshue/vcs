@@ -59,6 +59,13 @@ namespace vcs_WebCam_Emgu4
 
                 cap = new Capture(0);   //預設使用第一台的webcam
                 //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
+
+                //cap.FlipHorizontal = true;  //左右相反
+                //cap.FlipVertical = true;    //上下顛倒
+
+                richTextBox1.Text += "W = " + cap.Width.ToString() + ", ";
+                richTextBox1.Text += "H = " + cap.Height.ToString() + "\n";
+
                 Application.Idle += new EventHandler(Application_Idle); // 在Idle的event下，把畫面設定到pictureBox上
 
                 //  information
@@ -118,34 +125,6 @@ namespace vcs_WebCam_Emgu4
                 richTextBox1.Text += "停止錄影\n";
                 Application.Idle -= Application_Idle;
             }
-        }
-
-        //截圖
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (flag_webcam_ok == false)
-            {
-                richTextBox1.Text += "尚未開啟webcam\n";
-                return;
-            }
-
-            richTextBox1.Text += "截圖\t\t";
-
-            //  截圖  Query 攝影機的畫面
-            Image<Bgr, Byte> image = cap.QueryFrame();
-
-            string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-            try
-            {
-                image.Save(filename);   //儲存影像
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -293,24 +272,6 @@ namespace vcs_WebCam_Emgu4
             }
         }
 
-        //上下顛倒
-        private void button8_Click(object sender, EventArgs e)
-        {
-            if (cap != null)
-            {
-                cap.FlipVertical = !cap.FlipVertical;
-            }
-        }
-
-        //左右相反
-        private void button9_Click(object sender, EventArgs e)
-        {
-            if (cap != null)
-            {
-                cap.FlipHorizontal = !cap.FlipHorizontal;
-            }
-        }
-
         //關閉程式
         private void bt_exit_Click(object sender, EventArgs e)
         {
@@ -335,3 +296,4 @@ namespace vcs_WebCam_Emgu4
         }
     }
 }
+

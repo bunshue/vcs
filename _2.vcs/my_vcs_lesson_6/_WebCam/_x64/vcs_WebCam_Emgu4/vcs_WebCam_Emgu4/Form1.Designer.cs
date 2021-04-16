@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.bt_exit = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -43,26 +40,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(514, 21);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(89, 35);
-            this.button9.TabIndex = 27;
-            this.button9.Text = "左右相反";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(408, 21);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(89, 35);
-            this.button8.TabIndex = 26;
-            this.button8.Text = "上下顛倒";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button6
             // 
@@ -76,7 +53,7 @@
             // 
             // bt_exit
             // 
-            this.bt_exit.Location = new System.Drawing.Point(1092, 12);
+            this.bt_exit.Location = new System.Drawing.Point(901, 21);
             this.bt_exit.Name = "bt_exit";
             this.bt_exit.Size = new System.Drawing.Size(89, 35);
             this.bt_exit.TabIndex = 24;
@@ -113,16 +90,6 @@
             this.button5.Text = "test";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(304, 21);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(89, 35);
-            this.button4.TabIndex = 20;
-            this.button4.Text = "截圖";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -176,14 +143,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 661);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -199,14 +163,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button bt_exit;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
