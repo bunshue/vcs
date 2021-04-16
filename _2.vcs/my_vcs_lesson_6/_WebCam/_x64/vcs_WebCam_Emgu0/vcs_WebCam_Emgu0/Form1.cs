@@ -42,6 +42,13 @@ namespace vcs_WebCam_Emgu0
 
                 cap = new Capture(0);   //預設使用第一台的webcam
                 //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
+
+                //cap.FlipHorizontal = true;  //左右相反
+                //cap.FlipVertical = true;    //上下顛倒
+
+                richTextBox1.Text += "W = " + cap.Width.ToString() + ", ";
+                richTextBox1.Text += "H = " + cap.Height.ToString() + "\n";
+
                 Application.Idle += new EventHandler(Application_Idle); // 在Idle的event下，把畫面設定到pictureBox上
 
                 //  information
