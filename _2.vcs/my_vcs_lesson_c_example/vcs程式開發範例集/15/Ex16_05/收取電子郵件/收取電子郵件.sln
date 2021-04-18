@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "收取電子郵件", "收取電子郵件.csproj", "{D2720551-06A9-4A4F-93EA-01D010FE453C}"
 EndProject
 Global

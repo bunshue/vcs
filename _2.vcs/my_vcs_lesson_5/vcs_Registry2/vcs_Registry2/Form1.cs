@@ -22,7 +22,45 @@ namespace vcs_Registry2
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 150;
+            dy = 60;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            //button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
         {
             RegistryKey mreg;
             mreg = Registry.LocalMachine;
@@ -32,6 +70,31 @@ namespace vcs_Registry2
             richTextBox1.Text += IEVersion + "\n";
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "進入Windows前發出警告\n";
+
+            string title = "寫標題在此";
+            string content = "寫內容在此";
+            RegistryKey rkey = Registry.LocalMachine;
+            RegistryKey rkeyInfo = rkey.CreateSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon");
+
+            //偽執行
+            rkeyInfo.SetValue("LegalNoticeCaption", title, RegistryValueKind.String);
+            rkeyInfo.SetValue("LegalNoticeText", content, RegistryValueKind.String);
+
+            MessageBox.Show("已完成設定，請重新啟動計算機！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //若已存入，要用regedit到 HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Windows NT/CurrentVersion/Winlogon 刪除相關設定
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -94,9 +157,6 @@ namespace vcs_Registry2
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
     }
 }
+

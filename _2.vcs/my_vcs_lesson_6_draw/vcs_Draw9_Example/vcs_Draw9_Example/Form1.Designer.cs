@@ -523,11 +523,12 @@
             // 
             // button35
             // 
-            this.button35.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button35.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button35.Location = new System.Drawing.Point(756, 310);
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(100, 40);
             this.button35.TabIndex = 69;
+            this.button35.Text = "繪製面形圖";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
