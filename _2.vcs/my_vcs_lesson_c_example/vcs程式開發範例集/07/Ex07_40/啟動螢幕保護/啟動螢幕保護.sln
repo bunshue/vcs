@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "啟動螢幕保護", "啟動螢幕保護\啟動螢幕保護.csproj", "{093826D5-EA93-4F9F-9E3C-60517384BF26}"
 EndProject
 Global

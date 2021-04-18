@@ -17,6 +17,11 @@ using System.IO;
 using System.Runtime.InteropServices;   //for DllImport
 
 using System.Text.RegularExpressions;   //for Regex
+
+using Microsoft.VisualBasic.Devices;
+
+using System.Collections;       //for DictionaryEntry
+
 namespace test_new0418
 {
     public partial class Form1 : Form
@@ -41,6 +46,13 @@ namespace test_new0418
             */
 
             show_item_location();
+
+            label1.Text = "";
+            label2.Text = "";
+            label3.Text = "";
+            label4.Text = "";
+            label5.Text = "";
+            Microsoft.Win32.SystemEvents.TimeChanged += new EventHandler(SystemEvents_TimeChanged); //for 設定系統時間
         }
 
         void show_item_location()
@@ -315,6 +327,137 @@ namespace test_new0418
             }
 
         }
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Ansi)]
+        public extern static bool SetSystemTime(ref SYSTEMTIME time);
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SYSTEMTIME
+        {
+            public short Year;
+            public short Month;
+            public short DayOfWeek;
+            public short Day;
+            public short Hour;
+            public short Minute;
+            public short Second;
+            public short Miliseconds;
+        }
+
+        private void SystemEvents_TimeChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("系統日期修改成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //設定系統時間 為 12:34:56
+            int setup_hour = 12;
+            int setup_minute = 34;
+            int setup_second = 56;
+            SYSTEMTIME t = new SYSTEMTIME();
+            t.Year = (short)DateTime.Now.Year;
+            t.Month = (short)DateTime.Now.Month;
+            t.Day = (short)DateTime.Now.Day;
+            t.Hour = (short)(setup_hour - 8);//這個函數使用的是0時區的時間,例如，要設12點，則為12-8   
+            t.Minute = (short)setup_minute;
+            t.Second = (short)setup_second;
+            //偽執行
+            //bool v = SetSystemTime(ref t);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //參考/加入參考/.Net/Microsoft.VisualBasic
+            Computer myComputer = new Computer();
+            label1.Text = "物理內存總量（M）：" + Convert.ToString(myComputer.Info.TotalPhysicalMemory / 1024 / 1024);
+            label2.Text = "可用物理內存（M）：" + Convert.ToString(myComputer.Info.AvailablePhysicalMemory / 1024 / 1024);
+            label3.Text = "虛擬內存總量（M）：" + Convert.ToString(myComputer.Info.TotalVirtualMemory / 1024 / 1024);
+            label4.Text = "可用虛擬內存（M）：" + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024);
+
+            label5.Text = "系統啟動後經過的時間： " + (Environment.TickCount / 1000).ToString() + " 秒";
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_VideoController");
+            foreach (ManagementObject mobject in searcher.Get())
+            {
+
+
+                richTextBox1.Text += "顯示設備訊息\n";
+
+                richTextBox1.Text += "顯示設備名稱：" + mobject["Name"].ToString() + "\n";//顯示設備名稱
+                richTextBox1.Text += "顯示設備PNPDeviceID：" + mobject["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
+                richTextBox1.Text += "顯示設備驅動程序文件：" + mobject["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
+                richTextBox1.Text += "顯示設備驅動版本號：" + mobject["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
+                richTextBox1.Text += "顯示設備的顯示處理器：" + mobject["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
+                richTextBox1.Text += "顯示設備的最大更新率：" + mobject["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備的最小更新率：" + mobject["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備目前顯示模式：" + mobject["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
+
+
+
+
+            }
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "環境變數" + "\t\t\t" + "變數值" + "\n";
+            foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
+            {
+                richTextBox1.Text += DEntry.Key.ToString() + "\t" + DEntry.Value.ToString() + "\n";
+            }
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "系統版本：\t";
+
+            OperatingSystem myOS = Environment.OSVersion;
+            if (myOS.Version.Major == 5)
+            {
+                switch (myOS.Version.Minor)
+                {
+                    case 0:
+                        richTextBox1.Text += "Windows 2000 " + myOS.ServicePack;
+                        break;
+                    case 1:
+                        richTextBox1.Text += "Windows XP " + myOS.ServicePack;
+                        break;
+                    case 2:
+                        richTextBox1.Text += "Windows Server 2003 " + " " + myOS.ServicePack;
+                        break;
+                    default:
+                        richTextBox1.Text += myOS.ToString() + " " + myOS.ServicePack;
+                        break;
+                }
+            }
+            else
+                richTextBox1.Text += myOS.VersionString + " " + myOS.ServicePack;
+
+            richTextBox1.Text += "\n";
+
+
+
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "檢索系統中正在執行的任務\n";
+            Process[] myProcesses = Process.GetProcesses();
+            foreach (Process myProcess in myProcesses)
+            {
+                if (myProcess.MainWindowTitle.Length > 0)
+                    richTextBox1.Text += "任務名：" + myProcess.MainWindowTitle + "\n";
+            }
+
+
+        }
+
+
     }
 }
-

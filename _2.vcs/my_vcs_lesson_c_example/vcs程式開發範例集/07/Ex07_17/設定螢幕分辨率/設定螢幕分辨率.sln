@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "設定螢幕分辨率", "設定螢幕分辨率\設定螢幕分辨率.csproj", "{2F343E82-01D4-43FD-8460-499BB249023F}"
 EndProject
 Global
