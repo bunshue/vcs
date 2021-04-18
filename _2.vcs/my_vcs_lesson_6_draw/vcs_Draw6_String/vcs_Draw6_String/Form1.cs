@@ -93,38 +93,51 @@ namespace vcs_Draw6_String
             bt_exit.Location = new Point(x_st + dx * 4, y_st + dy * 8);
 
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width-100, this.Height - richTextBox1.Location.Y + 200);
+            richTextBox1.Size = new Size(richTextBox1.Size.Width - 100, this.Height - richTextBox1.Location.Y + 200);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             pictureBox1.Location = new Point(40, 40);
 
-            x_st = 40;
+            x_st = 700;
+            y_st = 40;
+            pictureBox2.Location = new Point(x_st, y_st);
+            pictureBox2.BackColor = Color.Red;
+            
+            x_st = 20;
             y_st = 600;
+
             dx = 450;
             dy = 150;
             int W = 440;
             int H = 150;
 
-            pictureBox2.Location = new Point(x_st, y_st);
-
-            pictureBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox3.BackColor = Color.Pink;
 
-            pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox4.Size = new Size(W, H);
 
-            pictureBox5.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            pictureBox5.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             pictureBox5.Size = new Size(W, H);
 
-            pictureBox6.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox6.Size = new Size(W, H);
 
-            pictureBox7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox7.Size = new Size(W, H);
 
-            pictureBox8.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            pictureBox8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             pictureBox8.Size = new Size(W, H);
+
+            pictureBox9.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox9.Size = new Size(W, H);
+
+            pictureBox10.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox10.Size = new Size(W, H);
+
+            pictureBox11.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            pictureBox11.Size = new Size(W, H);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -1041,6 +1054,42 @@ namespace vcs_Draw6_String
         }
 
         // 單色鉛筆彩色字體 SP
+
+        //倒影效果
+        private void pictureBox9_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(Color.White);//以指定的顏色清除控件背景
+            Brush Var_Brush_Back = Brushes.Gray;//設置前景色
+            Brush Var_Brush_Fore = Brushes.Black;//設置背景色
+            Font Var_Font = new Font("細明體", 40);//設置字體樣式
+            string Var_Str = "倒影效果的文字";//設置字符串
+            SizeF Var_Size = e.Graphics.MeasureString(Var_Str, Var_Font);//獲取字符串的大小
+            e.Graphics.DrawString(Var_Str, Var_Font, Var_Brush_Fore, 0, 0);//繪製文本
+            e.Graphics.ScaleTransform(1, -1.0F);//縮放變換矩陣
+            e.Graphics.DrawString(Var_Str, Var_Font, Var_Brush_Back, 0, -Var_Size.Height * 1.6F);//繪製倒影文本
+        }
+
+        //投影效果
+        private void pictureBox10_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(Color.White);//以白色清空panel1的背景
+            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;//設置文本輸出的質量
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;//消除繪製時出現的鋸齒
+            Font Var_Font = new Font("細明體", 48);//定義文字的字體
+            Matrix Var_Matrix = new Matrix();//實例化Matrix類
+            Var_Matrix.Shear(-1.4F, 0.0F);//設置投影
+            Var_Matrix.Scale(1, 0.5F);//設置縮放
+            Var_Matrix.Translate(168, 118);//設置平移
+            e.Graphics.Transform = Var_Matrix;//設置坐標平面變換
+            SolidBrush Var_Brush_1 = new SolidBrush(Color.Gray);//設置文字的畫刷
+            SolidBrush Var_Brush_2 = new SolidBrush(Color.SlateBlue);//設置投影的畫刷
+            string Var_Str = "投影效果文字";//設置文字
+            e.Graphics.DrawString(Var_Str, Var_Font, Var_Brush_1, new PointF(0, 60));//繪製投影
+            e.Graphics.ResetTransform();//變換矩陣重置為單位矩陣
+            e.Graphics.DrawString(Var_Str, Var_Font, Var_Brush_2, new PointF(0, 60));//繪製文字
+
+
+        }
 
     }
 }

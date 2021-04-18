@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageBatchChange", "ImageBatchChange\ImageBatchChange.csproj", "{3503CEE1-A0D6-4F7F-AA11-501CA14B5B15}"
 EndProject
 Global

@@ -42,13 +42,12 @@ namespace vcs_Draw9_Example
             //----使用上面的Bitmap畫圖----
             g = Graphics.FromImage(bitmap1);
 
-
             p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
             sb = new SolidBrush(Color.Blue);
             g.Clear(Color.White);
             pictureBox1.Image = bitmap1;
 
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox2.BackColor = Color.Pink;
         }
 
@@ -420,6 +419,27 @@ namespace vcs_Draw9_Example
 
         private void button6_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\picture1.jpg";
+            try
+            {
+                Image myImage = Image.FromFile(filename);
+                this.pictureBox1.Image = myImage;
+
+                Image image = Image.FromFile(filename);
+                Bitmap bitmap1 = new Bitmap(image);
+                image.Dispose();
+                Graphics graphics = Graphics.FromImage(bitmap1);
+                graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
+                SolidBrush brush = new SolidBrush(Color.Red);
+                PointF P = new PointF(120, 20);
+                Font font = new Font(this.Font.Name, 40);
+                graphics.DrawString("牡丹亭", font, brush, P);
+                string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                bitmap1.Save(filename2, ImageFormat.Jpeg);
+                font.Dispose();
+                graphics.Dispose();
+            }
+            catch { }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -3506,7 +3526,7 @@ namespace vcs_Draw9_Example
             g.DrawLine(p, 0, H + 10, W, H + 10);
             g.DrawLine(p, W + 10, 0, W + 10, H);
             g.DrawString("532", f, sb, new PointF(W / 2, H + 15));
-            g.DrawString("573", f, sb, new PointF(W + 15, H / 2+100));
+            g.DrawString("573", f, sb, new PointF(W + 15, H / 2 + 100));
 
             int dw;
             int dh;
@@ -3610,9 +3630,9 @@ namespace vcs_Draw9_Example
 
 
             draw_bookshelf(g, 560, 50, 3, 3);
-            draw_bookshelf(g, 560, 50+112, 3, 3);
-            draw_bookshelf(g, 560+112, 50, 4, 3);
-            draw_bookshelf(g, 560+112, 50 + 112, 4, 3);
+            draw_bookshelf(g, 560, 50 + 112, 3, 3);
+            draw_bookshelf(g, 560 + 112, 50, 4, 3);
+            draw_bookshelf(g, 560 + 112, 50 + 112, 4, 3);
 
             //draw_bookshelf(600, 200, 5, 2);
 
@@ -5601,17 +5621,94 @@ namespace vcs_Draw9_Example
 
         private void button40_Click(object sender, EventArgs e)
         {
+            pictureBox1.Size = new Size(268, 186);
+            Font Var_Font = new Font("Arial", 12, FontStyle.Bold);//定義字符串的字體樣式
+            Rectangle rect = new Rectangle(10, 10, 160, 160);//實例化Rectangle類
+
+            int tem_Line = 0;//記錄圓的直徑
+            int circularity_W = 4;//設置圓畫筆的粗細
+            if (pictureBox1.Width >= pictureBox1.Height)//如果pictureBox1控件的寬度大於等於高度
+                tem_Line = pictureBox1.Height;//設置高度為圓的直徑
+            else
+                tem_Line = pictureBox1.Width;//設置寬度為圓的直徑
+            rect = new Rectangle(circularity_W, circularity_W, tem_Line - circularity_W * 2, tem_Line - circularity_W * 2);//設置圓的繪製區域
+            Font star_Font = new Font("Arial", 30, FontStyle.Regular);//設置星號的字體樣式
+            string star_Str = "★";
+            Graphics g = this.pictureBox1.CreateGraphics();//實例化Graphics類
+            g.SmoothingMode = SmoothingMode.AntiAlias;//消除繪製圖形的鋸齒
+            g.Clear(Color.White);//以白色清空pictureBox1控件的背景
+            Pen myPen = new Pen(Color.Red, circularity_W);//設置畫筆的顏色
+            g.DrawEllipse(myPen, rect); //繪製圓 
+            SizeF Var_Size = new SizeF(rect.Width, rect.Width);//實例化SizeF類
+            Var_Size = g.MeasureString(star_Str, star_Font);//對指定字符串進行測量
+            //要指定的位置繪製星號
+            g.DrawString(star_Str, star_Font, myPen.Brush, new PointF((rect.Width / 2F) + circularity_W - Var_Size.Width / 2F, rect.Height / 2F - Var_Size.Width / 2F));
+            Var_Size = g.MeasureString("專用章", Var_Font);//對指定字符串進行測量
+            //繪製文字
+            g.DrawString("專用章", Var_Font, myPen.Brush, new PointF((rect.Width / 2F) + circularity_W - Var_Size.Width / 2F, rect.Height / 2F + Var_Size.Height * 2));
+            string tempStr = "省明日科技有限公司";
+            int len = tempStr.Length;//獲取字符串的長度
+            float angle = 180 + (180 - len * 20) / 2;//設置文字的旋轉角度
+            for (int i = 0; i < len; i++)//將文字以指定的弧度進行繪製
+            {
+                //將指定的平移添加到g的變換矩陣前         
+                g.TranslateTransform((tem_Line + circularity_W / 2) / 2, (tem_Line + circularity_W / 2) / 2);
+                g.RotateTransform(angle);//將指定的旋轉用於g的變換矩陣   
+                Brush myBrush = Brushes.Red;//定義畫刷
+                g.DrawString(tempStr.Substring(i, 1), Var_Font, myBrush, 60, 0);//顯示旋轉文字
+                g.ResetTransform();//將g的全局變換矩陣重置為單位矩陣
+                angle += 20;//設置下一個文字的角度
+            }
         }
 
         private void button41_Click(object sender, EventArgs e)
         {
-            
+            //擷取部分圖形
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image myImage = System.Drawing.Image.FromFile(filename);
+            pictureBox1.Image = myImage;
+
+            int x_st = 0;
+            int y_st = 0;
+            int W = 150;
+            int H = 150;
+
+            Graphics graphics = this.CreateGraphics();
+            Bitmap bitmap = new Bitmap(filename);
+            Rectangle rectangle = new Rectangle(x_st, y_st, W, H);
+            Bitmap cloneBitmap = bitmap.Clone(rectangle, PixelFormat.DontCare);
+            pictureBox2.Image = cloneBitmap;
+
+            pictureBox2.Location = new Point(pictureBox1.Right + 10, pictureBox1.Top);
+            pictureBox2.Visible = true;
+
+            richTextBox1.Text += "從(" + x_st.ToString() + ", " + y_st.ToString() + ") 擷取 W = " + W.ToString() + ", H = " + H.ToString() + " 區域\n";
         }
 
         private void button42_Click(object sender, EventArgs e)
         {
-
+            //繪製波形圖
+            Graphics graphics = this.pictureBox1.CreateGraphics();
+            Pen myPen = new Pen(Color.Black, 1);
+            int beginX = 50;
+            int beginY = 65;
+            int height = 35;
+            int width = 50;
+            Point pointX1 = new Point(beginX, beginY);
+            Point pointY1 = new Point(beginX + 210, beginY);
+            Point pointX2 = new Point(beginX, beginY - 45);
+            Point pointY2 = new Point(beginX, beginY + 45);
+            graphics.DrawLine(myPen, pointX1, pointY1);
+            graphics.DrawLine(myPen, pointX2, pointY2);
+            graphics.DrawBezier(myPen, beginX, beginY, beginX + 15, beginY - height, beginX + 40, beginY - height, beginX + width, beginY);
+            graphics.DrawBezier(myPen, beginX + width, beginY, beginX + width + 15, beginY + height,
+                beginX + width + 40, beginY + height, beginX + width * 2, beginY);
+            graphics.DrawBezier(myPen, beginX + width * 2, beginY, beginX + width * 2 + 15, beginY - height,
+                beginX + width * 2 + 40, beginY - height, beginX + width * 3, beginY);
+            graphics.DrawBezier(myPen, beginX + width * 3, beginY, beginX + width * 3 + 15, beginY + height,
+                beginX + width * 3 + 40, beginY + height, beginX + width * 4, beginY);
         }
+
         private void button43_Click(object sender, EventArgs e)
         {
             g = pictureBox1.CreateGraphics();
@@ -5688,6 +5785,5 @@ namespace vcs_Draw9_Example
         private void button44_Click(object sender, EventArgs e)
         {
         }
-
     }
 }
