@@ -1,4 +1,4 @@
-EMGU重製專案的方法_x64
+EMGU重建專案的方法_x64    x86
 
 取得 4個Emgu.XX.dll 與 3個opencv.XX.dll
 需把路徑指到C:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x64-2.3.0.1416\bin

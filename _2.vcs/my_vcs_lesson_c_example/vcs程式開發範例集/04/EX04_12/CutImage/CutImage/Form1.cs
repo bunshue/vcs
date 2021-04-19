@@ -12,6 +12,8 @@ namespace CutImage
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
+
         bool isDrag = false;
         Rectangle theRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
         Point startPoint, oldPoint;
@@ -23,9 +25,7 @@ namespace CutImage
 
         private void button1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
-            openFileDialog1.ShowDialog();
-            Image myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);
+            Image myImage = System.Drawing.Image.FromFile(filename);
             pictureBox1.Image = myImage;
         }
 
