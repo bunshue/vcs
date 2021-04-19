@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HideVoiceDevice", "HideVoiceDevice\HideVoiceDevice.csproj", "{DBF6FB86-36D3-46B8-AC09-8393C91EF7D2}"
 EndProject
 Global

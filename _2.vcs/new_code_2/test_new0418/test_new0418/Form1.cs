@@ -147,12 +147,12 @@ namespace test_new0418
         {
             //取得本機MAC地址
 
-            ManagementObjectSearcher nisc = new ManagementObjectSearcher("select * from Win32_NetworkAdapterConfiguration");
-            foreach (ManagementObject nic in nisc.Get())
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_NetworkAdapterConfiguration");
+            foreach (ManagementObject mo in mos.Get())
             {
-                if (Convert.ToBoolean(nic["ipEnabled"]) == true)
+                if (Convert.ToBoolean(mo["ipEnabled"]) == true)
                 {
-                    richTextBox1.Text += "取得本機MAC地址 : " + Convert.ToString(nic["MACAddress"]) + "\n";
+                    richTextBox1.Text += "取得本機MAC地址 : " + Convert.ToString(mo["MACAddress"]) + "\n";
                 }
             }
         }
@@ -239,9 +239,9 @@ namespace test_new0418
         {
             //獲得硬盤序號
 
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
             string strHardDiskID = "";
-            foreach (ManagementObject mo in searcher.Get())
+            foreach (ManagementObject mo in mos.Get())
             {
                 strHardDiskID = mo["SerialNumber"].ToString().Trim();
                 break;
@@ -256,10 +256,10 @@ namespace test_new0418
         private void button8_Click(object sender, EventArgs e)
         {
             SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
-            foreach (ManagementObject disk in searcher.Get())
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(selectQuery);
+            foreach (ManagementObject mo in mos.Get())
             {
-                string disk_name = disk["Name"].ToString();
+                string disk_name = mo["Name"].ToString();
                 richTextBox1.Text += "取得硬碟 : " + disk_name + "\n";
 
                 DriveInfo dinfo = new DriveInfo(disk_name);
@@ -379,27 +379,19 @@ namespace test_new0418
 
         private void button13_Click(object sender, EventArgs e)
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_VideoController");
-            foreach (ManagementObject mobject in searcher.Get())
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_VideoController");
+            foreach (ManagementObject mo in mos.Get())
             {
-
-
                 richTextBox1.Text += "顯示設備訊息\n";
-
-                richTextBox1.Text += "顯示設備名稱：" + mobject["Name"].ToString() + "\n";//顯示設備名稱
-                richTextBox1.Text += "顯示設備PNPDeviceID：" + mobject["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
-                richTextBox1.Text += "顯示設備驅動程序文件：" + mobject["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
-                richTextBox1.Text += "顯示設備驅動版本號：" + mobject["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
-                richTextBox1.Text += "顯示設備的顯示處理器：" + mobject["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
-                richTextBox1.Text += "顯示設備的最大更新率：" + mobject["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "顯示設備的最小更新率：" + mobject["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "顯示設備目前顯示模式：" + mobject["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
-
-
-
-
+                richTextBox1.Text += "顯示設備名稱：" + mo["Name"].ToString() + "\n";//顯示設備名稱
+                richTextBox1.Text += "顯示設備PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
+                richTextBox1.Text += "顯示設備驅動程序文件：" + mo["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
+                richTextBox1.Text += "顯示設備驅動版本號：" + mo["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
+                richTextBox1.Text += "顯示設備的顯示處理器：" + mo["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
+                richTextBox1.Text += "顯示設備的最大更新率：" + mo["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備的最小更新率：" + mo["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備目前顯示模式：" + mo["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
             }
-
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -409,7 +401,6 @@ namespace test_new0418
             {
                 richTextBox1.Text += DEntry.Key.ToString() + "\t" + DEntry.Value.ToString() + "\n";
             }
-
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -458,6 +449,42 @@ namespace test_new0418
 
         }
 
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //取得顯示設備相關資訊
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from win32_VideoController");//声明一个用于检索设备管理信息的对象
+            foreach (ManagementObject mo in mos.Get())//循环遍历WMI实例中的每一个对象
+            {
+                richTextBox1.Text += "顯示設備名稱 : " + mo["name"].ToString() + "\n";  //在文本框中显示显示设备的名称
+                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n"; //在文本框中显示显示设备的PNPDeviceID
 
+                richTextBox1.Text += "最大更新率 : " + mo["MaxRefreshRate"].ToString() + "\n"; //在当前文本框中显示最大刷新率
+                richTextBox1.Text += "最小更新率 : " + mo["MinRefreshRate"].ToString() + "\n"; //在当前文本框中显示最小刷新率
+                richTextBox1.Text += "目前更新率 : " + mo["CurrentRefreshRate"].ToString() + "\n"; //在当前文本框中显示当前刷新率
+
+                richTextBox1.Text += "顯示模式 : " + mo["VideoModeDescription"].ToString() + "\n"; //在文本框中显示设备的当前显示模式
+            }
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //取得音效設備相關資訊
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_SoundDevice");//声明一个用于检索设备管理信息的对象
+            foreach (ManagementObject mo in mos.Get())//循环遍历WMI实例中的每一个对象
+            {
+                richTextBox1.Text += "音效設備名稱 : " + mo["ProductName"].ToString() + "\n"; //在当前文本框中显示声音设备的名称
+                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n";//在当前文本框中显示声音设备的PNPDeviceID
+            }
+
+
+
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            string temp_filename = Path.GetTempFileName();
+            richTextBox1.Text += temp_filename + "\n";
+        }
     }
 }

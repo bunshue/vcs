@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SongPlayShroudAegis", "SongPlayShroudAegis\SongPlayShroudAegis.csproj", "{4067A9A7-0FA5-442A-87CE-FE897A29FC1C}"
 EndProject
 Global

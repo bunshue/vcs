@@ -17,6 +17,9 @@ namespace vcs_ReadWrite_GIF
 {
     public partial class Form1 : Form
     {
+        Bitmap bitmap = new Bitmap(@"C:\______test_files\__RW\_gif\cat.gif");
+        bool current = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -100,5 +103,41 @@ namespace vcs_ReadWrite_GIF
             e.Finish();
         }
 
+        public void PlayImage()
+        {
+            if (!current)
+            {
+                ImageAnimator.Animate(bitmap, new EventHandler(this.OnFrameChanged));
+                current = true;
+            }
+        }
+
+        private void OnFrameChanged(object o, EventArgs e)
+        {
+            this.Invalidate();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+
+            e.Graphics.DrawImage(this.bitmap, new Point(1, 1));
+            ImageAnimator.UpdateFrames();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (button3.Text == "播放GIF檔")
+            {
+                PlayImage();
+                ImageAnimator.Animate(bitmap, new EventHandler(this.OnFrameChanged));//播放
+
+                button3.Text = "停止播放GIF檔";
+            }
+            else
+            {
+                ImageAnimator.StopAnimate(bitmap, new EventHandler(this.OnFrameChanged));//停止
+                button3.Text = "播放GIF檔";
+            }
+        }
     }
 }
