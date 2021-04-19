@@ -1,8 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -14,16 +15,20 @@ using Emgu.CV.VideoSurveillance;
 
 namespace VideoSurveillance
 {
-    public partial class VideoSurveillance : Form
+    public partial class Form1 : Form
     {
         private static MCvFont _font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_SIMPLEX, 1.0, 1.0);
         private static Capture _cameraCapture;
         private static BlobTrackerAuto<Bgr> _tracker;
         private static IBGFGDetector<Bgr> _detector;
 
-        public VideoSurveillance()
+        public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             Run();
         }
 
@@ -69,4 +74,3 @@ namespace VideoSurveillance
         }
     }
 }
-

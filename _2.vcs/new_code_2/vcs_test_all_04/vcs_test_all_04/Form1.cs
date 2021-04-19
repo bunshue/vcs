@@ -28,6 +28,8 @@ namespace vcs_test_all_04
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
+
         public Form1()
         {
             InitializeComponent();
@@ -36,6 +38,9 @@ namespace vcs_test_all_04
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            Image myImage = System.Drawing.Image.FromFile(filename);
+            pictureBox1.Image = myImage;
         }
 
         void show_item_location()
@@ -169,12 +174,27 @@ namespace vcs_test_all_04
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //圖片轉向
+            string filename = @"C:\______test_files\picture1.jpg";
+            //pictureBox1.Image = Image.FromFile(filename);
+
+
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+            pictureBox1.Image = bitmap1;
+
+
+            Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename);
+            bitmap2.RotateFlip(RotateFlipType.Rotate90FlipX);
+            pictureBox2.Image = bitmap2;
+
 
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-
+            Image myImage = pictureBox1.Image;
+            myImage.RotateFlip(RotateFlipType.Rotate90FlipXY);
+            pictureBox1.Image = myImage;
         }
 
         private void button12_Click(object sender, EventArgs e)

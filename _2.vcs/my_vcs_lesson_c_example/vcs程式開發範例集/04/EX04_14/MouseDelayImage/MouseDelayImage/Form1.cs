@@ -19,11 +19,10 @@ namespace MouseDelayImage
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\picture1.jpg";
             flag = false;
             pictureBox1.Location = new System.Drawing.Point(14, 8);
-            openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
-            openFileDialog1.ShowDialog();
-            Image myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);
+            Image myImage = System.Drawing.Image.FromFile(filename);
             pictureBox1.Image = myImage;
         }
 

@@ -18,9 +18,8 @@ namespace MaxMinImage
         Image myImage;
         private void button1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
-            openFileDialog1.ShowDialog();
-            myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);
+            string filename = @"C:\______test_files\picture1.jpg";
+            myImage = System.Drawing.Image.FromFile(filename);
             pictureBox1.Image = myImage;
             pictureBox1.Height = myImage.Height;
             pictureBox1.Width = myImage.Width;

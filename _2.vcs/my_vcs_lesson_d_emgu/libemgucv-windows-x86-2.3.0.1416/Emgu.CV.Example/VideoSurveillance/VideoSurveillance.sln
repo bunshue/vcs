@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoSurveillance", "VideoSurveillance\VideoSurveillance.csproj", "{454D8440-89F6-45A7-9C48-18A0B1677F3A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{454D8440-89F6-45A7-9C48-18A0B1677F3A}.Debug|x86.ActiveCfg = Debug|x86
+		{454D8440-89F6-45A7-9C48-18A0B1677F3A}.Debug|x86.Build.0 = Debug|x86
+		{454D8440-89F6-45A7-9C48-18A0B1677F3A}.Release|x86.ActiveCfg = Release|x86
+		{454D8440-89F6-45A7-9C48-18A0B1677F3A}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
