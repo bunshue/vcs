@@ -1,7 +1,3 @@
-//----------------------------------------------------------------------------
-//  Copyright (C) 2004-2011 by EMGU. All rights reserved.       
-//----------------------------------------------------------------------------
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,12 +18,14 @@ namespace FacialMouseControl
       private Capture _capture;
       private HaarCascade _face;
 
+        string filename = @"C:\______test_files\__RW\_xml\haarcascades\haarcascade_frontalface_alt.xml";
+
       public Form1()
       {
          InitializeComponent();
 
          //Read the HaarCascade object
-         _face = new HaarCascade("haarcascades/haarcascade_frontalface_alt2.xml");
+            _face = new HaarCascade(filename);
 
          if (_capture == null)
          {

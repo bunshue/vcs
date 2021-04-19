@@ -12,6 +12,8 @@ namespace BuntForms
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
+
         Image myImage;
         public Form1()
         {
@@ -20,9 +22,7 @@ namespace BuntForms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp|*.jpg;*.jpeg;*.bmp";
-            openFileDialog1.ShowDialog();
-            myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);
+            myImage = System.Drawing.Image.FromFile(filename);
             this.BackgroundImage = myImage;
         }
 

@@ -205,5 +205,26 @@ namespace vcs_test_all_03_Syntax
             else
                 richTextBox1.Text += "long.TryParse 失敗\n";
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            dateTimePicker1.Value = DateTime.Now;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //get
+            richTextBox1.Text += "從dateTimePicker裏讀取時間\n";
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //set
+            richTextBox1.Text += "設定時間到dateTimePicker裏\n";
+            dateTimePicker1.Value = DateTime.Parse("12:34:56");
+
+        }
+
     }
 }

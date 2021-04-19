@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuntForms", "BuntForms\BuntForms.csproj", "{FD2DBA67-709C-4436-8A09-170B6EFAE147}"
 EndProject
 Global

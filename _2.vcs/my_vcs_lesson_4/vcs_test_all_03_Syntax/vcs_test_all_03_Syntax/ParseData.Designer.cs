@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
@@ -51,6 +52,10 @@
             this.button14 = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.button15 = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.button3 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button16 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -297,11 +302,53 @@
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.dateTimePicker1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker1.Location = new System.Drawing.Point(996, 182);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(162, 33);
+            this.dateTimePicker1.TabIndex = 24;
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(1024, 221);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(94, 40);
+            this.button3.TabIndex = 25;
+            this.button3.Text = "get";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 10000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // button16
+            // 
+            this.button16.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button16.Location = new System.Drawing.Point(1024, 267);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(94, 40);
+            this.button16.TabIndex = 26;
+            this.button16.Text = "set";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
             // ParseData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1183, 756);
+            this.Controls.Add(this.button16);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.textBox7);
@@ -358,6 +405,10 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button16;
     }
 }
 

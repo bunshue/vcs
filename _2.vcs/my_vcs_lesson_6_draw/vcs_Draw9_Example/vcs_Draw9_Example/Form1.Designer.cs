@@ -473,11 +473,12 @@
             // 
             // button30
             // 
-            this.button30.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button30.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button30.Location = new System.Drawing.Point(756, 284);
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(100, 40);
             this.button30.TabIndex = 60;
+            this.button30.Text = "百葉窗效果";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 

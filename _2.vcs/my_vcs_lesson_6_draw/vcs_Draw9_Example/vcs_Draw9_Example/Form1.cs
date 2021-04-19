@@ -5581,6 +5581,39 @@ namespace vcs_Draw9_Example
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //百葉窗效果
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            try
+            {
+                Bitmap bitmap1 = new Bitmap(filename);
+                int W = bitmap1.Width;
+                int H = bitmap1.Height / 20;
+                Graphics g = this.CreateGraphics();
+                g.Clear(Color.WhiteSmoke);
+                Point[] myPoint = new Point[30];
+                for (int i = 0; i < 30; i++)
+                {
+                    myPoint[i].X = 0;
+                    myPoint[i].Y = i * H;
+                }
+                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+                for (int m = 0; m < H; m++)
+                {
+                    for (int n = 0; n < 20; n++)
+                    {
+                        for (int j = 0; j < W; j++)
+                        {
+                            bitmap2.SetPixel(myPoint[n].X + j, myPoint[n].Y + m, bitmap1.GetPixel(myPoint[n].X + j, myPoint[n].Y + m));
+                        }
+                    }
+                    this.pictureBox1.Refresh();
+                    this.pictureBox1.Image = bitmap2;
+                    System.Threading.Thread.Sleep(100);
+                }
+            }
+            catch { }
+
         }
 
         private void button31_Click(object sender, EventArgs e)
