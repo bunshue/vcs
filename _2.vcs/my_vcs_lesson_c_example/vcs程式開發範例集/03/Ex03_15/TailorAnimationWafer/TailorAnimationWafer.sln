@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TailorAnimationWafer", "TailorAnimationWafer\TailorAnimationWafer.csproj", "{37D11D5E-6A7F-4A3D-BB30-56216F5C0367}"
 EndProject
 Global
