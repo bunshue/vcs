@@ -1,34 +1,36 @@
 EMGU重建專案的方法_x64    x86
 
-取得 4個Emgu.XX.dll 與 3個opencv.XX.dll
+取得 幾個Emgu.XX.dll 與 幾個opencv.XX.dll
 需把路徑指到C:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x64-2.3.0.1416\bin
 或者到此路徑把檔案拷貝出來
 
 1. 新建專案
-2. 開啟 *.csproj
+2. 編輯 *.csproj
 	把
 	  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
 		<PlatformTarget>x86</PlatformTarget>
 	改成
 		<PlatformTarget>x64</PlatformTarget>
 
-3. 專案/參考/加入參考, 選擇Emgu那4個Emgu.XX.dll
+3. 專案/參考/加入參考, 選擇Emgu那3個Emgu.XX.dll
 
-4. 專案/加入/現有項目, 選擇opencv那3個dll, 屬性之"複製到輸出目錄" 改成 "有更新時才複製"
+4. 專案/加入/現有項目, 選擇opencv那2個dll, 屬性之"複製到輸出目錄" 改成 "有更新時才複製"
    
 5. 編輯Form1.cs
 
-4個Emgu.XX.dll
+幾個Emgu.XX.dll
+Emgu.CV.dll		(基本必要)
+Emgu.CV.UI.dll	(基本必要)
+Emgu.Util.dll	(基本必要)
+Emgu.CV.GPU.dll	(進階)
+Emgu.CV.OCR.dll	(進階)
+Emgu.CV.ML.dll (Reserved)
 
-Emgu.CV.dll
-Emgu.CV.ML.dll (不用也可以)
-Emgu.CV.UI.dll
-Emgu.Util.dll
-
-3個opencv.XX.dll
-opencv_core231.dll		(必要)
-opencv_highgui231.dll	(必要)
-opencv_imgproc231.dll	(做特別的影像處理才需要)
+幾個opencv_XX.dll
+opencv_core231.dll		(基本必要)
+opencv_highgui231.dll	(基本必要)
+opencv_imgproc231.dll	(進階, 做特別的影像處理才需要)
+opencv_video231.dll		(進階, 做特別的影像處理才需要)
 
 CameraCapture1	要多 opencv_imgproc231.dll
 MotionDetection	要多 opencv_imgproc231.dll, opencv_video231.dll
@@ -44,5 +46,5 @@ MotionDetection	要多 opencv_imgproc231.dll, opencv_video231.dll
 改
     <PlatformTarget>x86</PlatformTarget>
 
-2. 改 4個Emgu.XX.dll 與 3個opencv.XX.dll 的路徑
+2. 改 幾個Emgu.XX.dll 與 幾個opencv.XX.dll 的路徑
 
