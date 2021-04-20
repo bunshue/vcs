@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "添加程序托盘", "新增程序托盤\添加程序托盘.csproj", "{5906D931-1BF5-41FE-99F5-05E75734F4A9}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "新增程序托盤", "新增程序托盤\新增程序托盤.csproj", "{5906D931-1BF5-41FE-99F5-05E75734F4A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

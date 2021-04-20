@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "關閉外部已開啟的程序", "關閉外部已開啟的程序\關閉外部已開啟的程序.csproj", "{966AF5D6-3365-429B-9873-B627554E12BD}"
 EndProject
 Global

@@ -224,6 +224,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(132, 49);
             this.button16.TabIndex = 18;
+            this.button16.Text = "打開控制面板中的程序_滑鼠游標設定";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -233,24 +234,27 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(132, 49);
             this.button17.TabIndex = 19;
+            this.button17.Text = "打開控制面板中的程序_桌面設定";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(150, 476);
+            this.button18.Location = new System.Drawing.Point(150, 470);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(132, 49);
             this.button18.TabIndex = 20;
+            this.button18.Text = "打開控制面板中的程序_網路連接";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(150, 531);
+            this.button19.Location = new System.Drawing.Point(150, 525);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(132, 49);
             this.button19.TabIndex = 20;
+            this.button19.Text = "打開控制面板中的程序_聲音設定";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -271,6 +275,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(132, 49);
             this.button20.TabIndex = 27;
+            this.button20.Text = "檢測系統啟動模式";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -280,6 +285,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(132, 49);
             this.button21.TabIndex = 28;
+            this.button21.Text = "取得計算機中已安裝的字體";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 

@@ -23,6 +23,7 @@ using Microsoft.VisualBasic.Devices;
 using System.Collections;       //for DictionaryEntry
 using System.Drawing.Imaging;   //for ImageFormat
 
+using System.Drawing.Text;      //for InstalledFontCollection
 
 namespace vcs_test_all_04
 {
@@ -217,30 +218,57 @@ namespace vcs_test_all_04
 
         private void button16_Click(object sender, EventArgs e)
         {
-
+            //打開控制面板中的程序_滑鼠游標設定
+            System.Diagnostics.Process.Start("main.cpl");
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-
+            //打開控制面板中的程序_桌面設定
+            System.Diagnostics.Process.Start("desk.cpl");
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //打開控制面板中的程序_網路連接
+            System.Diagnostics.Process.Start("ncpa.cpl");
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //打開控制面板中的程序_聲音設定
+            System.Diagnostics.Process.Start("mmsys.cpl");
 
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //檢測系統啟動模式
+            string mode = SystemInformation.BootMode.ToString();
+            string str = "目前系統的啟動模式是：";
+            switch (mode)
+            {
+                case "FailSafe":
+                    MessageBox.Show(str + "不具有網絡支援的安全模式");
+                    break;
+                case "FailSafeWithNetwork":
+                    MessageBox.Show(str + "具有網絡支援的安全模式");
+                    break;
+                case "Normal":
+                    MessageBox.Show(str + "標準模式");
+                    break;
+            }
 
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //取得計算機中已安裝的字體
+            InstalledFontCollection myFonts = new InstalledFontCollection();
+            foreach (FontFamily family in myFonts.Families)
+            {
+                richTextBox1.AppendText(family.Name + "\n");
+            }
 
         }
 

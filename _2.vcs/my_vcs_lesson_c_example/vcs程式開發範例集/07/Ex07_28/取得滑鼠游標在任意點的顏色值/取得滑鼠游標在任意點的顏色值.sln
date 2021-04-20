@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "取得滑鼠游標在任意點的顏色值", "取得滑鼠游標在任意點的顏色值\取得滑鼠游標在任意點的顏色值.csproj", "{BA5D726B-8638-46A0-8957-B8C6F48C6F0F}"
 EndProject
 Global

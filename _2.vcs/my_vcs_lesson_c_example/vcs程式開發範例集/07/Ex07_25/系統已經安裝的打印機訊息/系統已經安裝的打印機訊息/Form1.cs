@@ -39,6 +39,14 @@ namespace 系統已經安裝的打印機訊息
                     richTextBox1.AppendText(prinsize + "\n");
                 }
             }
+
+
+
+
+
+
+
+
         }
 
     }

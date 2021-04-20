@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "設定滑鼠游標樣式", "設定滑鼠游標樣式\設定滑鼠游標樣式.csproj", "{E8D1297F-1D53-4DCB-AC2F-E78AE59F98A2}"
 EndProject
 Global
