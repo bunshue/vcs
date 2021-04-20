@@ -74,6 +74,8 @@ namespace _emgu_test0
             pictureBox2.Size = new Size(W + 10, H + 10);
             pictureBox3.Size = new Size(W + 10, H + 10);
             pictureBox4.Size = new Size(W + 10, H + 10);
+            imageBox1.Size = new Size(W * 2 / 3, H * 2 / 3);
+            imageBox1.SizeMode = PictureBoxSizeMode.Zoom;
             ibox.Size = new Size(W + 10, H + 10);
             richTextBox1.Size = new Size(W + 10, H + 10);
 
@@ -95,6 +97,9 @@ namespace _emgu_test0
             label3.Location = new Point(pictureBox3.Location.X, pictureBox3.Location.Y - 30);
             label4.Location = new Point(pictureBox4.Location.X, pictureBox4.Location.Y - 30);
             label5.Location = new Point(ibox.Location.X, ibox.Location.Y - 30);
+
+            imageBox1.Location = new Point(x_st + dx * 0 + dxx * 0, y_st + dy * 11);
+            imageBox1.BackColor = Color.Pink;
         }
 
         void clear_all()
@@ -478,6 +483,15 @@ namespace _emgu_test0
             pictureBox3.Image = image_diff.ToBitmap();
         }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //使用ImageBox
+            Bitmap bmp = new Bitmap(filename);
+
+            //Bitmap 轉成 Image
+            Image<Bgr, Byte> image = new Image<Bgr, Byte>(bmp);
+            imageBox1.Image = image;
+        }
     }
 }
 

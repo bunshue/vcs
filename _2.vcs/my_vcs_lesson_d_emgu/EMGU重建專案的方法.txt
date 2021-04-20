@@ -1,11 +1,12 @@
-EMGU重建專案的方法_x64    x86
+EMGU重建專案的方法	x64 和 x86
 
 取得 幾個Emgu.XX.dll 與 幾個opencv.XX.dll
 需把路徑指到C:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x64-2.3.0.1416\bin
 或者到此路徑把檔案拷貝出來
 
 1. 新建專案
-2. 編輯 *.csproj
+
+2. (若是x64)編輯 *.csproj
 	把
 	  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
 		<PlatformTarget>x86</PlatformTarget>
@@ -34,6 +35,7 @@ opencv_video231.dll		(進階, 做特別的影像處理才需要)
 
 CameraCapture1	要多 opencv_imgproc231.dll
 MotionDetection	要多 opencv_imgproc231.dll, opencv_video231.dll
+TrafficSignRecognition 和 VideoSurveillance 要多 _dll2 的那10個dll
 
 ----------------------------------------------------------------------------------
 
