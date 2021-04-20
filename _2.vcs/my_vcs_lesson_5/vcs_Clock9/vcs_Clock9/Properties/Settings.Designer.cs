@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ScreenImage.Properties {
+namespace vcs_Clock9.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

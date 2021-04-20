@@ -43,7 +43,8 @@
     <Reference Include="Emgu.CV.UI">
       <HintPath>..\..\_dll\Emgu.CV.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.Util">
+    <Reference Include="Emgu.Util, Version=2.3.0.1416, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\_dll\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="System" />

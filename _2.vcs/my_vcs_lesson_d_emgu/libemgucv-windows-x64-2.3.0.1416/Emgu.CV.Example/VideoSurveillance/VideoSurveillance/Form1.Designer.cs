@@ -40,44 +40,44 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(682, 24);
+            this.label2.Location = new System.Drawing.Point(685, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 12);
-            this.label2.TabIndex = 8;
+            this.label2.TabIndex = 4;
             this.label2.Text = "Forground Mask";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 24);
+            this.label1.Location = new System.Drawing.Point(24, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 12);
-            this.label1.TabIndex = 7;
+            this.label1.TabIndex = 3;
             this.label1.Text = "Camera Frame";
             // 
             // imageBox2
             // 
             this.imageBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.imageBox2.Location = new System.Drawing.Point(684, 56);
+            this.imageBox2.Location = new System.Drawing.Point(687, 57);
             this.imageBox2.Name = "imageBox2";
             this.imageBox2.Size = new System.Drawing.Size(640, 480);
-            this.imageBox2.TabIndex = 10;
+            this.imageBox2.TabIndex = 6;
             this.imageBox2.TabStop = false;
             // 
             // imageBox1
             // 
             this.imageBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.imageBox1.Location = new System.Drawing.Point(21, 56);
+            this.imageBox1.Location = new System.Drawing.Point(24, 57);
             this.imageBox1.Name = "imageBox1";
             this.imageBox1.Size = new System.Drawing.Size(640, 480);
-            this.imageBox1.TabIndex = 9;
+            this.imageBox1.TabIndex = 5;
             this.imageBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1146, 812);
+            this.ClientSize = new System.Drawing.Size(1384, 562);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.imageBox2);

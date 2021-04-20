@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnatchAtMouse", "SnatchAtMouse\SnatchAtMouse.csproj", "{2CA29EBA-640E-4B38-8BC3-6C6CA982D626}"
 EndProject
 Global

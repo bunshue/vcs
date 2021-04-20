@@ -146,6 +146,11 @@ namespace vcs_test_all_04
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //檢視圖片的像素
+            string filename1 = @"C:\______test_files\picture1.jpg";
+
+            Image myImage = System.Drawing.Image.FromFile(filename1);
+            richTextBox1.Text += "檔案 : " + filename + ",\t" + "圖片像素：[" + myImage.Width + "*" + myImage.Height + "]" + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)

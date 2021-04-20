@@ -5618,15 +5618,98 @@ namespace vcs_Draw9_Example
 
         private void button31_Click(object sender, EventArgs e)
         {
+            //任意角度旋轉圖片
+            string filename = @"C:\______test_files\picture1.jpg";
+            CircumgyrateEffect(filename.Trim(), pictureBox1);//呼叫自定義方法
         }
+
+
+        public void CircumgyrateEffect(string Str, PictureBox pictureBox1)
+        {
+            Bitmap tem_Bitmap = new Bitmap(Str);//透過字串實例化Bitmap類
+            Bitmap Var_Bitmap = new Bitmap(tem_Bitmap, pictureBox1.Width, pictureBox1.Height);//透過panel按件的大小實例化Bitmap類
+
+            Graphics g = pictureBox1.CreateGraphics();//實例化panel控制元件的Graphics類
+            float Var_Angle = 0;//設定圖片的旋轉角度
+            while (Var_Angle <= 360)//使圖片旋轉360度
+            {
+                TextureBrush Var_Brush = new TextureBrush(Var_Bitmap);//實例化TextureBrush類
+                pictureBox1.Refresh();//使工作區無效
+                Var_Brush.RotateTransform(Var_Angle);//以指定角度旋轉圖片
+                //繪製旋轉後的圖片
+                g.FillRectangle(Var_Brush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
+                Var_Angle += 2f;//增加旋轉的角度
+                System.Threading.Thread.Sleep(30);//掛掉目前線程
+            }
+        }
+
 
         private void button32_Click(object sender, EventArgs e)
         {
+            //以四周擴散形式顯示圖片
+            string filename = @"C:\______test_files\picture1.jpg";
+            DiffuseEffect(filename.Trim(), pictureBox1);//呼叫自定義方法完成圖片向四周的擴充
+        }
+
+        public void DiffuseEffect(string Str, PictureBox pictureBox1)
+        {
+            Bitmap tem_Bitmap = new Bitmap(Str);//根據字串實例化Bitmap類
+            Bitmap Var_Bitmap = new Bitmap(tem_Bitmap, pictureBox1.Width, pictureBox1.Height);//根據大小實例化Bitmap類
+            int Var_W = Var_Bitmap.Width; //圖片寬度 
+            int Var_H = Var_Bitmap.Height; //圖片高度 
+            Graphics g = pictureBox1.CreateGraphics();//取得Graphics對像 
+            g.Clear(pictureBox1.BackColor); //初始為全灰色 
+            for (int i = 0; i <= Var_W / 2; i++)
+            {
+                //取得高和寬的比例
+                int j = Convert.ToInt32(i * (Convert.ToSingle(Var_H) / Convert.ToSingle(Var_W)));
+                //設定縮小後圖片的大小
+                Rectangle Var_D_Rect = new Rectangle(Var_W / 2 - i, Var_H / 2 - j, 2 * i, 2 * j);
+                //取得原圖片大小
+                Rectangle Var_S_Rect = new Rectangle(0, 0, Var_Bitmap.Width, Var_Bitmap.Height);
+                g.DrawImage(Var_Bitmap, Var_D_Rect, Var_S_Rect, GraphicsUnit.Pixel);//按照指定的大小繪製原圖片
+                System.Threading.Thread.Sleep(10);//線程序掛掉
+            }
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
+            //圖片的上下對接顯示
+            string filename = @"C:\______test_files\picture1.jpg";
+            UpDownConnect(filename.Trim(), pictureBox1);//呼叫自定義方法
         }
+
+        public void UpDownConnect(string Str, PictureBox pictureBox1)
+        {
+            Bitmap tem_Bitmap = new Bitmap(Str);
+            Bitmap Var_Bitmap = new Bitmap(tem_Bitmap, pictureBox1.Width, pictureBox1.Height);
+
+            int Var_W = Var_Bitmap.Width; //圖片寬度 
+            int Var_H = Var_Bitmap.Height; //圖片高度 
+            Graphics g = pictureBox1.CreateGraphics();//實例化Graphics類
+            g.Clear(Color.Gray);//清空panel控制元件
+            Bitmap Tem_bmp = new Bitmap(Var_W, Var_H);//透過圖片大小實例化Bitmap類
+            int n = 0;
+            //搜尋圖片中的各象素
+            while (n <= Var_H / 2)
+            {
+                for (int i = 0; i <= Var_W - 1; i++)//取得上半張圖片的象素
+                {
+                    Tem_bmp.SetPixel(i, n, Var_Bitmap.GetPixel(i, n));//根據象素取得目前象的顏色，並記錄在Bitmap類中
+                }
+                for (int i = 0; i <= Var_W - 1; i++)//取得下半張圖片的象素
+                {
+                    //根據象素取得目前象的顏色，並記錄在Bitmap類中
+                    Tem_bmp.SetPixel(i, Var_H - n - 1, Var_Bitmap.GetPixel(i, Var_H - n - 1));
+                }
+                n++;
+                pictureBox1.Refresh();//設定工作區無效
+                g.DrawImage(Tem_bmp, 0, 0);//繪製圖片
+                System.Threading.Thread.Sleep(5);//掛掉線程
+            }
+        }
+
+
 
         private void button34_Click(object sender, EventArgs e)
         {

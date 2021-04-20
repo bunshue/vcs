@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A7252FA8-4778-4394-B9E5-B84B4A85A390}</ProjectGuid>
+    <ProjectGuid>{97576503-7F3C-408B-8746-F841B83BC553}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wallpaper</RootNamespace>
-    <AssemblyName>Wallpaper</AssemblyName>
+    <RootNamespace>vcs_Clock9</RootNamespace>
+    <AssemblyName>vcs_Clock9</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
