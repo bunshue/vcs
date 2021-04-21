@@ -130,4 +130,7 @@
   <data name="Sad16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Sad16x16.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="White16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\White16x16.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

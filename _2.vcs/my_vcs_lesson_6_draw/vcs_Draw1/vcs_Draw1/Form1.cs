@@ -1799,6 +1799,43 @@ namespace vcs_Draw1
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //MakeTransparent 用法
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
+
+            int x_st = 50;
+            int y_st = 50;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            pictureBox1.Size = new Size(W * 2 + 150, H + 100);
+            pictureBox1.BackColor = Color.Pink;
+
+            Application.DoEvents();
+
+            GraphicsUnit units = GraphicsUnit.Pixel;
+
+            // Create parallelogram for drawing image.
+            Point ulCorner = new Point(x_st + 0, y_st);
+            Point urCorner = new Point(x_st + W, y_st);
+            Point llCorner = new Point(x_st + 0, y_st + H);
+            Point[] destPara = { ulCorner, urCorner, llCorner };
+
+            // Create rectangle for source image.
+            Rectangle srcRect = new Rectangle(0, 0, W, H);
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            g.DrawImage((Image)bitmap1, destPara, srcRect, units);
+
+            Application.DoEvents();
+
+            bitmap1.MakeTransparent(Color.White);
+            g.DrawImage((Image)bitmap1, new Point(x_st + W + 10, y_st));
+
+            g.DrawString("MakeTransparent 用法, 指名將白色變成透明", new Font("標楷體", 20), new SolidBrush(Color.Navy), 10, 10);
         }
 
         private void button31_Click(object sender, EventArgs e)

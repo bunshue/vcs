@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlveoliClewWindow", "AlveoliClewWindow\AlveoliClewWindow.csproj", "{2CC3D4FE-A4E7-4FDA-A0E5-B5308DDFE0CD}"
 EndProject
 Global

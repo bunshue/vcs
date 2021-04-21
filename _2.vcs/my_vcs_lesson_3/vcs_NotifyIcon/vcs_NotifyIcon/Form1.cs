@@ -59,5 +59,29 @@ namespace vcs_NotifyIcon
             this.Close();
         }
 
+        int cnt = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (cnt == 0)
+            {
+                this.Icon = Properties.Resources.Happy;
+                notifyIcon1.Icon = Properties.Resources.Happy16x16;
+            }
+            else if ((cnt == 1) || (cnt == 3))
+            {
+                this.Icon = Properties.Resources.White16x16;
+                notifyIcon1.Icon = Properties.Resources.White16x16;
+            }
+            else if (cnt == 2)
+            {
+                this.Icon = Properties.Resources.Sad;
+                notifyIcon1.Icon = Properties.Resources.Sad16x16;
+            }
+
+            cnt++;
+            if (cnt >= 4)
+                cnt = 0;
+        }
+
     }
 }
