@@ -35,6 +35,7 @@ namespace 關閉外部已開啟的程序
             {
                 myProcess.CloseMainWindow();
             }
+            //remove this process in listbox
             MessageBox.Show("程序已關閉", "訊息", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }

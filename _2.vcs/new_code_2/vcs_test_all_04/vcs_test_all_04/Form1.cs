@@ -255,9 +255,25 @@ namespace vcs_test_all_04
 
         }
 
+        [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "SwapMouseButton")]
+        public extern static int SwapMouseButton(int bSwap);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public extern static int GetSystemMetrics(int nIndes);
         private void button7_Click(object sender, EventArgs e)
         {
+            if (button7.Text == "切換滑鼠左右鍵")
+            {
+                SwapMouseButton(1);//切換滑鼠游標左右鍵
 
+
+                button7.Text = "恢復滑鼠左右鍵";
+            }
+            else
+            {
+                SwapMouseButton(0);//恢復，設定左鍵為主鍵
+
+                button7.Text = "切換滑鼠左右鍵";
+            }
         }
 
         [DllImport("winmm.dll", EntryPoint = "mciSendString")]

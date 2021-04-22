@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Wallpaper3", "vcs_Wallpaper3\vcs_Wallpaper3.csproj", "{041C8BFD-1DCD-44A1-AD10-2289DF29B9DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{041C8BFD-1DCD-44A1-AD10-2289DF29B9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{041C8BFD-1DCD-44A1-AD10-2289DF29B9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{041C8BFD-1DCD-44A1-AD10-2289DF29B9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{041C8BFD-1DCD-44A1-AD10-2289DF29B9DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
