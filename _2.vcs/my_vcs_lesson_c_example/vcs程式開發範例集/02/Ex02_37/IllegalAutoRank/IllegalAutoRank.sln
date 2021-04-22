@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IllegalAutoRank", "IllegalAutoRank\IllegalAutoRank.csproj", "{275DC146-D6D9-4D2B-9DBA-F43519340E00}"
 EndProject
 Global

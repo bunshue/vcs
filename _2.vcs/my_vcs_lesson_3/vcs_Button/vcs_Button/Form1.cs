@@ -163,5 +163,21 @@ namespace vcs_Button
             richTextBox1.Text += "Button變小\n";
             bt2.Size = new Size(bt2.Size.Width - 5, bt2.Size.Height - 5);
         }
+
+        //在Button上畫圖
+        private void button2_Paint(object sender, PaintEventArgs e)
+        {
+            string filename = @"C:\______test_files\cat\cat1.png";
+            Bitmap bmp;//實例Bitmap對像
+            bmp = new Bitmap(filename);
+            Graphics g = e.Graphics;
+            TextureBrush myBrush = new TextureBrush(bmp);
+            g.FillRectangle(myBrush, this.ClientRectangle);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "在Button上畫圖\n";
+        }
     }
 }

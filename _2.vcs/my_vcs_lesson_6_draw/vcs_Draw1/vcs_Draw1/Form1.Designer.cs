@@ -615,6 +615,7 @@
             this.button37.Size = new System.Drawing.Size(120, 42);
             this.button37.TabIndex = 64;
             this.button37.UseVisualStyleBackColor = true;
+            this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
             // button38
             // 
@@ -623,7 +624,9 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(120, 42);
             this.button38.TabIndex = 65;
+            this.button38.Text = "為此Button畫陰影";
             this.button38.UseVisualStyleBackColor = true;
+            this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
             // button39
             // 
@@ -632,7 +635,9 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(120, 42);
             this.button39.TabIndex = 66;
+            this.button39.Text = "為此Button畫投影";
             this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
             // button40
             // 

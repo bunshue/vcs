@@ -648,6 +648,14 @@ namespace vcs_test_all_00_Control
         {
             MainForm.Instance().CloseForm();//隱藏訊息表單
         }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            foreach (Control cont in this.Controls)
+            {
+                richTextBox1.Text += "取得控件 : " + cont.Name.ToString() + "\tText : " + cont.Text + "\tType : " + cont.GetType().ToString() + "\n";
+            }
+        }
     }
 
     class MyRecordControlClass

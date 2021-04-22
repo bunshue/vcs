@@ -239,5 +239,36 @@ new XElement("Name", "小夫")
             richTextBox1.Clear();
         }
 
+        //開啟XML檔案到TreeView ST
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\__RW\_xml\NexusPoint.xml";
+            //string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML6.xml";
+
+            XmlDocument NexusDocument = new XmlDataDocument();//定義一個XML文檔對像
+            NexusDocument.Load(filename);//加載XML文件
+            RecursionTreeControl(NexusDocument.DocumentElement, treeView1.Nodes);//將加載完成的XML文件顯示在TreeView控件中
+            treeView1.ExpandAll();//展開TreeView控件中的所有項
+        }
+
+        /// <summary>
+        /// RecursionTreeControl:表示將XML文件的內容顯示在TreeView控件中
+        /// </summary>
+        /// <param name="xmlNode">將要加載的XML文件中的節點元素</param>
+        /// <param name="nodes">將要加載的XML文件中的節點集合</param>
+        private void RecursionTreeControl(XmlNode xmlNode, TreeNodeCollection nodes)
+        {
+            foreach (XmlNode node in xmlNode.ChildNodes)//循環遍歷當前元素的子元素集合
+            {
+                string temp = (node.Value != null ? node.Value : (node.Attributes != null && node.Attributes.Count > 0) ? node.Attributes[0].Value : node.Name);//表示TreeNode節點的文本內容
+                TreeNode new_child = new TreeNode(temp);//定義一個TreeNode節點對像
+                nodes.Add(new_child);//向當前TreeNodeCollection集合中添加當前節點
+                RecursionTreeControl(node, new_child.Nodes);//調用本方法進行遞歸
+            }
+        }
+
+
+
+
     }
 }

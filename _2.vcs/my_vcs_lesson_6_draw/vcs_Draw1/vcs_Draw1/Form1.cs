@@ -1874,6 +1874,65 @@ namespace vcs_Draw1
             pictureBox1.Image = bitmap1;
         }
 
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+            //為此Button畫陰影
+            int len = 7;    //陰影長度
+            Graphics ag = this.CreateGraphics();
+            for (int i = 0; i < len; i++)
+            {
+                Point p1 = new Point();
+                p1.X = button38.Left - i;
+                p1.Y = button38.Top + button38.Height + i;
+                Point p2 = new Point();
+                p2.X = button38.Left + button38.Width + i;
+                p2.Y = button38.Top + button38.Height + i;
+                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
+            }
+            for (int i = 0; i < len; i++)
+            {
+                Point p1 = new Point();
+                p1.X = button38.Left + button38.Width + i;
+                p1.Y = button38.Top - i;
+                Point p2 = new Point();
+                p2.X = button38.Left + button38.Width + i;
+                p2.Y = button38.Top + button38.Height + i;
+                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
+            }
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            //為此Button畫投影
+            int len = 7;    //投影長度
+            Graphics ag = this.CreateGraphics();
+            for (int i = 0; i < len; i++)
+            {
+                Point p1 = new Point();
+                p1.X = button39.Left - i;
+                p1.Y = button39.Top;
+                Point p2 = new Point();
+                p2.X = button39.Left + i;
+                p2.Y = button39.Top + button39.Height + i;
+                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
+            }
+            for (int i = 0; i < len; i++)
+            {
+                Point p1 = new Point();
+                p1.X = button39.Left - i;
+                p1.Y = button39.Top - i;
+                Point p2 = new Point();
+                p2.X = button39.Left + button39.Width + i;
+                p2.Y = button39.Top + i;
+                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
+            }
+        }
+
         private void button40_Click(object sender, EventArgs e)
         {
             if (bitmap1 == null)
@@ -2060,6 +2119,13 @@ namespace vcs_Draw1
         {
 
         }
+
+
+
+
+
+
+
 
         //在線的上下畫字
         private void button32_Click(object sender, EventArgs e)
@@ -2890,5 +2956,7 @@ namespace vcs_Draw1
             }
             pictureBox_gradient_color.Image = bitmap1;
         }
+
+
     }
 }

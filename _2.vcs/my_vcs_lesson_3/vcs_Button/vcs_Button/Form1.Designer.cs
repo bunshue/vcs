@@ -35,6 +35,7 @@
             this.bt3 = new System.Windows.Forms.Button();
             this.bt1 = new System.Windows.Forms.Button();
             this.bt2 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,7 +80,7 @@
             // bt3
             // 
             this.bt3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt3.Location = new System.Drawing.Point(454, 430);
+            this.bt3.Location = new System.Drawing.Point(444, 319);
             this.bt3.Name = "bt3";
             this.bt3.Size = new System.Drawing.Size(195, 40);
             this.bt3.TabIndex = 37;
@@ -90,7 +91,7 @@
             // bt1
             // 
             this.bt1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt1.Location = new System.Drawing.Point(454, 298);
+            this.bt1.Location = new System.Drawing.Point(444, 187);
             this.bt1.Name = "bt1";
             this.bt1.Size = new System.Drawing.Size(195, 40);
             this.bt1.TabIndex = 36;
@@ -101,7 +102,7 @@
             // bt2
             // 
             this.bt2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt2.Location = new System.Drawing.Point(454, 364);
+            this.bt2.Location = new System.Drawing.Point(444, 253);
             this.bt2.Name = "bt2";
             this.bt2.Size = new System.Drawing.Size(195, 40);
             this.bt2.TabIndex = 35;
@@ -109,11 +110,24 @@
             this.bt2.UseVisualStyleBackColor = true;
             this.bt2.Click += new System.EventHandler(this.bt2_Click);
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Pink;
+            this.button2.Font = new System.Drawing.Font("標楷體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(444, 380);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(259, 224);
+            this.button2.TabIndex = 38;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Paint += new System.Windows.Forms.PaintEventHandler(this.button2_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1013, 616);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.bt3);
             this.Controls.Add(this.bt1);
             this.Controls.Add(this.bt2);
@@ -138,6 +152,7 @@
         private System.Windows.Forms.Button bt3;
         private System.Windows.Forms.Button bt1;
         private System.Windows.Forms.Button bt2;
+        private System.Windows.Forms.Button button2;
     }
 }
 

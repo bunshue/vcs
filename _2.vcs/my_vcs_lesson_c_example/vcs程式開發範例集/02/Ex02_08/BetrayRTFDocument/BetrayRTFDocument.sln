@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetrayRTFDocument", "BetrayRTFDocument\BetrayRTFDocument.csproj", "{6D575E7C-CE87-49B6-9B5D-9E43467C36F0}"
 EndProject
 Global
