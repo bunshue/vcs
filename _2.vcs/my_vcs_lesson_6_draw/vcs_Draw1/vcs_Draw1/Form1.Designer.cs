@@ -349,11 +349,12 @@
             // 
             // button19
             // 
-            this.button19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button19.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button19.Location = new System.Drawing.Point(1262, 153);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(120, 42);
             this.button19.TabIndex = 36;
+            this.button19.Text = "在Form上印出滑鼠游標形狀";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 

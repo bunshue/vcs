@@ -114,6 +114,7 @@ namespace vcs_Draw3B
             pictureBox_brown.Size = new Size(W, H);
             pictureBox_round.Size = new Size(W, H);
             pictureBox_ellipse.Size = new Size(350, 200);
+            pictureBox_circular.Size = new Size(W, H);
 
             pictureBox_captcha1.Size = new Size(W + 50, 110);
             pictureBox_captcha2.Size = new Size(W + 50, 110);
@@ -132,6 +133,8 @@ namespace vcs_Draw3B
             pictureBox_polygon.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox_brown.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox_round.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            pictureBox_circular.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
             groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 50);
             pictureBox_ellipse.Location = new Point(x_st + dx * 4 - 40, y_st + dy * 1);
             pictureBox_captcha1.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -1292,6 +1295,39 @@ namespace vcs_Draw3B
         private void timer_spiral_Tick(object sender, EventArgs e)
         {
             draw_spiral();
+        }
+
+        int Sect = 20;
+        float[] x = new float[31];
+        float[] y = new float[31];
+
+        public void draw_circular()
+        {
+            int i;
+            float r;
+            //this.ClientSize = new Size(300, 300);
+            r = this.pictureBox_circular.ClientSize.Width / 2;
+            Graphics g = this.pictureBox_circular.CreateGraphics();
+            for (i = 0; i < Sect; i++)
+            {
+                x[i] = (float)(r * Math.Cos(i * 2 * Math.PI / Sect) + this.pictureBox_circular.ClientSize.Width / 2);
+                y[i] = (float)(r * Math.Sin(i * 2 * Math.PI / Sect) + this.pictureBox_circular.ClientSize.Height / 2);
+            }
+            for (int m = 0; m < Sect - 1; m++)
+            {
+                for (int n = 0; n < Sect; n++)
+                {
+                    g.DrawLine(Pens.Blue, x[m], y[m], x[n], y[n]);
+                    Application.DoEvents();
+                }
+            }
+        }
+
+        private void timer_circular_Tick(object sender, EventArgs e)
+        {
+            Graphics g = this.pictureBox_circular.CreateGraphics();
+            g.Clear(Color.WhiteSmoke);
+            draw_circular();
         }
     }
 }

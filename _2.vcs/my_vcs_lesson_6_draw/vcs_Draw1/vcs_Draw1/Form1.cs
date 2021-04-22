@@ -24,6 +24,8 @@ namespace vcs_Draw1
         Color color_st = Color.White;
         Color color_sp = Color.Green;
 
+        bool flag_print_mouse_cursor = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -1411,6 +1413,12 @@ namespace vcs_Draw1
         {
             //richTextBox1.Text += "Mouse Up\n";
             enable_erase = false;
+
+            if (flag_print_mouse_cursor == true)
+            {
+                Graphics myGraphics = this.CreateGraphics();
+                Cursor.Draw(myGraphics, new Rectangle(e.X, e.Y, 10, 10));
+            }
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
@@ -1432,6 +1440,18 @@ namespace vcs_Draw1
 
         private void button19_Click(object sender, EventArgs e)
         {
+            if (button19.Text == "在Form上印出滑鼠游標形狀")
+            {
+                flag_print_mouse_cursor = true;
+                this.Cursor = Cursors.Hand;
+                button19.Text = "停止印出滑鼠游標形狀";
+            }
+            else
+            {
+                flag_print_mouse_cursor = false;
+                this.Cursor = Cursors.Default;
+                button19.Text = "在Form上印出滑鼠游標形狀";
+            }
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -2956,7 +2976,5 @@ namespace vcs_Draw1
             }
             pictureBox_gradient_color.Image = bitmap1;
         }
-
-
     }
 }

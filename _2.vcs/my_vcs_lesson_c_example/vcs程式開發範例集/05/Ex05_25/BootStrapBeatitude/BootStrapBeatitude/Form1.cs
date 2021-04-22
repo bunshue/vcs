@@ -37,7 +37,7 @@ namespace BootStrapBeatitude
 
             gpstirng.AddString("開開心心每一天", family, fontStyle, emSize, origin, format);
             this.button1.Region = new Region(gpstirng);
-            Registry.LocalMachine.CreateSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\RUN").SetValue("MyAngel", Application.StartupPath + "\\Ex05_13.exe", RegistryValueKind.String);
+            //Registry.LocalMachine.CreateSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\RUN").SetValue("MyAngel", Application.StartupPath + "\\Ex05_13.exe", RegistryValueKind.String);
         }
 
         private void button2_Click(object sender, EventArgs e)

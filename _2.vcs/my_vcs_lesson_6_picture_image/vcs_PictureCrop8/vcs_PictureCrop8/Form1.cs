@@ -63,19 +63,50 @@ namespace vcs_PictureCrop8
             */
             if (flag_mouse_down == true)
             {
+                int x_st2 = x_st;
+                int y_st2 = y_st;
+
+                x_sp = e.X;
+                y_sp = e.Y;
+
+                if (x_sp > x_st)
+                    w = x_sp - x_st;
+                else
+                {
+                    w = x_st - x_sp;
+                    x_st2 = x_sp;
+                }
+
+                if (y_sp > y_st)
+                    h = y_sp - y_st;
+                else
+                {
+                    h = y_st - y_sp;
+                    y_st2 = y_sp;
+                }
+
+                //恢復原狀
+                pictureBox1.Image = myImage;
+                pictureBox1.Height = myImage.Height;
+                pictureBox1.Width = myImage.Width;
+
+                Application.DoEvents();
 
                 int W = pictureBox1.Width;
                 int H = pictureBox1.Height;
 
                 Graphics g = pictureBox1.CreateGraphics();
-                g.DrawLine(new Pen(Color.Black, 1), new Point(e.X, 0), new Point(e.X, H));
-                g.DrawLine(new Pen(Color.Black, 1), new Point(0, e.Y), new Point(W, e.Y));
+                g.DrawRectangle(new Pen(Color.Red, 1), x_st2, y_st2, w, h);
             }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             flag_mouse_down = false;
+
+            int x_st2 = x_st;
+            int y_st2 = y_st;
+
             x_sp = e.X;
             y_sp = e.Y;
 
@@ -84,7 +115,7 @@ namespace vcs_PictureCrop8
             else
             {
                 w = x_st - x_sp;
-                x_st = x_sp;
+                x_st2 = x_sp;
             }
 
             if (y_sp > y_st)
@@ -92,7 +123,7 @@ namespace vcs_PictureCrop8
             else
             {
                 h = y_st - y_sp;
-                y_st = y_sp;
+                y_st2 = y_sp;
             }
 
             //恢復原狀
@@ -103,7 +134,12 @@ namespace vcs_PictureCrop8
             Application.DoEvents();
 
             Graphics g = pictureBox1.CreateGraphics();
-            g.DrawRectangle(new Pen(Color.Red, 1), x_st, y_st, w, h);
+            g.DrawRectangle(new Pen(Color.Red, 1), x_st2, y_st2, w, h);
+        }
+
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
