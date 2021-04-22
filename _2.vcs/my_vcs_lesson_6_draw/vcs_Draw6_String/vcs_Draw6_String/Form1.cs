@@ -103,7 +103,7 @@ namespace vcs_Draw6_String
             y_st = 40;
             pictureBox2.Location = new Point(x_st, y_st);
             pictureBox2.BackColor = Color.Red;
-            
+
             x_st = 20;
             y_st = 600;
 
@@ -315,18 +315,73 @@ namespace vcs_Draw6_String
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //印版效果的文字
+            Graphics g = pictureBox1.CreateGraphics();//創健控件的Graphics類
+            g.Clear(Color.White);//以指定的顏色清除控件背景
+            Brush Var_Brush_Back = Brushes.Black;//設置前景色
+            Brush Var_Brush_Fore = Brushes.Aquamarine;//設置背景色
+            Font Var_Font = new Font("細明體", 40);//設置字體樣式
+            string Var_Str = "印版效果的文字";//設置字符串
+            SizeF Var_Size = g.MeasureString(Var_Str, Var_Font);//獲取字符串的大小
+            int Var_X = (pictureBox1.Width - Convert.ToInt32(Var_Size.Width)) / 2;//設置平移的X坐標
+            int Var_Y = (pictureBox1.Height - Convert.ToInt32(Var_Size.Height)) / 2;////設置平移的Y坐標
+            for (int i = 0; i < 10; i++)
+            {
+                g.DrawString(Var_Str, Var_Font, Var_Brush_Back, Var_X - i, Var_Y + i);
+            }
+            g.DrawString(Var_Str, Var_Font, Var_Brush_Back, Var_X, Var_Y);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //陰影效果的文字
+            Graphics g = pictureBox1.CreateGraphics();//建立控制元件的Graphics類
+            g.Clear(Color.White);//以指定的顏色清除控制元件背景
+            Brush Var_Brush_Back = Brushes.Gray;//設定前景色
+            Brush Var_Brush_Fore = Brushes.Black;//設定背景色
+            Font Var_Font = new Font("黑體", 40, FontStyle.Bold);//設定字體樣式
+            string Var_Str = "陰影效果的文字";//設定字串
+            SizeF Var_Size = g.MeasureString(Var_Str, Var_Font);//取得字串的大小
+            int Var_X = (pictureBox1.Width - Convert.ToInt32(Var_Size.Width)) / 2;//設定平移的X座標
+            int Var_Y = (pictureBox1.Height - Convert.ToInt32(Var_Size.Height)) / 2;////設定平移的Y座標
+            g.DrawString(Var_Str, Var_Font, Var_Brush_Back, Var_X + 3, Var_Y + 2);
+            g.DrawString(Var_Str, Var_Font, Var_Brush_Fore, Var_X, Var_Y);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //傾斜效果的文字
+            Graphics g = pictureBox1.CreateGraphics();//建立控制元件的Graphics類
+            g.Clear(Color.White);//以指定的顏色清除控制元件背景
+            Brush Var_Brush_Back = Brushes.Black;//設定前景色
+            Brush Var_Brush_Fore = Brushes.Aquamarine;//設定背景色
+            Font Var_Font = new Font("細明體", 40);//設定字體樣式
+            string Var_Str = "傾斜效果的文字";//設定字串
+            SizeF Var_Size = g.MeasureString(Var_Str, Var_Font);//取得字串的大小
+            int Var_X = (pictureBox1.Width - Convert.ToInt32(Var_Size.Width)) / 2;//設定平移的X座標
+            int Var_Y = (pictureBox1.Height - Convert.ToInt32(Var_Size.Height)) / 2;////設定平移的Y座標
+            g.TranslateTransform(Var_X, Var_Y);//修改座標系原點
+            Matrix Var_Trans = g.Transform;
+            Var_Trans.Shear(0.40F, 0.00F);
+            g.Transform = Var_Trans;//文字的左傾斜
+            g.DrawString(Var_Str, Var_Font, Var_Brush_Back, 5, 5);//繪製文字
+
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //漸變色效果的文字
+            Graphics g = pictureBox1.CreateGraphics();//建立控制元件的Graphics類
+            g.Clear(Color.White);//以指定的顏色清除控制元件背景
+            Color Var_Color_Up = Color.Red;//設定前景色
+            Color Var_Color_Down = Color.Yellow;//設定背景色
+            Font Var_Font = new Font("細明體", 40);//設定字體樣式
+            string Var_Str = "漸變效果的文字";//設定字串
+            SizeF Var_Size = g.MeasureString(Var_Str, Var_Font);//取得字串的大小
+            PointF Var_Point = new PointF(5, 5);
+            RectangleF Var_Rect = new RectangleF(Var_Point, Var_Size);
+            LinearGradientBrush Var_LinearBrush = new LinearGradientBrush(Var_Rect, Var_Color_Up, Var_Color_Down, LinearGradientMode.Horizontal);
+            g.DrawString(Var_Str, Var_Font, Var_LinearBrush, Var_Point);
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -636,8 +691,49 @@ namespace vcs_Draw6_String
         {
         }
 
+        public static Image ImageLightEffect(string Str, Font F, Color ColorFore, Color ColorBack, int BlurConsideration)
+        {
+            Bitmap Var_Bitmap = null;//實例化Bitmap類
+            using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))//實例化Graphics類
+            {
+                SizeF Var_Size = g.MeasureString(Str, F);//對字串進行測量
+                using (Bitmap Var_bmp = new Bitmap((int)Var_Size.Width, (int)Var_Size.Height))//透過文字的大小實例化Bitmap類
+                using (Graphics Var_G_Bmp = Graphics.FromImage(Var_bmp))//實例化Bitmap類
+                using (SolidBrush Var_BrushBack = new SolidBrush(Color.FromArgb(16, ColorBack.R, ColorBack.G, ColorBack.B)))//根據RGB的值定義畫刷
+                using (SolidBrush Var_BrushFore = new SolidBrush(ColorFore))//定義畫刷
+                {
+                    Var_G_Bmp.SmoothingMode = SmoothingMode.HighQuality;//設定為高質量
+                    Var_G_Bmp.InterpolationMode = InterpolationMode.HighQualityBilinear;//設定為高質量的收合
+                    Var_G_Bmp.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;//消除鋸齒
+                    Var_G_Bmp.DrawString(Str, F, Var_BrushBack, 0, 0);//給制文字
+                    Var_Bitmap = new Bitmap(Var_bmp.Width + BlurConsideration, Var_bmp.Height + BlurConsideration);//根據發光文字的大小實例化Bitmap類
+                    using (Graphics Var_G_Bitmap = Graphics.FromImage(Var_Bitmap))//實例化Graphics類
+                    {
+                        Var_G_Bitmap.SmoothingMode = SmoothingMode.HighQuality;//設定為高質量
+                        Var_G_Bitmap.InterpolationMode = InterpolationMode.HighQualityBilinear;//設定為高質量的收合
+                        Var_G_Bitmap.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;//消除鋸齒
+                        //搜尋發光文字的各象素點
+                        for (int x = 0; x <= BlurConsideration; x++)
+                        {
+                            for (int y = 0; y <= BlurConsideration; y++)
+                            {
+                                Var_G_Bitmap.DrawImageUnscaled(Var_bmp, x, y);//繪製發光文字的點
+                            }
+                        }
+                        Var_G_Bitmap.DrawString(Str, F, Var_BrushFore, BlurConsideration / 2, BlurConsideration / 2);//繪製文字
+                    }
+                }
+            }
+            return Var_Bitmap;
+        }
+
         private void button20_Click(object sender, EventArgs e)
         {
+            //發光效果文字
+            using (Font fnt = new Font("Arial", 40, FontStyle.Bold))//定義字體
+            {
+                this.pictureBox1.Image = (Bitmap)ImageLightEffect("發光效果文字", fnt, Color.Yellow, Color.Red, 10);//呼叫自定義方法ImageLightEffect
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1088,8 +1184,6 @@ namespace vcs_Draw6_String
             e.Graphics.ResetTransform();//變換矩陣重置為單位矩陣
             e.Graphics.DrawString(Var_Str, Var_Font, Var_Brush_2, new PointF(0, 60));//繪製文字
 
-
         }
-
     }
 }

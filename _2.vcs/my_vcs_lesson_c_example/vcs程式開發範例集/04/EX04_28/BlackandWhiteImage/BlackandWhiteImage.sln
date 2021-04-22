@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackandWhiteImage", "BlackandWhiteImage\BlackandWhiteImage.csproj", "{69CB3E3C-F9AA-4C2C-8510-5D4FAF8EEF62}"
 EndProject
 Global

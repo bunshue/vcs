@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{69CB3E3C-F9AA-4C2C-8510-5D4FAF8EEF62}</ProjectGuid>
+    <ProjectGuid>{997EFE71-19B1-4ACF-B284-EE13799F54E4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlackandWhiteImage</RootNamespace>
-    <AssemblyName>BlackandWhiteImage</AssemblyName>
+    <RootNamespace>vcs_PictureCrop8</RootNamespace>
+    <AssemblyName>vcs_PictureCrop8</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -56,7 +56,7 @@
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Form1.designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
