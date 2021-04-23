@@ -258,11 +258,7 @@ namespace vcs_test_all_03
                 strHardDiskID = mo["SerialNumber"].ToString().Trim();
                 break;
             }
-            //label2.Text = strHardDiskID;
             richTextBox1.Text += "獲得硬盤序號 : " + strHardDiskID + "\n";
-
-
-
         }
 
         private void button8_Click(object sender, EventArgs e)

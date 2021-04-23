@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "編程完成Ping操作", "編程完成Ping操作.csproj", "{EDA1D26E-38B2-41FA-811A-024C7AB11A02}"
 EndProject
 Global

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "根據cpu序列號、磁盤序列號設計軟件註冊程序", "根據cpu序列號、磁盤序列號設計軟件註冊程序.csproj", "{C300C470-BD74-4E1D-83FE-AB7C7419D8FF}"
 EndProject
 Global

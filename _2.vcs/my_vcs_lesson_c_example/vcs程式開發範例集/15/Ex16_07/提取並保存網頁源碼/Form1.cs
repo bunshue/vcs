@@ -22,7 +22,7 @@ namespace 提取並保存網頁源碼
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }///
         public string strS;//存取網頁內容
         public void GetPageSource()
@@ -61,28 +61,22 @@ namespace 提取並保存網頁源碼
         //保存
         private void button1_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Filter = "文字文件|*.txt";
-            if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.textBox2.Text = this.saveFileDialog1.FileName;//
-                if (this.textBox1.Text.Trim().ToString() != "")
-                {
-                    saveInfo(this.textBox2.Text.Trim().ToString(), this.textBox1.Text.Trim().ToString());
-                    MessageBox.Show("保存成功");
-                }
-                else
-                {
-                    MessageBox.Show("請寫入目標頁的URL");
-                    this.textBox2.Text = string.Empty;
-                }
-            }
+            GetPageSource();//取得網頁編碼
+
+            string filename = Application.StartupPath + "\\html_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html";
+
+            saveInfo(filename, this.textBox1.Text.Trim().ToString());
+            MessageBox.Show("保存成功");
+
         }/// end block menthod showSource()
-         //保存網頁訊息
+
+        //保存網頁訊息
         private void saveInfo(string strPath, string strDown)
         {
-            WebClient wC = new WebClient();
-            wC.DownloadFile(strDown, strPath);
+            WebClient wc = new WebClient();
+            wc.DownloadFile(strDown, strPath);
         }
+
         //驗證網址是否正確
         public bool ValidateDate1(string input)
         {
@@ -111,7 +105,6 @@ namespace 提取並保存網頁源碼
             }
             return strSource.ToString();
         }
-
-      
-    }///
+    }
 }
+

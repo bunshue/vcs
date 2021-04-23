@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMTP協議發送電子郵件", "SMTP協議發送電子郵件.csproj", "{4BE21D4E-FAFE-4173-93B5-0827E569D1F3}"
 EndProject
 Global

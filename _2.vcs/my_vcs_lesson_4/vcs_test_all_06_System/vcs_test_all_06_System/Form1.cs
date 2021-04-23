@@ -712,7 +712,7 @@ namespace vcs_test_all_06_System
 
         private void button33_Click(object sender, EventArgs e)
         {
-            //c#获取屏幕分辨率信息
+            //取得螢幕解析度資料
             System.Windows.Forms.Screen scr = System.Windows.Forms.Screen.PrimaryScreen;//PrimaryScreen 属性：获取主显示设备
             richTextBox1.Text += "Bounds:\t\t" + scr.Bounds.ToString() + "\n"; //获取屏幕的边界。属性值是一个Rectangle结构的值
             richTextBox1.Text += "DeviceName:\t" + scr.DeviceName.ToString() + "\n"; //获取与显示关联的设备名称

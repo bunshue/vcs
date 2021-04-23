@@ -390,7 +390,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(200, 40);
             this.button33.TabIndex = 32;
-            this.button33.Text = "获取屏幕分辨率信息";
+            this.button33.Text = "取得螢幕解析度資料";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
