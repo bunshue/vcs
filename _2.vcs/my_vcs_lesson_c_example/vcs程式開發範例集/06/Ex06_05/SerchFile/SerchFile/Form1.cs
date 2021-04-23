@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Linq;
 using System.Windows.Forms;
+
 using System.IO;
 
 namespace SerchFile
@@ -19,15 +20,17 @@ namespace SerchFile
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            textBox1.Text = "angry_bird.jpg";
+            textBox2.Text = @"C:\______test_files";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             listView1.Items.Clear();
             SerachFile(textBox2.Text);
-           // MessageBox.Show("搜索完畢");
+            richTextBox1.Text += "搜尋完畢\n";
         }
+
         public void SerachFile(string fileDirectory)
         {
             DirectoryInfo dir = new DirectoryInfo(fileDirectory);
@@ -44,7 +47,7 @@ namespace SerchFile
                     {
                         FileInfo fin = new FileInfo(i.FullName);
                         listView1.Items.Add(fin.Name);//為ListView新增數據
-                        listView1.Items[listView1.Items.Count-1].SubItems.Add( fin.FullName);
+                        listView1.Items[listView1.Items.Count - 1].SubItems.Add(fin.FullName);
                         listView1.Items[listView1.Items.Count - 1].SubItems.Add(fin.Length.ToString());
                         listView1.Items[listView1.Items.Count - 1].SubItems.Add(fin.CreationTime.ToString());
                     }
@@ -53,3 +56,6 @@ namespace SerchFile
         }
     }
 }
+
+
+

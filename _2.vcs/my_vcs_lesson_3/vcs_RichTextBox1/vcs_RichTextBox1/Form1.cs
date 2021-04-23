@@ -149,6 +149,22 @@ namespace vcs_RichTextBox1
             button39.Location = new Point(x_st + dx * 2, y_st + dy * 9);
             button40.Location = new Point(x_st + dx * 2, y_st + dy * 10);
 
+
+            richTextBox1.Size = new Size(500, 400);
+            x_st = 820;
+            y_st = 12;
+            richTextBox1.Location = new Point(x_st, y_st);
+
+            richTextBox2.Size = new Size(500, 200);
+            x_st = 820;
+            y_st = 12 + 410;
+            richTextBox2.Location = new Point(x_st, y_st);
+
+            richTextBox3.Size = new Size(400, 300);
+            x_st = 820 + 510;
+            y_st = 12;
+            richTextBox3.Location = new Point(x_st, y_st);
+
             bt_open1.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height * 2 - 5);
             bt_open2.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
             bt_font.Location = new Point(richTextBox1.Location.X + bt_open2.Size.Width + 5, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
@@ -156,6 +172,7 @@ namespace vcs_RichTextBox1
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
+            bt_clear3.Location = new Point(richTextBox3.Location.X + richTextBox3.Size.Width - bt_clear3.Size.Width, richTextBox3.Location.Y + richTextBox3.Size.Height - bt_clear3.Size.Height);
 
             label4.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - 140, richTextBox1.Location.Y + 5);
             label6.Location = new Point(richTextBox1.Location.X + 100, richTextBox1.Location.Y + 5);
@@ -718,7 +735,7 @@ namespace vcs_RichTextBox1
 
                 e.Handled = true;
                 this.richTextBox1.Focus();
-            }  
+            }
         }
 
         DateTime doubleClickTimer;
@@ -930,5 +947,11 @@ namespace vcs_RichTextBox1
             bt_exit.BringToFront();     //移到最上層
         }
 
+        private void richTextBox3_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            this.Text = e.LinkText;//設置與窗體關聯的文本
+            Process.Start("firefox", e.LinkText);// 在firefox瀏覽器中瀏覽單擊的超鏈接
+        }
     }
 }
+

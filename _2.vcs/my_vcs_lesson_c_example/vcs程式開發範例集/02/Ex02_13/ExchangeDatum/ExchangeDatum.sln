@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeDatum", "ExchangeDatum\ExchangeDatum.csproj", "{621957FF-45ED-473E-8785-E468A3043DEF}"
 EndProject
 Global

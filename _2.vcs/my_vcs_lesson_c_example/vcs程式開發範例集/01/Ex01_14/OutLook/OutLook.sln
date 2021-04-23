@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutLook", "OutLook\OutLook.csproj", "{88B41EFF-8772-4178-B56C-4ECD3DD84440}"
 EndProject
 Global

@@ -97,9 +97,23 @@ namespace vcs_test_all_06_System2
             label1.Location = new Point(x_st + dx * 4, y_st + dy * 1 / 2 + 5);
             label1.Text = "";
 
-            bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 13);
-            richTextBox1.Location = new Point(x_st + dx * 4 + dx / 2, y_st + dy * 0);
+            label2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_exit.Location = new Point(x_st + dx * 5 + 140, y_st + dy * 0 + 35);
+
+            richTextBox1.Location = new Point(x_st + dx * 4 + dx / 2, y_st + dy * 0 + 80);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        //禁用視窗上的關閉按鈕
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_SYSCOMMAND = 0x0112;
+            const int SC_CLOSE = 0xF060;
+            if ((m.Msg == WM_SYSCOMMAND) && ((int)m.WParam == SC_CLOSE))
+            {
+                return;
+            }
+            base.WndProc(ref m);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -502,6 +516,11 @@ namespace vcs_test_all_06_System2
 
         private void button43_Click(object sender, EventArgs e)
         {
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

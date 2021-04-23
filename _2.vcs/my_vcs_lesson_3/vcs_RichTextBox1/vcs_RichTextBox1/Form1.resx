@@ -126,6 +126,19 @@
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>280, 17</value>
   </metadata>
+  <data name="richTextBox3.Text" xml:space="preserve">
+    <value>在RichTextBox控制元件上新增超連結文字
+
+要在RichTextBox加上LinkClicked事件
+
+雅虎：http://tw.yahoo.com
+Google：http://www.google.com/
+維基百科：https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5
+雅虎字典：https://tw.dictionary.search.yahoo.com/
+
+
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>49</value>
   </metadata>

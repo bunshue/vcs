@@ -576,7 +576,11 @@ namespace vcs_test_all_09_Form
 
             if (e.CloseReason != CloseReason.WindowsShutDown)
             {
-                if (MessageBox.Show("是否確定要關閉程式", "關閉程式", MessageBoxButtons.YesNo) == DialogResult.No)
+                if (MessageBox.Show("是否確定要關閉程式", "關閉程式", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else
                 {
                     e.Cancel = true;
                 }

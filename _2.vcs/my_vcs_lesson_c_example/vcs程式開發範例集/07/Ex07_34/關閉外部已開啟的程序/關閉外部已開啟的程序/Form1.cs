@@ -21,10 +21,12 @@ namespace 關閉外部已開啟的程序
         {
             listBox1.Items.Clear();
             Process[] myProcesses = Process.GetProcesses();
-            foreach(Process myProcess in myProcesses )
+            foreach (Process myProcess in myProcesses)
             {
                 if (myProcess.MainWindowTitle.Length > 0)
+                {
                     listBox1.Items.Add(myProcess.ProcessName.ToString().Trim());
+                }
             }
         }
 
@@ -35,7 +37,10 @@ namespace 關閉外部已開啟的程序
             {
                 myProcess.CloseMainWindow();
             }
+
             //remove this process in listbox
+            listBox1.Items.Remove(listBox1.SelectedItem);//從listBox1中移除listBox1中選定的項
+
             MessageBox.Show("程序已關閉", "訊息", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }

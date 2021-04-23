@@ -21,6 +21,15 @@ namespace MoveCharacter
         int tem_x = 0;//記錄滑鼠游標移動文字後的X位置
         int tem_y = 0;//記錄滑鼠游標移動文字後的Y位置
 
+        int W = 0;
+        int H = 0;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            W = this.ClientSize.Width;
+            H = this.ClientSize.Height - 100;
+        }
+
         private void label1_MouseDown(object sender, MouseEventArgs e)
         {
             CPoint = new Point(e.X, e.Y);//取得滑鼠游標在文字上按下時的位置
@@ -35,7 +44,7 @@ namespace MoveCharacter
             if (e.Button == MouseButtons.Left && isDown == true)//如果目前按下的是滑鼠游標左鍵，而且文字可以移動
             {
                 //如果文字在移動範圍內
-                if (label1.Left <= 0 || label1.Top <= 0 || label1.Left >= (panel1.Width - label1.Width) || label1.Top >= (panel1.Height - label1.Height))
+                if (label1.Left <= 0 || label1.Top <= 0 || label1.Left >= (this.Width - label1.Width) || label1.Top >= (this.Height - label1.Height))
                 {
                     if (label1.Left <= 0)//如果文字超出左邊界
                         if (e.X > tem_x)//如果文字還向右移動
@@ -43,10 +52,10 @@ namespace MoveCharacter
                     if (label1.Top <= 0)//如果文字超出上邊界
                         if (e.Y > tem_y)//如果文字還向下移動
                             tem_b = true;//文字移動
-                    if (label1.Left >= (panel1.Width - label1.Width))//如果文字超出右邊界
+                    if (label1.Left >= (this.Width - label1.Width))//如果文字超出右邊界
                         if (e.X < tem_x)//如果文字還向左移動
                             tem_b = true;//文字移動
-                    if (label1.Top >= (panel1.Height - label1.Height))//如果文字超出下邊界
+                    if (label1.Top >= (this.Height - label1.Height))//如果文字超出下邊界
                         if (e.Y < tem_y)//如果文字還向上移動
                             tem_b = true;//文字移動
                     if (tem_b == false)//如果文字超出邊界
@@ -58,5 +67,6 @@ namespace MoveCharacter
             tem_x = e.X;//記錄移動後的X位置
             tem_y = e.Y;//記錄移動後的Y位置
         }
+
     }
 }

@@ -23,6 +23,12 @@ namespace CutImage
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Image myImage = System.Drawing.Image.FromFile(filename);
+            pictureBox1.Image = myImage;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             Image myImage = System.Drawing.Image.FromFile(filename);
@@ -42,14 +48,6 @@ namespace CutImage
             }
         }
 
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            isDrag = false;
-            ig = pictureBox1.CreateGraphics();
-            ig.DrawRectangle(new Pen(Color.Black, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
-            theRectangle = new Rectangle(startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
-        }
-
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             Graphics g = this.CreateGraphics();
@@ -57,6 +55,14 @@ namespace CutImage
             {
                 g.DrawRectangle(new Pen(Color.Black, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
             }
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            isDrag = false;
+            ig = pictureBox1.CreateGraphics();
+            ig.DrawRectangle(new Pen(Color.Black, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
+            theRectangle = new Rectangle(startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
@@ -74,5 +80,6 @@ namespace CutImage
             catch
             { }
         }
+
     }
 }

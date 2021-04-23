@@ -121,5 +121,16 @@ namespace vcs_TextBox
             tb_id.Clear();
             tb_password.Text = "";
         }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //只允許輸入數字
+            if ((e.KeyChar != 8 && !char.IsDigit(e.KeyChar)) && e.KeyChar != 13)
+            {
+                //MessageBox.Show("只允許輸入數字", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Handled = true;
+            }
+
+        }
     }
 }
