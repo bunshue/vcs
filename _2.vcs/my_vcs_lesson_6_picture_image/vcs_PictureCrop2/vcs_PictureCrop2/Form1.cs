@@ -19,156 +19,86 @@ namespace vcs_PictureCrop2
             InitializeComponent();
         }
 
-        // Exit the program.
-        private void mnuFileExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        // The original image.
-        private Bitmap OriginalImage;
-        
-        // The currently cropped image.
-        private Bitmap CroppedImage;
+        private bool flag_select_area = false;  //開始選取的旗標
+        private Point pt_st, pt_sp;             //選取的起始點和終點
+        private Bitmap bitmap1 = null;  //原圖位圖Bitmap
+        private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
 
         // The cropped image with the selection rectangle.
         private Bitmap DisplayImage;
         private Graphics DisplayGraphics;
 
-        // Open a file.
-        private void mnuFileOpen_Click(object sender, EventArgs e)
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (ofdPicture.ShowDialog() == DialogResult.OK)
-            {
-                OriginalImage = LoadBitmapUnlocked(ofdPicture.FileName);
-                CroppedImage = OriginalImage.Clone() as Bitmap;
-                DisplayImage = CroppedImage.Clone() as Bitmap;
-                DisplayGraphics = Graphics.FromImage(DisplayImage);
-
-                picCropped.Image = DisplayImage;
-                picCropped.Visible = true;
-            }
-        }
-
-        // Let the user select an area.
-        private bool Drawing = false;
-        private Point StartPoint, EndPoint;
-        private void picCropped_MouseDown(object sender, MouseEventArgs e)
-        {
-            Drawing = true;
-            StartPoint = e.Location;
+            flag_select_area = true;
+            pt_st = e.Location;
 
             // Draw the area selected.
             DrawSelectionBox(e.Location);
         }
 
-        private void picCropped_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!Drawing) return;
+            if (flag_select_area == false)
+                return;
 
             // Draw the area selected.
             DrawSelectionBox(e.Location);
         }
 
-        private void picCropped_MouseUp(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!Drawing) return;
-            Drawing = false;
+            if (flag_select_area == false)
+                return;
+
+            flag_select_area = false;
 
             // Crop.
             // Get the selected area's dimensions.
-            int x = Math.Min(StartPoint.X, EndPoint.X);
-            int y = Math.Min(StartPoint.Y, EndPoint.Y);
-            int width = Math.Abs(StartPoint.X - EndPoint.X);
-            int height = Math.Abs(StartPoint.Y - EndPoint.Y);
+            int x = Math.Min(pt_st.X, pt_sp.X);
+            int y = Math.Min(pt_st.Y, pt_sp.Y);
+            int width = Math.Abs(pt_st.X - pt_sp.X);
+            int height = Math.Abs(pt_st.Y - pt_sp.Y);
             Rectangle source_rect = new Rectangle(x, y, width, height);
             Rectangle dest_rect = new Rectangle(0, 0, width, height);
 
             // Copy that part of the image to a new bitmap.
             DisplayImage = new Bitmap(width, height);
             DisplayGraphics = Graphics.FromImage(DisplayImage);
-            DisplayGraphics.DrawImage(CroppedImage, dest_rect, source_rect, GraphicsUnit.Pixel);
+            DisplayGraphics.DrawImage(bitmap2, dest_rect, source_rect, GraphicsUnit.Pixel);
 
             // Display the new bitmap.
-            CroppedImage = DisplayImage;
-            DisplayImage = CroppedImage.Clone() as Bitmap;
+            bitmap2 = DisplayImage;
+            DisplayImage = bitmap2.Clone() as Bitmap;
             DisplayGraphics = Graphics.FromImage(DisplayImage);
-            picCropped.Image = DisplayImage;
-            picCropped.Refresh();
+            pictureBox1.Image = DisplayImage;
+            pictureBox1.Refresh();
         }
 
         // Draw the area selected.
         private void DrawSelectionBox(Point end_point)
         {
             // Save the end point.
-            EndPoint = end_point;
-            if (EndPoint.X < 0) EndPoint.X = 0;
-            if (EndPoint.X >= CroppedImage.Width) EndPoint.X = CroppedImage.Width - 1;
-            if (EndPoint.Y < 0) EndPoint.Y = 0;
-            if (EndPoint.Y >= CroppedImage.Height) EndPoint.Y = CroppedImage.Height - 1;
+            pt_sp = end_point;
+            if (pt_sp.X < 0)
+                pt_sp.X = 0;
+            if (pt_sp.X >= bitmap2.Width)
+                pt_sp.X = bitmap2.Width - 1;
+            if (pt_sp.Y < 0)
+                pt_sp.Y = 0;
+            if (pt_sp.Y >= bitmap2.Height)
+                pt_sp.Y = bitmap2.Height - 1;
 
             // Reset the image.
-            DisplayGraphics.DrawImageUnscaled(CroppedImage, 0, 0);
+            DisplayGraphics.DrawImageUnscaled(bitmap2, 0, 0);
 
             // Draw the selection area.
-            int x = Math.Min(StartPoint.X, EndPoint.X);
-            int y = Math.Min(StartPoint.Y, EndPoint.Y);
-            int width = Math.Abs(StartPoint.X - EndPoint.X);
-            int height = Math.Abs(StartPoint.Y - EndPoint.Y);
+            int x = Math.Min(pt_st.X, pt_sp.X);
+            int y = Math.Min(pt_st.Y, pt_sp.Y);
+            int width = Math.Abs(pt_st.X - pt_sp.X);
+            int height = Math.Abs(pt_st.Y - pt_sp.Y);
             DisplayGraphics.DrawRectangle(Pens.Red, x, y, width, height);
-            picCropped.Refresh();
-        }
-
-        // Display the original image.
-        private void mnuPictureReset_Click(object sender, EventArgs e)
-        {
-            CroppedImage = OriginalImage.Clone() as Bitmap;
-            DisplayImage = OriginalImage.Clone() as Bitmap;
-            DisplayGraphics = Graphics.FromImage(DisplayImage);
-            picCropped.Image = DisplayImage;
-        }
-
-        // Save the current file.
-        private void mnuFileSave_Click(object sender, EventArgs e)
-        {
-            if (sfdPicture.ShowDialog() == DialogResult.OK)
-            {
-                SaveBitmapUsingExtension(CroppedImage, sfdPicture.FileName);
-            }
-        }
-
-        // Save the file with the appropriate format.
-        // Throw a NotSupportedException if the file
-        // has an unknown extension.
-        public void SaveBitmapUsingExtension(Bitmap bm, string filename)
-        {
-            string extension = Path.GetExtension(filename);
-            switch (extension.ToLower())
-            {
-                case ".bmp":
-                    bm.Save(filename, ImageFormat.Bmp);
-                    break;
-                case ".exif":
-                    bm.Save(filename, ImageFormat.Exif);
-                    break;
-                case ".gif":
-                    bm.Save(filename, ImageFormat.Gif);
-                    break;
-                case ".jpg":
-                case ".jpeg":
-                    bm.Save(filename, ImageFormat.Jpeg);
-                    break;
-                case ".png":
-                    bm.Save(filename, ImageFormat.Png);
-                    break;
-                case ".tif":
-                case ".tiff":
-                    bm.Save(filename, ImageFormat.Tiff);
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        "Unknown file extension " + extension);
-            }
+            pictureBox1.Refresh();
         }
 
         // Load the image into a Bitmap, clone it, and
@@ -184,6 +114,56 @@ namespace vcs_PictureCrop2
                 }
                 return new_bitmap;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Open
+            string filename = @"C:\______test_files\picture1.jpg";
+            bitmap1 = LoadBitmapUnlocked(filename);
+            bitmap2 = bitmap1.Clone() as Bitmap;
+            DisplayImage = bitmap2.Clone() as Bitmap;
+            DisplayGraphics = Graphics.FromImage(DisplayImage);
+
+            pictureBox1.Image = DisplayImage;
+            pictureBox1.Visible = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            save_select_picture_to_drive();
+        }
+
+        void save_select_picture_to_drive()
+        {
+            if (bitmap2 != null)
+            {
+                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+                try
+                {
+                    bitmap2.Save(filename, ImageFormat.Bmp);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+            else
+                richTextBox1.Text += "無圖可存\n";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //Reset
+            // Display the original image.
+            bitmap2 = bitmap1.Clone() as Bitmap;
+            DisplayImage = bitmap1.Clone() as Bitmap;
+            DisplayGraphics = Graphics.FromImage(DisplayImage);
+            pictureBox1.Image = DisplayImage;
         }
     }
 }

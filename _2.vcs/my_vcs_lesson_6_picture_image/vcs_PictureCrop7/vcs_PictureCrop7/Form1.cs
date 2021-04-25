@@ -15,10 +15,10 @@ namespace vcs_PictureCrop7
     {
         private Point DownPoint = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
         private Point UpPoint = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
-        private bool CatchFinished = false;//用來表示是否截圖完成
-        private bool CatchStart = false;//表示截圖開始
-        private Bitmap originBmp;//用來保存原始圖像
-        private Rectangle CatchRect;//用來保存截圖的矩形
+
+        private bool flag_select_area = false;  //開始選取的旗標
+        private Bitmap bitmap1 = null;  //原圖位圖Bitmap
+        private Rectangle select_rectangle;//用來保存截圖的矩形
         int W;
         int H;
 
@@ -32,7 +32,7 @@ namespace vcs_PictureCrop7
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
             this.UpdateStyles();
             //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題，關於這個大家可以自己去搜索下
-            originBmp = new Bitmap(this.BackgroundImage);//BackgroundImage為全屏圖片，我們另用變量來保存全屏圖片
+            bitmap1 = new Bitmap(this.BackgroundImage);//BackgroundImage為全屏圖片，我們另用變量來保存全屏圖片
             W = this.BackgroundImage.Width;
             H = this.BackgroundImage.Height;
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
@@ -51,9 +51,9 @@ namespace vcs_PictureCrop7
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (CatchStart == false)    //如果捕捉沒有開始
+                if (flag_select_area == false)    //如果捕捉沒有開始
                 {
-                    CatchStart = true;
+                    flag_select_area = true;
                     DownPoint = new Point(e.X, e.Y);    //保存鼠標按下時的坐標
                 }
             }
@@ -61,9 +61,9 @@ namespace vcs_PictureCrop7
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (CatchStart == true) //如果捕捉開始
+            if (flag_select_area == true) //如果捕捉開始
             {
-                Bitmap destBmp = (Bitmap)originBmp.Clone();//新建一個圖片對象，並讓它與原始圖片相同
+                Bitmap destBmp = (Bitmap)bitmap1.Clone();//新建一個圖片對象，並讓它與原始圖片相同
                 Point newPoint = new Point(DownPoint.X, DownPoint.Y);//獲取鼠標的坐標
                 Graphics g = Graphics.FromImage(destBmp);//在剛才新建的圖片上新建一個畫板
                 Pen p = new Pen(Color.Blue, 1);
@@ -78,8 +78,8 @@ namespace vcs_PictureCrop7
                 {
                     newPoint.Y = e.Y;
                 }
-                CatchRect = new Rectangle(newPoint, new Size(width, height));//保存矩形
-                g.DrawRectangle(p, CatchRect);//將矩形畫在這個畫板上
+                select_rectangle = new Rectangle(newPoint, new Size(width, height));//保存矩形
+                g.DrawRectangle(p, select_rectangle);//將矩形畫在這個畫板上
                 g.Dispose();//釋放目前的這個畫板
                 p.Dispose();
 
@@ -97,11 +97,10 @@ namespace vcs_PictureCrop7
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (CatchStart == true)
+                if (flag_select_area == true)
                 {
                     UpPoint = new Point(e.X, e.Y);//保存鼠標放開時的坐標
-                    CatchStart = false;
-                    CatchFinished = true;
+                    flag_select_area = false;
 
                     richTextBox1.Text += "down point = (" + DownPoint.X.ToString() + ", " + DownPoint.Y.ToString() + ")\n";
                     richTextBox1.Text += "down point = (" + UpPoint.X.ToString() + ", " + UpPoint.Y.ToString() + ")\n";

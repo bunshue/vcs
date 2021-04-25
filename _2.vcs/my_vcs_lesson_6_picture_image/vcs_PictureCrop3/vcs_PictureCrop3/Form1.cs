@@ -17,10 +17,11 @@ namespace vcs_PictureCrop3
     {
         // For selecting an area.
         private List<Point> Points = null;
-        private bool Selecting = false;
 
-        // A bitmap holding the selected area.
-        private Bitmap SelectedArea = null;
+        private bool flag_select_area = false;  //開始選取的旗標
+        private Point pt_st, pt_sp;             //選取的起始點和終點
+        private Bitmap bitmap1 = null;  //原圖位圖Bitmap
+        private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
 
         public Form1()
         {
@@ -36,13 +37,13 @@ namespace vcs_PictureCrop3
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             Points = new List<Point>();
-            Selecting = true;
+            flag_select_area = true;
         }
 
         // Continue selecting an area.
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!Selecting)
+            if (flag_select_area == false)
                 return;
             Points.Add(new Point(e.X, e.Y));
             pictureBox1.Invalidate();
@@ -51,7 +52,7 @@ namespace vcs_PictureCrop3
         // Finish selecting the area.
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            Selecting = false;
+            flag_select_area = false;
 
             // Create a DataObject to hold data
             // in different formats.
@@ -75,7 +76,7 @@ namespace vcs_PictureCrop3
             richTextBox1.Text += "已選擇區域複製至剪貼簿\n";
 
             // Copy the selected area.
-            SelectedArea = GetSelectedArea(pictureBox1.Image, Color.Transparent, Points);
+            bitmap2 = GetSelectedArea(pictureBox1.Image, Color.Transparent, Points);
         }
 
         // Draw the current selection if there is one.
@@ -156,33 +157,7 @@ namespace vcs_PictureCrop3
 
         void save_image_to_drive()
         {
-            /*
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
-
-                try
-                {
-                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap1.Save(@filename2, ImageFormat.Bmp);
-                    bitmap1.Save(@filename3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-            */
+            //reserved
         }
 
         //貼上 定點
@@ -192,21 +167,22 @@ namespace vcs_PictureCrop3
 
             // Copy the selected area centered at the point clicked.
             // Do nothing if we haven't selected an area.
-            if (SelectedArea == null) return;
+            if (bitmap2 == null)
+                return;
 
             // See where to put it.
-            //int x = e.X - SelectedArea.Width / 2;
-            //int y = e.Y - SelectedArea.Height / 2;
+            //int x = e.X - bitmap2.Width / 2;
+            //int y = e.Y - bitmap2.Height / 2;
             int x = 100;
             int y = 100;
 
             using (Graphics gr = Graphics.FromImage(pictureBox1.Image))
             {
                 Rectangle source_rect = new Rectangle(0, 0,
-                    SelectedArea.Width, SelectedArea.Height);
+                    bitmap2.Width, bitmap2.Height);
                 Rectangle dest_rect = new Rectangle(x, y,
-                    SelectedArea.Width, SelectedArea.Height);
-                gr.DrawImage(SelectedArea, dest_rect, source_rect,
+                    bitmap2.Width, bitmap2.Height);
+                gr.DrawImage(bitmap2, dest_rect, source_rect,
                     GraphicsUnit.Pixel);
             }
 

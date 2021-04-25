@@ -16,9 +16,10 @@ namespace vcs_PictureCrop
         private Bitmap bitmap1 = null;
         private Bitmap bitmap2 = null;
         private int X0, Y0, X1, Y1;
-        private bool SelectingArea = false;
+        private bool flag_select_area = false;
+        private Point pt_st, pt_sp;
         private Graphics SelectedGraphics = null;
-        private Rectangle SelectedRect;
+        private Rectangle select_rectangle;
 
         public Form1()
         {
@@ -36,7 +37,7 @@ namespace vcs_PictureCrop
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             // Save the starting point.
-            SelectingArea = true;
+            flag_select_area = true;
             ConvertCoordinates(pictureBox1, out X0, out Y0, e.X, e.Y);
 
             // Make the selected image.
@@ -104,7 +105,8 @@ namespace vcs_PictureCrop
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             // Do nothing if we're not selecting an area.
-            if (!SelectingArea) return;
+            if (flag_select_area == false)
+                return;
 
             // Generate the new image with the selection rectangle.
             ConvertCoordinates(pictureBox1, out X1, out Y1, e.X, e.Y);
@@ -136,21 +138,22 @@ namespace vcs_PictureCrop
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             // Do nothing if we're not selecting an area.
-            if (!SelectingArea)
+            if (flag_select_area == false)
                 return;
-            SelectingArea = false;
+            flag_select_area = false;
 
             // Stop selecting.
             SelectedGraphics = null;
 
             // Convert the points into a Rectangle.
-            SelectedRect = MakeRectangle(X0, Y0, X1, Y1);
+            select_rectangle = MakeRectangle(X0, Y0, X1, Y1);
+
+            richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "SelectedRect X = " + SelectedRect.X.ToString() + " Y = " + SelectedRect.Y.ToString() + "\n";
-            richTextBox1.Text += "SelectedRect W = " + SelectedRect.Width.ToString() + " H = " + SelectedRect.Height.ToString() + "\n";
+            richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
         }
 
         // Copy the selected area to the clipboard.
@@ -172,14 +175,14 @@ namespace vcs_PictureCrop
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if ((SelectedRect.Width <= 0) || (SelectedRect.Height <= 0))
+            if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
             {
                 richTextBox1.Text += "未選定區域，無法複製圖片\n";
                 return;
             }
 
             // Copy the selected area to the clipboard.
-            CopyToClipboard(SelectedRect);
+            CopyToClipboard(select_rectangle);
             richTextBox1.Text += "已複製圖片\n";
         }
 
@@ -188,21 +191,21 @@ namespace vcs_PictureCrop
         // and blank that area.
         private void button3_Click(object sender, EventArgs e)
         {
-            if ((SelectedRect.Width <= 0) || (SelectedRect.Height <= 0))
+            if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
             {
                 richTextBox1.Text += "未選定區域，無法剪下圖片\n";
                 return;
             }
 
             // Copy the selection to the clipboard.
-            CopyToClipboard(SelectedRect);
+            CopyToClipboard(select_rectangle);
 
             // Blank the selected area in the original image.
             using (Graphics gr = Graphics.FromImage(bitmap1))
             {
                 using (SolidBrush br = new SolidBrush(pictureBox1.BackColor))
                 {
-                    gr.FillRectangle(br, SelectedRect);
+                    gr.FillRectangle(br, select_rectangle);
                 }
             }
 
@@ -221,21 +224,14 @@ namespace vcs_PictureCrop
         {
             if (bitmap1 != null)
             {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
+                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
 
                 try
                 {
-                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap1.Save(@filename2, ImageFormat.Bmp);
-                    bitmap1.Save(@filename3, ImageFormat.Png);
+                    bitmap1.Save(filename, ImageFormat.Bmp);
 
                     richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
                 }
                 catch (Exception ex)
                 {
@@ -257,8 +253,8 @@ namespace vcs_PictureCrop
             Image clipboard_image = Clipboard.GetImage();
 
             // Figure out where to put it.
-            int cx = SelectedRect.X + (SelectedRect.Width - clipboard_image.Width) / 2;
-            int cy = SelectedRect.Y + (SelectedRect.Height - clipboard_image.Height) / 2;
+            int cx = select_rectangle.X + (select_rectangle.Width - clipboard_image.Width) / 2;
+            int cy = select_rectangle.Y + (select_rectangle.Height - clipboard_image.Height) / 2;
             Rectangle dest_rect = new Rectangle(
                 cx, cy,
                 clipboard_image.Width,
@@ -297,7 +293,7 @@ namespace vcs_PictureCrop
             // Copy the new image into position.
             using (Graphics gr = Graphics.FromImage(bitmap1))
             {
-                gr.DrawImage(clipboard_image, SelectedRect,
+                gr.DrawImage(clipboard_image, select_rectangle,
                     src_rect, GraphicsUnit.Pixel);
             }
 
@@ -314,8 +310,9 @@ namespace vcs_PictureCrop
         {
             if (e.KeyChar == 27)
             {
-                if (!SelectingArea) return;
-                SelectingArea = false;
+                if (flag_select_area == false)
+                    return;
+                flag_select_area = false;
 
                 // Stop selecting.
                 bitmap2 = null;

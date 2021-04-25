@@ -16,12 +16,13 @@ namespace vcs_PictureCrop4
             InitializeComponent();
         }
 
-        // The original image.
-        private Bitmap bmp;
         string filename = @"C:\______test_files\picture1.jpg";
 
-        // True when we're selecting a rectangle.
-        private bool IsSelecting = false;
+        private bool flag_select_area = false;  //開始選取的旗標
+        private Point pt_st, pt_sp;             //選取的起始點和終點
+        private Bitmap bitmap1 = null;  //原圖位圖Bitmap
+        private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
+
 
         // The area we are selecting.
         private int X0, Y0, X1, Y1;
@@ -31,19 +32,19 @@ namespace vcs_PictureCrop4
         {
             int w;
             int h;
-            bmp = new Bitmap(filename);
-            w = bmp.Width;
-            h = bmp.Height;
+            bitmap1 = new Bitmap(filename);
+            w = bitmap1.Width;
+            h = bitmap1.Height;
             pictureBox1.ClientSize = new Size(w, h);
             pictureBox2.ClientSize = new Size(w, h);
 
-            pictureBox1.Image = bmp;
+            pictureBox1.Image = bitmap1;
         }
 
         // Start selecting the rectangle.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            IsSelecting = true;
+            flag_select_area = true;
 
             // Save the start point.
             X0 = e.X;
@@ -54,14 +55,15 @@ namespace vcs_PictureCrop4
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             // Do nothing it we're not selecting an area.
-            if (!IsSelecting) return;
+            if (flag_select_area == false)
+                return;
 
             // Save the new point.
             X1 = e.X;
             Y1 = e.Y;
 
             // Make a Bitmap to display the selection rectangle.
-            Bitmap bm = new Bitmap(bmp);
+            Bitmap bm = new Bitmap(bitmap1);
 
             // Draw the rectangle.
             using (Graphics gr = Graphics.FromImage(bm))
@@ -76,11 +78,12 @@ namespace vcs_PictureCrop4
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             // Do nothing it we're not selecting an area.
-            if (!IsSelecting) return;
-            IsSelecting = false;
+            if (flag_select_area == false)
+                return;
+            flag_select_area = false;
 
             // Display the original image.
-            pictureBox1.Image = bmp;
+            pictureBox1.Image = bitmap1;
 
             // Copy the selected part of the image.
             int wid = Math.Abs(X0 - X1);
@@ -94,7 +97,7 @@ namespace vcs_PictureCrop4
                     new Rectangle(Math.Min(X0, X1), Math.Min(Y0, Y1), wid, hgt);
                 Rectangle dest_rectangle = 
                     new Rectangle(0, 0, wid, hgt);
-                gr.DrawImage(bmp, dest_rectangle, 
+                gr.DrawImage(bitmap1, dest_rectangle, 
                     source_rectangle, GraphicsUnit.Pixel);
             }
 

@@ -18,7 +18,7 @@ namespace vcs_PictureCrop8
         int H = 0;
 
         string filename = @"C:\______test_files\picture1.jpg";
-        bool flag_mouse_down = false;
+        bool flag_select_area = false;
 
         int x_st = 0;
         int y_st = 0;
@@ -27,7 +27,7 @@ namespace vcs_PictureCrop8
 
         int w = 0;
         int h = 0;
-        Rectangle cropRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
+        Rectangle select_rectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
 
         public Form1()
         {
@@ -51,12 +51,15 @@ namespace vcs_PictureCrop8
             tb_x_st.Text = x_st.ToString();
             tb_y_st.Text = y_st.ToString();
 
+            select_rectangle = new Rectangle(x_st, y_st, w, h);
+
+
             //試著在啟動時就把預設截取位置畫出來
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            flag_mouse_down = true;
+            flag_select_area = true;
             x_st = e.X;
             y_st = e.Y;
 
@@ -74,7 +77,7 @@ namespace vcs_PictureCrop8
             //恢復原狀
             pictureBox1.Image = image;
             */
-            if (flag_mouse_down == true)
+            if (flag_select_area == true)
             {
                 int x_st2 = x_st;
                 int y_st2 = y_st;
@@ -110,7 +113,7 @@ namespace vcs_PictureCrop8
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            flag_mouse_down = false;
+            flag_select_area = false;
 
             int x_st2 = x_st;
             int y_st2 = y_st;
@@ -143,7 +146,11 @@ namespace vcs_PictureCrop8
             Graphics g = pictureBox1.CreateGraphics();
             g.DrawRectangle(new Pen(Color.Red, 1), x_st2, y_st2, w, h);
 
-            cropRectangle = new Rectangle(x_st2, y_st2, w, h);
+            select_rectangle = new Rectangle(x_st2, y_st2, w, h);
+            tb_x_st.Text = x_st2.ToString();
+            tb_y_st.Text = y_st2.ToString();
+            tb_w.Text = w.ToString();
+            tb_h.Text = h.ToString();
         }
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
@@ -152,12 +159,12 @@ namespace vcs_PictureCrop8
             {
                 Graphics g2 = this.pictureBox2.CreateGraphics();
                 Bitmap bitmap = new Bitmap(pictureBox1.Image);
-                Bitmap cloneBitmap = bitmap.Clone(cropRectangle, PixelFormat.DontCare);
+                Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);
                 g2.DrawImage(cloneBitmap, e.X, e.Y);
                 /* 原本圖要不要塗白  像是剪下
                 Graphics g1 = pictureBox1.CreateGraphics();
                 SolidBrush myBrush = new SolidBrush(Color.White);
-                g1.FillRectangle(myBrush, cropRectangle);
+                g1.FillRectangle(myBrush, select_rectangle);
                 */
             }
             catch
@@ -168,18 +175,22 @@ namespace vcs_PictureCrop8
         {
             String filename = Application.StartupPath + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             Bitmap bitmap = new Bitmap(pictureBox1.Image);
-            Bitmap cloneBitmap = bitmap.Clone(cropRectangle, PixelFormat.DontCare);
+            Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);
             cloneBitmap.Save(filename, ImageFormat.Bmp);
             richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            int x_st = int.Parse(tb_x_st.Text);
+            int y_st = int.Parse(tb_y_st.Text);
+            int w = int.Parse(tb_w.Text);
+            int h = int.Parse(tb_h.Text);
             String filename = Application.StartupPath + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             Bitmap bitmap = new Bitmap(pictureBox1.Image);
-            cropRectangle = new Rectangle(x_st, y_st, 200, 200);
-            richTextBox1.Text += cropRectangle.ToString() + "\n";
-            Bitmap cloneBitmap = bitmap.Clone(cropRectangle, PixelFormat.DontCare);
+            select_rectangle = new Rectangle(x_st, y_st, w, h);
+            richTextBox1.Text += select_rectangle.ToString() + "\n";
+            Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);
             cloneBitmap.Save(filename, ImageFormat.Bmp);
             richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
         }

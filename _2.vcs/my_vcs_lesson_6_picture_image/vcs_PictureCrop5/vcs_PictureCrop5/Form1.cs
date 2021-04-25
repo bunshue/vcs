@@ -18,16 +18,17 @@ namespace vcs_PictureCrop5
             InitializeComponent();
         }
 
-        private Bitmap m_OriginalImage = null;
         private int X0, Y0, X1, Y1;
-        private bool SelectingArea = false;
-        private Bitmap SelectedImage = null;
+        private bool flag_select_area = false;  //開始選取的旗標
+        private Point pt_st, pt_sp;             //選取的起始點和終點
+        private Bitmap bitmap1 = null;  //原圖位圖Bitmap
+        private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
         private Graphics SelectedGraphics = null;
 
         // Save the original image.
         private void Form1_Load(object sender, EventArgs e)
         {
-            m_OriginalImage = new Bitmap(pictureBox1.Image);
+            bitmap1 = new Bitmap(pictureBox1.Image);
             this.KeyPreview = true;
         }
 
@@ -35,28 +36,29 @@ namespace vcs_PictureCrop5
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             // Save the starting point.
-            SelectingArea = true;
+            flag_select_area = true;
             X0 = e.X;
             Y0 = e.Y;
 
             // Make the selected image.
-            SelectedImage = new Bitmap(m_OriginalImage);
-            SelectedGraphics = Graphics.FromImage(SelectedImage);
-            pictureBox1.Image = SelectedImage;
+            bitmap2 = new Bitmap(bitmap1);
+            SelectedGraphics = Graphics.FromImage(bitmap2);
+            pictureBox1.Image = bitmap2;
         }
 
         // Continue selecting an area.
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             // Do nothing if we're not selecting an area.
-            if (!SelectingArea) return;
+            if (flag_select_area == false)
+                return;
 
             // Generate the new image with the selection rectangle.
             X1 = e.X;
             Y1 = e.Y;
 
             // Copy the original image.
-            SelectedGraphics.DrawImage(m_OriginalImage, 0, 0);
+            SelectedGraphics.DrawImage(bitmap1, 0, 0);
 
             // Draw the selection rectangle.
             using (Pen select_pen = new Pen(Color.Red))
@@ -72,21 +74,20 @@ namespace vcs_PictureCrop5
         // Finish selecting the area.
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!SelectingArea) return;
-            SelectingArea = false;
-            SelectedImage = null;
+            if (flag_select_area == false)
+                return;
+            flag_select_area = false;
+            bitmap2 = null;
             SelectedGraphics = null;
-            pictureBox1.Image = m_OriginalImage;
+            pictureBox1.Image = bitmap1;
             pictureBox1.Refresh();
 
             // Convert the points into a Rectangle.
-            Rectangle rect = MakeRectangle(X0, Y0, X1, Y1);
-            if ((rect.Width > 0) && (rect.Height > 0))
+            Rectangle select_rectangle = MakeRectangle(X0, Y0, X1, Y1);
+            if ((select_rectangle.Width > 0) && (select_rectangle.Height > 0))
             {
                 // Display the Rectangle.
-                //MessageBox.Show(rect.ToString());
-                //richTextBox1.Text += rect.ToString() + "\n";
-                richTextBox1.Text += "起點(" + rect.X.ToString() + ", " + rect.Y.ToString() + "), W = " + rect.Width.ToString() + " H = " + rect.Height.ToString() + "\n";
+                richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
             }
         }
 
@@ -105,13 +106,14 @@ namespace vcs_PictureCrop5
         {
             if (e.KeyChar == 27)
             {
-                if (!SelectingArea) return;
-                SelectingArea = false;
+                if (flag_select_area == false)
+                    return;
+                flag_select_area = false;
 
                 // Stop selecting.
-                SelectedImage = null;
+                bitmap2 = null;
                 SelectedGraphics = null;
-                pictureBox1.Image = m_OriginalImage;
+                pictureBox1.Image = bitmap1;
                 pictureBox1.Refresh();
             }
         }
