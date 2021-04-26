@@ -69,13 +69,13 @@
             this.tb_matrix = new System.Windows.Forms.TextBox();
             this.rtb_matrix = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ht0 = new System.Windows.Forms.Button();
-            this.ht1 = new System.Windows.Forms.Button();
-            this.ht2 = new System.Windows.Forms.Button();
-            this.ht3 = new System.Windows.Forms.Button();
-            this.ht4 = new System.Windows.Forms.Button();
-            this.ht5 = new System.Windows.Forms.Button();
             this.ht6 = new System.Windows.Forms.Button();
+            this.ht5 = new System.Windows.Forms.Button();
+            this.ht4 = new System.Windows.Forms.Button();
+            this.ht3 = new System.Windows.Forms.Button();
+            this.ht2 = new System.Windows.Forms.Button();
+            this.ht1 = new System.Windows.Forms.Button();
+            this.ht0 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -359,7 +359,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 42);
             this.button19.TabIndex = 47;
-            this.button19.Text = "xxx";
+            this.button19.Text = "插入排序";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -370,7 +370,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 42);
             this.button20.TabIndex = 48;
-            this.button20.Text = "xxx";
+            this.button20.Text = "希爾排序";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -381,7 +381,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 42);
             this.button24.TabIndex = 49;
-            this.button24.Text = "xxx";
+            this.button24.Text = "選擇排序";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -392,7 +392,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 42);
             this.button25.TabIndex = 50;
-            this.button25.Text = "xxx";
+            this.button25.Text = "氣泡排序";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -529,60 +529,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "HashTable";
             // 
-            // ht0
+            // ht6
             // 
-            this.ht0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht0.Location = new System.Drawing.Point(18, 21);
-            this.ht0.Name = "ht0";
-            this.ht0.Size = new System.Drawing.Size(170, 40);
-            this.ht0.TabIndex = 63;
-            this.ht0.Text = "info";
-            this.ht0.UseVisualStyleBackColor = true;
-            this.ht0.Click += new System.EventHandler(this.ht0_Click);
-            // 
-            // ht1
-            // 
-            this.ht1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht1.Location = new System.Drawing.Point(18, 67);
-            this.ht1.Name = "ht1";
-            this.ht1.Size = new System.Drawing.Size(170, 40);
-            this.ht1.TabIndex = 64;
-            this.ht1.Text = "add";
-            this.ht1.UseVisualStyleBackColor = true;
-            this.ht1.Click += new System.EventHandler(this.ht1_Click);
-            // 
-            // ht2
-            // 
-            this.ht2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht2.Location = new System.Drawing.Point(18, 113);
-            this.ht2.Name = "ht2";
-            this.ht2.Size = new System.Drawing.Size(170, 40);
-            this.ht2.TabIndex = 65;
-            this.ht2.Text = "remove";
-            this.ht2.UseVisualStyleBackColor = true;
-            this.ht2.Click += new System.EventHandler(this.ht2_Click);
-            // 
-            // ht3
-            // 
-            this.ht3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht3.Location = new System.Drawing.Point(18, 159);
-            this.ht3.Name = "ht3";
-            this.ht3.Size = new System.Drawing.Size(170, 40);
-            this.ht3.TabIndex = 66;
-            this.ht3.Text = "modify";
-            this.ht3.UseVisualStyleBackColor = true;
-            this.ht3.Click += new System.EventHandler(this.ht3_Click);
-            // 
-            // ht4
-            // 
-            this.ht4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht4.Location = new System.Drawing.Point(18, 205);
-            this.ht4.Name = "ht4";
-            this.ht4.Size = new System.Drawing.Size(170, 40);
-            this.ht4.TabIndex = 67;
-            this.ht4.Text = "clear";
-            this.ht4.UseVisualStyleBackColor = true;
-            this.ht4.Click += new System.EventHandler(this.ht4_Click);
+            this.ht6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht6.Location = new System.Drawing.Point(18, 297);
+            this.ht6.Name = "ht6";
+            this.ht6.Size = new System.Drawing.Size(170, 40);
+            this.ht6.TabIndex = 69;
+            this.ht6.Text = "獲取鍵的集合";
+            this.ht6.UseVisualStyleBackColor = true;
+            this.ht6.Click += new System.EventHandler(this.ht6_Click);
             // 
             // ht5
             // 
@@ -595,16 +551,60 @@
             this.ht5.UseVisualStyleBackColor = true;
             this.ht5.Click += new System.EventHandler(this.ht5_Click);
             // 
-            // ht6
+            // ht4
             // 
-            this.ht6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht6.Location = new System.Drawing.Point(18, 297);
-            this.ht6.Name = "ht6";
-            this.ht6.Size = new System.Drawing.Size(170, 40);
-            this.ht6.TabIndex = 69;
-            this.ht6.Text = "獲取鍵的集合";
-            this.ht6.UseVisualStyleBackColor = true;
-            this.ht6.Click += new System.EventHandler(this.ht6_Click);
+            this.ht4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht4.Location = new System.Drawing.Point(18, 205);
+            this.ht4.Name = "ht4";
+            this.ht4.Size = new System.Drawing.Size(170, 40);
+            this.ht4.TabIndex = 67;
+            this.ht4.Text = "clear";
+            this.ht4.UseVisualStyleBackColor = true;
+            this.ht4.Click += new System.EventHandler(this.ht4_Click);
+            // 
+            // ht3
+            // 
+            this.ht3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht3.Location = new System.Drawing.Point(18, 159);
+            this.ht3.Name = "ht3";
+            this.ht3.Size = new System.Drawing.Size(170, 40);
+            this.ht3.TabIndex = 66;
+            this.ht3.Text = "modify";
+            this.ht3.UseVisualStyleBackColor = true;
+            this.ht3.Click += new System.EventHandler(this.ht3_Click);
+            // 
+            // ht2
+            // 
+            this.ht2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht2.Location = new System.Drawing.Point(18, 113);
+            this.ht2.Name = "ht2";
+            this.ht2.Size = new System.Drawing.Size(170, 40);
+            this.ht2.TabIndex = 65;
+            this.ht2.Text = "remove";
+            this.ht2.UseVisualStyleBackColor = true;
+            this.ht2.Click += new System.EventHandler(this.ht2_Click);
+            // 
+            // ht1
+            // 
+            this.ht1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht1.Location = new System.Drawing.Point(18, 67);
+            this.ht1.Name = "ht1";
+            this.ht1.Size = new System.Drawing.Size(170, 40);
+            this.ht1.TabIndex = 64;
+            this.ht1.Text = "add";
+            this.ht1.UseVisualStyleBackColor = true;
+            this.ht1.Click += new System.EventHandler(this.ht1_Click);
+            // 
+            // ht0
+            // 
+            this.ht0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht0.Location = new System.Drawing.Point(18, 21);
+            this.ht0.Name = "ht0";
+            this.ht0.Size = new System.Drawing.Size(170, 40);
+            this.ht0.TabIndex = 63;
+            this.ht0.Text = "info";
+            this.ht0.UseVisualStyleBackColor = true;
+            this.ht0.Click += new System.EventHandler(this.ht0_Click);
             // 
             // Form1
             // 

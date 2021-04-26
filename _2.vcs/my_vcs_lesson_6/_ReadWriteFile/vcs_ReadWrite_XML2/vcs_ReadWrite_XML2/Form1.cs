@@ -11,7 +11,8 @@ namespace vcs_ReadWrite_XML2
 {
     public partial class Form1 : Form
     {
-        string filename = "C:\\______test_files\\__RW\\_xml\\person.xml";
+        string filename = @"C:\______test_files\__RW\_xml\person.xml";
+
         public Form1()
         {
             InitializeComponent();
@@ -40,7 +41,6 @@ namespace vcs_ReadWrite_XML2
             richTextBox1.Text += "CurrentRow1 = " + dataGridView1.Columns[1].Name + "\n";
             richTextBox1.Text += "CurrentRow2 = " + dataGridView1.Columns[2].Name + "\n";
             //dataGridView1.data
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -53,12 +53,11 @@ namespace vcs_ReadWrite_XML2
             //int index = dataGridView1.Rows.Add();
             //dataGridView1.Rows[index].Cells[0].Value = "123456";
 
-        //string[] row0 = { "11/22/1968", "29", "Revolution 9", "Beatles"};
-        //dataGridView1.Rows.Add(row0);
+            //string[] row0 = { "11/22/1968", "29", "Revolution 9", "Beatles"};
+            //dataGridView1.Rows.Add(row0);
 
             // Initialize the button column.
-            DataGridViewButtonColumn buttonColumn =
-                new DataGridViewButtonColumn();
+            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
             buttonColumn.Name = "Details";
             buttonColumn.HeaderText = "Details";
             buttonColumn.Text = "View Details";
@@ -90,7 +89,7 @@ namespace vcs_ReadWrite_XML2
             int row = this.dataGridView1.CurrentRow.Index + 1;
             if (row > this.dataGridView1.RowCount - 1)
                 row = 0;
-            this.dataGridView1.CurrentCell = this.dataGridView1[0, row]; 
+            this.dataGridView1.CurrentCell = this.dataGridView1[0, row];
 
         }
 
@@ -104,7 +103,7 @@ namespace vcs_ReadWrite_XML2
             int row = this.dataGridView1.CurrentRow.Index - 1;
             if (row < 0)
                 row = this.dataGridView1.RowCount - 1;
-            this.dataGridView1.CurrentCell = this.dataGridView1[0, row]; 
+            this.dataGridView1.CurrentCell = this.dataGridView1[0, row];
 
         }
 
@@ -123,13 +122,11 @@ namespace vcs_ReadWrite_XML2
                 for (j = 0; j < ColumnCount; j++)
                 {
                     richTextBox1.Text += "[" + j.ToString() + "," + i.ToString() + "]" + dataGridView1[j, i].Value + "\t";
-                
+
                 }
                 richTextBox1.Text += "\n";
             }
             richTextBox1.Text += "\n";
-
-
         }
     }
 }

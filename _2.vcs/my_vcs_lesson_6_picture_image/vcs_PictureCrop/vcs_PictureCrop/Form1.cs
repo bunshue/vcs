@@ -13,13 +13,15 @@ namespace vcs_PictureCrop
 {
     public partial class Form1 : Form
     {
-        private Bitmap bitmap1 = null;
-        private Bitmap bitmap2 = null;
+        private bool flag_select_area = false;  //開始選取的旗標
+        private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
+        private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
+        private Bitmap bitmap1 = null;  //原圖位圖Bitmap
+        private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
+        private Rectangle select_rectangle;//用來保存截圖的矩形
+
         private int X0, Y0, X1, Y1;
-        private bool flag_select_area = false;
-        private Point pt_st, pt_sp;
         private Graphics SelectedGraphics = null;
-        private Rectangle select_rectangle;
 
         public Form1()
         {
@@ -28,9 +30,18 @@ namespace vcs_PictureCrop
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            bitmap1 = new Bitmap(pictureBox1.Image);
+            string filename = @"C:\______test_files\bear.jpg";
+
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
 
             this.KeyPreview = true;
+        }
+
+        // Return a Rectangle with these points as corners.
+        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
+        {
+            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
         }
 
         // Start selecting an area.
@@ -44,6 +55,46 @@ namespace vcs_PictureCrop
             bitmap2 = new Bitmap(bitmap1);
             SelectedGraphics = Graphics.FromImage(bitmap2);
             pictureBox1.Image = bitmap2;
+        }
+
+        // Continue selecting an area.
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Do nothing if we're not selecting an area.
+            if (flag_select_area == false)
+                return;
+
+            // Generate the new image with the selection rectangle.
+            ConvertCoordinates(pictureBox1, out X1, out Y1, e.X, e.Y);
+
+            // Copy the original image.
+            SelectedGraphics.DrawImage(bitmap1, 0, 0);
+
+            // Draw the selection rectangle.
+            using (Pen select_pen = new Pen(Color.Red))
+            {
+                select_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                Rectangle rect = MakeRectangle(X0, Y0, X1, Y1);
+                SelectedGraphics.DrawRectangle(select_pen, rect);
+            }
+            pictureBox1.Refresh();
+        }
+
+        // Finish selecting the area.
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            // Do nothing if we're not selecting an area.
+            if (flag_select_area == false)
+                return;
+            flag_select_area = false;
+
+            // Stop selecting.
+            SelectedGraphics = null;
+
+            // Convert the points into a Rectangle.
+            select_rectangle = MakeRectangle(X0, Y0, X1, Y1);
+
+            richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
         }
 
         // Convert the coordinates for the image's SizeMode.
@@ -99,56 +150,6 @@ namespace vcs_PictureCrop
                 default:
                     break;
             }
-        }
-
-        // Continue selecting an area.
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            // Do nothing if we're not selecting an area.
-            if (flag_select_area == false)
-                return;
-
-            // Generate the new image with the selection rectangle.
-            ConvertCoordinates(pictureBox1, out X1, out Y1, e.X, e.Y);
-
-            // Copy the original image.
-            SelectedGraphics.DrawImage(bitmap1, 0, 0);
-
-            // Draw the selection rectangle.
-            using (Pen select_pen = new Pen(Color.Red))
-            {
-                select_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                Rectangle rect = MakeRectangle(X0, Y0, X1, Y1);
-                SelectedGraphics.DrawRectangle(select_pen, rect);
-            }
-            pictureBox1.Refresh();
-        }
-
-        // Return a Rectangle with these points as corners.
-        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
-        {
-            return new Rectangle(
-                Math.Min(x0, x1),
-                Math.Min(y0, y1),
-                Math.Abs(x0 - x1),
-                Math.Abs(y0 - y1));
-        }
-
-        // Finish selecting the area.
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            // Do nothing if we're not selecting an area.
-            if (flag_select_area == false)
-                return;
-            flag_select_area = false;
-
-            // Stop selecting.
-            SelectedGraphics = null;
-
-            // Convert the points into a Rectangle.
-            select_rectangle = MakeRectangle(X0, Y0, X1, Y1);
-
-            richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -212,34 +213,6 @@ namespace vcs_PictureCrop
             // Display the result.
             bitmap2 = new Bitmap(bitmap1);
             pictureBox1.Image = bitmap2;
-
-        }
-
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            save_image_to_drive();
-        }
-
-        void save_image_to_drive()
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-                try
-                {
-                    bitmap1.Save(filename, ImageFormat.Bmp);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
         }
 
         //貼上 定點

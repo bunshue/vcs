@@ -18,18 +18,30 @@ namespace vcs_PictureCrop5
             InitializeComponent();
         }
 
-        private int X0, Y0, X1, Y1;
         private bool flag_select_area = false;  //開始選取的旗標
-        private Point pt_st, pt_sp;             //選取的起始點和終點
+        private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
+        private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
         private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
+        private Rectangle select_rectangle;//用來保存截圖的矩形
+
+        private int X0, Y0, X1, Y1;
         private Graphics SelectedGraphics = null;
 
         // Save the original image.
         private void Form1_Load(object sender, EventArgs e)
         {
-            bitmap1 = new Bitmap(pictureBox1.Image);
+            string filename = @"C:\______test_files\picture1.jpg";
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
+
             this.KeyPreview = true;
+        }
+
+        // Return a Rectangle with these points as corners.
+        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
+        {
+            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
         }
 
         // Start selecting an area.
@@ -39,6 +51,7 @@ namespace vcs_PictureCrop5
             flag_select_area = true;
             X0 = e.X;
             Y0 = e.Y;
+            pt_st = e.Location;
 
             // Make the selected image.
             bitmap2 = new Bitmap(bitmap1);
@@ -56,6 +69,7 @@ namespace vcs_PictureCrop5
             // Generate the new image with the selection rectangle.
             X1 = e.X;
             Y1 = e.Y;
+            pt_sp = e.Location;
 
             // Copy the original image.
             SelectedGraphics.DrawImage(bitmap1, 0, 0);
@@ -89,16 +103,6 @@ namespace vcs_PictureCrop5
                 // Display the Rectangle.
                 richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
             }
-        }
-
-        // Return a Rectangle with these points as corners.
-        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
-        {
-            return new Rectangle(
-                Math.Min(x0, x1),
-                Math.Min(y0, y1),
-                Math.Abs(x0 - x1),
-                Math.Abs(y0 - y1));
         }
 
         // If the user presses Escape, cancel.

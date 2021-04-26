@@ -18,7 +18,15 @@ namespace vcs_PictureCrop8
         int H = 0;
 
         string filename = @"C:\______test_files\picture1.jpg";
-        bool flag_select_area = false;
+
+
+        private bool flag_select_area = false;  //開始選取的旗標
+        private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
+        private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
+        private Bitmap bitmap1 = null;  //原圖位圖Bitmap
+        private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
+        private Rectangle select_rectangle;//用來保存截圖的矩形
+        //Rectangle select_rectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
 
         int x_st = 0;
         int y_st = 0;
@@ -27,7 +35,6 @@ namespace vcs_PictureCrop8
 
         int w = 0;
         int h = 0;
-        Rectangle select_rectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
 
         public Form1()
         {
@@ -51,10 +58,16 @@ namespace vcs_PictureCrop8
             tb_x_st.Text = x_st.ToString();
             tb_y_st.Text = y_st.ToString();
 
-            select_rectangle = new Rectangle(x_st, y_st, w, h);
+            select_rectangle = MakeRectangle(x_st, y_st, x_st + w, y_st + h);
 
 
             //試著在啟動時就把預設截取位置畫出來
+        }
+
+        // Return a Rectangle with these points as corners.
+        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
+        {
+            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)

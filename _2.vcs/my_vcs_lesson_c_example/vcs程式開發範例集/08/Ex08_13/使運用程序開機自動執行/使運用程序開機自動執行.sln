@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "使運用程序開機自動執行", "使運用程序開機自動執行\使運用程序開機自動執行.csproj", "{30362C2C-642F-441F-8FF3-0466B4C379BC}"
 EndProject
 Global

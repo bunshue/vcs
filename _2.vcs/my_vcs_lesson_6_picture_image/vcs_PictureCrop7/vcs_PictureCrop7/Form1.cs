@@ -13,11 +13,11 @@ namespace vcs_PictureCrop7
 {
     public partial class Form1 : Form
     {
-        private Point DownPoint = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
-        private Point UpPoint = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
-
         private bool flag_select_area = false;  //開始選取的旗標
+        private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
+        private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
+        private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
         private Rectangle select_rectangle;//用來保存截圖的矩形
         int W;
         int H;
@@ -31,20 +31,27 @@ namespace vcs_PictureCrop7
         {
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
             this.UpdateStyles();
-            //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題，關於這個大家可以自己去搜索下
+            //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題
+
             bitmap1 = new Bitmap(this.BackgroundImage);//BackgroundImage為全屏圖片，我們另用變量來保存全屏圖片
             W = this.BackgroundImage.Width;
             H = this.BackgroundImage.Height;
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
+
+            /*
+            string filename = @"C:\______test_files\picture1.jpg";
+            bitmap1 = new Bitmap(filename);
+            W = bitmap1.Width;
+            H = bitmap1.Height;
+            pictureBox1.Image = bitmap1;
+            */
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // Return a Rectangle with these points as corners.
+        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
         {
-            richTextBox1.Text += "down point = (" + DownPoint.X.ToString() + ", " + DownPoint.Y.ToString() + ")\n";
-            richTextBox1.Text += "down point = (" + UpPoint.X.ToString() + ", " + UpPoint.Y.ToString() + ")\n";
-            int w = Math.Abs(UpPoint.X - DownPoint.X) + 1;
-            int h = Math.Abs(UpPoint.Y - DownPoint.Y) + 1;
-            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
+            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -54,7 +61,7 @@ namespace vcs_PictureCrop7
                 if (flag_select_area == false)    //如果捕捉沒有開始
                 {
                     flag_select_area = true;
-                    DownPoint = new Point(e.X, e.Y);    //保存鼠標按下時的坐標
+                    pt_st = e.Location;    //保存鼠標按下時的坐標
                 }
             }
         }
@@ -64,17 +71,17 @@ namespace vcs_PictureCrop7
             if (flag_select_area == true) //如果捕捉開始
             {
                 Bitmap destBmp = (Bitmap)bitmap1.Clone();//新建一個圖片對象，並讓它與原始圖片相同
-                Point newPoint = new Point(DownPoint.X, DownPoint.Y);//獲取鼠標的坐標
+                Point newPoint = new Point(pt_st.X, pt_st.Y);//獲取鼠標的坐標
                 Graphics g = Graphics.FromImage(destBmp);//在剛才新建的圖片上新建一個畫板
                 Pen p = new Pen(Color.Blue, 1);
-                int width = Math.Abs(e.X - DownPoint.X);
-                int height = Math.Abs(e.Y - DownPoint.Y);   //獲取矩形的長和寬
+                int width = Math.Abs(e.X - pt_st.X);
+                int height = Math.Abs(e.Y - pt_st.Y);   //獲取矩形的長和寬
 
-                if (e.X < DownPoint.X)
+                if (e.X < pt_st.X)
                 {
                     newPoint.X = e.X;
                 }
-                if (e.Y < DownPoint.Y)
+                if (e.Y < pt_st.Y)
                 {
                     newPoint.Y = e.Y;
                 }
@@ -99,17 +106,17 @@ namespace vcs_PictureCrop7
             {
                 if (flag_select_area == true)
                 {
-                    UpPoint = new Point(e.X, e.Y);//保存鼠標放開時的坐標
+                    pt_sp = e.Location;//保存鼠標放開時的坐標
                     flag_select_area = false;
 
-                    richTextBox1.Text += "down point = (" + DownPoint.X.ToString() + ", " + DownPoint.Y.ToString() + ")\n";
-                    richTextBox1.Text += "down point = (" + UpPoint.X.ToString() + ", " + UpPoint.Y.ToString() + ")\n";
-                    int w = Math.Abs(UpPoint.X - DownPoint.X) + 1;
-                    int h = Math.Abs(UpPoint.Y - DownPoint.Y) + 1;
+                    richTextBox1.Text += "pt_st = " + pt_st.ToString() + "\n";
+                    richTextBox1.Text += "pt_sp = " + pt_sp.ToString() + "\n";
+                    int w = Math.Abs(pt_sp.X - pt_st.X) + 1;
+                    int h = Math.Abs(pt_sp.Y - pt_st.Y) + 1;
                     richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
 
-                    int sx = DownPoint.X;
-                    int sy = DownPoint.Y;
+                    int sx = pt_st.X;
+                    int sy = pt_st.Y;
                     int sw = w;
                     int sh = h;
                     Rectangle srcRect = new Rectangle(sx, sy, sw, sh);   //擷取部分區域
@@ -133,6 +140,15 @@ namespace vcs_PictureCrop7
                     bitmap1.Dispose();
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "pt_st = " + pt_st.ToString() + "\n";
+            richTextBox1.Text += "pt_sp = " + pt_sp.ToString() + "\n";
+            int w = Math.Abs(pt_sp.X - pt_st.X) + 1;
+            int h = Math.Abs(pt_sp.Y - pt_st.Y) + 1;
+            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)

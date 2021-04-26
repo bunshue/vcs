@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "利用圖表分析彩票中獎情況", "利用圖表分析彩票中獎情況\利用圖表分析彩票中獎情況.csproj", "{44BECB5F-C7AE-4F6E-A464-228F30C97CA1}"
 EndProject
 Global

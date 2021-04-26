@@ -11,6 +11,13 @@ namespace vcs_PicturePixellate
 {
     public partial class Form1 : Form
     {
+        // Select an area.
+        private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
+        private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
+        private int StartX = -1, StartY = -1;
+        private Bitmap BoxBitmap = null;
+        private Graphics BoxGraphics = null;
+
         // The current image without the rubberband rectangle.
         private Bitmap CurrentBitmap = null;
 
@@ -36,19 +43,20 @@ namespace vcs_PicturePixellate
             {
                 MessageBox.Show(ex.Message);
             }
-
-            this.Text = "選取區域做 Pixellate";
         }
 
+        // Return a Rectangle with these points as corners.
+        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
+        {
+            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
+        }
 
-
-        // Select an area.
-        private int StartX = -1, StartY = -1;
-        private Bitmap BoxBitmap = null;
-        private Graphics BoxGraphics = null;
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (CurrentBitmap == null) return;
+            if (CurrentBitmap == null)
+                return;
+
+            pt_st = e.Location;
             StartX = e.X;
             StartY = e.Y;
 
@@ -61,7 +69,8 @@ namespace vcs_PicturePixellate
         // Continue selecting the area.
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (StartX < 0) return;
+            if (StartX < 0)
+                return;
 
             // Restore the current image.
             BoxGraphics.DrawImage(CurrentBitmap, 0, 0);
@@ -76,20 +85,11 @@ namespace vcs_PicturePixellate
             pictureBox1.Refresh();
         }
 
-        // Return a Rectangle with these points as corners.
-        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
-        {
-            return new Rectangle(
-                Math.Min(x0, x1),
-                Math.Min(y0, y1),
-                Math.Abs(x0 - x1),
-                Math.Abs(y0 - y1));
-        }
-
         // Pixellate the selected area and save the result.
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (StartX < 0) return;
+            if (StartX < 0)
+                return;
 
             PixellateRectangle(MakeRectangle(StartX, StartY, e.X, e.Y));
 
@@ -108,8 +108,7 @@ namespace vcs_PicturePixellate
             // Restrict the rectangle to fit on the image.
             int bm_wid = CurrentBitmap.Width;
             int bm_hgt = CurrentBitmap.Height;
-            rect = Rectangle.Intersect(rect,
-                new Rectangle(0, 0, bm_wid, bm_hgt));
+            rect = Rectangle.Intersect(rect, new Rectangle(0, 0, bm_wid, bm_hgt));
 
             // Process the rectangle.
             const int box_wid = 8;
@@ -131,8 +130,7 @@ namespace vcs_PicturePixellate
                             for (int dx = 0; dx < box_wid; dx++)
                             {
                                 if (x + dx >= bm_wid) break;
-                                Color pixel_color =
-                                    CurrentBitmap.GetPixel(x + dx, y + dy);
+                                Color pixel_color = CurrentBitmap.GetPixel(x + dx, y + dy);
                                 total_r += pixel_color.R;
                                 total_g += pixel_color.G;
                                 total_b += pixel_color.B;
@@ -157,8 +155,6 @@ namespace vcs_PicturePixellate
                 pictureBox1.Refresh();
             }
         }
-
-
-
     }
 }
+

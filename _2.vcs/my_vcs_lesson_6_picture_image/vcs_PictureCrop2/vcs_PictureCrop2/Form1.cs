@@ -20,13 +20,33 @@ namespace vcs_PictureCrop2
         }
 
         private bool flag_select_area = false;  //開始選取的旗標
-        private Point pt_st, pt_sp;             //選取的起始點和終點
+        private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
+        private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
         private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
+        private Rectangle select_rectangle;//用來保存截圖的矩形
 
         // The cropped image with the selection rectangle.
         private Bitmap DisplayImage;
         private Graphics DisplayGraphics;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\picture1.jpg";
+            bitmap1 = LoadBitmapUnlocked(filename);
+            bitmap2 = bitmap1.Clone() as Bitmap;
+            DisplayImage = bitmap2.Clone() as Bitmap;
+            DisplayGraphics = Graphics.FromImage(DisplayImage);
+
+            pictureBox1.Image = DisplayImage;
+            pictureBox1.Visible = true;
+        }
+
+        // Return a Rectangle with these points as corners.
+        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
+        {
+            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
+        }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -117,46 +137,6 @@ namespace vcs_PictureCrop2
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            //Open
-            string filename = @"C:\______test_files\picture1.jpg";
-            bitmap1 = LoadBitmapUnlocked(filename);
-            bitmap2 = bitmap1.Clone() as Bitmap;
-            DisplayImage = bitmap2.Clone() as Bitmap;
-            DisplayGraphics = Graphics.FromImage(DisplayImage);
-
-            pictureBox1.Image = DisplayImage;
-            pictureBox1.Visible = true;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            save_select_picture_to_drive();
-        }
-
-        void save_select_picture_to_drive()
-        {
-            if (bitmap2 != null)
-            {
-                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-                try
-                {
-                    bitmap2.Save(filename, ImageFormat.Bmp);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
-        private void button3_Click(object sender, EventArgs e)
         {
             //Reset
             // Display the original image.

@@ -707,12 +707,28 @@ namespace vcs_test_all_05_Array
 
         private void button19_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "插入排序\n";
+            int[] iArrary = new int[] { 1, 13, 3, 6, 10, 55, 98, 2, 87, 12, 34, 75, 33, 47 };
+            InsertionSort ii = new InsertionSort();
+            ii.Sort(iArrary);
+            for (int m = 0; m < iArrary.Length; m++)
+            {
+                richTextBox1.Text += iArrary[m].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "希爾排序\n";
+            int[] iArrary = new int[] { 1, 5, 13, 6, 10, 55, 99, 2, 87, 12, 34, 75, 33, 47 };
+            ShellSort sh = new ShellSort();
+            sh.Sort(iArrary);
+            for (int m = 0; m < iArrary.Length; m++)
+            {
+                richTextBox1.Text += iArrary[m].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
         }
 
         class AnimalData
@@ -872,12 +888,28 @@ namespace vcs_test_all_05_Array
 
         private void button24_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "選擇排序\n";
+            int[] iArrary = new int[] { 1, 5, 3, 6, 10, 55, 9, 2, 87, 12, 34, 75, 33, 47 };
+            SelectionSort ss = new SelectionSort();
+            ss.Sort(iArrary);
+            for (int m = 0; m < iArrary.Length; m++)
+            {
+                richTextBox1.Text += iArrary[m].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "氣泡排序\n";
+            int[] iArrary = new int[] { 1, 5, 13, 6, 10, 55, 99, 2, 87, 12, 34, 75, 33, 47 };//定義數組
+            BubbleSort sh = new BubbleSort();
+            sh.Sort(iArrary);
+            for (int m = 0; m < iArrary.Length; m++)//輸出結果
+            {
+                richTextBox1.Text += iArrary[m].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button26_Click(object sender, EventArgs e)
