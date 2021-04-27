@@ -12,33 +12,34 @@ namespace BassoRelievo
 {
     public partial class Form1 : Form
     {
-        Bitmap myBitmap;
-        Image myImage;
+        string filename = @"C:\______test_files\picture1.jpg";
+
+        Bitmap bitmap1;
+        Image image;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp|*.jpg;*.jpeg;*.bmp";
-            openFileDialog1.ShowDialog();
-            myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);
-            myBitmap = new Bitmap(myImage);
-            this.BackgroundImage = myBitmap;
+            image = System.Drawing.Image.FromFile(filename);
+            bitmap1 = new Bitmap(image);
+            this.BackgroundImage = bitmap1;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             try
             {
-                myBitmap = new Bitmap(myImage);
-                for (int i = 0; i < myBitmap.Width - 1; i++)
+                bitmap1 = new Bitmap(image);
+                for (int i = 0; i < bitmap1.Width - 1; i++)
                 {
-                    for (int j = 0; j < myBitmap.Height - 1; j++)
+                    for (int j = 0; j < bitmap1.Height - 1; j++)
                     {
-                        Color Color1 = myBitmap.GetPixel(i, j);
-                        Color Color2 = myBitmap.GetPixel(i + 1, j + 1);
+                        Color Color1 = bitmap1.GetPixel(i, j);
+                        Color Color2 = bitmap1.GetPixel(i + 1, j + 1);
                         int red = Math.Abs(Color1.R - Color2.R + 128);
                         int green = Math.Abs(Color1.G - Color2.G + 128);
                         int blue = Math.Abs(Color1.B - Color2.B + 128);
@@ -51,10 +52,10 @@ namespace BassoRelievo
 
                         if (blue > 255) blue = 255;
                         if (blue < 0) blue = 0;
-                        myBitmap.SetPixel(i, j, Color.FromArgb(red, green, blue));
+                        bitmap1.SetPixel(i, j, Color.FromArgb(red, green, blue));
                     }
                 }
-                this.BackgroundImage = myBitmap;
+                this.BackgroundImage = bitmap1;
             }
             catch { }
         }

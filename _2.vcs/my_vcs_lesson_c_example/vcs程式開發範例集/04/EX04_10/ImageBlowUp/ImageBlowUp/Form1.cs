@@ -13,6 +13,8 @@ namespace ImageBlowUp
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
+
         Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
         Image myImage; 
         public Form1()
@@ -20,11 +22,9 @@ namespace ImageBlowUp
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
-            openFileDialog1.ShowDialog();
-            myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);
+            myImage = System.Drawing.Image.FromFile(filename);
             pictureBox1.Image = myImage;
             pictureBox1.Height = myImage.Height;
             pictureBox1.Width = myImage.Width;
@@ -43,5 +43,6 @@ namespace ImageBlowUp
             catch
             { }
         }
+
     }
 }

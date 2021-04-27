@@ -14,17 +14,18 @@ namespace LevelInterleaving
     {
         string filename = @"C:\______test_files\picture1.jpg";
 
-        Bitmap myBitmap;
+        Bitmap bitmap1;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            Image myImage = System.Drawing.Image.FromFile(filename);
-            myBitmap = new Bitmap(myImage);
-            this.BackgroundImage = myBitmap;
+            Image image = System.Drawing.Image.FromFile(filename);
+            bitmap1 = new Bitmap(image);
+            this.BackgroundImage = bitmap1;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -41,11 +42,11 @@ namespace LevelInterleaving
                 {
                     for (int m = 0; m <= intHeight - 1; m++)
                     {
-                        bitmap.SetPixel(i, m, myBitmap.GetPixel(i, m));
+                        bitmap.SetPixel(i, m, bitmap1.GetPixel(i, m));
                     }
                     for (int n = 0; n <= intHeight - 1; n++)
                     {
-                        bitmap.SetPixel(intWidth - i - 1, n, myBitmap.GetPixel(intWidth - i - 1, n));
+                        bitmap.SetPixel(intWidth - i - 1, n, bitmap1.GetPixel(intWidth - i - 1, n));
                     }
                     i++;
                     this.Refresh();
@@ -55,5 +56,6 @@ namespace LevelInterleaving
             }
             catch { }
         }
+
     }
 }

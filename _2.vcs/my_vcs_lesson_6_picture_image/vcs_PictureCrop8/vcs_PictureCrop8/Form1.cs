@@ -13,12 +13,7 @@ namespace vcs_PictureCrop8
 {
     public partial class Form1 : Form
     {
-        Image image;
-        int W = 0;
-        int H = 0;
-
         string filename = @"C:\______test_files\picture1.jpg";
-
 
         private bool flag_select_area = false;  //開始選取的旗標
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
@@ -26,15 +21,18 @@ namespace vcs_PictureCrop8
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
         private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
         private Rectangle select_rectangle;//用來保存截圖的矩形
-        //Rectangle select_rectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
+
+        private int W = 0;  //原圖的寬
+        private int H = 0;  //原圖的高
+        private int w = 0;  //擷取圖的寬
+        private int h = 0;  //擷取圖的高
+
+        Image image;
 
         int x_st = 0;
         int y_st = 0;
         int x_sp = 0;
         int y_sp = 0;
-
-        int w = 0;
-        int h = 0;
 
         public Form1()
         {

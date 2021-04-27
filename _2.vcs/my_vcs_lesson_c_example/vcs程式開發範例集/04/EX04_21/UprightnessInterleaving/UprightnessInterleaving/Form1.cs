@@ -13,17 +13,18 @@ namespace UprightnessInterleaving
     {
         string filename = @"C:\______test_files\picture1.jpg";
 
-        Bitmap myBitmap;
+        Bitmap bitmap1;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            Image myImage = System.Drawing.Image.FromFile(filename);
-            myBitmap = new Bitmap(myImage);
-            this.BackgroundImage = myBitmap;
+            Image image = Image.FromFile(filename);
+            bitmap1 = new Bitmap(image);
+            this.BackgroundImage = bitmap1;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -40,11 +41,11 @@ namespace UprightnessInterleaving
                 {
                     for (int m = 0; m <= intWidth - 1; m++)
                     {
-                        bitmap.SetPixel(m, i, myBitmap.GetPixel(m, i));
+                        bitmap.SetPixel(m, i, bitmap1.GetPixel(m, i));
                     }
                     for (int n = 0; n <= intWidth - 1; n++)
                     {
-                        bitmap.SetPixel(n, intHeight - i - 1, myBitmap.GetPixel(n, intHeight - i - 1));
+                        bitmap.SetPixel(n, intHeight - i - 1, bitmap1.GetPixel(n, intHeight - i - 1));
                     }
                     i++;
                     this.Refresh();

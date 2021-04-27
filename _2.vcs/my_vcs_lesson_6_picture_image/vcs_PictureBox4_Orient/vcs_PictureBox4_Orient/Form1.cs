@@ -18,7 +18,7 @@ namespace vcs_PictureBox4_Orient
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\orient.jpg";
+            string filename = @"C:\______test_files\orient1.jpg";
 
             // Open the file.
             using (Bitmap bm = new Bitmap(filename))

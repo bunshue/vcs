@@ -21,7 +21,7 @@ namespace vcs_PictureCrop
         private Rectangle select_rectangle;//用來保存截圖的矩形
 
         private int X0, Y0, X1, Y1;
-        private Graphics SelectedGraphics = null;
+        private Graphics g2 = null;     //繪圖物件
 
         public Form1()
         {
@@ -44,6 +44,11 @@ namespace vcs_PictureCrop
             return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
         }
 
+        private Rectangle MakeRectangle(Point pt1, Point pt2)
+        {
+            return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
+        }
+
         // Start selecting an area.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -53,7 +58,7 @@ namespace vcs_PictureCrop
 
             // Make the selected image.
             bitmap2 = new Bitmap(bitmap1);
-            SelectedGraphics = Graphics.FromImage(bitmap2);
+            g2 = Graphics.FromImage(bitmap2);
             pictureBox1.Image = bitmap2;
         }
 
@@ -68,14 +73,14 @@ namespace vcs_PictureCrop
             ConvertCoordinates(pictureBox1, out X1, out Y1, e.X, e.Y);
 
             // Copy the original image.
-            SelectedGraphics.DrawImage(bitmap1, 0, 0);
+            g2.DrawImage(bitmap1, 0, 0);
 
             // Draw the selection rectangle.
             using (Pen select_pen = new Pen(Color.Red))
             {
                 select_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
                 Rectangle rect = MakeRectangle(X0, Y0, X1, Y1);
-                SelectedGraphics.DrawRectangle(select_pen, rect);
+                g2.DrawRectangle(select_pen, rect);
             }
             pictureBox1.Refresh();
         }
@@ -89,7 +94,7 @@ namespace vcs_PictureCrop
             flag_select_area = false;
 
             // Stop selecting.
-            SelectedGraphics = null;
+            g2 = null;
 
             // Convert the points into a Rectangle.
             select_rectangle = MakeRectangle(X0, Y0, X1, Y1);
@@ -152,11 +157,6 @@ namespace vcs_PictureCrop
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
-        }
-
         // Copy the selected area to the clipboard.
         private void CopyToClipboard(Rectangle src_rect)
         {
@@ -186,7 +186,6 @@ namespace vcs_PictureCrop
             CopyToClipboard(select_rectangle);
             richTextBox1.Text += "已複製圖片\n";
         }
-
 
         // Copy the selected area to the clipboard
         // and blank that area.
@@ -244,7 +243,7 @@ namespace vcs_PictureCrop
             pictureBox1.Refresh();
 
             bitmap2 = null;
-            SelectedGraphics = null;
+            g2 = null;
         }
 
         //貼上 伸展
@@ -275,7 +274,7 @@ namespace vcs_PictureCrop
             pictureBox1.Refresh();
 
             bitmap2 = null;
-            SelectedGraphics = null;
+            g2 = null;
         }
 
         // If the user presses Escape, cancel.
@@ -283,13 +282,14 @@ namespace vcs_PictureCrop
         {
             if (e.KeyChar == 27)
             {
+                richTextBox1.Text += "Esc\n";
                 if (flag_select_area == false)
                     return;
                 flag_select_area = false;
 
                 // Stop selecting.
                 bitmap2 = null;
-                SelectedGraphics = null;
+                g2 = null;
                 pictureBox1.Image = bitmap1;
                 pictureBox1.Refresh();
             }

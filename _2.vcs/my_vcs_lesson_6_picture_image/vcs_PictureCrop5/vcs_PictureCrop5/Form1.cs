@@ -26,7 +26,7 @@ namespace vcs_PictureCrop5
         private Rectangle select_rectangle;//用來保存截圖的矩形
 
         private int X0, Y0, X1, Y1;
-        private Graphics SelectedGraphics = null;
+        private Graphics g2 = null;
 
         // Save the original image.
         private void Form1_Load(object sender, EventArgs e)
@@ -44,6 +44,11 @@ namespace vcs_PictureCrop5
             return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
         }
 
+        private Rectangle MakeRectangle(Point pt1, Point pt2)
+        {
+            return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
+        }
+
         // Start selecting an area.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -55,7 +60,7 @@ namespace vcs_PictureCrop5
 
             // Make the selected image.
             bitmap2 = new Bitmap(bitmap1);
-            SelectedGraphics = Graphics.FromImage(bitmap2);
+            g2 = Graphics.FromImage(bitmap2);
             pictureBox1.Image = bitmap2;
         }
 
@@ -72,14 +77,14 @@ namespace vcs_PictureCrop5
             pt_sp = e.Location;
 
             // Copy the original image.
-            SelectedGraphics.DrawImage(bitmap1, 0, 0);
+            g2.DrawImage(bitmap1, 0, 0);
 
             // Draw the selection rectangle.
             using (Pen select_pen = new Pen(Color.Red))
             {
                 select_pen.DashStyle = DashStyle.Dash;
                 Rectangle rect = MakeRectangle(X0, Y0, X1, Y1);
-                SelectedGraphics.DrawRectangle(select_pen, rect);
+                g2.DrawRectangle(select_pen, rect);
             }
 
             pictureBox1.Refresh();
@@ -92,7 +97,7 @@ namespace vcs_PictureCrop5
                 return;
             flag_select_area = false;
             bitmap2 = null;
-            SelectedGraphics = null;
+            g2 = null;
             pictureBox1.Image = bitmap1;
             pictureBox1.Refresh();
 
@@ -116,7 +121,7 @@ namespace vcs_PictureCrop5
 
                 // Stop selecting.
                 bitmap2 = null;
-                SelectedGraphics = null;
+                g2 = null;
                 pictureBox1.Image = bitmap1;
                 pictureBox1.Refresh();
             }

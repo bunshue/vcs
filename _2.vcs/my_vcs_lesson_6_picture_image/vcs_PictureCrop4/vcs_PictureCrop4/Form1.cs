@@ -25,22 +25,21 @@ namespace vcs_PictureCrop4
         private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
         private Rectangle select_rectangle;//用來保存截圖的矩形
 
-        // The area we are selecting.
-        private int X0, Y0, X1, Y1;
+        private int W = 0;  //原圖的寬
+        private int H = 0;  //原圖的高
+        private int w = 0;  //擷取圖的寬
+        private int h = 0;  //擷取圖的高
 
         // Save the original image.
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
 
-            int w;
-            int h;
-            w = bitmap1.Width;
-            h = bitmap1.Height;
-            pictureBox1.ClientSize = new Size(w, h);
-            pictureBox2.ClientSize = new Size(w, h);
+            W = bitmap1.Width;
+            H = bitmap1.Height;
+            pictureBox1.ClientSize = new Size(W, H);
+            pictureBox2.ClientSize = new Size(W, H);
         }
 
         // Return a Rectangle with these points as corners.
@@ -49,17 +48,18 @@ namespace vcs_PictureCrop4
             return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
         }
 
+        private Rectangle MakeRectangle(Point pt1, Point pt2)
+        {
+            return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
+        }
+
         // Start selecting the rectangle.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             flag_select_area = true;
-
-            // Save the start point.
-            X0 = e.X;
-            Y0 = e.Y;
-            pt_st = e.Location;
+            pt_st = e.Location; //起始點座標
         }
-        
+
         // Continue selecting.
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -67,10 +67,9 @@ namespace vcs_PictureCrop4
             if (flag_select_area == false)
                 return;
 
-            // Save the new point.
-            X1 = e.X;
-            Y1 = e.Y;
-            pt_sp = e.Location;
+            pt_sp = e.Location; //終點座標
+
+            select_rectangle = MakeRectangle(pt_st, pt_sp);
 
             // Make a Bitmap to display the selection rectangle.
             Bitmap bm = new Bitmap(bitmap1);
@@ -78,7 +77,7 @@ namespace vcs_PictureCrop4
             // Draw the rectangle.
             using (Graphics gr = Graphics.FromImage(bm))
             {
-                gr.DrawRectangle(Pens.Red, Math.Min(X0, X1), Math.Min(Y0, Y1), Math.Abs(X0 - X1), Math.Abs(Y0 - Y1));
+                gr.DrawRectangle(Pens.Green, select_rectangle);
             }
             // Display the temporary bitmap.
             pictureBox1.Image = bm;
@@ -93,23 +92,42 @@ namespace vcs_PictureCrop4
             flag_select_area = false;
 
             // Display the original image.
-            pictureBox1.Image = bitmap1;
+            //pictureBox1.Image = bitmap1;  //仍應保留選取區域
 
-            // Copy the selected part of the image.
-            int w = Math.Abs(X0 - X1);
-            int h = Math.Abs(Y0 - Y1);
-            if ((w < 1) || (h < 1)) return;
+            int w = select_rectangle.Width;
+            int h = select_rectangle.Height;
+
+            if (w < 1)
+                return;
+            if (h < 1)
+                return;
 
             Bitmap area = new Bitmap(w, h);
-            using (Graphics gr = Graphics.FromImage(area))
+            using (Graphics g2 = Graphics.FromImage(area))
             {
-                Rectangle source_rectangle = new Rectangle(Math.Min(X0, X1), Math.Min(Y0, Y1), w, h);
                 Rectangle dest_rectangle = new Rectangle(0, 0, w, h);
-                gr.DrawImage(bitmap1, dest_rectangle, source_rectangle, GraphicsUnit.Pixel);
+                g2.DrawImage(bitmap1, dest_rectangle, select_rectangle, GraphicsUnit.Pixel);
             }
 
             // Display the result.
             pictureBox2.Image = area;
+        }
+
+        // If the user presses Escape, cancel.
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 27)
+            {
+                if (flag_select_area == false)
+                    return;
+                flag_select_area = false;
+
+                // Stop selecting.
+                bitmap2 = null;
+                //g2 = null;
+                pictureBox1.Image = bitmap1;
+                pictureBox1.Refresh();
+            }
         }
     }
 }

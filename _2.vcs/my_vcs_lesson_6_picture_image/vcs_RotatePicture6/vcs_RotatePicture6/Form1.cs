@@ -17,97 +17,82 @@ namespace vcs_RotatePicture6
         }
 
         // Copy the bitmap, rotate it, and return the result.
-        private Bitmap ModifiedBitmap(Image original_image, RotateFlipType rotate_flip_type)
+        private Bitmap ModifiedBitmap(Image image, RotateFlipType rotate_flip_type)
         {
             // Copy the Bitmap.
-            Bitmap new_bitmap = new Bitmap(original_image);
+            Bitmap bitmap1 = new Bitmap(image);
 
             // Rotate and flip.
-            new_bitmap.RotateFlip(rotate_flip_type);
+            bitmap1.RotateFlip(rotate_flip_type);
 
             // Return the result.
-            return new_bitmap;
+            return bitmap1;
         }
 
         private void rad180FlipNone_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate180FlipNone);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate180FlipNone);
         }
         private void rad180FlipX_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate180FlipX);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate180FlipX);
         }
         private void rad180FlipXY_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate180FlipXY);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate180FlipXY);
         }
         private void rad180FlipY_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate180FlipY);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate180FlipY);
         }
         private void rad270FlipNone_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate270FlipNone);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate270FlipNone);
         }
         private void rad270FlipX_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate270FlipX);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate270FlipX);
         }
         private void rad270FlipXY_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate270FlipXY);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate270FlipXY);
         }
         private void rad270FlipY_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate270FlipY);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate270FlipY);
         }
         private void rad90FlipNone_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate90FlipNone);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate90FlipNone);
         }
         private void rad90FlipX_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate90FlipX);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate90FlipX);
         }
         private void rad90FlipXY_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate90FlipXY);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate90FlipXY);
         }
         private void rad90FlipY_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.Rotate90FlipY);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.Rotate90FlipY);
         }
         private void radNoneFlipNone_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.RotateNoneFlipNone);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.RotateNoneFlipNone);
         }
         private void radNoneFlipX_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.RotateNoneFlipX);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.RotateNoneFlipX);
         }
         private void radNoneFlipXY_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.RotateNoneFlipXY);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.RotateNoneFlipXY);
         }
         private void radNoneFlipY_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox2.Image = ModifiedBitmap(
-                pictureBox1.Image, RotateFlipType.RotateNoneFlipY);
+            pictureBox2.Image = ModifiedBitmap(pictureBox1.Image, RotateFlipType.RotateNoneFlipY);
         }
     }
 }
+

@@ -23,8 +23,8 @@ namespace vcs_PictureCrop6
         private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
         private Rectangle select_rectangle;//用來保存截圖的矩形
 
-        private int X0, Y0, X1, Y1;
-        private Graphics SelectedGraphics = null;
+        private Graphics g1 = null;
+        private Graphics g2 = null;
         private bool MadeSelection = false;
 
         // Save the original image.
@@ -45,17 +45,21 @@ namespace vcs_PictureCrop6
             return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
         }
 
+        private Rectangle MakeRectangle(Point pt1, Point pt2)
+        {
+            return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
+        }
+
         // Start selecting an area.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             // Save the starting point.
             flag_select_area = true;
-            X0 = e.X;
-            Y0 = e.Y;
+            pt_st = e.Location; //起始點座標
 
             // Make the selected image.
             bitmap2 = new Bitmap(bitmap1);
-            SelectedGraphics = Graphics.FromImage(bitmap2);
+            g2 = Graphics.FromImage(bitmap2);
             pictureBox1.Image = bitmap2;
         }
 
@@ -66,21 +70,18 @@ namespace vcs_PictureCrop6
             if (flag_select_area == false)
                 return;
 
-            // Generate the new image with the selection rectangle.
-            X1 = e.X;
-            Y1 = e.Y;
+            pt_sp = e.Location; //終點座標
 
+            select_rectangle = MakeRectangle(pt_st, pt_sp);
+
+            // Generate the new image with the selection rectangle.
             // Copy the original image.
-            SelectedGraphics.DrawImage(bitmap1, 0, 0);
+            g2.DrawImage(bitmap1, 0, 0);
 
             // Draw the selection rectangle.
-            using (Pen select_pen = new Pen(Color.Red))
-            {
-                select_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                Rectangle rect = MakeRectangle(X0, Y0, X1, Y1);
-                SelectedGraphics.DrawRectangle(select_pen, rect);
-            }
-
+            Pen select_pen = new Pen(Color.Red);
+            select_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            g2.DrawRectangle(select_pen, select_rectangle);
             pictureBox1.Refresh();
         }
 
@@ -93,13 +94,11 @@ namespace vcs_PictureCrop6
             flag_select_area = false;
 
             // Stop selecting.
-            SelectedGraphics = null;
+            g2 = null;
 
             // Convert the points into a Rectangle.
-            select_rectangle = MakeRectangle(X0, Y0, X1, Y1);
-            MadeSelection = (
-                (select_rectangle.Width > 0) &&
-                (select_rectangle.Height > 0));
+            select_rectangle = MakeRectangle(pt_st, pt_sp);
+            MadeSelection = ((select_rectangle.Width > 0) && (select_rectangle.Height > 0));
         }
 
         // If the user presses Escape, cancel.
@@ -113,7 +112,7 @@ namespace vcs_PictureCrop6
 
                 // Stop selecting.
                 bitmap2 = null;
-                SelectedGraphics = null;
+                g2 = null;
                 pictureBox1.Image = bitmap1;
                 pictureBox1.Refresh();
 
@@ -129,10 +128,10 @@ namespace vcs_PictureCrop6
             Bitmap bm = new Bitmap(src_rect.Width, src_rect.Height);
 
             // Copy the selected area into the bitmap.
-            using (Graphics gr = Graphics.FromImage(bm))
+            using (Graphics g2 = Graphics.FromImage(bm))
             {
                 Rectangle dest_rect = new Rectangle(0, 0, src_rect.Width, src_rect.Height);
-                gr.DrawImage(bitmap1, dest_rect, src_rect, GraphicsUnit.Pixel);
+                g2.DrawImage(bitmap1, dest_rect, src_rect, GraphicsUnit.Pixel);
             }
 
             // Copy the selection image to the clipboard.
@@ -155,11 +154,11 @@ namespace vcs_PictureCrop6
             CopyToClipboard(select_rectangle);
 
             // Blank the selected area in the original image.
-            using (Graphics gr = Graphics.FromImage(bitmap1))
+            using (Graphics g2 = Graphics.FromImage(bitmap1))
             {
                 using (SolidBrush br = new SolidBrush(pictureBox1.BackColor))
                 {
-                    gr.FillRectangle(br, select_rectangle);
+                    g2.FillRectangle(br, select_rectangle);
                 }
             }
 
@@ -168,7 +167,7 @@ namespace vcs_PictureCrop6
             pictureBox1.Image = bitmap2;
 
             bitmap2 = null;
-            SelectedGraphics = null;
+            //g2 = null;
             MadeSelection = false;
         }
 
@@ -177,7 +176,8 @@ namespace vcs_PictureCrop6
         private void button3_Click(object sender, EventArgs e)
         {
             // Do nothing if the clipboard doesn't hold an image.
-            if (!Clipboard.ContainsImage()) return;
+            if (!Clipboard.ContainsImage())
+                return;
 
             // Get the clipboard's image.
             Image clipboard_image = Clipboard.GetImage();
@@ -185,15 +185,12 @@ namespace vcs_PictureCrop6
             // Figure out where to put it.
             int cx = select_rectangle.X + (select_rectangle.Width - clipboard_image.Width) / 2;
             int cy = select_rectangle.Y + (select_rectangle.Height - clipboard_image.Height) / 2;
-            Rectangle dest_rect = new Rectangle(
-                cx, cy,
-                clipboard_image.Width,
-                clipboard_image.Height);
+            Rectangle dest_rect = new Rectangle(cx, cy, clipboard_image.Width, clipboard_image.Height);
 
             // Copy the new image into position.
-            using (Graphics gr = Graphics.FromImage(bitmap1))
+            using (Graphics g2 = Graphics.FromImage(bitmap1))
             {
-                gr.DrawImage(clipboard_image, dest_rect);
+                g2.DrawImage(clipboard_image, dest_rect);
             }
 
             // Display the result.
@@ -201,7 +198,7 @@ namespace vcs_PictureCrop6
             pictureBox1.Refresh();
 
             bitmap2 = null;
-            SelectedGraphics = null;
+            //g2 = null;
             MadeSelection = false;
         }
 
@@ -210,21 +207,19 @@ namespace vcs_PictureCrop6
         private void button4_Click(object sender, EventArgs e)
         {
             // Do nothing if the clipboard doesn't hold an image.
-            if (!Clipboard.ContainsImage()) return;
+            if (!Clipboard.ContainsImage())
+                return;
 
             // Get the clipboard's image.
             Image clipboard_image = Clipboard.GetImage();
 
             // Get the image's bounding Rectangle.
-            Rectangle src_rect = new Rectangle(
-                0, 0,
-                clipboard_image.Width,
-                clipboard_image.Height);
+            Rectangle src_rect = new Rectangle(0, 0, clipboard_image.Width, clipboard_image.Height);
 
             // Copy the new image into position.
-            using (Graphics gr = Graphics.FromImage(bitmap1))
+            using (Graphics g2 = Graphics.FromImage(bitmap1))
             {
-                gr.DrawImage(clipboard_image, select_rectangle, src_rect, GraphicsUnit.Pixel);
+                g2.DrawImage(clipboard_image, select_rectangle, src_rect, GraphicsUnit.Pixel);
             }
 
             // Display the result.
@@ -232,7 +227,7 @@ namespace vcs_PictureCrop6
             pictureBox1.Refresh();
 
             bitmap2 = null;
-            SelectedGraphics = null;
+            //g2 = null;
             MadeSelection = false;
         }
     }

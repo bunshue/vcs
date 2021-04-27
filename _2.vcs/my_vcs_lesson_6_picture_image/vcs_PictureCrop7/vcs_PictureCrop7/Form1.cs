@@ -19,8 +19,11 @@ namespace vcs_PictureCrop7
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
         private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
         private Rectangle select_rectangle;//用來保存截圖的矩形
-        int W;
-        int H;
+
+        private int W = 0;  //原圖的寬
+        private int H = 0;  //原圖的高
+        private int w = 0;  //擷取圖的寬
+        private int h = 0;  //擷取圖的高
 
         public Form1()
         {
@@ -38,7 +41,6 @@ namespace vcs_PictureCrop7
             H = this.BackgroundImage.Height;
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
-
             /*
             string filename = @"C:\______test_files\picture1.jpg";
             bitmap1 = new Bitmap(filename);
@@ -52,6 +54,11 @@ namespace vcs_PictureCrop7
         private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
         {
             return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
+        }
+
+        private Rectangle MakeRectangle(Point pt1, Point pt2)
+        {
+            return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -122,8 +129,8 @@ namespace vcs_PictureCrop7
                     Rectangle srcRect = new Rectangle(sx, sy, sw, sh);   //擷取部分區域
 
                     //指定畫布大小
-                    pictureBox1.Width = sw;
-                    pictureBox1.Height = sh;
+                    pictureBox2.Width = sw;
+                    pictureBox2.Height = sh;
                     Bitmap bitmap1;
 
                     string filename = "C:\\______test_files\\picture1.jpg";
@@ -135,7 +142,7 @@ namespace vcs_PictureCrop7
                     Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
 
                     //將處理之後的圖片貼出來
-                    pictureBox1.Image = bitmap1.Clone(srcRect, PixelFormat.Format32bppArgb);
+                    pictureBox2.Image = bitmap1.Clone(srcRect, PixelFormat.Format32bppArgb);
                     g.Dispose();
                     bitmap1.Dispose();
                 }

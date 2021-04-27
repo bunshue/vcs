@@ -11,17 +11,19 @@ namespace Mosaic
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void Form1_Load(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp|*.jpg;*.jpeg;*.bmp";
-            openFileDialog1.ShowDialog();
-            Image myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);
+            Image myImage = System.Drawing.Image.FromFile(filename);
             this.BackgroundImage = myImage;
+
         }
 
         private void button2_Click(object sender, EventArgs e)
