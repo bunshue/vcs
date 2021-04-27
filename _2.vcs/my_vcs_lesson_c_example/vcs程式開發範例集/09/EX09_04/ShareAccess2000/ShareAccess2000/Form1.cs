@@ -12,6 +12,8 @@ namespace ShareAccess2000
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\__RW\_mdb\db_09b.mdb";
+
         public Form1()
         {
             InitializeComponent();
@@ -19,7 +21,7 @@ namespace ShareAccess2000
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string strCon = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db_09.mdb";
+            string strCon = @"Provider=Microsoft.ACE.OLEDB.12.0;Data source='" + filename + "'";
             OleDbConnection OleCon = new OleDbConnection(strCon);
             OleDbDataAdapter da = new OleDbDataAdapter("select * from DB_bookinfo_mr", OleCon);
             DataSet ds = new DataSet();

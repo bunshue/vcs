@@ -15,7 +15,6 @@ namespace BassoRelievo
         string filename = @"C:\______test_files\picture1.jpg";
 
         Bitmap bitmap1;
-        Image image;
 
         public Form1()
         {
@@ -24,22 +23,20 @@ namespace BassoRelievo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            image = System.Drawing.Image.FromFile(filename);
-            bitmap1 = new Bitmap(image);
-            this.BackgroundImage = bitmap1;
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        Bitmap BassoRelievo(Bitmap bmp)
         {
             try
             {
-                bitmap1 = new Bitmap(image);
-                for (int i = 0; i < bitmap1.Width - 1; i++)
+                for (int i = 0; i < bmp.Width - 1; i++)
                 {
-                    for (int j = 0; j < bitmap1.Height - 1; j++)
+                    for (int j = 0; j < bmp.Height - 1; j++)
                     {
-                        Color Color1 = bitmap1.GetPixel(i, j);
-                        Color Color2 = bitmap1.GetPixel(i + 1, j + 1);
+                        Color Color1 = bmp.GetPixel(i, j);
+                        Color Color2 = bmp.GetPixel(i + 1, j + 1);
                         int red = Math.Abs(Color1.R - Color2.R + 128);
                         int green = Math.Abs(Color1.G - Color2.G + 128);
                         int blue = Math.Abs(Color1.B - Color2.B + 128);
@@ -52,12 +49,25 @@ namespace BassoRelievo
 
                         if (blue > 255) blue = 255;
                         if (blue < 0) blue = 0;
-                        bitmap1.SetPixel(i, j, Color.FromArgb(red, green, blue));
+                        bmp.SetPixel(i, j, Color.FromArgb(red, green, blue));
                     }
                 }
-                this.BackgroundImage = bitmap1;
             }
             catch { }
+
+            return bmp;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = BassoRelievo(bitmap1);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
         }
     }
 }

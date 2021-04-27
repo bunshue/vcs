@@ -39,6 +39,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.button3 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -64,7 +65,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(8, 25);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(177, 21);
+            this.textBox1.Size = new System.Drawing.Size(177, 22);
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "C:\\";
             // 
@@ -92,7 +93,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(11, 81);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.Size = new System.Drawing.Size(47, 12);
             this.label3.TabIndex = 5;
             this.label3.Text = "類  型：";
             // 
@@ -100,7 +101,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(70, 51);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(147, 21);
+            this.textBox2.Size = new System.Drawing.Size(147, 22);
             this.textBox2.TabIndex = 6;
             this.textBox2.Text = "Streen";
             // 
@@ -138,11 +139,20 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "快速鍵為：F10";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(274, 24);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(335, 402);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(230, 132);
+            this.ClientSize = new System.Drawing.Size(621, 429);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.comboBox1);
@@ -155,8 +165,8 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "擷取螢幕";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,6 +185,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

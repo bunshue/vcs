@@ -17,6 +17,16 @@ namespace vcs_test_all_00_Control
         private Size SmallSize, LargeSize;
         private Font SmallFont, LargeFont;
 
+        //移動控件 ST
+        Point CPoint;//記錄滑鼠游標在父容器中的初始位置
+        bool isDown = false;//判斷是否可以移動文字
+        int tem_x = 0;//記錄滑鼠游標移動文字後的X位置
+        int tem_y = 0;//記錄滑鼠游標移動文字後的Y位置
+
+        int W = 0;
+        int H = 0;
+        //移動控件 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -25,7 +35,54 @@ namespace vcs_test_all_00_Control
             button8.Click += new System.EventHandler(button6_Click);//按下button8觸發button1_Click
             button9.Click += new System.EventHandler(button6_Click);//按下button9觸發button1_Click
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+
+            //移動控件 ST
+            W = this.ClientSize.Width;
+            H = this.ClientSize.Height - 100;
+            //移動控件 SP
         }
+
+        //移動控件 ST
+        private void control_MouseDown(object sender, MouseEventArgs e)
+        {
+            CPoint = new Point(e.X, e.Y);//取得滑鼠游標在文字上按下時的位置
+            tem_x = e.X;//記錄X座標
+            tem_y = e.Y;//記錄X座標
+            isDown = true;//文字可能移動
+        }
+
+        private void control_MouseMove(object sender, MouseEventArgs e)
+        {
+            Control ctrl = (Control)sender;
+            bool tem_b = false;//判斷是否超出邊界
+            if (e.Button == MouseButtons.Left && isDown == true)//如果目前按下的是滑鼠游標左鍵，而且文字可以移動
+            {
+                //如果文字在移動範圍內
+                if (ctrl.Left <= 0 || ctrl.Top <= 0 || ctrl.Left >= (this.Width - ctrl.Width) || ctrl.Top >= (this.Height - ctrl.Height))
+                {
+                    if (ctrl.Left <= 0)//如果文字超出左邊界
+                        if (e.X > tem_x)//如果文字還向右移動
+                            tem_b = true;//文字移動
+                    if (ctrl.Top <= 0)//如果文字超出上邊界
+                        if (e.Y > tem_y)//如果文字還向下移動
+                            tem_b = true;//文字移動
+                    if (ctrl.Left >= (this.Width - ctrl.Width))//如果文字超出右邊界
+                        if (e.X < tem_x)//如果文字還向左移動
+                            tem_b = true;//文字移動
+                    if (ctrl.Top >= (this.Height - ctrl.Height))//如果文字超出下邊界
+                        if (e.Y < tem_y)//如果文字還向上移動
+                            tem_b = true;//文字移動
+                    if (tem_b == false)//如果文字超出邊界
+                        return;//退出本次操作
+                }
+                Point myPosittion = new Point(ctrl.Left + e.X - CPoint.X, ctrl.Top + e.Y - CPoint.Y);//移動Label控制元件
+                ctrl.Location = myPosittion;//設定目前控制元件在視窗容器上的位置
+            }
+            tem_x = e.X;//記錄移動後的X位置
+            tem_y = e.Y;//記錄移動後的Y位置
+        }
+        //移動控件 SP
 
         private void Form1_Load(object sender, EventArgs e)
         {

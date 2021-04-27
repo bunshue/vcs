@@ -12,6 +12,8 @@ namespace Access2000Path
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\__RW\_mdb\db_09.mdb";
+
         OleDbConnection Olecon;
         OleDbDataAdapter OleDat;
         DataTable dt;
@@ -24,8 +26,8 @@ namespace Access2000Path
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string strPath = Application.StartupPath + "\\db_09.mdb";
-            ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + strPath;
+            //ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + filename;
+            ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename;
             Olecon = new OleDbConnection(ConStr);
             Olecon.Open();
             MaxValue = Convert.ToInt32(new OleDbCommand("select Count(*) from 帳目", Olecon).ExecuteScalar());

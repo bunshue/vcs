@@ -22,38 +22,42 @@ namespace UprightnessInterleaving
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Image image = Image.FromFile(filename);
-            bitmap1 = new Bitmap(image);
-            this.BackgroundImage = bitmap1;
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
+            pictureBox1.Size = new Size(bitmap1.Width, bitmap1.Height);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            try
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = UprightnessInterleaving(bitmap1);
+        }
+
+        Bitmap UprightnessInterleaving(Bitmap bitmap1)
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.WhiteSmoke);
+            Bitmap bitmap2 = new Bitmap(W, H);
+            int i = 0;
+            while (i <= H / 2)
             {
-                int intWidth = this.BackgroundImage.Width;
-                int intHeight = this.BackgroundImage.Height;
-                Graphics myGraphics = this.CreateGraphics();
-                myGraphics.Clear(Color.WhiteSmoke);
-                Bitmap bitmap = new Bitmap(intWidth, intHeight);
-                int i = 0;
-                while (i <= intHeight / 2)
+                for (int m = 0; m <= W - 1; m++)
                 {
-                    for (int m = 0; m <= intWidth - 1; m++)
-                    {
-                        bitmap.SetPixel(m, i, bitmap1.GetPixel(m, i));
-                    }
-                    for (int n = 0; n <= intWidth - 1; n++)
-                    {
-                        bitmap.SetPixel(n, intHeight - i - 1, bitmap1.GetPixel(n, intHeight - i - 1));
-                    }
-                    i++;
-                    this.Refresh();
-                    this.BackgroundImage = bitmap;
-                    System.Threading.Thread.Sleep(10);
+                    bitmap2.SetPixel(m, i, bitmap1.GetPixel(m, i));
                 }
+                for (int n = 0; n <= W - 1; n++)
+                {
+                    bitmap2.SetPixel(n, H - i - 1, bitmap1.GetPixel(n, H - i - 1));
+                }
+                i++;
+                this.Refresh();
+                pictureBox1.Image = bitmap2;
+                System.Threading.Thread.Sleep(10);
             }
-            catch { }
+            return bitmap2;
+
         }
     }
 }

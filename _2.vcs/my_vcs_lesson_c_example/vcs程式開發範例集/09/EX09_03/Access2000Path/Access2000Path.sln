@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Access2000Path", "Access2000Path\Access2000Path.csproj", "{5ADE0874-5085-49FE-A0BD-1BFF59B4DC01}"
 EndProject
 Global

@@ -12,6 +12,8 @@ namespace EncryptAccess
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\__RW\_mdb\db_09.mdb";
+
         public Form1()
         {
             InitializeComponent();
@@ -26,9 +28,9 @@ namespace EncryptAccess
         {
             try
             {
-                string strPath = Application.StartupPath + "\\db_09.mdb";
+                //string ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Jet OLEDB:DataBase Password='" + this.textBox1.Text + "';User Id=admin;Data source=" + filename;
+                string ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Jet OLEDB:DataBase Password='" + this.textBox1.Text + "';User Id=admin;Data source=" + filename;
 
-                string ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Jet OLEDB:DataBase Password='" + this.textBox1.Text + "';User Id=admin;Data source=" + strPath;
                 OleDbConnection oleCon = new OleDbConnection(ConStr);
                 OleDbDataAdapter oleDap = new OleDbDataAdapter("select * from 帳目", oleCon);
                 DataSet ds = new DataSet();

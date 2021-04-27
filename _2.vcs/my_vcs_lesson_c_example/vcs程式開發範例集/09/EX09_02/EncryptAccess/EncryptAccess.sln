@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptAccess", "EncryptAccess\EncryptAccess.csproj", "{94E6A777-72CE-44D3-B648-AC2700C1D33F}"
 EndProject
 Global

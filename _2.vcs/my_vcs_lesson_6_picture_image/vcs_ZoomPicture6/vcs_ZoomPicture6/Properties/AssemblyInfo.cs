@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MoveCharacter")]
+[assembly: AssemblyTitle("vcs_ZoomPicture6")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MoveCharacter")]
+[assembly: AssemblyProduct("vcs_ZoomPicture6")]
 [assembly: AssemblyCopyright("Copyright ©  2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("67d413b9-1191-4e13-9b1f-9c090087ed39")]
+[assembly: Guid("bcf4ea49-3598-4d74-a365-865b3ef37b1a")]
 
 // 程序集的版本信息由下面四个值组成:
 //

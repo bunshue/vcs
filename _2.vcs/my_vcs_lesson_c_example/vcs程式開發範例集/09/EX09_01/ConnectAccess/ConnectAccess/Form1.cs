@@ -12,6 +12,8 @@ namespace ConnectAccess
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\__RW\_mdb\db_09.mdb";
+
         public Form1()
         {
             InitializeComponent();
@@ -19,8 +21,8 @@ namespace ConnectAccess
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string strPath = Application.StartupPath + "\\db_09.mdb";
-            string ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data source='" + strPath + "'";
+            //string ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data source='" + filename + "'";     old
+            string ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data source='" + filename + "'";
             OleDbConnection oleCon = new OleDbConnection(ConStr);
             OleDbDataAdapter oleDap = new OleDbDataAdapter("select * from 帳目", oleCon);
             DataSet ds = new DataSet();

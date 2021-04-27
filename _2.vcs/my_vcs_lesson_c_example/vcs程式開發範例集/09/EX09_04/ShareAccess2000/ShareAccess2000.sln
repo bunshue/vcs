@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareAccess2000", "ShareAccess2000\ShareAccess2000.csproj", "{E569E3C5-EBED-4611-8228-434D3BB24DD9}"
 EndProject
 Global
