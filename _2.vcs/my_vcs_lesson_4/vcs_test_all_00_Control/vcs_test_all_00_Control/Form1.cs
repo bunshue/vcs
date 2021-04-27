@@ -30,12 +30,14 @@ namespace vcs_test_all_00_Control
         public Form1()
         {
             InitializeComponent();
-            button6.Click += new System.EventHandler(button6_Click);//按下button6觸發button1_Click
-            button7.Click += new System.EventHandler(button6_Click);//按下button7觸發button1_Click
-            button8.Click += new System.EventHandler(button6_Click);//按下button8觸發button1_Click
-            button9.Click += new System.EventHandler(button6_Click);//按下button9觸發button1_Click
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            //不同Button共用一個事件
+            button6.Click += new EventHandler(button6_Click);//按下button6觸發button1_Click
+            button7.Click += new EventHandler(button6_Click);//按下button7觸發button1_Click
+            button8.Click += new EventHandler(button6_Click);//按下button8觸發button1_Click
+            button9.Click += new EventHandler(button6_Click);//按下button9觸發button1_Click
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //移動控件 ST
             W = this.ClientSize.Width;
@@ -221,10 +223,18 @@ namespace vcs_test_all_00_Control
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //不同Button共用一個事件
+
             Button btn = (Button)sender;
             richTextBox1.Text += "你按了 " + btn.Text + "\n";
 
             richTextBox1.Text += "你按了 " + ((Button)sender).Name.ToString() + "\n";
+
+            Control ctrl = (Control)sender;
+            richTextBox1.Text += "控件內容\t" + ctrl + "\n";
+            richTextBox1.Text += "Type\t" + ctrl.GetType() + "\n";
+            richTextBox1.Text += "Name\t" + ctrl.Name + "\n";
+            richTextBox1.Text += "Text\t" + ctrl.Text + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)

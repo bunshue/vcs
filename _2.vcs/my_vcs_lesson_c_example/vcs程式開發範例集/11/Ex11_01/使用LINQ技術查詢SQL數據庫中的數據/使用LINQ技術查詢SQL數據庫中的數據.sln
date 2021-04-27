@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "使用LINQ技術查詢SQL數據庫中的數據", "使用LINQ技術查詢SQL數據庫中的數據\使用LINQ技術查詢SQL數據庫中的數據.csproj", "{29DF8B5C-5CDD-4A07-B768-C2B4DAAFFC8F}"
 EndProject
 Global
