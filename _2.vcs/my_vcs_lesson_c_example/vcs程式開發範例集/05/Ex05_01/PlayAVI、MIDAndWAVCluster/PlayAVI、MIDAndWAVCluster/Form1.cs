@@ -11,6 +11,7 @@ namespace PlayAVIMIDAndWAVCluster
     public partial class Form1 : Form
     {
         string filename = @"C:\______test_files\__RW\_avi\enka.avi";
+        //string filename = @"D:\_______VIDEO_ALL_all3\纪录片《毛泽东出访苏联》.mp4";
 
         public Form1()
         {
@@ -37,6 +38,7 @@ namespace PlayAVIMIDAndWAVCluster
 
             //or
             //this.axWindowsMediaPlayer1.Ctlcontrols.stop();
+            //this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString();
         }
 
         private void bt_pause_Click(object sender, EventArgs e)
@@ -61,10 +63,25 @@ namespace PlayAVIMIDAndWAVCluster
 
         private void bt_info_Click(object sender, EventArgs e)
         {
+            /*
             c = new WMPLib.WindowsMediaPlayerClass();
             m = c.newMedia(filename);
             richTextBox1.Text += "歌手名:\t" + m.getItemInfo("Author") + "\n" + "歌  名:\t" + m.getItemInfo("Title") + "\n";
+            */
 
+            richTextBox1.Text += "currentPositionString:\t" + this.axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + "\n";
+            richTextBox1.Text += "currentPosition:\t" + this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
+            richTextBox1.Text += "currentMarker:\t" + this.axWindowsMediaPlayer1.Ctlcontrols.currentMarker.ToString() + "\n";
+            richTextBox1.Text += "currentItem:\t" + this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.ToString() + "\n";
+            //richTextBox1.Text += "XXXXX:\t" + this.axWindowsMediaPlayer1.Ctlcontrols.isAvailable + "\n";
+            //richTextBox1.Text += "XXXXX:\t" + this.axWindowsMediaPlayer1.Ctlcontrols.fastForward() + "\n";
+            //richTextBox1.Text += "XXXXX:\t" + this.axWindowsMediaPlayer1.Ctlcontrols.isAvailable.ToString() + "\n";
+            //richTextBox1.Text += "XXXXX:\t" + this.axWindowsMediaPlayer1.Ctlcontrols.isAvailable.ToString() + "\n";
+            //richTextBox1.Text += "XXXXX:\t" + this.axWindowsMediaPlayer1.Ctlcontrols.isAvailable.ToString() + "\n";
+            //richTextBox1.Text += "XXXXX:\t" + this.axWindowsMediaPlayer1.Ctlcontrols.isAvailable.ToString() + "\n";
+
+
+            richTextBox1.Text += "\n";
 
         }
     }

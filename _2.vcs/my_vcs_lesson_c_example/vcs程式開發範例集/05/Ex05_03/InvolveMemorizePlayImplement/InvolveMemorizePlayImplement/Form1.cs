@@ -11,6 +11,8 @@ namespace InvolveMemorizePlayImplement
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\_mp3\list.m3u";
+
         string strpath;
         public Form1()
         {
@@ -22,7 +24,7 @@ namespace InvolveMemorizePlayImplement
         {
             this.openFileDialog1.FileName = "";
             this.openFileDialog1.ShowDialog();
-            StreamWriter s = new StreamWriter(strpath + "\\HyList.ini", true);
+            StreamWriter s = new StreamWriter(filename, true);
             s.WriteLine(openFileDialog1.FileName);
             s.Flush();
             s.Close();
@@ -35,7 +37,7 @@ namespace InvolveMemorizePlayImplement
         private void Form1_Load(object sender, EventArgs e)
         {
             string str = Application.StartupPath;
-            StreamReader sr = new StreamReader(str + "\\HyList.ini");
+            StreamReader sr = new StreamReader(filename, Encoding.Default);
             while (sr.Peek() >= 0)
             {
                 string strk=sr.ReadLine();

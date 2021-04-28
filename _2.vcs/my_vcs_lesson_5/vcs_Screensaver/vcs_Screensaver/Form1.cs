@@ -11,14 +11,9 @@ namespace vcs_Screensaver
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         private int iSpeed = 2;
-        private string str = "群曜醫電 Insight Medical Solutions Inc.";
-        private System.Drawing.Font TextStringFont = new System.Drawing.Font("細明體", 24, System.Drawing.FontStyle.Bold);
+        private string banner = "群曜醫電 Insight Medical Solutions Inc.";
+        private System.Drawing.Font TextStringFont = new System.Drawing.Font("細明體", 48, System.Drawing.FontStyle.Bold);
         private Color TextStringcolor = System.Drawing.Color.Red;
         private int iDistance;
         private int ixStart = 0;
@@ -26,10 +21,40 @@ namespace vcs_Screensaver
         private int speed;
         private int x1, y1;
         int width1, height1;
+
+        PictureBox pbx1 = new PictureBox();
+        PictureBox pbx2 = new PictureBox();
+        PictureBox pbx3 = new PictureBox();
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            speed = 0;
+            width1 = this.Width;
+            height1 = this.Height;
+
+            // 實例化按鈕
+            pbx1.Image = Image.FromFile(filename);
+            pbx1.Size = new Size(pbx1.Image.Width, pbx1.Image.Height);
+            //pbx1.BackColor = Color.Pink;
+            pbx1.Left = 430;
+            pbx1.Top = 20;
+            // 將按鈕加入表單
+            this.Controls.Add(pbx1);
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             label1.Visible = true;
-            label1.Text = str;
+            label1.Text = banner;
             label1.Height = label1.Font.Height;
             label1.Width = label1.Text.Length * (int)label1.Font.Size * 2;
             PlayScreenSaver();
@@ -37,22 +62,12 @@ namespace vcs_Screensaver
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            StopScreenSaver(); 
+            StopScreenSaver();
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            StopScreenSaver(); 
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            string filename = @"C:\______test_files\_material\ims1.bmp";
-            pictureBox1.Image = Image.FromFile(filename);
-
-            speed = 0;
-            width1 = this.Width;
-            height1 = this.Height;
+            StopScreenSaver();
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
@@ -137,7 +152,8 @@ namespace vcs_Screensaver
             }
             if (speed == 6 * width1)
                 speed = 0;
-            pictureBox1.Location = new System.Drawing.Point(x1, y1);
+
+            pbx1.Location = new System.Drawing.Point(x1, y1);
         }
 
         private void StopScreenSaver()
@@ -147,9 +163,5 @@ namespace vcs_Screensaver
             Application.Exit();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

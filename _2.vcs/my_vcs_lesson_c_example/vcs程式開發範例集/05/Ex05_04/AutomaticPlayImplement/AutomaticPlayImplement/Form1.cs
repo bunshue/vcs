@@ -13,7 +13,7 @@ namespace AutomaticPlayImplement
     {
         static int i = 0;
         private WMPLib.WindowsMediaPlayerClass WC;
-        private WMPLib.IWMPMedia MC=null;
+        private WMPLib.IWMPMedia MC = null;
         public Form1()
         {
             InitializeComponent();
@@ -50,7 +50,7 @@ namespace AutomaticPlayImplement
         private void button1_Click(object sender, EventArgs e)
         {
             this.listBox1.Items.Clear();
-            if (this.folderBrowserDialog1.ShowDialog()==DialogResult.OK)
+            if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 DirectoryInfo dir = new DirectoryInfo(folderBrowserDialog1.SelectedPath);
                 GetAllFiles(dir);
@@ -59,7 +59,6 @@ namespace AutomaticPlayImplement
 
         private void button2_Click(object sender, EventArgs e)
         {
-
             if (MC != null)
                 this.axWindowsMediaPlayer1.Ctlcontrols.play();
             else
