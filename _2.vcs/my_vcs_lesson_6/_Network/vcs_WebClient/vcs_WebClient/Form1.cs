@@ -11,6 +11,8 @@ using System.Net;
 using System.IO;    //for MemoryStream
 using System.Threading; //for Thread
 
+using System.Text.RegularExpressions;   //for Regex
+
 namespace vcs_WebClient
 {
     public partial class Form1 : Form
@@ -659,6 +661,85 @@ namespace vcs_WebClient
         private void button8_Click(object sender, EventArgs e)
         {
         }
+
+        //提取並保存網頁源碼 ST
+
+
+        string url = @"http://www.google.com";
+
+        public string strS;//存取網頁內容
+        public void GetPageSource()
+        {
+            string strAddress = url.Trim();//輸入網址
+            if (ValidateDate1(strAddress))//檢查輸入網址是否合法
+            {
+                strAddress = strAddress.ToLower();
+                strS = GetSource(strAddress);//呼叫方法提取網頁內容
+                if (strS.Length > 1)
+                {
+                    showSource();  //設定視窗樣式
+                }
+            }
+            else
+            {
+                MessageBox.Show("輸入網址不正確請從新輸入");
+            }
+        }
+        //設定視窗樣式
+        private void showSource()
+        {
+            richTextBox1.Text += strS;   //顯示網頁內容
+        }
+
+
+        //保存網頁訊息
+        private void saveInfo(string strPath, string strDown)
+        {
+            WebClient wc = new WebClient();
+            wc.DownloadFile(strDown, strPath);
+        }
+
+        //驗證網址是否正確
+        public bool ValidateDate1(string input)
+        {
+            return Regex.IsMatch(input, "http(s)?://([\\w-]+\\.)+[\\w-]+(//[\\w- .//?%&=]*)?");
+        }
+        //提取網頁內容。
+        public string GetSource(string webAddress)
+        {
+            StringBuilder strSource = new StringBuilder("");
+            try
+            {
+
+                WebRequest WReq = WebRequest.Create(webAddress);//對URl地址發出請求
+                WebResponse WResp = WReq.GetResponse();//傳回服務器的響應
+                StreamReader sr = new StreamReader(WResp.GetResponseStream(), Encoding.ASCII);//從數據流中讀取數據
+                string strTemp = "";
+                while ((strTemp = sr.ReadLine()) != null)//循環讀出數據
+                {
+                    strSource.Append(strTemp + "\r\n");//把數據新增到字串中
+                }
+                sr.Close();
+            }
+            catch (WebException WebExcp)
+            {
+                MessageBox.Show(WebExcp.Message, "error", MessageBoxButtons.OK);
+            }
+            return strSource.ToString();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //提取並保存網頁源碼
+            GetPageSource();//取得網頁編碼
+
+            string filename = Application.StartupPath + "\\html_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html";
+
+            saveInfo(filename, this.url.Trim().ToString());
+            MessageBox.Show("保存成功");
+        }
+
+        //提取並保存網頁源碼 SP
     }
 
     public class Protocols

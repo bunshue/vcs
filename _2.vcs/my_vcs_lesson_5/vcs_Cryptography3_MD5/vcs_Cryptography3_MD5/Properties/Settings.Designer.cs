@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace 鍵盤掛鉤屏蔽熱鍵.Properties {
+namespace vcs_Cryptography3_MD5.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

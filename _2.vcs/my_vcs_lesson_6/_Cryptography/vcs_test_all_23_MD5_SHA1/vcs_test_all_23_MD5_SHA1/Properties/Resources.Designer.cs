@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace 鍵盤掛鉤屏蔽熱鍵.Properties {
+namespace vcs_test_all_23_MD5_SHA1.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace 鍵盤掛鉤屏蔽熱鍵.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("鍵盤掛鉤屏蔽熱鍵.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_test_all_23_MD5_SHA1.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

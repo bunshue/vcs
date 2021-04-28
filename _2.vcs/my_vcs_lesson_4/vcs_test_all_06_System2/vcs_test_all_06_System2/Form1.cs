@@ -11,6 +11,8 @@ using System.Runtime.InteropServices;   //for DllImport
 using System.Diagnostics;   //for Process
 using System.Net.NetworkInformation;    //for Ping & PingReply
 
+using System.ServiceProcess;    //for ServiceController     參考/加入參考/.NET/System.ServiceProcess
+
 namespace vcs_test_all_06_System2
 {
     public partial class Form1 : Form
@@ -379,6 +381,33 @@ namespace vcs_test_all_06_System2
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //系統已經安裝的打印機訊息
+            foreach (string mPrinterName in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
+            {
+                richTextBox1.Text += "打印機名稱：" + mPrinterName + "\n";
+                System.Drawing.Printing.PrinterSettings mprinter = new System.Drawing.Printing.PrinterSettings();
+                mprinter.PrinterName = mPrinterName;
+                if (mprinter.IsValid)
+                {
+                    foreach (System.Drawing.Printing.PrinterResolution resolution in mprinter.PrinterResolutions)
+                    {
+                        richTextBox1.Text += "分  辨  率：" + resolution.ToString() + "\n";
+                    }
+                    string prinsize = "";
+                    foreach (System.Drawing.Printing.PaperSize size in mprinter.PaperSizes)
+                    {
+                        if (Enum.IsDefined(size.Kind.GetType(), size.Kind))
+                        {
+                            prinsize += size.ToString() + "\n";
+                        }
+                    }
+                    richTextBox1.AppendText("打 印 尺寸：\n" + prinsize + "\n");
+                }
+                else
+                {
+                    richTextBox1.Text += "XXXXXXXX\n";
+                }
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -451,8 +480,29 @@ namespace vcs_test_all_06_System2
         {
         }
 
+        public bool ExitSQL()
+        {
+            bool sqlFlag = false;
+            ServiceController[] services = ServiceController.GetServices();
+            for (int i = 0; i < services.Length; i++)
+            {
+                if (services[i].DisplayName.ToString() == "MSSQLSERVER")
+                    sqlFlag = true;
+            }
+            return sqlFlag;
+        }
+
         private void button24_Click_1(object sender, EventArgs e)
         {
+            //判斷電腦中是否安裝了SQL軟體
+            if (ExitSQL())
+            {
+                richTextBox1.Text += "本機電腦中已經安裝SQL軟體\n";
+            }
+            else
+            {
+                richTextBox1.Text += "本機電腦中沒有安裝SQL軟體\n";
+            }
         }
 
         private void button32_Click_1(object sender, EventArgs e)
@@ -520,7 +570,6 @@ namespace vcs_test_all_06_System2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

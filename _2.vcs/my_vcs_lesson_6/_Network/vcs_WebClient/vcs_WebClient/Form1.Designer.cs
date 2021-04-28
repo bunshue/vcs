@@ -41,6 +41,7 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,11 +172,22 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(352, 209);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(102, 50);
+            this.button10.TabIndex = 15;
+            this.button10.Text = "提取並保存網頁源碼";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1191, 670);
+            this.Controls.Add(this.button10);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.bt_clear);
@@ -212,6 +224,7 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button10;
     }
 }
 

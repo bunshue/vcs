@@ -278,6 +278,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 40);
             this.button20.TabIndex = 21;
+            this.button20.Text = "系統已經安裝的打印機訊息";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -446,11 +447,12 @@
             // 
             // button24
             // 
-            this.button24.Font = new System.Drawing.Font("新細明體", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button24.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button24.Location = new System.Drawing.Point(12, 269);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 40);
             this.button24.TabIndex = 52;
+            this.button24.Text = "判斷電腦中是否安裝了SQL軟體";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click_1);
             // 
