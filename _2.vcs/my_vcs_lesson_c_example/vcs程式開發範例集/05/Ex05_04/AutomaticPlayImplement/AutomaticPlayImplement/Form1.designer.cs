@@ -46,13 +46,13 @@
             this.listBox1.Location = new System.Drawing.Point(12, 10);
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(173, 232);
+            this.listBox1.Size = new System.Drawing.Size(326, 400);
             this.listBox1.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(191, 56);
+            this.button1.Location = new System.Drawing.Point(388, 52);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(101, 23);
             this.button1.TabIndex = 2;
@@ -63,7 +63,7 @@
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(204, 104);
+            this.button2.Location = new System.Drawing.Point(401, 100);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
@@ -78,7 +78,7 @@
             // axWindowsMediaPlayer1
             // 
             this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(12, 246);
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(12, 448);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
             this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(267, 10);
@@ -89,7 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 262);
+            this.ClientSize = new System.Drawing.Size(535, 488);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.button1);

@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="左对齐" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\左对齐.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="左對齊" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\左對齊.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="居中对齐" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\居中对齐.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="居中對齊" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\居中對齊.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="右对齐" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\右对齐.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="右對齊" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\右對齊.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

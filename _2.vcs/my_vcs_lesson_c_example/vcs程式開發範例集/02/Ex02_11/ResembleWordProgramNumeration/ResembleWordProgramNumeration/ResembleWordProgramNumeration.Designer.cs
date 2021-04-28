@@ -46,7 +46,7 @@ namespace ResembleWordProgramNumeration
             this.groupBox1.Controls.Add(this.unfold);
             this.groupBox1.Location = new System.Drawing.Point(7, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(383, 234);
+            this.groupBox1.Size = new System.Drawing.Size(480, 538);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "內容區域";
@@ -54,7 +54,7 @@ namespace ResembleWordProgramNumeration
             // 
             // hold
             // 
-            this.hold.Location = new System.Drawing.Point(323, 205);
+            this.hold.Location = new System.Drawing.Point(414, 509);
             this.hold.Name = "hold";
             this.hold.Size = new System.Drawing.Size(53, 23);
             this.hold.TabIndex = 2;
@@ -64,7 +64,7 @@ namespace ResembleWordProgramNumeration
             // 
             // unfold
             // 
-            this.unfold.Location = new System.Drawing.Point(249, 205);
+            this.unfold.Location = new System.Drawing.Point(340, 509);
             this.unfold.Name = "unfold";
             this.unfold.Size = new System.Drawing.Size(53, 23);
             this.unfold.TabIndex = 1;
@@ -78,7 +78,7 @@ namespace ResembleWordProgramNumeration
             this.groupBox2.Controls.Add(this.programNumeration);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(7, 243);
+            this.groupBox2.Location = new System.Drawing.Point(493, 24);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(383, 69);
             this.groupBox2.TabIndex = 1;
@@ -87,8 +87,8 @@ namespace ResembleWordProgramNumeration
             // 
             // figuresNumeration
             // 
+            this.figuresNumeration.BackgroundImage = global::ResembleWordProgramNumeration.Properties.Resources.number;
             this.figuresNumeration.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.figuresNumeration.Image = global::ResembleWordProgramNumeration.Properties.Resources.数字编号;
             this.figuresNumeration.Location = new System.Drawing.Point(252, 17);
             this.figuresNumeration.Name = "figuresNumeration";
             this.figuresNumeration.Size = new System.Drawing.Size(52, 38);
@@ -98,8 +98,8 @@ namespace ResembleWordProgramNumeration
             // 
             // programNumeration
             // 
+            this.programNumeration.BackgroundImage = global::ResembleWordProgramNumeration.Properties.Resources.item;
             this.programNumeration.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.programNumeration.Image = global::ResembleWordProgramNumeration.Properties.Resources.项目编号;
             this.programNumeration.Location = new System.Drawing.Point(87, 17);
             this.programNumeration.Name = "programNumeration";
             this.programNumeration.Size = new System.Drawing.Size(52, 38);
@@ -129,7 +129,7 @@ namespace ResembleWordProgramNumeration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(396, 319);
+            this.ClientSize = new System.Drawing.Size(899, 553);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ResembleWordProgramNumeration";

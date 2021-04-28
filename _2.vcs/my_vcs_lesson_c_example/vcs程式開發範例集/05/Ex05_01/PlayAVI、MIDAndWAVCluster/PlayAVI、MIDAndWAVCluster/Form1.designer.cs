@@ -29,111 +29,112 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.文件FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.选取文件 = new System.Windows.Forms.ToolStripMenuItem();
-            this.播放文件 = new System.Windows.Forms.ToolStripMenuItem();
-            this.停止 = new System.Windows.Forms.ToolStripMenuItem();
-            this.退出 = new System.Windows.Forms.ToolStripMenuItem();
-            this.optFile = new System.Windows.Forms.OpenFileDialog();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
-            this.menuStrip1.SuspendLayout();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.bt_pause = new System.Windows.Forms.Button();
+            this.bt_info = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.文件FToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(434, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // 文件FToolStripMenuItem
-            // 
-            this.文件FToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.选取文件,
-            this.播放文件,
-            this.停止,
-            this.退出});
-            this.文件FToolStripMenuItem.Name = "文件FToolStripMenuItem";
-            this.文件FToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.文件FToolStripMenuItem.Text = "文件(&F)";
-            // 
-            // 选取文件
-            // 
-            this.选取文件.Name = "选取文件";
-            this.选取文件.Size = new System.Drawing.Size(152, 22);
-            this.选取文件.Text = "選擇檔案(&C)";
-            this.选取文件.Click += new System.EventHandler(this.选取文件_Click);
-            // 
-            // 播放文件
-            // 
-            this.播放文件.Name = "播放文件";
-            this.播放文件.Size = new System.Drawing.Size(152, 22);
-            this.播放文件.Text = "播放檔案(&P)";
-            this.播放文件.Click += new System.EventHandler(this.播放文件_Click);
-            // 
-            // 停止
-            // 
-            this.停止.Name = "停止";
-            this.停止.Size = new System.Drawing.Size(152, 22);
-            this.停止.Text = "停止(&S)";
-            this.停止.Click += new System.EventHandler(this.停止_Click);
-            // 
-            // 退出
-            // 
-            this.退出.Name = "退出";
-            this.退出.Size = new System.Drawing.Size(152, 22);
-            this.退出.Text = "離開(&E)";
-            this.退出.Click += new System.EventHandler(this.退出_Click);
-            // 
-            // optFile
-            // 
-            this.optFile.FileName = "openFileDialog1";
-            this.optFile.Filter = "视频文件(*.avi)|*.avi|音频文件 (*.mid)|*.mid|音频文件 (*.wav)|*.wav";
-            // 
             // axWindowsMediaPlayer1
             // 
-            this.axWindowsMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(0, 24);
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(28, 27);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(434, 271);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(254, 181);
             this.axWindowsMediaPlayer1.TabIndex = 2;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(361, 27);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(392, 420);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(28, 232);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Load";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(28, 280);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Play";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(28, 330);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Stop";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // bt_pause
+            // 
+            this.bt_pause.Location = new System.Drawing.Point(145, 280);
+            this.bt_pause.Name = "bt_pause";
+            this.bt_pause.Size = new System.Drawing.Size(75, 23);
+            this.bt_pause.TabIndex = 7;
+            this.bt_pause.Text = "暫停";
+            this.bt_pause.UseVisualStyleBackColor = true;
+            this.bt_pause.Click += new System.EventHandler(this.bt_pause_Click);
+            // 
+            // bt_info
+            // 
+            this.bt_info.Location = new System.Drawing.Point(268, 280);
+            this.bt_info.Name = "bt_info";
+            this.bt_info.Size = new System.Drawing.Size(75, 23);
+            this.bt_info.TabIndex = 8;
+            this.bt_info.Text = "info";
+            this.bt_info.UseVisualStyleBackColor = true;
+            this.bt_info.Click += new System.EventHandler(this.bt_info_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 295);
+            this.ClientSize = new System.Drawing.Size(775, 459);
+            this.Controls.Add(this.bt_info);
+            this.Controls.Add(this.bt_pause);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.axWindowsMediaPlayer1);
-            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Windows Media Player";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 文件FToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 选取文件;
-        private System.Windows.Forms.ToolStripMenuItem 播放文件;
-        private System.Windows.Forms.ToolStripMenuItem 停止;
-        private System.Windows.Forms.ToolStripMenuItem 退出;
-        private System.Windows.Forms.OpenFileDialog optFile;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button bt_pause;
+        private System.Windows.Forms.Button bt_info;
 
     }
 }

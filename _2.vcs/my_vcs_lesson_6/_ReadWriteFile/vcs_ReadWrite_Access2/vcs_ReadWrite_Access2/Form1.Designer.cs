@@ -30,39 +30,37 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.cboStyle = new System.Windows.Forms.ComboBox();
-            this.lvwBooks = new System.Windows.Forms.ListView();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.imlLargeIcons = new System.Windows.Forms.ImageList(this.components);
             this.imlSmallIcons = new System.Windows.Forms.ImageList(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // cboStyle
+            // comboBox1
             // 
-            this.cboStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboStyle.FormattingEnabled = true;
-            this.cboStyle.Items.AddRange(new object[] {
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
             "Large Icons",
             "Small Icons",
             "List",
             "Tile",
             "Details"});
-            this.cboStyle.Location = new System.Drawing.Point(51, 11);
-            this.cboStyle.Name = "cboStyle";
-            this.cboStyle.Size = new System.Drawing.Size(121, 20);
-            this.cboStyle.TabIndex = 17;
-            this.cboStyle.SelectedIndexChanged += new System.EventHandler(this.cboStyle_SelectedIndexChanged);
+            this.comboBox1.Location = new System.Drawing.Point(51, 11);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 20);
+            this.comboBox1.TabIndex = 17;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // lvwBooks
+            // listView1
             // 
-            this.lvwBooks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvwBooks.Location = new System.Drawing.Point(12, 36);
-            this.lvwBooks.Name = "lvwBooks";
-            this.lvwBooks.Size = new System.Drawing.Size(883, 539);
-            this.lvwBooks.TabIndex = 18;
-            this.lvwBooks.UseCompatibleStateImageBehavior = false;
+            this.listView1.Location = new System.Drawing.Point(12, 36);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(724, 577);
+            this.listView1.TabIndex = 18;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // imlLargeIcons
             // 
@@ -97,13 +95,22 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "View:";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(742, 36);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(422, 577);
+            this.richTextBox1.TabIndex = 20;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(907, 586);
-            this.Controls.Add(this.cboStyle);
-            this.Controls.Add(this.lvwBooks);
+            this.ClientSize = new System.Drawing.Size(1176, 625);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "vcs_ReadWrite_Access2";
@@ -115,11 +122,12 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cboStyle;
-        private System.Windows.Forms.ListView lvwBooks;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ListView listView1;
         internal System.Windows.Forms.ImageList imlLargeIcons;
         internal System.Windows.Forms.ImageList imlSmallIcons;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

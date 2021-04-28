@@ -59,14 +59,14 @@ namespace PlantTextAlignMode
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Location = new System.Drawing.Point(7, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(383, 234);
+            this.groupBox1.Size = new System.Drawing.Size(383, 418);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "內容區域";
             // 
             // hold
             // 
-            this.hold.Location = new System.Drawing.Point(323, 205);
+            this.hold.Location = new System.Drawing.Point(323, 380);
             this.hold.Name = "hold";
             this.hold.Size = new System.Drawing.Size(53, 23);
             this.hold.TabIndex = 2;
@@ -76,7 +76,7 @@ namespace PlantTextAlignMode
             // 
             // unfold
             // 
-            this.unfold.Location = new System.Drawing.Point(249, 205);
+            this.unfold.Location = new System.Drawing.Point(249, 380);
             this.unfold.Name = "unfold";
             this.unfold.Size = new System.Drawing.Size(53, 23);
             this.unfold.TabIndex = 1;
@@ -88,7 +88,7 @@ namespace PlantTextAlignMode
             // 
             this.richTextBox1.Location = new System.Drawing.Point(5, 13);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(371, 186);
+            this.richTextBox1.Size = new System.Drawing.Size(371, 348);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -101,7 +101,7 @@ namespace PlantTextAlignMode
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(7, 245);
+            this.groupBox2.Location = new System.Drawing.Point(12, 460);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(383, 69);
             this.groupBox2.TabIndex = 3;
@@ -111,7 +111,6 @@ namespace PlantTextAlignMode
             // justifyRight
             // 
             this.justifyRight.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.justifyRight.Image = global::PlantTextAlignMode.Properties.Resources.右对齐;
             this.justifyRight.Location = new System.Drawing.Point(301, 24);
             this.justifyRight.Name = "justifyRight";
             this.justifyRight.Size = new System.Drawing.Size(37, 25);
@@ -122,7 +121,6 @@ namespace PlantTextAlignMode
             // justifyCenter
             // 
             this.justifyCenter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.justifyCenter.Image = global::PlantTextAlignMode.Properties.Resources.居中对齐;
             this.justifyCenter.Location = new System.Drawing.Point(184, 24);
             this.justifyCenter.Name = "justifyCenter";
             this.justifyCenter.Size = new System.Drawing.Size(37, 25);
@@ -133,7 +131,6 @@ namespace PlantTextAlignMode
             // justifyLeft
             // 
             this.justifyLeft.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.justifyLeft.Image = global::PlantTextAlignMode.Properties.Resources.左对齐;
             this.justifyLeft.Location = new System.Drawing.Point(68, 24);
             this.justifyLeft.Name = "justifyLeft";
             this.justifyLeft.Size = new System.Drawing.Size(37, 25);
@@ -163,7 +160,7 @@ namespace PlantTextAlignMode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(396, 319);
+            this.ClientSize = new System.Drawing.Size(539, 559);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Name = "PlantTextAlignMode";

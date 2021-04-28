@@ -10,30 +10,62 @@ namespace PlayAVIMIDAndWAVCluster
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\__RW\_avi\enka.avi";
+
         public Form1()
         {
             InitializeComponent();
         }
-      
-        private void 选取文件_Click(object sender, EventArgs e)
+
+        private void button1_Click(object sender, EventArgs e)
         {
-            this.optFile.ShowDialog();
-            this.axWindowsMediaPlayer1.newMedia(this.optFile.FileName);
+            //Load
+            this.axWindowsMediaPlayer1.newMedia(filename);
         }
 
-        private void 播放文件_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            this.axWindowsMediaPlayer1.URL = this.optFile.FileName;
+            //Play
+            this.axWindowsMediaPlayer1.URL = filename;
         }
 
-        private void 停止_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
+            //Stop
             this.axWindowsMediaPlayer1.close();
+
+
+            //or
+            //this.axWindowsMediaPlayer1.Ctlcontrols.stop();
         }
 
-        private void 退出_Click(object sender, EventArgs e)
+        private void bt_pause_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (bt_pause.Text == "暫停")
+            {
+                this.axWindowsMediaPlayer1.Ctlcontrols.pause();
+
+                bt_pause.Text = "繼續";
+
+            }
+            else
+            {
+                this.axWindowsMediaPlayer1.Ctlcontrols.play();
+
+                bt_pause.Text = "暫停";
+            }
+        }
+
+        private WMPLib.WindowsMediaPlayerClass c;
+        private WMPLib.IWMPMedia m;
+
+        private void bt_info_Click(object sender, EventArgs e)
+        {
+            c = new WMPLib.WindowsMediaPlayerClass();
+            m = c.newMedia(filename);
+            richTextBox1.Text += "歌手名:\t" + m.getItemInfo("Author") + "\n" + "歌  名:\t" + m.getItemInfo("Title") + "\n";
+
+
         }
     }
 }

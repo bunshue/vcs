@@ -17,7 +17,7 @@ namespace vcs_Screensaver
         }
 
         private int iSpeed = 2;
-        private string str = "明日科技有限公司";
+        private string str = "群曜醫電 Insight Medical Solutions Inc.";
         private System.Drawing.Font TextStringFont = new System.Drawing.Font("細明體", 24, System.Drawing.FontStyle.Bold);
         private Color TextStringcolor = System.Drawing.Color.Red;
         private int iDistance;
@@ -47,6 +47,9 @@ namespace vcs_Screensaver
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\_material\ims1.bmp";
+            pictureBox1.Image = Image.FromFile(filename);
+
             speed = 0;
             width1 = this.Width;
             height1 = this.Height;

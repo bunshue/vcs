@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConserveEconomyLog", "ConserveEconomyLog\ConserveEconomyLog.csproj", "{88E3671F-1D69-4B85-92DC-3796A78BC220}"
 EndProject
 Global
