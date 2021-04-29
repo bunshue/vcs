@@ -3356,7 +3356,7 @@ namespace vcs_Draw9_Example
             int y_st;
             int w;
             int h;
-            pictureBox1.Location = new Point(50, 50);
+            pictureBox1.Location = new Point(10, 10);
             pictureBox1.Size = new Size(W + 50, H + 50);  //改變圖框大小
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
 
@@ -3481,7 +3481,7 @@ namespace vcs_Draw9_Example
             int y_st;
             int w;
             int h;
-            pictureBox1.Location = new Point(50, 50);
+            pictureBox1.Location = new Point(10, 10);
             pictureBox1.Size = new Size(W + 50 + 250, H + 50);  //改變圖框大小
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
 
@@ -5039,8 +5039,8 @@ namespace vcs_Draw9_Example
         //畫Gamma曲線
         private void button21_Click(object sender, EventArgs e)
         {
-            pictureBox1.Location = new Point(50, 50);
-            pictureBox1.Size = new Size(887, 636);
+            pictureBox1.Location = new Point(10, 10);
+            pictureBox1.Size = new Size(256 * 3 + 500, 256 * 2);   //改變圖框大小
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
 
             Graphics g;
@@ -5058,7 +5058,12 @@ namespace vcs_Draw9_Example
             int[] data_out = new int[256];
             Point[] curvePoints = new Point[256];    //一維陣列內有 N 個Point
 
-            Pen gammaPen = new Pen(Color.Red, 2);
+            Pen redPen = new Pen(Color.Red, 2);
+            Pen greenPen = new Pen(Color.Green, 2);
+            Pen bluePen = new Pen(Color.Blue, 2);
+            Pen grayPen = new Pen(Color.Gray, 6);
+            Pen blackPen = new Pen(Color.Black, 6);
+
             gamma = 2.2;
             //畫出真正的Gamma 2.2曲線
             for (i = 0; i < 256; i++)
@@ -5069,9 +5074,8 @@ namespace vcs_Draw9_Example
                 curvePoints[i].X = data_in[i] * 3;
                 curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
             }
-            g.DrawLines(gammaPen, curvePoints);   //畫直線
+            //g.DrawLines(redPen, curvePoints);   //畫直線 gamma 2.2
 
-            gammaPen = new Pen(Color.Green, 2);
             gamma = 2.3;
             //畫出真正的Gamma 2.3曲線
             for (i = 0; i < 256; i++)
@@ -5082,9 +5086,8 @@ namespace vcs_Draw9_Example
                 curvePoints[i].X = data_in[i] * 3;
                 curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
             }
-            g.DrawLines(gammaPen, curvePoints);   //畫直線
+            //g.DrawLines(greenPen, curvePoints);   //畫直線 gamma 2.3
 
-            gammaPen = new Pen(Color.Blue, 2);
             gamma = 2.4;
             //畫出真正的Gamma 2.4曲線
             for (i = 0; i < 256; i++)
@@ -5095,12 +5098,13 @@ namespace vcs_Draw9_Example
                 curvePoints[i].X = data_in[i] * 3;
                 curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
             }
-            g.DrawLines(gammaPen, curvePoints);   //畫直線
+            g.DrawLines(grayPen, curvePoints);   //畫直線 gamma 2.4
 
 
+            int[] yst = new int[17];
 
-
-            int YST0 = 0x00;
+            /*
+            int YST0 = 0x00;    //必為0, 設為yst[0]
             int YST1 = 0x14;
             int YST2 = 0x22;
             int YST3 = 0x37;
@@ -5116,55 +5120,101 @@ namespace vcs_Draw9_Example
             int YST13 = 0xCF;
             int YST14 = 0xDE;
             int YST15 = 0xED;
+            int YSLP15 = 0x1B;  //設為yst[16]
+            */
 
-            int YSLP15 = 0x1B;
+            yst[0] = 0x00;
+            yst[1] = 0x14;
+            yst[2] = 0x22;
+            yst[3] = 0x37;
+            yst[4] = 0x4B;
+            yst[5] = 0x5E;
+            yst[6] = 0x6B;
+            yst[7] = 0x76;
+            yst[8] = 0x82;
+            yst[9] = 0x8C;
+            yst[10] = 0x9F;
+            yst[11] = 0xAB;
+            yst[12] = 0xB5;
+            yst[13] = 0xCF;
+            yst[14] = 0xDE;
+            yst[15] = 0xED;
+            yst[16] = 0x1B;
+            draw_gamma_curve(g, yst, Color.Red);    //OV spec上的數字, IC的預設值
+
+
+            yst = new int[] { 0, 0x2C, 0x33, 0x41, 0x55, 0x67, 0x74, 0x7E, 0x87, 0x8F, 0x96, 0x9F, 0xAA, 0xB8, 0xC9, 0xDA, 0x1E };
+            draw_gamma_curve(g, yst, Color.Green);  //gamma 2.4
+
+            yst = new int[] { 0, 0x14, 0x22, 0x37, 0x4B, 0x5E, 0x68, 0x6F, 0x78, 0x7E, 0x86, 0x90, 0x99, 0xA7, 0xB1, 0xBA, 0x0E };
+            draw_gamma_curve(g, yst, Color.Blue);   //HLG 2
+
+            yst = new int[] { 0, 18, 34, 56, 86, 96, 107, 116, 125, 134, 141, 156, 168, 182, 192, 201, 14 };
+            draw_gamma_curve(g, yst, Color.Yellow);
+
+            int dy = 50;
+            g.DrawString("灰色: 標準的gamma2.4".ToString(), new Font("細明體", 25), new SolidBrush(Color.Gray), new PointF(800, 50 + dy*0));
+            g.DrawString("紅色: IC的預設值".ToString(), new Font("細明體", 25), new SolidBrush(Color.Red), new PointF(800, 50+ dy*1));
+            g.DrawString("綠色: Gamma2.4 @ 2020/3/6".ToString(), new Font("細明體", 25), new SolidBrush(Color.Green), new PointF(800, 50+ dy*2));
+            g.DrawString("藍色: HLG2".ToString(), new Font("細明體", 25), new SolidBrush(Color.Blue), new PointF(800, 50+ dy*3));
+            g.DrawString("黃色: SLG".ToString(), new Font("細明體", 25), new SolidBrush(Color.Yellow), new PointF(800, 50+ dy*4));
+
+            g.DrawRectangle(new Pen(Color.Red,5), new Rectangle(0, 0, pictureBox1.Width - 5, pictureBox1.Height - 5));  //畫外框
+            pictureBox1.Image = bitmap1;
+        }
+
+        void draw_gamma_curve(Graphics g, int[] yst, Color color)
+        {
+            int i;
+            int[] data_in = new int[256];
+            int[] data_out = new int[256];
+            Point[] curvePoints = new Point[256];    //一維陣列內有 N 個Point
+
+            Pen p = new Pen(color, 2);
 
             for (i = 0; i < 256; i++)
             {
                 data_in[i] = i;
 
                 if (data_in[i] <= 4)
-                    data_out[i] = YST0 + (YST1 - YST0) * (data_in[i] - 0) / 4;
+                    data_out[i] = yst[0] + (yst[1] - yst[0]) * (data_in[i] - 0) / 4;
                 else if (data_in[i] <= 8)
-                    data_out[i] = YST1 + (YST2 - YST1) * (data_in[i] - 4) / 4;
+                    data_out[i] = yst[1] + (yst[2] - yst[1]) * (data_in[i] - 4) / 4;
                 else if (data_in[i] <= 16)
-                    data_out[i] = YST2 + (YST3 - YST2) * (data_in[i] - 8) / 8;
+                    data_out[i] = yst[2] + (yst[3] - yst[2]) * (data_in[i] - 8) / 8;
                 else if (data_in[i] <= 32)
-                    data_out[i] = YST4 + (YST4 - YST3) * (data_in[i] - 16) / 16;
+                    data_out[i] = yst[4] + (yst[4] - yst[3]) * (data_in[i] - 16) / 16;
                 else if (data_in[i] <= 40)
-                    data_out[i] = YST5 + (YST5 - YST4) * (data_in[i] - 32) / 8;
+                    data_out[i] = yst[5] + (yst[5] - yst[4]) * (data_in[i] - 32) / 8;
                 else if (data_in[i] <= 48)
-                    data_out[i] = YST6 + (YST6 - YST5) * (data_in[i] - 40) / 8;
+                    data_out[i] = yst[6] + (yst[6] - yst[5]) * (data_in[i] - 40) / 8;
                 else if (data_in[i] <= 56)
-                    data_out[i] = YST7 + (YST7 - YST6) * (data_in[i] - 48) / 8;
+                    data_out[i] = yst[7] + (yst[7] - yst[6]) * (data_in[i] - 48) / 8;
                 else if (data_in[i] <= 64)
-                    data_out[i] = YST8 + (YST8 - YST7) * (data_in[i] - 56) / 8;
+                    data_out[i] = yst[8] + (yst[8] - yst[7]) * (data_in[i] - 56) / 8;
                 else if (data_in[i] <= 72)
-                    data_out[i] = YST9 + (YST9 - YST8) * (data_in[i] - 64) / 8;
+                    data_out[i] = yst[9] + (yst[9] - yst[8]) * (data_in[i] - 64) / 8;
                 else if (data_in[i] <= 80)
-                    data_out[i] = YST10 + (YST10 - YST9) * (data_in[i] - 72) / 8;
+                    data_out[i] = yst[10] + (yst[10] - yst[9]) * (data_in[i] - 72) / 8;
                 else if (data_in[i] <= 96)
-                    data_out[i] = YST11 + (YST11 - YST10) * (data_in[i] - 80) / 16;
+                    data_out[i] = yst[11] + (yst[11] - yst[10]) * (data_in[i] - 80) / 16;
                 else if (data_in[i] <= 112)
-                    data_out[i] = YST12 + (YST12 - YST11) * (data_in[i] - 96) / 16;
+                    data_out[i] = yst[12] + (yst[12] - yst[11]) * (data_in[i] - 96) / 16;
                 else if (data_in[i] <= 144)
-                    data_out[i] = YST13 + (YST13 - YST12) * (data_in[i] - 112) / 32;
+                    data_out[i] = yst[13] + (yst[13] - yst[12]) * (data_in[i] - 112) / 32;
                 else if (data_in[i] <= 176)
-                    data_out[i] = YST14 + (YST14 - YST13) * (data_in[i] - 144) / 32;
+                    data_out[i] = yst[14] + (yst[14] - yst[13]) * (data_in[i] - 144) / 32;
                 else if (data_in[i] <= 208)
-                    data_out[i] = YST15 + (YST15 - YST14) * (data_in[i] - 176) / 32;
+                    data_out[i] = yst[15] + (yst[15] - yst[14]) * (data_in[i] - 176) / 32;
                 else
                 {
                     if (cb_manual.Checked == false)
                     {
-                        data_out[i] = YST15 + YSLP15 * (data_in[i] - 208) / 64;
-
-
+                        data_out[i] = yst[15] + yst[16] * (data_in[i] - 208) / 64;
                     }
                     else
                     {
-
-                        data_out[i] = YST15 + YSLP15 * (data_in[i] - 208) / 64;
+                        data_out[i] = yst[15] + yst[16] * (data_in[i] - 208) / 64;
                     }
                 }
             }
@@ -5172,20 +5222,17 @@ namespace vcs_Draw9_Example
             //int YSLP15 = 0x1B;
             //Yst15 + Yslp15 × (data - 208) / 64
 
-
+            /*
             richTextBox1.Text += "In:\n";
             for (i = 0; i < 256; i++)
                 richTextBox1.Text += data_in[i].ToString() + " ";
             richTextBox1.Text += "\n";
+            */
 
             richTextBox1.Text += "Out:\n";
             for (i = 0; i < 256; i++)
                 richTextBox1.Text += data_out[i].ToString() + " ";
             richTextBox1.Text += "\n";
-
-            pictureBox1.Size = new Size(256 * 3, 256 * 2);   //改變圖框大小
-
-            Pen redPen = new Pen(Color.Red, 3);
 
             for (i = 0; i < 256; i++)
             {
@@ -5194,20 +5241,12 @@ namespace vcs_Draw9_Example
                 //curvePoints[i].Y = H - (offset_y + (int)y1_data[i] + (draw_max - draw_min) / 2000) * 2;
                 curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
 
-
                 //curvePoints[i].X = i;
                 //curvePoints[i].Y = H - (int)y1_data[i] - 100;
                 //curvePoints[i].Y = H - (offset_y + (int)y1_data[i] + (draw_max - draw_min) / 2000) * 2;
                 //curvePoints[i].Y = 100;
-
             }
-
-            // Draw lines between original points to screen.
-            g.DrawLines(redPen, curvePoints);   //畫直線
-
-            g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1));
-
-            pictureBox1.Image = bitmap1;
+            g.DrawLines(p, curvePoints);   //畫直線
         }
 
         bool isDrawing = false;

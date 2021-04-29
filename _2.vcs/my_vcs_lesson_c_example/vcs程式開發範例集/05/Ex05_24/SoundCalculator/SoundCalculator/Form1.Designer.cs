@@ -90,12 +90,12 @@
             this.ToolS_Vox,
             this.ToolS_Close});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(119, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 48);
             // 
             // ToolS_Vox
             // 
             this.ToolS_Vox.Name = "ToolS_Vox";
-            this.ToolS_Vox.Size = new System.Drawing.Size(118, 22);
+            this.ToolS_Vox.Size = new System.Drawing.Size(122, 22);
             this.ToolS_Vox.Tag = "0";
             this.ToolS_Vox.Text = "設定聲音";
             this.ToolS_Vox.Click += new System.EventHandler(this.ToolS_Vox_Click);
@@ -103,7 +103,7 @@
             // ToolS_Close
             // 
             this.ToolS_Close.Name = "ToolS_Close";
-            this.ToolS_Close.Size = new System.Drawing.Size(118, 22);
+            this.ToolS_Close.Size = new System.Drawing.Size(122, 22);
             this.ToolS_Close.Tag = "1";
             this.ToolS_Close.Text = "退出";
             this.ToolS_Close.Click += new System.EventHandler(this.ToolS_Vox_Click);
@@ -153,9 +153,9 @@
             this.pict_Amount.TabIndex = 23;
             this.pict_Amount.TabStop = false;
             this.pict_Amount.Tag = "=";
-            this.pict_Amount.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_Amount.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_Amount.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_Amount.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_Add
             // 
@@ -168,9 +168,9 @@
             this.pict_Add.TabIndex = 22;
             this.pict_Add.TabStop = false;
             this.pict_Add.Tag = "+";
-            this.pict_Add.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_Add.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_Add.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_Add.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_Dot
             // 
@@ -183,9 +183,9 @@
             this.pict_Dot.TabIndex = 21;
             this.pict_Dot.TabStop = false;
             this.pict_Dot.Tag = ".";
-            this.pict_Dot.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_Dot.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_Dot.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_Dot.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_Bear
             // 
@@ -198,9 +198,9 @@
             this.pict_Bear.TabIndex = 20;
             this.pict_Bear.TabStop = false;
             this.pict_Bear.Tag = "+-";
-            this.pict_Bear.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_Bear.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_Bear.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_Bear.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_0
             // 
@@ -213,9 +213,9 @@
             this.pict_0.TabIndex = 19;
             this.pict_0.TabStop = false;
             this.pict_0.Tag = "0";
-            this.pict_0.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_0.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_0.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_0.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_Deno
             // 
@@ -228,9 +228,9 @@
             this.pict_Deno.TabIndex = 18;
             this.pict_Deno.TabStop = false;
             this.pict_Deno.Tag = "X";
-            this.pict_Deno.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_Deno.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_Deno.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_Deno.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_Decr
             // 
@@ -243,9 +243,9 @@
             this.pict_Decr.TabIndex = 17;
             this.pict_Decr.TabStop = false;
             this.pict_Decr.Tag = "-";
-            this.pict_Decr.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_Decr.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_Decr.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_Decr.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_3
             // 
@@ -258,9 +258,9 @@
             this.pict_3.TabIndex = 16;
             this.pict_3.TabStop = false;
             this.pict_3.Tag = "3";
-            this.pict_3.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_3.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_3.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_3.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_2
             // 
@@ -273,9 +273,9 @@
             this.pict_2.TabIndex = 15;
             this.pict_2.TabStop = false;
             this.pict_2.Tag = "2";
-            this.pict_2.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_2.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_2.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_2.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_1
             // 
@@ -288,9 +288,9 @@
             this.pict_1.TabIndex = 14;
             this.pict_1.TabStop = false;
             this.pict_1.Tag = "1";
-            this.pict_1.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_1.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_1.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_1.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_Hund
             // 
@@ -303,9 +303,9 @@
             this.pict_Hund.TabIndex = 13;
             this.pict_Hund.TabStop = false;
             this.pict_Hund.Tag = "%";
-            this.pict_Hund.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_Hund.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_Hund.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_Hund.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_Ride
             // 
@@ -318,9 +318,9 @@
             this.pict_Ride.TabIndex = 12;
             this.pict_Ride.TabStop = false;
             this.pict_Ride.Tag = "*";
-            this.pict_Ride.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_Ride.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_Ride.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_Ride.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_6
             // 
@@ -333,9 +333,9 @@
             this.pict_6.TabIndex = 11;
             this.pict_6.TabStop = false;
             this.pict_6.Tag = "6";
-            this.pict_6.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_6.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_6.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_6.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_5
             // 
@@ -348,9 +348,9 @@
             this.pict_5.TabIndex = 10;
             this.pict_5.TabStop = false;
             this.pict_5.Tag = "5";
-            this.pict_5.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_5.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_5.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_5.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_4
             // 
@@ -363,9 +363,9 @@
             this.pict_4.TabIndex = 9;
             this.pict_4.TabStop = false;
             this.pict_4.Tag = "4";
-            this.pict_4.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_4.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_4.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_4.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_Sqrt
             // 
@@ -378,9 +378,9 @@
             this.pict_Sqrt.TabIndex = 8;
             this.pict_Sqrt.TabStop = false;
             this.pict_Sqrt.Tag = "Sqrt";
-            this.pict_Sqrt.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_Sqrt.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_Sqrt.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_Sqrt.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_Remove
             // 
@@ -393,9 +393,9 @@
             this.pict_Remove.TabIndex = 7;
             this.pict_Remove.TabStop = false;
             this.pict_Remove.Tag = "/";
-            this.pict_Remove.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_Remove.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_Remove.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_Remove.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_9
             // 
@@ -408,9 +408,9 @@
             this.pict_9.TabIndex = 6;
             this.pict_9.TabStop = false;
             this.pict_9.Tag = "9";
-            this.pict_9.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_9.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_9.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_9.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_8
             // 
@@ -423,9 +423,9 @@
             this.pict_8.TabIndex = 5;
             this.pict_8.TabStop = false;
             this.pict_8.Tag = "8";
-            this.pict_8.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_8.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_8.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_8.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_7
             // 
@@ -438,9 +438,9 @@
             this.pict_7.TabIndex = 4;
             this.pict_7.TabStop = false;
             this.pict_7.Tag = "7";
-            this.pict_7.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_7.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_7.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_7.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_C
             // 
@@ -453,9 +453,9 @@
             this.pict_C.TabIndex = 3;
             this.pict_C.TabStop = false;
             this.pict_C.Tag = "C";
-            this.pict_C.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_C.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_C.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_C.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_CE
             // 
@@ -468,9 +468,9 @@
             this.pict_CE.TabIndex = 2;
             this.pict_CE.TabStop = false;
             this.pict_CE.Tag = "CE";
-            this.pict_CE.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_CE.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_CE.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_CE.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // pict_Back
             // 
@@ -483,9 +483,9 @@
             this.pict_Back.TabIndex = 1;
             this.pict_Back.TabStop = false;
             this.pict_Back.Tag = "Back";
-            this.pict_Back.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             this.pict_Back.Click += new System.EventHandler(this.pict_Back_Click);
             this.pict_Back.MouseEnter += new System.EventHandler(this.pict_Back_MouseEnter);
+            this.pict_Back.MouseLeave += new System.EventHandler(this.pict_Back_MouseLeave);
             // 
             // textBox1
             // 
@@ -493,7 +493,7 @@
             this.textBox1.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.Location = new System.Drawing.Point(18, 32);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(204, 26);
+            this.textBox1.Size = new System.Drawing.Size(204, 27);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "0";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -502,7 +502,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(238, 231);
+            this.ClientSize = new System.Drawing.Size(882, 545);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";

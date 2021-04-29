@@ -86,28 +86,15 @@ namespace EstablishAndExpunctionM3U
         }
         #endregion
 
-        #region 當單擊「建立」按鈕時
         private void found_Click(object sender, EventArgs e)
         {
-            SaveFileDialog M3UDialog = new SaveFileDialog();//宣告一個提示使用者選擇文件的保存位置對像
-            M3UDialog.Filter = "M3U文件(*.M3U)|*.M3U";//取得或設定目前文件名過濾器字串，該字串決定對話框的「另存為文件類型」或「文件類型」框中出現的選擇內容。 （繼承自 FileDialog。）
-            if (M3UDialog.ShowDialog() == DialogResult.OK)//當選定保存位置，點擊「保存」按鈕時
-            {
-                m3uCreate(M3UDialog.FileName);//建立一個M3U文件
-                M3UName.Text = "恭喜你，建立成功！";//在文字框中顯示提示訊息
-                M3UName.ForeColor = Color.Red;//設定文字框中文字的顏色
-                M3UName.BackColor = Color.Black;//設定文字框的背景顏色
-                found.Enabled = false;//設定「建立」按鈕為不可用狀態
-            }
-            else          //當選擇「取消」按鈕時
-            {
-                found.Enabled = true; //設定「建立」按鈕為可用狀態
-                M3UName.Text = "對不起，建立失敗！";//在文字框中顯示提示訊息
-                M3UName.ForeColor = Color.Red;//設定文字框中字體的顏色
-                M3UName.BackColor = Color.Black;//設定文字框中的背景顏色
-            }
+            string filename = Application.StartupPath + "\\mp3_playlist_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".m3u";
+            m3uCreate(filename);//建立一個M3U文件
+            M3UName.Text = "恭喜你，建立成功！";//在文字框中顯示提示訊息
+            M3UName.ForeColor = Color.Red;//設定文字框中文字的顏色
+            M3UName.BackColor = Color.Black;//設定文字框的背景顏色
+            found.Enabled = false;//設定「建立」按鈕為不可用狀態
         }
-        #endregion
 
         #region 當單擊打開M3U文件的「打開」按鈕時
         private void openM3U_Click(object sender, EventArgs e)
@@ -129,18 +116,16 @@ namespace EstablishAndExpunctionM3U
         }
         #endregion
 
-        #region 單擊打開歌曲的「打開」按鈕時
+
         private void openMusic_Click(object sender, EventArgs e)
         {
-            OpenFileDialog MusicDialog = new OpenFileDialog();//宣告一個提示使用者打開文件的對象
-            MusicDialog.Filter = "MP3文件(*.MP3)|*.MP3|WAV文件(*.WAV)|*.WAV|WMA文件(*.WMA)|*.WMA";//取得或設定目前文件名過濾器字串，該字串決定對話框的「另存為文件類型」或「文件類型」框中出現的選擇內容。 （繼承自 FileDialog。）
-            if (MusicDialog.ShowDialog() == DialogResult.OK)//當選定文件之後單擊「打開」按鈕時
-            {
-                musicPath.Text = MusicDialog.FileName;//保存打開文件的文件路徑
-                musicName.Text = System.IO.Path.GetFileNameWithoutExtension(musicPath.Text);//保存打開的文件的文件名
-            }
+            string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+
+            musicPath.Text = filename;
+            musicName.Text = System.IO.Path.GetFileNameWithoutExtension(musicPath.Text);//保存打開的文件的文件名
+
         }
-        #endregion
+
 
         #region 單擊「寫入」按鈕時
         private void writeIn_Click(object sender, EventArgs e)

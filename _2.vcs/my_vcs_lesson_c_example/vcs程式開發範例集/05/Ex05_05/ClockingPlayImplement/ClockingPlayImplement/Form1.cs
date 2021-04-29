@@ -10,13 +10,21 @@ namespace ClockingPlayImplement
 {
     public partial class Form1 : Form
     {
+        string filename = @"D:\vcs\astro\_DATA2\_mp3\陳盈潔_台語精選集6CD\disc3\01.南都夜曲.mp3";
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.textBox1.Text = filename;
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
+            richTextBox1.Text += DateTime.Now.ToShortTimeString() + "\t" + this.textBox2.Text.Trim().ToString() + "\n";
             if (DateTime.Now.ToShortTimeString() == this.textBox2.Text.Trim().ToString())
             {
                 this.axWindowsMediaPlayer1.URL = this.textBox1.Text;
@@ -31,22 +39,14 @@ namespace ClockingPlayImplement
         private void button1_Click(object sender, EventArgs e)
         {
             this.timer1.Enabled = true;
-            this.Hide();
-            this.ShowInTaskbar = false;//不在任务栏显现
+            //this.Hide();
+            //this.ShowInTaskbar = false;//不在任务栏显现
           
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.textBox1.Text = this.openFileDialog1.FileName;
-            }
         }
 
         private void timer2_Tick(object sender, EventArgs e)

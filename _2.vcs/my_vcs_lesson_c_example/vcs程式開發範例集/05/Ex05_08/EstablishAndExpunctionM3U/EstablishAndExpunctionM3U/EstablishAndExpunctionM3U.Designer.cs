@@ -47,6 +47,7 @@
             this.M3UPath = new System.Windows.Forms.TextBox();
             this.musicPath = new System.Windows.Forms.TextBox();
             this.musicName = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -241,11 +242,20 @@
             this.musicName.Size = new System.Drawing.Size(189, 22);
             this.musicName.TabIndex = 4;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(3, 308);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(681, 306);
+            this.richTextBox1.TabIndex = 6;
+            this.richTextBox1.Text = "";
+            // 
             // EstablishAndExpunctionM3U
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 296);
+            this.ClientSize = new System.Drawing.Size(696, 626);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
@@ -282,6 +292,7 @@
         private System.Windows.Forms.TextBox musicPath;
         private System.Windows.Forms.TextBox musicName;
         private System.Windows.Forms.Button OpenM3U;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
