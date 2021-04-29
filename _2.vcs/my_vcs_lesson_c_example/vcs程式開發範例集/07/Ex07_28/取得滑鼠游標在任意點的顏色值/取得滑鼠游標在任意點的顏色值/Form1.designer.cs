@@ -44,7 +44,7 @@
             // 
             this.txtColor.Location = new System.Drawing.Point(152, 81);
             this.txtColor.Name = "txtColor";
-            this.txtColor.Size = new System.Drawing.Size(111, 21);
+            this.txtColor.Size = new System.Drawing.Size(111, 22);
             this.txtColor.TabIndex = 17;
             // 
             // label4
@@ -60,7 +60,7 @@
             // 
             this.txtPoint.Location = new System.Drawing.Point(152, 31);
             this.txtPoint.Name = "txtPoint";
-            this.txtPoint.Size = new System.Drawing.Size(111, 21);
+            this.txtPoint.Size = new System.Drawing.Size(111, 22);
             this.txtPoint.TabIndex = 11;
             // 
             // label2
@@ -68,7 +68,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(86, 61);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.Size = new System.Drawing.Size(62, 12);
             this.label2.TabIndex = 15;
             this.label2.Text = "R G B 值：";
             // 
@@ -90,7 +90,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(85, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 14;
             this.label1.Text = "滑鼠游標位置：";
             // 
@@ -98,7 +98,7 @@
             // 
             this.txtRGB.Location = new System.Drawing.Point(152, 56);
             this.txtRGB.Name = "txtRGB";
-            this.txtRGB.Size = new System.Drawing.Size(111, 21);
+            this.txtRGB.Size = new System.Drawing.Size(111, 22);
             this.txtRGB.TabIndex = 12;
             // 
             // panel1
@@ -118,7 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(271, 116);
+            this.ClientSize = new System.Drawing.Size(510, 265);
             this.Controls.Add(this.txtColor);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtPoint);

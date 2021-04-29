@@ -15,6 +15,9 @@ namespace FileIco
 {
     public partial class Form1 : Form
     {
+
+        string foldername = @"C:\______test_files";
+
         public Form1()
         {
             InitializeComponent();
@@ -92,10 +95,9 @@ namespace FileIco
             catch { }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-                textBox1.Text = folderBrowserDialog1.SelectedPath;
+            textBox1.Text = foldername;
         }
     }
 }

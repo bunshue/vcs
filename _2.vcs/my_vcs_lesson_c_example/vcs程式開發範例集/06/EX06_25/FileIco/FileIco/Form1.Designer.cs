@@ -37,14 +37,13 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(434, 535);
+            this.button1.Location = new System.Drawing.Point(564, 535);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(59, 23);
             this.button1.TabIndex = 0;
@@ -99,18 +98,8 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(65, 536);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(298, 22);
+            this.textBox1.Size = new System.Drawing.Size(493, 22);
             this.textBox1.TabIndex = 5;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(366, 535);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(26, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "..";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -127,12 +116,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(700, 570);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "取得文件夾中的圖標資源";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,7 +137,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }

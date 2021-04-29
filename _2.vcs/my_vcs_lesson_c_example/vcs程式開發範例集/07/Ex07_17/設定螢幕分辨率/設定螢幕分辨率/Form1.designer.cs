@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +57,7 @@
             this.lblDisInfo.AutoSize = true;
             this.lblDisInfo.Location = new System.Drawing.Point(36, 57);
             this.lblDisInfo.Name = "lblDisInfo";
-            this.lblDisInfo.Size = new System.Drawing.Size(41, 12);
+            this.lblDisInfo.Size = new System.Drawing.Size(33, 12);
             this.lblDisInfo.TabIndex = 3;
             this.lblDisInfo.Text = "label3";
             // 
@@ -97,11 +98,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(30, 186);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(621, 424);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(219, 140);
+            this.ClientSize = new System.Drawing.Size(663, 622);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -123,6 +133,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

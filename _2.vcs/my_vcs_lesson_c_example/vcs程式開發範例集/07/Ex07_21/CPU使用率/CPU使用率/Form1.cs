@@ -6,19 +6,29 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Threading;
 using System.Diagnostics;
 using System.Management;
+
 namespace CPU使用率
 {
     public partial class Form1 : Form
     {
+        Thread td;
+        int mheight = 0;
+
         public Form1()
         {
             InitializeComponent();
         }
-        Thread td;
-        int mheight = 0;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            CheckForIllegalCrossThreadCalls = false;
+            myUser();
+        }
+
         private void CreateImage()
         {
             int i = panel3.Height / 100;
@@ -50,10 +60,6 @@ namespace CPU使用率
             td.Start();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            CheckForIllegalCrossThreadCalls = false;
-            myUser();
-        }
     }
 }
+
