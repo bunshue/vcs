@@ -32,6 +32,15 @@ namespace PlayAVIMIDAndWAVCluster
         {
             //Play
             this.axWindowsMediaPlayer1.URL = filename;
+            this.axWindowsMediaPlayer1.Ctlcontrols.play();
+
+            //不能直接設定播放器的大小
+            //this.axWindowsMediaPlayer1.Width = this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.imageSourceWidth;
+            //this.axWindowsMediaPlayer1.Height = this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.imageSourceHeight;
+
+            this.axWindowsMediaPlayer1.Width = 400;
+            this.axWindowsMediaPlayer1.Height = 400;
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -122,6 +131,20 @@ namespace PlayAVIMIDAndWAVCluster
         private void button7_Click(object sender, EventArgs e)
         {
             this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition -= 10;
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            /*
+            int W = this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.imageSourceWidth;
+            int H = this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.imageSourceHeight;
+            this.axWindowsMediaPlayer1.Width = W;
+            this.axWindowsMediaPlayer1.Height = H;
+            */
+
+            this.axWindowsMediaPlayer1.Width = this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.imageSourceWidth;
+            this.axWindowsMediaPlayer1.Height = this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.imageSourceHeight;
 
         }
 
