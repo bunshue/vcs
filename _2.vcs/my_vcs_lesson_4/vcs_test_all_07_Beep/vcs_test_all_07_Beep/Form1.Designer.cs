@@ -45,7 +45,21 @@
             this.txtFrequency = new System.Windows.Forms.TextBox();
             this.Label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.bt7 = new System.Windows.Forms.Button();
+            this.bt6 = new System.Windows.Forms.Button();
+            this.bt5 = new System.Windows.Forms.Button();
+            this.bt4 = new System.Windows.Forms.Button();
+            this.bt3 = new System.Windows.Forms.Button();
+            this.bt2 = new System.Windows.Forms.Button();
+            this.bt1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -62,9 +76,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(244, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(552, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(971, 610);
+            this.richTextBox1.Size = new System.Drawing.Size(663, 610);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -231,11 +245,159 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Play tone";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radioButton5);
+            this.groupBox2.Controls.Add(this.radioButton4);
+            this.groupBox2.Controls.Add(this.radioButton3);
+            this.groupBox2.Controls.Add(this.radioButton2);
+            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.bt7);
+            this.groupBox2.Controls.Add(this.bt6);
+            this.groupBox2.Controls.Add(this.bt5);
+            this.groupBox2.Controls.Add(this.bt4);
+            this.groupBox2.Controls.Add(this.bt3);
+            this.groupBox2.Controls.Add(this.bt2);
+            this.groupBox2.Controls.Add(this.bt1);
+            this.groupBox2.Location = new System.Drawing.Point(235, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(296, 90);
+            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "PC喇叭音效";
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(238, 19);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(47, 16);
+            this.radioButton5.TabIndex = 25;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "短音";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(173, 19);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(59, 16);
+            this.radioButton4.TabIndex = 24;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "短長音";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Checked = true;
+            this.radioButton3.Location = new System.Drawing.Point(123, 19);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(47, 16);
+            this.radioButton3.TabIndex = 23;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "中音";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(64, 19);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(59, 16);
+            this.radioButton2.TabIndex = 22;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "中長間";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(17, 19);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(47, 16);
+            this.radioButton1.TabIndex = 21;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "長音";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // bt7
+            // 
+            this.bt7.Location = new System.Drawing.Point(245, 46);
+            this.bt7.Name = "bt7";
+            this.bt7.Size = new System.Drawing.Size(29, 23);
+            this.bt7.TabIndex = 20;
+            this.bt7.Text = "7";
+            this.bt7.UseVisualStyleBackColor = true;
+            this.bt7.Click += new System.EventHandler(this.bt7_Click);
+            // 
+            // bt6
+            // 
+            this.bt6.Location = new System.Drawing.Point(207, 46);
+            this.bt6.Name = "bt6";
+            this.bt6.Size = new System.Drawing.Size(29, 23);
+            this.bt6.TabIndex = 19;
+            this.bt6.Text = "6";
+            this.bt6.UseVisualStyleBackColor = true;
+            this.bt6.Click += new System.EventHandler(this.bt6_Click);
+            // 
+            // bt5
+            // 
+            this.bt5.Location = new System.Drawing.Point(170, 46);
+            this.bt5.Name = "bt5";
+            this.bt5.Size = new System.Drawing.Size(29, 23);
+            this.bt5.TabIndex = 18;
+            this.bt5.Text = "5";
+            this.bt5.UseVisualStyleBackColor = true;
+            this.bt5.Click += new System.EventHandler(this.bt5_Click);
+            // 
+            // bt4
+            // 
+            this.bt4.Location = new System.Drawing.Point(133, 46);
+            this.bt4.Name = "bt4";
+            this.bt4.Size = new System.Drawing.Size(29, 23);
+            this.bt4.TabIndex = 17;
+            this.bt4.Text = "4";
+            this.bt4.UseVisualStyleBackColor = true;
+            this.bt4.Click += new System.EventHandler(this.bt4_Click);
+            // 
+            // bt3
+            // 
+            this.bt3.Location = new System.Drawing.Point(96, 46);
+            this.bt3.Name = "bt3";
+            this.bt3.Size = new System.Drawing.Size(29, 23);
+            this.bt3.TabIndex = 16;
+            this.bt3.Text = "3";
+            this.bt3.UseVisualStyleBackColor = true;
+            this.bt3.Click += new System.EventHandler(this.bt3_Click);
+            // 
+            // bt2
+            // 
+            this.bt2.Location = new System.Drawing.Point(59, 46);
+            this.bt2.Name = "bt2";
+            this.bt2.Size = new System.Drawing.Size(29, 23);
+            this.bt2.TabIndex = 15;
+            this.bt2.Text = "2";
+            this.bt2.UseVisualStyleBackColor = true;
+            this.bt2.Click += new System.EventHandler(this.bt2_Click);
+            // 
+            // bt1
+            // 
+            this.bt1.Location = new System.Drawing.Point(22, 46);
+            this.bt1.Name = "bt1";
+            this.bt1.Size = new System.Drawing.Size(29, 23);
+            this.bt1.TabIndex = 14;
+            this.bt1.Text = "1";
+            this.bt1.UseVisualStyleBackColor = true;
+            this.bt1.Click += new System.EventHandler(this.bt1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 644);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
@@ -253,6 +415,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -276,6 +440,19 @@
         internal System.Windows.Forms.TextBox txtFrequency;
         internal System.Windows.Forms.Label Label1;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Button bt7;
+        private System.Windows.Forms.Button bt6;
+        private System.Windows.Forms.Button bt5;
+        private System.Windows.Forms.Button bt4;
+        private System.Windows.Forms.Button bt3;
+        private System.Windows.Forms.Button bt2;
+        private System.Windows.Forms.Button bt1;
     }
 }
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DragDrop", "vcs_DragDrop\vcs_DragDrop.csproj", "{79860222-7C8A-432B-BF15-CAEBDFA2B646}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ListBox7_DragDrop", "vcs_ListBox7_DragDrop\vcs_ListBox7_DragDrop.csproj", "{79860222-7C8A-432B-BF15-CAEBDFA2B646}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

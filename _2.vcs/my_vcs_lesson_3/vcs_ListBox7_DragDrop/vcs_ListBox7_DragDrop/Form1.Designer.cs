@@ -1,4 +1,4 @@
-﻿namespace vcs_DragDrop
+﻿namespace vcs_ListBox7_DragDrop
 {
     partial class Form1
     {
@@ -38,7 +38,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(12, 441);
+            this.button1.Location = new System.Drawing.Point(573, 547);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(121, 48);
             this.button1.TabIndex = 0;
@@ -79,7 +79,7 @@
             "大暑"});
             this.listBox1.Location = new System.Drawing.Point(12, 99);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(147, 308);
+            this.listBox1.Size = new System.Drawing.Size(150, 441);
             this.listBox1.TabIndex = 2;
             this.listBox1.DragOver += new System.Windows.Forms.DragEventHandler(this.listBox1_DragOver);
             this.listBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseMove);
@@ -90,9 +90,9 @@
             this.listBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 19;
-            this.listBox2.Location = new System.Drawing.Point(245, 99);
+            this.listBox2.Location = new System.Drawing.Point(193, 99);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(147, 308);
+            this.listBox2.Size = new System.Drawing.Size(150, 441);
             this.listBox2.TabIndex = 3;
             this.listBox2.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox2.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
@@ -100,9 +100,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(409, 99);
+            this.richTextBox1.Location = new System.Drawing.Point(372, 99);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(285, 308);
+            this.richTextBox1.Size = new System.Drawing.Size(322, 441);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             // 
@@ -110,7 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 515);
+            this.ClientSize = new System.Drawing.Size(707, 607);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);

@@ -93,7 +93,7 @@ namespace vcs_test_all_07_Beep
         // Define the duration of a note in units of milliseconds.
         protected enum Duration
         {
-            WHOLE = 1600,
+            WHOLE = 1200,
             HALF = WHOLE / 2,
             QUARTER = HALF / 2,
             EIGHTH = QUARTER / 2,
@@ -115,8 +115,28 @@ namespace vcs_test_all_07_Beep
             }
 
             // Define properties to return the note's tone and duration.
-            public Tone NoteTone { get { return toneVal; } }
-            public Duration NoteDuration { get { return durVal; } }
+            public Tone NoteTone
+            {
+                get
+                {
+                    return toneVal;
+                }
+                set
+                {
+                    toneVal = value;
+                }
+            }
+            public Duration NoteDuration
+            {
+                get
+                {
+                    return durVal;
+                }
+                set
+                {
+                    durVal = value;
+                }
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -173,6 +193,104 @@ namespace vcs_test_all_07_Beep
 
             System.Console.Beep(freq, duration);
         }
+
+
+        //PC喇叭音效 ST
+        protected void Play(Note tune)
+        {
+            if (tune.NoteTone == Tone.REST)
+                Thread.Sleep((int)tune.NoteDuration);
+            else
+                Console.Beep((int)tune.NoteTone, (int)tune.NoteDuration);
+        }
+
+        private void PlayMic(int a)
+        {
+            Note note = new Note();
+            switch (a)
+            {
+                case 1:
+                    note.NoteTone = Tone.A;
+                    break;
+                case 2:
+                    note.NoteTone = Tone.B;
+                    break;
+                case 3:
+                    note.NoteTone = Tone.C;
+                    break;
+                case 4:
+                    note.NoteTone = Tone.D;
+                    break;
+                case 5:
+                    note.NoteTone = Tone.E;
+                    break;
+                case 6:
+                    note.NoteTone = Tone.F;
+                    break;
+                case 7:
+                    note.NoteTone = Tone.G;
+                    break;
+                default:
+                    break;
+            }
+            if (this.radioButton1.Checked)
+            {
+                note.NoteDuration = Duration.WHOLE;
+            }
+            else if (this.radioButton2.Checked)
+            {
+                note.NoteDuration = Duration.HALF;
+            }
+            else if (this.radioButton3.Checked)
+            {
+                note.NoteDuration = Duration.QUARTER;
+            }
+            else if (this.radioButton4.Checked)
+            {
+                note.NoteDuration = Duration.EIGHTH;
+            }
+            else if (this.radioButton5.Checked)
+            {
+                note.NoteDuration = Duration.SIXTEENTH;
+            }
+            Play(note);
+        }
+
+        private void bt1_Click(object sender, EventArgs e)
+        {
+            PlayMic(1);
+        }
+
+        private void bt2_Click(object sender, EventArgs e)
+        {
+            PlayMic(2);
+        }
+
+        private void bt3_Click(object sender, EventArgs e)
+        {
+            PlayMic(3);
+        }
+
+        private void bt4_Click(object sender, EventArgs e)
+        {
+            PlayMic(4);
+        }
+
+        private void bt5_Click(object sender, EventArgs e)
+        {
+            PlayMic(5);
+        }
+
+        private void bt6_Click(object sender, EventArgs e)
+        {
+            PlayMic(6);
+        }
+
+        private void bt7_Click(object sender, EventArgs e)
+        {
+            PlayMic(7);
+        }
+        //PC喇叭音效 SP
 
     
     

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_test_all_07_Beep2
+namespace vcs_ListBox7_DragDrop
 {
     static class Program
     {
         /// <summary>
-        /// 应用程序的主入口点。
+        /// 應用程式的主要進入點。
         /// </summary>
         [STAThread]
         static void Main()

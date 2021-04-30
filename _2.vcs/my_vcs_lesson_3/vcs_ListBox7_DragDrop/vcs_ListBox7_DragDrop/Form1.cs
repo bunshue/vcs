@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_DragDrop
+namespace vcs_ListBox7_DragDrop
 {
     public partial class Form1 : Form
     {
