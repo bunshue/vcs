@@ -39,7 +39,7 @@ namespace vcs_Registry2
             x_st = 12;
             y_st = 12;
             dx = 150;
-            dy = 60;
+            dy = 52;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -50,7 +50,11 @@ namespace vcs_Registry2
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            //button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -155,6 +159,41 @@ namespace vcs_Registry2
                 richTextBox1.Text += "舊的桌面路徑：" + old_wallpaper_path + ", 恢復\n";
                 SetImage(old_wallpaper_path);
             }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //禁止修改IE主頁設定
+            RegistryKey reg = Registry.CurrentUser.CreateSubKey(@"SoftWare\Policies\Microsoft\Internet Explorer\Control Panel");
+            reg.SetValue("HomePage", 1, RegistryValueKind.DWord);
+            MessageBox.Show("禁止修改IE主頁設定成功");
+
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //啟動IE主頁設定
+            RegistryKey reg = Registry.CurrentUser.CreateSubKey(@"SoftWare\Policies\Microsoft\Internet Explorer\Control Panel");
+            reg.SetValue("HomePage", 0, RegistryValueKind.DWord);
+            MessageBox.Show("啟動IE主頁設定成功");
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //修改IE瀏覽器標題欄內容
+            string new_title = "AAAAAAA";
+            RegistryKey reg = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
+            reg.SetValue("Window Title", new_title, RegistryValueKind.String);
+            MessageBox.Show("修改成功");
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //恢復IE瀏覽器標題欄內容
+            RegistryKey reg = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
+            reg.DeleteValue("Window Title", false);
+            MessageBox.Show("恢復成功");
         }
 
     }

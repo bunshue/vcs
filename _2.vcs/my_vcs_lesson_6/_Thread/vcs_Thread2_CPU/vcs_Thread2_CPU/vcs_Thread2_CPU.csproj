@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D4F84E54-7782-49DC-820B-E0F303368767}</ProjectGuid>
+    <ProjectGuid>{EB47B301-9341-468F-BEED-5F604067128E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>建立數據文件與程序的相關</RootNamespace>
-    <AssemblyName>建立數據文件與程序的相關</AssemblyName>
+    <RootNamespace>vcs_Thread2_CPU</RootNamespace>
+    <AssemblyName>vcs_Thread2_CPU</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -40,6 +40,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>

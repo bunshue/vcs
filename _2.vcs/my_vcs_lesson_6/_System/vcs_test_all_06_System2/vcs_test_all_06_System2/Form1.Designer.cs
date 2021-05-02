@@ -329,6 +329,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 40);
             this.button28.TabIndex = 29;
+            this.button28.Text = "取得各瀏覽器版本訊息";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -379,6 +380,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(200, 40);
             this.button36.TabIndex = 44;
+            this.button36.Text = "啟動螢幕保護";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -458,11 +460,12 @@
             // 
             // button32
             // 
-            this.button32.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button32.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button32.Location = new System.Drawing.Point(12, 346);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(200, 40);
             this.button32.TabIndex = 53;
+            this.button32.Text = "設定IE瀏覽器的預設主頁";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click_1);
             // 

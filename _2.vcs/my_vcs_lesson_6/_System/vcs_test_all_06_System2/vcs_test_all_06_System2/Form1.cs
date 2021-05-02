@@ -13,6 +13,8 @@ using System.Net.NetworkInformation;    //for Ping & PingReply
 
 using System.ServiceProcess;    //for ServiceController     參考/加入參考/.NET/System.ServiceProcess
 
+using Microsoft.Win32;      //for RegistryKey
+
 namespace vcs_test_all_06_System2
 {
     public partial class Form1 : Form
@@ -443,16 +445,46 @@ namespace vcs_test_all_06_System2
 
         private void button28_Click(object sender, EventArgs e)
         {
+            //取得各瀏覽器版本訊息
+
+            RegistryKey mreg;
+            mreg = Registry.LocalMachine;
+            mreg = mreg.CreateSubKey("software\\Microsoft\\Internet Explorer");
+            string IEVersion = "目前IE瀏覽器的版本訊息：\t" + (String)mreg.GetValue("Version");
+            mreg.Close();
+
+            richTextBox1.Text += IEVersion + "\n";
+
+            RegistryKey mreg2;
+            mreg2 = Registry.LocalMachine;
+            mreg2 = mreg2.CreateSubKey("software\\mozilla.org\\Mozilla");
+            string FirefoxVersion = "目前Firefox瀏覽器的版本訊息：\t" + (String)mreg2.GetValue("CurrentVersion");
+            mreg2.Close();
+
+            richTextBox1.Text += FirefoxVersion + "\n";
+
+
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
         }
 
+        //啟動螢幕保護 ST
+
+        private const int WM_SYSCOMMAND = 0x0112;
+        private const int SC_SCREENSAVE = 0xf140;
+
+        [DllImport("user32.dll")]
+        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
+
         private void button36_Click(object sender, EventArgs e)
         {
+            //啟動螢幕保護
+            SendMessage(this.Handle, WM_SYSCOMMAND, SC_SCREENSAVE, 0);
 
         }
+        //啟動螢幕保護 SP
 
         private void button37_Click(object sender, EventArgs e)
         {
@@ -507,6 +539,24 @@ namespace vcs_test_all_06_System2
 
         private void button32_Click_1(object sender, EventArgs e)
         {
+            //設定IE瀏覽器的預設主頁
+
+            //1.讀取目前IE的首頁
+            RegistryKey reg1 = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
+            object strInfo = reg1.GetValue("Start Page", "沒有值");
+            //this.textBox1.Text = (string)strInfo;
+            richTextBox1.Text += "IE目前的首頁:\t" + (string)strInfo + "\n";
+
+            //2.設定IE的首頁為空白頁
+            RegistryKey reg2 = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
+            reg2.SetValue("Start Page", "about:blank", RegistryValueKind.String);
+            richTextBox1.Text += "IE 目前的預設頁為\t空白頁\n";
+
+            //3.設定IE的首頁為Google首頁
+            string url = @"https://www.google.com.tw/";
+            RegistryKey reg3 = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
+            reg3.SetValue("Start Page", url, RegistryValueKind.String);
+            richTextBox1.Text += "IE 目前的預設頁為\t" + url + "\n";
         }
 
         private void button34_Click(object sender, EventArgs e)
