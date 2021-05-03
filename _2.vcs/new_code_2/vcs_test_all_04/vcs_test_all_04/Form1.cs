@@ -42,8 +42,8 @@ namespace vcs_test_all_04
         {
             show_item_location();
 
-            Image myImage = Image.FromFile(filename);
-            pictureBox1.Image = myImage;
+            Image image = Image.FromFile(filename);
+            pictureBox1.Image = image;
         }
 
         void show_item_location()
@@ -151,8 +151,8 @@ namespace vcs_test_all_04
             //檢視圖片的像素
             string filename1 = @"C:\______test_files\picture1.jpg";
 
-            Image myImage = Image.FromFile(filename1);
-            richTextBox1.Text += "檔案 : " + filename + ",\t" + "圖片像素：[" + myImage.Width + "*" + myImage.Height + "]" + "\n";
+            Image image = Image.FromFile(filename1);
+            richTextBox1.Text += "檔案 : " + filename + ",\t" + "圖片像素：[" + image.Width + "*" + image.Height + "]" + "\n";
         }
 
         #region  获取文件的播放时间，并在列表中进行显示
@@ -319,9 +319,9 @@ namespace vcs_test_all_04
 
         private void button11_Click(object sender, EventArgs e)
         {
-            Image myImage = pictureBox1.Image;
-            myImage.RotateFlip(RotateFlipType.Rotate90FlipXY);
-            pictureBox1.Image = myImage;
+            Image image = pictureBox1.Image;
+            image.RotateFlip(RotateFlipType.Rotate90FlipXY);
+            pictureBox1.Image = image;
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -344,46 +344,23 @@ namespace vcs_test_all_04
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //打開控制面板中的程序_滑鼠游標設定
-            System.Diagnostics.Process.Start("main.cpl");
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //打開控制面板中的程序_桌面設定
-            System.Diagnostics.Process.Start("desk.cpl");
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //打開控制面板中的程序_網路連接
-            System.Diagnostics.Process.Start("ncpa.cpl");
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //打開控制面板中的程序_聲音設定
-            System.Diagnostics.Process.Start("mmsys.cpl");
 
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //檢測系統啟動模式
-            string mode = SystemInformation.BootMode.ToString();
-            string str = "目前系統的啟動模式是：";
-            switch (mode)
-            {
-                case "FailSafe":
-                    MessageBox.Show(str + "不具有網絡支援的安全模式");
-                    break;
-                case "FailSafeWithNetwork":
-                    MessageBox.Show(str + "具有網絡支援的安全模式");
-                    break;
-                case "Normal":
-                    MessageBox.Show(str + "標準模式");
-                    break;
-            }
 
         }
 

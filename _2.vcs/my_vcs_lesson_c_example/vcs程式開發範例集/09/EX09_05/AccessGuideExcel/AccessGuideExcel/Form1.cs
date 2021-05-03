@@ -11,9 +11,17 @@ namespace AccessGuideExcel
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\__RW\_mdb\db1.mdb";
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         public void AccessGuideJoinExcel(string Access, string AccTable, string Excel)
@@ -21,7 +29,7 @@ namespace AccessGuideExcel
             try
             {
                 string tem_sql = "";//定義字串
-                string connstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Access + ";Persist Security Info=True";//記錄連接Access的語句
+                string connstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Access + ";Persist Security Info=True";//記錄連接Access的語句
                 System.Data.OleDb.OleDbConnection tem_conn = new System.Data.OleDb.OleDbConnection(connstr);//連接Access資料庫
                 System.Data.OleDb.OleDbCommand tem_comm;//定義OleDbCommand類
                 tem_conn.Open();//打開連接的Access資料庫
@@ -50,7 +58,8 @@ namespace AccessGuideExcel
 
         public void GetTable(string Apath,ComboBox ComBox)
         {
-            string connstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Apath + ";Persist Security Info=True";
+            //string connstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Apath + ";Persist Security Info=True";  //old
+            string connstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Apath + ";Persist Security Info=True";
             System.Data.OleDb.OleDbConnection tem_OleConn = new System.Data.OleDb.OleDbConnection(connstr);
             tem_OleConn.Open();
             DataTable tem_DataTable = tem_OleConn.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
@@ -67,12 +76,9 @@ namespace AccessGuideExcel
 
         private void button2_Click(object sender, EventArgs e)
         {
-            openFileDialog1.FileName = "";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                textBox1.Text = openFileDialog1.FileName;
-                GetTable(textBox1.Text, comboBox1);
-            }
+            textBox1.Text = filename;
+
+            GetTable(filename, comboBox1);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -81,5 +87,6 @@ namespace AccessGuideExcel
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                 textBox2.Text = folderBrowserDialog1.SelectedPath;
         }
+
     }
 }

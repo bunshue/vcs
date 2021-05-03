@@ -44,6 +44,8 @@
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -60,16 +62,16 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(222, 14);
+            this.richTextBox1.Location = new System.Drawing.Point(394, 14);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(662, 677);
+            this.richTextBox1.Size = new System.Drawing.Size(578, 564);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(709, 585);
+            this.bt_clear.Location = new System.Drawing.Point(863, 536);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(98, 32);
             this.bt_clear.TabIndex = 2;
@@ -150,7 +152,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(180, 50);
             this.button0.TabIndex = 9;
-            this.button0.Text = "讀取IE版本訊息";
+            this.button0.Text = "取得Owner與Company";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -171,57 +173,82 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(180, 50);
             this.button9.TabIndex = 11;
-            this.button9.Text = "禁止修改IE主頁設定";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
             this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(12, 577);
+            this.button10.Location = new System.Drawing.Point(208, 14);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 50);
             this.button10.TabIndex = 12;
-            this.button10.Text = "啟動IE主頁設定";
+            this.button10.Text = "取得各瀏覽器版本訊息";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
             this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button11.Location = new System.Drawing.Point(12, 633);
+            this.button11.Location = new System.Drawing.Point(208, 70);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(180, 50);
             this.button11.TabIndex = 13;
-            this.button11.Text = "修改IE瀏覽器標題欄內容";
+            this.button11.Text = "設定IE瀏覽器的預設主頁";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 
             this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(12, 689);
+            this.button12.Location = new System.Drawing.Point(208, 126);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(180, 50);
             this.button12.TabIndex = 14;
-            this.button12.Text = "恢復IE瀏覽器標題欄內容";
+            this.button12.Text = "禁止修改IE主頁設定";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
             this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button13.Location = new System.Drawing.Point(198, 689);
+            this.button13.Location = new System.Drawing.Point(208, 182);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(180, 50);
             this.button13.TabIndex = 15;
+            this.button13.Text = "啟動IE主頁設定";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // button14
+            // 
+            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button14.Location = new System.Drawing.Point(208, 238);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(180, 50);
+            this.button14.TabIndex = 16;
+            this.button14.Text = "修改IE瀏覽器標題欄內容";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // button15
+            // 
+            this.button15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button15.Location = new System.Drawing.Point(208, 294);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(180, 50);
+            this.button15.TabIndex = 17;
+            this.button15.Text = "恢復IE瀏覽器標題欄內容";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(896, 758);
+            this.ClientSize = new System.Drawing.Size(984, 605);
+            this.Controls.Add(this.button15);
+            this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
@@ -263,6 +290,8 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button15;
     }
 }
 

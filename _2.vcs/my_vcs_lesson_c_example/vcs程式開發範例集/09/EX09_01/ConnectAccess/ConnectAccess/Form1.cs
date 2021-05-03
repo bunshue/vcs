@@ -22,14 +22,14 @@ namespace ConnectAccess
         private void Form1_Load(object sender, EventArgs e)
         {
             //string ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data source='" + filename + "'";     old
-            string ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data source='" + filename + "'";
-            OleDbConnection oleCon = new OleDbConnection(ConStr);
-            OleDbDataAdapter oleDap = new OleDbDataAdapter("select * from 帳目", oleCon);
+            string ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename;
+            OleDbConnection Olecon = new OleDbConnection(ConStr);
+            OleDbDataAdapter OleDat = new OleDbDataAdapter("select * from 帳目", Olecon);
             DataSet ds = new DataSet();
-            oleDap.Fill(ds, "帳目");
+            OleDat.Fill(ds, "帳目");
             this.dataGridView1.DataSource = ds.Tables[0].DefaultView;
-            oleCon.Close();
-            oleCon.Dispose();
+            Olecon.Close();
+            Olecon.Dispose();
         }
     }
 }

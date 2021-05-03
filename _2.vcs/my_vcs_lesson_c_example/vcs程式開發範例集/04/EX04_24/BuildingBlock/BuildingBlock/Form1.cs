@@ -21,25 +21,24 @@ namespace BuildingBlock
         private void Form1_Load(object sender, EventArgs e)
         {
             Image image = Image.FromFile(filename);
-            this.BackgroundImage = image;
+            pictureBox1.Image = image;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        Bitmap ToBlock(Bitmap bitmap1)
         {
-            Graphics myGraphics = this.CreateGraphics();
-            Bitmap myBitmap = new Bitmap(this.BackgroundImage);
-            int myWidth, myHeight, i, j, iAvg, iPixel;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            int W, H, i, j, iAvg, iPixel;
             Color myColor, myNewColor;
             RectangleF myRect;
-            myWidth = myBitmap.Width;
-            myHeight = myBitmap.Height;
-            myRect = new RectangleF(0, 0, myWidth, myHeight);
-            Bitmap bitmap = myBitmap.Clone(myRect, System.Drawing.Imaging.PixelFormat.DontCare);
+            W = bitmap1.Width;
+            H = bitmap1.Height;
+            myRect = new RectangleF(0, 0, W, H);
+            Bitmap bitmap = bitmap1.Clone(myRect, System.Drawing.Imaging.PixelFormat.DontCare);
             i = 0;
-            while (i < myWidth - 1)
+            while (i < W - 1)
             {
                 j = 0;
-                while (j < myHeight - 1)
+                while (j < H - 1)
                 {
                     myColor = bitmap.GetPixel(i, j);
                     iAvg = (myColor.R + myColor.G + myColor.B) / 3;
@@ -54,9 +53,18 @@ namespace BuildingBlock
                 }
                 i = i + 1;
             }
-            myGraphics.Clear(Color.WhiteSmoke);
-            myGraphics.DrawImage(bitmap, new Rectangle(0, 0, myWidth, myHeight));
+            g.Clear(Color.WhiteSmoke);
+            g.DrawImage(bitmap, new Rectangle(0, 0, W, H));
+
+            return bitmap;
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Bitmap bmp = new Bitmap(filename);
+
+            pictureBox1.Image = ToBlock(bmp);
+        }
     }
 }
+

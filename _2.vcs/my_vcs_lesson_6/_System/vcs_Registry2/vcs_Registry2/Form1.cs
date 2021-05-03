@@ -38,8 +38,8 @@ namespace vcs_Registry2
             //button
             x_st = 12;
             y_st = 12;
-            dx = 150;
-            dy = 52;
+            dx = 185;
+            dy = 55;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -51,10 +51,13 @@ namespace vcs_Registry2
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -66,12 +69,39 @@ namespace vcs_Registry2
 
         private void button0_Click(object sender, EventArgs e)
         {
-            RegistryKey mreg;
-            mreg = Registry.LocalMachine;
-            mreg = mreg.CreateSubKey("software\\Microsoft\\Internet Explorer");
-            string IEVersion = "目前IE瀏覽器的版本訊息：" + (String)mreg.GetValue("Version");
-            mreg.Close();
-            richTextBox1.Text += IEVersion + "\n";
+            //取得Owner與Company
+            object owner_string = "", company_string = "";
+            OperatingSystem os_info = System.Environment.OSVersion;
+            if (os_info.Platform == PlatformID.Win32Windows)
+            {
+                // Windows 98?
+                owner_string = RegistryTools.GetRegistryValue(
+                    Registry.LocalMachine,
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\",
+                    "RegisteredOwner", "Unknown");
+                company_string = RegistryTools.GetRegistryValue(
+                    Registry.LocalMachine,
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\",
+                    "RegisteredOrganization", "Unknown");
+            }
+            else if (os_info.Platform == PlatformID.Win32NT)
+            {
+                // Windows NT.
+                owner_string = RegistryTools.GetRegistryValue(
+                    Registry.LocalMachine,
+                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\",
+                    "RegisteredOwner", "Unknown");
+                company_string = RegistryTools.GetRegistryValue(
+                    Registry.LocalMachine,
+                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\",
+                    "RegisteredOrganization", "Unknown");
+            }
+
+            richTextBox1.Text += "Owner :\t" + owner_string.ToString() + "\n";
+            richTextBox1.Text += "Company :\t" + company_string.ToString() + "\n";
+
+
+
 
         }
 
@@ -163,15 +193,59 @@ namespace vcs_Registry2
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //禁止修改IE主頁設定
-            RegistryKey reg = Registry.CurrentUser.CreateSubKey(@"SoftWare\Policies\Microsoft\Internet Explorer\Control Panel");
-            reg.SetValue("HomePage", 1, RegistryValueKind.DWord);
-            MessageBox.Show("禁止修改IE主頁設定成功");
 
 
         }
 
         private void button10_Click(object sender, EventArgs e)
+        {
+            //取得各瀏覽器版本訊息
+            RegistryKey mreg;
+            mreg = Registry.LocalMachine;
+            mreg = mreg.CreateSubKey("software\\Microsoft\\Internet Explorer");
+            string IEVersion = "目前IE瀏覽器的版本訊息：\t" + (String)mreg.GetValue("Version");
+            mreg.Close();
+            richTextBox1.Text += IEVersion + "\n";
+
+            RegistryKey mreg2;
+            mreg2 = Registry.LocalMachine;
+            mreg2 = mreg2.CreateSubKey("software\\mozilla.org\\Mozilla");
+            string FirefoxVersion = "目前Firefox瀏覽器的版本訊息：\t" + (String)mreg2.GetValue("CurrentVersion");
+            mreg2.Close();
+            richTextBox1.Text += FirefoxVersion + "\n";
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //設定IE瀏覽器的預設主頁
+
+            //1.讀取目前IE的首頁
+            RegistryKey reg1 = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
+            object strInfo = reg1.GetValue("Start Page", "沒有值");
+            //this.textBox1.Text = (string)strInfo;
+            richTextBox1.Text += "IE目前的首頁:\t" + (string)strInfo + "\n";
+
+            //2.設定IE的首頁為空白頁
+            RegistryKey reg2 = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
+            reg2.SetValue("Start Page", "about:blank", RegistryValueKind.String);
+            richTextBox1.Text += "IE 目前的預設頁為\t空白頁\n";
+
+            //3.設定IE的首頁為Google首頁
+            string url = @"https://www.google.com.tw/";
+            RegistryKey reg3 = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
+            reg3.SetValue("Start Page", url, RegistryValueKind.String);
+            richTextBox1.Text += "IE 目前的預設頁為\t" + url + "\n";
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //禁止修改IE主頁設定
+            RegistryKey reg = Registry.CurrentUser.CreateSubKey(@"SoftWare\Policies\Microsoft\Internet Explorer\Control Panel");
+            reg.SetValue("HomePage", 1, RegistryValueKind.DWord);
+            MessageBox.Show("禁止修改IE主頁設定成功");
+        }
+
+        private void button13_Click(object sender, EventArgs e)
         {
             //啟動IE主頁設定
             RegistryKey reg = Registry.CurrentUser.CreateSubKey(@"SoftWare\Policies\Microsoft\Internet Explorer\Control Panel");
@@ -179,7 +253,7 @@ namespace vcs_Registry2
             MessageBox.Show("啟動IE主頁設定成功");
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void button14_Click(object sender, EventArgs e)
         {
             //修改IE瀏覽器標題欄內容
             string new_title = "AAAAAAA";
@@ -188,14 +262,13 @@ namespace vcs_Registry2
             MessageBox.Show("修改成功");
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void button15_Click(object sender, EventArgs e)
         {
             //恢復IE瀏覽器標題欄內容
             RegistryKey reg = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
             reg.DeleteValue("Window Title", false);
             MessageBox.Show("恢復成功");
         }
-
     }
 }
 

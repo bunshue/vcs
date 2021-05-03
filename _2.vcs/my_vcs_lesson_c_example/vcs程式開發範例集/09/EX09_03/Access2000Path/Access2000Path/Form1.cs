@@ -16,6 +16,7 @@ namespace Access2000Path
 
         OleDbConnection Olecon;
         OleDbDataAdapter OleDat;
+
         DataTable dt;
         int MaxValue = 0, State = 1;
         string ConStr;
@@ -27,8 +28,17 @@ namespace Access2000Path
         private void Form1_Load(object sender, EventArgs e)
         {
             //ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + filename;
+            //ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data source='" + filename + "'";
             ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename;
             Olecon = new OleDbConnection(ConStr);
+
+            //顯示在dataGridView1 ST
+            OleDat = new OleDbDataAdapter("select * from 帳目", Olecon);
+            DataSet ds = new DataSet();
+            OleDat.Fill(ds, "帳目");
+            this.dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            //顯示在dataGridView1 SP
+
             Olecon.Open();
             MaxValue = Convert.ToInt32(new OleDbCommand("select Count(*) from 帳目", Olecon).ExecuteScalar());
             Olecon.Close();

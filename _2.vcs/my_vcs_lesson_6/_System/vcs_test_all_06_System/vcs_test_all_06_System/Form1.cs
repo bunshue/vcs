@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;   //for DllImport
 using System.Diagnostics;
 using Microsoft.VisualBasic.Devices;    //for Computer
@@ -18,7 +19,6 @@ using System.Collections;   //for DictionaryEntry
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Printing;  //for PrinterSettings
 
-using Microsoft.Win32;      //for Registry
 using System.Globalization;
 
 /*
@@ -133,7 +133,7 @@ namespace vcs_test_all_06_System
 
             dy = 0;
 
-            bt_memory.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 13+50);
+            bt_memory.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 13 + 50);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 25);
@@ -342,35 +342,6 @@ namespace vcs_test_all_06_System
 
         private void button12_Click(object sender, EventArgs e)
         {
-            object owner_string = "", company_string = "";
-            OperatingSystem os_info = System.Environment.OSVersion;
-            if (os_info.Platform == PlatformID.Win32Windows)
-            {
-                // Windows 98?
-                owner_string = RegistryTools.GetRegistryValue(
-                    Registry.LocalMachine,
-                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\",
-                    "RegisteredOwner", "Unknown");
-                company_string = RegistryTools.GetRegistryValue(
-                    Registry.LocalMachine,
-                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\",
-                    "RegisteredOrganization", "Unknown");
-            }
-            else if (os_info.Platform == PlatformID.Win32NT)
-            {
-                // Windows NT.
-                owner_string = RegistryTools.GetRegistryValue(
-                    Registry.LocalMachine,
-                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\",
-                    "RegisteredOwner", "Unknown");
-                company_string = RegistryTools.GetRegistryValue(
-                    Registry.LocalMachine,
-                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\",
-                    "RegisteredOrganization", "Unknown");
-            }
-
-            richTextBox1.Text += "Owner :\t" + owner_string.ToString() + "\n";
-            richTextBox1.Text += "Company :\t" + company_string.ToString() + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -388,7 +359,6 @@ namespace vcs_test_all_06_System
                 richTextBox1.Text += "電腦本機IP " + IPHost.AddressList[0].ToString() + "\n";
                 //MessageBox.Show(IPHost.AddressList[0].ToString(), "電腦本機IP");
             }
-
         }
 
         private void button15_Click(object sender, EventArgs e)

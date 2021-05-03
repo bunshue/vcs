@@ -13,8 +13,6 @@ using System.Net.NetworkInformation;    //for Ping & PingReply
 
 using System.ServiceProcess;    //for ServiceController     參考/加入參考/.NET/System.ServiceProcess
 
-using Microsoft.Win32;      //for RegistryKey
-
 namespace vcs_test_all_06_System2
 {
     public partial class Form1 : Form
@@ -37,7 +35,7 @@ namespace vcs_test_all_06_System2
             x_st = 10;
             y_st = 10;
             dx = 210;
-            dy = 42;
+            dy = 55;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -97,6 +95,7 @@ namespace vcs_test_all_06_System2
             button44.Location = new Point(x_st + dx * 0, y_st + dy * 11);
             button45.Location = new Point(x_st + dx * 1, y_st + dy * 11);
             button46.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            button47.Location = new Point(x_st + dx * 3, y_st + dy * 11);
 
             label1.Location = new Point(x_st + dx * 4, y_st + dy * 1 / 2 + 5);
             label1.Text = "";
@@ -106,6 +105,17 @@ namespace vcs_test_all_06_System2
 
             richTextBox1.Location = new Point(x_st + dx * 4 + dx / 2, y_st + dy * 0 + 80);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            //離開
+            Application.Exit();
         }
 
         //禁用視窗上的關閉按鈕
@@ -445,25 +455,21 @@ namespace vcs_test_all_06_System2
 
         private void button28_Click(object sender, EventArgs e)
         {
-            //取得各瀏覽器版本訊息
-
-            RegistryKey mreg;
-            mreg = Registry.LocalMachine;
-            mreg = mreg.CreateSubKey("software\\Microsoft\\Internet Explorer");
-            string IEVersion = "目前IE瀏覽器的版本訊息：\t" + (String)mreg.GetValue("Version");
-            mreg.Close();
-
-            richTextBox1.Text += IEVersion + "\n";
-
-            RegistryKey mreg2;
-            mreg2 = Registry.LocalMachine;
-            mreg2 = mreg2.CreateSubKey("software\\mozilla.org\\Mozilla");
-            string FirefoxVersion = "目前Firefox瀏覽器的版本訊息：\t" + (String)mreg2.GetValue("CurrentVersion");
-            mreg2.Close();
-
-            richTextBox1.Text += FirefoxVersion + "\n";
-
-
+            //檢測系統啟動模式
+            string mode = SystemInformation.BootMode.ToString();
+            string str = "目前系統的啟動模式是：";
+            switch (mode)
+            {
+                case "FailSafe":
+                    MessageBox.Show(str + "不具有網絡支援的安全模式");
+                    break;
+                case "FailSafeWithNetwork":
+                    MessageBox.Show(str + "具有網絡支援的安全模式");
+                    break;
+                case "Normal":
+                    MessageBox.Show(str + "標準模式");
+                    break;
+            }
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -488,6 +494,8 @@ namespace vcs_test_all_06_System2
 
         private void button37_Click(object sender, EventArgs e)
         {
+            //打開控制面板中的程序_桌面設定
+            System.Diagnostics.Process.Start("desk.cpl");
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -506,6 +514,8 @@ namespace vcs_test_all_06_System2
 
         private void button33_Click(object sender, EventArgs e)
         {
+            //打開控制面板中的程序_滑鼠游標設定
+            System.Diagnostics.Process.Start("main.cpl");
         }
 
         private void button23_Click_1(object sender, EventArgs e)
@@ -539,24 +549,6 @@ namespace vcs_test_all_06_System2
 
         private void button32_Click_1(object sender, EventArgs e)
         {
-            //設定IE瀏覽器的預設主頁
-
-            //1.讀取目前IE的首頁
-            RegistryKey reg1 = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
-            object strInfo = reg1.GetValue("Start Page", "沒有值");
-            //this.textBox1.Text = (string)strInfo;
-            richTextBox1.Text += "IE目前的首頁:\t" + (string)strInfo + "\n";
-
-            //2.設定IE的首頁為空白頁
-            RegistryKey reg2 = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
-            reg2.SetValue("Start Page", "about:blank", RegistryValueKind.String);
-            richTextBox1.Text += "IE 目前的預設頁為\t空白頁\n";
-
-            //3.設定IE的首頁為Google首頁
-            string url = @"https://www.google.com.tw/";
-            RegistryKey reg3 = Registry.CurrentUser.CreateSubKey(@"SoftWare\Microsoft\Internet Explorer\Main");
-            reg3.SetValue("Start Page", url, RegistryValueKind.String);
-            richTextBox1.Text += "IE 目前的預設頁為\t" + url + "\n";
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -577,21 +569,8 @@ namespace vcs_test_all_06_System2
 
         private void button41_Click(object sender, EventArgs e)
         {
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            //離開
-            Application.Exit();
+            //打開控制面板中的程序_網路連接
+            System.Diagnostics.Process.Start("ncpa.cpl");
         }
 
         private void button42_Click(object sender, EventArgs e)
@@ -608,6 +587,8 @@ namespace vcs_test_all_06_System2
 
         private void button45_Click(object sender, EventArgs e)
         {
+            //打開控制面板中的程序_聲音設定
+            System.Diagnostics.Process.Start("mmsys.cpl");
         }
 
         private void button46_Click(object sender, EventArgs e)

@@ -13,6 +13,8 @@ namespace ConnectExcel
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\__RW\_excel\2006年圖書銷售情況.xls";
+
         public Form1()
         {
             InitializeComponent();
@@ -22,7 +24,8 @@ namespace ConnectExcel
         {
             try
             {
-                string strOdbcCon = @"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=.\2006年圖書銷售情況.xls;Extended Properties=Excel 8.0";
+                //string strOdbcCon = @"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=.\2006年圖書銷售情況.xls;Extended Properties=Excel 8.0";  //old
+                string strOdbcCon = @"Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False;Data Source=./2006年圖書銷售情況.xls;Extended Properties=Excel 8.0";
                 OleDbConnection OleDB = new OleDbConnection(strOdbcCon);
                 OleDbDataAdapter OleDat = new OleDbDataAdapter("select * from [BookSell$]", OleDB);
                 DataTable dt = new DataTable();

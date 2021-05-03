@@ -38,14 +38,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(13, 13);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(391, 241);
+            this.dataGridView1.Size = new System.Drawing.Size(800, 323);
             this.dataGridView1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(416, 266);
+            this.ClientSize = new System.Drawing.Size(1007, 658);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "連接Access";

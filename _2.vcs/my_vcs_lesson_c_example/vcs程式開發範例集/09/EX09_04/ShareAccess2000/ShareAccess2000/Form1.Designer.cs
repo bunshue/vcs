@@ -38,14 +38,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(7, 10);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(435, 232);
+            this.dataGridView1.Size = new System.Drawing.Size(807, 306);
             this.dataGridView1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(449, 249);
+            this.ClientSize = new System.Drawing.Size(836, 496);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "連線網路分享的Access 2000資料庫";

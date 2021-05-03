@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectSQLServer", "ConnectSQLServer\ConnectSQLServer.csproj", "{AE44A91B-A185-4EAD-8341-EC0B2E2B9F71}"
 EndProject
 Global

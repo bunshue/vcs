@@ -39,7 +39,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(13, 30);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(395, 230);
+            this.dataGridView1.Size = new System.Drawing.Size(978, 456);
             this.dataGridView1.TabIndex = 0;
             // 
             // label1
@@ -48,7 +48,7 @@
             this.label1.ForeColor = System.Drawing.Color.Blue;
             this.label1.Location = new System.Drawing.Point(72, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(251, 12);
+            this.label1.Size = new System.Drawing.Size(232, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "使用Microsoft.Jet.OLEDB.4.0方式存取資料庫";
             // 
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 269);
+            this.ClientSize = new System.Drawing.Size(1018, 646);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";

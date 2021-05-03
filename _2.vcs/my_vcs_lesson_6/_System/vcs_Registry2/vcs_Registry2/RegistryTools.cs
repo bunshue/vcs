@@ -5,7 +5,7 @@ using System.Text;
 
 using Microsoft.Win32;
 
-namespace vcs_test_all_06_System
+namespace vcs_Registry2
 {
     class RegistryTools
     {
