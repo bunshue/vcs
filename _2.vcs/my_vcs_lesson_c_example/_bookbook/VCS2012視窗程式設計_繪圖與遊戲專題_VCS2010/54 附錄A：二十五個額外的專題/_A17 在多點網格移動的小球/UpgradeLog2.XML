@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="WindowsApplication1">
+</Property><Property Name="方案檔" Value="C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\WindowsApplication1.sln">
+</Property><Property Name="使用者選項檔" Value="C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\WindowsApplication1.suo">
+</Property><Property Name="Date" Value="2012年7月25日">
+</Property><Property Name="Time" Value="上午 10:14">
+</Property><Property Name="記錄檔編號" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="WindowsApplication1.sln" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\WindowsApplication1.sln">
+</Event><Event ErrorLevel="0" Project="" Source="WindowsApplication1.suo" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\WindowsApplication1.suo">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="WindowsApplication1.csproj" Description="專案檔已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\WindowsApplication1.csproj">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="BallInNet.cs" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\BallInNet.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="ClassMovingPoint.cs" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\ClassMovingPoint.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Form1.cs" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\Form1.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Form1.Designer.cs" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\Form1.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="G2D_PointAndLine.cs" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\G2D_PointAndLine.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Program.cs" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\Program.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Properties\AssemblyInfo.cs" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Properties\Resources.Designer.cs" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Properties\Settings.Designer.cs" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Properties\Settings.settings" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Form1.resx" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\Form1.resx">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Properties\Resources.resx" Description="檔案已成功備份為 C:\__20120711\VC# 2010 範例\54 附錄：額外的專題\_A17 在多點網格移動的小球\Backup\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="WindowsApplication1.csproj" Description="專案轉換成功">
+</Event><Event ErrorLevel="3" Project="WindowsApplication1" Source="WindowsApplication1.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="WindowsApplication1.sln" Description="方案轉換成功">
+</Event><Event ErrorLevel="3" Project="" Source="WindowsApplication1.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="WindowsApplication1.csproj" Description="掃描完成: 專案檔不需要升級。">
+</Event></UpgradeLog>

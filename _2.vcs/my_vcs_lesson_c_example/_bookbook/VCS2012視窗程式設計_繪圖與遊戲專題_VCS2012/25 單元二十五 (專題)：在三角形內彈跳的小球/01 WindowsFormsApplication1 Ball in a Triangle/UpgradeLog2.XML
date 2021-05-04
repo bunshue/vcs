@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="WindowsApplication1">
+</Property><Property Name="Solution File" Value="C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\WindowsApplication1.sln">
+</Property><Property Name="User Options File" Value="C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\WindowsApplication1.suo">
+</Property><Property Name="Date" Value="2012年7月9日">
+</Property><Property Name="Time" Value="上午 10:40">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="WindowsApplication1.sln" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\WindowsApplication1.sln">
+</Event><Event ErrorLevel="0" Project="" Source="WindowsApplication1.suo" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\WindowsApplication1.suo">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="WindowsApplication1.csproj" Description="Project file successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\WindowsApplication1.csproj">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="BallInATriangle.cs" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\BallInATriangle.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="ClassMovingPoint.cs" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\ClassMovingPoint.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Form1.cs" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\Form1.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Form1.Designer.cs" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\Form1.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="G2D_PointAndLine.cs" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\G2D_PointAndLine.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Program.cs" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\Program.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Properties\Resources.Designer.cs" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Properties\Settings.Designer.cs" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Properties\Settings.settings" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Form1.resx" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\Form1.resx">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="Properties\Resources.resx" Description="File successfully backed up as C:\第三本書 SRC\04 Ball_In_A_Triangle 三角形內的球\01 WindowsFormsApplication1 Ball in a Triangle\Backup\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="WindowsApplication1.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="WindowsApplication1" Source="WindowsApplication1.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="WindowsApplication1.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="WindowsApplication1.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="WindowsApplication1" Source="WindowsApplication1.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
