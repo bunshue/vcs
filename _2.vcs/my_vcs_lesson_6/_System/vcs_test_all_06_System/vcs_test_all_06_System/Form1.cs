@@ -37,7 +37,6 @@ namespace vcs_test_all_06_System
         public Form1()
         {
             InitializeComponent();
-            show_item_location();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -49,6 +48,7 @@ namespace vcs_test_all_06_System
                 richTextBox1.Text += "第 " + i.ToString() + " 項 : " + arg + "\n";
                 i++;
             }
+            show_item_location();
         }
 
         void show_item_location()
@@ -65,71 +65,78 @@ namespace vcs_test_all_06_System
             dy = 42;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button31.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button32.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button33.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button34.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            button35.Location = new Point(x_st + dx * 2, y_st + dy * 11);
 
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button15.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button40.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button41.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button42.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button43.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button44.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button45.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            button46.Location = new Point(x_st + dx * 3, y_st + dy * 10);
+            button47.Location = new Point(x_st + dx * 3, y_st + dy * 11);
 
-            button16.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button18.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button19.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button48.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button49.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button50.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button51.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button52.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            button53.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            button54.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            button55.Location = new Point(x_st + dx * 4, y_st + dy * 7);
+            button56.Location = new Point(x_st + dx * 4, y_st + dy * 8);
+            button57.Location = new Point(x_st + dx * 4, y_st + dy * 9);
+            button58.Location = new Point(x_st + dx * 4, y_st + dy * 10);
+            button59.Location = new Point(x_st + dx * 4, y_st + dy * 11);
 
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            label6.Location = new Point(x_st + dx * 3, y_st + dy * 12 + 30);
 
-            button24.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button25.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
+            groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 14);
 
-            button28.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button29.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button30.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button31.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-
-            button32.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button33.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button34.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button35.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-
-            button36.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button37.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button38.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-
-            button40.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button41.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button42.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            button43.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-
-            button44.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button45.Location = new Point(x_st + dx * 1, y_st + dy * 11);
-            button46.Location = new Point(x_st + dx * 2, y_st + dy * 11);
-            label6.Location = new Point(x_st + dx * 3, y_st + dy * 11 + 10);
-
-            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            richTextBox1.Size = new Size(420, 600);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-
-            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 12);
 
             dy = 0;
 
@@ -145,8 +152,6 @@ namespace vcs_test_all_06_System
             label3.Text = "";
             label4.Text = "";
             label5.Text = "";
-
-
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -183,6 +188,29 @@ namespace vcs_test_all_06_System
             this.Controls.Add(bt_exit); // 將按鈕加入表單
             bt_exit.BringToFront();     //移到最上層
         }
+
+        //關閉程式時，系統會問是否確認，只需要加下面這段就好 ST
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_SYSCOMMAND = 0x0112;
+            const int SC_CLOSE = 0xF060;
+            if (m.Msg == WM_SYSCOMMAND && (int)m.WParam == SC_CLOSE)
+            {
+                // 顯示MessageBox 
+                DialogResult Result = MessageBox.Show("確定關閉表單", "表單訊息", MessageBoxButtons.YesNo);
+                if (Result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    // 關閉Form 
+                    this.Close();
+                }
+                else
+                {
+                    return;
+                }
+            }
+            base.WndProc(ref m);
+        }
+        //關閉程式時，系統會問是否確認，只需要加下面這段就好 SP
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -445,7 +473,6 @@ namespace vcs_test_all_06_System
         {
             checkSuperuser chk = new checkSuperuser();
             chk.ShowDialog();
-
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -456,12 +483,40 @@ namespace vcs_test_all_06_System
 
         private void button23_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "取得目前應用程式版本\n";
+            richTextBox1.Text += "Ver：" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
 
+            richTextBox1.Text += "取得NOTEPAD版本資訊\n";
+            richTextBox1.Text += FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //取得程式的編譯時間
+            richTextBox1.Text += "編譯時間 : " + GetLinkerTime() + "\n";
+        }
 
+        //取得程式的編譯時間
+        DateTime GetLinkerTime()
+        {
+            var filePath = Assembly.GetExecutingAssembly().Location;
+
+            const int c_PeHeaderOffset = 60;
+            const int c_LinkerTimestampOffset = 8;
+
+            var buffer = new byte[256];
+
+            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                stream.Read(buffer, 0, 256);
+
+            var offset = BitConverter.ToInt32(buffer, c_PeHeaderOffset);
+            var secondsSince1970 = BitConverter.ToInt32(buffer, offset + c_LinkerTimestampOffset);
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+            var linkTimeUtc = epoch.AddSeconds(secondsSince1970);
+            var tz = TimeZoneInfo.Local;
+            var localTime = TimeZoneInfo.ConvertTimeFromUtc(linkTimeUtc, tz);
+            return localTime;
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -490,51 +545,6 @@ namespace vcs_test_all_06_System
             //方案總管空白處按右鍵/屬性/組件資訊, 修改要顯示的程式資訊
         }
 
-        private void button29_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "找出所有的COM port, ";
-
-            // Get a list of serial port names.
-            string[] ports = SerialPort.GetPortNames();
-
-            richTextBox1.Text += " 共有 " + ports.Length + " 個COM port\n";
-            // Display each port name to the console.
-            foreach (string port in ports)
-            {
-                richTextBox1.Text += "\t" + port + "\n";
-            }
-            richTextBox1.Text += "\n";
-        }
-
-        private void button36_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "詢問確定關閉表單\n";
-            richTextBox1.Text += "找個地方加入WndProc()即可\n";
-
-        }
-
-        //關閉程式時，系統會問是否確認，只需要加下面這段就好。
-        protected override void WndProc(ref Message m)
-        {
-            const int WM_SYSCOMMAND = 0x0112;
-            const int SC_CLOSE = 0xF060;
-            if (m.Msg == WM_SYSCOMMAND && (int)m.WParam == SC_CLOSE)
-            {
-                // 顯示MessageBox 
-                DialogResult Result = MessageBox.Show("確定關閉表單", "表單訊息", MessageBoxButtons.YesNo);
-                if (Result == System.Windows.Forms.DialogResult.Yes)
-                {
-                    // 關閉Form 
-                    this.Close();
-                }
-                else
-                {
-                    return;
-                }
-            }
-            base.WndProc(ref m);
-        }
-
         private void button27_Click(object sender, EventArgs e)
         {
             // 找出字體大小,並算出比例
@@ -545,10 +555,6 @@ namespace vcs_test_all_06_System
             dpiY = graphics.DpiY;
             richTextBox1.Text += "dpiX = " + dpiX.ToString() + "\n";
             richTextBox1.Text += "dpiY = " + dpiY.ToString() + "\n";
-        }
-
-        private void button37_Click(object sender, EventArgs e)
-        {
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -599,11 +605,21 @@ namespace vcs_test_all_06_System
                 return "32bit";
         }
 
+        private void button29_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "找出所有的COM port, ";
 
+            // Get a list of serial port names.
+            string[] ports = SerialPort.GetPortNames();
 
-
-
-
+            richTextBox1.Text += " 共有 " + ports.Length + " 個COM port\n";
+            // Display each port name to the console.
+            foreach (string port in ports)
+            {
+                richTextBox1.Text += "\t" + port + "\n";
+            }
+            richTextBox1.Text += "\n";
+        }
 
         private void button30_Click(object sender, EventArgs e)
         {
@@ -677,60 +693,6 @@ namespace vcs_test_all_06_System
 
         private void button32_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-            //取得螢幕解析度資料
-            System.Windows.Forms.Screen scr = System.Windows.Forms.Screen.PrimaryScreen;//PrimaryScreen 属性：获取主显示设备
-            richTextBox1.Text += "Bounds:\t\t" + scr.Bounds.ToString() + "\n"; //获取屏幕的边界。属性值是一个Rectangle结构的值
-            richTextBox1.Text += "DeviceName:\t" + scr.DeviceName.ToString() + "\n"; //获取与显示关联的设备名称
-            richTextBox1.Text += "Primary:\t\t" + scr.Primary.ToString() + "\n";   //该值指示某个显示是否为主设备
-            richTextBox1.Text += "WorkingArea:\t" + scr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
-            richTextBox1.Text += "BitsPerPixel:\t" + scr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
-        }
-
-        private void button23_Click_1(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "取得目前應用程式版本\n";
-            richTextBox1.Text += "Ver：" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
-
-            richTextBox1.Text += "取得NOTEPAD版本資訊\n";
-            richTextBox1.Text += FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
-        }
-
-        private void button24_Click_1(object sender, EventArgs e)
-        {
-            //取得程式的編譯時間
-            richTextBox1.Text += "編譯時間 : " + GetLinkerTime() + "\n";
-        }
-
-        //取得程式的編譯時間
-        DateTime GetLinkerTime()
-        {
-            var filePath = Assembly.GetExecutingAssembly().Location;
-
-            const int c_PeHeaderOffset = 60;
-            const int c_LinkerTimestampOffset = 8;
-
-            var buffer = new byte[256];
-
-            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-                stream.Read(buffer, 0, 256);
-
-            var offset = BitConverter.ToInt32(buffer, c_PeHeaderOffset);
-            var secondsSince1970 = BitConverter.ToInt32(buffer, offset + c_LinkerTimestampOffset);
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
-            var linkTimeUtc = epoch.AddSeconds(secondsSince1970);
-            var tz = TimeZoneInfo.Local;
-            var localTime = TimeZoneInfo.ConvertTimeFromUtc(linkTimeUtc, tz);
-            return localTime;
-        }
-
-        private void button32_Click_1(object sender, EventArgs e)
-        {
             //顯示所有邏輯磁碟機
             GetLogicalDrives();
         }
@@ -759,6 +721,17 @@ namespace vcs_test_all_06_System
             }
         }
 
+        private void button33_Click(object sender, EventArgs e)
+        {
+            //取得螢幕解析度資料
+            System.Windows.Forms.Screen scr = System.Windows.Forms.Screen.PrimaryScreen;//PrimaryScreen 属性：获取主显示设备
+            richTextBox1.Text += "Bounds:\t\t" + scr.Bounds.ToString() + "\n"; //获取屏幕的边界。属性值是一个Rectangle结构的值
+            richTextBox1.Text += "DeviceName:\t" + scr.DeviceName.ToString() + "\n"; //获取与显示关联的设备名称
+            richTextBox1.Text += "Primary:\t\t" + scr.Primary.ToString() + "\n";   //该值指示某个显示是否为主设备
+            richTextBox1.Text += "WorkingArea:\t" + scr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
+            richTextBox1.Text += "BitsPerPixel:\t" + scr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
+        }
+
         private void button34_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "到 【偵錯】→【視窗】→【即時運算】 看結果\n\r";
@@ -775,15 +748,31 @@ namespace vcs_test_all_06_System
             Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號3");
         }
 
+        private void button35_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "讀取程式預設值\n";
+            ReadSettings();
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "詢問確定關閉表單\n";
+            richTextBox1.Text += "找個地方加入WndProc()即可\n";
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+        }
+
         private void button38_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "C# 透過Win32取得滑鼠位置 GetCursorPos\n";
         }
 
-        private void button35_Click(object sender, EventArgs e)
+        private void button39_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "讀取程式預設值\n";
-            ReadSettings();
+            richTextBox1.Text += "寫入程式預設值\n";
+            SaveSettings();
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -843,44 +832,6 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "Line Status:\t" + status.PowerLineStatus.ToString() + "\n";
         }
 
-        [DllImport("User32")]
-        internal extern static bool GetCursorPos(out MousePoint point);
-
-        internal struct MousePoint
-        {
-            public int x;
-            public int y;
-        };
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            MousePoint point;
-            GetCursorPos(out point);
-            this.Text = point.x.ToString() + ", " + point.y.ToString();
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            Computer myComputer = new Computer();
-            label1.Text = "物理內存總量(B)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory);
-            label2.Text = "可用物理內存(B)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory);
-            label3.Text = "虛擬內存總量(B)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory);
-            label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory);
-
-            double cpu_usage;
-            cpu_usage = (double)pc.NextValue();
-            label5.Text = "CPU使用率 " + cpu_usage.ToString() + " %";
-        }
-
-        private void bt_memory_Click(object sender, EventArgs e)
-        {
-            timer2.Enabled = true;
-        }
 
         private void button42_Click(object sender, EventArgs e)
         {
@@ -910,10 +861,8 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
         }
 
-        private void button39_Click(object sender, EventArgs e)
+        private void button43_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "寫入程式預設值\n";
-            SaveSettings();
         }
 
         private void button44_Click(object sender, EventArgs e)
@@ -974,12 +923,110 @@ namespace vcs_test_all_06_System
 
         }
 
-
-
-        private void button43_Click(object sender, EventArgs e)
+        private void button47_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void button48_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button49_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button50_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button51_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button52_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button53_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button54_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button55_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button56_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button57_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button58_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button59_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        [DllImport("User32")]
+        internal extern static bool GetCursorPos(out MousePoint point);
+
+        internal struct MousePoint
+        {
+            public int x;
+            public int y;
+        };
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            MousePoint point;
+            GetCursorPos(out point);
+            this.Text = point.x.ToString() + ", " + point.y.ToString();
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            Computer myComputer = new Computer();
+            label1.Text = "物理內存總量(B)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory);
+            label2.Text = "可用物理內存(B)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory);
+            label3.Text = "虛擬內存總量(B)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory);
+            label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory);
+
+            double cpu_usage;
+            cpu_usage = (double)pc.NextValue();
+            label5.Text = "CPU使用率 " + cpu_usage.ToString() + " %";
+        }
+
+        private void bt_memory_Click(object sender, EventArgs e)
+        {
+            timer2.Enabled = true;
+        }
+
 
         // Save the current settings.
         private void SaveSettings()

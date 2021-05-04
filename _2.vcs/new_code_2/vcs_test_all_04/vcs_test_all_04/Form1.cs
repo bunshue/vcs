@@ -366,12 +366,6 @@ namespace vcs_test_all_04
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //取得計算機中已安裝的字體
-            InstalledFontCollection myFonts = new InstalledFontCollection();
-            foreach (FontFamily family in myFonts.Families)
-            {
-                richTextBox1.AppendText(family.Name + "\n");
-            }
 
         }
 

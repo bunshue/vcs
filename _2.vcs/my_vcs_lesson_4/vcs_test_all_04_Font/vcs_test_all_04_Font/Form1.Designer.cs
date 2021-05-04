@@ -248,9 +248,9 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(336, 199);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(266, 140);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
@@ -324,7 +324,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 40);
             this.button12.TabIndex = 49;
-            this.button12.Text = "取得所有字體";
+            this.button12.Text = "取得本機所有字體";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

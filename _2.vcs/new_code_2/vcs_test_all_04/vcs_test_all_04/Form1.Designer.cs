@@ -289,7 +289,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(132, 49);
             this.button21.TabIndex = 28;
-            this.button21.Text = "取得計算機中已安裝的字體";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 

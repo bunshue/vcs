@@ -119,34 +119,38 @@ namespace vcs_Wallpaper
         }
 
         // Display the file on the desktop.
-        private void DisplayPicture(string file_name, bool update_registry)
+        private void DisplayPicture(string filename, bool update_registry)
         {
+            //richTextBox1.Text += "將檔案 : " + filename + " 設定成桌布\n";
             try
             {
                 // If we should update the registry,
                 // set the appropriate flags.
                 uint flags = 0;
                 if (update_registry)
+                {
                     flags = SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE;
+                }
 
                 // Set the desktop background to this file.
-                if (!SystemParametersInfo(SPI_SETDESKWALLPAPER,
-                    0, file_name, flags))
+                if (!SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, filename, flags))
                 {
-                    MessageBox.Show("SystemParametersInfo failed.",
-                        "Error", MessageBoxButtons.OK,
-                        MessageBoxIcon.Exclamation);
+                    richTextBox1.Text += "*** SystemParametersInfo failed.\n";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error displaying picture " +
-                    file_name + ".\n" + ex.Message,
-                    "Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
+                MessageBox.Show("Error displaying picture " + filename + ".\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\picture1.jpg";
 
+            DisplayPicture(filename, true);     // Display the picture on the desktop.
+
+            richTextBox1.Text += "將檔案 : " + filename + " 設定成桌布, 完成\n";
+        }
     }
 }

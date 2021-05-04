@@ -21,6 +21,10 @@ namespace vcs_test_all_06_System2
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             show_item_location();
         }
 
@@ -38,63 +42,55 @@ namespace vcs_test_all_06_System2
             dy = 55;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button31.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button32.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button33.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button34.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            button35.Location = new Point(x_st + dx * 2, y_st + dy * 11);
 
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button15.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-
-            button16.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button18.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button19.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-
-            button24.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button25.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-
-            button28.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button29.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button30.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button31.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-
-            button32.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button33.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button34.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button35.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-
-            button36.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button37.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button38.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-
-            button40.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button41.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button42.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            button43.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-
-            button44.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button45.Location = new Point(x_st + dx * 1, y_st + dy * 11);
-            button46.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button40.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button41.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button42.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button43.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button44.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button45.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            button46.Location = new Point(x_st + dx * 3, y_st + dy * 10);
             button47.Location = new Point(x_st + dx * 3, y_st + dy * 11);
 
             label1.Location = new Point(x_st + dx * 4, y_st + dy * 1 / 2 + 5);
@@ -347,13 +343,6 @@ namespace vcs_test_all_06_System2
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //列出所有的Process
-            Process[] all = Process.GetProcesses();
-            int length = all.Length;
-            for (int index = 0; index < length; index++)
-            {
-                richTextBox1.Text += String.Format("{0} \tID:{1}", all[index].ProcessName, all[index].Id) + "\n";
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -371,12 +360,6 @@ namespace vcs_test_all_06_System2
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //列出firefox的Process
-            Process[] ps = Process.GetProcessesByName("firefox");
-            foreach (Process p in ps)
-            {
-                richTextBox1.Text += String.Format("{0} \tID:{1}", p.ProcessName, p.Id) + "\n";
-            }
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -438,7 +421,27 @@ namespace vcs_test_all_06_System2
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //判斷電腦中是否安裝了SQL軟體
+            if (ExitSQL())
+            {
+                richTextBox1.Text += "本機電腦中已經安裝SQL軟體\n";
+            }
+            else
+            {
+                richTextBox1.Text += "本機電腦中沒有安裝SQL軟體\n";
+            }
+        }
 
+        public bool ExitSQL()
+        {
+            bool sqlFlag = false;
+            ServiceController[] services = ServiceController.GetServices();
+            for (int i = 0; i < services.Length; i++)
+            {
+                if (services[i].DisplayName.ToString() == "MSSQLSERVER")
+                    sqlFlag = true;
+            }
+            return sqlFlag;
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -476,6 +479,39 @@ namespace vcs_test_all_06_System2
         {
         }
 
+        private void button30_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            //打開控制面板中的程序_桌面設定
+            System.Diagnostics.Process.Start("desk.cpl");
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            //打開控制面板中的程序_滑鼠游標設定
+            System.Diagnostics.Process.Start("main.cpl");
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            //打開控制面板中的程序_網路連接
+            System.Diagnostics.Process.Start("ncpa.cpl");
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            //打開控制面板中的程序_聲音設定
+            System.Diagnostics.Process.Start("mmsys.cpl");
+        }
+
         //啟動螢幕保護 ST
 
         private const int WM_SYSCOMMAND = 0x0112;
@@ -488,70 +524,10 @@ namespace vcs_test_all_06_System2
         {
             //啟動螢幕保護
             SendMessage(this.Handle, WM_SYSCOMMAND, SC_SCREENSAVE, 0);
-
         }
         //啟動螢幕保護 SP
 
         private void button37_Click(object sender, EventArgs e)
-        {
-            //打開控制面板中的程序_桌面設定
-            System.Diagnostics.Process.Start("desk.cpl");
-        }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-            //打開控制面板中的程序_滑鼠游標設定
-            System.Diagnostics.Process.Start("main.cpl");
-        }
-
-        private void button23_Click_1(object sender, EventArgs e)
-        {
-        }
-
-        public bool ExitSQL()
-        {
-            bool sqlFlag = false;
-            ServiceController[] services = ServiceController.GetServices();
-            for (int i = 0; i < services.Length; i++)
-            {
-                if (services[i].DisplayName.ToString() == "MSSQLSERVER")
-                    sqlFlag = true;
-            }
-            return sqlFlag;
-        }
-
-        private void button24_Click_1(object sender, EventArgs e)
-        {
-            //判斷電腦中是否安裝了SQL軟體
-            if (ExitSQL())
-            {
-                richTextBox1.Text += "本機電腦中已經安裝SQL軟體\n";
-            }
-            else
-            {
-                richTextBox1.Text += "本機電腦中沒有安裝SQL軟體\n";
-            }
-        }
-
-        private void button32_Click_1(object sender, EventArgs e)
-        {
-        }
-
-        private void button34_Click(object sender, EventArgs e)
         {
         }
 
@@ -559,7 +535,7 @@ namespace vcs_test_all_06_System2
         {
         }
 
-        private void button35_Click(object sender, EventArgs e)
+        private void button39_Click(object sender, EventArgs e)
         {
         }
 
@@ -569,15 +545,13 @@ namespace vcs_test_all_06_System2
 
         private void button41_Click(object sender, EventArgs e)
         {
-            //打開控制面板中的程序_網路連接
-            System.Diagnostics.Process.Start("ncpa.cpl");
         }
 
         private void button42_Click(object sender, EventArgs e)
         {
         }
 
-        private void button39_Click(object sender, EventArgs e)
+        private void button43_Click(object sender, EventArgs e)
         {
         }
 
@@ -587,20 +561,14 @@ namespace vcs_test_all_06_System2
 
         private void button45_Click(object sender, EventArgs e)
         {
-            //打開控制面板中的程序_聲音設定
-            System.Diagnostics.Process.Start("mmsys.cpl");
         }
 
         private void button46_Click(object sender, EventArgs e)
         {
         }
 
-        private void button43_Click(object sender, EventArgs e)
-        {
-        }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
+
+
     }
 }
