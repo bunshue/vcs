@@ -26,6 +26,11 @@ namespace vcs_test_all_03_Syntax
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //for Interaction,          //參考/加入參考/.NET/Microsoft.VisualBasic
+            string uName = Microsoft.VisualBasic.Interaction.InputBox("請輸入姓名", "程式啟動時，輸入資料");
+            DialogResult dr = MessageBox.Show(uName + "歡迎您！", "歡迎", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            this.Text = uName;	//表單標題顯示姓名
+
             show_item_location();
             textBox_hex.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
 
