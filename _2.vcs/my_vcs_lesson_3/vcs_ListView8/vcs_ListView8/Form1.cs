@@ -65,8 +65,8 @@ namespace vcs_ListView8
             {
                 // New column. Sort ascending.
                 sort_order = SortOrder.Ascending;
-            } 
-            else 
+            }
+            else
             {
                 // See if this is the same column.
                 if (new_sorting_column == SortingColumn)
@@ -108,5 +108,18 @@ namespace vcs_ListView8
             // Sort.
             listView1.Sort();
         }
+
+        //listView接受鍵盤的Delete鍵
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    listView1.SelectedItems[0].Remove();
+                }
+            }
+        }
     }
 }
+

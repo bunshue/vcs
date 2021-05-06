@@ -54,7 +54,7 @@ namespace vcs_ListViewA
             // Add up the column widths.
             int wid = 0;
             foreach (ColumnHeader col in listView1.Columns)
-        {
+            {
                 wid += col.Width;
             }
 
@@ -167,5 +167,16 @@ namespace vcs_ListViewA
             }
         }
 
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //listView接受鍵盤的Delete鍵
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    listView1.SelectedItems[0].Remove();
+                }
+            }
+        }
     }
 }

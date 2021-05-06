@@ -45,5 +45,18 @@ namespace vcs_ListViewB
             Rectangle item_rect =
                 listView1.GetItemRect(listView1.Items.Count - 1);
         }
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //listView接受鍵盤的Delete鍵
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    listView1.SelectedItems[0].Remove();
+                }
+            }
+        }
     }
 }
+

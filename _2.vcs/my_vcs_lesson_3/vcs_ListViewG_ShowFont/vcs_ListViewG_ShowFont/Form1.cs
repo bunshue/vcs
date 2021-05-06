@@ -79,5 +79,17 @@ namespace vcs_ListViewG_ShowFont
         {
             Show_Font_by_ListView();
         }
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //listView接受鍵盤的Delete鍵
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    listView1.SelectedItems[0].Remove();
+                }
+            }
+        }
     }
 }

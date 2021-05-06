@@ -132,21 +132,34 @@ namespace vcs_SendMail
                 mail.To.Add(new MailAddress(addr_to, "尊敬的收件者1"));
                 mail.To.Add(new MailAddress(addr_to, "尊敬的收件者2"));
 
-                //副本、密件副本
+                //副本
                 mail.CC.Add(new MailAddress(addr_to, "副本"));
+
+                //密件副本
                 mail.Bcc.Add(new MailAddress(addr_to, "密件副本"));
+
+
+                //對方回復郵件時默認的接收地址
+                mail.ReplyTo = new MailAddress(addr_from, "IMS-Sales", Encoding.GetEncoding(950));
+                mail.ReplyToList.Add(new MailAddress("David@insighteyes.com", "receiver"));
 
                 mail.Subject = subject; //郵件標題
                 mail.SubjectEncoding = Encoding.UTF8;//郵件標題編碼
 
+                //各種郵件內容的寫法
                 //mail.Body = ....      //郵件內容
                 //mail.Body = "莫聽穿林打葉聲，何妨吟嘯且徐行。竹杖芒鞋輕勝馬，誰怕？一蓑煙雨任平生。料峭春風吹酒醒，微冷，山頭斜照卻相迎。回首向來蕭瑟處，歸去，也無風雨也無晴。";
                 //mail.Body = richTextBox_mail.Text;
-                mailBody(mail);
-                mail.BodyEncoding = Encoding.UTF8;//郵件內容編碼 
+                //mailBody(mail);
+                //mail.Body = "<font color=\"red\">莫聽穿林打葉聲，何妨吟嘯且徐行</font>"; //郵件正文
+                mail.Body = "<html><body><h1>牡丹亭</h1><br><img src=\"C:\\______test_files\\picture1.jpg\"></body></html>";
+                mail.Body = "牡丹亭";
 
+                mail.BodyEncoding = Encoding.UTF8;//郵件內容編碼 
                 mail.IsBodyHtml = true; //是否是HTML郵件 
-                mail.ReplyToList.Add(new MailAddress("David@insighteyes.com", "receiver"));
+
+                //通知狀態 OnSuccess, OnFailure, Delay, None, Never
+                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure | DeliveryNotificationOptions.OnSuccess;
 
                 /*
                 //附加檔案 寫法 1
@@ -166,6 +179,10 @@ namespace vcs_SendMail
                 mail.Attachments.Add(new Attachment(filename1));
 
                 //附加檔案 寫法 4
+
+                mail.Attachments.Add(new Attachment(@"C:\______test_files\__RW\_word\Step.doc", System.Net.Mime.MediaTypeNames.Application.Rtf)); //添加附件，第二個參數表示附件的文件類型，可以不用指定
+
+                //附加檔案 寫法 5
                 /*
                 foreach (var attachment in sender.Attachments)
                 {

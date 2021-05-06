@@ -26,16 +26,6 @@ namespace WindowsFormsApplication1
             this.Invalidate(); // 要求重畫
         }
 
-        // 儲存檔案按鈕
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK) // 儲存影像檔
-            {
-                String output = saveFileDialog1.FileName;
-                img.Save(output, System.Drawing.Imaging.ImageFormat.Jpeg); // .jpg 格式
-            }
-        }
-
         // 表單重畫事件
         private void Form1_Paint(object sender, PaintEventArgs e)
         {

@@ -39,7 +39,7 @@
             this.radNoSort.AutoSize = true;
             this.radNoSort.Location = new System.Drawing.Point(0, 0);
             this.radNoSort.Name = "radNoSort";
-            this.radNoSort.Size = new System.Drawing.Size(59, 17);
+            this.radNoSort.Size = new System.Drawing.Size(57, 16);
             this.radNoSort.TabIndex = 4;
             this.radNoSort.TabStop = true;
             this.radNoSort.Text = "No sort";
@@ -51,7 +51,7 @@
             this.radSortAllColumns.AutoSize = true;
             this.radSortAllColumns.Location = new System.Drawing.Point(65, 0);
             this.radSortAllColumns.Name = "radSortAllColumns";
-            this.radSortAllColumns.Size = new System.Drawing.Size(114, 17);
+            this.radSortAllColumns.Size = new System.Drawing.Size(113, 16);
             this.radSortAllColumns.TabIndex = 5;
             this.radSortAllColumns.TabStop = true;
             this.radSortAllColumns.Text = "Sort on all columns";
@@ -63,7 +63,7 @@
             this.radSortClickedColumn.AutoSize = true;
             this.radSortClickedColumn.Location = new System.Drawing.Point(185, 0);
             this.radSortClickedColumn.Name = "radSortClickedColumn";
-            this.radSortClickedColumn.Size = new System.Drawing.Size(138, 17);
+            this.radSortClickedColumn.Size = new System.Drawing.Size(135, 16);
             this.radSortClickedColumn.TabIndex = 6;
             this.radSortClickedColumn.TabStop = true;
             this.radSortClickedColumn.Text = "Sort on clicked columns";
@@ -77,18 +77,19 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(0, 23);
+            this.listView1.Location = new System.Drawing.Point(0, 21);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(577, 243);
+            this.listView1.Size = new System.Drawing.Size(577, 225);
             this.listView1.TabIndex = 7;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyDown);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(577, 266);
+            this.ClientSize = new System.Drawing.Size(577, 246);
             this.Controls.Add(this.radNoSort);
             this.Controls.Add(this.radSortAllColumns);
             this.Controls.Add(this.radSortClickedColumn);

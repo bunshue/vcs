@@ -11,6 +11,8 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
+
         Image img; // Image 影像
         Image imgThumbnail; // Image 影像 小圖
         public Form1()
@@ -18,18 +20,13 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
-        // 開啟檔案按鈕
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)  // 開啟影像檔
-            {
-                String input = openFileDialog1.FileName;
-                img = Image.FromFile(input); // 產生一個Image物件
+            img = Image.FromFile(filename); // 產生一個Image物件
 
-                // 呈現 影像 的寬高資訊
-                label1.Text = "(" + img.Width.ToString() + ", " + img.Height.ToString() + ")";
-                this.Invalidate(); // 要求重畫
-            }
+            // 呈現 影像 的寬高資訊
+            label1.Text = "(" + img.Width.ToString() + ", " + img.Height.ToString() + ")";
+            this.Invalidate(); // 要求重畫
         }
 
         // 轉換成小圖 按鈕
@@ -59,5 +56,6 @@ namespace WindowsFormsApplication1
             if (imgThumbnail != null) // 呈現 Image 影像 小圖
                 e.Graphics.DrawImage(imgThumbnail, 200, 10, imgThumbnail.Width, imgThumbnail.Height);
         }
+
     }
 }

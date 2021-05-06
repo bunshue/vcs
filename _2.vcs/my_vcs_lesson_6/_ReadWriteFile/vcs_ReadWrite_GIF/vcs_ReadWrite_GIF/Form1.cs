@@ -17,12 +17,39 @@ namespace vcs_ReadWrite_GIF
 {
     public partial class Form1 : Form
     {
-        Bitmap bitmap = new Bitmap(@"C:\______test_files\__RW\_gif\cat.gif");
+        string filename1 = @"C:\______test_files\__RW\_gif\dog.gif";
+        string filename2 = @"C:\______test_files\__RW\_gif\cat.gif";
+
+        Bitmap bitmap1;
+        Bitmap bitmap2;
         bool current = false;
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bitmap1 = new Bitmap(filename1);
+            bitmap2 = new Bitmap(filename2);
+
+
+            if (ImageAnimator.CanAnimate(bitmap1)) // 是否 是動畫影像
+            {
+                // 播放動畫
+                ImageAnimator.Animate(bitmap1, new EventHandler(this.OnFrameChanged));
+            }
+        }
+
+        // 表單重畫事件
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            int x_st = 300;
+            int y_st = 0;
+
+            ImageAnimator.UpdateFrames(); // 推進到下一個動畫框架 Frame
+            e.Graphics.DrawImage(bitmap1, x_st, y_st, bitmap1.Width, bitmap1.Height);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -107,20 +134,21 @@ namespace vcs_ReadWrite_GIF
         {
             if (!current)
             {
-                ImageAnimator.Animate(bitmap, new EventHandler(this.OnFrameChanged));
+                ImageAnimator.Animate(bitmap2, new EventHandler(this.OnFrameChanged));
                 current = true;
             }
         }
 
+        // 當動畫框架變更時要呼叫的方法
         private void OnFrameChanged(object o, EventArgs e)
         {
-            this.Invalidate();
+            this.Invalidate(); // 要求表單重畫
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
 
-            e.Graphics.DrawImage(this.bitmap, new Point(1, 1));
+            e.Graphics.DrawImage(this.bitmap2, new Point(1, 1));
             ImageAnimator.UpdateFrames();
         }
 
@@ -129,15 +157,17 @@ namespace vcs_ReadWrite_GIF
             if (button3.Text == "播放GIF檔")
             {
                 PlayImage();
-                ImageAnimator.Animate(bitmap, new EventHandler(this.OnFrameChanged));//播放
+                ImageAnimator.Animate(bitmap2, new EventHandler(this.OnFrameChanged));//播放
 
                 button3.Text = "停止播放GIF檔";
             }
             else
             {
-                ImageAnimator.StopAnimate(bitmap, new EventHandler(this.OnFrameChanged));//停止
+                ImageAnimator.StopAnimate(bitmap2, new EventHandler(this.OnFrameChanged));//停止
                 button3.Text = "播放GIF檔";
             }
         }
+
+
     }
 }

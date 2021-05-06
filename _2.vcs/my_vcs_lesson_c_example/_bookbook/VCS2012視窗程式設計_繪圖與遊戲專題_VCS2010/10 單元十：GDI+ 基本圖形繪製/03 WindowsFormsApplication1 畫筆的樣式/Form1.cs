@@ -37,5 +37,10 @@ namespace WindowsFormsApplication1
             pen1.DashStyle = DashStyle.Solid; //實線
             e.Graphics.DrawLine(pen1, 10, 130, 200, 130);
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

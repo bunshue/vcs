@@ -11,23 +11,20 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
+
         Image img; // Image 影像
         public Form1()
         {
             InitializeComponent();
         }
 
-        // 開啟檔案按鈕
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK) // 開啟影像檔
-            {
-                String input = openFileDialog1.FileName;
-                img = Image.FromFile(input); // 產生一個Image物件
-                pictureBox1.BackgroundImage = img;
-                // 呈現 影像 的寬高資訊
-                label1.Text = "(" + img.Width.ToString() + ", " + img.Height.ToString() + ")";
-            }
+            img = Image.FromFile(filename); // 產生一個Image物件
+            pictureBox1.BackgroundImage = img;
+            // 呈現 影像 的寬高資訊
+            label1.Text = "(" + img.Width.ToString() + ", " + img.Height.ToString() + ")";
         }
 
         // 90 度旋轉按鈕
@@ -38,14 +35,5 @@ namespace WindowsFormsApplication1
             pictureBox1.Refresh(); // pictureBox1 重畫
         }
 
-        // 儲存檔案按鈕
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK) // 儲存影像檔
-            {
-                String output = saveFileDialog1.FileName;
-                img.Save(output, System.Drawing.Imaging.ImageFormat.Jpeg); // .jpg 格式
-            }
-        }
     }
 }
