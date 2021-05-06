@@ -62,16 +62,6 @@ namespace NetMail
       }
     }
 
-    private void mnuExit_Click(object sender, EventArgs e)
-    {
-      DialogResult result = MessageBox.Show("Are you sure to quit?", "Net Mail", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-
-      if (result == DialogResult.Yes)
-      {
-        this.Close();
-      }
-    }
-
     private void ProcessMail()
     {
       System.Net.Mail.SmtpClient mailClient = null;
