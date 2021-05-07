@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using Microsoft.VisualBasic;            //for AudioPlayMode
+using Microsoft.VisualBasic.Devices;    //for Computer
+
 using System.Runtime.InteropServices;   //for DllImport
 
 namespace vcs_SoundControl
@@ -46,6 +49,30 @@ namespace vcs_SoundControl
         {
             // 靜音 
             SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
+        }
+
+
+        //for Computer,          //參考/加入參考/.NET/Microsoft.VisualBasic
+
+        Computer myComputer = new Computer();
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // 播放在 Windows 音效配置中事件相關的音效
+            myComputer.Audio.PlaySystemSound(System.Media.SystemSounds.Asterisk);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // 播放外部的聲音檔
+            string filename = @"C:\______test_files\_wav\chimes.wav";
+            myComputer.Audio.Play(filename); // 聲音檔與執行檔同目錄
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            // 播放資源內嵌的聲音檔
+            myComputer.Audio.Play(Properties.Resources.ding, AudioPlayMode.WaitToComplete);
         }
     }
 }
