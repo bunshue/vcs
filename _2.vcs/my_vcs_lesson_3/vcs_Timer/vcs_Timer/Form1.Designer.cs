@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
@@ -63,6 +64,13 @@
             this.bt_start = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.pictureBox_runner = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.bt_sp = new System.Windows.Forms.Button();
+            this.bt_st = new System.Windows.Forms.Button();
+            this.timer_runner = new System.Windows.Forms.Timer(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -71,13 +79,15 @@
             this.groupBox3.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_runner)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(735, 278);
+            this.richTextBox1.Location = new System.Drawing.Point(862, 242);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(342, 298);
+            this.richTextBox1.Size = new System.Drawing.Size(311, 307);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -183,7 +193,7 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(481, 21);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(433, 242);
+            this.groupBox2.Size = new System.Drawing.Size(375, 201);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Timer";
@@ -192,7 +202,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(199, 94);
+            this.label3.Location = new System.Drawing.Point(154, 80);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(136, 21);
             this.label3.TabIndex = 13;
@@ -201,7 +211,7 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(61, 155);
+            this.button5.Location = new System.Drawing.Point(16, 141);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(97, 36);
             this.button5.TabIndex = 12;
@@ -214,7 +224,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(190, 133);
+            this.label2.Location = new System.Drawing.Point(145, 119);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(223, 64);
             this.label2.TabIndex = 11;
@@ -223,7 +233,7 @@
             // numericUpDown2
             // 
             this.numericUpDown2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown2.Location = new System.Drawing.Point(254, 38);
+            this.numericUpDown2.Location = new System.Drawing.Point(209, 24);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(89, 33);
             this.numericUpDown2.TabIndex = 10;
@@ -237,7 +247,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown1.Location = new System.Drawing.Point(107, 38);
+            this.numericUpDown1.Location = new System.Drawing.Point(62, 24);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(89, 33);
             this.numericUpDown1.TabIndex = 9;
@@ -246,7 +256,7 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(61, 98);
+            this.button6.Location = new System.Drawing.Point(16, 84);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(97, 36);
             this.button6.TabIndex = 8;
@@ -258,7 +268,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(57, 42);
+            this.label4.Location = new System.Drawing.Point(12, 28);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(204, 21);
             this.label4.TabIndex = 7;
@@ -344,7 +354,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 566);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1089, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1190, 22);
             this.statusStrip1.TabIndex = 32;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -419,11 +429,79 @@
             this.label5.TabIndex = 1;
             this.label5.Text = "讀取進度：";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.pictureBox_runner);
+            this.groupBox5.Controls.Add(this.label6);
+            this.groupBox5.Controls.Add(this.bt_sp);
+            this.groupBox5.Controls.Add(this.bt_st);
+            this.groupBox5.Location = new System.Drawing.Point(862, 21);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(311, 201);
+            this.groupBox5.TabIndex = 15;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Timer";
+            // 
+            // pictureBox_runner
+            // 
+            this.pictureBox_runner.Location = new System.Drawing.Point(152, 28);
+            this.pictureBox_runner.Name = "pictureBox_runner";
+            this.pictureBox_runner.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_runner.TabIndex = 14;
+            this.pictureBox_runner.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.Location = new System.Drawing.Point(28, 162);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(136, 21);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "時間經過：秒";
+            // 
+            // bt_sp
+            // 
+            this.bt_sp.Enabled = false;
+            this.bt_sp.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_sp.Location = new System.Drawing.Point(20, 92);
+            this.bt_sp.Name = "bt_sp";
+            this.bt_sp.Size = new System.Drawing.Size(97, 36);
+            this.bt_sp.TabIndex = 12;
+            this.bt_sp.Text = "停止";
+            this.bt_sp.UseVisualStyleBackColor = true;
+            this.bt_sp.Click += new System.EventHandler(this.bt_sp_Click);
+            // 
+            // bt_st
+            // 
+            this.bt_st.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_st.Location = new System.Drawing.Point(20, 35);
+            this.bt_st.Name = "bt_st";
+            this.bt_st.Size = new System.Drawing.Size(97, 36);
+            this.bt_st.TabIndex = 8;
+            this.bt_st.Text = "開始";
+            this.bt_st.UseVisualStyleBackColor = true;
+            this.bt_st.Click += new System.EventHandler(this.bt_st_Click);
+            // 
+            // timer_runner
+            // 
+            this.timer_runner.Tick += new System.EventHandler(this.timer_runner_Tick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "man1.gif");
+            this.imageList1.Images.SetKeyName(1, "man2.gif");
+            this.imageList1.Images.SetKeyName(2, "man3.gif");
+            this.imageList1.Images.SetKeyName(3, "man4.gif");
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1089, 588);
+            this.ClientSize = new System.Drawing.Size(1190, 588);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox3);
@@ -447,6 +525,9 @@
             this.statusStrip1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_runner)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -488,6 +569,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button bt_stop;
         private System.Windows.Forms.Button bt_start;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button bt_sp;
+        private System.Windows.Forms.Button bt_st;
+        private System.Windows.Forms.PictureBox pictureBox_runner;
+        private System.Windows.Forms.Timer timer_runner;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 

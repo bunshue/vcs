@@ -5153,13 +5153,13 @@ namespace vcs_Draw9_Example
             draw_gamma_curve(g, yst, Color.Yellow);
 
             int dy = 50;
-            g.DrawString("灰色: 標準的gamma2.4".ToString(), new Font("細明體", 25), new SolidBrush(Color.Gray), new PointF(800, 50 + dy*0));
-            g.DrawString("紅色: IC的預設值".ToString(), new Font("細明體", 25), new SolidBrush(Color.Red), new PointF(800, 50+ dy*1));
-            g.DrawString("綠色: Gamma2.4 @ 2020/3/6".ToString(), new Font("細明體", 25), new SolidBrush(Color.Green), new PointF(800, 50+ dy*2));
-            g.DrawString("藍色: HLG2".ToString(), new Font("細明體", 25), new SolidBrush(Color.Blue), new PointF(800, 50+ dy*3));
-            g.DrawString("黃色: SLG".ToString(), new Font("細明體", 25), new SolidBrush(Color.Yellow), new PointF(800, 50+ dy*4));
+            g.DrawString("灰色: 標準的gamma2.4".ToString(), new Font("細明體", 25), new SolidBrush(Color.Gray), new PointF(800, 50 + dy * 0));
+            g.DrawString("紅色: IC的預設值".ToString(), new Font("細明體", 25), new SolidBrush(Color.Red), new PointF(800, 50 + dy * 1));
+            g.DrawString("綠色: Gamma2.4 @ 2020/3/6".ToString(), new Font("細明體", 25), new SolidBrush(Color.Green), new PointF(800, 50 + dy * 2));
+            g.DrawString("藍色: HLG2".ToString(), new Font("細明體", 25), new SolidBrush(Color.Blue), new PointF(800, 50 + dy * 3));
+            g.DrawString("黃色: SLG".ToString(), new Font("細明體", 25), new SolidBrush(Color.Yellow), new PointF(800, 50 + dy * 4));
 
-            g.DrawRectangle(new Pen(Color.Red,5), new Rectangle(0, 0, pictureBox1.Width - 5, pictureBox1.Height - 5));  //畫外框
+            g.DrawRectangle(new Pen(Color.Red, 5), new Rectangle(0, 0, pictureBox1.Width - 5, pictureBox1.Height - 5));  //畫外框
             pictureBox1.Image = bitmap1;
         }
 
@@ -6031,17 +6031,167 @@ namespace vcs_Draw9_Example
 
         //在餅型圖的外圍顯示說明文字 SP
 
+        //謝爾平斯基的三角形 ST
+        //Sierpinski triangle 謝爾平斯基的三角形
         private void button37_Click(object sender, EventArgs e)
         {
+            PointF[] pt = new PointF[3];  // 3個點座標陣列
+            // 中心點　在視窗客戶區的　正中心
+            PointF center = new PointF(this.pictureBox1.ClientSize.Width / 2, this.pictureBox1.ClientSize.Height / 2);
+            // 半徑　取短的
+            float D = Math.Min(this.pictureBox1.ClientSize.Width / 2, this.pictureBox1.ClientSize.Height / 2) - 10;
+
+            // 　　　　p0
+            //      p2     p1 
+            for (int i = 0; i < 3; i++) // 定義一個正三角形 的三個角的座標
+            {
+                pt[i].X = (float)(center.X + D * Math.Cos(-Math.PI / 2 + i * 2 * Math.PI / 3));
+                pt[i].Y = (float)(center.Y + D * Math.Sin(-Math.PI / 2 + i * 2 * Math.PI / 3));
+            }
+
+            DrawTriangle(pt[0], pt[1], pt[2]); // 畫出第一個 正三角形
+            Sierp(pt[0], pt[1], pt[2], 0);
         }
 
+        private void DrawTriangle(PointF p0, PointF p1, PointF p2)
+        {
+            Graphics g = this.pictureBox1.CreateGraphics();// 取得 表單畫布
+            g.DrawLine(Pens.Black, p0, p1); // 畫出三角形
+            g.DrawLine(Pens.Black, p1, p2);
+            g.DrawLine(Pens.Black, p2, p0);
+        }
+
+        void Sierp(PointF p0, PointF p1, PointF p2, int n)
+        {
+            PointF m0 = new PointF(); // 新的三個點座標
+            PointF m1 = new PointF();
+            PointF m2 = new PointF();
+
+            if (n < 10)
+            {
+                // 　　　　p0
+                //       /     \
+                //     m1        m2
+                //    /            \
+                // p2 ---- m0 ----  p1
+                //
+                m2.X = (p0.X + p1.X) / 2; // 新的三個點座標
+                m2.Y = (p0.Y + p1.Y) / 2;
+
+                m1.X = (p0.X + p2.X) / 2;
+                m1.Y = (p0.Y + p2.Y) / 2;
+
+                m0.X = (p2.X + p1.X) / 2;
+                m0.Y = (p2.Y + p1.Y) / 2;
+
+                DrawTriangle(m0, m1, m2); // 畫出 新的三角形
+
+                // 以三個新的三角形 往下呼叫
+                Sierp(p0, m2, m1, n + 1);
+                Sierp(m1, m0, p2, n + 1);
+                Sierp(m2, p1, m0, n + 1);
+            }
+        }
+        //謝爾平斯基的三角形 SP
+
+        //圓圈拼圖 ST
         private void button38_Click(object sender, EventArgs e)
         {
+            Graphics g = this.pictureBox1.CreateGraphics();// 取得 表單畫布
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int D = this.pictureBox1.ClientSize.Height / 6; // 第一個圓的半徑
+            Point p = new Point(this.pictureBox1.ClientSize.Width / 2, this.pictureBox1.ClientSize.Height / 2);
+
+            g.TranslateTransform(p.X, p.Y); // 從這個點開始長出
+            g.FillEllipse(Brushes.Red, -D, -D, 2 * D, 2 * D); // 繪出第一個圓
+
+            int n = 6; // 遞迴深入 6 層
+            Matrix m = g.Transform;  // 暫存目前的 矩陣
+            Draw1(g, p, n, D, 0); //呼叫 遞迴函數 開始圓圈的增長 右
+
+            g.Transform = m;
+            Draw1(g, p, n, D, 90); //呼叫 遞迴函數 開始圓圈的增長 下
+
+            g.Transform = m;
+            Draw1(g, p, n, D, 180); //呼叫 遞迴函數 開始圓圈的增長 左
+
+            g.Transform = m;
+            Draw1(g, p, n, D, 270); //呼叫 遞迴函數 開始圓圈的增長 上
         }
 
+        // 遞迴函數
+        void Draw1(Graphics g, Point p, int n, int D, float Angle)
+        {
+            if (n > 0) // 共有 n 層
+            {
+                n = n - 1;
+                int D2 = (int)(D * 0.5f); // 這一層的 圓的半徑
+
+                Point p1 = new Point(D2, 0);
+                g.RotateTransform(Angle);      // 從上一層 圓圈 長出去的角度
+                g.TranslateTransform(D + D2, 0); // 從這個點開始長出
+                if (n % 2 == 0) // 偶數著紅色
+                {
+                    g.FillEllipse(Brushes.Red, -D2, -D2, 2 * D2, 2 * D2);
+                }
+                else  // 奇數著藍色
+                {
+                    g.FillEllipse(Brushes.Blue, -D2, -D2, 2 * D2, 2 * D2);
+                }
+                Matrix m = g.Transform; // 暫存目前的 矩陣 
+                Draw1(g, p1, n, D2, 0); // 同方向 繼續長出去
+
+                g.Transform = m; // 取回先前暫存的 矩陣 
+                Draw1(g, p1, n, D2, 90); // 同方向 轉 90 度繼續長出去
+
+                g.Transform = m; // 取回先前暫存的 矩陣
+                Draw1(g, p1, n, D2, -90); // 同方向 轉 -90 度繼續長出去
+            }
+        }
+        //圓圈拼圖 SP
+
+        //樹木的增長 ST
         private void button39_Click(object sender, EventArgs e)
         {
+            Graphics g = this.pictureBox1.CreateGraphics();// 取得 表單畫布
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int len = this.pictureBox1.ClientSize.Height / 7; // 第一根樹枝的高度
+            Point p1 = new Point(this.pictureBox1.ClientSize.Width / 2, this.pictureBox1.ClientSize.Height);
+            Point p2 = new Point(this.pictureBox1.ClientSize.Width / 2, this.pictureBox1.ClientSize.Height - len);
+            g.DrawLine(Pens.Black, p1, p2); // 繪出第一根樹枝
+
+            Draw2(g, p2, 10, len); //呼叫 遞迴函數 開始樹木的增長
         }
+
+        void Draw2(Graphics g, Point p, int n, int len)
+        {
+            if (n > 0) // 共有 n 層
+            {
+                n = n - 1;
+                int len2 = (int)(len * 0.9f); // 這一層的 樹枝的高度
+                Point p1 = new Point(0, 0);
+                Point p2 = new Point(0, -len2);
+
+                g.TranslateTransform(p.X, p.Y); // 從這個點開始長出
+                Matrix m = g.Transform; // 暫存目前的 矩陣 (左枝 還要用)
+
+                // 右枝
+                g.RotateTransform(15);
+                g.DrawLine(Pens.Black, p1, p2);  // 長出
+                Draw2(g, p2, n, len2);  // 呼叫 下一層
+
+                // 左枝
+                g.Transform = m;
+                g.RotateTransform(-15);
+                g.DrawLine(Pens.Black, p1, p2); // 長出
+                Draw2(g, p2, n, len2); // 呼叫 下一層
+            }
+        }
+
+        //樹木的增長 SP
 
         private void button40_Click(object sender, EventArgs e)
         {
@@ -6211,3 +6361,4 @@ namespace vcs_Draw9_Example
         }
     }
 }
+

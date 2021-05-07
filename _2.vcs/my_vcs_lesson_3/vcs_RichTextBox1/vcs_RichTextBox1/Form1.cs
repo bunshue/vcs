@@ -637,11 +637,13 @@ namespace vcs_RichTextBox1
         private void button35_Click(object sender, EventArgs e)
         {
             textBox1.Text = value2.ToString("F4");
+            //textBox1.Text = value2.ToString("F0");  //四捨五入到整數
+            //textBox1.Text = value2.ToString("F1");  //四捨五入到小數點下一位
         }
 
         private void button36_Click(object sender, EventArgs e)
         {
-            textBox1.Text = value3.ToString("#0.00");         //格式化，小數點後留2位
+            textBox1.Text = value3.ToString("#0.00");         //格式化，小數點後留2位，四捨五入
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -651,9 +653,10 @@ namespace vcs_RichTextBox1
 
         private void button38_Click(object sender, EventArgs e)
         {
-            int money = 1234;
+            double money = 1234.567;
             richTextBox1.Text += "\n";
             richTextBox1.Text += money.ToString("C") + "\n";
+            richTextBox1.Text += "新台幣：" + money.ToString("C0") + "元\n"; //到整數
             richTextBox1.Text += money.ToString("C", CultureInfo.CurrentCulture) + "\n";
             richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("da-DK")) + "\n";
             richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("en-US")) + "\n";
@@ -954,4 +957,3 @@ namespace vcs_RichTextBox1
         }
     }
 }
-

@@ -549,11 +549,12 @@
             // 
             // button37
             // 
-            this.button37.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button37.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button37.Location = new System.Drawing.Point(993, 310);
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(100, 40);
             this.button37.TabIndex = 67;
+            this.button37.Text = "謝爾平斯基的三角形";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -564,6 +565,7 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(100, 40);
             this.button38.TabIndex = 66;
+            this.button38.Text = "圓圈拼圖";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
@@ -574,6 +576,7 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(100, 40);
             this.button39.TabIndex = 65;
+            this.button39.Text = "樹木的增長";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 

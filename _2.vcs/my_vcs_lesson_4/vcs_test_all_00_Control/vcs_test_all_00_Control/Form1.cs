@@ -88,6 +88,18 @@ namespace vcs_test_all_00_Control
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //先顯示一個訊息, 再開啟主程式
+            string str = "";
+            for (int i = 1; i <= 6; i++)		// 被乘數
+            {
+                for (int j = 1; j <= 6; j++) 		// 乘數
+                {   // 將 i x j = (i * j) 合併str後再指定給str
+                    str += i + "x" + j + "=" + (i * j) + '\t';
+                }
+                str += '\n';   // 換行
+            }
+            MessageBox.Show(str);  //顯示結果
+
             // Set the small and large sizes.
             SmallSize = flp1.Size;
             LargeSize = new Size(

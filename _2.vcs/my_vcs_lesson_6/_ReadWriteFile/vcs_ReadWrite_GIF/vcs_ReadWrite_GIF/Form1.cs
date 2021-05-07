@@ -34,11 +34,10 @@ namespace vcs_ReadWrite_GIF
             bitmap1 = new Bitmap(filename1);
             bitmap2 = new Bitmap(filename2);
 
-
             if (ImageAnimator.CanAnimate(bitmap1)) // 是否 是動畫影像
             {
                 // 播放動畫
-                ImageAnimator.Animate(bitmap1, new EventHandler(this.OnFrameChanged));
+                ImageAnimator.Animate(bitmap1, new EventHandler(this.OnFrameChanged1));
             }
         }
 
@@ -134,19 +133,27 @@ namespace vcs_ReadWrite_GIF
         {
             if (!current)
             {
-                ImageAnimator.Animate(bitmap2, new EventHandler(this.OnFrameChanged));
+                ImageAnimator.Animate(bitmap2, new EventHandler(this.OnFrameChanged2));
                 current = true;
             }
         }
 
         // 當動畫框架變更時要呼叫的方法
-        private void OnFrameChanged(object o, EventArgs e)
+        private void OnFrameChanged1(object o, EventArgs e)
+        {
+            this.Invalidate(); // 要求表單重畫
+        }
+
+        // 當動畫框架變更時要呼叫的方法
+        private void OnFrameChanged2(object o, EventArgs e)
         {
             this.Invalidate(); // 要求表單重畫
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
+            e.Graphics.DrawImage(this.bitmap1, new Point(300, 30));
+            ImageAnimator.UpdateFrames();
 
             e.Graphics.DrawImage(this.bitmap2, new Point(1, 1));
             ImageAnimator.UpdateFrames();
@@ -157,17 +164,35 @@ namespace vcs_ReadWrite_GIF
             if (button3.Text == "播放GIF檔")
             {
                 PlayImage();
-                ImageAnimator.Animate(bitmap2, new EventHandler(this.OnFrameChanged));//播放
+                ImageAnimator.Animate(bitmap2, new EventHandler(this.OnFrameChanged2));//播放
 
                 button3.Text = "停止播放GIF檔";
             }
             else
             {
-                ImageAnimator.StopAnimate(bitmap2, new EventHandler(this.OnFrameChanged));//停止
+                ImageAnimator.StopAnimate(bitmap2, new EventHandler(this.OnFrameChanged2));//停止
                 button3.Text = "播放GIF檔";
             }
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (button4.Text == "停止")
+            {
+                // 停止播放動畫
+                ImageAnimator.StopAnimate(bitmap1, new EventHandler(this.OnFrameChanged1));
+                button4.Text = "開始";
+            }
+            else
+            {
+                button4.Text = "停止";
 
+                if (ImageAnimator.CanAnimate(bitmap1)) // 是否 是動畫影像
+                {
+                    // 播放動畫
+                    ImageAnimator.Animate(bitmap1, new EventHandler(this.OnFrameChanged1));
+                }
+            }
+        }
     }
 }

@@ -33,6 +33,8 @@ namespace vcs_Timer
             //for countdown timer SP
 
             toolStripStatusLabel1.Text = DateTime.Now.ToString();
+
+            pictureBox_runner.Image = imageList1.Images[0];// 顯示第1張圖
         }
 
         int toggle = 0;
@@ -206,6 +208,44 @@ namespace vcs_Timer
                 bt_start.Enabled = true;
                 bt_stop.Enabled = false;
             }
+        }
+
+        int no = 0;  // 用來表示目前是幾張圖
+        DateTime timeNow;  // 用來記錄目前時間
+
+        // timer 每0.1秒執行一次
+        private void timer_runner_Tick(object sender, EventArgs e)
+        {
+            if (no < 4)   // 判斷no是否小於4
+            {
+                pictureBox_runner.Image = imageList1.Images[no];  // 顯示第no張圖
+                no++;   // 切換到下一張圖
+                label6.Text = "總共花費  " + (DateTime.Now - timeNow).TotalSeconds.ToString() + "  秒";
+            }
+            else
+            {
+                no = 0;  // 切換到第一張圖
+            }
+        }
+
+        private void bt_st_Click(object sender, EventArgs e)
+        {
+            no = 0;  // 切換到第一張圖
+            timer_runner.Enabled = true;
+            timeNow = DateTime.Now;
+            label6.Text = "開始計時";
+            bt_st.Enabled = false;
+            bt_sp.Enabled = true;
+        }
+
+        private void bt_sp_Click(object sender, EventArgs e)
+        {
+            timer_runner.Enabled = false;
+            // 計算花費時間
+            label6.Text = "總共花費  " + (DateTime.Now - timeNow).TotalSeconds.ToString() + "  秒";
+            bt_st.Enabled = true;
+            bt_sp.Enabled = false;
+
         }
     }
 }

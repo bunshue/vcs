@@ -30,6 +30,12 @@ namespace vcs_TextBox
             AutoSizeTextBox(textBox2);
 
             this.AcceptButton = button5;            //在表單按enter就執行button5按鈕的動作
+
+
+            textBox4.MaxLength = 3;    //設最多只能輸入3位數
+            textBox4.ReadOnly = false;   //設為唯讀不能輸入, 改了
+            textBox4.TabIndex = 0;     //設為第一個停駐焦點
+            textBox4.Focus();    //將停駐焦點移到txtDegree
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -130,7 +136,6 @@ namespace vcs_TextBox
                 //MessageBox.Show("只允許輸入數字", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 e.Handled = true;
             }
-
         }
     }
 }
