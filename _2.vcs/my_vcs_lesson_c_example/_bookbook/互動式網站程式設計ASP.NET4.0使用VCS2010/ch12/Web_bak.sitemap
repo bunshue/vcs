@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="" title="我的教材"  description="我的教材">
+    <siteMapNode url ="" title ="第一章" description ="第一章">
+      <siteMapNode url="" title="1.1單元"  description="1.1單元" />
+      <siteMapNode url="" title="1.2單元"  description="1.2單元" />
+      <siteMapNode url="" title="1.3單元"  description="1.3單元" />
+    </siteMapNode>
+    <siteMapNode url ="" title ="第二章" description ="第二章">
+      <siteMapNode url="" title="2.1單元"  description="2.1單元" />
+      <siteMapNode url="" title="2.2單元"  description="2.2單元" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

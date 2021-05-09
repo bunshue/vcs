@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TreeNode Name="我的教材" Value="我的教材">
+  <TreeNode Name="第一章" Value="第一章" >
+    <TreeNode Name="1.1單元" Value="1.1單元" />
+    <TreeNode Name="1.2單元" Value="1.2單元" />
+    <TreeNode Name="1.3單元" Value="1.3單元" />
+  </TreeNode>
+  <TreeNode Name="第二章" Value="第二章" >
+    <TreeNode Name="2.1單元" Value="2.1單元" />
+    <TreeNode Name="2.2單元" Value="2.2單元" />
+  </TreeNode>
+</TreeNode>
+

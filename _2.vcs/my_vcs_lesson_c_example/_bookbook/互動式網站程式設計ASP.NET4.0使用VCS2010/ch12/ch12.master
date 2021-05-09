@@ -1,0 +1,48 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ch12.master.cs" Inherits="ch12" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+
+        .style1
+        {
+            width: 70%;
+        }
+        .style2
+        {
+            width: 960px;
+            height: 163px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <table align="center" class="style1">
+            <tr>
+                <td>
+                    <img class="style2" src="./images/logo.png" /></td>
+            </tr>
+            <tr>
+                <td>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td height="60" style="text-align: center">
+                    位置：833高雄縣鳥松鄉澄清路840號 正修科技大學 資訊管理系所<br />
+                    電話：886-07-7310606 ext.5320 傳真：886-07-7315367</td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>
