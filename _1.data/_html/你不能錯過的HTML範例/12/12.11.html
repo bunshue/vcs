@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>第12章</title>
+</head>
+<body>
+    <canvas id="gameCanvas" class="process" width="48px" height="48px">61%</canvas>  
+
+    <script type="text/javascript" charset="utf-8">
+    onload = function (){
+        drawProcess();
+    }
+    function drawProcess() {                
+        // canvas標籤
+        var canvas = document.getElementById("gameCanvas");
+        var text = "60%";
+        var process = 60;
+        // 拿到繪圖上下文,目前只支援"2d"
+        var context = canvas.getContext('2d');
+        // 將繪圖區域清空，如果是第一次在這個畫布上畫圖，畫布上沒有東西，這一步就不需要了
+        context.clearRect(0, 0, 48, 48);
+        
+        // 開始畫一個灰色的圓
+        context.beginPath();
+        // 座標移動到圓心
+        context.moveTo(24, 24);
+        // 畫圓，圓心是24,24，半徑24，從角度0開始畫到2PI結束，最後一個參數決定是順時針還是逆時針
+        context.arc(24, 24, 24, 0, Math.PI * 2, false);
+        context.closePath();
+        // 填上顏色
+        context.fillStyle = '#ddd';
+        context.fill();
+        // 灰色的圓畫完
+        
+        // 畫進度條
+        context.beginPath();
+        // 畫扇形的時候這步很重要，畫筆不在圓心畫出來的不是扇形
+        context.moveTo(24, 24);
+        // 跟上面的圓唯一的區別在這裡，不畫滿圓，畫個扇形
+        context.arc(24, 24, 24, 0, Math.PI * 2 * process / 100, false);
+        context.closePath();
+        context.fillStyle = '#e74c3c';
+        context.fill();
+
+        // 畫內部空白
+        context.beginPath();
+        context.moveTo(24, 24);
+        context.arc(24, 24, 21, 0, Math.PI * 2, true);
+        context.closePath();
+        context.fillStyle = 'rgba(255,255,255,1)';
+        context.fill();
+        
+        // 畫一條線
+        context.beginPath();
+        context.arc(24, 24, 18.5, 0, Math.PI * 2, true);
+        context.closePath();
+        // 與畫實心圓的區別，fill是填滿，stroke是畫線
+        context.strokeStyle = '#ddd';
+        context.stroke();
+        
+        //在中間寫字
+        context.font = "bold 9pt Arial";
+        context.fillStyle = '#e74c3c';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.moveTo(24, 24);
+        context.fillText(text, 24, 24);
+    }
+    </script>
+</body>
+</html>

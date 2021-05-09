@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>第12章</title>
+    <style type="text/css">
+        
+    </style>
+</head>
+
+
+<body>
+
+<div class="content">
+
+
+<canvas id="mycanvas" width="400" height="300">
+    your browser doesn't support the HTMl5 elemnt canvas.
+</canvas>
+
+
+<script>
+var canvas = document.getElementById('mycanvas'),
+    context = canvas.getContext('2d');
+ 
+context.fillStyle = 'orange';
+context.fillRect(150, 150, 100, 100); //參數分別是：矩形左上角座標x，y，矩形寬度，矩形高
+
+</script>
+</div>
+
+</body>
+</html>

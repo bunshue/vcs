@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>第12章</title>
+
+    <style type="text/css">
+
+    
+    </style>
+    
+</head>
+
+
+<body>
+
+
+<div class="content">
+
+
+
+<canvas id="mycanvas" width='400' height="300">
+
+    your browser doesn't support the HTMl5 elemnt canvas.
+
+</canvas>
+
+
+
+<script>
+var canvas = document.getElementById('mycanvas');
+   context = canvas.getContext('2d');
+
+var centerX = canvas.width / 2;
+var centerY = canvas.height / 2;
+var radius = 70;
+
+context.beginPath();
+context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+context.closePath();
+context.fillStyle = 'orange';
+context.fill();
+context.lineWidth = 3;
+context.strokeStyle = '#eee';
+context.stroke();
+
+
+</script>
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>第13章</title>
+    <style type="text/css">
+        
+    </style>
+</head>
+
+<body>
+<div class="content">
+
+</div>
+<script type="text/javascript">
+onload = function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {
+            // 指示瀏覽器獲取高精確度的位置，預設為false
+            enableHighAcuracy: true,
+            // 指定取得地理位置的超時時間，預設不限時，單位為毫秒
+            timeout: 5000,
+            // 最長有效期，在重複取得地理位置時，此參數指定多久再次取得位置
+            maximumAge: 3000
+        });
+    } else {
+        alert("Your browser does not support Geolocation!");
+    }
+
+
+}
+
+function locationError(error) {
+    switch (error.code) {
+    case error.TIMEOUT:
+        showError("A timeout occured! Please try again!");
+        break;
+    case error.POSITION_UNAVAILABLE:
+        showError('We can\'t detect your location. Sorry!');
+        break;
+    case error.PERMISSION_DENIED:
+        showError('Please allow geolocation access for this to work.');
+        break;
+    case error.UNKNOWN_ERROR:
+        showError('An unknown error occured!');
+        break;
+    }
+}
+
+function locationSuccess(position) {
+    var coords = position.coords;
+    console.log("coords", coords)
+    return
+    var latlng = new google.maps.LatLng(
+    // 緯度
+    coords.latitude,
+    // 經度
+    coords.longitude);  
+    var myOptions = {  
+        // 地圖放大倍數  
+        zoom: 12,
+        // 地圖中心設為指定座標點  
+        center: latlng,
+        // 地圖類型  
+        mapTypeId: google.maps.MapTypeId.ROADMAP  
+    };  
+    // 建立地圖並輸出到頁面  
+    var myMap = new google.maps.Map(  
+    document.getElementById("map"), myOptions  );  
+    // 建立標記  
+    var marker = new google.maps.Marker({  
+        // 標註指定的經緯度座標點  
+        position: latlng,
+        // 指定用於標註的地圖  
+        map: myMap
+    });
+    //建立標註視窗  
+    var infowindow = new google.maps.InfoWindow({  
+        content: "您在這裡<br/>緯度：" +   
+        coords.latitude +   "<br/>經度：" + coords.longitude  
+    });  
+    //打開標註視窗  
+    infowindow.open(myMap, marker); 
+}
+
+function showError(text){
+    console.log('showError',text)
+}
+</script>
+</body>
+</html>

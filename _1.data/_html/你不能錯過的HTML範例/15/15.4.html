@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html manifest="./manifest.cfm">
+    <head>
+        <title>第15章</title>
+        <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
+    </head>
+    <body>
+        <h1>監聽應用程式暫存事件</h1>
+        <p>
+            應用程式狀態:<span id="applicationStatus">Online</span>
+            <!-- 輸出時間 -->
+            <cfset writeOutput( timeFormat( now(), "h:mm:ss TT" ) ) />
+        </p>
+        <p>
+            <a id="manualUpdate" href="#">檢測更新</a>
+        </p>
+        <h2>應用程式暫存事件</h2>
+        <p>
+            進度:<span id="cacheProgress">N/A</span>
+        </p>
+        <ul id="applicationEvents">
+            <!-- 將進行動態設定 -->
+        </ul>
+        <!-- 當DOM ready，執行腳本-->
+        <script type="text/javascript">
+            // 取得所需的DOM元素
+            var appStatus = $("#applicationStatus");
+            var appEvents = $("#applicationEvents");
+            var manualUpdate = $("#manualUpdate");
+            var cacheProgress = $("#cacheProgress");
+            // 取得應用程式暫存物件
+            var appCache = window.applicationCache;
+            // 建立暫存物件屬性，便於跟蹤暫存進度
+            var cacheProperties = {
+                filesDownloaded: 0,
+                totalFiles: 0
+            };
+            // 輸出事件清單
+            function logEvent(event) {
+                appEvents.prepend("<li>" + (event + " ... " + (new Date()).toTimeString()) + "</li>");
+            }
+            // 取得暫存清單文件總數量
+            // 手動解析暫存清單的文件
+            function getTotalFiles() {
+                // 首先，初始化文件總數和下載總數
+                cacheProperties.filesDownloaded = 0;
+                cacheProperties.totalFiles = 0;
+                // 取得暫存清單文件
+                $.ajax({
+                    type: "get",
+                    url: "./manifest.cfm",
+                    dataType: "text",
+                    cache: false,
+                    success: function(content) {
+                        // 輸出非暫存片段
+                        content = content.replace(new RegExp("(NETWORK|FALLBACK):" + "((?!(NETWORK|FALLBACK|CACHE):)[\\w\\W]*)", "gi"), "");
+                        // 輸出註釋
+                        content = content.replace(new RegExp("#[^\\r\\n]*(\\r\\n?|\\n)", "g"), "");
+                        // 輸出暫存文件頭部和分隔字元
+                        content = content.replace(new RegExp("CACHE MANIFEST\\s*|\\s*$", "g"), "");
+                        // 輸出額外的空行便於打斷點
+                        content = content.replace(new RegExp("[\\r\\n]+", "g"), "#");
+                        // 取得文件總數
+                        var totalFiles = content.split("#").length;
+                        // 保存文件數量
+                        // 此處我們添加了 *THIS* ，預設進行暫存
+                        cacheProperties.totalFiles = (totalFiles + 1);
+                    }
+                });
+            }
+            // 展示下載過程
+            function displayProgress() {
+                // 增加下載總數
+                cacheProperties.filesDownloaded++;
+                // 檢查是否有文件總數
+                if (cacheProperties.totalFiles) {
+                    // 如果有下載總數，則輸出已知總數
+                    cacheProgress.text(cacheProperties.filesDownloaded + " of " + cacheProperties.totalFiles + " files downloaded.");
+                } else {
+                    // 如果未知文件總數，僅輸出下載數
+                    cacheProgress.text(cacheProperties.filesDownloaded + " files downloaded.");
+                }
+            }
+
+            // 綁定更新事件
+            manualUpdate.click(function(event) {
+                // 阻止預設事件
+                event.preventDefault();
+                // 手動觸發更新方法
+                appCache.update();
+            });
+            // 綁定online/offline事件
+            $(window).bind("online offline",
+            function(event) {
+                // 更新線上狀態
+                appStatus.text(navigator.onLine ? "Online": "Offline");
+            });
+            // 設置應用程式初始化
+            appStatus.text(navigator.onLine ? "Online": "Offline");
+            // 檢測事件
+            // 當瀏覽器檢測暫存清單文件或第一次試圖下載時觸發
+            $(appCache).bind("checking",
+            function(event) {
+                logEvent("Checking for manifest");
+            });
+            // 當檢測到暫存清單沒有更新時觸發
+            $(appCache).bind("noupdate",
+            function(event) {
+                logEvent("No cache updates");
+            });
+            // 當瀏覽器下載在暫存清單中設定的文件時觸發
+            $(appCache).bind("downloading",
+            function(event) {
+                logEvent("Downloading cache");
+                // 取得文件清單中的文件總數
+                getTotalFiles();
+            });
+            // 暫存更新時，每一個文件下載時均觸發
+            $(appCache).bind("progress",
+            function(event) {
+                logEvent("File downloaded");
+                // 顯示下載進度
+                displayProgress();
+            });
+            // 當所有暫存文件均下載完成並為應用程式準備好暫存時觸發
+            $(appCache).bind("cached",
+            function(event) {
+                logEvent("All files downloaded");
+            });
+            // 當暫存文件已下載並替換了已設定的暫存時觸發
+            // 舊暫存文件需要刪除
+            $(appCache).bind("updateready",
+            function(event) {
+                logEvent("New cache available");
+                // 刪除舊暫存
+                appCache.swapCache();
+            });
+            // 當找不到暫存清單時觸發
+            $(appCache).bind("obsolete",
+            function(event) {
+                logEvent("Manifest cannot be found");
+            });
+            // 當發生錯誤時觸發
+            $(appCache).bind("error",
+            function(event) {
+                logEvent("An error occurred");
+            });
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>第1章</title>
+    </head>
+
+    <body>
+        <script type="text/javascript">
+        function f2(){
+            console.log("這是回呼函數f2");
+        }
+        function f1(callback){ 
+            console.log("1");
+            setTimeout(function () { 
+                // f1的任務程式碼 
+                callback(); 
+            }, 1000); 
+            // 主要邏輯code
+            console.log(2)
+        }
+        f1(f2);
+        </script>
+    </body>
+
+</html>

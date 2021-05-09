@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>第14章</title>
+    <script src="http://g.alicdn.com/kissy/k/1.4.0/seed-min.js"></script>
+</head>
+<body>
+<figure>
+    <img id="elephant" src="img/elephant.png" alt="A close up of an elephant"  width="300px"/>
+    <noscript>
+        <img src="img/elephant.png" width="300px">
+    </noscript>
+    <figcaption>大象</figcaption>
+</figure>
+
+<script>
+//在本地儲存中儲存圖片
+var storageFiles = JSON.parse(localStorage.getItem("storageFiles")) || {},
+elephant = document.getElementById("elephant"),
+storageFilesDate = storageFiles.date,
+date = new Date(),
+todaysDate = (date.getMonth() + 1).toString() + date.getDate().toString();
+todaysDate = 418
+console.log(storageFiles,storageFilesDate,todaysDate)
+storageFilesDate = ''
+// 檢查資料，如果不存在或者資料過期，則建立一個本機儲存
+if (typeof storageFilesDate === "undefined" || storageFilesDate < todaysDate) {
+    // 圖片載入完成後執行
+    elephant.addEventListener("load",
+    function() {
+        var imgCanvas = document.createElement("canvas"),
+        imgContext = imgCanvas.getContext("2d");
+        // 確保canvas尺寸和圖片一致
+        imgCanvas.width = elephant.width;
+        imgCanvas.height = elephant.height;
+        // 在canvas中繪製圖片
+        imgContext.drawImage(elephant, 0, 0, elephant.width, elephant.height);
+        // 將圖片保存為Data URI
+        storageFiles.elephant = imgCanvas.toDataURL("image/png");
+        storageFiles.date = todaysDate;
+        // 將JSON儲存到本機儲存中
+        try {
+            localStorage.setItem("storageFiles", JSON.stringify(storageFiles));
+        } catch(e) {
+            console.log("Storage failed: " + e);
+        }
+    },
+    false);
+    // 設置圖片
+    elephant.setAttribute("src", "img/elephant.png");
+} else {
+    // Use image from localStorage
+    elephant.setAttribute("src", storageFiles.elephant);
+}
+</script>
+</body>
+</html>
