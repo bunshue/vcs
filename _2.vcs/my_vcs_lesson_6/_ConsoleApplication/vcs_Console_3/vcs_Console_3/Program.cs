@@ -42,11 +42,11 @@ namespace vcs_Console_3
             string input1, input2;
             int num1, num2;
 
-            Console.Write("數字一:");
+            Console.Write("數字一 : ");
             input1 = Console.ReadLine();
             num1 = Convert.ToInt16(input1);
 
-            Console.Write("數字二:");
+            Console.Write("數字二 : ");
             input2 = Console.ReadLine();
             num2 = Convert.ToInt16(input2);
 
@@ -56,10 +56,23 @@ namespace vcs_Console_3
 
             Console.WriteLine("{0} + {1} = {2}", num1, num2, result);
 
+            string age, name;
 
+            Console.WriteLine("請輸入您的姓名 : ");
+            name = Console.ReadLine();
+            Console.WriteLine("請輸入您的年齡 : ");
+            age = Console.ReadLine();
+            Console.Write(name + " 您好, 您今年是 " + age + " 歲");
+
+            int radius;
+            const float pi = 3.14159F;
+
+            Console.WriteLine("請輸入半徑");
+            radius = int.Parse(Console.ReadLine());
+            Console.WriteLine("所求圓周為" + radius * 2 * pi);
 
             Console.Read();
-
         }
     }
 }
+

@@ -103,7 +103,7 @@ namespace vcs_test_all_02_String
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -248,7 +248,13 @@ namespace vcs_test_all_02_String
 
         }
 
-
-
+        private void button16_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "左邊補空 和 右邊補空, 共5位數\n";
+            int i = 123;
+            richTextBox1.Text += "左邊補空-----" + i.ToString().PadLeft(5) + "-----\n";       //共5位數, 左邊補空
+            richTextBox1.Text += "右邊補空-----" + i.ToString().PadRight(5) + "-----\n";       //共5位數, 右邊補空
+        }
     }
 }
+

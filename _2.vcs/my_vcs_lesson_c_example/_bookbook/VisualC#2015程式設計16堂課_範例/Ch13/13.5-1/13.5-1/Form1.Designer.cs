@@ -101,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 70);
+            this.ClientSize = new System.Drawing.Size(366, 356);
             this.Controls.Add(this.chanceLabel);
             this.Controls.Add(this.maxLabel);
             this.Controls.Add(this.maxText);

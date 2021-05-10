@@ -243,13 +243,14 @@
             // 
             // button16
             // 
-            this.button16.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button16.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button16.Location = new System.Drawing.Point(235, 156);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(154, 42);
             this.button16.TabIndex = 17;
-            this.button16.Text = "xxx";
+            this.button16.Text = "左邊補空 和 右邊補空";
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button17
             // 

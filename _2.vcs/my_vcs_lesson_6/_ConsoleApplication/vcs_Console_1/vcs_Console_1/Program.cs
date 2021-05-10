@@ -31,7 +31,7 @@ namespace vcs_Console_1
             {
                 Console.WriteLine("{0} is not a valid file or directory.", path);
             }
-            
+
             //C# 二進位轉十進位
             Console.WriteLine(Convert.ToInt32("1111", 2).ToString("D"));//Binary To Decimal
             //> Output: 15
@@ -55,6 +55,7 @@ namespace vcs_Console_1
             Console.WriteLine("Press any key");//有換行
             Console.ReadLine();
             Console.ReadKey();
+            Console.Read();
         }
 
         public static void TraverseTree(string root)

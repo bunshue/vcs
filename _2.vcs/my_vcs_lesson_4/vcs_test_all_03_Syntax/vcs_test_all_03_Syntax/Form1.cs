@@ -663,7 +663,41 @@ namespace vcs_test_all_03_Syntax
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //throw 範例
+
+            try
+            {
+                int year = 2006;
+                int age = verify(year);
+                richTextBox1.Text += "您已成年, 今年" + age + "歲\n";
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                richTextBox1.Text += "您並未成年" + "\n";
+            }
+            catch (ArgumentException ex)
+            {
+                richTextBox1.Text += "您輸入的年份範圍不合理" + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "發生其他例外，例外訊息: " + ex.Message + "\n";
+            }
+
+
+
         }
+
+        public static int verify(int year)
+        {
+            if (year < 1 || year > DateTime.Now.Year)
+                throw new ArgumentException();
+            else if (DateTime.Now.Year - year < 18)
+                throw new ArgumentOutOfRangeException();
+            else
+                return DateTime.Now.Year - year;
+        }
+
 
         // The dictionary of digit names.
         private Dictionary<int, string> Numbers = new Dictionary<int, string>()
@@ -1503,6 +1537,28 @@ namespace vcs_test_all_03_Syntax
             //各種Parse範例
             ParseData parse = new ParseData();
             parse.Show();
+        }
+
+        private void bt_example_Click(object sender, EventArgs e)
+        {
+            int x;  //被除數
+            int y;  //除數
+
+            x = 30;
+            y = 0;
+
+            try
+            {
+                richTextBox2.Text += "商為: " + x / y + "\t餘數為: " + x % y + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox2.Text += "例外發生\n";
+                richTextBox2.Text += "訊息: " + ex.Message + "\n";
+                richTextBox2.Text += "例外來源: " + ex.Source + "\n";
+                richTextBox2.Text += "丟出例外的方法: " + ex.TargetSite + "\n";
+                richTextBox2.Text += "詳細文字說明: " + ex.ToString() + "\n";
+            }
         }
     }
 }

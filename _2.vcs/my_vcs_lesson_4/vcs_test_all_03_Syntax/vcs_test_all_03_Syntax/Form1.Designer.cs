@@ -105,6 +105,7 @@
             this.btnBlue = new System.Windows.Forms.Button();
             this.btnPink = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.bt_example = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.txtResult = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -343,6 +344,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(180, 40);
             this.button19.TabIndex = 20;
+            this.button19.Text = "throw範例";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -944,6 +946,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.bt_example);
             this.groupBox5.Controls.Add(this.richTextBox2);
             this.groupBox5.Controls.Add(this.txtResult);
             this.groupBox5.Controls.Add(this.label12);
@@ -958,6 +961,16 @@
             this.groupBox5.TabIndex = 70;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "try-catch-finally";
+            // 
+            // bt_example
+            // 
+            this.bt_example.Location = new System.Drawing.Point(11, 244);
+            this.bt_example.Name = "bt_example";
+            this.bt_example.Size = new System.Drawing.Size(75, 21);
+            this.bt_example.TabIndex = 15;
+            this.bt_example.Text = "try-catch";
+            this.bt_example.UseVisualStyleBackColor = true;
+            this.bt_example.Click += new System.EventHandler(this.bt_example_Click);
             // 
             // richTextBox2
             // 
@@ -1291,6 +1304,7 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Button bt_parse_data;
+        private System.Windows.Forms.Button bt_example;
     }
 }
 

@@ -83,6 +83,9 @@ namespace vcs_test_all_01_Math_Random
             textBox_A.Location = new Point(x_st + dx * 0 + 20, y_st + dy * 11 + 10);
             textBox_B.Location = new Point(x_st + dx * 1 / 2 + 20, y_st + dy * 11 + 10);
 
+            pictureBox1.Size = new Size(256, 256);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -109,6 +112,21 @@ namespace vcs_test_all_01_Math_Random
             textBox2.Location = new Point(x_st + dx * 2, y_st + dy * 10);
             lb_ordinal.Location = new Point(x_st + dx * 2 + dx / 6, y_st + dy * 11);
 
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button40.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button41.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            button42.Location = new Point(x_st + dx * 3, y_st + dy * 10);
+            button43.Location = new Point(x_st + dx * 3, y_st + dy * 11);
+
+            groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+
             bt_random1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_random2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_random3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -123,8 +141,8 @@ namespace vcs_test_all_01_Math_Random
             bt_random11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             bt_random12.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
-            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-            richTextBox1.Size = new Size(700, 1000);
+            richTextBox1.Location = new Point(x_st + dx * 7+20, y_st + dy * 0);
+            richTextBox1.Size = new Size(680, 1000);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -2350,5 +2368,82 @@ namespace vcs_test_all_01_Math_Random
             }
             return crc;
         }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "費氏數列\n";
+
+            int i;
+            int n = 10;
+            for (i = 1; i <= n; i++)
+            {
+                richTextBox1.Text += "費氏數列 第 " + i.ToString() + " 項 : " + fibonacci(i) + "\n";
+            }
+        }
+
+        public static int fibonacci(int n)
+        {
+            if (n == 1 || n == 2)
+                return 1;
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
     }
 }
