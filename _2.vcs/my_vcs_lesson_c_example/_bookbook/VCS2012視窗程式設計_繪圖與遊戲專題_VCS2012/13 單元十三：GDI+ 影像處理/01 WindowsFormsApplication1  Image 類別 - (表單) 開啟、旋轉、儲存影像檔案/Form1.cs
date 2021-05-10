@@ -11,24 +11,21 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
         Image img; // Image 影像
         public Form1()
         {
             InitializeComponent();
         }
 
-        // 開啟檔案按鈕
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)  // 開啟影像檔
-            {
-                String input = openFileDialog1.FileName;
-                img = Image.FromFile(input); // 產生一個Image物件
+            img = Image.FromFile(filename); // 產生一個Image物件
 
-                // 呈現 影像 的寬高資訊
-                label1.Text = "(" +img.Width.ToString() + ", " + img.Height.ToString() + ")";
-                this.Invalidate(); // 要求重畫
-            }
+            // 呈現 影像 的寬高資訊
+            label1.Text = "(" + img.Width.ToString() + ", " + img.Height.ToString() + ")";
+            this.Invalidate(); // 要求重畫
+
         }
 
         // 90 度旋轉按鈕
@@ -38,15 +35,6 @@ namespace WindowsFormsApplication1
             this.Invalidate(); // 要求重畫
         }
 
-        // 儲存檔案按鈕
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK) // 儲存影像檔
-            {
-                String output = saveFileDialog1.FileName;
-                img.Save(output, System.Drawing.Imaging.ImageFormat.Png); // .Png 格式
-            }
-        }
 
         // 表單重畫事件
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -54,6 +42,7 @@ namespace WindowsFormsApplication1
             if (img != null)
               e.Graphics.DrawImage(img, 10, 50, img.Width, img.Height);
         }
+
     }
 }
 

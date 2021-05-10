@@ -580,12 +580,15 @@
             // 
             // button34
             // 
-            this.button34.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button34.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button34.Location = new System.Drawing.Point(1260, 297);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(120, 42);
             this.button34.TabIndex = 61;
+            this.button34.Text = "在Button上畫圖";
             this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.button34_Click);
+            this.button34.Paint += new System.Windows.Forms.PaintEventHandler(this.button34_Paint);
             // 
             // button35
             // 

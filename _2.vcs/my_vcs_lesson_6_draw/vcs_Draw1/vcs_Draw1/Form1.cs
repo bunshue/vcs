@@ -2976,5 +2976,24 @@ namespace vcs_Draw1
             }
             pictureBox_gradient_color.Image = bitmap1;
         }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            //在Button上畫圖
+            richTextBox1.Text += "在Button上畫圖, 要改buttonXX_Paint()\n";
+        }
+
+        private void button34_Paint(object sender, PaintEventArgs e)
+        {
+            int W = button34.Width;
+            int H = button34.Height;
+            //e.Graphics.FillRectangle(new SolidBrush(Color.White), x_st, y_st, W, H);
+            e.Graphics.FillRectangle(new SolidBrush(Color.Pink), 0, 0, W, H);
+
+            Pen p = new Pen(Color.Red, 6);
+            e.Graphics.DrawRectangle(p, 0, 0, W - 0, H - 0);
+
+            e.Graphics.DrawString("在Button上畫圖", new Font("標楷體", 11), new SolidBrush(Color.Blue), 5, 15);
+        }
     }
 }
