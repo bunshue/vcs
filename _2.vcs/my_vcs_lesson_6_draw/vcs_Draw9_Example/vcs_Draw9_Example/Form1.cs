@@ -314,7 +314,42 @@ namespace vcs_Draw9_Example
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //已知的顏色列舉
 
+            pictureBox1.Size = new Size(1100, 600);
+            Graphics g = pictureBox1.CreateGraphics();
+
+            // 將 KnownColor 列舉的內容項目複雜到 allColors 陣列
+            Array colorsArray = Enum.GetValues(typeof(KnownColor));
+            KnownColor[] allColors = new KnownColor[colorsArray.Length];
+            Array.Copy(colorsArray, allColors, colorsArray.Length);
+
+            // Loop through printing out the values' names in the colors 
+            // they represent.
+            float y = -20;
+            float x = 0;
+
+            for (int i = 0; i < allColors.Length; i++)
+            {
+                // 一排 25 個
+                if (i > 0 && i % 25 == 0)
+                {
+                    x += 150.0f;
+                    y = 0.0f;
+                }
+                else
+                {
+                    // 在該排中 往下列出
+                    y += 20.0F;
+                }
+
+                // 產生該顏色的塗刷
+                SolidBrush sb = new SolidBrush(Color.FromName(allColors[i].ToString()));
+                g.DrawString(allColors[i].ToString(), this.Font, sb, x, y);
+
+                // 釋放該塗刷
+                sb.Dispose();
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -4741,6 +4776,37 @@ namespace vcs_Draw9_Example
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //奧運五環
+            Pen penBlack = new Pen(Color.Black, 6); // 黑色的畫筆 筆寬為 6
+            Pen penBlue = new Pen(Color.Blue, 6); // 藍色的畫筆
+            Pen penRed = new Pen(Color.Red, 6);  // 紅色的畫筆
+            Pen penYellow = new Pen(Color.Yellow, 6); // 黃色的畫筆
+            Pen penGreen = new Pen(Color.Green, 6); // 綠色的畫筆
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            int D = 50;  // 圓的半徑
+            int Gap = 20;// 圓和圓的 間距
+            int Cx = this.pictureBox1.ClientSize.Width / 2; // 抓一個中心點
+            int Cy = this.pictureBox1.ClientSize.Height / 2 - D / 2;
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            g.DrawEllipse(penBlack, Cx - D, Cy - D, 2 * D, 2 * D);
+            g.DrawEllipse(penBlue, Cx - 2 * D - Gap - D, Cy - D, 2 * D, 2 * D);
+            g.DrawEllipse(penRed, Cx + 2 * D + Gap - D, Cy - D, 2 * D, 2 * D);
+            g.DrawEllipse(penYellow, Cx - D - Gap / 2 - D, Cy + D - D, 2 * D, 2 * D);
+            g.DrawEllipse(penGreen, Cx + D + Gap / 2 - D, Cy + D - D, 2 * D, 2 * D);
+
+            // 黑色的弧在上面
+            g.DrawArc(penBlack, Cx - D, Cy - D, 2 * D, 2 * D, -10, 20);
+            g.DrawArc(penBlack, Cx - D, Cy - D, 2 * D, 2 * D, 90, 20);
+
+            // 藍色的弧在上面
+            g.DrawArc(penBlue, Cx - 2 * D - Gap - D, Cy - D, 2 * D, 2 * D, -10, 20);
+
+            // 紅色的弧在上面
+            g.DrawArc(penRed, Cx + 2 * D + Gap - D, Cy - D, 2 * D, 2 * D, 90, 20);
 
         }
 

@@ -13,6 +13,8 @@ namespace vcs_PictureCrop
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\bear.jpg";
+
         private bool flag_select_area = false;  //開始選取的旗標
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
         private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
@@ -30,8 +32,6 @@ namespace vcs_PictureCrop
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\bear.jpg";
-
             bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
 

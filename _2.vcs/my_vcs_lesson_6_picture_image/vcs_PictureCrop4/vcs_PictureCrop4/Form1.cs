@@ -11,11 +11,6 @@ namespace vcs_PictureCrop4
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         string filename = @"C:\______test_files\picture1.jpg";
 
         private bool flag_select_area = false;  //開始選取的旗標
@@ -30,7 +25,11 @@ namespace vcs_PictureCrop4
         private int w = 0;  //擷取圖的寬
         private int h = 0;  //擷取圖的高
 
-        // Save the original image.
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             bitmap1 = new Bitmap(filename);

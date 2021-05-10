@@ -1683,6 +1683,7 @@ namespace vcs_DrAP
             fileinfos.Clear();
 
             string path = @"C:\_git\vcs\_2.vcs";
+            //string path = @"C:\_git\vcs\_1.data\_html";
 
             if (path == String.Empty)
                 path = search_path;

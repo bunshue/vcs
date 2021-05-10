@@ -13,10 +13,7 @@ namespace vcs_PictureCrop5
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
+        string filename = @"C:\______test_files\bear.jpg";
 
         private bool flag_select_area = false;  //開始選取的旗標
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
@@ -28,10 +25,13 @@ namespace vcs_PictureCrop5
         private int X0, Y0, X1, Y1;
         private Graphics g2 = null;
 
-        // Save the original image.
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
 

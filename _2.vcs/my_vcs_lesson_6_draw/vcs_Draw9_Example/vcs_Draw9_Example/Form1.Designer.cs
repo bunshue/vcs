@@ -151,6 +151,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 40);
             this.button2.TabIndex = 20;
+            this.button2.Text = "已知的顏色列舉";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -337,6 +338,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(100, 40);
             this.button24.TabIndex = 43;
+            this.button24.Text = "奧運五環";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
