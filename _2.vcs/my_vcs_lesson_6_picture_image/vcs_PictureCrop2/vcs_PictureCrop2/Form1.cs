@@ -30,9 +30,10 @@ namespace vcs_PictureCrop2
         private Bitmap DisplayImage;
         private Graphics DisplayGraphics;
 
+        string filename = @"C:\______test_files\picture1.bmp";
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             bitmap1 = LoadBitmapUnlocked(filename);
             bitmap2 = bitmap1.Clone() as Bitmap;
             DisplayImage = bitmap2.Clone() as Bitmap;

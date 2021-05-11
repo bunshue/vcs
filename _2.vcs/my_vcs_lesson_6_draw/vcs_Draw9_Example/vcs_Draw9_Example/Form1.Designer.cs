@@ -519,11 +519,12 @@
             // 
             // button34
             // 
-            this.button34.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button34.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button34.Location = new System.Drawing.Point(1222, 285);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(100, 40);
             this.button34.TabIndex = 64;
+            this.button34.Text = "影像的寬高可以是負的";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 

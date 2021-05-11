@@ -76,7 +76,28 @@
             this.ht2 = new System.Windows.Forms.Button();
             this.ht1 = new System.Windows.Forms.Button();
             this.ht0 = new System.Windows.Forms.Button();
+            this.button36 = new System.Windows.Forms.Button();
+            this.button37 = new System.Windows.Forms.Button();
+            this.button38 = new System.Windows.Forms.Button();
+            this.button39 = new System.Windows.Forms.Button();
+            this.button40 = new System.Windows.Forms.Button();
+            this.button41 = new System.Windows.Forms.Button();
+            this.button42 = new System.Windows.Forms.Button();
+            this.button43 = new System.Windows.Forms.Button();
+            this.button44 = new System.Windows.Forms.Button();
+            this.button45 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.numText8 = new System.Windows.Forms.TextBox();
+            this.numText7 = new System.Windows.Forms.TextBox();
+            this.numText6 = new System.Windows.Forms.TextBox();
+            this.numText5 = new System.Windows.Forms.TextBox();
+            this.numText4 = new System.Windows.Forms.TextBox();
+            this.numText3 = new System.Windows.Forms.TextBox();
+            this.numText2 = new System.Windows.Forms.TextBox();
+            this.numText1 = new System.Windows.Forms.TextBox();
+            this.array_sort = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -522,7 +543,7 @@
             this.groupBox1.Controls.Add(this.ht2);
             this.groupBox1.Controls.Add(this.ht1);
             this.groupBox1.Controls.Add(this.ht0);
-            this.groupBox1.Location = new System.Drawing.Point(750, 12);
+            this.groupBox1.Location = new System.Drawing.Point(890, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 337);
             this.groupBox1.TabIndex = 62;
@@ -606,11 +627,204 @@
             this.ht0.UseVisualStyleBackColor = true;
             this.ht0.Click += new System.EventHandler(this.ht0_Click);
             // 
+            // button36
+            // 
+            this.button36.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button36.Location = new System.Drawing.Point(646, 12);
+            this.button36.Name = "button36";
+            this.button36.Size = new System.Drawing.Size(200, 42);
+            this.button36.TabIndex = 63;
+            this.button36.UseVisualStyleBackColor = true;
+            // 
+            // button37
+            // 
+            this.button37.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button37.Location = new System.Drawing.Point(646, 60);
+            this.button37.Name = "button37";
+            this.button37.Size = new System.Drawing.Size(200, 42);
+            this.button37.TabIndex = 64;
+            this.button37.UseVisualStyleBackColor = true;
+            // 
+            // button38
+            // 
+            this.button38.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button38.Location = new System.Drawing.Point(646, 108);
+            this.button38.Name = "button38";
+            this.button38.Size = new System.Drawing.Size(200, 42);
+            this.button38.TabIndex = 65;
+            this.button38.UseVisualStyleBackColor = true;
+            // 
+            // button39
+            // 
+            this.button39.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button39.Location = new System.Drawing.Point(646, 156);
+            this.button39.Name = "button39";
+            this.button39.Size = new System.Drawing.Size(200, 42);
+            this.button39.TabIndex = 66;
+            this.button39.UseVisualStyleBackColor = true;
+            // 
+            // button40
+            // 
+            this.button40.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button40.Location = new System.Drawing.Point(646, 204);
+            this.button40.Name = "button40";
+            this.button40.Size = new System.Drawing.Size(200, 42);
+            this.button40.TabIndex = 67;
+            this.button40.UseVisualStyleBackColor = true;
+            // 
+            // button41
+            // 
+            this.button41.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button41.Location = new System.Drawing.Point(646, 246);
+            this.button41.Name = "button41";
+            this.button41.Size = new System.Drawing.Size(200, 42);
+            this.button41.TabIndex = 68;
+            this.button41.UseVisualStyleBackColor = true;
+            // 
+            // button42
+            // 
+            this.button42.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button42.Location = new System.Drawing.Point(646, 294);
+            this.button42.Name = "button42";
+            this.button42.Size = new System.Drawing.Size(200, 42);
+            this.button42.TabIndex = 69;
+            this.button42.UseVisualStyleBackColor = true;
+            // 
+            // button43
+            // 
+            this.button43.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button43.Location = new System.Drawing.Point(646, 342);
+            this.button43.Name = "button43";
+            this.button43.Size = new System.Drawing.Size(200, 42);
+            this.button43.TabIndex = 70;
+            this.button43.UseVisualStyleBackColor = true;
+            // 
+            // button44
+            // 
+            this.button44.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button44.Location = new System.Drawing.Point(646, 389);
+            this.button44.Name = "button44";
+            this.button44.Size = new System.Drawing.Size(200, 42);
+            this.button44.TabIndex = 71;
+            this.button44.UseVisualStyleBackColor = true;
+            // 
+            // button45
+            // 
+            this.button45.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button45.Location = new System.Drawing.Point(646, 433);
+            this.button45.Name = "button45";
+            this.button45.Size = new System.Drawing.Size(200, 42);
+            this.button45.TabIndex = 72;
+            this.button45.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.array_sort);
+            this.groupBox2.Controls.Add(this.numText8);
+            this.groupBox2.Controls.Add(this.numText7);
+            this.groupBox2.Controls.Add(this.numText6);
+            this.groupBox2.Controls.Add(this.numText5);
+            this.groupBox2.Controls.Add(this.numText4);
+            this.groupBox2.Controls.Add(this.numText3);
+            this.groupBox2.Controls.Add(this.numText2);
+            this.groupBox2.Controls.Add(this.numText1);
+            this.groupBox2.Location = new System.Drawing.Point(890, 369);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(328, 100);
+            this.groupBox2.TabIndex = 73;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "物件Array";
+            // 
+            // numText8
+            // 
+            this.numText8.Location = new System.Drawing.Point(278, 24);
+            this.numText8.Name = "numText8";
+            this.numText8.Size = new System.Drawing.Size(32, 22);
+            this.numText8.TabIndex = 16;
+            this.numText8.Text = "0";
+            // 
+            // numText7
+            // 
+            this.numText7.Location = new System.Drawing.Point(240, 24);
+            this.numText7.Name = "numText7";
+            this.numText7.Size = new System.Drawing.Size(32, 22);
+            this.numText7.TabIndex = 15;
+            this.numText7.Text = "0";
+            // 
+            // numText6
+            // 
+            this.numText6.Location = new System.Drawing.Point(202, 24);
+            this.numText6.Name = "numText6";
+            this.numText6.Size = new System.Drawing.Size(32, 22);
+            this.numText6.TabIndex = 14;
+            this.numText6.Text = "0";
+            // 
+            // numText5
+            // 
+            this.numText5.Location = new System.Drawing.Point(164, 24);
+            this.numText5.Name = "numText5";
+            this.numText5.Size = new System.Drawing.Size(32, 22);
+            this.numText5.TabIndex = 13;
+            this.numText5.Text = "0";
+            // 
+            // numText4
+            // 
+            this.numText4.Location = new System.Drawing.Point(126, 24);
+            this.numText4.Name = "numText4";
+            this.numText4.Size = new System.Drawing.Size(32, 22);
+            this.numText4.TabIndex = 12;
+            this.numText4.Text = "0";
+            // 
+            // numText3
+            // 
+            this.numText3.Location = new System.Drawing.Point(88, 24);
+            this.numText3.Name = "numText3";
+            this.numText3.Size = new System.Drawing.Size(32, 22);
+            this.numText3.TabIndex = 11;
+            this.numText3.Text = "0";
+            // 
+            // numText2
+            // 
+            this.numText2.Location = new System.Drawing.Point(50, 24);
+            this.numText2.Name = "numText2";
+            this.numText2.Size = new System.Drawing.Size(32, 22);
+            this.numText2.TabIndex = 10;
+            this.numText2.Text = "0";
+            // 
+            // numText1
+            // 
+            this.numText1.Location = new System.Drawing.Point(12, 24);
+            this.numText1.Name = "numText1";
+            this.numText1.Size = new System.Drawing.Size(32, 22);
+            this.numText1.TabIndex = 9;
+            this.numText1.Text = "0";
+            // 
+            // array_sort
+            // 
+            this.array_sort.Location = new System.Drawing.Point(126, 63);
+            this.array_sort.Name = "array_sort";
+            this.array_sort.Size = new System.Drawing.Size(94, 23);
+            this.array_sort.TabIndex = 17;
+            this.array_sort.Text = "物件陣列測試";
+            this.array_sort.UseVisualStyleBackColor = true;
+            this.array_sort.Click += new System.EventHandler(this.array_sort_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1537, 643);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.button45);
+            this.Controls.Add(this.button44);
+            this.Controls.Add(this.button43);
+            this.Controls.Add(this.button42);
+            this.Controls.Add(this.button41);
+            this.Controls.Add(this.button40);
+            this.Controls.Add(this.button39);
+            this.Controls.Add(this.button38);
+            this.Controls.Add(this.button37);
+            this.Controls.Add(this.button36);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.rtb_matrix);
             this.Controls.Add(this.tb_matrix);
@@ -656,6 +870,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -711,6 +927,26 @@
         private System.Windows.Forms.Button ht2;
         private System.Windows.Forms.Button ht1;
         private System.Windows.Forms.Button ht0;
+        private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.Button button37;
+        private System.Windows.Forms.Button button38;
+        private System.Windows.Forms.Button button39;
+        private System.Windows.Forms.Button button40;
+        private System.Windows.Forms.Button button41;
+        private System.Windows.Forms.Button button42;
+        private System.Windows.Forms.Button button43;
+        private System.Windows.Forms.Button button44;
+        private System.Windows.Forms.Button button45;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button array_sort;
+        private System.Windows.Forms.TextBox numText8;
+        private System.Windows.Forms.TextBox numText7;
+        private System.Windows.Forms.TextBox numText6;
+        private System.Windows.Forms.TextBox numText5;
+        private System.Windows.Forms.TextBox numText4;
+        private System.Windows.Forms.TextBox numText3;
+        private System.Windows.Forms.TextBox numText2;
+        private System.Windows.Forms.TextBox numText1;
     }
 }
 

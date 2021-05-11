@@ -35,8 +35,10 @@ namespace WindowsFormsApplication1
         // 播放外部的聲音檔
         private void button2_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\_wav\chimes.wav";
+
             // 播放  聲音檔與執行檔同目錄
-            PlaySound("chimes.wav", new System.IntPtr(), PlaySoundFlags.SND_SYNC);
+            PlaySound(filename, new System.IntPtr(), PlaySoundFlags.SND_SYNC);
         }
     }
 }

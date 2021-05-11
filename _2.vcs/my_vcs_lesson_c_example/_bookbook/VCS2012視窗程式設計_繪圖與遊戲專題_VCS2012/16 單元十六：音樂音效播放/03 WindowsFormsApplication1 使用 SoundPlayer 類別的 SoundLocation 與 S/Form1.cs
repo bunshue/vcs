@@ -13,6 +13,8 @@ namespace WindowsFormsApplication1
     // 要加入 參考 -> Microsoft.VisualBasic
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\_wav\chimes.wav";
+
         public Form1()
         {
             InitializeComponent();
@@ -23,7 +25,7 @@ namespace WindowsFormsApplication1
         {
             SoundPlayer sound1 = new SoundPlayer(); // 新增一個SoundPlayer物件
 
-            sound1.SoundLocation = "chimes.wav"; // 設定聲音檔案的路徑和名稱
+            sound1.SoundLocation = filename; // 設定聲音檔案的路徑和名稱
             sound1.Play(); // 播放
         }
 

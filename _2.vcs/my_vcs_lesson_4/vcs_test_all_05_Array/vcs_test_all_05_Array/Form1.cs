@@ -79,9 +79,22 @@ namespace vcs_test_all_05_Array
             tb_matrix.Location = new Point(x_st + dx * 2, y_st + dy * 10);
             rtb_matrix.Location = new Point(x_st + dx * 2 + 140, y_st + dy * 10);
 
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button40.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button41.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button42.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button43.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button44.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button45.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
 
-            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+
             x_st = 15;
             y_st = 15;
             dy = 45;
@@ -97,8 +110,39 @@ namespace vcs_test_all_05_Array
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
+            bt_exit_setup();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1517,7 +1561,26 @@ namespace vcs_test_all_05_Array
                 richTextBox1.Text += k + "\t" + HT[k] + "\n";
             }
         }
+
         //Hashtable 測試 SP
+
+        private void array_sort_Click(object sender, EventArgs e)
+        {
+            //物件陣列測試
+            TextBox[] textArray = new TextBox[] { numText1, numText2, numText3, numText4, numText5, numText6, numText7, numText8 };
+            for (int i = 0; i < 8; i++)
+            {
+                textArray[i].BackColor = SystemColors.Window;
+            }
+            int[] numArray = new int[8];
+            Random rnd = new Random();
+            for (int i = 0; i < 8; ++i)
+            {
+                int num = rnd.Next(1, 50);
+                numArray[i] = num;
+                textArray[i].Text = num.ToString();
+            }
+        }
     }
 
     class Person : IComparable<Person>

@@ -27,11 +27,11 @@ namespace vcs_PictureCrop6
         private Graphics g2 = null;
         private bool MadeSelection = false;
 
-        // Save the original image.
+        string filename = @"C:\______test_files\picture1.bmp";
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //讀取圖檔
-            string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
             bitmap1 = new Bitmap(pictureBox1.Image);

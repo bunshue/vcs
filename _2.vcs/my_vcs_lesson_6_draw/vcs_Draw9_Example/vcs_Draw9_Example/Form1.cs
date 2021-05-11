@@ -5818,6 +5818,23 @@ namespace vcs_Draw9_Example
 
         private void button34_Click(object sender, EventArgs e)
         {
+            //影像的寬高可以是負的
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區 正中心
+            int Cy = this.pictureBox1.ClientSize.Height / 2;
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            g.DrawImage(bitmap1, Cx, Cy, W / 2, H / 2);
+            g.DrawImage(bitmap1, Cx, Cy, -W / 2, H / 2);
+            g.DrawImage(bitmap1, Cx, Cy, W / 2, -H / 2);
+            g.DrawImage(bitmap1, Cx, Cy, -W / 2, -H / 2);
         }
 
         private void button35_Click(object sender, EventArgs e)
@@ -6305,8 +6322,8 @@ namespace vcs_Draw9_Example
         {
             //擷取部分圖形
             string filename = @"C:\______test_files\picture1.jpg";
-            Image myImage = System.Drawing.Image.FromFile(filename);
-            pictureBox1.Image = myImage;
+            Image image = Image.FromFile(filename);
+            pictureBox1.Image = image;
 
             int x_st = 0;
             int y_st = 0;
@@ -6427,4 +6444,3 @@ namespace vcs_Draw9_Example
         }
     }
 }
-

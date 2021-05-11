@@ -27,9 +27,9 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-            this.ClientSize = new Size(500, 200);
-            Cx = this.ClientSize.Width / 2;
-            Cy = this.ClientSize.Height / 2;
+            this.pictureBox1.ClientSize = new Size(500, 200);
+            Cx = this.pictureBox1.ClientSize.Width / 2;
+            Cy = this.pictureBox1.ClientSize.Height / 2;
             a = (int)(Math.Min(Cx, Cy) * 2 * 0.8);
 
             lob = new G2D_LemniscateOfBernoulli(a);
@@ -37,19 +37,24 @@ namespace WindowsFormsApplication1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            
-            lob.Draw(e.Graphics, Cx, Cy);
-
-            PointF pt = lob.GetPos(t, Cx, Cy);
-            e.Graphics.FillEllipse(Brushes.Red, pt.X-10, pt.Y-10, 20, 20);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
           t++;
           t = t % 360;
-          this.Invalidate();
+          this.pictureBox1.Invalidate();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            lob.Draw(e.Graphics, Cx, Cy);
+
+            PointF pt = lob.GetPos(t, Cx, Cy);
+            e.Graphics.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
+
         }
     }
 }

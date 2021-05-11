@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Media; // SystemSounds類別、SoundPlayer類別
 
 namespace WindowsFormsApplication1
@@ -13,6 +14,8 @@ namespace WindowsFormsApplication1
     // 要加入 參考 -> Microsoft.VisualBasic
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\_wav\chimes.wav";
+
         public Form1()
         {
             InitializeComponent();
@@ -32,7 +35,7 @@ namespace WindowsFormsApplication1
         private void button2_Click(object sender, EventArgs e)
         {
             // 聲音檔與執行檔同目錄
-            SoundPlayer sound1 = new SoundPlayer("chimes.wav");
+            SoundPlayer sound1 = new SoundPlayer(filename);
             sound1.Play();  // 播放
             //sound1.PlayLooping(); // 重複循環播放
             //sound1.PlaySync(); // 播放 -- 等候播放完成後，再繼續執行程式碼

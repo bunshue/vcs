@@ -1018,11 +1018,12 @@
             // 
             // button33
             // 
-            this.button33.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button33.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button33.Location = new System.Drawing.Point(514, 50);
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(155, 40);
             this.button33.TabIndex = 48;
+            this.button33.Text = "顯示一個超大的數字";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 

@@ -141,7 +141,7 @@ namespace vcs_test_all_01_Math_Random
             bt_random11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             bt_random12.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
-            richTextBox1.Location = new Point(x_st + dx * 7+20, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7 + 20, y_st + dy * 0);
             richTextBox1.Size = new Size(680, 1000);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -1735,7 +1735,7 @@ namespace vcs_test_all_01_Math_Random
         //N階乘 ST
         private void button24_Click(object sender, EventArgs e)
         {
-            decimal M = 10;
+            decimal M = 27;
             try
             {
                 richTextBox1.Text += M.ToString() + " 階乘 = " + Factorial(M).ToString() + "\n";
@@ -2390,7 +2390,32 @@ namespace vcs_test_all_01_Math_Random
 
         private void button33_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "vcs最多只能表示到27!\n";
+            richTextBox1.Text += "顯示一個更大的數字30!\n";
 
+            int[] array = new int[50];
+            int m = 0, carry = 0;
+            array[0] = 1;
+
+            for (int i = 2; i <= 30; i++)
+            {
+                for (int j = 0; j <= m; j++)
+                {
+                    array[j] *= i;
+                    array[j] += carry;
+                    carry = array[j] / 10;
+                    if (carry != 0 && j == m)
+                        m++;
+                    array[j] = array[j] % 10;
+                }
+            }
+
+            richTextBox1.Text += "30! = ";
+            for (int k = m; k >= 0; k--)
+            {
+                richTextBox1.Text += array[k].ToString();
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -2442,8 +2467,6 @@ namespace vcs_test_all_01_Math_Random
         {
 
         }
-
-
-
     }
 }
+
