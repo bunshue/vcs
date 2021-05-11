@@ -13,15 +13,7 @@ namespace vcs_MouseKety_Form2
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-            label0.Text = "在Form上按方向鍵控制鼠標";
-            label1.Text = "在Form上按滑鼠各按鍵";
-            label2.Text = "按X離開";
-            label3.Text = "";
-            label4.Text = "";
-        }
+        Point mousePos; // 記錄滑鼠的位置
 
         [System.Runtime.InteropServices.DllImport("user32")]
         //[DllImport("user32")]
@@ -39,64 +31,72 @@ namespace vcs_MouseKety_Form2
         const int MOUSEEVENTF_XDOWN = 0x0080;       //X鍵按下
         const int MOUSEEVENTF_XUP = 0x1000;         //X鍵放開
 
+        public Form1()
+        {
+            InitializeComponent();
+            label0.Text = "在Form上按方向鍵控制鼠標";
+            label1.Text = "在Form上按滑鼠各按鍵";
+            label2.Text = "按X離開";
+            label3.Text = "";
+            label4.Text = "";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // 加入滾輪事件、指定事件處理函數
+            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseWheel);
+        }
+
+        // 滾輪事件處理函數
+        private void Form1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0) // 滾輪往前
+            {
+                richTextBox1.Text += "滾輪往上 ";
+            }
+            else if (e.Delta < 0) // 滾輪往後
+            {
+                richTextBox1.Text += "滾輪往下 ";
+            }
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Down)
-            {
-                label3.Text = "鼠標向下移動";
-                mouse_event(MOUSEEVENTF_MOVE, 0, 20, 0, 0);
-            }
-            else if (e.KeyCode == Keys.Up)
-            {
-                label3.Text = "鼠標向上移動";
-                mouse_event(MOUSEEVENTF_MOVE, 0, -20, 0, 0);
-            }
-            else if (e.KeyCode == Keys.Left)
-            {
-                label3.Text = "鼠標向左移動";
-                mouse_event(MOUSEEVENTF_MOVE, -20, 0, 0, 0);
-            }
-            else if (e.KeyCode == Keys.Right)
-            {
-                label3.Text = "鼠標向右移動";
-                mouse_event(MOUSEEVENTF_MOVE, 20, 0, 0, 0);
-            }
-            else if (e.KeyCode == Keys.X)
-            {
-                label3.Text = "離開";
-                Application.Exit();
-            }
-            else
-            {
-                label3.Text = "你按了" + e.KeyCode + "\n";
-            }
 
         }
 
+        // 滑鼠按下事件
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            mousePos = e.Location; // 記錄滑鼠的位置
+
+            if (e.Button == MouseButtons.Left)
             {
-                label3.Text = "MouseButtons.Right 你按了滑鼠右鍵";
-                mouse_event(MOUSEEVENTF_MOVE, 0, 20, 0, 0);
-            }
-            else if (e.Button == MouseButtons.Left)
-            {
+                richTextBox1.Text += "滑鼠左鍵\t";
                 label3.Text = "MouseButtons.Left 你按了滑鼠左鍵";
                 mouse_event(MOUSEEVENTF_MOVE, 0, -20, 0, 0);
             }
             else if (e.Button == MouseButtons.Middle)
             {
+                richTextBox1.Text += "滑鼠中鍵\t";
                 label3.Text = "MouseButtons.Middle 你按了滑鼠中鍵";
                 mouse_event(MOUSEEVENTF_MOVE, 0, -20, 0, 0);
             }
+            else if (e.Button == MouseButtons.Right)
+            {
+                richTextBox1.Text += "滑鼠右鍵\t";
+                label3.Text = "MouseButtons.Right 你按了滑鼠右鍵";
+                mouse_event(MOUSEEVENTF_MOVE, 0, 20, 0, 0);
+            }
             else if (e.Button == MouseButtons.XButton1)
             {
+                richTextBox1.Text += "滑鼠上一頁\t";
                 label3.Text = "MouseButtons.XButton1 你按了滑鼠上一頁";
                 mouse_event(MOUSEEVENTF_MOVE, 0, -20, 0, 0);
             }
             else if (e.Button == MouseButtons.XButton2)
             {
+                richTextBox1.Text += "滑鼠下一頁\t";
                 label3.Text = "MouseButtons.XButton2 你按了滑鼠下一頁";
                 mouse_event(MOUSEEVENTF_MOVE, 0, -20, 0, 0);
             }
@@ -115,7 +115,21 @@ namespace vcs_MouseKety_Form2
             需要注意的是，判讀的值在System.Windows.Forms.MouseButtons 裡對應
             */
 
+        }
 
+        // 滑鼠移動事件
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            mousePos = e.Location; // 記錄滑鼠的位置
+            this.Text = e.Location.ToString();
+        }
+
+        // 滑鼠放開事件
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            richTextBox1.Text += "放開\n";
         }
     }
 }
+
+

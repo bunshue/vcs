@@ -44,7 +44,7 @@
             this.logList.ItemHeight = 12;
             this.logList.Location = new System.Drawing.Point(12, 81);
             this.logList.Name = "logList";
-            this.logList.Size = new System.Drawing.Size(118, 160);
+            this.logList.Size = new System.Drawing.Size(585, 388);
             this.logList.TabIndex = 0;
             // 
             // numText1
@@ -96,7 +96,7 @@
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(14, 250);
+            this.resetButton.Location = new System.Drawing.Point(12, 487);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(118, 23);
             this.resetButton.TabIndex = 7;
@@ -108,7 +108,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(145, 285);
+            this.ClientSize = new System.Drawing.Size(609, 522);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.logLabel);
             this.Controls.Add(this.guessButton);
