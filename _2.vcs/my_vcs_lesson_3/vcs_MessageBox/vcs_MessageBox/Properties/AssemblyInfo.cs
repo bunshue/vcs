@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FormApplication")]
+[assembly: AssemblyTitle("vcs_MessageBox")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FormApplication")]
-[assembly: AssemblyCopyright("Copyright © Chia-Hui Huang 2008")]
+[assembly: AssemblyProduct("vcs_MessageBox")]
+[assembly: AssemblyCopyright("Copyright")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e5e4263f-dfeb-47b6-b1c0-718b0a3f7328")]
+[assembly: Guid("7be14ec8-c113-4f10-acd2-ad0f55cf4b53")]
 
 // Version information for an assembly consists of the following four values:
 //

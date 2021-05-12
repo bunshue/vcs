@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace FormApplication
+namespace vcs_MessageBox
 {
   static class Program
   {

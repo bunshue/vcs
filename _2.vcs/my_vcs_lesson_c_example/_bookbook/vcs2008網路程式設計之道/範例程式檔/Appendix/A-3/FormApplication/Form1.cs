@@ -38,9 +38,5 @@ namespace FormApplication
       Form2.ShowDialog();
     }
 
-    private void Button1_Click_1(object sender, EventArgs e)
-    {
-
-    }
   }
 }

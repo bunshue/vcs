@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DialogApplication", "DialogApplication\DialogApplication.csproj", "{376FCFE4-A44B-43B0-91B2-DEAC5E4BF175}"
 EndProject
 Global

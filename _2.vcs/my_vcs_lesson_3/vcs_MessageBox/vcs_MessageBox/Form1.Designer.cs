@@ -1,4 +1,4 @@
-namespace MessageBoxApplication
+namespace vcs_MessageBox
 {
     partial class Form1
     {

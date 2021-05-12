@@ -47,6 +47,16 @@ namespace AForge_PlayAVI
             timer.Start();
 
             this.Cursor = Cursors.Default;
+
+            if (source.IsRunning == true)
+            {
+                richTextBox1.Text += source.IsRunning.ToString() + "\n";
+                richTextBox1.Text += source.Source.Length.ToString() + "\n";
+                richTextBox1.Text += videoSourcePlayer.Size.ToString() + "\n";
+                richTextBox1.Text += videoSourcePlayer.Width.ToString() +"\n";
+                richTextBox1.Text += videoSourcePlayer.Height.ToString() + "\n";
+
+            }
         }
 
         // Close video source if it is running

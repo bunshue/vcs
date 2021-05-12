@@ -33,6 +33,7 @@ namespace DialogApplication
             this.Button1 = new System.Windows.Forms.Button();
             this.Label1 = new System.Windows.Forms.Label();
             this.SaveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // TextBox2
@@ -41,7 +42,7 @@ namespace DialogApplication
             this.TextBox2.Multiline = true;
             this.TextBox2.Name = "TextBox2";
             this.TextBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TextBox2.Size = new System.Drawing.Size(274, 153);
+            this.TextBox2.Size = new System.Drawing.Size(550, 457);
             this.TextBox2.TabIndex = 2;
             this.TextBox2.WordWrap = false;
             // 
@@ -49,12 +50,12 @@ namespace DialogApplication
             // 
             this.TextBox1.Location = new System.Drawing.Point(70, 9);
             this.TextBox1.Name = "TextBox1";
-            this.TextBox1.Size = new System.Drawing.Size(216, 22);
+            this.TextBox1.Size = new System.Drawing.Size(492, 22);
             this.TextBox1.TabIndex = 0;
             // 
             // Button1
             // 
-            this.Button1.Location = new System.Drawing.Point(95, 218);
+            this.Button1.Location = new System.Drawing.Point(153, 507);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(108, 28);
             this.Button1.TabIndex = 3;
@@ -73,12 +74,21 @@ namespace DialogApplication
             // 
             this.SaveFileDialog1.FileName = "doc1";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(568, 44);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(237, 457);
+            this.richTextBox1.TabIndex = 24;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AcceptButton = this.Button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 262);
+            this.ClientSize = new System.Drawing.Size(817, 547);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.TextBox2);
             this.Controls.Add(this.TextBox1);
             this.Controls.Add(this.Button1);
@@ -100,6 +110,7 @@ namespace DialogApplication
         internal System.Windows.Forms.Button Button1;
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.SaveFileDialog SaveFileDialog1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

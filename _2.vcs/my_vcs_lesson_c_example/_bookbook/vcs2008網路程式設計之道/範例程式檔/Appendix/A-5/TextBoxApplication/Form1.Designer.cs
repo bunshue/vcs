@@ -42,7 +42,7 @@ namespace TextBoxApplication
             this.TextBox3.Multiline = true;
             this.TextBox3.Name = "TextBox3";
             this.TextBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TextBox3.Size = new System.Drawing.Size(208, 112);
+            this.TextBox3.Size = new System.Drawing.Size(448, 401);
             this.TextBox3.TabIndex = 2;
             this.TextBox3.Text = "Muliline";
             // 
@@ -59,7 +59,7 @@ namespace TextBoxApplication
             this.TextBox2.Location = new System.Drawing.Point(84, 39);
             this.TextBox2.Name = "TextBox2";
             this.TextBox2.PasswordChar = '*';
-            this.TextBox2.Size = new System.Drawing.Size(136, 22);
+            this.TextBox2.Size = new System.Drawing.Size(376, 22);
             this.TextBox2.TabIndex = 1;
             this.TextBox2.Text = "password";
             // 
@@ -75,7 +75,7 @@ namespace TextBoxApplication
             // 
             this.TextBox1.Location = new System.Drawing.Point(84, 11);
             this.TextBox1.Name = "TextBox1";
-            this.TextBox1.Size = new System.Drawing.Size(136, 22);
+            this.TextBox1.Size = new System.Drawing.Size(376, 22);
             this.TextBox1.TabIndex = 0;
             this.TextBox1.Text = "Normal Text";
             // 
@@ -91,7 +91,7 @@ namespace TextBoxApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(232, 218);
+            this.ClientSize = new System.Drawing.Size(527, 548);
             this.Controls.Add(this.TextBox3);
             this.Controls.Add(this.Label3);
             this.Controls.Add(this.TextBox2);

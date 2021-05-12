@@ -59,7 +59,7 @@ namespace DialogApplication
             this.ToolBar1.Location = new System.Drawing.Point(0, 0);
             this.ToolBar1.Name = "ToolBar1";
             this.ToolBar1.ShowToolTips = true;
-            this.ToolBar1.Size = new System.Drawing.Size(297, 29);
+            this.ToolBar1.Size = new System.Drawing.Size(734, 29);
             this.ToolBar1.TabIndex = 22;
             this.ToolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.ToolBar1_ButtonClick);
             // 
@@ -80,7 +80,7 @@ namespace DialogApplication
             this.Panel1.Location = new System.Drawing.Point(0, 29);
             this.Panel1.Name = "Panel1";
             this.Panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.Panel1.Size = new System.Drawing.Size(297, 232);
+            this.Panel1.Size = new System.Drawing.Size(734, 541);
             this.Panel1.TabIndex = 23;
             // 
             // TextBox1
@@ -89,7 +89,7 @@ namespace DialogApplication
             this.TextBox1.Location = new System.Drawing.Point(5, 5);
             this.TextBox1.Multiline = true;
             this.TextBox1.Name = "TextBox1";
-            this.TextBox1.Size = new System.Drawing.Size(287, 222);
+            this.TextBox1.Size = new System.Drawing.Size(724, 531);
             this.TextBox1.TabIndex = 18;
             this.TextBox1.Text = "TextBox1";
             // 
@@ -97,7 +97,7 @@ namespace DialogApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 261);
+            this.ClientSize = new System.Drawing.Size(734, 570);
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.ToolBar1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

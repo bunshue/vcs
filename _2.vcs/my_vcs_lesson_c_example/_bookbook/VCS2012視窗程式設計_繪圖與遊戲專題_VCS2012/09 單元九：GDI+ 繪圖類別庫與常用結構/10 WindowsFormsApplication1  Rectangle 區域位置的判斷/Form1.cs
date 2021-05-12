@@ -33,12 +33,26 @@ namespace WindowsFormsApplication1
             else this.Cursor = Cursors.Default;
 
             if (RectinRect)
+            {
                 e.Graphics.FillRectangle(Brushes.DarkGreen, rectMouse); //深綠色矩形區塊
+                label2.Text = "深綠色矩形區塊";
+            }
             else
+            {
                 e.Graphics.FillRectangle(Brushes.Red, rectMouse); //紅色矩形區塊
+                label2.Text = "紅色矩形區塊";
+            }
 
             if (intersect)
+            {
                 e.Graphics.DrawRectangle(pen, rect); //綠色矩形區塊 加外框
+                label1.Text = "有交集";
+            }
+            else
+            {
+                label1.Text = "無交集";
+            }
+
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)

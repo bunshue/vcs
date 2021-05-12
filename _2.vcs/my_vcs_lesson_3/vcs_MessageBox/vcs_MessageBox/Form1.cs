@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace MessageBoxApplication
+namespace vcs_MessageBox
 {
   public partial class Form1 : Form
   {

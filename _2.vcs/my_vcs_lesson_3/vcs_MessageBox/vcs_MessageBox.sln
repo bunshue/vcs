@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoxApplication", "MessageBoxApplication\MessageBoxApplication.csproj", "{9665BAA4-8C83-4597-B445-216CB0C06856}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_MessageBox", "vcs_MessageBox\vcs_MessageBox.csproj", "{9665BAA4-8C83-4597-B445-216CB0C06856}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
