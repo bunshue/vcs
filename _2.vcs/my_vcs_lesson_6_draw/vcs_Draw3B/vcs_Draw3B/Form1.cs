@@ -50,6 +50,25 @@ namespace vcs_Draw3B
         Graphics gw;
         #endregion
 
+        //箱中球 ST
+        BallInABox ball;   // 宣告 一個箱中球 物件
+        Rectangle boxRect; // 宣告 一個箱子的位置與寬高
+        //箱中球 SP
+
+        //雙圓旋轉 ST
+        Pen pen01 = new Pen(Color.Red, 4); // 內圓 的筆刷
+        Pen pen02 = new Pen(Color.Blue, 4);// 外圓 的筆刷
+
+        double angle1 = 0;            // 內圓 的角度
+        double angle2 = Math.PI; // 外圓 的角度
+        double angleDelta = 0.1;     // 旋轉的角度遞增值
+
+        int inner = 80; // 內圓 的半徑
+        int outer = 120; // 外圓 的半徑
+        int innerNo = 1; // 內圓 的小圓球數目
+        int outerNo = 1; // 外圓 的小圓球數目
+        //雙圓旋轉 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -90,6 +109,43 @@ namespace vcs_Draw3B
             EllipseHeight = this.pictureBox_ellipse.ClientSize.Height - 2 * EllipseMargin;
 
             draw_random_color();
+
+            //三顆跳跳球 ST
+            ball1 = new ClassBall(new Point(this.pictureBox_ball.ClientSize.Width / 2, this.pictureBox_ball.ClientSize.Height / 2),
+                                new Point(3, 5),
+                                new Size(this.pictureBox_ball.ClientSize.Width, this.pictureBox_ball.ClientSize.Height),
+                                30,
+                                Color.Red);
+
+            ball2 = new ClassBall(new Point(this.pictureBox_ball.ClientSize.Width / 4, this.pictureBox_ball.ClientSize.Height / 4),
+                                new Point(-3, 5),
+                                new Size(this.pictureBox_ball.ClientSize.Width, this.pictureBox_ball.ClientSize.Height),
+                                30,
+                                Color.Blue);
+
+            ball3 = new ClassBall(new Point(this.pictureBox_ball.ClientSize.Width / 4, this.pictureBox_ball.ClientSize.Height / 2),
+                                new Point(3, -8),
+                                new Size(this.pictureBox_ball.ClientSize.Width, this.pictureBox_ball.ClientSize.Height),
+                                30,
+                                Color.Green);
+            //三顆跳跳球 SP
+
+            //箱中球 ST
+            // 設定 箱子的位置與寬高
+            boxRect = new Rectangle(20, 20, 200, 150);
+            // 新增 一個箱中球 物件
+            ball = new BallInABox(new Point(100, 100),
+                         new Point(2, 3),
+                         boxRect,
+                         20);
+            //箱中球 SP
+
+            //雙圓旋轉 ST
+            // 內外圓 的筆刷樣式設定
+            pen01.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            pen02.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            this.pictureBox_double_circle.KeyDown += new KeyEventHandler(pictureBox_double_circle_KeyDown);
+            //雙圓旋轉 SP
         }
 
         void show_item_location()
@@ -115,6 +171,9 @@ namespace vcs_Draw3B
             pictureBox_round.Size = new Size(W, H);
             pictureBox_ellipse.Size = new Size(350, 200);
             pictureBox_circular.Size = new Size(W, H);
+            pictureBox_ball.Size = new Size(W, H);
+            pictureBox_ball_in_box.Size = new Size(W, H);
+            pictureBox_double_circle.Size = new Size(W, H);
 
             pictureBox_captcha1.Size = new Size(W + 50, 110);
             pictureBox_captcha2.Size = new Size(W + 50, 110);
@@ -134,6 +193,9 @@ namespace vcs_Draw3B
             pictureBox_brown.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox_round.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             pictureBox_circular.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox_ball.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox_ball_in_box.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox_double_circle.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
             groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 50);
             pictureBox_ellipse.Location = new Point(x_st + dx * 4 - 40, y_st + dy * 1);
@@ -1329,5 +1391,163 @@ namespace vcs_Draw3B
             g.Clear(Color.WhiteSmoke);
             draw_circular();
         }
+
+
+        //三顆跳跳球 ST
+        ClassBall ball1, ball2, ball3;
+
+        bool Collides(ClassBall A, ClassBall B)
+        {
+            Double D = Math.Sqrt(
+            (A.position.X - B.position.X) * (A.position.X - B.position.X) +
+            (A.position.Y - B.position.Y) * (A.position.Y - B.position.Y));
+
+            if (D <= A.Ball_Width + B.Ball_Width)
+                return true;
+            else
+                return false;
+        }
+
+        void Swap(ClassBall A, ClassBall B)
+        {
+            Point temp = A.velocity;
+            A.velocity = B.velocity;
+            B.velocity = temp;
+        }
+
+        private void pictureBox_ball_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            ball1.Draw(e.Graphics);
+            ball2.Draw(e.Graphics);
+            ball3.Draw(e.Graphics);
+        }
+
+        private void timer_ball_Tick(object sender, EventArgs e)
+        {
+            ball1.Move();
+            ball2.Move();
+            ball3.Move();
+
+            if (Collides(ball1, ball2)) Swap(ball1, ball2);
+            if (Collides(ball2, ball3)) Swap(ball2, ball3);
+            if (Collides(ball1, ball3)) Swap(ball1, ball3);
+
+            //this.Invalidate();
+            this.pictureBox_ball.Invalidate();
+        }
+        //三顆跳跳球 SP
+
+        //箱中球 ST
+        private void pictureBox_ball_in_box_Paint(object sender, PaintEventArgs e)
+        {
+            // 反鋸齒設定 ==> 比較好的輸出品質
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            ball.DrawBox(e.Graphics, Color.Black); // 繪出 箱子
+            ball.Draw(e.Graphics, Color.Blue);     // 繪出 箱中球
+        }
+
+        private void timer_ball_in_box_Tick(object sender, EventArgs e)
+        {
+            ball.Update(); // 更新 箱中球 的位置
+            this.pictureBox_ball_in_box.Invalidate();   // 向作業系統要求重畫
+        }
+        //箱中球 SP
+
+        //雙圓旋轉 ST
+
+        // 鍵盤事件
+        void pictureBox_double_circle_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Space) // 空白鍵 旋轉反向
+            {
+                angleDelta = -angleDelta;
+            }
+            else if (e.KeyData == Keys.Up) // ↑鍵 旋轉加速
+            {
+                if (angleDelta > 0)
+                    angleDelta += 0.1;
+                else
+                    angleDelta -= 0.1;
+            }
+            else if (e.KeyData == Keys.Down) // ↓鍵 旋轉減慢
+            {
+                if (angleDelta > 0)
+                    angleDelta -= 0.1;
+                else
+                    angleDelta += 0.1;
+            }
+        }
+
+        // 滑鼠按下事件
+        private void pictureBox_double_circle_MouseDown(object sender, MouseEventArgs e)
+        {
+            int x0 = this.pictureBox_double_circle.ClientSize.Width / 2;
+            int y0 = this.pictureBox_double_circle.ClientSize.Height / 2;
+            double dist = Math.Sqrt((e.X - x0) * (e.X - x0) + (e.Y - y0) * (e.Y - y0));
+
+            if (dist < inner) // 滑鼠在內圓按下
+            {
+                if (e.Button == MouseButtons.Left)  // 滑鼠左鍵 增加小圓球
+                    innerNo++;
+                else if (e.Button == MouseButtons.Right) // 滑鼠右鍵 減少小圓球
+                {
+                    if (innerNo > 0)
+                        innerNo--;
+                }
+            }
+            else if (dist < outer) // 滑鼠在外圓按下
+            {
+                if (e.Button == MouseButtons.Left)
+                    outerNo++;
+                else if (e.Button == MouseButtons.Right)
+                {
+                    if (outerNo > 0)
+                        outerNo--;
+                }
+            }
+        }
+
+        private void pictureBox_double_circle_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // 視窗客戶區 中心點
+            int x0 = this.pictureBox_double_circle.ClientSize.Width / 2;
+            int y0 = this.pictureBox_double_circle.ClientSize.Height / 2;
+            // 繪出內外圓 的大圓
+            e.Graphics.DrawEllipse(pen01, x0 - inner, y0 - inner, inner * 2, inner * 2);
+            e.Graphics.DrawEllipse(pen02, x0 - outer, y0 - outer, outer * 2, outer * 2);
+
+            int x, y;
+            // 繪出內圓 的旋轉小圓球
+            for (int i = 0; i < innerNo; i++)
+            {
+                // 依旋轉角度angle1算出 座標
+                x = x0 + (int)((inner - 10) * Math.Cos(angle1 + i * (Math.PI * 2 / innerNo)));
+                y = y0 + (int)((inner - 10) * Math.Sin(angle1 + i * (Math.PI * 2 / innerNo)));
+                e.Graphics.FillEllipse(Brushes.Red, x - 10, y - 10, 20, 20);
+            }
+
+            // 繪出外圓 的旋轉小圓球
+            for (int i = 0; i < outerNo; i++)
+            {
+                // 依旋轉角度angle2算出 座標
+                x = x0 + (int)((outer - 10) * Math.Cos(angle2 + i * (Math.PI * 2 / outerNo)));
+                y = y0 + (int)((outer - 10) * Math.Sin(angle2 + i * (Math.PI * 2 / outerNo)));
+                e.Graphics.FillEllipse(Brushes.Blue, x - 10, y - 10, 20, 20);
+            }
+        }
+
+        // 使用計時器定時更新 小圓球 的旋轉角度
+        private void timer_double_circle_Tick(object sender, EventArgs e)
+        {
+            angle1 = angle1 + angleDelta;
+            angle2 = angle2 - angleDelta;
+            this.pictureBox_double_circle.Invalidate();
+        }
+        //雙圓旋轉 SP
     }
 }

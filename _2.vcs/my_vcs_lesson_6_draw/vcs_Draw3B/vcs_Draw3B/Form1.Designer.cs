@@ -64,6 +64,12 @@
             this.timer_spiral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_circular = new System.Windows.Forms.PictureBox();
             this.timer_circular = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_ball = new System.Windows.Forms.PictureBox();
+            this.timer_ball = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_ball_in_box = new System.Windows.Forms.PictureBox();
+            this.timer_ball_in_box = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_double_circle = new System.Windows.Forms.PictureBox();
+            this.timer_double_circle = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
@@ -81,6 +87,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_brown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_round)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circular)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ball)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ball_in_box)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_double_circle)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -356,11 +365,62 @@
             this.timer_circular.Interval = 2000;
             this.timer_circular.Tick += new System.EventHandler(this.timer_circular_Tick);
             // 
+            // pictureBox_ball
+            // 
+            this.pictureBox_ball.BackColor = System.Drawing.Color.White;
+            this.pictureBox_ball.Location = new System.Drawing.Point(91, 87);
+            this.pictureBox_ball.Name = "pictureBox_ball";
+            this.pictureBox_ball.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox_ball.TabIndex = 70;
+            this.pictureBox_ball.TabStop = false;
+            this.pictureBox_ball.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_ball_Paint);
+            // 
+            // timer_ball
+            // 
+            this.timer_ball.Enabled = true;
+            this.timer_ball.Interval = 10;
+            this.timer_ball.Tick += new System.EventHandler(this.timer_ball_Tick);
+            // 
+            // pictureBox_ball_in_box
+            // 
+            this.pictureBox_ball_in_box.BackColor = System.Drawing.Color.White;
+            this.pictureBox_ball_in_box.Location = new System.Drawing.Point(166, 87);
+            this.pictureBox_ball_in_box.Name = "pictureBox_ball_in_box";
+            this.pictureBox_ball_in_box.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox_ball_in_box.TabIndex = 71;
+            this.pictureBox_ball_in_box.TabStop = false;
+            this.pictureBox_ball_in_box.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_ball_in_box_Paint);
+            // 
+            // timer_ball_in_box
+            // 
+            this.timer_ball_in_box.Enabled = true;
+            this.timer_ball_in_box.Interval = 10;
+            this.timer_ball_in_box.Tick += new System.EventHandler(this.timer_ball_in_box_Tick);
+            // 
+            // pictureBox_double_circle
+            // 
+            this.pictureBox_double_circle.BackColor = System.Drawing.Color.White;
+            this.pictureBox_double_circle.Location = new System.Drawing.Point(244, 87);
+            this.pictureBox_double_circle.Name = "pictureBox_double_circle";
+            this.pictureBox_double_circle.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox_double_circle.TabIndex = 72;
+            this.pictureBox_double_circle.TabStop = false;
+            this.pictureBox_double_circle.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_double_circle_Paint);
+            this.pictureBox_double_circle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_double_circle_MouseDown);
+            // 
+            // timer_double_circle
+            // 
+            this.timer_double_circle.Enabled = true;
+            this.timer_double_circle.Tick += new System.EventHandler(this.timer_double_circle_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1398, 786);
+            this.Controls.Add(this.pictureBox_double_circle);
+            this.Controls.Add(this.pictureBox_ball_in_box);
+            this.Controls.Add(this.pictureBox_ball);
             this.Controls.Add(this.pictureBox_circular);
             this.Controls.Add(this.pictureBox_round);
             this.Controls.Add(this.pictureBox_brown);
@@ -399,6 +459,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_brown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_round)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circular)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ball)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ball_in_box)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_double_circle)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -440,6 +503,12 @@
         private System.Windows.Forms.Timer timer_spiral;
         private System.Windows.Forms.PictureBox pictureBox_circular;
         private System.Windows.Forms.Timer timer_circular;
+        private System.Windows.Forms.PictureBox pictureBox_ball;
+        private System.Windows.Forms.Timer timer_ball;
+        private System.Windows.Forms.PictureBox pictureBox_ball_in_box;
+        private System.Windows.Forms.Timer timer_ball_in_box;
+        private System.Windows.Forms.PictureBox pictureBox_double_circle;
+        private System.Windows.Forms.Timer timer_double_circle;
     }
 }
 

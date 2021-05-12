@@ -21,9 +21,9 @@ namespace vcs_Class2
             int i;
 
             Person[] people = new Person[3];
-            people[0] = new Person("Jethro", "Tull");
-            people[1] = new Person("Pink", "Floyd");
-            people[2] = new Person("Lynyrd", "Skynyrd");
+            people[0] = new Person("Jethro", "Tull", this);
+            people[1] = new Person("Pink", "Floyd", this);
+            people[2] = new Person("Lynyrd", "Skynyrd", this);
 
             for (i = 0; i < 3; i++)
             {
@@ -107,6 +107,7 @@ namespace vcs_Class2
     // A simple Person class.
     public class Person
     {
+        private Form1 MainForm;
         private string _FirstName;
         public string FirstName
         {
@@ -116,10 +117,12 @@ namespace vcs_Class2
 
         public string LastName { get; set; }
 
-        public Person(string firstName, string lastName)
+        public Person(string firstName, string lastName, Form1 MainForm)
         {
             FirstName = firstName;
             LastName = lastName;
+            this.MainForm = MainForm;
+            MainForm.richTextBox1.Text += "Person初始化，從Class印出, FirstName = " + firstName + ", LastName = " + lastName + "\n";
         }
 
         public override string ToString()
@@ -155,6 +158,4 @@ namespace vcs_Class2
             return "Product : " + Name + "\tPrice : " + Price.ToString("c");
         }
     }
-
-
 }
