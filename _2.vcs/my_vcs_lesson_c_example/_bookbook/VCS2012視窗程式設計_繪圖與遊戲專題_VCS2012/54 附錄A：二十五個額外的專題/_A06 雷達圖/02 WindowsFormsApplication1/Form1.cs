@@ -23,12 +23,18 @@ namespace WindowsFormsApplication1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            rada.Draw(e.Graphics);
+            //rada.Draw(e.Graphics);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            this.Invalidate();
+            this.pictureBox1.Invalidate();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            rada.Draw(e.Graphics);
+
         }
     }
 }

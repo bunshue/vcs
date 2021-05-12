@@ -45,7 +45,7 @@ namespace WindowsApplication1
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            this.Invalidate(); // 要求表單重畫
+            //this.Invalidate(); // 要求表單重畫
         }
 
         private void timer1_Tick(object sender, EventArgs e)

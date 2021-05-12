@@ -608,6 +608,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(120, 42);
             this.button36.TabIndex = 63;
+            this.button36.Text = "Rectangle的交集與聯集";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 

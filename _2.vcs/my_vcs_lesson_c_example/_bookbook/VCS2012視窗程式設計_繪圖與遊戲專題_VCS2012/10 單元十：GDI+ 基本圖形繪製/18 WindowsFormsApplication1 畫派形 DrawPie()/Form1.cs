@@ -19,16 +19,6 @@ namespace WindowsFormsApplication1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            int Cx = this.ClientSize.Width / 2;
-            int Cy = this.ClientSize.Height / 2;
-            int D = (int)(Math.Min(this.ClientSize.Width,
-                         this.ClientSize.Height) / 2) - 10; //半徑
-
-            for (int i = 0; i < 18; i++)
-            {
-                if (i % 2 == 0)  // 偶數才要繪出
-                    e.Graphics.DrawPie(Pens.Black, Cx - D, Cy - D, 2 * D, 2 * D, startAngle + i * 20, 20); // 繪出多邊形
-            }
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -39,12 +29,30 @@ namespace WindowsFormsApplication1
         private void timer1_Tick(object sender, EventArgs e)
         {
             startAngle = startAngle + 1; // 更新開始的角度
-            this.Invalidate();
+            this.pictureBox1.Invalidate();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             timer1.Enabled = !timer1.Enabled;
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            int cx = W / 2;
+            int cy = H / 2;
+            int d = (int)(Math.Min(W, H) / 2) - 10; //半徑
+
+            for (int i = 0; i < 18; i++)
+            {
+                if (i % 2 == 0)  // 偶數才要繪出
+                {
+                    e.Graphics.DrawPie(Pens.Black, cx - d, cy - d, 2 * d, 2 * d, startAngle + i * 20, 20); // 繪出派形
+                }
+            }
+
         }
     }
 }

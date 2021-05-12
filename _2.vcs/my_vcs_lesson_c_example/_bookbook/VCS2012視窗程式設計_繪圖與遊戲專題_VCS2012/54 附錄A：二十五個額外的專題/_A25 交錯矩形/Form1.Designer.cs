@@ -55,19 +55,19 @@
             this.sizeToolStripMenuItem,
             this.autoColorToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(124, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(136, 92);
             // 
             // color1ToolStripMenuItem
             // 
             this.color1ToolStripMenuItem.Name = "color1ToolStripMenuItem";
-            this.color1ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.color1ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.color1ToolStripMenuItem.Text = "Color1";
             this.color1ToolStripMenuItem.Click += new System.EventHandler(this.color1ToolStripMenuItem_Click);
             // 
             // color2ToolStripMenuItem
             // 
             this.color2ToolStripMenuItem.Name = "color2ToolStripMenuItem";
-            this.color2ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.color2ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.color2ToolStripMenuItem.Text = "Color2";
             this.color2ToolStripMenuItem.Click += new System.EventHandler(this.color2ToolStripMenuItem_Click);
             // 
@@ -79,34 +79,34 @@
             this.toolStripMenuItem4,
             this.toolStripMenuItem5});
             this.sizeToolStripMenuItem.Name = "sizeToolStripMenuItem";
-            this.sizeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.sizeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.sizeToolStripMenuItem.Text = "Size";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(88, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(95, 22);
             this.toolStripMenuItem2.Text = "10";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(88, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(95, 22);
             this.toolStripMenuItem3.Text = "20";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(88, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(95, 22);
             this.toolStripMenuItem4.Text = "50";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(88, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(95, 22);
             this.toolStripMenuItem5.Text = "100";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
@@ -117,27 +117,27 @@
             this.color2ToolStripMenuItem1,
             this.bothToolStripMenuItem});
             this.autoColorToolStripMenuItem.Name = "autoColorToolStripMenuItem";
-            this.autoColorToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.autoColorToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.autoColorToolStripMenuItem.Text = "Auto Color";
             // 
             // color1ToolStripMenuItem1
             // 
             this.color1ToolStripMenuItem1.Name = "color1ToolStripMenuItem1";
-            this.color1ToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
+            this.color1ToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.color1ToolStripMenuItem1.Text = "Color1";
             this.color1ToolStripMenuItem1.Click += new System.EventHandler(this.color1ToolStripMenuItem1_Click);
             // 
             // color2ToolStripMenuItem1
             // 
             this.color2ToolStripMenuItem1.Name = "color2ToolStripMenuItem1";
-            this.color2ToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
+            this.color2ToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.color2ToolStripMenuItem1.Text = "Color2";
             this.color2ToolStripMenuItem1.Click += new System.EventHandler(this.color2ToolStripMenuItem1_Click);
             // 
             // bothToolStripMenuItem
             // 
             this.bothToolStripMenuItem.Name = "bothToolStripMenuItem";
-            this.bothToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.bothToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.bothToolStripMenuItem.Text = "Both";
             this.bothToolStripMenuItem.Click += new System.EventHandler(this.bothToolStripMenuItem_Click);
             // 
@@ -155,14 +155,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.ClientSize = new System.Drawing.Size(655, 539);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "交錯矩形 (滑鼠右鍵選單)";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 

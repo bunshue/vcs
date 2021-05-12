@@ -2137,15 +2137,22 @@ namespace vcs_Draw1
 
         private void button36_Click(object sender, EventArgs e)
         {
+            //Rectangle的交集與聯集
 
+            Graphics g = pictureBox1.CreateGraphics();
+
+            Rectangle rect1 = new Rectangle(30, 30, 150, 150);
+            g.FillRectangle(Brushes.Green, rect1); //綠色矩形區塊 固定 畫綠色
+
+            Rectangle rect2 = new Rectangle(120, 120, 150, 150);
+            g.FillRectangle(Brushes.Red, rect2); //紅色矩形區塊 依滑鼠位置變化 畫紅色
+
+            Rectangle union = Rectangle.Union(rect1, rect2); //聯集區域
+            g.DrawRectangle(Pens.Black, union);                   //聯集 畫 黑色框
+
+            Rectangle intersect = Rectangle.Intersect(rect1, rect2); //交集區域
+            g.FillRectangle(Brushes.Yellow, intersect);    //交集 畫黃色
         }
-
-
-
-
-
-
-
 
         //在線的上下畫字
         private void button32_Click(object sender, EventArgs e)

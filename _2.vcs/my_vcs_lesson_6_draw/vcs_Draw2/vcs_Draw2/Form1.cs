@@ -673,7 +673,31 @@ namespace vcs_Draw2
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //畫筆的樣式
+            int x_st = 50;
+            int y_st = 50;
+            int dw = 300;
+            int dy = 60;
 
+            Graphics g = pictureBox1.CreateGraphics();
+
+            Pen p1 = new Pen(Color.Black, 3);  // 紅色畫筆 粗細為 1
+            Pen p2 = new Pen(Color.Red, 10); // 紅色畫筆 粗細為 10
+
+            p1.DashStyle = DashStyle.Dash; //虛線
+            g.DrawLine(p1, x_st, y_st + dy * 0, x_st + dw, y_st + dy * 0);
+
+            p1.DashStyle = DashStyle.DashDot; // 虛線-點線
+            g.DrawLine(p1, x_st, y_st + dy * 1, x_st + dw, y_st + dy * 1);
+
+            p1.DashStyle = DashStyle.DashDotDot; // 虛線-點-點線
+            g.DrawLine(p1, x_st, y_st + dy * 2, x_st + dw, y_st + dy * 2);
+
+            p1.DashStyle = DashStyle.Dot; //點線
+            g.DrawLine(p1, x_st, y_st + dy * 3, x_st + dw, y_st + dy * 3);
+
+            p2.DashStyle = DashStyle.Solid; //實線
+            g.DrawLine(p2, x_st, y_st + dy * 4, x_st + dw, y_st + dy * 4);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1180,7 +1204,7 @@ namespace vcs_Draw2
         {
             flowLayoutPanel1.Visible = true;
             flowLayoutPanel1.Location = new Point(0, 0);
-            flowLayoutPanel1.Size = new Size(960, 640+200);
+            flowLayoutPanel1.Size = new Size(960, 640 + 200);
             flowLayoutPanel1.BackColor = Color.Pink;
 
             // Display the names and samples of the HatchStyle values.
@@ -1255,18 +1279,141 @@ namespace vcs_Draw2
             pic.Image = bm;
             pan.Controls.Add(pic);
         }
-
-
         //HatchStyles SP
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //直線的開端與末端帽緣樣式
+            int x_st = 50;
+            int y_st = 50;
+            int dw = 300;
+            int dy = 60;
+            int dd = 50;
 
+            Graphics g = pictureBox1.CreateGraphics();
+
+            Pen p1 = new Pen(Color.Black, 10);  // 黑色畫筆 粗細為 10
+
+            p1.StartCap = LineCap.Flat; // 扁平線條端點。開端
+            p1.EndCap = LineCap.Flat; // 扁平線條端點。末端
+            g.DrawLine(p1, x_st, y_st + dy * 0, x_st + dw, y_st + dy * 0);
+            g.DrawString("LineCap.Flat", this.Font, Brushes.Black, x_st + dw + dd, y_st + dy * 0);
+
+            p1.StartCap = LineCap.Square; // 方形線條端點。開端
+            p1.EndCap = LineCap.Square; // 方形線條端點。末端
+            g.DrawLine(p1, x_st, y_st + dy * 1, x_st + dw, y_st + dy * 1);
+            g.DrawString("LineCap.Square", this.Font, Brushes.Black, x_st + dw + dd, y_st + dy * 1);
+
+            p1.StartCap = LineCap.Round; // 圓形線條端點。開端
+            p1.EndCap = LineCap.Round; // 圓形線條端點。末端
+            g.DrawLine(p1, x_st, y_st + dy * 2, x_st + dw, y_st + dy * 2);
+            g.DrawString("LineCap.Round", this.Font, Brushes.Black, x_st + dw + dd, y_st + dy * 2);
+
+            p1.StartCap = LineCap.Triangle; // 三角形線條端點。開端
+            p1.EndCap = LineCap.Triangle; // 三角形線條端點。末端
+            g.DrawLine(p1, x_st, y_st + dy * 3, x_st + dw, y_st + dy * 3);
+            g.DrawString("LineCap.Triangle", this.Font, Brushes.Black, x_st + dw + dd, y_st + dy * 3);
+
+            p1.StartCap = LineCap.SquareAnchor; // 方形錨點線條端點。開端
+            p1.EndCap = LineCap.SquareAnchor; // 方形錨點線條端點。末端
+            g.DrawLine(p1, x_st, y_st + dy * 4, x_st + dw, y_st + dy * 4);
+            g.DrawString("LineCap.SquareAnchor", this.Font, Brushes.Black, x_st + dw + dd, y_st + dy * 4);
+
+            p1.StartCap = LineCap.RoundAnchor; // 圓形錨點線條端點。開端
+            p1.EndCap = LineCap.RoundAnchor; // 圓形錨點線條端點。末端
+            g.DrawLine(p1, x_st, y_st + dy * 5, x_st + dw, y_st + dy * 5);
+            g.DrawString("LineCap.RoundAnchor", this.Font, Brushes.Black, x_st + dw + dd, y_st + dy * 5);
+
+            p1.StartCap = LineCap.DiamondAnchor; // 鑽石形線條端點。開端
+            p1.EndCap = LineCap.DiamondAnchor; // 鑽石形線條端點。末端
+            g.DrawLine(p1, x_st, y_st + dy * 6, x_st + dw, y_st + dy * 6);
+            g.DrawString("LineCap.DiamondAnchor", this.Font, Brushes.Black, x_st + dw + dd, y_st + dy * 6);
+
+            p1.StartCap = LineCap.ArrowAnchor; // 箭頭形狀線條端點。開端
+            p1.EndCap = LineCap.ArrowAnchor; // 箭頭形狀線條端點。末端
+            g.DrawLine(p1, x_st, y_st + dy * 7, x_st + dw, y_st + dy * 7);
+            g.DrawString("LineCap.ArrowAnchor", this.Font, Brushes.Black, x_st + dw + dd, y_st + dy * 7);
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //HatchBrush 有樣式的塗刷
 
+            int x_st = 10;
+            int y_st = 10;
+            int w = 100;
+            int dx = w + 20;
+            int dy = w + 50;
+            //int dd = 50;
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush1, x_st + dx * 0, y_st + dy * 0, w, w);
+            g.DrawString("Cross", Font, Brushes.Black, x_st + dx * 0, y_st + dy * 0 + w + 10);
+
+            HatchBrush myBrush2 = new HatchBrush(HatchStyle.DarkVertical, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush2, x_st + dx * 1, y_st + dy * 0, w, w);
+            g.DrawString("DarkVertical", Font, Brushes.Black, x_st + dx * 1, y_st + dy * 0 + w + 10);
+
+            HatchBrush myBrush3 = new HatchBrush(HatchStyle.DarkHorizontal, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush3, x_st + dx * 2, y_st + dy * 0, w, w);
+            g.DrawString("DarkHorizontal", Font, Brushes.Black, x_st + dx * 2, y_st + dy * 0 + w + 10);
+
+            HatchBrush myBrush4 = new HatchBrush(HatchStyle.DiagonalCross, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush4, x_st + dx * 3, y_st + dy * 0, w, w);
+            g.DrawString("DiagonalCross", Font, Brushes.Black, x_st + dx * 3, y_st + dy * 0 + w + 10);
+
+            HatchBrush myBrush5 = new HatchBrush(HatchStyle.Divot, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush5, x_st + dx * 4, y_st + dy * 0, w, w);
+            g.DrawString("Divot", Font, Brushes.Black, x_st + dx * 4, y_st + dy * 0 + w + 10);
+
+
+            HatchBrush myBrush6 = new HatchBrush(HatchStyle.Horizontal, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush6, x_st + dx * 0, y_st + dy * 1, w, w);
+            g.DrawString("Horizontal", Font, Brushes.Black, x_st + dx * 0, y_st + dy * 1 + w + 10);
+
+            HatchBrush myBrush7 = new HatchBrush(HatchStyle.Vertical, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush7, x_st + dx * 1, y_st + dy * 1, w, w);
+            g.DrawString("Vertical", Font, Brushes.Black, x_st + dx * 1, y_st + dy * 1 + w + 10);
+
+            HatchBrush myBrush8 = new HatchBrush(HatchStyle.Plaid, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush8, x_st + dx * 2, y_st + dy * 1, w, w);
+            g.DrawString("Plaid", Font, Brushes.Black, x_st + dx * 2, y_st + dy * 1 + w + 10);
+
+            HatchBrush myBrush9 = new HatchBrush(HatchStyle.Percent50, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush9, x_st + dx * 3, y_st + dy * 1, w, w);
+            g.DrawString("Percent50", Font, Brushes.Black, x_st + dx * 3, y_st + dy * 1 + w + 10);
+
+            HatchBrush myBrush10 = new HatchBrush(HatchStyle.Shingle, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush10, x_st + dx * 4, y_st + dy * 1, w, w);
+            g.DrawString("Shingle", Font, Brushes.Black, x_st + dx * 4, y_st + dy * 1 + w + 10);
+
+
+            HatchBrush myBrush11 = new HatchBrush(HatchStyle.SolidDiamond, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush11, x_st + dx * 0, y_st + dy * 2, w, w);
+            g.DrawString("SolidDiamond", Font, Brushes.Black, x_st + dx * 0, y_st + dy * 2 + w + 10);
+
+            HatchBrush myBrush12 = new HatchBrush(HatchStyle.Trellis, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush12, x_st + dx * 1, y_st + dy * 2, w, w);
+            g.DrawString("Trellis", Font, Brushes.Black, x_st + dx * 1, y_st + dy * 2 + w + 10);
+
+            HatchBrush myBrush13 = new HatchBrush(HatchStyle.Wave, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush13, x_st + dx * 2, y_st + dy * 2, w, w);
+            g.DrawString("Wave", Font, Brushes.Black, x_st + dx * 2, y_st + dy * 2 + w + 10);
+
+            HatchBrush myBrush14 = new HatchBrush(HatchStyle.Weave, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush14, x_st + dx * 3, y_st + dy * 2, w, w);
+            g.DrawString("Weave", Font, Brushes.Black, x_st + dx * 3, y_st + dy * 2 + w + 10);
+
+            HatchBrush myBrush15 = new HatchBrush(HatchStyle.SmallGrid, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush15, x_st + dx * 4, y_st + dy * 2, w, w);
+            g.DrawString("SmallGrid", Font, Brushes.Black, x_st + dx * 4, y_st + dy * 2 + w + 10);
+
+
+            HatchBrush myBrush16 = new HatchBrush(HatchStyle.ZigZag, Color.Yellow, Color.Blue);
+            g.FillEllipse(myBrush16, x_st + dx * 0, y_st + dy * 3, w, w);
+            g.DrawString("ZigZag", Font, Brushes.Black, x_st + dx * 0, y_st + dy * 3 + w + 10);
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -1316,7 +1463,7 @@ namespace vcs_Draw2
             string mesg = "Miter : 指定斜接接合。這會產生尖角或銳角，取決於斜接的長度是否超過斜接限制。\nBevel : 指定斜面接合。這會產生對角\nRound : 指定圓形接合。這會在直線之間產生平滑且圓的弧形。\nMiterClipped : 指定斜接接合。這會產生尖角或斜面角，取決於斜接的長度是否超過斜接限制。";
             x_st = 10;
             f = new Font("標楷體", 10, FontStyle.Bold);
-            g.DrawString(mesg, f, sb, new PointF(0, y_st + h + 70));     
+            g.DrawString(mesg, f, sb, new PointF(0, y_st + h + 70));
 
         }
 
@@ -1517,10 +1664,36 @@ namespace vcs_Draw2
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //漸層色1
+            //LinearGradientBrush線形漸層塗刷
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            LinearGradientBrush lbrush = new LinearGradientBrush(
+       new Point(0, 0),  // 開始的位置
+       new Point(400, 200),// 結束的位置
+       Color.White, // 第一種顏色
+       Color.Blue); // 第二種顏色
+
+            g.FillRectangle(lbrush, 0, 0, 400, 200);
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //漸層色2
+            //PathGradientBrush 路徑漸層塗刷
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            Point[] pt = new Point[3];  // 路徑
+            pt[0] = new Point(0, 0);
+            pt[1] = new Point(200, 200);
+            pt[2] = new Point(400, 0);
+            PathGradientBrush lbrush = new PathGradientBrush(pt);  // 中央顏色 
+            lbrush.CenterColor = Color.Blue;
+            Color[] colorArray = new Color[] { Color.Red, Color.Green, Color.Yellow };
+            lbrush.SurroundColors = colorArray; // 路徑中點的顏色
+            g.FillRectangle(lbrush, 0, 0, 400, 200);
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1686,24 +1859,46 @@ namespace vcs_Draw2
         }
 
 
-                                                                                        private void DrawGrid()
-                                                                                        {
-                                                                                            int i;
-                                                                                            p = new Pen(Color.Navy, 1);
-                                                                                            for (i = 0; i < 7; i++)
-                                                                                            {
-                                                                                                g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
-                                                                                            }
-                                                                                            for (i = 0; i < 7; i++)
-                                                                                            {
-                                                                                                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
-                                                                                            }
-                                                                                        }
+        private void DrawGrid()
+        {
+            int i;
+            p = new Pen(Color.Navy, 1);
+            for (i = 0; i < 7; i++)
+            {
+                g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
+            }
+            for (i = 0; i < 7; i++)
+            {
+                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
+            }
+        }
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //TextureBrush 有圖形的塗刷2
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            Bitmap bmp = new Bitmap(Properties.Resources.Butterfly);
+            TextureBrush Mybrush = new TextureBrush(bmp);  // 使用的影像
+            g.FillEllipse(Mybrush, 20, 20, 400, 200); //塗刷填滿橢圓形區域
+            g.DrawEllipse(Pens.Black, 20, 20, 400, 200);  //畫出橢圓形外框
+
+
         }
 
+        private void button31_Click(object sender, EventArgs e)
+        {
+            //TextureBrush 有圖形的塗刷2
 
+            Graphics g = pictureBox1.CreateGraphics();
+
+            Bitmap bmp = new Bitmap(Properties.Resources.Butterfly);
+            Rectangle rect = new Rectangle(0, 0, 50, 50);
+            TextureBrush Mybrush = new TextureBrush(bmp, rect);  // 使用的影像
+            g.FillEllipse(Mybrush, 20, 20, 400, 200); //塗刷填滿橢圓形區域
+            g.DrawEllipse(Pens.Black, 20, 20, 400, 200);  //畫出橢圓形外框
+        }
     }
 }
+
