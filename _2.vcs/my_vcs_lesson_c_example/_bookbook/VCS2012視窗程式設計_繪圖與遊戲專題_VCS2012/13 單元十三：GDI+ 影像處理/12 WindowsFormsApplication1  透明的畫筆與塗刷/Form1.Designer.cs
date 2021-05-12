@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 528);
+            this.ClientSize = new System.Drawing.Size(1072, 528);
             this.Name = "Form1";
             this.Text = "透明的畫筆與塗刷";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);

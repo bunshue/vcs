@@ -21,7 +21,7 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             img = Properties.Resources.Monet; // 影像從資源載入
-            this.ClientSize = new Size(img.Width, img.Height);// 調整視窗客戶區寬高
+            //this.ClientSize = new Size(img.Width, img.Height);// 調整視窗客戶區寬高
         }
 
         // 表單重畫事件

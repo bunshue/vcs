@@ -38,7 +38,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(170, 289);
+            this.btnOk.Location = new System.Drawing.Point(335, 474);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 30);
             this.btnOk.TabIndex = 9;
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 341);
+            this.ClientSize = new System.Drawing.Size(675, 579);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.mcaVacation);
             this.Controls.Add(this.lblVacation);

@@ -14,6 +14,8 @@ namespace vcs_Label
 {
     public partial class Form1 : Form
     {
+        int move_d = 1;   //記錄跑馬燈文字移動方向    0:向左 1:向右 2:向上 3:向下
+
         public Form1()
         {
             InitializeComponent();
@@ -25,6 +27,7 @@ namespace vcs_Label
             lblRotated1.Visible = false;
             lblRotated2.Visible = false;
             lblRotated3.Visible = false;
+            label_run.Text = DateTime.Now.ToString();
         }
 
         // Draw rotated text.
@@ -71,6 +74,77 @@ namespace vcs_Label
             {
                 lb_moving.Left = this.Width;
             }
+
+            if (move_d == 0)      //向左
+            {
+                label_run.Left -= 10;
+                if (label_run.Left <= -label_run.Width)
+                {
+                    label_run.Left = this.Width;
+                }
+            }
+            else if (move_d == 1)      //向右
+            {
+                label_run.Left += 10;
+                if (label_run.Left >= this.Width)
+                {
+                    label_run.Left = -label_run.Width;
+                }
+            }
+            else if (move_d == 2)      //向上
+            {
+                label_run.Top -= 10;
+                if (label_run.Top <= -label_run.Height)
+                {
+                    label_run.Top = this.Height;
+                }
+            }
+            else if (move_d == 3)      //向下
+            {
+                label_run.Top += 10;
+                if (label_run.Top >= this.Height)
+                {
+                    label_run.Top = -label_run.Height;
+                }
+            }
+            else
+            {
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //向左
+            move_d = 0;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //向右
+            move_d = 1;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //向上
+            move_d = 2;
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //向下
+            move_d = 3;
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //置中
+            int W = this.ClientSize.Width;
+            int H = this.ClientSize.Height;
+            label_run.Left = W / 2;
+            label_run.Top = H / 2;
         }
     }
 }
