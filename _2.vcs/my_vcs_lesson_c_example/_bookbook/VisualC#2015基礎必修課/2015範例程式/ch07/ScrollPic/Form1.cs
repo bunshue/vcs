@@ -20,7 +20,7 @@ namespace ScrollPic
         private void Form1_Load(object sender, EventArgs e)
         {
             picShow.SizeMode = PictureBoxSizeMode.StretchImage;
-            picShow.Image = Image.FromFile("船.jpg");//載入圖檔
+            picShow.Image = Image.FromFile("../../船.jpg");//載入圖檔
             picShow.Height = 90; picShow.Width = 90;//設定圖片高度和寬度
             vsbHeight.Maximum = 180;    //設定vsbHeight的最大值 = 180
             hsbWidth.Maximum = 180;     //設定hsbWidth的最大值 = 180

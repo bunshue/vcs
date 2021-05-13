@@ -19,9 +19,9 @@ namespace Tank
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            picTank.Image = Image.FromFile("tank1.gif");  //載入tank1.gif
+            picTank.Image = Image.FromFile("../../tank1.gif");  //載入tank1.gif
             picTank.Left = 100; picTank.Top = 90;  //預設picTank的位置
-            picFire.Image = Image.FromFile("fire.gif");  //載入fire.gif
+            picFire.Image = Image.FromFile("../../fire.gif");  //載入fire.gif
             picFire.Visible = false;  //預設picFire不可見
         }
         //當按下按鍵時
@@ -42,25 +42,25 @@ namespace Tank
                     picTank.Left += 2;  //右移2點
                     break;
                 case Keys.Up:  //若按向上鍵
-                    picTank.Image = Image.FromFile("tank1.gif");  //載入tank1.gif
+                    picTank.Image = Image.FromFile("../../tank1.gif");  //載入tank1.gif
                     picFire.Left = picTank.Left + 5;  //根據picTank設picFire的位置
                     picFire.Top = picTank.Top - 50;
                     picFire.Visible = true;  //設picFire可視
                     break;
                 case Keys.Right:  //若按向右鍵
-                    picTank.Image = Image.FromFile("tank2.gif");
+                    picTank.Image = Image.FromFile("../../tank2.gif");
                     picFire.Left = picTank.Left + 60;
                     picFire.Top = picTank.Top + 5;
                     picFire.Visible = true;
                     break;
                 case Keys.Down:  //若按向下鍵
-                    picTank.Image = Image.FromFile("tank3.gif");
+                    picTank.Image = Image.FromFile("../../tank3.gif");
                     picFire.Left = picTank.Left + 5;
                     picFire.Top = picTank.Top + 60;
                     picFire.Visible = true;
                     break;
                 case Keys.Left:  //若按向左鍵
-                    picTank.Image = Image.FromFile("tank4.gif");
+                    picTank.Image = Image.FromFile("../../tank4.gif");
                     picFire.Left = picTank.Left - 50;
                     picFire.Top = picTank.Top + 5;
                     picFire.Visible = true;

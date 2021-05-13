@@ -87,6 +87,7 @@
             this.button44 = new System.Windows.Forms.Button();
             this.button45 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.array_sort = new System.Windows.Forms.Button();
             this.numText8 = new System.Windows.Forms.TextBox();
             this.numText7 = new System.Windows.Forms.TextBox();
             this.numText6 = new System.Windows.Forms.TextBox();
@@ -95,7 +96,6 @@
             this.numText3 = new System.Windows.Forms.TextBox();
             this.numText2 = new System.Windows.Forms.TextBox();
             this.numText1 = new System.Windows.Forms.TextBox();
-            this.array_sort = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -634,7 +634,9 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(200, 42);
             this.button36.TabIndex = 63;
+            this.button36.Text = "IndexOf的用法";
             this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
             // button37
             // 
@@ -643,7 +645,9 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 42);
             this.button37.TabIndex = 64;
+            this.button37.Text = "排序";
             this.button37.UseVisualStyleBackColor = true;
+            this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
             // button38
             // 
@@ -653,6 +657,7 @@
             this.button38.Size = new System.Drawing.Size(200, 42);
             this.button38.TabIndex = 65;
             this.button38.UseVisualStyleBackColor = true;
+            this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
             // button39
             // 
@@ -662,6 +667,7 @@
             this.button39.Size = new System.Drawing.Size(200, 42);
             this.button39.TabIndex = 66;
             this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
             // button40
             // 
@@ -671,6 +677,7 @@
             this.button40.Size = new System.Drawing.Size(200, 42);
             this.button40.TabIndex = 67;
             this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
             // button41
             // 
@@ -680,6 +687,7 @@
             this.button41.Size = new System.Drawing.Size(200, 42);
             this.button41.TabIndex = 68;
             this.button41.UseVisualStyleBackColor = true;
+            this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
             // button42
             // 
@@ -689,6 +697,7 @@
             this.button42.Size = new System.Drawing.Size(200, 42);
             this.button42.TabIndex = 69;
             this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
             // button43
             // 
@@ -698,6 +707,7 @@
             this.button43.Size = new System.Drawing.Size(200, 42);
             this.button43.TabIndex = 70;
             this.button43.UseVisualStyleBackColor = true;
+            this.button43.Click += new System.EventHandler(this.button43_Click);
             // 
             // button44
             // 
@@ -707,6 +717,7 @@
             this.button44.Size = new System.Drawing.Size(200, 42);
             this.button44.TabIndex = 71;
             this.button44.UseVisualStyleBackColor = true;
+            this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
             // button45
             // 
@@ -716,6 +727,7 @@
             this.button45.Size = new System.Drawing.Size(200, 42);
             this.button45.TabIndex = 72;
             this.button45.UseVisualStyleBackColor = true;
+            this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
             // groupBox2
             // 
@@ -734,6 +746,16 @@
             this.groupBox2.TabIndex = 73;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "物件Array";
+            // 
+            // array_sort
+            // 
+            this.array_sort.Location = new System.Drawing.Point(126, 63);
+            this.array_sort.Name = "array_sort";
+            this.array_sort.Size = new System.Drawing.Size(94, 23);
+            this.array_sort.TabIndex = 17;
+            this.array_sort.Text = "物件陣列測試";
+            this.array_sort.UseVisualStyleBackColor = true;
+            this.array_sort.Click += new System.EventHandler(this.array_sort_Click);
             // 
             // numText8
             // 
@@ -798,16 +820,6 @@
             this.numText1.Size = new System.Drawing.Size(32, 22);
             this.numText1.TabIndex = 9;
             this.numText1.Text = "0";
-            // 
-            // array_sort
-            // 
-            this.array_sort.Location = new System.Drawing.Point(126, 63);
-            this.array_sort.Name = "array_sort";
-            this.array_sort.Size = new System.Drawing.Size(94, 23);
-            this.array_sort.TabIndex = 17;
-            this.array_sort.Text = "物件陣列測試";
-            this.array_sort.UseVisualStyleBackColor = true;
-            this.array_sort.Click += new System.EventHandler(this.array_sort_Click);
             // 
             // Form1
             // 

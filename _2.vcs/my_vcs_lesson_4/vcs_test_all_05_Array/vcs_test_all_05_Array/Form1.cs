@@ -91,6 +91,7 @@ namespace vcs_test_all_05_Array
             button45.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Size = new Size(800, 900);
 
             groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 13);
@@ -1426,6 +1427,145 @@ namespace vcs_test_all_05_Array
         }
         //解讀一個在TextBox的矩陣 SP
 
+        private void button36_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "IndexOf的用法\n";
+
+            string[] stu = new string[] { "趙一", "林二", "張三", "李四", "王五" };
+            int[] score = new int[] { 95, 100, 100, 92, 100 };
+
+            richTextBox1.Text += "一份成績表, 搜尋100分的學生\t";
+            //string msg = "一百分學生：";
+            int index = Array.IndexOf(score, 100);   //搜尋第一個滿分學生
+            while (index >= 0)                   //當index >= 0繼續迴圈
+            {
+                richTextBox1.Text += stu[index] + ", ";      // 顯示學生姓名
+                index = Array.IndexOf(score, 100, index + 1);  // 從下一筆繼續搜尋
+            };
+            richTextBox1.Text += "\n";
+
+
+
+            //定義學生的學號陣列StuId及姓名陣列StuName
+            string[] StuId = new string[] { "8001", "8002", "8003", "8004", "8005" };
+            string[] StuName = new string[] { "劉學有", "張杰輪", "周立宏", "王吉吉", "陶得華" };
+            richTextBox1.Text += "一份學號與姓名對照表, 搜尋學號為8003的學生\t";
+
+            // 使用Array.IndexOf方法搜尋txtId.Text在StuId陣列中是第幾個元素
+            int search_num = Array.IndexOf(StuId, "8003");
+            if (search_num != -1)
+            {
+                //lblMsg.Text = StuName[search_num] + "    歡迎光臨!!";
+                richTextBox1.Text += "查到學生:\t" + StuName[search_num] + "\n";
+            }
+            else
+            {
+                //lblMsg.Text = "Sorry!   查無此學生!!";
+                richTextBox1.Text += "查無此學生\n";
+            }
+
+
+            //song字串陣列存放歌曲名稱
+            string[] song = new string[] { "姐姐", "天后", "我的歌聲裡", "東區東區", "勢在必行", "末班車", "一個人想著一個人", "愛你", "阿飛的小蝴蝶", "王妃" };
+            //singer字串陣列存放歌手姓名
+            string[] singer = new string[] { "謝金燕", "陳勢安", "曲婉婷", "八三夭", "陳勢安", "蕭煌奇", "曾沛慈", "陳芳語", "蕭敬騰", "蕭敬騰" };
+            richTextBox1.Text += "一份歌手與專輯的對照表, 搜尋歌手為<陳芳語>的專輯\n";
+
+            string search = "陳芳語"; //取得使用者查詢的歌手姓名
+            string msg = "找不到" + search; //預設找不到
+            index = Array.IndexOf(singer, search);   //搜尋第一個歌手
+            if (index >= 0) //若有找到相符的資料
+            {
+                msg = "歌手" + "\t" + "歌曲" + Environment.NewLine;
+                while (index >= 0)   //當index >= 0繼續迴圈
+                {
+                    msg += singer[index] + "\t" + song[index] + Environment.NewLine;    //顯示資料內容
+                    index = Array.IndexOf(singer, search, index + 1); //從下一筆繼續搜尋
+                };
+            }
+            //txtMsg.Text = msg;  //顯示資料內容
+            richTextBox1.Text += msg + "\n";
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "一份歌手與歌曲的對照表, 依排名排序  依歌曲名排序\n";
+
+            //song字串陣列存放歌曲名稱
+            string[] song = new string[] { "姐姐", "天后", "我的歌聲裡", "東區東區", "勢在必行", "末班車", "一個人想著一個人", "愛你", "阿飛的小蝴蝶", "王妃" };
+            //singer字串陣列存放歌手姓名
+            string[] singer = new string[] { "謝金燕", "陳勢安", "曲婉婷", "八三夭", "陳勢安", "蕭煌奇", "曾沛慈", "陳芳語", "蕭敬騰", "蕭敬騰" };
+            int[] no = new int[10]; //no整數陣列存放排名
+
+            for (int i = 0; i < no.Length; i++) //設定no陣列的初值
+            {
+                no[i] = i + 1;
+            }
+
+            richTextBox1.Text += "依排名排序\n";
+            int[] temp1 = new int[no.Length];//宣告temp整數陣列，大小和no陣列相同
+            no.CopyTo(temp1, 0);   //將no陣列的內容複製到temp陣列
+            Array.Sort(no, song);   //nog陣列遞增排序，song陣列同步調整
+            Array.Sort(temp1, singer);   //temp陣列遞增排序，singer陣列同步調整
+            string msg1 = "排名" + "\t" + "歌手" + "\t" + "歌曲" + Environment.NewLine;
+            for (int i = 0; i < song.Length; i++)
+            {
+                msg1 += no[i].ToString() + "\t" + singer[i] + "\t" + song[i] + Environment.NewLine;
+            }
+            richTextBox1.Text += msg1 + "\n";
+
+            richTextBox1.Text += "依歌曲名排序\n";
+            string[] temp2 = new string[song.Length];//宣告temp字串陣列，大小和song陣列相同
+            song.CopyTo(temp2, 0);   //將song陣列的內容複製到temp陣列
+            Array.Sort(song, no);   //song陣列遞增排序，no陣列同步調整
+            Array.Sort(temp2, singer);   //temp陣列遞增排序，singer陣列同步調整
+            string msg2 = "排名" + "\t" + "歌手" + "\t" + "歌曲" + Environment.NewLine;
+            for (int i = 0; i < song.Length; i++)
+            {
+                msg2 += no[i].ToString() + "\t" + singer[i] + "\t" + song[i] + Environment.NewLine;
+            }
+            richTextBox1.Text += msg2 + "\n";
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+
+        }
 
         //Hashtable 測試 ST
 
@@ -1610,6 +1750,5 @@ namespace vcs_test_all_05_Array
             return name1.CompareTo(name2);
         }
     }
-
-
 }
+

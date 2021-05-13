@@ -33,6 +33,7 @@
             this.picShow = new System.Windows.Forms.PictureBox();
             this.vsbHeight = new System.Windows.Forms.VScrollBar();
             this.hsbWidth = new System.Windows.Forms.HScrollBar();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picShow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,11 +79,20 @@
             this.hsbWidth.TabIndex = 10;
             this.hsbWidth.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbWidth_Scroll);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(469, 9);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(266, 583);
+            this.richTextBox1.TabIndex = 15;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(747, 604);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.lblW);
             this.Controls.Add(this.lblH);
             this.Controls.Add(this.picShow);
@@ -104,6 +114,7 @@
         private System.Windows.Forms.PictureBox picShow;
         private System.Windows.Forms.VScrollBar vsbHeight;
         private System.Windows.Forms.HScrollBar hsbWidth;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

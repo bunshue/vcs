@@ -34,7 +34,7 @@
             // lblTouch
             // 
             this.lblTouch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblTouch.Location = new System.Drawing.Point(80, 79);
+            this.lblTouch.Location = new System.Drawing.Point(54, 45);
             this.lblTouch.Name = "lblTouch";
             this.lblTouch.Size = new System.Drawing.Size(112, 70);
             this.lblTouch.TabIndex = 0;

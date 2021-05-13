@@ -21,12 +21,12 @@ namespace MouseMove
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            picCat.Image = Image.FromFile("cat1.gif");//載入cat1.gif
+            picCat.Image = Image.FromFile("../../cat1.gif");//載入cat1.gif
         }
         //在表單上按一下左鍵時
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
-            picCat.Image = Image.FromFile("cat2.gif");//載入cat2.gif
+            picCat.Image = Image.FromFile("../../cat2.gif");//載入cat2.gif
             move = true;//設圖片隨滑鼠移動
         }
         //滑鼠在表單上移動時
@@ -41,7 +41,7 @@ namespace MouseMove
         //在表單上快按兩下左鍵時
         private void Form1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            picCat.Image = Image.FromFile("cat1.gif");//載入cat1.gif
+            picCat.Image = Image.FromFile("../../cat1.gif");//載入cat1.gif
             move = false;//設圖片不隨滑鼠移動
         }
     }

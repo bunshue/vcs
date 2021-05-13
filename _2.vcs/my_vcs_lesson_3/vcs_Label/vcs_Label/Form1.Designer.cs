@@ -46,6 +46,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label_run = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label4
@@ -209,11 +210,22 @@
             this.label_run.TabIndex = 29;
             this.label_run.Text = "label6";
             // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Pink;
+            this.label6.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.Location = new System.Drawing.Point(14, 19);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(552, 84);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "AutoSize=False 可以設定Label的Size";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 628);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label_run);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -258,6 +270,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label_run;
+        private System.Windows.Forms.Label label6;
     }
 }
 
