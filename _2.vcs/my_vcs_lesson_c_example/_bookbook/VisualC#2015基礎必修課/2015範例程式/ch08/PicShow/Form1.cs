@@ -22,7 +22,7 @@ namespace PicShow
         {
             Button btnHit = (Button)sender;   // 將sender轉型成Button物件btnHit
             // pictrueBox1顯示btnHit.Text上的圖檔名稱
-            pictureBox1.Image = new Bitmap(btnHit.Text + ".jpg");
+            pictureBox1.Image = new Bitmap("../../" + btnHit.Text + ".jpg");
         }
         // 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace PicShow
                 btn[i].Click += new EventHandler(MyClick);
             }
             // 指定pictureBox1顯示無尾態.jpg
-            pictureBox1.Image = new Bitmap(picName[1] + ".jpg");
+            pictureBox1.Image = new Bitmap("../../" + picName[1] + ".jpg");
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
     }

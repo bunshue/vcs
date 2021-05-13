@@ -21,9 +21,9 @@ namespace Picture
         {
             no = 1; //預設照片編號為1
             lblNo.Text = "第" + no.ToString() + "張";
-            picShow.Image = new Bitmap("pic" + no.ToString() + ".jpg");//載入圖檔
+            pictureBox1.Image = new Bitmap("../../pic" + no.ToString() + ".jpg");//載入圖檔
             //設隨控制項調整圖片大小
-            picShow.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             btnP.Enabled = false;   //設上一張鈕不能使用
         }
         //按下一張鈕時
@@ -33,8 +33,8 @@ namespace Picture
             lblNo.Text = "第" + no.ToString() + "張"; //顯示照片編號
             btnP.Enabled = true;   //設上一張鈕可以使用
             if (no == 4) btnN.Enabled = false;   //若no = 4設下一張鈕不能使用
-            picShow.Image = new Bitmap("pic" + no.ToString() + ".jpg");
-            picShow.Size = new Size(250, 200);  //恢復成預設大小
+            pictureBox1.Image = new Bitmap("../../pic" + no.ToString() + ".jpg");
+            pictureBox1.Size = new Size(250, 200);  //恢復成預設大小
         }
         //按上一張鈕時
         private void btnP_Click(object sender, EventArgs e)
@@ -43,15 +43,15 @@ namespace Picture
             lblNo.Text = "第" + no.ToString() + "張"; //顯示照片編號
             btnN.Enabled = true;   //設下一張鈕可以使用
             if (no == 1) btnP.Enabled = false;   //若no = 1設上一張鈕不能使用
-            picShow.Image = new Bitmap("pic" + no.ToString() + ".jpg");
-            picShow.Size = new Size(250, 200);  //恢復成預設大小
+            pictureBox1.Image = new Bitmap("../../pic" + no.ToString() + ".jpg");
+            pictureBox1.Size = new Size(250, 200);  //恢復成預設大小
         }
         //按縮小鈕時
         private void btnS_Click(object sender, EventArgs e)
         {
             for (int w = 250; w >= 50; w -= 20)   //圖片寬度由250到50，間距為-20
             {
-                picShow.Size = new Size(w, Convert.ToInt32(w * 0.8));//重設大小
+                pictureBox1.Size = new Size(w, Convert.ToInt32(w * 0.8));//重設大小
                 DateTime now = DateTime.Now;    //now紀錄目前時間
                 do     //時間間隔 < 0.1秒
                 {

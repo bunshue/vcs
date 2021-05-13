@@ -32,13 +32,13 @@
             this.lblNo = new System.Windows.Forms.Label();
             this.btnN = new System.Windows.Forms.Button();
             this.btnP = new System.Windows.Forms.Button();
-            this.picShow = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picShow)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnS
             // 
-            this.btnS.Location = new System.Drawing.Point(208, 224);
+            this.btnS.Location = new System.Drawing.Point(212, 538);
             this.btnS.Name = "btnS";
             this.btnS.Size = new System.Drawing.Size(64, 23);
             this.btnS.TabIndex = 14;
@@ -49,7 +49,7 @@
             // lblNo
             // 
             this.lblNo.AutoSize = true;
-            this.lblNo.Location = new System.Drawing.Point(83, 229);
+            this.lblNo.Location = new System.Drawing.Point(87, 543);
             this.lblNo.Name = "lblNo";
             this.lblNo.Size = new System.Drawing.Size(33, 12);
             this.lblNo.TabIndex = 13;
@@ -57,7 +57,7 @@
             // 
             // btnN
             // 
-            this.btnN.Location = new System.Drawing.Point(132, 224);
+            this.btnN.Location = new System.Drawing.Point(136, 538);
             this.btnN.Name = "btnN";
             this.btnN.Size = new System.Drawing.Size(64, 23);
             this.btnN.TabIndex = 12;
@@ -67,7 +67,7 @@
             // 
             // btnP
             // 
-            this.btnP.Location = new System.Drawing.Point(12, 224);
+            this.btnP.Location = new System.Drawing.Point(16, 538);
             this.btnP.Name = "btnP";
             this.btnP.Size = new System.Drawing.Size(64, 23);
             this.btnP.TabIndex = 11;
@@ -75,28 +75,28 @@
             this.btnP.UseVisualStyleBackColor = true;
             this.btnP.Click += new System.EventHandler(this.btnP_Click);
             // 
-            // picShow
+            // pictureBox1
             // 
-            this.picShow.Location = new System.Drawing.Point(16, 13);
-            this.picShow.Name = "picShow";
-            this.picShow.Size = new System.Drawing.Size(250, 200);
-            this.picShow.TabIndex = 10;
-            this.picShow.TabStop = false;
+            this.pictureBox1.Location = new System.Drawing.Point(16, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(497, 481);
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(726, 605);
             this.Controls.Add(this.btnS);
             this.Controls.Add(this.lblNo);
             this.Controls.Add(this.btnN);
             this.Controls.Add(this.btnP);
-            this.Controls.Add(this.picShow);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picShow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,7 +108,7 @@
         private System.Windows.Forms.Label lblNo;
         private System.Windows.Forms.Button btnN;
         private System.Windows.Forms.Button btnP;
-        private System.Windows.Forms.PictureBox picShow;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

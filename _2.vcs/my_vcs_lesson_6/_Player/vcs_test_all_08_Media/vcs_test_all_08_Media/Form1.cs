@@ -8,8 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;    //for FileStream, path
-using System.Media;	        //for SoundPlayer
-using Microsoft.Win32;    //for RegistryKey
+using System.Media;         //SystemSounds類別、SoundPlayer類別
+using Microsoft.Win32;      //for RegistryKey
 using System.Runtime.InteropServices;   //for DllImport
 
 using WMPLib;   //for mp3
@@ -58,12 +58,14 @@ namespace vcs_test_all_08_Media
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //法一
-            //直接使用 System.Media.SoundPlayer 類別 播放.wav檔
-            //System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\______test_files\_wav\WindowsShutdown.wav");
+            string filename = @"C:\______test_files\_wav\chimes.wav";
 
-            //法二, 直接使用 System.Media.SoundPlayer 類別
-            //System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
+            //法一
+            //直接使用 SoundPlayer 類別 播放.wav檔
+            //SoundPlayer sp = new SoundPlayer(@"C:\______test_files\_wav\WindowsShutdown.wav");
+
+            //法二, 直接使用 SoundPlayer 類別
+            //SoundPlayer sp = new SoundPlayer();
             //sp.SoundLocation = @"F:\_______mp3_ALL_all1\_mp3_0_中英日語文\《遥远的绝响--配乐朗诵余秋雨作品(共4篇)》.赵忠祥.[wav]\02.都江堰.wav";
 
             //法三
@@ -72,20 +74,31 @@ namespace vcs_test_all_08_Media
             //sp.Play(); // 撥放
 
             //法四
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-            player.SoundLocation = @"C:\______test_files\_wav\start.wav";
-            player.Play();
+            //SoundPlayer sp = new SoundPlayer();   // 新增一個SoundPlayer物件
+            //sp.SoundLocation = filename;          // 設定聲音檔案的路徑和名稱
+            //sp.Play();    // 播放
 
+            //法五    播放外部的聲音檔
+            //SoundPlayer sp = new SoundPlayer(filename);
+            //sp.Play();  // 播放
+            //sp.PlayLooping(); // 重複循環播放
+            //sp.PlaySync(); // 播放 -- 等候播放完成後，再繼續執行程式碼
+            //sp.Stop(); // 停止播放
+
+            //法六    設定檔案的串流 從專案的資源來的
+            SoundPlayer sp = new SoundPlayer();// 新增一個SoundPlayer物件
+            sp.Stream = Properties.Resources.WindowsShutdown; // 設定檔案的串流 從專案的資源來的
+            sp.Play(); // 播放
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //法一
-            //直接使用 System.Media.SoundPlayer 類別
-            System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\______test_files\_wav\WindowsShutdown.wav");
+            //直接使用 SoundPlayer 類別
+            SoundPlayer sp = new SoundPlayer(@"C:\______test_files\_wav\WindowsShutdown.wav");
 
             //法二
-            //System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
+            //SoundPlayer sp = new SoundPlayer();
             //sp.SoundLocation = @"F:\_______mp3_ALL_all1\_mp3_0_中英日語文\《遥远的绝响--配乐朗诵余秋雨作品(共4篇)》.赵忠祥.[wav]\02.都江堰.wav";
 
             sp.Stop(); // 停止
@@ -99,27 +112,27 @@ namespace vcs_test_all_08_Media
             switch (number)
             {
                 case 0:
-                    System.Media.SystemSounds.Beep.Play();
+                    SystemSounds.Beep.Play();
                     richTextBox1.Text += "Beep\n";
                     break;
                 case 1:
-                    System.Media.SystemSounds.Asterisk.Play();
+                    SystemSounds.Asterisk.Play();
                     richTextBox1.Text += "Asterisk\n";
                     break;
                 case 2:
-                    System.Media.SystemSounds.Exclamation.Play();
+                    SystemSounds.Exclamation.Play();
                     richTextBox1.Text += "Exclamation\n";
                     break;
                 case 3:
-                    System.Media.SystemSounds.Hand.Play();
+                    SystemSounds.Hand.Play();
                     richTextBox1.Text += "Hand\n";
                     break;
                 case 4:
-                    System.Media.SystemSounds.Question.Play();
+                    SystemSounds.Question.Play();
                     richTextBox1.Text += "Question\n";
                     break;
                 default:
-                    System.Media.SystemSounds.Beep.Play();
+                    SystemSounds.Beep.Play();
                     richTextBox1.Text += "Beep\n";
                     break;
             }
@@ -186,7 +199,7 @@ namespace vcs_test_all_08_Media
                 Player.Play();
         }
 
-       
+
         // 取得多媒體檔案長度
         private long GetMediaLen(string File)
         {
@@ -224,7 +237,7 @@ namespace vcs_test_all_08_Media
             //richTextBox1.Text += "totalLen = " + totalLen.ToString() + "\n";
             //richTextBox1.Text += "ret = " + ret.ToString() + "\n";
             return ret;
-        }  
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -243,7 +256,7 @@ namespace vcs_test_all_08_Media
             {
                 label1.Text = "00:00" + " / " + wplayer.currentMedia.durationString;
                 timer1.Enabled = false;
-            }  
+            }
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -308,7 +321,31 @@ namespace vcs_test_all_08_Media
             trackBar2.Value = 0;
         }
 
+        //使用 winmm.DLL 的 PlaySound() 播放.wav檔 ST
+        [System.Runtime.InteropServices.DllImport("winmm.DLL", EntryPoint = "PlaySound", SetLastError = true)]
+        private static extern bool PlaySound(string szSound, System.IntPtr hMod, PlaySoundFlags flags);
 
+        [System.Flags]
+        public enum PlaySoundFlags : int
+        {
+            SND_SYNC = 0x0000,
+            SND_ASYNC = 0x0001,
+            SND_NODEFAULT = 0x0002,
+            SND_LOOP = 0x0008,
+            SND_NOSTOP = 0x0010,
+            SND_NOWAIT = 0x00002000,
+            SND_FILENAME = 0x00020000,
+            SND_RESOURCE = 0x00040004
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //使用 winmm.DLL 的 PlaySound() 播放.wav檔
+            string filename = @"C:\______test_files\_wav\chimes.wav";
+
+            PlaySound(filename, new System.IntPtr(), PlaySoundFlags.SND_SYNC);
+        }
+        //使用 winmm.DLL 的 PlaySound() 播放.wav檔 SP
 
     }
 }

@@ -160,5 +160,18 @@ namespace vcs_WindowsMediaPlayer
             axWindowsMediaPlayer1.Ctlcontrols.currentPosition = 0;      //移動播放位置到最前面
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //播放外部的 MP3 檔案
+
+            string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+
+            //axWindowsMediaPlayer1.settings.autoStart = false; // 不自動播放
+            //axWindowsMediaPlayer1.settings.mute = true;       // 無聲
+            axWindowsMediaPlayer1.URL = filename;          // 載入 mp3
+            axWindowsMediaPlayer1.settings.volume = 90;       // 音量 0 ~ 100
+
+        }
     }
 }

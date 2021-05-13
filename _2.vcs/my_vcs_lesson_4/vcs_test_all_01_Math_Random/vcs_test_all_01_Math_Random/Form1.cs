@@ -2420,7 +2420,28 @@ namespace vcs_test_all_01_Math_Random
 
         private void button34_Click(object sender, EventArgs e)
         {
+            //貸款試算
 
+            //  彰化銀行-貸款試算
+            //  https://www.bankchb.com/frontend/SM1-2.jsp?type=2
+
+            richTextBox1.Text += "本息平均攤還\n";
+            richTextBox1.Text += "利率段式\t一段式\n";
+
+            int loan = 10000000;
+            int year = 20;
+            double rate = 0.03;  //年利率
+            double payRate;
+
+            //計算每月應付本息金額之平均攤還率
+            payRate = ((Math.Pow((1 + rate / 12), year * 12) * rate / 12)) / (Math.Pow((1 + rate / 12), year * 12) - 1);
+
+
+            richTextBox1.Text += "貸款金額\t" + loan.ToString() + "\n";
+            richTextBox1.Text += "貸款年限\t" + year.ToString() + "\n";
+            richTextBox1.Text += "貸款年利率\t" + (rate * 100).ToString() + "%\n";
+
+            richTextBox1.Text += "每月應付本息金額\t" + ((int)(loan * payRate + 0.5)).ToString() + "\n";
         }
 
         private void button35_Click(object sender, EventArgs e)
