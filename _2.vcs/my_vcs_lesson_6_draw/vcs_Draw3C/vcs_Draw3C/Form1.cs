@@ -18,6 +18,16 @@ namespace vcs_Draw3C
         int W = 250;
         int H = 250;
 
+        //數字 8 雙扭線 (Lemniscate of Bernoulli) ST
+        G2D_LemniscateOfBernoulli lob;
+
+        int angle0 = 0; // 數字 8 曲線公式的參數值(角度 0 ~ 359)
+
+        int cx0, cy0;  // 中心點
+        int radius0; // 半徑
+        //數字 8 雙扭線 (Lemniscate of Bernoulli) SP
+
+
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +37,14 @@ namespace vcs_Draw3C
         {
             show_item_location();
 
+            //數字 8 雙扭線 (Lemniscate of Bernoulli) ST
+            this.pictureBox1.ClientSize = new Size(250, 250);
+            cx0 = this.pictureBox1.ClientSize.Width / 2;
+            cy0 = this.pictureBox1.ClientSize.Height / 2;
+            radius0 = (int)(Math.Min(cx0, cy0) * 2 * 0.3);
+
+            lob = new G2D_LemniscateOfBernoulli(radius0);
+            //數字 8 雙扭線 (Lemniscate of Bernoulli) SP
         }
 
         void show_item_location()
@@ -119,6 +137,44 @@ namespace vcs_Draw3C
             Environment.Exit(0);
         }
 
+        //數字 8 雙扭線 (Lemniscate of Bernoulli) ST
+
+        // http://en.wikipedia.org/wiki/Lemniscate_of_Bernoulli
+
+        // Converting between polar and Cartesian coordinates
+        // x = r cos(θ)
+        // y = r sin(θ)
+
+        private void pictureBox0_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            lob.Draw(e.Graphics, cx0, cy0);
+
+            PointF pt = lob.GetPos(angle0, cx0, cy0);
+            e.Graphics.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
+
+        }
+
+        private void timer0_Tick(object sender, EventArgs e)
+        {
+            angle0++;
+            angle0 %= 360;
+            this.pictureBox0.Invalidate();
+        }
+        //數字 8 雙扭線 (Lemniscate of Bernoulli) SP
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox1.Invalidate();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+
+
+
+        }
 
 
 

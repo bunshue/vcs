@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_PictureCrop4
+using System.Drawing.Imaging;   //for ImageFormat
+
+namespace vcs_PictureCrop1
 {
     public partial class Form1 : Form
     {
@@ -101,20 +103,21 @@ namespace vcs_PictureCrop4
             if (h < 1)
                 return;
 
-            Bitmap area = new Bitmap(w, h);
-            using (Graphics g2 = Graphics.FromImage(area))
+            bitmap2 = new Bitmap(w, h);  //擷取部分位圖Bitmap
+            using (Graphics g2 = Graphics.FromImage(bitmap2))
             {
                 Rectangle dest_rectangle = new Rectangle(0, 0, w, h);
                 g2.DrawImage(bitmap1, dest_rectangle, select_rectangle, GraphicsUnit.Pixel);
             }
 
             // Display the result.
-            pictureBox2.Image = area;
+            pictureBox2.Image = bitmap2;
         }
 
         // If the user presses Escape, cancel.
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //若有RichTextBox則此功能失效
             if (e.KeyChar == 27)
             {
                 if (flag_select_area == false)
@@ -127,6 +130,36 @@ namespace vcs_PictureCrop4
                 pictureBox1.Image = bitmap1;
                 pictureBox1.Refresh();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (bitmap2 != null)
+            {
+                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+                try
+                {
+                    bitmap2.Save(filename, ImageFormat.Bmp);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

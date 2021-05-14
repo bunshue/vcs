@@ -33,9 +33,15 @@ namespace WindowsFormsApplication1
                     e.Graphics.FillEllipse(Brushes.Black, (float)x - 1, (float)y - 1, 2, 2);
                 }
             }
+
         }
 
         private void Form1_Resize(object sender, EventArgs e)
+        {
+            this.Invalidate();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             this.Invalidate();
         }

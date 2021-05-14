@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1.csproj", "{EDB21B37-3ED7-4B98-8074-33AA1A724642}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PingPongGame3", "vcs_PingPongGame3\vcs_PingPongGame3.csproj", "{EDB21B37-3ED7-4B98-8074-33AA1A724642}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;  // for PointF
 using System.Drawing.Drawing2D; //  for GraphicsPath
 
-namespace WindowsFormsApplication1
+namespace vcs_Draw3C
 {
     class G2D_LemniscateOfBernoulli
     {

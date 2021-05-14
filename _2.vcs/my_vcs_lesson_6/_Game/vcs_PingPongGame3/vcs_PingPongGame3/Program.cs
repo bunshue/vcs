@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_PictureCrop4
+namespace vcs_PingPongGame3
 {
     static class Program
     {

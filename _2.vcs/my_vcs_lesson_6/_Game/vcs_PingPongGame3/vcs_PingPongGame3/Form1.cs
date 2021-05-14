@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1
+namespace vcs_PingPongGame3
 {
     public partial class Form1 : Form
     {
