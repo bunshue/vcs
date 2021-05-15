@@ -41,7 +41,6 @@ namespace vcs_PictureCrop7
             bitmap1 = new Bitmap(this.BackgroundImage);//BackgroundImage為全屏圖片，我們另用變量來保存全屏圖片
             W = this.BackgroundImage.Width;
             H = this.BackgroundImage.Height;
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
             /*
             string filename = @"C:\______test_files\picture1.jpg";
@@ -118,11 +117,8 @@ namespace vcs_PictureCrop7
                     pt_sp = e.Location;//保存鼠標放開時的坐標
                     flag_select_area = false;
 
-                    richTextBox1.Text += "pt_st = " + pt_st.ToString() + "\n";
-                    richTextBox1.Text += "pt_sp = " + pt_sp.ToString() + "\n";
                     int w = Math.Abs(pt_sp.X - pt_st.X) + 1;
                     int h = Math.Abs(pt_sp.Y - pt_st.Y) + 1;
-                    richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
 
                     int sx = pt_st.X;
                     int sy = pt_st.Y;
@@ -149,20 +145,6 @@ namespace vcs_PictureCrop7
                     bitmap1.Dispose();
                 }
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "pt_st = " + pt_st.ToString() + "\n";
-            richTextBox1.Text += "pt_sp = " + pt_sp.ToString() + "\n";
-            int w = Math.Abs(pt_sp.X - pt_st.X) + 1;
-            int h = Math.Abs(pt_sp.Y - pt_st.Y) + 1;
-            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)

@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace vcs_PingPongGame4
 {
     partial class Form1
     {

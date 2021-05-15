@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
 using System.Drawing.Imaging;
 
 namespace vcs_PictureCrop2
@@ -135,16 +134,6 @@ namespace vcs_PictureCrop2
                 }
                 return new_bitmap;
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Reset
-            // Display the original image.
-            bitmap2 = bitmap1.Clone() as Bitmap;
-            DisplayImage = bitmap1.Clone() as Bitmap;
-            DisplayGraphics = Graphics.FromImage(DisplayImage);
-            pictureBox1.Image = DisplayImage;
         }
     }
 }

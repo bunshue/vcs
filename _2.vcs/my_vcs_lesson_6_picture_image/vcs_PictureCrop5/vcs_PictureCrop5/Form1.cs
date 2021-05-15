@@ -106,25 +106,12 @@ namespace vcs_PictureCrop5
             if ((select_rectangle.Width > 0) && (select_rectangle.Height > 0))
             {
                 // Display the Rectangle.
-                richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
+                //richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
             }
         }
 
-        // If the user presses Escape, cancel.
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 27)
-            {
-                if (flag_select_area == false)
-                    return;
-                flag_select_area = false;
-
-                // Stop selecting.
-                bitmap2 = null;
-                g2 = null;
-                pictureBox1.Image = bitmap1;
-                pictureBox1.Refresh();
-            }
         }
     }
 }

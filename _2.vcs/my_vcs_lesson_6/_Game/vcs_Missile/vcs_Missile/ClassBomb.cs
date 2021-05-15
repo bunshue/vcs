@@ -1,10 +1,9 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2009-09 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace WindowsFormsApplication1
+namespace vcs_Missile
 {
     class ClassBomb
     {
