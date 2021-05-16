@@ -57,8 +57,15 @@ namespace vcs_PictureCrop1
         // Start selecting the rectangle.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            flag_select_area = true;
-            pt_st = e.Location; //起始點座標
+            if (e.Button == MouseButtons.Left)
+            {
+                flag_select_area = true;
+                pt_st = e.Location; //起始點座標
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                richTextBox1.Text += "滑鼠右鍵\t準備貼上選取的部分\n";
+            }
         }
 
         // Continue selecting.
@@ -78,7 +85,9 @@ namespace vcs_PictureCrop1
             // Draw the selection rectangle.
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                g.DrawRectangle(Pens.Green, select_rectangle);
+                Pen select_pen = new Pen(Color.Green);
+                select_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                g.DrawRectangle(select_pen, select_rectangle);
             }
             // Display the temporary bitmap.
             pictureBox1.Image = bmp;
@@ -251,4 +260,3 @@ namespace vcs_PictureCrop1
         }
     }
 }
-
