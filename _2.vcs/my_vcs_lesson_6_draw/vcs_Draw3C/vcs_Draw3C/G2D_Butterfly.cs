@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace WindowsFormsApplication1
+namespace vcs_Draw3C
 {
     class G2D_Butterfly
     {
