@@ -619,6 +619,7 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(120, 42);
             this.button37.TabIndex = 64;
+            this.button37.Text = "MeasureString";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -748,7 +749,9 @@
             this.button49.Name = "button49";
             this.button49.Size = new System.Drawing.Size(120, 42);
             this.button49.TabIndex = 76;
+            this.button49.Text = "寫出直排的字串";
             this.button49.UseVisualStyleBackColor = true;
+            this.button49.Click += new System.EventHandler(this.button49_Click);
             // 
             // bt_eraser
             // 

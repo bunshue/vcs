@@ -1896,7 +1896,21 @@ namespace vcs_Draw1
 
         private void button37_Click(object sender, EventArgs e)
         {
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
 
+            //MeasureString 測試
+            Font f = new Font("標楷體", 36); // 字型
+            string text = "車如流水馬如龍"; // 文字字串
+            SizeF stringSize = g.MeasureString(text, f); // 文字字串的寬高
+            float X = 100;
+            float Y = 100;
+            g.DrawString(text, f, Brushes.Red, X, Y);   // 繪出文字字串
+            g.DrawRectangle(Pens.Red, X, Y, stringSize.Width, stringSize.Height);
+
+            richTextBox1.Text += "字串寬高 : " + stringSize.ToSize() + "\n";
         }
 
         private void button38_Click(object sender, EventArgs e)
@@ -3001,6 +3015,32 @@ namespace vcs_Draw1
             e.Graphics.DrawRectangle(p, 0, 0, W - 0, H - 0);
 
             e.Graphics.DrawString("在Button上畫圖", new Font("標楷體", 11), new SolidBrush(Color.Blue), 5, 15);
+        }
+
+        private void button49_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+
+            //寫出直排的字串
+            Font f = new Font("標楷體", 24); // 字型
+            string text = "用 VC# 寫出直排的字串"; // 文字字串
+            StringFormat stringFormat = new StringFormat();　// 字串 繪出格式
+            stringFormat.FormatFlags = StringFormatFlags.DirectionVertical;　// 垂直
+
+            int stringWidth = 100; // 字串　最大的寬度
+
+            SizeF stringSize = g.MeasureString(text, f, stringWidth, stringFormat); // 文字字串的寬高
+            float X = 100; // 左上角的座標
+            float Y = 100;
+
+            g.DrawString(text, f, Brushes.Red, X, Y, stringFormat);  // 繪出文字字串
+
+
+
+
         }
     }
 }

@@ -29,7 +29,7 @@ namespace 拉霸
         {
             // 使表單無法被調整大小
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            picBtn.Image = new Bitmap("up.jpg"); //使picBtn顯示up.jpg
+            picBtn.Image = new Bitmap("../../up.jpg"); //使picBtn顯示up.jpg
             // 使載入的圖片隨picBtn大小伸縮
             picBtn.SizeMode = PictureBoxSizeMode.StretchImage;
             p[1] = pic1;  // 將pic1指定給p(1)
@@ -38,7 +38,7 @@ namespace 拉霸
             // 使用迴圈使pic1~pic3顯示0.jpg圖
             for (int i = 1; i <= p.GetUpperBound(0); i++)
             {
-                p[i].Image = new Bitmap("0.jpg");
+                p[i].Image = new Bitmap("../../0.jpg");
                 p[i].SizeMode = PictureBoxSizeMode.Zoom;
             }
             timer1.Interval = 100;  // 使timer1計時器每0.1秒執行一次
@@ -56,7 +56,7 @@ namespace 拉霸
                 //可投注量減掉本次的的投注題
                 lblSum.Text = Convert.ToString((Convert.ToInt32(lblSum.Text) - nudQty.Value));
                 nudQty.Enabled = false;  // 無法投注
-                picBtn.Image = new Bitmap("down.jpg"); //使picBtn顯示down.jpg
+                picBtn.Image = new Bitmap("../../down.jpg"); //使picBtn顯示down.jpg
                 picBtn.Enabled = false;  // picBtn圖片按鈕失效
             }
             else
@@ -75,7 +75,7 @@ namespace 拉霸
             {
                 num[i] = r.Next(0, 4);   // 產生 0~3 的亂數並指定給 num[1]~num[3]
                 // 使pic1~pic3以亂數的方式顯示 0.jpg~3.jpg
-                p[i].Image = new Bitmap(Convert.ToString(num[i]) + ".jpg");
+                p[i].Image = new Bitmap("../../"+Convert.ToString(num[i]) + ".jpg");
             }
             t += 1;
             // 當計時器執行20次時，即馬上判斷是否中獎
@@ -108,7 +108,7 @@ namespace 拉霸
                     lblSum.Text = (Convert.ToInt32(lblSum.Text) + (nudQty.Value * 20)).ToString();
                     MessageBox.Show("中獎了! 投注量*20");
                 }
-                picBtn.Image = new Bitmap("up.jpg"); //使picBtn顯示up.jpg
+                picBtn.Image = new Bitmap("../../up.jpg"); //使picBtn顯示up.jpg
                 t = 0;
             }
         }

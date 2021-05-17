@@ -456,5 +456,34 @@ namespace vcs_Draw3C
 
         //漫遊演算法 SP
 
+        //派形風扇 ST
+
+        int startAngle = -10; // 開始的角度
+
+        private void timer5_Tick(object sender, EventArgs e)
+        {
+            startAngle = startAngle + 1; // 更新開始的角度
+            this.pictureBox5.Invalidate();
+        }
+
+        private void pictureBox5_Paint(object sender, PaintEventArgs e)
+        {
+            int W = pictureBox5.ClientSize.Width;
+            int H = pictureBox5.ClientSize.Height;
+            int cx = W / 2;
+            int cy = H / 2;
+            int d = (int)(Math.Min(W, H) / 2) - 10; //半徑
+
+            for (int i = 0; i < 18; i++)
+            {
+                if (i % 2 == 0)  // 偶數才要繪出
+                {
+                    e.Graphics.DrawPie(Pens.Black, cx - d, cy - d, 2 * d, 2 * d, startAngle + i * 20, 20); // 繪出派形
+                }
+            }
+        }
+        //派形風扇 SP
+
+
     }
 }

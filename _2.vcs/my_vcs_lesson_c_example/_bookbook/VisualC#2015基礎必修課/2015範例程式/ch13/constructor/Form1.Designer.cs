@@ -36,7 +36,7 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label1.Location = new System.Drawing.Point(12, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(187, 91);
+            this.label1.Size = new System.Drawing.Size(443, 314);
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
@@ -44,7 +44,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(217, 125);
+            this.ClientSize = new System.Drawing.Size(467, 468);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "建構式範例";

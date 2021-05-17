@@ -77,7 +77,7 @@ namespace 記憶大考驗
             p[8] = pic8;
             for (int i = 1; i <= n.GetUpperBound(0); i++)
             {
-                p[i].Image = new Bitmap("q.jpg");//使pic1~pic8顯示q.jpg
+                p[i].Image = new Bitmap("../../q.jpg");//使pic1~pic8顯示q.jpg
                 //使圖片隨pic1~pic8的大小做縮放
                 p[i].SizeMode = PictureBoxSizeMode.StretchImage;
                 //使pic1~pic8的框線樣式以3D框線顯示
@@ -98,7 +98,7 @@ namespace 記憶大考驗
                 hitPic1 = (PictureBox)sender;
                 t1 = Convert.ToString(hitPic1.Tag); //將目前翻牌圖片的值指定給t1
                 //顯示目前翻牌的圖示
-                hitPic1.Image = new Bitmap(Convert.ToString(hitPic1.Tag) + ".jpg");
+                hitPic1.Image = new Bitmap("../../" + Convert.ToString(hitPic1.Tag) + ".jpg");
                 isFirst = false;  //將isFirst設為false表示目前己結束第二次翻牌
             }
             else//第二次翻牌
@@ -107,7 +107,7 @@ namespace 記憶大考驗
                 hitPic2 = (PictureBox)sender;
                 t2 = Convert.ToString(hitPic2.Tag); //將目前翻牌圖片的值指定給t2
                 //顯示目前翻牌的圖示
-                hitPic2.Image = new Bitmap(Convert.ToString(hitPic2.Tag) + ".jpg");
+                hitPic2.Image = new Bitmap("../../" + Convert.ToString(hitPic2.Tag) + ".jpg");
                 isFirst = true;  //將isFirst設為true表示目前已結束第二次翻牌
                 //若t1等於t2，表示所翻牌兩個圖片的Tag屬性相同，即兩者的圖示相同
                 if (t1 == t2)
@@ -123,8 +123,8 @@ namespace 記憶大考驗
                 {
                     MessageBox.Show("答錯了^_|||");
                     //將第一次和第二次翻牌的圖示以q.jpg顯示
-                    hitPic1.Image = new Bitmap("q.jpg");
-                    hitPic2.Image = new Bitmap("q.jpg");
+                    hitPic1.Image = new Bitmap("../../q.jpg");
+                    hitPic2.Image = new Bitmap("../../q.jpg");
                 }
                 //若答對組數為4，即表示過關
                 if (tot == 4)
@@ -177,7 +177,7 @@ namespace 記憶大考驗
             {
                 //pic1~pic8的Tag屬性皆設為n[1]~n[8]，用來表示圖示狀態
                 p[i].Tag = n[i];
-                p[i].Image = new Bitmap(Convert.ToString(n[i]) + ".jpg");
+                p[i].Image = new Bitmap("../../" + Convert.ToString(n[i]) + ".jpg");
             }
         }
 
@@ -215,7 +215,7 @@ namespace 記憶大考驗
                 timer2.Enabled = true;  //timer2啟動
                 for (int i = 1; i <= n.GetUpperBound(0); i++)
                 {
-                    p[i].Image = new Bitmap("q.jpg");  //pic1~pic8顯示q.jpg
+                    p[i].Image = new Bitmap("../../q.jpg");  //pic1~pic8顯示q.jpg
                     //pic1~pic8圖片啟用
                     p[i].Enabled = true;
                 }
@@ -240,7 +240,7 @@ namespace 記憶大考驗
                 lblTime.Text = "";
                 for (int i = 1; i <= n.GetUpperBound(0); i++)
                 {
-                    p[i].Image = new Bitmap("q.jpg"); //pic1~pic8顯示q.jpg
+                    p[i].Image = new Bitmap("../../q.jpg"); //pic1~pic8顯示q.jpg
                     p[i].Enabled = false;  //pic1~pic8圖片失效
                 }
             }
