@@ -129,7 +129,7 @@ namespace vcs_Paint4a
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("繪圖板 Version 1.0\n作者：鄞永傳老師 2012.08", "繪圖板");
+            MessageBox.Show("繪圖板 Version 1.0\n作者：lion-mouse 2012.08", "繪圖板");
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2009-09 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +14,10 @@ namespace vcs_Keyboard
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             // 在27個按鍵的 Tag 放入 代表的 KeyCode
             label1.Tag = Keys.Q; label2.Tag = Keys.W; label3.Tag = Keys.E;
             label4.Tag = Keys.R; label5.Tag = Keys.T; label6.Tag = Keys.Y;
@@ -37,6 +39,8 @@ namespace vcs_Keyboard
             labelList[18] = label19; labelList[19] = label20; labelList[20] = label21;
             labelList[21] = label22; labelList[22] = label23; labelList[23] = label24;
             labelList[24] = label25; labelList[25] = label26; labelList[26] = label27;
+
+            lb_result.Text = "";
         }
 
         // 有鍵盤按鍵被按下
@@ -45,8 +49,16 @@ namespace vcs_Keyboard
             for (int i = 0; i < labelList.Length; i++)
             {
                 if (e.KeyCode == (Keys)labelList[i].Tag)
+                {
                     labelList[i].BackColor = Color.Red; // 將被按下的按鍵 變為紅色
+                }
             }
+            if (e.KeyCode == Keys.Return)
+                lb_result.Text += "\n";
+            else if (e.KeyCode == Keys.Space)
+                lb_result.Text += " ";
+            else
+                lb_result.Text += e.KeyCode;
         }
 
         // 有鍵盤按鍵被放開
@@ -58,5 +70,8 @@ namespace vcs_Keyboard
                     labelList[i].BackColor = Color.Pink; // 將被放開的按鍵 變為粉紅色
             }
         }
+
+
     }
 }
+

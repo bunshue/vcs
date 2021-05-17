@@ -44,6 +44,17 @@ namespace vcs_Draw3C
         int eY = 100;
         //picturebox12 蝴蝶曲線 Butterfly curve SP
 
+
+        //追逐滑鼠游標的蝴蝶 ST
+        NPC npc;
+        Point MousePos = new Point();
+        //追逐滑鼠游標的蝴蝶 SP
+
+        //漫遊演算法 ST
+        GC_2D_Wander gc; // 宣告一個物件
+        GC_2D_MovableCircle cir;
+        //漫遊演算法 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -65,6 +76,27 @@ namespace vcs_Draw3C
             //picturebox12 蝴蝶曲線 Butterfly curve ST
             butterfly = new G2D_Butterfly(3, 30);
             //picturebox12 蝴蝶曲線 Butterfly curve SP
+
+            //追逐滑鼠游標的蝴蝶 ST
+            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+            this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
+
+            string filename1 = @"C:\______test_files\__RW\_png\butterfly.png";
+
+            Rectangle rect = new Rectangle(0, 0, this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height);
+            npc = new NPC(new Bitmap(filename1));
+            npc.SetLocation(this.pictureBox1.ClientSize.Width / 2, this.pictureBox1.ClientSize.Height / 2);
+            npc.SetAngle(0, -90);
+            npc.SetBoundary(rect); // 設定視窗客戶區的邊界
+
+            //追逐滑鼠游標的蝴蝶 SP
+
+            //漫遊演算法 ST
+            string filename2 = @"C:\______test_files\__RW\_png\ladybug.png";
+            gc = new GC_2D_Wander(new Bitmap(filename2));
+            cir = new GC_2D_MovableCircle(20, new Point(this.pictureBox2.ClientSize.Width / 2, this.pictureBox2.ClientSize.Height / 2));
+            gc.Update();
+            //漫遊演算法 SP
         }
 
         void show_item_location()
@@ -212,6 +244,7 @@ namespace vcs_Draw3C
         }
         //數字 8 雙扭線 (Lemniscate of Bernoulli) SP
 
+        //追逐滑鼠游標的蝴蝶 ST
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.pictureBox1.Invalidate();
@@ -219,10 +252,34 @@ namespace vcs_Draw3C
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            npc.Update(MousePos);
 
-
-
+            //npc.Turn(1);
+            npc.Draw(e.Graphics);
+            e.Graphics.DrawString("追逐滑鼠游標的蝴蝶", new Font("標楷體", 16), Brushes.Navy, 10, 10);
         }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            MousePos.X = e.X;
+            MousePos.Y = e.Y;
+        }
+
+        void pictureBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //加速減速功能 但在richtextbox存在下 picturebox_keydown之功能不能用
+            if (e.KeyCode == Keys.Up)
+            {
+                richTextBox1.Text += "加速\n";
+                npc.ChangeSpeed(1);
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                richTextBox1.Text += "減速\n";
+                npc.ChangeSpeed(-1);
+            }
+        }
+        //追逐滑鼠游標的蝴蝶 SP
 
         //Maurer Rose 玫瑰線 ST
 
@@ -367,6 +424,37 @@ namespace vcs_Draw3C
 
         //picturebox12 蝴蝶曲線 Butterfly curve SP
 
+        //漫遊演算法 ST
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            cir.CheckSelected(e.X, e.Y);
+        }
+
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            cir.Update(e.X, e.Y);
+        }
+
+        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
+        {
+            cir.dragging = false;
+        }
+
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.ResetTransform();
+            cir.Draw(e.Graphics);
+            gc.Draw(e.Graphics);
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            gc.Wander_Center = cir.pos;
+            gc.Update();
+            this.pictureBox2.Invalidate();
+        }
+
+        //漫遊演算法 SP
 
     }
 }

@@ -55,6 +55,7 @@
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
+            this.lb_result = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -381,12 +382,23 @@
             this.label27.Text = "Space";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lb_result
+            // 
+            this.lb_result.AutoSize = true;
+            this.lb_result.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_result.Location = new System.Drawing.Point(15, 274);
+            this.lb_result.Name = "lb_result";
+            this.lb_result.Size = new System.Drawing.Size(87, 27);
+            this.lb_result.TabIndex = 29;
+            this.lb_result.Text = "label28";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(401, 175);
+            this.ClientSize = new System.Drawing.Size(699, 565);
+            this.Controls.Add(this.lb_result);
             this.Controls.Add(this.label27);
             this.Controls.Add(this.label26);
             this.Controls.Add(this.label25);
@@ -416,9 +428,11 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "鍵盤事件";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -451,6 +465,7 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label lb_result;
 
     }
 }
