@@ -739,6 +739,7 @@
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(120, 42);
             this.button48.TabIndex = 75;
+            this.button48.Text = "連接繪圖物件";
             this.button48.UseVisualStyleBackColor = true;
             this.button48.Click += new System.EventHandler(this.button48_Click);
             // 

@@ -2905,9 +2905,74 @@ namespace vcs_Draw1
 
         private void button48_Click(object sender, EventArgs e)
         {
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+
+            //連接繪圖物件
+
+            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+            int Cx = this.pictureBox1.ClientSize.Width * 1 / 4;   // 找到視窗客戶區中心點
+            int Cy = this.pictureBox1.ClientSize.Height / 4;
+
+            Point p1 = new Point(Cx - 100, Cy); // 計算出 直線的兩端
+            Point p2 = new Point(Cx + 100, Cy);
+            gp.AddLine(p1, p2); // 將 直線 加入到 GraphicsPath物件
+
+            Rectangle rect1 = new Rectangle(Cx - 100 - 20, Cy - 20, 40, 40);
+            Rectangle rect2 = new Rectangle(Cx + 100 - 20, Cy - 20, 40, 40);
+            gp.AddRectangle(rect1);  // 將 兩個矩形 加入到 GraphicsPath物件
+            gp.AddRectangle(rect2);
+
+            g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
+
+            GraphicsPath gp2 = new GraphicsPath(); // GraphicsPath圖形軌跡物件
+            Region rgn; // 宣告一個 Region區域表面 物件
+
+            Cx = this.pictureBox1.ClientSize.Width * 1 / 4; // 視窗客戶區的中心點
+            Cy = this.pictureBox1.ClientSize.Height * 3 / 4;
+            int W = this.pictureBox1.ClientSize.Width / 3;  // 矩形的寬
+            int H = this.pictureBox1.ClientSize.Height / 3; // 矩形的高
+
+            Rectangle rect3 = new Rectangle(Cx - W / 2, Cy - H / 2, W, H);
+            gp2.AddRectangle(rect3); // 圖形軌跡物件 加入一個矩形形狀
+
+            rgn = new Region(gp2); // 新增一個 Region 區域表面物件，以 gp2 為參數
+            // rgn = new Region(rect3);  // 或是直接以 rect3 為參數
+
+            g.FillRegion(Brushes.Cyan, rgn); // 區域表面 繪出
+            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
+
+
+            GraphicsPath gp3 = new GraphicsPath(); // GraphicsPath圖形軌跡物件
+
+            int x = this.pictureBox1.ClientSize.Width * 3 / 4; // 視窗客戶區的正中央
+            int y = this.pictureBox1.ClientSize.Height * 3 / 4;
+            // 圓形的  半徑
+            int D = Math.Min(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height) / 8;
+
+            gp3.AddPolygon(new Point[]{
+                 new Point(x - 2 * D,y - 3*D),
+                 new Point(x + 2 * D,y - 3*D),
+                 new Point(x + 5 * D,y ),
+                 new Point(x + 2 * D,y + 3*D),
+                 new Point(x - 2 * D,y + 3*D),
+                 new Point(x - 5 * D,y),
+               });  // 多邊形
+            gp3.AddEllipse(x - D, y - D, 2 * D, 2 * D);  // 在 多邊形 正中的 圓形
+
+            Region rgn2 = new Region(gp3); // 區域表面 物件
+            LinearGradientBrush brush = new LinearGradientBrush(
+                             new Point(x - 2 * D, y - 3 * D), // 線形漸層的開始點。
+                             new Point(x + 2 * D, y + 3 * D), // 線形漸層的結束點。
+                             Color.White,
+                             Color.Red); // 線形漸層塗刷
+
+            g.FillRegion(brush, rgn2); // 區域表面 繪出
+            g.DrawPath(Pens.Black, gp3); // 圖形軌跡 繪出
 
         }
-
 
         bool flag_eraser = false;
         private void bt_eraser_Click(object sender, EventArgs e)
@@ -3039,8 +3104,7 @@ namespace vcs_Draw1
             g.DrawString(text, f, Brushes.Red, X, Y, stringFormat);  // 繪出文字字串
 
 
-
-
         }
     }
 }
+

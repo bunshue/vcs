@@ -25,7 +25,8 @@ namespace WindowsFormsApplication1
             int D = (int)(Math.Min(this.ClientSize.Width, this.ClientSize.Height) / 2) - 10; // 半徑
             double Theta = -Math.PI / 2.0; // 角度
 
-            for (int i = 0; i < 5; i++)
+            int i;
+            for (i = 0; i < 5; i++)
             {
                 pt[i].X = Cx + (int)(D * Math.Cos(Theta));
                 pt[i].Y = Cy + (int)(D * Math.Sin(Theta));
@@ -33,7 +34,19 @@ namespace WindowsFormsApplication1
                 //Theta += 2 * Math.PI * 2.0 / 5.0; // 五角星星
             }
 
+
             e.Graphics.DrawPolygon(Pens.Black, pt); // 繪出多邊形
+
+
+            for (i = 0; i < 5; i++)
+            {
+                pt[i].X = Cx + (int)(D * Math.Cos(Theta));
+                pt[i].Y = Cy + (int)(D * Math.Sin(Theta));
+                //Theta += Math.PI * 2.0 / 5.0;  // 五邊形
+                Theta += 2 * Math.PI * 2.0 / 5.0; // 五角星星
+            }
+            e.Graphics.DrawPolygon(Pens.Red, pt); // 繪出多邊形
+
         }
 
         private void Form1_Resize(object sender, EventArgs e)
