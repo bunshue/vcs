@@ -55,6 +55,37 @@ namespace vcs_Draw3C
         GC_2D_MovableCircle cir;
         //漫遊演算法 SP
 
+        //橢圓形的軌跡 ST
+        G2D_Circle_Grad cir01;
+        G2D_EllipsePath ellipsePath;
+        PointF center;
+        float theta = 0;
+        //橢圓形的軌跡 SP
+
+        //在多點網格移動的小球 ST
+        List<ClassMovingPoint> mpList = new List<ClassMovingPoint>(); // 可移動點的動態陣列
+        List<int> pathList = new List<int>(); // 小球 在 可移動點動態陣列 的路徑
+        int mp_Selected = -1;  // 動態陣列 的第幾個 被選到
+        bool dragging = false; // 是否拖拉中
+
+        Pen myPen = new Pen(Color.Green, 1);  // 
+        int D = 10; // 小球的半徑
+
+        BallInNet ball; // 
+        //在多點網格移動的小球 SP
+
+        //雷達圖 pictureBox6 ST
+        G2D_Radar rada;
+        //雷達圖 pictureBox6 SP
+
+        //雷達圖 pictureBox7 ST
+        G2D_Radar2 rada2;
+        //雷達圖 pictureBox7 SP
+
+        //直線和圓的互動 ST
+        G2D_OvalLine ovalLine01;
+        //直線和圓的互動 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -97,6 +128,70 @@ namespace vcs_Draw3C
             cir = new GC_2D_MovableCircle(20, new Point(this.pictureBox2.ClientSize.Width / 2, this.pictureBox2.ClientSize.Height / 2));
             gc.Update();
             //漫遊演算法 SP
+
+            //橢圓形的軌跡 ST
+            cir01 = new G2D_Circle_Grad(128, 0.1f, Color.White);
+            center = new PointF(300 / 2, 200 / 2);
+            ellipsePath = new G2D_EllipsePath(center, 200 / 3, 100 / 3);
+            //橢圓形的軌跡 SP
+
+            //在多點網格移動的小球 ST
+
+            myPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+
+            this.ClientSize = new Size(900, 600);
+            // 加入5個可移動點  當作 網格 的個頂點
+            Point[] pts = new Point[5];
+            int Cx, Cy;
+            Cx = this.pictureBox3.ClientSize.Width / 2;
+            Cy = this.pictureBox3.ClientSize.Height / 2;
+
+            double theta = -Math.PI / 2;
+            for (int i = 0; i < pts.Length; i++)
+            {
+                pts[i].X = (int)(Cx + 100 * Math.Cos(theta));
+                pts[i].Y = (int)(Cy + 100 * Math.Sin(theta));
+                theta = theta + 2 * Math.PI / pts.Length;
+            }
+
+            ClassMovingPoint mp;
+            mp = new ClassMovingPoint(pts[0], 10, Color.Blue, "p0");
+            mpList.Add(mp);
+            mp = new ClassMovingPoint(pts[1], 10, Color.Blue, "p1");
+            mpList.Add(mp);
+            mp = new ClassMovingPoint(pts[2], 10, Color.Blue, "p2");
+            mpList.Add(mp);
+            mp = new ClassMovingPoint(pts[3], 10, Color.Blue, "p3");
+            mpList.Add(mp);
+            mp = new ClassMovingPoint(pts[4], 10, Color.Blue, "p4");
+            mpList.Add(mp);
+
+            pathList.Add(0);
+            pathList.Add(2);
+            pathList.Add(1);
+            pathList.Add(3);
+            pathList.Add(4);
+
+            ball = new BallInNet(mpList, pathList,
+                5,
+                D,
+                Color.Red);
+
+            //在多點網格移動的小球 SP
+
+            //雷達圖 pictureBox6 ST
+            rada = new G2D_Radar(120, 120, 240);
+            //雷達圖 pictureBox6 SP
+
+            //雷達圖 pictureBox7 ST
+            rada2 = new G2D_Radar2(120, 120, 240);
+            //雷達圖 pictureBox7 SP
+
+            //直線和圓的互動 ST
+            int Cx2 = this.pictureBox4.ClientSize.Width / 2;
+            int Cy2 = this.pictureBox4.ClientSize.Height / 2;
+            ovalLine01 = new G2D_OvalLine(Cx2, Cy2, 0.01, Color.Blue);
+            //直線和圓的互動 SP
         }
 
         void show_item_location()
@@ -482,8 +577,208 @@ namespace vcs_Draw3C
                 }
             }
         }
+
         //派形風扇 SP
 
+        //橢圓形的軌跡 ST
+        private void pictureBox9_Paint(object sender, PaintEventArgs e)
+        {
+            ellipsePath.Draw(e.Graphics);
+
+            PointF p = ellipsePath.GetPath(theta);
+            e.Graphics.DrawImage(cir01.bitmap, new PointF(p.X - cir01.bitmap.Width / 2, p.Y - cir01.bitmap.Height / 2));
+        }
+
+        private void timer9_Tick(object sender, EventArgs e)
+        {
+            theta = theta + 0.01f;
+            this.pictureBox9.Invalidate();
+        }
+        //橢圓形的軌跡 SP
+
+
+        //在多點網格移動的小球 ST
+
+        private void pictureBox3_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            for (int i = 0; i < mpList.Count; i++)
+            {
+                mpList[i].Draw(e.Graphics);
+            }
+
+            for (int i = 0; i < mpList.Count - 1; i++)
+            {
+                for (int j = i + 1; j < mpList.Count; j++)
+                {
+                    e.Graphics.DrawLine(myPen, mpList[i].pos, mpList[j].pos);
+                }
+            }
+
+            ball.Draw(e.Graphics);
+        }
+
+        // 檢查是哪一個點被 選到
+        private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
+        {
+            for (int i = 0; i <= mpList.Count - 1; i++)
+            {
+                if (mpList[i].CheckSelected(e.X, e.Y))
+                {
+                    mp_Selected = i;
+                    dragging = true;
+                    break;
+                }
+            }
+        }
+
+        // 更新 被選到的點 的座標
+        private void pictureBox3_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            {
+                mpList[mp_Selected].Move(e.X, e.Y);
+
+                this.Invalidate();
+                this.pictureBox3.Invalidate();
+            }
+        }
+
+        // 解除 被選到的點
+        private void pictureBox3_MouseUp(object sender, MouseEventArgs e)
+        {
+            mp_Selected = -1;
+            dragging = false;
+
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            ball.Update();
+            this.pictureBox3.Invalidate();
+        }
+        //在多點網格移動的小球 SP
+
+
+
+
+
+        //雷達圖 pictureBox6 ST
+        private void timer6_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox6.Invalidate();
+
+        }
+
+        private void pictureBox6_Paint(object sender, PaintEventArgs e)
+        {
+            rada.Draw(e.Graphics);
+
+        }
+
+        //雷達圖 pictureBox6 SP
+
+        //雷達圖 pictureBox7 ST
+        private void pictureBox7_Paint(object sender, PaintEventArgs e)
+        {
+            rada2.Draw(e.Graphics);
+        }
+
+        private void timer7_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox7.Invalidate();
+        }
+        //雷達圖 pictureBox7 SP
+
+
+        //直線和圓的互動 ST
+        private void timer4_Tick(object sender, EventArgs e)
+        {
+            ovalLine01.Update();
+            this.pictureBox4.Invalidate();
+        }
+
+        private void pictureBox4_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            ovalLine01.Draw(e.Graphics);
+        }
+        //直線和圓的互動 SP
+
+        int heart_type = 0;
+
+        private void timer14_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox14.Invalidate();
+            heart_type++;
+            if (heart_type > 4)
+                heart_type = 0;
+        }
+
+        private void pictureBox14_Paint(object sender, PaintEventArgs e)
+        {
+            //GraphicsPath - FillPath() 心形
+
+            GraphicsPath gp = new GraphicsPath();
+            int Cx = this.pictureBox14.ClientSize.Width / 2; // 視窗客戶區的中心點
+            int Cy = this.pictureBox14.ClientSize.Height / 2;
+
+            int D = 20;    // 每格 寬
+            int x = Cx;    // 心臟的起始點
+            int y = Cy - 2 * D;
+
+            //心臟右邊的曲線 由上往下
+            PointF[] pt = new PointF[]{
+                          new PointF(x, y),
+                          new PointF(x+3*D, y - 1.5f*D),
+                          new PointF(x+5*D, y),
+                          new PointF(x+4*D, y+3*D),
+                          new PointF(x, y+ 7 *D),
+                          };
+            gp.AddCurve(pt, 0.6f);
+
+            //心臟左邊的曲線 順時間方向 由下往上 定義點的座標
+            PointF[] pt2 = new PointF[]{
+                          new PointF(x, y+ 7 *D),
+                          new PointF(x-4*D, y+3*D),
+                          new PointF(x-5*D, y),
+                          new PointF(x-3*D, y - 1.5f*D),
+                          new PointF(x, y),
+                          };
+            gp.AddCurve(pt2, 0.6f);
+
+
+            if (heart_type == 0)
+            {
+                //空心
+            }
+            else if (heart_type == 1)   //單色塗刷
+            {
+                e.Graphics.FillPath(Brushes.Red, gp); // 填滿形狀區域 //SolidBrush - Red
+            }
+            else if (heart_type == 2)   //樣式塗刷一
+            {
+                HatchBrush myBrush1 = new HatchBrush(HatchStyle.DiagonalCross, Color.Yellow, Color.Blue);   //HatchBrush - DiagonalCross
+                e.Graphics.FillPath(myBrush1, gp); //填滿形狀區域
+            }
+            else if (heart_type == 3)   //樣式塗刷二
+            {
+                HatchBrush myBrush2 = new HatchBrush(HatchStyle.SolidDiamond, Color.Yellow, Color.Blue);    //HatchBrush - SolidDiamond
+                e.Graphics.FillPath(myBrush2, gp); //填滿形狀區域
+            }
+            else if (heart_type == 4)   //使用圖形塗刷
+            {
+                Bitmap bm = new Bitmap(Properties.Resources.Butterfly);
+                TextureBrush myBrush3 = new TextureBrush(bm);  // 圖形塗刷  //TextureBrush
+                e.Graphics.FillPath(myBrush3, gp); //填滿形狀區域
+            }
+            e.Graphics.DrawPath(Pens.Black, gp); //繪出圖形軌跡
+
+
+
+        }
 
     }
 }
+

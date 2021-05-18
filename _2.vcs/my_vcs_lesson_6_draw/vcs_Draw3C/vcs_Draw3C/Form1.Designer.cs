@@ -60,6 +60,12 @@
             this.timer12 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer5 = new System.Windows.Forms.Timer(this.components);
+            this.timer9 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.timer6 = new System.Windows.Forms.Timer(this.components);
+            this.timer7 = new System.Windows.Forms.Timer(this.components);
+            this.timer4 = new System.Windows.Forms.Timer(this.components);
+            this.timer14 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -130,6 +136,10 @@
             this.pictureBox3.Size = new System.Drawing.Size(50, 50);
             this.pictureBox3.TabIndex = 71;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox3_Paint);
+            this.pictureBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseDown);
+            this.pictureBox3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseMove);
+            this.pictureBox3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseUp);
             // 
             // pictureBox4
             // 
@@ -139,6 +149,7 @@
             this.pictureBox4.Size = new System.Drawing.Size(50, 50);
             this.pictureBox4.TabIndex = 72;
             this.pictureBox4.TabStop = false;
+            this.pictureBox4.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox4_Paint);
             // 
             // pictureBox0
             // 
@@ -179,6 +190,7 @@
             this.pictureBox6.Size = new System.Drawing.Size(50, 50);
             this.pictureBox6.TabIndex = 75;
             this.pictureBox6.TabStop = false;
+            this.pictureBox6.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox6_Paint);
             // 
             // pictureBox7
             // 
@@ -188,6 +200,7 @@
             this.pictureBox7.Size = new System.Drawing.Size(50, 50);
             this.pictureBox7.TabIndex = 76;
             this.pictureBox7.TabStop = false;
+            this.pictureBox7.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox7_Paint);
             // 
             // pictureBox8
             // 
@@ -200,12 +213,13 @@
             // 
             // pictureBox9
             // 
-            this.pictureBox9.BackColor = System.Drawing.Color.White;
+            this.pictureBox9.BackColor = System.Drawing.Color.Black;
             this.pictureBox9.Location = new System.Drawing.Point(320, 82);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(50, 50);
             this.pictureBox9.TabIndex = 78;
             this.pictureBox9.TabStop = false;
+            this.pictureBox9.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox9_Paint);
             // 
             // pictureBox10
             // 
@@ -255,6 +269,7 @@
             this.pictureBox14.Size = new System.Drawing.Size(50, 50);
             this.pictureBox14.TabIndex = 83;
             this.pictureBox14.TabStop = false;
+            this.pictureBox14.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox14_Paint);
             // 
             // button1
             // 
@@ -372,6 +387,42 @@
             this.timer5.Interval = 10;
             this.timer5.Tick += new System.EventHandler(this.timer5_Tick);
             // 
+            // timer9
+            // 
+            this.timer9.Enabled = true;
+            this.timer9.Interval = 10;
+            this.timer9.Tick += new System.EventHandler(this.timer9_Tick);
+            // 
+            // timer3
+            // 
+            this.timer3.Enabled = true;
+            this.timer3.Interval = 30;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // timer6
+            // 
+            this.timer6.Enabled = true;
+            this.timer6.Interval = 10;
+            this.timer6.Tick += new System.EventHandler(this.timer6_Tick);
+            // 
+            // timer7
+            // 
+            this.timer7.Enabled = true;
+            this.timer7.Interval = 10;
+            this.timer7.Tick += new System.EventHandler(this.timer7_Tick);
+            // 
+            // timer4
+            // 
+            this.timer4.Enabled = true;
+            this.timer4.Interval = 10;
+            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
+            // 
+            // timer14
+            // 
+            this.timer14.Enabled = true;
+            this.timer14.Interval = 1000;
+            this.timer14.Tick += new System.EventHandler(this.timer14_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -460,6 +511,12 @@
         private System.Windows.Forms.Timer timer12;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer5;
+        private System.Windows.Forms.Timer timer9;
+        private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Timer timer6;
+        private System.Windows.Forms.Timer timer7;
+        private System.Windows.Forms.Timer timer4;
+        private System.Windows.Forms.Timer timer14;
     }
 }
 

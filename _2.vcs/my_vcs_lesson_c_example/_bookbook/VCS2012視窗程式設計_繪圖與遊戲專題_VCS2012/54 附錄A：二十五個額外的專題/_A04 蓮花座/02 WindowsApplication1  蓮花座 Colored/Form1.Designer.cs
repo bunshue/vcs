@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(424, 265);
+            this.ClientSize = new System.Drawing.Size(1058, 694);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "GraphicsPath - AddCurve()  蓮花座";
