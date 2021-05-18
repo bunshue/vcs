@@ -447,6 +447,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(195, 40);
             this.button32.TabIndex = 33;
+            this.button32.Text = "不規則表單 Region";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 

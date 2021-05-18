@@ -138,8 +138,20 @@ namespace vcs_Draw1
             button48.Location = new Point(x_st + dx * 3, y_st + dy * 9);
             button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
 
-            bt_eraser.Location = new Point(x_st + dx * 2, y_st + dy * 11);
-            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 11);
+            button50.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button51.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button52.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            button53.Location = new Point(x_st + dx * 3, y_st + dy * 10);
+            button54.Location = new Point(x_st + dx * 4, y_st + dy * 10);
+
+            button55.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button56.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button57.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            button58.Location = new Point(x_st + dx * 3, y_st + dy * 11);
+            button59.Location = new Point(x_st + dx * 4, y_st + dy * 11);
+
+            bt_eraser.Location = new Point(x_st + dx * 2, y_st + dy * 12);
+            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 12);
 
             comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             checkBox1.Location = new Point(x_st + dx * 1, y_st + dy * 12);
@@ -2900,7 +2912,38 @@ namespace vcs_Draw1
 
         private void button47_Click(object sender, EventArgs e)
         {
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
 
+            //畫多邊形與五角星星
+
+            Point[] pt = new Point[5];  // 五個點
+
+            int Cx = this.pictureBox1.ClientSize.Width / 2;  // 中心點
+            int Cy = this.pictureBox1.ClientSize.Height / 2;
+            int D = (int)(Math.Min(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height) / 2) - 10; // 半徑
+            double Theta = -Math.PI / 2.0; // 角度
+
+            int i;
+            for (i = 0; i < 5; i++)
+            {
+                pt[i].X = Cx + (int)(D * Math.Cos(Theta));
+                pt[i].Y = Cy + (int)(D * Math.Sin(Theta));
+                Theta += Math.PI * 2.0 / 5.0;  // 五邊形
+                //Theta += 2 * Math.PI * 2.0 / 5.0; // 五角星星
+            }
+            g.DrawPolygon(Pens.Black, pt); // 繪出多邊形
+
+            for (i = 0; i < 5; i++)
+            {
+                pt[i].X = Cx + (int)(D * Math.Cos(Theta));
+                pt[i].Y = Cy + (int)(D * Math.Sin(Theta));
+                //Theta += Math.PI * 2.0 / 5.0;  // 五邊形
+                Theta += 2 * Math.PI * 2.0 / 5.0; // 五角星星
+            }
+            g.DrawPolygon(Pens.Red, pt); // 繪出多邊形
         }
 
         private void button48_Click(object sender, EventArgs e)
@@ -2911,7 +2954,6 @@ namespace vcs_Draw1
             }
 
             //連接繪圖物件
-
             GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
             int Cx = this.pictureBox1.ClientSize.Width * 1 / 4;   // 找到視窗客戶區中心點
             int Cy = this.pictureBox1.ClientSize.Height / 4;
@@ -2971,6 +3013,71 @@ namespace vcs_Draw1
 
             g.FillRegion(brush, rgn2); // 區域表面 繪出
             g.DrawPath(Pens.Black, gp3); // 圖形軌跡 繪出
+
+
+
+
+
+            GraphicsPath gp4 = new GraphicsPath(); // GraphicsPath物件
+
+            int Cx4 = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區的正中央
+            int Cy4 = this.pictureBox1.ClientSize.Height / 3;
+            // 第一個矩形的 寬高是取自視窗客戶區寬高最小者的一半
+            int D4 = Math.Min(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height) / 4;
+
+            // 第一個矩形
+            Rectangle rect1a = new Rectangle(Cx4 - D4, Cy4 - D4, 2 * D4, 2 * D4);
+            gp4.AddRectangle(rect1a); // 將 矩形 加入到 GraphicsPath物件
+
+            // 第二個矩形
+            Rectangle rect2a = new Rectangle(Cx4 - D4 - 20, Cy4 - D4 - 20, 40, 40);
+            gp4.AddRectangle(rect2a); // 將 矩形 加入到 GraphicsPath物件
+
+            // 第三個矩形
+            Rectangle rect3a = new Rectangle(Cx4 - D4 + 2 * D4 - 20, Cy4 - D4 - 20, 40, 40);
+            gp4.AddRectangle(rect3a); // 將 矩形 加入到 GraphicsPath物件
+
+            // 第四個矩形
+            Rectangle rect4a = new Rectangle(Cx4 - D4 - 20, Cy4 - D4 + 2 * D4 - 20, 40, 40);
+            gp4.AddRectangle(rect4a); // 將 矩形 加入到 GraphicsPath物件
+
+            // 第五個矩形
+            Rectangle rect5a = new Rectangle(Cx4 - D4 + 2 * D4 - 20, Cy4 - D4 + 2 * D4 - 20, 40, 40);
+            gp4.AddRectangle(rect5a); // 將 矩形 加入到 GraphicsPath物件
+
+            // 將 gp 內的形狀 繪出
+            g.DrawPath(Pens.Black, gp4); // 繪出GraphicsPath物件
+
+
+
+            GraphicsPath gp5 = new GraphicsPath(); // GraphicsPath物件
+
+            int Cx5 = this.pictureBox1.ClientSize.Width / 2 + 50; // 視窗客戶區的正中央
+            int Cy5 = this.pictureBox1.ClientSize.Height / 2 + 50;
+            // 第一個矩形的 寬高是取自視窗客戶區寬高最小者的一半
+            int D5 = Math.Min(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height) / 4;
+
+            Rectangle[] rects = new Rectangle[5];
+            // 第一個矩形
+            rects[0] = new Rectangle(Cx5 - D5, Cy5 - D5, 2 * D5, 2 * D5);
+
+            // 第二個矩形
+            rects[1] = new Rectangle(Cx5 - D5 - 20, Cy5 - D5 - 20, 40, 40);
+
+            // 第三個矩形
+            rects[2] = new Rectangle(Cx5 - D5 + 2 * D5 - 20, Cy5 - D5 - 20, 40, 40);
+
+            // 第四個矩形
+            rects[3] = new Rectangle(Cx5 - D5 - 20, Cy5 - D5 + 2 * D5 - 20, 40, 40);
+
+            // 第五個矩形
+            rects[4] = new Rectangle(Cx5 - D5 + 2 * D5 - 20, Cy5 - D5 + 2 * D5 - 20, 40, 40);
+
+            gp5.AddRectangles(rects); // 將 矩形陣列 加入到 GraphicsPath物件
+
+            // 將 gp5 內的形狀 繪出
+            g.DrawPath(Pens.Red, gp5); // 繪出GraphicsPath物件
+
 
         }
 
@@ -3102,9 +3209,79 @@ namespace vcs_Draw1
             float Y = 100;
 
             g.DrawString(text, f, Brushes.Red, X, Y, stringFormat);  // 繪出文字字串
+        }
 
+        private void button50_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+
+            //GraphicsPath - AddString() 加入字串路徑
+
+            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+
+            string text = "天若有情天亦老"; // 文字字串
+
+            FontFamily family = new FontFamily("標楷體");
+            StringFormat format = StringFormat.GenericDefault;
+            // format.FormatFlags = StringFormatFlags.DirectionVertical;　// 垂直
+
+            gp.AddString(text,  // 繪出文字字串
+                family,
+                (int)FontStyle.Regular,
+                70,
+                new Point(30, 30),
+                format);
+
+            // 將 gp 內的形狀 繪出
+            g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
+        }
+
+        private void button51_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button52_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button53_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button54_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button55_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button56_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button57_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button58_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button59_Click(object sender, EventArgs e)
+        {
 
         }
     }
 }
-

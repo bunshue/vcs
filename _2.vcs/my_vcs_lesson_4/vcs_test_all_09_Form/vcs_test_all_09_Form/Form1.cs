@@ -507,6 +507,13 @@ namespace vcs_test_all_09_Form
 
         private void button32_Click(object sender, EventArgs e)
         {
+            //不規則表單 Region
+
+            GraphicsPath path = new GraphicsPath();
+            Rectangle rect = new Rectangle(0, 0, 600, 400);
+
+            path.AddEllipse(rect);
+            this.Region = new Region(path);
         }
 
         private void button33_Click(object sender, EventArgs e)

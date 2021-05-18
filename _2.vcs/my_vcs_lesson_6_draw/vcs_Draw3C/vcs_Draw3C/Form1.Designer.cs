@@ -66,6 +66,7 @@
             this.timer7 = new System.Windows.Forms.Timer(this.components);
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.timer14 = new System.Windows.Forms.Timer(this.components);
+            this.timer8 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -210,6 +211,7 @@
             this.pictureBox8.Size = new System.Drawing.Size(50, 50);
             this.pictureBox8.TabIndex = 77;
             this.pictureBox8.TabStop = false;
+            this.pictureBox8.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox8_Paint);
             // 
             // pictureBox9
             // 
@@ -423,6 +425,12 @@
             this.timer14.Interval = 1000;
             this.timer14.Tick += new System.EventHandler(this.timer14_Tick);
             // 
+            // timer8
+            // 
+            this.timer8.Enabled = true;
+            this.timer8.Interval = 1000;
+            this.timer8.Tick += new System.EventHandler(this.timer8_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -517,6 +525,7 @@
         private System.Windows.Forms.Timer timer7;
         private System.Windows.Forms.Timer timer4;
         private System.Windows.Forms.Timer timer14;
+        private System.Windows.Forms.Timer timer8;
     }
 }
 

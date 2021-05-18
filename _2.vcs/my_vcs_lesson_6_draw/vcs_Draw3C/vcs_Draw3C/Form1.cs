@@ -779,6 +779,39 @@ namespace vcs_Draw3C
 
         }
 
+        //GraphicsPath - AddEllipse() 加入橢圓形 ST
+
+        int Gap = 10; // 角度間隔
+        private void pictureBox8_Paint(object sender, PaintEventArgs e)
+        {
+            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+
+            int Cx = this.pictureBox8.ClientSize.Width / 2; // 視窗客戶區的正中央
+            int Cy = this.pictureBox8.ClientSize.Height / 2;
+            // 圓形的半徑是取自視窗客戶區寬高最小者的四分之一
+            int D1 = Math.Min(this.pictureBox8.ClientSize.Width, this.pictureBox8.ClientSize.Height) / 4;
+
+            for (int i = 0; i < 360; i = i + Gap) // 每隔 Gap 角度 加入一個 圓形
+            {
+                int x = (int)(Cx + D1 * Math.Cos(i * Math.PI / 180));
+                int y = (int)(Cy + D1 * Math.Sin(i * Math.PI / 180));
+                gp.AddEllipse(x - D1, y - D1, 2 * D1, 2 * D1);
+            }
+
+            // 將 gp 內的形狀 繪出
+            e.Graphics.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
+        }
+
+        private void timer8_Tick(object sender, EventArgs e)
+        {
+            Gap += 5;   // 更改角度間隔
+            if (Gap > 90)
+                Gap = 10;
+            //this.Text = Gap.ToString();
+            richTextBox1.Text += Gap.ToString() + " ";
+            this.pictureBox8.Invalidate();
+        }
+        //GraphicsPath - AddEllipse() 加入橢圓形 SP
     }
 }
 
