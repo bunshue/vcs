@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace WindowsFormsApplication1
+namespace vcs_Draw3D
 {
     class DisplayBoard
     {
@@ -37,7 +37,7 @@ namespace WindowsFormsApplication1
             gapH = sH * gapHs;  // 展示板 內 每個小方塊間隔 的高
 
             // 展示板 內 每個小方塊 左上角的座標
-            for (int i = 0; i < col; i++)
+            for (int i = 0; i<col; i++)
                 for (int j = 0; j < row; j++)
                 {
                     pts[i, j].X = pt.X + gapW + i * (sW + gapW);
@@ -62,11 +62,11 @@ namespace WindowsFormsApplication1
                 for (int j = 0; j < row; j++)
                 {
                     if (j >= (row - values[i]))  // 
-                        G.FillRectangle(Brushes.Red, pts[i, j].X, pts[i, j].Y, sW, sH);
+                      G.FillRectangle(Brushes.Red, pts[i, j].X, pts[i, j].Y, sW, sH);
                 }
 
             // 繪出 每個小方塊 的 外框
-            for (int i = 0; i < col; i++)
+            for (int i = 0; i<col; i++)
                 for (int j = 0; j < row; j++)
                 {
                     G.DrawRectangle(Pens.Black, pts[i, j].X, pts[i, j].Y, sW, sH);

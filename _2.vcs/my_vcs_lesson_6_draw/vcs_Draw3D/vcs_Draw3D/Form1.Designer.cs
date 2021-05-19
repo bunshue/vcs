@@ -155,7 +155,6 @@
             // timer0
             // 
             this.timer0.Enabled = true;
-            this.timer0.Interval = 10;
             this.timer0.Tick += new System.EventHandler(this.timer0_Tick);
             // 
             // pictureBox5

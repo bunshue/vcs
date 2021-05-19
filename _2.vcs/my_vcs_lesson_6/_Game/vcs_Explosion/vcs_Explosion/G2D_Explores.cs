@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace WindowsFormsApplication1
+namespace vcs_Explosion
 {
     class G2D_Explores
     {

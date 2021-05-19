@@ -18,6 +18,26 @@ namespace vcs_Draw3D
         int W = 250;
         int H = 250;
 
+        //展示板 DisplayBoard ST
+        //高低展示板 (亂數上下呈現)
+        DisplayBoard db;  // 展示板物件
+        Random rd = new Random();
+        int col = 20, row = 15;  // 展示板的 行列數目
+        int[] values;  // 展示板 內 每行的高度
+        int WW = 230, HH = 230;  // 展示板 的 寬高
+        PointF pt = new PointF(10, 10); // 展示板物件 左上角的座標
+        //展示板 DisplayBoard SP
+
+        //展示板 DisplayBoard2 ST
+        //高低展示板 (波浪上下呈現)
+        DisplayBoard db2; // 展示板物件
+        //Random rd = new Random();
+        int col2 = 40, row2 = 40; // 展示板的 行列數目
+        int[] values2; // 展示板 內 每行的高度
+        double theta = 0;  // 徑度
+        int WW2 = 230, HH2 = 230;  // 展示板 的 寬高
+        //展示板 DisplayBoard2 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -26,6 +46,38 @@ namespace vcs_Draw3D
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //展示板 DisplayBoard ST
+            //高低展示板 (亂數上下呈現)
+            // 新增 一個展示板物件
+            db = new DisplayBoard(
+                    new PointF(10, 10), // 展示板左上角的座標
+                    WW, HH, // 展示板的寬高
+                    col, row, // 展示板的 行列數目
+                    0.5f, 0.5f);  // 小方塊間隙 與 小方塊寬高 的比例
+
+            values = new int[col];
+            for (int i = 0; i < values.Length; i++)
+            {
+                values[i] = 5;  // 預設每行的高度
+            }
+
+            db.Update(values); // 更新 展示板 每行的高度
+            //展示板 DisplayBoard SP
+
+            //展示板 DisplayBoard2 ST
+            //高低展示板 (波浪上下呈現)
+            // 新增 一個展示板物件
+            db2 = new DisplayBoard(new PointF(10, 10),  // 展示板左上角的座標
+                WW2, HH2,  // 展示板的寬高
+                col2, row2,  // 展示板的 行列數目
+                0.5f, 0.5f);  // 小方塊間隙 與 小方塊寬高 的比例
+
+            values2 = new int[col2];
+            db2.Update(values2);
+            //展示板 DisplayBoard2 SP
+
+
         }
 
         void show_item_location()
@@ -138,21 +190,60 @@ namespace vcs_Draw3D
             Environment.Exit(0);
         }
 
+        //展示板 DisplayBoard ST
+        //高低展示板 (亂數上下呈現)
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
         {
+            db.Draw(e.Graphics);  // 繪出 展示板
         }
 
         private void timer0_Tick(object sender, EventArgs e)
         {
-        }
+            double d;
+            for (int i = 0; i < values.Length; i++)
+            {
+                d = rd.NextDouble(); // 以亂數當作機率
+                if (d < 0.1)  // 有 0.1 的機率 第 i 行要增加
+                {
+                    values[i] = values[i] + 1;
+                    if (values[i] > row)  // 超過 上標
+                        values[i] = row;
+                }
+                else if (d > 0.9)  // 有 0.1 的機率 第 i 行要減少
+                {
+                    values[i] = values[i] - 1;
+                    if (values[i] < 0)  // 低於 下標
+                        values[i] = 0;
+                }
+            }
 
+            db.Update(values);  // 更新 展示板 每行的高度
+            this.pictureBox0.Invalidate();  // 要求 重畫
+
+        }
+        //展示板 DisplayBoard SP
+
+
+        //展示板 DisplayBoard2 ST
+        //高低展示板 (波浪上下呈現)
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            db2.Draw(e.Graphics);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            theta = theta + 0.1;
+            for (int i = 0; i < values2.Length; i++)
+            {
+                values2[i] = (int)((row2 / 2) * Math.Sin(theta + i * 0.1) + row2 / 2) + 1;
+            }
+
+            db2.Update(values2);
+            this.pictureBox1.Invalidate();
         }
+
+        //展示板 DisplayBoard2 SP
 
 
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
