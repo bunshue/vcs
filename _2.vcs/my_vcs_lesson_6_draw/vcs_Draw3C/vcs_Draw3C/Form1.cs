@@ -260,8 +260,8 @@ namespace vcs_Draw3C
             dx = 120;
             dy = 50;
 
-            richTextBox1.Location = new Point(x_st + dx * 0 - 300, y_st + dy * 12);
-            richTextBox1.Size = new Size(400, 380);
+            richTextBox1.Location = new Point(x_st + dx * 0 - 250, y_st + dy * 12);
+            richTextBox1.Size = new Size(340, 380);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
@@ -811,7 +811,65 @@ namespace vcs_Draw3C
             richTextBox1.Text += Gap.ToString() + " ";
             this.pictureBox8.Invalidate();
         }
+
         //GraphicsPath - AddEllipse() 加入橢圓形 SP
+
+        //點對點連線 ST
+        List<Point> pt = new List<Point>(); // 紀錄點座標的 動態陣列
+        int total_point = 3;
+        private void timer13_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox13.Invalidate();
+            total_point++;
+            if (total_point > 20)
+            {
+                total_point = 3;
+            }
+        }
+
+        private void pictureBox13_Paint(object sender, PaintEventArgs e)
+        {
+            int i;
+            int j;
+
+            List<Point> pt = new List<Point>(); // 紀錄點座標的 動態陣列
+            pt.Clear();
+            int cx = pictureBox13.Width / 2;
+            int cy = pictureBox13.Height / 2;
+            int r = Math.Min(pictureBox13.Width, pictureBox13.Height) / 2;
+
+            double angle = 2 * Math.PI / total_point;
+            double offset = -Math.PI / 2;
+
+            if ((total_point % 2) == 0)
+                offset -= 2 * Math.PI / total_point / 2;
+
+            for (i = 0; i < total_point; i++)
+            {
+                //richTextBox1.Text += "angle = " + (angle * i) * 180 / Math.PI + "\n";
+                pt.Add(new Point((int)(cx + r * Math.Cos(angle * i + offset)), (int)(cy + r * Math.Sin(angle * i + offset))));
+            }
+
+            for (i = 0; i < pt.Count; i++)
+            {
+                //richTextBox1.Text += pt[i].ToString() + "\n";
+            }
+            //richTextBox1.Text += "\n";
+
+            int k = pt.Count; // 點的數目
+            k = k * (k - 1) / 2; // 總計 連線數目
+
+            this.Text = "滑鼠 點對點 " + pt.Count.ToString() + " 個點 = " + k.ToString() + " 條線";
+            // 點對點 連線
+            for (i = 0; i < pt.Count - 1; i++)
+            {
+                for (j = i + 1; j < pt.Count; j++)
+                {
+                    e.Graphics.DrawLine(Pens.Black, pt[i], pt[j]);
+                }
+            }
+            e.Graphics.DrawString(pt.Count.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Red), 10, pictureBox13.ClientSize.Height - 30);
+        }
+        //點對點連線 SP
     }
 }
-
