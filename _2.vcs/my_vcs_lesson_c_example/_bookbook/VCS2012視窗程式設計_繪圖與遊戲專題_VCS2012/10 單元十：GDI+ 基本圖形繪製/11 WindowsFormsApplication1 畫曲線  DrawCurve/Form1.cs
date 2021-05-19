@@ -20,8 +20,11 @@ namespace WindowsFormsApplication1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            int Cx = this.ClientSize.Width / 2;  // 基準點
-            int Cy = this.ClientSize.Height / 2;
+            Tension = trackBar1.Value * 0.1f;
+            this.Text = "畫曲線  DrawCurve： 張力 = " + Tension.ToString();
+
+            int Cx = 100;  // 基準點
+            int Cy = 200;
             int D = 60; // 偏移值
 
             Point[] pt = new Point[4]; // 定義 四個點
@@ -32,6 +35,29 @@ namespace WindowsFormsApplication1
 
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             e.Graphics.DrawCurve(Pens.Black, pt, Tension);  // 曲線的繪出
+
+            for (int i = 0; i < pt.Length; i++) // 控制點的繪出
+                e.Graphics.DrawEllipse(Pens.Black, pt[i].X - 2, pt[i].Y - 2, 4, 4);
+
+
+
+
+            Tension = trackBar1.Value * 0.1f;
+            this.Text = "畫封閉的曲線  DrawClosedCurve： 張力 = " + Tension.ToString();
+            //int Cx = 300;  // 基準點
+            //int Cy = 200;
+            Cx += 200;
+
+            //int D = 60; // 偏移值
+
+            //Point[] pt = new Point[4]; // 定義 四個點
+            pt[0] = new Point(Cx - D, Cy + D);
+            pt[1] = new Point(Cx - D, Cy - D);
+            pt[2] = new Point(Cx + D, Cy - D);
+            pt[3] = new Point(Cx + D, Cy + D);
+
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.DrawClosedCurve(Pens.Black, pt, Tension, System.Drawing.Drawing2D.FillMode.Alternate);  // 曲線的繪出
 
             for (int i = 0; i < pt.Length; i++) // 控制點的繪出
                 e.Graphics.DrawEllipse(Pens.Black, pt[i].X - 2, pt[i].Y - 2, 4, 4);
