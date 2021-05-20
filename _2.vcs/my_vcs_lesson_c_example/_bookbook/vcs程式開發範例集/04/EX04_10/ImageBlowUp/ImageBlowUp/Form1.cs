@@ -32,12 +32,16 @@ namespace ImageBlowUp
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
+            int dd = 100;
+
+            //由 20 X 20 放大到 100 X 100
             try
             {
                 Cursor.Current = myCursor;
                 Graphics graphics = pictureBox1.CreateGraphics();
                 Rectangle sourceRectangle = new Rectangle(e.X - 10, e.Y - 10, 20, 20); //要放大的區域 
-                Rectangle destRectangle = new Rectangle(e.X - 20, e.Y - 20, 40, 40);
+                Rectangle destRectangle = new Rectangle(e.X - dd/2, e.Y - dd/2, dd, dd);
+                graphics.DrawImage(myImage, 0, 0, myImage.Width, myImage.Height);
                 graphics.DrawImage(myImage, destRectangle, sourceRectangle, GraphicsUnit.Pixel);
             }
             catch

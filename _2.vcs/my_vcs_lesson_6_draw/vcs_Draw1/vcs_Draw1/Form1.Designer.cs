@@ -884,6 +884,7 @@
             this.button55.Name = "button55";
             this.button55.Size = new System.Drawing.Size(120, 42);
             this.button55.TabIndex = 84;
+            this.button55.Text = "製作圖面的標記文字";
             this.button55.UseVisualStyleBackColor = true;
             this.button55.Click += new System.EventHandler(this.button55_Click);
             // 

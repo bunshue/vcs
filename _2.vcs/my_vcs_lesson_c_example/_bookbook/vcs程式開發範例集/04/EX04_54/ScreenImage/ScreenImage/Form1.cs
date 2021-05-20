@@ -19,6 +19,12 @@ namespace ScreenImage
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Hook.KeyUp += new KeyEventHandler(Hook_KeyUp);//加載鍵盤的放開事件
+            comboBox1.SelectedIndex = 0;//設定圖片的類型
+        }
+
 
         //聲明一個API函數
         [System.Runtime.InteropServices.DllImportAttribute("gdi32.dll")]
@@ -62,6 +68,7 @@ namespace ScreenImage
 
         void Hook_KeyUp(object sender, KeyEventArgs e)
         {
+            this.Text = "AAAA";
             if (e.KeyCode.ToString() == "F10")//如是目前按下的是F10鍵
             {
                 //如果沒有對螢幕螢幕截圖進行設定
@@ -83,12 +90,6 @@ namespace ScreenImage
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)//開啟文件對話框
                 textBox1.Text = folderBrowserDialog1.SelectedPath;//取得圖片儲存的路徑
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Hook.KeyUp += new KeyEventHandler(Hook_KeyUp);//加載鍵盤的放開事件
-            comboBox1.SelectedIndex = 0;//設定圖片的類型
         }
 
         private void button3_Click(object sender, EventArgs e)
