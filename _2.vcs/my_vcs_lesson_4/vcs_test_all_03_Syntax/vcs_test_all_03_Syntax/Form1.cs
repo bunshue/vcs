@@ -921,9 +921,58 @@ namespace vcs_test_all_03_Syntax
         {
         }
 
+        //結構與結構陣列的用法 ST
+        struct Ball  // 結構
+        {
+            public Point pt;
+            public Color color;
+        }
+        Random rd = new Random(); // 亂數
+        List<Ball> ballList = new List<Ball>(); // 動態陣列
+
         private void button28_Click(object sender, EventArgs e)
         {
+            int i;
+            //richTextBox1.Clear();
+            richTextBox1.Text += "清除結構陣列\n";
+            ballList.Clear();
+            this.Invalidate();
+
+            Ball aBall;
+
+            richTextBox1.Text += "加入3個紅球\n";
+
+            for (i = 0; i < 3; i++)
+            {
+                aBall.pt = new Point(rd.Next(20, this.ClientSize.Width - 20), rd.Next(40, this.ClientSize.Height - 20));
+                aBall.color = Color.Red;
+                ballList.Add(aBall);
+                this.Invalidate();
+            }
+
+            richTextBox1.Text += "加入5個綠球\n";
+
+            for (i = 0; i < 5; i++)
+            {
+                aBall.pt = new Point(rd.Next(20, this.ClientSize.Width - 20), rd.Next(40, this.ClientSize.Height - 20));
+                aBall.color = Color.Green;
+                ballList.Add(aBall);
+                this.Invalidate();
+            }
+
+            richTextBox1.Text += "看結構陣列內所有資料\n";
+            i = 0;
+            foreach (Ball b in ballList)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 個, 位置 : " + b.pt.ToString() + ", 顏色 : " + b.color.ToString() + "\n";
+                i++;
+
+                //把圓球畫出來
+                //e.Graphics.FillEllipse(new SolidBrush(b.color), b.pt.X - 10, b.pt.Y - 10, 20, 20);
+                //e.Graphics.DrawEllipse(Pens.Black, b.pt.X - 10, b.pt.Y - 10, 20, 20);
+            }
         }
+        //結構與結構陣列的用法 SP
 
         private void button29_Click(object sender, EventArgs e)
         {

@@ -421,6 +421,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(180, 40);
             this.button28.TabIndex = 29;
+            this.button28.Text = "結構與結構陣列的用法";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
