@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("WindowsApplication1")]
+[assembly: AssemblyTitle("vcs_ClockB2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("mychat")]
-[assembly: AssemblyProduct("WindowsApplication1")]
-[assembly: AssemblyCopyright("Copyright (C) mychat 2009")]
+[assembly: AssemblyCompany("vcs")]
+[assembly: AssemblyProduct("vcs_ClockB2")]
+[assembly: AssemblyCopyright("vcs")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1.csproj", "{50525AB6-0DBA-4861-9BE0-08E7D7610720}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ClockB1", "vcs_ClockB1\vcs_ClockB1.csproj", "{50525AB6-0DBA-4861-9BE0-08E7D7610720}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

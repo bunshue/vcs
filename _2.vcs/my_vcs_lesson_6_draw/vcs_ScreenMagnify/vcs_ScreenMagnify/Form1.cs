@@ -18,11 +18,12 @@ namespace vcs_ScreenMagnify
         TextureBrush texBrush; // 兩倍影像的塗刷
         Point mousePos; // 滑鼠位置
         int D = 100; // 放大鏡半徑
+        int magnify_ratio = 20;
 
         public Form1()
         {
             InitializeComponent();
-            Cursor.Hide(); // 隱藏滑鼠游標
+            //Cursor.Hide(); // 隱藏滑鼠游標
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -37,7 +38,7 @@ namespace vcs_ScreenMagnify
                 Graphics G2 = Graphics.FromImage(bitmapDouble);
                 rectDest = new Rectangle(0, 0, 2 * D, 2 * D);
                 rectSRC = new Rectangle(mousePos.X - D / 2, mousePos.Y - D / 2, D, D);
-                G2.DrawImage(bitmap, rectDest, rectSRC, GraphicsUnit.Pixel); // 考貝 2倍螢幕的圖 到 bitmapDouble
+                G2.DrawImage(bitmap, rectDest, rectSRC, GraphicsUnit.Pixel); // 拷貝 2倍螢幕的圖 到 bitmapDouble
             }
 
             // 圓形放大鏡 要將 圓形外的像素設為 透明 => 會吃資源
@@ -108,6 +109,8 @@ namespace vcs_ScreenMagnify
 
             if (magnifying_type == 2)
             {
+                //here
+                //int magnify_ratio = 20;
                 rectDest = new Rectangle(mousePos.X - D, mousePos.Y - D, 2 * D, 2 * D);
                 texBrush.ResetTransform();  // 塗刷的轉換矩陣 = 單位矩陣
                 texBrush.TranslateTransform(-mousePos.X, -mousePos.Y); // 塗刷對齊 滑鼠位置
@@ -132,7 +135,7 @@ namespace vcs_ScreenMagnify
             ScreenSize = SystemInformation.PrimaryMonitorSize; // 得到 螢幕的 寬高
             bitmap = new Bitmap(ScreenSize.Width, ScreenSize.Height);
             Graphics G = Graphics.FromImage(bitmap);
-            G.CopyFromScreen(0, 0, 0, 0, ScreenSize); // 考貝 螢幕的圖 到 bitmap
+            G.CopyFromScreen(0, 0, 0, 0, ScreenSize); // 拷貝 螢幕的圖 到 bitmap
 
             if (magnifying_type == 2)
             {
@@ -140,7 +143,7 @@ namespace vcs_ScreenMagnify
                 Graphics G2 = Graphics.FromImage(bitmapDouble);
                 Rectangle rectDest = new Rectangle(0, 0, ScreenSize.Width * 2, ScreenSize.Height * 2);
                 Rectangle rectSRC = new Rectangle(0, 0, ScreenSize.Width, ScreenSize.Height);
-                G2.DrawImage(bitmap, rectDest, rectSRC, GraphicsUnit.Pixel); // 考貝 2倍螢幕的圖 到 bitmapDouble
+                G2.DrawImage(bitmap, rectDest, rectSRC, GraphicsUnit.Pixel); // 拷貝2倍螢幕的圖 到 bitmapDouble
 
                 texBrush = new TextureBrush(bitmapDouble);  // 兩倍影像的塗刷
             }
@@ -165,6 +168,20 @@ namespace vcs_ScreenMagnify
             }
             else if (e.KeyData == Keys.Down)  // 放大鏡半徑 變小
             {
+                D = D - 10;
+                if (D < 30) D = 30;
+                this.Invalidate();
+            }
+            else if (e.KeyData == Keys.Add)  // 放大鏡倍率 變大
+            {
+                //TBD
+                D = D + 10;
+                if (D > 500) D = 500;
+                this.Invalidate();
+            }
+            else if (e.KeyData == Keys.Subtract)  // 放大鏡倍率 變小
+            {
+                //TBD
                 D = D - 10;
                 if (D < 30) D = 30;
                 this.Invalidate();

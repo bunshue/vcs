@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace vcs_ClockB1
 {
     partial class Form1
     {

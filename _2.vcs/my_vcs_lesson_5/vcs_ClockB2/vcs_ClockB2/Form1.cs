@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
-namespace WindowsFormsApplication1
+namespace vcs_ClockB2
 {
     public partial class Form1 : Form
     {
         Pen MyPen_H = new Pen(Color.Blue, 8); // 時針使用的筆
         Pen MyPen_M = new Pen(Color.Green, 8); // 分針使用的筆
         Pen MyPen_S = new Pen(Color.Red, 6);   // 秒針使用的筆
+        Pen MyPen_AL = new Pen(Color.Black, 6);   // 秒針使用的筆
+        float alarm_Angle = 0; // 
+        Point current = new Point(); // 滑鼠游標 目前的座標
 
         Pen MyPen_Frame = new Pen(Color.Black, 1); // 時鐘框架使用的筆
 
@@ -30,11 +33,9 @@ namespace WindowsFormsApplication1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
             e.Graphics.ResetTransform(); // 表單畫布 設為預設值
             // 表單畫布的原點 平移到 視窗客戶區的 中心點
-            e.Graphics.TranslateTransform(this.ClientSize.Width / 2,
+            e.Graphics.TranslateTransform(this.ClientSize.Width / 2, 
                                           this.ClientSize.Height / 2);
             // 繪出 時鐘的圓形
             e.Graphics.DrawEllipse(MyPen_Frame, -110, -110, 220, 220);
@@ -71,6 +72,12 @@ namespace WindowsFormsApplication1
             e.Graphics.RotateTransform(t.Second * 6.0f);
             e.Graphics.DrawLine(MyPen_S, 0, 0, 0, -100);
 
+            // 繪出 鬧鐘針
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(this.ClientSize.Width / 2, this.ClientSize.Height / 2);
+            e.Graphics.RotateTransform(alarm_Angle);
+            e.Graphics.DrawLine(MyPen_AL, 0, 0, 0, -100);
+
             // 繪出 時鐘中心的小圓圈
             e.Graphics.ResetTransform();
             e.Graphics.TranslateTransform(this.ClientSize.Width / 2, this.ClientSize.Height / 2);
@@ -82,6 +89,47 @@ namespace WindowsFormsApplication1
             MyPen_H.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
             MyPen_M.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
             MyPen_S.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            MyPen_AL.EndCap = System.Drawing.Drawing2D.LineCap.RoundAnchor;
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (e.X >= this.ClientSize.Width/2) // 在右方
+                {
+                    if (e.Y < current.Y)  // 滑鼠往上
+                        alarm_Angle -= 1;
+                    else if (e.Y > current.Y)  // 滑鼠往下
+                        alarm_Angle += 1;
+                }
+                else // 在左方 
+                {
+                    if (e.Y < current.Y)  // 滑鼠往上
+                        alarm_Angle += 1;
+                    else if (e.Y > current.Y) // 滑鼠往下
+                        alarm_Angle -= 1;
+                }
+
+                if (e.Y <= this.ClientSize.Height / 2) // 在上方
+                {
+                    if (e.X < current.X)  // 滑鼠往左
+                        alarm_Angle -= 1;
+                    else if (e.X > current.X) // 滑鼠往右
+                        alarm_Angle += 1;
+                }
+                else // 在下方 
+                {
+                    if (e.X < current.X)  // 滑鼠往左
+                        alarm_Angle += 1;
+                    else if (e.X > current.X)  // 滑鼠往右
+                        alarm_Angle -= 1;
+                }
+
+                current.X = e.X;
+                current.Y = e.Y;
+                this.Invalidate();
+            }
         }
     }
 }
