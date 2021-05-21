@@ -95,6 +95,8 @@ namespace vcs_test_all_05_Array
 
             groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 15);
+            groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 17);
 
             x_st = 15;
             y_st = 15;
@@ -1707,7 +1709,7 @@ namespace vcs_test_all_05_Array
         private void array_sort_Click(object sender, EventArgs e)
         {
             //物件陣列測試
-            TextBox[] textArray = new TextBox[] { numText1, numText2, numText3, numText4, numText5, numText6, numText7, numText8 };
+            TextBox[] textArray = new TextBox[] { numText1a, numText2a, numText3a, numText4a, numText5a, numText6a, numText7a, numText8a };
             for (int i = 0; i < 8; i++)
             {
                 textArray[i].BackColor = SystemColors.Window;
@@ -1719,6 +1721,138 @@ namespace vcs_test_all_05_Array
                 int num = rnd.Next(1, 50);
                 numArray[i] = num;
                 textArray[i].Text = num.ToString();
+            }
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            timer_sort.Enabled = true;
+            startButton.Text = "1";
+        }
+
+        private void timer_sort_Tick(object sender, EventArgs e)
+        {
+            TextBox[] textArray = new TextBox[] { numText1b, numText2b, numText3b, numText4b, numText5b, numText6b, numText7b, numText8b };
+            for (int i = 0; i < 8; i++)
+                textArray[i].BackColor = SystemColors.Window;
+
+            int check = int.Parse(startButton.Text);
+            for (int j = 0; check > (7 - j); j++)
+                check -= (7 - j);
+
+            check--;
+            textArray[check].BackColor = Color.LightBlue;
+            textArray[check + 1].BackColor = Color.LightBlue;
+            string tmp;
+            if (int.Parse(textArray[check].Text) > int.Parse(textArray[check + 1].Text))
+            {
+                textArray[check].BackColor = Color.Pink;
+                textArray[check + 1].BackColor = Color.Pink;
+                tmp = textArray[check + 1].Text;
+                textArray[check + 1].Text = textArray[check].Text;
+                textArray[check].Text = tmp;
+            }
+
+            if (startButton.Text == "28")
+            {
+                timer_sort.Enabled = false;
+                textArray[check].BackColor = SystemColors.Window;
+                textArray[check + 1].BackColor = SystemColors.Window;
+                startButton.Text = "開始排序";
+            }
+            else
+                startButton.Text = (int.Parse(startButton.Text) + 1).ToString();
+
+
+
+        }
+
+        private void stepButton_Click(object sender, EventArgs e)
+        {
+            TextBox[] textArray = new TextBox[] { numText1c, numText2c, numText3c, numText4c, numText5c, numText6c, numText7c, numText8c };
+
+            if (stepButton.Text == "開始")
+            {
+                stepButton.Text = "下一步";
+
+                for (int i = 7; i > 0; i--)
+                {
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (int.Parse(textArray[j].Text) > int.Parse(textArray[j + 1].Text))
+                        {
+                            string tmp = textArray[j + 1].Text;
+                            textArray[j + 1].Text = textArray[j].Text;
+                            textArray[j].Text = tmp;
+                        }
+                    }
+                }
+                for (int i = 0; i < 8; i++)
+                {
+                    textArray[i].BackColor = Color.LightBlue;
+                }
+                targetText.Enabled = false;
+            }
+            else
+            {
+                int i, lowIndex = 0, highIndex = 0;
+
+                for (i = 0; i < 8; i++)
+                {
+                    if (textArray[i].BackColor == Color.LightBlue)
+                    {
+                        break;
+                    }
+                }
+                lowIndex = i;
+
+                for (i = 7; i > 0; i--)
+                {
+                    if (textArray[i].BackColor == Color.LightBlue)
+                    {
+                        break;
+                    }
+                }
+                highIndex = i;
+
+                for (i = 0; i < 8; i++)
+                {
+                    textArray[i].BackColor = SystemColors.Window;
+                }
+
+
+                int midIndex = (highIndex + lowIndex) / 2;
+                if (textArray[midIndex].Text == targetText.Text)
+                {
+                    MessageBox.Show("你所指定的數字在索引 " + midIndex + "的位置!");
+                    stepButton.Text = "開始";
+                    targetText.Enabled = true;
+                }
+                else
+                {
+                    if (int.Parse(textArray[midIndex].Text) > int.Parse(targetText.Text))
+                    {
+                        highIndex = midIndex - 1;
+                    }
+                    else
+                    {
+                        lowIndex = midIndex + 1;
+                    }
+
+                    if (lowIndex > highIndex)
+                    {
+                        MessageBox.Show("程式在陣列中沒有找到你所指定的數字!");
+                        stepButton.Text = "開始";
+                        targetText.Enabled = true;
+                    }
+                    else
+                    {
+                        for (i = lowIndex; i <= highIndex; i++)
+                        {
+                            textArray[i].BackColor = Color.LightBlue;
+                        }
+                    }
+                }
             }
         }
     }

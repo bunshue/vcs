@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace _15._3_1
+namespace vcs_BallGame
 {
     static class Program
     {

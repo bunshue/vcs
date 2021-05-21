@@ -1,4 +1,4 @@
-﻿namespace _15._4_1
+﻿namespace vcs_BallGame
 {
     partial class Form1
     {
@@ -41,7 +41,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 264);
+            this.ClientSize = new System.Drawing.Size(661, 510);
             this.Name = "Form1";
             this.Text = "碰撞變色球遊戲";
             this.Load += new System.EventHandler(this.Form1_Load);

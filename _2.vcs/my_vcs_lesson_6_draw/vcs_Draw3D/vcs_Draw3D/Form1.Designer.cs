@@ -61,6 +61,9 @@
             this.timer14 = new System.Windows.Forms.Timer(this.components);
             this.timer8 = new System.Windows.Forms.Timer(this.components);
             this.timer13 = new System.Windows.Forms.Timer(this.components);
+            this.candidateText3 = new System.Windows.Forms.TextBox();
+            this.candidateText2 = new System.Windows.Forms.TextBox();
+            this.candidateText1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -313,7 +316,7 @@
             // timer4
             // 
             this.timer4.Enabled = true;
-            this.timer4.Interval = 10;
+            this.timer4.Interval = 1000;
             this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
             // 
             // timer14
@@ -334,11 +337,44 @@
             this.timer13.Interval = 3000;
             this.timer13.Tick += new System.EventHandler(this.timer13_Tick);
             // 
+            // candidateText3
+            // 
+            this.candidateText3.BackColor = System.Drawing.Color.Red;
+            this.candidateText3.Location = new System.Drawing.Point(144, 466);
+            this.candidateText3.Name = "candidateText3";
+            this.candidateText3.Size = new System.Drawing.Size(60, 22);
+            this.candidateText3.TabIndex = 86;
+            this.candidateText3.Text = "0";
+            this.candidateText3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // candidateText2
+            // 
+            this.candidateText2.BackColor = System.Drawing.Color.Green;
+            this.candidateText2.Location = new System.Drawing.Point(78, 465);
+            this.candidateText2.Name = "candidateText2";
+            this.candidateText2.Size = new System.Drawing.Size(60, 22);
+            this.candidateText2.TabIndex = 85;
+            this.candidateText2.Text = "0";
+            this.candidateText2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // candidateText1
+            // 
+            this.candidateText1.BackColor = System.Drawing.Color.Yellow;
+            this.candidateText1.Location = new System.Drawing.Point(12, 466);
+            this.candidateText1.Name = "candidateText1";
+            this.candidateText1.Size = new System.Drawing.Size(60, 22);
+            this.candidateText1.TabIndex = 84;
+            this.candidateText1.Text = "0";
+            this.candidateText1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1398, 786);
+            this.Controls.Add(this.candidateText3);
+            this.Controls.Add(this.candidateText2);
+            this.Controls.Add(this.candidateText1);
             this.Controls.Add(this.pictureBox14);
             this.Controls.Add(this.pictureBox13);
             this.Controls.Add(this.pictureBox12);
@@ -376,6 +412,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -413,6 +450,9 @@
         private System.Windows.Forms.Timer timer14;
         private System.Windows.Forms.Timer timer8;
         private System.Windows.Forms.Timer timer13;
+        private System.Windows.Forms.TextBox candidateText3;
+        private System.Windows.Forms.TextBox candidateText2;
+        private System.Windows.Forms.TextBox candidateText1;
     }
 }
 

@@ -77,7 +77,14 @@ namespace vcs_Draw3D
             db2.Update(values2);
             //展示板 DisplayBoard2 SP
 
-
+            //投票比例繪圖程式 ST
+            this.c1 = 0;
+            this.c2 = 0;
+            this.c3 = 0;
+            this.yellow_b = new SolidBrush(Color.Yellow);
+            this.green_b = new SolidBrush(Color.Green);
+            this.red_b = new SolidBrush(Color.Red);
+            //投票比例繪圖程式 SP
         }
 
         void show_item_location()
@@ -122,6 +129,11 @@ namespace vcs_Draw3D
             pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
+            candidateText1.Location = new Point(x_st + dx * 4+20, y_st + dy * 1 - 70);
+            candidateText2.Location = new Point(x_st + dx * 4+100, y_st + dy * 1 - 70);
+            candidateText3.Location = new Point(x_st + dx * 4+180, y_st + dy * 1 - 70);
+
             pictureBox5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
@@ -263,15 +275,41 @@ namespace vcs_Draw3D
         {
         }
 
+        //投票比例繪圖程式 ST
+
+        private int c1, c2, c3;
+        private Brush yellow_b, green_b, red_b;
+        Random r = new Random();
 
         private void pictureBox4_Paint(object sender, PaintEventArgs e)
         {
+            Rectangle r = new Rectangle(25, 10, 200, 200);
+            if (this.c1 != 0)
+                e.Graphics.FillPie(yellow_b, r, 0.0F, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3));
+            if (this.c2 != 0)
+                e.Graphics.FillPie(green_b, r, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3), 360.0F * this.c2 / (this.c1 + this.c2 + this.c3));
+            if (this.c3 != 0)
+                e.Graphics.FillPie(red_b, r, 360.0F * (this.c1 + this.c2) / (this.c1 + this.c2 + this.c3), 360.0F * this.c3 / (this.c1 + this.c2 + this.c3));
+            Pen p = new Pen(Color.Black);
+            if (this.c1 >= this.c2 && this.c1 >= this.c3 && this.c1 != 0)
+                e.Graphics.DrawPie(p, r, 0.0F, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3));
+            else if (this.c2 >= this.c3 && this.c2 != 0)
+                e.Graphics.DrawPie(p, r, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3), 360.0F * this.c2 / (this.c1 + this.c2 + this.c3));
+            else if (this.c3 != 0)
+                e.Graphics.DrawPie(p, r, 360.0F * (this.c1 + this.c2) / (this.c1 + this.c2 + this.c3), 360.0F * this.c3 / (this.c1 + this.c2 + this.c3));
         }
 
         private void timer4_Tick(object sender, EventArgs e)
         {
+            this.c1 = r.Next(1234);
+            this.c2 = r.Next(1234);
+            this.c3 = r.Next(1234);
+            candidateText1.Text = this.c1.ToString();
+            candidateText2.Text = this.c2.ToString();
+            candidateText3.Text = this.c3.ToString();
+            this.pictureBox4.Refresh();
         }
-
+        //投票比例繪圖程式 SP
 
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
