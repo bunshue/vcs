@@ -33,12 +33,11 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tb_x_st = new System.Windows.Forms.TextBox();
-            this.tb_y_st = new System.Windows.Forms.TextBox();
-            this.tb_w = new System.Windows.Forms.TextBox();
             this.tb_h = new System.Windows.Forms.TextBox();
+            this.tb_w = new System.Windows.Forms.TextBox();
+            this.tb_y_st = new System.Windows.Forms.TextBox();
+            this.tb_x_st = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -97,24 +96,12 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(68, 141);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(81, 33);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "save";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tb_h);
             this.groupBox1.Controls.Add(this.tb_w);
             this.groupBox1.Controls.Add(this.tb_y_st);
             this.groupBox1.Controls.Add(this.tb_x_st);
-            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(603, 453);
@@ -124,21 +111,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "指明部分截取";
             // 
-            // tb_x_st
+            // tb_h
             // 
-            this.tb_x_st.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_x_st.Location = new System.Drawing.Point(42, 24);
-            this.tb_x_st.Name = "tb_x_st";
-            this.tb_x_st.Size = new System.Drawing.Size(61, 30);
-            this.tb_x_st.TabIndex = 7;
-            // 
-            // tb_y_st
-            // 
-            this.tb_y_st.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_y_st.Location = new System.Drawing.Point(146, 24);
-            this.tb_y_st.Name = "tb_y_st";
-            this.tb_y_st.Size = new System.Drawing.Size(61, 30);
-            this.tb_y_st.TabIndex = 8;
+            this.tb_h.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_h.Location = new System.Drawing.Point(146, 84);
+            this.tb_h.Name = "tb_h";
+            this.tb_h.Size = new System.Drawing.Size(61, 30);
+            this.tb_h.TabIndex = 10;
             // 
             // tb_w
             // 
@@ -148,13 +127,21 @@
             this.tb_w.Size = new System.Drawing.Size(61, 30);
             this.tb_w.TabIndex = 9;
             // 
-            // tb_h
+            // tb_y_st
             // 
-            this.tb_h.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_h.Location = new System.Drawing.Point(146, 84);
-            this.tb_h.Name = "tb_h";
-            this.tb_h.Size = new System.Drawing.Size(61, 30);
-            this.tb_h.TabIndex = 10;
+            this.tb_y_st.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_y_st.Location = new System.Drawing.Point(146, 24);
+            this.tb_y_st.Name = "tb_y_st";
+            this.tb_y_st.Size = new System.Drawing.Size(61, 30);
+            this.tb_y_st.TabIndex = 8;
+            // 
+            // tb_x_st
+            // 
+            this.tb_x_st.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_x_st.Location = new System.Drawing.Point(42, 24);
+            this.tb_x_st.Name = "tb_x_st";
+            this.tb_x_st.Size = new System.Drawing.Size(61, 30);
+            this.tb_x_st.TabIndex = 7;
             // 
             // label1
             // 
@@ -208,7 +195,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox tb_h;
         private System.Windows.Forms.TextBox tb_w;

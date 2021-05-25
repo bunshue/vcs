@@ -14,7 +14,7 @@ namespace WindowsApplication1
         public Form1()
         {
             InitializeComponent();
-            this.Cursor = new Cursor("3dgarro.cur"); // 外部的滑鼠游標圖形檔案
+            this.Cursor = new Cursor("../../3dgarro.cur"); // 外部的滑鼠游標圖形檔案
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)

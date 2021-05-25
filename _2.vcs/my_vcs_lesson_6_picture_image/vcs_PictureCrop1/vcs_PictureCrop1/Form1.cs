@@ -20,7 +20,7 @@ namespace vcs_PictureCrop1
         private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
         private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
-        private Rectangle select_rectangle;//用來保存截圖的矩形
+        private Rectangle select_rectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
 
         private int W = 0;  //原圖的寬
         private int H = 0;  //原圖的高
@@ -61,6 +61,11 @@ namespace vcs_PictureCrop1
             {
                 flag_select_area = true;
                 pt_st = e.Location; //起始點座標
+
+                nud_x_st.Value = 0;
+                nud_y_st.Value = 0;
+                nud_w.Value = 0;
+                nud_h.Value = 0;
             }
             else if (e.Button == MouseButtons.Right)
             {
@@ -122,7 +127,12 @@ namespace vcs_PictureCrop1
             // Display the result.
             pictureBox2.Image = bitmap2;
 
-            richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
+            //richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
+
+            nud_x_st.Value = select_rectangle.X;
+            nud_y_st.Value = select_rectangle.Y;
+            nud_w.Value = select_rectangle.Width;
+            nud_h.Value = select_rectangle.Height;
         }
 
         // If the user presses Escape, cancel.
@@ -257,6 +267,60 @@ namespace vcs_PictureCrop1
             H = bitmap1.Height;
             pictureBox1.ClientSize = new Size(W, H);
             pictureBox2.ClientSize = new Size(W, H);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            int x_st = (int)nud_x_st.Value;
+            int y_st = (int)nud_y_st.Value;
+            int w = (int)nud_w.Value;
+            int h = (int)nud_h.Value;
+            String filename = Application.StartupPath + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            Bitmap bitmap = new Bitmap(pictureBox1.Image);
+            select_rectangle = new Rectangle(x_st, y_st, w, h);
+            //richTextBox1.Text += select_rectangle.ToString() + "\n";
+            Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);
+            cloneBitmap.Save(filename, ImageFormat.Bmp);
+            richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
+        }
+
+        private void select_crop_area(object sender, EventArgs e)
+        {
+            int x_st = (int)nud_x_st.Value;
+            int y_st = (int)nud_y_st.Value;
+            int w = (int)nud_w.Value;
+            int h = (int)nud_h.Value;
+
+            Rectangle select_rectangle2 = new Rectangle(x_st, y_st, w, h);
+
+            // Make a Bitmap to display the selection rectangle.
+            Bitmap bmp = new Bitmap(bitmap1);
+
+            // Draw the selection rectangle.
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                Pen select_pen = new Pen(Color.Red);
+                select_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                g.DrawRectangle(select_pen, select_rectangle2);
+            }
+            // Display the temporary bitmap.
+            pictureBox1.Image = bmp;
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                Graphics graphics = this.CreateGraphics();
+                Bitmap bitmap = new Bitmap(pictureBox1.Image);
+                Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);
+                graphics.DrawImage(cloneBitmap, e.X, e.Y);
+                Graphics g = pictureBox1.CreateGraphics();
+                //SolidBrush myBrush = new SolidBrush(Color.White);
+                //g.FillRectangle(myBrush, select_rectangle);   //將原圖剪下
+            }
+            catch
+            { }
         }
     }
 }

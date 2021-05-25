@@ -24,14 +24,15 @@ namespace WindowsFormsApplication1
             int X, Y;
             for (int i = 0; i < smallBallCount; i++)  // 初始化 200 顆小球
             {
-                X = rd.Next(this.ClientSize.Width);
-                Y = rd.Next(this.ClientSize.Height);
+                X = rd.Next(this.pictureBox1.ClientSize.Width);
+                Y = rd.Next(this.pictureBox1.ClientSize.Height);
                 R.Add(new Point(X, Y));
             }
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            /*
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             // 繪出大球
@@ -42,13 +43,16 @@ namespace WindowsFormsApplication1
             {
                 e.Graphics.FillEllipse(Brushes.Silver, R[i].X - 5, R[i].Y - 5, 10, 10);
             }
+            */
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
+            /*
             // 紀錄滑鼠的座標
             Mouse.X = e.X;
             Mouse.Y = e.Y;
+            */
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -87,17 +91,52 @@ namespace WindowsFormsApplication1
                 {
                     // 在邊界內漫遊
                     X = R[i].X + rd.Next(11) - 5;  // -5 ~ 5 之間變動
-                    if (X > this.ClientSize.Width) X = this.ClientSize.Width;
-                    else if (X < 0) X = 0;
+                    if (X > this.pictureBox1.ClientSize.Width)
+                    {
+                        X = this.pictureBox1.ClientSize.Width;
+                    }
+                    else if (X < 0)
+                    {
+                        X = 0;
+                    }
 
                     Y = R[i].Y + rd.Next(11) - 5;
-                    if (Y > this.ClientSize.Height) Y = this.ClientSize.Height;
-                    else if (Y < 0) Y = 0;
+                    if (Y > this.pictureBox1.ClientSize.Height)
+                    {
+                        Y = this.pictureBox1.ClientSize.Height;
+                    }
+                    else if (Y < 0)
+                    {
+                        Y = 0;
+                    }
 
                     R[i] = new Point((int)X, (int)Y);
                 }
             }
-            this.Invalidate();
+            this.pictureBox1.Invalidate();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // 繪出大球
+            e.Graphics.FillEllipse(Brushes.Black, (int)(BigBall.X - 15), (int)(BigBall.Y - 15), 30, 30);
+
+            // 繪出小球
+            for (int i = 0; i <= R.Count - 1; i++)
+            {
+                e.Graphics.FillEllipse(Brushes.Silver, R[i].X - 5, R[i].Y - 5, 10, 10);
+            }
+
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // 紀錄滑鼠的座標
+            Mouse.X = e.X;
+            Mouse.Y = e.Y;
+
         }
     }
 }

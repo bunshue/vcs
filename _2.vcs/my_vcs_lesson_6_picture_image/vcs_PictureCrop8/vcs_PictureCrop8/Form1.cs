@@ -158,10 +158,10 @@ namespace vcs_PictureCrop8
             g.DrawRectangle(new Pen(Color.Red, 1), x_st2, y_st2, w, h);
 
             select_rectangle = new Rectangle(x_st2, y_st2, w, h);
-            tb_x_st.Text = x_st2.ToString();
-            tb_y_st.Text = y_st2.ToString();
-            tb_w.Text = w.ToString();
-            tb_h.Text = h.ToString();
+                                                                            tb_x_st.Text = x_st2.ToString();
+                                                                            tb_y_st.Text = y_st2.ToString();
+                                                                            tb_w.Text = w.ToString();
+                                                                            tb_h.Text = h.ToString();
         }
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
@@ -191,19 +191,6 @@ namespace vcs_PictureCrop8
             richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            int x_st = int.Parse(tb_x_st.Text);
-            int y_st = int.Parse(tb_y_st.Text);
-            int w = int.Parse(tb_w.Text);
-            int h = int.Parse(tb_h.Text);
-            String filename = Application.StartupPath + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            Bitmap bitmap = new Bitmap(pictureBox1.Image);
-            select_rectangle = new Rectangle(x_st, y_st, w, h);
-            richTextBox1.Text += select_rectangle.ToString() + "\n";
-            Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);
-            cloneBitmap.Save(filename, ImageFormat.Bmp);
-            richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
-        }
+
     }
 }
