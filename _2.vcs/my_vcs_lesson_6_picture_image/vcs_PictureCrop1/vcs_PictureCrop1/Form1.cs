@@ -45,6 +45,10 @@ namespace vcs_PictureCrop1
             H = bitmap1.Height;
             pictureBox1.ClientSize = new Size(W, H);
             pictureBox2.ClientSize = new Size(W, H);
+            nud_w.Maximum = W;
+            nud_h.Maximum = H;
+            nud_x_st.Maximum = W;
+            nud_y_st.Maximum = H;
         }
 
         // Return a Rectangle with these points as corners.

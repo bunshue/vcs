@@ -131,10 +131,26 @@ namespace vcs_TextBox
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
             //只允許輸入數字
+            /* same
             if ((e.KeyChar != 8 && !char.IsDigit(e.KeyChar)) && e.KeyChar != 13)
             {
                 //MessageBox.Show("只允許輸入數字", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 e.Handled = true;
+            }
+            */
+            byte asc = Convert.ToByte(e.KeyChar);
+            if (asc < 48 || asc > 57)
+            {
+                e.Handled = true;  //不接受字元
+            }
+        }
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //只允許輸入小寫英文字母
+            if (e.KeyChar < 'a' || e.KeyChar > 'z')
+            {
+                e.Handled = true;  //不接受字元
             }
         }
     }

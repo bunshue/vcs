@@ -45,6 +45,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -52,15 +53,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(444, 21);
+            this.pictureBox2.Location = new System.Drawing.Point(360, 21);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(400, 450);
+            this.pictureBox2.Size = new System.Drawing.Size(320, 420);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
@@ -71,7 +73,7 @@
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox1.Location = new System.Drawing.Point(22, 21);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(400, 450);
+            this.pictureBox1.Size = new System.Drawing.Size(320, 420);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -80,15 +82,15 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(867, 21);
+            this.richTextBox1.Location = new System.Drawing.Point(1024, 21);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(310, 450);
+            this.richTextBox1.Size = new System.Drawing.Size(320, 420);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(867, 477);
+            this.button1.Location = new System.Drawing.Point(1024, 493);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(102, 38);
             this.button1.TabIndex = 3;
@@ -98,7 +100,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1083, 477);
+            this.button2.Location = new System.Drawing.Point(1240, 493);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(102, 38);
             this.button2.TabIndex = 4;
@@ -108,7 +110,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(867, 521);
+            this.button3.Location = new System.Drawing.Point(1024, 537);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(102, 38);
             this.button3.TabIndex = 5;
@@ -118,7 +120,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(975, 521);
+            this.button4.Location = new System.Drawing.Point(1132, 537);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(102, 38);
             this.button4.TabIndex = 6;
@@ -128,7 +130,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(1083, 521);
+            this.button5.Location = new System.Drawing.Point(1240, 537);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(102, 38);
             this.button5.TabIndex = 7;
@@ -145,7 +147,7 @@
             this.groupBox1.Controls.Add(this.nud_x_st);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(484, 490);
+            this.groupBox1.Location = new System.Drawing.Point(22, 483);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(241, 179);
             this.groupBox1.TabIndex = 8;
@@ -253,11 +255,23 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "可將選取區域貼在空白處";
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox3.Location = new System.Drawing.Point(698, 21);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(320, 420);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox3.TabIndex = 10;
+            this.pictureBox3.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1240, 698);
+            this.ClientSize = new System.Drawing.Size(1359, 698);
+            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button5);
@@ -281,6 +295,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_w)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,6 +320,7 @@
         private System.Windows.Forms.NumericUpDown nud_w;
         private System.Windows.Forms.NumericUpDown nud_h;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }
 

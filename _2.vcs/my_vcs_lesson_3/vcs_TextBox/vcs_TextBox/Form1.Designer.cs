@@ -45,8 +45,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -131,7 +133,7 @@
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(305, 170);
+            this.groupBox1.Location = new System.Drawing.Point(305, 249);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(324, 211);
             this.groupBox1.TabIndex = 13;
@@ -201,7 +203,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label7.Location = new System.Drawing.Point(715, 22);
+            this.label7.Location = new System.Drawing.Point(691, 22);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(256, 24);
             this.label7.TabIndex = 14;
@@ -210,7 +212,7 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox3.Location = new System.Drawing.Point(768, 65);
+            this.textBox3.Location = new System.Drawing.Point(744, 53);
             this.textBox3.MaxLength = 0;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(133, 36);
@@ -222,20 +224,12 @@
             // 
             this.groupBox2.Controls.Add(this.richTextBox1);
             this.groupBox2.Controls.Add(this.textBox4);
-            this.groupBox2.Location = new System.Drawing.Point(635, 170);
+            this.groupBox2.Location = new System.Drawing.Point(635, 249);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(362, 211);
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "TextBox屬性";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox4.Location = new System.Drawing.Point(85, 27);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(200, 36);
-            this.textBox4.TabIndex = 17;
             // 
             // richTextBox1
             // 
@@ -247,11 +241,42 @@
             this.richTextBox1.Text = "textBox4.MaxLength = 3;    //設最多只能輸入3位數\ntextBox4.ReadOnly = true;   //設為唯讀不能輸入\nte" +
                 "xtBox4.TabIndex = 0;     //設為第一個停駐焦點\ntextBox4.Focus();    //將停駐焦點移到txtDegree";
             // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox4.Location = new System.Drawing.Point(85, 27);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(200, 36);
+            this.textBox4.TabIndex = 17;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox5.Location = new System.Drawing.Point(744, 144);
+            this.textBox5.MaxLength = 0;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(133, 36);
+            this.textBox5.TabIndex = 18;
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label8.Location = new System.Drawing.Point(650, 112);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(352, 24);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "TextBox只允許輸入小寫英文字母";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1009, 539);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label7);
@@ -296,6 +321,8 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label8;
     }
 }
 
