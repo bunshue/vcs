@@ -1,0 +1,1 @@
+运行本程序时，首先需要确保程序的bin文件夹下有IPData.dat和MPhoneData.dat这两个文件，光盘中由于涉及到版权问题，所以没有附带，您如果需要，可以联系我们（使用邮箱或登录www.mingribook.com网站）。
