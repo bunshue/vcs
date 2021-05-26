@@ -34,6 +34,10 @@ namespace vcs_PictureCrop1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+            this.UpdateStyles();
+            //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題
+
             bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
 
@@ -309,6 +313,9 @@ namespace vcs_PictureCrop1
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
+            if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
+                return;
+
             try
             {
                 Graphics graphics = this.CreateGraphics();

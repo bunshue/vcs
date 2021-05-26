@@ -28,40 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.picCat = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picCat)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // picCat
+            // pictureBox1
             // 
-            this.picCat.Location = new System.Drawing.Point(112, 100);
-            this.picCat.Name = "picCat";
-            this.picCat.Size = new System.Drawing.Size(60, 60);
-            this.picCat.TabIndex = 2;
-            this.picCat.TabStop = false;
-            this.picCat.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picCat_MouseDown);
-            this.picCat.MouseEnter += new System.EventHandler(this.picCat_MouseEnter);
-            this.picCat.MouseLeave += new System.EventHandler(this.picCat_MouseLeave);
-            this.picCat.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picCat_MouseMove);
-            this.picCat.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picCat_MouseUp);
+            this.pictureBox1.Location = new System.Drawing.Point(321, 251);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(60, 60);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
+            this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.picCat);
+            this.ClientSize = new System.Drawing.Size(721, 569);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picCat)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox picCat;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

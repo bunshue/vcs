@@ -36,6 +36,7 @@
             this.lblMsg = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btnEnd
@@ -114,11 +115,20 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "英文數字聽力練習";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(12, 247);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(533, 323);
+            this.richTextBox1.TabIndex = 16;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 171);
+            this.ClientSize = new System.Drawing.Size(557, 582);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.btnCheck);
             this.Controls.Add(this.btnReplay);
@@ -145,6 +155,7 @@
         private System.Windows.Forms.Label lblMsg;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

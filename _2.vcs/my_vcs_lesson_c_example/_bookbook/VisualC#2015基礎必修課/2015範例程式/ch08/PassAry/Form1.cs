@@ -19,21 +19,26 @@ namespace PassAry
         //表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
-            int[] myArray = new int[] { 10, 30, 20, 40, 50 };
-            label1.Text = "排序前: ";
-            label2.Text = "排序後: ";
+            //傳一個陣列給函數 做 氣泡排序法
+            int[] myArray = new int[] { 33, 25, 16, 78, 12 };
+            richTextBox1.Text += "排序前: \n";
             // 顯示排序前的每個陣列元素資料
             for (int i = 0; i <= myArray.GetUpperBound(0); i++)
             {
-                label1.Text += myArray[i] + ",  ";
+                richTextBox1.Text += myArray[i] + ",  ";
             }
+            richTextBox1.Text += "\n";
+
             // 呼叫BubbleSort進行由小到大排序，傳遞的參數為myArray陣列
             BubbleSort(ref myArray);
+
+            richTextBox1.Text += "排序後: \n";
             // 顯示排序後的每個陣列元素資料
             for (int i = 0; i <= myArray.GetUpperBound(0); i++)
             {
-                label2.Text += myArray[i] + ",  ";
+                richTextBox1.Text += myArray[i] + ",  ";
             }
+            richTextBox1.Text += "\n";
         }
         //氣泡排序法
         private void BubbleSort(ref int[] vArray)
