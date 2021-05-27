@@ -78,7 +78,7 @@ namespace ImgMicroimage
             string[] a = new string[2];
             DirectoryInfo di = new DirectoryInfo(filePath);
             FileSystemInfo[] fi = di.GetFileSystemInfos();
-            DirectoryInfo di2 = new DirectoryInfo("c:\\LsTemp");
+            DirectoryInfo di2 = new DirectoryInfo("c:\\dddddddddd\\LsTemp");
             for (int i = 0; i < fi.Length; i++)
             {
                 string imgType = fi[i].ToString().Substring(fi[i].ToString().LastIndexOf(".") + 1, fi[i].ToString().Length - 1 - fi[i].ToString().LastIndexOf("."));
@@ -106,10 +106,10 @@ namespace ImgMicroimage
                     }
                     if (!di2.Exists)
                     {
-                        Directory.CreateDirectory("c:\\LsTemp");
-                        if (GetReducedImage(percent, "c:\\LsTemp\\_" + imgName + ".JPG"))
+                        Directory.CreateDirectory("c:\\dddddddddd\\LsTemp");
+                        if (GetReducedImage(percent, "c:\\dddddddddd\\LsTemp\\_" + imgName + ".JPG"))
                         {
-                            imageList1.Images.Add(i.ToString(), Image.FromFile("c:\\LsTemp\\_" + imgName + ".JPG"));
+                            imageList1.Images.Add(i.ToString(), Image.FromFile("c:\\dddddddddd\\LsTemp\\_" + imgName + ".JPG"));
                             a[0] = imgName + "." + imgType;
                             ListViewItem lvi = new ListViewItem(a);
                             lvi.ImageKey = i.ToString();
@@ -118,9 +118,9 @@ namespace ImgMicroimage
                     }
                     else
                     {
-                        if (GetReducedImage(percent, "c:\\LsTemp\\_" + imgName + ".JPG"))
+                        if (GetReducedImage(percent, "c:\\dddddddddd\\LsTemp\\_" + imgName + ".JPG"))
                         {
-                            imageList1.Images.Add(i.ToString(), Image.FromFile("c:\\LsTemp\\_" + imgName + ".JPG"));
+                            imageList1.Images.Add(i.ToString(), Image.FromFile("c:\\dddddddddd\\LsTemp\\_" + imgName + ".JPG"));
                             a[0] = imgName + "." + imgType;
                             ListViewItem lvi = new ListViewItem(a);
                             lvi.ImageKey = i.ToString();
@@ -154,11 +154,11 @@ namespace ImgMicroimage
         {
             try
             {
-                DirectoryInfo di2 = new DirectoryInfo("c:\\LsTemp");
+                DirectoryInfo di2 = new DirectoryInfo("c:\\dddddddddd\\LsTemp");
                 if (di2.Exists)
                 {
                     Scripting.FileSystemObject fso = new Scripting.FileSystemObject();
-                    fso.DeleteFolder("c:\\LsTemp", true);
+                    fso.DeleteFolder("c:\\dddddddddd\\LsTemp", true);
                 }
             }
             catch

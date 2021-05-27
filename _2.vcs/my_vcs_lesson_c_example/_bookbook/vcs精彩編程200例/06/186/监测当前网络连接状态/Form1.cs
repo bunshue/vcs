@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +10,8 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Net;
 using System.Runtime.InteropServices;
-namespace ¼à²âµ±Ç°ÍøÂçÁ¬½Ó×´Ì¬
+
+namespace ç›‘æµ‹å½“å‰ç½‘ç»œè¿æ¥çŠ¶æ€
 {
     public partial class Form1 : Form
     {
@@ -20,20 +21,20 @@ namespace ¼à²âµ±Ç°ÍøÂçÁ¬½Ó×´Ì¬
         }
         [DllImport("wininet.dll", EntryPoint = "InternetGetConnectedState")]
         public extern static bool InternetGetConnectedState(out int conState, int reder);
-        //²ÎÊıËµÃ÷ constate Á¬½ÓËµÃ÷ £¬reder±£ÁôÖµ
+        //å‚æ•°è¯´æ˜ constate è¿æ¥è¯´æ˜ ï¼Œrederä¿ç•™å€¼
         public bool IsConnectedToInternet()
         {
-            int Desc=0;
+            int Desc = 0;
             return InternetGetConnectedState(out  Desc, 0);
         }
-    
+
 
         private void button2_Click(object sender, EventArgs e)
         {
             if (IsConnectedToInternet())
-                MessageBox.Show("ÒÑÁ¬½ÓÔÚÍøÉÏ!","ÌáÊ¾");
+                MessageBox.Show("å·²è¿æ¥åœ¨ç½‘ä¸Š!", "æç¤º");
             else
-                MessageBox.Show("Î´Á¬½ÓÔÚÍøÉÏ!!","ÌáÊ¾"); 
+                MessageBox.Show("æœªè¿æ¥åœ¨ç½‘ä¸Š!!", "æç¤º");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -45,6 +46,6 @@ namespace ¼à²âµ±Ç°ÍøÂçÁ¬½Ó×´Ì¬
         {
             Application.Exit();
         }
-     
+
     }
 }
