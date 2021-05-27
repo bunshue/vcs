@@ -11,6 +11,8 @@ namespace vcs_ComboBox1
 {
     public partial class Form1 : Form
     {
+        private ImageList G_ImageList;//声明ImageList字段
+
         public Form1()
         {
             InitializeComponent();
@@ -63,6 +65,54 @@ namespace vcs_ComboBox1
             {
                 comboBox1.Items.Add(cursor);  // 加入到 comboBox1 清單內
             }
+
+
+
+            comboBox2.DrawMode = DrawMode.OwnerDrawFixed;//设置绘制元素方式
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList; //设置组合框样式
+            comboBox2.Items.Add("小车");//添加项
+            comboBox2.Items.Add("卡车");//添加项
+            comboBox2.Items.Add("工具");//添加项
+            comboBox2.Items.Add("朋友");//添加项
+            G_ImageList = new ImageList();//创建ImageList对象
+            G_ImageList.Images.Add(Properties.Resources.a);//添加图片
+            G_ImageList.Images.Add(Properties.Resources.b);//添加图片
+            G_ImageList.Images.Add(Properties.Resources.c);//添加图片
+            G_ImageList.Images.Add(Properties.Resources.d);//添加图片
+
+        }
+
+        private void comboBox2_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (G_ImageList != null)//判断ImageList是否为空
+            {
+                Graphics g = e.Graphics;//得到绘图对象
+                Rectangle r = e.Bounds;//得到绘图范围
+                Size imageSize = G_ImageList.ImageSize;//获取图像大小
+                if (e.Index >= 0)//判断是否有绘制项
+                {
+                    Font fn = new Font("宋体", 10, FontStyle.Bold);//创建字体对象
+                    string s = comboBox2.Items[e.Index].ToString();//得到绘制项的字符串
+                    DrawItemState dis = e.State;
+                    if (e.State == (DrawItemState.NoAccelerator | DrawItemState.NoFocusRect))
+                    {
+                        e.Graphics.FillRectangle(new SolidBrush(Color.LightYellow), r);//画条目背景
+                        G_ImageList.Draw(e.Graphics, r.Left, r.Top, e.Index);//绘制图像
+                        e.Graphics.DrawString(s, fn, new SolidBrush(Color.Black),//显示字符串
+                            r.Left + imageSize.Width, r.Top);
+                        e.DrawFocusRectangle();//显示取得焦点时的虚线框
+                    }
+                    else
+                    {
+                        e.Graphics.FillRectangle(new SolidBrush(Color.LightGreen), r);//画条目背景
+                        G_ImageList.Draw(e.Graphics, r.Left, r.Top, e.Index);//绘制图像
+                        e.Graphics.DrawString(s, fn, new SolidBrush(Color.Black),//显示字符串 
+                            r.Left + imageSize.Width, r.Top);
+                        e.DrawFocusRectangle();//显示取得焦点时的虚线框 
+                    }
+                }
+            }
+
         }
     }
 }
