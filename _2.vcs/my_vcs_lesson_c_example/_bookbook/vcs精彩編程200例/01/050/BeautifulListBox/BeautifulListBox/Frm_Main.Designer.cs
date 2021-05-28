@@ -52,14 +52,14 @@
             "C#编程词典（钻石版）"});
             this.drawListBox1.Location = new System.Drawing.Point(12, 9);
             this.drawListBox1.Name = "drawListBox1";
-            this.drawListBox1.Size = new System.Drawing.Size(305, 108);
+            this.drawListBox1.Size = new System.Drawing.Size(558, 420);
             this.drawListBox1.TabIndex = 0;
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(330, 125);
+            this.ClientSize = new System.Drawing.Size(735, 534);
             this.Controls.Add(this.drawListBox1);
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

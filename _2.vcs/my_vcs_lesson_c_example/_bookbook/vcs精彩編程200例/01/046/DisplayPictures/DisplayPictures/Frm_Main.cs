@@ -20,13 +20,13 @@ namespace DisplayPictures
         {
             dgv_Message.DataSource = new List<Images>()//绑定到图片集合
             { 
-                new Images(){Im=Image.FromFile("1.bmp")},
-                new Images(){Im=Image.FromFile("2.bmp")},
-                new Images(){Im=Image.FromFile("3.bmp")},
-                new Images(){Im=Image.FromFile("4.bmp")},
-                new Images(){Im=Image.FromFile("5.bmp")},
-                new Images(){Im=Image.FromFile("6.bmp")},
-                new Images(){Im=Image.FromFile("7.bmp")}
+                new Images(){Im=Image.FromFile("..//..//1.bmp")},
+                new Images(){Im=Image.FromFile("..//..//2.bmp")},
+                new Images(){Im=Image.FromFile("..//..//3.bmp")},
+                new Images(){Im=Image.FromFile("..//..//4.bmp")},
+                new Images(){Im=Image.FromFile("..//..//5.bmp")},
+                new Images(){Im=Image.FromFile("..//..//6.bmp")},
+                new Images(){Im=Image.FromFile("..//..//7.bmp")}
             };
             dgv_Message.Columns[0].HeaderText = "图片";//设置列文本
             dgv_Message.Columns[0].Width = 70;//设置列宽度

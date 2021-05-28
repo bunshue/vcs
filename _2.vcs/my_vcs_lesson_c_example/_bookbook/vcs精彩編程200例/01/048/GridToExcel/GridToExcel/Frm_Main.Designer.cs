@@ -40,12 +40,12 @@
             this.dgv_Message.Location = new System.Drawing.Point(0, 0);
             this.dgv_Message.Name = "dgv_Message";
             this.dgv_Message.RowTemplate.Height = 23;
-            this.dgv_Message.Size = new System.Drawing.Size(405, 186);
+            this.dgv_Message.Size = new System.Drawing.Size(847, 593);
             this.dgv_Message.TabIndex = 0;
             // 
             // btn_OutPut
             // 
-            this.btn_OutPut.Location = new System.Drawing.Point(137, 131);
+            this.btn_OutPut.Location = new System.Drawing.Point(357, 558);
             this.btn_OutPut.Name = "btn_OutPut";
             this.btn_OutPut.Size = new System.Drawing.Size(118, 23);
             this.btn_OutPut.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 186);
+            this.ClientSize = new System.Drawing.Size(847, 593);
             this.Controls.Add(this.btn_OutPut);
             this.Controls.Add(this.dgv_Message);
             this.Name = "Frm_Main";

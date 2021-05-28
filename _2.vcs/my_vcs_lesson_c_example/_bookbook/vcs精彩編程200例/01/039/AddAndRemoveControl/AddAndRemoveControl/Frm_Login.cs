@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
@@ -7,53 +7,53 @@ using System.Data;
 using System.Data.SqlClient;
 namespace AddAndRemoveControl
 {
-	/// <summary>
-    /// Frm_LoginµÄÕªÒªËµÃ÷¡£
-	/// </summary>
-	public class Frm_Login : System.Windows.Forms.Form
+    /// <summary>
+    /// Frm_Loginçš„æ‘˜è¦è¯´æ˜ã€‚
+    /// </summary>
+    public class Frm_Login : System.Windows.Forms.Form
     {
         private System.Windows.Forms.Label lbluPwd;
         private System.Windows.Forms.Label lbluName;
-		private System.Windows.Forms.Button btnConcel;
-		private System.Windows.Forms.Button btnOK;
-		private System.Windows.Forms.TextBox txtUser;
-		private System.Windows.Forms.TextBox txtPasword;
+        private System.Windows.Forms.Button btnConcel;
+        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.TextBox txtUser;
+        private System.Windows.Forms.TextBox txtPasword;
         private System.ComponentModel.IContainer components = null;
 
-		public Frm_Login()
-		{
-			//
-			// Windows ´°ÌåÉè¼ÆÆ÷Ö§³ÖËù±ØĞèµÄ
-			//
-			InitializeComponent();
+        public Frm_Login()
+        {
+            //
+            // Windows çª—ä½“è®¾è®¡å™¨æ”¯æŒæ‰€å¿…éœ€çš„
+            //
+            InitializeComponent();
 
-			//
-			// TODO: ÔÚ InitializeComponent µ÷ÓÃºóÌí¼ÓÈÎºÎ¹¹Ôìº¯Êı´úÂë
-			//
-		}
+            //
+            // TODO: åœ¨ InitializeComponent è°ƒç”¨åæ·»åŠ ä»»ä½•æ„é€ å‡½æ•°ä»£ç 
+            //
+        }
 
-		/// <summary>
-		/// ÇåÀíËùÓĞÕıÔÚÊ¹ÓÃµÄ×ÊÔ´¡£
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if (components != null) 
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary>
+        /// æ¸…ç†æ‰€æœ‰æ­£åœ¨ä½¿ç”¨çš„èµ„æºã€‚
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Windows ´°ÌåÉè¼ÆÆ÷Éú³ÉµÄ´úÂë
-		/// <summary>
-		/// Éè¼ÆÆ÷Ö§³ÖËùĞèµÄ·½·¨ - ²»ÒªÊ¹ÓÃ´úÂë±à¼­Æ÷ĞŞ¸Ä
-		/// ´Ë·½·¨µÄÄÚÈİ¡£
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows çª—ä½“è®¾è®¡å™¨ç”Ÿæˆçš„ä»£ç 
+        /// <summary>
+        /// è®¾è®¡å™¨æ”¯æŒæ‰€éœ€çš„æ–¹æ³• - ä¸è¦ä½¿ç”¨ä»£ç ç¼–è¾‘å™¨ä¿®æ”¹
+        /// æ­¤æ–¹æ³•çš„å†…å®¹ã€‚
+        /// </summary>
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Login));
             this.txtUser = new System.Windows.Forms.TextBox();
             this.txtPasword = new System.Windows.Forms.TextBox();
@@ -69,16 +69,16 @@ namespace AddAndRemoveControl
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(208, 21);
             this.txtUser.TabIndex = 13;
-            this.txtUser.Tag = "µÇÂ¼Ãû£º";
+            this.txtUser.Tag = "ç™»å½•åï¼š";
             // 
             // txtPasword
             // 
             this.txtPasword.Location = new System.Drawing.Point(128, 55);
             this.txtPasword.Name = "txtPasword";
-            this.txtPasword.PasswordChar = '¡ñ';
+            this.txtPasword.PasswordChar = 'â—';
             this.txtPasword.Size = new System.Drawing.Size(208, 21);
             this.txtPasword.TabIndex = 14;
-            this.txtPasword.Tag = "ÃÜ  Âë£º";
+            this.txtPasword.Tag = "å¯†  ç ï¼š";
             // 
             // lbluPwd
             // 
@@ -87,7 +87,7 @@ namespace AddAndRemoveControl
             this.lbluPwd.Name = "lbluPwd";
             this.lbluPwd.Size = new System.Drawing.Size(53, 12);
             this.lbluPwd.TabIndex = 12;
-            this.lbluPwd.Text = "ÃÜ  Âë£º";
+            this.lbluPwd.Text = "å¯†  ç ï¼š";
             // 
             // lbluName
             // 
@@ -96,7 +96,7 @@ namespace AddAndRemoveControl
             this.lbluName.Name = "lbluName";
             this.lbluName.Size = new System.Drawing.Size(53, 12);
             this.lbluName.TabIndex = 11;
-            this.lbluName.Text = "µÇÂ¼Ãû£º";
+            this.lbluName.Text = "ç™»å½•åï¼š";
             // 
             // btnConcel
             // 
@@ -105,7 +105,7 @@ namespace AddAndRemoveControl
             this.btnConcel.Name = "btnConcel";
             this.btnConcel.Size = new System.Drawing.Size(96, 23);
             this.btnConcel.TabIndex = 17;
-            this.btnConcel.Text = "ÍË³ö(&E)";
+            this.btnConcel.Text = "é€€å‡º(&E)";
             this.btnConcel.Click += new System.EventHandler(this.btnConcel_Click);
             // 
             // btnOK
@@ -114,7 +114,7 @@ namespace AddAndRemoveControl
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(96, 23);
             this.btnOK.TabIndex = 16;
-            this.btnOK.Text = "È·¶¨(&O)";
+            this.btnOK.Text = "ç¡®å®š(&O)";
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // frmLogin
@@ -131,63 +131,64 @@ namespace AddAndRemoveControl
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "³ÌĞòÔËĞĞÊ±ÖÇÄÜÔö¼õ¿Ø¼ş";
+            this.Text = "ç¨‹åºè¿è¡Œæ—¶æ™ºèƒ½å¢å‡æ§ä»¶";
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
-		#endregion
+        }
+        #endregion
 
-		/// <summary>
-		/// Ó¦ÓÃ³ÌĞòµÄÖ÷Èë¿Úµã¡£
-		/// </summary>
+        /// <summary>
+        /// åº”ç”¨ç¨‹åºçš„ä¸»å…¥å£ç‚¹ã€‚
+        /// </summary>
 
-        Frm_Main frm = new Frm_Main();//´´½¨´°Ìå¶ÔÏó
-		private void btnOK_Click(object sender, System.EventArgs e)//È·¶¨
-		{
-            if (txtUser.Text == "")//Èç¹ûÓÃ»§ÃûÎª¿Õ
+        Frm_Main frm = new Frm_Main();//åˆ›å»ºçª—ä½“å¯¹è±¡
+        private void btnOK_Click(object sender, System.EventArgs e)//ç¡®å®š
+        {
+            if (txtUser.Text == "")//å¦‚æœç”¨æˆ·åä¸ºç©º
             {
-                MessageBox.Show("ÇëÊäÈëÓÃ»§Ãû");//µ¯³öÏûÏ¢¶Ô»°¿ò
-                return;//ÍË³ö·½·¨
-            } else if (txtPasword.Text=="")//Èç¹ûÃÜÂëÎª¿Õ
-            {
-                MessageBox.Show("ÇëÊäÈëÓÃ»§ÃÜÂë");//µ¯³öÏûÏ¢¶Ô»°¿ò
-                return;//ÍË³ö·½·¨
+                MessageBox.Show("è¯·è¾“å…¥ç”¨æˆ·å");//å¼¹å‡ºæ¶ˆæ¯å¯¹è¯æ¡†
+                return;//é€€å‡ºæ–¹æ³•
             }
-            else if (txtUser.Text == "Admin" &&//Èç¹ûÊäÈëµÄÓÃ»§ÃûºÍÃÜÂëÕıÈ·
+            else if (txtPasword.Text == "")//å¦‚æœå¯†ç ä¸ºç©º
+            {
+                MessageBox.Show("è¯·è¾“å…¥ç”¨æˆ·å¯†ç ");//å¼¹å‡ºæ¶ˆæ¯å¯¹è¯æ¡†
+                return;//é€€å‡ºæ–¹æ³•
+            }
+            else if (txtUser.Text == "Admin" &&//å¦‚æœè¾“å…¥çš„ç”¨æˆ·åå’Œå¯†ç æ­£ç¡®
                 txtPasword.Text == "Admin")
             {
-                frm.Show();//ÏÔÊ¾´°Ìå
-                frm.button1.Visible = false;//Òş²ØButton°´Å¥
-                frm.button4.Visible = false;//Òş²ØButton°´Å¥
-                frm.Text = frm.Text + "    " + //ÏÔÊ¾´°Ìå±êÌâ
-                    "²Ù×÷Ô±:" + txtUser.Text;
-                this.Hide();//Òş²ØµÇÂ½´°Ìå
+                frm.Show();//æ˜¾ç¤ºçª—ä½“
+                frm.button1.Visible = false;//éšè—ButtonæŒ‰é’®
+                frm.button4.Visible = false;//éšè—ButtonæŒ‰é’®
+                frm.Text = frm.Text + "    " + //æ˜¾ç¤ºçª—ä½“æ ‡é¢˜
+                    "æ“ä½œå‘˜:" + txtUser.Text;
+                this.Hide();//éšè—ç™»é™†çª—ä½“
             }
-            else if (txtUser.Text == "Mr" &&//Èç¹ûÊäÈëµÄÓÃ»§ÃûºÍÃÜÂëÕıÈ·
+            else if (txtUser.Text == "Mr" &&//å¦‚æœè¾“å…¥çš„ç”¨æˆ·åå’Œå¯†ç æ­£ç¡®
                 txtPasword.Text == "Mrsoft")
             {
-                frm.Show();//ÏÔÊ¾´°Ìå
-                frm.Text = frm.Text + "    " +//ÏÔÊ¾´°Ìå±êÌâ
-                    "ÏµÍ³¹ÜÀíÔ±:" + txtPasword.Text;
-                this.Hide();//Òş²ØµÇÂ½´°Ìå
+                frm.Show();//æ˜¾ç¤ºçª—ä½“
+                frm.Text = frm.Text + "    " +//æ˜¾ç¤ºçª—ä½“æ ‡é¢˜
+                    "ç³»ç»Ÿç®¡ç†å‘˜:" + txtPasword.Text;
+                this.Hide();//éšè—ç™»é™†çª—ä½“
             }
             else
             {
-                MessageBox.Show("ÓÃ»§Ãû»òÃÜÂë´íÎó");//µ¯³öÏûÏ¢¶Ô»°¿ò
-                txtUser.Text = "";//Çå¿ÕÓÃ»§Ãû
-                txtPasword.Text = "";//Çå¿ÕÃÜÂë
-                txtUser.Focus();//¿Ø¼şµÃµ½½¹µã
+                MessageBox.Show("ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯");//å¼¹å‡ºæ¶ˆæ¯å¯¹è¯æ¡†
+                txtUser.Text = "";//æ¸…ç©ºç”¨æˆ·å
+                txtPasword.Text = "";//æ¸…ç©ºå¯†ç 
+                txtUser.Focus();//æ§ä»¶å¾—åˆ°ç„¦ç‚¹
             }
 
-		}
+        }
 
-		private void btnConcel_Click(object sender, System.EventArgs e)//µã»÷È¡Ïû°´Å¥
-		{
-			DialogResult bb =MessageBox.Show(//µ¯³öÏûÏ¢¶Ô»°¿ò
-                "ÊÇ·ñÒªÍË³öµÇÂ¼£¿","ÍË³öµÇÂ¼",MessageBoxButtons.YesNo);
-			if(Convert.ToString(bb)=="Yes")//Èç¹ûµã»÷È·¶¨°´Å¥
-			{Application .Exit();}//ÍË³öÓ¦ÓÃ³ÌĞò
-		}
-	}
+        private void btnConcel_Click(object sender, System.EventArgs e)//ç‚¹å‡»å–æ¶ˆæŒ‰é’®
+        {
+            DialogResult bb = MessageBox.Show(//å¼¹å‡ºæ¶ˆæ¯å¯¹è¯æ¡†
+                "æ˜¯å¦è¦é€€å‡ºç™»å½•ï¼Ÿ", "é€€å‡ºç™»å½•", MessageBoxButtons.YesNo);
+            if (Convert.ToString(bb) == "Yes")//å¦‚æœç‚¹å‡»ç¡®å®šæŒ‰é’®
+            { Application.Exit(); }//é€€å‡ºåº”ç”¨ç¨‹åº
+        }
+    }
 }

@@ -28,7 +28,7 @@ namespace 获得系统打开的端口和状态
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.CreateNoWindow = true;
             p.Start();
-            p.StandardInput.WriteLine(@"netstat -a -n > c:\port.txt");
+            p.StandardInput.WriteLine(@"netstat -a -n > c:\______test_files\port.txt");
            
            
         }
@@ -38,7 +38,7 @@ namespace 获得系统打开的端口和状态
             this.richTextBox1.Text = "";
             try
             {
-                string path = @"c:\port.txt";
+                string path = @"c:\______test_files\port.txt";
                 using (StreamReader sr = new StreamReader(path,Encoding.Default))
                 {
                     while (sr.Peek() >= 0)

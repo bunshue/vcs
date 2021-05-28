@@ -153,5 +153,31 @@ namespace vcs_TextBox
                 e.Handled = true;  //不接受字元
             }
         }
+
+        //拖曳文字內容到其他TextBox ST
+        //須設定 textBox7.AllowDrop = true;
+        private void textBox6_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)    //是否按下滑鼠左鍵
+            {
+                this.Cursor = new Cursor("../../arrow.cur");    //設置滑鼠鼠標樣式
+                //拖曳文字
+                DragDropEffects dropEffect = this.textBox6.DoDragDrop(this.textBox6.Text, DragDropEffects.Copy | DragDropEffects.Link);
+            }
+        }
+
+        private void textBox7_DragDrop(object sender, DragEventArgs e)
+        {
+            textBox7.Text += e.Data.GetData(DataFormats.Text).ToString();//显示拖放文本
+        }
+
+        private void textBox7_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;//设置复制操作
+        }
+        //拖曳文字內容到其他TextBox SP
+
+
+
     }
 }

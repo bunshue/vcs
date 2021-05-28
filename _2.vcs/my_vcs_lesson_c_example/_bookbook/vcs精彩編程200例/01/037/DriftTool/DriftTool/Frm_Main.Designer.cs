@@ -47,7 +47,7 @@
             this.toolStripButton4});
             this.toolStrip1.Location = new System.Drawing.Point(116, 33);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(110, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(141, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -91,7 +91,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(402, 159);
+            this.ClientSize = new System.Drawing.Size(654, 421);
             this.Controls.Add(this.toolStrip1);
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

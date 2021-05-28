@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +11,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 
 
-namespace ÌáÈ¡²¢±£´æÍøÒ³Ô´Âë
+namespace æå–å¹¶ä¿å­˜ç½‘é¡µæºç 
 {
     public partial class Form1 : Form
     {
@@ -22,31 +22,31 @@ namespace ÌáÈ¡²¢±£´æÍøÒ³Ô´Âë
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }///
-        public string strS;//´æÈ¡ÍøÒ³ÄÚÈİ
+        public string strS;//å­˜å–ç½‘é¡µå†…å®¹
         public void GetPageSource()
         {
-            string strAddress = textBox1.Text.Trim();//ÊäÈëÍøÖ·
-            if (ValidateDate1(strAddress))//¼ì²éÊäÈëÍøÖ·ÊÇ·ñºÏ·¨
+            string strAddress = textBox1.Text.Trim();//è¾“å…¥ç½‘å€
+            if (ValidateDate1(strAddress))//æ£€æŸ¥è¾“å…¥ç½‘å€æ˜¯å¦åˆæ³•
             {
                 strAddress = strAddress.ToLower();
-                strS = GetSource(strAddress);//µ÷ÓÃ·½·¨ÌáÈ¡ÍøÒ³ÄÚÈİ
+                strS = GetSource(strAddress);//è°ƒç”¨æ–¹æ³•æå–ç½‘é¡µå†…å®¹
                 if (strS.Length > 1)
                 {
-                    showSource();  //ÉèÖÃ´°ÌåÑùÊ½
+                    showSource();  //è®¾ç½®çª—ä½“æ ·å¼
                 }
             }
             else
             {
-                MessageBox.Show("ÊäÈëÍøÖ·²»ÕıÈ·ÇëÖØĞÂÊäÈë");
+                MessageBox.Show("è¾“å…¥ç½‘å€ä¸æ­£ç¡®è¯·é‡æ–°è¾“å…¥");
             }
         }
-        //ÉèÖÃ´°ÌåÑùÊ½
+        //è®¾ç½®çª—ä½“æ ·å¼
         private void showSource()
         {
             Form1.ActiveForm.Height = 608;
-            textBox2.Text = strS;//ÏÔÊ¾ÍøÒ³ÄÚÈİ
+            textBox2.Text = strS;//æ˜¾ç¤ºç½‘é¡µå†…å®¹
             textBox2.Visible = true;
         }
 
@@ -55,53 +55,51 @@ namespace ÌáÈ¡²¢±£´æÍøÒ³Ô´Âë
             char chr = e.KeyChar;
             if (chr == 13)
             {
-                GetPageSource();//»ñÈ¡ÍøÒ³±àÂë
+                GetPageSource();//è·å–ç½‘é¡µç¼–ç 
             }
         }
-        //±£´æ
+        //ä¿å­˜
         private void button1_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Filter = "ÎÄ±¾ÎÄ¼ş|*.txt";
-            if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
+            string filename = Application.StartupPath + "\\html_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html";
+
+            this.textBox2.Text = filename;
+            if (this.textBox1.Text.Trim().ToString() != "")
             {
-                this.textBox2.Text = this.saveFileDialog1.FileName;//
-                if (this.textBox1.Text.Trim().ToString() != "")
-                {
-                    saveInfo(this.textBox2.Text.Trim().ToString(), this.textBox1.Text.Trim().ToString());
-                    MessageBox.Show("±£´æ³É¹¦");
-                }
-                else
-                {
-                    MessageBox.Show("ÇëĞ´ÈëÄ¿±êÒ³µÄURL");
-                    this.textBox2.Text = string.Empty;
-                }
+                saveInfo(this.textBox2.Text.Trim().ToString(), this.textBox1.Text.Trim().ToString());
+                MessageBox.Show("ä¿å­˜æˆåŠŸ");
+            }
+            else
+            {
+                MessageBox.Show("è¯·å†™å…¥ç›®æ ‡é¡µçš„URL");
+                this.textBox2.Text = string.Empty;
             }
         }/// end block menthod showSource()
-         //±£´æÍøÒ³ĞÅÏ¢
+        //ä¿å­˜ç½‘é¡µä¿¡æ¯
         private void saveInfo(string strPath, string strDown)
         {
             WebClient wC = new WebClient();
             wC.DownloadFile(strDown, strPath);
         }
-        //ÑéÖ¤ÍøÖ·ÊÇ·ñÕıÈ·
+        //éªŒè¯ç½‘å€æ˜¯å¦æ­£ç¡®
         public bool ValidateDate1(string input)
         {
             return Regex.IsMatch(input, "http(s)?://([\\w-]+\\.)+[\\w-]+(//[\\w- .//?%&=]*)?");
         }
-        //ÌáÈ¡ÍøÒ³ÄÚÈİ¡£
+        //æå–ç½‘é¡µå†…å®¹ã€‚
         public string GetSource(string webAddress)
         {
             StringBuilder strSource = new StringBuilder("");
             try
             {
 
-                WebRequest WReq = WebRequest.Create(webAddress);//¶ÔURlµØÖ··¢³öÇëÇó
-                WebResponse WResp = WReq.GetResponse();//·µ»Ø·şÎñÆ÷µÄÏìÓ¦
-                StreamReader sr = new StreamReader(WResp.GetResponseStream(), Encoding.ASCII);//´ÓÊı¾İÁ÷ÖĞ¶ÁÈ¡Êı¾İ
+                WebRequest WReq = WebRequest.Create(webAddress);//å¯¹URlåœ°å€å‘å‡ºè¯·æ±‚
+                WebResponse WResp = WReq.GetResponse();//è¿”å›æœåŠ¡å™¨çš„å“åº”
+                StreamReader sr = new StreamReader(WResp.GetResponseStream(), Encoding.ASCII);//ä»æ•°æ®æµä¸­è¯»å–æ•°æ®
                 string strTemp = "";
-                while ((strTemp = sr.ReadLine()) != null)//Ñ­»·¶Á³öÊı¾İ
+                while ((strTemp = sr.ReadLine()) != null)//å¾ªç¯è¯»å‡ºæ•°æ®
                 {
-                    strSource.Append(strTemp + "\r\n");//°ÑÊı¾İÌí¼Óµ½×Ö·û´®ÖĞ
+                    strSource.Append(strTemp + "\r\n");//æŠŠæ•°æ®æ·»åŠ åˆ°å­—ç¬¦ä¸²ä¸­
                 }
                 sr.Close();
             }
@@ -112,6 +110,6 @@ namespace ÌáÈ¡²¢±£´æÍøÒ³Ô´Âë
             return strSource.ToString();
         }
 
-      
+
     }///
 }
