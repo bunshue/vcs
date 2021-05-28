@@ -6,12 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 
 namespace UseUpdate
 {
     public partial class Frm_Main : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo.mdf";
+        //string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo_log.ldf";   another
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -34,7 +38,7 @@ namespace UseUpdate
                 @"UPDATE tb_Student_Copy SET 学生姓名=@name,学生年龄=@age,性别=@sex,家庭住址=@address
 WHERE id=@id",
                 new SqlConnection(@"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd="));
-            P_cmd.Parameters.Add("@id", SqlDbType.Int,10,"id");//设置参数
+            P_cmd.Parameters.Add("@id", SqlDbType.Int, 10, "id");//设置参数
             P_cmd.Parameters.Add("@name", SqlDbType.VarChar, 10, "学生姓名");//设置参数
             P_cmd.Parameters.Add("@age", SqlDbType.Int, 10, "学生年龄");//设置参数
             P_cmd.Parameters.Add("@sex", SqlDbType.NChar, 2, "性别");//设置参数
@@ -42,7 +46,7 @@ WHERE id=@id",
             P_SqlDataAdapter.UpdateCommand = P_cmd;//设置UpdateCommand属性
             P_SqlDataAdapter.Update(G_st.Tables[0]);//更新数据库中数据
             G_st.AcceptChanges();//提交修改
-            MessageBox.Show("更改成功！","提示！");//弹出消息对话框
+            MessageBox.Show("更改成功！", "提示！");//弹出消息对话框
             GetMessage();//填充表
             dgv_Message.DataSource = G_st.Tables[0];//设置数据源
             dgv_Message.Columns[0].Visible = false;//隐藏主键列
@@ -68,6 +72,5 @@ WHERE id=@id",
             G_st.Tables[0].Rows[e.RowIndex][e.ColumnIndex] = //同步DataGridView控件中的数据
                 dgv_Message.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
         }
-
     }
 }

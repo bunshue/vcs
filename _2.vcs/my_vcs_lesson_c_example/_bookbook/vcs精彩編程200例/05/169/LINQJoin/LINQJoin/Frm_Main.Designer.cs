@@ -38,14 +38,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(391, 176);
+            this.dataGridView1.Size = new System.Drawing.Size(705, 592);
             this.dataGridView1.TabIndex = 0;
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 180);
+            this.ClientSize = new System.Drawing.Size(720, 606);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

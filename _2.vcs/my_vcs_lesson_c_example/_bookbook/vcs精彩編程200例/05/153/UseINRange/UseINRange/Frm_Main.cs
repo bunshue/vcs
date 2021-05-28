@@ -6,12 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 
 namespace UseINRange
 {
     public partial class Frm_Main : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo.mdf";
+        //string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo_log.ldf";   another
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -28,7 +32,7 @@ namespace UseINRange
         /// 查询学生信息
         /// </summary>
         /// <returns>方法返回DataTable对象</returns>
-        private DataTable GetStudent(string Begin,string end)
+        private DataTable GetStudent(string Begin, string end)
         {
             string P_Str_ConnectionStr = string.Format(//创建数据库连接字符串
                 @"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 using System.IO;
 
@@ -13,6 +14,9 @@ namespace ByteImage
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_09_Data.MDF";
+        //string filename = @"C:\______test_files\_vcs200_db\db_09_Log.LDF";   another
+
         public Form1()
         {
             InitializeComponent();
@@ -65,21 +69,21 @@ namespace ByteImage
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog()==DialogResult.OK)
-            { 
-            if (openFileDialog1.FileName != "" && textBox1.Text != "")
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                //添加用户信息
-                if (AddInfo(textBox1.Text, openFileDialog1.FileName))
+                if (openFileDialog1.FileName != "" && textBox1.Text != "")
                 {
-                    MessageBox.Show("用户信息添加成功");
+                    //添加用户信息
+                    if (AddInfo(textBox1.Text, openFileDialog1.FileName))
+                    {
+                        MessageBox.Show("用户信息添加成功");
+                    }
+                    else
+                    {
+                        MessageBox.Show("已经存在该用户");
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("已经存在该用户");
-                }
-            }
-            ShowInfo();
+                ShowInfo();
             }
         }
 

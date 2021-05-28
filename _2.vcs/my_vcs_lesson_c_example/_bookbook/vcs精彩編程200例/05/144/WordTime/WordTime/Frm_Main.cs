@@ -11,6 +11,11 @@ namespace WordTime
 {
     public partial class Frm_Main : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo.mdf";
+        //string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo_log.ldf";   another
+
+        //像是沒有用到資料庫
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -62,7 +67,7 @@ namespace WordTime
             //输出词频统计结果
             for (int i = 0; i < counts.Count(); i++)
             {
-                label1.Text+=distinctWords[i] + "出现 " + counts[i].ToString() + " 次\n";
+                label1.Text += distinctWords[i] + "出现 " + counts[i].ToString() + " 次\n";
             }
         }
     }

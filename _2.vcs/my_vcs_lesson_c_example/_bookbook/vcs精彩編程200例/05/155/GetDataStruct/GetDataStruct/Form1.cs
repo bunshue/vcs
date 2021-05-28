@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 using System.Data.Sql;
 
@@ -13,6 +14,9 @@ namespace GetDataStruct
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_09_Data.MDF";
+        //string filename = @"C:\______test_files\_vcs200_db\db_09_Log.LDF";   another
+
         public Form1()
         {
             InitializeComponent();

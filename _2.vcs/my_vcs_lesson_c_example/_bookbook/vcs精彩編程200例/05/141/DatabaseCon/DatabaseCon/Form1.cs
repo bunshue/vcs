@@ -14,11 +14,16 @@ namespace DatabaseCon
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_09_Data.MDF";
+        //string filename = @"C:\______test_files\_vcs200_db\db_09_Log.LDF";   another
+
+        public static string strCon = "";
+
         public Form1()
         {
             InitializeComponent();
         }
-        public static string strCon = "";
+
         private void Form1_Load(object sender, EventArgs e)
         {
             textBox6.Text = "(local)";
@@ -26,10 +31,10 @@ namespace DatabaseCon
 
         private void button1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "*.mdb(Access数据库文件)|*.mdb|*.xls(Excel文件)|*.xls|*.*(所有文件)|*.*";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            //openFileDialog1.Filter = "*.mdb(Access数据库文件)|*.mdb|*.xls(Excel文件)|*.xls|*.*(所有文件)|*.*";
+            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                textBox1.Text = openFileDialog1.FileName;
+                textBox1.Text = filename;
             }
         }
 

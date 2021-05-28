@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
@@ -14,11 +15,15 @@ namespace XmlToDatabase
 {
     public partial class Frm_Main : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo.mdf";
+        //string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo_log.ldf";   another
+
         public Frm_Main()
         {
             InitializeComponent();
         }
 
+        //Employee.xml 不知道寫到哪?
         static string strPath = "Employee.xml";//记录XML文件路径
         //定义数据库连接字符串
         string strCon = "Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;";

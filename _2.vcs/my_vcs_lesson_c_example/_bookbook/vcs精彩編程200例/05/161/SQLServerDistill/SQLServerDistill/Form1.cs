@@ -6,12 +6,16 @@ using System.Drawing;
 using System.Text;
 using System.Linq;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 
 namespace SQLServerDistill
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_20.mdf";
+        //string filename = @"C:\______test_files\_vcs200_db\db_20_log.LDF";   another
+
         public Form1()
         {
             InitializeComponent();
@@ -43,7 +47,7 @@ namespace SQLServerDistill
 
             }
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             comboBox1.Text = "";
@@ -54,7 +58,7 @@ namespace SQLServerDistill
             radioButton1.Checked = false;
             radioButton2.Checked = false;
         }
-       // 登录服务器
+        // 登录服务器
         private void button2_Click(object sender, EventArgs e)
         {
             if (comboBox1.Text == "")
@@ -67,7 +71,7 @@ namespace SQLServerDistill
             {
 
                 if (radioButton1.Checked == false && radioButton2.Checked == false)
-                { 
+                {
                     MessageBox.Show("请选择登录方式");
                     return;
                 }//
@@ -105,7 +109,7 @@ namespace SQLServerDistill
                         MessageBox.Show("登录成功");
                         comboBox2.Enabled = true;
                         comboBox3.Enabled = true;
-                        
+
                     }
                     catch (Exception ee)
                     {
@@ -130,7 +134,7 @@ namespace SQLServerDistill
                     com.CommandText = "sp_mshelpcolumns";//存储过程名
                     com.CommandType = CommandType.StoredProcedure;
                     com.Connection = con;
-                    com.Parameters.Add("@tablename",SqlDbType.NVarChar,517);
+                    com.Parameters.Add("@tablename", SqlDbType.NVarChar, 517);
                     com.Parameters["@tablename"].Value = comboBox3.Text;
                     SqlDataReader dr = com.ExecuteReader();
                     Form2 frm2 = new Form2(comboBox3.Text);
@@ -146,7 +150,7 @@ namespace SQLServerDistill
                     con.Close();
                     frm2.Show();
                 }
-            
+
             }
         }//是以何种方式登录，是Windows集成方式，不是SQlserver方式。
         public SqlConnection getCon(string strDatabase)
@@ -155,7 +159,7 @@ namespace SQLServerDistill
             if (radioButton1.Checked == true)
             {
                 string strCOn = "Integrated Security=SSPI;Persist Security Info=False;Initial Catalog= '" + strDatabase + "';Data Source='" + comboBox1.Text + "'";
-                 con = new SqlConnection(strCOn);
+                con = new SqlConnection(strCOn);
                 con.Open();
             }
             if (radioButton2.Checked == true)
@@ -163,19 +167,19 @@ namespace SQLServerDistill
                 string strcon = "server='" + comboBox1.Text + "';uid='" + textBox1.Text.Trim() + "';pwd='" + textBox2.Text + "';database='" + strDatabase + "'";
                 con = new SqlConnection(strcon);
                 con.Open();
-              
+
             }
             return con;
         }//end block 
-        public void getTables(string strDataBase,string U)
+        public void getTables(string strDataBase, string U)
         {
             SqlConnection con = getCon(strDataBase);
-            SqlCommand com = new SqlCommand("select name from sysobjects where Xtype='"+U+"'",con);
+            SqlCommand com = new SqlCommand("select name from sysobjects where Xtype='" + U + "'", con);
             SqlDataReader dr = com.ExecuteReader();
             comboBox3.Items.Clear();
             while (dr.Read())
             {
-                comboBox3.Items.Add(dr[0].ToString()); 
+                comboBox3.Items.Add(dr[0].ToString());
             }//
             dr.Close();
             con.Close();
@@ -186,8 +190,7 @@ namespace SQLServerDistill
             if (comboBox2.SelectedItem.ToString() != "")
             {
                 getTables(comboBox2.SelectedItem.ToString(), "U");
-            }//
-        }//
-        
+            }
+        }
     }
 }

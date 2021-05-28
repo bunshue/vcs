@@ -11,6 +11,12 @@ namespace Last
 {
     public partial class Frm_Main : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo.mdf";
+        //string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo_log.ldf";   another
+
+
+        //像是沒有用到資料庫
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -45,3 +51,4 @@ namespace Last
         public double SalePrice { get; set; }//销售单价
     }
 }
+

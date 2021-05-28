@@ -11,6 +11,9 @@ namespace LinqPages
 {
     public partial class Frm_Main : Form
     {
+        //string filename = @"C:\______test_files\_vcs200_db\AdventureWorks_Data.mdf";	//超大檔
+        string filename = @"C:\______test_files\_vcs200_db\AdventureWorks_log.ldf";   //another
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -67,7 +70,7 @@ namespace LinqPages
                               省份编号 = v.StateProvinceID
                           }).Skip(pageSize * pageIndex).Take(pageSize);
             dgvInfo.DataSource = result;//设置DataGridView控件的数据源
-            btnEnd.Enabled =btnFirst.Enabled=btnBack.Enabled=btnNext.Enabled = true;
+            btnEnd.Enabled = btnFirst.Enabled = btnBack.Enabled = btnNext.Enabled = true;
             //判断是否为第一页，如果为第一页，禁用首页和上一页按钮
             if (page == 0)
             {

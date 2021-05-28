@@ -6,12 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 
 namespace UseInsertSelect
 {
     public partial class Frm_Main : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo.mdf";
+        //string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo_log.ldf";   another
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -39,21 +43,21 @@ namespace UseInsertSelect
             string P_Str_SqlStr = string.Format(//创建SQL查询字符串
                 @"INSERT INTO tb_Student_Copy(学生姓名,学生年龄,性别,家庭住址)
 SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student");
-            SqlConnection P_con=new SqlConnection(//创建SQL连接对象
+            SqlConnection P_con = new SqlConnection(//创建SQL连接对象
                 P_Str_ConnectionStr);
             try
             {
                 P_con.Open();//打开数据库连接
                 SqlCommand P_cmd = new SqlCommand(//创建命令对象
                     P_Str_SqlStr, P_con);
-                if (P_cmd.ExecuteNonQuery()!=0)//写入数据并判断是否成功
+                if (P_cmd.ExecuteNonQuery() != 0)//写入数据并判断是否成功
                 {
-                    MessageBox.Show("成功写入数据","提示！");
+                    MessageBox.Show("成功写入数据", "提示！");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"提示！");
+                MessageBox.Show(ex.Message, "提示！");
             }
             finally
             {
@@ -78,6 +82,6 @@ SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student");
             P_SqlDataAdapter.Fill(P_dt);//填充数据表
             return P_dt;//返回数据表
         }
-
     }
 }
+

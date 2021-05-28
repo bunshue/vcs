@@ -6,12 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 
 namespace SelectComplex
 {
     public partial class Frm_Main : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo.mdf";
+        //string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo_log.ldf";   another
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -32,7 +36,7 @@ namespace SelectComplex
             }
             catch (Exception ex)//捕获异常
             {
-                MessageBox.Show(ex.Message,"提示！");//弹出消息对话框
+                MessageBox.Show(ex.Message, "提示！");//弹出消息对话框
             }
         }
 
@@ -40,7 +44,7 @@ namespace SelectComplex
         /// 查询数据库信息
         /// </summary>
         /// <returns>方法返回DataTable对象</returns>
-        private DataTable GetStudent(string Name,int Age,string Address)
+        private DataTable GetStudent(string Name, int Age, string Address)
         {
             string P_Str_ConnectionStr = string.Format(//创建数据库连接字符串
                 @"server=mr-pc\yl;database=db_TomeTwo;uid=sa;pwd=");

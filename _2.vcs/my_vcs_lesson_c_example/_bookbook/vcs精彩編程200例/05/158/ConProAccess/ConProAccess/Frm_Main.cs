@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
@@ -14,6 +15,9 @@ namespace ConProAccess
 {
     public partial class Frm_Main : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo.mdf";
+        //string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo_log.ldf";   another
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -22,10 +26,11 @@ namespace ConProAccess
 
         private void button1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "*.mdb(Access数据库文件)|*.mdb|*.xls(Excel文件)|*.xls|*.*(所有文件)|*.*";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            //openFileDialog1.Filter = "*.mdb(Access数据库文件)|*.mdb|*.xls(Excel文件)|*.xls|*.*(所有文件)|*.*";
+            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                textBox1.Text = openFileDialog1.FileName;//显示选择的数据库文件
+                //textBox1.Text = openFileDialog1.FileName;//显示选择的数据库文件
+                textBox1.Text = filename;
             }
         }
 

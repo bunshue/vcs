@@ -6,12 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 
 namespace EManageByProc
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\_vcs200_db\db_09_Data.MDF";
+        //string filename = @"C:\______test_files\_vcs200_db\db_09_Log.LDF";   another
+
         public Form1()
         {
             InitializeComponent();
@@ -36,7 +40,7 @@ namespace EManageByProc
             sqlcmd.ExecuteNonQuery();
             sqlcon.Close();
             txtID.Text = outValue.Value.ToString();
-            dgvInfo.DataSource = SelectEInfo("","").Tables[0];
+            dgvInfo.DataSource = SelectEInfo("", "").Tables[0];
         }
 
         //添加职工信息
@@ -62,7 +66,7 @@ namespace EManageByProc
                 MessageBox.Show("已经存在该职工编号！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
                 MessageBox.Show("职工信息——添加成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            dgvInfo.DataSource = SelectEInfo("","").Tables[0];
+            dgvInfo.DataSource = SelectEInfo("", "").Tables[0];
         }
 
         //在DataGridView控件中选择用户时，将其信息显示在相应的文本框中
@@ -127,7 +131,7 @@ namespace EManageByProc
         //查询职工信息
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            dgvInfo.DataSource = SelectEInfo(cboxCondition.Text,txtKeyWord.Text).Tables[0];
+            dgvInfo.DataSource = SelectEInfo(cboxCondition.Text, txtKeyWord.Text).Tables[0];
         }
 
         #region 获得数据库连接
@@ -150,7 +154,7 @@ namespace EManageByProc
         /// <param name="str">查询条件</param>
         /// <param name="str">查询关键字</param>
         /// <returns>DataSet数据集对象</returns>
-        private DataSet SelectEInfo(string str,string strKeyWord)
+        private DataSet SelectEInfo(string str, string strKeyWord)
         {
             sqlcon = getCon();
             sqlda = new SqlDataAdapter();
