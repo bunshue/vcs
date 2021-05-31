@@ -360,7 +360,7 @@ namespace vcs_Draw3A
             pictureBox1.BackColor = Color.LightGreen;
 
             pictureBox_sine.Size = new Size(400, 300);
-            pictureBox_sine.Location = new Point(910+480+10, 10);
+            pictureBox_sine.Location = new Point(910 + 480 + 10, 10);
             pictureBox_sine.BackColor = Color.LightYellow;
 
 
@@ -417,6 +417,10 @@ namespace vcs_Draw3A
             pictureBox_circle.Size = new Size(W, H);
             pictureBox_circle.Location = new Point(x_st + dx * 3, y_st);
             pictureBox_circle.BackColor = Color.Pink;
+
+            pictureBox_random_color.Size = new Size(W * 3 / 5, H);
+            pictureBox_random_color.Location = new Point(x_st + dx * 4, y_st);
+            pictureBox_random_color.BackColor = Color.Pink;
 
             //畫雷達掃瞄圖 ST
             panel_radar.Size = new Size(W, H);
@@ -779,7 +783,7 @@ namespace vcs_Draw3A
             if (step8 == 1)
             {
                 //if (x_st8 < (W - w * (round8 + 2)))
-                if ((x_st8 + w) < (W -w * round8-w))
+                if ((x_st8 + w) < (W - w * round8 - w))
                 {
                     x_st8 = x_st8 + w;
                     richTextBox1.Text += "U ";
@@ -795,7 +799,7 @@ namespace vcs_Draw3A
             }
             else if (step8 == 2)
             {
-                if ((y_st8 + h) < (H - h * round8-h))
+                if ((y_st8 + h) < (H - h * round8 - h))
                 {
                     y_st8 = y_st8 + h;
                     richTextBox1.Text += "R ";
@@ -813,7 +817,7 @@ namespace vcs_Draw3A
             else if (step8 == 3)
             {
                 //if ((x_st8 - w * round8) > w)
-                if ((x_st8 - w)> (w* round8))
+                if ((x_st8 - w) > (w * round8))
                 {
                     x_st8 -= w;
                     richTextBox1.Text += "D ";
@@ -2033,9 +2037,22 @@ namespace vcs_Draw3A
             draw_hex();
         }
 
+        private void timer_random_color_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox_random_color.Invalidate();
+        }
 
-
-
-
+        private void pictureBox_random_color_Paint(object sender, PaintEventArgs e)
+        {
+            int w = this.pictureBox_random_color.Width;
+            int h = this.pictureBox_random_color.Height;
+            int i;
+            Random r = new Random();
+            for (i = 0; i < h; i++)
+            {
+                //製作任意顏色
+                e.Graphics.DrawLine(new Pen(Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255))), 0, i, w, i);
+            }
+        }
     }
 }

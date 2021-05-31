@@ -81,6 +81,8 @@
             this.timer_random_2d_array = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_hex = new System.Windows.Forms.PictureBox();
             this.timer_hex = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_random_color = new System.Windows.Forms.PictureBox();
+            this.timer_random_color = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_move)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -103,6 +105,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_2d_array)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_color)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -486,11 +489,27 @@
             this.timer_hex.Interval = 50;
             this.timer_hex.Tick += new System.EventHandler(this.timer_hex_Tick);
             // 
+            // pictureBox_random_color
+            // 
+            this.pictureBox_random_color.Location = new System.Drawing.Point(256, 385);
+            this.pictureBox_random_color.Name = "pictureBox_random_color";
+            this.pictureBox_random_color.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_random_color.TabIndex = 76;
+            this.pictureBox_random_color.TabStop = false;
+            this.pictureBox_random_color.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_random_color_Paint);
+            // 
+            // timer_random_color
+            // 
+            this.timer_random_color.Enabled = true;
+            this.timer_random_color.Interval = 1000;
+            this.timer_random_color.Tick += new System.EventHandler(this.timer_random_color_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1693, 750);
+            this.Controls.Add(this.pictureBox_random_color);
             this.Controls.Add(this.pictureBox_hex);
             this.Controls.Add(this.pictureBox_random_2d_array);
             this.Controls.Add(this.panel_radar);
@@ -547,6 +566,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_2d_array)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_color)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -606,6 +626,8 @@
         private System.Windows.Forms.Timer timer_random_2d_array;
         private System.Windows.Forms.PictureBox pictureBox_hex;
         private System.Windows.Forms.Timer timer_hex;
+        private System.Windows.Forms.PictureBox pictureBox_random_color;
+        private System.Windows.Forms.Timer timer_random_color;
     }
 }
 
