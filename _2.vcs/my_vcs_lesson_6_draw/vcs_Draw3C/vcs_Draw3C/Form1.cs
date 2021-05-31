@@ -139,7 +139,6 @@ namespace vcs_Draw3C
 
             myPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
 
-            this.ClientSize = new Size(900, 600);
             // 加入5個可移動點  當作 網格 的個頂點
             Point[] pts = new Point[5];
             int Cx, Cy;

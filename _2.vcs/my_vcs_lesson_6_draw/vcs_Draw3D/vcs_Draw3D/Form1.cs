@@ -38,6 +38,8 @@ namespace vcs_Draw3D
         int WW2 = 230, HH2 = 230;  // 展示板 的 寬高
         //展示板 DisplayBoard2 SP
 
+        Graphics g3;
+
         public Form1()
         {
             InitializeComponent();
@@ -85,6 +87,8 @@ namespace vcs_Draw3D
             this.green_b = new SolidBrush(Color.Green);
             this.red_b = new SolidBrush(Color.Red);
             //投票比例繪圖程式 SP
+
+            g3 = this.pictureBox3.CreateGraphics();
         }
 
         void show_item_location()
@@ -273,6 +277,14 @@ namespace vcs_Draw3D
 
         private void timer3_Tick(object sender, EventArgs e)
         {
+            Brush b;
+            b = new SolidBrush(Color.Red);
+
+            Pen p = new Pen(Color.Red, 5);
+
+            g3.DrawRectangle(p, 50, 50, 50, 50);
+
+
         }
 
         //投票比例繪圖程式 ST

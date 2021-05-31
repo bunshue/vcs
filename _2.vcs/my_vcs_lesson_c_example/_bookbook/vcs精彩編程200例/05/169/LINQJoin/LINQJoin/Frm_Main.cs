@@ -21,22 +21,26 @@ namespace LINQJoin
 
         private void Frm_Main_Load(object sender, EventArgs e)
         {
-            List<SaleBill> bills = new List<SaleBill>//创建销售单列表
-        {
+            //创建销售单列表
+            List<SaleBill> bills = new List<SaleBill>
+            {
             new SaleBill("XS001","王*科",Convert.ToDateTime("2010-1-1")),
             new SaleBill("XS002","王*军",Convert.ToDateTime("2010-2-1")),
             new SaleBill("XS003","赵*东",Convert.ToDateTime("2010-3-1"))
-        };
-            List<SaleProduct> products = new List<SaleProduct>//创建销售商品列表
-        {
+            };
+
+            //创建销售商品列表
+            List<SaleProduct> products = new List<SaleProduct>
+            {
             new SaleProduct("XS001","冰箱",1,2000),
             new SaleProduct("XS001","洗衣机",2,600),
             new SaleProduct("XS002","电暖风",3,50),
             new SaleProduct("XS002","吸尘器",4,200),
             new SaleProduct("XS003","手机",1,990)
-        };
+            };
+
             //关联销售单列表和销售商品列表        
-            var query= bills.Join(products,
+            var query = bills.Join(products,
                                b => b.SaleBillCode,
                                p => p.SaleBillCode,
                                (b, p) => new
@@ -52,6 +56,7 @@ namespace LINQJoin
             dataGridView1.DataSource = query.ToList();//数据绑定
         }
     }
+
     class SaleBill//销售单据类
     {
         public SaleBill(string saleBillCode, string saleMan, DateTime saleDate)
@@ -80,3 +85,4 @@ namespace LINQJoin
         public double Price { get; set; }//单价
     }
 }
+
