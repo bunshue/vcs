@@ -98,6 +98,18 @@ namespace vcs_test_all_03
             button23.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             button24.Location = new Point(x_st + dx * 3, y_st + dy * 4);
 
+            button25.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button26.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button27.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button28.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button29.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+
+            button30.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 5, y_st + dy * 4);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -529,8 +541,6 @@ namespace vcs_test_all_03
             {
                 MessageBox.Show("兩個文件不相等");
             }
-
-
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -627,7 +637,5 @@ namespace vcs_test_all_03
             richTextBox1.Text += "取得系統目前目錄 : " + System.Environment.CurrentDirectory + "\n";
 
         }
-
-
     }
 }

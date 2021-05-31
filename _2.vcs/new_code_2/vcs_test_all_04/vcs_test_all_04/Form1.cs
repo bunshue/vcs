@@ -27,6 +27,8 @@ using System.Drawing.Text;      //for InstalledFontCollection
 
 using System.Media;     //for SoundPlayer
 
+using Microsoft.VisualBasic;
+
 namespace vcs_test_all_04
 {
     public partial class Form1 : Form
@@ -93,6 +95,24 @@ namespace vcs_test_all_04
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        //表單背景漸層色 只要補這一段就好
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            int intLocation, intHeight;//定义两个int型的变量intLocation、intHeight 
+            intLocation = this.ClientRectangle.Location.Y;//为变量intLocation赋值
+            intHeight = this.ClientRectangle.Height / 200;//为变量intHeight赋值
+            for (int i = 255; i >= 0; i--)
+            {
+                Color color = new Color();//定义一个Color类型的实例color
+                //为实例color赋值
+                color = Color.FromArgb(1, i, 100);
+                SolidBrush SBrush = new SolidBrush(color);//实例化一个单色画笔类对象SBrush
+                Pen pen = new Pen(SBrush, 1);//实例化一个用于绘制直线和曲线的对象pen
+                e.Graphics.DrawRectangle(pen, this.ClientRectangle.X, intLocation, this.Width, intLocation + intHeight);//绘制图形
+                intLocation = intLocation + intHeight;//重新为变量intLocation赋值
+            }
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -324,17 +344,56 @@ namespace vcs_test_all_04
             pictureBox1.Image = image;
         }
 
+
+        const int GB = 1024 * 1024 * 1024;//定义GB的计算常量
+        const int MB = 1024 * 1024;//定义MB的计算常量
+        const int KB = 1024;//定义KB的计算常量
+        public string ByteConversionGBMBKB(Int64 KSize)
+        {
+            if (KSize / GB >= 1)//如果当前Byte的值大于等于1GB
+                return (Math.Round(KSize / (float)GB, 2)).ToString() + "GB";//将其转换成GB
+            else if (KSize / MB >= 1)//如果当前Byte的值大于等于1MB
+                return (Math.Round(KSize / (float)MB, 2)).ToString() + "MB";//将其转换成MB
+            else if (KSize / KB >= 1)//如果当前Byte的值大于等于1KB
+                return (Math.Round(KSize / (float)KB, 2)).ToString() + "KB";//将其转换成KGB
+            else
+                return KSize.ToString() + "Byte";//显示Byte值
+        }
+
         private void button12_Click(object sender, EventArgs e)
         {
+            Int64 a = 123456;
+            richTextBox1.Text += "原拜數 : \t" + a.ToString() + "\t";
+            richTextBox1.Text += "轉換後 : \t" + ByteConversionGBMBKB(a).ToString() + "\n";
+            a = 123456789;
+            richTextBox1.Text += "原拜數 : \t" + a.ToString() + "\t";
+            richTextBox1.Text += "轉換後 : \t" + ByteConversionGBMBKB(a).ToString() + "\n";
+            a = 123456789123;
+            richTextBox1.Text += "原拜數 : \t" + a.ToString() + "\t";
+            richTextBox1.Text += "轉換後 : \t" + ByteConversionGBMBKB(a).ToString() + "\n";
+
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-
+            DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 30);
+            //DateTime dt1 = new DateTime(2021, 5, 21, 9, 15, 30);
+            DateTime dt2 = DateTime.Now;
+            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Year, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 年\n";
+            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Month, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 月\n";
+            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Day, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 天\n";
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //创建日历对象
+            System.Globalization.ChineseLunisolarCalendar chinseCaleander = new System.Globalization.ChineseLunisolarCalendar();
+            string TreeYear = "鼠牛虎兔龍蛇馬羊猴雞狗豬";//创建字符串对象
+            int intYear = chinseCaleander.GetSexagenaryYear(DateTime.Now);//计算年信息
+            //得到生肖信息
+            string Tree = TreeYear.Substring(chinseCaleander.GetTerrestrialBranch(intYear) - 1, 1);
+
+            richTextBox1.Text += "今年是十二生肖 " + Tree + " 年\n";
 
         }
 
