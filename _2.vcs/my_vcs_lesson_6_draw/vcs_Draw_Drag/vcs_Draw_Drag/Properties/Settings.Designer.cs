@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace test_move_point.Properties
+namespace vcs_Draw_Drag.Properties
 {
 
 

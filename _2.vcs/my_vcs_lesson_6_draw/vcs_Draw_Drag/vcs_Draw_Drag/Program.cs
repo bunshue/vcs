@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace test_move_point
+namespace vcs_Draw_Drag
 {
     static class Program
     {

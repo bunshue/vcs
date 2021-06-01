@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("test_move_point")]
+[assembly: AssemblyTitle("vcs_Draw_Drag")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("test_move_point")]
+[assembly: AssemblyProduct("vcs_Draw_Drag")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("9be41c5c-266c-4a76-910c-94902b12695f")]
+[assembly: Guid("efdd78fa-4ba0-4ba8-8aa2-e213b0d082e5")]
 
 // 組件的版本資訊是由下列四項值構成:
 //
