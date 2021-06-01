@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -56,28 +56,21 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // label1
+            // button1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "开始地址：";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(71, 18);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(112, 21);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "192.168.1.1";
+            this.button1.Location = new System.Drawing.Point(189, 20);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(50, 44);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "开始";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(71, 45);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(112, 21);
+            this.textBox2.Size = new System.Drawing.Size(112, 22);
             this.textBox2.TabIndex = 3;
             this.textBox2.Text = "192.168.1.255";
             // 
@@ -90,19 +83,26 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "结束地址：";
             // 
-            // button1
+            // textBox1
             // 
-            this.button1.Location = new System.Drawing.Point(189, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 44);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "开始";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.textBox1.Location = new System.Drawing.Point(71, 18);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(112, 22);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = "192.168.1.1";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "开始地址：";
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(4, 276);
+            this.progressBar1.Location = new System.Drawing.Point(4, 522);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(247, 15);
             this.progressBar1.TabIndex = 2;
@@ -124,7 +124,7 @@
             this.listView1.LargeImageList = this.imageList1;
             this.listView1.Location = new System.Drawing.Point(4, 78);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(247, 192);
+            this.listView1.Size = new System.Drawing.Size(718, 438);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.StateImageList = this.imageList1;
             this.listView1.TabIndex = 3;
@@ -135,7 +135,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(256, 293);
+            this.ClientSize = new System.Drawing.Size(734, 549);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.groupBox1);

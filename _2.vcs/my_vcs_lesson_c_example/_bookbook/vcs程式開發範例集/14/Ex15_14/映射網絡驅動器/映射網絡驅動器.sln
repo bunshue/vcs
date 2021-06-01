@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "映射網絡驅動器", "映射網絡驅動器.csproj", "{4F3E9AD2-F8EC-4E47-A46E-BE330BFAB7D2}"
 EndProject
 Global

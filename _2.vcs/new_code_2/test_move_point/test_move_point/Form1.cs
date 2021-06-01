@@ -7,6 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
+//先移動點
+
+//再移動邊
+
+
 namespace test_move_point
 {
     public partial class Form1 : Form
@@ -14,7 +20,7 @@ namespace test_move_point
         //在多點網格移動的小球 ST
         List<ClassMovingPoint> mpList = new List<ClassMovingPoint>(); // 可移動點的動態陣列
         int mp_Selected = -1;  // 動態陣列 的第幾個 被選到
-        bool dragging = false; // 是否拖拉中
+        bool flag_dragging = false; // 是否拖拉中
         Pen p = new Pen(Color.Green, 1);
         Point[] pts = new Point[4];
 
@@ -69,7 +75,7 @@ namespace test_move_point
                 if (mpList[i].CheckSelected(e.X, e.Y))
                 {
                     mp_Selected = i;
-                    dragging = true;
+                    flag_dragging = true;
                     //richTextBox1.Text += "選中 " + i.ToString() + "\n";
                     pts[mp_Selected].X = mpList[mp_Selected].pos.X;
                     pts[mp_Selected].Y = mpList[mp_Selected].pos.Y;
@@ -85,7 +91,7 @@ namespace test_move_point
         // 更新 被選到的點 的座標
         private void pictureBox3_MouseMove(object sender, MouseEventArgs e)
         {
-            if (dragging)
+            if (flag_dragging == true)
             {
                 mpList[mp_Selected].Move(e.X, e.Y);
 
@@ -100,11 +106,13 @@ namespace test_move_point
         // 解除 被選到的點
         private void pictureBox3_MouseUp(object sender, MouseEventArgs e)
         {
-            richTextBox1.Text += "放開 " + mp_Selected.ToString() + "\t" + mpList[mp_Selected].pos.ToString() + "\n";
+            if (flag_dragging == true)
+            {
+                richTextBox1.Text += "放開 " + mp_Selected.ToString() + "\t" + mpList[mp_Selected].pos.ToString() + "\n";
 
-            mp_Selected = -1;
-            dragging = false;
-
+                mp_Selected = -1;
+                flag_dragging = false;
+            }
         }
 
         private void FillCircle(Graphics g, PointF center, int radius, Color c)

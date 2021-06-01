@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "利用INI文件對軟件進行註冊", "利用INI文件對軟件進行註冊.csproj", "{F8194020-C4A2-4D89-8E9B-2FC26B7B0513}"
 EndProject
 Global

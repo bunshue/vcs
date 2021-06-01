@@ -36,6 +36,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // linkLabel1
@@ -66,7 +67,7 @@
             this.linkLabel3.LinkColor = System.Drawing.Color.Blue;
             this.linkLabel3.Location = new System.Drawing.Point(36, 90);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(65, 12);
+            this.linkLabel3.Size = new System.Drawing.Size(59, 12);
             this.linkLabel3.TabIndex = 2;
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "註冊  碼：";
@@ -75,7 +76,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(107, 17);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(135, 21);
+            this.textBox1.Size = new System.Drawing.Size(135, 22);
             this.textBox1.TabIndex = 3;
             this.textBox1.Tag = "登入名稱";
             // 
@@ -84,7 +85,7 @@
             this.textBox2.Location = new System.Drawing.Point(107, 57);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '#';
-            this.textBox2.Size = new System.Drawing.Size(135, 21);
+            this.textBox2.Size = new System.Drawing.Size(135, 22);
             this.textBox2.TabIndex = 4;
             this.textBox2.Tag = "登入密碼";
             // 
@@ -92,7 +93,7 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(107, 87);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(135, 21);
+            this.textBox3.Size = new System.Drawing.Size(135, 22);
             this.textBox3.TabIndex = 5;
             this.textBox3.Tag = "註冊  碼";
             // 
@@ -120,12 +121,21 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(38, 178);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(455, 360);
+            this.richTextBox1.TabIndex = 8;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::利用INI文件對軟件進行註冊.Properties.Resources._7;
-            this.ClientSize = new System.Drawing.Size(299, 152);
+            this.ClientSize = new System.Drawing.Size(649, 550);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox3);
@@ -152,6 +162,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

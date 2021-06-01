@@ -44,6 +44,7 @@
             this.lbluPwd = new System.Windows.Forms.Label();
             this.errUser = new System.Windows.Forms.ErrorProvider(this.components);
             this.errPassword = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -169,11 +170,21 @@
             this.errPassword.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.AlwaysBlink;
             this.errPassword.ContainerControl = this;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(177, 267);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 12);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "lion / mouse";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(396, 291);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnConcel);
@@ -212,6 +223,7 @@
         private System.Windows.Forms.Label lbluPwd;
         private System.Windows.Forms.ErrorProvider errUser;
         private System.Windows.Forms.ErrorProvider errPassword;
+        private System.Windows.Forms.Label label1;
 
 
     }
