@@ -20,7 +20,7 @@ namespace MultiFormatTxt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtResult.Text = File.ReadAllText("test.txt");
+            txtResult.Text = File.ReadAllText("../../test.txt");
             DataGridView1.ColumnHeadersVisible = true;
             // 设定栏标题样式。
             DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();

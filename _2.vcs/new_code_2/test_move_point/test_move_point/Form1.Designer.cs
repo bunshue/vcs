@@ -36,7 +36,7 @@
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.LightPink;
-            this.pictureBox3.Location = new System.Drawing.Point(66, 52);
+            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(699, 542);
             this.pictureBox3.TabIndex = 0;

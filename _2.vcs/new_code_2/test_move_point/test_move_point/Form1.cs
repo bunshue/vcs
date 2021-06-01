@@ -13,15 +13,10 @@ namespace test_move_point
     {
         //在多點網格移動的小球 ST
         List<ClassMovingPoint> mpList = new List<ClassMovingPoint>(); // 可移動點的動態陣列
-        List<int> pathList = new List<int>(); // 小球 在 可移動點動態陣列 的路徑
         int mp_Selected = -1;  // 動態陣列 的第幾個 被選到
         bool dragging = false; // 是否拖拉中
-
-        Pen myPen = new Pen(Color.Green, 1);  // 
-        //int D = 10; // 小球的半徑
-
-        //BallInNet ball; // 
-        //在多點網格移動的小球 SP
+        Pen p = new Pen(Color.Green, 1);
+        Point[] pts = new Point[4];
 
         public Form1()
         {
@@ -34,7 +29,6 @@ namespace test_move_point
             int y_st = 100;
             int w = 400;
             int h = 300;
-            Point[] pts = new Point[4];
 
             pts[0] = new Point(x_st, y_st);
             pts[1] = new Point(x_st + w, y_st);
@@ -51,46 +45,38 @@ namespace test_move_point
             mpList.Add(mp);
             mp = new ClassMovingPoint(pts[3], 10, Color.Blue, "p3");
             mpList.Add(mp);
-
-            pathList.Add(0);
-            pathList.Add(2);
-            pathList.Add(1);
-            pathList.Add(3);
         }
 
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-
             int radius = 10;
-            Point pt = new Point();
 
-            for (int i = 0; i < mpList.Count; i++)
+            e.Graphics.DrawPolygon(p, pts);
+
+            for (int i = 0; i < 4; i++)
             {
-                mpList[i].Draw(e.Graphics);
-                FillCircle(e.Graphics, mpList[i].pos, radius, Color.Red);
+                FillCircle(e.Graphics, pts[i], radius, Color.Red);
             }
-
-            for (int i = 0; i < mpList.Count - 1; i++)
-            {
-                for (int j = i + 1; j < mpList.Count; j++)
-                {
-                    e.Graphics.DrawLine(myPen, mpList[i].pos, mpList[j].pos);
-                }
-            }
-
         }
 
         // 檢查是哪一個點被 選到
         private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
         {
-            for (int i = 0; i <= mpList.Count - 1; i++)
+            for (int i = 0; i < mpList.Count; i++)
             {
                 if (mpList[i].CheckSelected(e.X, e.Y))
                 {
                     mp_Selected = i;
                     dragging = true;
+                    //richTextBox1.Text += "選中 " + i.ToString() + "\n";
+                    pts[mp_Selected].X = mpList[mp_Selected].pos.X;
+                    pts[mp_Selected].Y = mpList[mp_Selected].pos.Y;
+                    //pts[i] = new Point(mpList[i].pos.X, mpList[i].pos.Y); //same
+
+                    richTextBox1.Text += "選中 " + i.ToString() + "\t" + mpList[mp_Selected].pos.ToString() + "\n";
+
                     break;
                 }
             }
@@ -103,6 +89,9 @@ namespace test_move_point
             {
                 mpList[mp_Selected].Move(e.X, e.Y);
 
+                pts[mp_Selected].X = mpList[mp_Selected].pos.X;
+                pts[mp_Selected].Y = mpList[mp_Selected].pos.Y;
+
                 this.Invalidate();
                 this.pictureBox3.Invalidate();
             }
@@ -111,6 +100,8 @@ namespace test_move_point
         // 解除 被選到的點
         private void pictureBox3_MouseUp(object sender, MouseEventArgs e)
         {
+            richTextBox1.Text += "放開 " + mp_Selected.ToString() + "\t" + mpList[mp_Selected].pos.ToString() + "\n";
+
             mp_Selected = -1;
             dragging = false;
 

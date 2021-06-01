@@ -84,5 +84,46 @@ namespace vcs_MouseCursor3
                 this.Text = "滑鼠 其他 鍵";
             }
         }
+
+        //隱藏滑鼠鼠標 ST
+        //重寫API函數
+        [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "ShowCursor")]
+        public extern static bool ShowCursor(bool bShow);
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            button1.Text = "按Alt+F4離開程式";
+            ShowCursor(false);  //隱藏滑鼠鼠標
+
+
+            //ShowCursor(true);  //顯示滑鼠鼠標
+        }
+        //隱藏滑鼠鼠標 SP
+
+        //限制滑鼠只能在本表單上移動 ST
+        bool flag_limit_mouse_activity_area = false;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (flag_limit_mouse_activity_area == false)
+            {
+                flag_limit_mouse_activity_area = true;
+                button2.Text = "解除";
+
+                this.Cursor = new Cursor(Cursor.Current.Handle);//创建Cursor对象
+                Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y);//设置鼠标位置
+                Cursor.Clip = new Rectangle(this.Location, this.Size);//设置鼠标的活动区域
+            }
+            else
+            {
+                flag_limit_mouse_activity_area = false;
+                button2.Text = "限制滑鼠只能在本表單上移動";
+
+                Screen[] screens = Screen.AllScreens;//获取显示的数组
+                this.Cursor = new Cursor(Cursor.Current.Handle);//创建Cursor对象
+                Cursor.Clip = screens[0].Bounds;//接触对鼠标活动区域的限制
+            }
+
+        }
+        //限制滑鼠只能在本表單上移動 SP
     }
 }

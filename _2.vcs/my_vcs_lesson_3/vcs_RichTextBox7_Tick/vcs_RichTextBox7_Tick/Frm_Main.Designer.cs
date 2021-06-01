@@ -1,4 +1,4 @@
-﻿namespace ControlFormMove
+﻿namespace vcs_RichTextBox7_Tick
 {
     partial class Frm_Main
     {
@@ -28,26 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Main));
+            this.guageRichTextBox1 = new vcs_RichTextBox7_Tick.GuageRichTextBox();
             this.SuspendLayout();
+            // 
+            // guageRichTextBox1
+            // 
+            this.guageRichTextBox1.BackColor = System.Drawing.Color.Silver;
+            this.guageRichTextBox1.CodeShow = true;
+            this.guageRichTextBox1.Location = new System.Drawing.Point(12, 9);
+            this.guageRichTextBox1.Name = "guageRichTextBox1";
+            this.guageRichTextBox1.RulerStyle = vcs_RichTextBox7_Tick.GuageRichTextBox.Ruler.Graduation;
+            this.guageRichTextBox1.Size = new System.Drawing.Size(336, 268);
+            this.guageRichTextBox1.TabIndex = 0;
+            this.guageRichTextBox1.UnitStyle = vcs_RichTextBox7_Tick.GuageRichTextBox.Unit.Cm;
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(599, 489);
+            this.ClientSize = new System.Drawing.Size(750, 592);
+            this.Controls.Add(this.guageRichTextBox1);
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "使用键盘控制窗体的移动";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.Text = "设计带行数和标尺的RichTextBox控件";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private GuageRichTextBox guageRichTextBox1;
+
 
     }
 }

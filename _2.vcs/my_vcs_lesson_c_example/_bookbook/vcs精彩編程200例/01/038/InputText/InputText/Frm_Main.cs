@@ -26,7 +26,7 @@ namespace InputText
         string strB = null;//定义字符串字段
         private void txtPasword_Validating(object sender, CancelEventArgs e)
         {
-            if (txtPasword.Text != "mrsoft")//判断密码是否正确
+            if (txtPasword.Text != "mouse")//判断密码是否正确
             {
                 errPassword.SetError(//显示密码错误信息
                     txtPasword, "密码确误");
@@ -41,7 +41,7 @@ namespace InputText
      
         private void txtUser_Validating(object sender, CancelEventArgs e)
         {
-            if (txtUser.Text != "mr")//判断用户名是否正确
+            if (txtUser.Text != "lion")//判断用户名是否正确
             {
                 errUser.SetError(//显示用户名错误信息
                     txtUser, "登录名错误");

@@ -124,7 +124,7 @@
             // 
             this.txtUser.Location = new System.Drawing.Point(132, 69);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(208, 21);
+            this.txtUser.Size = new System.Drawing.Size(208, 22);
             this.txtUser.TabIndex = 22;
             this.txtUser.Tag = "登录名：";
             this.txtUser.Validating += new System.ComponentModel.CancelEventHandler(this.txtUser_Validating);
@@ -134,7 +134,7 @@
             this.txtPasword.Location = new System.Drawing.Point(132, 101);
             this.txtPasword.Name = "txtPasword";
             this.txtPasword.PasswordChar = '●';
-            this.txtPasword.Size = new System.Drawing.Size(208, 21);
+            this.txtPasword.Size = new System.Drawing.Size(208, 22);
             this.txtPasword.TabIndex = 23;
             this.txtPasword.Tag = "密  码：";
             this.txtPasword.Validating += new System.ComponentModel.CancelEventHandler(this.txtPasword_Validating);
@@ -153,7 +153,7 @@
             this.lbluPwd.AutoSize = true;
             this.lbluPwd.Location = new System.Drawing.Point(44, 101);
             this.lbluPwd.Name = "lbluPwd";
-            this.lbluPwd.Size = new System.Drawing.Size(53, 12);
+            this.lbluPwd.Size = new System.Drawing.Size(47, 12);
             this.lbluPwd.TabIndex = 21;
             this.lbluPwd.Text = "密  码：";
             // 
@@ -173,7 +173,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(396, 169);
+            this.ClientSize = new System.Drawing.Size(396, 291);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnConcel);
