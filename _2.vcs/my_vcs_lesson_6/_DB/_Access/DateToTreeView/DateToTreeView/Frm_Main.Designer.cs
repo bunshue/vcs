@@ -36,6 +36,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -45,7 +46,7 @@
             // 清空内容ToolStripMenuItem
             // 
             this.清空内容ToolStripMenuItem.Name = "清空内容ToolStripMenuItem";
-            this.清空内容ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.清空内容ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.清空内容ToolStripMenuItem.Text = "清空内容";
             this.清空内容ToolStripMenuItem.Click += new System.EventHandler(this.清空内容ToolStripMenuItem_Click);
             // 
@@ -66,7 +67,7 @@
             // 追加节点ToolStripMenuItem
             // 
             this.追加节点ToolStripMenuItem.Name = "追加节点ToolStripMenuItem";
-            this.追加节点ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.追加节点ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.追加节点ToolStripMenuItem.Text = "追加节点";
             this.追加节点ToolStripMenuItem.Click += new System.EventHandler(this.追加节点ToolStripMenuItem_Click);
             // 
@@ -86,7 +87,7 @@
             this.追加节点ToolStripMenuItem,
             this.清空内容ToolStripMenuItem});
             this.操作类型ToolStripMenuItem.Name = "操作类型ToolStripMenuItem";
-            this.操作类型ToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.操作类型ToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.操作类型ToolStripMenuItem.Text = "操作类型";
             // 
             // groupBox2
@@ -114,15 +115,24 @@
             this.操作类型ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(638, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(645, 24);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(0, 424);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(637, 334);
+            this.richTextBox1.TabIndex = 18;
+            this.richTextBox1.Text = "";
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 416);
+            this.ClientSize = new System.Drawing.Size(645, 757);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.menuStrip1);
@@ -150,6 +160,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

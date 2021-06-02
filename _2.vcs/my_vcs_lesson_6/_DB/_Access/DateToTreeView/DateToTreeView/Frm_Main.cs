@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.OleDb;
 
 namespace DateToTreeView
@@ -22,14 +23,42 @@ namespace DateToTreeView
         //窗体加载时，显示原有的数据
         private void Form1_Load(object sender,EventArgs e)
         {
-            string P_Connection = string.Format(//创建数据库连接字符串
-             "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..//..//test.mdb;User Id=Admin");
-            OleDbDataAdapter P_OLeDbDataAdapter = new OleDbDataAdapter(
-                "select au_id as 用户编号,au_lname as 用户名,phone as 联系电话  from authors",
-                P_Connection);
+            //创建数据库连接字符串
+            //string P_Connection = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..//..//test.mdb;User Id=Admin");    //sugar
+            string P_Connection = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..//..//test.mdb;User Id=Admin");    //kilo
+            OleDbDataAdapter P_OLeDbDataAdapter = new OleDbDataAdapter("select au_id as 用户编号,au_lname as 用户名,phone as 联系电话  from authors", P_Connection);
             DataSet ds = new DataSet();
             P_OLeDbDataAdapter.Fill(ds,"UserInfo");
-            dataGridView1.DataSource = ds.Tables["UserInfo"].DefaultView;
+            dataGridView1.DataSource = ds.Tables["UserInfo"].DefaultView;   //將所有資料都匯出到dataGridView上
+
+            //顯示資料庫的內容 ST
+            richTextBox1.Text += "顯示資料庫的內容\n";
+            richTextBox1.Text += "Columns = " + ds.Tables[0].Columns.Count.ToString() + "\n";
+            richTextBox1.Text += "Rows = " + ds.Tables[0].Rows.Count.ToString() + "\n";
+            richTextBox1.Text += "TableName = " + ds.Tables[0].TableName + "\n";
+            int i;
+            int j;
+            int C = ds.Tables[0].Columns.Count;
+            int R = ds.Tables[0].Rows.Count;
+            for (i = 0; i < C; i++)
+            {
+                richTextBox1.Text += ds.Tables[0].Columns[i] + "\t";
+            }
+            richTextBox1.Text += "\n";
+
+            for (j = 0; j < R; j++)
+            {
+                for (i = 0; i < C; i++)
+                {
+                    richTextBox1.Text += ds.Tables[0].Rows[j].ItemArray[i] + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+            //顯示資料庫的內容 SP
+
+
+
             TreeNode treeNode = new TreeNode("用户信息",0,0);
             treeView1.Nodes.Add(treeNode);
             //默认情况下追加节点

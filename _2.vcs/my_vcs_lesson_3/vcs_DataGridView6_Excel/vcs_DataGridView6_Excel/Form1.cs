@@ -92,7 +92,9 @@ namespace vcs_DataGridView6_Excel
             {
                 object[] row_values = new object[max_col];
                 for (int col = 1; col <= max_col; col++)
+                {
                     row_values[col - 1] = values[row, col];
+                }
                 dgv.Rows.Add(row_values);
             }
         }
