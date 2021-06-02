@@ -55,7 +55,6 @@ namespace AccessGuideExcel
 
         public void GetTable(string Apath, ComboBox ComBox)
         {
-            //string connstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Apath + ";Persist Security Info=True";  //old
             string connstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Apath + ";Persist Security Info=True";
             System.Data.OleDb.OleDbConnection tem_OleConn = new System.Data.OleDb.OleDbConnection(connstr);
             tem_OleConn.Open();
@@ -67,8 +66,9 @@ namespace AccessGuideExcel
                 ComBox.Items.Add(tem_DataTable.Rows[i][2]);
             }
             if (ComBox.Items.Count > 0)
+            {
                 ComBox.SelectedIndex = 0;
-
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

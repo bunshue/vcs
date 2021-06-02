@@ -49,9 +49,9 @@ namespace 如何編程修復Access數據庫
             temp += DateTime.Now.Second.ToString() + ".bak";
             temp = strPathMdb.Substring(0, strPathMdb.LastIndexOf("\\") + 1) + temp;
             //定義臨時數據庫的連接字串
-            string temp2 = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + temp;
+            string temp2 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + temp;
             //定義目標數據庫的連接字串
-            string strPathMdb2 = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + strPathMdb;
+            string strPathMdb2 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + strPathMdb;
             //建立一個JetEngineClass對象的實例
             JRO.JetEngineClass jt = new JRO.JetEngineClass();
             //使用JetEngineClass對象的CompactDatabase方法壓縮修復數據庫

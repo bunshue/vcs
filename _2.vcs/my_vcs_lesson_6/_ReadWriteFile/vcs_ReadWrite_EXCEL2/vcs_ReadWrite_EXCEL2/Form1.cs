@@ -76,8 +76,7 @@ namespace vcs_ReadWrite_EXCEL2
             string tableName = null;
             if (File.Exists(fullPath))
             {
-                using (OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet." +
-                "OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + fullPath))
+                using (OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + fullPath))
                 {
                     conn.Open();
 
@@ -119,6 +118,5 @@ namespace vcs_ReadWrite_EXCEL2
             myConn.Close();
             return ds;
         }
-
     }
 }

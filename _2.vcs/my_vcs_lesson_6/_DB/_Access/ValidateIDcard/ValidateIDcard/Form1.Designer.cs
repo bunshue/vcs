@@ -55,8 +55,9 @@
             // 
             this.txtCardID.Location = new System.Drawing.Point(76, 10);
             this.txtCardID.Name = "txtCardID";
-            this.txtCardID.Size = new System.Drawing.Size(207, 21);
+            this.txtCardID.Size = new System.Drawing.Size(207, 22);
             this.txtCardID.TabIndex = 1;
+            this.txtCardID.Text = "140110197409242154";
             // 
             // button1
             // 

@@ -23,7 +23,7 @@ namespace DateToTreeView
         private void Form1_Load(object sender,EventArgs e)
         {
             string P_Connection = string.Format(//创建数据库连接字符串
-             "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=test.mdb;User Id=Admin");
+             "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..//..//test.mdb;User Id=Admin");
             OleDbDataAdapter P_OLeDbDataAdapter = new OleDbDataAdapter(
                 "select au_id as 用户编号,au_lname as 用户名,phone as 联系电话  from authors",
                 P_Connection);

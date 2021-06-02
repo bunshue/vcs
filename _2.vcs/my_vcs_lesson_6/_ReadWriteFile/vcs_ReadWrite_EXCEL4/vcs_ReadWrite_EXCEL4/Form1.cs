@@ -243,7 +243,5 @@ namespace vcs_ReadWrite_EXCEL4
             }
             richTextBox1.Text += "\n";
         }
-
-
     }
 }

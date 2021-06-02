@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.OleDb;
+
 namespace SortOrStatistics
 {
     public partial class Frm_Main : Form
@@ -24,7 +26,7 @@ namespace SortOrStatistics
             try
             {
                 string P_Connection = string.Format(//创建数据库连接字符串
-                    "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..//..//test.mdb;User Id=Admin");
+                    "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..//..//fruit.mdb;User Id=Admin");
                 OleDbConnection P_OLEDBConnection = //创建连接对象
                     new OleDbConnection(P_Connection);
                 P_OLEDBConnection.Open();//连接到数据库

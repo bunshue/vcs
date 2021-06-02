@@ -132,7 +132,7 @@ namespace vcs_ReadWrite_EXCEL1
         private void button2_Click(object sender, EventArgs e)
         {
             //sugar can not use this
-            string filename = @"C:\______test_files\__RW\_excel\excel_20200916_115412.xls";
+            string filename = @"C:\______test_files\__RW\_excel\excel_20210602_131921.xls";
 
             //string filename = pathFile + ".xls";
             if (File.Exists(filename) == false)
