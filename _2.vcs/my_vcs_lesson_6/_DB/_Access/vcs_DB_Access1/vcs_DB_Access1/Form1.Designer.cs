@@ -51,9 +51,9 @@
             // btnQuery
             // 
             this.btnQuery.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnQuery.Location = new System.Drawing.Point(216, 133);
+            this.btnQuery.Location = new System.Drawing.Point(555, 123);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Size = new System.Drawing.Size(75, 21);
             this.btnQuery.TabIndex = 12;
             this.btnQuery.Text = "Query";
             this.btnQuery.UseVisualStyleBackColor = true;
@@ -62,9 +62,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.Size = new System.Drawing.Size(31, 12);
             this.label1.TabIndex = 2;
             this.label1.Text = "Field:";
             // 
@@ -72,9 +72,9 @@
             // 
             this.cboField0.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboField0.FormattingEnabled = true;
-            this.cboField0.Location = new System.Drawing.Point(15, 25);
+            this.cboField0.Location = new System.Drawing.Point(15, 23);
             this.cboField0.Name = "cboField0";
-            this.cboField0.Size = new System.Drawing.Size(138, 21);
+            this.cboField0.Size = new System.Drawing.Size(138, 20);
             this.cboField0.TabIndex = 0;
             // 
             // cboOperator0
@@ -90,26 +90,26 @@
             ">=",
             "<>",
             "LIKE"});
-            this.cboOperator0.Location = new System.Drawing.Point(159, 25);
+            this.cboOperator0.Location = new System.Drawing.Point(159, 23);
             this.cboOperator0.Name = "cboOperator0";
-            this.cboOperator0.Size = new System.Drawing.Size(66, 21);
+            this.cboOperator0.Size = new System.Drawing.Size(66, 20);
             this.cboOperator0.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(156, 9);
+            this.label2.Location = new System.Drawing.Point(156, 8);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.Size = new System.Drawing.Size(49, 12);
             this.label2.TabIndex = 5;
             this.label2.Text = "Operator:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(228, 9);
+            this.label3.Location = new System.Drawing.Point(228, 8);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 6;
             this.label3.Text = "Value:";
             // 
@@ -117,27 +117,27 @@
             // 
             this.txtValue0.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtValue0.Location = new System.Drawing.Point(231, 26);
+            this.txtValue0.Location = new System.Drawing.Point(231, 24);
             this.txtValue0.Name = "txtValue0";
-            this.txtValue0.Size = new System.Drawing.Size(263, 20);
+            this.txtValue0.Size = new System.Drawing.Size(942, 22);
             this.txtValue0.TabIndex = 2;
             // 
             // txtValue1
             // 
             this.txtValue1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtValue1.Location = new System.Drawing.Point(231, 53);
+            this.txtValue1.Location = new System.Drawing.Point(231, 49);
             this.txtValue1.Name = "txtValue1";
-            this.txtValue1.Size = new System.Drawing.Size(263, 20);
+            this.txtValue1.Size = new System.Drawing.Size(942, 22);
             this.txtValue1.TabIndex = 5;
             // 
             // cboField1
             // 
             this.cboField1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboField1.FormattingEnabled = true;
-            this.cboField1.Location = new System.Drawing.Point(15, 52);
+            this.cboField1.Location = new System.Drawing.Point(15, 48);
             this.cboField1.Name = "cboField1";
-            this.cboField1.Size = new System.Drawing.Size(138, 21);
+            this.cboField1.Size = new System.Drawing.Size(138, 20);
             this.cboField1.TabIndex = 3;
             // 
             // cboOperator1
@@ -153,27 +153,27 @@
             ">=",
             "<>",
             "LIKE"});
-            this.cboOperator1.Location = new System.Drawing.Point(159, 52);
+            this.cboOperator1.Location = new System.Drawing.Point(159, 48);
             this.cboOperator1.Name = "cboOperator1";
-            this.cboOperator1.Size = new System.Drawing.Size(66, 21);
+            this.cboOperator1.Size = new System.Drawing.Size(66, 20);
             this.cboOperator1.TabIndex = 4;
             // 
             // txtValue3
             // 
             this.txtValue3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtValue3.Location = new System.Drawing.Point(231, 107);
+            this.txtValue3.Location = new System.Drawing.Point(231, 99);
             this.txtValue3.Name = "txtValue3";
-            this.txtValue3.Size = new System.Drawing.Size(263, 20);
+            this.txtValue3.Size = new System.Drawing.Size(942, 22);
             this.txtValue3.TabIndex = 11;
             // 
             // cboField3
             // 
             this.cboField3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboField3.FormattingEnabled = true;
-            this.cboField3.Location = new System.Drawing.Point(15, 106);
+            this.cboField3.Location = new System.Drawing.Point(15, 98);
             this.cboField3.Name = "cboField3";
-            this.cboField3.Size = new System.Drawing.Size(138, 21);
+            this.cboField3.Size = new System.Drawing.Size(138, 20);
             this.cboField3.TabIndex = 9;
             // 
             // cboOperator3
@@ -189,27 +189,27 @@
             ">=",
             "<>",
             "LIKE"});
-            this.cboOperator3.Location = new System.Drawing.Point(159, 106);
+            this.cboOperator3.Location = new System.Drawing.Point(159, 98);
             this.cboOperator3.Name = "cboOperator3";
-            this.cboOperator3.Size = new System.Drawing.Size(66, 21);
+            this.cboOperator3.Size = new System.Drawing.Size(66, 20);
             this.cboOperator3.TabIndex = 10;
             // 
             // txtValue2
             // 
             this.txtValue2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtValue2.Location = new System.Drawing.Point(231, 80);
+            this.txtValue2.Location = new System.Drawing.Point(231, 74);
             this.txtValue2.Name = "txtValue2";
-            this.txtValue2.Size = new System.Drawing.Size(263, 20);
+            this.txtValue2.Size = new System.Drawing.Size(942, 22);
             this.txtValue2.TabIndex = 8;
             // 
             // cboField2
             // 
             this.cboField2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboField2.FormattingEnabled = true;
-            this.cboField2.Location = new System.Drawing.Point(15, 79);
+            this.cboField2.Location = new System.Drawing.Point(15, 73);
             this.cboField2.Name = "cboField2";
-            this.cboField2.Size = new System.Drawing.Size(138, 21);
+            this.cboField2.Size = new System.Drawing.Size(138, 20);
             this.cboField2.TabIndex = 6;
             // 
             // cboOperator2
@@ -225,9 +225,9 @@
             ">=",
             "<>",
             "LIKE"});
-            this.cboOperator2.Location = new System.Drawing.Point(159, 79);
+            this.cboOperator2.Location = new System.Drawing.Point(159, 73);
             this.cboOperator2.Name = "cboOperator2";
-            this.cboOperator2.Size = new System.Drawing.Size(66, 21);
+            this.cboOperator2.Size = new System.Drawing.Size(66, 20);
             this.cboOperator2.TabIndex = 7;
             // 
             // dgvBookInfo
@@ -236,16 +236,16 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvBookInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBookInfo.Location = new System.Drawing.Point(15, 162);
+            this.dgvBookInfo.Location = new System.Drawing.Point(15, 150);
             this.dgvBookInfo.Name = "dgvBookInfo";
-            this.dgvBookInfo.Size = new System.Drawing.Size(479, 203);
+            this.dgvBookInfo.Size = new System.Drawing.Size(1158, 494);
             this.dgvBookInfo.TabIndex = 13;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(506, 377);
+            this.ClientSize = new System.Drawing.Size(1185, 655);
             this.Controls.Add(this.dgvBookInfo);
             this.Controls.Add(this.txtValue3);
             this.Controls.Add(this.cboField3);

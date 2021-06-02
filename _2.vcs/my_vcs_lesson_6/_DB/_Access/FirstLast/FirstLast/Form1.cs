@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Linq;
 using System.Data.OleDb;
 
@@ -12,6 +13,8 @@ namespace FirstLast
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_database.mdb";
+
         public Form1()
         {
             InitializeComponent();
@@ -19,12 +22,11 @@ namespace FirstLast
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //OleDbConnection olecn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + "db_database.mdb");
-            OleDbConnection olecn = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + "..//..//db_database.mdb");
+            OleDbConnection olecn = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename);
             OleDbDataAdapter oledap = new OleDbDataAdapter("select * from tab_booksort", olecn);
             DataSet ds = new DataSet();
             oledap.Fill(ds);
-            dataGridView1.DataSource=ds.Tables[0].DefaultView;
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,11 +40,12 @@ namespace FirstLast
             {
                 strSql = "select Last(BookNames) as Bookname,Last(author)as peo,Last(sellsum)as slm from tab_booksort";
             }
-            OleDbConnection olecn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + "db_database.mdb");
+            OleDbConnection olecn = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename);
             OleDbDataAdapter oledap = new OleDbDataAdapter(strSql, olecn);
             DataSet ds = new DataSet();
             oledap.Fill(ds);
-            dataGridView1.DataSource=ds.Tables[0].DefaultView;
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
     }
 }
+

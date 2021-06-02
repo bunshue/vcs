@@ -11,20 +11,22 @@ namespace AccessGuideExcel
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\__RW\_mdb\db1.mdb";
+        string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db1.mdb";
 
         public Form1()
         {
             InitializeComponent();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
+            textBox1.Text = filename;
+            GetTable(filename, comboBox1);
 
+            textBox2.Text = Application.StartupPath;
         }
 
-        public void AccessGuideJoinExcel(string Access, string AccTable, string Excel)
+        public void AccessGuideJoinExcel(string Access, string AccTable, string filename)
         {
             try
             {
@@ -37,26 +39,21 @@ namespace AccessGuideExcel
                 tem_comm = new System.Data.OleDb.OleDbCommand(tem_sql, tem_conn);//實例化OleDbCommand類
                 int RecordCount = (int)tem_comm.ExecuteScalar();//執行SQL語句，並傳回結果
                 //每個Sheet只能最多保存65536條記錄。
-                tem_sql = @"select top 65535 * into [Excel 8.0;database=" + Excel + @".xls].[Sheet1] from Paging";//記錄連接Excel的語句
+                tem_sql = @"select top 65535 * into [Excel 8.0;database=" + filename + @".xls].[Sheet1] from Paging";//記錄連接Excel的語句
                 tem_comm = new System.Data.OleDb.OleDbCommand(tem_sql, tem_conn);//實例化OleDbCommand類
                 tem_comm.ExecuteNonQuery();//執行SQL語句，將數據表的內容導入到Excel中
                 tem_conn.Close();//關閉連接
                 tem_conn.Dispose();//釋放資源
                 tem_conn = null;
-                MessageBox.Show("導入完成");
+                richTextBox1.Text += "導入完成, 檔名 : " + filename + "\n";
             }
             catch
             {
-                MessageBox.Show("目前已有Sheet1頁");
+                richTextBox1.Text += "導入失敗, 目前已有Sheet1頁\n";
             }
         }
-        
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AccessGuideJoinExcel(textBox1.Text, comboBox1.Text, textBox2.Text + "\\" + textBox3.Text);
-        }
 
-        public void GetTable(string Apath,ComboBox ComBox)
+        public void GetTable(string Apath, ComboBox ComBox)
         {
             //string connstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Apath + ";Persist Security Info=True";  //old
             string connstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Apath + ";Persist Security Info=True";
@@ -74,19 +71,12 @@ namespace AccessGuideExcel
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            textBox1.Text = filename;
+            string filename = "xls_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xls";
+            textBox3.Text = filename;
 
-            GetTable(filename, comboBox1);
+            AccessGuideJoinExcel(textBox1.Text, comboBox1.Text, textBox2.Text + "\\" + filename);
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.SelectedPath = "";
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-                textBox2.Text = folderBrowserDialog1.SelectedPath;
-        }
-
     }
 }

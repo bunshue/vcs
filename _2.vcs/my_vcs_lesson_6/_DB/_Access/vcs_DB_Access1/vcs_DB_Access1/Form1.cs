@@ -35,7 +35,7 @@ namespace vcs_DB_Access1
         {
             // Compose the database file name.
             // This assumes it's in the executable's directory.
-            string filename = "C:\\______test_files\\__RW\\_access\\Books.accdb";
+            string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\Books.accdb";
 
             // Prepare the form for use.
             PrepareForm(filename, "BookInfo");

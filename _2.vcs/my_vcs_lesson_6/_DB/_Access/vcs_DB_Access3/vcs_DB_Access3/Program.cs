@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_DataGridView8
+namespace vcs_DB_Access3
 {
     static class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace vcs_DataGridView8
+﻿namespace vcs_DB_Access3
 {
     partial class Form1
     {
@@ -49,7 +49,7 @@
             this.ClientSize = new System.Drawing.Size(799, 491);
             this.Controls.Add(this.dgContacts);
             this.Name = "Form1";
-            this.Text = "vcs_DataGridView8";
+            this.Text = "vcs_DB_Access3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgContacts)).EndInit();

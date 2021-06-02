@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Linq;
 using System.Data.OleDb;
 
@@ -12,7 +13,7 @@ namespace ConnectAccess
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\__RW\_mdb\db_09.mdb";
+        string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_09.mdb";
 
         public Form1()
         {
@@ -21,7 +22,6 @@ namespace ConnectAccess
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //string ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data source='" + filename + "'";     old
             string ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename;
             OleDbConnection Olecon = new OleDbConnection(ConStr);
             OleDbDataAdapter OleDat = new OleDbDataAdapter("select * from 帳目", Olecon);
@@ -33,3 +33,4 @@ namespace ConnectAccess
         }
     }
 }
+

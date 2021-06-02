@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Linq;
 using System.Data.OleDb;
 
@@ -12,7 +13,7 @@ namespace EncryptAccess
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\__RW\_mdb\db_09.mdb";
+        string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_09.mdb";
 
         public Form1()
         {
@@ -21,14 +22,13 @@ namespace EncryptAccess
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                //string ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Jet OLEDB:DataBase Password='" + this.textBox1.Text + "';User Id=admin;Data source=" + filename;
                 string ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Jet OLEDB:DataBase Password='" + this.textBox1.Text + "';User Id=admin;Data source=" + filename;
 
                 OleDbConnection oleCon = new OleDbConnection(ConStr);
@@ -39,7 +39,7 @@ namespace EncryptAccess
                 oleCon.Close();
                 oleCon.Dispose();
             }
-            catch(Exception ey)
+            catch (Exception ey)
             {
                 MessageBox.Show(ey.Message);
             }

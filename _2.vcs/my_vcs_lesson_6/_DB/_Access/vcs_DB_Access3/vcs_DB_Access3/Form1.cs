@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Data.OleDb;
 
-namespace vcs_DataGridView8
+namespace vcs_DB_Access3
 {
     public partial class Form1 : Form
     {
@@ -17,6 +17,8 @@ namespace vcs_DataGridView8
         {
             InitializeComponent();
         }
+
+        string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\Contacts.vcs_DB_Access3.mdb";
 
         // The DataAdapters and the DataSet.
         private OleDbDataAdapter DaAddresses, DaTestScores;
@@ -27,14 +29,10 @@ namespace vcs_DataGridView8
             const string SELECT_ADDRESSES = "SELECT * FROM Addresses";
             const string SELECT_TEST_SCORES = "SELECT * FROM TestScores";
 
-            // Get the database file name.
-            // This assumes the database is in the executable directory.
-            string db_name = Application.StartupPath + "\\Contacts.mdb";
-
             // Compose the connection string.
             string connect_string =
                 "Provider=Microsoft.ACE.OLEDB.12.0;" +
-                "Data Source=" + db_name + ";" +
+                "Data Source=" + filename + ";" +
                 "Persist Security Info=False";
 
             // Create a DataAdapter to load the Addresses table.
@@ -74,3 +72,4 @@ namespace vcs_DataGridView8
         }
     }
 }
+

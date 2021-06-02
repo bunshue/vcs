@@ -1,0 +1,5 @@
+Access 2007版本之前，Microsoft Access數據庫文件格式是MDB。
+
+Access 2007和Access 2013使用ACCDB文件格式。
+
+雖然後續版本為了向後兼容的目的而繼續支持MDB數據庫文件，但在Access中工作時，建議使用ACCDB文件格式。
