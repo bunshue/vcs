@@ -35,7 +35,6 @@
             this.txt_Find = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txt_path = new System.Windows.Forms.TextBox();
-            this.txt_Select = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Begin = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -49,7 +48,6 @@
             this.groupBox1.Controls.Add(this.txt_Find);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txt_path);
-            this.groupBox1.Controls.Add(this.txt_Select);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btn_Begin);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -75,8 +73,9 @@
             this.txt_Replace.Location = new System.Drawing.Point(266, 70);
             this.txt_Replace.Name = "txt_Replace";
             this.txt_Replace.ReadOnly = true;
-            this.txt_Replace.Size = new System.Drawing.Size(72, 21);
+            this.txt_Replace.Size = new System.Drawing.Size(72, 22);
             this.txt_Replace.TabIndex = 13;
+            this.txt_Replace.Text = "lion-mouse";
             this.txt_Replace.TextChanged += new System.EventHandler(this.txt_Replace_TextChanged);
             // 
             // label4
@@ -93,8 +92,9 @@
             this.txt_Find.Location = new System.Drawing.Point(104, 70);
             this.txt_Find.Name = "txt_Find";
             this.txt_Find.ReadOnly = true;
-            this.txt_Find.Size = new System.Drawing.Size(72, 21);
+            this.txt_Find.Size = new System.Drawing.Size(72, 22);
             this.txt_Find.TabIndex = 8;
+            this.txt_Find.Text = "字幕";
             this.txt_Find.TextChanged += new System.EventHandler(this.txt_Find_TextChanged);
             // 
             // label2
@@ -111,18 +111,8 @@
             this.txt_path.Location = new System.Drawing.Point(105, 31);
             this.txt_path.Name = "txt_path";
             this.txt_path.ReadOnly = true;
-            this.txt_path.Size = new System.Drawing.Size(176, 21);
+            this.txt_path.Size = new System.Drawing.Size(176, 22);
             this.txt_path.TabIndex = 2;
-            // 
-            // txt_Select
-            // 
-            this.txt_Select.Location = new System.Drawing.Point(287, 31);
-            this.txt_Select.Name = "txt_Select";
-            this.txt_Select.Size = new System.Drawing.Size(75, 23);
-            this.txt_Select.TabIndex = 4;
-            this.txt_Select.Text = "选择";
-            this.txt_Select.UseVisualStyleBackColor = true;
-            this.txt_Select.Click += new System.EventHandler(this.txt_select_Click);
             // 
             // label1
             // 
@@ -152,6 +142,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Frm_Main";
             this.Text = "批量替换Word文档中指定的字符串";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -163,7 +154,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txt_path;
-        private System.Windows.Forms.Button txt_Select;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_Begin;
         private System.Windows.Forms.TextBox txt_Replace;

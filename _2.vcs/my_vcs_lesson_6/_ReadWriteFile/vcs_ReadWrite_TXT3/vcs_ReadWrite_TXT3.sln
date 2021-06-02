@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiFormatTxt", "MultiFormatTxt\MultiFormatTxt.csproj", "{116DB84D-BD75-48E3-B105-05099935E235}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ReadWrite_TXT3", "vcs_ReadWrite_TXT3\vcs_ReadWrite_TXT3.csproj", "{116DB84D-BD75-48E3-B105-05099935E235}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

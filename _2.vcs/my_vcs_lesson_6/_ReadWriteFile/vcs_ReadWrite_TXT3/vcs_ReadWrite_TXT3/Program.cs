@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace GetShortPathName
+namespace vcs_ReadWrite_TXT3
 {
     static class Program
     {
@@ -15,7 +15,7 @@ namespace GetShortPathName
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm_Main());
+            Application.Run(new Form1());
         }
     }
 }

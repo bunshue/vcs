@@ -1,4 +1,4 @@
-﻿namespace MultiFormatTxt
+﻿namespace vcs_ReadWrite_TXT3
 {
     partial class Form1
     {
@@ -43,11 +43,11 @@
             // 
             this.DataGridView3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.DataGridView3.ColumnHeadersHeight = 32;
-            this.DataGridView3.Location = new System.Drawing.Point(227, 214);
+            this.DataGridView3.Location = new System.Drawing.Point(344, 322);
             this.DataGridView3.Margin = new System.Windows.Forms.Padding(2);
             this.DataGridView3.Name = "DataGridView3";
             this.DataGridView3.RowTemplate.Height = 27;
-            this.DataGridView3.Size = new System.Drawing.Size(324, 111);
+            this.DataGridView3.Size = new System.Drawing.Size(350, 120);
             this.DataGridView3.TabIndex = 21;
             this.DataGridView3.Text = "DataGridView3";
             // 
@@ -55,11 +55,11 @@
             // 
             this.DataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.DataGridView2.ColumnHeadersHeight = 32;
-            this.DataGridView2.Location = new System.Drawing.Point(227, 107);
+            this.DataGridView2.Location = new System.Drawing.Point(344, 165);
             this.DataGridView2.Margin = new System.Windows.Forms.Padding(2);
             this.DataGridView2.Name = "DataGridView2";
             this.DataGridView2.RowTemplate.Height = 27;
-            this.DataGridView2.Size = new System.Drawing.Size(324, 103);
+            this.DataGridView2.Size = new System.Drawing.Size(350, 120);
             this.DataGridView2.TabIndex = 20;
             this.DataGridView2.Text = "DataGridView2";
             // 
@@ -67,18 +67,18 @@
             // 
             this.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.DataGridView1.ColumnHeadersHeight = 32;
-            this.DataGridView1.Location = new System.Drawing.Point(227, 6);
+            this.DataGridView1.Location = new System.Drawing.Point(344, 14);
             this.DataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.DataGridView1.Name = "DataGridView1";
             this.DataGridView1.RowTemplate.Height = 27;
-            this.DataGridView1.Size = new System.Drawing.Size(324, 96);
+            this.DataGridView1.Size = new System.Drawing.Size(350, 120);
             this.DataGridView1.TabIndex = 19;
             this.DataGridView1.Text = "DataGridView1";
             // 
             // btnParseTextFiles
             // 
             this.btnParseTextFiles.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnParseTextFiles.Location = new System.Drawing.Point(22, 266);
+            this.btnParseTextFiles.Location = new System.Drawing.Point(74, 383);
             this.btnParseTextFiles.Margin = new System.Windows.Forms.Padding(2);
             this.btnParseTextFiles.Name = "btnParseTextFiles";
             this.btnParseTextFiles.Size = new System.Drawing.Size(174, 59);
@@ -96,7 +96,7 @@
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
             this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResult.Size = new System.Drawing.Size(208, 228);
+            this.txtResult.Size = new System.Drawing.Size(316, 347);
             this.txtResult.TabIndex = 17;
             // 
             // Label1
@@ -113,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(557, 330);
+            this.ClientSize = new System.Drawing.Size(705, 467);
             this.Controls.Add(this.DataGridView3);
             this.Controls.Add(this.DataGridView2);
             this.Controls.Add(this.DataGridView1);

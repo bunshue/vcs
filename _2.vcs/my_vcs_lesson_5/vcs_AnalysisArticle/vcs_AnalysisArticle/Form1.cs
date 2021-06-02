@@ -18,6 +18,35 @@ namespace vcs_AnalysisArticle
 
         int same_count = 0;
 
+        //統計每個單詞在文章中出現的次數 用的資料
+        string text = @"var query = from info in infoList 
+    where info.AuditFlag == null || info.AuditFlag == false 
+    join emp in empList 
+       on info.SaleMan equals emp.EmployeeCode 
+    join house in houseList 
+       on info.WareHouse equals house.WareHouseCode 
+    join client in clientList 
+       on info.ClientCode equals client.ClientCode 
+    join dictPayMode in dictList 
+       on info.PayMode equals dictPayMode.ValueCode 
+    where dictPayMode.TypeCode == 'PayMode\' 
+    join dictInvoiceType in dictList 
+       on info.InvoiceType equals dictInvoiceType.ValueCode 
+    where dictInvoiceType.TypeCode == 'InvoiceType'
+    select new 
+    { 
+       id = info.ID,
+       SaleBillCode = info.SaleBillCode,
+       SaleMan = emp.Name,
+       SaleDate = info.SaleDate,
+       Provider = client.ShortName,
+       WareHouse = house.ShortName,
+       PayMode = dictPayMode.ValueName,
+       InvoiceType = dictInvoiceType.ValueName,
+       InvoiceCode = info.InvoiceCode,
+       AuditFlag = info.AuditFlag 
+    };";
+
         public class WordInfo
         {
             public int keyword_len;
@@ -68,7 +97,7 @@ namespace vcs_AnalysisArticle
             {
                 find_pattern_count = 0;
                 richTextBox1.Text += "\n搜尋長度：" + (k + 1).ToString() + "\n";
-                for (i = 0; i < (y.Length - (k+1)); i++)
+                for (i = 0; i < (y.Length - (k + 1)); i++)
                 {
                     same_count = 1;
                     ignore = 0;
@@ -260,47 +289,47 @@ namespace vcs_AnalysisArticle
                     continue;
 
                 //if (y[i] < 13000)
-                    //richTextBox1.Text += "i = " + i.ToString() + "\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                //richTextBox1.Text += "i = " + i.ToString() + "\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
 
-                    if ((y[i] >= 0x2E80) && (y[i] <= 0x33FF))
-                    {
-                        richTextBox1.Text += "_A\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
-                    }
+                if ((y[i] >= 0x2E80) && (y[i] <= 0x33FF))
+                {
+                    richTextBox1.Text += "_A\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
 
-                    if ((y[i] >= 0x3400) && (y[i] <= 0x4DFF))
-                    {
-                        richTextBox1.Text += "_B\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
-                    }
-                    if ((y[i] >= 0x4E00) && (y[i] <= 0x9FFF))
-                    {
-                        richTextBox1.Text += "_C\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
-                    }
-                    if ((y[i] >= 0xA000) && (y[i] <= 0xA4FF))
-                    {
-                        richTextBox1.Text += "_D\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
-                    }
-                    if ((y[i] >= 0xAC00) && (y[i] <= 0xD7FF))
-                    {
-                        richTextBox1.Text += "_E\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
-                    }
-                    if ((y[i] >= 0xF900) && (y[i] <= 0xFAFF))
-                    {
-                        richTextBox1.Text += "_F\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
-                    }
-                    if ((y[i] >= 0xFB00) && (y[i] <= 0xFFFD))
-                    {
-                        richTextBox1.Text += "_X\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
-                    }
+                if ((y[i] >= 0x3400) && (y[i] <= 0x4DFF))
+                {
+                    richTextBox1.Text += "_B\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+                if ((y[i] >= 0x4E00) && (y[i] <= 0x9FFF))
+                {
+                    richTextBox1.Text += "_C\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+                if ((y[i] >= 0xA000) && (y[i] <= 0xA4FF))
+                {
+                    richTextBox1.Text += "_D\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+                if ((y[i] >= 0xAC00) && (y[i] <= 0xD7FF))
+                {
+                    richTextBox1.Text += "_E\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+                if ((y[i] >= 0xF900) && (y[i] <= 0xFAFF))
+                {
+                    richTextBox1.Text += "_F\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+                if ((y[i] >= 0xFB00) && (y[i] <= 0xFFFD))
+                {
+                    richTextBox1.Text += "_X\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
 
-/*
-A   2E80～33FFh：中日韓符號區。收容康熙字典部首、中日韓輔助部首、注音符號、日本假名、韓文音符，中日韓的符號、標點、帶圈或帶括符文數字、月份，以及日本的假名組合、單位、年號、月份、日期、時間等。
-B   3400～4DFFh：中日韓認同表意文字擴充A區，總計收容6,582個中日韓漢字。
-C   4E00～9FFFh：中日韓認同表意文字區，總計收容20,902個中日韓漢字。
-D   A000～A4FFh：彝族文字區，收容中國南方彝族文字和字根。
-E   AC00～D7FFh：韓文拼音組合字區，收容以韓文音符拼成的文字。
-F   F900～FAFFh：中日韓兼容表意文字區，總計收容302個中日韓漢字。
-X   FB00～FFFDh：文字表現形式區，收容組合拉丁文字、希伯來文、阿拉伯文、中日韓直式標點、小符號、半角符號、全角符號等。
-*/
+                /*
+                A   2E80～33FFh：中日韓符號區。收容康熙字典部首、中日韓輔助部首、注音符號、日本假名、韓文音符，中日韓的符號、標點、帶圈或帶括符文數字、月份，以及日本的假名組合、單位、年號、月份、日期、時間等。
+                B   3400～4DFFh：中日韓認同表意文字擴充A區，總計收容6,582個中日韓漢字。
+                C   4E00～9FFFh：中日韓認同表意文字區，總計收容20,902個中日韓漢字。
+                D   A000～A4FFh：彝族文字區，收容中國南方彝族文字和字根。
+                E   AC00～D7FFh：韓文拼音組合字區，收容以韓文音符拼成的文字。
+                F   F900～FAFFh：中日韓兼容表意文字區，總計收容302個中日韓漢字。
+                X   FB00～FFFDh：文字表現形式區，收容組合拉丁文字、希伯來文、阿拉伯文、中日韓直式標點、小符號、半角符號、全角符號等。
+                */
 
             }
 
@@ -320,9 +349,32 @@ X   FB00～FFFDh：文字表現形式區，收容組合拉丁文字、希伯來�
                 //j++;
             }
         }
+
+        //統計每個單詞在文章中出現的次數
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //將單詞轉換為數組
+            string[] allWords = text.Split(new char[] { '.', '?', '!', ' ', ';', ':', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] distinctWords = allWords.Distinct().ToArray<string>(); //去掉單詞數組中重複的單詞
+            int[] counts = new int[distinctWords.Length];//創建一個存放詞頻統計信息的數組
+            for (int i = 0; i < distinctWords.Length; i++)//遍歷每個單詞
+            {
+                string tempWord = distinctWords[i];
+                //計算每個單詞出現的次數
+                var query = from item in allWords
+                            where item.ToLower() == tempWord.ToLower()
+                            select item;
+                counts[i] = query.Count();
+            }
+
+            //輸出詞頻統計結果
+            for (int i = 0; i < counts.Count(); i++)
+            {
+                richTextBox1.Text += distinctWords[i] + " 出現 " + counts[i].ToString() + " 次\n";
+            }
+        }
     }
 }
-
 
 
 

@@ -134,9 +134,9 @@ namespace vcs_Draw3D
             pictureBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
-            candidateText1.Location = new Point(x_st + dx * 4+20, y_st + dy * 1 - 70);
-            candidateText2.Location = new Point(x_st + dx * 4+100, y_st + dy * 1 - 70);
-            candidateText3.Location = new Point(x_st + dx * 4+180, y_st + dy * 1 - 70);
+            candidateText1.Location = new Point(x_st + dx * 4 + 20, y_st + dy * 1 - 70);
+            candidateText2.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 1 - 70);
+            candidateText3.Location = new Point(x_st + dx * 4 + 180, y_st + dy * 1 - 70);
 
             pictureBox5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -275,16 +275,12 @@ namespace vcs_Draw3D
         {
         }
 
+        int angle = 0;
         private void timer3_Tick(object sender, EventArgs e)
         {
-            Brush b;
-            b = new SolidBrush(Color.Red);
-
-            Pen p = new Pen(Color.Red, 5);
-
-            g3.DrawRectangle(p, 50, 50, 50, 50);
-
-
+            //製作任意顏色
+            g3.DrawArc(new Pen(Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256))), 10, 10, W - 20, H - 20, angle, angle + 5);  //r.Next(0, 256) 產出0~255之間的整數
+            angle += 5;
         }
 
         //投票比例繪圖程式 ST

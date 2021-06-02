@@ -2051,7 +2051,7 @@ namespace vcs_Draw3A
             for (i = 0; i < h; i++)
             {
                 //製作任意顏色
-                e.Graphics.DrawLine(new Pen(Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255))), 0, i, w, i);
+                e.Graphics.DrawLine(new Pen(Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256))), 0, i, w, i);   //r.Next(0, 256) 產出0~255之間的整數
             }
         }
     }

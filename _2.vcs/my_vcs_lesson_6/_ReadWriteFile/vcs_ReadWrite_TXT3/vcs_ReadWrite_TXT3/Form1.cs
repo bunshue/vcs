@@ -6,10 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.VisualBasic.FileIO;
 using System.IO;
 
-namespace MultiFormatTxt
+namespace vcs_ReadWrite_TXT3
 {
     public partial class Form1 : Form
     {
@@ -57,7 +58,7 @@ namespace MultiFormatTxt
 
         private void btnParseTextFiles_Click(object sender, EventArgs e)
         {
-            using (TextFieldParser myReader = new TextFieldParser("test.txt"))
+            using (TextFieldParser myReader = new TextFieldParser("../../test.txt"))
             {
                 // 定义三种格式之各栏的宽度与分隔字符。
                 int[] FirstFormat = { 5, 10, -1 };

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("WordTime")]
+[assembly: AssemblyTitle("vcs_ReadWrite_TXT3")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WordTime")]
-[assembly: AssemblyCopyright("Copyright ©  2010")]
+[assembly: AssemblyCompany("vcs")]
+[assembly: AssemblyProduct("vcs_ReadWrite_TXT3")]
+[assembly: AssemblyCopyright("vcs")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("6d533a2f-cc3a-42ab-93c4-0dfa0e87a3eb")]
+[assembly: Guid("9424091f-e083-471b-8389-59fceda6967d")]
 
 // 程序集的版本信息由下面四个值组成:
 //
