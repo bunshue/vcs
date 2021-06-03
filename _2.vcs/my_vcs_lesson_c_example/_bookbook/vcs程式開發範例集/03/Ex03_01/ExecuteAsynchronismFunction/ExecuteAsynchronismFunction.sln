@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExecuteAsynchronismFunction", "ExecuteAsynchronismFunction\ExecuteAsynchronismFunction.csproj", "{3AE444E5-D2BF-457D-88A9-7483CE7EE25E}"
 EndProject
 Global

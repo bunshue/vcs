@@ -15,11 +15,13 @@ namespace vcs_Draw_Drag
 {
     public partial class Form1 : Form
     {
+        private const int N = 6;   //total_points
+
         int pt_selected = -1;  // 動態陣列 的 第幾個 被選到
         bool flag_dragging = false; // 是否拖拉中
         Pen p1 = new Pen(Color.Green, 1);
         Pen p2 = new Pen(Color.Blue, 1);
-        Point[] pts = new Point[4];
+        Point[] pts = new Point[N];
         int Epsilon = 100; // 滑鼠 是否 點選到點 的距離 判斷 (避免 開根號)
 
         public Form1()
@@ -29,16 +31,20 @@ namespace vcs_Draw_Drag
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            int x_st = 50;
-            int y_st = 50;
-            int w = 300;
-            int h = 300;
+            int w = 400;
+            int h = 400;
 
-            pts[0] = new Point(x_st, y_st);
-            pts[1] = new Point(x_st + w, y_st);
-            pts[2] = new Point(x_st + w, y_st + h);
-            pts[3] = new Point(x_st, y_st + h);
+            int angle = 360 / N;
+            int r = Math.Min(w, h) * 2 / 5;
 
+            int i;
+            int x = 0;
+            int y = 0;
+
+            for (i = 0; i < N; i++)
+            {
+                pts[i] = new Point(w / 2 + (int)(r * Math.Cos(Math.PI * angle * i / 180)), h / 2 + (int)(r * Math.Sin(Math.PI * angle * i / 180)));
+            }
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -52,7 +58,7 @@ namespace vcs_Draw_Drag
             else
                 e.Graphics.DrawPolygon(p2, pts);
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < N; i++)
             {
                 FillCircle(e.Graphics, pts[i], radius, Color.Red);
             }
@@ -128,3 +134,4 @@ namespace vcs_Draw_Drag
         }
     }
 }
+

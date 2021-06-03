@@ -81,7 +81,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(79, 28);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 4;
             this.textBox1.Text = "0001";
             // 
@@ -89,7 +89,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(249, 28);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 5;
             this.textBox2.Text = "劉某";
             // 
@@ -97,7 +97,7 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(78, 63);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
+            this.textBox3.Size = new System.Drawing.Size(100, 22);
             this.textBox3.TabIndex = 6;
             this.textBox3.Text = "1981-12-24";
             // 
@@ -105,7 +105,7 @@
             // 
             this.textBox4.Location = new System.Drawing.Point(249, 63);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 21);
+            this.textBox4.Size = new System.Drawing.Size(100, 22);
             this.textBox4.TabIndex = 7;
             this.textBox4.Text = "經理";
             // 
@@ -140,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 147);
+            this.ClientSize = new System.Drawing.Size(495, 589);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";

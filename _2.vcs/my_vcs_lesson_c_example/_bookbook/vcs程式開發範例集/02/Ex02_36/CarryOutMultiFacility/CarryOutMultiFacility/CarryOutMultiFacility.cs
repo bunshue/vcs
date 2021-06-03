@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;//引用與數據庫操作有關的命名空間
 
 namespace CarryOutMultiFacility

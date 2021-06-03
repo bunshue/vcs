@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmoothProgressBar", "SmoothProgressBar\SmoothProgressBar.csproj", "{9513E3F1-CC7A-4B1A-8A0E-1033C727E807}"
 EndProject
 Global

@@ -5,8 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.DirectoryServices;
-using System.Data.SqlClient;
 
 namespace AuthenticateTextBoxInput
 {
@@ -15,6 +13,10 @@ namespace AuthenticateTextBoxInput
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
         }
 
         private void btnConcel_Click(object sender, EventArgs e)
@@ -53,14 +55,13 @@ namespace AuthenticateTextBoxInput
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (strB != null && strA != null)
-            { MessageBox.Show("登錄成功"); }
-            else { MessageBox.Show("輸入用戶名和密碼"); }
+            {
+                MessageBox.Show("登錄成功");
+            }
+            else
+            {
+                MessageBox.Show("輸入用戶名和密碼");
+            }
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }//
-
     }
 }
