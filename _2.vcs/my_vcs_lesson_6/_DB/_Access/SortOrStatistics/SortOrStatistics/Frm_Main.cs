@@ -26,8 +26,8 @@ namespace SortOrStatistics
             try
             {
                 //创建数据库连接字符串
-                //string P_Connection = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..//..//fruit.mdb;User Id=Admin"); //sugar
-                string P_Connection = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..//..//fruit.mdb;User Id=Admin");   //kilo
+                string P_Connection = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..//..//fruit.mdb;User Id=Admin"); //sugar
+                //string P_Connection = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..//..//fruit.mdb;User Id=Admin");   //kilo
                 //创建连接对象
                 OleDbConnection P_OLEDBConnection = new OleDbConnection(P_Connection);
                 //连接到数据库

@@ -61,9 +61,12 @@ namespace AccessGuideExcel
             DataTable tem_DataTable = tem_OleConn.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
             tem_OleConn.Close();
             ComBox.Items.Clear();
+
+            richTextBox1.Text += "Access資料庫的表名 個數" + tem_DataTable.Rows.Count.ToString() + "\n";
             for (int i = 0; i < tem_DataTable.Rows.Count; i++)
             {
                 ComBox.Items.Add(tem_DataTable.Rows[i][2]);
+                richTextBox1.Text += "加入 Access資料庫的表名 : " + tem_DataTable.Rows[i][2] + "\n";
             }
             if (ComBox.Items.Count > 0)
             {

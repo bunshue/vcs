@@ -24,18 +24,32 @@ namespace DateToTreeView
         private void Form1_Load(object sender,EventArgs e)
         {
             //创建数据库连接字符串
-            //string P_Connection = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..//..//test.mdb;User Id=Admin");    //sugar
-            string P_Connection = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..//..//test.mdb;User Id=Admin");    //kilo
+            string P_Connection = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..//..//test.mdb;User Id=Admin");    //sugar
+            //string P_Connection = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..//..//test.mdb;User Id=Admin");    //kilo
             OleDbDataAdapter P_OLeDbDataAdapter = new OleDbDataAdapter("select au_id as 用户编号,au_lname as 用户名,phone as 联系电话  from authors", P_Connection);
             DataSet ds = new DataSet();
             P_OLeDbDataAdapter.Fill(ds,"UserInfo");
             dataGridView1.DataSource = ds.Tables["UserInfo"].DefaultView;   //將所有資料都匯出到dataGridView上
 
-            //顯示資料庫的內容 ST
+            show_dataset_content(ds);   //顯示資料庫的內容
+
+            TreeNode treeNode = new TreeNode("用户信息",0,0);
+            treeView1.Nodes.Add(treeNode);
+            //默认情况下追加节点
+            追加节点ToolStripMenuItem.Checked = true;
+        }
+
+        //顯示資料庫的內容 ST
+        void show_dataset_content(DataSet ds)
+        {
             richTextBox1.Text += "顯示資料庫的內容\n";
+
+            richTextBox1.Text += "Tables.Count = " + ds.Tables.Count.ToString() + "\n";
             richTextBox1.Text += "Columns = " + ds.Tables[0].Columns.Count.ToString() + "\n";
             richTextBox1.Text += "Rows = " + ds.Tables[0].Rows.Count.ToString() + "\n";
-            richTextBox1.Text += "TableName = " + ds.Tables[0].TableName + "\n";
+            richTextBox1.Text += "TableName = " + ds.Tables[0].TableName + "\n\n";
+
+            richTextBox1.Text += "標題\n";
             int i;
             int j;
             int C = ds.Tables[0].Columns.Count;
@@ -44,8 +58,9 @@ namespace DateToTreeView
             {
                 richTextBox1.Text += ds.Tables[0].Columns[i] + "\t";
             }
-            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n\n";
 
+            richTextBox1.Text += "內容\n";
             for (j = 0; j < R; j++)
             {
                 for (i = 0; i < C; i++)
@@ -55,15 +70,8 @@ namespace DateToTreeView
                 richTextBox1.Text += "\n";
             }
             richTextBox1.Text += "\n";
-            //顯示資料庫的內容 SP
-
-
-
-            TreeNode treeNode = new TreeNode("用户信息",0,0);
-            treeView1.Nodes.Add(treeNode);
-            //默认情况下追加节点
-            追加节点ToolStripMenuItem.Checked = true;
         }
+        //顯示資料庫的內容 SP
 
         //DataGridView的按下鼠标事件
         private void dataGridView1_MouseDown(object sender,MouseEventArgs e)
