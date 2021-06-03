@@ -25,6 +25,7 @@ namespace ShowDiskSizeByPic
             foreach (ManagementObject disk in searcher.Get())//遍历所有磁盘
             {
                 comboBox1.Items.Add(disk["Name"].ToString());//将磁盘名称添加到下拉列表中
+                richTextBox1.Text += "抓到硬碟 : " + disk["Name"].ToString() + "\n";
             }
         }
 

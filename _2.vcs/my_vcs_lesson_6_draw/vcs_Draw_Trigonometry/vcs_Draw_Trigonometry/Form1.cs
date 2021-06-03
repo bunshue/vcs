@@ -47,6 +47,9 @@ namespace vcs_Draw_Trigonometry
             angle = 120;
             pts[1] = new Point(w / 2 + (int)(r * Math.Cos(Math.PI * angle / 180)), h / 2 + (int)(r * Math.Sin(Math.PI * angle / 180)));
 
+
+            pts[0] = new Point(500, 100);
+            pts[1] = new Point(100, 500);
             pts[2] = new Point(pts[0].X, pts[1].Y);
         }
 
@@ -55,6 +58,7 @@ namespace vcs_Draw_Trigonometry
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             int radius = 10;
+            int W = 600;
             int H = 600;
 
             if (flag_dragging_x == true)
@@ -99,6 +103,9 @@ namespace vcs_Draw_Trigonometry
             e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12, x_st + 140 + 60, y_st + 12);
             e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 1, x_st + 140 + 60, y_st + 12 + dy * 1);
             e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 2, x_st + 140 + 60, y_st + 12 + dy * 2);
+
+            e.Graphics.DrawLine(new Pen(Color.Black, 6), 3, 0, 3, H);
+            e.Graphics.DrawLine(new Pen(Color.Black, 6), 3, H - 4, W, H - 4);
 
 
             e.Graphics.DrawString("對邊", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20));
