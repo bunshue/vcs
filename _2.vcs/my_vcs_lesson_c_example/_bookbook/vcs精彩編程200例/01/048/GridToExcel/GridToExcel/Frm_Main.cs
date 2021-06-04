@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Threading;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -31,8 +32,8 @@ namespace GridToExcel
 
 
         private Excel.Application G_ea;//定义Word应用程序字段
-        private object G_missing = //定义G_missing字段并添加引用
-            System.Reflection.Missing.Value;
+        //定义G_missing字段并添加引用
+        private object G_missing = System.Reflection.Missing.Value;
 
         private void btn_OutPut_Click(object sender, EventArgs e)
         {
@@ -45,8 +46,9 @@ namespace GridToExcel
                     Price = Convert.ToSingle(dgvr.Cells[1].Value.ToString())
                 });
             }
-            SaveFileDialog P_SaveFileDialog =//创建保存文件对话框对象
-                new SaveFileDialog();
+
+            //创建保存文件对话框对象
+            SaveFileDialog P_SaveFileDialog = new SaveFileDialog();
             P_SaveFileDialog.Filter = "*.xls|*.xls";
             if (DialogResult.OK ==//确认是否保存文件
                 P_SaveFileDialog.ShowDialog())
@@ -73,11 +75,10 @@ namespace GridToExcel
                     this.Invoke(//调用窗体线程
                         (MethodInvoker)(() =>//使用lambda表达式
                         {
-                            MessageBox.Show(//弹出消息对话框
-                                "成功创建Excel文档！", "提示！");
+                            MessageBox.Show("成功创建Excel文档！", "提示！");
                         }));
                 });
             }
         }
     }
-}
+    ]

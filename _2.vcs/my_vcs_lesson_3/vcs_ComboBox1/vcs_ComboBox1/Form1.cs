@@ -80,6 +80,35 @@ namespace vcs_ComboBox1
             G_ImageList.Images.Add(Properties.Resources.c);//添加图片
             G_ImageList.Images.Add(Properties.Resources.d);//添加图片
 
+            comboBox3.Items.Clear();
+            comboBox3.Items.Add("Arial");
+            comboBox3.Items.Add("Arial Black");
+            comboBox3.Items.Add("Arial Narrow");
+            comboBox3.Items.Add("Arial Rounded MT Bold");
+            comboBox3.Items.Add("Arial Unicode MS");
+            comboBox3.Items.Add("Bahnschrift");
+            comboBox3.Items.Add("Bahnschrift Condensed");
+            comboBox3.Items.Add("Bahnschrift Light");
+            comboBox3.Items.Add("Bahnschrift Light Condensed");
+            comboBox3.Items.Add("Bahnschrift Light SemiCondensed");
+            comboBox3.Items.Add("Bahnschrift SemiBold");
+            comboBox3.Items.Add("Bahnschrift SemiBold Condensed");
+            comboBox3.Items.Add("Bahnschrift SemiBold SemiConden");
+            comboBox3.Items.Add("Bahnschrift SemiCondensed");
+            comboBox3.Items.Add("Segoe UI");
+            comboBox3.Items.Add("Segoe UI Black");
+            comboBox3.Items.Add("Segoe UI Emoji");
+            comboBox3.Items.Add("Segoe UI Historic");
+            comboBox3.Items.Add("Segoe UI Light");
+            comboBox3.Items.Add("Segoe UI Semibold");
+            comboBox3.Items.Add("Segoe UI Semilight");
+            comboBox3.Items.Add("Segoe UI Symbol");
+            comboBox3.Items.Add("新細明體");
+            comboBox3.Items.Add("新細明體-ExtB");
+            comboBox3.Items.Add("細明體");
+            comboBox3.Items.Add("細明體-ExtB");
+            comboBox3.Items.Add("細明體_HKSCS");
+            comboBox3.Items.Add("細明體_HKSCS-ExtB");
         }
 
         private void comboBox2_DrawItem(object sender, DrawItemEventArgs e)
@@ -113,6 +142,14 @@ namespace vcs_ComboBox1
                 }
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //設置自動完成的模式
+            comboBox3.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //設置自動完成字串的來源
+            comboBox3.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
     }
 }

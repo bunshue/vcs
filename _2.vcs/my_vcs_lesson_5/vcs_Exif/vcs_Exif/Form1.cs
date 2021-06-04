@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;   //for PropertyItem
+
+using System.IO;    //for FileStream
 //方案總管/加入/現有項目/選取ExifStuff.cs, 把 namespace 改成 vcs_Exif
 
 namespace vcs_Exif
@@ -63,5 +66,46 @@ namespace vcs_Exif
         {
             richTextBox1.Clear();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string filename = "C:\\______test_files\\vcs_reference2\\_icon\\IMG_20180228_215525.jpg";
+
+            richTextBox1.Text += "相片檔案:\t" + filename + "\n";
+
+            PropertyItem[] pi;
+            pi = GetExif(filename);
+            string TakePicDateTime = GetDateTime(pi);
+
+            richTextBox1.Text += "取得相片拍攝時間:\t" + TakePicDateTime + "\n";
+        }
+
+        #region 获取数码相片的拍摄日期
+        //获取图像文件的所有元数据属性，保存倒PropertyItem数组
+        public static PropertyItem[] GetExif(string fileName)
+        {
+            FileStream Mystream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            //通过指定的数据流来创建Image
+            Image image = Image.FromStream(Mystream, true, false);
+            return image.PropertyItems;
+        }
+
+        //遍历所有元数据，获取拍照日期/时间
+        private string GetDateTime(System.Drawing.Imaging.PropertyItem[] parr)
+        {
+            Encoding ascii = Encoding.ASCII;
+            //遍历图像文件元数据，检索所有属性
+            foreach (PropertyItem pp in parr)
+            {
+                //如果是PropertyTagDateTime，则返回该属性所对应的值
+                if (pp.Id == 0x0132)
+                {
+                    return ascii.GetString(pp.Value);
+                }
+            }
+            //若没有相关的EXIF信息则返回N/A
+            return "N/A";
+        }
+        #endregion
     }
 }

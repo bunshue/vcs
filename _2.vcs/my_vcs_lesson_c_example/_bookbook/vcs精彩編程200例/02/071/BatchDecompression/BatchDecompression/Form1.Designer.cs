@@ -78,7 +78,7 @@
             this.txtfiles.Location = new System.Drawing.Point(116, 25);
             this.txtfiles.Name = "txtfiles";
             this.txtfiles.ReadOnly = true;
-            this.txtfiles.Size = new System.Drawing.Size(260, 21);
+            this.txtfiles.Size = new System.Drawing.Size(260, 22);
             this.txtfiles.TabIndex = 1;
             // 
             // label1
@@ -134,7 +134,7 @@
             this.txtfiles2.Location = new System.Drawing.Point(128, 24);
             this.txtfiles2.Name = "txtfiles2";
             this.txtfiles2.ReadOnly = true;
-            this.txtfiles2.Size = new System.Drawing.Size(248, 21);
+            this.txtfiles2.Size = new System.Drawing.Size(248, 22);
             this.txtfiles2.TabIndex = 1;
             // 
             // label2
@@ -168,9 +168,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 200);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 405);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(456, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(534, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -195,7 +195,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 222);
+            this.ClientSize = new System.Drawing.Size(534, 427);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox2);

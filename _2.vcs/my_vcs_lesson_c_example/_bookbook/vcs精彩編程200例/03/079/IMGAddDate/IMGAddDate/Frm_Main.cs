@@ -6,9 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Drawing.Imaging;
 using System.Threading;
+
 namespace IMGAddDate
 {
     public partial class Frm_Main : Form
@@ -26,6 +28,15 @@ namespace IMGAddDate
         Bitmap Pic;
         Graphics g;
         Thread td;
+
+
+        //字串陣列的寫法(一維)：
+        string[] pic_array = { 
+            @"C:\______test_files\p3.jpg", 
+            @"C:\______test_files\p3.jpg", 
+            @"C:\______test_files\p3.jpg", 
+                             };
+
         private void button5_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -33,19 +44,19 @@ namespace IMGAddDate
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string[] IMG;
+            //string[] IMG;
             listBox1.Items.Clear();
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                IMG = openFileDialog1.FileNames;
-                if (IMG.Length > 0)
+                //IMG = openFileDialog1.FileNames;
+                //if (IMG.Length > 0)
                 {
-                    for (int i = 0; i < IMG.Length; i++)
+                    for (int i = 0; i < pic_array.Length; i++)
                     {
-                        listBox1.Items.Add(IMG[i]);
+                        listBox1.Items.Add(pic_array[i]);
                     }
                 }
-                flag = IMG.Length.ToString();
+                flag = pic_array.Length.ToString();
             }
         }
 
@@ -59,7 +70,7 @@ namespace IMGAddDate
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                txtSavePath.Text = folderBrowserDialog1.SelectedPath;
+                txtSavePath.Text = Application.StartupPath;
             }
         }
 
@@ -90,6 +101,7 @@ namespace IMGAddDate
                 pi = GetExif(listBox1.Items[i].ToString());
                 //获取元数据中的拍照日期时间，以字符串形式保存
                 TakePicDateTime = GetDateTime(pi);
+                richTextBox1.Text += " 1get time = " + TakePicDateTime + "\n";
                 //分析字符串分别保存拍照日期和时间的标准格式
                 SpaceLocation = TakePicDateTime.IndexOf(" ");
                 pdt = TakePicDateTime.Substring(0, SpaceLocation);
@@ -101,8 +113,9 @@ namespace IMGAddDate
                 //由位图对象创建Graphics对象的实例
                 g = Graphics.FromImage(Pic);
                 //绘制数码照片的日期/时间
-                g.DrawString(TakePicDateTime, normalContentFont, new SolidBrush(normalContentColor),
-            Pic.Width - 700, Pic.Height - 200);
+                richTextBox1.Text += " 2get time = " + TakePicDateTime + "\n";
+                //g.DrawString(TakePicDateTime, normalContentFont, new SolidBrush(normalContentColor), Pic.Width - 700, Pic.Height - 200);
+                g.DrawString("ABCDEFGHIJKLMN", normalContentFont, new SolidBrush(normalContentColor), 10, Pic.Height - 50);
                 //将添加日期/时间戳后的图像进行保存
                 if (txtSavePath.Text.Length == 3)
                 {
@@ -152,11 +165,11 @@ namespace IMGAddDate
             //若没有相关的EXIF信息则返回N/A
             return "N/A";
         }
-
         #endregion
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            txtSavePath.Text = Application.StartupPath;
             CheckForIllegalCrossThreadCalls = false;
         }
 
