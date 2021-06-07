@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Data.SqlClient;
 using System.Collections;
+
 namespace CAnalyseGoodsScale
 {
     public partial class Frm_Main : Form
@@ -18,10 +19,12 @@ namespace CAnalyseGoodsScale
         SqlConnection con;
         SqlCommand cmd;
         Hashtable ht = new Hashtable();
+
         public Frm_Main()
         {
             InitializeComponent();
         }
+
         private void Conn()
         {
             con = new SqlConnection("server=USER-20170504OU;uid=sa;pwd=;database=db_TomeOne");
@@ -41,6 +44,7 @@ namespace CAnalyseGoodsScale
             }
             TimeNum += f * 360;
         }
+
         private void Form1_Paint(object sender, PaintEventArgs e)			//在Paint事件中绘制窗体
         {
             ht.Clear();

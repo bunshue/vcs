@@ -38,7 +38,6 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.SelectFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label2 = new System.Windows.Forms.Label();
@@ -121,17 +120,6 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button7
-            // 
-            this.button7.CausesValidation = false;
-            this.button7.Location = new System.Drawing.Point(565, 272);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(138, 40);
-            this.button7.TabIndex = 13;
-            this.button7.Text = "TestNetworkConnection";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // SelectFile
             // 
             this.SelectFile.Image = global::my_vcs_02.Properties.Resources._1431440286_folder_open;
@@ -205,7 +193,6 @@
             this.Controls.Add(this.button8);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.SelectFile);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox3);
@@ -233,7 +220,6 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button SelectFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label2;

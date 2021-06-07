@@ -25,6 +25,7 @@ namespace AnalyseLottery
 
         private void Conn()
         {
+            richTextBox1.Text += "Conn\n";
             con = new SqlConnection("server=USER-20170504OU;uid=sa;pwd=;database=db_TomeOne");
             con.Open();
         }

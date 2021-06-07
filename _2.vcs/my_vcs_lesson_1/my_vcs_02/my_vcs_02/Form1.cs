@@ -66,23 +66,6 @@ namespace my_vcs_02
             }
         }
 
-        [DllImport("wininet.dll", EntryPoint = "InternetGetConnectedState")]
-        public extern static bool InternetGetConnectedState(out int conState, int reder);
-        //參數說明 constate 連接說明 ，reder保留值
-        public bool IsConnectedToInternet()
-        {
-            int Desc = 0;
-            return InternetGetConnectedState(out  Desc, 0);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            if (IsConnectedToInternet())
-                richTextBox1.Text += "已連接在網上" + "\n";
-            else
-                richTextBox1.Text += "未連接在網上" + "\n";
-        }
-
         private void SelectFile_Click(object sender, EventArgs e)
         {
             if(openFileDialog1.ShowDialog() == DialogResult.OK)

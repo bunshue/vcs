@@ -202,22 +202,8 @@ namespace vcs_test_all_03
 
         }
 
-        [DllImport("wininet.dll", EntryPoint = "InternetGetConnectedState")]
-        public extern static bool InternetGetConnectedState(out int conState, int reder);
-        //參數說明 constate 連接說明 ，reder保留值
-        public bool IsConnectedToInternet()
-        {
-            int Desc = 0;
-            return InternetGetConnectedState(out  Desc, 0);
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
-            //監測目前網絡連接狀態
-            if (IsConnectedToInternet())
-                MessageBox.Show("已連接在網上!", "提示");
-            else
-                MessageBox.Show("未連接在網上!!", "提示");
 
         }
 
@@ -635,7 +621,7 @@ namespace vcs_test_all_03
             richTextBox1.Text += "設定新的系統目前目錄\n";
             System.Environment.CurrentDirectory = foldername;
             richTextBox1.Text += "取得系統目前目錄 : " + System.Environment.CurrentDirectory + "\n";
-
         }
     }
 }
+

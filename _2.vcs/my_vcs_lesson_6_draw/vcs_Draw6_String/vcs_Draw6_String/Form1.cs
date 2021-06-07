@@ -316,7 +316,7 @@ namespace vcs_Draw6_String
         private void button6_Click(object sender, EventArgs e)
         {
             //印版效果的文字
-            Graphics g = pictureBox1.CreateGraphics();//創健控件的Graphics類
+            Graphics g = pictureBox1.CreateGraphics();//創建控件的Graphics類
             g.Clear(Color.White);//以指定的顏色清除控件背景
             Brush Var_Brush_Back = Brushes.Black;//設置前景色
             Brush Var_Brush_Fore = Brushes.Aquamarine;//設置背景色
