@@ -63,7 +63,7 @@ namespace HideToolBar
             // 
             this.Tip.AutoSize = true;
             this.Tip.BackColor = System.Drawing.Color.Transparent;
-            this.Tip.Font = new System.Drawing.Font("mingliu", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Tip.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Tip.Location = new System.Drawing.Point(37, 252);
             this.Tip.Name = "Tip";
             this.Tip.Size = new System.Drawing.Size(152, 16);
@@ -84,7 +84,7 @@ namespace HideToolBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(222, 566);
+            this.ClientSize = new System.Drawing.Size(542, 566);
             this.Controls.Add(this.Tip);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);

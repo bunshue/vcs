@@ -19,6 +19,14 @@ namespace vcs_StatusStrip
         private void timer1_Tick(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = DateTime.Now.ToString();
+            //statusStrip1.Items[0].Text = "日期:" + DateTime.Now.ToString();   //same
+
+
+            while (toolStripProgressBar1.Value < toolStripProgressBar1.Maximum)
+            {
+                this.toolStripProgressBar1.PerformStep();
+            }
+
         }
     }
 }

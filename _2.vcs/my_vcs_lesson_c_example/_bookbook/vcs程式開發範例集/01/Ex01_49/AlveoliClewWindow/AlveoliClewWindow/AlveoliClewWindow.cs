@@ -30,6 +30,9 @@ namespace AlveoliClewWindow
         private void notifyIcon1_MouseMove(object sender,MouseEventArgs e)
         {
             this.notifyIcon1.ShowBalloonTip(1000,"当前时间：",DateTime.Now.ToLocalTime().ToString(),ToolTipIcon.Info);
+
+
+            richTextBox1.Text += "A ";
         }
     }
 }
