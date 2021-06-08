@@ -81,6 +81,65 @@ namespace vcs_Draw2
             int dx;
             int dy;
 
+            int width = 600;
+            int height = 600;
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
+
+            pictureBox_pen.Size = new Size(width / 2, height/2);
+            pictureBox_pen.Location = new Point(900, 0);
+
+            this.pictureBox_pen.Controls.Add(groupBox2);
+            this.pictureBox_pen.Controls.Add(groupBox3);
+            this.pictureBox_pen.Controls.Add(groupBox4);
+            this.pictureBox_pen.Controls.Add(groupBox5);
+            groupBox2.BringToFront();
+            groupBox3.BringToFront();
+            groupBox4.BringToFront();
+            groupBox5.BringToFront();
+
+            int W;
+            int H;
+            int w;
+            int h;
+
+            //上
+            W = pictureBox_pen.Size.Width;
+            H = pictureBox_pen.Size.Height;
+            w = groupBox5.Size.Width;
+            h = groupBox5.Size.Height;
+            x_st = (W - w) / 2;
+            y_st = 10;
+            groupBox5.Location = new Point(x_st, y_st);
+
+            //下
+            W = pictureBox_pen.Size.Width;
+            H = pictureBox_pen.Size.Height;
+            w = groupBox3.Size.Width;
+            h = groupBox3.Size.Height;
+            x_st = (W - w) / 2;
+            y_st = H - h - 10;
+            groupBox3.Location = new Point(x_st, y_st);
+
+            //左
+            W = pictureBox_pen.Size.Width;
+            H = pictureBox_pen.Size.Height;
+            w = groupBox2.Size.Width;
+            h = groupBox2.Size.Height;
+            x_st = 10;
+            y_st = (H - h) / 2;
+            groupBox2.Location = new Point(x_st, y_st);
+
+            //右
+            W = pictureBox_pen.Size.Width;
+            H = pictureBox_pen.Size.Height;
+            w = groupBox4.Size.Width;
+            h = groupBox4.Size.Height;
+            x_st = W - w - 10;
+            y_st = (H - h) / 2;
+            groupBox4.Location = new Point(x_st, y_st);
+
             //button
             x_st = 1300;
             y_st = 10;
@@ -1858,7 +1917,6 @@ namespace vcs_Draw2
             return;
         }
 
-
         private void DrawGrid()
         {
             int i;
@@ -1883,8 +1941,6 @@ namespace vcs_Draw2
             TextureBrush Mybrush = new TextureBrush(bmp);  // 使用的影像
             g.FillEllipse(Mybrush, 20, 20, 400, 200); //塗刷填滿橢圓形區域
             g.DrawEllipse(Pens.Black, 20, 20, 400, 200);  //畫出橢圓形外框
-
-
         }
 
         private void button31_Click(object sender, EventArgs e)
@@ -1898,6 +1954,54 @@ namespace vcs_Draw2
             TextureBrush Mybrush = new TextureBrush(bmp, rect);  // 使用的影像
             g.FillEllipse(Mybrush, 20, 20, 400, 200); //塗刷填滿橢圓形區域
             g.DrawEllipse(Pens.Black, 20, 20, 400, 200);  //畫出橢圓形外框
+        }
+
+        //畫筆的設定
+        Pen pen = new Pen(Color.Red, 1);
+        private void radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked == false)
+                return;
+
+            // 顏色選項
+            if (radioButton == rb_color1)
+                pen.Color = Color.Red;
+            else if (radioButton == rb_color2)
+                pen.Color = Color.Green;
+            else if (radioButton == rb_color3)
+                pen.Color = Color.Blue;
+
+            // 粗細選項
+            else if (radioButton == rb_width1)
+                pen.Width = 1;
+            else if (radioButton == rb_width2)
+                pen.Width = 5;
+            else if (radioButton == rb_width3)
+                pen.Width = 10;
+
+            // 樣式選項
+            else if (radioButton == rb_style1)
+                pen.DashStyle = DashStyle.Solid; //實線
+            else if (radioButton == rb_style2)
+                pen.DashStyle = DashStyle.Dash; //虛線
+            else if (radioButton == rb_style3)
+                pen.DashStyle = DashStyle.Dot; //點線
+
+            // 端點樣式選項
+            else if (radioButton == rb_cap1)
+                pen.EndCap = LineCap.Flat; // 扁平線條端點
+            else if (radioButton == rb_cap2)
+                pen.EndCap = LineCap.RoundAnchor; //圓形錨點端點
+            else if (radioButton == rb_cap3)
+                pen.EndCap = LineCap.SquareAnchor; //方形錨點線條端點
+
+            this.pictureBox_pen.Invalidate();
+        }
+
+        private void pictureBox_pen_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawLine(pen, 20, 20, this.pictureBox_pen.ClientSize.Width - 20, this.pictureBox_pen.ClientSize.Height - 20);
         }
     }
 }

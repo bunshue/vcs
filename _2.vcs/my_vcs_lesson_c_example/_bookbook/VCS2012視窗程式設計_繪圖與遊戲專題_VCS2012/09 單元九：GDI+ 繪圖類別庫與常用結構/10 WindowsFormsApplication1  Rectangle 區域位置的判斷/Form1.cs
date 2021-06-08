@@ -29,10 +29,16 @@ namespace WindowsFormsApplication1
             bool RectinRect = rect.Contains(rectMouse); // 矩形區域在矩形區域
             bool intersect = rect.IntersectsWith(rectMouse); // 矩形區域和矩形區域有交集
 
-            if (pointInRect) this.Cursor = Cursors.Cross; // 改變游標形狀
-            else this.Cursor = Cursors.Default;
+            if (pointInRect == true)
+            {
+                this.Cursor = Cursors.Cross; // 改變游標形狀
+            }
+            else
+            {
+                this.Cursor = Cursors.Default;
+            }
 
-            if (RectinRect)
+            if (RectinRect==true)
             {
                 e.Graphics.FillRectangle(Brushes.DarkGreen, rectMouse); //深綠色矩形區塊
                 label2.Text = "深綠色矩形區塊";
@@ -43,7 +49,7 @@ namespace WindowsFormsApplication1
                 label2.Text = "紅色矩形區塊";
             }
 
-            if (intersect)
+            if (intersect==true)
             {
                 e.Graphics.DrawRectangle(pen, rect); //綠色矩形區塊 加外框
                 label1.Text = "有交集";

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;    //for FileInfo DirectoryInfo
 using System.Diagnostics;
 using System.Globalization; //for CultureInfo
@@ -1168,18 +1169,22 @@ namespace vcs_DrAP
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
         const int MB = 1024 * 1024;//定義MB的計算常量
         const int KB = 1024;//定義KB的計算常量
-        public string ByteConversionGBMBKB(Int64 KSize)
+        public string ByteConversionGBMBKB(Int64 size)
         {
-            if (KSize / TB >= 1)//如果目前Byte的值大於等於1TB
-                return (Math.Round(KSize / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
-            else if (KSize / GB >= 1)//如果目前Byte的值大於等於1GB
-                return (Math.Round(KSize / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
-            else if (KSize / MB >= 1)//如果目前Byte的值大於等於1MB
-                return (Math.Round(KSize / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
-            else if (KSize / KB >= 1)//如果目前Byte的值大於等於1KB
-                return (Math.Round(KSize / (float)KB, 2)).ToString() + " KB";//將其轉換成KGB
+            if (size < 0)
+                return "不合法的數值";
+            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
+                return "無法表示";
+            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
+                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
+            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
+                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
+            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
+                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
+            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
+                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KGB
             else
-                return KSize.ToString() + " Byte";//顯示Byte值
+                return size.ToString() + " Byte";//顯示Byte值
         }
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -2628,3 +2633,4 @@ namespace vcs_DrAP
         }
     }
 }
+
