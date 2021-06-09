@@ -95,8 +95,9 @@
             // 
             this.textBox5.Location = new System.Drawing.Point(52, 171);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 21);
+            this.textBox5.Size = new System.Drawing.Size(100, 22);
             this.textBox5.TabIndex = 13;
+            this.textBox5.Text = "taiwan.earth";
             // 
             // label5
             // 
@@ -111,8 +112,9 @@
             // 
             this.textBox4.Location = new System.Drawing.Point(52, 135);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 21);
+            this.textBox4.Size = new System.Drawing.Size(100, 22);
             this.textBox4.TabIndex = 11;
+            this.textBox4.Text = "lion@mouse.cat.dog";
             // 
             // label4
             // 
@@ -127,23 +129,26 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(52, 106);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
+            this.textBox3.Size = new System.Drawing.Size(100, 22);
             this.textBox3.TabIndex = 9;
+            this.textBox3.Text = "0922188156";
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(52, 71);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '×';
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 8;
+            this.textBox2.Text = "lion";
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(54, 34);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 7;
+            this.textBox1.Text = "david";
             // 
             // button2
             // 
@@ -228,7 +233,7 @@
             this.groupBox2.Controls.Add(this.checkBox3);
             this.groupBox2.Location = new System.Drawing.Point(177, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(140, 272);
+            this.groupBox2.Size = new System.Drawing.Size(140, 448);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "用户权限";
@@ -250,9 +255,9 @@
             this.cklMange.Items.AddRange(new object[] {
             "库存调配",
             "库存警报"});
-            this.cklMange.Location = new System.Drawing.Point(42, 238);
+            this.cklMange.Location = new System.Drawing.Point(42, 351);
             this.cklMange.Name = "cklMange";
-            this.cklMange.Size = new System.Drawing.Size(85, 36);
+            this.cklMange.Size = new System.Drawing.Size(85, 72);
             this.cklMange.TabIndex = 25;
             this.cklMange.Visible = false;
             // 
@@ -262,9 +267,9 @@
             this.cklSell.Items.AddRange(new object[] {
             "商品销售",
             "客户退货"});
-            this.cklSell.Location = new System.Drawing.Point(42, 173);
+            this.cklSell.Location = new System.Drawing.Point(42, 243);
             this.cklSell.Name = "cklSell";
-            this.cklSell.Size = new System.Drawing.Size(85, 36);
+            this.cklSell.Size = new System.Drawing.Size(85, 55);
             this.cklSell.TabIndex = 24;
             this.cklSell.Visible = false;
             // 
@@ -274,9 +279,9 @@
             this.cklShop.Items.AddRange(new object[] {
             "采购进货",
             "采购退货"});
-            this.cklShop.Location = new System.Drawing.Point(42, 110);
+            this.cklShop.Location = new System.Drawing.Point(42, 142);
             this.cklShop.Name = "cklShop";
-            this.cklShop.Size = new System.Drawing.Size(85, 36);
+            this.cklShop.Size = new System.Drawing.Size(85, 72);
             this.cklShop.TabIndex = 23;
             this.cklShop.Visible = false;
             // 
@@ -289,14 +294,14 @@
             "客户档案"});
             this.ckLinfo.Location = new System.Drawing.Point(42, 38);
             this.ckLinfo.Name = "ckLinfo";
-            this.ckLinfo.Size = new System.Drawing.Size(85, 52);
+            this.ckLinfo.Size = new System.Drawing.Size(85, 72);
             this.ckLinfo.TabIndex = 22;
             this.ckLinfo.Visible = false;
             // 
             // ckMange
             // 
             this.ckMange.AutoSize = true;
-            this.ckMange.Location = new System.Drawing.Point(29, 215);
+            this.ckMange.Location = new System.Drawing.Point(29, 328);
             this.ckMange.Name = "ckMange";
             this.ckMange.Size = new System.Drawing.Size(72, 16);
             this.ckMange.TabIndex = 21;
@@ -307,7 +312,7 @@
             // ckSell
             // 
             this.ckSell.AutoSize = true;
-            this.ckSell.Location = new System.Drawing.Point(29, 152);
+            this.ckSell.Location = new System.Drawing.Point(29, 222);
             this.ckSell.Name = "ckSell";
             this.ckSell.Size = new System.Drawing.Size(72, 16);
             this.ckSell.TabIndex = 20;
@@ -318,7 +323,7 @@
             // ckShop
             // 
             this.ckShop.AutoSize = true;
-            this.ckShop.Location = new System.Drawing.Point(29, 89);
+            this.ckShop.Location = new System.Drawing.Point(29, 121);
             this.ckShop.Name = "ckShop";
             this.ckShop.Size = new System.Drawing.Size(72, 16);
             this.ckShop.TabIndex = 19;
@@ -336,14 +341,14 @@
             this.checkBox3.Text = "基本档案";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(328, 278);
+            this.ClientSize = new System.Drawing.Size(394, 517);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.Text = "利用选择控件实现权限设置";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);

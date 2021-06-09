@@ -179,5 +179,10 @@ namespace vcs_Button
         {
             richTextBox1.Text += "在Button上畫圖\n";
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("你按了快捷键 Alt + F\n只要在Text改 快捷鍵 (&F) 即可");
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace vcs_Draw_BezierCurve1
 {
     partial class Form1
     {
@@ -34,17 +34,21 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 635);
+            this.ClientSize = new System.Drawing.Size(649, 372);
             this.DoubleBuffered = true;
             this.Name = "Form1";
-            this.Text = "透明的影像";
+            this.Text = "貝茲曲線與控制點";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+
     }
 }
 

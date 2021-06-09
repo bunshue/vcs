@@ -196,7 +196,7 @@ namespace Selected
         private void Form1_Load(object sender, EventArgs e)
         {
             radWoman.Checked = false;//取消选择性别女
-            radMan.Checked = false;//取消选择性别男
+            radMan.Checked = true;//取消选择性别男
 
         }
 

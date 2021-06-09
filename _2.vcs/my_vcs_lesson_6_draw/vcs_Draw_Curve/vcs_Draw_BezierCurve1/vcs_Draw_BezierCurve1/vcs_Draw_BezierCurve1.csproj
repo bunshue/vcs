@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{28D82A43-636A-4930-AA26-EEAA923B55F2}</ProjectGuid>
+    <ProjectGuid>{EB049470-4A7B-442E-A9FE-E91AB9972FAD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ListBox3</RootNamespace>
-    <AssemblyName>vcs_ListBox3</AssemblyName>
+    <RootNamespace>vcs_Draw_BezierCurve1</RootNamespace>
+    <AssemblyName>vcs_Draw_BezierCurve1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -46,18 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DrawListBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DrawListBox.Designer.cs">
-      <DependentUpon>DrawListBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MovingPoint.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

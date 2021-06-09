@@ -34,6 +34,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.drawListBox1 = new vcs_ListBox3.DrawListBox();
             this.SuspendLayout();
             // 
             // listBox1
@@ -96,11 +97,44 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // drawListBox1
+            // 
+            this.drawListBox1.Color1 = System.Drawing.Color.CornflowerBlue;
+            this.drawListBox1.Color1Gradual = System.Drawing.Color.Thistle;
+            this.drawListBox1.Color2 = System.Drawing.Color.PaleGreen;
+            this.drawListBox1.Color2Gradual = System.Drawing.Color.DarkKhaki;
+            this.drawListBox1.ColorSelect = System.Drawing.Color.Gainsboro;
+            this.drawListBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.drawListBox1.FormattingEnabled = true;
+            this.drawListBox1.GradualC = true;
+            this.drawListBox1.Items.AddRange(new object[] {
+            "杜牧．秋夕",
+            "杜牧．赤壁",
+            "杜牧．題烏江亭",
+            "杜牧．山行",
+            "李煜．相見歡",
+            "李煜．浪淘沙令",
+            "周邦彥．少年遊",
+            "周邦彥．蘇幕遮",
+            "蘇軾．江城子",
+            "蘇軾．江城子",
+            "蘇軾．蝶戀花",
+            "柳永．望海潮",
+            "柳永．雨霖鈴",
+            "辛棄疾．西江月",
+            "辛棄疾．青玉案",
+            "辛棄疾．南鄉子"});
+            this.drawListBox1.Location = new System.Drawing.Point(482, 12);
+            this.drawListBox1.Name = "drawListBox1";
+            this.drawListBox1.Size = new System.Drawing.Size(303, 459);
+            this.drawListBox1.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 486);
+            this.ClientSize = new System.Drawing.Size(797, 563);
+            this.Controls.Add(this.drawListBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -122,6 +156,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private DrawListBox drawListBox1;
     }
 }
 

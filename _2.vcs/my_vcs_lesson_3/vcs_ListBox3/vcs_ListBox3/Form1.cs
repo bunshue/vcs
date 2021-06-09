@@ -7,6 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+/*
+DrawListBox使用方法
+方案總管/加入/現有項目, 選DrawListBox.cs, 會自動帶入DrawListBox.Designer.cs
+改namespace
+工具箱會出現 DrawListBox
+使用方法如同ListBox, 就是多了顏色, 把GradualC改為true
+*/
+
 namespace vcs_ListBox3
 {
     public partial class Form1 : Form

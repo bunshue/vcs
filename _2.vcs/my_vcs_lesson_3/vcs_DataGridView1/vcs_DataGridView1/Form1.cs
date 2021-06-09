@@ -51,7 +51,7 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[4].Name = "Album";
             dataGridView1.Columns[4].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
 
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
             dataGridView1.MultiSelect = false;
             dataGridView1.Dock = DockStyle.Fill;
 
@@ -161,8 +161,44 @@ namespace vcs_DataGridView1
 
             dataGridView1.Rows.Add(new Object[] { "紅茶", 25 });
             dataGridView1.Rows.Add(new Object[] { "綠茶", 25 });
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //綁定數據集合
+            dataGridView1.DataSource = new List<Fruit>()
+            {
+            new Fruit(){Name="蘋果",Price=30},
+            new Fruit(){Name="橘子",Price=40},
+            new Fruit(){Name="梨子",Price=33},
+            new Fruit(){Name="水蜜桃",Price=31}
+            };
+            dataGridView1.Columns[0].Width = 200;
+            dataGridView1.Columns[1].Width = 170;
+
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
+            dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; //設置對其方式   此欄置中對齊
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+
+                if (i % 2 == 0)
+                    dataGridView1.Rows[i].DefaultCellStyle.
+                        BackColor = Color.LightYellow;//隔行更换背景色
+            }
 
         }
 
     }
+
+    class Fruit
+    {
+        public string Name { get; set; }
+        public float Price { get; set; }
+    }
 }
+

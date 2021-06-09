@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace vcs_Draw_Curve2
 {
     partial class Form1
     {
@@ -28,23 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 635);
+            this.ClientSize = new System.Drawing.Size(649, 372);
             this.DoubleBuffered = true;
             this.Name = "Form1";
-            this.Text = "透明的影像";
+            this.Text = "畫曲線 DrawCurve 跳動";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer timer1;
+
     }
 }
 
