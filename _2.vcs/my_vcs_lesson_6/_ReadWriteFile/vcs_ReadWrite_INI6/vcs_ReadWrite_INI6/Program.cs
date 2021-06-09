@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace INIFileOperate
+namespace vcs_ReadWrite_INI6
 {
     static class Program
     {

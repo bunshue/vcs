@@ -8,8 +8,8 @@
     <ProjectGuid>{7A2A7176-DF9E-4E43-9FCC-9D62E2189287}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>INIFileOperate</RootNamespace>
-    <AssemblyName>INIFileOperate</AssemblyName>
+    <RootNamespace>vcs_ReadWrite_INI6</RootNamespace>
+    <AssemblyName>vcs_ReadWrite_INI6</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

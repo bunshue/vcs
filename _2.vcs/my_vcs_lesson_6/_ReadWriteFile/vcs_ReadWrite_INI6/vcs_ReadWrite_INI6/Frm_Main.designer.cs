@@ -1,4 +1,4 @@
-﻿namespace INIFileOperate
+﻿namespace vcs_ReadWrite_INI6
 {
     partial class Frm_Main
     {
@@ -80,7 +80,7 @@
             // 
             this.pwd.Location = new System.Drawing.Point(70, 94);
             this.pwd.Name = "pwd";
-            this.pwd.Size = new System.Drawing.Size(100, 21);
+            this.pwd.Size = new System.Drawing.Size(100, 22);
             this.pwd.TabIndex = 26;
             // 
             // label8
@@ -96,7 +96,7 @@
             // 
             this.uid.Location = new System.Drawing.Point(70, 66);
             this.uid.Name = "uid";
-            this.uid.Size = new System.Drawing.Size(100, 21);
+            this.uid.Size = new System.Drawing.Size(100, 22);
             this.uid.TabIndex = 24;
             // 
             // label9
@@ -112,19 +112,19 @@
             // 
             this.server.Location = new System.Drawing.Point(70, 11);
             this.server.Name = "server";
-            this.server.Size = new System.Drawing.Size(100, 21);
+            this.server.Size = new System.Drawing.Size(100, 22);
             this.server.TabIndex = 13;
             // 
             // database
             // 
             this.database.Location = new System.Drawing.Point(70, 38);
             this.database.Name = "database";
-            this.database.Size = new System.Drawing.Size(100, 21);
+            this.database.Size = new System.Drawing.Size(100, 22);
             this.database.TabIndex = 22;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(187, 110);
+            this.button1.Location = new System.Drawing.Point(382, 110);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(55, 23);
             this.button1.TabIndex = 40;
@@ -136,7 +136,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(247, 144);
+            this.ClientSize = new System.Drawing.Size(579, 608);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Frm_Main";

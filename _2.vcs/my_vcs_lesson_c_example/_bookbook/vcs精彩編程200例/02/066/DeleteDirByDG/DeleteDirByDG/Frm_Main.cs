@@ -20,19 +20,24 @@ namespace DeleteDirByDG
         {
             FolderBrowserDialog FBDialog = new FolderBrowserDialog();//创建FolderBrowserDialog对象
             if (FBDialog.ShowDialog() == DialogResult.OK)//判断是否选择了文件夹
+            {
                 textBox1.Text = FBDialog.SelectedPath;//显示选择的文件夹
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            int file_no = 0;
             DirectoryInfo DInfo = new DirectoryInfo(textBox1.Text);//创建DirectoryInfo对象
             FileSystemInfo[] FSInfo = DInfo.GetFileSystemInfos();//获取所有文件
             for (int i = 0; i < FSInfo.Length; i++)//遍历获取到的文件
             {
                 FileInfo FInfo = new FileInfo(textBox1.Text + "\\" + FSInfo[i].ToString());//创建FileInfo对象
-                FInfo.Delete();//删除文件
+                //FInfo.Delete();//删除文件
+                richTextBox1.Text += "偽刪除 " + textBox1.Text + "\\" + FSInfo[i].ToString() + "\n";
+                file_no++;
             }
-            MessageBox.Show("删除成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("删除成功\n共刪除 " + file_no.ToString()+" 個檔案", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

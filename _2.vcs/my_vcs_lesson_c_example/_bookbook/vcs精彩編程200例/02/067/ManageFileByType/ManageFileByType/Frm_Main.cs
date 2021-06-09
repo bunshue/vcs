@@ -24,9 +24,13 @@ namespace ManageFileByType
             {
                 string strPath = FBDialog.SelectedPath;//记录选择的文件夹
                 if (strPath.EndsWith("\\"))
+                {
                     textBox1.Text = strPath;//显示选择的文件夹
+                }
                 else
+                {
                     textBox1.Text = strPath + "\\";
+                }
             }
         }
 
@@ -46,11 +50,15 @@ namespace ManageFileByType
             }
             for (int i = 0; i < listExten.Count; i++)//遍历泛型集合
             {
-                Directory.CreateDirectory(textBox1.Text + listExten[i]);//创建文件夹
+                //Directory.CreateDirectory(textBox1.Text + listExten[i]);//创建文件夹
+                richTextBox1.Text += "偽建立資料夾 : " + textBox1.Text + listExten[i] + "\n";
             }
             foreach (FileInfo FInfo in FInfos)//遍历所有文件
             {
-                FInfo.MoveTo(textBox1.Text + FInfo.Extension.TrimStart('.') + "\\" + FInfo.Name);//将文件移动到对应的文件夹中
+                //FInfo.MoveTo(textBox1.Text + FInfo.Extension.TrimStart('.') + "\\" + FInfo.Name);//将文件移动到对应的文件夹中
+                //richTextBox1.Text += "偽移動 "
+                richTextBox1.Text += "aaa " + textBox1.Text + FInfo.Extension.TrimStart('.') + "\n";
+                richTextBox1.Text += "bbb " + textBox1.Text + FInfo.Name + "\n";
             }
             MessageBox.Show("整理完毕！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -61,3 +69,4 @@ namespace ManageFileByType
         }
     }
 }
+
