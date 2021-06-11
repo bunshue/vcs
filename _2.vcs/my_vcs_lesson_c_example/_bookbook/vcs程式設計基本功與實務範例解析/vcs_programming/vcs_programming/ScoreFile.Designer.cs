@@ -43,6 +43,8 @@
             this.ofdOpen = new System.Windows.Forms.OpenFileDialog();
             this.btn_b_read = new System.Windows.Forms.Button();
             this.btn_b_save = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -110,7 +112,7 @@
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ReadOnly = true;
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOutput.Size = new System.Drawing.Size(225, 159);
+            this.txtOutput.Size = new System.Drawing.Size(225, 232);
             this.txtOutput.TabIndex = 8;
             this.txtOutput.WordWrap = false;
             // 
@@ -126,7 +128,7 @@
             // 
             // btn_read
             // 
-            this.btn_read.Location = new System.Drawing.Point(24, 144);
+            this.btn_read.Location = new System.Drawing.Point(24, 217);
             this.btn_read.Name = "btn_read";
             this.btn_read.Size = new System.Drawing.Size(143, 27);
             this.btn_read.TabIndex = 10;
@@ -136,7 +138,7 @@
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(24, 177);
+            this.btn_save.Location = new System.Drawing.Point(24, 250);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(143, 27);
             this.btn_save.TabIndex = 11;
@@ -156,7 +158,7 @@
             // 
             // btn_b_read
             // 
-            this.btn_b_read.Location = new System.Drawing.Point(24, 210);
+            this.btn_b_read.Location = new System.Drawing.Point(24, 283);
             this.btn_b_read.Name = "btn_b_read";
             this.btn_b_read.Size = new System.Drawing.Size(187, 27);
             this.btn_b_read.TabIndex = 12;
@@ -166,7 +168,7 @@
             // 
             // btn_b_save
             // 
-            this.btn_b_save.Location = new System.Drawing.Point(217, 210);
+            this.btn_b_save.Location = new System.Drawing.Point(24, 316);
             this.btn_b_save.Name = "btn_b_save";
             this.btn_b_save.Size = new System.Drawing.Size(191, 27);
             this.btn_b_save.TabIndex = 13;
@@ -174,11 +176,31 @@
             this.btn_b_save.UseVisualStyleBackColor = true;
             this.btn_b_save.Click += new System.EventHandler(this.btn_b_save_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(414, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(655, 561);
+            this.richTextBox1.TabIndex = 14;
+            this.richTextBox1.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(265, 283);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(143, 27);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "清除資料";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ScoreFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 251);
+            this.ClientSize = new System.Drawing.Size(1081, 585);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btn_b_save);
             this.Controls.Add(this.btn_b_read);
             this.Controls.Add(this.btn_save);
@@ -221,5 +243,7 @@
         private System.Windows.Forms.OpenFileDialog ofdOpen;
         private System.Windows.Forms.Button btn_b_read;
         private System.Windows.Forms.Button btn_b_save;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button1;
     }
 }

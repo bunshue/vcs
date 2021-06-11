@@ -7,20 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_programming
+namespace vcs_NewForm
 {
-    public partial class ModalForm : Form
+    public partial class Form2 : Form
     {
-        public string mInput {
-            get { return txtInput.Text; }
+        public string mInput
+        {
+            get { return richTextBox1.Text; }
         }
 
         public string getInput()
         {
-            return txtInput.Text;
+            return richTextBox1.Text;
         }
 
-        public ModalForm()
+        public Form2()
         {
             InitializeComponent();
         }

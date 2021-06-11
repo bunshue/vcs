@@ -81,19 +81,7 @@
     <Compile Include="MainForm.designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModalForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ModalForm.designer.cs">
-      <DependentUpon>ModalForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="MyClass.cs" />
-    <Compile Include="MyForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MyForm.designer.cs">
-      <DependentUpon>MyForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="RectangleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,12 +119,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModalForm.resx">
-      <DependentUpon>ModalForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyForm.resx">
-      <DependentUpon>MyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RectangleForm.resx">
       <DependentUpon>RectangleForm.cs</DependentUpon>

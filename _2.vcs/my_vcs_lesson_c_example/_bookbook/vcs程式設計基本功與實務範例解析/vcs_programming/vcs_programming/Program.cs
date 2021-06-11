@@ -20,9 +20,7 @@ namespace vcs_programming
             //Application.Run(new jaggedArray());     //有點多
 
             /* 第 14 章 */
-            //Application.Run(new ScoreFile());   //看存成二進位檔 與 讀出二進位檔
-
-            Application.Run(new MyForm());
+            Application.Run(new ScoreFile());   //看存成二進位檔 與 讀出二進位檔
 
             /* 第 19 章 */
             //Application.Run(new MainForm());

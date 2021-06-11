@@ -34,6 +34,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -63,6 +66,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(194, 22);
             this.txtLastName.TabIndex = 15;
+            this.txtLastName.Text = "wang";
             // 
             // label2
             // 
@@ -79,6 +83,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(194, 22);
             this.txtFirstName.TabIndex = 13;
+            this.txtFirstName.Text = "david";
             // 
             // label1
             // 
@@ -89,13 +94,44 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "First Name:";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(30, 150);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(259, 19);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "txtFirstName之Modifiers改Public";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(28, 180);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(257, 19);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "txtLastName之Modifiers改Public";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(32, 216);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(257, 173);
+            this.richTextBox1.TabIndex = 20;
+            this.richTextBox1.Text = "";
+            // 
             // NameDialog
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(330, 139);
+            this.ClientSize = new System.Drawing.Size(338, 424);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtLastName);
@@ -117,5 +153,8 @@
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

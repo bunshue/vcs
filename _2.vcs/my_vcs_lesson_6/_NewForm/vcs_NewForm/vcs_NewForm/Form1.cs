@@ -32,5 +32,31 @@ namespace vcs_NewForm
                 txtLastName.Text = dlg.txtLastName.Text;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //開啟新表單 並且從子表單取回回傳值
+            Form2 f2 = new Form2();
+
+            f2.ShowDialog();  //顯示表單          
+
+            if (f2.DialogResult == DialogResult.OK)
+            { //判斷使用者的動作
+                richTextBox1.Text += "你在子表單上輸入了 " + f2.mInput + "\n";
+                richTextBox1.Text += "你在子表單上輸入了 " + f2.getInput() + "\n";
+                richTextBox1.Text += "你在子表單上輸入了 " + f2.richTextBox1.Text + "\n"; // 子表單的txtInput要宣告為public
+            }
+            else if (f2.DialogResult == DialogResult.Cancel)
+            {
+                richTextBox1.Text += "你按了取消鍵!\n";
+            }
+            else
+            {
+                richTextBox1.Text += "未知選項!\n";
+            }
+
+            f2.Dispose(); // 釋放表單資源
+
+        }
     }
 }

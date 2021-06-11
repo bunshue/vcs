@@ -61,7 +61,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(122, 22);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "192.168.2.109";
+            this.textBox1.Text = "192.168.2.114";
             // 
             // label4
             // 

@@ -65,7 +65,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(129, 22);
             this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "192.168.2.109";
+            this.textBox1.Text = "192.168.2.114";
             // 
             // textBox2
             // 
@@ -73,6 +73,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(128, 22);
             this.textBox2.TabIndex = 3;
+            this.textBox2.Text = "david";
             // 
             // button1
             // 
