@@ -11,6 +11,8 @@ namespace vcs_TextBox
 {
     public partial class Form1 : Form
     {
+        TextBox RightKeyCarte;//聲明一個自定義類CustomTextBoxGroup的對象
+
         public Form1()
         {
             InitializeComponent();
@@ -36,6 +38,24 @@ namespace vcs_TextBox
             textBox4.ReadOnly = false;   //設為唯讀不能輸入, 改了
             textBox4.TabIndex = 0;     //設為第一個停駐焦點
             textBox4.Focus();    //將停駐焦點移到txtDegree
+
+            //製作一個加上底線的TextBox  在文字框下劃一條底線
+            TextBox goal = new CustomTextBoxGroup();//定義一個TextBox對像goal
+            goal.Parent = this;//獲取或設置自定義TextBox控件的父容器
+            goal.Text = "在文字框下劃一條底線";
+            goal.Size = new Size(200, 40);
+            goal.BackColor = Color.Pink;
+            goal.Location = new Point(470, 500);
+            this.Controls.Add(goal);//向窗體中添加自定義TextBox控件goal
+
+
+            this.RightKeyCarte = new CustomTextBoxGroup2();//實例化該類的對象
+            this.RightKeyCarte.Parent = this; //設定自定義控件的父容器為當前窗口
+            RightKeyCarte.Text = "禁止使用滑鼠右鍵";
+            RightKeyCarte.Location = new Point(470, 550);
+
+
+            this.Controls.Add(this.RightKeyCarte);//在當前窗體中添加自定義控件
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)

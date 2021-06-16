@@ -117,42 +117,42 @@ namespace TailorGuidanceInterface
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel4});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 204);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 415);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(474, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(604, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(41, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(43, 17);
             this.toolStripStatusLabel1.Text = "狀態：";
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedOuter;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(47, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(28, 17);
             this.toolStripStatusLabel2.Text = "       ";
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(83, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(92, 17);
             this.toolStripStatusLabel3.Text = "操作員：Admin";
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(77, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(73, 17);
             this.toolStripStatusLabel4.Text = "  系統時間：";
             // 
             // 憑證錄入ToolStripMenuItem
             // 
             this.憑證錄入ToolStripMenuItem.Name = "憑證錄入ToolStripMenuItem";
-            this.憑證錄入ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.憑證錄入ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.憑證錄入ToolStripMenuItem.Text = "憑證錄入";
             // 
             // 憑證管理ToolStripMenuItem
@@ -165,49 +165,49 @@ namespace TailorGuidanceInterface
             this.憑證ToolStripMenuItem,
             this.憑證修改ToolStripMenuItem1});
             this.憑證管理ToolStripMenuItem.Name = "憑證管理ToolStripMenuItem";
-            this.憑證管理ToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.憑證管理ToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.憑證管理ToolStripMenuItem.Text = "憑證管理(&F)";
             // 
             // 憑證審核ToolStripMenuItem
             // 
             this.憑證審核ToolStripMenuItem.Name = "憑證審核ToolStripMenuItem";
-            this.憑證審核ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.憑證審核ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.憑證審核ToolStripMenuItem.Text = "憑證審核";
             // 
             // 憑證結算ToolStripMenuItem
             // 
             this.憑證結算ToolStripMenuItem.Name = "憑證結算ToolStripMenuItem";
-            this.憑證結算ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.憑證結算ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.憑證結算ToolStripMenuItem.Text = "憑證結算";
             // 
             // 憑證總匯ToolStripMenuItem
             // 
             this.憑證總匯ToolStripMenuItem.Name = "憑證總匯ToolStripMenuItem";
-            this.憑證總匯ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.憑證總匯ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.憑證總匯ToolStripMenuItem.Text = "憑證總匯";
             // 
             // 憑證ToolStripMenuItem
             // 
             this.憑證ToolStripMenuItem.Name = "憑證ToolStripMenuItem";
-            this.憑證ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.憑證ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.憑證ToolStripMenuItem.Text = "憑證查詢";
             // 
             // 憑證修改ToolStripMenuItem1
             // 
             this.憑證修改ToolStripMenuItem1.Name = "憑證修改ToolStripMenuItem1";
-            this.憑證修改ToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
+            this.憑證修改ToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.憑證修改ToolStripMenuItem1.Text = "憑證修改";
             // 
             // 密碼修改ToolStripMenuItem
             // 
             this.密碼修改ToolStripMenuItem.Name = "密碼修改ToolStripMenuItem";
-            this.密碼修改ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.密碼修改ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.密碼修改ToolStripMenuItem.Text = "密碼修改(&B)";
             // 
             // 管理理員信息ToolStripMenuItem
             // 
             this.管理理員信息ToolStripMenuItem.Name = "管理理員信息ToolStripMenuItem";
-            this.管理理員信息ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.管理理員信息ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.管理理員信息ToolStripMenuItem.Text = "管理員信息(&W)";
             // 
             // 系統管理ToolStripMenuItem
@@ -219,25 +219,25 @@ namespace TailorGuidanceInterface
             this.管理理員信息ToolStripMenuItem,
             this.密碼修改ToolStripMenuItem});
             this.系統管理ToolStripMenuItem.Name = "系統管理ToolStripMenuItem";
-            this.系統管理ToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.系統管理ToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.系統管理ToolStripMenuItem.Text = "系統管理(&D)";
             // 
             // 公司信息ToolStripMenuItem
             // 
             this.公司信息ToolStripMenuItem.Name = "公司信息ToolStripMenuItem";
-            this.公司信息ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.公司信息ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.公司信息ToolStripMenuItem.Text = "公司信息(&L)";
             // 
             // 初始化使用時間ToolStripMenuItem
             // 
             this.初始化使用時間ToolStripMenuItem.Name = "初始化使用時間ToolStripMenuItem";
-            this.初始化使用時間ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.初始化使用時間ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.初始化使用時間ToolStripMenuItem.Text = "初始化使用時間(&G)";
             // 
             // 初始化科目資金ToolStripMenuItem
             // 
             this.初始化科目資金ToolStripMenuItem.Name = "初始化科目資金ToolStripMenuItem";
-            this.初始化科目資金ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.初始化科目資金ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.初始化科目資金ToolStripMenuItem.Text = "初始化科目資金(&F)";
             // 
             // 報表ToolStripMenuItem
@@ -246,49 +246,49 @@ namespace TailorGuidanceInterface
             this.按科目報表ToolStripMenuItem,
             this.按憑證ToolStripMenuItem});
             this.報表ToolStripMenuItem.Name = "報表ToolStripMenuItem";
-            this.報表ToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.報表ToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.報表ToolStripMenuItem.Text = "報表(&H)";
             // 
             // 按科目報表ToolStripMenuItem
             // 
             this.按科目報表ToolStripMenuItem.Name = "按科目報表ToolStripMenuItem";
-            this.按科目報表ToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.按科目報表ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.按科目報表ToolStripMenuItem.Text = "按科目名稱報表";
             // 
             // 按憑證ToolStripMenuItem
             // 
             this.按憑證ToolStripMenuItem.Name = "按憑證ToolStripMenuItem";
-            this.按憑證ToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.按憑證ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.按憑證ToolStripMenuItem.Text = "按憑證號報表";
             // 
             // 賬目佘額ToolStripMenuItem
             // 
             this.賬目佘額ToolStripMenuItem.Name = "賬目佘額ToolStripMenuItem";
-            this.賬目佘額ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.賬目佘額ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.賬目佘額ToolStripMenuItem.Text = "賬目餘額";
             // 
             // 按科目查詢ToolStripMenuItem
             // 
             this.按科目查詢ToolStripMenuItem.Name = "按科目查詢ToolStripMenuItem";
-            this.按科目查詢ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.按科目查詢ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.按科目查詢ToolStripMenuItem.Text = "按科目查詢";
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.退出ToolStripMenuItem.Text = "退出(&E)";
             // 
             // 按憑證查詢ToolStripMenuItem
             // 
             this.按憑證查詢ToolStripMenuItem.Name = "按憑證查詢ToolStripMenuItem";
-            this.按憑證查詢ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.按憑證查詢ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.按憑證查詢ToolStripMenuItem.Text = "按憑證查詢";
             // 
             // 添加科目ToolStripMenuItem
             // 
             this.添加科目ToolStripMenuItem.Name = "添加科目ToolStripMenuItem";
-            this.添加科目ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.添加科目ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.添加科目ToolStripMenuItem.Text = "科目信息";
             // 
             // 科目信息ToolStripMenuItem
@@ -297,19 +297,19 @@ namespace TailorGuidanceInterface
             this.添加科目ToolStripMenuItem,
             this.科目查詢ToolStripMenuItem});
             this.科目信息ToolStripMenuItem.Name = "科目信息ToolStripMenuItem";
-            this.科目信息ToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.科目信息ToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
             this.科目信息ToolStripMenuItem.Text = "科目信息(&T)";
             // 
             // 科目查詢ToolStripMenuItem
             // 
             this.科目查詢ToolStripMenuItem.Name = "科目查詢ToolStripMenuItem";
-            this.科目查詢ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.科目查詢ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.科目查詢ToolStripMenuItem.Text = "科目查詢";
             // 
             // 總賬遊覽ToolStripMenuItem
             // 
             this.總賬遊覽ToolStripMenuItem.Name = "總賬遊覽ToolStripMenuItem";
-            this.總賬遊覽ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.總賬遊覽ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.總賬遊覽ToolStripMenuItem.Text = "總賬瀏覽";
             // 
             // 賬目查詢ToolStripMenuItem
@@ -320,7 +320,7 @@ namespace TailorGuidanceInterface
             this.按科目查詢ToolStripMenuItem,
             this.賬目佘額ToolStripMenuItem});
             this.賬目查詢ToolStripMenuItem.Name = "賬目查詢ToolStripMenuItem";
-            this.賬目查詢ToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.賬目查詢ToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
             this.賬目查詢ToolStripMenuItem.Text = "賬目查詢(&Q)";
             // 
             // menuStrip2
@@ -334,7 +334,7 @@ namespace TailorGuidanceInterface
             this.退出ToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(474, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(604, 24);
             this.menuStrip2.TabIndex = 7;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -464,7 +464,7 @@ namespace TailorGuidanceInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 226);
+            this.ClientSize = new System.Drawing.Size(604, 437);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.menuStrip2);

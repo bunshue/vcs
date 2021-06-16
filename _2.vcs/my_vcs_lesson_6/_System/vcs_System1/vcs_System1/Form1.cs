@@ -214,8 +214,6 @@ namespace vcs_System1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "取得軟體版本\t";
-            richTextBox1.Text += "" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -370,6 +368,15 @@ namespace vcs_System1
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //GetExecutingAssembly() 使用
+            richTextBox1.Text += "取得軟體版本\t";
+            richTextBox1.Text += "" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
+
+            //取得目前應用程式版本
+            richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
+
+            richTextBox1.Text += "取得目前應用程式版本\n";
+            richTextBox1.Text += "Ver：" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -465,8 +472,6 @@ namespace vcs_System1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //取得目前應用程式版本
-            richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -477,17 +482,12 @@ namespace vcs_System1
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //取得NOTEPAD版本資訊
+            richTextBox1.Text += "取得NOTEPAD版本資訊\n";
             richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "取得目前應用程式版本\n";
-            richTextBox1.Text += "Ver：" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
-
-            richTextBox1.Text += "取得NOTEPAD版本資訊\n";
-            richTextBox1.Text += FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
         private void button24_Click(object sender, EventArgs e)

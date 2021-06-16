@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvolveCheckBoxFacility", "InvolveCheckBoxFacility\InvolveCheckBoxFacility.csproj", "{989E1066-36D6-4CDE-B9D4-7697C1A7E140}"
 EndProject
 Global

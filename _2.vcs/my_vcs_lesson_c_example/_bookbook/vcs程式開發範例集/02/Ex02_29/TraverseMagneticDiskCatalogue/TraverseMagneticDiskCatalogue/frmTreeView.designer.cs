@@ -31,6 +31,7 @@ namespace TraverseMagneticDiskCatalogue
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.TreeViewFile = new System.Windows.Forms.TreeView();
             this.ListViewFile = new System.Windows.Forms.ListView();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -49,15 +50,15 @@ namespace TraverseMagneticDiskCatalogue
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.ListViewFile);
-            this.splitContainer1.Size = new System.Drawing.Size(405, 181);
-            this.splitContainer1.SplitterDistance = 135;
+            this.splitContainer1.Size = new System.Drawing.Size(636, 550);
+            this.splitContainer1.SplitterDistance = 212;
             this.splitContainer1.TabIndex = 0;
             // 
             // TreeViewFile
             // 
             this.TreeViewFile.Location = new System.Drawing.Point(3, 3);
             this.TreeViewFile.Name = "TreeViewFile";
-            this.TreeViewFile.Size = new System.Drawing.Size(144, 179);
+            this.TreeViewFile.Size = new System.Drawing.Size(207, 544);
             this.TreeViewFile.TabIndex = 0;
             this.TreeViewFile.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewFile_AfterSelect);
             // 
@@ -67,7 +68,7 @@ namespace TraverseMagneticDiskCatalogue
             this.ListViewFile.Location = new System.Drawing.Point(0, 0);
             this.ListViewFile.MultiSelect = false;
             this.ListViewFile.Name = "ListViewFile";
-            this.ListViewFile.Size = new System.Drawing.Size(266, 181);
+            this.ListViewFile.Size = new System.Drawing.Size(420, 550);
             this.ListViewFile.TabIndex = 0;
             this.ListViewFile.UseCompatibleStateImageBehavior = false;
             this.ListViewFile.View = System.Windows.Forms.View.List;
@@ -78,13 +79,14 @@ namespace TraverseMagneticDiskCatalogue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 181);
+            this.ClientSize = new System.Drawing.Size(636, 550);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmTreeView";
             this.Text = "TreeView組件搜尋磁碟目錄";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 

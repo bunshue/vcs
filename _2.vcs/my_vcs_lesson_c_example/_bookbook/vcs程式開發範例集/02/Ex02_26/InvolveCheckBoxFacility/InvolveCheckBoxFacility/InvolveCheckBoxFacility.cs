@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;//引用與文件輸入輸出流有關的命名空間
 
+using System.IO;//引用與文件輸入輸出流有關的命名空間
 
 namespace InvolveCheckBoxFacility
 {

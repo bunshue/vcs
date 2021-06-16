@@ -55,7 +55,7 @@ namespace SelfDefiningScrollBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(336, 258);
+            this.ClientSize = new System.Drawing.Size(701, 598);
             this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.richTextBox1);
             this.Name = "SelfDefiningScrollBar";

@@ -238,6 +238,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 40);
             this.button12.TabIndex = 13;
+            this.button12.Text = "GetExecutingAssembly";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -314,7 +315,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 40);
             this.button20.TabIndex = 21;
-            this.button20.Text = "取得目前應用程式版本";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -478,7 +478,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 40);
             this.button0.TabIndex = 50;
-            this.button0.Text = "取得軟體版本";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -489,7 +488,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 40);
             this.button23.TabIndex = 51;
-            this.button23.Text = "取得目前應用程式版本";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
