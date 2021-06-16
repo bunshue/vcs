@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Diagnostics;   //for Process
-
 using System.Management;    //for WMI
 
 //[C#]透過PerformanceCounter取得特定Process的CPU使用率
@@ -21,7 +20,6 @@ using System.Management;    //for WMI
 第二步：引用命名空間
 using System.Management;
 */
-
 
 namespace vcs_Process2
 {
@@ -45,8 +43,8 @@ namespace vcs_Process2
             if (selectedProcess == null)
                 return;
 
-            textBox2.Text = selectedProcess.GetCpuUsage().ToString();
-            textBox3.Text = selectedProcess.GetProcessOwner();
+            textBox2.Text = "CPU : " + selectedProcess.GetCpuUsage().ToString() + " %";
+            textBox3.Text = "Owner : " + selectedProcess.GetProcessOwner();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -58,16 +56,15 @@ namespace vcs_Process2
 
             timer1.Enabled = false;
 
-            textBox1.Text = selectedProcess.GetInstanceName();
-            textBox2.Text = selectedProcess.GetCpuUsage().ToString();
-            textBox3.Text = selectedProcess.GetProcessOwner();
+            textBox1.Text = "Instance Name : " + selectedProcess.GetInstanceName();
+            textBox2.Text = "CPU : " + selectedProcess.GetCpuUsage().ToString() + " %";
+            textBox3.Text = "Owner : " + selectedProcess.GetProcessOwner();
 
             timer1.Enabled = true;
         }
-
-
     }
 
+    //擴充方法
     public static class ProcessExtension
     {
         #region Private Static Var
@@ -103,6 +100,7 @@ namespace vcs_Process2
         #endregion
 
         #region Private Static Method
+        //透過這個這個PerformanceCounter反查到Process的Instance Name
         private static string GetProcessInstanceName(int pid)
         {
             var category = new PerformanceCounterCategory("Process");
@@ -137,6 +135,7 @@ namespace vcs_Process2
 
             var interval = DateTime.Now - lastUpdateTime;
 
+            //取得的值必須要除以核心數才會是我們期望的值
             if (interval.TotalSeconds > 1)
             {
                 m_CpuUsagePool[pid] = (int)(m_CounterPool[pid].NextValue() / Environment.ProcessorCount);
@@ -186,6 +185,4 @@ namespace vcs_Process2
 
 
     }
-
-
 }

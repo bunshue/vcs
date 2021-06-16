@@ -35,14 +35,15 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.listView1 = new System.Windows.Forms.ListView();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -112,6 +113,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "扫描计算机已用端口号";
             // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(16, 67);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(172, 150);
+            this.listView1.TabIndex = 6;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.SmallIcon;
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(147, 38);
@@ -135,15 +145,17 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(88, 39);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(51, 21);
+            this.textBox2.Size = new System.Drawing.Size(51, 22);
             this.textBox2.TabIndex = 3;
+            this.textBox2.Text = "140";
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(16, 39);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(51, 21);
+            this.textBox1.Size = new System.Drawing.Size(51, 22);
             this.textBox1.TabIndex = 2;
+            this.textBox1.Text = "133";
             // 
             // label3
             // 
@@ -159,36 +171,36 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(16, 67);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(172, 150);
-            this.listView1.TabIndex = 6;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.SmallIcon;
-            // 
             // progressBar1
             // 
             this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(0, 236);
+            this.progressBar1.Location = new System.Drawing.Point(0, 557);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(342, 15);
+            this.progressBar1.Size = new System.Drawing.Size(735, 15);
             this.progressBar1.TabIndex = 2;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(8, 238);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(715, 293);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(342, 251);
+            this.ClientSize = new System.Drawing.Size(735, 572);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "局域网端口扫描";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -213,6 +225,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

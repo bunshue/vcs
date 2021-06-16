@@ -43,7 +43,7 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(123, 67);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(105, 21);
+            this.textBox3.Size = new System.Drawing.Size(349, 22);
             this.textBox3.TabIndex = 14;
             // 
             // label3
@@ -60,7 +60,7 @@
             this.textBox2.Location = new System.Drawing.Point(123, 40);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(105, 21);
+            this.textBox2.Size = new System.Drawing.Size(349, 22);
             this.textBox2.TabIndex = 12;
             // 
             // label2
@@ -85,7 +85,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(232, 11);
+            this.button1.Location = new System.Drawing.Point(477, 11);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(38, 23);
             this.button1.TabIndex = 7;
@@ -98,7 +98,7 @@
             this.textBox1.Location = new System.Drawing.Point(123, 13);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(105, 21);
+            this.textBox1.Size = new System.Drawing.Size(349, 22);
             this.textBox1.TabIndex = 10;
             // 
             // label1
@@ -114,7 +114,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 129);
+            this.ClientSize = new System.Drawing.Size(550, 296);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);

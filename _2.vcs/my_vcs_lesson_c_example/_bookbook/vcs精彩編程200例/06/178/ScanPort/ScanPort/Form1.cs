@@ -34,6 +34,7 @@ namespace ScanPort
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            richTextBox1.Text += "遍历局域网中的工作组，并显示在下拉列表控件中\n";
             //遍历局域网中的工作组，并显示在下拉列表控件中
             foreach (DirectoryEntry DEGroup in DEMain.Children)
             {

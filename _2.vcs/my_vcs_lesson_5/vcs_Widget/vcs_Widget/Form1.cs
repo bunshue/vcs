@@ -41,14 +41,11 @@ namespace vcs_Widget
             Image img = Image.FromFile(filename);
             pictureBox1.Image = img;
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-
-
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             this.Close();
-
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -66,7 +63,6 @@ namespace vcs_Widget
             nOldWndTop = this.Top;
             nClickX = e.X;
             nClickY = e.Y;
-
         }
 
         // Prepare the context menu and display it.
@@ -75,7 +71,6 @@ namespace vcs_Widget
             // Display the context menu.
             contextMenuStrip1.Show(pictureBox1, location);
         }
-
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {

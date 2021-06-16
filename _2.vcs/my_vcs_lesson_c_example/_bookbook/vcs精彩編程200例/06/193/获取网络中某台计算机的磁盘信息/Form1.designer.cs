@@ -39,12 +39,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(225, 12);
+            this.button1.Location = new System.Drawing.Point(438, 10);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(56, 23);
             this.button1.TabIndex = 0;
@@ -56,7 +57,7 @@
             // 
             this.textBox4.Location = new System.Drawing.Point(89, 12);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(128, 21);
+            this.textBox4.Size = new System.Drawing.Size(343, 22);
             this.textBox4.TabIndex = 7;
             // 
             // label4
@@ -78,7 +79,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(268, 99);
+            this.groupBox1.Size = new System.Drawing.Size(419, 99);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "提示信息";
@@ -87,21 +88,21 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(115, 68);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(144, 21);
+            this.textBox3.Size = new System.Drawing.Size(298, 22);
             this.textBox3.TabIndex = 12;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(115, 45);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(144, 21);
+            this.textBox2.Size = new System.Drawing.Size(298, 22);
             this.textBox2.TabIndex = 11;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(115, 20);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(144, 21);
+            this.textBox1.Size = new System.Drawing.Size(298, 22);
             this.textBox1.TabIndex = 10;
             // 
             // label3
@@ -131,11 +132,20 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "可用磁盘空间：";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(14, 164);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(739, 421);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(298, 153);
+            this.ClientSize = new System.Drawing.Size(765, 597);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox4);
@@ -163,6 +173,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

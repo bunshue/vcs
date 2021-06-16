@@ -150,8 +150,6 @@ namespace vcs_test_all_00_Control
                 button1.Dock = DockStyle.Fill;
             else
                 button1.Dock = DockStyle.None;
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)

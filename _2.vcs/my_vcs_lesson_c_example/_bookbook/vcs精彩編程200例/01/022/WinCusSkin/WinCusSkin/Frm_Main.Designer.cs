@@ -80,11 +80,11 @@
             this.panel_Top.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel_Top.Location = new System.Drawing.Point(0, 0);
             this.panel_Top.Name = "panel_Top";
-            this.panel_Top.Size = new System.Drawing.Size(447, 29);
+            this.panel_Top.Size = new System.Drawing.Size(461, 31);
             this.panel_Top.TabIndex = 4;
             this.panel_Top.DoubleClick += new System.EventHandler(this.panel_Top_DoubleClick);
-            this.panel_Top.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_Top_MouseMove);
             this.panel_Top.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_Top_MouseDown);
+            this.panel_Top.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_Top_MouseMove);
             this.panel_Top.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_Top_MouseUp);
             // 
             // panel_Left
@@ -95,12 +95,12 @@
             this.panel_Left.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel_Left.Controls.Add(this.panelLeftCornu);
             this.panel_Left.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.panel_Left.Location = new System.Drawing.Point(0, 29);
+            this.panel_Left.Location = new System.Drawing.Point(0, 31);
             this.panel_Left.Name = "panel_Left";
-            this.panel_Left.Size = new System.Drawing.Size(8, 379);
+            this.panel_Left.Size = new System.Drawing.Size(7, 377);
             this.panel_Left.TabIndex = 5;
-            this.panel_Left.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_Left_MouseMove);
             this.panel_Left.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_Left_MouseDown);
+            this.panel_Left.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_Left_MouseMove);
             this.panel_Left.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_Left_MouseUp);
             // 
             // panelLeftCornu
@@ -108,12 +108,12 @@
             this.panelLeftCornu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panelLeftCornu.BackColor = System.Drawing.Color.Transparent;
             this.panelLeftCornu.Cursor = System.Windows.Forms.Cursors.SizeNESW;
-            this.panelLeftCornu.Location = new System.Drawing.Point(0, 372);
+            this.panelLeftCornu.Location = new System.Drawing.Point(0, 370);
             this.panelLeftCornu.Name = "panelLeftCornu";
-            this.panelLeftCornu.Size = new System.Drawing.Size(8, 8);
+            this.panelLeftCornu.Size = new System.Drawing.Size(7, 8);
             this.panelLeftCornu.TabIndex = 9;
-            this.panelLeftCornu.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelLeftCornu_MouseMove);
             this.panelLeftCornu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelLeftCornu_MouseDown);
+            this.panelLeftCornu.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelLeftCornu_MouseMove);
             this.panelLeftCornu.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelLeftCornu_MouseUp);
             // 
             // panel_Bottom
@@ -123,12 +123,12 @@
             this.panel_Bottom.BackColor = System.Drawing.Color.Transparent;
             this.panel_Bottom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel_Bottom.Cursor = System.Windows.Forms.Cursors.SizeNS;
-            this.panel_Bottom.Location = new System.Drawing.Point(8, 400);
+            this.panel_Bottom.Location = new System.Drawing.Point(7, 400);
             this.panel_Bottom.Name = "panel_Bottom";
-            this.panel_Bottom.Size = new System.Drawing.Size(515, 8);
+            this.panel_Bottom.Size = new System.Drawing.Size(518, 8);
             this.panel_Bottom.TabIndex = 6;
-            this.panel_Bottom.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_Bottom_MouseMove);
             this.panel_Bottom.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_Bottom_MouseDown);
+            this.panel_Bottom.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_Bottom_MouseMove);
             this.panel_Bottom.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_Bottom_MouseUp);
             // 
             // panel_Right
@@ -138,12 +138,12 @@
             this.panel_Right.BackColor = System.Drawing.Color.Transparent;
             this.panel_Right.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel_Right.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.panel_Right.Location = new System.Drawing.Point(523, 29);
+            this.panel_Right.Location = new System.Drawing.Point(525, 31);
             this.panel_Right.Name = "panel_Right";
-            this.panel_Right.Size = new System.Drawing.Size(8, 378);
+            this.panel_Right.Size = new System.Drawing.Size(6, 376);
             this.panel_Right.TabIndex = 7;
-            this.panel_Right.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_Right_MouseMove);
             this.panel_Right.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_Right_MouseDown);
+            this.panel_Right.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_Right_MouseMove);
             this.panel_Right.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_Right_MouseUp);
             // 
             // 文件ToolStripMenuItem
@@ -162,31 +162,31 @@
             this.深蓝经典ToolStripMenuItem,
             this.魔幻天堂ToolStripMenuItem});
             this.设置皮肤ToolStripMenuItem.Name = "设置皮肤ToolStripMenuItem";
-            this.设置皮肤ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.设置皮肤ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.设置皮肤ToolStripMenuItem.Text = "设置皮肤";
             // 
             // 普通ToolStripMenuItem
             // 
             this.普通ToolStripMenuItem.Name = "普通ToolStripMenuItem";
-            this.普通ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.普通ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.普通ToolStripMenuItem.Text = "普通";
             // 
             // 深蓝经典ToolStripMenuItem
             // 
             this.深蓝经典ToolStripMenuItem.Name = "深蓝经典ToolStripMenuItem";
-            this.深蓝经典ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.深蓝经典ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.深蓝经典ToolStripMenuItem.Text = "深蓝经典";
             // 
             // 魔幻天堂ToolStripMenuItem
             // 
             this.魔幻天堂ToolStripMenuItem.Name = "魔幻天堂ToolStripMenuItem";
-            this.魔幻天堂ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.魔幻天堂ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.魔幻天堂ToolStripMenuItem.Text = "魔幻天堂";
             // 
             // 设置背景ToolStripMenuItem
             // 
             this.设置背景ToolStripMenuItem.Name = "设置背景ToolStripMenuItem";
-            this.设置背景ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.设置背景ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.设置背景ToolStripMenuItem.Text = "设置背景";
             // 
             // 编辑ToolStripMenuItem
@@ -235,9 +235,9 @@
             // 
             this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picClose.BackColor = System.Drawing.Color.Transparent;
-            this.picClose.Location = new System.Drawing.Point(502, 0);
+            this.picClose.Location = new System.Drawing.Point(507, 0);
             this.picClose.Name = "picClose";
-            this.picClose.Size = new System.Drawing.Size(29, 29);
+            this.picClose.Size = new System.Drawing.Size(24, 31);
             this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picClose.TabIndex = 3;
             this.picClose.TabStop = false;
@@ -247,9 +247,9 @@
             // 
             this.picMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picMinimize.BackColor = System.Drawing.Color.Transparent;
-            this.picMinimize.Location = new System.Drawing.Point(446, 0);
+            this.picMinimize.Location = new System.Drawing.Point(461, 0);
             this.picMinimize.Name = "picMinimize";
-            this.picMinimize.Size = new System.Drawing.Size(29, 29);
+            this.picMinimize.Size = new System.Drawing.Size(24, 31);
             this.picMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picMinimize.TabIndex = 2;
             this.picMinimize.TabStop = false;
@@ -259,9 +259,9 @@
             // 
             this.picMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picMaximize.BackColor = System.Drawing.Color.Transparent;
-            this.picMaximize.Location = new System.Drawing.Point(474, 0);
+            this.picMaximize.Location = new System.Drawing.Point(484, 0);
             this.picMaximize.Name = "picMaximize";
-            this.picMaximize.Size = new System.Drawing.Size(29, 29);
+            this.picMaximize.Size = new System.Drawing.Size(24, 31);
             this.picMaximize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picMaximize.TabIndex = 1;
             this.picMaximize.TabStop = false;
@@ -273,7 +273,7 @@
             this.换皮肤ToolStripMenuItem,
             this.退出ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(113, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
             // 
             // 换皮肤ToolStripMenuItem
             // 
@@ -282,34 +282,34 @@
             this.menItemSkin2,
             this.menItemSkin3});
             this.换皮肤ToolStripMenuItem.Name = "换皮肤ToolStripMenuItem";
-            this.换皮肤ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.换皮肤ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.换皮肤ToolStripMenuItem.Text = "换皮肤";
             // 
             // menItemSkin1
             // 
             this.menItemSkin1.Name = "menItemSkin1";
-            this.menItemSkin1.Size = new System.Drawing.Size(124, 22);
+            this.menItemSkin1.Size = new System.Drawing.Size(152, 22);
             this.menItemSkin1.Text = "紫色小花";
             this.menItemSkin1.Click += new System.EventHandler(this.menItemSkin1_Click);
             // 
             // menItemSkin2
             // 
             this.menItemSkin2.Name = "menItemSkin2";
-            this.menItemSkin2.Size = new System.Drawing.Size(124, 22);
+            this.menItemSkin2.Size = new System.Drawing.Size(152, 22);
             this.menItemSkin2.Text = "蓝色经典";
             this.menItemSkin2.Click += new System.EventHandler(this.menItemSkin2_Click);
             // 
             // menItemSkin3
             // 
             this.menItemSkin3.Name = "menItemSkin3";
-            this.menItemSkin3.Size = new System.Drawing.Size(124, 22);
+            this.menItemSkin3.Size = new System.Drawing.Size(152, 22);
             this.menItemSkin3.Text = "绿色家园";
             this.menItemSkin3.Click += new System.EventHandler(this.menItemSkin3_Click);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.退出ToolStripMenuItem.Text = "退  出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
@@ -328,9 +328,9 @@
             this.工具ToolStripMenuItem1,
             this.窗口ToolStripMenuItem,
             this.帮助ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(8, 29);
+            this.menuStrip1.Location = new System.Drawing.Point(7, 31);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(514, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(517, 26);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -339,37 +339,37 @@
             this.文件ToolStripMenuItem1.Name = "文件ToolStripMenuItem1";
             this.文件ToolStripMenuItem1.ShortcutKeyDisplayString = "";
             this.文件ToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F)));
-            this.文件ToolStripMenuItem1.Size = new System.Drawing.Size(58, 20);
+            this.文件ToolStripMenuItem1.Size = new System.Drawing.Size(57, 22);
             this.文件ToolStripMenuItem1.Text = "文件(&F)";
             // 
             // 编辑ToolStripMenuItem1
             // 
             this.编辑ToolStripMenuItem1.Name = "编辑ToolStripMenuItem1";
-            this.编辑ToolStripMenuItem1.Size = new System.Drawing.Size(59, 20);
+            this.编辑ToolStripMenuItem1.Size = new System.Drawing.Size(58, 22);
             this.编辑ToolStripMenuItem1.Text = "编辑(&E)";
             // 
             // 视图ToolStripMenuItem
             // 
             this.视图ToolStripMenuItem.Name = "视图ToolStripMenuItem";
-            this.视图ToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.视图ToolStripMenuItem.Size = new System.Drawing.Size(59, 22);
             this.视图ToolStripMenuItem.Text = "视图(&V)";
             // 
             // 工具ToolStripMenuItem1
             // 
             this.工具ToolStripMenuItem1.Name = "工具ToolStripMenuItem1";
-            this.工具ToolStripMenuItem1.Size = new System.Drawing.Size(59, 20);
+            this.工具ToolStripMenuItem1.Size = new System.Drawing.Size(58, 22);
             this.工具ToolStripMenuItem1.Text = "工具(&T)";
             // 
             // 窗口ToolStripMenuItem
             // 
             this.窗口ToolStripMenuItem.Name = "窗口ToolStripMenuItem";
-            this.窗口ToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.窗口ToolStripMenuItem.Size = new System.Drawing.Size(63, 22);
             this.窗口ToolStripMenuItem.Text = "窗口(&W)";
             // 
             // 帮助ToolStripMenuItem
             // 
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(60, 22);
             this.帮助ToolStripMenuItem.Text = "帮助(&H)";
             // 
             // panelRightCornu
@@ -377,17 +377,17 @@
             this.panelRightCornu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panelRightCornu.BackColor = System.Drawing.Color.Transparent;
             this.panelRightCornu.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
-            this.panelRightCornu.Location = new System.Drawing.Point(523, 400);
+            this.panelRightCornu.Location = new System.Drawing.Point(525, 400);
             this.panelRightCornu.Name = "panelRightCornu";
-            this.panelRightCornu.Size = new System.Drawing.Size(8, 8);
+            this.panelRightCornu.Size = new System.Drawing.Size(6, 8);
             this.panelRightCornu.TabIndex = 8;
-            this.panelRightCornu.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelRightCornu_MouseMove);
             this.panelRightCornu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelRightCornu_MouseDown);
+            this.panelRightCornu.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelRightCornu_MouseMove);
             this.panelRightCornu.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelRightCornu_MouseUp);
             // 
             // Frm_Main
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
+            this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
             this.ClientSize = new System.Drawing.Size(531, 408);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.panel_Left);
@@ -406,8 +406,8 @@
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "窗体换肤程序";
-            this.Load += new System.EventHandler(this.FormCusSkin_Load);
             this.Activated += new System.EventHandler(this.FormCusSkin_Activated);
+            this.Load += new System.EventHandler(this.FormCusSkin_Load);
             this.panel_Left.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();

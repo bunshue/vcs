@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Runtime.InteropServices;
+
 namespace 获取网络中某台计算机的磁盘信息
 {
     public partial class Form1 : Form
@@ -25,12 +26,13 @@ namespace 获取网络中某台计算机的磁盘信息
             {
                 long fb, ftb, tfb;
                 string str = this.folderBrowserDialog1.SelectedPath;
+                richTextBox1.Text += "path : " + str + "\n";
                 this.textBox4.Text = str;
                 if (GetDiskFreeSpaceEx(str, out fb, out ftb, out tfb) != 0)
                 {
-                    string strfb = Convert.ToString(fb / 1024 / 1024)+"M";
-                    string strftb = Convert.ToString(ftb / 1024 / 1024)+"M";
-                    string strtfb = Convert.ToString(tfb / 1024 / 1024)+"M";
+                    string strfb = Convert.ToString(fb / 1024 / 1024/1024)+" G";
+                    string strftb = Convert.ToString(ftb / 1024 / 1024/1024)+" G";
+                    string strtfb = Convert.ToString(tfb / 1024 / 1024/1024)+" G";
                     this.textBox2.Text = strfb;//总空间
                     this.textBox1.Text = strftb;//可用空间
                     this.textBox3.Text = strtfb;//总剩余空间

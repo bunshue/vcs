@@ -166,15 +166,23 @@ namespace _server
         }
         private void Show_label3(string str)
         {
+            richTextBox1.Text += "str = " + str + "\n";
 
             mydel a = Show_label3;
             object[] obj;
             obj = new object[1];
             obj[0] = str;
-            if (label3.InvokeRequired) this.Invoke(a, obj);
-            else this.label3.Text = label3.Text + (string)obj[0] + "\n";
-
+            if (label3.InvokeRequired)
+            {
+                this.Invoke(a, obj);
+            }
+            else
+            {
+                this.label3.Text = label3.Text + (string)obj[0] + "\n";
+                richTextBox1.Text += "新上線者 : " + (string)obj[0] + "\n";
+            }
         }
+
         private void ClientService() //這個副程式，乃是無限迴圈中偵測是否有Client傳送訊息
         {
             // *********************************************
