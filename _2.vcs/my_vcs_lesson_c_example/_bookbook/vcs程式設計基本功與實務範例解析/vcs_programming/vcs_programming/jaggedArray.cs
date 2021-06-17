@@ -29,45 +29,90 @@ namespace vcs_programming
         private void jaggedArray_Load(object sender, EventArgs e)
         {
             lblCounter.Text = "共有0個顧客";
+            richTextBox1.Text += "共有0個顧客\n";
         }
 
         private void btnInput_Click(object sender, EventArgs e)
         {
-            if (Counter >= 30) MessageBox.Show("儲存空間已滿","錯誤");
-            else { //紀錄交易的相關資訊
+            if (Counter >= 30)
+            {
+                MessageBox.Show("儲存空間已滿", "錯誤");
+            }
+            else //紀錄交易的相關資訊
+            {
                 name[Counter] = txtName.Text;
-                if(rdbMale.Checked) gender[ Counter ] = '男';
-                else gender[Counter] = '女';
+                if (rdbMale.Checked)
+                {
+                    gender[Counter] = '男';
+                }
+                else
+                {
+                    gender[Counter] = '女';
+                }
 
                 // 檢查共買了多少商品
                 int ctr = 0;
-                if (checkBox1.Checked) ctr++;
-                if (checkBox2.Checked) ctr++;
-                if (checkBox3.Checked) ctr++;
-                if (checkBox4.Checked) ctr++;
-                if (checkBox5.Checked) ctr++;
+                if (checkBox1.Checked)
+                {
+                    ctr++;
+                }
+                if (checkBox2.Checked)
+                {
+                    ctr++;
+                }
+                if (checkBox3.Checked)
+                {
+                    ctr++;
+                }
+                if (checkBox4.Checked)
+                {
+                    ctr++;
+                }
+                if (checkBox5.Checked)
+                {
+                    ctr++;
+                }
 
                 // 動態配置儲存交易商品的陣列
                 trans[Counter] = new string[ctr];
 
                 // 儲存購買的商品名稱
                 ctr = 0;
-                if (checkBox1.Checked) trans[Counter][ctr++] = checkBox1.Text;
-                if (checkBox2.Checked) trans[Counter][ctr++] = checkBox2.Text;
-                if (checkBox3.Checked) trans[Counter][ctr++] = checkBox3.Text;
-                if (checkBox4.Checked) trans[Counter][ctr++] = checkBox4.Text;
-                if (checkBox5.Checked) trans[Counter][ctr++] = checkBox5.Text;
+                if (checkBox1.Checked)
+                {
+                    trans[Counter][ctr++] = checkBox1.Text;
+                }
+                if (checkBox2.Checked)
+                {
+                    trans[Counter][ctr++] = checkBox2.Text;
+                }
+                if (checkBox3.Checked)
+                {
+                    trans[Counter][ctr++] = checkBox3.Text;
+                }
+                if (checkBox4.Checked)
+                {
+                    trans[Counter][ctr++] = checkBox4.Text;
+                }
+                if (checkBox5.Checked)
+                {
+                    trans[Counter][ctr++] = checkBox5.Text;
+                }
 
                 // 顯示新交易資訊
                 string output = "新顧客\r\n";
                 output = name[Counter] + ", " + gender[Counter];
                 for (int i = 0; i < ctr; i++)
+                {
                     output += ", " + trans[Counter][i];
+                }
                 txtOutput.Text = output;
+                richTextBox1.Text += output;
 
                 // 顧客數加1
                 Counter++;
                 lblCounter.Text = "共有" + Counter + "個顧客";
+                richTextBox1.Text += "共有" + Counter + "個顧客\n";
 
                 //清除介面上輸入的資料
                 txtName.Text = "";
@@ -92,12 +137,14 @@ namespace vcs_programming
                 str += name[i] + ", " + gender[i];
                 //輸出購買的所有商品
                 for (int j = 0; j < trans[i].Length; j++)
+                {
                     str += ", " + trans[i][j];
-
+                }
                 str += "\r\n";
             }
 
             txtOutput.Text = str;
+            richTextBox1.Text += str;
 
             txtName.Focus();
         }
@@ -110,7 +157,10 @@ namespace vcs_programming
 
             for (i = 0; i < Counter; i++)
             {
-                if (name[i] == n) break;
+                if (name[i] == n)
+                {
+                    break;
+                }
             }
 
             if (i < Counter) //找到
@@ -118,14 +168,20 @@ namespace vcs_programming
                 string str = "!!!搜尋結果!!!\r\n";
                 str += name[i] + ", " + gender[i];
                 for (int j = 0; j < trans[i].Length; j++)
-                     str += ", " + trans[i][j];
-
+                {
+                    str += ", " + trans[i][j];
+                }
                 txtOutput.Text = str;
+                richTextBox1.Text += str;
             }
-            else txtOutput.Text = "!!!搜尋結果!!!\r\n沒有找到" + n;
-
+            else
+            {
+                txtOutput.Text = "!!!搜尋結果!!!\r\n沒有找到\n";
+                richTextBox1.Text += "!!!搜尋結果!!!\r\n沒有找到\n";
+            }
             txtName.Text = "";
             txtName.Focus();
         }
     }
 }
+

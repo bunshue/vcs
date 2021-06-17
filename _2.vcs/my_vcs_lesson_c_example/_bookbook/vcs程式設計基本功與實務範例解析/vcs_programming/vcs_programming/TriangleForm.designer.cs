@@ -42,6 +42,7 @@
             this.txtHeight.Name = "txtHeight";
             this.txtHeight.Size = new System.Drawing.Size(100, 27);
             this.txtHeight.TabIndex = 2;
+            this.txtHeight.Text = "8";
             // 
             // label2
             // 
@@ -58,6 +59,7 @@
             this.txtBase.Name = "txtBase";
             this.txtBase.Size = new System.Drawing.Size(100, 27);
             this.txtBase.TabIndex = 1;
+            this.txtBase.Text = "10";
             // 
             // label1
             // 

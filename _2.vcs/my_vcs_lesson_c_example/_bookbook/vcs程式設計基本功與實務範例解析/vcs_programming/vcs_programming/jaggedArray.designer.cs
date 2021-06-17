@@ -45,6 +45,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.lblCounter = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -224,11 +225,20 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(319, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(335, 624);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "";
+            // 
             // jaggedArray
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(341, 424);
+            this.ClientSize = new System.Drawing.Size(660, 639);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.lblCounter);
             this.Controls.Add(this.btnExit);
@@ -273,5 +283,6 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblCounter;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

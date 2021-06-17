@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using System.IO;
 
-
 namespace vcs_programming
 {
     public partial class MainForm : Form
@@ -41,38 +40,48 @@ namespace vcs_programming
             lblCounter.Text = "目前共有" + Person.counter() + "人, ";
             lblCounter.Text += "學生" + Student.counter() + "人, ";
             lblCounter.Text += "老師" + Teacher.counter() + "人";
+
+            richTextBox1.Text += "目前共有" + Person.counter() + "人\n";
+            richTextBox1.Text += "學生" + Student.counter() + "人\n";
+            richTextBox1.Text += "老師" + Teacher.counter() + "人\n";
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
         {
             // add a Teacher
-            if (rdbTeacher.Checked) {
+            if (rdbTeacher.Checked)
+            {
                 tForm tf = new tForm();  //建立老師表單
                 if (tf.ShowDialog() == DialogResult.OK) { //開啟表單
                     int pos = Person.counter() - 1;
                     P[ pos ] = tf.tObj;
                     txtOutput.Text = "新增的老師\r\n" + P[pos].show() + "\r\n";
+                    richTextBox1.Text += "新增的老師\r\n" + P[pos].show() + "\n";
                     showCounter();
                 }
                 tf.Dispose(); //釋放表單資源
             }
             // add a Student
-            if (rdbStudent.Checked) {
+            if (rdbStudent.Checked)
+            {
                 sForm sf = new sForm(); //建立學生表單
                 if (sf.ShowDialog() == DialogResult.OK) { //開啟表單
                     int pos = Person.counter()-1;
                     P[pos] = sf.sObj;
                     txtOutput.Text = "新增的學生\r\n" + P[pos].show() + "\r\n";
+                    richTextBox1.Text += "新增的學生\r\n" + P[pos].show() + "\n";
                     showCounter();
                 }
                 sf.Dispose();  //釋放表單資源
             }
             //list all elements
-            if (rdbAllElements.Checked) {
+            if (rdbAllElements.Checked)
+            {
                 string str = "<<< 成員列表 >>>\r\n";
 	            for(int i = 0; i < Person.counter(); i++)
 		            str += P[i].show() + "--------------------\r\n";
                 txtOutput.Text = str;
+                richTextBox1.Text += str;
             }            
         }
 

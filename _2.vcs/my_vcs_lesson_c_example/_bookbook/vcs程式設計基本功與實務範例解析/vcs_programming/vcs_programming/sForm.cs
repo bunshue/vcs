@@ -11,12 +11,17 @@ namespace vcs_programming
 {
     public partial class sForm : Form
     {
+        internal Student sObj; //讓主選單可以取得此Student物件
+
         public sForm()
         {
             InitializeComponent();
         }
 
-        internal Student sObj; //讓主選單可以取得此Student物件
+        private void sForm_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
@@ -39,5 +44,6 @@ namespace vcs_programming
 
             sObj = new Student(name, age, gender, date, c, ma);
         }
+
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_programming
+namespace vcs_Mouse
 {
     static class Program
     {
@@ -15,16 +15,7 @@ namespace vcs_programming
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            /* 第 12 章 */
-            //Application.Run(new jaggedArray());     //有點多
-
-            /* 第 19 章 */
-            //Application.Run(new MainForm());    //學校成員管理表單
-
-            /* 第 20 章 */
-            Application.Run(new ShapeManagerForm());
-
+            Application.Run(new Form1());
         }
     }
 }

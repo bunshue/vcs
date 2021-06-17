@@ -56,6 +56,7 @@
             this.txtRank.Name = "txtRank";
             this.txtRank.Size = new System.Drawing.Size(100, 27);
             this.txtRank.TabIndex = 50;
+            this.txtRank.Text = "初級";
             // 
             // label6
             // 
@@ -108,6 +109,7 @@
             this.txtDay.Name = "txtDay";
             this.txtDay.Size = new System.Drawing.Size(90, 27);
             this.txtDay.TabIndex = 11;
+            this.txtDay.Text = "4";
             // 
             // label3
             // 
@@ -124,6 +126,7 @@
             this.txtMonth.Name = "txtMonth";
             this.txtMonth.Size = new System.Drawing.Size(90, 27);
             this.txtMonth.TabIndex = 9;
+            this.txtMonth.Text = "5";
             // 
             // label4
             // 
@@ -140,6 +143,7 @@
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(90, 27);
             this.txtYear.TabIndex = 7;
+            this.txtYear.Text = "1998";
             // 
             // label5
             // 
@@ -166,7 +170,7 @@
             this.rdbFemale.AutoSize = true;
             this.rdbFemale.Location = new System.Drawing.Point(15, 53);
             this.rdbFemale.Name = "rdbFemale";
-            this.rdbFemale.Size = new System.Drawing.Size(35, 16);
+            this.rdbFemale.Size = new System.Drawing.Size(42, 20);
             this.rdbFemale.TabIndex = 1;
             this.rdbFemale.Text = "女";
             this.rdbFemale.UseVisualStyleBackColor = true;
@@ -177,7 +181,7 @@
             this.rdbMale.Checked = true;
             this.rdbMale.Location = new System.Drawing.Point(15, 27);
             this.rdbMale.Name = "rdbMale";
-            this.rdbMale.Size = new System.Drawing.Size(35, 16);
+            this.rdbMale.Size = new System.Drawing.Size(42, 20);
             this.rdbMale.TabIndex = 0;
             this.rdbMale.TabStop = true;
             this.rdbMale.Text = "男";
@@ -189,6 +193,7 @@
             this.txtAge.Name = "txtAge";
             this.txtAge.Size = new System.Drawing.Size(100, 27);
             this.txtAge.TabIndex = 43;
+            this.txtAge.Text = "22";
             // 
             // label2
             // 
@@ -205,6 +210,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 27);
             this.txtName.TabIndex = 41;
+            this.txtName.Text = "david";
             // 
             // label1
             // 
@@ -237,6 +243,7 @@
             this.Name = "tForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "教師表單";
+            this.Load += new System.EventHandler(this.tForm_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

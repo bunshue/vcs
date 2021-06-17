@@ -38,6 +38,7 @@
             this.lblCounter = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,7 +90,7 @@
             this.rdbAllElements.AutoSize = true;
             this.rdbAllElements.Location = new System.Drawing.Point(19, 91);
             this.rdbAllElements.Name = "rdbAllElements";
-            this.rdbAllElements.Size = new System.Drawing.Size(95, 16);
+            this.rdbAllElements.Size = new System.Drawing.Size(122, 20);
             this.rdbAllElements.TabIndex = 6;
             this.rdbAllElements.Text = "列出所有成員";
             this.rdbAllElements.UseVisualStyleBackColor = true;
@@ -99,7 +100,7 @@
             this.rdbStudent.AutoSize = true;
             this.rdbStudent.Location = new System.Drawing.Point(19, 61);
             this.rdbStudent.Name = "rdbStudent";
-            this.rdbStudent.Size = new System.Drawing.Size(71, 16);
+            this.rdbStudent.Size = new System.Drawing.Size(90, 20);
             this.rdbStudent.TabIndex = 5;
             this.rdbStudent.Text = "新增學生";
             this.rdbStudent.UseVisualStyleBackColor = true;
@@ -110,7 +111,7 @@
             this.rdbTeacher.Checked = true;
             this.rdbTeacher.Location = new System.Drawing.Point(19, 32);
             this.rdbTeacher.Name = "rdbTeacher";
-            this.rdbTeacher.Size = new System.Drawing.Size(71, 16);
+            this.rdbTeacher.Size = new System.Drawing.Size(90, 20);
             this.rdbTeacher.TabIndex = 4;
             this.rdbTeacher.TabStop = true;
             this.rdbTeacher.Text = "新增老師";
@@ -145,12 +146,20 @@
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(12, 314);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(447, 312);
+            this.richTextBox1.TabIndex = 11;
+            this.richTextBox1.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 310);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(789, 638);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblCounter);
@@ -184,5 +193,6 @@
         private System.Windows.Forms.Label lblCounter;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

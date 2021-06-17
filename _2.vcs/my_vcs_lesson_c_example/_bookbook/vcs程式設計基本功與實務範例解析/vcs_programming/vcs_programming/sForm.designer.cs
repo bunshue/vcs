@@ -58,6 +58,7 @@
             this.txtMath.Name = "txtMath";
             this.txtMath.Size = new System.Drawing.Size(100, 27);
             this.txtMath.TabIndex = 40;
+            this.txtMath.Text = "87";
             // 
             // label7
             // 
@@ -74,6 +75,7 @@
             this.txtChinese.Name = "txtChinese";
             this.txtChinese.Size = new System.Drawing.Size(100, 27);
             this.txtChinese.TabIndex = 38;
+            this.txtChinese.Text = "92";
             // 
             // label6
             // 
@@ -126,6 +128,7 @@
             this.txtDay.Name = "txtDay";
             this.txtDay.Size = new System.Drawing.Size(90, 27);
             this.txtDay.TabIndex = 11;
+            this.txtDay.Text = "23";
             // 
             // label3
             // 
@@ -142,6 +145,7 @@
             this.txtMonth.Name = "txtMonth";
             this.txtMonth.Size = new System.Drawing.Size(90, 27);
             this.txtMonth.TabIndex = 9;
+            this.txtMonth.Text = "3";
             // 
             // label4
             // 
@@ -158,6 +162,7 @@
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(90, 27);
             this.txtYear.TabIndex = 7;
+            this.txtYear.Text = "2010";
             // 
             // label5
             // 
@@ -182,22 +187,22 @@
             // rdbFemale
             // 
             this.rdbFemale.AutoSize = true;
+            this.rdbFemale.Checked = true;
             this.rdbFemale.Location = new System.Drawing.Point(15, 53);
             this.rdbFemale.Name = "rdbFemale";
-            this.rdbFemale.Size = new System.Drawing.Size(35, 16);
+            this.rdbFemale.Size = new System.Drawing.Size(42, 20);
             this.rdbFemale.TabIndex = 1;
+            this.rdbFemale.TabStop = true;
             this.rdbFemale.Text = "女";
             this.rdbFemale.UseVisualStyleBackColor = true;
             // 
             // rdbMale
             // 
             this.rdbMale.AutoSize = true;
-            this.rdbMale.Checked = true;
             this.rdbMale.Location = new System.Drawing.Point(15, 27);
             this.rdbMale.Name = "rdbMale";
-            this.rdbMale.Size = new System.Drawing.Size(35, 16);
+            this.rdbMale.Size = new System.Drawing.Size(42, 20);
             this.rdbMale.TabIndex = 0;
-            this.rdbMale.TabStop = true;
             this.rdbMale.Text = "男";
             this.rdbMale.UseVisualStyleBackColor = true;
             // 
@@ -207,6 +212,7 @@
             this.txtAge.Name = "txtAge";
             this.txtAge.Size = new System.Drawing.Size(100, 27);
             this.txtAge.TabIndex = 31;
+            this.txtAge.Text = "10";
             // 
             // label2
             // 
@@ -223,6 +229,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 27);
             this.txtName.TabIndex = 29;
+            this.txtName.Text = "lion";
             // 
             // label1
             // 
@@ -257,6 +264,7 @@
             this.Name = "sForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "學生表單";
+            this.Load += new System.EventHandler(this.sForm_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

@@ -11,12 +11,17 @@ namespace vcs_programming
 {
     public partial class tForm : Form
     {
+        internal Teacher tObj; //讓主選單可以取得此Teacher物件
+
         public tForm()
         {
             InitializeComponent();
         }
 
-        internal Teacher tObj; //讓主選單可以取得此Teacher物件
+        private void tForm_Load(object sender, EventArgs e)
+        {
+
+        }
                 
         private void btnOK_Click(object sender, EventArgs e)
         {
@@ -39,6 +44,7 @@ namespace vcs_programming
             tObj = new Teacher(name, age, gender, date, r);
                        
         }
+
        
     }
 }

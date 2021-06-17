@@ -16,6 +16,11 @@ namespace vcs_DragPicture1
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            pictureBox2.Image = Image.FromFile("../../cat1.gif");//載入cat1.gif
+        }
+
         //製作拖曳元件
         //定義一些全域變數幫助拖曳時計算元件位置
         #region 移動元件時相關變數
@@ -59,5 +64,51 @@ namespace vcs_DragPicture1
             _isMoveState = false;
         }
         #endregion
+
+
+        //移動貓咪 ST
+        int offset_x = 0;
+        int offset_y = 0;
+        bool drag = false;//紀錄是否可拖曳，預設不可拖曳
+
+        //滑鼠游標移入pictureBox2時
+        private void pictureBox2_MouseEnter(object sender, EventArgs e)
+        {
+            pictureBox2.Image = Image.FromFile("../../cat3.gif");//載入cat3.gif
+        }
+        //滑鼠游標移出pictureBox2時
+        private void pictureBox2_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox2.Image = Image.FromFile("../../cat1.gif");//載入cat1.gif
+        }
+        //在pictureBox2內按下滑鼠左鍵時
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)//若是按滑鼠左鍵
+            {
+                pictureBox2.Image = Image.FromFile("../../cat4.gif");//載入cat4.gif
+                drag = true;//設drag=true，表可拖曳
+                //richTextBox1.Text += e.Location.ToString();
+                offset_x = e.Location.X;
+                offset_y = e.Location.Y;
+            }
+        }
+        //滑鼠游標在pictureBox2內移動時
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (drag)//若設drag=true
+            {   //將目前滑鼠的座標設為pictureBox2的座標
+                pictureBox2.Left += (e.X - offset_x);
+                pictureBox2.Top += (e.Y - offset_y);
+            }
+        }
+        //在pictureBox2內放開滑鼠左鍵時
+        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
+        {
+            pictureBox2.Image = Image.FromFile("../../cat1.gif");//載入cat1.gif
+            drag = false;//設drag=false，表不可拖曳
+        }
+        //移動貓咪 SP
     }
 }
+

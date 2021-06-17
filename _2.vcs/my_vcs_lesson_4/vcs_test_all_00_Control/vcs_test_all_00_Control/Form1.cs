@@ -733,6 +733,11 @@ namespace vcs_test_all_00_Control
                 richTextBox1.Text += "取得控件 : " + cont.Name.ToString() + "\tText : " + cont.Text + "\tType : " + cont.GetType().ToString() + "\n";
             }
         }
+
+        private void btn_help_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, "help.hlp");
+        }
     }
 
     class MyRecordControlClass

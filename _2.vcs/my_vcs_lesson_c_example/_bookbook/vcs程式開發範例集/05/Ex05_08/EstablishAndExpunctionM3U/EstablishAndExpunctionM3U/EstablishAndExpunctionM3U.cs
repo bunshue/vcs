@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 
 namespace EstablishAndExpunctionM3U
@@ -89,6 +90,8 @@ namespace EstablishAndExpunctionM3U
         private void found_Click(object sender, EventArgs e)
         {
             string filename = Application.StartupPath + "\\mp3_playlist_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".m3u";
+            richTextBox1.Text += "建立\t" + filename + "\n";
+
             m3uCreate(filename);//建立一個M3U文件
             M3UName.Text = "恭喜你，建立成功！";//在文字框中顯示提示訊息
             M3UName.ForeColor = Color.Red;//設定文字框中文字的顏色
@@ -99,7 +102,9 @@ namespace EstablishAndExpunctionM3U
         #region 當單擊打開M3U文件的「打開」按鈕時
         private void openM3U_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "開啟\n";
             M3UPath.Text = ListM3UFile();//在文字框中顯示M3U文件的路徑
+            richTextBox1.Text += "開啟\t" + M3UPath.Text + "\n";
         }
         #endregion
 
@@ -119,6 +124,7 @@ namespace EstablishAndExpunctionM3U
 
         private void openMusic_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "開啟\n";
             string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
 
             musicPath.Text = filename;
@@ -130,6 +136,7 @@ namespace EstablishAndExpunctionM3U
         #region 單擊「寫入」按鈕時
         private void writeIn_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "寫入\n";
             m3uWrite(musicName.Text, musicPath.Text, M3UPath.Text);//向M3U文件中寫入內容
         }
         #endregion
@@ -137,13 +144,16 @@ namespace EstablishAndExpunctionM3U
         #region 單擊「打開」按鈕時
         private void unfold_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "開啟\n";
             fileName.Text = ListM3UFile();//打開一個M3U文件
+            richTextBox1.Text += "開啟\t" + fileName.Text + "\n";
         }
         #endregion
 
         #region 單擊「刪除」按鈕時
         private void Expunction_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "刪除\t" + fileName.Text + "\n";
             m3uDelete(fileName.Text); //刪除指定的文件
             temp = null;//清空變數temp中保存的值
             fileName.Clear();//清空文字框中的內容
