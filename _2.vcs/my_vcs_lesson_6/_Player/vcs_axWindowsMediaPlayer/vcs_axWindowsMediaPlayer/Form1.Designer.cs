@@ -44,6 +44,12 @@
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label3 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.bt_info = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -52,17 +58,17 @@
             // axWindowsMediaPlayer1
             // 
             this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(12, 205);
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(12, 173);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(578, 418);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(618, 465);
             this.axWindowsMediaPlayer1.TabIndex = 0;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(842, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(652, 251);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(207, 626);
+            this.richTextBox1.Size = new System.Drawing.Size(397, 420);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -146,7 +152,7 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(61, 64);
+            this.trackBar1.Location = new System.Drawing.Point(83, 64);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(239, 45);
@@ -155,7 +161,7 @@
             // 
             // trackBar2
             // 
-            this.trackBar2.Location = new System.Drawing.Point(61, 98);
+            this.trackBar2.Location = new System.Drawing.Point(83, 98);
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(239, 45);
             this.trackBar2.TabIndex = 19;
@@ -179,11 +185,72 @@
             this.label3.TabIndex = 20;
             this.label3.Text = "播放位置";
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(306, 12);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(43, 34);
+            this.button7.TabIndex = 21;
+            this.button7.Text = "靜音";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(355, 12);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(43, 34);
+            this.button8.TabIndex = 22;
+            this.button8.Text = "最前";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(12, 648);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(618, 23);
+            this.progressBar1.TabIndex = 23;
+            // 
+            // bt_info
+            // 
+            this.bt_info.Location = new System.Drawing.Point(587, 12);
+            this.bt_info.Name = "bt_info";
+            this.bt_info.Size = new System.Drawing.Size(43, 34);
+            this.bt_info.TabIndex = 24;
+            this.bt_info.Text = "info";
+            this.bt_info.UseVisualStyleBackColor = true;
+            this.bt_info.Click += new System.EventHandler(this.bt_info_Click);
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(652, 12);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(397, 220);
+            this.listBox1.TabIndex = 25;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(404, 12);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(43, 34);
+            this.button9.TabIndex = 26;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1061, 650);
+            this.ClientSize = new System.Drawing.Size(1061, 683);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.bt_info);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.trackBar2);
             this.Controls.Add(this.trackBar1);
@@ -224,6 +291,12 @@
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button bt_info;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button button9;
     }
 }
 

@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-/*
+using System.IO;    //for Path
+
+/*  sugar
 使用AxWindowsMediaPlayer播放多媒體
 
 加入工具箱
@@ -21,12 +23,23 @@ using System.Windows.Forms;
 
 */
 
+/* old
+//使用WMP播放音樂檔
+//參考/加入參考/COM/Windows Media Player 1.0 wmp.dll
+
+//WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
+*/
 
 namespace vcs_axWindowsMediaPlayer
 {
     public partial class Form1 : Form
     {
         string filename = @"C:\______test_files\enka.avi";
+        //string filename = "C:\\______test_files\\_mp3\\07    都はろみ--妻戀道中(他鄉思妻兒).mp3";
+
+        //用來儲存音樂檔案的全路徑
+        List<string> listSong = new List<string>();
+        bool flag_playing = false;
 
         public Form1()
         {
@@ -36,60 +49,171 @@ namespace vcs_axWindowsMediaPlayer
         private void Form1_Load(object sender, EventArgs e)
         {
             label3.Text = "";
-            axWindowsMediaPlayer1.Dock = DockStyle.Fill;     //填滿整個表單
+            //axWindowsMediaPlayer1.Dock = DockStyle.Fill;     //填滿整個表單
+            axWindowsMediaPlayer1.settings.volume = 50;
+            //axWindowsMediaPlayer1.settings.autoStart = false;             //設定不自動播放, 預設是自動播放
 
-            //this.axWindowsMediaPlayer1.settings.autoStart = false;                     //設定不自動播放, 預設是自動播放
+            trackBar1.Minimum = 0;                                          //設定音量調整Bar最小值為最小音量值(0)
+            trackBar1.Maximum = 100;                                        //設定音量調整Bar最大值為最大音量值(100)
+            trackBar1.Value = axWindowsMediaPlayer1.settings.volume;        //設定音量調整Bar目前值為目前音量值
+            label1.Text = "音量 : " + trackBar1.Value.ToString();
 
-            this.trackBar1.Minimum = 0;                                               //設定音量調整Bar最小值為最小音量值(0)
-            this.trackBar1.Maximum = 100;                                             //設定音量調整Bar最大值為最大音量值(100)
-            this.trackBar1.Value = this.axWindowsMediaPlayer1.settings.volume;        //設定音量調整Bar目前值為目前音量值
-
-            this.timer1.Enabled = true;
+            timer1.Enabled = true;
+            listBox1.SelectedIndex = -1;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //表單標題顯示多媒體檔案路徑
+            //開啟多檔
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "請選擇檔案";
+            ofd.Multiselect = true;
+            ofd.InitialDirectory = @"D:\vcs\astro\_DATA2\_mp3\";
+            ofd.Filter = "音樂檔案|*.wav|mp3檔案|*.mp3|所有檔案|*.*";
+            ofd.FilterIndex = 2;
+            ofd.ShowDialog();
+            //獲得我們在資料夾中選擇所有檔案的全路徑
+            string[] path = ofd.FileNames;
+            for (int i = 0; i < path.Length; i++)
+            {
+                //將音樂檔案的檔名載入到ListBox中
+                listBox1.Items.Add(Path.GetFileName(path[i]));
+                //將音樂檔案的全路徑儲存到泛型集合中
+                listSong.Add(path[i]);
+            }
+            listBox1.SelectedIndex = 0;
+            flag_playing = false;
+
+            /*  播放單一檔案
+            //表單標題顯示檔案路徑
             this.Text = "播放檔案 : \t" + filename;
-            //axWindowsMediaPlayer1播放開檔對話方塊所選擇的多媒體檔
+            //axWindowsMediaPlayer1播放開檔對話方塊所選擇的檔案
             axWindowsMediaPlayer1.URL = filename;   //開啟檔案
-            this.trackBar2.Maximum = (int)this.axWindowsMediaPlayer1.currentMedia.duration;          //設定播放位置調整Bar最大值
+            trackBar2.Maximum = (int)axWindowsMediaPlayer1.currentMedia.duration;          //設定播放位置調整Bar最大值
+            */
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer1.Ctlcontrols.play();　　　　//開始播放多媒體檔
+            /*
+            axWindowsMediaPlayer1.Ctlcontrols.play();　　　　//開始播放
             richTextBox1.Text += "播放\n";
+            */
+
+
+            if (listBox1.SelectedIndex == -1)
+                return;
+
+            if (button2.Text == "播放")
+            {
+                if (flag_playing == false)
+                {
+                    axWindowsMediaPlayer1.URL = listSong[listBox1.SelectedIndex];   //開啟檔案
+                    //表單標題顯示檔案路徑
+                    this.Text = "播放檔案 : \t" + listSong[listBox1.SelectedIndex];
+                }
+
+                axWindowsMediaPlayer1.Ctlcontrols.play();
+                button2.Text = "暫停";
+                flag_playing = true;
+            }
+            else
+            {
+                axWindowsMediaPlayer1.Ctlcontrols.pause();        //暫停撥放
+                button2.Text = "播放";
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer1.Ctlcontrols.pause();　　　　//暫停播放多媒體檔
+            axWindowsMediaPlayer1.Ctlcontrols.pause();　　　　//暫停播放
             richTextBox1.Text += "暫停\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer1.Ctlcontrols.stop(); 　　　 //停止播放多媒體檔
+
+            if (listBox1.SelectedIndex == -1)
+                return;
+
             richTextBox1.Text += "停止\n";
+            axWindowsMediaPlayer1.Ctlcontrols.stop();         //停止播放
+            flag_playing = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.Ctlcontrols.previous();　　//播放上一段
             richTextBox1.Text += "播放上一段\n";
+
+            /*
+            if (listBox1.SelectedIndex == -1)
+                return;
+
+            // 獲得當前選中歌曲的索引
+            int index = listBox1.SelectedIndex;
+            index--;
+            if (index < 0)
+            {
+                index = listBox1.Items.Count - 1;
+            }
+            //將重新改變後的索引重新的賦值給當前選中項
+            listBox1.SelectedIndex = index;
+            axWindowsMediaPlayer1.URL = listSong[index];
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+            */
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.Ctlcontrols.next(); 　　　 //播放下一段
             richTextBox1.Text += "播放下一段\n";
+
+            /*
+            if (listBox1.SelectedIndex == -1)
+                return;
+
+            int index = listBox1.SelectedIndex;
+            index++;
+            if (index == listBox1.Items.Count)
+            {
+                index = 0;
+            }
+            listBox1.SelectedIndex = index;
+            axWindowsMediaPlayer1.URL = listSong[index];
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+            */
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (axWindowsMediaPlayer1.settings.mute == false)
+            {
+                axWindowsMediaPlayer1.settings.mute = true;
+                button7.Text = "恢復";
+            }
+            else
+            {
+                axWindowsMediaPlayer1.settings.mute = false;
+                button7.Text = "靜音";
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (axWindowsMediaPlayer1.currentMedia == null)
+                return;
+
+            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = 0;      //移動播放位置到最前面
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            //音量
-            this.axWindowsMediaPlayer1.settings.volume = this.trackBar1.Value;      //改變音量大小
+            //音量控制
+            axWindowsMediaPlayer1.settings.volume = trackBar1.Value;      //改變音量大小
+
+            label1.Text = "音量 : " + trackBar1.Value.ToString();
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
@@ -99,8 +223,10 @@ namespace vcs_axWindowsMediaPlayer
 
         private void trackBar2_MouseDown(object sender, MouseEventArgs e)
         {
-            timer1.Enabled = false;
+            if (axWindowsMediaPlayer1.currentMedia == null)
+                return;
 
+            timer1.Enabled = false;
         }
 
         private void trackBar2_MouseMove(object sender, MouseEventArgs e)
@@ -110,26 +236,125 @@ namespace vcs_axWindowsMediaPlayer
 
         private void trackBar2_MouseUp(object sender, MouseEventArgs e)
         {
+            if (axWindowsMediaPlayer1.currentMedia == null)
+                return;
+
             timer1.Enabled = true;
             //播放位置
-            this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition = trackBar2.Value;          //改變播放位置
+            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = trackBar2.Value;          //改變播放位置
             label3.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + " / " + axWindowsMediaPlayer1.currentMedia.durationString + " " + (axWindowsMediaPlayer1.Ctlcontrols.currentPosition / axWindowsMediaPlayer1.currentMedia.duration).ToString("P0");
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (this.axWindowsMediaPlayer1.currentMedia == null)
+            if (axWindowsMediaPlayer1.currentMedia == null)
                 return;
 
+            trackBar2.Minimum = 0;
+            trackBar2.Maximum = (int)axWindowsMediaPlayer1.currentMedia.duration;          //設定撥放位置調整Bar最大值
+            trackBar2.Value = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
 
-            this.trackBar2.Maximum = (int)this.axWindowsMediaPlayer1.currentMedia.duration;          //設定播放位置調整Bar最大值
-
-            this.trackBar2.Value = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
-
-            //richTextBox1.Text += this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
-            //richTextBox1.Text += this.axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + "\n";
+            //richTextBox1.Text += axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
+            //richTextBox1.Text += axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + "\n";
 
             label3.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + " / " + axWindowsMediaPlayer1.currentMedia.durationString + " " + (axWindowsMediaPlayer1.Ctlcontrols.currentPosition / axWindowsMediaPlayer1.currentMedia.duration).ToString("P0");
+
+
+            progressBar1.Value = MediaGetPosition();
+            if (WMPLib.WMPPlayState.wmppsPlaying == axWindowsMediaPlayer1.playState)
+            {
+                richTextBox1.Text += axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
+            }
+            else
+            {
+                timer1.Enabled = false;
+                richTextBox1.Text += "00:00";
+            }
+        }
+
+        public int MediaGetPosition()
+        {
+            int ret = 0;
+            if (WMPLib.WMPPlayState.wmppsPlaying != axWindowsMediaPlayer1.playState)
+            {
+                return ret;
+            }
+            double curPos = axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+            double totalLen = axWindowsMediaPlayer1.currentMedia.duration;
+            ret = (int)((curPos / totalLen) * 100);
+            //richTextBox1.Text += "ret = " + ret.ToString() + "\n";
+            return ret;
+        }
+
+        private void bt_info_Click(object sender, EventArgs e)
+        {
+
+            if (listBox1.SelectedIndex == -1)
+                return;
+
+            //axWindowsMediaPlayer1.Ctlcontrols.fastForward();  //快進
+            //axWindowsMediaPlayer1.Ctlcontrols.fastReverse();    //快退 似無效
+            //測試
+
+            /*
+            //加速
+            richTextBox1.Text += "current rate = " + axWindowsMediaPlayer1.settings.rate.ToString() + "\n";
+            axWindowsMediaPlayer1.settings.rate += 0.1;
+            richTextBox1.Text += "new rate = " + axWindowsMediaPlayer1.settings.rate.ToString() + "\n";
+            */
+
+            /* no work
+            axWindowsMediaPlayer1.URL = "https://www.youtube.com/watch?v=rjZksEz4kp0&t=337s";
+            axWindowsMediaPlayer1.Ctlcontrols.play();　　　　//開始播放
+            */
+
+            richTextBox1.Text += axWindowsMediaPlayer1.currentMedia.attributeCount.ToString() + "\n";
+            richTextBox1.Text += axWindowsMediaPlayer1.currentMedia.duration.ToString() + "\n";
+            richTextBox1.Text += axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
+
+            richTextBox1.Text += axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + "\n";
+            richTextBox1.Text += axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
+            richTextBox1.Text += axWindowsMediaPlayer1.Ctlcontrols.currentMarker.ToString() + "\n";
+
+            richTextBox1.Text += axWindowsMediaPlayer1.currentMedia.durationString + "\n";
+            richTextBox1.Text += axWindowsMediaPlayer1.currentMedia.duration.ToString() + "\n";
+            richTextBox1.Text += axWindowsMediaPlayer1.currentMedia.attributeCount.ToString() + "\n";
+
+            richTextBox1.Text += axWindowsMediaPlayer1.currentMedia.name + "\n";
+            richTextBox1.Text += axWindowsMediaPlayer1.currentMedia.sourceURL + "\n";
+            richTextBox1.Text += axWindowsMediaPlayer1.settings.playCount.ToString() + "\n";
+
+
+            return;
+
+            if (axWindowsMediaPlayer1.currentMedia == null)
+                return;
+
+            //info
+            richTextBox1.Text += "status" + "\t" + axWindowsMediaPlayer1.status + "\n";
+            richTextBox1.Text += "playState" + "\t" + axWindowsMediaPlayer1.playState + "\n";
+            richTextBox1.Text += "URL" + "\t" + axWindowsMediaPlayer1.URL + "\n";
+            richTextBox1.Text += "versionInfo" + "\t" + axWindowsMediaPlayer1.versionInfo + "\n";
+            richTextBox1.Text += "windowlessVideo" + "\t" + axWindowsMediaPlayer1.windowlessVideo + "\n";
+            richTextBox1.Text += "uiMode" + "\t" + axWindowsMediaPlayer1.uiMode + "\n";
+
+            richTextBox1.Text += "获取当前媒体信息\n";
+            richTextBox1.Text += "Title" + "\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title") + "\n";
+            richTextBox1.Text += "Author" + "\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Author") + "\n";
+            richTextBox1.Text += "Copyright" + "\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Copyright") + "\n";
+            richTextBox1.Text += "Description" + "\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Description") + "\n";
+            richTextBox1.Text += "Duration" + "\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Duration") + "\n";
+            richTextBox1.Text += "FileSize" + "\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("FileSize") + "\n";
+            richTextBox1.Text += "FileType" + "\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("FileType") + "\n";
+            richTextBox1.Text += "sourceURL" + "\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("sourceURL") + "\n";
+
+
+
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
         }
     }
 }
