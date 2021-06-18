@@ -1072,6 +1072,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(180, 40);
             this.button40.TabIndex = 73;
+            this.button40.Text = "ByteConversionTBGBMBKB";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 

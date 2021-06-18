@@ -445,7 +445,7 @@ namespace vcs_DrAP
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                 ProcessFile(path, 0);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
             }
             else if (Directory.Exists(path))
             {
@@ -493,7 +493,7 @@ namespace vcs_DrAP
                     */
                 }
 
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
                 show_file_info();
                 flag_search_done = 1;
             }
@@ -645,8 +645,8 @@ namespace vcs_DrAP
                 //richTextBox1.Text += fi.Name + " len = " + fi.Length.ToString() + "\n";
                 //richTextBox1.Text += filename + "\n";
                 //richTextBox1.Text += fi.Name + "\n";
-                //richTextBox1.Text += fi.Name + " \t\t " + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                //richTextBox1.Text += fi.Name + " \t\t " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
 
                 MediaFile f = new MediaFile(fi.FullName);
 
@@ -662,14 +662,14 @@ namespace vcs_DrAP
                     if (cb_generate_text.Checked == true)
                     {
                         richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                            fi.FullName, ByteConversionGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                            fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
                     }
                 }
                 else
                 {
                     if (cb_generate_text.Checked == true)
                     {
-                        richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                        richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
                     }
                 }
 
@@ -684,7 +684,7 @@ namespace vcs_DrAP
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
 
                 //sub_i1a.Text = fi.Length.ToString();
-                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fi.Length));
+                sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length));
                 i1.SubItems.Add(sub_i1a);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
 
@@ -769,7 +769,7 @@ namespace vcs_DrAP
                         //richTextBox2.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
                         //richTextBox2.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
                         //richTextBox2.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                        //fi.FullName, ByteConversionGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                        //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
 
                         if (((cb_video_l.Checked == true) && (h >= 1080)) || ((cb_video_m.Checked == true) && (h < 1080) && (h > 480)) || ((cb_video_s.Checked == true) && (h <= 480)))
                         {
@@ -782,7 +782,7 @@ namespace vcs_DrAP
                                 items = "中";
                             itema = fileinfos[i].filename;
                             itemb = fileinfos[i].filepath;
-                            itemc = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                            itemc = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
 
                             //i1 = new ListViewItem(fileinfos[i].filename);
                             i1 = new ListViewItem(item);
@@ -801,7 +801,7 @@ namespace vcs_DrAP
                             i1.SubItems.Add(sub_i1b);
 
                             //sub_i1a.Text = fi.Length.ToString();
-                            //sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                            //sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                             sub_i1c.Text = itemc;
                             i1.SubItems.Add(sub_i1c);
 
@@ -828,11 +828,11 @@ namespace vcs_DrAP
                         i1.UseItemStyleForSubItems = false;
 
                         richTextBox2.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX1\n";
-                        //richTextBox2.Text += "xxxxx" + fileinfos[i].filename + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
+                        //richTextBox2.Text += "xxxxx" + fileinfos[i].filename + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
                         sub_i1a.Text = fileinfos[i].filepath;
                         i1.SubItems.Add(sub_i1a);
                         //sub_i1a.Text = fi.Length.ToString();
-                        sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                        sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                         i1.SubItems.Add(sub_i1b);
 
                         sub_i1a.ForeColor = System.Drawing.Color.Blue;
@@ -864,7 +864,7 @@ namespace vcs_DrAP
                     sub_i1a.Text = fileinfos[i].filepath;
                     i1.SubItems.Add(sub_i1a);
                     //sub_i1a.Text = fi.Length.ToString();
-                    sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                    sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                     i1.SubItems.Add(sub_i1b);
 
                     sub_i1a.ForeColor = System.Drawing.Color.Blue;
@@ -945,7 +945,7 @@ namespace vcs_DrAP
                 sub_i1a.Text = fileinfos[i].filepath;
                 i1.SubItems.Add(sub_i1a);
                 //sub_i1a.Text = fi.Length.ToString();
-                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1b);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
                 sub_i1b.ForeColor = System.Drawing.Color.Blue;
@@ -990,7 +990,7 @@ namespace vcs_DrAP
                 i1.SubItems.Add(sub_i1a);
 
                 //sub_i1a.Text = fi.Length.ToString();
-                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1b);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
                 sub_i1b.ForeColor = System.Drawing.Color.Blue;
@@ -1040,7 +1040,7 @@ namespace vcs_DrAP
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
                 ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
 
-                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(folderinfos[i].foldersize));
+                sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(folderinfos[i].foldersize));
                 i1.SubItems.Add(sub_i1a);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
                 sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
@@ -1103,7 +1103,7 @@ namespace vcs_DrAP
                     // This path is a file
                     richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                     ProcessFile(path, 0);
-                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
                     flag_search_done = 1;
                 }
                 else if (Directory.Exists(path))
@@ -1111,7 +1111,7 @@ namespace vcs_DrAP
                     // This path is a directory
                     FolederName = path;
                     ProcessDirectory(path);
-                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
                     if (flag_search_mode == 1)
                         show_file_info2();
                     else
@@ -1169,7 +1169,7 @@ namespace vcs_DrAP
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
         const int MB = 1024 * 1024;//定義MB的計算常量
         const int KB = 1024;//定義KB的計算常量
-        public string ByteConversionGBMBKB(Int64 size)
+        public string ByteConversionTBGBMBKB(Int64 size)
         {
             if (size < 0)
                 return "不合法的數值";
@@ -1766,15 +1766,15 @@ namespace vcs_DrAP
                 {
                     if (fileinfos[i].filesize == fileinfos[j].filesize)
                     {
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
+                        richTextBox2.Text += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
+                        richTextBox2.Text += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
 
                         ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
                         i1.UseItemStyleForSubItems = false;
 
                         ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
                         i1.SubItems.Add(fileinfos[i].filepath);
-                        sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                        sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                         i1.SubItems.Add(sub_i1a);
                         i1.SubItems.Add(fileinfos[i].fileextension);
                         sub_i1a.ForeColor = System.Drawing.Color.Blue;
@@ -1787,7 +1787,7 @@ namespace vcs_DrAP
 
                         ListViewItem.ListViewSubItem sub_i2a = new ListViewItem.ListViewSubItem();
                         i2.SubItems.Add(fileinfos[j].filepath);
-                        sub_i2a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].filesize));
+                        sub_i2a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize));
                         i2.SubItems.Add(sub_i2a);
                         i2.SubItems.Add(fileinfos[j].fileextension);
                         sub_i2a.ForeColor = System.Drawing.Color.Blue;
@@ -1815,7 +1815,7 @@ namespace vcs_DrAP
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
 
                 //sub_i1a.Text = fi.Length.ToString();
-                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1a);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
 
@@ -1941,15 +1941,15 @@ namespace vcs_DrAP
                     if (fileinfos[i].filesize == fileinfos[j].filesize)
                     {
                         /*
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
+                        richTextBox2.Text += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
+                        richTextBox2.Text += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
 
                         ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
                         i1.UseItemStyleForSubItems = false;
 
                         ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
                         i1.SubItems.Add(fileinfos[i].filepath);
-                        sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                        sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                         i1.SubItems.Add(sub_i1a);
                         i1.SubItems.Add(fileinfos[i].extension);
                         sub_i1a.ForeColor = System.Drawing.Color.Blue;
@@ -1962,7 +1962,7 @@ namespace vcs_DrAP
 
                         ListViewItem.ListViewSubItem sub_i2a = new ListViewItem.ListViewSubItem();
                         i2.SubItems.Add(fileinfos[j].filepath);
-                        sub_i2a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].filesize));
+                        sub_i2a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize));
                         i2.SubItems.Add(sub_i2a);
                         i2.SubItems.Add(fileinfos[j].extension);
                         sub_i2a.ForeColor = System.Drawing.Color.Blue;
@@ -1990,7 +1990,7 @@ namespace vcs_DrAP
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
 
                 //sub_i1a.Text = fi.Length.ToString();
-                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1a);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
 
@@ -2036,7 +2036,7 @@ namespace vcs_DrAP
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                 ProcessFile2(path, 0);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
                 flag_search_done = 1;
             }
             else if (Directory.Exists(path))
@@ -2047,7 +2047,7 @@ namespace vcs_DrAP
 
                 richTextBox1.Text += "\n類型:\t\t檔案資料夾\n";
                 richTextBox1.Text += "位置:\t\t" + Directory.GetParent(path) + "\n";
-                richTextBox1.Text += "大小:\t\t" + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "(" + total_size.ToString() + "位元組)\n";
+                richTextBox1.Text += "大小:\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "(" + total_size.ToString() + "位元組)\n";
                 richTextBox1.Text += "包含:\t\t" + total_files.ToString() + "個檔案，" + (total_folders - 1).ToString() + "個資料夾\n";
 
                 DirectoryInfo di = new DirectoryInfo(path);
@@ -2184,7 +2184,7 @@ namespace vcs_DrAP
             folder_files++;
 
             //richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
-            //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+            //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
 
             //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length));
 
@@ -2288,15 +2288,15 @@ namespace vcs_DrAP
                             richTextBox1.Text += string.Format("{0,-10}{1,-15}", "標籤 :", drive.VolumeLabel) + "\n";
                             //richTextBox1.Text += string.Format("{0,-12}{1,-25}", "名稱 :", drive.Name) + "\n";
                             richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
-                                "使用空間 :", (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace))) + "\n";
+                                "使用空間 :", (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace))) + "\n";
                             double percentage = (double)drive.AvailableFreeSpace / (double)drive.TotalSize;
                             richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}{4,-10}",
                                 "可用空間 :", drive.AvailableFreeSpace.ToString("N0", CultureInfo.InvariantCulture), " 個位元組",
-                                ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)),
+                                ByteConversionTBGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)),
                                 " ( " + percentage.ToString("P", CultureInfo.InvariantCulture) + " )")
                                 + "\n";
                             richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
-                                "磁碟容量 :", drive.TotalSize.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize))) + "\n";
+                                "磁碟容量 :", drive.TotalSize.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize))) + "\n";
 
                             /*
                             richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
@@ -2331,14 +2331,14 @@ namespace vcs_DrAP
                     // This path is a file
                     richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                     ProcessFile(path, 0);
-                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
                 }
                 else if (Directory.Exists(path))
                 {
                     // This path is a directory
                     FolederName = path;
                     ProcessDirectory(path);
-                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
 
                     if (cb_video_only.Checked == true)
                     {
@@ -2633,4 +2633,3 @@ namespace vcs_DrAP
         }
     }
 }
-
