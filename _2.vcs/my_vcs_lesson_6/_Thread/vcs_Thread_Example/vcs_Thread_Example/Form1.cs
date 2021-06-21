@@ -150,6 +150,8 @@ namespace vcs_Thread_Example
                 MyThread.Abort();
                 MyThread = null;
             }
+
+            timechange.stop();
         }
     }
 }
