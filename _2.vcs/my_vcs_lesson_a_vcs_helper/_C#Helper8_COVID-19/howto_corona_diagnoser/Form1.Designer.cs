@@ -30,6 +30,8 @@
         {
             this.chkFever = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblNone = new System.Windows.Forms.Label();
+            this.lblAll = new System.Windows.Forms.Label();
             this.chkAdult = new System.Windows.Forms.CheckBox();
             this.chkSneezing = new System.Windows.Forms.CheckBox();
             this.chkRunnyNose = new System.Windows.Forms.CheckBox();
@@ -49,8 +51,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblAll = new System.Windows.Forms.Label();
-            this.lblNone = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -58,9 +59,9 @@
             // chkFever
             // 
             this.chkFever.AutoSize = true;
-            this.chkFever.Location = new System.Drawing.Point(23, 45);
+            this.chkFever.Location = new System.Drawing.Point(23, 42);
             this.chkFever.Name = "chkFever";
-            this.chkFever.Size = new System.Drawing.Size(53, 17);
+            this.chkFever.Size = new System.Drawing.Size(50, 16);
             this.chkFever.TabIndex = 0;
             this.chkFever.Text = "Fever";
             this.chkFever.UseVisualStyleBackColor = true;
@@ -83,19 +84,43 @@
             this.groupBox1.Controls.Add(this.chkShortnessOfBreath);
             this.groupBox1.Controls.Add(this.chkDryCough);
             this.groupBox1.Controls.Add(this.chkFever);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 11);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(164, 320);
+            this.groupBox1.Size = new System.Drawing.Size(164, 578);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Symptoms";
             // 
+            // lblNone
+            // 
+            this.lblNone.BackColor = System.Drawing.Color.LightBlue;
+            this.lblNone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblNone.Location = new System.Drawing.Point(92, 15);
+            this.lblNone.Name = "lblNone";
+            this.lblNone.Size = new System.Drawing.Size(35, 18);
+            this.lblNone.TabIndex = 12;
+            this.lblNone.Text = "None";
+            this.lblNone.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNone.Click += new System.EventHandler(this.lblNone_Click);
+            // 
+            // lblAll
+            // 
+            this.lblAll.BackColor = System.Drawing.Color.LightBlue;
+            this.lblAll.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblAll.Location = new System.Drawing.Point(51, 15);
+            this.lblAll.Name = "lblAll";
+            this.lblAll.Size = new System.Drawing.Size(35, 18);
+            this.lblAll.TabIndex = 11;
+            this.lblAll.Text = "All";
+            this.lblAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAll.Click += new System.EventHandler(this.lblAll_Click);
+            // 
             // chkAdult
             // 
             this.chkAdult.AutoSize = true;
-            this.chkAdult.Location = new System.Drawing.Point(23, 294);
+            this.chkAdult.Location = new System.Drawing.Point(23, 271);
             this.chkAdult.Name = "chkAdult";
-            this.chkAdult.Size = new System.Drawing.Size(50, 17);
+            this.chkAdult.Size = new System.Drawing.Size(50, 16);
             this.chkAdult.TabIndex = 10;
             this.chkAdult.Text = "Adult";
             this.chkAdult.UseVisualStyleBackColor = true;
@@ -104,9 +129,9 @@
             // chkSneezing
             // 
             this.chkSneezing.AutoSize = true;
-            this.chkSneezing.Location = new System.Drawing.Point(23, 252);
+            this.chkSneezing.Location = new System.Drawing.Point(23, 233);
             this.chkSneezing.Name = "chkSneezing";
-            this.chkSneezing.Size = new System.Drawing.Size(70, 17);
+            this.chkSneezing.Size = new System.Drawing.Size(66, 16);
             this.chkSneezing.TabIndex = 9;
             this.chkSneezing.Text = "Sneezing";
             this.chkSneezing.UseVisualStyleBackColor = true;
@@ -115,9 +140,9 @@
             // chkRunnyNose
             // 
             this.chkRunnyNose.AutoSize = true;
-            this.chkRunnyNose.Location = new System.Drawing.Point(23, 229);
+            this.chkRunnyNose.Location = new System.Drawing.Point(23, 211);
             this.chkRunnyNose.Name = "chkRunnyNose";
-            this.chkRunnyNose.Size = new System.Drawing.Size(85, 17);
+            this.chkRunnyNose.Size = new System.Drawing.Size(82, 16);
             this.chkRunnyNose.TabIndex = 8;
             this.chkRunnyNose.Text = "Runny Nose";
             this.chkRunnyNose.UseVisualStyleBackColor = true;
@@ -126,9 +151,9 @@
             // chkDiarrhea
             // 
             this.chkDiarrhea.AutoSize = true;
-            this.chkDiarrhea.Location = new System.Drawing.Point(23, 206);
+            this.chkDiarrhea.Location = new System.Drawing.Point(23, 190);
             this.chkDiarrhea.Name = "chkDiarrhea";
-            this.chkDiarrhea.Size = new System.Drawing.Size(66, 17);
+            this.chkDiarrhea.Size = new System.Drawing.Size(64, 16);
             this.chkDiarrhea.TabIndex = 7;
             this.chkDiarrhea.Text = "Diarrhea";
             this.chkDiarrhea.UseVisualStyleBackColor = true;
@@ -137,9 +162,9 @@
             // chkFatigue
             // 
             this.chkFatigue.AutoSize = true;
-            this.chkFatigue.Location = new System.Drawing.Point(23, 183);
+            this.chkFatigue.Location = new System.Drawing.Point(23, 169);
             this.chkFatigue.Name = "chkFatigue";
-            this.chkFatigue.Size = new System.Drawing.Size(61, 17);
+            this.chkFatigue.Size = new System.Drawing.Size(58, 16);
             this.chkFatigue.TabIndex = 6;
             this.chkFatigue.Text = "Fatigue";
             this.chkFatigue.UseVisualStyleBackColor = true;
@@ -148,9 +173,9 @@
             // chkSoreThroat
             // 
             this.chkSoreThroat.AutoSize = true;
-            this.chkSoreThroat.Location = new System.Drawing.Point(23, 160);
+            this.chkSoreThroat.Location = new System.Drawing.Point(23, 148);
             this.chkSoreThroat.Name = "chkSoreThroat";
-            this.chkSoreThroat.Size = new System.Drawing.Size(82, 17);
+            this.chkSoreThroat.Size = new System.Drawing.Size(79, 16);
             this.chkSoreThroat.TabIndex = 5;
             this.chkSoreThroat.Text = "Sore Throat";
             this.chkSoreThroat.UseVisualStyleBackColor = true;
@@ -159,9 +184,9 @@
             // chkAchesAndPains
             // 
             this.chkAchesAndPains.AutoSize = true;
-            this.chkAchesAndPains.Location = new System.Drawing.Point(23, 137);
+            this.chkAchesAndPains.Location = new System.Drawing.Point(23, 126);
             this.chkAchesAndPains.Name = "chkAchesAndPains";
-            this.chkAchesAndPains.Size = new System.Drawing.Size(106, 17);
+            this.chkAchesAndPains.Size = new System.Drawing.Size(99, 16);
             this.chkAchesAndPains.TabIndex = 4;
             this.chkAchesAndPains.Text = "Aches and Pains";
             this.chkAchesAndPains.UseVisualStyleBackColor = true;
@@ -170,9 +195,9 @@
             // chkHeadaches
             // 
             this.chkHeadaches.AutoSize = true;
-            this.chkHeadaches.Location = new System.Drawing.Point(23, 114);
+            this.chkHeadaches.Location = new System.Drawing.Point(23, 105);
             this.chkHeadaches.Name = "chkHeadaches";
-            this.chkHeadaches.Size = new System.Drawing.Size(81, 17);
+            this.chkHeadaches.Size = new System.Drawing.Size(73, 16);
             this.chkHeadaches.TabIndex = 3;
             this.chkHeadaches.Text = "Headaches";
             this.chkHeadaches.UseVisualStyleBackColor = true;
@@ -181,9 +206,9 @@
             // chkShortnessOfBreath
             // 
             this.chkShortnessOfBreath.AutoSize = true;
-            this.chkShortnessOfBreath.Location = new System.Drawing.Point(23, 91);
+            this.chkShortnessOfBreath.Location = new System.Drawing.Point(23, 84);
             this.chkShortnessOfBreath.Name = "chkShortnessOfBreath";
-            this.chkShortnessOfBreath.Size = new System.Drawing.Size(119, 17);
+            this.chkShortnessOfBreath.Size = new System.Drawing.Size(115, 16);
             this.chkShortnessOfBreath.TabIndex = 2;
             this.chkShortnessOfBreath.Text = "Shortness of Breath";
             this.chkShortnessOfBreath.UseVisualStyleBackColor = true;
@@ -192,9 +217,9 @@
             // chkDryCough
             // 
             this.chkDryCough.AutoSize = true;
-            this.chkDryCough.Location = new System.Drawing.Point(23, 68);
+            this.chkDryCough.Location = new System.Drawing.Point(23, 63);
             this.chkDryCough.Name = "chkDryCough";
-            this.chkDryCough.Size = new System.Drawing.Size(76, 17);
+            this.chkDryCough.Size = new System.Drawing.Size(77, 16);
             this.chkDryCough.TabIndex = 1;
             this.chkDryCough.Text = "Dry Cough";
             this.chkDryCough.UseVisualStyleBackColor = true;
@@ -213,9 +238,9 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(182, 12);
+            this.groupBox2.Location = new System.Drawing.Point(182, 11);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(248, 320);
+            this.groupBox2.Size = new System.Drawing.Size(410, 578);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Possible Causes";
@@ -224,9 +249,9 @@
             // 
             this.lblAllergies.BackColor = System.Drawing.Color.LightGreen;
             this.lblAllergies.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblAllergies.Location = new System.Drawing.Point(112, 88);
+            this.lblAllergies.Location = new System.Drawing.Point(112, 81);
             this.lblAllergies.Name = "lblAllergies";
-            this.lblAllergies.Size = new System.Drawing.Size(125, 17);
+            this.lblAllergies.Size = new System.Drawing.Size(125, 16);
             this.lblAllergies.TabIndex = 7;
             this.lblAllergies.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -234,9 +259,9 @@
             // 
             this.lblFlu.BackColor = System.Drawing.Color.LightGreen;
             this.lblFlu.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblFlu.Location = new System.Drawing.Point(112, 64);
+            this.lblFlu.Location = new System.Drawing.Point(112, 59);
             this.lblFlu.Name = "lblFlu";
-            this.lblFlu.Size = new System.Drawing.Size(125, 17);
+            this.lblFlu.Size = new System.Drawing.Size(125, 16);
             this.lblFlu.TabIndex = 6;
             this.lblFlu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -244,9 +269,9 @@
             // 
             this.lblCold.BackColor = System.Drawing.Color.LightGreen;
             this.lblCold.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblCold.Location = new System.Drawing.Point(112, 41);
+            this.lblCold.Location = new System.Drawing.Point(112, 38);
             this.lblCold.Name = "lblCold";
-            this.lblCold.Size = new System.Drawing.Size(125, 17);
+            this.lblCold.Size = new System.Drawing.Size(125, 16);
             this.lblCold.TabIndex = 5;
             this.lblCold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -254,77 +279,62 @@
             // 
             this.lblCoronaVirus.BackColor = System.Drawing.Color.LightGreen;
             this.lblCoronaVirus.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblCoronaVirus.Location = new System.Drawing.Point(112, 19);
+            this.lblCoronaVirus.Location = new System.Drawing.Point(112, 18);
             this.lblCoronaVirus.Name = "lblCoronaVirus";
-            this.lblCoronaVirus.Size = new System.Drawing.Size(125, 17);
+            this.lblCoronaVirus.Size = new System.Drawing.Size(125, 16);
             this.lblCoronaVirus.TabIndex = 4;
             this.lblCoronaVirus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 89);
+            this.label4.Location = new System.Drawing.Point(23, 82);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 13);
+            this.label4.Size = new System.Drawing.Size(46, 12);
             this.label4.TabIndex = 3;
             this.label4.Text = "Allergies";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 66);
+            this.label3.Location = new System.Drawing.Point(23, 61);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 13);
+            this.label3.Size = new System.Drawing.Size(20, 12);
             this.label3.TabIndex = 2;
             this.label3.Text = "Flu";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 43);
+            this.label2.Location = new System.Drawing.Point(23, 40);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.Size = new System.Drawing.Size(75, 12);
             this.label2.TabIndex = 1;
             this.label2.Text = "Common Cold";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 20);
+            this.label1.Location = new System.Drawing.Point(23, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(57, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "COVID-19";
             // 
-            // lblAll
+            // richTextBox1
             // 
-            this.lblAll.BackColor = System.Drawing.Color.LightBlue;
-            this.lblAll.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblAll.Location = new System.Drawing.Point(51, 16);
-            this.lblAll.Name = "lblAll";
-            this.lblAll.Size = new System.Drawing.Size(35, 19);
-            this.lblAll.TabIndex = 11;
-            this.lblAll.Text = "All";
-            this.lblAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblAll.Click += new System.EventHandler(this.lblAll_Click);
-            // 
-            // lblNone
-            // 
-            this.lblNone.BackColor = System.Drawing.Color.LightBlue;
-            this.lblNone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblNone.Location = new System.Drawing.Point(92, 16);
-            this.lblNone.Name = "lblNone";
-            this.lblNone.Size = new System.Drawing.Size(35, 19);
-            this.lblNone.TabIndex = 12;
-            this.lblNone.Text = "None";
-            this.lblNone.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblNone.Click += new System.EventHandler(this.lblNone_Click);
+            this.richTextBox1.Location = new System.Drawing.Point(598, 15);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(486, 574);
+            this.richTextBox1.TabIndex = 11;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 344);
+            this.ClientSize = new System.Drawing.Size(1096, 601);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -363,6 +373,7 @@
         private System.Windows.Forms.CheckBox chkAdult;
         private System.Windows.Forms.Label lblNone;
         private System.Windows.Forms.Label lblAll;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

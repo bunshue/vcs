@@ -107,6 +107,9 @@ namespace howto_covid19_states
             const string url = "https://covidtracking.com/api/v1/states/daily.csv";
             DownloadFile(url, filename);
 
+            richTextBox1.Text += "url : " + url + "\n";
+            richTextBox1.Text += "filename : " + filename + "\n";
+
             // Read the file.
             object[,] fields = LoadCsv(filename);
 

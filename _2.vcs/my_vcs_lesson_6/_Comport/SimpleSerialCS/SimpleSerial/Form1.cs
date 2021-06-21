@@ -20,8 +20,8 @@ namespace SimpleSerial
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            serialPort1.PortName = "COM1";
-            serialPort1.BaudRate = 9600;
+            serialPort1.PortName = "COM4";
+            serialPort1.BaudRate = 115200;
 
             serialPort1.Open();
             if (serialPort1.IsOpen)

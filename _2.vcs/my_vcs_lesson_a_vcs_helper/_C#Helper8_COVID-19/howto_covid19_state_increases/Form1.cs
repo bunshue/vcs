@@ -165,6 +165,9 @@ namespace howto_covid19_state_increases
 
             DownloadFile(url, filename);
 
+            richTextBox1.Text += "url : " + url + "\n";
+            richTextBox1.Text += "filename : " + filename + "\n";
+
             sw.Stop();
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString() + " 秒\n";

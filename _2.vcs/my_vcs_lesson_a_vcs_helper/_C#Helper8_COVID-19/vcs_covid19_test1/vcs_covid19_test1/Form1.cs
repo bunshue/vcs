@@ -48,6 +48,9 @@ namespace vcs_covid19_test1
 
             DownloadFile(url, filename);
 
+            richTextBox1.Text += "url : " + url + "\n";
+            richTextBox1.Text += "filename : " + filename + "\n";
+
             sw.Stop();
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString() + " 秒\n";
@@ -63,6 +66,8 @@ namespace vcs_covid19_test1
             url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
             DownloadFile(url, filename);
 
+            richTextBox1.Text += "url : " + url + "\n";
+            richTextBox1.Text += "filename : " + filename + "\n";
 
             richTextBox1.Text += "Loading death data...\n";
 
@@ -72,6 +77,9 @@ namespace vcs_covid19_test1
             // Download today's data.
             url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_deaths_global.csv&filename=time_series_covid19_deaths_global.csv";
             DownloadFile(url, filename);
+
+            richTextBox1.Text += "url : " + url + "\n";
+            richTextBox1.Text += "filename : " + filename + "\n";
 
             richTextBox1.Text += "Loading recovery data...\n";
 
@@ -83,9 +91,8 @@ namespace vcs_covid19_test1
             url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_recovered_global.csv&filename=time_series_covid19_recovered_global.csv";
             DownloadFile(url, filename);
 
-
-
-
+            richTextBox1.Text += "url : " + url + "\n";
+            richTextBox1.Text += "filename : " + filename + "\n";
         }
 
         // Download today's data.
@@ -137,5 +144,4 @@ namespace vcs_covid19_test1
             protocol_Tls11 = (SecurityProtocolType)768,
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
-
 }

@@ -19,7 +19,8 @@ namespace vcs_SlideShowPicture2
         private const int PICTURE_WIDTH = 1920 / COLUMNS * 9 / 10;
         private const int PICTURE_HEIGHT = 1080 / ROWS * 9 / 10;
 
-        string path = Application.StartupPath + "\\picture";
+        //string path = Application.StartupPath + "\\picture";
+        string path = @"C:\______test_files\_pic";
 
         ArrayList picture_files = new ArrayList();
 
@@ -255,8 +256,5 @@ namespace vcs_SlideShowPicture2
                     break;
             }
         }
-
-
-
     }
 }

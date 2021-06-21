@@ -55,15 +55,15 @@
             this.btnGetSerialPorts.Name = "btnGetSerialPorts";
             this.btnGetSerialPorts.Size = new System.Drawing.Size(75, 21);
             this.btnGetSerialPorts.TabIndex = 0;
-            this.btnGetSerialPorts.Text = "Ports";
+            this.btnGetSerialPorts.Text = "掃描COM";
             this.btnGetSerialPorts.UseVisualStyleBackColor = true;
             this.btnGetSerialPorts.Click += new System.EventHandler(this.btnGetSerialPorts_Click);
             // 
             // rtbIncoming
             // 
-            this.rtbIncoming.Location = new System.Drawing.Point(12, 257);
+            this.rtbIncoming.Location = new System.Drawing.Point(369, 12);
             this.rtbIncoming.Name = "rtbIncoming";
-            this.rtbIncoming.Size = new System.Drawing.Size(260, 89);
+            this.rtbIncoming.Size = new System.Drawing.Size(329, 553);
             this.rtbIncoming.TabIndex = 1;
             this.rtbIncoming.Text = "";
             // 
@@ -172,7 +172,7 @@
             this.btnPortState.Name = "btnPortState";
             this.btnPortState.Size = new System.Drawing.Size(75, 21);
             this.btnPortState.TabIndex = 13;
-            this.btnPortState.Text = "Closed";
+            this.btnPortState.Text = "關閉";
             this.btnPortState.UseVisualStyleBackColor = true;
             this.btnPortState.Click += new System.EventHandler(this.btnPortState_Click);
             // 
@@ -214,9 +214,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(373, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(704, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(427, 384);
+            this.richTextBox1.Size = new System.Drawing.Size(286, 553);
             this.richTextBox1.TabIndex = 18;
             this.richTextBox1.Text = "";
             // 
@@ -224,7 +224,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 408);
+            this.ClientSize = new System.Drawing.Size(1002, 577);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.txtCommand);
             this.Controls.Add(this.btnHyperTerm);
@@ -246,6 +246,7 @@
             this.Controls.Add(this.btnGetSerialPorts);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

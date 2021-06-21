@@ -8,15 +8,12 @@ using System.Text;
 using System.IO.Ports;
 using System.Windows.Forms;
 
-//CodeProjectSerialComms program 
-//23/04/2013   16:29
-
 namespace CodeProjectSerialComms
 {
     public partial class Form1 : Form
     {
         SerialPort ComPort = new SerialPort();
-        
+
         internal delegate void SerialDataReceivedEventHandlerDelegate(object sender, SerialDataReceivedEventArgs e);
         internal delegate void SerialPinChangedEventHandlerDelegate(object sender, SerialPinChangedEventArgs e);
         private SerialPinChangedEventHandler SerialPinChangedEventHandler1;
@@ -29,31 +26,37 @@ namespace CodeProjectSerialComms
             SerialPinChangedEventHandler1 = new SerialPinChangedEventHandler(PinChanged);
             ComPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(port_DataReceived_1);
         }
-     
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            btnGetSerialPorts_Click(sender, e);
+        }
+
         private void btnGetSerialPorts_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "搜尋所有comport\n";
             string[] ArrayComPortsNames = null;
             int index = -1;
             string ComPortName = null;
-           
-//Com Ports
+
+            //Com Ports
             ArrayComPortsNames = SerialPort.GetPortNames();
             do
             {
                 index += 1;
                 cboPorts.Items.Add(ArrayComPortsNames[index]);
-               
-              
+
+
             } while (!((ArrayComPortsNames[index] == ComPortName) || (index == ArrayComPortsNames.GetUpperBound(0))));
             Array.Sort(ArrayComPortsNames);
-           
+
             if (index == ArrayComPortsNames.GetUpperBound(0))
             {
                 ComPortName = ArrayComPortsNames[0];
             }
             //get first item print in text
             cboPorts.Text = ArrayComPortsNames[0];
-//Baud Rate
+            //Baud Rate
             cboBaudRate.Items.Add(300);
             cboBaudRate.Items.Add(600);
             cboBaudRate.Items.Add(1200);
@@ -66,20 +69,20 @@ namespace CodeProjectSerialComms
             cboBaudRate.Items.Add(115200);
             cboBaudRate.Items.ToString();
             //get first item print in text
-            cboBaudRate.Text = cboBaudRate.Items[0].ToString(); 
-//Data Bits
+            cboBaudRate.Text = cboBaudRate.Items[0].ToString();
+            //Data Bits
             cboDataBits.Items.Add(7);
             cboDataBits.Items.Add(8);
             //get the first item print it in the text 
-            cboDataBits.Text = cboDataBits.Items[0].ToString();
-           
-//Stop Bits
+            cboDataBits.Text = cboDataBits.Items[1].ToString();
+
+            //Stop Bits
             cboStopBits.Items.Add("One");
             cboStopBits.Items.Add("OnePointFive");
             cboStopBits.Items.Add("Two");
             //get the first item print in the text
             cboStopBits.Text = cboStopBits.Items[0].ToString();
-//Parity 
+            //Parity 
             cboParity.Items.Add("None");
             cboParity.Items.Add("Even");
             cboParity.Items.Add("Mark");
@@ -87,7 +90,7 @@ namespace CodeProjectSerialComms
             cboParity.Items.Add("Space");
             //get the first item print in the text
             cboParity.Text = cboParity.Items[0].ToString();
-//Handshake
+            //Handshake
             cboHandShaking.Items.Add("None");
             cboHandShaking.Items.Add("XOnXOff");
             cboHandShaking.Items.Add("RequestToSend");
@@ -97,7 +100,7 @@ namespace CodeProjectSerialComms
 
         }
 
-     
+
 
 
         private void port_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
@@ -130,7 +133,7 @@ namespace CodeProjectSerialComms
                     break;
                 case SerialPinChange.CDChanged:
                     signalState = ComPort.CtsHolding;
-                  //  MessageBox.Show("CD = " + signalState.ToString());
+                    //  MessageBox.Show("CD = " + signalState.ToString());
                     break;
                 case SerialPinChange.CtsChanged:
                     signalState = ComPort.CDHolding;
@@ -163,10 +166,9 @@ namespace CodeProjectSerialComms
 
         private void btnPortState_Click(object sender, EventArgs e)
         {
-          
-            if (btnPortState.Text == "Closed")
+            if (btnPortState.Text == "關閉")
             {
-                btnPortState.Text = "Open";
+                btnPortState.Text = "已連線";
                 ComPort.PortName = Convert.ToString(cboPorts.Text);
                 ComPort.BaudRate = Convert.ToInt32(cboBaudRate.Text);
                 ComPort.DataBits = Convert.ToInt16(cboDataBits.Text);
@@ -174,19 +176,21 @@ namespace CodeProjectSerialComms
                 ComPort.Handshake = (Handshake)Enum.Parse(typeof(Handshake), cboHandShaking.Text);
                 ComPort.Parity = (Parity)Enum.Parse(typeof(Parity), cboParity.Text);
                 ComPort.Open();
+                richTextBox1.Text += "已連線 : " + ComPort.PortName + "\t" + ComPort.BaudRate.ToString() + " BD\n";
             }
-            else if (btnPortState.Text == "Open")
+            else if (btnPortState.Text == "已連線")
             {
-                btnPortState.Text = "Closed";
+                btnPortState.Text = "關閉";
                 ComPort.Close();
-               
+                richTextBox1.Text += "已關閉\n";
             }
         }
+
         private void rtbOutgoing_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13) // enter key  
             {
-                ComPort.Write("\r\n");
+                ComPort.Write("\n\r");
                 rtbOutgoing.Text = "";
             }
             else if (e.KeyChar < 32 || e.KeyChar > 126)
@@ -198,9 +202,20 @@ namespace CodeProjectSerialComms
                 ComPort.Write(e.KeyChar.ToString());
             }
         }
+
         private void btnHello_Click(object sender, EventArgs e)
         {
-            ComPort.Write("Hello World!");
+            byte[] data = new byte[5];
+
+            data[0] = 0xFF;
+            data[1] = 0x11;
+            data[2] = 0x66;
+            data[3] = 0x88;
+            data[4] = 0x02;
+
+            //richTextBox1.AppendText("[TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
+
+            ComPort.Write(data, 0, data.Length);
         }
 
         private void btnHyperTerm_Click(object sender, EventArgs e)
@@ -217,9 +232,6 @@ namespace CodeProjectSerialComms
                 ComPort.Write(CommandSent);
                 j++;
             }
-
         }
-
-      
     }
 }

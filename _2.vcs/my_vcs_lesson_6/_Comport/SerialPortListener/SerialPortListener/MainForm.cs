@@ -21,7 +21,11 @@ namespace SerialPortListener
             UserInitialization();
         }
 
-      
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void UserInitialization()
         {
             _spManager = new SerialPortManager();
@@ -37,10 +41,10 @@ namespace SerialPortListener
             this.FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
         }
 
-        
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _spManager.Dispose();   
+            _spManager.Dispose();
         }
 
         void _spManager_NewSerialDataRecieved(object sender, SerialDataEventArgs e)
@@ -54,25 +58,29 @@ namespace SerialPortListener
 
             int maxTextLength = 1000; // maximum text length in text box
             if (tbData.TextLength > maxTextLength)
+            {
                 tbData.Text = tbData.Text.Remove(0, tbData.TextLength - maxTextLength);
+            }
 
             // This application is connected to a GPS sending ASCCI characters, so data is converted to text
             string str = Encoding.ASCII.GetString(e.Data);
             tbData.AppendText(str);
             tbData.ScrollToCaret();
 
+            richTextBox1.Text += str;
         }
 
-        // Handles the "Start Listening"-buttom click event
         private void btnStart_Click(object sender, EventArgs e)
         {
             _spManager.StartListening();
+            richTextBox1.Text += "已連線\n";
         }
 
-        // Handles the "Stop Listening"-buttom click event
         private void btnStop_Click(object sender, EventArgs e)
         {
             _spManager.StopListening();
+            richTextBox1.Text += "已離線\n";
         }
     }
 }
+

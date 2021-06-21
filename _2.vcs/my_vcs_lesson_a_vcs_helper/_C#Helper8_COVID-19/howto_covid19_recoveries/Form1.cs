@@ -102,10 +102,12 @@ namespace howto_covid19_recoveries
             const string url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
             DownloadFile(url, filename);
 
+            richTextBox1.Text += "url : " + url + "\n";
+            richTextBox1.Text += "filename : " + filename + "\n";
+
             // Read the file.
             object[,] fields = LoadCsv(filename);
             //richTextBox1.Text += "size = " + fields.Rank.ToString() + "\n";
-
 
             int row = fields.Rank;//獲取行數
             int col1 = fields.GetLength(0);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
@@ -195,6 +197,9 @@ namespace howto_covid19_recoveries
             const string url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_deaths_global.csv&filename=time_series_covid19_deaths_global.csv";
             DownloadFile(url, filename);
 
+            richTextBox1.Text += "url : " + url + "\n";
+            richTextBox1.Text += "filename : " + filename + "\n";
+
             // Read the file.
             object[,] fields = LoadCsv(filename);
 
@@ -240,6 +245,9 @@ namespace howto_covid19_recoveries
             // Download today's data.
             const string url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_recovered_global.csv&filename=time_series_covid19_recovered_global.csv";
             DownloadFile(url, filename);
+
+            richTextBox1.Text += "url : " + url + "\n";
+            richTextBox1.Text += "filename : " + filename + "\n";
 
             // Read the file.
             object[,] fields = LoadCsv(filename);
