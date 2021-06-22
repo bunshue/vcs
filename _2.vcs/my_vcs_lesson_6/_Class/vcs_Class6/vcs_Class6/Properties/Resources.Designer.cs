@@ -4,19 +4,19 @@
 //     執行階段版本:4.0.30319.42000
 //
 //     變更這個檔案可能會導致不正確的行為，而且如果已重新產生
-//     程式碼，則會遺失變更。
+//     程式碼，這個檔案將會遺失。
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Order.Properties
+namespace vcs_Class6.Properties
 {
 
 
     /// <summary>
-    ///   用於查詢當地語系化字串等的強類型資源類別
+    ///   用於查詢當地語系化字串等的強型別資源類別
     /// </summary>
     // 這個類別是自動產生的，是利用 StronglyTypedResourceBuilder
-    // 類別透過 ResGen 或 Visual Studio 這類工具產生。
+    // 類別透過 ResGen 或 Visual Studio 這類工具。
     // 若要加入或移除成員，請編輯您的 .ResX 檔，然後重新執行 ResGen
     // (利用 /str 選項)，或重建您的 VS 專案。
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
@@ -44,7 +44,7 @@ namespace Order.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Order.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_Class6.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -53,7 +53,7 @@ namespace Order.Properties
 
         /// <summary>
         ///   覆寫目前執行緒的 CurrentUICulture 屬性，對象是所有
-        ///   使用這個強類型資源類別的資源查閱。
+        ///   使用這個強型別資源類別的資源查閱。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture

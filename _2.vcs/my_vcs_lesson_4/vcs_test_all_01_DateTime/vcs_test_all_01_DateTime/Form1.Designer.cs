@@ -134,10 +134,22 @@
             this.bt3 = new System.Windows.Forms.Button();
             this.bt4 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button53 = new System.Windows.Forms.Button();
+            this.button54 = new System.Windows.Forms.Button();
+            this.button55 = new System.Windows.Forms.Button();
+            this.button56 = new System.Windows.Forms.Button();
+            this.button57 = new System.Windows.Forms.Button();
+            this.button58 = new System.Windows.Forms.Button();
+            this.button59 = new System.Windows.Forms.Button();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.bt_dtp_get = new System.Windows.Forms.Button();
+            this.bt_dtp_set = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -578,12 +590,12 @@
             // 
             // button34
             // 
-            this.button34.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button34.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button34.Location = new System.Drawing.Point(304, 152);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(164, 46);
             this.button34.TabIndex = 43;
-            this.button34.Text = "xxx";
+            this.button34.Text = "OLE自動化日期";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -1256,11 +1268,123 @@
             this.comboBox1.Size = new System.Drawing.Size(164, 24);
             this.comboBox1.TabIndex = 74;
             // 
+            // button53
+            // 
+            this.button53.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button53.Location = new System.Drawing.Point(457, 353);
+            this.button53.Name = "button53";
+            this.button53.Size = new System.Drawing.Size(164, 46);
+            this.button53.TabIndex = 76;
+            this.button53.UseVisualStyleBackColor = true;
+            // 
+            // button54
+            // 
+            this.button54.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button54.Location = new System.Drawing.Point(457, 392);
+            this.button54.Name = "button54";
+            this.button54.Size = new System.Drawing.Size(164, 46);
+            this.button54.TabIndex = 77;
+            this.button54.UseVisualStyleBackColor = true;
+            // 
+            // button55
+            // 
+            this.button55.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button55.Location = new System.Drawing.Point(457, 440);
+            this.button55.Name = "button55";
+            this.button55.Size = new System.Drawing.Size(164, 46);
+            this.button55.TabIndex = 78;
+            this.button55.UseVisualStyleBackColor = true;
+            // 
+            // button56
+            // 
+            this.button56.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button56.Location = new System.Drawing.Point(457, 489);
+            this.button56.Name = "button56";
+            this.button56.Size = new System.Drawing.Size(164, 46);
+            this.button56.TabIndex = 79;
+            this.button56.UseVisualStyleBackColor = true;
+            // 
+            // button57
+            // 
+            this.button57.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button57.Location = new System.Drawing.Point(457, 523);
+            this.button57.Name = "button57";
+            this.button57.Size = new System.Drawing.Size(164, 46);
+            this.button57.TabIndex = 80;
+            this.button57.UseVisualStyleBackColor = true;
+            // 
+            // button58
+            // 
+            this.button58.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button58.Location = new System.Drawing.Point(457, 568);
+            this.button58.Name = "button58";
+            this.button58.Size = new System.Drawing.Size(164, 46);
+            this.button58.TabIndex = 81;
+            this.button58.UseVisualStyleBackColor = true;
+            // 
+            // button59
+            // 
+            this.button59.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button59.Location = new System.Drawing.Point(457, 620);
+            this.button59.Name = "button59";
+            this.button59.Size = new System.Drawing.Size(164, 46);
+            this.button59.TabIndex = 82;
+            this.button59.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(23, 74);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker2.TabIndex = 83;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.bt_dtp_get);
+            this.groupBox5.Controls.Add(this.bt_dtp_set);
+            this.groupBox5.Controls.Add(this.dateTimePicker2);
+            this.groupBox5.Location = new System.Drawing.Point(700, 558);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(245, 134);
+            this.groupBox5.TabIndex = 84;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "groupBox5";
+            // 
+            // bt_dtp_get
+            // 
+            this.bt_dtp_get.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_dtp_get.Location = new System.Drawing.Point(135, 22);
+            this.bt_dtp_get.Name = "bt_dtp_get";
+            this.bt_dtp_get.Size = new System.Drawing.Size(88, 35);
+            this.bt_dtp_get.TabIndex = 86;
+            this.bt_dtp_get.Text = "取得時間";
+            this.bt_dtp_get.UseVisualStyleBackColor = true;
+            this.bt_dtp_get.Click += new System.EventHandler(this.bt_dtp_get_Click);
+            // 
+            // bt_dtp_set
+            // 
+            this.bt_dtp_set.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_dtp_set.Location = new System.Drawing.Point(23, 22);
+            this.bt_dtp_set.Name = "bt_dtp_set";
+            this.bt_dtp_set.Size = new System.Drawing.Size(88, 35);
+            this.bt_dtp_set.TabIndex = 85;
+            this.bt_dtp_set.Text = "設定範圍";
+            this.bt_dtp_set.UseVisualStyleBackColor = true;
+            this.bt_dtp_set.Click += new System.EventHandler(this.bt_dtp_set_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1660, 715);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.button59);
+            this.Controls.Add(this.button58);
+            this.Controls.Add(this.button57);
+            this.Controls.Add(this.button56);
+            this.Controls.Add(this.button55);
+            this.Controls.Add(this.button54);
+            this.Controls.Add(this.button53);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.bt4);
             this.Controls.Add(this.bt3);
@@ -1343,6 +1467,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1455,6 +1580,17 @@
         private System.Windows.Forms.Button bt3;
         private System.Windows.Forms.Button bt4;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button53;
+        private System.Windows.Forms.Button button54;
+        private System.Windows.Forms.Button button55;
+        private System.Windows.Forms.Button button56;
+        private System.Windows.Forms.Button button57;
+        private System.Windows.Forms.Button button58;
+        private System.Windows.Forms.Button button59;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button bt_dtp_set;
+        private System.Windows.Forms.Button bt_dtp_get;
     }
 }
 
