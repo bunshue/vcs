@@ -38,6 +38,7 @@ namespace vcs_Thread3
         //第1種Thread使用
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "第1種Thread使用\n";
             // Make a new counter object.
             Counter new_counter = new Counter(this, thread_num);
             richTextBox1.Text += "開啟thread, 編號 " + thread_num.ToString() + "\n";
@@ -71,6 +72,7 @@ namespace vcs_Thread3
         int a = 0;
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "第2種Thread使用\n";
             //將委托的方法和主窗體傳過去
             NEWThreadClass threadOneClass = new NEWThreadClass(SetValue, this);
 
@@ -103,6 +105,7 @@ namespace vcs_Thread3
         // Start threads with different priorities.
         private void button3_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "第3種Thread使用\n";
             int i;
             int num_low = 4;
             for (i = 0; i < num_low; i++)

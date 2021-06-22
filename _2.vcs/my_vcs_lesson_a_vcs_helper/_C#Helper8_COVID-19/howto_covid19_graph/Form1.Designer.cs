@@ -66,14 +66,14 @@
             this.checkedListBox1.IntegralHeight = false;
             this.checkedListBox1.Location = new System.Drawing.Point(12, 32);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(166, 792);
+            this.checkedListBox1.Size = new System.Drawing.Size(166, 613);
             this.checkedListBox1.TabIndex = 4;
             this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
             // 
             // btnAll
             // 
             this.btnAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAll.Location = new System.Drawing.Point(12, 829);
+            this.btnAll.Location = new System.Drawing.Point(12, 663);
             this.btnAll.Name = "btnAll";
             this.btnAll.Size = new System.Drawing.Size(75, 21);
             this.btnAll.TabIndex = 5;
@@ -84,7 +84,7 @@
             // btnNone
             // 
             this.btnNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnNone.Location = new System.Drawing.Point(103, 829);
+            this.btnNone.Location = new System.Drawing.Point(103, 663);
             this.btnNone.Name = "btnNone";
             this.btnNone.Size = new System.Drawing.Size(75, 21);
             this.btnNone.TabIndex = 6;
@@ -136,7 +136,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1522, 51);
+            this.button1.Location = new System.Drawing.Point(1502, 32);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 31);
             this.button1.TabIndex = 11;
@@ -167,7 +167,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1644, 51);
+            this.button2.Location = new System.Drawing.Point(1687, 32);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(85, 31);
             this.button2.TabIndex = 14;

@@ -19,11 +19,6 @@ namespace howto_covid19_align_starts
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The data.
         private List<CountryData> CountryList = null;
         private List<CountryData> SelectedCountries = null;
@@ -37,6 +32,11 @@ namespace howto_covid19_align_starts
 
         // Used to prevent redraws while checking or unchecking all countries.
         private bool IgnoreItemCheck = false;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {

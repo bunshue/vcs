@@ -21,16 +21,6 @@ namespace vcs_Thread_Example
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //產生一個類別，專門來管理時間運作
-            timechange = new ChangeTime(this);
-            //timechange.change();
-
-            //使用一個thread來增加時間的秒數
-            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(timechange.run));
-            thread.Start();
-
-            //this.
-
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
         }
@@ -151,7 +141,27 @@ namespace vcs_Thread_Example
                 MyThread = null;
             }
 
-            timechange.stop();
+            if (timechange != null)
+                timechange.stop();
+        }
+
+        //啟動時鐘
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //產生一個類別，專門來管理時間運作
+            timechange = new ChangeTime(this);
+            //timechange.change();
+
+            //使用一個thread來增加時間的秒數
+            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(timechange.run));
+            thread.Start();
+        }
+
+        //關閉時鐘
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (timechange != null)
+                timechange.stop();
         }
     }
 }

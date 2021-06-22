@@ -83,5 +83,29 @@ namespace vcs_NotifyIcon
                 cnt = 0;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //顯示
+            this.notifyIcon2.Visible = true;
+            this.notifyIcon2.ShowBalloonTip(1000, "当前时间：", DateTime.Now.ToLocalTime().ToString(), ToolTipIcon.Info);
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //關閉
+            this.notifyIcon2.Visible = false;
+
+        }
+
+        private void notifyIcon2_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.notifyIcon2.ShowBalloonTip(1000, "当前时间：", DateTime.Now.ToLocalTime().ToString(), ToolTipIcon.Info);
+
+
+            richTextBox1.Text += "A ";
+
+        }
+
     }
 }

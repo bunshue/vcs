@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TaskMessageWindow.Properties {
+namespace vcs_WebBrowser7.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TaskMessageWindow.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TaskMessageWindow.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_WebBrowser7.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,51 +61,11 @@ namespace TaskMessageWindow.Properties {
         }
         
         /// <summary>
-        ///   查詢類似 (圖示) 的類型 System.Drawing.Icon 當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Icon _1 {
-            get {
-                object obj = ResourceManager.GetObject("_1", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 (圖示) 的類型 System.Drawing.Icon 當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Icon _2 {
-            get {
-                object obj = ResourceManager.GetObject("_2", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
-        internal static System.Drawing.Bitmap Close1 {
+        internal static System.Drawing.Bitmap 转到 {
             get {
-                object obj = ResourceManager.GetObject("Close1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap Close2 {
-            get {
-                object obj = ResourceManager.GetObject("Close2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 提醒 {
-            get {
-                object obj = ResourceManager.GetObject("提醒", resourceCulture);
+                object obj = ResourceManager.GetObject("转到", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

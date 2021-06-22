@@ -24,12 +24,14 @@ namespace TaskMessageWindow
 
         private void informButton_Click(object sender,EventArgs e)
         {
+            richTextBox1.Text += "通知\n";
             MainForm.IconFlickerFlag = true;      //设置图标闪烁标识
             InformWindow.IconFlicker();          //调用闪烁图标方法
         }
 
         private void closeInform_Click(object sender,EventArgs e)
         {
+            richTextBox1.Text += "關閉\n";
             InformWindow.CloseNewWindow();       //关闭新显示的窗体
         }
 

@@ -6,12 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;
 using System.IO;
+
 namespace GetScreen
 {
     public partial class Frm_Main : Form
     {
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -43,10 +46,10 @@ namespace GetScreen
         [DllImport("user32.dll", EntryPoint = "GetIconInfo")]
         private static extern bool GetIconInfo(IntPtr hIcon, out ICONINFO iInfo);
         [DllImport("kernel32")]
-        private static extern long WritePrivateProfileString(string section,string key,string val,string filePath);
+        private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
         [DllImport("kernel32")]
-        private static extern int GetPrivateProfileString(string section,string key,string def,StringBuilder retval,int size,string filePath);
-        
+        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retval, int size, string filePath);
+
         #region 定义快捷键
         //如果函数执行成功，返回值不为0。       
         //如果函数执行失败，返回值为0。要得到扩展错误信息，调用GetLastError。        
@@ -77,12 +80,12 @@ namespace GetScreen
         public string path;
         public void IniWriteValue(string section, string key, string value)
         {
-            WritePrivateProfileString(section,key,value,path);
+            WritePrivateProfileString(section, key, value, path);
         }
         public string IniReadValue(string section, string key)
         {
             StringBuilder temp = new StringBuilder(255);
-            int i = GetPrivateProfileString(section,key,"",temp,255,path);
+            int i = GetPrivateProfileString(section, key, "", temp, 255, path);
             return temp.ToString();
         }
 
@@ -176,7 +179,7 @@ namespace GetScreen
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"警告",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -192,7 +195,7 @@ namespace GetScreen
         {
             RegisterHotKey(Handle, 81, KeyModifiers.Shift, Keys.F);
         }
-        public bool flag=true;
+        public bool flag = true;
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //注销Id号为81的热键设定    
@@ -243,10 +246,10 @@ namespace GetScreen
                 Directory.CreateDirectory(MyPicPath);
             }
             if (MyPicPath.Length == 3)
-                MyPicPath = MyPicPath.Remove(MyPicPath.LastIndexOf(":")+1);
-            string PicPath = MyPicPath+"\\IMG_" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + ".bmp";
+                MyPicPath = MyPicPath.Remove(MyPicPath.LastIndexOf(":") + 1);
+            string PicPath = MyPicPath + "\\IMG_" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + ".bmp";
             Bitmap bt;
-            if (MyCursor=="0")
+            if (MyCursor == "0")
             {
                 bt = CaptureNoCursor();
                 bt.Save(PicPath);

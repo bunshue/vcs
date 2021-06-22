@@ -35,6 +35,7 @@
             this.title = new System.Windows.Forms.TextBox();
             this.closeButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -53,12 +54,12 @@
             this.content.Name = "content";
             this.content.Size = new System.Drawing.Size(250, 178);
             this.content.TabIndex = 1;
-            this.content.Text = "";
+            this.content.Text = "hhh";
             this.content.TextChanged += new System.EventHandler(this.content_TextChanged);
             // 
             // informButton
             // 
-            this.informButton.Location = new System.Drawing.Point(187, 235);
+            this.informButton.Location = new System.Drawing.Point(218, 235);
             this.informButton.Name = "informButton";
             this.informButton.Size = new System.Drawing.Size(45, 23);
             this.informButton.TabIndex = 2;
@@ -82,6 +83,7 @@
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(114, 22);
             this.title.TabIndex = 0;
+            this.title.Text = "david";
             this.title.TextChanged += new System.EventHandler(this.title_TextChanged);
             // 
             // closeButton
@@ -103,11 +105,20 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "（最長字符不超過7個）";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(334, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(265, 246);
+            this.richTextBox1.TabIndex = 6;
+            this.richTextBox1.Text = "";
+            // 
             // TaskMessageWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 266);
+            this.ClientSize = new System.Drawing.Size(606, 271);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.title);
@@ -132,6 +143,7 @@
         private System.Windows.Forms.TextBox title;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

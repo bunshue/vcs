@@ -14,7 +14,7 @@
         protected override void Dispose(bool disposing)
         {
             //把thread停掉
-            timechange.stop();
+            //timechange.stop();
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -37,6 +37,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lb_B = new System.Windows.Forms.Label();
             this.lb_G = new System.Windows.Forms.Label();
@@ -106,6 +108,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label2);
@@ -113,10 +117,32 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(12, 23);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(211, 88);
+            this.groupBox1.Size = new System.Drawing.Size(374, 88);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "時鐘";
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("新細明體", 14F);
+            this.button6.Location = new System.Drawing.Point(281, 22);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(70, 56);
+            this.button6.TabIndex = 9;
+            this.button6.Text = "關閉時鐘";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("新細明體", 14F);
+            this.button5.Location = new System.Drawing.Point(197, 21);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(70, 56);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "啟動時鐘";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // groupBox2
             // 
@@ -130,7 +156,7 @@
             this.groupBox2.Size = new System.Drawing.Size(185, 189);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "螢幕畫素讀取";
+            this.groupBox2.Text = "RGB亂數";
             // 
             // lb_B
             // 
@@ -192,7 +218,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 317);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(546, 246);
+            this.richTextBox1.Size = new System.Drawing.Size(574, 246);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
@@ -261,7 +287,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 575);
+            this.ClientSize = new System.Drawing.Size(600, 575);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox2);
@@ -304,6 +330,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
     }
 }
 

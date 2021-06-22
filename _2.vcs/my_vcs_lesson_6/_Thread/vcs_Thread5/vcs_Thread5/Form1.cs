@@ -14,15 +14,20 @@ namespace vcs_Thread5
 {
     public partial class Form1 : Form
     {
+        int a = 0;
+
+        thread1 obj;
+        Thread t;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        int a = 0;
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
-        thread1 obj;
-        Thread t;
+        }
 
         //第2種 啟動Thread 方法
         //建立一個Thread 到 偵錯/視窗/即時運算 看結果
@@ -35,7 +40,6 @@ namespace vcs_Thread5
             t = new Thread(obj.runMe);
             t.Start();
         }
-
 
         class thread1
         {
@@ -63,7 +67,6 @@ namespace vcs_Thread5
 
         }
 
-
         //第2種 啟動Thread 方法
         //開啟關閉thread    ST
         System.Timers.Timer tt = new System.Timers.Timer(1234);
@@ -89,8 +92,7 @@ namespace vcs_Thread5
 
             //MessageBox.Show("number = " + number);
         }
+
         //開啟關閉thread    SP
-
-
     }
 }

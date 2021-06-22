@@ -19,11 +19,6 @@ namespace howto_covid19_graph
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The data.
         private List<CountryData> CountryList = null;
         private List<CountryData> SelectedCountries = null;
@@ -42,6 +37,13 @@ namespace howto_covid19_graph
         PointF[] curvePoints = new PointF[252];    //一維陣列內有 N 個Point
 
         int selectedIndex = 0;
+
+        bool flag_use_test_data = false;   //使用測試資料 TBD
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -92,6 +94,11 @@ namespace howto_covid19_graph
             Application.Exit();
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         // Load and prepare the data.
         private void LoadData()
         {
@@ -102,10 +109,11 @@ namespace howto_covid19_graph
             // Download today's data.
             DownloadFile(filename);
 
-            richTextBox1.Text += "讀取檔案: " + filename + "\n";
+            richTextBox1.Text += "讀取檔案: " + filename + "\t從csv => fields\n";
             // Read the file.
             object[,] fields = LoadCsv(filename);
 
+            richTextBox1.Text += "CreateCountryData: " + filename + "\t從fields => 各欄位\n";
             // Create the country data.
             CreateCountryData(fields);
         }
@@ -120,17 +128,24 @@ namespace howto_covid19_graph
             int max_col = fields.GetUpperBound(1);
             int num_dates = max_col - first_date_col + 1;   //此CSV檔的所有日期資料 行數(Column)
 
-            richTextBox1.Text += "CreateCountryData csv資料大小\n";
-            richTextBox1.Text += "共有 " + max_row.ToString() + " 列(Row)\n";
-            richTextBox1.Text += "共有 " + max_col.ToString() + " 欄(Column)\n";
-            richTextBox1.Text += "此CSV檔的資料欄數 " + num_dates.ToString() + " 欄(Column)\n";
+            richTextBox1.Text += "CreateCountryData fields資料大小\n";
+            richTextBox1.Text += "共有 " + max_row.ToString() + " 列(Row)\n";  //每列代表一個國家的資料
+            richTextBox1.Text += "共有 " + max_col.ToString() + " 欄(Column)\n";   //每欄代表一天的資料
+            richTextBox1.Text += "此 fields 的資料欄數 " + num_dates.ToString() + " 欄(Column)\n"; //扣掉檔頭 真實的資料天數
 
             CountryData.Dates = new DateTime[num_dates];
-            for (int col = 1; col <= num_dates; col++)
+            for (int col = 1; col <= num_dates; col++)  //每天的資料
             {
                 // Convert the date into a double and then into a date.
-                double double_value = (double)fields[1, col + first_date_col - 1];
+                double double_value = (double)fields[1, col + first_date_col - 1];  //從1900/1/1至今的天數
                 CountryData.Dates[col - 1] = DateTime.FromOADate(double_value);
+
+                if (col <= 10)
+                {
+                    richTextBox1.Text += "col = " + col.ToString() + "\tdouble_value = " + double_value.ToString() + "\n";
+                    richTextBox1.Text += "num = " + (col + first_date_col - 1).ToString() + "\n";
+                    richTextBox1.Text += "data = " + CountryData.Dates[col - 1].ToString() + "\n";
+                }
             }
 
             // Load the country data.
@@ -143,7 +158,16 @@ namespace howto_covid19_graph
                 //debug
                 if (country_name == "Taiwan*")
                 {
-                    richTextBox1.Text += "get country name : " + country_name + "\n";
+                    richTextBox1.Text += "get country name : " + country_name + "\tcountry_num = " + country_num.ToString() + "\n";
+                }
+
+                //debug
+                if (country_num == 246)
+                {
+                    for (int j = 2; j < 10; j++)
+                    {
+                        richTextBox1.Text += "j = " + j.ToString() + "\t" + fields[country_num, j].ToString() + "\n";
+                    }
                 }
 
                 // Get or create the country's CountryData object.
@@ -161,7 +185,10 @@ namespace howto_covid19_graph
                 }
 
                 if (country_name == "Taiwan*")
-                    richTextBox1.Text += "取得案例數\n";
+                {
+                    richTextBox1.Text += "從 fields 取得案例數\n";
+                }
+
                 // Add to the country's data.
                 for (int col = 1; col <= num_dates; col++)
                 {
@@ -169,7 +196,8 @@ namespace howto_covid19_graph
                     country_data.Cases[col - 1] += (int)(double)fields[country_num, col + first_date_col - 1];
                     if (country_name == "Taiwan*")
                     {
-                        //richTextBox1.Text += country_data.Cases[col - 1].ToString() + "\t";
+                        //debug
+                        richTextBox1.Text += country_data.Cases[col - 1].ToString() + "\t";
                     }
                 }
                 if (country_name == "Taiwan*")
@@ -184,7 +212,7 @@ namespace howto_covid19_graph
             {
                 //設定每個國家的總數
                 country.SetMax();
-                //richTextBox1.Text += country.Name + " " + country.MaxCases.ToString() + "  ";
+                richTextBox1.Text += "國家:" + country.Name + " 確診數:" + country.MaxCases.ToString() + ", ";
             }
 
             // Sort.
@@ -261,7 +289,7 @@ namespace howto_covid19_graph
 
             // Get the used range.
             Excel.Range used_range = sheet.UsedRange;
-    
+
             // Get the sheet's values.
             object[,] values = (object[,])used_range.Value2;
 
@@ -335,12 +363,12 @@ namespace howto_covid19_graph
         // Draw the graph.
         private void GraphCountries()
         {
-            richTextBox1.Text += "重畫資料";
+            richTextBox1.Text += "重畫資料 cnt = " + SelectedCountries.Count.ToString() + "\t";
             ClosePoint = new PointF(-1, -1);
             if (SelectedCountries.Count == 0)
             {
                 pictureBox1.Image = null;
-                richTextBox1.Text += "\t無資料\n";
+                richTextBox1.Text += "\t未選取國家\n";
                 return;
             }
             else
@@ -526,7 +554,7 @@ namespace howto_covid19_graph
                         CountryData.Dates[day_num].ToShortDateString() + "\n" +
                         num_cases.ToString("n0") + " 例";
 
-                    richTextBox1.Text += country.Name + "\t" + CountryData.Dates[day_num].ToShortDateString() + "\t總數: " +num_cases.ToString("n0") + "\n";
+                    richTextBox1.Text += country.Name + "\t" + CountryData.Dates[day_num].ToShortDateString() + "\t總數: " + num_cases.ToString("n0") + "\n";
                     break;
                 }
             }
@@ -557,14 +585,14 @@ namespace howto_covid19_graph
 
         private void radSortByName_Click(object sender, EventArgs e)
         {
-            //按了依國名排序
+            richTextBox1.Text += "按了 依 國名 排序\n";
+
             if (CountryList == null)
             {
                 return;
             }
             Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByName);
             checkedListBox1.DataSource = null;
-            richTextBox1.Text += "\n依 國名 排序\n\n";
             CountryList.Sort(Comparer);
             checkedListBox1.DataSource = CountryList;
             RedrawGraph();
@@ -572,14 +600,14 @@ namespace howto_covid19_graph
 
         private void radSortByMaxCases_Click(object sender, EventArgs e)
         {
-            //按了依總數排序
+            richTextBox1.Text += "按了 依 總數 排序\n";
+
             if (CountryList == null)
             {
                 return;
             }
             Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByMaxCases);
             checkedListBox1.DataSource = null;
-            richTextBox1.Text += "\n依 總數 排序\n\n";
             CountryList.Sort(Comparer);
             checkedListBox1.DataSource = CountryList;
             RedrawGraph();
@@ -727,11 +755,5 @@ namespace howto_covid19_graph
             // Display the result.
             pictureBox2.Image = bm;
         }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
     }
 }
