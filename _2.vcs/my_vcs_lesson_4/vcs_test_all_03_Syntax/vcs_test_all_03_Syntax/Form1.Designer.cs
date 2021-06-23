@@ -1059,11 +1059,12 @@
             // 
             // button38
             // 
-            this.button38.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button38.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button38.Location = new System.Drawing.Point(586, 236);
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(180, 40);
             this.button38.TabIndex = 72;
+            this.button38.Text = "swap範例";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 

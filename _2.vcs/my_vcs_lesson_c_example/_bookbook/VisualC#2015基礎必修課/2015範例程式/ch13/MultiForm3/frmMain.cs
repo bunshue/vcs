@@ -19,7 +19,6 @@ namespace MultiForm3
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            lblShow.Text = "";
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -41,13 +40,7 @@ namespace MultiForm3
             //使用ShowDialog()方法使 f 以強制回應形式顯示表單
             f.ShowDialog();
             //呼叫frmCal的Cal方法以計算配息方式
-            lblShow.Text = myYear.ToString() + " 年後領回本利和：" + f.Cal(myMoney, myYear, myRate).ToString();
-        }
-
-        private void btnOpenCal_Click(object sender, EventArgs e)
-        {
-            //開啟小算盤應用程式
-            System.Diagnostics.Process.Start("C:\\WINDOWS\\system32\\calc.exe");
+            richTextBox1.Text += myYear.ToString() + " 年後領回本利和：" + f.Cal(myMoney, myYear, myRate).ToString() + "\n";
         }
     }
 }

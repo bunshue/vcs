@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 
 namespace AutomaticPlayImplement
@@ -16,13 +17,16 @@ namespace AutomaticPlayImplement
         static int i = 0;
         private WMPLib.WindowsMediaPlayerClass WC;
         private WMPLib.IWMPMedia MC = null;
+
         public Form1()
         {
             InitializeComponent();
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
         }
+
         public void GetAllFiles(DirectoryInfo dir)
         {
             this.listBox1.Items.Clear();
@@ -73,6 +77,11 @@ namespace AutomaticPlayImplement
 
         private void button4_Click(object sender, EventArgs e)
         {
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /*
             //停止播放
             this.axWindowsMediaPlayer1.Ctlcontrols.stop();
             richTextBox1.Text += "select : " + listBox1.SelectedItem + "\n";
@@ -80,6 +89,19 @@ namespace AutomaticPlayImplement
             this.axWindowsMediaPlayer1.URL = foldername + listBox1.SelectedItem;
             richTextBox1.Text += "url : " + this.axWindowsMediaPlayer1.URL + "\n";
             this.axWindowsMediaPlayer1.Ctlcontrols.play();
+            */
+        }
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            //停止播放
+            this.axWindowsMediaPlayer1.Ctlcontrols.stop();
+            richTextBox1.Text += "select : " + listBox1.SelectedItem + "\n";
+
+            this.axWindowsMediaPlayer1.URL = foldername + listBox1.SelectedItem;
+            richTextBox1.Text += "url : " + this.axWindowsMediaPlayer1.URL + "\n";
+            this.axWindowsMediaPlayer1.Ctlcontrols.play();
+
         }
     }
 }

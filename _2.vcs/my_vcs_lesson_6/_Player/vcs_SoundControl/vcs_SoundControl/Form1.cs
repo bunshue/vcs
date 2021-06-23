@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Microsoft.VisualBasic;            //for AudioPlayMode
-using Microsoft.VisualBasic.Devices;    //for Computer
+using Microsoft.VisualBasic;            //for AudioPlayMode //引用Microsoft.VisualBasic命名空間
+using Microsoft.VisualBasic.Devices;    //for Computer      //引用Microsoft.VisualBasic.Devices命名空間
 
 using System.Runtime.InteropServices;   //for DllImport
+
+//參考/加入參考/.NET/Microsoft.VisualBasic
 
 namespace vcs_SoundControl
 {
@@ -73,6 +75,23 @@ namespace vcs_SoundControl
         {
             // 播放資源內嵌的聲音檔
             myComputer.Audio.Play(Properties.Resources.ding, AudioPlayMode.WaitToComplete);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string foldername = @"C:\______test_files\_wav\";
+            string filename = string.Empty;
+
+            Random rnd = new Random();  //產生亂數物件rnd
+            int testNum = rnd.Next(1, 11);  //產生1~10的亂數
+            richTextBox1.Text += testNum.ToString() + "\n";
+            filename = foldername + Convert.ToString(testNum) + ".wav";  //合併成數字聲音檔
+            richTextBox1.Text += "filename = " + filename + "\n";
+
+            Computer myComputer = new Computer();
+            //播放數字聲音檔
+            myComputer.Audio.Play(filename, AudioPlayMode.WaitToComplete);
+
         }
     }
 }

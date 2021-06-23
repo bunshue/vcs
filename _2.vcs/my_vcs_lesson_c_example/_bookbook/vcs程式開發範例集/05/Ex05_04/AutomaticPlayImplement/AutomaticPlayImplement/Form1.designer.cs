@@ -47,13 +47,15 @@
             this.listBox1.Location = new System.Drawing.Point(12, 10);
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(326, 352);
+            this.listBox1.Size = new System.Drawing.Size(351, 352);
             this.listBox1.TabIndex = 0;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(388, 52);
+            this.button1.Location = new System.Drawing.Point(388, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(101, 86);
             this.button1.TabIndex = 2;
@@ -64,7 +66,7 @@
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(388, 162);
+            this.button2.Location = new System.Drawing.Point(388, 116);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(101, 36);
             this.button2.TabIndex = 13;
@@ -78,14 +80,14 @@
             this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(12, 379);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(389, 29);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(511, 29);
             this.axWindowsMediaPlayer1.TabIndex = 4;
             this.axWindowsMediaPlayer1.Visible = false;
             // 
             // button3
             // 
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(388, 225);
+            this.button3.Location = new System.Drawing.Point(388, 170);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(101, 36);
             this.button3.TabIndex = 14;
@@ -100,15 +102,14 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(101, 36);
             this.button4.TabIndex = 15;
-            this.button4.Text = "info";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 414);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 424);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(477, 227);
+            this.richTextBox1.Size = new System.Drawing.Size(511, 217);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 

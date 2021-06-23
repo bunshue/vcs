@@ -22,14 +22,21 @@ namespace MultiForm3
         {
             if (radYear.Checked)
             {
+                richTextBox1.Text += "每年計息一次\n";
                 //每年計息一次
                 return (int)(vMoney * Math.Pow(1 + vRate, vYear));
             }
             else
             {
+                richTextBox1.Text += "每月計息一次\n";
                 //每月計息一次
                 return (int)(vMoney * Math.Pow(1 + (vRate) / 12, vYear * 12));
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

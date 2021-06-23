@@ -63,8 +63,9 @@ namespace vcs_MovePicture
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
+            {
                 isMouseDown = false;
-
+            }
         }
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)

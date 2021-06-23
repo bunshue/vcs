@@ -1372,10 +1372,23 @@ namespace vcs_test_all_03_Syntax
 
         }
 
+        //swap範例 ST
+        private void Swap(ref int n1, ref int n2)
+        {
+            int temp = n1;
+            n1 = n2;
+            n2 = temp;
+        }
+
         private void button38_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "\nswap範例\n";
+            int a = 10, b = 15;
+            richTextBox1.Text += "主程式:呼叫Swap方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n";
+            Swap(ref a, ref b);
+            richTextBox1.Text += "主程式:呼叫Swap方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n";
         }
+        //swap範例 SP
 
         private void button39_Click(object sender, EventArgs e)
         {
