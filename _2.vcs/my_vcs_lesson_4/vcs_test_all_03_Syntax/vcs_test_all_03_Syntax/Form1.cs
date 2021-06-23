@@ -974,8 +974,33 @@ namespace vcs_test_all_03_Syntax
         }
         //結構與結構陣列的用法 SP
 
+        enum Products { HardDrive = 0, PenDrive = 4, Keyboard = 8 };
         private void button29_Click(object sender, EventArgs e)
         {
+            //ENUM的用法
+            Products prod1 = Products.HardDrive;
+            Products prod2 = Products.PenDrive;
+            Products prod3 = Products.Keyboard;
+
+            richTextBox1.Text += "印出各個變數\n";
+            richTextBox1.Text += prod1 + "\n";
+            richTextBox1.Text += prod2 + "\n";
+            richTextBox1.Text += prod3 + "\n";
+
+            int ret = prod3.CompareTo(prod2);
+
+            if (ret > 0)
+            {
+                richTextBox1.Text += prod3 + " 比 " + prod2 + " 多\n";
+            }
+            else if (ret < 0)
+            {
+                richTextBox1.Text += prod3 + " 比 " + prod2 + " 少\n";
+            }
+            else
+            {
+                richTextBox1.Text += prod3 + " 比 " + prod2 + " 等同\n";
+            }
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -1296,6 +1321,54 @@ namespace vcs_test_all_03_Syntax
 
         private void button37_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "C# Extension Method 用法\n";
+
+            var arr = new double[]
+            {
+                39456,
+                39482,
+                39484,
+                39493,
+                39496,
+                39497,
+                39270 
+            };
+
+            foreach (double val in arr)
+            {
+                // C# Extension Method: Double - FromOADate
+                DateTime oaDate = val.FromOADate();
+
+                richTextBox1.Text += "val = " + val + "\tOA Date = " + oaDate.ToShortDateString() + "\n";
+            }
+
+            DateTime date = new DateTime(2006, 3, 11);
+            // C# Extension Method: DateTime - Age
+            int age = date.Age();
+            richTextBox1.Text += "Age : " + age.ToString() + "\n";
+
+
+            Guid guid = Guid.NewGuid();
+
+            Guid[] guids = new Guid[]
+            {
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                guid
+            };
+
+            // C# Extension Method: Guid - In
+            if (guid.In(guids))
+            {
+                Console.WriteLine("{0} exists in the list.", guid);
+                richTextBox1.Text += "111 guid = " + guid + "\n";
+            }
+            else
+            {
+                Console.WriteLine("{0} doesn't exists in the list.", guid);
+                richTextBox1.Text += "222 guid = " + guid + "\n";
+            }
 
         }
 
@@ -1640,6 +1713,50 @@ namespace vcs_test_all_03_Syntax
             }
         }
     }
+
+    public static partial class Extensions
+    {
+        //第一種Extension
+        /// <summary>
+        ///     Returns a  equivalent to the specified OLE Automation Date.
+        /// </summary>
+        /// <param name="d">An OLE Automation Date value.</param>
+        /// <returns>An object that represents the same date and time as .</returns>
+        public static DateTime FromOADate(this Double d)
+        {
+            return DateTime.FromOADate(d);
+        }
+
+        //第二種Extension
+        /// <summary>
+        ///     A DateTime extension method that ages the given this.
+        /// </summary>
+        /// <param name="this">The @this to act on.</param>
+        /// <returns>An int.</returns>
+        public static int Age(this DateTime @this)
+        {
+            if (DateTime.Today.Month < @this.Month ||
+                DateTime.Today.Month == @this.Month &&
+                DateTime.Today.Day < @this.Day)
+            {
+                return DateTime.Today.Year - @this.Year - 1;
+            }
+            return DateTime.Today.Year - @this.Year;
+        }
+
+        //第三種Extension
+        /// <summary>
+        ///     A T extension method to determines whether the object is equal to any of the provided values.
+        /// </summary>
+        /// <param name="this">The object to be compared.</param>
+        /// <param name="values">The value list to compare with the object.</param>
+        /// <returns>true if the values list contains the object, else false.</returns>
+        /// ###
+        /// <typeparam name="T">Generic type parameter.</typeparam>
+        public static bool In(this Guid @this, params Guid[] values)
+        {
+            return Array.IndexOf(values, @this) != -1;
+        }
+
+    }
 }
-
-

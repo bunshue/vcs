@@ -33,7 +33,7 @@
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.btnAll = new System.Windows.Forms.Button();
             this.btnNone = new System.Windows.Forms.Button();
-            this.tipGraph = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.radSortByName = new System.Windows.Forms.RadioButton();
             this.radSortByMaxCases = new System.Windows.Forms.RadioButton();
@@ -208,7 +208,7 @@
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button btnAll;
         private System.Windows.Forms.Button btnNone;
-        private System.Windows.Forms.ToolTip tipGraph;
+        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton radSortByName;
         private System.Windows.Forms.RadioButton radSortByMaxCases;

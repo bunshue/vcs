@@ -110,16 +110,16 @@
             this.timer_sort = new System.Windows.Forms.Timer(this.components);
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.targetText = new System.Windows.Forms.TextBox();
-            this.targetLabel = new System.Windows.Forms.Label();
-            this.numText8c = new System.Windows.Forms.TextBox();
-            this.numText7c = new System.Windows.Forms.TextBox();
-            this.numText6c = new System.Windows.Forms.TextBox();
-            this.numText5c = new System.Windows.Forms.TextBox();
-            this.numText4c = new System.Windows.Forms.TextBox();
-            this.numText3c = new System.Windows.Forms.TextBox();
-            this.numText2c = new System.Windows.Forms.TextBox();
             this.numText1c = new System.Windows.Forms.TextBox();
+            this.targetLabel = new System.Windows.Forms.Label();
             this.stepButton = new System.Windows.Forms.Button();
+            this.numText8c = new System.Windows.Forms.TextBox();
+            this.numText2c = new System.Windows.Forms.TextBox();
+            this.numText7c = new System.Windows.Forms.TextBox();
+            this.numText3c = new System.Windows.Forms.TextBox();
+            this.numText6c = new System.Windows.Forms.TextBox();
+            this.numText4c = new System.Windows.Forms.TextBox();
+            this.numText5c = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -660,7 +660,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(200, 42);
             this.button36.TabIndex = 63;
-            this.button36.Text = "IndexOf的用法";
+            this.button36.Text = "IndexOf()的用法";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -682,6 +682,7 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(200, 42);
             this.button38.TabIndex = 65;
+            this.button38.Text = "Clone()的用法";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
@@ -972,6 +973,14 @@
             this.targetText.TabIndex = 86;
             this.targetText.Text = "0";
             // 
+            // numText1c
+            // 
+            this.numText1c.Location = new System.Drawing.Point(14, 18);
+            this.numText1c.Name = "numText1c";
+            this.numText1c.Size = new System.Drawing.Size(32, 22);
+            this.numText1c.TabIndex = 77;
+            this.numText1c.Text = "0";
+            // 
             // targetLabel
             // 
             this.targetLabel.AutoSize = true;
@@ -980,70 +989,6 @@
             this.targetLabel.Size = new System.Drawing.Size(68, 12);
             this.targetLabel.TabIndex = 85;
             this.targetLabel.Text = "搜尋目標是:";
-            // 
-            // numText8c
-            // 
-            this.numText8c.Location = new System.Drawing.Point(280, 18);
-            this.numText8c.Name = "numText8c";
-            this.numText8c.Size = new System.Drawing.Size(32, 22);
-            this.numText8c.TabIndex = 84;
-            this.numText8c.Text = "0";
-            // 
-            // numText7c
-            // 
-            this.numText7c.Location = new System.Drawing.Point(242, 18);
-            this.numText7c.Name = "numText7c";
-            this.numText7c.Size = new System.Drawing.Size(32, 22);
-            this.numText7c.TabIndex = 83;
-            this.numText7c.Text = "0";
-            // 
-            // numText6c
-            // 
-            this.numText6c.Location = new System.Drawing.Point(204, 18);
-            this.numText6c.Name = "numText6c";
-            this.numText6c.Size = new System.Drawing.Size(32, 22);
-            this.numText6c.TabIndex = 82;
-            this.numText6c.Text = "0";
-            // 
-            // numText5c
-            // 
-            this.numText5c.Location = new System.Drawing.Point(166, 18);
-            this.numText5c.Name = "numText5c";
-            this.numText5c.Size = new System.Drawing.Size(32, 22);
-            this.numText5c.TabIndex = 81;
-            this.numText5c.Text = "0";
-            // 
-            // numText4c
-            // 
-            this.numText4c.Location = new System.Drawing.Point(128, 18);
-            this.numText4c.Name = "numText4c";
-            this.numText4c.Size = new System.Drawing.Size(32, 22);
-            this.numText4c.TabIndex = 80;
-            this.numText4c.Text = "0";
-            // 
-            // numText3c
-            // 
-            this.numText3c.Location = new System.Drawing.Point(90, 18);
-            this.numText3c.Name = "numText3c";
-            this.numText3c.Size = new System.Drawing.Size(32, 22);
-            this.numText3c.TabIndex = 79;
-            this.numText3c.Text = "0";
-            // 
-            // numText2c
-            // 
-            this.numText2c.Location = new System.Drawing.Point(52, 18);
-            this.numText2c.Name = "numText2c";
-            this.numText2c.Size = new System.Drawing.Size(32, 22);
-            this.numText2c.TabIndex = 78;
-            this.numText2c.Text = "0";
-            // 
-            // numText1c
-            // 
-            this.numText1c.Location = new System.Drawing.Point(14, 18);
-            this.numText1c.Name = "numText1c";
-            this.numText1c.Size = new System.Drawing.Size(32, 22);
-            this.numText1c.TabIndex = 77;
-            this.numText1c.Text = "0";
             // 
             // stepButton
             // 
@@ -1054,6 +999,62 @@
             this.stepButton.Text = "開始";
             this.stepButton.UseVisualStyleBackColor = true;
             this.stepButton.Click += new System.EventHandler(this.stepButton_Click);
+            // 
+            // numText8c
+            // 
+            this.numText8c.Location = new System.Drawing.Point(280, 18);
+            this.numText8c.Name = "numText8c";
+            this.numText8c.Size = new System.Drawing.Size(32, 22);
+            this.numText8c.TabIndex = 84;
+            this.numText8c.Text = "0";
+            // 
+            // numText2c
+            // 
+            this.numText2c.Location = new System.Drawing.Point(52, 18);
+            this.numText2c.Name = "numText2c";
+            this.numText2c.Size = new System.Drawing.Size(32, 22);
+            this.numText2c.TabIndex = 78;
+            this.numText2c.Text = "0";
+            // 
+            // numText7c
+            // 
+            this.numText7c.Location = new System.Drawing.Point(242, 18);
+            this.numText7c.Name = "numText7c";
+            this.numText7c.Size = new System.Drawing.Size(32, 22);
+            this.numText7c.TabIndex = 83;
+            this.numText7c.Text = "0";
+            // 
+            // numText3c
+            // 
+            this.numText3c.Location = new System.Drawing.Point(90, 18);
+            this.numText3c.Name = "numText3c";
+            this.numText3c.Size = new System.Drawing.Size(32, 22);
+            this.numText3c.TabIndex = 79;
+            this.numText3c.Text = "0";
+            // 
+            // numText6c
+            // 
+            this.numText6c.Location = new System.Drawing.Point(204, 18);
+            this.numText6c.Name = "numText6c";
+            this.numText6c.Size = new System.Drawing.Size(32, 22);
+            this.numText6c.TabIndex = 82;
+            this.numText6c.Text = "0";
+            // 
+            // numText4c
+            // 
+            this.numText4c.Location = new System.Drawing.Point(128, 18);
+            this.numText4c.Name = "numText4c";
+            this.numText4c.Size = new System.Drawing.Size(32, 22);
+            this.numText4c.TabIndex = 80;
+            this.numText4c.Text = "0";
+            // 
+            // numText5c
+            // 
+            this.numText5c.Location = new System.Drawing.Point(166, 18);
+            this.numText5c.Name = "numText5c";
+            this.numText5c.Size = new System.Drawing.Size(32, 22);
+            this.numText5c.TabIndex = 81;
+            this.numText5c.Text = "0";
             // 
             // Form1
             // 

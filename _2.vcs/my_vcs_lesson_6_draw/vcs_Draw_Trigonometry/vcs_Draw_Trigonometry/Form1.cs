@@ -113,11 +113,13 @@ namespace vcs_Draw_Trigonometry
                     {
                         flag_dragging_y = true;
                         pts[pt_selected].Y = e.Y;
+                        this.Cursor = Cursors.HSplit;
                     }
                     else if (i == 2)
                     {
                         flag_dragging_x = true;
                         pts[pt_selected].X = e.X;
+                        this.Cursor = Cursors.VSplit;
                     }
                     break;
                 }
@@ -162,6 +164,7 @@ namespace vcs_Draw_Trigonometry
                 flag_dragging_x = false;
                 flag_dragging_y = false;
                 this.pictureBox1.Invalidate();
+                this.Cursor = Cursors.Default;
             }
         }
 

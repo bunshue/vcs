@@ -186,34 +186,4 @@
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>297, 17</value>
   </metadata>
-  <metadata name="notifyIcon2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>386, 17</value>
-  </metadata>
-  <data name="notifyIcon2.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAwMKwA3N58AXV3FAGVl2gBlZdoAXV3GADY2oAARES0AAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAEADo6nwCOjuYA+Pj/AP///wD///8A////AP///wD5+f8Aj4/mADk5oAAA
-        AAUAAAAAAAAAAAAAAAAAAAAEAD4+vADe3vwA////AP///wbHzf8zNnD/MTRr/wXO1P8A////AP///wDf
-        3/0APz+9AAAABAAAAAAAAAAAADAwngDZ2fwA////AP///wD///8tOGv/qwLG/6oCxf8sOWv/AP///wD/
-        //8A////ANvb/AA4OJsAAAAAABMTKACDg+YA////AP7+/wCjo/8AdHT/A4iM/wGwsf8CsbP/BIiM/wB3
-        d/8Arq7/AP///wD///8Ah4foABMTKQA1NZ8A9PT/AP///wB0dP8Av7//AP///wD///8Ap7D/AKy1/wD/
-        //8A////AMHB/wB9ff8A////APb2/wA3N6IAU1PHAP///wC+vv8AtLT/AP///wD///8AuL3/AGG1/wBg
-        sv8At73/AP///wD///8Aqqr/AMDA/wD///8AVVXJAGNj1AD///8Aycn/APj4/wD///8A////AHaI/wCA
-        //8AgP//AHWI/wD///8A////APX1/wDExP8A////AGRk1gBkZNQA////AP///wrGxv8Xl5f/APLy/wCJ
-        lv8Aduz/AHbs/wCJlv8A7e3/Fo+P/wq+vv8A////AP///wBkZNYAU1PHAP///wfKyv9ca2v/KCgo/yFR
-        Uf8A7+//AFl2/wBZd/8A7u7/M3Nz/0BAQP8mKyv/Bs7O/wD///8AVVXJADk5ogD09P8cjY3/pqam/yYm
-        Jv89VVX/AP///wD///8A////AP7+/16Bgf9KSkr/TExM/xuQkP8A9vb/ADo6pAATEygAhIToCMbG/4WX
-        l//s7Oz/MXJy/wD///8A////AP///wD///8yb2//7e3t/4GUlP8Gy8v/AIeH6QASEioAAAAAADY2ogDZ
-        2fwKvb3/Fo+P/wDv7/8A////AP///wD///8A////AO3t/xaPj/8Kvr7/ANvb/QA2NqUAAAAAAAAAAAAA
-        AAQAPz+9AN7e/AD///8A////AP///wD///8A////AP///wD///8A////AN/f/QA/P74AAAAFAAAAAAAA
-        AAAAAAAAAAAABAA6Op8AkJDqAPj4/wD///8A////AP///wD///8A+fn/AJCQ6wA6OqIAAAAFAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAABwcLgA+PqUAXl7FAHFx1wBxcdcAXl7FAD09pgAgIDAAAAAAAAAAAAAA
-        AAAAAAAA8A8AAOAHAADAAwAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMAD
-        AADgBwAA8A8AAA==
-</value>
-  </data>
-  <metadata name="toolTip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>503, 17</value>
-  </metadata>
 </root>

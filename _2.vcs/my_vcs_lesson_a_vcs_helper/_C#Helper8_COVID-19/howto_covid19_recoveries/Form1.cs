@@ -29,18 +29,15 @@ namespace howto_covid19_recoveries
 
         // The data.
         private List<CountryData> CountryList = null;
-        private List<CountryData> SelectedCountries =
-            new List<CountryData>();
+        private List<CountryData> SelectedCountries = new List<CountryData>();
 
-        private Dictionary<string, CountryData> CountryDict =
-            new Dictionary<string, CountryData>();
+        private Dictionary<string, CountryData> CountryDict = new Dictionary<string, CountryData>();
 
         private Matrix Transform = null;
         private Matrix InverseTransform = null;
         private RectangleF WorldBounds;
         private PointF ClosePoint = new PointF(-1, -1);
-        private CountryDataComparer Comparer =
-            new CountryDataComparer(CountryDataComparer.CompareTypes.ByMaxCases);
+        private CountryDataComparer Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByMaxCases);
 
         // Used to prevent redraws while checking or unchecking all countries.
         private bool IgnoreItemCheck = false;
@@ -50,6 +47,7 @@ namespace howto_covid19_recoveries
             Show();
 
             // Load the case data.
+            richTextBox1.Text += "Loading case data...\n";
             lblLoading.Text = "Loading case data...";
             lblLoading.Refresh();
             LoadCaseData();
@@ -57,11 +55,13 @@ namespace howto_covid19_recoveries
 
             /*
             // Load the deaths data.
+            richTextBox1.Text += "Loading death data...\n";
             lblLoading.Text = "Loading death data...";
             lblLoading.Refresh();
             LoadDeathData();
 
             // Load the recovery data.
+            richTextBox1.Text += "Loading recovery data...\n";
             lblLoading.Text = "Loading recovery data...";
             lblLoading.Refresh();
             LoadRecoveryData();
@@ -338,7 +338,7 @@ namespace howto_covid19_recoveries
 
             // Get the used range.
             Excel.Range used_range = sheet.UsedRange;
-    
+
             // Get the sheet's values.
             object[,] values = (object[,])used_range.Value2;
 
@@ -576,10 +576,12 @@ namespace howto_covid19_recoveries
 
         private void SetTooltip(PointF point)
         {
-            if (picGraph.Image == null) return;
-            if (SelectedCountries == null) return;
+            if (picGraph.Image == null)
+                return;
+            if (SelectedCountries == null)
+                return;
 
-            string new_tip = "";
+            string mesg = "";
             int day_num;
             float data_value;
             foreach (CountryData country in SelectedCountries)
@@ -587,30 +589,30 @@ namespace howto_covid19_recoveries
                 if (country.PointIsAt(point, out day_num,
                     out data_value, out ClosePoint))
                 {
-                    new_tip = country.Name + "\n" +
+                    mesg = country.Name + "\n" +
                         CountryData.Dates[day_num].ToShortDateString() + "\n";
 
                     if (radCases.Checked)
-                        new_tip += data_value.ToString("n0") + " cases";
+                        mesg += data_value.ToString("n0") + " cases";
                     else if (radCasesPerMillion.Checked)
-                        new_tip += data_value.ToString("n2") + " cases per million";
+                        mesg += data_value.ToString("n2") + " cases per million";
                     else if (radDeaths.Checked)
-                        new_tip += data_value.ToString("n0") + " deaths";
+                        mesg += data_value.ToString("n0") + " deaths";
                     else if (radDeathsPerMillion.Checked)
-                        new_tip += data_value.ToString("n2") + " deaths per million";
+                        mesg += data_value.ToString("n2") + " deaths per million";
                     else if (radRecoveries.Checked)
-                        new_tip += data_value.ToString("n0") + " recoveries";
+                        mesg += data_value.ToString("n0") + " recoveries";
                     else if (radRecoveriesPerMillion.Checked)
-                        new_tip += data_value.ToString("n2") + " recoveries per million";
+                        mesg += data_value.ToString("n2") + " recoveries per million";
                     else if (radDeathsPerResolution.Checked)
-                        new_tip += data_value.ToString("n2") + " deaths per resolution";
+                        mesg += data_value.ToString("n2") + " deaths per resolution";
 
                     break;
                 }
             }
 
-            if (tipGraph.GetToolTip(picGraph) != new_tip)
-                tipGraph.SetToolTip(picGraph, new_tip);
+            if (toolTip1.GetToolTip(picGraph) != mesg)
+                toolTip1.SetToolTip(picGraph, mesg);
             picGraph.Refresh();
         }
 
@@ -695,7 +697,7 @@ namespace howto_covid19_recoveries
             CountryList.Sort(Comparer);
 
             // Redraw the graph.
-            RedrawGraph();        
+            RedrawGraph();
         }
 
         // A data set radio button has been clicked. Update the graph.

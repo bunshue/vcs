@@ -1531,7 +1531,23 @@ namespace vcs_test_all_05_Array
 
         private void button38_Click(object sender, EventArgs e)
         {
+            //Clone的用法
+            string[] arr = { "one", "two", "three", "four", "five" };
+            string[] arrCloned = arr.Clone() as string[];
 
+            richTextBox1.Text += "原陣列:\t";
+            foreach (string s in arr)
+            {
+                richTextBox1.Text += s + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "Clone陣列:\t";
+            foreach (string s in arrCloned)
+            {
+                richTextBox1.Text += s + " ";
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button39_Click(object sender, EventArgs e)
@@ -1885,4 +1901,3 @@ namespace vcs_test_all_05_Array
         }
     }
 }
-

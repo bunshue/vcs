@@ -252,7 +252,7 @@ namespace howto_covid19_deaths
 
             // Get the used range.
             Excel.Range used_range = sheet.UsedRange;
-    
+
             // Get the sheet's values.
             object[,] values = (object[,])used_range.Value2;
 
@@ -490,36 +490,37 @@ namespace howto_covid19_deaths
 
         private void SetTooltip(PointF point)
         {
-            if (picGraph.Image == null) return;
-            if (SelectedCountries == null) return;
+            if (picGraph.Image == null)
+                return;
+            if (SelectedCountries == null)
+                return;
 
-            string new_tip = "";
+            string mesg = "";
             int day_num;
             float data_value;
             foreach (CountryData country in SelectedCountries)
             {
-                if (country.PointIsAt(point, out day_num,
-                    out data_value, out ClosePoint))
+                if (country.PointIsAt(point, out day_num, out data_value, out ClosePoint))
                 {
-                    new_tip = country.Name + "\n" +
+                    mesg = country.Name + "\n" +
                         CountryData.Dates[day_num].ToShortDateString() + "\n" +
                         data_value.ToString("n0");
-                    
+
                     if ((radCases.Checked) ||
                         (radCasesPerMillion.Checked))
-                        new_tip += " cases";
+                        mesg += " cases";
                     else
-                        new_tip += " deaths";
+                        mesg += " deaths";
 
                     if ((radCasesPerMillion.Checked) ||
                         (radDeathsPerMillion.Checked))
-                        new_tip += " per million";
+                        mesg += " per million";
                     break;
                 }
             }
 
-            if (tipGraph.GetToolTip(picGraph) != new_tip)
-                tipGraph.SetToolTip(picGraph, new_tip);
+            if (toolTip1.GetToolTip(picGraph) != mesg)
+                toolTip1.SetToolTip(picGraph, mesg);
             picGraph.Refresh();
         }
 
@@ -598,7 +599,7 @@ namespace howto_covid19_deaths
             CountryList.Sort(Comparer);
 
             // Redraw the graph.
-            RedrawGraph();        
+            RedrawGraph();
         }
 
         // A data set radio button has been clicked. Update the graph.

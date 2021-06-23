@@ -74,6 +74,7 @@ namespace howto_covid19_states
             Show();
 
             // Load the data.
+            richTextBox1.Text += "Loading data...\n";
             lblLoading.Text = "Loading data...";
             lblLoading.Refresh();
             LoadData();
@@ -264,7 +265,7 @@ namespace howto_covid19_states
         private int ParseValue(object value)
         {
             if (value == null) return 0;
- 
+
             int result;
             if (int.TryParse(value.ToString(), out result)) return result;
             return 0;
@@ -323,7 +324,7 @@ namespace howto_covid19_states
 
             // Get the used range.
             Excel.Range used_range = sheet.UsedRange;
-    
+
             // Get the sheet's values.
             object[,] values = (object[,])used_range.Value2;
 
@@ -569,29 +570,30 @@ namespace howto_covid19_states
 
         private void SetTooltip(PointF point)
         {
-            if (picGraph.Image == null) return;
-            if (SelectedStates == null) return;
+            if (picGraph.Image == null)
+                return;
+            if (SelectedStates == null)
+                return;
 
-            string new_tip = "";
+            string mesg = "";
             int day_num;
             string descr;
 
             foreach (StateData state in SelectedStates)
             {
-                if (state.PointIsAt(point, out day_num,
-                    out descr, out ClosePoint))
+                if (state.PointIsAt(point, out day_num, out descr, out ClosePoint))
                 {
-                    new_tip = state.Name + "\n" +
+                    mesg = state.Name + "\n" +
                         StateData.Dates[day_num].ToShortDateString() + "\n" +
                         descr;
                     if (chkPerMillion.Checked)
-                        new_tip += " per million";
+                        mesg += " per million";
                     break;
                 }
             }
 
-            if (tipGraph.GetToolTip(picGraph) != new_tip)
-                tipGraph.SetToolTip(picGraph, new_tip);
+            if (toolTip1.GetToolTip(picGraph) != mesg)
+                toolTip1.SetToolTip(picGraph, mesg);
             picGraph.Refresh();
         }
 

@@ -397,7 +397,7 @@ namespace howto_covid19_graph
                 // Draw the axes.
                 DrawAxes(g);
 
-                // Draw the curves.
+                // Draw the curves. //預設的曲線顏色 輪流顯示
                 Color[] colors =
                 {
                     Color.Red, Color.Green, Color.Blue, Color.Black,
@@ -409,6 +409,7 @@ namespace howto_covid19_graph
                     foreach (CountryData country in SelectedCountries)
                     {
                         pen.Color = colors[country.CountryNumber % num_colors];
+                        richTextBox1.Text += "國家 : " + country.Name + "\t顏色 : " + pen.Color + "\n";
                         country.Draw(g, pen, Transform);
                     }
                 }
@@ -495,7 +496,7 @@ namespace howto_covid19_graph
 
         private void btnAll_Click(object sender, EventArgs e)
         {
-            //按了 全選
+            richTextBox1.Text += "按了 全選\n";
             IgnoreItemCheck = true;
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
@@ -507,10 +508,12 @@ namespace howto_covid19_graph
 
         private void btnNone_Click(object sender, EventArgs e)
         {
-            //按了 全不選
+            richTextBox1.Text += "按了 全不選\n";
             IgnoreItemCheck = true;
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
                 checkedListBox1.SetItemChecked(i, false);
+            }
             IgnoreItemCheck = false;
             RedrawGraph();
         }
@@ -536,11 +539,15 @@ namespace howto_covid19_graph
         private void SetTooltip(PointF point)
         {
             if (pictureBox1.Image == null)
+            {
                 return;
+            }
             if (SelectedCountries == null)
+            {
                 return;
+            }
 
-            string new_tip = "";
+            string mesg = "";
             int day_num;
             int num_cases;
             foreach (CountryData country in SelectedCountries)
@@ -550,7 +557,7 @@ namespace howto_covid19_graph
                     //由 point 找到第幾天 再對應到日期 找到當時的總數
                     //richTextBox1.Text += point.ToString() + " " + day_num.ToString() + " " + CountryData.Dates[day_num].ToShortDateString() + " " + num_cases.ToString() + " ";
 
-                    new_tip = country.Name + "\n" +
+                    mesg = country.Name + "\n" +
                         CountryData.Dates[day_num].ToShortDateString() + "\n" +
                         num_cases.ToString("n0") + " 例";
 
@@ -559,9 +566,9 @@ namespace howto_covid19_graph
                 }
             }
 
-            if (tipGraph.GetToolTip(pictureBox1) != new_tip)
+            if (toolTip1.GetToolTip(pictureBox1) != mesg)
             {
-                tipGraph.SetToolTip(pictureBox1, new_tip);
+                toolTip1.SetToolTip(pictureBox1, mesg);
             }
             pictureBox1.Refresh();
         }

@@ -429,10 +429,12 @@ namespace howto_covid19_per_million
 
         private void SetTooltip(PointF point)
         {
-            if (picGraph.Image == null) return;
-            if (SelectedCountries == null) return;
+            if (picGraph.Image == null)
+                return;
+            if (SelectedCountries == null)
+                return;
 
-            string new_tip = "";
+            string mesg = "";
             int day_num;
             float data_value;
             foreach (CountryData country in SelectedCountries)
@@ -440,18 +442,18 @@ namespace howto_covid19_per_million
                 if (country.PointIsAt(point, out day_num,
                     out data_value, out ClosePoint))
                 {
-                    new_tip = country.Name + "\n" +
+                    mesg = country.Name + "\n" +
                         CountryData.Dates[day_num].ToShortDateString() + "\n";
                     if (radCasesPerMillion.Checked)
-                        new_tip += data_value.ToString("n2") + " cases per million";
+                        mesg += data_value.ToString("n2") + " cases per million";
                     else
-                        new_tip += data_value.ToString("n0") + " cases";
+                        mesg += data_value.ToString("n0") + " cases";
                     break;
                 }
             }
 
-            if (tipGraph.GetToolTip(picGraph) != new_tip)
-                tipGraph.SetToolTip(picGraph, new_tip);
+            if (toolTip1.GetToolTip(picGraph) != mesg)
+                toolTip1.SetToolTip(picGraph, mesg);
             picGraph.Refresh();
         }
 

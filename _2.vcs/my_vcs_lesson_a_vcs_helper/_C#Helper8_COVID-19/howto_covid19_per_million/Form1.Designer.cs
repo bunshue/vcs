@@ -33,7 +33,7 @@
             this.clbCountries = new System.Windows.Forms.CheckedListBox();
             this.btnAll = new System.Windows.Forms.Button();
             this.btnNone = new System.Windows.Forms.Button();
-            this.tipGraph = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.radSortByName = new System.Windows.Forms.RadioButton();
             this.radSortByMaxCases = new System.Windows.Forms.RadioButton();
             this.txtAlignCases = new System.Windows.Forms.TextBox();
@@ -242,7 +242,7 @@
         private System.Windows.Forms.CheckedListBox clbCountries;
         private System.Windows.Forms.Button btnAll;
         private System.Windows.Forms.Button btnNone;
-        private System.Windows.Forms.ToolTip tipGraph;
+        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.RadioButton radSortByName;
         private System.Windows.Forms.RadioButton radSortByMaxCases;
         private System.Windows.Forms.TextBox txtAlignCases;

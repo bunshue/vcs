@@ -432,6 +432,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(180, 40);
             this.button29.TabIndex = 28;
+            this.button29.Text = "ENUM的用法";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -1047,11 +1048,12 @@
             // 
             // button37
             // 
-            this.button37.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button37.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button37.Location = new System.Drawing.Point(385, 238);
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(180, 40);
             this.button37.TabIndex = 71;
+            this.button37.Text = "C# Extension Method";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 

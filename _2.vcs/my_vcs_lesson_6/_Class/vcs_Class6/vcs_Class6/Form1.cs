@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using vcs_Class6XXX;    //Class1之namespace不一樣, 要引用
+using vcs_Class6XXX;    //Class1.cs之namespace不一樣, 要引用
+using CatTest;          //Cat.cs之namespace不一樣, 要引用
+using AnimalSpace;      //animal.cs cats.cs human.cs之namespace不一樣, 要引用
 
 namespace vcs_Class6
 {
@@ -48,6 +50,50 @@ namespace vcs_Class6
             //pop
             int pop = stack.Pop();
             richTextBox1.Text += "pop " + pop.ToString() + "\n";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Cat kitty = new Cat();
+            kitty.name = "凱蒂";
+            Cat doraemon = new Cat("多啦A夢", "機器貓");
+            doraemon.setweight(129);
+            Cat garfield = new Cat("加菲", "虎斑貓");
+            garfield.setweight(5);
+
+            kitty.print();
+            doraemon.print();
+            garfield.print();
+            Console.WriteLine();
+
+            garfield.feed();
+            doraemon.play();
+            Console.WriteLine();
+
+            kitty.print();
+            doraemon.print();
+            garfield.print();
+
+            Console.Read();
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Human myself = new Human("小李", "亞洲人", 64, 172);
+            Cats mypet = new Cats("喵仔", "暹邏貓", 7, 30, 20);
+            myself.setpet(mypet);
+
+            myself.print();
+            Console.WriteLine("類型為:" + myself.gettype());
+            Console.WriteLine();
+
+            Console.WriteLine("他的寵物是:");
+            myself.getpet().print();
+            mypet.print_length();
+
+            Console.Read();
+
         }
     }
 }

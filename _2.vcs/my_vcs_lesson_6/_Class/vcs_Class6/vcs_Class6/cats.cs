@@ -2,12 +2,12 @@
 
 namespace AnimalSpace
 {
-    class Cat : Animal
+    class Cats : Animal
     {
         private int body_length;
         private int tail_length;
 
-        public Cat(string n, string t, int w, int b_length, int t_length)
+        public Cats(string n, string t, int w, int b_length, int t_length)
         {
             this.setname(n);
             this.settype(t);

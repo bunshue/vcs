@@ -191,7 +191,7 @@ namespace howto_covid19_align_starts
 
             // Get the used range.
             Excel.Range used_range = sheet.UsedRange;
-    
+
             // Get the sheet's values.
             object[,] values = (object[,])used_range.Value2;
 
@@ -424,26 +424,27 @@ namespace howto_covid19_align_starts
 
         private void SetTooltip(PointF point)
         {
-            if (picGraph.Image == null) return;
-            if (SelectedCountries == null) return;
+            if (picGraph.Image == null)
+                return;
+            if (SelectedCountries == null)
+                return;
 
-            string new_tip = "";
+            string mesg = "";
             int day_num;
             int num_cases;
             foreach (CountryData country in SelectedCountries)
             {
-                if (country.PointIsAt(point, out day_num,
-                    out num_cases, out ClosePoint))
+                if (country.PointIsAt(point, out day_num, out num_cases, out ClosePoint))
                 {
-                    new_tip = country.Name + "\n" +
+                    mesg = country.Name + "\n" +
                         CountryData.Dates[day_num].ToShortDateString() + "\n" +
                         num_cases.ToString("n0") + " cases";
                     break;
                 }
             }
 
-            if (tipGraph.GetToolTip(picGraph) != new_tip)
-                tipGraph.SetToolTip(picGraph, new_tip);
+            if (toolTip1.GetToolTip(picGraph) != mesg)
+                toolTip1.SetToolTip(picGraph, mesg);
             picGraph.Refresh();
         }
 
