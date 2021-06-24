@@ -12,7 +12,9 @@ namespace HundredWindow
 {
     public partial class Frm_Main : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
         Image myImage;
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -20,9 +22,7 @@ namespace HundredWindow
 
         private void button1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp|*.jpg;*.jpeg;*.bmp";		//设置文件的类型
-            openFileDialog1.ShowDialog();								//打开文件对话框
-            myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);	//根据文件的路径实例化Image类
+            myImage = System.Drawing.Image.FromFile(filename);	//根据文件的路径实例化Image类
             this.BackgroundImage = myImage;								//显示打开的图片
         }
 

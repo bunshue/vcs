@@ -53,6 +53,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -105,7 +106,7 @@
             this.txtSavePath.Location = new System.Drawing.Point(0, 1);
             this.txtSavePath.Name = "txtSavePath";
             this.txtSavePath.ReadOnly = true;
-            this.txtSavePath.Size = new System.Drawing.Size(302, 14);
+            this.txtSavePath.Size = new System.Drawing.Size(302, 15);
             this.txtSavePath.TabIndex = 1;
             // 
             // panel1
@@ -137,7 +138,7 @@
             this.txtPicPath.Location = new System.Drawing.Point(0, 1);
             this.txtPicPath.Name = "txtPicPath";
             this.txtPicPath.ReadOnly = true;
-            this.txtPicPath.Size = new System.Drawing.Size(302, 14);
+            this.txtPicPath.Size = new System.Drawing.Size(302, 15);
             this.txtPicPath.TabIndex = 1;
             // 
             // label2
@@ -185,7 +186,7 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(40, 21);
+            this.numericUpDown1.Size = new System.Drawing.Size(40, 22);
             this.numericUpDown1.TabIndex = 8;
             this.numericUpDown1.Value = new decimal(new int[] {
             50,
@@ -198,7 +199,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(234, 22);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(11, 12);
+            this.label4.Size = new System.Drawing.Size(14, 12);
             this.label4.TabIndex = 4;
             this.label4.Text = "%";
             // 
@@ -312,11 +313,20 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(3, 259);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(458, 254);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = "";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 261);
+            this.ClientSize = new System.Drawing.Size(468, 525);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
@@ -328,8 +338,8 @@
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "不失真压缩图片";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -374,6 +384,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

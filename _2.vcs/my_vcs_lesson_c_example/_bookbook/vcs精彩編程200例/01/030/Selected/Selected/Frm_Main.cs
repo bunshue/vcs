@@ -100,19 +100,6 @@ namespace Selected
                         "用户姓名不能为空", "提示");
                     return;
                 }
-                if (textBox2.Text == "")//判断密码输入是否为空
-                {
-                    MessageBox.Show(//弹出消息对话框
-                        "用户密码", "提示");
-                    return;
-                }
-                if (radMan.Checked == false && //判断用户性别输入是否为空
-                    radWoman.Checked == false)
-                {
-                    MessageBox.Show(//弹出消息对话框
-                        "请选择用户性别", "提示");
-                    return;
-                }
                 if (ckInfo.Checked == false && ckMange.Checked == false && //判断是否选择权限
                     ckSell.Checked == false && ckShop.Checked == false)
                 {
@@ -121,19 +108,6 @@ namespace Selected
                     return;
                 }
                 string strName = textBox1.Text.ToString();//得到用户名信息
-                string strPassword = textBox2.Text;//得到密码信息
-                string strPhon = textBox3.Text;//得到电话信息
-                string srtEmail = textBox4.Text;//得到邮件地址信息
-                string strAdress = textBox5.Text;//得到地址信息
-                string strSex;//定义性别变量
-                if (radWoman.Checked == true)//判断用户性别
-                {
-                    strSex = "女";//为性别变量赋值
-                }
-                else
-                {
-                    strSex = "男";//为性别变量赋值
-                }
 
                 string strCkNabge = "库存管理：" + "\n";//创建字符串对象
                 string strCklsell = "销售管理：" + "\n";//创建字符串对象
@@ -180,9 +154,6 @@ namespace Selected
                 }
                 MessageBox.Show(//弹出消息对话框，输出用户输入权限信息
                     "注册信息如下：" + "\n" + "姓名:" + strName + 
-                    "\n" + "密码：" + strPassword + "\n" + "电话:"  +
-                    strPhon + "\n" + "邮箱:" + srtEmail + "\n" + 
-                    "地址:" + strAdress + "\n" + "性别：" + strSex + 
                     "\n" + "用户权限如下：" + "\n" + 
                     strCkl + strCkNabge + strCklsell + strCklShop, "信息确认");
             }
@@ -195,20 +166,11 @@ namespace Selected
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            radWoman.Checked = false;//取消选择性别女
-            radMan.Checked = true;//取消选择性别男
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";//初始化控件
-            textBox2.Text = "";//初始化控件
-            textBox3.Text = "";//初始化控件
-            textBox4.Text = "";//初始化控件
-            textBox5.Text = "";//初始化控件
-            radWoman.Checked = false;//初始化控件
-            radMan.Checked = false;//初始化控件
             ckInfo.Checked = false;//初始化控件
             ckMange.Checked = false;//初始化控件
             ckSell.Checked = false;//初始化控件

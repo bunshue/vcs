@@ -33,10 +33,14 @@ namespace ChineseCode
             string str3 = gb.GetString((byte[])Convert.ChangeType(bytes[2], typeof(byte[])));
             string str4 = gb.GetString((byte[])Convert.ChangeType(bytes[3], typeof(byte[])));
             txt = str1 + str2 + str3 + str4;
+            
             if (txt == null || txt == String.Empty)
             {
                 return;
             }
+
+            richTextBox1.Text += txt + "\n";
+
             Bitmap image = new Bitmap((int)Math.Ceiling((txt.Length * 20.5)), 22);
             Graphics g = Graphics.FromImage(image);
             try

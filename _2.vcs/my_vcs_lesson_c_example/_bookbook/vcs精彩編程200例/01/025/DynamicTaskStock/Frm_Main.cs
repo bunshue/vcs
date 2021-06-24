@@ -6,10 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Net.Sockets;
 using System.Threading;
 using System.IO;
 using System.Net;
+
 namespace DynamicTaskStock
 {
     public partial class Frm_Main : Form

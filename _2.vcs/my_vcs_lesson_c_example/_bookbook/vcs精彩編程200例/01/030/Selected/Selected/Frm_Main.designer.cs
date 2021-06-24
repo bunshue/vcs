@@ -29,20 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.radWoman = new System.Windows.Forms.RadioButton();
-            this.radMan = new System.Windows.Forms.RadioButton();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ckInfo = new System.Windows.Forms.CheckBox();
@@ -54,26 +43,16 @@
             this.ckSell = new System.Windows.Forms.CheckBox();
             this.ckShop = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.radWoman);
-            this.groupBox1.Controls.Add(this.radMan);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 2);
             this.groupBox1.Name = "groupBox1";
@@ -81,66 +60,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "用户注册";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 203);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 12);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "性别：";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(52, 171);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 22);
-            this.textBox5.TabIndex = 13;
-            this.textBox5.Text = "taiwan.earth";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 174);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "地址：";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(52, 135);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 22);
-            this.textBox4.TabIndex = 11;
-            this.textBox4.Text = "lion@mouse.cat.dog";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 138);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "邮箱：";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(52, 106);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 9;
-            this.textBox3.Text = "0922188156";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(52, 71);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '×';
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 8;
-            this.textBox2.Text = "lion";
             // 
             // textBox1
             // 
@@ -169,47 +88,6 @@
             this.button1.Text = "确定(&D)";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // radWoman
-            // 
-            this.radWoman.AutoSize = true;
-            this.radWoman.Checked = true;
-            this.radWoman.Location = new System.Drawing.Point(105, 201);
-            this.radWoman.Name = "radWoman";
-            this.radWoman.Size = new System.Drawing.Size(35, 16);
-            this.radWoman.TabIndex = 4;
-            this.radWoman.TabStop = true;
-            this.radWoman.Text = "女";
-            this.radWoman.UseVisualStyleBackColor = true;
-            // 
-            // radMan
-            // 
-            this.radMan.AutoSize = true;
-            this.radMan.CausesValidation = false;
-            this.radMan.Location = new System.Drawing.Point(52, 200);
-            this.radMan.Name = "radMan";
-            this.radMan.Size = new System.Drawing.Size(35, 16);
-            this.radMan.TabIndex = 3;
-            this.radMan.Text = "男";
-            this.radMan.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 109);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "电话：";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "密码：";
             // 
             // label1
             // 
@@ -341,11 +219,20 @@
             this.checkBox3.Text = "基本档案";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(323, 2);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(379, 448);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 517);
+            this.ClientSize = new System.Drawing.Size(714, 460);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Frm_Main";
@@ -362,16 +249,10 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radMan;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RadioButton radWoman;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckedListBox cklMange;
         private System.Windows.Forms.CheckedListBox cklSell;
@@ -382,11 +263,7 @@
         private System.Windows.Forms.CheckBox ckShop;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox ckInfo;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

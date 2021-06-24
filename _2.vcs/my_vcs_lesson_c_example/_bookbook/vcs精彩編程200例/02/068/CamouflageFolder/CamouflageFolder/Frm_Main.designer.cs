@@ -41,6 +41,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -63,7 +64,7 @@
             // 
             this.txtFolPath.Location = new System.Drawing.Point(78, 22);
             this.txtFolPath.Name = "txtFolPath";
-            this.txtFolPath.Size = new System.Drawing.Size(296, 21);
+            this.txtFolPath.Size = new System.Drawing.Size(296, 22);
             this.txtFolPath.TabIndex = 0;
             // 
             // button1
@@ -104,7 +105,7 @@
             this.txtID.Location = new System.Drawing.Point(103, 57);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(320, 21);
+            this.txtID.Size = new System.Drawing.Size(320, 22);
             this.txtID.TabIndex = 3;
             // 
             // label3
@@ -180,17 +181,26 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // Form1
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(12, 233);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(431, 255);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            // 
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 233);
+            this.ClientSize = new System.Drawing.Size(457, 498);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "伪装文件夹";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -218,6 +228,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

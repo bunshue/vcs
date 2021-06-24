@@ -1045,6 +1045,7 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(155, 40);
             this.button35.TabIndex = 50;
+            this.button35.Text = "各種進位轉換";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 

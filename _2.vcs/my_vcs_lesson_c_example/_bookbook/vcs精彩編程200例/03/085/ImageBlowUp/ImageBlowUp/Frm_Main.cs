@@ -14,7 +14,10 @@ namespace ImageBlowUp
     public partial class Frm_Main : Form
     {
         Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠标 
-        Image myImage; 
+        Image myImage;
+
+        string filename = @"C:\______test_files\picture1.jpg";
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -22,10 +25,7 @@ namespace ImageBlowUp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //设置文件的类型
-            openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
-            openFileDialog1.ShowDialog();								//打开文件对话框
-            myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);	//根据文件的路径和名称实例化Image类
+            myImage = System.Drawing.Image.FromFile(filename);	//根据文件的路径和名称实例化Image类
             pictureBox1.Image = myImage;								//显示图片
             pictureBox1.Height = myImage.Height;							//设置控件的高度
             pictureBox1.Width = myImage.Width;							//设置控件的宽度

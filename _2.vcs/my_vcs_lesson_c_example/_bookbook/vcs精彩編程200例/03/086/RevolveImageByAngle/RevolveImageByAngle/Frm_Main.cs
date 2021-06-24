@@ -10,25 +10,22 @@ namespace RevolveImageByAngle
 {
     public partial class Frm_Main : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
+        private Bitmap SourceBitmap;
+        private Bitmap MyBitmap;
+
         public Frm_Main()
         {
             InitializeComponent();
         }
-        private Bitmap SourceBitmap;
-        private Bitmap MyBitmap;
+
         private void button2_Click(object sender, EventArgs e)
         {
-            //打开图像文件
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "图像文件(JPeg, Gif, Bmp, etc.)|*.jpg;*.jpeg;*.gif;*.bmp;*.tif; *.tiff; *.png| JPeg 图像文件(*.jpg;*.jpeg)|*.jpg;*.jpeg |GIF 图像文件(*.gif)|*.gif |BMP图像文件(*.bmp)|*.bmp|Tiff图像文件(*.tif;*.tiff)|*.tif;*.tiff|Png图像文件(*.png)| *.png |所有文件(*.*)|*.*";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                //得到原始大小的图像
-                SourceBitmap = new Bitmap(openFileDialog.FileName);
-                //得到缩放后的图像
-                MyBitmap = new Bitmap(SourceBitmap, this.pictureBox1.Width, this.pictureBox1.Height);
-                this.pictureBox1.Image = MyBitmap;
-            }
+            //取得原始大小的图像
+            SourceBitmap = new Bitmap(filename);
+            //得到缩放后的图像
+            MyBitmap = new Bitmap(SourceBitmap, this.pictureBox1.Width, this.pictureBox1.Height);
+            this.pictureBox1.Image = MyBitmap;
         }
 
         private void button1_Click(object sender, EventArgs e)

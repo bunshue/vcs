@@ -2446,7 +2446,29 @@ namespace vcs_test_all_01_Math_Random
 
         private void button35_Click(object sender, EventArgs e)
         {
+            long value = 0xFFFF;
+            richTextBox1.Text += "十六進位數值 : \t0x" + value.ToString("X") + "\t轉換為二進位 : \t" + new Transform().SixteenToBinary(value.ToString("X")) + "\n";
+            richTextBox1.Text += "十六進位數值 : \t0x" + value.ToString("X") + "\t轉換為八進位 : \t" + new Transform().SixteenToEight(value.ToString("X")) + "\n";
+            richTextBox1.Text += "十六進位數值 : \t0x" + value.ToString("X") + "\t轉換為十進位 : \t" + new Transform().SixteenToTen(value.ToString("X")) + "\n";
+            richTextBox1.Text += "十六進位數值 : \t0x" + value.ToString("X") + "\t轉換為十六進位 : \t" + value.ToString("X") + "\n";
 
+            value = 65535;
+            richTextBox1.Text += "十進位數值 : \t" + value.ToString() + "\t轉換為二進位 : \t" + new Transform().TenToBinary(value) + "\n";
+            richTextBox1.Text += "十進位數值 : \t" + value.ToString() + "\t轉換為八進位 : \t" + new Transform().TenToEight(value) + "\n";
+            richTextBox1.Text += "十進位數值 : \t" + value.ToString() + "\t轉換為十進位 : \t" + value.ToString() + "\n";
+            richTextBox1.Text += "十進位數值 : \t" + value.ToString() + "\t轉換為十六進位 : \t" + new Transform().TenToSixteen(value) + "\n";
+
+            value = 177777;
+            richTextBox1.Text += "八進位數值 : \t" + value.ToString() + "\t轉換為二進位 : \t" + new Transform().EightToBinary(value) + "\n";
+            richTextBox1.Text += "八進位數值 : \t" + value.ToString() + "\t轉換為八進位 : \t" + value.ToString() + "\n";
+            richTextBox1.Text += "八進位數值 : \t" + value.ToString() + "\t轉換為十進位 : \t" + new Transform().EightToTen(value) + "\n";
+            richTextBox1.Text += "八進位數值 : \t" + value.ToString() + "\t轉換為十六進位 : \t" + new Transform().EightToSixteen(value) + "\n";
+
+            value = 1111111111111111;
+            richTextBox1.Text += "二進位數值 : \t" + value.ToString() + "\t轉換為二進位 : \t" + value.ToString() + "\n";
+            richTextBox1.Text += "二進位數值 : \t" + value.ToString() + "\t轉換為八進位 : \t" + new Transform().BinaryToEight(value) + "\n";
+            richTextBox1.Text += "二進位數值 : \t" + value.ToString() + "\t轉換為十進位 : \t" + new Transform().BinaryToTen(value) + "\n";
+            richTextBox1.Text += "二進位數值 : \t" + value.ToString() + "\t轉換為十六進位 : \t" + new Transform().BinaryToSixteen(value) + "\n";
         }
 
         private void button36_Click(object sender, EventArgs e)
