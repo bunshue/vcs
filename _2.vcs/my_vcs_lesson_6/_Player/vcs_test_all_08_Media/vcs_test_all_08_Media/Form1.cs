@@ -346,6 +346,5 @@ namespace vcs_test_all_08_Media
             PlaySound(filename, new System.IntPtr(), PlaySoundFlags.SND_SYNC);
         }
         //使用 winmm.DLL 的 PlaySound() 播放.wav檔 SP
-
     }
 }

@@ -6,17 +6,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Collections;   //for ArrayList
-
 using System.IO;    //for FileStream, path
-using WMPLib;   //for mp3
 
-namespace vcs_MyAmp
+using WMPLib;   //for WindowsMediaPlayer
+
+
+//WindowsMediaPlayerClass
+
+namespace vcs_WMPLibWindowsMediaPlayer
 {
     public partial class Form1 : Form
     {
-        private WMPLib.WindowsMediaPlayer wplayer;// = new WMPLib.WindowsMediaPlayer();
-        string mp3_file_path = "C:\\______test_files\\_mp3\\09    都はるみ--裏町人生(後街人生).mp3";
+        private WindowsMediaPlayer wmp;// = new WindowsMediaPlayer();
+        string mp3_filename = "C:\\______test_files\\_mp3\\09    都はるみ--裏町人生(後街人生).mp3";
 
         ArrayList musicPath = new ArrayList();    //用於保存歌曲目錄
 
@@ -25,22 +29,27 @@ namespace vcs_MyAmp
         public Form1()
         {
             InitializeComponent();
-            wplayer = new WMPLib.WindowsMediaPlayer();
-            //wplayer.URL = @"C:\______test_files\_mp3\aaaa.mp3";
-            wplayer.URL = mp3_file_path;
-            wplayer.settings.setMode("loop", true);
+            wmp = new WindowsMediaPlayer();
+            //wmp.URL = @"C:\______test_files\_mp3\aaaa.mp3";   //指名單一檔案
+            wmp.URL = mp3_filename;
+            wmp.settings.setMode("loop", true);
 
-            wplayer.settings.autoStart = true;          //自动播放
-            wplayer.settings.setMode("shuffle", false);  //顺序播放
-            wplayer.settings.enableErrorDialogs = true;
-            wplayer.settings.balance = 0;
-            wplayer.settings.mute = false;
-            wplayer.settings.volume = 50;  //声音设为最大
+            wmp.settings.autoStart = true;          //自动播放
+            wmp.settings.setMode("shuffle", false);  //顺序播放
+            wmp.settings.enableErrorDialogs = true;
+            wmp.settings.balance = 0;
+            wmp.settings.mute = false;
+            wmp.settings.volume = 50;  //設定音量大小
 
-            wplayer.controls.stop();
-            trackBar1.Value = wplayer.settings.volume;
+            wmp.controls.stop();
+            trackBar1.Value = wmp.settings.volume;
             listView1.Columns.Add("檔名", 400, HorizontalAlignment.Center);
             listView1.Columns.Add("內容", 200, HorizontalAlignment.Center);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         void Get_Mp3_Information(string filename)
@@ -190,25 +199,25 @@ namespace vcs_MyAmp
         //using WMPLib;
         private void button5_Click(object sender, EventArgs e)
         {
-            //wplayer.URL = @"C:\______test_files\_mp3\aaaa.mp3";
-            //wplayer.settings.setMode("loop", true);
-            wplayer.URL = mp3_file_path;
+            //wmp.URL = @"C:\______test_files\_mp3\aaaa.mp3";   //指名單一檔案
+            //wmp.settings.setMode("loop", true);
+            wmp.URL = mp3_filename;
 
-            wplayer.controls.play();
+            wmp.controls.play();
             timer1.Enabled = true;
-            richTextBox1.Text += "Title: " + wplayer.currentMedia.getItemInfo("Title") + "\t";
-            richTextBox1.Text += "Author: " + wplayer.currentMedia.getItemInfo("Author") + "\n";
-            richTextBox1.Text += "Copyright: " + wplayer.currentMedia.getItemInfo("Copyright") + "\t";
-            richTextBox1.Text += "Description: " + wplayer.currentMedia.getItemInfo("Description") + "\t";
-            richTextBox1.Text += "Duration: " + wplayer.currentMedia.getItemInfo("Duration").ToString() + " Sec\t";
-            richTextBox1.Text += "FileSize: " + wplayer.currentMedia.getItemInfo("FileSize").ToString() + "\t";
-            richTextBox1.Text += "FileType: " + wplayer.currentMedia.getItemInfo("FileType").ToString() + "\n";
-            richTextBox1.Text += "sourceURL: " + wplayer.currentMedia.getItemInfo("sourceURL").ToString() + "\n";
+            richTextBox1.Text += "Title: " + wmp.currentMedia.getItemInfo("Title") + "\t";
+            richTextBox1.Text += "Author: " + wmp.currentMedia.getItemInfo("Author") + "\n";
+            richTextBox1.Text += "Copyright: " + wmp.currentMedia.getItemInfo("Copyright") + "\t";
+            richTextBox1.Text += "Description: " + wmp.currentMedia.getItemInfo("Description") + "\t";
+            richTextBox1.Text += "Duration: " + wmp.currentMedia.getItemInfo("Duration").ToString() + " Sec\t";
+            richTextBox1.Text += "FileSize: " + wmp.currentMedia.getItemInfo("FileSize").ToString() + "\t";
+            richTextBox1.Text += "FileType: " + wmp.currentMedia.getItemInfo("FileType").ToString() + "\n";
+            richTextBox1.Text += "sourceURL: " + wmp.currentMedia.getItemInfo("sourceURL").ToString() + "\n";
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            wplayer.controls.stop();
+            wmp.controls.stop();
             timer1.Enabled = false;
             progressBar1.Value = 0;
             trackBar2.Value = 0;
@@ -217,12 +226,12 @@ namespace vcs_MyAmp
         public int MediaGetPosition()
         {
             int ret = 0;
-            if (WMPLib.WMPPlayState.wmppsPlaying != wplayer.playState)
+            if (WMPPlayState.wmppsPlaying != wmp.playState)
             {
                 return ret;
             }
-            double curPos = wplayer.controls.currentPosition;
-            double totalLen = wplayer.currentMedia.duration;
+            double curPos = wmp.controls.currentPosition;
+            double totalLen = wmp.currentMedia.duration;
             ret = (int)((curPos / totalLen) * 1000);
             //richTextBox1.Text += "curPos = " + curPos.ToString() + "\n";
             //richTextBox1.Text += "totalLen = " + totalLen.ToString() + "\n";
@@ -232,27 +241,27 @@ namespace vcs_MyAmp
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (WMPLib.WMPPlayState.wmppsPlaying != wplayer.playState)
+            if (WMPPlayState.wmppsPlaying != wmp.playState)
             {
                 return;
             }
             int position = MediaGetPosition();
             progressBar1.Value = position;
             trackBar2.Value = position;
-            if (WMPLib.WMPPlayState.wmppsPlaying == wplayer.playState)
+            if (WMPPlayState.wmppsPlaying == wmp.playState)
             {
-                label1.Text = wplayer.controls.currentPositionString + " / " + wplayer.currentMedia.durationString;
+                label1.Text = wmp.controls.currentPositionString + " / " + wmp.currentMedia.durationString;
             }
             else
             {
-                label1.Text = "00:00" + " / " + wplayer.currentMedia.durationString;
+                label1.Text = "00:00" + " / " + wmp.currentMedia.durationString;
                 timer1.Enabled = false;
             }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            wplayer.controls.pause();
+            wmp.controls.pause();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -262,26 +271,26 @@ namespace vcs_MyAmp
 
         private void button10_Click(object sender, EventArgs e)
         {
-            wplayer.controls.play();
+            wmp.controls.play();
             timer1.Enabled = true;
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            wplayer.settings.volume = trackBar1.Value;
+            wmp.settings.volume = trackBar1.Value;
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            if (WMPLib.WMPPlayState.wmppsPlaying != wplayer.playState)
+            if (WMPPlayState.wmppsPlaying != wmp.playState)
             {
                 trackBar2.Value = 0;
                 return;
             }
-            int position = (int)(trackBar2.Value * wplayer.currentMedia.duration / 1000);
-            wplayer.settings.mute = true;
-            wplayer.controls.currentPosition = position;
-            wplayer.settings.mute = false;
+            int position = (int)(trackBar2.Value * wmp.currentMedia.duration / 1000);
+            wmp.settings.mute = true;
+            wmp.controls.currentPosition = position;
+            wmp.settings.mute = false;
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -309,7 +318,7 @@ namespace vcs_MyAmp
                 richTextBox1.Text += "Directory: " + f.Directory + "\n";
                 richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
                 */
-                mp3_file_path = openFileDialog1.FileName;
+                mp3_filename = openFileDialog1.FileName;
             }
             else
             {
@@ -321,31 +330,31 @@ namespace vcs_MyAmp
         {
             //無效
             //richTextBox1.Text += "playCount = 0\n";
-            //wplayer.settings.playCount = 0;
+            //wmp.settings.playCount = 0;
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
             //無效
             //richTextBox1.Text += "playCount = 1\n";
-            //wplayer.settings.playCount = 1;
+            //wmp.settings.playCount = 1;
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "mute\n";
-            wplayer.settings.mute = true;
+            wmp.settings.mute = true;
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "unmute\n";
-            wplayer.settings.mute = false;
+            wmp.settings.mute = false;
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-            Get_Mp3_Information(mp3_file_path);
+            Get_Mp3_Information(mp3_filename);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -354,7 +363,7 @@ namespace vcs_MyAmp
             //listView1.Clear();
             //listView1.Columns.Add("檔名", 400, HorizontalAlignment.Center);
             //listView1.Columns.Add("內容", 200, HorizontalAlignment.Center);
-            //wplayer.currentPlaylist.clear();
+            //wmp.currentPlaylist.clear();
 
             openFileDialog1.Title = "多選檔案";
             //openFileDialog1.ShowHelp = true;
@@ -376,7 +385,7 @@ namespace vcs_MyAmp
                 {
                     richTextBox1.Text += "\t" + strFilename + "\n";
                     musicPath.Add(strFilename);
-                    wplayer.currentPlaylist.insertItem(wplayer.currentPlaylist.count, wplayer.newMedia(strFilename));
+                    wmp.currentPlaylist.insertItem(wmp.currentPlaylist.count, wmp.newMedia(strFilename));
 
                     ListViewItem i1 = new ListViewItem(strFilename);
                     ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
@@ -399,21 +408,21 @@ namespace vcs_MyAmp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            wplayer.controls.play();
+            wmp.controls.play();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            wplayer.controls.next();
+            wmp.controls.next();
             playlist_index++;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            wplayer.controls.previous();
+            wmp.controls.previous();
             if (playlist_index < 1)
             {
-                playlist_index = wplayer.currentPlaylist.count + playlist_index - 1;
+                playlist_index = wmp.currentPlaylist.count + playlist_index - 1;
             }
             else
                 playlist_index--;
@@ -431,27 +440,27 @@ namespace vcs_MyAmp
 
             /* 一樣
             //ListView.SelectedListViewItemCollection selected = listView1.SelectedItems;
-            //mp3_file_path = selected[0].SubItems[0].Text;
+            //mp3_filename = selected[0].SubItems[0].Text;
             */
             /*
             int selNdx = listView1.SelectedIndices[0];
-            mp3_file_path = listView1.Items[selNdx].Text;
+            mp3_filename = listView1.Items[selNdx].Text;
 
-            wplayer.controls.stop();
-            //wplayer.settings.setMode("loop", true);
-            wplayer.URL = mp3_file_path;
+            wmp.controls.stop();
+            //wmp.settings.setMode("loop", true);
+            wmp.URL = mp3_filename;
 
-            wplayer.controls.play();
+            wmp.controls.play();
             timer1.Enabled = true;
 
-            richTextBox1.Text += "Title: " + wplayer.currentMedia.getItemInfo("Title") + "\t";
-            richTextBox1.Text += "Author: " + wplayer.currentMedia.getItemInfo("Author") + "\n";
-            richTextBox1.Text += "Copyright: " + wplayer.currentMedia.getItemInfo("Copyright") + "\t";
-            richTextBox1.Text += "Description: " + wplayer.currentMedia.getItemInfo("Description") + "\t";
-            richTextBox1.Text += "Duration: " + wplayer.currentMedia.getItemInfo("Duration").ToString() + " Sec\t";
-            richTextBox1.Text += "FileSize: " + wplayer.currentMedia.getItemInfo("FileSize").ToString() + "\t";
-            richTextBox1.Text += "FileType: " + wplayer.currentMedia.getItemInfo("FileType").ToString() + "\n";
-            richTextBox1.Text += "sourceURL: " + wplayer.currentMedia.getItemInfo("sourceURL").ToString() + "\n";
+            richTextBox1.Text += "Title: " + wmp.currentMedia.getItemInfo("Title") + "\t";
+            richTextBox1.Text += "Author: " + wmp.currentMedia.getItemInfo("Author") + "\n";
+            richTextBox1.Text += "Copyright: " + wmp.currentMedia.getItemInfo("Copyright") + "\t";
+            richTextBox1.Text += "Description: " + wmp.currentMedia.getItemInfo("Description") + "\t";
+            richTextBox1.Text += "Duration: " + wmp.currentMedia.getItemInfo("Duration").ToString() + " Sec\t";
+            richTextBox1.Text += "FileSize: " + wmp.currentMedia.getItemInfo("FileSize").ToString() + "\t";
+            richTextBox1.Text += "FileType: " + wmp.currentMedia.getItemInfo("FileType").ToString() + "\n";
+            richTextBox1.Text += "sourceURL: " + wmp.currentMedia.getItemInfo("sourceURL").ToString() + "\n";
             */
         }
 
@@ -460,7 +469,7 @@ namespace vcs_MyAmp
             listView1.Clear();
             listView1.Columns.Add("檔名", 400, HorizontalAlignment.Center);
             listView1.Columns.Add("內容", 200, HorizontalAlignment.Center);
-            wplayer.currentPlaylist.clear();
+            wmp.currentPlaylist.clear();
             playlist_index = 0;
         }
 
@@ -478,7 +487,7 @@ namespace vcs_MyAmp
                 listView1.Clear();
                 listView1.Columns.Add("檔名", 400, HorizontalAlignment.Center);
                 listView1.Columns.Add("內容", 200, HorizontalAlignment.Center);
-                wplayer.currentPlaylist.clear();
+                wmp.currentPlaylist.clear();
                 playlist_index = 0;
 
                 String line;
@@ -491,7 +500,7 @@ namespace vcs_MyAmp
                     richTextBox1.Text += "第" + i.ToString() + "行： " + line + "\tlength:" + line.Length.ToString() + "\n";
                     if (line.Length > 0)
                     {
-                        wplayer.currentPlaylist.insertItem(wplayer.currentPlaylist.count, wplayer.newMedia(line));
+                        wmp.currentPlaylist.insertItem(wmp.currentPlaylist.count, wmp.newMedia(line));
                         ListViewItem i1 = new ListViewItem(line);
                         ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
                         //sub_i1a.Text = (prop.Value == null) ? String.Empty : prop.Value.ToString();
@@ -505,9 +514,9 @@ namespace vcs_MyAmp
                 listView1.Items[listView1.Items.Count - 1].EnsureVisible();
 
                 playlist_index = 0;
-                richTextBox1.Text += "wplayer.currentPlaylist.count = " + wplayer.currentPlaylist.count.ToString() + "\n";
+                richTextBox1.Text += "wmp.currentPlaylist.count = " + wmp.currentPlaylist.count.ToString() + "\n";
 
-                label2.Text = ((playlist_index % wplayer.currentPlaylist.count) + 1).ToString() + " / " + wplayer.currentPlaylist.count.ToString();
+                label2.Text = ((playlist_index % wmp.currentPlaylist.count) + 1).ToString() + " / " + wmp.currentPlaylist.count.ToString();
 
             }
         }
@@ -527,7 +536,7 @@ namespace vcs_MyAmp
                 StreamWriter sw = File.CreateText(playlist_filename);
                 string content = "";
 
-                //mp3_file_path = listView1.Items[selNdx].Text;
+                //mp3_filename = listView1.Items[selNdx].Text;
                 for (i = 0; i < numberMusic; i++)
                 {
                     richTextBox1.Text += listView1.Items[i].Text + "\n";
@@ -541,13 +550,13 @@ namespace vcs_MyAmp
         private void button19_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += " playlist_index = " + playlist_index.ToString() + "\n";
-            richTextBox1.Text += " playlist_count = " + wplayer.currentPlaylist.count.ToString() + "\n";
+            richTextBox1.Text += " playlist_count = " + wmp.currentPlaylist.count.ToString() + "\n";
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (wplayer.currentPlaylist.count > 0)
-                label2.Text = ((playlist_index % wplayer.currentPlaylist.count) + 1).ToString() + " / " + wplayer.currentPlaylist.count.ToString();
+            if (wmp.currentPlaylist.count > 0)
+                label2.Text = ((playlist_index % wmp.currentPlaylist.count) + 1).ToString() + " / " + wmp.currentPlaylist.count.ToString();
             else
                 label2.Text = "0 / 0";
         }
@@ -564,7 +573,7 @@ namespace vcs_MyAmp
                 {
                     richTextBox1.Text += strFilename + "\n";
                     musicPath.Add(strFilename);
-                    wplayer.currentPlaylist.insertItem(wplayer.currentPlaylist.count, wplayer.newMedia(strFilename));
+                    wmp.currentPlaylist.insertItem(wmp.currentPlaylist.count, wmp.newMedia(strFilename));
 
                     ListViewItem i1 = new ListViewItem(strFilename);
                     ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
@@ -591,23 +600,33 @@ namespace vcs_MyAmp
             //richTextBox1.Text += "you clicked " + listView1.Items[selNdx].Text + "\n";
 
             int selNdx = listView1.SelectedIndices[0];
-            mp3_file_path = listView1.Items[selNdx].Text;
+            mp3_filename = listView1.Items[selNdx].Text;
 
-            wplayer.controls.stop();
-            //wplayer.settings.setMode("loop", true);
-            wplayer.URL = mp3_file_path;
+            wmp.controls.stop();
+            //wmp.settings.setMode("loop", true);
+            wmp.URL = mp3_filename;
 
-            wplayer.controls.play();
+            wmp.controls.play();
             timer1.Enabled = true;
 
-            richTextBox1.Text += "Title: " + wplayer.currentMedia.getItemInfo("Title") + "\t";
-            richTextBox1.Text += "Author: " + wplayer.currentMedia.getItemInfo("Author") + "\n";
-            richTextBox1.Text += "Copyright: " + wplayer.currentMedia.getItemInfo("Copyright") + "\t";
-            richTextBox1.Text += "Description: " + wplayer.currentMedia.getItemInfo("Description") + "\t";
-            richTextBox1.Text += "Duration: " + wplayer.currentMedia.getItemInfo("Duration").ToString() + " Sec\t";
-            richTextBox1.Text += "FileSize: " + wplayer.currentMedia.getItemInfo("FileSize").ToString() + "\t";
-            richTextBox1.Text += "FileType: " + wplayer.currentMedia.getItemInfo("FileType").ToString() + "\n";
-            richTextBox1.Text += "sourceURL: " + wplayer.currentMedia.getItemInfo("sourceURL").ToString() + "\n";
+            richTextBox1.Text += "Title: " + wmp.currentMedia.getItemInfo("Title") + "\t";
+            richTextBox1.Text += "Author: " + wmp.currentMedia.getItemInfo("Author") + "\n";
+            richTextBox1.Text += "Copyright: " + wmp.currentMedia.getItemInfo("Copyright") + "\t";
+            richTextBox1.Text += "Description: " + wmp.currentMedia.getItemInfo("Description") + "\t";
+            richTextBox1.Text += "Duration: " + wmp.currentMedia.getItemInfo("Duration").ToString() + " Sec\t";
+            richTextBox1.Text += "FileSize: " + wmp.currentMedia.getItemInfo("FileSize").ToString() + "\t";
+            richTextBox1.Text += "FileType: " + wmp.currentMedia.getItemInfo("FileType").ToString() + "\n";
+            richTextBox1.Text += "sourceURL: " + wmp.currentMedia.getItemInfo("sourceURL").ToString() + "\n";
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            WMPLib.WindowsMediaPlayer wplayer;// = new WMPLib.WindowsMediaPlayer();
+            //WMPLib.WindowsMediaPlayerClass c;
+            WMPLib.IWMPMedia m;
+
+
+
         }
     }
 }

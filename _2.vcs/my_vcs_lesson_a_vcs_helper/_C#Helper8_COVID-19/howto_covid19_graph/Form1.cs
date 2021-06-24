@@ -54,6 +54,7 @@ namespace howto_covid19_graph
             checkedListBox1.DataSource = CountryList;
             checkedListBox1.CheckOnClick = true;
 
+            richTextBox1.Size = new Size(400, 900);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             pictureBox2.Image = null;
@@ -761,6 +762,13 @@ namespace howto_covid19_graph
             }
             // Display the result.
             pictureBox2.Image = bm;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //¸ÑÅªCSV¸ê®Æ
+
+
         }
     }
 }

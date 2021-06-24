@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Threading;     //for Thread
 
-using System.Media; // SystemSounds類別、SoundPlayer類別
+using System.Threading;     //for Thread
+using System.Media;         // for SystemSounds     SystemSounds類別、SoundPlayer類別
 
 namespace vcs_test_all_07_Beep
 {

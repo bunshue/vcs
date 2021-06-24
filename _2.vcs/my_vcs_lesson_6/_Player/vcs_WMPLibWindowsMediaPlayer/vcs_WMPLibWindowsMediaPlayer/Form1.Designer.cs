@@ -1,4 +1,4 @@
-﻿namespace vcs_MyAmp
+﻿namespace vcs_WMPLibWindowsMediaPlayer
 {
     partial class Form1
     {
@@ -61,6 +61,7 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.button20 = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.button21 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -241,7 +242,7 @@
             this.trackBar2.Location = new System.Drawing.Point(6, 204);
             this.trackBar2.Maximum = 1000;
             this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(405, 56);
+            this.trackBar2.Size = new System.Drawing.Size(405, 45);
             this.trackBar2.TabIndex = 14;
             this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
@@ -261,7 +262,7 @@
             this.trackBar1.Location = new System.Drawing.Point(10, 108);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(183, 56);
+            this.trackBar1.Size = new System.Drawing.Size(183, 45);
             this.trackBar1.TabIndex = 13;
             this.trackBar1.Value = 50;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -397,11 +398,23 @@
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
+            // button21
+            // 
+            this.button21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button21.Location = new System.Drawing.Point(12, 572);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(50, 30);
+            this.button21.TabIndex = 21;
+            this.button21.Text = "test";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1086, 614);
+            this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.label2);
@@ -418,6 +431,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
@@ -461,6 +475,7 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button button21;
     }
 }
 
