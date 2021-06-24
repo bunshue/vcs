@@ -230,7 +230,7 @@ namespace vcs_Process1
             //開啟特定程式
             //Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
 
-            //開啟計算機程式
+            //開啟小算盤應用程式
             //Process.Start(@"C:\WINDOWS\system32\calc.exe");
 
             //開啟檔案 由預設程式開啟
@@ -246,6 +246,8 @@ namespace vcs_Process1
             //開啟imsLink
             //Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
 
+            //呼叫外部的Exe文件
+            //Process.Start(textBox1.Text);  //呼叫 *.exe
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -560,5 +562,3 @@ namespace vcs_Process1
         }
     }
 }
-
-

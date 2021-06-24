@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.heroLabel = new System.Windows.Forms.Label();
             this.monsterLabel = new System.Windows.Forms.Label();
             this.defenseButton = new System.Windows.Forms.Button();
@@ -36,6 +37,8 @@
             this.powerButton = new System.Windows.Forms.Button();
             this.logList = new System.Windows.Forms.ListBox();
             this.logLabel = new System.Windows.Forms.Label();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // heroLabel
@@ -50,7 +53,7 @@
             // monsterLabel
             // 
             this.monsterLabel.AutoSize = true;
-            this.monsterLabel.Location = new System.Drawing.Point(147, 9);
+            this.monsterLabel.Location = new System.Drawing.Point(243, 9);
             this.monsterLabel.Name = "monsterLabel";
             this.monsterLabel.Size = new System.Drawing.Size(56, 12);
             this.monsterLabel.TabIndex = 1;
@@ -78,7 +81,7 @@
             // 
             // attackButton
             // 
-            this.attackButton.Location = new System.Drawing.Point(147, 75);
+            this.attackButton.Location = new System.Drawing.Point(243, 75);
             this.attackButton.Name = "attackButton";
             this.attackButton.Size = new System.Drawing.Size(75, 23);
             this.attackButton.TabIndex = 4;
@@ -88,7 +91,7 @@
             // 
             // powerButton
             // 
-            this.powerButton.Location = new System.Drawing.Point(147, 104);
+            this.powerButton.Location = new System.Drawing.Point(243, 104);
             this.powerButton.Name = "powerButton";
             this.powerButton.Size = new System.Drawing.Size(75, 23);
             this.powerButton.TabIndex = 5;
@@ -102,7 +105,7 @@
             this.logList.ItemHeight = 12;
             this.logList.Location = new System.Drawing.Point(12, 145);
             this.logList.Name = "logList";
-            this.logList.Size = new System.Drawing.Size(210, 196);
+            this.logList.Size = new System.Drawing.Size(306, 316);
             this.logList.TabIndex = 6;
             // 
             // logLabel
@@ -114,11 +117,25 @@
             this.logLabel.TabIndex = 7;
             this.logLabel.Text = "戰鬥歷程:";
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(334, 6);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(329, 455);
+            this.richTextBox1.TabIndex = 8;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(235, 353);
+            this.ClientSize = new System.Drawing.Size(675, 476);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.logLabel);
             this.Controls.Add(this.logList);
             this.Controls.Add(this.powerButton);
@@ -145,6 +162,8 @@
         private System.Windows.Forms.Button powerButton;
         private System.Windows.Forms.ListBox logList;
         private System.Windows.Forms.Label logLabel;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
