@@ -12,8 +12,8 @@ using System.IO;    //for FileStream, path
 
 using WMPLib;   //for WindowsMediaPlayer
 
-
-//WindowsMediaPlayerClass
+//參考/加入參考/dll內的兩個dll
+//Interop.WMPLib的內嵌Interop型別改成False
 
 namespace vcs_WMPLibWindowsMediaPlayer
 {
@@ -621,11 +621,13 @@ namespace vcs_WMPLibWindowsMediaPlayer
 
         private void button21_Click(object sender, EventArgs e)
         {
-            WMPLib.WindowsMediaPlayer wplayer;// = new WMPLib.WindowsMediaPlayer();
-            //WMPLib.WindowsMediaPlayerClass c;
-            WMPLib.IWMPMedia m;
+            richTextBox1.Text += "測試使用WindowsMediaPlayerClass\n";
+            WindowsMediaPlayerClass c;
+            IWMPMedia m;
 
-
+            c = new WindowsMediaPlayerClass();
+            m = c.newMedia(mp3_filename);
+            richTextBox1.Text += "歌手名:\t" + m.getItemInfo("Author") + "\n" + "歌  名:\t" + m.getItemInfo("Title") + "\n";
 
         }
     }

@@ -403,7 +403,7 @@
             this.button21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button21.Location = new System.Drawing.Point(12, 572);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(50, 30);
+            this.button21.Size = new System.Drawing.Size(89, 30);
             this.button21.TabIndex = 21;
             this.button21.Text = "test";
             this.button21.UseVisualStyleBackColor = true;

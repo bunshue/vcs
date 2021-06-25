@@ -62,7 +62,7 @@ namespace AutomaticPlayImplement
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //播放
+            richTextBox1.Text += "播放\n";
             if (MC != null)
                 this.axWindowsMediaPlayer1.Ctlcontrols.play();
             else
@@ -71,7 +71,7 @@ namespace AutomaticPlayImplement
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //停止播放
+            richTextBox1.Text += "停止播放\n";
             this.axWindowsMediaPlayer1.Ctlcontrols.stop();
         }
 

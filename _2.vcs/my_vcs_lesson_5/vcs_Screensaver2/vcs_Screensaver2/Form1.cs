@@ -1,0 +1,128 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+/*
+    表單Form1的屬性/ 
+
+    BackColor 改 White
+    FormBorderStyle 改 None
+    TransparencyKey = 改 White
+    
+    選一張圖，白色部分就會變成透明
+    BackgroundImage
+    BackgroundImageLayout 改 Center
+
+    // Set the form's TransparencyKey and BackColor
+    // to the image's transparent color.
+*/
+
+namespace vcs_Screensaver2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //讀取圖檔
+            string filename = @"C:\______test_files\picture1.jpg";
+            this.BackgroundImage = Image.FromFile(filename);
+            this.ClientSize = this.BackgroundImage.Size;
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.TopMost = true;
+
+        }
+
+        bool flag_move_right = true;
+        bool flag_move_down = true;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //richTextBox1.AppendText("螢幕解析度 : " + Screen.PrimaryScreen.Bounds.Width.ToString() + "*" + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n");
+
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
+
+            int x_st = this.Location.X;
+            int y_st = this.Location.Y;
+
+            int dx = 10;
+            int dy = 5;
+
+            int w = this.Width;
+            int h = this.Height;
+
+            if (flag_move_right == true) //move right
+            {
+                if ((x_st + w + dx) < W)
+                {
+                    x_st += dx;
+                }
+                else
+                {
+                    flag_move_right = false;
+                    x_st -= dx;
+                }
+            }
+            else   //move to left
+            {
+                if ((x_st - dx) > 0)
+                {
+                    x_st -= dx;
+                }
+                else
+                {
+                    flag_move_right = true;
+                    x_st += dx;
+                }
+            }
+
+            if (flag_move_down == true) //move down
+            {
+                if ((y_st + h + dy) < H)
+                {
+                    y_st += dy;
+                }
+                else
+                {
+                    flag_move_down = false;
+                    y_st -= dy;
+                }
+            }
+            else   //move to left
+            {
+                if ((y_st - dy) > 0)
+                {
+                    y_st -= dy;
+                }
+                else
+                {
+                    flag_move_down = true;
+                    y_st += dy;
+                }
+            }
+            this.Location = new Point(x_st, y_st);
+        }
+
+        private void Form1_Click(object sender, EventArgs e)
+        {
+            //按鍵後反相的寫法
+            timer1.Enabled = !timer1.Enabled;
+        }
+
+        private void Form1_DoubleClick(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+    }
+}

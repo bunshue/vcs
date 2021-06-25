@@ -47,7 +47,7 @@
             this.listBox1.Location = new System.Drawing.Point(12, 10);
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(351, 352);
+            this.listBox1.Size = new System.Drawing.Size(480, 352);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
@@ -55,9 +55,9 @@
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(388, 12);
+            this.button1.Location = new System.Drawing.Point(519, 16);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(101, 86);
+            this.button1.Size = new System.Drawing.Size(151, 86);
             this.button1.TabIndex = 2;
             this.button1.Text = "選取資料夾 將資料夾內所有mp3加入到播放清單內";
             this.button1.UseVisualStyleBackColor = true;
@@ -66,9 +66,9 @@
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(388, 116);
+            this.button2.Location = new System.Drawing.Point(519, 120);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(101, 36);
+            this.button2.Size = new System.Drawing.Size(151, 36);
             this.button2.TabIndex = 13;
             this.button2.Text = "播放";
             this.button2.UseVisualStyleBackColor = true;
@@ -80,16 +80,16 @@
             this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(12, 379);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(511, 29);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(658, 29);
             this.axWindowsMediaPlayer1.TabIndex = 4;
             this.axWindowsMediaPlayer1.Visible = false;
             // 
             // button3
             // 
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(388, 170);
+            this.button3.Location = new System.Drawing.Point(519, 174);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(101, 36);
+            this.button3.Size = new System.Drawing.Size(151, 36);
             this.button3.TabIndex = 14;
             this.button3.Text = "停止";
             this.button3.UseVisualStyleBackColor = true;
@@ -98,9 +98,9 @@
             // button4
             // 
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(388, 308);
+            this.button4.Location = new System.Drawing.Point(519, 326);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(101, 36);
+            this.button4.Size = new System.Drawing.Size(151, 36);
             this.button4.TabIndex = 15;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -109,7 +109,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 424);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(511, 217);
+            this.richTextBox1.Size = new System.Drawing.Size(658, 217);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
@@ -117,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(535, 653);
+            this.ClientSize = new System.Drawing.Size(682, 653);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);

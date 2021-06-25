@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DFC5DF90-0AC9-4ACA-9112-E694CAAE7B2C}</ProjectGuid>
+    <ProjectGuid>{FF9BF0CA-11B1-40CE-8C31-8D355100D084}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_WMPLibWindowsMediaPlayer</RootNamespace>
-    <AssemblyName>vcs_WMPLibWindowsMediaPlayer</AssemblyName>
+    <RootNamespace>vcs_Screensaver2</RootNamespace>
+    <AssemblyName>vcs_Screensaver2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -34,13 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxInterop.WMPLib">
-      <HintPath>dll\AxInterop.WMPLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Interop.WMPLib">
-      <HintPath>dll\Interop.WMPLib.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -72,7 +65,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
