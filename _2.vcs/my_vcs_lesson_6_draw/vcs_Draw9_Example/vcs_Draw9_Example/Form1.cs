@@ -6303,7 +6303,7 @@ namespace vcs_Draw9_Example
             Var_Size = g.MeasureString("專用章", Var_Font);//對指定字符串進行測量
             //繪製文字
             g.DrawString("專用章", Var_Font, myPen.Brush, new PointF((rect.Width / 2F) + circularity_W - Var_Size.Width / 2F, rect.Height / 2F + Var_Size.Height * 2));
-            string tempStr = "省明日科技有限公司";
+            string tempStr = "吉林省明日科技有限公司";
             int len = tempStr.Length;//獲取字符串的長度
             float angle = 180 + (180 - len * 20) / 2;//設置文字的旋轉角度
             for (int i = 0; i < len; i++)//將文字以指定的弧度進行繪製
