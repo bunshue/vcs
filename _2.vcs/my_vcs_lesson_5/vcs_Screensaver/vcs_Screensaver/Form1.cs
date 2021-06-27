@@ -23,8 +23,8 @@ namespace vcs_Screensaver
         int width1, height1;
 
         PictureBox pbx1 = new PictureBox();
-        PictureBox pbx2 = new PictureBox();
-        PictureBox pbx3 = new PictureBox();
+        //PictureBox pbx2 = new PictureBox();
+        //PictureBox pbx3 = new PictureBox();
 
         public Form1()
         {
@@ -33,6 +33,7 @@ namespace vcs_Screensaver
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.BackColor = Color.Black;
             this.WindowState = FormWindowState.Maximized;
 
             string filename = @"C:\______test_files\picture1.jpg";
@@ -79,7 +80,9 @@ namespace vcs_Screensaver
                 return;
             }
             else if (e.X != ixStart || e.Y != iyStart)
+            {
                 StopScreenSaver();
+            }
         }
 
         private void PlayScreenSaver()

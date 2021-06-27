@@ -105,12 +105,15 @@ namespace vcs_axWindowsMediaPlayer
             ofd.Title = "請選擇檔案";
             ofd.Multiselect = true;
             //ofd.InitialDirectory = @"D:\vcs\astro\_DATA2\_mp3\";
-            ofd.InitialDirectory = @"C:\______test_files";
+            ofd.InitialDirectory = @"C:\______test_files\_mp3";
             ofd.Filter = "音樂檔案|*.wav|mp3檔案|*.mp3|所有檔案|*.*";
             //ofd.Filter = "mp3文件|*.mp3|wav文件|*.wav|wma文件|*.wma|wmv文件|*.wmv|所有格式|*.*";
 
             ofd.FilterIndex = 3;
-            ofd.ShowDialog();
+
+            if (ofd.ShowDialog() == DialogResult.Cancel)
+                return;
+
             //獲得我們在資料夾中選擇所有檔案的全路徑
             string[] path = ofd.FileNames;
             for (int i = 0; i < path.Length; i++)

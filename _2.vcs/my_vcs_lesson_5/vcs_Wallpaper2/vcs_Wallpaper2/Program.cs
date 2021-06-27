@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Wallpaper
+namespace vcs_Wallpaper2
 {
     static class Program
     {

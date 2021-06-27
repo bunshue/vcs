@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有關程序集的常規訊息透過下列屬性集
 // 控制。更改這些屬性值可修改
 // 與程序集相關的訊息。
-[assembly: AssemblyTitle("PlantTextAlignMode")]
+[assembly: AssemblyTitle("vcs_ReadWrite_RTF2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PlantTextAlignMode")]
+[assembly: AssemblyProduct("vcs_ReadWrite_RTF2")]
 [assembly: AssemblyCopyright("Copyright ©  2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

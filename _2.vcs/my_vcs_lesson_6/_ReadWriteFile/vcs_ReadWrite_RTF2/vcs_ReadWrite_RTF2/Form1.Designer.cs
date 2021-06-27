@@ -1,6 +1,6 @@
-namespace PlantTextAlignMode
+namespace vcs_ReadWrite_RTF2
 {
-    partial class PlantTextAlignMode
+    partial class Form1
     {
         /// <summary>
         /// 必需的設計器變數。
@@ -111,6 +111,7 @@ namespace PlantTextAlignMode
             // justifyRight
             // 
             this.justifyRight.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.justifyRight.Image = global::PlantTextAlignMode.Properties.Resources.align_right;
             this.justifyRight.Location = new System.Drawing.Point(301, 24);
             this.justifyRight.Name = "justifyRight";
             this.justifyRight.Size = new System.Drawing.Size(37, 25);
@@ -121,6 +122,7 @@ namespace PlantTextAlignMode
             // justifyCenter
             // 
             this.justifyCenter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.justifyCenter.Image = global::PlantTextAlignMode.Properties.Resources.align_center;
             this.justifyCenter.Location = new System.Drawing.Point(184, 24);
             this.justifyCenter.Name = "justifyCenter";
             this.justifyCenter.Size = new System.Drawing.Size(37, 25);
@@ -131,6 +133,7 @@ namespace PlantTextAlignMode
             // justifyLeft
             // 
             this.justifyLeft.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.justifyLeft.Image = global::PlantTextAlignMode.Properties.Resources.align_left;
             this.justifyLeft.Location = new System.Drawing.Point(68, 24);
             this.justifyLeft.Name = "justifyLeft";
             this.justifyLeft.Size = new System.Drawing.Size(37, 25);
@@ -156,16 +159,16 @@ namespace PlantTextAlignMode
             this.label1.TabIndex = 0;
             this.label1.Text = "靠左：";
             // 
-            // PlantTextAlignMode
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(539, 559);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
-            this.Name = "PlantTextAlignMode";
+            this.Name = "Form1";
             this.Text = "設定RichTextBox的文字對齊方式";
-            this.Load += new System.EventHandler(this.PlantTextAlignMode_Load);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

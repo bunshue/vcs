@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace PlantTextAlignMode
+namespace vcs_ReadWrite_RTF2
 {
     static class Program
     {
@@ -15,7 +15,7 @@ namespace PlantTextAlignMode
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PlantTextAlignMode());
+            Application.Run(new Form1());
         }
     }
 }

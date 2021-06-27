@@ -3409,7 +3409,6 @@ namespace vcs_Draw1
 
         private void button59_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

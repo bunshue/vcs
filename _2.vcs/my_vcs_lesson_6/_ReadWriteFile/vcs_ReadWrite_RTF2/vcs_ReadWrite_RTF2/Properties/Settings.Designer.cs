@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PlantTextAlignMode.Properties {
+namespace vcs_ReadWrite_RTF2.Properties
+{
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

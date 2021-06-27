@@ -49,8 +49,15 @@ namespace vcs_WMPLibWindowsMediaPlayer
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
 
         }
+
 
         void Get_Mp3_Information(string filename)
         {
@@ -266,7 +273,6 @@ namespace vcs_WMPLibWindowsMediaPlayer
 
         private void button9_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -630,5 +636,6 @@ namespace vcs_WMPLibWindowsMediaPlayer
             richTextBox1.Text += "歌手名:\t" + m.getItemInfo("Author") + "\n" + "歌  名:\t" + m.getItemInfo("Title") + "\n";
 
         }
+
     }
 }

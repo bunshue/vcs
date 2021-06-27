@@ -6,19 +6,20 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;//需引用命名空間Using System.IO
 
-namespace PlantTextAlignMode
+namespace vcs_ReadWrite_RTF2
 {
-    public partial class PlantTextAlignMode : Form
+    public partial class Form1 : Form
     {
-        public PlantTextAlignMode()
+        public Form1()
         {
             InitializeComponent();
         }
 
         string temp = "tomorrow.RTF";//保存文件的路徑
-        private void PlantTextAlignMode_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             if (File.Exists(temp))//當在指定路徑下存在該文件時
             {
@@ -31,6 +32,7 @@ namespace PlantTextAlignMode
         private void unfold_Click(object sender, EventArgs e)
         {
             OpenFileDialog TxTOpenDialog = new OpenFileDialog();//聲明一個用於打開文件對話框的對象
+            TxTOpenDialog.InitialDirectory = @"C:\______test_files\__RW\_rtf";
             TxTOpenDialog.Filter = "RTF文件(*.RTF)|*.RTF";//定義打開文件對話框的過濾參數
             if (TxTOpenDialog.ShowDialog() == DialogResult.OK)//當在打開對話框中單擊「打開」按鈕時
             {
