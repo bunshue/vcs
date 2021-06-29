@@ -33,6 +33,8 @@ namespace vcs_Screensaver2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();       //將表單置中顯示
+
             //讀取圖檔
             string filename = @"C:\______test_files\picture1.jpg";
             this.BackgroundImage = Image.FromFile(filename);
@@ -41,7 +43,6 @@ namespace vcs_Screensaver2
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             this.TopMost = true;
-
         }
 
         bool flag_move_right = true;
@@ -124,5 +125,42 @@ namespace vcs_Screensaver2
         {
             Application.Exit();
         }
+
+        //***********************
+        private Point mouseOffset;//記錄滑鼠座標
+        private bool isMouseDown = false;//是否按下滑鼠
+        //***********************
+        #region 移動無邊框表單
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            int xOffset;
+            int yOffset;
+            if (e.Button == MouseButtons.Left)
+            {
+                xOffset = -e.X;
+                yOffset = -e.Y;
+                mouseOffset = new Point(xOffset, yOffset);
+                isMouseDown = true;
+            }
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown)
+            {
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouseOffset.X, mouseOffset.Y);
+                Location = mousePos;
+            }
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isMouseDown = false;
+            }
+        }
+        #endregion
     }
 }

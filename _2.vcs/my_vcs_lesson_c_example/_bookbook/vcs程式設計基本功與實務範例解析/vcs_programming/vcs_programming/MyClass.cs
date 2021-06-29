@@ -580,8 +580,7 @@ namespace vcs_programming
             for (int i = 0; i < count; i++)
             {   // polymorphism
                 Shape s = shapeArray[i];
-                res += s.show() + ", 面積 = " + s.area() +
-                       "\r\n-----------------------\r\n";
+                res += s.show() + ", 面積 = " + s.area() + "\r\n";
             }
 
             return res;

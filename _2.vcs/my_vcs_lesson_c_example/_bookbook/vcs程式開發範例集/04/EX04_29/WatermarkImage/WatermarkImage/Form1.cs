@@ -52,7 +52,7 @@ namespace WatermarkImage
 
         private void button1_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = pp(pictureBox1,49,47,40,100F);
+            pictureBox1.Image = pp(pictureBox1,200,100,500,150F);
         }
     }
 }

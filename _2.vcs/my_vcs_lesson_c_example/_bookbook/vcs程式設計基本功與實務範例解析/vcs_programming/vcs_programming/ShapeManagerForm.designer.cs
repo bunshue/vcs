@@ -35,6 +35,7 @@
             this.btnListing = new System.Windows.Forms.Button();
             this.btnCompare = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblCounter
@@ -42,7 +43,7 @@
             this.lblCounter.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCounter.Location = new System.Drawing.Point(12, 16);
             this.lblCounter.Name = "lblCounter";
-            this.lblCounter.Size = new System.Drawing.Size(374, 29);
+            this.lblCounter.Size = new System.Drawing.Size(638, 29);
             this.lblCounter.TabIndex = 13;
             this.lblCounter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -53,13 +54,13 @@
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ReadOnly = true;
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOutput.Size = new System.Drawing.Size(374, 176);
+            this.txtOutput.Size = new System.Drawing.Size(638, 176);
             this.txtOutput.TabIndex = 10;
             this.txtOutput.WordWrap = false;
             // 
             // btnTriangle
             // 
-            this.btnTriangle.Location = new System.Drawing.Point(392, 19);
+            this.btnTriangle.Location = new System.Drawing.Point(656, 16);
             this.btnTriangle.Name = "btnTriangle";
             this.btnTriangle.Size = new System.Drawing.Size(162, 31);
             this.btnTriangle.TabIndex = 14;
@@ -69,7 +70,7 @@
             // 
             // btnRectangle
             // 
-            this.btnRectangle.Location = new System.Drawing.Point(392, 56);
+            this.btnRectangle.Location = new System.Drawing.Point(656, 53);
             this.btnRectangle.Name = "btnRectangle";
             this.btnRectangle.Size = new System.Drawing.Size(162, 31);
             this.btnRectangle.TabIndex = 15;
@@ -79,7 +80,7 @@
             // 
             // btnListing
             // 
-            this.btnListing.Location = new System.Drawing.Point(392, 93);
+            this.btnListing.Location = new System.Drawing.Point(656, 90);
             this.btnListing.Name = "btnListing";
             this.btnListing.Size = new System.Drawing.Size(162, 31);
             this.btnListing.TabIndex = 16;
@@ -89,7 +90,7 @@
             // 
             // btnCompare
             // 
-            this.btnCompare.Location = new System.Drawing.Point(392, 134);
+            this.btnCompare.Location = new System.Drawing.Point(656, 131);
             this.btnCompare.Name = "btnCompare";
             this.btnCompare.Size = new System.Drawing.Size(162, 31);
             this.btnCompare.TabIndex = 17;
@@ -101,15 +102,26 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 230);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(542, 385);
+            this.richTextBox1.Size = new System.Drawing.Size(806, 385);
             this.richTextBox1.TabIndex = 18;
             this.richTextBox1.Text = "";
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(749, 572);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(58, 31);
+            this.bt_clear.TabIndex = 19;
+            this.bt_clear.Text = "clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // ShapeManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 627);
+            this.ClientSize = new System.Drawing.Size(830, 627);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnCompare);
             this.Controls.Add(this.btnListing);
@@ -138,5 +150,6 @@
         private System.Windows.Forms.Button btnListing;
         private System.Windows.Forms.Button btnCompare;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt_clear;
     }
 }

@@ -38,7 +38,8 @@ namespace howto_covid19_graph
 
         int selectedIndex = 0;
 
-        bool flag_use_test_data = false;   //使用測試資料 TBD
+        bool flag_use_test_data = true;   //使用測試資料 TBD
+        string csv_filename = "covid19_data2021_06_27.part.csv";
 
         public Form1()
         {
@@ -104,11 +105,19 @@ namespace howto_covid19_graph
         private void LoadData()
         {
             // Compose the local data file name.
-            string filename = "data" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+            string filename;
 
-            richTextBox1.Text += "下載檔案: " + filename + "\n";
-            // Download today's data.
-            DownloadFile(filename);
+            if (flag_use_test_data == true)
+            {
+                filename = csv_filename;
+            }
+            else
+            {
+                filename = "data" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+                richTextBox1.Text += "下載檔案: " + filename + "\n";
+                // Download today's data.
+                DownloadFile(filename);
+            }
 
             richTextBox1.Text += "讀取檔案: " + filename + "\t從csv => fields\n";
             // Read the file.
@@ -767,6 +776,36 @@ namespace howto_covid19_graph
         private void button3_Click(object sender, EventArgs e)
         {
             //解讀CSV資料
+
+            richTextBox1.Text += "CountryList 長度 : " + CountryList.Count.ToString() + "\n";
+            int i;
+            for (i = 0; i < CountryList.Count; i++)
+            {
+                richTextBox1.Text += CountryList[i].Name + "\t" + CountryList[i].CountryNumber.ToString() + "\t" + CountryList[i].MaxCases.ToString() + "\n";
+            }
+
+            richTextBox1.Text += "改變排序, 依名排序\n";
+
+            Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByName);
+            CountryList.Sort(Comparer);
+
+            for (i = 0; i < CountryList.Count; i++)
+            {
+                richTextBox1.Text += CountryList[i].Name + "\t" + CountryList[i].CountryNumber.ToString() + "\t" + CountryList[i].MaxCases.ToString() + "\n";
+            }
+
+            richTextBox1.Text += "改變排序, 依名確診數排序\n";
+
+            Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByMaxCases);
+            CountryList.Sort(Comparer);
+
+            for (i = 0; i < CountryList.Count; i++)
+            {
+                richTextBox1.Text += CountryList[i].Name + "\t" + CountryList[i].CountryNumber.ToString() + "\t" + CountryList[i].MaxCases.ToString() + "\n";
+            }
+
+
+
 
 
         }

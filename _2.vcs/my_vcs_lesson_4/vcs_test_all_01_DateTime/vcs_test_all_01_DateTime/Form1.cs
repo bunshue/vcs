@@ -814,12 +814,11 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "Minute : " + dateTime1.Minute + "\n";
             richTextBox1.Text += "Second : " + dateTime1.Second + "\n";
             richTextBox1.Text += "Millisecond : " + dateTime1.Millisecond + "\n";
-
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "電腦開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒\n";
+            richTextBox1.Text += "電腦開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒\n";  //???
         }
 
         private void button26_Click(object sender, EventArgs e)

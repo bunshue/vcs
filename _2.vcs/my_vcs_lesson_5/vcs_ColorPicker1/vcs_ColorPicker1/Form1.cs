@@ -247,8 +247,7 @@ namespace vcs_ColorPicker1
         private Point mouseOffset;//記錄滑鼠座標
         private bool isMouseDown = false;//是否按下滑鼠
         //***********************
-
-        #region 移動無邊框Form
+        #region 移動無邊框表單
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             int xOffset;
@@ -282,5 +281,6 @@ namespace vcs_ColorPicker1
 
         }
         #endregion
+
     }
 }
