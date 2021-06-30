@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Microsoft.WindowsAPICodePack.Taskbar;
@@ -21,6 +22,7 @@ namespace player
         private ThumbnailToolbarButton buttonNext;
         private ThumbnailToolbarButton buttonPrevious;
         TaskbarManager tbManager = TaskbarManager.Instance;
+
         public Form1()
         {
             InitializeComponent();
@@ -32,11 +34,14 @@ namespace player
 
         private void playlist_DoubleClick(object sender, EventArgs e)
         {
+            richTextBox1.Text += "playlist_DoubleClick\n"; 
+
             PlaySelectedSong();
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "上一首\n"; 
             PlayPreviousSong(); 
         }
 
@@ -51,6 +56,7 @@ namespace player
 
         private void btnNext_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "下一首\n";
             PlayNextSong(); 
            
         }
@@ -66,6 +72,7 @@ namespace player
 
         private void btnAddSong_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "添加檔案\n";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 playlist.Items.Add(openFileDialog.FileName);
@@ -74,19 +81,23 @@ namespace player
 
         private void btnRemoveSong_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "移除檔案\n";
             playlist.Items.Remove(playlist.SelectedItem);
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "播放檔案\t";
             if (playState == 0)
             {
+                richTextBox1.Text += "11111\n";
                 player.PlaySong();
                 playState = 1;
                 SetTimerforPlay();
             }
             else
             {
+                richTextBox1.Text += "22222\n";
                 PlaySelectedSong();
             }
             buttonPlayPause.Icon = Properties.Resources.Pause;
@@ -94,6 +105,7 @@ namespace player
 
         private void btnPause_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "暫停\n";
             buttonPlayPause.Icon = Properties.Resources.play;
             player.PauseSong();
             playState = 0;
@@ -132,6 +144,7 @@ namespace player
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "停止播放\n";
             player.StopSong();
         }
 
