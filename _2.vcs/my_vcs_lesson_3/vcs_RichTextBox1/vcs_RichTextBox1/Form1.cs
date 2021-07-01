@@ -176,6 +176,15 @@ namespace vcs_RichTextBox1
 
             label4.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - 140, richTextBox1.Location.Y + 5);
             label6.Location = new Point(richTextBox1.Location.X + 100, richTextBox1.Location.Y + 5);
+
+            x_st = 1350;
+            y_st = 350;
+            dy = 40;
+            label1.Location = new Point(x_st, y_st + dy * 0);
+            label7.Location = new Point(x_st, y_st + dy * 1);
+            label2.Location = new Point(x_st, y_st + dy * 2);
+            label3.Location = new Point(x_st, y_st + dy * 3);
+            label5.Location = new Point(x_st, y_st + dy * 4);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -954,6 +963,12 @@ namespace vcs_RichTextBox1
         {
             this.Text = e.LinkText;//設置與窗體關聯的文本
             Process.Start("firefox", e.LinkText);// 在firefox瀏覽器中瀏覽單擊的超鏈接
+        }
+
+        private void richTextBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            richTextBox1.Text += "C# richTextBox 點兩下全選\n";
+            richTextBox1.SelectAll();
         }
     }
 }

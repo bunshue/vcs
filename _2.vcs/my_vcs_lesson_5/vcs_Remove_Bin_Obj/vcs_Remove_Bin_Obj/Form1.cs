@@ -16,6 +16,8 @@ namespace vcs_Remove_Bin_Obj
         List<string> folder_name = new List<string>();      //宣告string型態的List
         List<string> filename_backup = new List<string>();  //宣告string型態的List
         string search_path = string.Empty;
+        int total_show_empty_folder_cnt = 0;
+        int total_delete_empty_folder_cnt = 0;
 
         public Form1()
         {
@@ -24,7 +26,25 @@ namespace vcs_Remove_Bin_Obj
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            int x_st = 15;
+            int y_st = 60;
+            int dy = 40;
+            checkBox3.Location = new Point(x_st, y_st + dy * 0);
+            checkBox1.Location = new Point(x_st, y_st + dy * 1);
+            checkBox4.Location = new Point(x_st, y_st + dy * 2);
+            checkBox2.Location = new Point(x_st, y_st + dy * 3);
+            checkBox7.Location = new Point(x_st, y_st + dy * 4);
+            checkBox8.Location = new Point(x_st, y_st + dy * 5);
+            checkBox9.Location = new Point(x_st, y_st + dy * 6);
+            checkBox10.Location = new Point(x_st, y_st + dy * 7);
+            button1.Location = new Point(x_st, y_st + dy * 8);
+
+            checkBox5.Location = new Point(x_st, y_st + dy * 10);
+            checkBox6.Location = new Point(x_st, y_st + dy * 11);
+            button3.Location = new Point(x_st, y_st + dy * 12);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
 
@@ -36,6 +56,8 @@ namespace vcs_Remove_Bin_Obj
 
         private void button1_Click(object sender, EventArgs e)
         {
+            total_show_empty_folder_cnt = 0;
+            total_delete_empty_folder_cnt = 0;
             lb_main_mesg.Text = "開始刪除檔案";
             this.Refresh();         //加上.Refresh()才可以讓人看清楚字的變化
             /*
@@ -63,10 +85,18 @@ namespace vcs_Remove_Bin_Obj
                 // This path is a directory
                 ProcessDirectory(path);
             }
-            
-            ProcessDirectoryBinObj(folder_name);
-        }
 
+            ProcessDirectoryBinObj(folder_name);
+
+            if (checkBox9.Checked == true)
+            {
+                richTextBox1.Text += "共找到空資料夾 " + total_show_empty_folder_cnt.ToString() + " 個\n";
+            }
+            if (checkBox10.Checked == true)
+            {
+                richTextBox1.Text += "共刪除空資料夾 " + total_delete_empty_folder_cnt.ToString() + " 個\n";
+            }        
+        }
 
         // Process all files in the directory passed in, recurse on any directories 
         // that are found, and process the files they contain.
@@ -74,10 +104,15 @@ namespace vcs_Remove_Bin_Obj
         {
             try
             {
+                int file_cnt = 0;
+                int dir_cnt = 0;
+
                 // Process the list of files found in the directory.
                 try
                 {
+
                     string[] fileEntries = Directory.GetFiles(targetDirectory);
+                    file_cnt = fileEntries.Length;
                     Array.Sort(fileEntries);
                     foreach (string fileName in fileEntries)
                     {
@@ -107,6 +142,7 @@ namespace vcs_Remove_Bin_Obj
 
                     // Recurse into subdirectories of this directory.
                     string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                    dir_cnt = subdirectoryEntries.Length;
                     Array.Sort(subdirectoryEntries);
                     foreach (string subdirectory in subdirectoryEntries)
                     {
@@ -140,6 +176,21 @@ namespace vcs_Remove_Bin_Obj
                 catch (UnauthorizedAccessException ex)
                 {
                     richTextBox1.Text += ex.Message + "\n";
+                }
+                if ((file_cnt == 0) && (dir_cnt == 0))
+                {
+                    if (checkBox9.Checked == true)
+                    {
+                        richTextBox1.Text += targetDirectory + "是一個空資料夾\n";
+                        total_show_empty_folder_cnt++;
+                    }
+                    if (checkBox10.Checked == true)
+                    {
+                        //richTextBox1.Text += "刪除 : " + targetDirectory + "是一個空資料夾\n";
+                        Directory.Delete(targetDirectory, false);   //not recurrsive
+                        richTextBox1.Text += "已刪除資料夾 : " + targetDirectory + "\n";
+                        total_delete_empty_folder_cnt++;
+                    }
                 }
             }
             catch (IOException e)
@@ -355,20 +406,12 @@ namespace vcs_Remove_Bin_Obj
                 // This path is a directory
                 ProcessRenameDirectory(path);
             }
-
             ProcessRenameBackup(filename_backup);
-
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
-
-
-
-
-
-
     }
 }

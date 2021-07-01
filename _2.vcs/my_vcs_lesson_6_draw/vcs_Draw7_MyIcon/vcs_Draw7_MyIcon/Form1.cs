@@ -45,7 +45,7 @@ namespace vcs_Draw7_MyIcon
             int dx;
             int dy;
 
-            x_st = 500;
+            x_st = 600;
             y_st = 10;
             groupBox1.Location = new Point(x_st - 10, y_st);
             groupBox1.ClientSize = new Size(65 * 8 + 12, 80);
@@ -64,7 +64,7 @@ namespace vcs_Draw7_MyIcon
             bt7.Location = new Point(x_st + dx * 7, y_st + dy * 0);
 
             //button
-            x_st = 500;
+            x_st = 600;
             y_st = 100;
             dx = 75;
             dy = 75;
@@ -2075,8 +2075,96 @@ namespace vcs_Draw7_MyIcon
         {
         }
 
+        void draw_camera_status_icon(Color back_color)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 128*1;
+            height = 128*1;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    bitmap1.SetPixel(xx, yy, Color.Black);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(foreground_color, 7);
+
+            int linewidth = width / 32;
+            g.DrawEllipse(new Pen(back_color, linewidth), 0 + linewidth / 2, 0 + linewidth / 2, width - linewidth - 1, height - linewidth - 1);
+
+            sb = new SolidBrush(Color.White);
+            g.FillEllipse(sb, 0 + linewidth / 2, 0 + linewidth / 2, width - linewidth - 1, height - linewidth - 1);
+
+            sb = new SolidBrush(back_color);
+            g.FillEllipse(sb, 8 + linewidth / 2, 8 + linewidth / 2, width - linewidth - 1 - 16, height - linewidth - 1 - 16);
+
+
+            //linewidth = 2;
+            int dx = 6;
+            int dy = 6;
+
+            sb = new SolidBrush(Color.White);
+            Point[] points = new Point[6];
+            int x_st = width * 6 / 10 - width / 16;
+            int y_st = height * 5 / 10;
+
+            int w = width / 5;
+            int h = height / 6;
+
+            dx = width / 12;
+            y_st -= h / 2;
+            points[0] = new Point(x_st, y_st);
+            x_st += w;
+            y_st -= w;
+            points[1] = new Point(x_st, y_st);
+            x_st += dx;
+            points[2] = new Point(x_st, y_st);
+            y_st += (w * 2 + h);
+            points[3] = new Point(x_st, y_st);
+            x_st -= dx;
+            points[4] = new Point(x_st, y_st);
+            x_st -= w;
+            y_st -= w;
+            points[5] = new Point(x_st, y_st);
+            g.FillPolygon(sb, points);
+
+            points = new Point[4];
+
+            x_st = width * 2 / 10 - width / 16; ;
+            y_st = height * 5 / 10;
+
+            w = width * 4 / 10 - width / 32;
+            h = height * 4 / 10;
+
+            y_st -= h / 2;
+            points[0] = new Point(x_st, y_st);
+            x_st += w;
+            points[1] = new Point(x_st, y_st);
+            y_st += h;
+            points[2] = new Point(x_st, y_st);
+            x_st -= w;
+            points[3] = new Point(x_st, y_st);
+            g.FillPolygon(sb, points);
+
+            pictureBox1.Image = bitmap1;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
+            Color back_color = Color.Lime;
+
+            draw_camera_status_icon(back_color);
 
         }
 
@@ -2232,3 +2320,4 @@ namespace vcs_Draw7_MyIcon
         }
     }
 }
+

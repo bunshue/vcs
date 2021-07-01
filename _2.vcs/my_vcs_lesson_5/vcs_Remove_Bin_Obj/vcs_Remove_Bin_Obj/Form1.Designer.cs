@@ -43,6 +43,8 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // button1
@@ -50,7 +52,7 @@
             this.button1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(12, 364);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 47);
+            this.button1.Size = new System.Drawing.Size(104, 39);
             this.button1.TabIndex = 0;
             this.button1.Text = "刪除";
             this.button1.UseVisualStyleBackColor = true;
@@ -58,9 +60,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(207, 85);
+            this.richTextBox1.Location = new System.Drawing.Point(210, 85);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(530, 495);
+            this.richTextBox1.Size = new System.Drawing.Size(527, 527);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -70,7 +72,7 @@
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox1.Location = new System.Drawing.Point(15, 120);
+            this.checkBox1.Location = new System.Drawing.Point(15, 100);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(165, 31);
             this.checkBox1.TabIndex = 2;
@@ -83,7 +85,7 @@
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox2.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox2.Location = new System.Drawing.Point(15, 220);
+            this.checkBox2.Location = new System.Drawing.Point(15, 180);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(189, 31);
             this.checkBox2.TabIndex = 3;
@@ -106,7 +108,7 @@
             this.checkBox3.Checked = true;
             this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox3.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox3.Location = new System.Drawing.Point(15, 70);
+            this.checkBox3.Location = new System.Drawing.Point(15, 60);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(165, 31);
             this.checkBox3.TabIndex = 5;
@@ -119,7 +121,7 @@
             this.checkBox4.Checked = true;
             this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox4.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox4.Location = new System.Drawing.Point(15, 170);
+            this.checkBox4.Location = new System.Drawing.Point(15, 140);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(189, 31);
             this.checkBox4.TabIndex = 6;
@@ -131,7 +133,7 @@
             this.button3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.Location = new System.Drawing.Point(14, 517);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 63);
+            this.button3.Size = new System.Drawing.Size(104, 52);
             this.button3.TabIndex = 8;
             this.button3.Text = "改名\r\n的副本";
             this.button3.UseVisualStyleBackColor = true;
@@ -189,7 +191,7 @@
             this.checkBox7.Checked = true;
             this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox7.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox7.Location = new System.Drawing.Point(15, 270);
+            this.checkBox7.Location = new System.Drawing.Point(15, 220);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(140, 31);
             this.checkBox7.TabIndex = 136;
@@ -202,18 +204,44 @@
             this.checkBox8.Checked = true;
             this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox8.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox8.Location = new System.Drawing.Point(15, 320);
+            this.checkBox8.Location = new System.Drawing.Point(15, 260);
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(140, 31);
             this.checkBox8.TabIndex = 137;
             this.checkBox8.Text = "刪除 misc";
             this.checkBox8.UseVisualStyleBackColor = true;
             // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Checked = true;
+            this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox9.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox9.Location = new System.Drawing.Point(15, 300);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(193, 31);
+            this.checkBox9.TabIndex = 138;
+            this.checkBox9.Text = "顯示空資料夾";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            // 
+            // checkBox10
+            // 
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox10.Location = new System.Drawing.Point(15, 337);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(193, 31);
+            this.checkBox10.TabIndex = 139;
+            this.checkBox10.Text = "刪除空資料夾";
+            this.checkBox10.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 591);
+            this.ClientSize = new System.Drawing.Size(749, 624);
+            this.Controls.Add(this.checkBox10);
+            this.Controls.Add(this.checkBox9);
             this.Controls.Add(this.checkBox8);
             this.Controls.Add(this.checkBox7);
             this.Controls.Add(this.bt_clear);
@@ -253,6 +281,8 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.CheckBox checkBox10;
     }
 }
 

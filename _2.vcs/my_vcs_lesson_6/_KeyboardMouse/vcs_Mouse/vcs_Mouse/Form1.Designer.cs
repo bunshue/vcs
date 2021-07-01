@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -48,11 +52,36 @@
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove);
             this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.label1_MouseUp);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(791, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 36);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "取得滑鼠資訊";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(589, 112);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(304, 484);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 608);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -64,6 +93,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

@@ -52,6 +52,7 @@ namespace vcs_Mouse
 
         private void label1_MouseClick(object sender, MouseEventArgs e)
         {
+            // 哪一個滑鼠按鍵處於按下狀態的值。
             label1.Text = "點按 ";
             if (e.Button == MouseButtons.Right)
                 label1.Text += "滑鼠右鍵";
@@ -105,6 +106,41 @@ namespace vcs_Mouse
         private void label1_MouseUp(object sender, MouseEventArgs e)
         {
             drag = false; //設drag=false，表不可拖曳
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            //取得滑鼠資訊
+            if (SystemInformation.MousePresent)  // 是否安裝滑鼠
+            {
+                richTextBox1.Text += "是否安裝滑鼠 : 是\n";
+            }
+            else
+            {
+                richTextBox1.Text += "是否安裝滑鼠 : 否\n";
+            }
+
+            // 滑鼠按鈕的數目
+            richTextBox1.Text += "滑鼠按鈕的數目 : " + SystemInformation.MouseButtons.ToString() + "\n";
+
+            if (SystemInformation.MouseWheelPresent) // 滑鼠是否有滾輪
+            {
+                richTextBox1.Text += "滑鼠是否有滾輪 : 是\n";
+            }
+            else
+            {
+                richTextBox1.Text += "滑鼠是否有滾輪 : 否\n";
+            }
+
+            // 滑鼠速度 (1 ~ 20)
+            richTextBox1.Text += "滑鼠速度 (1 ~ 20) : " + SystemInformation.MouseSpeed.ToString() + "\n";
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //this.Text = Control.MousePosition.ToString();
+            this.Text = "(" + Control.MousePosition.X.ToString() + ", " + Control.MousePosition.Y.ToString() + ")";
         }
     }
 }

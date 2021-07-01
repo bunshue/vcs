@@ -95,6 +95,7 @@
             this.button30 = new System.Windows.Forms.Button();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.bt_clear3 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -121,6 +122,7 @@
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             this.richTextBox1.DoubleClick += new System.EventHandler(this.richTextBox1_DoubleClick);
             this.richTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyUp);
+            this.richTextBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseDoubleClick);
             this.richTextBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseMove);
             this.richTextBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseUp);
             // 
@@ -469,7 +471,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(470, 513);
+            this.label1.Location = new System.Drawing.Point(886, 494);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(292, 24);
             this.label1.TabIndex = 54;
@@ -563,7 +565,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(470, 543);
+            this.label2.Location = new System.Drawing.Point(886, 568);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(281, 24);
             this.label2.TabIndex = 71;
@@ -573,7 +575,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(470, 573);
+            this.label3.Location = new System.Drawing.Point(886, 598);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(257, 24);
             this.label3.TabIndex = 72;
@@ -707,7 +709,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(471, 487);
+            this.label4.Location = new System.Drawing.Point(887, 473);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(257, 24);
             this.label4.TabIndex = 84;
@@ -717,7 +719,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(471, 602);
+            this.label5.Location = new System.Drawing.Point(887, 627);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(353, 24);
             this.label5.TabIndex = 85;
@@ -728,7 +730,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(471, 463);
+            this.label6.Location = new System.Drawing.Point(887, 449);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(376, 24);
             this.label6.TabIndex = 86;
@@ -796,11 +798,22 @@
             this.bt_clear3.Text = "clear";
             this.bt_clear3.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label7.Location = new System.Drawing.Point(886, 529);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(281, 24);
+            this.label7.TabIndex = 93;
+            this.label7.Text = "C# richTextBox 點兩下全選";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1395, 837);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.bt_clear3);
             this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.button30);
@@ -941,6 +954,7 @@
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.Button bt_clear3;
+        private System.Windows.Forms.Label label7;
     }
 }
 

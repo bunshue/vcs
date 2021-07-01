@@ -108,9 +108,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 404);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 550);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(469, 327);
+            this.richTextBox1.Size = new System.Drawing.Size(512, 286);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -127,6 +127,8 @@
             // 
             // button2
             // 
+            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.Location = new System.Drawing.Point(685, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(60, 60);
@@ -787,7 +789,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1485, 743);
+            this.ClientSize = new System.Drawing.Size(1485, 848);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button51);
