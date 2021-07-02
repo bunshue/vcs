@@ -1,3 +1,0 @@
-test for file open
-and save
-simple Editor
