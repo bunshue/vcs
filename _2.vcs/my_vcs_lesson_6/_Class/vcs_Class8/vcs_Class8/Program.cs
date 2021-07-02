@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_programming
+namespace vcs_Class8
 {
     static class Program
     {
@@ -15,9 +15,7 @@ namespace vcs_programming
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            /* 第 12 章 */
-            Application.Run(new jaggedArray());     //有點多
+            Application.Run(new Form1());
         }
     }
 }

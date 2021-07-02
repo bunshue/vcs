@@ -221,10 +221,6 @@ namespace vcs_Remove_Bin_Obj
                         richTextBox1.Text += "iiiiiiiiiiiiiiiiiiiii\n";
                         continue;
                     }
-                    else if (folder_name[i].Contains("vcs_programming"))
-                    {
-                        continue;
-                    }
                     else if ((folder_name[i].Contains("libemgucv")) && (!folder_name[i].Contains("Emgu.CV.Example")))
                     {
                         continue;

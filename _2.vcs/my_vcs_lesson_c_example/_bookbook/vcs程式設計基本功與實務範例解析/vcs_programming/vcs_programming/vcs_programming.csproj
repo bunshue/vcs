@@ -75,73 +75,15 @@
     <Compile Include="jaggedArray.designer.cs">
       <DependentUpon>jaggedArray.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MyClass.cs" />
-    <Compile Include="RectangleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RectangleForm.designer.cs">
-      <DependentUpon>RectangleForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="sForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sForm.designer.cs">
-      <DependentUpon>sForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ShapeManagerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ShapeManagerForm.designer.cs">
-      <DependentUpon>ShapeManagerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="tForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="tForm.designer.cs">
-      <DependentUpon>tForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Local_Instance.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Local_Instance.Designer.cs">
-      <DependentUpon>Local_Instance.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="jaggedArray.resx">
       <DependentUpon>jaggedArray.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RectangleForm.resx">
-      <DependentUpon>RectangleForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sForm.resx">
-      <DependentUpon>sForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ShapeManagerForm.resx">
-      <DependentUpon>ShapeManagerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="tForm.resx">
-      <DependentUpon>tForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Local_Instance.resx">
-      <DependentUpon>Local_Instance.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TriangleForm.resx">
-      <DependentUpon>TriangleForm.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -157,12 +99,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="TriangleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TriangleForm.designer.cs">
-      <DependentUpon>TriangleForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

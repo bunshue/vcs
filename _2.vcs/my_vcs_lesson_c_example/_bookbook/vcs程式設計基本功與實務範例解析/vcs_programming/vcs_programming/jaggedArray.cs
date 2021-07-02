@@ -21,14 +21,8 @@ namespace vcs_programming
             InitializeComponent();
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void jaggedArray_Load(object sender, EventArgs e)
         {
-            lblCounter.Text = "共有0個顧客";
             richTextBox1.Text += "共有0個顧客\n";
         }
 
@@ -106,12 +100,10 @@ namespace vcs_programming
                 {
                     output += ", " + trans[Counter][i];
                 }
-                txtOutput.Text = output;
                 richTextBox1.Text += output;
 
                 // 顧客數加1
                 Counter++;
-                lblCounter.Text = "共有" + Counter + "個顧客";
                 richTextBox1.Text += "共有" + Counter + "個顧客\n";
 
                 //清除介面上輸入的資料
@@ -143,7 +135,6 @@ namespace vcs_programming
                 str += "\r\n";
             }
 
-            txtOutput.Text = str;
             richTextBox1.Text += str;
 
             txtName.Focus();
@@ -171,12 +162,10 @@ namespace vcs_programming
                 {
                     str += ", " + trans[i][j];
                 }
-                txtOutput.Text = str;
                 richTextBox1.Text += str;
             }
             else
             {
-                txtOutput.Text = "!!!搜尋結果!!!\r\n沒有找到\n";
                 richTextBox1.Text += "!!!搜尋結果!!!\r\n沒有找到\n";
             }
             txtName.Text = "";

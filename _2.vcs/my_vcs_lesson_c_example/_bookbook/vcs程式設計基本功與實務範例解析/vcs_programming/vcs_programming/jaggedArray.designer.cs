@@ -39,11 +39,8 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.txtOutput = new System.Windows.Forms.TextBox();
             this.btnInput = new System.Windows.Forms.Button();
             this.btnListing = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.lblCounter = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
@@ -164,17 +161,6 @@
             this.checkBox1.Text = "桌上型電腦";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // txtOutput
-            // 
-            this.txtOutput.Location = new System.Drawing.Point(18, 285);
-            this.txtOutput.Multiline = true;
-            this.txtOutput.Name = "txtOutput";
-            this.txtOutput.ReadOnly = true;
-            this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOutput.Size = new System.Drawing.Size(295, 120);
-            this.txtOutput.TabIndex = 4;
-            this.txtOutput.WordWrap = false;
-            // 
             // btnInput
             // 
             this.btnInput.Location = new System.Drawing.Point(212, 117);
@@ -195,26 +181,6 @@
             this.btnListing.UseVisualStyleBackColor = true;
             this.btnListing.Click += new System.EventHandler(this.btnListing_Click);
             // 
-            // btnExit
-            // 
-            this.btnExit.Location = new System.Drawing.Point(212, 245);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(101, 28);
-            this.btnExit.TabIndex = 7;
-            this.btnExit.Text = "結束";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // lblCounter
-            // 
-            this.lblCounter.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblCounter.Location = new System.Drawing.Point(18, 245);
-            this.lblCounter.Name = "lblCounter";
-            this.lblCounter.Size = new System.Drawing.Size(141, 28);
-            this.lblCounter.TabIndex = 8;
-            this.lblCounter.Text = "共有0個顧客";
-            this.lblCounter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(212, 200);
@@ -229,7 +195,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(319, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(335, 624);
+            this.richTextBox1.Size = new System.Drawing.Size(503, 624);
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = "";
             // 
@@ -237,14 +203,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 639);
+            this.ClientSize = new System.Drawing.Size(834, 639);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.lblCounter);
-            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnListing);
             this.Controls.Add(this.btnInput);
-            this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtName);
@@ -277,11 +240,8 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox txtOutput;
         private System.Windows.Forms.Button btnInput;
         private System.Windows.Forms.Button btnListing;
-        private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.Label lblCounter;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
