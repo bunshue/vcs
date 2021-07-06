@@ -20,7 +20,7 @@ namespace WindowsApplication1
         {
             Point pt = Cursor.Position; // 滑鼠座標
             pt = this.PointToClient(pt); // 螢幕座標 -> 視窗客戶區座標
-            label1.Text = pt.X.ToString() + ", " + pt.Y.ToString();
+            this.Text = pt.X.ToString() + ", " + pt.Y.ToString();
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)

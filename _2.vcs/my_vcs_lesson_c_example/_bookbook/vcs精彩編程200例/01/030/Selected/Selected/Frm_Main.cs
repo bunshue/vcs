@@ -14,6 +14,11 @@ namespace Selected
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        }
+
         private void ckInfo_CheckedChanged(object sender, EventArgs e)
         {
             if (ckInfo.Checked == true)//判断是否选中基本档案
@@ -40,7 +45,6 @@ namespace Selected
                 cklShop.Visible = false;//隐藏进货管理信息
                 CheckAllEsce(cklShop);//取消选中所有进货管理
             }
-
         }
 
         private void ckSell_CheckedChanged(object sender, EventArgs e)
@@ -70,6 +74,7 @@ namespace Selected
                 CheckAllEsce(cklMange);//取消选中所有库存管理
             }
         }
+
         /// <summary>
         /// 全部选中方法
         /// </summary>
@@ -77,7 +82,9 @@ namespace Selected
         public void CheckAll(CheckedListBox ckl)
         {
             for (int i = 0; i < ckl.Items.Count; i++)//遍历控件中的项并赋值
-            { ckl.SetItemCheckState(i, CheckState.Checked); }
+            {
+                ckl.SetItemCheckState(i, CheckState.Checked);
+            }
         }
 
         /// <summary>
@@ -87,7 +94,9 @@ namespace Selected
         public void CheckAllEsce(CheckedListBox ckl)
         {
             for (int i = 0; i < ckl.Items.Count; i++)//遍历控件中的项并赋值
-            { ckl.SetItemCheckState(i, CheckState.Unchecked); }
+            {
+                ckl.SetItemCheckState(i, CheckState.Unchecked);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -96,17 +105,17 @@ namespace Selected
             {
                 if (textBox1.Text == "")//判断用户输入是否为空
                 {
-                    MessageBox.Show(//弹出消息对话框
-                        "用户姓名不能为空", "提示");
+                    MessageBox.Show("用户姓名不能为空", "提示");
                     return;
                 }
-                if (ckInfo.Checked == false && ckMange.Checked == false && //判断是否选择权限
-                    ckSell.Checked == false && ckShop.Checked == false)
+
+                //判断是否选择权限
+                if (ckInfo.Checked == false && ckMange.Checked == false && ckSell.Checked == false && ckShop.Checked == false)
                 {
-                    MessageBox.Show(//弹出消息对话框
-                        "请任选一项用户权限", "提示");
+                    MessageBox.Show("请任选一项用户权限", "提示");
                     return;
                 }
+
                 string strName = textBox1.Text.ToString();//得到用户名信息
 
                 string strCkNabge = "库存管理：" + "\n";//创建字符串对象
@@ -118,9 +127,8 @@ namespace Selected
 
                     for (int i = 0; i < ckLinfo.CheckedItems.Count; i++)
                     {
-
-                        strCkl += //添加输出信息
-                            ckLinfo.CheckedItems[i].ToString() + "\n";
+                        //添加输出信息
+                        strCkl += ckLinfo.CheckedItems[i].ToString() + "\n";
                     }
                 }
                 if (cklMange.Visible == true)//判断库存管理中是否有选择项
@@ -128,8 +136,8 @@ namespace Selected
 
                     for (int i = 0; i < cklMange.CheckedItems.Count; i++)
                     {
-                        strCkNabge += //添加输出信息
-                            cklMange.CheckedItems[i].ToString() + "\n";
+                        //添加输出信息
+                        strCkNabge += cklMange.CheckedItems[i].ToString() + "\n";
                     }
 
                 }
@@ -138,8 +146,8 @@ namespace Selected
 
                     for (int i = 0; i < cklSell.CheckedItems.Count; i++)
                     {
-                        strCklsell += //添加输出信息
-                            cklSell.CheckedItems[i].ToString() + "\n";
+                        //添加输出信息
+                        strCklsell += cklSell.CheckedItems[i].ToString() + "\n";
                     }
 
                 }
@@ -147,30 +155,24 @@ namespace Selected
                 {
                     for (int i = 0; i < cklShop.CheckedItems.Count; i++)
                     {
-                        strCklShop += //添加输出信息
-                            cklShop.CheckedItems[i].ToString() + "\n";
-
+                        //添加输出信息
+                        strCklShop += cklShop.CheckedItems[i].ToString() + "\n";
                     }
                 }
-                MessageBox.Show(//弹出消息对话框，输出用户输入权限信息
-                    "注册信息如下：" + "\n" + "姓名:" + strName + 
-                    "\n" + "用户权限如下：" + "\n" + 
+                //弹出消息对话框，输出用户输入权限信息
+                MessageBox.Show(
+                    "注册信息如下：" + "\n" + "姓名:" + strName + "\n" + "用户权限如下：" + "\n" +
                     strCkl + strCkNabge + strCklsell + strCklShop, "信息确认");
             }
             catch (Exception ee)
             {
-                MessageBox.Show(//弹出消息对话框
-                    ee.Message);
+                MessageBox.Show(ee.Message);
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";//初始化控件
+            //textBox1.Text = "";//初始化控件
             ckInfo.Checked = false;//初始化控件
             ckMange.Checked = false;//初始化控件
             ckSell.Checked = false;//初始化控件
@@ -178,3 +180,4 @@ namespace Selected
         }
     }
 }
+

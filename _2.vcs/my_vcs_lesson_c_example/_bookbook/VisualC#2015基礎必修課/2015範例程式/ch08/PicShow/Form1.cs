@@ -17,14 +17,6 @@ namespace PicShow
             InitializeComponent();
         }
 
-        // 建立MyClick事件處理函式, 用來處理button1~button4的Click事件
-        void MyClick(object sender, EventArgs e)
-        {
-            Button btnHit = (Button)sender;   // 將sender轉型成Button物件btnHit
-            // pictrueBox1顯示btnHit.Text上的圖檔名稱
-            pictureBox1.Image = new Bitmap("../../" + btnHit.Text + ".jpg");
-        }
-        // 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
             // 建立picName[1]~picName[4] 用來存放圖檔名稱，picName[0]省略不用
@@ -45,5 +37,18 @@ namespace PicShow
             pictureBox1.Image = new Bitmap("../../" + picName[1] + ".jpg");
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
+
+        // 建立MyClick事件處理函式, 用來處理button1~button4的Click事件
+        void MyClick(object sender, EventArgs e)
+        {
+            Button btnHit = (Button)sender;   // 將sender轉型成Button物件btnHit
+
+            richTextBox1.Text += "你按了 " + btnHit.Name + "\t" + btnHit.Text + "\n";
+
+            // pictrueBox1顯示btnHit.Text上的圖檔名稱
+            pictureBox1.Image = new Bitmap("../../" + btnHit.Text + ".jpg");
+
+        }
     }
 }
+
