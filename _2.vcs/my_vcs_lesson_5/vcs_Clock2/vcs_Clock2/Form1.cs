@@ -7,22 +7,24 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Runtime.InteropServices;
-
 using Microsoft.VisualBasic;
 
 namespace vcs_Clock2
 {
     public partial class Form1 : Form
     {
+        [DllImport("kernel32", EntryPoint = "Beep")]
+        public extern static int Beep(int dwfreq, int dwduration);
+        public int intHour, intMouit, intSecon;
+
         public Form1()
         {
             InitializeComponent();
         }
-        [DllImport("kernel32", EntryPoint = "Beep")]
-        public extern static int Beep(int dwfreq,int dwduration);
-        public int intHour, intMouit, intSecon; 
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            label1.Text = "";
             string strHour = DateTime.Now.TimeOfDay.Hours.ToString();
             string strMouit = DateTime.Now.TimeOfDay.Minutes.ToString();
             string strSecon = DateTime.Now.TimeOfDay.Seconds.ToString();
@@ -39,14 +41,14 @@ namespace vcs_Clock2
                 strSecon = "0" + strSecon;
             }
             textBox2.Text = strHour + ":" + strMouit + ":" + strSecon;
-            intHour= Convert.ToInt32(strHour);
+            intHour = Convert.ToInt32(strHour);
             intMouit = Convert.ToInt32(strMouit);
             intSecon = Convert.ToInt32(strSecon);
             numericUpDown3.Value = Convert.ToInt32(strHour);
             numericUpDown2.Value = Convert.ToInt32(strMouit);
             numericUpDown1.Value = Convert.ToInt32(strSecon);
         }
-  
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             string strHour = DateTime.Now.TimeOfDay.Hours.ToString();
@@ -54,7 +56,7 @@ namespace vcs_Clock2
             string strSecon = DateTime.Now.TimeOfDay.Seconds.ToString();
             if (Convert.ToInt32(strHour) < 10)
             {
-                strHour = "0" + strHour; 
+                strHour = "0" + strHour;
             }
             if (Convert.ToInt32(strMouit) < 10)
             {
@@ -66,13 +68,14 @@ namespace vcs_Clock2
             }
 
             textBox1.Text = strHour + ":" + strMouit + ":" + strSecon;
-           
+
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
+
         //設置小時
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
@@ -105,7 +108,7 @@ namespace vcs_Clock2
                 }
                 else
                 {
-                    second =intSecon.ToString();
+                    second = intSecon.ToString();
                 }
                 textBox2.Text = Hour + Minute + second;
             }
@@ -138,10 +141,11 @@ namespace vcs_Clock2
                     second = intSecon.ToString();
                 }
                 textBox2.Text = Hour + Minute + second;
-          
-                
+
+
             }
-        }/////////
+        }
+
         //設置分
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
@@ -177,7 +181,7 @@ namespace vcs_Clock2
                     second = intSecon.ToString();
                 }
                 textBox2.Text = Hour + Minute + second;
-                
+
             }
             else
             {
@@ -207,9 +211,9 @@ namespace vcs_Clock2
                     second = intSecon.ToString();
                 }
                 textBox2.Text = Hour + Minute + second;
-
             }
-        }///
+        }
+
         //設置秒
         private void numericUpDown3_ValueChanged(object sender, EventArgs e)
         {
@@ -275,10 +279,10 @@ namespace vcs_Clock2
 
             }
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
-               
+
             DateTime get_time1 = Convert.ToDateTime(DateTime.Now.ToString());
             DateTime sta_ontime1 = Convert.ToDateTime(Convert.ToDateTime(textBox2.Text.Trim().ToString()));
             TimeSpan sta1 = TimeSpan.FromHours(0);
@@ -295,7 +299,7 @@ namespace vcs_Clock2
                 {
                     MessageBox.Show("時鐘已經啟動，請取消後，在啟動");
                 }
-            }//
+            }
             else
             {
                 long hour = 24 * 3600 + dat;
@@ -303,21 +307,22 @@ namespace vcs_Clock2
                 label4.Text = "鬧鐘已啟動";
                 label1.Text = "剩餘" + hour.ToString() + "秒";
             }
-           
-        
-       }
+        }
+
         //計時
         private void timer2_Tick(object sender, EventArgs e)
         {
             DateTime get_time1 = Convert.ToDateTime(DateTime.Now.ToString());
             DateTime sta_ontime1 = Convert.ToDateTime(Convert.ToDateTime(textBox2.Text.Trim().ToString()));
             long dat = DateAndTime.DateDiff("s", get_time1, sta_ontime1, FirstDayOfWeek.Sunday, FirstWeekOfYear.FirstFourDays);
-          
+
+            label1.Text = "剩餘" + dat.ToString() + "秒";
+
             if (dat == 0)
             {
-                Beep(200,500);
+                Beep(200, 500);
                 label4.Text = "時間已到";
-            }//
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

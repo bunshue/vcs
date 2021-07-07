@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using Microsoft.VisualBasic;            //for AudioPlayMode //引用Microsoft.VisualBasic命名空間
 using Microsoft.VisualBasic.Devices;    //for Computer      //引用Microsoft.VisualBasic.Devices命名空間
-
 using System.Runtime.InteropServices;   //for DllImport
 
 //參考/加入參考/.NET/Microsoft.VisualBasic
@@ -18,11 +17,6 @@ namespace vcs_SoundControl
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // C# 控制電腦靜音與音量 
         // 使用Windows API控制電腦靜音與音量
         // 宣告常式 
@@ -34,6 +28,13 @@ namespace vcs_SoundControl
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
+        //for Computer,          //參考/加入參考/.NET/Microsoft.VisualBasic
+        Computer myComputer = new Computer();
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -52,11 +53,6 @@ namespace vcs_SoundControl
             // 靜音 
             SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
         }
-
-
-        //for Computer,          //參考/加入參考/.NET/Microsoft.VisualBasic
-
-        Computer myComputer = new Computer();
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -91,7 +87,6 @@ namespace vcs_SoundControl
             Computer myComputer = new Computer();
             //播放數字聲音檔
             myComputer.Audio.Play(filename, AudioPlayMode.WaitToComplete);
-
         }
     }
 }

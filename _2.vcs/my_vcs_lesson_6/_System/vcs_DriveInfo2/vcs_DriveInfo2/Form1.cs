@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 
-namespace WinFromDriveInfo
+namespace vcs_DriveInfo2
 {
     public partial class Form1 : Form
     {
@@ -24,6 +24,7 @@ namespace WinFromDriveInfo
             foreach (DriveInfo drive in drives)
             {
                 cmbDrive.Items.Add(drive.ToString());
+                richTextBox1.Text += "抓到磁碟分割區 : " + drive.ToString() + "\n";
             }
         }
 
@@ -46,7 +47,7 @@ namespace WinFromDriveInfo
             else
             {
                 lbDriveInfo.Items.Add("磁碟 " + drive.ToString() + "未就緒");
-            }            
+            }
         }
     }
 }

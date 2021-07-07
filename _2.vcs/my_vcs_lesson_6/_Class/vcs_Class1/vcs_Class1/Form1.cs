@@ -36,19 +36,6 @@ namespace vcs_Class1
             }
         }
 
-        class Sale
-        {
-            public Sale(string productName, DateTime saleDate, double salePrice)
-            {
-                this.ProductName = productName;
-                this.SaleDate = saleDate;
-                this.SalePrice = salePrice;
-            }
-            public string ProductName { get; set; }//货品名称
-            public DateTime SaleDate { get; set; }//销售日期
-            public double SalePrice { get; set; }//销售单价
-        }
-
         public Form1()
         {
             InitializeComponent();
@@ -56,7 +43,7 @@ namespace vcs_Class1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //empty
+            richTextBox1.Text += "empty\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -95,27 +82,7 @@ namespace vcs_Class1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //获取某类商品最后一次销售单价
-
-            //创建销售列表
-            List<Sale> SaleList = new List<Sale>
-            {
-                new Sale("洗衣机",Convert.ToDateTime("2010-3-3"),600),
-                new Sale("冰箱",Convert.ToDateTime("2010-12-12"),1900),
-                new Sale("洗衣机",Convert.ToDateTime("2010-2-2"),550),
-                new Sale("洗衣机",Convert.ToDateTime("2010-1-1"),500)
-            };
-            Sale sa = SaleList.Where(itm => itm.ProductName == "洗衣机").OrderBy(itm => itm.SaleDate).Last();//获取洗衣机最后一次销售单价
-            //输出查询结果
-            //label1.Text = "数据源：{\"洗衣机\",\"2010-3-3\",600}" + Environment.NewLine + "        {\"洗衣机\",\"2010-2-2\",550}" + Environment.NewLine + "        {\"洗衣机\",\"2010-1-1\",500}";//数据源
-            //label2.Text = "查询表达式：Last()";//查询表达式/操作
-            //label3.Text = "查询结果：" + sa.SalePrice.ToString();//查询结果
-
-            richTextBox1.Text += "数据源：{\"洗衣机\",\"2010-3-3\",600}" + "\n"
-                + "        {\"洗衣机\",\"2010-2-2\",550}" + "\n"
-                + "        {\"洗衣机\",\"2010-1-1\",500}" + "\n";//数据源
-            richTextBox1.Text += "查询表达式：Last()" + "\n";//查询表达式/操作
-            richTextBox1.Text += "查询结果：" + sa.SalePrice.ToString() + "\n";//查询结果
+            richTextBox1.Text += "empty\n";
         }
     }
 }

@@ -21,7 +21,7 @@ namespace vcs_Clock4
         private void timer1_Tick(object sender, EventArgs e)
         {
             DateTime get_time1 = Convert.ToDateTime(DateTime.Now.ToString());
-            DateTime sta_ontime1 = Convert.ToDateTime(Convert.ToDateTime("2008-08-08 20:00:00"));
+            DateTime sta_ontime1 = Convert.ToDateTime(Convert.ToDateTime("2021-07-23 20:00:00"));
            txtYear.Text = DateAndTime.DateDiff("yyyy", get_time1, sta_ontime1, FirstDayOfWeek.Sunday, FirstWeekOfYear.FirstFourDays).ToString();
            txtMonth.Text = DateAndTime.DateDiff("m", get_time1, sta_ontime1, FirstDayOfWeek.Sunday, FirstWeekOfYear.FirstFourDays).ToString();
            textday.Text = DateAndTime.DateDiff("d", get_time1, sta_ontime1, FirstDayOfWeek.Sunday, FirstWeekOfYear.FirstFourDays).ToString();
@@ -32,7 +32,7 @@ namespace vcs_Clock4
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox2.Text = "2008-08-08  20:00:00" + "　　星期五";
+            textBox2.Text = "2021-07-23  20:00:00" + "　　星期五";
             timer1.Enabled = true;
         }
     }

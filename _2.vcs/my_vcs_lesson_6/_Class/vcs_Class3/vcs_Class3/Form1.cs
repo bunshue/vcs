@@ -18,7 +18,6 @@ namespace vcs_Class3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -168,5 +167,68 @@ namespace vcs_Class3
 
             //System.GC.Collect();
         }
+
+
+        //Sale範例 ST
+        class Sale
+        {
+            public Sale(string productName, DateTime saleDate, double salePrice)
+            {
+                this.ProductName = productName;
+                this.SaleDate = saleDate;
+                this.SalePrice = salePrice;
+            }
+            public string ProductName { get; set; } //貨品名稱
+            public DateTime SaleDate { get; set; }  //銷售日期
+            public double SalePrice { get; set; }   //銷售價格
+        }
+
+        List<Sale> SaleList = new List<Sale> { };    //銷售列表
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "重建一個銷售列表\n";
+
+            SaleList = new List<Sale>
+            {
+                new Sale("洗衣機",Convert.ToDateTime("2010-3-3"),600),
+                new Sale("冰箱",Convert.ToDateTime("2010-12-12"),1900),
+                new Sale("洗衣機",Convert.ToDateTime("2010-2-2"),550),
+                new Sale("洗衣機",Convert.ToDateTime("2010-1-1"),500)
+            };
+
+            richTextBox1.Text += "增加一個銷售物件\n";
+            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
+
+
+            richTextBox1.Text += "增加一個銷售物件\n";
+            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
+
+            richTextBox1.Text += "增加一個銷售物件\n";
+            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 523));
+
+            int cnt = SaleList.Count;
+            richTextBox1.Text += "目前共有銷售個數 : " + cnt.ToString() + " 個\n";
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            int cnt = SaleList.Count;
+            richTextBox1.Text += "目前共有銷售個數 : " + cnt.ToString() + " 個\n";
+            if (cnt > 0)
+            {
+                richTextBox1.Text += "銷售列表\n";
+                for (int i = 0; i < cnt; i++)
+                {
+                    richTextBox1.Text += SaleList[i].ProductName + "\t" + SaleList[i].SaleDate.ToString() + "\t" + SaleList[i].SalePrice.ToString() + "\n";
+                }
+
+                richTextBox1.Text += "查詢最後一次洗衣機的銷售價格\n";
+                Sale sa = SaleList.Where(itm => itm.ProductName == "洗衣機").OrderBy(itm => itm.SaleDate).Last();
+                richTextBox1.Text += "查詢結果：" + sa.SalePrice.ToString() + "\n";
+            }
+        }
+        //Sale範例 SP
+
     }
 }

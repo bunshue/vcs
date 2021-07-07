@@ -1,4 +1,4 @@
-﻿namespace WinFromDriveInfo
+﻿namespace vcs_DriveInfo2
 {
     partial class Form1
     {
@@ -31,6 +31,7 @@
             this.cmbDrive = new System.Windows.Forms.ComboBox();
             this.lbDriveInfo = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // cmbDrive
@@ -48,7 +49,7 @@
             this.lbDriveInfo.ItemHeight = 12;
             this.lbDriveInfo.Location = new System.Drawing.Point(13, 43);
             this.lbDriveInfo.Name = "lbDriveInfo";
-            this.lbDriveInfo.Size = new System.Drawing.Size(267, 208);
+            this.lbDriveInfo.Size = new System.Drawing.Size(316, 472);
             this.lbDriveInfo.TabIndex = 1;
             // 
             // label1
@@ -60,11 +61,20 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "磁碟";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(335, 43);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(426, 472);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 262);
+            this.ClientSize = new System.Drawing.Size(771, 524);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbDriveInfo);
             this.Controls.Add(this.cmbDrive);
@@ -81,6 +91,7 @@
         private System.Windows.Forms.ComboBox cmbDrive;
         private System.Windows.Forms.ListBox lbDriveInfo;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
