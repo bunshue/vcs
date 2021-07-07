@@ -57,20 +57,20 @@ namespace AGaugeApp
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Lime;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 9);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 8);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(45, 29);
+            this.pictureBox1.Size = new System.Drawing.Size(45, 27);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(12, 44);
+            this.trackBar1.Location = new System.Drawing.Point(12, 41);
             this.trackBar1.Maximum = 400;
             this.trackBar1.Minimum = -100;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(45, 510);
+            this.trackBar1.Size = new System.Drawing.Size(45, 471);
             this.trackBar1.TabIndex = 2;
             this.trackBar1.TickFrequency = 100;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
@@ -83,9 +83,9 @@ namespace AGaugeApp
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(100, 213);
+            this.button1.Location = new System.Drawing.Point(100, 197);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 25);
+            this.button1.Size = new System.Drawing.Size(131, 23);
             this.button1.TabIndex = 9;
             this.button1.Text = "change needle types";
             this.button1.UseVisualStyleBackColor = true;
@@ -93,10 +93,10 @@ namespace AGaugeApp
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(142, 163);
+            this.textBox1.Location = new System.Drawing.Point(142, 150);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(42, 20);
+            this.textBox1.Size = new System.Drawing.Size(42, 22);
             this.textBox1.TabIndex = 17;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -114,9 +114,9 @@ namespace AGaugeApp
             // 
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(318, 111);
+            this.label3.Location = new System.Drawing.Point(318, 102);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(294, 36);
+            this.label3.Size = new System.Drawing.Size(294, 33);
             this.label3.TabIndex = 19;
             this.label3.Text = "Volt";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -125,9 +125,9 @@ namespace AGaugeApp
             // 
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Location = new System.Drawing.Point(302, 428);
+            this.label1.Location = new System.Drawing.Point(302, 395);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 86);
+            this.label1.Size = new System.Drawing.Size(134, 80);
             this.label1.TabIndex = 20;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -160,7 +160,7 @@ namespace AGaugeApp
         ""};
             this.aGauge5.CapText = "";
             this.aGauge5.Center = new System.Drawing.Point(30, 70);
-            this.aGauge5.Location = new System.Drawing.Point(695, 411);
+            this.aGauge5.Location = new System.Drawing.Point(695, 379);
             this.aGauge5.MaxValue = 50F;
             this.aGauge5.MinValue = 0F;
             this.aGauge5.Name = "aGauge5";
@@ -232,7 +232,7 @@ namespace AGaugeApp
             this.aGauge5.ScaleNumbersRotation = 90;
             this.aGauge5.ScaleNumbersStartScaleLine = 1;
             this.aGauge5.ScaleNumbersStepScaleLines = 2;
-            this.aGauge5.Size = new System.Drawing.Size(106, 95);
+            this.aGauge5.Size = new System.Drawing.Size(106, 88);
             this.aGauge5.TabIndex = 8;
             this.aGauge5.Text = "aGauge5";
             this.aGauge5.Value = 0F;
@@ -266,7 +266,7 @@ namespace AGaugeApp
         ""};
             this.aGauge3.CapText = "";
             this.aGauge3.Center = new System.Drawing.Point(70, 70);
-            this.aGauge3.Location = new System.Drawing.Point(63, 401);
+            this.aGauge3.Location = new System.Drawing.Point(63, 370);
             this.aGauge3.MaxValue = 50F;
             this.aGauge3.MinValue = 0F;
             this.aGauge3.Name = "aGauge3";
@@ -338,7 +338,7 @@ namespace AGaugeApp
             this.aGauge3.ScaleNumbersRotation = 90;
             this.aGauge3.ScaleNumbersStartScaleLine = 1;
             this.aGauge3.ScaleNumbersStepScaleLines = 2;
-            this.aGauge3.Size = new System.Drawing.Size(143, 95);
+            this.aGauge3.Size = new System.Drawing.Size(143, 88);
             this.aGauge3.TabIndex = 6;
             this.aGauge3.Text = "aGauge3";
             this.aGauge3.Value = 0F;
@@ -372,7 +372,7 @@ namespace AGaugeApp
         ""};
             this.aGauge12.CapText = "";
             this.aGauge12.Center = new System.Drawing.Point(70, 70);
-            this.aGauge12.Location = new System.Drawing.Point(611, 266);
+            this.aGauge12.Location = new System.Drawing.Point(611, 246);
             this.aGauge12.MaxValue = 100F;
             this.aGauge12.MinValue = 0F;
             this.aGauge12.Name = "aGauge12";
@@ -444,7 +444,7 @@ namespace AGaugeApp
             this.aGauge12.ScaleNumbersRotation = 0;
             this.aGauge12.ScaleNumbersStartScaleLine = 1;
             this.aGauge12.ScaleNumbersStepScaleLines = 2;
-            this.aGauge12.Size = new System.Drawing.Size(150, 142);
+            this.aGauge12.Size = new System.Drawing.Size(150, 131);
             this.aGauge12.TabIndex = 18;
             this.aGauge12.Text = "aGauge12";
             this.aGauge12.Value = 0F;
@@ -480,7 +480,7 @@ namespace AGaugeApp
             this.aGauge7.CapText = "";
             this.aGauge7.Center = new System.Drawing.Point(70, 70);
             this.aGauge7.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aGauge7.Location = new System.Drawing.Point(547, 411);
+            this.aGauge7.Location = new System.Drawing.Point(547, 379);
             this.aGauge7.MaxValue = 50F;
             this.aGauge7.MinValue = 0F;
             this.aGauge7.Name = "aGauge7";
@@ -552,7 +552,7 @@ namespace AGaugeApp
             this.aGauge7.ScaleNumbersRotation = 90;
             this.aGauge7.ScaleNumbersStartScaleLine = 1;
             this.aGauge7.ScaleNumbersStepScaleLines = 2;
-            this.aGauge7.Size = new System.Drawing.Size(142, 85);
+            this.aGauge7.Size = new System.Drawing.Size(142, 78);
             this.aGauge7.TabIndex = 11;
             this.aGauge7.Text = "aGauge7";
             this.aGauge7.Value = 0F;
@@ -588,7 +588,7 @@ namespace AGaugeApp
             this.aGauge8.CapText = "";
             this.aGauge8.Center = new System.Drawing.Point(70, 70);
             this.aGauge8.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aGauge8.Location = new System.Drawing.Point(509, 167);
+            this.aGauge8.Location = new System.Drawing.Point(509, 154);
             this.aGauge8.MaxValue = 50F;
             this.aGauge8.MinValue = 0F;
             this.aGauge8.Name = "aGauge8";
@@ -660,7 +660,7 @@ namespace AGaugeApp
             this.aGauge8.ScaleNumbersRotation = 90;
             this.aGauge8.ScaleNumbersStartScaleLine = 1;
             this.aGauge8.ScaleNumbersStepScaleLines = 2;
-            this.aGauge8.Size = new System.Drawing.Size(84, 85);
+            this.aGauge8.Size = new System.Drawing.Size(84, 78);
             this.aGauge8.TabIndex = 16;
             this.aGauge8.Text = "aGauge8";
             this.aGauge8.Value = 22F;
@@ -696,7 +696,7 @@ namespace AGaugeApp
             this.aGauge11.CapText = "";
             this.aGauge11.Center = new System.Drawing.Point(70, 70);
             this.aGauge11.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aGauge11.Location = new System.Drawing.Point(631, 9);
+            this.aGauge11.Location = new System.Drawing.Point(631, 8);
             this.aGauge11.MaxValue = 10F;
             this.aGauge11.MinValue = 0F;
             this.aGauge11.Name = "aGauge11";
@@ -768,7 +768,7 @@ namespace AGaugeApp
             this.aGauge11.ScaleNumbersRotation = 0;
             this.aGauge11.ScaleNumbersStartScaleLine = 2;
             this.aGauge11.ScaleNumbersStepScaleLines = 2;
-            this.aGauge11.Size = new System.Drawing.Size(149, 148);
+            this.aGauge11.Size = new System.Drawing.Size(149, 137);
             this.aGauge11.TabIndex = 15;
             this.aGauge11.Text = "aGauge11";
             this.aGauge11.Value = 0F;
@@ -804,7 +804,7 @@ namespace AGaugeApp
             this.aGauge10.CapText = "";
             this.aGauge10.Center = new System.Drawing.Point(15, 70);
             this.aGauge10.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aGauge10.Location = new System.Drawing.Point(695, 167);
+            this.aGauge10.Location = new System.Drawing.Point(695, 154);
             this.aGauge10.MaxValue = 100F;
             this.aGauge10.MinValue = 0F;
             this.aGauge10.Name = "aGauge10";
@@ -876,7 +876,7 @@ namespace AGaugeApp
             this.aGauge10.ScaleNumbersRotation = 90;
             this.aGauge10.ScaleNumbersStartScaleLine = 1;
             this.aGauge10.ScaleNumbersStepScaleLines = 2;
-            this.aGauge10.Size = new System.Drawing.Size(85, 93);
+            this.aGauge10.Size = new System.Drawing.Size(85, 86);
             this.aGauge10.TabIndex = 14;
             this.aGauge10.Text = "aGauge10";
             this.aGauge10.Value = 0F;
@@ -912,7 +912,7 @@ namespace AGaugeApp
             this.aGauge9.CapText = "% Fuel";
             this.aGauge9.Center = new System.Drawing.Point(70, 70);
             this.aGauge9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aGauge9.Location = new System.Drawing.Point(611, 167);
+            this.aGauge9.Location = new System.Drawing.Point(611, 154);
             this.aGauge9.MaxValue = 100F;
             this.aGauge9.MinValue = 0F;
             this.aGauge9.Name = "aGauge9";
@@ -984,7 +984,7 @@ namespace AGaugeApp
             this.aGauge9.ScaleNumbersRotation = 90;
             this.aGauge9.ScaleNumbersStartScaleLine = 1;
             this.aGauge9.ScaleNumbersStepScaleLines = 2;
-            this.aGauge9.Size = new System.Drawing.Size(91, 108);
+            this.aGauge9.Size = new System.Drawing.Size(91, 100);
             this.aGauge9.TabIndex = 13;
             this.aGauge9.Text = "aGauge9";
             this.aGauge9.Value = 0F;
@@ -1020,7 +1020,7 @@ namespace AGaugeApp
             this.aGauge6.CapText = "";
             this.aGauge6.Center = new System.Drawing.Point(70, 70);
             this.aGauge6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aGauge6.Location = new System.Drawing.Point(82, 266);
+            this.aGauge6.Location = new System.Drawing.Point(82, 246);
             this.aGauge6.MaxValue = 50F;
             this.aGauge6.MinValue = 0F;
             this.aGauge6.Name = "aGauge6";
@@ -1092,7 +1092,7 @@ namespace AGaugeApp
             this.aGauge6.ScaleNumbersRotation = 90;
             this.aGauge6.ScaleNumbersStartScaleLine = 1;
             this.aGauge6.ScaleNumbersStepScaleLines = 2;
-            this.aGauge6.Size = new System.Drawing.Size(84, 85);
+            this.aGauge6.Size = new System.Drawing.Size(84, 78);
             this.aGauge6.TabIndex = 12;
             this.aGauge6.Text = "aGauge6";
             this.aGauge6.Value = 22F;
@@ -1127,7 +1127,7 @@ namespace AGaugeApp
             this.aGauge2.CapText = "x 1000000 [m/s]";
             this.aGauge2.Center = new System.Drawing.Point(170, 170);
             this.aGauge2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aGauge2.Location = new System.Drawing.Point(199, 187);
+            this.aGauge2.Location = new System.Drawing.Point(199, 173);
             this.aGauge2.MaxValue = 400F;
             this.aGauge2.MinValue = -100F;
             this.aGauge2.Name = "aGauge2";
@@ -1199,7 +1199,7 @@ namespace AGaugeApp
             this.aGauge2.ScaleNumbersRotation = 0;
             this.aGauge2.ScaleNumbersStartScaleLine = 0;
             this.aGauge2.ScaleNumbersStepScaleLines = 1;
-            this.aGauge2.Size = new System.Drawing.Size(378, 299);
+            this.aGauge2.Size = new System.Drawing.Size(378, 276);
             this.aGauge2.TabIndex = 3;
             this.aGauge2.Text = "aGauge2";
             this.aGauge2.Value = 0F;
@@ -1235,7 +1235,7 @@ namespace AGaugeApp
         ""};
             this.aGauge1.CapText = "";
             this.aGauge1.Center = new System.Drawing.Point(100, 105);
-            this.aGauge1.Location = new System.Drawing.Point(63, 21);
+            this.aGauge1.Location = new System.Drawing.Point(63, 19);
             this.aGauge1.MaxValue = 400F;
             this.aGauge1.MinValue = -100F;
             this.aGauge1.Name = "aGauge1";
@@ -1307,7 +1307,7 @@ namespace AGaugeApp
             this.aGauge1.ScaleNumbersRotation = 0;
             this.aGauge1.ScaleNumbersStartScaleLine = 0;
             this.aGauge1.ScaleNumbersStepScaleLines = 1;
-            this.aGauge1.Size = new System.Drawing.Size(209, 186);
+            this.aGauge1.Size = new System.Drawing.Size(209, 172);
             this.aGauge1.TabIndex = 0;
             this.aGauge1.Text = "aGauge1";
             this.aGauge1.Value = 50F;
@@ -1414,16 +1414,16 @@ namespace AGaugeApp
             this.aGauge4.ScaleNumbersRotation = 90;
             this.aGauge4.ScaleNumbersStartScaleLine = 1;
             this.aGauge4.ScaleNumbersStepScaleLines = 2;
-            this.aGauge4.Size = new System.Drawing.Size(297, 121);
+            this.aGauge4.Size = new System.Drawing.Size(297, 112);
             this.aGauge4.TabIndex = 7;
             this.aGauge4.Text = "aGauge4";
             this.aGauge4.Value = 0F;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 566);
+            this.ClientSize = new System.Drawing.Size(848, 543);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.aGauge5);
             this.Controls.Add(this.aGauge3);

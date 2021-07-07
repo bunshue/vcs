@@ -74,6 +74,11 @@ namespace AGaugeApp
             aGauge9.Value = (Single)(((Int32)aGauge9.Value + 99) % 100);
             aGauge10.Value = (Single)(((Int32)aGauge10.Value + 99) % 100);
             aGauge12.Value = (Single)(((Int32)aGauge12.Value + 99) % 100);
+
+            if ((trackBar1.Value + 17) < trackBar1.Maximum)
+                trackBar1.Value += 17;
+            else
+                trackBar1.Value = trackBar1.Minimum;
         }
 
         private void button1_Click(object sender, EventArgs e)

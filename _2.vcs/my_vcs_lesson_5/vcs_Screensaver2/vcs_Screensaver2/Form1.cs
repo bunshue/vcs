@@ -36,17 +36,22 @@ namespace vcs_Screensaver2
             this.CenterToScreen();       //將表單置中顯示
 
             //讀取圖檔
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files\_pic\poster_01.jpg";
             this.BackgroundImage = Image.FromFile(filename);
-            this.ClientSize = this.BackgroundImage.Size;
+            //this.ClientSize = this.BackgroundImage.Size;
+            this.ClientSize = new Size(this.BackgroundImage.Size.Width * 1 / 4, this.BackgroundImage.Size.Height * 1 / 4);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             this.TopMost = true;
         }
 
+        int index_pic = 1;
+        int cnt = 0;
         bool flag_move_right = true;
         bool flag_move_down = true;
+        bool flag_enlarge = true;
+        int ratio = 100;
         private void timer1_Tick(object sender, EventArgs e)
         {
             //richTextBox1.AppendText("螢幕解析度 : " + Screen.PrimaryScreen.Bounds.Width.ToString() + "*" + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n");
@@ -113,6 +118,42 @@ namespace vcs_Screensaver2
                 }
             }
             this.Location = new Point(x_st, y_st);
+
+            cnt++;
+            if ((cnt % 10) == 0)
+            {
+                index_pic++;
+                if (index_pic > 21)
+                    index_pic = 1;
+
+                /*
+                //讀取圖檔
+                string filename = @"C:\pic1018c\b\" + index_pic.ToString() + ".jpg";
+                this.BackgroundImage = Image.FromFile(filename);
+                //this.ClientSize = this.BackgroundImage.Size;
+                this.ClientSize = new Size(this.BackgroundImage.Size.Width * 1 / 4, this.BackgroundImage.Size.Height * 1 / 4);
+                */
+
+                if (flag_enlarge == true)
+                {
+                    ratio += 10;
+                    if (ratio > 150)
+                    {
+                        flag_enlarge = false;
+                    }
+                }
+                else
+                {
+                    ratio -= 10;
+                    if (ratio < 80)
+                    {
+                        flag_enlarge = true;
+                    }
+                }
+                this.ClientSize = new Size(this.BackgroundImage.Size.Width * 1 / 4 * ratio / 100, this.BackgroundImage.Size.Height * 1 / 4 * ratio / 100);
+
+
+            }
         }
 
         private void Form1_Click(object sender, EventArgs e)
