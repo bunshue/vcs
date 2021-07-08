@@ -19,10 +19,10 @@ namespace vcs_Class1
         //建立 Animal 類別
         public class Animal
         {
-            public string recorder;
             public int number;
-            public string name;
             public string type;
+            public string name;
+            public string recorder;
             //A class被實例化時，會立即執行建構子內容，並且可以傳入參數
             public string Show
             {
@@ -44,7 +44,6 @@ namespace vcs_Class1
             InitializeComponent();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -53,6 +52,42 @@ namespace vcs_Class1
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //實例化Animal類別
+            Animal dog1 = new Animal();
+
+            dog1.number = 1;
+            dog1.type = "Poodle";	//貴賓犬
+            dog1.name = "Peter";
+            dog1.Show = "ppp";
+            richTextBox1.Text += dog1.Show + "\n";
+            richTextBox1.Text += "recorder = " + dog1.recorder + "\n";
+
+            Animal dog2 = new Animal();
+
+            dog2.number = 2;
+            dog2.type = "Maltese";	//馬爾濟斯
+            dog2.name = "Mary";
+            dog2.Show = "mmm";
+            richTextBox1.Text += dog2.Show + "\n";
+            richTextBox1.Text += "recorder = " + dog2.recorder + "\n";
+
+            Animal dog3 = new Animal();
+
+            dog3.number = 3;
+            dog3.type = "Pomeranian";	//博美犬
+            dog3.name = "Pluto";
+            dog3.Show = "PPP";
+            richTextBox1.Text += dog3.Show + "\n";
+            richTextBox1.Text += "recorder = " + dog3.recorder + "\n";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
 
         //Sale範例 ST
@@ -65,14 +100,20 @@ namespace vcs_Class1
             SaleList = new List<Sale>
             {
                 new Sale("洗衣機",Convert.ToDateTime("2010-3-3"),600),
-                new Sale("冰箱",Convert.ToDateTime("2010-12-12"),1900),
+                new Sale("電冰箱",Convert.ToDateTime("2010-12-12"),1900),
                 new Sale("洗衣機",Convert.ToDateTime("2010-2-2"),550),
                 new Sale("洗衣機",Convert.ToDateTime("2010-1-1"),500)
             };
 
+            Sale refeg1 = new Sale();
+            refeg1.ProductName = "電冰箱";
+            refeg1.SaleDate = Convert.ToDateTime("2006-3-11");
+            refeg1.SalePrice = 456;
+            richTextBox1.Text += "增加一個銷售物件\t電冰箱\n";
+            SaleList.Add(refeg1);
+
             richTextBox1.Text += "增加一個銷售物件\n";
             SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
-
 
             richTextBox1.Text += "增加一個銷售物件\n";
             SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
@@ -103,40 +144,29 @@ namespace vcs_Class1
         }
         //Sale範例 SP
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //實例化Animal類別
-            Animal people = new Animal();
-
-            people.type = "zzz";
-            people.name = "Brown";
-            people.Show = "Joe";
-            richTextBox1.Text += people.Show + "\n";
-
-            richTextBox1.Text += "recorder = " + people.recorder + "\n";
-
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
             Person2 p1 = new Person2();
 
-            richTextBox1.Text += "Default firstname = " + p1.FirstName + "\n";
-            //讀FirstName
-            p1.FirstName = "FN"; //寫firstname
-            richTextBox1.Text += "set new firstname = " + p1.FirstName + "\n";
-            //p1.LastName ="LN";
-            //由於LastName不可寫，因此此行會顯示readonly無法編譯
-            richTextBox1.Text += "Default lastname = " + p1.LastName + "\n";
-            p1.Age = 5;
-            richTextBox1.Text += "condition change Age = " + p1.Age + "\n";
-            p1.Age = 20;
-            richTextBox1.Text += "condition change Age =" + p1.Age + "\n";
-            richTextBox1.Text += "Default sex =" + p1.Sex + "\n";
-            p1.Sex = "male";
-            richTextBox1.Text += "set new sex =" + p1.Sex + "\n";
-            //p1.ADDR = "123"; ADDR不可寫，因此此行會顯示readonly無法編譯
+            richTextBox1.Text += "僅宣告物件, 還沒給值, 讀FirstName, ";
+            richTextBox1.Text += "firstname = " + p1.FirstName + "\n";
 
+            p1.FirstName = "David";
+            richTextBox1.Text += "寫firstname = " + p1.FirstName + "\n";
+
+            //p1.LastName ="Wang";
+            //由於LastName不可寫，因此此行會顯示readonly無法編譯
+            richTextBox1.Text += "讀LastName, lastname = " + p1.LastName + "\n";
+            p1.Age = 5;
+            richTextBox1.Text += "讀Age, Age = " + p1.Age + "\n";
+            p1.Age = 20;
+            richTextBox1.Text += "讀Age, Age = " + p1.Age + "\n";
+
+            richTextBox1.Text += "讀Sex, Sex = " + p1.Sex + "\n";
+
+            p1.Sex = "male";
+            richTextBox1.Text += "讀Sex, Sex = " + p1.Sex + "\n";
+            //p1.ADDR = "123"; ADDR不可寫，因此此行會顯示readonly無法編譯
         }
 
         //PersonData範例 ST
@@ -172,7 +202,6 @@ namespace vcs_Class1
 
             richTextBox1.Text += p.show() + "\n";
             richTextBox1.Text += "共有" + Person.counter() + "人\n";
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -232,12 +261,11 @@ namespace vcs_Class1
         //圖形範例 ST
         private void button12_Click(object sender, EventArgs e)
         {
-            //Circle物件
+            richTextBox1.Text += "新增一個Circle物件, 給定參數2\n";
             Circle c1 = new Circle(2);
             richTextBox1.Text += "圓c1的半徑 = " + c1.getRadius() + "\t" + "圓c1的面積 = " + c1.getArea() + "\n";
 
-
-            //Cylinder物件
+            richTextBox1.Text += "新增一個Cylinder物件, 給定參數5, 10\n";
             Cylinder cy1 = new Cylinder(5, 10);
             richTextBox1.Text += "圓柱體cy1的半徑 = " + cy1.getRadius() + "\t" + "圓柱體cy1的高度 = " + cy1.getLength() + "\t" + "圓柱體cy1的表面積 = " + cy1.getArea() + "\n";
         }
@@ -306,8 +334,6 @@ namespace vcs_Class1
         }
 
         //MyTime範例 SP
-
-
 
     }
 }

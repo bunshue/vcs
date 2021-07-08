@@ -6,20 +6,25 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Diagnostics;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Management;
-namespace CPU_Detect
+
+namespace vcs_System4_CPU
 {
-    public partial class Frm_Main : Form
+    public partial class Form1 : Form
     {
-        public Frm_Main()
+        Process[] MyProcesses;
+        Thread td;
+        int mheight = 0;
+
+        public Form1()
         {
             InitializeComponent();
         }
-        Process[] MyProcesses;
-        Thread td;
+
         private void myUser()
         {
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_Processor");
@@ -78,7 +83,7 @@ namespace CPU_Detect
                 td.Abort();
             }
         }
-        int mheight = 0;
+
         private void CreateImage()
         {
             int i=panel3.Height/100;

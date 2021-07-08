@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("名称：CPU使用率")]
+[assembly: AssemblyTitle("vcs")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("作者：WildWolf")]
-[assembly: AssemblyProduct("CPU_Detect")]
-[assembly: AssemblyCopyright("Copyright ©  2008")]
+[assembly: AssemblyCompany("vcs")]
+[assembly: AssemblyProduct("vcs_System4_CPU")]
+[assembly: AssemblyCopyright("vcs")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

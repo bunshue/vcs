@@ -11,6 +11,8 @@ using Microsoft.Win32;  //for RegistryKey
 
 using System.Reflection;    //for Assembly
 
+using System.IO;    //for StreamReader
+
 namespace 真的只是一個測試1
 {
     public partial class Form1 : Form
@@ -22,7 +24,56 @@ namespace 真的只是一個測試1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
 
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 165;
+            dy = 65;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //計算二維陣列所有元素總和
+            int[,] array = new int[,] { { 0, 11, 3, 45, 17 }, { 23, 41, 5, 8, 10 }, { 9, 21, 16, 84, 51 } };
+
+            int Total = 0;
+            foreach (int element in array)
+            {
+                Total += element;
+            }
+            richTextBox1.Text += "此二維陣列的各個元素總和為: " + Total.ToString() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -80,16 +131,56 @@ namespace 真的只是一個測試1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //從檔案完整路徑分離出資料夾,檔案名稱,副檔名
+            string full_filename = @"C:\______test_files\_case1\_case1a\_case1aa\eula.3081a.txt";
+            //取得資料夾路徑
+            string foldername = full_filename.Substring(0, full_filename.LastIndexOf("\\") + 1);
+            //取得檔案名稱
+            string short_filename =
+                full_filename.Substring(full_filename.LastIndexOf("\\") + 1,
+                full_filename.LastIndexOf(".") -
+                (full_filename.LastIndexOf("\\") + 1));
+            //取得副檔名
+            string ext_filename =
+                full_filename.Substring(full_filename.LastIndexOf(".") + 1,
+                full_filename.Length - full_filename.LastIndexOf(".") - 1);
+
+            richTextBox1.Text += "檔案完整路徑:\t" + full_filename + "\n";
+            richTextBox1.Text += "資料夾路徑:\t" + foldername + "\n";
+            richTextBox1.Text += "檔案名稱:\t" + short_filename + "\n";
+            richTextBox1.Text += "副檔名:\t" + ext_filename + "\n";
 
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //char可以存放中文字
+            char[] gender = new char[5];
+            gender[0] = '男';
+            gender[1] = '女';
+            gender[2] = '男';
+            gender[3] = '男';
+            gender[4] = '女';
+            for (int i = 0; i < 5; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + gender[i] + "\n";
+
+            }
 
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //一行一行讀取文字檔
+            string filename = @"C:\______test_files\_case1\_case1a\_case1aa\eula.3081a.txt";
+
+            StreamReader SReader = new StreamReader(filename, Encoding.Default);
+            string strLine = string.Empty;
+            while ((strLine = SReader.ReadLine()) != null)
+            {
+                richTextBox1.Text += strLine + "\n";
+            }
+
 
         }
 
@@ -113,7 +204,5 @@ namespace 真的只是一個測試1
             custom.Close();
             shell.Close();
         }
-
-
     }
 }

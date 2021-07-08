@@ -1,6 +1,6 @@
-﻿namespace CPU_Detect
+﻿namespace vcs_System4_CPU
 {
-    partial class Frm_Main
+    partial class Form1
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -109,7 +109,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(103, 7);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(321, 100);
+            this.groupBox2.Size = new System.Drawing.Size(457, 100);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "物理内存(K)";
@@ -117,18 +117,18 @@
             // lblMuse
             // 
             this.lblMuse.AutoSize = true;
-            this.lblMuse.Location = new System.Drawing.Point(257, 61);
+            this.lblMuse.Location = new System.Drawing.Point(304, 61);
             this.lblMuse.Name = "lblMuse";
-            this.lblMuse.Size = new System.Drawing.Size(41, 12);
+            this.lblMuse.Size = new System.Drawing.Size(33, 12);
             this.lblMuse.TabIndex = 7;
             this.lblMuse.Text = "label8";
             // 
             // lblSum
             // 
             this.lblSum.AutoSize = true;
-            this.lblSum.Location = new System.Drawing.Point(257, 39);
+            this.lblSum.Location = new System.Drawing.Point(304, 39);
             this.lblSum.Name = "lblSum";
-            this.lblSum.Size = new System.Drawing.Size(41, 12);
+            this.lblSum.Size = new System.Drawing.Size(33, 12);
             this.lblSum.TabIndex = 6;
             this.lblSum.Text = "label7";
             // 
@@ -136,14 +136,14 @@
             // 
             this.pbMemoryUse.Location = new System.Drawing.Point(69, 61);
             this.pbMemoryUse.Name = "pbMemoryUse";
-            this.pbMemoryUse.Size = new System.Drawing.Size(183, 13);
+            this.pbMemoryUse.Size = new System.Drawing.Size(229, 13);
             this.pbMemoryUse.TabIndex = 4;
             // 
             // pbMemorySum
             // 
             this.pbMemorySum.Location = new System.Drawing.Point(69, 39);
             this.pbMemorySum.Name = "pbMemorySum";
-            this.pbMemorySum.Size = new System.Drawing.Size(183, 13);
+            this.pbMemorySum.Size = new System.Drawing.Size(229, 13);
             this.pbMemorySum.TabIndex = 3;
             // 
             // label2
@@ -172,16 +172,16 @@
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel4,
             this.tssluse});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 220);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 235);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(432, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(572, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(56, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(55, 17);
             this.toolStripStatusLabel1.Text = "进程数：";
             // 
             // tsslNum
@@ -202,7 +202,7 @@
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(72, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(70, 17);
             this.toolStripStatusLabel4.Text = "CPU 使用：";
             // 
             // tssluse
@@ -226,7 +226,7 @@
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Location = new System.Drawing.Point(103, 113);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(321, 100);
+            this.groupBox3.Size = new System.Drawing.Size(457, 100);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "虚拟内存(K)";
@@ -234,18 +234,18 @@
             // lblVuse
             // 
             this.lblVuse.AutoSize = true;
-            this.lblVuse.Location = new System.Drawing.Point(257, 61);
+            this.lblVuse.Location = new System.Drawing.Point(304, 61);
             this.lblVuse.Name = "lblVuse";
-            this.lblVuse.Size = new System.Drawing.Size(41, 12);
+            this.lblVuse.Size = new System.Drawing.Size(33, 12);
             this.lblVuse.TabIndex = 9;
             this.lblVuse.Text = "label8";
             // 
             // lblVinfo
             // 
             this.lblVinfo.AutoSize = true;
-            this.lblVinfo.Location = new System.Drawing.Point(257, 38);
+            this.lblVinfo.Location = new System.Drawing.Point(304, 38);
             this.lblVinfo.Name = "lblVinfo";
-            this.lblVinfo.Size = new System.Drawing.Size(41, 12);
+            this.lblVinfo.Size = new System.Drawing.Size(33, 12);
             this.lblVinfo.TabIndex = 8;
             this.lblVinfo.Text = "label8";
             // 
@@ -253,14 +253,14 @@
             // 
             this.pbVmemoryuse.Location = new System.Drawing.Point(69, 60);
             this.pbVmemoryuse.Name = "pbVmemoryuse";
-            this.pbVmemoryuse.Size = new System.Drawing.Size(183, 13);
+            this.pbVmemoryuse.Size = new System.Drawing.Size(229, 13);
             this.pbVmemoryuse.TabIndex = 4;
             // 
             // pbVmemorysum
             // 
             this.pbVmemorysum.Location = new System.Drawing.Point(69, 38);
             this.pbVmemorysum.Name = "pbVmemorysum";
-            this.pbVmemorysum.Size = new System.Drawing.Size(183, 13);
+            this.pbVmemorysum.Size = new System.Drawing.Size(229, 13);
             this.pbVmemorysum.TabIndex = 3;
             // 
             // label5
@@ -281,11 +281,11 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "总数：";
             // 
-            // Frm_Main
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(432, 242);
+            this.ClientSize = new System.Drawing.Size(572, 257);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox2);
@@ -293,11 +293,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Frm_Main";
+            this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CPU使用率";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

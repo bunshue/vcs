@@ -1,6 +1,6 @@
-﻿namespace ShowDiskSizeByPic
+﻿namespace vcs_DriveInfo3
 {
-    partial class Frm_Main
+    partial class Form1
     {
         /// <summary>
         /// 必需的设计器变量。

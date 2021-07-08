@@ -63,7 +63,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(546, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(272, 605);
+            this.richTextBox1.Size = new System.Drawing.Size(526, 605);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -115,7 +115,9 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(106, 39);
             this.button5.TabIndex = 9;
+            this.button5.Text = "info";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -271,7 +273,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(754, 576);
+            this.bt_clear.Location = new System.Drawing.Point(986, 551);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(64, 28);
             this.bt_clear.TabIndex = 12;
@@ -283,7 +285,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(830, 629);
+            this.ClientSize = new System.Drawing.Size(1084, 629);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);

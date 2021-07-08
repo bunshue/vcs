@@ -147,6 +147,14 @@ namespace vcs_test_all_03_Syntax
             button40.Location = new Point(x_st + dx * 5, y_st + dy * 5);
             button41.Location = new Point(x_st + dx * 6, y_st + dy * 5);
 
+            button42.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button43.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button44.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button45.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button46.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            button47.Location = new Point(x_st + dx * 5, y_st + dy * 6);
+            button48.Location = new Point(x_st + dx * 6, y_st + dy * 6);
+
             label11.Location = new Point(x_st + dx * 7, y_st + dy * 5 + 5);
             textBox_hex.Location = new Point(x_st + dx * 7 + 32, y_st + dy * 5);
             lb_dec.Location = new Point(x_st + dx * 7 + 148, y_st + dy * 5 + 5);

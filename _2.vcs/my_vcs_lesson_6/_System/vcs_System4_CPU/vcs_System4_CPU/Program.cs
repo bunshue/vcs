@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace CPU_Detect
+namespace vcs_System4_CPU
 {
     static class Program
     {
@@ -15,7 +15,7 @@ namespace CPU_Detect
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm_Main());
+            Application.Run(new Form1());
         }
     }
 }

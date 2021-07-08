@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ShowDiskSizeByPic
+namespace vcs_DriveInfo3
 {
     static class Program
     {
@@ -15,7 +15,7 @@ namespace ShowDiskSizeByPic
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm_Main());
+            Application.Run(new Form1());
         }
     }
 }

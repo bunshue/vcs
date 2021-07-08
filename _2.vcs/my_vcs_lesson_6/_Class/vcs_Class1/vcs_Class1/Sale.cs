@@ -7,6 +7,10 @@ namespace vcs_Class1
 {
     class Sale
     {
+        public Sale()
+        {
+        }
+
         public Sale(string productName, DateTime saleDate, double salePrice)
         {
             this.ProductName = productName;
