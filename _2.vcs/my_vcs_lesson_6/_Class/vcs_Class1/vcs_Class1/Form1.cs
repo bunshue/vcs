@@ -46,12 +46,85 @@ namespace vcs_Class1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        void show_item_location()
+        {
+            int w;
+            int h;
+            w = 150;
+            h = 140;
+            groupBox2.Size = new Size(w, h);
+            groupBox3.Size = new Size(w, h);
+            groupBox1.Size = new Size(w, h);
+            groupBox5.Size = new Size(w, h);
+            groupBox6.Size = new Size(w, h);
+            groupBox8.Size = new Size(w, h);
+
+            h = 250;
+            groupBox4.Size = new Size(w, h);
+            groupBox7.Size = new Size(w, h);
+
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            x_st = 12;
+            y_st = 12;
+            dx = 180;
+            dy = 150;
+
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+
+            groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+
+            x_st = 20;
+            y_st = 20;
+            dx = 190;
+            dy = 50;
+
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+            button14.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+            button19.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button16.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button17.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button18.Location = new Point(x_st + dx * 0, y_st + dy * 3);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -334,6 +407,113 @@ namespace vcs_Class1
         }
 
         //MyTime範例 SP
+
+
+        //Student範例 ST
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //類別範例
+            Student0 Jasper = new Student0();   //建立Jasper屬於Student類別的物件
+            Jasper.Name = "賈思伯";             //設定Jasper物件的學生姓名
+            Jasper.Score = 98;                  //設定Jasper物件的學生成績
+            //Jasper.ShowMsg();                   //呼叫ShowMsg()方法顯示學生姓名和分數
+            richTextBox1.Text += Jasper.GetMsg() + "\n";
+
+            Student0 Anita = new Student0();
+            Anita.Name = "愛妮達";
+            Anita.Score = 85;
+            //Anita.ShowMsg();
+            richTextBox1.Text += Anita.GetMsg() + "\n";
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //建構式範例
+
+            //無參數的建構式
+            StudentA Anita = new StudentA();
+            Anita.Name = "愛妮達";
+            Anita.Score = 88;
+            richTextBox1.Text += Anita.GetMsg() + "\n";
+
+            //傳一個參數的建構式
+            StudentA Jasper = new StudentA("賈思伯");
+            Jasper.Score = 77;
+            richTextBox1.Text += Jasper.GetMsg() + "\n";
+
+            //傳兩個參數的建構式
+            StudentA Aliya = new StudentA("愛麗雅", 99);
+            richTextBox1.Text += Aliya.GetMsg() + "\n";
+
+            //呼叫StudentA類別的GetTotalStudent靜態方法取得目前有多少位學生
+            richTextBox1.Text += StudentA.GetTotalStudent() + "\n";
+
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //物件檢查參數
+            //物件檢查參數
+            //給錯誤參數, 讓系統自動訂正
+            StudentA Jasper = new StudentA();
+            Jasper.Name = "賈思伯";
+            Jasper.Score = 5000;
+            Jasper.ShowMsg();
+            StudentA Anita = new StudentA();
+            Anita.Name = "愛妮達";
+            Anita.Score = -100;
+            Anita.ShowMsg();
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //使用靜態成員
+            //使用靜態成員
+            StudentA Aaita = new StudentA("愛妮達", 100);
+            StudentA Jasper = new StudentA("賈思伯", 56);
+            StudentA Aliya = new StudentA("愛麗雅", 99);
+
+
+            richTextBox1.Text += Aaita.GetMsg() + "\n";
+            richTextBox1.Text += Jasper.GetMsg() + "\n";
+            richTextBox1.Text += Aliya.GetMsg() + "\n";
+            richTextBox1.Text += "=====================\n";
+
+            //呼叫StudentA類別的GetTotalStudent靜態方法取得目前有多少位學生
+            richTextBox1.Text += StudentA.GetTotalStudent() + "\n";
+        }
+        //Student範例 SP
+
+        //繼承範例 ST
+        private void button19_Click(object sender, EventArgs e)
+        {
+            //繼承範例 1
+            Empolyee Jasper = new Empolyee();  //Employee父類別
+            Jasper.Name = "賈思伯";
+            Jasper.Salary = 30000;
+            richTextBox1.Text += "員工姓名：" + Jasper.Name + "\n實領薪水：" + Convert.ToString(Jasper.Salary) + "\n";
+            richTextBox1.Text += "======================\n";
+            Manager Aliya = new Manager();      //Manager子類別
+            Aliya.Name = "愛麗雅";
+            Aliya.Salary = 40000;
+            Aliya.Bonus = 20000;    //Manager子類別新增的Bonus屬性
+            //Manager子類別新增的GetTotal()方法
+            richTextBox1.Text += Aliya.GetTotal() + "\n";
+
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //繼承範例 2
+
+        }
+
+        //繼承範例 SP
+
+
 
     }
 }

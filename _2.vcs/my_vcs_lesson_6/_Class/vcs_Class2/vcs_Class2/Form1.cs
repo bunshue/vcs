@@ -16,6 +16,16 @@ namespace vcs_Class2
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             int i;
@@ -101,6 +111,10 @@ namespace vcs_Class2
             // Force garbage collection.
             GC.Collect();
         }
+
+
+
+
     }
 
 
