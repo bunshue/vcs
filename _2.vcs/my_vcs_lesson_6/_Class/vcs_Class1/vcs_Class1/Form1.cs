@@ -12,6 +12,18 @@ using System.Windows.Forms;
 //方案總管/右鍵/加入/類別/預設Class1.cs改成Sale.cs
 //方案總管/右鍵/加入/類別/預設Class1.cs改成Shape.cs
 
+//方案總管/右鍵/加入/Windows Form/預設Form2.cs改成MyForm.cs
+//方案總管 點選MyForm.Designer.cs 刪除之
+//修改MyForm.cs
+
+//新增/加入 類別檔案 故意讓檔名,namespace,類別不一樣
+//方案總管/右鍵/現有項目 選取Class1.cs
+
+using vcs_Class6XXX;    //Class1.cs之namespace不一樣, 要引用
+
+using CatTest;          //Cat.cs之namespace不一樣, 要引用
+using AnimalSpace;      //animal.cs cats.cs human.cs之namespace不一樣, 要引用
+
 namespace vcs_Class1
 {
     public partial class Form1 : Form
@@ -60,6 +72,8 @@ namespace vcs_Class1
             int w;
             int h;
             w = 150;
+
+            //小的groupBox
             h = 140;
             groupBox2.Size = new Size(w, h);
             groupBox3.Size = new Size(w, h);
@@ -67,10 +81,13 @@ namespace vcs_Class1
             groupBox5.Size = new Size(w, h);
             groupBox6.Size = new Size(w, h);
             groupBox8.Size = new Size(w, h);
+            groupBox10.Size = new Size(w, h);
 
+            //大的groupBox
             h = 250;
             groupBox4.Size = new Size(w, h);
             groupBox7.Size = new Size(w, h);
+            groupBox9.Size = new Size(w, h);
 
             int x_st;
             int y_st;
@@ -85,13 +102,15 @@ namespace vcs_Class1
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox5.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            groupBox6.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            groupBox8.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
             groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            groupBox9.Location = new Point(x_st + dx * 2, y_st + dy * 2);
 
             x_st = 20;
             y_st = 20;
@@ -116,6 +135,9 @@ namespace vcs_Class1
             button19.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
+            button25.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button26.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -125,6 +147,11 @@ namespace vcs_Class1
             button16.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button17.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button18.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            button21.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button22.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button23.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 3);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -508,12 +535,106 @@ namespace vcs_Class1
         private void button20_Click(object sender, EventArgs e)
         {
             //繼承範例 2
-
+            //繼承表單
+            MyForm f = new MyForm();    //建立f 為MyForm類別
+            f.ShowDialog();			//呼叫f.ShowDialog()方法使視窗顯示
         }
-
         //繼承範例 SP
 
+        //Stack範例 ST
+        MyStack stack;
+        private void button21_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "初始化20個stack\n";
+            stack = new MyStack(20);
+        }
 
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //push
+            stack.Push(1);
+            stack.Push(3);
+            stack.Push(5);
+            stack.Push(7);
+            stack.Push(9);
+            stack.Push(11);
+            richTextBox1.Text += "Push 6 個stack : 1 3 5 7 9 11\n";
+        }
 
+        private void button23_Click(object sender, EventArgs e)
+        {
+            //pop
+            int pop = stack.Pop();
+            richTextBox1.Text += "Pop 1 個stack : " + pop.ToString() + "\n";
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+        //Stack範例 SP
+
+        //寵物範例 ST
+        private void button25_Click(object sender, EventArgs e)
+        {
+            //寵物範例1
+            richTextBox1.Text += "初始化 Cat 1\n";
+            Cat kitty = new Cat();
+            kitty.name = "凱蒂";
+
+            richTextBox1.Text += "初始化 Cat 2\n";
+            Cat doraemon = new Cat("多啦A夢", "機器貓");
+            doraemon.setweight(129);
+
+            richTextBox1.Text += "初始化 Cat 3\n";
+            Cat garfield = new Cat("加菲", "虎斑貓");
+            garfield.setweight(5);
+
+            richTextBox1.Text += "訊息\n";
+            kitty.ShowMsg();
+            doraemon.ShowMsg();
+            garfield.ShowMsg();
+            richTextBox1.Text += kitty.GetMsg() + "\n";
+            richTextBox1.Text += doraemon.GetMsg() + "\n";
+            richTextBox1.Text += garfield.GetMsg() + "\n";
+
+            richTextBox1.Text += "進行動作\n";
+            garfield.feed();
+            doraemon.play();
+
+            richTextBox1.Text += "訊息\n";
+            kitty.ShowMsg();
+            doraemon.ShowMsg();
+            garfield.ShowMsg();
+            richTextBox1.Text += kitty.GetMsg() + "\n";
+            richTextBox1.Text += doraemon.GetMsg() + "\n";
+            richTextBox1.Text += garfield.GetMsg() + "\n";
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            //寵物範例2
+            richTextBox1.Text += "初始化 Human\n";
+            Human myself = new Human("小李", "亞洲人", 64, 172);
+
+            richTextBox1.Text += "初始化 Cats\n";
+            Cats mypet = new Cats("喵仔", "暹邏貓", 7, 30, 20);
+
+            myself.setpet(mypet);
+
+            myself.ShowMsg();
+            richTextBox1.Text += "主人資訊:\t" + myself.GetMsg() + "\n";
+
+            Console.WriteLine("類型為:" + myself.gettype());
+            richTextBox1.Text += "類型為:\t" + myself.gettype() + "\n";
+
+            Console.WriteLine("他的寵物是:");
+            myself.getpet().ShowMsg();
+            mypet.print_length();
+
+            richTextBox1.Text += "他的寵物是:\t" + myself.getpet().GetMsg() + "\n";
+            richTextBox1.Text += "寵物資訊:\t" + mypet.show_length() + "\n";
+        }
+        //寵物範例 SP
     }
 }

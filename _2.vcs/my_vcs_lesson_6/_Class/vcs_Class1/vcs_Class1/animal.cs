@@ -35,10 +35,16 @@ namespace AnimalSpace
             return this.weight;
         }
 
-        public virtual void print()
+        public virtual void ShowMsg()
         {
             Console.WriteLine("名字:" + this.name + " 類型:" + this.type + " 重量:" + this.weight);
         }
+
+        public virtual string GetMsg()
+        {
+            return "名字:" + this.name + " 類型:" + this.type + " 重量:" + this.weight;
+        }
+
     }
 }
 

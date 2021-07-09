@@ -24,9 +24,14 @@ namespace AnimalSpace
             return this.pet;
         }
 
-        public override void print()
+        public override void ShowMsg()
         {
             Console.WriteLine("名字:" + this.getname() + " 重量:" + this.getweight() + " 身高:" + this.height);
+        }
+
+        public override string GetMsg()
+        {
+            return "名字:" + this.getname() + " 重量:" + this.getweight() + " 身高:" + this.height;
         }
     }
 }

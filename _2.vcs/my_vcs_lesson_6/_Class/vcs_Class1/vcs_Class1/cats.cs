@@ -20,6 +20,11 @@ namespace AnimalSpace
         {
             Console.WriteLine("體長:" + this.body_length + " 尾長:" + this.tail_length);
         }
+
+        public string show_length()
+        {
+            return "體長:" + this.body_length + " 尾長:" + this.tail_length;
+        }
     }
 }
 

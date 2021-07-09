@@ -10,12 +10,12 @@ namespace vcs_Class6XXX     //預設namespace同Form1.cs之namespace
         //預設class同檔名
     }
 
-    class my_stack
+    class MyStack
     {
         private int top;
         private int[] stack_list;
 
-        public my_stack(int x)
+        public MyStack(int x)
         {
             this.top = 0;
             this.stack_list = new int[x];

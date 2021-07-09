@@ -54,9 +54,14 @@ namespace CatTest
             this.weight -= 1;
         }
 
-        public void print()
+        public void ShowMsg()
         {
             Console.WriteLine("名稱:" + this.name + " 品種:" + this.type + " 體重:" + this.weight);
+        }
+
+        public string GetMsg()
+        {
+            return "名稱:" + this.name + " 品種:" + this.type + " 體重:" + this.weight;
         }
     }
 }
