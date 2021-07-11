@@ -49,9 +49,9 @@
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(12, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(135, 44);
+            this.button1.Size = new System.Drawing.Size(149, 44);
             this.button1.TabIndex = 2;
-            this.button1.Text = "Class 使用";
+            this.button1.Text = "Class 陣列使用";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -60,7 +60,7 @@
             this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button2.Location = new System.Drawing.Point(12, 75);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(135, 44);
+            this.button2.Size = new System.Drawing.Size(149, 44);
             this.button2.TabIndex = 4;
             this.button2.Text = "Class List 使用";
             this.button2.UseVisualStyleBackColor = true;
@@ -71,7 +71,7 @@
             this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.Location = new System.Drawing.Point(12, 147);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(135, 44);
+            this.button3.Size = new System.Drawing.Size(149, 44);
             this.button3.TabIndex = 5;
             this.button3.Text = "Class 使用";
             this.button3.UseVisualStyleBackColor = true;

@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
-
 namespace vcs_Registry1
 {
     public partial class Form1 : Form
@@ -25,7 +23,9 @@ namespace vcs_Registry1
 
             label1.Text = hScrollBar1.Value.ToString();
             if (textBox1.Text == "")
+            {
                 textBox1.Text = @"C:\______test_files\picture1.jpg";
+            }
             label1.Text = hScrollBar1.Value.ToString();
         }
 
@@ -35,7 +35,9 @@ namespace vcs_Registry1
             RegistryTools.LoadAllSettings(Application.ProductName, this);
 
             if (textBox1.Text == "")
+            {
                 textBox1.Text = @"C:\______test_files\picture1.jpg";
+            }
             label1.Text = hScrollBar1.Value.ToString();
         }
 
@@ -63,6 +65,5 @@ namespace vcs_Registry1
             // Save
             RegistryTools.SaveAllSettings(Application.ProductName, this);
         }
-
     }
 }

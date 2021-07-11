@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using Microsoft.Win32;  //for Registry
-
 using System.Runtime.InteropServices;   //for DllImport
 
 namespace vcs_Registry2

@@ -30,27 +30,35 @@ namespace vcs_Class2
         {
             int i;
 
+            richTextBox1.Text += "建立一個Person物件一維陣列, 長度3\n";
             Person[] people = new Person[3];
-            people[0] = new Person("Jethro", "Tull", this);
-            people[1] = new Person("Pink", "Floyd", this);
-            people[2] = new Person("Lynyrd", "Skynyrd", this);
 
+            richTextBox1.Text += "對第0個物件初始化\n";
+            people[0] = new Person("David", "Wang", this);
+            richTextBox1.Text += "對第1個物件初始化\n";
+            people[1] = new Person("Jerry", "Lin", this);
+            richTextBox1.Text += "對第2個物件初始化\n";
+            people[2] = new Person("James P.", "Sullivan", this);
+
+            richTextBox1.Text += "顯示每個物件的內容\n";
             for (i = 0; i < 3; i++)
             {
-                richTextBox1.Text += i.ToString() + "\t" + people[i].ToString() + "\n";
+                richTextBox1.Text += "第 " + i.ToString() + "個\t" + people[i].ToString() + "\n";
             }
 
+            richTextBox1.Text += "\n建立一個Person物件一維陣列, 長度3, 並初始化\n";
             Person2[] people2 = 
             {
-                new Person2() { FirstName="Simon", LastName="Green" },
-                new Person2() { FirstName="Terry", LastName="Pratchett" },
-                new Person2() { FirstName="Eowin", LastName="Colfer" },
+                new Person2() { FirstName="David", LastName="Wang" },
+                new Person2() { FirstName="Jerry", LastName="Lin" },
+                new Person2() { FirstName="James P.", LastName="Sullivan" },
             };
+
+            richTextBox1.Text += "顯示每個物件的內容\n";
             for (i = 0; i < 3; i++)
             {
-                richTextBox1.Text += i.ToString() + "\t" + people2[i].ToString() + "\n";
+                richTextBox1.Text += "第 " + i.ToString() + "個\t" + people2[i].ToString() + "\n";
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -93,8 +101,6 @@ namespace vcs_Class2
                 //使用Class內的參數
                 richTextBox1.Text += i.ToString() + "\t" + Products[i].Name + "\t" + Products[i].Price.ToString("c") + "\n";
             }
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -102,21 +108,14 @@ namespace vcs_Class2
             richTextBox1.Text += "使用Person.cs裡面的class Person3, 看輸出畫面的log\n";
 
             // Create a Person.
-            richTextBox1.Text += "建立\n";
+            richTextBox1.Text += "新增一個Person3物件\n";
             Person3 person = new Person3();
-
-
 
             richTextBox1.Text += "銷毀\n";
             // Force garbage collection.
             GC.Collect();
         }
-
-
-
-
     }
-
 
     // A simple Person class.
     public class Person
