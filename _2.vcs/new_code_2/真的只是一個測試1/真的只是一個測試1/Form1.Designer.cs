@@ -132,7 +132,9 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(155, 55);
             this.button7.TabIndex = 7;
+            this.button7.Text = "遍歷所有控件";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button0
             // 

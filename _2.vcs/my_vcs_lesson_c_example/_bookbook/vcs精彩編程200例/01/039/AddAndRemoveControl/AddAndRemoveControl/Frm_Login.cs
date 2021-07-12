@@ -74,6 +74,7 @@ namespace AddAndRemoveControl
             this.txtUser.Size = new System.Drawing.Size(173, 22);
             this.txtUser.TabIndex = 13;
             this.txtUser.Tag = "登录名：";
+            this.txtUser.Text = "Admin";
             // 
             // txtPasword
             // 
@@ -83,6 +84,7 @@ namespace AddAndRemoveControl
             this.txtPasword.Size = new System.Drawing.Size(173, 22);
             this.txtPasword.TabIndex = 14;
             this.txtPasword.Tag = "密  码：";
+            this.txtPasword.Text = "Admin";
             // 
             // lbluPwd
             // 
@@ -166,17 +168,7 @@ namespace AddAndRemoveControl
         Frm_Main frm = new Frm_Main();//创建窗体对象
         private void btnOK_Click(object sender, System.EventArgs e)//确定
         {
-            if (txtUser.Text == "")//如果用户名为空
-            {
-                MessageBox.Show("请输入用户名");//弹出消息对话框
-                return;//退出方法
-            }
-            else if (txtPasword.Text == "")//如果密码为空
-            {
-                MessageBox.Show("请输入用户密码");//弹出消息对话框
-                return;//退出方法
-            }
-            else if (txtUser.Text == "Admin" && txtPasword.Text == "Admin")//如果输入的用户名和密码正确
+            if (txtUser.Text == "Admin" && txtPasword.Text == "Admin")//如果输入的用户名和密码正确
             {
                 frm.Show();//显示窗体
                 frm.button1.Visible = false;//隐藏Button按钮
@@ -209,4 +201,3 @@ namespace AddAndRemoveControl
         }
     }
 }
-

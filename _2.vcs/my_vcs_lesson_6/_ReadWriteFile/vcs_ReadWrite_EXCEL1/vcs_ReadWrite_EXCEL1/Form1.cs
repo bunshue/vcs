@@ -153,7 +153,7 @@ namespace vcs_ReadWrite_EXCEL1
             //設定讀取的Excel屬性
             string strCon = "Provider=Microsoft.Jet.OLEDB.4.0;" +
                 //路徑(檔案讀取路徑)
-            "Data Source=C:\\vcs_test_excel.xls;" +
+            "Data Source=C:\\______test_files\\__RW\\_excel\\vcs_test_excel.xls;" +
                 //選擇Excel版本
                 //Excel 12.0 針對Excel 2010、2007版本(OLEDB.12.0)
                 //Excel 8.0 針對Excel 97-2003版本(OLEDB.4.0)

@@ -204,5 +204,29 @@ namespace 真的只是一個測試1
             custom.Close();
             shell.Close();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            browse_all_controls(this.Controls);
+        }
+
+        public void browse_all_controls(Control.ControlCollection cc)
+        {
+            foreach (Control c in cc)  //撈出所有控件
+            {
+                richTextBox1.Text += c.GetType().Name;
+
+                if (c.GetType().Name == "Button")   //判斷是否為 Button 控件
+                {
+                    richTextBox1.Text += "\t" + ((Button)c).Text + " " + ((Button)c).Size.Width.ToString() + " X " + ((Button)c).Size.Height.ToString();
+
+                    if (((Button)c).Tag != null)
+                    {
+                        richTextBox1.Text += "\t" + ((Button)c).Tag.ToString().ToString();
+                    }
+                }
+                richTextBox1.Text += "\n";
+            }
+        }
     }
 }

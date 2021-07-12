@@ -140,26 +140,10 @@ namespace ChineseCode
             return bytes;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
             CreateImage();
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (txtCode.Text.Trim() == "")
-                return;
-            else
-            {
-                if (txtCode.Text.Trim() == txt)
-                {
-                    MessageBox.Show("提示：验证码输入正确！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("提示：验证码输入错误，请重新输入！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
         }
     }
 }

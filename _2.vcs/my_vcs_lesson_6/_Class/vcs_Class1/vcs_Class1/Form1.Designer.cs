@@ -66,6 +66,12 @@
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.button25 = new System.Windows.Forms.Button();
             this.button26 = new System.Windows.Forms.Button();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.button27 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.button29 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -76,14 +82,16 @@
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.groupBox12.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(751, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(813, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(321, 664);
+            this.richTextBox1.Size = new System.Drawing.Size(279, 664);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -265,7 +273,7 @@
             // 
             this.groupBox6.Controls.Add(this.button13);
             this.groupBox6.Controls.Add(this.button14);
-            this.groupBox6.Location = new System.Drawing.Point(12, 222);
+            this.groupBox6.Location = new System.Drawing.Point(697, 12);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(158, 192);
             this.groupBox6.TabIndex = 12;
@@ -358,7 +366,7 @@
             // 
             this.groupBox8.Controls.Add(this.button19);
             this.groupBox8.Controls.Add(this.button20);
-            this.groupBox8.Location = new System.Drawing.Point(187, 222);
+            this.groupBox8.Location = new System.Drawing.Point(12, 210);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(158, 192);
             this.groupBox8.TabIndex = 13;
@@ -441,7 +449,7 @@
             // 
             this.groupBox10.Controls.Add(this.button25);
             this.groupBox10.Controls.Add(this.button26);
-            this.groupBox10.Location = new System.Drawing.Point(369, 222);
+            this.groupBox10.Location = new System.Drawing.Point(194, 210);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(158, 192);
             this.groupBox10.TabIndex = 14;
@@ -468,11 +476,75 @@
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.button27);
+            this.groupBox11.Controls.Add(this.button28);
+            this.groupBox11.Location = new System.Drawing.Point(358, 210);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(158, 192);
+            this.groupBox11.TabIndex = 12;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "基本";
+            // 
+            // button27
+            // 
+            this.button27.Location = new System.Drawing.Point(15, 21);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(106, 39);
+            this.button27.TabIndex = 9;
+            this.button27.Text = "Class List 使用";
+            this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
+            // 
+            // button28
+            // 
+            this.button28.Location = new System.Drawing.Point(15, 81);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(106, 39);
+            this.button28.TabIndex = 8;
+            this.button28.Text = "Class 陣列使用";
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.button29);
+            this.groupBox12.Controls.Add(this.button30);
+            this.groupBox12.Location = new System.Drawing.Point(533, 210);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(158, 192);
+            this.groupBox12.TabIndex = 13;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "基本";
+            // 
+            // button29
+            // 
+            this.button29.Location = new System.Drawing.Point(15, 21);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(106, 39);
+            this.button29.TabIndex = 9;
+            this.button29.Text = "從Class內印出資料";
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
+            // button30
+            // 
+            this.button30.Location = new System.Drawing.Point(15, 81);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(106, 39);
+            this.button30.TabIndex = 8;
+            this.button30.Text = "建構子和解構子";
+            this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 688);
+            this.ClientSize = new System.Drawing.Size(1169, 688);
+            this.Controls.Add(this.groupBox12);
+            this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
@@ -498,6 +570,8 @@
             this.groupBox8.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox12.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -542,6 +616,12 @@
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.Button button30;
     }
 }
 

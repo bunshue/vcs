@@ -28,6 +28,81 @@ namespace vcs_Class1
 {
     public partial class Form1 : Form
     {
+        class ClassExample
+        {
+            public ClassExample()
+            {
+                Console.WriteLine("建立一個ClassExample的物件");
+            }
+
+            ~ClassExample()
+            {
+                Console.WriteLine("銷毀一個ClassExample的物件");
+            }
+        }
+
+        public class ClassPrintDataExample
+        {
+            private Form1 form1;
+            private string _FirstName;
+            public string FirstName
+            {
+                get { return _FirstName; }
+                set { _FirstName = value; }
+            }
+
+            public string LastName { get; set; }
+
+            public ClassPrintDataExample(string firstName, string lastName, Form1 f1)
+            {
+                FirstName = firstName;
+                LastName = lastName;
+                this.form1 = f1;
+                f1.richTextBox1.Text += "ClassPrintDataExample初始化，從Class印出, FirstName = " + firstName + ", LastName = " + lastName + "\n";
+            }
+
+            public override string ToString()
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
+        //測試Class陣列 1
+        public class Person4
+        {
+            private string _FirstName;
+            public string FirstName
+            {
+                get { return _FirstName; }
+                set { _FirstName = value; }
+            }
+
+            public string LastName { get; set; }
+
+            public Person4(string firstName, string lastName)
+            {
+                FirstName = firstName;
+                LastName = lastName;
+            }
+
+            public override string ToString()
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
+        //測試Class陣列 2
+        public class Person5
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+
+            public override string ToString()
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
         //建立 Animal 類別
         public class Animal
         {
@@ -51,6 +126,22 @@ namespace vcs_Class1
             }
         }
 
+        public class Product
+        {
+            public string Name;
+            public decimal Price;
+            public Product(string name, decimal price)
+            {
+                Name = name;
+                Price = price;
+            }
+
+            public override string ToString()
+            {
+                return "Product : " + Name + "\tPrice : " + Price.ToString("c");
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -71,10 +162,10 @@ namespace vcs_Class1
         {
             int w;
             int h;
-            w = 150;
+            w = 135;
 
             //小的groupBox
-            h = 140;
+            h = 120;
             groupBox2.Size = new Size(w, h);
             groupBox3.Size = new Size(w, h);
             groupBox1.Size = new Size(w, h);
@@ -82,6 +173,8 @@ namespace vcs_Class1
             groupBox6.Size = new Size(w, h);
             groupBox8.Size = new Size(w, h);
             groupBox10.Size = new Size(w, h);
+            groupBox11.Size = new Size(w, h);
+            groupBox12.Size = new Size(w, h);
 
             //大的groupBox
             h = 250;
@@ -96,25 +189,27 @@ namespace vcs_Class1
 
             x_st = 12;
             y_st = 12;
-            dx = 180;
-            dy = 150;
+            dx = 150;
+            dy = 140;
 
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox5.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox6.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
-            groupBox6.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            groupBox8.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            groupBox10.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            groupBox11.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            groupBox12.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
             groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             groupBox9.Location = new Point(x_st + dx * 2, y_st + dy * 2);
 
-            x_st = 20;
-            y_st = 20;
-            dx = 190;
+            x_st = 15;
+            y_st = 15;
+            dx = 150;
             dy = 50;
 
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -137,6 +232,12 @@ namespace vcs_Class1
 
             button25.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button26.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+            button27.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button28.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+            button29.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button30.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -372,7 +473,6 @@ namespace vcs_Class1
 
         private void button11_Click(object sender, EventArgs e)
         {
-
         }
 
         //圖形範例 SP
@@ -635,6 +735,109 @@ namespace vcs_Class1
             richTextBox1.Text += "他的寵物是:\t" + myself.getpet().GetMsg() + "\n";
             richTextBox1.Text += "寵物資訊:\t" + mypet.show_length() + "\n";
         }
+
         //寵物範例 SP
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            //Class List 使用
+            List<Product> Products = new List<Product>();
+
+            // Load the data.
+            // Cake slices.
+            string[] cakes =
+            {
+                "Black Forest Cake",
+                "Strawberry Chocolate Mousse Cake",
+                "Chocolate Mousse Cake",
+                "Jiggly Cheesecake",
+                "Tiramisu",
+                "Matcha Tiramisu",
+            };
+            foreach (string cake in cakes)
+            {
+                Products.Add(new Product(cake, 5.49m));
+            }
+
+            int len = Products.Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                //使用Override的ToString
+                richTextBox1.Text += i.ToString() + "\t" + Products[i].ToString() + "\n";
+            }
+            for (i = 0; i < len; i++)
+            {
+                //使用Class內的參數
+                richTextBox1.Text += i.ToString() + "\t" + Products[i].Name + "\t" + Products[i].Price.ToString("c") + "\n";
+            }
+        }
+        private void button28_Click(object sender, EventArgs e)
+        {
+            //Class 陣列使用
+
+            int i;
+
+            richTextBox1.Text += "建立一個Person4物件一維陣列, 長度3\n";
+            Person4[] people = new Person4[3];
+
+            richTextBox1.Text += "對第0個物件初始化\n";
+            people[0] = new Person4("David", "Wang");
+            richTextBox1.Text += "對第1個物件初始化\n";
+            people[1] = new Person4("Jerry", "Lin");
+            richTextBox1.Text += "對第2個物件初始化\n";
+            people[2] = new Person4("James P.", "Sullivan");
+
+            richTextBox1.Text += "顯示每個物件的內容\n";
+            for (i = 0; i < 3; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + "個\t" + people[i].ToString() + "\n";
+            }
+
+            richTextBox1.Text += "\n建立一個Person物件一維陣列, 長度3, 並初始化\n";
+            Person5[] people2 = 
+            {
+                new Person5() { FirstName="David", LastName="Wang" },
+                new Person5() { FirstName="Jerry", LastName="Lin" },
+                new Person5() { FirstName="James P.", LastName="Sullivan" },
+            };
+
+            richTextBox1.Text += "顯示每個物件的內容\n";
+            for (i = 0; i < 3; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + "個\t" + people2[i].ToString() + "\n";
+            }
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            //從Class內印出資料
+            //從Class內使用Form1的控件，richTextBox改為Public ?? 不用??
+
+            richTextBox1.Text += "從Class內印出資料, 建立一個 ClassPrintDataExample 物件\n";
+            ClassPrintDataExample people;
+
+            richTextBox1.Text += "初始化\n";
+            people = new ClassPrintDataExample("David", "Wang", this);
+
+            richTextBox1.Text += "顯示物件的內容\n";
+
+            richTextBox1.Text += people.ToString() + "\n";
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "建構子和解構子 class ClassExample, 看輸出畫面的log\n";
+
+            //建構子
+            richTextBox1.Text += "新增一個ClassExample物件\n";
+            ClassExample person = new ClassExample();
+
+            //解構子
+            richTextBox1.Text += "銷毀\n";
+            GC.Collect();       // Force garbage collection.
+
+        }
     }
 }

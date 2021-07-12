@@ -6,21 +6,48 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Management;
 using Microsoft.Win32;
 
-namespace RegSoftByNetworkCard  
+namespace RegSoftByNetworkCard
 {
     public partial class Frm_Main : Form
     {
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
         string[] strLanCode = new string[12];// 网卡信息存储到
         string[] strkey = { "Q", "W", "7", "E", "D", "F", "2", "G", "R", "T", "Y", "8", "P", "N", "B", "V", "C", "X", "Z", "0", "9", "I", "8", "6", "U", "O", "P", "M", "5", "4", "3", "1", "A", "S", "H", "J", "K", "L" };
         //生成注册码
         public int intRand = 0;//判断随机生成次数
+
+        public Frm_Main()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            label2.Text = Environment.MachineName.ToString();//得到计算机名
+            label4.Text = GetNetCardMacAddress();//得到网卡信息
+
+            richTextBox1.Text += "你的計算機名稱 : " + Environment.MachineName.ToString() + "\n";
+            richTextBox1.Text += "你的網卡序號 : " + GetNetCardMacAddress() + "\n";
+
+        }
+
+        //获得网卡信息函数
+        public string GetNetCardMacAddress()
+        {
+            //创建ManagementClass对象
+            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection moc = mc.GetInstances();//创建ManagementObjectCollection对象
+            string str = "";//用于存储网卡序列号
+            foreach (ManagementObject mo in moc)//遍历得到的集合
+            {
+                if ((bool)mo["IPEnabled"] == true)//判断IPEnabled属性是否为true
+                    str = mo["MacAddress"].ToString();//获取网卡序列号
+            }
+            return str;//返回网卡序列号
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -54,31 +81,13 @@ namespace RegSoftByNetworkCard
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            label2.Text = Environment.MachineName.ToString();//得到计算机名
-            label4.Text = GetNetCardMacAddress();//得到网卡信息
-
-        }
-        //获得网卡信息函数
-        public string GetNetCardMacAddress()
-        {
-            //创建ManagementClass对象
-            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection moc = mc.GetInstances();//创建ManagementObjectCollection对象
-            string str = "";//用于存储网卡序列号
-            foreach (ManagementObject mo in moc)//遍历得到的集合
-            {
-                if ((bool)mo["IPEnabled"] == true)//判断IPEnabled属性是否为true
-                    str = mo["MacAddress"].ToString();//获取网卡序列号
-            }
-            return str;//返回网卡序列号
-        }
         //注册
         private void button2_Click(object sender, EventArgs e)
         {
             if (label5.Text == "")//判断是否生成注册码
-            { MessageBox.Show("请生成注册码"); }//如果没有生成则弹出提示
+            {
+                MessageBox.Show("请生成注册码");
+            }
             else
             {
                 string strNameKey = textBox1.Text.TrimEnd() + textBox2.Text.TrimEnd() + textBox3.Text.TrimEnd() + textBox4.Text.TrimEnd();											//获取输入的注册码
@@ -97,11 +106,15 @@ namespace RegSoftByNetworkCard
                         }
                     }//开始注册信息
                     Microsoft.Win32.RegistryKey retkey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software", true).CreateSubKey("ZHY").CreateSubKey("ZHY.INI").CreateSubKey(strNumber.TrimEnd());
-                    retkey.SetValue("UserName", "明日科技");//设置注册名
+
+                    richTextBox1.Text += "偽執行\n";
+                    //retkey.SetValue("UserName", "明日科技");//设置注册名
                     MessageBox.Show("注册成功!", "提示");//弹出提示
                 }
-                else//否则
-                { MessageBox.Show("注册码输入错误"); }//弹出错误提示
+                else
+                {
+                    MessageBox.Show("注册码输入错误");
+                }
             }
         }
 
