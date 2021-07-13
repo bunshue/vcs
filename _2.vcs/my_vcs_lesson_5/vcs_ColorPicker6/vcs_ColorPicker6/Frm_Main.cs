@@ -82,41 +82,18 @@ namespace vcs_ColorPicker6
 
         private void FrmGetColor_Load(object sender, EventArgs e)
         {
-            this.TopMost = true;
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked == true)
-            {
-                this.TopMost = true;
-            }
-            else
-            {
-                this.TopMost = false;
-            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            txtPoint.Text=Control.MousePosition.X.ToString()+","+Control.MousePosition.Y.ToString();
+            this.Text=Control.MousePosition.X.ToString()+","+Control.MousePosition.Y.ToString();
             Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
             Color cl = GetColor(pt);
-            panel1.BackColor = cl;
             txtRGB.Text = cl.R + "," + cl.G + "," + cl.B;
             txtColor.Text = ColorTranslator.ToHtml(cl).ToString();
             RegisterHotKey(Handle, 81, KeyModifiers.Ctrl, Keys.F);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("http://www.mrbccd.com");
-        }
         protected override void WndProc(ref Message m)
         {
             const int WM_HOTKEY = 0x0312;
