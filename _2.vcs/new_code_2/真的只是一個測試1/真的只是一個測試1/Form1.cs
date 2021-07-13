@@ -17,6 +17,8 @@ using System.Net;   //for HttpWebRequest HttpWebResponse
 
 using System.Collections;   //for DictionaryEntry
 
+using WMPLib;
+
 namespace 真的只是一個測試1
 {
     public partial class Form1 : Form
@@ -29,6 +31,11 @@ namespace 真的只是一個測試1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         void show_item_location()
@@ -65,6 +72,8 @@ namespace 真的只是一個測試1
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -434,7 +443,6 @@ namespace 真的只是一個測試1
         // that are found, and process the files they contain.
         public void ProcessDirectory(string targetDirectory)
         {
-            //richTextBox1.Text += "處理資料夾 : " + targetDirectory + "\n";
             try
             {
                 string[] fileEntries = Directory.GetFiles(targetDirectory);
@@ -469,8 +477,10 @@ namespace 真的只是一個測試1
                 richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
             }
 
+            /*
             richTextBox1.Text += "資料夾 " + targetDirectory + "\t檔案個數 : " + folder_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(folder_size)) + "\n";
             richTextBox1.Text += "\n";
+            */
         }
 
         // Insert logic for processing found files here.
@@ -548,11 +558,12 @@ namespace 真的只是一個測試1
             richTextBox1.Text += "照檔名排序:\n";
             for (i = 0; i < 20; i++)
             {
-                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
 
             }
 
+            /*
             richTextBox1.Text += "照大小排序(由大到小):\n";
 
             //排序 由大到小  在return的地方多個負號
@@ -562,7 +573,6 @@ namespace 真的只是一個測試1
             {
                 //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
-
             }
 
             richTextBox1.Text += "照大小排序(由小到大):\n";
@@ -574,10 +584,104 @@ namespace 真的只是一個測試1
             {
                 //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+            }
+            */
 
+            //fileinfos[i].filename + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+
+            //播放單一檔案
+            //axWindowsMediaPlayer1.URL = fileinfos[0].filepath + "\\" + fileinfos[0].filename;   //開啟檔案
+
+            //一次加入到播放清單
+            axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播放列表", "");
+
+            for (i = 0; i < 20; i++)
+            {
+                axWindowsMediaPlayer1.currentPlaylist.appendItem(axWindowsMediaPlayer1.newMedia(fileinfos[i].filepath + "\\" + fileinfos[i].filename));
+                richTextBox1.Text += "加入播放清單: " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
+            }
+            //foreach (string fn in ofd.FileNames)
+            {
+                //axWindowsMediaPlayer1.currentPlaylist.appendItem(axWindowsMediaPlayer1.newMedia(fn));
+                //richTextBox1.Text += "加入播放清單: " + fn + "\n";
             }
 
 
+
+
         }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            axWindowsMediaPlayer1.settings.setMode("loop", true);   //循環播放
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            int len;
+            len = axWindowsMediaPlayer1.currentPlaylist.count;
+            richTextBox1.Text += "目前播放清單內有 : " + len.ToString() + " 首歌\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += axWindowsMediaPlayer1.currentPlaylist.Item[i].name + "\t";
+                richTextBox1.Text += axWindowsMediaPlayer1.currentPlaylist.Item[i].sourceURL + "\n";
+            }
+
+            //清除播放清單內所有資料
+            //axWindowsMediaPlayer1.currentPlaylist.clear();
+            //richTextBox1.Text += "目前播放清單內有 : " + len.ToString() + " 首歌\n";
+
+            //改變檔案位置
+            axWindowsMediaPlayer1.currentPlaylist.moveItem(3, 5);
+
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += axWindowsMediaPlayer1.currentPlaylist.Item[i].name + "\t";
+                richTextBox1.Text += axWindowsMediaPlayer1.currentPlaylist.Item[i].sourceURL + "\n";
+            }
+
+            //移除檔案
+            //axWindowsMediaPlayer1.currentPlaylist.removeItem(fileinfos[4].filepath + "\\" + fileinfos[4].filename);
+
+
+            //state if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsMediaEnded)
+            richTextBox1.Text += "state = " + axWindowsMediaPlayer1.playState.ToString() + "\n";
+
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("myplaylist");
+            WMPLib.IWMPMedia media;
+
+            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\06.紅燈青燈.mp3");
+            playlist.appendItem(media);
+            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\04.行船人的純情曲.mp3");
+            playlist.appendItem(media);
+            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\07.為錢賭生命.mp3");
+            playlist.appendItem(media);
+            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\08.看破愛別人.mp3");
+            playlist.appendItem(media);
+            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\09.戀歌.mp3");
+            playlist.appendItem(media);
+            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\10.悲戀的酒杯.mp3");
+            playlist.appendItem(media);
+            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\11.一卡手指.mp3");
+            playlist.appendItem(media);
+
+            axWindowsMediaPlayer1.currentPlaylist = playlist;
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+
+
+            //移除播放清單
+            //axWindowsMediaPlayer1.playlistCollection.remove(playlist);
+
+
+
+        }
+
     }
 }
