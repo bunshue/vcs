@@ -12,7 +12,8 @@ namespace AutomaticPlayImplement
 {
     public partial class Form1 : Form
     {
-        string foldername = @"D:\vcs\astro\_DATA2\_mp3\陳盈潔_台語精選集6CD\disc1\";
+        //string foldername = @"D:\vcs\astro\_DATA2\_mp3\陳盈潔_台語精選集6CD\disc1\";
+        string foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\陳一郎_紅燈碼頭\";  //會少檔案
 
         static int i = 0;
         private WMPLib.WindowsMediaPlayerClass WC;
@@ -35,8 +36,6 @@ namespace AutomaticPlayImplement
 
         public void GetAllFiles(DirectoryInfo dir)
         {
-            //richTextBox1.Text += "clear 1\n";
-            //this.listBox1.Items.Clear();
             FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();
             foreach (FileSystemInfo i in fileinfo)
             {
@@ -63,7 +62,6 @@ namespace AutomaticPlayImplement
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "clear 2\n";
             this.listBox1.Items.Clear();
             DirectoryInfo dir = new DirectoryInfo(foldername);
             GetAllFiles(dir);
@@ -93,7 +91,6 @@ namespace AutomaticPlayImplement
             richTextBox1.Text += "下一首\t";
             richTextBox1.Text += this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.name + "\t";
             richTextBox1.Text += this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.sourceURL + "\n";
-
         }
 
         private void button5_Click(object sender, EventArgs e)

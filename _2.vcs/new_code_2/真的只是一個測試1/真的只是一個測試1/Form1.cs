@@ -13,6 +13,10 @@ using System.Reflection;    //for Assembly
 
 using System.IO;    //for StreamReader
 
+using System.Net;   //for HttpWebRequest HttpWebResponse
+
+using System.Collections;   //for DictionaryEntry
+
 namespace 真的只是一個測試1
 {
     public partial class Form1 : Form
@@ -227,6 +231,353 @@ namespace 真的只是一個測試1
                 }
                 richTextBox1.Text += "\n";
             }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //分出 時:分:秒 再組合
+
+            DateTime dt = DateTime.Now;
+
+            richTextBox1.Text += dt.Hour.ToString().PadLeft(2, '0') + ":"
+                                    + dt.Minute.ToString().PadLeft(2, '0') + ":"
+                                    + dt.Second.ToString().PadLeft(2, '0') + "\n";
+
+        }
+
+        //根据Url地址得到网页的html源码
+        private string GetWebContent(string Url)
+        {
+            string strResult = "";
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+                //声明一个HttpWebRequest请求
+                request.Timeout = 30000;
+                //设置连接超时时间
+                request.Headers.Set("Pragma", "no-cache");
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                Stream streamReceive = response.GetResponseStream();
+                Encoding encoding = Encoding.GetEncoding("big5");
+                StreamReader streamReader = new StreamReader(streamReceive, encoding);
+                strResult = streamReader.ReadToEnd();
+            }
+            catch
+            {
+                MessageBox.Show("出错");
+            }
+            return strResult;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //抓取網頁並分析數據
+
+
+            //要抓取的URL地址
+            //string Url = "http://list.mp3.baidu.com/topso/mp3topsong.html?id=1#top2";
+            string Url = "https://tw.dictionary.search.yahoo.com/search;_ylt=AwrtXG3n.Oxg00wAkRB7rolQ;_ylc=X1MDMTM1MTIwMDM3OQRfcgMyBGZyAwRncHJpZAM1cFFoWDdMWFFLbTByV2N1Z3d3WThBBG5fcnNsdAMwBG5fc3VnZwMxBG9yaWdpbgN0dy5kaWN0aW9uYXJ5LnNlYXJjaC55YWhvby5jb20EcG9zAzAEcHFzdHIDBHBxc3RybAMwBHFzdHJsAzgEcXVlcnkDcHJlc3RpZ2UEdF9zdG1wAzE2MjYxNDI5Nzk-?p=prestige&fr=sfp&iscqry=";
+            //string Url = "http://mirlab.org/jang/books/matlabProgramming4beginner/example/03-%E4%BA%8C%E7%B6%AD%E5%B9%B3%E9%9D%A2%E7%B9%AA%E5%9C%96/plotxy12.m";
+            //string Url = "https://zh.wikipedia.org/wiki/%E6%98%8E%E7%A5%9E%E5%AE%97";
+            //得到指定Url的源码
+            string strWebContent = GetWebContent(Url);
+            richTextBox1.Text = strWebContent;
+
+
+            return;
+
+
+            //取出和数据有关的那段源码
+            int iBodyStart = strWebContent.IndexOf("<body", 0);
+            int iStart = strWebContent.IndexOf("歌曲TOP500", iBodyStart);
+            int iTableStart = strWebContent.IndexOf("<table", iStart);
+            int iTableEnd = strWebContent.IndexOf("</table>", iTableStart);
+            string strWeb = strWebContent.Substring(iTableStart, iTableEnd - iTableStart + 8);
+            //生成HtmlDocument
+            WebBrowser webb = new WebBrowser();
+            webb.Navigate("about:blank");
+            HtmlDocument htmldoc = webb.Document.OpenNew(true);
+            htmldoc.Write(strWeb);
+            HtmlElementCollection htmlTR = htmldoc.GetElementsByTagName("TR");
+            foreach (HtmlElement tr in htmlTR)
+            {
+                string strID = tr.GetElementsByTagName("TD")[0].InnerText;
+                richTextBox1.Text += "get : " + strID + "\n";
+
+                //string strName = SplitName(tr.GetElementsByTagName("TD")[1].InnerText, "MusicName");
+                //string strSinger = SplitName(tr.GetElementsByTagName("TD")[1].InnerText, "Singer");
+                strID = strID.Replace(".", "");
+                //插入DataTable
+                //AddLine(strID, strName, strSinger, "0");
+
+                string strID1 = tr.GetElementsByTagName("TD")[2].InnerText;
+                //string strName1 = SplitName(tr.GetElementsByTagName("TD")[3].InnerText, "MusicName");
+                //string strSinger1 = SplitName(tr.GetElementsByTagName("TD")[3].InnerText, "Singer");
+                //插入DataTable
+                strID1 = strID1.Replace(".", "");
+                //AddLine(strID1, strName1, strSinger1, "0");
+                string strID2 = tr.GetElementsByTagName("TD")[4].InnerText;
+                //string strName2 = SplitName(tr.GetElementsByTagName("TD")[5].InnerText, "MusicName");
+                //string strSinger2 = SplitName(tr.GetElementsByTagName("TD")[5].InnerText, "Singer");
+                //插入DataTable
+                strID2 = strID2.Replace(".", "");
+                //AddLine(strID2, strName2, strSinger2, "0");
+            }
+            //插入数据库
+            //InsertData(dt);
+
+            //dataGridView1.DataSource = dt.DefaultView;
+
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Environment參數\n";
+            richTextBox1.Text += "CommandLine:\t" + Environment.CommandLine + "\n";
+            richTextBox1.Text += "CurrentDirectory:\t" + Environment.CurrentDirectory + "\n";
+            richTextBox1.Text += "MachineName:\t" + Environment.MachineName + "\n";
+            richTextBox1.Text += "OSVersion:\t" + Environment.OSVersion + "\n";
+            //richTextBox1.Text += "StackTrace:\t" + Environment.StackTrace + "\n";
+            richTextBox1.Text += "SystemDirectory:\t" + Environment.SystemDirectory + "\n";
+            richTextBox1.Text += "TickCount:\t" + Environment.TickCount + "\n";
+            richTextBox1.Text += "Version:\t" + Environment.Version + "\n";
+            richTextBox1.Text += "WorkingSet:\t" + Environment.WorkingSet + "\n";
+
+            richTextBox1.Text += "列出所有環境變數\n";
+            foreach (DictionaryEntry var in Environment.GetEnvironmentVariables())
+            {
+                richTextBox1.Text += var.Key + "\t" + var.Value + "\n";
+            }
+
+            richTextBox1.Text += "列出Logical Drives\n";
+            foreach (string drive in Environment.GetLogicalDrives())
+            {
+                richTextBox1.Text += "\t" + drive + "\n";
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "建立一個Hashtable\n";
+
+            Hashtable openWith = new Hashtable();
+
+            richTextBox1.Text += "給Hashtable賦值, key是唯一, value不唯一\n";
+            //            key     value
+            openWith.Add("txt", "notepad.exe");
+            openWith.Add("bmp", "paint.exe");
+            openWith.Add("dib", "paint.exe");
+            openWith.Add("rtf", "wordpad.exe");
+
+            // When you use foreach to enumerate hash table elements,
+            // the elements are retrieved as DictionaryEntry objects.
+            foreach (DictionaryEntry var in openWith)
+            {
+                richTextBox1.Text += var.Key + "\t" + var.Value + "\n";
+            }
+        }
+
+
+        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
+        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
+        const int MB = 1024 * 1024;//定義MB的計算常量
+        const int KB = 1024;//定義KB的計算常量
+        public string ByteConversionTBGBMBKB(Int64 size)
+        {
+            if (size < 0)
+                return "不合法的數值";
+            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
+                return "無法表示";
+            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
+                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
+            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
+                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
+            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
+                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
+            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
+                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KGB
+            else
+                return size.ToString() + " Byte";//顯示Byte值
+        }
+
+
+        public class MyFileInfo
+        {
+            public string filename;
+            public string filepath;
+            public string fileextension;
+            public long filesize;
+            public DateTime filecreationtime;
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c)
+            {
+                this.filename = n;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+            }
+        }
+
+        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+
+        string FolederName;
+        Int64 total_size = 0;
+        Int64 total_files = 0;
+
+        Int64 folder_size = 0;
+        Int64 folder_files = 0;
+
+
+        // Process all files in the directory passed in, recurse on any directories 
+        // that are found, and process the files they contain.
+        public void ProcessDirectory(string targetDirectory)
+        {
+            //richTextBox1.Text += "處理資料夾 : " + targetDirectory + "\n";
+            try
+            {
+                string[] fileEntries = Directory.GetFiles(targetDirectory);
+                Array.Sort(fileEntries);
+                folder_size = 0;
+                folder_files = 0;
+                foreach (string fileName in fileEntries)
+                {
+                    ProcessFile(fileName);
+                }
+                //richTextBox1.Text += "folder_name = " + targetDirectory + "\n";
+                //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
+                //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
+                if (folder_files == 0)
+                {
+                    //richTextBox1.Text += "空資料夾 folder_name = " + targetDirectory + "\n";
+                }
+
+
+                // Recurse into subdirectories of this directory.
+                string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                Array.Sort(subdirectoryEntries);
+                foreach (string subdirectory in subdirectoryEntries)
+                {
+                    DirectoryInfo di = new DirectoryInfo(subdirectory);
+                    FolederName = subdirectory;
+                    ProcessDirectory(subdirectory);
+                }
+            }
+            catch (IOException e)
+            {
+                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+            }
+
+            richTextBox1.Text += "資料夾 " + targetDirectory + "\t檔案個數 : " + folder_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(folder_size)) + "\n";
+            richTextBox1.Text += "\n";
+        }
+
+        // Insert logic for processing found files here.
+        public void ProcessFile(string path)
+        {
+            //richTextBox1.Text += path + "\n";
+
+            FileInfo fi;
+
+            try
+            {   //可能會產生錯誤的程式區段
+                fi = new FileInfo(path);
+            }
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                richTextBox1.Text += "錯誤訊息1 : " + ex.Message + "\n";
+                return;
+            }
+            finally
+            {
+                //一定會被執行的程式區段
+            }
+
+            total_size += fi.Length;
+            total_files++;
+            folder_size += fi.Length;
+            folder_files++;
+
+            //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
+            fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            fileinfos.Clear();
+
+            string path = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\";
+
+            richTextBox1.Text += "\n搜尋路徑" + path + "\n";
+
+            if (File.Exists(path))
+            {
+                //給定的路徑是一個檔案
+                ProcessFile(path);
+                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+            }
+            else if (Directory.Exists(path))
+            {
+                //給定的路徑是一個資料夾
+                FolederName = path;
+                ProcessDirectory(path);
+                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "非合法路徑或檔案\n";
+            }
+
+
+            richTextBox1.Text += "\n\n\n";
+
+
+            richTextBox1.Text += "fileinfos len = " + fileinfos.Count.ToString() + "\n";
+
+            richTextBox1.Text += "total_size = " + total_size.ToString() + "\n";
+            richTextBox1.Text += "total_files = " + total_files.ToString() + "\n";
+            //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
+            //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
+
+            int i;
+            int len = fileinfos.Count;
+
+
+            richTextBox1.Text += "照檔名排序:\n";
+            for (i = 0; i < 20; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+
+            }
+
+            richTextBox1.Text += "照大小排序(由大到小):\n";
+
+            //排序 由大到小  在return的地方多個負號
+            fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+
+            for (i = 0; i < 20; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+
+            }
+
+            richTextBox1.Text += "照大小排序(由小到大):\n";
+
+            //排序 由小到大
+            fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+
+            for (i = 0; i < 20; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+
+            }
+
+
         }
     }
 }

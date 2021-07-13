@@ -121,7 +121,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(351, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(581, 649);
+            this.richTextBox1.Size = new System.Drawing.Size(790, 649);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
@@ -154,7 +154,9 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(155, 55);
             this.button8.TabIndex = 9;
+            this.button8.Text = "test1";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
@@ -163,7 +165,9 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(155, 55);
             this.button9.TabIndex = 10;
+            this.button9.Text = "抓取網頁資料";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
@@ -172,7 +176,9 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(155, 55);
             this.button10.TabIndex = 11;
+            this.button10.Text = "Environment參數";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
@@ -181,7 +187,9 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(155, 55);
             this.button11.TabIndex = 12;
+            this.button11.Text = "Hashtable 物件";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 
@@ -190,7 +198,9 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(155, 55);
             this.button12.TabIndex = 13;
+            this.button12.Text = "轉出";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
@@ -259,7 +269,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 673);
+            this.ClientSize = new System.Drawing.Size(1153, 673);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);

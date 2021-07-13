@@ -275,25 +275,8 @@ namespace vcs_test_all_04
 
         }
 
-        [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "SwapMouseButton")]
-        public extern static int SwapMouseButton(int bSwap);
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public extern static int GetSystemMetrics(int nIndes);
         private void button7_Click(object sender, EventArgs e)
         {
-            if (button7.Text == "切換滑鼠左右鍵")
-            {
-                SwapMouseButton(1);//切換滑鼠游標左右鍵
-
-
-                button7.Text = "恢復滑鼠左右鍵";
-            }
-            else
-            {
-                SwapMouseButton(0);//恢復，設定左鍵為主鍵
-
-                button7.Text = "切換滑鼠左右鍵";
-            }
         }
 
         [DllImport("winmm.dll", EntryPoint = "mciSendString")]
@@ -345,34 +328,9 @@ namespace vcs_test_all_04
         }
 
 
-        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
-        const int MB = 1024 * 1024;//定義MB的計算常量
-        const int KB = 1024;//定義KB的計算常量
-
-        public string ByteConversionGBMBKB(Int64 KSize)
-        {
-
-            if (KSize / GB >= 1)//如果目前Byte的值大於等於1GB
-                return (Math.Round(KSize / (float)GB, 2)).ToString() + "GB";//將其轉換成GB
-            else if (KSize / MB >= 1)//如果目前Byte的值大於等於1MB
-                return (Math.Round(KSize / (float)MB, 2)).ToString() + "MB";//將其轉換成MB
-            else if (KSize / KB >= 1)//如果目前Byte的值大於等於1KB
-                return (Math.Round(KSize / (float)KB, 2)).ToString() + "KB";//將其轉換成KGB
-            else
-                return KSize.ToString() + "Byte";//顯示Byte值
-        }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            Int64 a = 123456;
-            richTextBox1.Text += "原拜數 : \t" + a.ToString() + "\t";
-            richTextBox1.Text += "轉換後 : \t" + ByteConversionGBMBKB(a).ToString() + "\n";
-            a = 123456789;
-            richTextBox1.Text += "原拜數 : \t" + a.ToString() + "\t";
-            richTextBox1.Text += "轉換後 : \t" + ByteConversionGBMBKB(a).ToString() + "\n";
-            a = 123456789123;
-            richTextBox1.Text += "原拜數 : \t" + a.ToString() + "\t";
-            richTextBox1.Text += "轉換後 : \t" + ByteConversionGBMBKB(a).ToString() + "\n";
 
         }
 
