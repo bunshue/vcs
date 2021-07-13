@@ -51,55 +51,55 @@
             this.menu1ToolStripMenuItem5,
             this.menu1ToolStripMenuItem6});
             this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(119, 158);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(123, 158);
             // 
             // menu1ToolStripMenuItem
             // 
             this.menu1ToolStripMenuItem.Name = "menu1ToolStripMenuItem";
-            this.menu1ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.menu1ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.menu1ToolStripMenuItem.Text = "仓库管理";
             // 
             // menu1ToolStripMenuItem1
             // 
             this.menu1ToolStripMenuItem1.Name = "menu1ToolStripMenuItem1";
-            this.menu1ToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
+            this.menu1ToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.menu1ToolStripMenuItem1.Text = "库存盘点";
             // 
             // menu1ToolStripMenuItem2
             // 
             this.menu1ToolStripMenuItem2.Name = "menu1ToolStripMenuItem2";
-            this.menu1ToolStripMenuItem2.Size = new System.Drawing.Size(118, 22);
+            this.menu1ToolStripMenuItem2.Size = new System.Drawing.Size(122, 22);
             this.menu1ToolStripMenuItem2.Text = "仓库调拨";
             // 
             // menu1ToolStripMenuItem3
             // 
             this.menu1ToolStripMenuItem3.Name = "menu1ToolStripMenuItem3";
-            this.menu1ToolStripMenuItem3.Size = new System.Drawing.Size(118, 22);
+            this.menu1ToolStripMenuItem3.Size = new System.Drawing.Size(122, 22);
             this.menu1ToolStripMenuItem3.Text = "仓库报损";
             // 
             // menu1ToolStripMenuItem4
             // 
             this.menu1ToolStripMenuItem4.Name = "menu1ToolStripMenuItem4";
-            this.menu1ToolStripMenuItem4.Size = new System.Drawing.Size(118, 22);
+            this.menu1ToolStripMenuItem4.Size = new System.Drawing.Size(122, 22);
             this.menu1ToolStripMenuItem4.Text = "入库管理";
             // 
             // menu1ToolStripMenuItem5
             // 
             this.menu1ToolStripMenuItem5.Name = "menu1ToolStripMenuItem5";
-            this.menu1ToolStripMenuItem5.Size = new System.Drawing.Size(118, 22);
+            this.menu1ToolStripMenuItem5.Size = new System.Drawing.Size(122, 22);
             this.menu1ToolStripMenuItem5.Text = "出库管理";
             // 
             // menu1ToolStripMenuItem6
             // 
             this.menu1ToolStripMenuItem6.Name = "menu1ToolStripMenuItem6";
-            this.menu1ToolStripMenuItem6.Size = new System.Drawing.Size(118, 22);
+            this.menu1ToolStripMenuItem6.Size = new System.Drawing.Size(122, 22);
             this.menu1ToolStripMenuItem6.Text = "退货管理";
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 293);
+            this.ClientSize = new System.Drawing.Size(263, 224);
             this.ContextMenuStrip = this.contextMenuStrip2;
             this.Name = "Form2";
             this.Text = "子窗体";

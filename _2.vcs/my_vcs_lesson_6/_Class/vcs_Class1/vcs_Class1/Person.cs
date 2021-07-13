@@ -5,7 +5,7 @@ using System.Text;
 
 namespace vcs_Class1
 {
-    class Person
+    class Person2
     {
         private string firstname = "DEFAULT";
         private string lastname = "CAN NOT CHANGE";

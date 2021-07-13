@@ -17,7 +17,7 @@ namespace WatermarkImage
             InitializeComponent();
         }
 
-        public Image pp(PictureBox Pict, int x, int y, int R, float better)//R強光照射面的半徑，即」光暈」
+        public Image pp(PictureBox Pict, int x, int y, int R, float better) //R強光照射面的半徑，即"光暈"
         {
             Bitmap Var_Bmp = new Bitmap(Pict.Image, Pict.Width, Pict.Height);//根據圖像實例化Bitmap類
             int tem_W = Var_Bmp.Width;//獲取圖像的寬度
@@ -52,7 +52,10 @@ namespace WatermarkImage
 
         private void button1_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = pp(pictureBox1,200,100,500,150F);
+            int cx = 200;
+            int cy = 200;
+            int R = 150;
+            pictureBox1.Image = pp(pictureBox1, cx, cy, R, 150F);
         }
     }
 }

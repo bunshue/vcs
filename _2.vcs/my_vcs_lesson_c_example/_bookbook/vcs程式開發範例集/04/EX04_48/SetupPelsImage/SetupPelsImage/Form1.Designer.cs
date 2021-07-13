@@ -61,7 +61,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 272);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 12);
+            this.label1.Size = new System.Drawing.Size(16, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "X:";
             // 
@@ -70,7 +70,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 298);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 12);
+            this.label2.Size = new System.Drawing.Size(16, 12);
             this.label2.TabIndex = 2;
             this.label2.Text = "Y:";
             // 
@@ -79,7 +79,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(75, 272);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.Size = new System.Drawing.Size(37, 12);
             this.label3.TabIndex = 3;
             this.label3.Text = "Width:";
             // 
@@ -88,7 +88,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(69, 298);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 12);
+            this.label4.Size = new System.Drawing.Size(39, 12);
             this.label4.TabIndex = 4;
             this.label4.Text = "Height:";
             // 
@@ -171,6 +171,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "設定圖片中指定位置的像素值";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -481,23 +481,10 @@ namespace vcs_test_all_03
                 richTextBox1.Text += "音效設備名稱 : " + mo["ProductName"].ToString() + "\n"; //在当前文本框中显示声音设备的名称
                 richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n";//在当前文本框中显示声音设备的PNPDeviceID
             }
-
-
-
-
         }
-
-        const int SHERB_NOCONFIRMATION = 0x000001;
-        const int SHERB_NOPROGRESSUI = 0x000002;
-        const int SHERB_NOSOUND = 0x000004;
-        [DllImportAttribute("shell32.dll")]
-        private static extern int SHEmptyRecycleBin(IntPtr handle, string root, int falgs);
 
         private void button19_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "清理資源回收筒\n";
-
-            SHEmptyRecycleBin(this.Handle, "", SHERB_NOCONFIRMATION + SHERB_NOPROGRESSUI + SHERB_NOSOUND);
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -509,7 +496,6 @@ namespace vcs_test_all_03
                 richTextBox1.Text += files[i] + "\n";
                 //textBox2.Lines = files;
             }
-
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -624,4 +610,3 @@ namespace vcs_test_all_03
         }
     }
 }
-

@@ -44,14 +44,11 @@ namespace ZoomCharacter
             Var_Matrix.TransformPoints(Var_PointS);
             GraphicsPath Var_New_Path = new GraphicsPath(Var_PointS, Car_Types);
             g.FillPath(Var_Back, Var_New_Path);
-
-
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             button1_Click(sender, e);
-
         }
     }
 }

@@ -84,20 +84,17 @@ namespace vcs_ListBox1_CheckedListBox
             int i;
             richTextBox1.Text += "CheckedListBox Info\n";
 
-            richTextBox1.Text += "checkedListBox1.Items.Count = " + checkedListBox1.Items.Count.ToString() + "\n";
+            richTextBox1.Text += "checkedListBox1 總共有 " + checkedListBox1.Items.Count.ToString() + " 項, 依序是 :\n";
             for (i = 0; i < checkedListBox1.Items.Count; i++)
             {
                 richTextBox1.Text += checkedListBox1.Items[i] + "\n";
             }
 
-            richTextBox1.Text += "checkedListBox1.CheckedItems.Count = " + checkedListBox1.CheckedItems.Count.ToString() + "\n";
+            richTextBox1.Text += "checkedListBox1 選取 " + checkedListBox1.CheckedItems.Count.ToString() + " 項, 依序是 :\n";
             for (i = 0; i < checkedListBox1.CheckedItems.Count; i++)
             {
                 richTextBox1.Text += checkedListBox1.CheckedItems[i] + "\n";
             }
-            //richTextBox1.Text += "CheckedListBox Info\n";
-            //richTextBox1.Text += "CheckedListBox Info\n";
-
         }
 
         private void button7_Click(object sender, EventArgs e)

@@ -20,7 +20,11 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-            this.ClientSize = new Size(500, 500); // 視窗客戶區的寬高
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //this.ClientSize = new Size(500, 500); // 視窗客戶區的寬高
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)

@@ -13,19 +13,19 @@ namespace vcs_Clock8_Countdown
 {
     public partial class Form1 : Form
     {
+        // Initialize information about the event.
+        private const string EventName = "End of the World";
+        private DateTime EventDate = DateTime.Now + new TimeSpan(1, 13, 42, 59);
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        // Initialize information about the event.
-        private const string EventName = "End of the World";
-        private DateTime EventDate = DateTime.Now + new TimeSpan(1, 13, 42, 59);
         private void Form1_Load(object sender, EventArgs e)
         {
             lblEvent.Text = EventName;
             this.Text = EventName + " at " + EventDate.ToString();
-            this.ClientSize = new Size(lblEvent.Bounds.Right, lblEvent.Bounds.Bottom);
             tmrCheckTime.Enabled = true;
         }
 

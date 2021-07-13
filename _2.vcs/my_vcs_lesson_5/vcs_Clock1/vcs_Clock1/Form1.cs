@@ -40,15 +40,11 @@ namespace vcs_Clock1
             //this.UpdateStyles();
             int r = 100;
             // 绘制数字时钟
-            Rectangle r1 = new Rectangle(50, 10, 200, 20); //参数分别为左上角矩形坐标，宽度和长度
-            g.FillRectangle(Brushes.Chocolate, r1);//填充颜色
             int ss = DateTime.Now.Second;
             int mm = DateTime.Now.Minute;
             int hh = DateTime.Now.Hour;
-            Font f1 = new Font("宋体", 12, FontStyle.Bold);
-            StringFormat sf1 = new StringFormat();
-            SolidBrush s1 = new SolidBrush(Color.White);
-            g.DrawString("当前时间：" + DateTime.Now.ToString("hh:mm:ss"), f1, s1, r1, sf1);
+            this.Text = DateTime.Now.ToString("hh:mm:ss");
+
             //绘制圆形轮廓
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;//使画出的指针更平滑、高质量
             g.FillEllipse(Brushes.White, 50, 50, 200, 200);

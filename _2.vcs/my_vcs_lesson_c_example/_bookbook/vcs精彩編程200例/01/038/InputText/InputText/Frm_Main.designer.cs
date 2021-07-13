@@ -30,11 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Main));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btnConcel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.imgLogin = new System.Windows.Forms.ImageList(this.components);
             this.lbluName = new System.Windows.Forms.Label();
@@ -45,21 +43,13 @@
             this.errUser = new System.Windows.Forms.ErrorProvider(this.components);
             this.errPassword = new System.Windows.Forms.ErrorProvider(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(368, 44);
-            this.pictureBox1.TabIndex = 27;
-            this.pictureBox1.TabStop = false;
             // 
             // groupBox2
             // 
@@ -86,19 +76,9 @@
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             // 
-            // btnConcel
-            // 
-            this.btnConcel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnConcel.Location = new System.Drawing.Point(258, 139);
-            this.btnConcel.Name = "btnConcel";
-            this.btnConcel.Size = new System.Drawing.Size(96, 23);
-            this.btnConcel.TabIndex = 26;
-            this.btnConcel.Text = "退出(&E)";
-            this.btnConcel.Click += new System.EventHandler(this.btnConcel_Click);
-            // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(115, 139);
+            this.btnOK.Location = new System.Drawing.Point(73, 160);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(96, 23);
             this.btnOK.TabIndex = 25;
@@ -179,6 +159,15 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "lion / mouse";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(368, 44);
+            this.pictureBox1.TabIndex = 27;
+            this.pictureBox1.TabStop = false;
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -187,7 +176,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.btnConcel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lbluName);
             this.Controls.Add(this.groupBox3);
@@ -197,11 +185,11 @@
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "使用ErrorProvider组件验证文本框输入";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,11 +197,9 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button btnConcel;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.ImageList imgLogin;
         private System.Windows.Forms.Label lbluName;
@@ -224,6 +210,7 @@
         private System.Windows.Forms.ErrorProvider errUser;
         private System.Windows.Forms.ErrorProvider errPassword;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
 
 
     }

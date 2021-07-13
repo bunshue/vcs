@@ -47,6 +47,7 @@ namespace vcs_WebCam_AForge1
                 {
                     richTextBox1.Text += "WebCam Name : " + USBWebcams[0].Name + "\n";
                     richTextBox1.Text += "WebCam MonikerString Length : " + USBWebcams[0].MonikerString.Length.ToString() + "\n";
+                    richTextBox1.Text += "WebCam MonikerString : " + USBWebcams[0].MonikerString + "\n";
 
                     button1.Enabled = true;
                     ///---实例化对象
@@ -54,8 +55,25 @@ namespace vcs_WebCam_AForge1
                     ///---绑定事件
                     Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
 
-                    richTextBox1.Text += "Length " + Cam.Source.Length.ToString() + "\n";
-                    richTextBox1.Text += "Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
+                    richTextBox1.Text += "Cam.Source = " + Cam.Source + "\n";
+                    richTextBox1.Text += "Cam.Source.Length " + Cam.Source.Length.ToString() + "\n";
+
+                    richTextBox1.Text += "VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
+
+                    //richTextBox1.Text += "aaa" + Cam.VideoResolution.AverageFrameRate.ToString() + "\n";  XXXX
+                    //richTextBox1.Text += "aaa" + Cam.VideoResolution.FrameRate.ToString() + "\n"; XXXXX
+
+                    int i;
+                    int len;
+                    len = Cam.VideoCapabilities.Length;
+                    for (i = 0; i < len; i++)
+                    {
+                        richTextBox1.Text += "BitCount = " + Cam.VideoCapabilities[i].BitCount.ToString() + "\t";
+                        richTextBox1.Text += "MaximumFrameRate = " + Cam.VideoCapabilities[i].MaximumFrameRate.ToString() + "\t";
+                        richTextBox1.Text += "fps = " + Cam.VideoCapabilities[i].AverageFrameRate.ToString() + "\t";
+                        richTextBox1.Text += "W = " + Cam.VideoCapabilities[i].FrameSize.Width.ToString() + "\t";
+                        richTextBox1.Text += "H = " + Cam.VideoCapabilities[i].FrameSize.Height.ToString() + "\n";
+                    }
                 }
                 else
                 {
@@ -63,14 +81,12 @@ namespace vcs_WebCam_AForge1
                     button1.Enabled = false;
                     richTextBox1.Text += "無影像裝置\n";
                 }
-               
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-
         }
 
         public Bitmap bm = null;
@@ -215,10 +231,6 @@ namespace vcs_WebCam_AForge1
             {
                 richTextBox1.Text += "無圖可存\n";
             }
-
         }
-
-
-
     }
 }

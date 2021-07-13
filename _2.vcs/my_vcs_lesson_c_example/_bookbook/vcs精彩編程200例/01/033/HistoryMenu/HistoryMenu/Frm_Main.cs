@@ -5,17 +5,16 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
+
 namespace HistoryMenu
 {
     public partial class Frm_Main : Form
     {
-        string address;
         public Frm_Main()
         {
             InitializeComponent();
-            address = //得到应用程序路径
-                Environment.CurrentDirectory;
         }
 
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -23,7 +22,7 @@ namespace HistoryMenu
             openFileDialog1.FileName = "";//设置默认打开文件名称
             openFileDialog1.ShowDialog();//弹出打开文件对话框
             StreamWriter s = //创建流写入器对象
-                new StreamWriter(address + "\\History.ini", true);
+                new StreamWriter("../../History.ini", true);
             s.WriteLine(openFileDialog1.FileName);//向文件中写入历史信息
             s.Flush();//将信息压入流
             s.Close();//关闭流
@@ -33,7 +32,7 @@ namespace HistoryMenu
         private void Form1_Load(object sender, EventArgs e)
         {
             StreamReader sr = //创建流读取器对象
-                new StreamReader(address + "\\History.ini");
+                new StreamReader("../../History.ini");
             int i = //得到菜单项索引
                 文件ToolStripMenuItem.DropDownItems.Count-2;
             while (sr.Peek()>=0)//循环读取流中文本

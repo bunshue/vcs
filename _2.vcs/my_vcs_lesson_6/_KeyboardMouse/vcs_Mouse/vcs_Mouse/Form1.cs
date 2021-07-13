@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Runtime.InteropServices;   //for DllImport
+
 namespace vcs_Mouse
 {
     public partial class Form1 : Form
@@ -142,5 +144,27 @@ namespace vcs_Mouse
             //this.Text = Control.MousePosition.ToString();
             this.Text = "(" + Control.MousePosition.X.ToString() + ", " + Control.MousePosition.Y.ToString() + ")";
         }
+
+        //切換滑鼠左右鍵 ST
+        [DllImport("user32.dll", EntryPoint = "SwapMouseButton")]
+        public extern static int SwapMouseButton(int bSwap);
+        [DllImport("user32.dll")]
+        public extern static int GetSystemMetrics(int nIndes);
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //切換滑鼠左右鍵
+            if (button2.Text == "切換滑鼠左右鍵")
+            {
+                SwapMouseButton(1);//切換滑鼠游標左右鍵
+                button2.Text = "恢復滑鼠左右鍵";
+            }
+            else
+            {
+                SwapMouseButton(0);//恢復，設定左鍵為主鍵
+                button2.Text = "切換滑鼠左右鍵";
+            }
+        }
+        //切換滑鼠左右鍵 SP
     }
 }

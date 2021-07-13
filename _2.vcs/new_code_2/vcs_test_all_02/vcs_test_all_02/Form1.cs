@@ -181,21 +181,9 @@ namespace vcs_test_all_02
             richTextBox1.Text += "短檔名：" + filename_short + "\n";
         }
 
-
-        //清理資源回收筒 ST
-        const int SHERB_NOCONFIRMATION = 0x000001;	//整型常量在API中表示删除时没有确认对话框
-        const int SHERB_NOPROGRESSUI = 0x000002;		//在API中表示不显示删除进度条
-        const int SHERB_NOSOUND = 0x000004;			//在API中表示删除完毕时不播放声音
-
-        [DllImportAttribute("shell32.dll")]					//声明API函数
-        private static extern int SHEmptyRecycleBin(IntPtr handle, string root, int falgs);
-
         private void button2_Click(object sender, EventArgs e)
         {
-            //清理資源回收筒
-            SHEmptyRecycleBin(this.Handle, "", SHERB_NOCONFIRMATION + SHERB_NOPROGRESSUI + SHERB_NOSOUND);
         }
-        //清理資源回收筒 SP
 
     }
 }

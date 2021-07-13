@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Runtime.InteropServices;   //for DllImport, DllImportAttribute
 
 //參考/加入參考/.NET/Microsoft.VisualBasic
 
@@ -115,6 +116,22 @@ namespace vcs_RecycleBin
                 File.WriteAllText(filename2, "This is another test file.");
             }
         }
+
+        //清理資源回收筒 ST
+        const int SHERB_NOCONFIRMATION = 0x000001;	//整型常量在API中表示删除时没有确认对话框
+        const int SHERB_NOPROGRESSUI = 0x000002;		//在API中表示不显示删除进度条
+        const int SHERB_NOSOUND = 0x000004;			//在API中表示删除完毕时不播放声音
+
+        [DllImportAttribute("shell32.dll")]					//声明API函数
+        private static extern int SHEmptyRecycleBin(IntPtr handle, string root, int falgs);
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "清理資源回收筒\n";
+            SHEmptyRecycleBin(this.Handle, "", SHERB_NOCONFIRMATION + SHERB_NOPROGRESSUI + SHERB_NOSOUND);
+        }
+        //清理資源回收筒 SP
+
     }
 }
 

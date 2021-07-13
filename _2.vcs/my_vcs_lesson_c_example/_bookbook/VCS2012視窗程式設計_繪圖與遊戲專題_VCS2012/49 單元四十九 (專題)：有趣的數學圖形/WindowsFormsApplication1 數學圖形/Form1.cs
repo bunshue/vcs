@@ -26,6 +26,11 @@ namespace WindowsFormsApplication1
             G = this.CreateGraphics();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            label1.Text = "";
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             theta = theta + 0.01;
@@ -33,18 +38,27 @@ namespace WindowsFormsApplication1
             if (comboBox1.Text == "")
             {
                 timer1.Enabled = false;
+                label1.Text = "";
                 return;
             }
             else if (comboBox1.Text == "Circle")
             {
-                if (theta >= Math.PI * 2) timer1.Enabled = false;
+                if (theta >= Math.PI * 2)
+                {
+                    timer1.Enabled = false;
+                    label1.Text = "";
+                }
                 r = this.ClientSize.Height / 4;
                 x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
                 y2 = this.ClientSize.Height / 2 + (int)(r * Math.Sin(theta));
             }
             else if (comboBox1.Text == "Limacon")
             {
-                if (theta >= Math.PI * 2) timer1.Enabled = false;
+                if (theta >= Math.PI * 2)
+                {
+                    timer1.Enabled = false;
+                    label1.Text = "";
+                }
                 a = 200; b = 100;
                 r = a * Math.Cos(theta - Math.PI / 2) + b;
                 x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
@@ -52,7 +66,11 @@ namespace WindowsFormsApplication1
             }
             else if (comboBox1.Text == "Cardiod")
             {
-                if (theta >= Math.PI * 2) timer1.Enabled = false;
+                if (theta >= Math.PI * 2)
+                {
+                    timer1.Enabled = false;
+                    label1.Text = "";
+                }
                 a = 200;// b = 50;
                 r = a * Math.Cos(theta - Math.PI / 2) + a;
                 x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
@@ -60,7 +78,11 @@ namespace WindowsFormsApplication1
             }
             else if (comboBox1.Text == "Three Left")
             {
-                if (theta >= Math.PI) timer1.Enabled = false;
+                if (theta >= Math.PI)
+                {
+                    timer1.Enabled = false;
+                    label1.Text = "";
+                }
                 a = 275;
                 r = a * Math.Cos(3.0 * theta);
                 x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
@@ -68,7 +90,11 @@ namespace WindowsFormsApplication1
             }
             else if (comboBox1.Text == "Four Left")
             {
-                if (theta >= Math.PI * 2) timer1.Enabled = false;
+                if (theta >= Math.PI * 2)
+                {
+                    timer1.Enabled = false;
+                    label1.Text = "";
+                }
                 a = 275;
                 r = a * Math.Cos(2.0 * theta);
                 x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
@@ -76,7 +102,11 @@ namespace WindowsFormsApplication1
             }
             else if (comboBox1.Text == "Spiral")
             {
-                if (theta >= Math.PI * 20) timer1.Enabled = false;
+                if (theta >= Math.PI * 20)
+                {
+                    timer1.Enabled = false;
+                    label1.Text = "";
+                }
                 a = 175;
                 r = a / 40.0 * theta;
                 x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
@@ -93,10 +123,12 @@ namespace WindowsFormsApplication1
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            label1.Text = comboBox1.Text.ToString();
             this.Invalidate();
             timer1.Enabled = true;
             theta = 0;
             First = true;
         }
+
     }
 }

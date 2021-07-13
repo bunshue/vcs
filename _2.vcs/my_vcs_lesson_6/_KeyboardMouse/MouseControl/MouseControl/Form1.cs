@@ -4,6 +4,7 @@
 //     HotKey   : http://www.dotblogs.com.tw/sam319/archive/2010/01/10/12945.aspx
 //     列舉取得1 : http://www.dotblogs.com.tw/dc690216/archive/2009/09/16/10666.aspx
 //     列舉取得2 :http://www.dotblogs.com.tw/ouch1978/archive/2011/01/27/enumtolist.aspx
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,7 +36,9 @@ namespace MouseControl
             foreach (var item in Enum.GetNames(typeof(System.Windows.Forms.Keys)))
             {
                 if ((item.Length == 1) || (item.Length == 2 && item.StartsWith("F")))
+                {
                     this.comboBox1.Items.Add(item);
+                }
             }
             //-------------------------------
 
@@ -61,7 +64,6 @@ namespace MouseControl
 
             System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
 
-
             nicon = new NotifyIcon();
             nicon.Icon = new Icon(asm.GetManifestResourceStream(asm.GetName().Name + ".1207680.ico"));
             nicon.Text = "Clicker";
@@ -76,7 +78,6 @@ namespace MouseControl
             this.Show();
             Win32Native.Methods.SetForegroundWindow(this.Handle);
         }
-
 
         NotifyIcon nicon;
 
@@ -114,7 +115,6 @@ namespace MouseControl
                 Console.WriteLine(e.Keys.ToString());
                 Console.WriteLine(e.VirtualKeyCode.ToString());
             }
-
         }
 
         void AutoGetCursorPosition(object obj)
@@ -127,6 +127,7 @@ namespace MouseControl
                 try
                 {
                     SetText(this.label1, "滑鼠位置 : ( " + pt.X + " , " + pt.Y + " )");
+                    //this.Text = "滑鼠位置 : ( " + pt.X + " , " + pt.Y + " )"; fail
                 }
                 catch (Exception ex)
                 {
@@ -166,7 +167,6 @@ namespace MouseControl
             }
         }
 
-
         /// <summary>
         /// 改變目前熱鍵
         /// </summary>
@@ -200,17 +200,12 @@ namespace MouseControl
             {
                 this.HotKey = new GlobalHotKey(this.Handle, k, Keys.None);
             }
-
             this.HotKey.OnHotkey += new GlobalHotKey.HotkeyEventHandler(HotKey_OnHotkey);
-
         }
-
-
 
         bool isWorking = false;
 
         MouseLogicControl.EventType CT = MouseLogicControl.EventType.LeftClick;
-
 
         private void AutoClicking(object obj)
         {
@@ -272,12 +267,15 @@ namespace MouseControl
                 {
                     case "左":
                         this.CT = MouseLogicControl.EventType.LeftClick;
+                        richTextBox1.Text += "你按了 左\n";
                         break;
                     case "中":
                         this.CT = MouseLogicControl.EventType.MidClick;
+                        richTextBox1.Text += "你按了 中\n";
                         break;
                     case "右":
                         this.CT = MouseLogicControl.EventType.RightClick;
+                        richTextBox1.Text += "你按了 右\n";
                         break;
                     default:
                         break;
@@ -286,3 +284,4 @@ namespace MouseControl
         }
     }
 }
+

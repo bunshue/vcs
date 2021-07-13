@@ -43,6 +43,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -74,7 +75,7 @@
             this.textBox1.ForeColor = System.Drawing.Color.Red;
             this.textBox1.Location = new System.Drawing.Point(18, 18);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(111, 26);
+            this.textBox1.Size = new System.Drawing.Size(111, 27);
             this.textBox1.TabIndex = 0;
             // 
             // groupBox2
@@ -97,7 +98,7 @@
             this.textBox2.ForeColor = System.Drawing.Color.Red;
             this.textBox2.Location = new System.Drawing.Point(9, 52);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(126, 26);
+            this.textBox2.Size = new System.Drawing.Size(126, 27);
             this.textBox2.TabIndex = 8;
             // 
             // numericUpDown2
@@ -105,7 +106,7 @@
             this.numericUpDown2.ForeColor = System.Drawing.Color.Red;
             this.numericUpDown2.Location = new System.Drawing.Point(52, 25);
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(43, 26);
+            this.numericUpDown2.Size = new System.Drawing.Size(43, 27);
             this.numericUpDown2.TabIndex = 7;
             this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
             // 
@@ -119,7 +120,7 @@
             0,
             0});
             this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(43, 26);
+            this.numericUpDown3.Size = new System.Drawing.Size(43, 27);
             this.numericUpDown3.TabIndex = 3;
             this.numericUpDown3.Value = new decimal(new int[] {
             1,
@@ -138,7 +139,7 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(43, 26);
+            this.numericUpDown1.Size = new System.Drawing.Size(43, 27);
             this.numericUpDown1.TabIndex = 0;
             this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown1.Value = new decimal(new int[] {
@@ -206,11 +207,20 @@
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(300, 4);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(262, 337);
+            this.richTextBox1.TabIndex = 5;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(320, 144);
+            this.ClientSize = new System.Drawing.Size(566, 345);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
@@ -218,7 +228,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(1);
-            this.Text = "使用Timer組件製作計時器";
+            this.Text = "使用Timer組件製作計時器";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -249,6 +259,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
 
     }
 }

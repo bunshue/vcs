@@ -36,6 +36,7 @@
             this.tmrCheckTime = new System.Windows.Forms.Timer(this.components);
             this.lblSeconds = new System.Windows.Forms.Label();
             this.lblMinutes = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // Label1
@@ -109,11 +110,20 @@
             this.lblMinutes.TabIndex = 8;
             this.lblMinutes.Text = "59 minutes";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(12, 310);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(509, 200);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(24F, 46F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 237);
+            this.ClientSize = new System.Drawing.Size(533, 522);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.Label1);
             this.Controls.Add(this.lblEvent);
             this.Controls.Add(this.lblHours);
@@ -139,6 +149,7 @@
         internal System.Windows.Forms.Timer tmrCheckTime;
         internal System.Windows.Forms.Label lblSeconds;
         internal System.Windows.Forms.Label lblMinutes;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
