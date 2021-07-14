@@ -596,7 +596,20 @@ namespace 真的只是一個測試1
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //file info
+            string filename = @"C:\______test_files\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
 
+            FileInfo fileInfo = new FileInfo(filename);
+            string fileSize = (fileInfo.Length / 1024).ToString() + " KB";
+            string temp = filename.Remove(filename.LastIndexOf('.'));
+            string fileName = Path.GetFileNameWithoutExtension(filename);
+            string fileExtension = Path.GetExtension(filename);
+
+            richTextBox1.Text += "filename = " + filename + "\n";
+            richTextBox1.Text += "fileSize = " + fileSize + "\n";
+            richTextBox1.Text += "temp = " + temp + "\n";
+            richTextBox1.Text += "fileName = " + fileName + "\n";
+            richTextBox1.Text += "fileExtension = " + fileExtension + "\n";
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -605,11 +618,23 @@ namespace 真的只是一個測試1
 
         private void button17_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //透明的Form背景
+            this.TransparencyKey = Color.Red;
+            this.BackColor = this.TransparencyKey;
         }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            //透明的RichTextBox背景
+            this.TransparencyKey = Color.Red;
+            richTextBox1.BackColor = this.TransparencyKey;
+        }
+
 
         int index = 0;
         private void timer1_Tick(object sender, EventArgs e)
@@ -627,11 +652,5 @@ namespace 真的只是一個測試1
 
         }
 
-        private void button19_Click(object sender, EventArgs e)
-        {
-            //透明的RichTextBox背景
-            this.TransparencyKey = Color.Red;
-            richTextBox1.BackColor = this.TransparencyKey;
-        }
     }
 }

@@ -35,7 +35,7 @@ namespace vcs_axWindowsMediaPlayer2_new
             //button
             x_st = 12;
             y_st = 12;
-            dx = 165;
+            dx = 150;
             dy = 70;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -47,6 +47,18 @@ namespace vcs_axWindowsMediaPlayer2_new
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -292,6 +304,12 @@ namespace vcs_axWindowsMediaPlayer2_new
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (axWindowsMediaPlayer1.currentPlaylist == null)
+            {
+                richTextBox1.Text += "無播放清單\n";
+                return;
+            }
+
             int len;
             len = axWindowsMediaPlayer1.currentPlaylist.count;
             richTextBox1.Text += "目前播放清單內有 : " + len.ToString() + " 首歌\n";
@@ -301,6 +319,8 @@ namespace vcs_axWindowsMediaPlayer2_new
                 richTextBox1.Text += axWindowsMediaPlayer1.currentPlaylist.Item[i].name + "\t";
                 richTextBox1.Text += axWindowsMediaPlayer1.currentPlaylist.Item[i].sourceURL + "\n";
             }
+
+            return;
 
             //清除播放清單內所有資料
             //axWindowsMediaPlayer1.currentPlaylist.clear();
@@ -401,6 +421,91 @@ namespace vcs_axWindowsMediaPlayer2_new
         }
 
         private void button8_Click(object sender, EventArgs e)
+        {
+
+            axWindowsMediaPlayer1.settings.setMode("shuffle", true);	//隨機播放
+            axWindowsMediaPlayer1.settings.setMode("shuffle", false);	//順序播放
+            axWindowsMediaPlayer1.settings.setMode("loop", true);	//循環播放
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (this.axWindowsMediaPlayer1.currentMedia == null)
+            {
+                richTextBox1.Text += "無播放檔案\n";
+                return;
+            }
+
+            string durationString = this.axWindowsMediaPlayer1.currentMedia.durationString;
+            richTextBox1.Text += "目前播放這首歌的長度是 : " + durationString + "\n";
+
+            int len = Convert.ToInt32(this.axWindowsMediaPlayer1.currentMedia.duration);
+            richTextBox1.Text += "目前播放這首歌的長度是 : " + len.ToString() + " 秒\n";
+
+            int trackBarValue = Convert.ToInt32(this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition);
+            richTextBox1.Text += "目前播放位置是 : " + trackBarValue.ToString() + " 秒\n";
+
+            richTextBox1.Text += "目前播放位置是 : " + this.axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + "\n";
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //直接播放單一檔案
+            string filename = @"D:\vcs\astro\_DATA2\_mp3\陳盈潔_台語精選集6CD\disc3\01.南都夜曲.mp3";
+            axWindowsMediaPlayer1.URL = filename;
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //使用播放清單播放檔案
+            string filename = @"D:\vcs\astro\_DATA2\_mp3\陳盈潔_台語精選集6CD\disc3\01.南都夜曲.mp3";
+            IWMPMedia media;
+            //新增到播放列表
+            media = axWindowsMediaPlayer1.newMedia(filename);
+            //axWindowsMediaPlayer1.currentPlaylist.insertItem(media);
+            axWindowsMediaPlayer1.currentPlaylist.appendItem(media);
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
         {
 
         }

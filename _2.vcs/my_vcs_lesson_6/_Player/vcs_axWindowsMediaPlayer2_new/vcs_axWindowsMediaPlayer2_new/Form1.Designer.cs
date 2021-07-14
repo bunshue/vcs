@@ -41,6 +41,17 @@
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,25 +127,26 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(12, 602);
+            this.button8.Location = new System.Drawing.Point(12, 594);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(131, 55);
             this.button8.TabIndex = 7;
+            this.button8.Text = "播放模式";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(168, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(344, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(734, 576);
+            this.richTextBox1.Size = new System.Drawing.Size(558, 623);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
             // 
             // axWindowsMediaPlayer1
             // 
             this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(168, 594);
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(344, 641);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
             this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(494, 60);
@@ -160,11 +172,124 @@
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(12, 655);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(131, 55);
+            this.button9.TabIndex = 12;
+            this.button9.Text = "info";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(163, 12);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(131, 55);
+            this.button10.TabIndex = 13;
+            this.button10.Text = "直接播放單一檔案";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(163, 85);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(131, 55);
+            this.button11.TabIndex = 14;
+            this.button11.Text = "使用播放清單播放檔案";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(163, 161);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(131, 55);
+            this.button12.TabIndex = 15;
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(163, 235);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(131, 55);
+            this.button13.TabIndex = 16;
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(163, 313);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(131, 55);
+            this.button14.TabIndex = 17;
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(163, 382);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(131, 55);
+            this.button15.TabIndex = 18;
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(163, 455);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(131, 55);
+            this.button16.TabIndex = 19;
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button17
+            // 
+            this.button17.Location = new System.Drawing.Point(163, 527);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(131, 55);
+            this.button17.TabIndex = 20;
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(163, 594);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(131, 55);
+            this.button18.TabIndex = 21;
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(163, 655);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(131, 55);
+            this.button19.TabIndex = 22;
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 666);
+            this.ClientSize = new System.Drawing.Size(917, 713);
+            this.Controls.Add(this.button19);
+            this.Controls.Add(this.button18);
+            this.Controls.Add(this.button17);
+            this.Controls.Add(this.button16);
+            this.Controls.Add(this.button15);
+            this.Controls.Add(this.button14);
+            this.Controls.Add(this.button13);
+            this.Controls.Add(this.button12);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.axWindowsMediaPlayer1);
@@ -199,6 +324,17 @@
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
     }
 }
 

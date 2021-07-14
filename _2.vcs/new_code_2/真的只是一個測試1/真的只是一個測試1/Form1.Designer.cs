@@ -235,6 +235,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(155, 55);
             this.button15.TabIndex = 16;
+            this.button15.Text = "file info";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -265,6 +266,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(155, 55);
             this.button18.TabIndex = 19;
+            this.button18.Text = "透明的Form背景";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -292,7 +294,6 @@
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
             this.timer1.Interval = 600;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 

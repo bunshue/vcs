@@ -44,6 +44,14 @@ namespace vcs_Clipboard
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
+            int offset = 70;
+            button15.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 10);
+
             groupBox1.Location = new Point(12, 350);
             y_st = 18;
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -293,16 +301,108 @@ namespace vcs_Clipboard
                 richTextBoxp_clipboard.Rtf = Clipboard.GetText(TextDataFormat.Rtf);
             }
         }
-
-
-
-
-
-
-
-
-
         //檢查剪貼簿內的資料內容 SP
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            bool flag = Clipboard.ContainsImage();  //判斷Clipboard中是否包含圖片資料
+            richTextBox1.Text += "Clipboard 是否包含圖片資料 : " + flag.ToString() + "\n";
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "將圖片資料放置到Clipboard中\n";
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image img = Image.FromFile(filename);
+            Clipboard.SetImage(img);
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            bool flag = Clipboard.ContainsText();   //判斷Clipboard中是否包含文字資料
+            richTextBox1.Text += "Clipboard 是否包含文字資料 : " + flag.ToString() + "\n";
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "將文字資料放置到Clipboard中\n";
+            string data = "翠盖龙旗出建章 莺啼百啭柳初黄";
+            Clipboard.SetDataObject(data);	//向Clipboard中放置資料
+
+            //string text = Clipboard.GetText();
+            //Console.WriteLine(text);
+
+
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            bool flag = Clipboard.ContainsText();
+            if (flag == true)
+            {
+                //顯示Clipboard中的文字資料
+                string text = Clipboard.GetText();
+                richTextBox1.Text += "取得文字資料 :\n" + text + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無  文字資料\n";
+            }
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //Clipboard中檔名的集合
+
+            //Clipboard
+            //傳回字串集合，其中包含剪貼簿上已置放檔案的清單。
+            System.Collections.Specialized.StringCollection stringCollection = Clipboard.GetFileDropList();
+            if (stringCollection != null)
+            {
+                richTextBox1.Text += "在檔案總管中, 複製 或 剪下的檔案:\n";
+                foreach (var item in stringCollection)
+                {
+                    richTextBox1.Text += "取得檔案 : " + item + "\n";
+                }
+            }
+
+            richTextBox1.Text += "\n";
+
+            if ((Clipboard.ContainsFileDropList()) && (Clipboard.GetFileDropList().Count > 0))
+            {
+                int cnt = Clipboard.GetFileDropList().Count;
+                int i;
+                for (i = 0; i < cnt; i++)
+                {
+                    richTextBox1.Text += "取得檔案 : " + Path.GetFileName(Clipboard.GetFileDropList()[i]) + "\n";
+
+                }
+
+            }
+
+            richTextBox1.Text += "\n";
+            //因為Clipboard是可以複製多個檔案的所有要遍歷獲取
+            System.Collections.Specialized.StringCollection sc = Clipboard.GetFileDropList();
+            richTextBox1.Text += "在檔案總管中, 複製 或 剪下的檔案:\n";
+            foreach (var item in sc)
+            {
+                richTextBox1.Text += "取得檔案 : " + item + "\n";
+            }
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
 
     }
 

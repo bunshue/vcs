@@ -55,6 +55,12 @@
             this.richTextBoxp_clipboard = new System.Windows.Forms.RichTextBox();
             this.textBox_clipboard = new System.Windows.Forms.TextBox();
             this.pictureBox_clipboard = new System.Windows.Forms.PictureBox();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button20 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_clipboard)).BeginInit();
@@ -341,11 +347,83 @@
             this.pictureBox_clipboard.TabIndex = 15;
             this.pictureBox_clipboard.TabStop = false;
             // 
+            // button15
+            // 
+            this.button15.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button15.Location = new System.Drawing.Point(333, 302);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(159, 52);
+            this.button15.TabIndex = 19;
+            this.button15.Text = "判斷Clipboard中是否包含圖片資料";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // button16
+            // 
+            this.button16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button16.Location = new System.Drawing.Point(333, 364);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(159, 52);
+            this.button16.TabIndex = 20;
+            this.button16.Text = "將圖片資料放置到Clipboard中";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button17
+            // 
+            this.button17.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button17.Location = new System.Drawing.Point(333, 433);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(159, 52);
+            this.button17.TabIndex = 21;
+            this.button17.Text = "判斷Clipboard中是否包含文字資料";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // button18
+            // 
+            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button18.Location = new System.Drawing.Point(333, 491);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(159, 52);
+            this.button18.TabIndex = 22;
+            this.button18.Text = "將文字資料放置到Clipboard中";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button19
+            // 
+            this.button19.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button19.Location = new System.Drawing.Point(333, 549);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(159, 52);
+            this.button19.TabIndex = 23;
+            this.button19.Text = "顯示Clipboard中的文字資料";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // button20
+            // 
+            this.button20.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button20.Location = new System.Drawing.Point(333, 607);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(159, 52);
+            this.button20.TabIndex = 24;
+            this.button20.Text = "取得Clipboard中檔名的集合";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1332, 812);
+            this.Controls.Add(this.button20);
+            this.Controls.Add(this.button19);
+            this.Controls.Add(this.button18);
+            this.Controls.Add(this.button17);
+            this.Controls.Add(this.button16);
+            this.Controls.Add(this.button15);
             this.Controls.Add(this.webBrowser_clipboard);
             this.Controls.Add(this.richTextBoxp_clipboard);
             this.Controls.Add(this.textBox_clipboard);
@@ -401,6 +479,12 @@
         private System.Windows.Forms.RichTextBox richTextBoxp_clipboard;
         private System.Windows.Forms.TextBox textBox_clipboard;
         private System.Windows.Forms.PictureBox pictureBox_clipboard;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button20;
     }
 }
 
