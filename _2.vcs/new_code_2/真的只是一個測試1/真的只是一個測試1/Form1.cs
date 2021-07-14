@@ -17,7 +17,9 @@ using System.Net;   //for HttpWebRequest HttpWebResponse
 
 using System.Collections;   //for DictionaryEntry
 
-using WMPLib;
+
+using System.Text.RegularExpressions;
+
 
 namespace 真的只是一個測試1
 {
@@ -28,9 +30,52 @@ namespace 真的只是一個測試1
             InitializeComponent();
         }
 
+        private List<string> imageList;//播放的圖片
+
+        /// <summary>
+        ///  初始化 載入播放列表 如歌詞 背景圖 定時器等等
+        /// </summary>
+        private void InitLoad()
+        {
+            try
+            {
+                bool flag = false;
+                //string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bgImages");
+                //string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bgImages");
+                string foldername = @"C:\______test_files\peony2";
+
+                DirectoryInfo root = new DirectoryInfo(foldername);
+                FileInfo[] files = root.GetFiles();
+                string fileName;
+                for (int i = 0; i < files.Length; i++)
+                {
+                    fileName = files[i].Name.ToLower();
+                    if (fileName.EndsWith(".png") || fileName.EndsWith(".jpeg") || fileName.EndsWith(".jpg"))
+                    {
+                        if (!flag)
+                        {
+                            imageList = new List<string>();
+                            this.pictureBox1.Image = Image.FromFile(files[i].FullName);
+                        }
+                        imageList.Add(files[i].FullName);
+                        flag = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("錯誤:" + ex.Message);
+            }
+        }
+
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            InitLoad();
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -387,223 +432,75 @@ namespace 真的只是一個測試1
             }
         }
 
-
-        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
-        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
-        const int MB = 1024 * 1024;//定義MB的計算常量
-        const int KB = 1024;//定義KB的計算常量
-        public string ByteConversionTBGBMBKB(Int64 size)
-        {
-            if (size < 0)
-                return "不合法的數值";
-            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
-                return "無法表示";
-            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
-                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
-            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
-                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
-            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
-                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
-            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
-                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KGB
-            else
-                return size.ToString() + " Byte";//顯示Byte值
-        }
-
-
-        public class MyFileInfo
-        {
-            public string filename;
-            public string filepath;
-            public string fileextension;
-            public long filesize;
-            public DateTime filecreationtime;
-
-            public MyFileInfo(string n, string p, string e, long s, DateTime c)
-            {
-                this.filename = n;
-                this.filepath = p;
-                this.fileextension = e;
-                this.filesize = s;
-                this.filecreationtime = c;
-            }
-        }
-
-        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
-
-        string FolederName;
-        Int64 total_size = 0;
-        Int64 total_files = 0;
-
-        Int64 folder_size = 0;
-        Int64 folder_files = 0;
-
-
-        // Process all files in the directory passed in, recurse on any directories 
-        // that are found, and process the files they contain.
-        public void ProcessDirectory(string targetDirectory)
-        {
-            try
-            {
-                string[] fileEntries = Directory.GetFiles(targetDirectory);
-                Array.Sort(fileEntries);
-                folder_size = 0;
-                folder_files = 0;
-                foreach (string fileName in fileEntries)
-                {
-                    ProcessFile(fileName);
-                }
-                //richTextBox1.Text += "folder_name = " + targetDirectory + "\n";
-                //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
-                //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
-                if (folder_files == 0)
-                {
-                    //richTextBox1.Text += "空資料夾 folder_name = " + targetDirectory + "\n";
-                }
-
-
-                // Recurse into subdirectories of this directory.
-                string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                Array.Sort(subdirectoryEntries);
-                foreach (string subdirectory in subdirectoryEntries)
-                {
-                    DirectoryInfo di = new DirectoryInfo(subdirectory);
-                    FolederName = subdirectory;
-                    ProcessDirectory(subdirectory);
-                }
-            }
-            catch (IOException e)
-            {
-                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
-            }
-
-            /*
-            richTextBox1.Text += "資料夾 " + targetDirectory + "\t檔案個數 : " + folder_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(folder_size)) + "\n";
-            richTextBox1.Text += "\n";
-            */
-        }
-
-        // Insert logic for processing found files here.
-        public void ProcessFile(string path)
-        {
-            //richTextBox1.Text += path + "\n";
-
-            FileInfo fi;
-
-            try
-            {   //可能會產生錯誤的程式區段
-                fi = new FileInfo(path);
-            }
-            catch (Exception ex)
-            {   //定義產生錯誤時的例外處理程式碼
-                richTextBox1.Text += "錯誤訊息1 : " + ex.Message + "\n";
-                return;
-            }
-            finally
-            {
-                //一定會被執行的程式區段
-            }
-
-            total_size += fi.Length;
-            total_files++;
-            folder_size += fi.Length;
-            folder_files++;
-
-            //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-
-            fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
-        }
+        List<string> al = new List<string>(); //當前歌詞時間表
 
         private void button12_Click(object sender, EventArgs e)
         {
-            fileinfos.Clear();
+            string filename = @"C:\______test_files\_mp3\04-三月雪(&黃妃).mp3";
 
-            string path = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\";
+            string filename_lyrics = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename) + ".lrc");
 
-            richTextBox1.Text += "\n搜尋路徑" + path + "\n";
+            richTextBox1.Text += "f1 = " + filename + "\n";
+            richTextBox1.Text += "f2 = " + filename_lyrics + "\n";
 
-            if (File.Exists(path))
+            if (!File.Exists(filename_lyrics))
             {
-                //給定的路徑是一個檔案
-                ProcessFile(path);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-            }
-            else if (Directory.Exists(path))
-            {
-                //給定的路徑是一個資料夾
-                FolederName = path;
-                ProcessDirectory(path);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "非合法路徑或檔案\n";
+                richTextBox1.Text = "無 歌詞檔案\n";
+                return;
             }
 
-
-            richTextBox1.Text += "\n\n\n";
-
-
-            richTextBox1.Text += "fileinfos len = " + fileinfos.Count.ToString() + "\n";
-
-            richTextBox1.Text += "total_size = " + total_size.ToString() + "\n";
-            richTextBox1.Text += "total_files = " + total_files.ToString() + "\n";
-            //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
-            //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
-
-            int i;
-            int len = fileinfos.Count;
-
-
-            richTextBox1.Text += "照檔名排序:\n";
-            for (i = 0; i < 20; i++)
+            using (StreamReader sr = new StreamReader(new FileStream(filename_lyrics, FileMode.Open), Encoding.Default))
             {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
-                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+                string tempLrc = "";
+                while (!sr.EndOfStream)
+                {
+                    tempLrc = sr.ReadToEnd();
+                }
 
-            }
+                if (tempLrc.Trim() == "")
+                {
+                    this.richTextBox1.Text = "歌詞檔案內容為空";
+                    return;
+                }
 
-            /*
-            richTextBox1.Text += "照大小排序(由大到小):\n";
+                tempLrc = tempLrc.Trim();
+                Regex rg = new Regex("\r*\n*\\[ver:(.*)\\]\r*\n*");
+                tempLrc = rg.Replace(tempLrc, "");
+                rg = new Regex("\r*\n*\\[al:(.*)\\]\r*\n*");
+                tempLrc = rg.Replace(tempLrc, "");
+                rg = new Regex("\r*\n*\\[by:(.*)\\]\r*\n*");
+                tempLrc = rg.Replace(tempLrc, "");
+                rg = new Regex("\r*\n*\\[offset:(.*)\\]\r*\n*");
+                tempLrc = rg.Replace(tempLrc, "");
+                rg = new Regex("\r*\n*\\[ar:(.*)\\]\r*\n*");
+                Match mtch;
+                mtch = rg.Match(tempLrc);
+                tempLrc = rg.Replace(tempLrc, "\n歌手:" + mtch.Groups[1].Value + "\n");
+                rg = new Regex("\r*\n*\\[ti:(.+?)\\]\r*\n*");   //這裡注意貪婪匹配問題.+?
+                mtch = rg.Match(tempLrc);
+                tempLrc = rg.Replace(tempLrc, "\n歌名:" + mtch.Groups[1].Value + "\n");
+                rg = new Regex("\r*\n*\\[[0-9][0-9]:[0-9][0-9].[0-9][0-9]\\]");
+                MatchCollection mc = rg.Matches(tempLrc);
+                al.Clear();
 
-            //排序 由大到小  在return的地方多個負號
-            fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+                foreach (Match m in mc)
+                {
+                    string temp = m.Groups[0].Value;
+                    //this.Text += temp + "+";                        
+                    string mi = temp.Substring(temp.IndexOf('[') + 1, 2);
+                    string se = temp.Substring(temp.IndexOf(':') + 1, 2);
+                    string ms = temp.Substring(temp.IndexOf('.') + 1, 2);   //這是毫秒，其實我只精確到秒，毫秒後面並沒有用
+                    //this.Text += mi + ":" + se + "+";
+                    string time = Convert.ToInt32(mi) * 60 + Convert.ToInt32(se) + "";  //這裡並沒有新增毫秒
+                    al.Add(time);
+                }
 
-            for (i = 0; i < 20; i++)
-            {
-                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
-            }
-
-            richTextBox1.Text += "照大小排序(由小到大):\n";
-
-            //排序 由小到大
-            fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
-
-            for (i = 0; i < 20; i++)
-            {
-                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
-            }
-            */
-
-            //fileinfos[i].filename + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
-
-            //播放單一檔案
-            //axWindowsMediaPlayer1.URL = fileinfos[0].filepath + "\\" + fileinfos[0].filename;   //開啟檔案
-
-            //一次加入到播放清單
-            axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播放列表", "");
-
-            for (i = 0; i < 20; i++)
-            {
-                axWindowsMediaPlayer1.currentPlaylist.appendItem(axWindowsMediaPlayer1.newMedia(fileinfos[i].filepath + "\\" + fileinfos[i].filename));
-                richTextBox1.Text += "加入播放清單: " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
-            }
-            //foreach (string fn in ofd.FileNames)
-            {
-                //axWindowsMediaPlayer1.currentPlaylist.appendItem(axWindowsMediaPlayer1.newMedia(fn));
-                //richTextBox1.Text += "加入播放清單: " + fn + "\n";
+                tempLrc = rg.Replace(tempLrc, "\n");
+                char[] remove = { '\r', '\n', ' ' };
+                this.richTextBox1.Text = tempLrc.TrimStart(remove);
+                this.timer1.Interval = 1000;
+                this.timer1.Tick += ShowLineLrc;
+                this.timer1.Start();
             }
 
 
@@ -611,77 +508,130 @@ namespace 真的只是一個測試1
 
         }
 
+
+        int position = 0;
+        /// <summary>
+        /// 定時器執行的方法，每隔1秒執行一次  歌詞逐行顯示
+        private void ShowLineLrc(object sender, EventArgs e)
+        {
+            //int pos = al.IndexOf(trackBarValue.ToString());
+            position++;
+            int pos = position;
+            bool isAr = this.richTextBox1.Text.Contains("歌手:");
+            bool isTi = this.richTextBox1.Text.Contains("歌名:");
+
+
+            if ((pos >= 0) && (pos < 25))
+            {
+                int n = isAr ? 1 : 0;
+                int m = isTi ? 1 : 0;
+
+                int height = 28 * (this.al.Count + m + n);
+                int max = height - this.richTextBox1.Height;
+
+
+                this.richTextBox1.SelectAll();
+                this.richTextBox1.SelectionColor = Color.Black;
+                this.richTextBox1.SelectionLength = 0;/**/
+
+                int l = this.richTextBox1.Lines[pos + m + n].Length;
+                this.richTextBox1.Select(this.richTextBox1.GetFirstCharIndexFromLine(pos + m + n), l);
+                this.richTextBox1.SelectionColor = Color.OrangeRed;
+                this.richTextBox1.SelectionLength = 0;
+                //this.Text = GetScrollPos(this.richTextBox1.Handle, SB_VERT).ToString() + "-" + al.Count + "-" + this.richTextBox1.Height;
+
+                if ((pos + m + n) * 28 <= max)
+                {
+                    int start = this.richTextBox1.GetFirstCharIndexFromLine(pos + m + n);
+                    this.richTextBox1.SelectionStart = start;
+                    this.richTextBox1.ScrollToCaret();
+
+                }
+                else
+                {
+                    /*
+                    //this.richTextBox1.Focus();
+                    SendMessage(this.richTextBox1.Handle, WM_VSCROLL, SB_BOTTOM, 0);
+                    UpdateWindow(this.richTextBox1.Handle);
+                    //this.richTextBox1.SelectionStart = this.richTextBox1.Text.Length;
+                    //this.richTextBox1.ScrollToCaret();
+                    */
+                }
+
+                /*
+                if (this.lrcForm != null)
+                {
+                    string l1 = this.richTextBox1.Lines[pos + m + n];
+                    string l2;
+                    if ((pos + m + n) < this.richTextBox1.Lines.Length - 1)
+                    {
+                        l2 = this.richTextBox1.Lines[pos + m + n + 1];
+                    }
+                    else
+                    {
+                        l2 = "。。。。。";
+                    }
+
+                    this.lrcForm.setLrc(l1, l2, pos);
+                    //this.lrcForm.setLrc(ArrayList al,);
+
+                }
+                */
+            }
+        }
+
+
+
         private void button13_Click(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer1.settings.setMode("loop", true);   //循環播放
-            axWindowsMediaPlayer1.Ctlcontrols.play();
+            int len = al.Count;
+            richTextBox1.Text = "len = " + len.ToString() + "\n";
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            int len;
-            len = axWindowsMediaPlayer1.currentPlaylist.count;
-            richTextBox1.Text += "目前播放清單內有 : " + len.ToString() + " 首歌\n";
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += axWindowsMediaPlayer1.currentPlaylist.Item[i].name + "\t";
-                richTextBox1.Text += axWindowsMediaPlayer1.currentPlaylist.Item[i].sourceURL + "\n";
-            }
-
-            //清除播放清單內所有資料
-            //axWindowsMediaPlayer1.currentPlaylist.clear();
-            //richTextBox1.Text += "目前播放清單內有 : " + len.ToString() + " 首歌\n";
-
-            //改變檔案位置
-            axWindowsMediaPlayer1.currentPlaylist.moveItem(3, 5);
-
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += axWindowsMediaPlayer1.currentPlaylist.Item[i].name + "\t";
-                richTextBox1.Text += axWindowsMediaPlayer1.currentPlaylist.Item[i].sourceURL + "\n";
-            }
-
-            //移除檔案
-            //axWindowsMediaPlayer1.currentPlaylist.removeItem(fileinfos[4].filepath + "\\" + fileinfos[4].filename);
-
-
-            //state if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsMediaEnded)
-            richTextBox1.Text += "state = " + axWindowsMediaPlayer1.playState.ToString() + "\n";
-
-
+            int len = imageList.Count;
+            richTextBox1.Text += "目前共有 " + len.ToString() + " 張圖片\n";
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("myplaylist");
-            WMPLib.IWMPMedia media;
-
-            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\06.紅燈青燈.mp3");
-            playlist.appendItem(media);
-            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\04.行船人的純情曲.mp3");
-            playlist.appendItem(media);
-            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\07.為錢賭生命.mp3");
-            playlist.appendItem(media);
-            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\08.看破愛別人.mp3");
-            playlist.appendItem(media);
-            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\09.戀歌.mp3");
-            playlist.appendItem(media);
-            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\10.悲戀的酒杯.mp3");
-            playlist.appendItem(media);
-            media = axWindowsMediaPlayer1.newMedia(@"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\_陳一郎_台語精選集6CD\disc1\11.一卡手指.mp3");
-            playlist.appendItem(media);
-
-            axWindowsMediaPlayer1.currentPlaylist = playlist;
-            axWindowsMediaPlayer1.Ctlcontrols.play();
-
-
-            //移除播放清單
-            //axWindowsMediaPlayer1.playlistCollection.remove(playlist);
-
-
 
         }
 
+        private void button16_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+        }
+
+        int index = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            int len = imageList.Count;
+            //richTextBox1.Text += "目前共有 " + len.ToString() + " 張圖片\n";
+
+            this.pictureBox1.Image = Image.FromFile(imageList[index]);
+            richTextBox1.Text += "index = " + index.ToString() + ", show : " + imageList[index] + "\n";
+
+            if (index < (len - 1))
+                index++;
+            else
+                index = 0;
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            //透明的RichTextBox背景
+            this.TransparencyKey = Color.Red;
+            richTextBox1.BackColor = this.TransparencyKey;
+        }
     }
 }

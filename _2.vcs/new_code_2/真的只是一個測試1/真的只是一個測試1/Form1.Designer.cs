@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -50,9 +50,10 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
-            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.bt_clear = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -123,9 +124,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(351, 134);
+            this.richTextBox1.Location = new System.Drawing.Point(351, 367);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(790, 527);
+            this.richTextBox1.Size = new System.Drawing.Size(790, 294);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
@@ -202,7 +203,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(155, 55);
             this.button12.TabIndex = 13;
-            this.button12.Text = "轉出";
+            this.button12.Text = "從mp3檔名找lrc";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -213,7 +214,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(155, 55);
             this.button13.TabIndex = 14;
-            this.button13.Text = "play";
+            this.button13.Text = "info";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -224,7 +225,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(155, 55);
             this.button14.TabIndex = 15;
-            this.button14.Text = "info";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -235,7 +235,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(155, 55);
             this.button15.TabIndex = 16;
-            this.button15.Text = "playlist";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -247,6 +246,7 @@
             this.button16.Size = new System.Drawing.Size(155, 55);
             this.button16.TabIndex = 17;
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button17
             // 
@@ -256,6 +256,7 @@
             this.button17.Size = new System.Drawing.Size(155, 55);
             this.button17.TabIndex = 18;
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button18
             // 
@@ -265,6 +266,7 @@
             this.button18.Size = new System.Drawing.Size(155, 55);
             this.button18.TabIndex = 19;
             this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // button19
             // 
@@ -273,16 +275,9 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(155, 55);
             this.button19.TabIndex = 20;
+            this.button19.Text = "透明的RichTextBox背景";
             this.button19.UseVisualStyleBackColor = true;
-            // 
-            // axWindowsMediaPlayer1
-            // 
-            this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(351, 12);
-            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
-            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(506, 63);
-            this.axWindowsMediaPlayer1.TabIndex = 21;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // bt_clear
             // 
@@ -295,13 +290,28 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 600;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(351, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(382, 336);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 23;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1153, 673);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);
@@ -326,7 +336,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -354,8 +364,9 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
-        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
