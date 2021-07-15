@@ -51,7 +51,7 @@ namespace vcs_RegisterHotKey
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label1.Text = "測試快捷鍵範例" + Environment.NewLine + "Shift + F"+ Environment.NewLine + "Ctrl + P 全螢幕截圖"+ Environment.NewLine + "Alt + Ctrl + C"; 
+            label1.Text = "測試快捷鍵範例" + Environment.NewLine + "Shift + F"+ Environment.NewLine + "Ctrl + P 全螢幕截圖"+ Environment.NewLine + "Alt + Ctrl + C";
             label2.Text = "";
 
             //註冊快捷鍵	  快捷鍵ID        輔助鍵      快捷鍵內容, 以 快捷鍵內容 為準
