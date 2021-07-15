@@ -11,17 +11,13 @@ namespace ScreenCutter
 {
     public partial class Frm_Browser : Form
     {
-        public Frm_Browser()
-        {
-            InitializeComponent();
-        }
         public Image ig;
         private Graphics MainPainter;
         private Pen pen;
         private bool isDowned;
         private Image baseImage;
-        private Rectangle Rect;
-        private bool RectReady;
+        private Rectangle rect;
+        private bool flag_rect_ready;
         private Point downPoint;
         private bool change;
         Rectangle[] Rectpoints;
@@ -29,41 +25,9 @@ namespace ScreenCutter
         int tmpx;
         int tmpy;
 
-        private void DrawRect(Graphics Painter, int Mouse_x, int Mouse_y)
+        public Frm_Browser()
         {
-            int width = 0;
-            int heigth = 0;
-            if (Mouse_y < Rect.Y)
-            {
-                Rect.Y = Mouse_y;
-                heigth = downPoint.Y - Mouse_y;
-            }
-            else
-            {
-                heigth = Mouse_y - downPoint.Y;
-            }
-            if (Mouse_x < Rect.X)
-            {
-                Rect.X = Mouse_x;
-                width = downPoint.X - Mouse_x;
-            }
-            else
-            {
-                width = Mouse_x - downPoint.X;
-            }
-            Rect.Size = new Size(width, heigth);
-            DrawRects(Painter);
-        }
-        private void DrawRects(Graphics Painter)
-        {
-            Painter.DrawRectangle(pen, Rect);
-        }
-
-        private Image DrawScreen(Image back, int Mouse_x, int Mouse_y)
-        {
-            Graphics Painter = Graphics.FromImage(back);
-            DrawRect(Painter, Mouse_x, Mouse_y);
-            return back;
+            InitializeComponent();
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -74,14 +38,52 @@ namespace ScreenCutter
             pen = new Pen(Brushes.Red);
             isDowned = false;
             baseImage = this.BackgroundImage;
-            Rect = new Rectangle();
-            RectReady = false;
+            rect = new Rectangle();
+            flag_rect_ready = false;
             change = false;
             Rectpoints = new Rectangle[8];
             for (int i = 0; i < Rectpoints.Length; i++)
             {
                 Rectpoints[i].Size = new Size(4, 4);
             }
+        }
+
+        private void DrawRect(Graphics Painter, int Mouse_x, int Mouse_y)
+        {
+            int width = 0;
+            int heigth = 0;
+            if (Mouse_y < rect.Y)
+            {
+                rect.Y = Mouse_y;
+                heigth = downPoint.Y - Mouse_y;
+            }
+            else
+            {
+                heigth = Mouse_y - downPoint.Y;
+            }
+            if (Mouse_x < rect.X)
+            {
+                rect.X = Mouse_x;
+                width = downPoint.X - Mouse_x;
+            }
+            else
+            {
+                width = Mouse_x - downPoint.X;
+            }
+            rect.Size = new Size(width, heigth);
+            DrawRects(Painter);
+        }
+
+        private void DrawRects(Graphics Painter)
+        {
+            Painter.DrawRectangle(pen, rect);
+        }
+
+        private Image DrawScreen(Image back, int Mouse_x, int Mouse_y)
+        {
+            Graphics Painter = Graphics.FromImage(back);
+            DrawRect(Painter, Mouse_x, Mouse_y);
+            return back;
         }
 
         private void Form2_KeyUp(object sender, KeyEventArgs e)
@@ -94,12 +96,17 @@ namespace ScreenCutter
 
         private void Form2_DoubleClick(object sender, EventArgs e)
         {
-            if (((MouseEventArgs)e).Button == MouseButtons.Left && Rect.Contains(((MouseEventArgs)e).X, ((MouseEventArgs)e).Y))
+            if ((rect.Size.Width <= 0) || (rect.Size.Height <= 0))
             {
-                Image memory = new Bitmap(Rect.Width-1, Rect.Height-1);
-                Graphics g = Graphics.FromImage(memory);
-                g.CopyFromScreen(Rect.X+1, Rect.Y+1,0, 0, Rect.Size);
-                Clipboard.SetImage(memory);
+                return;
+            }
+
+            if (((MouseEventArgs)e).Button == MouseButtons.Left && rect.Contains(((MouseEventArgs)e).X, ((MouseEventArgs)e).Y))
+            {
+                Image img = new Bitmap(rect.Width - 1, rect.Height - 1);
+                Graphics g = Graphics.FromImage(img);
+                g.CopyFromScreen(rect.X + 1, rect.Y + 1, 0, 0, rect.Size);
+                Clipboard.SetImage(img);
                 this.Close();
             }
         }
@@ -109,15 +116,15 @@ namespace ScreenCutter
             if (e.Button == MouseButtons.Left)
             {
                 isDowned = true;
-                if (RectReady == true)
+                if (flag_rect_ready == true)
                 {
                     tmpx = e.X;
                     tmpy = e.Y;
                 }
                 else
                 {
-                    Rect.X = e.X;
-                    Rect.Y = e.Y;
+                    rect.X = e.X;
+                    rect.Y = e.Y;
                     downPoint = new Point(e.X, e.Y);
                 }
                 for (int i = 0; i < Rectpoints.Length; i++)
@@ -128,17 +135,17 @@ namespace ScreenCutter
                         point = i + 1;
                     }
                 }
-
             }
+
             if (e.Button == MouseButtons.Right)
             {
-                if (RectReady != true)
+                if (flag_rect_ready != true)
                 {
                     this.Close();
                     return;
                 }
                 this.CreateGraphics().DrawImage(baseImage, 0, 0);
-                RectReady = false;
+                flag_rect_ready = false;
             }
         }
 
@@ -147,26 +154,26 @@ namespace ScreenCutter
             if (e.Button == MouseButtons.Left)
             {
                 isDowned = false;
-                RectReady = true;
+                flag_rect_ready = true;
                 change = false;
             }
         }
 
         private void Form2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (RectReady == true)
+            if (flag_rect_ready == true)
             {
-                if (Rect.Contains(e.X, e.Y))
+                if (rect.Contains(e.X, e.Y))
                 {
                     if (isDowned == true && change == false)
                     {
                         //和上一次的位置比较获取偏移量
-                        Rect.X = Rect.X + e.X - tmpx;
-                        Rect.Y = Rect.Y + e.Y - tmpy;
+                        rect.X = rect.X + e.X - tmpx;
+                        rect.Y = rect.Y + e.Y - tmpy;
                         //记录现在的位置
                         tmpx = e.X;
                         tmpy = e.Y;
-                        MoveRect((Image)baseImage.Clone(), Rect);
+                        MoveRect((Image)baseImage.Clone(), rect);
                     }
                 }
                 //if (change == true && isDowned == true)
@@ -215,28 +222,28 @@ namespace ScreenCutter
                 case ChangeSide.LeftBottom:
                     break;
                 case ChangeSide.LeftTop:
-                    Rect.Y = Position_y;
+                    rect.Y = Position_y;
                     break;
                 case ChangeSide.Bottom:
                     break;
                 case ChangeSide.Top:
                     break;
                 case ChangeSide.Right:
-                    if (Position_x < Rect.X)
+                    if (Position_x < rect.X)
                     {
-                        Rect.Size = new Size(tmpx - Position_x + Rect.Width, Rect.Height);
-                        Rect.X = Position_x;
+                        rect.Size = new Size(tmpx - Position_x + rect.Width, rect.Height);
+                        rect.X = Position_x;
                         //记录现在的位置
                         tmpx = Position_x;
                     }
                     else
-                        Rect.Size = new Size(Position_x - Rect.X, Rect.Height);
+                        rect.Size = new Size(Position_x - rect.X, rect.Height);
                     break;
                 case ChangeSide.RightBottom:
-                    Rect.Size = new Size(Position_x - Rect.X, Position_y - Rect.Y);
+                    rect.Size = new Size(Position_x - rect.X, Position_y - rect.Y);
                     break;
                 case ChangeSide.RightTop:
-                    Rect.Size = new Size(Position_x - Rect.X, Rect.Height + Rectpoints[5].Y - Position_y);
+                    rect.Size = new Size(Position_x - rect.X, rect.Height + Rectpoints[5].Y - Position_y);
                     break;
             }
             DrawRects(Painter);
@@ -275,3 +282,4 @@ namespace ScreenCutter
         }
     }
 }
+

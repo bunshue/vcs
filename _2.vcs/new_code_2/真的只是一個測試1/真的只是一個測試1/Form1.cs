@@ -16,7 +16,7 @@ using System.IO;    //for StreamReader
 using System.Net;   //for HttpWebRequest HttpWebResponse
 
 using System.Collections;   //for DictionaryEntry
-
+using System.Drawing.Imaging;   //for ImageFormat
 
 using System.Text.RegularExpressions;
 
@@ -547,6 +547,16 @@ namespace 真的只是一個測試1
 
         private void button14_Click(object sender, EventArgs e)
         {
+            if (button14.Text == "啟動 CopyFromScreen")
+            {
+                button14.Text = "關閉 CopyFromScreen";
+                timer1.Enabled = true;
+            }
+            else
+            {
+                button14.Text = "啟動 CopyFromScreen";
+                timer1.Enabled = false;
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -569,10 +579,56 @@ namespace 真的只是一個測試1
 
         private void button16_Click(object sender, EventArgs e)
         {
+            save_current_program_to_local_drive();  //本程式截圖
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            save_fullscreen_to_local_drive();       //全螢幕截圖
+        }
+
+        void save_current_program_to_local_drive()
+        {
+            //本程式截圖
+            int W = this.Width;
+            int H = this.Height;
+
+            using (Bitmap bmp = new Bitmap(W, H))
+            {
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.CopyFromScreen(this.Location, new Point(0, 0), new Size(W, H));
+                    //richTextBox1.Text += "W = " + W.ToString() + "\n";
+                    //richTextBox1.Text += "H = " + H.ToString() + "\n";
+                }
+                //存成bmp檔
+                String filename = "C:\\dddddddddd\\program_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                bmp.Save(filename, ImageFormat.Bmp);
+
+                richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
+            }
+        }
+
+        void save_fullscreen_to_local_drive()
+        {
+            //全螢幕截圖
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
+
+            using (Bitmap bmp = new Bitmap(W, H))
+            {
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
+                    //richTextBox1.Text += "W = " + W.ToString() + "\n";
+                    //richTextBox1.Text += "H = " + H.ToString() + "\n";
+                }
+                //存成bmp檔
+                String filename = "C:\\dddddddddd\\full_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                bmp.Save(filename, ImageFormat.Bmp);
+
+                richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
+            }
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -589,8 +645,33 @@ namespace 真的只是一個測試1
             richTextBox1.BackColor = this.TransparencyKey;
         }
 
+        int x_st = 0;
+        int y_st = 0;
+
         private void timer1_Tick(object sender, EventArgs e)
         {
+            Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+            this.Text = pt.ToString();
+
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
+            int w = 200;
+            int h = 200;
+            Bitmap bitmap1 = new Bitmap(w, h);  //, PixelFormat.Format32bppArgb);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            //                    來源位置             目的位置      要傳輸的區域大小  判斷在像素複製作業中來源色彩如何與目的色彩結合以產生最後的色彩
+            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h), CopyPixelOperation.SourceInvert);
+            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h));
+            g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
+            g.Dispose();
+
+            pictureBox1.Image = bitmap1;
+            pictureBox1.Size = bitmap1.Size;
+
+            x_st += 50;
+            if (x_st > 600)
+                x_st = 0;
 
         }
     }

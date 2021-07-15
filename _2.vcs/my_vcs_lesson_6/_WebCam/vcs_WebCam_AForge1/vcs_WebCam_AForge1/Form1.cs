@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Imaging;   //for ImageFormat
 
 using AForge.Video;             //需要添加這兩個.dll
@@ -40,15 +41,23 @@ namespace vcs_WebCam_AForge1
             {
                 ///---实例化对象
                 USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-                richTextBox1.Text += "WebCam數目 : " + USBWebcams.Count.ToString() + "\n";
+
+                int webcam_count = USBWebcams.Count;
+                richTextBox1.Text += "WebCam數目 : " + webcam_count.ToString() + "\n";
+                int i;
+                for (i = 0; i < webcam_count; i++)
+                {
+                    richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
+                    richTextBox1.Text += "WebCam Name : " + USBWebcams[i].Name + "\n";
+                    richTextBox1.Text += "WebCam MonikerString Length : " + USBWebcams[i].MonikerString.Length.ToString() + "\n";
+                    richTextBox1.Text += "WebCam MonikerString : " + USBWebcams[i].MonikerString + "\n";
+                    richTextBox1.Text += "\n";
+                }
+                richTextBox1.Text += "\n";
 
                 ///---摄像头数量大于0
-                if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+                if (webcam_count > 0)  // The quantity of WebCam must be more than 0.
                 {
-                    richTextBox1.Text += "WebCam Name : " + USBWebcams[0].Name + "\n";
-                    richTextBox1.Text += "WebCam MonikerString Length : " + USBWebcams[0].MonikerString.Length.ToString() + "\n";
-                    richTextBox1.Text += "WebCam MonikerString : " + USBWebcams[0].MonikerString + "\n";
-
                     button1.Enabled = true;
                     ///---实例化对象
                     Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
@@ -57,13 +66,11 @@ namespace vcs_WebCam_AForge1
 
                     richTextBox1.Text += "Cam.Source = " + Cam.Source + "\n";
                     richTextBox1.Text += "Cam.Source.Length " + Cam.Source.Length.ToString() + "\n";
-
                     richTextBox1.Text += "VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
-
                     //richTextBox1.Text += "aaa" + Cam.VideoResolution.AverageFrameRate.ToString() + "\n";  XXXX
                     //richTextBox1.Text += "aaa" + Cam.VideoResolution.FrameRate.ToString() + "\n"; XXXXX
 
-                    int i;
+                    //int i;
                     int len;
                     len = Cam.VideoCapabilities.Length;
                     for (i = 0; i < len; i++)
@@ -81,7 +88,6 @@ namespace vcs_WebCam_AForge1
                     button1.Enabled = false;
                     richTextBox1.Text += "無影像裝置\n";
                 }
-
             }
             catch (Exception ex)
             {

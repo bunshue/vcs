@@ -280,6 +280,7 @@ namespace vcs_PicPick2
                     {
                         case 81:    //按下的是Shift+Q                   
                             getImg();
+                            this.TopMost = true;
                             break;
                     }
                     break;

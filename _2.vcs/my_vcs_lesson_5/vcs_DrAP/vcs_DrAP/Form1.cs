@@ -1606,7 +1606,7 @@ namespace vcs_DrAP
 
             if (res == true)
             {
-                if (search_mode == SEARCH_MODE_VCS)
+                if (search_mode == SEARCH_MODE_VCS) //有一些vcs檔案 要跳開 (先改成小寫名)
                 {
                     if (fi.FullName.ToLower().Replace(" ", "").Contains("designer"))
                     {
@@ -1618,7 +1618,7 @@ namespace vcs_DrAP
                         res = false;
                         return;
                     }
-                    else if (fi.FullName.ToLower().Replace(" ", "").Contains("AssemblyInfo.cs"))
+                    else if (fi.FullName.ToLower().Replace(" ", "").Contains("assemblyinfo.cs"))
                     {
                         res = false;
                         return;

@@ -225,6 +225,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(155, 55);
             this.button14.TabIndex = 15;
+            this.button14.Text = "啟動 CopyFromScreen";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -246,6 +247,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(155, 55);
             this.button16.TabIndex = 17;
+            this.button16.Text = "本程式截圖";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -256,6 +258,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(155, 55);
             this.button17.TabIndex = 18;
+            this.button17.Text = "全螢幕截圖";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -294,16 +297,17 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(351, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(382, 336);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.Size = new System.Drawing.Size(310, 310);
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
             // 
             // timer1
             // 
-            this.timer1.Interval = 600;
+            this.timer1.Interval = 300;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
