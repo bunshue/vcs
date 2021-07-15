@@ -331,12 +331,6 @@ namespace vcs_Clipboard
             richTextBox1.Text += "將文字資料放置到Clipboard中\n";
             string data = "翠盖龙旗出建章 莺啼百啭柳初黄";
             Clipboard.SetDataObject(data);	//向Clipboard中放置資料
-
-            //string text = Clipboard.GetText();
-            //Console.WriteLine(text);
-
-
-
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -379,12 +373,10 @@ namespace vcs_Clipboard
                 for (i = 0; i < cnt; i++)
                 {
                     richTextBox1.Text += "取得檔案 : " + Path.GetFileName(Clipboard.GetFileDropList()[i]) + "\n";
-
                 }
-
             }
-
             richTextBox1.Text += "\n";
+
             //因為Clipboard是可以複製多個檔案的所有要遍歷獲取
             System.Collections.Specialized.StringCollection sc = Clipboard.GetFileDropList();
             richTextBox1.Text += "在檔案總管中, 複製 或 剪下的檔案:\n";
@@ -392,10 +384,6 @@ namespace vcs_Clipboard
             {
                 richTextBox1.Text += "取得檔案 : " + item + "\n";
             }
-
-
-
-
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -437,7 +425,7 @@ namespace vcs_Clipboard
 
         private void button22_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Clipboard內的影像顯示存檔\t部分\n";
+            richTextBox1.Text += "Clipboard內的影像顯示存檔\t部分\t九宮格之正中\n";
 
             bool flag = Clipboard.ContainsImage();  //判斷Clipboard中是否包含圖片資料
             richTextBox1.Text += "Clipboard 是否包含圖片資料 : " + flag.ToString() + "\n";
@@ -453,47 +441,43 @@ namespace vcs_Clipboard
                 int w = W / 3;
                 int h = H / 3;
 
-                //TBD
+                RectangleF rect = new RectangleF(x_st, y_st, w, h);
 
-                //Image img_new = img.Clone(new RectangleF(x_st, y_st, w, h), PixelFormat.Format32bppArgb);
-                pictureBox_clipboard.Image = img;
+                Bitmap bitmap1;
 
-                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-                Bitmap bitmap1 = (Bitmap)img;
-
-                if (bitmap1 != null)
+                try
                 {
-                    try
-                    {
-                        //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                        bitmap1.Save(filename, ImageFormat.Bmp);
-                        //bitmap1.Save(@file3, ImageFormat.Png);
+                    // 擷取部份影像，顯示於pictureBox2，區域為(起點x座標, 起點y座標, 寬度, 高度)
+                    bitmap1 = ((Bitmap)img).Clone(rect, PixelFormat.Format32bppArgb);
+                    pictureBox_clipboard.Image = bitmap1;
 
-                        richTextBox1.Text += "存檔成功\n";
-                        richTextBox1.Text += "已存檔 : " + filename + "\n";
-                    }
-                    catch (Exception ex)
+                    string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+                    if (bitmap1 != null)
                     {
-                        richTextBox1.Text += "xxx錯誤訊息b2 : " + ex.Message + "\n";
-                        //show_main_message1("存檔失敗", S_OK, 30);
-                        //show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
+                        try
+                        {
+                            //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                            bitmap1.Save(filename, ImageFormat.Bmp);
+                            //bitmap1.Save(@file3, ImageFormat.Png);
+
+                            richTextBox1.Text += "存檔成功\n";
+                            richTextBox1.Text += "已存檔 : " + filename + "\n";
+                        }
+                        catch (Exception ex)
+                        {
+                            richTextBox1.Text += "xxx錯誤訊息b2 : " + ex.Message + "\n";
+                            //show_main_message1("存檔失敗", S_OK, 30);
+                            //show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息p : " + ex.Message + "\t";
+                }
             }
-
-
         }
-
-
-
-
-
-
-
-
-
-
     }
 
     [Serializable()]    //必要的一行

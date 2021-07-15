@@ -39,6 +39,10 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.br_clear_listbox = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,17 +130,61 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(523, 37);
+            this.richTextBox1.Location = new System.Drawing.Point(560, 37);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(440, 414);
+            this.richTextBox1.Size = new System.Drawing.Size(403, 414);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(881, 409);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(63, 23);
+            this.bt_clear.TabIndex = 9;
+            this.bt_clear.Text = "clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(468, 435);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 10;
+            this.button5.Text = "匯出清單";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(468, 409);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 11;
+            this.button6.Text = "讀入清單";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // br_clear_listbox
+            // 
+            this.br_clear_listbox.Location = new System.Drawing.Point(399, 366);
+            this.br_clear_listbox.Name = "br_clear_listbox";
+            this.br_clear_listbox.Size = new System.Drawing.Size(63, 23);
+            this.br_clear_listbox.TabIndex = 12;
+            this.br_clear_listbox.Text = "clear";
+            this.br_clear_listbox.UseVisualStyleBackColor = true;
+            this.br_clear_listbox.Click += new System.EventHandler(this.br_clear_listbox_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 472);
+            this.Controls.Add(this.br_clear_listbox);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.label2);
@@ -167,6 +215,10 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button br_clear_listbox;
     }
 }
 

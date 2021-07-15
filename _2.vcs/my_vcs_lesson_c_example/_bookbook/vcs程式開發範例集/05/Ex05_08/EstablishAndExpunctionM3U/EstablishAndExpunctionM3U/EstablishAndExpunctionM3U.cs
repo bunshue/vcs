@@ -61,12 +61,12 @@ namespace EstablishAndExpunctionM3U
                 MessageBox.Show("文件不存在！");//彈出訊息提示
                 return;//直接傳回
             }
-            StreamWriter ASW = new StreamWriter(FileDir, true, Encoding.Default);//定義完成一個 TextWriter對象，使其以一種特定的編碼向流中寫入字符
-            ASW.WriteLine();//將行結束符寫入文字流
-            ASW.Write(FDir, Encoding.Default);//將數據流中的文件以特定的編碼方式寫入指定路徑中的文件
-            ASW.Flush();//清理目前編寫器的所有緩衝區，並使所有緩衝數據寫入基礎串流
-            ASW.Close();//關閉目前的 StreamWriter 對像和基礎串流
-            ASW.Dispose();//釋放由此 TextWriter 對像使用的所有資源
+            StreamWriter sw = new StreamWriter(FileDir, true, Encoding.Default);//定義完成一個 TextWriter對象，使其以一種特定的編碼向流中寫入字符
+            sw.WriteLine();//將行結束符寫入文字流
+            sw.Write(FDir, Encoding.Default);//將數據流中的文件以特定的編碼方式寫入指定路徑中的文件
+            sw.Flush();//清理目前編寫器的所有緩衝區，並使所有緩衝數據寫入基礎串流
+            sw.Close();//關閉目前的 StreamWriter 對像和基礎串流
+            sw.Dispose();//釋放由此 TextWriter 對像使用的所有資源
         }
         #endregion
 

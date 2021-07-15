@@ -14,7 +14,6 @@ namespace SongPlayShroudAegis
     public partial class Form1 : Form
     {
         int width = 0, heigh = 0;
-        string strpath;
         string foldername = @"C:\______test_files\_mp3b";
 
         public Form1()
@@ -24,17 +23,15 @@ namespace SongPlayShroudAegis
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            strpath = Environment.SystemDirectory + "\\music";
-            strpath = foldername;
-
-            this.timer1.Enabled = true;
+            timer1.Enabled = true;
             width = this.Width;
             heigh = this.Height;
         }
 
         private void Form1_Click(object sender, EventArgs e)
         {
-            ExitWindows();
+            timer1.Enabled = false;
+            Application.Exit();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -47,12 +44,12 @@ namespace SongPlayShroudAegis
                 label1.Text += strname + "  ";
                 if (this.axWindowsMediaPlayer1.status == "" || this.axWindowsMediaPlayer1.status == "已停止")
                 {
-                    string strUrl = strpath + "\\" + strname + ".mp3";
+                    string strUrl = foldername + "\\" + strname + ".mp3";
                     this.axWindowsMediaPlayer1.URL = strUrl;
                     label1.Text += strUrl + " ";
                 }
             }
-            catch(Exception eb)
+            catch (Exception eb)
             {
                 timer1.Enabled = false;
                 MessageBox.Show(eb.Message);
@@ -61,20 +58,12 @@ namespace SongPlayShroudAegis
 
         private void drowInfo()
         {
-            Graphics myGraphics = this.CreateGraphics();
-            myGraphics.Clear(Color.Black);
+            Graphics g = this.CreateGraphics();
+            g.Clear(Color.Black);
             string strinfo = "歌曲播放螢幕保護";
             int x = new Random().Next(0, width - 250);
-            int y = new Random().Next(50, heigh-20);
-            myGraphics.DrawString(strinfo, new Font("標楷體", 30, FontStyle.Bold), new SolidBrush(Color.FromArgb(new Random().Next(50, 255), new Random().Next(70, 255), new Random().Next(36, 255))),x,y);
-
+            int y = new Random().Next(50, heigh - 20);
+            g.DrawString(strinfo, new Font("標楷體", 30, FontStyle.Bold), new SolidBrush(Color.FromArgb(new Random().Next(50, 255), new Random().Next(70, 255), new Random().Next(36, 255))), x, y);
         }
-
-        private void ExitWindows()
-        {
-            this.timer1.Enabled = false;
-            Application.Exit();
-        }
-
     }
 }

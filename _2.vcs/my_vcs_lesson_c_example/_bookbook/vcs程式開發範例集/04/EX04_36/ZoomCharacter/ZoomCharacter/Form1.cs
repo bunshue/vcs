@@ -27,8 +27,8 @@ namespace ZoomCharacter
             Graphics g = panel1.CreateGraphics();//建立控制元件的Graphics類
             g.Clear(Color.White);//以指定的顏色清除控制元件背景
             Brush Var_Back = Brushes.Black;//設定畫刷
-            FontFamily Var_FontFamily = new FontFamily("細明體");//設定字體樣式
-            string Var_Str = "縮放文字";//設定字串
+            FontFamily Var_FontFamily = new FontFamily("標楷體");//設定字體樣式
+            string Var_Str = "海納百川，有容乃大；壁立千仞，無欲則剛。";//設定字串
 
             //SizeF Var_Size = g.MeasureString(Var_Str, Var_Font);//取得字串的大小
             //int Var_X = (panel1.Width - Convert.ToInt32(Var_Size.Width)) / 2;//設定平移的X座標
