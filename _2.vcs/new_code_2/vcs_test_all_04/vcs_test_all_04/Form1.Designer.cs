@@ -127,7 +127,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(132, 49);
             this.button6.TabIndex = 6;
-            this.button6.Text = "是否安裝音效卡";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -156,7 +155,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(132, 49);
             this.button9.TabIndex = 9;
-            this.button9.Text = "光碟機關閉";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -166,7 +164,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(132, 49);
             this.button8.TabIndex = 10;
-            this.button8.Text = "光碟機打開";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 

@@ -74,6 +74,9 @@ namespace vcs_PicPick2
 
         public string path;
 
+        string Cursor;
+        string PicPath;
+
         public Form1()
         {
             InitializeComponent();
@@ -81,7 +84,9 @@ namespace vcs_PicPick2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            txtSavaPath.Text = @"C:\dddddddddd";
+            PicPath = txtSavaPath.Text.Trim();
+            RegisterHotKey(Handle, 81, KeyModifiers.Shift, Keys.F); //Shift + F 為快速鍵
         }
 
         public void IniWriteValue(string section, string key, string value)
@@ -153,8 +158,6 @@ namespace vcs_PicPick2
             return null;
         }
 
-        string Cursor;
-        string PicPath;
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -163,6 +166,7 @@ namespace vcs_PicPick2
                 path = path.Substring(0, path.LastIndexOf("\\"));
                 path = path.Substring(0, path.LastIndexOf("\\"));
                 path += @"\Setup.ini";
+
                 if (checkBox1.Checked == true)
                 {
                     Cursor = "1";
@@ -171,6 +175,7 @@ namespace vcs_PicPick2
                 {
                     Cursor = "0";
                 }
+
                 if (txtSavaPath.Text == "")
                 {
                     PicPath = @"D:\";
@@ -189,29 +194,14 @@ namespace vcs_PicPick2
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                txtSavaPath.Text = folderBrowserDialog1.SelectedPath;
-            }
-        }
-
         private void Form1_StyleChanged(object sender, EventArgs e)
         {
-            RegisterHotKey(Handle, 81, KeyModifiers.Shift, Keys.F);
         }
+
         public bool flag = true;
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //注销Id号为81的热键设定    
-            UnregisterHotKey(Handle, 81);
-            timer1.Stop();
+            UnregisterHotKey(Handle, 81);   //注销Id号为81的热键设定
             flag = false;
             Application.Exit();
         }
@@ -227,6 +217,7 @@ namespace vcs_PicPick2
             path += @"\Setup.ini";
             MyCursor = IniReadValue("Setup", "CapMouse");
             MyPicPath = IniReadValue("Setup", "Dir");
+
             if (MyCursor == "" || MyPicPath == "")
             {
                 checkBox1.Checked = true;
@@ -278,9 +269,9 @@ namespace vcs_PicPick2
                 case WM_HOTKEY:
                     switch (m.WParam.ToInt32())
                     {
-                        case 81:    //按下的是Shift+Q                   
+                        case 81:    //按下的是Shift+F
+                            richTextBox1.Text += "存圖\n";
                             getImg();
-                            this.TopMost = true;
                             break;
                     }
                     break;
@@ -298,13 +289,9 @@ namespace vcs_PicPick2
             this.Show();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            RegisterHotKey(Handle, 81, KeyModifiers.Shift, Keys.F);
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            UnregisterHotKey(Handle, 81);   //注销Id号为81的热键设定
             this.Hide();
             if (flag == true)
             {

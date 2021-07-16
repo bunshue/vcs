@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Diagnostics;   //for StopWatch
+
 using AForge.Video;
 using AForge.Video.DirectShow;
 
@@ -18,6 +20,7 @@ namespace vcs_WebCam_AForge0b
     {
         FilterInfoCollection USBWebcams;
         AForge.Controls.VideoSourcePlayer vsp;
+        Stopwatch sw;
 
         public Form1()
         {
@@ -26,7 +29,9 @@ namespace vcs_WebCam_AForge0b
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            button1.Location = new Point(680, 20);
+            lb_fps.Text = "";
+            lb_fps.Location = new Point(680, 20);
+            button1.Location = new Point(800, 20);
             richTextBox1.Location = new Point(680, 60);
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
@@ -50,7 +55,10 @@ namespace vcs_WebCam_AForge0b
 
                 vsp.Size = new Size(ww, hh);
                 vsp.Location = new Point(20, 20);
-                this.ClientSize = new Size(vsp.Size.Width + 40+160, vsp.Size.Height + 40);
+                this.ClientSize = new Size(vsp.Size.Width + 250, vsp.Size.Height + 40);
+
+                sw = new Stopwatch();
+                sw.Start();
             }
             else
             {
@@ -70,6 +78,35 @@ namespace vcs_WebCam_AForge0b
             var bitmap = vsp.GetCurrentVideoFrame();
             bitmap.Save(filename, System.Drawing.Imaging.ImageFormat.Jpeg);
             richTextBox1.Text += "已存檔 : " + filename + "\n";
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (sw == null)
+            {
+                sw = new Stopwatch();
+                sw.Start();
+            }
+            else
+            {
+                sw.Stop();
+
+                IVideoSource ivs = vsp.VideoSource;
+                int framesReceived1 = 0;
+
+                // get number of frames for the last second
+                if (ivs != null)
+                {
+                    framesReceived1 = ivs.FramesReceived;   //讀過資料後 會歸零
+
+                    float fps = 1000.0f * framesReceived1 / sw.ElapsedMilliseconds;
+
+                    lb_fps.Text = fps.ToString("F2") + " fps";
+
+                    sw.Reset();
+                    sw.Start();
+                }
+            }
         }
     }
 }

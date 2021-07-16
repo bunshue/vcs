@@ -341,18 +341,45 @@ namespace vcs_System2
 
         }
 
+        //是否安裝音效卡 ST
+        [DllImport("winmm.dll", EntryPoint = "waveOutGetNumDevs")]
+        public static extern int waveOutGetNumDevs();
         private void button12_Click(object sender, EventArgs e)
         {
+            if (waveOutGetNumDevs() != 0)
+            {
+                richTextBox1.Text += "已安裝音效卡\n";
+            }
+            else
+            {
+                richTextBox1.Text += "未安裝音效卡\n";
+            }
         }
+        //是否安裝音效卡 SP
 
+        //光碟機開關 ST
+        [DllImport("winmm.dll", EntryPoint = "mciSendString")]
+        public static extern int mciSendString(string lpstrCommand, string lpstrReturnString, System.UInt16 uReturnLength, System.IntPtr HwndCallback);
         private void button13_Click(object sender, EventArgs e)
         {
+            //光碟機打開
+            int i = mciSendString("Set cdaudio door open wait", "", 0, this.Handle);
+            if (i == 0)
+            {
+                richTextBox1.Text += "光碟機打開\n";
+            }
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-
+            //光碟機關閉
+            int i = mciSendString("Set cdaudio door Closed wait", "", 0, this.Handle);
+            if (i == 0)
+            {
+                richTextBox1.Text += "光碟機關閉\n";
+            }
         }
+        //光碟機開關 SP
 
         private void button15_Click(object sender, EventArgs e)
         {
@@ -566,9 +593,5 @@ namespace vcs_System2
         private void button46_Click(object sender, EventArgs e)
         {
         }
-
-
-
-
     }
 }
