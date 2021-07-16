@@ -34,6 +34,11 @@ namespace AutomaticPlayImplement
             richTextBox1.Clear();
         }
 
+        private void br_clear_listbox_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+        }
+
         public void GetAllFiles(DirectoryInfo dir)
         {
             FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();
@@ -69,17 +74,30 @@ namespace AutomaticPlayImplement
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "播放\n";
-            if (MC != null)
-                this.axWindowsMediaPlayer1.Ctlcontrols.play();
+            if (button2.Text == "播放")
+            {
+                if (MC != null)
+                {
+                    richTextBox1.Text += "播放\n";
+                    this.Text = axWindowsMediaPlayer1.Ctlcontrols.currentItem.name;
+                    this.axWindowsMediaPlayer1.Ctlcontrols.play();
+                    button2.Text = "停止";
+                }
+                else
+                {
+                    richTextBox1.Text += "請添加播放清單\n";
+                }
+            }
             else
-                MessageBox.Show("请添加文件列表");
+            {
+                richTextBox1.Text += "停止播放\n";
+                this.axWindowsMediaPlayer1.Ctlcontrols.stop();
+                button2.Text = "播放";
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "停止播放\n";
-            this.axWindowsMediaPlayer1.Ctlcontrols.stop();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -91,6 +109,7 @@ namespace AutomaticPlayImplement
             richTextBox1.Text += "下一首\t";
             richTextBox1.Text += this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.name + "\t";
             richTextBox1.Text += this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.sourceURL + "\n";
+            this.Text = axWindowsMediaPlayer1.Ctlcontrols.currentItem.name;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -102,6 +121,7 @@ namespace AutomaticPlayImplement
             richTextBox1.Text += "上一首\t";
             richTextBox1.Text += this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.name + "\t";
             richTextBox1.Text += this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.sourceURL + "\n";
+            this.Text = axWindowsMediaPlayer1.Ctlcontrols.currentItem.name;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

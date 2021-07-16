@@ -12,7 +12,6 @@ namespace InvolveMemorizePlayImplement
 {
     public partial class Form1 : Form
     {
-        static int index = 0;
         string filename_r = @"C:\______test_files\_mp3\list.m3u";
 
         public Form1()
@@ -22,6 +21,7 @@ namespace InvolveMemorizePlayImplement
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Text = "mp3播放器";
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -44,39 +44,55 @@ namespace InvolveMemorizePlayImplement
             {
                 foreach (string str in openFileDialog1.FileNames)
                 {
+                    //richTextBox1.Text += "str = " + str + "\n";
                     listBox1.Items.Add(str);
                 }
+
+                if (openFileDialog1.FileNames.Length == listBox1.Items.Count)   //初次加入清單 預設播放第一首
+                {
+                    this.Text = listBox1.Items[0].ToString();
+                    axWindowsMediaPlayer1.URL = listBox1.Items[0].ToString();
+                }
+
+                richTextBox1.Text += "本次開啟檔案 : " + openFileDialog1.FileNames.Length.ToString() + " 個\t";
+                richTextBox1.Text += "清單內共有檔案 : " + listBox1.Items.Count.ToString() + " 個\n";
             }
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
-            string strPath = listBox1.Items[listBox1.SelectedIndex].ToString();
-            ShowPlay(strPath);
-        }
-
-        private void ShowPlay(string Path)
-        {
-            label2.Text = Path;
-            axWindowsMediaPlayer1.URL = Path;
+            string str = listBox1.Items[listBox1.SelectedIndex].ToString();
+            this.Text = str;
+            axWindowsMediaPlayer1.URL = str;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            index += 1;
-            if (index % 2 == 0)
+            if (button3.Text == "暫停")
             {
-                axWindowsMediaPlayer1.Ctlcontrols.play();
+                button3.Text = "繼續";
+                axWindowsMediaPlayer1.Ctlcontrols.pause();
             }
             else
             {
-                axWindowsMediaPlayer1.Ctlcontrols.pause();
+                button3.Text = "暫停";
+                axWindowsMediaPlayer1.Ctlcontrols.play();
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ShowPlay(openFileDialog1.FileName);
+            richTextBox1.Text += "old filename = " + openFileDialog1.FileName + "\n";
+            richTextBox1.Text += "url = " + axWindowsMediaPlayer1.URL + "\n";
+            if (axWindowsMediaPlayer1.URL == "")
+            {
+                richTextBox1.Text += "無檔可播\n";
+            }
+            else
+            {
+                this.Text = axWindowsMediaPlayer1.URL;
+                axWindowsMediaPlayer1.Ctlcontrols.play();
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -91,11 +107,11 @@ namespace InvolveMemorizePlayImplement
             StreamReader sr = new StreamReader(filename_r, Encoding.Default);
             while (sr.Peek() >= 0)
             {
-                string strk = sr.ReadLine();
-                if (strk != "")
+                string line = sr.ReadLine();
+                if (line != "")
                 {
-                    richTextBox1.Text += "加入項目 : " + strk + "\n";
-                    listBox1.Items.Add(strk);
+                    richTextBox1.Text += "加入項目 : " + line + "\n";
+                    listBox1.Items.Add(line);
                 }
             }
             sr.Close();
@@ -109,7 +125,8 @@ namespace InvolveMemorizePlayImplement
             int len = listBox1.Items.Count;
             if (len > 0)
             {
-                StreamWriter sw = new StreamWriter(filename_w, true);
+                FileStream fs = new FileStream(filename_w, FileMode.Create, FileAccess.Write);
+                StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("Unicode"));   //指名編碼格式
 
                 int i;
                 for (i = 0; i < len; i++)

@@ -14,9 +14,9 @@ namespace vcs_RegisterHotKey
 {
     public partial class Form1 : Form
     {
-        #region 定义快捷键
-        //如果函数执行成功，返回值不为0。       
-        //如果函数执行失败，返回值为0。要得到扩展错误信息，调用GetLastError。        
+        //定義快捷鍵 ST
+        //如果函數執行成功，返回值不为0。       
+        //如果函數執行失敗，返回值为0。要得到扩展错误信息，调用GetLastError。        
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool RegisterHotKey(
@@ -42,7 +42,7 @@ namespace vcs_RegisterHotKey
             Shift = 4,
             WindowsKey = 8
         }
-        #endregion
+        //定義快捷鍵 SP
 
         public Form1()
         {
@@ -53,6 +53,7 @@ namespace vcs_RegisterHotKey
         {
             label1.Text = "測試快捷鍵範例" + Environment.NewLine + "Shift + F"+ Environment.NewLine + "Ctrl + P 全螢幕截圖"+ Environment.NewLine + "Alt + Ctrl + C";
             label2.Text = "";
+            label3.Text = "";
 
             //註冊快捷鍵	  快捷鍵ID        輔助鍵      快捷鍵內容, 以 快捷鍵內容 為準
             RegisterHotKey(Handle, 70, KeyModifiers.Shift, Keys.F); // Shift + F
@@ -122,7 +123,7 @@ namespace vcs_RegisterHotKey
                 String filename = "C:\\dddddddddd\\full_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
                 bmp.Save(filename, ImageFormat.Bmp);
 
-                //richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
+                label3.Text = "全螢幕截圖，存檔檔名：" + filename;
             }
         }
     }

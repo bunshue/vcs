@@ -29,6 +29,8 @@ namespace vcs_RegisterHotKey_PrintScreen
         private void Form1_Load(object sender, EventArgs e)
         {
             label1.Text = "測試快捷鍵範例" + Environment.NewLine + "PrintScreen 全螢幕截圖";
+            label2.Text = "";
+            label3.Text = "";
 
             _RegisKey.Keys = Keys.PrintScreen;
             _RegisKey.ModKey = 0;
@@ -56,7 +58,7 @@ namespace vcs_RegisterHotKey_PrintScreen
                 String filename = "C:\\dddddddddd\\full_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
                 bmp.Save(filename, ImageFormat.Bmp);
 
-                //richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
+                label3.Text = "全螢幕截圖，存檔檔名：" + filename;
             }
         }
 

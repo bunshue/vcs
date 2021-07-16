@@ -39,6 +39,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.br_clear_listbox = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +51,7 @@
             this.listBox1.Location = new System.Drawing.Point(12, 10);
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(480, 352);
+            this.listBox1.Size = new System.Drawing.Size(487, 352);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
@@ -58,7 +59,7 @@
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(519, 16);
+            this.button1.Location = new System.Drawing.Point(12, 378);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(151, 86);
             this.button1.TabIndex = 2;
@@ -69,7 +70,7 @@
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(519, 120);
+            this.button2.Location = new System.Drawing.Point(12, 482);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(151, 36);
             this.button2.TabIndex = 13;
@@ -80,28 +81,27 @@
             // axWindowsMediaPlayer1
             // 
             this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(12, 379);
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(12, 561);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(658, 29);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(487, 29);
             this.axWindowsMediaPlayer1.TabIndex = 4;
             this.axWindowsMediaPlayer1.Visible = false;
             // 
             // button3
             // 
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(519, 174);
+            this.button3.Location = new System.Drawing.Point(188, 466);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(151, 36);
             this.button3.TabIndex = 14;
-            this.button3.Text = "停止";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(613, 232);
+            this.button4.Location = new System.Drawing.Point(282, 375);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(55, 55);
             this.button4.TabIndex = 15;
@@ -111,16 +111,16 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 424);
+            this.richTextBox1.Location = new System.Drawing.Point(517, 10);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(658, 217);
+            this.richTextBox1.Size = new System.Drawing.Size(497, 580);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
             // button5
             // 
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(519, 232);
+            this.button5.Location = new System.Drawing.Point(188, 375);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(55, 55);
             this.button5.TabIndex = 17;
@@ -131,7 +131,7 @@
             // button6
             // 
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(517, 326);
+            this.button6.Location = new System.Drawing.Point(186, 508);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(151, 36);
             this.button6.TabIndex = 18;
@@ -142,7 +142,7 @@
             // bt_clear
             // 
             this.bt_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_clear.Location = new System.Drawing.Point(596, 605);
+            this.bt_clear.Location = new System.Drawing.Point(942, 449);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 19;
@@ -150,11 +150,22 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // br_clear_listbox
+            // 
+            this.br_clear_listbox.Location = new System.Drawing.Point(418, 322);
+            this.br_clear_listbox.Name = "br_clear_listbox";
+            this.br_clear_listbox.Size = new System.Drawing.Size(63, 23);
+            this.br_clear_listbox.TabIndex = 20;
+            this.br_clear_listbox.Text = "clear";
+            this.br_clear_listbox.UseVisualStyleBackColor = true;
+            this.br_clear_listbox.Click += new System.EventHandler(this.br_clear_listbox_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 653);
+            this.ClientSize = new System.Drawing.Size(1026, 600);
+            this.Controls.Add(this.br_clear_listbox);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -185,6 +196,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button br_clear_listbox;
     }
 }
 
