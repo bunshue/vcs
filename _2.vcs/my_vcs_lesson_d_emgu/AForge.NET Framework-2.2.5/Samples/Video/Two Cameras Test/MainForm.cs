@@ -119,8 +119,8 @@ namespace TwoCamerasTest
         {
             // create first video source
             VideoCaptureDevice videoSource1 = new VideoCaptureDevice(videoDevices[camera1Combo.SelectedIndex].MonikerString);
-            videoSource1.DesiredFrameRate = 10;
 
+            videoSource1.DesiredFrameRate = 10;
             videoSourcePlayer1.VideoSource = videoSource1;
             videoSourcePlayer1.Start();
 
@@ -192,6 +192,14 @@ namespace TwoCamerasTest
                 stopWatch.Reset();
                 stopWatch.Start();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            var bitmap = videoSourcePlayer1.GetCurrentVideoFrame();
+            bitmap.Save(filename, System.Drawing.Imaging.ImageFormat.Jpeg);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
     }
 }

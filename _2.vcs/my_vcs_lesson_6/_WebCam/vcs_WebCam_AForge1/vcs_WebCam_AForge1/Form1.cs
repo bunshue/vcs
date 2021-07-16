@@ -16,7 +16,6 @@ namespace vcs_WebCam_AForge1
 {
     public partial class Form1 : Form
     {
-
         //參考
         //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
         //https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
@@ -41,6 +40,16 @@ namespace vcs_WebCam_AForge1
             {
                 ///---实例化对象
                 USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+
+                foreach (FilterInfo vidDevice in USBWebcams)
+                {
+                    richTextBox1.Text += "找到WebCam :\n";
+                    richTextBox1.Text += "短名 : " + vidDevice.Name + "\n";
+                    richTextBox1.Text += "長名 : " + vidDevice.MonikerString + "\n";
+                }
+
+                richTextBox1.Text += "USBWebcams.Capacity : " + USBWebcams.Capacity.ToString() + "\n";
+                richTextBox1.Text += "USBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
 
                 int webcam_count = USBWebcams.Count;
                 richTextBox1.Text += "WebCam數目 : " + webcam_count.ToString() + "\n";
@@ -67,10 +76,42 @@ namespace vcs_WebCam_AForge1
                     richTextBox1.Text += "Cam.Source = " + Cam.Source + "\n";
                     richTextBox1.Text += "Cam.Source.Length " + Cam.Source.Length.ToString() + "\n";
                     richTextBox1.Text += "VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
-                    //richTextBox1.Text += "aaa" + Cam.VideoResolution.AverageFrameRate.ToString() + "\n";  XXXX
-                    //richTextBox1.Text += "aaa" + Cam.VideoResolution.FrameRate.ToString() + "\n"; XXXXX
+                    var videoCapabilities = Cam.VideoCapabilities;
+                    foreach (var video in videoCapabilities)
+                    {
+                        richTextBox1.Text += "預覽分辨率 : " + video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + "\n";
+                        richTextBox1.Text += "AverageFrameRate : " + video.AverageFrameRate.ToString() + "\n";
+                        richTextBox1.Text += "BitCount : " + video.BitCount.ToString() + "\n";
+                        richTextBox1.Text += "MaximumFrameRate : " + video.MaximumFrameRate.ToString() + "\n";
+                    }
+                    //選擇分辨率
+                    if (videoCapabilities.Count() > 0)
+                    {
+                        Cam.VideoResolution = Cam.VideoCapabilities.Last();
 
-                    //int i;
+                        //可能寫法
+                        //var videoCapabilities2 = Cam.VideoCapabilities;
+                        //Cam.VideoResolution = videoCapabilities2[10];
+
+                        //可能寫法
+                        //Cam.VideoResolution = Cam.VideoCapabilities[4];
+                    }
+
+                    richTextBox1.Text += "SnapshotCapabilities.Length " + Cam.SnapshotCapabilities.Length.ToString() + "\n";
+                    var snapVabalities = Cam.SnapshotCapabilities;
+                    foreach (var snap in snapVabalities)
+                    {
+                        richTextBox1.Text += "Snapshot分辨率->" + snap.FrameSize.Width.ToString() + "*" + snap.FrameSize.Height.ToString() + "\n";
+                        richTextBox1.Text += "Snapshot AverageFrameRate : " + snap.AverageFrameRate.ToString() + "\n";
+                        richTextBox1.Text += "Snapshot BitCount : " + snap.BitCount.ToString() + "\n";
+                        richTextBox1.Text += "Snapshot MaximumFrameRate : " + snap.MaximumFrameRate.ToString() + "\n";
+                    }
+                    //選擇Snapshot分辨率
+                    if (snapVabalities.Count() > 0)
+                    {
+                        Cam.SnapshotResolution = Cam.SnapshotCapabilities.Last();
+                    }
+
                     int len;
                     len = Cam.VideoCapabilities.Length;
                     for (i = 0; i < len; i++)
@@ -93,6 +134,12 @@ namespace vcs_WebCam_AForge1
             {
                 MessageBox.Show(ex.Message);
             }
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         public Bitmap bm = null;
@@ -237,6 +284,20 @@ namespace vcs_WebCam_AForge1
             {
                 richTextBox1.Text += "無圖可存\n";
             }
+        }
+
+        //重抓WebCam, 只有關了再開
+        private void button3_Click(object sender, EventArgs e)
+        {
+            camera_start = 0;
+            Cam.Stop();
+
+            System.Threading.Thread.Sleep(1000);
+
+            camera_start = 1;
+            button1.Text = "關閉Webcam";
+            //Cam.VideoResolution = Cam.VideoCapabilities[0];   //若有多個capabilities 或許可以換
+            Cam.Start();   // WebCam starts capturing images.
         }
     }
 }

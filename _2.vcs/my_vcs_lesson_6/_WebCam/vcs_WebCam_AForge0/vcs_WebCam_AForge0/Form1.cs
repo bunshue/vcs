@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Imaging;   //for ImageFormat
 
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔

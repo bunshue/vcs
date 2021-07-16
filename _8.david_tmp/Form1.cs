@@ -6,23 +6,22 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;                //for file read/write
 using System.IO.Ports;          //for serial ports
 using System.Diagnostics;       //for Process, Stopwatch
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Runtime.InteropServices;   //for dll
+using System.Windows.Forms.DataVisualization.Charting;  //for Series
 
 using AForge.Video;
 using AForge.Video.DirectShow;
-
-using System.Runtime.InteropServices;   //for dll
-
-using System.Windows.Forms.DataVisualization.Charting;  //for Series
 
 namespace iMS_Link
 {
     public partial class Form1 : Form
     {
-        String compile_time = "3/3/2021 01:35下午";
+        String compile_time = "7/8/2021 01:35下午";
         String software_version = "A05";
 
         int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
@@ -47,10 +46,15 @@ namespace iMS_Link
         bool flag_david_test2 = false;   //david測試2, 存圖顯示亮度狀況
         bool flag_david_test3 = false;   //david測試3, no comport, no webcam, test ui only
 
+        bool flag_use_esophagoscopy = false;   //食道鏡設定
         bool flag_use_metering_color = false;   //量測畫面的RGB色彩
+        bool flag_use_measure_picture_brightness = false;   //量測畫面的亮度
+        bool flag_show_cmx_lenc_result = false;   //量測畫面的亮度, for CMX, LENC
         bool flag_use_metering = false;   //在第3站加上測光模式
         bool flag_use_chart1 = false;   //用chart1紀錄RGB變化
         bool flag_save_measure_color_picture = false;
+        bool flag_lenc_enable = false;   //LENC status
+        bool flag_get_lenc_status_ready = false;
 
         bool flag_enaglb_sound_effect = false;
         bool flag_enaglb_awb_function = true;
@@ -220,6 +224,10 @@ namespace iMS_Link
         bool flag_do_find_awb_location_fail_too_far = false;
         bool flag_doing_writing_data = false;
         bool flag_doing_refreshing_camera = false;
+        int timer_display_show_main_mesg0_count = 0;
+        int timer_display_show_main_mesg0_count_target = 0;
+        int timer_display_show_main_mesg_cmx_lenc_count = 0;
+        int timer_display_show_main_mesg_cmx_lenc_count_target = 0;
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
         int timer_display_r_count = 0;
@@ -317,10 +325,21 @@ namespace iMS_Link
         int Send_IMS_Data_cnt = 0;
         int awb_time_out = 600;
 
-        int pictureBox3_position_x_old = 100;
-        int pictureBox3_position_y_old = 300;
-        float pictureBox3_ratio_y = 0.34f;
-        Button btn1;
+        //int pictureBox3_position_x_old = 100;
+        //int pictureBox3_position_y_old = 300;
+        float pictureBox3_ratio_y = 0.125f;
+
+        //pictureBox3 initial location
+        private const int PB3_DEFAULT_POSITION_X = 600 - 10;
+        private const int PB3_DEFAULT_POSITION_Y = 700;
+        int pictureBox3_position_x_old = PB3_DEFAULT_POSITION_X;
+        int pictureBox3_position_y_old = PB3_DEFAULT_POSITION_Y;
+
+        //pictureBox4 initial location
+        private const int PB4_DEFAULT_POSITION_X = 600 - 10;
+        private const int PB4_DEFAULT_POSITION_Y = 700;
+        int pictureBox4_position_x_old = PB4_DEFAULT_POSITION_X;
+        int pictureBox4_position_y_old = PB4_DEFAULT_POSITION_Y;
 
         string saturation_ratio = "X1.00";
         byte g_TH2 = 0;
@@ -336,6 +355,228 @@ namespace iMS_Link
         private const int FOCUS_ON_SERIAL = 0x01;	//timer_webcam focus on textbox serial
         int timer_webcam_mode = FOCUS_ON_SERIAL;
         DateTime bootup_time = DateTime.Now;
+
+        //pictureBox3
+        Button btn1 = new Button();
+        Button btn2 = new Button();
+        Button btn3 = new Button();
+        Button btn_return = new Button();
+        HScrollBar hsbar = new HScrollBar();
+
+        CheckBox cb_average = new CheckBox();
+        CheckBox cb_show_r = new CheckBox();
+        CheckBox cb_show_g = new CheckBox();
+        CheckBox cb_show_b = new CheckBox();
+        CheckBox cb_show_y = new CheckBox();
+
+        RadioButton rb_select_r = new RadioButton();
+        RadioButton rb_select_g = new RadioButton();
+        RadioButton rb_select_b = new RadioButton();
+        RadioButton rb_select_y = new RadioButton();
+        RadioButton rb_select_none = new RadioButton();
+
+        //做 Color Matrix ST
+        Label lb_main_mesg_cmx_lenc = new Label();
+        TrackBar tbar0 = new TrackBar();
+        TrackBar tbar1 = new TrackBar();
+        TrackBar tbar2 = new TrackBar();
+        TrackBar tbar3 = new TrackBar();
+        TrackBar tbar4 = new TrackBar();
+        TrackBar tbar5 = new TrackBar();
+
+        TextBox tb0 = new TextBox();
+        TextBox tb1 = new TextBox();
+        TextBox tb2 = new TextBox();
+        TextBox tb3 = new TextBox();
+        TextBox tb4 = new TextBox();
+        TextBox tb5 = new TextBox();
+        TextBox tb6 = new TextBox();
+        TextBox tb7 = new TextBox();
+        TextBox tb8 = new TextBox();
+
+        TextBox tb0h = new TextBox();
+        TextBox tb1h = new TextBox();
+        TextBox tb2h = new TextBox();
+        TextBox tb3h = new TextBox();
+        TextBox tb4h = new TextBox();
+        TextBox tb5h = new TextBox();
+        TextBox tb6h = new TextBox();
+        TextBox tb7h = new TextBox();
+        TextBox tb8h = new TextBox();
+
+        Button btn_ok6 = new Button();
+        Button btn_ok7 = new Button();
+        Button btn_ok8 = new Button();
+        Button btn_read_cmx = new Button();
+        Button btn_reset_cmx = new Button();
+
+        CheckBox cb5a = new CheckBox();
+        CheckBox cb4a = new CheckBox();
+        CheckBox cb3a = new CheckBox();
+        CheckBox cb2a = new CheckBox();
+        CheckBox cb1a = new CheckBox();
+        CheckBox cb0a = new CheckBox();
+
+        CheckBox cb2b = new CheckBox();
+        CheckBox cb1b = new CheckBox();
+        CheckBox cb0b = new CheckBox();
+
+        CheckBox cb7c = new CheckBox();
+        CheckBox cb6c = new CheckBox();
+        CheckBox cb5c = new CheckBox();
+        CheckBox cb4c = new CheckBox();
+        CheckBox cb3c = new CheckBox();
+        CheckBox cb2c = new CheckBox();
+        CheckBox cb1c = new CheckBox();
+        CheckBox cb0c = new CheckBox();
+
+        //做 Color Matrix SP
+
+        //做 LENC Control ST
+        PictureBox pbox_lenc_status = new PictureBox();
+        TrackBar tbar0r = new TrackBar();
+        TrackBar tbar1r = new TrackBar();
+        TrackBar tbar2r = new TrackBar();
+        TrackBar tbar3r = new TrackBar();
+        TrackBar tbar4r = new TrackBar();
+        TrackBar tbar5r = new TrackBar();
+        TrackBar tbar0g = new TrackBar();
+        TrackBar tbar1g = new TrackBar();
+        TrackBar tbar2g = new TrackBar();
+        TrackBar tbar3g = new TrackBar();
+        TrackBar tbar4g = new TrackBar();
+        TrackBar tbar5g = new TrackBar();
+        TrackBar tbar0b = new TrackBar();
+        TrackBar tbar1b = new TrackBar();
+        TrackBar tbar2b = new TrackBar();
+        TrackBar tbar3b = new TrackBar();
+        TrackBar tbar4b = new TrackBar();
+        TrackBar tbar5b = new TrackBar();
+
+        TrackBar tbar_lenc1 = new TrackBar();
+        TrackBar tbar_lenc2 = new TrackBar();
+        TrackBar tbar_lenc3 = new TrackBar();
+        TrackBar tbar_lenc4 = new TrackBar();
+
+        TextBox tb0r = new TextBox();
+        TextBox tb1r = new TextBox();
+        TextBox tb2r = new TextBox();
+        TextBox tb3r = new TextBox();
+        TextBox tb4r = new TextBox();
+        TextBox tb5r = new TextBox();
+        TextBox tb0g = new TextBox();
+        TextBox tb1g = new TextBox();
+        TextBox tb2g = new TextBox();
+        TextBox tb3g = new TextBox();
+        TextBox tb4g = new TextBox();
+        TextBox tb5g = new TextBox();
+        TextBox tb0b = new TextBox();
+        TextBox tb1b = new TextBox();
+        TextBox tb2b = new TextBox();
+        TextBox tb3b = new TextBox();
+        TextBox tb4b = new TextBox();
+        TextBox tb5b = new TextBox();
+
+        TextBox tb0rh = new TextBox();
+        TextBox tb1rh = new TextBox();
+        TextBox tb2rh = new TextBox();
+        TextBox tb3rh = new TextBox();
+        TextBox tb4rh = new TextBox();
+        TextBox tb5rh = new TextBox();
+        TextBox tb0gh = new TextBox();
+        TextBox tb1gh = new TextBox();
+        TextBox tb2gh = new TextBox();
+        TextBox tb3gh = new TextBox();
+        TextBox tb4gh = new TextBox();
+        TextBox tb5gh = new TextBox();
+        TextBox tb0bh = new TextBox();
+        TextBox tb1bh = new TextBox();
+        TextBox tb2bh = new TextBox();
+        TextBox tb3bh = new TextBox();
+        TextBox tb4bh = new TextBox();
+        TextBox tb5bh = new TextBox();
+
+        TextBox tb_lenc0 = new TextBox();
+        TextBox tb_lenc1 = new TextBox();
+        TextBox tb_lenc2 = new TextBox();
+        TextBox tb_lenc3 = new TextBox();
+        TextBox tb_lenc4 = new TextBox();
+        TextBox tb_lenc0h = new TextBox();
+        TextBox tb_lenc1h = new TextBox();
+        TextBox tb_lenc2h = new TextBox();
+        TextBox tb_lenc3h = new TextBox();
+        TextBox tb_lenc4h = new TextBox();
+
+        Button btn_read_lenc = new Button();
+        Button btn_reset_lenc = new Button();
+        Button btn_reset_lenc_r = new Button();
+        Button btn_reset_lenc_g = new Button();
+        Button btn_reset_lenc_b = new Button();
+        Button btn_reset_lenc_ctrl = new Button();
+        Button btn_lenc_test1 = new Button();
+        Button btn_lenc_test2 = new Button();
+        Button btn_lenc_test3 = new Button();
+        Button btn_lenc_test4 = new Button();
+        Button btn_lenc_test5 = new Button();
+        Button btn_lenc_test6 = new Button();
+
+        CheckBox cb_lenc3 = new CheckBox();
+        CheckBox cb_lenc2 = new CheckBox();
+        CheckBox cb_lenc1 = new CheckBox();
+        CheckBox cb_lenc0 = new CheckBox();
+
+        CheckBox cb_apply_rgb = new CheckBox();
+
+        int tb0r_old = 0;
+        int tb1r_old = 0;
+        int tb2r_old = 0;
+        int tb3r_old = 0;
+        int tb4r_old = 0;
+        int tb5r_old = 0;
+
+        int tb0g_old = 0;
+        int tb1g_old = 0;
+        int tb2g_old = 0;
+        int tb3g_old = 0;
+        int tb4g_old = 0;
+        int tb5g_old = 0;
+
+        int tb0b_old = 0;
+        int tb1b_old = 0;
+        int tb2b_old = 0;
+        int tb3b_old = 0;
+        int tb4b_old = 0;
+        int tb5b_old = 0;
+
+        int data_x0_red = 0;
+        byte data_x0_red_h = 0;
+        byte data_x0_red_l = 0;
+        int data_y0_red = 0;
+        byte data_y0_red_h = 0;
+        byte data_y0_red_l = 0;
+
+        int data_x0_green = 0;
+        byte data_x0_green_h = 0;
+        byte data_x0_green_l = 0;
+        int data_y0_green = 0;
+        byte data_y0_green_h = 0;
+        byte data_y0_green_l = 0;
+
+        int data_x0_blue = 0;
+        byte data_x0_blue_h = 0;
+        byte data_x0_blue_l = 0;
+        int data_y0_blue = 0;
+        byte data_y0_blue_h = 0;
+        byte data_y0_blue_l = 0;
+
+        bool flag_lenc_update_x0_red = false;
+        bool flag_lenc_update_y0_red = false;
+        bool flag_lenc_update_x0_green = false;
+        bool flag_lenc_update_y0_green = false;
+        bool flag_lenc_update_x0_blue = false;
+        bool flag_lenc_update_y0_blue = false;
+
+        //做 LENC Control SP
 
         //溫度偵測圖表
         private int pointIndex = 0;
@@ -717,12 +958,12 @@ namespace iMS_Link
         {
             float v = (float)(((HScrollBar)sender).Value);
 
-            if (v == 50)
+            if (v == 75)
                 pictureBox3_ratio_y = 1;
-            else if (v > 50)
-                pictureBox3_ratio_y = (v - 50) / 5 + 1;
+            else if (v > 75)
+                pictureBox3_ratio_y = (v - 75) / 5 + 1;
             else
-                pictureBox3_ratio_y = v / 50;
+                pictureBox3_ratio_y = v / 400;
 
             //richTextBox1.Text += "hscroll = " + v.ToString() + "\t";
             richTextBox1.Text += "ratio = " + pictureBox3_ratio_y.ToString() + "\n";
@@ -762,10 +1003,31 @@ namespace iMS_Link
 
         private void myClick3(object sender, EventArgs e)
         {
+            flag_show_cmx_lenc_result = false;
+            timer_clock.Interval = 500;
             richTextBox1.Visible = true;
             flag_use_metering_color = false;
+            flag_use_measure_picture_brightness = false;
             pictureBox3.Visible = false;
+            pictureBox4.Visible = false;
             btn1.Text = "Play";
+            remove_all_controls_in_pictureBox3();
+            cb_show_info.Checked = true;
+            cb_show_info.Visible = true;
+        }
+
+        private void btn_return_pbx3_Click(object sender, EventArgs e)
+        {
+            pictureBox3_position_x_old = PB3_DEFAULT_POSITION_X;
+            pictureBox3_position_y_old = PB3_DEFAULT_POSITION_Y;
+            pictureBox3.Location = new Point(pictureBox3_position_x_old, pictureBox3_position_y_old);
+        }
+
+        private void btn_return_pbx4_Click(object sender, EventArgs e)
+        {
+            pictureBox4_position_x_old = PB4_DEFAULT_POSITION_X;
+            pictureBox4_position_y_old = PB4_DEFAULT_POSITION_Y;
+            pictureBox4.Location = new Point(pictureBox4_position_x_old, pictureBox4_position_y_old);
         }
 
         private void Reset_iMS_Link_Setting()
@@ -775,11 +1037,11 @@ namespace iMS_Link
             this.tabControl1.Location = new Point(10, 60);
 
             int gb_w = 930;
-            int gb_h = 510;
+            int gb_h = 530;
             int x_st = 30;
             int y_st = 30;
 
-            groupBox1.Size = new Size(gb_w, gb_h);
+            groupBox1.Size = new Size(gb_w, gb_h + 30);
             groupBox4.Size = new Size(gb_w, gb_h);
             groupBox5.Size = new Size(gb_w, gb_h);
             groupBox10.Size = new Size(gb_w, gb_h + 16);
@@ -821,9 +1083,13 @@ namespace iMS_Link
             pictureBox3.Visible = false;
             pictureBox3.Location = new Point(pictureBox3_position_x_old, pictureBox3_position_y_old);
 
+            pictureBox4.BackColor = Color.LightGray;
+            pictureBox4.Visible = false;
+            pictureBox4_position_x_old = PB4_DEFAULT_POSITION_X;
+            pictureBox4_position_y_old = PB4_DEFAULT_POSITION_Y;
+            pictureBox4.Location = new Point(pictureBox4_position_x_old, pictureBox4_position_y_old);
+
             // 實例化按鈕
-            //Button btn1 = new Button();
-            btn1 = new Button();
             btn1.Width = 60;
             btn1.Height = 40;
             btn1.Text = "Play";
@@ -837,7 +1103,6 @@ namespace iMS_Link
             this.pictureBox3.Controls.Add(btn1);
 
             // 實例化按鈕
-            Button btn2 = new Button();
             btn2.Width = 60;
             btn2.Height = 40;
             btn2.Text = "Save";
@@ -851,7 +1116,6 @@ namespace iMS_Link
             this.pictureBox3.Controls.Add(btn2);
 
             // 實例化按鈕
-            Button btn3 = new Button();
             btn3.Width = 30;
             btn3.Height = 30;
             btn3.Text = "X";
@@ -864,14 +1128,12 @@ namespace iMS_Link
             //this.AcceptButton = btn3;
             this.pictureBox3.Controls.Add(btn3);
 
-
             // 實例化按鈕
-            HScrollBar hsbar = new HScrollBar();
             hsbar.Width = 250;
             hsbar.Height = 30;
             hsbar.Maximum = 99;
             hsbar.Minimum = 1;
-            hsbar.Value = 17;
+            hsbar.Value = 50;
             hsbar.LargeChange = 1;
             hsbar.SmallChange = 1;
             hsbar.Name = "hsbar1";
@@ -1966,9 +2228,8 @@ namespace iMS_Link
                                 }
                                 catch (Exception ex)
                                 {
-                                    richTextBox1.Text += "xxx錯誤訊息c : " + ex.Message + "\n";
+                                    richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
                                 }
-
                                 progressBar2.Value = 100;
                             }
                         }
@@ -2408,6 +2669,8 @@ namespace iMS_Link
                     }
                     else if (input[1] <= 0x58)  //ims send camera sensor data
                     {
+                        //讀取相機暫存器值 先一律顯示在固定位置 再依指令放到變數裏
+
                         int dd = (int)input[3];
                         tb_3.Text = dd.ToString("X2");
                         tb_4.Text = dd.ToString();
@@ -2417,6 +2680,21 @@ namespace iMS_Link
                         tb_4m.Text = dd.ToString();
 
                         //richTextBox1.Text += "cmd : " + ((int)input[1]).ToString("X2") + " " + ((int)input[2]).ToString("X2") + " " + ((int)input[3]).ToString("X2") + "\n";
+
+                        if ((input[1] == 0x50) && (input[2] == 0x00))
+                        {
+                            if (((input[3] >> 1) & 0x01) == 0x01)
+                            {
+                                flag_lenc_enable = true;
+                                pbox_lenc_status.Image = iMS_Link.Properties.Resources.on;
+                            }
+                            else
+                            {
+                                flag_lenc_enable = false;
+                                pbox_lenc_status.Image = iMS_Link.Properties.Resources.off;
+                            }
+                            flag_get_lenc_status_ready = true;
+                        }
 
                         if ((input[1] == 0x35) || (input[1] == 0x52) || (input[1] == 0x3A))
                         {
@@ -2588,6 +2866,387 @@ namespace iMS_Link
                                 lb_data_camera_bright.Text = "B 0x" + ((int)input[3]).ToString("X2");
                             else if (input[2] == 0x08)
                                 lb_data_camera_sign.Text = "S 0x" + ((int)input[3]).ToString("X2");
+                        }
+                        else if (input[1] == 0x56)  // Color Matrix
+                        {
+                            if (input[2] == 0x00)
+                            {
+                                tb0.Text = ((int)input[3]).ToString();
+                                tb0h.Text = ((int)input[3]).ToString("X2");
+                                tb0.ForeColor = Color.Black;
+                                tb0h.ForeColor = Color.Black;
+                                tbar0.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x01)
+                            {
+                                tb1.Text = ((int)input[3]).ToString();
+                                tb1h.Text = ((int)input[3]).ToString("X2");
+                                tb1.ForeColor = Color.Black;
+                                tb1h.ForeColor = Color.Black;
+                                tbar1.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x02)
+                            {
+                                tb2.Text = ((int)input[3]).ToString();
+                                tb2h.Text = ((int)input[3]).ToString("X2");
+                                tb2.ForeColor = Color.Black;
+                                tb2h.ForeColor = Color.Black;
+                                tbar2.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x03)
+                            {
+                                tb3.Text = ((int)input[3]).ToString();
+                                tb3h.Text = ((int)input[3]).ToString("X2");
+                                tb3.ForeColor = Color.Black;
+                                tb3h.ForeColor = Color.Black;
+                                tbar3.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x04)
+                            {
+                                tb4.Text = ((int)input[3]).ToString();
+                                tb4h.Text = ((int)input[3]).ToString("X2");
+                                tb4.ForeColor = Color.Black;
+                                tb4h.ForeColor = Color.Black;
+                                tbar4.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x05)
+                            {
+                                tb5.Text = ((int)input[3]).ToString();
+                                tb5h.Text = ((int)input[3]).ToString("X2");
+                                tb5.ForeColor = Color.Black;
+                                tb5h.ForeColor = Color.Black;
+                                tbar5.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x12)
+                            {
+                                tb6.Text = ((int)input[3]).ToString();
+                                tb6h.Text = ((int)input[3]).ToString("X2");
+                                tb6.ForeColor = Color.Black;
+                                tb6h.ForeColor = Color.Black;
+                                show_hex2bit1((int)input[3]);
+                            }
+                            else if (input[2] == 0x15)
+                            {
+                                tb7.Text = ((int)input[3]).ToString();
+                                tb7h.Text = ((int)input[3]).ToString("X2");
+                                tb7.ForeColor = Color.Black;
+                                tb7h.ForeColor = Color.Black;
+                                show_hex2bit2((int)input[3]);
+                            }
+                        }
+                        else if (input[1] == 0x50)  // Color Matrix
+                        {
+                            if (input[2] == 0x01)
+                            {
+                                tb8.Text = ((int)input[3]).ToString();
+                                tb8h.Text = ((int)input[3]).ToString("X2");
+                                tb8.ForeColor = Color.Black;
+                                tb8h.ForeColor = Color.Black;
+                                show_hex2bit3((int)input[3]);
+                            }
+                        }
+                        else if (input[1] == 0x51)  // LENC
+                        {
+                            if (input[2] == 0x00)
+                            {
+                                data_x0_red_h = (byte)input[3];
+                                flag_lenc_update_x0_red = true;
+                                //richTextBox1.Text += "x0rH  ";
+                            }
+                            else if (input[2] == 0x01)
+                            {
+                                data_x0_red_l = (byte)input[3];
+                                //richTextBox1.Text += "x0rL  ";
+                                if (flag_lenc_update_x0_red == true)
+                                {
+                                    flag_lenc_update_x0_red = false;
+                                    data_x0_red = (int)data_x0_red_h * 256 + (int)data_x0_red_l;
+                                    tb0r.Text = data_x0_red.ToString();
+                                    tb0rh.Text = data_x0_red.ToString("X2");
+                                    tb0r.ForeColor = Color.Black;
+                                    tb0rh.ForeColor = Color.Black;
+                                    tbar0r.Value = data_x0_red;
+                                }
+                            }
+                            else if (input[2] == 0x02)
+                            {
+                                data_y0_red_h = (byte)input[3];
+                                flag_lenc_update_y0_red = true;
+                                //richTextBox1.Text += "y0rH  ";
+                            }
+                            else if (input[2] == 0x03)
+                            {
+                                data_y0_red_l = (byte)input[3];
+                                //richTextBox1.Text += "y0rL  ";
+                                if (flag_lenc_update_y0_red == true)
+                                {
+                                    flag_lenc_update_y0_red = false;
+                                    data_y0_red = (int)data_y0_red_h * 256 + (int)data_y0_red_l;
+                                    tb1r.Text = data_y0_red.ToString();
+                                    tb1rh.Text = data_y0_red.ToString("X2");
+                                    tb1r.ForeColor = Color.Black;
+                                    tb1rh.ForeColor = Color.Black;
+                                    tbar1r.Value = data_y0_red;
+                                }
+                            }
+                            else if (input[2] == 0x04)
+                            {
+                                tb2r.Text = ((int)input[3]).ToString();
+                                tb2rh.Text = ((int)input[3]).ToString("X2");
+                                tb2r.ForeColor = Color.Black;
+                                tb2rh.ForeColor = Color.Black;
+                                tbar2r.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x05)
+                            {
+                                tb3r.Text = ((int)input[3]).ToString();
+                                tb3rh.Text = ((int)input[3]).ToString("X2");
+                                tb3r.ForeColor = Color.Black;
+                                tb3rh.ForeColor = Color.Black;
+                                tbar3r.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x06)
+                            {
+                                int value = (int)input[3];
+                                if ((value & 0x80) == 0x80)     //positive
+                                {
+                                    value &= 0x7f;
+                                    tb4r.Text = "正" + value.ToString();
+                                    tb4rh.Text = "正" + value.ToString("X2");
+                                    tbar4r.Value = value;
+                                }
+                                else  //negative
+                                {
+                                    tb4r.Text = "負" + value.ToString();
+                                    tb4rh.Text = "負" + value.ToString("X2");
+                                    tbar4r.Value = -value;
+                                }
+                                tb4r.ForeColor = Color.Black;
+                                tb4rh.ForeColor = Color.Black;
+                            }
+                            else if (input[2] == 0x07)
+                            {
+                                tb5r.Text = ((int)input[3]).ToString();
+                                tb5rh.Text = ((int)input[3]).ToString("X2");
+                                tb5r.ForeColor = Color.Black;
+                                tb5rh.ForeColor = Color.Black;
+                                tbar5r.Value = (int)input[3];
+                            }
+                            else if (input[2] == (0x00 + 8))
+                            {
+                                data_x0_green_h = (byte)input[3];
+                                flag_lenc_update_x0_green = true;
+                                //richTextBox1.Text += "x0gH  ";
+                            }
+                            else if (input[2] == (0x01 + 8))
+                            {
+                                data_x0_green_l = (byte)input[3];
+                                //richTextBox1.Text += "x0gL  ";
+                                if (flag_lenc_update_x0_green == true)
+                                {
+                                    flag_lenc_update_x0_green = false;
+                                    data_x0_green = (int)data_x0_green_h * 256 + (int)data_x0_green_l;
+                                    tb0g.Text = data_x0_green.ToString();
+                                    tb0gh.Text = data_x0_green.ToString("X2");
+                                    tb0g.ForeColor = Color.Black;
+                                    tb0gh.ForeColor = Color.Black;
+                                    tbar0g.Value = data_x0_green;
+                                }
+                            }
+                            else if (input[2] == (0x02 + 8))
+                            {
+                                data_y0_green_h = (byte)input[3];
+                                flag_lenc_update_y0_green = true;
+                                //richTextBox1.Text += "y0gH  ";
+                            }
+                            else if (input[2] == (0x03 + 8))
+                            {
+                                data_y0_green_l = (byte)input[3];
+                                //richTextBox1.Text += "y0gL  ";
+                                if (flag_lenc_update_y0_green == true)
+                                {
+                                    flag_lenc_update_y0_green = false;
+                                    data_y0_green = (int)data_y0_green_h * 256 + (int)data_y0_green_l;
+                                    tb1g.Text = data_y0_green.ToString();
+                                    tb1gh.Text = data_y0_green.ToString("X2");
+                                    tb1g.ForeColor = Color.Black;
+                                    tb1gh.ForeColor = Color.Black;
+                                    tbar1g.Value = data_y0_green;
+                                }
+                            }
+                            else if (input[2] == (0x04 + 8))
+                            {
+                                tb2g.Text = ((int)input[3]).ToString();
+                                tb2gh.Text = ((int)input[3]).ToString("X2");
+                                tb2g.ForeColor = Color.Black;
+                                tb2gh.ForeColor = Color.Black;
+                                tbar2g.Value = (int)input[3];
+                            }
+                            else if (input[2] == (0x05 + 8))
+                            {
+                                tb3g.Text = ((int)input[3]).ToString();
+                                tb3gh.Text = ((int)input[3]).ToString("X2");
+                                tb3g.ForeColor = Color.Black;
+                                tb3gh.ForeColor = Color.Black;
+                                tbar3g.Value = (int)input[3];
+                            }
+                            else if (input[2] == (0x06 + 8))
+                            {
+                                int value = (int)input[3];
+                                if ((value & 0x80) == 0x80)     //positive
+                                {
+                                    value &= 0x7f;
+                                    tb4g.Text = "正" + value.ToString();
+                                    tb4gh.Text = "正" + value.ToString("X2");
+                                    tbar4g.Value = value;
+                                }
+                                else  //negative
+                                {
+                                    tb4g.Text = "負" + value.ToString();
+                                    tb4gh.Text = "負" + value.ToString("X2");
+                                    tbar4g.Value = -value;
+                                }
+                                tb4g.ForeColor = Color.Black;
+                                tb4gh.ForeColor = Color.Black;
+                            }
+                            else if (input[2] == (0x07 + 8))
+                            {
+                                tb5g.Text = ((int)input[3]).ToString();
+                                tb5gh.Text = ((int)input[3]).ToString("X2");
+                                tb5g.ForeColor = Color.Black;
+                                tb5gh.ForeColor = Color.Black;
+                                tbar5g.Value = (int)input[3];
+                            }
+                            else if (input[2] == (0x00 + 16))
+                            {
+                                data_x0_blue_h = (byte)input[3];
+                                flag_lenc_update_x0_blue = true;
+                                //richTextBox1.Text += "x0bH  ";
+                            }
+                            else if (input[2] == (0x01 + 16))
+                            {
+                                data_x0_blue_l = (byte)input[3];
+                                //richTextBox1.Text += "x0bL  ";
+                                if (flag_lenc_update_x0_blue == true)
+                                {
+                                    flag_lenc_update_x0_blue = false;
+                                    data_x0_blue = (int)data_x0_blue_h * 256 + (int)data_x0_blue_l;
+                                    tb0b.Text = data_x0_blue.ToString();
+                                    tb0bh.Text = data_x0_blue.ToString("X2");
+                                    tb0b.ForeColor = Color.Black;
+                                    tb0bh.ForeColor = Color.Black;
+                                    tbar0b.Value = data_x0_blue;
+                                }
+                            }
+                            else if (input[2] == (0x02 + 16))
+                            {
+                                data_y0_blue_h = (byte)input[3];
+                                flag_lenc_update_y0_blue = true;
+                                //richTextBox1.Text += "y0bH  ";
+                            }
+                            else if (input[2] == (0x03 + 16))
+                            {
+                                data_y0_blue_l = (byte)input[3];
+                                //richTextBox1.Text += "y0bL  ";
+                                if (flag_lenc_update_y0_blue == true)
+                                {
+                                    flag_lenc_update_y0_blue = false;
+                                    data_y0_blue = (int)data_y0_blue_h * 256 + (int)data_y0_blue_l;
+                                    tb1b.Text = data_y0_blue.ToString();
+                                    tb1bh.Text = data_y0_blue.ToString("X2");
+                                    tb1b.ForeColor = Color.Black;
+                                    tb1bh.ForeColor = Color.Black;
+                                    tbar1b.Value = data_y0_blue;
+                                }
+                            }
+                            else if (input[2] == (0x04 + 16))
+                            {
+                                tb2b.Text = ((int)input[3]).ToString();
+                                tb2bh.Text = ((int)input[3]).ToString("X2");
+                                tb2b.ForeColor = Color.Black;
+                                tb2bh.ForeColor = Color.Black;
+                                tbar2b.Value = (int)input[3];
+                            }
+                            else if (input[2] == (0x05 + 16))
+                            {
+                                tb3b.Text = ((int)input[3]).ToString();
+                                tb3bh.Text = ((int)input[3]).ToString("X2");
+                                tb3b.ForeColor = Color.Black;
+                                tb3bh.ForeColor = Color.Black;
+                                tbar3b.Value = (int)input[3];
+                            }
+                            else if (input[2] == (0x06 + 16))
+                            {
+                                int value = (int)input[3];
+                                if ((value & 0x80) == 0x80)     //positive
+                                {
+                                    value &= 0x7f;
+                                    tb4b.Text = "正" + value.ToString();
+                                    tb4bh.Text = "正" + value.ToString("X2");
+                                    tbar4b.Value = value;
+                                }
+                                else  //negative
+                                {
+                                    tb4b.Text = "負" + value.ToString();
+                                    tb4bh.Text = "負" + value.ToString("X2");
+                                    tbar4b.Value = -value;
+                                }
+                                tb4b.ForeColor = Color.Black;
+                                tb4bh.ForeColor = Color.Black;
+                            }
+                            else if (input[2] == (0x07 + 16))
+                            {
+                                tb5b.Text = ((int)input[3]).ToString();
+                                tb5bh.Text = ((int)input[3]).ToString("X2");
+                                tb5b.ForeColor = Color.Black;
+                                tb5bh.ForeColor = Color.Black;
+                                tbar5b.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x18)
+                            {
+                                //0x5118 LENC CTRL
+                                tb_lenc0.Text = ((int)input[3]).ToString();
+                                tb_lenc0h.Text = ((int)input[3]).ToString("X2");
+                                tb_lenc0.ForeColor = Color.Black;
+                                tb_lenc0h.ForeColor = Color.Black;
+                                show_hex2bit4((int)input[3]);
+                            }
+                            else if (input[2] == 0x19)
+                            {
+                                //0x5119 LENC COEF TH
+                                tb_lenc1.Text = ((int)input[3]).ToString();
+                                tb_lenc1h.Text = ((int)input[3]).ToString("X2");
+                                tb_lenc1.ForeColor = Color.Black;
+                                tb_lenc1h.ForeColor = Color.Black;
+                                tbar_lenc1.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x1A)
+                            {
+                                //0x511A LENC GAIN TH1
+                                tb_lenc2.Text = ((int)input[3]).ToString();
+                                tb_lenc2h.Text = ((int)input[3]).ToString("X2");
+                                tb_lenc2.ForeColor = Color.Black;
+                                tb_lenc2h.ForeColor = Color.Black;
+                                tbar_lenc2.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x1B)
+                            {
+                                //0x511B LENC GAIN TH2
+                                tb_lenc3.Text = ((int)input[3]).ToString();
+                                tb_lenc3h.Text = ((int)input[3]).ToString("X2");
+                                tb_lenc3.ForeColor = Color.Black;
+                                tb_lenc3h.ForeColor = Color.Black;
+                                tbar_lenc3.Value = (int)input[3];
+                            }
+                            else if (input[2] == 0x1C)
+                            {
+                                //0x511C COEF MAN
+                                tb_lenc4.Text = ((int)input[3]).ToString();
+                                tb_lenc4h.Text = ((int)input[3]).ToString("X2");
+                                tb_lenc4.ForeColor = Color.Black;
+                                tb_lenc4h.ForeColor = Color.Black;
+                                tbar_lenc4.Value = (int)input[3];
+                            }
                         }
                     }
                     else if (input[1] == 0xA1)
@@ -3011,6 +3670,7 @@ namespace iMS_Link
                 lb_data_camera_sign.Visible = false;
                 cb_Contrast_Brightness_Gamma.Visible = false;
                 cb_Gamma.Visible = false;
+                cb_show_info.Visible = false;
 
                 lb_yuv_y.Visible = true;
                 lb_yuv_u.Visible = true;
@@ -3069,6 +3729,7 @@ namespace iMS_Link
                 lb_data_camera_sign.Visible = true;
                 cb_Contrast_Brightness_Gamma.Visible = true;
                 cb_Gamma.Visible = true;
+                cb_show_info.Visible = true;
             }
 
             if (flag_operation_mode == MODE_RELEASE_STAGE2)
@@ -3087,10 +3748,18 @@ namespace iMS_Link
             else
                 bt_manual_mode2.Visible = false;
 
-            if (flag_usb_mode == true)
+            if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)
+                || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+            {
                 lb_fps.Visible = true;
+                lb_main_mesg0.Visible = true;
+                lb_main_mesg0.Location = new Point(620, 120);
+            }
             else
+            {
                 lb_fps.Visible = false;
+                lb_main_mesg0.Visible = false;
+            }
 
             bt_awb_break.Visible = false;
 
@@ -3103,8 +3772,11 @@ namespace iMS_Link
             groupBox_comport1.Size = new Size(397, 58);
             groupBox_system.Location = new Point(0, 0);
             groupBox_system.Size = new Size(134, 542 + 50);
-            groupBox_quick.Location = new Point(613, 0);
+            groupBox_quick.Location = new Point(613 + 12, 0);
             groupBox_quick.Size = new Size(1005, 60);
+
+            tb_mesg.Location = new Point(1700, 8);
+            tb_mesg.Size = new Size(200, 40);
 
             //gb_contrast_brightness.Location = new Point(613, 0);
             gb_contrast_brightness1.Size = new Size(603, 128);
@@ -3389,12 +4061,14 @@ namespace iMS_Link
                 lb_note1.Visible = false;
                 lb_note2.Visible = false;
                 lb_note3.Visible = false;
+                tb_mesg.Visible = true;
             }
             else
             {
                 cb_auto_search.Enabled = false;
                 groupBox_brightness.Enabled = false;
                 groupBox_debug.Visible = false;
+                tb_mesg.Visible = false;
             }
 
             //debug button
@@ -3438,6 +4112,9 @@ namespace iMS_Link
             bt_debug8.Location = new Point(x_st + dx * 6, y_st + dy * 2);
             bt_debug9.Location = new Point(x_st + dx * 7, y_st + dy * 2);
             bt_debug10.Location = new Point(x_st + dx * 8, y_st + dy * 2);
+            bt_debug6.Text = "CMX";
+            bt_debug7.Text = "LENC";
+            bt_debug10.Text = "說明";
 
             //第三排button
 
@@ -3733,6 +4410,7 @@ namespace iMS_Link
 
                 cb_Contrast_Brightness_Gamma.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - 672, pictureBox1.Location.Y + 5);
                 cb_Gamma.Location = new Point(cb_Contrast_Brightness_Gamma.Location.X + 206, cb_Contrast_Brightness_Gamma.Location.Y);
+                cb_show_info.Location = new Point(cb_Gamma.Location.X + 100, cb_Contrast_Brightness_Gamma.Location.Y);
                 bt_restore_camera_setup.Visible = true;
             }
             else
@@ -3751,6 +4429,15 @@ namespace iMS_Link
                 cb_enable_awb.Visible = true;
                 bt_LED.Visible = true;
                 groupBox_brightness.Visible = true;
+
+                if (flag_use_esophagoscopy == true)
+                {
+                    numericUpDown_brightness.Value = 90;    //食道鏡設定
+                }
+                else
+                {
+                    numericUpDown_brightness.Value = 140;
+                }
             }
             else
             {
@@ -3931,6 +4618,7 @@ namespace iMS_Link
             tb_mb_big_serial.Text = "0000000000000";
             tb_mb_small_serial.Text = "0000000 0000 000000 0000";
             tb_awb_mesg.Text = "";
+            lb_main_mesg0.Text = "";
             lb_main_mesg1.Text = "";
             lb_main_mesg2.Text = "";
             lb_main_mesg3.Text = "";
@@ -3949,6 +4637,10 @@ namespace iMS_Link
             lb_temperature.Text = "";
             bt_script_save.Visible = false;
             bt_script_cancel.Visible = false;
+            bt_script_cancel.Text = "x";
+            bt_script_cancel.Width = 30;
+            bt_script_cancel.Height = 30;
+
             tb_wpt.Text = Convert.ToString((Int32)numericUpDown_wpt.Value, 16).ToUpper();
             tb_bpt.Text = Convert.ToString((Int32)numericUpDown_bpt.Value, 16).ToUpper();
             wpt_value_old = numericUpDown_wpt.Value;
@@ -4290,7 +4982,19 @@ namespace iMS_Link
         private void timer_clock_Tick(object sender, EventArgs e)
         {
             if (flag_use_metering_color == true)
+            {
                 measure_picture();
+            }
+
+            if (flag_use_measure_picture_brightness == true)
+            {
+                show_picture_brightness();
+            }
+
+            if (flag_show_cmx_lenc_result == true)
+            {
+                show_cmx_lenc_result();
+            }
 
             toolStripStatusLabel1.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             Application.DoEvents();
@@ -4356,7 +5060,7 @@ namespace iMS_Link
                     */
                     if (flag_use_metering == false)
                     {
-                        lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F4") + " fps";
+                        lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F2") + " fps";
                     }
 
                     dt_old = dt;
@@ -4607,7 +5311,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {   //定義產生錯誤時的例外處理程式碼
-                richTextBox1.Text += "xxx錯誤訊息ims2 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e02 : " + ex.Message + "\n";
             }
             finally
             {
@@ -4652,12 +5356,13 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {   //定義產生錯誤時的例外處理程式碼
-                richTextBox1.Text += "xxx錯誤訊息ims1 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e03 : " + ex.Message + "\n";
             }
             finally
             {
                 //一定會被執行的程式區段
             }
+            delay(30);
             return true;
         }
 
@@ -5067,7 +5772,6 @@ namespace iMS_Link
             yy = 20; //gdispImageDraw
             zz = 0;
             Send_IMS_Data(0xD0, xx, yy, zz);
-
         }
 
         private void button141_Click(object sender, EventArgs e)
@@ -5076,7 +5780,6 @@ namespace iMS_Link
             yy = 8; //test new pic
             zz = 0;
             Send_IMS_Data(0xD0, xx, yy, zz);
-
         }
 
         private void button142_Click(object sender, EventArgs e)
@@ -5085,7 +5788,6 @@ namespace iMS_Link
             yy = 21; //lion test position
             zz = 0;
             Send_IMS_Data(0xD0, xx, yy, zz);
-
         }
 
         private void button143_Click(object sender, EventArgs e)
@@ -5094,7 +5796,6 @@ namespace iMS_Link
             yy = 22; //lion test position
             zz = 0;
             Send_IMS_Data(0xD0, xx, yy, zz);
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -5402,8 +6103,8 @@ namespace iMS_Link
             }
             else if (tabControl1.SelectedTab == tp_Serial_Auto)
             {
-                this.Size = new Size(1036, 745 - 16);
-                this.tabControl1.Size = new Size(1000, 600);
+                this.Size = new Size(1036, 745);
+                //this.tabControl1.Size = new Size(1000, 600);
                 this.tabControl1.Location = new Point(10, 60);
 
                 richTextBox1.Text += "進入 相機序號 頁\n";
@@ -5655,9 +6356,12 @@ namespace iMS_Link
             {
                 richTextBox1.Text += "進入 About 頁\n";
 
-                this.Size = new Size(1036, 745 - 16);
-                this.tabControl1.Size = new Size(1000, 600);
+                this.Size = new Size(1036, 745);
+                //this.tabControl1.Size = new Size(1000, 600);
                 this.tabControl1.Location = new Point(10, 60);
+
+                this.richTextBox1.Location = new System.Drawing.Point(958 + 65, 67 + 20);
+                this.richTextBox1.Size = new System.Drawing.Size(500, 586 + 10);
 
                 timer_rgb.Enabled = false;
                 timer_stage1.Enabled = false;
@@ -5680,8 +6384,8 @@ namespace iMS_Link
                     flag_fullscreen = false;
                     bt_zoom.BackgroundImage = iMS_Link.Properties.Resources.full_screen;
                     richTextBox1.Visible = true;
-                    this.richTextBox1.Location = new System.Drawing.Point(958, 67);
-                    this.richTextBox1.Size = new System.Drawing.Size(500, 586);
+                    //this.richTextBox1.Location = new System.Drawing.Point(958, 67);
+                    //this.richTextBox1.Size = new System.Drawing.Size(500, 586);
                     this.FormBorderStyle = FormBorderStyle.Sizable;
                     this.WindowState = FormWindowState.Normal;
                     //this.TopMost = false;
@@ -5759,8 +6463,8 @@ namespace iMS_Link
                     flag_fullscreen = false;
                     bt_zoom.BackgroundImage = iMS_Link.Properties.Resources.full_screen;
                     richTextBox1.Visible = true;
-                    this.richTextBox1.Location = new System.Drawing.Point(958, 67);
-                    this.richTextBox1.Size = new System.Drawing.Size(500, 586);
+                    this.richTextBox1.Location = new System.Drawing.Point(958 + 65, 67 + 20);
+                    this.richTextBox1.Size = new System.Drawing.Size(500, 586 + 10);
                     this.FormBorderStyle = FormBorderStyle.Sizable;
                     this.WindowState = FormWindowState.Normal;
                     //this.TopMost = false;
@@ -5867,7 +6571,7 @@ namespace iMS_Link
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e04 : " + ex.Message + "\n";
                 }
 
                 try
@@ -5876,7 +6580,7 @@ namespace iMS_Link
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息a : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e05 : " + ex.Message + "\n";
                 }
 
                 GC.Collect();       //回收資源
@@ -5996,7 +6700,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息s : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e06 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_capture_picture = false;
                 return;
@@ -6008,7 +6712,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e07 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_capture_picture = false;
                 return;
@@ -6023,7 +6727,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息o : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e08 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_capture_picture = false;
                 return;
@@ -6271,6 +6975,31 @@ namespace iMS_Link
                 //gg.DrawPolygon(p, points);
             }
 
+            if (flag_operation_mode == MODE_RELEASE_STAGE2)
+            {
+                if (flag_show_cmx_lenc_result == false)
+                {
+                    if (flag_use_esophagoscopy == true)
+                    {
+                        drawFont1 = new Font("標楷體", 45);
+                        drawBrush = new SolidBrush(Color.Red);
+                        x_st = 500;
+                        y_st = 10;
+
+                        gg.DrawString("食道\n小腸", drawFont1, drawBrush, x_st, y_st);
+                    }
+                    else
+                    {
+                        drawFont1 = new Font("標楷體", 45);
+                        drawBrush = new SolidBrush(Color.Red);
+                        x_st = 560;
+                        y_st = 10;
+
+                        gg.DrawString("胃", drawFont1, drawBrush, x_st, y_st);
+                    }
+                }
+            }
+
             if (cb_show_time.Checked == true)
             {   //顯示時間
                 drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
@@ -6285,11 +7014,21 @@ namespace iMS_Link
                 }
                 else
                 {
+                    //在畫面的上方顯示時間
                     gg.DrawString(drawDate, drawFont1, drawBrush, x_st, y_st);
                 }
             }
 
-            if ((flag_enaglb_awb_function == true) && (flag_fullscreen == true))
+            if ((flag_use_measure_picture_brightness == true) || (flag_show_cmx_lenc_result == true))
+            {
+                //把量測亮度區域畫出來
+                gg.DrawLine(new Pen(Color.Red, 2), 0, 240 - 6, 640, 240 - 6);
+                gg.DrawLine(new Pen(Color.Red, 2), 0, 240 + 6, 640, 240 + 6);
+
+                gg.DrawLine(new Pen(Color.Red, 2), 80 - 5, 240 - 12, 80 - 5, 240 + 12);
+                gg.DrawLine(new Pen(Color.Red, 2), 80 + 5, 240 - 12, 80 + 5, 240 + 12);
+            }
+            else if ((flag_enaglb_awb_function == true) && (flag_fullscreen == true) && (cb_show_info.Checked == true))
             {
                 int hhh = 0;
 
@@ -6340,10 +7079,28 @@ namespace iMS_Link
                             else
                             {
                                 gg.DrawRectangle(new Pen(Color.Silver, 1), x_st, y_st, ww, hh);
+                                gg.DrawRectangle(new Pen(Color.White, 1), x_st, y_st, ww, hh);
                             }
                         }
                     }
                 }
+
+                /*      畫color bar, 與OV相機的test pattern比對用
+                x_st = 0;
+                y_st = 640 / 2-140;
+
+                int dw = 640 / 8;
+
+                gg.FillRectangle(new SolidBrush(Color.White), x_st + dw * 0, y_st, 640 / 8, 480 / 8);
+                gg.FillRectangle(new SolidBrush(Color.Yellow), x_st + dw * 1, y_st, 640 / 8, 480 / 8);
+                gg.FillRectangle(new SolidBrush(Color.FromArgb(0,255,255)), x_st + dw * 2, y_st, 640 / 8, 480 / 8);
+                gg.FillRectangle(new SolidBrush(Color.FromArgb(0,255,0)), x_st + dw * 3, y_st, 640 / 8, 480 / 8);
+                gg.FillRectangle(new SolidBrush(Color.FromArgb(255,0,255)), x_st + dw * 4, y_st, 640 / 8, 480 / 8);
+                gg.FillRectangle(new SolidBrush(Color.Red), x_st + dw * 5, y_st, 640 / 8, 480 / 8);
+                gg.FillRectangle(new SolidBrush(Color.Blue), x_st + dw * 6, y_st, 640 / 8, 480 / 8);
+                gg.FillRectangle(new SolidBrush(Color.Black), x_st + dw * 7, y_st, 640 / 8, 480 / 8);
+                gg.DrawRectangle(new Pen(Color.Red, 10), x_st + dw * 0, y_st, 640, 480 / 8);
+                */
 
                 if (flag_do_find_awb_location_ok == true)
                 {
@@ -6497,7 +7254,7 @@ namespace iMS_Link
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息r1 : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e09 : " + ex.Message + "\n";
                     GC.Collect();       //回收資源
                     return;
                 }
@@ -6508,7 +7265,7 @@ namespace iMS_Link
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息r2 : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e10 : " + ex.Message + "\n";
                     GC.Collect();       //回收資源
                     return;
                 }
@@ -6526,7 +7283,9 @@ namespace iMS_Link
                     p1 = new Pen(Color.Red, 12);
                 }
                 else
-                    p1 = new Pen(Color.Silver, 1);
+                {
+                    p1 = new Pen(Color.Silver, 1);  //一般情況 中間大框框 為銀色
+                }
                 // Set the DashStyle property.
                 //p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
                 p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
@@ -6538,7 +7297,8 @@ namespace iMS_Link
                 // Draw a rectangle.    畫中間的大方框 通常是 200X200
                 if (flag_use_metering_color == true)
                     p1 = new Pen(Color.Red, 10);
-                gg.DrawRectangle(p1, x_st, y_st, awb_window_size, awb_window_size);
+
+                gg.DrawRectangle(p1, x_st, y_st, awb_window_size, awb_window_size);   //畫中間那個大框框 200 X 200
 
                 total_RGB_R = total_R;
                 total_RGB_G = total_G;
@@ -6613,7 +7373,7 @@ namespace iMS_Link
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e11 : " + ex.Message + "\n";
                     GC.Collect();       //回收資源
                     flag_capture_picture = false;
                     return;
@@ -6986,7 +7746,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息p1 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e12 : " + ex.Message + "\n";
             }
             GC.Collect();       //回收資源
 
@@ -7403,7 +8163,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e13 : " + ex.Message + "\n";
             }
             Environment.Exit(Environment.ExitCode);
             */
@@ -7585,7 +8345,6 @@ namespace iMS_Link
                         tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 30);
                         lb_class.Location = new Point(tb_wait_sn_data.Location.X + 140 + 27, tb_wait_sn_data.Location.Y - 190);
                         lb_main_mesg2.Location = new Point(tb_wait_sn_data.Location.X + 140, tb_wait_sn_data.Location.Y);
-
                     }
                     */
                 }
@@ -8594,7 +9353,15 @@ namespace iMS_Link
             lb_yuv_y.Text = ((int)yyy.Y).ToString();
             lb_yuv_u.Text = ((int)yyy.U).ToString();
             lb_yuv_v.Text = ((int)yyy.V).ToString();
-            lb_yuv_y2.Text = ((int)yyy.Y).ToString();
+
+            if (flag_show_cmx_lenc_result == true)
+            {
+                lb_yuv_y2.Text = ((int)cl.R).ToString() + "\n" + ((int)cl.G).ToString() + "\n" + ((int)cl.B).ToString() + "\n" + ((int)yyy.Y).ToString();
+            }
+            else
+            {
+                lb_yuv_y2.Text = ((int)yyy.Y).ToString();
+            }
 
             if (flag_check_webcam_signal == true)
             {
@@ -10203,7 +10970,8 @@ namespace iMS_Link
                 tb_awb_mesg.Text = "有連接器, 有相機";
                 playSound(S_OK);
 
-                restore_camera_setup();
+                restore_camera_setup(); //恢復相機預設值
+                delay(100);
 
                 timer_stage2.Enabled = true;
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);  //To auto mode
@@ -10748,7 +11516,7 @@ namespace iMS_Link
                     Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
                     serialPort1.Write(user_flash_data, 0, 16);
 
-                    //do_save_camera_data();  //write saturation brightness data
+                    do_save_camera_data();  //write saturation brightness data
                 }
 
                 // Stop timing
@@ -11840,7 +12608,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息r1 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e14 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 return;
             }
@@ -11851,7 +12619,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息r2 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e15 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 return;
             }
@@ -12888,6 +13656,24 @@ namespace iMS_Link
             else
                 flag_display_b_do_awb = false;
 
+            if (timer_display_show_main_mesg0_count < timer_display_show_main_mesg0_count_target)      //display main message timeout
+            {
+                timer_display_show_main_mesg0_count++;
+                if (timer_display_show_main_mesg0_count >= timer_display_show_main_mesg0_count_target)
+                {
+                    lb_main_mesg0.Text = "";
+                }
+            }
+
+            if (timer_display_show_main_mesg_cmx_lenc_count < timer_display_show_main_mesg_cmx_lenc_count_target)      //display main message timeout for cmx and lenc
+            {
+                timer_display_show_main_mesg_cmx_lenc_count++;
+                if (timer_display_show_main_mesg_cmx_lenc_count >= timer_display_show_main_mesg_cmx_lenc_count_target)
+                {
+                    lb_main_mesg_cmx_lenc.Text = "";
+                }
+            }
+
             if (timer_display_show_main_mesg_count < timer_display_show_main_mesg_count_target)      //display main message timeout
             {
                 timer_display_show_main_mesg_count++;
@@ -13024,7 +13810,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息c : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e16 : " + ex.Message + "\n";
                 //MessageBox.Show("無法連上Comport, 請重新連線");
                 richTextBox1.Text += "無法連上 " + comport + ", 請重新連線";
                 button1.Enabled = true;
@@ -13892,8 +14678,8 @@ namespace iMS_Link
                  */
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息p2 : " + ex.ToString() + "\n";
-                    richTextBox1.Text += "xxx錯誤訊息p3 : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e17 : " + ex.ToString() + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e18 : " + ex.Message + "\n";
                     show_main_message1("CSV檔使用中, 未儲存1", S_OK, 50);
                     show_main_message3("匯出CSV檔失敗", S_OK, 50);
                     return;
@@ -14102,7 +14888,7 @@ namespace iMS_Link
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息r : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e19 : " + ex.Message + "\n";
                     show_main_message1("CSV檔使用中, 未儲存2", S_OK, 50);
                     show_main_message3("匯出CSV檔失敗", S_OK, 50);
                     return;
@@ -14273,7 +15059,7 @@ namespace iMS_Link
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e20 : " + ex.Message + "\n";
                     show_main_message1("CSV檔使用中, 未儲存", S_OK, 50);
                     show_main_message3("匯出CSV檔失敗", S_OK, 50);
                     return;
@@ -14333,7 +15119,7 @@ namespace iMS_Link
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e21 : " + ex.Message + "\n";
                     show_main_message1("CSV檔使用中, 未儲存", S_OK, 50);
                     show_main_message3("匯出CSV檔失敗", S_OK, 50);
                     return;
@@ -14433,6 +15219,26 @@ namespace iMS_Link
                 button90.Enabled = false;
                 flag_comport_ok = false;
             }
+        }
+
+        void show_main_message_cmx_lenc(string mesg, int number, int timeout)
+        {
+            lb_main_mesg_cmx_lenc.Text = mesg;
+            playSound(number);
+
+            timer_display_show_main_mesg_cmx_lenc_count = 0;
+            timer_display_show_main_mesg_cmx_lenc_count_target = timeout;   //timeout in 0.1 sec
+            timer_display.Enabled = true;
+        }
+
+        void show_main_message0(string mesg, int number, int timeout)
+        {
+            lb_main_mesg0.Text = mesg;
+            playSound(number);
+
+            timer_display_show_main_mesg0_count = 0;
+            timer_display_show_main_mesg0_count_target = timeout;   //timeout in 0.1 sec
+            timer_display.Enabled = true;
         }
 
         void show_main_message1(string mesg, int number, int timeout)
@@ -19454,7 +20260,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f1a : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e22 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -19466,7 +20272,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f2 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e23 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -19479,7 +20285,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f3 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e24 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -19510,7 +20316,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f4 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e25 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -19532,7 +20338,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f5 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e26 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -19544,7 +20350,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f6 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e27 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -19557,7 +20363,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f7 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e28 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -19723,7 +20529,7 @@ namespace iMS_Link
                                 }
                                 catch (Exception ex)
                                 {
-                                    richTextBox1.Text += "xxx錯誤訊息f9 : " + ex.Message + "\n";
+                                    richTextBox1.Text += "xxx錯誤訊息e29 : " + ex.Message + "\n";
                                     GC.Collect();       //回收資源
                                     flag_do_find_awb_location = false;
                                     return S_FALSE;
@@ -19786,7 +20592,7 @@ namespace iMS_Link
                     }
                     catch (Exception ex)
                     {
-                        richTextBox1.Text += "xxx錯誤訊息fa : " + ex.Message + "\n";
+                        richTextBox1.Text += "xxx錯誤訊息e30 : " + ex.Message + "\n";
                         GC.Collect();       //回收資源
                         flag_do_find_awb_location = false;
                         return S_FALSE;
@@ -19953,7 +20759,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f1b : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e31 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -19965,7 +20771,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f2 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e32 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -19978,7 +20784,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f3 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e33 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -20085,7 +20891,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f1c : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e34 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -20097,7 +20903,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f2 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e35 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -20110,7 +20916,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f3 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e36 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return S_FALSE;
@@ -20190,6 +20996,32 @@ namespace iMS_Link
             }
 
             //停用Gamma
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x00;
+            SendData = 0x02;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x0B;
+            SendData = 0x00;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x06;
+            SendData = 0x20;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x05;
+            SendData = 0x15;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x08;
+            SendData = 0x00;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
             DongleAddr_h = 0x50;
             DongleAddr_l = 0x00;
             SendData = 0xFF;
@@ -20207,11 +21039,11 @@ namespace iMS_Link
             delay(10);
 
             //設定相機預設的RB值
-            //R = 0x5B0 = 1456, 0x600 = 1536
-            //B = 0x670 = 1648, 0x500 = 1280
+            //R = 0x5B0 = 1456, 0x500 = 1280
+            //B = 0x670 = 1648, 0x600 = 1536
             DongleAddr_h = 0x52;
             DongleAddr_l = 0x1A;
-            SendData = 0x06;
+            SendData = 0x05;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
             delay(10);
             DongleAddr_h = 0x52;
@@ -20221,7 +21053,7 @@ namespace iMS_Link
             delay(10);
             DongleAddr_h = 0x52;
             DongleAddr_l = 0x1E;
-            SendData = 0x05;
+            SendData = 0x06;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
             delay(10);
             DongleAddr_h = 0x52;
@@ -20247,16 +21079,16 @@ namespace iMS_Link
 
                 delay(20);
             }
-            else    //A04
+            else    //A04, A05
             {
                 if (rb_brightness_color_1.Checked == true)
                     richTextBox1.Text += "使用白光 66 56\n";
                 else
-                    richTextBox1.Text += "使用黃光 40 25\n";
+                    richTextBox1.Text += "使用黃光 35 20\n";
                 if (rb_brightness_color_1.Checked == true)
                     SendData = 66;
                 else
-                    SendData = 40;
+                    SendData = 35;
                 if (flag_auto_brightness_awb == true)
                 {
                     richTextBox1.Text += "自動亮度測試 20 5 + 5 * " + current_test_count.ToString() + "\n";
@@ -20271,7 +21103,7 @@ namespace iMS_Link
                 if (rb_brightness_color_1.Checked == true)
                     SendData = 56;
                 else
-                    SendData = 25;
+                    SendData = 20;
                 if (flag_auto_brightness_awb == true)
                 {
                     SendData = (byte)(5 + current_test_count * 5);
@@ -20340,7 +21172,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f1d : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e37 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 return S_FALSE;
             }
@@ -20601,7 +21433,7 @@ namespace iMS_Link
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息b1 : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e38 : " + ex.Message + "\n";
                     show_main_message1("存檔失敗", S_OK, 30);
                     show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
                 }
@@ -20782,7 +21614,7 @@ namespace iMS_Link
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息b1 : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e39 : " + ex.Message + "\n";
                     show_main_message1("存檔失敗", S_OK, 30);
                     show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
                 }
@@ -20794,6 +21626,48 @@ namespace iMS_Link
                 show_main_message2("無圖可存a", S_FALSE, 30);
             }
             return;
+        }
+
+        private void tb_mesg_Enter(object sender, EventArgs e)
+        {
+            if (tb_mesg.Text == "輸入圖片訊息")
+                tb_mesg.Text = "";
+            tb_mesg.BackColor = Color.Pink;
+            timer_stage2.Enabled = false;
+        }
+
+        private void tb_mesg_Leave(object sender, EventArgs e)
+        {
+            tb_mesg.BackColor = System.Drawing.SystemColors.ControlLight;
+            if (tb_mesg.Text == "")
+                tb_mesg.Text = "輸入圖片訊息";
+            timer_stage2.Enabled = true;
+        }
+
+        private void tb_mesg_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                tb_mesg.BackColor = System.Drawing.SystemColors.ControlLight;
+                if (tb_mesg.Text == "")
+                    tb_mesg.Text = "輸入圖片訊息";
+                timer_stage2.Enabled = true;
+
+                save_image_to_local_drive();        //順道本地存圖
+
+                e.Handled = true;
+            }
+            else if (e.KeyChar == (Char)27)  //撈取ESC
+            {
+                tb_mesg.BackColor = System.Drawing.SystemColors.ControlLight;
+                tb_mesg.Text = "輸入圖片訊息";
+                timer_stage2.Enabled = true;
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
         }
 
         void save_image_to_local_drive()
@@ -20828,6 +21702,14 @@ namespace iMS_Link
                     }
                     else
                     {
+                        if (flag_operation_mode == MODE_RELEASE_STAGE0)
+                        {
+                            if ((tb_mesg.Text != "") && (tb_mesg.Text != "輸入圖片訊息"))
+                            {
+                                drawDate += "\t" + tb_mesg.Text.Trim();
+                                //tb_mesg.Text = "輸入圖片訊息";
+                            }
+                        }
                         g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
                     }
                 }
@@ -20882,7 +21764,7 @@ namespace iMS_Link
                         y_st += 35;
                         g.DrawString("整張亮度 : " + brightness_result_full.ToString("F2"), drawFont1, drawBrush, x_st, y_st);
                     }
-                    else
+                    else if ((cb_show_info.Checked == true) && (flag_show_cmx_lenc_result == false))
                     {
                         if (cb_auto_search.Checked == true)
                         {
@@ -20926,6 +21808,15 @@ namespace iMS_Link
                 else
                 {
                     filename1 = Application.StartupPath + "\\picture\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                    if (flag_operation_mode == MODE_RELEASE_STAGE0)
+                    {
+                        if ((tb_mesg.Text != "") && (tb_mesg.Text != "輸入圖片訊息"))
+                        {
+                            filename1 += "_" + tb_mesg.Text.Trim();
+                            tb_mesg.Text = "輸入圖片訊息";
+                        }
+                    }
                 }
 
                 //String file1 = file + ".jpg";
@@ -20947,7 +21838,7 @@ namespace iMS_Link
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息b2 : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e40 : " + ex.Message + "\n";
                     show_main_message1("存檔失敗", S_OK, 30);
                     show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
                 }
@@ -21042,7 +21933,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e41 : " + ex.Message + "\n";
             }
             */
 
@@ -22256,7 +23147,6 @@ namespace iMS_Link
                 pictureBox_contrast.Size = new Size(300, 256);
             else
                 pictureBox_contrast.Size = new Size(280, 256);
-
         }
 
         private void trackBar_WPT_Scroll(object sender, EventArgs e)
@@ -22827,7 +23717,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f1f : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e42 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return result;
@@ -22839,7 +23729,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f2 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e43 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return result;
@@ -22852,7 +23742,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f3 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e44 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return result;
@@ -22926,7 +23816,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f1g : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e45 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 return result;
             }
@@ -22937,7 +23827,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f2 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e46 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 return result;
             }
@@ -22949,7 +23839,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f3 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e47 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return result;
@@ -23011,7 +23901,7 @@ namespace iMS_Link
             Color p;
             Bitmap bm2 = null;
             double y_total = 0;
-            int result = -1;
+            //int result = -1;
 
             tb_awb_mesg.Text = "量測亮度";
 
@@ -23024,7 +23914,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f1f : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e48 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return null;
@@ -23036,7 +23926,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f2 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e49 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return null;
@@ -23049,7 +23939,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f3 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e50 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return null;
@@ -23445,6 +24335,7 @@ namespace iMS_Link
 
         void measure_brightness_one_frame()
         {
+            string mesg = "量整張畫面亮度\n";
             double result = -1;
 
             /*
@@ -23465,10 +24356,14 @@ namespace iMS_Link
             result = measure_brightness_one_frame0(640 / 4, 480 / 4, 640 / 2, 480 / 2);
             richTextBox1.Text += "中間1/4張平均 : result : " + result.ToString("F4") + "\n";
             brightness_result_quarter = result;
+            mesg += "中間1/4張平均 : " + result.ToString("F4") + "\n";
 
             result = measure_brightness_one_frame0(0, 0, 640, 480);
             richTextBox1.Text += "整張平均 : result : " + result.ToString("F4") + "\n";
             brightness_result_full = result;
+            mesg += "整張平均 : " + result.ToString("F4");
+
+            show_main_message0(mesg, S_OK, 50);
         }
 
         double measure_brightness_one_frame0(int x_st, int y_st, int ww, int hh)
@@ -23499,7 +24394,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f1h : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e51 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return result;
@@ -23511,7 +24406,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f2 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e52 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return result;
@@ -23524,7 +24419,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f3 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e53 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return result;
@@ -23607,14 +24502,15 @@ namespace iMS_Link
 
         private void bt_debug1_Click(object sender, EventArgs e)
         {
+            show_main_message0("debug1 : 量測亮度", S_OK, 30);
+            //show_main_message0("目前這整張圖片的亮度 : " + result.ToString(), S_OK, 30);
             //richTextBox1.Visible = false;
             measure_picture();
-
-
         }
 
         private void bt_debug2_Click(object sender, EventArgs e)
         {
+            show_main_message0("debug2 : 量測目前這整張圖片的亮度", S_OK, 30);
             /*
             //一維陣列用法：
             double[] sd_num = new double[] { 
@@ -23650,6 +24546,8 @@ namespace iMS_Link
 
         private void bt_debug3_Click(object sender, EventArgs e)
         {
+            show_main_message0("debug3 : 測試comport連線 300次", S_OK, 30);
+
             int i = 0;
             int ret;
 
@@ -23802,15 +24700,26 @@ namespace iMS_Link
             double total_R = 0;
             double total_G = 0;
             double total_B = 0;
+            double total_Y = 0;
 
             int R_count_max = 0;
             int G_count_max = 0;
             int B_count_max = 0;
+            int Y_count_max = 0;
 
+            /*
+            richTextBox1.Text += "量測正中央 190X190\n";
             ww = 190;
             hh = 190;
             x_st = 640 / 2 - ww / 2;
             y_st = 480 / 2 - hh / 2;
+            */
+
+            richTextBox1.Text += "量測整張\n";
+            ww = 640;
+            hh = 480;
+            x_st = 0;
+            y_st = 0;
 
             if ((ww <= 0) || (hh <= 0))
             {
@@ -23830,7 +24739,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f1i : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e54 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return;
@@ -23843,7 +24752,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f2 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e55 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return;
@@ -23857,7 +24766,7 @@ namespace iMS_Link
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息f3 : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息e56 : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 flag_do_find_awb_location = false;
                 return;
@@ -23878,14 +24787,17 @@ namespace iMS_Link
             total_R = 0;
             total_G = 0;
             total_B = 0;
+            total_Y = 0;
 
             int[] R_data = new int[ww * hh];
             int[] G_data = new int[ww * hh];
             int[] B_data = new int[ww * hh];
+            int[] Y_data = new int[ww * hh];
 
             int[] R_count = new int[256];
             int[] G_count = new int[256];
             int[] B_count = new int[256];
+            int[] Y_count = new int[256];
 
             //richTextBox1.Text += "\nST\n";
             for (j = y_st; j < (y_st + hh); j++)
@@ -23907,13 +24819,13 @@ namespace iMS_Link
                     G_count[p.G]++;
                     B_count[p.B]++;
 
-                    /*
                     //bm2.SetPixel(i, j, Color.FromArgb(255, 0, 0));
                     RGB pp = new RGB(p.R, p.G, p.B);
                     YUV yyy = new YUV();
                     yyy = RGBToYUV(pp);
-                    y_total += yyy.Y;
-                    */
+                    total_Y += yyy.Y;
+                    Y_data[hh * (j - y_st) + (i - x_st)] = (int)yyy.Y;
+                    Y_count[(int)yyy.Y]++;
                 }
             }
             //richTextBox1.Text += "\nSP\n";
@@ -23958,6 +24870,7 @@ namespace iMS_Link
             R_count_max = 0;
             G_count_max = 0;
             B_count_max = 0;
+            Y_count_max = 0;
             for (i = 0; i < 256; i++)
             {
                 /*
@@ -23978,6 +24891,8 @@ namespace iMS_Link
                     G_count_max = G_count[i];
                 if (B_count[i] > B_count_max)
                     B_count_max = B_count[i];
+                if (Y_count[i] > Y_count_max)
+                    Y_count_max = Y_count[i];
             }
 
             //richTextBox1.Text += "Max : " + R_count_max.ToString() + ", " + G_count_max.ToString() + ", " + B_count_max.ToString() + "\n";
@@ -23987,6 +24902,7 @@ namespace iMS_Link
             int margin = 50;
             pictureBox3.Size = new Size(256 * 2 + margin * 2 + 640 + margin * 2, 256 * 2 + margin * 2);
             pictureBox3.BringToFront();
+            pictureBox3.Location = new Point(20, 350);
 
             Bitmap bmp3 = new Bitmap(256 * 2 + margin * 2 + 640 + margin * 2, 256 * 2 + margin * 2);
             g3 = Graphics.FromImage(bmp3);
@@ -23994,11 +24910,13 @@ namespace iMS_Link
             g3.DrawRectangle(new Pen(Color.Navy, 2), margin - 4, margin - 4, 256 * 2 + 8, 256 * 2 + 8);
 
             // Create pens.
-            Pen redPen = new Pen(Color.Red, 3);
-            Pen greenPen = new Pen(Color.Green, 2);
-            Pen bluePen = new Pen(Color.Blue, 1);
+            Pen redPen = new Pen(Color.Red, 4);
+            Pen greenPen = new Pen(Color.Green, 3);
+            Pen bluePen = new Pen(Color.Blue, 2);
+            Pen yellowPen = new Pen(Color.Yellow, 1);
             Point[] curvePoints = new Point[256];    //一維陣列內有 256 個Point
 
+            //畫紅色的分布
             for (i = 0; i < 256; i++)
             {
                 curvePoints[i].X = margin + 2 * i;
@@ -24010,6 +24928,7 @@ namespace iMS_Link
             // Draw curve to screen.
             //g3.DrawCurve(redPen, curvePoints); //畫曲線
 
+            //畫綠色的分布
             for (i = 0; i < 256; i++)
             {
                 curvePoints[i].X = margin + 2 * i;
@@ -24021,6 +24940,7 @@ namespace iMS_Link
             // Draw curve to screen.
             //g3.DrawCurve(greenPen, curvePoints); //畫曲線
 
+            //畫藍色的分布
             for (i = 0; i < 256; i++)
             {
                 curvePoints[i].X = margin + 2 * i;
@@ -24032,6 +24952,19 @@ namespace iMS_Link
             // Draw curve to screen.
             //g3.DrawCurve(bluePen, curvePoints); //畫曲線
 
+            //畫亮度的分布
+            for (i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = margin + 2 * i;
+                curvePoints[i].Y = margin + 256 * 2 - (int)(Y_count[i] * pictureBox3_ratio_y);
+                //curvePoints[i].Y = 2 * i;
+            }
+            // Draw lines between original points to screen.
+            g3.DrawLines(yellowPen, curvePoints);   //畫直線
+            // Draw curve to screen.
+            //g3.DrawCurve(bluePen, curvePoints); //畫曲線
+
+
             double[] r_array = new double[250];
             double[] g_array = new double[250];
             double[] b_array = new double[250];
@@ -24039,9 +24972,12 @@ namespace iMS_Link
             int r_max = 0;
             int g_max = 0;
             int b_max = 0;
+            int y_max = 0;
+
             int r_max_index = 0;
             int g_max_index = 0;
             int b_max_index = 0;
+            int y_max_index = 0;
 
             total_R = 0;
             total_G = 0;
@@ -24069,10 +25005,16 @@ namespace iMS_Link
                     b_max = B_count[i];
                     b_max_index = i;
                 }
+                if (y_max < Y_count[i])
+                {
+                    y_max = Y_count[i];
+                    y_max_index = i;
+                }
             }
+
+            //標示極大值
             Point pt1;
             Point pt2;
-
             pt1 = new Point(margin + 2 * r_max_index - 12, margin + 256 * 2 - (int)(r_max * pictureBox3_ratio_y));
             pt2 = new Point(margin + 2 * r_max_index + 12, margin + 256 * 2 - (int)(r_max * pictureBox3_ratio_y));
             g3.DrawLine(new Pen(Color.Blue, 2), pt1, pt2);
@@ -24094,6 +25036,12 @@ namespace iMS_Link
             pt2 = new Point(margin + 2 * b_max_index, margin + 256 * 2 - (int)(b_max * pictureBox3_ratio_y) + 40);
             g3.DrawLine(new Pen(Color.Green, 2), pt1, pt2);
 
+            pt1 = new Point(margin + 2 * y_max_index - 12, margin + 256 * 2 - (int)(y_max * pictureBox3_ratio_y));
+            pt2 = new Point(margin + 2 * y_max_index + 12, margin + 256 * 2 - (int)(y_max * pictureBox3_ratio_y));
+            g3.DrawLine(new Pen(Color.Green, 2), pt1, pt2);
+            pt1 = new Point(margin + 2 * y_max_index, margin + 256 * 2 - (int)(y_max * pictureBox3_ratio_y) - 40);
+            pt2 = new Point(margin + 2 * y_max_index, margin + 256 * 2 - (int)(y_max * pictureBox3_ratio_y) + 40);
+            g3.DrawLine(new Pen(Color.Red, 2), pt1, pt2);
 
             /*
             richTextBox1.Text += "total_R = " + total_R.ToString() + "\n";
@@ -24114,6 +25062,9 @@ namespace iMS_Link
 
 
             g3.DrawImage(bm2, 256 * 2 + 100 + 50, (256 * 2 + 100 - 480) / 2 - 50, bm2.Width, bm2.Height);
+
+            g3.DrawRectangle(new Pen(Color.Yellow, 10), 256 * 2 + 100 + 50 + x_st, (256 * 2 + 100 - 480) / 2 - 50 + y_st, ww, hh);   //把量測區域畫出來
+
             //g3.DrawRectangle(new Pen(Color.Red, 10), 256 * 2 + 100, 100, 200, 200);
 
             pictureBox3.Image = bmp3;
@@ -24161,7 +25112,7 @@ namespace iMS_Link
                     }
                     catch (Exception ex)
                     {
-                        richTextBox1.Text += "xxx錯誤訊息b2 : " + ex.Message + "\n";
+                        richTextBox1.Text += "xxx錯誤訊息e57 : " + ex.Message + "\n";
                     }
 
 
@@ -24213,11 +25164,8 @@ namespace iMS_Link
                 int dy = e.Y - pictureBox3_position_y_old;
 
                 //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
-
-
                 pictureBox3.Location = new Point(pictureBox3.Location.X + dx, pictureBox3.Location.Y + dy);
             }
-
         }
 
         private void pictureBox3_MouseUp(object sender, MouseEventArgs e)
@@ -24228,11 +25176,7 @@ namespace iMS_Link
             int dy = e.Y - pictureBox3_position_y_old;
 
             //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
-
-
             pictureBox3.Location = new Point(pictureBox3.Location.X + dx, pictureBox3.Location.Y + dy);
-
-
         }
 
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
@@ -24599,7 +25543,7 @@ namespace iMS_Link
             Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
             serialPort1.Write(user_flash_data, 0, 16);
 
-            numericUpDown_brightness.Value = 140;
+            //numericUpDown_brightness.Value = 140;
 
             do_save_camera_data();
 
@@ -24763,7 +25707,6 @@ namespace iMS_Link
             Color[] colors = new Color[] { Color.Red, Color.Green, Color.Blue };
             String[] curves = new String[] { "", "", "" };
 
-            //int i;
             for (i = 0; i < N; i++)
             {
                 series[i] = new Series(curves[i]);
@@ -24794,34 +25737,26 @@ namespace iMS_Link
 
             chart2.Series.Add(series[0]);       //將序列1新增到chart上
             chart2.ChartAreas[0].AxisY.Maximum = numbers.Max() + 10;        //設定Y軸最大值
-
-
-
-
-
-
-
             return;
         }
 
         void show_picture_histogram()
         {
-            int ww = 0;
-            int hh = 0;
+            //int ww = 0;
+            //int hh = 0;
             int step = 20;
-            int i;
             int count;
             double result = -1;
             int ww_st = 10;
             int ww_sp = 210;
             count = (ww_sp - ww_st) / step + 1;
 
-
             result = measure_brightness(0, 0, 640, 480);
-            richTextBox1.Text += "result = " + result.ToString() + "\n";
-
+            richTextBox1.Text += "目前這整張圖片的亮度 : " + result.ToString() + "\n";
+            show_main_message0("目前這整張圖片的亮度 : " + result.ToString(), S_OK, 30);
 
             /*
+            int i;
             for (i = ww_st; i <= ww_sp; i += step)
             {
                 ww = i;
@@ -24870,13 +25805,15 @@ namespace iMS_Link
         {
             if (flag_show_brightness == false)
             {
+                show_main_message0("debug4 : 用chart顯示一張圖中間那小塊的亮度", S_OK, 30);
                 flag_show_brightness = true;
                 chart2.Visible = true;
-                chart2.Location = new Point(605, 15);
+                chart2.Location = new Point(610, 750);
                 chart2.Size = new Size(600, 200);
             }
             else
             {
+                show_main_message0("debug4 : 關閉", S_OK, 30);
                 flag_show_brightness = false;
                 chart2.Visible = false;
             }
@@ -24884,32 +25821,4734 @@ namespace iMS_Link
 
         private void bt_debug5_Click(object sender, EventArgs e)
         {
+            show_main_message0("debug5 : 量測亮度 只看中間一條", S_OK, 30);
 
+            int x_st = 1195;
+            int y_st = 10;
+            int dy = 20;
+            int w = 95;
+            int h = 20;
+            cb_average.Text = "20張平均";
+            cb_average.ForeColor = Color.Black;
+            cb_average.BackColor = Color.White;
+            cb_average.Width = w;
+            cb_average.Height = h;
+            cb_average.Checked = false;
+            cb_average.Location = new Point(x_st, y_st + dy * 0);
+            cb_average.Enabled = false;
+            this.pictureBox3.Controls.Add(cb_average);	// 將控件加入表單
+
+            cb_show_r.Text = "R";
+            cb_show_r.ForeColor = Color.Red;
+            cb_show_r.BackColor = Color.White;
+            cb_show_r.Width = w;
+            cb_show_r.Height = h;
+            cb_show_r.Checked = true;
+            cb_show_r.Location = new Point(x_st, y_st + dy * 1);
+            this.pictureBox3.Controls.Add(cb_show_r);	// 將控件加入表單
+
+            cb_show_g.Text = "G";
+            cb_show_g.ForeColor = Color.Green;
+            cb_show_g.BackColor = Color.White;
+            cb_show_g.Width = w;
+            cb_show_g.Height = h;
+            cb_show_g.Checked = true;
+            cb_show_g.Location = new Point(x_st, y_st + dy * 2);
+            this.pictureBox3.Controls.Add(cb_show_g);	// 將控件加入表單
+
+            cb_show_b.Text = "B";
+            cb_show_b.ForeColor = Color.Blue;
+            cb_show_b.BackColor = Color.White;
+            cb_show_b.Width = w;
+            cb_show_b.Height = h;
+            cb_show_b.Checked = true;
+            cb_show_b.Location = new Point(x_st, y_st + dy * 3);
+            this.pictureBox3.Controls.Add(cb_show_b);	// 將控件加入表單
+
+            cb_show_y.Text = "Y";
+            cb_show_y.ForeColor = Color.Orange;
+            cb_show_y.BackColor = Color.White;
+            cb_show_y.Width = w;
+            cb_show_y.Height = h;
+            cb_show_y.Checked = false;
+            cb_show_y.Location = new Point(x_st, y_st + dy * 4);
+            this.pictureBox3.Controls.Add(cb_show_y);	// 將控件加入表單
+
+            // 實例化按鈕
+            btn_return.Width = 35;
+            btn_return.Height = 35;
+            btn_return.Text = "回";
+            //btn_return.BackColor = Color.Red;
+            btn_return.Name = "bt_return";
+            btn_return.Location = new Point(x_st + 50, y_st + dy * 1 + dy / 2);
+            // 加入按鈕事件
+            //btn_return.Click += new EventHandler(btn_return_pbx3_Click);   //same
+            btn_return.Click += btn_return_pbx3_Click;
+            // 將按鈕加入表單
+            //this.AcceptButton = btn_return;
+            this.pictureBox3.Controls.Add(btn_return);
+            btn_return.BringToFront();
+
+            flag_use_measure_picture_brightness = true;
+            //show_picture_brightness();
+        }
+
+        void show_picture_brightness()
+        {
+            if (bm == null)
+                return;
+
+            flag_do_find_awb_location = true;
+
+            int ww = 640;
+            int hh = 480;
+            int x_st;
+            int y_st;
+
+            int w;
+            int h;
+            int i;
+            int j;
+            Color p;
+            Bitmap bm2 = null;
+
+            //double total_R = 0;
+            //double total_G = 0;
+            //double total_B = 0;
+            //double total_Y = 0;
+
+            //int R_count_max = 0;
+            //int G_count_max = 0;
+            //int B_count_max = 0;
+            //int Y_count_max = 0;
+
+            x_st = 0;
+            y_st = 0;
+
+            if ((ww <= 0) || (hh <= 0))
+            {
+                richTextBox1.Text += "量測點數 ww = " + ww.ToString() + ", hh = " + hh.ToString() + " 不合法\n";
+                flag_do_find_awb_location = false;
+                return;
+            }
+
+            try
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                //bm2 = bm;
+                //bm2 = (Bitmap)bm.Clone();
+                bm2 = new Bitmap(bm);
+
+                //pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e58 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return;
+            }
+
+            /*
+            try
+            {
+                ga = Graphics.FromImage(bm2);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e59 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return;
+            }
+            */
+
+            try
+            {
+                w = bm2.Width;
+                h = bm2.Height;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e60 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return;
+            }
+
+            if (x_st < 0)
+                x_st = 0;
+            if (y_st < 0)
+                y_st = 0;
+            if ((x_st + ww) > w)
+                x_st = w - ww;
+            if ((y_st + hh) > h)
+                y_st = h - hh;
+
+            //richTextBox1.Text += "量測起點 x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+            //richTextBox1.Text += "量測範圍 ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+
+            total_R = 0;
+            total_G = 0;
+            total_B = 0;
+            //total_Y = 0;
+
+            int[] R_data = new int[640];
+            int[] G_data = new int[640];
+            int[] B_data = new int[640];
+            int[] Y_data = new int[640];
+
+            int[] R_count = new int[256];
+            int[] G_count = new int[256];
+            int[] B_count = new int[256];
+            int[] Y_count = new int[256];
+
+            //richTextBox1.Text += "\nST\n";
+            //for (j = y_st; j < (y_st + hh); j++)
+            j = 240;
+            {
+                //for (i = x_st; i < (x_st + ww); i++)
+                for (i = 0; i < 640; i++)
+                {
+                    p = bm2.GetPixel(i, j);
+
+                    /*
+                    total_R += p.R;
+                    total_G += p.G;
+                    total_B += p.B;
+                    //richTextBox1.Text += p.B.ToString() + " ";
+                    */
+
+                    R_data[i] = p.R;
+                    G_data[i] = p.G;
+                    B_data[i] = p.B;
+                    /*
+                    R_count[p.R]++;
+                    G_count[p.G]++;
+                    B_count[p.B]++;
+                    */
+
+                    //bm2.SetPixel(i, j, Color.FromArgb(255, 0, 0));
+                    RGB pp = new RGB(p.R, p.G, p.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+                    //total_Y += yyy.Y;
+                    //Y_data[hh * (j - y_st) + (i - x_st)] = (int)yyy.Y;
+                    Y_data[i] = (int)yyy.Y;
+                    //Y_count[(int)yyy.Y]++;
+                }
+            }
+            //richTextBox1.Text += "\nSP\n";
+
+            /*
+            int total_points = ww * hh;
+            richTextBox1.Text += "total_points = " + total_points.ToString() + "\n";
+            richTextBox1.Text += "total_R = " + total_R.ToString() + "\n";
+            richTextBox1.Text += "total_G = " + total_G.ToString() + "\n";
+            richTextBox1.Text += "total_B = " + total_B.ToString() + "\n";
+
+            richTextBox1.Text += "average_R = " + (total_R / total_points).ToString("F2") + "\n";
+            richTextBox1.Text += "average_G = " + (total_G / total_points).ToString("F2") + "\n";
+            richTextBox1.Text += "average_B = " + (total_B / total_points).ToString("F2") + "\n";
+            */
+
+            /*
+            richTextBox1.Text += "R_count\t";
+            for (i = 0; i < 256; i++)
+            {
+                richTextBox1.Text += R_count[i] + " ";
+                if ((i % 32) == 31)
+                    richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+            /*
+            richTextBox1.Text += "\nG_count\t";
+            for (i = 0; i < 256; i++)
+            {
+                richTextBox1.Text += G_count[i] + " ";
+            }
+            richTextBox1.Text += "\nB_count\t";
+            for (i = 0; i < 256; i++)
+            {
+                richTextBox1.Text += B_count[i] + " ";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+
+            //R_count_max = 0;
+            //G_count_max = 0;
+            //B_count_max = 0;
+            //Y_count_max = 0;
+            for (i = 0; i < 256; i++)
+            {
+                /*
+                if (R_count[i] > 1000)
+                    R_count[i] = 1000;
+                if (G_count[i] > 1000)
+                    G_count[i] = 1000;
+                if (B_count[i] > 1000)
+                    B_count[i] = 1000;
+
+                if ((R_count[i] >= 1000) || (G_count[i] >= 1000) || (B_count[i] >= 1000))
+                    continue;
+                */
+
+                /*
+                if (R_count[i] > R_count_max)
+                    R_count_max = R_count[i];
+                if (G_count[i] > G_count_max)
+                    G_count_max = G_count[i];
+                if (B_count[i] > B_count_max)
+                    B_count_max = B_count[i];
+                if (Y_count[i] > Y_count_max)
+                    Y_count_max = Y_count[i];
+                */
+            }
+
+            //richTextBox1.Text += "Max : " + R_count_max.ToString() + ", " + G_count_max.ToString() + ", " + B_count_max.ToString() + "\n";
+
+            pictureBox3.Visible = true;
+            pictureBox3.BackColor = Color.White;
+            int margin = 10;
+            pictureBox3.Size = new Size(640 * 2 + margin * 2, 256 * 1 + margin * 2);
+            pictureBox3.BringToFront();
+
+            Bitmap bmp3 = new Bitmap(640 * 2 + margin * 2, 256 * 1 + margin * 2);
+            g3 = Graphics.FromImage(bmp3);
+            g3.FillRectangle(new SolidBrush(Color.White), 0, 0, bmp3.Width, bmp3.Height);
+            g3.DrawRectangle(new Pen(Color.Navy, 2), margin - 4, margin - 4, 640 * 2 + 8, 256 * 1 + 8);
+
+            if (cb_average.Checked == true)
+            {
+                //取20點平均, TBD
+
+            }
+            // Create pens.
+            Pen redPen = new Pen(Color.Red, 2);
+            Pen greenPen = new Pen(Color.Green, 3);
+            Pen bluePen = new Pen(Color.Blue, 2);
+            Pen yellowPen = new Pen(Color.Yellow, 2);
+            Point[] curvePoints = new Point[640];    //一維陣列內有 256 個Point
+
+            if (cb_show_r.Checked == true)
+            {
+                //畫 R 的分布
+                for (i = 0; i < 640; i++)
+                {
+                    curvePoints[i].X = margin + i * 2;
+                    //curvePoints[i].Y = margin + 256 * 2 - (int)(Y_count[i] * pictureBox3_ratio_y);
+                    curvePoints[i].Y = margin + 256 * 1 - (int)(R_data[i]);
+                    //curvePoints[i].Y = 2 * i;
+                }
+                // Draw lines between original points to screen.
+                g3.DrawLines(redPen, curvePoints);   //畫直線
+                // Draw curve to screen.
+                //g3.DrawCurve(bluePen, curvePoints); //畫曲線
+            }
+
+            if (cb_show_g.Checked == true)
+            {
+                //畫 G 的分布
+                for (i = 0; i < 640; i++)
+                {
+                    curvePoints[i].X = margin + i * 2;
+                    //curvePoints[i].Y = margin + 256 * 2 - (int)(Y_count[i] * pictureBox3_ratio_y);
+                    curvePoints[i].Y = margin + 256 * 1 - (int)(G_data[i]);
+                    //curvePoints[i].Y = 2 * i;
+                }
+                // Draw lines between original points to screen.
+                g3.DrawLines(greenPen, curvePoints);   //畫直線
+                // Draw curve to screen.
+                //g3.DrawCurve(bluePen, curvePoints); //畫曲線
+            }
+
+            if (cb_show_b.Checked == true)
+            {
+                //畫 B 的分布
+                for (i = 0; i < 640; i++)
+                {
+                    curvePoints[i].X = margin + i * 2;
+                    //curvePoints[i].Y = margin + 256 * 2 - (int)(Y_count[i] * pictureBox3_ratio_y);
+                    curvePoints[i].Y = margin + 256 * 1 - (int)(B_data[i]);
+                    //curvePoints[i].Y = 2 * i;
+                }
+                // Draw lines between original points to screen.
+                g3.DrawLines(bluePen, curvePoints);   //畫直線
+                // Draw curve to screen.
+                //g3.DrawCurve(bluePen, curvePoints); //畫曲線
+            }
+
+            if (cb_show_y.Checked == true)
+            {
+                //畫亮度的分布
+                for (i = 0; i < 640; i++)
+                {
+                    curvePoints[i].X = margin + i * 2;
+                    //curvePoints[i].Y = margin + 256 * 2 - (int)(Y_count[i] * pictureBox3_ratio_y);
+                    curvePoints[i].Y = margin + 256 * 1 - (int)(Y_data[i]);
+                    //curvePoints[i].Y = 2 * i;
+                }
+                // Draw lines between original points to screen.
+                g3.DrawLines(yellowPen, curvePoints);   //畫直線
+                // Draw curve to screen.
+                //g3.DrawCurve(bluePen, curvePoints); //畫曲線
+            }
+
+            pictureBox3.Image = bmp3;
+
+            GC.Collect();       //回收資源
+            //pictureBox1.Image = bm2;
+
+            delay(10);
+            flag_do_find_awb_location = false;
+
+            return;
         }
 
         private void bt_debug6_Click(object sender, EventArgs e)
         {
-
+            show_main_message0("debug6 : 做CMX", S_OK, 30);
+            do_cmx();
+            flag_show_cmx_lenc_result = true;
+            timer_clock.Interval = 100;
+            cb_show_info.Checked = false;
+            cb_show_info.Visible = false;
         }
 
         private void bt_debug7_Click(object sender, EventArgs e)
         {
-
+            show_main_message0("debug7 : 做LENC", S_OK, 30);
+            do_lenc();
+            flag_show_cmx_lenc_result = true;
+            timer_clock.Interval = 100;
+            cb_show_info.Checked = false;
+            cb_show_info.Visible = false;
         }
 
         private void bt_debug8_Click(object sender, EventArgs e)
         {
-
+            show_main_message0("debug8 : --------------", S_OK, 30);
+            //remove_all_controls_in_pictureBox3();
+            check_all_controls_in_pictureBox3();
         }
 
         private void bt_debug9_Click(object sender, EventArgs e)
         {
-
+            show_main_message0("debug9 : --------------", S_OK, 30);
         }
 
         private void bt_debug10_Click(object sender, EventArgs e)
         {
+            int ww = 640;
+            int hh = 480;
+            int margin = 30;
+            pictureBox3.Visible = true;
+            pictureBox3.BackColor = Color.White;
+            pictureBox3.Size = new Size(ww, hh);
+            pictureBox3.BringToFront();
+            pictureBox3.Location = new Point(600, 450);
 
+            Bitmap bmp3 = new Bitmap(ww, hh);
+            g3 = Graphics.FromImage(bmp3);
+            g3.FillRectangle(new SolidBrush(Color.Pink), 0, 0, bmp3.Width, bmp3.Height);
+            g3.DrawRectangle(new Pen(Color.Navy, 2), margin, margin, ww - margin * 2, hh - margin * 2);
+
+            string debug1 = "debug1 : 量測亮度";
+            string debug2 = "debug2 : 量測目前這整張圖片的亮度";
+            string debug3 = "debug3 : 測試comport連線 300次";
+            string debug4 = "debug4 : 用chart顯示一張圖中間那小塊的亮度";
+            string debug5 = "debug5 : 量測亮度 只看中間一條";
+            string debug6 = "debug6 : 做CMX";
+            string debug7 = "debug7 : 做LENC";
+            string debug8 = "debug8 : --------------";
+            string debug9 = "debug9 : --------------";
+
+            int x_st = 60;
+            int y_st = 50;
+            int dy = 45;
+
+            g3.DrawString(debug1, new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(x_st, y_st + dy * 0));
+            g3.DrawString(debug2, new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(x_st, y_st + dy * 1));
+            g3.DrawString(debug3, new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(x_st, y_st + dy * 2));
+            g3.DrawString(debug4, new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(x_st, y_st + dy * 3));
+            g3.DrawString(debug5, new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(x_st, y_st + dy * 4));
+            g3.DrawString(debug6, new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(x_st, y_st + dy * 5));
+            g3.DrawString(debug7, new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(x_st, y_st + dy * 6));
+            g3.DrawString(debug8, new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(x_st, y_st + dy * 7));
+            g3.DrawString(debug9, new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(x_st, y_st + dy * 8));
+
+            pictureBox3.Image = bmp3;
+
+            return;
+        }
+
+        private void chart2_DoubleClick(object sender, EventArgs e)
+        {
+            chart2.Visible = false;
+            flag_show_brightness = false;
+        }
+
+        void do_cmx()
+        {
+            int pbx3_w = 750;       //最後顯示出來的圖的大小
+            int pbx3_h = 500;
+            richTextBox1.Text += "pbx3_w = " + pbx3_w.ToString() + ", pbx3_h = " + pbx3_h.ToString() + "\n";
+            pictureBox3.Visible = true;
+            pictureBox3.BackColor = Color.White;
+
+            pictureBox3.Size = new Size(pbx3_w, pbx3_h);
+            pictureBox3.BringToFront();
+            pictureBox3.Location = new Point(10, 70);
+
+            Bitmap bmp3 = new Bitmap(pbx3_w, pbx3_h);
+            g3 = Graphics.FromImage(bmp3);
+            g3.FillRectangle(new SolidBrush(Color.White), 0, 0, bmp3.Width, bmp3.Height);   //整個背景
+            g3.DrawString("Color Matrix", new Font("標楷體", 26), new SolidBrush(Color.Red), new PointF(60, 10));
+
+            pictureBox3.Image = bmp3;
+
+            GC.Collect();       //回收資源
+
+            delay(10);
+
+            add_cmx_controls();
+            pictureBox4.Visible = true;
+            pictureBox4_position_x_old = PB4_DEFAULT_POSITION_X;
+            pictureBox4_position_y_old = PB4_DEFAULT_POSITION_Y;
+            pictureBox4.Location = new Point(pictureBox4_position_x_old, pictureBox4_position_y_old);
+            return;
+        }
+
+        void add_cmx_controls()
+        {
+            btn1.Visible = false;
+            btn2.Visible = false;
+            hsbar.Visible = false;
+            richTextBox1.Visible = false;
+
+            int x_st = 30;
+            int y_st = 60;
+            int dx = 250;
+            int dy = 50;
+            int offset = 0;
+            int w = 0;  //控件寬度
+            int h = 0;  //控件高度
+
+            // 實例化控件
+
+            lb_main_mesg_cmx_lenc.Text = "";
+            lb_main_mesg_cmx_lenc.Font = new Font("標楷體", 22);
+            lb_main_mesg_cmx_lenc.ForeColor = Color.Red;
+            lb_main_mesg_cmx_lenc.Location = new Point(x_st + dx * 2 + 100, y_st + dy * (-1));
+            lb_main_mesg_cmx_lenc.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb_main_mesg_cmx_lenc);     // 將控件加入表單
+
+            Label lb0 = new Label();
+            lb0.Text = "0x5600    CMX11    0x";
+            lb0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            lb0.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb0);     // 將控件加入表單
+
+            Label lb1 = new Label();
+            lb1.Text = "0x5601    CMX12    0x";
+            lb1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            lb1.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb1);     // 將控件加入表單
+
+            Label lb2 = new Label();
+            lb2.Text = "0x5602    CMX13    0x";
+            lb2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lb2.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb2);     // 將控件加入表單
+
+            Label lb3 = new Label();
+            lb3.Text = "0x5603    CMX14    0x";
+            lb3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb3.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb3);     // 將控件加入表單
+
+            Label lb4 = new Label();
+            lb4.Text = "0x5604    CMX15    0x";
+            lb4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            lb4.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb4);     // 將控件加入表單
+
+            Label lb5 = new Label();
+            lb5.Text = "0x5605    CMX16    0x";
+            lb5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            lb5.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb5);     // 將控件加入表單
+
+            Label lb6 = new Label();
+            lb6.Text = "0x5612    CMXSIGN    0x";
+            lb6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            lb6.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb6);     // 將控件加入表單
+
+            Label lb7 = new Label();
+            lb7.Text = "0x5615    CMXCTRL    0x";
+            lb7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            lb7.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb7);     // 將控件加入表單
+
+            Label lb8 = new Label();
+            lb8.Text = "0x5001    ISP CTRL01    0x";
+            lb8.Location = new Point(x_st + dx * 0 - 20, y_st + dy * 8);
+            lb8.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb8);     // 將控件加入表單
+
+            w = 50;
+            h = 50;
+            offset = -70;
+            tb0.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 0);
+            tb0.Width = w;
+            tb0.Height = h;
+            this.pictureBox3.Controls.Add(tb0);     // 將控件加入表單
+            tb0h.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 0);
+            tb0h.Width = w;
+            tb0h.Height = h;
+            this.pictureBox3.Controls.Add(tb0h);     // 將控件加入表單
+
+            tb1.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 1);
+            tb1.Width = w;
+            tb1.Height = h;
+            this.pictureBox3.Controls.Add(tb1);     // 將控件加入表單
+            tb1h.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 1);
+            tb1h.Width = w;
+            tb1h.Height = h;
+            this.pictureBox3.Controls.Add(tb1h);     // 將控件加入表單
+
+            tb2.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 2);
+            tb2.Width = w;
+            tb2.Height = h;
+            this.pictureBox3.Controls.Add(tb2);     // 將控件加入表單
+            tb2h.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 2);
+            tb2h.Width = w;
+            tb2h.Height = h;
+            this.pictureBox3.Controls.Add(tb2h);     // 將控件加入表單
+
+            tb3.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 3);
+            tb3.Width = w;
+            tb3.Height = h;
+            this.pictureBox3.Controls.Add(tb3);     // 將控件加入表單
+            tb3h.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 3);
+            tb3h.Width = w;
+            tb3h.Height = h;
+            this.pictureBox3.Controls.Add(tb3h);     // 將控件加入表單
+
+            tb4.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 4);
+            tb4.Width = w;
+            tb4.Height = h;
+            this.pictureBox3.Controls.Add(tb4);     // 將控件加入表單
+            tb4h.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 4);
+            tb4h.Width = w;
+            tb4h.Height = h;
+            this.pictureBox3.Controls.Add(tb4h);     // 將控件加入表單
+
+            tb5.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 5);
+            tb5.Width = w;
+            tb5.Height = h;
+            this.pictureBox3.Controls.Add(tb5);     // 將控件加入表單
+            tb5h.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 5);
+            tb5h.Width = w;
+            tb5h.Height = h;
+            this.pictureBox3.Controls.Add(tb5h);     // 將控件加入表單
+
+            tb6.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 6);
+            tb6.Width = w;
+            tb6.Height = h;
+            this.pictureBox3.Controls.Add(tb6);     // 將控件加入表單
+            tb6h.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 6);
+            tb6h.Width = w;
+            tb6h.Height = h;
+            this.pictureBox3.Controls.Add(tb6h);     // 將控件加入表單
+
+            tb7.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 7);
+            tb7.Width = w;
+            tb7.Height = h;
+            this.pictureBox3.Controls.Add(tb7);     // 將控件加入表單
+            tb7h.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 7);
+            tb7h.Width = w;
+            tb7h.Height = h;
+            this.pictureBox3.Controls.Add(tb7h);     // 將控件加入表單
+
+            tb8.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 8);
+            tb8.Width = w;
+            tb8.Height = h;
+            this.pictureBox3.Controls.Add(tb8);     // 將控件加入表單
+            tb8h.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 8);
+            tb8h.Width = w;
+            tb8h.Height = h;
+            this.pictureBox3.Controls.Add(tb8h);     // 將控件加入表單
+
+            w = 250;
+            h = 30;
+            offset = -170;
+            tbar0.Width = w;
+            tbar0.Height = h;
+            tbar0.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 0);
+            tbar0.Minimum = 0;
+            tbar0.Maximum = 255;
+            tbar0.Value = 0x41;
+            tbar0.Scroll += tbar_scroll_cmx;	// 加入事件
+            tbar0.MouseDown += tbar_mouse_down_cmx;
+            tbar0.MouseUp += tbar_mouse_up_cmx;
+            this.pictureBox3.Controls.Add(tbar0);	// 將控件加入表單
+
+            tbar1.Width = w;
+            tbar1.Height = h;
+            tbar1.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 1);
+            tbar1.Minimum = 0;
+            tbar1.Maximum = 255;
+            tbar1.Value = 0x3C;
+            tbar1.Scroll += tbar_scroll_cmx;	// 加入事件
+            tbar1.MouseDown += tbar_mouse_down_cmx;
+            tbar1.MouseUp += tbar_mouse_up_cmx;
+            this.pictureBox3.Controls.Add(tbar1);	// 將控件加入表單
+
+            tbar2.Width = w;
+            tbar2.Height = h;
+            tbar2.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 2);
+            tbar2.Minimum = 0;
+            tbar2.Maximum = 255;
+            tbar2.Value = 0x06;
+            tbar2.Scroll += tbar_scroll_cmx;	// 加入事件
+            tbar2.MouseDown += tbar_mouse_down_cmx;
+            tbar2.MouseUp += tbar_mouse_up_cmx;
+            this.pictureBox3.Controls.Add(tbar2);	// 將控件加入表單
+
+            tbar3.Width = w;
+            tbar3.Height = h;
+            tbar3.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 3);
+            tbar3.Minimum = 0;
+            tbar3.Maximum = 255;
+            tbar3.Value = 0x17;
+            tbar3.Scroll += tbar_scroll_cmx;	// 加入事件
+            tbar3.MouseDown += tbar_mouse_down_cmx;
+            tbar3.MouseUp += tbar_mouse_up_cmx;
+            this.pictureBox3.Controls.Add(tbar3);	// 將控件加入表單
+
+            tbar4.Width = w;
+            tbar4.Height = h;
+            tbar4.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 4);
+            tbar4.Minimum = 0;
+            tbar4.Maximum = 255;
+            tbar4.Value = 0x3A;
+            tbar4.Scroll += tbar_scroll_cmx;	// 加入事件
+            tbar4.MouseDown += tbar_mouse_down_cmx;
+            tbar4.MouseUp += tbar_mouse_up_cmx;
+            this.pictureBox3.Controls.Add(tbar4);	// 將控件加入表單
+
+            tbar5.Width = w;
+            tbar5.Height = h;
+            tbar5.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 5);
+            tbar5.Minimum = 0;
+            tbar5.Maximum = 255;
+            tbar5.Value = 0x52;
+            tbar5.Scroll += tbar_scroll_cmx;	// 加入事件
+            tbar5.MouseDown += tbar_mouse_down_cmx;
+            tbar5.MouseUp += tbar_mouse_up_cmx;
+            this.pictureBox3.Controls.Add(tbar5);	// 將控件加入表單
+
+            w = 80;
+            h = 30;
+
+            offset = -150;
+            btn_ok6.Width = w;
+            btn_ok6.Height = h;
+            btn_ok6.Text = "Write";
+            btn_ok6.Location = new Point(x_st + dx * 3 + offset, y_st + dy * 6);
+            btn_ok6.Click += btn_cmx_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_ok6);	// 將控件加入表單
+
+            btn_ok7.Width = w;
+            btn_ok7.Height = h;
+            btn_ok7.Text = "Write";
+            btn_ok7.Location = new Point(x_st + dx * 3 + offset, y_st + dy * 7);
+            btn_ok7.Click += btn_cmx_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_ok7);	// 將控件加入表單
+
+            btn_ok8.Width = w;
+            btn_ok8.Height = h;
+            btn_ok8.Text = "Write";
+            btn_ok8.Location = new Point(x_st + dx * 3 + offset, y_st + dy * 8);
+            btn_ok8.Click += btn_cmx_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_ok8);	// 將控件加入表單
+
+            btn_read_cmx.Width = w;
+            btn_read_cmx.Height = h;
+            btn_read_cmx.Text = "Read";
+            btn_read_cmx.Location = new Point(x_st + dx * 2 - 100, y_st + dy * (-1));
+            btn_read_cmx.Click += btn_read_cmx_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_read_cmx);	// 將控件加入表單
+
+            btn_reset_cmx.Width = w;
+            btn_reset_cmx.Height = h;
+            btn_reset_cmx.Text = "Reset";
+            btn_reset_cmx.Location = new Point(x_st + dx * 2 - 100 + w + 5, y_st + dy * (-1));
+            btn_reset_cmx.Click += btn_reset_cmx_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_reset_cmx);	// 將控件加入表單
+
+            tb0.Text = tbar0.Value.ToString();
+            tb1.Text = tbar1.Value.ToString();
+            tb2.Text = tbar2.Value.ToString();
+            tb3.Text = tbar3.Value.ToString();
+            tb4.Text = tbar4.Value.ToString();
+            tb5.Text = tbar5.Value.ToString();
+            tb0h.Text = tbar0.Value.ToString("X2");
+            tb1h.Text = tbar1.Value.ToString("X2");
+            tb2h.Text = tbar2.Value.ToString("X2");
+            tb3h.Text = tbar3.Value.ToString("X2");
+            tb4h.Text = tbar4.Value.ToString("X2");
+            tb5h.Text = tbar5.Value.ToString("X2");
+
+            tb0.ForeColor = Color.Black;
+            tb1.ForeColor = Color.Black;
+            tb2.ForeColor = Color.Black;
+            tb3.ForeColor = Color.Black;
+            tb4.ForeColor = Color.Black;
+            tb5.ForeColor = Color.Black;
+            tb6.ForeColor = Color.Black;
+            tb7.ForeColor = Color.Black;
+
+            tb0h.ForeColor = Color.Black;
+            tb1h.ForeColor = Color.Black;
+            tb2h.ForeColor = Color.Black;
+            tb3h.ForeColor = Color.Black;
+            tb4h.ForeColor = Color.Black;
+            tb5h.ForeColor = Color.Black;
+            tb6h.ForeColor = Color.Black;
+            tb7h.ForeColor = Color.Black;
+
+            int dxx = 22;
+            w = 20;
+            h = 18;
+            offset = -120;
+
+            cb5a.Width = w;
+            cb5a.Height = h;
+            cb5a.Checked = false;
+            cb5a.Location = new Point(x_st + dx * 2 + dxx * (8 - 5) + offset, y_st + dy * 6);
+            cb5a.CheckedChanged += cmx_data_bit_change1;	// 加入事件
+            this.pictureBox3.Controls.Add(cb5a);	// 將控件加入表單
+
+            cb4a.Width = w;
+            cb4a.Height = h;
+            cb4a.Checked = false;
+            cb4a.Location = new Point(x_st + dx * 2 + dxx * (8 - 4) + offset, y_st + dy * 6);
+            cb4a.CheckedChanged += cmx_data_bit_change1;	// 加入事件
+            this.pictureBox3.Controls.Add(cb4a);	// 將控件加入表單
+
+            cb3a.Width = w;
+            cb3a.Height = h;
+            cb3a.Checked = false;
+            cb3a.Location = new Point(x_st + dx * 2 + dxx * (8 - 3) + offset, y_st + dy * 6);
+            cb3a.CheckedChanged += cmx_data_bit_change1;	// 加入事件
+            this.pictureBox3.Controls.Add(cb3a);	// 將控件加入表單
+
+            cb2a.Width = w;
+            cb2a.Height = h;
+            cb2a.Checked = false;
+            cb2a.Location = new Point(x_st + dx * 2 + dxx * (8 - 2) + offset, y_st + dy * 6);
+            cb2a.CheckedChanged += cmx_data_bit_change1;	// 加入事件
+            this.pictureBox3.Controls.Add(cb2a);	// 將控件加入表單
+
+            cb1a.Width = w;
+            cb1a.Height = h;
+            cb1a.Checked = false;
+            cb1a.Location = new Point(x_st + dx * 2 + dxx * (8 - 1) + offset, y_st + dy * 6);
+            cb1a.CheckedChanged += cmx_data_bit_change1;	// 加入事件
+            this.pictureBox3.Controls.Add(cb1a);	// 將控件加入表單
+
+            cb0a.Width = w;
+            cb0a.Height = h;
+            cb0a.Checked = false;
+            cb0a.Location = new Point(x_st + dx * 2 + dxx * (8 - 0) + offset, y_st + dy * 6);
+            cb0a.CheckedChanged += cmx_data_bit_change1;	// 加入事件
+            this.pictureBox3.Controls.Add(cb0a);	// 將控件加入表單
+
+            cb2b.Width = w;
+            cb2b.Height = h;
+            cb2b.Checked = false;
+            cb2b.Location = new Point(x_st + dx * 2 + dxx * (8 - 2) + offset, y_st + dy * 7);
+            //cb2b.CheckedChanged += cmx_data_bit_change2;	// 加入事件
+            this.pictureBox3.Controls.Add(cb2b);	// 將控件加入表單
+            cb2b.Enabled = false;
+            cb2b.Checked = true;
+
+            cb1b.Width = w;
+            cb1b.Height = h;
+            cb1b.Checked = false;
+            cb1b.Location = new Point(x_st + dx * 2 + dxx * (8 - 1) + offset, y_st + dy * 7);
+            //cb1b.CheckedChanged += cmx_data_bit_change2;	// 加入事件
+            this.pictureBox3.Controls.Add(cb1b);	// 將控件加入表單
+            cb1b.Enabled = false;
+            cb1b.Checked = true;
+
+            cb0b.Width = w;
+            cb0b.Height = h;
+            cb0b.Checked = false;
+            cb0b.Location = new Point(x_st + dx * 2 + dxx * (8 - 0) + offset, y_st + dy * 7);
+            cb0b.CheckedChanged += cmx_data_bit_change2;	// 加入事件
+            this.pictureBox3.Controls.Add(cb0b);	// 將控件加入表單
+
+            cb7c.Width = w;
+            cb7c.Height = h;
+            cb7c.Checked = false;
+            cb7c.Location = new Point(x_st + dx * 2 + dxx * (8 - 7) + offset, y_st + dy * 8);
+            cb7c.CheckedChanged += cmx_data_bit_change3;	// 加入事件
+            this.pictureBox3.Controls.Add(cb7c);	// 將控件加入表單
+            cb7c.Enabled = false;
+
+            cb6c.Width = w;
+            cb6c.Height = h;
+            cb6c.Checked = false;
+            cb6c.Location = new Point(x_st + dx * 2 + dxx * (8 - 6) + offset, y_st + dy * 8);
+            cb6c.CheckedChanged += cmx_data_bit_change3;	// 加入事件
+            this.pictureBox3.Controls.Add(cb6c);	// 將控件加入表單
+            cb6c.Enabled = false;
+
+            cb5c.Width = w;
+            cb5c.Height = h;
+            cb5c.Checked = false;
+            cb5c.Location = new Point(x_st + dx * 2 + dxx * (8 - 5) + offset, y_st + dy * 8);
+            cb5c.CheckedChanged += cmx_data_bit_change3;	// 加入事件
+            this.pictureBox3.Controls.Add(cb5c);	// 將控件加入表單
+            cb5c.Enabled = false;
+
+            cb4c.Width = w;
+            cb4c.Height = h;
+            cb4c.Checked = false;
+            cb4c.Location = new Point(x_st + dx * 2 + dxx * (8 - 4) + offset, y_st + dy * 8);
+            cb4c.CheckedChanged += cmx_data_bit_change3;	// 加入事件
+            this.pictureBox3.Controls.Add(cb4c);	// 將控件加入表單
+            cb4c.Enabled = false;
+
+            cb3c.Width = w;
+            cb3c.Height = h;
+            cb3c.Checked = false;
+            cb3c.Location = new Point(x_st + dx * 2 + dxx * (8 - 3) + offset, y_st + dy * 8);
+            cb3c.CheckedChanged += cmx_data_bit_change3;	// 加入事件
+            this.pictureBox3.Controls.Add(cb3c);	// 將控件加入表單
+            cb3c.Enabled = false;
+
+            cb2c.Width = w;
+            cb2c.Height = h;
+            cb2c.Checked = false;
+            cb2c.Location = new Point(x_st + dx * 2 + dxx * (8 - 2) + offset, y_st + dy * 8);
+            cb2c.CheckedChanged += cmx_data_bit_change3;	// 加入事件
+            this.pictureBox3.Controls.Add(cb2c);	// 將控件加入表單
+            cb2c.Enabled = false;
+
+            cb1c.Width = w;
+            cb1c.Height = h;
+            cb1c.Checked = false;
+            cb1c.Location = new Point(x_st + dx * 2 + dxx * (8 - 1) + offset, y_st + dy * 8);
+            cb1c.CheckedChanged += cmx_data_bit_change3;	// 加入事件
+            this.pictureBox3.Controls.Add(cb1c);	// 將控件加入表單
+
+            cb0c.Width = w;
+            cb0c.Height = h;
+            cb0c.Checked = false;
+            cb0c.Location = new Point(x_st + dx * 2 + dxx * (8 - 0) + offset, y_st + dy * 8);
+            cb0c.CheckedChanged += cmx_data_bit_change3;	// 加入事件
+            this.pictureBox3.Controls.Add(cb0c);	// 將控件加入表單
+            cb0c.Enabled = false;
+
+            x_st = 1195;
+            y_st = 10;
+            dy = 20;
+            w = 95;
+            h = 20;
+            cb_average.Text = "20張平均";
+            cb_average.ForeColor = Color.Black;
+            cb_average.BackColor = Color.White;
+            cb_average.Width = w;
+            cb_average.Height = h;
+            cb_average.Checked = true;
+            cb_average.Location = new Point(x_st, y_st + dy * 0);
+            this.pictureBox4.Controls.Add(cb_average);	// 將控件加入表單
+
+            cb_show_r.Text = "R";
+            cb_show_r.ForeColor = Color.Red;
+            cb_show_r.BackColor = Color.White;
+            cb_show_r.Width = w;
+            cb_show_r.Height = h;
+            cb_show_r.Checked = true;
+            cb_show_r.Location = new Point(x_st, y_st + dy * 1);
+            this.pictureBox4.Controls.Add(cb_show_r);	// 將控件加入表單
+
+            cb_show_g.Text = "G";
+            cb_show_g.ForeColor = Color.Green;
+            cb_show_g.BackColor = Color.White;
+            cb_show_g.Width = w;
+            cb_show_g.Height = h;
+            cb_show_g.Checked = true;
+            cb_show_g.Location = new Point(x_st, y_st + dy * 2);
+            this.pictureBox4.Controls.Add(cb_show_g);	// 將控件加入表單
+
+            cb_show_b.Text = "B";
+            cb_show_b.ForeColor = Color.Blue;
+            cb_show_b.BackColor = Color.White;
+            cb_show_b.Width = w;
+            cb_show_b.Height = h;
+            cb_show_b.Checked = true;
+            cb_show_b.Location = new Point(x_st, y_st + dy * 3);
+            this.pictureBox4.Controls.Add(cb_show_b);	// 將控件加入表單
+
+            cb_show_y.Text = "Y";
+            cb_show_y.ForeColor = Color.Orange;
+            cb_show_y.BackColor = Color.White;
+            cb_show_y.Width = w;
+            cb_show_y.Height = h;
+            cb_show_y.Checked = false;
+            cb_show_y.Location = new Point(x_st, y_st + dy * 4);
+            this.pictureBox4.Controls.Add(cb_show_y);	// 將控件加入表單
+
+            // 實例化按鈕
+            btn_return.Width = 35;
+            btn_return.Height = 35;
+            btn_return.Text = "回";
+            //btn_return.BackColor = Color.Red;
+            btn_return.Name = "bt_return";
+            btn_return.Location = new Point(x_st + 50, y_st + dy * 1 + dy / 2);
+            // 加入按鈕事件
+            //btn_return.Click += new EventHandler(btn_return_pbx4_Click);   //same
+            btn_return.Click += btn_return_pbx4_Click;
+            // 將按鈕加入表單
+            //this.AcceptButton = btn_return;
+            this.pictureBox4.Controls.Add(btn_return);
+            btn_return.BringToFront();
+        }
+
+        private void btn_cmx_click(object sender, EventArgs e)
+        {
+            byte SendData = 0;
+
+            if (sender.Equals(btn_ok6))
+            {
+                tb6.ForeColor = Color.Black;
+                tb6h.ForeColor = Color.Black;
+                SendData = (byte)(int.Parse(tb6.Text));
+                DongleAddr_h = 0x56;
+                DongleAddr_l = 0x12;    //CMX SIGN
+            }
+            else if (sender.Equals(btn_ok7))
+            {
+                tb7.ForeColor = Color.Black;
+                tb7h.ForeColor = Color.Black;
+                SendData = (byte)(int.Parse(tb7.Text));
+                DongleAddr_h = 0x56;
+                DongleAddr_l = 0x15;    //CMX CTRL
+            }
+            else if (sender.Equals(btn_ok8))
+            {
+                tb8.ForeColor = Color.Black;
+                tb8h.ForeColor = Color.Black;
+                SendData = (byte)(int.Parse(tb8.Text));
+                DongleAddr_h = 0x50;
+                DongleAddr_l = 0x01;    //ISP CTRL01
+            }
+
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+        }
+
+        private void setup_cmx(object sender, EventArgs e)
+        {
+            byte SendData = 0;
+
+            if (sender.Equals(tbar0))
+            {
+                tb0.ForeColor = Color.Black;
+                tb0h.ForeColor = Color.Black;
+                SendData = (byte)tbar0.Value;
+                DongleAddr_h = 0x56;
+                DongleAddr_l = 0x00;    //CMX11
+            }
+            else if (sender.Equals(tbar1))
+            {
+                tb1.ForeColor = Color.Black;
+                tb1h.ForeColor = Color.Black;
+                SendData = (byte)tbar1.Value;
+                DongleAddr_h = 0x56;
+                DongleAddr_l = 0x01;    //CMX12
+            }
+            else if (sender.Equals(tbar2))
+            {
+                tb2.ForeColor = Color.Black;
+                tb2h.ForeColor = Color.Black;
+                SendData = (byte)tbar2.Value;
+                DongleAddr_h = 0x56;
+                DongleAddr_l = 0x02;    //CMX13
+            }
+            else if (sender.Equals(tbar3))
+            {
+                tb3.ForeColor = Color.Black;
+                tb3h.ForeColor = Color.Black;
+                SendData = (byte)tbar3.Value;
+                DongleAddr_h = 0x56;
+                DongleAddr_l = 0x03;    //CMX14
+            }
+            else if (sender.Equals(tbar4))
+            {
+                tb4.ForeColor = Color.Black;
+                tb4h.ForeColor = Color.Black;
+                SendData = (byte)tbar4.Value;
+                DongleAddr_h = 0x56;
+                DongleAddr_l = 0x04;    //CMX15
+            }
+            else if (sender.Equals(tbar5))
+            {
+                tb5.ForeColor = Color.Black;
+                tb5h.ForeColor = Color.Black;
+                SendData = (byte)tbar5.Value;
+                DongleAddr_h = 0x56;
+                DongleAddr_l = 0x05;    //CMX16
+            }
+
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+        }
+
+        private void btn_reset_cmx_click(object sender, EventArgs e)
+        {
+            byte SendData = 0;
+
+            tbar0.Value = 0x41;
+            tb0.ForeColor = Color.Black;
+            tb0h.ForeColor = Color.Black;
+            SendData = (byte)tbar0.Value;
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x00;    //CMX11
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar1.Value = 0x3C;
+            tb1.ForeColor = Color.Black;
+            tb1h.ForeColor = Color.Black;
+            SendData = (byte)tbar1.Value;
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x01;    //CMX12
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar2.Value = 0x06;
+            tb2.ForeColor = Color.Black;
+            tb2h.ForeColor = Color.Black;
+            SendData = (byte)tbar2.Value;
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x02;    //CMX13
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar3.Value = 0x17;
+            tb3.ForeColor = Color.Black;
+            tb3h.ForeColor = Color.Black;
+            SendData = (byte)tbar3.Value;
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x03;    //CMX14
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar4.Value = 0x3A;
+            tb4.ForeColor = Color.Black;
+            tb4h.ForeColor = Color.Black;
+            SendData = (byte)tbar4.Value;
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x04;    //CMX15
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar5.Value = 0x52;
+            tb5.ForeColor = Color.Black;
+            tb5h.ForeColor = Color.Black;
+            SendData = (byte)tbar5.Value;
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x05;    //CMX16
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            //tbar5.Value = 0x52;
+            //tb5.ForeColor = Color.Black;
+            //tb5h.ForeColor = Color.Black;
+            SendData = 0x1E;
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x12;    //CMX SIGN
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            //tbar5.Value = 0x52;
+            //tb5.ForeColor = Color.Black;
+            //tb5h.ForeColor = Color.Black;
+            SendData = 0x07;
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x15;    //CMX CTRL
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            //tbar5.Value = 0x52;
+            //tb5.ForeColor = Color.Black;
+            //tb5h.ForeColor = Color.Black;
+            SendData = 0x3F;
+            DongleAddr_h = 0x50;
+            DongleAddr_l = 0x01;    //ISP CTRL01
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+        }
+
+        private void btn_read_cmx_click(object sender, EventArgs e)
+        {
+            if (get_comport_status() == false)
+                return;
+
+            show_main_message_cmx_lenc("讀取", S_OK, 20);
+
+            tb0.Text = "";
+            tb1.Text = "";
+            tb2.Text = "";
+            tb3.Text = "";
+            tb4.Text = "";
+            tb5.Text = "";
+            tb6.Text = "";
+            tb7.Text = "";
+            tb8.Text = "";
+            tb0h.Text = "";
+            tb1h.Text = "";
+            tb2h.Text = "";
+            tb3h.Text = "";
+            tb4h.Text = "";
+            tb5h.Text = "";
+            tb6h.Text = "";
+            tb7h.Text = "";
+            tb8h.Text = "";
+
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x00;    //CMX11
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x01;    //CMX12
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x02;    //CMX13
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x03;    //CMX14
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x04;    //CMX15
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x05;    //CMX16
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x12;    //CMX SIGN
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+            DongleAddr_h = 0x56;
+            DongleAddr_l = 0x15;    //CMX CTRL
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            DongleAddr_h = 0x50;
+            DongleAddr_l = 0x01;    //ISP CTRL01
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+        }
+
+        private void tbar_mouse_down_cmx(object sender, EventArgs e)
+        {
+            if (sender.Equals(tbar0))
+            {
+                tb0.ForeColor = Color.Red;
+                tb0h.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar1))
+            {
+                tb1.ForeColor = Color.Red;
+                tb1h.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar2))
+            {
+                tb2.ForeColor = Color.Red;
+                tb2h.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar3))
+            {
+                tb3.ForeColor = Color.Red;
+                tb3h.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar4))
+            {
+                tb4.ForeColor = Color.Red;
+                tb4h.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar5))
+            {
+                tb5.ForeColor = Color.Red;
+                tb5h.ForeColor = Color.Red;
+            }
+        }
+
+        private void tbar_scroll_cmx(object sender, EventArgs e)
+        {
+            if (sender.Equals(tbar0))
+            {
+                tb0.Text = tbar0.Value.ToString();
+                tb0h.Text = tbar0.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar1))
+            {
+                tb1.Text = tbar1.Value.ToString();
+                tb1h.Text = tbar1.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar2))
+            {
+                tb2.Text = tbar2.Value.ToString();
+                tb2h.Text = tbar2.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar3))
+            {
+                tb3.Text = tbar3.Value.ToString();
+                tb3h.Text = tbar3.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar4))
+            {
+                tb4.Text = tbar4.Value.ToString();
+                tb4h.Text = tbar4.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar5))
+            {
+                tb5.Text = tbar5.Value.ToString();
+                tb5h.Text = tbar5.Value.ToString("X2");
+            }
+        }
+
+        private void tbar_mouse_up_cmx(object sender, EventArgs e)
+        {
+            setup_cmx(sender, e);
+        }
+
+        private void cmx_data_bit_change1(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (cb5a.Checked == true)
+                value |= (1 << 5);
+            if (cb4a.Checked == true)
+                value |= (1 << 4);
+            if (cb3a.Checked == true)
+                value |= (1 << 3);
+            if (cb2a.Checked == true)
+                value |= (1 << 2);
+            if (cb1a.Checked == true)
+                value |= (1 << 1);
+            if (cb0a.Checked == true)
+                value |= (1 << 0);
+            //richTextBox1.Text += "value = 0x " + value.ToString("X2") + " = " + value.ToString() + "\n";
+            tb6h.Text = value.ToString("X2");
+            tb6.Text = value.ToString();
+            tb6h.ForeColor = Color.Red;
+            tb6.ForeColor = Color.Red;
+        }
+
+        private void cmx_data_bit_change2(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (cb0b.Checked == true)
+                value |= (1 << 0);
+            //richTextBox1.Text += "value = 0x " + value.ToString("X2") + " = " + value.ToString() + "\n";
+
+            value |= 0x06;
+
+            tb7h.Text = value.ToString("X2");
+            tb7.Text = value.ToString();
+            tb7h.ForeColor = Color.Red;
+            tb7.ForeColor = Color.Red;
+        }
+
+        private void cmx_data_bit_change3(object sender, EventArgs e)
+        {
+            int value = 0;
+
+            if (cb7c.Checked == true)
+                value |= (1 << 7);
+            if (cb6c.Checked == true)
+                value |= (1 << 6);
+            if (cb5c.Checked == true)
+                value |= (1 << 5);
+            if (cb4c.Checked == true)
+                value |= (1 << 4);
+            if (cb3c.Checked == true)
+                value |= (1 << 3);
+            if (cb2c.Checked == true)
+                value |= (1 << 2);
+            if (cb1c.Checked == true)
+                value |= (1 << 1);
+            if (cb0c.Checked == true)
+                value |= (1 << 0);
+
+            //richTextBox1.Text += "value = 0x " + value.ToString("X2") + " = " + value.ToString() + "\n";
+            tb8h.Text = value.ToString("X2");
+            tb8.Text = value.ToString();
+            tb8h.ForeColor = Color.Red;
+            tb8.ForeColor = Color.Red;
+        }
+
+        void show_hex2bit1(int value)
+        {
+            //richTextBox1.Text += "show_hex2bit\n";
+            if (((value >> 5) & 0x01) == 0x01)
+                cb5a.Checked = true;
+            else
+                cb5a.Checked = false;
+            if (((value >> 4) & 0x01) == 0x01)
+                cb4a.Checked = true;
+            else
+                cb4a.Checked = false;
+            if (((value >> 3) & 0x01) == 0x01)
+                cb3a.Checked = true;
+            else
+                cb3a.Checked = false;
+            if (((value >> 2) & 0x01) == 0x01)
+                cb2a.Checked = true;
+            else
+                cb2a.Checked = false;
+            if (((value >> 1) & 0x01) == 0x01)
+                cb1a.Checked = true;
+            else
+                cb1a.Checked = false;
+            if (((value >> 0) & 0x01) == 0x01)
+                cb0a.Checked = true;
+            else
+                cb0a.Checked = false;
+        }
+
+        void show_hex2bit2(int value)
+        {
+            //richTextBox1.Text += "show_hex2bit\n";
+            if (((value >> 0) & 0x01) == 0x01)
+                cb0b.Checked = true;
+            else
+                cb0b.Checked = false;
+        }
+
+        void show_hex2bit3(int value)
+        {
+            //richTextBox1.Text += "show_hex2bit\n";
+            if (((value >> 7) & 0x01) == 0x01)
+                cb7c.Checked = true;
+            else
+                cb7c.Checked = false;
+            if (((value >> 6) & 0x01) == 0x01)
+                cb6c.Checked = true;
+            else
+                cb6c.Checked = false;
+            if (((value >> 5) & 0x01) == 0x01)
+                cb5c.Checked = true;
+            else
+                cb5c.Checked = false;
+            if (((value >> 4) & 0x01) == 0x01)
+                cb4c.Checked = true;
+            else
+                cb4c.Checked = false;
+            if (((value >> 3) & 0x01) == 0x01)
+                cb3c.Checked = true;
+            else
+                cb3c.Checked = false;
+            if (((value >> 2) & 0x01) == 0x01)
+                cb2c.Checked = true;
+            else
+                cb2c.Checked = false;
+            if (((value >> 1) & 0x01) == 0x01)
+                cb1c.Checked = true;
+            else
+                cb1c.Checked = false;
+            if (((value >> 0) & 0x01) == 0x01)
+                cb0c.Checked = true;
+            else
+                cb0c.Checked = false;
+        }
+
+        void do_lenc()
+        {
+            int pbx3_w = 592;       //最後顯示出來的圖的大小
+            int pbx3_h = 1000;
+            richTextBox1.Text += "pbx3_w = " + pbx3_w.ToString() + ", pbx3_h = " + pbx3_h.ToString() + "\n";
+            pictureBox3.Visible = true;
+            pictureBox3.BackColor = Color.White;
+            pictureBox3.Size = new Size(pbx3_w, pbx3_h);
+            pictureBox3.BringToFront();
+            pictureBox3.Location = new Point(0, 0);
+
+            Bitmap bmp3 = new Bitmap(pbx3_w, pbx3_h);
+            g3 = Graphics.FromImage(bmp3);
+            g3.FillRectangle(new SolidBrush(Color.White), 0, 0, bmp3.Width, bmp3.Height);   //整個背景
+            g3.DrawString("Lens Correction (LENC)", new Font("標楷體", 22), new SolidBrush(Color.Red), new PointF(40, 10));
+
+            pictureBox3.Image = bmp3;
+
+            GC.Collect();       //回收資源
+
+            delay(10);
+
+            flag_get_lenc_status_ready = false;
+            Send_IMS_Data(0xA1, 0x50, 0x00, 0); //read 0x5000 ISP CTRL00 for LENC enable
+
+            int cnt = 0;
+            while ((flag_get_lenc_status_ready == false) && (cnt++ < 20))
+            {
+                richTextBox1.Text += "+";
+                delay(10);
+            }
+
+            add_lenc_controls();
+            pictureBox4.Visible = true;
+            pictureBox4_position_x_old = PB4_DEFAULT_POSITION_X;
+            pictureBox4_position_y_old = PB4_DEFAULT_POSITION_Y;
+            pictureBox4.Location = new Point(pictureBox4_position_x_old, pictureBox4_position_y_old);
+            return;
+        }
+
+        void add_lenc_controls()
+        {
+            btn1.Visible = false;
+            btn2.Visible = false;
+            hsbar.Visible = false;
+            richTextBox1.Visible = false;
+
+            int x_st = 30;
+            int y_st = 80;
+            int dx = 150;
+            int dy = 37;
+            int offset = 0;
+            int w = 0;  //控件寬度
+            int h = 0;  //控件高度
+
+            int region_y = 235;
+
+            // 實例化控件
+
+            lb_main_mesg_cmx_lenc.Text = "";
+            lb_main_mesg_cmx_lenc.Font = new Font("標楷體", 22);
+            lb_main_mesg_cmx_lenc.ForeColor = Color.Red;
+            lb_main_mesg_cmx_lenc.Location = new Point(x_st + dx * 3 - 80, y_st + dy * (-2) + 2);
+            lb_main_mesg_cmx_lenc.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb_main_mesg_cmx_lenc);     // 將控件加入表單
+
+            Label lbX0r = new Label();
+            lbX0r.Text = "X0        0x";
+            lbX0r.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            lbX0r.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbX0r);     // 將控件加入表單
+            lbX0r.ForeColor = Color.Red;
+
+            Label lbY0r = new Label();
+            lbY0r.Text = "Y0        0x";
+            lbY0r.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            lbY0r.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbY0r);     // 將控件加入表單
+            lbY0r.ForeColor = Color.Red;
+
+            Label lbA1r = new Label();
+            lbA1r.Text = "A1        0x";
+            lbA1r.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lbA1r.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbA1r);     // 將控件加入表單
+            lbA1r.ForeColor = Color.Red;
+
+            Label lbA2r = new Label();
+            lbA2r.Text = "A2        0x";
+            lbA2r.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lbA2r.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbA2r);     // 將控件加入表單
+            lbA2r.ForeColor = Color.Red;
+
+            Label lbB1r = new Label();
+            lbB1r.Text = "B1        0x";
+            lbB1r.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            lbB1r.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbB1r);     // 將控件加入表單
+            lbB1r.ForeColor = Color.Red;
+
+            Label lbB2r = new Label();
+            lbB2r.Text = "B2        0x";
+            lbB2r.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            lbB2r.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbB2r);     // 將控件加入表單
+            lbB2r.ForeColor = Color.Red;
+
+            Label lbX0g = new Label();
+            lbX0g.Text = "X0        0x";
+            lbX0g.Location = new Point(x_st + dx * 0, y_st + dy * 0 + region_y * 1);
+            lbX0g.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbX0g);     // 將控件加入表單
+            lbX0g.ForeColor = Color.Green;
+
+            Label lbY0g = new Label();
+            lbY0g.Text = "Y0        0x";
+            lbY0g.Location = new Point(x_st + dx * 0, y_st + dy * 1 + region_y * 1);
+            lbY0g.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbY0g);     // 將控件加入表單
+            lbY0g.ForeColor = Color.Green;
+
+            Label lbA1g = new Label();
+            lbA1g.Text = "A1        0x";
+            lbA1g.Location = new Point(x_st + dx * 0, y_st + dy * 2 + region_y * 1);
+            lbA1g.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbA1g);     // 將控件加入表單
+            lbA1g.ForeColor = Color.Green;
+
+            Label lbA2g = new Label();
+            lbA2g.Text = "A2        0x";
+            lbA2g.Location = new Point(x_st + dx * 0, y_st + dy * 3 + region_y * 1);
+            lbA2g.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbA2g);     // 將控件加入表單
+            lbA2g.ForeColor = Color.Green;
+
+            Label lbB1g = new Label();
+            lbB1g.Text = "B1        0x";
+            lbB1g.Location = new Point(x_st + dx * 0, y_st + dy * 4 + region_y * 1);
+            lbB1g.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbB1g);     // 將控件加入表單
+            lbB1g.ForeColor = Color.Green;
+
+            Label lbB2g = new Label();
+            lbB2g.Text = "B2        0x";
+            lbB2g.Location = new Point(x_st + dx * 0, y_st + dy * 5 + region_y * 1);
+            lbB2g.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbB2g);     // 將控件加入表單
+            lbB2g.ForeColor = Color.Green;
+
+            Label lbX0b = new Label();
+            lbX0b.Text = "X0        0x";
+            lbX0b.Location = new Point(x_st + dx * 0, y_st + dy * 0 + region_y * 2);
+            lbX0b.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbX0b);     // 將控件加入表單
+            lbX0b.ForeColor = Color.Blue;
+
+            Label lbY0b = new Label();
+            lbY0b.Text = "Y0        0x";
+            lbY0b.Location = new Point(x_st + dx * 0, y_st + dy * 1 + region_y * 2);
+            lbY0b.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbY0b);     // 將控件加入表單
+            lbY0b.ForeColor = Color.Blue;
+
+            Label lbA1b = new Label();
+            lbA1b.Text = "A1        0x";
+            lbA1b.Location = new Point(x_st + dx * 0, y_st + dy * 2 + region_y * 2);
+            lbA1b.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbA1b);     // 將控件加入表單
+            lbA1b.ForeColor = Color.Blue;
+
+            Label lbA2b = new Label();
+            lbA2b.Text = "A2        0x";
+            lbA2b.Location = new Point(x_st + dx * 0, y_st + dy * 3 + region_y * 2);
+            lbA2b.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbA2b);     // 將控件加入表單
+            lbA2b.ForeColor = Color.Blue;
+
+            Label lbB1b = new Label();
+            lbB1b.Text = "B1        0x";
+            lbB1b.Location = new Point(x_st + dx * 0, y_st + dy * 4 + region_y * 2);
+            lbB1b.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbB1b);     // 將控件加入表單
+            lbB1b.ForeColor = Color.Blue;
+
+            Label lbB2b = new Label();
+            lbB2b.Text = "B2        0x";
+            lbB2b.Location = new Point(x_st + dx * 0, y_st + dy * 5 + region_y * 2);
+            lbB2b.AutoSize = true;
+            this.pictureBox3.Controls.Add(lbB2b);     // 將控件加入表單
+            lbB2b.ForeColor = Color.Blue;
+
+            Label lb_lenc0 = new Label();
+            lb_lenc0.Text = "LENC CTRL\n0x5118";
+            lb_lenc0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + region_y * 3);
+            lb_lenc0.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb_lenc0);     // 將控件加入表單
+            lb_lenc0.ForeColor = Color.Blue;
+
+            Label lb_lenc1 = new Label();
+            lb_lenc1.Text = "LENC COEF TH\n0x5119";
+            lb_lenc1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + region_y * 3);
+            lb_lenc1.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb_lenc1);     // 將控件加入表單
+            lb_lenc1.ForeColor = Color.Blue;
+
+            Label lb_lenc2 = new Label();
+            lb_lenc2.Text = "LENC GAIN TH1\n0x511A";
+            lb_lenc2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + region_y * 3);
+            lb_lenc2.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb_lenc2);     // 將控件加入表單
+            lb_lenc2.ForeColor = Color.Blue;
+
+            Label lb_lenc3 = new Label();
+            lb_lenc3.Text = "LENC GAIN TH2\n0x511B";
+            lb_lenc3.Location = new Point(x_st + dx * 0, y_st + dy * 3 + region_y * 3);
+            lb_lenc3.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb_lenc3);     // 將控件加入表單
+            lb_lenc3.ForeColor = Color.Blue;
+
+            Label lb_lenc4 = new Label();
+            lb_lenc4.Text = "COEF MAN\n0x511C";
+            lb_lenc4.Location = new Point(x_st + dx * 0, y_st + dy * 4 + region_y * 3);
+            lb_lenc4.AutoSize = true;
+            this.pictureBox3.Controls.Add(lb_lenc4);     // 將控件加入表單
+            lb_lenc4.ForeColor = Color.Blue;
+
+            w = 50;
+            h = 50;
+            offset = -70;
+            tb0r.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            tb0r.Width = w;
+            tb0r.Height = h;
+            this.pictureBox3.Controls.Add(tb0r);     // 將控件加入表單
+            tb0rh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 0);
+            tb0rh.Width = w;
+            tb0rh.Height = h;
+            this.pictureBox3.Controls.Add(tb0rh);     // 將控件加入表單
+
+            tb1r.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            tb1r.Width = w;
+            tb1r.Height = h;
+            this.pictureBox3.Controls.Add(tb1r);     // 將控件加入表單
+            tb1rh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 1);
+            tb1rh.Width = w;
+            tb1rh.Height = h;
+            this.pictureBox3.Controls.Add(tb1rh);     // 將控件加入表單
+
+            tb2r.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            tb2r.Width = w;
+            tb2r.Height = h;
+            this.pictureBox3.Controls.Add(tb2r);     // 將控件加入表單
+            tb2rh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 2);
+            tb2rh.Width = w;
+            tb2rh.Height = h;
+            this.pictureBox3.Controls.Add(tb2rh);     // 將控件加入表單
+
+            tb3r.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            tb3r.Width = w;
+            tb3r.Height = h;
+            this.pictureBox3.Controls.Add(tb3r);     // 將控件加入表單
+            tb3rh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 3);
+            tb3rh.Width = w;
+            tb3rh.Height = h;
+            this.pictureBox3.Controls.Add(tb3rh);     // 將控件加入表單
+
+            tb4r.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            tb4r.Width = w;
+            tb4r.Height = h;
+            this.pictureBox3.Controls.Add(tb4r);     // 將控件加入表單
+            tb4rh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 4);
+            tb4rh.Width = w;
+            tb4rh.Height = h;
+            this.pictureBox3.Controls.Add(tb4rh);     // 將控件加入表單
+
+            tb5r.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            tb5r.Width = w;
+            tb5r.Height = h;
+            this.pictureBox3.Controls.Add(tb5r);     // 將控件加入表單
+            tb5rh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 5);
+            tb5rh.Width = w;
+            tb5rh.Height = h;
+            this.pictureBox3.Controls.Add(tb5rh);     // 將控件加入表單
+
+            tb0g.Location = new Point(x_st + dx * 1, y_st + dy * 0 + region_y * 1);
+            tb0g.Width = w;
+            tb0g.Height = h;
+            this.pictureBox3.Controls.Add(tb0g);     // 將控件加入表單
+            tb0gh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 0 + region_y * 1);
+            tb0gh.Width = w;
+            tb0gh.Height = h;
+            this.pictureBox3.Controls.Add(tb0gh);     // 將控件加入表單
+
+            tb1g.Location = new Point(x_st + dx * 1, y_st + dy * 1 + region_y * 1);
+            tb1g.Width = w;
+            tb1g.Height = h;
+            this.pictureBox3.Controls.Add(tb1g);     // 將控件加入表單
+            tb1gh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 1 + region_y * 1);
+            tb1gh.Width = w;
+            tb1gh.Height = h;
+            this.pictureBox3.Controls.Add(tb1gh);     // 將控件加入表單
+
+            tb2g.Location = new Point(x_st + dx * 1, y_st + dy * 2 + region_y * 1);
+            tb2g.Width = w;
+            tb2g.Height = h;
+            this.pictureBox3.Controls.Add(tb2g);     // 將控件加入表單
+            tb2gh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 2 + region_y * 1);
+            tb2gh.Width = w;
+            tb2gh.Height = h;
+            this.pictureBox3.Controls.Add(tb2gh);     // 將控件加入表單
+
+            tb3g.Location = new Point(x_st + dx * 1, y_st + dy * 3 + region_y * 1);
+            tb3g.Width = w;
+            tb3g.Height = h;
+            this.pictureBox3.Controls.Add(tb3g);     // 將控件加入表單
+            tb3gh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 3 + region_y * 1);
+            tb3gh.Width = w;
+            tb3gh.Height = h;
+            this.pictureBox3.Controls.Add(tb3gh);     // 將控件加入表單
+
+            tb4g.Location = new Point(x_st + dx * 1, y_st + dy * 4 + region_y * 1);
+            tb4g.Width = w;
+            tb4g.Height = h;
+            this.pictureBox3.Controls.Add(tb4g);     // 將控件加入表單
+            tb4gh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 4 + region_y * 1);
+            tb4gh.Width = w;
+            tb4gh.Height = h;
+            this.pictureBox3.Controls.Add(tb4gh);     // 將控件加入表單
+
+            tb5g.Location = new Point(x_st + dx * 1, y_st + dy * 5 + region_y * 1);
+            tb5g.Width = w;
+            tb5g.Height = h;
+            this.pictureBox3.Controls.Add(tb5g);     // 將控件加入表單
+            tb5gh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 5 + region_y * 1);
+            tb5gh.Width = w;
+            tb5gh.Height = h;
+            this.pictureBox3.Controls.Add(tb5gh);     // 將控件加入表單
+
+            tb0b.Location = new Point(x_st + dx * 1, y_st + dy * 0 + region_y * 2);
+            tb0b.Width = w;
+            tb0b.Height = h;
+            this.pictureBox3.Controls.Add(tb0b);     // 將控件加入表單
+            tb0bh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 0 + region_y * 2);
+            tb0bh.Width = w;
+            tb0bh.Height = h;
+            this.pictureBox3.Controls.Add(tb0bh);     // 將控件加入表單
+
+            tb1b.Location = new Point(x_st + dx * 1, y_st + dy * 1 + region_y * 2);
+            tb1b.Width = w;
+            tb1b.Height = h;
+            this.pictureBox3.Controls.Add(tb1b);     // 將控件加入表單
+            tb1bh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 1 + region_y * 2);
+            tb1bh.Width = w;
+            tb1bh.Height = h;
+            this.pictureBox3.Controls.Add(tb1bh);     // 將控件加入表單
+
+            tb2b.Location = new Point(x_st + dx * 1, y_st + dy * 2 + region_y * 2);
+            tb2b.Width = w;
+            tb2b.Height = h;
+            this.pictureBox3.Controls.Add(tb2b);     // 將控件加入表單
+            tb2bh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 2 + region_y * 2);
+            tb2bh.Width = w;
+            tb2bh.Height = h;
+            this.pictureBox3.Controls.Add(tb2bh);     // 將控件加入表單
+
+            tb3b.Location = new Point(x_st + dx * 1, y_st + dy * 3 + region_y * 2);
+            tb3b.Width = w;
+            tb3b.Height = h;
+            this.pictureBox3.Controls.Add(tb3b);     // 將控件加入表單
+            tb3bh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 3 + region_y * 2);
+            tb3bh.Width = w;
+            tb3bh.Height = h;
+            this.pictureBox3.Controls.Add(tb3bh);     // 將控件加入表單
+
+            tb4b.Location = new Point(x_st + dx * 1, y_st + dy * 4 + region_y * 2);
+            tb4b.Width = w;
+            tb4b.Height = h;
+            this.pictureBox3.Controls.Add(tb4b);     // 將控件加入表單
+            tb4bh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 4 + region_y * 2);
+            tb4bh.Width = w;
+            tb4bh.Height = h;
+            this.pictureBox3.Controls.Add(tb4bh);     // 將控件加入表單
+
+            tb5b.Location = new Point(x_st + dx * 1, y_st + dy * 5 + region_y * 2);
+            tb5b.Width = w;
+            tb5b.Height = h;
+            this.pictureBox3.Controls.Add(tb5b);     // 將控件加入表單
+            tb5bh.Location = new Point(x_st + dx * 1 + offset, y_st + dy * 5 + region_y * 2);
+            tb5bh.Width = w;
+            tb5bh.Height = h;
+            this.pictureBox3.Controls.Add(tb5bh);     // 將控件加入表單
+
+            int offset2 = 45;
+
+            tb_lenc0.Location = new Point(x_st + dx * 1 + offset2, y_st + dy * 0 + region_y * 3);
+            tb_lenc0.Width = w;
+            tb_lenc0.Height = h;
+            this.pictureBox3.Controls.Add(tb_lenc0);     // 將控件加入表單
+            tb_lenc0h.Location = new Point(x_st + dx * 1 + offset + offset2, y_st + dy * 0 + region_y * 3);
+            tb_lenc0h.Width = w;
+            tb_lenc0h.Height = h;
+            this.pictureBox3.Controls.Add(tb_lenc0h);     // 將控件加入表單
+
+            tb_lenc1.Location = new Point(x_st + dx * 1 + offset2, y_st + dy * 1 + region_y * 3);
+            tb_lenc1.Width = w;
+            tb_lenc1.Height = h;
+            this.pictureBox3.Controls.Add(tb_lenc1);     // 將控件加入表單
+            tb_lenc1h.Location = new Point(x_st + dx * 1 + offset + offset2, y_st + dy * 1 + region_y * 3);
+            tb_lenc1h.Width = w;
+            tb_lenc1h.Height = h;
+            this.pictureBox3.Controls.Add(tb_lenc1h);     // 將控件加入表單
+
+            tb_lenc2.Location = new Point(x_st + dx * 1 + offset2, y_st + dy * 2 + region_y * 3);
+            tb_lenc2.Width = w;
+            tb_lenc2.Height = h;
+            this.pictureBox3.Controls.Add(tb_lenc2);     // 將控件加入表單
+            tb_lenc2h.Location = new Point(x_st + dx * 1 + offset + offset2, y_st + dy * 2 + region_y * 3);
+            tb_lenc2h.Width = w;
+            tb_lenc2h.Height = h;
+            this.pictureBox3.Controls.Add(tb_lenc2h);     // 將控件加入表單
+
+            tb_lenc3.Location = new Point(x_st + dx * 1 + offset2, y_st + dy * 3 + region_y * 3);
+            tb_lenc3.Width = w;
+            tb_lenc3.Height = h;
+            this.pictureBox3.Controls.Add(tb_lenc3);     // 將控件加入表單
+            tb_lenc3h.Location = new Point(x_st + dx * 1 + offset + offset2, y_st + dy * 3 + region_y * 3);
+            tb_lenc3h.Width = w;
+            tb_lenc3h.Height = h;
+            this.pictureBox3.Controls.Add(tb_lenc3h);     // 將控件加入表單
+
+            tb_lenc4.Location = new Point(x_st + dx * 1 + offset2, y_st + dy * 4 + region_y * 3);
+            tb_lenc4.Width = w;
+            tb_lenc4.Height = h;
+            this.pictureBox3.Controls.Add(tb_lenc4);     // 將控件加入表單
+            tb_lenc4h.Location = new Point(x_st + dx * 1 + offset + offset2, y_st + dy * 4 + region_y * 3);
+            tb_lenc4h.Width = w;
+            tb_lenc4h.Height = h;
+            this.pictureBox3.Controls.Add(tb_lenc4h);     // 將控件加入表單
+
+            w = 250;
+            h = 30;
+            offset = -50;
+            tbar0r.Width = w;
+            tbar0r.Height = h;
+            tbar0r.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 0);
+            tbar0r.Minimum = 0;
+            tbar0r.Maximum = 1023;
+            tbar0r.Value = 0x015A;
+            tbar0r.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar0r.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar0r.MouseDown += tbar_mouse_down_lenc;
+            tbar0r.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar0r);	// 將控件加入表單
+
+            tbar1r.Width = w;
+            tbar1r.Height = h;
+            tbar1r.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 1);
+            tbar1r.Minimum = 0;
+            tbar1r.Maximum = 1023;
+            tbar1r.Value = 0x00CF;
+            tbar1r.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar1r.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar1r.MouseDown += tbar_mouse_down_lenc;
+            tbar1r.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar1r);	// 將控件加入表單
+
+            tbar2r.Width = w;
+            tbar2r.Height = h;
+            tbar2r.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 2);
+            tbar2r.Minimum = 0;
+            tbar2r.Maximum = 127;
+            tbar2r.Value = 0x1E;
+            tbar2r.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar2r.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar2r.MouseDown += tbar_mouse_down_lenc;
+            tbar2r.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar2r);	// 將控件加入表單
+
+            tbar3r.Width = w;
+            tbar3r.Height = h;
+            tbar3r.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 3);
+            tbar3r.Minimum = 0;
+            tbar3r.Maximum = 15;
+            tbar3r.Value = 0x03;
+            tbar3r.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar3r.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar3r.MouseDown += tbar_mouse_down_lenc;
+            tbar3r.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar3r);	// 將控件加入表單
+
+            tbar4r.Width = w;
+            tbar4r.Height = h;
+            tbar4r.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 4);
+            tbar4r.Minimum = -127;
+            tbar4r.Maximum = 127;
+            tbar4r.Value = -0x75;
+            tbar4r.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar4r.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar4r.MouseDown += tbar_mouse_down_lenc;
+            tbar4r.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar4r);	// 將控件加入表單
+
+            tbar5r.Width = w;
+            tbar5r.Height = h;
+            tbar5r.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 5);
+            tbar5r.Minimum = 0;
+            tbar5r.Maximum = 15;
+            tbar5r.Value = 0x05;
+            tbar5r.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar5r.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar5r.MouseDown += tbar_mouse_down_lenc;
+            tbar5r.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar5r);	// 將控件加入表單
+
+            tbar0g.Width = w;
+            tbar0g.Height = h;
+            tbar0g.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 0 + region_y * 1);
+            tbar0g.Minimum = 0;
+            tbar0g.Maximum = 1023;
+            tbar0g.Value = 0x015E;
+            tbar0g.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar0g.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar0g.MouseDown += tbar_mouse_down_lenc;
+            tbar0g.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar0g);	// 將控件加入表單
+
+            tbar1g.Width = w;
+            tbar1g.Height = h;
+            tbar1g.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 1 + region_y * 1);
+            tbar1g.Minimum = 0;
+            tbar1g.Maximum = 1023;
+            tbar1g.Value = 0x00CF;
+            tbar1g.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar1g.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar1g.MouseDown += tbar_mouse_down_lenc;
+            tbar1g.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar1g);	// 將控件加入表單
+
+            tbar2g.Width = w;
+            tbar2g.Height = h;
+            tbar2g.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 2 + region_y * 1);
+            tbar2g.Minimum = 0;
+            tbar2g.Maximum = 127;
+            tbar2g.Value = 0x0F;
+            tbar2g.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar2g.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar2g.MouseDown += tbar_mouse_down_lenc;
+            tbar2g.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar2g);	// 將控件加入表單
+
+            tbar3g.Width = w;
+            tbar3g.Height = h;
+            tbar3g.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 3 + region_y * 1);
+            tbar3g.Minimum = 0;
+            tbar3g.Maximum = 15;
+            tbar3g.Value = 0x03;
+            tbar3g.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar3g.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar3g.MouseDown += tbar_mouse_down_lenc;
+            tbar3g.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar3g);	// 將控件加入表單
+
+            tbar4g.Width = w;
+            tbar4g.Height = h;
+            tbar4g.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 4 + region_y * 1);
+            tbar4g.Minimum = -127;
+            tbar4g.Maximum = 127;
+            tbar4g.Value = -0x75;
+            tbar4g.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar4g.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar4g.MouseDown += tbar_mouse_down_lenc;
+            tbar4g.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar4g);	// 將控件加入表單
+
+            tbar5g.Width = w;
+            tbar5g.Height = h;
+            tbar5g.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 5 + region_y * 1);
+            tbar5g.Minimum = 0;
+            tbar5g.Maximum = 15;
+            tbar5g.Value = 0x05;
+            tbar5g.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar5g.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar5g.MouseDown += tbar_mouse_down_lenc;
+            tbar5g.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar5g);	// 將控件加入表單
+
+            tbar0b.Width = w;
+            tbar0b.Height = h;
+            tbar0b.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 0 + region_y * 2);
+            tbar0b.Minimum = 0;
+            tbar0b.Maximum = 1023;
+            tbar0b.Value = 0x016B;
+            tbar0b.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar0b.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar0b.MouseDown += tbar_mouse_down_lenc;
+            tbar0b.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar0b);	// 將控件加入表單
+
+            tbar1b.Width = w;
+            tbar1b.Height = h;
+            tbar1b.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 1 + region_y * 2);
+            tbar1b.Minimum = 0;
+            tbar1b.Maximum = 1023;
+            tbar1b.Value = 0x00CF;
+            tbar1b.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar1b.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar1b.MouseDown += tbar_mouse_down_lenc;
+            tbar1b.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar1b);	// 將控件加入表單
+
+            tbar2b.Width = w;
+            tbar2b.Height = h;
+            tbar2b.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 2 + region_y * 2);
+            tbar2b.Minimum = 0;
+            tbar2b.Maximum = 127;
+            tbar2b.Value = 0x0A;
+            tbar2b.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar2b.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar2b.MouseDown += tbar_mouse_down_lenc;
+            tbar2b.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar2b);	// 將控件加入表單
+
+            tbar3b.Width = w;
+            tbar3b.Height = h;
+            tbar3b.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 3 + region_y * 2);
+            tbar3b.Minimum = 0;
+            tbar3b.Maximum = 15;
+            tbar3b.Value = 0x03;
+            tbar3b.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar3b.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar3b.MouseDown += tbar_mouse_down_lenc;
+            tbar3b.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar3b);	// 將控件加入表單
+
+            tbar4b.Width = w;
+            tbar4b.Height = h;
+            tbar4b.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 4 + region_y * 2);
+            tbar4b.Minimum = -127;
+            tbar4b.Maximum = 127;
+            tbar4b.Value = -0x75;
+            tbar4b.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar4b.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar4b.MouseDown += tbar_mouse_down_lenc;
+            tbar4b.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar4b);	// 將控件加入表單
+
+            tbar5b.Width = w;
+            tbar5b.Height = h;
+            tbar5b.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 5 + region_y * 2);
+            tbar5b.Minimum = 0;
+            tbar5b.Maximum = 15;
+            tbar5b.Value = 0x05;
+            tbar5b.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar5b.ValueChanged += tbar_value_changed_lenc;    // 加入事件
+            tbar5b.MouseDown += tbar_mouse_down_lenc;
+            tbar5b.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar5b);	// 將控件加入表單
+
+            w = 60;
+            h = 18;
+            cb_apply_rgb.Width = w;
+            cb_apply_rgb.Height = h;
+            cb_apply_rgb.Text = "RGB";
+            cb_apply_rgb.Checked = true;
+            cb_apply_rgb.Location = new Point(x_st + dx * 3 + 50, y_st + dy * 0 + region_y * 2);
+            this.pictureBox3.Controls.Add(cb_apply_rgb);	// 將控件加入表單
+
+            tbar_lenc1.Width = w;
+            tbar_lenc1.Height = h;
+            tbar_lenc1.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 1 + region_y * 3);
+            tbar_lenc1.Minimum = 0;
+            tbar_lenc1.Maximum = 255;
+            tbar_lenc1.Value = 0x14;
+            tbar_lenc1.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar_lenc1.MouseDown += tbar_mouse_down_lenc;
+            tbar_lenc1.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar_lenc1);	// 將控件加入表單
+
+            tbar_lenc2.Width = w;
+            tbar_lenc2.Height = h;
+            tbar_lenc2.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 2 + region_y * 3);
+            tbar_lenc2.Minimum = 0;
+            tbar_lenc2.Maximum = 63;
+            tbar_lenc2.Value = 0x02;
+            tbar_lenc2.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar_lenc2.MouseDown += tbar_mouse_down_lenc;
+            tbar_lenc2.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar_lenc2);	// 將控件加入表單
+
+            tbar_lenc3.Width = w;
+            tbar_lenc3.Height = h;
+            tbar_lenc3.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 3 + region_y * 3);
+            tbar_lenc3.Minimum = 0;
+            tbar_lenc3.Maximum = 63;
+            tbar_lenc3.Value = 0x0C;
+            tbar_lenc3.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar_lenc3.MouseDown += tbar_mouse_down_lenc;
+            tbar_lenc3.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar_lenc3);	// 將控件加入表單
+
+            tbar_lenc4.Width = w;
+            tbar_lenc4.Height = h;
+            tbar_lenc4.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 4 + region_y * 3);
+            tbar_lenc4.Minimum = 0;
+            tbar_lenc4.Maximum = 255;
+            tbar_lenc4.Value = 0x80;
+            tbar_lenc4.Scroll += tbar_scroll_lenc;	// 加入事件
+            tbar_lenc4.MouseDown += tbar_mouse_down_lenc;
+            tbar_lenc4.MouseUp += tbar_mouse_up_lenc;
+            this.pictureBox3.Controls.Add(tbar_lenc4);	// 將控件加入表單
+
+            int dxx = 22;
+            w = 20;
+            h = 18;
+            offset = -50;
+
+            cb_lenc3.Width = w;
+            cb_lenc3.Height = h;
+            cb_lenc3.Checked = false;
+            cb_lenc3.Location = new Point(x_st + dx * 2 + dxx * (8 - 3) + offset, y_st + dy * 0 + region_y * 3);
+            cb_lenc3.CheckedChanged += lenc_data_bit_change2;	// 加入事件
+            this.pictureBox3.Controls.Add(cb_lenc3);	// 將控件加入表單
+
+            cb_lenc2.Width = w;
+            cb_lenc2.Height = h;
+            cb_lenc2.Checked = false;
+            cb_lenc2.Location = new Point(x_st + dx * 2 + dxx * (8 - 2) + offset, y_st + dy * 0 + region_y * 3);
+            cb_lenc2.CheckedChanged += lenc_data_bit_change2;	// 加入事件
+            this.pictureBox3.Controls.Add(cb_lenc2);	// 將控件加入表單
+
+            cb_lenc1.Width = w;
+            cb_lenc1.Height = h;
+            cb_lenc1.Checked = false;
+            cb_lenc1.Location = new Point(x_st + dx * 2 + dxx * (8 - 1) + offset, y_st + dy * 0 + region_y * 3);
+            cb_lenc1.CheckedChanged += lenc_data_bit_change2;	// 加入事件
+            this.pictureBox3.Controls.Add(cb_lenc1);	// 將控件加入表單
+
+            cb_lenc0.Width = w;
+            cb_lenc0.Height = h;
+            cb_lenc0.Checked = false;
+            cb_lenc0.Location = new Point(x_st + dx * 2 + dxx * (8 - 0) + offset, y_st + dy * 0 + region_y * 3);
+            cb_lenc0.CheckedChanged += lenc_data_bit_change2;	// 加入事件
+            this.pictureBox3.Controls.Add(cb_lenc0);	// 將控件加入表單
+
+            offset = 0;
+            w = 80;
+            h = 30;
+            offset = -50;
+
+            pbox_lenc_status.Width = w;
+            pbox_lenc_status.Height = h;
+            pbox_lenc_status.Location = new Point(x_st + dx * 1 + offset - 90, y_st + dy * (-1));
+            pbox_lenc_status.BackColor = Color.White;
+            pbox_lenc_status.SizeMode = PictureBoxSizeMode.Zoom;
+            if (flag_lenc_enable == false)
+                pbox_lenc_status.Image = iMS_Link.Properties.Resources.off;
+            else
+                pbox_lenc_status.Image = iMS_Link.Properties.Resources.on;
+            pbox_lenc_status.Click += pbox_lenc_status_click;	// 加入事件
+            this.pictureBox3.Controls.Add(pbox_lenc_status);	// 將控件加入表單
+
+            btn_read_lenc.Width = w;
+            btn_read_lenc.Height = h;
+            btn_read_lenc.Text = "Read";
+            btn_read_lenc.Location = new Point(x_st + dx * 1 + offset, y_st + dy * (-1));
+            btn_read_lenc.Click += btn_read_lenc_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_read_lenc);	// 將控件加入表單
+
+            btn_reset_lenc.BackColor = Color.Orange;
+            btn_reset_lenc.Width = w;
+            btn_reset_lenc.Height = h;
+            btn_reset_lenc.Text = "Reset";
+            btn_reset_lenc.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 1, y_st + dy * (-1));
+            btn_reset_lenc.Click += btn_reset_lenc_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_reset_lenc);	// 將控件加入表單
+
+            btn_reset_lenc_r.BackColor = Color.Red;
+            btn_reset_lenc_r.Width = w;
+            btn_reset_lenc_r.Height = h;
+            btn_reset_lenc_r.Text = "Reset R";
+            btn_reset_lenc_r.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 2, y_st + dy * (-1));
+            btn_reset_lenc_r.Click += btn_reset_lenc_r_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_reset_lenc_r);	// 將控件加入表單
+
+            btn_reset_lenc_g.BackColor = Color.Green;
+            btn_reset_lenc_g.Width = w;
+            btn_reset_lenc_g.Height = h;
+            btn_reset_lenc_g.Text = "Reset G";
+            btn_reset_lenc_g.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 3, y_st + dy * (-1));
+            btn_reset_lenc_g.Click += btn_reset_lenc_g_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_reset_lenc_g);	// 將控件加入表單
+
+            btn_reset_lenc_b.BackColor = Color.Blue;
+            btn_reset_lenc_b.Width = w;
+            btn_reset_lenc_b.Height = h;
+            btn_reset_lenc_b.Text = "Reset B";
+            btn_reset_lenc_b.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 4, y_st + dy * (-1));
+            btn_reset_lenc_b.Click += btn_reset_lenc_b_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_reset_lenc_b);	// 將控件加入表單
+
+            btn_reset_lenc_ctrl.Width = w - 10;
+            btn_reset_lenc_ctrl.Height = h;
+            btn_reset_lenc_ctrl.Text = "Reset C";
+            btn_reset_lenc_ctrl.Location = new Point(x_st + dx * 3 + 20, y_st + dy * 0 + region_y * 3);
+            btn_reset_lenc_ctrl.Click += btn_reset_lenc_ctrl_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_reset_lenc_ctrl);	// 將控件加入表單
+
+            btn_lenc_test1.Width = w - 20;
+            btn_lenc_test1.Height = h;
+            btn_lenc_test1.Text = "test1";
+            btn_lenc_test1.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 4 + 52 + 5, y_st + dy * (-1) + 30);
+            btn_lenc_test1.Click += btn_lenc_test1_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_lenc_test1);	// 將控件加入表單
+
+            btn_lenc_test2.Width = w - 20;
+            btn_lenc_test2.Height = h;
+            btn_lenc_test2.Text = "test2";
+            btn_lenc_test2.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 4 + 52 + 5, y_st + dy * (-1) + 30 + 40);
+            btn_lenc_test2.Click += btn_lenc_test2_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_lenc_test2);	// 將控件加入表單
+
+            btn_lenc_test3.Width = w - 20;
+            btn_lenc_test3.Height = h;
+            btn_lenc_test3.Text = "90/75";
+            btn_lenc_test3.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 4 + 52 + 5, y_st + dy * (-1) + 30 + 80);
+            btn_lenc_test3.Click += btn_lenc_test3_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_lenc_test3);	// 將控件加入表單
+
+            btn_lenc_test4.Width = w - 20;
+            btn_lenc_test4.Height = h;
+            btn_lenc_test4.Text = "Rem";
+            btn_lenc_test4.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 4 + 52 + 5, y_st + dy * (-1) + 30 + 120);
+            btn_lenc_test4.Click += btn_lenc_test4_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_lenc_test4);	// 將控件加入表單
+
+            btn_lenc_test5.Width = w - 20;
+            btn_lenc_test5.Height = h;
+            btn_lenc_test5.Text = "Apply";
+            btn_lenc_test5.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 4 + 52 + 5, y_st + dy * (-1) + 30 + 160);
+            btn_lenc_test5.Click += btn_lenc_test5_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_lenc_test5);	// 將控件加入表單
+
+            btn_lenc_test6.Width = w - 20;
+            btn_lenc_test6.Height = h;
+            btn_lenc_test6.Text = "X0Y0";
+            btn_lenc_test6.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 4 + 52 + 6, y_st + dy * (-1) + 30 + 160);
+            btn_lenc_test6.Click += btn_lenc_test6_click;	// 加入事件
+            this.pictureBox3.Controls.Add(btn_lenc_test6);	// 將控件加入表單
+
+            //將textBox填入初始值 (大多從trackBar的預設值而來)
+
+            tb0r.Text = tbar0r.Value.ToString();
+            tb1r.Text = tbar1r.Value.ToString();
+            tb2r.Text = tbar2r.Value.ToString();
+            tb3r.Text = tbar3r.Value.ToString();
+            tb4r.Text = tbar4r.Value.ToString();
+            tb5r.Text = tbar5r.Value.ToString();
+            tb0rh.Text = tbar0r.Value.ToString("X2");
+            tb1rh.Text = tbar1r.Value.ToString("X2");
+            tb2rh.Text = tbar2r.Value.ToString("X2");
+            tb3rh.Text = tbar3r.Value.ToString("X2");
+            if (tbar4r.Value > 0)
+            {
+                tb4rh.Text = "正" + tbar4r.Value.ToString("X2");
+            }
+            else
+            {
+                tb4rh.Text = "負" + (-tbar4r.Value).ToString("X2");
+            }
+            tb5rh.Text = tbar5r.Value.ToString("X2");
+
+            tb0g.Text = tbar0g.Value.ToString();
+            tb1g.Text = tbar1g.Value.ToString();
+            tb2g.Text = tbar2g.Value.ToString();
+            tb3g.Text = tbar3g.Value.ToString();
+            tb4g.Text = tbar4g.Value.ToString();
+            tb5g.Text = tbar5g.Value.ToString();
+            tb0gh.Text = tbar0g.Value.ToString("X2");
+            tb1gh.Text = tbar1g.Value.ToString("X2");
+            tb2gh.Text = tbar2g.Value.ToString("X2");
+            tb3gh.Text = tbar3g.Value.ToString("X2");
+            if (tbar4g.Value > 0)
+            {
+                tb4gh.Text = "正" + tbar4g.Value.ToString("X2");
+            }
+            else
+            {
+                tb4gh.Text = "負" + (-tbar4g.Value).ToString("X2");
+            }
+            tb5gh.Text = tbar5g.Value.ToString("X2");
+
+            tb0b.Text = tbar0b.Value.ToString();
+            tb1b.Text = tbar1b.Value.ToString();
+            tb2b.Text = tbar2b.Value.ToString();
+            tb3b.Text = tbar3b.Value.ToString();
+            tb4b.Text = tbar4b.Value.ToString();
+            tb5b.Text = tbar5b.Value.ToString();
+            tb0bh.Text = tbar0b.Value.ToString("X2");
+            tb1bh.Text = tbar1b.Value.ToString("X2");
+            tb2bh.Text = tbar2b.Value.ToString("X2");
+            tb3bh.Text = tbar3b.Value.ToString("X2");
+            if (tbar4b.Value > 0)
+            {
+                tb4bh.Text = "正" + tbar4b.Value.ToString("X2");
+            }
+            else
+            {
+                tb4bh.Text = "負" + (-tbar4b.Value).ToString("X2");
+            }
+            tb5bh.Text = tbar5b.Value.ToString("X2");
+
+            show_hex2bit4(13);
+            tb_lenc0.Text = "13";
+            tb_lenc1.Text = tbar_lenc1.Value.ToString();
+            tb_lenc2.Text = tbar_lenc2.Value.ToString();
+            tb_lenc3.Text = tbar_lenc3.Value.ToString();
+            tb_lenc4.Text = tbar_lenc4.Value.ToString();
+            tb_lenc0h.Text = "0D";
+            tb_lenc1h.Text = tbar_lenc1.Value.ToString("X2");
+            tb_lenc2h.Text = tbar_lenc2.Value.ToString("X2");
+            tb_lenc3h.Text = tbar_lenc3.Value.ToString("X2");
+            tb_lenc4h.Text = tbar_lenc4.Value.ToString("X2");
+
+            tb0r.ForeColor = Color.Black;
+            tb1r.ForeColor = Color.Black;
+            tb2r.ForeColor = Color.Black;
+            tb3r.ForeColor = Color.Black;
+            tb4r.ForeColor = Color.Black;
+            tb5r.ForeColor = Color.Black;
+            tb0g.ForeColor = Color.Black;
+            tb1g.ForeColor = Color.Black;
+            tb2g.ForeColor = Color.Black;
+            tb3g.ForeColor = Color.Black;
+            tb4g.ForeColor = Color.Black;
+            tb5g.ForeColor = Color.Black;
+            tb0b.ForeColor = Color.Black;
+            tb1b.ForeColor = Color.Black;
+            tb2b.ForeColor = Color.Black;
+            tb3b.ForeColor = Color.Black;
+            tb4b.ForeColor = Color.Black;
+            tb5b.ForeColor = Color.Black;
+
+            tb0rh.ForeColor = Color.Black;
+            tb1rh.ForeColor = Color.Black;
+            tb2rh.ForeColor = Color.Black;
+            tb3rh.ForeColor = Color.Black;
+            tb4rh.ForeColor = Color.Black;
+            tb5rh.ForeColor = Color.Black;
+            tb0gh.ForeColor = Color.Black;
+            tb1gh.ForeColor = Color.Black;
+            tb2gh.ForeColor = Color.Black;
+            tb3gh.ForeColor = Color.Black;
+            tb4gh.ForeColor = Color.Black;
+            tb5gh.ForeColor = Color.Black;
+            tb0bh.ForeColor = Color.Black;
+            tb1bh.ForeColor = Color.Black;
+            tb2bh.ForeColor = Color.Black;
+            tb3bh.ForeColor = Color.Black;
+            tb4bh.ForeColor = Color.Black;
+            tb5bh.ForeColor = Color.Black;
+            tb_lenc0.ForeColor = Color.Black;
+            tb_lenc1.ForeColor = Color.Black;
+            tb_lenc2.ForeColor = Color.Black;
+            tb_lenc3.ForeColor = Color.Black;
+            tb_lenc4.ForeColor = Color.Black;
+            tb_lenc0h.ForeColor = Color.Black;
+            tb_lenc1h.ForeColor = Color.Black;
+            tb_lenc2h.ForeColor = Color.Black;
+            tb_lenc3h.ForeColor = Color.Black;
+            tb_lenc4h.ForeColor = Color.Black;
+
+            tbar0r.BringToFront();
+            tbar1r.BringToFront();
+            tbar2r.BringToFront();
+            tbar3r.BringToFront();
+            tbar4r.BringToFront();
+            tbar5r.BringToFront();
+
+            tbar0g.BringToFront();
+            tbar1g.BringToFront();
+            tbar2g.BringToFront();
+            tbar3g.BringToFront();
+            tbar4g.BringToFront();
+            tbar5g.BringToFront();
+
+            tbar0b.BringToFront();
+            tbar1b.BringToFront();
+            tbar2b.BringToFront();
+            tbar3b.BringToFront();
+            tbar4b.BringToFront();
+            tbar5b.BringToFront();
+
+            tbar_lenc1.BringToFront();
+            tbar_lenc2.BringToFront();
+            tbar_lenc3.BringToFront();
+            tbar_lenc4.BringToFront();
+
+            btn_lenc_test1.BringToFront();
+            btn_lenc_test2.BringToFront();
+            btn_lenc_test3.BringToFront();
+            btn_lenc_test4.BringToFront();
+            btn_lenc_test5.BringToFront();
+            btn_lenc_test6.BringToFront();
+
+            x_st = 1195;
+            y_st = 10;
+            dy = 20;
+            w = 95;
+            h = 20;
+            cb_average.Text = "20張平均";
+            cb_average.ForeColor = Color.Black;
+            cb_average.BackColor = Color.White;
+            cb_average.Width = w;
+            cb_average.Height = h;
+            cb_average.Checked = true;
+            cb_average.Location = new Point(x_st, y_st + dy * 0);
+            this.pictureBox4.Controls.Add(cb_average);	// 將控件加入表單
+
+            cb_show_r.Text = "R";
+            cb_show_r.ForeColor = Color.Red;
+            cb_show_r.BackColor = Color.White;
+            cb_show_r.Width = w;
+            cb_show_r.Height = h;
+            cb_show_r.Checked = true;
+            cb_show_r.Location = new Point(x_st, y_st + dy * 1);
+            this.pictureBox4.Controls.Add(cb_show_r);	// 將控件加入表單
+
+            cb_show_g.Text = "G";
+            cb_show_g.ForeColor = Color.Green;
+            cb_show_g.BackColor = Color.White;
+            cb_show_g.Width = w;
+            cb_show_g.Height = h;
+            cb_show_g.Checked = true;
+            cb_show_g.Location = new Point(x_st, y_st + dy * 2);
+            this.pictureBox4.Controls.Add(cb_show_g);	// 將控件加入表單
+
+            cb_show_b.Text = "B";
+            cb_show_b.ForeColor = Color.Blue;
+            cb_show_b.BackColor = Color.White;
+            cb_show_b.Width = w;
+            cb_show_b.Height = h;
+            cb_show_b.Checked = true;
+            cb_show_b.Location = new Point(x_st, y_st + dy * 3);
+            this.pictureBox4.Controls.Add(cb_show_b);	// 將控件加入表單
+
+            cb_show_y.Text = "Y";
+            cb_show_y.ForeColor = Color.Orange;
+            cb_show_y.BackColor = Color.White;
+            cb_show_y.Width = w;
+            cb_show_y.Height = h;
+            cb_show_y.Checked = false;
+            cb_show_y.Location = new Point(x_st, y_st + dy * 4);
+            this.pictureBox4.Controls.Add(cb_show_y);	// 將控件加入表單
+
+            // 實例化按鈕
+            btn_return.Width = 35;
+            btn_return.Height = 35;
+            btn_return.Text = "回";
+            //btn_return.BackColor = Color.Red;
+            btn_return.Name = "bt_return";
+            btn_return.Location = new Point(x_st + 50, y_st + dy * 1 + dy / 2);
+            // 加入按鈕事件
+            //btn_return.Click += new EventHandler(btn_return_pbx4_Click);   //same
+            btn_return.Click += btn_return_pbx4_Click;
+            // 將按鈕加入表單
+            //this.AcceptButton = btn_return;
+            this.pictureBox4.Controls.Add(btn_return);
+            btn_return.BringToFront();
+
+            x_st -= 50;
+            w = 40;
+
+            rb_select_r.Text = "R";
+            rb_select_r.ForeColor = Color.Red;
+            rb_select_r.BackColor = Color.White;
+            rb_select_r.Width = w;
+            rb_select_r.Height = h;
+            rb_select_r.Checked = false;
+            rb_select_r.Location = new Point(x_st, y_st + dy * 1);
+            this.pictureBox4.Controls.Add(rb_select_r);	// 將控件加入表單
+
+            rb_select_g.Text = "G";
+            rb_select_g.ForeColor = Color.Green;
+            rb_select_g.BackColor = Color.White;
+            rb_select_g.Width = w;
+            rb_select_g.Height = h;
+            rb_select_g.Checked = true;
+            rb_select_g.Location = new Point(x_st, y_st + dy * 2);
+            this.pictureBox4.Controls.Add(rb_select_g);	// 將控件加入表單
+
+            rb_select_b.Text = "B";
+            rb_select_b.ForeColor = Color.Blue;
+            rb_select_b.BackColor = Color.White;
+            rb_select_b.Width = w;
+            rb_select_b.Height = h;
+            rb_select_b.Checked = false;
+            rb_select_b.Location = new Point(x_st, y_st + dy * 3);
+            this.pictureBox4.Controls.Add(rb_select_b);	// 將控件加入表單
+
+            rb_select_y.Text = "Y";
+            rb_select_y.ForeColor = Color.Orange;
+            rb_select_y.BackColor = Color.White;
+            rb_select_y.Width = w;
+            rb_select_y.Height = h;
+            rb_select_y.Checked = false;
+            rb_select_y.Location = new Point(x_st, y_st + dy * 4);
+            this.pictureBox4.Controls.Add(rb_select_y);	// 將控件加入表單
+
+            rb_select_none.Text = "無";
+            rb_select_none.ForeColor = Color.Black;
+            rb_select_none.BackColor = Color.White;
+            rb_select_none.Width = w;
+            rb_select_none.Height = h;
+            rb_select_none.Checked = false;
+            rb_select_none.Location = new Point(x_st, y_st + dy * 0);
+            this.pictureBox4.Controls.Add(rb_select_none);	// 將控件加入表單
+        }
+
+        private void btn_reset_lenc_click(object sender, EventArgs e)
+        {
+            btn_reset_lenc_r_click(sender, e);
+            btn_reset_lenc_g_click(sender, e);
+            btn_reset_lenc_b_click(sender, e);
+            btn_reset_lenc_ctrl_click(sender, e);
+        }
+
+        private void btn_reset_lenc_r_click(object sender, EventArgs e)
+        {
+            byte SendData = 0;
+
+            tbar0r.Value = 0x015A;
+            tb0r.ForeColor = Color.Black;
+            tb0rh.ForeColor = Color.Black;
+            SendData = (byte)(tbar0r.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x00;    //X0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar0r.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x01;    //X0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar1r.Value = 0x00CF;
+            tb1r.ForeColor = Color.Black;
+            tb1rh.ForeColor = Color.Black;
+            SendData = (byte)(tbar1r.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x02;    //Y0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar1r.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x03;    //Y0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar2r.Value = 0x1E;
+            tb2r.ForeColor = Color.Black;
+            tb2rh.ForeColor = Color.Black;
+            SendData = (byte)tbar2r.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x04;    //A1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar3r.Value = 0x03;
+            tb3r.ForeColor = Color.Black;
+            tb3rh.ForeColor = Color.Black;
+            SendData = (byte)tbar3r.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x05;    //A2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar4r.Value = -0x75;
+            tb4r.ForeColor = Color.Black;
+            tb4rh.ForeColor = Color.Black;
+            SendData = (byte)tbar4r.Value;
+            if (tbar4r.Value > 0)
+                SendData |= 0x80;
+            else
+                SendData = (byte)(-tbar4r.Value);
+
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x06;    //B1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar5r.Value = 0x05;
+            tb5r.ForeColor = Color.Black;
+            tb5rh.ForeColor = Color.Black;
+            SendData = (byte)tbar5r.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x07;    //B2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+        }
+
+        private void btn_reset_lenc_g_click(object sender, EventArgs e)
+        {
+            byte SendData = 0;
+
+            tbar0g.Value = 0x015E;
+            tb0g.ForeColor = Color.Black;
+            tb0gh.ForeColor = Color.Black;
+            SendData = (byte)(tbar0g.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x00 + 8 * 1;    //X0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar0g.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x01 + 8 * 1;    //X0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar1g.Value = 0x00CF;
+            tb1g.ForeColor = Color.Black;
+            tb1gh.ForeColor = Color.Black;
+            SendData = (byte)(tbar1g.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x02 + 8 * 1;    //Y0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar1g.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x03 + 8 * 1;    //Y0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar2g.Value = 0x0F;
+            tb2g.ForeColor = Color.Black;
+            tb2gh.ForeColor = Color.Black;
+            SendData = (byte)tbar2g.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x04 + 8 * 1;    //A1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar3g.Value = 0x03;
+            tb3g.ForeColor = Color.Black;
+            tb3gh.ForeColor = Color.Black;
+            SendData = (byte)tbar3g.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x05 + 8 * 1;    //A2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar4g.Value = -0x75;
+            tb4g.ForeColor = Color.Black;
+            tb4gh.ForeColor = Color.Black;
+            SendData = (byte)tbar4g.Value;
+            if (tbar4g.Value > 0)
+                SendData |= 0x80;
+            else
+                SendData = (byte)(-tbar4g.Value);
+
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x06 + 8 * 1;    //B1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar5g.Value = 0x05;
+            tb5g.ForeColor = Color.Black;
+            tb5gh.ForeColor = Color.Black;
+            SendData = (byte)tbar5g.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x07 + 8 * 1;    //B2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+        }
+
+        private void btn_reset_lenc_b_click(object sender, EventArgs e)
+        {
+            byte SendData = 0;
+
+            tbar0b.Value = 0x016B;
+            tb0b.ForeColor = Color.Black;
+            tb0bh.ForeColor = Color.Black;
+            SendData = (byte)(tbar0b.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x00 + 8 * 2;    //X0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar0b.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x01 + 8 * 2;    //X0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar1b.Value = 0x00CF;
+            tb1b.ForeColor = Color.Black;
+            tb1bh.ForeColor = Color.Black;
+            SendData = (byte)(tbar1b.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x02 + 8 * 2;    //Y0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar1b.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x03 + 8 * 2;    //Y0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar2b.Value = 0x0A;
+            tb2b.ForeColor = Color.Black;
+            tb2bh.ForeColor = Color.Black;
+            SendData = (byte)tbar2b.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x04 + 8 * 2;    //A1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar3b.Value = 0x03;
+            tb3b.ForeColor = Color.Black;
+            tb3bh.ForeColor = Color.Black;
+            SendData = (byte)tbar3b.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x05 + 8 * 2;    //A2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar4b.Value = -0x75;
+            tb4b.ForeColor = Color.Black;
+            tb4bh.ForeColor = Color.Black;
+            SendData = (byte)tbar4b.Value;
+            if (tbar4b.Value > 0)
+                SendData |= 0x80;
+            else
+                SendData = (byte)(-tbar4b.Value);
+
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x06 + 8 * 2;    //B1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar5b.Value = 0x05;
+            tb5b.ForeColor = Color.Black;
+            tb5bh.ForeColor = Color.Black;
+            SendData = (byte)tbar5b.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x07 + 8 * 2;    //B2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+        }
+
+        private void btn_reset_lenc_ctrl_click(object sender, EventArgs e)
+        {
+            byte SendData = 0;
+
+            tbar_lenc1.Value = 0x14;
+            tb_lenc1.ForeColor = Color.Black;
+            tb_lenc1h.ForeColor = Color.Black;
+            SendData = (byte)tbar_lenc1.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x19;
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar_lenc2.Value = 0x02;
+            tb_lenc2.ForeColor = Color.Black;
+            tb_lenc2h.ForeColor = Color.Black;
+            SendData = (byte)tbar_lenc2.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x1A;
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar_lenc3.Value = 0x0C;
+            tb_lenc3.ForeColor = Color.Black;
+            tb_lenc3h.ForeColor = Color.Black;
+            SendData = (byte)tbar_lenc3.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x1B;
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar_lenc4.Value = 0x80;
+            tb_lenc4.ForeColor = Color.Black;
+            tb_lenc4h.ForeColor = Color.Black;
+            SendData = (byte)tbar_lenc4.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x1A;
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tb_lenc1.Text = tbar_lenc1.Value.ToString();
+            tb_lenc1h.Text = tbar_lenc1.Value.ToString("X2");
+            tb_lenc2.Text = tbar_lenc2.Value.ToString();
+            tb_lenc2h.Text = tbar_lenc2.Value.ToString("X2");
+            tb_lenc3.Text = tbar_lenc3.Value.ToString();
+            tb_lenc3h.Text = tbar_lenc3.Value.ToString("X2");
+            tb_lenc4.Text = tbar_lenc4.Value.ToString();
+            tb_lenc4h.Text = tbar_lenc4.Value.ToString("X2");
+        }
+
+        private void btn_lenc_test1_click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "LENC G test\n";
+
+            /*
+            byte SendData = 0;
+
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x00;
+            SendData = 0;
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x01;
+            SendData = 0;
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            */
+
+            tbar0g.Value = 307;
+            tbar_mouse_up_lenc(tbar0g, e);
+            tbar1g.Value = 202;
+            tbar_mouse_up_lenc(tbar1g, e);
+            tbar2g.Value = 41;// 73;
+            tbar_mouse_up_lenc(tbar2g, e);
+            tbar3g.Value = 0;// 1;
+            tbar_mouse_up_lenc(tbar3g, e);
+            tbar4g.Value = -47;// 7;//;117;
+            tbar_mouse_up_lenc(tbar4g, e);
+            tbar5g.Value = 0;// 5;
+            tbar_mouse_up_lenc(tbar5g, e);
+        }
+
+        private void btn_lenc_test2_click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "LENC G test\n";
+
+            tbar0r.Value = 307;
+            tbar_mouse_up_lenc(tbar0r, e);
+            tbar1r.Value = 202;
+            tbar_mouse_up_lenc(tbar1r, e);
+            tbar2r.Value = 41;// 73;
+            tbar_mouse_up_lenc(tbar2r, e);
+            tbar3r.Value = 0;// 1;
+            tbar_mouse_up_lenc(tbar3r, e);
+            tbar4r.Value = 7;//;117;
+            tbar_mouse_up_lenc(tbar4r, e);
+            tbar5r.Value = 0;// 5;
+            tbar_mouse_up_lenc(tbar5r, e);
+
+            tbar0g.Value = 307;
+            tbar_mouse_up_lenc(tbar0g, e);
+            tbar1g.Value = 202;
+            tbar_mouse_up_lenc(tbar1g, e);
+            tbar2g.Value = 41;// 73;
+            tbar_mouse_up_lenc(tbar2g, e);
+            tbar3g.Value = 0;// 1;
+            tbar_mouse_up_lenc(tbar3g, e);
+            tbar4g.Value = 7;//;117;
+            tbar_mouse_up_lenc(tbar4g, e);
+            tbar5g.Value = 0;// 5;
+            tbar_mouse_up_lenc(tbar5g, e);
+
+            tbar0b.Value = 307;
+            tbar_mouse_up_lenc(tbar0b, e);
+            tbar1b.Value = 202;
+            tbar_mouse_up_lenc(tbar1b, e);
+            tbar2b.Value = 41;// 73;
+            tbar_mouse_up_lenc(tbar2b, e);
+            tbar3b.Value = 0;// 1;
+            tbar_mouse_up_lenc(tbar3b, e);
+            tbar4b.Value = 7;//;117;
+            tbar_mouse_up_lenc(tbar4b, e);
+            tbar5b.Value = 0;// 5;
+            tbar_mouse_up_lenc(tbar5b, e);
+        }
+
+        private void btn_lenc_test3_click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "WPT = 90, BPT = 75\n";
+
+            byte SendData;
+
+            SendData = 90;
+            DongleAddr_h = 0x3A;
+            DongleAddr_l = 0x03;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            delay(100);
+
+            SendData = 75;
+            DongleAddr_h = 0x3A;
+            DongleAddr_l = 0x04;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+        }
+
+        private void btn_lenc_test4_click(object sender, EventArgs e)
+        {
+            show_main_message0("存參數", S_OK, 30);
+
+            tb0r_old = tbar0r.Value;
+            tb1r_old = tbar1r.Value;
+            tb2r_old = tbar2r.Value;
+            tb3r_old = tbar3r.Value;
+            tb4r_old = tbar4r.Value;
+            tb5r_old = tbar5r.Value;
+
+            tb0g_old = tbar0g.Value;
+            tb1g_old = tbar1g.Value;
+            tb2g_old = tbar2g.Value;
+            tb3g_old = tbar3g.Value;
+            tb4g_old = tbar4g.Value;
+            tb5g_old = tbar5g.Value;
+
+            tb0b_old = tbar0b.Value;
+            tb1b_old = tbar1b.Value;
+            tb2b_old = tbar2b.Value;
+            tb3b_old = tbar3b.Value;
+            tb4b_old = tbar4b.Value;
+            tb5b_old = tbar5b.Value;
+        }
+
+        private void btn_lenc_test5_click(object sender, EventArgs e)
+        {
+            show_main_message0("套用參數", S_OK, 30);
+
+            byte SendData = 0;
+
+            tbar0b.Value = tb0b_old;
+            tb0b.ForeColor = Color.Black;
+            tb0bh.ForeColor = Color.Black;
+            SendData = (byte)(tbar0b.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x00 + 8 * 2;    //X0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar0b.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x01 + 8 * 2;    //X0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar1b.Value = tb1b_old;
+            tb1b.ForeColor = Color.Black;
+            tb1bh.ForeColor = Color.Black;
+            SendData = (byte)(tbar1b.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x02 + 8 * 2;    //Y0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar1b.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x03 + 8 * 2;    //Y0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar2b.Value = tb2b_old;
+            tb2b.ForeColor = Color.Black;
+            tb2bh.ForeColor = Color.Black;
+            SendData = (byte)tbar2b.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x04 + 8 * 2;    //A1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar3b.Value = tb3b_old;
+            tb3b.ForeColor = Color.Black;
+            tb3bh.ForeColor = Color.Black;
+            SendData = (byte)tbar3b.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x05 + 8 * 2;    //A2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar4b.Value = tb4b_old;
+            tb4b.ForeColor = Color.Black;
+            tb4bh.ForeColor = Color.Black;
+            SendData = (byte)tbar4b.Value;
+            if (tbar4b.Value > 0)
+                SendData |= 0x80;
+            else
+                SendData = (byte)(-tbar4b.Value);
+
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x06 + 8 * 2;    //B1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar5b.Value = tb5b_old;
+            tb5b.ForeColor = Color.Black;
+            tb5bh.ForeColor = Color.Black;
+            SendData = (byte)tbar5b.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x07 + 8 * 2;    //B2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar0r.Value = tb0r_old;
+            tb0r.ForeColor = Color.Black;
+            tb0rh.ForeColor = Color.Black;
+            SendData = (byte)(tbar0r.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x00;    //X0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar0r.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x01;    //X0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar1r.Value = tb1r_old;
+            tb1r.ForeColor = Color.Black;
+            tb1rh.ForeColor = Color.Black;
+            SendData = (byte)(tbar1r.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x02;    //Y0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar1r.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x03;    //Y0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar2r.Value = tb2r_old;
+            tb2r.ForeColor = Color.Black;
+            tb2rh.ForeColor = Color.Black;
+            SendData = (byte)tbar2r.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x04;    //A1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar3r.Value = tb3r_old;
+            tb3r.ForeColor = Color.Black;
+            tb3rh.ForeColor = Color.Black;
+            SendData = (byte)tbar3r.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x05;    //A2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar4r.Value = tb4r_old;
+            tb4r.ForeColor = Color.Black;
+            tb4rh.ForeColor = Color.Black;
+            SendData = (byte)tbar4r.Value;
+            if (tbar4r.Value > 0)
+                SendData |= 0x80;
+            else
+                SendData = (byte)(-tbar4r.Value);
+
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x06;    //B1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar5r.Value = tb5r_old;
+            tb5r.ForeColor = Color.Black;
+            tb5rh.ForeColor = Color.Black;
+            SendData = (byte)tbar5r.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x07;    //B2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar0g.Value = tb0g_old;
+            tb0g.ForeColor = Color.Black;
+            tb0gh.ForeColor = Color.Black;
+            SendData = (byte)(tbar0g.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x00 + 8 * 1;    //X0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar0g.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x01 + 8 * 1;    //X0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar1g.Value = tb1g_old;
+            tb1g.ForeColor = Color.Black;
+            tb1gh.ForeColor = Color.Black;
+            SendData = (byte)(tbar1g.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x02 + 8 * 1;    //Y0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar1g.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x03 + 8 * 1;    //Y0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar2g.Value = tb2g_old;
+            tb2g.ForeColor = Color.Black;
+            tb2gh.ForeColor = Color.Black;
+            SendData = (byte)tbar2g.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x04 + 8 * 1;    //A1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar3g.Value = tb3g_old;
+            tb3g.ForeColor = Color.Black;
+            tb3gh.ForeColor = Color.Black;
+            SendData = (byte)tbar3g.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x05 + 8 * 1;    //A2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar4g.Value = tb4g_old;
+            tb4g.ForeColor = Color.Black;
+            tb4gh.ForeColor = Color.Black;
+            SendData = (byte)tbar4g.Value;
+            if (tbar4g.Value > 0)
+                SendData |= 0x80;
+            else
+                SendData = (byte)(-tbar4g.Value);
+
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x06 + 8 * 1;    //B1
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar5g.Value = tb5g_old;
+            tb5g.ForeColor = Color.Black;
+            tb5gh.ForeColor = Color.Black;
+            SendData = (byte)tbar5g.Value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x07 + 8 * 1;    //B2
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+        }
+
+        private void btn_lenc_test6_click(object sender, EventArgs e)
+        {
+            show_main_message0("套用參數", S_OK, 30);
+
+            tb0r_old = 0;
+            tb1r_old = 0;
+            tb0g_old = 0;
+            tb1g_old = 0;
+            tb0b_old = 0;
+            tb1b_old = 0;
+
+            byte SendData = 0;
+
+            tbar0b.Value = tb0b_old;
+            tb0b.ForeColor = Color.Black;
+            tb0bh.ForeColor = Color.Black;
+            SendData = (byte)(tbar0b.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x00 + 8 * 2;    //X0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar0b.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x01 + 8 * 2;    //X0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar1b.Value = tb1b_old;
+            tb1b.ForeColor = Color.Black;
+            tb1bh.ForeColor = Color.Black;
+            SendData = (byte)(tbar1b.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x02 + 8 * 2;    //Y0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar1b.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x03 + 8 * 2;    //Y0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar0r.Value = tb0r_old;
+            tb0r.ForeColor = Color.Black;
+            tb0rh.ForeColor = Color.Black;
+            SendData = (byte)(tbar0r.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x00;    //X0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar0r.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x01;    //X0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar1r.Value = tb1r_old;
+            tb1r.ForeColor = Color.Black;
+            tb1rh.ForeColor = Color.Black;
+            SendData = (byte)(tbar1r.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x02;    //Y0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar1r.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x03;    //Y0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar0g.Value = tb0g_old;
+            tb0g.ForeColor = Color.Black;
+            tb0gh.ForeColor = Color.Black;
+            SendData = (byte)(tbar0g.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x00 + 8 * 1;    //X0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar0g.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x01 + 8 * 1;    //X0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+
+            tbar1g.Value = tb1g_old;
+            tb1g.ForeColor = Color.Black;
+            tb1gh.ForeColor = Color.Black;
+            SendData = (byte)(tbar1g.Value / 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x02 + 8 * 1;    //Y0 H
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+            SendData = (byte)(tbar1g.Value % 256);
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x03 + 8 * 1;    //Y0 L
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+        }
+
+        private void pbox_lenc_status_click(object sender, EventArgs e)
+        {
+            if (flag_lenc_enable == false)
+            {
+                flag_lenc_enable = true;
+                pbox_lenc_status.Image = iMS_Link.Properties.Resources.on;
+                Send_IMS_Data(0xA0, 0x50, 0x00, 0xFF);
+            }
+            else
+            {
+                flag_lenc_enable = false;
+                pbox_lenc_status.Image = iMS_Link.Properties.Resources.off;
+                Send_IMS_Data(0xA0, 0x50, 0x00, 0xFD);
+            }
+        }
+
+        private void btn_read_lenc_click(object sender, EventArgs e)
+        {
+            if (get_comport_status() == false)
+                return;
+
+            show_main_message_cmx_lenc("讀取", S_OK, 40);
+
+            tb0r.Text = "";
+            tb1r.Text = "";
+            tb2r.Text = "";
+            tb3r.Text = "";
+            tb4r.Text = "";
+            tb5r.Text = "";
+            tb0rh.Text = "";
+            tb1rh.Text = "";
+            tb2rh.Text = "";
+            tb3rh.Text = "";
+            tb4rh.Text = "";
+            tb5rh.Text = "";
+
+            tb0g.Text = "";
+            tb1g.Text = "";
+            tb2g.Text = "";
+            tb3g.Text = "";
+            tb4g.Text = "";
+            tb5g.Text = "";
+            tb0gh.Text = "";
+            tb1gh.Text = "";
+            tb2gh.Text = "";
+            tb3gh.Text = "";
+            tb4gh.Text = "";
+            tb5gh.Text = "";
+
+            tb0b.Text = "";
+            tb1b.Text = "";
+            tb2b.Text = "";
+            tb3b.Text = "";
+            tb4b.Text = "";
+            tb5b.Text = "";
+            tb0bh.Text = "";
+            tb1bh.Text = "";
+            tb2bh.Text = "";
+            tb3bh.Text = "";
+            tb4bh.Text = "";
+            tb5bh.Text = "";
+
+            tb_lenc0.Text = "";
+            tb_lenc0h.Text = "";
+            tb_lenc1.Text = "";
+            tb_lenc1h.Text = "";
+            tb_lenc2.Text = "";
+            tb_lenc2h.Text = "";
+            tb_lenc3.Text = "";
+            tb_lenc3h.Text = "";
+            tb_lenc4.Text = "";
+            tb_lenc4h.Text = "";
+
+            Send_IMS_Data(0xA1, 0x50, 0x00, 0); //read 0x5000 ISP CTRL00 for LENC enable
+            delay(100);
+
+            byte addr = 0;
+
+            DongleAddr_h = 0x51;
+
+            for (addr = 0; addr <= 0x1C; addr++)
+            {
+                DongleAddr_l = addr;
+                Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+                delay(100);
+            }
+        }
+
+        private void tbar_mouse_down_lenc(object sender, EventArgs e)
+        {
+            if (sender.Equals(tbar0r))
+            {
+                tb0r.ForeColor = Color.Red;
+                tb0rh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar1r))
+            {
+                tb1r.ForeColor = Color.Red;
+                tb1rh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar2r))
+            {
+                tb2r.ForeColor = Color.Red;
+                tb2rh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar3r))
+            {
+                tb3r.ForeColor = Color.Red;
+                tb3rh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar4r))
+            {
+                tb4r.ForeColor = Color.Red;
+                tb4rh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar5r))
+            {
+                tb5r.ForeColor = Color.Red;
+                tb5rh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar0g))
+            {
+                tb0g.ForeColor = Color.Red;
+                tb0gh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar1g))
+            {
+                tb1g.ForeColor = Color.Red;
+                tb1gh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar2g))
+            {
+                tb2g.ForeColor = Color.Red;
+                tb2gh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar3g))
+            {
+                tb3g.ForeColor = Color.Red;
+                tb3gh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar4g))
+            {
+                tb4g.ForeColor = Color.Red;
+                tb4gh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar5g))
+            {
+                tb5g.ForeColor = Color.Red;
+                tb5gh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar0b))
+            {
+                tb0b.ForeColor = Color.Red;
+                tb0bh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar1b))
+            {
+                tb1b.ForeColor = Color.Red;
+                tb1bh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar2b))
+            {
+                tb2b.ForeColor = Color.Red;
+                tb2bh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar3b))
+            {
+                tb3b.ForeColor = Color.Red;
+                tb3bh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar4b))
+            {
+                tb4b.ForeColor = Color.Red;
+                tb4bh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar5b))
+            {
+                tb5b.ForeColor = Color.Red;
+                tb5bh.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar_lenc1))
+            {
+                tb_lenc1.ForeColor = Color.Red;
+                tb_lenc1h.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar_lenc2))
+            {
+                tb_lenc2.ForeColor = Color.Red;
+                tb_lenc2h.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar_lenc3))
+            {
+                tb_lenc3.ForeColor = Color.Red;
+                tb_lenc3h.ForeColor = Color.Red;
+            }
+            else if (sender.Equals(tbar_lenc4))
+            {
+                tb_lenc4.ForeColor = Color.Red;
+                tb_lenc4h.ForeColor = Color.Red;
+            }
+        }
+
+        private void tbar_scroll_lenc(object sender, EventArgs e)
+        {
+            if (sender.Equals(tbar0r))
+            {
+                tb0r.Text = tbar0r.Value.ToString();
+                tb0rh.Text = tbar0r.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar1r))
+            {
+                tb1r.Text = tbar1r.Value.ToString();
+                tb1rh.Text = tbar1r.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar2r))
+            {
+                tb2r.Text = tbar2r.Value.ToString();
+                tb2rh.Text = tbar2r.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar3r))
+            {
+                tb3r.Text = tbar3r.Value.ToString();
+                tb3rh.Text = tbar3r.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar4r))
+            {
+                tb4r.Text = tbar4r.Value.ToString();
+                if (tbar4r.Value > 0)
+                {
+                    tb4rh.Text = "正" + tbar4r.Value.ToString("X2");
+                }
+                else
+                {
+                    tb4rh.Text = "負" + (-tbar4r.Value).ToString("X2");
+                }
+            }
+            else if (sender.Equals(tbar5r))
+            {
+                tb5r.Text = tbar5r.Value.ToString();
+                tb5rh.Text = tbar5r.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar0g))
+            {
+                tb0g.Text = tbar0g.Value.ToString();
+                tb0gh.Text = tbar0g.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar1g))
+            {
+                tb1g.Text = tbar1g.Value.ToString();
+                tb1gh.Text = tbar1g.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar2g))
+            {
+                tb2g.Text = tbar2g.Value.ToString();
+                tb2gh.Text = tbar2g.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar3g))
+            {
+                tb3g.Text = tbar3g.Value.ToString();
+                tb3gh.Text = tbar3g.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar4g))
+            {
+                tb4g.Text = tbar4g.Value.ToString();
+                if (tbar4g.Value > 0)
+                {
+                    tb4gh.Text = "正" + tbar4g.Value.ToString("X2");
+                }
+                else
+                {
+                    tb4gh.Text = "負" + (-tbar4g.Value).ToString("X2");
+                }
+            }
+            else if (sender.Equals(tbar5g))
+            {
+                tb5g.Text = tbar5g.Value.ToString();
+                tb5gh.Text = tbar5g.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar0b))
+            {
+                tb0b.Text = tbar0b.Value.ToString();
+                tb0bh.Text = tbar0b.Value.ToString("X2");
+                if (cb_apply_rgb.Checked == true)
+                {
+                    tbar0r.Value = tbar0b.Value;
+                    tbar0g.Value = tbar0b.Value;
+                }
+            }
+            else if (sender.Equals(tbar1b))
+            {
+                tb1b.Text = tbar1b.Value.ToString();
+                tb1bh.Text = tbar1b.Value.ToString("X2");
+                if (cb_apply_rgb.Checked == true)
+                {
+                    tbar1r.Value = tbar1b.Value;
+                    tbar1g.Value = tbar1b.Value;
+                }
+            }
+            else if (sender.Equals(tbar2b))
+            {
+                tb2b.Text = tbar2b.Value.ToString();
+                tb2bh.Text = tbar2b.Value.ToString("X2");
+                if (cb_apply_rgb.Checked == true)
+                {
+                    tbar2r.Value = tbar2b.Value;
+                    tbar2g.Value = tbar2b.Value;
+                }
+            }
+            else if (sender.Equals(tbar3b))
+            {
+                tb3b.Text = tbar3b.Value.ToString();
+                tb3bh.Text = tbar3b.Value.ToString("X2");
+                if (cb_apply_rgb.Checked == true)
+                {
+                    tbar3r.Value = tbar3b.Value;
+                    tbar3g.Value = tbar3b.Value;
+                }
+            }
+            else if (sender.Equals(tbar4b))
+            {
+                tb4b.Text = tbar4b.Value.ToString();
+                if (tbar4b.Value > 0)
+                {
+                    tb4bh.Text = "正" + tbar4b.Value.ToString("X2");
+                }
+                else
+                {
+                    tb4bh.Text = "負" + (-tbar4b.Value).ToString("X2");
+                }
+                if (cb_apply_rgb.Checked == true)
+                {
+                    tbar4r.Value = tbar4b.Value;
+                    tbar4g.Value = tbar4b.Value;
+                }
+            }
+            else if (sender.Equals(tbar5b))
+            {
+                tb5b.Text = tbar5b.Value.ToString();
+                tb5bh.Text = tbar5b.Value.ToString("X2");
+                if (cb_apply_rgb.Checked == true)
+                {
+                    tbar5r.Value = tbar5b.Value;
+                    tbar5g.Value = tbar5b.Value;
+                }
+            }
+            else if (sender.Equals(tbar_lenc1))
+            {
+                tb_lenc1.Text = tbar_lenc1.Value.ToString();
+                tb_lenc1h.Text = tbar_lenc1.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar_lenc2))
+            {
+                tb_lenc2.Text = tbar_lenc2.Value.ToString();
+                tb_lenc2h.Text = tbar_lenc2.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar_lenc3))
+            {
+                tb_lenc3.Text = tbar_lenc3.Value.ToString();
+                tb_lenc3h.Text = tbar_lenc3.Value.ToString("X2");
+            }
+            else if (sender.Equals(tbar_lenc4))
+            {
+                tb_lenc4.Text = tbar_lenc4.Value.ToString();
+                tb_lenc4h.Text = tbar_lenc4.Value.ToString("X2");
+            }
+            //setup_lenc(sender, e);
+            //delay(30);
+        }
+
+        private void tbar_value_changed_lenc(object sender, EventArgs e)
+        {
+            tbar_scroll_lenc(sender, e);
+        }
+
+        private void tbar_mouse_up_lenc(object sender, EventArgs e)
+        {
+            setup_lenc(sender, e);
+            delay(30);
+        }
+
+        private void setup_lenc(object sender, EventArgs e)
+        {
+            byte SendData = 0;
+            DongleAddr_h = 0x51;
+
+            if (sender.Equals(tbar0r))
+            {
+                //RED X0
+                int data = tbar0r.Value;
+
+                byte dd;
+                dd = (byte)(data / 256);
+                DongleAddr_l = 0x00;
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                DongleAddr_l = 0x01;
+                dd = (byte)(data % 256);
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                tb0r.ForeColor = Color.Black;
+                tb0rh.ForeColor = Color.Black;
+                show_main_message_cmx_lenc("寫入", S_OK, 10);
+                return;
+            }
+            else if (sender.Equals(tbar1r))
+            {
+                //RED Y0
+                int data = tbar1r.Value;
+
+                byte dd;
+                dd = (byte)(data / 256);
+                DongleAddr_l = 0x02;
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                DongleAddr_l = 0x03;
+                dd = (byte)(data % 256);
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                tb1r.ForeColor = Color.Black;
+                tb1rh.ForeColor = Color.Black;
+                show_main_message_cmx_lenc("寫入", S_OK, 10);
+                return;
+            }
+            else if (sender.Equals(tbar2r))
+            {
+                //RED A1    0x5104
+                tb2r.ForeColor = Color.Black;
+                tb2rh.ForeColor = Color.Black;
+                SendData = (byte)tbar2r.Value;
+                DongleAddr_l = 0x04;
+            }
+            else if (sender.Equals(tbar3r))
+            {
+                //RED A2    0x5105
+                tb3r.ForeColor = Color.Black;
+                tb3rh.ForeColor = Color.Black;
+                SendData = (byte)tbar3r.Value;
+                DongleAddr_l = 0x05;
+            }
+            else if (sender.Equals(tbar4r))
+            {
+                //RED B1    0x5106
+                tb4r.ForeColor = Color.Black;
+                tb4rh.ForeColor = Color.Black;
+                if (tbar4r.Value > 0)
+                {
+                    SendData = (byte)tbar4r.Value;
+                    SendData |= 0x80;
+                }
+                else
+                    SendData = (byte)(-tbar4r.Value);
+                DongleAddr_l = 0x06;
+            }
+            else if (sender.Equals(tbar5r))
+            {
+                //RED B2    0x5107
+                tb5r.ForeColor = Color.Black;
+                tb5rh.ForeColor = Color.Black;
+                SendData = (byte)tbar5r.Value;
+                DongleAddr_l = 0x07;
+            }
+            else if (sender.Equals(tbar0g))
+            {
+                //GREEN X0
+                int data = tbar0g.Value;
+
+                byte dd;
+                dd = (byte)(data / 256);
+                DongleAddr_l = 0x00 + 8;
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                DongleAddr_l = 0x01 + 8;
+                dd = (byte)(data % 256);
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                tb0g.ForeColor = Color.Black;
+                tb0gh.ForeColor = Color.Black;
+                show_main_message_cmx_lenc("寫入", S_OK, 10);
+                return;
+            }
+            else if (sender.Equals(tbar1g))
+            {
+                //GREEN Y0
+                int data = tbar1g.Value;
+
+                byte dd;
+                dd = (byte)(data / 256);
+                DongleAddr_l = 0x02 + 8;
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                DongleAddr_l = 0x03 + 8;
+                dd = (byte)(data % 256);
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                tb1g.ForeColor = Color.Black;
+                tb1gh.ForeColor = Color.Black;
+                show_main_message_cmx_lenc("寫入", S_OK, 10);
+                return;
+            }
+            else if (sender.Equals(tbar2g))
+            {
+                //GREEN A1    0x5104 + 8
+                tb2g.ForeColor = Color.Black;
+                tb2gh.ForeColor = Color.Black;
+                SendData = (byte)tbar2g.Value;
+                DongleAddr_l = 0x04 + 8;
+            }
+            else if (sender.Equals(tbar3g))
+            {
+                //GREEN A2    0x5105 + 8
+                tb3g.ForeColor = Color.Black;
+                tb3gh.ForeColor = Color.Black;
+                SendData = (byte)tbar3g.Value;
+                DongleAddr_l = 0x05 + 8;
+            }
+            else if (sender.Equals(tbar4g))
+            {
+                //GREEN B1    0x5106 + 8
+                tb4g.ForeColor = Color.Black;
+                tb4gh.ForeColor = Color.Black;
+
+                if (tbar4g.Value > 0)
+                {
+                    SendData = (byte)tbar4g.Value;
+                    SendData |= 0x80;
+                }
+                else
+                    SendData = (byte)(-tbar4g.Value);
+                DongleAddr_l = 0x06 + 8;
+            }
+            else if (sender.Equals(tbar5g))
+            {
+                //GREEN B2    0x5107 + 8
+                tb5g.ForeColor = Color.Black;
+                tb5gh.ForeColor = Color.Black;
+                SendData = (byte)tbar5g.Value;
+                DongleAddr_l = 0x07 + 8;
+            }
+            else if (sender.Equals(tbar0b))
+            {
+                //BLUE X0
+                int data = tbar0b.Value;
+
+                byte dd;
+                dd = (byte)(data / 256);
+                DongleAddr_l = 0x00 + 16;
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                DongleAddr_l = 0x01 + 16;
+                dd = (byte)(data % 256);
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                tb0b.ForeColor = Color.Black;
+                tb0bh.ForeColor = Color.Black;
+                show_main_message_cmx_lenc("寫入", S_OK, 10);
+                return;
+            }
+            else if (sender.Equals(tbar1b))
+            {
+                //BLUE Y0
+                int data = tbar1b.Value;
+
+                byte dd;
+                dd = (byte)(data / 256);
+                DongleAddr_l = 0x02 + 16;
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                DongleAddr_l = 0x03 + 16;
+                dd = (byte)(data % 256);
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                tb1b.ForeColor = Color.Black;
+                tb1bh.ForeColor = Color.Black;
+                show_main_message_cmx_lenc("寫入", S_OK, 10);
+                return;
+            }
+            else if (sender.Equals(tbar2b))
+            {
+                //BLUE A1    0x5104 + 16
+                tb2b.ForeColor = Color.Black;
+                tb2bh.ForeColor = Color.Black;
+                SendData = (byte)tbar2b.Value;
+                DongleAddr_l = 0x04 + 16;
+            }
+            else if (sender.Equals(tbar3b))
+            {
+                //BLUE A2    0x5105 + 16
+                tb3b.ForeColor = Color.Black;
+                tb3bh.ForeColor = Color.Black;
+                SendData = (byte)tbar3b.Value;
+                DongleAddr_l = 0x05 + 16;
+            }
+            else if (sender.Equals(tbar4b))
+            {
+                //BLUE B1    0x5106 + 16
+                tb4b.ForeColor = Color.Black;
+                tb4bh.ForeColor = Color.Black;
+
+                if (tbar4b.Value > 0)
+                {
+                    SendData = (byte)tbar4b.Value;
+                    SendData |= 0x80;
+                }
+                else
+                    SendData = (byte)(-tbar4b.Value);
+                DongleAddr_l = 0x06 + 16;
+            }
+            else if (sender.Equals(tbar5b))
+            {
+                //BLUE B2    0x5107 + 16
+                tb5b.ForeColor = Color.Black;
+                tb5bh.ForeColor = Color.Black;
+                SendData = (byte)tbar5b.Value;
+                DongleAddr_l = 0x07 + 16;
+            }
+            else if (sender.Equals(tbar_lenc1))
+            {
+                //0x5119 LENC COEF TH
+                tb_lenc1.ForeColor = Color.Black;
+                tb_lenc1h.ForeColor = Color.Black;
+                SendData = (byte)tbar_lenc1.Value;
+                DongleAddr_l = 0x19;
+            }
+            else if (sender.Equals(tbar_lenc2))
+            {
+                //0x511A LENC GAIN TH1
+                tb_lenc2.ForeColor = Color.Black;
+                tb_lenc2h.ForeColor = Color.Black;
+                SendData = (byte)tbar_lenc2.Value;
+                DongleAddr_l = 0x1A;
+            }
+            else if (sender.Equals(tbar_lenc3))
+            {
+                //0x511B LENC GAIN TH2
+                tb_lenc3.ForeColor = Color.Black;
+                tb_lenc3h.ForeColor = Color.Black;
+                SendData = (byte)tbar_lenc3.Value;
+                DongleAddr_l = 0x1B;
+            }
+            else if (sender.Equals(tbar_lenc4))
+            {
+                //0x511C COEF MAN
+                tb_lenc4.ForeColor = Color.Black;
+                tb_lenc4h.ForeColor = Color.Black;
+                SendData = (byte)tbar_lenc4.Value;
+                DongleAddr_l = 0x1C;
+            }
+
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
+        }
+
+        private void lenc_data_bit_change2(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (cb_lenc3.Checked == true)
+                value |= (1 << 3);
+            if (cb_lenc2.Checked == true)
+                value |= (1 << 2);
+            if (cb_lenc1.Checked == true)
+                value |= (1 << 1);
+            if (cb_lenc0.Checked == true)
+                value |= (1 << 0);
+            //richTextBox1.Text += "value = 0x " + value.ToString("X2") + " = " + value.ToString() + "\n";
+
+            tb_lenc0h.Text = value.ToString("X2");
+            tb_lenc0.Text = value.ToString();
+            tb_lenc0h.ForeColor = Color.Red;
+            tb_lenc0.ForeColor = Color.Red;
+        }
+
+        void remove_all_controls_in_pictureBox3()
+        {
+            //richTextBox1.Text += "遍歷所有控件\n";
+            int i;
+
+            btn_read_cmx.Click -= btn_read_cmx_click;
+            btn_read_lenc.Click -= btn_read_lenc_click;
+
+            for (i = 0; i < 10; i++)
+            {
+                foreach (Control con in this.pictureBox3.Controls)
+                {
+                    System.String strControl = con.GetType().ToString();//获得控件的类型
+                    System.String strControlName = con.Name.ToString();//获得控件的名称
+
+                    //richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
+                    if (strControlName == "bt_close")
+                        continue;
+
+                    this.pictureBox3.Controls.Remove(con);
+
+                }
+            }
+        }
+
+        void check_all_controls_in_pictureBox3()
+        {
+            //檢查所有的控件, 做特別的處理
+            //richTextBox1.Text += "遍歷所有控件\n";
+
+            foreach (Control con in this.pictureBox3.Controls)
+            {
+                System.String strControl = con.GetType().ToString();//获得控件的类型
+                System.String strControlName = con.Name.ToString();//获得控件的名称
+
+                //richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
+
+                //若是Label, 改變Font大小
+                if (strControl == "System.Windows.Forms.Label")
+                {
+                    //richTextBox1.Text += con.Font.ToString() + "\n";
+                    con.Font = new Font("新細明體", 14, FontStyle.Bold | FontStyle.Italic);
+
+                }
+
+                /*
+                //若是某控件, 跳過
+                if (strControlName == "bt_close")
+                    continue;
+                */
+
+
+                //移除某控件
+                //this.pictureBox3.Controls.Remove(con);
+
+            }
+        }
+
+        int index = 0;
+        int[] R_total_array = new int[20];
+        int[] G_total_array = new int[20];
+        int[] B_total_array = new int[20];
+        int[] Y_total_array = new int[20];
+        int[] R_point_data_array = new int[20];
+
+        int[,] R_data_array = new int[20, 640];
+        int[,] G_data_array = new int[20, 640];
+        int[,] B_data_array = new int[20, 640];
+        int[,] Y_data_array = new int[20, 640];
+
+        private const int ratio = 3;
+        int[,] data_array = new int[640 / ratio + ratio, 480 / ratio + ratio];
+
+        void show_cmx_lenc_result()
+        {
+            if (bm == null)
+                return;
+
+            flag_do_find_awb_location = true;
+
+            int ww = 640;
+            int hh = 480;
+            int x_st;
+            int y_st;
+
+            int w;
+            int h;
+            int i;
+            int j;
+            Color p;
+            Bitmap bm2 = null;
+
+            //double total_R = 0;
+            //double total_G = 0;
+            //double total_B = 0;
+            //double total_Y = 0;
+
+            //int R_count_max = 0;
+            //int G_count_max = 0;
+            //int B_count_max = 0;
+            //int Y_count_max = 0;
+
+            x_st = 0;
+            y_st = 0;
+
+            if ((ww <= 0) || (hh <= 0))
+            {
+                richTextBox1.Text += "量測點數 ww = " + ww.ToString() + ", hh = " + hh.ToString() + " 不合法\n";
+                flag_do_find_awb_location = false;
+                return;
+            }
+
+            try
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                //bm2 = bm;
+                //bm2 = (Bitmap)bm.Clone();
+                bm2 = new Bitmap(bm);
+
+                //pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e61 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return;
+            }
+
+            /*
+            try
+            {
+                ga = Graphics.FromImage(bm2);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e62 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return;
+            }
+            */
+
+            try
+            {
+                w = bm2.Width;
+                h = bm2.Height;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e63 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return;
+            }
+
+            if (x_st < 0)
+                x_st = 0;
+            if (y_st < 0)
+                y_st = 0;
+            if ((x_st + ww) > w)
+                x_st = w - ww;
+            if ((y_st + hh) > h)
+                y_st = h - hh;
+
+            //richTextBox1.Text += "量測起點 x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+            //richTextBox1.Text += "量測範圍 ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+
+            total_R = 0;
+            total_G = 0;
+            total_B = 0;
+            //total_Y = 0;
+
+            int[] R_data = new int[640];
+            int[] G_data = new int[640];
+            int[] B_data = new int[640];
+            int[] Y_data = new int[640];
+
+            /*
+            int[] R_count = new int[256];
+            int[] G_count = new int[256];
+            int[] B_count = new int[256];
+            int[] Y_count = new int[256];
+            */
+
+            int R_total = 0;
+            int G_total = 0;
+            int B_total = 0;
+            int Y_total = 0;
+
+            //richTextBox1.Text += "\nST\n";
+            //for (j = y_st; j < (y_st + hh); j++)
+            j = 240;
+            {
+                //for (i = x_st; i < (x_st + ww); i++)
+                for (i = 0; i < 640; i++)
+                {
+                    p = bm2.GetPixel(i, j);
+
+                    /*
+                    total_R += p.R;
+                    total_G += p.G;
+                    total_B += p.B;
+                    //richTextBox1.Text += p.B.ToString() + " ";
+                    */
+
+                    R_data[i] = p.R;
+                    G_data[i] = p.G;
+                    B_data[i] = p.B;
+
+                    R_data_array[index, i] = p.R;
+                    G_data_array[index, i] = p.G;
+                    B_data_array[index, i] = p.B;
+
+                    /*
+                    R_count[p.R]++;
+                    G_count[p.G]++;
+                    B_count[p.B]++;
+                    */
+
+                    //bm2.SetPixel(i, j, Color.FromArgb(255, 0, 0));
+                    RGB pp = new RGB(p.R, p.G, p.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+                    //total_Y += yyy.Y;
+                    //Y_data[hh * (j - y_st) + (i - x_st)] = (int)yyy.Y;
+                    Y_data[i] = (int)yyy.Y;
+                    Y_data_array[index, i] = (int)yyy.Y;
+                    //Y_count[(int)yyy.Y]++;
+
+                    R_total += R_data[i];
+                    G_total += G_data[i];
+                    B_total += B_data[i];
+                    Y_total += Y_data[i];
+                }
+            }
+            //richTextBox1.Text += "\nSP\n";
+
+            /*
+            //超前部署
+            if ((index == 0) && (R_data_array[index + 1, 320] == 0))
+            {
+                richTextBox1.Text += "超前部署\n";
+                for (i = 1; i < 20; i++)
+                {
+                    for (j = 0; j < 640; j++)
+                    {
+                        R_data_array[i, j] = R_data_array[0, j];
+                        G_data_array[i, j] = G_data_array[0, j];
+                        B_data_array[i, j] = B_data_array[0, j];
+                        Y_data_array[i, j] = Y_data_array[0, j];
+                    }
+                }
+            }
+            */
+
+            R_total_array[index] = R_total;
+            G_total_array[index] = G_total;
+            B_total_array[index] = B_total;
+            Y_total_array[index] = Y_total;
+            R_point_data_array[index] = R_data[320];
+
+            index++;
+            if (index >= 20)
+                index = 0;
+
+            /*
+            int total_points = ww * hh;
+            richTextBox1.Text += "total_points = " + total_points.ToString() + "\n";
+            richTextBox1.Text += "total_R = " + total_R.ToString() + "\n";
+            richTextBox1.Text += "total_G = " + total_G.ToString() + "\n";
+            richTextBox1.Text += "total_B = " + total_B.ToString() + "\n";
+
+            richTextBox1.Text += "average_R = " + (total_R / total_points).ToString("F2") + "\n";
+            richTextBox1.Text += "average_G = " + (total_G / total_points).ToString("F2") + "\n";
+            richTextBox1.Text += "average_B = " + (total_B / total_points).ToString("F2") + "\n";
+            */
+
+            /*
+            richTextBox1.Text += "R_count\t";
+            for (i = 0; i < 256; i++)
+            {
+                richTextBox1.Text += R_count[i] + " ";
+                if ((i % 32) == 31)
+                    richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+            /*
+            richTextBox1.Text += "\nG_count\t";
+            for (i = 0; i < 256; i++)
+            {
+                richTextBox1.Text += G_count[i] + " ";
+            }
+            richTextBox1.Text += "\nB_count\t";
+            for (i = 0; i < 256; i++)
+            {
+                richTextBox1.Text += B_count[i] + " ";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+
+            //R_count_max = 0;
+            //G_count_max = 0;
+            //B_count_max = 0;
+            //Y_count_max = 0;
+            for (i = 0; i < 256; i++)
+            {
+                /*
+                if (R_count[i] > 1000)
+                    R_count[i] = 1000;
+                if (G_count[i] > 1000)
+                    G_count[i] = 1000;
+                if (B_count[i] > 1000)
+                    B_count[i] = 1000;
+
+                if ((R_count[i] >= 1000) || (G_count[i] >= 1000) || (B_count[i] >= 1000))
+                    continue;
+                */
+
+                /*
+                if (R_count[i] > R_count_max)
+                    R_count_max = R_count[i];
+                if (G_count[i] > G_count_max)
+                    G_count_max = G_count[i];
+                if (B_count[i] > B_count_max)
+                    B_count_max = B_count[i];
+                if (Y_count[i] > Y_count_max)
+                    Y_count_max = Y_count[i];
+                */
+            }
+
+            //richTextBox1.Text += "Max : " + R_count_max.ToString() + ", " + G_count_max.ToString() + ", " + B_count_max.ToString() + "\n";
+
+            //private const int ratio = 3;
+            //int[,] data_array = new int[640 / ratio, 480 / ratio];
+            //int ww = 640;
+            //int hh = 480;
+
+            //richTextBox1.Text += "w = " + (ww / ratio).ToString() + " h = " + (hh / ratio).ToString() + " ";
+
+            int ii = 0;
+            int jj = 0;
+
+            for (j = 0; j < (hh / 1); j += ratio)
+            {
+                ii = 0;
+                for (i = 0; i < (ww / 1); i += ratio)
+                {
+                    p = bm2.GetPixel(i, j);
+
+                    if (rb_select_r.Checked == true)
+                    {
+                        data_array[ii, jj] = p.R;
+                    }
+                    else if (rb_select_g.Checked == true)
+                    {
+                        data_array[ii, jj] = p.G;
+                    }
+                    else if (rb_select_b.Checked == true)
+                    {
+                        data_array[ii, jj] = p.B;
+                    }
+                    else if (rb_select_y.Checked == true)
+                    {
+                        RGB pp = new RGB(p.R, p.G, p.B);
+                        YUV yyy = new YUV();
+                        yyy = RGBToYUV(pp);
+                        data_array[ii, jj] = (int)yyy.Y;
+                    }
+                    else
+                    {
+                        //richTextBox1.Text += "x";
+                    }
+                    ii++;
+                }
+                jj++;
+            }
+
+            //pictureBox4.Visible = true;
+            //pictureBox4.BackColor = Color.White;
+            int margin = 10;
+            pictureBox4.Size = new Size(640 * 2 + margin * 2, 256 * 1 + margin * 2);
+            pictureBox4.BringToFront();
+
+            Bitmap bmp4 = new Bitmap(640 * 2 + margin * 2, 256 * 1 + margin * 2);
+            g3 = Graphics.FromImage(bmp4);
+            g3.FillRectangle(new SolidBrush(Color.White), 0, 0, bmp4.Width, bmp4.Height);
+            g3.DrawRectangle(new Pen(Color.Navy, 2), margin - 4, margin - 4, 640 * 2 + 8, 256 * 1 + 8);
+
+            if (cb_average.Checked == true)
+            {
+                //取20點平均
+                //int[,] R_data_array = new int[20, 640];
+                for (j = 0; j < 640; j++)
+                {
+                    int total_r = 0;
+                    int total_g = 0;
+                    int total_b = 0;
+                    int total_y = 0;
+                    for (i = 0; i < 20; i++)
+                    {
+                        total_r += R_data_array[i, j];
+                        total_g += G_data_array[i, j];
+                        total_b += B_data_array[i, j];
+                        total_y += Y_data_array[i, j];
+                    }
+                    R_data[j] = total_r / 20;
+                    G_data[j] = total_g / 20;
+                    B_data[j] = total_b / 20;
+                    Y_data[j] = total_y / 20;
+                }
+            }
+
+            // Create pens.
+            Pen redPen = new Pen(Color.Red, 2);
+            Pen greenPen = new Pen(Color.Green, 3);
+            Pen bluePen = new Pen(Color.Blue, 2);
+            Pen yellowPen = new Pen(Color.Yellow, 2);
+            Point[] curvePoints = new Point[640];    //一維陣列內有 256 個Point
+
+            if (cb_show_r.Checked == true)
+            {
+                //畫 R 的分布
+                for (i = 0; i < 640; i++)
+                {
+                    curvePoints[i].X = margin + i * 2;
+                    //curvePoints[i].Y = margin + 256 * 2 - (int)(Y_count[i] * pictureBox3_ratio_y);
+                    curvePoints[i].Y = margin + 256 * 1 - (int)(R_data[i]);
+                    //curvePoints[i].Y = 2 * i;
+                }
+                // Draw lines between original points to screen.
+                g3.DrawLines(redPen, curvePoints);   //畫直線
+                // Draw curve to screen.
+                //g3.DrawCurve(bluePen, curvePoints); //畫曲線
+            }
+
+            if (cb_show_g.Checked == true)
+            {
+                //畫 G 的分布
+                for (i = 0; i < 640; i++)
+                {
+                    curvePoints[i].X = margin + i * 2;
+                    //curvePoints[i].Y = margin + 256 * 2 - (int)(Y_count[i] * pictureBox3_ratio_y);
+                    curvePoints[i].Y = margin + 256 * 1 - (int)(G_data[i]);
+                    //curvePoints[i].Y = 2 * i;
+                }
+                // Draw lines between original points to screen.
+                g3.DrawLines(greenPen, curvePoints);   //畫直線
+                // Draw curve to screen.
+                //g3.DrawCurve(bluePen, curvePoints); //畫曲線
+            }
+
+            if (cb_show_b.Checked == true)
+            {
+                //畫 B 的分布
+                for (i = 0; i < 640; i++)
+                {
+                    curvePoints[i].X = margin + i * 2;
+                    //curvePoints[i].Y = margin + 256 * 2 - (int)(Y_count[i] * pictureBox3_ratio_y);
+                    curvePoints[i].Y = margin + 256 * 1 - (int)(B_data[i]);
+                    //curvePoints[i].Y = 2 * i;
+                }
+                // Draw lines between original points to screen.
+                g3.DrawLines(bluePen, curvePoints);   //畫直線
+                // Draw curve to screen.
+                //g3.DrawCurve(bluePen, curvePoints); //畫曲線
+            }
+
+            if (cb_show_y.Checked == true)
+            {
+                //畫亮度的分布
+                for (i = 0; i < 640; i++)
+                {
+                    curvePoints[i].X = margin + i * 2;
+                    //curvePoints[i].Y = margin + 256 * 2 - (int)(Y_count[i] * pictureBox3_ratio_y);
+                    curvePoints[i].Y = margin + 256 * 1 - (int)(Y_data[i]);
+                    //curvePoints[i].Y = 2 * i;
+                }
+                // Draw lines between original points to screen.
+                g3.DrawLines(yellowPen, curvePoints);   //畫直線
+                // Draw curve to screen.
+                //g3.DrawCurve(bluePen, curvePoints); //畫曲線
+            }
+
+            /*
+            g3.DrawString(R_total.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(10, 10));
+            g3.DrawString(G_total.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(10, 10 + 30));
+            g3.DrawString(B_total.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(10, 10 + 60));
+            g3.DrawString(Y_total.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Yellow), new PointF(10, 10 + 90));
+            */
+
+            /*
+            g3.DrawString(R_total.ToString() + "  " + (R_total_array.Max() - R_total_array.Min()).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(10, 10));
+            g3.DrawString(G_total.ToString() + "  " + (G_total_array.Max() - G_total_array.Min()).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(10, 10 + 30));
+            g3.DrawString(B_total.ToString() + "  " + (B_total_array.Max() - B_total_array.Min()).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(10, 10 + 60));
+            g3.DrawString(Y_total.ToString() + "  " + (Y_total_array.Max() - Y_total_array.Min()).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Yellow), new PointF(10, 10 + 90));
+            */
+
+            g3.DrawString("640點總和  640點平均  20張640點總和最大-最小", new Font("標楷體", 14), new SolidBrush(Color.Red), new PointF(10, 10));
+
+            if (cb_show_r.Checked == true)
+                g3.DrawString(R_total.ToString() + "  " + (R_total / 640).ToString() + "  " + (R_total_array.Max() - R_total_array.Min()).ToString(), new Font("標楷體", 18), new SolidBrush(Color.Red), new PointF(10, 10 + 30));
+            if (cb_show_g.Checked == true)
+                g3.DrawString(G_total.ToString() + "  " + (G_total / 640).ToString() + "  " + (G_total_array.Max() - G_total_array.Min()).ToString(), new Font("標楷體", 18), new SolidBrush(Color.Green), new PointF(10, 10 + 60));
+            if (cb_show_b.Checked == true)
+                g3.DrawString(B_total.ToString() + "  " + (B_total / 640).ToString() + "  " + (B_total_array.Max() - B_total_array.Min()).ToString(), new Font("標楷體", 18), new SolidBrush(Color.Blue), new PointF(10, 10 + 90));
+            if (cb_show_y.Checked == true)
+                g3.DrawString(Y_total.ToString() + "  " + (Y_total / 640).ToString() + "  " + (Y_total_array.Max() - Y_total_array.Min()).ToString(), new Font("標楷體", 18), new SolidBrush(Color.Yellow), new PointF(10, 10 + 120));
+
+            /*
+            g3.FillRectangle(new SolidBrush(Color.Red), 640, 50, 2, 2);
+            g3.FillRectangle(new SolidBrush(Color.Red), 640, 60, 4, 4);
+            g3.FillRectangle(new SolidBrush(Color.Red), 640, 70, 6, 6);
+            g3.FillRectangle(new SolidBrush(Color.Red), 640, 80, 8, 8);
+            g3.FillRectangle(new SolidBrush(Color.Red), 640, 90, 10, 10);
+            */
+
+            if (cb_show_r.Checked == true)
+            {
+                g3.FillEllipse(new SolidBrush(Color.Red), margin + 320 * 2 - 5, margin + 256 * 1 - (int)(R_data[320]) - 5, 10, 10);
+
+                x_st = margin + 320 * 2;
+                for (i = 0; i < 20; i++)
+                {
+                    y_st = margin + 256 * 1 - R_point_data_array[i];
+                    g3.DrawLine(new Pen(Color.Pink, 1), x_st - 5, y_st, x_st + 5, y_st);
+                }
+
+                y_st = margin + 256 * 1 - R_point_data_array.Max();
+                g3.DrawLine(new Pen(Color.Navy, 2), x_st - 8, y_st, x_st + 8, y_st);
+
+                y_st = margin + 256 * 1 - R_point_data_array.Min();
+                g3.DrawLine(new Pen(Color.Navy, 2), x_st - 8, y_st, x_st + 8, y_st);
+
+
+                x_st = margin + 320 * 2 - 20;
+
+                y_st = margin + 256 * 1 - G_data[320] - 40;
+                g3.DrawString(G_data[320].ToString(), new Font("標楷體", 20), new SolidBrush(Color.DarkGreen), new PointF(x_st, y_st));
+
+                x_st += 10;
+                y_st = margin + 256 * 1 - R_point_data_array.Min() + 50;
+                g3.DrawString((R_point_data_array.Max() - R_point_data_array.Min()).ToString(), new Font("標楷體", 20), new SolidBrush(Color.DarkGreen), new PointF(x_st, y_st));
+
+                x_st = margin + 80 * 2 - 20;
+                y_st = margin + 256 * 1 - G_data[80] - 40;
+                g3.DrawString(G_data[80].ToString() + " " + (G_data[80] * 100 / G_data[320]).ToString() + "%", new Font("標楷體", 20), new SolidBrush(Color.DarkGreen), new PointF(x_st, y_st));
+
+            }
+
+            w = ww / ratio;
+            h = hh / ratio;
+
+            x_st = (1300 - w) / 2;
+            y_st = 276 - h - 10;
+
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    if (rb_select_r.Checked == true)
+                    {
+                        bmp4.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, data_array[i, j], 0, 0));
+                    }
+                    else if (rb_select_g.Checked == true)
+                    {
+                        bmp4.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, 0, data_array[i, j], 0));
+                    }
+                    else if (rb_select_b.Checked == true)
+                    {
+                        bmp4.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, 0, 0, data_array[i, j]));
+                    }
+                    else if (rb_select_y.Checked == true)
+                    {
+                        bmp4.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, data_array[i, j], data_array[i, j], data_array[i, j]));
+                    }
+                    else
+                    {
+                        //richTextBox1.Text += "x";
+                    }
+                }
+            }
+
+            pictureBox4.Image = bmp4;
+
+            GC.Collect();       //回收資源
+            //pictureBox1.Image = bm2;
+
+            delay(10);
+            flag_do_find_awb_location = false;
+
+            return;
+        }
+
+        bool flag_pictureBox4_mouse_down = false;
+        private void pictureBox4_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_pictureBox4_mouse_down = true;
+            //richTextBox1.Text += "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+            pictureBox4_position_x_old = e.X;
+            pictureBox4_position_y_old = e.Y;
+        }
+
+        private void pictureBox4_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_pictureBox4_mouse_down == true)
+            {
+                //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+                int dx = e.X - pictureBox4_position_x_old;
+                int dy = e.Y - pictureBox4_position_y_old;
+
+                //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+                pictureBox4.Location = new Point(pictureBox4.Location.X + dx, pictureBox4.Location.Y + dy);
+            }
+        }
+
+        private void pictureBox4_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_pictureBox4_mouse_down = false;
+            //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+            int dx = e.X - pictureBox4_position_x_old;
+            int dy = e.Y - pictureBox4_position_y_old;
+
+            //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+            pictureBox4.Location = new Point(pictureBox4.Location.X + dx, pictureBox4.Location.Y + dy);
+        }
+
+        void show_hex2bit4(int value)
+        {
+            //richTextBox1.Text += "show_hex2bit4\n";
+            if (((value >> 3) & 0x01) == 0x01)
+                cb_lenc3.Checked = true;
+            else
+                cb_lenc3.Checked = false;
+            if (((value >> 2) & 0x01) == 0x01)
+                cb_lenc2.Checked = true;
+            else
+                cb_lenc2.Checked = false;
+            if (((value >> 1) & 0x01) == 0x01)
+                cb_lenc1.Checked = true;
+            else
+                cb_lenc1.Checked = false;
+            if (((value >> 0) & 0x01) == 0x01)
+                cb_lenc0.Checked = true;
+            else
+                cb_lenc0.Checked = false;
+        }
+
+        private void cb_show_info_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_show_info.Checked == true)
+            {
+                pictureBox2.Visible = true;
+                groupBox_awb2.Visible = true;
+                groupBox_sn1.Visible = true;
+                groupBox_temperature.Visible = true;
+                groupBox_wpt_bpt.Visible = true;
+                lb_yuv_y2.Location = new Point(1610, 740);
+                cb_Contrast_Brightness_Gamma.Visible = true;
+                cb_Gamma.Visible = true;
+            }
+            else
+            {
+                pictureBox2.Visible = false;
+                groupBox_awb2.Visible = false;
+                groupBox_sn1.Visible = false;
+                groupBox_temperature.Visible = false;
+                groupBox_wpt_bpt.Visible = false;
+                lb_yuv_y2.Location = new Point(1795, 12);
+                cb_Contrast_Brightness_Gamma.Visible = false;
+                cb_Gamma.Visible = false;
+            }
         }
     }
 }
