@@ -83,7 +83,11 @@ namespace vcs_WebCam_AForge1
                         richTextBox1.Text += "AverageFrameRate : " + video.AverageFrameRate.ToString() + "\n";
                         richTextBox1.Text += "BitCount : " + video.BitCount.ToString() + "\n";
                         richTextBox1.Text += "MaximumFrameRate : " + video.MaximumFrameRate.ToString() + "\n";
+                        string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + " @ " + video.AverageFrameRate.ToString() + " Hz";
+                        comboBox2.Items.Add(video_capability);
                     }
+                    comboBox2.SelectedIndex = 0;
+
                     //選擇分辨率
                     if (videoCapabilities.Count() > 0)
                     {
@@ -95,6 +99,7 @@ namespace vcs_WebCam_AForge1
 
                         //可能寫法
                         //Cam.VideoResolution = Cam.VideoCapabilities[4];
+                        //Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
                     }
 
                     richTextBox1.Text += "SnapshotCapabilities.Length " + Cam.SnapshotCapabilities.Length.ToString() + "\n";
@@ -165,7 +170,8 @@ namespace vcs_WebCam_AForge1
                 {
                     camera_start = 1;
                     button1.Text = "關閉Webcam";
-                    //Cam.VideoResolution = Cam.VideoCapabilities[0];   //若有多個capabilities 或許可以換
+                    //richTextBox1.Text += "sel = " + comboBox2.SelectedIndex.ToString() + "\n";
+                    Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
                     Cam.Start();   // WebCam starts capturing images.
                 }
                 else
@@ -202,8 +208,6 @@ namespace vcs_WebCam_AForge1
             {
                 MessageBox.Show(ex.Message);
             }
-
-
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -296,7 +300,7 @@ namespace vcs_WebCam_AForge1
 
             camera_start = 1;
             button1.Text = "關閉Webcam";
-            //Cam.VideoResolution = Cam.VideoCapabilities[0];   //若有多個capabilities 或許可以換
+            Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
             Cam.Start();   // WebCam starts capturing images.
         }
     }
