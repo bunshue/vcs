@@ -36,11 +36,11 @@ namespace vcs_RegisterHotKey
         [Flags()]
         public enum KeyModifiers
         {
-            None = 0,
-            Alt = 1,
-            Ctrl = 2,
-            Shift = 4,
-            WindowsKey = 8
+            NONE = 0,
+            ALT = 1,
+            CONTROL = 2,
+            SHIFT = 4,
+            WINDOWS_KEY = 8
         }
         //定義快捷鍵 SP
 
@@ -56,10 +56,10 @@ namespace vcs_RegisterHotKey
             label3.Text = "";
 
             //註冊快捷鍵	  快捷鍵ID        輔助鍵      快捷鍵內容, 以 快捷鍵內容 為準
-            RegisterHotKey(Handle, 70, KeyModifiers.Shift, Keys.F); // Shift + F
-            RegisterHotKey(Handle, 88, KeyModifiers.Ctrl, Keys.P); // Ctrl + P 全螢幕截圖
+            RegisterHotKey(Handle, 70, KeyModifiers.SHIFT, Keys.F); // Shift + F
+            RegisterHotKey(Handle, 88, KeyModifiers.CONTROL, Keys.P); // Ctrl + P 全螢幕截圖
 
-            KeyModifiers ctrlHotKey = KeyModifiers.Alt | KeyModifiers.Ctrl;
+            KeyModifiers ctrlHotKey = KeyModifiers.ALT | KeyModifiers.CONTROL;
             RegisterHotKey(Handle, 100, ctrlHotKey, Keys.C);    // 註冊熱鍵為Alt+Ctrl+C, "100"為唯一標識熱鍵
         }
 

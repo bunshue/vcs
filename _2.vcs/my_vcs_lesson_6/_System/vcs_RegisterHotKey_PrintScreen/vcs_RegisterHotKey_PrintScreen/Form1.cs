@@ -14,12 +14,12 @@ namespace vcs_RegisterHotKey_PrintScreen
 {
     public partial class Form1 : Form
     {
-        private RegisterHotKeyClass _RegisKey = new RegisterHotKeyClass();
+        private RegisterHotKeyClass RegisterHotKey = new RegisterHotKeyClass();
 
         void _Regis_HotKey()
         {
             save_fullscreen_to_local_drive();       //全螢幕截圖
-        } 
+        }
 
         public Form1()
         {
@@ -32,12 +32,11 @@ namespace vcs_RegisterHotKey_PrintScreen
             label2.Text = "";
             label3.Text = "";
 
-            _RegisKey.Keys = Keys.PrintScreen;
-            _RegisKey.ModKey = 0;
-            _RegisKey.WindowHandle = this.Handle;
-            _RegisKey.HotKey += new RegisterHotKeyClass.HotKeyPass(_Regis_HotKey);
-            _RegisKey.StarHotKey();
-
+            RegisterHotKey.Keys = Keys.PrintScreen;
+            RegisterHotKey.ModKey = 0;
+            RegisterHotKey.WindowHandle = this.Handle;
+            RegisterHotKey.HotKey += new RegisterHotKeyClass.HotKeyPass(_Regis_HotKey);
+            RegisterHotKey.StarHotKey();
         }
 
         void save_fullscreen_to_local_drive()
@@ -61,13 +60,12 @@ namespace vcs_RegisterHotKey_PrintScreen
                 label3.Text = "全螢幕截圖，存檔檔名：" + filename;
             }
         }
-
     }
 
     public class RegisterHotKeyClass
     {
         private IntPtr m_WindowHandle = IntPtr.Zero;
-        private MODKEY m_ModKey = MODKEY.MOD_CONTROL;
+        private KeyModifiers m_ModKey = KeyModifiers.CONTROL;
         private Keys m_Keys = Keys.A;
         private int m_WParam = 10000;
         private bool Star = false;
@@ -78,7 +76,7 @@ namespace vcs_RegisterHotKey_PrintScreen
             get { return m_WindowHandle; }
             set { if (Star)return; m_WindowHandle = value; }
         }
-        public MODKEY ModKey
+        public KeyModifiers ModKey
         {
             get { return m_ModKey; }
             set { if (Star)return; m_ModKey = value; }
@@ -115,10 +113,15 @@ namespace vcs_RegisterHotKey_PrintScreen
                 }
             }
         }
+
         private void KeyPass()
         {
-            if (HotKey != null) HotKey();
+            if (HotKey != null)
+            {
+                HotKey();
+            }
         }
+
         public void StopHotKey()
         {
             if (Star)
@@ -132,10 +135,8 @@ namespace vcs_RegisterHotKey_PrintScreen
             }
         }
 
-
         public delegate void HotKeyPass();
         public event HotKeyPass HotKey;
-
 
         private class HotKeyWndProc : NativeWindow
         {
@@ -145,26 +146,28 @@ namespace vcs_RegisterHotKey_PrintScreen
             {
                 if (m.Msg == 0x0312 && m.WParam.ToInt32() == m_WParam)
                 {
-                    if (m_HotKeyPass != null) m_HotKeyPass.Invoke();
+                    if (m_HotKeyPass != null)
+                    {
+                        m_HotKeyPass.Invoke();
+                    }
                 }
-
                 base.WndProc(ref m);
             }
         }
 
-        public enum MODKEY
+        public enum KeyModifiers
         {
-            MOD_ALT = 0x0001,
-            MOD_CONTROL = 0x0002,
-            MOD_SHIFT = 0x0004,
-            MOD_WIN = 0x0008,
+            NONE = 0,
+            ALT = 1,
+            CONTROL = 2,
+            SHIFT = 4,
+            WINDOWS_KEY = 8
         }
 
         [DllImport("user32.dll")]
-        public static extern bool RegisterHotKey(IntPtr wnd, int id, MODKEY mode, Keys vk);
+        public static extern bool RegisterHotKey(IntPtr wnd, int id, KeyModifiers mode, Keys vk);
 
         [DllImport("user32.dll")]
         public static extern bool UnregisterHotKey(IntPtr wnd, int id);
     }
-
 }

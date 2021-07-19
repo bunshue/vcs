@@ -11,7 +11,8 @@ namespace vcs_Draw_Trigonometry
 {
     public partial class Form1 : Form
     {
-        private const int N = 3;   //total_points
+        private const int N = 3;    //total_points
+        private const int A = 100;  //Amplitude
 
         int pt_selected = -1;  // 動態陣列 的 第幾個 被選到
         bool flag_dragging_x = false; // 是否拖拉中
@@ -20,6 +21,24 @@ namespace vcs_Draw_Trigonometry
         Pen p2 = new Pen(Color.Blue, 1);
         Point[] pts = new Point[N];
         int Epsilon = 100; // 滑鼠 是否 點選到點 的距離 判斷 (避免 開根號)
+        int[] array_sin = new int[91];
+        int[] array_cos = new int[91];
+        int[] array_tan = new int[91];
+
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
 
         public Form1()
         {
@@ -31,6 +50,22 @@ namespace vcs_Draw_Trigonometry
             pts[0] = new Point(500, 100);
             pts[1] = new Point(100, 500);
             pts[2] = new Point(pts[0].X, pts[1].Y);
+
+            int i = 0;
+            for (i = 0; i <= 90; i++)
+            {
+                array_sin[i] = (int)(A * sind(i));
+                array_cos[i] = (int)(A * cosd(i));
+
+            }
+
+
+            for (i = 0; i <= 90; i++)
+            {
+                //richTextBox1.Text += ((int)(100*sind(i))).ToString() + " ";
+                richTextBox1.Text += array_sin[i].ToString() + " ";
+            }
+
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -68,25 +103,35 @@ namespace vcs_Draw_Trigonometry
             double angle = Math.Acos(CA / AB) * 180 / Math.PI;
             e.Graphics.DrawString("θ=" + angle.ToString("n2") + "°", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(pts[1].X + 20, pts[1].Y - 25));
 
-            int x_st = 600;
+            //XY軸
+            e.Graphics.DrawLine(new Pen(Color.Black, 6), 3, 0, 3, H);
+            e.Graphics.DrawLine(new Pen(Color.Black, 6), 3, H - 4, W, H - 4);
+
+            int x_st = 650;
             int y_st = 100;
             int dy = 100;
 
-            e.Graphics.DrawString("sin(θ)=       =         = " + (BC / AB).ToString("n8"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st));
-            e.Graphics.DrawString("cos(θ)=       =         = " + (CA / AB).ToString("n8"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 1));
-            e.Graphics.DrawString("tan(θ)=       =         = " + (BC / CA).ToString("n8"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 2));
+            e.Graphics.DrawString("sin(θ)=       =         = " + (BC / AB).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st));
+            e.Graphics.DrawString("cos(θ)=       =         = " + (CA / AB).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 1));
+            e.Graphics.DrawString("tan(θ)=       =         = " + (BC / CA).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 2));
+            e.Graphics.DrawString("cot(θ)=       =         = " + (CA / BC).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 3));
+            e.Graphics.DrawString("sec(θ)=       =         = " + (AB / CA).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 4));
+            e.Graphics.DrawString("csc(θ)=       =         = " + (AB / BC).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 5));
 
             e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12, x_st + 140 + 60, y_st + 12);
             e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 1, x_st + 140 + 60, y_st + 12 + dy * 1);
             e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 2, x_st + 140 + 60, y_st + 12 + dy * 2);
+            e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 3, x_st + 140 + 60, y_st + 12 + dy * 3);
+            e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 4, x_st + 140 + 60, y_st + 12 + dy * 4);
+            e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 5, x_st + 140 + 60, y_st + 12 + dy * 5);
 
             int dx = 115;
             e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12, x_st + 140 + 80 + dx, y_st + 12);
             e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12 + dy * 1, x_st + 140 + 80 + dx, y_st + 12 + dy * 1);
             e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12 + dy * 2, x_st + 140 + 80 + dx, y_st + 12 + dy * 2);
-
-            e.Graphics.DrawLine(new Pen(Color.Black, 6), 3, 0, 3, H);
-            e.Graphics.DrawLine(new Pen(Color.Black, 6), 3, H - 4, W, H - 4);
+            e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12 + dy * 3, x_st + 140 + 80 + dx, y_st + 12 + dy * 3);
+            e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12 + dy * 4, x_st + 140 + 80 + dx, y_st + 12 + dy * 4);
+            e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12 + dy * 5, x_st + 140 + 80 + dx, y_st + 12 + dy * 5);
 
             e.Graphics.DrawString("對邊     " + BC.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20));
             e.Graphics.DrawString("斜邊    " + AB.ToString("n2"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st + 20));
@@ -96,6 +141,41 @@ namespace vcs_Draw_Trigonometry
 
             e.Graphics.DrawString("對邊     " + BC.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20 + dy * 2));
             e.Graphics.DrawString("鄰邊     " + CA.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st + 20 + dy * 2));
+
+
+
+            e.Graphics.DrawString("鄰邊     " + CA.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20 + dy * 3));
+            e.Graphics.DrawString("對邊     " + BC.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st + 20 + dy * 3));
+
+            e.Graphics.DrawString("斜邊    " + AB.ToString("n2"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20 + dy * 4));
+            e.Graphics.DrawString("鄰邊     " + CA.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st + 20 + dy * 4));
+
+            e.Graphics.DrawString("斜邊    " + AB.ToString("n2"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20 + dy * 5));
+            e.Graphics.DrawString("對邊     " + BC.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st + 20 + dy * 5));
+
+            /*
+
+            x_st = 1200;
+            y_st = 50;
+            Point[] curvePoints = new Point[91];    //一維陣列內有 91 個Point
+            int i;
+            for (i = 0; i < 91; i++)
+            {
+                curvePoints[i].X = x_st + i;
+                curvePoints[i].Y = 300 - (array_sin[i] + A);
+
+
+            }
+            e.Graphics.DrawCurve(new Pen(Color.Red, 3), curvePoints);
+            //g3.DrawCurve(bluePen, curvePoints); //畫曲線
+
+            //array_sin[i] = (int)sind(i);
+            //array_sin[i] = (int)cosd(i);
+
+            */
+
+
+
         }
 
         // 檢查是哪一個點被 選到
@@ -136,7 +216,13 @@ namespace vcs_Draw_Trigonometry
             if (flag_dragging_x == true)
             {
                 if (e.X >= pts[1].X)
-                    pts[pt_selected].X = e.X;
+                {
+                    if (e.X < 1000)
+                        pts[pt_selected].X = e.X;
+                    else
+                        pts[pt_selected].X = 1000;
+
+                }
                 else
                     pts[pt_selected].X = pts[1].X;
 
@@ -147,7 +233,12 @@ namespace vcs_Draw_Trigonometry
             else if (flag_dragging_y == true)
             {
                 if (e.Y <= pts[2].Y)
-                    pts[pt_selected].Y = e.Y;
+                {
+                    if (e.Y < 50)
+                        pts[pt_selected].Y = 50;
+                    else
+                        pts[pt_selected].Y = e.Y;
+                }
                 else
                     pts[pt_selected].Y = pts[2].Y;
 

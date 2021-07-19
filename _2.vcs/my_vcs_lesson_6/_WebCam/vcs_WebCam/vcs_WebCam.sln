@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_WebCam_AForge0", "vcs_WebCam_AForge0\vcs_WebCam_AForge0.csproj", "{4CA5D69D-B8A7-4AF2-B621-5AC95FA304D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_WebCam", "vcs_WebCam\vcs_WebCam.csproj", "{4CA5D69D-B8A7-4AF2-B621-5AC95FA304D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

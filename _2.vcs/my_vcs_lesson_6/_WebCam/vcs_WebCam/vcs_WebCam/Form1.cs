@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_WebCam_AForge0
+namespace vcs_WebCam
 {
     public partial class Form1 : Form
     {
@@ -18,8 +18,8 @@ namespace vcs_WebCam_AForge0
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             show_item_location();
+            Init_WebcamSetup();
         }
 
         void show_item_location()
@@ -68,6 +68,10 @@ namespace vcs_WebCam_AForge0
             checkBox3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             radioButton1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             radioButton2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            checkBox1.Enabled = false;
+            checkBox2.Enabled = false;
+            radioButton1.Enabled = false;
+            radioButton2.Enabled = false;
 
             //groupBox3
             x_st = 10;
@@ -98,8 +102,23 @@ namespace vcs_WebCam_AForge0
             bt_snapshot.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             bt_info.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_fullscreen.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            cb_show_time.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            cb_auto_save.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        void Init_WebcamSetup()
+        {
 
         }
+
+
     }
 }
-
