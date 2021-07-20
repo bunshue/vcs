@@ -52,7 +52,7 @@ namespace vcs_WebCam_AForge3
                 Cam.Start();   // WebCam starts capturing images.
 
                 //以下為WebCam訊息與調整視窗大小
-                Cam.VideoResolution = Cam.VideoCapabilities[0];
+                Cam.VideoResolution = Cam.VideoCapabilities[0];         //若有多個capabilities 可以更換, 真正設定顯示能力的地方
                 string webcam_name = string.Empty;
                 int ww;
                 int hh;

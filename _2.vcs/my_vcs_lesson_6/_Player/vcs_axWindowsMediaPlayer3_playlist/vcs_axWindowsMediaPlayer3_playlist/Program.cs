@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_WebCam_AForge1
+namespace vcs_axWindowsMediaPlayer3_playlist
 {
     static class Program
     {

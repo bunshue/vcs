@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cb_auto_save = new System.Windows.Forms.CheckBox();
+            this.bt_fullscreen = new System.Windows.Forms.Button();
+            this.cb_show_time = new System.Windows.Forms.CheckBox();
             this.bt_start = new System.Windows.Forms.Button();
             this.bt_info = new System.Windows.Forms.Button();
             this.bt_pause = new System.Windows.Forms.Button();
@@ -53,26 +57,27 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cb_show_time = new System.Windows.Forms.CheckBox();
-            this.bt_fullscreen = new System.Windows.Forms.Button();
-            this.cb_auto_save = new System.Windows.Forms.CheckBox();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.timer_display = new System.Windows.Forms.Timer(this.components);
+            this.lb_main_mesg = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Controls.Add(this.lb_fps);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1077, 272);
+            this.groupBox1.Size = new System.Drawing.Size(1086, 272);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -95,6 +100,39 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Operation";
             // 
+            // cb_auto_save
+            // 
+            this.cb_auto_save.AutoSize = true;
+            this.cb_auto_save.Location = new System.Drawing.Point(106, 194);
+            this.cb_auto_save.Name = "cb_auto_save";
+            this.cb_auto_save.Size = new System.Drawing.Size(72, 16);
+            this.cb_auto_save.TabIndex = 14;
+            this.cb_auto_save.Text = "自動存檔";
+            this.cb_auto_save.UseVisualStyleBackColor = true;
+            // 
+            // bt_fullscreen
+            // 
+            this.bt_fullscreen.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_fullscreen.Location = new System.Drawing.Point(103, 152);
+            this.bt_fullscreen.Name = "bt_fullscreen";
+            this.bt_fullscreen.Size = new System.Drawing.Size(75, 36);
+            this.bt_fullscreen.TabIndex = 13;
+            this.bt_fullscreen.Text = "全螢幕";
+            this.bt_fullscreen.UseVisualStyleBackColor = true;
+            this.bt_fullscreen.Click += new System.EventHandler(this.bt_fullscreen_Click);
+            // 
+            // cb_show_time
+            // 
+            this.cb_show_time.AutoSize = true;
+            this.cb_show_time.Checked = true;
+            this.cb_show_time.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_show_time.Location = new System.Drawing.Point(18, 193);
+            this.cb_show_time.Name = "cb_show_time";
+            this.cb_show_time.Size = new System.Drawing.Size(72, 16);
+            this.cb_show_time.TabIndex = 5;
+            this.cb_show_time.Text = "顯示時間";
+            this.cb_show_time.UseVisualStyleBackColor = true;
+            // 
             // bt_start
             // 
             this.bt_start.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -104,6 +142,7 @@
             this.bt_start.TabIndex = 5;
             this.bt_start.Text = "啟動";
             this.bt_start.UseVisualStyleBackColor = true;
+            this.bt_start.Click += new System.EventHandler(this.bt_start_Click);
             // 
             // bt_info
             // 
@@ -114,6 +153,7 @@
             this.bt_info.TabIndex = 12;
             this.bt_info.Text = "Info";
             this.bt_info.UseVisualStyleBackColor = true;
+            this.bt_info.Click += new System.EventHandler(this.bt_info_Click);
             // 
             // bt_pause
             // 
@@ -124,6 +164,7 @@
             this.bt_pause.TabIndex = 6;
             this.bt_pause.Text = "暫停";
             this.bt_pause.UseVisualStyleBackColor = true;
+            this.bt_pause.Click += new System.EventHandler(this.bt_pause_Click);
             // 
             // bt_stop
             // 
@@ -134,6 +175,7 @@
             this.bt_stop.TabIndex = 7;
             this.bt_stop.Text = "停止";
             this.bt_stop.UseVisualStyleBackColor = true;
+            this.bt_stop.Click += new System.EventHandler(this.bt_stop_Click);
             // 
             // bt_exit
             // 
@@ -144,6 +186,7 @@
             this.bt_exit.TabIndex = 10;
             this.bt_exit.Text = "離開";
             this.bt_exit.UseVisualStyleBackColor = true;
+            this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
             // 
             // bt_refresh
             // 
@@ -154,6 +197,7 @@
             this.bt_refresh.TabIndex = 8;
             this.bt_refresh.Text = "重抓";
             this.bt_refresh.UseVisualStyleBackColor = true;
+            this.bt_refresh.Click += new System.EventHandler(this.bt_refresh_Click);
             // 
             // bt_snapshot
             // 
@@ -164,6 +208,7 @@
             this.bt_snapshot.TabIndex = 9;
             this.bt_snapshot.Text = "截圖";
             this.bt_snapshot.UseVisualStyleBackColor = true;
+            this.bt_snapshot.Click += new System.EventHandler(this.bt_snapshot_Click);
             // 
             // groupBox3
             // 
@@ -193,10 +238,28 @@
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "不鏡射也不旋轉",
+            "水平鏡射",
+            "垂直鏡射",
+            "水平 & 垂直鏡射",
+            "90°旋轉",
+            "90°旋轉 + 水平鏡射",
+            "90°旋轉 + 垂直鏡射",
+            "90°旋轉 + 水平 & 垂直鏡射",
+            "180°旋轉",
+            "180°旋轉 + 水平鏡射",
+            "180°旋轉 + 垂直鏡射",
+            "180°旋轉 + 水平 & 垂直鏡射",
+            "270°旋轉",
+            "270°旋轉 + 水平鏡射",
+            "270°旋轉 + 垂直鏡射",
+            "270°旋轉 + 水平 & 垂直鏡射"});
             this.comboBox3.Location = new System.Drawing.Point(29, 173);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(192, 20);
             this.comboBox3.TabIndex = 3;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -215,6 +278,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(192, 20);
             this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // comboBox2
             // 
@@ -238,7 +302,7 @@
             // 
             this.lb_fps.AutoSize = true;
             this.lb_fps.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_fps.Location = new System.Drawing.Point(845, 50);
+            this.lb_fps.Location = new System.Drawing.Point(24, 100);
             this.lb_fps.Name = "lb_fps";
             this.lb_fps.Size = new System.Drawing.Size(35, 21);
             this.lb_fps.TabIndex = 11;
@@ -269,6 +333,7 @@
             this.checkBox3.TabIndex = 4;
             this.checkBox3.Text = "Debug";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -331,38 +396,6 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // cb_show_time
-            // 
-            this.cb_show_time.AutoSize = true;
-            this.cb_show_time.Checked = true;
-            this.cb_show_time.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_show_time.Location = new System.Drawing.Point(18, 193);
-            this.cb_show_time.Name = "cb_show_time";
-            this.cb_show_time.Size = new System.Drawing.Size(72, 16);
-            this.cb_show_time.TabIndex = 5;
-            this.cb_show_time.Text = "顯示時間";
-            this.cb_show_time.UseVisualStyleBackColor = true;
-            // 
-            // bt_fullscreen
-            // 
-            this.bt_fullscreen.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_fullscreen.Location = new System.Drawing.Point(103, 152);
-            this.bt_fullscreen.Name = "bt_fullscreen";
-            this.bt_fullscreen.Size = new System.Drawing.Size(75, 36);
-            this.bt_fullscreen.TabIndex = 13;
-            this.bt_fullscreen.Text = "全螢幕";
-            this.bt_fullscreen.UseVisualStyleBackColor = true;
-            // 
-            // cb_auto_save
-            // 
-            this.cb_auto_save.AutoSize = true;
-            this.cb_auto_save.Location = new System.Drawing.Point(106, 194);
-            this.cb_auto_save.Name = "cb_auto_save";
-            this.cb_auto_save.Size = new System.Drawing.Size(72, 16);
-            this.cb_auto_save.TabIndex = 14;
-            this.cb_auto_save.Text = "自動存檔";
-            this.cb_auto_save.UseVisualStyleBackColor = true;
-            // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -374,20 +407,46 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // timer_display
+            // 
+            this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
+            // 
+            // lb_main_mesg
+            // 
+            this.lb_main_mesg.AutoSize = true;
+            this.lb_main_mesg.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg.Location = new System.Drawing.Point(24, 39);
+            this.lb_main_mesg.Name = "lb_main_mesg";
+            this.lb_main_mesg.Size = new System.Drawing.Size(82, 24);
+            this.lb_main_mesg.TabIndex = 16;
+            this.lb_main_mesg.Text = "label1";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.lb_fps);
+            this.groupBox5.Controls.Add(this.lb_main_mesg);
+            this.groupBox5.Location = new System.Drawing.Point(798, 37);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(254, 212);
+            this.groupBox5.TabIndex = 17;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Message";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1119, 757);
+            this.ClientSize = new System.Drawing.Size(1146, 757);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "WebCam";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -395,6 +454,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -430,6 +491,9 @@
         private System.Windows.Forms.Button bt_fullscreen;
         private System.Windows.Forms.CheckBox cb_auto_save;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Timer timer_display;
+        private System.Windows.Forms.Label lb_main_mesg;
+        private System.Windows.Forms.GroupBox groupBox5;
     }
 }
 

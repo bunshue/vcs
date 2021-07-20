@@ -75,7 +75,7 @@ namespace vcs_PicPick2
         public string path;
 
         string Cursor;
-        string PicPath;
+        string foldername = @"C:\dddddddddd";
 
         public Form1()
         {
@@ -84,8 +84,6 @@ namespace vcs_PicPick2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtSavaPath.Text = @"C:\dddddddddd";
-            PicPath = txtSavaPath.Text.Trim();
             RegisterHotKey(Handle, 81, KeyModifiers.Shift, Keys.F); //Shift + F 為快速鍵
         }
 
@@ -176,16 +174,8 @@ namespace vcs_PicPick2
                     Cursor = "0";
                 }
 
-                if (txtSavaPath.Text == "")
-                {
-                    PicPath = @"D:\";
-                }
-                else
-                {
-                    PicPath = txtSavaPath.Text.Trim();
-                }
                 IniWriteValue("Setup", "CapMouse", Cursor);
-                IniWriteValue("Setup", "Dir", PicPath);
+                IniWriteValue("Setup", "Dir", foldername);
                 MessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -221,7 +211,6 @@ namespace vcs_PicPick2
             if (MyCursor == "" || MyPicPath == "")
             {
                 checkBox1.Checked = true;
-                txtSavaPath.Text = @"D:\";
             }
             else
             {
@@ -233,7 +222,6 @@ namespace vcs_PicPick2
                 {
                     checkBox1.Checked = false;
                 }
-                txtSavaPath.Text = MyPicPath;
             }
         }
 

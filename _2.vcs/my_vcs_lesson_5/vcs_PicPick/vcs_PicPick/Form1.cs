@@ -14,6 +14,8 @@ namespace vcs_PicPick
 {
     public partial class Form1 : Form
     {
+        string foldername = @"C:\dddddddddd";
+
         int clear_label_count = 0;
 
         // The image of the whole screen.
@@ -33,21 +35,18 @@ namespace vcs_PicPick
             this.ControlBox = false;
             this.BackColor = Color.LightPink;
 
-
             richTextBox1.Visible = false;
             label1.Text = "";
             //show_item_location();
 
-            string Path;
             //檢查存d10d的資料夾
-            Path = "C:\\dddddddddd";
-            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
             {
-                Directory.CreateDirectory(Path);
-                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+                Directory.CreateDirectory(foldername);
+                richTextBox1.Text += "已建立一個新資料夾: " + foldername + "\n";
             }
             else
-                richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+                richTextBox1.Text += "資料夾: " + foldername + " 已存在，不用再建立\n";
 
             button1.Text = "截圖存檔";
             button1.Location = new Point(10, 10);

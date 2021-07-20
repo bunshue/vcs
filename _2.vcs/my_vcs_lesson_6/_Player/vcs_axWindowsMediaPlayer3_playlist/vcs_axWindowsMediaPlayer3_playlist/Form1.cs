@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
 
-namespace InvolveMemorizePlayImplement
+namespace vcs_axWindowsMediaPlayer3_playlist
 {
     public partial class Form1 : Form
     {
@@ -23,6 +24,8 @@ namespace InvolveMemorizePlayImplement
         {
             this.Text = "mp3播放器";
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -57,13 +60,16 @@ namespace InvolveMemorizePlayImplement
                 richTextBox1.Text += "本次開啟檔案 : " + openFileDialog1.FileNames.Length.ToString() + " 個\t";
                 richTextBox1.Text += "清單內共有檔案 : " + listBox1.Items.Count.ToString() + " 個\n";
             }
+
         }
+
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
             string str = listBox1.Items[listBox1.SelectedIndex].ToString();
             this.Text = str;
             axWindowsMediaPlayer1.URL = str;
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -78,6 +84,7 @@ namespace InvolveMemorizePlayImplement
                 button3.Text = "暫停";
                 axWindowsMediaPlayer1.Ctlcontrols.play();
             }
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -93,6 +100,7 @@ namespace InvolveMemorizePlayImplement
                 this.Text = axWindowsMediaPlayer1.URL;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
             }
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -115,6 +123,7 @@ namespace InvolveMemorizePlayImplement
                 }
             }
             sr.Close();
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -143,6 +152,9 @@ namespace InvolveMemorizePlayImplement
             {
                 richTextBox1.Text += "播放清單內沒有項目\n";
             }
+
         }
+
+
     }
 }
