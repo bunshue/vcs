@@ -83,7 +83,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 50);
             this.button2.TabIndex = 2;
-            this.button2.Text = "取得一層檔案";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -148,7 +147,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(150, 50);
             this.button16.TabIndex = 17;
-            this.button16.Text = "只撈一層的所有檔案";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -159,7 +157,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(150, 50);
             this.button17.TabIndex = 18;
-            this.button17.Text = "只撈一層的所有.txt檔案";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -181,7 +178,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(150, 50);
             this.button20.TabIndex = 21;
-            this.button20.Text = "取得資料夾下的所有檔案";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -202,7 +198,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 50);
             this.button1.TabIndex = 66;
-            this.button1.Text = "搜尋子目錄內的所有檔案";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -326,7 +321,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(150, 50);
             this.button21.TabIndex = 76;
-            this.button21.Text = "撈出資料夾內的檔案(一層)";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -337,7 +331,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(150, 50);
             this.button22.TabIndex = 77;
-            this.button22.Text = "撈出資料夾內的檔案(多層)";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 

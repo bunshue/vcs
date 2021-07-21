@@ -590,56 +590,10 @@ namespace 真的只是一個測試1
 
         private void button16_Click(object sender, EventArgs e)
         {
-            save_current_program_to_local_drive();  //本程式截圖
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-            save_fullscreen_to_local_drive();       //全螢幕截圖
-        }
-
-        void save_current_program_to_local_drive()
-        {
-            //本程式截圖
-            int W = this.Width;
-            int H = this.Height;
-
-            using (Bitmap bmp = new Bitmap(W, H))
-            {
-                using (Graphics g = Graphics.FromImage(bmp))
-                {
-                    g.CopyFromScreen(this.Location, new Point(0, 0), new Size(W, H));
-                    //richTextBox1.Text += "W = " + W.ToString() + "\n";
-                    //richTextBox1.Text += "H = " + H.ToString() + "\n";
-                }
-                //存成bmp檔
-                String filename = "C:\\dddddddddd\\program_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-                bmp.Save(filename, ImageFormat.Bmp);
-
-                richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
-            }
-        }
-
-        void save_fullscreen_to_local_drive()
-        {
-            //全螢幕截圖
-            int W = Screen.PrimaryScreen.Bounds.Width;
-            int H = Screen.PrimaryScreen.Bounds.Height;
-
-            using (Bitmap bmp = new Bitmap(W, H))
-            {
-                using (Graphics g = Graphics.FromImage(bmp))
-                {
-                    g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
-                    //richTextBox1.Text += "W = " + W.ToString() + "\n";
-                    //richTextBox1.Text += "H = " + H.ToString() + "\n";
-                }
-                //存成bmp檔
-                String filename = "C:\\dddddddddd\\full_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-                bmp.Save(filename, ImageFormat.Bmp);
-
-                richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
-            }
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -688,7 +642,6 @@ namespace 真的只是一個測試1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //撈出資料夾下所有檔案
 
 
         }

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;                        //for StreamReader, SearchOption
 using System.Drawing.Imaging;   //for bmp2jpg
 using System.Reflection;    //for Assembly
@@ -123,44 +124,10 @@ namespace vcs_test_all_99_tmp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int cnt = 0;
-
-            DirectoryInfo dir = new DirectoryInfo("c:\\______test_files");
-            richTextBox1.Text += "搜尋子目錄內的所有檔案, 子目錄 : " + dir.ToString() + "\n";
-
-            DirectoryInfo[] dddd = dir.GetDirectories();
-            cnt = 0;
-            richTextBox1.Text += "子目錄 :\n";
-            foreach (DirectoryInfo d in dddd)
-            {
-                cnt++;
-                richTextBox1.Text += cnt.ToString() + "\t" + d + "\n";
-            }
-
-            FileInfo[] aaaa = dir.GetFiles();
-            cnt = 0;
-            richTextBox1.Text += "子目錄 " + dir.Name + " 下的檔案 :\n";
-            foreach (FileInfo b in aaaa)
-            {
-                cnt++;
-                richTextBox1.Text += cnt.ToString() + "\t" + b + "\n";
-            }
-            richTextBox1.Text += "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DirectoryInfo dir = new DirectoryInfo("c:\\______test_files");
-            if (!dir.Exists)
-            {
-                dir = new DirectoryInfo("c:\\______test_files");
-            }
-            FileInfo[] files = dir.GetFiles();
-            StringBuilder sb = new StringBuilder();
-            foreach (FileInfo file in files)
-            {
-                richTextBox1.Text += "get file : " + file.Name + "\n";
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -588,20 +555,10 @@ namespace vcs_test_all_99_tmp1
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //只撈一層的所有檔案
-            foreach (string fname in System.IO.Directory.GetFileSystemEntries("c:\\______test_files"))
-            {
-                richTextBox1.Text += fname + "\n";
-            }
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //只撈一層的所有.txt檔案
-            foreach (string fname in System.IO.Directory.GetFileSystemEntries("c:\\______test_files", "*.txt"))
-            {
-                richTextBox1.Text += fname + "\n";
-            }
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -615,12 +572,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //C# 取得資料夾下的所有檔案(包括子目錄)
-            string[] files = System.IO.Directory.GetFiles(@"C:\______test_files", "*.*", System.IO.SearchOption.AllDirectories);
-            foreach (string filename in files)
-            {
-                richTextBox1.Text += filename + "\n";
-            }
         }
 
         private void button19_Click_1(object sender, EventArgs e)
@@ -633,48 +584,12 @@ namespace vcs_test_all_99_tmp1
             richTextBox1.Clear();
         }
 
-
-        //string directory = @"C:\______test_files\__test_directory_to_grayscale";
-        string directory = @"C:\______test_files\__test_directory_to_grayscale";
-
         private void button21_Click(object sender, EventArgs e)
         {
-            //撈出資料夾內的檔案(一層)
-            SearchOption search_option;
-            search_option = SearchOption.TopDirectoryOnly;
-            // Look for graphic files.
-            string[] patterns = { "*.png", "*.bmp", "*.jpg", "*.jpeg", "*.gif" };
-            foreach (string pattern in patterns)
-            {
-                // Find the matching files.
-                foreach (string filename in Directory.GetFiles(directory, pattern, search_option))
-                {
-                    richTextBox1.Text += "find file : " + filename + "\n";
-                }
-            }
-
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //string foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\陳一郎_紅燈碼頭\";
-            string foldername = @"C:\dddddddddd\_music_from_yt";
-
-            //撈出資料夾內的檔案(多層)
-            SearchOption search_option;
-            search_option = SearchOption.AllDirectories;
-            // Look for graphic files.
-            //string[] patterns = { "*.png", "*.bmp", "*.jpg", "*.jpeg", "*.gif" };
-            string[] patterns = { "*.*" };
-            foreach (string pattern in patterns)
-            {
-                // Find the matching files.
-                foreach (string filename in Directory.GetFiles(foldername, pattern, search_option))
-                {
-                    richTextBox1.Text += "find file : " + filename + "\n";
-                }
-            }
-
         }
 
         private void button23_Click(object sender, EventArgs e)

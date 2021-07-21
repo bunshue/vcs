@@ -31,13 +31,95 @@ namespace vcs_WebCam
         List<string> camera_full_name = new List<string>();      //一維List for string
         List<int[]> camera_capability = new List<int[]>();  //二維List for int
 
-        bool flag_show_time = true;
         int webcam_count = 0;
 
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
+
+        public struct RGB
+        {
+            private byte _r;
+            private byte _g;
+            private byte _b;
+
+            public RGB(byte r, byte g, byte b)
+            {
+                this._r = r;
+                this._g = g;
+                this._b = b;
+            }
+
+            public byte R
+            {
+                get { return this._r; }
+                set { this._r = value; }
+            }
+
+            public byte G
+            {
+                get { return this._g; }
+                set { this._g = value; }
+            }
+
+            public byte B
+            {
+                get { return this._b; }
+                set { this._b = value; }
+            }
+
+            public bool Equals(RGB rgb)
+            {
+                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
+            }
+        }
+
+        public struct YUV
+        {
+            private double _y;
+            private double _u;
+            private double _v;
+
+            public YUV(double y, double u, double v)
+            {
+                this._y = y;
+                this._u = u;
+                this._v = v;
+            }
+
+            public double Y
+            {
+                get { return this._y; }
+                set { this._y = value; }
+            }
+
+            public double U
+            {
+                get { return this._u; }
+                set { this._u = value; }
+            }
+
+            public double V
+            {
+                get { return this._v; }
+                set { this._v = value; }
+            }
+
+            public bool Equals(YUV yuv)
+            {
+                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
+            }
+        }
+
+        public static YUV RGBToYUV(RGB rgb)
+        {
+            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
+            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
+            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
+
+            return new YUV(y, u, v);
+        }
 
         public Form1()
         {
@@ -46,6 +128,9 @@ namespace vcs_WebCam
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //C# 跨 Thread 存取 UI
+            Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
+
             show_item_location();
             Init_WebcamSetup();
         }
@@ -131,7 +216,8 @@ namespace vcs_WebCam
             bt_info.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_fullscreen.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             cb_show_time.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            cb_auto_save.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            cb_image_processing.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            cb_auto_save.Location = new Point(x_st + dx * 2, y_st + dy * 3);
 
             //groupBox5
             x_st = 10;
@@ -149,6 +235,33 @@ namespace vcs_WebCam
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        //窗口關閉事件
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (Cam != null)
+                {
+                    //關閉WebCam
+                    if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                    {
+                        Cam.Stop();   // WebCam stops capturing images.
+                        Cam.SignalToStop();
+                        Cam.WaitForStop();
+                        while (Cam.IsRunning)
+                        {
+                        }
+                        Cam = null;
+                    }
+                }
+                System.Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         void Init_WebcamSetup()         //讀出目前相機資訊 存在各list, comboBox1~3和richTextBox1裏
@@ -400,35 +513,108 @@ namespace vcs_WebCam
         }
 
         public Bitmap bm = null;
+        int frame_cnt = 0;          //每多少張做一個計算
+        int frame_count = 0;        //計算fps用
+        int frame_count_old = 0;    //計算fps用
+        DateTime dt_old = DateTime.Now;
 
         //自定義函數, 捕獲每一幀圖像並顯示
         private void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            frame_count++;
             if (cb_show_time.Checked == false)      //直接顯示圖片
             {
-                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();  //直接顯示圖片
                 bm = (Bitmap)eventArgs.Frame.Clone();
                 //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                bm.RotateFlip(rotate_flip_type);
+                bm.RotateFlip(rotate_flip_type);                        //鏡射旋轉
                 pictureBox1.Image = bm;
 
                 GC.Collect();       //回收資源
             }
             else                //處理後再顯示圖片
             {
-                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();  //直接顯示圖片
                 bm = (Bitmap)eventArgs.Frame.Clone();
                 //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                bm.RotateFlip(rotate_flip_type);
+                bm.RotateFlip(rotate_flip_type);                        //鏡射旋轉
+
+                Graphics g;
+                g = Graphics.FromImage(bm);
+
+                //顯示時間
+                SolidBrush drawBrush;
+                Font drawFont;
+                string drawDate;
+                int x_st = 0;
+                int y_st = 0;
+
+                drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                drawBrush = new SolidBrush(Color.Yellow);
+                drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                x_st = 10;
+                y_st = 10;
+
+                //在畫面的上方顯示時間
+                g.DrawString(drawDate, drawFont, drawBrush, x_st, y_st);
+
+
+
                 pictureBox1.Image = bm;
 
                 GC.Collect();       //回收資源
 
             }
 
+            if (cb_image_processing.Checked == true)
+            {
+                frame_cnt++;
+                if ((frame_cnt % 30) == 0)
+                {
+                    //Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+                    Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone();   //重新抓圖, 以免拿到上面寫過字的圖
+                    //bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                    int WW = bitmap1.Width;
+                    int HH = bitmap1.Height;
+                    int i;
+                    int j;
+                    Color pt;
+                    int ww = WW;
+                    int hh = HH;
+                    int total_Y = 0;
 
 
+                    for (j = 0; j < hh; j++)
+                    {
+                        for (i = 0; i < ww; i++)
+                        {
+                            pt = bitmap1.GetPixel(0 + i, 0 + j);
 
+                            RGB pp = new RGB(pt.R, pt.G, pt.B);
+                            YUV yyy = new YUV();
+                            yyy = RGBToYUV(pp);
+                            total_Y += (int)yyy.Y;
+                        }
+                    }
+
+                    GC.Collect();       //回收資源
+                    lb_main_mesg.Text = "亮度 : " + (total_Y / (ww * hh)).ToString();
+
+                    /*  存圖備查
+                    String filename = string.Empty;
+                    filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                    //String file1 = file + ".jpg";
+                    String filename2 = filename + ".bmp";
+                    //String file3 = file + ".png";
+
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename2, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+                    */
+                }
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -514,18 +700,18 @@ namespace vcs_WebCam
             richTextBox1.Text += "選了" + rotate_flip_type.ToString() + "\n";
         }
 
-        int camera_start = 0;
+        bool camera_start = false;
         private void bt_start_Click(object sender, EventArgs e)
         {
-            if (camera_start == 0)
+            if (camera_start == false)
             {
-                camera_start = 1;
+                camera_start = true;
                 bt_start.Text = "停止";
                 Start_Webcam();
             }
             else
             {
-                camera_start = 0;
+                camera_start = false;
                 bt_start.Text = "啟動";
                 Stop_Webcam();
             }
@@ -538,7 +724,7 @@ namespace vcs_WebCam
 
         private void bt_stop_Click(object sender, EventArgs e)
         {
-            camera_start = 0;
+            camera_start = false;
             bt_start.Text = "啟動";
             Stop_Webcam();
         }
@@ -548,13 +734,13 @@ namespace vcs_WebCam
         {
             show_main_message("重抓", S_OK, 20);
 
-            camera_start = 0;
+            camera_start = false;
 
             Stop_Webcam();
 
             System.Threading.Thread.Sleep(100);
 
-            camera_start = 1;
+            camera_start = true;
             bt_start.Text = "停止";
 
             Start_Webcam();
@@ -562,58 +748,7 @@ namespace vcs_WebCam
 
         private void bt_snapshot_Click(object sender, EventArgs e)
         {
-            show_main_message("截圖", S_OK, 20);
-
-            this.pictureBox1.Focus();
-
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-
-            if (bitmap1 != null)
-            {
-                IntPtr pHdc;
-                Graphics g = Graphics.FromImage(bitmap1);
-                Pen p = new Pen(Color.Red, 1);
-                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                pHdc = g.GetHdc();
-
-                if (flag_show_time == true)
-                {   //顯示時間
-                    int xPos = 10;
-                    int yPos = 10;
-                    string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-                    g.ReleaseHdc();
-                    g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
-                }
-                else
-                {
-                    g.ReleaseHdc();
-                }
-                g.Dispose();
-
-                String filename = string.Empty;
-                filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-
-                //String file1 = file + ".jpg";
-                String filename2 = filename + ".bmp";
-                //String file3 = file + ".png";
-
-                //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                bitmap1.Save(filename2, ImageFormat.Bmp);
-                //bitmap1.Save(@file3, ImageFormat.Png);
-
-                richTextBox1.Text += "存檔成功\n";
-                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                show_main_message("已存檔", S_OK, 10);
-            }
-            else
-            {
-                richTextBox1.Text += "無圖可存\n";
-                show_main_message("無圖可存", S_OK, 20);
-            }
+            save_image_to_drive();
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -671,34 +806,20 @@ namespace vcs_WebCam
 
         private void bt_fullscreen_Click(object sender, EventArgs e)
         {
-            show_main_message("全螢幕 TBD", S_OK, 20);
-        }
+            show_main_message("全螢幕", S_OK, 20);
+            groupBox1.Visible = false;
+            richTextBox1.Visible = false;
+            bt_clear.Visible = false;
 
-        //窗口關閉事件
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                if (Cam != null)
-                {
-                    //關閉WebCam
-                    if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                    {
-                        Cam.Stop();   // WebCam stops capturing images.
-                        Cam.SignalToStop();
-                        Cam.WaitForStop();
-                        while (Cam.IsRunning)
-                        {
-                        }
-                        Cam = null;
-                    }
-                }
-                System.Environment.Exit(0);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            this.BackColor = Color.Black;
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+
+            this.pictureBox1.Size = new Size(1920, 1080);
+            this.pictureBox1.Location = new Point(0, 0);
+            //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
         }
 
         void show_main_message(string mesg, int number, int timeout)
@@ -721,6 +842,26 @@ namespace vcs_WebCam
             }
         }
 
+        private void timer_clock_Tick(object sender, EventArgs e)
+        {
+            if (camera_start == true)
+            {
+                DateTime dt = DateTime.Now;
+                lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F2") + " fps";
+                dt_old = dt;
+                frame_count_old = frame_count;
+            }
+            else
+            {
+                lb_fps.Text = "";
+            }
+        }
+
+        private void timer_auto_save_Tick(object sender, EventArgs e)
+        {
+            save_image_to_drive();
+        }
+
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox3.Checked == true)
@@ -732,6 +873,50 @@ namespace vcs_WebCam
             {
                 richTextBox1.Visible = false;
                 bt_clear.Visible = false;
+            }
+        }
+
+        private void cb_auto_save_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_auto_save.Checked == true)
+            {
+                timer_auto_save.Enabled = true;
+            }
+            else
+            {
+                timer_auto_save.Enabled = false;
+            }
+        }
+
+        void save_image_to_drive()
+        {
+            show_main_message("截圖", S_OK, 20);
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                String filename = string.Empty;
+                filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                //String file1 = file + ".jpg";
+                String filename2 = filename + ".bmp";
+                //String file3 = file + ".png";
+
+                //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                bitmap1.Save(filename2, ImageFormat.Bmp);
+                //bitmap1.Save(@file3, ImageFormat.Png);
+
+                richTextBox1.Text += "存檔成功\n";
+                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                show_main_message("已存檔", S_OK, 10);
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+                show_main_message("無圖可存", S_OK, 20);
             }
         }
     }

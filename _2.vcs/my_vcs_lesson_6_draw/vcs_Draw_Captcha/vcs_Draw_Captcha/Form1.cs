@@ -27,12 +27,15 @@ namespace vcs_Draw_Captcha
         {
             CreateImage();
 
+            CodeImage(CheckCode(), pictureBox3);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             CreateImage();
 
+
+            CodeImage(CheckCode(), pictureBox3);
         }
 
         //中文驗證法碼 ST
@@ -152,7 +155,73 @@ namespace vcs_Draw_Captcha
         }
         //中文驗證法碼 SP
 
+        //英數驗證碼 ST
+        private string CheckCode()
+        {
+            int number;
+            char code;
+            string checkCode = String.Empty;
 
+            Random random = new Random();
+
+            for (int i = 0; i < 4; i++)
+            {
+                number = random.Next();
+
+                if (number % 2 == 0)
+                    code = (char)('0' + (char)(number % 10));
+                else
+                    code = (char)('A' + (char)(number % 26));
+
+                checkCode += " " + code.ToString();
+            }
+            return checkCode;
+        }
+
+        private void CodeImage(string checkCode, PictureBox pbx)
+        {
+            if (checkCode == null || checkCode.Trim() == String.Empty)
+                return;
+
+            Bitmap image = new Bitmap((int)Math.Ceiling((checkCode.Length * 20.0)), 50);
+            Graphics g = Graphics.FromImage(image);
+
+            try
+            {
+                //產生隨機產生器
+                Random random = new Random();
+                //清空圖片背景色
+                g.Clear(Color.White);
+                //畫圖片的背景噪音線
+                for (int i = 0; i < 3; i++)
+                {
+                    int x1 = random.Next(image.Width);
+                    int x2 = random.Next(image.Width);
+                    int y1 = random.Next(image.Height);
+                    int y2 = random.Next(image.Height);
+                    g.DrawLine(new Pen(Color.Black), x1, y1, x2, y2);
+                }
+                Font font = new Font("Arial", 24, (FontStyle.Bold));
+                g.DrawString(checkCode, font, new SolidBrush(Color.Red), 2, 2);
+
+                //畫圖片的前景噪音點
+                for (int i = 0; i < 150; i++)
+                {
+                    int x = random.Next(image.Width);
+                    int y = random.Next(image.Height);
+
+                    image.SetPixel(x, y, Color.FromArgb(random.Next()));
+                }
+                //畫圖片的邊框線
+                g.DrawRectangle(new Pen(Color.Silver), 0, 0, image.Width - 1, image.Height - 1);
+                pbx.Width = image.Width;
+                pbx.Height = image.Height;
+                pbx.BackgroundImage = image;
+            }
+            catch
+            { }
+        }
+        //英數驗證碼 SP
 
     }
 }

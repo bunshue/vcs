@@ -363,7 +363,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(132, 49);
             this.button20.TabIndex = 27;
-            this.button20.Text = "找出資料夾內一層檔案";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -403,7 +402,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(132, 49);
             this.button24.TabIndex = 31;
-            this.button24.Text = "temp資料";
+            this.button24.Text = "temp資料 系統路徑";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

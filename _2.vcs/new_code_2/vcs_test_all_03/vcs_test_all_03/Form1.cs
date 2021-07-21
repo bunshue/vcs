@@ -489,13 +489,6 @@ namespace vcs_test_all_03
 
         private void button20_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\______test_files";
-            string[] files = Directory.GetFiles(foldername);
-            for (int i = 0; i < files.Length; i++)
-            {
-                richTextBox1.Text += files[i] + "\n";
-                //textBox2.Lines = files;
-            }
         }
 
         private void button21_Click(object sender, EventArgs e)

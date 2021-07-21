@@ -257,7 +257,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(155, 55);
             this.button16.TabIndex = 17;
-            this.button16.Text = "本程式截圖";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -268,7 +267,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(155, 55);
             this.button17.TabIndex = 18;
-            this.button17.Text = "全螢幕截圖";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -327,7 +325,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(155, 55);
             this.button20.TabIndex = 24;
-            this.button20.Text = "撈出資料夾下所有檔案";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 

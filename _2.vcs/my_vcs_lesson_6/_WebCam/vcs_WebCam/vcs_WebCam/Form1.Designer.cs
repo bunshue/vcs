@@ -30,7 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lb_fps = new System.Windows.Forms.Label();
+            this.lb_main_mesg = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cb_image_processing = new System.Windows.Forms.CheckBox();
             this.cb_auto_save = new System.Windows.Forms.CheckBox();
             this.bt_fullscreen = new System.Windows.Forms.Button();
             this.cb_show_time = new System.Windows.Forms.CheckBox();
@@ -48,7 +52,6 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lb_fps = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -59,14 +62,14 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
-            this.lb_main_mesg = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.timer_clock = new System.Windows.Forms.Timer(this.components);
+            this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -81,8 +84,41 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.lb_fps);
+            this.groupBox5.Controls.Add(this.lb_main_mesg);
+            this.groupBox5.Location = new System.Drawing.Point(798, 37);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(254, 212);
+            this.groupBox5.TabIndex = 17;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Message";
+            // 
+            // lb_fps
+            // 
+            this.lb_fps.AutoSize = true;
+            this.lb_fps.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_fps.Location = new System.Drawing.Point(24, 100);
+            this.lb_fps.Name = "lb_fps";
+            this.lb_fps.Size = new System.Drawing.Size(35, 21);
+            this.lb_fps.TabIndex = 11;
+            this.lb_fps.Text = "fps";
+            // 
+            // lb_main_mesg
+            // 
+            this.lb_main_mesg.AutoSize = true;
+            this.lb_main_mesg.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg.Location = new System.Drawing.Point(24, 39);
+            this.lb_main_mesg.Name = "lb_main_mesg";
+            this.lb_main_mesg.Size = new System.Drawing.Size(82, 24);
+            this.lb_main_mesg.TabIndex = 16;
+            this.lb_main_mesg.Text = "label1";
+            // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.cb_image_processing);
             this.groupBox4.Controls.Add(this.cb_auto_save);
             this.groupBox4.Controls.Add(this.bt_fullscreen);
             this.groupBox4.Controls.Add(this.cb_show_time);
@@ -100,15 +136,26 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Operation";
             // 
+            // cb_image_processing
+            // 
+            this.cb_image_processing.AutoSize = true;
+            this.cb_image_processing.Location = new System.Drawing.Point(103, 194);
+            this.cb_image_processing.Name = "cb_image_processing";
+            this.cb_image_processing.Size = new System.Drawing.Size(48, 16);
+            this.cb_image_processing.TabIndex = 15;
+            this.cb_image_processing.Text = "處裡";
+            this.cb_image_processing.UseVisualStyleBackColor = true;
+            // 
             // cb_auto_save
             // 
             this.cb_auto_save.AutoSize = true;
-            this.cb_auto_save.Location = new System.Drawing.Point(106, 194);
+            this.cb_auto_save.Location = new System.Drawing.Point(197, 193);
             this.cb_auto_save.Name = "cb_auto_save";
             this.cb_auto_save.Size = new System.Drawing.Size(72, 16);
             this.cb_auto_save.TabIndex = 14;
             this.cb_auto_save.Text = "自動存檔";
             this.cb_auto_save.UseVisualStyleBackColor = true;
+            this.cb_auto_save.CheckedChanged += new System.EventHandler(this.cb_auto_save_CheckedChanged);
             // 
             // bt_fullscreen
             // 
@@ -298,16 +345,6 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "相機";
             // 
-            // lb_fps
-            // 
-            this.lb_fps.AutoSize = true;
-            this.lb_fps.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_fps.Location = new System.Drawing.Point(24, 100);
-            this.lb_fps.Name = "lb_fps";
-            this.lb_fps.Size = new System.Drawing.Size(35, 21);
-            this.lb_fps.TabIndex = 11;
-            this.lb_fps.Text = "fps";
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.checkBox3);
@@ -393,6 +430,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(12, 301);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(464, 248);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
@@ -411,27 +449,16 @@
             // 
             this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
             // 
-            // lb_main_mesg
+            // timer_clock
             // 
-            this.lb_main_mesg.AutoSize = true;
-            this.lb_main_mesg.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg.Location = new System.Drawing.Point(24, 39);
-            this.lb_main_mesg.Name = "lb_main_mesg";
-            this.lb_main_mesg.Size = new System.Drawing.Size(82, 24);
-            this.lb_main_mesg.TabIndex = 16;
-            this.lb_main_mesg.Text = "label1";
+            this.timer_clock.Enabled = true;
+            this.timer_clock.Interval = 1000;
+            this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
             // 
-            // groupBox5
+            // timer_auto_save
             // 
-            this.groupBox5.Controls.Add(this.lb_fps);
-            this.groupBox5.Controls.Add(this.lb_main_mesg);
-            this.groupBox5.Location = new System.Drawing.Point(798, 37);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(254, 212);
-            this.groupBox5.TabIndex = 17;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Message";
+            this.timer_auto_save.Interval = 3000;
+            this.timer_auto_save.Tick += new System.EventHandler(this.timer_auto_save_Tick);
             // 
             // Form1
             // 
@@ -447,6 +474,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -454,8 +483,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -494,6 +521,9 @@
         private System.Windows.Forms.Timer timer_display;
         private System.Windows.Forms.Label lb_main_mesg;
         private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.CheckBox cb_image_processing;
+        private System.Windows.Forms.Timer timer_clock;
+        private System.Windows.Forms.Timer timer_auto_save;
     }
 }
 

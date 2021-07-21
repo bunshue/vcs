@@ -19,73 +19,81 @@ namespace vcs_CopyFromScreen
 
         private void button1_Click(object sender, EventArgs e)
         {
+            save_fullscreen_to_local_drive();       //全螢幕截圖
+        }
+
+        void save_fullscreen_to_local_drive()
+        {
             //全螢幕截圖
-            //建立空白畫布
-            Bitmap bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            //取得畫布的繪圖物件用以繪圖
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
 
-            //將裁切出的矩形存成JPG圖檔。
-            String filename1 = Application.StartupPath + "\\image_full_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            try
+            using (Bitmap bitmap1 = new Bitmap(W, H))   //建立空白畫布
             {
-                bitmap1.Save(filename1, ImageFormat.Jpeg);
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-            richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename1 + "\n";
+                using (Graphics g = Graphics.FromImage(bitmap1))
+                {
+                    //取得畫布的繪圖物件用以繪圖
+                    g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
+                    //richTextBox1.Text += "W = " + W.ToString() + "\n";
+                    //richTextBox1.Text += "H = " + H.ToString() + "\n";
+                    IntPtr dc1 = g.GetHdc();
+                    g.ReleaseHdc(dc1);
+                }
 
-            //將裁切出的矩形存成其他格式
-            String filename2 = Application.StartupPath + "\\image_full_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            try
-            {
-                bitmap1.Save(filename2, ImageFormat.Bmp);
+                //存成bmp檔
+                String filename = Application.StartupPath + "\\image_full_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                try
+                {
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+                richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
             }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-            richTextBox1.Text += "全螢幕截圖2，存檔檔名：" + filename2 + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            save_current_program_to_local_drive();
+            save_current_program_to_local_drive();  //本程式截圖
         }
 
         void save_current_program_to_local_drive()
         {
             //本程式截圖
-            Bitmap bitmap1 = new Bitmap(this.Width, this.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, System.Drawing.Size blockRegionSize);
-            g.CopyFromScreen(this.Location, new Point(0, 0), new Size(this.Width, this.Height));
-            //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
-            //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
+            int W = this.Width;
+            int H = this.Height;
 
-            //存成bmp檔
-            String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            try
+            using (Bitmap bitmap1 = new Bitmap(W, H))
             {
-                bitmap1.Save(filename, ImageFormat.Bmp);
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
+                using (Graphics g = Graphics.FromImage(bitmap1))
+                {
+                    //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, System.Drawing.Size blockRegionSize);
+                    g.CopyFromScreen(this.Location, new Point(0, 0), new Size(W, H));
+                    //richTextBox1.Text += "W = " + W.ToString() + "\n";
+                    //richTextBox1.Text += "H = " + H.ToString() + "\n";
+                    IntPtr dc1 = g.GetHdc();
+                    g.ReleaseHdc(dc1);
+                }
 
-            //存成jpg檔
-            //String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            //bitmap1.Save(filename, ImageFormat.Jpeg);
+                //存成bmp檔
+                String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                try
+                {
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
 
-            richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
+                //存成jpg檔
+                //String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                //bitmap1.Save(filename, ImageFormat.Jpeg);
+
+                richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
