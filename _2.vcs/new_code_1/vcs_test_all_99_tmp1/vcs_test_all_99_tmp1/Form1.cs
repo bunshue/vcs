@@ -634,7 +634,9 @@ namespace vcs_test_all_99_tmp1
         }
 
 
+        //string directory = @"C:\______test_files\__test_directory_to_grayscale";
         string directory = @"C:\______test_files\__test_directory_to_grayscale";
+
         private void button21_Click(object sender, EventArgs e)
         {
             //撈出資料夾內的檔案(一層)
@@ -655,15 +657,19 @@ namespace vcs_test_all_99_tmp1
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //string foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\陳一郎_紅燈碼頭\";
+            string foldername = @"C:\dddddddddd\_music_from_yt";
+
             //撈出資料夾內的檔案(多層)
             SearchOption search_option;
             search_option = SearchOption.AllDirectories;
             // Look for graphic files.
-            string[] patterns = { "*.png", "*.bmp", "*.jpg", "*.jpeg", "*.gif" };
+            //string[] patterns = { "*.png", "*.bmp", "*.jpg", "*.jpeg", "*.gif" };
+            string[] patterns = { "*.*" };
             foreach (string pattern in patterns)
             {
                 // Find the matching files.
-                foreach (string filename in Directory.GetFiles(directory, pattern, search_option))
+                foreach (string filename in Directory.GetFiles(foldername, pattern, search_option))
                 {
                     richTextBox1.Text += "find file : " + filename + "\n";
                 }

@@ -21,7 +21,9 @@ namespace SwitchInput
             //获取系统中已经安装的文字输入法
             InputLanguageCollection mInputs = InputLanguage.InstalledInputLanguages;
             foreach (InputLanguage mInput in mInputs)
+            {
                 this.comboBox1.Items.Add(mInput.LayoutName);
+            }
             //获取当前输入法信息
             InputLanguage CurrentInput = InputLanguage.CurrentInputLanguage;
             this.textBox1.Text = CurrentInput.LayoutName;
@@ -45,7 +47,7 @@ namespace SwitchInput
             this.textBox3.Text = CurrentInput.Culture.DisplayName;
             //获取默认的输入法信息
             InputLanguage dInput = InputLanguage.DefaultInputLanguage;
-            this.textBox2.Text = dInput.LayoutName;	
+            this.textBox2.Text = dInput.LayoutName;
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 //移除舊的AxInterop.WMPLib.dll 和 Interop.WMPLib.dll
 //參考/加入參考/ 選擇 dll / AxInterop.WMPLib.dll 和 Interop.WMPLib.dll
+//Interop.WMPLib.dll的屬性的內嵌Interop型別 改成false
 
 namespace SongPlayShroudAegis
 {

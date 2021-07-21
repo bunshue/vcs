@@ -54,7 +54,7 @@
             this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(96, 9);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(188, 21);
+            this.textBox1.Size = new System.Drawing.Size(188, 22);
             this.textBox1.TabIndex = 1;
             // 
             // textBox2
@@ -63,7 +63,7 @@
             this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(96, 36);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(188, 21);
+            this.textBox2.Size = new System.Drawing.Size(188, 22);
             this.textBox2.TabIndex = 3;
             // 
             // label2
@@ -81,7 +81,7 @@
             this.textBox3.Enabled = false;
             this.textBox3.Location = new System.Drawing.Point(96, 63);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(188, 21);
+            this.textBox3.Size = new System.Drawing.Size(188, 22);
             this.textBox3.TabIndex = 5;
             // 
             // label3
@@ -116,15 +116,15 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(14, 116);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(270, 77);
+            this.richTextBox1.Size = new System.Drawing.Size(270, 286);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
             // 
-            // Form1
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 200);
+            this.ClientSize = new System.Drawing.Size(297, 414);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
@@ -134,7 +134,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "切换输入法";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -39,7 +39,7 @@
   <ItemGroup>
     <Reference Include="HookEx, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\HookEx\bin\Debug\HookEx.dll</HintPath>
+      <HintPath>.\HookEx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

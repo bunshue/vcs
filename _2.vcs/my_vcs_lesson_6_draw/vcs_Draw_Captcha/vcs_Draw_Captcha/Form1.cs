@@ -10,13 +10,15 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
-namespace ChineseCode
-{
-    public partial class Frm_Main : Form
-    {
-        public string txt = "";
+// 全自動區分電腦和人類的公開圖靈測試
+//（英語：Completely Automated Public Turing test to tell Computers and Humans Apart，簡稱CAPTCHA）
+// 俗稱驗證碼
 
-        public Frm_Main()
+namespace vcs_Draw_Captcha
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
         {
             InitializeComponent();
         }
@@ -24,8 +26,17 @@ namespace ChineseCode
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateImage();
+
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            CreateImage();
+
+        }
+
+        //中文驗證法碼 ST
+        public string txt = "";
         private void CreateImage()
         {
             //获取GB2312编码页（表） 
@@ -46,7 +57,7 @@ namespace ChineseCode
 
             richTextBox1.Text += txt + "\n";
 
-            Bitmap image = new Bitmap((int)Math.Ceiling((txt.Length * 20.5))*3, 22*3);
+            Bitmap image = new Bitmap((int)Math.Ceiling((txt.Length * 20.5)) * 3, 22 * 3);
             Graphics g = Graphics.FromImage(image);
             try
             {
@@ -61,7 +72,7 @@ namespace ChineseCode
                     Point tem_Point_2 = new Point(random.Next(image.Width), random.Next(image.Height));
                     g.DrawLine(new Pen(Color.Black), tem_Point_1, tem_Point_2);
                 }
-                Font font = new Font("宋体", 12*2, (FontStyle.Bold));
+                Font font = new Font("宋体", 12 * 2, (FontStyle.Bold));
                 LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, image.Width, image.Height), Color.Blue, Color.DarkRed, 1.2f, true);
                 g.DrawString(txt, font, brush, 2, 2);
                 //画图片的前景噪音点
@@ -139,12 +150,9 @@ namespace ChineseCode
             }
             return bytes;
         }
+        //中文驗證法碼 SP
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            CreateImage();
 
-        }
+
     }
 }
-

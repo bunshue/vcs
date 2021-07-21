@@ -163,12 +163,11 @@ namespace vcs_WebCam
             try
             {
                 USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
+                webcam_count = USBWebcams.Count;
+                richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
 
                 richTextBox1.Text += "USBWebcams.Capacity : " + USBWebcams.Capacity.ToString() + "\n";
                 richTextBox1.Text += "USBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
-
-                webcam_count = USBWebcams.Count;
-                richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
 
                 int i = 0;
                 foreach (FilterInfo vidDevice in USBWebcams)
@@ -196,11 +195,10 @@ namespace vcs_WebCam
                 {
                     for (i = 0; i < webcam_count; i++)
                     {
-                        richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
-                        richTextBox1.Text += "短名 : " + USBWebcams[i].Name + "\n";
-
                         Cam = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
 
+                        richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
+                        richTextBox1.Text += "短名 : " + USBWebcams[i].Name + "\n";
                         richTextBox1.Text += "ProvideSnapshots = " + Cam.ProvideSnapshots.ToString() + "\n";
                         if (Cam.ProvideSnapshots == true)
                         {
@@ -269,10 +267,6 @@ namespace vcs_WebCam
                                     + Cam.VideoCapabilities[j].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[j].FrameSize.Height.ToString()
                                     + " @ " + Cam.VideoCapabilities[j].AverageFrameRate.ToString() + " Hz";
 
-                                webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " "
-                                    + Cam.VideoCapabilities[j].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[j].FrameSize.Height.ToString()
-                                    + " @ " + Cam.VideoCapabilities[j].AverageFrameRate.ToString() + " Hz";
-
                                 if (flag_use_first_non_virtual_camera == false)
                                 {
                                     //comboBox2.Items.Add(webcam_name);
@@ -293,41 +287,8 @@ namespace vcs_WebCam
                         comboBox2.SelectedIndex = 0;
                 }
 
-                if (webcam_count > 0)  //有相機存在
-                {
-                    Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
-                    ///---绑定事件
-                    Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
-
-                    richTextBox1.Text += "Cam.Source = " + Cam.Source + "\n";
-                    richTextBox1.Text += "Cam.Source.Length " + Cam.Source.Length.ToString() + "\n";
-                    richTextBox1.Text += "VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
-                    var videoCapabilities = Cam.VideoCapabilities;
-                    foreach (var video in videoCapabilities)
-                    {
-                        richTextBox1.Text += "預覽分辨率 : " + video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + "\n";
-                        richTextBox1.Text += "AverageFrameRate : " + video.AverageFrameRate.ToString() + "\n";
-                        richTextBox1.Text += "BitCount : " + video.BitCount.ToString() + "\n";
-                        richTextBox1.Text += "MaximumFrameRate : " + video.MaximumFrameRate.ToString() + "\n";
-                        string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + " @ " + video.AverageFrameRate.ToString() + " Hz";
-                        //comboBox2.Items.Add(video_capability);
-                    }
-                    comboBox2.SelectedIndex = 0;
-
-                    //真正設定顯示能力的地方
-                    if (videoCapabilities.Count() > 0)
-                    {
-                        Cam.VideoResolution = Cam.VideoCapabilities.Last(); //若有多個capabilities 可以更換, 真正設定顯示能力的地方
-
-                        //可能寫法
-                        //var videoCapabilities2 = Cam.VideoCapabilities;
-                        //Cam.VideoResolution = videoCapabilities2[10];
-
-                        //可能寫法
-                        //Cam.VideoResolution = Cam.VideoCapabilities[4];
-                        //Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
-                    }
-
+                /*  reserved
+                 * 
                     richTextBox1.Text += "aaaa SnapshotCapabilities.Length " + Cam.SnapshotCapabilities.Length.ToString() + "\n";
                     var snapVabalities = Cam.SnapshotCapabilities;
                     foreach (var snap in snapVabalities)
@@ -353,12 +314,7 @@ namespace vcs_WebCam
                         richTextBox1.Text += "W = " + Cam.VideoCapabilities[i].FrameSize.Width.ToString() + "\t";
                         richTextBox1.Text += "H = " + Cam.VideoCapabilities[i].FrameSize.Height.ToString() + "\n";
                     }
-                }
-                else
-                {
-                    richTextBox1.Text += "無影像裝置\n";
-                    show_main_message("無影像裝置", S_OK, 20);
-                }
+                */
             }
             catch (Exception ex)
             {
@@ -392,13 +348,30 @@ namespace vcs_WebCam
             richTextBox1.Text += "選擇能力 : " + comboBox2.SelectedIndex.ToString() + "\n";
             richTextBox1.Text += "選擇方向 : " + comboBox3.SelectedIndex.ToString() + "\t" + comboBox3.Text + "\n";
 
-            Cam = new VideoCaptureDevice(camera_full_name[comboBox1.SelectedIndex]);  //實例化對象
+            Cam = new VideoCaptureDevice(camera_full_name[comboBox1.SelectedIndex]);    //實例化對象
             Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換, 真正設定顯示能力的地方
-            Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+            Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);                 //綁定事件
+
+            /* 以下為WebCam訊息
+            richTextBox1.Text += "Cam.Source = " + Cam.Source + "\n";   //就是camera fullname
+            richTextBox1.Text += "Cam.Source.Length " + Cam.Source.Length.ToString() + "\n";
+            richTextBox1.Text += "VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
+            var videoCapabilities = Cam.VideoCapabilities;
+            foreach (var video in videoCapabilities)
+            {
+                richTextBox1.Text += "預覽分辨率 : " + video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + "\n";
+                richTextBox1.Text += "AverageFrameRate : " + video.AverageFrameRate.ToString() + "\n";
+                richTextBox1.Text += "BitCount : " + video.BitCount.ToString() + "\n";
+                richTextBox1.Text += "MaximumFrameRate : " + video.MaximumFrameRate.ToString() + "\n";
+                string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + " @ " + video.AverageFrameRate.ToString() + " Hz";
+                richTextBox1.Text += video_capability + "\n";
+            }
+            */
+
+            //真正設定顯示能力的地方
+            Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
 
             //以下為WebCam訊息
-            Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];
-            Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換, 真正設定顯示能力的地方
             string webcam_name = string.Empty;
             int ww;
             int hh;
@@ -413,14 +386,17 @@ namespace vcs_WebCam
 
         void Stop_Webcam()
         {
-            show_main_message("停止", S_OK, 20);
-            Cam.Stop();  // WebCam stops capturing images.
-            Cam.SignalToStop();
-            Cam.WaitForStop();
-            while (Cam.IsRunning)
+            if (Cam != null)
             {
+                show_main_message("停止", S_OK, 20);
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                while (Cam.IsRunning)
+                {
+                }
+                Cam = null;
             }
-            Cam = null;
         }
 
         public Bitmap bm = null;
@@ -428,13 +404,31 @@ namespace vcs_WebCam
         //自定義函數, 捕獲每一幀圖像並顯示
         private void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-            bm = (Bitmap)eventArgs.Frame.Clone();
-            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            bm.RotateFlip(rotate_flip_type);
-            pictureBox1.Image = bm;
+            if (cb_show_time.Checked == false)      //直接顯示圖片
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                bm = (Bitmap)eventArgs.Frame.Clone();
+                //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                bm.RotateFlip(rotate_flip_type);
+                pictureBox1.Image = bm;
 
-            GC.Collect();       //回收資源
+                GC.Collect();       //回收資源
+            }
+            else                //處理後再顯示圖片
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                bm = (Bitmap)eventArgs.Frame.Clone();
+                //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                bm.RotateFlip(rotate_flip_type);
+                pictureBox1.Image = bm;
+
+                GC.Collect();       //回收資源
+
+            }
+
+
+
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -558,7 +552,7 @@ namespace vcs_WebCam
 
             Stop_Webcam();
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(100);
 
             camera_start = 1;
             bt_start.Text = "停止";

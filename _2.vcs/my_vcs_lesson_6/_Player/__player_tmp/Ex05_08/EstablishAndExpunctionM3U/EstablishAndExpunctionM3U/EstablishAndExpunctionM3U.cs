@@ -13,24 +13,16 @@ namespace EstablishAndExpunctionM3U
 {
     public partial class EstablishAndExpunctionM3U : Form
     {
-        string filename_w;  //播放清單檔案
+        string filename_w = "test_m3u.m3u";  //播放清單檔案
 
-        #region 變數宣告
-        private static string temp = null;//保存打開文件的文件路徑
-        #endregion
-
-        #region  建立m3u文件
-        /// <summary>
-        /// 建立m3u文件
-        /// </summary>
-        /// <param FileDir="string">m3u路徑</param>
+        //建立 m3u 檔案
         public void m3uCreate(string FileDir)
         {
             FileStream fs;//宣告一個公開以文件為主的 Stream對象，既支援同步讀寫操作，也支援異步讀寫操作
             Byte[] info;//宣告一個字節數組
             if (File.Exists(FileDir)) //如果文件存在,則退出操作
             {
-                MessageBox.Show("文件已存在，請重新設定文件名！");//彈出訊息提示
+                //MessageBox.Show("文件已存在，請重新設定文件名！");//彈出訊息提示
                 return;//直接傳回
             }
             else    //如果文件不存在,則建立File.CreateText對像
@@ -42,15 +34,7 @@ namespace EstablishAndExpunctionM3U
             fs.Close();//關閉FileStream對像
             fs.Dispose();//釋放FileStream對像所佔用的資源
         }
-        #endregion
 
-        #region  寫入m3u文件
-        /// <summary>
-        /// 寫入m3u文件
-        /// </summary>
-        /// <param FName="string">播放文件名</param>
-        /// <param FDir="string">播放文件路徑</param>
-        /// <param FileDir="string">m3u路徑</param>
         public void m3uWrite(string FName, string FDir, string FileDir)
         {
             if (!File.Exists(FileDir))//當不存在文件路徑時
@@ -65,7 +49,6 @@ namespace EstablishAndExpunctionM3U
             sw.Close();//關閉目前的 StreamWriter 對像和基礎串流
             sw.Dispose();//釋放由此 TextWriter 對像使用的所有資源
         }
-        #endregion
 
         public EstablishAndExpunctionM3U()
         {
@@ -74,7 +57,7 @@ namespace EstablishAndExpunctionM3U
 
         private void EstablishAndExpunctionM3U_Load(object sender, EventArgs e)
         {
-            filename_w = Application.StartupPath + "\\m3u_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".m3u"; //播放清單檔案
+            //filename_w = Application.StartupPath + "\\m3u_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".m3u"; //播放清單檔案
             richTextBox1.Text += "建立一個M3U文件 : " + filename_w + "\n";
             m3uCreate(filename_w);//建立一個M3U文件
             M3UPath.Text = filename_w;

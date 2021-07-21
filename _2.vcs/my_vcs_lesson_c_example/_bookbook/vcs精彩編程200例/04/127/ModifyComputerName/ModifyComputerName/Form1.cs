@@ -37,9 +37,8 @@ namespace ModifyComputerName
             }
             else
             {
-                richTextBox1.Text += "偽執行\n";
-                //SetComputerName(textBox2.Text);//修改计算机名称
-                MessageBox.Show("计算机名称修改成功，请重新启动计算机使之生效！");
+                richTextBox1.Text += "偽執行 計算機名稱修改, 須重啟計算機使之生效\n";
+                //SetComputerName(textBox2.Text);//修改計算機名稱
             }
         }
     }
