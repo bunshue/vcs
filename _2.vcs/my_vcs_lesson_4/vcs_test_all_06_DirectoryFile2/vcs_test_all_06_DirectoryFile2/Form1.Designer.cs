@@ -40,6 +40,7 @@
             this.button9 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -48,7 +49,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(151, 49);
             this.button1.TabIndex = 0;
-            this.button1.Text = "撈出資料夾內的檔案(多層)";
+            this.button1.Text = "撈出資料夾內的檔案(多層)a";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -58,7 +59,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(151, 49);
             this.button2.TabIndex = 1;
-            this.button2.Text = "取得資料夾下的所有檔案";
+            this.button2.Text = "撈出資料夾內的檔案(多層)b";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -137,6 +138,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(151, 49);
             this.button9.TabIndex = 9;
+            this.button9.Text = "我的轉出";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -158,11 +160,22 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(12, 636);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(151, 49);
+            this.button10.TabIndex = 12;
+            this.button10.Text = "info";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 646);
+            this.ClientSize = new System.Drawing.Size(804, 726);
+            this.Controls.Add(this.button10);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button9);
@@ -196,6 +209,7 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button10;
     }
 }
 

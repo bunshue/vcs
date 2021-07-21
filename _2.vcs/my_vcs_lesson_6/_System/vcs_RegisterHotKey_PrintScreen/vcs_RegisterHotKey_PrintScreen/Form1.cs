@@ -19,6 +19,12 @@ namespace vcs_RegisterHotKey_PrintScreen
         void _Regis_HotKey()
         {
             save_fullscreen_to_local_drive();       //全螢幕截圖
+            //this.Show();
+            this.WindowState = FormWindowState.Normal;
+            Application.DoEvents(); //為了顯示出來
+            System.Threading.Thread.Sleep(1000);
+            //this.Hide();
+            this.WindowState = FormWindowState.Minimized;
         }
 
         public Form1()
@@ -37,6 +43,16 @@ namespace vcs_RegisterHotKey_PrintScreen
             RegisterHotKey.WindowHandle = this.Handle;
             RegisterHotKey.HotKey += new RegisterHotKeyClass.HotKeyPass(_Regis_HotKey);
             RegisterHotKey.StarHotKey();
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            this.Location = new System.Drawing.Point(screenWidth - this.Width - 50, screenHeight - this.Height - 50);
+            this.BackColor = Color.Pink;
         }
 
         void save_fullscreen_to_local_drive()
@@ -57,8 +73,19 @@ namespace vcs_RegisterHotKey_PrintScreen
                 String filename = "C:\\dddddddddd\\full_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
                 bmp.Save(filename, ImageFormat.Bmp);
 
-                label3.Text = "全螢幕截圖，存檔檔名：" + filename;
+                label3.Text = "全螢幕截圖，存檔檔名：\n" + filename;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+            //this.Hide();	//隱藏表單
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 

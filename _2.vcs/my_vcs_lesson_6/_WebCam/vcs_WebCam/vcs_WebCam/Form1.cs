@@ -131,6 +131,9 @@ namespace vcs_WebCam
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
 
+            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+            this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
+
             show_item_location();
             Init_WebcamSetup();
         }
@@ -215,6 +218,8 @@ namespace vcs_WebCam
             bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             bt_info.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_fullscreen.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_help.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+
             cb_show_time.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             cb_image_processing.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             cb_auto_save.Location = new Point(x_st + dx * 2, y_st + dy * 3);
@@ -334,7 +339,6 @@ namespace vcs_WebCam
                             */
                         }
 
-                        bool flag_use_first_non_virtual_camera = false;
                         string webcam_name;
                         if (USBWebcams[i].Name.Contains("Virtual"))
                         {
@@ -380,16 +384,10 @@ namespace vcs_WebCam
                                     + Cam.VideoCapabilities[j].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[j].FrameSize.Height.ToString()
                                     + " @ " + Cam.VideoCapabilities[j].AverageFrameRate.ToString() + " Hz";
 
-                                if (flag_use_first_non_virtual_camera == false)
-                                {
-                                    //comboBox2.Items.Add(webcam_name);
-                                }
-
                                 richTextBox1.Text += webcam_name + "\n";
 
                                 camera_capability.Add(new int[] { i, j });
                             }
-                            flag_use_first_non_virtual_camera = true;
                         }
                         richTextBox1.Text += "\n\n";
                     }
@@ -462,7 +460,10 @@ namespace vcs_WebCam
             richTextBox1.Text += "選擇方向 : " + comboBox3.SelectedIndex.ToString() + "\t" + comboBox3.Text + "\n";
 
             Cam = new VideoCaptureDevice(camera_full_name[comboBox1.SelectedIndex]);    //實例化對象
-            Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換, 真正設定顯示能力的地方
+
+            //真正設定顯示能力的地方
+            Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
+
             Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);                 //綁定事件
 
             /* 以下為WebCam訊息
@@ -480,9 +481,6 @@ namespace vcs_WebCam
                 richTextBox1.Text += video_capability + "\n";
             }
             */
-
-            //真正設定顯示能力的地方
-            Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
 
             //以下為WebCam訊息
             string webcam_name = string.Empty;
@@ -820,12 +818,12 @@ namespace vcs_WebCam
             this.pictureBox1.Size = new Size(1920, 1080);
             this.pictureBox1.Location = new Point(0, 0);
             //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
+            this.pictureBox1.Focus();
         }
 
         void show_main_message(string mesg, int number, int timeout)
         {
             lb_main_mesg.Text = mesg;
-            //playSound(number);
 
             timer_display_show_main_mesg_count = 0;
             timer_display_show_main_mesg_count_target = timeout;   //timeout in 0.1 sec
@@ -918,6 +916,49 @@ namespace vcs_WebCam
                 richTextBox1.Text += "無圖可存\n";
                 show_main_message("無圖可存", S_OK, 20);
             }
+        }
+
+        void pictureBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)   //根據e.KeyCode分別執行
+            {
+                case Keys.Escape:
+                case Keys.X:
+                    show_main_message("離開", S_OK, 20);
+                    MessageBox.Show("版權沒有，歡迎散發", "WebCam");
+                    Application.Exit();
+                    break;
+                case Keys.G:
+
+                    break;
+                case Keys.S:
+                    save_image_to_drive();
+                    break;
+                case Keys.W:
+
+                    break;
+                case Keys.Space:
+
+                    break;
+                case Keys.Up:
+
+                    break;
+                case Keys.Down:
+
+                    break;
+                default:
+                    //MessageBox.Show("x, KeyCode: " + e.KeyCode.ToString());
+                    break;
+            }
+        }
+
+        private void bt_help_Click(object sender, EventArgs e)
+        {
+            string message = string.Empty;
+            message += "按 S 鍵 截圖\n";
+            message += "按 X 鍵 離開程式\n";
+            message += "按 ESC 鍵 離開程式\n\n";
+            MessageBox.Show(message, "WebCam操作說明");
         }
     }
 }
