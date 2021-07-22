@@ -14,7 +14,8 @@ namespace SongPlayShroudAegis
 {
     public partial class Form1 : Form
     {
-        int width = 0, heigh = 0;
+        int W = 0;
+        int H = 0;
         string foldername = @"C:\______test_files\_mp3b";
 
         public Form1()
@@ -25,8 +26,9 @@ namespace SongPlayShroudAegis
         private void Form1_Load(object sender, EventArgs e)
         {
             timer1.Enabled = true;
-            width = this.Width;
-            heigh = this.Height;
+            W = this.Width;
+            H = this.Height;
+            label2.Text = "";   //for debug
         }
 
         private void Form1_Click(object sender, EventArgs e)
@@ -61,10 +63,11 @@ namespace SongPlayShroudAegis
         {
             Graphics g = this.CreateGraphics();
             g.Clear(Color.Black);
-            string strinfo = "歌曲播放螢幕保護";
-            int x = new Random().Next(0, width - 250);
-            int y = new Random().Next(50, heigh - 20);
-            g.DrawString(strinfo, new Font("標楷體", 30, FontStyle.Bold), new SolidBrush(Color.FromArgb(new Random().Next(50, 255), new Random().Next(70, 255), new Random().Next(36, 255))), x, y);
+            string show_message = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            int x = new Random().Next(0, W - 350);
+            int y = new Random().Next(50, H - 120);
+            g.DrawString(show_message, new Font("標楷體", 30, FontStyle.Bold), new SolidBrush(Color.FromArgb(new Random().Next(50, 255), new Random().Next(70, 255), new Random().Next(36, 255))), x, y);
+            //label2.Text = "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
         }
     }
 }

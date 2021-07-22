@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Diagnostics;
 
 using AForge.Video;
@@ -30,15 +31,12 @@ namespace AForge_PlayAVI
         // Open video source
         private void OpenVideoSource(IVideoSource source)
         {
-            // set busy cursor
-            this.Cursor = Cursors.WaitCursor;
-
             // stop current video source
             CloseCurrentVideoSource();
 
             // start new video source
-            videoSourcePlayer.VideoSource = source;
-            videoSourcePlayer.Start();
+            vsp.VideoSource = source;
+            vsp.Start();
 
             // reset stop watch
             stopWatch = null;
@@ -46,15 +44,13 @@ namespace AForge_PlayAVI
             // start timer
             timer.Start();
 
-            this.Cursor = Cursors.Default;
-
             if (source.IsRunning == true)
             {
                 richTextBox1.Text += source.IsRunning.ToString() + "\n";
                 richTextBox1.Text += source.Source.Length.ToString() + "\n";
-                richTextBox1.Text += videoSourcePlayer.Size.ToString() + "\n";
-                richTextBox1.Text += videoSourcePlayer.Width.ToString() +"\n";
-                richTextBox1.Text += videoSourcePlayer.Height.ToString() + "\n";
+                richTextBox1.Text += vsp.Size.ToString() + "\n";
+                richTextBox1.Text += vsp.Width.ToString() + "\n";
+                richTextBox1.Text += vsp.Height.ToString() + "\n";
 
             }
         }
@@ -62,29 +58,29 @@ namespace AForge_PlayAVI
         // Close video source if it is running
         private void CloseCurrentVideoSource()
         {
-            if (videoSourcePlayer.VideoSource != null)
+            if (vsp.VideoSource != null)
             {
-                videoSourcePlayer.SignalToStop();
+                vsp.SignalToStop();
 
                 // wait ~ 3 seconds
                 for (int i = 0; i < 30; i++)
                 {
-                    if (!videoSourcePlayer.IsRunning)
+                    if (!vsp.IsRunning)
                         break;
                     System.Threading.Thread.Sleep(100);
                 }
 
-                if (videoSourcePlayer.IsRunning)
+                if (vsp.IsRunning)
                 {
-                    videoSourcePlayer.Stop();
+                    vsp.Stop();
                 }
 
-                videoSourcePlayer.VideoSource = null;
+                vsp.VideoSource = null;
             }
         }
 
         // New frame received by the player
-        private void videoSourcePlayer_NewFrame(object sender, ref Bitmap image)
+        private void vsp_NewFrame(object sender, ref Bitmap image)
         {
             //畫上目前的時間
             DateTime now = DateTime.Now;
@@ -100,7 +96,7 @@ namespace AForge_PlayAVI
         // On timer event - gather statistics
         private void timer_Tick(object sender, EventArgs e)
         {
-            IVideoSource videoSource = videoSourcePlayer.VideoSource;
+            IVideoSource videoSource = vsp.VideoSource;
 
             if (videoSource != null)
             {

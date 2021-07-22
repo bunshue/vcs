@@ -34,6 +34,7 @@
             this.lb_fps = new System.Windows.Forms.Label();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.bt_help = new System.Windows.Forms.Button();
             this.cb_image_processing = new System.Windows.Forms.CheckBox();
             this.cb_auto_save = new System.Windows.Forms.CheckBox();
             this.bt_fullscreen = new System.Windows.Forms.Button();
@@ -64,7 +65,6 @@
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
-            this.bt_help = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -137,6 +137,17 @@
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Operation";
+            // 
+            // bt_help
+            // 
+            this.bt_help.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_help.Location = new System.Drawing.Point(188, 152);
+            this.bt_help.Name = "bt_help";
+            this.bt_help.Size = new System.Drawing.Size(75, 36);
+            this.bt_help.TabIndex = 16;
+            this.bt_help.Text = "Help";
+            this.bt_help.UseVisualStyleBackColor = true;
+            this.bt_help.Click += new System.EventHandler(this.bt_help_Click);
             // 
             // cb_image_processing
             // 
@@ -436,6 +447,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDoubleClick);
             // 
             // bt_clear
             // 
@@ -462,17 +474,6 @@
             // 
             this.timer_auto_save.Interval = 3000;
             this.timer_auto_save.Tick += new System.EventHandler(this.timer_auto_save_Tick);
-            // 
-            // bt_help
-            // 
-            this.bt_help.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_help.Location = new System.Drawing.Point(188, 152);
-            this.bt_help.Name = "bt_help";
-            this.bt_help.Size = new System.Drawing.Size(75, 36);
-            this.bt_help.TabIndex = 16;
-            this.bt_help.Text = "Help";
-            this.bt_help.UseVisualStyleBackColor = true;
-            this.bt_help.Click += new System.EventHandler(this.bt_help_Click);
             // 
             // Form1
             // 

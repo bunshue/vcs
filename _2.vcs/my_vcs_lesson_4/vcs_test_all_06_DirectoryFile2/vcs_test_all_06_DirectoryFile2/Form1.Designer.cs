@@ -41,6 +41,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.bt_save = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -144,6 +145,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(180, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(612, 599);
@@ -170,11 +172,22 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // bt_save
+            // 
+            this.bt_save.Location = new System.Drawing.Point(642, 497);
+            this.bt_save.Name = "bt_save";
+            this.bt_save.Size = new System.Drawing.Size(72, 37);
+            this.bt_save.TabIndex = 13;
+            this.bt_save.Text = "Save";
+            this.bt_save.UseVisualStyleBackColor = true;
+            this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 726);
+            this.Controls.Add(this.bt_save);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -210,6 +223,7 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button bt_save;
     }
 }
 

@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 
+using System.Drawing.Imaging;   //for ImageFormat
+
 using AForge.Video;
 using AForge.Video.DirectShow;
 
@@ -30,67 +32,64 @@ namespace AForge_WebCam
         // Open video source
         private void OpenVideoSource(IVideoSource source)
         {
-            // set busy cursor
-            this.Cursor = Cursors.WaitCursor;
-
             // stop current video source
             CloseCurrentVideoSource();
 
             // start new video source
-            videoSourcePlayer.VideoSource = source;
-            videoSourcePlayer.Start();
+            vsp.VideoSource = source;
+            vsp.Start();
 
             // reset stop watch
             stopWatch = null;
 
             // start timer
             timer.Start();
-
-            this.Cursor = Cursors.Default;
         }
 
         // Close video source if it is running
         private void CloseCurrentVideoSource()
         {
-            if (videoSourcePlayer.VideoSource != null)
+            if (vsp.VideoSource != null)
             {
-                videoSourcePlayer.SignalToStop();
+                vsp.SignalToStop();
 
                 // wait ~ 3 seconds
                 for (int i = 0; i < 30; i++)
                 {
-                    if (!videoSourcePlayer.IsRunning)
+                    if (!vsp.IsRunning)
                         break;
                     System.Threading.Thread.Sleep(100);
                 }
 
-                if (videoSourcePlayer.IsRunning)
+                if (vsp.IsRunning)
                 {
-                    videoSourcePlayer.Stop();
+                    vsp.Stop();
                 }
 
-                videoSourcePlayer.VideoSource = null;
+                vsp.VideoSource = null;
             }
         }
 
         // New frame received by the player
-        private void videoSourcePlayer_NewFrame(object sender, ref Bitmap image)
+        private void vsp_NewFrame(object sender, ref Bitmap image)
         {
-            DateTime now = DateTime.Now;
             Graphics g = Graphics.FromImage(image);
+            SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+            Font drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+            int x_st = 10;
+            int y_st = 10;
 
-            // paint current time
-            SolidBrush brush = new SolidBrush(Color.Red);
-            g.DrawString(now.ToString(), this.Font, brush, new PointF(5, 5));
-            brush.Dispose();
-
+            //在畫面的上方顯示時間
+            string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            g.DrawString(drawDate, drawFont1, drawBrush, x_st, y_st);
+            drawBrush.Dispose();
             g.Dispose();
         }
 
         // On timer event - gather statistics
         private void timer_Tick(object sender, EventArgs e)
         {
-            IVideoSource videoSource = videoSourcePlayer.VideoSource;
+            IVideoSource videoSource = vsp.VideoSource;
 
             if (videoSource != null)
             {
@@ -107,7 +106,6 @@ namespace AForge_WebCam
                     stopWatch.Stop();
 
                     float fps = 1000.0f * framesReceived / stopWatch.ElapsedMilliseconds;
-                    lb_fps.Text = fps.ToString("F2") + " fps";
                     this.Text = fps.ToString("F2") + " fps";
 
                     stopWatch.Reset();
@@ -124,13 +122,58 @@ namespace AForge_WebCam
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 // create video source
-                VideoCaptureDevice videoSource = form.VideoDevice;
+                VideoCaptureDevice Cam = form.VideoDevice;
 
-                richTextBox1.Text += "FrameRate = " + videoSource.VideoResolution.FrameRate.ToString() + "\n";
+                richTextBox1.Text += "VideoCapabilities.Length = " + Cam.VideoCapabilities.Length.ToString() + "\n";
+                richTextBox1.Text += "FrameRate = " + Cam.VideoResolution.FrameRate.ToString() + "\n";
 
                 // open it
-                OpenVideoSource(videoSource);
+                OpenVideoSource(Cam);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            CloseCurrentVideoSource();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (vsp.VideoSource == null)
+            {
+                richTextBox1.Text += "無圖可存\n";
+                return;
+            }
+
+            try
+            {
+                Bitmap bitmap1 = vsp.GetCurrentVideoFrame();
+                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
+            }
+
+            
+            
         }
     }
 }

@@ -271,10 +271,6 @@ namespace vcs_WMPLibWindowsMediaPlayer
             wmp.controls.pause();
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
             wmp.controls.play();
@@ -553,12 +549,6 @@ namespace vcs_WMPLibWindowsMediaPlayer
             }
         }
 
-        private void button19_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += " playlist_index = " + playlist_index.ToString() + "\n";
-            richTextBox1.Text += " playlist_count = " + wmp.currentPlaylist.count.ToString() + "\n";
-        }
-
         private void timer2_Tick(object sender, EventArgs e)
         {
             if (wmp.currentPlaylist.count > 0)
@@ -623,18 +613,6 @@ namespace vcs_WMPLibWindowsMediaPlayer
             richTextBox1.Text += "FileSize: " + wmp.currentMedia.getItemInfo("FileSize").ToString() + "\t";
             richTextBox1.Text += "FileType: " + wmp.currentMedia.getItemInfo("FileType").ToString() + "\n";
             richTextBox1.Text += "sourceURL: " + wmp.currentMedia.getItemInfo("sourceURL").ToString() + "\n";
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "測試使用WindowsMediaPlayerClass\n";
-            WindowsMediaPlayerClass c;
-            IWMPMedia m;
-
-            c = new WindowsMediaPlayerClass();
-            m = c.newMedia(mp3_filename);
-            richTextBox1.Text += "歌手名:\t" + m.getItemInfo("Author") + "\n" + "歌  名:\t" + m.getItemInfo("Title") + "\n";
-
         }
 
     }

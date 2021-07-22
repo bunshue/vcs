@@ -49,6 +49,7 @@ namespace vcs_test_all_06_DirectoryFile2
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_save.Location = new Point(bt_clear.Location.X - 100, bt_clear.Location.Y);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -79,7 +80,7 @@ namespace vcs_test_all_06_DirectoryFile2
         {
             //撈出資料夾內的檔案(多層)
             string foldername = @"C:\______test_files";
-            
+
             SearchOption search_option;
             search_option = SearchOption.AllDirectories;
             //string[] patterns = { "*.png", "*.bmp", "*.jpg", "*.jpeg", "*.gif" }; //指名搜尋pattern
@@ -323,8 +324,8 @@ namespace vcs_test_all_06_DirectoryFile2
             folder_size += fi.Length;
             folder_files++;
 
-            //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-            richTextBox1.Text += fi.FullName + "\n";
+            richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+            //richTextBox1.Text += fi.FullName + "\n";
 
             fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
         }
@@ -368,8 +369,9 @@ namespace vcs_test_all_06_DirectoryFile2
 
         private void button9_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\______test_files\_pic";
+            //string foldername = @"C:\______test_files\_pic";
             //string foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\";
+            string foldername = @"C:\dddddddddd\_music_from_yt";
 
             export_filenames(foldername);
 
@@ -419,5 +421,16 @@ namespace vcs_test_all_06_DirectoryFile2
 
         }
 
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔, 這樣會出現怪字型, 還是一行一行儲存比較好
+
+            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式            
+            sw.Write(richTextBox1.Text);
+            sw.Close();
+            richTextBox1.Text += "存檔檔名: " + filename + "\n";
+        }
     }
 }

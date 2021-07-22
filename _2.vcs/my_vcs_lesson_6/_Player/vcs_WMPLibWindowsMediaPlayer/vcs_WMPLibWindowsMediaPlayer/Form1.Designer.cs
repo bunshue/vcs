@@ -33,7 +33,6 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button9 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,11 +56,9 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.button19 = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.button20 = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.button21 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -109,16 +106,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(617, 274);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
-            // 
-            // button9
-            // 
-            this.button9.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(347, 510);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(100, 30);
-            this.button9.TabIndex = 9;
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // timer1
             // 
@@ -370,17 +357,6 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "0 / 0";
             // 
-            // button19
-            // 
-            this.button19.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(347, 467);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(100, 30);
-            this.button19.TabIndex = 29;
-            this.button19.Text = "Message";
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
-            // 
             // timer2
             // 
             this.timer2.Enabled = true;
@@ -397,17 +373,6 @@
             this.button20.Text = "選取資料夾";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button21
-            // 
-            this.button21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(347, 559);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(100, 30);
-            this.button21.TabIndex = 21;
-            this.button21.Text = "test";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
             // bt_clear
             // 
@@ -426,9 +391,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1086, 614);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
-            this.Controls.Add(this.button19);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);
@@ -438,7 +401,6 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.button9);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -459,7 +421,6 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label1;
@@ -483,11 +444,9 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button bt_clear;
     }
 }

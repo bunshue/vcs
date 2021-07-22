@@ -38,6 +38,8 @@ namespace vcs_WebCam
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
 
+        bool flag_fullscreen = false;
+
         public struct RGB
         {
             private byte _r;
@@ -522,7 +524,7 @@ namespace vcs_WebCam
             frame_count++;
             if (cb_show_time.Checked == false)      //直接顯示圖片
             {
-                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();  //直接顯示圖片
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();  //直接顯示圖片, 不能做任何處理
                 bm = (Bitmap)eventArgs.Frame.Clone();
                 //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);
                 bm.RotateFlip(rotate_flip_type);                        //鏡射旋轉
@@ -804,21 +806,44 @@ namespace vcs_WebCam
 
         private void bt_fullscreen_Click(object sender, EventArgs e)
         {
-            show_main_message("全螢幕", S_OK, 20);
-            groupBox1.Visible = false;
-            richTextBox1.Visible = false;
-            bt_clear.Visible = false;
+            if (flag_fullscreen == false)
+            {
+                flag_fullscreen = true;
+                show_main_message("全螢幕", S_OK, 20);
+                groupBox1.Visible = false;
+                richTextBox1.Visible = false;
+                bt_clear.Visible = false;
 
-            this.BackColor = Color.Black;
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+                this.BackColor = Color.Black;
+                //最大化螢幕
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+                //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
-            this.pictureBox1.Size = new Size(1920, 1080);
-            this.pictureBox1.Location = new Point(0, 0);
-            //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
-            this.pictureBox1.Focus();
+                this.pictureBox1.Size = new Size(1920, 1080);
+                this.pictureBox1.Location = new Point(0, 0);
+                //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
+                this.pictureBox1.Focus();
+            }
+            else
+            {
+                flag_fullscreen = false;
+                show_main_message("復原", S_OK, 20);
+                groupBox1.Visible = true;
+                richTextBox1.Visible = true;
+                bt_clear.Visible = true;
+
+                this.BackColor = System.Drawing.SystemColors.ControlLight;
+                //最大化螢幕
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.WindowState = FormWindowState.Normal;
+                //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+
+                pictureBox1.Size = new Size(640, 480);
+                pictureBox1.Location = new Point(10, 270);
+                //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
+                this.pictureBox1.Focus();
+            }
         }
 
         void show_main_message(string mesg, int number, int timeout)
@@ -923,6 +948,26 @@ namespace vcs_WebCam
             switch (e.KeyCode)   //根據e.KeyCode分別執行
             {
                 case Keys.Escape:
+                    if (flag_fullscreen == true)
+                    {
+                        flag_fullscreen = false;
+                        show_main_message("復原", S_OK, 20);
+                        groupBox1.Visible = true;
+                        richTextBox1.Visible = true;
+                        bt_clear.Visible = true;
+
+                        this.BackColor = System.Drawing.SystemColors.ControlLight;
+                        //最大化螢幕
+                        this.FormBorderStyle = FormBorderStyle.Sizable;
+                        this.WindowState = FormWindowState.Normal;
+                        //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+
+                        pictureBox1.Size = new Size(640, 480);
+                        pictureBox1.Location = new Point(10, 270);
+                        //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
+                        this.pictureBox1.Focus();
+                    }
+                    break;
                 case Keys.X:
                     show_main_message("離開", S_OK, 20);
                     MessageBox.Show("版權沒有，歡迎散發", "WebCam");
@@ -956,9 +1001,51 @@ namespace vcs_WebCam
         {
             string message = string.Empty;
             message += "按 S 鍵 截圖\n";
+            message += "按 ESC 鍵 離開全螢幕\n\n";
             message += "按 X 鍵 離開程式\n";
-            message += "按 ESC 鍵 離開程式\n\n";
             MessageBox.Show(message, "WebCam操作說明");
+        }
+
+        private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (flag_fullscreen == false)
+            {
+                flag_fullscreen = true;
+                show_main_message("全螢幕", S_OK, 20);
+                groupBox1.Visible = false;
+                richTextBox1.Visible = false;
+                bt_clear.Visible = false;
+
+                this.BackColor = Color.Black;
+                //最大化螢幕
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+                //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+
+                this.pictureBox1.Size = new Size(1920, 1080);
+                this.pictureBox1.Location = new Point(0, 0);
+                //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
+                this.pictureBox1.Focus();
+            }
+            else
+            {
+                flag_fullscreen = false;
+                show_main_message("復原", S_OK, 20);
+                groupBox1.Visible = true;
+                richTextBox1.Visible = true;
+                bt_clear.Visible = true;
+
+                this.BackColor = System.Drawing.SystemColors.ControlLight;
+                //最大化螢幕
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.WindowState = FormWindowState.Normal;
+                //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+
+                pictureBox1.Size = new Size(640, 480);
+                pictureBox1.Location = new Point(10, 270);
+                //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
+                this.pictureBox1.Focus();
+            }
         }
     }
 }

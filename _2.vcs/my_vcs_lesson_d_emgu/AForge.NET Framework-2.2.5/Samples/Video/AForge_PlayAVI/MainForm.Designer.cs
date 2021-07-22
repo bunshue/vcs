@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.fpsLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.videoSourcePlayer = new AForge.Controls.VideoSourcePlayer();
+            this.vsp = new AForge.Controls.VideoSourcePlayer();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -56,17 +56,17 @@
             this.fpsLabel.Spring = true;
             this.fpsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // videoSourcePlayer
+            // vsp
             // 
-            this.videoSourcePlayer.AutoSizeControl = true;
-            this.videoSourcePlayer.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.videoSourcePlayer.ForeColor = System.Drawing.Color.White;
-            this.videoSourcePlayer.Location = new System.Drawing.Point(333, 143);
-            this.videoSourcePlayer.Name = "videoSourcePlayer";
-            this.videoSourcePlayer.Size = new System.Drawing.Size(322, 242);
-            this.videoSourcePlayer.TabIndex = 0;
-            this.videoSourcePlayer.VideoSource = null;
-            this.videoSourcePlayer.NewFrame += new AForge.Controls.VideoSourcePlayer.NewFrameHandler(this.videoSourcePlayer_NewFrame);
+            this.vsp.AutoSizeControl = true;
+            this.vsp.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.vsp.ForeColor = System.Drawing.Color.White;
+            this.vsp.Location = new System.Drawing.Point(333, 143);
+            this.vsp.Name = "vsp";
+            this.vsp.Size = new System.Drawing.Size(322, 242);
+            this.vsp.TabIndex = 0;
+            this.vsp.VideoSource = null;
+            this.vsp.NewFrame += new AForge.Controls.VideoSourcePlayer.NewFrameHandler(this.vsp_NewFrame);
             // 
             // timer
             // 
@@ -88,7 +88,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 35);
+            this.button1.Location = new System.Drawing.Point(12, 20);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 53);
             this.button1.TabIndex = 3;
@@ -103,7 +103,7 @@
             this.ClientSize = new System.Drawing.Size(989, 528);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.videoSourcePlayer);
+            this.Controls.Add(this.vsp);
             this.Controls.Add(this.statusStrip);
             this.Name = "MainForm";
             this.Text = "Simple Player";
@@ -118,7 +118,7 @@
         #endregion
 
         private System.Windows.Forms.StatusStrip statusStrip;
-        private AForge.Controls.VideoSourcePlayer videoSourcePlayer;
+        private AForge.Controls.VideoSourcePlayer vsp;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.ToolStripStatusLabel fpsLabel;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
