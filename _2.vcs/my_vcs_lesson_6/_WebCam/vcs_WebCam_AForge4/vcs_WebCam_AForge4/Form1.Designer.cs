@@ -28,15 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rb4 = new System.Windows.Forms.RadioButton();
             this.rb3 = new System.Windows.Forms.RadioButton();
-            this.rb2 = new System.Windows.Forms.RadioButton();
             this.rb1 = new System.Windows.Forms.RadioButton();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -62,7 +59,6 @@
             // 
             this.groupBox1.Controls.Add(this.rb4);
             this.groupBox1.Controls.Add(this.rb3);
-            this.groupBox1.Controls.Add(this.rb2);
             this.groupBox1.Controls.Add(this.rb1);
             this.groupBox1.Location = new System.Drawing.Point(678, 12);
             this.groupBox1.Name = "groupBox1";
@@ -91,17 +87,6 @@
             this.rb3.Text = "radioButton1";
             this.rb3.UseVisualStyleBackColor = true;
             // 
-            // rb2
-            // 
-            this.rb2.AutoSize = true;
-            this.rb2.Location = new System.Drawing.Point(27, 70);
-            this.rb2.Name = "rb2";
-            this.rb2.Size = new System.Drawing.Size(64, 16);
-            this.rb2.TabIndex = 1;
-            this.rb2.Text = "QR code";
-            this.rb2.UseVisualStyleBackColor = true;
-            this.rb2.CheckedChanged += new System.EventHandler(this.rb2_CheckedChanged);
-            // 
             // rb1
             // 
             this.rb1.AutoSize = true;
@@ -113,11 +98,6 @@
             this.rb1.TabStop = true;
             this.rb1.Text = "正常";
             this.rb1.UseVisualStyleBackColor = true;
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -145,9 +125,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rb4;
         private System.Windows.Forms.RadioButton rb3;
-        private System.Windows.Forms.RadioButton rb2;
         private System.Windows.Forms.RadioButton rb1;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 

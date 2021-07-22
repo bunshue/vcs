@@ -95,7 +95,7 @@ namespace vcs_ImageProcessingB
             pictureBox1.Image = Image.FromFile(filename);
         }
 
-        //旋转90,180,270
+        //旋轉90,180,270度
         public Bitmap RotateImage(Bitmap bmp, int angle)
         {
             if (angle != 90 && angle != 180 && angle != 270)
@@ -110,10 +110,12 @@ namespace vcs_ImageProcessingB
                 Bitmap newbmp = new Bitmap(height, width);
                 using (Graphics g = Graphics.FromImage(newbmp))
                 {
-                    Point[] destinationPoints = {
+                    Point[] destinationPoints =
+                    {
                         new Point(height, 0), // destination for upper-left point of original
                         new Point(height, width),// destination for upper-right point of original
-                        new Point(0, 0)}; // destination for lower-left point of original
+                        new Point(0, 0)     // destination for lower-left point of original
+                    };
                     g.DrawImage(bmp, destinationPoints);
                 }
                 return newbmp;
@@ -124,10 +126,12 @@ namespace vcs_ImageProcessingB
                 Bitmap newbmp = new Bitmap(width, height);
                 using (Graphics g = Graphics.FromImage(newbmp))
                 {
-                    Point[] destinationPoints = {
+                    Point[] destinationPoints =
+                    {
                         new Point(width, height), // destination for upper-left point of original
                         new Point(0, height),// destination for upper-right point of original
-                        new Point(width, 0)}; // destination for lower-left point of original
+                        new Point(width, 0)     // destination for lower-left point of original
+                    };
                     g.DrawImage(bmp, destinationPoints);
                 }
                 return newbmp;
@@ -138,18 +142,18 @@ namespace vcs_ImageProcessingB
                 Bitmap newbmp = new Bitmap(height, width);
                 using (Graphics g = Graphics.FromImage(newbmp))
                 {
-                    Point[] destinationPoints = {
+                    Point[] destinationPoints = 
+                    {
                         new Point(0, width), // destination for upper-left point of original
                         new Point(0, 0),// destination for upper-right point of original
-                        new Point(height, width)}; // destination for lower-left point of original
+                        new Point(height, width)    // destination for lower-left point of original
+                    };
                     g.DrawImage(bmp, destinationPoints);
                 }
                 return newbmp;
             }
             return null;
         }
-
-
 
         //重设大小
         public Bitmap ResizeImage(Bitmap bmp, Size size)
@@ -161,7 +165,6 @@ namespace vcs_ImageProcessingB
             }
             return newbmp;
         }
-
 
         //底片
         public Bitmap NegativeImage(Bitmap bmp)
@@ -280,9 +283,6 @@ namespace vcs_ImageProcessingB
             return newbmp;
         }
 
-
-
-
         //柔化
         public Bitmap SoftenImage(Bitmap bmp)
         {
@@ -333,9 +333,6 @@ namespace vcs_ImageProcessingB
             return newbmp;
         }
 
-
-
-
         //锐化
         public Bitmap SharpenImage(Bitmap bmp)
         {
@@ -382,7 +379,6 @@ namespace vcs_ImageProcessingB
             return newbmp;
         }
 
-
         //雾化
         public Bitmap AtomizationImage(Bitmap bmp)
         {
@@ -417,11 +413,6 @@ namespace vcs_ImageProcessingB
             newlbmp.UnlockBits();
             return newbmp;
         }
-
-
-
-
-
     }
 
     //內存法

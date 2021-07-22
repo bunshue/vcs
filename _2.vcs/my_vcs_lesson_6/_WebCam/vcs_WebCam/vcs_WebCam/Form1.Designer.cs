@@ -34,6 +34,9 @@
             this.lb_fps = new System.Windows.Forms.Label();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rb3 = new System.Windows.Forms.RadioButton();
+            this.rb2 = new System.Windows.Forms.RadioButton();
+            this.rb1 = new System.Windows.Forms.RadioButton();
             this.bt_help = new System.Windows.Forms.Button();
             this.cb_image_processing = new System.Windows.Forms.CheckBox();
             this.cb_auto_save = new System.Windows.Forms.CheckBox();
@@ -65,6 +68,7 @@
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
+            this.timer_qr_code = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -113,12 +117,15 @@
             this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
             this.lb_main_mesg.Location = new System.Drawing.Point(24, 39);
             this.lb_main_mesg.Name = "lb_main_mesg";
-            this.lb_main_mesg.Size = new System.Drawing.Size(82, 24);
+            this.lb_main_mesg.Size = new System.Drawing.Size(154, 24);
             this.lb_main_mesg.TabIndex = 16;
-            this.lb_main_mesg.Text = "label1";
+            this.lb_main_mesg.Text = "lb_main_mesg";
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.rb3);
+            this.groupBox4.Controls.Add(this.rb2);
+            this.groupBox4.Controls.Add(this.rb1);
             this.groupBox4.Controls.Add(this.bt_help);
             this.groupBox4.Controls.Add(this.cb_image_processing);
             this.groupBox4.Controls.Add(this.cb_auto_save);
@@ -138,10 +145,45 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Operation";
             // 
+            // rb3
+            // 
+            this.rb3.AutoSize = true;
+            this.rb3.Location = new System.Drawing.Point(210, 193);
+            this.rb3.Name = "rb3";
+            this.rb3.Size = new System.Drawing.Size(29, 16);
+            this.rb3.TabIndex = 18;
+            this.rb3.Text = "3";
+            this.rb3.UseVisualStyleBackColor = true;
+            this.rb3.CheckedChanged += new System.EventHandler(this.rb_processing_CheckedChanged);
+            // 
+            // rb2
+            // 
+            this.rb2.AutoSize = true;
+            this.rb2.Location = new System.Drawing.Point(175, 193);
+            this.rb2.Name = "rb2";
+            this.rb2.Size = new System.Drawing.Size(29, 16);
+            this.rb2.TabIndex = 17;
+            this.rb2.Text = "2";
+            this.rb2.UseVisualStyleBackColor = true;
+            this.rb2.CheckedChanged += new System.EventHandler(this.rb_processing_CheckedChanged);
+            // 
+            // rb1
+            // 
+            this.rb1.AutoSize = true;
+            this.rb1.Checked = true;
+            this.rb1.Location = new System.Drawing.Point(150, 194);
+            this.rb1.Name = "rb1";
+            this.rb1.Size = new System.Drawing.Size(29, 16);
+            this.rb1.TabIndex = 5;
+            this.rb1.TabStop = true;
+            this.rb1.Text = "1";
+            this.rb1.UseVisualStyleBackColor = true;
+            this.rb1.CheckedChanged += new System.EventHandler(this.rb_processing_CheckedChanged);
+            // 
             // bt_help
             // 
             this.bt_help.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_help.Location = new System.Drawing.Point(188, 152);
+            this.bt_help.Location = new System.Drawing.Point(188, 122);
             this.bt_help.Name = "bt_help";
             this.bt_help.Size = new System.Drawing.Size(75, 36);
             this.bt_help.TabIndex = 16;
@@ -152,7 +194,7 @@
             // cb_image_processing
             // 
             this.cb_image_processing.AutoSize = true;
-            this.cb_image_processing.Location = new System.Drawing.Point(103, 194);
+            this.cb_image_processing.Location = new System.Drawing.Point(103, 174);
             this.cb_image_processing.Name = "cb_image_processing";
             this.cb_image_processing.Size = new System.Drawing.Size(48, 16);
             this.cb_image_processing.TabIndex = 15;
@@ -162,7 +204,7 @@
             // cb_auto_save
             // 
             this.cb_auto_save.AutoSize = true;
-            this.cb_auto_save.Location = new System.Drawing.Point(197, 193);
+            this.cb_auto_save.Location = new System.Drawing.Point(218, 173);
             this.cb_auto_save.Name = "cb_auto_save";
             this.cb_auto_save.Size = new System.Drawing.Size(72, 16);
             this.cb_auto_save.TabIndex = 14;
@@ -173,7 +215,7 @@
             // bt_fullscreen
             // 
             this.bt_fullscreen.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_fullscreen.Location = new System.Drawing.Point(103, 152);
+            this.bt_fullscreen.Location = new System.Drawing.Point(103, 122);
             this.bt_fullscreen.Name = "bt_fullscreen";
             this.bt_fullscreen.Size = new System.Drawing.Size(75, 36);
             this.bt_fullscreen.TabIndex = 13;
@@ -186,7 +228,7 @@
             this.cb_show_time.AutoSize = true;
             this.cb_show_time.Checked = true;
             this.cb_show_time.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_show_time.Location = new System.Drawing.Point(18, 193);
+            this.cb_show_time.Location = new System.Drawing.Point(18, 173);
             this.cb_show_time.Name = "cb_show_time";
             this.cb_show_time.Size = new System.Drawing.Size(72, 16);
             this.cb_show_time.TabIndex = 5;
@@ -207,7 +249,7 @@
             // bt_info
             // 
             this.bt_info.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_info.Location = new System.Drawing.Point(18, 152);
+            this.bt_info.Location = new System.Drawing.Point(18, 122);
             this.bt_info.Name = "bt_info";
             this.bt_info.Size = new System.Drawing.Size(75, 36);
             this.bt_info.TabIndex = 12;
@@ -240,7 +282,7 @@
             // bt_exit
             // 
             this.bt_exit.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_exit.Location = new System.Drawing.Point(188, 110);
+            this.bt_exit.Location = new System.Drawing.Point(188, 80);
             this.bt_exit.Name = "bt_exit";
             this.bt_exit.Size = new System.Drawing.Size(75, 36);
             this.bt_exit.TabIndex = 10;
@@ -251,7 +293,7 @@
             // bt_refresh
             // 
             this.bt_refresh.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_refresh.Location = new System.Drawing.Point(18, 110);
+            this.bt_refresh.Location = new System.Drawing.Point(18, 80);
             this.bt_refresh.Name = "bt_refresh";
             this.bt_refresh.Size = new System.Drawing.Size(75, 36);
             this.bt_refresh.TabIndex = 8;
@@ -262,7 +304,7 @@
             // bt_snapshot
             // 
             this.bt_snapshot.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_snapshot.Location = new System.Drawing.Point(103, 110);
+            this.bt_snapshot.Location = new System.Drawing.Point(103, 80);
             this.bt_snapshot.Name = "bt_snapshot";
             this.bt_snapshot.Size = new System.Drawing.Size(75, 36);
             this.bt_snapshot.TabIndex = 9;
@@ -475,6 +517,11 @@
             this.timer_auto_save.Interval = 3000;
             this.timer_auto_save.Tick += new System.EventHandler(this.timer_auto_save_Tick);
             // 
+            // timer_qr_code
+            // 
+            this.timer_qr_code.Interval = 1000;
+            this.timer_qr_code.Tick += new System.EventHandler(this.timer_qr_code_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -540,6 +587,10 @@
         private System.Windows.Forms.Timer timer_clock;
         private System.Windows.Forms.Timer timer_auto_save;
         private System.Windows.Forms.Button bt_help;
+        private System.Windows.Forms.RadioButton rb3;
+        private System.Windows.Forms.RadioButton rb2;
+        private System.Windows.Forms.RadioButton rb1;
+        private System.Windows.Forms.Timer timer_qr_code;
     }
 }
 

@@ -8,9 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Diagnostics;       //for Process
 
-using AForge.Video;             //需要添加這兩個.dll
+using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;
+
+using System.IO;
 
 //參考
 //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
@@ -18,6 +21,12 @@ using AForge.Video.DirectShow;
 
 //AForge下載鏈結
 //http://www.aforgenet.com/framework/downloads.html
+
+/*
+Aforge.Net 安裝路徑設定
+Solution Explorer(方案總管) => References(參考)(右鍵) => Add Reference(加入參考) => AForge.Net的Release資料夾
+加入AForge.Video.dll、AForge.Video.DirectShow.dll
+*/
 
 namespace vcs_WebCam
 {
@@ -226,6 +235,11 @@ namespace vcs_WebCam
             cb_image_processing.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             cb_auto_save.Location = new Point(x_st + dx * 2, y_st + dy * 3);
 
+            rb1.Location = new Point(x_st + dx * 1, y_st + dy * 3 + 25);
+            rb2.Location = new Point(x_st + dx * 1 + 30, y_st + dy * 3 + 25);
+            rb3.Location = new Point(x_st + dx * 1 + 60, y_st + dy * 3 + 25);
+
+
             //groupBox5
             x_st = 10;
             y_st = 20;
@@ -263,12 +277,17 @@ namespace vcs_WebCam
                         Cam = null;
                     }
                 }
-                System.Environment.Exit(0);
+                //System.Environment.Exit(0);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+
+            Application.Exit();
         }
 
         void Init_WebcamSetup()         //讀出目前相機資訊 存在各list, comboBox1~3和richTextBox1裏
@@ -518,11 +537,22 @@ namespace vcs_WebCam
         int frame_count_old = 0;    //計算fps用
         DateTime dt_old = DateTime.Now;
 
+        Graphics g;
+        //SolidBrush drawBrush;
+        Font drawFont1;
+
+        int[] saturation_array = new int[81];
+        int[] saturation_deny_array = new int[81];
+
+        int awb_x = 0;
+        int awb_y = 0;
+
+
         //自定義函數, 捕獲每一幀圖像並顯示
         private void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             frame_count++;
-            if (cb_show_time.Checked == false)      //直接顯示圖片
+            if ((cb_show_time.Checked == false) && (cb_image_processing.Checked == false))      //直接顯示圖片
             {
                 //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();  //直接顯示圖片, 不能做任何處理
                 bm = (Bitmap)eventArgs.Frame.Clone();
@@ -539,7 +569,6 @@ namespace vcs_WebCam
                 //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);
                 bm.RotateFlip(rotate_flip_type);                        //鏡射旋轉
 
-                Graphics g;
                 g = Graphics.FromImage(bm);
 
                 //顯示時間
@@ -549,71 +578,196 @@ namespace vcs_WebCam
                 int x_st = 0;
                 int y_st = 0;
 
-                drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                drawBrush = new SolidBrush(Color.Yellow);
-                drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                x_st = 10;
-                y_st = 10;
+                if (cb_show_time.Checked == true)
+                {
+                    drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                    drawBrush = new SolidBrush(Color.Yellow);
+                    drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                    x_st = 10;
+                    y_st = 10;
 
-                //在畫面的上方顯示時間
-                g.DrawString(drawDate, drawFont, drawBrush, x_st, y_st);
+                    //在畫面的上方顯示時間
+                    g.DrawString(drawDate, drawFont, drawBrush, x_st, y_st);
+                }
+
+                if (cb_image_processing.Checked == true)
+                {
+                    if (rb1.Checked == true)    //亮度
+                    {
+                        frame_cnt++;
+                        if ((frame_cnt % 30) == 0)
+                        {
+                            //Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+                            Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone();   //重新抓圖, 以免拿到上面寫過字的圖
+                            //bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                            int WW = bitmap1.Width;
+                            int HH = bitmap1.Height;
+                            int i;
+                            int j;
+                            Color pt;
+                            int ww = WW;
+                            int hh = HH;
+                            int total_Y = 0;
 
 
+                            for (j = 0; j < hh; j++)
+                            {
+                                for (i = 0; i < ww; i++)
+                                {
+                                    pt = bitmap1.GetPixel(0 + i, 0 + j);
+
+                                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                                    YUV yyy = new YUV();
+                                    yyy = RGBToYUV(pp);
+                                    total_Y += (int)yyy.Y;
+                                }
+                            }
+
+                            GC.Collect();       //回收資源
+                            lb_main_mesg.Text = "亮度 : " + (total_Y / (ww * hh)).ToString();
+
+                            /*  存圖備查
+                            String filename = string.Empty;
+                            filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                            //String file1 = file + ".jpg";
+                            String filename2 = filename + ".bmp";
+                            //String file3 = file + ".png";
+
+                            //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                            bitmap1.Save(filename2, ImageFormat.Bmp);
+                            //bitmap1.Save(@file3, ImageFormat.Png);
+                            */
+                        }
+                    }
+                    else if (rb2.Checked == true)   //做圖
+                    {
+                        bm = (Bitmap)eventArgs.Frame.Clone();
+                        g = Graphics.FromImage(bm);
+
+                        int i;
+                        int j;
+                        int A;
+                        int R;
+                        int G;
+                        int B;
+
+                        //int x_st = 0;
+                        //int y_st = 0;
+
+
+                        int W = bm.Width;
+                        int H = bm.Height;
+                        int center_x = W / 2;
+                        int center_y = H / 2;
+
+                        int awb_block = 32;     //AWB block size width, height
+                        int awb_search_size = 256 + 32;   //256X256
+
+
+                        x_st = center_x - awb_search_size / 2;
+                        y_st = center_y - awb_search_size / 2;
+
+                        for (i = 0; i <= (awb_search_size / awb_block); i++)
+                        {
+                            g.DrawLine(new Pen(Color.Red, 1), x_st, y_st + awb_block * i, x_st + awb_search_size - 1, y_st + awb_block * i);
+                            g.DrawLine(new Pen(Color.Red, 1), x_st + awb_block * i, y_st, x_st + awb_block * i, y_st + awb_search_size - 1);
+                        }
+
+                        for (i = 0; i < saturation_array.Length; i++)
+                        {
+                            saturation_array[i] = 0;
+                        }
+
+                        int upper_bound = 255;
+                        for (j = y_st; j < (y_st + awb_search_size); j++)
+                        {
+                            for (i = x_st; i < (x_st + awb_search_size); i++)
+                            {
+                                Color pp = bm.GetPixel(i, j);
+
+                                A = pp.A;
+                                R = pp.R;
+                                G = pp.G;
+                                B = pp.B;
+
+                                if ((R >= upper_bound) && (G >= upper_bound) && (B >= upper_bound))
+                                {
+                                    saturation_array[((i - x_st) / awb_block) + (((j - y_st) / awb_block)) * (awb_search_size / awb_block)]++;
+
+                                }
+                            }
+                        }
+
+                        SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(40, 0, 255, 0));
+                        SolidBrush semiTransBrushRed = new SolidBrush(Color.FromArgb(40, 255, 0, 0));
+                        //richTextBox1.Text += "\nresult:\n";
+
+                        int ii = 0;
+                        int jj = 0;
+                        int xx;
+                        int yy;
+
+                        for (i = 0; i < saturation_array.Length; i++)
+                        {
+                            //richTextBox1.Text += "saturation_array[" + i.ToString() + "] = " + saturation_array[i].ToString() + "\n";
+                            if (saturation_array[i] <= 40)
+                            {
+                                if (saturation_deny_array[i] == 1)
+                                {
+                                    xx = (i % (awb_search_size / awb_block));
+                                    yy = (i / (awb_search_size / awb_block));
+
+                                    g.FillRectangle(semiTransBrushRed, new Rectangle(x_st + awb_block * xx, y_st + awb_block * yy, awb_block, awb_block));
+                                }
+                                else
+                                {
+                                    xx = (i % (awb_search_size / awb_block));
+                                    yy = (i / (awb_search_size / awb_block));
+
+                                    g.FillRectangle(semiTransBrush, new Rectangle(x_st + awb_block * xx, y_st + awb_block * yy, awb_block, awb_block));
+                                }
+                            }
+                        }
+                        semiTransBrush = new SolidBrush(Color.FromArgb(60, 255, 0, 0));
+                        //g.FillRectangle(semiTransBrush, new Rectangle(x_st + awb_block * ii, y_st + awb_block * jj, awb_block, awb_block));
+                        //g.DrawRectangle(new Pen(Color.Red, 3), new Rectangle(x_st + awb_block * ii + 3, y_st + awb_block * jj + 3, awb_block - 6, awb_block - 6));
+                        g.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(x_st + awb_block * ii + 2, y_st + awb_block * jj + 2, awb_block - 4, awb_block - 4));
+
+                        drawBrush = new SolidBrush(Color.Red);
+                        drawFont1 = new Font("Arial", 16, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+
+                        x_st = 200;
+                        y_st = 20;
+                        //g.DrawString(tmp, drawFont1, drawBrush, x_st, y_st);
+
+                        x_st = 580;
+                        y_st = 390 - 100 + 30;
+
+                        g.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(x_st, y_st, 50, 25));
+                        g.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(x_st, y_st + 25, 50, 40));
+
+                        //upper_bound
+                        drawBrush = new SolidBrush(Color.Red);
+                        drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                        g.DrawString(upper_bound.ToString(), drawFont1, drawBrush, x_st, y_st);
+
+                        g.DrawString(saturation_array[awb_x + awb_y * 9].ToString(), drawFont1, drawBrush, x_st + 8, y_st + 30);
+                    }
+                    else if (rb3.Checked == true)   //TBD
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
 
                 pictureBox1.Image = bm;
 
                 GC.Collect();       //回收資源
-
-            }
-
-            if (cb_image_processing.Checked == true)
-            {
-                frame_cnt++;
-                if ((frame_cnt % 30) == 0)
-                {
-                    //Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-                    Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone();   //重新抓圖, 以免拿到上面寫過字的圖
-                    //bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipX);
-
-                    int WW = bitmap1.Width;
-                    int HH = bitmap1.Height;
-                    int i;
-                    int j;
-                    Color pt;
-                    int ww = WW;
-                    int hh = HH;
-                    int total_Y = 0;
-
-
-                    for (j = 0; j < hh; j++)
-                    {
-                        for (i = 0; i < ww; i++)
-                        {
-                            pt = bitmap1.GetPixel(0 + i, 0 + j);
-
-                            RGB pp = new RGB(pt.R, pt.G, pt.B);
-                            YUV yyy = new YUV();
-                            yyy = RGBToYUV(pp);
-                            total_Y += (int)yyy.Y;
-                        }
-                    }
-
-                    GC.Collect();       //回收資源
-                    lb_main_mesg.Text = "亮度 : " + (total_Y / (ww * hh)).ToString();
-
-                    /*  存圖備查
-                    String filename = string.Empty;
-                    filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-
-                    //String file1 = file + ".jpg";
-                    String filename2 = filename + ".bmp";
-                    //String file3 = file + ".png";
-
-                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                    bitmap1.Save(filename2, ImageFormat.Bmp);
-                    //bitmap1.Save(@file3, ImageFormat.Png);
-                    */
-                }
             }
         }
 
@@ -1045,6 +1199,75 @@ namespace vcs_WebCam
                 pictureBox1.Location = new Point(10, 270);
                 //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
                 this.pictureBox1.Focus();
+            }
+        }
+
+        private void rb_processing_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb1.Checked == true)
+            {
+                show_main_message("亮度", S_OK, 30);
+                timer_qr_code.Enabled = false;
+            }
+            else if (rb2.Checked == true)
+            {
+                show_main_message("畫圖", S_OK, 30);
+                timer_qr_code.Enabled = false;
+            }
+            else if (rb3.Checked == true)
+            {
+                show_main_message("QR Code", S_OK, 30);
+                timer_qr_code.Enabled = true;
+            }
+            else
+            {
+                timer_qr_code.Enabled = false;
+                show_main_message("", S_OK, 30);
+            }
+        }
+
+        private void timer_qr_code_Tick(object sender, EventArgs e)
+        {
+            if (camera_start == false)
+                return;
+
+            if (cb_image_processing.Checked == false)
+                return;
+
+            //  存圖用以後來解讀其中的資料
+            string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            Bitmap bmp = pictureBox1.Image as Bitmap;
+            bmp.Save(filename, ImageFormat.Jpeg);
+            //richTextBox1.Text += "pictureBox1存圖，存檔檔名：" + filename + "\n";
+
+            Bitmap bitmap = null;
+            //宣告 QRCode Reader 物件
+            ZXing.IBarcodeReader reader = new ZXing.BarcodeReader();
+
+            //讀取要解碼的圖片
+            FileStream fs = new FileStream(filename, FileMode.Open);
+            Byte[] data = new Byte[fs.Length];
+            // 把檔案讀取到位元組陣列
+            fs.Read(data, 0, data.Length);
+            fs.Close();
+            // 實例化一個記憶體資料流 MemoryStream，將位元組陣列放入
+            MemoryStream ms = new MemoryStream(data);
+            // 將記憶體資料流的資料放到 BitMap的物件中
+            bitmap = (Bitmap)Image.FromStream(ms);
+
+            //pictureBox2.Image = bitmap;       //將圖片顯示於 PictureBox 中
+
+            //進行解碼的動作
+            ZXing.Result result = reader.Decode(bitmap);
+
+            if (result != null)
+            {   //如果有成功解讀，則顯示文字
+                richTextBox1.Text += "OK ";
+                richTextBox1.Text += result.Text;
+            }
+            else
+            {
+                richTextBox1.Text += "解不出來 ";
             }
         }
     }

@@ -6,14 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Imaging;   //for ImageFormat
 
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;
 
 using System.Runtime.InteropServices;   //for Marshal
-
-using System.IO;
 
 /*
 Aforge.Net 安裝路徑設定
@@ -80,10 +79,6 @@ namespace vcs_WebCam_AForge4
                 //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
                 bm = (Bitmap)eventArgs.Frame.Clone();
                 //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
-
-
-                //if (rb2.Checked == true)
-                    //bm = SharpenImage(bm);
 
                 pictureBox1.Image = bm;
             }
@@ -428,58 +423,6 @@ namespace vcs_WebCam_AForge4
             lbmp.UnlockBits();
             newlbmp.UnlockBits();
             return newbmp;
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //  存圖用以後來解讀其中的資料
-            string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            Bitmap bmp = pictureBox1.Image as Bitmap;
-            bmp.Save(filename, ImageFormat.Jpeg);
-            //richTextBox1.Text += "pictureBox1存圖，存檔檔名：" + filename + "\n";
-
-
-            Bitmap bitmap = null;
-            //宣告 QRCode Reader 物件
-            ZXing.IBarcodeReader reader = new ZXing.BarcodeReader();
-
-            //讀取要解碼的圖片
-            FileStream fs = new FileStream(filename, FileMode.Open);
-            Byte[] data = new Byte[fs.Length];
-            // 把檔案讀取到位元組陣列
-            fs.Read(data, 0, data.Length);
-            fs.Close();
-            // 實例化一個記憶體資料流 MemoryStream，將位元組陣列放入
-            MemoryStream ms = new MemoryStream(data);
-            // 將記憶體資料流的資料放到 BitMap的物件中
-            bitmap = (Bitmap)Image.FromStream(ms);
-
-            //pictureBox2.Image = bitmap;       //將圖片顯示於 PictureBox 中
-
-            //進行解碼的動作
-            ZXing.Result result = reader.Decode(bitmap);
-
-            if (result != null)
-            {   //如果有成功解讀，則顯示文字
-                richTextBox1.Text += "OK ";
-                richTextBox1.Text += result.Text;
-            }
-            else
-            {
-                richTextBox1.Text += "解不出來 ";
-            }
-
-
-
-
-        }
-
-        private void rb2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rb2.Checked == true)
-                timer1.Enabled = true;
-            else
-                timer1.Enabled = false;
         }
     }
 
