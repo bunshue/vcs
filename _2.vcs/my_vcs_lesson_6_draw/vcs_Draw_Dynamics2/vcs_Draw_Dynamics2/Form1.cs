@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Drawing2D; //for DashStyle
 
-namespace vcs_Draw9_Example2
+namespace vcs_Draw_Dynamics2
 {
     public partial class Form1 : Form
     {

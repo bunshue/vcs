@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Draw9_Example2", "vcs_Draw9_Example2\vcs_Draw9_Example2.csproj", "{0B942E3A-AEFF-4643-8D35-4B9B74CB9063}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Draw_Dynamics2", "vcs_Draw_Dynamics2\vcs_Draw_Dynamics2.csproj", "{0B942E3A-AEFF-4643-8D35-4B9B74CB9063}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

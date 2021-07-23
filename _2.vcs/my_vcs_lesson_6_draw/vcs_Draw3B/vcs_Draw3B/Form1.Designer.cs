@@ -39,10 +39,6 @@
             this.timer_draw_star = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_polygon = new System.Windows.Forms.PictureBox();
             this.timer_draw_polygon = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_captcha3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_captcha2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_captcha1 = new System.Windows.Forms.PictureBox();
-            this.timer_draw_captcha = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_rectangle = new System.Windows.Forms.PictureBox();
             this.timer_draw_rectangle = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_random_pixel_image = new System.Windows.Forms.PictureBox();
@@ -74,9 +70,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polygon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
@@ -167,39 +160,6 @@
             this.timer_draw_polygon.Enabled = true;
             this.timer_draw_polygon.Interval = 1000;
             this.timer_draw_polygon.Tick += new System.EventHandler(this.timer_draw_polygon_Tick);
-            // 
-            // pictureBox_captcha3
-            // 
-            this.pictureBox_captcha3.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_captcha3.Location = new System.Drawing.Point(12, 568);
-            this.pictureBox_captcha3.Name = "pictureBox_captcha3";
-            this.pictureBox_captcha3.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox_captcha3.TabIndex = 61;
-            this.pictureBox_captcha3.TabStop = false;
-            // 
-            // pictureBox_captcha2
-            // 
-            this.pictureBox_captcha2.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_captcha2.Location = new System.Drawing.Point(12, 511);
-            this.pictureBox_captcha2.Name = "pictureBox_captcha2";
-            this.pictureBox_captcha2.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox_captcha2.TabIndex = 60;
-            this.pictureBox_captcha2.TabStop = false;
-            // 
-            // pictureBox_captcha1
-            // 
-            this.pictureBox_captcha1.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_captcha1.Location = new System.Drawing.Point(12, 455);
-            this.pictureBox_captcha1.Name = "pictureBox_captcha1";
-            this.pictureBox_captcha1.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox_captcha1.TabIndex = 59;
-            this.pictureBox_captcha1.TabStop = false;
-            // 
-            // timer_draw_captcha
-            // 
-            this.timer_draw_captcha.Enabled = true;
-            this.timer_draw_captcha.Interval = 1000;
-            this.timer_draw_captcha.Tick += new System.EventHandler(this.timer_draw_captcha_Tick);
             // 
             // pictureBox_rectangle
             // 
@@ -429,9 +389,6 @@
             this.Controls.Add(this.pictureBox_progressbar);
             this.Controls.Add(this.pictureBox_random_pixel_image);
             this.Controls.Add(this.pictureBox_rectangle);
-            this.Controls.Add(this.pictureBox_captcha3);
-            this.Controls.Add(this.pictureBox_captcha2);
-            this.Controls.Add(this.pictureBox_captcha1);
             this.Controls.Add(this.pictureBox_polygon);
             this.Controls.Add(this.pictureBox_star);
             this.Controls.Add(this.pictureBox_ellipse);
@@ -446,9 +403,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polygon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
@@ -478,10 +432,6 @@
         private System.Windows.Forms.Timer timer_draw_star;
         private System.Windows.Forms.PictureBox pictureBox_polygon;
         private System.Windows.Forms.Timer timer_draw_polygon;
-        private System.Windows.Forms.PictureBox pictureBox_captcha3;
-        private System.Windows.Forms.PictureBox pictureBox_captcha2;
-        private System.Windows.Forms.PictureBox pictureBox_captcha1;
-        private System.Windows.Forms.Timer timer_draw_captcha;
         private System.Windows.Forms.PictureBox pictureBox_rectangle;
         private System.Windows.Forms.Timer timer_draw_rectangle;
         private System.Windows.Forms.PictureBox pictureBox_random_pixel_image;

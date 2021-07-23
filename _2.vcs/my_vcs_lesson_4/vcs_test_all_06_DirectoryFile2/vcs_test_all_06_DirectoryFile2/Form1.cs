@@ -424,13 +424,13 @@ namespace vcs_test_all_06_DirectoryFile2
         private void bt_save_Click(object sender, EventArgs e)
         {
             string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-            richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔, 這樣會出現怪字型, 還是一行一行儲存比較好
+            //XXX richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔, 這樣會出現怪字型, 還是一行一行儲存比較好
 
             FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式            
             sw.Write(richTextBox1.Text);
             sw.Close();
-            richTextBox1.Text += "存檔檔名: " + filename + "\n";
+            richTextBox1.Text += "存檔完成, 檔名 : " + filename + "\n";
         }
     }
 }

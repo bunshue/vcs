@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;      //for TextRenderingHint
 
 // 全自動區分電腦和人類的公開圖靈測試
 //（英語：Completely Automated Public Turing test to tell Computers and Humans Apart，簡稱CAPTCHA）
@@ -25,17 +26,53 @@ namespace vcs_Draw_Captcha
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             CreateImage();
 
             CodeImage(CheckCode(), pictureBox3);
+        }
+
+        void show_item_location()
+        {
+            int W = 250;
+            int H = 250;
+
+            pictureBox_captcha1.Size = new Size(W + 50, 110);
+            pictureBox_captcha2.Size = new Size(W + 50, 110);
+            pictureBox_captcha3.Size = new Size(W + 50, 110);
+
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            x_st = 20;
+            y_st = 20;
+            dx = 160;
+            dy = 50;
+
+            pictureBox_captcha1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox_captcha2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 120);
+            pictureBox_captcha3.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 120 * 2);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             CreateImage();
 
-
             CodeImage(CheckCode(), pictureBox3);
+
+            draw_captcha1();
+            draw_captcha2();
+            draw_captcha3();
         }
 
         //中文驗證法碼 ST
@@ -221,7 +258,250 @@ namespace vcs_Draw_Captcha
             catch
             { }
         }
+
         //英數驗證碼 SP
+
+
+        //3種 Captcha ST
+
+        void draw_captcha1()
+        {
+            string txt = "This is a lion-mouse";
+
+            Bitmap bm = MakeCaptchaImge1(txt,
+                50, 70,
+                pictureBox_captcha1.ClientSize.Width,
+                pictureBox_captcha1.ClientSize.Height);
+            pictureBox_captcha1.Image = bm;
+        }
+
+        void draw_captcha2()
+        {
+            string txt = "This is a lion-mouse";
+
+            using (Font the_font = new Font("Times New Roman", 30))
+            {
+                pictureBox_captcha2.Image = MakeCaptchaImage2(txt,
+                    pictureBox_captcha2.ClientSize.Width,
+                    pictureBox_captcha2.ClientSize.Height,
+                    the_font, Brushes.Blue);
+            }
+        }
+
+        //產生驗證圖片 ST
+        void draw_captcha3()
+        {
+            //產生驗證圖片
+
+            //從已知幾個元素中任意選出幾個
+            int num = 10;
+
+            string vaildNumAnswer = "";
+
+            Random rr = new Random();
+
+            List<char> myList = new List<char>();   //用來存放篩選後的字
+
+            /*  不均勻分配
+            myList.Add('A');
+            myList.Add('A');
+            myList.Add('A');
+            myList.Add('B');
+            myList.Add('C');
+            */
+
+            //特定分配
+            for (int i = 50; i <= 57; i++)
+                //ASCII碼，找出數字
+                myList.Add((char)i); //從2開始，排除了0，1，放入列表
+
+
+            for (int i = 65; i <= 90; i++)
+            {
+                //ASCII碼，找出大寫英文
+                if (i == 73) continue; //排除I
+                if (i == 79) continue; //排除O
+                myList.Add((char)i);
+            }
+
+
+            for (int i = 97; i <= 122; i++)
+            {
+                //參考ASCII碼，找出小寫英文
+                if (i == 108) continue; //排除l
+                if (i == 111) continue; //排除o
+                myList.Add((char)i);
+            }
+
+
+            char[] texts = new char[myList.Count];
+            texts = myList.ToArray();
+
+            //亂數產生驗證答案
+            vaildNumAnswer = "";
+            for (int i = 1; i <= num; i++)
+            {
+                char c = texts[rr.Next(texts.Length)];
+                vaildNumAnswer += c;
+            }
+            //richTextBox1.Text += vaildNumAnswer + "\n";
+
+            RenderImage(vaildNumAnswer);
+        }
+
+        //產生驗證圖片
+        private void RenderImage(string vaildNumAnswer)
+        {
+            Random rr = new Random();
+
+            int num = 10;
+            int ww = 30 * 2 + num * 20;
+            //寬度=(留邊)30*2 + 每個字*20
+            int hh = 70;
+
+            Bitmap vaildNumImage = new Bitmap(ww, hh);
+            Graphics g = Graphics.FromImage(vaildNumImage);
+
+            //產生背景色
+            Color cc = Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256));
+            Brush bb = new SolidBrush(cc);
+            g.FillRectangle(bb, 0, 0, ww, hh);
+
+            //產生字色，斥掉背景色
+            bb = new SolidBrush(Color.FromArgb(cc.R ^ 255, cc.G ^ 255, cc.B ^ 255));
+            //產生字體
+            Font ff = new Font("Arial Black", 18, FontStyle.Regular);
+            //逐一畫每一個字
+
+            for (int i = 0; i < vaildNumAnswer.Length; i++)
+            {
+                g.DrawString(vaildNumAnswer.Substring(i, 1), ff, bb, i * 20 + 30, 20);
+            }
+
+            //加入雜點
+            bb = new SolidBrush(Color.White);
+            for (int i = 1; i <= 500; i++)
+            {
+                g.FillRectangle(bb, rr.Next(ww), rr.Next(hh), 2, 2);
+            }
+            pictureBox_captcha3.Image = vaildNumImage;
+        }
+        //產生驗證圖片 SP
+
+        private Random Rand = new Random();
+
+        // Make a captcha image for the text.
+        private Bitmap MakeCaptchaImge1(string txt, int min_size, int max_size, int wid, int hgt)
+        {
+            // Make the bitmap and associated Graphics object.
+            Bitmap bm = new Bitmap(wid, hgt);
+            using (Graphics g = Graphics.FromImage(bm))
+            {
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.Clear(Color.White);
+
+                // See how much room is available for each character.
+                int ch_wid = (int)(wid / txt.Length);
+
+                // Draw each character.
+                for (int i = 0; i < txt.Length; i++)
+                {
+                    float font_size = Rand.Next(min_size, max_size);
+                    using (Font the_font = new Font("Times New Roman", font_size, FontStyle.Bold))
+                    {
+                        DrawCharacter1(txt.Substring(i, 1), g, the_font, i * ch_wid, ch_wid, wid, hgt);
+                    }
+                }
+            }
+
+            return bm;
+        }
+
+        // Draw a deformed character at this position.
+        private int PreviousAngle = 0;
+        private void DrawCharacter1(string txt, Graphics g, Font the_font, int X, int ch_wid, int wid, int hgt)
+        {
+            // Center the text.
+            using (StringFormat string_format = new StringFormat())
+            {
+                string_format.Alignment = StringAlignment.Center;
+                string_format.LineAlignment = StringAlignment.Center;
+                RectangleF rectf = new RectangleF(X, 0, ch_wid, hgt);
+
+                // Convert the text into a path.
+                using (GraphicsPath graphics_path = new GraphicsPath())
+                {
+                    graphics_path.AddString(txt,
+                        the_font.FontFamily, (int)(Font.Style),
+                        the_font.Size, rectf, string_format);
+
+                    // Make random warping parameters.
+                    float x1 = (float)(X + Rand.Next(ch_wid) / 2);
+                    float y1 = (float)(Rand.Next(hgt) / 2);
+                    float x2 = (float)(X + ch_wid / 2 + Rand.Next(ch_wid) / 2);
+                    float y2 = (float)(hgt / 2 + Rand.Next(hgt) / 2);
+                    PointF[] pts = {
+                    new PointF(
+                        (float)(X + Rand.Next(ch_wid) / 4),
+                        (float)(Rand.Next(hgt) / 4)),
+                    new PointF(
+                        (float)(X + ch_wid - Rand.Next(ch_wid) / 4),
+                        (float)(Rand.Next(hgt) / 4)),
+                    new PointF(
+                        (float)(X + Rand.Next(ch_wid) / 4),
+                        (float)(hgt - Rand.Next(hgt) / 4)),
+                    new PointF(
+                        (float)(X + ch_wid - Rand.Next(ch_wid) / 4),
+                        (float)(hgt - Rand.Next(hgt) / 4))
+                };
+                    Matrix mat = new Matrix();
+                    graphics_path.Warp(pts, rectf, mat,
+                        WarpMode.Perspective, 0);
+
+                    // Rotate a bit randomly.
+                    float dx = (float)(X + ch_wid / 2);
+                    float dy = (float)(hgt / 2);
+                    g.TranslateTransform(-dx, -dy, MatrixOrder.Append);
+                    int angle = PreviousAngle;
+                    do
+                    {
+                        angle = Rand.Next(-30, 30);
+                    } while (Math.Abs(angle - PreviousAngle) < 20);
+                    PreviousAngle = angle;
+                    g.RotateTransform(angle, MatrixOrder.Append);
+                    g.TranslateTransform(dx, dy, MatrixOrder.Append);
+
+                    // Draw the text.
+                    g.FillPath(Brushes.Blue, graphics_path);
+                    g.ResetTransform();
+                }
+            }
+        }
+
+        // Draw the words with letters overlapping each other.
+        private Bitmap MakeCaptchaImage2(string txt, int wid, int hgt, Font the_font, Brush the_brush)
+        {
+            Bitmap bm = new Bitmap(wid, hgt);
+            using (Graphics g = Graphics.FromImage(bm))
+            {
+                g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+                int x = 0;
+                foreach (char ch in txt.ToCharArray())
+                {
+                    SizeF ch_size = g.MeasureString(ch.ToString(), the_font);
+                    int y = (int)(Rand.NextDouble() * (hgt - ch_size.Height));
+                    g.DrawString(ch.ToString(), the_font, the_brush, x, y);
+                    x += (int)(ch_size.Width * 0.35);
+                }
+            }
+            return bm;
+        }
+
+        //3種 Captcha SP
+
+
+
 
     }
 }

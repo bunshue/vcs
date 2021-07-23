@@ -34,9 +34,16 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha1 = new System.Windows.Forms.PictureBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -49,7 +56,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(329, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(676, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(374, 535);
             this.richTextBox1.TabIndex = 1;
@@ -77,11 +84,52 @@
             this.pictureBox3.TabIndex = 3;
             this.pictureBox3.TabStop = false;
             // 
+            // pictureBox_captcha3
+            // 
+            this.pictureBox_captcha3.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox_captcha3.Location = new System.Drawing.Point(298, 125);
+            this.pictureBox_captcha3.Name = "pictureBox_captcha3";
+            this.pictureBox_captcha3.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox_captcha3.TabIndex = 64;
+            this.pictureBox_captcha3.TabStop = false;
+            // 
+            // pictureBox_captcha2
+            // 
+            this.pictureBox_captcha2.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox_captcha2.Location = new System.Drawing.Point(298, 68);
+            this.pictureBox_captcha2.Name = "pictureBox_captcha2";
+            this.pictureBox_captcha2.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox_captcha2.TabIndex = 63;
+            this.pictureBox_captcha2.TabStop = false;
+            // 
+            // pictureBox_captcha1
+            // 
+            this.pictureBox_captcha1.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox_captcha1.Location = new System.Drawing.Point(298, 12);
+            this.pictureBox_captcha1.Name = "pictureBox_captcha1";
+            this.pictureBox_captcha1.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox_captcha1.TabIndex = 62;
+            this.pictureBox_captcha1.TabStop = false;
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(975, 517);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(75, 30);
+            this.bt_clear.TabIndex = 65;
+            this.bt_clear.Text = "clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(715, 559);
+            this.ClientSize = new System.Drawing.Size(1062, 559);
+            this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.pictureBox_captcha3);
+            this.Controls.Add(this.pictureBox_captcha2);
+            this.Controls.Add(this.pictureBox_captcha1);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.richTextBox1);
@@ -92,6 +140,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -103,6 +154,10 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox_captcha3;
+        private System.Windows.Forms.PictureBox pictureBox_captcha2;
+        private System.Windows.Forms.PictureBox pictureBox_captcha1;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

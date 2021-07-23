@@ -96,6 +96,7 @@
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.bt_clear3 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.bt_save2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -808,11 +809,24 @@
             this.label7.TabIndex = 93;
             this.label7.Text = "C# richTextBox 點兩下全選";
             // 
+            // bt_save2
+            // 
+            this.bt_save2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_save2.BackgroundImage")));
+            this.bt_save2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_save2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_save2.Location = new System.Drawing.Point(1076, 244);
+            this.bt_save2.Name = "bt_save2";
+            this.bt_save2.Size = new System.Drawing.Size(40, 40);
+            this.bt_save2.TabIndex = 94;
+            this.bt_save2.UseVisualStyleBackColor = true;
+            this.bt_save2.Click += new System.EventHandler(this.bt_save2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1395, 837);
+            this.Controls.Add(this.bt_save2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.bt_clear3);
             this.Controls.Add(this.richTextBox3);
@@ -955,6 +969,7 @@
         private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.Button bt_clear3;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button bt_save2;
     }
 }
 

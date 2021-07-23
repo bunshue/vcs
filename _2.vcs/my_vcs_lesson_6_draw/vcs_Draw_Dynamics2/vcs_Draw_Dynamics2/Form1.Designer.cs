@@ -1,4 +1,4 @@
-﻿namespace vcs_Draw9_Example2
+﻿namespace vcs_Draw_Dynamics2
 {
     partial class Form1
     {

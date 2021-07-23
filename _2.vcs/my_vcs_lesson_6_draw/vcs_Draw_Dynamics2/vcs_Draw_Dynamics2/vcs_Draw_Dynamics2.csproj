@@ -8,8 +8,8 @@
     <ProjectGuid>{0B942E3A-AEFF-4643-8D35-4B9B74CB9063}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Draw9_Example2</RootNamespace>
-    <AssemblyName>vcs_Draw9_Example2</AssemblyName>
+    <RootNamespace>vcs_Draw_Dynamics2</RootNamespace>
+    <AssemblyName>vcs_Draw_Dynamics2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

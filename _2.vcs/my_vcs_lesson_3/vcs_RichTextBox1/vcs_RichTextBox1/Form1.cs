@@ -169,6 +169,7 @@ namespace vcs_RichTextBox1
             bt_open2.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
             bt_font.Location = new Point(richTextBox1.Location.X + bt_open2.Size.Width + 5, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
             bt_save.Location = new Point(richTextBox1.Location.X + bt_open2.Size.Width + 5 + bt_font.Size.Width + 5, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
+            bt_save2.Location = new Point(richTextBox1.Location.X + bt_open2.Size.Width + 5 + bt_font.Size.Width + 5 + bt_save.Size.Width + 5, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
@@ -830,6 +831,18 @@ namespace vcs_RichTextBox1
             }
         }
 
+        private void bt_save2_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            //XXX richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔, 這樣會出現怪字型, 還是一行一行儲存比較好
+
+            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式            
+            sw.Write(richTextBox1.Text);
+            sw.Close();
+            richTextBox2.Text += "存檔完成, 檔名 : " + filename + "\n";
+        }
+
         private void bt_set_font_size_Click(object sender, EventArgs e)
         {
             int textSize = int.Parse(textBox2.Text);
@@ -970,5 +983,6 @@ namespace vcs_RichTextBox1
             richTextBox1.Text += "C# richTextBox 點兩下全選\n";
             richTextBox1.SelectAll();
         }
+
     }
 }
