@@ -156,5 +156,73 @@ namespace vcs_axWindowsMediaPlayer3_playlist
         }
 
 
+        public void m3uCreate(string FileDir)   //建立 m3u 檔案
+        {
+            FileStream fs;//宣告一個公開以文件為主的 Stream對象，既支援同步讀寫操作，也支援異步讀寫操作
+            Byte[] info;//宣告一個字節數組
+            if (File.Exists(FileDir)) //如果文件存在,則退出操作
+            {
+                //MessageBox.Show("文件已存在，請重新設定文件名！");//彈出訊息提示
+                return;//直接傳回
+            }
+            else    //如果文件不存在,則建立File.CreateText對像
+            {
+                fs = File.Create(FileDir);//建立M3U文件
+            }
+            info = new UTF8Encoding(true).GetBytes("#EXTM3U");//定義M3U文件的編碼方式
+            fs.Write(info, 0, info.Length);//向數據流中寫入內容
+            fs.Close();//關閉FileStream對像
+            fs.Dispose();//釋放FileStream對像所佔用的資源
+        }
+
+        public void m3uWrite(string FDir, string FileDir)
+        {
+            if (!File.Exists(FileDir))//當不存在文件路徑時
+            {
+                MessageBox.Show("文件不存在！aaaa");//彈出訊息提示
+                return;//直接傳回
+            }
+            StreamWriter sw = new StreamWriter(FileDir, true, Encoding.Default);//定義完成一個 TextWriter對象，使其以一種特定的編碼向流中寫入字符
+            sw.WriteLine();//將行結束符寫入文字流
+            sw.Write(FDir, Encoding.Default);//將數據流中的文件以特定的編碼方式寫入指定路徑中的文件
+            sw.Flush();//清理目前編寫器的所有緩衝區，並使所有緩衝數據寫入基礎串流
+            sw.Close();//關閉目前的 StreamWriter 對像和基礎串流
+            sw.Dispose();//釋放由此 TextWriter 對像使用的所有資源
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //建立mp3播放清單m3u檔案
+
+            string m3u_filename = Application.StartupPath + "\\m3u_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".m3u"; //播放清單檔案
+            richTextBox1.Text += "建立一個M3U文件 : " + m3u_filename + "\n";
+            m3uCreate(m3u_filename);//建立一個M3U文件
+
+            string full_filename;   //全名
+            string short_filename;  //簡名
+
+            full_filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            short_filename = Path.GetFileNameWithoutExtension(full_filename);//保存打開的文件的文件名
+            m3uWrite(full_filename, m3u_filename);//向M3U文件中寫入內容
+
+            /*
+            full_filename = @"D:\內視鏡影片\16.010.mp3";
+            short_filename = Path.GetFileNameWithoutExtension(full_filename);//保存打開的文件的文件名
+            m3uWrite(full_filename, m3u_filename);//向M3U文件中寫入內容
+
+            full_filename = @"D:\內視鏡影片\16.010.mp3";
+            short_filename = Path.GetFileNameWithoutExtension(full_filename);//保存打開的文件的文件名
+            m3uWrite(full_filename, m3u_filename);//向M3U文件中寫入內容
+            */
+
+            full_filename = @"C:\_git\vcs\_2.vcs\______test_files\_wav\start.wav";
+            short_filename = Path.GetFileNameWithoutExtension(full_filename);//保存打開的文件的文件名
+            m3uWrite(full_filename, m3u_filename);//向M3U文件中寫入內容
+
+        }
+
+
+
+
     }
 }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("EstablishAndExpunctionM3U")]
+[assembly: AssemblyTitle("vcs_Screensaver3")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("EstablishAndExpunctionM3U")]
+[assembly: AssemblyProduct("vcs_Screensaver3")]
 [assembly: AssemblyCopyright("Copyright ©  2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("fdbaeffb-fe6a-4f96-a82c-eaf57fe89b4d")]
+[assembly: Guid("2f79c786-5a97-43f8-94bd-b64fde68eaaa")]
 
 // 程序集的版本信息由下面四个值组成:
 //

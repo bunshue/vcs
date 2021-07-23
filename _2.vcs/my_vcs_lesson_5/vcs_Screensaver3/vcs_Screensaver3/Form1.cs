@@ -10,7 +10,7 @@ using System.Windows.Forms;
 //參考/加入參考/ 選擇 dll / AxInterop.WMPLib.dll 和 Interop.WMPLib.dll
 //Interop.WMPLib.dll的屬性的內嵌Interop型別 改成false
 
-namespace SongPlayShroudAegis
+namespace vcs_Screensaver3
 {
     public partial class Form1 : Form
     {

@@ -69,6 +69,10 @@
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
             this.timer_qr_code = new System.Windows.Forms.Timer(this.components);
+            this.cb_show_grid = new System.Windows.Forms.CheckBox();
+            this.rb_5X5 = new System.Windows.Forms.RadioButton();
+            this.rb_4X4 = new System.Windows.Forms.RadioButton();
+            this.rb_3X3 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -85,7 +89,7 @@
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1086, 272);
+            this.groupBox1.Size = new System.Drawing.Size(1270, 272);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -93,7 +97,7 @@
             // 
             this.groupBox5.Controls.Add(this.lb_fps);
             this.groupBox5.Controls.Add(this.lb_main_mesg);
-            this.groupBox5.Location = new System.Drawing.Point(798, 37);
+            this.groupBox5.Location = new System.Drawing.Point(958, 37);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(254, 212);
             this.groupBox5.TabIndex = 17;
@@ -123,6 +127,10 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.rb_5X5);
+            this.groupBox4.Controls.Add(this.rb_4X4);
+            this.groupBox4.Controls.Add(this.rb_3X3);
+            this.groupBox4.Controls.Add(this.cb_show_grid);
             this.groupBox4.Controls.Add(this.rb3);
             this.groupBox4.Controls.Add(this.rb2);
             this.groupBox4.Controls.Add(this.rb1);
@@ -140,7 +148,7 @@
             this.groupBox4.Controls.Add(this.bt_snapshot);
             this.groupBox4.Location = new System.Drawing.Point(496, 30);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(296, 215);
+            this.groupBox4.Size = new System.Drawing.Size(384, 215);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Operation";
@@ -522,11 +530,54 @@
             this.timer_qr_code.Interval = 1000;
             this.timer_qr_code.Tick += new System.EventHandler(this.timer_qr_code_Tick);
             // 
+            // cb_show_grid
+            // 
+            this.cb_show_grid.AutoSize = true;
+            this.cb_show_grid.Location = new System.Drawing.Point(296, 173);
+            this.cb_show_grid.Name = "cb_show_grid";
+            this.cb_show_grid.Size = new System.Drawing.Size(48, 16);
+            this.cb_show_grid.TabIndex = 19;
+            this.cb_show_grid.Text = "格線";
+            this.cb_show_grid.UseVisualStyleBackColor = true;
+            this.cb_show_grid.CheckedChanged += new System.EventHandler(this.cb_show_grid_CheckedChanged);
+            // 
+            // rb_5X5
+            // 
+            this.rb_5X5.AutoSize = true;
+            this.rb_5X5.Location = new System.Drawing.Point(319, 144);
+            this.rb_5X5.Name = "rb_5X5";
+            this.rb_5X5.Size = new System.Drawing.Size(43, 16);
+            this.rb_5X5.TabIndex = 22;
+            this.rb_5X5.Text = "5X5";
+            this.rb_5X5.UseVisualStyleBackColor = true;
+            // 
+            // rb_4X4
+            // 
+            this.rb_4X4.AutoSize = true;
+            this.rb_4X4.Checked = true;
+            this.rb_4X4.Location = new System.Drawing.Point(319, 122);
+            this.rb_4X4.Name = "rb_4X4";
+            this.rb_4X4.Size = new System.Drawing.Size(43, 16);
+            this.rb_4X4.TabIndex = 21;
+            this.rb_4X4.TabStop = true;
+            this.rb_4X4.Text = "4X4";
+            this.rb_4X4.UseVisualStyleBackColor = true;
+            // 
+            // rb_3X3
+            // 
+            this.rb_3X3.AutoSize = true;
+            this.rb_3X3.Location = new System.Drawing.Point(319, 100);
+            this.rb_3X3.Name = "rb_3X3";
+            this.rb_3X3.Size = new System.Drawing.Size(43, 16);
+            this.rb_3X3.TabIndex = 20;
+            this.rb_3X3.Text = "3X3";
+            this.rb_3X3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1146, 757);
+            this.ClientSize = new System.Drawing.Size(1387, 757);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.richTextBox1);
@@ -591,6 +642,10 @@
         private System.Windows.Forms.RadioButton rb2;
         private System.Windows.Forms.RadioButton rb1;
         private System.Windows.Forms.Timer timer_qr_code;
+        private System.Windows.Forms.CheckBox cb_show_grid;
+        private System.Windows.Forms.RadioButton rb_5X5;
+        private System.Windows.Forms.RadioButton rb_4X4;
+        private System.Windows.Forms.RadioButton rb_3X3;
     }
 }
 

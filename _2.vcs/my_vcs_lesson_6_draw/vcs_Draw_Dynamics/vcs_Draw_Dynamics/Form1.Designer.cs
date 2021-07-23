@@ -36,6 +36,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.lb_mesg = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
@@ -62,9 +65,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1023, 120);
+            this.richTextBox1.Location = new System.Drawing.Point(1023, 159);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(301, 492);
+            this.richTextBox1.Size = new System.Drawing.Size(301, 453);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -84,7 +87,8 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(1023, 69);
+            this.trackBar1.LargeChange = 1;
+            this.trackBar1.Location = new System.Drawing.Point(1023, 108);
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(301, 45);
@@ -102,11 +106,43 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1249, 12);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Info";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // lb_mesg
+            // 
+            this.lb_mesg.AutoSize = true;
+            this.lb_mesg.Location = new System.Drawing.Point(1023, 64);
+            this.lb_mesg.Name = "lb_mesg";
+            this.lb_mesg.Size = new System.Drawing.Size(33, 12);
+            this.lb_mesg.TabIndex = 7;
+            this.lb_mesg.Text = "label1";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(1249, 64);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Reset";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1336, 627);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.lb_mesg);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.button2);
@@ -132,6 +168,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label lb_mesg;
+        private System.Windows.Forms.Button button4;
     }
 }
 

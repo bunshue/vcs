@@ -1,4 +1,4 @@
-﻿namespace SongPlayShroudAegis
+﻿namespace vcs_Screensaver3
 {
     partial class Form1
     {

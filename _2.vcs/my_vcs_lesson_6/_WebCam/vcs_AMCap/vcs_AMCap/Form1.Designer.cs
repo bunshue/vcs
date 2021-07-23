@@ -37,15 +37,12 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
             this.timer_focus = new System.Windows.Forms.Timer(this.components);
             this.numericUpDown_time = new System.Windows.Forms.NumericUpDown();
             this.rb_3X3 = new System.Windows.Forms.RadioButton();
             this.rb_4X4 = new System.Windows.Forms.RadioButton();
             this.rb_5X5 = new System.Windows.Forms.RadioButton();
-            this.lb_webcam_info = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_time)).BeginInit();
             this.SuspendLayout();
@@ -121,26 +118,6 @@
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(12, 369);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 21);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "按 S 存檔";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(12, 412);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 21);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "按 X 離開";
-            // 
             // timer_auto_save
             // 
             this.timer_auto_save.Interval = 3000;
@@ -204,28 +181,15 @@
             this.rb_5X5.Text = "5X5";
             this.rb_5X5.UseVisualStyleBackColor = true;
             // 
-            // lb_webcam_info
-            // 
-            this.lb_webcam_info.AutoSize = true;
-            this.lb_webcam_info.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_webcam_info.Location = new System.Drawing.Point(12, 464);
-            this.lb_webcam_info.Name = "lb_webcam_info";
-            this.lb_webcam_info.Size = new System.Drawing.Size(76, 21);
-            this.lb_webcam_info.TabIndex = 16;
-            this.lb_webcam_info.Text = "webcam";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(959, 706);
-            this.Controls.Add(this.lb_webcam_info);
             this.Controls.Add(this.rb_5X5);
             this.Controls.Add(this.rb_4X4);
             this.Controls.Add(this.rb_3X3);
             this.Controls.Add(this.numericUpDown_time);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
@@ -253,15 +217,12 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer timer_auto_save;
         private System.Windows.Forms.Timer timer_focus;
         private System.Windows.Forms.NumericUpDown numericUpDown_time;
         private System.Windows.Forms.RadioButton rb_3X3;
         private System.Windows.Forms.RadioButton rb_4X4;
         private System.Windows.Forms.RadioButton rb_5X5;
-        private System.Windows.Forms.Label lb_webcam_info;
     }
 }
 

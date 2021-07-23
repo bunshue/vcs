@@ -48,6 +48,10 @@ namespace vcs_WebCam
         int timer_display_show_main_mesg_count_target = 0;
 
         bool flag_fullscreen = false;
+        bool flag_show_time = true;     //顯示時間
+        bool flag_show_grid = true;     //顯示格線
+        bool flag_invert = false;        //反相, SC700需要反相
+        bool flag_auto_save = false;    //自動存檔
 
         public struct RGB
         {
@@ -162,7 +166,7 @@ namespace vcs_WebCam
             dx = 210;
             dy = 42;
 
-            groupBox1.Size = new Size(1120, 250);
+            groupBox1.Size = new Size(1120+100, 250);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             pictureBox1.Size = new Size(640, 480);
@@ -176,14 +180,14 @@ namespace vcs_WebCam
             int h = 220;
             groupBox2.Size = new Size(w, h);
             groupBox3.Size = new Size(w, h);
-            groupBox4.Size = new Size(w, h);
+            groupBox4.Size = new Size(w+100, h);
             groupBox5.Size = new Size(w, h);
 
             dx = w + 20;
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox5.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox5.Location = new Point(x_st + dx * 3+100, y_st + dy * 0);
 
             //groupBox2
             x_st = 10;
@@ -234,11 +238,19 @@ namespace vcs_WebCam
             cb_show_time.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             cb_image_processing.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             cb_auto_save.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            cb_show_grid.Location = new Point(x_st + dx * 3, y_st + dy * 3);
 
             rb1.Location = new Point(x_st + dx * 1, y_st + dy * 3 + 25);
             rb2.Location = new Point(x_st + dx * 1 + 30, y_st + dy * 3 + 25);
             rb3.Location = new Point(x_st + dx * 1 + 60, y_st + dy * 3 + 25);
 
+            rb_3X3.Location = new Point(x_st + dx * 3+45, y_st + dy * 3-20);
+            rb_4X4.Location = new Point(x_st + dx * 3+45, y_st + dy * 3);
+            rb_5X5.Location = new Point(x_st + dx * 3+45, y_st + dy * 3+20);
+
+            rb_3X3.Visible = false;
+            rb_4X4.Visible = false;
+            rb_5X5.Visible = false;
 
             //groupBox5
             x_st = 10;
@@ -1079,16 +1091,23 @@ namespace vcs_WebCam
                 //String file1 = file + ".jpg";
                 String filename2 = filename + ".bmp";
                 //String file3 = file + ".png";
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename2, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
 
-                //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                bitmap1.Save(filename2, ImageFormat.Bmp);
-                //bitmap1.Save(@file3, ImageFormat.Png);
-
-                richTextBox1.Text += "存檔成功\n";
-                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                show_main_message("已存檔", S_OK, 10);
+                    richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                    show_main_message("已存檔", S_OK, 10);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                    show_main_message("存檔失敗", S_OK, 30);
+                }
             }
             else
             {
@@ -1269,6 +1288,25 @@ namespace vcs_WebCam
             {
                 richTextBox1.Text += "解不出來 ";
             }
+        }
+
+        private void cb_show_grid_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_show_grid.Checked == true)
+            {
+                flag_show_grid = true;
+                rb_3X3.Visible = true;
+                rb_4X4.Visible = true;
+                rb_5X5.Visible = true;
+            }
+            else
+            {
+                flag_show_grid = false;
+                rb_3X3.Visible = false;
+                rb_4X4.Visible = false;
+                rb_5X5.Visible = false;
+            }
+
         }
     }
 }

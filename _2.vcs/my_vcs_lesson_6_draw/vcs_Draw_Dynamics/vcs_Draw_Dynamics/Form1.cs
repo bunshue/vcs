@@ -23,9 +23,17 @@ namespace vcs_Draw_Dynamics
         int vx = 10;
         int vy = 0;
 
+        int index = -1;
+        List<int[]> pts = new List<int[]>();    //二維List for int
+
+        //List<PointF[]> pts = new List<PointF[]>();
+
+        int mass = 1;
+
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,6 +44,8 @@ namespace vcs_Draw_Dynamics
             H = pictureBox1.Height;
             x_st = 0;
             y_st = 500;
+            lb_mesg.Text = "";
+            trackBar1_Scroll(sender, e);
         }
 
         void show_item_location()
@@ -50,13 +60,21 @@ namespace vcs_Draw_Dynamics
             int dy;
 
             //button
-            x_st = 850;
+            x_st = 1500;
             y_st = 10;
             dx = 110;
             dy = 45;
 
-            //richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            //richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button4.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+
+            lb_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            trackBar1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            richTextBox1.Size = new Size(400,800);
 
             //pictureBox1.Location = new Point(10, 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -127,6 +145,10 @@ namespace vcs_Draw_Dynamics
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            int ww = 20;
+            int hh = 20;
+
+            List<PointF> Points = new List<PointF>();
             int g = 10;
             /*
             SolidBrush redBrush = new SolidBrush(Color.Red);
@@ -143,27 +165,63 @@ namespace vcs_Draw_Dynamics
             DrawFillCircle(e, x_st, H - y_st, 15, Color.Red);
             */
 
+
+
+            Point[] curvePoints = new Point[3];    //一維陣列內有 3 個Point
+
             Pen p = new Pen(Color.Red, 2);
-            p.DashStyle = DashStyle.Dot;
-            Point p1 = new Point();
-            Point p2 = new Point();
+            //p.DashStyle = DashStyle.Dot;
 
-            p1.X = 0;
-            p1.Y = H - 500;
-            p2.X = 200;
-            p2.Y = H - 500;
-            e.Graphics.DrawLine(p, p1, p2);
+            curvePoints[0].X = 0;
+            curvePoints[0].Y = H - 500;
+            curvePoints[1].X = 200;
+            curvePoints[1].Y = H - 500;
+            curvePoints[2].X = 200;
+            curvePoints[2].Y = H;
+            e.Graphics.DrawLines(p, curvePoints);   //畫直線
+			
 
+            DrawFillCircle(e, x_st, H - y_st, 15, Color.Blue);
 
-            p1.X = 200;
-            p1.Y = H;
-            p2.X = 200;
-            p2.Y = H - 500;
-            e.Graphics.DrawLine(p, p1, p2);
+            e.Graphics.FillRectangle(new SolidBrush(Color.Red), x_st - ww / 2, H - y_st - hh / 2, ww, hh);
 
 
-            DrawFillCircle(e, x_st, H - y_st, 15, Color.Red);
+            pts.Add(new int[] { index, x_st, H - y_st });
 
+            using (Pen thick_pen = new Pen(Color.Gray, 2))
+            {
+                int len = pts.Count;
+                int ii = -1;
+                int ii_old = 0;
+
+                if (len > 0)
+                {
+                    Points.Clear();
+
+                    int i;
+                    //richTextBox1.Text += "共有 " + len.ToString() + " 個項目, 分別是:\n";
+                    for (i = 0; i < len; i++)
+                    {
+                        ii = pts[i][0];
+                        if (ii < 0)
+                            continue;
+                        if (ii != ii_old)
+                        {
+                            if (Points.Count > 1)
+                                e.Graphics.DrawLines(thick_pen, Points.ToArray());
+                            Points.Clear();
+                            ii_old = ii;
+                        }
+
+                        Points.Add(new PointF(pts[i][1], pts[i][2]));
+                        DrawFillCircle(e, pts[i][1], pts[i][2], 4, Color.Red);
+
+                        //richTextBox1.Text += pts[i][0].ToString() + "\t" + pts[i][1].ToString() + "\t" + pts[i][2].ToString() + "\n";
+                    }
+                    if (Points.Count > 1)
+                        e.Graphics.DrawLines(thick_pen, Points.ToArray());
+                }
+            }
 
             richTextBox1.Text += "t = " + t.ToString() + "\tx = " + x_st.ToString() + "\ty = " + y_st.ToString() + "\t";
             richTextBox1.Text += "vx = " + vx.ToString() + "\tvy = " + vy.ToString() + "\n";
@@ -186,6 +244,10 @@ namespace vcs_Draw_Dynamics
                 timer1.Enabled = false;
             }
             t++;
+
+            ww = 100;
+            hh = 100;
+            e.Graphics.FillRectangle(new SolidBrush(Color.Red), W - 100 - ww / 2, 200 - hh / 2, ww, hh);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -195,6 +257,7 @@ namespace vcs_Draw_Dynamics
 
         private void button1_Click(object sender, EventArgs e)
         {
+            index++;
             t = 0;
             x_st = 0;
             y_st = 500;
@@ -220,6 +283,42 @@ namespace vcs_Draw_Dynamics
         {
             vx = 10 * (int)trackBar1.Value;
             richTextBox1.Text += "初速度 : " + vx.ToString() + " m/s\n";
+
+            lb_mesg.Text = "初速度 : " + vx.ToString() + " m/s       能量 : " + (mass * vx * vx / 2).ToString() + " 焦耳";
+        }
+
+        private const int COLUMNS = 10;
+        private const int ROWS = 8;
+
+        int[,] gray = new int[COLUMNS, ROWS];
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int i;
+            int j;
+
+            int len = pts.Count;
+            richTextBox1.Text += "共有 " + len.ToString() + " 個項目, 分別是:\n";
+
+            for (i = 0; i < pts.Count; i++)
+            {
+                richTextBox1.Text += pts[i][0].ToString() + "\t" + pts[i][1].ToString() + "\t" + pts[i][2].ToString() + "\n";
+                //richTextBox1.Text += i.ToString() + pts[i]
+                //int tt = int.Parse(pts[i][1]);
+                //richTextBox1.Text += "pts[" + i.ToString() + "][0] = " + pts[i][0].ToString() + "\tpts[" + i.ToString() + "][1] = " + pts[i][1].ToString() + "\n";
+            }
+
+            //richTextBox1.Text += pts[0][0].ToString();
+            //richTextBox1.Text += pts[1][1].ToString();
+            //richTextBox1.Text += pts[3][3].ToString();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            x_st = 0;
+            y_st = 500;
+            pts.Clear();
+            this.pictureBox1.Invalidate();
         }
     }
 }

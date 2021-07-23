@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Imaging;   //for ImageFormat
 
 using AForge.Video;             //需要添加這兩個.dll
@@ -15,10 +16,10 @@ namespace vcs_AMCap
 {
     public partial class Form1 : Form
     {
-        bool flag_show_time = true;     //顯示時間
-        bool flag_show_grid = true;     //顯示格線
-        bool flag_invert = false;        //反相, SC700需要反相
-        bool flag_auto_save = false;    //自動存檔
+                                        bool flag_show_time = true;     //顯示時間
+                                        bool flag_show_grid = true;     //顯示格線
+                                        bool flag_invert = false;        //反相, SC700需要反相
+                                        bool flag_auto_save = false;    //自動存檔
 
         //參考
         //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
@@ -71,8 +72,7 @@ namespace vcs_AMCap
             }
 
             lb_main_mesg.Text = "";
-            lb_webcam_info.Text = "";
-            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             this.pictureBox1.Focus();
@@ -99,7 +99,7 @@ namespace vcs_AMCap
                 hh = Cam.VideoCapabilities[0].FrameSize.Height;
 
                 webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
-                lb_webcam_info.Text = webcam_name;
+                this.Text = webcam_name;
 
                 if (Screen.PrimaryScreen.Bounds.Width == 1920)
                 {
@@ -118,24 +118,15 @@ namespace vcs_AMCap
                         pictureBox1.Location = new Point(140, 60);
                         this.FormBorderStyle = FormBorderStyle.FixedSingle;
                         this.WindowState = FormWindowState.Normal;
-                        this.Size = new Size(pictureBox1.Size.Width + 140+100, pictureBox1.Size.Height + 60+100);
-                        lb_webcam_info.Location = new Point(10, pictureBox1.Location.Y + pictureBox1.Height +20);
-
-
-
+                        this.Size = new Size(pictureBox1.Size.Width + 140 + 100, pictureBox1.Size.Height + 60 + 100);
                     }
-
-
-
                 }
-
             }
             else
             {
                 //button12.Enabled = true;
                 //richTextBox1.Text += "無影像裝置\n";
             }
-
         }
 
         //寫字的功能, 畫框的功能
@@ -259,28 +250,6 @@ namespace vcs_AMCap
 
         }
 
-        void pictureBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.X)
-            {
-                if (Cam != null)
-                {
-                    if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                    {
-                        Cam.Stop();   // WebCam stops capturing images.
-                        Cam.SignalToStop();
-                        Cam.WaitForStop();
-                    }
-                }
-
-                System.Environment.Exit(0);
-            }
-            else if (e.KeyCode == Keys.S)
-            {
-                save_image_file();
-            }
-        }
-
         void show_main_message(string mesg, int number, int timeout)
         {
             lb_main_mesg.Text = mesg;
@@ -314,20 +283,20 @@ namespace vcs_AMCap
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox2.Checked == true)
-            {
-                flag_show_grid = true;
-                rb_3X3.Visible = true;
-                rb_4X4.Visible = true;
-                rb_5X5.Visible = true;
-            }
-            else
-            {
-                flag_show_grid = false;
-                rb_3X3.Visible = false;
-                rb_4X4.Visible = false;
-                rb_5X5.Visible = false;
-            }
+                                    if (checkBox2.Checked == true)
+                                    {
+                                        flag_show_grid = true;
+                                        rb_3X3.Visible = true;
+                                        rb_4X4.Visible = true;
+                                        rb_5X5.Visible = true;
+                                    }
+                                    else
+                                    {
+                                        flag_show_grid = false;
+                                        rb_3X3.Visible = false;
+                                        rb_4X4.Visible = false;
+                                        rb_5X5.Visible = false;
+                                    }
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -364,72 +333,72 @@ namespace vcs_AMCap
             this.pictureBox1.Focus();
         }
 
-        void save_image_file()
-        {
-            this.pictureBox1.Focus();
-            //show_main_message("存檔中...", S_OK, 10);
-            //delay(10);
+                                                                void save_image_file()
+                                                                {
+                                                                    this.pictureBox1.Focus();
+                                                                    //show_main_message("存檔中...", S_OK, 10);
+                                                                    //delay(10);
 
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+                                                                    Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
 
-            if (bitmap1 != null)
-            {
-                IntPtr pHdc;
-                Graphics g = Graphics.FromImage(bitmap1);
-                Pen p = new Pen(Color.Red, 1);
-                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                pHdc = g.GetHdc();
+                                                                    if (bitmap1 != null)
+                                                                    {
+                                                                        IntPtr pHdc;
+                                                                        Graphics g = Graphics.FromImage(bitmap1);
+                                                                        Pen p = new Pen(Color.Red, 1);
+                                                                        SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                                                                        Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                                                                        pHdc = g.GetHdc();
 
-                if (flag_show_time == true)
-                {   //顯示時間
-                    int xPos = 10;
-                    int yPos = 10;
-                    string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                                                                        if (flag_show_time == true)
+                                                                        {   //顯示時間
+                                                                            int xPos = 10;
+                                                                            int yPos = 10;
+                                                                            string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
-                    g.ReleaseHdc();
-                    g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
-                }
-                else
-                {
-                    g.ReleaseHdc();
-                }
-                g.Dispose();
+                                                                            g.ReleaseHdc();
+                                                                            g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            g.ReleaseHdc();
+                                                                        }
+                                                                        g.Dispose();
 
-                String filename = string.Empty;
-                filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                                                                        String filename = string.Empty;
+                                                                        filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
-                //String file1 = file + ".jpg";
-                String filename2 = filename + ".bmp";
-                //String file3 = file + ".png";
+                                                                        //String file1 = file + ".jpg";
+                                                                        String filename2 = filename + ".bmp";
+                                                                        //String file3 = file + ".png";
 
-                try
-                {
-                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                    bitmap1.Save(filename2, ImageFormat.Bmp);
-                    //bitmap1.Save(@file3, ImageFormat.Png);
+                                                                        try
+                                                                        {
+                                                                            //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                                                                            bitmap1.Save(filename2, ImageFormat.Bmp);
+                                                                            //bitmap1.Save(@file3, ImageFormat.Png);
 
-                    //richTextBox1.Text += "存檔成功\n";
-                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                    //richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                    show_main_message("已存檔 BMP", S_OK, 10);
-                }
-                catch (Exception ex)
-                {
-                    //richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
-                    //show_main_message1("存檔失敗", S_OK, 30);
-                    //show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
-                }
+                                                                            //richTextBox1.Text += "存檔成功\n";
+                                                                            //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                                                                            //richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                                                                            //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                                                                            show_main_message("已存檔 BMP", S_OK, 10);
+                                                                        }
+                                                                        catch (Exception ex)
+                                                                        {
+                                                                            //richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                                                                            //show_main_message1("存檔失敗", S_OK, 30);
+                                                                            //show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
+                                                                        }
 
-            }
-            else
-            {
-                //richTextBox1.Text += "無圖可存\n";
-                //show_main_message("無圖可存", S_FALSE, 30);
-            }
-            return;
-        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        //richTextBox1.Text += "無圖可存\n";
+                                                                        //show_main_message("無圖可存", S_FALSE, 30);
+                                                                    }
+                                                                    return;
+                                                                }
 
         private void numericUpDown_time_ValueChanged(object sender, EventArgs e)
         {

@@ -8,8 +8,8 @@
     <ProjectGuid>{4067A9A7-0FA5-442A-87CE-FE897A29FC1C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SongPlayShroudAegis</RootNamespace>
-    <AssemblyName>SongPlayShroudAegis</AssemblyName>
+    <RootNamespace>vcs_Screensaver3</RootNamespace>
+    <AssemblyName>vcs_Screensaver3</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
