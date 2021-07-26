@@ -534,6 +534,10 @@ namespace vcs_Draw_Dynamics
             lb_mesg2.Text = "";
             lb_mesg3.Text = "";
             trackBar1_Scroll(sender, e);
+            rb2.Checked = false;
+            rb3.Checked = false;
+            rb4.Checked = false;
+            rb1.Checked = true;
             rb_bird_CheckedChanged(sender, e);
             update_energy();
             pts.Clear();

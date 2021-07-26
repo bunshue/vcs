@@ -23,6 +23,7 @@ namespace iMS_Link
     {
         String compile_time = "7/8/2021 01:35下午";
         String software_version = "A05";
+        String ims_camera_fullname = string.Empty;
 
         int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
 
@@ -32,11 +33,11 @@ namespace iMS_Link
         private const int MODE_RELEASE_STAGE1C = 0x0B;   //release mode stage 1, check result
         private const int MODE_RELEASE_STAGE2 = 0x02;   //release mode stage 2, AWB mode, writing camera serial
         private const int MODE_RELEASE_STAGE3 = 0x03;   //release mode stage 3, judge class
-        private const int MODE_RELEASE_STAGE4 = 0x04;   //release mode stage 4, write camera serial
+        private const int MODE_RELEASE_STAGE4 = 0x04;   //release mode stage 4, write camera serial, 要使用STAGE0或2
         private const int MODE_RELEASE_STAGE5 = 0x05;   //release mode stage 5, packaging product
         private const int MODE_RELEASE_STAGE6 = 0x06;   //release mode stage 6, packaging product package6
-        private const int MODE_RELEASE_STAGE7 = 0x07;   //release mode stage 7, packaging product package7
-        private const int MODE_RELEASE_STAGE8 = 0x08;   //release mode stage 8, packaging product package8
+        private const int MODE_RELEASE_STAGE7 = 0x07;   //release mode stage 7, packaging product package7, 要使用STAGE6
+        private const int MODE_RELEASE_STAGE8 = 0x08;   //release mode stage 8, packaging product package8, 要使用STAGE6
         private const int MODE_RELEASE_STAGE9 = 0x09;   //release mode stage 9, sale data
         private const int MODE_RELEASE_STAGE11 = 0x11;   //release mode stage 11, HiPot check
         private const int MODE_RELEASE_STAGE12 = 0x12;   //release mode stage 12, COSMO check
@@ -719,6 +720,29 @@ namespace iMS_Link
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Init_iMS_Link(sender, e);
+        }
+
+        void Init_iMS_Link(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;   //setup busy cursor
+            if ((flag_operation_mode == MODE_RELEASE_STAGE4) || (flag_operation_mode == MODE_RELEASE_STAGE7) || (flag_operation_mode == MODE_RELEASE_STAGE8) || (flag_operation_mode > MODE_RELEASE_STAGE20))
+            {
+                MessageBox.Show("不能使用此模式, mode = " + flag_operation_mode.ToString() + ", 離開", "iMS_Link", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
+
+            if ((flag_operation_mode == MODE_RELEASE_STAGE0) && (flag_display_mode == DISPLAY_SD))
+            {
+                MessageBox.Show("不能在SD螢幕使用模式0, 離開", "iMS_Link", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
 
             richTextBox1.Text += "\niMS_Link " + software_version + " 啟動, 時間 : " + bootup_time.ToString() + "\n\n";
             richTextBox1.Text += "Compile time : " + compile_time + "\n";
@@ -952,6 +976,432 @@ namespace iMS_Link
                 button2.Enabled = true;
             }
             */
+
+            if (Screen.PrimaryScreen.Bounds.Width < 1920)
+            {
+                flag_display_mode = DISPLAY_SD;
+            }
+            else
+            {
+                flag_display_mode = DISPLAY_FHD;
+            }
+
+            if (flag_enaglb_awb_function == true)
+            {
+                cb_enable_awb.Checked = true;
+            }
+            else
+            {
+                cb_enable_awb.Checked = false;
+            }
+
+            this.Text = "iMS_Link " + software_version;
+
+            pictureBox1.Size = new Size(640, 480);
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+            this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
+            lb_a.Text = "";
+            lb_b.Text = "";
+            lb_d.Text = "";
+            lb_e.Text = "";
+            lb_f.Text = "";
+            lb_awb0.Text = "";
+            lb_awb1.Text = "";
+            lb_sn1.Text = "";
+            lb_sn2.Text = "";
+            lb_sn3.Text = "";
+            this.tb_sn2.Focus();
+            bt_confirm.Visible = false;
+            lb_time1.Text = "";
+            lb_time2.Text = "";
+            lb_rtc.Text = "";
+            lb_camera_model.Text = "";
+            lb_machine_serial.Text = "";
+            lb_mb_big_serial.Text = "";
+            lb_mb_small_serial.Text = "";
+            lb_write_camera_model.Text = "";
+            lb_write_camera_serial.Text = "";
+            lb_write_mb_model.Text = "";
+            lb_write_camera_serial2.Text = "";
+            lb_zoom.Text = "1.00 X";
+            lb_rtc2.Text = "";
+            lb_data_camera_gain.Text = "";
+            lb_data_camera_offset.Text = "";
+            lb_data_camera_bright.Text = "";
+            lb_data_camera_sign.Text = "";
+            lb_gain_value.Text = "1 X";
+            tb_machine_serial.Text = "0000000-B0000";
+            tb_mb_big_serial.Text = "0000000000000";
+            tb_mb_small_serial.Text = "0000000 0000 000000 0000";
+            tb_awb_mesg.Text = "";
+            lb_main_mesg0.Text = "";
+            lb_main_mesg1.Text = "";
+            lb_main_mesg2.Text = "";
+            lb_main_mesg3.Text = "";
+            lb_main_mesg5.Text = "";
+            lb_main_mesg6.Text = "";
+            lb_main_mesg7.Text = "";
+            lb_main_mesg8.Text = "";
+            lb_main_mesg9.Text = "";
+            lb_main_mesg11.Text = "";
+            lb_main_mesg12a.Text = "";
+            lb_main_mesg12b.Text = "";
+            lb_main_mesg12c.Text = "";
+            lb_awb_data.Text = "";
+            lb_awb_time.Text = "";
+            lb_class.Text = "";
+            lb_temperature.Text = "";
+            bt_script_save.Visible = false;
+            bt_script_cancel.Visible = false;
+            bt_script_cancel.Text = "x";
+            bt_script_cancel.Width = 30;
+            bt_script_cancel.Height = 30;
+
+            tb_wpt.Text = Convert.ToString((Int32)numericUpDown_wpt.Value, 16).ToUpper();
+            tb_bpt.Text = Convert.ToString((Int32)numericUpDown_bpt.Value, 16).ToUpper();
+            wpt_value_old = numericUpDown_wpt.Value;
+
+            //numericUpDown_gain3.Value = trackBar_Contrast3.Value;
+            //numericUpDown_offset3.Value = trackBar_Y_Offset3.Value;
+            //numericUpDown_brightness3.Value = trackBar_Brightness3.Value;
+            numericUpDown_wpt3.Value = trackBar_WPT.Value;
+            numericUpDown_bpt3.Value = trackBar_BPT.Value;
+            trackBar_WPT.Minimum = trackBar_BPT.Value + 1;
+            trackBar_BPT.Maximum = trackBar_WPT.Value - 1;
+
+            tb_gain3.Text = ((int)numericUpDown_gain3.Value).ToString("X2");
+            tb_offset3.Text = ((int)numericUpDown_offset3.Value).ToString("X2");
+            tb_brightness3.Text = ((int)numericUpDown_brightness3.Value).ToString("X2");
+            tb_wpt3.Text = ((int)numericUpDown_wpt3.Value).ToString("X2");
+            tb_bpt3.Text = ((int)numericUpDown_bpt3.Value).ToString("X2");
+
+            if (flag_operation_mode != MODE_RELEASE_STAGE0)
+            {
+                tb_sn1.Text = "AA0000000";
+                tb_sn2.Text = "00000000000";
+            }
+            else
+            {
+                tb_sn1.Text = "AA1234567";
+                tb_sn2.Text = "12345678901";
+            }
+            tb_sn1.Text = "";
+            tb_sn2.Text = "";
+
+            button12.BackgroundImage = iMS_Link.Properties.Resources.refresh;
+            button15.BackgroundImage = iMS_Link.Properties.Resources.play_pause;
+            button17.BackgroundImage = iMS_Link.Properties.Resources.plus;
+            button18.BackgroundImage = iMS_Link.Properties.Resources.minus;
+            bt_zoom.BackgroundImage = iMS_Link.Properties.Resources.full_screen;
+            button20.BackgroundImage = iMS_Link.Properties.Resources.power;
+            button32.BackgroundImage = iMS_Link.Properties.Resources.console;
+            button35.BackgroundImage = iMS_Link.Properties.Resources.ims3;
+            btnUp.BackgroundImage = iMS_Link.Properties.Resources.up;
+            btnDown.BackgroundImage = iMS_Link.Properties.Resources.down;
+            btnLeft.BackgroundImage = iMS_Link.Properties.Resources.left;
+            btnRight.BackgroundImage = iMS_Link.Properties.Resources.right;
+            btnCenter.BackgroundImage = iMS_Link.Properties.Resources.stop;
+
+            camera_serials.Clear();
+
+            //Comport_Scan();
+            this.BackColor = Color.Yellow;
+
+            //connect_IMS_comport();
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox_comport.SizeMode = PictureBoxSizeMode.Zoom;
+
+            if (flag_enaglb_awb_function == true)
+                bt_goto_awb.Visible = true;
+            else
+                bt_goto_awb.Visible = false;
+
+            show_awb_item_visible(false);   //111
+            g.Clear(BackColor);
+
+            //設定執行後的表單起始位置
+            //this.StartPosition = FormStartPosition.Manual;
+            //this.Location = new System.Drawing.Point(100, 100);
+
+            // C# 設定視窗載入位置 
+            this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+
+            if (flag_operation_mode != MODE_RELEASE_STAGE0)
+            {
+                //C# 軟體啟動、版權宣告視窗 
+                Frm_Start frm = new Frm_Start();    //實體化Form2視窗物件
+                frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+                frm.ShowDialog();   //顯示Form2視窗
+            }
+
+            toolTip1.SetToolTip(button17, "Zoom in");
+            toolTip1.SetToolTip(button18, "Zoom out");
+            toolTip1.SetToolTip(button12, "Refresh");
+            toolTip1.SetToolTip(button16, "影像存檔");
+            toolTip1.SetToolTip(button15, "Play/Pause");
+
+            if (flag_display_mode == DISPLAY_SD)
+            {
+                toolTip1.SetToolTip(bt_zoom, "1.25X");
+            }
+            else
+            {
+                toolTip1.SetToolTip(bt_zoom, "2X");
+            }
+
+            toolTip1.SetToolTip(btnUp, "Up");
+            toolTip1.SetToolTip(btnDown, "Down");
+            toolTip1.SetToolTip(btnLeft, "Left");
+            toolTip1.SetToolTip(btnRight, "Right");
+            toolTip1.SetToolTip(btnCenter, "Default");
+
+            toolTip1.SetToolTip(button10, "Comport Scan");
+            toolTip1.SetToolTip(button1, "Comport Connect");
+            toolTip1.SetToolTip(button2, "Comport Disconnect");
+            toolTip1.SetToolTip(button9, "Reset");
+            toolTip1.SetToolTip(button13, "START");
+            toolTip1.SetToolTip(button35, "To iMS_Link Mode");
+            toolTip1.SetToolTip(button32, "To PuTTy Mode");
+            toolTip1.SetToolTip(button20, "Exit");
+            toolTip1.SetToolTip(bt_min, "最小化");
+            toolTip1.SetToolTip(button33, "log on");
+
+
+            //以下為提示視窗的設定(通常會設定的部分)
+            //ToolTipIcon：設定顯示在提示視窗的圖示類型。
+            //toolTip1.ToolTipIcon = ToolTipIcon.Info;
+            //ForeColor：前景顏色
+            toolTip1.ForeColor = Color.Blue;
+            //BackColor：背景顏色
+            toolTip1.BackColor = Color.Gray;
+            //AutoPopDelay：當游標停滯在控制項，顯示提示視窗的時間。(以毫秒為單位)
+            toolTip1.AutoPopDelay = 5000;
+            //ToolTipTitle：設定提示視窗的標題。
+            //toolTip1.ToolTipTitle = "提示訊息";
+
+            comboBox_webcam.Size = new Size(comboBox_webcam.Size.Width - 50, comboBox_webcam.Size.Height);
+            comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
+
+            if (flag_enaglb_awb_function == true)
+            {
+                richTextBox1.Text += "call bt_goto_awb_Click 111\n";
+                bt_goto_awb_Click(sender, e);
+            }
+
+            if (cb_show_grid.Checked == false)
+            {
+                rb_3X3.Visible = false;
+                rb_4X4.Visible = false;
+                rb_5X5.Visible = false;
+                rb_NXN.Visible = false;
+                groupBox_gridlinecolor.Visible = false;
+            }
+
+            show_item_location();
+
+            /* no need barcode scanner trigger
+            if (flag_operation_mode == MODE_RELEASE_STAGE2)
+            {
+                bt_awb_test.Enabled = false;
+                bt_awb_test.BackColor = Color.Pink;
+            }
+            */
+
+            if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)
+                || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+            {
+                richTextBox1.Text += "call Init_WebcamSetup() 111\n";
+                Init_WebcamSetup();
+            }
+
+            bt_script_save.Visible = false;
+            bt_script_cancel.Visible = false;
+            bt_cancel.Visible = false;
+
+            if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+            {
+                bt_zoom_Click(sender, e);
+            }
+
+            string Path;
+            //檢查存log的資料夾
+            Path = Application.StartupPath + "\\log";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+            }
+
+            //檢查存csv的資料夾
+            Path = Application.StartupPath + "\\csv";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+            }
+
+            if (flag_operation_mode == MODE_RELEASE_STAGE0)
+            {
+                //檢查存圖片的資料夾
+                Path = Application.StartupPath + "\\script";
+                if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+                {
+                    Directory.CreateDirectory(Path);
+                    richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+                }
+                else
+                {
+                    //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+                }
+            }
+
+            if ((flag_operation_mode <= MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
+            {
+                //檢查存圖片的資料夾
+                Path = Application.StartupPath + "\\picture";
+                if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+                {
+                    Directory.CreateDirectory(Path);
+                    richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+                }
+                else
+                {
+                    //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+                }
+            }
+
+            if (flag_operation_mode == MODE_RELEASE_STAGE12)
+            {
+                Comport_Scan();
+
+                //auto connect to comport
+                button82_Click(sender, e);
+            }
+
+            if (flag_operation_mode == MODE_RELEASE_STAGE20)
+            {
+                if (flag_comport_connection_ok == false)
+                {
+                    richTextBox1.Text += "MODE_RELEASE_STAGE20 call connect_IMS_comport()\n";
+                    connect_IMS_comport();
+                }
+
+                if (serialPort1.IsOpen)
+                {
+                    button89.Enabled = false;
+                    button90.Enabled = true;
+                    this.BackColor = System.Drawing.SystemColors.ControlLight;
+                    flag_comport_ok = true;
+                }
+                button84.Visible = false;
+                button85.Visible = false;
+                button47.Visible = false;
+                button41.Visible = false;
+            }
+
+            if ((flag_operation_mode != MODE_RELEASE_STAGE20) && (check_network_disk() == S_OK))
+            {
+                show_main_message1("已連上網路磁碟機", S_OK, 30);
+                show_main_message2("已連上網路磁碟機", S_OK, 30);
+                show_main_message3("已連上網路磁碟機", S_OK, 30);
+                tb_awb_mesg.BackColor = Color.White;
+                tb_awb_mesg.Text = "";
+            }
+
+            cb_Contrast_Brightness_Gamma.Checked = false;
+
+            if (((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)) && (flag_use_chart1 == true))
+            {
+                series_r = chart1.Series.Add("");
+                series_g = chart1.Series.Add("");
+                series_b = chart1.Series.Add("");
+
+                series_r.ChartType = SeriesChartType.Line;
+                series_g.ChartType = SeriesChartType.Line;
+                series_b.ChartType = SeriesChartType.Line;
+
+                series_r.Color = Color.Red; //設定線條顏色
+                series_g.Color = Color.Green; //設定線條顏色
+                series_b.Color = Color.Blue; //設定線條顏色
+
+                series_r.BorderWidth = 2;
+                series_g.BorderWidth = 2;
+                series_b.BorderWidth = 2;
+            }
+
+            chart2_init();
+
+            richTextBox1.Text += "\niMS_Link " + software_version + " 啟動完成, 時間 : " + DateTime.Now.ToString() + "\t";
+            richTextBox1.Text += "耗時 : " + (DateTime.Now - bootup_time).TotalSeconds.ToString("0.00") + " 秒\n\n";
+
+            if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)
+                || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+            {
+                //高度不變
+            }
+            else
+            {
+                this.Height -= 16;
+            }
+
+            //程式啟動完成後, 再開始檢查comport
+            if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
+            {
+                if (flag_comport_connection_ok == false)
+                {
+                    richTextBox1.Text += "awb call connect_IMS_comport()\n";
+                    show_main_message1("連線COM Port", S_OK, 30);
+                    show_main_message2("連線COM Port", S_OK, 30);
+                    show_main_message3("連線COM Port", S_OK, 30);
+                    connect_IMS_comport();
+                    if (flag_comport_connection_ok == true)
+                    {
+                        show_main_message1("連線COM Port, OK", S_OK, 30);
+                        show_main_message2("連線COM Port, OK", S_OK, 30);
+                        show_main_message3("連線COM Port, OK", S_OK, 30);
+                    }
+                }
+
+                if (serialPort1.IsOpen)
+                {
+                    button1.Enabled = false;
+                    button2.Enabled = true;
+                    this.BackColor = System.Drawing.SystemColors.ControlLight;
+                    flag_comport_ok = true;
+                    bt_awb_test.Enabled = true;
+                    bt_awb_test.BackColor = Color.Lime;
+                }
+                else
+                {
+                    bt_awb_test.Enabled = false;
+                    bt_awb_test.BackColor = Color.Pink;
+                }
+            }
+
+            if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_use_metering == true))
+            {
+                if (flag_comport_connection_ok == false)
+                {
+                    richTextBox1.Text += "metering call connect_IMS_comport()\n";
+                    connect_IMS_comport();
+                }
+            }
+            richTextBox1.Text += "耗時 : " + (DateTime.Now - bootup_time).TotalSeconds.ToString("0.00") + " 秒\n\n";
+            show_main_message1("程式啟動完成", S_OK, 30);
+            show_main_message2("程式啟動完成", S_OK, 30);
+            show_main_message3("程式啟動完成", S_OK, 30);
+            this.Cursor = Cursors.Default;
+            return;
         }
 
         private void myScroll(object sender, EventArgs e)
@@ -1003,11 +1453,193 @@ namespace iMS_Link
 
         private void myClick3(object sender, EventArgs e)
         {
-            flag_show_cmx_lenc_result = false;
+            if (flag_show_cmx_lenc_result == true)
+            {
+                flag_show_cmx_lenc_result = false;
+
+                //CMX部分 ST
+                tbar0.Scroll -= tbar_scroll_cmx;	// 移除事件
+                tbar0.MouseDown -= tbar_mouse_down_cmx;
+                tbar0.MouseUp -= tbar_mouse_up_cmx;
+                tbar1.Scroll -= tbar_scroll_cmx;	// 移除事件
+                tbar1.MouseDown -= tbar_mouse_down_cmx;
+                tbar1.MouseUp -= tbar_mouse_up_cmx;
+                tbar2.Scroll -= tbar_scroll_cmx;	// 移除事件
+                tbar2.MouseDown -= tbar_mouse_down_cmx;
+                tbar2.MouseUp -= tbar_mouse_up_cmx;
+                tbar3.Scroll -= tbar_scroll_cmx;	// 移除事件
+                tbar3.MouseDown -= tbar_mouse_down_cmx;
+                tbar3.MouseUp -= tbar_mouse_up_cmx;
+                tbar4.Scroll -= tbar_scroll_cmx;	// 移除事件
+                tbar4.MouseDown -= tbar_mouse_down_cmx;
+                tbar4.MouseUp -= tbar_mouse_up_cmx;
+                tbar5.Scroll -= tbar_scroll_cmx;	// 移除事件
+                tbar5.MouseDown -= tbar_mouse_down_cmx;
+                tbar5.MouseUp -= tbar_mouse_up_cmx;
+                btn_ok6.Click -= btn_cmx_click;	// 移除事件
+                btn_ok7.Click -= btn_cmx_click;	// 移除事件
+                btn_ok8.Click -= btn_cmx_click;	// 移除事件
+                btn_read_cmx.Click -= btn_read_cmx_click;	// 移除事件
+                btn_reset_cmx.Click -= btn_reset_cmx_click;	// 移除事件
+                cb5a.CheckedChanged -= cmx_data_bit_change1;	// 移除事件
+                cb4a.CheckedChanged -= cmx_data_bit_change1;	// 移除事件
+                cb3a.CheckedChanged -= cmx_data_bit_change1;	// 移除事件
+                cb2a.CheckedChanged -= cmx_data_bit_change1;	// 移除事件
+                cb1a.CheckedChanged -= cmx_data_bit_change1;	// 移除事件
+                cb0a.CheckedChanged -= cmx_data_bit_change1;	// 移除事件
+                //cb2b.CheckedChanged -= cmx_data_bit_change2;	// 移除事件
+                //cb1b.CheckedChanged -= cmx_data_bit_change2;	// 移除事件
+                cb0b.CheckedChanged -= cmx_data_bit_change2;	// 移除事件
+                cb7c.CheckedChanged -= cmx_data_bit_change3;	// 移除事件
+                cb6c.CheckedChanged -= cmx_data_bit_change3;	// 移除事件
+                cb5c.CheckedChanged -= cmx_data_bit_change3;	// 移除事件
+                cb4c.CheckedChanged -= cmx_data_bit_change3;	// 移除事件
+                cb3c.CheckedChanged -= cmx_data_bit_change3;	// 移除事件
+                cb2c.CheckedChanged -= cmx_data_bit_change3;	// 移除事件
+                cb1c.CheckedChanged -= cmx_data_bit_change3;	// 移除事件
+                cb0c.CheckedChanged -= cmx_data_bit_change3;	// 移除事件
+                //CMX部分 SP
+
+                //LENC部分 ST
+                tbar0r.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar0r.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar0r.MouseDown -= tbar_mouse_down_lenc;
+                tbar0r.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar1r.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar1r.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar1r.MouseDown -= tbar_mouse_down_lenc;
+                tbar1r.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar2r.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar2r.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar2r.MouseDown -= tbar_mouse_down_lenc;
+                tbar2r.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar3r.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar3r.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar3r.MouseDown -= tbar_mouse_down_lenc;
+                tbar3r.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar4r.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar4r.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar4r.MouseDown -= tbar_mouse_down_lenc;
+                tbar4r.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar5r.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar5r.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar5r.MouseDown -= tbar_mouse_down_lenc;
+                tbar5r.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar0g.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar0g.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar0g.MouseDown -= tbar_mouse_down_lenc;
+                tbar0g.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar1g.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar1g.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar1g.MouseDown -= tbar_mouse_down_lenc;
+                tbar1g.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar2g.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar2g.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar2g.MouseDown -= tbar_mouse_down_lenc;
+                tbar2g.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar3g.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar3g.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar3g.MouseDown -= tbar_mouse_down_lenc;
+                tbar3g.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar4g.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar4g.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar4g.MouseDown -= tbar_mouse_down_lenc;
+                tbar4g.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar5g.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar5g.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar5g.MouseDown -= tbar_mouse_down_lenc;
+                tbar5g.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar0b.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar0b.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar0b.MouseDown -= tbar_mouse_down_lenc;
+                tbar0b.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar1b.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar1b.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar1b.MouseDown -= tbar_mouse_down_lenc;
+                tbar1b.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar2b.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar2b.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar2b.MouseDown -= tbar_mouse_down_lenc;
+                tbar2b.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar3b.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar3b.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar3b.MouseDown -= tbar_mouse_down_lenc;
+                tbar3b.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar4b.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar4b.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar4b.MouseDown -= tbar_mouse_down_lenc;
+                tbar4b.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar5b.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar5b.ValueChanged -= tbar_value_changed_lenc;    // 移除事件
+                tbar5b.MouseDown -= tbar_mouse_down_lenc;
+                tbar5b.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar_lenc1.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar_lenc1.MouseDown -= tbar_mouse_down_lenc;
+                tbar_lenc1.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar_lenc2.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar_lenc2.MouseDown -= tbar_mouse_down_lenc;
+                tbar_lenc2.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar_lenc3.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar_lenc3.MouseDown -= tbar_mouse_down_lenc;
+                tbar_lenc3.MouseUp -= tbar_mouse_up_lenc;
+
+                tbar_lenc4.Scroll -= tbar_scroll_lenc;	// 移除事件
+                tbar_lenc4.MouseDown -= tbar_mouse_down_lenc;
+                tbar_lenc4.MouseUp -= tbar_mouse_up_lenc;
+
+                cb_lenc3.CheckedChanged -= lenc_data_bit_change2;	// 移除事件
+                cb_lenc2.CheckedChanged -= lenc_data_bit_change2;	// 移除事件
+                cb_lenc1.CheckedChanged -= lenc_data_bit_change2;	// 移除事件
+                cb_lenc0.CheckedChanged -= lenc_data_bit_change2;	// 移除事件
+
+                pbox_lenc_status.Click -= pbox_lenc_status_click;	// 移除事件
+                btn_read_lenc.Click -= btn_read_lenc_click;	// 移除事件
+                btn_reset_lenc.Click -= btn_reset_lenc_click;	// 移除事件
+                btn_reset_lenc_r.Click -= btn_reset_lenc_r_click;	// 移除事件
+                btn_reset_lenc_g.Click -= btn_reset_lenc_g_click;	// 移除事件
+                btn_reset_lenc_b.Click -= btn_reset_lenc_b_click;	// 移除事件
+                btn_reset_lenc_ctrl.Click -= btn_reset_lenc_ctrl_click;	// 移除事件
+                btn_lenc_test1.Click -= btn_lenc_test1_click;	// 移除事件
+                btn_lenc_test2.Click -= btn_lenc_test2_click;	// 移除事件
+                btn_lenc_test3.Click -= btn_lenc_test3_click;	// 移除事件
+                btn_lenc_test4.Click -= btn_lenc_test4_click;	// 移除事件
+                btn_lenc_test5.Click -= btn_lenc_test5_click;	// 移除事件
+                btn_lenc_test6.Click -= btn_lenc_test6_click;	// 移除事件
+                //LENC部分 SP
+
+                //CMX + LENC部分 ST
+                btn_return.Click -= btn_return_pbx4_Click;
+                //CMX + LENC部分 SP
+            }
+            if (flag_use_measure_picture_brightness == true)
+            {
+                flag_use_measure_picture_brightness = false;
+                btn_return.Click -= btn_return_pbx3_Click;
+            }
+
             timer_clock.Interval = 500;
             richTextBox1.Visible = true;
             flag_use_metering_color = false;
-            flag_use_measure_picture_brightness = false;
             pictureBox3.Visible = false;
             pictureBox4.Visible = false;
             btn1.Text = "Play";
@@ -3573,7 +4205,6 @@ namespace iMS_Link
             lb_awb_result_B.Visible = en;
             bt_get_setup.Visible = en;
 
-            comboBox_webcam.Visible = false;
             groupBox_temperature.Visible = en;
 
             b7.Visible = en;
@@ -4040,7 +4671,8 @@ namespace iMS_Link
             //AWB
             bt_awb_test.Location = new Point(170 + 70 * 0 - 30, 460 + 40 * 0 - 200);
             bt_awb_test.Size = new Size(200, 97);
-            bt_awb_test.BackColor = Color.Lime;
+            bt_awb_test.BackColor = Color.Red;
+            bt_awb_test.Enabled = false;
             progressBar_awb.Location = new Point(170 + 70 * 0 - 30, 460 + 40 * 0 - 200 + 100);
             //lb_awb_time.Location = new Point(170 + 70 * 0 + 330, 460 + 40 * 0 - 200 + 100 + 4);
             lb_awb_time.Location = new Point(170 + 70 * 0 + 10, 460 + 40 * 0 - 200 + 100 + 4);
@@ -4540,441 +5172,15 @@ namespace iMS_Link
                 button96.Visible = false;
             }
 
-            button12.Enabled = false;
-            return;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            if (Screen.PrimaryScreen.Bounds.Width < 1920)
-            {
-                flag_display_mode = DISPLAY_SD;
-            }
-            else
-            {
-                flag_display_mode = DISPLAY_FHD;
-            }
-
-            if ((flag_operation_mode == MODE_RELEASE_STAGE4) || (flag_operation_mode > MODE_RELEASE_STAGE20))
-            {
-                MessageBox.Show("不能使用此模式, mode = " + flag_operation_mode.ToString() + ", 離開", "iMS_Link", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-                return;
-            }
-
-            if ((flag_operation_mode == MODE_RELEASE_STAGE0) && (flag_display_mode == DISPLAY_SD))
-            {
-                MessageBox.Show("不能在SD螢幕使用模式0, 離開", "iMS_Link", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-                return;
-            }
-
-            if (flag_enaglb_awb_function == true)
-            {
-                cb_enable_awb.Checked = true;
-            }
-            else
-            {
-                cb_enable_awb.Checked = false;
-            }
-
-            this.Text = "iMS_Link " + software_version;
-
-            pictureBox1.Size = new Size(640, 480);
-            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
-            this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
-            lb_a.Text = "";
-            lb_b.Text = "";
-            lb_d.Text = "";
-            lb_e.Text = "";
-            lb_f.Text = "";
-            lb_awb0.Text = "";
-            lb_awb1.Text = "";
-            lb_sn1.Text = "";
-            lb_sn2.Text = "";
-            lb_sn3.Text = "";
-            this.tb_sn2.Focus();
-            bt_confirm.Visible = false;
-            lb_time1.Text = "";
-            lb_time2.Text = "";
-            lb_rtc.Text = "";
-            lb_camera_model.Text = "";
-            lb_machine_serial.Text = "";
-            lb_mb_big_serial.Text = "";
-            lb_mb_small_serial.Text = "";
-            lb_write_camera_model.Text = "";
-            lb_write_camera_serial.Text = "";
-            lb_write_mb_model.Text = "";
-            lb_write_camera_serial2.Text = "";
-            lb_zoom.Text = "1.00 X";
-            lb_rtc2.Text = "";
-            lb_data_camera_gain.Text = "";
-            lb_data_camera_offset.Text = "";
-            lb_data_camera_bright.Text = "";
-            lb_data_camera_sign.Text = "";
-            lb_gain_value.Text = "1 X";
-            tb_machine_serial.Text = "0000000-B0000";
-            tb_mb_big_serial.Text = "0000000000000";
-            tb_mb_small_serial.Text = "0000000 0000 000000 0000";
-            tb_awb_mesg.Text = "";
-            lb_main_mesg0.Text = "";
-            lb_main_mesg1.Text = "";
-            lb_main_mesg2.Text = "";
-            lb_main_mesg3.Text = "";
-            lb_main_mesg5.Text = "";
-            lb_main_mesg6.Text = "";
-            lb_main_mesg7.Text = "";
-            lb_main_mesg8.Text = "";
-            lb_main_mesg9.Text = "";
-            lb_main_mesg11.Text = "";
-            lb_main_mesg12a.Text = "";
-            lb_main_mesg12b.Text = "";
-            lb_main_mesg12c.Text = "";
-            lb_awb_data.Text = "";
-            lb_awb_time.Text = "";
-            lb_class.Text = "";
-            lb_temperature.Text = "";
-            bt_script_save.Visible = false;
-            bt_script_cancel.Visible = false;
-            bt_script_cancel.Text = "x";
-            bt_script_cancel.Width = 30;
-            bt_script_cancel.Height = 30;
-
-            tb_wpt.Text = Convert.ToString((Int32)numericUpDown_wpt.Value, 16).ToUpper();
-            tb_bpt.Text = Convert.ToString((Int32)numericUpDown_bpt.Value, 16).ToUpper();
-            wpt_value_old = numericUpDown_wpt.Value;
-
-            //numericUpDown_gain3.Value = trackBar_Contrast3.Value;
-            //numericUpDown_offset3.Value = trackBar_Y_Offset3.Value;
-            //numericUpDown_brightness3.Value = trackBar_Brightness3.Value;
-            numericUpDown_wpt3.Value = trackBar_WPT.Value;
-            numericUpDown_bpt3.Value = trackBar_BPT.Value;
-            trackBar_WPT.Minimum = trackBar_BPT.Value + 1;
-            trackBar_BPT.Maximum = trackBar_WPT.Value - 1;
-
-            tb_gain3.Text = ((int)numericUpDown_gain3.Value).ToString("X2");
-            tb_offset3.Text = ((int)numericUpDown_offset3.Value).ToString("X2");
-            tb_brightness3.Text = ((int)numericUpDown_brightness3.Value).ToString("X2");
-            tb_wpt3.Text = ((int)numericUpDown_wpt3.Value).ToString("X2");
-            tb_bpt3.Text = ((int)numericUpDown_bpt3.Value).ToString("X2");
-
-            if (flag_operation_mode != MODE_RELEASE_STAGE0)
-            {
-                tb_sn1.Text = "AA0000000";
-                tb_sn2.Text = "00000000000";
-            }
-            else
-            {
-                tb_sn1.Text = "AA1234567";
-                tb_sn2.Text = "12345678901";
-            }
-            tb_sn1.Text = "";
-            tb_sn2.Text = "";
-
-            button12.BackgroundImage = iMS_Link.Properties.Resources.refresh;
-            button15.BackgroundImage = iMS_Link.Properties.Resources.play_pause;
-            button17.BackgroundImage = iMS_Link.Properties.Resources.plus;
-            button18.BackgroundImage = iMS_Link.Properties.Resources.minus;
-            bt_zoom.BackgroundImage = iMS_Link.Properties.Resources.full_screen;
-            button20.BackgroundImage = iMS_Link.Properties.Resources.power;
-            button32.BackgroundImage = iMS_Link.Properties.Resources.console;
-            button35.BackgroundImage = iMS_Link.Properties.Resources.ims3;
-            btnUp.BackgroundImage = iMS_Link.Properties.Resources.up;
-            btnDown.BackgroundImage = iMS_Link.Properties.Resources.down;
-            btnLeft.BackgroundImage = iMS_Link.Properties.Resources.left;
-            btnRight.BackgroundImage = iMS_Link.Properties.Resources.right;
-            btnCenter.BackgroundImage = iMS_Link.Properties.Resources.stop;
-
-            camera_serials.Clear();
-
-            //Comport_Scan();
-            this.BackColor = Color.Yellow;
-
-            //connect_IMS_comport();
-
-            /*
-            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
-            {
-                //button12.Enabled = false;
-                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
-                Cam.VideoResolution = Cam.VideoCapabilities[0];
-                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);     //綁定事件
-
-                Cam.Start();   // WebCam starts capturing images.
-                flag_camera_start = 1;
-                richTextBox1.Text += "有影像裝置\n";
-            }
-            else
-            {
-                //button12.Enabled = true;
-                flag_camera_start = 0;
-                richTextBox1.Text += "無影像裝置\n";
-            }
-            */
-
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox_comport.SizeMode = PictureBoxSizeMode.Zoom;
-
-            if (flag_enaglb_awb_function == true)
-                bt_goto_awb.Visible = true;
-            else
-                bt_goto_awb.Visible = false;
-
-            show_awb_item_visible(false);   //111
-            g.Clear(BackColor);
-
-            //設定執行後的表單起始位置
-            //this.StartPosition = FormStartPosition.Manual;
-            //this.Location = new System.Drawing.Point(100, 100);
-
-            // C# 設定視窗載入位置 
-            this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
-
-            if (flag_operation_mode != MODE_RELEASE_STAGE0)
-            {
-                //C# 軟體啟動、版權宣告視窗 
-                Frm_Start frm = new Frm_Start();    //實體化Form2視窗物件
-                frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
-                frm.ShowDialog();   //顯示Form2視窗
-            }
-
-            toolTip1.SetToolTip(button17, "Zoom in");
-            toolTip1.SetToolTip(button18, "Zoom out");
-            toolTip1.SetToolTip(button12, "Refresh");
-            toolTip1.SetToolTip(button16, "影像存檔");
-            toolTip1.SetToolTip(button15, "Play/Pause");
-
-            if (flag_display_mode == DISPLAY_SD)
-            {
-                toolTip1.SetToolTip(bt_zoom, "1.25X");
-            }
-            else
-            {
-                toolTip1.SetToolTip(bt_zoom, "2X");
-            }
-
-            toolTip1.SetToolTip(btnUp, "Up");
-            toolTip1.SetToolTip(btnDown, "Down");
-            toolTip1.SetToolTip(btnLeft, "Left");
-            toolTip1.SetToolTip(btnRight, "Right");
-            toolTip1.SetToolTip(btnCenter, "Default");
-
-            toolTip1.SetToolTip(button10, "Comport Scan");
-            toolTip1.SetToolTip(button1, "Comport Connect");
-            toolTip1.SetToolTip(button2, "Comport Disconnect");
-            toolTip1.SetToolTip(button9, "Reset");
-            toolTip1.SetToolTip(button13, "START");
-            toolTip1.SetToolTip(button35, "To iMS_Link Mode");
-            toolTip1.SetToolTip(button32, "To PuTTy Mode");
-            toolTip1.SetToolTip(button20, "Exit");
-            toolTip1.SetToolTip(bt_min, "最小化");
-            toolTip1.SetToolTip(button33, "log on");
-
-
-            //以下為提示視窗的設定(通常會設定的部分)
-            //ToolTipIcon：設定顯示在提示視窗的圖示類型。
-            //toolTip1.ToolTipIcon = ToolTipIcon.Info;
-            //ForeColor：前景顏色
-            toolTip1.ForeColor = Color.Blue;
-            //BackColor：背景顏色
-            toolTip1.BackColor = Color.Gray;
-            //AutoPopDelay：當游標停滯在控制項，顯示提示視窗的時間。(以毫秒為單位)
-            toolTip1.AutoPopDelay = 5000;
-            //ToolTipTitle：設定提示視窗的標題。
-            //toolTip1.ToolTipTitle = "提示訊息";
-
-            comboBox_webcam.Size = new Size(comboBox_webcam.Size.Width - 50, comboBox_webcam.Size.Height);
-            comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
-
-            if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_use_metering == true))
-            {
-                if (flag_comport_connection_ok == false)
-                {
-                    richTextBox1.Text += "metering call connect_IMS_comport()\n";
-                    connect_IMS_comport();
-                }
-            }
-
-            if (flag_enaglb_awb_function == true)
-            {
-                richTextBox1.Text += "call bt_goto_awb_Click 111\n";
-                bt_goto_awb_Click(sender, e);
-            }
-            if (cb_show_grid.Checked == false)
-            {
-                rb_3X3.Visible = false;
-                rb_4X4.Visible = false;
-                rb_5X5.Visible = false;
-                rb_NXN.Visible = false;
-                groupBox_gridlinecolor.Visible = false;
-            }
-
-            show_item_location();
-
-            /* no need barcode scanner trigger
-            if (flag_operation_mode == MODE_RELEASE_STAGE2)
-            {
-                bt_awb_test.Enabled = false;
-                bt_awb_test.BackColor = Color.Pink;
-            }
-            */
-
-            if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)
-                || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
-            {
-                richTextBox1.Text += "call check_webcam() 111\n";
-                check_webcam();
-            }
-
-            bt_script_save.Visible = false;
-            bt_script_cancel.Visible = false;
-            bt_cancel.Visible = false;
-
-            if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
-            {
-                bt_zoom_Click(sender, e);
-            }
-
-            string Path;
-            //檢查存log的資料夾
-            Path = Application.StartupPath + "\\log";
-            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
-            {
-                Directory.CreateDirectory(Path);
-                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
-            }
-            else
-                richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
-
-            //檢查存csv的資料夾
-            Path = Application.StartupPath + "\\csv";
-            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
-            {
-                Directory.CreateDirectory(Path);
-                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
-            }
-            else
-                richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
-
             if (flag_operation_mode == MODE_RELEASE_STAGE0)
             {
-                //檢查存圖片的資料夾
-                Path = Application.StartupPath + "\\script";
-                if (Directory.Exists(Path) == false)     //確認資料夾是否存在
-                {
-                    Directory.CreateDirectory(Path);
-                    richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
-                }
-                else
-                    richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
-            }
-
-            if ((flag_operation_mode <= MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
-            {
-                //檢查存圖片的資料夾
-                Path = Application.StartupPath + "\\picture";
-                if (Directory.Exists(Path) == false)     //確認資料夾是否存在
-                {
-                    Directory.CreateDirectory(Path);
-                    richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
-                }
-                else
-                    richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
-            }
-
-            if (flag_operation_mode == MODE_RELEASE_STAGE12)
-            {
-                Comport_Scan();
-
-                //auto connect to comport
-                button82_Click(sender, e);
-            }
-
-            if (flag_operation_mode == MODE_RELEASE_STAGE20)
-            {
-                if (flag_comport_connection_ok == false)
-                {
-                    richTextBox1.Text += "MODE_RELEASE_STAGE20 call connect_IMS_comport()\n";
-                    connect_IMS_comport();
-                }
-
-                if (serialPort1.IsOpen)
-                {
-                    button89.Enabled = false;
-                    button90.Enabled = true;
-                    this.BackColor = System.Drawing.SystemColors.ControlLight;
-                    flag_comport_ok = true;
-                }
-                button84.Visible = false;
-                button85.Visible = false;
-                button47.Visible = false;
-                button41.Visible = false;
-            }
-
-            if ((flag_operation_mode != MODE_RELEASE_STAGE20) && (check_network_disk() == S_OK))
-            {
-                show_main_message1("已連上網路磁碟機", S_OK, 30);
-                show_main_message2("已連上網路磁碟機", S_OK, 30);
-                show_main_message3("已連上網路磁碟機", S_OK, 30);
-                tb_awb_mesg.BackColor = Color.White;
-                tb_awb_mesg.Text = "";
-            }
-
-            //make sure comport is connected
-            if (flag_enaglb_awb_function == true)
-            {
-                if (flag_comport_connection_ok == false)
-                {
-                    show_main_message1("重新連線COM Port", S_OK, 30);
-                    show_main_message2("重新連線COM Port", S_OK, 30);
-                    show_main_message3("重新連線COM Port", S_OK, 30);
-                    richTextBox1.Text += "no comport, call connect_IMS_comport() again\n";
-                    delay(30);
-                    connect_IMS_comport();
-                    if (flag_comport_connection_ok == true)
-                    {
-                        show_main_message1("重新連線COM Port, OK", S_OK, 30);
-                        show_main_message2("重新連線COM Port, OK", S_OK, 30);
-                        show_main_message3("重新連線COM Port, OK", S_OK, 30);
-                    }
-                }
-            }
-
-            cb_Contrast_Brightness_Gamma.Checked = false;
-
-            if (((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)) && (flag_use_chart1 == true))
-            {
-                series_r = chart1.Series.Add("");
-                series_g = chart1.Series.Add("");
-                series_b = chart1.Series.Add("");
-
-                series_r.ChartType = SeriesChartType.Line;
-                series_g.ChartType = SeriesChartType.Line;
-                series_b.ChartType = SeriesChartType.Line;
-
-                series_r.Color = Color.Red; //設定線條顏色
-                series_g.Color = Color.Green; //設定線條顏色
-                series_b.Color = Color.Blue; //設定線條顏色
-
-                series_r.BorderWidth = 2;
-                series_g.BorderWidth = 2;
-                series_b.BorderWidth = 2;
-            }
-
-            chart2_init();
-
-            richTextBox1.Text += "\niMS_Link " + software_version + " 啟動完成, 時間 : " + DateTime.Now.ToString() + "\n\n";
-
-            if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)
-                || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
-            {
-                //高度不變
+                comboBox_webcam.Visible = true;
+                button12.Enabled = true;
             }
             else
             {
-                this.Height -= 16;
+                comboBox_webcam.Visible = false;
+                button12.Enabled = false;
             }
             return;
         }
@@ -8088,17 +8294,16 @@ namespace iMS_Link
                 {
                     richTextBox1.Text += "USB影像傳輸中, 中斷重來ST\n";  //david : 應考慮此功能是否有用?
                     flag_camera_start = 0;
-                    Cam.Stop();  // WebCam stops capturing images.
-                    //Cam.SignalToStop();
-                    //Cam.WaitForStop();
-                    Cam = null;
+
+                    Stop_Webcam();
+
                     comboBox_webcam.Items.Clear();
                     richTextBox1.Text += "USB影像傳輸中, 中斷重來SP\n";
                 }
             }
 
-            richTextBox1.Text += "call check_webcam() 222\n";
-            if (check_webcam() == S_OK)
+            richTextBox1.Text += "call Init_WebcamSetup() 222\n";
+            if (Init_WebcamSetup() == S_OK)
             {
                 richTextBox1.Text += "重新抓取USB影像\t";
                 USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -8107,7 +8312,8 @@ namespace iMS_Link
                     //button12.Enabled = false;
                     Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
                     Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
-                    Cam.Start();   // WebCam starts capturing images.
+                    richTextBox1.Text += "Start_Webcam() refresh\n";
+                    Start_Webcam();
                     flag_camera_start = 1;
                     richTextBox1.Text += "有影像裝置\n";
                 }
@@ -8119,24 +8325,6 @@ namespace iMS_Link
                 }
             }
 
-            /*
-            if (camera_start == 0)
-            {
-                camera_start = 1;
-                button12.Text = "Stop";
-                Cam.Start();   // WebCam starts capturing images.
-            }
-            else
-            {
-                camera_start = 0;
-                button12.Text = "Start";
-                flag_camera_start = 0;
-                Cam.Stop();  // WebCam stops capturing images.
-                //Cam.SignalToStop();
-                //Cam.WaitForStop();
-                Cam = null;
-            }
-            */
             flag_doing_refreshing_camera = false;
         }
 
@@ -8147,10 +8335,7 @@ namespace iMS_Link
                 if (Cam.IsRunning == true)  // When Form1 closes itself, WebCam must stop, too.
                 {
                     flag_camera_start = 0;
-                    Cam.Stop();   // WebCam stops capturing images.
-                    //Cam.SignalToStop();
-                    //Cam.WaitForStop();
-                    Cam = null;
+                    Stop_Webcam();
                 }
             }
 
@@ -8182,27 +8367,6 @@ namespace iMS_Link
         int flag_camera_is_stopped = 0;
         private void button15_Click(object sender, EventArgs e)
         {
-            /*
-            if (flag_camera_start == 1)
-            {
-                if (flag_camera_is_stopped == 0)
-                {
-                    flag_camera_start = 0;
-                    Cam.Stop();
-                    //Cam.SignalToStop();
-                    //Cam.WaitForStop();
-                    Cam = null;
-                    flag_camera_is_stopped = 1;
-                    richTextBox1.Text += "停止\n";
-                }
-                else
-                {
-                    Cam.Start();
-                    flag_camera_is_stopped = 0;
-                    richTextBox1.Text += "繼續\n";
-                }
-            }
-            */
             if (flag_camera_start == 1)
             {
                 if (flag_camera_is_stopped == 0)
@@ -12268,20 +12432,6 @@ namespace iMS_Link
         {
             richTextBox1.Text += "bt_goto_awb_Click ST\n";
 
-            if (flag_comport_connection_ok == false)
-            {
-                richTextBox1.Text += "awb call connect_IMS_comport()\n";
-                connect_IMS_comport();
-            }
-
-            if (serialPort1.IsOpen)
-            {
-                button1.Enabled = false;
-                button2.Enabled = true;
-                this.BackColor = System.Drawing.SystemColors.ControlLight;
-                flag_comport_ok = true;
-            }
-
             tabControl1.SelectedTab = tp_USB;
 
             bt_zoom_Click(sender, e);
@@ -13246,31 +13396,6 @@ namespace iMS_Link
         private void bt_test_Click(object sender, EventArgs e)
         {
             /*
-            richTextBox1.Text += "none\n";
-            //write_awb_data_to_camera(data_R, data_B);
-
-            //check_webcam();
-
-            //check_comport();
-            richTextBox1.Text += "flag_camera_start = " + flag_camera_start.ToString() + "\n";
-            richTextBox1.Text += "Cam.IsRunning = " + Cam.IsRunning.ToString() + "\n";
-
-            if (Cam != null)
-            {
-                if ((flag_camera_start == 1) && (Cam.IsRunning == true))
-                {
-                    richTextBox1.Text += "USB影像傳輸中, 關閉\n";
-                    flag_camera_start = 0;
-                    Cam.Stop();  // WebCam stops capturing images.
-                    //Cam.SignalToStop();
-                    //Cam.WaitForStop();
-                    Cam = null;
-                    comboBox_webcam.Items.Clear();
-                }
-            }
-            */
-
-            /*
             //設定相機亮度
             richTextBox1.Text += "設定相機亮度\n";
 
@@ -13360,6 +13485,7 @@ namespace iMS_Link
                     {
                         //richTextBox1.Text += "有InsightEyes影像裝置 在 i = " + i.ToString() + "\n";
                         flag_ims_egd_exist = true;
+                        ims_camera_fullname = USBWebcams[i].MonikerString;
                         return S_OK;
                     }
                 }
@@ -13376,8 +13502,10 @@ namespace iMS_Link
         }
 
         bool flag_doing_check_webcam = false;
-        int check_webcam()
+        int Init_WebcamSetup()      //讀出目前相機資訊
         {
+            //檢查相機, 無需考慮comport連線
+
             if (flag_david_test3 == true)
             {
                 richTextBox1.Text += "david test 3, skip\n";
@@ -13385,156 +13513,134 @@ namespace iMS_Link
             }
 
             int i;
-            /*  檢查相機, 無需考慮comport連線
-            if ((flag_operation_mode != MODE_RELEASE_STAGE1A) && (flag_operation_mode != MODE_RELEASE_STAGE1B) && (flag_operation_mode != MODE_RELEASE_STAGE3))
-            {
-                if (flag_comport_ok == false)
-                {
-                    richTextBox1.Text += "no comport, abort\n";
-                    return S_FALSE;
-                }
-            }
-            */
+
             if (flag_doing_check_webcam == false)
             {
                 flag_doing_check_webcam = true;
             }
             else
             {
-                richTextBox1.Text += "doing check_webcam, abort\n";
+                richTextBox1.Text += "doing Init_WebcamSetup, abort\n";
                 return S_FALSE;
             }
 
-            /* 檢查相機, 無需考慮comport連線
-            if (flag_enaglb_awb_function == true)
-            {
-                richTextBox1.Text += "call check_webcam ST, 檢查相機有無接上\n";
-                g_conn_status = CAMERA_UNKNOWN;
-
-                delay(1000);
-
-                serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
-
-                Send_IMS_Data(0xFF, 0, 0, 0);
-
-                int cnt = 0;
-                while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 60))
-                {
-                    richTextBox1.Text += "y";
-                    delay(10);
-                    if ((cnt % 40) == 39)
-                    {
-                        richTextBox1.Text += "無回應, 再發一次命令2\n";
-                        serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
-                        Send_IMS_Data(0xFF, 0, 0, 0);
-                    }
-                }
-                richTextBox1.Text += "\ncnt = " + cnt.ToString() + "\n";    //usually cnt = 4
-                richTextBox1.Text += "時間 : " + DateTime.Now.ToString() + "\n";
-
-                if (g_conn_status == DONGLE_NONE)
-                {
-                    richTextBox1.Text += "無連接器3\n";
-                    flag_doing_check_webcam = false;
-                    return S_FALSE;
-                }
-                else if (g_conn_status == CAMERA_NONE)
-                {
-                    richTextBox1.Text += "有連接器, 無相機\n";
-                    flag_doing_check_webcam = false;
-                    return S_FALSE;
-                }
-                else if (g_conn_status == CAMERA_OK)
-                {
-                    richTextBox1.Text += "有連接器, 有相機d\n";
-                }
-                else if (g_conn_status == CAMERA_SENSOR_FAIL)
-                {
-                    richTextBox1.Text += "有連接器, 有相機, 但是相機無法讀寫b\n";
-                    tb_awb_mesg.Text = "相機無法讀寫";
-                    bt_awb_test.BackColor = Color.Red;
-                    flag_doing_awb = false;
-                    bt_awb_test.Enabled = false;
-                    playSound(S_FALSE);
-                }
-                else
-                {
-                    richTextBox1.Text += "狀態不明j, status = " + g_conn_status.ToString() + "\n";
-                    flag_doing_check_webcam = false;
-                    return S_FALSE;
-                }
-            }
-            */
+            richTextBox1.Text += "Init_WebcamSetup ST\n";
 
             flag_camera_use_insighteyes = 0;
             comboBox_webcam.Items.Clear();
-            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            VideoCaptureDevice Cam_tmp = null;
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
 
-            richTextBox1.Text += "check_webcam ST\n";
+            int webcam_count = USBWebcams.Count;
+            richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
+            /*
+            richTextBox1.Text += "USBWebcams.Capacity : " + USBWebcams.Capacity.ToString() + "\n";
+            richTextBox1.Text += "USBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
 
-            //USBWebcams2 = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+            i = 0;
+            foreach (FilterInfo vidDevice in USBWebcams)
             {
-                if (USBWebcams.Count == 1)
-                {
-                    richTextBox1.Text += "There is " + USBWebcams.Count.ToString() + " camera\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "There are " + USBWebcams.Count.ToString() + " cameras\n";
-                }
+                richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
+                richTextBox1.Text += "短名 : " + vidDevice.Name + "\n";
+                richTextBox1.Text += "長名 : " + vidDevice.MonikerString + "\n";
+                richTextBox1.Text += "\n";
+                i++;
+            }
+            */
 
-                for (i = 0; i < USBWebcams.Count; i++)
+            /* same
+            for (i = 0; i < webcam_count; i++)
+            {
+                richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
+                richTextBox1.Text += "短名 : " + USBWebcams[i].Name + "\n";
+                richTextBox1.Text += "長名 : " + USBWebcams[i].MonikerString + "\n";
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+            //抓出並顯示所有顯示能力
+            if (webcam_count > 0)  // The quantity of WebCam must be more than 0.
+            {
+                for (i = 0; i < webcam_count; i++)
                 {
+                    Cam = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
+
                     /*
-                    richTextBox1.Text += "camera " + i.ToString() + "\n";
-                    richTextBox1.Text += "name : " + USBWebcams[i].Name + "\n";
-                    richTextBox1.Text += "MonikerString: " + USBWebcams[i].MonikerString + "\n";
+                    richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
+                    richTextBox1.Text += "短名 : " + USBWebcams[i].Name + "\n";
+                    richTextBox1.Text += "ProvideSnapshots = " + Cam.ProvideSnapshots.ToString() + "\n";
+                    if (Cam.ProvideSnapshots == true)
+                    {
+                        richTextBox1.Text += "Snapshot len = " + Cam.SnapshotCapabilities.Length.ToString() + "\n";
+                        richTextBox1.Text += "Snapshot W = " + Cam.SnapshotResolution.FrameSize.Width.ToString() + "\n";
+                        richTextBox1.Text += "Snapshot H = " + Cam.SnapshotResolution.FrameSize.Height.ToString() + "\n";
+                        richTextBox1.Text += "Snapshot FR = " + Cam.SnapshotResolution.MaximumFrameRate.ToString() + "\n";
+                    }
+                    richTextBox1.Text += "顯示能力 VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
                     */
+
+                    var videoCapabilities = Cam.VideoCapabilities;
+                    foreach (var video in videoCapabilities)
+                    {
+                        /*
+                        richTextBox1.Text += "預覽分辨率 : " + video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + "\n";
+                        richTextBox1.Text += "AverageFrameRate : " + video.AverageFrameRate.ToString() + "\n";
+                        richTextBox1.Text += "BitCount : " + video.BitCount.ToString() + "\n";
+                        richTextBox1.Text += "MaximumFrameRate : " + video.MaximumFrameRate.ToString() + "\n";
+                        string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + " @ " + video.AverageFrameRate.ToString() + " Hz";
+                        //comboBox2.Items.Add(video_capability);
+                        */
+                    }
 
                     string webcam_name;
                     if (USBWebcams[i].Name.Contains("Virtual"))
                     {
                         richTextBox1.Text += "跳過 Virtual\n";
                         webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name;
+                        comboBox_webcam.Items.Add(webcam_name);
+                        richTextBox1.Text += webcam_name + "\n";
                     }
                     else
                     {
-                        Cam_tmp = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
-                        Cam_tmp.VideoResolution = Cam_tmp.VideoCapabilities[0];
-                        /*
-                        richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + "\n";
-                        //richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[0].FrameRate.ToString();
-                        richTextBox1.Text += "W = " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + "\n";
-                        richTextBox1.Text += "H = " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + "\n";
-                        */
-                        /*
-                        richTextBox1.Text += "BitCount = " + Cam_tmp.VideoCapabilities[0].BitCount.ToString() + "\n";
-                        richTextBox1.Text += "FR_max = " + Cam_tmp.VideoCapabilities[0].MaximumFrameRate.ToString() + "\n";
-                        richTextBox1.Text += "ProvideSnapshots = " + Cam_tmp.ProvideSnapshots.ToString() + "\n";
-                        if (Cam_tmp.ProvideSnapshots == true)
+                        int j;
+
+                        for (j = 0; j < Cam.VideoCapabilities.Length; j++)
                         {
-                            richTextBox1.Text += "Snapshot len = " + Cam_tmp.SnapshotCapabilities.Length.ToString() + "\n";
-                            richTextBox1.Text += "Snapshot W = " + Cam_tmp.SnapshotResolution.FrameSize.Width.ToString() + "\n";
-                            richTextBox1.Text += "Snapshot H = " + Cam_tmp.SnapshotResolution.FrameSize.Height.ToString() + "\n";
-                            richTextBox1.Text += "Snapshot FR = " + Cam_tmp.SnapshotResolution.MaximumFrameRate.ToString() + "\n";
+                            /*
+                            richTextBox1.Text += "FR1 = " + Cam.VideoCapabilities[j].AverageFrameRate.ToString() + "\n";
+                            //richTextBox1.Text += "FR1 = " + Cam.VideoCapabilities[j].FrameRate.ToString();
+                            richTextBox1.Text += "W = " + Cam.VideoCapabilities[j].FrameSize.Width.ToString() + "\n";
+                            richTextBox1.Text += "H = " + Cam.VideoCapabilities[j].FrameSize.Height.ToString() + "\n";
+                            */
+                            /*
+                            richTextBox1.Text += "BitCount = " + Cam.VideoCapabilities[j].BitCount.ToString() + "\n";
+                            richTextBox1.Text += "FR_max = " + Cam.VideoCapabilities[j].MaximumFrameRate.ToString() + "\n";
+                            richTextBox1.Text += "ProvideSnapshots = " + Cam.ProvideSnapshots.ToString() + "\n";
+                            if (Cam.ProvideSnapshots == true)
+                            {
+                                richTextBox1.Text += "Snapshot len = " + Cam.SnapshotCapabilities.Length.ToString() + "\n";
+                                richTextBox1.Text += "Snapshot W = " + Cam.SnapshotResolution.FrameSize.Width.ToString() + "\n";
+                                richTextBox1.Text += "Snapshot H = " + Cam.SnapshotResolution.FrameSize.Height.ToString() + "\n";
+                                richTextBox1.Text += "Snapshot FR = " + Cam.SnapshotResolution.MaximumFrameRate.ToString() + "\n";
+                            }
+                            richTextBox1.Text += "Cam.Source = " + Cam.Source.ToString() + "\n";
+                            richTextBox1.Text += "Cam.Source.Length = " + Cam.Source.Length.ToString() + "\n";
+                            richTextBox1.Text += "FrameRate = " + Cam.VideoResolution.FrameRate.ToString() + "\n";    //old
+                            richTextBox1.Text += "FrameSize.W = " + Cam.VideoResolution.FrameSize.Width.ToString() + "\n";
+                            richTextBox1.Text += "FrameSize.H = " + Cam.VideoResolution.FrameSize.Height.ToString() + "\n";
+                            */
+
+                            webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " "
+                                + Cam.VideoCapabilities[j].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[j].FrameSize.Height.ToString()
+                                + " @ " + Cam.VideoCapabilities[j].AverageFrameRate.ToString() + " Hz";
+
+                            comboBox_webcam.Items.Add(webcam_name);
+                            //richTextBox1.Text += webcam_name + "\n";
                         }
-                        richTextBox1.Text += "Cam.Source = " + Cam_tmp.Source.ToString() + "\n";
-                        richTextBox1.Text += "Cam.Source.Length = " + Cam_tmp.Source.Length.ToString() + "\n";
-                        richTextBox1.Text += "FrameRate = " + Cam_tmp.VideoResolution.FrameRate.ToString() + "\n";    //old
-                        richTextBox1.Text += "FrameSize.W = " + Cam_tmp.VideoResolution.FrameSize.Width.ToString() + "\n";
-                        richTextBox1.Text += "FrameSize.H = " + Cam_tmp.VideoResolution.FrameSize.Height.ToString() + "\n";
-                        */
-
-                        webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
                     }
-
-                    comboBox_webcam.Items.Add(webcam_name);
-                    richTextBox1.Text += webcam_name + "\n";
                 }
 
-                for (i = 0; i < USBWebcams.Count; i++)
+                for (i = 0; i < webcam_count; i++)
                 {
                     if (USBWebcams[i].Name == "InsightEyes")
                     {
@@ -13543,33 +13649,15 @@ namespace iMS_Link
                         Cam.VideoResolution = Cam.VideoCapabilities[0];
                         Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);     //綁定事件
 
-                        Cam.Start();   // WebCam starts capturing images.
+                        richTextBox1.Text += "Start_Webcam() bootup\n";
+                        Start_Webcam();
                         flag_camera_start = 1;
 
                         comboBox_webcam.Text = comboBox_webcam.Items[i].ToString();
                         flag_camera_use_insighteyes = 1;
                         break;
                     }
-
                 }
-
-                /*  若是找不到InsightEyes, 就算了
-                if (flag_camera_start != 1)     //若是找不到InsightEyes, 用第1個
-                {
-                    Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
-                    Cam.VideoResolution = Cam.VideoCapabilities[0];
-                    Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);     //綁定事件
-
-                    Cam.Start();   // WebCam starts capturing images.
-                    flag_camera_start = 1;
-                    richTextBox1.Text += "有影像裝置\n";
-
-                    //string webcam_name;
-                    i = 0;
-                    //webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
-                    comboBox_webcam.Text = comboBox_webcam.Items[i].ToString();
-                }
-                */
             }
             else
             {
@@ -13583,22 +13671,46 @@ namespace iMS_Link
 
         private void comboBox_webcam_SelectedIndexChanged(object sender, EventArgs e)
         {
+            /*
+            //現在不開放使用切換相機功能
             richTextBox1.Text += "你選取了" + comboBox_webcam.SelectedItem.ToString() + "\n";
             //richTextBox1.Text += "SelectedIndex = " + comboBox_webcam.SelectedIndex.ToString() + "\n";
 
             if (Cam != null)
             {
                 flag_camera_start = 0;
-                Cam.Stop();  // WebCam stops capturing images.
-                //Cam.SignalToStop();
-                //Cam.WaitForStop();
-                Cam = null;
+                Stop_Webcam();
             }
 
             Cam = new VideoCaptureDevice(USBWebcams[comboBox_webcam.SelectedIndex].MonikerString);
             Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
-            Cam.Start();   // WebCam starts capturing images.
+            Start_Webcam();
             flag_camera_start = 1;
+            */
+            return;
+        }
+
+        void Start_Webcam()
+        {
+            if (Cam != null)
+            {
+                Cam.Start();   // WebCam starts capturing images.
+            }
+        }
+
+        void Stop_Webcam()
+        {
+            if (Cam != null)
+            {
+                //show_main_message("停止", S_OK, 20);
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                while (Cam.IsRunning)
+                {
+                }
+                Cam = null;
+            }
         }
 
         void check_comport()
@@ -13900,7 +14012,7 @@ namespace iMS_Link
                         //Application.DoEvents();
                     }
 
-                    tb_awb_mesg.Text = connect_comport_cnt_max.ToString();
+                    //tb_awb_mesg.Text = connect_comport_cnt_max.ToString();
                     Application.DoEvents();
 
                     double diff_time = (DateTime.Now - start_time).TotalSeconds;
@@ -15186,7 +15298,7 @@ namespace iMS_Link
                 return;
             }
             int ret;
-            ret = try_connect_comport();
+            ret = try_connect_comport();    //是這個在耗時間 且不一定連得上
             if (ret == S_OK)
             {
                 richTextBox1.Text += "已連上IMS EGD System\n";
@@ -17148,11 +17260,26 @@ namespace iMS_Link
                         check_export_data();
                     }
                 }
-                else if ((tb_wait_product_data.Text.Length == 38) || (tb_wait_product_data.Text.Length == 39) || (tb_wait_product_data.Text.Length == 40))
+                else if ((tb_wait_product_data.Text.Length == 38) || (tb_wait_product_data.Text.Length == 39) || (tb_wait_product_data.Text.Length == 40) || (tb_wait_product_data.Text.Length == 41))
                 {
                     for (i = 0; i < tb_wait_product_data.Text.Length; i++)
                     {
-                        if ((tb_wait_product_data.Text.Length == 40) && (i == 26))
+                        if ((tb_wait_product_data.Text.Length == 40) && (i == 26))  //40碼, 第26碼 要英文
+                        {
+                            if (((tb_wait_product_data.Text[i] >= 'A') && (tb_wait_product_data.Text[i] <= 'Z')) || ((tb_wait_product_data.Text[i] >= 'a') && (tb_wait_product_data.Text[i] <= 'z')))
+                            {
+                                flag_incorrect_data = false;
+                            }
+                            else
+                            {
+                                flag_incorrect_data = true;
+                                richTextBox1.Text += "資料p2格式不正確a1\n";
+                                tb_wait_product_data.Text = "";
+                                tb_product2.Clear();
+                                tb_product2.BackColor = Color.Pink;
+                            }
+                        }
+                        else if ((tb_wait_product_data.Text.Length == 41) && ((i == 26) || (i == 36))) //41碼, 第26碼 第36碼 要英文
                         {
                             if (((tb_wait_product_data.Text[i] >= 'A') && (tb_wait_product_data.Text[i] <= 'Z')) || ((tb_wait_product_data.Text[i] >= 'a') && (tb_wait_product_data.Text[i] <= 'z')))
                             {
@@ -17601,11 +17728,26 @@ namespace iMS_Link
                 richTextBox1.Text += "無資料p2\n";
                 tb_product2.BackColor = Color.Pink;
             }
-            else if ((tb_product2.Text.Length == 38) || (tb_product2.Text.Length == 39) || (tb_product2.Text.Length == 40))
+            else if ((tb_product2.Text.Length == 38) || (tb_product2.Text.Length == 39) || (tb_product2.Text.Length == 40) || (tb_product2.Text.Length == 41))
             {
                 for (i = 0; i < tb_product2.Text.Length; i++)
                 {
-                    if ((tb_product2.Text.Length == 40) && (i == 26))
+                    if ((tb_product2.Text.Length == 40) && (i == 26))   //40碼, 第26碼 要英文
+                    {
+                        if (((tb_product2.Text[i] >= 'A') && (tb_product2.Text[i] <= 'Z')) || ((tb_product2.Text[i] >= 'a') && (tb_product2.Text[i] <= 'z')))
+                        {
+                            flag_incorrect_data = false;
+                        }
+                        else
+                        {
+                            flag_incorrect_data = true;
+                            richTextBox1.Text += "資料p2格式不正確b1\n";
+                            tb_wait_product_data.Text = "";
+                            tb_product2.Clear();
+                            tb_product2.BackColor = Color.Pink;
+                        }
+                    }
+                    else if ((tb_product2.Text.Length == 41) && ((i == 26) || (i == 36)))   //41碼, 第26碼 第36碼 要英文
                     {
                         if (((tb_product2.Text[i] >= 'A') && (tb_product2.Text[i] <= 'Z')) || ((tb_product2.Text[i] >= 'a') && (tb_product2.Text[i] <= 'z')))
                         {
@@ -20014,7 +20156,7 @@ namespace iMS_Link
                     }
                 }
                 */
-                if ((tb_sale3.Text.Length == 39) || (tb_sale3.Text.Length == 40))
+                if ((tb_sale3.Text.Length == 39) || (tb_sale3.Text.Length == 40) || (tb_sale3.Text.Length == 41))
                 {
                     if (tb_sale3.Text.Length == 39)         //all numbers　ex : 010000000000000017221202102012002210015
                     {
@@ -20029,7 +20171,7 @@ namespace iMS_Link
                             }
                         }
                     }
-                    else          //len = 40  ex : 01000000000000001722120210N2012002210015
+                    else if (tb_sale3.Text.Length == 40)          //len = 40  ex : 0100000000000000 17221202 10N2012002 210015
                     {
                         for (i = 0; i < tb_sale3.Text.Length; i++)
                         {
@@ -20044,6 +20186,26 @@ namespace iMS_Link
                                 }
                             }
                         }
+                    }
+                    else if (tb_sale3.Text.Length == 41)          //len = 41  ex : 0100000000000000 17230721 10N2106002 21A0264
+                    {
+                        for (i = 0; i < tb_sale3.Text.Length; i++)
+                        {
+                            if ((i != 26) && (i != 36))     //position 26, 36 contains non-numbers
+                            {
+                                if ((tb_sale3.Text[i] < '0') || (tb_sale3.Text[i] > '9'))
+                                {
+                                    flag_incorrect_data = true;
+                                    richTextBox1.Text += "_41資料格式不正確, 資料 : " + tb_sale3.Text + "\n";
+                                    tb_sale3.Clear();
+                                    tb_sale3.BackColor = Color.Pink;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        flag_incorrect_data = true;
                     }
 
                     if (flag_incorrect_data == false)
@@ -21895,10 +22057,7 @@ namespace iMS_Link
                 {
                     richTextBox1.Text += "USB影像傳輸中, 關閉\n";
                     flag_camera_start = 0;
-                    Cam.Stop();  // WebCam stops capturing images.
-                    //Cam.SignalToStop();
-                    //Cam.WaitForStop();
-                    Cam = null;
+                    Stop_Webcam();
                     comboBox_webcam.Items.Clear();
                 }
             }
@@ -21912,10 +22071,7 @@ namespace iMS_Link
                 if (Cam.IsRunning == true)  // When Form1 closes itself, WebCam must stop, too.
                 {
                     flag_camera_start = 0;
-                    Cam.Stop();   // WebCam stops capturing images.
-                    //Cam.SignalToStop();
-                    //Cam.WaitForStop();
-                    Cam = null;
+                    Stop_Webcam();
                     richTextBox1.Text += "先關閉camera\n";
                 }
             }
@@ -24519,14 +24675,6 @@ namespace iMS_Link
             double sd;
             sd = SD(sd_num);
             richTextBox1.Text += "SD = " + sd.ToString() + "\n";
-            */
-
-            /*
-            int ret = check_ims_camera();
-            if (ret == S_OK)
-                richTextBox1.Text += "有InsightEyes影像裝置\n";
-            else
-                richTextBox1.Text += "無InsightEyes影像裝置\n";
             */
 
             //test_save_picturebox();
@@ -27969,6 +28117,9 @@ namespace iMS_Link
             cb_apply_rgb.Location = new Point(x_st + dx * 3 + 50, y_st + dy * 0 + region_y * 2);
             this.pictureBox3.Controls.Add(cb_apply_rgb);	// 將控件加入表單
 
+            w = 250;
+            h = 30;
+
             tbar_lenc1.Width = w;
             tbar_lenc1.Height = h;
             tbar_lenc1.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 1 + region_y * 3);
@@ -28111,14 +28262,14 @@ namespace iMS_Link
 
             btn_lenc_test1.Width = w - 20;
             btn_lenc_test1.Height = h;
-            btn_lenc_test1.Text = "test1";
+            btn_lenc_test1.Text = "only G";
             btn_lenc_test1.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 4 + 52 + 5, y_st + dy * (-1) + 30);
             btn_lenc_test1.Click += btn_lenc_test1_click;	// 加入事件
             this.pictureBox3.Controls.Add(btn_lenc_test1);	// 將控件加入表單
 
             btn_lenc_test2.Width = w - 20;
             btn_lenc_test2.Height = h;
-            btn_lenc_test2.Text = "test2";
+            btn_lenc_test2.Text = "RGB";
             btn_lenc_test2.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 4 + 52 + 5, y_st + dy * (-1) + 30 + 40);
             btn_lenc_test2.Click += btn_lenc_test2_click;	// 加入事件
             this.pictureBox3.Controls.Add(btn_lenc_test2);	// 將控件加入表單
@@ -28147,7 +28298,7 @@ namespace iMS_Link
             btn_lenc_test6.Width = w - 20;
             btn_lenc_test6.Height = h;
             btn_lenc_test6.Text = "X0Y0";
-            btn_lenc_test6.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 4 + 52 + 6, y_st + dy * (-1) + 30 + 160);
+            btn_lenc_test6.Location = new Point(x_st + dx * 1 + offset + (w + 5) * 4 + 52 + 5, y_st + dy * (-1) + 30 + 200);
             btn_lenc_test6.Click += btn_lenc_test6_click;	// 加入事件
             this.pictureBox3.Controls.Add(btn_lenc_test6);	// 將控件加入表單
 
@@ -28676,7 +28827,37 @@ namespace iMS_Link
 
         private void btn_reset_lenc_ctrl_click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "\nReset\n\n";
             byte SendData = 0;
+
+            cb_lenc3.Checked = true;
+            cb_lenc2.Checked = true;
+            cb_lenc1.Checked = false;
+            cb_lenc0.Checked = true;
+
+            int value = 0;
+            if (cb_lenc3.Checked == true)
+                value |= (1 << 3);
+            if (cb_lenc2.Checked == true)
+                value |= (1 << 2);
+            if (cb_lenc1.Checked == true)
+                value |= (1 << 1);
+            if (cb_lenc0.Checked == true)
+                value |= (1 << 0);
+            //richTextBox1.Text += "value = 0x " + value.ToString("X2") + " = " + value.ToString() + "\n";
+
+            tb_lenc0h.Text = value.ToString("X2");
+            tb_lenc0.Text = value.ToString();
+            //tb_lenc0h.ForeColor = Color.Red;
+            //tb_lenc0.ForeColor = Color.Red;
+
+            SendData = 0x0D;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x18;
+
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
 
             tbar_lenc1.Value = 0x14;
             tb_lenc1.ForeColor = Color.Black;
@@ -29870,8 +30051,16 @@ namespace iMS_Link
 
             tb_lenc0h.Text = value.ToString("X2");
             tb_lenc0.Text = value.ToString();
-            tb_lenc0h.ForeColor = Color.Red;
-            tb_lenc0.ForeColor = Color.Red;
+            //tb_lenc0h.ForeColor = Color.Red;
+            //tb_lenc0.ForeColor = Color.Red;
+
+            byte SendData = (byte)value;
+            DongleAddr_h = 0x51;
+            DongleAddr_l = 0x18;
+
+            richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            show_main_message_cmx_lenc("寫入", S_OK, 10);
         }
 
         void remove_all_controls_in_pictureBox3()

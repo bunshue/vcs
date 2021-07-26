@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_WebCam_AForge4
+namespace vcs_Draw_Dynamics3
 {
     static class Program
     {

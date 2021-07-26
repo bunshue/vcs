@@ -95,7 +95,7 @@ namespace vcs_ImageProcessingB
             pictureBox1.Image = Image.FromFile(filename);
         }
 
-        //旋轉90,180,270度
+        //旋轉 90, 180, 270 度
         public Bitmap RotateImage(Bitmap bmp, int angle)
         {
             if (angle != 90 && angle != 180 && angle != 270)
@@ -450,7 +450,7 @@ namespace vcs_ImageProcessingB
                 Rectangle rect = new Rectangle(0, 0, Width, Height);
 
                 // get source bitmap pixel format size
-                Depth = System.Drawing.Bitmap.GetPixelFormatSize(source.PixelFormat);
+                Depth = Bitmap.GetPixelFormatSize(source.PixelFormat);
 
                 // Check if bpp (Bits Per Pixel) is 8, 24, or 32
                 if (Depth != 8 && Depth != 24 && Depth != 32)
@@ -604,7 +604,7 @@ namespace vcs_ImageProcessingB
                 Rectangle rect = new Rectangle(0, 0, Width, Height);
 
                 // get source bitmap pixel format size
-                Depth = System.Drawing.Bitmap.GetPixelFormatSize(source.PixelFormat);
+                Depth = Bitmap.GetPixelFormatSize(source.PixelFormat);
 
                 // Check if bpp (Bits Per Pixel) is 8, 24, or 32
                 if (Depth != 8 && Depth != 24 && Depth != 32)
@@ -721,8 +721,5 @@ namespace vcs_ImageProcessingB
             else return Span.TotalSeconds;
         }
     }
-
-
-
-
 }
+
