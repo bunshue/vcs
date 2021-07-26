@@ -60,10 +60,14 @@ namespace vcs_Draw_Dynamics
             H = pictureBox1.Height;
             x_st = 0;
             y_st = INITIAL_HEIGHT;
-            lb_main_mesg.Text = "";
-            lb_mesg1.Text = "發射次數 : " + try_count.ToString();
-            lb_mesg2.Text = "";
-            lb_mesg3.Text = "";
+            //lb_main_mesg.Text = "";
+            lb_shoot_count.Text = "發射次數 : " + try_count.ToString();
+            //lb_energy_ek.Text = "";
+            //lb_energy_ep.Text = "";
+            //lb_energy_es.Text = "";
+            //lb_energy_et.Text = "";
+             
+            //lb_initial_speed.Text = "";
             trackBar1_Scroll(sender, e);
             rb_bird_CheckedChanged(sender, e);
 
@@ -98,12 +102,16 @@ namespace vcs_Draw_Dynamics
             pictureBox_bird.Size = new Size(200, 200);
             pictureBox_bird.Location = new Point(60, 60);
 
-            lb_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            lb_mesg2.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            lb_mesg3.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            lb_energy_ep.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_energy_ek.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            lb_velocity.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+
+            lb_energy_es.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            lb_energy_et.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+
             lb_total_energy.Location = new Point(x_st + dx * 4, y_st + dy * 6);
             lb_this_energy.Location = new Point(x_st + dx * 4, y_st + dy * 7);
-            lb_speed.Location = new Point(x_st + dx * 4, y_st + dy * 8 + 20);
+            lb_initial_speed.Location = new Point(x_st + dx * 4, y_st + dy * 8 + 20);
 
             progressBar_total_energy.Maximum = total_energy;
             progressBar_total_energy.Minimum = 0;
@@ -128,7 +136,8 @@ namespace vcs_Draw_Dynamics
             pictureBox1.BackColor = Color.FromArgb(244, 252, 254);
             pictureBox_bird.BackColor = Color.FromArgb(244, 252, 254);
 
-            lb_main_mesg.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - 300, pictureBox1.Location.Y + 20);
+            lb_shoot_count.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - 300, pictureBox1.Location.Y + 20);
+            lb_main_mesg.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - 300, pictureBox1.Location.Y + 20 + 40);
 
             x_st = 25;
             y_st = 25;
@@ -348,15 +357,17 @@ namespace vcs_Draw_Dynamics
 
                 if ((x_st < 1000) && (y_st >= 0))
                 {
-                    lb_mesg2.Text = "動能 : " + EK.ToString() + " 焦耳\t\t位能 : " + EP.ToString() + " 焦耳\t\t總能量" + (EK + EP).ToString() + " 焦耳";
-                    lb_mesg3.Text = "vx = " + vx.ToString() + " m/s\tvy = " + vy.ToString() + " m/s\tv = " + v.ToString() + " m/s";
+                    lb_energy_ep.Text = "位能 : " + EP.ToString() + " 焦耳";
+                    lb_energy_ek.Text = "動能 : " + EK.ToString() + " 焦耳\t\t總能量" + (EK + EP).ToString() + " 焦耳";
+                    lb_velocity.Text = "vx = " + vx.ToString() + " m/s\tvy = " + vy.ToString() + " m/s\tv = " + v.ToString() + " m/s";
                 }
                 else if (y_st <= 0)
                 {
                     y_st = 0;
                     EP = (int)(mass * g * y_st);
-                    lb_mesg2.Text = "動能 : " + EK.ToString() + " 焦耳\t\t位能 : " + EP.ToString() + " 焦耳\t\t總能量" + (EK + EP).ToString() + " 焦耳";
-                    lb_mesg3.Text = "vx = " + vx.ToString() + " m/s\tvy = " + vy.ToString() + " m/s\tv = " + v.ToString() + " m/s";
+                    lb_energy_ep.Text = "位能 : " + EP.ToString() + " 焦耳";
+                    lb_energy_ek.Text = "動能 : " + EK.ToString() + " 焦耳\t\t總能量" + (EK + EP).ToString() + " 焦耳";
+                    lb_velocity.Text = "vx = " + vx.ToString() + " m/s\tvy = " + vy.ToString() + " m/s\tv = " + v.ToString() + " m/s";
                 }
             }
 
@@ -419,6 +430,14 @@ namespace vcs_Draw_Dynamics
             Rectangle destRect3 = new Rectangle(W - 100 - ww / 2, 600 - hh / 2 + hh, ww, 300);
             e.Graphics.FillRectangle(new SolidBrush(Color.Lime), destRect3);
             e.Graphics.DrawString("300 M", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(W - 100 - ww / 2 + 10, 600 - hh / 2 + hh + 5));
+
+
+            Pen p = new Pen(Color.Black, 5);
+            e.Graphics.DrawLine(p, 200, H - 5, W - 100 - ww / 2, H - 5);
+            int distance = W - 100 - ww / 2 - 200;
+            //richTextBox1.Text += "line = " + distance.ToString() + "\n";
+            e.Graphics.DrawString(distance.ToString() + " M", new Font("標楷體", 20), new SolidBrush(Color.Black), new PointF((W - 100 - ww / 2 + 10 + 200) / 2 - 50, H - 40));
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -439,7 +458,7 @@ namespace vcs_Draw_Dynamics
 
             drop_down_time = 0;
             try_count++;
-            lb_mesg1.Text = "發射次數 : " + try_count.ToString();
+            lb_shoot_count.Text = "發射次數 : " + try_count.ToString();
 
             //richTextBox1.Text += "total = " + total_energy.ToString() + "\tthis = " + this_energy.ToString() + "\n";
             total_energy -= this_energy;
@@ -530,9 +549,9 @@ namespace vcs_Draw_Dynamics
             x_st = 0;
             y_st = INITIAL_HEIGHT;
             lb_main_mesg.Text = "";
-            lb_mesg1.Text = "發射次數 : " + try_count.ToString();
-            lb_mesg2.Text = "";
-            lb_mesg3.Text = "";
+            lb_shoot_count.Text = "發射次數 : " + try_count.ToString();
+            lb_energy_ek.Text = "";
+            lb_velocity.Text = "";
             trackBar1_Scroll(sender, e);
             rb2.Checked = false;
             rb3.Checked = false;
@@ -588,7 +607,7 @@ namespace vcs_Draw_Dynamics
 
         void update_energy()
         {
-            lb_speed.Text = "初速度 : " + vx.ToString() + " m/s";
+            lb_initial_speed.Text = "初速度 : " + vx.ToString() + " m/s";
             this_energy = (int)(mass * vx * vx / 2);
             if (this_energy <= progressBar_this_energy.Maximum)
             {
@@ -600,8 +619,6 @@ namespace vcs_Draw_Dynamics
                 //progressBar_this_energy 應改成紅色
             }
 
-            //lb_mesg1.Text = "初速度 : " + vx.ToString() + " m/s       能量 : " + this_energy.ToString() + " 焦耳";
-            //lb_mesg2.Text = "初速度 : " + vx.ToString() + " m/s       能量 : " + this_energy.ToString() + " 焦耳";
             lb_this_energy.Text = "預計能量 : " + this_energy.ToString() + " 焦耳";
             lb_total_energy.Text = "總能量 : " + total_energy.ToString() + " 焦耳";
             if ((total_energy >= progressBar_total_energy.Minimum) && (total_energy <= progressBar_total_energy.Maximum))

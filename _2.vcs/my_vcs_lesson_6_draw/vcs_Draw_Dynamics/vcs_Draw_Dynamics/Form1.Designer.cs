@@ -37,9 +37,9 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.lb_mesg1 = new System.Windows.Forms.Label();
+            this.lb_shoot_count = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.lb_mesg2 = new System.Windows.Forms.Label();
+            this.lb_energy_ek = new System.Windows.Forms.Label();
             this.progressBar_total_energy = new System.Windows.Forms.ProgressBar();
             this.groupBox_bird = new System.Windows.Forms.GroupBox();
             this.rb4 = new System.Windows.Forms.RadioButton();
@@ -50,11 +50,14 @@
             this.pictureBox_bird = new System.Windows.Forms.PictureBox();
             this.progressBar_this_energy = new System.Windows.Forms.ProgressBar();
             this.lb_this_energy = new System.Windows.Forms.Label();
-            this.lb_speed = new System.Windows.Forms.Label();
+            this.lb_initial_speed = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
-            this.lb_mesg3 = new System.Windows.Forms.Label();
+            this.lb_velocity = new System.Windows.Forms.Label();
+            this.lb_energy_ep = new System.Windows.Forms.Label();
+            this.lb_energy_es = new System.Windows.Forms.Label();
+            this.lb_energy_et = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox_bird.SuspendLayout();
@@ -134,15 +137,15 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // lb_mesg1
+            // lb_shoot_count
             // 
-            this.lb_mesg1.AutoSize = true;
-            this.lb_mesg1.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_mesg1.Location = new System.Drawing.Point(501, 42);
-            this.lb_mesg1.Name = "lb_mesg1";
-            this.lb_mesg1.Size = new System.Drawing.Size(72, 16);
-            this.lb_mesg1.TabIndex = 7;
-            this.lb_mesg1.Text = "發射次數";
+            this.lb_shoot_count.AutoSize = true;
+            this.lb_shoot_count.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_shoot_count.Location = new System.Drawing.Point(501, 431);
+            this.lb_shoot_count.Name = "lb_shoot_count";
+            this.lb_shoot_count.Size = new System.Drawing.Size(72, 16);
+            this.lb_shoot_count.TabIndex = 7;
+            this.lb_shoot_count.Text = "發射次數";
             // 
             // button4
             // 
@@ -154,15 +157,15 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // lb_mesg2
+            // lb_energy_ek
             // 
-            this.lb_mesg2.AutoSize = true;
-            this.lb_mesg2.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_mesg2.Location = new System.Drawing.Point(501, 70);
-            this.lb_mesg2.Name = "lb_mesg2";
-            this.lb_mesg2.Size = new System.Drawing.Size(40, 16);
-            this.lb_mesg2.TabIndex = 9;
-            this.lb_mesg2.Text = "動能";
+            this.lb_energy_ek.AutoSize = true;
+            this.lb_energy_ek.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_energy_ek.Location = new System.Drawing.Point(501, 71);
+            this.lb_energy_ek.Name = "lb_energy_ek";
+            this.lb_energy_ek.Size = new System.Drawing.Size(40, 16);
+            this.lb_energy_ek.TabIndex = 9;
+            this.lb_energy_ek.Text = "動能";
             // 
             // progressBar_total_energy
             // 
@@ -268,15 +271,15 @@
             this.lb_this_energy.TabIndex = 16;
             this.lb_this_energy.Text = "預計能量";
             // 
-            // lb_speed
+            // lb_initial_speed
             // 
-            this.lb_speed.AutoSize = true;
-            this.lb_speed.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_speed.Location = new System.Drawing.Point(501, 218);
-            this.lb_speed.Name = "lb_speed";
-            this.lb_speed.Size = new System.Drawing.Size(56, 16);
-            this.lb_speed.TabIndex = 17;
-            this.lb_speed.Text = "初速度";
+            this.lb_initial_speed.AutoSize = true;
+            this.lb_initial_speed.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_initial_speed.Location = new System.Drawing.Point(501, 218);
+            this.lb_initial_speed.Name = "lb_initial_speed";
+            this.lb_initial_speed.Size = new System.Drawing.Size(56, 16);
+            this.lb_initial_speed.TabIndex = 17;
+            this.lb_initial_speed.Text = "初速度";
             // 
             // timer2
             // 
@@ -299,33 +302,66 @@
             // 
             this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
             // 
-            // lb_mesg3
+            // lb_velocity
             // 
-            this.lb_mesg3.AutoSize = true;
-            this.lb_mesg3.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_mesg3.Location = new System.Drawing.Point(501, 103);
-            this.lb_mesg3.Name = "lb_mesg3";
-            this.lb_mesg3.Size = new System.Drawing.Size(48, 16);
-            this.lb_mesg3.TabIndex = 19;
-            this.lb_mesg3.Text = "vx = ";
+            this.lb_velocity.AutoSize = true;
+            this.lb_velocity.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_velocity.Location = new System.Drawing.Point(501, 103);
+            this.lb_velocity.Name = "lb_velocity";
+            this.lb_velocity.Size = new System.Drawing.Size(48, 16);
+            this.lb_velocity.TabIndex = 19;
+            this.lb_velocity.Text = "vx = ";
+            // 
+            // lb_energy_ep
+            // 
+            this.lb_energy_ep.AutoSize = true;
+            this.lb_energy_ep.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_energy_ep.Location = new System.Drawing.Point(501, 35);
+            this.lb_energy_ep.Name = "lb_energy_ep";
+            this.lb_energy_ep.Size = new System.Drawing.Size(40, 16);
+            this.lb_energy_ep.TabIndex = 20;
+            this.lb_energy_ep.Text = "位能";
+            // 
+            // lb_energy_es
+            // 
+            this.lb_energy_es.AutoSize = true;
+            this.lb_energy_es.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_energy_es.Location = new System.Drawing.Point(636, 35);
+            this.lb_energy_es.Name = "lb_energy_es";
+            this.lb_energy_es.Size = new System.Drawing.Size(72, 16);
+            this.lb_energy_es.TabIndex = 21;
+            this.lb_energy_es.Text = "彈性位能";
+            // 
+            // lb_energy_et
+            // 
+            this.lb_energy_et.AutoSize = true;
+            this.lb_energy_et.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_energy_et.Location = new System.Drawing.Point(636, 71);
+            this.lb_energy_et.Name = "lb_energy_et";
+            this.lb_energy_et.Size = new System.Drawing.Size(56, 16);
+            this.lb_energy_et.TabIndex = 22;
+            this.lb_energy_et.Text = "總能量";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1336, 627);
-            this.Controls.Add(this.lb_mesg3);
+            this.Controls.Add(this.lb_energy_et);
+            this.Controls.Add(this.lb_energy_es);
+            this.Controls.Add(this.lb_energy_ep);
+            this.Controls.Add(this.lb_velocity);
             this.Controls.Add(this.lb_main_mesg);
-            this.Controls.Add(this.lb_speed);
+            this.Controls.Add(this.lb_initial_speed);
             this.Controls.Add(this.lb_this_energy);
             this.Controls.Add(this.progressBar_this_energy);
             this.Controls.Add(this.pictureBox_bird);
             this.Controls.Add(this.lb_total_energy);
             this.Controls.Add(this.groupBox_bird);
             this.Controls.Add(this.progressBar_total_energy);
-            this.Controls.Add(this.lb_mesg2);
+            this.Controls.Add(this.lb_energy_ek);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.lb_mesg1);
+            this.Controls.Add(this.lb_shoot_count);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.trackBar1);
@@ -356,9 +392,9 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label lb_mesg1;
+        private System.Windows.Forms.Label lb_shoot_count;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label lb_mesg2;
+        private System.Windows.Forms.Label lb_energy_ek;
         private System.Windows.Forms.ProgressBar progressBar_total_energy;
         private System.Windows.Forms.GroupBox groupBox_bird;
         private System.Windows.Forms.RadioButton rb4;
@@ -369,11 +405,14 @@
         private System.Windows.Forms.PictureBox pictureBox_bird;
         private System.Windows.Forms.ProgressBar progressBar_this_energy;
         private System.Windows.Forms.Label lb_this_energy;
-        private System.Windows.Forms.Label lb_speed;
+        private System.Windows.Forms.Label lb_initial_speed;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label lb_main_mesg;
         private System.Windows.Forms.Timer timer_display;
-        private System.Windows.Forms.Label lb_mesg3;
+        private System.Windows.Forms.Label lb_velocity;
+        private System.Windows.Forms.Label lb_energy_ep;
+        private System.Windows.Forms.Label lb_energy_es;
+        private System.Windows.Forms.Label lb_energy_et;
     }
 }
 
