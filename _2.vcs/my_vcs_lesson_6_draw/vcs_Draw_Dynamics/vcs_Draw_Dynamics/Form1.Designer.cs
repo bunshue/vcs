@@ -66,7 +66,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1000, 600);
+            this.pictureBox1.Size = new System.Drawing.Size(324, 218);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -138,11 +138,11 @@
             // 
             this.lb_mesg1.AutoSize = true;
             this.lb_mesg1.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_mesg1.Location = new System.Drawing.Point(1028, 136);
+            this.lb_mesg1.Location = new System.Drawing.Point(501, 42);
             this.lb_mesg1.Name = "lb_mesg1";
-            this.lb_mesg1.Size = new System.Drawing.Size(56, 16);
+            this.lb_mesg1.Size = new System.Drawing.Size(72, 16);
             this.lb_mesg1.TabIndex = 7;
-            this.lb_mesg1.Text = "label1";
+            this.lb_mesg1.Text = "發射次數";
             // 
             // button4
             // 
@@ -158,11 +158,11 @@
             // 
             this.lb_mesg2.AutoSize = true;
             this.lb_mesg2.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_mesg2.Location = new System.Drawing.Point(1067, 147);
+            this.lb_mesg2.Location = new System.Drawing.Point(501, 70);
             this.lb_mesg2.Name = "lb_mesg2";
-            this.lb_mesg2.Size = new System.Drawing.Size(56, 16);
+            this.lb_mesg2.Size = new System.Drawing.Size(40, 16);
             this.lb_mesg2.TabIndex = 9;
-            this.lb_mesg2.Text = "label1";
+            this.lb_mesg2.Text = "動能";
             // 
             // progressBar_total_energy
             // 
@@ -178,7 +178,7 @@
             this.groupBox_bird.Controls.Add(this.rb3);
             this.groupBox_bird.Controls.Add(this.rb2);
             this.groupBox_bird.Controls.Add(this.rb1);
-            this.groupBox_bird.Location = new System.Drawing.Point(359, 188);
+            this.groupBox_bird.Location = new System.Drawing.Point(12, 262);
             this.groupBox_bird.Name = "groupBox_bird";
             this.groupBox_bird.Size = new System.Drawing.Size(372, 65);
             this.groupBox_bird.TabIndex = 11;
@@ -235,7 +235,7 @@
             // 
             this.lb_total_energy.AutoSize = true;
             this.lb_total_energy.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_total_energy.Location = new System.Drawing.Point(1067, 114);
+            this.lb_total_energy.Location = new System.Drawing.Point(501, 174);
             this.lb_total_energy.Name = "lb_total_energy";
             this.lb_total_energy.Size = new System.Drawing.Size(56, 16);
             this.lb_total_energy.TabIndex = 12;
@@ -262,21 +262,21 @@
             // 
             this.lb_this_energy.AutoSize = true;
             this.lb_this_energy.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_this_energy.Location = new System.Drawing.Point(1115, 114);
+            this.lb_this_energy.Location = new System.Drawing.Point(501, 141);
             this.lb_this_energy.Name = "lb_this_energy";
-            this.lb_this_energy.Size = new System.Drawing.Size(40, 16);
+            this.lb_this_energy.Size = new System.Drawing.Size(72, 16);
             this.lb_this_energy.TabIndex = 16;
-            this.lb_this_energy.Text = "能量";
+            this.lb_this_energy.Text = "預計能量";
             // 
             // lb_speed
             // 
             this.lb_speed.AutoSize = true;
             this.lb_speed.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_speed.Location = new System.Drawing.Point(1115, 147);
+            this.lb_speed.Location = new System.Drawing.Point(501, 218);
             this.lb_speed.Name = "lb_speed";
-            this.lb_speed.Size = new System.Drawing.Size(40, 16);
+            this.lb_speed.Size = new System.Drawing.Size(56, 16);
             this.lb_speed.TabIndex = 17;
-            this.lb_speed.Text = "能量";
+            this.lb_speed.Text = "初速度";
             // 
             // timer2
             // 
@@ -289,7 +289,7 @@
             this.lb_main_mesg.AutoSize = true;
             this.lb_main_mesg.Font = new System.Drawing.Font("標楷體", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg.Location = new System.Drawing.Point(1042, 182);
+            this.lb_main_mesg.Location = new System.Drawing.Point(496, 361);
             this.lb_main_mesg.Name = "lb_main_mesg";
             this.lb_main_mesg.Size = new System.Drawing.Size(320, 48);
             this.lb_main_mesg.TabIndex = 18;
@@ -303,11 +303,11 @@
             // 
             this.lb_mesg3.AutoSize = true;
             this.lb_mesg3.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_mesg3.Location = new System.Drawing.Point(1032, 86);
+            this.lb_mesg3.Location = new System.Drawing.Point(501, 103);
             this.lb_mesg3.Name = "lb_mesg3";
-            this.lb_mesg3.Size = new System.Drawing.Size(56, 16);
+            this.lb_mesg3.Size = new System.Drawing.Size(48, 16);
             this.lb_mesg3.TabIndex = 19;
-            this.lb_mesg3.Text = "label1";
+            this.lb_mesg3.Text = "vx = ";
             // 
             // Form1
             // 

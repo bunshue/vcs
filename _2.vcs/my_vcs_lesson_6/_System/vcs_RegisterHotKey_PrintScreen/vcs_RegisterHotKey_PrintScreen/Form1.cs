@@ -52,7 +52,7 @@ namespace vcs_RegisterHotKey_PrintScreen
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
 
             this.Location = new System.Drawing.Point(screenWidth - this.Width - 50, screenHeight - this.Height - 50);
-            this.BackColor = Color.Pink;
+            this.BackColor = Color.Gold;
         }
 
         void save_fullscreen_to_local_drive()
