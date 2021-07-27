@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApplication1testpb.Properties
+namespace vcs_ProgressBar.Properties
 {
 
 

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("WindowsFormsApplication1testpb")]
+[assembly: AssemblyTitle("vcs_ProgressBar")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WindowsFormsApplication1testpb")]
+[assembly: AssemblyProduct("vcs_ProgressBar")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("264db75c-818e-41d3-b400-bec3e19606b7")]
+[assembly: Guid("4c8963a6-363a-42c7-89b8-4ad544ace55e")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

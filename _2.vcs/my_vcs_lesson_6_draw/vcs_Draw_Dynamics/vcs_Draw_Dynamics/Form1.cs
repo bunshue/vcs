@@ -39,6 +39,7 @@ namespace vcs_Draw_Dynamics
 
         int try_count = 0;
 
+        int g = 10;
         int drop_down_time = 0;
 
         int timer_display_show_main_mesg_count = 0;
@@ -225,7 +226,6 @@ namespace vcs_Draw_Dynamics
             int hh = 40;
 
             List<PointF> Points = new List<PointF>();
-            int g = 10;
             /*
             SolidBrush redBrush = new SolidBrush(Color.Red);
             //e.Graphics.DrawRectangle(new Pen(Color.Red, 1), x_st - sw / 2, y_st - sh / 2, sw, sh);
@@ -316,7 +316,6 @@ namespace vcs_Draw_Dynamics
                         }
 
                         Points.Add(new PointF(pts[i][2] + ww / 2, pts[i][3] - hh / 2));
-
 
                         Color color_trajectory;
 
@@ -431,13 +430,11 @@ namespace vcs_Draw_Dynamics
             e.Graphics.FillRectangle(new SolidBrush(Color.Lime), destRect3);
             e.Graphics.DrawString("300 M", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(W - 100 - ww / 2 + 10, 600 - hh / 2 + hh + 5));
 
-
             Pen p = new Pen(Color.Black, 5);
             e.Graphics.DrawLine(p, 200, H - 5, W - 100 - ww / 2, H - 5);
             int distance = W - 100 - ww / 2 - 200;
             //richTextBox1.Text += "line = " + distance.ToString() + "\n";
             e.Graphics.DrawString(distance.ToString() + " M", new Font("標楷體", 20), new SolidBrush(Color.Black), new PointF((W - 100 - ww / 2 + 10 + 200) / 2 - 50, H - 40));
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -632,9 +629,7 @@ namespace vcs_Draw_Dynamics
             else
             {
                 richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
-
             }
-
         }
 
         private void timer2_Tick(object sender, EventArgs e)

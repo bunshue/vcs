@@ -42,12 +42,6 @@ namespace WindowsFormsApplication1ffffff
             trackBar1.Value = 1;
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            progressBar1.BackColor = Color.Red;
-            progressBar1.ForeColor = Color.Red;
-            progressBar1.Value = 50;
-        }
     }
 }
+

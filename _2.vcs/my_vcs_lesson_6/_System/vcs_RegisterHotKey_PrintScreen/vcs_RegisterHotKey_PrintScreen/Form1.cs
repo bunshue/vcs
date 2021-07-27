@@ -34,15 +34,14 @@ namespace vcs_RegisterHotKey_PrintScreen
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label1.Text = "測試快捷鍵範例" + Environment.NewLine + "PrintScreen 全螢幕截圖";
-            label2.Text = "";
-            label3.Text = "";
-
+            richTextBox1.Text += "測試快捷鍵範例" + Environment.NewLine + "PrintScreen 全螢幕截圖\n";
             RegisterHotKey.Keys = Keys.PrintScreen;
             RegisterHotKey.ModKey = 0;
             RegisterHotKey.WindowHandle = this.Handle;
             RegisterHotKey.HotKey += new RegisterHotKeyClass.HotKeyPass(_Regis_HotKey);
             RegisterHotKey.StarHotKey();
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.FormBorderStyle = FormBorderStyle.None;
             //設定執行後的表單起始位置
@@ -72,8 +71,7 @@ namespace vcs_RegisterHotKey_PrintScreen
                 //存成bmp檔
                 String filename = "C:\\dddddddddd\\full_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
                 bmp.Save(filename, ImageFormat.Bmp);
-
-                label3.Text = "全螢幕截圖，存檔檔名：\n" + filename;
+                richTextBox1.Text += "全螢幕截圖，存檔檔名：\n" + filename + "\n";
             }
         }
 
@@ -86,6 +84,11 @@ namespace vcs_RegisterHotKey_PrintScreen
         private void bt_exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
     }
 

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{02711ED4-51C5-4420-A697-0E2841C9E245}</ProjectGuid>
+    <ProjectGuid>{8990B0CB-B9E1-4DF0-BED0-FD41E1F460E5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication1testpb</RootNamespace>
-    <AssemblyName>WindowsFormsApplication1testpb</AssemblyName>
+    <RootNamespace>vcs_ProgressBar</RootNamespace>
+    <AssemblyName>vcs_ProgressBar</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1testpb
+namespace vcs_ProgressBar
 {
     static class Program
     {
