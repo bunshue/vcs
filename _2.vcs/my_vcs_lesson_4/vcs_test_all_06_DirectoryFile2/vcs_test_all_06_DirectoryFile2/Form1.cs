@@ -224,7 +224,6 @@ namespace vcs_test_all_06_DirectoryFile2
                 return size.ToString() + " Byte";//顯示Byte值
         }
 
-
         public class MyFileInfo
         {
             public string filename;

@@ -645,8 +645,6 @@ namespace vcs_test_all_01_Math_Random
             return builder.ToString();
         }
 
-
-
         public static string GetRandomString3(int length)
         {
             //var str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -659,7 +657,6 @@ namespace vcs_test_all_01_Math_Random
             }
             return builder.ToString();
         }
-
 
         private const int ROUND = 1000;
         int[] useless = new int[ROUND];
@@ -674,7 +671,6 @@ namespace vcs_test_all_01_Math_Random
                 this.cnt = cc;
             }
         }
-
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -722,10 +718,7 @@ namespace vcs_test_all_01_Math_Random
                         (B * B * B) + " + " + (C * C * C) + "\n";
                 }
             }
-
-
         }
-
 
         private void button15_Click(object sender, EventArgs e)
         {
@@ -1189,13 +1182,11 @@ namespace vcs_test_all_01_Math_Random
 
                 richTextBox1.Text += "Name : " + name_string + "\t" + score_chi.ToString() + "\t" + score_eng.ToString() + "\t" + score_math.ToString() + "\n";
             }
-
         }
-
 
         //不用宣告長度的陣列(Array)
         // 宣告searchinfos 為List
-        // 以下List 裡為MyFileInfo 型態
+        // 以下List 裡為 MySearchInfo 型態
         List<MySearchInfo> result = new List<MySearchInfo>();
         private void bt_random7_Click(object sender, EventArgs e)
         {
@@ -2512,4 +2503,3 @@ namespace vcs_test_all_01_Math_Random
         }
     }
 }
-

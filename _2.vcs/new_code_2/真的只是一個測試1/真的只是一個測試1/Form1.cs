@@ -20,6 +20,7 @@ using System.Drawing.Imaging;   //for ImageFormat
 
 using System.Text.RegularExpressions;
 
+using System.Diagnostics;	//for Stopwatch
 
 namespace 真的只是一個測試1
 {
@@ -640,9 +641,132 @@ namespace 真的只是一個測試1
 
         }
 
+        List<double[]> pts = new List<double[]>();    //二維List for double
+        int g = 10;
+
+
+        //二維List for double
         private void button20_Click(object sender, EventArgs e)
         {
+            double t = 0;
 
+            for (t = 0; t <= 10.01; t += 0.1)
+            {
+                //richTextBox1.Text += "t = " + t.ToString() + "\n";
+                pts.Add(new double[] { t, g * t * t / 2 });
+            }
+
+            int len = pts.Count;
+
+            richTextBox1.Text += "共有 " + len.ToString() + " 個項目, 分別是:\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += pts[i][0].ToString("n3") + "\t" + pts[i][1].ToString("n3") + "\n";
+            }
+
+
+
+        }
+
+        //多筆資料比較
+        private const int CNT = 100;
+        private void button21_Click(object sender, EventArgs e)
+        {
+            int N = 10;
+
+            pts.Clear();
+
+            //一維陣列用法：
+            double[] a = new double[CNT];
+            int[] checked_array = new int[CNT]; //一維陣列用法
+
+            int i;
+            int j;
+
+            Random r = new Random();
+            for (i = 0; i < CNT; i++)
+            {
+                //a[i] = r.NextDouble();
+                a[i] = r.Next(100, 200);
+            }
+
+
+            for (i = 0; i < CNT; i++)
+            {
+                //richTextBox1.Text += "取0.0~1.0的亂數值：" + a[i].ToString() + "\n";
+                //richTextBox1.Text += "a[" + i.ToString() + "] = " + a[i].ToString() + "\n";
+
+                //result3 += r.Next(10, 20).ToString() + " ";
+            }
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            int equal_count = 0;
+
+            int[] same_index = new int[10]; //一維陣列用法
+            int index = 0;
+
+            for (i = 0; i < CNT; i++)
+            {
+                if (checked_array[i] == 1)
+                    continue;
+
+                index = 0;
+                same_index = new int[100];
+
+                for (j = (i + 1); j < CNT; j++)
+                {
+                    if ((a[i] == a[j]) && (a[i] != -1))
+                    {
+                        equal_count++;
+                        same_index[index] = j;
+                        index++;
+                        //richTextBox1.Text += "取得相同數字\t\ta[" + i.ToString() + "] = " + a[i].ToString() + "\t\ta[" + j.ToString() + "] = " + a[j].ToString() + "\n";
+                    }
+                }
+
+                if (index > 0)
+                {
+                    checked_array[i] = 1;
+                    richTextBox1.Text += "取得相同數字\t\ta[" + i.ToString() + "] = " + a[i].ToString();
+                    int k;
+                    for (k = 0; k < index; k++)
+                    {
+                        checked_array[same_index[k]] = 1;
+                        richTextBox1.Text += "\t\ta[" + same_index[k].ToString() + "] = " + a[same_index[k]].ToString();
+                    }
+                    richTextBox1.Text += "\n";
+
+                    /*
+                    if (index == 1)
+                    {
+                        richTextBox1.Text += "a[" + same_index[0].ToString() + "] = " + a[same_index[0]].ToString() + "\n";
+                    }
+                    else if (index == 2)
+                    {
+                        richTextBox1.Text += "a[" + same_index[0].ToString() + "] = " + a[same_index[0]].ToString() + "\t\ta[" + same_index[1].ToString() + "] = " + a[same_index[1]].ToString() + "\n";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "333333333333\n";
+                    }
+                    //richTextBox1.Text += "index = " + index.ToString() + "\n";
+                    */
+                }
+            }
+
+            sw.Stop();
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
+
+            for (i = 0; i < CNT; i++)
+            {
+                //richTextBox1.Text += "取0.0~1.0的亂數值：" + a[i].ToString() + "\n";
+                //richTextBox1.Text += "a[" + i.ToString() + "] = " + a[i].ToString() + "\n";
+
+                //result3 += r.Next(10, 20).ToString() + " ";
+            }
 
         }
     }

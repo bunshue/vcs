@@ -28,7 +28,12 @@ namespace WindowsFormsApplication1ffffff
         {
             if (flag_mouse_down == true)
             {
-                richTextBox1.Text += trackBar1.Value.ToString() + " ";
+                //richTextBox1.Text += trackBar1.Value.ToString() + " ";
+
+                int x = trackBar1.Value;
+
+                int k = 100;
+                label1.Text = "ES = k * x * x / 2 = " + (k * x * x / 2).ToString();
             }
 
 
@@ -39,7 +44,7 @@ namespace WindowsFormsApplication1ffffff
             flag_mouse_down = false;
             richTextBox1.Text += trackBar1.Value.ToString() + " ";
 
-            trackBar1.Value = 1;
+            trackBar1.Value = 0;
 
         }
     }

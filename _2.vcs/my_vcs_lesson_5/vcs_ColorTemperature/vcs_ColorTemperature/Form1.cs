@@ -32,7 +32,7 @@ namespace vcs_ColorTemperature
 
         //不用宣告長度的陣列(Array)
         // 宣告fileinfos 為List
-        // 以下List 裡為MyFileInfo 型態
+        // 以下List 裡為 RGBInfo 型態
 
         List<RGBInfo> rgbinfos = new List<RGBInfo>();
 
@@ -133,20 +133,15 @@ namespace vcs_ColorTemperature
                         value_b = int.Parse(line.Substring(73, 4));
                         //richTextBox1.Text += "R = " + value_r.ToString() + "  G = " + value_g.ToString() + "  B = " + value_b.ToString() + "\n";
 
-                        //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length));
                         rgbinfos.Add(new RGBInfo(temperature, value_r, value_g, value_b));
-
                     }
                     else
                     {
                         continue;
                     }
 
-
-
                     //richTextBox1.Text += i.ToString() + "\t" + line + "\tlen = " + line.Length.ToString() + "\n";
                     //all_strings.Add(line);
-
 
                     //if (i >= 30)
                     //  break;
@@ -156,8 +151,6 @@ namespace vcs_ColorTemperature
 
                 //richTextBox1.Text += "共有 " + lyrics_count.ToString() + " 首\n";
                 //richTextBox1.Text += "可用行數 " + strings_count.ToString() + "\n";
-
-
                 return true;
             }
         }
@@ -231,7 +224,7 @@ namespace vcs_ColorTemperature
                 //richTextBox1.Text += "R = " + rgbinfos[i].r.ToString() + "  G = " + rgbinfos[i].g.ToString() + "  B = " + rgbinfos[i].b.ToString() + "\n";
                 //" R = " + rgbinfos[i].r.ToString() + " G = " + rgbinfos[i].g.ToString() + " B = " + rgbinfos[i].b.ToString() + "\n";
 
-                if(rgbinfos[i].temperature.Contains(temp.ToString()))
+                if (rgbinfos[i].temperature.Contains(temp.ToString()))
                 {
                     richTextBox1.Text += "temperature = " + rgbinfos[i].temperature + "\t";
                     richTextBox1.Text += "R = " + rgbinfos[i].r.ToString() + "  G = " + rgbinfos[i].g.ToString() + "  B = " + rgbinfos[i].b.ToString() + "\n";
@@ -306,19 +299,17 @@ namespace vcs_ColorTemperature
             //Graphics g;
             Bitmap bmp;
             //逐點製作圖檔
-            int xx;
-            int yy;
+            //int xx;
+            //int yy;
 
             int ww = pictureBox1.Width;
             int hh = pictureBox1.Height;
 
             bmp = new Bitmap(ww, hh);
 
-
             Point[] pts_r = new Point[rgbinfos.Count * 3];
             Point[] pts_g = new Point[rgbinfos.Count * 3];
             Point[] pts_b = new Point[rgbinfos.Count * 3];
-
 
             for (int i = 0; i < (rgbinfos.Count * 3); i++)
             {
@@ -356,13 +347,7 @@ namespace vcs_ColorTemperature
             g.DrawCurve(new Pen(Color.Green, 3), pts_g);
             g.DrawCurve(new Pen(Color.Blue, 3), pts_b);
 
-
-
             pictureBox1.Image = bmp;
-
-
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -378,12 +363,7 @@ namespace vcs_ColorTemperature
                 richTextBox1.Text += "temperature = " + rgbinfos[i].temperature + "\t";
                 richTextBox1.Text += "R = " + rgbinfos[i].r.ToString() + "  G = " + rgbinfos[i].g.ToString() + "  B = " + rgbinfos[i].b.ToString() + "\n";
                 //" R = " + rgbinfos[i].r.ToString() + " G = " + rgbinfos[i].g.ToString() + " B = " + rgbinfos[i].b.ToString() + "\n";
-
-
             }
-
         }
-
-
     }
 }

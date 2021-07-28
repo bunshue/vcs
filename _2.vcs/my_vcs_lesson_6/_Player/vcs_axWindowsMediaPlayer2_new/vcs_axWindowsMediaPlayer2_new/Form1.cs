@@ -94,7 +94,6 @@ namespace vcs_axWindowsMediaPlayer2_new
                 return size.ToString() + " Byte";//顯示Byte值
         }
 
-
         public class MyFileInfo
         {
             public string filename;
@@ -197,8 +196,6 @@ namespace vcs_axWindowsMediaPlayer2_new
 
             fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
         }
-
-
 
         private void button0_Click(object sender, EventArgs e)
         {

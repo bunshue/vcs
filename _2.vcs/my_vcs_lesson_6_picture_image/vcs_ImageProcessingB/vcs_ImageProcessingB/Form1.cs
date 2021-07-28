@@ -102,18 +102,18 @@ namespace vcs_ImageProcessingB
             {
                 return null;
             }
-            int width = bmp.Width;
-            int height = bmp.Height;
+            int W = bmp.Width;
+            int H = bmp.Height;
 
             if (angle == 90)
             {
-                Bitmap newbmp = new Bitmap(height, width);
+                Bitmap newbmp = new Bitmap(H, W);
                 using (Graphics g = Graphics.FromImage(newbmp))
                 {
                     Point[] destinationPoints =
                     {
-                        new Point(height, 0), // destination for upper-left point of original
-                        new Point(height, width),// destination for upper-right point of original
+                        new Point(H, 0), // destination for upper-left point of original
+                        new Point(H, W),// destination for upper-right point of original
                         new Point(0, 0)     // destination for lower-left point of original
                     };
                     g.DrawImage(bmp, destinationPoints);
@@ -123,14 +123,14 @@ namespace vcs_ImageProcessingB
 
             if (angle == 180)
             {
-                Bitmap newbmp = new Bitmap(width, height);
+                Bitmap newbmp = new Bitmap(W, H);
                 using (Graphics g = Graphics.FromImage(newbmp))
                 {
                     Point[] destinationPoints =
                     {
-                        new Point(width, height), // destination for upper-left point of original
-                        new Point(0, height),// destination for upper-right point of original
-                        new Point(width, 0)     // destination for lower-left point of original
+                        new Point(W, H), // destination for upper-left point of original
+                        new Point(0, H),// destination for upper-right point of original
+                        new Point(W, 0)     // destination for lower-left point of original
                     };
                     g.DrawImage(bmp, destinationPoints);
                 }
@@ -139,14 +139,14 @@ namespace vcs_ImageProcessingB
 
             if (angle == 270)
             {
-                Bitmap newbmp = new Bitmap(height, width);
+                Bitmap newbmp = new Bitmap(H, W);
                 using (Graphics g = Graphics.FromImage(newbmp))
                 {
                     Point[] destinationPoints = 
                     {
-                        new Point(0, width), // destination for upper-left point of original
+                        new Point(0, W), // destination for upper-left point of original
                         new Point(0, 0),// destination for upper-right point of original
-                        new Point(height, width)    // destination for lower-left point of original
+                        new Point(H, W)    // destination for lower-left point of original
                     };
                     g.DrawImage(bmp, destinationPoints);
                 }
@@ -169,9 +169,9 @@ namespace vcs_ImageProcessingB
         //底片
         public Bitmap NegativeImage(Bitmap bmp)
         {
-            int height = bmp.Height;
-            int width = bmp.Width;
-            Bitmap newbmp = new Bitmap(width, height);
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
 
             LockBitmap lbmp = new LockBitmap(bmp);
             LockBitmap newlbmp = new LockBitmap(newbmp);
@@ -179,9 +179,9 @@ namespace vcs_ImageProcessingB
             newlbmp.LockBits();
 
             Color pixel;
-            for (int x = 1; x < width; x++)
+            for (int x = 1; x < W; x++)
             {
-                for (int y = 1; y < height; y++)
+                for (int y = 1; y < H; y++)
                 {
                     int r, g, b;
                     pixel = lbmp.GetPixel(x, y);
@@ -199,9 +199,9 @@ namespace vcs_ImageProcessingB
         //黑白
         public Bitmap GrayImage(Bitmap bmp, int type)
         {
-            int height = bmp.Height;
-            int width = bmp.Width;
-            Bitmap newbmp = new Bitmap(width, height);
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
 
             LockBitmap lbmp = new LockBitmap(bmp);
             LockBitmap newlbmp = new LockBitmap(newbmp);
@@ -209,9 +209,9 @@ namespace vcs_ImageProcessingB
             newlbmp.LockBits();
 
             Color pixel;
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < W; x++)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < H; y++)
                 {
                     pixel = lbmp.GetPixel(x, y);
                     int r, g, b, Result = 0;
@@ -243,9 +243,9 @@ namespace vcs_ImageProcessingB
         //浮雕
         public Bitmap EmbossmentImage(Bitmap bmp)
         {
-            int height = bmp.Height;
-            int width = bmp.Width;
-            Bitmap newbmp = new Bitmap(width, height);
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
 
             LockBitmap lbmp = new LockBitmap(bmp);
             LockBitmap newlbmp = new LockBitmap(newbmp);
@@ -253,9 +253,9 @@ namespace vcs_ImageProcessingB
             newlbmp.LockBits();
 
             Color pixel1, pixel2;
-            for (int x = 0; x < width - 1; x++)
+            for (int x = 0; x < W - 1; x++)
             {
-                for (int y = 0; y < height - 1; y++)
+                for (int y = 0; y < H - 1; y++)
                 {
                     int r = 0, g = 0, b = 0;
                     pixel1 = lbmp.GetPixel(x, y);
@@ -286,9 +286,9 @@ namespace vcs_ImageProcessingB
         //柔化
         public Bitmap SoftenImage(Bitmap bmp)
         {
-            int height = bmp.Height;
-            int width = bmp.Width;
-            Bitmap newbmp = new Bitmap(width, height);
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
 
             LockBitmap lbmp = new LockBitmap(bmp);
             LockBitmap newlbmp = new LockBitmap(newbmp);
@@ -298,9 +298,9 @@ namespace vcs_ImageProcessingB
             Color pixel;
             //高斯模板
             int[] Gauss = { 1, 2, 1, 2, 4, 2, 1, 2, 1 };
-            for (int x = 1; x < width - 1; x++)
+            for (int x = 1; x < W - 1; x++)
             {
-                for (int y = 1; y < height - 1; y++)
+                for (int y = 1; y < H - 1; y++)
                 {
                     int r = 0, g = 0, b = 0;
                     int Index = 0;
@@ -336,32 +336,32 @@ namespace vcs_ImageProcessingB
         //锐化
         public Bitmap SharpenImage(Bitmap bmp)
         {
-            int height = bmp.Height;
-            int width = bmp.Width;
-            Bitmap newbmp = new Bitmap(width, height);
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
 
             LockBitmap lbmp = new LockBitmap(bmp);
             LockBitmap newlbmp = new LockBitmap(newbmp);
             lbmp.LockBits();
             newlbmp.LockBits();
 
-            Color pixel;
             //拉普拉斯模板
             int[] Laplacian = { -1, -1, -1, -1, 9, -1, -1, -1, -1 };
-            for (int x = 1; x < width - 1; x++)
+            for (int i = 1; i < W - 1; i++)
             {
-                for (int y = 1; y < height - 1; y++)
+                for (int j = 1; j < H - 1; j++)
                 {
                     int r = 0, g = 0, b = 0;
-                    int Index = 0;
+                    int index = 0;
                     for (int col = -1; col <= 1; col++)
                     {
                         for (int row = -1; row <= 1; row++)
                         {
-                            pixel = lbmp.GetPixel(x + row, y + col); r += pixel.R * Laplacian[Index];
-                            g += pixel.G * Laplacian[Index];
-                            b += pixel.B * Laplacian[Index];
-                            Index++;
+                            Color color = lbmp.GetPixel(i + row, j + col);
+                            r += color.R * Laplacian[index];
+                            g += color.G * Laplacian[index];
+                            b += color.B * Laplacian[index];
+                            index++;
                         }
                     }
                     //处理颜色值溢出
@@ -371,7 +371,7 @@ namespace vcs_ImageProcessingB
                     g = g < 0 ? 0 : g;
                     b = b > 255 ? 255 : b;
                     b = b < 0 ? 0 : b;
-                    newlbmp.SetPixel(x - 1, y - 1, Color.FromArgb(r, g, b));
+                    newlbmp.SetPixel(i - 1, j - 1, Color.FromArgb(r, g, b));
                 }
             }
             lbmp.UnlockBits();
@@ -382,9 +382,9 @@ namespace vcs_ImageProcessingB
         //雾化
         public Bitmap AtomizationImage(Bitmap bmp)
         {
-            int height = bmp.Height;
-            int width = bmp.Width;
-            Bitmap newbmp = new Bitmap(width, height);
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
 
             LockBitmap lbmp = new LockBitmap(bmp);
             LockBitmap newlbmp = new LockBitmap(newbmp);
@@ -393,18 +393,18 @@ namespace vcs_ImageProcessingB
 
             System.Random MyRandom = new Random();
             Color pixel;
-            for (int x = 1; x < width - 1; x++)
+            for (int x = 1; x < W - 1; x++)
             {
-                for (int y = 1; y < height - 1; y++)
+                for (int y = 1; y < H - 1; y++)
                 {
                     int k = MyRandom.Next(123456);
                     //像素块大小
                     int dx = x + k % 19;
                     int dy = y + k % 19;
-                    if (dx >= width)
-                        dx = width - 1;
-                    if (dy >= height)
-                        dy = height - 1;
+                    if (dx >= W)
+                        dx = W - 1;
+                    if (dy >= H)
+                        dy = H - 1;
                     pixel = lbmp.GetPixel(dx, dy);
                     newlbmp.SetPixel(x, y, pixel);
                 }

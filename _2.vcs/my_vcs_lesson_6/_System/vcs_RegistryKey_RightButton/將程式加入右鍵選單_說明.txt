@@ -1,0 +1,15 @@
+透過寫入登錄檔的方式
+針對檔案右鍵選單，在 HKEY_CLASSES_ROOT\*\shell
+針對目錄又見選單，在 HKEY_CLASSES_ROOT\Directory\shell
+
+針對寫入登錄檔，使用 RegistryKey 類別 : 表示 Windows 登錄中的機碼層級節點。 這個類別的作用是登錄封裝。
+
+
+
+ 由於寫入登錄檔需要權限，因此請在編譯好的執行檔上，按滑鼠右鍵，選擇 [以系統管理員身分執行]
+
+
+
+
+
+https://dotblogs.com.tw/chou/2011/04/17/22945

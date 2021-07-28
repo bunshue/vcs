@@ -6,16 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;
 
 namespace 鍵盤掛鉤屏蔽熱鍵
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
         private IntPtr pKeyboardHook = IntPtr.Zero;//鍵盤掛鉤句柄
         public delegate int HookProc(int nCode, Int32 wParam, IntPtr lParam);// 掛鉤委託宣告
         //鍵盤掛鉤委託實例不能省略變數
@@ -24,11 +21,11 @@ namespace 鍵盤掛鉤屏蔽熱鍵
         public const int idHook = 13;
         //安裝掛鉤
         [DllImport("user32.dll", CallingConvention = CallingConvention.StdCall)]
-        public static extern IntPtr SetWindowsHookEx(int idHook, HookProc lpfn,
-            IntPtr pInstance, int threadId);
+        public static extern IntPtr SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr pInstance, int threadId);
         //卸載掛鉤
         [DllImport("user32.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern bool UnhookWindowsHookEx(IntPtr pHookHandle);
+
         //鍵盤掛鉤處理函數
         private int KeyboardHookProc(int nCode, Int32 wParam, IntPtr lParam)
         {
@@ -50,6 +47,7 @@ namespace 鍵盤掛鉤屏蔽熱鍵
             }
             return 0;
         }
+
         //安裝掛鉤
         public bool InsertHook()
         {
@@ -66,6 +64,7 @@ namespace 鍵盤掛鉤屏蔽熱鍵
             }
             return true;
         }
+
         //卸載掛鉤
         public bool UnInsertHook()
         {
@@ -77,6 +76,7 @@ namespace 鍵盤掛鉤屏蔽熱鍵
             }
             return result;
         }
+
         [StructLayout(LayoutKind.Sequential)]
         public struct KeyMSG
         {
@@ -87,21 +87,28 @@ namespace 鍵盤掛鉤屏蔽熱鍵
             public int dwExtraInfo;
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        public Form1()
         {
-            if (checkBox1.Checked)
-            {
-                InsertHook();
-            }
-            else
-            {
-                UnInsertHook();
-            }
+            InitializeComponent();
         }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //安裝掛勾, 鍵盤掛鉤屏蔽系統熱鍵
+            InsertHook();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //卸載掛勾, 鍵盤掛鉤屏蔽系統熱鍵
+            UnInsertHook();
+        }
     }
 }
+
