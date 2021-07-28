@@ -87,8 +87,11 @@ namespace vcs_Draw2
             pictureBox1.Size = new Size(width, height);
             pictureBox1.Location = new Point(0, 0);
 
-            pictureBox_pen.Size = new Size(width / 2, height/2);
+            pictureBox_pen.Size = new Size(width / 2, height / 2);
             pictureBox_pen.Location = new Point(900, 0);
+
+            panel_word.Size = new Size(width * 3, 250);
+            panel_word.Location = new Point(0, height + 200);
 
             this.pictureBox_pen.Controls.Add(groupBox2);
             this.pictureBox_pen.Controls.Add(groupBox3);
@@ -2002,6 +2005,35 @@ namespace vcs_Draw2
         private void pictureBox_pen_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawLine(pen, 20, 20, this.pictureBox_pen.ClientSize.Width - 20, this.pictureBox_pen.ClientSize.Height - 20);
+        }
+
+        int size = 1;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            size++;
+            if (size > 6)
+                size = 1;
+
+            Graphics g = panel_word.CreateGraphics();//建立控制元件的Graphics類
+            g.Clear(Color.White);//以指定的顏色清除控制元件背景
+            Brush Var_Back = Brushes.Black;//設定畫刷
+            FontFamily Var_FontFamily = new FontFamily("標楷體");//設定字體樣式
+            string Var_Str = "海納百川，有容乃大；壁立千仞，無欲則剛。";//設定字串
+
+            //SizeF Var_Size = g.MeasureString(Var_Str, Var_Font);//取得字串的大小
+            //int Var_X = (panel_word.Width - Convert.ToInt32(Var_Size.Width)) / 2;//設定平移的X座標
+            //int Var_Y = (panel_word.Height - Convert.ToInt32(Var_Size.Height)) / 2;////設定平移的Y座標
+
+            GraphicsPath Var_Path = new GraphicsPath();//實例化GraphicsPath對像
+            Var_Path.AddString(Var_Str, Var_FontFamily, (int)FontStyle.Regular, 50, new Point(0, 0), new StringFormat());//在路徑中新增文字
+            PointF[] Var_PointS = Var_Path.PathPoints;//取得路徑中的點
+            Byte[] Car_Types = Var_Path.PathTypes;//取得對應點的類型
+
+            //Matrix Var_Matrix = new Matrix(Convert.ToSingle(textBox1.Text), 0.0F, 0.0F, Convert.ToSingle(textBox1.Text), 0.0F, 0.0F);//設定仿射矩陣
+            Matrix Var_Matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
+            Var_Matrix.TransformPoints(Var_PointS);
+            GraphicsPath Var_New_Path = new GraphicsPath(Var_PointS, Car_Types);
+            g.FillPath(Var_Back, Var_New_Path);
         }
     }
 }

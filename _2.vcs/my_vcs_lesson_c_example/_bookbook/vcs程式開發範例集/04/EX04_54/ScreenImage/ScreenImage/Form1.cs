@@ -25,7 +25,6 @@ namespace ScreenImage
             comboBox1.SelectedIndex = 0;//設定圖片的類型
         }
 
-
         //聲明一個API函數
         [System.Runtime.InteropServices.DllImportAttribute("gdi32.dll")]
         private static extern bool BitBlt(IntPtr hdcDest, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hdcSrc, int nXSrc, int nYSrc, System.Int32 dwRop);
@@ -62,7 +61,10 @@ namespace ScreenImage
         HOOK Hook = new HOOK();
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "stop\n";
             Hook.Stop();//卸載掛鉤
+
+            richTextBox1.Text += "start\n";
             Hook.Start();//安裝掛鉤
         }
 
@@ -79,27 +81,36 @@ namespace ScreenImage
                     return;//退出本次操作
                 }
                 //執行螢幕截圖的操作
+                richTextBox1.Text += "wwwwwwwwwwwwwwwwwwwwwwwwww\n";
+                     
                 SnatchScreen(this, textBox1.Text + "\\" + textBox2.Text + "." + comboBox1.Text, comboBox1.Text);
                 HOOK.pp = 1;//標識，不進行F10鍵的正常操作
             }
             else
+            {
                 HOOK.pp = 0;//標識，執行F10鍵的正常操作
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)//開啟文件對話框
+            {
                 textBox1.Text = folderBrowserDialog1.SelectedPath;//取得圖片儲存的路徑
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "stop\n";
             Hook.Stop();//卸載掛鉤
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            richTextBox1.Text += "stop\n";
             Hook.Stop();//卸載掛鉤
         }
     }
 }
+

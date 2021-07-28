@@ -16,6 +16,14 @@ namespace vcs_Draw_Dynamics3
         double one_step_second = 0.2;
         int g = 10;
 
+        float x_st = 0;
+        float y_st = 0;
+        double drop_sec = 0;
+
+        float x_st0 = 445;
+        float y_st0 = 170;
+        float y_sp0 = 170 + 460;    //降落距離 460
+
         public Form1()
         {
             InitializeComponent();
@@ -29,30 +37,35 @@ namespace vcs_Draw_Dynamics3
             one_step_second = ((double)trackBar1.Value) / 10;
             richTextBox1.Text += "每步 " + one_step_second.ToString() + " 秒\n";
 
-
+            x_st = x_st0;
+            y_st = y_st0;
         }
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
+            int xx;
+            int yy;
             int dx;
             int dy;
 
-            x_st = 50;
-            y_st = 50;
+            xx = 50;
+            yy = 50;
             dx = 0;
             dy = 0;
 
             pictureBox1.Size = new Size(700, 700);
-            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-
+            pictureBox1.Location = new Point(xx + dx * 0, yy + dy * 1);
 
             this.ClientSize = new Size(1200, 800);
-            //this.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            //this.Location = new Point(xx + dx * 0, yy + dy * 1);
 
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -76,13 +89,6 @@ namespace vcs_Draw_Dynamics3
             this.pictureBox1.Invalidate();
         }
 
-        float x_st = 20;
-        float y_st = 0;
-        double drop_sec = 0;
-
-        float x_st0 = 445;
-        float y_st0 = 170;
-
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             GraphicsUnit units = GraphicsUnit.Pixel;
@@ -103,52 +109,41 @@ namespace vcs_Draw_Dynamics3
 
             e.Graphics.DrawImage(bmp, destRect1, 0, 0, w, h, units);
 
-            Pen p = new Pen(Color.Red, 10);
-            e.Graphics.DrawLine(p, 480, 150, 480, 500 + 150);
-
-            e.Graphics.FillEllipse(new SolidBrush(Color.Red), x_st0, y_st0, 20, 20);
+            //Pen p = new Pen(Color.Red, 10);
+            //e.Graphics.DrawLine(p, 480, y_st0, 480, y_st0 + 480);
+            //e.Graphics.FillEllipse(new SolidBrush(Color.Red), x_st, y_st0, 20, 20);
 
             if (dropdown_status == false)
                 return;
 
-            if (y_st <= (pictureBox1.Height - 100))
+            SolidBrush newBrush = new SolidBrush(Color.Red);
+
+            if (y_st <= y_sp0)
             {
-
-                SolidBrush newBrush = new SolidBrush(Color.Red);
-
-                e.Graphics.FillEllipse(newBrush, 450, y_st, 20, 20);
-
-
+                e.Graphics.FillEllipse(newBrush, x_st, y_st, 20, 20);
                 e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, 20, 20);
-                //richTextBox1.Text += "t = " + drop_sec.ToString() + "\t" + y_st.ToString() + "\n";
+                richTextBox1.Text += "t = " + drop_sec.ToString() + "\t" + (y_st - y_st0).ToString("n3") + "\n";
 
                 drop_sec += one_step_second;
-                y_st = (float)(g * drop_sec * drop_sec * 1 / 2);
+                y_st = y_st0 + (float)(g * drop_sec * drop_sec * 1 / 2) * 10;   //1公尺 10點
                 //int y_st2 = (int)Math.Round(y_st);
-                richTextBox1.Text += "t = " + drop_sec.ToString("n3") + "\t" + y_st.ToString("n3") + "\n";
-
-
-                //c = (int)Math.Round(result);
-                //richTextBox1.Text += "四捨五入c = " + c.ToString() + "\n";
-                /*
-                double pi = Math.PI;
-                richTextBox1.Text += "小數點下2位\t" + pi.ToString("n2") + "\n";
-                richTextBox1.Text += "小數點下4位\t" + pi.ToString("n4") + "\t四捨五入\n";
-                richTextBox1.Text += "小數點下5位\t" + pi.ToString("n5") + "\n";
-                richTextBox1.Text += "小數點下10位\t" + pi.ToString("n10") + "\n";
-                richTextBox1.Text += "小數點下15位\t" + pi.ToString("n15") + "\n";
-                */
+                richTextBox1.Text += "t = " + drop_sec.ToString("n3") + "\t" + (y_st - y_st0).ToString("n3") + "\n";
             }
             else
             {
+                y_st = y_sp0;
+
+                e.Graphics.FillEllipse(newBrush, x_st, y_st, 20, 20);
+                e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, 20, 20);
+
                 richTextBox1.Text += "測試結束\n";
 
                 button1.Text = "ST";
                 timer1.Enabled = false;
                 dropdown_status = false;
 
-                x_st = 20;
-                y_st = 0;
+                x_st = x_st0;
+                y_st = y_st0;
                 drop_sec = 0;
 
             }
@@ -166,28 +161,11 @@ namespace vcs_Draw_Dynamics3
             timer1.Enabled = false;
             dropdown_status = false;
 
-            x_st = 20;
-            y_st = 0;
+            x_st = x_st0;
+            y_st = y_st0;
             drop_sec = 0;
         }
 
-        private void DrawCircle(PaintEventArgs e, int center_x, int center_y, int radius, int linewidth, Color c)
-        {
-            // Create a new pen.
-            //顏色、線寬分開寫
-            //Pen p = new Pen(c);
-            // Set the pen's width.
-            //p.Width = linewidth;
-
-            //顏色、線寬寫在一起
-            Pen p = new Pen(c, linewidth);
-
-            // Draw the circle
-            e.Graphics.DrawEllipse(p, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
-            //Dispose of the pen.
-            p.Dispose();
-        }
-
-
     }
 }
+

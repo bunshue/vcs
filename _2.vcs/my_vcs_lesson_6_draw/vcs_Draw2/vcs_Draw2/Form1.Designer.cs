@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button9 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -93,6 +94,8 @@
             this.rb_color1 = new System.Windows.Forms.RadioButton();
             this.rb_color3 = new System.Windows.Forms.RadioButton();
             this.rb_color2 = new System.Windows.Forms.RadioButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panel_word = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pen)).BeginInit();
@@ -813,11 +816,25 @@
             this.rb_color2.UseVisualStyleBackColor = true;
             this.rb_color2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // panel_word
+            // 
+            this.panel_word.Location = new System.Drawing.Point(12, 559);
+            this.panel_word.Name = "panel_word";
+            this.panel_word.Size = new System.Drawing.Size(708, 102);
+            this.panel_word.TabIndex = 67;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1416, 673);
+            this.Controls.Add(this.panel_word);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -951,6 +968,8 @@
         private System.Windows.Forms.RadioButton rb_color1;
         private System.Windows.Forms.RadioButton rb_color3;
         private System.Windows.Forms.RadioButton rb_color2;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel panel_word;
     }
 }
 
