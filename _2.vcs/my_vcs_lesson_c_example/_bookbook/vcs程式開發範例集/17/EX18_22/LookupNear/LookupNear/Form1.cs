@@ -22,10 +22,10 @@ namespace LookupNear
         {
             int tem_n;//定義變數
             int jl, ju, jm;
-            jl=0;
-            ju=N + 1;
-            //利用二分尋找法進行查詢
-            rebound://goto語句
+            jl = 0;
+            ju = N + 1;
+        //利用二分尋找法進行查詢
+        rebound://goto語句
             if (ju - jl > 1)//如果沒有搜尋完
             {
                 jm = (ju + jl) / 2;//取得中間的位置
@@ -64,3 +64,4 @@ namespace LookupNear
         }
     }
 }
+

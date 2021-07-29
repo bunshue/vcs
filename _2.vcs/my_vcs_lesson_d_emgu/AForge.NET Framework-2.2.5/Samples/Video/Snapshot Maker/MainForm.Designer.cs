@@ -37,10 +37,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.connectButton = new System.Windows.Forms.Button();
             this.disconnectButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.videoSourcePlayer = new AForge.Controls.VideoSourcePlayer();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.triggerButton = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,7 +104,7 @@
             // 
             // connectButton
             // 
-            this.connectButton.Location = new System.Drawing.Point(756, 6);
+            this.connectButton.Location = new System.Drawing.Point(769, 6);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(75, 21);
             this.connectButton.TabIndex = 6;
@@ -113,7 +114,7 @@
             // 
             // disconnectButton
             // 
-            this.disconnectButton.Location = new System.Drawing.Point(756, 34);
+            this.disconnectButton.Location = new System.Drawing.Point(769, 34);
             this.disconnectButton.Name = "disconnectButton";
             this.disconnectButton.Size = new System.Drawing.Size(75, 21);
             this.disconnectButton.TabIndex = 7;
@@ -121,23 +122,12 @@
             this.disconnectButton.UseVisualStyleBackColor = true;
             this.disconnectButton.Click += new System.EventHandler(this.disconnectButton_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.videoSourcePlayer);
-            this.panel1.Location = new System.Drawing.Point(0, 97);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(853, 504);
-            this.panel1.TabIndex = 8;
-            // 
             // videoSourcePlayer
             // 
             this.videoSourcePlayer.AutoSizeControl = true;
             this.videoSourcePlayer.BackColor = System.Drawing.SystemColors.ControlDark;
             this.videoSourcePlayer.ForeColor = System.Drawing.Color.DarkRed;
-            this.videoSourcePlayer.Location = new System.Drawing.Point(265, 131);
+            this.videoSourcePlayer.Location = new System.Drawing.Point(209, 169);
             this.videoSourcePlayer.Name = "videoSourcePlayer";
             this.videoSourcePlayer.Size = new System.Drawing.Size(322, 242);
             this.videoSourcePlayer.TabIndex = 0;
@@ -152,7 +142,7 @@
             // 
             // triggerButton
             // 
-            this.triggerButton.Location = new System.Drawing.Point(756, 61);
+            this.triggerButton.Location = new System.Drawing.Point(769, 61);
             this.triggerButton.Name = "triggerButton";
             this.triggerButton.Size = new System.Drawing.Size(75, 21);
             this.triggerButton.TabIndex = 9;
@@ -160,11 +150,31 @@
             this.triggerButton.UseVisualStyleBackColor = true;
             this.triggerButton.Click += new System.EventHandler(this.triggerButton_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(769, 88);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(384, 580);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.videoSourcePlayer);
+            this.panel1.Location = new System.Drawing.Point(12, 88);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(740, 580);
+            this.panel1.TabIndex = 8;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(852, 599);
+            this.ClientSize = new System.Drawing.Size(1165, 812);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.triggerButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.disconnectButton);
@@ -197,10 +207,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Button disconnectButton;
-        private System.Windows.Forms.Panel panel1;
         private AForge.Controls.VideoSourcePlayer videoSourcePlayer;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Button triggerButton;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

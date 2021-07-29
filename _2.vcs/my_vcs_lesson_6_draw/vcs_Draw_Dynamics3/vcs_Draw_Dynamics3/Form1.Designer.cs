@@ -36,13 +36,22 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.button2 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.groupBox_bird = new System.Windows.Forms.GroupBox();
+            this.rb4 = new System.Windows.Forms.RadioButton();
+            this.rb3 = new System.Windows.Forms.RadioButton();
+            this.rb2 = new System.Windows.Forms.RadioButton();
+            this.rb1 = new System.Windows.Forms.RadioButton();
+            this.pictureBox_bird = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.groupBox_bird.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_bird)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(817, 45);
+            this.button1.Location = new System.Drawing.Point(817, 14);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -66,7 +75,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(817, 160);
+            this.richTextBox1.Location = new System.Drawing.Point(817, 217);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(236, 376);
             this.richTextBox1.TabIndex = 2;
@@ -75,7 +84,7 @@
             // trackBar1
             // 
             this.trackBar1.LargeChange = 1;
-            this.trackBar1.Location = new System.Drawing.Point(817, 89);
+            this.trackBar1.Location = new System.Drawing.Point(817, 153);
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(236, 45);
@@ -85,7 +94,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(910, 45);
+            this.button2.Location = new System.Drawing.Point(910, 14);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -96,7 +105,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(880, 462);
+            this.bt_clear.Location = new System.Drawing.Point(880, 519);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(67, 36);
             this.bt_clear.TabIndex = 56;
@@ -104,11 +113,92 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1012, 14);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 57;
+            this.button3.Text = "Info";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // groupBox_bird
+            // 
+            this.groupBox_bird.Controls.Add(this.rb4);
+            this.groupBox_bird.Controls.Add(this.rb3);
+            this.groupBox_bird.Controls.Add(this.rb2);
+            this.groupBox_bird.Controls.Add(this.rb1);
+            this.groupBox_bird.Location = new System.Drawing.Point(817, 55);
+            this.groupBox_bird.Name = "groupBox_bird";
+            this.groupBox_bird.Size = new System.Drawing.Size(372, 65);
+            this.groupBox_bird.TabIndex = 58;
+            this.groupBox_bird.TabStop = false;
+            this.groupBox_bird.Text = "Select";
+            // 
+            // rb4
+            // 
+            this.rb4.AutoSize = true;
+            this.rb4.Location = new System.Drawing.Point(292, 30);
+            this.rb4.Name = "rb4";
+            this.rb4.Size = new System.Drawing.Size(59, 16);
+            this.rb4.TabIndex = 3;
+            this.rb4.Text = "炸彈鳥";
+            this.rb4.UseVisualStyleBackColor = true;
+            this.rb4.CheckedChanged += new System.EventHandler(this.rb_bird_CheckedChanged);
+            // 
+            // rb3
+            // 
+            this.rb3.AutoSize = true;
+            this.rb3.Location = new System.Drawing.Point(201, 30);
+            this.rb3.Name = "rb3";
+            this.rb3.Size = new System.Drawing.Size(47, 16);
+            this.rb3.TabIndex = 2;
+            this.rb3.Text = "藍鳥";
+            this.rb3.UseVisualStyleBackColor = true;
+            this.rb3.CheckedChanged += new System.EventHandler(this.rb_bird_CheckedChanged);
+            // 
+            // rb2
+            // 
+            this.rb2.AutoSize = true;
+            this.rb2.Location = new System.Drawing.Point(110, 30);
+            this.rb2.Name = "rb2";
+            this.rb2.Size = new System.Drawing.Size(47, 16);
+            this.rb2.TabIndex = 1;
+            this.rb2.Text = "黃鳥";
+            this.rb2.UseVisualStyleBackColor = true;
+            this.rb2.CheckedChanged += new System.EventHandler(this.rb_bird_CheckedChanged);
+            // 
+            // rb1
+            // 
+            this.rb1.AutoSize = true;
+            this.rb1.Checked = true;
+            this.rb1.Location = new System.Drawing.Point(19, 30);
+            this.rb1.Name = "rb1";
+            this.rb1.Size = new System.Drawing.Size(47, 16);
+            this.rb1.TabIndex = 0;
+            this.rb1.TabStop = true;
+            this.rb1.Text = "紅鳥";
+            this.rb1.UseVisualStyleBackColor = true;
+            this.rb1.CheckedChanged += new System.EventHandler(this.rb_bird_CheckedChanged);
+            // 
+            // pictureBox_bird
+            // 
+            this.pictureBox_bird.Location = new System.Drawing.Point(1063, 135);
+            this.pictureBox_bird.Name = "pictureBox_bird";
+            this.pictureBox_bird.Size = new System.Drawing.Size(128, 117);
+            this.pictureBox_bird.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_bird.TabIndex = 59;
+            this.pictureBox_bird.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(959, 599);
+            this.ClientSize = new System.Drawing.Size(1203, 599);
+            this.Controls.Add(this.pictureBox_bird);
+            this.Controls.Add(this.groupBox_bird);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.trackBar1);
@@ -120,6 +210,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.groupBox_bird.ResumeLayout(false);
+            this.groupBox_bird.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_bird)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,6 +227,13 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.GroupBox groupBox_bird;
+        private System.Windows.Forms.RadioButton rb4;
+        private System.Windows.Forms.RadioButton rb3;
+        private System.Windows.Forms.RadioButton rb2;
+        private System.Windows.Forms.RadioButton rb1;
+        private System.Windows.Forms.PictureBox pictureBox_bird;
     }
 }
 

@@ -41,6 +41,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -59,15 +60,16 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(98, 13);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(143, 21);
+            this.textBox1.Size = new System.Drawing.Size(143, 22);
             this.textBox1.TabIndex = 1;
+            this.textBox1.Text = "www.google.com.tw";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 12);
+            this.label1.Size = new System.Drawing.Size(78, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "IP地址/機器名";
             // 
@@ -93,7 +95,7 @@
             this.textBox5.Enabled = false;
             this.textBox5.Location = new System.Drawing.Point(80, 91);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(161, 21);
+            this.textBox5.Size = new System.Drawing.Size(161, 22);
             this.textBox5.TabIndex = 7;
             // 
             // textBox4
@@ -101,7 +103,7 @@
             this.textBox4.Enabled = false;
             this.textBox4.Location = new System.Drawing.Point(80, 67);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(161, 21);
+            this.textBox4.Size = new System.Drawing.Size(161, 22);
             this.textBox4.TabIndex = 6;
             // 
             // textBox3
@@ -109,7 +111,7 @@
             this.textBox3.Enabled = false;
             this.textBox3.Location = new System.Drawing.Point(80, 42);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(161, 21);
+            this.textBox3.Size = new System.Drawing.Size(161, 22);
             this.textBox3.TabIndex = 5;
             // 
             // textBox2
@@ -117,7 +119,7 @@
             this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(80, 18);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(161, 21);
+            this.textBox2.Size = new System.Drawing.Size(161, 22);
             this.textBox2.TabIndex = 4;
             // 
             // label5
@@ -159,7 +161,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(189, 180);
+            this.button1.Location = new System.Drawing.Point(304, 151);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -167,11 +169,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(8, 180);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(416, 341);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(271, 206);
+            this.ClientSize = new System.Drawing.Size(436, 533);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -201,6 +212,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

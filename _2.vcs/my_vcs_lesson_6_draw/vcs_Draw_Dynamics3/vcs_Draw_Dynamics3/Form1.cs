@@ -24,6 +24,11 @@ namespace vcs_Draw_Dynamics3
         float y_st0 = 170;
         float y_sp0 = 170 + 460;    //降落距離 460
 
+        List<float[]> pts = new List<float[]>();    //二維List for float
+
+        int ball_size_width = 20;
+        int ball_size_height = 20;
+
         public Form1()
         {
             InitializeComponent();
@@ -75,6 +80,7 @@ namespace vcs_Draw_Dynamics3
                 button1.Text = "SP";
                 timer1.Enabled = true;
                 dropdown_status = true;
+                pts.Clear();
             }
             else
             {
@@ -111,7 +117,7 @@ namespace vcs_Draw_Dynamics3
 
             //Pen p = new Pen(Color.Red, 10);
             //e.Graphics.DrawLine(p, 480, y_st0, 480, y_st0 + 480);
-            //e.Graphics.FillEllipse(new SolidBrush(Color.Red), x_st, y_st0, 20, 20);
+            //e.Graphics.FillEllipse(new SolidBrush(Color.Red), x_st, y_st0, ball_size_width, ball_size_height);
 
             if (dropdown_status == false)
                 return;
@@ -120,8 +126,10 @@ namespace vcs_Draw_Dynamics3
 
             if (y_st <= y_sp0)
             {
-                e.Graphics.FillEllipse(newBrush, x_st, y_st, 20, 20);
-                e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, 20, 20);
+                e.Graphics.FillEllipse(newBrush, x_st, y_st, ball_size_width, ball_size_height);
+                e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, ball_size_width, ball_size_height);
+                pts.Add(new float[] { (float)drop_sec, x_st, y_st });
+
                 richTextBox1.Text += "t = " + drop_sec.ToString() + "\t" + (y_st - y_st0).ToString("n3") + "\n";
 
                 drop_sec += one_step_second;
@@ -133,10 +141,14 @@ namespace vcs_Draw_Dynamics3
             {
                 y_st = y_sp0;
 
-                e.Graphics.FillEllipse(newBrush, x_st, y_st, 20, 20);
-                e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, 20, 20);
+                e.Graphics.FillEllipse(newBrush, x_st, y_st, ball_size_width, ball_size_height);
+                e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, ball_size_width, ball_size_height);
+                pts.Add(new float[] { (float)drop_sec, x_st, y_st });
+
 
                 richTextBox1.Text += "測試結束\n";
+
+                richTextBox1.Text += "已在 : " + Math.Sqrt(2 * 46 / 10.0) + " 秒時墜地\n";
 
                 button1.Text = "ST";
                 timer1.Enabled = false;
@@ -166,6 +178,61 @@ namespace vcs_Draw_Dynamics3
             drop_sec = 0;
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int i;
+
+            int len = pts.Count;
+            richTextBox1.Text += "共有 " + len.ToString() + " 個項目, 分別是:\n";
+
+            for (i = 0; i < pts.Count; i++)
+            {
+                //richTextBox1.Text += pts[i][0].ToString() + "\t" + pts[i][1].ToString() + "\n";
+                richTextBox1.Text += pts[i][0].ToString() + "\t" + pts[i][1].ToString() + "\t" + pts[i][2].ToString() + "\n";
+            }
+        }
+
+        float mass = 1;
+        int use_bird_kind = 0;
+
+        private void rb_bird_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb1.Checked == true)
+            {
+                richTextBox1.Text += "改用 紅鳥 1 Kg\n";
+                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_red.jpg");
+                mass = 1;
+                use_bird_kind = 0;
+            }
+            else if (rb2.Checked == true)
+            {
+                richTextBox1.Text += "改用 黃鳥 0.6 Kg\n";
+                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_yellow.jpg");
+                mass = 0.6f;
+                use_bird_kind = 1;
+            }
+            else if (rb3.Checked == true)
+            {
+                richTextBox1.Text += "改用 藍鳥 0.3 Kg\n";
+                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_blue.jpg");
+                mass = 0.3f;
+                use_bird_kind = 2;
+            }
+            else if (rb4.Checked == true)
+            {
+                richTextBox1.Text += "改用 炸彈鳥 2 Kg\n";
+                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_black.jpg");
+                mass = 2;
+                use_bird_kind = 3;
+            }
+            else
+            {
+                richTextBox1.Text += "改用 紅鳥 1 Kg\n";
+                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_red.jpg");
+                use_bird_kind = 0;
+            }
+            this.pictureBox1.Invalidate();
+        }
     }
 }
 

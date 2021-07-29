@@ -196,10 +196,24 @@ namespace TwoCamerasTest
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (videoSourcePlayer1.VideoSource == null)
+            {
+                richTextBox1.Text += "無圖可存\n";
+                return;
+            }
+
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             var bitmap = videoSourcePlayer1.GetCurrentVideoFrame();
-            bitmap.Save(filename, System.Drawing.Imaging.ImageFormat.Jpeg);
-            richTextBox1.Text += "已存檔 : " + filename + "\n";
+            if (bitmap != null)
+            {
+                bitmap.Save(filename, System.Drawing.Imaging.ImageFormat.Jpeg);
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
         }
     }
 }
+

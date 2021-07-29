@@ -32,6 +32,9 @@ namespace vcs_SearchFile1
             //在Form1_Load時把資料讀出來
             txtDirectory.Text = Properties.Settings.Default.Directory;
 
+            this.Show();
+            Application.DoEvents();
+
             /*
             //檢查文字檔所在的資料夾
             //string Path = Application.StartupPath + "\\data";

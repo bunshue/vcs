@@ -673,7 +673,7 @@ namespace 真的只是一個測試1
         private const int CNT = 100;
         private void button21_Click(object sender, EventArgs e)
         {
-            int N = 10;
+            //int N = 10;
 
             pts.Clear();
 
