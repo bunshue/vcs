@@ -769,5 +769,44 @@ namespace 真的只是一個測試1
             }
 
         }
+
+        //找出資料夾內所有檔案
+        private void button22_Click(object sender, EventArgs e)
+        {
+            string foldername = @"C:\______test_files\_pic";
+
+            // Enumerate the files.
+            DirectoryInfo dir_info = new System.IO.DirectoryInfo(foldername);
+
+            foreach (DirectoryInfo d_info in dir_info.GetDirectories())
+            {
+                richTextBox1.Text += d_info.FullName + "\n";
+                richTextBox1.Text += d_info.Name + "\n";
+
+
+            }
+
+            richTextBox1.Text += "\n\n";
+
+            foreach (FileInfo file_info in dir_info.GetFiles())
+            {
+                try
+                {
+                    richTextBox1.Text += file_info.FullName + "\n";
+                    //richTextBox1.Text += file_info.Name + "\n";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error processing file '" +
+                        file_info.Name + "'\n" + ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            } // foreach file_info
+
+
+
+        }
     }
 }

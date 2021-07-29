@@ -38,12 +38,16 @@ namespace vcs_Draw_Dynamics3
         {
             show_item_location();
 
+            x_st = x_st0;
+            y_st = y_st0;
+
             richTextBox1.Text += "H = " + pictureBox1.Height.ToString() + "\n";
             one_step_second = ((double)trackBar1.Value) / 10;
             richTextBox1.Text += "每步 " + one_step_second.ToString() + " 秒\n";
 
-            x_st = x_st0;
-            y_st = y_st0;
+
+            trackBar1_Scroll(sender, e);
+            rb_bird_CheckedChanged(sender, e);
         }
 
         void show_item_location()
@@ -123,13 +127,23 @@ namespace vcs_Draw_Dynamics3
                 return;
 
             SolidBrush newBrush = new SolidBrush(Color.Red);
-
+            int point_width = 10;
+            int len;
+            int i;
             if (y_st <= y_sp0)
             {
                 e.Graphics.FillEllipse(newBrush, x_st, y_st, ball_size_width, ball_size_height);
                 e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, ball_size_width, ball_size_height);
                 pts.Add(new float[] { (float)drop_sec, x_st, y_st });
 
+                len = pts.Count;
+                if (len > 0)
+                {
+                    for (i = 0; i < len; i++)
+                    {
+                        e.Graphics.FillEllipse(new SolidBrush(Color.Black), pts[i][1] + ball_size_width / 2 - point_width / 2, pts[i][2] + ball_size_height / 2 - point_width / 2, 10, 10);
+                    }
+                }
                 richTextBox1.Text += "t = " + drop_sec.ToString() + "\t" + (y_st - y_st0).ToString("n3") + "\n";
 
                 drop_sec += one_step_second;
@@ -144,6 +158,14 @@ namespace vcs_Draw_Dynamics3
                 e.Graphics.FillEllipse(newBrush, x_st, y_st, ball_size_width, ball_size_height);
                 e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, ball_size_width, ball_size_height);
                 pts.Add(new float[] { (float)drop_sec, x_st, y_st });
+                len = pts.Count;
+                if (len > 0)
+                {
+                    for (i = 0; i < len; i++)
+                    {
+                        e.Graphics.FillEllipse(new SolidBrush(Color.Black), pts[i][1] + ball_size_width / 2 - point_width / 2, pts[i][2] + ball_size_height / 2 - point_width / 2, 10, 10);
+                    }
+                }
 
 
                 richTextBox1.Text += "測試結束\n";
@@ -157,7 +179,6 @@ namespace vcs_Draw_Dynamics3
                 x_st = x_st0;
                 y_st = y_st0;
                 drop_sec = 0;
-
             }
         }
 
@@ -165,6 +186,8 @@ namespace vcs_Draw_Dynamics3
         {
             one_step_second = ((double)trackBar1.Value) / 10;
             richTextBox1.Text += "每步 " + one_step_second.ToString() + " 秒\n";
+
+            lb_interval.Text = "每步 " + one_step_second.ToString() + " 秒";
         }
 
         private void button2_Click(object sender, EventArgs e)

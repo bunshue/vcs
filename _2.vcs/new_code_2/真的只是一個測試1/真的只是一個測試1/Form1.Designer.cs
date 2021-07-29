@@ -347,7 +347,9 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(155, 55);
             this.button22.TabIndex = 26;
+            this.button22.Text = "找出資料夾內所有檔案";
             this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
             // button23
             // 

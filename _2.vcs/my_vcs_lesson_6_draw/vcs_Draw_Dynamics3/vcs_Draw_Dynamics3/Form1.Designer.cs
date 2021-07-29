@@ -43,6 +43,7 @@
             this.rb2 = new System.Windows.Forms.RadioButton();
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.pictureBox_bird = new System.Windows.Forms.PictureBox();
+            this.lb_interval = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox_bird.SuspendLayout();
@@ -75,7 +76,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(817, 217);
+            this.richTextBox1.Location = new System.Drawing.Point(817, 262);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(236, 376);
             this.richTextBox1.TabIndex = 2;
@@ -105,7 +106,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(880, 519);
+            this.bt_clear.Location = new System.Drawing.Point(880, 564);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(67, 36);
             this.bt_clear.TabIndex = 56;
@@ -191,11 +192,21 @@
             this.pictureBox_bird.TabIndex = 59;
             this.pictureBox_bird.TabStop = false;
             // 
+            // lb_interval
+            // 
+            this.lb_interval.AutoSize = true;
+            this.lb_interval.Location = new System.Drawing.Point(817, 205);
+            this.lb_interval.Name = "lb_interval";
+            this.lb_interval.Size = new System.Drawing.Size(29, 12);
+            this.lb_interval.TabIndex = 60;
+            this.lb_interval.Text = "間隔";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 599);
+            this.Controls.Add(this.lb_interval);
             this.Controls.Add(this.pictureBox_bird);
             this.Controls.Add(this.groupBox_bird);
             this.Controls.Add(this.button3);
@@ -234,6 +245,7 @@
         private System.Windows.Forms.RadioButton rb2;
         private System.Windows.Forms.RadioButton rb1;
         private System.Windows.Forms.PictureBox pictureBox_bird;
+        private System.Windows.Forms.Label lb_interval;
     }
 }
 
