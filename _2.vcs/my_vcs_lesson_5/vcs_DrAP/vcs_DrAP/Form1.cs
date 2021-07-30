@@ -134,6 +134,12 @@ namespace vcs_DrAP
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            richTextBox2.Text += "video_player_path = " + Properties.Settings.Default.video_player_path + "\n";
+            richTextBox2.Text += "audio_player_path = " + Properties.Settings.Default.audio_player_path + "\n";
+            richTextBox2.Text += "picture_viewer_path = " + Properties.Settings.Default.picture_viewer_path + "\n";
+            richTextBox2.Text += "text_editor_path = " + Properties.Settings.Default.text_editor_path + "\n";
+            richTextBox2.Text += "search_path = " + Properties.Settings.Default.search_path + "\n";
+
             show_item_location();
 
             //search_path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
@@ -211,6 +217,17 @@ namespace vcs_DrAP
                 groupBox_file.Enabled = true;
             else
                 groupBox_file.Enabled = false;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.video_player_path = video_player_path;
+            Properties.Settings.Default.audio_player_path = audio_player_path;
+            Properties.Settings.Default.picture_viewer_path = picture_viewer_path;
+            Properties.Settings.Default.text_editor_path = text_editor_path;
+            Properties.Settings.Default.search_path = search_path;
+
+            Properties.Settings.Default.Save();
         }
 
         void update_setup_file()
@@ -2574,5 +2591,6 @@ namespace vcs_DrAP
             }
             return;
         }
+
     }
 }

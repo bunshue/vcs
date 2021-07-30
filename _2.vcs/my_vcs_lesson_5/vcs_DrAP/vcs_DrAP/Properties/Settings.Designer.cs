@@ -22,5 +22,65 @@ namespace vcs_DrAP.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string video_player_path {
+            get {
+                return ((string)(this["video_player_path"]));
+            }
+            set {
+                this["video_player_path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string audio_player_path {
+            get {
+                return ((string)(this["audio_player_path"]));
+            }
+            set {
+                this["audio_player_path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string picture_viewer_path {
+            get {
+                return ((string)(this["picture_viewer_path"]));
+            }
+            set {
+                this["picture_viewer_path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string text_editor_path {
+            get {
+                return ((string)(this["text_editor_path"]));
+            }
+            set {
+                this["text_editor_path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string search_path {
+            get {
+                return ((string)(this["search_path"]));
+            }
+            set {
+                this["search_path"] = value;
+            }
+        }
     }
 }

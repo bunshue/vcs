@@ -208,6 +208,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(131, 55);
             this.button12.TabIndex = 15;
+            this.button12.Text = "windowlessVideo false";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -217,6 +218,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(131, 55);
             this.button13.TabIndex = 16;
+            this.button13.Text = "windowlessVideo true";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -226,6 +228,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(131, 55);
             this.button14.TabIndex = 17;
+            this.button14.Text = "取消全螢幕播放";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -235,6 +238,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(131, 55);
             this.button15.TabIndex = 18;
+            this.button15.Text = "全螢幕播放";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -244,6 +248,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(131, 55);
             this.button16.TabIndex = 19;
+            this.button16.Text = "自動播放 true";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -253,6 +258,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(131, 55);
             this.button17.TabIndex = 20;
+            this.button17.Text = "自動播放 false";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -262,6 +268,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(131, 55);
             this.button18.TabIndex = 21;
+            this.button18.Text = "set url";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 

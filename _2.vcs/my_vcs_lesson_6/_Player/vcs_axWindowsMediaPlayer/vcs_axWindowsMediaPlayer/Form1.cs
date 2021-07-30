@@ -59,7 +59,19 @@ http://kikilala-tw.blogspot.com/2009/09/caxwindowsmediaplayermp3.html
 複製到本機 改 True
 */
 
+/* old
+C# 播放器控件的常用方法
 
+MediaPlay 9
+
+右擊工具箱->選擇項(I)... -> 顯示"選擇工具箱項" -> COM組件 -> Windows Media Player   wmp.dll 添加
+
+
+MediaPlay 以前版本
+
+右擊工具箱->選擇項(I)... -> 顯示"選擇工具箱項" -> COM組件 -> 瀏覽(B)... -> C:WINDOWS\system32\msdxm.ocx -> 打開
+Windows Media Player   msdxm.dll 添加
+*/
 
 namespace vcs_axWindowsMediaPlayer
 {
@@ -80,14 +92,13 @@ namespace vcs_axWindowsMediaPlayer
         private void Form1_Load(object sender, EventArgs e)
         {
             label3.Text = "";
-            //axWindowsMediaPlayer1.Dock = DockStyle.Fill;     //填滿整個表單
-            axWindowsMediaPlayer1.settings.volume = 50;
-            //axWindowsMediaPlayer1.settings.autoStart = false;             //設定不自動播放, 預設是自動播放
+            //axWindowsMediaPlayer1.Dock = DockStyle.Fill;      //填滿整個表單
+            axWindowsMediaPlayer1.settings.volume = 50;         // 音量　int 0 ~ 100   100 是最大音量
+            //axWindowsMediaPlayer1.settings.autoStart = false; //設定不自動播放, 預設是自動播放
 
             //axWindowsMediaPlayer1.URL = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
             axWindowsMediaPlayer1.settings.rate = 1;    //播放速度
             //axWindowsMediaPlayer1.settings.getMode("loop"); //useless
-
 
             trackBar1.Minimum = 0;                                          //設定音量調整Bar最小值為最小音量值(0)
             trackBar1.Maximum = 100;                                        //設定音量調整Bar最大值為最大音量值(100)
@@ -183,7 +194,6 @@ namespace vcs_axWindowsMediaPlayer
                 axWindowsMediaPlayer1.Ctlcontrols.pause();        //暫停撥放
                 button2.Text = "播放";
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -304,7 +314,7 @@ namespace vcs_axWindowsMediaPlayer
 
             timer1.Enabled = true;
             //播放位置
-            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = trackBar2.Value;          //改變播放位置
+            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = trackBar2.Value;          //設定 當前的播放位置　double
             label3.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + " / " + axWindowsMediaPlayer1.currentMedia.durationString + " " + (axWindowsMediaPlayer1.Ctlcontrols.currentPosition / axWindowsMediaPlayer1.currentMedia.duration).ToString("P0");
         }
 
@@ -315,7 +325,7 @@ namespace vcs_axWindowsMediaPlayer
 
             trackBar2.Minimum = 0;
             trackBar2.Maximum = (int)axWindowsMediaPlayer1.currentMedia.duration;          //設定撥放位置調整Bar最大值
-            trackBar2.Value = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+            trackBar2.Value = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;      //取得 當前的播放位置　double
 
             //richTextBox1.Text += axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
             //richTextBox1.Text += axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + "\n";
@@ -343,8 +353,8 @@ namespace vcs_axWindowsMediaPlayer
             {
                 return ret;
             }
-            double curPos = axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
-            double totalLen = axWindowsMediaPlayer1.currentMedia.duration;
+            double curPos = axWindowsMediaPlayer1.Ctlcontrols.currentPosition;  //取得 當前的播放位置　double
+            double totalLen = axWindowsMediaPlayer1.currentMedia.duration;      //影片長度
             ret = (int)((curPos / totalLen) * 100);
             //richTextBox1.Text += "ret = " + ret.ToString() + "\n";
             return ret;
@@ -414,8 +424,8 @@ namespace vcs_axWindowsMediaPlayer
 
             //axWindowsMediaPlayer1.currentMedia
             richTextBox1.Text += "获取当前媒体信息\n";
-            richTextBox1.Text += "Title:\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title") + "\n";
-            richTextBox1.Text += "Author:\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Author") + "\n";
+            richTextBox1.Text += "Title:\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title") + "\n";   //標題
+            richTextBox1.Text += "Author:\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Author") + "\n"; //作者
             richTextBox1.Text += "Artist:\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Artist") + "\n";
             richTextBox1.Text += "Genre:\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Genre") + "\n";
             richTextBox1.Text += "WM/Genre:\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("WM/Genre") + "\n";
@@ -477,7 +487,7 @@ namespace vcs_axWindowsMediaPlayer
 
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
-            int balance =trackBar3.Value;
+            int balance = trackBar3.Value;
             if ((balance <= 100) && (balance >= -100))
             {
                 axWindowsMediaPlayer1.settings.balance = balance;
@@ -533,4 +543,3 @@ namespace vcs_axWindowsMediaPlayer
         }
     }
 }
-

@@ -469,36 +469,48 @@ namespace vcs_axWindowsMediaPlayer2_new
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //無效
+            axWindowsMediaPlayer1.windowlessVideo = false;   //設爲false後雙擊屏幕可以全屏
+            
 
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //無效
+            axWindowsMediaPlayer1.windowlessVideo = true;   //設爲false後雙擊屏幕可以全屏
 
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            axWindowsMediaPlayer1.fullScreen = false; //設播放器全屏播放
 
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
+            axWindowsMediaPlayer1.fullScreen = true; //設播放器全屏播放
 
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-
+            //axWindowsMediaPlayer1設定URL後, 會自動播放
+            axWindowsMediaPlayer1.settings.autoStart = true;     //自動播放
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //axWindowsMediaPlayer1設定URL後, 不會自動播放
+            axWindowsMediaPlayer1.settings.autoStart = false;     //自動播放
 
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
+            string filename = @"D:\vcs\astro\_DATA2\_mp3\陳盈潔_台語精選集6CD\disc3\01.南都夜曲.mp3";
+            axWindowsMediaPlayer1.URL = filename;
 
         }
 
