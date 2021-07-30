@@ -17,7 +17,161 @@ namespace vcs_DrAP
 {
     public partial class Form1 : Form
     {
-        void Setup_DrAP_Form()
+        private const int FUNCTION_NONE = 0x00;         //無
+        private const int FUNCTION_LIST_ONE = 0x01;     //轉出一層
+        private const int FUNCTION_LIST = 0x02;         //轉出
+        private const int FUNCTION_FIND_SAME_FILE = 0x03;    //找同檔
+        private const int FUNCTION_FIND_SIMILAR_FILE = 0x04; //找可能相同檔案
+        private const int FUNCTION_FIND_SMALL_FOLDER = 0x05;   //找小資料夾
+        private const int FUNCTION_FIND_BIG_FILE = 0x06;   //找大檔案
+        private const int FUNCTION_SEARCH = 0x07;       //搜尋
+
+        private const int FUNCTION_TEST = 0xFF;         //測試
+
+        private const int FILETYPE_VIDEO = 0x00;        //影片
+        private const int FILETYPE_AUDIO = 0x01;        //音樂
+        private const int FILETYPE_ALL = 0x02;          //全部
+        private const int FILETYPE_OTHERS = 0xFF;       //其他
+
+        int flag_function = FUNCTION_NONE;
+
+        string path = String.Empty;
+        int filetype = 0;
+        string filetype2 = String.Empty;
+        Int64 total_size = 0;
+        Int64 total_files = 0;
+        Int64 total_folders = 0;
+        Int64 folder_size = 0;
+        Int64 folder_files = 0;
+        int min_size_mb = 0;
+        int step = 0;
+        int flag_search_mode = 0;
+        int flag_search_done = 0;
+        int flag_search_vcs_pattern = 0;
+        int SelectedLanguage = 0;
+        string drap_setup_filename = "drap_setup.ini";
+        string FolederName;
+
+        string video_player_path = String.Empty;
+        string audio_player_path = String.Empty;
+        string picture_viewer_path = String.Empty;
+        string text_editor_path = String.Empty;
+        string search_path = String.Empty;
+
+        bool flag_need_update_setup_file = false;
+
+        private const int SEARCH_MODE_VCS = 0x00;	//search vcs code, 搜尋vcs內的關鍵字
+        private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
+        private const int SEARCH_MODE_MATLAB = 0x02;	//search matlab code, 搜尋matlab內的關鍵字
+        int search_mode = SEARCH_MODE_VCS;
+
+        List<String> old_search_path = new List<String>();
+
+        //不用宣告長度的陣列(Array)
+        // 宣告fileinfos 為List
+        // 以下List 裡為MyFileInfo 型態
+        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();
+
+        public class MyFileInfo
+        {
+            public string filename;
+            public string filepath;
+            public string fileextension;
+            public long filesize;
+            public DateTime filecreationtime;
+
+            public int video_width;
+            public int video_height;
+            public int video_fps;
+            public string video_duration;
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c)
+            {
+                this.filename = n;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+            }
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c, int w, int h, int f, string d)
+            {
+                this.filename = n;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+
+                this.video_width = w;
+                this.video_height = h;
+                this.video_fps = f;
+                this.video_duration = d;
+            }
+        }
+
+        public class MyFolderInfo
+        {
+            public string foldername;
+            public string folderpath;
+            public long foldersize;
+            public DateTime foldercreationtime;
+            public MyFolderInfo(string n, string p, long s, DateTime c)
+            {
+                this.foldername = n;
+                this.folderpath = p;
+                this.foldersize = s;
+                this.foldercreationtime = c;
+            }
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+            comboBox1.SelectedIndex = 0;
+            Read_Setup_File();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+
+            //search_path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
+            //this.listBox1.Items.Add(search_path);
+            // 可用foreach 取出List 裡的值
+            //richTextBox2.Text += "\n可用foreach 取出List 裡的值\n";
+            this.listBox1.Items.Clear();
+            foreach (string sss in old_search_path)
+            {
+                //richTextBox1.Text += sss + "\n";
+                this.listBox1.Items.Add(sss);
+            }
+
+            this.listView1.GridLines = true;
+
+
+            //C# 提示視窗 ToolTip 
+            //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
+            ToolTip toolTip1 = new ToolTip();
+            //SetToolTip：定義控制項會跳出提示的文字
+            toolTip1.SetToolTip(button14, "Add Directory");
+            toolTip1.SetToolTip(button15, "Delete Directory");
+            toolTip1.SetToolTip(button16, "Delete All Directory");
+
+            //以下為提示視窗的設定(通常會設定的部分)
+            //ToolTipIcon：設定顯示在提示視窗的圖示類型。
+            toolTip1.ToolTipIcon = ToolTipIcon.Info;
+            //ForeColor：前景顏色
+            toolTip1.ForeColor = Color.Blue;
+            //BackColor：背景顏色
+            toolTip1.BackColor = Color.Gray;
+            //AutoPopDelay：當游標停滯在控制項，顯示提示視窗的時間。(以毫秒為單位)
+            toolTip1.AutoPopDelay = 5000;
+            //ToolTipTitle：設定提示視窗的標題。
+            toolTip1.ToolTipTitle = "提示訊息";
+        }
+
+        void show_item_location()
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
@@ -41,7 +195,6 @@ namespace vcs_DrAP
             richTextBox2.Text += "lsstview1 x_st = " + this.listView1.Location.X.ToString() + "\n";
             richTextBox2.Text += "lsstview1 y_st = " + this.listView1.Location.Y.ToString() + "\n";
 
-
             //this.richTextBox2.Location = new Point(1600, 600);
 
             if (checkBox7.Checked == false)
@@ -58,8 +211,6 @@ namespace vcs_DrAP
                 groupBox_file.Enabled = true;
             else
                 groupBox_file.Enabled = false;
-
-
         }
 
         void update_setup_file()
@@ -297,122 +448,6 @@ namespace vcs_DrAP
             }
         }
 
-        public Form1()
-        {
-            InitializeComponent();
-            comboBox1.SelectedIndex = 0;
-            Read_Setup_File();
-        }
-
-        private const int FUNCTION_NONE = 0x00;         //無
-        private const int FUNCTION_LIST_ONE = 0x01;     //轉出一層
-        private const int FUNCTION_LIST = 0x02;         //轉出
-        private const int FUNCTION_FIND_SAME_FILE = 0x03;    //找同檔
-        private const int FUNCTION_FIND_SIMILAR_FILE = 0x04; //找可能相同檔案
-        private const int FUNCTION_FIND_SMALL_FOLDER = 0x05;   //找小資料夾
-        private const int FUNCTION_FIND_BIG_FILE = 0x06;   //找大檔案
-        private const int FUNCTION_SEARCH = 0x07;       //搜尋
-
-        private const int FUNCTION_TEST = 0xFF;         //測試
-
-        private const int FILETYPE_VIDEO = 0x00;        //影片
-        private const int FILETYPE_AUDIO = 0x01;        //音樂
-        private const int FILETYPE_ALL = 0x02;          //全部
-        private const int FILETYPE_OTHERS = 0xFF;       //其他
-
-        int flag_function = FUNCTION_NONE;
-
-        string path = String.Empty;
-        int filetype = 0;
-        string filetype2 = String.Empty;
-        Int64 total_size = 0;
-        Int64 total_files = 0;
-        Int64 total_folders = 0;
-        Int64 folder_size = 0;
-        Int64 folder_files = 0;
-        int min_size_mb = 0;
-        int step = 0;
-        int flag_search_mode = 0;
-        int flag_search_done = 0;
-        int flag_search_vcs_pattern = 0;
-        int SelectedLanguage = 0;
-        string drap_setup_filename = "drap_setup.ini";
-        string FolederName;
-
-        string video_player_path = String.Empty;
-        string audio_player_path = String.Empty;
-        string picture_viewer_path = String.Empty;
-        string text_editor_path = String.Empty;
-        string search_path = String.Empty;
-
-        bool flag_need_update_setup_file = false;
-
-        private const int SEARCH_MODE_VCS = 0x00;	//search vcs code
-        private const int SEARCH_MODE_PYTHON = 0x01;	//search python code
-        private const int SEARCH_MODE_MATLAB = 0x02;	//search matlab code
-        int search_mode = SEARCH_MODE_VCS;
-
-        List<String> old_search_path = new List<String>();
-
-        public class MyFileInfo
-        {
-            public string filename;
-            public string filepath;
-            public string fileextension;
-            public long filesize;
-            public DateTime filecreationtime;
-
-            public int video_width;
-            public int video_height;
-            public int video_fps;
-            public string video_duration;
-
-            public MyFileInfo(string n, string p, string e, long s, DateTime c)
-            {
-                this.filename = n;
-                this.filepath = p;
-                this.fileextension = e;
-                this.filesize = s;
-                this.filecreationtime = c;
-            }
-
-            public MyFileInfo(string n, string p, string e, long s, DateTime c, int w, int h, int f, string d)
-            {
-                this.filename = n;
-                this.filepath = p;
-                this.fileextension = e;
-                this.filesize = s;
-                this.filecreationtime = c;
-
-                this.video_width = w;
-                this.video_height = h;
-                this.video_fps = f;
-                this.video_duration = d;
-            }
-        }
-
-        public class MyFolderInfo
-        {
-            public string foldername;
-            public string folderpath;
-            public long foldersize;
-            public DateTime foldercreationtime;
-            public MyFolderInfo(string n, string p, long s, DateTime c)
-            {
-                this.foldername = n;
-                this.folderpath = p;
-                this.foldersize = s;
-                this.foldercreationtime = c;
-            }
-        }
-
-        //不用宣告長度的陣列(Array)
-        // 宣告fileinfos 為List
-        // 以下List 裡為MyFileInfo 型態
-
-        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
-        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();
-
         private void button2_Click(object sender, EventArgs e)
         {
             flag_search_mode = 0;
@@ -503,8 +538,6 @@ namespace vcs_DrAP
                 richTextBox1.Text += "非合法路徑或檔案\n";
                 flag_search_done = 0;
             }
-
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -841,13 +874,6 @@ namespace vcs_DrAP
                         sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                         sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                     }
-
-
-
-
-
-
-
                 }
                 else
                 {
@@ -1002,9 +1028,7 @@ namespace vcs_DrAP
                 //設置ListView最後一行可見
                 //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
             }
-
         }
-
 
         void show_file_info4()
         {
@@ -1219,11 +1243,7 @@ namespace vcs_DrAP
             else
             {
 
-
-
             }
-
-
 
             selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
@@ -1387,12 +1407,6 @@ namespace vcs_DrAP
                 //ListViewItem t = listView1.Items[selNdx]; //相同寫法
                 //richTextBox1.Text += t.Text + "\t" + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
                 richTextBox2.Text += listView1.Items[selNdx].Text + "\t" + listView1.Items[selNdx].SubItems[1].Text + "\t" + listView1.Items[selNdx].SubItems[2].Text + "\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
-
-
-
-
-
-
             }
         }
 
@@ -1493,45 +1507,6 @@ namespace vcs_DrAP
                 */
                 listView1.SelectedItems[i].Remove();
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Setup_DrAP_Form();
-
-            //search_path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
-            //this.listBox1.Items.Add(search_path);
-            // 可用foreach 取出List 裡的值
-            //richTextBox2.Text += "\n可用foreach 取出List 裡的值\n";
-            this.listBox1.Items.Clear();
-            foreach (string sss in old_search_path)
-            {
-                //richTextBox1.Text += sss + "\n";
-                this.listBox1.Items.Add(sss);
-            }
-
-            this.listView1.GridLines = true;
-
-
-            //C# 提示視窗 ToolTip 
-            //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
-            ToolTip toolTip1 = new ToolTip();
-            //SetToolTip：定義控制項會跳出提示的文字
-            toolTip1.SetToolTip(button14, "Add Directory");
-            toolTip1.SetToolTip(button15, "Delete Directory");
-            toolTip1.SetToolTip(button16, "Delete All Directory");
-
-            //以下為提示視窗的設定(通常會設定的部分)
-            //ToolTipIcon：設定顯示在提示視窗的圖示類型。
-            toolTip1.ToolTipIcon = ToolTipIcon.Info;
-            //ForeColor：前景顏色
-            toolTip1.ForeColor = Color.Blue;
-            //BackColor：背景顏色
-            toolTip1.BackColor = Color.Gray;
-            //AutoPopDelay：當游標停滯在控制項，顯示提示視窗的時間。(以毫秒為單位)
-            toolTip1.AutoPopDelay = 5000;
-            //ToolTipTitle：設定提示視窗的標題。
-            toolTip1.ToolTipTitle = "提示訊息";
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -1665,50 +1640,7 @@ namespace vcs_DrAP
 
         private void button13_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
-            richTextBox2.Clear();
-            removeDrawDiskSpace();
-            richTextBox1.Text += "搜尋開始vcs\n";
-            richTextBox2.Text += "搜尋開始vcs\n\n";
-
-            button13.BackgroundImage = null;
-            button13.BackColor = Color.Red;
-            button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
-            flag_function = FUNCTION_SEARCH;
-            search_mode = SEARCH_MODE_VCS;
-
-            Application.DoEvents();
-
-            if (textBox3.Text == "")
-            {
-                richTextBox2.Text += "未輸入搜尋內容\n";
-                return;
-            }
-
-            fileinfos.Clear();
-
-            string path = @"C:\_git\vcs\_2.vcs";
-            //string path = @"C:\_git\vcs\_1.data\_html";
-
-            if (path == String.Empty)
-                path = search_path;
-
-            richTextBox1.Text += "資料夾: " + path + "\n\n";
-            if (System.IO.File.Exists(path))
-            {
-                // This path is a file
-                richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
-                ProcessFileS(path);
-            }
-            else if (Directory.Exists(path))
-            {
-                // This path is a directory
-                ProcessDirectoryS(path);
-            }
-            show_file_info3();
-            flag_search_vcs_pattern = 1;
-            button13.BackColor = System.Drawing.SystemColors.ControlLight;
-            button13.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
+            do_search_mode(SEARCH_MODE_VCS);
             return;
         }
 
@@ -1996,11 +1928,7 @@ namespace vcs_DrAP
 
                 sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                 */
-
-
             }
-
-
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -2061,11 +1989,6 @@ namespace vcs_DrAP
                 richTextBox1.Text += "非合法路徑或檔案\n";
                 flag_search_done = 0;
             }
-
-
-
-
-
         }
 
         // Process all files in the directory passed in, recurse on any directories 
@@ -2193,49 +2116,7 @@ namespace vcs_DrAP
 
         private void button22_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
-            richTextBox2.Clear();
-            removeDrawDiskSpace();
-            richTextBox1.Text += "搜尋開始python\n";
-            richTextBox2.Text += "搜尋開始python\n\n";
-
-            button22.BackgroundImage = null;
-            button22.BackColor = Color.Red;
-            button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
-            flag_function = FUNCTION_SEARCH;
-            search_mode = SEARCH_MODE_PYTHON;
-
-            Application.DoEvents();
-
-            if (textBox3.Text == "")
-            {
-                richTextBox2.Text += "未輸入搜尋內容\n";
-                return;
-            }
-
-            fileinfos.Clear();
-
-            string path = @"C:\_git\vcs\_4.cmpp\_python_test";
-
-            if (path == String.Empty)
-                path = search_path;
-
-            richTextBox1.Text += "資料夾: " + path + "\n\n";
-            if (System.IO.File.Exists(path))
-            {
-                // This path is a file
-                richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
-                ProcessFileS(path);
-            }
-            else if (Directory.Exists(path))
-            {
-                // This path is a directory
-                ProcessDirectoryS(path);
-            }
-            show_file_info3();
-            flag_search_vcs_pattern = 1;
-            button22.BackColor = System.Drawing.SystemColors.ControlLight;
-            button22.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
+            do_search_mode(SEARCH_MODE_PYTHON);
             return;
         }
 
@@ -2503,7 +2384,6 @@ namespace vcs_DrAP
                     button19.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button19.Width, button19.Location.Y);
                     button23.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button23.Width, button23.Location.Y);
                 }
-
             }
             else
             {
@@ -2516,12 +2396,7 @@ namespace vcs_DrAP
 
                     button19.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button19.Width, button19.Location.Y);
                     button23.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button23.Width, button23.Location.Y);
-
                 }
-
-
-
-
             }
         }
 
@@ -2580,12 +2455,72 @@ namespace vcs_DrAP
 
         private void button24_Click(object sender, EventArgs e)
         {
-            button24.BackgroundImage = null;
-            button24.BackColor = Color.Red;
-            button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
-            flag_function = FUNCTION_SEARCH;
-            search_mode = SEARCH_MODE_MATLAB;
+            do_search_mode(SEARCH_MODE_MATLAB);
+            return;
+        }
 
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(int delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        }
+
+        void do_search_mode(int mode)
+        {
+            string path;
+            richTextBox1.Clear();
+            richTextBox2.Clear();
+            removeDrawDiskSpace();
+            flag_function = FUNCTION_SEARCH;
+
+            if (mode == SEARCH_MODE_VCS)
+            {
+                search_mode = SEARCH_MODE_VCS;
+                richTextBox1.Text += "搜尋開始vcs\n";
+                richTextBox2.Text += "搜尋開始vcs\n\n";
+
+                button13.BackgroundImage = null;
+                button13.BackColor = Color.Red;
+                path = @"C:\_git\vcs\_2.vcs";
+            }
+            else if (mode == SEARCH_MODE_PYTHON)
+            {
+                search_mode = SEARCH_MODE_PYTHON;
+                richTextBox1.Text += "搜尋開始python\n";
+                richTextBox2.Text += "搜尋開始python\n\n";
+
+                button22.BackgroundImage = null;
+                button22.BackColor = Color.Red;
+                path = @"C:\_git\vcs\_4.cmpp\_python_test";
+            }
+            else if (mode == SEARCH_MODE_MATLAB)
+            {
+                search_mode = SEARCH_MODE_MATLAB;
+                richTextBox1.Text += "搜尋開始matlab\n";
+                richTextBox2.Text += "搜尋開始matlab\n\n";
+
+                button24.BackgroundImage = null;
+                button24.BackColor = Color.Red;
+                path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
+            }
+            else
+            {
+                search_mode = SEARCH_MODE_VCS;
+                richTextBox1.Text += "搜尋開始vcs\n";
+                richTextBox2.Text += "搜尋開始vcs\n\n";
+
+                button13.BackgroundImage = null;
+                button13.BackColor = Color.Red;
+                path = @"C:\_git\vcs\_2.vcs";
+            }
+
+            button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             Application.DoEvents();
 
             if (textBox3.Text == "")
@@ -2595,8 +2530,6 @@ namespace vcs_DrAP
             }
 
             fileinfos.Clear();
-
-            string path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
 
             if (path == String.Empty)
                 path = search_path;
@@ -2615,21 +2548,27 @@ namespace vcs_DrAP
             }
             show_file_info3();
             flag_search_vcs_pattern = 1;
-            button24.BackColor = System.Drawing.SystemColors.ControlLight;
-            button24.BackgroundImage = vcs_DrAP.Properties.Resources.matlab;
-            return;
-        }
-
-        //delay 10000 約 10秒
-        //C# 不lag的延遲時間
-        private void delay(int delay_milliseconds)
-        {
-            delay_milliseconds *= 2;
-            DateTime time_before = DateTime.Now;
-            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            if (mode == SEARCH_MODE_VCS)
             {
-                Application.DoEvents();
+                button13.BackColor = System.Drawing.SystemColors.ControlLight;
+                button13.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
             }
+            else if (mode == SEARCH_MODE_PYTHON)
+            {
+                button22.BackColor = System.Drawing.SystemColors.ControlLight;
+                button22.BackgroundImage = vcs_DrAP.Properties.Resources.python;
+            }
+            else if (mode == SEARCH_MODE_MATLAB)
+            {
+                button24.BackColor = System.Drawing.SystemColors.ControlLight;
+                button24.BackgroundImage = vcs_DrAP.Properties.Resources.matlab;
+            }
+            else
+            {
+                button13.BackColor = System.Drawing.SystemColors.ControlLight;
+                button13.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
+            }
+            return;
         }
     }
 }
