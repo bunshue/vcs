@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "柱形圖表分析商品走勢", "柱形圖表分析商品走勢\柱形圖表分析商品走勢.csproj", "{B71B0F1D-EDB6-40EF-A000-410764F6C733}"
 EndProject
 Global

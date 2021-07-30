@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace 取得網絡中某台計算機的磁盤訊息
+namespace vcs_SaveWebpage_Image
 {
     static class Program
     {
         /// <summary>
-        /// 運用程序的主入口點。
+        /// 應用程式的主要進入點。
         /// </summary>
         [STAThread]
         static void Main()

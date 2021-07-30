@@ -16,6 +16,11 @@ namespace HundredChicken
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            label4.Text = "公雞5元一隻，母雞3元一隻，小雞3" + "\r" + "只一元，用100元買100隻雞";
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             int a = 0, b = 0, c = 0, p = 0;//定義變數
@@ -35,11 +40,5 @@ namespace HundredChicken
                 }
             }
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            label4.Text="公雞5元一隻，母雞3元一隻，小雞3"+"\r"+"只一元，用100元買100隻雞";
-        }
-
     }
 }

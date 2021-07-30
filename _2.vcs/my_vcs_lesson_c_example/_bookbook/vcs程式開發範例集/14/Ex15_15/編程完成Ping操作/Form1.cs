@@ -50,13 +50,16 @@ namespace 編程完成Ping操作
                 }
                 else
                 {
-                    MessageBox.Show("無法Ping通");
+                    richTextBox1.Text += "無法Ping通\n";
                 }
             }
-            catch (Exception ey)
+            catch (Exception ex)
             {
-                MessageBox.Show(ey.Message);
+                //MessageBox.Show(ex.Message);
+                richTextBox1.Text += "無法Ping, 錯誤訊息:\n" + ex.Message + "\n";
             }
+            richTextBox1.Text += "\n";
         }
     }
 }
+

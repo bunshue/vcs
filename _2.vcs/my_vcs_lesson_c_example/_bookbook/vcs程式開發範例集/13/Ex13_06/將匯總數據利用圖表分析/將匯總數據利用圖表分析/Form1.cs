@@ -9,12 +9,14 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;
 using System.Data.SqlClient;
+
 namespace 將匯總數據利用圖表分析
 {
     public partial class Form1 : Form
     {
         SqlConnection con;
         SqlCommand cmd;
+
         public Form1()
         {
             InitializeComponent();

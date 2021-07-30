@@ -450,6 +450,14 @@ namespace vcs_DrAP
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //轉出一層
+            richTextBox2.Text += "開始計時\n";
+            this.Text = "DrAP";
+            // Create stopwatch
+            Stopwatch stopwatch = new Stopwatch();
+            // Begin timing
+            stopwatch.Start();
+
             flag_search_mode = 0;
             flag_search_done = 0;
             flag_search_vcs_pattern = 0;
@@ -538,6 +546,13 @@ namespace vcs_DrAP
                 richTextBox1.Text += "非合法路徑或檔案\n";
                 flag_search_done = 0;
             }
+
+            // Stop timing
+            stopwatch.Stop();
+            // Write result
+            richTextBox2.Text += "停止計時\t";
+            richTextBox2.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+            this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -1080,6 +1095,7 @@ namespace vcs_DrAP
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //轉出
             richTextBox2.Text += "開始計時\n";
             this.Text = "DrAP";
             // Create stopwatch
@@ -1092,20 +1108,6 @@ namespace vcs_DrAP
             flag_search_vcs_pattern = 0;
 
             fileinfos.Clear();
-            /*  無法依子目錄排序 廢棄
-            if (path == String.Empty)
-                path = search_path;
-
-            //C# 取得資料夾下的所有檔案(包括子目錄)
-            string[] files = System.IO.Directory.GetFiles(path, filetype2, System.IO.SearchOption.AllDirectories);
-            foreach (string filename in files)
-            {
-                //richTextBox1.Text += filename + "\n";
-                FileInfo fi = new FileInfo(filename);
-                richTextBox1.Text += fi.Name + "\n";
-            }
-            */
-
             total_size = 0;
             total_files = 0;
 
@@ -1463,6 +1465,7 @@ namespace vcs_DrAP
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //搜尋大檔
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.potplayer;
             button4.BackColor = Color.Red;
 
@@ -1671,6 +1674,7 @@ namespace vcs_DrAP
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //找同檔
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();

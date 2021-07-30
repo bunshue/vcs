@@ -17,6 +17,12 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // 取得設備硬盤的卷標號
         public string GetDiskVolumeSerialNumber()
         {
@@ -25,51 +31,58 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
             disk.Get();
             return disk.GetPropertyValue("VolumeSerialNumber").ToString();
         }
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
-        }
         //獲得CPU的序列號
         public string getCpu()
         {
             string strCpu = null;
             ManagementClass myCpu = new ManagementClass("win32_Processor");
             ManagementObjectCollection myCpuConnection = myCpu.GetInstances();
-            foreach( ManagementObject myObject in myCpuConnection)
+            foreach (ManagementObject myObject in myCpuConnection)
             {
                 strCpu = myObject.Properties["Processorid"].Value.ToString();
                 break;
             }
             return strCpu;
         }
-       //產生機器碼
+
+        //產生機器碼
         private void button1_Click(object sender, EventArgs e)
         {
             label2.Text = getCpu() + GetDiskVolumeSerialNumber();//獲得24位Cpu和硬盤序列號
+
+            richTextBox1.Text += "CPU : " + getCpu() + "\n";
+            richTextBox1.Text += "HDD : " + GetDiskVolumeSerialNumber() + "\n";
+
+
             string[] strid = new string[24];//
             for (int i = 0; i < 24; i++)//把字符賦給數組
             {
                 strid[i] = label2.Text.Substring(i, 1);
             }
+
             label2.Text = "";
             Random rdid = new Random();
             for (int i = 0; i < 24; i++)//從數組隨機抽取24個字符組成新的字符產生機器三
             {
                 label2.Text += strid[rdid.Next(0, 24)];
             }
+
+            richTextBox1.Text += "strid : " + label2.Text + "\n";
         }
+
         public int[] intCode = new int[127];//用於存密鑰
         public void setIntCode()//給數組賦值個小於10的隨機數
         {
             Random ra = new Random();
-            for (int i = 1; i < intCode.Length;i++ )
+            for (int i = 1; i < intCode.Length; i++)
             {
                 intCode[i] = ra.Next(0, 9);
             }
         }
         public int[] intNumber = new int[25];//用於存機器碼的Ascii值
         public char[] Charcode = new char[25];//儲存機器碼字
-    
+
         //產生註冊碼
         private void button2_Click(object sender, EventArgs e)
         {
@@ -113,12 +126,16 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
 
                     }
                     label3.Text = strAsciiName;//得到註冊碼
+                    richTextBox1.Text += "得到註冊碼 : " + strAsciiName + "\n";
 
                 }
             }
             else
-            { MessageBox.Show("請選產生機器碼","註冊提示"); }
+            {
+                MessageBox.Show("請選產生機器碼", "註冊提示");
+            }
         }
+
         //註冊
         private void button3_Click(object sender, EventArgs e)
         {
@@ -126,27 +143,30 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
             {
                 if (textBox1.Text.TrimEnd().Equals(label3.Text.TrimEnd()))
                 {
-
+                    /*
                     Microsoft.Win32.RegistryKey retkey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software", true).CreateSubKey("ZHY").CreateSubKey("ZHY.INI").CreateSubKey(textBox1.Text.TrimEnd());
                     retkey.SetValue("UserName", "明日科技");
+                    */
+
+                    richTextBox1.Text += "偽執行\n";
+
                     MessageBox.Show("註冊成功");
                 }
                 else
                 {
                     MessageBox.Show("註冊碼輸入錯誤");
-                
+
                 }
-            
+
             }
-            else { MessageBox.Show("請產生註冊碼","註冊提示"); }
-         
+            else { MessageBox.Show("請產生註冊碼", "註冊提示"); }
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }//
-
-        
+        }
     }
 }
+

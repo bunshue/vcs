@@ -33,12 +33,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txt_Num = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_Get
             // 
-            this.btn_Get.Location = new System.Drawing.Point(30, 56);
+            this.btn_Get.Location = new System.Drawing.Point(30, 57);
             this.btn_Get.Name = "btn_Get";
             this.btn_Get.Size = new System.Drawing.Size(75, 23);
             this.btn_Get.TabIndex = 0;
@@ -48,9 +49,9 @@
             // 
             // txt_Chinese
             // 
-            this.txt_Chinese.Location = new System.Drawing.Point(94, 20);
+            this.txt_Chinese.Location = new System.Drawing.Point(110, 20);
             this.txt_Chinese.Name = "txt_Chinese";
-            this.txt_Chinese.Size = new System.Drawing.Size(100, 21);
+            this.txt_Chinese.Size = new System.Drawing.Size(193, 22);
             this.txt_Chinese.TabIndex = 1;
             // 
             // label1
@@ -64,9 +65,9 @@
             // 
             // txt_Num
             // 
-            this.txt_Num.Location = new System.Drawing.Point(111, 58);
+            this.txt_Num.Location = new System.Drawing.Point(127, 58);
             this.txt_Num.Name = "txt_Num";
-            this.txt_Num.Size = new System.Drawing.Size(83, 21);
+            this.txt_Num.Size = new System.Drawing.Size(176, 22);
             this.txt_Num.TabIndex = 3;
             // 
             // groupBox1
@@ -77,16 +78,25 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(17, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(213, 102);
+            this.groupBox1.Size = new System.Drawing.Size(395, 102);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "转换";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(17, 120);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(395, 381);
+            this.richTextBox1.TabIndex = 5;
+            this.richTextBox1.Text = "";
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(246, 128);
+            this.ClientSize = new System.Drawing.Size(424, 513);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Frm_Main";
             this.Text = "汉字与区位码的转换";
@@ -103,6 +113,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_Num;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Data.SqlClient;
+
 namespace 柱形圖表分析商品走勢
 {
     public partial class Form1 : Form
@@ -21,7 +22,7 @@ namespace 柱形圖表分析商品走勢
         {
             using (SqlConnection Con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13"))
             {
-                DataTable dt=new DataTable();
+                DataTable dt = new DataTable();
                 SqlCommand cmd = new SqlCommand("select ShowYear from tb_Stat", Con);
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
@@ -133,7 +134,7 @@ namespace 柱形圖表分析商品走勢
                     x = x + 40;
                 }
                 this.panel1.BackgroundImage = image;
-              
+
             }
             catch (Exception ey)
             {
@@ -147,3 +148,4 @@ namespace 柱形圖表分析商品走勢
         }
     }
 }
+
