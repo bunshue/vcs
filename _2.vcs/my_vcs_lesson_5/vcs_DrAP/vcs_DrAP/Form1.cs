@@ -129,16 +129,15 @@ namespace vcs_DrAP
         {
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
-            Read_Setup_File();
+            //Read_Setup_File();    應無用
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            richTextBox2.Text += "video_player_path = " + Properties.Settings.Default.video_player_path + "\n";
-            richTextBox2.Text += "audio_player_path = " + Properties.Settings.Default.audio_player_path + "\n";
-            richTextBox2.Text += "picture_viewer_path = " + Properties.Settings.Default.picture_viewer_path + "\n";
-            richTextBox2.Text += "text_editor_path = " + Properties.Settings.Default.text_editor_path + "\n";
-            richTextBox2.Text += "search_path = " + Properties.Settings.Default.search_path + "\n";
+            update_default_setting();
+
+            richTextBox2.Text += "加入路徑 : " + search_path + "\n";
+            old_search_path.Add(search_path);       //目前只能 儲存/加入 一個路徑
 
             show_item_location();
 
@@ -221,6 +220,7 @@ namespace vcs_DrAP
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            /*
             Properties.Settings.Default.video_player_path = video_player_path;
             Properties.Settings.Default.audio_player_path = audio_player_path;
             Properties.Settings.Default.picture_viewer_path = picture_viewer_path;
@@ -228,6 +228,7 @@ namespace vcs_DrAP
             Properties.Settings.Default.search_path = search_path;
 
             Properties.Settings.Default.Save();
+            */
         }
 
         void update_setup_file()
@@ -300,6 +301,7 @@ namespace vcs_DrAP
                 else
                     content += "0\n";
 
+                /*
                 //Major主版本號,Minor副版本號
                 if (ver.Major == 6 && ver.Minor == 1)
                 {
@@ -314,6 +316,7 @@ namespace vcs_DrAP
                 audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
                 picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
                 text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
+                */
 
                 richTextBox2.Text += "目前共有 " + listBox1.Items.Count.ToString() + " 條搜尋路徑\n";
 
@@ -337,7 +340,7 @@ namespace vcs_DrAP
             }
         }
 
-        void Read_Setup_File()
+        void Read_Setup_File()  //no use this, 準備廢棄使用
         {
             int i;
             int tmp;
@@ -1304,7 +1307,7 @@ namespace vcs_DrAP
             }
             else
             {
-                System.Diagnostics.Process.Start("uedit32.exe", fullname);
+                System.Diagnostics.Process.Start(text_editor_path, fullname);
             }
         }
 
@@ -1774,11 +1777,7 @@ namespace vcs_DrAP
 
                 sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                 */
-
-
             }
-
-
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -2592,5 +2591,49 @@ namespace vcs_DrAP
             return;
         }
 
+        private void bt_setup_Click(object sender, EventArgs e)
+        {
+            Form_Setup frm = new Form_Setup();    //實體化 Form_Setup 視窗物件
+            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+            frm.ShowDialog();   //顯示 frm 視窗
+
+
+            update_default_setting();
+        }
+
+        void update_default_setting()
+        {
+            video_player_path = Properties.Settings.Default.video_player_path;
+            audio_player_path = Properties.Settings.Default.audio_player_path;
+            picture_viewer_path = Properties.Settings.Default.picture_viewer_path;
+            text_editor_path = Properties.Settings.Default.text_editor_path;
+            search_path = Properties.Settings.Default.search_path;
+
+            if (System.IO.File.Exists(Properties.Settings.Default.video_player_path) == false)
+            {
+                richTextBox2.Text += "播放影片程式不存在 : " + Properties.Settings.Default.video_player_path + "\n";
+                video_player_path = String.Empty;
+            }
+            if (System.IO.File.Exists(Properties.Settings.Default.audio_player_path) == false)
+            {
+                richTextBox2.Text += "播放音樂程式不存在 : " + Properties.Settings.Default.audio_player_path + "\n";
+                audio_player_path = String.Empty;
+            }
+            if (System.IO.File.Exists(Properties.Settings.Default.picture_viewer_path) == false)
+            {
+                richTextBox2.Text += "播放圖片程式不存在 : " + Properties.Settings.Default.picture_viewer_path + "\n";
+                picture_viewer_path = String.Empty;
+            }
+            if (System.IO.File.Exists(Properties.Settings.Default.text_editor_path) == false)
+            {
+                richTextBox2.Text += "文字編輯程式不存在 : " + Properties.Settings.Default.text_editor_path + "\n";
+                text_editor_path = String.Empty;
+            }
+            if (Directory.Exists(Properties.Settings.Default.search_path) == false)
+            {
+                richTextBox2.Text += "搜尋預設路徑不存在 : " + Properties.Settings.Default.search_path + "\n";
+                search_path = String.Empty;
+            }
+        }
     }
 }
