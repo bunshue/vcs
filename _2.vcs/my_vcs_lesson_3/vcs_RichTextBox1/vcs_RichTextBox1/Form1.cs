@@ -6,10 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Globalization;//for CultureInfo
 
 using System.IO;    //for FILE
-using System.Diagnostics;   //for Process
+using System.Diagnostics;   //for Process, Stopwatch
+using System.Globalization; //for CultureInfo
 
 namespace vcs_RichTextBox1
 {
@@ -25,6 +25,7 @@ namespace vcs_RichTextBox1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             label4.Text = "字數 : " + richTextBox1.TextLength.ToString();
             label6.Text = "";
 
@@ -148,6 +149,8 @@ namespace vcs_RichTextBox1
             button38.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button39.Location = new Point(x_st + dx * 2, y_st + dy * 9);
             button40.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            button41.Location = new Point(x_st + dx * 2, y_st + dy * 12);
+            button42.Location = new Point(x_st + dx * 2, y_st + dy * 13);
 
 
             richTextBox1.Size = new Size(500, 400);
@@ -984,5 +987,41 @@ namespace vcs_RichTextBox1
             richTextBox1.SelectAll();
         }
 
+        private void button41_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "RichTextBox用 += 印1000行資料\n";
+            richTextBox1.Clear();
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            int i;
+            for (i = 0; i < 1000; i++)
+            {
+                richTextBox1.Text += "ABCDEFGHIJKLMNOPQRSTUVWXYZ  " + i.ToString() + "\n";
+            }
+
+            sw.Stop();
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "RichTextBox先製造好1000行資料再一次印出來\n";
+            richTextBox1.Clear();
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            string aaaa = string.Empty;
+            int i;
+            for (i = 0; i < 1000; i++)
+            {
+                aaaa += "ABCDEFGHIJKLMNOPQRSTUVWXYZ  " + i.ToString() + "\n";
+            }
+
+            richTextBox1.Text = aaaa;
+
+            sw.Stop();
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
+        }
     }
 }

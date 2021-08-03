@@ -249,9 +249,9 @@ for(i=0; i<360;i++)
 
 
 
+        string drap_setup_filename = "drap_setup.ini";
 
-
-        void update_setup_file()    //應無用
+        void update_setup_file()
         {
             richTextBox2.Text += "update_setup_file ST\n";
             richTextBox2.Text += "length of old_search_path = " + old_search_path.Count.ToString() + "\n";
@@ -353,7 +353,7 @@ for(i=0; i<360;i++)
             }
         }
 
-        void Read_Setup_File()  //no use this, 準備廢棄使用
+        void Read_Setup_File()
         {
             int i;
             int tmp;

@@ -48,8 +48,6 @@ namespace vcs_DrAP
         int flag_search_mode = 0;
         int flag_search_done = 0;
         int flag_search_vcs_pattern = 0;
-        int SelectedLanguage = 0;
-        string drap_setup_filename = "drap_setup.ini";
         string FolederName;
 
         string video_player_path = String.Empty;
@@ -135,9 +133,6 @@ namespace vcs_DrAP
 
             update_default_setting();
 
-            richTextBox2.Text += "加入路徑 : " + search_path + "\n";
-            old_search_path.Add(search_path);       //目前只能 儲存/加入 一個路徑
-
             //search_path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
             //this.listBox1.Items.Add(search_path);
             // 可用foreach 取出List 裡的值
@@ -145,7 +140,7 @@ namespace vcs_DrAP
             this.listBox1.Items.Clear();
             foreach (string sss in old_search_path)
             {
-                //richTextBox1.Text += sss + "\n";
+                richTextBox1.Text += "add " + sss + "\n";
                 this.listBox1.Items.Add(sss);
             }
 
@@ -188,21 +183,25 @@ namespace vcs_DrAP
             this.listView1.Size = new System.Drawing.Size(1900, 500);
 
             this.richTextBox2.Size = new System.Drawing.Size(594, 388);
-            button20.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - button20.Width, richTextBox2.Location.Y);
+            bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
+            button11.Location = new Point(bt_clear2.Location.X, button11.Location.Y);
+
             button24.Location = new Point(button13.Location.X + 55, button13.Location.Y);
 
+            bt_setup.Location = new Point(this.ClientSize.Width - bt_setup.Width, 55);
+
+            /*
             richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
             richTextBox2.Text += "Form1 W2 " + this.ClientSize.Width.ToString() + "\n";
-
             richTextBox2.Text += "lsstview1 x_st = " + this.listView1.Location.X.ToString() + "\n";
             richTextBox2.Text += "lsstview1 y_st = " + this.listView1.Location.Y.ToString() + "\n";
-
             //this.richTextBox2.Location = new Point(1600, 600);
+            */
 
             if (checkBox7.Checked == false)
             {
                 richTextBox2.Visible = false;
-                button20.Visible = false;
+                bt_clear2.Visible = false;
             }
 
             if (cb_video_only.Checked == true)
@@ -258,6 +257,20 @@ namespace vcs_DrAP
 
             Properties.Settings.Default.Save();
             */
+
+            string save_path = string.Empty;
+            for (int i = 0; i < listBox1.Items.Count; i++)
+            {
+                save_path += listBox1.Items[i];
+                if (i < (listBox1.Items.Count - 1))
+                    save_path += ";";
+            }
+
+            Properties.Settings.Default.search_path = save_path;
+
+            Properties.Settings.Default.Save();
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -990,7 +1003,7 @@ namespace vcs_DrAP
                     filetype2 = "*.*";
                     break;
             }
-            richTextBox2.Text += "change file type to " + filetype2 + "\n";
+            //richTextBox2.Text += "change file type to " + filetype2 + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1066,34 +1079,40 @@ namespace vcs_DrAP
 
             if (flag_function == FUNCTION_FIND_BIG_FILE)
             {
-                richTextBox2.Text += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-                richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                //richTextBox2.Text += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
                 fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
             }
             else
             {
-                richTextBox2.Text += "b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
-                richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
-                fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
+                //richTextBox2.Text += "b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
             }
 
             if (flag_search_vcs_pattern == 0)
             {
-                richTextBox2.Text += "11111 fullname = " + fullname + "\n";
-
                 FileInfo fi = new FileInfo(fullname);
 
-                richTextBox2.Text += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
+                //richTextBox2.Text += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
 
                 if (fi.Extension == ".txt")
                 {
-                    System.Diagnostics.Process.Start("uedit32.exe", fullname);
+                    System.Diagnostics.Process.Start(text_editor_path, fullname);
                 }
                 else
                 {
                     richTextBox2.Text += "video_player_path = " + video_player_path + "\n";
                     richTextBox2.Text += "fullname = " + fullname + "\n";
-                    System.Diagnostics.Process.Start(video_player_path, fullname);
+
+                    if (video_player_path == String.Empty)
+                    {
+                        System.Diagnostics.Process.Start(fullname); //使用預設程式開啟
+                    }
+                    else
+                    {
+                        System.Diagnostics.Process.Start(video_player_path, fullname);    //指名播放程式開啟
+                    }
                 }
             }
             else
@@ -1163,20 +1182,33 @@ namespace vcs_DrAP
                 ProcessStartInfo pInfo = new ProcessStartInfo(target);
                 pInfo.Arguments = all_filename;
 
-                /* debug mesg
+                /*
+                // debug mesg
                 richTextBox2.Text += "target : " + target + "\n";
                 richTextBox2.Text += "all_filename : " + all_filename + "\n";
                 */
 
+                if (video_player_path == String.Empty)
+                {
+                    all_filename = all_filename.Trim().Replace("\"", "");
+                    System.Diagnostics.Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(video_player_path, all_filename);    //指名播放程式開啟
+                }
+
+                /*
                 using (Process p = new Process())
                 {
                     p.StartInfo = pInfo;
                     p.Start();
                 }
+                */
             }
             else
             {
-                System.Diagnostics.Process.Start("uedit32.exe", all_filename);
+                System.Diagnostics.Process.Start(text_editor_path, all_filename);
             }
         }
 
@@ -1596,7 +1628,11 @@ namespace vcs_DrAP
 
         private void button18_Click(object sender, EventArgs e)
         {
-            richTextBox2.Text += "flag_function = " + flag_function.ToString() + "\n";
+            //richTextBox2.Text += "flag_function = " + flag_function.ToString() + "\n";
+
+            Properties.Settings.Default.search_path = "";
+
+            Properties.Settings.Default.Save();
         }
 
         private void textBox3_KeyDown(object sender, KeyEventArgs e)
@@ -1608,13 +1644,13 @@ namespace vcs_DrAP
             }
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void bt_clear1_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
             removeDrawDiskSpace();
         }
 
-        private void button20_Click(object sender, EventArgs e)
+        private void bt_clear2_Click(object sender, EventArgs e)
         {
             richTextBox2.Clear();
         }
@@ -2177,25 +2213,25 @@ namespace vcs_DrAP
             if (checkBox7.Checked == true)
             {
                 richTextBox2.Visible = true;
-                button20.Visible = true;
+                bt_clear2.Visible = true;
                 if (cb_generate_text.Checked == true)
                 {
                     richTextBox1.Size = new Size(1300, 430);
 
-                    button19.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button19.Width, button19.Location.Y);
+                    bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, bt_clear1.Location.Y);
                     button23.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button23.Width, button23.Location.Y);
                 }
             }
             else
             {
                 richTextBox2.Visible = false;
-                button20.Visible = false;
+                bt_clear2.Visible = false;
 
                 if (cb_generate_text.Checked == true)
                 {
                     richTextBox1.Size = new Size(listView1.Width, 430);
 
-                    button19.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button19.Width, button19.Location.Y);
+                    bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, bt_clear1.Location.Y);
                     button23.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button23.Width, button23.Location.Y);
                 }
             }
@@ -2249,18 +2285,6 @@ namespace vcs_DrAP
         {
             do_search_mode(SEARCH_MODE_MATLAB);
             return;
-        }
-
-        //delay 10000 約 10秒
-        //C# 不lag的延遲時間
-        private void delay(int delay_milliseconds)
-        {
-            delay_milliseconds *= 2;
-            DateTime time_before = DateTime.Now;
-            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
-            {
-                Application.DoEvents();
-            }
         }
 
         void do_search_mode(int mode)
@@ -2369,7 +2393,6 @@ namespace vcs_DrAP
             frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
             frm.ShowDialog();   //顯示 frm 視窗
 
-
             update_default_setting();
         }
 
@@ -2383,29 +2406,173 @@ namespace vcs_DrAP
 
             if (System.IO.File.Exists(Properties.Settings.Default.video_player_path) == false)
             {
-                richTextBox2.Text += "播放影片程式不存在 : " + Properties.Settings.Default.video_player_path + "\n";
+                richTextBox2.Text += "播放影片程式不存在 : " + Properties.Settings.Default.video_player_path + "\n使用Windows預設播放影片程式\n";
                 video_player_path = String.Empty;
             }
             if (System.IO.File.Exists(Properties.Settings.Default.audio_player_path) == false)
             {
-                richTextBox2.Text += "播放音樂程式不存在 : " + Properties.Settings.Default.audio_player_path + "\n";
+                richTextBox2.Text += "播放音樂程式不存在 : " + Properties.Settings.Default.audio_player_path + "\n使用Windows預設播放音樂程式\n";
                 audio_player_path = String.Empty;
             }
             if (System.IO.File.Exists(Properties.Settings.Default.picture_viewer_path) == false)
             {
-                richTextBox2.Text += "播放圖片程式不存在 : " + Properties.Settings.Default.picture_viewer_path + "\n";
+                richTextBox2.Text += "播放圖片程式不存在 : " + Properties.Settings.Default.picture_viewer_path + "\n使用Windows預設播放圖片程式\n";
                 picture_viewer_path = String.Empty;
             }
             if (System.IO.File.Exists(Properties.Settings.Default.text_editor_path) == false)
             {
-                richTextBox2.Text += "文字編輯程式不存在 : " + Properties.Settings.Default.text_editor_path + "\n";
+                richTextBox2.Text += "文字編輯程式不存在 : " + Properties.Settings.Default.text_editor_path + "\n使用Windows預設文字編輯程式\n";
                 text_editor_path = String.Empty;
             }
-            if (Directory.Exists(Properties.Settings.Default.search_path) == false)
+
+            //預設搜尋路徑
+            string PATH = Properties.Settings.Default.search_path;
+            //richTextBox2.Text += "PATH = " + PATH + "\n";
+
+            string[] path = PATH.Split(';');
+
+            foreach (string p in path)
             {
-                richTextBox2.Text += "搜尋預設路徑不存在 : " + Properties.Settings.Default.search_path + "\n";
-                search_path = String.Empty;
+                if (p.Length > 0)
+                {
+                    //check existency
+                    if (Directory.Exists(p) == true)
+                    {
+                        //richTextBox2.Text += "len = " + p.Length.ToString() + "\t" + p + "\n";
+                        richTextBox2.Text += "加入路徑 : " + p + "\n";
+                        old_search_path.Add(p);       //目前只能 儲存/加入 一個路徑
+                    }
+                    else
+                    {
+                        richTextBox2.Text += "搜尋預設路徑不存在 : " + p + "\tskip\n";
+                    }
+                }
             }
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //C# – 複製資料到剪貼簿
+            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            Clipboard.SetDataObject(richTextBox2.Text + "\n");      //建議用此
+            richTextBox2.Text += "已複製資料到系統剪貼簿\n";
+        }
+
+        //檢查空資料夾 ST
+
+
+        int total_show_empty_folder_cnt = 0;
+        int total_delete_empty_folder_cnt = 0;
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            total_show_empty_folder_cnt = 0;
+            total_delete_empty_folder_cnt = 0;
+
+            /*
+            //取得目前所在路徑
+            string currentPath = Directory.GetCurrentDirectory();
+            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+
+            //確認資料夾是否存在
+            string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
+            if (Directory.Exists(Path) == false)    //確認資料夾是否存在
+                richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
+            else
+                richTextBox1.Text += "資料夾: " + Path + " 存在\n";
+            */
+
+            //string path = @"C:\_git\vcs\_2.vcs";
+            string path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
+            //string path = search_path;
+
+
+            //folder_name.Clear();
+
+            //richTextBox1.Text += "資料夾: " + path + "\n\n";
+            if (Directory.Exists(path))
+            {
+                // This path is a directory
+                ProcessDirectory3(path);
+            }
+
+            //if (checkBox9.Checked == true)
+            {
+                richTextBox1.Text += "共找到空資料夾 " + total_show_empty_folder_cnt.ToString() + " 個\n";
+            }
+            //if (checkBox10.Checked == true)
+            {
+                //richTextBox1.Text += "共刪除空資料夾 " + total_delete_empty_folder_cnt.ToString() + " 個\n";
+            }
+
+        }
+
+
+        // Process all files in the directory passed in, recurse on any directories 
+        // that are found, and process the files they contain.
+        public void ProcessDirectory3(string targetDirectory)
+        {
+            try
+            {
+                int file_cnt = 0;
+                int dir_cnt = 0;
+
+                // Process the list of files found in the directory.
+                try
+                {
+
+                    string[] fileEntries = Directory.GetFiles(targetDirectory);
+                    file_cnt = fileEntries.Length;
+                    Array.Sort(fileEntries);
+                    foreach (string fileName in fileEntries)
+                    {
+                    }
+
+                    // Recurse into subdirectories of this directory.
+                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                    dir_cnt = subdirectoryEntries.Length;
+                    Array.Sort(subdirectoryEntries);
+                    foreach (string subdirectory in subdirectoryEntries)
+                    {
+                        //richTextBox1.Text += "subdirectory = " + subdirectory + "\n";
+
+                        DirectoryInfo di = new DirectoryInfo(subdirectory);
+                        ProcessDirectory3(subdirectory);
+                    }
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    richTextBox1.Text += ex.Message + "\n";
+                }
+                if ((file_cnt == 0) && (dir_cnt == 0))
+                {
+                    /*
+                    if (checkBox9.Checked == true)
+                    {
+                        richTextBox1.Text += targetDirectory + "是一個空資料夾\n";
+                        total_show_empty_folder_cnt++;
+                    }
+                    if (checkBox10.Checked == true)
+                    {
+                        //richTextBox1.Text += "刪除 : " + targetDirectory + "是一個空資料夾\n";
+                        Directory.Delete(targetDirectory, false);   //not recurrsive
+                        richTextBox1.Text += "已刪除資料夾 : " + targetDirectory + "\n";
+                        total_delete_empty_folder_cnt++;
+                    }
+                    */
+                }
+            }
+            catch (IOException e)
+            {
+                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+            }
+        }
+
+
+
+
+
+
     }
 }
+

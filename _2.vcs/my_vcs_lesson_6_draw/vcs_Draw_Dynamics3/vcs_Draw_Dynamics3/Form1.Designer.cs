@@ -44,6 +44,7 @@
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.pictureBox_bird = new System.Windows.Forms.PictureBox();
             this.lb_interval = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox_bird.SuspendLayout();
@@ -56,7 +57,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
-            this.button1.Text = "ST";
+            this.button1.Text = "自由落體";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -78,7 +79,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(817, 262);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(236, 376);
+            this.richTextBox1.Size = new System.Drawing.Size(374, 376);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -95,7 +96,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(910, 14);
+            this.button2.Location = new System.Drawing.Point(1002, 14);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -116,7 +117,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(1012, 14);
+            this.button3.Location = new System.Drawing.Point(1093, 14);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 57;
@@ -201,11 +202,22 @@
             this.lb_interval.TabIndex = 60;
             this.lb_interval.Text = "間隔";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(909, 14);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 61;
+            this.button4.Text = "橫拋";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 599);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.lb_interval);
             this.Controls.Add(this.pictureBox_bird);
             this.Controls.Add(this.groupBox_bird);
@@ -246,6 +258,7 @@
         private System.Windows.Forms.RadioButton rb1;
         private System.Windows.Forms.PictureBox pictureBox_bird;
         private System.Windows.Forms.Label lb_interval;
+        private System.Windows.Forms.Button button4;
     }
 }
 

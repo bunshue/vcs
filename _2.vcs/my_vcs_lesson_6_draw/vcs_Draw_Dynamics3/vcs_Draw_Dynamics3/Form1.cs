@@ -12,6 +12,7 @@ namespace vcs_Draw_Dynamics3
     public partial class Form1 : Form
     {
         bool dropdown_status = false;
+        bool transverse_direction = false;
 
         double one_step_second = 0.2;
         int g = 10;
@@ -68,6 +69,10 @@ namespace vcs_Draw_Dynamics3
             this.ClientSize = new Size(1200, 800);
             //this.Location = new Point(xx + dx * 0, yy + dy * 1);
 
+
+            richTextBox1.Size = new Size(374, 490);
+            //374, 376
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -78,17 +83,17 @@ namespace vcs_Draw_Dynamics3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (button1.Text == "ST")
+            if (button1.Text == "自由落體")
             {
                 richTextBox1.Text += "每步 " + one_step_second.ToString() + " 秒\n";
-                button1.Text = "SP";
+                button1.Text = "暫停";
                 timer1.Enabled = true;
                 dropdown_status = true;
                 pts.Clear();
             }
             else
             {
-                button1.Text = "ST";
+                button1.Text = "自由落體";
                 timer1.Enabled = false;
                 dropdown_status = false;
             }
@@ -141,12 +146,16 @@ namespace vcs_Draw_Dynamics3
                 {
                     for (i = 0; i < len; i++)
                     {
-                        e.Graphics.FillEllipse(new SolidBrush(Color.Black), pts[i][1] + ball_size_width / 2 - point_width / 2, pts[i][2] + ball_size_height / 2 - point_width / 2, 10, 10);
+                        e.Graphics.FillEllipse(new SolidBrush(Color.DarkGreen), pts[i][1] + ball_size_width / 2 - point_width / 2, pts[i][2] + ball_size_height / 2 - point_width / 2, 10, 10);
                     }
                 }
                 richTextBox1.Text += "t = " + drop_sec.ToString() + "\t" + (y_st - y_st0).ToString("n3") + "\n";
 
                 drop_sec += one_step_second;
+                if (transverse_direction == true)
+                {
+                    x_st = x_st0 + (float)(60 * drop_sec);
+                }
                 y_st = y_st0 + (float)(g * drop_sec * drop_sec * 1 / 2) * 10;   //1公尺 10點
                 //int y_st2 = (int)Math.Round(y_st);
                 richTextBox1.Text += "t = " + drop_sec.ToString("n3") + "\t" + (y_st - y_st0).ToString("n3") + "\n";
@@ -154,6 +163,11 @@ namespace vcs_Draw_Dynamics3
             else
             {
                 y_st = y_sp0;
+
+                if (transverse_direction == true)
+                {
+                    x_st = x_st0 + (float)(60 * Math.Sqrt(2 * 46 / 10.0));
+                }
 
                 e.Graphics.FillEllipse(newBrush, x_st, y_st, ball_size_width, ball_size_height);
                 e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, ball_size_width, ball_size_height);
@@ -163,7 +177,7 @@ namespace vcs_Draw_Dynamics3
                 {
                     for (i = 0; i < len; i++)
                     {
-                        e.Graphics.FillEllipse(new SolidBrush(Color.Black), pts[i][1] + ball_size_width / 2 - point_width / 2, pts[i][2] + ball_size_height / 2 - point_width / 2, 10, 10);
+                        e.Graphics.FillEllipse(new SolidBrush(Color.DarkGreen), pts[i][1] + ball_size_width / 2 - point_width / 2, pts[i][2] + ball_size_height / 2 - point_width / 2, 10, 10);
                     }
                 }
 
@@ -172,7 +186,8 @@ namespace vcs_Draw_Dynamics3
 
                 richTextBox1.Text += "已在 : " + Math.Sqrt(2 * 46 / 10.0) + " 秒時墜地\n";
 
-                button1.Text = "ST";
+                button1.Text = "自由落體";
+                transverse_direction = false;
                 timer1.Enabled = false;
                 dropdown_status = false;
 
@@ -192,7 +207,8 @@ namespace vcs_Draw_Dynamics3
 
         private void button2_Click(object sender, EventArgs e)
         {
-            button1.Text = "ST";
+            button1.Text = "自由落體";
+            transverse_direction = false;
             timer1.Enabled = false;
             dropdown_status = false;
 
@@ -255,6 +271,29 @@ namespace vcs_Draw_Dynamics3
                 use_bird_kind = 0;
             }
             this.pictureBox1.Invalidate();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //橫拋
+            if (button1.Text == "自由落體")
+            {
+                richTextBox1.Text += "每步 " + one_step_second.ToString() + " 秒\n";
+                button1.Text = "暫停";
+                transverse_direction = true;
+                timer1.Enabled = true;
+                dropdown_status = true;
+                pts.Clear();
+            }
+            else
+            {
+                button1.Text = "自由落體";
+                transverse_direction = false;
+                timer1.Enabled = false;
+                dropdown_status = false;
+            }
+
+
         }
     }
 }

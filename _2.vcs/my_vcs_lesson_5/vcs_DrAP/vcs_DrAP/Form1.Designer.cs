@@ -56,8 +56,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
+            this.bt_clear1 = new System.Windows.Forms.Button();
+            this.bt_clear2 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.cb_video_only = new System.Windows.Forms.CheckBox();
@@ -74,6 +74,7 @@
             this.cb_file_s = new System.Windows.Forms.CheckBox();
             this.cb_file_size = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.button11 = new System.Windows.Forms.Button();
             this.bt_setup = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
@@ -83,6 +84,7 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
@@ -232,7 +234,7 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox2.Location = new System.Drawing.Point(258, 13);
+            this.textBox2.Location = new System.Drawing.Point(252, 14);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(99, 30);
             this.textBox2.TabIndex = 20;
@@ -242,9 +244,9 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(385, 9);
+            this.button4.Location = new System.Drawing.Point(360, 6);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(45, 45);
+            this.button4.Size = new System.Drawing.Size(50, 50);
             this.button4.TabIndex = 21;
             this.button4.Text = "搜尋大檔";
             this.button4.UseVisualStyleBackColor = true;
@@ -257,7 +259,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(142, 30);
             this.textBox3.TabIndex = 24;
-            this.textBox3.Text = "listview";
+            this.textBox3.Text = "ByteConversionTBGBMBKB";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
             this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
@@ -359,27 +361,27 @@
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
-            // button19
+            // bt_clear1
             // 
-            this.button19.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(1248, 620);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(63, 30);
-            this.button19.TabIndex = 36;
-            this.button19.Text = "清除";
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
+            this.bt_clear1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear1.Location = new System.Drawing.Point(1248, 620);
+            this.bt_clear1.Name = "bt_clear1";
+            this.bt_clear1.Size = new System.Drawing.Size(63, 30);
+            this.bt_clear1.TabIndex = 36;
+            this.bt_clear1.Text = "清除";
+            this.bt_clear1.UseVisualStyleBackColor = true;
+            this.bt_clear1.Click += new System.EventHandler(this.bt_clear1_Click);
             // 
-            // button20
+            // bt_clear2
             // 
-            this.button20.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button20.Location = new System.Drawing.Point(1605, 620);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(60, 23);
-            this.button20.TabIndex = 37;
-            this.button20.Text = "清除";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
+            this.bt_clear2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear2.Location = new System.Drawing.Point(1605, 620);
+            this.bt_clear2.Name = "bt_clear2";
+            this.bt_clear2.Size = new System.Drawing.Size(63, 30);
+            this.bt_clear2.TabIndex = 37;
+            this.bt_clear2.Text = "清除";
+            this.bt_clear2.UseVisualStyleBackColor = true;
+            this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
             // 
             // button21
             // 
@@ -589,14 +591,26 @@
             this.checkBox8.Text = "滿30結束";
             this.checkBox8.UseVisualStyleBackColor = true;
             // 
+            // button11
+            // 
+            this.button11.BackgroundImage = global::vcs_DrAP.Properties.Resources.clipboard;
+            this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button11.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button11.Location = new System.Drawing.Point(1605, 649);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(45, 45);
+            this.button11.TabIndex = 53;
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // bt_setup
             // 
             this.bt_setup.BackgroundImage = global::vcs_DrAP.Properties.Resources.setup;
             this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup.Location = new System.Drawing.Point(1025, 8);
+            this.bt_setup.Location = new System.Drawing.Point(1824, 113);
             this.bt_setup.Name = "bt_setup";
-            this.bt_setup.Size = new System.Drawing.Size(45, 45);
+            this.bt_setup.Size = new System.Drawing.Size(50, 50);
             this.bt_setup.TabIndex = 52;
             this.bt_setup.UseVisualStyleBackColor = true;
             this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
@@ -655,9 +669,9 @@
             this.button10.BackgroundImage = global::vcs_DrAP.Properties.Resources.delete;
             this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button10.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(941, 6);
+            this.button10.Location = new System.Drawing.Point(940, 6);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(45, 45);
+            this.button10.Size = new System.Drawing.Size(50, 50);
             this.button10.TabIndex = 22;
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
@@ -667,9 +681,9 @@
             this.button9.BackgroundImage = global::vcs_DrAP.Properties.Resources.potplayer;
             this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button9.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(436, 9);
+            this.button9.Location = new System.Drawing.Point(420, 6);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(45, 45);
+            this.button9.Size = new System.Drawing.Size(50, 50);
             this.button9.TabIndex = 15;
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
@@ -679,9 +693,9 @@
             this.button8.BackgroundImage = global::vcs_DrAP.Properties.Resources.open_folder;
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button8.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(256, 56);
+            this.button8.Location = new System.Drawing.Point(252, 56);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(45, 45);
+            this.button8.Size = new System.Drawing.Size(50, 50);
             this.button8.TabIndex = 11;
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
@@ -691,18 +705,31 @@
             this.button6.BackgroundImage = global::vcs_DrAP.Properties.Resources.save_file;
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button6.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(486, 9);
+            this.button6.Location = new System.Drawing.Point(480, 6);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(45, 45);
+            this.button6.Size = new System.Drawing.Size(50, 50);
             this.button6.TabIndex = 7;
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button19
+            // 
+            this.button19.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button19.Location = new System.Drawing.Point(1363, 17);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(144, 23);
+            this.button19.TabIndex = 54;
+            this.button19.Text = "檢查空資料夾";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.button19);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.checkBox8);
             this.Controls.Add(this.button24);
@@ -716,8 +743,8 @@
             this.Controls.Add(this.button23);
             this.Controls.Add(this.button22);
             this.Controls.Add(this.button21);
-            this.Controls.Add(this.button20);
-            this.Controls.Add(this.button19);
+            this.Controls.Add(this.bt_clear2);
+            this.Controls.Add(this.bt_clear1);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox4);
@@ -794,8 +821,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.Button button20;
+        private System.Windows.Forms.Button bt_clear1;
+        private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
@@ -816,6 +843,8 @@
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.Button bt_setup;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button19;
     }
 }
 

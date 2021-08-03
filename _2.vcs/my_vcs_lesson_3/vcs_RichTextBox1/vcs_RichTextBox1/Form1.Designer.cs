@@ -97,6 +97,8 @@
             this.bt_clear3 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.bt_save2 = new System.Windows.Forms.Button();
+            this.button41 = new System.Windows.Forms.Button();
+            this.button42 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -821,11 +823,37 @@
             this.bt_save2.UseVisualStyleBackColor = true;
             this.bt_save2.Click += new System.EventHandler(this.bt_save2_Click);
             // 
+            // button41
+            // 
+            this.button41.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button41.Location = new System.Drawing.Point(497, 481);
+            this.button41.Name = "button41";
+            this.button41.Size = new System.Drawing.Size(320, 40);
+            this.button41.TabIndex = 95;
+            this.button41.Text = "RichTextBox用 += 印1000行資料";
+            this.button41.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button41.UseVisualStyleBackColor = true;
+            this.button41.Click += new System.EventHandler(this.button41_Click);
+            // 
+            // button42
+            // 
+            this.button42.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button42.Location = new System.Drawing.Point(497, 527);
+            this.button42.Name = "button42";
+            this.button42.Size = new System.Drawing.Size(320, 40);
+            this.button42.TabIndex = 96;
+            this.button42.Text = "RichTextBox先製造好1000行資料再一次印出來";
+            this.button42.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1395, 837);
+            this.Controls.Add(this.button42);
+            this.Controls.Add(this.button41);
             this.Controls.Add(this.bt_save2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.bt_clear3);
@@ -970,6 +998,8 @@
         private System.Windows.Forms.Button bt_clear3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button bt_save2;
+        private System.Windows.Forms.Button button41;
+        private System.Windows.Forms.Button button42;
     }
 }
 
