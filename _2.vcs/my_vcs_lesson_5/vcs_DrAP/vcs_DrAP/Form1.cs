@@ -58,9 +58,7 @@ namespace vcs_DrAP
         string text_editor_path = String.Empty;
         string search_path = String.Empty;
 
-        bool flag_need_update_setup_file = false;
-
-        private const int SEARCH_MODE_VCS = 0x00;	//search vcs code, 搜尋vcs內的關鍵字
+        private const int SEARCH_MODE_VCS = 0x00;	    //search vcs code, 搜尋vcs內的關鍵字
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
         private const int SEARCH_MODE_MATLAB = 0x02;	//search matlab code, 搜尋matlab內的關鍵字
         int search_mode = SEARCH_MODE_VCS;
@@ -129,17 +127,16 @@ namespace vcs_DrAP
         {
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
-            //Read_Setup_File();    應無用
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             update_default_setting();
 
             richTextBox2.Text += "加入路徑 : " + search_path + "\n";
             old_search_path.Add(search_path);       //目前只能 儲存/加入 一個路徑
-
-            show_item_location();
 
             //search_path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
             //this.listBox1.Items.Add(search_path);
@@ -153,7 +150,6 @@ namespace vcs_DrAP
             }
 
             this.listView1.GridLines = true;
-
 
             //C# 提示視窗 ToolTip 
             //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
@@ -178,7 +174,9 @@ namespace vcs_DrAP
 
         void show_item_location()
         {
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
 
             //設定執行後的表單大小
@@ -191,7 +189,6 @@ namespace vcs_DrAP
 
             this.richTextBox2.Size = new System.Drawing.Size(594, 388);
             button20.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - button20.Width, richTextBox2.Location.Y);
-            button11.Location = new Point(button11.Location.X + 100, button11.Location.Y + 10);
             button24.Location = new Point(button13.Location.X + 55, button13.Location.Y);
 
             richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
@@ -216,6 +213,38 @@ namespace vcs_DrAP
                 groupBox_file.Enabled = true;
             else
                 groupBox_file.Enabled = false;
+
+            bt_exit_setup();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -229,243 +258,6 @@ namespace vcs_DrAP
 
             Properties.Settings.Default.Save();
             */
-        }
-
-        void update_setup_file()
-        {
-            richTextBox2.Text += "update_setup_file ST\n";
-            richTextBox2.Text += "length of old_search_path = " + old_search_path.Count.ToString() + "\n";
-
-            if (flag_need_update_setup_file == false)
-            {
-                richTextBox2.Text += "無修改, 不用存檔\n";
-            }
-            else
-            {
-                richTextBox2.Text += "有修改, 需要存檔\n";
-
-                StreamWriter sw = System.IO.File.CreateText(drap_setup_filename);
-                string content = "";
-                //定義系統版本
-                Version ver = Environment.OSVersion.Version;
-                //Major主版本號,Minor副版本號
-                if (ver.Major == 6 && ver.Minor == 1)
-                {
-                    //Windows7
-                    content += "\"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
-                }
-                else
-                {
-                    //Windows10
-                    content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
-                }
-                content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
-                content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
-                content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
-                content += SelectedLanguage.ToString() + "\n";
-                content += comboBox1.SelectedIndex.ToString() + "\n";
-                if (cb_video_only.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_video_l.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_video_m.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_video_s.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_file_size.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_file_l.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_file_m.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_file_s.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_generate_text.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-
-                /*
-                //Major主版本號,Minor副版本號
-                if (ver.Major == 6 && ver.Minor == 1)
-                {
-                    //Windows7
-                    video_player_path = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
-                }
-                else
-                {
-                    //Windows10
-                    video_player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
-                }
-                audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
-                picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
-                text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
-                */
-
-                richTextBox2.Text += "目前共有 " + listBox1.Items.Count.ToString() + " 條搜尋路徑\n";
-
-                if (listBox1.Items.Count == 0)
-                {
-                    content += "C:\\______test_files\n";
-                    old_search_path.Add("C:\\______test_files");
-                }
-                else
-                {
-                    for (int i = 0; i < listBox1.Items.Count; i++)
-                    {
-                        richTextBox2.Text += listBox1.Items[i] + "\n";
-                        content += listBox1.Items[i] + "\n";
-                    }
-                }
-                content += "\n";
-
-                sw.WriteLine(content, Encoding.UTF8);
-                sw.Close();
-            }
-        }
-
-        void Read_Setup_File()  //no use this, 準備廢棄使用
-        {
-            int i;
-            int tmp;
-            if (System.IO.File.Exists(drap_setup_filename) == false)
-            {
-                richTextBox2.Text += "檔案 " + drap_setup_filename + " 不存在，製作一個。\n";
-                flag_need_update_setup_file = true;
-                update_setup_file();
-            }
-            else
-            {
-                richTextBox2.Text += "檔案 " + drap_setup_filename + " 存在, 開啟，並讀入設定\n";
-                string line;
-                StreamReader sr = new StreamReader(drap_setup_filename, Encoding.UTF8);
-                i = 0;
-                while (!sr.EndOfStream)
-                {               // 每次讀取一行，直到檔尾
-                    line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
-                    richTextBox2.Text += "第 " + i.ToString() + " 行資料 : " + line + "\n";
-                    switch (i)
-                    {
-                        case 0:
-                            video_player_path = line;
-                            break;
-                        case 1:
-                            audio_player_path = line;
-                            break;
-                        case 2:
-                            picture_viewer_path = line;
-                            break;
-                        case 3:
-                            text_editor_path = line;
-                            break;
-                        case 4:
-                            SelectedLanguage = int.Parse(line);
-                            break;
-                        case 5:
-                            tmp = int.Parse(line);
-                            comboBox1.SelectedIndex = tmp;
-                            break;
-                        case 6:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_video_only.Checked = true;
-                            else
-                                cb_video_only.Checked = false;
-                            break;
-                        case 7:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_video_l.Checked = true;
-                            else
-                                cb_video_l.Checked = false;
-                            break;
-                        case 8:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_video_m.Checked = true;
-                            else
-                                cb_video_m.Checked = false;
-                            break;
-                        case 9:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_video_s.Checked = true;
-                            else
-                                cb_video_s.Checked = false;
-                            break;
-                        case 10:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_file_size.Checked = true;
-                            else
-                                cb_file_size.Checked = false;
-                            break;
-                        case 11:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_file_l.Checked = true;
-                            else
-                                cb_file_l.Checked = false;
-                            break;
-                        case 12:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_file_m.Checked = true;
-                            else
-                                cb_file_m.Checked = false;
-                            break;
-                        case 13:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_file_s.Checked = true;
-                            else
-                                cb_file_s.Checked = false;
-                            break;
-                        case 14:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_generate_text.Checked = true;
-                            else
-                                cb_generate_text.Checked = false;
-                            break;
-                        case 15:
-                            search_path = line;
-                            break;
-                        default:
-                            break;
-                    }
-                    if (i >= 15)
-                    {
-                        if (line.Length > 0)
-                        {
-                            richTextBox2.Text += "加入路徑 : " + line + "\n";
-                            old_search_path.Add(line);
-                        }
-                        else
-                        {
-                            richTextBox2.Text += "空行\n";
-                        }
-                    }
-                    i++;
-                }
-                sr.Close();
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1199,7 +991,6 @@ namespace vcs_DrAP
                     break;
             }
             richTextBox2.Text += "change file type to " + filetype2 + "\n";
-            flag_need_update_setup_file = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1532,13 +1323,6 @@ namespace vcs_DrAP
             }
         }
 
-        private void button11_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "離開時儲存最後選擇的路徑\n";
-            update_setup_file();
-            Application.Exit();
-        }
-
         // Process all files in the directory passed in, recurse on any directories 
         // that are found, and process the files they contain.
         public void ProcessDirectoryS(string targetDirectory)
@@ -1789,7 +1573,6 @@ namespace vcs_DrAP
                 richTextBox2.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
                 listBox1.Items.Add(folderBrowserDialog1.SelectedPath);
                 old_search_path.Add(folderBrowserDialog1.SelectedPath);
-                flag_need_update_setup_file = true;
             }
             else
             {
@@ -1803,14 +1586,12 @@ namespace vcs_DrAP
             richTextBox2.Text += "移除了 " + listBox1.SelectedItem + "\n";
             old_search_path.Remove(folderBrowserDialog1.SelectedPath);
             listBox1.Items.Remove(listBox1.SelectedItem);
-            flag_need_update_setup_file = true;
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
             old_search_path.Clear();
-            flag_need_update_setup_file = true;
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -2426,7 +2207,6 @@ namespace vcs_DrAP
                 groupBox_video.Enabled = true;
             else
                 groupBox_video.Enabled = false;
-            flag_need_update_setup_file = true;
         }
 
         private void cb_file_size_CheckedChanged(object sender, EventArgs e)
@@ -2435,42 +2215,34 @@ namespace vcs_DrAP
                 groupBox_file.Enabled = true;
             else
                 groupBox_file.Enabled = false;
-            flag_need_update_setup_file = true;
         }
 
         private void cb_generate_text_CheckedChanged(object sender, EventArgs e)
         {
-            flag_need_update_setup_file = true;
         }
 
         private void cb_video_l_CheckedChanged(object sender, EventArgs e)
         {
-            flag_need_update_setup_file = true;
         }
 
         private void cb_video_m_CheckedChanged(object sender, EventArgs e)
         {
-            flag_need_update_setup_file = true;
         }
 
         private void cb_video_s_CheckedChanged(object sender, EventArgs e)
         {
-            flag_need_update_setup_file = true;
         }
 
         private void cb_file_l_CheckedChanged(object sender, EventArgs e)
         {
-            flag_need_update_setup_file = true;
         }
 
         private void cb_file_m_CheckedChanged(object sender, EventArgs e)
         {
-            flag_need_update_setup_file = true;
         }
 
         private void cb_file_s_CheckedChanged(object sender, EventArgs e)
         {
-            flag_need_update_setup_file = true;
         }
 
         private void button24_Click(object sender, EventArgs e)

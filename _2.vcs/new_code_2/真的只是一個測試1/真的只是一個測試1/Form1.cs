@@ -178,7 +178,6 @@ namespace 真的只是一個測試1
             richTextBox1.Text += "資料夾路徑:\t" + foldername + "\n";
             richTextBox1.Text += "檔案名稱:\t" + short_filename + "\n";
             richTextBox1.Text += "副檔名:\t" + ext_filename + "\n";
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -193,9 +192,7 @@ namespace 真的只是一個測試1
             for (int i = 0; i < 5; i++)
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + gender[i] + "\n";
-
             }
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -209,8 +206,6 @@ namespace 真的只是一個測試1
             {
                 richTextBox1.Text += strLine + "\n";
             }
-
-
         }
 
         private void RegFile(string sText, string sFullName)
@@ -223,6 +218,7 @@ namespace 真的只是一個測試1
             custom.Close();
             shell.Close();
         }
+
         private void RegDirectory(string sText, string sFullName)
         {
             RegistryKey shell = Registry.ClassesRoot.OpenSubKey(@"directory\shell", true);
@@ -267,7 +263,6 @@ namespace 真的只是一個測試1
             richTextBox1.Text += dt.Hour.ToString().PadLeft(2, '0') + ":"
                                     + dt.Minute.ToString().PadLeft(2, '0') + ":"
                                     + dt.Second.ToString().PadLeft(2, '0') + "\n";
-
         }
 
         //根据Url地址得到网页的html源码
@@ -298,7 +293,6 @@ namespace 真的只是一個測試1
         {
             //抓取網頁並分析數據
 
-
             //要抓取的URL地址
             //string Url = "http://list.mp3.baidu.com/topso/mp3topsong.html?id=1#top2";
             string Url = "https://tw.dictionary.search.yahoo.com/search;_ylt=AwrtXG3n.Oxg00wAkRB7rolQ;_ylc=X1MDMTM1MTIwMDM3OQRfcgMyBGZyAwRncHJpZAM1cFFoWDdMWFFLbTByV2N1Z3d3WThBBG5fcnNsdAMwBG5fc3VnZwMxBG9yaWdpbgN0dy5kaWN0aW9uYXJ5LnNlYXJjaC55YWhvby5jb20EcG9zAzAEcHFzdHIDBHBxc3RybAMwBHFzdHJsAzgEcXVlcnkDcHJlc3RpZ2UEdF9zdG1wAzE2MjYxNDI5Nzk-?p=prestige&fr=sfp&iscqry=";
@@ -307,7 +301,6 @@ namespace 真的只是一個測試1
             //得到指定Url的源码
             string strWebContent = GetWebContent(Url);
             richTextBox1.Text = strWebContent;
-
 
             return;
 
@@ -815,7 +808,6 @@ namespace 真的只是一個測試1
         [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
         public static extern int GetDiskFreeSpaceEx(string lpDirectoryName, out long lpFreeBytesAvailable, out long lpTotalNumberOfBytes, out long lpTotalNumberOfFreeBytes);
 
-
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
         const int MB = 1024 * 1024;//定義MB的計算常量
@@ -855,11 +847,13 @@ namespace 真的只是一個測試1
             {
                 MessageBox.Show("NO");
             }
-
-
-
         }
         //取得硬碟資訊 SP
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
 
     }
 }

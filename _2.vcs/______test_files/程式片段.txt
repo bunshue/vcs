@@ -1,0 +1,488 @@
+
+richTextBox1.Text += "測試使用WindowsMediaPlayerClass\n";
+WindowsMediaPlayerClass c;
+IWMPMedia m;
+
+c = new WindowsMediaPlayerClass();
+m = c.newMedia(mp3_filename);
+richTextBox1.Text += "歌手名:\t" + m.getItemInfo("Author") + "\n" + "歌  名:\t" + m.getItemInfo("Title") + "\n";
+
+
+getItemInfo Author Title
+
+// Store the current media object.
+var cm = Player.currentMedia;
+
+// Get the number of attributes for the current media. 
+var atCount = cm.attributeCount;
+
+// Loop through the attribute list.
+for(var i=0; i < atCount; i++){
+
+   // Print each attribute index and name.   
+   myText.value += "Attribute " + i +": ";
+   myText.value += cm.getAttributeName(i);
+   myText.value += "\n";
+}
+
+
+
+
+//添加列表
+WC = new WMPLib.WindowsMediaPlayerClass();
+MC = WC.newMedia(str);
+this.axWindowsMediaPlayer1.currentPlaylist.appendItem(MC);
+richTextBox1.Text += "add " + str + "\n";
+
+
+
+
+            /*  無法依子目錄排序 廢棄
+            if (path == String.Empty)
+                path = search_path;
+
+            //C# 取得資料夾下的所有檔案(包括子目錄)
+            string[] files = System.IO.Directory.GetFiles(path, filetype2, System.IO.SearchOption.AllDirectories);
+            foreach (string filename in files)
+            {
+                //richTextBox1.Text += filename + "\n";
+                FileInfo fi = new FileInfo(filename);
+                richTextBox1.Text += fi.Name + "\n";
+            }
+            */
+
+
+
+string newID = id.Insert(6, "19");
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "檢查IP合法性\n";
+            string[] lines = new string[4];
+            string s = ".";
+            string ip = "192.168.0.123";
+
+            lines = ip.Split(s.ToCharArray(), 4);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (Convert.ToInt32(lines[i]) >= 255)
+                {
+                    richTextBox1.Text += "不合法\n";
+                    return;
+                }
+            }
+            richTextBox1.Text += "合法\n";
+			
+
+        }
+
+
+
+
+string strpath1 = Environment.SystemDirectory;
+richTextBox1.Text += "str1\t" + strpath1 + "\n";
+
+str1	C:\WINDOWS\system32
+
+
+
+
+this.StartPosition = FormStartPosition.CenterScreen;//視窗居中顯示
+
+
+
+如何清除播放清單
+
+顯示播放清單的內容
+
+播放清單移除特定檔案
+
+
+
+
+
+
+        public override string show()
+        {
+            return base.show() +
+                   ": 寬 = " + width +
+                   ", 高 = " + height;
+        }
+		
+        public string listing()
+        {
+            string res = "";
+
+            for (int i = 0; i < count; i++)
+            {   // polymorphism
+                Shape s = shapeArray[i];
+                res += s.show() + ", 面積 = " + s.area() +
+                       "\r\n-----------------------\r\n";
+            }
+
+            return res;
+        }
+
+
+
+
+計算程式執行的時間
+
+int URms = System.Environment.TickCount;
+
+XXXXXXXXX
+
+Console.WriteLine("花費 {0} ms 完成!!!", Environment.TickCount - URms);
+
+
+
+
+
+
+//紀錄開始的時間
+System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();//引用stopwatch物件
+
+sw.Reset();//時間歸零
+sw.Start();
+sw.Stop();
+
+            label1.Text = "經過時間: " 
+                + sw.Elapsed.Hours.ToString().PadLeft(2,'0') + ":"
+                + sw.Elapsed.Minutes.ToString().PadLeft(2, '0') + ":"
+                + sw.Elapsed.Seconds.ToString().PadLeft(2, '0');
+				
+				
+				
+				
+				
+
+				
+
+
+//取得專案內所有表單名稱
+
+
+
+            Assembly a = Assembly.GetExecutingAssembly();       //取得目前組件
+
+            
+
+            foreach (Type t in a.GetTypes())                    //找尋組件內所有類別型態
+
+            {
+
+                if (t.IsSubclassOf(typeof(Form)))           //如果父類別是繼承自Form的話
+
+                {
+
+                    //textBox1.AppendText(t.ToString() + "\r\n"); //列出該類別資訊
+
+                }
+
+            }
+
+ 
+
+
+
+
+				
+				
+
+
+做一個我的 Transform範例
+
+角度-180~+180
+正弦值 -1~+1
+
+xmin = -180;
+xmax = 180;
+ymin = -1;
+ymax = 1;
+xmargin = 10;
+ymargin = 0.2;
+
+顯示區域寬度W  if 720
+顯示區域高度H  if 360
+
+xratio = W/(xmax-xmin+xmargin*2);     //2 倍
+yratio = H/(ymax-ymin+ymargin*2);     //180 倍
+
+x=xmin:1:xmax;
+y=sind(x);
+
+先不考慮margin  把圖畫在中間
+
+畫x時 每點相距 2 pixel
+
+畫y時 要放大180倍
+
+for(i=0; i<360;i++)
+{
+ x_new = x_old*2;
+ y_new = y_old*180;
+}
+
+
+            e.Graphics.Clear(picGraph.BackColor);
+            if (Balance.Count < 2) return;
+
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Scale to make the data fit.
+            float xmin = -1;
+            float xmax = Contributions.Count + 1;
+            float ymax = Balance.Max(pt => pt.Y);
+            float ymin = -ymax * 0.05f;
+            RectangleF rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
+            PointF[] pts =
+            {
+                new PointF(0, picGraph.ClientSize.Height),
+                new PointF(picGraph.ClientSize.Width, picGraph.ClientSize.Height),
+                new PointF(0, 0),
+            };
+            Transform = new Matrix(rect, pts);
+            e.Graphics.Transform = Transform;
+
+
+
+
+
+
+        void update_setup_file()    //應無用
+        {
+            richTextBox2.Text += "update_setup_file ST\n";
+            richTextBox2.Text += "length of old_search_path = " + old_search_path.Count.ToString() + "\n";
+
+            {
+                StreamWriter sw = System.IO.File.CreateText(drap_setup_filename);
+                string content = "";
+                //定義系統版本
+                Version ver = Environment.OSVersion.Version;
+                //Major主版本號,Minor副版本號
+                if (ver.Major == 6 && ver.Minor == 1)
+                {
+                    //Windows7
+                    content += "\"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+                }
+                else
+                {
+                    //Windows10
+                    content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+                }
+                content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
+                content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
+                content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
+                content += SelectedLanguage.ToString() + "\n";
+                content += comboBox1.SelectedIndex.ToString() + "\n";
+                if (cb_video_only.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_video_l.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_video_m.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_video_s.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_size.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_l.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_m.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_s.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_generate_text.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+
+                /*
+                //Major主版本號,Minor副版本號
+                if (ver.Major == 6 && ver.Minor == 1)
+                {
+                    //Windows7
+                    video_player_path = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+                }
+                else
+                {
+                    //Windows10
+                    video_player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
+                }
+                audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
+                picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
+                text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
+                */
+
+                richTextBox2.Text += "目前共有 " + listBox1.Items.Count.ToString() + " 條搜尋路徑\n";
+
+                if (listBox1.Items.Count == 0)
+                {
+                    content += "C:\\______test_files\n";
+                    old_search_path.Add("C:\\______test_files");
+                }
+                else
+                {
+                    for (int i = 0; i < listBox1.Items.Count; i++)
+                    {
+                        richTextBox2.Text += listBox1.Items[i] + "\n";
+                        content += listBox1.Items[i] + "\n";
+                    }
+                }
+                content += "\n";
+
+                sw.WriteLine(content, Encoding.UTF8);
+                sw.Close();
+            }
+        }
+
+        void Read_Setup_File()  //no use this, 準備廢棄使用
+        {
+            int i;
+            int tmp;
+            if (System.IO.File.Exists(drap_setup_filename) == false)
+            {
+                richTextBox2.Text += "檔案 " + drap_setup_filename + " 不存在，製作一個。\n";
+                update_setup_file();
+            }
+            else
+            {
+                richTextBox2.Text += "檔案 " + drap_setup_filename + " 存在, 開啟，並讀入設定\n";
+                string line;
+                StreamReader sr = new StreamReader(drap_setup_filename, Encoding.UTF8);
+                i = 0;
+                while (!sr.EndOfStream)
+                {               // 每次讀取一行，直到檔尾
+                    line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
+                    richTextBox2.Text += "第 " + i.ToString() + " 行資料 : " + line + "\n";
+                    switch (i)
+                    {
+                        case 0:
+                            video_player_path = line;
+                            break;
+                        case 1:
+                            audio_player_path = line;
+                            break;
+                        case 2:
+                            picture_viewer_path = line;
+                            break;
+                        case 3:
+                            text_editor_path = line;
+                            break;
+                        case 4:
+                            SelectedLanguage = int.Parse(line);
+                            break;
+                        case 5:
+                            tmp = int.Parse(line);
+                            comboBox1.SelectedIndex = tmp;
+                            break;
+                        case 6:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_only.Checked = true;
+                            else
+                                cb_video_only.Checked = false;
+                            break;
+                        case 7:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_l.Checked = true;
+                            else
+                                cb_video_l.Checked = false;
+                            break;
+                        case 8:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_m.Checked = true;
+                            else
+                                cb_video_m.Checked = false;
+                            break;
+                        case 9:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_s.Checked = true;
+                            else
+                                cb_video_s.Checked = false;
+                            break;
+                        case 10:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_size.Checked = true;
+                            else
+                                cb_file_size.Checked = false;
+                            break;
+                        case 11:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_l.Checked = true;
+                            else
+                                cb_file_l.Checked = false;
+                            break;
+                        case 12:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_m.Checked = true;
+                            else
+                                cb_file_m.Checked = false;
+                            break;
+                        case 13:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_s.Checked = true;
+                            else
+                                cb_file_s.Checked = false;
+                            break;
+                        case 14:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_generate_text.Checked = true;
+                            else
+                                cb_generate_text.Checked = false;
+                            break;
+                        case 15:
+                            search_path = line;
+                            break;
+                        default:
+                            break;
+                    }
+                    if (i >= 15)
+                    {
+                        if (line.Length > 0)
+                        {
+                            richTextBox2.Text += "加入路徑 : " + line + "\n";
+                            old_search_path.Add(line);
+                        }
+                        else
+                        {
+                            richTextBox2.Text += "空行\n";
+                        }
+                    }
+                    i++;
+                }
+                sr.Close();
+            }
+        }
+
+
+
+
+
+
+				

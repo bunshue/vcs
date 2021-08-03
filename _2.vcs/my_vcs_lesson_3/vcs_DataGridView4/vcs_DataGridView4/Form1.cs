@@ -56,15 +56,16 @@ namespace vcs_DataGridView4
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 // Calculate total cost.
-                decimal total_cost =
-                    (decimal)row.Cells["PriceEach"].Value *
-                    (int)row.Cells["Quantity"].Value;
+                decimal total_cost = (decimal)row.Cells["PriceEach"].Value * (int)row.Cells["Quantity"].Value;
 
                 // Display the value.
                 row.Cells["Total"].Value = total_cost;
 
                 // Highlight the cell if the vcalue is big.
-                if (total_cost > 9.99m) row.Cells["Total"].Style = highlight_style;
+                if (total_cost > 9.99m)
+                {
+                    row.Cells["Total"].Style = highlight_style;
+                }
             }
         }
 
@@ -99,12 +100,9 @@ namespace vcs_DataGridView4
             {
                 dataGridView1.Rows.Add(new object[]
                     {
-                        item.Description,
-                        item.UnitPrice,
-                        item.Quantity,
-                        item.TotalCost
+                        item.Description,item.UnitPrice,item.Quantity,item.TotalCost
                     }
-                );
+                    );
             }
         }
     }
@@ -124,5 +122,5 @@ namespace vcs_DataGridView4
             TotalCost = UnitPrice * Quantity;
         }
     }
-
 }
+
