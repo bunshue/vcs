@@ -61,7 +61,7 @@ namespace vcs_Draw_Dynamics
             H = pictureBox1.Height;
             x_st = 0;
             y_st = INITIAL_HEIGHT;
-            //lb_main_mesg.Text = "";
+            lb_main_mesg.Text = "";
             lb_shoot_count.Text = "發射次數 : " + try_count.ToString();
             //lb_energy_ek.Text = "";
             //lb_energy_ep.Text = "";
@@ -87,10 +87,10 @@ namespace vcs_Draw_Dynamics
             int dy;
 
             //button
-            x_st = 1300;
+            x_st = 1450;
             y_st = 50;
             dx = 110;
-            dy = 45;
+            dy = 65;
 
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 30);
             button2.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 30);
@@ -110,9 +110,9 @@ namespace vcs_Draw_Dynamics
             lb_energy_es.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             lb_energy_et.Location = new Point(x_st + dx * 2, y_st + dy * 4);
 
-            lb_total_energy.Location = new Point(x_st + dx * 4, y_st + dy * 6);
-            lb_this_energy.Location = new Point(x_st + dx * 4, y_st + dy * 7);
-            lb_initial_speed.Location = new Point(x_st + dx * 4, y_st + dy * 8 + 20);
+            lb_total_energy.Location = new Point(x_st + dx * 0, y_st + dy * 5 + 40);
+            lb_this_energy.Location = new Point(x_st + dx * 0, y_st + dy * 6 + 40);
+            lb_initial_speed.Location = new Point(x_st + dx * 0, y_st + dy * 7 + 40);
 
             progressBar_total_energy.Maximum = total_energy;
             progressBar_total_energy.Minimum = 0;
@@ -130,10 +130,10 @@ namespace vcs_Draw_Dynamics
             trackBar1.Location = new Point(x_st + dx * 0, y_st + dy * 8 + 20);
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            richTextBox1.Size = new Size(400, 500);
+            richTextBox1.Size = new Size(400, 450);
 
             pictureBox1.Location = new Point(50, 50);
-            pictureBox1.Size = new Size(1200, 900);
+            pictureBox1.Size = new Size(1350, 900);
             pictureBox1.BackColor = Color.FromArgb(244, 252, 254);
             pictureBox_bird.BackColor = Color.FromArgb(244, 252, 254);
 
@@ -259,7 +259,7 @@ namespace vcs_Draw_Dynamics
             Rectangle destRect0 = new Rectangle(0, H - INITIAL_HEIGHT, 200, INITIAL_HEIGHT);
             e.Graphics.FillRectangle(new SolidBrush(Color.Gold), destRect0);
 
-            e.Graphics.DrawString("高 " + INITIAL_HEIGHT.ToString() + " 公尺", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(10, H - INITIAL_HEIGHT + 10));
+            e.Graphics.DrawString(INITIAL_HEIGHT.ToString() + " M", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(50, H - INITIAL_HEIGHT + 10));
 
 
             GraphicsUnit units = GraphicsUnit.Pixel;
