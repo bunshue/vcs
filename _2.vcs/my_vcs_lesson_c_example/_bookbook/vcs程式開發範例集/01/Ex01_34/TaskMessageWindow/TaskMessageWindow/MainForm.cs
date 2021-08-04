@@ -79,6 +79,7 @@ namespace TaskMessageWindow
             {
                 case FormState.Hide://当提示窗体的状态为隐藏时
                     this.FormNowState = FormState.Displaying;//设置提示窗体的状态为显示中
+					//SetBounds : 設定控件的位置與大小
                     this.SetBounds(Rect.X,Rect.Y + Rect.Height,Rect.Width,0);//显示提示窗体，并把它放在屏幕底端
                     ShowWindow(this.Handle,4);      //显示窗体
                     displayCounter.Interval = 100;   //设定时间事件的频率为100ms一次
@@ -161,11 +162,13 @@ namespace TaskMessageWindow
                 case FormState.Displaying:                  //当窗体处于显示中状态时
                     if(this.Height <= this.Rect.Height - 12) //如果窗体没有完全显示
                     {
+						//SetBounds : 設定控件的位置與大小
                         this.SetBounds(Rect.X,this.Top - 12,Rect.Width,this.Height + 12);//设定窗体的边界
                     }
                     else                                     //当窗体完全显示时
                     {
                         displayCounter.Stop();                //停止计时器displayCounter
+						//SetBounds : 設定控件的位置與大小
                         this.SetBounds(Rect.X,Rect.Y,Rect.Width,Rect.Height);//设定当前窗体的边界
                         this.FormNowState = FormState.Display;  //修改当前窗体所处的状态值
                         this.displayCounter.Interval = 5000;    //设定计时器的时间事件间隔
@@ -181,6 +184,7 @@ namespace TaskMessageWindow
                     {
                         if(this.Top <= this.Rect.Bottom - 12)        //当窗体没有完全隐藏时
                         {
+							//SetBounds : 設定控件的位置與大小
                             this.SetBounds(Rect.X,this.Top + 12,Rect.Width,this.Height - 12);//设定控件的边界
                         }
                         else                                    //当窗体完全隐藏时

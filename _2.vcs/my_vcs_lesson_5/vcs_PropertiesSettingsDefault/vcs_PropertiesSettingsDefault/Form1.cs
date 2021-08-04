@@ -32,11 +32,11 @@ namespace vcs_PropertiesSettingsDefault
             richTextBox1.Text += "Right : \t" + Properties.Settings.Default.Right.ToString() + "\n";
             richTextBox1.Text += "Bottom : \t" + Properties.Settings.Default.Bottom.ToString() + "\n";
 
-            this.SetBounds(
-            Properties.Settings.Default.Left,
-            Properties.Settings.Default.Top,
-            Properties.Settings.Default.Right - Properties.Settings.Default.Left,
-            Properties.Settings.Default.Bottom - Properties.Settings.Default.Top);
+            int x_st = Properties.Settings.Default.Left;
+            int y_st = Properties.Settings.Default.Top;
+            int w = Properties.Settings.Default.Right - Properties.Settings.Default.Left;
+            int h = Properties.Settings.Default.Bottom - Properties.Settings.Default.Top;
+            this.SetBounds(x_st, y_st, w, h);   //SetBounds : 設定控件的位置與大小
         }
 
         void show_form_information()

@@ -30,6 +30,7 @@ namespace vcs_Registry1
         public static void LoadAllSettings(string app_name, Form frm)
         {
             // Load form settings.
+			//SetBounds : 設定控件的位置與大小
             frm.SetBounds(
                 (int)GetSetting(app_name, "FormLeft", frm.Left),
                 (int)GetSetting(app_name, "FormTop", frm.Top),

@@ -77,6 +77,7 @@ namespace vcs_test_all_00_Control
             switch (this.FormNowState)
             {
                 case FormState.Hide:
+					//SetBounds : 設定控件的位置與大小
                     if (this.Height <= this.Rect.Height - 192)//当窗体没有完全显示时
                         this.SetBounds(Rect.X, this.Top - 192, Rect.Width, this.Height + 192);//使窗体不断上移
                     else

@@ -96,7 +96,7 @@ namespace vcs_Button
             button1.SetBounds(
                 button1.Location.X,
                 button1.Location.Y,
-                pts[3].X + 5, pts[4].Y + 5);
+                pts[3].X + 5, pts[4].Y + 5);	//SetBounds : 設定控件的位置與大小
 
             bt_exit_setup();
         }

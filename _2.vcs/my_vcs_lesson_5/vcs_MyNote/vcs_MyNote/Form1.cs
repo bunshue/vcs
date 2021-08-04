@@ -23,7 +23,7 @@ namespace vcs_MyNote
                 Properties.Settings.Default.Left,
                 Properties.Settings.Default.Top,
                 Properties.Settings.Default.Width,
-                Properties.Settings.Default.Height);
+                Properties.Settings.Default.Height);	//SetBounds : 設定控件的位置與大小
             richTextBox1.Text = Properties.Settings.Default.Contents;
         }
 

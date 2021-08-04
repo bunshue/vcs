@@ -1076,9 +1076,20 @@ namespace vcs_DrAP
             }
             else
             {
-                //richTextBox2.Text += "b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-                //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
-                fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
+                if (flag_function == FUNCTION_SEARCH)
+                {
+                    //搜尋字串模式
+                    richTextBox2.Text += "aaaa b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                    richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+                    fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
+                }
+                else
+                {
+                    //轉出模式
+                    //richTextBox2.Text += "b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                    //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                    fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
+                }
             }
 
             if (flag_search_vcs_pattern == 0)
