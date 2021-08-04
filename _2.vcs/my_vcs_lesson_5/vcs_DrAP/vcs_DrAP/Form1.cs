@@ -248,16 +248,7 @@ namespace vcs_DrAP
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            /*
-            Properties.Settings.Default.video_player_path = video_player_path;
-            Properties.Settings.Default.audio_player_path = audio_player_path;
-            Properties.Settings.Default.picture_viewer_path = picture_viewer_path;
-            Properties.Settings.Default.text_editor_path = text_editor_path;
-            Properties.Settings.Default.search_path = search_path;
-
-            Properties.Settings.Default.Save();
-            */
-
+            //儲存搜尋路徑
             string save_path = string.Empty;
             for (int i = 0; i < listBox1.Items.Count; i++)
             {
@@ -265,12 +256,8 @@ namespace vcs_DrAP
                 if (i < (listBox1.Items.Count - 1))
                     save_path += ";";
             }
-
             Properties.Settings.Default.search_path = save_path;
-
             Properties.Settings.Default.Save();
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -362,13 +349,13 @@ namespace vcs_DrAP
                 }
 
                 richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                show_file_info();
+                show_file_info1();
                 flag_search_done = 1;
             }
             else
             {
                 //Console.WriteLine("{0} is not a valid file or directory.", path);
-                richTextBox1.Text += "非合法路徑或檔案\n";
+                richTextBox1.Text += "非合法路徑或檔案a\n";
                 flag_search_done = 0;
             }
 
@@ -423,7 +410,6 @@ namespace vcs_DrAP
                     {
                         //richTextBox1.Text += "空資料夾 folder_name = " + targetDirectory + "\n";
                     }
-
 
                     // Recurse into subdirectories of this directory.
                     string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
@@ -489,7 +475,6 @@ namespace vcs_DrAP
             {
                 //一定會被執行的程式區段
             }
-
 
             //richTextBox2.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
 
@@ -573,7 +558,7 @@ namespace vcs_DrAP
             }
         }
 
-        void show_file_info()
+        void show_file_info1()  //轉出一層
         {
             if (cb_video_only.Checked == false)
                 return;
@@ -758,7 +743,7 @@ namespace vcs_DrAP
             }
         }
 
-        void show_file_info2()
+        void show_file_info2()  //目前像是都不會用到
         {
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
@@ -870,9 +855,11 @@ namespace vcs_DrAP
             }
         }
 
-        void show_file_info4()
+        void show_file_info6()
         {
-            richTextBox1.Text += "show_file_info4 ST\n";
+            //找小資料夾
+
+            richTextBox1.Text += "show_file_info6 ST\n";
 
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
@@ -963,16 +950,20 @@ namespace vcs_DrAP
                     FolederName = path;
                     ProcessDirectory(path);
                     richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                    if (flag_search_mode == 1)
-                        show_file_info2();
+                    if (flag_search_mode == 1)  //不會為1
+                    {
+                        show_file_info2();  //目前像是都不會用到
+                    }
                     else
-                        show_file_info();
+                    {
+                        show_file_info1();
+                    }
                     flag_search_done = 1;
                 }
                 else
                 {
                     //Console.WriteLine("{0} is not a valid file or directory.", path);
-                    richTextBox1.Text += "非合法路徑或檔案\n";
+                    richTextBox1.Text += "非合法路徑或檔案b\n";
                     flag_search_done = 0;
                 }
             }
@@ -1508,7 +1499,7 @@ namespace vcs_DrAP
             richTextBox1.ScrollToCaret();
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        void show_file_info4()
         {
             //找同檔
             listView1.View = View.Details;  //定義列表顯示的方式
@@ -1567,16 +1558,9 @@ namespace vcs_DrAP
 
                         listView1.Items.Add(i2);
 
-
-
-
-
                         //設置ListView最後一行可見
                         //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-
-
                     }
-
                 }
 
                 /*
@@ -1594,6 +1578,12 @@ namespace vcs_DrAP
                 sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                 */
             }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //找同檔
+            show_file_info4();
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -1655,7 +1645,7 @@ namespace vcs_DrAP
             richTextBox2.Clear();
         }
 
-        private void button21_Click(object sender, EventArgs e)
+        void show_file_info5()
         {
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
@@ -1704,9 +1694,6 @@ namespace vcs_DrAP
                         richTextBox1.Text += "NNNNNNNNN\n";
                     }
 
-
-
-
                     if (fileinfos[i].filesize == fileinfos[j].filesize)
                     {
                         /*
@@ -1740,15 +1727,9 @@ namespace vcs_DrAP
                         listView1.Items.Add(i2);
                         */
 
-
-
-
                         //設置ListView最後一行可見
                         //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-
-
                     }
-
                 }
 
                 /*
@@ -1768,8 +1749,15 @@ namespace vcs_DrAP
             }
         }
 
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //找可能相同檔案
+            show_file_info5();
+        }
+
         private void button17_Click(object sender, EventArgs e)
         {
+            //找小資料夾
             min_size_mb = 0;
             bool conversionSuccessful = int.TryParse(textBox4.Text, out min_size_mb);    //out為必須
             if (conversionSuccessful == true)
@@ -1818,12 +1806,12 @@ namespace vcs_DrAP
                 DirectoryInfo di = new DirectoryInfo(path);
                 richTextBox1.Text += "建立日期:\t" + di.CreationTime.ToString() + "\n\n";
 
-                show_file_info4();
+                show_file_info6();
             }
             else
             {
                 //Console.WriteLine("{0} is not a valid file or directory.", path);
-                richTextBox1.Text += "非合法路徑或檔案\n";
+                richTextBox1.Text += "非合法路徑或檔案c\n";
                 flag_search_done = 0;
             }
         }
@@ -1947,8 +1935,6 @@ namespace vcs_DrAP
             //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
 
             //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length));
-
-
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -2031,7 +2017,7 @@ namespace vcs_DrAP
                     else
                     {
                         //Console.WriteLine("{0} is not a valid file or directory.", path);
-                        richTextBox1.Text += "非合法路徑或檔案\n";
+                        richTextBox1.Text += "非合法路徑或檔案d\n";
                     }
                 }
             }
@@ -2060,13 +2046,13 @@ namespace vcs_DrAP
 
                     if (cb_video_only.Checked == true)
                     {
-                        show_file_info();
+                        show_file_info1();
                     }
                 }
                 else
                 {
                     //Console.WriteLine("{0} is not a valid file or directory.", path);
-                    richTextBox1.Text += "非合法路徑或檔案\n";
+                    richTextBox1.Text += "非合法路徑或檔案e\n";
                 }
             }
         }
@@ -2119,7 +2105,7 @@ namespace vcs_DrAP
                     else
                     {
                         //Console.WriteLine("{0} is not a valid file or directory.", path);
-                        richTextBox1.Text += "非合法路徑或檔案\n";
+                        richTextBox1.Text += "非合法路徑或檔案f\n";
                     }
 
                 }
@@ -2567,12 +2553,6 @@ namespace vcs_DrAP
                 richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
             }
         }
-
-
-
-
-
-
     }
 }
 
