@@ -44,7 +44,7 @@ namespace vcs_WebCam_Emgu3
                 button1.Text = "關閉Webcam";
                 flag_webcam_ok = true;
 
-                cap = new Capture(0);   //預設使用第一台的webcam
+                cap = new Capture(1);   //預設使用第一台的webcam
                 //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
 
                 //cap.FlipHorizontal = true;  //左右相反
@@ -84,35 +84,32 @@ namespace vcs_WebCam_Emgu3
         //錄製影像
         private void button2_Click(object sender, EventArgs e)
         {
-            cap = new Capture();
-            double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
+            cap = new Capture(1);   //預設使用第一台的webcam
+            //double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
 
             if (cap == null)
             {
-                MessageBox.Show("can't find a camera", "error");
+                MessageBox.Show("找不到攝影機", "error");
             }
             Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
 
-            SaveFileDialog SaveFileDialog1 = new SaveFileDialog();
-            SaveFileDialog1.FileName = DateTime.Now.ToString("yyyyMMddhhmmss");
-            SaveFileDialog1.Filter = "Image Files(*.avi)|*.avi|All files (*.*)|*.*";
-            if (SaveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                MessageBox.Show("開始錄製，按ESC結束錄製");
-            }
+            string filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
 
-            VideoWriter video = new VideoWriter(SaveFileDialog1.FileName, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 20, 800, 600, true);
+            VideoWriter video = new VideoWriter(filename, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 25, 1920, 1080, true);
 
             while (image != null)
             {
-                CvInvoke.cvShowImage("camera", image.Ptr);
+                CvInvoke.cvShowImage("錄製影像, 按ESC停止錄影", image.Ptr);
                 image = cap.QueryFrame(); // Query WebCam 的畫面
+                video.WriteFrame<Bgr, byte>(image); //將每張圖片製作成影片
+
                 int c = CvInvoke.cvWaitKey(20);
-                video.WriteFrame<Bgr, byte>(image);
-                if (c == 27) break;
+                //遇到事件停止錄影
+                if (c == 27)
+                    break;
             }
             video.Dispose();
-            CvInvoke.cvDestroyWindow("camera");
+            CvInvoke.cvDestroyWindow("錄製影像, 按ESC停止錄影"); //關閉剛剛開啟的CV視窗
 
             //錄影完需將影像停止不然會出錯
             flag_webcam_ok = false;

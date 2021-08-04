@@ -76,7 +76,7 @@ namespace vcs_WebCam_Emgu1
                     button1.Text = "關閉Webcam";
                     flag_webcam_ok = true;
 
-                    cap = new Capture(0);   //預設使用第一台的webcam
+                    cap = new Capture(1);   //預設使用第一台的webcam
                     //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
 
                     //cap.FlipHorizontal = true;  //左右相反
@@ -223,7 +223,7 @@ namespace vcs_WebCam_Emgu1
 
                 //cap.Width 取得攝影機可支援的最大寬度
                 //cap.Height 取得攝影機可支援的最大高度
-                video = new VideoWriter(filename, 0, 10, cap.Width, cap.Height, true);
+                video = new VideoWriter(filename, 0, 10, cap.Width, cap.Height, true);  //一秒10張, 未壓縮, 應該是1秒10張bmp的圖疊合成一個檔案
 
                 //開啟錄影模式
                 flag_recording = true;
