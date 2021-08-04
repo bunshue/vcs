@@ -34,7 +34,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.bt_help = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
@@ -45,20 +45,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.bt_find_big_files = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button12 = new System.Windows.Forms.Button();
+            this.bt_find_same_files = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
+            this.bt_find_small_folders = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button18 = new System.Windows.Forms.Button();
+            this.bt_test = new System.Windows.Forms.Button();
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
+            this.bt_find_same_files2 = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.cb_video_only = new System.Windows.Forms.CheckBox();
             this.cb_video_s = new System.Windows.Forms.CheckBox();
@@ -74,17 +74,17 @@
             this.cb_file_s = new System.Windows.Forms.CheckBox();
             this.cb_file_size = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.button11 = new System.Windows.Forms.Button();
+            this.bt_copy_rtb_data = new System.Windows.Forms.Button();
             this.bt_setup = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.bt_search_pattern_matlab = new System.Windows.Forms.Button();
+            this.bt_save_rtb_data = new System.Windows.Forms.Button();
+            this.bt_search_pattern_python = new System.Windows.Forms.Button();
+            this.bt_search_pattern_vcs = new System.Windows.Forms.Button();
+            this.bt_delete_file = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
+            this.bt_find_empty_folders = new System.Windows.Forms.Button();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
@@ -146,15 +146,16 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button5
+            // bt_help
             // 
-            this.button5.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(846, 4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "Help";
-            this.button5.UseVisualStyleBackColor = true;
+            this.bt_help.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_help.Location = new System.Drawing.Point(846, 4);
+            this.bt_help.Name = "bt_help";
+            this.bt_help.Size = new System.Drawing.Size(75, 23);
+            this.bt_help.TabIndex = 8;
+            this.bt_help.Text = "Help";
+            this.bt_help.UseVisualStyleBackColor = true;
+            this.bt_help.Click += new System.EventHandler(this.bt_help_Click);
             // 
             // button7
             // 
@@ -241,16 +242,16 @@
             this.textBox2.Text = "雍正";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button4
+            // bt_find_big_files
             // 
-            this.button4.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(360, 6);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(50, 50);
-            this.button4.TabIndex = 21;
-            this.button4.Text = "搜尋大檔";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.bt_find_big_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_find_big_files.Location = new System.Drawing.Point(360, 6);
+            this.bt_find_big_files.Name = "bt_find_big_files";
+            this.bt_find_big_files.Size = new System.Drawing.Size(50, 50);
+            this.bt_find_big_files.TabIndex = 21;
+            this.bt_find_big_files.Text = "搜尋大檔";
+            this.bt_find_big_files.UseVisualStyleBackColor = true;
+            this.bt_find_big_files.Click += new System.EventHandler(this.bt_find_big_files_Click);
             // 
             // textBox3
             // 
@@ -259,21 +260,21 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(142, 30);
             this.textBox3.TabIndex = 24;
-            this.textBox3.Text = "ByteConversionTBGBMBKB";
+            this.textBox3.Text = "TBGBMBKB";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
             this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 
-            // button12
+            // bt_find_same_files
             // 
-            this.button12.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(537, 30);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(156, 23);
-            this.button12.TabIndex = 27;
-            this.button12.Text = "找同檔";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.bt_find_same_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_find_same_files.Location = new System.Drawing.Point(537, 30);
+            this.bt_find_same_files.Name = "bt_find_same_files";
+            this.bt_find_same_files.Size = new System.Drawing.Size(156, 23);
+            this.bt_find_same_files.TabIndex = 27;
+            this.bt_find_same_files.Text = "找同檔";
+            this.bt_find_same_files.UseVisualStyleBackColor = true;
+            this.bt_find_same_files.Click += new System.EventHandler(this.bt_find_same_files_Click);
             // 
             // button14
             // 
@@ -320,16 +321,16 @@
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
-            // button17
+            // bt_find_small_folders
             // 
-            this.button17.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button17.Location = new System.Drawing.Point(1263, 71);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(94, 23);
-            this.button17.TabIndex = 32;
-            this.button17.Text = "找小資料夾";
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
+            this.bt_find_small_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_find_small_folders.Location = new System.Drawing.Point(1263, 71);
+            this.bt_find_small_folders.Name = "bt_find_small_folders";
+            this.bt_find_small_folders.Size = new System.Drawing.Size(94, 23);
+            this.bt_find_small_folders.TabIndex = 32;
+            this.bt_find_small_folders.Text = "找小資料夾";
+            this.bt_find_small_folders.UseVisualStyleBackColor = true;
+            this.bt_find_small_folders.Click += new System.EventHandler(this.bt_find_small_folders_Click);
             // 
             // label3
             // 
@@ -350,16 +351,16 @@
             this.textBox4.Text = "10";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button18
+            // bt_test
             // 
-            this.button18.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button18.Location = new System.Drawing.Point(1593, 77);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(75, 23);
-            this.button18.TabIndex = 35;
-            this.button18.Text = "TEST";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
+            this.bt_test.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test.Location = new System.Drawing.Point(1593, 77);
+            this.bt_test.Name = "bt_test";
+            this.bt_test.Size = new System.Drawing.Size(75, 23);
+            this.bt_test.TabIndex = 35;
+            this.bt_test.Text = "TEST";
+            this.bt_test.UseVisualStyleBackColor = true;
+            this.bt_test.Click += new System.EventHandler(this.bt_test_Click);
             // 
             // bt_clear1
             // 
@@ -383,16 +384,16 @@
             this.bt_clear2.UseVisualStyleBackColor = true;
             this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
             // 
-            // button21
+            // bt_find_same_files2
             // 
-            this.button21.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(1363, 70);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(144, 23);
-            this.button21.TabIndex = 38;
-            this.button21.Text = "找可能相同檔案";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
+            this.bt_find_same_files2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_find_same_files2.Location = new System.Drawing.Point(1363, 70);
+            this.bt_find_same_files2.Name = "bt_find_same_files2";
+            this.bt_find_same_files2.Size = new System.Drawing.Size(144, 23);
+            this.bt_find_same_files2.TabIndex = 38;
+            this.bt_find_same_files2.Text = "找可能相同檔案";
+            this.bt_find_same_files2.UseVisualStyleBackColor = true;
+            this.bt_find_same_files2.Click += new System.EventHandler(this.bt_find_same_files2_Click);
             // 
             // checkBox3
             // 
@@ -591,17 +592,17 @@
             this.checkBox8.Text = "滿30結束";
             this.checkBox8.UseVisualStyleBackColor = true;
             // 
-            // button11
+            // bt_copy_rtb_data
             // 
-            this.button11.BackgroundImage = global::vcs_DrAP.Properties.Resources.clipboard;
-            this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button11.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button11.Location = new System.Drawing.Point(1605, 649);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(45, 45);
-            this.button11.TabIndex = 53;
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.bt_copy_rtb_data.BackgroundImage = global::vcs_DrAP.Properties.Resources.clipboard;
+            this.bt_copy_rtb_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_copy_rtb_data.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_copy_rtb_data.Location = new System.Drawing.Point(1605, 649);
+            this.bt_copy_rtb_data.Name = "bt_copy_rtb_data";
+            this.bt_copy_rtb_data.Size = new System.Drawing.Size(45, 45);
+            this.bt_copy_rtb_data.TabIndex = 53;
+            this.bt_copy_rtb_data.UseVisualStyleBackColor = true;
+            this.bt_copy_rtb_data.Click += new System.EventHandler(this.bt_copy_rtb_data_Click);
             // 
             // bt_setup
             // 
@@ -615,66 +616,66 @@
             this.bt_setup.UseVisualStyleBackColor = true;
             this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
             // 
-            // button24
+            // bt_search_pattern_matlab
             // 
-            this.button24.BackColor = System.Drawing.Color.White;
-            this.button24.BackgroundImage = global::vcs_DrAP.Properties.Resources.matlab;
-            this.button24.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button24.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button24.Location = new System.Drawing.Point(1674, 115);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(50, 50);
-            this.button24.TabIndex = 50;
-            this.button24.UseVisualStyleBackColor = false;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
+            this.bt_search_pattern_matlab.BackColor = System.Drawing.Color.White;
+            this.bt_search_pattern_matlab.BackgroundImage = global::vcs_DrAP.Properties.Resources.matlab;
+            this.bt_search_pattern_matlab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_search_pattern_matlab.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_search_pattern_matlab.Location = new System.Drawing.Point(1674, 115);
+            this.bt_search_pattern_matlab.Name = "bt_search_pattern_matlab";
+            this.bt_search_pattern_matlab.Size = new System.Drawing.Size(50, 50);
+            this.bt_search_pattern_matlab.TabIndex = 50;
+            this.bt_search_pattern_matlab.UseVisualStyleBackColor = false;
+            this.bt_search_pattern_matlab.Click += new System.EventHandler(this.bt_search_pattern_matlab_Click);
             // 
-            // button23
+            // bt_save_rtb_data
             // 
-            this.button23.BackgroundImage = global::vcs_DrAP.Properties.Resources.save_file;
-            this.button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button23.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button23.Location = new System.Drawing.Point(1248, 649);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(45, 45);
-            this.button23.TabIndex = 40;
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
+            this.bt_save_rtb_data.BackgroundImage = global::vcs_DrAP.Properties.Resources.save_file;
+            this.bt_save_rtb_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_save_rtb_data.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_save_rtb_data.Location = new System.Drawing.Point(1248, 649);
+            this.bt_save_rtb_data.Name = "bt_save_rtb_data";
+            this.bt_save_rtb_data.Size = new System.Drawing.Size(45, 45);
+            this.bt_save_rtb_data.TabIndex = 40;
+            this.bt_save_rtb_data.UseVisualStyleBackColor = true;
+            this.bt_save_rtb_data.Click += new System.EventHandler(this.bt_save_rtb_data_Click);
             // 
-            // button22
+            // bt_search_pattern_python
             // 
-            this.button22.BackgroundImage = global::vcs_DrAP.Properties.Resources.python;
-            this.button22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button22.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button22.Location = new System.Drawing.Point(1674, 59);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(50, 50);
-            this.button22.TabIndex = 39;
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
+            this.bt_search_pattern_python.BackgroundImage = global::vcs_DrAP.Properties.Resources.python;
+            this.bt_search_pattern_python.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_search_pattern_python.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_search_pattern_python.Location = new System.Drawing.Point(1674, 59);
+            this.bt_search_pattern_python.Name = "bt_search_pattern_python";
+            this.bt_search_pattern_python.Size = new System.Drawing.Size(50, 50);
+            this.bt_search_pattern_python.TabIndex = 39;
+            this.bt_search_pattern_python.UseVisualStyleBackColor = true;
+            this.bt_search_pattern_python.Click += new System.EventHandler(this.bt_search_pattern_python_Click);
             // 
-            // button13
+            // bt_search_pattern_vcs
             // 
-            this.button13.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs;
-            this.button13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button13.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button13.Location = new System.Drawing.Point(1674, 6);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(50, 50);
-            this.button13.TabIndex = 26;
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            this.bt_search_pattern_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs;
+            this.bt_search_pattern_vcs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_search_pattern_vcs.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_search_pattern_vcs.Location = new System.Drawing.Point(1674, 6);
+            this.bt_search_pattern_vcs.Name = "bt_search_pattern_vcs";
+            this.bt_search_pattern_vcs.Size = new System.Drawing.Size(50, 50);
+            this.bt_search_pattern_vcs.TabIndex = 26;
+            this.bt_search_pattern_vcs.UseVisualStyleBackColor = true;
+            this.bt_search_pattern_vcs.Click += new System.EventHandler(this.bt_search_pattern_vcs_Click);
             // 
-            // button10
+            // bt_delete_file
             // 
-            this.button10.BackgroundImage = global::vcs_DrAP.Properties.Resources.delete;
-            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button10.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(940, 6);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(50, 50);
-            this.button10.TabIndex = 22;
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.bt_delete_file.BackgroundImage = global::vcs_DrAP.Properties.Resources.delete;
+            this.bt_delete_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_delete_file.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_delete_file.Location = new System.Drawing.Point(940, 6);
+            this.bt_delete_file.Name = "bt_delete_file";
+            this.bt_delete_file.Size = new System.Drawing.Size(50, 50);
+            this.bt_delete_file.TabIndex = 22;
+            this.bt_delete_file.UseVisualStyleBackColor = true;
+            this.bt_delete_file.Click += new System.EventHandler(this.bt_delete_file_Click);
             // 
             // button9
             // 
@@ -712,27 +713,27 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // button19
+            // bt_find_empty_folders
             // 
-            this.button19.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(1363, 17);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(144, 23);
-            this.button19.TabIndex = 54;
-            this.button19.Text = "檢查空資料夾";
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
+            this.bt_find_empty_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_find_empty_folders.Location = new System.Drawing.Point(1363, 17);
+            this.bt_find_empty_folders.Name = "bt_find_empty_folders";
+            this.bt_find_empty_folders.Size = new System.Drawing.Size(144, 23);
+            this.bt_find_empty_folders.TabIndex = 54;
+            this.bt_find_empty_folders.Text = "找空資料夾";
+            this.bt_find_empty_folders.UseVisualStyleBackColor = true;
+            this.bt_find_empty_folders.Click += new System.EventHandler(this.bt_find_empty_folders_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
-            this.Controls.Add(this.button19);
-            this.Controls.Add(this.button11);
+            this.Controls.Add(this.bt_find_empty_folders);
+            this.Controls.Add(this.bt_copy_rtb_data);
             this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.checkBox8);
-            this.Controls.Add(this.button24);
+            this.Controls.Add(this.bt_search_pattern_matlab);
             this.Controls.Add(this.cb_file_size);
             this.Controls.Add(this.groupBox_file);
             this.Controls.Add(this.groupBox_video);
@@ -740,24 +741,24 @@
             this.Controls.Add(this.cb_generate_text);
             this.Controls.Add(this.cb_video_only);
             this.Controls.Add(this.checkBox3);
-            this.Controls.Add(this.button23);
-            this.Controls.Add(this.button22);
-            this.Controls.Add(this.button21);
+            this.Controls.Add(this.bt_save_rtb_data);
+            this.Controls.Add(this.bt_search_pattern_python);
+            this.Controls.Add(this.bt_find_same_files2);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_clear1);
-            this.Controls.Add(this.button18);
+            this.Controls.Add(this.bt_test);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.button17);
+            this.Controls.Add(this.bt_find_small_folders);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button14);
-            this.Controls.Add(this.button12);
-            this.Controls.Add(this.button13);
+            this.Controls.Add(this.bt_find_same_files);
+            this.Controls.Add(this.bt_search_pattern_vcs);
             this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.bt_delete_file);
+            this.Controls.Add(this.bt_find_big_files);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.checkBox2);
@@ -765,7 +766,7 @@
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.bt_help);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button3);
@@ -794,7 +795,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button bt_help;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.RichTextBox richTextBox1;
@@ -808,24 +809,24 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button bt_find_big_files;
+        private System.Windows.Forms.Button bt_delete_file;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button bt_search_pattern_vcs;
+        private System.Windows.Forms.Button bt_find_same_files;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button bt_find_small_folders;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button bt_test;
         private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.Button bt_clear2;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.Button bt_find_same_files2;
+        private System.Windows.Forms.Button bt_search_pattern_python;
+        private System.Windows.Forms.Button bt_save_rtb_data;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox cb_video_only;
         private System.Windows.Forms.CheckBox cb_video_s;
@@ -840,11 +841,11 @@
         private System.Windows.Forms.CheckBox cb_file_s;
         private System.Windows.Forms.TextBox tb_file_s;
         private System.Windows.Forms.CheckBox cb_file_size;
-        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Button bt_search_pattern_matlab;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.Button bt_setup;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button bt_copy_rtb_data;
+        private System.Windows.Forms.Button bt_find_empty_folders;
     }
 }
 

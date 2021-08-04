@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.bt_exit = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -43,16 +42,6 @@
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // bt_exit
-            // 
-            this.bt_exit.Location = new System.Drawing.Point(245, 12);
-            this.bt_exit.Name = "bt_exit";
-            this.bt_exit.Size = new System.Drawing.Size(30, 30);
-            this.bt_exit.TabIndex = 5;
-            this.bt_exit.Text = "X";
-            this.bt_exit.UseVisualStyleBackColor = true;
-            this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
             // 
             // richTextBox1
             // 
@@ -80,7 +69,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(287, 268);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
@@ -93,7 +81,6 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button bt_exit;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_clear;
     }

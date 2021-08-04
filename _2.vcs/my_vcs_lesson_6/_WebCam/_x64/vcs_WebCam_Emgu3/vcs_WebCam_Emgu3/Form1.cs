@@ -85,7 +85,7 @@ namespace vcs_WebCam_Emgu3
         private void button2_Click(object sender, EventArgs e)
         {
             cap = new Capture(1);   //預設使用第一台的webcam
-            double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
+            //double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
 
             if (cap == null)
             {
@@ -125,6 +125,58 @@ namespace vcs_WebCam_Emgu3
                 cap.Dispose();
             }
             Application.Exit();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Image<Bgr, Byte> img;
+
+            string filenamej;
+
+            string filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+
+            VideoWriter video = new VideoWriter(filename, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 1, 640, 480, true);
+
+            filenamej = @"C:\______test_files\_pic\id_card_01.jpg";
+            pictureBox1.Image = Image.FromFile(filenamej);
+            img = new Image<Bgr, byte>(filenamej);
+            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(1000);
+
+            filenamej = @"C:\______test_files\_pic\id_card_02.jpg";
+            pictureBox1.Image = Image.FromFile(filenamej);
+            img = new Image<Bgr, byte>(filenamej);
+            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(1000);
+
+            filenamej = @"C:\______test_files\_pic\id_card_03.jpg";
+            pictureBox1.Image = Image.FromFile(filenamej);
+            img = new Image<Bgr, byte>(filenamej);
+            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(1000);
+
+            filenamej = @"C:\______test_files\_pic\id_card_04.jpg";
+            pictureBox1.Image = Image.FromFile(filenamej);
+            img = new Image<Bgr, byte>(filenamej);
+            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(1000);
+
+            filenamej = @"C:\______test_files\_pic\id_card_05.jpg";
+            pictureBox1.Image = Image.FromFile(filenamej);
+            img = new Image<Bgr, byte>(filenamej);
+            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(1000);
+
+
+            video.Dispose();
+
+            richTextBox1.Text += "done\n";
+
         }
     }
 }

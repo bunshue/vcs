@@ -184,9 +184,9 @@ namespace vcs_DrAP
 
             this.richTextBox2.Size = new System.Drawing.Size(594, 388);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
-            button11.Location = new Point(bt_clear2.Location.X, button11.Location.Y);
+            bt_copy_rtb_data.Location = new Point(bt_clear2.Location.X, bt_copy_rtb_data.Location.Y);
 
-            button24.Location = new Point(button13.Location.X + 55, button13.Location.Y);
+            bt_search_pattern_matlab.Location = new Point(bt_search_pattern_vcs.Location.X + 55, bt_search_pattern_vcs.Location.Y);
 
             bt_setup.Location = new Point(this.ClientSize.Width - bt_setup.Width, 55);
 
@@ -1297,11 +1297,11 @@ namespace vcs_DrAP
             */
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void bt_find_big_files_Click(object sender, EventArgs e)
         {
             //搜尋大檔
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.potplayer;
-            button4.BackColor = Color.Red;
+            bt_find_big_files.BackColor = Color.Red;
 
             Application.DoEvents();
 
@@ -1319,10 +1319,10 @@ namespace vcs_DrAP
             }
             flag_function = FUNCTION_FIND_BIG_FILE;
             find_and_show_big_files();
-            button4.BackColor = System.Drawing.SystemColors.ControlLight;
+            bt_find_big_files.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void bt_delete_file_Click(object sender, EventArgs e)
         {
             richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
 
@@ -1468,7 +1468,7 @@ namespace vcs_DrAP
             }
         }
 
-        private void button13_Click(object sender, EventArgs e)
+        private void bt_search_pattern_vcs_Click(object sender, EventArgs e)
         {
             do_search_mode(SEARCH_MODE_VCS);
             return;
@@ -1480,7 +1480,7 @@ namespace vcs_DrAP
             /*
             if (e.KeyChar == (Char)13)      //Enter
             {
-                button13_Click(sender, e);
+                bt_search_pattern_vcs_Click(sender, e);
             }
             */
         }
@@ -1580,7 +1580,7 @@ namespace vcs_DrAP
             }
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void bt_find_same_files_Click(object sender, EventArgs e)
         {
             //找同檔
             show_file_info4();
@@ -1616,7 +1616,7 @@ namespace vcs_DrAP
             old_search_path.Clear();
         }
 
-        private void button18_Click(object sender, EventArgs e)
+        private void bt_test_Click(object sender, EventArgs e)
         {
             //richTextBox2.Text += "flag_function = " + flag_function.ToString() + "\n";
 
@@ -1629,8 +1629,8 @@ namespace vcs_DrAP
         {
             if (e.KeyCode == Keys.Enter)
             {
-                //按Enter 等同於 button13_Click
-                button13_Click(sender, e);
+                //按Enter 等同於 bt_search_pattern_vcs_Click
+                bt_search_pattern_vcs_Click(sender, e);
             }
         }
 
@@ -1749,13 +1749,13 @@ namespace vcs_DrAP
             }
         }
 
-        private void button21_Click(object sender, EventArgs e)
+        private void bt_find_same_files2_Click(object sender, EventArgs e)
         {
             //找可能相同檔案
             show_file_info5();
         }
 
-        private void button17_Click(object sender, EventArgs e)
+        private void bt_find_small_folders_Click(object sender, EventArgs e)
         {
             //找小資料夾
             min_size_mb = 0;
@@ -1937,7 +1937,7 @@ namespace vcs_DrAP
             //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length));
         }
 
-        private void button22_Click(object sender, EventArgs e)
+        private void bt_search_pattern_python_Click(object sender, EventArgs e)
         {
             do_search_mode(SEARCH_MODE_PYTHON);
             return;
@@ -2126,7 +2126,7 @@ namespace vcs_DrAP
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
 
-        private void button23_Click(object sender, EventArgs e)
+        private void bt_save_rtb_data_Click(object sender, EventArgs e)
         {
             save_log_to_local_drive();
         }
@@ -2205,7 +2205,7 @@ namespace vcs_DrAP
                     richTextBox1.Size = new Size(1300, 430);
 
                     bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, bt_clear1.Location.Y);
-                    button23.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button23.Width, button23.Location.Y);
+                    bt_save_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_save_rtb_data.Width, bt_save_rtb_data.Location.Y);
                 }
             }
             else
@@ -2218,7 +2218,7 @@ namespace vcs_DrAP
                     richTextBox1.Size = new Size(listView1.Width, 430);
 
                     bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, bt_clear1.Location.Y);
-                    button23.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button23.Width, button23.Location.Y);
+                    bt_save_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_save_rtb_data.Width, bt_save_rtb_data.Location.Y);
                 }
             }
         }
@@ -2267,7 +2267,7 @@ namespace vcs_DrAP
         {
         }
 
-        private void button24_Click(object sender, EventArgs e)
+        private void bt_search_pattern_matlab_Click(object sender, EventArgs e)
         {
             do_search_mode(SEARCH_MODE_MATLAB);
             return;
@@ -2287,8 +2287,8 @@ namespace vcs_DrAP
                 richTextBox1.Text += "搜尋開始vcs\n";
                 richTextBox2.Text += "搜尋開始vcs\n\n";
 
-                button13.BackgroundImage = null;
-                button13.BackColor = Color.Red;
+                bt_search_pattern_vcs.BackgroundImage = null;
+                bt_search_pattern_vcs.BackColor = Color.Red;
                 path = @"C:\_git\vcs\_2.vcs";
             }
             else if (mode == SEARCH_MODE_PYTHON)
@@ -2297,8 +2297,8 @@ namespace vcs_DrAP
                 richTextBox1.Text += "搜尋開始python\n";
                 richTextBox2.Text += "搜尋開始python\n\n";
 
-                button22.BackgroundImage = null;
-                button22.BackColor = Color.Red;
+                bt_search_pattern_python.BackgroundImage = null;
+                bt_search_pattern_python.BackColor = Color.Red;
                 path = @"C:\_git\vcs\_4.cmpp\_python_test";
             }
             else if (mode == SEARCH_MODE_MATLAB)
@@ -2307,8 +2307,8 @@ namespace vcs_DrAP
                 richTextBox1.Text += "搜尋開始matlab\n";
                 richTextBox2.Text += "搜尋開始matlab\n\n";
 
-                button24.BackgroundImage = null;
-                button24.BackColor = Color.Red;
+                bt_search_pattern_matlab.BackgroundImage = null;
+                bt_search_pattern_matlab.BackColor = Color.Red;
                 path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
             }
             else
@@ -2317,8 +2317,8 @@ namespace vcs_DrAP
                 richTextBox1.Text += "搜尋開始vcs\n";
                 richTextBox2.Text += "搜尋開始vcs\n\n";
 
-                button13.BackgroundImage = null;
-                button13.BackColor = Color.Red;
+                bt_search_pattern_vcs.BackgroundImage = null;
+                bt_search_pattern_vcs.BackColor = Color.Red;
                 path = @"C:\_git\vcs\_2.vcs";
             }
 
@@ -2352,23 +2352,23 @@ namespace vcs_DrAP
             flag_search_vcs_pattern = 1;
             if (mode == SEARCH_MODE_VCS)
             {
-                button13.BackColor = System.Drawing.SystemColors.ControlLight;
-                button13.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
+                bt_search_pattern_vcs.BackColor = System.Drawing.SystemColors.ControlLight;
+                bt_search_pattern_vcs.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
             }
             else if (mode == SEARCH_MODE_PYTHON)
             {
-                button22.BackColor = System.Drawing.SystemColors.ControlLight;
-                button22.BackgroundImage = vcs_DrAP.Properties.Resources.python;
+                bt_search_pattern_python.BackColor = System.Drawing.SystemColors.ControlLight;
+                bt_search_pattern_python.BackgroundImage = vcs_DrAP.Properties.Resources.python;
             }
             else if (mode == SEARCH_MODE_MATLAB)
             {
-                button24.BackColor = System.Drawing.SystemColors.ControlLight;
-                button24.BackgroundImage = vcs_DrAP.Properties.Resources.matlab;
+                bt_search_pattern_matlab.BackColor = System.Drawing.SystemColors.ControlLight;
+                bt_search_pattern_matlab.BackgroundImage = vcs_DrAP.Properties.Resources.matlab;
             }
             else
             {
-                button13.BackColor = System.Drawing.SystemColors.ControlLight;
-                button13.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
+                bt_search_pattern_vcs.BackColor = System.Drawing.SystemColors.ControlLight;
+                bt_search_pattern_vcs.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
             }
             return;
         }
@@ -2436,7 +2436,7 @@ namespace vcs_DrAP
             }
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void bt_copy_rtb_data_Click(object sender, EventArgs e)
         {
             //C# – 複製資料到剪貼簿
             //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
@@ -2450,7 +2450,7 @@ namespace vcs_DrAP
         int total_show_empty_folder_cnt = 0;
         int total_delete_empty_folder_cnt = 0;
 
-        private void button19_Click(object sender, EventArgs e)
+        private void bt_find_empty_folders_Click(object sender, EventArgs e)
         {
             total_show_empty_folder_cnt = 0;
             total_delete_empty_folder_cnt = 0;
@@ -2552,6 +2552,11 @@ namespace vcs_DrAP
             {
                 richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
             }
+        }
+
+        private void bt_help_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
