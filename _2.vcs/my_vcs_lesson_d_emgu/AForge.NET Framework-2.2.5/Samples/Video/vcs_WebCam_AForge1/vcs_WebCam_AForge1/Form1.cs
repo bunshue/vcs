@@ -23,7 +23,7 @@ namespace vcs_WebCam_AForge1
 {
     public partial class Form1 : Form
     {
-        private Stopwatch stopWatch = null;
+        private Stopwatch stopwatch = null;
 
         public Form1()
         {
@@ -51,7 +51,7 @@ namespace vcs_WebCam_AForge1
             vsp.Start();
 
             // reset stop watch
-            stopWatch = null;
+            stopwatch = null;
 
             // start timer
             timer1.Start();
@@ -107,20 +107,20 @@ namespace vcs_WebCam_AForge1
                 // get number of frames since the last timer tick
                 int framesReceived = videoSource.FramesReceived;
 
-                if (stopWatch == null)
+                if (stopwatch == null)
                 {
-                    stopWatch = new Stopwatch();
-                    stopWatch.Start();
+                    stopwatch = new Stopwatch();
+                    stopwatch.Start();
                 }
                 else
                 {
-                    stopWatch.Stop();
+                    stopwatch.Stop();
 
-                    float fps = 1000.0f * framesReceived / stopWatch.ElapsedMilliseconds;
+                    float fps = 1000.0f * framesReceived / stopwatch.ElapsedMilliseconds;
                     this.Text = fps.ToString("F2") + " fps";
 
-                    stopWatch.Reset();
-                    stopWatch.Start();
+                    stopwatch.Reset();
+                    stopwatch.Start();
                 }
             }
         }
@@ -140,10 +140,27 @@ namespace vcs_WebCam_AForge1
                 richTextBox1.Text += "VideoCapabilities.Length = " + Cam.VideoCapabilities.Length.ToString() + "\n";
                 richTextBox1.Text += "FrameRate = " + Cam.VideoResolution.FrameRate.ToString() + "\n";
 
+                richTextBox1.Text += "VideoDeviceMoniker = " + form.VideoDeviceMoniker + "\n";
+
+                Size cs = form.CaptureSize;
+                richTextBox1.Text += "CaptureSize W = " + cs.Width.ToString() + ", H = " + cs.Height.ToString() + "\n";
+
+                bool con1 = form.ConfigureSnapshots;
+                richTextBox1.Text += "ConfigureSnapshots = " + con1.ToString() + "\n";
+                if (con1 == true)
+                {
+                    Size ss = form.SnapshotSize;
+
+                    richTextBox1.Text += "SnapshotSize W = " + ss.Width.ToString() + ", H = " + ss.Height.ToString() + "\n";
+                }
+
+                VideoInput vi = form.VideoInput;
+                richTextBox1.Text += "Index " + vi.Index.ToString() + "\n";
+                richTextBox1.Text += "Type " + vi.Type.ToString() + "\n";
+
                 // open it
                 OpenVideoSource(Cam);
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -151,7 +168,6 @@ namespace vcs_WebCam_AForge1
             //關閉WebCam
 
             CloseCurrentVideoSource();
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -181,18 +197,11 @@ namespace vcs_WebCam_AForge1
                 {
                     richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                 }
-
-
-
             }
             catch (Exception ex)
             {
                 richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
             }
-
-
         }
-
-
     }
 }

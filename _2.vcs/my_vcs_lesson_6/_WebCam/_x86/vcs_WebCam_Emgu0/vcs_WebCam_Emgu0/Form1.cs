@@ -48,7 +48,7 @@ namespace vcs_WebCam_Emgu0
                     button1.Text = "關閉Webcam";
                     flag_webcam_ok = true;
 
-                    cap = new Capture(0);   //預設使用第一台的webcam
+                    cap = new Capture(1);   //預設使用第一台的webcam
                     //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
 
                     //cap.FlipHorizontal = true;  //左右相反

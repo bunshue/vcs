@@ -28,19 +28,11 @@
         /// </summary>
         private void InitializeComponent( )
         {
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox = new AForge.Controls.PictureBox();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.Filter = "All files (*.*)|*.*|Flexible Image Transport System images (*.fit, *.fits)|*.fit;" +
-                "*.fits|PNM (Portable Any Map) images (*.pbm, *.pgm, *.ppm, *.pnm)|*.pbm;*.pgm;*." +
-                "ppm;*.pnm";
-            this.openFileDialog.Title = "Select image file";
             // 
             // pictureBox
             // 
@@ -94,7 +86,6 @@
 
         #endregion
 
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.PropertyGrid propertyGrid;
         private AForge.Controls.PictureBox pictureBox;
         private System.Windows.Forms.Button button1;

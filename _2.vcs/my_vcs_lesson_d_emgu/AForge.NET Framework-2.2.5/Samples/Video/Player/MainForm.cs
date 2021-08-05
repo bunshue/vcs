@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Diagnostics;
 
 using AForge.Video;
@@ -14,7 +15,7 @@ namespace Player
 {
     public partial class MainForm : Form
     {
-        private Stopwatch stopWatch = null;
+        private Stopwatch stopwatch = null;
 
         // Class constructor
         public MainForm()
@@ -22,20 +23,111 @@ namespace Player
             InitializeComponent();
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             CloseCurrentVideoSource();
         }
 
-        // "Exit" menu item clicked
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        // Open video source
+        private void OpenVideoSource(IVideoSource source)
         {
-            this.Close();
+            // stop current video source
+            CloseCurrentVideoSource();
+
+            // start new video source
+            vsp.VideoSource = source;
+            vsp.Start();
+
+            // reset stop watch
+            stopwatch = null;
+
+            // start timer
+            timer.Start();
+
+            if (source.IsRunning == true)
+            {
+                richTextBox1.Text += source.IsRunning.ToString() + "\n";
+                richTextBox1.Text += source.Source.Length.ToString() + "\n";
+                richTextBox1.Text += vsp.Size.ToString() + "\n";
+                richTextBox1.Text += vsp.Width.ToString() + "\n";
+                richTextBox1.Text += vsp.Height.ToString() + "\n";
+            }
         }
 
-        // Open local video capture device
-        private void localVideoCaptureDeviceToolStripMenuItem_Click(object sender, EventArgs e)
+        // Close video source if it is running
+        private void CloseCurrentVideoSource()
         {
+            if (vsp.VideoSource != null)
+            {
+                vsp.SignalToStop();
+
+                // wait ~ 3 seconds
+                for (int i = 0; i < 30; i++)
+                {
+                    if (!vsp.IsRunning)
+                        break;
+                    System.Threading.Thread.Sleep(100);
+                }
+
+                if (vsp.IsRunning)
+                {
+                    vsp.Stop();
+                }
+
+                vsp.VideoSource = null;
+            }
+        }
+
+        // New frame received by the player
+        private void vsp_NewFrame(object sender, ref Bitmap image)
+        {
+            //畫上目前的時間
+            DateTime now = DateTime.Now;
+            Graphics g = Graphics.FromImage(image);
+
+            SolidBrush brush = new SolidBrush(Color.Red);
+            g.DrawString(now.ToString(), this.Font, brush, new PointF(5, 5));
+            brush.Dispose();
+
+            g.Dispose();
+        }
+
+        // On timer event - gather statistics
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            IVideoSource videoSource = vsp.VideoSource;
+
+            if (videoSource != null)
+            {
+                // get number of frames since the last timer tick
+                int framesReceived = videoSource.FramesReceived;
+
+                if (stopwatch == null)
+                {
+                    stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                }
+                else
+                {
+                    stopwatch.Stop();
+
+                    float fps = 1000.0f * framesReceived / stopwatch.ElapsedMilliseconds;
+                    fpsLabel.Text = fps.ToString("F2") + " fps";
+
+                    stopwatch.Reset();
+                    stopwatch.Start();
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Local Video Capture Device
             VideoCaptureDeviceForm form = new VideoCaptureDeviceForm();
 
             if (form.ShowDialog(this) == DialogResult.OK)
@@ -48,22 +140,22 @@ namespace Player
             }
         }
 
-        // Open video file using DirectShow
-        private void openVideofileusingDirectShowToolStripMenuItem_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            //Open video file (using DirectShow)
+            string filename = @"C:\______test_files\__RWa\_avi\enka.avi";
             {
                 // create video source
-                FileVideoSource fileSource = new FileVideoSource(openFileDialog.FileName);
+                FileVideoSource fileSource = new FileVideoSource(filename);
 
                 // open it
                 OpenVideoSource(fileSource);
             }
         }
 
-        // Open JPEG URL
-        private void openJPEGURLToolStripMenuItem_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
+            //Open JPEG URL
             URLForm form = new URLForm();
 
             form.Description = "Enter URL of an updating JPEG from a web camera:";
@@ -82,9 +174,9 @@ namespace Player
             }
         }
 
-        // Open MJPEG URL
-        private void openMJPEGURLToolStripMenuItem_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
+            //Open MJPEG URL
             URLForm form = new URLForm();
 
             form.Description = "Enter URL of an MJPEG video stream:";
@@ -104,98 +196,18 @@ namespace Player
             }
         }
 
-        // Capture 1st display in the system
-        private void capture1stDisplayToolStripMenuItem_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
+            //Capture 1st display in the system
             OpenVideoSource(new ScreenCaptureStream(Screen.AllScreens[0].Bounds, 100));
         }
 
-        // Open video source
-        private void OpenVideoSource(IVideoSource source)
+        private void bt_exit_Click(object sender, EventArgs e)
         {
-            // set busy cursor
-            this.Cursor = Cursors.WaitCursor;
-
-            // stop current video source
-            CloseCurrentVideoSource();
-
-            // start new video source
-            videoSourcePlayer.VideoSource = source;
-            videoSourcePlayer.Start();
-
-            // reset stop watch
-            stopWatch = null;
-
-            // start timer
-            timer.Start();
-
-            this.Cursor = Cursors.Default;
+            this.Close();
         }
 
-        // Close video source if it is running
-        private void CloseCurrentVideoSource()
-        {
-            if (videoSourcePlayer.VideoSource != null)
-            {
-                videoSourcePlayer.SignalToStop();
 
-                // wait ~ 3 seconds
-                for (int i = 0; i < 30; i++)
-                {
-                    if (!videoSourcePlayer.IsRunning)
-                        break;
-                    System.Threading.Thread.Sleep(100);
-                }
 
-                if (videoSourcePlayer.IsRunning)
-                {
-                    videoSourcePlayer.Stop();
-                }
-
-                videoSourcePlayer.VideoSource = null;
-            }
-        }
-
-        // New frame received by the player
-        private void videoSourcePlayer_NewFrame(object sender, ref Bitmap image)
-        {
-            //畫上目前的時間
-            DateTime now = DateTime.Now;
-            Graphics g = Graphics.FromImage(image);
-
-            SolidBrush brush = new SolidBrush(Color.Red);
-            g.DrawString(now.ToString(), this.Font, brush, new PointF(5, 5));
-            brush.Dispose();
-
-            g.Dispose();
-        }
-
-        // On timer event - gather statistics
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            IVideoSource videoSource = videoSourcePlayer.VideoSource;
-
-            if (videoSource != null)
-            {
-                // get number of frames since the last timer tick
-                int framesReceived = videoSource.FramesReceived;
-
-                if (stopWatch == null)
-                {
-                    stopWatch = new Stopwatch();
-                    stopWatch.Start();
-                }
-                else
-                {
-                    stopWatch.Stop();
-
-                    float fps = 1000.0f * framesReceived / stopWatch.ElapsedMilliseconds;
-                    fpsLabel.Text = fps.ToString("F2") + " fps";
-
-                    stopWatch.Reset();
-                    stopWatch.Start();
-                }
-            }
-        }
     }
 }

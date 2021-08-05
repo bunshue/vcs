@@ -13,6 +13,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Diagnostics;
 
 using AForge.Video;
@@ -25,12 +26,15 @@ namespace TwoCamerasTest
         // list of video devices
         FilterInfoCollection videoDevices;
         // stop watch for measuring fps
-        private Stopwatch stopWatch = null;
+        private Stopwatch stopwatch = null;
 
         public MainForm()
         {
             InitializeComponent();
+        }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
             camera1FpsLabel.Text = string.Empty;
             camera2FpsLabel.Text = string.Empty;
 
@@ -137,7 +141,7 @@ namespace TwoCamerasTest
             }
 
             // reset stop watch
-            stopWatch = null;
+            stopwatch = null;
             // start timer
             timer.Start();
         }
@@ -174,23 +178,23 @@ namespace TwoCamerasTest
                 framesReceived2 = videoSource2.FramesReceived;
             }
 
-            if (stopWatch == null)
+            if (stopwatch == null)
             {
-                stopWatch = new Stopwatch();
-                stopWatch.Start();
+                stopwatch = new Stopwatch();
+                stopwatch.Start();
             }
             else
             {
-                stopWatch.Stop();
+                stopwatch.Stop();
 
-                float fps1 = 1000.0f * framesReceived1 / stopWatch.ElapsedMilliseconds;
-                float fps2 = 1000.0f * framesReceived2 / stopWatch.ElapsedMilliseconds;
+                float fps1 = 1000.0f * framesReceived1 / stopwatch.ElapsedMilliseconds;
+                float fps2 = 1000.0f * framesReceived2 / stopwatch.ElapsedMilliseconds;
 
                 camera1FpsLabel.Text = fps1.ToString("F2") + " fps";
                 camera2FpsLabel.Text = fps2.ToString("F2") + " fps";
 
-                stopWatch.Reset();
-                stopWatch.Start();
+                stopwatch.Reset();
+                stopwatch.Start();
             }
         }
 
@@ -214,6 +218,7 @@ namespace TwoCamerasTest
                 richTextBox1.Text += "無圖可存\n";
             }
         }
+
     }
 }
 
