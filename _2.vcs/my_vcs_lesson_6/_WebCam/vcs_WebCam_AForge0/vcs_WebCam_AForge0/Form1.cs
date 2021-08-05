@@ -7,10 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Diagnostics;       //for StopWatch
 using System.Drawing.Imaging;   //for ImageFormat
 
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;
+
+//使用Aforge的VideoSourcePlayer, 在要再多添加4個.dll
 
 /*
 Aforge.Net 安裝路徑設定
@@ -32,6 +35,9 @@ namespace vcs_WebCam_AForge0
         public FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
 
+        AForge.Controls.VideoSourcePlayer vsp;
+        Stopwatch stopwatch;
+
         public Form1()
         {
             InitializeComponent();
@@ -39,12 +45,26 @@ namespace vcs_WebCam_AForge0
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            lb_fps.Text = "";
+            lb_fps.Location = new Point(680 + 400, 20);
+            button1.Location = new Point(800 + 400, 20);
+            richTextBox1.Location = new Point(680 + 400, 60);
+
+            vsp = new AForge.Controls.VideoSourcePlayer();
+            this.Controls.Add(vsp);
+
+
+
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
             {
                 Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
+
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
                 Cam.Start();   // WebCam starts capturing images.
+
+                vsp.VideoSource = Cam;
+                vsp.Start();
 
                 //以下為WebCam訊息與調整視窗大小
                 Cam.VideoResolution = Cam.VideoCapabilities[0];
@@ -58,13 +78,36 @@ namespace vcs_WebCam_AForge0
 
                 pictureBox1.Size = new Size(ww, hh);
                 pictureBox1.Location = new Point(20, 20);
-                this.ClientSize = new Size(pictureBox1.Size.Width + 40, pictureBox1.Size.Height + 40);
+                //this.ClientSize = new Size(pictureBox1.Size.Width + 40, pictureBox1.Size.Height + 40);
+
+                vsp.Size = new Size(ww, hh);
+                vsp.Location = new Point(20 + 640 + 30, 20);
+                //this.ClientSize = new Size(vsp.Size.Width + 250, vsp.Size.Height + 40);
+
+                stopwatch = new Stopwatch();
+                stopwatch.Start();
             }
             else
             {
                 this.Text = "無影像裝置";
             }
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
+            vsp.SignalToStop();
+            vsp.WaitForStop();
+        }
+
 
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
@@ -78,18 +121,42 @@ namespace vcs_WebCam_AForge0
             GC.Collect();       //回收資源
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            if (Cam != null)
+            if (stopwatch == null)
             {
-                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                stopwatch = new Stopwatch();
+                stopwatch.Start();
+            }
+            else
+            {
+                stopwatch.Stop();
+
+                IVideoSource ivs = vsp.VideoSource;
+                int framesReceived1 = 0;
+
+                // get number of frames for the last second
+                if (ivs != null)
                 {
-                    Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
+                    framesReceived1 = ivs.FramesReceived;   //讀過資料後 會歸零
+
+                    float fps = 1000.0f * framesReceived1 / stopwatch.ElapsedMilliseconds;
+
+                    lb_fps.Text = fps.ToString("F2") + " fps";
+
+                    stopwatch.Reset();
+                    stopwatch.Start();
                 }
             }
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            var bitmap = vsp.GetCurrentVideoFrame();
+            bitmap.Save(filename, System.Drawing.Imaging.ImageFormat.Jpeg);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
     }
 }
+

@@ -25,7 +25,7 @@ namespace iMS_Link
         String software_version = "A05";
         String ims_camera_fullname = string.Empty;
 
-        int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
+        int flag_operation_mode = MODE_RELEASE_STAGE3E;  //不允許第四, 第七, 第八
 
         private const int MODE_RELEASE_STAGE0 = 0x00;   //release mode stage 0, normal use
         private const int MODE_RELEASE_STAGE1A = 0x01;   //release mode stage 1, 4X4 USB camera
@@ -33,6 +33,7 @@ namespace iMS_Link
         private const int MODE_RELEASE_STAGE1C = 0x0B;   //release mode stage 1, check result
         private const int MODE_RELEASE_STAGE2 = 0x02;   //release mode stage 2, AWB mode, writing camera serial
         private const int MODE_RELEASE_STAGE3 = 0x03;   //release mode stage 3, judge class
+        private const int MODE_RELEASE_STAGE3E = 0x0E;   //release mode stage 3, judge class, modify picture
         private const int MODE_RELEASE_STAGE4 = 0x04;   //release mode stage 4, write camera serial, 要使用STAGE0或2
         private const int MODE_RELEASE_STAGE5 = 0x05;   //release mode stage 5, packaging product
         private const int MODE_RELEASE_STAGE6 = 0x06;   //release mode stage 6, packaging product package6
@@ -797,6 +798,13 @@ namespace iMS_Link
                 flag_usb_mode = true;  //for webcam
                 flag_check_webcam_signal = false;
             }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE3E)
+            {
+                richTextBox1.Text += "MODE_RELEASE_STAGE3E\n";
+                flag_enaglb_awb_function = false;
+                flag_usb_mode = false;  //for webcam
+                flag_check_webcam_signal = false;
+            }
             else if (flag_operation_mode == MODE_RELEASE_STAGE5)
             {
                 richTextBox1.Text += "MODE_RELEASE_STAGE5\n";
@@ -1131,9 +1139,9 @@ namespace iMS_Link
             if (flag_operation_mode != MODE_RELEASE_STAGE0)
             {
                 //C# 軟體啟動、版權宣告視窗 
-                Frm_Start frm = new Frm_Start();    //實體化Form2視窗物件
+                Frm_Start frm = new Frm_Start();    //實體化 Frm_Start 視窗物件
                 frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
-                frm.ShowDialog();   //顯示Form2視窗
+                frm.ShowDialog();   //顯示 frm 視窗
             }
 
             toolTip1.SetToolTip(button17, "Zoom in");
@@ -1141,6 +1149,8 @@ namespace iMS_Link
             toolTip1.SetToolTip(button12, "Refresh");
             toolTip1.SetToolTip(button16, "影像存檔");
             toolTip1.SetToolTip(button15, "Play/Pause");
+            toolTip1.SetToolTip(bt_open_picture, "開啟圖片");
+            toolTip1.SetToolTip(bt_save_picture, "影像存檔");
 
             if (flag_display_mode == DISPLAY_SD)
             {
@@ -1220,7 +1230,7 @@ namespace iMS_Link
             bt_script_cancel.Visible = false;
             bt_cancel.Visible = false;
 
-            if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+            if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
             {
                 bt_zoom_Click(sender, e);
             }
@@ -1265,9 +1275,10 @@ namespace iMS_Link
                 }
             }
 
-            if ((flag_operation_mode <= MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
+            if ((flag_operation_mode <= MODE_RELEASE_STAGE3) || (flag_operation_mode <= MODE_RELEASE_STAGE3E) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
             {
                 //檢查存圖片的資料夾
+                //Path = Application.StartupPath + "\\pictureaa\\bb\\cc\\dd\\ee";   //可以一次建立多層資料夾
                 Path = Application.StartupPath + "\\picture";
                 if (Directory.Exists(Path) == false)     //確認資料夾是否存在
                 {
@@ -1345,7 +1356,7 @@ namespace iMS_Link
             richTextBox1.Text += "耗時 : " + (DateTime.Now - bootup_time).TotalSeconds.ToString("0.00") + " 秒\n\n";
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)
-                || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+                || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
             {
                 //高度不變
             }
@@ -1809,6 +1820,10 @@ namespace iMS_Link
                 {
                     this.tp_USB.Text = "第三站";
                 }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE3E)
+                {
+                    this.tp_USB.Text = "第三E站";
+                }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE4)
                 {
                     this.tp_USB.Text = "第二站";
@@ -1923,7 +1938,7 @@ namespace iMS_Link
                 timer_stage5.Enabled = false;
                 timer_stage1.Enabled = false;
             }
-            else if (flag_operation_mode == MODE_RELEASE_STAGE3)
+            else if ((flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
             {
                 cb_show_grid.Checked = true;
                 this.tp_Info.Parent = null;
@@ -1951,8 +1966,10 @@ namespace iMS_Link
                 timer_stage5.Enabled = false;
                 timer_stage1.Enabled = false;
                 timer_stage2.Enabled = false;
-                timer_stage3.Enabled = true;
-                //Comport_Scan();
+                if (flag_operation_mode == MODE_RELEASE_STAGE3)
+                    timer_stage3.Enabled = true;
+                else
+                    timer_stage3.Enabled = false;
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE5)
             {
@@ -4371,7 +4388,7 @@ namespace iMS_Link
                 lb_note3.Visible = en;
             }
 
-            if (flag_operation_mode == MODE_RELEASE_STAGE3)
+            if ((flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
             {
                 bt_manual_mode2.Visible = true;
                 bt_manual_mode2.Location = new Point(lb_sn_opal.Location.X + 100, lb_sn_opal.Location.Y - 10);
@@ -4380,7 +4397,7 @@ namespace iMS_Link
                 bt_manual_mode2.Visible = false;
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)
-                || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+                || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
             {
                 lb_fps.Visible = true;
                 lb_main_mesg0.Visible = true;
@@ -4481,7 +4498,7 @@ namespace iMS_Link
                 button34.Location = new Point(x_st + dx * 8, y_st);
                 button7.Location = new Point(x_st + dx * 9, y_st);
             }
-            else if ((flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+            else if ((flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
             {
                 x_st = 2;
                 y_st = 1;
@@ -4933,7 +4950,7 @@ namespace iMS_Link
                 lb_note3.Font = new Font("標楷體", lb_note3.Font.Size * 5 / 6);
 
                 if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B)
-                    || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+                    || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
                 {
                     //SD + big
                     //lb_fps.Location = new Point(1055, 55);
@@ -4952,7 +4969,7 @@ namespace iMS_Link
             else
             {
                 if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B)
-                    || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+                    || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
                 {
                     groupBox_sn1.Location = new Point(0, 600);
                     groupBox_sn1.Size = new Size(300, 200);
@@ -4983,6 +5000,22 @@ namespace iMS_Link
                 lb_auto_awb_cnt.Location = new Point(bt_awb_break.Location.X + 110, bt_awb_break.Location.Y + 5);
                 lb_fps.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 200, 50);
                 checkBox_only_picture.Location = new Point(lb_fps.Location.X, lb_fps.Location.Y - 35);
+            }
+
+            if (flag_operation_mode == MODE_RELEASE_STAGE3E)
+            {
+                groupBox_sn1.Visible = false;
+                lb_fps.Visible = false;
+                bt_open_picture.Location = new Point(160, 50);
+                bt_save_picture.Location = new Point(160, 120);
+
+                bt_open_picture.Visible = true;
+                bt_save_picture.Visible = true;
+            }
+            else
+            {
+                bt_open_picture.Visible = false;
+                bt_save_picture.Visible = false;
             }
 
             //TARGET RGB
@@ -5082,7 +5115,7 @@ namespace iMS_Link
                 groupBox_brightness.Visible = false;
             }
 
-            if (flag_operation_mode <= MODE_RELEASE_STAGE3)
+            if ((flag_operation_mode <= MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
             {
                 button49.Visible = true;
             }
@@ -5091,7 +5124,7 @@ namespace iMS_Link
                 button49.Visible = false;
             }
 
-            if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+            if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
             {
                 bt_zoom.Location = new Point(bt_zoom.Location.X - 31, bt_zoom.Location.Y);
             }
@@ -5150,7 +5183,7 @@ namespace iMS_Link
                 gb_ng_reason1.Visible = false;
             }
 
-            if (flag_operation_mode == MODE_RELEASE_STAGE3)
+            if ((flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
             {
                 lb_class.Visible = true;
                 bt_zoom.Visible = false;
@@ -6289,6 +6322,13 @@ namespace iMS_Link
                     timer_stage1.Enabled = false;
                     timer_stage2.Enabled = false;
                     timer_stage3.Enabled = true;
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE3E)
+                {
+                    richTextBox1.Text += "第三E站\n";
+                    timer_stage1.Enabled = false;
+                    timer_stage2.Enabled = false;
+                    timer_stage3.Enabled = false;
                 }
                 else
                 {
@@ -8527,7 +8567,7 @@ namespace iMS_Link
                     }
 
                     if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B)
-                        || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+                        || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
                     {
                         //HD + big
                         groupBox_sn1.Location = new Point(0, 600);
@@ -8658,7 +8698,7 @@ namespace iMS_Link
                     }
 
                     if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B)
-                        || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+                        || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
                     {
                         groupBox_sn1.Location = new Point(140, 535);
                         groupBox_sn1.Size = new Size(780, 50);
@@ -14073,6 +14113,11 @@ namespace iMS_Link
                 rb_5X5.Visible = false;
                 rb_NXN.Visible = false;
                 groupBox_gridlinecolor.Visible = false;
+            }
+
+            if (flag_operation_mode == MODE_RELEASE_STAGE3E)
+            {
+                reload_3e_picture();
             }
         }
 
@@ -30739,5 +30784,241 @@ namespace iMS_Link
                 cb_Gamma.Visible = false;
             }
         }
+
+        string stage_3e_filename = string.Empty;
+        Bitmap bitmap3e = null;
+
+        private void bt_open_picture_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "開啟圖片";
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";	//限定檔案格式
+            openFileDialog1.FilterIndex = 2;
+            //openFileDialog1.RestoreDirectory = false;
+            //openFileDialog1.InitialDirectory = Application.StartupPath;         //從目前目錄開始尋找檔案
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
+                stage_3e_filename = openFileDialog1.FileName;
+                //richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
+
+                bitmap3e = new Bitmap(stage_3e_filename);
+                Graphics g = Graphics.FromImage(bitmap3e);
+
+                int w;
+                int h;
+                try
+                {
+                    w = bitmap3e.Width;
+                    h = bitmap3e.Height;
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e08 : " + ex.Message + "\n";
+                    GC.Collect();       //回收資源
+                    return;
+                }
+
+                if (cb_show_grid.Checked == true)
+                {   //顯示格線
+                    int i;
+                    int j;
+
+                    j = 0;
+                    if (rb_3X3.Checked == true)
+                    {
+                        j = 3;
+                    }
+                    else if (rb_4X4.Checked == true)
+                    {
+                        j = 4;
+                    }
+                    else if (rb_5X5.Checked == true)
+                    {
+                        j = 80;
+                    }
+                    else if (rb_NXN.Checked == true)
+                    {
+                        j = 160;
+                    }
+                    else
+                    {
+                        j = 4;
+                    }
+
+                    if (j >= 2)
+                    {
+                        for (i = 1; i <= (j - 1); i++)
+                        {
+                            if (rb_gridlinecolor_white.Checked == true)
+                            {
+                                g.DrawLine(new Pen(Color.Silver, 1), w * i / j, 0, w * i / j, h);
+                                g.DrawLine(new Pen(Color.Silver, 1), 0, h * i / j, w, h * i / j);
+                            }
+                            else
+                            {
+                                g.DrawLine(new Pen(Color.Black, 1), w * i / j, 0, w * i / j, h);
+                                g.DrawLine(new Pen(Color.Black, 1), 0, h * i / j, w, h * i / j);
+                            }
+                        }
+                    }
+                }
+                show_main_message1("開啟圖片完成", S_OK, 30);
+                pictureBox1.Image = bitmap3e;
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
+        }
+
+        private void bt_save_picture_Click(object sender, EventArgs e)
+        {
+            save_3e_image_to_local_drive();
+        }
+
+        void save_3e_image_to_local_drive()
+        {
+            show_main_message1("存檔中...", S_OK, 10);
+            delay(10);
+
+            if (bitmap3e != null)
+            {
+                //Path = Application.StartupPath + "\\picture";
+
+                String filename1 = string.Empty;
+
+                filename1 = Application.StartupPath + "\\picture\\" +
+                    stage_3e_filename.Substring(stage_3e_filename.LastIndexOf("\\") + 1,
+                    stage_3e_filename.LastIndexOf(".") -
+                    (stage_3e_filename.LastIndexOf("\\") + 1)) + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_C";
+
+                //String file1 = file + ".jpg";
+                String filename1a = filename1 + ".bmp";
+                //String file3 = file + ".png";
+
+                try
+                {
+                    //bitmap3e.Save(@file1, ImageFormat.Jpeg);
+                    bitmap3e.Save(filename1a, ImageFormat.Bmp);
+                    //bitmap3e.Save(@file3, ImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename1a + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                    show_main_message1("已存檔BMP", S_OK, 30);
+                    show_main_message2("已存檔 : " + filename1a, S_OK, 30);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e40 : " + ex.Message + "\n";
+                    show_main_message1("存檔失敗", S_OK, 30);
+                    show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+                show_main_message1("無圖可存c", S_FALSE, 30);
+                show_main_message2("無圖可存c", S_FALSE, 30);
+            }
+            return;
+        }
+
+        private void rb_grid_CheckedChanged(object sender, EventArgs e)
+        {
+            if (flag_operation_mode == MODE_RELEASE_STAGE3E)
+            {
+                reload_3e_picture();
+            }
+        }
+
+        void reload_3e_picture()
+        {
+            if (bitmap3e != null)
+            {
+                bitmap3e = new Bitmap(stage_3e_filename);
+                Graphics g = Graphics.FromImage(bitmap3e);
+
+                int w;
+                int h;
+                try
+                {
+                    w = bitmap3e.Width;
+                    h = bitmap3e.Height;
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e08 : " + ex.Message + "\n";
+                    GC.Collect();       //回收資源
+                    return;
+                }
+
+                if (cb_show_grid.Checked == true)
+                {   //顯示格線
+                    int i;
+                    int j;
+
+                    j = 0;
+                    if (rb_3X3.Checked == true)
+                    {
+                        j = 3;
+                    }
+                    else if (rb_4X4.Checked == true)
+                    {
+                        j = 4;
+                    }
+                    else if (rb_5X5.Checked == true)
+                    {
+                        j = 80;
+                    }
+                    else if (rb_NXN.Checked == true)
+                    {
+                        j = 160;
+                    }
+                    else
+                    {
+                        j = 4;
+                    }
+
+                    if (j >= 2)
+                    {
+                        for (i = 1; i <= (j - 1); i++)
+                        {
+                            if (rb_gridlinecolor_white.Checked == true)
+                            {
+                                g.DrawLine(new Pen(Color.Silver, 1), w * i / j, 0, w * i / j, h);
+                                g.DrawLine(new Pen(Color.Silver, 1), 0, h * i / j, w, h * i / j);
+                            }
+                            else
+                            {
+                                g.DrawLine(new Pen(Color.Black, 1), w * i / j, 0, w * i / j, h);
+                                g.DrawLine(new Pen(Color.Black, 1), 0, h * i / j, w, h * i / j);
+                            }
+                        }
+                    }
+                }
+                pictureBox1.Image = bitmap3e;
+
+
+            }
+            else
+            {
+
+            }
+            return;
+
+        }
+
+        private void rb_gridlinecolor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (flag_operation_mode == MODE_RELEASE_STAGE3E)
+            {
+                reload_3e_picture();
+            }
+        }
     }
 }
+
+
