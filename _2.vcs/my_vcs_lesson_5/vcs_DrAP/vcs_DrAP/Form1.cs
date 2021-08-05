@@ -17,15 +17,15 @@ namespace vcs_DrAP
 {
     public partial class Form1 : Form
     {
-        private const int FUNCTION_NONE = 0x00;         //無
-        private const int FUNCTION_LIST_ONE = 0x01;     //轉出一層
-        private const int FUNCTION_LIST = 0x02;         //轉出
-        private const int FUNCTION_FIND_SAME_FILE = 0x03;    //找同檔
-        private const int FUNCTION_FIND_SIMILAR_FILE = 0x04; //找可能相同檔案
-        private const int FUNCTION_FIND_SMALL_FOLDER = 0x05;   //找小資料夾
-        private const int FUNCTION_FIND_BIG_FILE = 0x06;   //找大檔案
-        private const int FUNCTION_SEARCH = 0x07;       //搜尋
-
+        private const int FUNCTION_NONE = 0x00;                     //無
+        private const int FUNCTION_SEARCH_ALL_FILES = 0x01;         //轉出
+        private const int FUNCTION_SEARCH_ONE_LAYER_FILES = 0x02;   //轉出一層
+        private const int FUNCTION_FIND_SAME_FILES = 0x03;          //找同檔
+        private const int FUNCTION_FIND_SAME_FILES2 = 0x04;         //找可能相同檔案
+        private const int FUNCTION_FIND_SMALL_FOLDERS = 0x05;        //找小資料夾
+        private const int FUNCTION_FIND_EMPTY_FOLDERS = 0x06;       //找空資料夾
+        private const int FUNCTION_FIND_BIG_FILES = 0x07;           //找大檔案
+        private const int FUNCTION_SEARCH_TEXT = 0x08;  //搜尋關鍵字, vcs, python, matlab...
         private const int FUNCTION_TEST = 0xFF;         //測試
 
         private const int FILETYPE_VIDEO = 0x00;        //影片
@@ -150,9 +150,9 @@ namespace vcs_DrAP
             //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
             ToolTip toolTip1 = new ToolTip();
             //SetToolTip：定義控制項會跳出提示的文字
-            toolTip1.SetToolTip(button14, "Add Directory");
-            toolTip1.SetToolTip(button15, "Delete Directory");
-            toolTip1.SetToolTip(button16, "Delete All Directory");
+            toolTip1.SetToolTip(bt_add_dir, "Add Directory");
+            toolTip1.SetToolTip(bt_remove_dir, "Remove Directory");
+            toolTip1.SetToolTip(bt_clear_dir, "Remove All Directory");
 
             //以下為提示視窗的設定(通常會設定的部分)
             //ToolTipIcon：設定顯示在提示視窗的圖示類型。
@@ -181,8 +181,57 @@ namespace vcs_DrAP
             this.Location = new System.Drawing.Point(0, 0);
             this.listBox1.BorderStyle = BorderStyle.Fixed3D;
             this.listView1.Size = new System.Drawing.Size(1900, 500);
-
             this.richTextBox2.Size = new System.Drawing.Size(594, 388);
+
+            int x_st = 12;
+            int y_st = 12;
+
+            listBox1.Location = new Point(x_st, y_st);
+
+            int dx = 10;
+            int dy = 25;
+
+            x_st += listBox1.Size.Width+dx;
+            bt_add_dir.Location = new Point(x_st, y_st + dy * 0);
+            bt_remove_dir.Location = new Point(x_st, y_st + dy * 1);
+            bt_clear_dir.Location = new Point(x_st, y_st + dy * 2);
+
+            x_st += bt_add_dir.Size.Width + dx;
+            tb_search_text_pattern.Location = new Point(x_st, y_st + dy * 0);
+
+            x_st += tb_search_text_pattern.Size.Width + dx;
+            bt_find_big_files.Location = new Point(x_st, y_st + dy * 0);
+
+            x_st += bt_find_big_files.Size.Width + dx;
+            bt_start_files.Location = new Point(x_st, y_st + dy * 0);
+
+            x_st += bt_start_files.Size.Width + dx;
+            bt_save_data.Location = new Point(x_st, y_st + dy * 0);
+
+            x_st += bt_save_data.Size.Width + dx;
+            bt_search_all_files.Location = new Point(x_st, y_st + dy * 0);
+
+            bt_find_same_files.Location = new Point(x_st, y_st + dy * 1);
+
+            x_st += bt_search_all_files.Size.Width + dx;
+            bt_search_one_layer_files.Location = new Point(x_st, y_st + dy * 0);
+
+            x_st += bt_search_one_layer_files.Size.Width + dx;
+            bt_clear_data.Location = new Point(x_st, y_st + dy * 0);
+
+            x_st += bt_clear_data.Size.Width + dx;
+            bt_copy_data.Location = new Point(x_st, y_st + dy * 0);
+
+            x_st += bt_copy_data.Size.Width + dx;
+            bt_help.Location = new Point(x_st, y_st + dy * 0);
+
+            x_st += bt_help.Size.Width + dx;
+            bt_delete_file.Location = new Point(x_st, y_st + dy * 0);
+
+
+
+
+
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_copy_rtb_data.Location = new Point(bt_clear2.Location.X, bt_copy_rtb_data.Location.Y);
 
@@ -260,7 +309,7 @@ namespace vcs_DrAP
             Properties.Settings.Default.Save();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void bt_search_one_layer_files_Click(object sender, EventArgs e)
         {
             //轉出一層
             richTextBox2.Text += "開始計時\n";
@@ -367,7 +416,7 @@ namespace vcs_DrAP
             this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void bt_open_dir_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -489,7 +538,7 @@ namespace vcs_DrAP
                 if (flag_search_mode == 1)
                 {
                     bool res;
-                    res = fi.FullName.ToLower().Replace(" ", "").Contains(textBox2.Text.ToLower().Replace("-", ""));
+                    res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
                     if (res == false)
                         return;
                     else
@@ -728,7 +777,7 @@ namespace vcs_DrAP
                 if (flag_search_mode == 1)
                 {
                     bool res;
-                    res = i1.Name.ToLower().Replace(" ", "").Contains(textBox2.Text.ToLower().Replace("-", ""));
+                    res = i1.Name.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
                     if (res == false)
                         continue;
                     else
@@ -780,7 +829,7 @@ namespace vcs_DrAP
                 ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
 
                 bool res;
-                res = fileinfos[i].filename.ToLower().Replace(" ", "").Contains(textBox2.Text.ToLower().Replace("-", ""));
+                res = fileinfos[i].filename.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
                 if (res == false)
                     continue;
                 else
@@ -905,7 +954,7 @@ namespace vcs_DrAP
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void bt_search_all_files_Click(object sender, EventArgs e)
         {
             //轉出
             richTextBox2.Text += "開始計時\n";
@@ -997,7 +1046,7 @@ namespace vcs_DrAP
             //richTextBox2.Text += "change file type to " + filetype2 + "\n";
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void bt_clear_data_Click(object sender, EventArgs e)
         {
             fileinfos.Clear();
             listView1.Clear();
@@ -1033,7 +1082,7 @@ namespace vcs_DrAP
             int selNdx;
             string fullname;
 
-            if (flag_function == FUNCTION_FIND_SMALL_FOLDER)
+            if (flag_function == FUNCTION_FIND_SMALL_FOLDERS)
             {
                 selNdx = listView1.SelectedIndices[0];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
@@ -1068,7 +1117,7 @@ namespace vcs_DrAP
             //richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
             //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
 
-            if (flag_function == FUNCTION_FIND_BIG_FILE)
+            if (flag_function == FUNCTION_FIND_BIG_FILES)
             {
                 //richTextBox2.Text += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
                 //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
@@ -1076,7 +1125,7 @@ namespace vcs_DrAP
             }
             else
             {
-                if (flag_function == FUNCTION_SEARCH)
+                if (flag_function == FUNCTION_SEARCH_TEXT)
                 {
                     //搜尋字串模式
                     richTextBox2.Text += "aaaa b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
@@ -1123,7 +1172,7 @@ namespace vcs_DrAP
             }
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void bt_start_files_Click(object sender, EventArgs e)
         {
             /*
             richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
@@ -1151,7 +1200,7 @@ namespace vcs_DrAP
                 listView1.Items[selNdx].Selected = true;    //選到的項目
                 //richTextBox2.Text += listView1.Items[selNdx].Text + "\n";
 
-                if (flag_function == FUNCTION_SEARCH)
+                if (flag_function == FUNCTION_SEARCH_TEXT)
                 {
                     all_filename += " \"" + listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].Text + "\"";
                 }
@@ -1235,8 +1284,8 @@ namespace vcs_DrAP
 
             if (e.KeyCode == Keys.Enter)
             {
-                //按Enter 等同於 button9_Click
-                button9_Click(sender, e);
+                //按Enter 等同於 bt_start_files_Click
+                bt_start_files_Click(sender, e);
             }
 
             if (e.KeyCode == Keys.F2)
@@ -1257,12 +1306,12 @@ namespace vcs_DrAP
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void bt_save_data_Click(object sender, EventArgs e)
         {
-
+            richTextBox2.Text += "儲存資料成檔案\tTBD\n";
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void bt_copy_data_Click(object sender, EventArgs e)
         {
             if (this.listView1.Items.Count <= 0)
             {
@@ -1311,7 +1360,7 @@ namespace vcs_DrAP
         private void bt_find_big_files_Click(object sender, EventArgs e)
         {
             //搜尋大檔
-            button9.BackgroundImage = vcs_DrAP.Properties.Resources.potplayer;
+            bt_start_files.BackgroundImage = vcs_DrAP.Properties.Resources.potplayer;
             bt_find_big_files.BackColor = Color.Red;
 
             Application.DoEvents();
@@ -1328,7 +1377,7 @@ namespace vcs_DrAP
                 richTextBox1.Text += "取得容量限制數字失敗\n";
                 return;
             }
-            flag_function = FUNCTION_FIND_BIG_FILE;
+            flag_function = FUNCTION_FIND_BIG_FILES;
             find_and_show_big_files();
             bt_find_big_files.BackColor = System.Drawing.SystemColors.ControlLight;
         }
@@ -1597,7 +1646,7 @@ namespace vcs_DrAP
             show_file_info4();
         }
 
-        private void button14_Click(object sender, EventArgs e)
+        private void bt_add_dir_Click(object sender, EventArgs e)
         {
             //folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -1614,14 +1663,14 @@ namespace vcs_DrAP
             flag_search_done = 0;
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void bt_remove_dir_Click(object sender, EventArgs e)
         {
             richTextBox2.Text += "移除了 " + listBox1.SelectedItem + "\n";
             old_search_path.Remove(folderBrowserDialog1.SelectedPath);
             listBox1.Items.Remove(listBox1.SelectedItem);
         }
 
-        private void button16_Click(object sender, EventArgs e)
+        private void bt_clear_dir_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
             old_search_path.Clear();
@@ -1783,7 +1832,7 @@ namespace vcs_DrAP
             }
             richTextBox1.Text += "找小資料夾\n";
 
-            flag_function = FUNCTION_FIND_SMALL_FOLDER;
+            flag_function = FUNCTION_FIND_SMALL_FOLDERS;
             folderinfos.Clear();
 
             total_size = 0;
@@ -2290,7 +2339,7 @@ namespace vcs_DrAP
             richTextBox1.Clear();
             richTextBox2.Clear();
             removeDrawDiskSpace();
-            flag_function = FUNCTION_SEARCH;
+            flag_function = FUNCTION_SEARCH_TEXT;
 
             if (mode == SEARCH_MODE_VCS)
             {
@@ -2333,7 +2382,7 @@ namespace vcs_DrAP
                 path = @"C:\_git\vcs\_2.vcs";
             }
 
-            button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
+            bt_start_files.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             Application.DoEvents();
 
             if (textBox3.Text == "")

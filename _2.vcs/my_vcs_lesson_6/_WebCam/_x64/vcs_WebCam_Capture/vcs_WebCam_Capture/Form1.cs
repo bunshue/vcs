@@ -32,7 +32,6 @@ namespace vcs_WebCam_Capture
         private void button2_Click(object sender, EventArgs e)
         {
             webcam.Stop();
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -43,11 +42,17 @@ namespace vcs_WebCam_Capture
         private void button4_Click(object sender, EventArgs e)
         {
             pictureBox2.Image = pictureBox1.Image;
-        }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            Helper.SaveImageCapture(pictureBox2.Image);
+            if (pictureBox2.Image != null)
+            {
+                string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                Helper.SaveImageCapture(filename, pictureBox2.Image);
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)

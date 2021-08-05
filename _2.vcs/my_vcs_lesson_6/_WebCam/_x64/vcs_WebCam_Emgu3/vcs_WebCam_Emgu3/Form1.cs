@@ -172,11 +172,9 @@ namespace vcs_WebCam_Emgu3
             Application.DoEvents();
             System.Threading.Thread.Sleep(1000);
 
-
             video.Dispose();
 
             richTextBox1.Text += "done\n";
-
         }
     }
 }

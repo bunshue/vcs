@@ -280,5 +280,17 @@ namespace vcs_WebCam_Emgu1
             richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
             richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (flag_recording == true)
+            {
+                //錄影完需將影像停止不然會出錯
+                flag_recording = false;
+                video.Dispose();
+                richTextBox1.Text += "停止錄影\n";
+            }
+        }
     }
 }
+
