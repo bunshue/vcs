@@ -30,7 +30,7 @@ namespace vcs_RichTextBox8
             int dy;
 
             //button
-            x_st = 920;
+            x_st = 1100;
             y_st = 10;
             dx = 100;
             dy = 70;
@@ -43,11 +43,6 @@ namespace vcs_RichTextBox8
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            richTextBox2.Text += "A ";
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -119,7 +114,7 @@ namespace vcs_RichTextBox8
             //Font f = new Font("標楷體", 20F, FontStyle.Regular, GraphicsUnit.Point);
             Font f = new Font("標楷體", 20F, FontStyle.Bold, GraphicsUnit.Point);      //粗體
 
- 
+
             richTextBox1.Font = f;
 
         }
@@ -134,8 +129,29 @@ namespace vcs_RichTextBox8
 
         }
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            //richTextBox2.Text += "A ";
+        }
 
+        private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //抓 Ctrl + R
+            byte asc = Convert.ToByte(e.KeyChar);
+            //richTextBox2.Text += "|  " + e.KeyChar.ToString() + "  |  " + asc.ToString() + "  |  " + asc.ToString("X2") + "  |\n";
+            if (asc == 18)  //ctrl + A = 1, ctrl + B = 2, ..., ctrl + R = 18
+            {
+                e.Handled = true;
+                richTextBox2.Text += "你按了 ctrl + R\n";
+            }
 
+            //抓 Enter 鍵
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
+                richTextBox2.Text += "你按了 Enter\n";
+            }
+        }
     }
 }
 

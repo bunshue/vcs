@@ -27,8 +27,8 @@ namespace vcs_Draw_Dynamics3
 
         List<float[]> pts = new List<float[]>();    //二維List for float
 
-        int ball_size_width = 20;
-        int ball_size_height = 20;
+        int ball_size_width = 30;
+        int ball_size_height = 30;
 
         public Form1()
         {
@@ -108,21 +108,21 @@ namespace vcs_Draw_Dynamics3
         {
             GraphicsUnit units = GraphicsUnit.Pixel;
 
-            Bitmap bmp;
+            Bitmap bmp_pisa;
 
-            bmp = new Bitmap("..//..//Leaning_Tower_of_Pisa.jpg");
+            bmp_pisa = new Bitmap("..//..//Leaning_Tower_of_Pisa.jpg");
 
-            int w = bmp.Width;
-            int h = bmp.Height;
+            int picture_width = bmp_pisa.Width;
+            int picture_height = bmp_pisa.Height;
 
-            //richTextBox1.Text += "W = " + bmp.Width.ToString() + ", H = " + bmp.Height.ToString() + "\n";
+            //richTextBox1.Text += "W = " + bmp_pisa.Width.ToString() + ", H = " + bmp_pisa.Height.ToString() + "\n";
 
-            int ww = w * 7 / 10;
-            int hh = h * 7 / 10;
+            int w = picture_width * 7 / 10;
+            int h = picture_height * 7 / 10;
 
-            Rectangle destRect1 = new Rectangle(0, 0, ww, hh);
+            Rectangle destRect1 = new Rectangle(0, 0, w, h);
 
-            e.Graphics.DrawImage(bmp, destRect1, 0, 0, w, h, units);
+            e.Graphics.DrawImage(bmp_pisa, destRect1, 0, 0, picture_width, picture_height, units);
 
             //Pen p = new Pen(Color.Red, 10);
             //e.Graphics.DrawLine(p, 480, y_st0, 480, y_st0 + 480);
@@ -135,10 +135,44 @@ namespace vcs_Draw_Dynamics3
             int point_width = 10;
             int len;
             int i;
+
+
+            int ww = ball_size_width;
+            int hh = ball_size_height;
+
+            Bitmap bmp;
+
+            if (rb1.Checked == true)
+                bmp = new Bitmap("..//..//img//AB_red.jpg");
+            else if (rb2.Checked == true)
+                bmp = new Bitmap("..//..//img//AB_yellow.jpg");
+            else if (rb3.Checked == true)
+                bmp = new Bitmap("..//..//img//AB_blue.jpg");
+            else if (rb4.Checked == true)
+                bmp = new Bitmap("..//..//img//AB_black.jpg");
+            else
+                bmp = new Bitmap("..//..//img//AB_red.jpg");
+
+            //DrawFillCircle(e, x_st + ww / 2, H - y_st - hh / 2, 15, Color.Blue);
+
+            //Rectangle destRect1 = new Rectangle(x_st - ww / 2, H - y_st - hh / 2, ww, hh);
+
+            ww = hh * bmp.Width / bmp.Height;   //符合比例
+            //e.Graphics.DrawImage(bmp, destRect1a, 0, 0, bmp.Width, bmp.Height, units);
+            //e.Graphics.FillRectangle(new SolidBrush(Color.Red), x_st - ww / 2, H - y_st - hh / 2, ww, hh);
+
+            //richTextBox1.Text += "ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+
+
+
             if (y_st <= y_sp0)
             {
-                e.Graphics.FillEllipse(newBrush, x_st, y_st, ball_size_width, ball_size_height);
-                e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, ball_size_width, ball_size_height);
+                //e.Graphics.FillEllipse(newBrush, x_st, y_st, ball_size_width, ball_size_height);
+                //e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, ball_size_width, ball_size_height);
+
+                Rectangle destRect1a = new Rectangle((int)x_st, (int)y_st, ww, hh);
+                e.Graphics.DrawImage(bmp, destRect1a, 0, 0, bmp.Width, bmp.Height, units);
+
                 pts.Add(new float[] { (float)drop_sec, x_st, y_st });
 
                 len = pts.Count;
@@ -171,6 +205,10 @@ namespace vcs_Draw_Dynamics3
 
                 e.Graphics.FillEllipse(newBrush, x_st, y_st, ball_size_width, ball_size_height);
                 e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, ball_size_width, ball_size_height);
+
+                Rectangle destRect1a = new Rectangle((int)x_st, (int)y_st, ww, hh);
+                e.Graphics.DrawImage(bmp, destRect1a, 0, 0, bmp.Width, bmp.Height, units);
+
                 pts.Add(new float[] { (float)drop_sec, x_st, y_st });
                 len = pts.Count;
                 if (len > 0)

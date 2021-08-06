@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1111
+﻿namespace vcs_ListBox8
 {
     partial class DrawListBox
     {

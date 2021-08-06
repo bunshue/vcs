@@ -42,26 +42,31 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 12);
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.richTextBox1.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(443, 549);
+            this.richTextBox1.Size = new System.Drawing.Size(707, 716);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "第一集： 源头 Beginnings\n\n第二集： 理念的力量 The Power of Ideas\n\n第三集： 香料和丝绸之路 Spice Routes and " +
                 "Silk Roads\n\n第四集： 黄金时代 Ages of Gold\n\n第五集： 两大洋交汇 The Meeting of Two Oceans\n\n第六集： 自" +
                 "由和解放 Freedom and Liberation\n\n\n\n";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(461, 12);
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.richTextBox2.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox2.Location = new System.Drawing.Point(707, 0);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(443, 549);
+            this.richTextBox2.Size = new System.Drawing.Size(387, 716);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.Text = "";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(938, 66);
+            this.button1.Location = new System.Drawing.Point(1100, 65);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 50);
             this.button1.TabIndex = 2;
@@ -71,7 +76,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(938, 138);
+            this.button2.Location = new System.Drawing.Point(1100, 137);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 50);
             this.button2.TabIndex = 3;
@@ -81,7 +86,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(938, 206);
+            this.button3.Location = new System.Drawing.Point(1100, 205);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 50);
             this.button3.TabIndex = 4;
@@ -91,7 +96,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(938, 270);
+            this.button4.Location = new System.Drawing.Point(1100, 269);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(120, 50);
             this.button4.TabIndex = 5;
@@ -101,7 +106,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(938, 335);
+            this.button5.Location = new System.Drawing.Point(1100, 334);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(120, 50);
             this.button5.TabIndex = 6;
@@ -111,7 +116,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(938, 394);
+            this.button6.Location = new System.Drawing.Point(1100, 393);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(120, 50);
             this.button6.TabIndex = 7;
@@ -121,7 +126,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(938, 451);
+            this.button7.Location = new System.Drawing.Point(1100, 450);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(120, 50);
             this.button7.TabIndex = 8;
@@ -131,11 +136,10 @@
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(938, 12);
+            this.button0.Location = new System.Drawing.Point(1100, 9);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(120, 50);
             this.button0.TabIndex = 9;
-            this.button0.Text = "button0";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -143,7 +147,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1126, 616);
+            this.ClientSize = new System.Drawing.Size(1228, 716);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);

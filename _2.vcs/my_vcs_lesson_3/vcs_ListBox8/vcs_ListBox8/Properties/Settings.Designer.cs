@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApplication1111.Properties
+namespace vcs_ListBox8.Properties
 {
 
 

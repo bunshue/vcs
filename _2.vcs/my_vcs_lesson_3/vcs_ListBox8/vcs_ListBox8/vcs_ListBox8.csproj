@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EB818515-9556-4CCE-8697-6DCE4FD7A861}</ProjectGuid>
+    <ProjectGuid>{65E25D4E-7A35-4A92-8644-F6CCEBA4D0BC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication1111</RootNamespace>
-    <AssemblyName>WindowsFormsApplication1111</AssemblyName>
+    <RootNamespace>vcs_ListBox8</RootNamespace>
+    <AssemblyName>vcs_ListBox8</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

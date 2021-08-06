@@ -194,7 +194,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 40);
             this.button8.TabIndex = 8;
-            this.button8.Text = "Environment屬性";
+            this.button8.Text = "取得硬碟資訊";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -932,6 +932,7 @@
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(200, 40);
             this.button48.TabIndex = 80;
+            this.button48.Text = "Environment屬性";
             this.button48.UseVisualStyleBackColor = true;
             this.button48.Click += new System.EventHandler(this.button48_Click);
             // 
@@ -942,6 +943,7 @@
             this.button49.Name = "button49";
             this.button49.Size = new System.Drawing.Size(200, 40);
             this.button49.TabIndex = 79;
+            this.button49.Text = "Environment參數";
             this.button49.UseVisualStyleBackColor = true;
             this.button49.Click += new System.EventHandler(this.button49_Click);
             // 

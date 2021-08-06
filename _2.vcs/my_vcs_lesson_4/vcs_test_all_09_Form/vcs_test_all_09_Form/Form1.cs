@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Drawing2D; //for GraphicsPath
-
 using System.Runtime.InteropServices;   //for DllImportAttribute
 
 namespace vcs_test_all_09_Form
@@ -16,7 +15,6 @@ namespace vcs_test_all_09_Form
     public partial class Form1 : Form
     {
         private Form2 F2;   // A variable that refers to the instance of Form2.
-
 
         public const Int32 AW_HOR_POSITIVE = 0x00000001;
         public const Int32 AW_HOR_NEGATIVE = 0x00000002;
@@ -30,9 +28,6 @@ namespace vcs_test_all_09_Form
 
         [DllImportAttribute("user32.dll")]
         private static extern bool AnimateWindow(IntPtr hwnd, int dwTime, int dwFlags);
-
-
-
 
         public Form1()
         {
@@ -620,8 +615,28 @@ namespace vcs_test_all_09_Form
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.DrawRectangle(new Pen(Color.Green), new Rectangle(00, 00, this.ClientSize.Width - 1, this.ClientSize.Height - 1));
+            g.DrawRectangle(new Pen(Color.Green, 10), new Rectangle(00, 00, this.ClientSize.Width - 1, this.ClientSize.Height - 1));    //畫邊框
+
+            ShowPropertiesOfSlateBlue(e);   //用OnPaint寫字範例
         }
+
+        private void ShowPropertiesOfSlateBlue(PaintEventArgs e)
+        {
+            Color slateBlue = Color.FromName("SlateBlue");
+            byte g = slateBlue.G;
+            byte b = slateBlue.B;
+            byte r = slateBlue.R;
+            byte a = slateBlue.A;
+            string text = String.Format("用OnPaint寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " +
+                "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
+            int x_st = label1.Location.X + 630;
+            int y_st = label1.Location.Y - 20;
+            e.Graphics.DrawString(text,
+                new Font(this.Font, FontStyle.Italic),
+                new SolidBrush(slateBlue),
+                new RectangleF(new PointF(x_st, y_st), this.Size));
+        }
+
 
         #region 引用方法:為窗體繪製圓角(新增至窗體Resize事件)
         //此方法設定窗體有效區域為圓角矩形

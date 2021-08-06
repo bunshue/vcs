@@ -1279,19 +1279,17 @@ namespace vcs_test_all_01_DateTime
 
         private void button33_Click(object sender, EventArgs e)
         {
-            System.Globalization.ChineseLunisolarCalendar chinseCaleander =//創建日歷對象ChineseLunisolarCalendar,將時間分成多個部分來表示，如分成年、月和日。 年按農歷計算，而日和月按陰陽歷計算。
-new System.Globalization.ChineseLunisolarCalendar();
+            //創建日歷對象ChineseLunisolarCalendar,將時間分成多個部分來表示，如分成年、月和日。 年按農歷計算，而日和月按陰陽歷計算。
+            System.Globalization.ChineseLunisolarCalendar chinseCaleander = new System.Globalization.ChineseLunisolarCalendar();
             string TreeYear = "鼠牛虎兔龍蛇馬羊猴雞狗豬";//創建字符串對象
             int intYear = chinseCaleander.GetSexagenaryYear(DateTime.Now);//計算年信息,GetSexagenaryYear計算與指定日期對應的甲子（60 年）循環中的年。
-            string Tree = TreeYear.Substring(chinseCaleander.//得到生肖信息
-                GetTerrestrialBranch(intYear) - 1, 1);//GetTerrestrialBranch計算甲子（60 年）循環中指定年份的地支,
+            //得到生肖信息
+            string Tree = TreeYear.Substring(chinseCaleander.GetTerrestrialBranch(intYear) - 1, 1);//GetTerrestrialBranch計算甲子（60 年）循環中指定年份的地支,
             //Substring(x,y)從此實例檢索子字符串。 子字符串從指定的字符位置開始且具有指定的長度
             richTextBox1.Text += "今年是十二生肖 " + Tree + " 年\n";
 
-
-            richTextBox1.Text += "今天是： "//顯示星期信息
-                + DateTime.Now.ToString("dddd") + "\n";//dddd是星期日,ddd是日,dd是01
-
+            //顯示星期信息
+            richTextBox1.Text += "今天是： " + DateTime.Now.ToString("dddd") + "\n";//dddd是星期日,ddd是日,dd是01
         }
 
         private void button47_Click(object sender, EventArgs e)
@@ -1686,5 +1684,19 @@ new System.Globalization.ChineseLunisolarCalendar();
             string date2 = DateTime.Today.AddDays(12).Month.ToString() + "/" + DateTime.Today.AddDays(12).Day.ToString();
             richTextBox1.Text += "12天後的日期是 : " + date2.ToString() + "\n";
         }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+            /*
+            //兩時間相隔
+            DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 30);
+            //DateTime dt1 = new DateTime(2021, 5, 21, 9, 15, 30);
+            DateTime dt2 = DateTime.Now;
+            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Year, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 年\n";
+            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Month, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 月\n";
+            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Day, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 天\n";
+            */
+        }
     }
 }
+

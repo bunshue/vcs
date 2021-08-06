@@ -725,8 +725,9 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(164, 46);
             this.button44.TabIndex = 56;
-            this.button44.Text = "xxx";
+            this.button44.Text = "兩時間相隔";
             this.button44.UseVisualStyleBackColor = true;
+            this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
             // button45
             // 

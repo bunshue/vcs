@@ -191,7 +191,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(155, 55);
             this.button10.TabIndex = 11;
-            this.button10.Text = "Environment參數";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -358,7 +357,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(155, 55);
             this.button23.TabIndex = 27;
-            this.button23.Text = "取得硬碟資訊";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 

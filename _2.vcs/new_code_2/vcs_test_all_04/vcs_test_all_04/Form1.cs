@@ -302,7 +302,6 @@ namespace vcs_test_all_04
         }
 
 
-
         private void button12_Click(object sender, EventArgs e)
         {
 
@@ -310,25 +309,10 @@ namespace vcs_test_all_04
 
         private void button13_Click(object sender, EventArgs e)
         {
-            DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 30);
-            //DateTime dt1 = new DateTime(2021, 5, 21, 9, 15, 30);
-            DateTime dt2 = DateTime.Now;
-            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Year, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 年\n";
-            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Month, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 月\n";
-            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Day, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 天\n";
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //创建日历对象
-            System.Globalization.ChineseLunisolarCalendar chinseCaleander = new System.Globalization.ChineseLunisolarCalendar();
-            string TreeYear = "鼠牛虎兔龍蛇馬羊猴雞狗豬";//创建字符串对象
-            int intYear = chinseCaleander.GetSexagenaryYear(DateTime.Now);//计算年信息
-            //得到生肖信息
-            string Tree = TreeYear.Substring(chinseCaleander.GetTerrestrialBranch(intYear) - 1, 1);
-
-            richTextBox1.Text += "今年是十二生肖 " + Tree + " 年\n";
-
         }
 
         private void button15_Click(object sender, EventArgs e)

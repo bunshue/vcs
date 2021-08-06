@@ -227,7 +227,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(132, 49);
             this.button13.TabIndex = 15;
-            this.button13.Text = "取得計算機的顯示設備訊息";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -237,7 +236,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(132, 49);
             this.button14.TabIndex = 16;
-            this.button14.Text = "取得系統環境變數";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -247,7 +245,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(132, 49);
             this.button15.TabIndex = 17;
-            this.button15.Text = "檢視目前系統版本";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -257,7 +254,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(132, 49);
             this.button16.TabIndex = 18;
-            this.button16.Text = "檢索系統中正在執行的任務";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -267,7 +263,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(132, 49);
             this.button17.TabIndex = 19;
-            this.button17.Text = "取得顯示設備相關資訊";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -277,7 +272,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(132, 49);
             this.button18.TabIndex = 20;
-            this.button18.Text = "取得音效設備相關資訊";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -382,7 +376,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(132, 49);
             this.button22.TabIndex = 29;
-            this.button22.Text = "取得映射驅動器路徑";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -392,7 +385,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(132, 49);
             this.button23.TabIndex = 30;
-            this.button23.Text = "判斷驅動器類型";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
