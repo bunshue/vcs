@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Globalization; //for CultureInfo   //for 民國記年 農曆
 using System.Collections;   //for IEnumerable
+using Microsoft.VisualBasic;    //for DateAndTime, 需要 參考/加入參考/.NET/Microsoft.VisualBasic
 
 namespace vcs_test_all_01_DateTime
 {
@@ -1687,7 +1688,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button44_Click(object sender, EventArgs e)
         {
-            /*
             //兩時間相隔
             DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 30);
             //DateTime dt1 = new DateTime(2021, 5, 21, 9, 15, 30);
@@ -1695,7 +1695,6 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Year, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 年\n";
             richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Month, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 月\n";
             richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Day, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 天\n";
-            */
         }
     }
 }

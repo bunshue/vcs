@@ -45,6 +45,12 @@ namespace vcs_Draw_Dynamics
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
 
+        int ball_size_width0 = 40;
+        int ball_size_height0 = 40;
+
+        int ball_size_width = 40;
+        int ball_size_height = 40;
+
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
 
@@ -134,8 +140,8 @@ namespace vcs_Draw_Dynamics
 
             pictureBox1.Location = new Point(50, 50);
             pictureBox1.Size = new Size(1350, 900);
-            pictureBox1.BackColor = Color.FromArgb(244, 252, 254);
-            pictureBox_bird.BackColor = Color.FromArgb(244, 252, 254);
+            pictureBox1.BackColor = Color.White;
+            pictureBox_bird.BackColor = Color.White;
 
             lb_shoot_count.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - 300, pictureBox1.Location.Y + 20);
             lb_main_mesg.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - 300, pictureBox1.Location.Y + 20 + 40);
@@ -222,8 +228,8 @@ namespace vcs_Draw_Dynamics
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            int ww = 40;
-            int hh = 40;
+            int ww = ball_size_width;
+            int hh = ball_size_height;
 
             List<PointF> Points = new List<PointF>();
             /*
@@ -267,15 +273,15 @@ namespace vcs_Draw_Dynamics
             Bitmap bmp;
 
             if (rb1.Checked == true)
-                bmp = new Bitmap("..//..//img//AB_red.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_red.jpg");
             else if (rb2.Checked == true)
-                bmp = new Bitmap("..//..//img//AB_yellow.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_yellow.jpg");
             else if (rb3.Checked == true)
-                bmp = new Bitmap("..//..//img//AB_blue.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_blue.jpg");
             else if (rb4.Checked == true)
-                bmp = new Bitmap("..//..//img//AB_black.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_black.jpg");
             else
-                bmp = new Bitmap("..//..//img//AB_red.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_red.jpg");
 
             //DrawFillCircle(e, x_st + ww / 2, H - y_st - hh / 2, 15, Color.Blue);
 
@@ -403,23 +409,23 @@ namespace vcs_Draw_Dynamics
 
             if (use_pig_kind == 0)
             {
-                bmp = new Bitmap("..//..//img//AB_pig1.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_pig1.jpg");
             }
             else if (use_pig_kind == 1)
             {
-                bmp = new Bitmap("..//..//img//AB_pig2.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_pig2.jpg");
             }
             else if (use_pig_kind == 2)
             {
-                bmp = new Bitmap("..//..//img//AB_pig3.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_pig3.jpg");
             }
             else if (use_pig_kind == 3)
             {
-                bmp = new Bitmap("..//..//img//AB_pig4.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_pig4.jpg");
             }
             else
             {
-                bmp = new Bitmap("..//..//img//AB_pig1.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_pig1.jpg");
             }
 
             Rectangle destRect2 = new Rectangle(W - 100 - ww / 2, 600 - hh / 2, ww, hh);
@@ -566,37 +572,39 @@ namespace vcs_Draw_Dynamics
             if (rb1.Checked == true)
             {
                 richTextBox1.Text += "改用 紅鳥 1 Kg\n";
-                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_red.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_red.jpg");
                 mass = 1;
                 use_bird_kind = 0;
             }
             else if (rb2.Checked == true)
             {
                 richTextBox1.Text += "改用 黃鳥 0.6 Kg\n";
-                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_yellow.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_yellow.jpg");
                 mass = 0.6f;
                 use_bird_kind = 1;
             }
             else if (rb3.Checked == true)
             {
                 richTextBox1.Text += "改用 藍鳥 0.3 Kg\n";
-                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_blue.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_blue.jpg");
                 mass = 0.3f;
                 use_bird_kind = 2;
             }
             else if (rb4.Checked == true)
             {
                 richTextBox1.Text += "改用 炸彈鳥 2 Kg\n";
-                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_black.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_black.jpg");
                 mass = 2;
                 use_bird_kind = 3;
             }
             else
             {
                 richTextBox1.Text += "改用 紅鳥 1 Kg\n";
-                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_red.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_red.jpg");
                 use_bird_kind = 0;
             }
+            ball_size_width = (int)((float)ball_size_width0 * mass);
+            ball_size_height = (int)((float)ball_size_height0 * mass);
             this.pictureBox1.Invalidate();
 
             update_energy();

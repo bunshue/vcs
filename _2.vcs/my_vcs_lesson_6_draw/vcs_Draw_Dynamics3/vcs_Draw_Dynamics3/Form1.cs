@@ -27,8 +27,11 @@ namespace vcs_Draw_Dynamics3
 
         List<float[]> pts = new List<float[]>();    //二維List for float
 
-        int ball_size_width = 30;
-        int ball_size_height = 30;
+        int ball_size_width0 = 40;
+        int ball_size_height0 = 40;
+
+        int ball_size_width = 40;
+        int ball_size_height = 40;
 
         public Form1()
         {
@@ -45,7 +48,6 @@ namespace vcs_Draw_Dynamics3
             richTextBox1.Text += "H = " + pictureBox1.Height.ToString() + "\n";
             one_step_second = ((double)trackBar1.Value) / 10;
             richTextBox1.Text += "每步 " + one_step_second.ToString() + " 秒\n";
-
 
             trackBar1_Scroll(sender, e);
             rb_bird_CheckedChanged(sender, e);
@@ -69,9 +71,7 @@ namespace vcs_Draw_Dynamics3
             this.ClientSize = new Size(1200, 800);
             //this.Location = new Point(xx + dx * 0, yy + dy * 1);
 
-
             richTextBox1.Size = new Size(374, 490);
-            //374, 376
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -110,7 +110,7 @@ namespace vcs_Draw_Dynamics3
 
             Bitmap bmp_pisa;
 
-            bmp_pisa = new Bitmap("..//..//Leaning_Tower_of_Pisa.jpg");
+            bmp_pisa = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\Leaning_Tower_of_Pisa.jpg");
 
             int picture_width = bmp_pisa.Width;
             int picture_height = bmp_pisa.Height;
@@ -136,22 +136,23 @@ namespace vcs_Draw_Dynamics3
             int len;
             int i;
 
-
             int ww = ball_size_width;
             int hh = ball_size_height;
 
             Bitmap bmp;
 
             if (rb1.Checked == true)
-                bmp = new Bitmap("..//..//img//AB_red.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_red.jpg");
             else if (rb2.Checked == true)
-                bmp = new Bitmap("..//..//img//AB_yellow.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_yellow.jpg");
             else if (rb3.Checked == true)
-                bmp = new Bitmap("..//..//img//AB_blue.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_blue.jpg");
             else if (rb4.Checked == true)
-                bmp = new Bitmap("..//..//img//AB_black.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_black.jpg");
             else
-                bmp = new Bitmap("..//..//img//AB_red.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_red.jpg");
+
+            bmp.MakeTransparent(Color.White); ;  //MakeTransparent 用法, bmp2 去背景, 可以多重去背, 連續寫即可
 
             //DrawFillCircle(e, x_st + ww / 2, H - y_st - hh / 2, 15, Color.Blue);
 
@@ -162,8 +163,6 @@ namespace vcs_Draw_Dynamics3
             //e.Graphics.FillRectangle(new SolidBrush(Color.Red), x_st - ww / 2, H - y_st - hh / 2, ww, hh);
 
             //richTextBox1.Text += "ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
-
-
 
             if (y_st <= y_sp0)
             {
@@ -203,8 +202,8 @@ namespace vcs_Draw_Dynamics3
                     x_st = x_st0 + (float)(60 * Math.Sqrt(2 * 46 / 10.0));
                 }
 
-                e.Graphics.FillEllipse(newBrush, x_st, y_st, ball_size_width, ball_size_height);
-                e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, ball_size_width, ball_size_height);
+                //e.Graphics.FillEllipse(newBrush, x_st, y_st, ball_size_width, ball_size_height);
+                //e.Graphics.DrawEllipse(new Pen(Color.Red, 1), x_st, y_st, ball_size_width, ball_size_height);
 
                 Rectangle destRect1a = new Rectangle((int)x_st, (int)y_st, ww, hh);
                 e.Graphics.DrawImage(bmp, destRect1a, 0, 0, bmp.Width, bmp.Height, units);
@@ -218,7 +217,6 @@ namespace vcs_Draw_Dynamics3
                         e.Graphics.FillEllipse(new SolidBrush(Color.DarkGreen), pts[i][1] + ball_size_width / 2 - point_width / 2, pts[i][2] + ball_size_height / 2 - point_width / 2, 10, 10);
                     }
                 }
-
 
                 richTextBox1.Text += "測試結束\n";
 
@@ -277,37 +275,39 @@ namespace vcs_Draw_Dynamics3
             if (rb1.Checked == true)
             {
                 richTextBox1.Text += "改用 紅鳥 1 Kg\n";
-                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_red.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_red.jpg");
                 mass = 1;
                 use_bird_kind = 0;
             }
             else if (rb2.Checked == true)
             {
                 richTextBox1.Text += "改用 黃鳥 0.6 Kg\n";
-                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_yellow.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_yellow.jpg");
                 mass = 0.6f;
                 use_bird_kind = 1;
             }
             else if (rb3.Checked == true)
             {
                 richTextBox1.Text += "改用 藍鳥 0.3 Kg\n";
-                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_blue.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_blue.jpg");
                 mass = 0.3f;
                 use_bird_kind = 2;
             }
             else if (rb4.Checked == true)
             {
                 richTextBox1.Text += "改用 炸彈鳥 2 Kg\n";
-                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_black.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_black.jpg");
                 mass = 2;
                 use_bird_kind = 3;
             }
             else
             {
                 richTextBox1.Text += "改用 紅鳥 1 Kg\n";
-                pictureBox_bird.Image = Image.FromFile("..//..//img//AB_red.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_2.vcs\______test_files\_AB\AB_red.jpg");
                 use_bird_kind = 0;
             }
+            ball_size_width = (int)((float)ball_size_width0 * mass);
+            ball_size_height = (int)((float)ball_size_height0 * mass);
             this.pictureBox1.Invalidate();
         }
 

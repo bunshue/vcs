@@ -27,8 +27,6 @@ using System.Drawing.Text;      //for InstalledFontCollection
 
 using System.Media;     //for SoundPlayer
 
-using Microsoft.VisualBasic;
-
 namespace vcs_test_all_04
 {
     public partial class Form1 : Form
@@ -278,29 +276,11 @@ namespace vcs_test_all_04
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //圖片轉向
-            string filename = @"C:\______test_files\picture1.jpg";
-            //pictureBox1.Image = Image.FromFile(filename);
-
-
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
-            pictureBox1.Image = bitmap1;
-
-
-            Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename);
-            bitmap2.RotateFlip(RotateFlipType.Rotate90FlipX);
-            pictureBox2.Image = bitmap2;
-
-
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            Image image = pictureBox1.Image;
-            image.RotateFlip(RotateFlipType.Rotate90FlipXY);
-            pictureBox1.Image = image;
         }
-
 
         private void button12_Click(object sender, EventArgs e)
         {

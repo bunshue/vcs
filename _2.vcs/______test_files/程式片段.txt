@@ -2,6 +2,26 @@
 
 //System
 
+            richTextBox1.Text += "讀取電源狀態\n";
+            PowerStatus status = SystemInformation.PowerStatus;
+            float percent = status.BatteryLifePercent;
+
+            string percent_text = percent.ToString("P0");
+
+            richTextBox1.Text += percent_text + "\n";
+            if (status.PowerLineStatus == PowerLineStatus.Online)
+            {
+                if (percent < 1.0f)
+                    richTextBox1.Text += percent_text + ", charging\n";
+                else
+                    richTextBox1.Text += "Online fully charged\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Offline, " + percent_text + " remaining\n";
+            }
+
+
 取得系統環境變數
             richTextBox1.Text += "環境變數" + "\t\t\t" + "變數值" + "\n";
             foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())

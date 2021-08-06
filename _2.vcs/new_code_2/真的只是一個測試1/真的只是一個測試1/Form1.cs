@@ -142,8 +142,8 @@ namespace 真的只是一個測試1
             richTextBox1.Text += "FullName : " + a.FullName.ToString() + "\n";
             richTextBox1.Text += "Location : " + a.Location.ToString() + "\n";
             richTextBox1.Text += "GetType : " + a.GetType().ToString() + "\n";
-            richTextBox1.Text += "GetType : " + a.GetName() + "\n";
-            richTextBox1.Text += "GetType : " + a.ImageRuntimeVersion + "\n";
+            richTextBox1.Text += "GetName : " + a.GetName() + "\n";
+            richTextBox1.Text += "ImageRuntimeVersion : " + a.ImageRuntimeVersion + "\n";
 
             foreach (Type t in a.GetTypes())                    //找尋組件內所有類別型態
             {
