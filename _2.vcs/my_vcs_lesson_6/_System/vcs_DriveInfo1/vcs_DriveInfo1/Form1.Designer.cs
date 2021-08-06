@@ -33,6 +33,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,11 +86,69 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "磁碟：";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(820, 25);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(143, 52);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "獲得硬盤序號";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(820, 102);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(143, 52);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "檢查硬碟容量";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(820, 179);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(143, 52);
+            this.button4.TabIndex = 12;
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(820, 257);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(143, 52);
+            this.button5.TabIndex = 13;
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(820, 342);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(143, 52);
+            this.button6.TabIndex = 14;
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(820, 420);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(143, 52);
+            this.button7.TabIndex = 15;
+            this.button7.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(833, 645);
+            this.ClientSize = new System.Drawing.Size(997, 645);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
@@ -106,6 +170,12 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }
 

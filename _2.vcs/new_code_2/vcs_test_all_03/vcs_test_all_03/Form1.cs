@@ -247,60 +247,14 @@ namespace vcs_test_all_03
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //獲得硬盤序號
-
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
-            string strHardDiskID = "";
-            foreach (ManagementObject mo in mos.Get())
-            {
-                strHardDiskID = mo["SerialNumber"].ToString().Trim();
-                break;
-            }
-            richTextBox1.Text += "獲得硬盤序號 : " + strHardDiskID + "\n";
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-            ManagementObjectSearcher mos = new ManagementObjectSearcher(selectQuery);
-            foreach (ManagementObject mo in mos.Get())
-            {
-                string disk_name = mo["Name"].ToString();
-                richTextBox1.Text += "取得硬碟 : " + disk_name + "\n";
-
-                DriveInfo dinfo = new DriveInfo(disk_name);
-                if (dinfo.IsReady == true)
-                {
-                    richTextBox1.Text += "驅動器總容量：" + dinfo.TotalSize + " B\n";
-                    richTextBox1.Text += "驅動器剩餘容量：" + dinfo.TotalFreeSpace + " B\n"; ;
-                }
-            }
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            DriveInfo dinfo = new DriveInfo(@"C:\");
-            float tsize = dinfo.TotalSize;
-            float fsize = dinfo.TotalFreeSpace;
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.Clear(Color.White);
-            Pen pen1 = new Pen(Color.Red);
-            Brush brush1 = new SolidBrush(Color.WhiteSmoke);
-            Brush brush2 = new SolidBrush(Color.LimeGreen);
-            Brush brush3 = new SolidBrush(Color.RoyalBlue);
-            Font font1 = new Font("Courier New", 16, FontStyle.Bold);
-            Font font2 = new Font("細明體", 9);
-            g.DrawString("磁盤容量分析", font1, brush2, new Point(60, 50));
-            float angle1 = Convert.ToSingle((360 * (Convert.ToSingle(fsize / 100000000000) / Convert.ToSingle(tsize / 100000000000))));
-            float angle2 = Convert.ToSingle((360 * (Convert.ToSingle((tsize - fsize) / 100000000000) / Convert.ToSingle(tsize / 100000000000))));
-            g.FillPie(brush2, 60, 80, 150, 150, 0, angle1);
-            g.FillPie(brush3, 60, 80, 150, 150, angle1, angle2);
-            g.DrawRectangle(pen1, 30, 235, 200, 50);
-            g.FillRectangle(brush2, 35, 245, 20, 10);
-            g.DrawString("磁盤剩餘容量:" + dinfo.TotalFreeSpace / 1000 + "KB", font2, brush2, 55, 245);
-            g.FillRectangle(brush3, 35, 265, 20, 10);
-            g.DrawString("磁盤已用容量:" + (dinfo.TotalSize - dinfo.TotalFreeSpace) / 1000 + "KB", font2, brush3, 55, 265);
-
         }
 
 
@@ -444,21 +398,6 @@ namespace vcs_test_all_03
 
         private void button24_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "臨時文件目錄 : " + Path.GetTempPath() + "\n";
-
-            //string temp_filename = Path.GetTempFileName();
-            //richTextBox1.Text += temp_filename + "\n";
-
-
-            richTextBox1.Text += "取得運用程序所在目錄 : " + Application.StartupPath + "\n";
-
-            richTextBox1.Text += "取得系統目前目錄 : " + System.Environment.CurrentDirectory + "\n";
-
-            string foldername = @"C:\______test_files";
-
-            richTextBox1.Text += "設定新的系統目前目錄\n";
-            System.Environment.CurrentDirectory = foldername;
-            richTextBox1.Text += "取得系統目前目錄 : " + System.Environment.CurrentDirectory + "\n";
         }
     }
 }

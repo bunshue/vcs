@@ -78,28 +78,63 @@ namespace vcs_DriveInfo1
             {
                 float tsize = dinfo.TotalSize;//获得磁盘的总容量
                 float fsize = dinfo.TotalFreeSpace;//获取剩余容量
-                Graphics graphics = this.CreateGraphics();//创建Graphics绘图对象
+                Graphics g = this.CreateGraphics();//创建Graphics绘图对象
+                g.Clear(Color.White);
                 Pen pen1 = new Pen(Color.Red);//创建画笔对象
                 Brush brush1 = new SolidBrush(Color.WhiteSmoke);//创建笔刷
                 Brush brush2 = new SolidBrush(Color.LimeGreen);//创建笔刷
                 Brush brush3 = new SolidBrush(Color.RoyalBlue);//创建笔刷
                 Font font1 = new Font("Courier New", 16, FontStyle.Bold);//设置字体
                 Font font2 = new Font("標楷體", 9);//设置字体
-                graphics.DrawString("磁碟容量分析", font1, brush2, new Point(60, 50));//绘制文本
+                g.DrawString("磁碟容量分析", font1, brush2, new Point(60, 50));//绘制文本
                 float angle1 = Convert.ToSingle((360 * (Convert.ToSingle(fsize / 100000000000) / Convert.ToSingle(tsize / 100000000000))));//计算绿色饼形图的范围
                 float angle2 = Convert.ToSingle((360 * (Convert.ToSingle((tsize - fsize) / 100000000000) / Convert.ToSingle(tsize / 100000000000))));//计算蓝色饼形图的范围
                 //调用Graphics对象的FillPie方法绘制饼形图
-                graphics.FillPie(brush2, 60, 80, 150, 150, 0, angle1);
-                graphics.FillPie(brush3, 60, 80, 150, 150, angle1, angle2);
-                graphics.DrawRectangle(pen1, 30, 235, 200, 50);
-                graphics.FillRectangle(brush2, 35, 245, 20, 10);
-                graphics.DrawString("磁碟剩餘容量:" + dinfo.TotalFreeSpace / 1000 + "KB", font2, brush2, 55, 245);
-                graphics.FillRectangle(brush3, 35, 265, 20, 10);
-                graphics.DrawString("磁碟已用容量:" + (dinfo.TotalSize - dinfo.TotalFreeSpace) / 1000 + "KB", font2, brush3, 55, 265);
+                g.FillPie(brush2, 60, 80, 150, 150, 0, angle1);
+                g.FillPie(brush3, 60, 80, 150, 150, angle1, angle2);
+                g.DrawRectangle(pen1, 30, 235, 200, 50);
+                g.FillRectangle(brush2, 35, 245, 20, 10);
+                g.DrawString("磁碟剩餘容量:" + dinfo.TotalFreeSpace / 1000 + "KB", font2, brush2, 55, 245);
+                g.FillRectangle(brush3, 35, 265, 20, 10);
+                g.DrawString("磁碟已用容量:" + (dinfo.TotalSize - dinfo.TotalFreeSpace) / 1000 + "KB", font2, brush3, 55, 265);
             }
             else
             {
                 richTextBox1.Text += "硬碟 : " + drive + " 未Ready\n";
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //獲得硬盤序號
+
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
+            string strHardDiskID = "";
+            foreach (ManagementObject mo in mos.Get())
+            {
+                strHardDiskID = mo["SerialNumber"].ToString().Trim();
+                break;
+            }
+            richTextBox1.Text += "獲得硬盤序號 : " + strHardDiskID + "\n";
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //檢查硬碟容量
+            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(selectQuery);
+            foreach (ManagementObject mo in mos.Get())
+            {
+                string disk_name = mo["Name"].ToString();
+                richTextBox1.Text += "取得硬碟 : " + disk_name + "\n";
+
+                DriveInfo dinfo = new DriveInfo(disk_name);
+                if (dinfo.IsReady == true)
+                {
+                    richTextBox1.Text += "驅動器總容量：" + dinfo.TotalSize + " B\n";
+                    richTextBox1.Text += "驅動器剩餘容量：" + dinfo.TotalFreeSpace + " B\n"; ;
+                }
             }
         }
     }

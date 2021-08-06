@@ -315,6 +315,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 40);
             this.button20.TabIndex = 21;
+            this.button20.Text = "檢索系統中正在執行的任務";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -478,6 +479,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 40);
             this.button0.TabIndex = 50;
+            this.button0.Text = "讀取電源狀態";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -832,46 +834,51 @@
             this.button59.Name = "button59";
             this.button59.Size = new System.Drawing.Size(200, 40);
             this.button59.TabIndex = 90;
+            this.button59.Text = "判斷驅動器類型";
             this.button59.UseVisualStyleBackColor = true;
             this.button59.Click += new System.EventHandler(this.button59_Click);
             // 
             // button58
             // 
-            this.button58.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button58.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button58.Location = new System.Drawing.Point(840, 474);
             this.button58.Name = "button58";
             this.button58.Size = new System.Drawing.Size(200, 40);
             this.button58.TabIndex = 89;
+            this.button58.Text = "取得映射驅動器路徑";
             this.button58.UseVisualStyleBackColor = true;
             this.button58.Click += new System.EventHandler(this.button58_Click);
             // 
             // button57
             // 
-            this.button57.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button57.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button57.Location = new System.Drawing.Point(840, 428);
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(200, 40);
             this.button57.TabIndex = 88;
+            this.button57.Text = "取得音效設備相關資訊";
             this.button57.UseVisualStyleBackColor = true;
             this.button57.Click += new System.EventHandler(this.button57_Click);
             // 
             // button56
             // 
-            this.button56.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button56.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button56.Location = new System.Drawing.Point(840, 382);
             this.button56.Name = "button56";
             this.button56.Size = new System.Drawing.Size(200, 40);
             this.button56.TabIndex = 87;
+            this.button56.Text = "取得計算機的顯示設備訊息";
             this.button56.UseVisualStyleBackColor = true;
             this.button56.Click += new System.EventHandler(this.button56_Click);
             // 
             // button55
             // 
-            this.button55.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button55.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button55.Location = new System.Drawing.Point(840, 334);
             this.button55.Name = "button55";
             this.button55.Size = new System.Drawing.Size(200, 40);
             this.button55.TabIndex = 86;
+            this.button55.Text = "取得顯示設備相關資訊";
             this.button55.UseVisualStyleBackColor = true;
             this.button55.Click += new System.EventHandler(this.button55_Click);
             // 
@@ -912,6 +919,7 @@
             this.button51.Name = "button51";
             this.button51.Size = new System.Drawing.Size(200, 40);
             this.button51.TabIndex = 82;
+            this.button51.Text = "取得系統環境變數";
             this.button51.UseVisualStyleBackColor = true;
             this.button51.Click += new System.EventHandler(this.button51_Click);
             // 
@@ -922,6 +930,7 @@
             this.button50.Name = "button50";
             this.button50.Size = new System.Drawing.Size(200, 40);
             this.button50.TabIndex = 81;
+            this.button50.Text = "temp資料 系統路徑";
             this.button50.UseVisualStyleBackColor = true;
             this.button50.Click += new System.EventHandler(this.button50_Click);
             // 

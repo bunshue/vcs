@@ -149,7 +149,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(132, 49);
             this.button7.TabIndex = 7;
-            this.button7.Text = "獲得硬盤序號";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -169,7 +168,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(132, 49);
             this.button9.TabIndex = 9;
-            this.button9.Text = "圖表顯示磁盤容量";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -179,7 +177,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(132, 49);
             this.button8.TabIndex = 10;
-            this.button8.Text = "檢查硬碟容量";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -394,7 +391,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(132, 49);
             this.button24.TabIndex = 31;
-            this.button24.Text = "temp資料 系統路徑";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
