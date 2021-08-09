@@ -152,13 +152,13 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         public System.Windows.Forms.Button button6;
         public System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button bt_clear;
+        public System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -125,7 +125,6 @@ namespace vcs_WebCam_AForge1
             }
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             //開啟WebCam
@@ -137,6 +136,7 @@ namespace vcs_WebCam_AForge1
                 // create video source
                 VideoCaptureDevice Cam = form.VideoDevice;
 
+                //message ST
                 richTextBox1.Text += "VideoCapabilities.Length = " + Cam.VideoCapabilities.Length.ToString() + "\n";
                 richTextBox1.Text += "FrameRate = " + Cam.VideoResolution.FrameRate.ToString() + "\n";
 
@@ -157,6 +157,7 @@ namespace vcs_WebCam_AForge1
                 VideoInput vi = form.VideoInput;
                 richTextBox1.Text += "Index " + vi.Index.ToString() + "\n";
                 richTextBox1.Text += "Type " + vi.Type.ToString() + "\n";
+                //message SP
 
                 // open it
                 OpenVideoSource(Cam);

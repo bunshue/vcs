@@ -13,6 +13,7 @@ namespace vcs_FormSendData
     {
         int[] data;
 
+        //public Form4() old, 改成可以接收參數
         public Form4(int[] histData)
         {
             InitializeComponent();

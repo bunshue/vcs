@@ -42,6 +42,7 @@
             this.triggerButton = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -169,11 +170,22 @@
             this.panel1.Size = new System.Drawing.Size(740, 580);
             this.panel1.TabIndex = 8;
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(1060, 628);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(75, 21);
+            this.bt_clear.TabIndex = 11;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1165, 812);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.triggerButton);
             this.Controls.Add(this.panel1);
@@ -212,6 +224,7 @@
         private System.Windows.Forms.Button triggerButton;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

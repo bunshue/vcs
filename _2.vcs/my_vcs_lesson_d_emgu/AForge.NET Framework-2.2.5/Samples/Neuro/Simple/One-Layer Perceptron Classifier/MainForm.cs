@@ -2,7 +2,7 @@
 // AForge.NET framework
 // http://www.aforgenet.com/framework/
 //
-// Copyright © AForge.NET, 2006-2011
+// Copyright ?AForge.NET, 2006-2011
 // contacts@aforgenet.com
 //
 
@@ -110,222 +110,226 @@ namespace Classifier
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.loadButton = new System.Windows.Forms.Button();
-			this.chart = new AForge.Controls.Chart();
-			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.weightsList = new System.Windows.Forms.ListView();
-			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-			this.label4 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.saveFilesCheck = new System.Windows.Forms.CheckBox();
-			this.stopButton = new System.Windows.Forms.Button();
-			this.startButton = new System.Windows.Forms.Button();
-			this.iterationsBox = new System.Windows.Forms.TextBox();
-			this.label2 = new System.Windows.Forms.Label();
-			this.learningRateBox = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.errorChart = new AForge.Controls.Chart();
-			this.groupBox1.SuspendLayout();
-			this.groupBox2.SuspendLayout();
-			this.groupBox3.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// groupBox1
-			// 
-			this.groupBox1.Controls.AddRange(new System.Windows.Forms.Control[] {
-																					this.loadButton,
-																					this.chart});
-			this.groupBox1.Location = new System.Drawing.Point(10, 10);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(220, 255);
-			this.groupBox1.TabIndex = 0;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Data";
-			// 
-			// loadButton
-			// 
-			this.loadButton.Location = new System.Drawing.Point(10, 225);
-			this.loadButton.Name = "loadButton";
-			this.loadButton.TabIndex = 1;
-			this.loadButton.Text = "&Load";
-			this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
-			// 
-			// chart
-			// 
-			this.chart.Location = new System.Drawing.Point(10, 20);
-			this.chart.Name = "chart";
-			this.chart.Size = new System.Drawing.Size(200, 200);
-			this.chart.TabIndex = 0;
-			// 
-			// openFileDialog
-			// 
-			this.openFileDialog.Filter = "CSV (Comma delimited) (*.csv)|*.csv";
-			this.openFileDialog.Title = "Select data file";
-			// 
-			// groupBox2
-			// 
-			this.groupBox2.Controls.AddRange(new System.Windows.Forms.Control[] {
-																					this.weightsList,
-																					this.label4,
-																					this.label3,
-																					this.saveFilesCheck,
-																					this.stopButton,
-																					this.startButton,
-																					this.iterationsBox,
-																					this.label2,
-																					this.learningRateBox,
-																					this.label1});
-			this.groupBox2.Location = new System.Drawing.Point(240, 10);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(240, 410);
-			this.groupBox2.TabIndex = 1;
-			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "Training";
-			// 
-			// weightsList
-			// 
-			this.weightsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-																						  this.columnHeader1,
-																						  this.columnHeader2,
-																						  this.columnHeader3});
-			this.weightsList.FullRowSelect = true;
-			this.weightsList.GridLines = true;
-			this.weightsList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-			this.weightsList.Location = new System.Drawing.Point(10, 130);
-			this.weightsList.Name = "weightsList";
-			this.weightsList.Size = new System.Drawing.Size(220, 270);
-			this.weightsList.TabIndex = 14;
-			this.weightsList.View = System.Windows.Forms.View.Details;
-			// 
-			// columnHeader1
-			// 
-			this.columnHeader1.Text = "Neuron";
-			// 
-			// columnHeader2
-			// 
-			this.columnHeader2.Text = "Weigh";
-			// 
-			// columnHeader3
-			// 
-			this.columnHeader3.Text = "Value";
-			this.columnHeader3.Width = 65;
-			// 
-			// label4
-			// 
-			this.label4.Location = new System.Drawing.Point(10, 110);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(55, 16);
-			this.label4.TabIndex = 13;
-			this.label4.Text = "Weights:";
-			// 
-			// label3
-			// 
-			this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.label3.Location = new System.Drawing.Point(10, 100);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(220, 2);
-			this.label3.TabIndex = 12;
-			// 
-			// saveFilesCheck
-			// 
-			this.saveFilesCheck.Location = new System.Drawing.Point(10, 80);
-			this.saveFilesCheck.Name = "saveFilesCheck";
-			this.saveFilesCheck.Size = new System.Drawing.Size(150, 16);
-			this.saveFilesCheck.TabIndex = 11;
-			this.saveFilesCheck.Text = "Save weights and errors to files";
-			// 
-			// stopButton
-			// 
-			this.stopButton.Enabled = false;
-			this.stopButton.Location = new System.Drawing.Point(155, 49);
-			this.stopButton.Name = "stopButton";
-			this.stopButton.TabIndex = 10;
-			this.stopButton.Text = "S&top";
-			this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
-			// 
-			// startButton
-			// 
-			this.startButton.Enabled = false;
-			this.startButton.Location = new System.Drawing.Point(155, 19);
-			this.startButton.Name = "startButton";
-			this.startButton.TabIndex = 9;
-			this.startButton.Text = "&Start";
-			this.startButton.Click += new System.EventHandler(this.startButton_Click);
-			// 
-			// iterationsBox
-			// 
-			this.iterationsBox.Location = new System.Drawing.Point(90, 50);
-			this.iterationsBox.Name = "iterationsBox";
-			this.iterationsBox.ReadOnly = true;
-			this.iterationsBox.Size = new System.Drawing.Size(50, 20);
-			this.iterationsBox.TabIndex = 3;
-			this.iterationsBox.Text = "";
-			// 
-			// label2
-			// 
-			this.label2.Location = new System.Drawing.Point(10, 52);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(55, 13);
-			this.label2.TabIndex = 2;
-			this.label2.Text = "Iterations:";
-			// 
-			// learningRateBox
-			// 
-			this.learningRateBox.Location = new System.Drawing.Point(90, 20);
-			this.learningRateBox.Name = "learningRateBox";
-			this.learningRateBox.Size = new System.Drawing.Size(50, 20);
-			this.learningRateBox.TabIndex = 1;
-			this.learningRateBox.Text = "";
-			// 
-			// label1
-			// 
-			this.label1.Location = new System.Drawing.Point(10, 22);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(80, 17);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Learning rate:";
-			// 
-			// groupBox3
-			// 
-			this.groupBox3.Controls.AddRange(new System.Windows.Forms.Control[] {
-																					this.errorChart});
-			this.groupBox3.Location = new System.Drawing.Point(10, 270);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(220, 150);
-			this.groupBox3.TabIndex = 2;
-			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "Error\'s dynamics";
-			// 
-			// errorChart
-			// 
-			this.errorChart.Location = new System.Drawing.Point(10, 20);
-			this.errorChart.Name = "errorChart";
-			this.errorChart.Size = new System.Drawing.Size(200, 120);
-			this.errorChart.TabIndex = 0;
-			this.errorChart.Text = "chart1";
-			// 
-			// MainForm
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(489, 430);
-			this.Controls.AddRange(new System.Windows.Forms.Control[] {
-																		  this.groupBox3,
-																		  this.groupBox2,
-																		  this.groupBox1});
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.MaximizeBox = false;
-			this.Name = "MainForm";
-			this.Text = "One-Layer Perceptron Classifier";
-			this.Closing += new System.ComponentModel.CancelEventHandler(this.MainForm_Closing);
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox2.ResumeLayout(false);
-			this.groupBox3.ResumeLayout(false);
-			this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.loadButton = new System.Windows.Forms.Button();
+            this.chart = new AForge.Controls.Chart();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.weightsList = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.saveFilesCheck = new System.Windows.Forms.CheckBox();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.iterationsBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.learningRateBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.errorChart = new AForge.Controls.Chart();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.loadButton);
+            this.groupBox1.Controls.Add(this.chart);
+            this.groupBox1.Location = new System.Drawing.Point(10, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(220, 294);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Data";
+            // 
+            // loadButton
+            // 
+            this.loadButton.Location = new System.Drawing.Point(10, 260);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(75, 26);
+            this.loadButton.TabIndex = 1;
+            this.loadButton.Text = "&Load";
+            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
+            // 
+            // chart
+            // 
+            this.chart.Location = new System.Drawing.Point(10, 23);
+            this.chart.Name = "chart";
+            this.chart.RangeX = ((AForge.Range)(resources.GetObject("chart.RangeX")));
+            this.chart.RangeY = ((AForge.Range)(resources.GetObject("chart.RangeY")));
+            this.chart.Size = new System.Drawing.Size(200, 231);
+            this.chart.TabIndex = 0;
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "CSV (Comma delimited) (*.csv)|*.csv";
+            this.openFileDialog.Title = "Select data file";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.weightsList);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.saveFilesCheck);
+            this.groupBox2.Controls.Add(this.stopButton);
+            this.groupBox2.Controls.Add(this.startButton);
+            this.groupBox2.Controls.Add(this.iterationsBox);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.learningRateBox);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Location = new System.Drawing.Point(240, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(240, 473);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Training";
+            // 
+            // weightsList
+            // 
+            this.weightsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.weightsList.FullRowSelect = true;
+            this.weightsList.GridLines = true;
+            this.weightsList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.weightsList.Location = new System.Drawing.Point(10, 150);
+            this.weightsList.Name = "weightsList";
+            this.weightsList.Size = new System.Drawing.Size(220, 312);
+            this.weightsList.TabIndex = 14;
+            this.weightsList.UseCompatibleStateImageBehavior = false;
+            this.weightsList.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Neuron";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Weigh";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Value";
+            this.columnHeader3.Width = 65;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(10, 127);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 18);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Weights:";
+            // 
+            // label3
+            // 
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.Location = new System.Drawing.Point(10, 115);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(220, 3);
+            this.label3.TabIndex = 12;
+            // 
+            // saveFilesCheck
+            // 
+            this.saveFilesCheck.Location = new System.Drawing.Point(10, 92);
+            this.saveFilesCheck.Name = "saveFilesCheck";
+            this.saveFilesCheck.Size = new System.Drawing.Size(150, 19);
+            this.saveFilesCheck.TabIndex = 11;
+            this.saveFilesCheck.Text = "Save weights and errors to files";
+            // 
+            // stopButton
+            // 
+            this.stopButton.Enabled = false;
+            this.stopButton.Location = new System.Drawing.Point(155, 57);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(75, 26);
+            this.stopButton.TabIndex = 10;
+            this.stopButton.Text = "S&top";
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // startButton
+            // 
+            this.startButton.Enabled = false;
+            this.startButton.Location = new System.Drawing.Point(155, 22);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(75, 26);
+            this.startButton.TabIndex = 9;
+            this.startButton.Text = "&Start";
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // iterationsBox
+            // 
+            this.iterationsBox.Location = new System.Drawing.Point(90, 58);
+            this.iterationsBox.Name = "iterationsBox";
+            this.iterationsBox.ReadOnly = true;
+            this.iterationsBox.Size = new System.Drawing.Size(50, 22);
+            this.iterationsBox.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(10, 60);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 15);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Iterations:";
+            // 
+            // learningRateBox
+            // 
+            this.learningRateBox.Location = new System.Drawing.Point(90, 23);
+            this.learningRateBox.Name = "learningRateBox";
+            this.learningRateBox.Size = new System.Drawing.Size(50, 22);
+            this.learningRateBox.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(10, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Learning rate:";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.errorChart);
+            this.groupBox3.Location = new System.Drawing.Point(10, 312);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(220, 173);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Error\'s dynamics";
+            // 
+            // errorChart
+            // 
+            this.errorChart.Location = new System.Drawing.Point(10, 23);
+            this.errorChart.Name = "errorChart";
+            this.errorChart.RangeX = ((AForge.Range)(resources.GetObject("errorChart.RangeX")));
+            this.errorChart.RangeY = ((AForge.Range)(resources.GetObject("errorChart.RangeY")));
+            this.errorChart.Size = new System.Drawing.Size(200, 139);
+            this.errorChart.TabIndex = 0;
+            this.errorChart.Text = "chart1";
+            // 
+            // MainForm
+            // 
+            this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
+            this.ClientSize = new System.Drawing.Size(554, 503);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.Name = "MainForm";
+            this.Text = "One-Layer Perceptron Classifier";
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.MainForm_Closing);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.ResumeLayout(false);
 
 		}
 		#endregion
@@ -417,7 +421,7 @@ namespace Classifier
             }
 		}
 
-		// Load input data
+        //∂}±“.csv¿…
 		private void loadButton_Click(object sender, System.EventArgs e)
 		{
 			// data file format:
@@ -425,7 +429,7 @@ namespace Classifier
 
 			// load maximum 10 classes !
 
-			// show file selection dialog
+            openFileDialog.InitialDirectory = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\Data Samples\"));
 			if ( openFileDialog.ShowDialog( ) == DialogResult.OK )
 			{
 				StreamReader reader = null;

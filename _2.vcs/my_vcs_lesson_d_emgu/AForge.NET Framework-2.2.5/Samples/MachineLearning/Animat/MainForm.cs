@@ -2,7 +2,7 @@
 // AForge.NET framework
 // http://www.aforgenet.com/framework/
 //
-// Copyright © AForge.NET, 2006-2011
+// Copyright ?AForge.NET, 2006-2011
 // contacts@aforgenet.com
 //
 
@@ -198,10 +198,10 @@ namespace Animat
             }
         }
 
-        // On "Load" button click
+        // ∂}±“ .map¿…
         private void loadButton_Click( object sender, EventArgs e )
         {
-			// show file selection dialog
+            openFileDialog.InitialDirectory = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\Data files\"));
             if ( openFileDialog.ShowDialog( ) == DialogResult.OK )
             {
                 StreamReader reader = null;

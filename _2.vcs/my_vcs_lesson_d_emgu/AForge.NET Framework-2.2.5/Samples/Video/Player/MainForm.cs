@@ -155,6 +155,8 @@ namespace Player
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //會不會是 無線網路監控IP Cam?
+
             //Open JPEG URL
             URLForm form = new URLForm();
 
@@ -176,6 +178,8 @@ namespace Player
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //會不會是 無線網路監控IP Cam?
+
             //Open MJPEG URL
             URLForm form = new URLForm();
 

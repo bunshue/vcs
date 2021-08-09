@@ -13,7 +13,7 @@ namespace vcs_FormSendData
     {
         private Form1 frm1;
 
-        //public Form3() old
+        //public Form3() old, 要改成可以接收參數
         public Form3(Form1 form)
         {
             InitializeComponent();
@@ -32,6 +32,11 @@ namespace vcs_FormSendData
             //this.Close();
         }
 
-
+        int cnt = 0;
+        private void button3_Click(object sender, EventArgs e)
+        {
+            frm1.richTextBox1.Text += "Form3送資料給Form1的richTextBox1  " + (cnt++).ToString() + "\n";
+        }
     }
 }
+

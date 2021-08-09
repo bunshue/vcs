@@ -30,6 +30,12 @@ namespace ImageViewer
 
                 propertyGrid.SelectedObject = imageInfo;
                 propertyGrid.ExpandAllGridItems();
+
+                richTextBox1.Text += "Number of bits per image's pixel : " + imageInfo.BitsPerPixel.ToString() + "\n";
+                richTextBox1.Text += "Frame's index : " + imageInfo.FrameIndex.ToString() + "\n";
+                richTextBox1.Text += "W : " + imageInfo.Width.ToString() + "\n";
+                richTextBox1.Text += "H : " + imageInfo.Height.ToString() + "\n";
+                richTextBox1.Text += "Total frames in the image : " + imageInfo.TotalFrames.ToString() + "\n";
             }
             catch (NotSupportedException ex)
             {

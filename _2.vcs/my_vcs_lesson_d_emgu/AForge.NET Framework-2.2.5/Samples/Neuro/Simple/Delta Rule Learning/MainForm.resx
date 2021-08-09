@@ -120,4 +120,18 @@
   <metadata name="openFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="errorChart.RangeX" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAElBRm9yZ2UsIFZlcnNpb249Mi4yLjUuMCwgQ3VsdHVyZT1uZXV0
+        cmFsLCBQdWJsaWNLZXlUb2tlbj1jMWRiNmZmNGVhYTA2YWViBQEAAAAMQUZvcmdlLlJhbmdlAgAAAANt
+        aW4DbWF4AAALCwIAAAAAAAAAAACAPws=
+</value>
+  </data>
+  <data name="errorChart.RangeY" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAElBRm9yZ2UsIFZlcnNpb249Mi4yLjUuMCwgQ3VsdHVyZT1uZXV0
+        cmFsLCBQdWJsaWNLZXlUb2tlbj1jMWRiNmZmNGVhYTA2YWViBQEAAAAMQUZvcmdlLlJhbmdlAgAAAANt
+        aW4DbWF4AAALCwIAAAAAAAAAAACAPws=
+</value>
+  </data>
 </root>
