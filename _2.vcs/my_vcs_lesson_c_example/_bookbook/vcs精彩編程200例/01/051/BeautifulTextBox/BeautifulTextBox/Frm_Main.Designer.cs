@@ -32,6 +32,7 @@
             this.numberBox1 = new BeautifulTextBox.NumberBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -54,16 +55,17 @@
             this.numberBox1.Name = "numberBox1";
             this.numberBox1.ReservedDigit = 2;
             this.numberBox1.ReservedStyle = BeautifulTextBox.NumberBox.Reserved.Tropism;
-            this.numberBox1.Size = new System.Drawing.Size(227, 21);
+            this.numberBox1.Size = new System.Drawing.Size(227, 22);
             this.numberBox1.TabIndex = 2;
             this.numberBox1.Text = "-87987.54735543";
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.numberBox1);
             this.groupBox1.Location = new System.Drawing.Point(6, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(277, 64);
+            this.groupBox1.Size = new System.Drawing.Size(277, 180);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "内容";
@@ -71,18 +73,26 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Location = new System.Drawing.Point(6, 72);
+            this.groupBox2.Location = new System.Drawing.Point(6, 188);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(277, 53);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "操作";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(23, 99);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(227, 22);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.Text = "-87987.54735543";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(289, 129);
+            this.ClientSize = new System.Drawing.Size(447, 414);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Frm_Main";
@@ -100,6 +110,7 @@
         private NumberBox numberBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

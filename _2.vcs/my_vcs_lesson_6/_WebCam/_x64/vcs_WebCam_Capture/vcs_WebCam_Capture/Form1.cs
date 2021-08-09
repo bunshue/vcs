@@ -21,7 +21,7 @@ namespace vcs_WebCam_Capture
         private void Form1_Load(object sender, EventArgs e)
         {
             webcam = new WebCam();
-            webcam.InitializeWebCam(ref pictureBox1);
+            webcam.InitializeWebCam(ref pictureBox1, ref richTextBox1);
         }
 
         private void button1_Click(object sender, EventArgs e)

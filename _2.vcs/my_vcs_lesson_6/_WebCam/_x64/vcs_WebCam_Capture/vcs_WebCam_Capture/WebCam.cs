@@ -13,9 +13,20 @@ namespace vcs_WebCam_Capture
         private WebCamCapture webcam;
         private System.Windows.Forms.PictureBox _FrameImage;
         private int FrameNumber = 30;
-        public void InitializeWebCam(ref System.Windows.Forms.PictureBox ImageControl)
+        public void InitializeWebCam(ref System.Windows.Forms.PictureBox ImageControl, ref System.Windows.Forms.RichTextBox rtb)
         {
             webcam = new WebCamCapture();
+
+            rtb.Text += "Name : " + webcam.Name.ToString() + "\n";
+            rtb.Text += "ProductName : " + webcam.ProductName.ToString() + "\n";
+            rtb.Text += "CompanyName : " + webcam.CompanyName.ToString() + "\n";
+
+            rtb.Text += "CaptureWidth : " + webcam.CaptureWidth.ToString() + "\n";
+            rtb.Text += "CaptureHeight : " + webcam.CaptureHeight.ToString() + "\n";
+            rtb.Text += "Size : " + webcam.Size.ToString() + "\n";
+            rtb.Text += "Width : " + webcam.Width.ToString() + "\n";
+            rtb.Text += "Height : " + webcam.Height.ToString() + "\n";
+
             webcam.FrameNumber = ((ulong)(0ul));
             webcam.TimeToCapture_milliseconds = FrameNumber;
             webcam.ImageCaptured += new WebCamCapture.WebCamEventHandler(webcam_ImageCaptured);
