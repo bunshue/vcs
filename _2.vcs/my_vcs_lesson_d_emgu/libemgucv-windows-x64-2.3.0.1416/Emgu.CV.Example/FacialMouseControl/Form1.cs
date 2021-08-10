@@ -5,9 +5,11 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
+
 using System.Threading;
 using System.Runtime.InteropServices;
 
@@ -15,7 +17,7 @@ namespace FacialMouseControl
 {
     public partial class Form1 : Form
     {
-        private Capture _capture;
+        private Capture cap;
         private HaarCascade _face;
 
         string filename = @"C:\______test_files\__RW\_xml\haarcascades\haarcascade_frontalface_default.xml";
@@ -27,11 +29,11 @@ namespace FacialMouseControl
             //Read the HaarCascade object
             _face = new HaarCascade(filename);
 
-            if (_capture == null)
+            if (cap == null)
             {
                 try
                 {
-                    _capture = new Capture();
+                    cap = new Capture(1);   //預設使用第一台的webcam
                 }
                 catch (NullReferenceException excpt)
                 {
@@ -45,7 +47,7 @@ namespace FacialMouseControl
 
         public void ProcessImage(object sender, EventArgs e)
         {
-            Image<Bgr, Byte> frame = _capture.QueryFrame();
+            Image<Bgr, Byte> frame = cap.QueryFrame();
             Image<Gray, Byte> grayImage = frame.Convert<Gray, Byte>();
             grayImage._EqualizeHist();
 
@@ -111,13 +113,16 @@ namespace FacialMouseControl
 
         public void ReleaseData()
         {
-            if (_capture != null)
-                _capture.Dispose();
+            if (cap != null)
+                cap.Dispose();
         }
 
         private void flipHorizontalButton_Click(object sender, EventArgs e)
         {
-            if (_capture != null) _capture.FlipHorizontal = !_capture.FlipHorizontal;
+            if (cap != null)
+            {
+                cap.FlipHorizontal = !cap.FlipHorizontal;
+            }
         }
     }
 }

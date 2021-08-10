@@ -29,7 +29,6 @@ namespace _WebCam1
             InitializeComponent();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
             int W = 640;
@@ -104,19 +103,17 @@ namespace _WebCam1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            #region if capture is not created, create it now
             if (cap == null)
             {
                 try
                 {
-                    cap = new Capture();
+                    cap = new Capture(1);   //預設使用第一台的webcam
                 }
                 catch (NullReferenceException excpt)
                 {
                     MessageBox.Show(excpt.Message);
                 }
             }
-            #endregion
 
             if (cap != null)
             {
@@ -152,3 +149,4 @@ namespace _WebCam1
         }
     }
 }
+

@@ -1,4 +1,9 @@
 
+using System.Reflection;
+            Assembly assembly = this.GetType().Assembly;
+            richTextBox1.Text += "取得專案名稱 : " + assembly.GetName().Name + "\n";
+
+
 
 richTextBox1.Text += "測試使用WindowsMediaPlayerClass\n";
 WindowsMediaPlayerClass c;

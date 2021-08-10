@@ -14,9 +14,17 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Resources;
+
 using System.Reflection;
 
 using AForge.Imaging;
+
+/*
+Convex Hull 凸面 殼體
+Left/Right Edges 左右邊緣
+Top/Bottom Edges 上下邊緣
+Quadrilateral 四邊形的
+*/
 
 namespace BlobsExplorer
 {

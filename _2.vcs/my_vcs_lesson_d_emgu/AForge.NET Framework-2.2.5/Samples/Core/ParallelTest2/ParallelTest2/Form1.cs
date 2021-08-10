@@ -31,6 +31,9 @@ namespace ParallelTest2
             double test2time = 0;
 
             richTextBox1.Text += "Starting test with " + AForge.Parallel.ThreadsCount + " threads" + "\n";
+
+            richTextBox1.Text += "不使用平行運算" + "\t\t|\t\t" + "使用平行運算" + "\t\t|\n";
+
             Application.DoEvents();
 
             // allocate matrixes for all tests
@@ -111,7 +114,6 @@ namespace ParallelTest2
                     {
                         v += a[i, k] * b[k, j];
                     }
-
                     c[i, j] = v;
                 }
             }
@@ -140,3 +142,4 @@ namespace ParallelTest2
         }
     }
 }
+

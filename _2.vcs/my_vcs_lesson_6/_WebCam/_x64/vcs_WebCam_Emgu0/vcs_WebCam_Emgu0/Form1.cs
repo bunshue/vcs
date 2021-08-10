@@ -70,6 +70,14 @@ namespace vcs_WebCam_Emgu0
             Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
             pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
 
+            /*  其他處理
+            pictureBox1.Image = image.Not().ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
+            Image<Gray, Byte> grayFrame = image.Convert<Gray, Byte>();      //彩色轉灰階
+            Image<Gray, Byte> smallGrayFrame = grayFrame.PyrDown();
+            Image<Gray, Byte> smoothedGrayFrame = smallGrayFrame.PyrUp();
+            Image<Gray, Byte> cannyFrame = smoothedGrayFrame.Canny(new Gray(100), new Gray(60));
+            */
+
             //錄影模式
             if (flag_recording == true) //錄影1
             {
@@ -173,6 +181,9 @@ namespace vcs_WebCam_Emgu0
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
+                return;
+
             //截圖
             if (cap != null)
             {
