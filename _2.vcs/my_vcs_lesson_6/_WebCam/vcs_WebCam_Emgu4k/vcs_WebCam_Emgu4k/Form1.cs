@@ -123,29 +123,6 @@ namespace vcs_WebCam_Emgu4k
         //截圖
         private void button4_Click(object sender, EventArgs e)
         {
-            if (flag_webcam_ok == false)
-            {
-                richTextBox1.Text += "尚未開啟webcam\n";
-                return;
-            }
-
-            richTextBox1.Text += "截圖\t\t";
-
-            //  截圖  Query 攝影機的畫面
-            Image<Bgr, Byte> image = cap.QueryFrame();
-
-            string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-            try
-            {
-                image.Save(filename);   //儲存影像
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-
         }
 
         private void button5_Click(object sender, EventArgs e)
