@@ -3,31 +3,51 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
+//參考/加入參考/ 選取EMGU那3個dll
+
+/*
+工具箱選擇ImageBox
+
+工具箱/選擇項目/.NET Framework元件/瀏覽 選取Emgu.CV.UI.dll
+出現ImageBox
+
+要一次按完 不要按別的 會當機
+*/
+
+//加入/現有項目  core highgui imgproc video 4個 選有更新時才複製
+
+//.csproj的PlatformTarget的x86改x64
+
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.VideoSurveillance;
 using Emgu.Util;
 
-namespace MotionDetection
+namespace vcs_EMGU_MotionDetection
 {
     public partial class Form1 : Form
     {
-        private Capture _capture;
+        private Capture cap;
         private MotionHistory _motionHistory;
         private IBGFGDetector<Bgr> _forgroundDetector;
 
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             //try to create the capture
-            if (_capture == null)
+            if (cap == null)
             {
                 try
                 {
-                    _capture = new Capture();
+                    cap = new Capture(1);   //預設使用第一台的webcam
                 }
                 catch (NullReferenceException excpt)
                 {   //show errors if there is any
@@ -35,7 +55,7 @@ namespace MotionDetection
                 }
             }
 
-            if (_capture != null) //if camera capture has been successfully created
+            if (cap != null) //if camera capture has been successfully created
             {
                 _motionHistory = new MotionHistory(
                     1.0, //in second, the duration of motion history you wants to keep
@@ -48,7 +68,7 @@ namespace MotionDetection
 
         private void ProcessFrame(object sender, EventArgs e)
         {
-            using (Image<Bgr, Byte> image = _capture.QueryFrame())
+            using (Image<Bgr, Byte> image = cap.QueryFrame())
             using (MemStorage storage = new MemStorage()) //create storage for motion components
             {
                 if (_forgroundDetector == null)
@@ -60,7 +80,7 @@ namespace MotionDetection
 
                 _forgroundDetector.Update(image);
 
-                capturedImageBox.Image = image;
+                imageBox1.Image = image;
 
                 //update the motion history
                 _motionHistory.Update(_forgroundDetector.ForgroundMask);
@@ -109,13 +129,13 @@ namespace MotionDetection
                 UpdateText(String.Format("Total Motions found: {0}; Motion Pixel count: {1}", motionComponents.Total, overallMotionPixelCount));
 
                 //Display the image of the motion
-                motionImageBox.Image = motionImage;
+                imageBox2.Image = motionImage;
             }
         }
 
         private void UpdateText(String text)
         {
-            label3.Text = text;
+            label1.Text = text;
         }
 
         private static void DrawMotion(Image<Bgr, Byte> image, Rectangle motionRegion, double angle, Bgr color)
@@ -137,21 +157,6 @@ namespace MotionDetection
             image.Draw(circle, color, 1);
             image.Draw(line, color, 2);
         }
-        /*
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-
-            base.Dispose(disposing);
-        }
-        */
     }
 }
+

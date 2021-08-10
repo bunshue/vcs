@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("MotionDetection")]
+[assembly: AssemblyTitle("vcs_EMGU_MotionDetection")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MotionDetection")]
+[assembly: AssemblyProduct("vcs_EMGU_MotionDetection")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("73cd3045-88b3-4890-b3f1-00090f019c7f")]
+[assembly: Guid("b353b04f-4608-4588-9644-d90f5edb6b22")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

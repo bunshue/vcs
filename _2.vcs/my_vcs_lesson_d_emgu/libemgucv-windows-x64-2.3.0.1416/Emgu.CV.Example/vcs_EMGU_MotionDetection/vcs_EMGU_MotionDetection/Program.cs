@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace MotionDetection
+namespace vcs_EMGU_MotionDetection
 {
     static class Program
     {
