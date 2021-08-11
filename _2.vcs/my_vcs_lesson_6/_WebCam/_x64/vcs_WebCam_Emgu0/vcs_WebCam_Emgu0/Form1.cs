@@ -116,9 +116,10 @@ namespace vcs_WebCam_Emgu0
                     frame_count = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
                     fps = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
 
-                    richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-                    richTextBox1.Text += "frame_count = " + frame_count.ToString() + "\n";
-                    richTextBox1.Text += "fps = " + fps.ToString() + "\n";
+                    richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
+                    richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
+                    richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
+                    richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
                 }
                 catch (NullReferenceException excpt)
                 {
@@ -147,12 +148,12 @@ namespace vcs_WebCam_Emgu0
                 flag_recording = false;
                 video.Dispose();
                 richTextBox1.Text += "停止錄影\n";
-                Application.Idle -= Application_Idle;
             }
 
             if (cap != null)
             {
                 cap.Dispose();
+                Application.Idle -= Application_Idle;
             }
             Application.Exit();
         }

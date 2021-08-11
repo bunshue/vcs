@@ -53,8 +53,6 @@ namespace vcs_WebCam_AForge0
             vsp = new AForge.Controls.VideoSourcePlayer();
             this.Controls.Add(vsp);
 
-
-
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
             {

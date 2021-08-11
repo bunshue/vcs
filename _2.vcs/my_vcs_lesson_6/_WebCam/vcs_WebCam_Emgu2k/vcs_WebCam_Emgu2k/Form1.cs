@@ -38,10 +38,10 @@ namespace vcs_WebCam_Emgu2k
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            cap1 = new Capture(0);
-            cap2 = new Capture(0);
-            cap3 = new Capture(0);
-            cap4 = new Capture(0);
+            cap1 = new Capture(1);
+            cap2 = new Capture(1);
+            cap3 = new Capture(1);
+            cap4 = new Capture(1);
             cap2.FlipHorizontal = true;
             cap3.FlipVertical = true;
             cap4.FlipHorizontal = true;
