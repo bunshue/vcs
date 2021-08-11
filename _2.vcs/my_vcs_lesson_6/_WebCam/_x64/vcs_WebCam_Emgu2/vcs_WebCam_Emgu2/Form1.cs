@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
 
-namespace vcs_WebCam_Emgu2k
+namespace vcs_WebCam_Emgu2
 {
     public partial class Form1 : Form
     {
@@ -18,6 +18,7 @@ namespace vcs_WebCam_Emgu2k
         private Capture cap2 = null;
         private Capture cap3 = null;
         private Capture cap4 = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -47,8 +48,8 @@ namespace vcs_WebCam_Emgu2k
             cap4.FlipHorizontal = true;
             cap4.FlipVertical = true;
 
-            richTextBox1.Text += "width = " + cap1.Width.ToString() + "\n";
-            richTextBox1.Text += "height = " + cap1.Height.ToString() + "\n";
+            //richTextBox1.Text += "width = " + cap1.Width.ToString() + "\n";
+            //richTextBox1.Text += "height = " + cap1.Height.ToString() + "\n";
             Application.Idle += new EventHandler(Application_Idle);
         }
     }

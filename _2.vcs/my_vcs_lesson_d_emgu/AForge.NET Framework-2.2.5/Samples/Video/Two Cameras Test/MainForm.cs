@@ -58,7 +58,7 @@ namespace TwoCamerasTest
                     camera1Combo.Items.Add(cameraName);
                     camera2Combo.Items.Add(cameraName);
 
-                    richTextBox1.Text += cameraName + "\n";
+                    richTextBox1.Text += "i = " + i.ToString() + "\t" + cameraName + "\n";
                 }
 
                 // check cameras count

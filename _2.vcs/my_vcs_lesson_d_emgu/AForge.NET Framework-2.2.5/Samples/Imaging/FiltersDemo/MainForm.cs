@@ -104,12 +104,12 @@ namespace FiltersDemo
         private System.Drawing.Bitmap filteredImage;
 
         // Constructor
-        public MainForm( )
+        public MainForm()
         {
             //
             // Required for Windows Form Designer support
             //
-            InitializeComponent( );
+            InitializeComponent();
 
             // set default size mode of picture box
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -118,16 +118,16 @@ namespace FiltersDemo
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        protected override void Dispose( bool disposing )
+        protected override void Dispose(bool disposing)
         {
-            if ( disposing )
+            if (disposing)
             {
-                if ( components != null )
+                if (components != null)
                 {
-                    components.Dispose( );
+                    components.Dispose();
                 }
             }
-            base.Dispose( disposing );
+            base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
@@ -135,7 +135,7 @@ namespace FiltersDemo
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent( )
+        private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
             this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
@@ -521,248 +521,248 @@ namespace FiltersDemo
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox.Location = new System.Drawing.Point(6, 6);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(730, 550);
+            this.pictureBox.Size = new System.Drawing.Size(730, 641);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1024, 6);
+            this.richTextBox1.Location = new System.Drawing.Point(1008, 6);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(149, 550);
+            this.richTextBox1.Size = new System.Drawing.Size(165, 550);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(742, 33);
+            this.button1.Location = new System.Drawing.Point(755, 33);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(110, 40);
             this.button1.TabIndex = 2;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(742, 62);
+            this.button2.Location = new System.Drawing.Point(755, 62);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(110, 40);
             this.button2.TabIndex = 3;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(742, 91);
+            this.button3.Location = new System.Drawing.Point(755, 91);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(110, 40);
             this.button3.TabIndex = 4;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(742, 120);
+            this.button4.Location = new System.Drawing.Point(755, 120);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(110, 40);
             this.button4.TabIndex = 5;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(742, 149);
+            this.button5.Location = new System.Drawing.Point(755, 149);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(110, 40);
             this.button5.TabIndex = 6;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(742, 178);
+            this.button6.Location = new System.Drawing.Point(755, 178);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(110, 40);
             this.button6.TabIndex = 7;
             this.button6.Text = "button6";
             this.button6.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(742, 207);
+            this.button7.Location = new System.Drawing.Point(755, 207);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.Size = new System.Drawing.Size(110, 40);
             this.button7.TabIndex = 8;
             this.button7.Text = "button7";
             this.button7.UseVisualStyleBackColor = true;
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(742, 236);
+            this.button8.Location = new System.Drawing.Point(755, 236);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.Size = new System.Drawing.Size(110, 40);
             this.button8.TabIndex = 9;
             this.button8.Text = "button8";
             this.button8.UseVisualStyleBackColor = true;
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(742, 265);
+            this.button9.Location = new System.Drawing.Point(755, 265);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.Size = new System.Drawing.Size(110, 40);
             this.button9.TabIndex = 10;
             this.button9.Text = "button9";
             this.button9.UseVisualStyleBackColor = true;
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(742, 294);
+            this.button10.Location = new System.Drawing.Point(755, 294);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.Size = new System.Drawing.Size(110, 40);
             this.button10.TabIndex = 11;
             this.button10.Text = "button10";
             this.button10.UseVisualStyleBackColor = true;
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(742, 323);
+            this.button11.Location = new System.Drawing.Point(755, 323);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.Size = new System.Drawing.Size(110, 40);
             this.button11.TabIndex = 12;
             this.button11.Text = "button11";
             this.button11.UseVisualStyleBackColor = true;
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(742, 352);
+            this.button12.Location = new System.Drawing.Point(755, 352);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(75, 23);
+            this.button12.Size = new System.Drawing.Size(110, 40);
             this.button12.TabIndex = 13;
             this.button12.Text = "button12";
             this.button12.UseVisualStyleBackColor = true;
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(841, 4);
+            this.button13.Location = new System.Drawing.Point(892, 2);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(75, 23);
+            this.button13.Size = new System.Drawing.Size(110, 40);
             this.button13.TabIndex = 14;
             this.button13.Text = "button13";
             this.button13.UseVisualStyleBackColor = true;
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(841, 33);
+            this.button14.Location = new System.Drawing.Point(892, 31);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(75, 23);
+            this.button14.Size = new System.Drawing.Size(110, 40);
             this.button14.TabIndex = 15;
             this.button14.Text = "button14";
             this.button14.UseVisualStyleBackColor = true;
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(841, 64);
+            this.button15.Location = new System.Drawing.Point(892, 62);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(75, 23);
+            this.button15.Size = new System.Drawing.Size(110, 40);
             this.button15.TabIndex = 16;
             this.button15.Text = "button15";
             this.button15.UseVisualStyleBackColor = true;
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(841, 93);
+            this.button16.Location = new System.Drawing.Point(892, 91);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(75, 23);
+            this.button16.Size = new System.Drawing.Size(110, 40);
             this.button16.TabIndex = 17;
             this.button16.Text = "button16";
             this.button16.UseVisualStyleBackColor = true;
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(841, 122);
+            this.button17.Location = new System.Drawing.Point(892, 120);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(75, 23);
+            this.button17.Size = new System.Drawing.Size(110, 40);
             this.button17.TabIndex = 18;
             this.button17.Text = "button17";
             this.button17.UseVisualStyleBackColor = true;
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(841, 151);
+            this.button18.Location = new System.Drawing.Point(892, 149);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(75, 23);
+            this.button18.Size = new System.Drawing.Size(110, 40);
             this.button18.TabIndex = 19;
             this.button18.Text = "button18";
             this.button18.UseVisualStyleBackColor = true;
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(841, 180);
+            this.button19.Location = new System.Drawing.Point(892, 178);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(75, 23);
+            this.button19.Size = new System.Drawing.Size(110, 40);
             this.button19.TabIndex = 20;
             this.button19.Text = "button19";
             this.button19.UseVisualStyleBackColor = true;
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(841, 209);
+            this.button20.Location = new System.Drawing.Point(892, 207);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(75, 23);
+            this.button20.Size = new System.Drawing.Size(110, 40);
             this.button20.TabIndex = 21;
             this.button20.Text = "button20";
             this.button20.UseVisualStyleBackColor = true;
             // 
             // button21
             // 
-            this.button21.Location = new System.Drawing.Point(841, 238);
+            this.button21.Location = new System.Drawing.Point(892, 236);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(75, 23);
+            this.button21.Size = new System.Drawing.Size(110, 40);
             this.button21.TabIndex = 22;
             this.button21.Text = "button21";
             this.button21.UseVisualStyleBackColor = true;
             // 
             // button22
             // 
-            this.button22.Location = new System.Drawing.Point(841, 267);
+            this.button22.Location = new System.Drawing.Point(892, 265);
             this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(75, 23);
+            this.button22.Size = new System.Drawing.Size(110, 40);
             this.button22.TabIndex = 23;
             this.button22.Text = "button22";
             this.button22.UseVisualStyleBackColor = true;
             // 
             // button23
             // 
-            this.button23.Location = new System.Drawing.Point(841, 296);
+            this.button23.Location = new System.Drawing.Point(892, 294);
             this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(75, 23);
+            this.button23.Size = new System.Drawing.Size(110, 40);
             this.button23.TabIndex = 24;
             this.button23.Text = "button23";
             this.button23.UseVisualStyleBackColor = true;
             // 
             // button24
             // 
-            this.button24.Location = new System.Drawing.Point(841, 325);
+            this.button24.Location = new System.Drawing.Point(892, 323);
             this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(75, 23);
+            this.button24.Size = new System.Drawing.Size(110, 40);
             this.button24.TabIndex = 25;
             this.button24.Text = "button24";
             this.button24.UseVisualStyleBackColor = true;
             // 
             // button25
             // 
-            this.button25.Location = new System.Drawing.Point(841, 354);
+            this.button25.Location = new System.Drawing.Point(892, 352);
             this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(75, 23);
+            this.button25.Size = new System.Drawing.Size(110, 40);
             this.button25.TabIndex = 26;
             this.button25.Text = "button25";
             this.button25.UseVisualStyleBackColor = true;
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(742, 4);
+            this.button0.Location = new System.Drawing.Point(755, 4);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(75, 23);
+            this.button0.Size = new System.Drawing.Size(110, 40);
             this.button0.TabIndex = 27;
             this.button0.Text = "button26";
             this.button0.UseVisualStyleBackColor = true;
@@ -770,7 +770,7 @@ namespace FiltersDemo
             // MainForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
-            this.ClientSize = new System.Drawing.Size(1185, 562);
+            this.ClientSize = new System.Drawing.Size(1185, 653);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button25);
             this.Controls.Add(this.button24);
@@ -814,373 +814,651 @@ namespace FiltersDemo
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main( )
+        static void Main()
         {
-            Application.Run( new MainForm( ) );
+            Application.Run(new MainForm());
         }
 
         // On File->Exit menu item
-        private void exitFilrItem_Click( object sender, System.EventArgs e )
+        private void exitFilrItem_Click(object sender, System.EventArgs e)
         {
-            Application.Exit( );
+            Application.Exit();
         }
 
         // On File->Open menu item
-        private void openFileItem_Click( object sender, System.EventArgs e )
+        private void openFileItem_Click(object sender, System.EventArgs e)
         {
             try
             {
                 // show file open dialog
                 openFileDialog.InitialDirectory = @"C:\______test_files\";
-                if ( openFileDialog.ShowDialog( ) == DialogResult.OK )
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     // load image
-                    sourceImage = (Bitmap) Bitmap.FromFile( openFileDialog.FileName );
+                    sourceImage = (Bitmap)Bitmap.FromFile(openFileDialog.FileName);
 
                     // check pixel format
-                    if ( ( sourceImage.PixelFormat == PixelFormat.Format16bppGrayScale ) ||
-                         ( Bitmap.GetPixelFormatSize( sourceImage.PixelFormat ) > 32 ) )
+                    if ((sourceImage.PixelFormat == PixelFormat.Format16bppGrayScale) ||
+                         (Bitmap.GetPixelFormatSize(sourceImage.PixelFormat) > 32))
                     {
-                        MessageBox.Show( "The demo application supports only color images.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                        MessageBox.Show("The demo application supports only color images.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         // free image
-                        sourceImage.Dispose( );
+                        sourceImage.Dispose();
                         sourceImage = null;
                     }
                     else
                     {
                         // make sure the image has 24 bpp format
-                        if ( sourceImage.PixelFormat != PixelFormat.Format24bppRgb )
+                        if (sourceImage.PixelFormat != PixelFormat.Format24bppRgb)
                         {
-                            Bitmap temp = AForge.Imaging.Image.Clone( sourceImage, PixelFormat.Format24bppRgb );
-                            sourceImage.Dispose( );
+                            Bitmap temp = AForge.Imaging.Image.Clone(sourceImage, PixelFormat.Format24bppRgb);
+                            sourceImage.Dispose();
                             sourceImage = temp;
                         }
                     }
 
-                    ClearCurrentImage( );
+                    ClearCurrentImage();
 
                     // display image
                     pictureBox.Image = sourceImage;
                     noneFiltersItem.Checked = true;
 
                     // enable filters menu
-                    filtersItem.Enabled = ( sourceImage != null );
+                    filtersItem.Enabled = (sourceImage != null);
                 }
             }
             catch
             {
-                MessageBox.Show( "Failed loading the image", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                MessageBox.Show("Failed loading the image", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         // On Size mode->Normal menu item
-        private void normalSizeItem_Click( object sender, System.EventArgs e )
+        private void normalSizeItem_Click(object sender, System.EventArgs e)
         {
             pictureBox.SizeMode = PictureBoxSizeMode.Normal;
         }
 
         // On Size mode->Stretched menu item
-        private void stretchedSizeItem_Click( object sender, System.EventArgs e )
+        private void stretchedSizeItem_Click(object sender, System.EventArgs e)
         {
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         // On Size mode->Centered size menu item
-        private void centeredSizeItem_Click( object sender, System.EventArgs e )
+        private void centeredSizeItem_Click(object sender, System.EventArgs e)
         {
             pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
         }
 
         // On Size menu item popup
-        private void sizeItem_Popup( object sender, System.EventArgs e )
+        private void sizeItem_Popup(object sender, System.EventArgs e)
         {
-            normalSizeItem.Checked = ( pictureBox.SizeMode == PictureBoxSizeMode.Normal );
-            stretchedSizeItem.Checked = ( pictureBox.SizeMode == PictureBoxSizeMode.StretchImage );
-            centeredSizeItem.Checked = ( pictureBox.SizeMode == PictureBoxSizeMode.CenterImage );
+            normalSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.Normal);
+            stretchedSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.StretchImage);
+            centeredSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.CenterImage);
         }
 
         // Clear current image in picture box
-        private void ClearCurrentImage( )
+        private void ClearCurrentImage()
         {
             // clear current image from picture box
             pictureBox.Image = null;
             // free current image
-            if ( ( noneFiltersItem.Checked == false ) && ( filteredImage != null ) )
+            if ((noneFiltersItem.Checked == false) && (filteredImage != null))
             {
-                filteredImage.Dispose( );
+                filteredImage.Dispose();
                 filteredImage = null;
             }
             // uncheck all menu items
-            foreach ( MenuItem item in filtersItem.MenuItems )
+            foreach (MenuItem item in filtersItem.MenuItems)
                 item.Checked = false;
         }
 
         // Apply filter to the source image and show the filtered image
-        private void ApplyFilter( IFilter filter )
+        private void ApplyFilter(IFilter filter)
         {
-            ClearCurrentImage( );
+            ClearCurrentImage();
             // apply filter
-            filteredImage = filter.Apply( sourceImage );
+            filteredImage = filter.Apply(sourceImage);
             // display filtered image
             pictureBox.Image = filteredImage;
         }
 
         // On Filters->None item
-        private void noneFiltersItem_Click( object sender, System.EventArgs e )
+        private void noneFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ClearCurrentImage( );
+            ClearCurrentImage();
             // display source image
             pictureBox.Image = sourceImage;
             noneFiltersItem.Checked = true;
         }
 
         // On Filters->Grayscale item
-        private void grayscaleFiltersItem_Click( object sender, System.EventArgs e )
+        private void grayscaleFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( Grayscale.CommonAlgorithms.BT709 );
+            ApplyFilter(Grayscale.CommonAlgorithms.BT709);
             grayscaleFiltersItem.Checked = true;
         }
 
         // On Filters->Sepia item
-        private void sepiaFiltersItem_Click( object sender, System.EventArgs e )
+        private void sepiaFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new Sepia( ) );
+            ApplyFilter(new Sepia());
             sepiaFiltersItem.Checked = true;
         }
 
         // On Filters->Invert item
-        private void invertFiltersItem_Click( object sender, System.EventArgs e )
+        private void invertFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new Invert( ) );
+            ApplyFilter(new Invert());
             invertFiltersItem.Checked = true;
         }
 
         // On Filters->Rotate Channels item
-        private void rotateChannelFiltersItem_Click( object sender, System.EventArgs e )
+        private void rotateChannelFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new RotateChannels( ) );
+            ApplyFilter(new RotateChannels());
             rotateChannelFiltersItem.Checked = true;
         }
 
         // On Filters->Color filtering
-        private void colorFiltersItem_Click( object sender, System.EventArgs e )
+        private void colorFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new ColorFiltering( new IntRange( 25, 230 ), new IntRange( 25, 230 ), new IntRange( 25, 230 ) ) );
+            ApplyFilter(new ColorFiltering(new IntRange(25, 230), new IntRange(25, 230), new IntRange(25, 230)));
             colorFiltersItem.Checked = true;
         }
 
         // On Filters->Hue modifier
-        private void hueModifierFiltersItem_Click( object sender, System.EventArgs e )
+        private void hueModifierFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new HueModifier( 50 ) );
+            ApplyFilter(new HueModifier(50));
             hueModifierFiltersItem.Checked = true;
         }
 
         // On Filters->Saturation adjusting
-        private void saturationAdjustingFiltersItem_Click( object sender, System.EventArgs e )
+        private void saturationAdjustingFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new SaturationCorrection( 0.15f ) );
+            ApplyFilter(new SaturationCorrection(0.15f));
             saturationAdjustingFiltersItem.Checked = true;
         }
 
         // On Filters->Brightness adjusting
-        private void brightnessAdjustingFiltersItem_Click( object sender, System.EventArgs e )
+        private void brightnessAdjustingFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new BrightnessCorrection( ) );
+            ApplyFilter(new BrightnessCorrection());
             brightnessAdjustingFiltersItem.Checked = true;
         }
 
         // On Filters->Contrast adjusting
-        private void contrastAdjustingFiltersItem_Click( object sender, System.EventArgs e )
+        private void contrastAdjustingFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new ContrastCorrection( ) );
+            ApplyFilter(new ContrastCorrection());
             contrastAdjustingFiltersItem.Checked = true;
         }
 
         // On Filters->HSL filtering
-        private void hslFiltersItem_Click( object sender, System.EventArgs e )
+        private void hslFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new HSLFiltering( new IntRange( 330, 30 ), new Range( 0, 1 ), new Range( 0, 1 ) ) );
+            ApplyFilter(new HSLFiltering(new IntRange(330, 30), new Range(0, 1), new Range(0, 1)));
             hslFiltersItem.Checked = true;
         }
 
         // On Filters->YCbCr filtering
-        private void yCbCrLinearFiltersItem_Click( object sender, System.EventArgs e )
+        private void yCbCrLinearFiltersItem_Click(object sender, System.EventArgs e)
         {
-            YCbCrLinear filter = new YCbCrLinear( );
+            YCbCrLinear filter = new YCbCrLinear();
 
-            filter.InCb = new Range( -0.3f, 0.3f );
+            filter.InCb = new Range(-0.3f, 0.3f);
 
-            ApplyFilter( filter );
+            ApplyFilter(filter);
             yCbCrLinearFiltersItem.Checked = true;
         }
 
         // On Filters->YCbCr filtering
-        private void yCbCrFiltersItem_Click( object sender, System.EventArgs e )
+        private void yCbCrFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new YCbCrFiltering( new Range( 0.2f, 0.9f ), new Range( -0.3f, 0.3f ), new Range( -0.3f, 0.3f ) ) );
+            ApplyFilter(new YCbCrFiltering(new Range(0.2f, 0.9f), new Range(-0.3f, 0.3f), new Range(-0.3f, 0.3f)));
             yCbCrFiltersItem.Checked = true;
         }
 
         // On Filters->Threshold binarization
-        private void thresholdFiltersItem_Click( object sender, System.EventArgs e )
+        private void thresholdFiltersItem_Click(object sender, System.EventArgs e)
         {
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
-            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply( sourceImage );
+            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
             // apply threshold filter
-            ApplyFilter( new Threshold( ) );
+            ApplyFilter(new Threshold());
             // delete grayscale image and restore original
-            sourceImage.Dispose( );
+            sourceImage.Dispose();
             sourceImage = originalImage;
 
             thresholdFiltersItem.Checked = true;
         }
 
         // On Filters->Floyd-Steinberg dithering
-        private void floydFiltersItem_Click( object sender, System.EventArgs e )
+        private void floydFiltersItem_Click(object sender, System.EventArgs e)
         {
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
-            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply( sourceImage );
+            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
             // apply threshold filter
-            ApplyFilter( new FloydSteinbergDithering( ) );
+            ApplyFilter(new FloydSteinbergDithering());
             // delete grayscale image and restore original
-            sourceImage.Dispose( );
+            sourceImage.Dispose();
             sourceImage = originalImage;
 
             floydFiltersItem.Checked = true;
         }
 
         // On Filters->Ordered dithering
-        private void orderedDitheringFiltersItem_Click( object sender, System.EventArgs e )
+        private void orderedDitheringFiltersItem_Click(object sender, System.EventArgs e)
         {
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
-            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply( sourceImage );
+            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
             // apply threshold filter
-            ApplyFilter( new OrderedDithering( ) );
+            ApplyFilter(new OrderedDithering());
             // delete grayscale image and restore original
-            sourceImage.Dispose( );
+            sourceImage.Dispose();
             sourceImage = originalImage;
 
             orderedDitheringFiltersItem.Checked = true;
         }
 
         // On Filters->Correlation
-        private void convolutionFiltersItem_Click( object sender, System.EventArgs e )
+        private void convolutionFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new Convolution( new int[,] {
+            ApplyFilter(new Convolution(new int[,] {
 								{ 1, 2, 3, 2, 1 },
 								{ 2, 4, 5, 4, 2 },
 								{ 3, 5, 6, 5, 3 },
 								{ 2, 4, 5, 4, 2 },
-								{ 1, 2, 3, 2, 1 } } ) );
+								{ 1, 2, 3, 2, 1 } }));
             convolutionFiltersItem.Checked = true;
         }
 
         // On Filters->Sharpen
-        private void sharpenFiltersItem_Click( object sender, System.EventArgs e )
+        private void sharpenFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new Sharpen( ) );
+            ApplyFilter(new Sharpen());
             sharpenFiltersItem.Checked = true;
         }
 
         // On Filters->Difference edge detector
-        private void differenceEdgesFiltersItem_Click( object sender, System.EventArgs e )
+        private void differenceEdgesFiltersItem_Click(object sender, System.EventArgs e)
         {
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
-            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply( sourceImage );
+            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
             // apply edge filter
-            ApplyFilter( new DifferenceEdgeDetector( ) );
+            ApplyFilter(new DifferenceEdgeDetector());
             // delete grayscale image and restore original
-            sourceImage.Dispose( );
+            sourceImage.Dispose();
             sourceImage = originalImage;
 
             differenceEdgesFiltersItem.Checked = true;
         }
 
         // On Filters->Homogenity edge detector
-        private void homogenityEdgesFiltersItem_Click( object sender, System.EventArgs e )
+        private void homogenityEdgesFiltersItem_Click(object sender, System.EventArgs e)
         {
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
-            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply( sourceImage );
+            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
             // apply edge filter
-            ApplyFilter( new HomogenityEdgeDetector( ) );
+            ApplyFilter(new HomogenityEdgeDetector());
             // delete grayscale image and restore original
-            sourceImage.Dispose( );
+            sourceImage.Dispose();
             sourceImage = originalImage;
 
             homogenityEdgesFiltersItem.Checked = true;
         }
 
         // On Filters->Sobel edge detector
-        private void sobelEdgesFiltersItem_Click( object sender, System.EventArgs e )
+        private void sobelEdgesFiltersItem_Click(object sender, System.EventArgs e)
         {
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
-            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply( sourceImage );
+            sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
             // apply edge filter
-            ApplyFilter( new SobelEdgeDetector( ) );
+            ApplyFilter(new SobelEdgeDetector());
             // delete grayscale image and restore original
-            sourceImage.Dispose( );
+            sourceImage.Dispose();
             sourceImage = originalImage;
 
             sobelEdgesFiltersItem.Checked = true;
         }
 
         // On Filters->Levels Linear Correction
-        private void rgbLinearFiltersItem_Click( object sender, System.EventArgs e )
+        private void rgbLinearFiltersItem_Click(object sender, System.EventArgs e)
         {
-            LevelsLinear filter = new LevelsLinear( );
+            LevelsLinear filter = new LevelsLinear();
 
-            filter.InRed = new IntRange( 30, 230 );
-            filter.InGreen = new IntRange( 50, 240 );
-            filter.InBlue = new IntRange( 10, 210 );
+            filter.InRed = new IntRange(30, 230);
+            filter.InGreen = new IntRange(50, 240);
+            filter.InBlue = new IntRange(10, 210);
 
-            ApplyFilter( filter );
+            ApplyFilter(filter);
             rgbLinearFiltersItem.Checked = true;
         }
 
         // On Filters->Jitter
-        private void jitterFiltersItem_Click( object sender, System.EventArgs e )
+        private void jitterFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new Jitter( ) );
+            ApplyFilter(new Jitter());
             jitterFiltersItem.Checked = true;
         }
 
         // On Filters->Oil Painting
-        private void oilFiltersItem_Click( object sender, System.EventArgs e )
+        private void oilFiltersItem_Click(object sender, System.EventArgs e)
         {
-            ApplyFilter( new OilPainting( ) );
+            ApplyFilter(new OilPainting());
             oilFiltersItem.Checked = true;
         }
 
         // On Filters->Gaussin blur
-        private void gaussianFiltersItem_Click( object sender, EventArgs e )
+        private void gaussianFiltersItem_Click(object sender, EventArgs e)
         {
-            ApplyFilter( new GaussianBlur( 2.0, 7 ) );
+            ApplyFilter(new GaussianBlur(2.0, 7));
             gaussianFiltersItem.Checked = true;
         }
 
         // On Filters->Texture
-        private void textureFiltersItem_Click( object sender, EventArgs e )
+        private void textureFiltersItem_Click(object sender, EventArgs e)
         {
-            ApplyFilter( new Texturer( new TextileTexture( ), 1.0, 0.8 ) );
+            ApplyFilter(new Texturer(new TextileTexture(), 1.0, 0.8));
             textureFiltersItem.Checked = true;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
 
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 740;
+            y_st = 10;
+            dx = 120;
+            dy = 45;
+
+            button0.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 11);
+            button12.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 12);
+            button13.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 0);
+            button14.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 1);
+            button15.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 2);
+            button16.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 3);
+            button17.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 4);
+            button18.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 5);
+            button19.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 6);
+            button20.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 7);
+            button21.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 8);
+            button22.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 9);
+            button23.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 10);
+            button24.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 11);
+            button25.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 12);
+
+            button0.Text = "No Filter";
+            button1.Text = "Grayscale";
+            button2.Text = "Sepia";
+            button3.Text = "Invert";
+            button4.Text = "Rotate channel";
+            button5.Text = "Color filtering";
+            button6.Text = "Levels linear correction";
+            button7.Text = "Hue modifier";
+            button8.Text = "Saturation adjusting";
+            button9.Text = "Brightness adjusting";
+            button10.Text = "Contrast adjusting";
+            button11.Text = "HSL filtering";
+            button12.Text = "YCbCr linear correction";
+            button13.Text = "YCbCr filtering";
+            button14.Text = "Threshold binarization";
+            button15.Text = "Floyd-Steinberg dithering";
+            button16.Text = "Ordered dithering";
+            button17.Text = "Convolution";
+            button18.Text = "Sharpen";
+            button19.Text = "Gaussian blur";
+            button20.Text = "Difference edge detector";
+            button21.Text = "Homogenity edge detector";
+            button22.Text = "Sobel edge detector";
+            button23.Text = "Jitter";
+            button24.Text = "Oil Painting";
+            button25.Text = "Texture";
+
+            this.button0.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button1.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button2.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button3.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button4.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button5.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button6.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button7.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button8.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button9.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button10.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button11.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button12.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button13.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button14.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button15.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button16.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button17.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button18.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button19.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button20.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button21.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button22.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button23.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button24.Click += new System.EventHandler(this.bt_filter_select_Click);
+            this.button25.Click += new System.EventHandler(this.bt_filter_select_Click);
+        }
+
+        private void bt_filter_select_Click(object sender, EventArgs e)
+        {
+            string name = ((Button)sender).Name;
+            string text = ((Button)sender).Text;
+            richTextBox1.Text += name + "\t" + text + "\n";
+
+            switch (name)
+            {
+                case "button0":
+                    richTextBox1.Text += "On Filters->None item\n";
+                    ClearCurrentImage();
+                    pictureBox.Image = sourceImage;
+                    break;
+                case "button1":
+                    richTextBox1.Text += "On Filters->Grayscale item\n";
+                    ApplyFilter(Grayscale.CommonAlgorithms.BT709);
+                    break;
+                case "button2":
+                    richTextBox1.Text += "On Filters->Sepia item\n";
+                    ApplyFilter(new Sepia());
+                    break;
+                case "button3":
+                    richTextBox1.Text += "On Filters->Invert item\n";
+                    ApplyFilter(new Invert());
+                    break;
+                case "button4":
+                    richTextBox1.Text += "On Filters->Rotate Channels item\n";
+                    ApplyFilter(new RotateChannels());
+                    break;
+                case "button5":
+                    richTextBox1.Text += "On Filters->Color filtering\n";
+                    ApplyFilter(new ColorFiltering(new IntRange(25, 230), new IntRange(25, 230), new IntRange(25, 230)));
+                    break;
+                case "button6":
+                    richTextBox1.Text += "On Filters->Levels Linear Correction\n";
+                    LevelsLinear filter = new LevelsLinear();
+
+                    filter.InRed = new IntRange(30, 230);
+                    filter.InGreen = new IntRange(50, 240);
+                    filter.InBlue = new IntRange(10, 210);
+
+                    ApplyFilter(filter);
+                    break;
+                case "button7":
+                    richTextBox1.Text += "On Filters->Hue modifier\n";
+                    ApplyFilter(new HueModifier(50));
+                    break;
+                case "button8":
+                    richTextBox1.Text += "On Filters->Saturation adjusting\n";
+                    ApplyFilter(new SaturationCorrection(0.15f));
+                    break;
+                case "button9":
+                    richTextBox1.Text += "On Filters->Brightness adjusting\n";
+                    ApplyFilter(new BrightnessCorrection());
+                    break;
+                case "button10":
+                    richTextBox1.Text += "On Filters->Contrast adjusting\n";
+                    ApplyFilter(new ContrastCorrection());
+                    break;
+                case "button11":
+                    richTextBox1.Text += "On Filters->HSL filtering\n";
+                    ApplyFilter(new HSLFiltering(new IntRange(330, 30), new Range(0, 1), new Range(0, 1)));
+                    break;
+                case "button12":
+                    /*
+                    richTextBox1.Text += "On Filters->YCbCr filtering\n";
+                    YCbCrLinear filter = new YCbCrLinear();
+                    filter.InCb = new Range(-0.3f, 0.3f);
+                    ApplyFilter(filter);
+                    */
+                    break;
+                case "button13":
+                    richTextBox1.Text += "On Filters->YCbCr filtering\n";
+                    ApplyFilter(new YCbCrFiltering(new Range(0.2f, 0.9f), new Range(-0.3f, 0.3f), new Range(-0.3f, 0.3f)));
+                    break;
+                case "button14":
+                    richTextBox1.Text += "On Filters->Threshold binarization\n";
+                    // save original image
+                    Bitmap originalImage5 = sourceImage;
+                    // get grayscale image
+                    sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
+                    // apply threshold filter
+                    ApplyFilter(new Threshold());
+                    // delete grayscale image and restore original
+                    sourceImage.Dispose();
+                    sourceImage = originalImage5;
+                    break;
+                case "button15":
+                    richTextBox1.Text += "On Filters->Floyd-Steinberg dithering\n";
+                    // save original image
+                    Bitmap originalImage6 = sourceImage;
+                    // get grayscale image
+                    sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
+                    // apply threshold filter
+                    ApplyFilter(new FloydSteinbergDithering());
+                    // delete grayscale image and restore original
+                    sourceImage.Dispose();
+                    sourceImage = originalImage6;
+                    break;
+                case "button16":
+                    richTextBox1.Text += "On Filters->Ordered dithering\n";
+                    // save original image
+                    Bitmap originalImage7 = sourceImage;
+                    // get grayscale image
+                    sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
+                    // apply threshold filter
+                    ApplyFilter(new OrderedDithering());
+                    // delete grayscale image and restore original
+                    sourceImage.Dispose();
+                    sourceImage = originalImage7;
+                    break;
+                case "button17":
+                    richTextBox1.Text += "On Filters->Correlation\n";
+                    ApplyFilter(new Convolution(new int[,] {
+								{ 1, 2, 3, 2, 1 },
+								{ 2, 4, 5, 4, 2 },
+								{ 3, 5, 6, 5, 3 },
+								{ 2, 4, 5, 4, 2 },
+								{ 1, 2, 3, 2, 1 } }));
+                    break;
+                case "button18":
+                    richTextBox1.Text += "On Filters->Sharpen\n";
+                    ApplyFilter(new Sharpen());
+                    break;
+                case "button19":
+                    richTextBox1.Text += "On Filters->Gaussin blur\n";
+                    ApplyFilter(new GaussianBlur(2.0, 7));
+                    break;
+                case "button20":
+                    richTextBox1.Text += "On Filters->Difference edge detector\n";
+                    // save original image
+                    Bitmap originalImage9 = sourceImage;
+                    // get grayscale image
+                    sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
+                    // apply edge filter
+                    ApplyFilter(new DifferenceEdgeDetector());
+                    // delete grayscale image and restore original
+                    sourceImage.Dispose();
+                    sourceImage = originalImage9;
+                    break;
+                case "button21":
+                    richTextBox1.Text += "On Filters->Homogenity edge detector\n";
+                    // save original image
+                    Bitmap originalImage10 = sourceImage;
+                    // get grayscale image
+                    sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
+                    // apply edge filter
+                    ApplyFilter(new HomogenityEdgeDetector());
+                    // delete grayscale image and restore original
+                    sourceImage.Dispose();
+                    sourceImage = originalImage10;
+                    break;
+                case "button22":
+                    richTextBox1.Text += "On Filters->Sobel edge detector\n";
+                    // save original image
+                    Bitmap originalImage11 = sourceImage;
+                    // get grayscale image
+                    sourceImage = Grayscale.CommonAlgorithms.RMY.Apply(sourceImage);
+                    // apply edge filter
+                    ApplyFilter(new SobelEdgeDetector());
+                    // delete grayscale image and restore original
+                    sourceImage.Dispose();
+                    sourceImage = originalImage11;
+                    break;
+                case "button23":
+                    richTextBox1.Text += "On Filters->Jitter\n";
+                    ApplyFilter(new Jitter());
+                    break;
+                case "button24":
+                    richTextBox1.Text += "On Filters->Oil Painting\n";
+                    ApplyFilter(new OilPainting());
+                    break;
+                case "button25":
+                    richTextBox1.Text += "On Filters->Texture\n";
+                    ApplyFilter(new Texturer(new TextileTexture(), 1.0, 0.8));
+                    break;
+                default:
+                    ClearCurrentImage();
+                    pictureBox.Image = sourceImage;
+                    break;
+            }
         }
     }
 }

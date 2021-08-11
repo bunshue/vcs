@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("vcs_WebCam_Emgu2k")]
+[assembly: AssemblyTitle("vcs_WebCam_Emgu2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Home")]
-[assembly: AssemblyProduct("vcs_WebCam_Emgu2k")]
-[assembly: AssemblyCopyright("Copyright © Home 2018")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("vcs_WebCam_Emgu2")]
+[assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("c9744205-a7e6-44f6-b22c-4c326773df0a")]
+[assembly: Guid("428b5a65-e313-433e-9d22-97d08f0a6de1")]
 
 // 組件的版本資訊是由下列四項值構成:
 //
