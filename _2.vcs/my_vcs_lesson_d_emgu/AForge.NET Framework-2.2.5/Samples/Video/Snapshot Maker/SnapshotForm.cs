@@ -11,9 +11,9 @@ namespace Snapshot_Maker
 {
     public partial class SnapshotForm : Form
     {
-        public SnapshotForm( )
+        public SnapshotForm()
         {
-            InitializeComponent( );
+            InitializeComponent();
         }
 
         private void SnapshotForm_Load(object sender, EventArgs e)
@@ -21,54 +21,42 @@ namespace Snapshot_Maker
 
         }
 
-        public void SetImage( Bitmap bitmap )
+        public void SetImage(Bitmap bitmap)
         {
-            timeBox.Text = DateTime.Now.ToLongTimeString( );
+            timeBox.Text = DateTime.Now.ToLongTimeString();
 
-            lock ( this )
+            lock (this)
             {
-                Bitmap old = (Bitmap) pictureBox.Image;
+                Bitmap old = (Bitmap)pictureBox.Image;
                 pictureBox.Image = bitmap;
 
-                if ( old != null )
+                if (old != null)
                 {
-                    old.Dispose( );
+                    old.Dispose();
                 }
             }
         }
 
-        private void saveButton_Click( object sender, EventArgs e )
+        private void saveButton_Click(object sender, EventArgs e)
         {
-            if ( saveFileDialog.ShowDialog( ) == DialogResult.OK )
+            string filename = Application.StartupPath + "\\snapshot_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            try
             {
-                string ext = Path.GetExtension( saveFileDialog.FileName ).ToLower( );
-                ImageFormat format = ImageFormat.Jpeg;
-
-                if ( ext == ".bmp" )
+                lock (this)
                 {
-                    format = ImageFormat.Bmp;
-                }
-                else if ( ext == ".png" )
-                {
-                    format = ImageFormat.Png;
-                }
-
-                try
-                {
-                    lock ( this )
-                    {
-                        Bitmap image = (Bitmap) pictureBox.Image;
-
-                        image.Save( saveFileDialog.FileName, format );
-                    }
-                }
-                catch ( Exception ex )
-                {
-                    MessageBox.Show( "Failed saving the snapshot.\n" + ex.Message,
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                    Bitmap bitmap1 = (Bitmap)pictureBox.Image;
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+                    //richTextBox1.Text += "已存檔 : " + filename + "\n";
                 }
             }
+            catch (Exception ex)
+            {
+                //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                MessageBox.Show("Failed saving the snapshot.\n" + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
     }
 }
+

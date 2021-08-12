@@ -105,32 +105,32 @@ namespace Snapshot_Maker
             try
             {
                 videoCapabilities = videoDevice.VideoCapabilities;
-                snapshotCapabilities = videoDevice.SnapshotCapabilities;
 
+                richTextBox1.Text += "支持 video\t" + videoCapabilities.Length.ToString() + " 種格式\n";
                 foreach (VideoCapabilities capabilty in videoCapabilities)
                 {
                     videoResolutionsCombo.Items.Add(string.Format("{0} x {1}", capabilty.FrameSize.Width, capabilty.FrameSize.Height));
                     richTextBox1.Text += "抓到video resoluvtion : " + string.Format("{0} x {1}", capabilty.FrameSize.Width, capabilty.FrameSize.Height) + "\n";
                 }
-
-                foreach (VideoCapabilities capabilty in snapshotCapabilities)
-                {
-                    snapshotResolutionsCombo.Items.Add(string.Format("{0} x {1}", capabilty.FrameSize.Width, capabilty.FrameSize.Height));
-                    richTextBox1.Text += "抓到snapshot resoluvtion : " + string.Format("{0} x {1}", capabilty.FrameSize.Width, capabilty.FrameSize.Height) + "\n";
-                }
-
                 if (videoCapabilities.Length == 0)
                 {
                     videoResolutionsCombo.Items.Add("Not supported");
                     richTextBox1.Text += "不支持 video\n";
+                }
+                videoResolutionsCombo.SelectedIndex = 0;
+
+                snapshotCapabilities = videoDevice.SnapshotCapabilities;
+                richTextBox1.Text += "支持 snapshot\t" + snapshotCapabilities.Length.ToString() + " 種格式\n";
+                foreach (VideoCapabilities capabilty in snapshotCapabilities)
+                {
+                    snapshotResolutionsCombo.Items.Add(string.Format("{0} x {1}", capabilty.FrameSize.Width, capabilty.FrameSize.Height));
+                    richTextBox1.Text += "抓到snapshot resoluvtion : " + string.Format("{0} x {1}", capabilty.FrameSize.Width, capabilty.FrameSize.Height) + "\n";
                 }
                 if (snapshotCapabilities.Length == 0)
                 {
                     snapshotResolutionsCombo.Items.Add("Not supported");
                     richTextBox1.Text += "不支持 snapshot\n";
                 }
-
-                videoResolutionsCombo.SelectedIndex = 0;
                 snapshotResolutionsCombo.SelectedIndex = 0;
             }
             finally
