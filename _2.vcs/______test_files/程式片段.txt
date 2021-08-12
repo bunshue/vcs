@@ -1,4 +1,21 @@
 
+
+
+MainMenu選了之後會有打勾記號
+
+        // On Size menu item popup
+        private void sizeItem_Popup(object sender, System.EventArgs e)
+        {
+            normalSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.Normal);
+            stretchedSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.StretchImage);
+            centeredSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.CenterImage);
+        }
+
+
+
+
+
+
 using System.Reflection;
             Assembly assembly = this.GetType().Assembly;
             richTextBox1.Text += "取得專案名稱 : " + assembly.GetName().Name + "\n";

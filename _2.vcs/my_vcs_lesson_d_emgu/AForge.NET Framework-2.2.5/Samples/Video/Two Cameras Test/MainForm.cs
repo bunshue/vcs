@@ -25,18 +25,15 @@ namespace TwoCamerasTest
     {
         // list of video devices
         FilterInfoCollection videoDevices;
-        // stop watch for measuring fps
-        private Stopwatch stopwatch = null;
-
         public MainForm()
         {
             InitializeComponent();
         }
 
+
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            camera1FpsLabel.Text = string.Empty;
-            camera2FpsLabel.Text = string.Empty;
 
             // show device list
             try
@@ -56,23 +53,8 @@ namespace TwoCamerasTest
                     string cameraName = i + " : " + videoDevices[i - 1].Name;
 
                     camera1Combo.Items.Add(cameraName);
-                    camera2Combo.Items.Add(cameraName);
 
                     richTextBox1.Text += "i = " + i.ToString() + "\t" + cameraName + "\n";
-                }
-
-                // check cameras count
-                if (videoDevices.Count == 1)
-                {
-                    camera2Combo.Items.Clear();
-
-                    camera2Combo.Items.Add("Only one camera found");
-                    camera2Combo.SelectedIndex = 0;
-                    camera2Combo.Enabled = false;
-                }
-                else
-                {
-                    camera2Combo.SelectedIndex = 1;
                 }
                 camera1Combo.SelectedIndex = 0;
             }
@@ -81,13 +63,10 @@ namespace TwoCamerasTest
                 startButton.Enabled = false;
 
                 camera1Combo.Items.Add("No cameras found");
-                camera2Combo.Items.Add("No cameras found");
 
                 camera1Combo.SelectedIndex = 0;
-                camera2Combo.SelectedIndex = 0;
 
                 camera1Combo.Enabled = false;
-                camera2Combo.Enabled = false;
             }
         }
 
@@ -114,8 +93,6 @@ namespace TwoCamerasTest
             startButton.Enabled = true;
             stopButton.Enabled = false;
 
-            camera1FpsLabel.Text = string.Empty;
-            camera2FpsLabel.Text = string.Empty;
         }
 
         // Start cameras
@@ -127,98 +104,15 @@ namespace TwoCamerasTest
             videoSource1.DesiredFrameRate = 10;
             videoSourcePlayer1.VideoSource = videoSource1;
             videoSourcePlayer1.Start();
-
-            // create second video source
-            if (camera2Combo.Enabled == true)
-            {
-                System.Threading.Thread.Sleep(500);
-
-                VideoCaptureDevice videoSource2 = new VideoCaptureDevice(videoDevices[camera2Combo.SelectedIndex].MonikerString);
-                videoSource2.DesiredFrameRate = 10;
-
-                videoSourcePlayer2.VideoSource = videoSource2;
-                videoSourcePlayer2.Start();
-            }
-
-            // reset stop watch
-            stopwatch = null;
-            // start timer
-            timer.Start();
         }
 
         // Stop cameras
         private void StopCameras()
         {
-            timer.Stop();
-
             videoSourcePlayer1.SignalToStop();
-            videoSourcePlayer2.SignalToStop();
 
             videoSourcePlayer1.WaitForStop();
-            videoSourcePlayer2.WaitForStop();
         }
-
-        // On times tick - collect statistics
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            IVideoSource videoSource1 = videoSourcePlayer1.VideoSource;
-            IVideoSource videoSource2 = videoSourcePlayer2.VideoSource;
-
-            int framesReceived1 = 0;
-            int framesReceived2 = 0;
-
-            // get number of frames for the last second
-            if (videoSource1 != null)
-            {
-                framesReceived1 = videoSource1.FramesReceived;
-            }
-
-            if (videoSource2 != null)
-            {
-                framesReceived2 = videoSource2.FramesReceived;
-            }
-
-            if (stopwatch == null)
-            {
-                stopwatch = new Stopwatch();
-                stopwatch.Start();
-            }
-            else
-            {
-                stopwatch.Stop();
-
-                float fps1 = 1000.0f * framesReceived1 / stopwatch.ElapsedMilliseconds;
-                float fps2 = 1000.0f * framesReceived2 / stopwatch.ElapsedMilliseconds;
-
-                camera1FpsLabel.Text = fps1.ToString("F2") + " fps";
-                camera2FpsLabel.Text = fps2.ToString("F2") + " fps";
-
-                stopwatch.Reset();
-                stopwatch.Start();
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (videoSourcePlayer1.VideoSource == null)
-            {
-                richTextBox1.Text += "無圖可存\n";
-                return;
-            }
-
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            var bitmap = videoSourcePlayer1.GetCurrentVideoFrame();
-            if (bitmap != null)
-            {
-                bitmap.Save(filename, System.Drawing.Imaging.ImageFormat.Jpeg);
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "無圖可存\n";
-            }
-        }
-
     }
 }
 

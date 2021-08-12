@@ -23,7 +23,7 @@ namespace vcs_AForge_WebCam
 {
     public partial class Form1 : Form
     {
-        private Stopwatch stopwatch = null;
+        private Stopwatch stopwatch = null; //量測fps用
 
         public Form1()
         {
@@ -125,9 +125,8 @@ namespace vcs_AForge_WebCam
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        void Start_Webcam()
         {
-            //開啟WebCam
 
             VideoCaptureDeviceForm form = new VideoCaptureDeviceForm();
 
@@ -164,11 +163,21 @@ namespace vcs_AForge_WebCam
             }
         }
 
+        void Stop_Webcam()
+        {
+            CloseCurrentVideoSource();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //開啟WebCam
+            Start_Webcam();
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             //關閉WebCam
-
-            CloseCurrentVideoSource();
+            Stop_Webcam();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -204,5 +213,33 @@ namespace vcs_AForge_WebCam
                 richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            FilterInfoCollection videoDevices;
+            try
+            {
+                // enumerate video devices
+                videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+
+                richTextBox1.Text += "取得device count : " + videoDevices.Count.ToString() + "\n";
+
+                if (videoDevices.Count == 0)
+                {
+                    throw new Exception();
+                }
+
+                for (int i = 1, n = videoDevices.Count; i <= n; i++)
+                {
+                    string cameraName = i + " : " + videoDevices[i - 1].Name;
+
+                    richTextBox1.Text += "抓到 WebCam i = " + i.ToString() + "\t" + cameraName + "\n";
+                }
+            }
+            catch
+            {
+            }
+        }
     }
 }
+

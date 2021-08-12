@@ -31,7 +31,7 @@ namespace FiltersDemo
         private System.Windows.Forms.MenuItem menuItem3;
         private System.Windows.Forms.MenuItem exitFilrItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.MainMenu mainMenu;
         private System.Windows.Forms.MenuItem sizeItem;
         private System.Windows.Forms.MenuItem normalSizeItem;
@@ -101,6 +101,7 @@ namespace FiltersDemo
         private Button button24;
         private Button button25;
         private Button button0;
+        private Button bt_open;
         private System.Drawing.Bitmap filteredImage;
 
         // Constructor
@@ -112,7 +113,7 @@ namespace FiltersDemo
             InitializeComponent();
 
             // set default size mode of picture box
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         /// <summary>
@@ -182,7 +183,7 @@ namespace FiltersDemo
             this.stretchedSizeItem = new System.Windows.Forms.MenuItem();
             this.centeredSizeItem = new System.Windows.Forms.MenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -210,7 +211,8 @@ namespace FiltersDemo
             this.button24 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.bt_open = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -513,17 +515,18 @@ namespace FiltersDemo
                 "p)|*.bmp|GIF files (*.gif)|*.gif";
             this.openFileDialog.Title = "Open image";
             // 
-            // pictureBox
+            // pictureBox1
             // 
-            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.Location = new System.Drawing.Point(6, 6);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(730, 641);
-            this.pictureBox.TabIndex = 0;
-            this.pictureBox.TabStop = false;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(730, 724);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // richTextBox1
             // 
@@ -764,13 +767,24 @@ namespace FiltersDemo
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(110, 40);
             this.button0.TabIndex = 27;
-            this.button0.Text = "button26";
+            this.button0.Text = "button0";
             this.button0.UseVisualStyleBackColor = true;
+            // 
+            // bt_open
+            // 
+            this.bt_open.Location = new System.Drawing.Point(755, 428);
+            this.bt_open.Name = "bt_open";
+            this.bt_open.Size = new System.Drawing.Size(110, 40);
+            this.bt_open.TabIndex = 28;
+            this.bt_open.Text = "Open";
+            this.bt_open.UseVisualStyleBackColor = true;
+            this.bt_open.Click += new System.EventHandler(this.bt_open_Click);
             // 
             // MainForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
-            this.ClientSize = new System.Drawing.Size(1185, 653);
+            this.ClientSize = new System.Drawing.Size(1185, 736);
+            this.Controls.Add(this.bt_open);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button25);
             this.Controls.Add(this.button24);
@@ -798,13 +812,13 @@ namespace FiltersDemo
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.pictureBox1);
             this.Menu = this.mainMenu;
             this.MinimumSize = new System.Drawing.Size(320, 277);
             this.Name = "MainForm";
             this.Text = "Image Processing filters demo";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -828,82 +842,83 @@ namespace FiltersDemo
         // On File->Open menu item
         private void openFileItem_Click(object sender, System.EventArgs e)
         {
-            try
-            {
-                // show file open dialog
-                openFileDialog.InitialDirectory = @"C:\______test_files\";
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    // load image
-                    sourceImage = (Bitmap)Bitmap.FromFile(openFileDialog.FileName);
+                                                            try
+                                                            {
+                                                                // show file open dialog
+                                                                openFileDialog.InitialDirectory = @"C:\______test_files\";
+                                                                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                                                                {
+                                                                    // load image
+                                                                    sourceImage = (Bitmap)Bitmap.FromFile(openFileDialog.FileName);
 
-                    // check pixel format
-                    if ((sourceImage.PixelFormat == PixelFormat.Format16bppGrayScale) ||
-                         (Bitmap.GetPixelFormatSize(sourceImage.PixelFormat) > 32))
-                    {
-                        MessageBox.Show("The demo application supports only color images.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        // free image
-                        sourceImage.Dispose();
-                        sourceImage = null;
-                    }
-                    else
-                    {
-                        // make sure the image has 24 bpp format
-                        if (sourceImage.PixelFormat != PixelFormat.Format24bppRgb)
-                        {
-                            Bitmap temp = AForge.Imaging.Image.Clone(sourceImage, PixelFormat.Format24bppRgb);
-                            sourceImage.Dispose();
-                            sourceImage = temp;
-                        }
-                    }
+                                                                    // check pixel format
+                                                                    if ((sourceImage.PixelFormat == PixelFormat.Format16bppGrayScale) ||
+                                                                         (Bitmap.GetPixelFormatSize(sourceImage.PixelFormat) > 32))
+                                                                    {
+                                                                        MessageBox.Show("The demo application supports only color images.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                                        // free image
+                                                                        sourceImage.Dispose();
+                                                                        sourceImage = null;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        // make sure the image has 24 bpp format
+                                                                        if (sourceImage.PixelFormat != PixelFormat.Format24bppRgb)
+                                                                        {
+                                                                            Bitmap temp = AForge.Imaging.Image.Clone(sourceImage, PixelFormat.Format24bppRgb);
+                                                                            sourceImage.Dispose();
+                                                                            sourceImage = temp;
+                                                                        }
+                                                                    }
 
-                    ClearCurrentImage();
+                                                                    ClearCurrentImage();
 
-                    // display image
-                    pictureBox.Image = sourceImage;
-                    noneFiltersItem.Checked = true;
+                                                                    // display image
+                                                                    pictureBox1.Image = sourceImage;
+                                                                    noneFiltersItem.Checked = true;
 
-                    // enable filters menu
-                    filtersItem.Enabled = (sourceImage != null);
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Failed loading the image", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                                                                    // enable filters menu
+                                                                    filtersItem.Enabled = (sourceImage != null);
+                                                                }
+                                                            }
+                                                            catch
+                                                            {
+                                                                MessageBox.Show("Failed loading the image", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                            }
         }
 
-        // On Size mode->Normal menu item
-        private void normalSizeItem_Click(object sender, System.EventArgs e)
-        {
-            pictureBox.SizeMode = PictureBoxSizeMode.Normal;
-        }
+                                                            // On Size mode->Normal menu item
+                                                            private void normalSizeItem_Click(object sender, System.EventArgs e)
+                                                            {
+                                                                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+                                                            }
 
-        // On Size mode->Stretched menu item
-        private void stretchedSizeItem_Click(object sender, System.EventArgs e)
-        {
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-        }
+                                                            // On Size mode->Stretched menu item
+                                                            private void stretchedSizeItem_Click(object sender, System.EventArgs e)
+                                                            {
+                                                                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                                                            }
 
-        // On Size mode->Centered size menu item
-        private void centeredSizeItem_Click(object sender, System.EventArgs e)
-        {
-            pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
-        }
+                                                            // On Size mode->Centered size menu item
+                                                            private void centeredSizeItem_Click(object sender, System.EventArgs e)
+                                                            {
+                                                                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+                                                            }
 
-        // On Size menu item popup
-        private void sizeItem_Popup(object sender, System.EventArgs e)
-        {
-            normalSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.Normal);
-            stretchedSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.StretchImage);
-            centeredSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.CenterImage);
-        }
+                                                            // On Size menu item popup
+                                                            private void sizeItem_Popup(object sender, System.EventArgs e)
+                                                            {
+                                                                normalSizeItem.Checked = (pictureBox1.SizeMode == PictureBoxSizeMode.Normal);
+                                                                stretchedSizeItem.Checked = (pictureBox1.SizeMode == PictureBoxSizeMode.StretchImage);
+                                                                centeredSizeItem.Checked = (pictureBox1.SizeMode == PictureBoxSizeMode.CenterImage);
+                                                            }
+
 
         // Clear current image in picture box
         private void ClearCurrentImage()
         {
             // clear current image from picture box
-            pictureBox.Image = null;
+            pictureBox1.Image = null;
             // free current image
             if ((noneFiltersItem.Checked == false) && (filteredImage != null))
             {
@@ -922,21 +937,23 @@ namespace FiltersDemo
             // apply filter
             filteredImage = filter.Apply(sourceImage);
             // display filtered image
-            pictureBox.Image = filteredImage;
+            pictureBox1.Image = filteredImage;
         }
 
         // On Filters->None item
         private void noneFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //0
             ClearCurrentImage();
             // display source image
-            pictureBox.Image = sourceImage;
+            pictureBox1.Image = sourceImage;
             noneFiltersItem.Checked = true;
         }
 
         // On Filters->Grayscale item
         private void grayscaleFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //1
             ApplyFilter(Grayscale.CommonAlgorithms.BT709);
             grayscaleFiltersItem.Checked = true;
         }
@@ -944,6 +961,7 @@ namespace FiltersDemo
         // On Filters->Sepia item
         private void sepiaFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //2
             ApplyFilter(new Sepia());
             sepiaFiltersItem.Checked = true;
         }
@@ -951,6 +969,7 @@ namespace FiltersDemo
         // On Filters->Invert item
         private void invertFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //3
             ApplyFilter(new Invert());
             invertFiltersItem.Checked = true;
         }
@@ -958,6 +977,7 @@ namespace FiltersDemo
         // On Filters->Rotate Channels item
         private void rotateChannelFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //4
             ApplyFilter(new RotateChannels());
             rotateChannelFiltersItem.Checked = true;
         }
@@ -965,13 +985,29 @@ namespace FiltersDemo
         // On Filters->Color filtering
         private void colorFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //5
             ApplyFilter(new ColorFiltering(new IntRange(25, 230), new IntRange(25, 230), new IntRange(25, 230)));
             colorFiltersItem.Checked = true;
+        }
+
+        // On Filters->Levels Linear Correction
+        private void rgbLinearFiltersItem_Click(object sender, System.EventArgs e)
+        {
+            //6
+            LevelsLinear filter = new LevelsLinear();
+
+            filter.InRed = new IntRange(30, 230);
+            filter.InGreen = new IntRange(50, 240);
+            filter.InBlue = new IntRange(10, 210);
+
+            ApplyFilter(filter);
+            rgbLinearFiltersItem.Checked = true;
         }
 
         // On Filters->Hue modifier
         private void hueModifierFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //7
             ApplyFilter(new HueModifier(50));
             hueModifierFiltersItem.Checked = true;
         }
@@ -979,6 +1015,7 @@ namespace FiltersDemo
         // On Filters->Saturation adjusting
         private void saturationAdjustingFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //8
             ApplyFilter(new SaturationCorrection(0.15f));
             saturationAdjustingFiltersItem.Checked = true;
         }
@@ -986,6 +1023,7 @@ namespace FiltersDemo
         // On Filters->Brightness adjusting
         private void brightnessAdjustingFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //9
             ApplyFilter(new BrightnessCorrection());
             brightnessAdjustingFiltersItem.Checked = true;
         }
@@ -993,6 +1031,7 @@ namespace FiltersDemo
         // On Filters->Contrast adjusting
         private void contrastAdjustingFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //10
             ApplyFilter(new ContrastCorrection());
             contrastAdjustingFiltersItem.Checked = true;
         }
@@ -1000,6 +1039,7 @@ namespace FiltersDemo
         // On Filters->HSL filtering
         private void hslFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //11
             ApplyFilter(new HSLFiltering(new IntRange(330, 30), new Range(0, 1), new Range(0, 1)));
             hslFiltersItem.Checked = true;
         }
@@ -1007,6 +1047,7 @@ namespace FiltersDemo
         // On Filters->YCbCr filtering
         private void yCbCrLinearFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //12
             YCbCrLinear filter = new YCbCrLinear();
 
             filter.InCb = new Range(-0.3f, 0.3f);
@@ -1018,6 +1059,7 @@ namespace FiltersDemo
         // On Filters->YCbCr filtering
         private void yCbCrFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //13
             ApplyFilter(new YCbCrFiltering(new Range(0.2f, 0.9f), new Range(-0.3f, 0.3f), new Range(-0.3f, 0.3f)));
             yCbCrFiltersItem.Checked = true;
         }
@@ -1025,6 +1067,7 @@ namespace FiltersDemo
         // On Filters->Threshold binarization
         private void thresholdFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //14
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
@@ -1041,6 +1084,7 @@ namespace FiltersDemo
         // On Filters->Floyd-Steinberg dithering
         private void floydFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //15
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
@@ -1057,6 +1101,7 @@ namespace FiltersDemo
         // On Filters->Ordered dithering
         private void orderedDitheringFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //16
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
@@ -1073,6 +1118,7 @@ namespace FiltersDemo
         // On Filters->Correlation
         private void convolutionFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //17
             ApplyFilter(new Convolution(new int[,] {
 								{ 1, 2, 3, 2, 1 },
 								{ 2, 4, 5, 4, 2 },
@@ -1085,13 +1131,23 @@ namespace FiltersDemo
         // On Filters->Sharpen
         private void sharpenFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //18
             ApplyFilter(new Sharpen());
             sharpenFiltersItem.Checked = true;
+        }
+
+        // On Filters->Gaussin blur
+        private void gaussianFiltersItem_Click(object sender, EventArgs e)
+        {
+            //19
+            ApplyFilter(new GaussianBlur(2.0, 7));
+            gaussianFiltersItem.Checked = true;
         }
 
         // On Filters->Difference edge detector
         private void differenceEdgesFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //20
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
@@ -1108,6 +1164,7 @@ namespace FiltersDemo
         // On Filters->Homogenity edge detector
         private void homogenityEdgesFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //21
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
@@ -1124,6 +1181,7 @@ namespace FiltersDemo
         // On Filters->Sobel edge detector
         private void sobelEdgesFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //22
             // save original image
             Bitmap originalImage = sourceImage;
             // get grayscale image
@@ -1137,22 +1195,10 @@ namespace FiltersDemo
             sobelEdgesFiltersItem.Checked = true;
         }
 
-        // On Filters->Levels Linear Correction
-        private void rgbLinearFiltersItem_Click(object sender, System.EventArgs e)
-        {
-            LevelsLinear filter = new LevelsLinear();
-
-            filter.InRed = new IntRange(30, 230);
-            filter.InGreen = new IntRange(50, 240);
-            filter.InBlue = new IntRange(10, 210);
-
-            ApplyFilter(filter);
-            rgbLinearFiltersItem.Checked = true;
-        }
-
         // On Filters->Jitter
         private void jitterFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //23
             ApplyFilter(new Jitter());
             jitterFiltersItem.Checked = true;
         }
@@ -1160,20 +1206,15 @@ namespace FiltersDemo
         // On Filters->Oil Painting
         private void oilFiltersItem_Click(object sender, System.EventArgs e)
         {
+            //24
             ApplyFilter(new OilPainting());
             oilFiltersItem.Checked = true;
-        }
-
-        // On Filters->Gaussin blur
-        private void gaussianFiltersItem_Click(object sender, EventArgs e)
-        {
-            ApplyFilter(new GaussianBlur(2.0, 7));
-            gaussianFiltersItem.Checked = true;
         }
 
         // On Filters->Texture
         private void textureFiltersItem_Click(object sender, EventArgs e)
         {
+            //25
             ApplyFilter(new Texturer(new TextileTexture(), 1.0, 0.8));
             textureFiltersItem.Checked = true;
         }
@@ -1196,6 +1237,9 @@ namespace FiltersDemo
             dx = 120;
             dy = 45;
 
+            bt_open.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 0);
+
+            y_st += 70;
             button0.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 2);
@@ -1289,7 +1333,7 @@ namespace FiltersDemo
                 case "button0":
                     richTextBox1.Text += "On Filters->None item\n";
                     ClearCurrentImage();
-                    pictureBox.Image = sourceImage;
+                    pictureBox1.Image = sourceImage;
                     break;
                 case "button1":
                     richTextBox1.Text += "On Filters->Grayscale item\n";
@@ -1342,12 +1386,10 @@ namespace FiltersDemo
                     ApplyFilter(new HSLFiltering(new IntRange(330, 30), new Range(0, 1), new Range(0, 1)));
                     break;
                 case "button12":
-                    /*
                     richTextBox1.Text += "On Filters->YCbCr filtering\n";
-                    YCbCrLinear filter = new YCbCrLinear();
-                    filter.InCb = new Range(-0.3f, 0.3f);
-                    ApplyFilter(filter);
-                    */
+                    YCbCrLinear filter2 = new YCbCrLinear();
+                    filter2.InCb = new Range(-0.3f, 0.3f);
+                    ApplyFilter(filter2);
                     break;
                 case "button13":
                     richTextBox1.Text += "On Filters->YCbCr filtering\n";
@@ -1456,9 +1498,57 @@ namespace FiltersDemo
                     break;
                 default:
                     ClearCurrentImage();
-                    pictureBox.Image = sourceImage;
+                    pictureBox1.Image = sourceImage;
                     break;
             }
+        }
+
+        private void bt_open_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // show file open dialog
+                openFileDialog.InitialDirectory = @"C:\______test_files\";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // load image
+                    sourceImage = (Bitmap)Bitmap.FromFile(openFileDialog.FileName);
+
+                    // check pixel format
+                    if ((sourceImage.PixelFormat == PixelFormat.Format16bppGrayScale) ||
+                         (Bitmap.GetPixelFormatSize(sourceImage.PixelFormat) > 32))
+                    {
+                        MessageBox.Show("The demo application supports only color images.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // free image
+                        sourceImage.Dispose();
+                        sourceImage = null;
+                    }
+                    else
+                    {
+                        // make sure the image has 24 bpp format
+                        if (sourceImage.PixelFormat != PixelFormat.Format24bppRgb)
+                        {
+                            Bitmap temp = AForge.Imaging.Image.Clone(sourceImage, PixelFormat.Format24bppRgb);
+                            sourceImage.Dispose();
+                            sourceImage = temp;
+                        }
+                    }
+
+                    ClearCurrentImage();
+
+                    // display image
+                    pictureBox1.Image = sourceImage;
+                    noneFiltersItem.Checked = true;
+
+                    // enable filters menu
+                    filtersItem.Enabled = (sourceImage != null);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Failed loading the image", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }

@@ -1,30 +1,25 @@
-// Hough line and circle transformation demo
-// AForge.NET framework
-// http://www.aforgenet.com/framework/
-//
-// Copyright ?AForge.NET, 2006-2011
-// contacts@aforgenet.com
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;
 using System.IO;
 
 using AForge;
 using AForge.Imaging;
 using AForge.Imaging.Filters;
 
-namespace HoughTransform
+namespace vcs_AForge_HoughTransformation
 {
-    public partial class MainForm : Form
+    public partial class Form1 : Form
     {
+        string filename = Path.Combine(Application.StartupPath, "..\\..\\sample.bmp");
+
         // binarization filtering sequence
         private FiltersSequence filter = new FiltersSequence(
             Grayscale.CommonAlgorithms.BT709,
@@ -34,24 +29,22 @@ namespace HoughTransform
         HoughLineTransformation lineTransform = new HoughLineTransformation();
         HoughCircleTransformation circleTransform = new HoughCircleTransformation(35);
 
-        // Construct MainForm
-        public MainForm()
+        public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             lineTransform.MinLineIntensity = 10;
             circleTransform.MinCircleIntensity = 20;
+
+            label1.Text = "原圖                                                            Hough Line                                                 HoughCircle";
+            open_image_file();
         }
 
-        // Exit from application
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        void open_image_file()
         {
-            Application.Exit();
-        }
-
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string filename = Path.Combine(Application.StartupPath, "..\\..\\Sample Images\\sample.bmp");
             try
             {
                 // load image
@@ -150,9 +143,9 @@ namespace HoughTransform
                 binarySource.Dispose();
 
                 // show images
-                sourcePictureBox.Image = image;
-                houghLinePictureBox.Image = lineTransform.ToBitmap();
-                houghCirclePictureBox.Image = circleTransform.ToBitmap();
+                pictureBox1.Image = image;
+                pictureBox2.Image = lineTransform.ToBitmap();
+                pictureBox3.Image = circleTransform.ToBitmap();
             }
             catch
             {
@@ -161,4 +154,3 @@ namespace HoughTransform
         }
     }
 }
-

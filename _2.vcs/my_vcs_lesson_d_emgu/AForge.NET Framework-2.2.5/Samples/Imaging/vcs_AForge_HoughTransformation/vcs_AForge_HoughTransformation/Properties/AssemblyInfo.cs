@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("vcs_AForge_FiltersDemo")]
+[assembly: AssemblyTitle("vcs_AForge_HoughTransformation")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("vcs_AForge_FiltersDemo")]
+[assembly: AssemblyProduct("vcs_AForge_HoughTransformation")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("9f76ed11-7915-4ce6-b1b5-3e7c4a689f4b")]
+[assembly: Guid("196c979e-1468-4503-8c7d-28dd50eb12bf")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

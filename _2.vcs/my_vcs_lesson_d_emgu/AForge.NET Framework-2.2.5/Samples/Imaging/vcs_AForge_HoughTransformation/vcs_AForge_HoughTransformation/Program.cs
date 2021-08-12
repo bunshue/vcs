@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_AForge_FiltersDemo
+namespace vcs_AForge_HoughTransformation
 {
     static class Program
     {

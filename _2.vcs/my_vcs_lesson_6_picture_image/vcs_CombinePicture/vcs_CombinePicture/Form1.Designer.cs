@@ -84,7 +84,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(60, 33);
             this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "4";
+            this.textBox1.Text = "7";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox2
@@ -94,7 +94,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(60, 33);
             this.textBox2.TabIndex = 5;
-            this.textBox2.Text = "3";
+            this.textBox2.Text = "5";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3

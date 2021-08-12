@@ -75,6 +75,11 @@ namespace Snapshot_Maker
             snapshotResolutionsCombo.Enabled = enable;
             connectButton.Enabled = enable;
             disconnectButton.Enabled = !enable;
+
+            richTextBox1.Text += "enable = " + enable.ToString() + "\n";
+            richTextBox1.Text += "len = " + snapshotCapabilities.Length.ToString() + "\n";
+            richTextBox1.Text += "result = " + ((!enable) && (snapshotCapabilities.Length != 0)).ToString() + "\n";
+
             triggerButton.Enabled = (!enable) && (snapshotCapabilities.Length != 0);
         }
 
@@ -190,8 +195,11 @@ namespace Snapshot_Maker
         // Simulate snapshot trigger
         private void triggerButton_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "provide = " + videoDevice.ProvideSnapshots.ToString() + "\n";
+
             if ((videoDevice != null) && (videoDevice.ProvideSnapshots))
             {
+                richTextBox1.Text += "SimulateTrigger\n";
                 videoDevice.SimulateTrigger();
             }
         }

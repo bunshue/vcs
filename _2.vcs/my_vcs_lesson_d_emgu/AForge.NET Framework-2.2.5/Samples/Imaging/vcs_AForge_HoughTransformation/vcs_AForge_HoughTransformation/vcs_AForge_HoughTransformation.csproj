@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A8382D2D-A455-4C04-B67C-5E80098B834D}</ProjectGuid>
+    <ProjectGuid>{90A364AB-04DB-43FE-8A7B-E5D6EE9B1CD2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_AForge_FiltersDemo</RootNamespace>
-    <AssemblyName>vcs_AForge_FiltersDemo</AssemblyName>
+    <RootNamespace>vcs_AForge_HoughTransformation</RootNamespace>
+    <AssemblyName>vcs_AForge_HoughTransformation</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -34,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge">
+      <HintPath>dll\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging">
+      <HintPath>dll\AForge.Imaging.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

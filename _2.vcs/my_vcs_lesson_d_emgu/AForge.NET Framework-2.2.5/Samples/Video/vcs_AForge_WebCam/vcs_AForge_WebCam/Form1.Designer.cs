@@ -35,6 +35,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.vsp = new AForge.Controls.VideoSourcePlayer();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button3
@@ -89,11 +90,22 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(12, 234);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(91, 38);
+            this.button4.TabIndex = 12;
+            this.button4.Text = "info";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1047, 511);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.vsp);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button3);
@@ -115,6 +127,7 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private AForge.Controls.VideoSourcePlayer vsp;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button4;
     }
 }
 
