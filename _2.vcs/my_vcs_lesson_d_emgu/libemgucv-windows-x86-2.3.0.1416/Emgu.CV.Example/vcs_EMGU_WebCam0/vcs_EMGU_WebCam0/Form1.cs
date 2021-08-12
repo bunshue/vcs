@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -10,7 +11,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
 
-namespace _WebCam0
+namespace vcs_EMGU_WebCam0
 {
     public partial class Form1 : Form
     {
@@ -20,6 +21,11 @@ namespace _WebCam0
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         void Application_Idle(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿namespace _WebCam1
+﻿namespace vcs_EMGU_WebCam0
 {
     partial class Form1
     {
@@ -36,10 +36,10 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 562);
+            this.richTextBox1.Location = new System.Drawing.Point(733, 56);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(660, 189);
-            this.richTextBox1.TabIndex = 11;
+            this.richTextBox1.Size = new System.Drawing.Size(343, 622);
+            this.richTextBox1.TabIndex = 14;
             this.richTextBox1.Text = "";
             // 
             // pictureBox1
@@ -47,16 +47,16 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 56);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(660, 500);
-            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.Size = new System.Drawing.Size(705, 622);
+            this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(12, 9);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 38);
-            this.button1.TabIndex = 7;
+            this.button1.Size = new System.Drawing.Size(106, 38);
+            this.button1.TabIndex = 12;
             this.button1.Text = "開啟Webcam";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -65,12 +65,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1421, 763);
+            this.ClientSize = new System.Drawing.Size(1090, 750);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "_WebCam1";
+            this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

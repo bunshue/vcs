@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BA52B692-0A94-4E1F-858F-D5CCD033940C}</ProjectGuid>
+    <ProjectGuid>{AA8F2AE8-A94E-4D2A-A778-771BFEF8FAD3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_WebCam0</RootNamespace>
-    <AssemblyName>_WebCam0</AssemblyName>
+    <RootNamespace>vcs_EMGU_WebCam0</RootNamespace>
+    <AssemblyName>vcs_EMGU_WebCam0</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -74,7 +74,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
