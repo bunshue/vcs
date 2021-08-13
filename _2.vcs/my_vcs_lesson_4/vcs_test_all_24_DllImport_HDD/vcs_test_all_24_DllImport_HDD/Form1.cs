@@ -6,20 +6,20 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;   //for DllImport
 
 namespace vcs_test_all_24_DllImport_HDD
 {
     public partial class Form1 : Form
     {
+        [DllImport("kernel32.dll")]
+        private static extern bool GetDiskFreeSpaceEx(string lpDirectoryName, out ulong lpFreeBytesAvailable, out ulong lpTotalNumberOfBytes, out ulong lpTotalNumberOfFreeBytes);
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        [DllImport("kernel32.dll")]
-        private static extern bool GetDiskFreeSpaceEx(
-        string lpDirectoryName, out ulong lpFreeBytesAvailable, out ulong lpTotalNumberOfBytes, out ulong lpTotalNumberOfFreeBytes);
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -47,6 +47,6 @@ namespace vcs_test_all_24_DllImport_HDD
             GetDiskFreeSpaceEx(driveDirectoryName, out freeBytesAvailable, out totalNumberOfBytes, out totalNumberOfFreeBytes);
             return freeBytesAvailable;
         }
-
     }
 }
+

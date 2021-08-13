@@ -681,19 +681,16 @@ namespace vcs_test_all_03_Syntax
             }
             catch (ArgumentOutOfRangeException ex)
             {
-                richTextBox1.Text += "您並未成年" + "\n";
+                richTextBox1.Text += "您並未成年\t" + ex.Message + "\n";
             }
             catch (ArgumentException ex)
             {
-                richTextBox1.Text += "您輸入的年份範圍不合理" + "\n";
+                richTextBox1.Text += "您輸入的年份範圍不合理\t" + ex.Message + "\n";
             }
             catch (Exception ex)
             {
                 richTextBox1.Text += "發生其他例外，例外訊息: " + ex.Message + "\n";
             }
-
-
-
         }
 
         public static int verify(int year)
@@ -1778,6 +1775,5 @@ namespace vcs_test_all_03_Syntax
         {
             return Array.IndexOf(values, @this) != -1;
         }
-
     }
 }

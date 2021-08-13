@@ -6,17 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;   //for DllImport
 
 namespace vcs_test_all_24_DllImport_VolumeControl
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         //user32控制方式
         // 宣告常式 
         private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
@@ -26,7 +22,12 @@ namespace vcs_test_all_24_DllImport_VolumeControl
 
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-        
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // 聲音變大

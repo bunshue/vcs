@@ -21,6 +21,10 @@ namespace vcs_test_all_24_DllImport_GetMediaLength
             string lpstrCommand, string lpstrReturnString,
             int uReturnLength, int hwndCallback);
 
+        string filename = @"C:\______test_files\_wav\WindowsShutdown.wav";
+        //string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+        //string filename = @"C:\______test_files\[诸神字幕组][TBS][世界遗产][20160124 加德满都谷地].mp4";
+
         public Form1()
         {
             InitializeComponent();
@@ -28,9 +32,7 @@ namespace vcs_test_all_24_DllImport_GetMediaLength
 
         private void button1_Click(object sender, EventArgs e)
         {
-            label1.Text = (GetMediaLen(@"C:\______test_files\_wav\WindowsShutdown.wav").ToString() + " 秒");
-            //label1.Text = (GetMediaLen(@"C:\______test_files\_mp3\aaaa.mp3").ToString() + " 秒");
-            //label1.Text = (GetMediaLen(@"C:\______test_files\[诸神字幕组][TBS][世界遗产][20160124 加德满都谷地].mp4").ToString() + " 秒");
+            label1.Text = (GetMediaLen(filename).ToString() + " 秒");
         }
 
         // 取得多媒體檔案長度
@@ -55,6 +57,5 @@ namespace vcs_test_all_24_DllImport_GetMediaLength
             }
             return RetVal;
         }
-   
     }
 }

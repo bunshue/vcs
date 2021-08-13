@@ -13,6 +13,7 @@ using System.Windows.Forms;
 //加入/現有項目 core231 highgui231 並設為有更新時才複製
 
 //壓縮影像錄影, 需要再添加:  opencv_ffmpeg_64.dll
+//做影像處理, 需要再添加:  opencv_imgproc231.dll
 
 /*
 把*.csproj

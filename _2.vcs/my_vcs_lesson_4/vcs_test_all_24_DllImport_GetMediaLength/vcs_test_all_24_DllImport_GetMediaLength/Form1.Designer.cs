@@ -49,9 +49,9 @@
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label1.Location = new System.Drawing.Point(50, 130);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 24);
+            this.label1.Size = new System.Drawing.Size(106, 24);
             this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.label1.Text = "檔案長度";
             // 
             // Form1
             // 

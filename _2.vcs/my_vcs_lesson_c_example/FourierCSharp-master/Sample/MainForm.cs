@@ -31,7 +31,8 @@ namespace FourierTransform
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "CSV(*.csv;*.htm)|*.csv";
-            ofd.InitialDirectory = Path.Combine(Application.StartupPath, @"..\..\csv");
+            //ofd.InitialDirectory = Path.Combine(Application.StartupPath, @"..\..\csv");
+            ofd.InitialDirectory = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\csv"));
 
             if (ofd.ShowDialog() == DialogResult.Cancel) return;
 
