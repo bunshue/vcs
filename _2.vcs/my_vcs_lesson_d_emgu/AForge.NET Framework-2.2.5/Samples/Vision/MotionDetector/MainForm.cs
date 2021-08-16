@@ -72,13 +72,6 @@ namespace MotionDetectorSample
             this.Close();
         }
 
-        // "About" menu item clicked
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AboutForm form = new AboutForm();
-            form.ShowDialog();
-        }
-
         // "Open" menu item clieck - open AVI file
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {

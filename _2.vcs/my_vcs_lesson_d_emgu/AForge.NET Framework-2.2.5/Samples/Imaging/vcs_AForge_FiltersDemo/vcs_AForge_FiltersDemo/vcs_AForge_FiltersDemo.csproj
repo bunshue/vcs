@@ -5,14 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EBFCE2E9-31CB-4EBF-B3F8-B9F0152E9479}</ProjectGuid>
+    <ProjectGuid>{F073034A-A10F-4276-BCB8-54753FD2AEB8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OperateCamera</RootNamespace>
-    <AssemblyName>OperateCamera</AssemblyName>
+    <RootNamespace>vcs_AForge_FiltersDemo</RootNamespace>
+    <AssemblyName>vcs_AForge_FiltersDemo</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -38,26 +37,14 @@
     <Reference Include="AForge">
       <HintPath>dll\AForge.dll</HintPath>
     </Reference>
-    <Reference Include="AForge.Controls">
-      <HintPath>dll\AForge.Controls.dll</HintPath>
-    </Reference>
     <Reference Include="AForge.Imaging">
       <HintPath>dll\AForge.Imaging.dll</HintPath>
     </Reference>
-    <Reference Include="AForge.Video">
-      <HintPath>dll\AForge.Video.dll</HintPath>
+    <Reference Include="AForge.Math">
+      <HintPath>dll\AForge.Math.dll</HintPath>
     </Reference>
-    <Reference Include="AForge.Video.DirectShow">
-      <HintPath>dll\AForge.Video.DirectShow.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Video.FFMPEG, Version=2.2.5.0, Culture=neutral, PublicKeyToken=03563089b1be05dd, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Release\AForge.Video.FFMPEG.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,7 +53,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
@@ -88,9 +74,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -100,9 +84,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

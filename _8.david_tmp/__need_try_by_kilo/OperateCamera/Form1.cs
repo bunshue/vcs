@@ -23,15 +23,14 @@ namespace OperateCamera
 {
     public partial class Form1 : Form
     {
-        private FilterInfoCollection videoDevices;
-        private VideoCaptureDevice videoSource;
+        public FilterInfoCollection USBWebcams = null;
+        public VideoCaptureDevice Cam = null;
 
         //开始录像
         private bool stopREC = true;
         private bool createNewFile = true;
         string videoPath = "";
         private VideoFileWriter videoWriter;
-        int frameRate = 20; //默认帧率
 
         public Form1()
         {
@@ -52,12 +51,12 @@ namespace OperateCamera
             try
             {
                 // 枚举所有视频输入设备
-                videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-                if (videoDevices.Count == 0)
+                if (USBWebcams.Count == 0)
                     throw new ApplicationException();
 
-                foreach (FilterInfo device in videoDevices)
+                foreach (FilterInfo device in USBWebcams)
                 {
                     richTextBox1.Text += "取得WebCam : " + device.Name + "\n";
                 }
@@ -65,7 +64,7 @@ namespace OperateCamera
             catch (ApplicationException)
             {
                 richTextBox1.Text += "無 WebCam\n";
-                videoDevices = null;
+                USBWebcams = null;
             }
 
             CameraConn();
@@ -74,17 +73,33 @@ namespace OperateCamera
         //连接摄像头
         private void CameraConn()
         {
-            VideoCaptureDevice videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
-            videoSource.DesiredFrameSize = new System.Drawing.Size(320, 240);
-            videoSource.DesiredFrameRate = 1;
+            Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
 
-            videoSourcePlayer.VideoSource = videoSource;
+            Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+            Cam.Start();   // WebCam starts capturing images.
+
+
+
+            Cam.DesiredFrameSize = new System.Drawing.Size(320, 240);
+            Cam.DesiredFrameRate = 1;
+
+            videoSourcePlayer.VideoSource = Cam;
             videoSourcePlayer.Start();
         }
 
         //关闭摄像头
         private void btnClose_Click(object sender, EventArgs e)
         {
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
+
             videoSourcePlayer.SignalToStop();
             videoSourcePlayer.WaitForStop();
         }
@@ -111,7 +126,7 @@ namespace OperateCamera
             g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
 
             ////创建文件路径
-            string fileFullPath = videoPath + "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"); ;
+            string fileFullPath = videoPath + "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             if (stopREC)
             {
@@ -134,7 +149,7 @@ namespace OperateCamera
                     }
                     videoWriter = new VideoFileWriter();
                     //这里必须是全路径，否则会默认保存到程序运行根据录下了
-                    videoWriter.Open(fileFullPath, image.Width, image.Height, frameRate, VideoCodec.MPEG4);
+                    videoWriter.Open(fileFullPath, image.Width, image.Height, 30, VideoCodec.MPEG4);
                     videoWriter.WriteVideoFrame(image);
                 }
                 else
@@ -151,7 +166,6 @@ namespace OperateCamera
             {
                 stopREC = false;
                 createNewFile = true;
-                // frameRate = Convert.ToInt32(txtFrameRate.Text.Trim());
                 button1.Text = "停止录像";
             }
             else if (button1.Text == "停止录像")
@@ -160,6 +174,45 @@ namespace OperateCamera
                 button1.Text = "开始录像";
             }
         }
+
+        public Bitmap bm = null;
+        //自定義函數, 捕獲每一幀圖像並顯示
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+            bm = (Bitmap)eventArgs.Frame.Clone();
+            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+            pictureBox1.Image = bm;
+
+            GC.Collect();       //回收資源
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string fileFullPath = videoPath + "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+            /*
+            if (videoWriter != null)
+            {
+                videoWriter.Close();
+                videoWriter.Dispose();
+            }
+            */
+
+            //videoWriter = new VideoFileWriter();
+
+            //videoWriter.Open(fileFullPath, 640, 480, 30, VideoCodec.MPEG4);
+            //videoWriter.WriteVideoFrame(image);
+
+            //videoWriter.Close();
+            //videoWriter.Dispose();
+
+
+
+
+        }
+
+
     }
 }
 
