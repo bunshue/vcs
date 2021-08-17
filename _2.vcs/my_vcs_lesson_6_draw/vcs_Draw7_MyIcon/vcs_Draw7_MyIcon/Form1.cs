@@ -2215,6 +2215,76 @@ namespace vcs_Draw7_MyIcon
 
         private void button10_Click(object sender, EventArgs e)
         {
+            int i;
+            int j;
+            int W = 1000;
+            int H = 600;
+
+            int width;
+            int height;
+
+            Pen p1;
+            Pen p2;
+
+            width = W;
+            height = H;
+
+            if (bitmap1 == null)
+                bitmap1 = new Bitmap(width, height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            p1 = new Pen(Color.Black, 1);
+            p2 = new Pen(Color.Pink, 1);
+
+            Point pointa;
+            Point pointb;
+
+            int linewidth = 1;
+
+
+            for (linewidth = 1; linewidth < 7; linewidth++)
+            {
+                p = new Pen(Color.Black, linewidth);
+                for (j = 0; j < H; j += 10)
+                {
+                    pointa = new Point((linewidth - 1) * 100, j);
+                    pointb = new Point(linewidth * 100, j);
+                    g.DrawLine(p, pointa, pointb);
+                }
+            }
+
+            /*
+            p = new Pen(Color.Black, 2);
+            for (j = 0; j < H; j += 10)
+            {
+                pointa = new Point(100, j);
+                pointb = new Point(200, j);
+                g.DrawLine(p, pointa, pointb);
+            }
+
+            p = new Pen(Color.Black, 3);
+            for (j = 0; j < H; j += 10)
+            {
+                pointa = new Point(200, j);
+                pointb = new Point(300, j);
+                g.DrawLine(p, pointa, pointb);
+            }
+            */
+
+
+
+            for (i = 0; i < W; i += 10)
+            {
+                p = new Pen(Color.Black, 1);
+                pointa = new Point(i, 0);
+                pointb = new Point(i, H);
+                g.DrawLine(p, pointa, pointb);
+            }
+
+
+
+            pictureBox1.Image = bitmap1;
 
         }
 
