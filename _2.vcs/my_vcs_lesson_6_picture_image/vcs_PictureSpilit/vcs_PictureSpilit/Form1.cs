@@ -19,7 +19,6 @@ namespace vcs_PictureSpilit
         }
 
         PictureBox[,] pbox = new PictureBox[3, 3];
-        Font font = new Font("微軟正黑體", 12);
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -56,17 +55,60 @@ namespace vcs_PictureSpilit
                     pbox[x, y].Text = "";
                     pbox[x, y].Location = new Point(x_st + x * dx, y_st + y * dy);
                     //pbox[x, y].Location = new Point(x_st + r.Next(400), y_st + r.Next(400));
-                    pbox[x, y].Font = font;
                     pbox[x, y].Name = "( " + x.ToString() + ", " + y.ToString() + ")";
                     pbox[x, y].BackColor = Color.Pink;
-                    pbox[x, y].BorderStyle = BorderStyle.Fixed3D;
+                    pbox[x, y].BorderStyle = BorderStyle.None;
                     pbox[x, y].SizeMode = PictureBoxSizeMode.Normal;   //圖片Zoom的方法
                     pbox[x, y].Image = bitmap2;
-                    //pbox[x, y].Click += PictureBoxClick;
+                    pbox[x, y].MouseDown += PictureBox_MouseDown;
+                    pbox[x, y].MouseMove += PictureBox_MouseMove;
+                    pbox[x, y].MouseUp += PictureBox_MouseUp;
                     //panel.Controls.Add(pbox[x, y]);
                     this.Controls.Add(pbox[x, y]);
                 }
             }
         }
+
+        bool flag_pictureBox_mouse_down = false;
+        int pictureBox_position_x_old = 0;
+        int pictureBox_position_y_old = 0;
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_pictureBox_mouse_down = true;
+            //richTextBox1.Text += "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+            pictureBox_position_x_old = e.X;
+            pictureBox_position_y_old = e.Y;
+            ((PictureBox)sender).BringToFront();    //選中的那一片拉到最上層顯示
+        }
+
+        private void PictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_pictureBox_mouse_down == true)
+            {
+                //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+                int dx = e.X - pictureBox_position_x_old;
+                int dy = e.Y - pictureBox_position_y_old;
+
+                //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+                ((PictureBox)sender).Location = new Point(((PictureBox)sender).Location.X + dx, ((PictureBox)sender).Location.Y + dy);
+            }
+        }
+
+        private void PictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_pictureBox_mouse_down = false;
+            //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+            int dx = e.X - pictureBox_position_x_old;
+            int dy = e.Y - pictureBox_position_y_old;
+
+            //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+            ((PictureBox)sender).Location = new Point(((PictureBox)sender).Location.X + dx, ((PictureBox)sender).Location.Y + dy);
+        }
+
+
+
+
+
+
     }
 }

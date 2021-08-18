@@ -2218,7 +2218,7 @@ namespace vcs_Draw7_MyIcon
             int i;
             int j;
             int W = 1000;
-            int H = 600;
+            int H = 400;
 
             int width;
             int height;
@@ -2243,36 +2243,16 @@ namespace vcs_Draw7_MyIcon
             int linewidth = 1;
 
 
-            for (linewidth = 1; linewidth < 7; linewidth++)
+            for (linewidth = 1; linewidth < 8; linewidth++)
             {
                 p = new Pen(Color.Black, linewidth);
-                for (j = 0; j < H; j += 10)
+                for (j = 0; j < (H - 100); j += 10)
                 {
                     pointa = new Point((linewidth - 1) * 100, j);
                     pointb = new Point(linewidth * 100, j);
                     g.DrawLine(p, pointa, pointb);
                 }
             }
-
-            /*
-            p = new Pen(Color.Black, 2);
-            for (j = 0; j < H; j += 10)
-            {
-                pointa = new Point(100, j);
-                pointb = new Point(200, j);
-                g.DrawLine(p, pointa, pointb);
-            }
-
-            p = new Pen(Color.Black, 3);
-            for (j = 0; j < H; j += 10)
-            {
-                pointa = new Point(200, j);
-                pointb = new Point(300, j);
-                g.DrawLine(p, pointa, pointb);
-            }
-            */
-
-
 
             for (i = 0; i < W; i += 10)
             {
@@ -2282,7 +2262,21 @@ namespace vcs_Draw7_MyIcon
                 g.DrawLine(p, pointa, pointb);
             }
 
+            for (i = 0; i < W; i += 5)
+            {
+                p = new Pen(Color.Black, 1);
+                pointa = new Point(i, H-100);
+                pointb = new Point(i, H-50);
+                g.DrawLine(p, pointa, pointb);
+            }
 
+            for (i = 0; i < W; i += 3)
+            {
+                p = new Pen(Color.Black, 1);
+                pointa = new Point(i, H - 50);
+                pointb = new Point(i, H - 0);
+                g.DrawLine(p, pointa, pointb);
+            }
 
             pictureBox1.Image = bitmap1;
 

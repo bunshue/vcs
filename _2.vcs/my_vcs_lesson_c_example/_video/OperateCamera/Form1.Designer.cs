@@ -40,9 +40,9 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(483, 16);
+            this.btnClose.Location = new System.Drawing.Point(251, 528);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.Size = new System.Drawing.Size(75, 35);
             this.btnClose.TabIndex = 3;
             this.btnClose.Text = "关闭";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -50,9 +50,9 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(20, 16);
+            this.btnConnect.Location = new System.Drawing.Point(12, 528);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(75, 23);
+            this.btnConnect.Size = new System.Drawing.Size(75, 35);
             this.btnConnect.TabIndex = 8;
             this.btnConnect.Text = "连接";
             this.btnConnect.UseVisualStyleBackColor = true;
@@ -60,9 +60,9 @@
             // 
             // videoSourcePlayer
             // 
-            this.videoSourcePlayer.Location = new System.Drawing.Point(20, 61);
+            this.videoSourcePlayer.Location = new System.Drawing.Point(12, 12);
             this.videoSourcePlayer.Name = "videoSourcePlayer";
-            this.videoSourcePlayer.Size = new System.Drawing.Size(637, 451);
+            this.videoSourcePlayer.Size = new System.Drawing.Size(640, 480);
             this.videoSourcePlayer.TabIndex = 10;
             this.videoSourcePlayer.Text = "videoSourcePlayer";
             this.videoSourcePlayer.VideoSource = null;
@@ -70,9 +70,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(101, 16);
+            this.button1.Location = new System.Drawing.Point(109, 528);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 35);
             this.button1.TabIndex = 13;
             this.button1.Text = "开始录像";
             this.button1.UseVisualStyleBackColor = true;
@@ -80,26 +80,26 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(819, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(658, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(294, 607);
+            this.richTextBox1.Size = new System.Drawing.Size(320, 334);
             this.richTextBox1.TabIndex = 14;
             this.richTextBox1.Text = "";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(674, 225);
+            this.pictureBox1.Location = new System.Drawing.Point(658, 352);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(376, 318);
+            this.pictureBox1.Size = new System.Drawing.Size(320, 240);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(698, 30);
+            this.button2.Location = new System.Drawing.Point(352, 528);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(75, 35);
             this.button2.TabIndex = 16;
             this.button2.Text = "test";
             this.button2.UseVisualStyleBackColor = true;
@@ -109,7 +109,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1125, 631);
+            this.ClientSize = new System.Drawing.Size(990, 603);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.videoSourcePlayer);
