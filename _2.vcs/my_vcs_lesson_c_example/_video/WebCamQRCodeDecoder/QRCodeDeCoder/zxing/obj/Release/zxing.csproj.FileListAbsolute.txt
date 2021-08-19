@@ -1,0 +1,17 @@
+H:\svn\xzing\csharp\obj\Release\ResolveAssemblyReference.cache
+H:\svn\xzing\csharp\obj\Release\zxing.dll
+H:\svn\xzing\csharp\obj\Release\zxing.pdb
+H:\svn\xzing\csharp\zxing.dll
+H:\svn\xzing\csharp\zxing.pdb
+H:\範例\c#\zxing\obj\Release\ResolveAssemblyReference.cache
+H:\範例\c#\zxing\zxing.dll.config
+H:\範例\c#\zxing\obj\Release\zxing.dll
+H:\範例\c#\zxing\obj\Release\zxing.pdb
+H:\範例\c#\zxing\zxing.dll
+H:\範例\c#\zxing\zxing.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\WebCamQRCodeDecoder\QRCodeDeCoder\zxing\zxing.dll.config
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\WebCamQRCodeDecoder\QRCodeDeCoder\zxing\obj\Release\zxing.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\WebCamQRCodeDecoder\QRCodeDeCoder\zxing\obj\Release\zxing.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\WebCamQRCodeDecoder\QRCodeDeCoder\zxing\zxing.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\WebCamQRCodeDecoder\QRCodeDeCoder\zxing\zxing.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\WebCamQRCodeDecoder\QRCodeDeCoder\zxing\obj\Release\zxing.csprojResolveAssemblyReference.cache

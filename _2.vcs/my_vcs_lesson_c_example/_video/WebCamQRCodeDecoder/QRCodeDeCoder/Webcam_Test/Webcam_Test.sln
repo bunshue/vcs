@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webcam_Test", "Webcam_Test.csproj", "{79C5A124-F4B8-4E98-A6CC-3B64F5FBE317}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCam_Capture", "..\WebCam_Capture.csproj", "{782C366A-DD3B-4ED3-8A21-71A1F03947ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zxing", "..\zxing\zxing.csproj", "{6431CF13-7A7B-4602-B96A-47CDA6F0B008}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79C5A124-F4B8-4E98-A6CC-3B64F5FBE317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C5A124-F4B8-4E98-A6CC-3B64F5FBE317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C5A124-F4B8-4E98-A6CC-3B64F5FBE317}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C5A124-F4B8-4E98-A6CC-3B64F5FBE317}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{782C366A-DD3B-4ED3-8A21-71A1F03947ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{782C366A-DD3B-4ED3-8A21-71A1F03947ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{782C366A-DD3B-4ED3-8A21-71A1F03947ED}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{782C366A-DD3B-4ED3-8A21-71A1F03947ED}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{6431CF13-7A7B-4602-B96A-47CDA6F0B008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6431CF13-7A7B-4602-B96A-47CDA6F0B008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6431CF13-7A7B-4602-B96A-47CDA6F0B008}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{6431CF13-7A7B-4602-B96A-47CDA6F0B008}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
