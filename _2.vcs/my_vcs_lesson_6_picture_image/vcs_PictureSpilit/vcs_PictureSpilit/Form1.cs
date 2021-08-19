@@ -13,12 +13,17 @@ namespace vcs_PictureSpilit
 {
     public partial class Form1 : Form
     {
+        PictureBox[,] pbox = new PictureBox[3, 3];
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        PictureBox[,] pbox = new PictureBox[3, 3];
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -74,11 +79,14 @@ namespace vcs_PictureSpilit
         int pictureBox_position_y_old = 0;
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            flag_pictureBox_mouse_down = true;
-            //richTextBox1.Text += "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
-            pictureBox_position_x_old = e.X;
-            pictureBox_position_y_old = e.Y;
-            ((PictureBox)sender).BringToFront();    //選中的那一片拉到最上層顯示
+            if (e.Button == MouseButtons.Left)
+            {
+                flag_pictureBox_mouse_down = true;
+                //richTextBox1.Text += "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+                pictureBox_position_x_old = e.X;
+                pictureBox_position_y_old = e.Y;
+                ((PictureBox)sender).BringToFront();    //選中的那一片拉到最上層顯示
+            }
         }
 
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
@@ -96,19 +104,16 @@ namespace vcs_PictureSpilit
 
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            flag_pictureBox_mouse_down = false;
-            //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
-            int dx = e.X - pictureBox_position_x_old;
-            int dy = e.Y - pictureBox_position_y_old;
+            if (e.Button == MouseButtons.Left)
+            {
+                flag_pictureBox_mouse_down = false;
+                //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+                int dx = e.X - pictureBox_position_x_old;
+                int dy = e.Y - pictureBox_position_y_old;
 
-            //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
-            ((PictureBox)sender).Location = new Point(((PictureBox)sender).Location.X + dx, ((PictureBox)sender).Location.Y + dy);
+                //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+                ((PictureBox)sender).Location = new Point(((PictureBox)sender).Location.X + dx, ((PictureBox)sender).Location.Y + dy);
+            }
         }
-
-
-
-
-
-
     }
 }

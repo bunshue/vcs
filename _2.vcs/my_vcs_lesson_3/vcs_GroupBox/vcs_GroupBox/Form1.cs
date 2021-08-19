@@ -16,6 +16,11 @@ namespace vcs_GroupBox
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void chkBreakfast_CheckedChanged(object sender, EventArgs e)
         {
             ManageCheckGroupBox(chkBreakfast, groupBox1);
@@ -25,7 +30,7 @@ namespace vcs_GroupBox
         {
             ManageCheckGroupBox(chkLunch, groupBox2);
         }
-        
+
         private void ManageCheckGroupBox(CheckBox chk, GroupBox grp)
         {
             // Make sure the CheckBox isn't in the GroupBox.
@@ -36,9 +41,7 @@ namespace vcs_GroupBox
                 grp.Parent.Controls.Add(chk);
 
                 // Adjust the CheckBox's location.
-                chk.Location = new Point(
-                    chk.Left + grp.Left,
-                    chk.Top + grp.Top);
+                chk.Location = new Point(chk.Left + grp.Left, chk.Top + grp.Top);
 
                 // Move the CheckBox to the top of the stacking order.
                 chk.BringToFront();

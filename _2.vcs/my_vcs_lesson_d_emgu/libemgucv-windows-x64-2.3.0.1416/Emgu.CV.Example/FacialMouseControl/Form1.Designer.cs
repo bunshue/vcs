@@ -29,26 +29,18 @@ namespace FacialMouseControl
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.components = new System.ComponentModel.Container();
             this.flipHorizontalButton = new System.Windows.Forms.Button();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
-            this.panel1.SuspendLayout();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.flipHorizontalButton);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(560, 46);
-            this.panel1.TabIndex = 0;
             // 
             // flipHorizontalButton
             // 
-            this.flipHorizontalButton.Location = new System.Drawing.Point(12, 12);
+            this.flipHorizontalButton.Location = new System.Drawing.Point(670, 12);
             this.flipHorizontalButton.Name = "flipHorizontalButton";
-            this.flipHorizontalButton.Size = new System.Drawing.Size(130, 23);
+            this.flipHorizontalButton.Size = new System.Drawing.Size(130, 21);
             this.flipHorizontalButton.TabIndex = 0;
             this.flipHorizontalButton.Text = "Flip Horizontal";
             this.flipHorizontalButton.UseVisualStyleBackColor = true;
@@ -56,33 +48,41 @@ namespace FacialMouseControl
             // 
             // imageBox1
             // 
-            this.imageBox1.DisplayedImage = null;
-            this.imageBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imageBox1.Image = null;
-            this.imageBox1.Location = new System.Drawing.Point(0, 46);
+            this.imageBox1.Location = new System.Drawing.Point(12, 12);
             this.imageBox1.Name = "imageBox1";
-            this.imageBox1.Size = new System.Drawing.Size(560, 325);
+            this.imageBox1.Size = new System.Drawing.Size(640, 480);
             this.imageBox1.TabIndex = 1;
+            this.imageBox1.TabStop = false;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(670, 50);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(256, 442);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 371);
+            this.ClientSize = new System.Drawing.Size(938, 512);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.flipHorizontalButton);
             this.Controls.Add(this.imageBox1);
-            this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.panel1.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button flipHorizontalButton;
         private Emgu.CV.UI.ImageBox imageBox1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

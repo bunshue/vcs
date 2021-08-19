@@ -27,111 +27,58 @@ namespace vcs_MovePicture
             pictureBox2.ClientSize = new Size(pictureBox2.Image.Width / 2, pictureBox2.Image.Height / 2);
             pictureBox3.Image = Image.FromFile(filename3);
             pictureBox3.ClientSize = new Size(pictureBox3.Image.Width / 2, pictureBox3.Image.Height / 2);
+
+            pictureBox1.MouseDown += PictureBox_MouseDown;
+            pictureBox1.MouseMove += PictureBox_MouseMove;
+            pictureBox1.MouseUp += PictureBox_MouseUp;
+            pictureBox2.MouseDown += PictureBox_MouseDown;
+            pictureBox2.MouseMove += PictureBox_MouseMove;
+            pictureBox2.MouseUp += PictureBox_MouseUp;
+            pictureBox3.MouseDown += PictureBox_MouseDown;
+            pictureBox3.MouseMove += PictureBox_MouseMove;
+            pictureBox3.MouseUp += PictureBox_MouseUp;
         }
 
-        bool isMouseDown = false;
-        int px, py;
-
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        bool flag_pictureBox_mouse_down = false;
+        int pictureBox_position_x_old = 0;
+        int pictureBox_position_y_old = 0;
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                pictureBox1.BringToFront();
-                isMouseDown = true;
-                px = e.X;
-                py = e.Y;
+                flag_pictureBox_mouse_down = true;
+                //richTextBox1.Text += "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+                pictureBox_position_x_old = e.X;
+                pictureBox_position_y_old = e.Y;
+                ((PictureBox)sender).BringToFront();    //選中的那一片拉到最上層顯示
             }
         }
 
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMouseDown)
+            if (flag_pictureBox_mouse_down == true)
             {
-                /*  same
-                pictureBox1.Left += (e.X - px);
-                pictureBox1.Top += (e.Y - py);
-                */
+                //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+                int dx = e.X - pictureBox_position_x_old;
+                int dy = e.Y - pictureBox_position_y_old;
 
-                int x = pictureBox1.Location.X;
-                int y = pictureBox1.Location.Y;
-                x += (e.X - px);
-                y += (e.Y - py);
-                pictureBox1.Location = new Point(x, y);
+                //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+                ((PictureBox)sender).Location = new Point(((PictureBox)sender).Location.X + dx, ((PictureBox)sender).Location.Y + dy);
             }
         }
 
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                isMouseDown = false;
+                flag_pictureBox_mouse_down = false;
+                //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+                int dx = e.X - pictureBox_position_x_old;
+                int dy = e.Y - pictureBox_position_y_old;
+
+                //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+                ((PictureBox)sender).Location = new Point(((PictureBox)sender).Location.X + dx, ((PictureBox)sender).Location.Y + dy);
             }
-        }
-
-        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                pictureBox2.BringToFront();
-                isMouseDown = true;
-                px = e.X;
-                py = e.Y;
-            }
-        }
-
-        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isMouseDown)
-            {
-                /*  same
-                pictureBox2.Left += (e.X - px);
-                pictureBox2.Top += (e.Y - py);
-                */
-
-                int x = pictureBox2.Location.X;
-                int y = pictureBox2.Location.Y;
-                x += (e.X - px);
-                y += (e.Y - py);
-                pictureBox2.Location = new Point(x, y);
-            }
-        }
-
-        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
-        {
-            pictureBox1_MouseUp(sender, e);
-        }
-
-        private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                pictureBox3.BringToFront();
-                isMouseDown = true;
-                px = e.X;
-                py = e.Y;
-            }
-        }
-
-        private void pictureBox3_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isMouseDown)
-            {
-                /*  same
-                pictureBox3.Left += (e.X - px);
-                pictureBox3.Top += (e.Y - py);
-                */
-
-                int x = pictureBox3.Location.X;
-                int y = pictureBox3.Location.Y;
-                x += (e.X - px);
-                y += (e.Y - py);
-                pictureBox3.Location = new Point(x, y);
-            }
-        }
-
-        private void pictureBox3_MouseUp(object sender, MouseEventArgs e)
-        {
-            pictureBox1_MouseUp(sender, e);
         }
     }
 }

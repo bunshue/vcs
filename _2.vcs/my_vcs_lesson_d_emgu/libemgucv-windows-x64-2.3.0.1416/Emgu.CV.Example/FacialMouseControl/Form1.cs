@@ -6,12 +6,12 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Threading;
+using System.Runtime.InteropServices;
+
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
-
-using System.Threading;
-using System.Runtime.InteropServices;
 
 namespace FacialMouseControl
 {
@@ -25,7 +25,10 @@ namespace FacialMouseControl
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             //Read the HaarCascade object
             _face = new HaarCascade(filename);
 
@@ -41,7 +44,6 @@ namespace FacialMouseControl
                     return;
                 }
             }
-
             Application.Idle += ProcessImage;
         }
 
@@ -101,7 +103,6 @@ namespace FacialMouseControl
                     SetCursorPos(p.X, p.Y);
                 }
             }
-
             imageBox1.Image = frame;
         }
 
@@ -114,7 +115,9 @@ namespace FacialMouseControl
         public void ReleaseData()
         {
             if (cap != null)
+            {
                 cap.Dispose();
+            }
         }
 
         private void flipHorizontalButton_Click(object sender, EventArgs e)
