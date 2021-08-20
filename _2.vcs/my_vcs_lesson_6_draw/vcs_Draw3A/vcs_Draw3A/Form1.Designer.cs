@@ -83,6 +83,7 @@
             this.timer_hex = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_random_color = new System.Windows.Forms.PictureBox();
             this.timer_random_color = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_battery2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_move)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -106,6 +107,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_2d_array)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_color)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery2)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -504,11 +506,20 @@
             this.timer_random_color.Interval = 1000;
             this.timer_random_color.Tick += new System.EventHandler(this.timer_random_color_Tick);
             // 
+            // pictureBox_battery2
+            // 
+            this.pictureBox_battery2.Location = new System.Drawing.Point(567, 136);
+            this.pictureBox_battery2.Name = "pictureBox_battery2";
+            this.pictureBox_battery2.Size = new System.Drawing.Size(166, 64);
+            this.pictureBox_battery2.TabIndex = 77;
+            this.pictureBox_battery2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1693, 750);
+            this.Controls.Add(this.pictureBox_battery2);
             this.Controls.Add(this.pictureBox_random_color);
             this.Controls.Add(this.pictureBox_hex);
             this.Controls.Add(this.pictureBox_random_2d_array);
@@ -567,6 +578,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_2d_array)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_color)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -628,6 +640,7 @@
         private System.Windows.Forms.Timer timer_hex;
         private System.Windows.Forms.PictureBox pictureBox_random_color;
         private System.Windows.Forms.Timer timer_random_color;
+        private System.Windows.Forms.PictureBox pictureBox_battery2;
     }
 }
 
