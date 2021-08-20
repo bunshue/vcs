@@ -6,13 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 
 // Libraries needed to work with VideoInputDevices
 using AForge.Video;
 using AForge.Video.DirectShow;
-
-
 
 namespace WebcamSecurity
 {
@@ -27,7 +26,6 @@ namespace WebcamSecurity
         GroupBox[] camOptions = new GroupBox[4];
         // The Configuration data set where we will store all user options (recording path , etc..)
         Config config;
-
 
         public MainForm()
         {
@@ -57,6 +55,7 @@ namespace WebcamSecurity
             this.camOptions[2].Enabled = false;
             this.camOptions[3].Enabled = false;
         }
+
         // The following method is responsible of saving data (upon exit) to the Config DataSet
         private void SaveOptions()
         {
@@ -131,6 +130,7 @@ namespace WebcamSecurity
             // finally we write everyting to an xml file
             this.config.WriteXml("config.xml");
         }
+
         // The following method is responsible of loading data (upon application load) 
         // from the Config Dataset to the user interface
         private void LoadOptions()
@@ -183,9 +183,9 @@ namespace WebcamSecurity
             // an instance of FilterInfoCollection is created to fetch available VideoCaptureDevices
             webcam = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             // we create our CameraMonitors
-            for (int i = 0; i < webcam.Count && i<4; i++)
+            for (int i = 0; i < webcam.Count && i < 4; i++)
             {
-                this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i],webcam[i].MonikerString,"Camera"+(i+1));
+                this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i], webcam[i].MonikerString, "Camera" + (i + 1));
                 // Enable the user controls coressponding to the CameraMonitor
                 this.camPanels[i].Enabled = true;
                 this.camOptions[i].Enabled = true;
@@ -369,7 +369,8 @@ namespace WebcamSecurity
             {
                 this.toggleOption(0, 0, true);
             }
-            else {
+            else
+            {
                 this.toggleOption(0, 0, false);
             }
         }
@@ -562,7 +563,6 @@ namespace WebcamSecurity
         {
             this.SetFocus(0);
         }
-
-        
     }
 }
+

@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
+
 using com.google.zxing;
 using com.google.zxing.common;
 
@@ -13,58 +14,59 @@ namespace Webcam_Test
      * http://www.planet-source-code.com/vb/scripts/ShowCode.asp?txtCodeId=1339&lngWId=10
      * */
     /// <summary>
-	/// Summary description for Form1.
-	/// </summary>
-	public class Form1 : System.Windows.Forms.Form
-	{
-		private WebCam_Capture.WebCamCapture UserControl1;
-		private WebCam_Capture.WebCamCapture WebCamCapture;
-		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.Button cmdStart;
-		private System.Windows.Forms.Button cmdStop;
-		private System.Windows.Forms.Button cmdContinue;
-		private System.Windows.Forms.NumericUpDown numCaptureTime;
-		private System.Windows.Forms.Label label1;
+    /// Summary description for Form1.
+    /// </summary>
+    public class Form1 : System.Windows.Forms.Form
+    {
+        private WebCam_Capture.WebCamCapture UserControl1;
+        private WebCam_Capture.WebCamCapture WebCamCapture;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button cmdStart;
+        private System.Windows.Forms.Button cmdStop;
+        private System.Windows.Forms.Button cmdContinue;
+        private System.Windows.Forms.NumericUpDown numCaptureTime;
+        private System.Windows.Forms.Label label1;
         private TextBox textBox1;
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.Container components = null;
+        private RichTextBox richTextBox1;
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.Container components = null;
 
-		public Form1()
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
+        public Form1()
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
 
-			//
-			// TODO: Add any constructor code after InitializeComponent call
-			//
-		}
+            //
+            // TODO: Add any constructor code after InitializeComponent call
+            //
+        }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if (components != null) 
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.WebCamCapture = new WebCam_Capture.WebCamCapture();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmdStart = new System.Windows.Forms.Button();
@@ -73,6 +75,7 @@ namespace Webcam_Test
             this.numCaptureTime = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCaptureTime)).BeginInit();
             this.SuspendLayout();
@@ -161,10 +164,19 @@ namespace Webcam_Test
             this.textBox1.Size = new System.Drawing.Size(318, 22);
             this.textBox1.TabIndex = 6;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(652, 7);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(482, 480);
+            this.richTextBox1.TabIndex = 7;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
-            this.ClientSize = new System.Drawing.Size(778, 629);
+            this.ClientSize = new System.Drawing.Size(1146, 695);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numCaptureTime);
@@ -175,46 +187,47 @@ namespace Webcam_Test
             this.Name = "Form1";
             this.Text = "WebCam Capture";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.Form1_Closing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCaptureTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
-		#endregion
+        }
+        #endregion
 
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main() 
-		{
-			Application.Run(new Form1());
-		}
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.Run(new Form1());
+        }
 
-		private void Form1_Load(object sender, System.EventArgs e)
-		{
-			// set the image capture size
-			this.WebCamCapture.CaptureHeight = this.pictureBox1.Height;
-			this.WebCamCapture.CaptureWidth = this.pictureBox1.Width;
-		}
+        private void Form1_Load(object sender, System.EventArgs e)
+        {
+            // set the image capture size
+            this.WebCamCapture.CaptureHeight = this.pictureBox1.Height;
+            this.WebCamCapture.CaptureWidth = this.pictureBox1.Width;
+        }
 
-		private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			// stop the video capture
-			this.WebCamCapture.Stop();
-		}
+        private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // stop the video capture
+            this.WebCamCapture.Stop();
+        }
         private Boolean b = true;
-		/// <summary>
-		/// An image was capture
-		/// </summary>
-		/// <param name="source">control raising the event</param>
-		/// <param name="e">WebCamEventArgs</param>
-		private void WebCamCapture_ImageCaptured(object source, WebCam_Capture.WebcamEventArgs e)
-		{
-			// set the picturebox picture
-			this.pictureBox1.Image = e.WebCamImage;
+        /// <summary>
+        /// An image was capture
+        /// </summary>
+        /// <param name="source">control raising the event</param>
+        /// <param name="e">WebCamEventArgs</param>
+        private void WebCamCapture_ImageCaptured(object source, WebCam_Capture.WebcamEventArgs e)
+        {
+            // set the picturebox picture
+            this.pictureBox1.Image = e.WebCamImage;
 
             if (b)
             {
@@ -223,45 +236,55 @@ namespace Webcam_Test
                 System.Drawing.Bitmap img = new System.Drawing.Bitmap(this.pictureBox1.Image, this.pictureBox1.Image.Size);
                 thread1 obj = new thread1(img, this);
                 System.Threading.Thread t = new System.Threading.Thread(obj.runMe);
-               
+
                 t.Start();
             }
-		}
-        public void setTextBox(String str,Boolean b)
+        }
+        public void setTextBox(String str, Boolean b)
         {
+            richTextBox1.Text += "get : " + str + "\tb = " + b.ToString() + "\n";
             this.textBox1.Text = str;
             this.b = b;
         }
-        public delegate void decodeValue(string str,Boolean b);
-		private void cmdStart_Click(object sender, System.EventArgs e)
-		{
-			// change the capture time frame
-			this.WebCamCapture.TimeToCapture_milliseconds = (int) this.numCaptureTime.Value;
 
-			// start the video capture. let the control handle the
-			// frame numbers.
-			this.WebCamCapture.Start(0);
+        public delegate void decodeValue(string str, Boolean b);
+        private void cmdStart_Click(object sender, System.EventArgs e)
+        {
+            // change the capture time frame
+            this.WebCamCapture.TimeToCapture_milliseconds = (int)this.numCaptureTime.Value;
 
-		}
+            // start the video capture. let the control handle the
+            // frame numbers.
+            this.WebCamCapture.Start(0);
+        }
 
-		private void cmdStop_Click(object sender, System.EventArgs e)
-		{
-			// stop the video capture
-			this.WebCamCapture.Stop();
-            
+        private void cmdStop_Click(object sender, System.EventArgs e)
+        {
+            // stop the video capture
+            this.WebCamCapture.Stop();
+        }
 
-		}
+        private void cmdContinue_Click(object sender, System.EventArgs e)
+        {
+            // change the capture time frame
+            this.WebCamCapture.TimeToCapture_milliseconds = (int)this.numCaptureTime.Value;
+            setTextBox("", true);
+            // resume the video capture from the stop
+            this.WebCamCapture.Start(this.WebCamCapture.FrameNumber);
 
-		private void cmdContinue_Click(object sender, System.EventArgs e)
-		{
-			// change the capture time frame
-			this.WebCamCapture.TimeToCapture_milliseconds = (int) this.numCaptureTime.Value;
-            setTextBox("",true);
-			// resume the video capture from the stop
-			this.WebCamCapture.Start(this.WebCamCapture.FrameNumber);
+        }
 
-		}
-	}
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.WebCamCapture.bStopped == false)
+            {
+                // stop the video capture
+                this.WebCamCapture.Stop();
+            }
+            System.Threading.Thread.Sleep(500);
+
+        }
+    }
     /*
      *
      * 
@@ -288,7 +311,6 @@ namespace Webcam_Test
         }
         public void QrDecode(System.Drawing.Bitmap picDecode)
         {
-
             try
             {
                 Reader reader = new MultiFormatReader();
@@ -298,8 +320,8 @@ namespace Webcam_Test
                 BinaryBitmap image = new BinaryBitmap(new HybridBinarizer(source));
                 Result result = (Result)reader.decode(image);
                 string text = result.Text;
-                
-               
+
+
                 BarcodeFormat format = result.BarcodeFormat;
                 ResultPoint[] points = result.ResultPoints;
                 Console.WriteLine("barcode text: {0}", text);
@@ -307,19 +329,16 @@ namespace Webcam_Test
                 Console.WriteLine("format: {0}", format);
                 Console.ReadLine();
                 form.Invoke(new Form1.decodeValue(form.setTextBox), new object[] { System.Text.Encoding.UTF8.GetString(System.Text.Encoding.GetEncoding("SJIS").GetBytes(text)), false });
-                
+
 
             }
             catch (com.google.zxing.ReaderException ex)
             {
-                
-                form.Invoke(new Form1.decodeValue(form.setTextBox), new object[] { "error",true });
-                
+
+                form.Invoke(new Form1.decodeValue(form.setTextBox), new object[] { "error", true });
+
                 return;
-                
             }
-            
         }
     }
-
 }

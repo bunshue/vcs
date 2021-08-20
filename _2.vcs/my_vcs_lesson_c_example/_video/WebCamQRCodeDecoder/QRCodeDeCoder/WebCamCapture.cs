@@ -29,7 +29,7 @@ namespace WebCam_Capture
 		private WebCam_Capture.WebcamEventArgs x = new WebCam_Capture.WebcamEventArgs();
 		private IDataObject tempObj;
 		private System.Drawing.Image tempImg;
-		private bool bStopped = true;
+        public bool bStopped = true;
 
 		// event delegate
 		public delegate void WebCamEventHandler (object source, WebCam_Capture.WebcamEventArgs e);

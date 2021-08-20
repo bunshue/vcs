@@ -29,21 +29,30 @@ namespace OperateCamera
         //开始录像
         private bool stopREC = true;
         private bool createNewFile = true;
-        string videoPath = "";
         private VideoFileWriter videoWriter;
+
+        string fileFullPath = string.Empty;
 
         public Form1()
         {
             InitializeComponent();
-            videoPath = Application.StartupPath + "\\videos\\";
-            if (!Directory.Exists(videoPath))
-            {
-                Directory.CreateDirectory(videoPath);
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //创建文件路径
+            string fileFullPath = Application.StartupPath + "\\V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+            richTextBox1.Text += "開啟檔案 : " + fileFullPath + "\n";
+
+            /*
+            videoWriter = new VideoFileWriter();    //無法執行此行
+
+            //这里必须是全路径，否则会默认保存到程序运行根据录下了
+            videoWriter.Open(fileFullPath, 640, 480, 30, VideoCodec.MPEG4);
+            */
+
+
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
@@ -126,7 +135,7 @@ namespace OperateCamera
             g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
 
             ////创建文件路径
-            string fileFullPath = videoPath + "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+            //string fileFullPath = videoPath + "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             if (stopREC)
             {
@@ -147,6 +156,8 @@ namespace OperateCamera
                         videoWriter.Close();
                         videoWriter.Dispose();
                     }
+                    richTextBox1.Text += "開啟檔案 : " + fileFullPath + "\n";
+
                     videoWriter = new VideoFileWriter();
                     //这里必须是全路径，否则会默认保存到程序运行根据录下了
                     videoWriter.Open(fileFullPath, image.Width, image.Height, 30, VideoCodec.MPEG4);
@@ -175,21 +186,77 @@ namespace OperateCamera
             }
         }
 
-        public Bitmap bm = null;
+        bool flag_recording = false;
+
+        public Bitmap bmp = null;
         //自定義函數, 捕獲每一幀圖像並顯示
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-            bm = (Bitmap)eventArgs.Frame.Clone();
-            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
-            pictureBox1.Image = bm;
+            bmp = (Bitmap)eventArgs.Frame.Clone();
+
+            bmp = (Bitmap)eventArgs.Frame.Clone();
+
+            //bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+            Graphics g = Graphics.FromImage(bmp);
+            SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+
+            Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+            int xPos = bmp.Width - (bmp.Width - 15);
+            int yPos = 10;
+            //写到屏幕上的时间
+            string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+
+
+            /*  準備中
+            if (stopREC)
+            {
+                stopREC = true;
+                createNewFile = true;  //这里要设置为true表示要创建新文件
+                if (videoWriter != null)
+                    videoWriter.Close();
+            }
+            else
+            {
+                //开始录像
+                if (createNewFile)
+                {
+
+                    createNewFile = false;
+                    if (videoWriter != null)
+                    {
+                        videoWriter.Close();
+                        videoWriter.Dispose();
+                    }
+                    richTextBox1.Text += "開啟檔案 : " + fileFullPath + "\n";
+
+                    videoWriter = new VideoFileWriter();
+                    //这里必须是全路径，否则会默认保存到程序运行根据录下了
+                    videoWriter.Open(fileFullPath, bmp.Width, bmp.Height, 30, VideoCodec.MPEG4);
+                    videoWriter.WriteVideoFrame(bmp);
+                }
+                else
+                {
+                    videoWriter.WriteVideoFrame(bmp);
+                }
+            }
+            */
+
+            pictureBox1.Image = bmp;
 
             GC.Collect();       //回收資源
+
+
+
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string fileFullPath = videoPath + "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+            //string fileFullPath = videoPath + "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             /*
             if (videoWriter != null)
@@ -206,13 +273,28 @@ namespace OperateCamera
 
             //videoWriter.Close();
             //videoWriter.Dispose();
-
-
-
-
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //ST
+            flag_recording = true;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //SP
+            flag_recording = false;
+            if (videoWriter != null)
+            {
+                videoWriter.Close();
+                videoWriter.Dispose();
+            }
+        }
     }
 }
-
