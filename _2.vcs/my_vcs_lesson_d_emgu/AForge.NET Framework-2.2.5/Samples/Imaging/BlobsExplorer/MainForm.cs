@@ -44,28 +44,6 @@ namespace BlobsExplorer
             LoadDemo( );
         }
 
-        // Exit from application
-        private void exitToolStripMenuItem_Click( object sender, EventArgs e )
-        {
-            this.Close( );
-        }
-
-        // Open file
-        private void openToolStripMenuItem_Click( object sender, EventArgs e )
-        {
-            if ( openFileDialog.ShowDialog( ) == DialogResult.OK )
-            {
-                try
-                {
-                    ProcessImage( (Bitmap) Bitmap.FromFile( openFileDialog.FileName ) );
-                }
-                catch
-                {
-                    MessageBox.Show( "Failed loading selected image file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
-                }
-            }
-        }
-
         // Process image
         private void ProcessImage( Bitmap image )
         {
@@ -82,24 +60,6 @@ namespace BlobsExplorer
             propertyGrid.ExpandAllGridItems( );
         }
 
-        // Load demo image
-        private void loaddemoImageToolStripMenuItem_Click( object sender, EventArgs e )
-        {
-            LoadDemo( );
-        }
-
-        private void LoadDemo( )
-        {
-            // load arrow bitmap
-            Assembly assembly = this.GetType( ).Assembly;
-            Bitmap image = new Bitmap( assembly.GetManifestResourceStream( "BlobsExplorer.demo.png" ) );
-            ProcessImage( image );
-        }
-
-        private void aboutToolStripMenuItem_Click( object sender, EventArgs e )
-        {
-        }
-
         // Change type of blobs' highlighting
         private void highlightTypeCombo_SelectedIndexChanged( object sender, EventArgs e )
         {
@@ -111,5 +71,39 @@ namespace BlobsExplorer
         {
             blobsBrowser.ShowRectangleAroundSelection = showRectangleAroundSelectionCheck.Checked;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //open
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    ProcessImage((Bitmap)Bitmap.FromFile(openFileDialog.FileName));
+                }
+                catch
+                {
+                    MessageBox.Show("Failed loading selected image file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //load demo image
+            LoadDemo();
+
+        }
+
+        private void LoadDemo()
+        {
+            // load arrow bitmap
+            Assembly assembly = this.GetType().Assembly;
+            Bitmap image = new Bitmap(assembly.GetManifestResourceStream("BlobsExplorer.demo.png"));
+            ProcessImage(image);
+        }
+
+
     }
 }

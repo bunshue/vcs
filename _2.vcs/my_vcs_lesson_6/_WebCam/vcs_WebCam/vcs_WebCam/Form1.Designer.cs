@@ -34,6 +34,10 @@
             this.lb_fps = new System.Windows.Forms.Label();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rb_5X5 = new System.Windows.Forms.RadioButton();
+            this.rb_4X4 = new System.Windows.Forms.RadioButton();
+            this.rb_3X3 = new System.Windows.Forms.RadioButton();
+            this.cb_show_grid = new System.Windows.Forms.CheckBox();
             this.rb3 = new System.Windows.Forms.RadioButton();
             this.rb2 = new System.Windows.Forms.RadioButton();
             this.rb1 = new System.Windows.Forms.RadioButton();
@@ -69,10 +73,6 @@
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
             this.timer_qr_code = new System.Windows.Forms.Timer(this.components);
-            this.cb_show_grid = new System.Windows.Forms.CheckBox();
-            this.rb_5X5 = new System.Windows.Forms.RadioButton();
-            this.rb_4X4 = new System.Windows.Forms.RadioButton();
-            this.rb_3X3 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -153,6 +153,49 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Operation";
             // 
+            // rb_5X5
+            // 
+            this.rb_5X5.AutoSize = true;
+            this.rb_5X5.Location = new System.Drawing.Point(319, 144);
+            this.rb_5X5.Name = "rb_5X5";
+            this.rb_5X5.Size = new System.Drawing.Size(43, 16);
+            this.rb_5X5.TabIndex = 22;
+            this.rb_5X5.Text = "5X5";
+            this.rb_5X5.UseVisualStyleBackColor = true;
+            // 
+            // rb_4X4
+            // 
+            this.rb_4X4.AutoSize = true;
+            this.rb_4X4.Checked = true;
+            this.rb_4X4.Location = new System.Drawing.Point(319, 122);
+            this.rb_4X4.Name = "rb_4X4";
+            this.rb_4X4.Size = new System.Drawing.Size(43, 16);
+            this.rb_4X4.TabIndex = 21;
+            this.rb_4X4.TabStop = true;
+            this.rb_4X4.Text = "4X4";
+            this.rb_4X4.UseVisualStyleBackColor = true;
+            // 
+            // rb_3X3
+            // 
+            this.rb_3X3.AutoSize = true;
+            this.rb_3X3.Location = new System.Drawing.Point(319, 100);
+            this.rb_3X3.Name = "rb_3X3";
+            this.rb_3X3.Size = new System.Drawing.Size(43, 16);
+            this.rb_3X3.TabIndex = 20;
+            this.rb_3X3.Text = "3X3";
+            this.rb_3X3.UseVisualStyleBackColor = true;
+            // 
+            // cb_show_grid
+            // 
+            this.cb_show_grid.AutoSize = true;
+            this.cb_show_grid.Location = new System.Drawing.Point(296, 173);
+            this.cb_show_grid.Name = "cb_show_grid";
+            this.cb_show_grid.Size = new System.Drawing.Size(48, 16);
+            this.cb_show_grid.TabIndex = 19;
+            this.cb_show_grid.Text = "格線";
+            this.cb_show_grid.UseVisualStyleBackColor = true;
+            this.cb_show_grid.CheckedChanged += new System.EventHandler(this.cb_show_grid_CheckedChanged);
+            // 
             // rb3
             // 
             this.rb3.AutoSize = true;
@@ -193,7 +236,7 @@
             this.bt_help.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_help.Location = new System.Drawing.Point(188, 122);
             this.bt_help.Name = "bt_help";
-            this.bt_help.Size = new System.Drawing.Size(75, 36);
+            this.bt_help.Size = new System.Drawing.Size(75, 30);
             this.bt_help.TabIndex = 16;
             this.bt_help.Text = "Help";
             this.bt_help.UseVisualStyleBackColor = true;
@@ -225,7 +268,7 @@
             this.bt_fullscreen.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_fullscreen.Location = new System.Drawing.Point(103, 122);
             this.bt_fullscreen.Name = "bt_fullscreen";
-            this.bt_fullscreen.Size = new System.Drawing.Size(75, 36);
+            this.bt_fullscreen.Size = new System.Drawing.Size(75, 30);
             this.bt_fullscreen.TabIndex = 13;
             this.bt_fullscreen.Text = "全螢幕";
             this.bt_fullscreen.UseVisualStyleBackColor = true;
@@ -248,7 +291,7 @@
             this.bt_start.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_start.Location = new System.Drawing.Point(18, 38);
             this.bt_start.Name = "bt_start";
-            this.bt_start.Size = new System.Drawing.Size(75, 36);
+            this.bt_start.Size = new System.Drawing.Size(75, 30);
             this.bt_start.TabIndex = 5;
             this.bt_start.Text = "啟動";
             this.bt_start.UseVisualStyleBackColor = true;
@@ -259,7 +302,7 @@
             this.bt_info.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_info.Location = new System.Drawing.Point(18, 122);
             this.bt_info.Name = "bt_info";
-            this.bt_info.Size = new System.Drawing.Size(75, 36);
+            this.bt_info.Size = new System.Drawing.Size(75, 30);
             this.bt_info.TabIndex = 12;
             this.bt_info.Text = "Info";
             this.bt_info.UseVisualStyleBackColor = true;
@@ -270,7 +313,7 @@
             this.bt_pause.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_pause.Location = new System.Drawing.Point(103, 38);
             this.bt_pause.Name = "bt_pause";
-            this.bt_pause.Size = new System.Drawing.Size(75, 36);
+            this.bt_pause.Size = new System.Drawing.Size(75, 30);
             this.bt_pause.TabIndex = 6;
             this.bt_pause.Text = "暫停";
             this.bt_pause.UseVisualStyleBackColor = true;
@@ -281,7 +324,7 @@
             this.bt_stop.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_stop.Location = new System.Drawing.Point(194, 38);
             this.bt_stop.Name = "bt_stop";
-            this.bt_stop.Size = new System.Drawing.Size(75, 36);
+            this.bt_stop.Size = new System.Drawing.Size(75, 30);
             this.bt_stop.TabIndex = 7;
             this.bt_stop.Text = "停止";
             this.bt_stop.UseVisualStyleBackColor = true;
@@ -292,7 +335,7 @@
             this.bt_exit.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_exit.Location = new System.Drawing.Point(188, 80);
             this.bt_exit.Name = "bt_exit";
-            this.bt_exit.Size = new System.Drawing.Size(75, 36);
+            this.bt_exit.Size = new System.Drawing.Size(75, 30);
             this.bt_exit.TabIndex = 10;
             this.bt_exit.Text = "離開";
             this.bt_exit.UseVisualStyleBackColor = true;
@@ -303,7 +346,7 @@
             this.bt_refresh.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_refresh.Location = new System.Drawing.Point(18, 80);
             this.bt_refresh.Name = "bt_refresh";
-            this.bt_refresh.Size = new System.Drawing.Size(75, 36);
+            this.bt_refresh.Size = new System.Drawing.Size(75, 30);
             this.bt_refresh.TabIndex = 8;
             this.bt_refresh.Text = "重抓";
             this.bt_refresh.UseVisualStyleBackColor = true;
@@ -314,7 +357,7 @@
             this.bt_snapshot.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_snapshot.Location = new System.Drawing.Point(103, 80);
             this.bt_snapshot.Name = "bt_snapshot";
-            this.bt_snapshot.Size = new System.Drawing.Size(75, 36);
+            this.bt_snapshot.Size = new System.Drawing.Size(75, 30);
             this.bt_snapshot.TabIndex = 9;
             this.bt_snapshot.Text = "截圖";
             this.bt_snapshot.UseVisualStyleBackColor = true;
@@ -338,10 +381,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label3.Location = new System.Drawing.Point(26, 147);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 21);
+            this.label3.Size = new System.Drawing.Size(47, 19);
             this.label3.TabIndex = 14;
             this.label3.Text = "方向";
             // 
@@ -374,10 +417,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label2.Location = new System.Drawing.Point(26, 81);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 21);
+            this.label2.Size = new System.Drawing.Size(66, 19);
             this.label2.TabIndex = 13;
             this.label2.Text = "解析度";
             // 
@@ -401,10 +444,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label1.Location = new System.Drawing.Point(25, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 21);
+            this.label1.Size = new System.Drawing.Size(47, 19);
             this.label1.TabIndex = 4;
             this.label1.Text = "相機";
             // 
@@ -530,54 +573,11 @@
             this.timer_qr_code.Interval = 1000;
             this.timer_qr_code.Tick += new System.EventHandler(this.timer_qr_code_Tick);
             // 
-            // cb_show_grid
-            // 
-            this.cb_show_grid.AutoSize = true;
-            this.cb_show_grid.Location = new System.Drawing.Point(296, 173);
-            this.cb_show_grid.Name = "cb_show_grid";
-            this.cb_show_grid.Size = new System.Drawing.Size(48, 16);
-            this.cb_show_grid.TabIndex = 19;
-            this.cb_show_grid.Text = "格線";
-            this.cb_show_grid.UseVisualStyleBackColor = true;
-            this.cb_show_grid.CheckedChanged += new System.EventHandler(this.cb_show_grid_CheckedChanged);
-            // 
-            // rb_5X5
-            // 
-            this.rb_5X5.AutoSize = true;
-            this.rb_5X5.Location = new System.Drawing.Point(319, 144);
-            this.rb_5X5.Name = "rb_5X5";
-            this.rb_5X5.Size = new System.Drawing.Size(43, 16);
-            this.rb_5X5.TabIndex = 22;
-            this.rb_5X5.Text = "5X5";
-            this.rb_5X5.UseVisualStyleBackColor = true;
-            // 
-            // rb_4X4
-            // 
-            this.rb_4X4.AutoSize = true;
-            this.rb_4X4.Checked = true;
-            this.rb_4X4.Location = new System.Drawing.Point(319, 122);
-            this.rb_4X4.Name = "rb_4X4";
-            this.rb_4X4.Size = new System.Drawing.Size(43, 16);
-            this.rb_4X4.TabIndex = 21;
-            this.rb_4X4.TabStop = true;
-            this.rb_4X4.Text = "4X4";
-            this.rb_4X4.UseVisualStyleBackColor = true;
-            // 
-            // rb_3X3
-            // 
-            this.rb_3X3.AutoSize = true;
-            this.rb_3X3.Location = new System.Drawing.Point(319, 100);
-            this.rb_3X3.Name = "rb_3X3";
-            this.rb_3X3.Size = new System.Drawing.Size(43, 16);
-            this.rb_3X3.TabIndex = 20;
-            this.rb_3X3.Text = "3X3";
-            this.rb_3X3.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1387, 757);
+            this.ClientSize = new System.Drawing.Size(1244, 761);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.richTextBox1);

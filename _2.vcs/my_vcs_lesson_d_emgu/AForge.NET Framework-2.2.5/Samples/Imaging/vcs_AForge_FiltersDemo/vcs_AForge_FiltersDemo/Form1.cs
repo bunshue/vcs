@@ -155,6 +155,12 @@ namespace vcs_AForge_FiltersDemo
 
         private void bt_filter_select_Click(object sender, EventArgs e)
         {
+            if (sourceImage == null)
+            {
+                richTextBox1.Text += "尚未開啟圖片\n";
+                return;
+            }
+
             string name = ((Button)sender).Name;
             string text = ((Button)sender).Text;
             richTextBox1.Text += name + "\t" + text + "\n";

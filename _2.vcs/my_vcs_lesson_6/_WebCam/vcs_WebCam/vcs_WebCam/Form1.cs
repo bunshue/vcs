@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Diagnostics;       //for Process
 
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;
 
-using System.IO;
 
 //參考
 //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
@@ -166,28 +166,28 @@ namespace vcs_WebCam
             dx = 210;
             dy = 42;
 
-            groupBox1.Size = new Size(1120+100, 250);
+            groupBox1.Size = new Size(1120 + 100, 220);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             pictureBox1.Size = new Size(640, 480);
-            pictureBox1.Location = new Point(10, 270);
+            pictureBox1.Location = new Point(10, 240);
 
-            richTextBox1.Size = new Size(300, 480);
-            richTextBox1.Location = new Point(10 + 640 + 10, 270);
+            richTextBox1.Size = new Size(320, 480);
+            richTextBox1.Location = new Point(900, 240);
 
             y_st = 20;
             int w = 260;
-            int h = 220;
+            int h = 190;
             groupBox2.Size = new Size(w, h);
             groupBox3.Size = new Size(w, h);
-            groupBox4.Size = new Size(w+100, h);
+            groupBox4.Size = new Size(w + 100, h);
             groupBox5.Size = new Size(w, h);
 
             dx = w + 20;
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox5.Location = new Point(x_st + dx * 3+100, y_st + dy * 0);
+            groupBox5.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
 
             //groupBox2
             x_st = 10;
@@ -208,7 +208,7 @@ namespace vcs_WebCam
             x_st = 10;
             y_st = 20;
             dx = 210;
-            dy = 30;
+            dy = 26;
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             label3.Location = new Point(x_st + dx * 0, y_st + dy * 4);
@@ -224,7 +224,7 @@ namespace vcs_WebCam
             x_st = 10;
             y_st = 20;
             dx = 80;
-            dy = 50;
+            dy = 40;
             bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_pause.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_stop.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -244,9 +244,9 @@ namespace vcs_WebCam
             rb2.Location = new Point(x_st + dx * 1 + 30, y_st + dy * 3 + 25);
             rb3.Location = new Point(x_st + dx * 1 + 60, y_st + dy * 3 + 25);
 
-            rb_3X3.Location = new Point(x_st + dx * 3+45, y_st + dy * 3-20);
-            rb_4X4.Location = new Point(x_st + dx * 3+45, y_st + dy * 3);
-            rb_5X5.Location = new Point(x_st + dx * 3+45, y_st + dy * 3+20);
+            rb_3X3.Location = new Point(x_st + dx * 3 + 45, y_st + dy * 3 - 20);
+            rb_4X4.Location = new Point(x_st + dx * 3 + 45, y_st + dy * 3);
+            rb_5X5.Location = new Point(x_st + dx * 3 + 45, y_st + dy * 3 + 20);
 
             rb_3X3.Visible = false;
             rb_4X4.Visible = false;
@@ -1306,7 +1306,6 @@ namespace vcs_WebCam
                 rb_4X4.Visible = false;
                 rb_5X5.Visible = false;
             }
-
         }
     }
 }
