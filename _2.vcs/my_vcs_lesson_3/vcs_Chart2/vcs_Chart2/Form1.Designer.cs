@@ -183,7 +183,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(101, 44);
             this.button6.TabIndex = 7;
-            this.button6.Text = "plotChart 6";
+            this.button6.Text = "plotChart 6 TBD";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -280,6 +280,7 @@
             this.Controls.Add(this.chart1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

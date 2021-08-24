@@ -27,6 +27,10 @@ namespace vcs_Chart1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             chart1_init();
         }
@@ -48,7 +52,9 @@ namespace vcs_Chart1
 
         void chart1_init()
         {
-            chart1.Series.Clear();  //每次使用此function前先清除圖表
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
 
             //設定Chart大小與外觀
             //全圖
@@ -88,9 +94,9 @@ namespace vcs_Chart1
             chart1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
             chart1.BackSecondaryColor = System.Drawing.Color.Yellow;//設置背景的輔助顏色
             chart1.BorderlineColor = System.Drawing.Color.Yellow;//設置圖像邊框的顏色
-            chart1.BorderlineDashStyle=  System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
+            chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
             chart1.BorderlineWidth = 2;//設置圖像的邊框寬度
-            chart1.BorderSkin.SkinStyle=  System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
+            chart1.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
             chart1.BackColor = System.Drawing.Color.Yellow;//設置圖表的背景顏色
             #endregion
             chart1.Titles[0].Font = new System.Drawing.Font("標楷體", 30f);//设置图表标题字体样式和大小
@@ -101,7 +107,7 @@ namespace vcs_Chart1
         {
             chart1_init();
             richTextBox1.Text += "靜畫範例1, 用獨立數組做\n\r";
-                 
+
             //設定數列大小與外觀
             //series 1
             Series series1 = new Series("sin", 500); //初始畫線條(標題，最大數值)
@@ -276,8 +282,12 @@ namespace vcs_Chart1
 
         private void bt_clear_chart_Click(object sender, EventArgs e)
         {
-            if(timer1.Enabled == false)
-                chart1.Series.Clear();  //每次使用此function前先清除圖表
+            if (timer1.Enabled == false)
+            {
+                //清除圖表
+                chart1.Series.Clear();
+                chart1.Titles.Clear();
+            }
             /*
             chart1.Series[0].Points.Clear();
             chart1.Series[1].Points.Clear();
@@ -323,7 +333,6 @@ namespace vcs_Chart1
             else
                 richTextBox1.Text += "無圖可存\n";
         }
-
-
     }
 }
+

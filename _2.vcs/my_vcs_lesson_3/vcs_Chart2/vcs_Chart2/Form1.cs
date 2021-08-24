@@ -31,6 +31,10 @@ namespace vcs_Chart2
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             show_item_location();
             comboBox1.SelectedIndex = 0;
             chart1.Size = new Size(CHART_WIDTH, CHART_HEIGHT);       //改變Cahrt大小
@@ -60,12 +64,9 @@ namespace vcs_Chart2
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
 
-
             bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 11);
             bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-        
-        
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -201,8 +202,10 @@ namespace vcs_Chart2
         private void button0_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "靜畫範例1, 用獨立數組做\n\r";
-                 
-            chart1.Series.Clear();  //每次使用此function前先清除圖表
+
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
 
             //設定Chart大小與外觀
             //全圖
@@ -311,8 +314,10 @@ namespace vcs_Chart2
 
         private void plotChart2() //繪圖
         {
-            //---------------------
-            chart1.Series.Clear();  //每次使用此function前先清除圖表
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
             Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
             series1.Color = Color.Blue; //設定線條顏色
             series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
@@ -340,7 +345,10 @@ namespace vcs_Chart2
         private void plotChart3() //繪圖
         {
             //Bar example
-            this.chart1.Series.Clear();
+
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
 
             // Data arrays
             string[] seriesArray = { "Cat", "Dog", "Bird", "Monkey" };
@@ -368,7 +376,10 @@ namespace vcs_Chart2
         private void plotChart4() //繪圖
         {
             //SplineChartExample
-            this.chart1.Series.Clear();
+
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
 
             this.chart1.Titles.Add("Total Income");
 
@@ -400,6 +411,10 @@ namespace vcs_Chart2
         {
             //C#.Net 透過Chart繪製直線圖
 
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
             chart1.Titles.Add("直線圖");
             Series[] series = new Series[3];       //預先建立3個數組   應該是不太好
             double[] _y = new double[] { 77, 35, 131 };
@@ -424,25 +439,27 @@ namespace vcs_Chart2
             }
 
             foreach (Series s in series)
+            {
                 chart1.Series.Add(s);
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //C#.Net 透過Chart繪製圓餅圖
+            //C#.Net 透過Chart繪製圓餅圖,  fail
 
             /*  TBD
-            Series _series = new Series();
+            Series series1 = new Series();
             double[] _y = new double[] { 77, 35, 131, 55, 77, 66 };
             Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown, Color.Salmon, Color.Sienna, Color.SlateBlue };
             String[] _users = new String[] { "小王", "小風", "小明", "小姿", "小玉", "小蟹" };
 
 
 
-            _series.ChartType = SeriesChartType.Pie;
-            _series.IsValueShownAsLabel = true;
-            _series.Points.DataBindXY(_users, _y);
-            chart1.Series.Add(_series);
+            series1.ChartType = SeriesChartType.Pie;
+            series1.IsValueShownAsLabel = true;
+            series1.Points.DataBindXY(_users, _y);
+            chart1.Series.Add(series1);
             */
         }
 
@@ -450,24 +467,27 @@ namespace vcs_Chart2
         {
             //C#.Net 使用Chart繪製長條圖
 
-            Series[] _series = null;
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
+            Series[] series1 = null;
             double[] _y = new double[] { 100, 57, 93, 26, 77, 88 };
             Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown, Color.Salmon, Color.Sienna, Color.SlateBlue };
             String[] _users = new String[] { "小王", "小風", "小明", "小姿", "小玉", "小蟹" };
 
             int _length = _y.Length;
-            _series = new Series[_length];
+            series1 = new Series[_length];
             for (int index = 0; index < _length; index++)
             {
-                _series[index] = new Series();
-                _series[index].Color = _colors[index];
-                _series[index].ChartType = SeriesChartType.Column;
-                _series[index].Name = _users[index];
-                _series[index].IsValueShownAsLabel = true;
-                _series[index].Points.Add(_y[index]);
-                chart1.Series.Add(_series[index]);
+                series1[index] = new Series();
+                series1[index].Color = _colors[index];
+                series1[index].ChartType = SeriesChartType.Column;
+                series1[index].Name = _users[index];
+                series1[index].IsValueShownAsLabel = true;
+                series1[index].Points.Add(_y[index]);
+                chart1.Series.Add(series1[index]);
             }
-
         }
 
         double x = 0;
@@ -493,6 +513,10 @@ namespace vcs_Chart2
         {
             if (bt_start.Text == "動畫 ST")
             {
+                //清除圖表
+                chart1.Series.Clear();
+                chart1.Titles.Clear();
+
                 Series series1 = new Series();
                 chart1.Series.Add(series1);
                 chart1.Series[0].ChartType = chartType;
@@ -509,7 +533,11 @@ namespace vcs_Chart2
         private void bt_clear_Click(object sender, EventArgs e)
         {
             if (timer1.Enabled == false)
-                chart1.Series.Clear();  //每次使用此function前先清除圖表
+            {
+                //清除圖表
+                chart1.Series.Clear();
+                chart1.Titles.Clear();
+            }
             richTextBox1.Clear();
         }
 
@@ -573,7 +601,9 @@ namespace vcs_Chart2
             var rand = new Random(123);
             var items = Enumerable.Range(0, 20).Select(x => new Item(x, rand.Next(1, 100) / 2.0)).ToList();
 
-            this.chart1.Series.Clear();
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
 
             var seriesLines = this.chart1.Series.Add("Line");
             seriesLines.ChartType = SeriesChartType.Line; //System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -589,7 +619,7 @@ namespace vcs_Chart2
             this.chart1.DataSource = items;
         }
 
-        Point? prevPosition = null;
+        Point? prevPosition = null;     //好奇怪的寫法?
         ToolTip tooltip = new ToolTip();
         private void chart1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -597,11 +627,12 @@ namespace vcs_Chart2
             {
                 var pos = e.Location;
                 if (prevPosition.HasValue && pos == prevPosition.Value)
+                {
                     return;
+                }
                 tooltip.RemoveAll();
                 prevPosition = pos;
-                var results = chart1.HitTest(pos.X, pos.Y, false,
-                                                ChartElementType.DataPoint);
+                var results = chart1.HitTest(pos.X, pos.Y, false, ChartElementType.DataPoint);
                 foreach (var result in results)
                 {
                     if (result.ChartElementType == ChartElementType.DataPoint)
@@ -613,19 +644,14 @@ namespace vcs_Chart2
                             var pointYPixel = result.ChartArea.AxisY.ValueToPixelPosition(prop.YValues[0]);
 
                             // check if the cursor is really close to the point (2 pixels around)
-                            if (Math.Abs(pos.X - pointXPixel) < 2 &&
-                                Math.Abs(pos.Y - pointYPixel) < 2)
+                            if (Math.Abs(pos.X - pointXPixel) < 2 && Math.Abs(pos.Y - pointYPixel) < 2)
                             {
-                                tooltip.Show("X=" + prop.XValue + ", Y=" + prop.YValues[0], this.chart1,
-                                                pos.X, pos.Y - 15);
+                                tooltip.Show("X=" + prop.XValue + ", Y=" + prop.YValues[0], this.chart1, pos.X, pos.Y - 15);
                             }
                         }
                     }
                 }
             }
         }
-
-
-
     }
 }

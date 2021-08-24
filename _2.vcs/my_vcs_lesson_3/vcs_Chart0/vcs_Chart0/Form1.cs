@@ -36,7 +36,10 @@ namespace vcs_Chart0
                 number[i] = r.Next(350);
             }
 
-            chart1.Series.Clear();  //每次使用此function前先清除圖表
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
             Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
             series1.Color = Color.Blue; //設定線條顏色
             series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
