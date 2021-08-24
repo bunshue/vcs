@@ -18,7 +18,7 @@ namespace VideoSurveillance
     public partial class Form1 : Form
     {
         private static MCvFont _font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_SIMPLEX, 1.0, 1.0);
-        private static Capture _cameraCapture;
+        private Capture cap = null;             //宣告一個Webcam物件
         private static BlobTrackerAuto<Bgr> _tracker;
         private static IBGFGDetector<Bgr> _detector;
 
@@ -36,7 +36,7 @@ namespace VideoSurveillance
         {
             try
             {
-                _cameraCapture = new Capture();
+                cap = new Capture(1);   //預設使用第一台的webcam
             }
             catch (Exception e)
             {
@@ -53,7 +53,7 @@ namespace VideoSurveillance
 
         void ProcessFrame(object sender, EventArgs e)
         {
-            Image<Bgr, Byte> frame = _cameraCapture.QueryFrame();
+            Image<Bgr, Byte> frame = cap.QueryFrame();
             frame._SmoothGaussian(3); //filter out noises
 
             #region use the BG/FG detector to find the forground mask
@@ -74,3 +74,4 @@ namespace VideoSurveillance
         }
     }
 }
+

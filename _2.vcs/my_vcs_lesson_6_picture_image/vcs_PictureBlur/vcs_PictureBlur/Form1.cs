@@ -39,7 +39,7 @@ namespace vcs_PictureBlur
                     int G = 0;
                     int B = 0;
 
-                    // 檢查上相鄰像素
+                    // 檢查相鄰像素, 每個點的鄰居不一樣多, 所以要做不同的平均
 
                     //自己
                     R += bmp.GetPixel(i, j).R;
@@ -106,6 +106,7 @@ namespace vcs_PictureBlur
                         ok_cnt++;
                     }
 
+                    //平均, 設定個點的像素值
                     bmp2.SetPixel(i, j, Color.FromArgb((R / ok_cnt), (G / ok_cnt), (B / ok_cnt)));
                 }
             }

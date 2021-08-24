@@ -24,6 +24,9 @@ namespace vcs_Chart5_FollowFang
 
         private void button1_Click(object sender, EventArgs e)
         {
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
             //C#.Net 透過Chart繪製直線圖
 
             //x軸只顯示一條，只要將資料都加入到一個序列內即可
@@ -54,11 +57,16 @@ namespace vcs_Chart5_FollowFang
             }
 
             foreach (Series s in series1)
+            {
                 chart1.Series.Add(s);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
             //C#.Net 使用Chart繪製長條圖
 
             Series[] series1 = null;
@@ -79,14 +87,13 @@ namespace vcs_Chart5_FollowFang
                 series1[index].Points.Add(_y[index]);
                 chart1.Series.Add(series1[index]);
             }
-
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             //same
             //chart1.Series.Clear();  //每次使用此function前先清除圖表
-            
+
             chart1.ChartAreas.Clear();
             chart1.Series.Clear();
         }
@@ -97,3 +104,4 @@ namespace vcs_Chart5_FollowFang
         }
     }
 }
+
