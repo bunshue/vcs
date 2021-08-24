@@ -38,6 +38,7 @@
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "以塗刷新增畫筆";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.ResumeLayout(false);

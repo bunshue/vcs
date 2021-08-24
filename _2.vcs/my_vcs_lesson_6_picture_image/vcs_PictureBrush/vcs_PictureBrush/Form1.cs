@@ -22,6 +22,10 @@ namespace vcs_PictureBrush
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             image = new Bitmap(filename);
             textureBrush = new TextureBrush(image);
             p = new Pen(textureBrush, 40);
