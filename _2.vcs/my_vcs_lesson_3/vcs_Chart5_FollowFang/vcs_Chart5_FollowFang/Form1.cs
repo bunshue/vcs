@@ -97,11 +97,5 @@ namespace vcs_Chart5_FollowFang
             chart1.ChartAreas.Clear();
             chart1.Series.Clear();
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
-

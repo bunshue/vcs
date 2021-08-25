@@ -31,16 +31,15 @@ namespace vcs_Chart4_Radar
             area.AxisY.LineColor = Color.Red;
             area.AxisY.LineWidth = 1;
 
+            Random r = new Random();
             for (int index = 1; index <= 4; index++)
             {
                 //第n個點, 數值
-                series1.Points.AddXY(index, index * 100);
+                series1.Points.AddXY(index, r.Next(10) * 50);
 
                 //點的名稱
                 series1.Points[index - 1].Label = index.ToString();
             }
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -59,21 +58,15 @@ namespace vcs_Chart4_Radar
             {
                 series1.Points.AddXY(5 * j, 5 + j % 9);
             }
-
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             //same
             //chart1.Series.Clear();  //每次使用此function前先清除圖表
-            
+
             chart1.ChartAreas.Clear();
             chart1.Series.Clear();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

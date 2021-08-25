@@ -145,23 +145,28 @@ namespace vcs_Chart3
             chart1.Invalidate();
         }
 
+        bool flag_running = false;
         private void button1_Click(object sender, EventArgs e)
         {
-            //開始
-            chart1 = new RealtimeChart().GetChart;
-            timer1.Enabled = true;
-            this.Controls.Add(chart1);
+            if (flag_running == false)
+            {
+                //開啟
+                flag_running = true;
+                pointIndex = 0;
+                chart1 = new RealtimeChart().GetChart;
+                timer1.Enabled = true;
+                this.Controls.Add(chart1);
+                button1.Text = "關閉";
+
+            }
+            else
+            {
+                //關閉
+                flag_running = false;
+                timer1.Enabled = false;
+                this.Controls.Remove(chart1);
+                button1.Text = "開啟";
+            }
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //停止
-            timer1.Enabled = false;
-            this.Controls.Remove(chart1);
-        }
-
-
-
-
     }
 }
