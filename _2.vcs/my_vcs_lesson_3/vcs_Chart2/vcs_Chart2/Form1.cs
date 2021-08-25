@@ -334,6 +334,22 @@ namespace vcs_Chart2
             series1.Points.AddXY("Tom", 30);
             series1.Points.AddXY("James", 300);
             series1.Points.AddXY("Larry", 70);
+
+            int i;
+            int count = series1.Points.Count;
+            richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
+            for (i = 0; i < count; i++)
+            {
+                richTextBox1.Text += "X[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
+                richTextBox1.Text += "Y[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\n";
+            }
+
+            //設定邊界
+            chart1.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
+            chart1.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
+            chart1.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
+            chart1.ChartAreas[0].AxisY.Maximum = 400;//設定Y軸最大值
+
             this.chart1.Series.Add(series1);//將線畫在圖上
         }
 
@@ -488,6 +504,26 @@ namespace vcs_Chart2
                 series1[index].Points.Add(_y[index]);
                 chart1.Series.Add(series1[index]);
             }
+
+            /* print data TBD
+            int i;
+            int count = series1.Points.Count;
+            richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
+            for (i = 0; i < count; i++)
+            {
+                richTextBox1.Text += "X[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
+                richTextBox1.Text += "Y[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\n";
+            }
+            */
+            /*
+            //設定邊界
+            chart1.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
+            chart1.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
+            chart1.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
+            chart1.ChartAreas[0].AxisY.Maximum = 120;//設定Y軸最大值
+            */
+
+
         }
 
         double x = 0;

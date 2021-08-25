@@ -153,6 +153,7 @@ namespace ShapeDetection
 
         private void loadImageButton_Click(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = @"C:\______test_files\";
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK || result == DialogResult.Yes)
             {
