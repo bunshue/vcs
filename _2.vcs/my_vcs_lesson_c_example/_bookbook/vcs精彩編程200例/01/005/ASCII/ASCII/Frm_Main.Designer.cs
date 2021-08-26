@@ -35,6 +35,7 @@
             this.btn_ToChar = new System.Windows.Forms.Button();
             this.txt_char = new System.Windows.Forms.TextBox();
             this.btn_ToASCII = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,35 +49,36 @@
             this.groupBox1.Controls.Add(this.btn_ToASCII);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(332, 107);
+            this.groupBox1.Size = new System.Drawing.Size(332, 207);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "字母与ASCII相互转换";
             // 
             // txt_Char2
             // 
-            this.txt_Char2.Location = new System.Drawing.Point(220, 66);
+            this.txt_Char2.Location = new System.Drawing.Point(220, 101);
             this.txt_Char2.Name = "txt_Char2";
-            this.txt_Char2.Size = new System.Drawing.Size(100, 21);
+            this.txt_Char2.Size = new System.Drawing.Size(100, 22);
             this.txt_Char2.TabIndex = 11;
             // 
             // txt_ASCII2
             // 
-            this.txt_ASCII2.Location = new System.Drawing.Point(7, 66);
+            this.txt_ASCII2.Location = new System.Drawing.Point(7, 101);
             this.txt_ASCII2.Name = "txt_ASCII2";
-            this.txt_ASCII2.Size = new System.Drawing.Size(100, 21);
+            this.txt_ASCII2.Size = new System.Drawing.Size(100, 22);
             this.txt_ASCII2.TabIndex = 10;
+            this.txt_ASCII2.Text = "68";
             // 
             // txt_ASCII
             // 
             this.txt_ASCII.Location = new System.Drawing.Point(220, 27);
             this.txt_ASCII.Name = "txt_ASCII";
-            this.txt_ASCII.Size = new System.Drawing.Size(100, 21);
+            this.txt_ASCII.Size = new System.Drawing.Size(100, 22);
             this.txt_ASCII.TabIndex = 9;
             // 
             // btn_ToChar
             // 
-            this.btn_ToChar.Location = new System.Drawing.Point(113, 64);
+            this.btn_ToChar.Location = new System.Drawing.Point(113, 99);
             this.btn_ToChar.Name = "btn_ToChar";
             this.btn_ToChar.Size = new System.Drawing.Size(99, 23);
             this.btn_ToChar.TabIndex = 8;
@@ -88,8 +90,9 @@
             // 
             this.txt_char.Location = new System.Drawing.Point(6, 27);
             this.txt_char.Name = "txt_char";
-            this.txt_char.Size = new System.Drawing.Size(100, 21);
+            this.txt_char.Size = new System.Drawing.Size(100, 22);
             this.txt_char.TabIndex = 7;
+            this.txt_char.Text = "A";
             // 
             // btn_ToASCII
             // 
@@ -101,11 +104,20 @@
             this.btn_ToASCII.UseVisualStyleBackColor = true;
             this.btn_ToASCII.Click += new System.EventHandler(this.btn_ToASCII_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(12, 225);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(674, 316);
+            this.richTextBox1.TabIndex = 7;
+            this.richTextBox1.Text = "";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 128);
+            this.ClientSize = new System.Drawing.Size(698, 553);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -125,6 +137,7 @@
         private System.Windows.Forms.Button btn_ToChar;
         private System.Windows.Forms.TextBox txt_char;
         private System.Windows.Forms.Button btn_ToASCII;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

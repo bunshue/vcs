@@ -23,10 +23,17 @@ namespace FileIco
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            textBox1.Text = foldername;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Length > 0)
+            {
                 GetListViewItem(textBox1.Text, imageList1, listView1);
+            }
         }
 
         [DllImport("shell32.dll", EntryPoint = "SHGetFileInfo")]
@@ -94,10 +101,6 @@ namespace FileIco
             }
             catch { }
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            textBox1.Text = foldername;
-        }
     }
 }
+

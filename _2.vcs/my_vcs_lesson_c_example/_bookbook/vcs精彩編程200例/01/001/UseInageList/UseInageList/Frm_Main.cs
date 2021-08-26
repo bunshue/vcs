@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
-//using System.Data.SqlClient;
 
 namespace UseImageList
 {
@@ -36,6 +35,9 @@ namespace UseImageList
             dr["userName"] = this.txt_UserName.Text;//设置内容
             dt.Rows.Add(dr);//添回数据行
             Method(dt);//显示数据表中内容
+
+
+            richTextBox1.Text += "add user : " + dr["userName"] + "\n";
         }
 
         /// <summary>
@@ -49,13 +51,13 @@ namespace UseImageList
             {
                 if (j % 2 == 0)
                 {
-                    listView1.Items.Add(//添加数据项和图像
-                        dt.Rows[j][0].ToString(), 0);
+                    //添加数据项和图像
+                    listView1.Items.Add(dt.Rows[j][0].ToString(), 0);
                 }
                 else
                 {
-                    listView1.Items.Add(//添加数据项和图像
-                        dt.Rows[j][0].ToString(), 1);
+                    //添加数据项和图像
+                    listView1.Items.Add(dt.Rows[j][0].ToString(), 1);
                 }
             }
         }

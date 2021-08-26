@@ -5,6 +5,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
+using System.Threading;
+
  // the next imports are the most important libraries for this class
 
 using AForge.Vision.Motion; // Motion detection
@@ -12,18 +14,17 @@ using AForge.Video;              //
 using AForge.Video.DirectShow;   // Video Recording
 using AForge.Video.FFMPEG;       // 
 
-using System.Threading;
-
-
 namespace WebcamSecurity
 {
     class CameraMonitor
     {
         PictureBox display;    // a refrence to the PictureBox on the MainForm
-        private VideoCaptureDevice cam; // refrence to the actual VidioCaptureDevice (webcam)
+
+        private VideoCaptureDevice Cam = null;   //efrence to the actual VidioCaptureDevice (webcam)
+
         String cameraName; // string for display purposes
         MotionDetector md;
-        public CameraMonitor(PictureBox display,string monikerString,String  cameraName)
+        public CameraMonitor(PictureBox display, string monikerString, String cameraName)
         {
             this.cameraName = cameraName;
             this.display = display;
@@ -31,19 +32,17 @@ namespace WebcamSecurity
 
             md = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting()); // creates the motion detector
 
-            cam = new VideoCaptureDevice(monikerString);
-            cam.NewFrame += new NewFrameEventHandler(cam_NewFrame); // defines which method to call when a new frame arrives
-            cam.Start(); // starts the videoCapture
+            Cam = new VideoCaptureDevice(monikerString);
+            Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame); // defines which method to call when a new frame arrives
+            Cam.Start(); // starts the videoCapture
         }
-
-        
 
         public void StopCapture()
         {
-            if (this.cam.IsRunning)
+            if (this.Cam.IsRunning)
             {
                 // we must stop the VideoCaptureDevice when done to free it so it can be used by other applications
-                this.cam.Stop(); 
+                this.Cam.Stop();
             }
         }
 
@@ -53,7 +52,7 @@ namespace WebcamSecurity
          */
         private void DrawMessage(object sender, PaintEventArgs e)
         {
-            using (Font myFont = new Font("Tahoma", 10,FontStyle.Bold))
+            using (Font myFont = new Font("Tahoma", 10, FontStyle.Bold))
             {
 
                 e.Graphics.DrawString(DateTime.Now.ToString() + ((this.motionDetected) ? " + Motion !" : ""), myFont, ((this.motionDetected) ? Brushes.Red : Brushes.Green), new Point(2, 2));
@@ -71,14 +70,12 @@ namespace WebcamSecurity
                     this.showRecordMarkerCount++;
                 }
             }
-            
-
         }
-        
+
         bool motionDetected = false; // was there any motion detected previously
         int calibrateAndResume = 0; // counter used delay/skip frames from being processed by the MotionDetector
 
-        void cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             try
             {
@@ -104,9 +101,11 @@ namespace WebcamSecurity
                             Thread th = new Thread(MotionReaction);
                             th.Start(); // start the motion reaction thread
                         }
-                        else this.calibrateAndResume++;
+                        else
+                        {
+                            this.calibrateAndResume++;
+                        }
                     }
-
                 }
                 if (IsRecording)
                 {
@@ -120,7 +119,6 @@ namespace WebcamSecurity
                     }
                     frames.Enqueue((Bitmap)bit.Clone());
                 }
-                
             }
             catch (InvalidOperationException ex) { }
         }
@@ -130,7 +128,7 @@ namespace WebcamSecurity
         public bool BeepOnMotion = false;
         public bool MotionDetection = false;
         public bool forceRecord = false;
-        
+
         private void MotionReaction()
         {
             this.motionDetected = true;
@@ -144,7 +142,7 @@ namespace WebcamSecurity
                 System.Console.Beep(400, 500);
                 System.Console.Beep(800, 500);
             }
-            
+
             Thread.Sleep(10000); // the user is notified for 10 seconds
             calibrateAndResume = 0;
             this.motionDetected = false;
@@ -154,7 +152,6 @@ namespace WebcamSecurity
             {
                 this.StopRecording();
             }
-
         }
 
         // output video resolution info
@@ -171,8 +168,8 @@ namespace WebcamSecurity
         {
             // we set our VideoFileWriter as well as the file name, resolution and fps
             VideoFileWriter writer = new VideoFileWriter();
-            writer.Open(RecordingPath+"\\" + this.cameraName +String.Format("{0:_dd-M-yyyy_hh-mm-ss}",DateTime.Now) +".avi", this.Width, this.Height, 30);
-            
+            writer.Open(RecordingPath + "\\" + this.cameraName + String.Format("{0:_dd-M-yyyy_hh-mm-ss}", DateTime.Now) + ".avi", this.Width, this.Height, 30);
+
             // as long as we're recording
             // we dequeue the BitMaps waiting in the Queue and write them to the file
             while (IsRecording)
@@ -204,3 +201,4 @@ namespace WebcamSecurity
         }
     }
 }
+

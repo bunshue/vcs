@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "隱藏、顯示桌面圖標", "隱藏、顯示桌面圖標\隱藏、顯示桌面圖標.csproj", "{7114211A-6C49-40D7-82A2-2C14D8FDA157}"
 EndProject
 Global

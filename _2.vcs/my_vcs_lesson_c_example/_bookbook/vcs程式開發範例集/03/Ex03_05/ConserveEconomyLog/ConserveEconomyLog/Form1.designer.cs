@@ -33,6 +33,7 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.eventLog2 = new System.Diagnostics.EventLog();
             this.label1 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog2)).BeginInit();
             this.SuspendLayout();
@@ -60,7 +61,7 @@
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(12, 34);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(367, 160);
+            this.listBox1.Size = new System.Drawing.Size(430, 580);
             this.listBox1.TabIndex = 1;
             // 
             // eventLog2
@@ -79,11 +80,20 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "顯示系統錯誤日誌信息：";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(448, 34);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(466, 580);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(391, 206);
+            this.ClientSize = new System.Drawing.Size(926, 629);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button1);
@@ -104,6 +114,7 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Diagnostics.EventLog eventLog2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

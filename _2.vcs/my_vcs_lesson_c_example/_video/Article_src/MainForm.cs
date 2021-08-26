@@ -17,6 +17,8 @@ namespace WebcamSecurity
 {
     public partial class MainForm : Form
     {
+        public FilterInfoCollection USBWebcams = null;  //get information about VideoCaptureDevices
+
         // Refrence to cameraMonitors of all 4 cams
         CameraMonitor[] CamMonitor = new CameraMonitor[4];
         // Indexed arrays containing referces to the user interface components
@@ -174,18 +176,16 @@ namespace WebcamSecurity
             }
             catch (Exception ex) { }
         }
-        // the FilterInfoCollection is where we get information about VideoCaptureDevices
-        private FilterInfoCollection webcam;
 
         // When the form loads
         private void Form1_Load(object sender, EventArgs e)
         {
             // an instance of FilterInfoCollection is created to fetch available VideoCaptureDevices
-            webcam = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             // we create our CameraMonitors
-            for (int i = 0; i < webcam.Count && i < 4; i++)
+            for (int i = 0; i < USBWebcams.Count && i < 4; i++)
             {
-                this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i], webcam[i].MonikerString, "Camera" + (i + 1));
+                this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i], USBWebcams[i].MonikerString, "Camera" + (i + 1));
                 // Enable the user controls coressponding to the CameraMonitor
                 this.camPanels[i].Enabled = true;
                 this.camOptions[i].Enabled = true;
@@ -565,4 +565,5 @@ namespace WebcamSecurity
         }
     }
 }
+
 

@@ -53,6 +53,11 @@
             this.txtReplacementPattern2 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txtPattern2 = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -300,11 +305,62 @@
             this.txtPattern2.Text = "(?m)^([^,]*), ([^\\r]*)\\r?$";
             this.txtPattern2.TextChanged += new System.EventHandler(this.do_regular_expression);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(653, 233);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(269, 334);
+            this.richTextBox1.TabIndex = 21;
+            this.richTextBox1.Text = "";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(369, 226);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(171, 22);
+            this.textBox1.TabIndex = 20;
+            this.textBox1.Text = "13987654321";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(369, 261);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(171, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "檢查中國手機號";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(369, 354);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(171, 23);
+            this.button2.TabIndex = 24;
+            this.button2.Text = "驗證每個月的天數";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(369, 319);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(171, 22);
+            this.textBox2.TabIndex = 23;
+            this.textBox2.Text = "25";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 526);
+            this.ClientSize = new System.Drawing.Size(934, 579);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -318,6 +374,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -348,6 +405,11 @@
         internal System.Windows.Forms.TextBox txtReplacementPattern2;
         internal System.Windows.Forms.Label label12;
         internal System.Windows.Forms.TextBox txtPattern2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

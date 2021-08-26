@@ -22,16 +22,17 @@ namespace ChineseCode
             {
                 try
                 {
-                    txt_Num.Text = //得到汉字区位码信息
-                        getCode(txt_Chinese.Text);
+                    //得到汉字区位码信息
+                    txt_Num.Text = getCode(txt_Chinese.Text);
                 }
                 catch (IndexOutOfRangeException ex)
                 {
-                    MessageBox.Show(//使用消息对话框提示异常信息
-                        ex.Message + "请输入正确的汉字", "出错！");
+                    //使用消息对话框提示异常信息
+                    MessageBox.Show(ex.Message + "请输入正确的汉字", "出错！");
                 }
             }
         }
+
         /// <summary>
         /// 得到汉字区位码方法
         /// </summary>
@@ -46,3 +47,4 @@ namespace ChineseCode
         }
     }
 }
+

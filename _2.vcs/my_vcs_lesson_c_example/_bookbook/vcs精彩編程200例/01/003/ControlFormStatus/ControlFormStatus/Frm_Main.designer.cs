@@ -48,9 +48,9 @@
             this.pictureBox_Close.TabIndex = 3;
             this.pictureBox_Close.TabStop = false;
             this.pictureBox_Close.Tag = "2";
-            this.pictureBox_Close.MouseLeave += new System.EventHandler(this.pictureBox_Close_MouseLeave);
             this.pictureBox_Close.Click += new System.EventHandler(this.pictureBox_Close_Click);
             this.pictureBox_Close.MouseEnter += new System.EventHandler(this.pictureBox_Close_MouseEnter);
+            this.pictureBox_Close.MouseLeave += new System.EventHandler(this.pictureBox_Close_MouseLeave);
             // 
             // panel_Title
             // 
@@ -72,9 +72,9 @@
             this.pictureBox_Min.TabIndex = 2;
             this.pictureBox_Min.TabStop = false;
             this.pictureBox_Min.Tag = "0";
-            this.pictureBox_Min.MouseLeave += new System.EventHandler(this.pictureBox_Close_MouseLeave);
             this.pictureBox_Min.Click += new System.EventHandler(this.pictureBox_Close_Click);
             this.pictureBox_Min.MouseEnter += new System.EventHandler(this.pictureBox_Close_MouseEnter);
+            this.pictureBox_Min.MouseLeave += new System.EventHandler(this.pictureBox_Close_MouseLeave);
             // 
             // pictureBox_Max
             // 
@@ -85,9 +85,9 @@
             this.pictureBox_Max.TabIndex = 0;
             this.pictureBox_Max.TabStop = false;
             this.pictureBox_Max.Tag = "1";
-            this.pictureBox_Max.MouseLeave += new System.EventHandler(this.pictureBox_Close_MouseLeave);
             this.pictureBox_Max.Click += new System.EventHandler(this.pictureBox_Close_Click);
             this.pictureBox_Max.MouseEnter += new System.EventHandler(this.pictureBox_Close_MouseEnter);
+            this.pictureBox_Max.MouseLeave += new System.EventHandler(this.pictureBox_Close_MouseLeave);
             // 
             // panel_ALL
             // 

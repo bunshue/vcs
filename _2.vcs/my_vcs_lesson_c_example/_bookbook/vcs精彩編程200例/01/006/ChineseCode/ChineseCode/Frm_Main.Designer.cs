@@ -53,6 +53,7 @@
             this.txt_Chinese.Name = "txt_Chinese";
             this.txt_Chinese.Size = new System.Drawing.Size(193, 22);
             this.txt_Chinese.TabIndex = 1;
+            this.txt_Chinese.Text = "汉字区位码";
             // 
             // label1
             // 
