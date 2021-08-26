@@ -155,30 +155,22 @@ namespace vcs_test_all_05_Array
 
         private void button0_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //陣列宣告範例
-            int[] A = new int[5];
-            int[] B = new int[] { 1, 2, 3, 4, 5 };
-            int[] C = { 1, 3, 5, 7, 9 };
-            int[,] D = new int[3, 3];
-            int[,] E = new int[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-            int[,] F = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-            int[, ,] G = new int[3, 4, 5];
-            Point[] pt = new Point[360];    //一維陣列內有360個Point
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             //一維陣列用法：
+            int[] A = new int[5];
+            int[] B = new int[] { 1, 2, 3, 4, 5 };
+            int[] C = { 1, 3, 5, 7, 9 };
             int[] myArray = new int[10];
             string[] studentName = new string[100];
             int[] a = new int[5] { 0, 1, 2, 3, 4 };
@@ -198,6 +190,9 @@ namespace vcs_test_all_05_Array
             //二維陣列用法：
             int[,] b = new int[2, 3];
             int[,] c = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } };
+            int[,] D = new int[3, 3];
+            int[,] E = new int[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+            int[,] F = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
             int[,] myArray = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } };
         }
 
@@ -222,8 +217,6 @@ namespace vcs_test_all_05_Array
             int[,] Subject_Sum = new int[3, 5];     //科目總成績
             int[,] Subjcet_Average = new int[3, 5]; //科目平均成績
             int[,] Score = new int[,] { { 65, 85, 78, 75, 69 }, { 66, 55, 52, 92, 47 }, { 75, 99, 63, 73, 86 }, { 77, 88, 99, 91, 100 } };
-
-
 
             string[,] person = null;
             person = new string[,] {
@@ -283,6 +276,9 @@ namespace vcs_test_all_05_Array
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //三維陣列宣告：
+            int[, ,] G = new int[3, 4, 5];
+
             //三維陣列宣告：
             //int[, ,] Score = { { { 65, 85, 78, 75, 69 }, { 66, 55, 52, 92, 47 }, { 75, 99, 63, 73, 86 }, { 77, 88, 99, 91, 99 } }, { { 77, 88, 66, 77, 66 }, { 65, 66, 88, 55, 77 }, { 70, 88, 56, 88, 88 }, { 80, 90, 95, 99, 99 } }, { { 55, 67, 56, 98, 67 }, { 66, 69, 76, 66, 78 }, { 77, 89, 88, 77, 77 }, { 88, 89, 99, 97, 88 } } };
 
@@ -346,14 +342,15 @@ namespace vcs_test_all_05_Array
             int len1 = Score.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
             richTextBox1.Text += "len0 = " + len0.ToString() + "\n";    //3
             richTextBox1.Text += "len1 = " + len1.ToString() + "\n";    //6
-
-
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             //字串陣列的寫法(一維)：
             string[] atoms = { "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處女座", "天秤座", "天蠍座", "射手座", "魔羯座" };
+
+            //字串陣列的寫法(一維)：
+            string[] ws = new string[10] { "Acknowledge", "LookDown", "Sad", "Alert", "LookDownBlink", "Search", "Announce", "LookUp", "Think", "Blink" };
 
             //字串陣列的寫法(二維)：
             String[,] language = new string[3, 6] { { "正中1", "正中2", "正中3", "正中4", "正中5", "正中6" }, { "簡中1", "簡中2", "簡中3", "簡中4", "簡中5", "簡中6" }, { "英語1", "英語2", "英語3", "英語4", "英語5", "英語6" } };
@@ -482,7 +479,6 @@ namespace vcs_test_all_05_Array
             }
             richTextBox1.Text += "取0~10的亂數值：" + result2 + "\n";
             */
-
 
             Random r = new Random();
 
