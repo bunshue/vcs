@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;//该命名空间提供各种各样支持 COM interop 及平台调用服务的成员
 
-namespace ResembleWordProgramNumeration
+namespace vcs_RichTextBox9
 {
     class RichTextBoxEx:RichTextBox 
     {

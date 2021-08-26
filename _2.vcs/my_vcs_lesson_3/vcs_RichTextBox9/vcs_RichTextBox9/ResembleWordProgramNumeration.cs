@@ -6,20 +6,22 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;//引用與輸入輸出流有關的命名空間
 
-namespace ResembleWordProgramNumeration
+namespace vcs_RichTextBox9
 {
-    public partial class ResembleWordProgramNumeration : Form
+    public partial class Form1 : Form
     {
-        public ResembleWordProgramNumeration()
+        private static string temp = "tomorrow.RTF";//用來保存RTF文件的路徑
+        private RichTextBoxEx richTextBox1 = new RichTextBoxEx();//聲明一個自定義類的實例
+
+        public Form1()
         {
             InitializeComponent();
         }
 
-        private static string temp = "tomorrow.RTF";//用來保存RTF文件的路徑
-        private RichTextBoxEx richTextBox1 = new RichTextBoxEx();//聲明一個自定義類的實例
-        private void ResembleWordProgramNumeration_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             this.richTextBox1.Parent = this.groupBox1;//設置自定義類的父容器
             this.groupBox1.Controls.Add(this.richTextBox1);//向指定的父容器中添加控件
@@ -30,18 +32,6 @@ namespace ResembleWordProgramNumeration
                 hold.Enabled = false;//設置保存按鈕為不可用狀態                                         
             }
             richTextBox1.SelectionBullet = true;//設置RichTextBox控件標識項目符號的值為true
-        }
-
-        private void programNumeration_Click(object sender, EventArgs e)
-        {
-            if (richTextBox1.SelectionBullet)//當RichTextBox控件標識項目符號的值為true時
-            {
-                richTextBox1.SelectionBullet = false;//設置RichTextBox控件標識項目符號的值為false
-            }
-            else //當RichTextBox控件標識項目符號的值為false時
-            {
-                richTextBox1.SelectionBullet = true;//設置RichTextBox控件標識項目符號的值為true
-            }
         }
 
         private void unfold_Click(object sender, EventArgs e)
@@ -74,6 +64,18 @@ namespace ResembleWordProgramNumeration
                     MessageBox.Show("保存成功！", "提示信息", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);//彈出保存成功的信息提示
                     this.richTextBox1.Clear();//清空RichTextBox控件中的原有內容
                 }
+            }
+        }
+
+        private void programNumeration_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.SelectionBullet)//當RichTextBox控件標識項目符號的值為true時
+            {
+                richTextBox1.SelectionBullet = false;//設置RichTextBox控件標識項目符號的值為false
+            }
+            else //當RichTextBox控件標識項目符號的值為false時
+            {
+                richTextBox1.SelectionBullet = true;//設置RichTextBox控件標識項目符號的值為true
             }
         }
 
