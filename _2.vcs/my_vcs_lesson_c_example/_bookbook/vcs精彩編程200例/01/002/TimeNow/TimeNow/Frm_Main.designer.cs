@@ -49,6 +49,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -56,8 +64,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 15.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
-                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("宋体", 15.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic)
+                            | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(133, 9);
             this.label1.Name = "label1";
@@ -81,7 +89,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(120, 30);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(235, 21);
+            this.textBox2.Size = new System.Drawing.Size(235, 22);
             this.textBox2.TabIndex = 3;
             // 
             // label3
@@ -98,7 +106,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(120, 6);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(235, 21);
+            this.textBox1.Size = new System.Drawing.Size(235, 22);
             this.textBox1.TabIndex = 1;
             // 
             // label2
@@ -136,42 +144,42 @@
             // 
             this.textday.Location = new System.Drawing.Point(59, 84);
             this.textday.Name = "textday";
-            this.textday.Size = new System.Drawing.Size(115, 21);
+            this.textday.Size = new System.Drawing.Size(115, 22);
             this.textday.TabIndex = 12;
             // 
             // txtMonth
             // 
             this.txtMonth.Location = new System.Drawing.Point(59, 47);
             this.txtMonth.Name = "txtMonth";
-            this.txtMonth.Size = new System.Drawing.Size(115, 21);
+            this.txtMonth.Size = new System.Drawing.Size(115, 22);
             this.txtMonth.TabIndex = 11;
             // 
             // txtsecon
             // 
             this.txtsecon.Location = new System.Drawing.Point(245, 79);
             this.txtsecon.Name = "txtsecon";
-            this.txtsecon.Size = new System.Drawing.Size(144, 21);
+            this.txtsecon.Size = new System.Drawing.Size(144, 22);
             this.txtsecon.TabIndex = 10;
             // 
             // txtmintue
             // 
             this.txtmintue.Location = new System.Drawing.Point(245, 47);
             this.txtmintue.Name = "txtmintue";
-            this.txtmintue.Size = new System.Drawing.Size(144, 21);
+            this.txtmintue.Size = new System.Drawing.Size(144, 22);
             this.txtmintue.TabIndex = 9;
             // 
             // txtHour
             // 
             this.txtHour.Location = new System.Drawing.Point(245, 20);
             this.txtHour.Name = "txtHour";
-            this.txtHour.Size = new System.Drawing.Size(144, 21);
+            this.txtHour.Size = new System.Drawing.Size(144, 22);
             this.txtHour.TabIndex = 8;
             // 
             // txtYear
             // 
             this.txtYear.Location = new System.Drawing.Point(59, 17);
             this.txtYear.Name = "txtYear";
-            this.txtYear.Size = new System.Drawing.Size(115, 21);
+            this.txtYear.Size = new System.Drawing.Size(115, 22);
             this.txtYear.TabIndex = 7;
             // 
             // label9
@@ -245,11 +253,90 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(457, 137);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(595, 365);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(74, 245);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 12);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "label10";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(74, 280);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(39, 12);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "label11";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(74, 310);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(39, 12);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "label12";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(74, 341);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(39, 12);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "label13";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(74, 374);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(39, 12);
+            this.label14.TabIndex = 8;
+            this.label14.Text = "label14";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(74, 404);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(39, 12);
+            this.label15.TabIndex = 9;
+            this.label15.Text = "label15";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(74, 438);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(39, 12);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "label16";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 207);
+            this.ClientSize = new System.Drawing.Size(1073, 514);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -288,6 +375,14 @@
         private System.Windows.Forms.TextBox txtHour;
         private System.Windows.Forms.TextBox txtYear;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
     }
 }
 
