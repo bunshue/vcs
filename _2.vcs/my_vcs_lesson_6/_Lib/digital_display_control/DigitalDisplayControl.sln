@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owf.Controls.DigitalDisplayControl", "Owf.Controls.DigitalDisplayControl\Owf.Controls.DigitalDisplayControl.csproj", "{5D082F88-4290-4049-9984-FCB126A7BD4E}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owf.Controls.A1Panel", "Owf.Controls.A1Panel\Owf.Controls.A1Panel.csproj", "{0CCB7147-6EEC-4CC6-923B-99632A556F17}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{267D221A-D1E3-43CF-B648-48335D785680}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D082F88-4290-4049-9984-FCB126A7BD4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D082F88-4290-4049-9984-FCB126A7BD4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D082F88-4290-4049-9984-FCB126A7BD4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D082F88-4290-4049-9984-FCB126A7BD4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CCB7147-6EEC-4CC6-923B-99632A556F17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CCB7147-6EEC-4CC6-923B-99632A556F17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CCB7147-6EEC-4CC6-923B-99632A556F17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CCB7147-6EEC-4CC6-923B-99632A556F17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267D221A-D1E3-43CF-B648-48335D785680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267D221A-D1E3-43CF-B648-48335D785680}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267D221A-D1E3-43CF-B648-48335D785680}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267D221A-D1E3-43CF-B648-48335D785680}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

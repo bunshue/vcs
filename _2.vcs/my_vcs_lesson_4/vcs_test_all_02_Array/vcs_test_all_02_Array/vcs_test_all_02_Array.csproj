@@ -8,8 +8,8 @@
     <ProjectGuid>{41B824E2-7788-42CC-A010-6E6FD9FE42A8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_test_all_05_Array</RootNamespace>
-    <AssemblyName>vcs_test_all_05_Array</AssemblyName>
+    <RootNamespace>vcs_test_all_02_Array</RootNamespace>
+    <AssemblyName>vcs_test_all_02_Array</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

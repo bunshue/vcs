@@ -11,7 +11,7 @@ using System.IO;                //for file read/write
 
 using System.Collections; //匯入集合物件      for Hashtable
 
-namespace vcs_test_all_05_Array
+namespace vcs_test_all_02_Array
 {
     public partial class Form1 : Form
     {

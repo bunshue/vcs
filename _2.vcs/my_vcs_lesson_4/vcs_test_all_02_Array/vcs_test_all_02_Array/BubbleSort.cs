@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace vcs_test_all_05_Array
+namespace vcs_test_all_02_Array
 {
     class BubbleSort
     {
