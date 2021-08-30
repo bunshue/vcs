@@ -21,8 +21,9 @@ namespace HistoryMenu
         {
             openFileDialog1.FileName = "";//设置默认打开文件名称
             openFileDialog1.ShowDialog();//弹出打开文件对话框
-            StreamWriter s = //创建流写入器对象
-                new StreamWriter("../../History.ini", true);
+
+            //创建流写入器对象
+            StreamWriter s = new StreamWriter("../../History.ini", true);
             s.WriteLine(openFileDialog1.FileName);//向文件中写入历史信息
             s.Flush();//将信息压入流
             s.Close();//关闭流
@@ -31,31 +32,40 @@ namespace HistoryMenu
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            StreamReader sr = //创建流读取器对象
-                new StreamReader("../../History.ini");
-            int i = //得到菜单项索引
-                文件ToolStripMenuItem.DropDownItems.Count-2;
-            while (sr.Peek()>=0)//循环读取流中文本
+            //创建流读取器对象
+            StreamReader sr = new StreamReader("../../History.ini");
+
+            //得到菜单项索引
+            int i = 文件ToolStripMenuItem.DropDownItems.Count - 2;
+
+            //循环读取流中文本
+            while (sr.Peek() >= 0)
             {
-                ToolStripMenuItem menuitem = //创建菜单项对象
-                    new ToolStripMenuItem(sr.ReadLine());
-                this.文件ToolStripMenuItem.//向菜单中添加新项
-                    DropDownItems.Insert(i, menuitem);
+                //创建菜单项对象
+                ToolStripMenuItem menuitem = new ToolStripMenuItem(sr.ReadLine());
+                //向菜单中添加新项
+                this.文件ToolStripMenuItem.DropDownItems.Insert(i, menuitem);
                 i++;//向菜单中插入索引的位置
-                menuitem.Click += //添加点击事件
-                    new EventHandler(menuitem_Click);
+
+                //添加点击事件
+                menuitem.Click += new EventHandler(menuitem_Click);
             }
             sr.Close();
         }
 
-       private  void menuitem_Click(object sender, EventArgs e)
+        private void menuitem_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem menu = //得到菜单项
-                (ToolStripMenuItem)sender;
-            ShowWindows(menu.Text);//打开新窗口
+            richTextBox1.Text += "menuitem_Click\n";
+
+            //得到菜单项
+            ToolStripMenuItem menu = (ToolStripMenuItem)sender;
+            ShowWindows(menu.Text); //打开新窗口
         }
+
         public void ShowWindows(string fileName)
         {
+            richTextBox1.Text += "用新表單開啟檔案 : " + fileName + "\n";
+
             Image p = Image.FromFile(fileName);//得到图像对象
             Form f = new Form();//创建窗体对象
             f.MdiParent = this;//设置父窗体
@@ -63,9 +73,10 @@ namespace HistoryMenu
             f.Show();//显示窗体
         }
 
-        private void 退出ToolStripMenuItem_Click(object sender,EventArgs e)
+        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();//退出应用程序
+            Application.Exit();
         }
     }
 }
+

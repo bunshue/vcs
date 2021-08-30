@@ -89,7 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="copy.gif" />
-    <Content Include="gg.gif" />
     <Content Include="netspell.gif" />
     <Content Include="图标 %28166%29.ico" />
     <Content Include="图标 %28179%29.ico" />

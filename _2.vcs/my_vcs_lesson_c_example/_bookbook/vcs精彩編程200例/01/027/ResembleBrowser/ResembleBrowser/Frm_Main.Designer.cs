@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.cbox_Url = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -41,22 +42,31 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "网址：";
             // 
-            // cbox_Url
+            // comboBox1
             // 
-            this.cbox_Url.FormattingEnabled = true;
-            this.cbox_Url.Location = new System.Drawing.Point(70, 36);
-            this.cbox_Url.Name = "cbox_Url";
-            this.cbox_Url.Size = new System.Drawing.Size(317, 20);
-            this.cbox_Url.TabIndex = 1;
-            this.cbox_Url.TextChanged += new System.EventHandler(this.cbox_Url_TextChanged);
-            this.cbox_Url.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbox_Url_KeyDown);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(70, 36);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(317, 20);
+            this.comboBox1.TabIndex = 1;
+            this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
+            this.comboBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyDown);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(35, 108);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(429, 433);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "";
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(499, 553);
-            this.Controls.Add(this.cbox_Url);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -70,7 +80,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbox_Url;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

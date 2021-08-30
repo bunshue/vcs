@@ -5,13 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;
 
 namespace HideToolBar
 {
     public partial class Frm_Main : Form
     {
-        #region 声明本程序中用到的API函数
         //获取当前鼠标下可视化控件的函数
         [DllImport("user32.dll")]
         public static extern int WindowFromPoint(int xPoint, int yPoint);
@@ -21,83 +21,26 @@ namespace HideToolBar
         //获取屏幕的大小
         [DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
         private static extern int GetSystemMetrics(int mVal);
-        #endregion
+
+        private IntPtr CurrentHandle;//记录鼠标当前状态下控件的句柄
+        private int WindowFlag;//标记是否对窗体进行拉伸操作 
+        private int intOriHeight;
 
         public Frm_Main()
         {
             InitializeComponent();
         }
 
-        #region 运行本程序需要声明的变量
-        private IntPtr CurrentHandle;//记录鼠标当前状态下控件的句柄
-        private int WindowFlag;//标记是否对窗体进行拉伸操作 
-        private int intOriHeight;
-        #endregion
-
         private void Form1_Load(object sender, EventArgs e)
         {
             intOriHeight = this.Height;
-            this.DesktopLocation = new Point(794, 0);   //为当前窗体定位
+            this.DesktopLocation = new Point(500, 0);   //为当前窗体定位
             JudgeWinMouPosition.Enabled = true;      //计时器JudgeWinMouPosition开始工作
-            listView1.Clear();
-            listView1.LargeImageList = imageList1;
-            listView1.Items.Add("小猪", "小猪", 0);
-            listView1.Items.Add("小狗", "小狗", 1);
-            listView1.Items.Add("娇娇", "娇娇", 2);
         }
-
         
         public int OriHeight
         {
             get { return intOriHeight; }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            listView1.Dock = DockStyle.None;
-            button1.Dock = DockStyle.Top;
-            button2.Dock = DockStyle.Bottom;
-            button3.Dock = DockStyle.Bottom;
-            button3.SendToBack();
-            listView1.BringToFront();
-            listView1.Dock = DockStyle.Bottom;
-            listView1.Clear();
-            listView1.Items.Add("小猪", "小猪", 0);
-            listView1.Items.Add("小狗", "小狗", 1);
-            listView1.Items.Add("娇娇", "娇娇", 2);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            listView1.Dock = DockStyle.None;
-           
-            button2.Dock = DockStyle.Top;
-            
-            button1.Dock = DockStyle.Top;
-            button1.SendToBack();
-
-            button3.Dock = DockStyle.Bottom;
-            listView1.Dock = DockStyle.Bottom;
-            listView1.Clear();
-            listView1.Items.Add("北风", "北风", 3);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            listView1.Dock = DockStyle.None;
-
-            button3.Dock = DockStyle.Top;//设置button3按钮绑定到窗体的上边缘
-
-            button2.Dock = DockStyle.Top;//设置button2按钮绑定到窗体的上边缘
-            button2.SendToBack();           //保证button2在button3的后面
-
-            button1.Dock = DockStyle.Top;
-            button1.SendToBack();//保证button1在button2的后面
-            
-
-            listView1.Dock = DockStyle.Bottom;
-            listView1.Clear();
-            listView1.Items.Add("冰雨", "冰雨", 5);
         }
 
         private void JudgeWinMouPosition_Tick(object sender, EventArgs e)
@@ -235,7 +178,6 @@ namespace HideToolBar
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            listView1.Height = this.Height - button3.Height * 3 - 30;
         }
     }
 }

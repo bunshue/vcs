@@ -49,7 +49,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
@@ -67,13 +66,13 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -84,7 +83,6 @@
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -100,7 +98,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(597, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(597, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -112,21 +110,21 @@
             this.导出文件列表ToolStripMenuItem,
             this.退出ToolStripMenuItem});
             this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
-            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(58, 21);
+            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.文件ToolStripMenuItem.Text = "文件(&F)";
             // 
             // 添加文件ToolStripMenuItem
             // 
             this.添加文件ToolStripMenuItem.Image = global::FileBatchChangeName.Properties.Resources.图标__220_;
             this.添加文件ToolStripMenuItem.Name = "添加文件ToolStripMenuItem";
-            this.添加文件ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.添加文件ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.添加文件ToolStripMenuItem.Text = "添加文件...";
             this.添加文件ToolStripMenuItem.Click += new System.EventHandler(this.添加文件ToolStripMenuItem_Click);
             // 
             // 总在最前ToolStripMenuItem
             // 
             this.总在最前ToolStripMenuItem.Name = "总在最前ToolStripMenuItem";
-            this.总在最前ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.总在最前ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.总在最前ToolStripMenuItem.Text = "总在最前";
             this.总在最前ToolStripMenuItem.Click += new System.EventHandler(this.总在最前ToolStripMenuItem_Click);
             // 
@@ -134,7 +132,7 @@
             // 
             this.导出文件列表ToolStripMenuItem.Image = global::FileBatchChangeName.Properties.Resources.图标__166_;
             this.导出文件列表ToolStripMenuItem.Name = "导出文件列表ToolStripMenuItem";
-            this.导出文件列表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.导出文件列表ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.导出文件列表ToolStripMenuItem.Text = "导出文件列表";
             this.导出文件列表ToolStripMenuItem.Click += new System.EventHandler(this.导出文件列表ToolStripMenuItem_Click);
             // 
@@ -142,7 +140,7 @@
             // 
             this.退出ToolStripMenuItem.Image = global::FileBatchChangeName.Properties.Resources.图标__99_;
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
@@ -153,14 +151,14 @@
             this.繁体转简体ToolStripMenuItem,
             this.简体转繁体ToolStripMenuItem});
             this.更名PToolStripMenuItem.Name = "更名PToolStripMenuItem";
-            this.更名PToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
+            this.更名PToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.更名PToolStripMenuItem.Text = "更名(&P)";
             // 
             // 更名ToolStripMenuItem
             // 
             this.更名ToolStripMenuItem.Image = global::FileBatchChangeName.Properties.Resources.图标;
             this.更名ToolStripMenuItem.Name = "更名ToolStripMenuItem";
-            this.更名ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.更名ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.更名ToolStripMenuItem.Text = "应用";
             this.更名ToolStripMenuItem.Click += new System.EventHandler(this.更名ToolStripMenuItem_Click);
             // 
@@ -168,7 +166,7 @@
             // 
             this.繁体转简体ToolStripMenuItem.Image = global::FileBatchChangeName.Properties.Resources.netspell;
             this.繁体转简体ToolStripMenuItem.Name = "繁体转简体ToolStripMenuItem";
-            this.繁体转简体ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.繁体转简体ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.繁体转简体ToolStripMenuItem.Text = "繁体转简体";
             this.繁体转简体ToolStripMenuItem.Click += new System.EventHandler(this.繁体转简体ToolStripMenuItem_Click);
             // 
@@ -176,7 +174,7 @@
             // 
             this.简体转繁体ToolStripMenuItem.Image = global::FileBatchChangeName.Properties.Resources.netspell;
             this.简体转繁体ToolStripMenuItem.Name = "简体转繁体ToolStripMenuItem";
-            this.简体转繁体ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.简体转繁体ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.简体转繁体ToolStripMenuItem.Text = "简体转繁体";
             this.简体转繁体ToolStripMenuItem.Click += new System.EventHandler(this.简体转繁体ToolStripMenuItem_Click);
             // 
@@ -203,7 +201,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(59, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(58, 17);
             this.toolStripStatusLabel2.Text = "文件总数:";
             // 
             // tsslSum
@@ -217,7 +215,7 @@
             // 
             this.toolStripStatusLabel3.ForeColor = System.Drawing.Color.Gray;
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(11, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(10, 17);
             this.toolStripStatusLabel3.Text = "|";
             // 
             // toolStripProgressBar1
@@ -234,7 +232,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -245,7 +243,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listView1);
-            this.splitContainer1.Size = new System.Drawing.Size(597, 387);
+            this.splitContainer1.Size = new System.Drawing.Size(597, 388);
             this.splitContainer1.SplitterDistance = 121;
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 1;
@@ -263,7 +261,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -273,16 +270,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本设置";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Image = global::FileBatchChangeName.Properties.Resources.gg;
-            this.pictureBox1.Location = new System.Drawing.Point(401, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(182, 79);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
             // 
             // groupBox2
             // 
@@ -380,7 +367,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(589, 96);
+            this.tabPage2.Size = new System.Drawing.Size(589, 95);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "序号设置";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -389,7 +376,7 @@
             // 
             this.txtTemplate.Location = new System.Drawing.Point(318, 25);
             this.txtTemplate.Name = "txtTemplate";
-            this.txtTemplate.Size = new System.Drawing.Size(190, 21);
+            this.txtTemplate.Size = new System.Drawing.Size(190, 22);
             this.txtTemplate.TabIndex = 7;
             this.txtTemplate.TextChanged += new System.EventHandler(this.txtTemplate_TextChanged);
             // 
@@ -411,7 +398,7 @@
             0,
             0});
             this.nuAdd.Name = "nuAdd";
-            this.nuAdd.Size = new System.Drawing.Size(56, 21);
+            this.nuAdd.Size = new System.Drawing.Size(56, 22);
             this.nuAdd.TabIndex = 5;
             this.nuAdd.Value = new decimal(new int[] {
             1,
@@ -433,7 +420,7 @@
             // 
             this.nuStart.Location = new System.Drawing.Point(80, 60);
             this.nuStart.Name = "nuStart";
-            this.nuStart.Size = new System.Drawing.Size(56, 21);
+            this.nuStart.Size = new System.Drawing.Size(56, 22);
             this.nuStart.TabIndex = 3;
             this.nuStart.ValueChanged += new System.EventHandler(this.nuStart_ValueChanged);
             // 
@@ -484,7 +471,7 @@
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(597, 265);
+            this.listView1.Size = new System.Drawing.Size(597, 266);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -550,8 +537,8 @@
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "文件批量更名";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -561,7 +548,6 @@
             this.splitContainer1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -607,7 +593,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown nuAdd;

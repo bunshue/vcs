@@ -39,6 +39,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +82,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(294, 541);
+            this.button3.Location = new System.Drawing.Point(392, 541);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(97, 34);
             this.button3.TabIndex = 4;
@@ -101,7 +102,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(602, 541);
+            this.button5.Location = new System.Drawing.Point(700, 541);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(97, 34);
             this.button5.TabIndex = 6;
@@ -111,7 +112,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(397, 541);
+            this.button6.Location = new System.Drawing.Point(495, 541);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(97, 34);
             this.button6.TabIndex = 7;
@@ -141,7 +142,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(500, 541);
+            this.button9.Location = new System.Drawing.Point(598, 541);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(97, 34);
             this.button9.TabIndex = 10;
@@ -149,11 +150,22 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(292, 541);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(86, 34);
+            this.button10.TabIndex = 11;
+            this.button10.Text = "建立DGV 4";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1177, 598);
+            this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -185,6 +197,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
     }
 }
 

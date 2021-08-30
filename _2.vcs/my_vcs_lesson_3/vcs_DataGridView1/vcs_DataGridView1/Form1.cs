@@ -150,7 +150,6 @@ namespace vcs_DataGridView1
             {
                 this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
             }
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -185,14 +184,25 @@ namespace vcs_DataGridView1
         {
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
-
                 if (i % 2 == 0)
-                    dataGridView1.Rows[i].DefaultCellStyle.
-                        BackColor = Color.LightYellow;//隔行更换背景色
+                {
+                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.LightYellow;   //隔行更换背景色
+                }
             }
-
         }
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "在DataGridView控件做下拉式列表\n";
+            //创建列对象
+            DataGridViewComboBoxColumn dgvc = new DataGridViewComboBoxColumn();
+            dgvc.Items.Add("苹果");//向集合中添加元素
+            dgvc.Items.Add("芒果");//向集合中添加元素
+            dgvc.Items.Add("鸭梨");//向集合中添加元素
+            dgvc.Items.Add("橘子");//向集合中添加元素
+            dgvc.HeaderText = "水果";//设置列标题文本
+            dataGridView1.Columns.Add(dgvc);//将列添加到集合
+        }
     }
 
     class Fruit
@@ -201,4 +211,3 @@ namespace vcs_DataGridView1
         public float Price { get; set; }
     }
 }
-

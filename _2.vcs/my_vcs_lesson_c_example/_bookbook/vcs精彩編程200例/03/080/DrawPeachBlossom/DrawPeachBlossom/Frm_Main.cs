@@ -54,6 +54,7 @@ namespace DrawPeachBlossom
                     pbox.Image = Properties.Resources._1;//设置PictureBox控件要显示的图像
                     break;
             }
+
             if (e.Button == MouseButtons.Left)//判断是否单击了鼠标左键
             {
                 pictureBox1.Controls.Add(pbox);//将把图片控件添加到桃树上
