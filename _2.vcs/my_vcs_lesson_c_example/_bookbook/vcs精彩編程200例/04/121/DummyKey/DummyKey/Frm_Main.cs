@@ -198,6 +198,8 @@ namespace DummyKey
             if (btnKey == null)//如果按键为空值
                 return;
             SendKeyCommand(btnKey);//发送按键的信息
+
+            richTextBox1.Text += btnKey.Text;
         }
 
         /// <summary>

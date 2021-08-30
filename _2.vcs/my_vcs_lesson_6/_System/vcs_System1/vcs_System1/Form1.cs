@@ -7,19 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Runtime.InteropServices;   //for DllImport
-using System.Diagnostics;
-using Microsoft.VisualBasic.Devices;    //for Computer
-using System.Reflection;        //for Assembly
-using System.Management;
 using System.IO;            //for DriveInfo
 using System.Net;   //for DNS
 using System.IO.Ports;          //for serial ports
 using System.Collections;   //for DictionaryEntry
+using System.Globalization;
+using System.Runtime.InteropServices;   //for DllImport
+using System.Diagnostics;
+using System.Reflection;        //for Assembly
+using System.Management;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Printing;  //for PrinterSettings
 
-using System.Globalization;
+using Microsoft.VisualBasic.Devices;    //for Computer
 
 /*
 讀取/寫入程式預設值
@@ -816,8 +816,18 @@ namespace vcs_System1
             richTextBox1.Text += "找個地方加入WndProc()即可\n";
         }
 
+
+        [DllImport("kernel32.dll")]
+        private static extern int SetComputerName(string ipComputerName);//重写API函数
+
         private void button37_Click(object sender, EventArgs e)
         {
+            //取得並修改電腦名(偽執行)
+            Computer computer = new Computer();//创建计算机对象
+            richTextBox1.Text += "取得原計算機名 : " + computer.Name + "\n";
+
+            richTextBox1.Text += "偽執行 計算機名稱修改, 須重啟計算機使之生效\n";
+            //SetComputerName("lion-mouse");//修改計算機名稱
         }
 
         private void button38_Click(object sender, EventArgs e)

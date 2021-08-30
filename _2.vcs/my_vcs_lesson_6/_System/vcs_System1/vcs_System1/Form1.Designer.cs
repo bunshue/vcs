@@ -409,11 +409,12 @@
             // 
             // button37
             // 
-            this.button37.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button37.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button37.Location = new System.Drawing.Point(630, 59);
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 40);
             this.button37.TabIndex = 36;
+            this.button37.Text = "取得並修改電腦名(偽執行)";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 

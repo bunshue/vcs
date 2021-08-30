@@ -101,6 +101,7 @@
             this.btnF2 = new DummyKey.FecitButton();
             this.btnF1 = new DummyKey.FecitButton();
             this.btnESC = new DummyKey.FecitButton();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btnDEL
@@ -905,13 +906,22 @@
             this.btnESC.Text = "Esc";
             this.btnESC.UseVisualStyleBackColor = true;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(417, 186);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(468, 372);
+            this.richTextBox1.TabIndex = 73;
+            this.richTextBox1.Text = "";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::DummyKey.Properties.Resources.键盘_1_;
-            this.ClientSize = new System.Drawing.Size(413, 180);
+            this.ClientSize = new System.Drawing.Size(953, 570);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnDEL);
             this.Controls.Add(this.btnINS);
             this.Controls.Add(this.btnPSC);
@@ -1068,6 +1078,7 @@
         private FecitButton btnPSC;
         private FecitButton btnINS;
         private FecitButton btnDEL;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
