@@ -66,11 +66,9 @@ namespace vcs_ContextMenuStrip
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            //檢查滑鼠右鍵
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right) //檢查滑鼠右鍵
             {
-                // Display the context menu.
-                ShowContextMenu(e.Location);
+                contextMenuStrip1.Show(pictureBox1, e.Location);  //顯示ContextMenu
                 return;
             }
 
@@ -92,13 +90,6 @@ namespace vcs_ContextMenuStrip
                 nOldWndLeft = this.Left;
                 nOldWndTop = this.Top;
             }
-        }
-
-        // Prepare the context menu and display it.
-        private void ShowContextMenu(Point location)
-        {
-            // Display the context menu.
-            contextMenuStrip1.Show(pictureBox1, location);
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)

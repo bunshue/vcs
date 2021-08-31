@@ -98,6 +98,19 @@ namespace vcs_Button
                 button1.Location.Y,
                 pts[3].X + 5, pts[4].Y + 5);	//SetBounds : 設定控件的位置與大小
 
+            //文字化按鈕 button4 ST
+            GraphicsPath gpstirng = new GraphicsPath();
+            FontFamily family = new FontFamily("細明體");
+            int fontStyle = (int)FontStyle.Italic;
+            int emSize = 55;
+
+            Point origin = new Point(0, 0);
+            StringFormat format = StringFormat.GenericDefault;
+
+            gpstirng.AddString("Conan", family, fontStyle, emSize, origin, format);
+            button4.Region = new Region(gpstirng);
+            //文字化按鈕 button4 SP
+
             bt_exit_setup();
         }
 
@@ -184,5 +197,11 @@ namespace vcs_Button
         {
             MessageBox.Show("你按了快捷键 Alt + F\n只要在Text改 快捷鍵 (&F) 即可");
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了文字化按鈕\n";
+        }
     }
 }
+

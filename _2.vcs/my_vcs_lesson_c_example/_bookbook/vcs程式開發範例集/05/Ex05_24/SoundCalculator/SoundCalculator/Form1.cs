@@ -6,17 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace SoundCalculator
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         [DllImport("winmm.dll", EntryPoint = "mciSendString")]
         private static extern Int32 mciSendString(String lpstrCommand, String lpstrReturnString, Int32 uReturnLength, Int32 hwndCallback);
         [DllImport("kernel32")]
@@ -28,10 +25,20 @@ namespace SoundCalculator
         string tem_FileName = "";
         Int32 n = 0;
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            GetVox();
+        }
+
         public void GetVox()
         {
             StringBuilder temp = new StringBuilder(255);
-            if (System.IO.File.Exists(Application.StartupPath + "\\Tem_File.ini") == true)
+            if (File.Exists(Application.StartupPath + "\\Tem_File.ini") == true)
             {
                 for (int i = 0; i < VoxPath.Length; i++)
                 {
@@ -40,6 +47,7 @@ namespace SoundCalculator
                 }
             }
         }
+
         public void sound(string FileName)
         {
             if (FileName == null)//如果文件為空
@@ -121,7 +129,11 @@ namespace SoundCalculator
         public void dian()
         {
             bool isfirst = isfloor();
-            if ((isnum == true) || (textBox1.Text == "0")) { textBox1.Text = "0."; }
+            if ((isnum == true) || (textBox1.Text == "0"))
+            {
+                textBox1.Text = "0.";
+            }
+
             if ((isdian == false) && (isfirst == true))
             {
                 textBox1.Text = "0.";
@@ -134,13 +146,21 @@ namespace SoundCalculator
                 isdian = true;
             }
         }
+
         public bool isfloor()
         {
             var int1 = Convert.ToDouble(textBox1.Text);
             var int2 = Math.Floor(int1);
-            if (int1 > int2) { return true; }
-            else { return false; }
+            if (int1 > int2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+
         public void ce()
         {
             zong = Convert.ToDouble(textBox1.Text);
@@ -148,6 +168,7 @@ namespace SoundCalculator
             isnum = true;
             isdian = false;
         }
+
         public void Aclose()
         {
             isdian = isnum = false;
@@ -155,13 +176,21 @@ namespace SoundCalculator
             fu = tem_base = "";
             zong = n1 = 0;
         }
+
         public bool isxiao(double n)
         {
             double int1 = Convert.ToSingle(n);
             double int2 = Math.Floor(int1);
-            if (int1 > int2) { return true; }
-            else { return false; }
+            if (int1 > int2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+
         string tem_base;
         public void js(string s)
         {
@@ -171,14 +200,26 @@ namespace SoundCalculator
                 if ((tem_base == "+") || (tem_base == "-") || (tem_base == "*") || (tem_base == "/"))
                 {
                     zong = eval(zong, tem_base, lin);
-                    if (isxiao(zong) == true) { textBox1.Text = Math.Round(zong, 4).ToString(); }
-                    else { textBox1.Text = zong.ToString(); }
+                    if (isxiao(zong) == true)
+                    {
+                        textBox1.Text = Math.Round(zong, 4).ToString();
+                    }
+                    else
+                    {
+                        textBox1.Text = zong.ToString();
+                    }
                 }
             }
             else if ((fu == "=") && (s == ("*") || s == ("/") || s == ("+") || s == ("-")))
             {
-                if (isxiao(zong) == true) { textBox1.Text = Math.Round(zong, 4).ToString(); }
-                else { textBox1.Text = zong.ToString(); }
+                if (isxiao(zong) == true)
+                {
+                    textBox1.Text = Math.Round(zong, 4).ToString();
+                }
+                else
+                {
+                    textBox1.Text = zong.ToString();
+                }
                 tem_base = fu;
                 fu = s;
             }
@@ -187,45 +228,81 @@ namespace SoundCalculator
                 if (isnum && fu != "=")
                 {
                     if ("+" == fu)
+                    {
                         zong = eval(zong, fu, lin);
+                    }
                     else if ("-" == fu)
+                    {
                         zong = eval(zong, fu, lin);
+                    }
                     else if ("/" == fu)
+                    {
                         zong = eval(zong, fu, lin);
+                    }
                     else if ("*" == fu)
+                    {
                         zong = eval(zong, fu, lin);
+                    }
                     else if ("" == fu)
+                    {
                         zong = lin;
-                    if (isxiao(zong) == true) { textBox1.Text = Math.Round(zong, 4).ToString(); }
-                    else { textBox1.Text = zong.ToString(); }
+                    }
+
+                    if (isxiao(zong) == true)
+                    {
+                        textBox1.Text = Math.Round(zong, 4).ToString();
+                    }
+                    else
+                    {
+                        textBox1.Text = zong.ToString();
+                    }
                     tem_base = fu;
                     fu = s;
                 }
                 else
                 {
                     if ("+" == fu)
+                    {
                         zong += lin;
+                    }
                     else if ("-" == fu)
+                    {
                         zong = zong - lin;
+                    }
                     else if ("/" == fu)
+                    {
                         zong /= lin;
+                    }
                     else if ("*" == fu)
+                    {
                         zong *= lin;
+                    }
                     else
+                    {
                         zong = lin;
-                    if (isxiao(zong) == true) { textBox1.Text = Math.Round(zong, 4).ToString(); }
-                    else { textBox1.Text = zong.ToString(); }
+                    }
+
+                    if (isxiao(zong) == true)
+                    {
+                        textBox1.Text = Math.Round(zong, 4).ToString();
+                    }
+                    else
+                    {
+                        textBox1.Text = zong.ToString();
+                    }
                     tem_base = fu;
                     fu = s;
                 }
             }
             isnum = true;
         }
+
         public void bai()
         {
             textBox1.Text = ((Convert.ToDouble(textBox1.Text) / 100) * Convert.ToDouble(zong)).ToString();
             isdian = false;
         }
+
         public void kfang()
         {
             if (textBox1.Text != "0" || textBox1.Text != "")
@@ -235,12 +312,21 @@ namespace SoundCalculator
                 isdian = false;
             }
         }
+
         public void zf()
         {
             double pp = Convert.ToDouble(textBox1.Text);
-            if (pp > 0) { textBox1.Text = "-" + pp; }
-            if (pp < 0) { textBox1.Text = Math.Abs(pp).ToString(); }
+            if (pp > 0)
+            {
+                textBox1.Text = "-" + pp;
+            }
+
+            if (pp < 0)
+            {
+                textBox1.Text = Math.Abs(pp).ToString();
+            }
         }
+
         public void ji()
         {
             double pp = Convert.ToDouble(textBox1.Text);
@@ -248,6 +334,7 @@ namespace SoundCalculator
             isnum = true;
             isdian = false;
         }
+
         public void backspace()
         {
             var bstr = textBox1.Text;
@@ -259,7 +346,10 @@ namespace SoundCalculator
                     textBox1.Text = "0";
                     isdian = false;
                 }
-                else { textBox1.Text = bstr.Substring(0, bstr.Length - 1); }
+                else
+                {
+                    textBox1.Text = bstr.Substring(0, bstr.Length - 1);
+                }
             }
         }
 
@@ -282,7 +372,7 @@ namespace SoundCalculator
 
         private void ToolS_Vox_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Tag : " + ((ToolStripMenuItem)sender).Tag.ToString().ToString() + "\n";
+            richTextBox1.Text += "Tag : " + ((ToolStripMenuItem)sender).Tag.ToString() + "\n";
             switch (Convert.ToInt32(((ToolStripMenuItem)sender).Tag.ToString()))
             {
                 case 0:
@@ -302,16 +392,10 @@ namespace SoundCalculator
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            GetVox();
-        }
-
         private void pict_Back_MouseEnter(object sender, EventArgs e)
         {
             SetButton(sender, false);
         }
-
 
         private void pict_Back_MouseLeave(object sender, EventArgs e)
         {
@@ -473,7 +557,6 @@ namespace SoundCalculator
             {
                 GetVox();
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -482,4 +565,3 @@ namespace SoundCalculator
         }
     }
 }
-
