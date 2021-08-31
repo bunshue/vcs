@@ -1730,6 +1730,17 @@ namespace vcs_test_all_03_Syntax
                 richTextBox2.Text += "詳細文字說明: " + ex.ToString() + "\n";
             }
         }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "\nout 語法\n";
+            int r = 0;
+            for (int i = 1; i < 10; i++)
+            {
+                Math.DivRem(i, 7, out r);
+                richTextBox1.Text += i.ToString() + " 除以 7 的餘數 " + r.ToString() + "\n";
+            }
+        }
     }
 
     public static partial class Extensions

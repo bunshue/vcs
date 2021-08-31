@@ -103,7 +103,7 @@
             // 
             this.textBox4.Location = new System.Drawing.Point(226, 116);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(194, 21);
+            this.textBox4.Size = new System.Drawing.Size(194, 22);
             this.textBox4.TabIndex = 14;
             // 
             // textBox3
@@ -111,22 +111,23 @@
             this.textBox3.Location = new System.Drawing.Point(110, 67);
             this.textBox3.Name = "textBox3";
             this.textBox3.PasswordChar = '*';
-            this.textBox3.Size = new System.Drawing.Size(194, 21);
+            this.textBox3.Size = new System.Drawing.Size(194, 22);
             this.textBox3.TabIndex = 13;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(110, 41);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(270, 21);
+            this.textBox2.Size = new System.Drawing.Size(270, 22);
             this.textBox2.TabIndex = 12;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(110, 14);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(270, 21);
+            this.textBox1.Size = new System.Drawing.Size(270, 22);
             this.textBox1.TabIndex = 11;
+            this.textBox1.Text = "pop.gmail.com";
             // 
             // button2
             // 

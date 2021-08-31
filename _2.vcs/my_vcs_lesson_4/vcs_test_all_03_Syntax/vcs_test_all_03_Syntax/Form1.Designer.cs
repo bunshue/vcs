@@ -1149,7 +1149,9 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(180, 40);
             this.button42.TabIndex = 78;
+            this.button42.Text = "out 語法";
             this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
             // button43
             // 

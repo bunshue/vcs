@@ -29,7 +29,7 @@ namespace SoundCalculator
         Int32 n = 0;
 
         public void GetVox()
-        { 
+        {
             StringBuilder temp = new StringBuilder(255);
             if (System.IO.File.Exists(Application.StartupPath + "\\Tem_File.ini") == true)
             {
@@ -46,10 +46,10 @@ namespace SoundCalculator
                 return;//退出操作
             if (FileName.IndexOf(" ") == -1)//如果路徑中沒有空格
             {
-                if (tem_FileName.Length!=0)//如果有播放的文件
+                if (tem_FileName.Length != 0)//如果有播放的文件
                     mciSendString("close " + tem_FileName, null, 0, 0);//關閉目前文件的播放
-                n=mciSendString("open " + FileName , null, 0 , 0);//打開要播放的文件
-                n=mciSendString("play " + FileName, null, 0, 0);//播放目前文件
+                n = mciSendString("open " + FileName, null, 0, 0);//打開要播放的文件
+                n = mciSendString("play " + FileName, null, 0, 0);//播放目前文件
                 tem_FileName = FileName;//記錄播放文件的路徑
             }
         }
@@ -170,7 +170,7 @@ namespace SoundCalculator
             {
                 if ((tem_base == "+") || (tem_base == "-") || (tem_base == "*") || (tem_base == "/"))
                 {
-                    zong = eval(zong , tem_base , lin);
+                    zong = eval(zong, tem_base, lin);
                     if (isxiao(zong) == true) { textBox1.Text = Math.Round(zong, 4).ToString(); }
                     else { textBox1.Text = zong.ToString(); }
                 }
@@ -187,13 +187,13 @@ namespace SoundCalculator
                 if (isnum && fu != "=")
                 {
                     if ("+" == fu)
-                        zong = eval(zong , fu , lin);
+                        zong = eval(zong, fu, lin);
                     else if ("-" == fu)
-                        zong = eval(zong , fu , lin);
+                        zong = eval(zong, fu, lin);
                     else if ("/" == fu)
-                        zong = eval(zong , fu , lin);
+                        zong = eval(zong, fu, lin);
                     else if ("*" == fu)
-                        zong = eval(zong , fu , lin);
+                        zong = eval(zong, fu, lin);
                     else if ("" == fu)
                         zong = lin;
                     if (isxiao(zong) == true) { textBox1.Text = Math.Round(zong, 4).ToString(); }
@@ -282,18 +282,23 @@ namespace SoundCalculator
 
         private void ToolS_Vox_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Tag : " + ((ToolStripMenuItem)sender).Tag.ToString().ToString() + "\n";
             switch (Convert.ToInt32(((ToolStripMenuItem)sender).Tag.ToString()))
             {
                 case 0:
                     {
-                        Form2 Frm_2 = new Form2();
-                        if (Frm_2.ShowDialog() == DialogResult.OK)
+                        richTextBox1.Text += "你選擇了\t設定聲音\t開啟Form2\n";
+                        Form2 f2 = new Form2();
+                        if (f2.ShowDialog() == DialogResult.OK)
                         {
                             GetVox();
                         }
                         break;
                     }
-                case 1: Close(); break;
+                case 1:
+                    richTextBox1.Text += "你選擇了\t離開\n";
+                    Close();
+                    break;
             }
         }
 
@@ -460,5 +465,21 @@ namespace SoundCalculator
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你選擇了\t設定聲音\t開啟Form2\n";
+            Form2 f2 = new Form2();
+            if (f2.ShowDialog() == DialogResult.OK)
+            {
+                GetVox();
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
+

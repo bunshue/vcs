@@ -61,15 +61,16 @@ namespace ScreenImage
         HOOK Hook = new HOOK();
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "stop\n";
+            //richTextBox1.Text += "stop\n";
             Hook.Stop();//卸載掛鉤
 
-            richTextBox1.Text += "start\n";
+            //richTextBox1.Text += "start\n";
             Hook.Start();//安裝掛鉤
         }
 
         void Hook_KeyUp(object sender, KeyEventArgs e)
         {
+            //richTextBox1.Text += "Hook_KeyUp\n";
             this.Text = "AAAA";
             if (e.KeyCode.ToString() == "F10")//如是目前按下的是F10鍵
             {
@@ -81,7 +82,7 @@ namespace ScreenImage
                     return;//退出本次操作
                 }
                 //執行螢幕截圖的操作
-                richTextBox1.Text += "wwwwwwwwwwwwwwwwwwwwwwwwww\n";
+                //richTextBox1.Text += "wwwwwwwwwwwwwwwwwwwwwwwwww\n";
                      
                 SnatchScreen(this, textBox1.Text + "\\" + textBox2.Text + "." + comboBox1.Text, comboBox1.Text);
                 HOOK.pp = 1;//標識，不進行F10鍵的正常操作
@@ -102,13 +103,13 @@ namespace ScreenImage
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "stop\n";
+            //richTextBox1.Text += "stop\n";
             Hook.Stop();//卸載掛鉤
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            richTextBox1.Text += "stop\n";
+            //richTextBox1.Text += "stop\n";
             Hook.Stop();//卸載掛鉤
         }
     }

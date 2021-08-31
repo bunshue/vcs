@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
+using System.IO;
+
 // Program to view simple DICOM images.
 // Written by Amarnath S, Mahesh Reddy S, Bangalore, India, April 2009.
 // Updated by Amarnath, July 2010 to include "Save As Text".
@@ -40,13 +42,13 @@ namespace DicomImageViewer
         // Saving DICOM tags as Text file
         private void bnSaveAs_Click(object sender, System.EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "TXT Files(*.txt)|*.txt";
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.InitialDirectory = @"C:\______test_files\__RW\_dicom";  //對話方塊的初始目錄
+            saveFileDialog1.Filter = "TXT Files(*.txt)|*.txt";
             string s1, s4, s5, s11, s12;
-
-            if (sfd.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                System.IO.StreamWriter file = new System.IO.StreamWriter(sfd.FileName);
+                StreamWriter file = new StreamWriter(saveFileDialog1.FileName);
                 for (int i = 0; i < str.Count; ++i)
                 {
                     s1 = str[i];

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
 
+using System.IO;
+
 // Program to view simple DICOM images.
 // Written by Amarnath S, Mahesh Reddy S, Bangalore, India, April 2009.
 // Updated along with Harsha T, April 2010 to include Window/Level
@@ -72,7 +74,7 @@ namespace DicomImageViewer
         private void bnOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = @"C:\______test_files\__RW\_dicom";
+            openFileDialog1.InitialDirectory = @"C:\______test_files\__RW\_dicom";  //對話方塊的初始目錄
             openFileDialog1.Filter = "All DICOM Files(*.*)|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -132,7 +134,7 @@ namespace DicomImageViewer
                     //  to view the pixel values as ascii data.
                     //if (true)
                     //{
-                    //    System.IO.StreamWriter file = new System.IO.StreamWriter(
+                    //    StreamWriter file = new StreamWriter(
                     //               "C:\\imageSigned.txt");
 
                     //    for (int ik = 0; ik < pixels8.Count; ++ik)
@@ -177,7 +179,7 @@ namespace DicomImageViewer
                     //  to view the pixel values as ascii data.
                     //if (true)
                     //{
-                    //    System.IO.StreamWriter file = new System.IO.StreamWriter(
+                    //    StreamWriter file = new StreamWriter(
                     //               "C:\\imageSigned.txt");
 
                     //    for (int ik = 0; ik < pixels16.Count; ++ik)
@@ -225,7 +227,7 @@ namespace DicomImageViewer
                     //    to view the pixel values as ascii data.
                     //if (true)
                     //{
-                    //    System.IO.StreamWriter file = new System.IO.StreamWriter(
+                    //    StreamWriter file = new StreamWriter(
                     //                      "C:\\image24.txt");
 
                     //    for (int ik = 0; ik < pixels24.Count; ++ik)
@@ -303,11 +305,13 @@ namespace DicomImageViewer
         {
             if (imageOpened == true)
             {
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "PNG Files(*.png)|*.png";
-
-                if (sfd.ShowDialog() == DialogResult.OK)
-                    imagePanelControl.SaveImage(sfd.FileName);
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.InitialDirectory = @"C:\______test_files\__RW\_dicom";  //對話方塊的初始目錄
+                saveFileDialog1.Filter = "PNG Files(*.png)|*.png";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    imagePanelControl.SaveImage(saveFileDialog1.FileName);
+                }
             }
             else
                 MessageBox.Show("Load a DICOM file before saving!", "Information", 

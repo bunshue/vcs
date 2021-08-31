@@ -1056,6 +1056,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(155, 40);
             this.button36.TabIndex = 51;
+            this.button36.Text = "水仙花數";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
