@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 using System.IO;
@@ -42,21 +43,19 @@ namespace vcs_ReadWrite_DICOM
         // Saving DICOM tags as Text file
         private void bnSaveAs_Click(object sender, System.EventArgs e)
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.InitialDirectory = @"C:\______test_files\__RW\_dicom";  //對話方塊的初始目錄
-            saveFileDialog1.Filter = "TXT Files(*.txt)|*.txt";
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+
             string s1, s4, s5, s11, s12;
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+
+            StreamWriter file = new StreamWriter(filename);
+            for (int i = 0; i < str.Count; ++i)
             {
-                StreamWriter file = new StreamWriter(saveFileDialog1.FileName);
-                for (int i = 0; i < str.Count; ++i)
-                {
-                    s1 = str[i];
-                    ExtractStrings(s1, out s4, out s5, out s11, out s12);
-                    file.WriteLine("(" + s11 + "," + s12 + ")\t" + s4 + "\t\t" + s5);
-                }
-                file.Close();
+                s1 = str[i];
+                ExtractStrings(s1, out s4, out s5, out s11, out s12);
+                file.WriteLine("(" + s11 + "," + s12 + ")\t" + s4 + "\t\t" + s5);
             }
+            file.Close();
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         // This method was extracted using the Refactoring facility in Visual Studio

@@ -73,32 +73,22 @@ namespace vcs_ReadWrite_DICOM
 
         private void bnOpen_Click(object sender, EventArgs e)
         {
-            //string filename = @"C:\______test_files\__RW\_dicom\test.dcm";
+            string filename = @"C:\______test_files\__RW\_dicom\test.dcm";
+            //string filename = @"C:\______test_files\__RW\_dicom\ims000525.dcm";
 
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = @"C:\______test_files\__RW\_dicom";  //對話方塊的初始目錄
-            openFileDialog1.Filter = "All DICOM Files(*.*)|*.*";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                if (openFileDialog1.FileName.Length > 0)
-                {
-                    Cursor = Cursors.WaitCursor;
-                    ReadAndDisplayDicomFile(openFileDialog1.FileName, openFileDialog1.SafeFileName);
-                    imageOpened = true;
-                    Cursor = Cursors.Default;
-                }
-                openFileDialog1.Dispose();
-            }
+            Cursor = Cursors.WaitCursor;
+            ReadAndDisplayDicomFile(filename);
+            imageOpened = true;
+            Cursor = Cursors.Default;
         }
 
-        private void ReadAndDisplayDicomFile(string fileName, string fileNameOnly)
+        private void ReadAndDisplayDicomFile(string fileName)
         {
             dd.DicomFileName = fileName;
 
             TypeOfDicomFile typeOfDicomFile = dd.typeofDicomFile;
 
-            if (typeOfDicomFile == TypeOfDicomFile.Dicom3File ||
-                typeOfDicomFile == TypeOfDicomFile.DicomOldTypeFile)
+            if (typeOfDicomFile == TypeOfDicomFile.Dicom3File || typeOfDicomFile == TypeOfDicomFile.DicomOldTypeFile)
             {
                 imageWidth = dd.width;
                 imageHeight = dd.height;
@@ -117,13 +107,16 @@ namespace vcs_ReadWrite_DICOM
                 bnResetWL.Enabled = true;
                 label2.Text = imageWidth.ToString() + " X " + imageHeight.ToString();
                 if (samplesPerPixel == 1)
+                {
                     label4.Text = bitDepth.ToString() + " bit";
+                }
                 else
-                    label4.Text = bitDepth.ToString() + " bit, " + samplesPerPixel +
-                        " samples per pixel";
+                {
+                    label4.Text = bitDepth.ToString() + " bit, " + samplesPerPixel + " samples per pixel";
+                }
 
                 imagePanelControl.NewImage = true;
-                Text = "DICOM Image Viewer: " + fileNameOnly;
+                Text = "DICOM Image Viewer: " + fileName;
 
                 if (samplesPerPixel == 1 && bitDepth == 8)
                 {
@@ -160,14 +153,12 @@ namespace vcs_ReadWrite_DICOM
                         winWidth = maxPixelValue - minPixelValue;
                     }
 
-                    if ((winCentre == 0) ||
-                        (minPixelValue > winCentre) || (maxPixelValue < winCentre))
+                    if ((winCentre == 0) || (minPixelValue > winCentre) || (maxPixelValue < winCentre))
                     {
                         winCentre = (maxPixelValue + minPixelValue) / 2;
                     }
 
-                    imagePanelControl.SetParameters(ref pixels8, imageWidth, imageHeight,
-                        winWidth, winCentre, samplesPerPixel, true, this);
+                    imagePanelControl.SetParameters(ref pixels8, imageWidth, imageHeight, winWidth, winCentre, samplesPerPixel, true, this);
                 }
 
                 if (samplesPerPixel == 1 && bitDepth == 16)
@@ -205,16 +196,14 @@ namespace vcs_ReadWrite_DICOM
                         winWidth = maxPixelValue - minPixelValue;
                     }
 
-                    if ((winCentre == 0) ||
-                        (minPixelValue > winCentre) || (maxPixelValue < winCentre))
+                    if ((winCentre == 0) || (minPixelValue > winCentre) || (maxPixelValue < winCentre))
                     {
                         winCentre = (maxPixelValue + minPixelValue) / 2;
                     }
 
                     imagePanelControl.Signed16Image = dd.signedImage;
 
-                    imagePanelControl.SetParameters(ref pixels16, imageWidth, imageHeight,
-                        winWidth, winCentre, true, this);
+                    imagePanelControl.SetParameters(ref pixels16, imageWidth, imageHeight, winWidth, winCentre, true, this);
                 }
 
                 if (samplesPerPixel == 3 && bitDepth == 8)
@@ -238,22 +227,18 @@ namespace vcs_ReadWrite_DICOM
                     //    file.Close();
                     //}
 
-                    imagePanelControl.SetParameters(ref pixels24, imageWidth, imageHeight,
-                        winWidth, winCentre, samplesPerPixel, true, this);
+                    imagePanelControl.SetParameters(ref pixels24, imageWidth, imageHeight, winWidth, winCentre, samplesPerPixel, true, this);
                 }
             }
-            else 
+            else
             {
                 if (typeOfDicomFile == TypeOfDicomFile.DicomUnknownTransferSyntax)
                 {
-                    MessageBox.Show("Sorry, I can't read a DICOM file with this Transfer Syntax.",
-                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Sorry, I can't read a DICOM file with this Transfer Syntax.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    MessageBox.Show("Sorry, I can't open this file. " + 
-                        "This file does not appear to contain a DICOM image.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Sorry, I can't open this file. " + "This file does not appear to contain a DICOM image.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 Text = "DICOM Image Viewer: ";
@@ -273,8 +258,7 @@ namespace vcs_ReadWrite_DICOM
                 }
                 winWidth = 256;
                 winCentre = 127;
-                imagePanelControl.SetParameters(ref pixels8, imageWidth, imageHeight,
-                    winWidth, winCentre, samplesPerPixel, true, this);
+                imagePanelControl.SetParameters(ref pixels8, imageWidth, imageHeight, winWidth, winCentre, samplesPerPixel, true, this);
                 imagePanelControl.Invalidate();
                 label1.Visible = false;
                 label2.Visible = false;
@@ -292,32 +276,31 @@ namespace vcs_ReadWrite_DICOM
             {
                 List<string> str = dd.dicomInfo;
 
-                DicomTagsForm dtg = new DicomTagsForm();
-                dtg.SetString(ref str);
-                dtg.ShowDialog();
+                DicomTagsForm dtf = new DicomTagsForm();
+                dtf.SetString(ref str);
+                dtf.ShowDialog();
 
                 imagePanelControl.Invalidate();
             }
             else
-                MessageBox.Show("Load a DICOM file before viewing tags!", "Information", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                richTextBox1.Text += "尚未開啟DICOM圖片\n";
+            }
         }
 
         private void bnSave_Click(object sender, EventArgs e)
         {
             if (imageOpened == true)
             {
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-                saveFileDialog1.InitialDirectory = @"C:\______test_files\__RW\_dicom";  //對話方塊的初始目錄
-                saveFileDialog1.Filter = "PNG Files(*.png)|*.png";
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    imagePanelControl.SaveImage(saveFileDialog1.FileName);
-                }
+                string filename = Application.StartupPath + "\\png_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
+                imagePanelControl.SaveImage(filename);
+
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
             }
             else
-                MessageBox.Show("Load a DICOM file before saving!", "Information", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                richTextBox1.Text += "尚未開啟DICOM圖片\n";
+            }
 
             imagePanelControl.Invalidate();
         }
@@ -334,7 +317,10 @@ namespace vcs_ReadWrite_DICOM
         {
             pixels8.Clear();
             pixels16.Clear();
-            if (imagePanelControl != null) imagePanelControl.Dispose();
+            if (imagePanelControl != null)
+            {
+                imagePanelControl.Dispose();
+            }
         }
 
         private void bnResetWL_Click(object sender, EventArgs e)
@@ -345,20 +331,24 @@ namespace vcs_ReadWrite_DICOM
                 if (bitDepth == 8)
                 {
                     if (samplesPerPixel == 1)
-                        imagePanelControl.SetParameters(ref pixels8, imageWidth, imageHeight,
-                            winWidth, winCentre, samplesPerPixel, false, this);
+                    {
+                        imagePanelControl.SetParameters(ref pixels8, imageWidth, imageHeight, winWidth, winCentre, samplesPerPixel, false, this);
+                    }
                     else // samplesPerPixel == 3
-                        imagePanelControl.SetParameters(ref pixels24, imageWidth, imageHeight,
-                        winWidth, winCentre, samplesPerPixel, false, this);
+                    {
+                        imagePanelControl.SetParameters(ref pixels24, imageWidth, imageHeight, winWidth, winCentre, samplesPerPixel, false, this);
+                    }
                 }
 
                 if (bitDepth == 16)
-                    imagePanelControl.SetParameters(ref pixels16, imageWidth, imageHeight,
-                        winWidth, winCentre, false, this);
+                {
+                    imagePanelControl.SetParameters(ref pixels16, imageWidth, imageHeight, winWidth, winCentre, false, this);
+                }
             }
             else
-                MessageBox.Show("Load a DICOM file before resetting!", "Information", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                richTextBox1.Text += "尚未開啟DICOM圖片\n";
+            }
         }
 
         public void UpdateWindowLevel(int winWidth, int winCentre, ImageBitsPerPixel bpp)
@@ -384,3 +374,4 @@ namespace vcs_ReadWrite_DICOM
         }
     }
 }
+

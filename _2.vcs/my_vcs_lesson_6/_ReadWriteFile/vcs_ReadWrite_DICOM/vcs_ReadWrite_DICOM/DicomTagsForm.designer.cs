@@ -30,19 +30,20 @@
         {
             this.bnClose = new System.Windows.Forms.Button();
             this.listView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.bnSaveAs = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // bnClose
             // 
             this.bnClose.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.bnClose.Location = new System.Drawing.Point(467, 529);
+            this.bnClose.Location = new System.Drawing.Point(383, 579);
             this.bnClose.Name = "bnClose";
-            this.bnClose.Size = new System.Drawing.Size(100, 23);
+            this.bnClose.Size = new System.Drawing.Size(100, 21);
             this.bnClose.TabIndex = 1;
             this.bnClose.Text = "Close";
             this.bnClose.UseVisualStyleBackColor = true;
@@ -56,9 +57,9 @@
             this.columnHeader4});
             this.listView.FullRowSelect = true;
             this.listView.GridLines = true;
-            this.listView.Location = new System.Drawing.Point(12, 12);
+            this.listView.Location = new System.Drawing.Point(12, 11);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(786, 511);
+            this.listView.Size = new System.Drawing.Size(724, 562);
             this.listView.TabIndex = 2;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
@@ -85,19 +86,28 @@
             // 
             // bnSaveAs
             // 
-            this.bnSaveAs.Location = new System.Drawing.Point(244, 529);
+            this.bnSaveAs.Location = new System.Drawing.Point(160, 579);
             this.bnSaveAs.Name = "bnSaveAs";
-            this.bnSaveAs.Size = new System.Drawing.Size(100, 23);
+            this.bnSaveAs.Size = new System.Drawing.Size(100, 21);
             this.bnSaveAs.TabIndex = 3;
             this.bnSaveAs.Text = "Save As Text";
             this.bnSaveAs.UseVisualStyleBackColor = true;
             this.bnSaveAs.Click += new System.EventHandler(this.bnSaveAs_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(742, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(344, 588);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            // 
             // DicomTagsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(810, 557);
+            this.ClientSize = new System.Drawing.Size(1098, 612);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.bnSaveAs);
             this.Controls.Add(this.listView);
             this.Controls.Add(this.bnClose);
@@ -121,6 +131,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Button bnSaveAs;
+        private System.Windows.Forms.RichTextBox richTextBox1;
 
 
     }

@@ -47,14 +47,15 @@
             this.rbZoom1_1 = new System.Windows.Forms.RadioButton();
             this.windowLevelControl = new vcs_ReadWrite_DICOM.WindowLevelGraphControl();
             this.imagePanelControl = new vcs_ReadWrite_DICOM.ImagePanelControl();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.gbViewSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // bnOpen
             // 
-            this.bnOpen.Location = new System.Drawing.Point(35, 12);
+            this.bnOpen.Location = new System.Drawing.Point(35, 11);
             this.bnOpen.Name = "bnOpen";
-            this.bnOpen.Size = new System.Drawing.Size(117, 28);
+            this.bnOpen.Size = new System.Drawing.Size(117, 26);
             this.bnOpen.TabIndex = 0;
             this.bnOpen.Text = "Open DICOM Image";
             this.bnOpen.UseVisualStyleBackColor = true;
@@ -62,9 +63,9 @@
             // 
             // bnSave
             // 
-            this.bnSave.Location = new System.Drawing.Point(35, 74);
+            this.bnSave.Location = new System.Drawing.Point(35, 68);
             this.bnSave.Name = "bnSave";
-            this.bnSave.Size = new System.Drawing.Size(117, 28);
+            this.bnSave.Size = new System.Drawing.Size(117, 26);
             this.bnSave.TabIndex = 2;
             this.bnSave.Text = "Save as PNG";
             this.bnSave.UseVisualStyleBackColor = true;
@@ -74,7 +75,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 225);
+            this.label1.Location = new System.Drawing.Point(12, 208);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 13);
             this.label1.TabIndex = 4;
@@ -84,9 +85,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 242);
+            this.label2.Location = new System.Drawing.Point(12, 223);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(33, 12);
             this.label2.TabIndex = 5;
             this.label2.Text = "label2";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -95,7 +96,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 266);
+            this.label3.Location = new System.Drawing.Point(12, 246);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(102, 13);
             this.label3.TabIndex = 6;
@@ -105,18 +106,18 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 283);
+            this.label4.Location = new System.Drawing.Point(12, 261);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.Size = new System.Drawing.Size(33, 12);
             this.label4.TabIndex = 7;
             this.label4.Text = "label4";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // bnTags
             // 
-            this.bnTags.Location = new System.Drawing.Point(35, 43);
+            this.bnTags.Location = new System.Drawing.Point(35, 40);
             this.bnTags.Name = "bnTags";
-            this.bnTags.Size = new System.Drawing.Size(117, 28);
+            this.bnTags.Size = new System.Drawing.Size(117, 26);
             this.bnTags.TabIndex = 1;
             this.bnTags.Text = "View DICOM Tags";
             this.bnTags.UseVisualStyleBackColor = true;
@@ -124,9 +125,9 @@
             // 
             // bnResetWL
             // 
-            this.bnResetWL.Location = new System.Drawing.Point(35, 105);
+            this.bnResetWL.Location = new System.Drawing.Point(35, 97);
             this.bnResetWL.Name = "bnResetWL";
-            this.bnResetWL.Size = new System.Drawing.Size(117, 28);
+            this.bnResetWL.Size = new System.Drawing.Size(117, 26);
             this.bnResetWL.TabIndex = 3;
             this.bnResetWL.Text = "Reset Window/Level";
             this.bnResetWL.UseVisualStyleBackColor = true;
@@ -137,7 +138,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label5.Location = new System.Drawing.Point(19, 560);
+            this.label5.Location = new System.Drawing.Point(19, 517);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(124, 13);
             this.label5.TabIndex = 9;
@@ -149,7 +150,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label6.Location = new System.Drawing.Point(22, 576);
+            this.label6.Location = new System.Drawing.Point(22, 532);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(108, 13);
             this.label6.TabIndex = 9;
@@ -161,7 +162,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label7.Location = new System.Drawing.Point(19, 601);
+            this.label7.Location = new System.Drawing.Point(19, 555);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(114, 13);
             this.label7.TabIndex = 11;
@@ -173,7 +174,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label8.Location = new System.Drawing.Point(19, 616);
+            this.label8.Location = new System.Drawing.Point(19, 569);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(127, 13);
             this.label8.TabIndex = 12;
@@ -185,7 +186,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label9.Location = new System.Drawing.Point(19, 631);
+            this.label9.Location = new System.Drawing.Point(19, 582);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(124, 13);
             this.label9.TabIndex = 13;
@@ -197,7 +198,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label10.Location = new System.Drawing.Point(19, 646);
+            this.label10.Location = new System.Drawing.Point(19, 596);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(129, 13);
             this.label10.TabIndex = 14;
@@ -208,9 +209,9 @@
             // 
             this.gbViewSettings.Controls.Add(this.rbZoomfit);
             this.gbViewSettings.Controls.Add(this.rbZoom1_1);
-            this.gbViewSettings.Location = new System.Drawing.Point(12, 143);
+            this.gbViewSettings.Location = new System.Drawing.Point(12, 132);
             this.gbViewSettings.Name = "gbViewSettings";
-            this.gbViewSettings.Size = new System.Drawing.Size(145, 63);
+            this.gbViewSettings.Size = new System.Drawing.Size(145, 58);
             this.gbViewSettings.TabIndex = 5;
             this.gbViewSettings.TabStop = false;
             this.gbViewSettings.Text = "View Settings";
@@ -219,9 +220,9 @@
             // 
             this.rbZoomfit.AutoSize = true;
             this.rbZoomfit.Checked = true;
-            this.rbZoomfit.Location = new System.Drawing.Point(16, 37);
+            this.rbZoomfit.Location = new System.Drawing.Point(16, 34);
             this.rbZoomfit.Name = "rbZoomfit";
-            this.rbZoomfit.Size = new System.Drawing.Size(78, 17);
+            this.rbZoomfit.Size = new System.Drawing.Size(78, 16);
             this.rbZoomfit.TabIndex = 1;
             this.rbZoomfit.TabStop = true;
             this.rbZoomfit.Text = "Zoom to Fit";
@@ -231,9 +232,9 @@
             // rbZoom1_1
             // 
             this.rbZoom1_1.AutoSize = true;
-            this.rbZoom1_1.Location = new System.Drawing.Point(16, 17);
+            this.rbZoom1_1.Location = new System.Drawing.Point(16, 16);
             this.rbZoom1_1.Name = "rbZoom1_1";
-            this.rbZoom1_1.Size = new System.Drawing.Size(40, 17);
+            this.rbZoom1_1.Size = new System.Drawing.Size(38, 16);
             this.rbZoom1_1.TabIndex = 0;
             this.rbZoom1_1.Text = "1:1";
             this.rbZoom1_1.UseVisualStyleBackColor = true;
@@ -241,27 +242,37 @@
             // 
             // windowLevelControl
             // 
-            this.windowLevelControl.Location = new System.Drawing.Point(10, 300);
+            this.windowLevelControl.Location = new System.Drawing.Point(10, 277);
             this.windowLevelControl.Name = "windowLevelControl";
-            this.windowLevelControl.Size = new System.Drawing.Size(165, 235);
+            this.windowLevelControl.Size = new System.Drawing.Size(165, 217);
             this.windowLevelControl.TabIndex = 10;
             // 
             // imagePanelControl
             // 
             this.imagePanelControl.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.imagePanelControl.BackColor = System.Drawing.SystemColors.Control;
+            this.imagePanelControl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.imagePanelControl.CausesValidation = false;
-            this.imagePanelControl.Location = new System.Drawing.Point(185, 9);
+            this.imagePanelControl.Location = new System.Drawing.Point(185, 8);
             this.imagePanelControl.Name = "imagePanelControl";
-            this.imagePanelControl.Size = new System.Drawing.Size(800, 647);
+            this.imagePanelControl.Size = new System.Drawing.Size(800, 597);
             this.imagePanelControl.TabIndex = 1;
             this.imagePanelControl.TabStop = false;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(991, 8);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(300, 601);
+            this.richTextBox1.TabIndex = 15;
+            this.richTextBox1.Text = "";
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 668);
+            this.ClientSize = new System.Drawing.Size(1303, 640);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.gbViewSettings);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -284,8 +295,8 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DICOM Image Viewer";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.gbViewSettings.ResumeLayout(false);
             this.gbViewSettings.PerformLayout();
             this.ResumeLayout(false);
@@ -314,6 +325,7 @@
         private System.Windows.Forms.GroupBox gbViewSettings;
         private System.Windows.Forms.RadioButton rbZoomfit;
         private System.Windows.Forms.RadioButton rbZoom1_1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
 
     }
 }

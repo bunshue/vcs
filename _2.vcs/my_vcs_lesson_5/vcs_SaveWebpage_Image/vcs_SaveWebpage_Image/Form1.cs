@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;                //for Directory
 using System.Drawing.Imaging;   //for ImageFormat
 
 namespace vcs_SaveWebpage_Image
@@ -17,6 +18,8 @@ namespace vcs_SaveWebpage_Image
         private const int S_FALSE = 1;     //system return FALSE
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
+
+        string foldername = @"C:\dddddddddd\_網頁存圖";
 
         public Form1()
         {
@@ -36,6 +39,16 @@ namespace vcs_SaveWebpage_Image
 
             this.Location = new System.Drawing.Point(screenWidth - this.Width - 50, screenHeight - this.Height - 400);
             this.BackColor = Color.Gold;
+
+            if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(foldername);
+                //richTextBox1.Text += "已建立一個新資料夾: " + foldername + "\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "資料夾: " + foldername + " 已存在，不用再建立\n";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -50,7 +63,7 @@ namespace vcs_SaveWebpage_Image
 
                 //pictureBox_clipboard.Image = img;
 
-                String filename = "C:\\_git\\vcs\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                String filename = foldername + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
 
                 Bitmap bitmap1 = (Bitmap)img;
 
