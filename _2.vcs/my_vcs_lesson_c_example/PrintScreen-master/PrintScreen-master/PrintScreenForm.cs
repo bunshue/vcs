@@ -41,8 +41,6 @@ namespace PrintScreen
             InitializeComponent();
         }
 
-        #region WIndow Form Events
-
         private void PrintScreenForm_Load(object sender, EventArgs e)
         {
             RootPath = @"C:\dddddddddd";
@@ -56,15 +54,15 @@ namespace PrintScreen
                 MessageBox.Show("PrintScreen " + proc + " 已經在執行", "重複執行錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
             }
-            //LoadConfig();
+            //LoadConfig(); ??未呼叫
             KeyHookHandler.Hook();
             timerKeyboard.Enabled = true;
-        } //PrintScreenForm_Load()
+        }
 
         private void PrintScreenForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             KeyHookHandler.UnHook();
-        } //PrintScreenForm_FormClosed()
+        }
 
         private void PrintScreenForm_Resize(object sender, EventArgs e)
         {
@@ -76,7 +74,7 @@ namespace PrintScreen
                 notifyIcon.ShowBalloonTip(300);
                 this.Hide();
             }
-        } //PrintScreenForm_Resize()
+        }
 
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -85,14 +83,12 @@ namespace PrintScreen
             notifyIcon.Visible = false;
             this.Show();
             //this.BringToFront();
-        } //notifyIcon_MouseDoubleClick()
+        }
 
-        #endregion
-
-        #region Support Functions
-        
         void LoadConfig()
         {
+            richTextBox1.Text += "LoadConfig\n";
+
             if (!File.Exists(ConfigFileName))
             {
                 // Config not exists
@@ -100,6 +96,7 @@ namespace PrintScreen
                             + Environment.GetEnvironmentVariable("HOMEPATH")
                             + @"\ScreenCapture";
                 SaveConfig();
+                richTextBox1.Text += "LoadConfig 111 RootPath = " + RootPath + "\n";
             }
             else
             {
@@ -118,7 +115,7 @@ namespace PrintScreen
                     }
                     else if (Line.Contains("BalloonTips="))
                     {
-                        chkBalloonTips.Checked = Convert.ToBoolean( Line.Substring("BalloonTips=".Length));
+                        chkBalloonTips.Checked = Convert.ToBoolean(Line.Substring("BalloonTips=".Length));
                     }
                     else if (Line.Contains("Sound="))
                     {
@@ -126,9 +123,11 @@ namespace PrintScreen
                     }
                 }
                 ConfigFileStream.Close();
+
+                richTextBox1.Text += "LoadConfig 222 ConfigFileName = " + ConfigFileName + "\n";
             }
             tbFilePath.Text = RootPath;
-        } // LoadConfig()
+        }
 
         void SaveConfig()
         {
@@ -139,12 +138,17 @@ namespace PrintScreen
             ConfigFileStream.WriteLine("Sound=" + chkSound.Checked);
 
             ConfigFileStream.Close();
-        } //SaveConfig()
+
+            richTextBox1.Text += "RootPath=" + RootPath + "\n";
+            richTextBox1.Text += "BalloonTips=" + chkBalloonTips.Checked + "\n";
+            richTextBox1.Text += "Sound=" + chkSound.Checked + "\n";
+
+        }
 
         private void SetMonitorState(MonitorState state)
         {
             SendMessage(this.FindForm().Handle, WM_SYSCOMMAND, (IntPtr)SC_MONITORPOWER, (IntPtr)state);
-        } //SetMonitorState(
+        }
 
         private void BuildPath()
         {
@@ -163,7 +167,7 @@ namespace PrintScreen
             {
                 System.IO.Directory.CreateDirectory(FilePath);
             }
-        } //BuildPath()
+        }
 
         private void ScreenCapture()
         {
@@ -186,7 +190,7 @@ namespace PrintScreen
                 }
                 BuildPath();
                 String FileName = "PrintScreen" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".jpg";
-                String BmpFileName = FilePath + "\\"+ FileName;
+                String BmpFileName = FilePath + "\\" + FileName;
 
                 richTextBox1.Text += "FileName = " + FileName + "\n";
                 richTextBox1.Text += "BmpFileName = " + BmpFileName + "\n";
@@ -205,7 +209,7 @@ namespace PrintScreen
                     notifyIcon.ShowBalloonTip(200);
                 }
             }
-        } //ScreenCapture()
+        }
 
         private void timerKeyboard_Tick(object sender, EventArgs e)
         {
@@ -214,31 +218,24 @@ namespace PrintScreen
                 ScreenCapture();
                 KeyHooker.IsPrintScreenPressed = false;
             }
-        } //imerKeyboard_Tick()
-
-        #endregion
-
-        #region UI Events
+        }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             folderBrowserDialog.ShowDialog();
             RootPath = tbFilePath.Text = folderBrowserDialog.SelectedPath;
             SaveConfig();
-        } //btnBrowse_Click()
+        }
 
         private void chkBalloonTips_Click(object sender, EventArgs e)
         {
             SaveConfig();
-        } //chkBalloonTips_Click()
+        }
 
         private void chkSound_Click(object sender, EventArgs e)
         {
             SaveConfig();
-        } //chkSound_Click()
-
-
-        #endregion
-
+        }
     }
 }
+

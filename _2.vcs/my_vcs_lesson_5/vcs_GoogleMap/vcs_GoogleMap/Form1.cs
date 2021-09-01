@@ -7,9 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-// Add a reference to System.Web.
+using System.Net;
 using System.Web;
 using Microsoft.Win32;
+using System.Device.Location;   //for GeoCoordinate
+
+//參考/加入參考/.NET/System.Device
+//參考/加入參考/.NET/System.Net
+//參考/加入參考/.NET/System.Web
+
+//專案屬性/目標FrameWork 改成 .NET Framework 4
 
 namespace vcs_GoogleMap
 {
@@ -65,7 +72,11 @@ namespace vcs_GoogleMap
             string url = "http://maps.google.com/maps?";
 
             // Add the query.
-            url += "q=" + HttpUtility.UrlEncode(query, Encoding.UTF8);
+            // If the query starts with "loc:", don't encode.
+            if (query.StartsWith("loc:"))
+                url += "q=" + query;
+            else
+                url += "q=" + HttpUtility.UrlEncode(query, Encoding.UTF8);
 
             // Add the type.
             richTextBox1.Text += "map_type = " + map_type + "\n";
@@ -152,5 +163,38 @@ namespace vcs_GoogleMap
             key.Close();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            double lat = 24.8072;
+            double lon = 120.9685;
+
+            richTextBox1.Text += "指定GPS座標\n";
+            richTextBox1.Text += "緯度\t" + lat.ToString() + "\n";
+            richTextBox1.Text += "經度\t" + lon.ToString() + "\n";
+            GeoCoordinate location = new GeoCoordinate(lat, lon);
+            DisplayMap(location.Latitude, location.Longitude);
+        }
+
+        // Display a map for this location.
+        private void DisplayMap(double latitude, double longitude)
+        {
+            // Emulate Internet Explorer 11.
+            SetWebBrowserVersion(11001);
+
+            // Get the Google maps hybrid URL with defult zoom.
+            string address = "loc:" +
+                latitude.ToString() + "+" +
+                longitude.ToString();
+            string url = GoogleMapUrl(address, "Map", 0);
+            richTextBox1.Text += "URL : " + url + "\n";
+
+            // Display the URL in the WebBrowser control.
+            webBrowser1.Navigate(url);
+
+            // Hide the label and display the map.
+            //lblStatus.Hide();
+            webBrowser1.Show();
+        }
     }
 }
+

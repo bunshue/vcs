@@ -58,6 +58,9 @@ namespace vcs_ReadWrite_DICOM
         int maxPixelValue;    // Updated July 2012
         int minPixelValue;
 
+        string filename1 = @"C:\______test_files\__RW\_dicom\test.dcm";
+        string filename2 = @"C:\______test_files\__RW\_dicom\ims000525.dcm";
+
         public MainForm()
         {
             InitializeComponent();
@@ -71,15 +74,30 @@ namespace vcs_ReadWrite_DICOM
             minPixelValue = 65535;
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            pixels8.Clear();
+            pixels16.Clear();
+            if (imagePanelControl != null)
+            {
+                imagePanelControl.Dispose();
+            }
+        }
+
         private void bnOpen_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_dicom\test.dcm";
-            //string filename = @"C:\______test_files\__RW\_dicom\ims000525.dcm";
-
-            Cursor = Cursors.WaitCursor;
-            ReadAndDisplayDicomFile(filename);
+            ReadAndDisplayDicomFile(filename1);
             imageOpened = true;
-            Cursor = Cursors.Default;
+        }
+
+        private void bnOpen2_Click(object sender, EventArgs e)
+        {
+            ReadAndDisplayDicomFile(filename2);
+            imageOpened = true;
         }
 
         private void ReadAndDisplayDicomFile(string fileName)
@@ -98,25 +116,24 @@ namespace vcs_ReadWrite_DICOM
                 samplesPerPixel = dd.samplesPerPixel;
                 signedImage = dd.signedImage;
 
-                label1.Visible = true;
-                label2.Visible = true;
-                label3.Visible = true;
-                label4.Visible = true;
                 bnSave.Enabled = true;
                 bnTags.Enabled = true;
                 bnResetWL.Enabled = true;
-                label2.Text = imageWidth.ToString() + " X " + imageHeight.ToString();
+
+                richTextBox1.Text += "DICOM Image : " + fileName + "\n";
+
+                richTextBox1.Text += "Image Size : " + imageWidth.ToString() + " X " + imageHeight.ToString() + "\n";
+
                 if (samplesPerPixel == 1)
                 {
-                    label4.Text = bitDepth.ToString() + " bit";
+                    richTextBox1.Text += "Image Bit Depth : " + bitDepth.ToString() + " bit\n";
                 }
                 else
                 {
-                    label4.Text = bitDepth.ToString() + " bit, " + samplesPerPixel + " samples per pixel";
+                    richTextBox1.Text += "Image Bit Depth : " + bitDepth.ToString() + " bit, " + samplesPerPixel + " samples per pixel\n";
                 }
 
                 imagePanelControl.NewImage = true;
-                Text = "DICOM Image Viewer: " + fileName;
 
                 if (samplesPerPixel == 1 && bitDepth == 8)
                 {
@@ -260,10 +277,6 @@ namespace vcs_ReadWrite_DICOM
                 winCentre = 127;
                 imagePanelControl.SetParameters(ref pixels8, imageWidth, imageHeight, winWidth, winCentre, samplesPerPixel, true, this);
                 imagePanelControl.Invalidate();
-                label1.Visible = false;
-                label2.Visible = false;
-                label3.Visible = false;
-                label4.Visible = false;
                 bnSave.Enabled = false;
                 bnTags.Enabled = false;
                 bnResetWL.Enabled = false;
@@ -303,24 +316,6 @@ namespace vcs_ReadWrite_DICOM
             }
 
             imagePanelControl.Invalidate();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            label1.Visible = false;
-            label2.Visible = false;
-            label3.Visible = false;
-            label4.Visible = false;
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            pixels8.Clear();
-            pixels16.Clear();
-            if (imagePanelControl != null)
-            {
-                imagePanelControl.Dispose();
-            }
         }
 
         private void bnResetWL_Click(object sender, EventArgs e)
@@ -372,6 +367,7 @@ namespace vcs_ReadWrite_DICOM
             imagePanelControl.viewSettingsChanged = true;
             imagePanelControl.Invalidate();
         }
+
     }
 }
 
