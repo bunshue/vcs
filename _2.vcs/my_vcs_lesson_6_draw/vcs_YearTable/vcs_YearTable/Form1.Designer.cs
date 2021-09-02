@@ -264,7 +264,9 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(100, 40);
             this.button18.TabIndex = 23;
+            this.button18.Text = "生卒最接近";
             this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // Form1
             // 

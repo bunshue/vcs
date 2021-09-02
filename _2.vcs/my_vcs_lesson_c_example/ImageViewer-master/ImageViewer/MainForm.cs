@@ -56,6 +56,8 @@ namespace ImageViewer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             // ホイールイベントの追加
             this.pictureBox1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseWheel);
 
@@ -73,6 +75,32 @@ namespace ImageViewer
             {
                 OpenImageFile(cmds[1]);
             }
+        }
+
+        void show_item_location()
+        {
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(0, 0);
+
+            pictureBox1.Size = new Size(1920 * 7 / 10, 500);
+            richTextBox1.Size = new Size(1920 * 3 / 10, 500);
+
+            label1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width / 2, richTextBox1.Location.Y + 50);
+            label2.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width / 2, richTextBox1.Location.Y + 100);
+
+            label1.Text = "PixelInfo";
+            label2.Text = "ImageInfo";
+
+            bt_open.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_open.Size.Width, richTextBox1.Location.Y + 50);
+            bt_exit.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_exit.Size.Width, richTextBox1.Location.Y + 100);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -103,28 +131,6 @@ namespace ImageViewer
             _gPicbox.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             // 画像の描画
             DrawImage();
-        }
-
-        private void mnuFileOpen_Click(object sender, EventArgs e)
-        {
-            // ファイルを開くダイアログの作成 
-            OpenFileDialog dlg = new OpenFileDialog();
-            // ファイルフィルタ 
-            dlg.Filter = "画像ﾌｧｲﾙ(*.bmp,*.jpg,*.png,*.tif,*.ico)|*.bmp;*.jpg;*.png;*.tif;*.ico";
-            // ダイアログの表示 （Cancelボタンがクリックされた場合は何もしない）
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-            {
-                return;
-            }
-
-            // 画像ファイルを開く
-            OpenImageFile(dlg.FileName);
-        }
-
-        private void mnuFileExit_Click(object sender, EventArgs e)
-        {
-            // 終了
-            this.Close();
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -271,6 +277,7 @@ namespace ImageViewer
 
             // 画像サイズ
             lblImageInfo.Text = _img.Width.ToString() + " x " + _img.Height.ToString() + " x " + _img.ImageBit.ToString() + "bit";
+            label2.Text = _img.Width.ToString() + " x " + _img.Height.ToString() + " x " + _img.ImageBit.ToString() + "bit";
 
             // 表示する画像の領域
             _srcRect = new RectangleF(-0.5f, -0.5f, _img.Width, _img.Height);
@@ -418,6 +425,7 @@ namespace ImageViewer
 
             // 輝度値の表示（モノクロを除く）
             lblPixelInfo.Text = "(" + picX.ToString() + ", " + picY.ToString() + ")" + bright;
+            label1.Text = "(" + picX.ToString() + ", " + picY.ToString() + ")" + bright;
         }
 
         /// <summary>
@@ -499,6 +507,28 @@ namespace ImageViewer
                     break;
                 }
             }
+        }
+
+        private void bt_open_Click(object sender, EventArgs e)
+        {
+            // ファイルを開くダイアログの作成 
+            OpenFileDialog dlg = new OpenFileDialog();
+            // ファイルフィルタ 
+            dlg.Filter = "画像ﾌｧｲﾙ(*.bmp,*.jpg,*.png,*.tif,*.ico)|*.bmp;*.jpg;*.png;*.tif;*.ico";
+            // ダイアログの表示 （Cancelボタンがクリックされた場合は何もしない）
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // 画像ファイルを開く
+            OpenImageFile(dlg.FileName);
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            // 終了
+            this.Close();
         }
     }
 }

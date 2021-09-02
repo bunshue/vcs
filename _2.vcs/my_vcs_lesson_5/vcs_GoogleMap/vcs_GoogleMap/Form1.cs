@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Diagnostics;   //for Process
+
 using System.Net;
 using System.Web;
 using Microsoft.Win32;
@@ -43,6 +45,8 @@ namespace vcs_GoogleMap
             // Get the Google maps URL with defult zoom.
             string url = GoogleMapUrl(location, comboBox1.Text, 0);
 
+            richTextBox1.Text += "Location : " + location + "\n";
+            richTextBox1.Text += "Type : " + comboBox1.Text + "\n";
             richTextBox1.Text += "URL : " + url + "\n";
 
             // Display the URL in the WebBrowser control.
@@ -74,9 +78,13 @@ namespace vcs_GoogleMap
             // Add the query.
             // If the query starts with "loc:", don't encode.
             if (query.StartsWith("loc:"))
+            {
                 url += "q=" + query;
+            }
             else
+            {
                 url += "q=" + HttpUtility.UrlEncode(query, Encoding.UTF8);
+            }
 
             // Add the type.
             richTextBox1.Text += "map_type = " + map_type + "\n";
@@ -84,10 +92,16 @@ namespace vcs_GoogleMap
 
             richTextBox1.Text += "map_type = " + map_type + "\n";
 
-            if (map_type != null) url += "&t=" + map_type;
+            if (map_type != null)
+            {
+                url += "&t=" + map_type;
+            }
 
             // Add the zoom level.
-            if (zoom > 0) url += "&z=" + zoom.ToString();
+            if (zoom > 0)
+            {
+                url += "&z=" + zoom.ToString();
+            }
 
             return url;
         }
@@ -186,6 +200,7 @@ namespace vcs_GoogleMap
                 latitude.ToString() + "+" +
                 longitude.ToString();
             string url = GoogleMapUrl(address, "Map", 0);
+
             richTextBox1.Text += "URL : " + url + "\n";
 
             // Display the URL in the WebBrowser control.
@@ -194,6 +209,22 @@ namespace vcs_GoogleMap
             // Hide the label and display the map.
             //lblStatus.Hide();
             webBrowser1.Show();
+        }
+
+        // Display a Google map.
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Get the Google maps URL with defult zoom.
+            string url = GoogleMapUrl(textBox1.Text, comboBox1.Text, 0);
+
+            richTextBox1.Text += "Addr : " + textBox1.Text + "\n";
+            richTextBox1.Text += "Type : " + comboBox1.Text + "\n";
+            richTextBox1.Text += "URL : " + url + "\n";
+
+            //使用預設瀏覽器開啟
+            // Display the URL in the default browser.
+            Process.Start(url);
+
         }
     }
 }

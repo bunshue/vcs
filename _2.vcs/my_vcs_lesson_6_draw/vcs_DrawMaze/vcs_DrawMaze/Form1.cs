@@ -71,7 +71,7 @@ namespace vcs_DrawMaze
 
             points.Clear();
             points.Add(new Point(x + offset_x, y + offset_y));
-            timer1.Enabled = true;
+            //timer1.Enabled = true;
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -94,21 +94,25 @@ namespace vcs_DrawMaze
             if (result == 0)
             {
                 //向右
+                richTextBox1.Text += "欲向右\t";
                 x += L;
             }
             else if (result == 1)
             {
                 //向下
+                richTextBox1.Text += "欲向下\t";
                 y += L;
             }
             else if (result == 2)
             {
                 //向左
+                richTextBox1.Text += "欲向左\t";
                 x -= L;
             }
             else if (result == 3)
             {
                 //向上
+                richTextBox1.Text += "欲向上\t";
                 y -= L;
             }
             else
@@ -126,7 +130,7 @@ namespace vcs_DrawMaze
 
             if ((x == x_old) && (y == y_old))
             {
-                richTextBox1.Text += "未移動\n";
+                richTextBox1.Text += "未移動\n\n";
             }
             else
             {
@@ -143,7 +147,7 @@ namespace vcs_DrawMaze
                     index = ix + N * iy;
                     if (array_row[index] == 1)
                     {
-                        richTextBox1.Text += "已走過 向右\n";
+                        richTextBox1.Text += "已走過 向右\n\n";
                         flag_skip = true;
                     }
                     else
@@ -159,7 +163,7 @@ namespace vcs_DrawMaze
                     index = N * ix + iy;
                     if (array_col[index] == 1)
                     {
-                        richTextBox1.Text += "已走過 向下\n";
+                        richTextBox1.Text += "已走過 向下\n\n";
                         flag_skip = true;
                     }
                     else
@@ -175,7 +179,7 @@ namespace vcs_DrawMaze
                     index = ix + N * iy;
                     if (array_row[index] == 1)
                     {
-                        richTextBox1.Text += "已走過 向左\n";
+                        richTextBox1.Text += "已走過 向左\n\n";
                         flag_skip = true;
                     }
                     else
@@ -191,7 +195,7 @@ namespace vcs_DrawMaze
                     index = N * ix + iy;
                     if (array_col[index] == 1)
                     {
-                        richTextBox1.Text += "已走過 向上\n";
+                        richTextBox1.Text += "已走過 向上\n\n";
                         flag_skip = true;
                     }
                     else
@@ -216,7 +220,7 @@ namespace vcs_DrawMaze
                     result = check_available_movements();
                     if (result > 0)
                     {
-                        richTextBox1.Text += "還有路可走\t" + result.ToString() + "\n";
+                        richTextBox1.Text += "還有路可走\t" + result.ToString() + "\n\n";
                     }
                     else
                     {
@@ -269,7 +273,7 @@ namespace vcs_DrawMaze
             int result = check_available_movements();
             if (result > 0)
             {
-                richTextBox1.Text += "還有路可走\t" + result.ToString() + "\n";
+                richTextBox1.Text += "還有路可走\t" + result.ToString() + "\n\n";
             }
             else
             {
@@ -360,8 +364,19 @@ namespace vcs_DrawMaze
 
         private void button2_Click(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
             init_mouse_setting();
             this.pictureBox1.Invalidate();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            timer1_Tick(sender, e);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
         }
     }
 }

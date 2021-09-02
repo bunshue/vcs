@@ -80,8 +80,8 @@ namespace vcs_YearTable
 
             //row 7
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button9.Location = new Point(x_st + dx * 1-dx/4+5, y_st + dy * 7);
-            button5.Location = new Point(x_st + dx * 1+dx/3+10, y_st + dy * 7);
+            button9.Location = new Point(x_st + dx * 1 - dx / 4 + 5, y_st + dy * 7);
+            button5.Location = new Point(x_st + dx * 1 + dx / 3 + 10, y_st + dy * 7);
 
         }
 
@@ -418,7 +418,6 @@ namespace vcs_YearTable
                 { "普朗克(Planck)", "1858年4月23日", "1947年10月4日" , "德國"},
                 { "居禮夫人", "1867年11月7日", "1934年7月4日" , "波蘭裔法國"},
                 { "愛因斯坦", "1879年3月14日", "1955年4月18日" , "猶太裔"},
-                { "波耳", "1885年10月7日", "1962年11月18日" , "丹麥"},
                 { "海森堡", "1901年12月5日", "1976年2月1日" , "德國"},
                 { "傅立葉", "1768年3月21日", "1830年5月16日" ,  "法國"},
                 { "法拉第", "1791年9月22日", "1867年8月25日" , "英國"},
@@ -1459,5 +1458,51 @@ namespace vcs_YearTable
             draw_person_data(PERSON_DATA_MODERN);
         }
 
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //生卒最接近
+
+            richTextBox1.Clear();
+
+            load_personData(PERSON_DATA_GREAT);
+
+            DateTime lifeStart1;
+            DateTime lifeStart2;
+            DateTime lifeEnd1;
+            DateTime lifeEnd2;
+
+            int i;
+            int j;
+            int total_persons = person.GetUpperBound(0) + 1;
+            richTextBox1.Text += "total_persons = " + total_persons.ToString() + "\n";
+
+            int threshold = 600;    //天
+
+            for (i = 0; i < (total_persons - 1); i++)
+            {
+                for (j = (i + 1); j < total_persons; j++)
+                {
+                    lifeStart1 = DateTime.Parse(person[i, 1]);
+                    lifeStart2 = DateTime.Parse(person[j, 1]);
+
+                    lifeEnd1 = DateTime.Parse(person[i, 2]);
+                    lifeEnd2 = DateTime.Parse(person[j, 2]);
+
+                    TimeSpan diffLife1 = lifeStart1 - lifeStart2;
+                    TimeSpan diffLife2 = lifeEnd1 - lifeEnd2;
+
+                    int diffDays1 = (int)diffLife1.TotalDays;
+                    int diffDays2 = (int)diffLife2.TotalDays;
+
+                    //richTextBox1.Text += "diff1 = " + diffDays1.ToString() + "\tdiff2 = " + diffDays2.ToString() + "\n";
+
+                    if ((Math.Abs(diffDays1) + Math.Abs(diffDays2)) < threshold)
+                    {
+                        richTextBox1.Text += "很相近 : " + person[i, 0] + "\t" + person[j, 0] + "\t差 " + (Math.Abs(diffDays1) + Math.Abs(diffDays2)).ToString() + " 天\n";
+                    }
+                }
+            }
+            richTextBox1.Text += "done\n";
+        }
     }
 }
