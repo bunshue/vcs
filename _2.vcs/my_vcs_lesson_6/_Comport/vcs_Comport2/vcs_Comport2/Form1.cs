@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.IO.Ports;          //for serial ports
 using System.Windows.Forms.DataVisualization.Charting;  //for Series,   參考/加入參考/.NET/System.Windows.Forms.DataVisualization
 
+using Microsoft.Win32;//for RegistryKey
+
 namespace vcs_Comport2
 {
     public partial class Form1 : Form
@@ -29,7 +31,7 @@ namespace vcs_Comport2
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             groupBox_comport.Location = new Point(10, 10);
             groupBox_comport.Size = new Size(397, 58);
-
+            Comport_Scan();
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -85,6 +87,7 @@ namespace vcs_Comport2
                 //計算serialPort1中有多少位元組 
                 BytesToRead = serialPort1.BytesToRead;
                 richTextBox1.Text += "BytesToRead = " + BytesToRead.ToString() + "\n";
+                richTextBox1.Text += "ReadBufferSize = " + serialPort1.ReadBufferSize.ToString() + "\n";
 
                 if (BytesToRead > 0)
                 {
@@ -143,12 +146,12 @@ namespace vcs_Comport2
         private void Comport_Scan()
         {
             comboBox_comport.Items.Clear();    //Clear All items in Combobox
-            string[] tempString = SerialPort.GetPortNames();
-            Array.Sort(tempString);
-            Array.Resize(ref COM_Ports_NameArr, tempString.Length);
-            tempString.CopyTo(COM_Ports_NameArr, 0);
+            string[] comport_names = SerialPort.GetPortNames();
+            Array.Sort(comport_names);
+            Array.Resize(ref COM_Ports_NameArr, comport_names.Length);
+            comport_names.CopyTo(COM_Ports_NameArr, 0);
 
-            richTextBox1.Text += "a共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
+            richTextBox1.Text += "a共抓到 " + comport_names.Length.ToString() + " 個 comport :\t";
             foreach (string port in COM_Ports_NameArr)
             {
                 richTextBox1.Text += port + "\t";
@@ -261,17 +264,24 @@ namespace vcs_Comport2
                     richTextBox1.Text += "len = " + textBox1.TextLength.ToString() + "\n";
 
                     // Convert a C# string to a byte array  
-                    byte[] data = Encoding.ASCII.GetBytes(textBox1.Text);   //字串 轉 拜列
+                    byte[] data1 = Encoding.ASCII.GetBytes(textBox1.Text);   //字串 轉 拜列
 
-                    //string str = Encoding.ASCII.GetString(data); //拜列 轉 字串
+                    byte[] data2 = Encoding.Default.GetBytes(textBox1.Text);
+
+
+
+                    //string str = Encoding.ASCII.GetString(data1); //拜列 轉 字串
                     //richTextBox1.Text += "str = " + str + "\n";
 
-                    foreach (byte b in data)
+                    foreach (byte b in data1)
                     {
                         //richTextBox1.Text += b.ToString("X2") + "\n";
                     }
 
-                    serialPort1.Write(data, 0, textBox1.TextLength);
+                    //serialPort1.Write(data1, 0, textBox1.TextLength);
+
+                    serialPort1.Write(data2, 0, data2.Length);
+
                     richTextBox1.Text += "send message ok\n";
                 }
                 else
@@ -645,9 +655,9 @@ namespace vcs_Comport2
 
         private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // If the port is closed, don't try to send a character.
-            if (!serialPort1.IsOpen)
+            if (serialPort1.IsOpen == false)
             {
+                richTextBox1.Text += "無連線\n";
                 return;
             }
 
@@ -665,5 +675,70 @@ namespace vcs_Comport2
             e.Handled = true;
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen == false)
+            {
+                richTextBox1.Text += "無連線\n";
+                return;
+            }
+
+            //write 1
+            string cmd = "systeminfo";
+            serialPort1.Write(cmd);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen == false)
+            {
+                richTextBox1.Text += "無連線\n";
+                return;
+            }
+
+            //write 2
+            string cmd = "systeminfo";
+            serialPort1.WriteLine(cmd);
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen == false)
+            {
+                richTextBox1.Text += "無連線\n";
+                return;
+            }
+
+            //write 3
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"Hardware\DeviceMap\SerialComm");
+
+            if (key != null)
+            {
+                //讀取所有串列通訊的名稱
+                String[] names = key.GetValueNames();
+                foreach (String s in names)
+                {
+                    richTextBox1.Text += "抓到 : " + key.GetValue(s) + "\t在 : " + s + "\n";
+                }
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen == false)
+            {
+                richTextBox1.Text += "無連線\n";
+                return;
+            }
+
+            serialPort1.Write("^");
+        }
     }
 }
+
