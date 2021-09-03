@@ -11,7 +11,7 @@ namespace vcs_DrawMaze
 {
     public partial class Form1 : Form
     {
-        private const int N = 3;
+        private const int N = 4;
         private const int L = 100;
 
         int x = 0;
@@ -29,6 +29,8 @@ namespace vcs_DrawMaze
         int total_steps = 0;
         int offset_x = 10;
         int offset_y = 10;
+
+        bool flag_game_end = false;
 
         public Form1()
         {
@@ -53,8 +55,10 @@ namespace vcs_DrawMaze
             total_steps = 0;
             this.Text = total_steps.ToString();
 
-            x = 0;
-            y = 0;
+            x = (N / 2) * L;
+            y = (N / 2) * L;
+            x_old = x;
+            y_old = y;
 
             int i;
             array_row_len = array_row.Length;
@@ -71,6 +75,7 @@ namespace vcs_DrawMaze
 
             points.Clear();
             points.Add(new Point(x + offset_x, y + offset_y));
+            flag_game_end = false;
             //timer1.Enabled = true;
         }
 
@@ -128,9 +133,13 @@ namespace vcs_DrawMaze
             if (y > H)
                 y = H;
 
+            //richTextBox1.Text += "\nx_old = " + x_old.ToString() + " y_old = " + y_old.ToString() + "\tx = " + x.ToString() + " y = " + y.ToString() + "\n";
+
             if ((x == x_old) && (y == y_old))
             {
                 richTextBox1.Text += "未移動\n\n";
+
+                timer1_Tick(sender, e);
             }
             else
             {
@@ -227,12 +236,14 @@ namespace vcs_DrawMaze
                         richTextBox1.Text += "無路可走\n";
                         this.Text = "無路可走";
                         timer1.Enabled = false;
+                        flag_game_end = true;
                     }
                 }
                 else
                 {
                     x = x_old;
                     y = y_old;
+                    timer1_Tick(sender, e);
                 }
             }
         }
@@ -280,6 +291,7 @@ namespace vcs_DrawMaze
                 richTextBox1.Text += "無路可走\n";
                 this.Text = "無路可走";
                 timer1.Enabled = false;
+                flag_game_end = true;
             }
         }
 
@@ -371,7 +383,15 @@ namespace vcs_DrawMaze
 
         private void button3_Click(object sender, EventArgs e)
         {
-            timer1_Tick(sender, e);
+            if (flag_game_end == false)
+            {
+                timer1_Tick(sender, e);
+            }
+            else
+            {
+                richTextBox1.Text += "無路可走\n";
+
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)

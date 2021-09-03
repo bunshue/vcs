@@ -1876,16 +1876,25 @@ namespace vcs_Draw1
                 open_new_file();
             }
 
-            //MeasureString 測試
-            Font f = new Font("標楷體", 36); // 字型
-            string text = "車如流水馬如龍"; // 文字字串
-            SizeF stringSize = g.MeasureString(text, f); // 文字字串的寬高
-            float X = 100;
-            float Y = 100;
-            g.DrawString(text, f, Brushes.Red, X, Y);   // 繪出文字字串
-            g.DrawRectangle(Pens.Red, X, Y, stringSize.Width, stringSize.Height);
+            int X = 100;
+            int Y = 100;
 
-            richTextBox1.Text += "字串寬高 : " + stringSize.ToSize() + "\n";
+            //量測字的大小 MeasureString
+            Font f = new Font("標楷體", 48); // 字型
+            string text1 = "車如流水馬如龍"; // 文字字串
+            SizeF stringSize1 = g.MeasureString(text1, f); // 文字字串的寬高
+            g.DrawString(text1, f, Brushes.Red, X, Y);   // 繪出文字字串
+            g.DrawRectangle(Pens.Red, X, Y, stringSize1.Width, stringSize1.Height);
+            richTextBox1.Text += "字串寬高 : " + stringSize1.ToSize() + "\n";
+
+            int dy = 100;
+            string text2 = "標楷體,48"; // 文字字串
+            SizeF stringSize2 = g.MeasureString(text2, f); // 文字字串的寬高
+            g.DrawString(text2, f, Brushes.Red, X, Y + dy);   // 繪出文字字串
+            g.DrawRectangle(Pens.Red, X, Y + dy, stringSize2.Width, stringSize2.Height);
+            richTextBox1.Text += "字串寬高 : " + stringSize2.ToSize() + "\n";
+
+            richTextBox1.Text += "其實量得也不準\n";
         }
 
         private void button38_Click(object sender, EventArgs e)
@@ -3446,3 +3455,5 @@ namespace vcs_Draw1
         }
     }
 }
+
+

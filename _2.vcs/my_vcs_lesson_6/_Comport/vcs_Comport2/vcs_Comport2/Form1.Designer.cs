@@ -33,12 +33,9 @@
             this.button4 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.button6 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -47,7 +44,17 @@
             this.lb_temperature = new System.Windows.Forms.Label();
             this.bt_temperature_on = new System.Windows.Forms.Button();
             this.SerialPortTimer100ms = new System.Windows.Forms.Timer(this.components);
+            this.groupBox_comport = new System.Windows.Forms.GroupBox();
+            this.comboBox_comport = new System.Windows.Forms.ComboBox();
+            this.pictureBox_comport = new System.Windows.Forms.PictureBox();
+            this.comboBox_baud_rate = new System.Windows.Forms.ComboBox();
+            this.bt_comport_scan = new System.Windows.Forms.Button();
+            this.bt_comport_connect = new System.Windows.Forms.Button();
+            this.bt_comport_disconnect = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox20.SuspendLayout();
+            this.groupBox_comport.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
             this.SuspendLayout();
             // 
             // button5
@@ -72,11 +79,12 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(774, 9);
+            this.richTextBox1.Location = new System.Drawing.Point(793, 60);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(274, 534);
+            this.richTextBox1.Size = new System.Drawing.Size(255, 483);
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
+            this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
             // 
             // button3
             // 
@@ -87,26 +95,6 @@
             this.button3.Text = "send";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(12, 62);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "close";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "open";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // serialPort1
             // 
@@ -131,16 +119,6 @@
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(12, 431);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 37);
-            this.button7.TabIndex = 14;
-            this.button7.Text = "comport info";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
@@ -175,7 +153,7 @@
             this.groupBox20.Controls.Add(this.bt_temperature_off);
             this.groupBox20.Controls.Add(this.lb_temperature);
             this.groupBox20.Controls.Add(this.bt_temperature_on);
-            this.groupBox20.Location = new System.Drawing.Point(13, 500);
+            this.groupBox20.Location = new System.Drawing.Point(12, 625);
             this.groupBox20.Name = "groupBox20";
             this.groupBox20.Size = new System.Drawing.Size(172, 136);
             this.groupBox20.TabIndex = 187;
@@ -222,29 +200,116 @@
             // 
             this.SerialPortTimer100ms.Tick += new System.EventHandler(this.SerialPortTimer100ms_Tick);
             // 
+            // groupBox_comport
+            // 
+            this.groupBox_comport.Controls.Add(this.comboBox_comport);
+            this.groupBox_comport.Controls.Add(this.pictureBox_comport);
+            this.groupBox_comport.Controls.Add(this.comboBox_baud_rate);
+            this.groupBox_comport.Controls.Add(this.bt_comport_scan);
+            this.groupBox_comport.Controls.Add(this.bt_comport_connect);
+            this.groupBox_comport.Controls.Add(this.bt_comport_disconnect);
+            this.groupBox_comport.Location = new System.Drawing.Point(13, 9);
+            this.groupBox_comport.Name = "groupBox_comport";
+            this.groupBox_comport.Size = new System.Drawing.Size(443, 70);
+            this.groupBox_comport.TabIndex = 188;
+            this.groupBox_comport.TabStop = false;
+            // 
+            // comboBox_comport
+            // 
+            this.comboBox_comport.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_comport.FormattingEnabled = true;
+            this.comboBox_comport.Location = new System.Drawing.Point(8, 18);
+            this.comboBox_comport.Name = "comboBox_comport";
+            this.comboBox_comport.Size = new System.Drawing.Size(80, 27);
+            this.comboBox_comport.TabIndex = 19;
+            // 
+            // pictureBox_comport
+            // 
+            this.pictureBox_comport.Location = new System.Drawing.Point(344, 8);
+            this.pictureBox_comport.Name = "pictureBox_comport";
+            this.pictureBox_comport.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox_comport.TabIndex = 22;
+            this.pictureBox_comport.TabStop = false;
+            // 
+            // comboBox_baud_rate
+            // 
+            this.comboBox_baud_rate.Enabled = false;
+            this.comboBox_baud_rate.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_baud_rate.FormattingEnabled = true;
+            this.comboBox_baud_rate.Items.AddRange(new object[] {
+            "9600",
+            "19600",
+            "115200"});
+            this.comboBox_baud_rate.Location = new System.Drawing.Point(92, 18);
+            this.comboBox_baud_rate.Name = "comboBox_baud_rate";
+            this.comboBox_baud_rate.Size = new System.Drawing.Size(76, 27);
+            this.comboBox_baud_rate.TabIndex = 20;
+            this.comboBox_baud_rate.Text = "115200";
+            // 
+            // bt_comport_scan
+            // 
+            this.bt_comport_scan.Location = new System.Drawing.Point(170, 15);
+            this.bt_comport_scan.Name = "bt_comport_scan";
+            this.bt_comport_scan.Size = new System.Drawing.Size(49, 33);
+            this.bt_comport_scan.TabIndex = 21;
+            this.bt_comport_scan.Text = "Scan";
+            this.bt_comport_scan.UseVisualStyleBackColor = true;
+            this.bt_comport_scan.Click += new System.EventHandler(this.bt_comport_scan_Click);
+            // 
+            // bt_comport_connect
+            // 
+            this.bt_comport_connect.Location = new System.Drawing.Point(220, 15);
+            this.bt_comport_connect.Name = "bt_comport_connect";
+            this.bt_comport_connect.Size = new System.Drawing.Size(58, 33);
+            this.bt_comport_connect.TabIndex = 0;
+            this.bt_comport_connect.Text = "Connect";
+            this.bt_comport_connect.UseVisualStyleBackColor = true;
+            this.bt_comport_connect.Click += new System.EventHandler(this.bt_comport_connect_Click);
+            // 
+            // bt_comport_disconnect
+            // 
+            this.bt_comport_disconnect.Location = new System.Drawing.Point(278, 15);
+            this.bt_comport_disconnect.Name = "bt_comport_disconnect";
+            this.bt_comport_disconnect.Size = new System.Drawing.Size(64, 33);
+            this.bt_comport_disconnect.TabIndex = 1;
+            this.bt_comport_disconnect.Text = "Disconnect";
+            this.bt_comport_disconnect.UseVisualStyleBackColor = true;
+            this.bt_comport_disconnect.Click += new System.EventHandler(this.bt_comport_disconnect_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(774, 24);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(77, 16);
+            this.checkBox1.TabIndex = 189;
+            this.checkBox1.Text = "putty mode";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1058, 648);
+            this.ClientSize = new System.Drawing.Size(1058, 773);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.groupBox_comport);
             this.Controls.Add(this.groupBox20);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox20.ResumeLayout(false);
             this.groupBox20.PerformLayout();
+            this.groupBox_comport.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,12 +321,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.TextBox textBox1;
@@ -270,6 +332,14 @@
         private System.Windows.Forms.Label lb_temperature;
         private System.Windows.Forms.Button bt_temperature_on;
         private System.Windows.Forms.Timer SerialPortTimer100ms;
+        private System.Windows.Forms.GroupBox groupBox_comport;
+        private System.Windows.Forms.ComboBox comboBox_comport;
+        private System.Windows.Forms.PictureBox pictureBox_comport;
+        private System.Windows.Forms.ComboBox comboBox_baud_rate;
+        private System.Windows.Forms.Button bt_comport_scan;
+        private System.Windows.Forms.Button bt_comport_connect;
+        private System.Windows.Forms.Button bt_comport_disconnect;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
