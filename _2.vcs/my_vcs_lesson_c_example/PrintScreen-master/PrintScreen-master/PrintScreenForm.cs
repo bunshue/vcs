@@ -45,7 +45,7 @@ namespace PrintScreen
         {
             RootPath = @"C:\dddddddddd";
 
-            tbFilePath.Text = @"C:\dddddddddd";
+            textBox1.Text = @"C:\dddddddddd";
             // 判斷是否已有程式在執行
             string proc = Process.GetCurrentProcess().ProcessName;
             Process[] processes = Process.GetProcessesByName(proc);
@@ -100,10 +100,10 @@ namespace PrintScreen
             }
             else
             {
-                StreamReader ConfigFileStream = new StreamReader(ConfigFileName);
+                StreamReader sr = new StreamReader(ConfigFileName);
 
                 String Line;
-                while ((Line = ConfigFileStream.ReadLine()) != null)
+                while ((Line = sr.ReadLine()) != null)
                 {
                     if (Line[0] == '#')
                     {
@@ -122,22 +122,22 @@ namespace PrintScreen
                         chkSound.Checked = Convert.ToBoolean(Line.Substring("Sound=".Length));
                     }
                 }
-                ConfigFileStream.Close();
+                sr.Close();
 
                 richTextBox1.Text += "LoadConfig 222 ConfigFileName = " + ConfigFileName + "\n";
             }
-            tbFilePath.Text = RootPath;
+            textBox1.Text = RootPath;
         }
 
         void SaveConfig()
         {
-            StreamWriter ConfigFileStream = new StreamWriter(ConfigFileName);
+            StreamWriter sw = new StreamWriter(ConfigFileName);
 
-            ConfigFileStream.WriteLine("RootPath=" + RootPath);
-            ConfigFileStream.WriteLine("BalloonTips=" + chkBalloonTips.Checked);
-            ConfigFileStream.WriteLine("Sound=" + chkSound.Checked);
+            sw.WriteLine("RootPath=" + RootPath);
+            sw.WriteLine("BalloonTips=" + chkBalloonTips.Checked);
+            sw.WriteLine("Sound=" + chkSound.Checked);
 
-            ConfigFileStream.Close();
+            sw.Close();
 
             richTextBox1.Text += "RootPath=" + RootPath + "\n";
             richTextBox1.Text += "BalloonTips=" + chkBalloonTips.Checked + "\n";
@@ -220,10 +220,10 @@ namespace PrintScreen
             }
         }
 
-        private void btnBrowse_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             folderBrowserDialog.ShowDialog();
-            RootPath = tbFilePath.Text = folderBrowserDialog.SelectedPath;
+            RootPath = textBox1.Text = folderBrowserDialog.SelectedPath;
             SaveConfig();
         }
 

@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintScreenForm));
             this.chkSound = new System.Windows.Forms.CheckBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbFilePath = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.timerKeyboard = new System.Windows.Forms.Timer(this.components);
@@ -54,15 +54,15 @@
             this.chkSound.UseVisualStyleBackColor = true;
             this.chkSound.Click += new System.EventHandler(this.chkSound_Click);
             // 
-            // btnBrowse
+            // button1
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(496, 12);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(59, 23);
-            this.btnBrowse.TabIndex = 13;
-            this.btnBrowse.Text = "Browse";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            this.button1.Location = new System.Drawing.Point(496, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(59, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Browse";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label3
             // 
@@ -73,13 +73,13 @@
             this.label3.TabIndex = 12;
             this.label3.Text = "File Path :";
             // 
-            // tbFilePath
+            // textBox1
             // 
-            this.tbFilePath.Enabled = false;
-            this.tbFilePath.Location = new System.Drawing.Point(75, 12);
-            this.tbFilePath.Name = "tbFilePath";
-            this.tbFilePath.Size = new System.Drawing.Size(415, 22);
-            this.tbFilePath.TabIndex = 11;
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(75, 12);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(415, 22);
+            this.textBox1.TabIndex = 11;
             // 
             // notifyIcon
             // 
@@ -123,9 +123,9 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.chkBalloonTips);
             this.Controls.Add(this.chkSound);
-            this.Controls.Add(this.btnBrowse);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.tbFilePath);
+            this.Controls.Add(this.textBox1);
             this.Name = "PrintScreenForm";
             this.Text = "Print Screen";
             this.TopMost = true;
@@ -140,9 +140,9 @@
         #endregion
 
         private System.Windows.Forms.CheckBox chkSound;
-        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbFilePath;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.Timer timerKeyboard;

@@ -77,7 +77,8 @@ namespace ConsoleSample
             imgMat.SaveCsv(filename_csv);
 
             // キー入力待ち
-            Console.WriteLine("続行するには何かキーを押してください . . .");
+            //Console.WriteLine("続行するには何かキーを押してください . . .");
+            Console.WriteLine("Press any key to continue....");
             Console.ReadKey();
         }
     }
