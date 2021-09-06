@@ -37,6 +37,10 @@ namespace 設定滑鼠游標樣式
             strg = strg.Substring(0, strg.LastIndexOf("\\"));
             strg = strg.Substring(0, strg.LastIndexOf("\\"));
             strg += @"\Image";
+
+
+            richTextBox1.Text += "CursorsPath = " + CursorsPath + "\n";
+            richTextBox1.Text += "strg = " + strg + "\n";
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)

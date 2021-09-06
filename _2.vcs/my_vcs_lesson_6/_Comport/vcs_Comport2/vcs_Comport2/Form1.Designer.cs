@@ -84,7 +84,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(793, 60);
+            this.richTextBox1.Location = new System.Drawing.Point(853, 65);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(255, 483);
             this.richTextBox1.TabIndex = 9;
@@ -284,7 +284,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(774, 24);
+            this.checkBox1.Location = new System.Drawing.Point(853, 27);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(77, 16);
             this.checkBox1.TabIndex = 189;
@@ -293,7 +293,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(625, 130);
+            this.button1.Location = new System.Drawing.Point(755, 69);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 190;
@@ -303,7 +303,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(625, 174);
+            this.button2.Location = new System.Drawing.Point(755, 113);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 191;
@@ -313,7 +313,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(625, 220);
+            this.button7.Location = new System.Drawing.Point(755, 159);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 23);
             this.button7.TabIndex = 192;
@@ -345,7 +345,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1058, 773);
+            this.ClientSize = new System.Drawing.Size(1120, 827);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button7);

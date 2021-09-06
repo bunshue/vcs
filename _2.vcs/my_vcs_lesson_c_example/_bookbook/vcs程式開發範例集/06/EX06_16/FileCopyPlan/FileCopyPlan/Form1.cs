@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Threading;//線程序的命名空間
 
@@ -25,27 +26,35 @@ namespace FileCopyPlan
 
         private void button1_Click(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = @"C:\______test_files\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)//打開文件對話框
+            {
                 textBox1.Text = openFileDialog1.FileName;//取得源文件的路徑
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)//打開文件夾對話框
+            {
                 textBox2.Text = folderBrowserDialog1.SelectedPath;//取得目的文件的路徑
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Length == 0 || textBox2.Text.Length == 0)
             {
-                MessageBox.Show("請選擇原文件路徑或目的文件路徑。");
+                richTextBox1.Text += "請選擇原文件路徑或目的文件路徑。\n";
                 return;
             }
-            str = textBox1.Text;//記錄源文件的路徑
-            str = "\\" + str.Substring(str.LastIndexOf('\\') + 1, str.Length - str.LastIndexOf('\\') - 1);//取得源文件的名稱
-            thdAddFile = new Thread(new ThreadStart(SetAddFile));//建立一個線程
-            thdAddFile.Start();//執行目前線程
+            else
+            {
+                str = textBox1.Text;//記錄源文件的路徑
+                str = "\\" + str.Substring(str.LastIndexOf('\\') + 1, str.Length - str.LastIndexOf('\\') - 1);//取得源文件的名稱
+                thdAddFile = new Thread(new ThreadStart(SetAddFile));//建立一個線程
+                thdAddFile.Start();//執行目前線程
+            }
         }
 
         public delegate void AddFile();//定義委託

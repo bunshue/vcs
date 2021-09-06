@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WebCamPictureBox</RootNamespace>
     <AssemblyName>WebCamPictureBox</AssemblyName>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>WebCamPictureBox.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -78,9 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="WebPictureBox.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="WebCamPictureBox.snk" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

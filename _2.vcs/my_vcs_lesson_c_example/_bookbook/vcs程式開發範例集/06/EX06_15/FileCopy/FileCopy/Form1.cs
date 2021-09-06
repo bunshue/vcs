@@ -19,28 +19,43 @@ namespace FileCopy
 
         private void button1_Click(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = @"C:\______test_files\";
             openFileDialog1.FileName = "";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
                 textBox1.Text = openFileDialog1.FileName;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.SelectedPath = "";
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
                 textBox2.Text = folderBrowserDialog1.SelectedPath;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Length == 0 || textBox2.Text.Length == 0)
-                MessageBox.Show("請選擇原文件路徑或目的文件路徑。");
+            {
+                richTextBox1.Text += "請選擇原文件路徑或目的文件路徑。\n";
+            }
             else
             {
-                string tem_Dfile = textBox1.Text;
-                tem_Dfile = tem_Dfile.Substring(tem_Dfile.LastIndexOf("\\") + 1, tem_Dfile.Length - tem_Dfile.LastIndexOf("\\") - 1);
-                tem_Dfile = textBox2.Text + "\\" + tem_Dfile;
-                CopyFile(textBox1.Text, tem_Dfile, 1024);
+                richTextBox1.Text += "複製檔案, 檔案 : " + textBox1.Text + ", 複製到 : " + textBox2.Text + "\n";
+
+                richTextBox1.Text += "原完整檔名 : " + textBox1.Text + "\n";
+                string filename = textBox1.Text;
+                filename = filename.Substring(filename.LastIndexOf("\\") + 1, filename.Length - filename.LastIndexOf("\\") - 1);
+                richTextBox1.Text += "原簡單檔名 : " + filename + "\n";
+                filename = textBox2.Text + "\\" + filename;
+                richTextBox1.Text += "目標檔名 : " + filename + "\n";
+
+                Application.DoEvents();
+
+                CopyFile(textBox1.Text, filename, 1024);
             }
         }
 
@@ -93,7 +108,8 @@ namespace FileCopy
             }
             FormerOpen.Close();										//釋放所有資源
             ToFileOpen.Close();										//釋放所有資源
-            MessageBox.Show("文件複製完成");
+            richTextBox1.Text += "文件複製完成\n";
         }
     }
 }
+

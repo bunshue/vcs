@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Linq;
 using System.Windows.Forms;
+
 using System.IO;
 
 namespace CopyLotFiles
@@ -31,7 +32,6 @@ namespace CopyLotFiles
 
         private void button2_Click(object sender, EventArgs e)
         {
-
             foreach (object o in listBox1.SelectedItems)
             {
                 File.Copy(textBox1.Text + "\\" + o.ToString(), textBox2.Text + "\\" + o.ToString());
@@ -45,3 +45,5 @@ namespace CopyLotFiles
         }
     }
 }
+
+

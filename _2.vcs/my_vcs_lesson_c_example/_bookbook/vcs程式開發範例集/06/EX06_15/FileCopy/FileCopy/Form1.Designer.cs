@@ -54,7 +54,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(350, 22);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "D:\\dddddddddd";
+            this.textBox2.Text = "C:\\dddddddddd";
             // 
             // button1
             // 

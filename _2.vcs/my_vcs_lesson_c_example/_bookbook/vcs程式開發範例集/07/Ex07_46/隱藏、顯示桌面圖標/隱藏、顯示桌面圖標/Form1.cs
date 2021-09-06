@@ -32,10 +32,12 @@ namespace 隱藏_顯示桌面圖標
             if (checkBox1.Checked)
             {
                 ShowWindow(FindWindow("progman", null), 0);
+                richTextBox1.Text += "隱藏桌面圖標\n";
             }
             else
             {
                 ShowWindow(FindWindow("progman", null), 5);
+                richTextBox1.Text += "顯示桌面圖標\n";
             }
         }
     }

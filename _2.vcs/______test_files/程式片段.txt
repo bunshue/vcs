@@ -1,4 +1,16 @@
 
+            if (radioButton1.Checked)
+            {
+                this.ShowInTaskbar = true;
+                richTextBox1.Text += "在任務欄中顯示\n";
+            }
+            else
+            {
+                this.ShowInTaskbar = false;
+                richTextBox1.Text += "不在任務欄中顯示\n";
+            }
+
+
 
         //限制滑鼠游標活動區域
         private void button1_Click(object sender, EventArgs e)

@@ -18,6 +18,11 @@ namespace SimpleSerial
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void buttonStart_Click(object sender, EventArgs e)
         {
             serialPort1.PortName = "COM4";
@@ -26,9 +31,7 @@ namespace SimpleSerial
             serialPort1.Open();
             if (serialPort1.IsOpen)
             {
-                buttonStart.Enabled = false;
-                buttonStop.Enabled = true;
-                textBox1.ReadOnly = false;
+                richTextBox1.Text += "連上 " + serialPort1.PortName + ", BR = " + serialPort1.BaudRate.ToString() + "\n";
             }
         }
 
@@ -37,16 +40,17 @@ namespace SimpleSerial
             if (serialPort1.IsOpen)
             {
                 serialPort1.Close();
-                buttonStart.Enabled = true;
-                buttonStop.Enabled = false;
-                textBox1.ReadOnly = true;
+                richTextBox1.Text += "關閉連線\n";
             }
-
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (serialPort1.IsOpen) serialPort1.Close();
+            if (serialPort1.IsOpen)
+            {
+                serialPort1.Close();
+                richTextBox1.Text += "關閉連線\n";
+            }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -80,3 +84,4 @@ namespace SimpleSerial
         }
     }
 }
+
