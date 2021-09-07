@@ -29,6 +29,8 @@ namespace vcs_DrawMaze
         int total_steps = 0;
         int offset_x = 10;
         int offset_y = 10;
+        int direction = 0;  //0: 向右, 1: 向下, 2: 向左, 3: 向上, 
+        int direction_old = 0;
 
         bool flag_game_end = false;
 
@@ -39,7 +41,7 @@ namespace vcs_DrawMaze
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.Size = new Size(L * N + 25, L * N + 25);
+            pictureBox1.Size = new Size(L * N + 50, L * N + 50);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             init_mouse_setting();
@@ -81,14 +83,61 @@ namespace vcs_DrawMaze
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            Pen p = new Pen(Color.Red, 5);
+            string filename = string.Empty;
+            if (direction == 0)
+            {
+                filename = @"C:\_git\vcs\_2.vcs\______test_files\_pic\_car\car_potato.right.jpg";
+            }
+            else if (direction == 1)
+            {
+                filename = @"C:\_git\vcs\_2.vcs\______test_files\_pic\_car\car_potato.down.jpg";
+            }
+            else if (direction == 2)
+            {
+                filename = @"C:\_git\vcs\_2.vcs\______test_files\_pic\_car\car_potato.left.jpg";
+            }
+            else if (direction == 3)
+            {
+                filename = @"C:\_git\vcs\_2.vcs\______test_files\_pic\_car\car_potato.up.jpg";
+            }
+            else
+            {
+                filename = @"C:\_git\vcs\_2.vcs\______test_files\_pic\_car\car_potato.right.jpg";
+            }
+
+            GraphicsUnit units = GraphicsUnit.Pixel;
+            Bitmap bmp;
+
+            bmp = new Bitmap(filename);
+
+            Pen p;
+
+            if (flag_game_end == false)
+            {
+                p = new Pen(Color.Green, 5);
+            }
+            else
+            {
+                p = new Pen(Color.Red, 5);
+            }
+
             if (points.Count > 1)
             {
                 e.Graphics.DrawLines(p, points.ToArray());
             }
 
-            int r = 20;
+            int r = 40;
             e.Graphics.FillEllipse(Brushes.Red, x - r / 2 + offset_x, y - r / 2 + offset_y, r, r);
+
+            int mouse_size_width = 40;
+            int mouse_size_height = 40;
+
+            int ww = mouse_size_width;
+            int hh = mouse_size_height;
+
+            ww = hh * bmp.Width / bmp.Height;   //符合比例
+            Rectangle destRect1 = new Rectangle(x - r / 2 + offset_x, y - r / 2 + offset_y, ww, hh);
+            e.Graphics.DrawImage(bmp, destRect1, 0, 0, bmp.Width, bmp.Height, units);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -162,6 +211,7 @@ namespace vcs_DrawMaze
                     else
                     {
                         richTextBox1.Text += "向右\n";
+                        direction = 0;
                         total_steps++;
                         array_row[index] = 1;
                     }
@@ -178,6 +228,7 @@ namespace vcs_DrawMaze
                     else
                     {
                         richTextBox1.Text += "向下\n";
+                        direction = 1;
                         total_steps++;
                         array_col[index] = 1;
                     }
@@ -194,6 +245,7 @@ namespace vcs_DrawMaze
                     else
                     {
                         richTextBox1.Text += "向左\n";
+                        direction = 2;
                         total_steps++;
                         array_row[index] = 1;
                     }
@@ -210,6 +262,7 @@ namespace vcs_DrawMaze
                     else
                     {
                         richTextBox1.Text += "向上\n";
+                        direction = 3;
                         total_steps++;
                         array_col[index] = 1;
                     }
@@ -224,8 +277,6 @@ namespace vcs_DrawMaze
                     richTextBox1.Text += "x = " + x.ToString() + ", y = " + y.ToString() + "\t" + "px = " + (x / L).ToString() + ", py = " + (y / L).ToString() + "\n";
                     points.Add(new Point(x + offset_x, y + offset_y));
 
-                    this.pictureBox1.Invalidate();
-
                     result = check_available_movements();
                     if (result > 0)
                     {
@@ -238,6 +289,7 @@ namespace vcs_DrawMaze
                         timer1.Enabled = false;
                         flag_game_end = true;
                     }
+                    this.pictureBox1.Invalidate();
                 }
                 else
                 {
@@ -369,7 +421,6 @@ namespace vcs_DrawMaze
                     richTextBox1.Text += "未走過 向上\n";
                     available_movements++;
                 }
-
             }
             return available_movements;
         }
@@ -379,6 +430,8 @@ namespace vcs_DrawMaze
             timer1.Enabled = false;
             init_mouse_setting();
             this.pictureBox1.Invalidate();
+
+            timer1.Enabled = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -390,7 +443,6 @@ namespace vcs_DrawMaze
             else
             {
                 richTextBox1.Text += "無路可走\n";
-
             }
         }
 
@@ -400,3 +452,4 @@ namespace vcs_DrawMaze
         }
     }
 }
+

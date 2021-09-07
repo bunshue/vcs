@@ -1,4 +1,18 @@
 
+
+
+//開啟檔案總管到指定的目錄
+
+        // Opening the record directory 
+        private void OpenRecordingDirectory_Click(object sender, EventArgs e)
+        {
+            string filePath = this.RecordingPathInput.Text;
+            System.Diagnostics.Process.Start("explorer.exe", filePath);
+        }
+
+
+
+
             if (radioButton1.Checked)
             {
                 this.ShowInTaskbar = true;

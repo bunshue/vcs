@@ -58,7 +58,6 @@
             this.BeepOnMotionCheck4 = new System.Windows.Forms.CheckBox();
             this.AutoRecord4 = new System.Windows.Forms.CheckBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.OpenRecordingDirectory = new System.Windows.Forms.Button();
             this.ChangePathButton = new System.Windows.Forms.Button();
             this.RecordingPathInput = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -431,7 +430,6 @@
             // 
             // groupBox9
             // 
-            this.groupBox9.Controls.Add(this.OpenRecordingDirectory);
             this.groupBox9.Controls.Add(this.ChangePathButton);
             this.groupBox9.Controls.Add(this.RecordingPathInput);
             this.groupBox9.Location = new System.Drawing.Point(5, 503);
@@ -440,16 +438,6 @@
             this.groupBox9.TabIndex = 2;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Records Path";
-            // 
-            // OpenRecordingDirectory
-            // 
-            this.OpenRecordingDirectory.Location = new System.Drawing.Point(6, 66);
-            this.OpenRecordingDirectory.Name = "OpenRecordingDirectory";
-            this.OpenRecordingDirectory.Size = new System.Drawing.Size(169, 21);
-            this.OpenRecordingDirectory.TabIndex = 2;
-            this.OpenRecordingDirectory.Text = "Open Folder";
-            this.OpenRecordingDirectory.UseVisualStyleBackColor = true;
-            this.OpenRecordingDirectory.Click += new System.EventHandler(this.OpenRecordingDirectory_Click);
             // 
             // ChangePathButton
             // 
@@ -693,7 +681,6 @@
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.Button ChangePathButton;
         private System.Windows.Forms.TextBox RecordingPathInput;
-        private System.Windows.Forms.Button OpenRecordingDirectory;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;

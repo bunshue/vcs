@@ -910,6 +910,7 @@
             this.button52.Name = "button52";
             this.button52.Size = new System.Drawing.Size(200, 40);
             this.button52.TabIndex = 83;
+            this.button52.Text = "取得Assembly資料";
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.button52_Click);
             // 

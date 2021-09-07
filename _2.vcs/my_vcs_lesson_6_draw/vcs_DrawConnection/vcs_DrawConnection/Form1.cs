@@ -52,29 +52,80 @@ namespace vcs_DrawConnection
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            int i;
-            int j;
-
-            Random r = new Random();
-            Points.Clear();
-            for (i = 0; i < N; i++)
+            if (type < 5)
             {
-                Points.Add(new Point(r.Next(W), r.Next(H)));
-            }
+                int i;
+                int j;
+                int rr = 20;
+                Random r = new Random();
 
-            /*
-            for (i = 0; i < N; i++)
-            {
-                richTextBox1.Text += i.ToString() + "\t" + Points[i].X.ToString() + "\t" + Points[i].Y.ToString() + "\n";
-            }
-            */
-
-            for (j = 0; j < N; j++)
-            {
+                Points.Clear();
                 for (i = 0; i < N; i++)
                 {
-                    e.Graphics.DrawLine(new Pen(Color.Red, 1), Points[i], Points[j]);
+                    Points.Add(new Point(r.Next(W), r.Next(H)));
                 }
+
+                /*
+                for (i = 0; i < N; i++)
+                {
+                    richTextBox1.Text += i.ToString() + "\t" + Points[i].X.ToString() + "\t" + Points[i].Y.ToString() + "\n";
+                }
+                */
+
+                if (type == 1)
+                {
+                    for (j = 0; j < N; j++)
+                    {
+                        for (i = 0; i < N; i++)
+                        {
+                            e.Graphics.DrawLine(new Pen(Color.Red, 1), Points[i], Points[j]);
+                        }
+                    }
+                }
+                else if (type == 2)
+                {
+                    for (i = 0; i < N; i++)
+                    {
+                        e.Graphics.FillEllipse(Brushes.Red, Points[i].X - rr / 2, Points[i].Y - rr / 2, rr, rr);
+                    }
+                }
+                else if (type == 3)
+                {
+                    for (j = 0; j < N; j++)
+                    {
+                        for (i = 0; i < N; i++)
+                        {
+                            e.Graphics.DrawLine(new Pen(Color.Red, 1), Points[i], Points[j]);
+                        }
+                    }
+                    for (i = 0; i < N; i++)
+                    {
+                        e.Graphics.FillEllipse(Brushes.Red, Points[i].X - rr / 2, Points[i].Y - rr / 2, rr, rr);
+                    }
+                }
+                else if (type == 4)
+                {
+                    for (i = 0; i < (N - 1); i++)
+                    {
+                        e.Graphics.DrawLine(new Pen(Color.Red, 1), Points[i], Points[i + 1]);
+                    }
+
+                    for (i = 0; i < N; i++)
+                    {
+                        e.Graphics.FillEllipse(Brushes.Red, Points[i].X - rr / 2, Points[i].Y - rr / 2, rr, rr);
+                    }
+
+                }
+                else
+                {
+
+
+                }
+            }
+            else if (type == 5)
+            {
+
+
             }
         }
 
@@ -173,6 +224,11 @@ namespace vcs_DrawConnection
                 richTextBox1.Text += "布朗運動\n";
                 type = 4;
             }
+            else if (radioButton5.Checked == true)
+            {
+                richTextBox1.Text += "毛毛蟲運動\n";
+                type = 5;
+            }
             else
             {
                 richTextBox1.Text += "XXXXXX\n";
@@ -183,3 +239,4 @@ namespace vcs_DrawConnection
         }
     }
 }
+

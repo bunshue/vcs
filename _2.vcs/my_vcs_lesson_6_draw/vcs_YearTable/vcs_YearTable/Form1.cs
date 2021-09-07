@@ -19,6 +19,34 @@ namespace vcs_YearTable
         SolidBrush sb;
         Bitmap bitmap1;
 
+        //不用宣告長度的陣列(Array)
+        // 宣告personinfos 為List
+        // 以下List 裡為 PersonInfo 型態
+        List<PersonInfo> personinfos = new List<PersonInfo>();
+
+        public class PersonInfo
+        {
+            public string name;
+            public DateTime lift_start;
+            public DateTime lift_stop;
+            public string nationality;
+
+            public PersonInfo(string n, DateTime st, DateTime sp)
+            {
+                this.name = n;
+                this.lift_start = st;
+                this.lift_stop = sp;
+            }
+
+            public PersonInfo(string n, DateTime st, DateTime sp, string nationality)
+            {
+                this.name = n;
+                this.lift_start = st;
+                this.lift_stop = sp;
+                this.nationality = nationality;
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -338,7 +366,7 @@ namespace vcs_YearTable
                 { "泰昌帝", "1582年8月28日", "1620年9月26日"},
                 { "天啟帝", "1605年12月23日", "1627年9月30日"},
                 { "崇禎帝", "1611年2月6日", "1644年4月25日"},
-                { "哥倫布", "1451年", "1506年5月20日"},
+                { "哥倫布", "1451年10月31日", "1506年5月20日"},
                 { "哥白尼", "1473年2月19日", "1543年5月24日"},
                 { "湯顯祖", "1550年9月24日", "1616年7月29日"},
                 { "莎士比亞", "1564年4月26日", "1616年4月23日"},
@@ -371,7 +399,7 @@ namespace vcs_YearTable
                 { "年羹堯", "1679年", "1726年1月15日"},
                 { "乾隆帝", "1711年9月25日", "1799年2月7日"},
                 { "嘉慶帝", "1760年11月13日", "1820年9月2日"},
-                { "紀昀", "1724年8月3日", "1805年3月14日"},
+                { "紀曉嵐", "1724年8月3日", "1805年3月14日"},
                 { "和珅", "1750年7月1日", "1799年2月22日"},
                 { "道光帝", "1782年9月16日", "1850年2月26日"},
                 { "咸豐帝", "1831年7月17日", "1861年8月22日"},
@@ -1462,49 +1490,105 @@ namespace vcs_YearTable
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //生卒最接近
-
-            richTextBox1.Clear();
-
-            load_personData(PERSON_DATA_GREAT);
+            int i;
+            int j;
+            int total_persons;
+            int threshold = 1000;    //天
 
             DateTime lifeStart1;
             DateTime lifeStart2;
             DateTime lifeEnd1;
             DateTime lifeEnd2;
 
-            int i;
-            int j;
-            int total_persons = person.GetUpperBound(0) + 1;
-            richTextBox1.Text += "total_persons = " + total_persons.ToString() + "\n";
+            TimeSpan diffLife1;
+            TimeSpan diffLife2;
 
-            int threshold = 600;    //天
+            int diffDays1;
+            int diffDays2;
 
-            for (i = 0; i < (total_persons - 1); i++)
+            //生卒最接近
+
+            personinfos.Clear();
+            richTextBox1.Clear();
+
+            richTextBox1.Text += "生卒最接近, 相差 " + threshold.ToString() + " 天以內\n";
+
+            load_personData(PERSON_DATA_GREAT);
+            total_persons = person.GetUpperBound(0) + 1;
+            richTextBox1.Text += "PERSON_DATA_GREAT total_persons = " + total_persons.ToString() + "\n";
+            for (i = 0; i < total_persons; i++)
             {
-                for (j = (i + 1); j < total_persons; j++)
+                personinfos.Add(new PersonInfo(person[i, 0], DateTime.Parse(person[i, 1]), DateTime.Parse(person[i, 2]), person[i, 3]));
+            }
+
+            load_personData(PERSON_DATA_MODERN);
+            total_persons = person.GetUpperBound(0) + 1;
+            richTextBox1.Text += "PERSON_DATA_MODERN total_persons = " + total_persons.ToString() + "\n";
+            for (i = 0; i < total_persons; i++)
+            {
+                personinfos.Add(new PersonInfo(person[i, 0], DateTime.Parse(person[i, 1]), DateTime.Parse(person[i, 2]), person[i, 3]));
+            }
+
+            load_personData(PERSON_DATA_1);
+            total_persons = person.GetUpperBound(0) + 1;
+            richTextBox1.Text += "PERSON_DATA_1 total_persons = " + total_persons.ToString() + "\n";
+            for (i = 0; i < total_persons; i++)
+            {
+                personinfos.Add(new PersonInfo(person[i, 0], DateTime.Parse(person[i, 1]), DateTime.Parse(person[i, 2])));
+            }
+
+            load_personData(PERSON_DATA_2);
+            total_persons = person.GetUpperBound(0) + 1;
+            richTextBox1.Text += "PERSON_DATA_2 total_persons = " + total_persons.ToString() + "\n";
+            for (i = 0; i < total_persons; i++)
+            {
+                personinfos.Add(new PersonInfo(person[i, 0], DateTime.Parse(person[i, 1]), DateTime.Parse(person[i, 2])));
+            }
+
+            load_personData(PERSON_DATA_3);
+            total_persons = person.GetUpperBound(0) + 1;
+            richTextBox1.Text += "PERSON_DATA_3 total_persons = " + total_persons.ToString() + "\n";
+            for (i = 0; i < total_persons; i++)
+            {
+                personinfos.Add(new PersonInfo(person[i, 0], DateTime.Parse(person[i, 1]), DateTime.Parse(person[i, 2])));
+            }
+
+            if (personinfos.Count == 0)
+                richTextBox1.Text += "找不到資料\n";
+            else
+                richTextBox1.Text += "找到 " + personinfos.Count.ToString() + " 筆資料a\n";
+
+            for (i = 0; i < (personinfos.Count - 1); i++)
+            {
+                for (j = (i + 1); j < personinfos.Count; j++)
                 {
-                    lifeStart1 = DateTime.Parse(person[i, 1]);
-                    lifeStart2 = DateTime.Parse(person[j, 1]);
+                    lifeStart1 = personinfos[i].lift_start;
+                    lifeStart2 = personinfos[j].lift_start;
 
-                    lifeEnd1 = DateTime.Parse(person[i, 2]);
-                    lifeEnd2 = DateTime.Parse(person[j, 2]);
+                    lifeEnd1 = personinfos[i].lift_stop;
+                    lifeEnd2 = personinfos[j].lift_stop;
 
-                    TimeSpan diffLife1 = lifeStart1 - lifeStart2;
-                    TimeSpan diffLife2 = lifeEnd1 - lifeEnd2;
+                    diffLife1 = lifeStart1 - lifeStart2;
+                    diffLife2 = lifeEnd1 - lifeEnd2;
 
-                    int diffDays1 = (int)diffLife1.TotalDays;
-                    int diffDays2 = (int)diffLife2.TotalDays;
+                    diffDays1 = (int)diffLife1.TotalDays;
+                    diffDays2 = (int)diffLife2.TotalDays;
 
                     //richTextBox1.Text += "diff1 = " + diffDays1.ToString() + "\tdiff2 = " + diffDays2.ToString() + "\n";
 
                     if ((Math.Abs(diffDays1) + Math.Abs(diffDays2)) < threshold)
                     {
-                        richTextBox1.Text += "很相近 : " + person[i, 0] + "\t" + person[j, 0] + "\t差 " + (Math.Abs(diffDays1) + Math.Abs(diffDays2)).ToString() + " 天\n";
+                        if (personinfos[i].name != personinfos[j].name)
+                        {
+                            richTextBox1.Text += "很相近 : " + personinfos[i].name + "\t" + personinfos[j].name + "\t差 " + (Math.Abs(diffDays1) + Math.Abs(diffDays2)).ToString() + " 天\n";
+                        }
                     }
                 }
             }
+
             richTextBox1.Text += "done\n";
+
         }
     }
 }
+

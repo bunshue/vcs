@@ -250,12 +250,13 @@ namespace WebcamSecurity
         private void ChangeRecordingPath(object sender, EventArgs e)
         {
             // prompt the user with a FolderBrowserDialog
-            FolderBrowserDialog folder = new FolderBrowserDialog();
-            folder.ShowDialog();
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            folderBrowserDialog1.SelectedPath = @"C:\______test_files";
+            folderBrowserDialog1.ShowDialog();
 
-            if (folder.SelectedPath != "")
+            if (folderBrowserDialog1.SelectedPath != "")
             {
-                this.RecordingPathInput.Text = folder.SelectedPath;
+                this.RecordingPathInput.Text = folderBrowserDialog1.SelectedPath;
                 // Load the selected path to the Config DataSet
                 try
                 {
@@ -276,12 +277,6 @@ namespace WebcamSecurity
                     catch (NullReferenceException ex) { }
                 }
             }
-        }
-        // Opening the record directory 
-        private void OpenRecordingDirectory_Click(object sender, EventArgs e)
-        {
-            string filePath = this.RecordingPathInput.Text;
-            System.Diagnostics.Process.Start("explorer.exe", filePath);
         }
 
         // The Rest is User Interface EventHandling
