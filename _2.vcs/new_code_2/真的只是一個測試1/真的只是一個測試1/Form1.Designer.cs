@@ -357,6 +357,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(155, 55);
             this.button23.TabIndex = 27;
+            this.button23.Text = "正規表示式";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -367,6 +368,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(155, 55);
             this.button24.TabIndex = 28;
+            this.button24.Text = "richTextBox 內文變色";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

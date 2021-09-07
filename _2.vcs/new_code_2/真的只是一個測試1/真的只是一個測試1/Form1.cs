@@ -781,11 +781,89 @@ namespace 真的只是一個測試1
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //正規表示式
+
+            //使用方法
+            //Regex.Match("String", @"正規表示式").ToString();
+
+            string str = "USA stands for the United States of America with 50 states and 330 millions people.";
+
+            string result = string.Empty;
+
+
+            //只提出字串最前面或最後面的英文
+            result = Regex.Match(str, @"[A-Z]+").ToString();
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            //只提出字串最前面或最後面的數字
+            result = Regex.Match(str, @"[\d_]+").ToString();
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            //其他規則
+            result = Regex.Match("123ABC456DEF", @"[A-Z]+[0-9]+").ToString(); //Output:"ABC456"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("123ABC456DeF", @"[0-9A-Z]+").ToString();//Output:"123ABC456D"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("123ABC456DeF", @"[0-9A-Za-z]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n\n\n\n";
+
+
+
+            result = Regex.Match("ABC123D", @"[A-Z]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("ABC123", @"[A-Z]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("123ABC456DEF", @"[A-Z]+[0-9]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("123ABC", @"\d").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\t數字\n";
+
+            result = Regex.Match("ABC 123", @"[A-Z]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("123ABC456-DeF", @"[0-9A-Za-z\-]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
 
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //richTextBox 內文變色
+
+            richTextBox1.SelectionColor = Color.Red;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Orange;
+            richTextBox1.AppendText("多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Yellow;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Green;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Blue;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Purple;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+            richTextBox1.AppendText("恢復原色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+
+
 
         }
 
