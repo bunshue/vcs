@@ -1,33 +1,5 @@
 
 
-            //取得螢幕解析度
-            int ScreenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int ScreenHeight = Screen.PrimaryScreen.Bounds.Height;
-
-
-            richTextBox1.Text += "取得螢幕解析度 : " + ScreenWidth.ToString() + " X " + ScreenHeight.ToString() + "\n";
-
-            //取得可工作區域大小
-            int WorkingAreaWidth = Screen.PrimaryScreen.WorkingArea.Width;
-            int WorkingAreaHeight = Screen.PrimaryScreen.WorkingArea.Height;
-
-            richTextBox1.Text += "取得可工作區域大小 : " + WorkingAreaWidth.ToString() + " X " + WorkingAreaHeight.ToString() + "\n";
-
-
-
-            //全螢幕截圖
-            Bitmap bitmap1;
-            Graphics g;
-
-            bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            g = Graphics.FromImage(bitmap1);
-            g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
-            bitmap1.Save(string.Format(@"c:\dddddddddd\test.jpg", DateTime.Now.Ticks.ToString()), System.Drawing.Imaging.ImageFormat.Png);
-
-
-
-
-
 //開啟檔案總管到指定的目錄
 
         // Opening the record directory 
@@ -35,7 +7,10 @@
         {
             string filePath = this.RecordingPathInput.Text;
             System.Diagnostics.Process.Start("explorer.exe", filePath);
+			
         }
+
+			System.Diagnostics.Process.Start(textBox1.Text);//打开文件夹进行查看
 
 
 
@@ -80,15 +55,6 @@ MainMenu選了之後會有打勾記號
             stretchedSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.StretchImage);
             centeredSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.CenterImage);
         }
-
-
-
-
-
-
-using System.Reflection;
-            Assembly assembly = this.GetType().Assembly;
-            richTextBox1.Text += "取得專案名稱 : " + assembly.GetName().Name + "\n";
 
 
 
@@ -247,43 +213,6 @@ sw.Stop();
                 + sw.Elapsed.Seconds.ToString().PadLeft(2, '0');
 				
 				
-				
-				
-				
-
-				
-
-
-//取得專案內所有表單名稱
-
-
-
-            Assembly a = Assembly.GetExecutingAssembly();       //取得目前組件
-
-            
-
-            foreach (Type t in a.GetTypes())                    //找尋組件內所有類別型態
-
-            {
-
-                if (t.IsSubclassOf(typeof(Form)))           //如果父類別是繼承自Form的話
-
-                {
-
-                    //textBox1.AppendText(t.ToString() + "\r\n"); //列出該類別資訊
-
-                }
-
-            }
-
- 
-
-
-
-
-				
-				
-
 
 做一個我的 Transform範例
 

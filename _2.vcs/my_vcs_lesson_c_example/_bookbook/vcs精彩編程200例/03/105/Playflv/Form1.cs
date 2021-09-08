@@ -6,22 +6,25 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Xml;
 using System.IO;
 using System.Runtime.InteropServices;
+
 namespace Playflv
 {
     public partial class Form1 : Form
     {
+        string xmlPath = "";
+        string[] flv = new string[3];
+        FileInfo fi;
+        string strg;
+        AxShockwaveFlashObjects.AxShockwaveFlash ax;
+
         public Form1()
         {
             InitializeComponent();
         }
-        string xmlPath = "";
-        string [] flv=new string[3];
-        FileInfo fi;
-        string strg;
-        AxShockwaveFlashObjects.AxShockwaveFlash ax;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -65,7 +68,7 @@ namespace Playflv
             if (fi2.Exists)
             {
                 Directory.CreateDirectory("c:\\flvVidio");
-                string newPath="c:\\flvVidio\\"+DateTime.Now.Year+DateTime.Now.Second+".flv";
+                string newPath = "c:\\flvVidio\\" + DateTime.Now.Year + DateTime.Now.Second + ".flv";
                 File.Copy(path, newPath);
                 ChangeFlv(newPath);
                 this.Text = listView1.SelectedItems[0].SubItems[0].Text;
@@ -127,7 +130,7 @@ namespace Playflv
                 Scripting.FileSystemObject fso = new Scripting.FileSystemObject();
                 fso.DeleteFolder("c:\\flvVidio", true);
             }
-            catch{}
+            catch { }
         }
 
         private void panel2_Click(object sender, EventArgs e)
@@ -176,3 +179,4 @@ namespace Playflv
         }
     }
 }
+

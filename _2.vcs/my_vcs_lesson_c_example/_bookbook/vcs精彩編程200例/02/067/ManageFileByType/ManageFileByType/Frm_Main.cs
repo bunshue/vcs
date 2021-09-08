@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 
 namespace ManageFileByType
@@ -19,10 +20,12 @@ namespace ManageFileByType
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog FBDialog = new FolderBrowserDialog();//创建FolderBrowserDialog对象
-            if (FBDialog.ShowDialog() == DialogResult.OK)//判断是否选择了文件夹
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();//创建FolderBrowserDialog对象
+            folderBrowserDialog1.SelectedPath = @"C:\______test_files";
+
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)//判断是否选择了文件夹
             {
-                string strPath = FBDialog.SelectedPath;//记录选择的文件夹
+                string strPath = folderBrowserDialog1.SelectedPath;//记录选择的文件夹
                 if (strPath.EndsWith("\\"))
                 {
                     textBox1.Text = strPath;//显示选择的文件夹

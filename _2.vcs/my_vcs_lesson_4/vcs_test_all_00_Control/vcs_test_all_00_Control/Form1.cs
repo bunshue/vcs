@@ -45,47 +45,6 @@ namespace vcs_test_all_00_Control
             //移動控件 SP
         }
 
-        //移動控件 ST
-        private void control_MouseDown(object sender, MouseEventArgs e)
-        {
-            CPoint = new Point(e.X, e.Y);//取得滑鼠游標在文字上按下時的位置
-            tem_x = e.X;//記錄X座標
-            tem_y = e.Y;//記錄X座標
-            isDown = true;//文字可能移動
-        }
-
-        private void control_MouseMove(object sender, MouseEventArgs e)
-        {
-            Control ctrl = (Control)sender;
-            bool tem_b = false;//判斷是否超出邊界
-            if (e.Button == MouseButtons.Left && isDown == true)//如果目前按下的是滑鼠游標左鍵，而且文字可以移動
-            {
-                //如果文字在移動範圍內
-                if (ctrl.Left <= 0 || ctrl.Top <= 0 || ctrl.Left >= (this.Width - ctrl.Width) || ctrl.Top >= (this.Height - ctrl.Height))
-                {
-                    if (ctrl.Left <= 0)//如果文字超出左邊界
-                        if (e.X > tem_x)//如果文字還向右移動
-                            tem_b = true;//文字移動
-                    if (ctrl.Top <= 0)//如果文字超出上邊界
-                        if (e.Y > tem_y)//如果文字還向下移動
-                            tem_b = true;//文字移動
-                    if (ctrl.Left >= (this.Width - ctrl.Width))//如果文字超出右邊界
-                        if (e.X < tem_x)//如果文字還向左移動
-                            tem_b = true;//文字移動
-                    if (ctrl.Top >= (this.Height - ctrl.Height))//如果文字超出下邊界
-                        if (e.Y < tem_y)//如果文字還向上移動
-                            tem_b = true;//文字移動
-                    if (tem_b == false)//如果文字超出邊界
-                        return;//退出本次操作
-                }
-                Point myPosittion = new Point(ctrl.Left + e.X - CPoint.X, ctrl.Top + e.Y - CPoint.Y);//移動Label控制元件
-                ctrl.Location = myPosittion;//設定目前控制元件在視窗容器上的位置
-            }
-            tem_x = e.X;//記錄移動後的X位置
-            tem_y = e.Y;//記錄移動後的Y位置
-        }
-        //移動控件 SP
-
         private void Form1_Load(object sender, EventArgs e)
         {
             //先顯示一個訊息, 再開啟主程式
@@ -131,6 +90,77 @@ namespace vcs_test_all_00_Control
             bm.MakeTransparent(bm.GetPixel(0, 0));
             //btn.Image = bm;   comment also OK
         }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        //移動控件 ST
+        private void control_MouseDown(object sender, MouseEventArgs e)
+        {
+            CPoint = new Point(e.X, e.Y);//取得滑鼠游標在文字上按下時的位置
+            tem_x = e.X;//記錄X座標
+            tem_y = e.Y;//記錄X座標
+            isDown = true;//文字可能移動
+        }
+
+        private void control_MouseMove(object sender, MouseEventArgs e)
+        {
+            Control ctrl = (Control)sender;
+            bool tem_b = false;//判斷是否超出邊界
+            if (e.Button == MouseButtons.Left && isDown == true)//如果目前按下的是滑鼠游標左鍵，而且文字可以移動
+            {
+                //如果文字在移動範圍內
+                if (ctrl.Left <= 0 || ctrl.Top <= 0 || ctrl.Left >= (this.Width - ctrl.Width) || ctrl.Top >= (this.Height - ctrl.Height))
+                {
+                    if (ctrl.Left <= 0)//如果文字超出左邊界
+                        if (e.X > tem_x)//如果文字還向右移動
+                            tem_b = true;//文字移動
+                    if (ctrl.Top <= 0)//如果文字超出上邊界
+                        if (e.Y > tem_y)//如果文字還向下移動
+                            tem_b = true;//文字移動
+                    if (ctrl.Left >= (this.Width - ctrl.Width))//如果文字超出右邊界
+                        if (e.X < tem_x)//如果文字還向左移動
+                            tem_b = true;//文字移動
+                    if (ctrl.Top >= (this.Height - ctrl.Height))//如果文字超出下邊界
+                        if (e.Y < tem_y)//如果文字還向上移動
+                            tem_b = true;//文字移動
+                    if (tem_b == false)//如果文字超出邊界
+                        return;//退出本次操作
+                }
+                Point myPosittion = new Point(ctrl.Left + e.X - CPoint.X, ctrl.Top + e.Y - CPoint.Y);//移動Label控制元件
+                ctrl.Location = myPosittion;//設定目前控制元件在視窗容器上的位置
+            }
+            tem_x = e.X;//記錄移動後的X位置
+            tem_y = e.Y;//記錄移動後的Y位置
+        }
+        //移動控件 SP
 
         int i = 0;
         private void button1_Click(object sender, EventArgs e)
@@ -678,36 +708,6 @@ namespace vcs_test_all_00_Control
             richTextBox1.Text += "此按鈕之圖片  無  去背景效果\n";
         }
 
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
-        }
-
         private void button37_Click(object sender, EventArgs e)
         {
             // Show About dialog
@@ -737,6 +737,45 @@ namespace vcs_test_all_00_Control
         private void btn_help_Click(object sender, EventArgs e)
         {
             Help.ShowHelp(this, "help.hlp");
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            //遍歷所有控件
+            browse_all_controls(this.Controls);
+        }
+
+        public void browse_all_controls(Control.ControlCollection cc)
+        {
+            foreach (Control c in cc)  //撈出所有控件
+            {
+                richTextBox1.Text += c.GetType().Name;
+
+                if (c.GetType().Name == "Button")   //判斷是否為 Button 控件
+                {
+                    richTextBox1.Text += "\t" + ((Button)c).Text + " " + ((Button)c).Size.Width.ToString() + " X " + ((Button)c).Size.Height.ToString();
+
+                    if (((Button)c).Tag != null)
+                    {
+                        richTextBox1.Text += "\t" + ((Button)c).Tag.ToString().ToString();
+                    }
+                }
+                richTextBox1.Text += "\n";
+            }
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            //透明的Form背景
+            this.TransparencyKey = Color.Red;
+            this.BackColor = this.TransparencyKey;
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+            //透明的RichTextBox背景
+            this.TransparencyKey = Color.Red;
+            richTextBox1.BackColor = this.TransparencyKey;
         }
     }
 

@@ -101,6 +101,60 @@ namespace vcs_RegularExpression
             return System.Text.RegularExpressions.Regex.IsMatch(str_day, @"^((0?[1-9])|((1|2)[0-9])|30|31)$");
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //正規表示式的使用
+
+            //正規表示式
+
+            //使用方法
+            //Regex.Match("String", @"正規表示式").ToString();
+
+            string str = "USA stands for the United States of America with 50 states and 330 millions people.";
+
+            string result = string.Empty;
+
+
+            //只提出字串最前面或最後面的英文
+            result = Regex.Match(str, @"[A-Z]+").ToString();
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            //只提出字串最前面或最後面的數字
+            result = Regex.Match(str, @"[\d_]+").ToString();
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            //其他規則
+            result = Regex.Match("123ABC456DEF", @"[A-Z]+[0-9]+").ToString(); //Output:"ABC456"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("123ABC456DeF", @"[0-9A-Z]+").ToString();//Output:"123ABC456D"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("123ABC456DeF", @"[0-9A-Za-z]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n\n\n\n";
+
+
+
+            result = Regex.Match("ABC123D", @"[A-Z]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("ABC123", @"[A-Z]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("123ABC456DEF", @"[A-Z]+[0-9]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("123ABC", @"\d").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\t數字\n";
+
+            result = Regex.Match("ABC 123", @"[A-Z]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+            result = Regex.Match("123ABC456-DeF", @"[0-9A-Za-z\-]+").ToString();//Output:"123ABC456DeF"
+            richTextBox1.Text += "結果 : " + result + "\n";
+
+        }
+
 
 
 

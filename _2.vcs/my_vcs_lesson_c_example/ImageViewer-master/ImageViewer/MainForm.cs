@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.IO;
+using System.Drawing.Drawing2D;
+
 namespace ImageViewer
 {
     public partial class MainForm : Form
@@ -19,11 +22,11 @@ namespace ImageViewer
         /// <summary>
         /// 画像データ
         /// </summary>
-        private ImagingSolution.Imaging.ImageData _img;
+        private ImagingSolution.Imaging.ImageData image;
         /// <summary>
         /// Bitmapクラス（表示用）
         /// </summary>
-        private Bitmap _bmp;
+        private Bitmap bitmap1;
         /// <summary>
         /// 表示する画像の領域
         /// </summary>
@@ -35,11 +38,11 @@ namespace ImageViewer
         /// <summary>
         /// 描画用Graphicsオブジェクト
         /// </summary>
-        private Graphics _gPicbox = null;
+        private Graphics g = null;
         /// <summary>
         /// マウスダウンフラグ
         /// </summary>
-        private bool _mouseDownFlg = false;
+        private bool flag_mouse_down = false;
         /// <summary>
         /// マウスをクリックした位置の保持用
         /// </summary>
@@ -47,7 +50,7 @@ namespace ImageViewer
         /// <summary>
         /// アフィン変換行列
         /// </summary>
-        private System.Drawing.Drawing2D.Matrix _matAffine;
+        private Matrix _matAffine;
 
         public MainForm()
         {
@@ -67,7 +70,7 @@ namespace ImageViewer
             MainForm_Resize(null, null);
 
             // Matrixクラスの確保（単位行列が代入される）
-            _matAffine = new System.Drawing.Drawing2D.Matrix();
+            _matAffine = new Matrix();
 
             // コマンドラインの確認
             var cmds = System.Environment.GetCommandLineArgs();
@@ -86,49 +89,81 @@ namespace ImageViewer
 
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
+            this.Location = new Point(0, 0);
 
             pictureBox1.Size = new Size(1920 * 7 / 10, 500);
             richTextBox1.Size = new Size(1920 * 3 / 10, 500);
 
-            label1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width / 2, richTextBox1.Location.Y + 50);
-            label2.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width / 2, richTextBox1.Location.Y + 100);
+            label1.Location = new Point(richTextBox1.Location.X + 200, richTextBox1.Location.Y + 40);
+            label2.Location = new Point(richTextBox1.Location.X + 200, richTextBox1.Location.Y + 80);
 
             label1.Text = "PixelInfo";
             label2.Text = "ImageInfo";
 
-            bt_open.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_open.Size.Width, richTextBox1.Location.Y + 50);
-            bt_exit.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_exit.Size.Width, richTextBox1.Location.Y + 100);
+            bt_open.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_open.Size.Width, richTextBox1.Location.Y + 100);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_exit_setup();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // 解放
-            if (_img != null)
+            if (image != null)
             {
-                _img.Dispose();
+                image.Dispose();
             }
-            if (_bmp != null)
+            if (bitmap1 != null)
             {
-                _bmp.Dispose();
+                bitmap1.Dispose();
             }
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
-            if ((pictureBox1.Width == 0) || (pictureBox1.Height == 0)) return;
+            if ((pictureBox1.Width == 0) || (pictureBox1.Height == 0))
+            {
+                return;
+            }
 
             // PictureBoxと同じ大きさのBitmapクラスを作成する。
-            Bitmap bmpPicBox = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             // 空のBitmapをPictureBoxのImageに指定する。
-            pictureBox1.Image = bmpPicBox;
+            pictureBox1.Image = bmp;
             // Graphicsオブジェクトの作成(FromImageを使う)
-            _gPicbox = Graphics.FromImage(pictureBox1.Image);
+            g = Graphics.FromImage(pictureBox1.Image);
 
             // 補間モードの設定（このサンプルではNearestNeighborに設定）
-            _gPicbox.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
             // 画像の描画
             DrawImage();
         }
@@ -142,16 +177,16 @@ namespace ImageViewer
             _oldPoint.X = e.X;
             _oldPoint.Y = e.Y;
             // マウスダウンフラグ
-            _mouseDownFlg = true;
+            flag_mouse_down = true;
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             // マウスをクリックしながら移動中のとき
-            if (_mouseDownFlg == true)
+            if (flag_mouse_down == true)
             {
                 // 画像の移動
-                _matAffine.Translate(e.X - _oldPoint.X, e.Y - _oldPoint.Y, System.Drawing.Drawing2D.MatrixOrder.Append);
+                _matAffine.Translate(e.X - _oldPoint.X, e.Y - _oldPoint.Y, MatrixOrder.Append);
                 // 画像の描画
                 DrawImage();
 
@@ -161,13 +196,13 @@ namespace ImageViewer
             }
 
             // マウスポインタの位置の輝度値表示
-            DispPixelInfo(_matAffine, _img, e.Location);
+            DispPixelInfo(_matAffine, image, e.Location);
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             // マウスダウンフラグ
-            _mouseDownFlg = false;
+            flag_mouse_down = false;
         }
 
         private void pictureBox1_DragEnter(object sender, DragEventArgs e)
@@ -238,7 +273,7 @@ namespace ImageViewer
             if (e.Button == MouseButtons.Left)
             {
                 // 画像全体を表示
-                ZoomFit(ref _matAffine, _img, pictureBox1);
+                ZoomFit(ref _matAffine, image, pictureBox1);
             }
 
             if (e.Button == MouseButtons.Right)
@@ -263,37 +298,36 @@ namespace ImageViewer
             }
 
             // 画像データの確保
-            if (_img != null)
+            if (image != null)
             {
-                _img.Dispose();
+                image.Dispose();
             }
-            if (_bmp != null)
+            if (bitmap1 != null)
             {
-                _bmp.Dispose();
+                bitmap1.Dispose();
             }
-            _img = new ImagingSolution.Imaging.ImageData(filename);
+            image = new ImagingSolution.Imaging.ImageData(filename);
             // 表示用
-            _bmp = _img.ToBitmap();
+            bitmap1 = image.ToBitmap();
 
             // 画像サイズ
-            lblImageInfo.Text = _img.Width.ToString() + " x " + _img.Height.ToString() + " x " + _img.ImageBit.ToString() + "bit";
-            label2.Text = _img.Width.ToString() + " x " + _img.Height.ToString() + " x " + _img.ImageBit.ToString() + "bit";
+            label2.Text = image.Width.ToString() + " x " + image.Height.ToString() + " x " + image.ImageBit.ToString() + "bit";
 
             // 表示する画像の領域
-            _srcRect = new RectangleF(-0.5f, -0.5f, _img.Width, _img.Height);
+            _srcRect = new RectangleF(-0.5f, -0.5f, image.Width, image.Height);
             // 描画元を指定する３点の座標（左上、右上、左下の順）
             _srcPoints[0] = new PointF(_srcRect.Left, _srcRect.Top);
             _srcPoints[1] = new PointF(_srcRect.Right, _srcRect.Top);
             _srcPoints[2] = new PointF(_srcRect.Left, _srcRect.Bottom);
 
             // 画像全体を表示
-            ZoomFit(ref _matAffine, _img, pictureBox1);
+            ZoomFit(ref _matAffine, image, pictureBox1);
             // 画像の描画
             DrawImage();
 
             _openedFileName = filename;
 
-            this.Text = System.IO.Path.GetFileName(filename) + " - ImageViewer";
+            this.Text = Path.GetFileName(filename) + " - ImageViewer";
         }
 
         /// <summary>
@@ -301,18 +335,18 @@ namespace ImageViewer
         /// </summary>
         private void DrawImage()
         {
-            if (_img == null)
+            if (image == null)
             {
                 return;
             }
 
-            if (_bmp == null)
+            if (bitmap1 == null)
             {
                 return;
             }
 
             // ピクチャボックスのクリア
-            _gPicbox.Clear(pictureBox1.BackColor);
+            g.Clear(pictureBox1.BackColor);
 
             // 描画先の座標をアフィン変換で求める（左上、右上、左下の順）
             PointF[] destPoints = (PointF[])_srcPoints.Clone();
@@ -320,7 +354,7 @@ namespace ImageViewer
             _matAffine.TransformPoints(destPoints);
 
             // 描画
-            _gPicbox.DrawImage(_bmp, destPoints, _srcRect, GraphicsUnit.Pixel);
+            g.DrawImage(bitmap1, destPoints, _srcRect, GraphicsUnit.Pixel);
 
             // 再描画
             pictureBox1.Refresh();
@@ -331,14 +365,14 @@ namespace ImageViewer
         /// </summary>
         /// <param name="scale">倍率</param>
         /// <param name="point">基準点の座標</param>
-        private void ScaleAt(ref System.Drawing.Drawing2D.Matrix mat, float scale, PointF point)
+        private void ScaleAt(ref Matrix mat, float scale, PointF point)
         {
             // 原点へ移動
-            mat.Translate(-point.X, -point.Y, System.Drawing.Drawing2D.MatrixOrder.Append);
+            mat.Translate(-point.X, -point.Y, MatrixOrder.Append);
             // 拡大縮小
-            mat.Scale(scale, scale, System.Drawing.Drawing2D.MatrixOrder.Append);
+            mat.Scale(scale, scale, MatrixOrder.Append);
             // 元へ戻す
-            mat.Translate(point.X, point.Y, System.Drawing.Drawing2D.MatrixOrder.Append);
+            mat.Translate(point.X, point.Y, MatrixOrder.Append);
         }
 
         /// <summary>
@@ -347,7 +381,7 @@ namespace ImageViewer
         /// <param name="mat">アフィン変換行列</param>
         /// <param name="image">画像データ</param>
         /// <param name="dst">描画先のピクチャボックス</param>
-        private void ZoomFit(ref System.Drawing.Drawing2D.Matrix mat, ImagingSolution.Imaging.ImageData image, PictureBox dst)
+        private void ZoomFit(ref Matrix mat, ImagingSolution.Imaging.ImageData image, PictureBox dst)
         {
             // アフィン変換行列の初期化（単位行列へ）
             mat.Reset();
@@ -364,17 +398,17 @@ namespace ImageViewer
             {
                 // ピクチャボックスの縦方法に画像表示を合わせる場合
                 scale = dstHeight / (float)srcHeight;
-                mat.Scale(scale, scale, System.Drawing.Drawing2D.MatrixOrder.Append);
+                mat.Scale(scale, scale, MatrixOrder.Append);
                 // 中央へ平行移動
-                mat.Translate((dstWidth - srcWidth * scale) / 2f, 0f, System.Drawing.Drawing2D.MatrixOrder.Append);
+                mat.Translate((dstWidth - srcWidth * scale) / 2f, 0f, MatrixOrder.Append);
             }
             else
             {
                 // ピクチャボックスの横方法に画像表示を合わせる場合
                 scale = dstWidth / (float)srcWidth;
-                mat.Scale(scale, scale, System.Drawing.Drawing2D.MatrixOrder.Append);
+                mat.Scale(scale, scale, MatrixOrder.Append);
                 // 中央へ平行移動
-                mat.Translate(0f, (dstHeight - srcHeight * scale) / 2f, System.Drawing.Drawing2D.MatrixOrder.Append);
+                mat.Translate(0f, (dstHeight - srcHeight * scale) / 2f, MatrixOrder.Append);
             }
         }
 
@@ -384,7 +418,7 @@ namespace ImageViewer
         /// <param name="mat">画像を表示しているアフィン変換行列</param>
         /// <param name="image">表示している画像</param>
         /// <param name="pointPictureBox">表示先のピクチャボックス</param>
-        private void DispPixelInfo(System.Drawing.Drawing2D.Matrix mat, ImagingSolution.Imaging.ImageData image, PointF pointPictureBox)
+        private void DispPixelInfo(Matrix mat, ImagingSolution.Imaging.ImageData image, PointF pointPictureBox)
         {
             if (image == null)
             {
@@ -424,7 +458,6 @@ namespace ImageViewer
             }
 
             // 輝度値の表示（モノクロを除く）
-            lblPixelInfo.Text = "(" + picX.ToString() + ", " + picY.ToString() + ")" + bright;
             label1.Text = "(" + picX.ToString() + ", " + picY.ToString() + ")" + bright;
         }
 
@@ -435,10 +468,10 @@ namespace ImageViewer
         /// <returns></returns>
         private bool IsImageFile(string filename)
         {
-            if (System.IO.File.Exists(filename) == false) return false;
+            if (File.Exists(filename) == false) return false;
 
             // ファイル形式の確認
-            string ext = System.IO.Path.GetExtension(filename).ToLower();
+            string ext = Path.GetExtension(filename).ToLower();
             if (
                 (ext != ".bmp") &&
                 (ext != ".jpg") &&
@@ -465,9 +498,9 @@ namespace ImageViewer
             }
 
             // 指定したファイルのディレクトリ
-            var directory = System.IO.Path.GetDirectoryName(filename);
+            var directory = Path.GetDirectoryName(filename);
             // ディレクトリ内のファイル一覧
-            var files = System.IO.Directory.GetFiles(directory, "*", System.IO.SearchOption.TopDirectoryOnly);
+            var files = Directory.GetFiles(directory, "*", SearchOption.TopDirectoryOnly);
             // 一覧からのIndex番号を取得
             int index = Array.IndexOf(files, filename);
 
@@ -493,9 +526,9 @@ namespace ImageViewer
             }
 
             // 指定したファイルのディレクトリ
-            var directory = System.IO.Path.GetDirectoryName(filename);
+            var directory = Path.GetDirectoryName(filename);
             // ディレクトリ内のファイル一覧
-            var files = System.IO.Directory.GetFiles(directory, "*", System.IO.SearchOption.TopDirectoryOnly);
+            var files = Directory.GetFiles(directory, "*", SearchOption.TopDirectoryOnly);
             // 一覧からのIndex番号を取得
             int index = Array.IndexOf(files, filename);
 
@@ -512,23 +545,21 @@ namespace ImageViewer
         private void bt_open_Click(object sender, EventArgs e)
         {
             // ファイルを開くダイアログの作成 
-            OpenFileDialog dlg = new OpenFileDialog();
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = @"C:\______test_files\";
             // ファイルフィルタ 
-            dlg.Filter = "画像ﾌｧｲﾙ(*.bmp,*.jpg,*.png,*.tif,*.ico)|*.bmp;*.jpg;*.png;*.tif;*.ico";
+            openFileDialog1.Filter = "画像ﾌｧｲﾙ(*.bmp,*.jpg,*.png,*.tif,*.ico)|*.bmp;*.jpg;*.png;*.tif;*.ico";
             // ダイアログの表示 （Cancelボタンがクリックされた場合は何もしない）
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                return;
+                // 画像ファイルを開く
+                OpenImageFile(openFileDialog1.FileName);
             }
-
-            // 画像ファイルを開く
-            OpenImageFile(dlg.FileName);
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            // 終了
-            this.Close();
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
         }
     }
 }

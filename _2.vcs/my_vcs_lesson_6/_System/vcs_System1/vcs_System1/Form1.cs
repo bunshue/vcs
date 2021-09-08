@@ -502,9 +502,6 @@ namespace vcs_System1
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            //int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            richTextBox1.Text += "目前的螢幕解析度 :" + Screen.PrimaryScreen.Bounds.Width.ToString() + " * " + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n";
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -966,32 +963,48 @@ namespace vcs_System1
 
         private void button45_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "WorkingArea X = " + Screen.PrimaryScreen.WorkingArea.X.ToString() + "\n";
-            richTextBox1.Text += "WorkingArea Y = " + Screen.PrimaryScreen.WorkingArea.Y.ToString() + "\n";
-            richTextBox1.Text += "WorkingArea Width = " + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
-            richTextBox1.Text += "WorkingArea Height = " + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
+            //取得螢幕解析度
+            int ScreenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int ScreenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            richTextBox1.Text += "螢幕解析度 : " + ScreenWidth.ToString() + " X " + ScreenHeight.ToString() + "\n";
+
+            //取得可工作區域大小
+            int WorkingAreaWidth = Screen.PrimaryScreen.WorkingArea.Width;
+            int WorkingAreaHeight = Screen.PrimaryScreen.WorkingArea.Height;
+
+            richTextBox1.Text += "可工作區域大小 : " + WorkingAreaWidth.ToString() + " X " + WorkingAreaHeight.ToString() + "\n";
         }
 
         private void button46_Click(object sender, EventArgs e)
         {
+            //全螢幕截圖1
             Rectangle rect = Screen.GetBounds(Point.Empty);
-            using (Bitmap bmp = new Bitmap(rect.Width, rect.Height))
+            using (Bitmap bitmap1 = new Bitmap(rect.Width, rect.Height))
             {
-                using (Graphics g = Graphics.FromImage(bmp))
+                using (Graphics g = Graphics.FromImage(bitmap1))
+                {
                     g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
-
-                //存成bmp檔
-                String filename = Application.StartupPath + "\\image_full_screen_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-                bmp.Save(filename, ImageFormat.Bmp);
-
-                richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
+                    //存成bmp檔
+                    String filename = Application.StartupPath + "\\image_full_screen_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+                    richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
+                }
             }
-
         }
 
         private void button47_Click(object sender, EventArgs e)
         {
+            //全螢幕截圖2
+            Bitmap bitmap1;
+            Graphics g;
 
+            bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            g = Graphics.FromImage(bitmap1);
+            g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+            String filename = Application.StartupPath + "\\image_full_screen_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(filename, ImageFormat.Bmp);
+            richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
         }
 
         private void button48_Click(object sender, EventArgs e)
@@ -1090,6 +1103,15 @@ namespace vcs_System1
             richTextBox1.Text += "Copyright\t" + AssemblyCopyright + "\n";
             richTextBox1.Text += "Company\t" + AssemblyCompany + "\n";
             richTextBox1.Text += "Description\t" + AssemblyDescription + "\n";
+
+            Assembly assembly = this.GetType().Assembly;
+            richTextBox1.Text += "取得專案名稱 : " + assembly.GetName().Name + "\n";
+
+            //取得目前執行程式的名字 與所在的資料夾
+            string sPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string installDirectory = Path.GetDirectoryName(sPath) + @"\";
+            richTextBox1.Text += "取得目前執行程式的名字 = " + sPath + "\n";
+            richTextBox1.Text += "取得目前執行程式所在的資料夾 = " + installDirectory + "\n";
         }
 
         #region 組件屬性存取子
@@ -1173,7 +1195,27 @@ namespace vcs_System1
 
         private void button53_Click(object sender, EventArgs e)
         {
+            //取得專案內所有表單名稱
 
+            Assembly a = Assembly.GetExecutingAssembly();       //取得目前組件
+
+            richTextBox1.Text += "目前組件 : " + a.ToString() + "\n";
+            richTextBox1.Text += "CodeBase : " + a.CodeBase.ToString() + "\n";
+            richTextBox1.Text += "FullName : " + a.FullName.ToString() + "\n";
+            richTextBox1.Text += "Location : " + a.Location.ToString() + "\n";
+            richTextBox1.Text += "GetType : " + a.GetType().ToString() + "\n";
+            richTextBox1.Text += "GetName : " + a.GetName() + "\n";
+            richTextBox1.Text += "ImageRuntimeVersion : " + a.ImageRuntimeVersion + "\n";
+
+            foreach (Type t in a.GetTypes())                    //找尋組件內所有類別型態
+            {
+                richTextBox1.Text += t.ToString() + "\n";
+
+                if (t.IsSubclassOf(typeof(Form)))           //如果父類別是繼承自Form的話
+                {
+                    //richTextBox1.Text += t.ToString() + "\n"; //列出該類別資訊
+                }
+            }
         }
 
         private void button54_Click(object sender, EventArgs e)

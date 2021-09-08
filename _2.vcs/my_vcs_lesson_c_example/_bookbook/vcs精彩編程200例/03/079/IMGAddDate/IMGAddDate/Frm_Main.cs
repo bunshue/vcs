@@ -15,20 +15,15 @@ namespace IMGAddDate
 {
     public partial class Frm_Main : Form
     {
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
         public string flag = null;
         PropertyItem[] pi;
         string TakePicDateTime;
         int SpaceLocation;
         string pdt;
         string ptm;
-        Bitmap Pic;
+        Bitmap bitmap1;
         Graphics g;
         Thread td;
-
 
         //字串陣列的寫法(一維)：
         string[] pic_array = { 
@@ -37,9 +32,22 @@ namespace IMGAddDate
             @"C:\______test_files\p3.jpg", 
                              };
 
-        private void button5_Click(object sender, EventArgs e)
+        public Frm_Main()
         {
-            Application.Exit();
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            CheckForIllegalCrossThreadCalls = false;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (td != null)
+            {
+                td.Abort();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -65,19 +73,12 @@ namespace IMGAddDate
             listBox1.Items.Clear();
             flag = null;
         }
-        
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                txtSavePath.Text = Application.StartupPath;
-            }
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (flag == null || txtSavePath.Text == "")
+            if (flag == null)
             {
+                richTextBox1.Text += "尚未添加圖片\n";
                 return;
             }
             else
@@ -90,18 +91,20 @@ namespace IMGAddDate
 
         private void AddDate()
         {
-            Font normalContentFont = new Font("宋体", 36,FontStyle.Bold);
+            Font normalContentFont = new Font("宋体", 36, FontStyle.Bold);
             Color normalContentColor = Color.Red;
             int kk = 1;
             toolStripProgressBar1.Maximum = listBox1.Items.Count;
             toolStripProgressBar1.Minimum = 1;
             toolStripStatusLabel1.Text = "开始添加数码相片拍摄日期";
+            richTextBox1.Text += "开始添加数码相片拍摄日期\n";
+
             for (int i = 0; i < listBox1.Items.Count; i++)
             {
                 pi = GetExif(listBox1.Items[i].ToString());
                 //获取元数据中的拍照日期时间，以字符串形式保存
                 TakePicDateTime = GetDateTime(pi);
-                richTextBox1.Text += " 1get time = " + TakePicDateTime + "\n";
+                richTextBox1.Text += "1取得相片的拍攝時間 : " + TakePicDateTime + "\n";
                 //分析字符串分别保存拍照日期和时间的标准格式
                 SpaceLocation = TakePicDateTime.IndexOf(" ");
                 pdt = TakePicDateTime.Substring(0, SpaceLocation);
@@ -109,28 +112,27 @@ namespace IMGAddDate
                 ptm = TakePicDateTime.Substring(SpaceLocation + 1, TakePicDateTime.Length - SpaceLocation - 2);
                 TakePicDateTime = pdt + " " + ptm;
                 //由列表中的文件创建内存位图对象
-                Pic = new Bitmap(listBox1.Items[i].ToString());
+                bitmap1 = new Bitmap(listBox1.Items[i].ToString());
                 //由位图对象创建Graphics对象的实例
-                g = Graphics.FromImage(Pic);
+                g = Graphics.FromImage(bitmap1);
+
                 //绘制数码照片的日期/时间
-                richTextBox1.Text += " 2get time = " + TakePicDateTime + "\n";
-                //g.DrawString(TakePicDateTime, normalContentFont, new SolidBrush(normalContentColor), Pic.Width - 700, Pic.Height - 200);
-                g.DrawString("ABCDEFGHIJKLMN", normalContentFont, new SolidBrush(normalContentColor), 10, Pic.Height - 50);
+                richTextBox1.Text += "\n2取得相片的拍攝時間 : " + TakePicDateTime + "\n";
+
+                g.DrawString(TakePicDateTime, normalContentFont, new SolidBrush(normalContentColor), 10, bitmap1.Height - 40);
+                g.DrawString("西江月製作", normalContentFont, new SolidBrush(normalContentColor), 10, bitmap1.Height - 80);
+
                 //将添加日期/时间戳后的图像进行保存
-                if (txtSavePath.Text.Length == 3)
-                {
-                    Pic.Save(txtSavePath.Text + Path.GetFileName(listBox1.Items[i].ToString()));
-                }
-                else
-                {
-                    Pic.Save(txtSavePath.Text +"\\"+ Path.GetFileName(listBox1.Items[i].ToString()));
-                }
+
+                bitmap1.Save(Application.StartupPath + "\\" + Path.GetFileName(listBox1.Items[i].ToString()));
+
                 //释放内存位图对象
-                Pic.Dispose();
+                bitmap1.Dispose();
                 toolStripProgressBar1.Value = kk;
                 if (kk == listBox1.Items.Count)
                 {
                     toolStripStatusLabel1.Text = "全部数码相片拍摄日期添加成功";
+                    richTextBox1.Text += "全部数码相片拍摄日期添加成功\n";
                     toolStripProgressBar1.Visible = false;
                     flag = null;
                     listBox1.Items.Clear();
@@ -167,18 +169,6 @@ namespace IMGAddDate
         }
         #endregion
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            txtSavePath.Text = Application.StartupPath;
-            CheckForIllegalCrossThreadCalls = false;
-        }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if(td!=null)
-            {
-                td.Abort();
-            }
-        }
     }
 }
+

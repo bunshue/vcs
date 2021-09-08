@@ -95,7 +95,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(155, 55);
             this.button3.TabIndex = 2;
-            this.button3.Text = "取得專案內所有表單名稱";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -147,7 +146,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(155, 55);
             this.button7.TabIndex = 7;
-            this.button7.Text = "遍歷所有控件";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -276,7 +274,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(155, 55);
             this.button18.TabIndex = 19;
-            this.button18.Text = "透明的Form背景";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -287,7 +284,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(155, 55);
             this.button19.TabIndex = 20;
-            this.button19.Text = "透明的RichTextBox背景";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -357,7 +353,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(155, 55);
             this.button23.TabIndex = 27;
-            this.button23.Text = "正規表示式";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 

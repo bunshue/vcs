@@ -9,8 +9,6 @@ using System.Windows.Forms;
 
 using Microsoft.Win32;  //for RegistryKey
 
-using System.Reflection;    //for Assembly
-
 using System.IO;    //for StreamReader
 
 using System.Net;   //for HttpWebRequest HttpWebResponse
@@ -133,29 +131,6 @@ namespace 真的只是一個測試1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //取得專案內所有表單名稱
-
-            Assembly a = Assembly.GetExecutingAssembly();       //取得目前組件
-
-            richTextBox1.Text += "目前組件 : " + a.ToString() + "\n";
-            richTextBox1.Text += "CodeBase : " + a.CodeBase.ToString() + "\n";
-            richTextBox1.Text += "FullName : " + a.FullName.ToString() + "\n";
-            richTextBox1.Text += "Location : " + a.Location.ToString() + "\n";
-            richTextBox1.Text += "GetType : " + a.GetType().ToString() + "\n";
-            richTextBox1.Text += "GetName : " + a.GetName() + "\n";
-            richTextBox1.Text += "ImageRuntimeVersion : " + a.ImageRuntimeVersion + "\n";
-
-            foreach (Type t in a.GetTypes())                    //找尋組件內所有類別型態
-            {
-                richTextBox1.Text += t.ToString() + "\n";
-
-                if (t.IsSubclassOf(typeof(Form)))           //如果父類別是繼承自Form的話
-                {
-                    //richTextBox1.Text += t.ToString() + "\n"; //列出該類別資訊
-
-                }
-            }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -232,26 +207,7 @@ namespace 真的只是一個測試1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            browse_all_controls(this.Controls);
-        }
-
-        public void browse_all_controls(Control.ControlCollection cc)
-        {
-            foreach (Control c in cc)  //撈出所有控件
-            {
-                richTextBox1.Text += c.GetType().Name;
-
-                if (c.GetType().Name == "Button")   //判斷是否為 Button 控件
-                {
-                    richTextBox1.Text += "\t" + ((Button)c).Text + " " + ((Button)c).Size.Width.ToString() + " X " + ((Button)c).Size.Height.ToString();
-
-                    if (((Button)c).Tag != null)
-                    {
-                        richTextBox1.Text += "\t" + ((Button)c).Tag.ToString().ToString();
-                    }
-                }
-                richTextBox1.Text += "\n";
-            }
+            
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -572,16 +528,10 @@ namespace 真的只是一個測試1
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //透明的Form背景
-            this.TransparencyKey = Color.Red;
-            this.BackColor = this.TransparencyKey;
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //透明的RichTextBox背景
-            this.TransparencyKey = Color.Red;
-            richTextBox1.BackColor = this.TransparencyKey;
         }
 
         int x_st = 0;
@@ -781,55 +731,6 @@ namespace 真的只是一個測試1
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //正規表示式
-
-            //使用方法
-            //Regex.Match("String", @"正規表示式").ToString();
-
-            string str = "USA stands for the United States of America with 50 states and 330 millions people.";
-
-            string result = string.Empty;
-
-
-            //只提出字串最前面或最後面的英文
-            result = Regex.Match(str, @"[A-Z]+").ToString();
-            richTextBox1.Text += "結果 : " + result + "\n";
-
-            //只提出字串最前面或最後面的數字
-            result = Regex.Match(str, @"[\d_]+").ToString();
-            richTextBox1.Text += "結果 : " + result + "\n";
-
-            //其他規則
-            result = Regex.Match("123ABC456DEF", @"[A-Z]+[0-9]+").ToString(); //Output:"ABC456"
-            richTextBox1.Text += "結果 : " + result + "\n";
-
-            result = Regex.Match("123ABC456DeF", @"[0-9A-Z]+").ToString();//Output:"123ABC456D"
-            richTextBox1.Text += "結果 : " + result + "\n";
-
-            result = Regex.Match("123ABC456DeF", @"[0-9A-Za-z]+").ToString();//Output:"123ABC456DeF"
-            richTextBox1.Text += "結果 : " + result + "\n\n\n\n";
-
-
-
-            result = Regex.Match("ABC123D", @"[A-Z]+").ToString();//Output:"123ABC456DeF"
-            richTextBox1.Text += "結果 : " + result + "\n";
-
-            result = Regex.Match("ABC123", @"[A-Z]+").ToString();//Output:"123ABC456DeF"
-            richTextBox1.Text += "結果 : " + result + "\n";
-
-            result = Regex.Match("123ABC456DEF", @"[A-Z]+[0-9]+").ToString();//Output:"123ABC456DeF"
-            richTextBox1.Text += "結果 : " + result + "\n";
-
-            result = Regex.Match("123ABC", @"\d").ToString();//Output:"123ABC456DeF"
-            richTextBox1.Text += "結果 : " + result + "\t數字\n";
-
-            result = Regex.Match("ABC 123", @"[A-Z]+").ToString();//Output:"123ABC456DeF"
-            richTextBox1.Text += "結果 : " + result + "\n";
-
-            result = Regex.Match("123ABC456-DeF", @"[0-9A-Za-z\-]+").ToString();//Output:"123ABC456DeF"
-            richTextBox1.Text += "結果 : " + result + "\n";
-
-
         }
 
         private void button24_Click(object sender, EventArgs e)

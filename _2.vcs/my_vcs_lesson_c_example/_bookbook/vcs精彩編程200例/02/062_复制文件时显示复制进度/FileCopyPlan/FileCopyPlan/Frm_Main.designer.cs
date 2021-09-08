@@ -41,21 +41,23 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 95);
+            this.progressBar1.Location = new System.Drawing.Point(12, 140);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(590, 23);
             this.progressBar1.TabIndex = 9;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(12, 39);
+            this.textBox2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox2.Location = new System.Drawing.Point(12, 61);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(524, 22);
+            this.textBox2.Size = new System.Drawing.Size(524, 33);
             this.textBox2.TabIndex = 8;
+            this.textBox2.Text = "C:\\dddddddddd";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(542, 39);
+            this.button2.Location = new System.Drawing.Point(542, 66);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(61, 23);
             this.button2.TabIndex = 7;
@@ -65,14 +67,16 @@
             // 
             // textBox1
             // 
+            this.textBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.textBox1.Location = new System.Drawing.Point(12, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(524, 22);
+            this.textBox1.Size = new System.Drawing.Size(524, 33);
             this.textBox1.TabIndex = 6;
+            this.textBox1.Text = "D:\\MX-18.2_386.iso";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(542, 12);
+            this.button1.Location = new System.Drawing.Point(542, 17);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(61, 23);
             this.button1.TabIndex = 5;
@@ -86,7 +90,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(542, 68);
+            this.button3.Location = new System.Drawing.Point(542, 113);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(60, 23);
             this.button3.TabIndex = 10;
@@ -96,9 +100,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 141);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 188);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(591, 329);
+            this.richTextBox1.Size = new System.Drawing.Size(591, 282);
             this.richTextBox1.TabIndex = 11;
             this.richTextBox1.Text = "";
             // 

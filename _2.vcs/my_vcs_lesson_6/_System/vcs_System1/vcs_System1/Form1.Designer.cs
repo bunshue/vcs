@@ -293,7 +293,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 40);
             this.button18.TabIndex = 19;
-            this.button18.Text = "取得目前螢幕的解析度";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -621,12 +620,12 @@
             // 
             // button45
             // 
-            this.button45.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button45.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button45.Location = new System.Drawing.Point(630, 428);
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(200, 40);
             this.button45.TabIndex = 63;
-            this.button45.Text = "WorkingArea";
+            this.button45.Text = "螢幕解析度 與 可工作區域";
             this.button45.UseVisualStyleBackColor = true;
             this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
@@ -637,7 +636,7 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(200, 40);
             this.button46.TabIndex = 64;
-            this.button46.Text = "全螢幕截圖";
+            this.button46.Text = "全螢幕截圖1";
             this.button46.UseVisualStyleBackColor = true;
             this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
@@ -825,6 +824,7 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(200, 40);
             this.button47.TabIndex = 78;
+            this.button47.Text = "全螢幕截圖2";
             this.button47.UseVisualStyleBackColor = true;
             this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
@@ -895,11 +895,12 @@
             // 
             // button53
             // 
-            this.button53.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button53.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button53.Location = new System.Drawing.Point(840, 246);
             this.button53.Name = "button53";
             this.button53.Size = new System.Drawing.Size(200, 40);
             this.button53.TabIndex = 84;
+            this.button53.Text = "取得專案內所有表單名稱";
             this.button53.UseVisualStyleBackColor = true;
             this.button53.Click += new System.EventHandler(this.button53_Click);
             // 

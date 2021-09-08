@@ -11,11 +11,19 @@ namespace playflash
 {
     public partial class Frm_Main : Form
     {
+        AxShockwaveFlashObjects.AxShockwaveFlash ax;//创建AxShockwaveFlash实例
+
         public Frm_Main()
         {
             InitializeComponent();
         }
-        AxShockwaveFlashObjects.AxShockwaveFlash ax;//创建AxShockwaveFlash实例
+
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+            AddFlash();												//窗体加载时添加播放器
+            ax.Visible = false;											//隐藏播放器
+            ControlState(0);											//设置菜单状态
+        }
 
         private void AddFlash()
         {
@@ -44,7 +52,6 @@ namespace playflash
             }
         }
 
-
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)				//如果选择了FLASH文件
@@ -55,13 +62,6 @@ namespace playflash
                 panel1.Visible = true;									//显示Panel控件
                 ControlState(1);										//激活菜单
             }
-        }
-
-        private void Frm_Main_Load(object sender, EventArgs e)
-        {
-            AddFlash();												//窗体加载时添加播放器
-            ax.Visible = false;											//隐藏播放器
-            ControlState(0);											//设置菜单状态
         }
 
         private void 关闭ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace playflash
 
         private void 播放ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (播放ToolStripMenuItem.CheckState  == CheckState.Checked)
+            if (播放ToolStripMenuItem.CheckState == CheckState.Checked)
             {
                 播放ToolStripMenuItem.CheckState = CheckState.Unchecked;
                 ax.Stop();
@@ -116,7 +116,7 @@ namespace playflash
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            Size  s=new Size(423,386);
+            Size s = new Size(423, 386);
             if (this.Size == s)
             {
                 panel1.Visible = true;
@@ -131,4 +131,5 @@ namespace playflash
             }
         }
     }
-}                                                                                                                                                                                                                                                                   
+}
+

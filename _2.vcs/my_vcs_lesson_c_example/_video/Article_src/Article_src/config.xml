@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="yes"?>
+<Config xmlns="http://tempuri.org/Config.xsd">
+  <Options>
+    <Key>Camera1</Key>
+    <Value>000</Value>
+  </Options>
+  <Options>
+    <Key>Camera2</Key>
+    <Value>000</Value>
+  </Options>
+  <Options>
+    <Key>Camera3</Key>
+    <Value>000</Value>
+  </Options>
+  <Options>
+    <Key>Camera4</Key>
+    <Value>000</Value>
+  </Options>
+  <Options>
+    <Key>RECORDINGPATH</Key>
+    <Value>C:\dddddddddd</Value>
+  </Options>
+</Config>

@@ -172,10 +172,10 @@ namespace vcs_DrAP
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             //this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+            //this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
 
             //設定執行後的表單大小
-            this.Size = new Size(1920, 1080);
+            this.Size = new Size(1920, 1040);
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);

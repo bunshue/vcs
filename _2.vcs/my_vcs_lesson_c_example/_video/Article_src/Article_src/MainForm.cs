@@ -129,7 +129,7 @@ namespace WebcamSecurity
                 this.config.Options.AddOptionsRow("RECORDINGPATH", this.RecordingPathInput.Text);
             }
             // finally we write everyting to an xml file
-            this.config.WriteXml("config.xml");
+            this.config.WriteXml("..//..//config.xml");
         }
         // The following method is responsible of loading data (upon application load) 
         // from the Config Dataset to the user interface
@@ -196,7 +196,7 @@ namespace WebcamSecurity
 
             try
             {
-                config.ReadXml("config.xml");
+                config.ReadXml("..//..//config.xml");
                 // we fetch the recording path from the DataSet
                 DataRow result = config.Options.Select("Key = 'RECORDINGPATH'")[0];
                 this.RecordingPathInput.Text = result[1].ToString();
