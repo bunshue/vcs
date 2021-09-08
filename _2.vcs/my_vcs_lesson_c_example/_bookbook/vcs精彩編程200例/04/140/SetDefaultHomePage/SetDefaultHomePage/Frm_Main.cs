@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Microsoft.Win32;
+
 namespace SetDefaultHomePage
 {
     public partial class Frm_Main : Form
@@ -24,6 +25,7 @@ namespace SetDefaultHomePage
             object strInfo = reg.GetValue("Start Page", "没有值");//获取当前IE主页
             this.textBox1.Text = (string)strInfo;//显示主页
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
             //定位注册表项位置
@@ -41,3 +43,4 @@ namespace SetDefaultHomePage
         }
     }
 }
+

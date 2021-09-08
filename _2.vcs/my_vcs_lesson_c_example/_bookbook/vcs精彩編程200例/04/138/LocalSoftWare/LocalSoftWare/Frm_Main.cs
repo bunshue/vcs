@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.Win32;
 
 namespace LocalSoftWare
@@ -19,6 +20,7 @@ namespace LocalSoftWare
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "获取本机安装的软件清单\n";
             try
             {
                 RegistryKey rkMain = Registry.LocalMachine;//定义注册表位置
@@ -26,9 +28,9 @@ namespace LocalSoftWare
                 string[] strSubKeyNames = rkChild.GetSubKeyNames();//获取所有子项
                 foreach (string strItem in strSubKeyNames)//遍历所有子项
                 {
-                    if (strItem.Substring(0,1) != "{")//去掉系统自动生成的信息
+                    if (strItem.Substring(0, 1) != "{")//去掉系统自动生成的信息
                     {
-                        listBox1.Items.Add(strItem);//将子项添加到ListBox控件中
+                        richTextBox1.Text += "取的已安裝軟體名稱 : " + strItem + "\n";
                     }
                 }
             }
@@ -39,3 +41,6 @@ namespace LocalSoftWare
         }
     }
 }
+
+
+

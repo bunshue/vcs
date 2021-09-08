@@ -18,7 +18,7 @@ namespace ImageViewer
         /// <summary>
         /// 開いた画像ファイル名
         /// </summary>
-        private string _openedFileName;
+        private string image_filename;
         /// <summary>
         /// 画像データ
         /// </summary>
@@ -46,7 +46,7 @@ namespace ImageViewer
         /// <summary>
         /// マウスをクリックした位置の保持用
         /// </summary>
-        private PointF _oldPoint;
+        private PointF point_old;
         /// <summary>
         /// アフィン変換行列
         /// </summary>
@@ -174,8 +174,8 @@ namespace ImageViewer
             //（クリックしただけではMouseWheelイベントが有効にならない）
             pictureBox1.Focus();
             // マウスをクリックした位置の記録
-            _oldPoint.X = e.X;
-            _oldPoint.Y = e.Y;
+            point_old.X = e.X;
+            point_old.Y = e.Y;
             // マウスダウンフラグ
             flag_mouse_down = true;
         }
@@ -186,13 +186,13 @@ namespace ImageViewer
             if (flag_mouse_down == true)
             {
                 // 画像の移動
-                _matAffine.Translate(e.X - _oldPoint.X, e.Y - _oldPoint.Y, MatrixOrder.Append);
+                _matAffine.Translate(e.X - point_old.X, e.Y - point_old.Y, MatrixOrder.Append);
                 // 画像の描画
                 DrawImage();
 
                 // ポインタ位置の保持
-                _oldPoint.X = e.X;
-                _oldPoint.Y = e.Y;
+                point_old.X = e.X;
+                point_old.Y = e.Y;
             }
 
             // マウスポインタの位置の輝度値表示
@@ -256,15 +256,18 @@ namespace ImageViewer
 
         private void pictureBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+            richTextBox1.Text += "pictureBox1_PreviewKeyDown\n";
             if ((e.KeyCode == Keys.Right) || (e.KeyCode == Keys.Down))
             {
                 // 次の画像ファイルを開く
-                OpenNextFile(_openedFileName);
+                richTextBox1.Text += "pictureBox1_PreviewKeyDown 右 下\n";
+                OpenNextFile(image_filename);
             }
             else if ((e.KeyCode == Keys.Left) || (e.KeyCode == Keys.Up))
             {
                 // 前の画像ファイルを開く
-                OpenPreviousFile(_openedFileName);
+                richTextBox1.Text += "pictureBox1_PreviewKeyDown 左 上\n";
+                OpenPreviousFile(image_filename);
             }
         }
 
@@ -272,12 +275,14 @@ namespace ImageViewer
         {
             if (e.Button == MouseButtons.Left)
             {
+                richTextBox1.Text += "全螢幕顯示圖片\n";
                 // 画像全体を表示
                 ZoomFit(ref _matAffine, image, pictureBox1);
             }
 
             if (e.Button == MouseButtons.Right)
             {
+                richTextBox1.Text += "原始比例顯示圖片\n";
                 // マウスポインタ周りに等倍表示
                 ScaleAt(ref _matAffine, 1f / _matAffine.Elements[0], e.Location);
             }
@@ -306,6 +311,10 @@ namespace ImageViewer
             {
                 bitmap1.Dispose();
             }
+
+            richTextBox1.Text += "開啟檔案 : " + filename + "\n";
+            //richTextBox1.Text += "開啟檔案 : " + Path.GetFileName(filename) + "\n";   簡檔名
+
             image = new ImagingSolution.Imaging.ImageData(filename);
             // 表示用
             bitmap1 = image.ToBitmap();
@@ -322,12 +331,11 @@ namespace ImageViewer
 
             // 画像全体を表示
             ZoomFit(ref _matAffine, image, pictureBox1);
+
             // 画像の描画
             DrawImage();
 
-            _openedFileName = filename;
-
-            this.Text = Path.GetFileName(filename) + " - ImageViewer";
+            image_filename = filename;
         }
 
         /// <summary>
@@ -345,7 +353,7 @@ namespace ImageViewer
                 return;
             }
 
-            // ピクチャボックスのクリア
+            // pictureBoxのクリア
             g.Clear(pictureBox1.BackColor);
 
             // 描画先の座標をアフィン変換で求める（左上、右上、左下の順）
@@ -376,11 +384,11 @@ namespace ImageViewer
         }
 
         /// <summary>
-        /// 画像をピクチャボックスのサイズに合わせて全体に表示するアフィン変換行列を求める
+        /// 画像をpictureBoxのサイズに合わせて全体に表示するアフィン変換行列を求める
         /// </summary>
         /// <param name="mat">アフィン変換行列</param>
         /// <param name="image">画像データ</param>
-        /// <param name="dst">描画先のピクチャボックス</param>
+        /// <param name="dst">描画先のpictureBox</param>
         private void ZoomFit(ref Matrix mat, ImagingSolution.Imaging.ImageData image, PictureBox dst)
         {
             // アフィン変換行列の初期化（単位行列へ）
@@ -393,19 +401,24 @@ namespace ImageViewer
 
             float scale;
 
+            //richTextBox1.Text += "source W = " + srcWidth.ToString() + ", H = " + srcHeight.ToString() + "\n";
+            //richTextBox1.Text += "destination W = " + dstWidth.ToString() + ", H = " + dstHeight.ToString() + "\n";
+
             // 縦に合わせるか？横に合わせるか？
             if (srcHeight * dstWidth > dstHeight * srcWidth)
             {
-                // ピクチャボックスの縦方法に画像表示を合わせる場合
+                // pictureBoxの縦方法に画像表示を合わせる場合
                 scale = dstHeight / (float)srcHeight;
+                //richTextBox1.Text += "a scale = " + scale.ToString() + "\n";
                 mat.Scale(scale, scale, MatrixOrder.Append);
                 // 中央へ平行移動
                 mat.Translate((dstWidth - srcWidth * scale) / 2f, 0f, MatrixOrder.Append);
             }
             else
             {
-                // ピクチャボックスの横方法に画像表示を合わせる場合
+                // pictureBoxの横方法に画像表示を合わせる場合
                 scale = dstWidth / (float)srcWidth;
+                //richTextBox1.Text += "b scale = " + scale.ToString() + "\n";
                 mat.Scale(scale, scale, MatrixOrder.Append);
                 // 中央へ平行移動
                 mat.Translate(0f, (dstHeight - srcHeight * scale) / 2f, MatrixOrder.Append);
@@ -417,7 +430,7 @@ namespace ImageViewer
         /// </summary>
         /// <param name="mat">画像を表示しているアフィン変換行列</param>
         /// <param name="image">表示している画像</param>
-        /// <param name="pointPictureBox">表示先のピクチャボックス</param>
+        /// <param name="pointPictureBox">表示先のpictureBox</param>
         private void DispPixelInfo(Matrix mat, ImagingSolution.Imaging.ImageData image, PointF pointPictureBox)
         {
             if (image == null)
@@ -425,7 +438,7 @@ namespace ImageViewer
                 return;
             }
 
-            // ピクチャボックス→画像上の座標のアフィン変換行列
+            // pictureBox→画像上の座標のアフィン変換行列
             var matInvert = mat.Clone();
             matInvert.Invert();
 
@@ -439,13 +452,8 @@ namespace ImageViewer
 
             string bright = " = ";
 
-            if (
-                (picX >= 0) &&              // ポインタ座標が画像の範囲内の場合
-                (picY >= 0) &&
-                (picX < image.Width) &&
-                (picY < image.Height) &&
-                (image.ImageBit >= 24)    // カラー画像の場合
-                )
+            // ポインタ座標が画像の範囲内の場合                                                    カラー画像の場合
+            if ((picX >= 0) && (picY >= 0) && (picX < image.Width) && (picY < image.Height) && (image.ImageBit >= 24))
             {
                 bright += "(" +
                     image[picY, picX, 2].ToString() + ", " +    // R
@@ -468,21 +476,17 @@ namespace ImageViewer
         /// <returns></returns>
         private bool IsImageFile(string filename)
         {
-            if (File.Exists(filename) == false) return false;
-
-            // ファイル形式の確認
-            string ext = Path.GetExtension(filename).ToLower();
-            if (
-                (ext != ".bmp") &&
-                (ext != ".jpg") &&
-                (ext != ".png") &&
-                (ext != ".tif") &&
-                (ext != ".ico")
-                )
+            if (File.Exists(filename) == false)
             {
                 return false;
             }
 
+            // ファイル形式の確認
+            string ext = Path.GetExtension(filename).ToLower();
+            if ((ext != ".bmp") && (ext != ".jpg") && (ext != ".png") && (ext != ".tif") && (ext != ".ico"))
+            {
+                return false;
+            }
             return true;
         }
 
@@ -492,6 +496,7 @@ namespace ImageViewer
         /// <param name="filename">基準となるファイル名</param>
         private void OpenNextFile(string filename)
         {
+            richTextBox1.Text += "OpenNextFile, filename = " + filename + "\n";
             if (filename == "")
             {
                 return;
@@ -520,6 +525,7 @@ namespace ImageViewer
         /// <param name="filename">基準となるファイル名</param>
         private void OpenPreviousFile(string filename)
         {
+            richTextBox1.Text += "OpenNextFile, filename = " + filename + "\n";
             if (filename == "")
             {
                 return;

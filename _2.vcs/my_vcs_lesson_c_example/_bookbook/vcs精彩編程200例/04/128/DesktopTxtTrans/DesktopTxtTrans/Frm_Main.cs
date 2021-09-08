@@ -13,11 +13,6 @@ namespace DesktopTxtTrans
 {
     public partial class Frm_Main : Form
     {
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
-
         [DllImport("user32.dll")]
         public static extern int GetDesktopWindow();//获得代表整个屏幕的一个窗口（桌面窗口）句柄
         [DllImport("user32.dll")]//在窗口列表中寻找与指定条件相符的第一个子窗口
@@ -31,7 +26,17 @@ namespace DesktopTxtTrans
         private const int wMsg2 = 0x1024;
         private const uint lParam1 = 0xffffffff;
         private const uint lParam2 = 0x00ffffff;
-        Rectangle lpRect = new Rectangle(0,0,0,0);
+        Rectangle lpRect = new Rectangle(0, 0, 0, 0);
+
+        public Frm_Main()
+        {
+            InitializeComponent();
+        }
+
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -48,3 +53,5 @@ namespace DesktopTxtTrans
         }
     }
 }
+
+

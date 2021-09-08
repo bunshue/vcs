@@ -1,5 +1,10 @@
 
 
+            //打开注册表
+            string regeditstr = Environment.GetEnvironmentVariable("WinDir");//WinDir系统环境变量的名称
+            System.Diagnostics.Process.Start(regeditstr + "\\regedit.exe");//打开注册表
+
+
 //開啟檔案總管到指定的目錄
 
         // Opening the record directory 

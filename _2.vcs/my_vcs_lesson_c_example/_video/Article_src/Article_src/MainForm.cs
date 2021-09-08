@@ -145,7 +145,10 @@ namespace WebcamSecurity
                 this.AutoRecord1.Checked = (option[1] == '0') ? false : true;
                 this.BeepOnMotionCheck1.Checked = (option[2] == '0') ? false : true;
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+            }
+
             try
             {
                 DataRow r = this.config.Options.Select("Key = 'Camera2'")[0];
@@ -154,7 +157,10 @@ namespace WebcamSecurity
                 this.AutoRecord2.Checked = (option[1] == '0') ? false : true;
                 this.BeepOnMotionCheck2.Checked = (option[2] == '0') ? false : true;
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+            }
+
             try
             {
                 DataRow r = this.config.Options.Select("Key = 'Camera3'")[0];
@@ -163,7 +169,10 @@ namespace WebcamSecurity
                 this.AutoRecord3.Checked = (option[1] == '0') ? false : true;
                 this.BeepOnMotionCheck3.Checked = (option[2] == '0') ? false : true;
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+            }
+
             try
             {
                 DataRow r = this.config.Options.Select("Key = 'Camera4'")[0];
@@ -172,8 +181,11 @@ namespace WebcamSecurity
                 this.AutoRecord4.Checked = (option[1] == '0') ? false : true;
                 this.BeepOnMotionCheck4.Checked = (option[2] == '0') ? false : true;
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+            }
         }
+        
         // the FilterInfoCollection is where we get information about VideoCaptureDevices
         private FilterInfoCollection webcam;
 
@@ -183,9 +195,9 @@ namespace WebcamSecurity
             // an instance of FilterInfoCollection is created to fetch available VideoCaptureDevices
             webcam = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             // we create our CameraMonitors
-            for (int i = 0; i < webcam.Count && i<4; i++)
+            for (int i = 0; i < webcam.Count && i < 4; i++)
             {
-                this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i],webcam[i].MonikerString,"Camera"+(i+1));
+                this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i], webcam[i].MonikerString, "Camera" + (i + 1));
                 // Enable the user controls coressponding to the CameraMonitor
                 this.camPanels[i].Enabled = true;
                 this.camOptions[i].Enabled = true;
@@ -226,9 +238,12 @@ namespace WebcamSecurity
                 {
                     this.CamMonitor[i].RecordingPath = this.RecordingPathInput.Text;
                 }
-                catch (NullReferenceException ex) { }
+                catch (NullReferenceException ex)
+                {
+                }
             }
         }
+        
         // this method will stop recording and running cameras 
         // also save the options to an xml file
         private void StopCameras(object sender, FormClosingEventArgs e)
@@ -240,7 +255,9 @@ namespace WebcamSecurity
                     this.CamMonitor[i].StopRecording();
                     this.CamMonitor[i].StopCapture();
                 }
-                catch (Exception ex) { }
+                catch (Exception ex)
+                {
+                }
             }
             // save options to an  xml file
             this.SaveOptions();
@@ -274,7 +291,9 @@ namespace WebcamSecurity
                     {
                         this.CamMonitor[i].RecordingPath = this.RecordingPathInput.Text;
                     }
-                    catch (NullReferenceException ex) { }
+                    catch (NullReferenceException ex)
+                    {
+                    }
                 }
             }
         }
@@ -364,7 +383,8 @@ namespace WebcamSecurity
             {
                 this.toggleOption(0, 0, true);
             }
-            else {
+            else
+            {
                 this.toggleOption(0, 0, false);
             }
         }
@@ -557,7 +577,6 @@ namespace WebcamSecurity
         {
             this.SetFocus(0);
         }
-
-        
     }
 }
+
