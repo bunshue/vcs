@@ -34,12 +34,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_open = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Black;
+            this.pictureBox1.BackColor = System.Drawing.Color.Pink;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
@@ -102,11 +103,22 @@
             this.bt_open.UseVisualStyleBackColor = true;
             this.bt_open.Click += new System.EventHandler(this.bt_open_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(959, 86);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(54, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Info";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1013, 754);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.bt_open);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.label2);
@@ -132,5 +144,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_open;
+        private System.Windows.Forms.Button button1;
     }
 }

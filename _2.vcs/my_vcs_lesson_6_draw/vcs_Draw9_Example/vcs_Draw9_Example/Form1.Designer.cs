@@ -629,11 +629,12 @@
             // 
             // button44
             // 
-            this.button44.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button44.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button44.Location = new System.Drawing.Point(1222, 360);
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(100, 40);
             this.button44.TabIndex = 70;
+            this.button44.Text = "畫2D陣列2";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
             // 

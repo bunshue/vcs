@@ -101,6 +101,7 @@ namespace ImageViewer
             label2.Text = "ImageInfo";
 
             bt_open.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_open.Size.Width, richTextBox1.Location.Y + 100);
+            button1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_open.Size.Width, richTextBox1.Location.Y + 150);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_exit_setup();
@@ -496,11 +497,11 @@ namespace ImageViewer
         /// <param name="filename">基準となるファイル名</param>
         private void OpenNextFile(string filename)
         {
-            richTextBox1.Text += "OpenNextFile, filename = " + filename + "\n";
             if (filename == "")
             {
                 return;
             }
+            richTextBox1.Text += "OpenNextFile, filename = " + filename + "\n";
 
             // 指定したファイルのディレクトリ
             var directory = Path.GetDirectoryName(filename);
@@ -525,11 +526,11 @@ namespace ImageViewer
         /// <param name="filename">基準となるファイル名</param>
         private void OpenPreviousFile(string filename)
         {
-            richTextBox1.Text += "OpenNextFile, filename = " + filename + "\n";
             if (filename == "")
             {
                 return;
             }
+            richTextBox1.Text += "OpenPreviousFile, filename = " + filename + "\n";
 
             // 指定したファイルのディレクトリ
             var directory = Path.GetDirectoryName(filename);
@@ -557,6 +558,7 @@ namespace ImageViewer
             openFileDialog1.Filter = "画像ﾌｧｲﾙ(*.bmp,*.jpg,*.png,*.tif,*.ico)|*.bmp;*.jpg;*.png;*.tif;*.ico";
             // ダイアログの表示 （Cancelボタンがクリックされた場合は何もしない）
 
+            openFileDialog1.FileName = "ims_image.bmp";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 // 画像ファイルを開く
@@ -566,6 +568,71 @@ namespace ImageViewer
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (image == null)
+            {
+                return;
+            }
+
+            //image = new ImagingSolution.Imaging.ImageData(filename);
+            // 表示用
+            //bitmap1 = image.ToBitmap();
+
+            //private void DispPixelInfo(Matrix mat, ImagingSolution.Imaging.ImageData image, PointF pointPictureBox)
+
+            richTextBox1.Text += "image.Channel = " + image.Channel.ToString() + "\n";
+            richTextBox1.Text += "image.Stride = " + image.Stride.ToString() + "\n";
+            richTextBox1.Text += "image.Width = " + image.Width.ToString() + "\n";
+            richTextBox1.Text += "image.Height = " + image.Height.ToString() + "\n";
+
+
+            richTextBox1.Text += image.Width.ToString() + " x " + image.Height.ToString() + " x " + image.ImageBit.ToString() + "bit\n";
+
+            int i, j;
+            int x_st = 200;
+            int y_st = 200;
+            for (j = 0; j < 30; j+=5)
+            {
+                for (i = 0; i < 30; i+=5)
+                {
+                    //image[x_st + i, y_st + j, 0] = (i * 5 + j * 5) % 256;
+                    //image[x_st + i, y_st + j, 1] = (i * 5 + j * 5) % 256;
+                    //image[x_st + i, y_st + j, 2] = (i * 5 + j * 5) % 256;
+
+                    //image[x_st + i, y_st + j, 0] = 255;     //B
+                    //image[x_st + i, y_st + j, 1] = 0;     //G
+                    //image[x_st + i, y_st + j, 2] = 0;     //R
+                    image[x_st + i, y_st + j, 3] = 0; //A
+                    //richTextBox1.Text += image[x_st + i, y_st + j, 3].ToString() + " ";
+                }
+            }
+
+
+
+            // 表示用
+            bitmap1 = image.ToBitmap();
+
+            // 画像サイズ
+            label2.Text = image.Width.ToString() + " x " + image.Height.ToString() + " x " + image.ImageBit.ToString() + "bit";
+
+            // 表示する画像の領域
+            _srcRect = new RectangleF(-0.5f, -0.5f, image.Width, image.Height);
+            // 描画元を指定する３点の座標（左上、右上、左下の順）
+            _srcPoints[0] = new PointF(_srcRect.Left, _srcRect.Top);
+            _srcPoints[1] = new PointF(_srcRect.Right, _srcRect.Top);
+            _srcPoints[2] = new PointF(_srcRect.Left, _srcRect.Bottom);
+
+            // 画像全体を表示
+            ZoomFit(ref _matAffine, image, pictureBox1);
+
+            // 画像の描画
+            DrawImage();
+
+
+
         }
     }
 }
