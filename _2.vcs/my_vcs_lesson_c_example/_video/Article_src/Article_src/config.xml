@@ -2,11 +2,11 @@
 <Config xmlns="http://tempuri.org/Config.xsd">
   <Options>
     <Key>Camera1</Key>
-    <Value>000</Value>
+    <Value>011</Value>
   </Options>
   <Options>
     <Key>Camera2</Key>
-    <Value>000</Value>
+    <Value>101</Value>
   </Options>
   <Options>
     <Key>Camera3</Key>

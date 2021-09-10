@@ -23,7 +23,6 @@ namespace WebcamSecurity
         // Indexed arrays containing referces to the user interface components
         // so they can be easily accessed later on
         PictureBox[] DisplayReference = new PictureBox[4];
-        GroupBox[] camPanels = new GroupBox[4];
         GroupBox[] camOptions = new GroupBox[4];
         // The Configuration data set where we will store all user options (recording path , etc..)
         Config config;
@@ -38,20 +37,11 @@ namespace WebcamSecurity
             this.DisplayReference[2] = this.Display_Cam3;
             this.DisplayReference[3] = this.Display_Cam4;
 
-            this.camPanels[0] = this.groupBox1;
-            this.camPanels[1] = this.groupBox2;
-            this.camPanels[2] = this.groupBox3;
-            this.camPanels[3] = this.groupBox4;
-
             this.camOptions[0] = this.groupBox5;
             this.camOptions[1] = this.groupBox6;
             this.camOptions[2] = this.groupBox7;
             this.camOptions[3] = this.groupBox8;
-            // we disable all the user controls (will be activated later when we load cameras)
-            this.camPanels[0].Enabled = false;
-            this.camPanels[1].Enabled = false;
-            this.camPanels[2].Enabled = false;
-            this.camPanels[3].Enabled = false;
+
             this.camOptions[0].Enabled = false;
             this.camOptions[1].Enabled = false;
             this.camOptions[2].Enabled = false;
@@ -185,13 +175,15 @@ namespace WebcamSecurity
             {
             }
         }
-        
+
         // the FilterInfoCollection is where we get information about VideoCaptureDevices
         private FilterInfoCollection webcam;
 
         // When the form loads
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             // an instance of FilterInfoCollection is created to fetch available VideoCaptureDevices
             webcam = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             // we create our CameraMonitors
@@ -199,7 +191,6 @@ namespace WebcamSecurity
             {
                 this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i], webcam[i].MonikerString, "Camera" + (i + 1));
                 // Enable the user controls coressponding to the CameraMonitor
-                this.camPanels[i].Enabled = true;
                 this.camOptions[i].Enabled = true;
             }
 
@@ -243,7 +234,47 @@ namespace WebcamSecurity
                 }
             }
         }
-        
+
+        void show_item_location()
+        {
+            int W = 640 * 9 / 10;
+            int H = 480 * 9 / 10;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 50;
+            int dy = H + 50;
+
+            Display_Cam1.Size = new Size(W, H);
+            Display_Cam2.Size = new Size(W, H);
+            Display_Cam3.Size = new Size(W, H);
+            Display_Cam4.Size = new Size(W, H);
+
+            Display_Cam1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            Display_Cam2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            Display_Cam3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            Display_Cam4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+
+            W = 120;
+            H = 30;
+            RecordButton1.Size = new Size(W, H);
+            RecordButton2.Size = new Size(W, H);
+            RecordButton3.Size = new Size(W, H);
+            RecordButton4.Size = new Size(W, H);
+
+            //W = 640 * 9 / 10;
+            H = 480 * 9 / 10;
+            RecordButton1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + 10);
+            RecordButton2.Location = new Point(x_st + dx * 1, y_st + dy * 0 + H + 10);
+            RecordButton3.Location = new Point(x_st + dx * 0, y_st + dy * 1 + H + 10);
+            RecordButton4.Location = new Point(x_st + dx * 1, y_st + dy * 1 + H + 10);
+
+
+            panel1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(panel1.Size.Width + 100, panel1.Size.Height);
+            richTextBox1.Location = new Point(x_st + dx * 2 + panel1.Size.Width + 50, y_st + dy * 0);
+        }
+
         // this method will stop recording and running cameras 
         // also save the options to an xml file
         private void StopCameras(object sender, FormClosingEventArgs e)
@@ -519,63 +550,6 @@ namespace WebcamSecurity
             {
                 this.toggleOption(3, 2, false);
             }
-        }
-
-        private void SetFocus(int camIndex)
-        {
-            switch (camIndex)
-            {
-                case 0:
-                    this.splitContainer1.Panel1Collapsed = false;
-                    this.splitContainer1.Panel2Collapsed = false;
-                    this.splitContainer2.Panel1Collapsed = false;
-                    this.splitContainer2.Panel2Collapsed = false;
-                    this.splitContainer3.Panel1Collapsed = false;
-                    this.splitContainer3.Panel2Collapsed = false;
-                    break;
-                case 1:
-                    this.splitContainer1.Panel2Collapsed = true;
-                    this.splitContainer2.Panel2Collapsed = true;
-                    break;
-                case 2:
-                    this.splitContainer1.Panel2Collapsed = true;
-                    this.splitContainer2.Panel1Collapsed = true;
-                    break;
-                case 3:
-                    this.splitContainer1.Panel1Collapsed = true;
-                    this.splitContainer3.Panel2Collapsed = true;
-                    break;
-                case 4:
-                    this.splitContainer1.Panel1Collapsed = true;
-                    this.splitContainer3.Panel1Collapsed = true;
-                    break;
-
-            }
-        }
-
-        private void buttonFocusCam1_Click(object sender, EventArgs e)
-        {
-            this.SetFocus(1);
-        }
-
-        private void buttonFocusCam2_Click(object sender, EventArgs e)
-        {
-            this.SetFocus(2);
-        }
-
-        private void buttonFocusCam3_Click(object sender, EventArgs e)
-        {
-            this.SetFocus(3);
-        }
-
-        private void buttonFocusCam4_Click(object sender, EventArgs e)
-        {
-            this.SetFocus(4);
-        }
-
-        private void buttonResetFocus_Click(object sender, EventArgs e)
-        {
-            this.SetFocus(0);
         }
     }
 }

@@ -207,7 +207,7 @@ namespace 真的只是一個測試1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -564,7 +564,7 @@ namespace 真的只是一個測試1
 
         }
 
-        List<double[]> pts = new List<double[]>();    //二維List for double
+        List<double[]> pts = new List<double[]>();    //二維List for double array
         int g = 10;
 
 
@@ -573,10 +573,10 @@ namespace 真的只是一個測試1
         {
             double t = 0;
 
-            for (t = 0; t <= 10.01; t += 0.1)
+            for (t = 0; t <= 5.0; t += 0.1)
             {
                 //richTextBox1.Text += "t = " + t.ToString() + "\n";
-                pts.Add(new double[] { t, g * t * t / 2 });
+                pts.Add(new double[] { t, g * t * t / 2, g * t * t * t / 2, Math.Sqrt(g * t * t / 2) });
             }
 
             int len = pts.Count;
@@ -585,11 +585,8 @@ namespace 真的只是一個測試1
             int i;
             for (i = 0; i < len; i++)
             {
-                richTextBox1.Text += pts[i][0].ToString("n3") + "\t" + pts[i][1].ToString("n3") + "\n";
+                richTextBox1.Text += pts[i][0].ToString("n3") + "\t" + pts[i][1].ToString("n3") + "\t" + pts[i][2].ToString("n3") + "\t" + pts[i][3].ToString("n3") + "\n";
             }
-
-
-
         }
 
         //多筆資料比較
@@ -763,10 +760,23 @@ namespace 真的只是一個測試1
             richTextBox1.AppendText("恢復原色\n");
             richTextBox1.AppendText("恢復原色\n");
 
+        }
 
+        private void button25_Click(object sender, EventArgs e)
+        {
+            //使用 GetBytes() 方法將字串轉換為位元組陣列
+
+
+            string myString = "This is a string.";
+            byte[] byteArray = Encoding.ASCII.GetBytes(myString);
+            richTextBox1.Text += "The Byte Array is:\n";
+            foreach (byte bytes in byteArray)
+            {
+                richTextBox1.Text += bytes.ToString() + "\n";
+            }
 
 
         }
-
     }
 }
+

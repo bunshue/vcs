@@ -1,4 +1,72 @@
 
+                string appDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().GetName().CodeBase);
+                path = Path.Combine(appDir, path);
+
+        private static string FFMPEG_EXE_PATH = CheckRelativePath(@"ffmpeg\ffmpeg.exe");
+        private static string FFPROBE_EXE_PATH = CheckRelativePath(@"ffmpeg\ffprobe.exe");
+
+            string cmdParams = String.Format("-hide_banner -ss {0} -i {1} -r 1 -t 1 -f image2 {2}", atPositioin, filename, tmpFileName);
+
+                // Execute command to let FFMPEG extract the frame
+                Execute(FFMPEG_EXE_PATH, cmdParams);
+
+        private static string Execute(string exePath, string parameters)
+        {
+            string result = String.Empty;
+
+            using (Process p = new Process())
+            {
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.FileName = exePath;
+                p.StartInfo.Arguments = parameters;
+                p.Start();
+                p.WaitForExit();
+
+                result = p.StandardOutput.ReadToEnd();
+            }
+
+            return result;
+        }
+
+
+
+在 C# 中使用 File.ReadAllText() 方法將檔案讀取為字串
+string text = File.ReadAllText(@"C:\File\file.txt");
+Console.WriteLine(text);
+
+在 C# 中使用 StreamReader.ReadToEnd() 方法將檔案讀取為字串
+StreamReader fileReader = new StreamReader(@"C:\File\file.txt");
+string text = fileReader.ReadToEnd();
+Console.WriteLine(text);			
+
+使用 C# 中的 FileInfo.Length 屬性獲取檔案大小
+
+
+
+            FileInfo fileinfo = new FileInfo("dark.jpg");
+            Console.WriteLine(fileinfo.Length);
+FileInfo 類提供了用於在 C# 中建立，開啟，複製，刪除和移動檔案的方法。
+
+
+在 C# 中使用 BitConverter.ToString() 方法將字串轉換為十六進位制
+
+            string decString = "0123456789";
+            byte[] bytes = Encoding.Default.GetBytes(decString);
+            string hexString = BitConverter.ToString(bytes);
+            hexString = hexString.Replace("-", "");
+            Console.WriteLine(hexString);
+
+
+
+在 C# 中使用 String.Format() 方法將字串轉換為十六進位制
+            string decString = "0123456789";
+            var hexString = string.Join("",
+                decString.Select(c => String.Format("{0:X2}", Convert.ToInt32(c))));
+            Console.WriteLine(hexString);
+
+
 
             //打开注册表
             string regeditstr = Environment.GetEnvironmentVariable("WinDir");//WinDir系统环境变量的名称

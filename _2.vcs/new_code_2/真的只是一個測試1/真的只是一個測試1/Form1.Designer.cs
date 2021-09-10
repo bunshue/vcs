@@ -320,7 +320,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(155, 55);
             this.button20.TabIndex = 24;
-            this.button20.Text = "二維List for double";
+            this.button20.Text = "二維List for double array";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -369,12 +369,14 @@
             // 
             // button25
             // 
-            this.button25.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button25.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button25.Location = new System.Drawing.Point(334, 327);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(155, 55);
             this.button25.TabIndex = 29;
+            this.button25.Text = "使用 GetBytes() 方法將字串轉換為位元組陣列";
             this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // button26
             // 

@@ -123,6 +123,13 @@ namespace vcs_Draw9_Example
             button43.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button44.Location = new Point(x_st + dx * 4, y_st + dy * 8);
 
+            button45.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button46.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button47.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button48.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
+
+
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
 
             bt_save.Location = new Point(x_st + dx * 4, y_st + dy * 15);
@@ -6693,6 +6700,9 @@ namespace vcs_Draw9_Example
 
             int max = gray[0, 0];
             int min = gray[0, 0];
+            int diff = 0;
+            int center = gray[7, 7];
+            double mean = 0;
 
             for (j = 0; j < 15; j++)
             {
@@ -6705,16 +6715,21 @@ namespace vcs_Draw9_Example
                 }
             }
 
+            diff = max - min;
+            mean = (max + min) / 2.0;
+
             richTextBox1.Text += "max = " + max.ToString() + "\n";
             richTextBox1.Text += "min = " + min.ToString() + "\n";
-            richTextBox1.Text += "diff = " + (max - min).ToString() + "\n";
+            richTextBox1.Text += "diff = " + diff.ToString() + "\n";
+            richTextBox1.Text += "center = " + center.ToString() + "\n";
+            richTextBox1.Text += "mean = " + mean.ToString() + "\n";
 
 
             for (j = 0; j < 15; j++)
             {
                 for (i = 0; i < 15; i++)
                 {
-                    richTextBox1.Text += (gray[i, j]-min).ToString("D3") + "  ";
+                    richTextBox1.Text += (gray[i, j] - min).ToString("D3") + "  ";
                 }
                 richTextBox1.Text += "\n";
             }
@@ -6737,6 +6752,8 @@ namespace vcs_Draw9_Example
             byte rr = 0;
             byte gg = 0;
             byte bb = 0;
+
+            //ratio = 1;
 
             for (yy = 0; yy < height; yy++)
             {
@@ -6772,5 +6789,90 @@ namespace vcs_Draw9_Example
             pictureBox1.Image = bitmap1;
 
         }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+            int width = 640;
+            int height = 480;
+
+            pictureBox1.Size = new Size(width, height);
+            bitmap1 = new Bitmap(width, height);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            Pen p = new Pen(Color.Red, 5);
+
+            int i;
+            int j;
+
+            int flag_right_left_cnt = 0;
+            int flag_down_up_cnt = 0;
+            int awb_step = 10;
+            int awb_window_size = 200;     //AWB window size width, height
+            int awb_block = 32;     //AWB block size width, height
+
+            int x_st = 0;
+            int y_st = 0;
+            int ww = awb_block;
+            int hh = awb_block;
+
+            int w;
+            int h;
+            w = bitmap1.Width;
+            h = bitmap1.Height;
+
+            x_st = w / 2 - awb_window_size / 2;
+            y_st = h / 2 - awb_window_size / 2;
+
+            Pen p1 = new Pen(Color.Silver, 1);  //一般情況 中間大框框 為銀色
+
+            g.DrawRectangle(p1, x_st, y_st, awb_window_size, awb_window_size);   //畫中間那個大框框 200 X 200
+
+            for (j = -7; j <= 7; j += 7)
+            {
+                for (i = -7; i <= 7; i += 7)
+                {
+                        flag_right_left_cnt = i;
+                        flag_down_up_cnt = j;
+
+                        int WW = 640 * 1;
+                        int HH = 480 * 1;
+
+                        x_st = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step + 0;
+
+                        y_st = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step + 0;
+
+                        richTextBox1.Text += "refresh_picturebox2 x_st = " + x_st.ToString() + " y_st = " + y_st.ToString() + " ww = " + ww.ToString() + " hh = " + hh.ToString() + "\n";
+
+                        g.DrawRectangle(new Pen(Color.Red, 2), x_st, y_st, ww, hh);    //draw boundary
+
+                        pictureBox1.Image = bitmap1;
+
+                        delay(10);
+                }
+            }
+
+
+			
+
+            richTextBox1.Text += "\n";
+            pictureBox1.Image = bitmap1;
+
+
+
+        }
+
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(int delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        }
+
+
     }
 }

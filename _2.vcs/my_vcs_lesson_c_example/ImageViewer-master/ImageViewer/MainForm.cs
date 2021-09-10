@@ -233,21 +233,24 @@ namespace ImageViewer
         // マウスホイールイベント
         private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
         {
+            if (image == null)
+            {
+                return;
+            }
+
             if (e.Delta > 0)
             {
-                // 拡大
                 if (_matAffine.Elements[0] < 100)  // X方向の倍率を代表してチェック
                 {
-                    // ポインタの位置周りに拡大
+                    richTextBox1.Text += "放大 在 " + e.Location.ToString() + "\tr=" + _matAffine.Elements[0].ToString() + "\n";
                     ScaleAt(ref _matAffine, 1.5f, e.Location);
                 }
             }
             else
             {
-                // 縮小
                 if (_matAffine.Elements[0] > 0.01)  // X方向の倍率を代表してチェック
                 {
-                    // ポインタの位置周りに縮小
+                    richTextBox1.Text += "縮小 在 " + e.Location.ToString() + "\tr=" + _matAffine.Elements[0].ToString() + "\n";
                     ScaleAt(ref _matAffine, 1.0f / 1.5f, e.Location);
                 }
             }
@@ -552,7 +555,7 @@ namespace ImageViewer
 
         private void bt_open_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\_pic_combine\ims_image.bmp";
+            string filename = @"C:\______test_files\ims_image.bmp";
             OpenImageFile(filename);
 
             /*
@@ -578,8 +581,6 @@ namespace ImageViewer
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-
 
         }
     }
