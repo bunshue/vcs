@@ -543,6 +543,7 @@ namespace ImageViewer
             {
                 if (IsImageFile(files[i]))
                 {
+                    richTextBox1.Text += "old index = " + index.ToString() + "\ti = " + i.ToString() + "\tfilename = " + files[i] + "\n";
                     OpenImageFile(files[i]);
                     break;
                 }
@@ -551,6 +552,10 @@ namespace ImageViewer
 
         private void bt_open_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\_pic_combine\ims_image.bmp";
+            OpenImageFile(filename);
+
+            /*
             // ファイルを開くダイアログの作成 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = @"C:\______test_files\";
@@ -568,68 +573,11 @@ namespace ImageViewer
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
+            */
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (image == null)
-            {
-                return;
-            }
-
-            //image = new ImagingSolution.Imaging.ImageData(filename);
-            // 表示用
-            //bitmap1 = image.ToBitmap();
-
-            //private void DispPixelInfo(Matrix mat, ImagingSolution.Imaging.ImageData image, PointF pointPictureBox)
-
-            richTextBox1.Text += "image.Channel = " + image.Channel.ToString() + "\n";
-            richTextBox1.Text += "image.Stride = " + image.Stride.ToString() + "\n";
-            richTextBox1.Text += "image.Width = " + image.Width.ToString() + "\n";
-            richTextBox1.Text += "image.Height = " + image.Height.ToString() + "\n";
-
-
-            richTextBox1.Text += image.Width.ToString() + " x " + image.Height.ToString() + " x " + image.ImageBit.ToString() + "bit\n";
-
-            int i, j;
-            int x_st = 200;
-            int y_st = 200;
-            for (j = 0; j < 30; j+=5)
-            {
-                for (i = 0; i < 30; i+=5)
-                {
-                    //image[x_st + i, y_st + j, 0] = (i * 5 + j * 5) % 256;
-                    //image[x_st + i, y_st + j, 1] = (i * 5 + j * 5) % 256;
-                    //image[x_st + i, y_st + j, 2] = (i * 5 + j * 5) % 256;
-
-                    //image[x_st + i, y_st + j, 0] = 255;     //B
-                    //image[x_st + i, y_st + j, 1] = 0;     //G
-                    //image[x_st + i, y_st + j, 2] = 0;     //R
-                    image[x_st + i, y_st + j, 3] = 0; //A
-                    //richTextBox1.Text += image[x_st + i, y_st + j, 3].ToString() + " ";
-                }
-            }
-
-
-
-            // 表示用
-            bitmap1 = image.ToBitmap();
-
-            // 画像サイズ
-            label2.Text = image.Width.ToString() + " x " + image.Height.ToString() + " x " + image.ImageBit.ToString() + "bit";
-
-            // 表示する画像の領域
-            _srcRect = new RectangleF(-0.5f, -0.5f, image.Width, image.Height);
-            // 描画元を指定する３点の座標（左上、右上、左下の順）
-            _srcPoints[0] = new PointF(_srcRect.Left, _srcRect.Top);
-            _srcPoints[1] = new PointF(_srcRect.Right, _srcRect.Top);
-            _srcPoints[2] = new PointF(_srcRect.Left, _srcRect.Bottom);
-
-            // 画像全体を表示
-            ZoomFit(ref _matAffine, image, pictureBox1);
-
-            // 画像の描画
-            DrawImage();
 
 
 

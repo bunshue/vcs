@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
+
 namespace vcs_PictureBox2
 {
     public partial class Form1 : Form
@@ -24,24 +26,27 @@ namespace vcs_PictureBox2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
-            image_filename = filename;
-            Image image = Image.FromFile(filename);
-            pictureBox1.Image = image;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
+            //string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files\_pic_combine\poster_04.jpg";
 
+            OpenImageFile(filename);
+            /*
+                                    image_filename = filename;
+                                    Image image = Image.FromFile(filename);
+                                    pictureBox1.Image = image;
+                                    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                                    pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
+            */
             //pictureBox1.Size = new Size(image.Width, image.Height);
 
             this.pictureBox1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseWheel);
 
             pictureBox1.AllowDrop = true;
+            pictureBox1.Focus();
 
 
             W = this.Width;
             H = this.Height;
-            w = image.Width;
-            h = image.Height;
         }
 
         private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -79,8 +84,133 @@ namespace vcs_PictureBox2
                 //OpenPreviousFile(image_filename);
             }
 
+            if (e.KeyCode == Keys.PageDown)
+            {
+                this.Text = "pictureBox1_PreviewKeyDown 右 下, 下一張";
+                OpenNextFile(image_filename);
+            }
+            else if (e.KeyCode == Keys.PageUp)
+            {
+                this.Text = "pictureBox1_PreviewKeyDown 左 上, 上一張";
+                OpenPreviousFile(image_filename);
+            }
+            else if (e.KeyCode == Keys.Home)
+            {
+                this.Text = "pictureBox1_PreviewKeyDown 到第一張";
+                //OpenPreviousFile(image_filename);
+            }
+            else if (e.KeyCode == Keys.End)
+            {
+                this.Text = "pictureBox1_PreviewKeyDown 到最後一張";
+                //OpenPreviousFile(image_filename);
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                this.Text = "pictureBox1_PreviewKeyDown 刪除這一張";
+                //OpenPreviousFile(image_filename);
+            }
+        }
+
+        private bool IsImageFile(string filename)
+        {
+            if (File.Exists(filename) == false)
+            {
+                return false;
+            }
+
+            // ファイル形式の確認
+            string ext = Path.GetExtension(filename).ToLower();
+            if ((ext != ".bmp") && (ext != ".jpg") && (ext != ".png") && (ext != ".tif") && (ext != ".ico"))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private void OpenImageFile(string filename)
+        {
+            if (IsImageFile(filename) == false)
+            {
+                return;
+            }
+
+            image_filename = filename;
+            Image image = Image.FromFile(filename);
+            pictureBox1.Image = image;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
+
+            w = image.Width;
+            h = image.Height;
+
+            /*
+                        if (image != null)
+                        {
+                            image.Dispose();
+                        }
+                        if (bitmap1 != null)
+                        {
+                            bitmap1.Dispose();
+                        }
+            */
+            //richTextBox1.Text += "開啟檔案 : " + filename + "\n";
+            //richTextBox1.Text += "開啟檔案 : " + Path.GetFileName(filename) + "\n";   簡檔名
 
         }
+
+        private void OpenNextFile(string filename)
+        {
+            if (filename == "")
+            {
+                return;
+            }
+            //richTextBox1.Text += "OpenNextFile, filename = " + filename + "\n";
+
+            // 指定したファイルのディレクトリ
+            var directory = Path.GetDirectoryName(filename);
+            // ディレクトリ内のファイル一覧
+            var files = Directory.GetFiles(directory, "*", SearchOption.TopDirectoryOnly);
+            // 一覧からのIndex番号を取得
+            int index = Array.IndexOf(files, filename);
+
+            for (int i = index + 1; i < files.Length; i++)
+            {
+                if (IsImageFile(files[i]))
+                {
+                    OpenImageFile(files[i]);
+                    break;
+                }
+            }
+        }
+
+        private void OpenPreviousFile(string filename)
+        {
+            if (filename == "")
+            {
+                return;
+            }
+            //richTextBox1.Text += "OpenPreviousFile, filename = " + filename + "\n";
+
+            // 指定したファイルのディレクトリ
+            var directory = Path.GetDirectoryName(filename);
+            // ディレクトリ内のファイル一覧
+            var files = Directory.GetFiles(directory, "*", SearchOption.TopDirectoryOnly);
+            // 一覧からのIndex番号を取得
+            int index = Array.IndexOf(files, filename);
+
+            for (int i = index - 1; i >= 0; i--)
+            {
+                if (IsImageFile(files[i]))
+                {
+                    //richTextBox1.Text += "old index = " + index.ToString() + "\ti = " + i.ToString() + "\tfilename = " + files[i] + "\n";
+                    OpenImageFile(files[i]);
+                    break;
+                }
+            }
+        }
+
+
+
 
         int ratio = 10;
         private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
@@ -122,6 +252,7 @@ namespace vcs_PictureBox2
             //this.Text = "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
             pictureBox1_position_x_old = e.X;
             pictureBox1_position_y_old = e.Y;
+            pictureBox1.Focus();
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -146,12 +277,7 @@ namespace vcs_PictureBox2
 
             //this.Text = "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
             pictureBox1.Location = new Point(pictureBox1.Location.X + dx, pictureBox1.Location.Y + dy);
-
         }
-
-
-
-
-
     }
 }
+
