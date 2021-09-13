@@ -16,15 +16,17 @@ namespace vcs_RegisterHotKey_PrintScreen
     {
         private RegisterHotKeyClass RegisterHotKey = new RegisterHotKeyClass();
 
-        void _Regis_HotKey()
+        void Register_HotKey_Function()
         {
             save_fullscreen_to_local_drive();       //全螢幕截圖
             //this.Show();
             this.WindowState = FormWindowState.Normal;
+            this.TopMost = true;
             Application.DoEvents(); //為了顯示出來
             System.Threading.Thread.Sleep(1000);
             //this.Hide();
             this.WindowState = FormWindowState.Minimized;
+            this.TopMost = false;
         }
 
         public Form1()
@@ -36,11 +38,11 @@ namespace vcs_RegisterHotKey_PrintScreen
         {
             show_item_location();
 
-            richTextBox1.Text += "測試快捷鍵範例" + Environment.NewLine + "PrintScreen 全螢幕截圖\n";
+            richTextBox1.Text += "測試快捷鍵範例\nPrintScreen 全螢幕截圖\n";
             RegisterHotKey.Keys = Keys.PrintScreen;
             RegisterHotKey.ModKey = 0;
             RegisterHotKey.WindowHandle = this.Handle;
-            RegisterHotKey.HotKey += new RegisterHotKeyClass.HotKeyPass(_Regis_HotKey);
+            RegisterHotKey.HotKey += new RegisterHotKeyClass.HotKeyPass(Register_HotKey_Function);
             RegisterHotKey.StarHotKey();
         }
 
@@ -101,7 +103,8 @@ namespace vcs_RegisterHotKey_PrintScreen
             {
                 using (Graphics g = Graphics.FromImage(bmp))
                 {
-                    g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
+                    //             擷取螢幕位置起點  自建bmp的位置起點     擷取大小
+                    g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W / 2, H / 2));
                     //richTextBox1.Text += "W = " + W.ToString() + "\n";
                     //richTextBox1.Text += "H = " + H.ToString() + "\n";
                 }
@@ -233,3 +236,5 @@ namespace vcs_RegisterHotKey_PrintScreen
         public static extern bool UnregisterHotKey(IntPtr wnd, int id);
     }
 }
+
+

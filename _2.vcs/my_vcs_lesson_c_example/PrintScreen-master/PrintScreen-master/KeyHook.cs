@@ -112,12 +112,15 @@ namespace KeyHook
         private static extern IntPtr GetModuleHandle(string lpModuleName);
  
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        //設置鉤子 
         public static extern int SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hInstance, int threadId);
  
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        //抽掉鉤子
         public static extern bool UnhookWindowsHookEx(int idHook);
  
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        //調用下一個鉤子 
         public static extern int CallNextHookEx(int idHook, int nCode, IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true)]
@@ -128,6 +131,7 @@ namespace KeyHook
 
         public void Hook()
         {
+            // 安裝鍵盤鉤子 
             if (m_HookHandle == 0)
             {
                 using (Process curProcess = Process.GetCurrentProcess())
@@ -135,9 +139,10 @@ namespace KeyHook
                 using (ProcessModule curModule = curProcess.MainModule)
                 {
                     m_KbdHookProc = new HookProc(KeyHooker.KeyboardHookProc);
-                    m_HookHandle = SetWindowsHookEx(WH_KEYBOARD_LL, m_KbdHookProc,
-                        GetModuleHandle(curModule.ModuleName), 0);
+                    m_HookHandle = SetWindowsHookEx(WH_KEYBOARD_LL, m_KbdHookProc, GetModuleHandle(curModule.ModuleName), 0);
                 }
+
+                //如果設置鉤子失敗
                 if (m_HookHandle == 0)
                 {
                     MessageBox.Show("呼叫 SetWindowsHookEx 失敗!");
@@ -146,10 +151,12 @@ namespace KeyHook
             }
         }
 
+        //取消鉤子事件
         public void UnHook()
         {
             bool ret = UnhookWindowsHookEx(m_HookHandle);
-            if (ret == false)
+
+            if (ret == false)   //如果去掉鉤子失敗
             {
                 MessageBox.Show("呼叫 UnhookWindowsHookEx 失敗!");
                 return;
@@ -157,21 +164,73 @@ namespace KeyHook
             m_HookHandle = 0;
         }
 
-        // KeyboardHookProc() :
-        // 當按鍵按下及鬆開時都會觸發此函式。 
+        //KeyboardHookProc() :
+        //當按鍵按下及鬆開時都會觸發此函式。 
+        //這裏可以添加自己想要的信息處理
         public static int KeyboardHookProc(int nCode, IntPtr wParam, IntPtr lParam)  
         {
             const int WM_KEYDOWN = 0x100;
 
-            KBDLLHOOKSTRUCT kbd = (KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(KBDLLHOOKSTRUCT));
-            Keys vkCode = (Keys)kbd.vkCode;
-
-            if (nCode >= 0 && wParam == (IntPtr)WM_KEYDOWN) //Key Pressed
+            if (nCode >= 0)
             {
-                if (vkCode == Keys.PrintScreen)
+                KBDLLHOOKSTRUCT kbd = (KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(KBDLLHOOKSTRUCT));
+
+                Keys vkCode = (Keys)kbd.vkCode;
+
+                if (wParam == (IntPtr)WM_KEYDOWN) //Key Pressed
                 {
-                    IsPrintScreenPressed = true;                
+                    if (vkCode == Keys.PrintScreen)
+                    {
+                        IsPrintScreenPressed = true;
+                    }
                 }
+
+
+                if (kbd.vkCode == 91)  // 截獲左win(開始菜單鍵)
+                {
+                    return 1;
+                }
+                if (kbd.vkCode == 92)// 截獲右win
+                {
+                    return 1;
+                }
+                if (kbd.vkCode == (int)Keys.Escape && (int)Control.ModifierKeys == (int)Keys.Control) //截獲Ctrl+Esc
+                {
+                    return 1;
+                }
+                if (kbd.vkCode == (int)Keys.F4 && (int)Control.ModifierKeys == (int)Keys.Alt)  //截獲alt+f4
+                {
+                    return 1;
+                }
+                if (kbd.vkCode == (int)Keys.Tab && (int)Control.ModifierKeys == (int)Keys.Alt) //截獲alt+tab
+                {
+                    return 1;
+                }
+                if (kbd.vkCode == (int)Keys.Escape && (int)Control.ModifierKeys == (int)Keys.Control + (int)Keys.Shift) //截獲Ctrl+Shift+Esc
+                {
+                    return 1;
+                }
+                if (kbd.vkCode == (int)Keys.Space && (int)Control.ModifierKeys == (int)Keys.Alt)  //截獲alt+空格
+                {
+                    return 1;
+                }
+                if (kbd.vkCode == 241)                  //截獲F1
+                {
+                    return 1;
+                }
+                if ((int)Control.ModifierKeys == (int)Keys.Control + (int)Keys.Alt + (int)Keys.Delete)      //截獲Ctrl+Alt+Delete
+                {
+                    return 1;
+                }
+                //if ((int)Control.ModifierKeys == (int)Keys.Control + (int)Keys.Shift)      //截獲Ctrl+Shift
+                //{
+                //    return 1;
+                //}
+
+                //if (kbd.vkCode == (int)Keys.Space && (int)Control.ModifierKeys == (int)Keys.Control + (int)Keys.Alt)  //截獲Ctrl+Alt+空格
+                //{
+                //    return 1;
+                //}
             }
             return CallNextHookEx(m_HookHandle, nCode, wParam, lParam);
         }

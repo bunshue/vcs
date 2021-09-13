@@ -6,7 +6,7 @@ using System.Text;
 using System.Drawing;
 using System.Diagnostics;
 
-namespace vcs_Draw9_Example
+namespace vcs_Draw_Circle
 {
     // Represents a circle.
     class Circle
@@ -34,18 +34,18 @@ namespace vcs_Draw9_Example
         }
 
         // Draw the circle.
-        public void Draw(Graphics g, Pen pen)
+        public void Draw(Graphics gr, Pen pen)
         {
-            if (Radius > 0) g.DrawEllipse(pen, GetBounds());
+            if (Radius > 0) gr.DrawEllipse(pen, GetBounds());
         }
-        public void Draw(Graphics g, Brush brush)
+        public void Draw(Graphics gr, Brush brush)
         {
-            if (Radius > 0) g.FillEllipse(brush, GetBounds());
+            if (Radius > 0) gr.FillEllipse(brush, GetBounds());
         }
-        public void Draw(Graphics g, Brush brush, Pen pen)
+        public void Draw(Graphics gr, Brush brush, Pen pen)
         {
-            Draw(g, brush);
-            Draw(g, pen);
+            Draw(gr, brush);
+            Draw(gr, pen);
         }
 
         // Return a textual representation.

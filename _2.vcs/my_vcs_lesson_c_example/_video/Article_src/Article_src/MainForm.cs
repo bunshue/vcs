@@ -6,13 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 
 // Libraries needed to work with VideoInputDevices
 using AForge.Video;
 using AForge.Video.DirectShow;
-
-
 
 namespace WebcamSecurity
 {
@@ -26,7 +25,6 @@ namespace WebcamSecurity
         GroupBox[] camOptions = new GroupBox[4];
         // The Configuration data set where we will store all user options (recording path , etc..)
         Config config;
-
 
         public MainForm()
         {
@@ -177,7 +175,8 @@ namespace WebcamSecurity
         }
 
         // the FilterInfoCollection is where we get information about VideoCaptureDevices
-        private FilterInfoCollection webcam;
+        private FilterInfoCollection USBWebcams = null;
+        int webcam_count = 0;
 
         // When the form loads
         private void Form1_Load(object sender, EventArgs e)
@@ -185,13 +184,35 @@ namespace WebcamSecurity
             show_item_location();
 
             // an instance of FilterInfoCollection is created to fetch available VideoCaptureDevices
-            webcam = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            // we create our CameraMonitors
-            for (int i = 0; i < webcam.Count && i < 4; i++)
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            //USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
+
+            webcam_count = USBWebcams.Count;
+            richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
+
+            richTextBox1.Text += "USBWebcams.Capacity : " + USBWebcams.Capacity.ToString() + "\n";
+            richTextBox1.Text += "USBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
+
+            int i;
+            for (i = 0; i < webcam_count; i++)
             {
-                this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i], webcam[i].MonikerString, "Camera" + (i + 1));
+                richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
+                richTextBox1.Text += "短名 : " + USBWebcams[i].Name + "\n";
+                richTextBox1.Text += "長名 : " + USBWebcams[i].MonikerString + "\n";
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            // we create our CameraMonitors
+            for (i = 0; i < webcam_count && i < 4; i++)
+            {
+                this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i], USBWebcams[i].MonikerString, "Camera" + (i + 1));
                 // Enable the user controls coressponding to the CameraMonitor
                 this.camOptions[i].Enabled = true;
+
+                richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
+                richTextBox1.Text += "短名 : " + USBWebcams[i].Name + "\n";
+                richTextBox1.Text += "長名 : " + USBWebcams[i].MonikerString + "\n";
             }
 
             // we try to load Options from the xml file saved previously
@@ -223,7 +244,7 @@ namespace WebcamSecurity
             LoadOptions();
 
             // set the recording path to the exising CameraMonitors
-            for (int i = 0; i < 4; i++)
+            for (i = 0; i < 4; i++)
             {
                 try
                 {

@@ -47,6 +47,9 @@ namespace vcs_PictureBox2
 
             W = this.Width;
             H = this.Height;
+
+
+            this.Text = "W= " + W.ToString() + ", H= " + H.ToString() + ", w= " + w.ToString() + ", h= " + h.ToString();
         }
 
         private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -143,6 +146,8 @@ namespace vcs_PictureBox2
             w = image.Width;
             h = image.Height;
 
+            pictureBox1.Size = new Size(w, h);
+
             /*
                         if (image != null)
                         {
@@ -222,7 +227,8 @@ namespace vcs_PictureBox2
                 ratio++;
                 if (ratio > 20)
                     ratio = 20;
-                this.Text = "放大 " + ratio.ToString();
+                //this.Text = "放大 " + ratio.ToString();
+                this.Text = "放大 " + ratio.ToString() + "\t" + e.Location.ToString();
 
 
             }
@@ -238,7 +244,7 @@ namespace vcs_PictureBox2
             hh = h * ratio / 10;
 
             pictureBox1.Size = new Size(ww, hh);
-            pictureBox1.Location = new Point((W - ww) / 2, (H - hh) / 2);
+            //pictureBox1.Location = new Point((W - ww) / 2, (H - hh) / 2);
 
         }
 

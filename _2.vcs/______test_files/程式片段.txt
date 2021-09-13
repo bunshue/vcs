@@ -1,4 +1,10 @@
 
+
+限制滑鼠的活動範圍
+System.Windows.Forms.Cursor.Clip = new Rectangle(0, 0, 300, 300);	//螢幕左上方一塊
+System.Windows.Forms.Cursor.Clip = new Rectangle(this.Location.X, this.Location.Y, 300, 300);	//本表單左上方一塊
+System.Windows.Forms.Cursor.Clip = new Rectangle(this.Location, this.Size); //控制鼠標在窗口範圍內 
+
                 string appDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().GetName().CodeBase);
                 path = Path.Combine(appDir, path);
 
