@@ -10,13 +10,16 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Runtime.InteropServices;   //for dll
 
+using System.Diagnostics;   //for Process
+
 namespace vcs_RegisterHotKey_PrintScreen
 {
     public partial class Form1 : Form
     {
-        private RegisterHotKeyClass RegisterHotKey = new RegisterHotKeyClass();
+        private RegisterHotKeyClass RegisterHotKey1 = new RegisterHotKeyClass();
+        private RegisterHotKeyClass RegisterHotKey2 = new RegisterHotKeyClass();
 
-        void Register_HotKey_Function()
+        void Register_HotKey_Function1()
         {
             save_fullscreen_to_local_drive();       //全螢幕截圖
             //this.Show();
@@ -29,6 +32,11 @@ namespace vcs_RegisterHotKey_PrintScreen
             this.TopMost = false;
         }
 
+        void Register_HotKey_Function2()
+        {
+            Process.Start(@"C:\WINDOWS\system32\calc.exe");
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -39,11 +47,19 @@ namespace vcs_RegisterHotKey_PrintScreen
             show_item_location();
 
             richTextBox1.Text += "測試快捷鍵範例\nPrintScreen 全螢幕截圖\n";
-            RegisterHotKey.Keys = Keys.PrintScreen;
-            RegisterHotKey.ModKey = 0;
-            RegisterHotKey.WindowHandle = this.Handle;
-            RegisterHotKey.HotKey += new RegisterHotKeyClass.HotKeyPass(Register_HotKey_Function);
-            RegisterHotKey.StarHotKey();
+            RegisterHotKey1.Keys = Keys.PrintScreen;
+            RegisterHotKey1.ModKey = RegisterHotKeyClass.KeyModifiers.NONE;
+            RegisterHotKey1.WindowHandle = this.Handle;
+            RegisterHotKey1.HotKey += new RegisterHotKeyClass.HotKeyPass(Register_HotKey_Function1);
+            RegisterHotKey1.StarHotKey();
+
+            /*  目前不能做到依照不同的快捷鍵做不同的事
+            RegisterHotKey2.Keys = Keys.C;
+            RegisterHotKey2.ModKey = RegisterHotKeyClass.KeyModifiers.CONTROL | RegisterHotKeyClass.KeyModifiers.ALT;
+            RegisterHotKey2.WindowHandle = this.Handle;
+            RegisterHotKey2.HotKey += new RegisterHotKeyClass.HotKeyPass(Register_HotKey_Function2);
+            RegisterHotKey2.StarHotKey();
+            */
         }
 
         void show_item_location()

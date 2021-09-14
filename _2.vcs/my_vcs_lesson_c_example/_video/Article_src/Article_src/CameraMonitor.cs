@@ -51,15 +51,14 @@ namespace WebcamSecurity
          */
         private void DrawMessage(object sender, PaintEventArgs e)
         {
-            using (Font myFont = new Font("Tahoma", 10, FontStyle.Bold))
+            using (Font f = new Font("Arial", 10, FontStyle.Bold))
             {
-
-                e.Graphics.DrawString(DateTime.Now.ToString() + ((this.motionDetected) ? " + Motion !" : ""), myFont, ((this.motionDetected) ? Brushes.Red : Brushes.Green), new Point(2, 2));
+                e.Graphics.DrawString(DateTime.Now.ToString() + ((this.motionDetected) ? " + Motion !" : ""), f, ((this.motionDetected) ? Brushes.Red : Brushes.Green), new Point(10, 10));
                 if (this.IsRecording)
                 {
                     if (this.showRecordMarkerCount > 10)
                     {
-                        e.Graphics.DrawString("[RECORDING]", myFont, Brushes.Red, new Point(2, 14));
+                        e.Graphics.DrawString("[RECORDING]", f, Brushes.Red, new Point(2, 14));
 
                         if (this.showRecordMarkerCount == 20)
                         {
@@ -69,8 +68,6 @@ namespace WebcamSecurity
                     this.showRecordMarkerCount++;
                 }
             }
-
-
         }
 
         bool motionDetected = false; // was there any motion detected previously
@@ -104,21 +101,20 @@ namespace WebcamSecurity
                         }
                         else this.calibrateAndResume++;
                     }
-
                 }
+
                 if (IsRecording)
                 {
                     // if recording is enabled we enqueue the current frame to be encoded to a video file
-                    Graphics gr = Graphics.FromImage(bit);
+                    Graphics g = Graphics.FromImage(bit);
                     Pen p = new Pen(Color.Red);
                     p.Width = 5.0f;
                     using (Font f = new Font("Tahoma", 10, FontStyle.Bold))
                     {
-                        gr.DrawString(DateTime.Now.ToString(), f, Brushes.Red, new Point(2, 2));
+                        g.DrawString(DateTime.Now.ToString(), f, Brushes.Red, new Point(2, 2));
                     }
                     frames.Enqueue((Bitmap)bit.Clone());
                 }
-
             }
             catch (InvalidOperationException ex)
             {
@@ -205,3 +201,4 @@ namespace WebcamSecurity
         }
     }
 }
+

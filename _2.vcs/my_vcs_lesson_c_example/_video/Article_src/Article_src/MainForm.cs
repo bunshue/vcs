@@ -181,19 +181,19 @@ namespace WebcamSecurity
         // When the form loads
         private void Form1_Load(object sender, EventArgs e)
         {
+            int i;
             show_item_location();
 
-            // an instance of FilterInfoCollection is created to fetch available VideoCaptureDevices
-            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            //USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
 
             webcam_count = USBWebcams.Count;
+
+            /*
             richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
 
             richTextBox1.Text += "USBWebcams.Capacity : " + USBWebcams.Capacity.ToString() + "\n";
             richTextBox1.Text += "USBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
 
-            int i;
             for (i = 0; i < webcam_count; i++)
             {
                 richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
@@ -202,17 +202,18 @@ namespace WebcamSecurity
                 richTextBox1.Text += "\n";
             }
             richTextBox1.Text += "\n";
+            */
 
-            // we create our CameraMonitors
             for (i = 0; i < webcam_count && i < 4; i++)
             {
                 this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i], USBWebcams[i].MonikerString, "Camera" + (i + 1));
                 // Enable the user controls coressponding to the CameraMonitor
                 this.camOptions[i].Enabled = true;
-
+                /*
                 richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
                 richTextBox1.Text += "短名 : " + USBWebcams[i].Name + "\n";
                 richTextBox1.Text += "長名 : " + USBWebcams[i].MonikerString + "\n";
+                */
             }
 
             // we try to load Options from the xml file saved previously
@@ -296,9 +297,13 @@ namespace WebcamSecurity
             richTextBox1.Location = new Point(x_st + dx * 2 + panel1.Size.Width + 50, y_st + dy * 0);
         }
 
-        // this method will stop recording and running cameras 
-        // also save the options to an xml file
-        private void StopCameras(object sender, FormClosingEventArgs e)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StopCameras();
+        }
+
+        //離開程式前, 關閉相機(錄影與播放) 並儲存設定
+        private void StopCameras()
         {
             for (int i = 0; i < 4; i++)
             {
@@ -311,7 +316,8 @@ namespace WebcamSecurity
                 {
                 }
             }
-            // save options to an  xml file
+
+            //儲存設定
             this.SaveOptions();
         }
 

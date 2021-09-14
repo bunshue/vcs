@@ -777,6 +777,200 @@ namespace 真的只是一個測試1
 
 
         }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            //一、月份英文簡寫
+
+            DateTime dt = DateTime.Now;
+            string MM = dt.AddMonths(-1).ToString("MMM", new System.Globalization.CultureInfo("en-us"));//月英文縮寫：Jul
+            richTextBox1.Text += "月份英文簡寫\t" + MM + "\n";
+
+
+
+            //二、當月第一天和最后一天
+
+            DateTime ThisMonth_Frist = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
+            DateTime ThisMOnth_Last = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date.AddMonths(1).AddSeconds(-1);
+            richTextBox1.Text += "當月第一天\t" + ThisMonth_Frist + "\n";
+            richTextBox1.Text += "當月最后一天\t" + ThisMOnth_Last + "\n";
+
+            //三、上月第一天和最后一天
+
+            DateTime Today = DateTime.Today;//當天時間
+            DateTime ThisMonth = new DateTime(Today.Year, Today.Month, 1);//當前月第一天時間
+            DateTime LastMonth_First = ThisMonth.AddMonths(-1);//上月第一天時間
+            DateTime LastMonth_Last = ThisMonth.AddDays(-1);//上月最后一天時間
+            richTextBox1.Text += "上月第一天\t" + LastMonth_First + "\n";
+            richTextBox1.Text += "上月最后一天\t" + LastMonth_Last + "\n";
+
+            //四、本周第幾天
+
+            int daysInWeek1 = (int)DateTime.Now.DayOfWeek;//注意：此處周,日時回傳0，
+            int daysInWeek2 = (int)DateTime.Now.DayOfWeek == 0 ? 7 : (int)DateTime.Now.DayOfWeek;//當前周第幾天,注釋:周日為0
+            richTextBox1.Text += "本周第幾天\t" + daysInWeek1.ToString() + "\n";
+            richTextBox1.Text += "本周第幾天\t" + daysInWeek2.ToString() + "\n";
+
+
+            //五、本月第幾周
+
+            //int a = WeekOfMonth(DateTime.Now, false);//
+            //richTextBox1.Text += "本月第幾周\t" + a + "\n";
+
+
+
+        }
+
+        //本年第幾周
+        private int WeekOfYear()
+        {
+            var dt = DateTime.Now;
+            int firstWeekend = Convert.ToInt32(DateTime.Parse(dt.Year + "-1-1").DayOfWeek);
+            int weekDay = firstWeekend == 0 ? 1 : (7 - firstWeekend + 1);
+            int currentDay = dt.DayOfYear;
+            int current_week = Convert.ToInt32(Math.Ceiling((currentDay - weekDay) / 7.0)) + 1;
+            return current_week;
+        }
+
+        //前幾周的周一和周日
+        private void FEDayInLastWeek()
+        {
+            int N = 3;//前幾周引數
+            DateTime Today = DateTime.Now;
+            int daysInWeek = (int)Today.DayOfWeek == 0 ? 7 : (int)Today.DayOfWeek;//當前周第幾天,注釋:周日為0
+
+            for (int i = N; i > 0; i--)
+            {
+                //起始日期
+                DateTime firstDay = Today.AddDays(1 - (7 * i + daysInWeek));
+                DateTime lastDay = Today.AddDays(7 - (7 * i + daysInWeek));
+            }
+        }
+
+        //本周一和當前日
+        private void FristDayToNowInThisWeek()
+        {
+            int daysInWeek = (int)DateTime.Now.DayOfWeek == 0 ? 7 : (int)DateTime.Now.DayOfWeek;//當前周第幾天,注釋:周日為0
+            //起始日期
+            DateTime firstDay = DateTime.Now.AddDays(1 - daysInWeek);
+            DateTime lastDay = DateTime.Now;
+        }
+
+        //ENUM測試 ST
+
+        //默認從0開始：分別為0，1，2，3
+        enum Level1
+        {
+            Employee,
+            Manager,
+            Boss,
+            BigBoss,
+        }
+
+        //未指定的列舉名的值將依著最后一個指定值向后依次遞增（注意是最后一個指定值）
+        //列舉中定義的可以自定義整數值
+        enum Level2
+        {
+            Employee = 100,
+            Manager,
+            Boss,
+            BigBoss,
+        }
+        //結果為100，101，102，103
+
+        //列舉中定義的整數值可以部分預設
+        enum Level3
+        {
+            Employee = 100,
+            Manager,
+            Boss = 102,
+            BigBoss,
+        }
+        //Manager自動為101，BigBoss自動為103
+
+        enum Level4
+        {
+            Employee = 100,
+            Manager,
+            Boss = 101,
+            BigBoss,
+        }
+        //結果為100，101，101，102，有兩個101也是合法的
+        //但不能有兩個Manager，即enum中的名稱不能重復，
+
+        //位元位式用法
+
+        enum Skill
+        {
+            Drive = 1,  //二進制  0001
+            Cook = 2,  //二進制  0010
+            Program = 4, //二進制  0100
+            Teach = 8, //二進制  1000
+        }
+
+        class Person
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
+            public Level1 Level { get; set; }
+            public Skill Skill { get; set; }
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            Person person1 = new Person();
+            person1.Level = Level1.Employee;
+
+            richTextBox1.Text += "result : " + ((int)Level1.Boss).ToString() + "\n";
+            //結果為2
+
+            Person person2 = new Person();
+            person2.Skill = Skill.Drive | Skill.Cook | Skill.Program | Skill.Teach; //二進制  1111，十進制的15 //結果為15
+
+            richTextBox1.Text += "Skill : " + ((int)person2.Skill).ToString() + "\n";
+            richTextBox1.Text += "Skill a : " + ((person2.Skill & Skill.Cook) > 0).ToString() + "\n";
+            richTextBox1.Text += "Skill b : " + ((person2.Skill & Skill.Cook) == Skill.Cook).ToString() + "\n";
+
+            Console.WriteLine(person2.Skill);
+            Console.WriteLine((person2.Skill & Skill.Cook) > 0) ; //結果為True，（1111 & 0010 = 0010）
+            Console.WriteLine((person2.Skill & Skill.Cook) == Skill.Cook)  ; //結果為True
+
+
+
+        }
+
+        //ENUM測試 SP
+
+
+        //class test ST
+
+        class P
+        {
+            private string pname;
+            public string Name
+            {
+                get
+                {
+                    return "name : " + pname;
+                }
+                set
+                {
+                    pname = value;
+                }
+            }
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            P obj = new P();
+            obj.Name = "david wang";            //使用到set
+            Console.WriteLine(obj.Name);        //使用到get
+
+        }
+
+
+        //class test SP
+
     }
 }
 

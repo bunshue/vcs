@@ -1,9 +1,23 @@
 
 
-限制滑鼠的活動範圍
-System.Windows.Forms.Cursor.Clip = new Rectangle(0, 0, 300, 300);	//螢幕左上方一塊
-System.Windows.Forms.Cursor.Clip = new Rectangle(this.Location.X, this.Location.Y, 300, 300);	//本表單左上方一塊
-System.Windows.Forms.Cursor.Clip = new Rectangle(this.Location, this.Size); //控制鼠標在窗口範圍內 
+//在 C# 中使用 DownloadFile() 方法從一個 URL 下載檔案
+WebClient mywebClient = new WebClient();
+mywebClient.DownloadFile("http://mysite.com/myfile.txt", @"d:\myfile.txt");
+
+//在 C# 中獲取 2D 陣列的長度
+
+    //使用 C# 中的 Array.GetLength() 函式獲取 2D 陣列的寬度和高度
+    //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
+            int[,] array2D = new int[5, 10];
+            Console.WriteLine(array2D.GetLength(0));	//5
+            Console.WriteLine(array2D.GetLength(1));	//10
+			
+//使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
+            int[,] array2D = new int[5, 10];
+            Console.WriteLine(array2D.GetUpperBound(0)+1);	//5
+            Console.WriteLine(array2D.GetUpperBound(1)+1);	//10
+			
+			
 
                 string appDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().GetName().CodeBase);
                 path = Path.Combine(appDir, path);
@@ -104,24 +118,6 @@ FileInfo 類提供了用於在 C# 中建立，開啟，複製，刪除和移動�
                 this.ShowInTaskbar = false;
                 richTextBox1.Text += "不在任務欄中顯示\n";
             }
-
-
-
-        //限制滑鼠游標活動區域
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Cursor = new Cursor(Cursor.Current.Handle);
-            Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y);
-            Cursor.Clip = new Rectangle(this.Location, this.Size);
-        }
-
-        //解除
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Screen[] screens = Screen.AllScreens;
-            this.Cursor = new Cursor(Cursor.Current.Handle);
-            Cursor.Clip = screens[0].Bounds;
-        }
 
 
 

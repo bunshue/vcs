@@ -165,6 +165,35 @@ namespace vcs_Mouse
                 button2.Text = "切換滑鼠左右鍵";
             }
         }
+
         //切換滑鼠左右鍵 SP
+
+        //限制滑鼠游標活動區域
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Cursor = new Cursor(Cursor.Current.Handle);
+            Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y);
+            Cursor.Clip = new Rectangle(this.Location, this.Size);
+
+            /*
+            //限制滑鼠的活動範圍
+            Cursor.Clip = new Rectangle(0, 0, 300, 300);	//螢幕左上方一塊
+            Cursor.Clip = new Rectangle(this.Location.X, this.Location.Y, 300, 300);	//本表單左上方一塊
+            Cursor.Clip = new Rectangle(this.Location, this.Size); //控制鼠標在窗口範圍內 
+            */
+        }
+
+        //解除限制
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Screen[] screens = Screen.AllScreens;
+            this.Cursor = new Cursor(Cursor.Current.Handle);
+            Cursor.Clip = screens[0].Bounds;
+
+        }
+
+
+
+
     }
 }

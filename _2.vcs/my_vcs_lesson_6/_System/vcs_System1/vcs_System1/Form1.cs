@@ -13,7 +13,7 @@ using System.IO.Ports;          //for serial ports
 using System.Collections;   //for DictionaryEntry
 using System.Globalization;
 using System.Runtime.InteropServices;   //for DllImport
-using System.Diagnostics;
+using System.Diagnostics;       //for Process
 using System.Reflection;        //for Assembly
 using System.Management;
 using System.Drawing.Imaging;   //for ImageFormat

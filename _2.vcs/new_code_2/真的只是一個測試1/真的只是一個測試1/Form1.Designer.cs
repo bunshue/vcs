@@ -385,7 +385,9 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(155, 55);
             this.button26.TabIndex = 30;
+            this.button26.Text = "C#中時間相關知識點小結";
             this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
             // button27
             // 
@@ -394,7 +396,9 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(155, 55);
             this.button27.TabIndex = 31;
+            this.button27.Text = "ENUM測試";
             this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
             // button28
             // 
@@ -403,7 +407,9 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(155, 55);
             this.button28.TabIndex = 32;
+            this.button28.Text = "class  test";
             this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
             // button29
             // 
