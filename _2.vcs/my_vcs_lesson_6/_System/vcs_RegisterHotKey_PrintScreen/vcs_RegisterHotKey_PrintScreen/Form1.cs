@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;                //for Directory
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Runtime.InteropServices;   //for dll
 
@@ -60,6 +61,18 @@ namespace vcs_RegisterHotKey_PrintScreen
             RegisterHotKey2.HotKey += new RegisterHotKeyClass.HotKeyPass(Register_HotKey_Function2);
             RegisterHotKey2.StarHotKey();
             */
+
+            //檢查存圖的資料夾
+            string Path = @"C:\dddddddddd";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+            }
         }
 
         void show_item_location()
@@ -115,9 +128,9 @@ namespace vcs_RegisterHotKey_PrintScreen
             int W = Screen.PrimaryScreen.Bounds.Width;
             int H = Screen.PrimaryScreen.Bounds.Height;
 
-            using (Bitmap bmp = new Bitmap(W, H))
+            using (Bitmap bitmap1 = new Bitmap(W, H))
             {
-                using (Graphics g = Graphics.FromImage(bmp))
+                using (Graphics g = Graphics.FromImage(bitmap1))
                 {
                     //             擷取螢幕位置起點  自建bmp的位置起點     擷取大小
                     g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W / 2, H / 2));
@@ -126,7 +139,7 @@ namespace vcs_RegisterHotKey_PrintScreen
                 }
                 //存成bmp檔
                 String filename = "C:\\dddddddddd\\full_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-                bmp.Save(filename, ImageFormat.Bmp);
+                bitmap1.Save(filename, ImageFormat.Bmp);
                 richTextBox1.Text += "全螢幕截圖，存檔檔名：\n" + filename + "\n";
             }
         }

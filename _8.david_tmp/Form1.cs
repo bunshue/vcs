@@ -11,8 +11,9 @@ using System.IO;                //for file read/write
 using System.IO.Ports;          //for serial ports
 using System.Diagnostics;       //for Process, Stopwatch
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Drawing.Drawing2D; //for DashStyle
 using System.Runtime.InteropServices;   //for dll
-using System.Windows.Forms.DataVisualization.Charting;  //for Series
+using System.Windows.Forms.DataVisualization.Charting;  //for Series,   參考/加入參考/.NET/System.Windows.Forms.DataVisualization
 
 using AForge.Video;
 using AForge.Video.DirectShow;
@@ -25,7 +26,7 @@ namespace iMS_Link
         String software_version = "A05";
         String ims_camera_fullname = string.Empty;
 
-        int flag_operation_mode = MODE_RELEASE_STAGE3E;  //不允許第四, 第七, 第八
+        int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
 
         private const int MODE_RELEASE_STAGE0 = 0x00;   //release mode stage 0, normal use
         private const int MODE_RELEASE_STAGE1A = 0x01;   //release mode stage 1, 4X4 USB camera
@@ -616,7 +617,7 @@ namespace iMS_Link
 
             if (log_file_tmp_length > 100)
             {
-                if (System.IO.File.Exists(iMS_Link_log_filename) == false)
+                if (File.Exists(iMS_Link_log_filename) == false)
                 {
                     //richTextBox1.Text += "檔案: " + iMS_Link_log_filename + " 不存在，製作一個。\n";
                     StreamWriter sw = File.CreateText(iMS_Link_log_filename);
@@ -730,7 +731,8 @@ namespace iMS_Link
 
         void Init_iMS_Link(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;   //setup busy cursor
+            this.Cursor = Cursors.WaitCursor;   // set busy cursor
+
             if ((flag_operation_mode == MODE_RELEASE_STAGE4) || (flag_operation_mode == MODE_RELEASE_STAGE7) || (flag_operation_mode == MODE_RELEASE_STAGE8) || (flag_operation_mode > MODE_RELEASE_STAGE20))
             {
                 MessageBox.Show("不能使用此模式, mode = " + flag_operation_mode.ToString() + ", 離開", "iMS_Link", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1131,7 +1133,7 @@ namespace iMS_Link
 
             //設定執行後的表單起始位置
             //this.StartPosition = FormStartPosition.Manual;
-            //this.Location = new System.Drawing.Point(100, 100);
+            //this.Location = new Point(100, 100);
 
             // C# 設定視窗載入位置 
             this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
@@ -1190,6 +1192,10 @@ namespace iMS_Link
             toolTip1.AutoPopDelay = 5000;
             //ToolTipTitle：設定提示視窗的標題。
             //toolTip1.ToolTipTitle = "提示訊息";
+
+            // initialize links
+            linkLabel1.Links.Add(0, linkLabel1.Text.Length, "https://www.insighteyes.com/");
+            linkLabel2.Links.Add(0, linkLabel2.Text.Length, "mailto:sales@insighteyes.com");
 
             comboBox_webcam.Size = new Size(comboBox_webcam.Size.Width - 50, comboBox_webcam.Size.Height);
             comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
@@ -1311,7 +1317,7 @@ namespace iMS_Link
                 {
                     button89.Enabled = false;
                     button90.Enabled = true;
-                    this.BackColor = System.Drawing.SystemColors.ControlLight;
+                    this.BackColor = SystemColors.ControlLight;
                     flag_comport_ok = true;
                 }
                 button84.Visible = false;
@@ -1387,7 +1393,7 @@ namespace iMS_Link
                 {
                     button1.Enabled = false;
                     button2.Enabled = true;
-                    this.BackColor = System.Drawing.SystemColors.ControlLight;
+                    this.BackColor = SystemColors.ControlLight;
                     flag_comport_ok = true;
                     bt_awb_test.Enabled = true;
                     bt_awb_test.BackColor = Color.Lime;
@@ -1677,7 +1683,7 @@ namespace iMS_Link
         {
             this.Size = new Size(1036, 745);
             this.tabControl1.Size = new Size(1000, 600);
-            this.tabControl1.Location = new Point(10, 60);
+            this.tabControl1.Location = new Point(10, 56);
 
             int gb_w = 930;
             int gb_h = 530;
@@ -2133,8 +2139,8 @@ namespace iMS_Link
             show_comport_log = SHOW_COMPORT_LOG;
 
             Comport_Mode = 0;
-            this.richTextBox1.Location = new System.Drawing.Point(this.tabControl1.Location.X + this.tabControl1.ClientRectangle.Width + 10, this.tabControl1.Location.Y + 10);
-            this.richTextBox1.Size = new System.Drawing.Size(510, this.tabControl1.ClientSize.Height - 10);
+            this.richTextBox1.Location = new Point(this.tabControl1.Location.X + this.tabControl1.ClientRectangle.Width + 10, this.tabControl1.Location.Y + 10);
+            this.richTextBox1.Size = new Size(510, this.tabControl1.ClientSize.Height - 10);
 
             if (isCommandLog == 1)
             {
@@ -2197,7 +2203,7 @@ namespace iMS_Link
             richTextBox1.AppendText(RxString);
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
-        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             //RxString = serialPort1.ReadExisting();
             //this.Invoke(new EventHandler(DisplayText));
@@ -2533,6 +2539,7 @@ namespace iMS_Link
                             serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
                         }
                     }
+
                     if (Comport_Mode == 0)  //iMS_Link mode
                     {
                         if (BytesToRead == UART_BUF_LENGTH)
@@ -4076,15 +4083,15 @@ namespace iMS_Link
                         if ((input[2] == 0x00) && (input[3] == 0x00))
                         {
                             button36.BackgroundImage = iMS_Link.Properties.Resources.console;
-                            button36.BackColor = System.Drawing.SystemColors.ControlLight;
-                            button37.BackColor = System.Drawing.SystemColors.ControlLight;
+                            button36.BackColor = SystemColors.ControlLight;
+                            button37.BackColor = SystemColors.ControlLight;
                         }
                         else if ((input[2] == 0x11) && (input[3] == 0x11))
                         {
                             button36.BackgroundImage = iMS_Link.Properties.Resources.ims3;
-                            button35.BackColor = System.Drawing.SystemColors.ControlLight;
-                            button36.BackColor = System.Drawing.SystemColors.ControlLight;
-                            button37.BackColor = System.Drawing.SystemColors.ControlLight;
+                            button35.BackColor = SystemColors.ControlLight;
+                            button36.BackColor = SystemColors.ControlLight;
+                            button37.BackColor = SystemColors.ControlLight;
                         }
                         else
                         {
@@ -4257,6 +4264,9 @@ namespace iMS_Link
                 bt_ae_decrease.Visible = false;
                 bt_saturation.Visible = false;
 
+                //LENC on/off
+                bt_lenc.Visible = false;
+
                 //Saturation
                 lb_function.Visible = false;
                 numericUpDown_saturation.Visible = false;
@@ -4347,6 +4357,9 @@ namespace iMS_Link
                 //AE_decrease, Saturation
                 bt_ae_decrease.Visible = en;
                 bt_saturation.Visible = en;
+
+                //LENC on/off
+                bt_lenc.Visible = en;
 
                 //Saturation
                 lb_function.Visible = en;
@@ -4721,10 +4734,12 @@ namespace iMS_Link
             }
 
             //debug button
-            groupBox_debug.Location = new Point(0, 590);
-            groupBox_debug.Size = new Size(335 + 130 + 120, 120);
-            x_st = 10;
-            y_st = 20;
+
+            groupBox_debug.Location = new Point(135, 382 + 122);
+            groupBox_debug.Size = new Size(460, 122 + 30);
+
+            x_st = 5;
+            y_st = 15;
             dx = 64;
             dy = 32;
 
@@ -4736,37 +4751,37 @@ namespace iMS_Link
             cb_only_search.Checked = false;
             bt_awb_test2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_tmp.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-            bt_test.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-            bt_clear.Location = new Point(x_st + dx * 8, y_st + dy * 0);
 
             //第一排button
-            bt_script.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            bt_location.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_brightness.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            bt_reset_camera.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            bt_awb_test_init.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            bt_script_load.Location = new Point(x_st + dx * 5, y_st + dy * 1);  //at the same place
-            bt_cancel.Location = new Point(x_st + dx * 5, y_st + dy * 1);       //at the same place
-            bt_measure_brightness.Location = new Point(x_st + dx * 6, y_st + dy * 1);
-            bt_measure_frame.Location = new Point(x_st + dx * 7, y_st + dy * 1);
-            bt_debug1.Location = new Point(x_st + dx * 8, y_st + dy * 1);
+            bt_test.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_clear.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_script.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_location.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            bt_brightness.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            bt_reset_camera.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            bt_awb_test_init.Location = new Point(x_st + dx * 6, y_st + dy * 1);
 
             //第二排button
-            bt_debug2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            bt_debug3.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            bt_debug4.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            bt_debug5.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            bt_debug6.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            bt_debug7.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-            bt_debug8.Location = new Point(x_st + dx * 6, y_st + dy * 2);
-            bt_debug9.Location = new Point(x_st + dx * 7, y_st + dy * 2);
-            bt_debug10.Location = new Point(x_st + dx * 8, y_st + dy * 2);
+            bt_script_load.Location = new Point(x_st + dx * 0, y_st + dy * 2);  //at the same place
+            bt_cancel.Location = new Point(x_st + dx * 0, y_st + dy * 2);       //at the same place
+            bt_measure_brightness.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_measure_frame.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            bt_debug1.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            bt_debug2.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            bt_debug3.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+            bt_debug4.Location = new Point(x_st + dx * 6, y_st + dy * 2);
+
+            //第三排button
+            bt_debug5.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_debug6.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            bt_debug7.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            bt_debug8.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            bt_debug9.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            bt_debug10.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+
             bt_debug6.Text = "CMX";
             bt_debug7.Text = "LENC";
             bt_debug10.Text = "說明";
-
-            //第三排button
-
 
             //讀寫相機暫存器
             groupBox_register0.Location = new Point(135, 382);
@@ -4825,8 +4840,8 @@ namespace iMS_Link
             b1.Location = new Point(115 + dx + dxx * 6 + 5, y_st + 30 + 0);
             b0.Location = new Point(115 + dx + dxx * 7 + 5, y_st + 30 + 0);
 
-            //AWB
-            groupBox_awb.Location = new Point(0, 710);
+            //AWB, 左下方5個trackBar
+            groupBox_awb.Location = new Point(0, 710 - 20);
             groupBox_awb.Size = new Size(550, 262);
 
             x_st = 0;
@@ -4895,7 +4910,7 @@ namespace iMS_Link
             lb_0xG.Text = "0x                 =";
             lb_0xB.Text = "0x                 =";
 
-            groupBox_wpt_bpt.Location = new Point(1050 - 3, 860);
+            groupBox_wpt_bpt.Location = new Point(1050 - 3 + 50 + 19, 860 - 9);
             groupBox_wpt_bpt.Size = new Size(630 + 145, 105);
 
             x_st = 5;
@@ -4927,6 +4942,18 @@ namespace iMS_Link
             bt_write_bpt.Location = new Point(x_st + dx * 4, y_st);
             //AE Target
             bt_ae_decrease.Location = new Point(x_st + dx * 5, y_st);
+
+            //LENC on/off
+            bt_lenc.Location = new Point(x_st + dx * 7, y_st);
+
+            if (flag_lenc_enable == false)
+            {
+                bt_lenc.BackgroundImage = iMS_Link.Properties.Resources.off;
+            }
+            else
+            {
+                bt_lenc.BackgroundImage = iMS_Link.Properties.Resources.on;
+            }
 
             numericUpDown_denoise.Location = new Point(x_st + dx * 8, y_st);
             numericUpDown_sharpness.Location = new Point(x_st + dx * 9, y_st);
@@ -4982,7 +5009,7 @@ namespace iMS_Link
 
                     if (flag_operation_mode == MODE_RELEASE_STAGE0)
                     {
-                        groupBox_sn1.Location = new Point(1047, 758);
+                        groupBox_sn1.Location = new Point(1050 - 3 + 50 + 19, 758 + 3);
                         groupBox_sn1.Size = new Size(300, 100);
                     }
                     if (flag_operation_mode == MODE_RELEASE_STAGE2)
@@ -4995,7 +5022,7 @@ namespace iMS_Link
                     groupBox_sn1.Visible = false;
                 }
 
-                lb_yuv_y2.Location = new Point(1610, 740);
+                lb_yuv_y2.Location = new Point(1610 + 36 - 15 + 28, 740 + 45 + 22);
                 lb_yuv_y3.Location = new Point(1215, 105);
                 lb_auto_awb_cnt.Location = new Point(bt_awb_break.Location.X + 110, bt_awb_break.Location.Y + 5);
                 lb_fps.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 200, 50);
@@ -5046,7 +5073,7 @@ namespace iMS_Link
             }
             else
             {
-                groupBox_temperature.Location = new Point(935, 705 - 15 + 20 + 15 + 10 + 15);
+                groupBox_temperature.Location = new Point(935 + 20 + 20, 705 - 15 + 20 + 15 + 16);
                 groupBox_temperature.Size = new Size(110, 240 - 10 - 10 - 5);
 
                 comboBox_temperature.Location = new Point(5, 10);
@@ -5082,7 +5109,7 @@ namespace iMS_Link
                 bt_restore_camera_setup.Visible = false;
 
             //AWB2 亮度 找過亮 顯示過量 上限下限
-            groupBox_awb2.Location = new Point(1750, 540);
+            groupBox_awb2.Location = new Point(1750 + 20 + 6, 540 + 35 + 18);
             groupBox_awb2.Size = new Size(115, 257);
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
@@ -5235,7 +5262,7 @@ namespace iMS_Link
                 show_cmx_lenc_result();
             }
 
-            toolStripStatusLabel1.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            //toolStripStatusLabel1.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             Application.DoEvents();
 
             string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
@@ -5409,7 +5436,7 @@ namespace iMS_Link
             string currentPath = Directory.GetCurrentDirectory();
             richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
             //開啟檔案總管
-            System.Diagnostics.Process.Start(currentPath);
+            Process.Start(currentPath);
         }
 
         private void button74_Click(object sender, EventArgs e)
@@ -5453,24 +5480,24 @@ namespace iMS_Link
         {
             richTextBox1.AppendText("[PC] : Putty mode\n");
             Comport_Mode = 1;
-            this.richTextBox1.Location = new System.Drawing.Point(4, 67);
-            this.richTextBox1.Size = new System.Drawing.Size(958 - 4 + 382 + 10, 594);
+            this.richTextBox1.Location = new Point(4, 67);
+            this.richTextBox1.Size = new Size(958 - 4 + 382 + 10, 594);
         }
 
         private void button88_Click(object sender, EventArgs e)
         {
             richTextBox1.AppendText("[PC] : iMS_Link mode\n");
             Comport_Mode = 0;
-            this.richTextBox1.Location = new System.Drawing.Point(958, 67);
-            this.richTextBox1.Size = new System.Drawing.Size(500, 586);
+            this.richTextBox1.Location = new Point(958, 67);
+            this.richTextBox1.Size = new Size(500, 586);
         }
 
         private void button87_Click(object sender, EventArgs e)
         {
             richTextBox1.AppendText("[PC] : Hex mode\n");
             Comport_Mode = 2;
-            this.richTextBox1.Location = new System.Drawing.Point(4, 67);
-            this.richTextBox1.Size = new System.Drawing.Size(958 - 4 + 382 + 10, 594);
+            this.richTextBox1.Location = new Point(4, 67);
+            this.richTextBox1.Size = new Size(958 - 4 + 382 + 10, 594);
         }
 
         private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
@@ -5485,22 +5512,22 @@ namespace iMS_Link
                         {
                             Comport_Mode = 1;
                             richTextBox1.AppendText("[PC] : Putty mode\n");
-                            this.richTextBox1.Location = new System.Drawing.Point(4, 67);
-                            this.richTextBox1.Size = new System.Drawing.Size(958 - 4 + 382 + 10, 594);
+                            this.richTextBox1.Location = new Point(4, 67);
+                            this.richTextBox1.Size = new Size(958 - 4 + 382 + 10, 594);
                         }
                         else if (Comport_Mode == 1)
                         {
                             Comport_Mode = 2;
                             richTextBox1.AppendText("[PC] : Hex mode\n");
-                            this.richTextBox1.Location = new System.Drawing.Point(4, 67);
-                            this.richTextBox1.Size = new System.Drawing.Size(958 - 4 + 382 + 10, 594);
+                            this.richTextBox1.Location = new Point(4, 67);
+                            this.richTextBox1.Size = new Size(958 - 4 + 382 + 10, 594);
                         }
                         if (Comport_Mode == 2)
                         {
                             Comport_Mode = 0;
                             richTextBox1.AppendText("[PC] : iMS_Link mode\n");
-                            this.richTextBox1.Location = new System.Drawing.Point(958, 67);
-                            this.richTextBox1.Size = new System.Drawing.Size(382, 594);
+                            this.richTextBox1.Location = new Point(958, 67);
+                            this.richTextBox1.Size = new Size(382, 594);
                         }
                     }
                     break;
@@ -5601,7 +5628,6 @@ namespace iMS_Link
             {
                 //一定會被執行的程式區段
             }
-            delay(30);
             return true;
         }
 
@@ -5659,6 +5685,8 @@ namespace iMS_Link
             DongleAddr_h = 0x3A;
             DongleAddr_l = 0x03;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
+
+            DongleData = (byte)(DongleData - 15);
             DongleAddr_h = 0x3A;
             DongleAddr_l = 0x04;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
@@ -6088,7 +6116,7 @@ namespace iMS_Link
 
             lb_write_camera_serial2.BackColor = Color.White;
             lb_write_camera_serial2.Text = "讀取序號資料完成";
-            button8.BackColor = System.Drawing.SystemColors.ControlLight;
+            button8.BackColor = SystemColors.ControlLight;
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -6264,7 +6292,7 @@ namespace iMS_Link
             page = AWB_PAGE1;
             Send_IMS_Data(0xD1, (byte)page, 0, 0);
 
-            button4.BackColor = System.Drawing.SystemColors.ControlLight;
+            button4.BackColor = SystemColors.ControlLight;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -6350,8 +6378,6 @@ namespace iMS_Link
             else if (tabControl1.SelectedTab == tp_Serial_Auto)
             {
                 this.Size = new Size(1036, 745);
-                //this.tabControl1.Size = new Size(1000, 600);
-                this.tabControl1.Location = new Point(10, 60);
 
                 richTextBox1.Text += "進入 相機序號 頁\n";
                 richTextBox1.Text += "改成不檢查相機內是否已有序號\n";
@@ -6378,8 +6404,8 @@ namespace iMS_Link
                     flag_fullscreen = false;
                     bt_zoom.BackgroundImage = iMS_Link.Properties.Resources.full_screen;
                     richTextBox1.Visible = true;
-                    this.richTextBox1.Location = new System.Drawing.Point(958 + 65, 67);
-                    this.richTextBox1.Size = new System.Drawing.Size(500, 600);
+                    this.richTextBox1.Location = new Point(958 + 65, 67);
+                    this.richTextBox1.Size = new Size(500, 600);
                     this.FormBorderStyle = FormBorderStyle.Sizable;
                     this.WindowState = FormWindowState.Normal;
                     //tabControl1.Size = new Size(948, 616);
@@ -6603,11 +6629,9 @@ namespace iMS_Link
                 richTextBox1.Text += "進入 About 頁\n";
 
                 this.Size = new Size(1036, 745);
-                //this.tabControl1.Size = new Size(1000, 600);
-                this.tabControl1.Location = new Point(10, 60);
 
-                this.richTextBox1.Location = new System.Drawing.Point(958 + 65, 67 + 20);
-                this.richTextBox1.Size = new System.Drawing.Size(500, 586 + 10);
+                this.richTextBox1.Location = new Point(958 + 65, 67 + 20);
+                this.richTextBox1.Size = new Size(500, 586 + 10);
 
                 timer_rgb.Enabled = false;
                 timer_stage1.Enabled = false;
@@ -6630,8 +6654,8 @@ namespace iMS_Link
                     flag_fullscreen = false;
                     bt_zoom.BackgroundImage = iMS_Link.Properties.Resources.full_screen;
                     richTextBox1.Visible = true;
-                    //this.richTextBox1.Location = new System.Drawing.Point(958, 67);
-                    //this.richTextBox1.Size = new System.Drawing.Size(500, 586);
+                    //this.richTextBox1.Location = new Point(958, 67);
+                    //this.richTextBox1.Size = new Size(500, 586);
                     this.FormBorderStyle = FormBorderStyle.Sizable;
                     this.WindowState = FormWindowState.Normal;
                     //this.TopMost = false;
@@ -6709,8 +6733,8 @@ namespace iMS_Link
                     flag_fullscreen = false;
                     bt_zoom.BackgroundImage = iMS_Link.Properties.Resources.full_screen;
                     richTextBox1.Visible = true;
-                    this.richTextBox1.Location = new System.Drawing.Point(958 + 65, 67 + 20);
-                    this.richTextBox1.Size = new System.Drawing.Size(500, 586 + 10);
+                    this.richTextBox1.Location = new Point(958 + 65, 67 + 20);
+                    this.richTextBox1.Size = new Size(500, 586 + 10);
                     this.FormBorderStyle = FormBorderStyle.Sizable;
                     this.WindowState = FormWindowState.Normal;
                     //this.TopMost = false;
@@ -6789,8 +6813,6 @@ namespace iMS_Link
         int frame_count = 0;        //計算fps用
         int frame_count_old = 0;    //計算fps用
         DateTime dt_old = DateTime.Now;
-        public Bitmap bm = null;
-        //自定義函數, 捕獲每一幀圖像並顯示
         bool flag_capture_picture = false;
         int[] y_data_r = new int[8];
         int[] y_data_g = new int[8];
@@ -6805,14 +6827,17 @@ namespace iMS_Link
 
         int tick_count = 0;
         float tick_x = 0;
+        public Bitmap bm = null;
+        //自定義函數, 捕獲每一幀圖像並顯示
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             if (flag_ims_egd_exist == false)
             {
                 try
                 {
-                    //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                    //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();  //直接顯示圖片, 但是通常會先做些處理再顯示
                     bm = (Bitmap)eventArgs.Frame.Clone();
+                    //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
                     //pictureBox1.Image = bm;
                 }
                 catch (Exception ex)
@@ -7043,7 +7068,7 @@ namespace iMS_Link
                     int hhh = 0;
 
                     drawBrush = new SolidBrush(Color.Black);
-                    drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                    drawFont1 = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
 
                     if (rb_metering_1.Checked == true)
                     {
@@ -7078,11 +7103,11 @@ namespace iMS_Link
                                     string brightness = ((int)result).ToString() + "." + (((int)(result * 1000)) % 1000).ToString();
 
                                     drawBrush = new SolidBrush(Color.White);
-                                    drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                                    drawFont1 = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
                                     gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st, draw_y_st);
 
                                     drawBrush = new SolidBrush(Color.Black);
-                                    drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                                    drawFont1 = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
                                     gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st - 2, draw_y_st + 2);
                                 }
                             }
@@ -7114,11 +7139,11 @@ namespace iMS_Link
                             string brightness = ((int)result).ToString() + "." + (((int)(result * 1000)) % 1000).ToString();
 
                             drawBrush = new SolidBrush(Color.White);
-                            drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                            drawFont1 = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
                             gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st, draw_y_st);
 
                             drawBrush = new SolidBrush(Color.Black);
-                            drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                            drawFont1 = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
                             gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st - 2, draw_y_st + 2);
 
                         }
@@ -7142,11 +7167,11 @@ namespace iMS_Link
                             string brightness = ((int)result).ToString() + "." + (((int)(result * 1000)) % 1000).ToString();
 
                             drawBrush = new SolidBrush(Color.White);
-                            drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                            drawFont1 = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
                             gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st, draw_y_st);
 
                             drawBrush = new SolidBrush(Color.Black);
-                            drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                            drawFont1 = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
                             gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st - 2, draw_y_st + 2);
 
                         }
@@ -7168,8 +7193,8 @@ namespace iMS_Link
                 //畫框的功能
                 // Set the DashStyle property.
                 Pen p2 = new Pen(Color.Black, 1);
-                //p2.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-                p2.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                //p2.DashStyle = DashStyle.Custom;
+                p2.DashStyle = DashStyle.Dash;
 
                 gg.DrawLine(p2, w / 2 - 140, h / 2, w / 2 + 140, h / 2);
                 gg.DrawLine(p2, w / 2, h / 2 - 140, w / 2, h / 2 + 140);
@@ -7250,7 +7275,7 @@ namespace iMS_Link
             {   //顯示時間
                 drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 drawBrush = new SolidBrush(Color.Yellow);
-                drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                drawFont1 = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
                 x_st = 10;
                 y_st = 10;
 
@@ -7282,7 +7307,7 @@ namespace iMS_Link
                 int x_st2 = 0;
                 int y_st2 = 0;
                 Point[] points = new Point[3];
-                drawFont3 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                drawFont3 = new Font("Arial", 3, FontStyle.Bold, GraphicsUnit.Millimeter);
 
                 //畫框的功能
 
@@ -7533,12 +7558,12 @@ namespace iMS_Link
                     p1 = new Pen(Color.Silver, 1);  //一般情況 中間大框框 為銀色
                 }
                 // Set the DashStyle property.
-                //p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-                p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                //p1.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
-                //p1.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
-                //p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-                //p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+                //p1.DashStyle = DashStyle.Custom;
+                p1.DashStyle = DashStyle.Dash;
+                //p1.DashStyle = DashStyle.DashDot;
+                //p1.DashStyle = DashStyle.DashDotDot;
+                //p1.DashStyle = DashStyle.Dot;
+                //p1.DashStyle = DashStyle.Solid;
 
                 // Draw a rectangle.    畫中間的大方框 通常是 200X200
                 if (flag_use_metering_color == true)
@@ -7569,7 +7594,7 @@ namespace iMS_Link
                 string rgb_value;
                 x_st = 0;
 
-                y_st = 370;
+                y_st = 370 - 5;
                 if ((total_RGB_R >= (TARGET_AWB_R * ww * hh - tolerance)) && (total_RGB_R <= (TARGET_AWB_R * ww * hh + tolerance)))
                 {
                     drawBrush = new SolidBrush(Color.Gray);
@@ -7627,7 +7652,7 @@ namespace iMS_Link
 
                 if ((flag_do_awb == true) && (flag_display_r_do_awb == true))
                 {
-                    drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                    drawFont2 = new Font("Arial", 3, FontStyle.Bold, GraphicsUnit.Millimeter);
                     if (diff_r > 0)
                     {
                         x_st2 = x_st + 100 - ss;
@@ -7726,7 +7751,7 @@ namespace iMS_Link
 
                 if ((flag_do_awb == true) && (flag_display_g_do_awb == true))
                 {
-                    drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                    drawFont2 = new Font("Arial", 3, FontStyle.Bold, GraphicsUnit.Millimeter);
                     if (diff_g > 0)
                     {
                         x_st2 = x_st + 100 - ss;
@@ -7871,7 +7896,7 @@ namespace iMS_Link
 
                 if ((flag_do_awb == true) && (flag_display_b_do_awb == true))
                 {
-                    drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                    drawFont2 = new Font("Arial", 3, FontStyle.Bold, GraphicsUnit.Millimeter);
                     if (diff_b > 0)
                     {
                         x_st2 = x_st + 100 - ss;
@@ -7971,15 +7996,13 @@ namespace iMS_Link
                 //if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
                 if (flag_operation_mode == MODE_RELEASE_STAGE0)
                 {
-                    //draw auto awb region
+                    //畫出AWB亮度允許的範圍
                     int th_h = (int)numericUpDown_find_brightness_h.Value;
                     int th_l = (int)numericUpDown_find_brightness_l.Value;
 
-                    //gg.DrawRectangle(new Pen(Color.Green, 1), 550, 347, 18, 255/4);
-                    gg.FillRectangle(new SolidBrush(Color.LightGreen), 550, 347, 18, 255 / 4);
-
-                    gg.FillRectangle(new SolidBrush(Color.Yellow), 550, 347, 18, (255 - th_h) / 4);
-                    gg.FillRectangle(new SolidBrush(Color.Gold), 550, 347 + (255 - th_l) / 4, 18, (th_l / 4));
+                    gg.FillRectangle(new SolidBrush(Color.LightGreen), 550 + 13, 347 + 16, 18, 255 / 4);
+                    gg.FillRectangle(new SolidBrush(Color.Yellow), 550 + 13, 347 + 16, 18, (255 - th_h) / 4);
+                    gg.FillRectangle(new SolidBrush(Color.Gold), 550 + 13, 347 + (255 - th_l) / 4 + 16, 18, (th_l / 4));
                 }
             }
             usb_camera_width = w;
@@ -8254,7 +8277,7 @@ namespace iMS_Link
                     }
                 }
                 tb_wait_camera_data.Text = "";
-                button11.BackColor = System.Drawing.SystemColors.ControlLight;
+                button11.BackColor = SystemColors.ControlLight;
             }
         }
 
@@ -8296,10 +8319,10 @@ namespace iMS_Link
             lb_sn3.Text = "";
             tb_sn1.Text = "";
             tb_sn2.Text = "";
-            //groupBox10.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            //groupBox10.BackColor = SystemColors.ControlLightLight;
             lb_write_camera_serial2.Text += "";
             lb_write_camera_serial2.ForeColor = Color.Black;
-            button11.BackColor = System.Drawing.SystemColors.ControlLight;
+            button11.BackColor = SystemColors.ControlLight;
             g2.Clear(BackColor);
 
             bt_confirm.Visible = false;
@@ -8569,7 +8592,6 @@ namespace iMS_Link
                     if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B)
                         || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE3E))
                     {
-                        //HD + big
                         groupBox_sn1.Location = new Point(0, 600);
                         groupBox_sn1.Size = new Size(300, 170);
                         lb_sn_opal.Location = new Point(5, 10);
@@ -8581,7 +8603,7 @@ namespace iMS_Link
 
                         if (flag_operation_mode == MODE_RELEASE_STAGE0)
                         {
-                            groupBox_sn1.Location = new Point(1050, 700);
+                            groupBox_sn1.Location = new Point(1050, 700 - 20);
                             groupBox_sn1.Size = new Size(300, 130);
                         }
                     }
@@ -8592,12 +8614,13 @@ namespace iMS_Link
 
                 //最大化螢幕
                 this.FormBorderStyle = FormBorderStyle.None;
-                this.WindowState = FormWindowState.Maximized;
+                //this.WindowState = FormWindowState.Maximized;
+                this.Size = new Size(1920, 1040);
                 //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
                 //設定執行後的表單起始位置
                 this.StartPosition = FormStartPosition.Manual;
-                this.Location = new System.Drawing.Point(0, 0);
+                this.Location = new Point(0, 0);
 
                 if (flag_display_mode == DISPLAY_SD)
                 {
@@ -8622,11 +8645,11 @@ namespace iMS_Link
 
                 if (flag_enaglb_awb_function == true)
                 {
-                    pictureBox1.Location = new Point(170 + 400 + 30, 7);
+                    pictureBox1.Location = new Point(170 + 400 + 45, 0);
                     richTextBox1.Visible = true;
 
-                    this.richTextBox1.Location = new System.Drawing.Point(150, 90);
-                    this.richTextBox1.Size = new System.Drawing.Size(400 + 30 + 20, 250);
+                    this.richTextBox1.Location = new Point(150, 90);
+                    this.richTextBox1.Size = new Size(400 + 30 + 20, 250);
 
                     show_awb_item_visible(true);    //333
 
@@ -8651,7 +8674,7 @@ namespace iMS_Link
                 }
                 else
                 {
-                    pictureBox1.Location = new Point(170 + 90 + 80 + 140, 10);
+                    pictureBox1.Location = new Point(170 + 90 + 80 + 140, 0);
                     richTextBox1.Visible = false;
                 }
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
@@ -8714,8 +8737,8 @@ namespace iMS_Link
 
                 bt_zoom.BackgroundImage = iMS_Link.Properties.Resources.full_screen;
                 richTextBox1.Visible = true;
-                this.richTextBox1.Location = new System.Drawing.Point(1020, this.tabControl1.Location.Y + 30);
-                this.richTextBox1.Size = new System.Drawing.Size(500, 586 - 5);
+                this.richTextBox1.Location = new Point(1020, this.tabControl1.Location.Y + 30);
+                this.richTextBox1.Size = new Size(500, 586 - 5);
                 this.FormBorderStyle = FormBorderStyle.Sizable;
                 this.WindowState = FormWindowState.Normal;
                 if (flag_display_mode == DISPLAY_SD)
@@ -8775,9 +8798,12 @@ namespace iMS_Link
             exit_program();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.insighteyes.com/");
+            //Process.Start("https://www.insighteyes.com/");
+
+            //richTextBox1.Text += "get data :\n" + e.Link.LinkData.ToString() + "\n";
+            Process.Start(e.Link.LinkData.ToString());
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -8827,7 +8853,7 @@ namespace iMS_Link
             delay(300);
 
             lb_rtc.Text = "已更新RTC時間";
-            button21.BackColor = System.Drawing.SystemColors.ControlLight;
+            button21.BackColor = SystemColors.ControlLight;
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -8883,7 +8909,7 @@ namespace iMS_Link
                 delay(100);
             }
             flag_wait_receive_data = 0;
-            button24.BackColor = System.Drawing.SystemColors.ControlLight;
+            button24.BackColor = SystemColors.ControlLight;
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -8925,7 +8951,7 @@ namespace iMS_Link
 
             serialPort1.Write(camera_model_data_send, 0, 16);
             lb_write_camera_model.Text = "寫入相機型號完成";
-            button23.BackColor = System.Drawing.SystemColors.ControlLight;
+            button23.BackColor = SystemColors.ControlLight;
         }
 
         private void button31_Click(object sender, EventArgs e)
@@ -8947,7 +8973,7 @@ namespace iMS_Link
             Send_IMS_Data(0xC0, 0x65, 0x43, 0x21);   //camera serial write random data
             lb_write_camera_serial.Text = "寫入相機任意序號完成";
 
-            button31.BackColor = System.Drawing.SystemColors.ControlLight;
+            button31.BackColor = SystemColors.ControlLight;
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -8975,7 +9001,7 @@ namespace iMS_Link
             }
             flag_wait_receive_data = 0;
 
-            button30.BackColor = System.Drawing.SystemColors.ControlLight;
+            button30.BackColor = SystemColors.ControlLight;
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -9040,7 +9066,7 @@ namespace iMS_Link
             delay(200);
             lb_write_mb_model.Text = "寫入主機型號完成";
             lb_write_mb_model.ForeColor = Color.Black;
-            button29.BackColor = System.Drawing.SystemColors.ControlLight;
+            button29.BackColor = SystemColors.ControlLight;
             g.Clear(BackColor);
             g.DrawString("燒錄完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(15, 20));
             flag_already_write_system_data = true;
@@ -9075,7 +9101,7 @@ namespace iMS_Link
             delay(100);
             serialPort1.Write(data, 0, 8);
             delay(100);
-            button35.BackColor = System.Drawing.SystemColors.ControlLight;
+            button35.BackColor = SystemColors.ControlLight;
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -9715,10 +9741,10 @@ namespace iMS_Link
 
                 lb_write_camera_serial2.Text = "寫入相機序號完成";
                 lb_write_camera_serial2.BackColor = Color.White;
-                button11.BackColor = System.Drawing.SystemColors.ControlLight;
+                button11.BackColor = SystemColors.ControlLight;
                 g2.Clear(BackColor);
                 g2.DrawString("燒錄完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(15, 20));
-                button11.BackColor = System.Drawing.SystemColors.ControlLight;
+                button11.BackColor = SystemColors.ControlLight;
                 lb_write_camera_serial2.Text += "    燒錄完成";
 
                 delay(200);
@@ -9743,7 +9769,7 @@ namespace iMS_Link
                 g2.Clear(BackColor);
                 g2.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(60, 20));
                 //g2.DrawString(str, f, new SolidBrush(Color.Blue), new PointF((panel9.Width - tmp_width) / 2, (panel9.Height - tmp_height) / 2));
-                button11.BackColor = System.Drawing.SystemColors.ControlLight;
+                button11.BackColor = SystemColors.ControlLight;
 
                 richTextBox1.Text += "delay ST\n";
                 //flag_verify_serial_data = 1;
@@ -13471,7 +13497,7 @@ namespace iMS_Link
             int y_st = 300;
             richTextBox2.Visible = true;
             richTextBox2.Location = new Point(x_st, y_st);
-            richTextBox2.Size = new System.Drawing.Size(150, 500);
+            richTextBox2.Size = new Size(150, 500);
             */
             richTextBox2.Clear();
 
@@ -14067,7 +14093,7 @@ namespace iMS_Link
                             button89.Enabled = false;
                             button2.Enabled = true;
                             button90.Enabled = true;
-                            this.BackColor = System.Drawing.SystemColors.ControlLight;
+                            this.BackColor = SystemColors.ControlLight;
                             flag_comport_ok = true;
                         }
                         else
@@ -15475,7 +15501,7 @@ namespace iMS_Link
                     x_st = 605;
                     y_st = 500;
                     richTextBox2.Location = new Point(x_st, y_st);
-                    richTextBox2.Size = new System.Drawing.Size(300, 460);
+                    richTextBox2.Size = new Size(300, 460);
                     bt_script_save.Location = new Point(x_st + 300 - bt_script_save.Width - 5, y_st + 5);
                     bt_script_cancel.Location = new Point(x_st + 300 - bt_script_save.Width - 5, y_st + bt_script_save.Height + 10);
                 }
@@ -15570,7 +15596,7 @@ namespace iMS_Link
             openFileDialog1.InitialDirectory = Application.StartupPath + "\\script\\";         //從目前目錄開始尋找檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
+                richTextBox1.Text += "1 get filename : " + openFileDialog1.FileName + "\n";
                 //richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
 
                 flag_script_data_on = true;
@@ -15593,7 +15619,7 @@ namespace iMS_Link
                     x_st = 605;
                     y_st = 500;
                     richTextBox2.Location = new Point(x_st, y_st);
-                    richTextBox2.Size = new System.Drawing.Size(300, 460);
+                    richTextBox2.Size = new Size(300, 460);
                     bt_script_save.Location = new Point(x_st + 300 - bt_script_save.Width - 5, y_st + 5);
                     bt_script_cancel.Location = new Point(x_st + 300 - bt_script_save.Width - 5, y_st + bt_script_save.Height + 10);
                 }
@@ -15625,7 +15651,7 @@ namespace iMS_Link
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                richTextBox1.Text += "get filename : " + saveFileDialog1.FileName + "\n";
+                richTextBox1.Text += "2 get filename : " + saveFileDialog1.FileName + "\n";
                 //richTextBox1.Text += "length : " + saveFileDialog1.FileName.Length.ToString() + "\n";
 
                 //StreamReader sr = new StreamReader(saveFileDialog1.FileName);
@@ -15645,7 +15671,6 @@ namespace iMS_Link
             else
             {
                 richTextBox1.Text += "未選取檔案\n";
-
             }
         }
 
@@ -16915,7 +16940,7 @@ namespace iMS_Link
             SendData = TH1;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
 
-            delay(500);
+            delay(50);
 
             DongleAddr_h = 0x55;
             DongleAddr_l = 0x07;
@@ -17003,7 +17028,7 @@ namespace iMS_Link
             SendData = TH1;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
 
-            delay(500);
+            delay(50);
 
             DongleAddr_h = 0x55;
             DongleAddr_l = 0x0c;
@@ -21463,7 +21488,7 @@ namespace iMS_Link
             {
                 using (Graphics g = Graphics.FromImage(bmp))
                 {
-                    //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, System.Drawing.Size blockRegionSize);
+                    //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize);
                     g.CopyFromScreen(this.Location, new Point(0, 0), new Size(this.Width, this.Height));
                     //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
                     //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
@@ -21562,7 +21587,7 @@ namespace iMS_Link
                 Graphics g = Graphics.FromImage(bitmap1);
                 Pen p = new Pen(Color.Red, 1);
                 SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                Font drawFont = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
                 pHdc = g.GetHdc();
 
                 if (cb_show_time.Checked == true)
@@ -21743,7 +21768,7 @@ namespace iMS_Link
                 Graphics g = Graphics.FromImage(bitmap1);
                 Pen p = new Pen(Color.Red, 1);
                 SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                Font drawFont = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
                 pHdc = g.GetHdc();
 
                 if (cb_show_time.Checked == true)
@@ -21845,7 +21870,7 @@ namespace iMS_Link
 
         private void tb_mesg_Leave(object sender, EventArgs e)
         {
-            tb_mesg.BackColor = System.Drawing.SystemColors.ControlLight;
+            tb_mesg.BackColor = SystemColors.ControlLight;
             if (tb_mesg.Text == "")
                 tb_mesg.Text = "輸入圖片訊息";
             timer_stage2.Enabled = true;
@@ -21855,7 +21880,7 @@ namespace iMS_Link
         {
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
-                tb_mesg.BackColor = System.Drawing.SystemColors.ControlLight;
+                tb_mesg.BackColor = SystemColors.ControlLight;
                 if (tb_mesg.Text == "")
                     tb_mesg.Text = "輸入圖片訊息";
                 timer_stage2.Enabled = true;
@@ -21866,7 +21891,7 @@ namespace iMS_Link
             }
             else if (e.KeyChar == (Char)27)  //撈取ESC
             {
-                tb_mesg.BackColor = System.Drawing.SystemColors.ControlLight;
+                tb_mesg.BackColor = SystemColors.ControlLight;
                 tb_mesg.Text = "輸入圖片訊息";
                 timer_stage2.Enabled = true;
                 e.Handled = true;
@@ -21892,7 +21917,7 @@ namespace iMS_Link
                 Graphics g = Graphics.FromImage(bitmap1);
                 Pen p = new Pen(Color.Red, 1);
                 SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                Font drawFont = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
                 pHdc = g.GetHdc();
 
                 if (cb_show_time.Checked == true)
@@ -21934,7 +21959,7 @@ namespace iMS_Link
 
                     if (data_R > 0)
                     {
-                        drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                        drawFont1 = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
                         drawBrush = new SolidBrush(Color.Red);
                         x_st = 430;
                         g.DrawString(data_R.ToString(), drawFont1, drawBrush, x_st, y_st);
@@ -22058,6 +22083,121 @@ namespace iMS_Link
             }
             return;
         }
+
+        void save_image_to_local_drive(string foldername)
+        {
+            show_main_message1("存檔中...", S_OK, 10);
+            delay(10);
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                IntPtr pHdc;
+                Graphics g = Graphics.FromImage(bitmap1);
+                Pen p = new Pen(Color.Red, 1);
+                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                Font drawFont = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
+                pHdc = g.GetHdc();
+
+                if (cb_show_time.Checked == true)
+                {   //顯示時間
+                    int xPos = 10;
+                    int yPos = 10;
+                    string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+                    g.ReleaseHdc();
+
+                    if (flag_david_test1 == true)
+                    {
+                        g.DrawString(saturation_ratio + ", TH2 = " + g_TH2.ToString() + ", TH1 = " + g_TH1.ToString(), drawFont, drawBrush, xPos, yPos);
+                    }
+                    else
+                    {
+                        if (flag_operation_mode == MODE_RELEASE_STAGE0)
+                        {
+                            if ((tb_mesg.Text != "") && (tb_mesg.Text != "輸入圖片訊息"))
+                            {
+                                drawDate += "\t" + tb_mesg.Text.Trim();
+                                //tb_mesg.Text = "輸入圖片訊息";
+                            }
+                        }
+                        g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+                    }
+                }
+                else
+                {
+                    g.ReleaseHdc();
+                }
+
+                if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
+                {
+                    int x_st = 0;
+                    int y_st = 0;
+
+                    y_st = 450;
+
+
+                    drawBrush = new SolidBrush(Color.Red);
+                    x_st = 430 - 70 * 2 - 110;
+                    //g.DrawString("point  " + flag_right_left_point_cnt.ToString() + ",  " + flag_down_up_point_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+
+                    drawFont1 = new Font("Arial", 5, FontStyle.Bold, GraphicsUnit.Millimeter);
+
+                    if (flag_lenc_enable == true)
+                    {
+                        g.DrawString("LENC ON,   WPT = " + numericUpDown_wpt.Value.ToString() + ",    DNS = " + numericUpDown_denoise.Value.ToString() + ",   Sharp = " + numericUpDown_sharpness.Value.ToString(), drawFont1, drawBrush, x_st, y_st);
+                    }
+                    else
+                    {
+                        g.DrawString("LENC OFF,   WPT = " + numericUpDown_wpt.Value.ToString() + ",    DNS = " + numericUpDown_denoise.Value.ToString() + ",   Sharp = " + numericUpDown_sharpness.Value.ToString(), drawFont1, drawBrush, x_st, y_st);
+                    }
+                    g.Dispose();
+                }
+
+                String filename1 = string.Empty;
+
+                if (lb_auto_awb_cnt.Visible == true)
+                {
+                }
+                else
+                {
+                    filename1 = foldername + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                }
+
+                //String file1 = file + ".jpg";
+                String filename1a = filename1 + ".bmp";
+                //String file3 = file + ".png";
+
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename1a, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename1a + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                    show_main_message1("已存檔BMP", S_OK, 30);
+                    show_main_message2("已存檔 : " + filename1a, S_OK, 30);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e40 : " + ex.Message + "\n";
+                    show_main_message1("存檔失敗", S_OK, 30);
+                    show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+                show_main_message1("無圖可存b", S_FALSE, 30);
+                show_main_message2("無圖可存b", S_FALSE, 30);
+            }
+            return;
+        }
+
 
         void show_system_info()
         {
@@ -23269,14 +23409,14 @@ namespace iMS_Link
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 button75.Text = "設定中";
-                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
+                richTextBox1.Text += "3 get filename : " + openFileDialog1.FileName + "\n";
                 //richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
 
                 int x_st = 605;
                 int y_st = 465;
                 richTextBox2.Visible = true;
                 richTextBox2.Location = new Point(x_st, y_st);
-                richTextBox2.Size = new System.Drawing.Size(139, 495);
+                richTextBox2.Size = new Size(139, 495);
                 richTextBox2.Clear();
 
                 StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
@@ -23291,7 +23431,7 @@ namespace iMS_Link
                 richTextBox1.Text += "未選取檔案\n";
             }
             button75.Text = "Gamma";
-            button75.BackColor = System.Drawing.SystemColors.ControlLight;
+            button75.BackColor = SystemColors.ControlLight;
         }
 
         private void button66_Click(object sender, EventArgs e)
@@ -23303,7 +23443,7 @@ namespace iMS_Link
             int y_st = 465;
             richTextBox2.Visible = true;
             richTextBox2.Location = new Point(x_st, y_st);
-            richTextBox2.Size = new System.Drawing.Size(139, 495);
+            richTextBox2.Size = new Size(139, 495);
             richTextBox2.Clear();
 
             StreamReader sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
@@ -23415,20 +23555,25 @@ namespace iMS_Link
             richTextBox1.Text += "\n自動位置測試AWB ST, 時間 : " + DateTime.Now.ToString() + "\n";
             tb_awb_mesg.Text = "自動AWB開始";
             awb_cnt = 0;
-            flag_right_left_cnt = -8;
-            flag_down_up_cnt = -8;
+            flag_right_left_cnt = 0;
+            flag_down_up_cnt = 0;
 
-            //for (current_test_count = 1; current_test_count <= total_test_count; current_test_count++)
-            for (current_test_count = 1; current_test_count <= 15; current_test_count++)
+            int i;
+            int j;
+            for (j = -7; j <= 7; j += 1)
             {
-                flag_right_left_cnt += 1;
-                flag_down_up_cnt += 1;
-                refresh_picturebox2();
+                for (i = -7; i <= 7; i += 1)
+                {
+                    flag_right_left_cnt = i;
+                    flag_down_up_cnt = j;
+                    refresh_picturebox2();
 
-                lb_auto_awb_cnt.Text = current_test_count.ToString();
-                do_awb(sender, e);
-                //delay(500);
+                    lb_auto_awb_cnt.Text = current_test_count.ToString();
+                    do_awb(sender, e);
+                    //delay(500);
+                }
             }
+
             lb_auto_awb_cnt.Visible = false;
             cb_auto_search.Checked = true;
             richTextBox1.Text += "\n自動位置測試AWB SP, 時間 : " + DateTime.Now.ToString() + "\n";
@@ -23712,7 +23857,7 @@ namespace iMS_Link
             {
                 button82.Enabled = false;
                 button81.Enabled = true;
-                this.BackColor = System.Drawing.SystemColors.ControlLight;
+                this.BackColor = SystemColors.ControlLight;
                 flag_comport_ok = true;
             }
         }
@@ -24308,7 +24453,7 @@ namespace iMS_Link
             {
                 button89.Enabled = false;
                 button90.Enabled = true;
-                this.BackColor = System.Drawing.SystemColors.ControlLight;
+                this.BackColor = SystemColors.ControlLight;
                 flag_comport_ok = true;
             }
         }
@@ -24343,7 +24488,7 @@ namespace iMS_Link
             richTextBox1.Text += "到手動模式\n";
             show_main_message1("到手動模式", S_FALSE, 10);
             button92.BackColor = Color.Pink;
-            button93.BackColor = System.Drawing.SystemColors.ControlLight;
+            button93.BackColor = SystemColors.ControlLight;
         }
 
         private void button93_Click(object sender, EventArgs e)
@@ -24354,7 +24499,7 @@ namespace iMS_Link
             Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);  //To auto mode
             richTextBox1.Text += "到自動模式\n";
             show_main_message1("到自動模式", S_FALSE, 10);
-            button92.BackColor = System.Drawing.SystemColors.ControlLight;
+            button92.BackColor = SystemColors.ControlLight;
             button93.BackColor = Color.Pink;
         }
 
@@ -25278,7 +25423,7 @@ namespace iMS_Link
                     Graphics g = Graphics.FromImage(bmp3);
                     //Pen p = new Pen(Color.Red, 1);
                     SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-                    Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                    Font drawFont = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
 
                     //g.DrawRectangle(new Pen(Color.Navy, 1), x_st, y_st, ww, hh);
 
@@ -25450,10 +25595,10 @@ namespace iMS_Link
             if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "iMS_Link", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                button8.BackColor = System.Drawing.SystemColors.ControlLight;
-                button11.BackColor = System.Drawing.SystemColors.ControlLight;
-                button29.BackColor = System.Drawing.SystemColors.ControlLight;
-                button30.BackColor = System.Drawing.SystemColors.ControlLight;
+                button8.BackColor = SystemColors.ControlLight;
+                button11.BackColor = SystemColors.ControlLight;
+                button29.BackColor = SystemColors.ControlLight;
+                button30.BackColor = SystemColors.ControlLight;
                 playSound(S_FALSE);
                 flag_doing_writing_data = false;
                 return false;
@@ -25573,8 +25718,8 @@ namespace iMS_Link
                     get_camera_status();    //再呼叫自己一次
                 }
             }
-            button4.BackColor = System.Drawing.SystemColors.ControlLight;
-            button8.BackColor = System.Drawing.SystemColors.ControlLight;
+            button4.BackColor = SystemColors.ControlLight;
+            button8.BackColor = SystemColors.ControlLight;
 
             if (check_camera_sensor_fail_cnt > 0)
                 check_camera_sensor_fail_cnt = 0;
@@ -25627,15 +25772,15 @@ namespace iMS_Link
                 Legend legend = new Legend();
                 Series series = new Series();
 
-                chart1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
-                chart1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-                chart1.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
-                chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+                chart1.BackColor = Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
+                chart1.BackGradientStyle = GradientStyle.TopBottom;
+                chart1.BorderlineColor = Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
+                chart1.BorderlineDashStyle = ChartDashStyle.Solid;
                 chart1.BorderlineWidth = 2;
-                chart1.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
-                chart1.Location = new System.Drawing.Point(50, 50);
+                chart1.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;
+                chart1.Location = new Point(50, 50);
                 chart1.Name = "chart1";
-                chart1.Size = new System.Drawing.Size(chartWidth, chartHeight);
+                chart1.Size = new Size(chartWidth, chartHeight);
                 chart1.TabIndex = 1;
                 chart1.Dock = DockStyle.None;
 
@@ -25646,37 +25791,37 @@ namespace iMS_Link
                 ctArea.Area3DStyle.Rotation = 10;
                 ctArea.Area3DStyle.WallWidth = 0;
                 ctArea.AxisX.IsLabelAutoFit = false;
-                ctArea.AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-                ctArea.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisX.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+                ctArea.AxisX.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);
+                ctArea.AxisX.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisX.MajorGrid.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisX.MinorGrid.LineDashStyle = ChartDashStyle.Dash;
                 ctArea.AxisX.Title = nameAxisX;
                 ctArea.AxisY.IsLabelAutoFit = false;
-                ctArea.AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-                ctArea.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);
+                ctArea.AxisY.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisY.MajorGrid.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
                 ctArea.AxisY.Maximum = 80D;
                 ctArea.AxisY.Minimum = 60D;
                 ctArea.AxisY.Title = nameAxisY;
-                ctArea.BackColor = System.Drawing.Color.OldLace;
-                ctArea.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-                ctArea.BackSecondaryColor = System.Drawing.Color.White;
-                ctArea.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+                ctArea.BackColor = Color.OldLace;
+                ctArea.BackGradientStyle = GradientStyle.TopBottom;
+                ctArea.BackSecondaryColor = Color.White;
+                ctArea.BorderColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.BorderDashStyle = ChartDashStyle.Solid;
                 ctArea.Name = "Default";
-                ctArea.ShadowColor = System.Drawing.Color.Transparent;
+                ctArea.ShadowColor = Color.Transparent;
                 chart1.ChartAreas.Add(ctArea);
 
-                legend.BackColor = System.Drawing.Color.Transparent;
+                legend.BackColor = Color.Transparent;
                 legend.Enabled = false;
-                legend.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+                legend.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);
                 legend.IsTextAutoFit = false;
                 legend.Name = "Default";
                 chart1.Legends.Add(legend);
 
-                series.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
+                series.BorderColor = Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
                 series.ChartArea = "Default";
-                series.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                series.ChartType = SeriesChartType.Line;
                 series.Legend = "Default";
                 series.Name = "Default";
                 chart1.Series.Add(series);
@@ -25786,13 +25931,13 @@ namespace iMS_Link
             chart2.ChartAreas[0].AxisX.TitleForeColor = Color.Blue; //設定X軸名稱的字體顏色
             chart2.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  //顯示 或 隱藏 X 軸標示
             chart2.ChartAreas[0].AxisX.MajorGrid.Enabled = true;    //顯示 或 隱藏 X 軸標線
-            chart2.ChartAreas[0].AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 15, System.Drawing.FontStyle.Bold);   //設定X軸刻度的字型
+            chart2.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Trebuchet MS", 15, FontStyle.Bold);   //設定X軸刻度的字型
             chart2.ChartAreas[0].AxisX.LabelStyle.Interval = 60;    //設置X軸刻度間隔的大小
             chart2.ChartAreas[0].AxisX.LabelStyle.IntervalType = DateTimeIntervalType.Number;//設置間隔大小的度量單位
-            chart2.ChartAreas[0].AxisX.LineColor = System.Drawing.Color.White;//設置X軸的線條顏色
+            chart2.ChartAreas[0].AxisX.LineColor = Color.White;//設置X軸的線條顏色
             chart2.ChartAreas[0].AxisX.MajorGrid.Interval = 100;//設置主網格線與次要網格線的間隔
             chart2.ChartAreas[0].AxisX.MajorGrid.IntervalType = DateTimeIntervalType.Number;//設置主網格線與次網格線的間隔的度量單位
-            chart2.ChartAreas[0].AxisX.MajorGrid.LineColor = System.Drawing.Color.Snow;//設置網格線的顏色
+            chart2.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Snow;//設置網格線的顏色
             chart2.ChartAreas[0].AxisX.MajorTickMark.Interval = 20;//設置刻度線的間隔
             chart2.ChartAreas[0].AxisX.MajorTickMark.IntervalType = DateTimeIntervalType.Number;//設置刻度線的間隔的度量單位
 
@@ -25804,23 +25949,23 @@ namespace iMS_Link
             chart2.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  //顯示 或 隱藏 Y 軸標示
             chart2.ChartAreas[0].AxisY.MajorGrid.Enabled = true;    //顯示 或 隱藏 Y 軸標線
 
-            chart2.ChartAreas[0].AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);//設置Y軸左側的提示信息的字體屬性
-            chart2.ChartAreas[0].AxisY.LineColor = System.Drawing.Color.DarkBlue;//設置軸的線條顏色
-            chart2.ChartAreas[0].AxisY.MajorGrid.LineColor = System.Drawing.Color.White;//設置網格線顏色
+            chart2.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);//設置Y軸左側的提示信息的字體屬性
+            chart2.ChartAreas[0].AxisY.LineColor = Color.DarkBlue;//設置軸的線條顏色
+            chart2.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;//設置網格線顏色
 
             /*
             #region 圖表樣式
-            chart2.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
-            chart2.BackSecondaryColor = System.Drawing.Color.Yellow;//設置背景的輔助顏色
-            chart2.BorderlineColor = System.Drawing.Color.Yellow;//設置圖像邊框的顏色
-            chart2.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
+            chart2.BackGradientStyle = GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
+            chart2.BackSecondaryColor = Color.Yellow;//設置背景的輔助顏色
+            chart2.BorderlineColor = Color.Yellow;//設置圖像邊框的顏色
+            chart2.BorderlineDashStyle = ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
             chart2.BorderlineWidth = 2;//設置圖像的邊框寬度
-            chart2.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
-            chart2.BackColor = System.Drawing.Color.Yellow;//設置圖表的背景顏色
+            chart2.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
+            chart2.BackColor = Color.Yellow;//設置圖表的背景顏色
             #endregion
             */
-            //chart2.Titles[0].Font = new System.Drawing.Font("標楷體", 30f);//设置图表标题字体样式和大小
-            //chart2.Legends["Legend1"].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;  //設定圖標顯示停靠的位置
+            //chart2.Titles[0].Font = new Font("標楷體", 30f);//设置图表标题字体样式和大小
+            //chart2.Legends["Legend1"].Docking = Docking.Right;  //設定圖標顯示停靠的位置
         }
 
         void show_picture_brightness_histogram()
@@ -25904,7 +26049,7 @@ namespace iMS_Link
             {
                 series[i] = new Series(curves[i]);
                 series[i].Color = colors[i];
-                series[i].Font = new System.Drawing.Font("新細明體", 2); //設定字型
+                series[i].Font = new Font("新細明體", 2); //設定字型
 
                 series[i].ChartType = SeriesChartType.Point; //設定線條種類
                 series[i].ChartType = SeriesChartType.Column; //設定線條種類
@@ -26430,7 +26575,96 @@ namespace iMS_Link
 
         private void bt_debug9_Click(object sender, EventArgs e)
         {
-            show_main_message0("debug9 : --------------", S_OK, 30);
+            if (get_comport_status() == false)
+                return;
+
+            g_conn_status = get_camera_status();
+            richTextBox1.Text += "g_conn_status = " + g_conn_status.ToString() + "\n";
+
+            if (g_conn_status != CAMERA_OK)
+            {
+                richTextBox1.Text += "無相機, abort\n";
+                return;
+            }
+
+            show_main_message0("debug9 : DNS 測試", S_OK, 30);
+
+            flag_get_lenc_status_ready = false;
+            Send_IMS_Data(0xA1, 0x50, 0x00, 0); //read 0x5000 ISP CTRL00 for LENC enable
+
+            int cnt = 0;
+            while ((flag_get_lenc_status_ready == false) && (cnt++ < 20))
+            {
+                richTextBox1.Text += "+";
+                delay(10);
+            }
+
+            if (flag_lenc_enable == false)
+            {
+                richTextBox1.Text += "LENC OFF\n";
+            }
+            else
+            {
+                richTextBox1.Text += "LENC ON\n";
+            }
+
+            byte wpt = 0;
+            byte bpt = 0;
+
+            for (wpt = 70; wpt <= 160; wpt += 10)
+            {
+                bpt = (byte)(wpt - 15);
+
+                numericUpDown_wpt.Value = wpt;
+                numericUpDown_bpt.Value = bpt;
+
+                DongleData = wpt;
+                DongleAddr_h = 0x3A;
+                DongleAddr_l = 0x03;
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
+                delay(10);
+                DongleData = bpt;
+                DongleAddr_h = 0x3A;
+                DongleAddr_l = 0x04;
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
+                delay(10);
+
+                read_camera_sensor(SENSOR_WPT);
+
+                richTextBox1.Text += "WPT =" + numericUpDown_wpt.Value.ToString() + "\n";
+
+                string foldername;
+                foldername = Application.StartupPath + "\\picture_" + numericUpDown_wpt.Value.ToString();
+                if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
+                {
+                    Directory.CreateDirectory(foldername);
+                    richTextBox1.Text += "已建立一個新資料夾: " + foldername + "\n";
+                }
+                else
+                {
+                    //richTextBox1.Text += "資料夾: " + foldername + " 已存在，不用再建立\n";
+                }
+
+                int sharp;
+                int dns;
+                for (sharp = 0; sharp < 5; sharp++)
+                {
+                    numericUpDown_sharpness.Value = sharp;
+
+                    for (dns = 0; dns < 5; dns++)
+                    {
+                        show_main_message0("測試  " + numericUpDown_wpt.Value.ToString() + "   " + dns.ToString() + "   " + sharp.ToString(), S_OK, 30);
+                        numericUpDown_denoise.Value = dns;
+                        delay(500);
+                        //save_image_to_local_drive();
+                        //save_image_to_local_drive(foldername);
+                    }
+                }
+            }
+
+            richTextBox1.Text += "debug9 test SP\n";
+
+            show_main_message0("debug9 : 測試完成", S_OK, 500);
         }
 
         private void bt_debug10_Click(object sender, EventArgs e)
@@ -28992,7 +29226,11 @@ namespace iMS_Link
 
         private void btn_lenc_test2_click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "LENC G test\n";
+            richTextBox1.Text += "LENC RGB test\n";
+
+            flag_lenc_enable = true;
+            pbox_lenc_status.Image = iMS_Link.Properties.Resources.on;
+            Send_IMS_Data(0xA0, 0x50, 0x00, 0xFF);
 
             tbar0r.Value = 307;
             tbar_mouse_up_lenc(tbar0r, e);
@@ -29805,13 +30043,15 @@ namespace iMS_Link
         private void tbar_mouse_up_lenc(object sender, EventArgs e)
         {
             setup_lenc(sender, e);
-            delay(30);
+            delay(3);
         }
 
         private void setup_lenc(object sender, EventArgs e)
         {
             byte SendData = 0;
             DongleAddr_h = 0x51;
+
+            //richTextBox1.Text += "setup_lenc\t";
 
             if (sender.Equals(tbar0r))
             {
@@ -30768,7 +31008,7 @@ namespace iMS_Link
                 groupBox_sn1.Visible = true;
                 groupBox_temperature.Visible = true;
                 groupBox_wpt_bpt.Visible = true;
-                lb_yuv_y2.Location = new Point(1610, 740);
+                lb_yuv_y2.Location = new Point(1610 + 35, 740 + 45);
                 cb_Contrast_Brightness_Gamma.Visible = true;
                 cb_Gamma.Visible = true;
             }
@@ -30798,7 +31038,7 @@ namespace iMS_Link
             //openFileDialog1.InitialDirectory = Application.StartupPath;         //從目前目錄開始尋找檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
+                richTextBox1.Text += "4 get filename : " + openFileDialog1.FileName + "\n";
                 stage_3e_filename = openFileDialog1.FileName;
                 //richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
 
@@ -31018,7 +31258,103 @@ namespace iMS_Link
                 reload_3e_picture();
             }
         }
+
+        private void bt_lenc_Click(object sender, EventArgs e)
+        {
+            if (flag_lenc_enable == false)
+            {
+                flag_lenc_enable = true;
+                bt_lenc.BackgroundImage = iMS_Link.Properties.Resources.on;
+                Send_IMS_Data(0xA0, 0x50, 0x00, 0xFF);
+
+                setup_lenc(1);
+
+            }
+            else
+            {
+                flag_lenc_enable = false;
+                bt_lenc.BackgroundImage = iMS_Link.Properties.Resources.off;
+                Send_IMS_Data(0xA0, 0x50, 0x00, 0xFD);
+                setup_lenc(0);
+            }
+        }
+
+        void setup_lenc(int enable)
+        {
+            byte SendData = 0;
+
+            if (enable == 0)
+            {
+
+
+            }
+            else if (enable == 1)
+            {
+                DongleAddr_h = 0x50;
+                DongleAddr_l = 0x00;
+                SendData = 0xFF;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+
+                DongleAddr_h = 0x51;
+
+                DongleAddr_l = 0x04;
+                SendData = 0x29;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+                DongleAddr_l = 0x05;
+                SendData = 0x00;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+                DongleAddr_l = 0x06;
+                SendData = 0x87;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+                DongleAddr_l = 0x07;
+                SendData = 0x00;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+
+                DongleAddr_l = 0x0C;
+                SendData = 0x29;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+                DongleAddr_l = 0x0D;
+                SendData = 0x00;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+                DongleAddr_l = 0x0E;
+                SendData = 0x87;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+                DongleAddr_l = 0x0F;
+                SendData = 0x00;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+                DongleAddr_l = 0x14;
+                SendData = 0x29;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+                DongleAddr_l = 0x15;
+                SendData = 0x00;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+                DongleAddr_l = 0x16;
+                SendData = 0x87;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+                DongleAddr_l = 0x17;
+                SendData = 0x00;
+                richTextBox1.Text += "位址 0x" + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t數值 : 0x " + SendData.ToString("X2") + " = " + SendData.ToString() + "\n";
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            }
+            else
+            {
+            }
+        }
     }
 }
-
 

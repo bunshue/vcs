@@ -1,22 +1,4 @@
 
-
-//在 C# 中使用 DownloadFile() 方法從一個 URL 下載檔案
-WebClient mywebClient = new WebClient();
-mywebClient.DownloadFile("http://mysite.com/myfile.txt", @"d:\myfile.txt");
-
-//在 C# 中獲取 2D 陣列的長度
-
-    //使用 C# 中的 Array.GetLength() 函式獲取 2D 陣列的寬度和高度
-    //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
-            int[,] array2D = new int[5, 10];
-            Console.WriteLine(array2D.GetLength(0));	//5
-            Console.WriteLine(array2D.GetLength(1));	//10
-			
-//使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
-            int[,] array2D = new int[5, 10];
-            Console.WriteLine(array2D.GetUpperBound(0)+1);	//5
-            Console.WriteLine(array2D.GetUpperBound(1)+1);	//10
-			
 			
 
                 string appDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().GetName().CodeBase);
@@ -88,37 +70,25 @@ FileInfo 類提供了用於在 C# 中建立，開啟，複製，刪除和移動�
 
 
 
-            //打开注册表
-            string regeditstr = Environment.GetEnvironmentVariable("WinDir");//WinDir系统环境变量的名称
-            System.Diagnostics.Process.Start(regeditstr + "\\regedit.exe");//打开注册表
+//打开注册表
+string regeditstr = Environment.GetEnvironmentVariable("WinDir");//WinDir系统环境变量的名称
+Process.Start(regeditstr + "\\regedit.exe");//打开注册表
 
 
 //開啟檔案總管到指定的目錄
+string Path = @"C:\dddddddddd";
+Process.Start("explorer.exe", Path);
 
-        // Opening the record directory 
-        private void OpenRecordingDirectory_Click(object sender, EventArgs e)
-        {
-            string filePath = this.RecordingPathInput.Text;
-            System.Diagnostics.Process.Start("explorer.exe", filePath);
-			
-        }
+Process.Start(textBox1.Text);//打开文件夹进行查看
 
-			System.Diagnostics.Process.Start(textBox1.Text);//打开文件夹进行查看
+richTextBox1.Text += "在任務欄中顯示\n";
+this.ShowInTaskbar = true;
 
-
+richTextBox1.Text += "不在任務欄中顯示\n";
+this.ShowInTaskbar = false;
 
 
-            if (radioButton1.Checked)
-            {
-                this.ShowInTaskbar = true;
-                richTextBox1.Text += "在任務欄中顯示\n";
-            }
-            else
-            {
-                this.ShowInTaskbar = false;
-                richTextBox1.Text += "不在任務欄中顯示\n";
-            }
-
+this.StartPosition = FormStartPosition.CenterScreen;//視窗居中顯示
 
 
 MainMenu選了之後會有打勾記號
@@ -176,7 +146,7 @@ richTextBox1.Text += "add " + str + "\n";
                 path = search_path;
 
             //C# 取得資料夾下的所有檔案(包括子目錄)
-            string[] files = System.IO.Directory.GetFiles(path, filetype2, System.IO.SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(path, filetype2, System.IO.SearchOption.AllDirectories);
             foreach (string filename in files)
             {
                 //richTextBox1.Text += filename + "\n";
@@ -212,18 +182,6 @@ string newID = id.Insert(6, "19");
 
         }
 
-
-
-
-string strpath1 = Environment.SystemDirectory;
-richTextBox1.Text += "str1\t" + strpath1 + "\n";
-
-str1	C:\WINDOWS\system32
-
-
-
-
-this.StartPosition = FormStartPosition.CenterScreen;//視窗居中顯示
 
 
 
@@ -276,7 +234,7 @@ Console.WriteLine("花費 {0} ms 完成!!!", Environment.TickCount - URms);
 
 
 //紀錄開始的時間
-System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();//引用stopwatch物件
+Stopwatch sw = new Stopwatch();//引用stopwatch物件
 
 sw.Reset();//時間歸零
 sw.Start();
@@ -354,7 +312,7 @@ for(i=0; i<360;i++)
             richTextBox2.Text += "length of old_search_path = " + old_search_path.Count.ToString() + "\n";
 
             {
-                StreamWriter sw = System.IO.File.CreateText(drap_setup_filename);
+                StreamWriter sw = File.CreateText(drap_setup_filename);
                 string content = "";
                 //定義系統版本
                 Version ver = Environment.OSVersion.Version;
@@ -454,7 +412,7 @@ for(i=0; i<360;i++)
         {
             int i;
             int tmp;
-            if (System.IO.File.Exists(drap_setup_filename) == false)
+            if (File.Exists(drap_setup_filename) == false)
             {
                 richTextBox2.Text += "檔案 " + drap_setup_filename + " 不存在，製作一個。\n";
                 update_setup_file();

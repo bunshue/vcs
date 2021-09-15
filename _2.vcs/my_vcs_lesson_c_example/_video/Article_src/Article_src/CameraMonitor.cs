@@ -53,12 +53,27 @@ namespace WebcamSecurity
         {
             using (Font f = new Font("Arial", 10, FontStyle.Bold))
             {
-                e.Graphics.DrawString(DateTime.Now.ToString() + ((this.motionDetected) ? " + Motion !" : ""), f, ((this.motionDetected) ? Brushes.Red : Brushes.Green), new Point(10, 10));
+                string str = string.Empty;
+                SolidBrush sb;
+                if (this.motionDetected == true)
+                {
+                    str = DateTime.Now.ToString() + " 移動偵測";
+                    sb = new SolidBrush(Color.Red);
+                }
+                else
+                {
+                    str = DateTime.Now.ToString();
+                    sb = new SolidBrush(Color.Green);
+
+                }
+
+                e.Graphics.DrawString(str, f, sb, new Point(10, 10));
+
                 if (this.IsRecording)
                 {
                     if (this.showRecordMarkerCount > 10)
                     {
-                        e.Graphics.DrawString("[RECORDING]", f, Brushes.Red, new Point(2, 14));
+                        e.Graphics.DrawString("錄影中", f, Brushes.Red, new Point(2, 14));
 
                         if (this.showRecordMarkerCount == 20)
                         {

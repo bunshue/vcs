@@ -53,6 +53,7 @@ namespace vcs_PictureBox
             // Allow the user to select multiple images.
             openFileDialog1.Multiselect = true;
             openFileDialog1.Title = "My Image Browser";
+            openFileDialog1.InitialDirectory = @"C:\______test_files\";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

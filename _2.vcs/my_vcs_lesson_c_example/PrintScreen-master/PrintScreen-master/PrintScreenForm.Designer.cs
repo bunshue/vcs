@@ -32,9 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintScreenForm));
             this.chkSound = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.timerKeyboard = new System.Windows.Forms.Timer(this.components);
             this.chkBalloonTips = new System.Windows.Forms.CheckBox();
@@ -46,40 +43,22 @@
             this.chkSound.AutoSize = true;
             this.chkSound.Checked = true;
             this.chkSound.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSound.Location = new System.Drawing.Point(20, 55);
+            this.chkSound.Location = new System.Drawing.Point(20, 27);
             this.chkSound.Name = "chkSound";
             this.chkSound.Size = new System.Drawing.Size(54, 16);
             this.chkSound.TabIndex = 14;
             this.chkSound.Text = "Sound";
             this.chkSound.UseVisualStyleBackColor = true;
-            this.chkSound.Click += new System.EventHandler(this.chkSound_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(496, 12);
+            this.button1.Location = new System.Drawing.Point(446, 27);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(59, 23);
             this.button1.TabIndex = 13;
-            this.button1.Text = "Browse";
+            this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 15);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 12);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "File Path :";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(75, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(415, 22);
-            this.textBox1.TabIndex = 11;
             // 
             // notifyIcon
             // 
@@ -99,19 +78,18 @@
             this.chkBalloonTips.AutoSize = true;
             this.chkBalloonTips.Checked = true;
             this.chkBalloonTips.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBalloonTips.Location = new System.Drawing.Point(92, 55);
+            this.chkBalloonTips.Location = new System.Drawing.Point(92, 27);
             this.chkBalloonTips.Name = "chkBalloonTips";
             this.chkBalloonTips.Size = new System.Drawing.Size(84, 16);
             this.chkBalloonTips.TabIndex = 15;
             this.chkBalloonTips.Text = "Balloon Tips";
             this.chkBalloonTips.UseVisualStyleBackColor = true;
-            this.chkBalloonTips.Click += new System.EventHandler(this.chkBalloonTips_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(20, 124);
+            this.richTextBox1.Location = new System.Drawing.Point(20, 77);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(535, 319);
+            this.richTextBox1.Size = new System.Drawing.Size(535, 366);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
@@ -124,8 +102,6 @@
             this.Controls.Add(this.chkBalloonTips);
             this.Controls.Add(this.chkSound);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
             this.Name = "PrintScreenForm";
             this.Text = "Print Screen";
             this.TopMost = true;
@@ -141,9 +117,6 @@
 
         private System.Windows.Forms.CheckBox chkSound;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.Timer timerKeyboard;
         private System.Windows.Forms.CheckBox chkBalloonTips;

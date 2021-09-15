@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using KeyHook;
+using System.IO;                //for Directory
+using System.Drawing.Imaging;   //for ImageFormat
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Media;
-using System.IO;
+
+using KeyHook;
 
 namespace PrintScreen
 {
@@ -27,7 +29,7 @@ namespace PrintScreen
     {
         private int SC_MONITORPOWER = 0xF170;
         private uint WM_SYSCOMMAND = 0x0112;
-        private String ConfigFileName = "PrintScreen.cfg";
+        private String config_filename = "PrintScreen.cfg";
 
         [DllImport("user32.dll")]
         static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
@@ -43,18 +45,34 @@ namespace PrintScreen
 
         private void PrintScreenForm_Load(object sender, EventArgs e)
         {
-            RootPath = @"C:\dddddddddd";
+            richTextBox1.Text += "PrintScreenForm_Load\n";
 
-            textBox1.Text = @"C:\dddddddddd";
             // 判斷是否已有程式在執行
             string proc = Process.GetCurrentProcess().ProcessName;
             Process[] processes = Process.GetProcessesByName(proc);
+
+            richTextBox1.Text += "ProcessName : " + proc + "\tlen = " + processes.Length.ToString() + "\n";
             if (processes.Length > 1)
             {
                 MessageBox.Show("PrintScreen " + proc + " 已經在執行", "重複執行錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
             }
-            //LoadConfig(); ??未呼叫
+
+            LoadConfig();
+
+            //檢查存圖的資料夾
+            string Path = @"C:\dddddddddd";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+            }
+            RootPath = Path;
+
             KeyHookHandler.Hook();
             timerKeyboard.Enabled = true;
         }
@@ -87,20 +105,18 @@ namespace PrintScreen
 
         void LoadConfig()
         {
-            richTextBox1.Text += "LoadConfig\n";
+            richTextBox1.Text += "LoadConfig, config_filename : " + config_filename + "\n";
 
-            if (!File.Exists(ConfigFileName))
+            if (!File.Exists(config_filename))
             {
-                // Config not exists
-                RootPath = Environment.GetEnvironmentVariable("HOMEDRIVE")
-                            + Environment.GetEnvironmentVariable("HOMEPATH")
-                            + @"\ScreenCapture";
+                //設定檔不存在
+                RootPath = @"C:\dddddddddd";
                 SaveConfig();
                 richTextBox1.Text += "LoadConfig 111 RootPath = " + RootPath + "\n";
             }
             else
             {
-                StreamReader sr = new StreamReader(ConfigFileName);
+                StreamReader sr = new StreamReader(config_filename);
 
                 String Line;
                 while ((Line = sr.ReadLine()) != null)
@@ -124,14 +140,13 @@ namespace PrintScreen
                 }
                 sr.Close();
 
-                richTextBox1.Text += "LoadConfig 222 ConfigFileName = " + ConfigFileName + "\n";
+                richTextBox1.Text += "LoadConfig 222 config_filename = " + config_filename + "\n";
             }
-            textBox1.Text = RootPath;
         }
 
         void SaveConfig()
         {
-            StreamWriter sw = new StreamWriter(ConfigFileName);
+            StreamWriter sw = new StreamWriter(config_filename);
 
             sw.WriteLine("RootPath=" + RootPath);
             sw.WriteLine("BalloonTips=" + chkBalloonTips.Checked);
@@ -139,34 +154,15 @@ namespace PrintScreen
 
             sw.Close();
 
-            richTextBox1.Text += "RootPath=" + RootPath + "\n";
-            richTextBox1.Text += "BalloonTips=" + chkBalloonTips.Checked + "\n";
-            richTextBox1.Text += "Sound=" + chkSound.Checked + "\n";
-
+            richTextBox1.Text += "SaveConfig\nFilename = " + config_filename + "\n";
+            richTextBox1.Text += "RootPath = " + RootPath + "\n";
+            richTextBox1.Text += "BalloonTips = " + chkBalloonTips.Checked + "\n";
+            richTextBox1.Text += "Sound = " + chkSound.Checked + "\n";
         }
 
         private void SetMonitorState(MonitorState state)
         {
             SendMessage(this.FindForm().Handle, WM_SYSCOMMAND, (IntPtr)SC_MONITORPOWER, (IntPtr)state);
-        }
-
-        private void BuildPath()
-        {
-            FilePath = RootPath + "\\" + DateTime.Now.ToString("yyyy-MM-dd");
-            //FilePath = @"C:\dddddddddd" + "\\" + DateTime.Now.ToString("yyyy-MM-dd");
-
-            richTextBox1.Text += "RootPath = " + RootPath + "\n";
-            richTextBox1.Text += "FilePath = " + FilePath + "\n";
-
-            if (!System.IO.Directory.Exists(RootPath))
-            {
-                System.IO.Directory.CreateDirectory(RootPath);
-            }
-
-            if (!System.IO.Directory.Exists(FilePath))
-            {
-                System.IO.Directory.CreateDirectory(FilePath);
-            }
         }
 
         private void ScreenCapture()
@@ -177,27 +173,26 @@ namespace PrintScreen
             SetMonitorState(MonitorState.ON);
             Thread.Sleep(100); //wait monitor on
 
-            using (Bitmap bmpScreenCapture = new Bitmap(Screen.AllScreens[MonitorIndex].Bounds.Width,
-                                            Screen.AllScreens[MonitorIndex].Bounds.Height))
+            int W = Screen.AllScreens[MonitorIndex].Bounds.Width;
+            int H = Screen.AllScreens[MonitorIndex].Bounds.Height;
+            int x_st = Screen.AllScreens[MonitorIndex].Bounds.X;
+            int y_st = Screen.AllScreens[MonitorIndex].Bounds.Y;
+
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + ", x = " + x_st.ToString() + ", y = " + y_st.ToString() + "\n";
+
+            using (Bitmap bitmap1 = new Bitmap(W, H))
             {
-                using (Graphics g = Graphics.FromImage(bmpScreenCapture))
+                using (Graphics g = Graphics.FromImage(bitmap1))
                 {
-                    g.CopyFromScreen(Screen.AllScreens[MonitorIndex].Bounds.X,
-                                     Screen.AllScreens[MonitorIndex].Bounds.Y,
-                                     0, 0,
-                                     bmpScreenCapture.Size,
-                                     CopyPixelOperation.SourceCopy);
+                    g.CopyFromScreen(x_st, y_st, 0, 0, bitmap1.Size, CopyPixelOperation.SourceCopy);
                 }
-                BuildPath();
-                String FileName = "PrintScreen" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".jpg";
-                String BmpFileName = FilePath + "\\" + FileName;
 
-                richTextBox1.Text += "FileName = " + FileName + "\n";
-                richTextBox1.Text += "BmpFileName = " + BmpFileName + "\n";
+                //存成bmp檔
+                String filename = "C:\\dddddddddd\\full_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                bitmap1.Save(filename, ImageFormat.Bmp);
+                richTextBox1.Text += "全螢幕截圖，存檔檔名：\n" + filename + "\n";
 
-                bmpScreenCapture.Save(BmpFileName);
-
-                if (chkSound.Checked)
+                if (chkSound.Checked == true)
                 {
                     SoundPlayer simpleSound = new SoundPlayer(@"shutter.wav");
                     simpleSound.Play();
@@ -205,7 +200,7 @@ namespace PrintScreen
 
                 //if (chkBalloonTips.Checked && this.WindowState == FormWindowState.Minimized)
                 {
-                    notifyIcon.BalloonTipText = FileName;
+                    notifyIcon.BalloonTipText = filename;
                     notifyIcon.ShowBalloonTip(200);
                 }
             }
@@ -213,26 +208,21 @@ namespace PrintScreen
 
         private void timerKeyboard_Tick(object sender, EventArgs e)
         {
-            if (KeyHooker.IsPrintScreenPressed) //有鍵盤輸入
+            //richTextBox1.Text += "T ";
+            if (KeyHooker.IsPrintScreenPressed == true) //有鍵盤輸入
             {
                 ScreenCapture();
                 KeyHooker.IsPrintScreenPressed = false;
             }
+            if (KeyHooker.IsF12Pressed == true) //有鍵盤輸入
+            {
+                //ScreenCapture();
+                richTextBox1.Text += "F12\n";
+                KeyHooker.IsF12Pressed = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog.ShowDialog();
-            RootPath = textBox1.Text = folderBrowserDialog.SelectedPath;
-            SaveConfig();
-        }
-
-        private void chkBalloonTips_Click(object sender, EventArgs e)
-        {
-            SaveConfig();
-        }
-
-        private void chkSound_Click(object sender, EventArgs e)
         {
             SaveConfig();
         }

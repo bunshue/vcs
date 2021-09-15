@@ -2,7 +2,7 @@
 <Config xmlns="http://tempuri.org/Config.xsd">
   <Options>
     <Key>Camera1</Key>
-    <Value>011</Value>
+    <Value>100</Value>
   </Options>
   <Options>
     <Key>Camera2</Key>

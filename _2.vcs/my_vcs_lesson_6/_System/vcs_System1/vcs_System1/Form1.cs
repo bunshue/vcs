@@ -1220,7 +1220,15 @@ namespace vcs_System1
 
         private void button54_Click(object sender, EventArgs e)
         {
+            //環境參數
+            string RootPath = Environment.GetEnvironmentVariable("HOMEDRIVE") + Environment.GetEnvironmentVariable("HOMEPATH") + @"\ScreenCapture";
 
+            richTextBox1.Text += "HOMEDRIVE :\t" + Environment.GetEnvironmentVariable("HOMEDRIVE") + "\n";
+            richTextBox1.Text += "HOMEPATH :\t" + Environment.GetEnvironmentVariable("HOMEPATH") + "\n";
+            richTextBox1.Text += "my path :\t" + RootPath + "\n";
+
+            string sys_dir = Environment.SystemDirectory;
+            richTextBox1.Text += "SystemDirectory :\t" + sys_dir + "\n";
         }
 
         private void button55_Click(object sender, EventArgs e)

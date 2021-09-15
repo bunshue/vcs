@@ -10,11 +10,9 @@ namespace KeyHook
 {
     class KeyHooker
     {
-        #region KeyBoard Hook
-        //參考  http://www.dotblogs.com.tw/huanlin/archive/2008/04/23/3320.aspx
-
         public static Boolean IsPrintScreenPressed = false;
-        
+        public static Boolean IsF12Pressed = false;
+
         public class KeyboardInfo
         {
             private KeyboardInfo() { }
@@ -110,15 +108,15 @@ namespace KeyHook
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr GetModuleHandle(string lpModuleName);
- 
+
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         //設置鉤子 
         public static extern int SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hInstance, int threadId);
- 
+
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         //抽掉鉤子
         public static extern bool UnhookWindowsHookEx(int idHook);
- 
+
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         //調用下一個鉤子 
         public static extern int CallNextHookEx(int idHook, int nCode, IntPtr wParam, IntPtr lParam);
@@ -167,7 +165,7 @@ namespace KeyHook
         //KeyboardHookProc() :
         //當按鍵按下及鬆開時都會觸發此函式。 
         //這裏可以添加自己想要的信息處理
-        public static int KeyboardHookProc(int nCode, IntPtr wParam, IntPtr lParam)  
+        public static int KeyboardHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
             const int WM_KEYDOWN = 0x100;
 
@@ -183,8 +181,11 @@ namespace KeyHook
                     {
                         IsPrintScreenPressed = true;
                     }
+                    if (vkCode == Keys.F12)
+                    {
+                        IsF12Pressed = true;
+                    }
                 }
-
 
                 if (kbd.vkCode == 91)  // 截獲左win(開始菜單鍵)
                 {
@@ -234,7 +235,6 @@ namespace KeyHook
             }
             return CallNextHookEx(m_HookHandle, nCode, wParam, lParam);
         }
-
-        #endregion
     }
 }
+

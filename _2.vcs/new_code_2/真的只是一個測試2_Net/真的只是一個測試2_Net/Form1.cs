@@ -59,6 +59,11 @@ namespace 真的只是一個測試2_Net
         private void button2_Click(object sender, EventArgs e)
         {
 
+            //在 C# 中使用 DownloadFile() 方法從一個 URL 下載檔案
+            WebClient mywebClient = new WebClient();
+            mywebClient.DownloadFile("https://wiki.linuxfoundation.org/_media/wiki/logo.png", @"C:\dddddddddd\aaaaa.png");
+
+
         }
 
         private void button3_Click(object sender, EventArgs e)

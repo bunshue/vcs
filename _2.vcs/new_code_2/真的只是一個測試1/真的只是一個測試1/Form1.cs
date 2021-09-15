@@ -520,6 +520,19 @@ namespace 真的只是一個測試1
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //在 C# 中獲取 2D 陣列的長度
+
+            int[,] array2D;
+            //使用 C# 中的 Array.GetLength() 函式獲取 2D 陣列的寬度和高度
+            //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
+            array2D = new int[5, 10];
+            Console.WriteLine(array2D.GetLength(0));	//5
+            Console.WriteLine(array2D.GetLength(1));	//10
+
+            //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
+            array2D = new int[5, 10];
+            Console.WriteLine(array2D.GetUpperBound(0) + 1);	//5
+            Console.WriteLine(array2D.GetUpperBound(1) + 1);	//10
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -535,8 +548,6 @@ namespace 真的只是一個測試1
         }
 
         int x_st = 0;
-        int y_st = 0;
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
@@ -932,8 +943,8 @@ namespace 真的只是一個測試1
             richTextBox1.Text += "Skill b : " + ((person2.Skill & Skill.Cook) == Skill.Cook).ToString() + "\n";
 
             Console.WriteLine(person2.Skill);
-            Console.WriteLine((person2.Skill & Skill.Cook) > 0) ; //結果為True，（1111 & 0010 = 0010）
-            Console.WriteLine((person2.Skill & Skill.Cook) == Skill.Cook)  ; //結果為True
+            Console.WriteLine((person2.Skill & Skill.Cook) > 0); //結果為True，（1111 & 0010 = 0010）
+            Console.WriteLine((person2.Skill & Skill.Cook) == Skill.Cook); //結果為True
 
 
 
