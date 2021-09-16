@@ -69,6 +69,7 @@ FileInfo 類提供了用於在 C# 中建立，開啟，複製，刪除和移動�
             Console.WriteLine(hexString);
 
 
+Process.Start("http://www.mrbccd.com");
 
 //打开注册表
 string regeditstr = Environment.GetEnvironmentVariable("WinDir");//WinDir系统环境变量的名称

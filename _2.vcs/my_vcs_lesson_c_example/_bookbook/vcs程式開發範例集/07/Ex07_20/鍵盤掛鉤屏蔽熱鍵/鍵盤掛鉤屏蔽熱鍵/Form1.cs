@@ -32,6 +32,7 @@ namespace 鍵盤掛鉤屏蔽熱鍵
             KeyMSG m = (KeyMSG)Marshal.PtrToStructure(lParam, typeof(KeyMSG));
             if (pKeyboardHook != IntPtr.Zero)
             {
+                richTextBox1.Text += "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n";
                 switch (((Keys)m.vkCode))
                 {
                     case Keys.LWin:
@@ -51,6 +52,8 @@ namespace 鍵盤掛鉤屏蔽熱鍵
         //安裝掛鉤
         public bool InsertHook()
         {
+            richTextBox1.Text += "安裝掛鉤\n";
+
             IntPtr pIn = (IntPtr)4194304;
             if (this.pKeyboardHook == IntPtr.Zero)
             {
@@ -68,6 +71,8 @@ namespace 鍵盤掛鉤屏蔽熱鍵
         //卸載掛鉤
         public bool UnInsertHook()
         {
+            richTextBox1.Text += "卸載掛鉤\n";
+
             bool result = true;
             if (this.pKeyboardHook != IntPtr.Zero)
             {

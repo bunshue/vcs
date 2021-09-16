@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Main));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_Exit = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,27 +40,12 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.groupBox1.SuspendLayout();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btn_Exit);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txt_PassWord);
-            this.groupBox1.Controls.Add(this.txt_UserName);
-            this.groupBox1.Controls.Add(this.btn_Login);
-            this.groupBox1.Location = new System.Drawing.Point(0, 179);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(353, 104);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "登录窗体";
             // 
             // btn_Exit
             // 
-            this.btn_Exit.Location = new System.Drawing.Point(200, 75);
+            this.btn_Exit.Location = new System.Drawing.Point(494, 82);
             this.btn_Exit.Name = "btn_Exit";
             this.btn_Exit.Size = new System.Drawing.Size(59, 23);
             this.btn_Exit.TabIndex = 10;
@@ -72,7 +56,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(91, 49);
+            this.label2.Location = new System.Drawing.Point(385, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 12);
             this.label2.TabIndex = 9;
@@ -81,7 +65,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(91, 21);
+            this.label1.Location = new System.Drawing.Point(385, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 8;
@@ -89,7 +73,7 @@
             // 
             // txt_PassWord
             // 
-            this.txt_PassWord.Location = new System.Drawing.Point(159, 49);
+            this.txt_PassWord.Location = new System.Drawing.Point(453, 56);
             this.txt_PassWord.Name = "txt_PassWord";
             this.txt_PassWord.PasswordChar = '*';
             this.txt_PassWord.Size = new System.Drawing.Size(100, 22);
@@ -98,7 +82,7 @@
             // 
             // txt_UserName
             // 
-            this.txt_UserName.Location = new System.Drawing.Point(159, 21);
+            this.txt_UserName.Location = new System.Drawing.Point(453, 28);
             this.txt_UserName.Name = "txt_UserName";
             this.txt_UserName.Size = new System.Drawing.Size(100, 22);
             this.txt_UserName.TabIndex = 6;
@@ -106,7 +90,7 @@
             // 
             // btn_Login
             // 
-            this.btn_Login.Location = new System.Drawing.Point(93, 75);
+            this.btn_Login.Location = new System.Drawing.Point(387, 82);
             this.btn_Login.Name = "btn_Login";
             this.btn_Login.Size = new System.Drawing.Size(59, 23);
             this.btn_Login.TabIndex = 5;
@@ -121,7 +105,7 @@
             this.listView1.LargeImageList = this.imageList1;
             this.listView1.Location = new System.Drawing.Point(0, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(353, 170);
+            this.listView1.Size = new System.Drawing.Size(353, 234);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.StateImageList = this.imageList1;
             this.listView1.TabIndex = 1;
@@ -140,32 +124,46 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(0, 289);
+            this.richTextBox1.Location = new System.Drawing.Point(0, 243);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(353, 175);
+            this.richTextBox1.Size = new System.Drawing.Size(353, 221);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(387, 243);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(87, 46);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "DataTable測試";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(364, 476);
+            this.ClientSize = new System.Drawing.Size(718, 476);
+            this.Controls.Add(this.btn_Exit);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.txt_PassWord);
+            this.Controls.Add(this.txt_UserName);
+            this.Controls.Add(this.btn_Login);
             this.Name = "Frm_Main";
             this.Text = "带图像列表的系统登录程序";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_PassWord;
@@ -176,6 +174,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button1;
 
     }
 }

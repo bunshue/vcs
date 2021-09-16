@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;   //for ImageFormat
+
 namespace ScreenCutter
 {
     public partial class Frm_Browser : Form
@@ -103,10 +105,26 @@ namespace ScreenCutter
 
             if (((MouseEventArgs)e).Button == MouseButtons.Left && rect.Contains(((MouseEventArgs)e).X, ((MouseEventArgs)e).Y))
             {
-                Image img = new Bitmap(rect.Width - 1, rect.Height - 1);
-                Graphics g = Graphics.FromImage(img);
-                g.CopyFromScreen(rect.X + 1, rect.Y + 1, 0, 0, rect.Size);
-                Clipboard.SetImage(img);
+                //部分螢幕截圖
+                int W = rect.Width - 1;
+                int H = rect.Height - 1;
+
+                using (Bitmap bitmap1 = new Bitmap(W, H))
+                {
+                    using (Graphics g = Graphics.FromImage(bitmap1))
+                    {
+                        //             擷取螢幕位置起點  自建bmp的位置起點     擷取大小
+                        g.CopyFromScreen(rect.X + 1, rect.Y + 1, 0, 0, rect.Size);
+                        //richTextBox1.Text += "W = " + W.ToString() + "\n";
+                        //richTextBox1.Text += "H = " + H.ToString() + "\n";
+                    }
+                    //存成bmp檔
+                    String filename = "C:\\dddddddddd\\part_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+                    //richTextBox1.Text += "全螢幕截圖，存檔檔名：\n" + filename + "\n";
+
+                    Clipboard.SetImage(bitmap1);    //同時把截圖存到剪貼簿裏
+                }
                 this.Close();
             }
         }

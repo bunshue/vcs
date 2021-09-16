@@ -6,11 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Collections;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Threading;
+
 namespace CompressImg
 {
     public partial class Frm_Main : Form
@@ -19,7 +21,7 @@ namespace CompressImg
         {
             InitializeComponent();
         }
-        FileSystemInfo[] fsi=null;
+        FileSystemInfo[] fsi = null;
         string ImgPath = "";
         ArrayList al = new ArrayList();
         string ImgSavePath = "";
@@ -40,15 +42,15 @@ namespace CompressImg
         /// <param name="dHeight">缩放后图片的高度</param>
         /// <param name="dWidth">缩放后图片的宽度</param>
         /// <returns></returns>
-                      
+
         public static bool GetPicThumbnail(string sFile, string dFile, int dHeight, int dWidth)
         {
             Image iSource = Image.FromFile(sFile);
             ImageFormat tFormat = iSource.RawFormat;
             int sW = 0, sH = 0;
             // 按比例缩放
-            Size tem_size = new Size(iSource.Width,iSource.Height);
-            if (tem_size.Height> dHeight || tem_size.Width> dWidth)
+            Size tem_size = new Size(iSource.Width, iSource.Height);
+            if (tem_size.Height > dHeight || tem_size.Width > dWidth)
             {
                 if ((tem_size.Width * dHeight) > (tem_size.Height * dWidth))
                 {
@@ -123,12 +125,12 @@ namespace CompressImg
                 al.Clear();
                 txtPicPath.Text = folderBrowserDialog1.SelectedPath;
                 ImgPath = txtPicPath.Text.Trim();
-                DirectoryInfo di=new DirectoryInfo(txtPicPath.Text);
+                DirectoryInfo di = new DirectoryInfo(txtPicPath.Text);
                 fsi = di.GetFileSystemInfos();
                 for (int i = 0; i < fsi.Length; i++)
                 {
-                    string ofile=fsi[i].ToString();
-                    string fileType = ofile.Substring(ofile.LastIndexOf(".") + 1, ofile.Length - ofile.LastIndexOf(".")-1);
+                    string ofile = fsi[i].ToString();
+                    string fileType = ofile.Substring(ofile.LastIndexOf(".") + 1, ofile.Length - ofile.LastIndexOf(".") - 1);
                     fileType = fileType.ToLower();
                     if (fileType == "jpeg" || fileType == "jpg" || fileType == "bmp" || fileType == "png")
                     {
@@ -184,12 +186,12 @@ namespace CompressImg
                     GetPicThumbnail(strSourcePath + al[i].ToString(), strSavePath + al[i].ToString(), Convert.ToInt32(ig.Width * (numericUpDown1.Value / 100)), Convert.ToInt32(ig.Height * (numericUpDown1.Value / 100)));
                 }
                 ig.Dispose();
-                progressBar1.Value = i+1;
-                lblComplete.Text = Convert.ToString(i+1);
+                progressBar1.Value = i + 1;
+                lblComplete.Text = Convert.ToString(i + 1);
             }
             if (lblComplete.Text == al.Count.ToString())
             {
-                MessageBox.Show("压缩成功","提示",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("压缩成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 progressBar1.Value = 1;
                 pictureBox1.Enabled = true;
                 pictureBox2.Enabled = true;
@@ -201,7 +203,7 @@ namespace CompressImg
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtPicPath.Text.Trim() != "" && txtSavePath.Text.Trim() != ""&&lblPicNum.Text!="0")
+            if (txtPicPath.Text.Trim() != "" && txtSavePath.Text.Trim() != "" && lblPicNum.Text != "0")
             {
                 pictureBox1.Enabled = false;
                 pictureBox2.Enabled = false;
@@ -234,3 +236,4 @@ namespace CompressImg
         }
     }
 }
+

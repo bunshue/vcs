@@ -133,7 +133,7 @@ namespace vcs_RegisterHotKey_PrintScreen
                 using (Graphics g = Graphics.FromImage(bitmap1))
                 {
                     //             擷取螢幕位置起點  自建bmp的位置起點     擷取大小
-                    g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W / 2, H / 2));
+                    g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
                     //richTextBox1.Text += "W = " + W.ToString() + "\n";
                     //richTextBox1.Text += "H = " + H.ToString() + "\n";
                 }

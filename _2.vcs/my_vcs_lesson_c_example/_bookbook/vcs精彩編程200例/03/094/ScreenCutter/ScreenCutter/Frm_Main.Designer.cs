@@ -46,21 +46,21 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 60);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(307, 77);
+            this.richTextBox1.Size = new System.Drawing.Size(307, 68);
             this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "1. 按 截圖\n2. 用滑鼠選取截圖區域 可以移動選取區域\n3. 滑鼠雙擊選取區域 把選取區域存到剪貼簿";
+            this.richTextBox1.Text = "1. 按 截圖\n2. 用滑鼠選取截圖區域 可以移動選取區域\n3. 滑鼠雙擊選取區域 把選取區域 存檔 與 存到剪貼簿";
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(331, 149);
+            this.ClientSize = new System.Drawing.Size(335, 153);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.MaximizeBox = false;
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "仿QQ截图";
+            this.Text = "螢幕截图";
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.ResumeLayout(false);
 
