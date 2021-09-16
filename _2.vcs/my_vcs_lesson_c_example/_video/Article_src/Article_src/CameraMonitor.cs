@@ -23,6 +23,7 @@ namespace WebcamSecurity
         private VideoCaptureDevice cam; // refrence to the actual VidioCaptureDevice (webcam)
         String cameraName; // string for display purposes
         MotionDetector md;
+
         public CameraMonitor(PictureBox display, string monikerString, String cameraName)
         {
             this.cameraName = cameraName;

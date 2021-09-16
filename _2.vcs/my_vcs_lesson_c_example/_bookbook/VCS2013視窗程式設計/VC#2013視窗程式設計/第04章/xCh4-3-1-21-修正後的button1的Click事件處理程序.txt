@@ -1,0 +1,13 @@
+string strMinute = "";
+if(DateTime.Now.Minute > 30) strMinute="30";
+else strMinute = "00";
+
+string mapURL = String.Format(
+   "http://www.cwb.gov.tw/V7/observe/satellite/Data/s3p/s3p-{0}-{2}-{3}-{4}.jpg";
+   DateTime.Now.Year,
+   DateTime.Now.Month.ToString("00");
+   DataTime.Now.Day.ToString("00");
+   DateTime.Now.Hour.ToString("00");
+   strMinute);
+pictureBox1.ImageLocation = mapURL;
+pictureBox1.ClientSize = new Size(400,430);

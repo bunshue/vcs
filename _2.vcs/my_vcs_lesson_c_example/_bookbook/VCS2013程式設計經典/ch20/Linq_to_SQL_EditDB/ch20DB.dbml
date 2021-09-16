@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ch20DB" Class="ch20DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\ch20DB.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="Linq_to_SQL_EditDB.Properties.Settings" SettingsPropertyName="ch20DBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.員工" Member="員工">
+    <Type Name="員工">
+      <Column Name="編號" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="姓名" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="職稱" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="電話" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="薪資" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

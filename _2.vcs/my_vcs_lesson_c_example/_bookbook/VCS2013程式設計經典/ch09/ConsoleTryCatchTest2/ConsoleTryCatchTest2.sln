@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTryCatchTest2", "ConsoleTryCatchTest2.csproj", "{333EFDAA-6832-45BB-91A2-3CB1D463DCAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{333EFDAA-6832-45BB-91A2-3CB1D463DCAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{333EFDAA-6832-45BB-91A2-3CB1D463DCAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{333EFDAA-6832-45BB-91A2-3CB1D463DCAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{333EFDAA-6832-45BB-91A2-3CB1D463DCAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

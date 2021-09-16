@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Northwind" Class="NorthwindDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\Northwind.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="Linq_to_SQL4.Properties.Settings" SettingsPropertyName="NorthwindConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.產品資料" Member="產品資料">
+    <Type Name="產品資料">
+      <Column Name="產品編號" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="產品" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="供應商編號" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="類別編號" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="單位數量" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="單價" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="庫存量" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="已訂購量" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="安全存量" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="不再銷售" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="產品類別_產品資料" Member="產品類別" ThisKey="類別編號" OtherKey="類別編號" Type="產品類別" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.產品類別" Member="產品類別">
+    <Type Name="產品類別">
+      <Column Name="類別編號" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="類別名稱" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="說明" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="圖片" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="產品類別_產品資料" Member="產品資料" ThisKey="類別編號" OtherKey="類別編號" Type="產品資料" />
+    </Type>
+  </Table>
+</Database>

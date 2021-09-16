@@ -1,4 +1,95 @@
 
+
+
+Display_Cam1
+
+            //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+            bm = (Bitmap)eventArgs.Frame.Clone();
+            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+            pictureBox1.Image = bm;
+
+            GC.Collect();       //回收資源
+
+//--------------------------
+
+            //录像
+            //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+            bm = (Bitmap)eventArgs.Frame.Clone();
+            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+			
+            Graphics g = Graphics.FromImage(image);
+			
+			
+										SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+
+										Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+										int xPos = image.Width - (image.Width - 15);
+										int yPos = 10;
+										//写到屏幕上的时间
+										string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+										g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+
+            ////创建文件路径
+            string fileFullPath = videoPath + "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+            if (stopREC)
+            {
+                stopREC = true;
+                createNewFile = true;  //这里要设置为true表示要创建新文件
+                if (videoWriter != null)
+                    videoWriter.Close();
+            }
+            else
+            {
+										//开始录像
+										if (createNewFile)
+										{
+
+											createNewFile = false;
+											if (videoWriter != null)
+											{
+												videoWriter.Close();
+												videoWriter.Dispose();
+											}
+											richTextBox1.Text += "開啟檔案 : " + fileFullPath + "\n";
+
+											videoWriter = new VideoFileWriter();
+											//这里必须是全路径，否则会默认保存到程序运行根据录下了
+											videoWriter.Open(fileFullPath, image.Width, image.Height, 30, VideoCodec.MPEG4);
+											videoWriter.WriteVideoFrame(image);
+										}
+										else
+										{
+											videoWriter.WriteVideoFrame(image);
+										}
+            }
+
+
+
+fileFullPath : C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\OperateCamera\bin\Debug\V12021-08-20-15-39-07
+
+
+
+
+
+關掉AForge的VSP
+        // Close currently open camera if any
+        private void CloseCamera()
+        {
+            if (videoSource != null)
+            {
+                videoSourcePlayer.VideoSource = null;
+
+                videoSource.SignalToStop();
+                videoSource.WaitForStop();
+                videoSource = null;
+            }
+        }		
+
+
+
+
 			
 
                 string appDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().GetName().CodeBase);

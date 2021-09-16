@@ -69,7 +69,8 @@ namespace WebcamSecurity
                 richTextBox1.Text += "長名 : " + USBWebcams[i].MonikerString + "\n";
                 */
 
-                this.CamMonitor[i].RecordingPath = this.RecordingPathInput.Text;
+                //this.CamMonitor[i].RecordingPath = this.RecordingPathInput.Text;
+                this.CamMonitor[i].RecordingPath = @"C:\dddddddddd\";
             }
         }
 
