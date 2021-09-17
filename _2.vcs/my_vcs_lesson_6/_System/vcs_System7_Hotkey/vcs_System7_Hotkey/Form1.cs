@@ -10,8 +10,8 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Diagnostics;
-using Microsoft.Win32;
 
+using Microsoft.Win32;
 
 //參考    https://www.twblogs.net/a/5b823b1a2b71772b882fb103
 

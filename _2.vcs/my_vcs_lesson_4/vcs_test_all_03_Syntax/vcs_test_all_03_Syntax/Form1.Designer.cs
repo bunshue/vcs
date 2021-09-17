@@ -1160,7 +1160,9 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(180, 40);
             this.button43.TabIndex = 79;
+            this.button43.Text = "DataTable用法";
             this.button43.UseVisualStyleBackColor = true;
+            this.button43.Click += new System.EventHandler(this.button43_Click);
             // 
             // button44
             // 
@@ -1170,6 +1172,7 @@
             this.button44.Size = new System.Drawing.Size(180, 40);
             this.button44.TabIndex = 80;
             this.button44.UseVisualStyleBackColor = true;
+            this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
             // button45
             // 
@@ -1179,6 +1182,7 @@
             this.button45.Size = new System.Drawing.Size(180, 40);
             this.button45.TabIndex = 81;
             this.button45.UseVisualStyleBackColor = true;
+            this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
             // button46
             // 
@@ -1188,6 +1192,7 @@
             this.button46.Size = new System.Drawing.Size(180, 40);
             this.button46.TabIndex = 82;
             this.button46.UseVisualStyleBackColor = true;
+            this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
             // button47
             // 
@@ -1197,6 +1202,7 @@
             this.button47.Size = new System.Drawing.Size(180, 40);
             this.button47.TabIndex = 83;
             this.button47.UseVisualStyleBackColor = true;
+            this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
             // button48
             // 
@@ -1206,6 +1212,7 @@
             this.button48.Size = new System.Drawing.Size(180, 40);
             this.button48.TabIndex = 84;
             this.button48.UseVisualStyleBackColor = true;
+            this.button48.Click += new System.EventHandler(this.button48_Click);
             // 
             // Form1
             // 

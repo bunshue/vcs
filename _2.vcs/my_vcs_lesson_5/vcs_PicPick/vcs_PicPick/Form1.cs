@@ -31,36 +31,39 @@ namespace vcs_PicPick
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Text = string.Empty;
-            this.ControlBox = false;
-            this.BackColor = Color.LightPink;
+            show_item_location();
 
-            richTextBox1.Visible = false;
-            label1.Text = "";
-            //show_item_location();
-
-            //檢查存d10d的資料夾
+            //檢查存圖的資料夾
             if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
             {
                 Directory.CreateDirectory(foldername);
                 richTextBox1.Text += "已建立一個新資料夾: " + foldername + "\n";
             }
             else
-                richTextBox1.Text += "資料夾: " + foldername + " 已存在，不用再建立\n";
+            {
+                //richTextBox1.Text += "資料夾: " + foldername + " 已存在，不用再建立\n";
+            }
+        }
 
-            button1.Text = "截圖存檔";
+        void show_item_location()
+        {
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            this.BackColor = Color.LightPink;
+
+            richTextBox1.Visible = false;
+            label1.Text = "";
+
             button1.Location = new Point(10, 10);
             button1.Size = new Size(60, 60);
             button1.Visible = true;
 
             button2.Font = new Font(button2.Font.Name, 14);
-            button2.Text = "全螢幕截圖";
             button2.Location = new Point(button1.Location.X + button1.Size.Width + 2, 10);
             button2.Size = new Size(115, 25);
             button2.Visible = true;
 
             button3.Font = new Font(button2.Font.Name, 14);
-            button3.Text = "自選截圖";
             button3.Location = new Point(button2.Location.X, button2.Location.Y + button2.Size.Height + 9);
             button3.Size = new Size(115, 25);
             button3.Visible = true;

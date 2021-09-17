@@ -98,32 +98,36 @@ namespace vcs_CopyFromScreen
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //抓螢幕某區塊為檔案
-            Image image = new Bitmap(410, 410);   //宣告Image類別
-            Graphics g = Graphics.FromImage(image);
-            g.CopyFromScreen(new Point(340, 255), new Point(0, 0), new Size(410, 410));
-            //取得螢幕上x=340 y=255為左上角，長寬為410的區域
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
-            //this.pictureBox1.Image = image;   若有picturebox 可以貼上
+            //抓螢幕某區塊為檔案, 從(x_st, y_st)開始, 抓 W X H 大小的圖
+            int x_st = 300;
+            int y_st = 200;
+            int W = 1000;
+            int H = 200;
 
-            //存成bmp檔
-            String filename = Application.StartupPath + "\\image_partial_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            try
+            using (Bitmap bitmap1 = new Bitmap(W, H))
             {
-                image.Save(filename, ImageFormat.Bmp); //把圖片存起來
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
+                using (Graphics g = Graphics.FromImage(bitmap1))
+                {
+                    //                   擷取螢幕位置起點    自建bmp的位置起點     擷取大小
+                    g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(W, H));
+                    //richTextBox1.Text += "W = " + W.ToString() + "\n";
+                    //richTextBox1.Text += "H = " + H.ToString() + "\n";
 
-            richTextBox1.Text += "已部分截圖存檔完成, 檔名 : " + filename + "\n";
-
-            //存成jpg檔
-            //String filename = Application.StartupPath + "\\image_partial_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            //image.Save(filename, ImageFormat.Jpeg); //把圖片存起來
-            //richTextBox1.Text += "已部分截圖存檔完成, 檔名 : " + filename + "\n";
+                    //pictureBox1.Image = image;   //若有picturebox 可以貼上
+                }
+                //存成bmp檔
+                String filename = Application.StartupPath + "\\image_partial_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                try
+                {
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+                richTextBox1.Text += "已部分截圖存檔完成, 檔名 : " + filename + "\n";
+            }
         }
     }
 }
+

@@ -23,6 +23,7 @@ namespace vcs_RegisterHotKey_PrintScreen
         void Register_HotKey_Function1()
         {
             save_fullscreen_to_local_drive();       //全螢幕截圖
+            //顯示訊息
             //this.Show();
             this.WindowState = FormWindowState.Normal;
             this.TopMost = true;
@@ -73,6 +74,11 @@ namespace vcs_RegisterHotKey_PrintScreen
             {
                 //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
 
         void show_item_location()
@@ -265,5 +271,6 @@ namespace vcs_RegisterHotKey_PrintScreen
         public static extern bool UnregisterHotKey(IntPtr wnd, int id);
     }
 }
+
 
 
