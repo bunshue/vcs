@@ -17,31 +17,38 @@ namespace vcs_Draw_Circle
             : this(0, 0, 0)
         {
         }
+
         public Circle(float new_x, float new_y, float new_radius)
         {
             Center = new PointF(new_x, new_y);
             Radius = Math.Abs(new_radius);
-            Debug.Assert((Radius > 0.000001) && (Radius < 1000),
-                "Cannot create a circle with radius " + Radius + ".");
+            Debug.Assert((Radius > 0.000001) && (Radius < 1000), "Cannot create a circle with radius " + Radius + ".");
         }
 
         // Return the circle's bounds.
         public RectangleF GetBounds()
         {
-            return new RectangleF(
-                Center.X - Radius, Center.Y - Radius,
-                2 * Radius, 2 * Radius);
+            //由圓心半徑取得此圓的範圍
+            return new RectangleF(Center.X - Radius, Center.Y - Radius, 2 * Radius, 2 * Radius);
         }
 
         // Draw the circle.
         public void Draw(Graphics gr, Pen pen)
         {
-            if (Radius > 0) gr.DrawEllipse(pen, GetBounds());
+            if (Radius > 0)
+            {
+                gr.DrawEllipse(pen, GetBounds());
+            }
         }
+
         public void Draw(Graphics gr, Brush brush)
         {
-            if (Radius > 0) gr.FillEllipse(brush, GetBounds());
+            if (Radius > 0)
+            {
+                gr.FillEllipse(brush, GetBounds());
+            }
         }
+
         public void Draw(Graphics gr, Brush brush, Pen pen)
         {
             Draw(gr, brush);
@@ -55,3 +62,4 @@ namespace vcs_Draw_Circle
         }
     }
 }
+

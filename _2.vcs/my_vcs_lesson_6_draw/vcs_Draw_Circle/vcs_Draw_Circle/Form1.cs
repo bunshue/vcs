@@ -13,7 +13,7 @@ namespace vcs_Draw_Circle
     {
         // Return a random color.
         private Random rand = new Random();
-        private Color[] Colors15 =
+        private Color[] color =
         {
             Color.Red,
             Color.Green,
@@ -29,7 +29,7 @@ namespace vcs_Draw_Circle
 
         private Color RandomColor()
         {
-            return Colors15[rand.Next(0, Colors15.Length)];
+            return color[rand.Next(0, color.Length)];
         }
 
         public Form1()
@@ -46,25 +46,31 @@ namespace vcs_Draw_Circle
         {
             float x = 100;
             float y = 100;
-            float r = 100;
+            float r = 50;
             Circle circle0 = new Circle(x, y, r);
 
             int i;
-            for (i = 0; i < 50; i += 20)
+            for (i = 50; i < 300; i += 50)
             {
-                x += i;
-                y += i;
-                r += i;
-                circle0 = new Circle(x, y, r+5);
-                circle0.Draw(e.Graphics, Pens.Red); //畫空心
+                x = i;
+                y = i;
+                r = i/2;
+
 
                 using (Brush the_brush = new SolidBrush(RandomColor()))
                 {
                     circle0 = new Circle(x, y, r);
                     circle0.Draw(e.Graphics, the_brush);    //畫實心
+                    richTextBox1.Text += "circle info : " + circle0.ToString() + "\n";
                 }
-            }
 
+                circle0 = new Circle(x, y, r + 10);
+                Pen p = new Pen(Color.Red, 5);
+
+                //circle0.Draw(e.Graphics, Pens.Red); //畫空心, 未設定筆寬, 即筆寬為1
+                circle0.Draw(e.Graphics, p); //畫空心
+                richTextBox1.Text += "circle info : " + circle0.ToString() + "\n";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

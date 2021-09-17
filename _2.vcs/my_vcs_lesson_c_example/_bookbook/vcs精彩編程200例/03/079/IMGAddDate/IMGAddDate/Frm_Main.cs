@@ -83,7 +83,6 @@ namespace IMGAddDate
             }
             else
             {
-                toolStripProgressBar1.Visible = true;
                 td = new Thread(new ThreadStart(AddDate));
                 td.Start();
             }
@@ -94,9 +93,6 @@ namespace IMGAddDate
             Font normalContentFont = new Font("宋体", 36, FontStyle.Bold);
             Color normalContentColor = Color.Red;
             int kk = 1;
-            toolStripProgressBar1.Maximum = listBox1.Items.Count;
-            toolStripProgressBar1.Minimum = 1;
-            toolStripStatusLabel1.Text = "开始添加数码相片拍摄日期";
             richTextBox1.Text += "开始添加数码相片拍摄日期\n";
 
             for (int i = 0; i < listBox1.Items.Count; i++)
@@ -128,16 +124,16 @@ namespace IMGAddDate
 
                 //释放内存位图对象
                 bitmap1.Dispose();
-                toolStripProgressBar1.Value = kk;
                 if (kk == listBox1.Items.Count)
                 {
-                    toolStripStatusLabel1.Text = "全部数码相片拍摄日期添加成功";
                     richTextBox1.Text += "全部数码相片拍摄日期添加成功\n";
-                    toolStripProgressBar1.Visible = false;
                     flag = null;
                     listBox1.Items.Clear();
                 }
                 kk++;
+
+                //System.Threading.Thread.Sleep(3500);
+                //Application.DoEvents();
             }
         }
 
@@ -152,7 +148,7 @@ namespace IMGAddDate
         }
 
         //遍历所有元数据，获取拍照日期/时间
-        private string GetDateTime(System.Drawing.Imaging.PropertyItem[] parr)
+        private string GetDateTime(PropertyItem[] parr)
         {
             Encoding ascii = Encoding.ASCII;
             //遍历图像文件元数据，检索所有属性
@@ -168,7 +164,5 @@ namespace IMGAddDate
             return "N/A";
         }
         #endregion
-
     }
 }
-

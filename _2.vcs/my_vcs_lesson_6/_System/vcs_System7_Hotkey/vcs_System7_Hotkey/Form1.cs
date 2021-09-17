@@ -99,10 +99,13 @@ namespace vcs_System7_Hotkey
                 KeyBoardHookStruct kbh = (KeyBoardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyBoardHookStruct));
                 if (kbh.vkCode == 91)  // 截獲左win(開始菜單鍵)
                 {
+                    MessageBox.Show("截獲左win(開始菜單鍵)");
+
                     return 1;
                 }
                 if (kbh.vkCode == 92)// 截獲右win
                 {
+                    MessageBox.Show("截獲右win");
                     return 1;
                 }
                 if (kbh.vkCode == (int)Keys.Escape && (int)Control.ModifierKeys == (int)Keys.Control) //截獲Ctrl+Esc
@@ -179,6 +182,11 @@ namespace vcs_System7_Hotkey
         {
             Hook_Clear();
 
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            Cursor.Clip = new Rectangle(this.Location, this.Size); //控制鼠標在窗口範圍內
         }
     }
 }

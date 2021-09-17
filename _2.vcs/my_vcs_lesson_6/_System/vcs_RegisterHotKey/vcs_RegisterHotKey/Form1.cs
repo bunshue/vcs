@@ -10,8 +10,7 @@ using System.Windows.Forms;
 using System.IO;                //for Directory
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Runtime.InteropServices;   //for dll
-
-using System.Diagnostics;   //for Process
+using System.Diagnostics;       //for Process
 
 namespace vcs_RegisterHotKey
 {
@@ -108,8 +107,6 @@ namespace vcs_RegisterHotKey
         {
             show_item_location();
 
-            //richTextBox1.Text += "測試快捷鍵範例" + Environment.NewLine + "Shift + F" + Environment.NewLine + "Ctrl + P 全螢幕截圖" + Environment.NewLine + "Alt + Ctrl + C\n";
-
             //註冊快捷鍵	  快捷鍵ID        輔助鍵      快捷鍵內容, 以 快捷鍵內容 為準
             RegisterHotKey(Handle, 70, KeyModifiers.SHIFT, Keys.F); // Shift + F
             RegisterHotKey(Handle, 88, KeyModifiers.CONTROL, Keys.P); // Ctrl + P 全螢幕截圖
@@ -139,6 +136,11 @@ namespace vcs_RegisterHotKey
 
         void show_item_location()
         {
+            richTextBox1.Text += "測試快捷鍵範例\n";
+            richTextBox1.Text += "Shift + F\n";
+            richTextBox1.Text += "Ctrl + P 全螢幕截圖\n";
+            richTextBox1.Text += "Alt + Ctrl + C 計算機\n";
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.FormBorderStyle = FormBorderStyle.None;
@@ -218,3 +220,4 @@ namespace vcs_RegisterHotKey
         }
     }
 }
+
