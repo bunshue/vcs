@@ -26,7 +26,7 @@ namespace WinTrackBar
              // 圖片隨控制項大小伸縮
              pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
              // 圖片控制項顯示photo[0]元素的圖檔
-             pictureBox1.Image = new Bitmap(photo[0] + ".jpg");
+             pictureBox1.Image = new Bitmap("../../../images/" + photo[0] + ".jpg");
              label1.Text = "圖片名稱：" + photo[0];
              // 指定滑桿的最小值，剛好為陣列索引下限
              trackBar1.Minimum = 0;     
@@ -38,7 +38,7 @@ namespace WinTrackBar
         {
              int index = trackBar1.Value;  // 取得滑桿的位置值，用來當陣列索引
              // 顯示photo陣列中第index張圖片
-             pictureBox1.Image = new Bitmap(photo[index] + ".jpg");
+             pictureBox1.Image = new Bitmap("../../../images/"+photo[index] + ".jpg");
              label1.Text = "圖片名稱：" + photo[index];
         }
     }

@@ -23,7 +23,7 @@ namespace ReadWriteXML
         private void Form1_Load(object sender, EventArgs e)
         {
             // 讀取XML文件並放入DataSet
-            ds.ReadXml("person.xml");
+            ds.ReadXml("../../../person.xml");
             dataGridView1.DataSource = ds.Tables["學生"];
             DataColumn dc = ds.Tables["學生"].Columns["學號"];
             // 在學生DataTable建立學號欄位為主鍵，主鍵名稱為「PK_學號」
@@ -90,7 +90,7 @@ namespace ReadWriteXML
         private void btnAllUpdate_Click(object sender, EventArgs e)
         {
             // 將DataSet的資料一次寫回XML文件
-            ds.WriteXml("person.xml");
+            ds.WriteXml("person_new.xml");
             MessageBox.Show("成功的將資料更新到XML檔");
         }
     }

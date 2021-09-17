@@ -133,7 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::MDIMutilFormEx.Properties.Resources.拉霸背景;
+            //this.BackgroundImage = global::MDIMutilFormEx.Properties.Resources.拉霸背景;
             this.ClientSize = new System.Drawing.Size(361, 473);
             this.Controls.Add(this.lblSum);
             this.Controls.Add(this.nudQty);

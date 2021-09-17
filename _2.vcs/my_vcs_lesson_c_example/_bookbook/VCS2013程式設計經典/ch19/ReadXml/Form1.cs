@@ -21,7 +21,7 @@ namespace ReadXml
         private void Form1_Load(object sender, EventArgs e)
         {
             DataSet ds = new DataSet();	//建立ds屬於DataSet物件
-            ds.ReadXml("person.xml");		//讀入person.xml文件檔
+            ds.ReadXml("../../../person.xml");		//讀入person.xml文件檔
             //在dataGridView1控制項上顯示person.xml文件檔的所有資料
             dataGridView1.DataSource = ds.Tables["學生"];
         }

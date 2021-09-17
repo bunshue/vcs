@@ -30,7 +30,6 @@
         {
             this.btnCls = new System.Windows.Forms.Button();
             this.lblShow = new System.Windows.Forms.Label();
-            this.btnEnd = new System.Windows.Forms.Button();
             this.btnCheckLot = new System.Windows.Forms.Button();
             this.chkListLot = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,17 +57,6 @@
             this.lblShow.TabIndex = 10;
             this.lblShow.Text = "lblShow";
             // 
-            // btnEnd
-            // 
-            this.btnEnd.Location = new System.Drawing.Point(216, 333);
-            this.btnEnd.Margin = new System.Windows.Forms.Padding(2);
-            this.btnEnd.Name = "btnEnd";
-            this.btnEnd.Size = new System.Drawing.Size(74, 35);
-            this.btnEnd.TabIndex = 9;
-            this.btnEnd.Text = "結束";
-            this.btnEnd.UseVisualStyleBackColor = true;
-            this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
-            // 
             // btnCheckLot
             // 
             this.btnCheckLot.Location = new System.Drawing.Point(29, 333);
@@ -86,7 +74,7 @@
             this.chkListLot.Location = new System.Drawing.Point(29, 56);
             this.chkListLot.Margin = new System.Windows.Forms.Padding(2);
             this.chkListLot.Name = "chkListLot";
-            this.chkListLot.Size = new System.Drawing.Size(261, 154);
+            this.chkListLot.Size = new System.Drawing.Size(261, 144);
             this.chkListLot.TabIndex = 7;
             // 
             // label1
@@ -95,18 +83,17 @@
             this.label1.Location = new System.Drawing.Point(27, 16);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 19);
+            this.label1.Size = new System.Drawing.Size(154, 15);
             this.label1.TabIndex = 6;
             this.label1.Text = "大樂透-請選擇6個號碼";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(324, 391);
             this.Controls.Add(this.btnCls);
             this.Controls.Add(this.lblShow);
-            this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.btnCheckLot);
             this.Controls.Add(this.chkListLot);
             this.Controls.Add(this.label1);
@@ -123,7 +110,6 @@
 
         private System.Windows.Forms.Button btnCls;
         private System.Windows.Forms.Label lblShow;
-        private System.Windows.Forms.Button btnEnd;
         private System.Windows.Forms.Button btnCheckLot;
         private System.Windows.Forms.CheckedListBox chkListLot;
         private System.Windows.Forms.Label label1;

@@ -28,30 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pic = new System.Windows.Forms.PictureBox();
-            this.cboPhotoName = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // pic
+            // pictureBox1
             // 
-            this.pic.Location = new System.Drawing.Point(33, 67);
-            this.pic.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pic.Name = "pic";
-            this.pic.Size = new System.Drawing.Size(209, 152);
-            this.pic.TabIndex = 5;
-            this.pic.TabStop = false;
+            this.pictureBox1.Location = new System.Drawing.Point(33, 67);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(614, 494);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
             // 
-            // cboPhotoName
+            // comboBox1
             // 
-            this.cboPhotoName.FormattingEnabled = true;
-            this.cboPhotoName.Location = new System.Drawing.Point(102, 23);
-            this.cboPhotoName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cboPhotoName.Name = "cboPhotoName";
-            this.cboPhotoName.Size = new System.Drawing.Size(139, 23);
-            this.cboPhotoName.TabIndex = 4;
-            this.cboPhotoName.SelectedIndexChanged += new System.EventHandler(this.cboPhotoName_SelectedIndexChanged);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(102, 23);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(139, 23);
+            this.comboBox1.TabIndex = 4;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -66,16 +66,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(278, 243);
-            this.Controls.Add(this.pic);
-            this.Controls.Add(this.cboPhotoName);
+            this.ClientSize = new System.Drawing.Size(732, 584);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -83,8 +83,8 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pic;
-        private System.Windows.Forms.ComboBox cboPhotoName;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
     }
 }

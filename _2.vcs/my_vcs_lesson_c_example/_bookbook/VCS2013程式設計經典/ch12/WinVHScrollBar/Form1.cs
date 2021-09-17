@@ -20,7 +20,7 @@ namespace WinVHScrollBar
         private void Form1_Load(object sender, EventArgs e)
         {
             // pictureBox1顯示 "無尾熊.jpg"
-            pictureBox1.Image = new Bitmap("無尾熊.jpg");
+            pictureBox1.Image = new Bitmap("../../../images/" + "無尾熊.jpg");
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.BorderStyle = BorderStyle.Fixed3D ;
             // 圖片方塊寬度指定給水平捲軸最大值

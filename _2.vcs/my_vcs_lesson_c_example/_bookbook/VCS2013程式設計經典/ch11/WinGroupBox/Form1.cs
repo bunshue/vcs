@@ -16,22 +16,25 @@ namespace WinGroupBox
         {
             InitializeComponent();
         }
-        // 表單載入時執行
+
         private void Form1_Load(object sender, EventArgs e)
         {
             rdbXBoxOne.Checked = true;  // 預設XBox One選項鈕被選取
         }
+
         private void rdbXBoxOne_CheckedChanged(object sender, EventArgs e)
         {
             gbXBoxOne.Enabled = true;// XBox One 遊戲群組方塊不失效，可啟用
             gbPS4.Enabled = false;   // PS4遊戲群組方塊失效
         }
+
         // 按 PS4 選項鈕執行
         private void rdbPS4_CheckedChanged(object sender, EventArgs e)
         {
             gbXBoxOne.Enabled = false;
             gbPS4.Enabled = true;
         }
+
         // 按 [確定] 鈕執行
         private void btnOk_Click(object sender, EventArgs e)
         {
@@ -73,3 +76,4 @@ namespace WinGroupBox
         }
     }
 }
+

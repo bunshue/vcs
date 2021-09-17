@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Main));
-            this.btn_Exit = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_PassWord = new System.Windows.Forms.TextBox();
@@ -41,16 +40,6 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
-            // 
-            // btn_Exit
-            // 
-            this.btn_Exit.Location = new System.Drawing.Point(494, 82);
-            this.btn_Exit.Name = "btn_Exit";
-            this.btn_Exit.Size = new System.Drawing.Size(59, 23);
-            this.btn_Exit.TabIndex = 10;
-            this.btn_Exit.Text = "退出";
-            this.btn_Exit.UseVisualStyleBackColor = true;
-            this.btn_Exit.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
@@ -89,7 +78,7 @@
             // 
             // btn_Login
             // 
-            this.btn_Login.Location = new System.Drawing.Point(387, 82);
+            this.btn_Login.Location = new System.Drawing.Point(433, 95);
             this.btn_Login.Name = "btn_Login";
             this.btn_Login.Size = new System.Drawing.Size(59, 23);
             this.btn_Login.TabIndex = 5;
@@ -134,7 +123,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 476);
-            this.Controls.Add(this.btn_Exit);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
@@ -157,7 +145,6 @@
         private System.Windows.Forms.TextBox txt_PassWord;
         private System.Windows.Forms.TextBox txt_UserName;
         private System.Windows.Forms.Button btn_Login;
-        private System.Windows.Forms.Button btn_Exit;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ImageList imageList1;

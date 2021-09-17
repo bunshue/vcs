@@ -18,6 +18,7 @@ namespace Linq_to_DataSet1
         {
             InitializeComponent();
         }
+
         //建立DataSet物件ds，ds建立於所有事件處理函式之外以便所有事件一起共用
         DataSet ds = new DataSet();
         // 表單載入時執行此事件處理函式
@@ -34,6 +35,7 @@ namespace Linq_to_DataSet1
                 dataGridView1.DataSource = ds.Tables["員工"];
             }
         }
+
         // 按 [確定] 鈕執行此事件處理函式 
         private void btnOk_Click(object sender, EventArgs e)
         {
@@ -60,3 +62,4 @@ namespace Linq_to_DataSet1
         }
     }
 }
+

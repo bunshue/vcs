@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinOPenSaveDialog", "WinOPenSaveDialog.csproj", "{819A647D-CA30-49ED-9E86-5097A1304FF5}"
 EndProject
 Global

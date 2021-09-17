@@ -16,11 +16,11 @@ namespace WinChkLstBx
         {
             InitializeComponent();
         }
+
         // 建立pcLot陣列，其陣列元素為pcLot[0]~pcLot[5]
         // 用來存放本期大樂透的6個號碼
         int[] pcLot = new int[6];
-        //  ------------------------------------------------------
-        // 表單載入時執行
+
         private void Form1_Load(object sender, EventArgs e)
         {
             chkListLot.MultiColumn = true;	// chkListLot水平欄顯示
@@ -31,8 +31,8 @@ namespace WinChkLstBx
                 chkListLot.Items.Add(i.ToString());
             }
             lblShow.Text = "本期未開獎...";
-
         }
+
         // 按 [對獎] 鈕執行
         private void btnCheckLot_Click(object sender, EventArgs e)
         {
@@ -86,7 +86,7 @@ namespace WinChkLstBx
                 lblShow.Text += "沒中，請再接再厲...";
             }
         }
-        // 按 [清除] 鈕執行
+
         private void btnCls_Click(object sender, EventArgs e)
         {
             // 將chkListLot核取清單方塊所有項目設為不勾選
@@ -96,11 +96,8 @@ namespace WinChkLstBx
             }
 
         }
-        // 按 [結束] 鈕執行
-        private void btnEnd_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+
+
         // SetLot可用來設定num個min~max之間的亂數，並將亂數值放入choose陣列內
         void SetLot(ref  int[] choose, int min, int max, int num)
         {

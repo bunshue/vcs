@@ -22,7 +22,7 @@ namespace SearchXml
         {
             txtResult.Text = "";
             DataSet ds = new DataSet();
-            ds.ReadXml("person.xml");  //將person.xml讀入至ds
+            ds.ReadXml("../../../person.xml");  //將person.xml讀入至ds
             //建立學號為學生DataTable的主鍵
             DataColumn dc = ds.Tables["學生"].Columns["學號"];
             ds.Tables["學生"].Constraints.Add("PK_學號", dc, true);

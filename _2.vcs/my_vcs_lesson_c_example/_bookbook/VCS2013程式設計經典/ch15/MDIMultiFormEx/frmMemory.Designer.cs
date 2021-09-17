@@ -197,7 +197,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::MDIMutilFormEx.Properties.Resources.bg;
+            //this.BackgroundImage = global::MDIMutilFormEx.Properties.Resources.bg;
             this.ClientSize = new System.Drawing.Size(660, 471);
             this.Controls.Add(this.btn3);
             this.Controls.Add(this.btn2);

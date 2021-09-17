@@ -36,7 +36,6 @@ namespace UseImageList
             dt.Rows.Add(dr);//添回数据行
             Method(dt);//显示数据表中内容
 
-
             richTextBox1.Text += "add user : " + dr["userName"] + "\n";
         }
 
@@ -61,10 +60,6 @@ namespace UseImageList
                 }
             }
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();//关闭窗体
-        }
     }
 }
+
