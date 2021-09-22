@@ -8,8 +8,8 @@
     <ProjectGuid>{0C7313FC-291D-4E67-9879-8C85EF16C467}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_PicPick2</RootNamespace>
-    <AssemblyName>vcs_PicPick2</AssemblyName>
+    <RootNamespace>vcs_RegisterHotKey2</RootNamespace>
+    <AssemblyName>vcs_RegisterHotKey2</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

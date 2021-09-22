@@ -8,8 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;  //for path
-using Microsoft.Win32;    //for RegistryKey
 using System.Runtime.InteropServices;   //for DllImport
+using Microsoft.Win32;    //for RegistryKey
 
 namespace vcs_test_all_24_DllImport_GetMediaLength
 {
@@ -17,9 +17,7 @@ namespace vcs_test_all_24_DllImport_GetMediaLength
     {
         // API 宣告
         [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
-        public static extern int mciSendString(
-            string lpstrCommand, string lpstrReturnString,
-            int uReturnLength, int hwndCallback);
+        public static extern int mciSendString(string lpstrCommand, string lpstrReturnString, int uReturnLength, int hwndCallback);
 
         string filename = @"C:\______test_files\_wav\WindowsShutdown.wav";
         //string filename = @"C:\______test_files\_mp3\aaaa.mp3";
@@ -51,7 +49,10 @@ namespace vcs_test_all_24_DllImport_GetMediaLength
                 if (mciSendString("status Media length", tm, tm.Length, 0) == 0)
                 {
                     tm = tm.Trim((char)0);
-                    if (!string.IsNullOrEmpty(tm)) RetVal = Convert.ToInt64(tm) / 1000;
+                    if (!string.IsNullOrEmpty(tm))
+                    {
+                        RetVal = Convert.ToInt64(tm) / 1000;
+                    }
                 }
                 mciSendString("close Media", null, 0, 0);
             }
@@ -59,3 +60,4 @@ namespace vcs_test_all_24_DllImport_GetMediaLength
         }
     }
 }
+

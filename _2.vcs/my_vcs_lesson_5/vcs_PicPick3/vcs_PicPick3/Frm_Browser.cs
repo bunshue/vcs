@@ -119,7 +119,7 @@ namespace vcs_PicPick3
                         //richTextBox1.Text += "H = " + H.ToString() + "\n";
                     }
                     //存成bmp檔
-                    String filename = "C:\\dddddddddd\\part_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                    string filename = "C:\\dddddddddd\\part_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
                     bitmap1.Save(filename, ImageFormat.Bmp);
                     //richTextBox1.Text += "全螢幕截圖，存檔檔名：\n" + filename + "\n";
 

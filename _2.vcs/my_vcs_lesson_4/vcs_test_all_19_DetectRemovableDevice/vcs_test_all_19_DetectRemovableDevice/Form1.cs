@@ -42,11 +42,11 @@ namespace vcs_test_all_19_DetectRemovableDevice
                             richTextBox1.Text += "WM_DEVICECHANGE\n";
                             break;
                         case DBT_DEVICEARRIVAL:     //裝置插入並且可以使用時，產生的系統訊息
-                            richTextBox1.Text += "DBT_DEVICEARRIVAL\t";
+                            richTextBox1.Text += "DBT_DEVICEARRIVAL\t\t裝置插入並且可以使用\n";
                             DeviceChange();
                             break;
                         case DBT_DEVICEREMOVECOMPLETE:      //裝置卸載或移除時產生的系統訊息
-                            richTextBox1.Text += "DBT_DEVICEREMOVECOMPLETE\n";
+                            richTextBox1.Text += "DBT_DEVICEREMOVECOMPLETE\t\t裝置卸載或移除\n";
                             DeviceChange();
                             break;
                         default:
@@ -70,7 +70,7 @@ namespace vcs_test_all_19_DetectRemovableDevice
                     richTextBox1.Text += "偵測到  " + di.Name + "  抽取式存放裝置\n";
                 }
             }
-
         }
     }
 }
+

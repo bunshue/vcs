@@ -1,4 +1,4 @@
-﻿namespace vcs_PicPick2
+﻿namespace vcs_RegisterHotKey2
 {
     partial class Form1
     {
@@ -44,7 +44,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(239, 91);
+            this.button1.Location = new System.Drawing.Point(220, 42);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -55,6 +55,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(13, 14);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(301, 71);
@@ -115,7 +116,8 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(13, 130);
+            this.richTextBox1.BackColor = System.Drawing.Color.LightYellow;
+            this.richTextBox1.Location = new System.Drawing.Point(12, 91);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(301, 314);
             this.richTextBox1.TabIndex = 6;
@@ -125,10 +127,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 452);
+            this.ClientSize = new System.Drawing.Size(325, 417);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

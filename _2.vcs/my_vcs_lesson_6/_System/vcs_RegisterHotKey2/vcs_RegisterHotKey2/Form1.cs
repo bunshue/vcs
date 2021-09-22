@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Runtime.InteropServices;
-using System.IO;
+using System.IO;                //for Directory
+using System.Runtime.InteropServices;   //for dll
 
-namespace vcs_PicPick2
+namespace vcs_RegisterHotKey2
 {
     public partial class Form1 : Form
     {
@@ -85,6 +85,17 @@ namespace vcs_PicPick2
         private void Form1_Load(object sender, EventArgs e)
         {
             RegisterHotKey(Handle, 81, KeyModifiers.Shift, Keys.F); //Shift + F 為快速鍵
+
+            //檢查存圖的資料夾
+            if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(foldername);
+                richTextBox1.Text += "已建立一個新資料夾: " + foldername + "\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "資料夾: " + foldername + " 已存在，不用再建立\n";
+            }
         }
 
         public void IniWriteValue(string section, string key, string value)
@@ -225,27 +236,22 @@ namespace vcs_PicPick2
             }
         }
 
-        private void getImg()
+        private void save_fullscreen_to_local_drive()
         {
-            DirectoryInfo di = new DirectoryInfo(MyPicPath);
-            if (!di.Exists)
-            {
-                Directory.CreateDirectory(MyPicPath);
-            }
-            if (MyPicPath.Length == 3)
-                MyPicPath = MyPicPath.Remove(MyPicPath.LastIndexOf(":") + 1);
-            string PicPath = MyPicPath + "\\IMG_" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + ".bmp";
-            Bitmap bt;
+            //存成bmp檔
+            string filename = "C:\\dddddddddd\\full_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            Bitmap bitmap1;
             if (MyCursor == "0")
             {
-                bt = CaptureNoCursor();
-                bt.Save(PicPath);
+                bitmap1 = CaptureNoCursor();
+                bitmap1.Save(filename);
             }
             else
             {
-                bt = CaptureDesktop();
-                bt.Save(PicPath);
+                bitmap1 = CaptureDesktop();
+                bitmap1.Save(filename);
             }
+            richTextBox1.Text += "全螢幕截圖，存檔檔名：\n" + filename + "\n";
         }
 
         protected override void WndProc(ref Message m)
@@ -259,7 +265,7 @@ namespace vcs_PicPick2
                     {
                         case 81:    //按下的是Shift+F
                             richTextBox1.Text += "存圖\n";
-                            getImg();
+                            save_fullscreen_to_local_drive();       //全螢幕截圖
                             break;
                     }
                     break;

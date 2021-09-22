@@ -5,22 +5,19 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
- // the next imports are the most important libraries for this class
-
-using AForge.Vision.Motion; // Motion detection
-using AForge.Video;              //
-using AForge.Video.DirectShow;   // Video Recording
-using AForge.Video.FFMPEG;       // 
-
 using System.Threading;
 
+using AForge.Video;
+using AForge.Video.DirectShow;  // Video Recording
+using AForge.Vision.Motion;     // Motion detection
+using AForge.Video.FFMPEG;
 
 namespace WebcamSecurity
 {
     class CameraMonitor
     {
         PictureBox display;    // a refrence to the PictureBox on the MainForm
-        private VideoCaptureDevice cam; // refrence to the actual VidioCaptureDevice (webcam)
+        private VideoCaptureDevice Cam = null; // refrence to the actual VidioCaptureDevice (webcam)
         String cameraName; // string for display purposes
         MotionDetector md;
 
@@ -32,17 +29,17 @@ namespace WebcamSecurity
 
             md = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting()); // creates the motion detector
 
-            cam = new VideoCaptureDevice(monikerString);
-            cam.NewFrame += new NewFrameEventHandler(cam_NewFrame); // defines which method to call when a new frame arrives
-            cam.Start(); // starts the videoCapture
+            Cam = new VideoCaptureDevice(monikerString);
+            Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame); // defines which method to call when a new frame arrives
+            Cam.Start(); // starts the videoCapture
         }
 
         public void StopCapture()
         {
-            if (this.cam.IsRunning)
+            if (this.Cam.IsRunning)
             {
                 // we must stop the VideoCaptureDevice when done to free it so it can be used by other applications
-                this.cam.Stop();
+                this.Cam.Stop();
             }
         }
 
@@ -52,7 +49,7 @@ namespace WebcamSecurity
          */
         private void DrawMessage(object sender, PaintEventArgs e)
         {
-            using (Font f = new Font("Arial", 10, FontStyle.Bold))
+            using (Font f = new Font("Arial", 14, FontStyle.Bold))
             {
                 string str = string.Empty;
                 SolidBrush sb;
@@ -65,7 +62,6 @@ namespace WebcamSecurity
                 {
                     str = DateTime.Now.ToString();
                     sb = new SolidBrush(Color.Green);
-
                 }
 
                 e.Graphics.DrawString(str, f, sb, new Point(10, 10));
@@ -89,25 +85,26 @@ namespace WebcamSecurity
         bool motionDetected = false; // was there any motion detected previously
         int calibrateAndResume = 0; // counter used delay/skip frames from being processed by the MotionDetector
 
-        void cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        //自定義函數, 捕獲每一幀圖像並顯示
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             try
             {
-                Bitmap bit = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
+                Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
                 if (!this.isResolutionSet)
                 {
                     // this is run once to set the resolution for the VideoRecorder
-                    this.Width = bit.Width;
-                    this.Height = bit.Height;
+                    this.Width = bitmap1.Width;
+                    this.Height = bitmap1.Height;
                     this.isResolutionSet = true;
                 }
-                this.display.Image = (Bitmap)bit.Clone(); // displays the current frame on the main form
+                this.display.Image = (Bitmap)bitmap1.Clone(); // displays the current frame on the main form
                 if (this.MotionDetection && !this.motionDetected)
                 {
                     // if motion detection is enabled and there werent any previous motion detected
-                    Bitmap bit2 = (Bitmap)bit.Clone(); // clone the bits from the current frame
+                    Bitmap bitmap2 = (Bitmap)bitmap1.Clone(); // clone the bits from the current frame
 
-                    if (md.ProcessFrame(bit2) > 0.001) // feed the bits to the MD 
+                    if (md.ProcessFrame(bitmap2) > 0.001) // feed the bits to the MD 
                     {
                         if (this.calibrateAndResume > 3)
                         {
@@ -122,14 +119,14 @@ namespace WebcamSecurity
                 if (IsRecording)
                 {
                     // if recording is enabled we enqueue the current frame to be encoded to a video file
-                    Graphics g = Graphics.FromImage(bit);
+                    Graphics g = Graphics.FromImage(bitmap1);
                     Pen p = new Pen(Color.Red);
                     p.Width = 5.0f;
                     using (Font f = new Font("Tahoma", 10, FontStyle.Bold))
                     {
                         g.DrawString(DateTime.Now.ToString(), f, Brushes.Red, new Point(2, 2));
                     }
-                    frames.Enqueue((Bitmap)bit.Clone());
+                    frames.Enqueue((Bitmap)bitmap1.Clone());
                 }
             }
             catch (InvalidOperationException ex)

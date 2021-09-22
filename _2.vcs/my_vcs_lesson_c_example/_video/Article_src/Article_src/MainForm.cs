@@ -16,21 +16,14 @@ namespace WebcamSecurity
 {
     public partial class MainForm : Form
     {
-        // Refrence to cameraMonitors of all 4 cams
         CameraMonitor[] CamMonitor = new CameraMonitor[4];  //物件陣列
-        // Indexed arrays containing referces to the user interface components
-        // so they can be easily accessed later on
-        PictureBox[] DisplayReference = new PictureBox[4];
 
-        // the FilterInfoCollection is where we get information about VideoCaptureDevices
         private FilterInfoCollection USBWebcams = null;
         int webcam_count = 0;
 
         public MainForm()
         {
             InitializeComponent();
-            // linking the user interface componets to the arrays
-            this.DisplayReference[0] = this.pictureBox1;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -61,7 +54,8 @@ namespace WebcamSecurity
             if (webcam_count > 0)
             {
                 i = 0;
-                this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i], USBWebcams[i].MonikerString, "Camera" + (i + 1));
+                string camera_name = USBWebcams[i].MonikerString;   //長名
+                this.CamMonitor[i] = new CameraMonitor(pictureBox1, camera_name, "Camera" + (i + 1));
 
                 /*
                 richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
@@ -185,3 +179,4 @@ namespace WebcamSecurity
         }
     }
 }
+

@@ -5,9 +5,11 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
+using System.Diagnostics;
+
 using Emgu.CV;
 using Emgu.CV.Structure;
-using System.Diagnostics;
 
 namespace ShapeDetection
 {
@@ -27,9 +29,7 @@ namespace ShapeDetection
                 StringBuilder msgBuilder = new StringBuilder("Performance: ");
 
                 //Load the image from file and resize it for display
-                Image<Bgr, Byte> img =
-                   new Image<Bgr, byte>(fileNameTextBox.Text)
-                   .Resize(400, 400, Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR, true);
+                Image<Bgr, Byte> img = new Image<Bgr, byte>(fileNameTextBox.Text).Resize(400, 400, Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR, true);
 
                 //Convert the image to grayscale and filter out the noise
                 Image<Gray, Byte> gray = img.Convert<Gray, Byte>().PyrDown().PyrUp();
