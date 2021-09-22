@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "禁用桌面選項卡", "禁用桌面選項卡\禁用桌面選項卡.csproj", "{4A639172-1404-4C7D-AA0B-A6D2A504C681}"
 EndProject
 Global
