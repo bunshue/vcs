@@ -12,7 +12,6 @@ namespace vcs_NotifyIcon2
     public partial class Form1 : Form
     {
         private Icon mNetTrayIcon = new Icon(@"C:\_git\vcs\_2.vcs\______test_files\_material\ims.ico");
-        private Bitmap MyImage = null;
         private NotifyIcon TrayIcon;
         private ContextMenu notifyiconMnu;
 

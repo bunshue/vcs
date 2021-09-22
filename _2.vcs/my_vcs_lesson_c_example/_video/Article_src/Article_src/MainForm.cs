@@ -31,6 +31,18 @@ namespace WebcamSecurity
             int i;
             show_item_location();
 
+            //檢查錄影存檔的資料夾
+            string Path = @"C:\dddddddddd";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+            }
+
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
 
             webcam_count = USBWebcams.Count;
@@ -55,16 +67,13 @@ namespace WebcamSecurity
             {
                 i = 0;
                 string camera_name = USBWebcams[i].MonikerString;   //長名
-                this.CamMonitor[i] = new CameraMonitor(pictureBox1, camera_name, "Camera" + (i + 1));
+                this.CamMonitor[i] = new CameraMonitor(pictureBox1, camera_name, "第 " + (i + 1).ToString() + " 台攝影機");
 
                 /*
                 richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
                 richTextBox1.Text += "短名 : " + USBWebcams[i].Name + "\n";
                 richTextBox1.Text += "長名 : " + USBWebcams[i].MonikerString + "\n";
                 */
-
-                //this.CamMonitor[i].RecordingPath = this.RecordingPathInput.Text;
-                this.CamMonitor[i].RecordingPath = @"C:\dddddddddd\";
             }
         }
 
@@ -88,6 +97,7 @@ namespace WebcamSecurity
             //W = 640;
             H = 480;
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + 10);
+            button2.Location = new Point(1000, 10);
 
             richTextBox1.Size = new Size(200, 600);
             richTextBox1.Location = new Point(1000, 50);
@@ -177,6 +187,20 @@ namespace WebcamSecurity
                 this.toggleOption(0, 2, false);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
+            int i;
+            i = 0;
+
+            richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
+            richTextBox1.Text += "IsRecording\t" + this.CamMonitor[i].IsRecording.ToString() + "\n";
+            richTextBox1.Text += "cameraName\t" + this.CamMonitor[i].cameraName.ToString() + "\n";
+            richTextBox1.Text += "CamMonitor\t" + this.CamMonitor[i].ToString() + "\n";
+            richTextBox1.Text += "BeepOnMotion\t" + this.CamMonitor[i].BeepOnMotion.ToString() + "\n";
+        }
     }
 }
+
 

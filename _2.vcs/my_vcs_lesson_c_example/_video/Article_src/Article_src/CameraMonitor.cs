@@ -18,7 +18,7 @@ namespace WebcamSecurity
     {
         PictureBox display;    // a refrence to the PictureBox on the MainForm
         private VideoCaptureDevice Cam = null; // refrence to the actual VidioCaptureDevice (webcam)
-        String cameraName; // string for display purposes
+        public String cameraName; // string for display purposes
         MotionDetector md;
 
         public CameraMonitor(PictureBox display, string monikerString, String cameraName)
@@ -112,7 +112,10 @@ namespace WebcamSecurity
                             Thread th = new Thread(MotionReaction);
                             th.Start(); // start the motion reaction thread
                         }
-                        else this.calibrateAndResume++;
+                        else
+                        {
+                            this.calibrateAndResume++;
+                        }
                     }
                 }
 
@@ -173,14 +176,13 @@ namespace WebcamSecurity
 
         public bool IsRecording = false; // recording flag
 
-        Queue<Bitmap> frames = new Queue<Bitmap>(); // Queue that stors frames to be written by the recorder thread
-        public string RecordingPath = "recording"; // default recording path
+        Queue<Bitmap> frames = new Queue<Bitmap>(); // Queue that stores frames to be written by the recorder thread
 
         private void DoRecord()
         {
             // we set our VideoFileWriter as well as the file name, resolution and fps
             VideoFileWriter writer = new VideoFileWriter();
-            writer.Open(RecordingPath + "\\" + this.cameraName + String.Format("{0:_dd-M-yyyy_hh-mm-ss}", DateTime.Now) + ".avi", this.Width, this.Height, 30);
+            writer.Open("C:\\dddddddddd\\" + this.cameraName + String.Format("{0:_dd-M-yyyy_hh-mm-ss}", DateTime.Now) + ".avi", this.Width, this.Height, 30);
 
             // as long as we're recording
             // we dequeue the BitMaps waiting in the Queue and write them to the file
@@ -188,8 +190,8 @@ namespace WebcamSecurity
             {
                 if (frames.Count > 0)
                 {
-                    Bitmap bmp = frames.Dequeue();
-                    writer.WriteVideoFrame(bmp);
+                    Bitmap bitmap1 = frames.Dequeue();
+                    writer.WriteVideoFrame(bitmap1);
                 }
             }
             writer.Close();
