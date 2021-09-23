@@ -155,6 +155,40 @@ namespace vcs_test_all_02_Array
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //二維陣列的宣告與使用
+            int i, j;
+            int[,] gray = new int[3, 8];    //Row = 3, Column = 8
+
+            int ROW = gray.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int COL = gray.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int length = gray.Length;//獲取整個二維陣列的長度，即所有元 的個數
+            richTextBox1.Text += "ROW = " + ROW.ToString() + "\n";
+            richTextBox1.Text += "COL = " + COL.ToString() + "\n";
+            richTextBox1.Text += "length = " + length.ToString() + "\n";
+
+            richTextBox1.Text += "assign value\n";
+
+            for (j = 0; j < ROW; j++)
+            {
+                for (i = 0; i < COL; i++)
+                {
+                    gray[j, i] = i * 10 + j;
+                }
+            }
+
+            richTextBox1.Text += "print value\n";
+            for (j = 0; j < ROW; j++)
+            {
+                for (i = 0; i < COL; i++)
+                {
+                    richTextBox1.Text += gray[j, i].ToString("D2") + "  ";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "二維陣列內容\n";
+            PrintArray(gray);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -380,11 +414,9 @@ namespace vcs_test_all_02_Array
 
             int[, , ,] dim = new int[2, 5, 3, 7];
             richTextBox1.Text += "rank = " + dim.Rank.ToString() + "\n";
-            //Console.WriteLine(dim.Rank);//結果 4
 
             //int[] num = { { { 5, 6 }, { 7, 8 } }, { { 5, 6 }, { 7, 8 } }, { { 5, 6 }, { 7, 8 } } };
             //richTextBox1.Text += "rank = " + num.Rank.ToString() + "\n";
-            //Console.WriteLine(num.Rank);//結果 3
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -400,8 +432,6 @@ namespace vcs_test_all_02_Array
             arr[0] = new int[5] { 1, 3, 5, 7, 9 };
             arr[1] = new int[4] { 2, 4, 6, 8 };
             arr[2] = new int[2] { 2, 4 };
-
-
 
             // Display the array elements.
             for (int i = 0; i < arr.Length; i++)
@@ -1274,20 +1304,30 @@ namespace vcs_test_all_02_Array
             richTextBox1.Text += "\n";
         }
 
-        // Display the array's values in the Console window.
         private void PrintArray<T>(T[,] arr)
         {
+            /*
+            int ROW = arr.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int COL = arr.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int length = arr.Length;//獲取整個二維陣列的長度，即所有元 的個數
+            richTextBox1.Text += "ROW = " + ROW.ToString() + "\n";
+            richTextBox1.Text += "COL = " + COL.ToString() + "\n";
+            richTextBox1.Text += "length = " + length.ToString() + "\n";
+
+            richTextBox1.Text += "t1 = " + arr.GetLowerBound(0).ToString() + "\n";  //第0維的下限 0
+            richTextBox1.Text += "t2 = " + arr.GetLowerBound(1).ToString() + "\n";  //第1維的下限 0
+            richTextBox1.Text += "t3 = " + arr.GetUpperBound(0).ToString() + "\n";  //第0維的上限
+            richTextBox1.Text += "t3 = " + arr.GetUpperBound(1).ToString() + "\n";  //第1維的上限
+            */
+
             for (int r = arr.GetLowerBound(0); r <= arr.GetUpperBound(0); r++)
             {
                 for (int c = arr.GetLowerBound(1); c <= arr.GetUpperBound(1); c++)
                 {
-                    //Console.Write(arr[r, c] + "\t");
                     richTextBox1.Text += arr[r, c].ToString() + "\t";
                 }
-                //Console.WriteLine("");
                 richTextBox1.Text += "\n";
             }
-            //Console.WriteLine("");
             richTextBox1.Text += "\n";
         }
 
@@ -1406,7 +1446,6 @@ namespace vcs_test_all_02_Array
             return arr;
         }
 
-        // Display the array's values in the Console window.
         private void PrintArray(double[,] arr)
         {
             richTextBox1.Text += "PrintArray\n";
@@ -1414,13 +1453,10 @@ namespace vcs_test_all_02_Array
             {
                 for (int c = arr.GetLowerBound(1); c <= arr.GetUpperBound(1); c++)
                 {
-                    Console.Write(arr[r, c] + "\t");
                     richTextBox1.Text += arr[r, c].ToString() + "\t";
                 }
-                Console.WriteLine("");
                 richTextBox1.Text += "\n";
             }
-            Console.WriteLine("");
             richTextBox1.Text += "\n";
         }
         //解讀一個在TextBox的矩陣 SP

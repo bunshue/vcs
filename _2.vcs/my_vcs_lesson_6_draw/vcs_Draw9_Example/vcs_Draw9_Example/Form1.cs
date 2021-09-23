@@ -6719,12 +6719,37 @@ namespace vcs_Draw9_Example
             richTextBox1.Text += "center = " + center.ToString() + "\n";
             richTextBox1.Text += "mean = " + mean.ToString() + "\n";
 
+            /*
+            //使用測試陣列
+            max = 255;
+            min = 0;
+            gray = new int[15, 15];
 
+            richTextBox1.Text += "assign value\n";
             for (j = 0; j < 15; j++)
             {
                 for (i = 0; i < 15; i++)
                 {
-                    richTextBox1.Text += (gray[i, j] - min).ToString("D3") + "  ";
+                    //gray[j, i] = j * 15 + i;
+                    gray[j, i] = j * 10 + i * 0;
+                    //gray[j, i] = i * 10;
+                }
+            }
+            */
+
+            int ROW = gray.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int COL = gray.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int length = gray.Length;//獲取整個二維陣列的長度，即所有元 的個數
+            richTextBox1.Text += "ROW = " + ROW.ToString() + "\n";
+            richTextBox1.Text += "COL = " + COL.ToString() + "\n";
+            richTextBox1.Text += "length = " + length.ToString() + "\n";
+
+            richTextBox1.Text += "before\n";
+            for (j = 0; j < ROW; j++)
+            {
+                for (i = 0; i < COL; i++)
+                {
+                    richTextBox1.Text += (gray[j, i] - min).ToString("D3") + "  ";
                 }
                 richTextBox1.Text += "\n";
             }
@@ -6735,59 +6760,52 @@ namespace vcs_Draw9_Example
             int avg;
             int tap = 2;
 
-            int[] reserved = new int[tap - 1];
-
-
-            int ROW = gray.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
-            int COL = gray.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
-            int length = gray.Length;//獲取整個二維陣列的長度，即所有元 的個數
-
-            //richTextBox1.Text += "row = " + row.ToString() + "\n";
-            richTextBox1.Text += "ROW = " + ROW.ToString() + "\n";
-            richTextBox1.Text += "COL = " + COL.ToString() + "\n";
-            richTextBox1.Text += "length = " + length.ToString() + "\n";
-
-
             richTextBox1.Text += "smoothing...\ttap = " + tap.ToString() + "\n";
-            for (j = 0; j < 15; j++)
-            {
-                for (k = 0; k < (tap - 1); k++)
-                {
-                    reserved[k] = gray[15 - 1 - k, j];
-                }
 
-                for (i = 0; i < (15 - (tap - 1)); i++)
+            //水平filter
+            for (j = 0; j < ROW; j++)
+            {
+                for (i = 0; i < (COL - (tap - 1)); i++)
+                {
+                    avg = 0;
+                    for (k = 0; k < tap; k++)
+                    {
+                        avg += gray[j, i + k];
+                    }
+                    avg /= tap;
+
+                    gray[j, i] = avg;
+                }
+            }
+
+            //垂直filter
+            for (j = 0; j < COL; j++)
+            {
+                for (i = 0; i < (ROW - (tap - 1)); i++)
                 {
                     avg = 0;
                     for (k = 0; k < tap; k++)
                     {
                         avg += gray[i + k, j];
+                        //richTextBox1.Text += "use " + gray[j, i + k].ToString() + " ";
                     }
                     avg /= tap;
 
-                    for (k = 0; k < tap; k++)
-                    {
-                        gray[i + k, j] = avg;
-                    }
-                }
+                    gray[i, j] = avg;
 
-                for (k = 0; k < (tap - 1); k++)
-                {
-                    gray[15 - 1 - k, j] = reserved[k];
                 }
             }
 
-
-            for (j = 0; j < 15; j++)
+            richTextBox1.Text += "after\n";
+            for (j = 0; j < ROW; j++)
             {
-                for (i = 0; i < 15; i++)
+                for (i = 0; i < COL; i++)
                 {
-                    richTextBox1.Text += (gray[i, j] - min).ToString("D3") + "  ";
+                    richTextBox1.Text += (gray[j, i] - min).ToString("D3") + "  ";
                 }
                 richTextBox1.Text += "\n";
             }
             richTextBox1.Text += "\n";
-
 
 
             double ratio = (double)255 / (max - min);
@@ -6932,132 +6950,7 @@ namespace vcs_Draw9_Example
 
         private void button46_Click(object sender, EventArgs e)
         {
-            int i, j, k;
-            int[,] gray = new int[5, 15];    //Rows, Columns
-
-            //int row = gray.Rank;//獲取行數
-            int ROW = gray.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
-            int COL = gray.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
-            int length = gray.Length;//獲取整個二維陣列的長度，即所有元 的個數
-
-            //richTextBox1.Text += "row = " + row.ToString() + "\n";
-            richTextBox1.Text += "ROW = " + ROW.ToString() + "\n";
-            richTextBox1.Text += "COL = " + COL.ToString() + "\n";
-            richTextBox1.Text += "length = " + length.ToString() + "\n";
-
-            richTextBox1.Text += "assign value\n";
-            for (j = 0; j < ROW; j++)
-            {
-                for (i = 0; i < COL; i++)
-                {
-                    gray[j, i] = j * COL + i;
-                    //gray[j, i] = i * 10;
-                }
-            }
-
-            richTextBox1.Text += "before\n";
-            for (j = 0; j < ROW; j++)
-            {
-                for (i = 0; i < COL; i++)
-                {
-                    richTextBox1.Text += gray[j, i].ToString("D3") + "  ";
-                }
-                richTextBox1.Text += "\n";
-            }
-            richTextBox1.Text += "\n";
-
-
-            int avg;
-            int tap = 3;
-
-            int[] reserved = new int[tap - 1];
-
-            richTextBox1.Text += "smoothing...\ttap = " + tap.ToString() + "\n";
-
-            //水平filter
-            for (j = 0; j < ROW; j++)
-            {
-                for (k = 0; k < (tap - 1); k++)
-                {
-                    reserved[k] = gray[j, COL - 1 - k];
-                    //richTextBox1.Text += "j = " + j.ToString() + "\treserve[" + k.ToString() + "]=" + reserved[k].ToString() + "\n";
-                }
-
-                for (i = 0; i < (COL - (tap - 1)); i++)
-                {
-                    avg = 0;
-                    for (k = 0; k < tap; k++)
-                    {
-                        avg += gray[j, i + k];
-                        //richTextBox1.Text += "use " + gray[j, i + k].ToString() + " ";
-                    }
-                    avg /= tap;
-
-                    for (k = 0; k < tap; k++)
-                    {
-                        gray[j, i + k] = avg;
-                        //richTextBox1.Text += "avg " + gray[j, i + k].ToString() + " ";
-                    }
-                }
-
-                for (k = 0; k < (tap - 1); k++)
-                {
-                    gray[j, COL - 1 - k] = reserved[k];
-                }
-            }
-
-            //垂直filter
-            for (j = 0; j < COL; j++)
-            {
-                for (k = 0; k < (tap - 1); k++)
-                {
-                    reserved[k] = gray[ROW - 1 - k, j];
-                    //richTextBox1.Text += "j = " + j.ToString() + "\treserve[" + k.ToString() + "]=" + reserved[k].ToString() + "\n";
-                }
-
-                for (i = 0; i < (ROW - (tap - 1)); i++)
-                {
-                    avg = 0;
-                    for (k = 0; k < tap; k++)
-                    {
-                        avg += gray[i + k, j];
-                        //richTextBox1.Text += "use " + gray[j, i + k].ToString() + " ";
-                    }
-                    avg /= tap;
-
-                    for (k = 0; k < tap; k++)
-                    {
-                        gray[i + k, j] = avg;
-                        //richTextBox1.Text += "avg " + gray[j, i + k].ToString() + " ";
-                    }
-                }
-
-                for (k = 0; k < (tap - 1); k++)
-                {
-                    gray[ROW - 1 - k, j] = reserved[k];
-                }
-            }
-
-
-
-
-
-            richTextBox1.Text += "after\n";
-            for (j = 0; j < ROW; j++)
-            {
-                for (i = 0; i < COL; i++)
-                {
-                    richTextBox1.Text += gray[j, i].ToString("D3") + "  ";
-                }
-                richTextBox1.Text += "\n";
-            }
-            richTextBox1.Text += "\n";
-
-
-
         }
     }
 }
-
-
 

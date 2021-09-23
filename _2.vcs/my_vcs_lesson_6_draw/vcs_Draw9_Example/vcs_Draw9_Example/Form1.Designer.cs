@@ -725,7 +725,6 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(100, 40);
             this.button46.TabIndex = 80;
-            this.button46.Text = "Filter Test";
             this.button46.UseVisualStyleBackColor = true;
             this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
