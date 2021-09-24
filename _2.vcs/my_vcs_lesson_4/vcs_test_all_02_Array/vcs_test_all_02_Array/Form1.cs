@@ -181,7 +181,7 @@ namespace vcs_test_all_02_Array
             {
                 for (i = 0; i < COL; i++)
                 {
-                    richTextBox1.Text += gray[j, i].ToString("D2") + "  ";
+                    richTextBox1.Text += gray[j, i].ToString("D2") + "\t";
                 }
                 richTextBox1.Text += "\n";
             }
@@ -189,6 +189,21 @@ namespace vcs_test_all_02_Array
 
             richTextBox1.Text += "二維陣列內容\n";
             PrintArray(gray);
+
+            //richTextBox1.Text += "數學的(5,2)位置 要寫gray[2, 5] = " + gray[2, 5].ToString("D2") + "\n";
+            richTextBox1.Text += "數學的(5,2)位置 要寫gray[2, 5] = " + gray[2, 5].ToString("D2") + "\n";
+
+
+            /*
+            //三維陣列 測試中
+            int[,,] gray2 = new int[5, 3, 8];    //Row = 3, Column = 8
+
+            richTextBox1.Text += "Rank = " + gray2.Rank.ToString() + "\n";
+
+            richTextBox1.Text += "三維陣列內容\n";
+            PrintArray(gray2);
+            */
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -217,6 +232,58 @@ namespace vcs_test_all_02_Array
             {
                 richTextBox1.Text += "字串\t" + s + "\n";
             }
+
+            richTextBox1.Text += "一維陣列的運算\n";
+            int N = 12;
+            int[] Values = new int[N];
+            Random r = new Random();
+            //Values = new int[NumValues];
+            for (int i = 0; i < N; i++)
+            {
+                Values[i] = r.Next(0, 100);
+            }
+
+            richTextBox1.Text += "顯示內容\n";
+            foreach (var v in Values)
+            {
+                richTextBox1.Text += v.ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "個數 :\t" + Values.Count().ToString() + "\t陣列資料長度\n";
+            richTextBox1.Text += "個數 :\t" + Values.Length.ToString() + "\t陣列資料長度\n";
+            richTextBox1.Text += "總和 :\t" + Values.Sum().ToString() + "\n";
+            richTextBox1.Text += "平均 :\t" + Values.Average().ToString() + "\n";
+            richTextBox1.Text += "Max :\t" + Values.Max().ToString() + "\n";
+            richTextBox1.Text += "Min :\t" + Values.Min().ToString() + "\n";
+            richTextBox1.Text += "Rank :\t" + Values.Rank.ToString() + "\t陣列維度值\n";
+
+            Array.Sort(Values);
+            richTextBox1.Text += "排序後\n";
+            foreach (var v in Values)
+            {
+                richTextBox1.Text += v.ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            Array.Reverse(Values);
+            richTextBox1.Text += "反相後\n";
+            foreach (var v in Values)
+            {
+                richTextBox1.Text += v.ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "不定長度一維字串陣列\n";
+            string[] Product = new string[] { "火影忍者", "航海王",
+ 				"史瑞克4", "葉問2", "鋼鐵人2", "偷心大聖PS男", "阿凡達",
+ 				"半夜鬼上床", "第一次愛上你", "松藥局的兒子們", "老婆，給我飯" };
+            richTextBox1.Text += "共有 " + Product.Length.ToString() + " 個項目, 分別是:\n";
+            foreach (var s in Product)
+            {
+                richTextBox1.Text += s.ToString() + "\n";
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -269,7 +336,7 @@ namespace vcs_test_all_02_Array
             richTextBox1.Text += "維度 rank = " + rank.ToString() + "\n";
             for (i = 0; i < rank; i++)
             {
-                richTextBox1.Text += "第 " + i.ToString() + " 維\t長度 " + (person.GetUpperBound(i) + 1).ToString() + "\n";
+                richTextBox1.Text += "第 " + i.ToString() + " 維的長度 : " + (person.GetUpperBound(i) + 1).ToString() + "\n";
             }
 
             int xx = person.GetUpperBound(0) + 1;
@@ -342,7 +409,7 @@ namespace vcs_test_all_02_Array
             richTextBox1.Text += "維度 rank = " + rank.ToString() + "\n";
             for (i = 0; i < rank; i++)
             {
-                richTextBox1.Text += "第 " + i.ToString() + " 維\t長度 " + (Score.GetUpperBound(i) + 1).ToString() + "\n";
+                richTextBox1.Text += "第 " + i.ToString() + " 維的長度 : " + (Score.GetUpperBound(i) + 1).ToString() + "\n";
             }
 
             int xx = Score.GetUpperBound(0) + 1;
@@ -1306,6 +1373,48 @@ namespace vcs_test_all_02_Array
 
         private void PrintArray<T>(T[,] arr)
         {
+            richTextBox1.Text += "Rank = " + arr.Rank.ToString() + "\n";
+
+            int ROW = arr.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int COL = arr.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int length = arr.Length;//獲取整個二維陣列的長度，即所有元 的個數
+            richTextBox1.Text += "ROW = " + ROW.ToString() + "\n";
+            richTextBox1.Text += "COL = " + COL.ToString() + "\n";
+            richTextBox1.Text += "length = " + length.ToString() + "\n";
+
+            richTextBox1.Text += "L0 = " + arr.GetLength(0).ToString() + "\n";  //第0維的長度
+            richTextBox1.Text += "L1 = " + arr.GetLength(1).ToString() + "\n";  //第1維的長度
+
+            richTextBox1.Text += "t1 = " + arr.GetLowerBound(0).ToString() + "\n";  //第0維的下限 0
+            richTextBox1.Text += "t2 = " + arr.GetLowerBound(1).ToString() + "\n";  //第1維的下限 0
+            richTextBox1.Text += "t3 = " + arr.GetUpperBound(0).ToString() + "\n";  //第0維的上限
+            richTextBox1.Text += "t3 = " + arr.GetUpperBound(1).ToString() + "\n";  //第1維的上限
+
+
+            for (int r = arr.GetLowerBound(0); r <= arr.GetUpperBound(0); r++)
+            {
+                for (int c = arr.GetLowerBound(1); c <= arr.GetUpperBound(1); c++)
+                {
+                    richTextBox1.Text += arr[r, c].ToString() + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        private void PrintArray<T>(T[, ,] arr)
+        {
+            int i;
+            int rank = arr.Rank;
+
+            richTextBox1.Text += "維度 rank = " + rank.ToString() + "\n";
+
+            for (i = 0; i < rank; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 維的長度 : " + arr.GetLength(i).ToString() + "\n";
+                richTextBox1.Text += "第 " + i.ToString() + " 維的長度 : " + (arr.GetUpperBound(i) + 1).ToString() + "\n";
+            }
+
             /*
             int ROW = arr.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
             int COL = arr.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
@@ -1324,12 +1433,13 @@ namespace vcs_test_all_02_Array
             {
                 for (int c = arr.GetLowerBound(1); c <= arr.GetUpperBound(1); c++)
                 {
-                    richTextBox1.Text += arr[r, c].ToString() + "\t";
+                    //richTextBox1.Text += arr[r, c].ToString() + "\t";
                 }
-                richTextBox1.Text += "\n";
+                //richTextBox1.Text += "\n";
             }
-            richTextBox1.Text += "\n";
+            //richTextBox1.Text += "\n";
         }
+
 
         //解讀一個在TextBox的矩陣 ST
         private void button34_Click(object sender, EventArgs e)
@@ -1809,10 +1919,9 @@ namespace vcs_test_all_02_Array
                 startButton.Text = "開始排序";
             }
             else
+            {
                 startButton.Text = (int.Parse(startButton.Text) + 1).ToString();
-
-
-
+            }
         }
 
         private void stepButton_Click(object sender, EventArgs e)
@@ -1933,3 +2042,4 @@ namespace vcs_test_all_02_Array
         }
     }
 }
+

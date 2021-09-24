@@ -1,5 +1,225 @@
 
 
+#define abs(a, b)	(((a) > (b)) ? (a - b) : (b - a))
+
+printf("function: %s:%s(%d) debug message\r\n",__FILE__,__func__,__LINE__);
+       
+        
+        
+        
+
+
+內建函式
+
+if(isprint(ch))
+系統時間
+
+
+
+C	宣告要在最前面
+變數 常數
+資料型態1 	int(整數) char(字元) char[](字串)
+輸出 printf %d %c %s
+輸入 scanf
+
+運算
++-*/%
+
+遞增、遞減
+++ --
+
+
+
+關係運算、條件運算
+邏輯運算、位元運算
+
+
+流程控制1 if for
+
+函式 abs dec2hex hex2dec print9X9_Table
+Nine-Nine Multiplication Table
+九九乘法表 (Multiplication Table or Times Table) 
+九九乘法表(Multiplication table)
+
+資料型態2	float(浮點數) int[](一維陣列) int[,](二維陣列)
+
+流程控制2 while switch
+
+資料型態3	struct(結構)
+
+檔案儲存與讀取
+位址 指標(X)
+
+
+C++
+輸入輸出 cin cout
+
+物件類別繼承包裝多型(X)
+
+
+C/C++ 沒辦法:顯示圖片 播放音樂 畫圖
+
+
+VC#
+資料型態	string(字串) bool(布耳)
+各種控件	button richtextbox picturebox timer
+
+
+ENUM的用法
+        // 定義WeekDays列舉內容7個成員
+        // 用來表示一星期的星期日到星期六的列舉常數值
+        enum WeekDays : int
+        {
+            Monday = 1,      	// 星期一
+            Tuesday = 2,         // 星期二
+            Wednesday = 3,       // 星期三
+            Thursday = 4,        // 星期四
+            Friday = 5,          // 星期五
+            Saturday = 6,        // 星期六
+            Sunday = 7           // 星期日
+        };
+
+        static void Main(string[] args)
+        {
+            // 取出WeekDays.Wednesday列舉常數值之後再轉成整數
+            Console.WriteLine("星期三列舉常數值：{0}", (int)WeekDays.Wednesday);
+            Console.WriteLine("星期五列舉常數值：{0}", (int)WeekDays.Friday);
+            Console.Read();
+        }
+        
+
+colsole mode的scanf        
+        
+            // 宣告字串資料型別ProductName變數，用來存放品名
+            string ProductName;
+            // 宣告整數資料型別Price變數，用來存放單價
+            int Price;
+            Console.Write("請輸入品名：");        // 印出 "請輸入品名："
+            // 由鍵盤輸入品名資料並按 [Enter]鍵，即將品名存放至ProductName變數
+            ProductName = Console.ReadLine();
+            Console.Write("請輸入單價：");         // 印出 "請輸入單價："
+            // 由鍵盤輸入單價並按 [Enter]鍵，將單價轉成整數之後
+            // 再將單價放至Price變數
+            Price = int.Parse(Console.ReadLine());
+            Console.WriteLine("品名：{0}　單價：{1}　這筆記錄儲存成功",ProductName, Price);
+            Console.Read();
+
+console mode讀取double數字
+            double netIncome;
+            int taxRate;
+
+            Console.Write("請輸入全年綜合所得淨額(單位:萬元) : ");
+            netIncome = double.Parse(Console.ReadLine());
+
+console mode讀取字串
+            // 宣告Ans字串變數用來存放使用者由鍵盤輸入的答案
+            string Ans = Console.ReadLine();
+                        
+struct用法
+
+        // 定義Product產品結構資料型別
+        struct Product
+        {
+            // Product產品結構內含No編號欄位、Name品名欄位、Price單價欄位
+            public string No, Name;
+            public int Price;
+       }
+
+       static void Main(string[] args)
+        {
+            // 宣告game結構變數為Product結構型別
+             Product game;
+            // 設定game.No編號欄位的值為 "G01"
+            game.No = "G01";
+            // 設定game.Name品名欄位的值為"XBox One"
+            game.Name = "XBox One";
+            // 設定game.Price單價欄位的值為10000
+            game.Price = 10000;
+            Product cookie;        // 宣告cookie結構變數為Product結構型別
+            Console.Write(" 請輸入產品編號：");
+            // 由鍵盤輸入編號再指定給cookie.No編號欄位
+            cookie.No = Console.ReadLine();
+            Console.Write(" 請輸入產品名稱：");
+            // 由鍵盤輸入品名再指定給cookie.Name品名欄位
+            cookie.Name = Console.ReadLine();
+            Console.Write(" 請輸入產品單價：");
+            // 由鍵盤輸入單價並轉成整數再指定給cookie.Price單價欄位
+            cookie.Price = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            Console.WriteLine(" ====== 產品單價清單 ====== ");
+            Console.WriteLine();
+            // 印出game及cookie結構的編號、品名及單價
+            Console.WriteLine(" 產品編號：{0} ", game.No);
+            Console.WriteLine(" 產品名稱：{0} ", game.Name);
+            Console.WriteLine(" 產品單價：{0} ", game.Price);
+            Console.WriteLine(" 產品編號：{0} ", cookie.No);
+            Console.WriteLine(" 產品名稱：{0} ", cookie.Name);
+            Console.WriteLine(" 產品單價：{0} ", cookie.Price);
+            Console.Read();
+        }
+
+
+
+        
+        
+        
+#include <stdio.h>
+int main(int argc,char* argv[])
+{
+
+
+
+    /*
+	int i;
+
+	time_t time_ptr;
+
+	printf("david: This is a c template.\n");
+
+	printf("function: %s:%s(%d) debug message\r\n",__FILE__,__func__,__LINE__);
+
+
+	time(&time_ptr);
+
+	printf("現在時間 : %s\n", asctime(localtime(&time_ptr)));
+*/
+
+
+    time_t t1 = time(NULL);
+    struct tm *nPtr = localtime(&t1);
+    char *now = asctime(nPtr);
+
+    printf("現在時間 : %s\n", now);
+    printf("len = %d\n",sizeof(now));
+
+    int i;
+
+    for(i=0;i<sizeof(now);i++)
+    {
+        printf("%c\n", now[i]);
+
+
+    }
+
+
+
+    //srand(123);
+    srand(now[0]);
+
+    for(i=0;i<10;i++)
+    {
+        printf("%c\n", 'A' + rand() % 26);
+
+    }
+
+	return 0;
+}
+        
+        
+        
+        
+
+
 
 Display_Cam1
 
