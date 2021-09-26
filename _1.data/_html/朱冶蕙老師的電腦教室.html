@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>朱冶蕙老師的電腦教室</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="朱冶蕙老師的電腦教室_files/bootstrap.css">
+	<link rel="stylesheet" href="朱冶蕙老師的電腦教室_files/_css_highlight.css">
+	<link rel="stylesheet" href="朱冶蕙老師的電腦教室_files/_css_customize.css">
+	<script src="朱冶蕙老師的電腦教室_files/adsbygoogle.js" crossorigin="anonymous" data-checked-head="true"></script>
+	<script type="text/javascript" src="朱冶蕙老師的電腦教室_files/integrator.js"></script>
+	<script type="text/javascript" src="朱冶蕙老師的電腦教室_files/integrator_002.js"></script>
+</head>
+
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+	<div class="navbar-header">
+	</div>
+	</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div id="main-contents" class="col-md-12">
+				<div class="title title-color">
+					<h1>朱冶蕙老師的電腦教室</h1>
+				</div>
+				<div class="date-time">
+					<span class="glyphicon glyphicon-th-large"></span>&nbsp;2021/09/26
+				</div>
+	
+				<p></p>
+				
+				<h3>變數、常數、資料型態1</h3>
+				<p>int(整數)</p>
+				<p>char(字元)</p>
+				<p>char[](字串)</p>
+				<p>輸出 printf %d %c %s</p>
+				<p>輸入 scanf</p>
+				<pre class="hljs pre-scrollable">
+				#include <stdio.h>
+				#include <stdlib.h>
+				
+				#define PI 3.14		//宣告PI 為一個 常數, 其值為3.14
+				#define YES 1		//宣告YES為一個 常數, 其值為1
+				#define NO  0		//宣告NO 為一個 常數, 其值為0
+				
+				int main()
+				{
+					int age;        //宣告age為一個 整數
+					char grade;    	//宣告grade為一個 字元
+					char name[20];  //宣告name為一個 字元數列 長度是20
+					
+					printf("請問你幾歲：");
+					scanf("%d", &age);  //有一個&
+					
+					printf("原來你已經 %d 歲了\n", age);   //d: decimal
+					printf("5年後就是 %d 歲了\n", age + 5);
+					
+					printf("請教大名：");
+					scanf("%s", name);  //s: string
+					printf("你好啊～～～, %s\n", name);   //s: string
+					
+					grade = 'A';    //一個字元要用單引號包起來
+					
+					printf("你的等級是 %c\n", grade);    //c: char
+					printf("你的等級是 %d\n", grade);    //d: decimal
+					
+					printf("印出常數\n");
+					printf("PI = %f\n", PI);
+					printf("YES = %d\n", YES);
+					printf("NO = %d\n", NO);
+					
+					return 0;	//程式結束，回傳一個0
+				}
+				</pre>
+				
+				<h3>運算</h3>
+				<p>加減乘除求餘+-*/%</p>
+				<p>遞增++、遞減--</p>
+				<p>關係運算</p>
+				<p>條件運算</p>
+				<p>邏輯運算</p>
+				<p>位元運算</p>
+				<pre class="hljs pre-scrollable">
+				#include <stdio.h>
+				#include <stdlib.h>
+				
+				#define YES 1
+				#define NO  0
+				
+				int main()
+				{
+					int a = 10;
+					int b  = 3;
+					
+					printf("基本運算\n");
+					printf("加\ta + b = %d\n", a + b);
+					printf("減\ta - b = %d\n", a - b);
+					printf("乘\ta * b = %d\n", a * b);
+					printf("除\ta / b = %d\n", a / b);
+					printf("求餘\ta % b = %d\n", a % b);
+					
+					printf("遞增++、遞減--\n");
+					printf("a = %d\n", a);
+					a++;
+					printf("經過遞增\ta = %d\n", a);
+					a--;
+					printf("經過遞減\ta = %d\n", a);
+					
+					printf("位元運算\n");
+					a = 10;
+					printf("a = %d\n", a);
+					a = a << 1;
+					printf("a往左移1位\ta = %d\t其實就是乘2倍\n", a);
+					a = a << 1;
+					printf("a往左移1位\ta = %d\t其實就是乘2倍\n", a);
+					a = a << 1;
+					printf("a往左移1位\ta = %d\t其實就是乘2倍\n", a);
+					a = a << 1;
+					printf("a往左移1位\ta = %d\t其實就是乘2倍\n", a);
+					
+					a = 10;
+					printf("a = %d\n", a);
+					a = a >> 1;
+					printf("a往右移1位\ta = %d\t其實就是除2倍\n", a);
+					a = a >> 1;
+					printf("a往右移1位\ta = %d\t其實就是除2倍\n", a);
+					a = a >> 1;
+					printf("a往右移1位\ta = %d\t其實就是除2倍\n", a);
+					a = a >> 1;
+					printf("a往右移1位\ta = %d\t其實就是除2倍\n", a);
+					a = a >> 1;
+					printf("a往右移1位\ta = %d\t其實就是除2倍\n", a);
+					
+					printf("邏輯運算\n");
+					printf("YES && YES = %d\n", YES && YES);
+					printf("YES && NO  = %d\n", YES && NO);
+					printf("NO  && YES = %d\n", NO && YES);
+					printf("NO  && NO  = %d\n", NO && NO);
+					printf("YES || YES = %d\n", YES || YES);
+					printf("YES || NO  = %d\n", YES || NO);
+					printf("NO  || YES = %d\n", NO || YES);
+					printf("NO  || NO  = %d\n", NO || NO);
+					
+					printf("條件運算\n");
+					a = 10;
+					b = 3;
+					
+					printf("a = %d, b = %d\n", a, b);
+					printf("[a大於b] 為 %d\n", (a > b) );
+					printf("[a小於b] 為 %d\n", (a < b) );
+					return 0;
+				}
+				</pre>
+				
+				<h3>流程控制1</h3>
+				<p>if</p>
+				<p>for</p>
+				<pre class="hljs pre-scrollable">
+				#include <stdio.h>
+				#include <stdlib.h>
+				
+				int main()
+				{
+					int i;
+					int age;        //宣告age為一個 整數
+					
+					printf("請問你幾歲：");
+					scanf("%d", &age);  //有一個&
+					
+					if(age >= 120)
+					{
+						printf("不會吧～～你是不是騙我？\n");
+					}
+					else if(age >= 18)
+					{
+						printf("已成年, 可以騎機車了\n");
+					}
+					else if(age >= 0)
+					{
+						printf("太小, 不可以騎乘機車\n");
+					}
+					else
+					{
+						printf("年齡不合法，你輸入了 %d 歲\n", age);
+					}
+					
+					for(i = 0; i < 10; i++)
+					{
+						printf("第 %d 個迴圈\n", i);
+					}
+					return 0;
+				}
+				</pre>
+				
+				<h3>資料型態2</h3>
+				<p>float(浮點數)</p>
+				<p>int[](一維陣列)</p>
+				<p>int[,](二維陣列)</p>
+				<pre class="hljs pre-scrollable">
+				#include <stdio.h>
+				#include <stdlib.h>
+				
+				int main()
+				{
+					int i;
+					float pi = 3.14159;
+					float g = 9.8;
+					int t;
+					float distance[10];
+					
+					printf("pi = %f\n", pi);
+					printf("g = %f\n", g);
+					
+					printf("自由落體 s = 1 / 2 * g * t * t\n");
+					
+					for(i = 0; i < 10; i++)
+					{
+						printf("i = %d\n", i);
+						distance[i] = g * i * i / 2;
+					}
+					
+					printf("結果:\n");
+					for(i = 0; i < 10; i++)
+					{
+						printf("t = %d\t%f\n", i, distance[i]);
+					}
+					return 0;
+				}
+				</pre>
+				
+				<h3>流程控制2</h3>
+				<p>while</p>
+				<p>switch</p>
+				<pre class="hljs pre-scrollable">
+				
+				</pre>
+				
+				<h3>資料型態3</h3>
+				<p>struct(結構)</p>
+				<pre class="hljs pre-scrollable">
+
+				</pre>
+				
+				<h3>函式(function)</h3>
+				<p>可重複使用，有輸入輸出，也可以無輸入輸出</p>
+				<p>有系統內建函式 及 自建函式</p>
+				<pre class="hljs pre-scrollable">
+				#include <stdio.h>
+				#include <stdlib.h>
+				
+				float average(int n1, int n2, int n3);
+				
+				int main()
+				{
+					int score = 100;
+					int chinese = 94;
+					int english = 95;
+					int math = 92;
+					float avg;
+					
+					char name[20] = "david";
+					
+					printf("內建函式 printf, \n");
+					printf("Hi, %s, 你這次考 %d 分\n", name, score);
+					
+					avg = average(chinese, english, math);
+					printf("平均分數 : %f 分\n", avg);
+					
+					chinese = 87;
+					english = 87;
+					math = 88;
+					avg = average(chinese, english, math);
+					printf("平均分數 : %f 分\n", avg);
+					
+					return 0;
+				}
+				
+				float average(int n1, int n2, int n3) //輸入3個整數, 回傳(輸出)一個浮點數
+				{
+					float aaa = 0;
+					aaa = n1 + n2 + n3;
+					aaa = aaa / 3;
+					return aaa;
+				}
+				</pre>
+
+				<h3>其他</h3>
+				<p>檔案儲存與讀取</p>
+				<p>記憶體 位址 指標(X)</p>
+				
+				<h3>C++</h3>
+				<p>輸入輸出 cin cout</p>
+				<p>物件類別繼承包裝多型(X)</p>
+				<pre class="hljs pre-scrollable">
+				#include <iostream>
+				
+				using namespace std;
+				
+				int main()
+				{
+					printf("C++完全可以使用C的東西, 宣告不用一定要在最前面\n");
+					
+					int age;        //宣告age為一個 整數
+					char name[20];  //宣告name為一個 字元數列 長度是20
+					
+					printf("請問你幾歲：");
+					scanf("%d", &age);  //有一個&
+					
+					printf("原來你已經 %d 歲了\n", age);   //d: decimal
+					printf("5年後就是 %d 歲了\n", age + 5);
+					
+					printf("請教大名：");
+					scanf("%s", name);  //s: string
+					printf("你好啊～～～, %s\n", name);   //s: string
+					
+					string name2;	//C++多了一個string資料型態
+					
+					cout << "請問你幾歲：" << endl;
+					cin >> age;
+					cout << "原來你已經 " << age << " 歲了" << endl;
+					
+					cout << "請教大名：" << endl;
+					cin >> name2;
+					cout << "你好啊～～～, " << name2 << endl;
+					
+					return 0;
+				}
+
+				</pre>
+
+				<h3>C/C++ 沒辦法</h3>
+				<p>顯示圖片 播放音樂 畫圖</p>
+
+				<h3>進階</h3>
+				<p>巢式迴圈</p>
+				<p>多重邏輯判斷</p>
+				<p>亂數</p>
+
+				<h3>作業</h3>
+				<p>印出九九乘法表(Multiplication table)</p>
+				<p>猜數字遊戲</p>
+				<p>Toyata Altis的輪徑為17吋，每0.1秒偵測到輪胎轉4圈，請問時速為多少？</p>
+				<p>給定一串數字，由大到小排列之，ex: 3 1 4 1 5 9 2 6 5 3 5 9</p>
+				<p>做出一個成績單</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+

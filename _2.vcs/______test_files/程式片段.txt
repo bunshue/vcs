@@ -4,66 +4,17 @@
 
 printf("function: %s:%s(%d) debug message\r\n",__FILE__,__func__,__LINE__);
        
-        
-        
-        
-
 
 內建函式
 
 if(isprint(ch))
 系統時間
 
-
-
-C	宣告要在最前面
-變數 常數
-資料型態1 	int(整數) char(字元) char[](字串)
-輸出 printf %d %c %s
-輸入 scanf
-
-運算
-+-*/%
-
-遞增、遞減
-++ --
-
-
-
-關係運算、條件運算
-邏輯運算、位元運算
-
-
-流程控制1 if for
-
 函式 abs dec2hex hex2dec print9X9_Table
-Nine-Nine Multiplication Table
-九九乘法表 (Multiplication Table or Times Table) 
-九九乘法表(Multiplication table)
-
-資料型態2	float(浮點數) int[](一維陣列) int[,](二維陣列)
-
-流程控制2 while switch
-
-資料型態3	struct(結構)
-
-檔案儲存與讀取
-位址 指標(X)
-
-
-C++
-輸入輸出 cin cout
-
-物件類別繼承包裝多型(X)
-
-
-C/C++ 沒辦法:顯示圖片 播放音樂 畫圖
-
 
 VC#
 資料型態	string(字串) bool(布耳)
 各種控件	button richtextbox picturebox timer
-
 
 ENUM的用法
         // 定義WeekDays列舉內容7個成員
