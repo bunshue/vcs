@@ -39,9 +39,9 @@
 				<p>輸出 printf %d %c %s</p>
 				<p>輸入 scanf</p>
 				<pre class="hljs pre-scrollable">
-				#include <stdio.h>
-				#include <stdlib.h>
-				
+				#include &lt;stdio.h&gt;
+				#include &lt;stdlib.h&gt;
+
 				#define PI 3.14		//宣告PI 為一個 常數, 其值為3.14
 				#define YES 1		//宣告YES為一個 常數, 其值為1
 				#define NO  0		//宣告NO 為一個 常數, 其值為0
@@ -84,8 +84,8 @@
 				<p>邏輯運算</p>
 				<p>位元運算</p>
 				<pre class="hljs pre-scrollable">
-				#include <stdio.h>
-				#include <stdlib.h>
+				#include &lt;stdio.h&gt;
+				#include &lt;stdlib.h&gt;
 				
 				#define YES 1
 				#define NO  0
@@ -159,35 +159,47 @@
 				<p>if</p>
 				<p>for</p>
 				<pre class="hljs pre-scrollable">
-				#include <stdio.h>
-				#include <stdlib.h>
+				#include &lt;stdio.h&gt;
+				#include &lt;stdlib.h&gt;
 				
 				int main()
 				{
 					int i;
-					int age;        //宣告age為一個 整數
+					int score;        //宣告score為一個 整數
 					
-					printf("請問你幾歲：");
-					scanf("%d", &age);  //有一個&
+					printf("請問你的分數：");
+					scanf("%d", &score);  //有一個&
 					
-					if(age >= 120)
+					if((score > 100) || (score < 0))
 					{
-						printf("不會吧～～你是不是騙我？\n");
+						printf("分數不合法，你輸入了 %d\n", score);
 					}
-					else if(age >= 18)
+					else if(score == 100)
 					{
-						printf("已成年, 可以騎機車了\n");
+						printf("特優\n");
 					}
-					else if(age >= 0)
+					else if(score >= 90)
 					{
-						printf("太小, 不可以騎乘機車\n");
+						printf("A等\n");
+					}
+					else if(score >= 80)
+					{
+						printf("B等\n");
+					}
+					else if(score >= 70)
+					{
+						printf("C等\n");
+					}
+					else if(score >= 60)
+					{
+						printf("D等\n");
 					}
 					else
 					{
-						printf("年齡不合法，你輸入了 %d 歲\n", age);
+						printf("F等\n");
 					}
 					
-					for(i = 0; i < 10; i++)
+					for(i = 0; i < 10; i++)		//i從0開始到9, 每次加1
 					{
 						printf("第 %d 個迴圈\n", i);
 					}
@@ -200,8 +212,8 @@
 				<p>int[](一維陣列)</p>
 				<p>int[,](二維陣列)</p>
 				<pre class="hljs pre-scrollable">
-				#include <stdio.h>
-				#include <stdlib.h>
+				#include &lt;stdio.h&gt;
+				#include &lt;stdlib.h&gt;
 				
 				int main()
 				{
@@ -237,21 +249,114 @@
 				<pre class="hljs pre-scrollable">
 				
 				</pre>
-				
+					
 				<h3>資料型態3</h3>
-				<p>struct(結構)</p>
+				<p>struct(結構)，能夠使用不同種類的資料型態</p>
 				<pre class="hljs pre-scrollable">
+				#include &lt;stdio.h&gt;
+				
+				#define INFO_LEN			6
+				
+				struct person_info
+				{
+					unsigned char id_no[20];
+					unsigned char name[20];
+					char sex;
+					int age;
+					unsigned char birthday[12];
+				};
+				
+				struct person_score
+				{
+					int number;
+					unsigned char name[20];
+					int chinese;
+					int english;
+					int math;
+					float average;
+					char grade;
+				};
+				
+				struct person_info p_info = {"D021120903", "Doraemon", 'M', -92, "9/3/2112"};
+				
+				struct person_info p_infos[INFO_LEN] =
+				{
+					{"", "", 'X', -1, ""},
+					{"D021120903", "Doraemon", 'M', -92, "9/3/2112"},
+					{"D021141202", "Dorami", 'F', -94, "12/2/2114"},
+					{"M019281118", "Mickey", 'M', 92, "11/18/1928"},
+					{"B020000814", "Benny", 'M', 20, "8/14/2000"},
+					{"C020130417", "Cony", 'F', 7, "4/17/2013"}
+				};
+				
+				void show_person_info(struct person_info info);
+				void show_score_info(struct person_score info);
+				
+				int main()
+				{
+					int i;
+					
+					printf("目前 p_info 的內容 是 :\n");
+					show_person_info(p_info);
+					
+					for(i = 0; i < INFO_LEN; i++)
+					{
+						printf("第 %d 筆資料\n", i);
+						show_person_info(p_infos[i]);
+					}
 
+					struct person_score s20={0,"david",0,0,0,0,'A'};    //初始化順便給定字串
+					s20.number = 20;
+					//s20.name =   "david"; //字串不能這樣給定
+					s20.chinese = 100;
+					s20.english = 100;
+					s20.math = 100;
+					s20.average = 100.00;
+					s20.grade = 'A';
+					
+					show_score_info(s20);
+
+					return 0;
+				}
+				
+				void show_person_info(struct person_info info)
+				{
+					printf("編號 : %s\n", info.id_no);
+					printf("姓名 : %s\n", info.name);
+					if((info.sex == 'M') || (info.sex == 'F'))
+						printf("性別 : %c\n", info.sex);
+					else
+						printf("性別 :\n");
+					if(info.age >=0 )
+						printf("年齡 : %d\n", info.age);
+					else
+						printf("年齡 :\n");
+					printf("生日 : %s\n", info.birthday);
+					return;
+				}
+				
+				void show_score_info(struct person_score info)
+				{
+					printf("座號 : %d\n", info.number);
+					printf("姓名 : %s\n", info.name);
+					printf("國文 : %d\n", info.chinese);
+					printf("英文 : %d\n", info.english);
+					printf("數學 : %d\n", info.math);
+					printf("平均 : %f\n", info.average);
+					printf("等級 : %c\n", info.grade);
+					return;
+				}
 				</pre>
 				
 				<h3>函式(function)</h3>
 				<p>可重複使用，有輸入輸出，也可以無輸入輸出</p>
 				<p>有系統內建函式 及 自建函式</p>
 				<pre class="hljs pre-scrollable">
-				#include <stdio.h>
-				#include <stdlib.h>
+				#include &lt;stdio.h&gt;
+				#include &lt;stdlib.h&gt;
 				
-				float average(int n1, int n2, int n3);
+				float average(int n1, int n2, int n3);	//函式要先宣告才能用
+				int gcd(int a, int b);			//函式要先宣告才能用
 				
 				int main()
 				{
@@ -262,6 +367,10 @@
 					float avg;
 					
 					char name[20] = "david";
+					
+					int a;
+					int b;
+					int ret;
 					
 					printf("內建函式 printf, \n");
 					printf("Hi, %s, 你這次考 %d 分\n", name, score);
@@ -275,6 +384,23 @@
 					avg = average(chinese, english, math);
 					printf("平均分數 : %f 分\n", avg);
 					
+					a = 1234;
+					b = 5678;
+					ret = gcd(a, b);
+					printf("gcd(%d, %d) = %d\n", a, b, ret);
+					a = 18;
+					b = 150;
+					ret = gcd(a, b);
+					printf("gcd(%d, %d) = %d\n", a, b, ret);
+					a = 256;
+					b = 72;
+					ret = gcd(a, b);
+					printf("gcd(%d, %d) = %d\n", a, b, ret);
+					a = 1234;
+					b = 1234;
+					ret = gcd(a, b);
+					printf("gcd(%d, %d) = %d\n", a, b, ret);
+					
 					return 0;
 				}
 				
@@ -285,9 +411,36 @@
 					aaa = aaa / 3;
 					return aaa;
 				}
+				
+				int gcd(int a, int b)	//輸2個整數, 回傳(輸出)一個整數
+				{
+					int temp = 1;
+					while(temp != 0)
+					{
+						temp = a % b;
+						a = b;
+						b = temp;
+					}
+					return a;
+				}
 				</pre>
 
+				<p>數學函式</p>
+				<pre class="hljs pre-scrollable">
+				#include &lt;stdio.h&gt;
+				#include &lt;math.h&gt;
+				
+				int main()
+				{
+					float root;
+					root = sqrt (2);
+					printf("根號2 = %f\n",root);
+					return 0;
+				}
+				</pre>
 				<h3>其他</h3>
+				<p>其他資料型態</p>
+				<img src="朱冶蕙老師的電腦教室_files/data_type.jpg" />
 				<p>檔案儲存與讀取</p>
 				<p>記憶體 位址 指標(X)</p>
 				
@@ -295,7 +448,7 @@
 				<p>輸入輸出 cin cout</p>
 				<p>物件類別繼承包裝多型(X)</p>
 				<pre class="hljs pre-scrollable">
-				#include <iostream>
+				#include &lt;iostream&gt;
 				
 				using namespace std;
 				
@@ -337,7 +490,86 @@
 				<h3>進階</h3>
 				<p>巢式迴圈</p>
 				<p>多重邏輯判斷</p>
+				<pre class="hljs pre-scrollable">
+				//巢式迴圈 與 多重邏輯判斷
+				for(j = 0; j < H; j++)
+				{
+					for(i = 0; i < W; i++)
+					{
+						if((j > (cut - 1)) && (j < (H - cut)))
+						{
+							if((i >= dx) && (i < dx + w) && (j >= dy) && (j < dy + h))
+							{
+								//do something
+							}
+							else
+							{
+								//do something
+							}
+						}
+						else
+						{
+							if(j < cut)
+							{
+								if ((i < (cut - j)) || (i > ((W - cut) - 1 + j)))
+								{
+									//do something
+								}
+								else
+								{
+									if((i >= dx) && (i < dx + w) && (j >= dy) && (j < dy + h))
+									{
+										//do something
+									}
+									else
+									{
+										//do something
+									}
+								}
+							}
+							else
+							{
+								if((i < (j + cut - H) ) || i > ((W - (cut-(H - j))) - 1 ))
+								{
+									//do something
+								}
+								else
+								{
+									if((i >= dx) && (i < dx + w) && (j >= dy) && (j < dy + h))
+									{
+										//do something
+									}
+									else
+									{
+										//do something
+									}
+								}
+							}
+						}
+					}
+				}
+				</pre>
+				
 				<p>亂數</p>
+				<pre class="hljs pre-scrollable">
+				#include &lt;stdio.h&gt;
+				int main()
+				{
+					int i;
+					int r;
+					
+					//srand(123); //設定一個固定種子
+					srand(time(0)); //設定一個時變種子, Time(0)是得到當前時時間值 1970.1.1至今的秒數
+					
+					printf("產生10個亂數值, 限定範圍0~100\n");
+					for(i = 0; i < 10; i++)
+					{
+						r = rand();
+						printf("i = %d\t產生亂數 %d\t%d\n", i, r, r%101);
+					}
+					return 0;
+				}
+				</pre>
 
 				<h3>作業</h3>
 				<p>印出九九乘法表(Multiplication table)</p>
