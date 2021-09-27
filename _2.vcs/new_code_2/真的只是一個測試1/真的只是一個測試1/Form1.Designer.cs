@@ -265,6 +265,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(155, 55);
             this.button17.TabIndex = 18;
+            this.button17.Text = "亂數產生Unicode中文範圍的中文字元";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

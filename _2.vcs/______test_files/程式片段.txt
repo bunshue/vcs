@@ -1,4 +1,19 @@
 
+陣列
+一群資料型態相同的變數集合在一起
+
+反向運算子
+
+
+
+要顯示 & 以 ＆amp;取代
+要顯示 < 以 ＆lt;取代
+要顯示 > 以 ＆gt;取代
+要顯示 " 以 ＆quot;取代
+要顯示 ' 以 ＆apos;取代
+
+Unicode中文字碼（CJK Unified Ideographs；中日韓統一表意文字）的範圍落在0x4E00至0x9FFF（UTF-32），但迄今（Unicode v11.0）最末的0x9FF0～0x9FFF這16個字仍是空白。
+
 
 #define abs(a, b)	(((a) > (b)) ? (a - b) : (b - a))
 
