@@ -18,6 +18,8 @@ namespace MouseControl
 {
     public partial class Form1 : Form
     {
+        NotifyIcon notifyicon1;
+
         public Form1()
         {
             InitializeComponent();
@@ -64,22 +66,23 @@ namespace MouseControl
 
             System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
 
-            nicon = new NotifyIcon();
-            nicon.Icon = new Icon(asm.GetManifestResourceStream(asm.GetName().Name + ".1207680.ico"));
-            nicon.Text = "Clicker";
-            this.Icon = nicon.Icon;
-            nicon.Click += new EventHandler(nicon_Click);
+            notifyicon1 = new NotifyIcon();
+            //以下才可以把icon檔案放到.exe裏
+            notifyicon1.Icon = new Icon(asm.GetManifestResourceStream(asm.GetName().Name + ".1207680.ico"));
+            //以下需要在執行時去特定位置找icon檔案
+            //notifyicon1.Icon = new Icon("../../1207680.ico");
+            notifyicon1.Text = "Clicker";
+            this.Icon = notifyicon1.Icon;
+            notifyicon1.Click += new EventHandler(notifyicon1_Click);
             this.pictureBox1.Image = GenerateBitmap(System.Drawing.Color.Green, new Size(20, 20));
         }
 
-        void nicon_Click(object sender, EventArgs e)
+        void notifyicon1_Click(object sender, EventArgs e)
         {
-            nicon.Visible = false;
+            notifyicon1.Visible = false;
             this.Show();
             Win32Native.Methods.SetForegroundWindow(this.Handle);
         }
-
-        NotifyIcon nicon;
 
         Bitmap GenerateBitmap(Color c, Size s)
         {
@@ -235,11 +238,11 @@ namespace MouseControl
                 MessageBox.Show("開始自動連點!\r\n本程式自動縮小。", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(AutoClicking), this.hScrollBar1.Value);
                 this.Hide();
-                this.nicon.Visible = true;
+                this.notifyicon1.Visible = true;
             }
             else
             {
-                nicon_Click(this.nicon, new EventArgs());
+                notifyicon1_Click(this.notifyicon1, new EventArgs());
                 ChangeStateView(System.Drawing.Color.Green);
             }
         }
@@ -284,4 +287,3 @@ namespace MouseControl
         }
     }
 }
-

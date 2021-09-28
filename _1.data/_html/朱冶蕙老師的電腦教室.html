@@ -435,6 +435,31 @@
 					float root;
 					root = sqrt (2);
 					printf("根號2 = %f\n",root);
+					
+					printf("根號\n");
+					printf("%f\n", sqrt(25));
+					printf("%f\n", sqrt(64.0));
+					printf("%f\n", sqrt(27.5));
+					printf("%f\n", sqrt(30.25));
+					printf("%f\n", sqrt(81.02));
+					printf("%f\n", sqrt(9.3));
+					
+					printf("冪次方\n");
+					printf("%f\n", pow(2, 3));
+					printf("%f\n", pow(2, 3.2));
+					printf("%f\n", pow(6, 8));
+					printf("%f\n", pow(10, 6));
+					printf("%f\n", pow(7.3, 5));
+					printf("%f\n", pow(6.9, 9.3));					
+					
+					printf("四捨五入\n");
+					printf("%f\n", round(8.2));
+					printf("%f\n", round(8.49));
+					printf("%f\n", round(8.5));
+					printf("%f\n", round(8.52));
+					printf("%f\n", round(8.6));
+					printf("%f\n", round(8.8));					
+					
 					return 0;
 				}
 				</pre>
@@ -564,7 +589,7 @@
 					printf("產生10個亂數值, 限定範圍0~100\n");
 					for(i = 0; i < 10; i++)
 					{
-						r = rand();
+						r = rand();	//rand() 產生擬隨機數，可當亂數使用，範圍從 0 到 RAND_MAX
 						printf("i = %d\t產生亂數 %d\t%d\n", i, r, r%101);
 					}
 					return 0;
@@ -577,6 +602,19 @@
 				<p>Toyata Altis的輪徑為17吋，每0.1秒偵測到輪胎轉4圈，請問時速為多少？</p>
 				<p>給定一串數字，由大到小排列之，ex: 3 1 4 1 5 9 2 6 5 3 5 9</p>
 				<p>做出一個成績單</p>
+				
+				<h3>程式語言與金庸小說中的絕世武功</h3>
+				<p>C 比之九陰真經，學會並掌握指標，天下無敵。<br />
+				C++ 比之龍象般若功，有十三層，但修煉不易，無人超過第十層。<br />
+				C# 比之彈指神通，高手運用手指的巧勁就能施展。<br />
+				Java 比之獨孤九劍，敗中變化出的招式，不限平台的 JVM 。<br />
+				JavaScript 比之胡家刀法，六字訣變幻莫測，瀏覽器上都能運作。<br />
+				Objective-C 比之六脈神劍，獨家不傳絕技。<br />
+				Perl 比之龍爪手，少林正宗武學，幾乎 Linux 高手必備。<br />
+				PHP 比之黯然銷魂掌，需要深厚內力才能使出。<br />
+				Python 比之降龍十八掌，簡單卻威力強大。<br />
+				Ruby 比之乾坤大挪移，這要用過了才會知道。<br />
+				Swift 比之一陽指，六脈神劍的精髓，本來同樣是獨家不傳絕技，不過現在 <i>open source</i> 了。</p>
 			</div>
 		</div>
 	</div>
