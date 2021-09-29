@@ -406,7 +406,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(180, 40);
             this.button25.TabIndex = 25;
-            this.button25.Text = "10進位轉二進位";
+            this.button25.Text = "10進位轉十六進位";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -1171,6 +1171,7 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(180, 40);
             this.button44.TabIndex = 80;
+            this.button44.Text = "ASCII Table";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
             // 

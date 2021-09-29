@@ -31,8 +31,21 @@
 				</div>
 	
 				<p></p>
+
+				<h3>最小的C程式</h3>
+				<pre class="hljs pre-scrollable">
+				#include &lt;stdio.h&gt;	//引用標準化輸入
+				#include &lt;stdlib.h&gt;	//引用標準化資料庫
+				
+				int main()	//主程式
+				{
+					printf("Hello world!\n");	//印出一行字
+					return 0;	//程式結束，回傳一個0
+				}
+				</pre>
 				
 				<h3>變數、常數、資料型態1</h3>
+				<p>變數命名不能使用關鍵字(34字, unsigned long int for if else switch case default while break continue return)</p>
 				<p>int(整數)</p>
 				<p>char(字元)</p>
 				<p>char[](字串)</p>
@@ -48,9 +61,9 @@
 				
 				int main()
 				{
-					int age;        //宣告age為一個 整數
-					char grade;    	//宣告grade為一個 字元
-					char name[20];  //宣告name為一個 字元數列 長度是20
+					int age;        //宣告age為一個 整數(integer)
+					char grade;    	//宣告grade為一個 字元(character)
+					char name[20];  //宣告name為一個 字元陣列 長度是20
 					
 					printf("請問你幾歲：");
 					scanf("%d", &age);  //有一個&
@@ -209,6 +222,7 @@
 				
 				<h3>資料型態2</h3>
 				<p>float(浮點數)</p>
+				<p>陣列: 多個相同的資料型態的變數排列在一起</p>
 				<p>int[](一維陣列)</p>
 				<p>int[,](二維陣列)</p>
 				<pre class="hljs pre-scrollable">
@@ -217,27 +231,26 @@
 				
 				int main()
 				{
-					int i;
-					float pi = 3.14159;
-					float g = 9.8;
 					int t;
-					float distance[10];
+					float pi = 3.14159;	//宣告pi為一個 浮點數(floating point)
+					float g = 9.8;
+					float distance[10];	//宣告distance為一個 浮點數陣列 長度是10
 					
 					printf("pi = %f\n", pi);
 					printf("g = %f\n", g);
 					
 					printf("自由落體 s = 1 / 2 * g * t * t\n");
 					
-					for(i = 0; i < 10; i++)
+					for(t = 0; t < 10; t++)
 					{
-						printf("i = %d\n", i);
-						distance[i] = g * i * i / 2;
+						printf("t = %d\n", t);
+						distance[t] = g * t * t / 2;
 					}
 					
 					printf("結果:\n");
-					for(i = 0; i < 10; i++)
+					for(t = 0; t < 10; t++)
 					{
-						printf("t = %d\t%f\n", i, distance[i]);
+						printf("t = %d\t%f\n", t, distance[t]);
 					}
 					return 0;
 				}
@@ -596,6 +609,34 @@
 				}
 				</pre>
 
+				<p>有號數 與 無號數 的比較</p>
+				<pre class="hljs pre-scrollable">
+				#include &lt;stdio.h&gt;
+				int main()
+				{
+					int i;
+					char c1 = 0;
+					unsigned char c2 = 0;
+					
+					printf("有號數:\n");
+					for(i=0; i < 256; i++)
+					{
+						printf("%d ", c1);
+						c1++;
+					}
+					printf("\n");
+					
+					printf("無號數:\n");
+					for(i=0; i < 256; i++)
+					{
+						printf("%d ", c2);
+						c2++;
+					}
+					printf("\n");
+					return 0;
+				}
+				</pre>
+
 				<h3>作業</h3>
 				<p>印出九九乘法表(Multiplication table)</p>
 				<p>猜數字遊戲</p>
@@ -615,6 +656,12 @@
 				Python 比之降龍十八掌，簡單卻威力強大。<br />
 				Ruby 比之乾坤大挪移，這要用過了才會知道。<br />
 				Swift 比之一陽指，六脈神劍的精髓，本來同樣是獨家不傳絕技，不過現在 <i>open source</i> 了。</p>
+					
+				<h3>編譯語言 與 直譯語言 的比較</h3>
+				<p>編譯語言 (Compiled language)<br />
+				編譯語言— C、C++、C#、Java、Visual C#等等。<br />
+				直譯語言 (Interpreted language)<br />
+				直譯語言 — JavaScript、Perl、Python、Ruby等等。</p>
 			</div>
 		</div>
 	</div>

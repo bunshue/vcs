@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2C30CDF2-705C-4506-8BEB-77430ABD1671}</ProjectGuid>
+    <ProjectGuid>{4971FCE9-B151-420F-9F99-6FC02CB88C47}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_test_all_09_Form_NotRectangle</RootNamespace>
-    <AssemblyName>vcs_test_all_09_Form_NotRectangle</AssemblyName>
+    <RootNamespace>vcs_test_all_09_Form_NotRectangle1</RootNamespace>
+    <AssemblyName>vcs_test_all_09_Form_NotRectangle1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

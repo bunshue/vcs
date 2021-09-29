@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_test_all_09_Form_NotRectangle.Properties
+namespace vcs_test_all_09_Form_NotRectangle1.Properties
 {
 
 

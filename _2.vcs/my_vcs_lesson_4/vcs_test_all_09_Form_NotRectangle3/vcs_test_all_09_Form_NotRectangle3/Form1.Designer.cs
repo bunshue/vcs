@@ -1,4 +1,4 @@
-﻿namespace vcs_test_all_09_Form_NotRectangle
+﻿namespace vcs_test_all_09_Form_NotRectangle3
 {
     partial class Form1
     {

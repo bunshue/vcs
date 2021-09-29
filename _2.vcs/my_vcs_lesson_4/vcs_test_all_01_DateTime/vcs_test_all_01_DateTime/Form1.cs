@@ -1179,16 +1179,22 @@ namespace vcs_test_all_01_DateTime
             while (nIsEnd != 1)
             {
                 if (LunarData[m] < 4095)
+                {
                     k = 11;
+                }
                 else
+                {
                     k = 12;
+                }
                 n = k;
                 while (n >= 0)
                 {
-                    //獲取LunarData[m]的第n個二進位位的值
+                    //獲取LunarData[m]的第n個二進位的值
                     nBit = LunarData[m];
                     for (i = 1; i < n + 1; i++)
+                    {
                         nBit = nBit / 2;
+                    }
                     nBit = nBit % 2;
                     if (nTheDate <= (29 + nBit))
                     {
@@ -1199,7 +1205,9 @@ namespace vcs_test_all_01_DateTime
                     n = n - 1;
                 }
                 if (nIsEnd == 1)
+                {
                     break;
+                }
                 m = m + 1;
             }
             year = 1921 + m;
@@ -1210,9 +1218,13 @@ namespace vcs_test_all_01_DateTime
             if (k == 12)
             {
                 if (month == LunarData[m] / 65536 + 1)
+                {
                     month = 1 - month;
+                }
                 else if (month > LunarData[m] / 65536 + 1)
+                {
                     month = month - 1;
+                }
             }
             //年
             calendar = year + "年";
@@ -1225,9 +1237,13 @@ namespace vcs_test_all_01_DateTime
 
             //農曆月
             if (month < 1)
+            {
                 calendar += "閏" + MonthName[-1 * month].ToString() + "月";
+            }
             else
+            {
                 calendar += MonthName[month].ToString() + "月";
+            }
 
             //農曆日
             calendar += DayName[day].ToString() + "日";
@@ -1250,7 +1266,6 @@ namespace vcs_test_all_01_DateTime
             int daysInMonth = tc.GetDaysInMonth(year, month);   //整個月的天數
 
             richTextBox1.Text += "民國" + year.ToString() + "年" + month.ToString() + "月" + dayOfMonth.ToString() + "日\n";
-
 
             TaiwanLunisolarCalendar tlc = new TaiwanLunisolarCalendar();
 
@@ -1305,25 +1320,25 @@ namespace vcs_test_all_01_DateTime
             // Call the ToString(IFormatProvider) method.
             richTextBox1.Text += "Japanese calendar date: " + date.ToString("d", jaJp) + "\n";
 
-
-
             var date2 = new DateTime(2, 5, 10, japaneseCal);
 
             richTextBox1.Text += "Gregorian calendar date: " + date2.ToString("d") + "\n";
             richTextBox1.Text += "Japanese calendar date: " + date2.ToString("d", jaJp) + "\n";
 
             richTextBox1.Text += "Japanese calendar date: " + DateTime.Now.ToString("d", jaJp) + "\n";
-
-
-
-
         }
 
         //y－年，m－月，d－日期
         string CaculateWeekDay(int y, int m, int d)
         {
-            if (m == 1) m = 13;
-            if (m == 2) m = 14;
+            if (m == 1)
+            {
+                m = 13;
+            }
+            if (m == 2)
+            {
+                m = 14;
+            }
             //基姆拉爾森計算公式
             int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400 + 1) % 7;
             string weekstr = "";
@@ -1416,44 +1431,70 @@ namespace vcs_test_all_01_DateTime
         {
             DateTime date1, date2;
             if (!DateTime.TryParse(textBox8.Text, out date1))
+            {
                 return;
+            }
             textBox3.Text = date1.ToString();
 
             if (!DateTime.TryParse(textBox10.Text, out date2))
+            {
                 return;
+            }
             textBox9.Text = date1.ToString();
 
             int years, months, days, hours, minutes, seconds, milliseconds;
 
-            GetElapsedTime(date1, date2, out years, out months,
-                out days, out hours, out minutes, out seconds, out milliseconds);
+            GetElapsedTime(date1, date2, out years, out months, out days, out hours, out minutes, out seconds, out milliseconds);
 
             // Display the result.
             string txt = "";
-            if (years != 0) txt += ", " + years.ToString() + " years";
-            if (months != 0) txt += ", " + months.ToString() + " months";
-            if (days != 0) txt += ", " + days.ToString() + " days";
-            if (hours != 0) txt += ", " + hours.ToString() + " hours";
-            if (minutes != 0) txt += ", " + minutes.ToString() + " minutes";
-            if (seconds != 0) txt += ", " + seconds.ToString() + " seconds";
-            if (milliseconds != 0) txt += ", " + milliseconds.ToString() + " milliseconds";
-            if (txt.Length > 0) txt = txt.Substring(2);
-            if (txt.Length == 0) txt = "Same";
+            if (years != 0)
+            {
+                txt += ", " + years.ToString() + " years";
+            }
+            if (months != 0)
+            {
+                txt += ", " + months.ToString() + " months";
+            }
+            if (days != 0)
+            {
+                txt += ", " + days.ToString() + " days";
+            }
+            if (hours != 0)
+            {
+                txt += ", " + hours.ToString() + " hours";
+            }
+            if (minutes != 0)
+            {
+                txt += ", " + minutes.ToString() + " minutes";
+            }
+            if (seconds != 0)
+            {
+                txt += ", " + seconds.ToString() + " seconds";
+            }
+            if (milliseconds != 0)
+            {
+                txt += ", " + milliseconds.ToString() + " milliseconds";
+            }
+            if (txt.Length > 0)
+            {
+                txt = txt.Substring(2);
+            }
+            if (txt.Length == 0)
+            {
+                txt = "Same";
+            }
             textBox7.Text = txt;
         }
 
         // Return the number of years, months, days, hours, minutes, seconds,
         // and milliseconds you need to add to from_date to get to_date.
-        private void GetElapsedTime(DateTime from_date, DateTime to_date,
-            out int years, out int months, out int days, out int hours,
-            out int minutes, out int seconds, out int milliseconds)
+        private void GetElapsedTime(DateTime from_date, DateTime to_date, out int years, out int months, out int days, out int hours, out int minutes, out int seconds, out int milliseconds)
         {
             // If from_date > to_date, switch them around.
             if (from_date > to_date)
             {
-                GetElapsedTime(to_date, from_date,
-                    out years, out months, out days, out hours,
-                    out minutes, out seconds, out milliseconds);
+                GetElapsedTime(to_date, from_date, out years, out months, out days, out hours, out minutes, out seconds, out milliseconds);
                 years = -years;
                 months = -months;
                 days = -days;
@@ -1554,7 +1595,6 @@ namespace vcs_test_all_01_DateTime
                     return item;
                 }
             }
-            // Return null;
             return null;
         }
 
@@ -1657,7 +1697,6 @@ namespace vcs_test_all_01_DateTime
             //?日?時?分?秒 後
             DateTime dt_new = dt + new TimeSpan(365 * 10, 12, 34, 56);
 
-
             richTextBox1.Text += "現在時間 : " + dt.ToString() + "\n";
             richTextBox1.Text += "一段時間以後 : " + dt_new.ToString() + "\n";
         }
@@ -1698,4 +1737,5 @@ namespace vcs_test_all_01_DateTime
         }
     }
 }
+
 

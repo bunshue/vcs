@@ -62,5 +62,36 @@ namespace vcs_Cryptography5
             string result = Convert.ToBase64String(output);
             textBox2.Text = result;
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //SHA1
+            string cTemp = "This is a lion-mouse";
+            richTextBox1.Text += "原字串 :\n" + cTemp + "\n\n";
+            richTextBox1.Text += "SHA1\n";
+            UnicodeEncoding oConvert = new UnicodeEncoding();
+            Byte[] bytData = oConvert.GetBytes(cTemp);
+            System.Security.Cryptography.SHA1Managed oSha1 = new System.Security.Cryptography.SHA1Managed();
+            Byte[] bytResult = oSha1.ComputeHash(bytData);
+            foreach (int oItem in bytResult)
+            {
+                richTextBox1.Text += oItem.ToString("X");
+            }
+            richTextBox1.Text += "\n\n";
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //SHA512
+            string cTemp = "This is a lion-mouse";
+            richTextBox1.Text += "原字串 :\n" + cTemp + "\n\n";
+            richTextBox1.Text += "SHA512\n";
+            //SHA512程式碼只有三行就解決了
+            System.Security.Cryptography.SHA512 oSHA = new System.Security.Cryptography.SHA512Managed();
+            byte[] aryByte = oSHA.ComputeHash(System.Text.Encoding.UTF8.GetBytes(cTemp));
+            richTextBox1.Text += System.BitConverter.ToString(aryByte).Replace("-", "");
+            richTextBox1.Text += "\n\n";
+        }
     }
 }
+

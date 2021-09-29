@@ -1786,7 +1786,6 @@ namespace vcs_test_all_03_Syntax
             for (i = 0; i < len1; i++)
             {
                 richTextBox1.Text += dt.Columns[i].ToString() + "\t";
-
             }
             richTextBox1.Text += "\n";
 
@@ -1797,15 +1796,42 @@ namespace vcs_test_all_03_Syntax
                     richTextBox1.Text += dt.Rows[j][i].ToString() + "\t";
                 }
                 richTextBox1.Text += "\n";
-
             }
             richTextBox1.Text += "\n";
         }
 
+        //ASCII Table ST
+        internal string TenToBinary(long value)//將十進制轉換為二進制
+        {
+            return Convert.ToString(value, 2).PadLeft(8, '0').Insert(4, "_");
+        }
+
         private void button44_Click(object sender, EventArgs e)
         {
+            int i;
+            int j;
+            int k;
+            for (j = 0; j < 32; j++)
+            {
+                for (i = 0; i < 128; i += 32)
+                {
+                    k = j + i;
 
+                    richTextBox1.Text += k.ToString().PadLeft(3) + "  " + TenToBinary(k) + "  0x" + k.ToString("X2");
+                    if (char.IsControl((char)k) == true)
+                    {
+                        richTextBox1.Text += " ";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += " " + (char)k;
+                    }
+                    richTextBox1.Text += "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
         }
+        //ASCII Table SP
 
         private void button45_Click(object sender, EventArgs e)
         {
@@ -1849,9 +1875,7 @@ namespace vcs_test_all_03_Syntax
         /// <returns>An int.</returns>
         public static int Age(this DateTime @this)
         {
-            if (DateTime.Today.Month < @this.Month ||
-                DateTime.Today.Month == @this.Month &&
-                DateTime.Today.Day < @this.Day)
+            if (DateTime.Today.Month < @this.Month || DateTime.Today.Month == @this.Month && DateTime.Today.Day < @this.Day)
             {
                 return DateTime.Today.Year - @this.Year - 1;
             }
@@ -1873,4 +1897,3 @@ namespace vcs_test_all_03_Syntax
         }
     }
 }
-

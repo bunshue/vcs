@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_test_all_09_Form_NotRectangle
+namespace vcs_test_all_09_Form_NotRectangle1
 {
     static class Program
     {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_test_all_09_Form_NotRectangle
+namespace vcs_test_all_09_Form_NotRectangle3
 {
     public partial class Form1 : Form
     {
