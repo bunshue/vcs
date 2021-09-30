@@ -1,4 +1,92 @@
 
+
+
+3. 如何为一个窗体设置一个默认按钮？（How to set the default button for a form?）
+
+form1.AcceptButton = button1;
+
+4. 如何为一个窗体设置一个取消按钮？（How to set the Cancel button for a form?）
+
+form1.CancelButton = button1;
+
+5. 如何阻止一个窗体标题显示在任务栏上？（How to prevent a form from being shown in the taskbar?）
+
+设置窗体的ShowIntaskbar属性为False
+
+9. 如何获取应用程序当前执行的路径？（How to get the path to my running EXE?）
+
+string appPath = Application.ExecutablePath; 
+
+10. 如何确定当前运行的系统？（How to determine which operating system is running?）
+
+OperatingSystem os = Environment.OSVersion;
+MessageBox.Show(os.Version.ToString());
+MessageBox.Show(os.Platform.ToString());
+
+23. 如何使Windows Form上的Panel或者Label控件半透明？（How to make a Panel or Label semi-transparent on a Windows Form? ）
+
+通过设置控件背景色的alpha值
+panel1.BackColor = Color.FromA#41ccd4;
+注意：在设计时手动输入这些值，不要用颜色选取
+
+
+
+設定倒數計時
+        DateTime dtTarget;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //dtTarget = DateTime.Now.AddHours(2);  //設定兩小時後
+            dtTarget = new DateTime(2021, 9, 30, 12, 0, 0);   //設定特定時間
+
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            TimeSpan diffTime = dtTarget.Subtract(DateTime.Now);
+
+            string diffHour = Convert.ToString(diffTime.Hours);
+            string diffMin = Convert.ToString(diffTime.Minutes);
+            string diffSec = Convert.ToString(diffTime.Seconds);
+            label1.Text = "距離 " + dtTarget.ToString() + " 還有 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒";
+
+        }
+
+
+        //執行時期 顯示 屬性編輯視窗
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            PropertyGrid PG = new PropertyGrid();
+            Form PGForm = new Form();
+            PGForm.Owner = this;
+            PGForm.StartPosition = FormStartPosition.Manual;
+            PGForm.Left = this.Left + this.Width;
+            PGForm.Top = this.Top;
+            PGForm.ShowInTaskbar = false;
+            PGForm.Controls.Add(PG);
+            PG.Dock = DockStyle.Fill;
+            PG.SelectedObject = this.label1;  //選擇要顯示的控件名稱
+            PGForm.Text = "Label 屬性編輯視窗";
+            PGForm.Show();
+        }
+
+
+
+驗證台灣手機號碼
+            bool match;
+            match = System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, @"^09[0-9]{8}$");
+            if (match == true)
+            {
+                richTextBox1.Text += "OK\n";
+                     
+            }
+            else
+            {
+                richTextBox1.Text += "NG\n";
+            }
+
+
+
 陣列
 一群資料型態相同的變數集合在一起
 

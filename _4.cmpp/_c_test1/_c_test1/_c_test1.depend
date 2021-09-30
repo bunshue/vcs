@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1584205420 source:c:\dddddddddd\_c_test1\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1584205420 source:c:\_git\vcs\_4.cmpp\_c_test1\_c_test1\main.c
+	<stdio.h>
+	<stdlib.h>
+

@@ -17,7 +17,6 @@ namespace vcs_Paint1
         Graphics ig;        //繪製bitmap的Graphics實例
         Pen PenStyle;
         Pen p;
-        //SolidBrush sb;
         Bitmap bitmap1;
 
         Color foreColor = Color.Red;
@@ -33,11 +32,14 @@ namespace vcs_Paint1
         //private drawTools drawTool = drawTools.Pen;
         private drawTools drawTool = drawTools.Line;
         private bool isDrawing = false;     //是否正在繪圖
-        
+
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             show_item_location();
             comboBox1.SelectedIndex = 1;
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -98,7 +100,6 @@ namespace vcs_Paint1
             ig.Clear(backColor);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -158,7 +159,6 @@ namespace vcs_Paint1
                     richTextBox1.Text += "xxxxxxxxxx\n";
                     break;
             }
-
         }
 
         void save_image_to_drive()
@@ -253,7 +253,6 @@ namespace vcs_Paint1
                 foreColor = colorDialog1.Color;
                 PenStyle.Color = foreColor;
             }
-
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -295,7 +294,6 @@ namespace vcs_Paint1
                     oldPoint = new Point(e.X, e.Y);
                 }
             }
-
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -335,8 +333,6 @@ namespace vcs_Paint1
                     pictureBox1.Image = bitmap1;
                 }
             }
-            
-
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -351,12 +347,6 @@ namespace vcs_Paint1
                 ig.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
                 pictureBox1.Image = bitmap1;
             }
-
-
-
-
-
-
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -371,6 +361,6 @@ namespace vcs_Paint1
             }
             */
         }
-
     }
 }
+
