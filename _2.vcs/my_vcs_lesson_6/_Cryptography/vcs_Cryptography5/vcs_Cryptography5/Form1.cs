@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Security.Cryptography;
 
 namespace vcs_Cryptography5
@@ -88,9 +89,67 @@ namespace vcs_Cryptography5
             richTextBox1.Text += "SHA512\n";
             //SHA512程式碼只有三行就解決了
             System.Security.Cryptography.SHA512 oSHA = new System.Security.Cryptography.SHA512Managed();
-            byte[] aryByte = oSHA.ComputeHash(System.Text.Encoding.UTF8.GetBytes(cTemp));
+            byte[] aryByte = oSHA.ComputeHash(Encoding.UTF8.GetBytes(cTemp));
             richTextBox1.Text += System.BitConverter.ToString(aryByte).Replace("-", "");
             richTextBox1.Text += "\n\n";
+        }
+
+        string filename = @"C:\______test_files\__RW\_avi\i2c.avi";
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //MD5
+            var tragetFile = new FileStream(filename, FileMode.Open);
+
+            var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] hashbytes = md5.ComputeHash(tragetFile);
+
+            tragetFile.Close();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hashbytes.Length; i++)
+            {
+                sb.Append(hashbytes[i].ToString("x2"));
+            }
+            richTextBox1.Text += "MD5\n";
+            richTextBox1.Text += sb.ToString() + "\n";
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //SHA1
+            var tragetFile = new FileStream(filename, FileMode.Open);
+
+            var sha1 = new System.Security.Cryptography.SHA1CryptoServiceProvider();
+            byte[] hashbytes = sha1.ComputeHash(tragetFile);
+
+            tragetFile.Close();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hashbytes.Length; i++)
+            {
+                sb.Append(hashbytes[i].ToString("x2"));
+            }
+            richTextBox1.Text += "SHA1\n";
+            richTextBox1.Text += sb.ToString() + "\n";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //SHA256
+            var tragetFile = new FileStream(filename, FileMode.Open);
+
+            var sha256 = new System.Security.Cryptography.SHA256CryptoServiceProvider();
+            byte[] hashbytes = sha256.ComputeHash(tragetFile);
+
+            tragetFile.Close();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hashbytes.Length; i++)
+            {
+                sb.Append(hashbytes[i].ToString("x2"));
+            }
+            richTextBox1.Text += "SHA256\n";
+            richTextBox1.Text += sb.ToString() + "\n";
         }
     }
 }

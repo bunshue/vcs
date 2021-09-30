@@ -1835,6 +1835,29 @@ namespace vcs_test_all_03_Syntax
 
         private void button45_Click(object sender, EventArgs e)
         {
+            int i;
+            int j;
+            int k;
+            for (j = 0; j < 32; j++)
+            {
+                richTextBox1.Text += "<tr align=\"center\" bgcolor=\"#FFFFF0\">";
+                for (i = 0; i < 128; i += 32)
+                {
+                    k = j + i;
+
+                    richTextBox1.Text += "<td>" + k.ToString() + "</td><td>" + TenToBinary(k) + "</td><td>0x" + k.ToString("X2");
+                    if (char.IsControl((char)k) == true)
+                    {
+                        richTextBox1.Text += "</td><td>";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "</td><td>" + (char)k;
+                    }
+                    //richTextBox1.Text += "\t";
+                }
+                richTextBox1.Text += "</tr>\n";
+            }
 
         }
 

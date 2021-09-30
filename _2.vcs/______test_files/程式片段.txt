@@ -1,4 +1,18 @@
 
+//如何取得網路上的圖片並顯示 
+            string url = @"https://upload.wikimedia.org/wikipedia/commons/0/0f/Ic-photo-intel-D4004.png";
+            this.pictureBox1.Image = ReadImageFromUrl(url);
+
+        private Image ReadImageFromUrl(string urlImagePath)
+        {
+            Uri uri = new Uri(urlImagePath);
+            WebRequest webRequest = WebRequest.Create(uri);
+            Stream stream = webRequest.GetResponse().GetResponseStream();
+            Image res = Image.FromStream(stream);
+            return res;
+
+        }
+
 
 
 3. 如何为一个窗体设置一个默认按钮？（How to set the default button for a form?）
@@ -905,5 +919,18 @@ for(i=0; i<360;i++)
 
 
 
-
+從顏色的名稱 取得顏色的分量
 				
+				
+    Color slateBlue = Color.FromName("SlateBlue");
+    byte g = slateBlue.G;
+    byte b = slateBlue.B;
+    byte r = slateBlue.R;
+    byte a = slateBlue.A;
+    string text = String.Format("Slate Blue has these ARGB values: Alpha:{0}, " +
+        "red:{1}, green: {2}, blue {3}", new object[]{a, r, g, b});
+    e.Graphics.DrawString(text, 
+        new Font(this.Font, FontStyle.Italic), 
+        new SolidBrush(slateBlue), 
+        new RectangleF(new PointF(0.0F, 0.0F), this.Size));
+        				

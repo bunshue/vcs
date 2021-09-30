@@ -11,13 +11,19 @@ namespace vcs_WebBrowser5
 {
     public partial class Form1 : Form
     {
+        int cnt = 0;
+        bool finished = false;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        int cnt = 0;
-        bool finished = false;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            webBrowser1.ScriptErrorsSuppressed = true;  //關閉 指令碼偵錯視窗
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             string url = "www.yahoo.com";
@@ -46,6 +52,7 @@ namespace vcs_WebBrowser5
             finished = true;
             richTextBox1.Text += "讀取完成\n";
         }
+
     }
 }
 

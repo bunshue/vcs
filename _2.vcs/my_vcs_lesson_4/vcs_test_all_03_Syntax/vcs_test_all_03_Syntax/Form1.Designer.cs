@@ -1182,6 +1182,7 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(180, 40);
             this.button45.TabIndex = 81;
+            this.button45.Text = "ASCII Table 2";
             this.button45.UseVisualStyleBackColor = true;
             this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
