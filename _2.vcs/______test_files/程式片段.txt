@@ -1,4 +1,5 @@
 
+
 //如何取得網路上的圖片並顯示 
             string url = @"https://upload.wikimedia.org/wikipedia/commons/0/0f/Ic-photo-intel-D4004.png";
             this.pictureBox1.Image = ReadImageFromUrl(url);
@@ -31,18 +32,11 @@ form1.CancelButton = button1;
 
 string appPath = Application.ExecutablePath; 
 
-10. 如何确定当前运行的系统？（How to determine which operating system is running?）
-
-OperatingSystem os = Environment.OSVersion;
-MessageBox.Show(os.Version.ToString());
-MessageBox.Show(os.Platform.ToString());
-
 23. 如何使Windows Form上的Panel或者Label控件半透明？（How to make a Panel or Label semi-transparent on a Windows Form? ）
 
 通过设置控件背景色的alpha值
 panel1.BackColor = Color.FromA#41ccd4;
 注意：在设计时手动输入这些值，不要用颜色选取
-
 
 
 設定倒數計時

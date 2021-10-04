@@ -294,30 +294,33 @@ namespace vcs_System1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            OperatingSystem myOS = Environment.OSVersion;
-            richTextBox1.Text += "目前系統版本： " + myOS.ToString() + "\n";
+            OperatingSystem os = Environment.OSVersion;
+            richTextBox1.Text += "目前系統版本： " + os.ToString() + "\n";
+            richTextBox1.Text += "目前系統版本.Version： " + os.Version.ToString() + "\n";
+            richTextBox1.Text += "目前系統版本.Platform： " + os.Platform.ToString() + "\n";
             richTextBox1.Text += "目前系統版本： ";
-            if (myOS.Version.Major == 5)
+            if (os.Version.Major == 5)
             {
-                switch (myOS.Version.Minor)
+                switch (os.Version.Minor)
                 {
                     case 0:
-                        richTextBox1.Text += "Windows 2000 " + myOS.ServicePack + "\n";
+                        richTextBox1.Text += "Windows 2000 " + os.ServicePack + "\n";
                         break;
                     case 1:
-                        richTextBox1.Text += "Windows XP " + myOS.ServicePack + "\n";
+                        richTextBox1.Text += "Windows XP " + os.ServicePack + "\n";
                         break;
                     case 2:
-                        richTextBox1.Text += "Windows Server 2003 " + " " + myOS.ServicePack + "\n";
+                        richTextBox1.Text += "Windows Server 2003 " + " " + os.ServicePack + "\n";
                         break;
                     default:
-                        richTextBox1.Text += myOS.ToString() + " " + myOS.ServicePack + "\n";
+                        richTextBox1.Text += os.ToString() + " " + os.ServicePack + "\n";
                         break;
                 }
             }
             else
-                richTextBox1.Text += myOS.VersionString + " " + myOS.ServicePack + "\n";
-
+            {
+                richTextBox1.Text += os.VersionString + " " + os.ServicePack + "\n";
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -502,6 +505,18 @@ namespace vcs_System1
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //螢幕資訊
+            richTextBox1.Text += "AllScreens.Length = " + Screen.AllScreens.Length.ToString() + "\n";
+
+            richTextBox1.Text += "W = " + Screen.AllScreens[0].Bounds.Width.ToString() + ", H = " + Screen.AllScreens[0].Bounds.Height.ToString() + "\n";
+            richTextBox1.Text += "Bounds = " + Screen.AllScreens[0].Bounds.Size.ToString() + "\n";
+            richTextBox1.Text += "Rank = " + Screen.AllScreens.Rank.ToString() + "\n";
+
+            richTextBox1.Text += "DeviceName = " + Screen.PrimaryScreen.DeviceName + "\n";
+            richTextBox1.Text += "BitsPerPixel = " + Screen.PrimaryScreen.BitsPerPixel.ToString() + "\n";
+            richTextBox1.Text += "Bounds = " + Screen.PrimaryScreen.Bounds.ToString() + "\n";
+            richTextBox1.Text += "WorkingArea = " + Screen.PrimaryScreen.WorkingArea.ToString() + "\n";
+
         }
 
         private void button19_Click(object sender, EventArgs e)
