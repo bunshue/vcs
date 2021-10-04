@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;   //for ImageFormat
+
 namespace vcs_WebCam_Capture
 {
     public partial class Form1 : Form
@@ -45,9 +47,27 @@ namespace vcs_WebCam_Capture
 
             if (pictureBox2.Image != null)
             {
+                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    pictureBox1.Image.Save(filename, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+
+                /*  使用Helper.cs
                 string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
                 Helper.SaveImageCapture(filename, pictureBox2.Image);
                 richTextBox1.Text += "已存檔 : " + filename + "\n";
+                */
             }
             else
             {

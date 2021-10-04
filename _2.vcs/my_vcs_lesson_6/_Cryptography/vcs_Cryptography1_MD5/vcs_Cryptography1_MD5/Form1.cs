@@ -52,5 +52,42 @@ namespace vcs_Cryptography1_MD5
             richTextBox1.Text += "輸出:\n" + output + "\n";
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string input = "lion";
+            string output = CalculateMD5Hash(input);
+            richTextBox1.Text += "輸入:\n" + input + "\n";
+            richTextBox1.Text += "輸出:\n" + output + "\n";
+
+            input = "mouse";
+            output = CalculateMD5Hash(input);
+            richTextBox1.Text += "輸入:\n" + input + "\n";
+            richTextBox1.Text += "輸出:\n" + output + "\n";
+
+        }
+
+        public string CalculateMD5Hash(string input)
+        {
+            //MD5 Encode但不轉Base64 String
+            //        MSSQL 使用
+            //        select SUBSTRING(sys.fn_sqlvarbasetostr(HASHBYTES('MD5','加密字串')),3,32)
+            //        可得同樣結果
+
+            // step 1, calculate MD5 hash from input
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            //byte[] inputBytes = System.Text.Encoding.Unicode.GetBytes(input);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("x2"));
+            }
+            return sb.ToString();
+        }
+
     }
 }

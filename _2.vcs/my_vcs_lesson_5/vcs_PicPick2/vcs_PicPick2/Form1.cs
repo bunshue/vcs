@@ -20,7 +20,6 @@ namespace vcs_PicPick2
         Point start, end;
         Point start1, end1;
         Size size = new Size(0, 0);
-        bool flag_need_save_image = true;
 
         public Form1()
         {
@@ -44,17 +43,14 @@ namespace vcs_PicPick2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //截圖存檔
+            //自訂截圖存檔
             ReadyToCaptrue();
-            flag_need_save_image = true;
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //複製到剪貼簿
-            ReadyToCaptrue();
-            flag_need_save_image = false;
+            //全螢幕截圖存檔
+
         }
 
         private void ReadyToCaptrue()
@@ -122,17 +118,14 @@ namespace vcs_PicPick2
                 Graphics g = Graphics.FromImage(bitmap1);
                 g.CopyFromScreen(start, new Point(0, 0), bitmap1.Size);
 
+                //自訂截圖存檔
+                String filename = "C:\\dddddddddd\\part_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                bitmap1.Save(filename, ImageFormat.Bmp);
+                //richTextBox1.Text += "全螢幕截圖，存檔檔名：\n" + filename + "\n";
 
-                if (flag_need_save_image == true)
-                {
-                    String filename = "C:\\dddddddddd\\part_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-                    bitmap1.Save(filename, ImageFormat.Bmp);
-                    //richTextBox1.Text += "全螢幕截圖，存檔檔名：\n" + filename + "\n";
-                }
-                else
-                {
-                    Clipboard.SetImage(bitmap1);
-                }
+                //複製到剪貼簿
+                Clipboard.SetImage(bitmap1);
+
                 g.Dispose();
             }
             this.WindowState = FormWindowState.Normal;

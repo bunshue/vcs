@@ -1,5 +1,13 @@
 
 
+ C# 修改啟始Form [複製鏈接]
+打開program.cs，修改Application.Run(new Form1());，將Form1改為要啟始的頁面即可!
+
+
+
+
+
+
 //如何取得網路上的圖片並顯示 
             string url = @"https://upload.wikimedia.org/wikipedia/commons/0/0f/Ic-photo-intel-D4004.png";
             this.pictureBox1.Image = ReadImageFromUrl(url);
