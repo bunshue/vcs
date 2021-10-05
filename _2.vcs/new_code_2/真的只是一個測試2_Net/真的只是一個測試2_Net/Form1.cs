@@ -30,16 +30,12 @@ namespace 真的只是一個測試2_Net
 
         static void download()
         {
-
-
             string url = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Breathe-face-smile.svg/1200px-Breathe-face-smile.svg.png";
-
-            using (WebClient client = new WebClient())
+            using (WebClient wc = new WebClient())
             {
-                client.DownloadFile(new Uri(url), "Image.png");
+                wc.DownloadFile(new Uri(url), "Image.png");
             }
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -61,12 +57,9 @@ namespace 真的只是一個測試2_Net
 
         private void button2_Click(object sender, EventArgs e)
         {
-
             //在 C# 中使用 DownloadFile() 方法從一個 URL 下載檔案
-            WebClient mywebClient = new WebClient();
-            mywebClient.DownloadFile("https://wiki.linuxfoundation.org/_media/wiki/logo.png", @"C:\dddddddddd\aaaaa.png");
-
-
+            WebClient wc = new WebClient();
+            wc.DownloadFile("https://wiki.linuxfoundation.org/_media/wiki/logo.png", @"C:\dddddddddd\aaaaa.png");
         }
 
         private void button3_Click(object sender, EventArgs e)

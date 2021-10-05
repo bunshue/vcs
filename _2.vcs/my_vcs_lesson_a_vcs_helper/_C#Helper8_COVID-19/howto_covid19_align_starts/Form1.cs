@@ -138,7 +138,7 @@ namespace howto_covid19_align_starts
         private void DownloadFile(string filename)
         {
             // See if we have today's file.
-            if (!File.Exists(filename))
+            if (File.Exists(filename) == false)
             {
                 // Download the file.
                 this.Cursor = Cursors.WaitCursor;
@@ -147,11 +147,11 @@ namespace howto_covid19_align_starts
                 try
                 {
                     // Make a WebClient.
-                    WebClient web_client = new WebClient();
+                    WebClient wc = new WebClient();
 
                     // Download the file.
                     const string url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
-                    web_client.DownloadFile(url, filename);
+                    wc.DownloadFile(url, filename);
 
                     richTextBox1.Text += "url : " + url + "\n";
                     richTextBox1.Text += "filename : " + filename + "\n";

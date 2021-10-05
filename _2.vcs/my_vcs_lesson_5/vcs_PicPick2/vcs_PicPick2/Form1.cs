@@ -30,7 +30,7 @@ namespace vcs_PicPick2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label1.Text = "";
+            show_item_location();
 
             //檢查存圖的資料夾
             string Path = @"C:\dddddddddd";
@@ -45,32 +45,40 @@ namespace vcs_PicPick2
             }
         }
 
+        void show_item_location()
+        {
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            this.BackColor = Color.LightPink;
+
+            //richTextBox1.Visible = false;
+            //label1.Text = "";
+
+            button1.Location = new Point(10, 10);
+            button1.Size = new Size(60, 60);
+            button1.Visible = true;
+            //label1.Location = new Point(10, button2.Location.Y + button2.Size.Height + button3.Size.Height + 15);
+
+            this.Size = new Size(205 + 30, 110 + 35);
+
+            //設定執行後的表單起始位置, 在螢幕的最右下方
+            const int margin = 0;
+            int x = Screen.PrimaryScreen.WorkingArea.Right - this.Width - margin;
+            int y = Screen.PrimaryScreen.WorkingArea.Bottom - this.Height - margin;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(x, y);
+            //關閉最大化,最小化按鈕, 且固定不能改變表單大小
+            //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+
+            //this.ShowInTaskbar = false;     //false : 表單不顯示在 Windows 工作列中
+            this.TopMost = true;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //自訂截圖存檔
             ReadyToCaptrue();
-        }
-
-        private void delay(int delay_milliseconds)
-        {
-            delay_milliseconds *= 2;
-            DateTime time_before = DateTime.Now;
-            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
-            {
-                Application.DoEvents();
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //全螢幕截圖存檔
-
-            this.Hide();    // Hide this form.
-            delay(100);
-
-            ReadyToCaptrueFullScreen();
-
-            this.Show();    // Show this form again.
         }
 
         // Get the screen's image.
@@ -87,22 +95,6 @@ namespace vcs_PicPick2
 
             // Return the result.
             return bitmap1;
-        }
-
-        private void ReadyToCaptrueFullScreen()
-        {
-            // Get the screen's image.
-            using (Bitmap bitmap1 = GetScreenImage())
-            {
-                //存成bmp檔
-                string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-                bitmap1.Save(filename, ImageFormat.Jpeg);
-                //richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
-                label1.Text = "存檔成功";
-                timer1.Enabled = true;
-            }
-
-
         }
 
         private void ReadyToCaptrue()
@@ -185,18 +177,6 @@ namespace vcs_PicPick2
             panel1.Visible = true;
             this.Opacity = 1;
             flag_mouse_down = false;
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            clear_label_count++;
-            if (clear_label_count == 3)
-            {
-                clear_label_count = 0;
-                label1.Text = "";
-                timer1.Enabled = false;
-            }
-
         }
     }
 }

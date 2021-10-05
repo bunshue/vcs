@@ -75,8 +75,14 @@ namespace howto_get_continuous_stock_prices
         {
             gr.Clear(Color.White);
             gr.SmoothingMode = SmoothingMode.AntiAlias;
-            if (Prices == null) return;
-            if (Prices[0].Count < 2) return;
+            if (Prices == null)
+            {
+                return;
+            }
+            if (Prices[0].Count < 2)
+            {
+                return;
+            }
 
             // Find the maximum price.
             const float min_price = 0;
@@ -92,8 +98,7 @@ namespace howto_get_continuous_stock_prices
             max_price *= 1.1f;
 
             // Scale.
-            RectangleF rect = new RectangleF(
-                0, min_price, MaxNumPrices, max_price);
+            RectangleF rect = new RectangleF(0, min_price, MaxNumPrices, max_price);
             int wid = picGraph.ClientSize.Width;
             int hgt = picGraph.ClientSize.Height;
             PointF[] points = 
@@ -121,7 +126,7 @@ namespace howto_get_continuous_stock_prices
                     }
                 }
             }
-            
+
             // Draw the graphs.
             Color[] colors = { Color.Black, Color.Red, Color.Green, Color.Blue, Color.Orange, Color.Purple };
             for (int i = 0; i < Prices.Count; i++)
@@ -215,9 +220,7 @@ namespace howto_get_continuous_stock_prices
         {
             // Build the URL.
             string symbol_text = string.Join("+", symbols.ToArray());
-            string url =
-                "http://download.finance.yahoo.com/d/quotes.csv?s=" +
-                symbol_text + "&f=sl1d1t1c1";
+            string url = "http://download.finance.yahoo.com/d/quotes.csv?s=" + symbol_text + "&f=sl1d1t1c1";
 
             richTextBox1.Text += "url = " + url + "\n";
 
@@ -245,8 +248,7 @@ namespace howto_get_continuous_stock_prices
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Read Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(ex.Message, "Read Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
             // If we get this far, we failed.
@@ -257,10 +259,10 @@ namespace howto_get_continuous_stock_prices
         private string GetWebResponse(string url)
         {
             // Make a WebClient.
-            WebClient web_client = new WebClient();
+            WebClient wc = new WebClient();
 
             // Get the indicated URL.
-            Stream response = web_client.OpenRead(url);
+            Stream response = wc.OpenRead(url);
 
             // Read the result.
             using (StreamReader stream_reader = new StreamReader(response))
@@ -277,3 +279,4 @@ namespace howto_get_continuous_stock_prices
         }
     }
 }
+

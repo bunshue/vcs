@@ -37,8 +37,7 @@ namespace howto_get_stock_prices
                 url = url.Substring(0, url.Length - 1);
 
                 // Prepend the base URL.
-                const string base_url =
-                    "http://download.finance.yahoo.com/d/quotes.csv?s=@&f=sl1d1t1c1";
+                const string base_url = "http://download.finance.yahoo.com/d/quotes.csv?s=@&f=sl1d1t1c1";
                 url = base_url.Replace("@", url);
 
                 // Get the response.
@@ -62,11 +61,9 @@ namespace howto_get_stock_prices
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Read Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(ex.Message, "Read Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
-
             this.Cursor = Cursors.Default;
         }
 
@@ -75,7 +72,10 @@ namespace howto_get_stock_prices
         private string FormatCurrency(string text)
         {
             decimal value;
-            if (decimal.TryParse(text, out value)) return value.ToString("C3");
+            if (decimal.TryParse(text, out value))
+            {
+                return value.ToString("C3");
+            }
             return "";
         }
 
@@ -84,12 +84,12 @@ namespace howto_get_stock_prices
         {
             richTextBox1.Text += "url = " + url + "\n";
             // Make a WebClient.
-            WebClient web_client = new WebClient();
-            web_client.Proxy = null;
+            WebClient wc = new WebClient();
+            wc.Proxy = null;
 
             // Get the indicated URL.
-            web_client.Proxy = null;
-            Stream response = web_client.OpenRead(url);
+            wc.Proxy = null;
+            Stream response = wc.OpenRead(url);
 
             // Read the result.
             using (StreamReader stream_reader = new StreamReader(response))
