@@ -79,7 +79,7 @@ namespace vcs_DownloadPicture2
             //richTextBox1.Text += "下載圖片 : " + url + "\n";
 
             // Make a WebClient.
-            WebClient client = new WebClient();
+            WebClient wc = new WebClient();
 
             int pos = url.LastIndexOf('/');
             string filename = url.Substring(pos + 1);
@@ -93,7 +93,7 @@ namespace vcs_DownloadPicture2
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
             // Download the file.
-            client.DownloadFile(url, filename);
+            wc.DownloadFile(url, filename);
         }
 
         // Download a file from the internet.
@@ -102,13 +102,13 @@ namespace vcs_DownloadPicture2
         {
             try
             {
-                WebClient client = new WebClient();
+                WebClient wc = new WebClient();
 
                 // Use one of the following.
                 //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                MemoryStream image_stream = new MemoryStream(client.DownloadData(url));
+                MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
                 return Image.FromStream(image_stream);
             }
             catch (Exception ex)

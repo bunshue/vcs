@@ -77,7 +77,10 @@ namespace vcs_Network2_WebPageImage
 
                     Application.DoEvents();
 
-                    if (!Running) break;
+                    if (!Running)
+                    {
+                        break;
+                    }
                 }
                 Running = false;
 
@@ -111,16 +114,14 @@ namespace vcs_Network2_WebPageImage
                 float h_scale = max_height / (float)pic.Image.Height;
                 float scale = Math.Min(w_scale, h_scale);
                 pic.SizeMode = PictureBoxSizeMode.Zoom;
-                pic.Size = new Size(
-                    (int)(scale * pic.Image.Width),
-                    (int)(scale * pic.Image.Height));
+                pic.Size = new Size((int)(scale * pic.Image.Width), (int)(scale * pic.Image.Height));
             }
         }
 
         // Get the picture at a given URL.
         private Image GetPicture(string url)
         {
-            WebClient client = new WebClient();
+            WebClient wc = new WebClient();
             try
             {
                 url = url.Trim();
@@ -128,7 +129,7 @@ namespace vcs_Network2_WebPageImage
                 {
                     url = "http://" + url;
                 }
-                MemoryStream image_stream = new MemoryStream(client.DownloadData(url));
+                MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
                 return Image.FromStream(image_stream);
             }
             catch (Exception ex)
@@ -207,8 +208,7 @@ namespace vcs_Network2_WebPageImage
                     image.Save(filename, ImageFormat.Tiff);
                     break;
                 default:
-                    throw new NotSupportedException(
-                        "Unknown file extension " + extension);
+                    throw new NotSupportedException("Unknown file extension " + extension);
             }
         }
     }

@@ -75,17 +75,20 @@ namespace vcs_DownloadFile2
                 this.textBox2.Text = string.Empty;
             }
         }/// end block menthod showSource()
+
         //保存网页信息
         private void saveInfo(string strPath, string strDown)
         {
-            WebClient wC = new WebClient();
-            wC.DownloadFile(strDown, strPath);
+            WebClient wc = new WebClient();
+            wc.DownloadFile(strDown, strPath);
         }
+
         //验证网址是否正确
         public bool ValidateDate1(string input)
         {
             return Regex.IsMatch(input, "http(s)?://([\\w-]+\\.)+[\\w-]+(//[\\w- .//?%&=]*)?");
         }
+
         //提取网页内容。
         public string GetSource(string webAddress)
         {

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFontColorDialog", "WinFontColorDialog.csproj", "{9704FCDA-9CF7-4F32-A964-E8A2DB300BD7}"
 EndProject
 Global

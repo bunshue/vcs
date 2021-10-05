@@ -21,6 +21,8 @@ namespace vcs_PicPick2
         Point start1, end1;
         Size size = new Size(0, 0);
 
+        int clear_label_count = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -28,6 +30,8 @@ namespace vcs_PicPick2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            label1.Text = "";
+
             //檢查存圖的資料夾
             string Path = @"C:\dddddddddd";
             if (Directory.Exists(Path) == false)     //確認資料夾是否存在
@@ -47,9 +51,57 @@ namespace vcs_PicPick2
             ReadyToCaptrue();
         }
 
+        private void delay(int delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             //全螢幕截圖存檔
+
+            this.Hide();    // Hide this form.
+            delay(100);
+
+            ReadyToCaptrueFullScreen();
+
+            this.Show();    // Show this form again.
+        }
+
+        // Get the screen's image.
+        private Bitmap GetScreenImage()
+        {
+            // Make a bitmap to hold the result.
+            Bitmap bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb);
+
+            // Copy the image into the bitmap.
+            using (Graphics g = Graphics.FromImage(bitmap1))
+            {
+                g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+            }
+
+            // Return the result.
+            return bitmap1;
+        }
+
+        private void ReadyToCaptrueFullScreen()
+        {
+            // Get the screen's image.
+            using (Bitmap bitmap1 = GetScreenImage())
+            {
+                //存成bmp檔
+                string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                bitmap1.Save(filename, ImageFormat.Jpeg);
+                //richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
+                label1.Text = "存檔成功";
+                timer1.Enabled = true;
+            }
+
 
         }
 
@@ -133,6 +185,18 @@ namespace vcs_PicPick2
             panel1.Visible = true;
             this.Opacity = 1;
             flag_mouse_down = false;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            clear_label_count++;
+            if (clear_label_count == 3)
+            {
+                clear_label_count = 0;
+                label1.Text = "";
+                timer1.Enabled = false;
+            }
+
         }
     }
 }

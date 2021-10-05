@@ -16,6 +16,7 @@ namespace WinMultiForm
         {
             InitializeComponent();
         }
+
         //Cal 方法可計算配息方式
         public int Cal(int vMoney, int vYear, double vRate)
         {
@@ -29,6 +30,11 @@ namespace WinMultiForm
                 //每月計息一次
                 return (int)(vMoney * Math.Pow(1 + (vRate) / 12, vYear * 12));
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

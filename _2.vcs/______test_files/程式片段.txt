@@ -4,7 +4,38 @@
 打開program.cs，修改Application.Run(new Form1());，將Form1改為要啟始的頁面即可!
 
 
+        // ===  按 [使用小算盤] 鈕執行
+        private void btnOpenCal_Click(object sender, EventArgs e)
+        {
+            //開啟小算盤應用程式
+            System.Diagnostics.Process.Start("C:\\WINDOWS\\system32\\calc.exe");
 
+        }
+
+
+
+
+
+網際網路時間伺服器，
+從原來的 time.windows.com 改為 time.nist.gov，
+
+
+C# 播放 wav 或音樂檔方式
+
+在 C# 內播放 wav或音樂檔案方式，可使用下面範例實現
+Sample Code
+
+System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
+sp.SoundLocation = @"C:\Wave音效檔\DoReMe.wav";
+sp.Play(); // 撥放
+..
+..
+..
+sp.Stop(); // 停止
+
+ 
+ 
+ 
 
 
 

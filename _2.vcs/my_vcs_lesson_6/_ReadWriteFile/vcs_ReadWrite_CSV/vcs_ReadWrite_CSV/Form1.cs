@@ -81,7 +81,7 @@ namespace vcs_ReadWrite_CSV
 
             Encoding enc = Encoding.GetEncoding("big5"); //設定檔案的編碼
             //一維字串陣列
-            string[] readText = System.IO.File.ReadAllLines(filename, enc); //以指定的編碼方式讀取檔案
+            string[] readText = File.ReadAllLines(filename, enc); //以指定的編碼方式讀取檔案
 
             //資料處理
             string[] name = new string[readText.Length];//宣告一個1維字串陣列，來儲存所有的姓名
@@ -95,7 +95,7 @@ namespace vcs_ReadWrite_CSV
                 //一, 未分割資料, 只打印每行資料
                 //richTextBox1.Text += s + "\r\n";
 
-                //二, 分割資料, 分割資料後印出
+                //二, 分割資料, 分割資料後印出 a
                 /*
                 string[] ss = s.Split(',');         //將一列的資料，以逗號的方式進行資料切割，並將資料放入一個字串陣列
                 int len = ss.Length;
@@ -112,10 +112,19 @@ namespace vcs_ReadWrite_CSV
                 }
                 */
 
+                /*
+                //二, 分割資料, 分割資料後印出 b
+                var fields = s.Split(new char[] { ',' });
+                foreach (var v in fields)
+                {
+                    richTextBox1.Text += v + "\t";
+                }
+                richTextBox1.Text += "\n";
+                */
+
                 //三, 資料處理
                 string[] ss = s.Split(','); //將一列的資料，以逗號的方式進行資料切割，並將資料放入一個字串陣列
                 name[line] = ss[0]; //切出來的字串，第0個元素是姓名
-
 
                 allData[line, 0] = double.Parse(ss[1]);
                 allData[line, 1] = double.Parse(ss[2]);
@@ -149,7 +158,7 @@ namespace vcs_ReadWrite_CSV
             string filename = "C:\\______test_files\\__RW\\_csv\\vcs_ReadWrite_CSV_F0035CH1.CSV";
 
             Encoding enc = Encoding.GetEncoding("big5"); //設定檔案的編碼
-            string[] readText = System.IO.File.ReadAllLines(filename, enc); //以指定的編碼方式讀取檔案
+            string[] readText = File.ReadAllLines(filename, enc); //以指定的編碼方式讀取檔案
 
             richTextBox1.Text += "len = " + readText.Length.ToString() + "\n";
 
@@ -274,7 +283,7 @@ namespace vcs_ReadWrite_CSV
 
             Encoding enc = Encoding.GetEncoding("big5"); //設定檔案的編碼
             //一維字串陣列
-            string[] readText = System.IO.File.ReadAllLines(filename, enc); //以指定的編碼方式讀取檔案
+            string[] readText = File.ReadAllLines(filename, enc); //以指定的編碼方式讀取檔案
 
             //資料處理
             string[] name = new string[readText.Length];//宣告一個1維字串陣列，來儲存所有的姓名
