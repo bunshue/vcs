@@ -1722,10 +1722,70 @@ namespace vcs_test_all_02_Array
 
         }
 
+        //氣泡排序2 ST
+
+        /*
+        1、道理：從數組的第一個地位開端兩兩比擬array[index]和array[index+1]，假如array[index]年夜於array[index+1]則交流array[index]和array[index+1]的地位，止到數組停止;
+        從數組的第一個地位開端，反復下面的舉措，止到數組長度減一個地位停止;
+        從數組的第一個地位開端，反復下面的舉措，止到數組長度減二個地位停止;
+        。。。。
+        2、時光龐雜度：O(N²)，停止了(n-1)*(n-2)....=n*(n-1)/2次比擬和約比擬次數一半的交流次數(均況下)，那末依據年夜O表現法時光龐雜度為O(N^2)
+        */
+
+        //先樹立一個類，今後把一切排序辦法都放到這個類裡，
+        public class SumSort
+        {
+            //冒泡排序辦法，從小到年夜排，固然許多冒泡排序都是從年夜到小，
+            //可是我就想這麼排，你能怎樣著我。
+            public void PopSort(int[] list)
+            {
+                int i, j, temp;  //先界說一下要用的變量
+                for (i = 0; i < list.Length - 1; i++)
+                {
+                    for (j = i + 1; j < list.Length; j++)
+                    {
+                        if (list[i] > list[j]) //假如第二個小於第一個數
+                        {
+                            //交流兩個數的地位，在這裡你也能夠零丁寫一個交流辦法，在此挪用就好了
+                            temp = list[i]; //把年夜的數放在一個暫時存儲地位
+                            list[i] = list[j]; //然後把小的數賦給前一個，包管每趟排序後面的最小
+                            list[j] = temp; //然後把暫時地位的誰人年夜數賦給後一個
+                        }
+                    }
+                }
+            }
+        }
+
         private void button45_Click(object sender, EventArgs e)
         {
+            //氣泡排序2
+            int[] arr = { 1, 4, 2, 43, 5, 61, 89, 34, 67, 32, 40 };
+            richTextBox1.Text += "原序列:\n";
+            for (int i = 0; i < arr.Length; i++)
+            {
+                richTextBox1.Text += arr[i].ToString() + "\t";
+            }
+            richTextBox1.Text += "\n";
+
+            //把數據排序類實例化一下，然後挪用辦法。
+            //甚麼？還要實例，可我不想實例化怎樣辦？
+            //那也沒有關系，把PopSort辦法前加一個static，直接挪用SumSort.PopSort(arr)就行了
+            SumSort mysort = new SumSort();
+            //來來來，年夜家按高矮排個隊，矮的排後面高的排前面
+            mysort.PopSort(arr);
+            //真聽話，看看年夜家都排第幾位了
+            richTextBox1.Text += "排序後:\n";
+            for (int i = 0; i < arr.Length; i++)
+            {
+                richTextBox1.Text += arr[i].ToString() + "\t";
+            }
+            Console.WriteLine();
+            richTextBox1.Text += "\n";
+
 
         }
+        //氣泡排序2 SP
+
 
         //Hashtable 測試 ST
 

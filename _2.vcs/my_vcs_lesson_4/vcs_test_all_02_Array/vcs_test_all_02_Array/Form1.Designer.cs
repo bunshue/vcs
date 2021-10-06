@@ -439,7 +439,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 42);
             this.button25.TabIndex = 50;
-            this.button25.Text = "氣泡排序";
+            this.button25.Text = "氣泡排序1";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -753,6 +753,7 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(200, 42);
             this.button45.TabIndex = 72;
+            this.button45.Text = "氣泡排序2";
             this.button45.UseVisualStyleBackColor = true;
             this.button45.Click += new System.EventHandler(this.button45_Click);
             // 

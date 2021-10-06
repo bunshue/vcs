@@ -1,4 +1,36 @@
 
+      //挪用IE閱讀器 
+      System.Diagnostics.Process.Start("iexplore.exe", "http://www.谷歌.cn");  
+ 
+      //挪用體系默許的閱讀器 
+      System.Diagnostics.Process.Start( "http://www.谷歌.cn");  
+
+
+
+
+
+            string foldername = @"C:\______test_files\_pic";
+            DirectoryInfo TheFolder = new DirectoryInfo(foldername);
+
+            richTextBox1.Text += "遍歷文件夾\n";
+            //遍歷文件夾
+            foreach (DirectoryInfo NextFolder in TheFolder.GetDirectories())
+            {
+                this.listBox1.Items.Add(NextFolder.Name);
+                richTextBox1.Text += NextFolder.Name+"\n";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "遍歷文件\n";
+            foreach (FileInfo NextFile in TheFolder.GetFiles())
+            {
+                this.listBox2.Items.Add(NextFile.Name);
+                richTextBox1.Text += NextFile.Name + "\n";
+            }
+            richTextBox1.Text += "\n";
+
+
+
 16進制與字符串、字節數組之間的轉換。，
 
 1.將十進制數的字符串轉化成十六進制數的字符串
