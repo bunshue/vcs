@@ -600,11 +600,12 @@
             // 
             // button43
             // 
-            this.button43.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button43.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button43.Location = new System.Drawing.Point(630, 334);
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(200, 40);
             this.button43.TabIndex = 61;
+            this.button43.Text = "取得作業系統安裝時間";
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
             // 

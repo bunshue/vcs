@@ -43,7 +43,7 @@ namespace vcs_WMI_Win32__tmp
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -553,14 +553,7 @@ namespace vcs_WMI_Win32__tmp
                 richTextBox1.Text += "Sectors per Track: " + moDisk["SectorsPerTrack"].ToString() + "\n";
 
                 richTextBox1.Text += "Tracks per Cylinder: " + moDisk["TracksPerCylinder"].ToString() + "\n";
-
             }
-
-
         }
-
-
-
-
     }
 }

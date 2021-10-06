@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using   System.Runtime.InteropServices;
+
 namespace 遠程控制計算機
 {
     public partial class Form2 : Form
@@ -19,12 +20,8 @@ namespace 遠程控制計算機
 
         private void Form2_Load(object sender, EventArgs e)
         {
-          
+
         }
-
-
-
-
 
         [DllImport("Iphlpapi.dll")]
         private static extern int SendARP(Int32 dest, Int32 host, ref   Int64 mac, ref   Int32 length);
@@ -49,16 +46,16 @@ namespace 遠程控制計算機
             catch (Exception err)
             {
                 return -1;
-             
+
             }
-           
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-          string str=Convert.ToString(GetMACByIP(this.textBox1.Text));
-          MessageBox.Show(str);
+            string str = Convert.ToString(GetMACByIP(this.textBox1.Text));
+            richTextBox1.Text += "取得網卡MAC位址 : " + str + "\n";
         }
     }
-  
 }
+

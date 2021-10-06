@@ -17,6 +17,8 @@ namespace vcs_test_all_00_Control
         private Size SmallSize, LargeSize;
         private Font SmallFont, LargeFont;
 
+        private double opacity = 0;//記錄當前窗體的透明度
+
         //移動控件 ST
         Point CPoint;//記錄滑鼠游標在父容器中的初始位置
         bool isDown = false;//判斷是否可以移動文字
@@ -61,15 +63,10 @@ namespace vcs_test_all_00_Control
 
             // Set the small and large sizes.
             SmallSize = flp1.Size;
-            LargeSize = new Size(
-                (int)(1.5 * flp1.Size.Width),
-                (int)(1.5 * flp1.Size.Height));
+            LargeSize = new Size((int)(1.5 * flp1.Size.Width), (int)(1.5 * flp1.Size.Height));
 
             SmallFont = flp1.Font;
-            LargeFont = new Font(
-                SmallFont.FontFamily,
-                SmallFont.Size * 1.5f,
-                FontStyle.Bold);
+            LargeFont = new Font(SmallFont.FontFamily, SmallFont.Size * 1.5f, FontStyle.Bold);
 
             lb_checkbox_CheckState.Text = "";
 
@@ -80,6 +77,9 @@ namespace vcs_test_all_00_Control
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             bt_exit_setup();
+
+            Opacity = 0;//指定窗體完全透明
+            timer2.Enabled = true;
         }
 
         // 做出 去背景 的效果
@@ -247,10 +247,7 @@ namespace vcs_test_all_00_Control
                 System.String strControlName = con.Name.ToString();//获得控件的名称
 
                 richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
-
-
             }
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -258,13 +255,11 @@ namespace vcs_test_all_00_Control
             //Sender它代表的是引發這個事件的Object，所以我們可以把他轉型回來使用。
             richTextBox1.Text += "Name : " + ((Button)sender).Name.ToString() + "\n";
             richTextBox1.Text += "Size : " + ((Button)sender).Size.Width.ToString() + " X " + ((Button)sender).Size.Height.ToString() + "\n";
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             //不同Button共用一個事件
-
             Button btn = (Button)sender;
             richTextBox1.Text += "你按了 " + btn.Text + "\n";
 
@@ -288,12 +283,10 @@ namespace vcs_test_all_00_Control
                 richTextBox1.Text += "Text: " + this.Controls[i].Text + "\t";
                 richTextBox1.Text += "這項是：" + this.Controls[i].GetType() + "\n";
 
-
                 if (this.Controls[i] is Button)
                 {
                     richTextBox1.Text += "這是Button" + "\n";
                 }
-
             }
         }
 
@@ -313,7 +306,6 @@ namespace vcs_test_all_00_Control
                     i++;
                 }
             }
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -346,11 +338,8 @@ namespace vcs_test_all_00_Control
             richTextBox1.Text += "size W = " + preferredSize.Width.ToString() + "\n";
             richTextBox1.Text += "size H = " + preferredSize.Height.ToString() + "\n";
             // Pad the text and resize the control.
-            button13.ClientSize = new Size(
-                preferredSize.Width + (textPadding * 2),
-                preferredSize.Height + (textPadding * 2));
+            button13.ClientSize = new Size(preferredSize.Width + (textPadding * 2), preferredSize.Height + (textPadding * 2));
             g.Dispose();    // Clean up the Graphics object.
-
         }
 
         MyRecordControlClass mdc = new MyRecordControlClass();
@@ -358,14 +347,12 @@ namespace vcs_test_all_00_Control
         {
             richTextBox1.Text += button18.Text + "\n";
             mdc.recordAllControls(this);
-
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += button17.Text + "\n";
             mdc.controlSizeChange(this);
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -412,7 +399,10 @@ namespace vcs_test_all_00_Control
         private Control FindControl(Control parent, string name)
         {
             // Check the parent.
-            if (parent.Text == name) return parent;
+            if (parent.Text == name)
+            {
+                return parent;
+            }
 
             // Recursively search the parent's children.
             foreach (Control ctl in parent.Controls)
@@ -420,7 +410,9 @@ namespace vcs_test_all_00_Control
                 richTextBox1.Text += "檢查\t" + ctl.Name + "\t" + ctl.Text + "\n";
                 Control found = FindControl(ctl, name);
                 if (found != null)
+                {
                     return found;
+                }
             }
 
             // If we still haven't found it, it's not here.
@@ -485,9 +477,7 @@ namespace vcs_test_all_00_Control
         {
             CheckBox chk = sender as CheckBox;
             lb_checkbox_CheckState.Text = "CheckState :    " + chk.CheckState.ToString();
-
         }
-
 
         // True if we should ignore check change events.
         private bool IgnoreCheckChangeEvents = false;
@@ -495,15 +485,22 @@ namespace vcs_test_all_00_Control
         // Select or deselect all CheckBoxes.
         private void chkMeals_CheckStateChanged(object sender, EventArgs e)
         {
-            if (IgnoreCheckChangeEvents) return;
+            if (IgnoreCheckChangeEvents)
+            {
+                return;
+            }
 
             if (chkMeals.CheckState == CheckState.Indeterminate)
+            {
                 chkMeals.CheckState = CheckState.Unchecked;
+            }
 
             CheckBox[] meal_boxes = { chkBreakfast, chkLunch, chkDinner };
             IgnoreCheckChangeEvents = true;
             foreach (CheckBox chk in meal_boxes)
+            {
                 chk.Checked = chkMeals.Checked;
+            }
             IgnoreCheckChangeEvents = false;
         }
 
@@ -511,13 +508,21 @@ namespace vcs_test_all_00_Control
         // Update the chkMeals CheckBox.
         private void chkMealType_CheckedChanged(object sender, EventArgs e)
         {
-            if (IgnoreCheckChangeEvents) return;
+            if (IgnoreCheckChangeEvents)
+            {
+                return;
+            }
 
             // See how many meals are selected.
             int num_selected = 0;
             CheckBox[] meal_boxes = { chkBreakfast, chkLunch, chkDinner };
             foreach (CheckBox chk in meal_boxes)
-                if (chk.Checked) num_selected++;
+            {
+                if (chk.Checked)
+                {
+                    num_selected++;
+                }
+            }
 
             // Set the chkMeals CheckBox appropriately.
             IgnoreCheckChangeEvents = true;
@@ -528,7 +533,6 @@ namespace vcs_test_all_00_Control
             else
                 chkMeals.CheckState = CheckState.Indeterminate;
             IgnoreCheckChangeEvents = false;
-
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -541,7 +545,9 @@ namespace vcs_test_all_00_Control
         {
             Opacity -= 0.10;
             if (Opacity <= 0)
+            {
                 Close();
+            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -577,7 +583,10 @@ namespace vcs_test_all_00_Control
             string result = "";
             foreach (char ch in input.ToCharArray())
             {
-                if (char.IsUpper(ch)) result += " ";
+                if (char.IsUpper(ch))
+                {
+                    result += " ";
+                }
                 result += ch;
             }
 
@@ -611,7 +620,6 @@ namespace vcs_test_all_00_Control
                 errorProvider1.SetError(textBox1, "台灣身份證字號格式 1英9數");
                 e.Cancel = true;
             }
-
         }
 
         // Validate fields.
@@ -678,9 +686,7 @@ namespace vcs_test_all_00_Control
                     return;
                 }
             }
-
             richTextBox1.Text += "資料正確\nID:\t" + textBox1.Text + "\nName:\t" + textBox2.Text + "\n";
-
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -777,6 +783,19 @@ namespace vcs_test_all_00_Control
             this.TransparencyKey = Color.Red;
             richTextBox1.BackColor = this.TransparencyKey;
         }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (opacity <= 1)
+            {
+                opacity = opacity + 0.05;
+                Opacity = opacity;
+            }
+            else
+            {
+                timer2.Enabled = false;
+            }
+        }
     }
 
     class MyRecordControlClass
@@ -856,7 +875,9 @@ namespace vcs_test_all_00_Control
 
                 //**放在这里，是先记录控件本身，后记录控件的子控件
                 if (c.Controls.Count > 0)
+                {
                     AddControl(c);//窗体内其余控件还可能嵌套控件(比如panel),要单独抽出,因为要递归调用
+                }
             }
         }
 

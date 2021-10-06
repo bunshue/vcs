@@ -941,6 +941,19 @@ namespace vcs_System1
 
         private void button43_Click(object sender, EventArgs e)
         {
+            //取得作業系統安裝時間
+            ObjectQuery MyQuery = new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
+            ManagementScope MyScope = new ManagementScope();
+            ManagementObjectSearcher MySearch = new ManagementObjectSearcher(MyScope, MyQuery);
+            ManagementObjectCollection MyCollection = MySearch.Get();
+            string StrInfo = "";
+            foreach (ManagementObject MyObject in MyCollection)
+            {
+                StrInfo = MyObject.GetText(TextFormat.Mof);
+            }
+            string InstallDate = StrInfo.Substring(StrInfo.LastIndexOf("InstallDate") + 15, 14);
+
+            richTextBox1.Text += "取得作業系統安裝時間 :\t" + InstallDate + "\n";
         }
 
         private void button44_Click(object sender, EventArgs e)

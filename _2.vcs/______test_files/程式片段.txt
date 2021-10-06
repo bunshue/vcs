@@ -1,4 +1,35 @@
 
+16進制與字符串、字節數組之間的轉換。，
+
+1.將十進制數的字符串轉化成十六進制數的字符串
+
+//十進制轉二進制
+Console.WriteLine("十進制166的二進制表示: "+Convert.ToString(166, 2));
+//十進制轉八進制
+Console.WriteLine("十進制166的八進制表示: "+Convert.ToString(166, 8));
+//十進制轉十六進制
+Console.WriteLine("十進制166的十六進制表示: "+Convert.ToString(166, 16));
+    
+//二進制轉十進制
+Console.WriteLine("二進制 111101 的十進制表示: "+Convert.ToInt32("111101", 2));
+//八進制轉十進制
+Console.WriteLine("八進制 44 的十進制表示: "+Convert.ToInt32("44", 8));
+//十六進制轉十進制
+Console.WriteLine("十六進制 CC的十進制表示: "+Convert.ToInt32("CC", 16));
+
+2.16進制與字符串、字節數組之間的轉換
+
+            richTextBox1.Text += "取得網頁資料\n";
+            string strUrl = "https://www.google.com.tw/"; //獲得IP的網址了
+
+            Uri uri = new Uri(strUrl);
+            System.Net.WebRequest wr = System.Net.WebRequest.Create(uri);
+            System.IO.Stream s = wr.GetResponse().GetResponseStream();
+            System.IO.StreamReader sr = new System.IO.StreamReader(s, Encoding.Default);
+            string all = sr.ReadToEnd(); //讀取網站的數據
+            richTextBox1.Text += all + "\n";
+
+
 
  C# 修改啟始Form [複製鏈接]
 打開program.cs，修改Application.Run(new Form1());，將Form1改為要啟始的頁面即可!

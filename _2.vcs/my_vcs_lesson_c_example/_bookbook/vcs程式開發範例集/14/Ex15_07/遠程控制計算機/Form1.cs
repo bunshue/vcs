@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Management;
+
 namespace 遠程控制計算機
 {
     public partial class Form1 : Form
@@ -31,7 +32,7 @@ namespace 遠程控制計算機
             try 
             { 
                 scope.Connect ( ) ; 
-                System.Management.ObjectQuery oq = new System.Management.ObjectQuery ( "SELECT * FROM Win32_OperatingSystem" ) ; 
+                ObjectQuery oq = new ObjectQuery ( "SELECT * FROM Win32_OperatingSystem" ) ; 
                 ManagementObjectSearcher query1 = new ManagementObjectSearcher (scope,oq) ; 
                 //得到WMI控制 
                 ManagementObjectCollection queryCollection1 = query1.Get ( ) ; 
@@ -51,7 +52,8 @@ namespace 遠程控制計算機
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CloseComputer(this.textBox2.Text, this.textBox3.Text, this.textBox1.Text, "Reboot");
+            richTextBox1.Text += "重啟\t偽執行\n";
+            //CloseComputer(this.textBox2.Text, this.textBox3.Text, this.textBox1.Text, "Reboot");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -61,7 +63,8 @@ namespace 遠程控制計算機
 
         private void button3_Click(object sender, EventArgs e)
         {
-            CloseComputer(this.textBox2.Text, this.textBox3.Text, this.textBox1.Text, "Shutdown");
+            richTextBox1.Text += "關機\t偽執行\n";
+            //CloseComputer(this.textBox2.Text, this.textBox3.Text, this.textBox1.Text, "Shutdown");
         }
 
         private void label1_Click(object sender, EventArgs e)

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace 远程控制计算机
+namespace vcs_test_all_09_FormMove
 {
     static class Program
     {
         /// <summary>
-        /// 应用程序的主入口点。
+        /// 應用程式的主要進入點。
         /// </summary>
         [STAThread]
         static void Main()

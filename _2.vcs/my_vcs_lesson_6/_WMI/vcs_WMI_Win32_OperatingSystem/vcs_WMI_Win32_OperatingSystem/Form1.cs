@@ -39,7 +39,7 @@ namespace vcs_WMI_Win32_OperatingSystem
                 richTextBox1.Text += "LastBootUpTime: " + mo["LastBootUpTime"].ToString().Substring(0, 14) + "\n";
                 richTextBox1.Text += "LocalDateTime: " + mo["LocalDateTime"].ToString() + "\n";
                 richTextBox1.Text += "Name: " + mo["Name"].ToString() + "\n";
-                richTextBox1.Text += "Organization: " + mo["Organization"].ToString() + "\n";
+                //richTextBox1.Text += "Organization: " + mo["Organization"].ToString() + "\n";
                 richTextBox1.Text += "OSLanguage: " + mo["OSLanguage"].ToString() + "\n";
                 richTextBox1.Text += "OSType: " + mo["OSType"].ToString() + "\n";
                 richTextBox1.Text += "RegisteredUser: " + mo["RegisteredUser"].ToString() + "\n";
@@ -55,7 +55,7 @@ namespace vcs_WMI_Win32_OperatingSystem
                 richTextBox1.Text += "SystemDirectory: " + mo["SystemDirectory"].ToString() + "\n";　　//獲取系統目錄
                 richTextBox1.Text += "BootDevice: " + mo["BootDevice"].ToString() + "\n";　　//獲取啟動設備
                 richTextBox1.Text += "Version: " + mo["Version"].ToString() + "\n";//獲取版本
-                richTextBox1.Text += "CSDVersion: " + mo["CSDVersion"].ToString() + "\n";//獲取SP
+                //richTextBox1.Text += "CSDVersion: " + mo["CSDVersion"].ToString() + "\n";//獲取SP
                 richTextBox1.Text += "BuildNumber: " + mo["BuildNumber"].ToString() + "\n";//獲取builderNumber
                 richTextBox1.Text += "TotalVisibleMemorySize: " + ((ulong)mo["TotalVisibleMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取總的物理內存
                 richTextBox1.Text += "FreePhysicalMemory: " + ((ulong)mo["FreePhysicalMemory"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取可用物理內存
