@@ -501,16 +501,6 @@ namespace 真的只是一個測試1
 
         private void button14_Click(object sender, EventArgs e)
         {
-            if (button14.Text == "啟動 CopyFromScreen")
-            {
-                button14.Text = "關閉 CopyFromScreen";
-                timer1.Enabled = true;
-            }
-            else
-            {
-                button14.Text = "啟動 CopyFromScreen";
-                timer1.Enabled = false;
-            }
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -580,34 +570,6 @@ namespace 真的只是一個測試1
 
         private void button19_Click(object sender, EventArgs e)
         {
-        }
-
-        int x_st = 0;
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
-            this.Text = pt.ToString();
-
-            int W = Screen.PrimaryScreen.Bounds.Width;
-            int H = Screen.PrimaryScreen.Bounds.Height;
-            int w = 200;
-            int h = 200;
-            Bitmap bitmap1 = new Bitmap(w, h);  //, PixelFormat.Format32bppArgb);
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            //                    來源位置             目的位置      要傳輸的區域大小  判斷在像素複製作業中來源色彩如何與目的色彩結合以產生最後的色彩
-            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h), CopyPixelOperation.SourceInvert);
-            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h));
-            g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
-            g.Dispose();
-
-            pictureBox1.Image = bitmap1;
-            pictureBox1.Size = bitmap1.Size;
-
-            x_st += 50;
-            if (x_st > 600)
-                x_st = 0;
-
         }
 
         List<double[]> pts = new List<double[]>();    //二維List for double array

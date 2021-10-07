@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 using SpeechLib;
 
+using System.Speech.Synthesis;  //參考/加入參考/.NET/System.Speech
+
 /*
 參考/加入參考/COM/Microsoft Speech Object Library, 選sapi.dll
 
@@ -33,7 +35,7 @@ namespace vcs_SpeechLib
         {
             string article1 = "When his father died, he left an estate of one million dollars.";
             string article2 = "他父親去世時留下了一百萬元遺產。";
-            string article3 = "When his father died, he left an estate of one million dollars. 他父親去世時留下了一百萬元遺產。";
+            
 
             #region 應用一: 只說英文
             SpVoiceClass voice1 = new SpVoiceClass();
@@ -58,6 +60,13 @@ namespace vcs_SpeechLib
             #endregion
 
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string article3 = "When his father died, he left an estate of one million dollars. 他父親去世時留下了一百萬元遺產。";
+            SpeechSynthesizer synth = new SpeechSynthesizer();
+            synth.SpeakAsync(article3);
         }
     }
 }

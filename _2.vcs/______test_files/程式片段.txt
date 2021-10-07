@@ -1,5 +1,22 @@
 
 
+DataGridView 指定欄位排序
+
+// 根據 資料行1 (Name) 做 大到小 排序
+dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Descending); 
+
+// 根據 資料行1 (Name) 做 小到大 排序 
+dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending); 
+
+
+
+    
+    
+            //                    來源位置             目的位置      要傳輸的區域大小  判斷在像素複製作業中來源色彩如何與目的色彩結合以產生最後的色彩
+            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h), CopyPixelOperation.SourceInvert);
+            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h));
+            g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
+
 
 //隨機生成四位驗證碼（0~9，a~Z）
             int LEN = 4;
