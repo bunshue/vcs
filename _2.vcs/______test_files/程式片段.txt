@@ -1,4 +1,37 @@
 
+
+
+//隨機生成四位驗證碼（0~9，a~Z）
+            int LEN = 4;
+            Random r = new Random();
+            string code = "0123456789abcdefghjklmnopqistuvwxyzABCDEFGHIJKLMNOPQISTUVWXYZ";
+            string captcha = "";
+            for (int i = 0; i < LEN; i++)
+            {
+                int ra = r.Next(code.Length);
+                captcha = code.Substring(ra, 1) + captcha;
+            }
+            richTextBox1.Text += captcha + "\n";
+            
+            
+using System.Reflection;
+            //取得 namespaceName
+            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
+
+            richTextBox1.Text += namespaceName + "\n";
+
+            richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
+
+
+//播放音樂
+using System.Media;
+            string filename = @"C:\______test_files\_wav\start.wav";
+            SoundPlayer sp = new SoundPlayer(filename);
+            sp.Play();
+
+        
+        
+        
       //挪用IE閱讀器 
       System.Diagnostics.Process.Start("iexplore.exe", "http://www.谷歌.cn");  
  
