@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_ReadWrite_Barcode.Properties
+namespace vcs_ReadWrite_Barcode3.Properties
 {
 
 
