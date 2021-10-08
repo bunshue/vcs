@@ -501,6 +501,21 @@ namespace 真的只是一個測試1
 
         private void button14_Click(object sender, EventArgs e)
         {
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo d in allDrives)
+            {
+                richTextBox1.Text += "Drive : " + d.Name + "\tFile type : " + d.DriveType + "\n";
+            }
+
+            foreach (DriveInfo d in allDrives)
+            {
+                //жU
+                if (d.DriveType == DriveType.Removable)
+                {
+                    richTextBox1.Text += "Removable Device : " + d.Name + "\n";
+                }
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)

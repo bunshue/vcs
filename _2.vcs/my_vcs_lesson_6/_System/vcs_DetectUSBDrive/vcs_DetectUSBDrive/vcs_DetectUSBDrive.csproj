@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B2E9FC74-63F0-4805-B131-4658581B13E1}</ProjectGuid>
+    <ProjectGuid>{E13A593B-8A28-46F3-8BCE-3B51A6AA19E4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ReadWrite_Barcode3</RootNamespace>
-    <AssemblyName>vcs_ReadWrite_Barcode3</AssemblyName>
+    <RootNamespace>vcs_DetectUSBDrive</RootNamespace>
+    <AssemblyName>vcs_DetectUSBDrive</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="USBMonitor.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

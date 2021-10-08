@@ -231,6 +231,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(155, 55);
             this.button14.TabIndex = 15;
+            this.button14.Text = "偵測裝置型態";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

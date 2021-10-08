@@ -7,10 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_ReadWrite_Barcode3
+//使用ZXing
+using System.IO;
+using System.Drawing.Imaging;   //for ImageFormat
+
+using ZXing;
+using ZXing.QrCode;
+using ZXing.Common;
+using System.Text.RegularExpressions;
+using ZXing.QrCode.Internal;
+
+//使用NBarcodes
+using NBarCodes;
+
+namespace vcs_ReadWrite_Barcode
 {
     public partial class Form1 : Form
     {
+        /*
+        Bitmap bitmap1 = null;
+        Bitmap bitmap2 = null;
+        */
+
         public Form1()
         {
             InitializeComponent();
@@ -23,6 +41,7 @@ namespace vcs_ReadWrite_Barcode3
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //製作一維條碼 自己畫
             //製作一維條碼
             string aaaaa = "abcdefg";
             int h = 100;
@@ -132,5 +151,59 @@ namespace vcs_ReadWrite_Barcode3
             objGraphics.DrawString(BarCodeText, barCodeTextFont, Brushes.Black, rect, sf);
             return objBitmap;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //製作一維條碼 使用ZXing
+            /*
+            //要轉成QRCode 的內容
+            string content = richTextBox1.Text;
+            //儲存圖片
+            string filename1 = Application.StartupPath + "\\qr_code_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
+            string filename2 = Application.StartupPath + "\\qr_code_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+
+            bitmap1.Save(filename1, ImageFormat.Png);
+            bitmap1.Save(filename2, ImageFormat.Jpeg);
+            //顯示在畫面中
+            pictureBox2.Image = bitmap1;
+            */
+
+            string contents = "123456";
+            string path = @"C:\dddddddddd\";
+            string result = CreateBarCode(contents, path);
+            richTextBox1.Text += result + "\n";
+
+        }
+
+        /// <summary>
+        /// 一維碼生成
+        /// </summary>
+        public static string CreateBarCode(string contents, string tempPath)
+        {
+            EncodingOptions options = null;
+            BarcodeWriter writer = null;
+            options = new EncodingOptions { Width = 200, Height = 200 };
+            writer = new BarcodeWriter();
+            writer.Format = BarcodeFormat.ITF;
+            writer.Options = options;
+            Bitmap bitmap = writer.Write(contents);
+            string fileName = Guid.NewGuid().ToString() + ".png";
+            bitmap.Save(tempPath + fileName);
+            return fileName;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //製作一維條碼 使用NBarcodes
+            //產生Code128
+            NBarCodes.BarCodeSettings bs = new BarCodeSettings();
+            bs.Type = BarCodeType.Code128;
+            bs.Data = "4710085221226";
+
+            BarCodeGenerator generator = new BarCodeGenerator(bs);
+            Image image = generator.GenerateImage();
+            pictureBox3.Image = image;
+        }
     }
 }
+

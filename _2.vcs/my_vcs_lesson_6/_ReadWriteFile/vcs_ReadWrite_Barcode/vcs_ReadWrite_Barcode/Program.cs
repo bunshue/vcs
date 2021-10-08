@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ReadWrite_Barcode2
+namespace vcs_ReadWrite_Barcode
 {
     static class Program
     {

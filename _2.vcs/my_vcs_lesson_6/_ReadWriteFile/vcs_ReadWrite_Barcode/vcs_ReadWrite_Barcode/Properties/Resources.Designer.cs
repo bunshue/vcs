@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_ReadWrite_Barcode3.Properties
+namespace vcs_ReadWrite_Barcode.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace vcs_ReadWrite_Barcode3.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_ReadWrite_Barcode3.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_ReadWrite_Barcode.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
