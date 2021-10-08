@@ -47,12 +47,18 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label_run = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label_run2 = new System.Windows.Forms.Label();
+            this.timer_right = new System.Windows.Forms.Timer(this.components);
+            this.timer_left = new System.Windows.Forms.Timer(this.components);
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(585, 170);
+            this.label4.Location = new System.Drawing.Point(585, 186);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 12);
             this.label4.TabIndex = 20;
@@ -61,7 +67,7 @@
             // lblRotated3
             // 
             this.lblRotated3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblRotated3.Location = new System.Drawing.Point(375, 280);
+            this.lblRotated3.Location = new System.Drawing.Point(375, 296);
             this.lblRotated3.Name = "lblRotated3";
             this.lblRotated3.Size = new System.Drawing.Size(22, 45);
             this.lblRotated3.TabIndex = 19;
@@ -70,7 +76,7 @@
             // lblRotated2
             // 
             this.lblRotated2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblRotated2.Location = new System.Drawing.Point(375, 235);
+            this.lblRotated2.Location = new System.Drawing.Point(375, 251);
             this.lblRotated2.Name = "lblRotated2";
             this.lblRotated2.Size = new System.Drawing.Size(22, 45);
             this.lblRotated2.TabIndex = 18;
@@ -79,7 +85,7 @@
             // lblRotated1
             // 
             this.lblRotated1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblRotated1.Location = new System.Drawing.Point(375, 190);
+            this.lblRotated1.Location = new System.Drawing.Point(375, 206);
             this.lblRotated1.Name = "lblRotated1";
             this.lblRotated1.Size = new System.Drawing.Size(22, 45);
             this.lblRotated1.TabIndex = 17;
@@ -88,7 +94,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(528, 170);
+            this.label3.Location = new System.Drawing.Point(528, 186);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 12);
             this.label3.TabIndex = 16;
@@ -97,7 +103,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(471, 170);
+            this.label2.Location = new System.Drawing.Point(471, 186);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 12);
             this.label2.TabIndex = 15;
@@ -106,7 +112,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(414, 170);
+            this.label1.Location = new System.Drawing.Point(414, 186);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 12);
             this.label1.TabIndex = 14;
@@ -204,7 +210,7 @@
             // 
             this.label_run.AutoSize = true;
             this.label_run.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label_run.Location = new System.Drawing.Point(74, 146);
+            this.label_run.Location = new System.Drawing.Point(36, 113);
             this.label_run.Name = "label_run";
             this.label_run.Size = new System.Drawing.Size(69, 19);
             this.label_run.TabIndex = 29;
@@ -220,11 +226,65 @@
             this.label6.TabIndex = 30;
             this.label6.Text = "AutoSize=False 可以設定Label的Size";
             // 
+            // label_run2
+            // 
+            this.label_run2.AutoSize = true;
+            this.label_run2.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_run2.Location = new System.Drawing.Point(36, 142);
+            this.label_run2.Name = "label_run2";
+            this.label_run2.Size = new System.Drawing.Size(219, 19);
+            this.label_run2.TabIndex = 31;
+            this.label_run2.Text = "Label文字向右向左移動";
+            // 
+            // timer_right
+            // 
+            this.timer_right.Interval = 150;
+            this.timer_right.Tick += new System.EventHandler(this.timer_right_Tick);
+            // 
+            // timer_left
+            // 
+            this.timer_left.Interval = 150;
+            this.timer_left.Tick += new System.EventHandler(this.timer_left_Tick);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(662, 63);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(40, 40);
+            this.button6.TabIndex = 34;
+            this.button6.Text = "暫停";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(712, 63);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(40, 40);
+            this.button7.TabIndex = 33;
+            this.button7.Text = "向右";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(612, 63);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(40, 40);
+            this.button8.TabIndex = 32;
+            this.button8.Text = "向左";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 628);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.label_run2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label_run);
             this.Controls.Add(this.button5);
@@ -271,6 +331,12 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label_run;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label_run2;
+        private System.Windows.Forms.Timer timer_right;
+        private System.Windows.Forms.Timer timer_left;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
     }
 }
 

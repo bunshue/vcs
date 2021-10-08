@@ -28,6 +28,10 @@ namespace vcs_Label
             lblRotated2.Visible = false;
             lblRotated3.Visible = false;
             label_run.Text = DateTime.Now.ToString();
+
+            //向右
+            this.timer_left.Stop();
+            this.timer_right.Start();
         }
 
         // Draw rotated text.
@@ -145,6 +149,47 @@ namespace vcs_Label
             int H = this.ClientSize.Height;
             label_run.Left = W / 2;
             label_run.Top = H / 2;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //向右
+            this.timer_left.Stop();
+            this.timer_right.Start();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //向左
+            this.timer_right.Stop();
+            this.timer_left.Start();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //暫停
+            this.timer_right.Stop();
+            this.timer_left.Stop();
+        }
+
+        private void timer_right_Tick(object sender, EventArgs e)
+        {
+            //向右
+            this.label_run2.Left += 8;  //向右移動3個像素
+            if (this.label_run2.Left > this.Width)
+            {
+                this.label_run2.Left = 0 - label_run2.Width;   //標簽左位置為當前控件寬度
+            }
+        }
+
+        private void timer_left_Tick(object sender, EventArgs e)
+        {
+            //向左
+            this.label_run2.Left -= 8;  //向右移動3個像素
+            if (this.label_run2.Right < 0)
+            {
+                this.label_run2.Left = this.Width;   //標簽左位置為當前控件寬度
+            }
         }
     }
 }

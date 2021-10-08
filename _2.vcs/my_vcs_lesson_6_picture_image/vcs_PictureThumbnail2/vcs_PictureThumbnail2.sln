@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PictureThumbnail2", "vcs_PictureThumbnail2\vcs_PictureThumbnail2.csproj", "{20632151-7AE1-436C-A510-B3B8F8AE32E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20632151-7AE1-436C-A510-B3B8F8AE32E5}.Debug|x86.ActiveCfg = Debug|x86
+		{20632151-7AE1-436C-A510-B3B8F8AE32E5}.Debug|x86.Build.0 = Debug|x86
+		{20632151-7AE1-436C-A510-B3B8F8AE32E5}.Release|x86.ActiveCfg = Release|x86
+		{20632151-7AE1-436C-A510-B3B8F8AE32E5}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
