@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+using System.Diagnostics;   //for Process
+
+namespace vcs_Process5
+{
+    public partial class Form1 : Form
+    {
+        string program_name = "AMCAP";
+
+        private Process[] MyProcesses;
+        bool flag_EnableRaisingEvents = false;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //C# 跨 Thread 存取 UI
+            Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
+
+            richTextBox1.Text += "偵測程式 : " + program_name + "\n";
+        }
+
+        private void myprocess_Exited(object sender, EventArgs e)//被觸發的程序
+        {
+            richTextBox1.Text += "偵測到程式 " + program_name + " 被關閉了\n";
+            flag_EnableRaisingEvents = false;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            MyProcesses = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程
+            foreach (Process myprocess in MyProcesses)
+            {
+                //richTextBox1.Text += myprocess.ProcessName + "\r\n";
+                if (flag_EnableRaisingEvents == false)
+                {
+                    if (myprocess.ProcessName.ToLower() == program_name.ToLower())
+                    {
+                        flag_EnableRaisingEvents = true;
+                        richTextBox1.Text += "偵測到程式 " + program_name + " 被開啟\n";
+                        myprocess.EnableRaisingEvents = true;//設置進程終止時觸發的時間
+                        myprocess.Exited += new EventHandler(myprocess_Exited);//發現外部程序關閉即觸發方法myprocess_Exited
+                    }
+                }
+            }
+        }
+    }
+}

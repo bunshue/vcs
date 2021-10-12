@@ -1,4 +1,68 @@
 
+            richTextBox1.Text += "string.PadLeft 字串統一長度或補字元\n";
+            int a = 15;
+            string s1 = a.ToString().PadLeft(10, '-');
+            richTextBox1.Text += s1 + "\n";
+
+            string s2 = string.Format("{0:00000}", Convert.ToInt16(a));
+            richTextBox1.Text += s2 + "\n";
+
+
+
+
+
+            //System.Text.StringBuilder("")
+            //字元串相加，（+號是不是也一樣？）
+            System.Text.StringBuilder sb = new System.Text.StringBuilder("");
+            sb.Append("AB");
+            sb.Append("CD");
+            sb.Append("EFG");
+
+            richTextBox1.Text += sb + "\n";
+
+
+
+設定資料到剪貼簿
+                Clipboard.SetText(textBox1.Text);
+                MessageBox.Show("已成功將文本框內容復制到剪貼板!");
+                
+從剪貼簿取得資料
+            string txt2 = textBox2.Text;
+            try
+            {
+                IDataObject iData = Clipboard.GetDataObject();
+                if (iData.GetDataPresent(DataFormats.Text))
+                {
+                    //MessageBox.Show((string)iData.GetData(DataFormats.Text));
+                    textBox2.Text = (string)iData.GetData(DataFormats.UnicodeText);
+                }
+                else
+                {
+                    MessageBox.Show("目前剪貼板中數據不可轉換為文本", "錯誤");
+                }
+            }
+            
+                            
+
+String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 
+如:
+
+（1）
+string p1 = "Jackie";
+string p2 = "Aillo";
+Response.Write(String.Format("Hello {0}, I'm {1}", p1, p2));
+（2）
+Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
+
+
+求取字母的ASCII值
+
+            Console.Write("輸入一個字符："); 
+            char c = Console.ReadKey().KeyChar; 
+            Console.WriteLine("\r\n字符{0}的ASCII值是：{1}", c, (int)c); 
+            Console.ReadKey(false); 
+
+
 
 DataGridView 指定欄位排序
 

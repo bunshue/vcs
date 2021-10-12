@@ -188,9 +188,9 @@ namespace vcs_Draw9_Example
         {
             Color color_background = Color.Blue;
             Color color_foreground = Color.Black;
-            Font f = new Font("Times New Roman", 20F);
-            int width = 50;
-            int boder_size = 5; //寫0為無邊框
+            Font f = new Font("Times New Roman", 200F);
+            int width = 500;
+            int boder_size = 50; //寫0為無邊框
 
             richTextBox1.Text += "製作數字球並存檔\n";
             richTextBox1.Text += "背景色\t" + color_background + "\n";
@@ -199,20 +199,35 @@ namespace vcs_Draw9_Example
             richTextBox1.Text += "大小\t" + width + "\n";
             richTextBox1.Text += "框線大小\t" + boder_size.ToString() + "\n";
 
-            int first = 3;
-            int last = 6;
+            int number_st = 3;
+            int number_sp = 6;
 
-            pictureBox1.Image = MakeNumberBitmap(width, color_background, color_foreground, boder_size, f, last.ToString());
+            //只顯示最後一張數字球
+            pictureBox1.Image = MakeNumberBitmap(width, color_background, color_foreground, boder_size, f, number_sp.ToString());
 
+            //製作數字球檔案
             int i;
-            // Make the files.
-            for (i = first; i <= last; i++)
+            for (i = number_st; i <= number_sp; i++)
             {
                 // Make the file.
-                Bitmap bm = MakeNumberBitmap(width, color_background, color_foreground, boder_size, f, i.ToString());
+                Bitmap bitmap1 = MakeNumberBitmap(width, color_background, color_foreground, boder_size, f, i.ToString());
 
-                // Save the file.
-                bm.Save("Number" + i.ToString() + ".png", ImageFormat.Png);
+                //用PNG可以避免黑邊框
+                string filename = Application.StartupPath + "\\Number_" + i.ToString() + ".png";
+                try
+                {
+                    //bitmap1.Save(filename, ImageFormat.Jpeg);
+                    //bitmap1.Save(filename, ImageFormat.Bmp);
+                    bitmap1.Save(filename, ImageFormat.Png);
+
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
             }
             richTextBox1.Text += "完成\n";
         }
