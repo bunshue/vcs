@@ -1,4 +1,122 @@
 
+C# WindowsMediaPlayer 的一些用法
+
+播放單首歌曲
+
+                player.URL = 
+
+添加多首歌曲到播放列表
+
+            IWMPPlaylist playList = player.playlistCollection.newPlaylist(); 
+ (DataRow drItem = player.newMedia(drItem[].ToString()); 
+=
+
+ 或者直接在當前列表上添加
+
+ (DataRow drItem = player.newMedia(drItem[].ToString()); 
+
+
+設置播放器音量
+
+ player.settings.volume=;
+
+
+ 設置循環播放
+
+player.settings.setMode(, );
+
+ 
+
+設置隨機播放
+
+
+  player.settings.setMode(, );
+
+
+
+
+C#調用默認浏覽器打開網頁的幾種方法
+
+
+
+
+方法一：從注冊表中讀取默認浏覽器可執行文件路徑
+
+ 
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //從注冊表中讀取默認浏覽器可執行文件路徑
+            RegistryKey key = Registry.ClassesRoot.OpenSubKey(@httpshellopencommand);
+            string s = key.GetValue().ToString();
+
+            //s就是你的默認浏覽器，不過後面帶了參數，把它截去，不過需要注意的是：不同的浏覽器後面的參數不一樣！
+            //D:Program Files (x86)GoogleChromeApplicationchrome.exe -- %1
+            System.Diagnostics.Process.Start(s.Substring(0, s.Length - 8), http://blog.csdn.net/testcs_dn);
+        }
+方法二：
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //調用系統默認的浏覽器 
+            System.Diagnostics.Process.Start(explorer.exe, http://blog.csdn.net/testcs_dn);
+        }
+方法三：
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //調用系統默認的浏覽器 
+            System.Diagnostics.Process.Start(http://blog.csdn.net/testcs_dn);
+        }
+
+方法四：調用IE浏覽器
+
+ 
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //調用IE浏覽器  
+            System.Diagnostics.Process.Start(iexplore.exe, http://blog.csdn.net/testcs_dn);
+        }
+
+從原理上來講，方法二和方法三應該是一樣的，不過方法三的代碼更短一點。 
+
+
+
+
+命令行msinfo32
+
+
+三、添加office相關引用
+Microsoft.Office.Interop.Word 12.0.0.0
+
+
+
+
+
+using System.Data.OleDb;
+using System.Data.SqlClient;
+using System.IO;
+using Microsoft.Office.Core;
+using Word=Microsoft.Office.Interop.Word;
+using System.Reflection;
+
+如果其路徑包含後綴名的話，要取得後綴名，只需要一行代碼即可：
+1 var ext = System.IO.Path.GetExtension("C:\\soar.jpg");
+
+
+
+
+
+
+用C#獲取硬盤ID編號
+在軟件產品中常常需要制作軟件注冊碼，而根據硬件產品編號制作注冊碼是一個不錯得選擇。可以使用讀取注冊表的方式獲得第一塊硬盤的編號。 主要程序代碼。
+
+private void button1_Click(object sender, EventArgs e)
+{
+    textBox1.Text = Registry.GetValue("HKEY_Local_Machine\\HardWare\\Devicemap\\Scsi\\Scsi port 0\\Scsi Bus 0\\Target Id 1\\Logical Unit Id 0","Identifier","cuowu").ToString();
+}
+
+
+
             richTextBox1.Text += "string.PadLeft 字串統一長度或補字元\n";
             int a = 15;
             string s1 = a.ToString().PadLeft(10, '-');
