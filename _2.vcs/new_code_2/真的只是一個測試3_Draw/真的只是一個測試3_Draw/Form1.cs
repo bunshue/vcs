@@ -159,10 +159,102 @@ namespace 真的只是一個測試3_Draw
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string ccc = "this is a lion-mouse";
+            CreateImage(ccc);
+        }
+
+        //彩色驗證碼
+        private void CreateImage(string checkCode)
+        {
+            int W = checkCode.Length * 15;
+            int H = 50;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            //定義顏色
+            Color[] c = { Color.Black, Color.Red, Color.DarkBlue, Color.Green, Color.Orange, Color.Brown, Color.DarkCyan, Color.Purple };
+            //定義字體
+            string[] font = {"Verdana","Microsoft Sans Serif","Comic Sans MS","Arial","宋體"};
+            Random rand = new Random();
+            //隨機輸出噪點
+            for (int i = 0; i < 50; i++)
+            {
+                int x = rand.Next(bitmap1.Width);
+                int y = rand.Next(bitmap1.Height);
+                g.DrawRectangle(new Pen(Color.LightGray, 0), x, y, 1, 1);
+            }
+
+            //輸出不同字體和顏色的驗證碼字符
+            for (int i = 0; i < checkCode.Length; i++)
+            {
+                int cindex = rand.Next(7);
+                int findex = rand.Next(5);
+
+                Font f = new Font(font[findex], 15, FontStyle.Bold);
+                Brush b = new SolidBrush(c[cindex]);
+                int ii = 4;
+                if ((i + 1) % 2 == 0)
+                {
+                    ii = 2;
+                }
+                g.DrawString(checkCode.Substring(i, 1), f, b, 3 + (i * 12), ii);
+            }
+            //畫一個邊框
+            g.DrawRectangle(new Pen(Color.Black, 0), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
+
+            g.Dispose();
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //製作驗證碼3
+            //C#生成驗證碼例子及代碼
+
+            Random r = new Random();
+            string str = "";
+            for (int i = 0; i < 5; i++)
+            {
+                int rNumber = r.Next(0, 10);
+                str += rNumber;
+            }
+
+            //創建一個圖片對象
+            Bitmap bmp = new Bitmap(120, 25);
+            //創建GDI對象
+            Graphics g = Graphics.FromImage(bmp);
+            // MessageBox.Show(str);
+
+            string[] fonts = { "黑體", "楷體", "微軟雅黑", "宋體", "隸書" };
+            Color[] colors = { Color.Red, Color.Yellow, Color.Blue, Color.Black, Color.Green };
+
+            for (int i = 0; i < 5; i++)
+            {
+                Point p = new Point(i * 20, 0);//0,0 20 0
+                g.DrawString(str[i].ToString(), new Font(fonts[r.Next(0, 5)], 20, FontStyle.Bold), new SolidBrush(colors[r.Next(0, 5)]), p);
+            }
+
+            //畫線
+            for (int i = 0; i < 25; i++)
+            {
+                Point p1 = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
+                Point p2 = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
+                g.DrawLine(new Pen(Color.Green), p1, p2);
+            }
+
+            //畫像素顆粒
+            for (int i = 0; i < 100; i++)
+            {
+                Point p = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
+                bmp.SetPixel(p.X, p.Y, Color.Black);
+            }
+
+            //把畫好的圖片放到PictureBox上
+            pictureBox1.Image = bmp;
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -421,13 +513,13 @@ namespace 真的只是一個測試3_Draw
         /// <param name="bXDir">假如歪曲則選擇為True</param>  
         /// <param name="nMultValue">波形的幅度倍數，越年夜歪曲的水平越高，普通為3</param>  
         /// <param name="dPhase">波形的肇端相位，取值區間[0-2*PI)</param>  
-        private static System.Drawing.Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
+        private static Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
         {
-            System.Drawing.Bitmap destBmp = new Bitmap(srcBmp.Width, srcBmp.Height);
+            Bitmap destBmp = new Bitmap(srcBmp.Width, srcBmp.Height);
 
             // 將位圖配景填充為白色  
-            System.Drawing.Graphics graph = System.Drawing.Graphics.FromImage(destBmp);
-            graph.FillRectangle(new SolidBrush(System.Drawing.Color.White), 0, 0, destBmp.Width, destBmp.Height);
+            Graphics graph = Graphics.FromImage(destBmp);
+            graph.FillRectangle(new SolidBrush(Color.White), 0, 0, destBmp.Width, destBmp.Height);
             graph.Dispose();
 
             double dBaseAxisLen = bXDir ? (double)destBmp.Height : (double)destBmp.Width;
@@ -446,7 +538,7 @@ namespace 真的只是一個測試3_Draw
                     nOldX = bXDir ? i + (int)(dy * dMultValue) : i;
                     nOldY = bXDir ? j : j + (int)(dy * dMultValue);
 
-                    System.Drawing.Color color = srcBmp.GetPixel(i, j);
+                    Color color = srcBmp.GetPixel(i, j);
                     if (nOldX >= 0 && nOldX < destBmp.Width
                      && nOldY >= 0 && nOldY < destBmp.Height)
                     {

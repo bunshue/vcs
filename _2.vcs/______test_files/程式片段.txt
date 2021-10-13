@@ -1,5 +1,19 @@
 
 
+
+//Winform中如何讀取局域網路由的IP地址代碼
+System.Net.WebClient client = new System.Net.WebClient();
+client.Encoding = System.Text.Encoding.Default;
+string lip = client.DownloadString("http://www.ip138.com/ip2city.asp");
+string sip = reply.Substring(reply.IndexOf("您的IP地址是"), reply.IndexOf("</center>") - reply.IndexOf("您的IP地址是"));
+MessageBox.Show(sip);
+
+
+
+//開啟一個程式
+Process newprocess = Process.Start(ofDlg.FileName);//選擇進程
+
+
 C#之讀取web上的xml
 string　sURL　=　"http://localhost:9058/GameServerInfo/XMLFile.xml";
 XDocument　oXDoc　=　XDocument.Load(sURL);
