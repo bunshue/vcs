@@ -98,5 +98,40 @@ namespace vcs_ImageProcessingE
                 pictureBox1.Image = newbitmap.Clone() as Image;
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int Height = this.pictureBox1.Image.Height;
+            int Width = this.pictureBox1.Image.Width;
+            Bitmap bitmap = new Bitmap(Width, Height);
+            Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image;
+            Color pixel;
+            for (int x = 0; x < Width; x++)
+                for (int y = 0; y < Height; y++)
+                {
+                    pixel = MyBitmap.GetPixel(x, y);
+                    int r, g, b, Result = 0;
+                    r = pixel.R;
+                    g = pixel.G;
+                    b = pixel.B;
+                    //實例程序以加權平均值法產生黑白圖像  
+                    int iType = 2;
+                    switch (iType)
+                    {
+                        case 0://平均值法  
+                            Result = ((r + g + b) / 3);
+                            break;
+                        case 1://最大值法  
+                            Result = r > g ? r : g;
+                            Result = Result > b ? Result : b;
+                            break;
+                        case 2://加權平均值法  
+                            Result = ((int)(0.7 * r) + (int)(0.2 * g) + (int)(0.1 * b));
+                            break;
+                    }
+                    bitmap.SetPixel(x, y, Color.FromArgb(Result, Result, Result));
+                }
+            this.pictureBox1.Image = bitmap;
+        }
     }
 }

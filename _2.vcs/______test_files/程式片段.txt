@@ -1,4 +1,13 @@
 
+
+C#之讀取web上的xml
+string　sURL　=　"http://localhost:9058/GameServerInfo/XMLFile.xml";
+XDocument　oXDoc　=　XDocument.Load(sURL);
+
+用C＃實現在客戶區拖動窗體
+
+
+
 C# WindowsMediaPlayer 的一些用法
 
 播放單首歌曲

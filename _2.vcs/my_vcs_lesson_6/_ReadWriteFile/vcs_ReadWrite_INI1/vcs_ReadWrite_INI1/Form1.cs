@@ -21,17 +21,13 @@ namespace vcs_ReadWrite_INI1
         private string filename = "c:\\______test_files\\__RW\\_ini\\vcs_ReadWrite_INI1a.ini";
 
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool WritePrivateProfileString(
-        string lpAppName, string lpKeyName, string lpString, string lpFileName);
+        private static extern bool WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
 
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern int GetPrivateProfileString(
-        string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString,
-        int nSize, string lpFileName);
+        private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern int GetPrivateProfileInt(
-        string lpAppName, string lpKeyName, int lpDefault, string lpFileName);
+        private static extern int GetPrivateProfileInt(string lpAppName, string lpKeyName, int lpDefault, string lpFileName);
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -89,9 +85,7 @@ namespace vcs_ReadWrite_INI1
             richTextBox1.Text += "Read ini data from " + filename + "\n";
 
             //TBD
-
-
         }
-
     }
 }
+
