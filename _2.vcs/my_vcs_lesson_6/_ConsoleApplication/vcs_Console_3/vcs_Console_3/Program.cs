@@ -37,6 +37,7 @@ namespace vcs_Console_3
 
             Console.WriteLine("");
 
+            /*
             Console.WriteLine("<<<兩位數相加>>>");
 
             string input1, input2;
@@ -70,8 +71,26 @@ namespace vcs_Console_3
             Console.WriteLine("請輸入半徑");
             radius = int.Parse(Console.ReadLine());
             Console.WriteLine("所求圓周為" + radius * 2 * pi);
+            */
 
-            Console.Read();
+            Console.WriteLine("測試多型（Polymorphism）");
+            hi();
+
+            hi("lion-mouse");
+
+
+            Console.Read(); //Hold住畫面
+        }
+
+        public static void hi()
+        {
+
+            Console.WriteLine("hi,C Sharp");
+        }
+
+        public static void hi(string name)
+        {
+            Console.WriteLine("hi,{0}", name);
         }
     }
 }

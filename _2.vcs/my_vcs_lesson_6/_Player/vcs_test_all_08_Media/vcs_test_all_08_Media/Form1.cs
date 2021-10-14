@@ -48,13 +48,10 @@ namespace vcs_test_all_08_Media
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
-
-
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7 + 20);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
-
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -102,7 +99,6 @@ namespace vcs_test_all_08_Media
             //sp.SoundLocation = @"F:\_______mp3_ALL_all1\_mp3_0_中英日語文\《遥远的绝响--配乐朗诵余秋雨作品(共4篇)》.赵忠祥.[wav]\02.都江堰.wav";
 
             sp.Stop(); // 停止
-
         }
 
         int number = 0;
@@ -144,9 +140,7 @@ namespace vcs_test_all_08_Media
 
         // API 宣告
         [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
-        public static extern int mciSendString(
-            string lpstrCommand, string lpstrReturnString,
-            int uReturnLength, int hwndCallback);
+        public static extern int mciSendString(string lpstrCommand, string lpstrReturnString, int uReturnLength, int hwndCallback);
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -348,3 +342,4 @@ namespace vcs_test_all_08_Media
         //使用 winmm.DLL 的 PlaySound() 播放.wav檔 SP
     }
 }
+

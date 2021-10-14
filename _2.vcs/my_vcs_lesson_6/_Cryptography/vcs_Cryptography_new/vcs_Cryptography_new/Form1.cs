@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;   //for ImageFormat
-using System.Drawing.Printing;  //for PrintPageEventArgs
+using System.Security.Cryptography; //for CryptoConfig
 
-namespace 真的只是一個測試3_Draw
+namespace vcs_Cryptography_new
 {
     public partial class Form1 : Form
     {
@@ -22,11 +21,7 @@ namespace 真的只是一個測試3_Draw
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-        }
 
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
         }
 
         void show_item_location()
@@ -39,7 +34,7 @@ namespace 真的只是一個測試3_Draw
             //button
             x_st = 12;
             y_st = 12;
-            dx = 165;
+            dx = 200;
             dy = 65;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -64,123 +59,128 @@ namespace 真的只是一個測試3_Draw
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //字串旋轉列印
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.DrawString("彩色轉灰階", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(20, 20));
+            /*
+            MD5簡介： 
+            MD5的全稱是Message-Digest Algorithm 5，在90年代初由MIT的計算機科學實驗室和RSA Data Security Inc發明，
+            經MD2、MD3和MD4發展而來。MD5將任意長度的“字節串”變換成一個128bit的大整數，並且它是一個不可逆的字符串變換算法。
+            換句話說就是，即使你看到源程序和算法描述，也無法將一個MD5的值變換回原始的字符串，
+            從數學原理上說，是因為原始的字符串有無窮多個，這有點象不存在反函數的數學函數。
+            */
 
-            Font f = new Font("標楷體", 50);
-            RotateDeawString(g, f, 35, "旋轉列印字串", 20, 20);
-        }
+            //欲進行md5加密的字符串  
+            string test = "123abc";
 
-        /// <summary>
-        /// 旋轉列印字串
-        /// </summary>
-        /// <param name="e">PrintPageEventArgs</param>
-        /// <param name="font">字型</param>
-        /// <param name="degree">旋轉角度</param>
-        /// <param name="msg">列印訊息</param>
-        /// <param name="x">重設原點 X 位置</param>
-        /// <param name="y">重設原點 Y 位置</param>
-        private void RotateDeawString(Graphics g, Font font, int degree, string msg, int x, int y)
-        {
-            // 原點位置重設
-            g.TranslateTransform(mmTo100InchX(x), mmTo100InchY(y));
-            // 設定旋轉角度
-            g.RotateTransform(degree);
-            // 標題
-            g.DrawString(msg, font, Brushes.Black, mmTo100InchX(0), mmTo100InchY(0));
-            //繪圖畫布還原
-            g.ResetTransform();
-        }
+            //獲取加密服務  
+            System.Security.Cryptography.MD5CryptoServiceProvider md5CSP = new System.Security.Cryptography.MD5CryptoServiceProvider();
 
-        private int mmTo100InchX(int mm)
-        {
-            int times = 100;
-            double result = (mm * times / 25.4);
-            return (int)Math.Floor(result);
-        }
+            //獲取要加密的字段，並轉化為Byte[]數組  
+            byte[] testEncrypt = System.Text.Encoding.Unicode.GetBytes(test);
 
-        private int mmTo100InchY(int mm)
-        {
-            int times = 100;
-            double result = (mm * times / 25.4);
-            return (int)Math.Floor(result);
+            //加密Byte[]數組  
+            byte[] resultEncrypt = md5CSP.ComputeHash(testEncrypt);
+
+            //將加密後的數組轉化為字段(普通加密)  
+            string testResult = System.Text.Encoding.Unicode.GetString(resultEncrypt);
+
+            //作為密碼方式加密   
+            //string Encrypt_PWD = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(test, "MD5");  
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //MD5
+            string ccc = "this is a lion-mouse";
+            string result = EncryptCode(ccc);
+            richTextBox1.Text += result + "\n";
+
+        }
+
+        public static string EncryptCode(string password)
+        {
+            //這裡Hash算法用MD5算法為例，MD5加密是不可逆的，所以只有加密沒有解密。
+            //明文密碼由字符串轉換為byte數組
+            byte[] clearBytes = new UnicodeEncoding().GetBytes(password);
+            //由明文的byte數組計算出MD5密文byte數組
+            byte[] hashedBytes = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(clearBytes);
+
+            //把byte數組轉換為字符串後返回，BitConverter用於將基礎數據類型與字節數組相互轉換
+            return BitConverter.ToString(hashedBytes);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -195,52 +195,14 @@ namespace 真的只是一個測試3_Draw
 
         private void button18_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
 
         }
 
-        private void button21_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-        }
     }
 }
-

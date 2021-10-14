@@ -313,6 +313,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(142, 46);
             this.button22.TabIndex = 24;
+            this.button22.Text = "啟動一個外部程序";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using MediaInfoNET;
 
 using System.Globalization; //for CultureInfo
@@ -194,3 +195,4 @@ namespace vcs_test_all_08_MediaInfo
         }
     }
 }
+

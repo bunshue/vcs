@@ -523,7 +523,41 @@ namespace vcs_Process1
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //啟動一個外部程序
 
+            ProcessStartInfo Info = new ProcessStartInfo();
+            Info.FileName = "notepad.exe";  //設置外部程序名
+            Info.Arguments = "article.txt"; //設置外部程序的啟動參數（命令行參數）為test.txt
+            Info.WorkingDirectory = @"C:\______test_files\__RW\_txt";   //設置外部程序工作目錄
+
+            //創建一個進程
+            Process Proc;
+            try
+            {////啟動外部程序//
+                Proc = Process.Start(Info);
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                Console.WriteLine("系統找不到指定的程序文件。\r{0}", ex);
+                return;
+            }   //打印出外部程序的開始執行時間
+            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
+
+            //等待3秒鐘
+            Proc.WaitForExit(3000);
+
+            //如果這個外部程序沒有結束運行則對其強行終止
+            if (Proc.HasExited == false)
+            {
+                Console.WriteLine("由主程序強行終止外部程序的運行！");
+                Proc.Kill();
+            }
+            else
+            {
+                Console.WriteLine("由外部程序正常退出！");
+            }
+            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
+            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
         }
 
         private void button23_Click(object sender, EventArgs e)

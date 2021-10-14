@@ -1,5 +1,8 @@
 
 
+用預設程式開啟檔案
+Process.Start("explorer.exe", filename);
+
 
 //Winform中如何讀取局域網路由的IP地址代碼
 System.Net.WebClient client = new System.Net.WebClient();

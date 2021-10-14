@@ -751,31 +751,6 @@ namespace 真的只是一個測試1
 
         private void button23_Click(object sender, EventArgs e)
         {
-            /*
-            MD5簡介： 
-            MD5的全稱是Message-Digest Algorithm 5，在90年代初由MIT的計算機科學實驗室和RSA Data Security Inc發明，
-            經MD2、MD3和MD4發展而來。MD5將任意長度的“字節串”變換成一個128bit的大整數，並且它是一個不可逆的字符串變換算法。
-            換句話說就是，即使你看到源程序和算法描述，也無法將一個MD5的值變換回原始的字符串，
-            從數學原理上說，是因為原始的字符串有無窮多個，這有點象不存在反函數的數學函數。
-            */
-
-            //欲進行md5加密的字符串  
-            string test = "123abc";
-
-            //獲取加密服務  
-            System.Security.Cryptography.MD5CryptoServiceProvider md5CSP = new System.Security.Cryptography.MD5CryptoServiceProvider();
-
-            //獲取要加密的字段，並轉化為Byte[]數組  
-            byte[] testEncrypt = System.Text.Encoding.Unicode.GetBytes(test);
-
-            //加密Byte[]數組  
-            byte[] resultEncrypt = md5CSP.ComputeHash(testEncrypt);
-
-            //將加密後的數組轉化為字段(普通加密)  
-            string testResult = System.Text.Encoding.Unicode.GetString(resultEncrypt);
-
-            //作為密碼方式加密   
-            //string Encrypt_PWD = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(test, "MD5");  
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1018,7 +993,6 @@ namespace 真的只是一個測試1
 
 
         //class test SP
-
     }
 }
 
