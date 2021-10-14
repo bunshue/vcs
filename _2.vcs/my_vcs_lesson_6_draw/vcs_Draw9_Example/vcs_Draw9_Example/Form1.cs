@@ -6965,7 +6965,49 @@ namespace vcs_Draw9_Example
 
         private void button46_Click(object sender, EventArgs e)
         {
+            //畫圓角矩形
+            Bitmap bitmap1 = new Bitmap(600, 400);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.FillRectangle(Brushes.Pink, new Rectangle(0, 0, 600, 400));
+            FillRoundRectangle(g, Brushes.Plum, new Rectangle(100, 100, 100, 100), 8);
+            DrawRoundRectangle(g, Pens.Yellow, new Rectangle(100, 100, 100, 100), 8);
+
+            pictureBox1.Image = bitmap1;
+            g.Dispose();
+            //bitmap1.Dispose();
         }
+
+        public static void DrawRoundRectangle(Graphics g, Pen pen, Rectangle rect, int cornerRadius)
+        {
+            using (GraphicsPath path = CreateRoundedRectanglePath(rect, cornerRadius))
+            {
+                g.DrawPath(pen, path);
+            }
+        }
+
+        public static void FillRoundRectangle(Graphics g, Brush brush, Rectangle rect, int cornerRadius)
+        {
+            using (GraphicsPath path = CreateRoundedRectanglePath(rect, cornerRadius))
+            {
+                g.FillPath(brush, path);
+            }
+        }
+
+        internal static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
+        {
+            GraphicsPath roundedRect = new GraphicsPath();
+            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
+            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
+            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
+            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
+            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
+            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
+            roundedRect.CloseFigure();
+            return roundedRect;
+        }
+
     }
 }
 

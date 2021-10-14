@@ -131,19 +131,6 @@ namespace 真的只是一個測試1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //Process 測試
-
-            //取出名字裡有特定字樣的process
-            Process[] processes = Process.GetProcessesByName("firefox");
-
-            //取出所有的process
-            //Process[] processes = Process.GetProcesses();
-            foreach (Process p in processes)
-            {
-                //p.Kill(); 指名刪除這個process
-                richTextBox1.Text += p.ProcessName + "\n";
-            }
-
         }
 
         private void button4_Click(object sender, EventArgs e)

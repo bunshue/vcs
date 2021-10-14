@@ -185,7 +185,9 @@ namespace vcs_Process1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Process.Start("IExplore.exe", "www.google.com.tw");
+            //使用IE
+            //Process.Start("IExplore.exe", "www.google.com.tw");   //same
+            Process.Start("iexplore.exe", "www.google.com.tw");
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -279,17 +281,29 @@ namespace vcs_Process1
         private void button12_Click(object sender, EventArgs e)
         {
             //用預設的程式開啟檔案
-            String pathname = "C:\\______test_files\\aaaaaaa.txt";
+            string filename = "C:\\______test_files\\aaaaaaa.txt";
 
-            if (File.Exists(pathname) == false)
+            if (File.Exists(filename) == false)
             {
-                MessageBox.Show("檔案: " + pathname + "不存在，無法開啟。\n");
+                MessageBox.Show("檔案: " + filename + "不存在，無法開啟。\n");
                 return;
             }
             else
             {
-                Process.Start(pathname);
+                Process.Start(filename);
             }
+
+            //用預設的程式開啟檔案
+            filename = @"C:\______test_files\__RW\_gif\sky.gif";
+
+            Process.Start("explorer.exe", filename);
+            //Process.Start(filename);    //same
+
+            //開啟一個程式
+            //Process newprocess = Process.Start(filename);
+
+
+
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -562,12 +576,43 @@ namespace vcs_Process1
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //Process 測試
+
+            //取出名字裡有特定字樣的process
+            Process[] processes = Process.GetProcessesByName("firefox");
+
+            //取出所有的process
+            //Process[] processes = Process.GetProcesses();
+            foreach (Process p in processes)
+            {
+                //p.Kill(); 指名刪除這個process
+                richTextBox1.Text += p.ProcessName + "\n";
+            }
+
 
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //執行外部.EXE檔 並獲取結果
+            //相當於輸入 cmd/netstat -an, 並獲取輸出的結果
 
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo("cmd.exe");
+            startInfo.UseShellExecute = false;
+            process.StartInfo = startInfo;
+            process.StartInfo.RedirectStandardInput = true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.Start();
+
+            process.StandardInput.WriteLine("netstat -an");
+            process.StandardInput.WriteLine("exit");
+
+            string netMessage = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+            process.Close();
+
+            richTextBox1.Text += netMessage + "\n";
         }
 
         private void button25_Click(object sender, EventArgs e)

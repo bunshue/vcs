@@ -16,10 +16,10 @@ namespace vcs_AMCap
 {
     public partial class Form1 : Form
     {
-                                        bool flag_show_time = true;     //顯示時間
-                                        bool flag_show_grid = true;     //顯示格線
-                                        bool flag_invert = false;        //反相, SC700需要反相
-                                        bool flag_auto_save = false;    //自動存檔
+        bool flag_show_time = true;     //顯示時間
+        bool flag_show_grid = true;     //顯示格線
+        bool flag_invert = false;        //反相, SC700需要反相
+        bool flag_auto_save = false;    //自動存檔
 
         //參考
         //【AForge.NET】C#上使用AForge.Net擷取視訊畫面

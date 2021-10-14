@@ -1271,12 +1271,14 @@
             // 
             // button53
             // 
-            this.button53.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button53.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button53.Location = new System.Drawing.Point(457, 353);
             this.button53.Name = "button53";
             this.button53.Size = new System.Drawing.Size(164, 46);
             this.button53.TabIndex = 76;
+            this.button53.Text = "根據年月日計算星期幾的函數";
             this.button53.UseVisualStyleBackColor = true;
+            this.button53.Click += new System.EventHandler(this.button53_Click);
             // 
             // button54
             // 
@@ -1285,7 +1287,9 @@
             this.button54.Name = "button54";
             this.button54.Size = new System.Drawing.Size(164, 46);
             this.button54.TabIndex = 77;
+            this.button54.Text = "取得時辰";
             this.button54.UseVisualStyleBackColor = true;
+            this.button54.Click += new System.EventHandler(this.button54_Click);
             // 
             // button55
             // 

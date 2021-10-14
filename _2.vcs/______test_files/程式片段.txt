@@ -1,7 +1,53 @@
 
 
-用預設程式開啟檔案
-Process.Start("explorer.exe", filename);
+在不設置Cookie、PostData的情況下要獲得一個頁面 的HTML的方法很簡單：
+
+public static string GetHtml(string URL)
+　 　　　{
+　　　　　　WebRequest wrt;
+　　　　　　wrt = WebRequest.Create(URL);
+　　　　　　wrt.Credentials = CredentialCache.DefaultCredentials;
+　　　　　　WebResponse wrp;
+　　　 　　　wrp = wrt.GetResponse();
+　　　　　　return new StreamReader (wrp.GetResponseStream(), Encoding.Default).ReadToEnd();
+　　　　} 
+
+
+
+地支時間與現在時間的對應關系：
+
+【子時】夜半，又名子夜、中夜：十二時辰的第一個時辰。（23時至次日01時）。
+
+【丑時】雞鳴，又名荒雞：十二時辰的第二個時辰。（01時至03時）。
+
+【寅時】平旦，又稱黎明、早晨、日旦等：時是夜與日的交替之際。（03時至05時）。
+
+【卯時】日出，又名日始、破曉、旭日等：指太陽剛剛露臉，冉冉初升的那段時間。（05 時至07時）。
+
+【辰時】食時，又名早食等：古人“朝食”之時也就是吃早飯時間，（07時至 09時）。
+
+【巳時】隅中，又名日禺等：臨近中午的時候稱為隅中。（09時至11時）。
+
+【午時】日中，又名日正、中午等：（11時至13時）。
+
+【未時】日昳，又名日跌、日央等：太陽偏西為日跌。（13時至15時）。
+
+【申時】哺時，又名日鋪、夕食等：（15時至17時）。
+
+【酉時】日入，又名日落、日沉、傍晚：意為太陽落山的時候。（17時至19時）。　
+
+【戌時】黃昏，又名日夕、日暮、日晚等：此時太陽已經落山，天將黑未黑。天地昏黃，萬物朦胧 ，故稱黃昏。（19時至21時）。
+
+【亥時】人定，又名定昏等：此時夜色已深，人們也已經停止活動，安歇睡眠了。人定也就是人靜 。（21時至23時）。
+
+
+
+
+開關檔案 使用指定的編碼
+StreamWriter outStream = new StreamWriter( filepath,false,System.Text.Encoding.GetEncoding( 950 ) );
+using ( StreamReader sr = new StreamReader( filepath,System.Text.Encoding.GetEncoding( 936 ) ) )
+
+
 
 
 //Winform中如何讀取局域網路由的IP地址代碼
@@ -10,11 +56,6 @@ client.Encoding = System.Text.Encoding.Default;
 string lip = client.DownloadString("http://www.ip138.com/ip2city.asp");
 string sip = reply.Substring(reply.IndexOf("您的IP地址是"), reply.IndexOf("</center>") - reply.IndexOf("您的IP地址是"));
 MessageBox.Show(sip);
-
-
-
-//開啟一個程式
-Process newprocess = Process.Start(ofDlg.FileName);//選擇進程
 
 
 C#之讀取web上的xml
@@ -95,13 +136,6 @@ C#調用默認浏覽器打開網頁的幾種方法
 
 方法四：調用IE浏覽器
 
- 
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //調用IE浏覽器  
-            System.Diagnostics.Process.Start(iexplore.exe, http://blog.csdn.net/testcs_dn);
-        }
 
 從原理上來講，方法二和方法三應該是一樣的，不過方法三的代碼更短一點。 
 
@@ -253,18 +287,10 @@ using System.Media;
             string filename = @"C:\______test_files\_wav\start.wav";
             SoundPlayer sp = new SoundPlayer(filename);
             sp.Play();
-
         
         
-        
-      //挪用IE閱讀器 
-      System.Diagnostics.Process.Start("iexplore.exe", "http://www.谷歌.cn");  
- 
       //挪用體系默許的閱讀器 
       System.Diagnostics.Process.Start( "http://www.谷歌.cn");  
-
-
-
 
 
             string foldername = @"C:\______test_files\_pic";
@@ -323,18 +349,6 @@ Console.WriteLine("十六進制 CC的十進制表示: "+Convert.ToInt32("CC", 16
 
  C# 修改啟始Form [複製鏈接]
 打開program.cs，修改Application.Run(new Form1());，將Form1改為要啟始的頁面即可!
-
-
-        // ===  按 [使用小算盤] 鈕執行
-        private void btnOpenCal_Click(object sender, EventArgs e)
-        {
-            //開啟小算盤應用程式
-            System.Diagnostics.Process.Start("C:\\WINDOWS\\system32\\calc.exe");
-
-        }
-
-
-
 
 
 網際網路時間伺服器，

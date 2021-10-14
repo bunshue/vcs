@@ -29,6 +29,11 @@ namespace vcs_test_all_00_Control
         int H = 0;
         //移動控件 SP
 
+        //在控件上加ToolTip
+        ToolTip tooltip1 = new ToolTip();
+        ToolTip tooltip2 = new ToolTip();
+        ToolTip tooltip3 = new ToolTip();
+
         public Form1()
         {
             InitializeComponent();
@@ -80,6 +85,29 @@ namespace vcs_test_all_00_Control
 
             Opacity = 0;//指定窗體完全透明
             timer2.Enabled = true;
+
+
+            //使用ToolTip
+            tooltip1.SetToolTip(button41, "在控件上加ToolTip 41");
+            tooltip1.ToolTipIcon = ToolTipIcon.Info;	//ToolTipIcon:取得或設定值,以便定義要顯示在工具提示文字旁的圖示類型
+            tooltip1.ForeColor = Color.Blue;	//ForeColor:取得或設定工具提示的前景色彩
+            tooltip1.BackColor = Color.LightGray;	//BackColor:取得或設定工具提示的背景色彩.
+            tooltip1.AutoPopDelay = 5000;	//AutoPopDelay:當指標靜止於控制項上時,ToolTip 保持可見的時間 (以毫秒為單位).預設值為 5000.
+            tooltip1.ToolTipTitle = "vcs";	//ToolTipTitle:取得或設定工具提示視窗的標題.
+
+            tooltip2.SetToolTip(button42, "在控件上加ToolTip 42");
+            tooltip2.ToolTipIcon = ToolTipIcon.Info;	//ToolTipIcon:取得或設定值,以便定義要顯示在工具提示文字旁的圖示類型
+            tooltip2.ForeColor = Color.Blue;	//ForeColor:取得或設定工具提示的前景色彩
+            tooltip2.BackColor = Color.LightGray;	//BackColor:取得或設定工具提示的背景色彩.
+            tooltip2.AutoPopDelay = 5000;	//AutoPopDelay:當指標靜止於控制項上時,ToolTip 保持可見的時間 (以毫秒為單位).預設值為 5000.
+            tooltip2.ToolTipTitle = "vcs";	//ToolTipTitle:取得或設定工具提示視窗的標題.
+
+            tooltip3.SetToolTip(button43, "在控件上加ToolTip 43");
+            tooltip3.ToolTipIcon = ToolTipIcon.Info;	//ToolTipIcon:取得或設定值,以便定義要顯示在工具提示文字旁的圖示類型
+            tooltip3.ForeColor = Color.Blue;	//ForeColor:取得或設定工具提示的前景色彩
+            tooltip3.BackColor = Color.LightGray;	//BackColor:取得或設定工具提示的背景色彩.
+            tooltip3.AutoPopDelay = 5000;	//AutoPopDelay:當指標靜止於控制項上時,ToolTip 保持可見的時間 (以毫秒為單位).預設值為 5000.
+            tooltip3.ToolTipTitle = "vcs";	//ToolTipTitle:取得或設定工具提示視窗的標題.
         }
 
         // 做出 去背景 的效果

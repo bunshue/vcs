@@ -323,6 +323,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(142, 46);
             this.button23.TabIndex = 24;
+            this.button23.Text = "Process 測試";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -332,6 +333,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(142, 46);
             this.button24.TabIndex = 25;
+            this.button24.Text = "執行外部.EXE檔 並獲取結果";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

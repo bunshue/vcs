@@ -53,6 +53,7 @@ namespace vcs_ReadWrite_GIF
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "讀GIF 做成PNG\n";
             string filename = @"C:\______test_files\__RW\_gif\sky.gif";
             string dirname = Application.StartupPath + "\\gif_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
@@ -64,6 +65,7 @@ namespace vcs_ReadWrite_GIF
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "讀PNG 做成GIF\n";
             string dirname = @"C:\______test_files\__RW\_gif\png2gif";
             string filename = Application.StartupPath + "\\gif_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gif";
 

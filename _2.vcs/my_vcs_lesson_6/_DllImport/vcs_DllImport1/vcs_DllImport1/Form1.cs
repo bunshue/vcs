@@ -16,11 +16,13 @@ namespace vcs_DllImport1
         #region 取得目前的桌面路徑
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int SystemParametersInfo(int uAction, int uParam, StringBuilder lpvParam, int fuWinIni);
-
         private const int SPI_GETDESKWALLPAPER = 0x0073;
         #endregion 
 
-
+        #region 取系統的硬盤分區的盤符，用API函數：GetDriveType
+        [DllImport("kernel32.dll", EntryPoint = "GetDriveType")]
+        public static extern int GetDriveType(string nDrive);
+        #endregion
 
         public Form1()
         {
@@ -93,7 +95,20 @@ namespace vcs_DllImport1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string[] dirs = Environment.GetLogicalDrives(); //取得所有的盤符
 
+            foreach (string dir in dirs)
+            {
+                richTextBox1.Text += dir + "\tType : " + GetDriveType(dir).ToString();
+                if (GetDriveType(dir) == 3)
+                {
+                    richTextBox1.Text += "\t硬碟\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "\n";
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

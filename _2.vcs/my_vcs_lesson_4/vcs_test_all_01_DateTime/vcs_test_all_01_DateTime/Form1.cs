@@ -1735,7 +1735,66 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Month, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 月\n";
             richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Day, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 天\n";
         }
+
+        private void button53_Click(object sender, EventArgs e)
+        {
+            string result;
+            //根據年月日計算星期幾的函數
+            result = CalculateWeekDay(2021, 10, 14);
+            richTextBox1.Text += "日期 " + DateTime.Parse("2021/10/14").ToString() + "\t" + result + "\n";
+
+            result = CalculateWeekDay(1941, 12, 7);
+            richTextBox1.Text += "日期 " + DateTime.Parse("1941/12/7").ToString() + "\t" + result + "\n";
+
+            result = CalculateWeekDay(2006, 3, 11);
+            richTextBox1.Text += "日期 " + DateTime.Parse("2006/3/11").ToString() + "\t" + result + "\n";
+        }
+
+        //根據年月日計算星期幾的函數
+        //基姆拉爾森計算公式, 外文名是Kim larsen calculation formula。
+
+        //在公式中d表示日期中的日數，m表示月份數，y表示年數。注意：在公式中有個與其他公式不同的地方：
+        //把一月和二月看成是上一年的十三月和十四月，例：如果是2004-1-10則換算成：2003-13-10來代入公式計算。
+
+        //y－年，m－月，d－日期
+        string CalculateWeekDay(int y, int m, int d)
+        {
+            if (m == 1) m = 13;
+            if (m == 2) m = 14;
+            //int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400) % 7;
+
+            int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400 + 1) % 7; //C++計算公式
+
+            string weekstr = "";
+            switch (week)
+            {
+                case 0: weekstr = "星期日"; break;
+                case 1: weekstr = "星期一"; break;
+                case 2: weekstr = "星期二"; break;
+                case 3: weekstr = "星期三"; break;
+                case 4: weekstr = "星期四"; break;
+                case 5: weekstr = "星期五"; break;
+                case 6: weekstr = "星期六"; break;
+                case 7: weekstr = "星期日"; break;
+            }
+            return weekstr;
+        }
+
+        private void button54_Click(object sender, EventArgs e)
+        {
+            //取得時辰
+            DateTime dt = DateTime.Now;
+            string ctime = getChineseTime(dt.Hour);
+
+            richTextBox1.Text += "目前時辰 : " + ctime + "\n";
+        }
+
+        string getChineseTime(int hour)
+        {
+            //地支時間做成數組
+            string[] CTime = "子|丑|寅|卯|辰|巳|午|未|申|酉|戌|亥".Split('|');
+
+            return "【" + CTime[hour / 2] + "時】";
+        }
     }
 }
-
-
