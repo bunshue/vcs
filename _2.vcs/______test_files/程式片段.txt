@@ -1,5 +1,34 @@
 
 
+C#:判斷當前程序是否通過管理員運行，
+
+public bool IsAdministrator()
+{
+WindowsIdentity current = WindowsIdentity.GetCurrent();
+WindowsPrincipal windowsPrincipal = new WindowsPrincipal(current);
+return windowsPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
+}
+
+
+C# 文件創建時間，修改時間，
+
+System.IO.FileInfo fi = new System.IO.FileInfo(@"D:\site\EKECMS\skin\Grey\default#.html");
+Response.Write("修改時間：" + fi.LastWriteTime.ToString() + "<br>");
+Response.Write("創建時間：" + fi.CreationTime.ToString() + "<br>");
+
+//在代碼中設置控件的padding 設置Label的字體
+如果要在代碼中設置margin，可以使用如下代碼：
+this.label1.Padding = new Padding(20,8,20,8);
+或者=new Padding(20);
+
+設置Label的字體代碼：
+this.label1.Font = new Font(label1.Font.FontFamily,10f);
+
+設置Label的背景色代碼：
+this.label1.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
+
+
+
 在不設置Cookie、PostData的情況下要獲得一個頁面 的HTML的方法很簡單：
 
 public static string GetHtml(string URL)
