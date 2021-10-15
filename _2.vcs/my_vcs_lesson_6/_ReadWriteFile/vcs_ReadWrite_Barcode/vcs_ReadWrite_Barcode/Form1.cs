@@ -20,6 +20,9 @@ using ZXing.QrCode.Internal;
 //使用NBarcodes
 using NBarCodes;
 
+//使用BarcodeLib
+using BarcodeLib;
+
 namespace vcs_ReadWrite_Barcode
 {
     public partial class Form1 : Form
@@ -203,6 +206,41 @@ namespace vcs_ReadWrite_Barcode
             BarCodeGenerator generator = new BarCodeGenerator(bs);
             Image image = generator.GenerateImage();
             pictureBox3.Image = image;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //創建Barcode
+            string strEncode = "lion-mouse";
+            CreateImage(strEncode);
+        }
+
+        private void CreateImage(string Code)
+        {
+            BarcodeLib.Barcode barcode = new BarcodeLib.Barcode()
+            {
+                IncludeLabel = true,
+                Alignment = AlignmentPositions.CENTER,
+                Width = 300,
+                Height = 100,
+                RotateFlipType = RotateFlipType.RotateNoneFlipNone,
+                BackColor = Color.White,
+                ForeColor = Color.Black,
+            };
+
+            Image image = barcode.Encode(TYPE.CODE128B, Code);
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            {
+                image.Save(ms, ImageFormat.Jpeg);
+
+                image.Save("lion.jpg", ImageFormat.Jpeg);
+
+                pictureBox4.Image = image;
+
+                //Response.ClearContent();
+                //Response.ContentType = "image/png";
+                //Response.BinaryWrite(ms.ToArray());
+            }
         }
     }
 }
