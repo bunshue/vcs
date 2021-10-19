@@ -1,4 +1,24 @@
 
+
+
+其實在ASP.Net編程中，不用調用md5.ASP來加密數據。在DotNet中有自帶的類：System.Web.Security.HashPassWordForStoringInConfigFile()
+
+public string md5(string str,int code)
+{
+if(code==16) //16位MD5加密（取32位加密的9~25字符）
+{
+return System.Web.Security.FormsAuthentication.HashPassWordForStoringInConfigFile(str,"MD5").ToLower().Substring(8,16) ;
+}
+
+if(code==32) //32位加密
+{
+return System.Web.Security.FormsAuthentication.HashPassWordForStoringInConfigFile(str,"MD5").ToLower();
+}
+
+return "00000000000000000000000000000000";
+}
+
+
 c#畫三角形、並填充顏色
 目前知道有兩種方法：畫多邊形、GraphicsPath。但是用畫多邊形的方式畫三角形不太好。老畫不正的，截圖放大就明顯了。
 

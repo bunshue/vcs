@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+//http://www.aspphp.online/bianchen/cyuyan/gycyy/201701/81415.html
+
 namespace vcs_ImageProcessingG
 {
     public partial class Form1 : Form

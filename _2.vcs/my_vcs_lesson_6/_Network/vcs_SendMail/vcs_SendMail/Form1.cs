@@ -40,7 +40,7 @@ namespace vcs_SendMail
         string addr_to = "David@insighteyes.com";
 
         string filename1 = @"C:\______test_files\picture1.jpg";
-        string filename2 = @"C:\______test_files\__RW\_excel\2006年圖書銷售情況.xls";
+        string filename2 = @"C:\______test_files\__RW\_excel\2019~2021新竹日出日沒時刻表.xls";
 
         public Form1()
         {
