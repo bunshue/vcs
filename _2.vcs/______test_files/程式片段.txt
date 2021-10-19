@@ -1,4 +1,178 @@
 
+c#畫三角形、並填充顏色
+目前知道有兩種方法：畫多邊形、GraphicsPath。但是用畫多邊形的方式畫三角形不太好。老畫不正的，截圖放大就明顯了。
+
+	Point point1 = new Point(0, 0);
+	Point point2 = new Point(11, 0);
+	Point point3 = new Point(5, 8);
+	Point[] pntArr = {point1, point2, point3};
+	
+	e.Graphics.FillPolygon(Brushes.Red, pntArr);
+
+
+
+
+
+C#計算文件的MD5值實例
+MD5 是 Message Digest Algorithm 5（信息摘要算法）的縮寫，MD5 一種散列(Hash)技術，廣泛用於加密、解密、數據簽名和數據完整性校驗等方面。
+
+
+
+
+C# 條形碼操作【源碼下載】
+
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185924.html
+
+
+
+
+
+
+
+
+
+this.toolStripStatusLabel3.Text = DateTime.Now.DayOfWeek.ToString();
+this.textBox1.SelectedText = DateTime.Now.ToString();
+this.textBox1.Text += DateTime.Now;
+
+
+//c#記事本實現代碼
+
+
+
+
+目前大部分數碼相機都將所拍照的圖像保存成JPG格式，
+而像拍照日期這樣的 信息統稱為EXIF信息。
+EXIF是英文ExchangeableImageFile(可交換圖像文件)的 縮寫
+
+
+
+
+            //獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
+            string tempFile = System.Reflection.Assembly.GetExecutingAssembly().FullName;
+
+
+new vcs data
+
+不寫注釋是流氓，名字瞎起是扯淡
+
+
+C#讀取exe版本號
+
+	using System.Reflection;
+	using System.IO;
+	...
+	
+	Assembly currentAssembly = Assembly.LoadFile(currentAssemblyPath);
+	Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
+	
+	AssemblyName currentAssemblyName = currentAssembly.GetName();
+	AssemblyName updatedAssemblyName = updatedAssembly.GetName();
+	
+	// 比較版本號
+	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
+	{
+	    // 不需要更新
+	    return;
+	}
+	
+	using System.Reflection;
+	using System.IO;
+	...
+	
+	AssemblyName currentAssemblyName = AssemblyName.GetAssemblyName(currentAssemblyPath);
+	AssemblyName updatedAssemblyName = AssemblyName.GetAssemblyName(updatedAssemblyPath);
+	
+	// 比較版本
+	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
+	{
+	    // 不需要更新
+	    return;
+	}
+	
+	// 更新
+	File.Copy(updatedAssemblyPath, currentAssemblyPath, true);
+	
+
+
+C#對注冊表的操作
+
+C#中提供的與注冊表相關的最主要的是兩個類：
+
+Registry 和 RegistryKey，這兩個類屬於Microsoft.Win32命名空間
+
+ 
+
+Registry類包含5個公共的靜態域，分別代表5個基本主鍵分別是：
+
+Registry.ClassesRoot
+
+Registry.CurrentUser
+
+Registry.LocalMachine
+
+Registry.Users
+
+Registry.Current Config
+
+這5個類分別對應注冊表的第二級目錄的五個預定義主鍵
+
+ 
+
+RegistryKey類中提供了對注冊表操作的方法
+
+CreateSubKey //建立一個子鍵
+
+OpenSubKey //打開一個子鍵
+
+DeleteKey //刪除一個子鍵
+
+DeleteKeyTree//刪除一個鍵及其下的全部鍵
+
+GetValue //獲取鍵值
+
+SetValue //設置鍵值
+
+
+
+//獲取某文件夾所有文件
+public static string[] GetFiles(string Path)
+{
+	return Directory.GetFiles(Path);
+}
+
+//讀取文件內容到字符串 www.2cto.com
+public static string OpenFile(string Path)
+{
+	return File.ReadAllText(Path);
+}
+
+
+檢測 USB 設備撥插的 C# 類庫：USBClassLibrary
+
+private void USBPort_USBDeviceAttached(objectsender, USBClass.USBDeviceEventArgs e)
+{
+	if (!MyUSBDeviceConnected)
+	{
+		if(USBClass.GetUSBDevice(MyDeviceVID, MyDevicePID, ref USBDeviceProperties, false))
+		{
+			//My Device is connected
+			MyUSBDeviceConnected = true;
+		}
+	}
+}
+
+private void USBPort_USBDeviceRemoved(objectsender, USBClass.USBDeviceEventArgs e)
+{
+	if(!USBClass.GetUSBDevice(MyDeviceVID, MyDevicePID, ref USBDeviceProperties, false))
+	{
+		//My Device is removed 
+		MyUSBDeviceConnected = false;
+	}
+}
+
+
+
 C# TabControl標簽的隱藏
 	當你想要隱藏的時候
 	

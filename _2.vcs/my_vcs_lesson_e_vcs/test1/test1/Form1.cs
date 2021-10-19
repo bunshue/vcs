@@ -13,6 +13,10 @@ using System.Text.RegularExpressions;
 
 using System.Management;
 
+using System.IO;
+
+using Shell32;
+
 /*
 XmlDocument 用來存放XML文件的類別
 
@@ -412,9 +416,514 @@ namespace test1
             {
             }
         }
-    
 
+        //數字大寫顯示 ST
+        private void button7_Click(object sender, EventArgs e)
+        {
+            int money = 123456;
+            string result = MoneyToChinese(money.ToString());
+            richTextBox1.Text += result + "\n";
+        }
+
+        public static string MoneyToChinese(string strAmount)
+        {
+            string functionReturnValue = null;
+            bool IsNegative = false; // 是否是負數
+            if (strAmount.Trim().Substring(0, 1) == "-")
+            {
+                // 是負數則先轉為正數
+                strAmount = strAmount.Trim().Remove(0, 1);
+                IsNegative = true;
+            }
+            string strLower = null;
+            string strUpart = null;
+            string strUpper = null;
+            int iTemp = 0;
+            // 保留兩位小數123.489→123.49　　123.4→123.4
+            strAmount = Math.Round(double.Parse(strAmount), 2).ToString();
+            if (strAmount.IndexOf(".") > 0)
+            {
+                if (strAmount.IndexOf(".") == strAmount.Length - 2)
+                {
+                    strAmount = strAmount + "0";
+                }
+            }
+            else
+            {
+                strAmount = strAmount + ".00";
+            }
+
+            strLower = strAmount;
+            iTemp = 1;
+            strUpper = "";
+            while (iTemp <= strLower.Length)
+            {
+                switch (strLower.Substring(strLower.Length - iTemp, 1))
+                {
+                    case ".":
+                        strUpart = "圓";
+                        break;
+                    case "0":
+                        strUpart = "零";
+                        break;
+                    case "1":
+                        strUpart = "壹";
+                        break;
+                    case "2":
+                        strUpart = "貳";
+                        break;
+                    case "3":
+                        strUpart = "三";
+                        break;
+                    case "4":
+                        strUpart = "肆";
+                        break;
+                    case "5":
+                        strUpart = "伍";
+                        break;
+                    case "6":
+                        strUpart = "陸";
+                        break;
+                    case "7":
+                        strUpart = "柒";
+                        break;
+                    case "8":
+                        strUpart = "捌";
+                        break;
+                    case "9":
+                        strUpart = "玖";
+                        break;
+                }
+
+                switch (iTemp)
+                {
+                    case 1:
+                        strUpart = strUpart + "分";
+                        break;
+                    case 2:
+                        strUpart = strUpart + "角";
+                        break;
+                    case 3:
+                        strUpart = strUpart + "";
+                        break;
+                    case 4:
+                        strUpart = strUpart + "";
+                        break;
+                    case 5:
+                        strUpart = strUpart + "拾";
+                        break;
+                    case 6:
+                        strUpart = strUpart + "佰";
+                        break;
+                    case 7:
+                        strUpart = strUpart + "仟";
+                        break;
+                    case 8:
+                        strUpart = strUpart + "萬";
+                        break;
+                    case 9:
+                        strUpart = strUpart + "拾";
+                        break;
+                    case 10:
+                        strUpart = strUpart + "佰";
+                        break;
+                    case 11:
+                        strUpart = strUpart + "仟";
+                        break;
+                    case 12:
+                        strUpart = strUpart + "億";
+                        break;
+                    case 13:
+                        strUpart = strUpart + "拾";
+                        break;
+                    case 14:
+                        strUpart = strUpart + "佰";
+                        break;
+                    case 15:
+                        strUpart = strUpart + "仟";
+                        break;
+                    case 16:
+                        strUpart = strUpart + "萬";
+                        break;
+                    default:
+                        strUpart = strUpart + "";
+                        break;
+                }
+                strUpper = strUpart + strUpper;
+                iTemp = iTemp + 1;
+            }
+
+            strUpper = strUpper.Replace("零拾", "零");
+            strUpper = strUpper.Replace("零佰", "零");
+            strUpper = strUpper.Replace("零仟", "零");
+            strUpper = strUpper.Replace("零零零", "零");
+            strUpper = strUpper.Replace("零零", "零");
+            strUpper = strUpper.Replace("零角零分", "整");
+            strUpper = strUpper.Replace("零分", "整");
+            strUpper = strUpper.Replace("零角", "零");
+            strUpper = strUpper.Replace("零億零萬零圓", "億圓");
+            strUpper = strUpper.Replace("億零萬零圓", "億圓");
+            strUpper = strUpper.Replace("零億零萬", "億");
+            strUpper = strUpper.Replace("零萬零圓", "萬圓");
+            strUpper = strUpper.Replace("零億", "億");
+            strUpper = strUpper.Replace("零萬", "萬");
+            strUpper = strUpper.Replace("零圓", "圓");
+            strUpper = strUpper.Replace("零零", "零");
+
+            // 對壹圓以下的金額的處理
+
+            if (strUpper.Substring(0, 1) == "圓")
+            {
+                strUpper = strUpper.Substring(1, strUpper.Length - 1);
+            }
+
+            if (strUpper.Substring(0, 1) == "零")
+            {
+                strUpper = strUpper.Substring(1, strUpper.Length - 1);
+            }
+
+            if (strUpper.Substring(0, 1) == "角")
+            {
+                strUpper = strUpper.Substring(1, strUpper.Length - 1);
+            }
+
+            if (strUpper.Substring(0, 1) == "分")
+            {
+                strUpper = strUpper.Substring(1, strUpper.Length - 1);
+            }
+
+            if (strUpper.Substring(0, 1) == "整")
+            {
+                strUpper = "零圓整";
+            }
+
+            functionReturnValue = strUpper;
+
+            if (IsNegative == true)
+            {
+                return "負" + functionReturnValue;
+            }
+            else
+            {
+                return functionReturnValue;
+            }
+        }
+
+        //數字大寫顯示 SP
+
+
+        //由日期找出星座 ST
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //由日期找出星座
+            int month = 3;
+            int day = 11;
+            string result = getAstro(month, day);
+            richTextBox1.Text += result + "\n";
+        }
+
+        private static String getAstro(int month, int day)
+        {
+            String[] starArr = { "魔羯座", "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處女座", "天秤座", "天蠍座", "射手座" };
+            int[] DayArr = { 22, 20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22 };  // 兩個星座分割日
+            int index = month;
+            // 所查詢日期在分割日之前，索引-1，否則不變
+            if (day < DayArr[month - 1])
+            {
+                index = index - 1;
+            }
+            index = index % 12;
+            // 返回索引指向的星座string
+            return starArr[index];
+        }
+
+        //由日期找出星座 SP
+
+        //根據文件頭判斷上傳的文件類型 ST
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\doraemon.jpg";
+            string result = getFileType(filename);
+            richTextBox1.Text += "File Type : " + result + "\n";
+
+        }
+
+        /// <summary>
+        /// 根據文件頭判斷上傳的文件類型
+        /// </summary>
+        /// <param name="filePath">filePath是文件的完整路徑 </param>
+        /// <returns>返回true或false</returns>
+        public string getFileType(string filePath)
+        {
+            try
+            {
+                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                BinaryReader reader = new BinaryReader(fs);
+                string fileClass;
+                byte buffer;
+                buffer = reader.ReadByte();
+                fileClass = buffer.ToString();
+                buffer = reader.ReadByte();
+                fileClass += buffer.ToString();
+                reader.Close();
+                fs.Close();
+
+                //richTextBox1.Text += "fileClass == " + fileClass + "\t";
+
+                if (fileClass == "255216")
+                    return "jpg";
+                else if (fileClass == "7173")
+                    return "gif";
+                else if (fileClass == "13780")
+                    return "png";
+                else if (fileClass == "6677")
+                    return "bmp";
+                else if (fileClass == "80114")
+                    return "csv";
+                else if (fileClass == "6063")
+                    return "xml";
+                else if (fileClass == "3780")
+                    return "pdf";
+                else if (fileClass == "4948")
+                    return "txt";
+                else if (fileClass == "8075")
+                    return "zip";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else
+                {
+                    return fileClass + "\tunknown";
+
+                }
+                //;7173是gif;,13780是PNG;7790是exe,8297是rar 
+            }
+            catch
+            {
+                return "unknown";
+            }
+        }
+
+        //C#實現小小的日歷 ST
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+            int year = 2021;
+
+            int month = 10;
+
+            int day = 0;
+
+            int sum = 0;
+
+
+
+            for (int i = 1900; i < year; i++)
+            {
+
+                if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
+                {
+
+                    sum += 366;
+
+                }
+
+                else
+                {
+
+                    sum += 365;
+
+                }
+
+            }
+
+
+
+            switch (month)
+            {
+
+                case 12:
+
+                    day = 31;
+
+                    break;
+
+                case 11:
+
+                    day = 30;
+
+                    break;
+
+                case 10:
+
+                    day = 31;
+
+                    break;
+
+                case 9:
+
+                    day = 30;
+
+                    break;
+
+                case 8:
+
+                    day = 31;
+
+                    break;
+
+                case 7:
+
+                    day = 31;
+
+                    break;
+
+                case 6:
+
+                    day = 30;
+
+                    break;
+
+                case 5:
+
+                    day = 31;
+
+                    break;
+
+                case 4:
+
+                    day = 30;
+
+                    break;
+
+                case 3:
+
+                    day = 31;
+
+                    break;
+
+                case 2:
+
+                    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+
+                        day = 29;
+
+                    else
+
+                        day = 28;
+
+                    break;
+
+                case 1:
+
+                    day = 31;
+
+                    break;
+
+            }
+
+            int leap;
+
+            /*先計算某月以前月份的總天數*/
+
+            switch (month)
+            {
+
+                case 1: sum += 0; break;
+
+                case 2: sum += 31; break;
+
+                case 3: sum += 59; break;
+
+                case 4: sum += 90; break;
+
+                case 5: sum += 120; break;
+
+                case 6: sum += 151; break;
+
+                case 7: sum += 181; break;
+
+                case 8: sum += 212; break;
+
+                case 9: sum += 243; break;
+
+                case 10: sum += 273; break;
+
+                case 11: sum += 304; break;
+
+                case 12: sum += 334; break;
+
+            }
+
+            /*判斷是不是閏年*/
+
+            if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+
+                leap = 1;
+
+            else
+
+                leap = 0;
+
+            /*如果是閏年且月份大於2,總天數應該加一天*/
+
+            if (leap == 1 && month > 2)
+
+                sum++;
+
+
+
+            int space = (sum + 1) % 7;
+
+
+
+            Console.WriteLine("日\t一\t二\t三\t四\t五\t六\t");
+            richTextBox1.Text += "日\t一\t二\t三\t四\t五\t六\t";
+
+
+
+            for (int i = 1; i <= space + day; i++)
+            {
+
+                if (i <= space)
+                {
+
+                    //Console.Write("\t");
+                    richTextBox1.Text += "\t";
+                }
+                else
+                {
+                    //Console.Write(i - space + "\t");
+                    richTextBox1.Text += i - space + "\t";
+                }
+
+
+                if (i % 7 == 0)
+                {
+
+                    //Console.WriteLine();
+                    richTextBox1.Text += "\n";
+                }
+
+            }
+
+            //Console.WriteLine();
+            richTextBox1.Text += "\n";
+
+
+        }
+
+        //C#實現小小的日歷 SP
+
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
-
 
