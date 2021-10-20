@@ -96,8 +96,37 @@ namespace system_test3_wmi
             }
         }
 
+        //C#讀取計算機CPU信息
+        public string getCpuInfo() //讀取CPU信息
+        {
+            //獲得CPU訊息
+            ManagementClass mc = new ManagementClass("win32_processor"); //建立ManagementClass物件
+            ManagementObjectCollection moc = mc.GetInstances();          //取得CPU訊息
+            foreach (ManagementObject mo in moc)
+            {
+                return mo.Properties["ProcessorId"].Value.ToString();   //取得CPU編號
+                //return mo["ProcessorId"].ToString();   //取得CPU編號  same
+            }
+            return "";
+        }
+
+        //C#讀取計算機HDD信息
+        public string getHddInfo() //讀取硬盤信息
+        {
+            ManagementClass mc = new ManagementClass("Win32_PhysicalMedia");
+            ManagementObjectCollection moc = mc.GetInstances();
+            foreach (ManagementObject mo in moc)
+            {
+                return mo.Properties["SerialNumber"].Value.ToString();
+            }
+            return "";
+        }
+
+
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "CPU信息: \t" + getCpuInfo() + "\n";
+            richTextBox1.Text += "HDD信息: \t" + getHddInfo() + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)

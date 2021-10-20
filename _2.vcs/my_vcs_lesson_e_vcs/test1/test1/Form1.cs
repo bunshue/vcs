@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Net;
-using System.Xml;
 using System.Text.RegularExpressions;
 using System.Management;
 using System.IO;
@@ -186,109 +185,19 @@ namespace test1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            XmlDocument doc = new XmlDocument();
-            //建立根節點
-            XmlElement company = doc.CreateElement("Company");
-            doc.AppendChild(company);
-            //建立子節點
-            XmlElement department = doc.CreateElement("Department");
-            department.SetAttribute("部門名稱", "技術部");//設定屬性
-            department.SetAttribute("部門負責人", "余小章");//設定屬性
-            //加入至company節點底下
-            company.AppendChild(department);
-
-            XmlElement members = doc.CreateElement("Members");//建立節點
-            //加入至department節點底下
-            department.AppendChild(members);
-
-            XmlElement info = doc.CreateElement("Information");
-            info.SetAttribute("名字", "余小章");
-            info.SetAttribute("電話", "0806449");
-            //加入至members節點底下
-            members.AppendChild(info);
-            info = doc.CreateElement("Information");
-            info.SetAttribute("名字", "王大明");
-            info.SetAttribute("電話", "080644978");
-            //加入至members節點底下
-            members.AppendChild(info);
-            doc.Save("Test.xml");
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //xml write add data
-
-
-
-            //插入節點
-            XmlDocument doc = new XmlDocument();
-            doc.Load("Test.xml");
-            XmlNode node = doc.SelectSingleNode("Company/Department");//選擇節點
-            if (node == null)
-                return;
-            XmlElement main = doc.CreateElement("newPerson"); //添加person節點
-            main.SetAttribute("name", "小明");
-            main.SetAttribute("sex", "女");
-            main.SetAttribute("age", "25");
-            node.AppendChild(main);
-            XmlElement sub1 = doc.CreateElement("phone");
-            sub1.InnerText = "123456778";
-            main.AppendChild(sub1);
-            XmlElement sub2 = doc.CreateElement("address");
-            sub2.InnerText = "高雄";
-            main.AppendChild(sub2);
-            doc.Save("Test.xml");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //修改資料
-            //取得根節點內的子節點
-            XmlDocument doc = new XmlDocument();
-            doc.Load("Test.xml");
-            //選擇節點
-            XmlNode main = doc.SelectSingleNode("Company/Department");
-            if (main == null)
-                return;
-            //取得節點內的欄位
-            XmlElement element = (XmlElement)main;
-            //取得節點內的"部門名稱"內容
-            string data = element.GetAttribute("部門名稱");
-            //取得節點內的"部門名稱"的屬性
-            XmlAttribute attribute = element.GetAttributeNode("部門名稱");
-            //列舉節點內的屬性
-            XmlAttributeCollection attributes = element.Attributes;
-            string content = "";
-            foreach (XmlAttribute item in attributes)
-            {
-                content += item.Name + "," + item.Value + Environment.NewLine;
-                if (item.Name == "部門名稱")
-                    item.Value = "胎哥部門";
-                if (item.Name == "部門負責人")
-                    item.Value = "胎哥郎";
-            }
-            doc.Save("Test.xml");
-            richTextBox1.Text += content + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //remove data
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load("Test.xml");
-            //選擇節點
-            XmlNode main = doc.SelectSingleNode("Company/Department");
-            if (main == null)
-                return;
-            //取得節點內的欄位
-            XmlElement element = (XmlElement)main;
-            //刪除節點內的屬性
-            element.RemoveAttribute("部門名稱");
-            //刪除節點內所有的內容
-            //element.RemoveAll();
-            doc.Save("Test.xml");
         }
 
         //C#兩種方法判斷字符是否為漢字

@@ -71,7 +71,7 @@ namespace vcs_ReadWrite_Barcode
             int narrowLength = 1;
             int intSourceLength = sourceCode.Length;
             string strEncode = "010010100"; //添加起始碼“ *”.
-            var font = new System.Drawing.Font("Segoe UI", 5);
+            var font = new Font("Segoe UI", 5);
             string AlphaBet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%*";
             string[] Code39 =
              {
@@ -229,7 +229,7 @@ namespace vcs_ReadWrite_Barcode
             };
 
             Image image = barcode.Encode(TYPE.CODE128B, Code);
-            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            using (MemoryStream ms = new MemoryStream())
             {
                 image.Save(ms, ImageFormat.Jpeg);
 
@@ -242,6 +242,37 @@ namespace vcs_ReadWrite_Barcode
                 //Response.BinaryWrite(ms.ToArray());
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string strEncode = "lion-mouse";
+            CreateImage2(strEncode);
+        }
+
+        private void CreateImage2(string Code)
+        {
+            BarcodeLib.Barcode barcode = new BarcodeLib.Barcode()
+            {
+                IncludeLabel = true,
+                Alignment = AlignmentPositions.CENTER,
+                Width = 300,
+                Height = 100,
+                RotateFlipType = RotateFlipType.RotateNoneFlipNone,
+                BackColor = Color.White,
+                ForeColor = Color.Black,
+            };
+
+            Image img = barcode.Encode(TYPE.CODE128B, Code);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms, ImageFormat.Jpeg);
+                img.Save("lion.jpg", ImageFormat.Jpeg);
+                //Response.ClearContent();
+                //Response.ContentType = "image/png";
+                //Response.BinaryWrite(ms.ToArray());
+            }
+        }
+
     }
 }
 
