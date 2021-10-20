@@ -1,4 +1,4 @@
-﻿namespace test1
+﻿namespace test8
 {
     partial class Form1
     {
@@ -54,7 +54,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 70);
             this.button1.TabIndex = 0;
-            this.button1.Text = "xml write";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -73,7 +72,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(160, 70);
             this.button2.TabIndex = 2;
-            this.button2.Text = "xml write add data";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -84,7 +82,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(160, 70);
             this.button3.TabIndex = 3;
-            this.button3.Text = "modify data";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -95,7 +92,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(160, 70);
             this.button4.TabIndex = 4;
-            this.button4.Text = "remove";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -106,7 +102,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(160, 70);
             this.button5.TabIndex = 5;
-            this.button5.Text = "判斷是不是漢字";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -117,7 +112,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(160, 70);
             this.button6.TabIndex = 6;
-            this.button6.Text = "獲取本機電腦名稱,IP,MAC地址,硬碟ID";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -128,7 +122,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(160, 70);
             this.button7.TabIndex = 7;
-            this.button7.Text = "數字大寫顯示";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -139,7 +132,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(160, 70);
             this.button8.TabIndex = 8;
-            this.button8.Text = "由日期找出星座";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -150,7 +142,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(160, 70);
             this.button9.TabIndex = 9;
-            this.button9.Text = "根據文件頭判斷上傳的文件類型";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -161,7 +152,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 70);
             this.button10.TabIndex = 10;
-            this.button10.Text = "C#實現小小的日歷";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -172,7 +162,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 70);
             this.button11.TabIndex = 11;
-            this.button11.Text = "C#如何獲得 WINDOWS 版本";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -183,7 +172,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(160, 70);
             this.button12.TabIndex = 12;
-            this.button12.Text = "GPS定位，经纬度附近地点查询–C#实现方法";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -194,7 +182,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 70);
             this.button13.TabIndex = 13;
-            this.button13.Text = "GUID";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -205,7 +192,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(160, 70);
             this.button0.TabIndex = 14;
-            this.button0.Text = "獲取程序安裝目錄";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -216,7 +202,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(160, 70);
             this.button14.TabIndex = 15;
-            this.button14.Text = "C#中利用process類調用外部程序以及執行dos命令";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
