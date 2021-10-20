@@ -841,7 +841,7 @@ namespace test1
                     return fileClass + "\tunknown";
 
                 }
-                //;7173是gif;,13780是PNG;7790是exe,8297是rar 
+                // 7790是exe,8297是rar 
             }
             catch
             {
