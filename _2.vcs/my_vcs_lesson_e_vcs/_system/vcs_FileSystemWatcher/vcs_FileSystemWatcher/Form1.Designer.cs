@@ -1,4 +1,4 @@
-﻿namespace speech_lib
+﻿namespace vcs_FileSystemWatcher
 {
     partial class Form1
     {
@@ -44,22 +44,22 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(111, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(106, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(604, 524);
+            this.richTextBox1.Size = new System.Drawing.Size(615, 543);
             this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "In compupting, a system call is the mechanism used by an application Linux下使用C語言檢" +
-                "測USB裝置和硬碟裝置 program to request service from the operating system. hot hot hot";
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(727, 569);
+            this.ClientSize = new System.Drawing.Size(733, 656);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

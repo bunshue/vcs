@@ -1,4 +1,103 @@
 
+C#如何獲取主板序列號
+  private static string GetBIOSNumber()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select SerialNumber From Win32_BIOS");
+            string biosNumber = string.Empty;
+            foreach (ManagementObject mgt in searcher.Get())
+            {
+                biosNumber += mgt["SerialNumber"].ToString();
+            }
+            return biosNumber;
+        }
+        
+
+
+byte[]與Image Image與 byte[] 之間的轉換
+
+/// <summary>
+/// 將byte[]轉換為Image
+/// </summary>
+/// <param name="bytes">字節數組</param>
+/// <returns>Image</returns>
+public Image ReadImage(byte[] bytes)
+{
+     MemoryStream ms=new MemoryStream(bytes,0,bytes.Length);
+     BinaryFormatter bf = new BinaryFormatter();
+     object obj=bf.Deserialize(ms);  
+　　ms.Close();
+　　return (Image)obj;
+}
+/// <summary>
+/// 將Image轉換為byte[]
+/// </summary>
+/// <param name="image">Image</param>
+/// <returns>byte[]</returns>
+public byte[] ConvertImage(Image image)
+{
+     MemoryStream ms=new MemoryStream();
+     BinaryFormatter bf = new BinaryFormatter();
+     bf.Serialize(ms,(object)image);
+     ms.Close();
+     return ms.ToArray();
+}
+
+
+
+
+C# GUID介紹和的使用，
+
+GUID（全局統一標識符）是指在一台機器上生成的數字，它保證對在同一時空中的所有機器都是唯一的。通常平台會提供生成GUID的API。生成算法很有意思，用到了以太網卡地址、納秒級時間、芯片ID碼和許多可能的數字。GUID的唯一缺陷在於生成的結果串會比較大。
+
+GUID永遠是方便的; 對於程序開發的各個方面，.NET Framework簡化了建立和處理GUID數值的過程。在.NET程序需要的地方，這一功能很容易地生成唯一的數值。
+
+ 
+
+1. 一個GUID為一個128位的整數(16字節)，在使用唯一標識符的情況下，你可以在所有計算機和網絡之間使用這一整數。
+
+2. GUID 的格式為“xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx”，其中每個 x 是 0-9 或 a-f 范圍內的一個十六進制的數字。例如：337c7f2b-7a34-4f50-9141-bab9e6478cc8 即為有效的 GUID 值。
+
+3. 世界上（Koffer注：應該是地球上）的任何兩台計算機都不會生成重復的 GUID 值。GUID 主要用於在擁有多個節點、多台計算機的網絡或系統中，分配必須具有唯一性的標識符。
+
+4. 在 Windows 平台上，GUID 應用非常廣泛：注冊表、類及接口標識、數據庫、甚至自動生成的機器名、目錄名等。
+
+
+
+
+
+//拜列轉字串(16進制)
+
+	static int buffersize = 18;   //十六進制數的大小（假設為6Byte）
+	byte[] buffer = new Byte[buffersize];   //創建緩沖區
+	
+	private void button1_Click(object sender, EventArgs e)
+	{
+	    serialPort1.Read(buffer, 0, buffersize);
+	    string ss;
+	    ss = byteToHexStr(buffer); //用到函數byteToHexStr
+	    textBox2.Text = ss;
+	    serialPort1.Close();
+	    MessageBox.Show("數據接收成功！", "系統提示");
+	}
+	
+	//字節數組轉16進制字符串
+	public static string byteToHexStr(byte[] bytes)
+	{
+	    string returnStr = "";
+	    if (bytes != null)
+	    {
+	        for (int i = 0; i < bytes.Length; i++)
+	        {
+	            returnStr += bytes[i].ToString("X2");
+	        }
+	    }
+	    return returnStr;
+	}
+	
+	
+	 
+	
+
 
 
 其實在ASP.Net編程中，不用調用md5.ASP來加密數據。在DotNet中有自帶的類：System.Web.Security.HashPassWordForStoringInConfigFile()

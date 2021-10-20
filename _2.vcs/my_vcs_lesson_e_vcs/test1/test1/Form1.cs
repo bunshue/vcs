@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Net;
+
 using System.Xml;
 
 using System.Text.RegularExpressions;
@@ -16,6 +18,8 @@ using System.Management;
 using System.IO;
 
 using Shell32;
+
+using System.Runtime.InteropServices;
 
 /*
 XmlDocument 用來存放XML文件的類別
@@ -35,6 +39,48 @@ namespace test1
 {
     public partial class Form1 : Form
     {
+        //C#如何獲得 WINDOWS 版本 ST
+        [StructLayout(LayoutKind.Sequential)]
+        public class OSVersionInfo
+        {
+            public int OSVersionInfoSize;
+            public int MajorVersion;
+            public int MinorVersion;
+            public int BuildNumber;
+            public int PlatformId;
+
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public String versionString;
+        }
+
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct OSVersionInfo2
+        {
+            public int OSVersionInfoSize;
+            public int MajorVersion;
+            public int MinorVersion;
+            public int BuildNumber;
+            public int PlatformId;
+
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public String versionString;
+        }
+
+
+        public class LibWrap
+        {
+            [DllImport("kernel32")]
+            public static extern bool GetVersionEx([In, Out] OSVersionInfo osvi);
+
+
+            [DllImport("kernel32", EntryPoint = "GetVersionEx")]
+            public static extern bool GetVersionEx2(ref OSVersionInfo2 osvi);
+        }
+        //C#如何獲得 WINDOWS 版本 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -125,7 +171,6 @@ namespace test1
                     item.Value = "胎哥郎";
             }
             doc.Save("Test.xml");
-            Console.WriteLine(content);
             richTextBox1.Text += content + "\n";
         }
 
@@ -165,16 +210,13 @@ namespace test1
                 richTextBox1.Text += c[i] + "\t";
                 if (c[i] >= 0x4e00 && c[i] <= 0x9fbb)
                 {
-                    Console.WriteLine("是漢字");
                     richTextBox1.Text += "是漢字\n";
                 }
                 else
                 {
-                    Console.WriteLine("不是漢字");
                     richTextBox1.Text += "不是漢字\n";
                 }
             }
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -873,26 +915,16 @@ namespace test1
             /*如果是閏年且月份大於2,總天數應該加一天*/
 
             if (leap == 1 && month > 2)
-
                 sum++;
-
-
 
             int space = (sum + 1) % 7;
 
-
-
-            Console.WriteLine("日\t一\t二\t三\t四\t五\t六\t");
             richTextBox1.Text += "日\t一\t二\t三\t四\t五\t六\t";
-
-
 
             for (int i = 1; i <= space + day; i++)
             {
-
                 if (i <= space)
                 {
-
                     //Console.Write("\t");
                     richTextBox1.Text += "\t";
                 }
@@ -902,20 +934,12 @@ namespace test1
                     richTextBox1.Text += i - space + "\t";
                 }
 
-
                 if (i % 7 == 0)
                 {
-
-                    //Console.WriteLine();
                     richTextBox1.Text += "\n";
                 }
-
             }
-
-            //Console.WriteLine();
             richTextBox1.Text += "\n";
-
-
         }
 
         //C#實現小小的日歷 SP
@@ -923,7 +947,212 @@ namespace test1
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //C#如何獲得 WINDOWS 版本 ST
+            richTextBox1.Text += " Passing OSVersionInfo as class" + "\n";
+
+
+            OSVersionInfo osvi = new OSVersionInfo();
+            osvi.OSVersionInfoSize = Marshal.SizeOf(osvi);
+
+
+            LibWrap.GetVersionEx(osvi);
+
+            richTextBox1.Text += "Class size: " + osvi.OSVersionInfoSize + "\tOperation System : " + OpSysName(osvi.MajorVersion, osvi.MinorVersion, osvi.PlatformId) + "\tPack: " + osvi.versionString + "\n";
+            richTextBox1.Text += osvi.PlatformId + "\n";
+
+            richTextBox1.Text += " Passing OSVersionInfo as struct" + "\n";
+            OSVersionInfo2 osvi2 = new OSVersionInfo2();
+            osvi2.OSVersionInfoSize = Marshal.SizeOf(osvi2);
+
+
+            LibWrap.GetVersionEx2(ref osvi2);
+            richTextBox1.Text += "Static size: " + osvi2.OSVersionInfoSize + "\tOperation System : " + OpSysName(osvi2.MajorVersion, osvi2.MinorVersion, osvi2.PlatformId) + "\tPack: " + osvi2.versionString + "\n";
+
+            //C#如何獲得 WINDOWS 版本 SP
         }
+
+        public static String OpSysName(int MajorVersion, int MinorVersion, int PlatformId)
+        {
+            String str_opn = String.Format("{0}.{1}", MajorVersion, MinorVersion);
+
+            switch (str_opn)
+            {
+                case "4.0":
+                    return win95_nt40(PlatformId);
+                case "4.10":
+                    return "Windows 98";
+                case "4.90":
+                    return "Windows Me";
+                case "3.51":
+                    return "Windows NT 3.51";
+                case "5.0":
+                    return "Windwos 2000";
+                case "5.1":
+                    return "Windwos XP";
+                case "5.2":
+                    return "Windows Server 2003 family";
+                default:
+                    return "This windows version is not distinguish!";
+            }
+        }
+
+        public static String win95_nt40(int PlatformId)
+        {
+            switch (PlatformId)
+            {
+                case 1:
+                    return "Windows 95";
+                case 2:
+                    return "Windows NT 4.0";
+                default:
+                    return "This windows version is not distinguish!";
+            }
+        }
+
+
+
+        //GPS定位，经纬度附近地点查询–C#实现方法 ST
+
+
+        /// <summary>
+        /// 经纬度坐标
+        /// </summary>
+
+        public class Degree
+        {
+            public Degree(double x, double y)
+            {
+                X = x;
+                Y = y;
+            }
+            private double x;
+
+            public double X
+            {
+                get { return x; }
+                set { x = value; }
+            }
+            private double y;
+
+            public double Y
+            {
+                get { return y; }
+                set { y = value; }
+            }
+        }
+
+
+        public class CoordDispose
+        {
+            private const double EARTH_RADIUS = 6378137.0;//地球半径(米)
+
+            /// <summary>
+            /// 角度数转换为弧度公式
+            /// </summary>
+            /// <param name="d"></param>
+            /// <returns></returns>
+            private static double radians(double d)
+            {
+                return d * Math.PI / 180.0;
+            }
+
+            /// <summary>
+            /// 弧度转换为角度数公式
+            /// </summary>
+            /// <param name="d"></param>
+            /// <returns></returns>
+            private static double degrees(double d)
+            {
+                return d * (180 / Math.PI);
+            }
+
+            /// <summary>
+            /// 计算两个经纬度之间的直接距离
+            /// </summary>
+
+            public static double GetDistance(Degree Degree1, Degree Degree2)
+            {
+                double radLat1 = radians(Degree1.X);
+                double radLat2 = radians(Degree2.X);
+                double a = radLat1 - radLat2;
+                double b = radians(Degree1.Y) - radians(Degree2.Y);
+
+                double s = 2 * Math.Asin(Math.Sqrt(Math.Pow(Math.Sin(a / 2), 2) +
+                 Math.Cos(radLat1) * Math.Cos(radLat2) * Math.Pow(Math.Sin(b / 2), 2)));
+                s = s * EARTH_RADIUS;
+                s = Math.Round(s * 10000) / 10000;
+                return s;
+            }
+
+            /// <summary>
+            /// 计算两个经纬度之间的直接距离(google 算法)
+            /// </summary>
+            public static double GetDistanceGoogle(Degree Degree1, Degree Degree2)
+            {
+                double radLat1 = radians(Degree1.X);
+                double radLng1 = radians(Degree1.Y);
+                double radLat2 = radians(Degree2.X);
+                double radLng2 = radians(Degree2.Y);
+
+                double s = Math.Acos(Math.Cos(radLat1) * Math.Cos(radLat2) * Math.Cos(radLng1 - radLng2) + Math.Sin(radLat1) * Math.Sin(radLat2));
+                s = s * EARTH_RADIUS;
+                s = Math.Round(s * 10000) / 10000;
+                return s;
+            }
+
+            /// <summary>
+            /// 以一个经纬度为中心计算出四个顶点
+            /// </summary>
+            /// <param name="distance">半径(米)</param>
+            /// <returns></returns>
+            public static Degree[] GetDegreeCoordinates(Degree Degree1, double distance)
+            {
+                double dlng = 2 * Math.Asin(Math.Sin(distance / (2 * EARTH_RADIUS)) / Math.Cos(Degree1.X));
+                dlng = degrees(dlng);//一定转换成角度数  原PHP文章这个地方说的不清楚根本不正确 后来lz又查了很多资料终于搞定了
+
+                double dlat = distance / EARTH_RADIUS;
+                dlat = degrees(dlat);//一定转换成角度数
+
+                return new Degree[] { new Degree(Math.Round(Degree1.X + dlat,6), Math.Round(Degree1.Y - dlng,6)),//left-top
+                                  new Degree(Math.Round(Degree1.X - dlat,6), Math.Round(Degree1.Y - dlng,6)),//left-bottom
+                                  new Degree(Math.Round(Degree1.X + dlat,6), Math.Round(Degree1.Y + dlng,6)),//right-top
+                                  new Degree(Math.Round(Degree1.X - dlat,6), Math.Round(Degree1.Y + dlng,6)) //right-bottom
+            };
+
+            }
+        }
+
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //GPS定位，经纬度附近地点查询–C#实现方法
+            double a = CoordDispose.GetDistance(new Degree(116.412007, 39.947545), new Degree(116.412924, 39.947918));//116.416984,39.944959
+            double b = CoordDispose.GetDistanceGoogle(new Degree(116.412007, 39.947545), new Degree(116.412924, 39.947918));
+            Degree[] dd = CoordDispose.GetDegreeCoordinates(new Degree(116.412007, 39.947545), 102);
+
+            richTextBox1.Text += a + " " + b + "\n";
+            richTextBox1.Text += dd[0].X + "," + dd[0].Y + "\n";
+            richTextBox1.Text += dd[3].X + "," + dd[3].Y + "\n";
+        }
+
+        //GPS定位，经纬度附近地点查询–C#实现方法 SP
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("N") + "\n";//結果為：38bddf48f43c48588e0d78761eaa1ce6
+
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("D") + "\n";//結果為：57d99d89-caab-482a-a0e9-a0a803eed3ba (默認的為第2種效果)
+
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("B") + "\n";//結果為：{09f140d5-af72-44ba-a763-c861304b46f8}
+
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("P") + "\n";//結果為：(778406c2-efff-4262-ab03-70a77d09c2b5)
+
+
+        }
+
+
     }
+
+
 }
 
