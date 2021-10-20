@@ -1,4 +1,4 @@
-﻿namespace test6
+﻿namespace network_test2_http
 {
     partial class Form1
     {
@@ -54,7 +54,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 70);
             this.button1.TabIndex = 0;
-            this.button1.Text = "模擬MSN窗體抖動2";
+            this.button1.Text = "下載網頁HTML源碼";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -193,7 +193,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(160, 70);
             this.button0.TabIndex = 14;
-            this.button0.Text = "模擬MSN窗體抖動1";
+            this.button0.Text = "下載網頁源碼 獲取http狀態碼";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

@@ -7,19 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Net;
-using System.Xml;
-using System.Text.RegularExpressions;
 using System.Management;
-using System.IO;
-using Shell32;
-using System.Runtime.InteropServices;
 
-namespace test6
+//WMI是Windows Management Instrumentation的簡稱，即：視窗管理規范。
+
+namespace system_test3_wmi
 {
     public partial class Form1 : Form
     {
-
         public Form1()
         {
             InitializeComponent();
@@ -38,8 +33,8 @@ namespace test6
             int dy;
 
             //button
-            x_st = 10;
-            y_st = 10;
+            x_st = 15;
+            y_st = 15;
             dx = 180;
             dy = 90;
 
@@ -66,77 +61,43 @@ namespace test6
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //模擬MSN窗體抖動1
+            //獲取主板序列號
+            string sn = GetBIOSNumber();
+            richTextBox1.Text += "主板序列號:\t" + sn + "\n";
+        }
 
-            int rand = 50;
-            int recordx = this.Left;　//保存原來窗體的左上角的x坐標
-            int recordy = this.Top;　//保存原來窗體的左上角的y坐標
-
-            Random random = new Random();
-
-            for (int i = 0; i < 100; i++)
+        private static string GetBIOSNumber()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select SerialNumber From Win32_BIOS");
+            string biosNumber = string.Empty;
+            foreach (ManagementObject mgt in searcher.Get())
             {
-                int x = random.Next(rand);
-                int y = random.Next(rand);
-                if (x % 2 == 0)
-                {
-                    this.Left = this.Left + x;
-                }
-                else
-                {
-                    this.Left = this.Left - x;
-                }
-                if (y % 2 == 0)
-                {
-                    this.Top = this.Top + y;
-                }
-                else
-                {
-                    this.Top = this.Top - y;
-                }
-
-                this.Left = recordx;　//還原原始窗體的左上角的x坐標
-                this.Top = recordy;　//還原原始窗體的左上角的y坐標
+                biosNumber += mgt["SerialNumber"].ToString();
             }
+            return biosNumber;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //模擬MSN窗體抖動2
-
-            int rand = 10;
-            int recordx = this.Left;
-            int recordy = this.Top;
-            Random random = new Random();
-            for (int i = 0; i < 50; i++)
+            //獲得CPU的編號
+            ManagementClass mc = new ManagementClass("win32_processor"); //建立ManagementClass物件
+            ManagementObjectCollection moc = mc.GetInstances();          //取得CPU訊息
+            foreach (ManagementObject mo in moc)
             {
-                int x = random.Next(rand);
-                int y = random.Next(rand);
-                if (x % 2 == 0)
-                {
-                    this.Left = this.Left + x;
-                }
-                else
-                {
-                    this.Left = this.Left - x;
-                }
-                if (y % 2 == 0)
-                {
-                    this.Top = this.Top + y;
-                }
-                else
-                {
-                    this.Top = this.Top - y;
-                }
-                System.Threading.Thread.Sleep(1);
+                richTextBox1.Text += mo["processorid"].ToString() + "\n";   //取得CPU編號
             }
-            this.Left = recordx;
-            this.Top = recordy;
+
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("Select * From Win32_Processor"); //查詢CPU訊息
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += mo["Manufacturer"].ToString() + "\n";//取得CPU製造商名稱
+                richTextBox1.Text += mo["Version"].ToString() + "\n";     //取得CPU版本號 
+                richTextBox1.Text += mo["Name"].ToString() + "\n";        //取得CPU產品名稱
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -203,7 +164,5 @@ namespace test6
         {
 
         }
-
     }
 }
-

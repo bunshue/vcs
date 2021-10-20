@@ -1,16 +1,5 @@
-
-C#如何獲取主板序列號
-  private static string GetBIOSNumber()
-        {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select SerialNumber From Win32_BIOS");
-            string biosNumber = string.Empty;
-            foreach (ManagementObject mgt in searcher.Get())
-            {
-                biosNumber += mgt["SerialNumber"].ToString();
-            }
-            return biosNumber;
-        }
-        
+					
+       
 
 
 byte[]與Image Image與 byte[] 之間的轉換
@@ -395,19 +384,6 @@ namespaceName 是上面獲取的空間名稱，Resource是音頻文件夾的名�
 
                 //關閉進程
                 pc.Close();
-
-
-
-
-獲得CPU的編號。
-
-System.Management.ManagementClass mc = new ManagementClass("win32_processor");
-ManagementObjectCollection moc = mc.GetInstances();
-foreach (ManagementObject mo in moc)
-{
-    MessageBox.Show(mo["processorid"].ToString());
-} 
-
 
 
 //字符串轉數組
