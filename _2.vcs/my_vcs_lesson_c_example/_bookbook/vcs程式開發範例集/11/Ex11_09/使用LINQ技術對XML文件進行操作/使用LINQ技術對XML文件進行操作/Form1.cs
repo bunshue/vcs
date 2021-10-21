@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
@@ -14,24 +15,28 @@ namespace 使用LINQ技術對XML文件進行操作
 {
     public partial class Form1 : Form
     {
+        static string strPath = @"../../Employee.xml";
+        static string strID = "";
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        static string strPath = "Employee.xml";
-        static string strID = "";
 
         //視窗加載時加載XML文件
         private void Form1_Load(object sender, EventArgs e)
         {
             if (File.Exists(strPath))
             {
+                richTextBox1.Text += "檔案 : " + strPath + "\t存在\n";
                 groupBox1.Enabled = false;
                 getXmlInfo();
             }
             else
+            {
+                richTextBox1.Text += "檔案 : " + strPath + "\t不存在\n";
                 groupBox1.Enabled = true;
+            }
         }
 
         //建立XML文件
@@ -90,7 +95,7 @@ namespace 使用LINQ技術對XML文件進行操作
                         );
                 }
                 xe.Save(strPath);
-            } 
+            }
             getXmlInfo();
         }
 
@@ -104,7 +109,9 @@ namespace 使用LINQ技術對XML文件進行操作
                                                  where element.Attribute("ID").Value == strID
                                                  select element;
                 if (elements.Count() > 0)
+                {
                     elements.First().Remove();
+                }
                 xe.Save(strPath);
             }
             getXmlInfo();
@@ -134,6 +141,7 @@ namespace 使用LINQ技術對XML文件進行操作
         {
             try
             {
+                richTextBox1.Text += "getXmlInfo 開啟檔案 : " + strPath + "\n";
                 string path = Application.StartupPath + "\\" + strPath;
                 FileInfo fi = new FileInfo(path);
                 if (fi.Exists)
@@ -143,7 +151,7 @@ namespace 使用LINQ技術對XML文件進行操作
                     dataGridView1.DataSource = myds.Tables[0];
                 }
             }
-            catch 
+            catch
             {
                 dataGridView1.DataSource = null;
             }

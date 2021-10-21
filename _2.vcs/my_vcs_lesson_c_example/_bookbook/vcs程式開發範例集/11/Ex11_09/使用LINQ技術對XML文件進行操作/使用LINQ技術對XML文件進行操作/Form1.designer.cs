@@ -61,6 +61,7 @@
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -101,7 +102,7 @@
             this.textBox10.Location = new System.Drawing.Point(319, 47);
             this.textBox10.Name = "textBox10";
             this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(119, 21);
+            this.textBox10.Size = new System.Drawing.Size(119, 22);
             this.textBox10.TabIndex = 3;
             this.textBox10.Text = "001";
             // 
@@ -128,7 +129,7 @@
             // 
             this.textBox9.Location = new System.Drawing.Point(319, 131);
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(119, 21);
+            this.textBox9.Size = new System.Drawing.Size(119, 22);
             this.textBox9.TabIndex = 9;
             // 
             // label8
@@ -145,7 +146,7 @@
             this.textBox8.Location = new System.Drawing.Point(111, 131);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(119, 21);
+            this.textBox8.Size = new System.Drawing.Size(119, 22);
             this.textBox8.TabIndex = 8;
             this.textBox8.Text = "Salary";
             // 
@@ -162,7 +163,7 @@
             // 
             this.textBox7.Location = new System.Drawing.Point(319, 103);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(119, 21);
+            this.textBox7.Size = new System.Drawing.Size(119, 22);
             this.textBox7.TabIndex = 7;
             // 
             // label2
@@ -179,7 +180,7 @@
             this.textBox6.Location = new System.Drawing.Point(111, 103);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(119, 21);
+            this.textBox6.Size = new System.Drawing.Size(119, 22);
             this.textBox6.TabIndex = 6;
             this.textBox6.Text = "Sex";
             // 
@@ -196,7 +197,7 @@
             // 
             this.textBox5.Location = new System.Drawing.Point(319, 75);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(119, 21);
+            this.textBox5.Size = new System.Drawing.Size(119, 22);
             this.textBox5.TabIndex = 5;
             // 
             // label5
@@ -213,7 +214,7 @@
             this.textBox4.Location = new System.Drawing.Point(111, 75);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(119, 21);
+            this.textBox4.Size = new System.Drawing.Size(119, 22);
             this.textBox4.TabIndex = 4;
             this.textBox4.Text = "Name";
             // 
@@ -231,7 +232,7 @@
             this.textBox3.Location = new System.Drawing.Point(111, 47);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(119, 21);
+            this.textBox3.Size = new System.Drawing.Size(119, 22);
             this.textBox3.TabIndex = 2;
             this.textBox3.Text = "ID";
             // 
@@ -249,7 +250,7 @@
             this.textBox2.Location = new System.Drawing.Point(319, 20);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(119, 21);
+            this.textBox2.Size = new System.Drawing.Size(119, 22);
             this.textBox2.TabIndex = 1;
             this.textBox2.Text = "People";
             // 
@@ -267,7 +268,7 @@
             this.textBox1.Location = new System.Drawing.Point(111, 20);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(119, 21);
+            this.textBox1.Size = new System.Drawing.Size(119, 22);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Peoples";
             // 
@@ -344,7 +345,7 @@
             // 
             this.textBox12.Location = new System.Drawing.Point(85, 49);
             this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(119, 21);
+            this.textBox12.Size = new System.Drawing.Size(119, 22);
             this.textBox12.TabIndex = 13;
             // 
             // label12
@@ -369,7 +370,7 @@
             // 
             this.textBox11.Location = new System.Drawing.Point(85, 20);
             this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(119, 21);
+            this.textBox11.Size = new System.Drawing.Size(119, 22);
             this.textBox11.TabIndex = 11;
             // 
             // label14
@@ -395,11 +396,20 @@
             this.dataGridView1.TabIndex = 17;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(481, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(335, 443);
+            this.richTextBox1.TabIndex = 20;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 460);
+            this.ClientSize = new System.Drawing.Size(828, 502);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -451,6 +461,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

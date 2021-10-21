@@ -47,6 +47,7 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.l = new System.Windows.Forms.ListBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +64,7 @@
             // 
             this.txtName.Location = new System.Drawing.Point(80, 18);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 21);
+            this.txtName.Size = new System.Drawing.Size(100, 22);
             this.txtName.TabIndex = 2;
             // 
             // label2
@@ -101,10 +102,10 @@
             this.txtage.Location = new System.Drawing.Point(371, 17);
             this.txtage.MaxLength = 3;
             this.txtage.Name = "txtage";
-            this.txtage.Size = new System.Drawing.Size(81, 21);
+            this.txtage.Size = new System.Drawing.Size(81, 22);
             this.txtage.TabIndex = 6;
-            this.txtage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtage_KeyUp);
             this.txtage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtage_KeyPress);
+            this.txtage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtage_KeyUp);
             // 
             // label5
             // 
@@ -166,7 +167,7 @@
             this.txtphone.Location = new System.Drawing.Point(371, 46);
             this.txtphone.MaxLength = 11;
             this.txtphone.Name = "txtphone";
-            this.txtphone.Size = new System.Drawing.Size(81, 21);
+            this.txtphone.Size = new System.Drawing.Size(81, 22);
             this.txtphone.TabIndex = 16;
             this.txtphone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtphone_KeyPress);
             // 
@@ -183,7 +184,7 @@
             // 
             this.txtaddress.Location = new System.Drawing.Point(80, 81);
             this.txtaddress.Name = "txtaddress";
-            this.txtaddress.Size = new System.Drawing.Size(372, 21);
+            this.txtaddress.Size = new System.Drawing.Size(372, 22);
             this.txtaddress.TabIndex = 18;
             // 
             // button1
@@ -211,7 +212,7 @@
             this.listBox1.BackColor = System.Drawing.SystemColors.Control;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(12, 144);
+            this.listBox1.Location = new System.Drawing.Point(10, 156);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(447, 184);
             this.listBox1.TabIndex = 21;
@@ -222,11 +223,11 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(19, 149);
+            this.dataGridView1.Location = new System.Drawing.Point(17, 353);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(435, 174);
+            this.dataGridView1.Size = new System.Drawing.Size(435, 118);
             this.dataGridView1.TabIndex = 22;
             // 
             // l
@@ -239,11 +240,20 @@
             this.l.Size = new System.Drawing.Size(447, 136);
             this.l.TabIndex = 0;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(477, 7);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(403, 464);
+            this.richTextBox1.TabIndex = 23;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 336);
+            this.ClientSize = new System.Drawing.Size(892, 483);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button2);
@@ -266,8 +276,8 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "使用LINQ技術向SQL數據庫中新增數據";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Activated += new System.EventHandler(this.Form1_Activated);
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -295,6 +305,7 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ListBox l;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

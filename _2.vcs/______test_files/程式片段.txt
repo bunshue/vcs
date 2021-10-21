@@ -1,4 +1,348 @@
-					
+
+try by sugar
+C#如何獲取遠程磁盤上的剩余空間
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/191690.html
+
+
+1.對於那種明知道跨線程調用不會帶來錯誤的，可以設置Form控件不檢查跨線程調用錯誤，這樣就不報錯了。
+在Form1構造方法中：
+C#代碼 
+CheckForIllegalCrossThreadCalls = false; 
+
+
+//發送資料到剪貼簿
+Clipboard.SetText(textBox1.Text);
+MessageBox.Show("已成功將文本框內容復制到剪貼板!");
+
+
+//從剪貼簿取得資料
+
+            try
+            {
+                IDataObject iData = Clipboard.GetDataObject();
+                if (iData.GetDataPresent(DataFormats.Text))
+                {
+                    //MessageBox.Show((string)iData.GetData(DataFormats.Text));
+                    textBox2.Text = (string)iData.GetData(DataFormats.UnicodeText);
+                }
+                else
+                {
+                    MessageBox.Show("目前剪貼板中數據不可轉換為文本", "錯誤");
+                }
+            }
+            
+C# MD5摘要算法、哈希算法，
+MD5即Message-Digest Algorithm 5（信息-摘要算法5），用於確保信息傳輸完整一致。是計算機廣泛使用的雜湊算法之一（又譯摘要算法、哈希算法）
+
+
+
+            
+            
+
+//-------------------------------------------------------------
+
+//C#--遍歷文件夾實例
+
+
+                //實例化DirectoryInfo對象
+                DirectoryInfo dinfo = new DirectoryInfo(textBox1.Text);
+                //獲取指定目錄下的所有子目錄及文件類型
+                FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();
+                foreach (FileSystemInfo fsinfo in fsinfos)
+                {
+                    if (fsinfo is DirectoryInfo)    //判斷是否文件夾
+                    {
+                        //使用獲取的文件夾名稱實例化DirectoryInfo對象
+                        DirectoryInfo dirinfo = new DirectoryInfo(fsinfo.FullName);
+                        //為ListView控件添加文件夾信息
+                        listView1.Items.Add(dirinfo.Name);
+                        listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.FullName);
+                        listView1.Items[listView1.Items.Count - 1].SubItems.Add("");
+                        listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.CreationTime.ToShortDateString());
+                    }
+                    else
+                    {
+                        //使用獲取的文件名稱實例化FileInfo對象
+                        FileInfo finfo = new FileInfo(fsinfo.FullName);
+                        //為ListView控件添加文件信息
+                        listView1.Items.Add(finfo.Name);
+                        listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.FullName);
+                        listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.Length.ToString());
+                        listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.CreationTime.ToShortDateString());
+                    }
+                }
+
+
+
+
+
+
+
+//MD5加密
+//MD5加密是不可以逆的，只能將字串轉為MD5值，不能將MD5值轉回字串。
+
+static void Main(string[] args)
+    {
+        //202cb962ac59075b964b07152d234b70
+        //202cb962ac5975b964b7152d234b70   ToString x引數
+        //202cb962ac59075b964b07152d234b70  ToString x2引數
+
+        // 3244185981728979115075721453575112   ToString  沒加引數
+        //ToString引數需要到百度拿來用
+        string s = GetMD5("123");
+        Console.WriteLine(s);
+        Console.ReadKey();
+    }
+
+    public static string GetMD5(string str)
+    {
+        //建立MD5物件
+        MD5 md5 = MD5.Create();
+        //開始加密
+        //需要將字串轉為位元組陣列
+        byte[] buffer = Encoding.Default.GetBytes(str);
+        //返回一個加密好的位元組陣列
+       byte[] MD5Buffer = md5.ComputeHash(buffer);
+
+        //將位元組陣列轉換成字串
+        //位元組陣列---字串
+        //1.將位元組陣列中每個元素按照自定的編碼格式解析成字串
+        //2.直接將陣列ToString();
+        //3.將位元組陣列中的每個元素ToString()
+        //  return Encoding.Default.GetString(MD5Buffer);
+        string strNew = " ";
+        for (int i = 0; i < MD5Buffer.Length; i++)
+        {
+            //ToString("x") 加x引數將十進位制轉為十六進位制，屬於ToString的方法
+            strNew += MD5Buffer[i].ToString("x2");
+        }
+        return strNew;
+    }
+    
+    
+
+/// <summary>
+/// MD5加密
+/// </summary>
+/// <param name="str"></param>
+/// <returns></returns>
+        public string UserMd5(string str)
+        {
+         
+       
+            string cl = str;
+            string pwd = "";
+            MD5 md5 = MD5.Create();//实例化一个md5对像
+            // 加密后是一个字节类型的数组，这里要注意编码UTF8/Unicode等的选择　
+            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
+          
+            // 通过使用循环，将字节类型的数组转换为字符串，此字符串是常规字符格式化所得
+            for (int i = 0; i < s.Length; i++)
+            {
+                // 将得到的字符串使用十六进制类型格式。格式后的字符是小写的字母，如果使用大写（X）则格式后的字符是大写字符
+
+                pwd = pwd + s[i].ToString("x");
+		pwd = pwd + s[i].ToString("x2");
+            }
+            return pwd;
+        }
+    }
+
+//wenweifeng 加密出来的WEB是:E28ACEB82C41284D13A50962E1C00D56
+
+
+
+C#设置窗体透明，控件不透明
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //方法1    
+            //例：窗体的透明度为50% 
+            //this.Opacity = 0.5; 
+            
+            //方法2，我用的方法2，窗体透明控件不透明了
+            // TransparencyKey只支持透明或不透明，不支持过度色，比如PNG图片中的从不透明到透明的过渡色会显示出讨厌的效果
+            this.BackColor = Color.Black;
+            this.TransparencyKey = Color.Black;
+ 
+        }
+
+
+emule
+http://www.ed2k.online/tushu/jsjwl/16725.html
+
+
+ed2k://|file|[www.ed2k.online][C#%E5%85%A8%E8%83%BD%E9%80%9F%E6%9F%A5%E5%AE%9D%E5%85%B8].%E6%98%8E%E6%97%A5%E7%A7%91%E6%8A%80%E7%AD%89.%E6%89%AB%E6%8F%8F%E7%89%88.pdf|255157709|83403adcb05aaf95a0a0ef19846a00aa|h=pk25dcx3grk63emqyukmuh2eb6zuhpg5|/
+
+
+
+
+
+
+
+用C#實現全屏幕截圖
+
+
+今天一位同事想寫一個全屏幕截圖的代碼。當然要實現的第一步是能夠獲取整個屏幕的位圖，記得Win32 API的CreateDC, BitBlt等函數可以使用。於是上網查了下，果然屏幕截圖用這些函數。但winform已經可以把API都忘記了，所以得尋找一個無Win32 API的實現方式。綜合了網上的實現，以及自己的一些設計，實現思路如下：
+
+1. 開始截圖時，創建一個與屏幕大小一樣的位圖，然後用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上。這是很關鍵的一步，這樣所有的操作就都可以在該位圖上進行了，而無實際屏幕無關了。
+    int width = Screen.PrimaryScreen.Bounds.Width;
+
+    int height = Screen.PrimaryScreen.Bounds.Height;
+
+    Bitmap bmp = new Bitmap(width, height);
+
+    using (Graphics g = Graphics.FromImage(bmp))
+    {
+    g.CopyFromScreen(0, 0, 0, 0, new Size(width, height));
+    }
+
+
+
+
+
+
+    2. 接下來為了方便在這之上進行截圖，有一個很重要的設計實現方式：用全屏幕窗體代替現有真實屏幕，這樣就可以把截圖過程的所有操作都在那個窗體上實現（該窗體設置成無邊框，高寬等於屏幕大小即可），另外為了顯示掩蔽效果（只能正常顯示選擇的部分屏幕內容，而其實部分用一個如半透明層覆蓋），就添加一層半透明位置位圖。具體代碼如下：
+
+    public partial class FullScreenForm : Form
+    {
+	    private Rectangle rectSelected = Rectangle.Empty;
+	
+	    private bool isClipping = false;
+	
+	    private Bitmap screen;
+	
+	    private Bitmap coverLayer = null;
+	
+	    private Color coverColor;
+	
+	    private Brush rectBrush = null;
+	
+	    private Bitmap resultBmp = null;
+	
+	    public FullScreenForm(Bitmap screen)
+	    {
+		    InitializeComponent();
+		
+		    int width = Screen.PrimaryScreen.Bounds.Width;
+		
+		    int height = Screen.PrimaryScreen.Bounds.Height;
+		
+		    coverLayer = new Bitmap(width, height);
+		
+		    coverColor = Color.FromArgb(50, 200, 0, 0);
+		
+		    rectBrush = new SolidBrush(coverColor);
+		
+		    using (Graphics g = Graphics.FromImage(coverLayer)) {
+		
+		    g.Clear(coverColor);
+	    }
+	
+	    this.Bounds = new Rectangle(0, 0, width, height);
+	
+	    this.screen = screen;
+	
+	    this.DoubleBuffered = true;
+    }
+
+    protected override void OnMouseDown(MouseEventArgs e)
+    {
+	    if (e.Button == MouseButtons.Left)
+	    {
+		    isClipping = true;
+		    rectSelected.Location = e.Location;
+	    }
+	    else if (e.Button == MouseButtons.Right)
+	    {
+	    	this.DialogResult = DialogResult.OK;
+	    }
+    }
+
+    protected override void OnMouseMove(MouseEventArgs e)
+    {
+	    if (e.Button == MouseButtons.Left & & isClipping)
+	    {
+		    rectSelected.Width = e.X - rectSelected.X;
+		    rectSelected.Height = e.Y - rectSelected.Y;
+		    this.Invalidate();
+	    }
+    }
+
+    protected override void OnMouseUp(MouseEventArgs e)
+    {
+	    if (e.Button == MouseButtons.Left && isClipping)
+	    {
+		    rectSelected.Width = e.X - rectSelected.X;
+		    rectSelected.Height = e.Y - rectSelected.Y;
+		    this.Invalidate();
+		    resultBmp = new Bitmap(rectSelected.Width, rectSelected.Height);
+		    using (Graphics g = Graphics.FromImage(resultBmp))
+		    {
+		    	g.DrawImage(screen,new Rectangle(0, 0, rectSelected.Width, rectSelected.Height), rectSelected, GraphicsUnit.Pixel);
+		    }
+		    this.DialogResult = DialogResult.OK;
+	    }
+    }
+
+    protected override void OnPaint(PaintEventArgs e)
+    {
+	    Graphics g = e.Graphics;
+	    g.DrawImage(screen, 0, 0);
+	    g.DrawImage(coverLayer, 0, 0);
+	    PaintRectangle();
+    }
+
+    protected override void OnPaintBackground(PaintEventArgs e)
+    {
+    }
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+	    if (e.KeyCode == Keys.Escape)
+	    {
+	    	this.DialogResult = DialogResult.Cancel;
+	    }
+    }
+
+    private void PaintRectangle()
+    {
+	    using (Graphics g = Graphics.FromImage(coverLayer))
+	    {
+		    g.Clear(coverColor);
+		    GraphicsPath path = new GraphicsPath();
+		    path.AddRectangle(this.Bounds);
+		    path.AddRectangle(rectSelected);
+		    g.FillPath(rectBrush, path);
+		    g.DrawRectangle(Pens.Blue, rectSelected);
+	    }
+    }
+
+    public Bitmap ResultBitmap
+    {
+    	get { return resultBmp; }
+    }
+    
+    
+
+}
+
+    
+    
+
+
+/*
+XmlDocument 用來存放XML文件的類別
+
+XmlElement 存取節點屬性的類別
+
+XmlNode 選取節點的類別
+
+
+使用XmlDocument.CreateElement 方法建立節點
+*/
+			
        
 
 

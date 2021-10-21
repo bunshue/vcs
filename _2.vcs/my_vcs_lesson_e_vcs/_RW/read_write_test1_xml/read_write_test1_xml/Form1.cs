@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Xml;
+using System.Xml.Linq;  //for XNamespace, XElement
 using System.IO;
 
 namespace read_write_test1_xml
@@ -227,7 +228,64 @@ namespace read_write_test1_xml
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //XElement物件預設是以序列的方式處理xml資料，可以直接根據xml資料的階層結構，透過XElement物件建立資料
 
+            //XML Test
+            XElement xmlTree1a = new XElement("Root",
+                new XElement("Child1", 1),
+                new XElement("Child2", 2),
+                new XElement("Child3", 3),
+                new XElement("Child4", 4),
+                new XElement("Child5", 5),
+                new XElement("Child6", 6)
+                );
+
+            richTextBox1.Text += "XML 內容\n";
+            richTextBox1.Text += xmlTree1a + "\n";
+
+            XElement xmlTree2a = new XElement("Root",
+                from el in xmlTree1a.Elements()
+                where ((int)el >= 3 && (int)el <= 5)
+                select el
+            );
+
+            richTextBox1.Text += "XML 內容\n";
+            richTextBox1.Text += xmlTree2a + "\n";
+
+            XNamespace aw = "http://www.adventure-works.com";
+            XElement xmlTree1b = new XElement(aw + "Root",
+                new XElement(aw + "Child1", 1),
+                new XElement(aw + "Child2", 2),
+                new XElement(aw + "Child3", 3),
+                new XElement(aw + "Child4", 4),
+                new XElement(aw + "Child5", 5),
+                new XElement(aw + "Child6", 6)
+                );
+
+            richTextBox1.Text += "XML 內容\n";
+            richTextBox1.Text += xmlTree1b + "\n";
+
+            XElement xmlTree2b = new XElement(aw + "Root",
+                from el in xmlTree1b.Elements()
+                where ((int)el >= 3 && (int)el <= 5)
+                select el
+            );
+
+            richTextBox1.Text += "XML 內容\n";
+            richTextBox1.Text += xmlTree2b + "\n";
+
+            XElement company =
+                new XElement("Company",
+                new XElement("Employee",
+                new XElement("ID", "001"),
+                new XElement("Name", "胖虎")),
+                new XElement("Employee",
+                new XElement("ID", "002"),
+                new XElement("Name", "小夫")
+                )
+                );
+            richTextBox1.Text += "XML 內容\n";
+            richTextBox1.Text += company.ToString() + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)

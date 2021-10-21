@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "read_write_xml", "read_write_xml\read_write_xml.csproj", "{35A23B07-3BCC-44C4-98BE-F1E0151F1D21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35A23B07-3BCC-44C4-98BE-F1E0151F1D21}.Debug|x86.ActiveCfg = Debug|x86
+		{35A23B07-3BCC-44C4-98BE-F1E0151F1D21}.Debug|x86.Build.0 = Debug|x86
+		{35A23B07-3BCC-44C4-98BE-F1E0151F1D21}.Release|x86.ActiveCfg = Release|x86
+		{35A23B07-3BCC-44C4-98BE-F1E0151F1D21}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
