@@ -32,7 +32,9 @@ namespace vcs_System1
     public partial class Form1 : Form
     {
         DateTime start_time = DateTime.Now;
-        static PerformanceCounter pc = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+
+        //PerformanceCounter cpuPerformance = new PerformanceCounter(); 若未給參數 要在使用時給參數
+        static PerformanceCounter cpuPerformance = new PerformanceCounter("Processor", "% Processor Time", "_Total");
 
         public Form1()
         {
@@ -828,7 +830,6 @@ namespace vcs_System1
             richTextBox1.Text += "找個地方加入WndProc()即可\n";
         }
 
-
         [DllImport("kernel32.dll")]
         private static extern int SetComputerName(string ipComputerName);//重写API函数
 
@@ -1411,9 +1412,16 @@ namespace vcs_System1
             label3.Text = "虛擬內存總量(B)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory / 1024 / 1024) + " MB";
             label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024) + " MB";
 
-            double cpu_usage;
-            cpu_usage = (double)pc.NextValue();
+            timer2.Interval = 2000;
+            double cpu_usage = cpuPerformance.NextValue();
             label5.Text = "CPU使用率 " + cpu_usage.ToString() + " %";
+            richTextBox1.Text += "CPU使用率 " + cpu_usage.ToString() + " %\n";
+
+            /*
+            cpuPerformance.CategoryName = "Processor";
+            cpuPerformance.CounterName = "% Processor Time";
+            cpuPerformance.InstanceName = "_Total";
+            */
         }
 
         private void bt_memory_Click(object sender, EventArgs e)

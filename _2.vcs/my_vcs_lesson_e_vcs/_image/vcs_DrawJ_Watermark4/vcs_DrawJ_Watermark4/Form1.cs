@@ -96,7 +96,7 @@ namespace vcs_DrawJ_Watermark4
                 drawRect = new RectangleF(73, 135, 450, 64);
                 //color = Color.FromArgb(255, 255, 255);
                 color = Color.Red;
-                
+
             }
             else
             {
@@ -121,6 +121,50 @@ namespace vcs_DrawJ_Watermark4
         /*       和第一種方法比起來，第二種方法更直觀，更短小精悍，只需要在你需要添加水印的圖片上計算好固定坐標然後先畫一個矩形，然後把水印漢字畫在矩形內，這樣不管水印漢字如何變化都可以在圖片固定位置居中。
         */
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //讀取圖檔, 多一層Image結構
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image = Image.FromFile(filename);
+            image = AddTextToImg(image, "lion-mouse");
+            pictureBox1.Image = image;
+        }
+
+        public static Image AddTextToImg(Image image, string text)
+        {
+            Bitmap bitmap = new Bitmap(image, image.Width, image.Height);
+            Graphics g = Graphics.FromImage(bitmap);
+
+            float fontSize = 12.0f; //字體大小
+            float textWidth = text.Length * fontSize; //文本的長度
+            //下面定義一個矩形區域，以後在這個矩形裡畫上白底黑字
+            float rectX = 0;
+            float rectY = 0;
+            float rectWidth = text.Length * (fontSize + 8);
+            float rectHeight = fontSize + 8;
+            //聲明矩形域
+            RectangleF textArea = new RectangleF(rectX, rectY, rectWidth, rectHeight);
+
+            Font font = new Font("宋體", fontSize); //定義字體
+            Brush whiteBrush = new SolidBrush(Color.White); //白筆刷，畫文字用
+            Brush blackBrush = new SolidBrush(Color.Black); //黑筆刷，畫背景用
+
+
+            g.FillRectangle(blackBrush, rectX, rectY, rectWidth, rectHeight);
+
+            g.DrawString(text, font, whiteBrush, textArea);
+            MemoryStream ms = new MemoryStream();
+            //保存為Jpg類型
+            bitmap.Save(ms, ImageFormat.Jpeg);
+
+            Image h_hovercImg = Image.FromStream(ms);
+
+            g.Dispose();
+            bitmap.Dispose();
+
+
+            return h_hovercImg;
+        }
     }
 }
 

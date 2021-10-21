@@ -56,7 +56,16 @@ namespace read_write_test1_xml
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -95,17 +104,14 @@ namespace read_write_test1_xml
 
                     if (readerXml.Name == "IpAddress")
                     {
-                        //Console.WriteLine(readerXml.ReadElementString().Trim());
                         richTextBox1.Text += readerXml.Name + " :\t" + readerXml.ReadElementString().Trim() + "\n";
                     }
                     if (readerXml.Name == "Netmask")
                     {
-                        //Console.WriteLine(readerXml.ReadElementString().Trim());
                         richTextBox1.Text += readerXml.Name + " :\t" + readerXml.ReadElementString().Trim() + "\n";
                     }
                     if (readerXml.Name == "Gateway")
                     {
-                        //Console.WriteLine(readerXml.ReadElementString().Trim());
                         richTextBox1.Text += readerXml.Name + " :\t" + readerXml.ReadElementString().Trim() + "\n";
                     }
                 }
@@ -290,37 +296,202 @@ namespace read_write_test1_xml
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //建立普通XML
 
+            //通過代碼來創建XML文檔
+            //1、引用命名空間
+            //2、創建XML文檔對象
+            XmlDocument doc = new XmlDocument();
+            //3、創建第一個行描述信息，並且添加到doc文檔中
+            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "utf-8", null);
+            doc.AppendChild(dec);
+            //4、創建根節點
+            XmlElement books = doc.CreateElement("Books");
+            //將根節點添加到文檔中
+            doc.AppendChild(books);
+
+            //5、給根節點Books創建子節點
+            XmlElement book1 = doc.CreateElement("Book");
+            //將book添加到根節點
+            books.AppendChild(book1);
+            //6、給Book1添加子節點
+            XmlElement name1 = doc.CreateElement("Name");
+            name1.InnerText = "三國演義";
+            book1.AppendChild(name1);
+
+            XmlElement price1 = doc.CreateElement("Price");
+            price1.InnerText = "70";
+            book1.AppendChild(price1);
+
+            XmlElement des1 = doc.CreateElement("Des");
+            des1.InnerText = "好看";
+            book1.AppendChild(des1);
+
+            XmlElement book2 = doc.CreateElement("Book");
+            books.AppendChild(book2);
+
+
+            XmlElement name2 = doc.CreateElement("Name");
+            name2.InnerText = "西游記";
+            book2.AppendChild(name2);
+
+            XmlElement price2 = doc.CreateElement("Price");
+            price2.InnerText = "80";
+            book2.AppendChild(price2);
+
+            XmlElement des2 = doc.CreateElement("Des");
+            des2.InnerText = "還不錯";
+            book2.AppendChild(des2);
+
+            doc.Save("Books.xml");
+            richTextBox1.Text += "存檔完成\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //建立帶屬性的XML
 
+            XmlDocument doc = new XmlDocument();
+            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "utf-8", "yes");
+            doc.AppendChild(dec);
+
+            XmlElement order = doc.CreateElement("Order");
+            doc.AppendChild(order);
+
+            XmlElement customerName = doc.CreateElement("CustomerName");
+            customerName.InnerText = "張三";
+            order.AppendChild(customerName);
+
+            XmlElement customerNumber = doc.CreateElement("CustomerNumber");
+            customerNumber.InnerText = "1010101";
+            order.AppendChild(customerNumber);
+
+
+            XmlElement items = doc.CreateElement("Items");
+            order.AppendChild(items);
+
+            XmlElement orderItem1 = doc.CreateElement("OrderItem");
+            //給節點添加屬性
+            orderItem1.SetAttribute("Name", "單反");
+            orderItem1.SetAttribute("Count", "1120");
+            items.AppendChild(orderItem1);
+
+            XmlElement orderItem2 = doc.CreateElement("OrderItem");
+            //給節點添加屬性
+            orderItem2.SetAttribute("Name", "書");
+            orderItem2.SetAttribute("Count", "30");
+            items.AppendChild(orderItem2);
+
+            XmlElement orderItem3 = doc.CreateElement("OrderItem");
+            //給節點添加屬性
+            orderItem3.SetAttribute("Name", "手機");
+            orderItem3.SetAttribute("Count", "2000");
+            items.AppendChild(orderItem3);
+
+            doc.Save("Order.xml");
+            richTextBox1.Text += "存檔完成\n";
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //追加XML
 
+            //追加XML文檔
+            XmlDocument doc = new XmlDocument();
+            XmlElement books;
+            if (File.Exists("Books.xml"))
+            {
+                //如果文件存在 載入XML
+                doc.Load("Books.xml");
+                //獲得文件的根節點
+                books = doc.DocumentElement;
+            }
+            else
+            {
+                //如果文件不存在
+                //創建第一行
+                XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "utf-8", null);
+                doc.AppendChild(dec);
+                //創建跟節點
+                books = doc.CreateElement("Books");
+                doc.AppendChild(books);
+            }
+            //5、給根節點Books創建子節點
+            XmlElement book1 = doc.CreateElement("Book");
+            //將book添加到根節點
+            books.AppendChild(book1);
+
+            //6、給Book1添加子節點
+            XmlElement name1 = doc.CreateElement("Name");
+            name1.InnerText = "c#開發大全";
+            book1.AppendChild(name1);
+
+            XmlElement price1 = doc.CreateElement("Price");
+            price1.InnerText = "110";
+            book1.AppendChild(price1);
+
+            XmlElement des1 = doc.CreateElement("Des");
+            des1.InnerText = "看不懂";
+            book1.AppendChild(des1);
+
+            doc.Save("Books2.xml");
+            richTextBox1.Text += "存檔完成\n";
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //讀取普通XML
+            XmlDocument doc = new XmlDocument();
+            //載入要讀取的XML
+            doc.Load("Books.xml");
 
+            //獲得根節點
+            XmlElement books = doc.DocumentElement;
+
+            //獲得子節點 返回節點的集合
+            XmlNodeList xnl = books.ChildNodes;
+
+            foreach (XmlNode item in xnl)
+            {
+                richTextBox1.Text += item.InnerText + "\n";
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //讀取帶屬性的XML
 
+            XmlDocument doc = new XmlDocument();
+            doc.Load("Order.xml");
+            XmlNodeList xnl = doc.SelectNodes("/Order/Items/OrderItem");
+            foreach (XmlNode node in xnl)
+            {
+                richTextBox1.Text += node.Attributes["Name"].Value + "\n";
+                richTextBox1.Text += node.Attributes["Count"].Value + "\n";
+            }
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-
+            //修改屬性的值
+            XmlDocument doc = new XmlDocument();
+            doc.Load("Order.xml");
+            XmlNode xn = doc.SelectSingleNode("/Order/Items/OrderItem[@Name='單反']");
+            xn.Attributes["Count"].Value = "2000";
+            xn.Attributes["Name"].Value = "電腦";
+            doc.Save("Order2.xml");
+            richTextBox1.Text += "存檔完成\n";
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-
+            //刪除XML節點
+            XmlDocument doc = new XmlDocument();
+            doc.Load("Order.xml");
+            XmlNode xn = doc.SelectSingleNode("/Order/Items");
+            xn.RemoveAll();
+            doc.Save("Order3.xml");
+            richTextBox1.Text += "存檔完成\n";
         }
     }
 }

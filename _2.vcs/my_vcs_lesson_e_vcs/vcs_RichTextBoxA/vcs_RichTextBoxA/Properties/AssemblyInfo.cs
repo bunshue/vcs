@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("read_write_xml")]
+[assembly: AssemblyTitle("vcs_RichTextBoxA")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("read_write_xml")]
+[assembly: AssemblyProduct("vcs_RichTextBoxA")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("fbcf78a1-d364-4b5d-a9ae-2d967a45177e")]
+[assembly: Guid("7ccd2b79-2c2f-4e23-b437-a5dbea9f44ce")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

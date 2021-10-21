@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace read_write_xml.Properties
+namespace vcs_RichTextBoxA.Properties
 {
 
 

@@ -1,4 +1,6 @@
 
+作為一個小型的數據存儲傳遞的工具——XML
+
 try by sugar
 C#如何獲取遠程磁盤上的剩余空間
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/191690.html

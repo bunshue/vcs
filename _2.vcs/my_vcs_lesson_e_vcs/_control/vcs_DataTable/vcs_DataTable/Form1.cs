@@ -78,6 +78,9 @@ namespace vcs_DataTable
             Console.WriteLine(value);
             */
 
+
+            //可以把 DataTable 直接轉給 DataGridView 顯示
+            //dataGridView1.DataSource = dt.DefaultView;
         }
     }
 }

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{35A23B07-3BCC-44C4-98BE-F1E0151F1D21}</ProjectGuid>
+    <ProjectGuid>{DF7CB7FE-EA47-4D6E-8D2B-DD4DADA4CB45}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>read_write_xml</RootNamespace>
-    <AssemblyName>read_write_xml</AssemblyName>
+    <RootNamespace>vcs_RichTextBoxA</RootNamespace>
+    <AssemblyName>vcs_RichTextBoxA</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
