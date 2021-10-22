@@ -1,4 +1,601 @@
 
+Application.StartupPath：獲取啟動了應用程序的可執行文件的路徑，不包括可執行文件的名稱。
+Application.ExecutablePath：獲取啟動了應用程序的可執行文件的路徑，包括可執行文件的名稱。
+	
+
+
+
+Directory类
+
+用来操作文件夹的
+
+Directory.CreateDirectory("d:/ccc/cc"); //创建文件夹
+
+Directory.Delete("d:/ccc",true); //true删除非空文件夹
+
+Directory.Move(@"d:/ccc", @"d:/cccc"); //剪切操作 源目录没了 必须同一卷轴d盘
+
+string[] s = Directory.GetFiles(@"D:\项目\Web\Images\shiji"); //获得文件夹目录下所有文件全路径
+
+string[] s = Directory.GetFiles(@"D:\项目\Web\Images\shiji","*.jpg"); //获得文件夹目录下指定后缀名文件全路径
+
+string[] s = Directory.GetDirectories(@"D:\项目\Web\Images"); //获得文件夹目录下的文件夹的全路径
+
+Directory.Exists(@"D:\项目\Web\Images") //是否存在某文件夹
+
+
+进程
+
+我们可以把计算机中每一个运行的应用程序当作是一个进程
+	
+///获得当前程序中正在运行的进程
+Process[] pros = Process.GetProcesses();
+foreach (var item in pros)
+{　　　　//item.Kill(); //关闭所有进程.　　　　//item.ProcessName; //进程名
+    Console.Write(item.ToString());
+}
+//通过进程打开一些程序
+Process.Start("calc"); //打开计算器
+Process.Start("notepad"); //打开记事本
+//打开指定文件
+ProcessStartInfo pro = new ProcessStartInfo(@"d:\11.txt");
+Process pr = new Process();
+pr.StartInfo = pro;
+pr.Start();
+
+线程
+
+每一个进程是由多个线程组成的。
+
+单线程：让程序做多件事时，会引发卡死 假死状态。
+
+多线程：让一个程序同时处理多个事情，后台运行程序，提高程序的运行效率。
+
+前台线程：只有所有的前台线程都关闭才能完成程序关闭。(winform多窗口时)
+
+后台线程：只要所有的前台线程结束，后台线程自动结束。
+	
+	
+//实例化Thread类，并传入一个指向线程所要运行的方法。（这时线程已经产生，但还没有运行）
+//调用Thread类的Start方法，标记线程可以被CPU执行了，但具体执行事件由CPU决定。
+Thread th = new Thread(Test); //创建一个线程去执行这个方法。
+th.IsBackground = true; //将线程设置为后台线程，前台关闭后 线程结束。
+th.Start(); //标记准备就绪，可以随意被执行，具体什么时候执行由CPU决定。
+//在.net下是不允许跨线程访问的。
+//有时候需要手动释放线程 关闭时 判断线程是否关闭
+if (th != null)
+{
+    th.Abort(); //结束这个线程 不能再Start()
+}
+Thread.Sleep(3000); //睡眠3秒后执行
+//线程执行带参数方法
+Thread.Start("123")； object类型参数 在start后括号写参数
+
+
+
+
+画验证码
+
+
+
+/// <summary>
+/// 字符
+/// </summary>
+/// <param name="len">几位</param>
+/// <returns></returns>
+public static string validation(int cd)
+{
+    var ran = new Random();
+    int num, tem;
+    string rtuStr = "";
+    for (int i = 0; i < cd; i++)
+    {
+        num = ran.Next();
+        if (i % 2 == 1)
+            tem = num % 10 + '0'; //数字
+        else
+            tem = num % 26 + 'A'; //字母
+        rtuStr += Convert.ToChar(tem).ToString();
+    }
+    //写入cookie
+    HttpCookie cookie = new HttpCookie("check");
+    cookie.Value = rtuStr.ToLower();
+    HttpContext.Current.Response.Cookies.Add(cookie);
+    return rtuStr;
+}
+
+/// <summary>
+/// 生成图像
+/// </summary>
+/// <param name="check">字符</param>
+public static byte[] drawImg(string check)
+{
+    Bitmap img = new Bitmap(90, 34);
+    var ht = Graphics.FromImage(img);
+    ht.Clear(Color.White);
+    ht.DrawLine(new Pen(Color.SpringGreen), 1, 1, 90, 34);
+    Font font = new Font("微软雅黑", 20, FontStyle.Bold);
+    var jianbian = new LinearGradientBrush(new Rectangle(0, 0, img.Width, img.Height), Color.Teal, Color.Snow, 2f, true);
+    ht.DrawString(check, font, jianbian, 0, 0);
+    ht.DrawRectangle(new Pen(Color.Aqua), 0, 0, img.Width - 1, img.Height - 1);
+    MemoryStream ms = new MemoryStream();
+    img.Save(ms, ImageFormat.Jpeg);
+    ht.Dispose();
+    img.Dispose();
+    return ms.ToArray();
+}    
+
+
+
+
+
+
+XML文件
+
+可扩展标记性语言，用来保存轻量级数据。
+
+XML的标签是成对出现的、并且是区分大小写的。
+
+XML文档必须包含根节点，且只有一个。
+
+创建XML文件
+
+//创建XML对象
+XmlDocument doc = new XmlDocument();
+//创建文档描述信息
+XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "utf-8", null);
+doc.AppendChild(dec);
+
+//创建根节点
+XmlElement books = doc.CreateElement("Books");
+doc.AppendChild(books);
+
+//创建子节点
+XmlElement book1 = doc.CreateElement("Book");
+books.AppendChild(book1); //将子节点添加到books
+
+//给book1子节点追加子节点
+XmlElement name1 = doc.CreateElement("Name");
+name1.InnerText = "c#"; //赋值 文本值
+book1.AppendChild(name1);
+
+XmlElement price1 = doc.CreateElement("Price");
+price1.InnerXml = "<b>10.0</b>"; //赋值 html标签
+book1.AppendChild(price1);
+
+XmlElement items = doc.CreateElement("Items");
+//给节点增加属性
+items.SetAttribute("Name", "c#");
+items.SetAttribute("Price", "10.0");
+book1.AppendChild(items);
+
+doc.Save("Books.xml"); //保存
+
+//创建后
+<?xml version="1.0" encoding="utf-8"?>
+<Books>
+  <Book>
+    <Name>c#</Name>
+    <Price>
+      <b>10.0</b>
+    </Price>
+    <Items Name="c#" Price="10.0" />
+  </Book>
+</Books>
+
+
+向已有XML文件中追加
+XmlDocument doc = new XmlDocument();
+if (File.Exists("Books.xml"))
+{
+    doc.Load("Books.xml"); //加载 xml
+    XmlElement books = doc.DocumentElement; //得到根节点
+    //再建立元素进行追加
+}
+
+获取XML文件
+
+XmlDocument doc = new XmlDocument();
+doc.Load("Books.xml");
+
+XmlElement books = doc.DocumentElement;
+XmlNodeList xnl = books.ChildNodes; //得到所有节点
+
+foreach (XmlNode v in xnl) //遍历得到所有节点值
+{
+    Console.WriteLine(v.InnerText);
+}
+
+XmlNodeList xnl1 = doc.SelectNodes("Books/Book/Items"); //查找节点列表
+foreach (XmlNode node in xnl1)
+{
+    Console.WriteLine(node.Attributes["Name"].Value); //得到name属性的值
+    Console.WriteLine(node.Attributes["Price"].Value); //得到price属性的值
+}
+
+删除XML文件
+
+XmlDocument doc = new XmlDocument();
+doc.Load("Books.xml");
+
+XmlNode xnl = doc.SelectSingleNode("Books/Book"); //查找单一节点
+xnl.RemoveAll(); //删除全部
+doc.Save("Books.xml");
+Console.ReadKey();
+
+
+LinqToXml
+
+//兼容传统方法创建
+XDocument xDoc = new XDocument();
+//xDoc.Declaration = new XDeclaration() 默认UTF-8 第一行不需要单独建
+XElement xRoot = new XElement("root", "值"); //定义元素
+
+XElement xRoot1 = new XElement("root1");  //定义元素２
+xRoot1.Value = "值1";
+
+XAttribute xattr = new XAttribute("Id", "1"); //定义属性
+
+xDoc.Add(xRoot); //统一使用add添加
+xRoot.Add(xattr);
+
+xDoc.Save(@"d:\linqtoxml.xml");
+
+//真正的linq语法
+//F#  函数式编程语言
+new XDocument(
+    new XElement("root",
+        new XAttribute("id", "001"),
+        "值")
+    ).Save(@"d:\2.xml");
+//链式编程，流水线生产 f1().f2().f3()...
+
+//查找xml
+XDocument xdoc = new XDocument(new XElement("root"));//根节点
+xdoc.Root.Add(new XElement("person",
+    new XAttribute("id", "1"),
+    new XAttribute("name", "zhangsan"),
+    new XAttribute("sex", "1")
+    )); //添加子节点
+xdoc.Root.Add(new XElement("person",
+   new XAttribute("id", "2"),
+   new XAttribute("name", "lisi"),
+   new XAttribute("sex", "2")
+   ));
+xdoc.Save(@"d:\2.xml");
+
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <person id="1" name="zhangsan" sex="1" />
+  <person id="2" name="lisi" sex="2" />
+</root>
+
+//开始查找、修改、删除
+
+XDocument xdoc = XDocument.Load(@"d:\2.xml"); //加载xml
+foreach (XElement xlt in xdoc.Root.Elements()) //Root根节点 Elements 元素集合
+{
+    if (xlt.Name.LocalName == "person") //Name节点名 LocalName不带命名空间的节点名
+    {
+        if (xlt.Attribute("id").Value == "1") //判断属性值为1时
+        {
+            Response.Write(xlt.Attribute("name").Value); //输出name
+            xlt.Attribute("name").Value = "newname"; //修改name
+            xlt.Remove(); //删除此节点
+            xdoc.Save(@"d:2.xml");
+        }
+    }
+}
+
+//Linq查询语法
+//Descendants()所有子节点 可加某节点下所有节点
+var query = from s in xdoc.Descendants() //从集合里找
+            where s.Name.LocalName == "person"
+            select s;
+foreach (XElement xlt in query)
+{
+    Response.Write(xlt.Value);
+}
+
+//Linq方法语法(lambda表达式)
+foreach (XElement xlt in xdoc.Descendants().Where(s =>
+{
+    if (s.Name.LocalName == "name")
+    {
+        return true;
+    }
+    return false;
+}))
+{
+    Response.Write(xlt.Value);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+
+
+DataTable中使用Order By排序與Where過濾
+
+/// <summary>
+/// DataTable中使用Order By排序與Where過濾
+/// </summary>
+private void Bind()
+{
+    //這裡構造一個數據源
+    DataTable dt = new DataTable();
+    dt.Columns.Add("ID", typeof(System.String));
+    dt.Columns.Add("uName", typeof(System.String));
+    dt.Columns.Add("uDate", typeof(System.DateTime));
+    for (int i = 0; i < 10; i++)
+    {
+        DataRow dr = dt.NewRow();
+        dr["ID"] = i.ToString();
+        dr["uName"] = "name" + i;
+        dt.Rows.Add(dr);
+    }
+    dt.DefaultView.Sort = "ID asc";//相當於Order By
+    dt.DefaultView.RowFilter = "ID>5";//相當於Where
+    GridView1.DataSource = dt;
+    GridView1.DataBind();
+}
+    
+
+
+
+
+
+
+C# 獲得主板參數程序代碼
+C# 獲得主板參數程序代碼如下：
+public static void Mainboard(out string[] 制造商, out string[] 型號)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+        制造商 = new string[searcher.Get().Count];
+        型號 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                型號[i] = share.GetPropertyValue("Product").ToString();
+                i ;
+        }
+} 
+
+
+C# 獲得主板序列號程序代碼
+
+C# 獲得主板序列號程序代碼如下：
+public static void MainboardSerialNumber(out string[] 序列號)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
+        序列號 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                序列號[i] = share.GetPropertyValue("SerialNumber").ToString();
+                i ;
+        }
+}
+
+
+C# 獲得網卡參數程序代碼
+
+C# 獲得網卡參數程序代碼如下：
+public static void NetworkAdapter(out string[] 制造商, out string[] MAC地址)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+        制造商 = new string[searcher.Get().Count];
+        MAC地址 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                try
+                {
+                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                        MAC地址[i] = share.GetPropertyValue("MACAddress").ToString();
+                }
+                        catch (System.Exception er)
+                {
+                }
+                i ;
+        }
+} 
+
+
+
+C# 獲得硬盤參數程序代碼
+C# 獲得硬盤參數程序代碼如下：
+public static void HardDisk(out string[] 制造商, out string[] 型號, out string[] 序列號)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+        制造商 = new string[searcher.Get().Count];
+        型號 = new string[searcher.Get().Count];
+        序列號 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                try
+                        {
+                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                        型號[i] = share.GetPropertyValue("Model").ToString();
+                        序列號[i] = share.GetPropertyValue("Signature").ToString();
+                }
+                catch (System.Exception er)
+                {
+                }
+                i ;
+        }
+} 
+
+
+C# 獲得處理器參數程序代碼
+C# 獲得處理器參數程序代碼如下：
+public static void Processor(out string[] 制造商, out string[] 型號, out string[] 序列號)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+        制造商 = new string[searcher.Get().Count];
+        型號 = new string[searcher.Get().Count];
+        序列號 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                try
+                {
+                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                        序列號[i] = share.GetPropertyValue("ProcessorId").ToString();
+                }
+                catch (System.Exception er)
+                {
+                }
+                i ;
+        }
+} 
+
+
+
+
+            string Year = DateTime.Now.Year.ToString();
+            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
+            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
+
+            //年月日文件夾是否存在，不存在則建立
+            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
+            {
+                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
+            }
+
+
+
+
+        public Bitmap bmpobj; 
+ 
+        public VerifyCode(Bitmap pic) 
+        { 
+            bmpobj = new Bitmap(pic);    //轉換為Format32bppRgb 
+        } 
+ 
+        /// <summary> 
+        /// 根據RGB，計算灰度值 
+        /// </summary> 
+        /// <param name="posClr">Color值</param> 
+        /// <returns>灰度值，整型</returns> 
+        private int GetGrayNumColor(System.Drawing.Color posClr) 
+        { 
+            return (posClr.R * 19595 + posClr.G * 38469 + posClr.B * 7472) >> 16; 
+        } 
+ 
+        /// <summary> 
+        /// 灰度轉換,逐點方式 
+        /// </summary> 
+        public void GrayByPixels() 
+        { 
+            for (int i = 0; i < bmpobj.Height; i++) 
+            { 
+                for (int j = 0; j < bmpobj.Width; j++) 
+                { 
+                    int tmpValue = GetGrayNumColor(bmpobj.GetPixel(j, i)); 
+                    bmpobj.SetPixel(j, i, Color.FromArgb(tmpValue, tmpValue, tmpValue)); 
+                } 
+            } 
+        } 
+ 
+
+
+
+
+
+c# Process類使用小例
+
+               
+                Process myProcess = new Process();
+                try
+                {
+                    myProcess.StartInfo.UseShellExecute = false;
+                    myProcess.StartInfo.FileName = exe_filename;
+                    myProcess.StartInfo.CreateNoWindow = true;
+                    myProcess.Start();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+
+
+
+
+C#讀取U盤序列號
+
+
+private List<string> _serialNumber = new List<string>();
+
+/// <summary>
+/// 調用這個函數將本機所有U盤序列號存儲到_serialNumber中
+/// </summary>
+private void matchDriveLetterWithSerial()
+{
+    string[] diskArray;
+    string driveNumber;
+    var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDiskToPartition");
+    foreach (ManagementObject dm in searcher.Get())
+    {
+        getValueInQuotes(dm["Dependent"].ToString());
+        diskArray = getValueInQuotes(dm["Antecedent"].ToString()).Split(,);
+        driveNumber = diskArray[0].Remove(0, 6).Trim();
+        var disks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+        foreach (ManagementObject disk in disks.Get())
+        {
+            if (disk["Name"].ToString() == ("\\.\PHYSICALDRIVE" + driveNumber) & disk["InterfaceType"].ToString() == "USB")
+            {
+                _serialNumber.Add(parseSerialFromDeviceID(disk["PNPDeviceID"].ToString()));
+            }
+        }
+    }
+}
+
+private static string parseSerialFromDeviceID(string deviceId)
+{
+    var splitDeviceId = deviceId.Split(\);
+    var arrayLen = splitDeviceId.Length - 1;
+    var serialArray = splitDeviceId[arrayLen].Split(&);
+    var serial = serialArray[0];
+    return serial;
+}
+
+
+
+
+
+
+
+
 作為一個小型的數據存儲傳遞的工具——XML
 
 try by sugar

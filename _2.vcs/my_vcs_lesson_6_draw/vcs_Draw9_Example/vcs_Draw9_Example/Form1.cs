@@ -6971,7 +6971,9 @@ namespace vcs_Draw9_Example
             g.FillRectangle(Brushes.Pink, new Rectangle(0, 0, 600, 400));
             FillRoundRectangle(g, Brushes.Plum, new Rectangle(100, 100, 100, 100), 8);
             DrawRoundRectangle(g, Pens.Yellow, new Rectangle(100, 100, 100, 100), 8);
-
+            //bm.Save(Response.OutputStream, ImageFormat.Jpeg);
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(filename, ImageFormat.Bmp);
             pictureBox1.Image = bitmap1;
             g.Dispose();
             //bitmap1.Dispose();

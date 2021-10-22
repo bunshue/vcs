@@ -206,10 +206,112 @@ namespace test1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            int len = 100;  //useless
+            string result = CreateCode(len);
+            richTextBox1.Text += result + "\n";
+
         }
+
+        //隨機生成漢字（摘錄保存的代碼），生成漢字摘錄代碼
+
+        /// <summary>
+        /// 隨機生成漢字
+        /// </summary>
+        /// <param name="strlength">長度（4位）</param>
+        /// <returns></returns>
+        public string CreateCode(int strlength)
+        {
+            //定義一個字符串數組儲存漢字編碼的組成元素
+            string[] r = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+            Random rnd = new Random();
+            //定義一個object數組用來
+            object[] bytes = new object[strlength];
+            /**/
+            /*每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中
+            每個漢字有四個區位碼組成
+            區位碼第1位和區位碼第2位作為字節數組第一個元素
+            區位碼第3位和區位碼第4位作為字節數組第二個元素
+            */
+            for (int i = 0; i < strlength; i++)
+            {
+                //區位碼第1位
+                int r1 = rnd.Next(11, 14);
+                string str_r1 = r[r1].Trim();
+                //區位碼第2位
+                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的種子避免產生重復值
+                int r2;
+                if (r1 == 13)
+                    r2 = rnd.Next(0, 7);
+                else
+                    r2 = rnd.Next(0, 16);
+                string str_r2 = r[r2].Trim();
+                //區位碼第3位
+                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r3 = rnd.Next(10, 16);
+                string str_r3 = r[r3].Trim();
+                //區位碼第4位
+                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r4;
+                if (r3 == 10)
+                {
+                    r4 = rnd.Next(1, 16);
+                }
+                else if (r3 == 15)
+                {
+                    r4 = rnd.Next(0, 15);
+                }
+                else
+                {
+                    r4 = rnd.Next(0, 16);
+                }
+                string str_r4 = r[r4].Trim();
+                //定義兩個字節變量存儲產生的隨機漢字區位碼
+                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
+                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
+                //將兩個字節變量存儲在字節數組中
+                byte[] str_r = new byte[] { byte1, byte2 };
+                //將產生的一個漢字的字節數組放入object數組中
+                bytes.SetValue(str_r, i);
+            }
+
+
+            //獲取GB2312編碼頁（表）
+            Encoding gb = Encoding.GetEncoding("gb2312");
+
+            //根據漢字編碼的字節數組解碼出中文漢字
+            string str1 = gb.GetString((byte[])Convert.ChangeType(bytes[0], typeof(byte[])));
+            string str2 = gb.GetString((byte[])Convert.ChangeType(bytes[1], typeof(byte[])));
+            string str3 = gb.GetString((byte[])Convert.ChangeType(bytes[2], typeof(byte[])));
+            string str4 = gb.GetString((byte[])Convert.ChangeType(bytes[3], typeof(byte[])));
+            string txt = str1 + str2 + str3 + str4;
+
+
+            return txt;
+
+        }
+
+
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //MD5加密
+            string text = "lion-mouse";
+            string result = getMd5(text);
+            richTextBox1.Text += result + "\n";
+        }
+
+        public string getMd5(string str)
+        {
+            MD5 md5 = MD5.Create();//MD5抽象类无法实例化 实例化该方法
+            byte[] buffer = Encoding.Default.GetBytes(str); //将字符串转换为字节数组
+            byte[] mdbuffer = md5.ComputeHash(buffer); //调用ComputeHash方法把数组传进去
+            //将字节数组中每个元素ToString();
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < mdbuffer.Length; i++)
+            {
+                result.Append(mdbuffer[i].ToString("x2")); //ToString得到十进制字符串 ToString("x")十六进制字符串 ToString("x2")对齐
+            }
+            return result.ToString();
         }
 
         private void button4_Click(object sender, EventArgs e)

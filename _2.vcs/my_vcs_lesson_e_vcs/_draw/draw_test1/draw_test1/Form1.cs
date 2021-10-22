@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Reflection;    //PropertyInfo
+
 namespace draw_test1
 {
     public partial class Form1 : Form
@@ -241,12 +245,102 @@ namespace draw_test1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //太極圖
+            int imgWidth = 400; //圖象尺寸
+            int eyeRadius = imgWidth / 20; //魚眼半徑
+            int headDiameter = imgWidth / 2; //魚頭直徑
 
+            Bitmap image = new Bitmap(imgWidth, imgWidth);
+            image.SetResolution(300, 300);
+
+            Graphics g = Graphics.FromImage(image);
+
+            //設置圖像質量
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+
+            //底色填充為白色
+            Brush white = new SolidBrush(Color.White);
+            g.FillRectangle(white, new Rectangle(0, 0, imgWidth, imgWidth));
+
+            Brush blue = new SolidBrush(Color.Blue);//定義藍色筆刷
+            Brush red = new SolidBrush(Color.Red);//定義紅色筆刷
+
+            //整個圓形填充藍色
+            g.FillPie(blue, 0, 0, imgWidth, imgWidth, 0, 360);
+
+            //定義右邊的路徑（紅色部分）
+            GraphicsPath redPath = new GraphicsPath();//初始化路徑
+            redPath.AddArc(0, 0, imgWidth, imgWidth, 0, -180);
+            redPath.AddArc(0, headDiameter / 2, headDiameter, headDiameter, 0, -180);
+            redPath.AddArc(headDiameter, headDiameter / 2, headDiameter, headDiameter, 0, 180);
+            //填充右邊部分
+            g.FillPath(red, redPath);
+            //填充紅色眼睛
+            g.FillPie(red, new Rectangle(headDiameter / 2 - eyeRadius, headDiameter - eyeRadius, eyeRadius * 2, eyeRadius * 2), 0, 360);
+            //填充藍色眼睛
+            g.FillPie(blue, new Rectangle(headDiameter + headDiameter / 2 - eyeRadius, headDiameter - eyeRadius, eyeRadius * 2, eyeRadius * 2), 0, 360);
+
+            g.Dispose();
+            pictureBox1.Image = image;
+
+            //使用指定參數輸出
+            //image.Save(Response.OutputStream, myImageCodecInfo, myEncoderParameters);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //生成Color類所有static預定義成員的顏色表
+            //生成Color類所有static預定義成員的顏色表
+            const long CELLS_PER_LINE = 10;
 
+            const float MARGIN = 12;
+            const float CELL_WIDTH = 160;
+            const float CELL_HEIGHT = 64;
+            const float COLOR_LEFT_MARGIN = 8;
+            const float COLOR_TOP_MARGIN = 8;
+            const float COLOR_CELL_WIDTH = 48;
+            const float COLOR_CELL_HEIGHT = 32;
+            const float TEXT_TOP_MARGIN = COLOR_TOP_MARGIN + COLOR_CELL_HEIGHT + 2;
+
+            List<Color> vColors = new List<Color>();
+            Type t = typeof(Color);
+            PropertyInfo[] vProps = t.GetProperties();
+            foreach (PropertyInfo propInfo in vProps)
+            {
+                if (MemberTypes.Property == propInfo.MemberType &&
+                    typeof(Color) == propInfo.PropertyType)
+                {
+                    Color tmpColor = (Color)propInfo.GetValue(null, null);
+                    vColors.Add(tmpColor);
+                }
+            }
+
+            Bitmap bmpColor = new Bitmap((int)(CELLS_PER_LINE * CELL_WIDTH + MARGIN * 2), (int)((vColors.Count / CELLS_PER_LINE + 1) * CELL_HEIGHT + MARGIN * 2));
+            using (Graphics grp = Graphics.FromImage(bmpColor))
+            {
+                grp.Clear(Color.Black);
+
+                for (int i = 0; i < vColors.Count; i++)
+                {
+                    float nLeftBase = MARGIN + i % CELLS_PER_LINE * CELL_WIDTH;
+                    float nTopBase = MARGIN + i / CELLS_PER_LINE * CELL_HEIGHT;
+
+                    grp.DrawRectangle(new Pen(Color.White), nLeftBase, nTopBase, CELL_WIDTH, CELL_HEIGHT);
+
+                    grp.FillRectangle(new SolidBrush(vColors[i]),
+                                      nLeftBase + COLOR_LEFT_MARGIN, nTopBase + COLOR_TOP_MARGIN,
+                                      COLOR_CELL_WIDTH, COLOR_CELL_HEIGHT);
+
+                    grp.DrawString(vColors[i].Name,
+                                   new Font("宋體", 9, FontStyle.Regular),
+                                   new SolidBrush(Color.White),
+                                   nLeftBase + COLOR_LEFT_MARGIN, nTopBase + TEXT_TOP_MARGIN);
+                }
+            }
+            bmpColor.Save("AllColor.bmp");
         }
 
         private void button4_Click(object sender, EventArgs e)
