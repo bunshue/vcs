@@ -238,7 +238,17 @@ namespace network_test2_http
 
         private void button5_Click(object sender, EventArgs e)
         {
+            HttpProvider httpProvider = new HttpProvider();
 
+            // 1. 模擬一個Get請求方式
+            HttpResponseParameter responseParameter1 = httpProvider.Excute(new HttpRequestParameter
+            {
+                Url = "http://www.baidu.com",
+                IsPost = false,
+                Encoding = Encoding.UTF8
+                //Cookie = new HttpCookieType() 如果需要Cookie
+            });
+            System.Console.WriteLine(responseParameter1.Body);
         }
 
         private void button6_Click(object sender, EventArgs e)

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 using System.IO;
 
 //C#圖片加水印
@@ -73,6 +74,84 @@ namespace vcs_DrawJ_Watermark3
             bitmap.Dispose();
             return h_hovercImg;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image.Dispose();
+
+            //調用方法：命名空間.類名.AddWaterText(picpath, "Tandy Tang - 博客園", picpath, 255, 18);
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename2 = @"C:\______test_files\picture1add.jpg";
+            string text = "牡丹亭";
+            int alpha = 255;
+            int fontsize = 30;
+
+            AddWaterText(filename1, filename2, text, alpha, fontsize);
+        }
+
+        /// <summary>
+        /// 圖片加水印文字
+        /// </summary>
+        /// <param name="oldpath">舊圖片地址</param>
+        /// <param name="newpath">新圖片地址</param>
+        /// <param name="text">水印文字</param>
+        /// <param name="Alpha">透明度</param>
+        /// <param name="fontsize">字體大小</param>
+        void AddWaterText(string oldpath, string newpath, string text, int Alpha, int fontsize)
+        {
+            try
+            {
+                text = text + "版權所有";
+                FileStream fs = new FileStream(oldpath, FileMode.Open);
+                BinaryReader br = new BinaryReader(fs);
+                byte[] bytes = br.ReadBytes((int)fs.Length);
+                br.Close();
+                fs.Close();
+                MemoryStream ms = new MemoryStream(bytes);
+
+                Image imgPhoto = Image.FromStream(ms);
+                int imgPhotoWidth = imgPhoto.Width;
+                int imgPhotoHeight = imgPhoto.Height;
+
+                Bitmap bitmap1 = new Bitmap(imgPhotoWidth, imgPhotoHeight, PixelFormat.Format24bppRgb);
+
+                bitmap1.SetResolution(72, 72);
+                Graphics g = Graphics.FromImage(bitmap1);
+                //gif背景色
+                g.Clear(Color.FromName("white"));
+                g.InterpolationMode = InterpolationMode.High;
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.DrawImage(imgPhoto, new Rectangle(0, 0, imgPhotoWidth, imgPhotoHeight), 0, 0, imgPhotoWidth, imgPhotoHeight, GraphicsUnit.Pixel);
+                Font font = null;
+                SizeF crSize = new SizeF();
+                font = new Font("宋體", fontsize, FontStyle.Bold);
+                //測量指定區域 www.2cto.com
+                crSize = g.MeasureString(text, font);
+                float y = imgPhotoHeight - crSize.Height;
+                float x = imgPhotoWidth - crSize.Width;
+                StringFormat StrFormat = new StringFormat();
+                StrFormat.Alignment = StringAlignment.Center;
+
+                //畫兩次制造透明效果
+                SolidBrush semiTransBrush2 = new SolidBrush(Color.FromArgb(Alpha, 56, 56, 56));
+                g.DrawString(text, font, semiTransBrush2, x + 1, y + 1);
+
+                g.DrawRectangle(Pens.Red, 10, 10, 100, 100);
+
+                SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(Alpha, 176, 176, 176));
+                g.DrawString(text, font, semiTransBrush, x, y);
+                bitmap1.Save(newpath, ImageFormat.Jpeg);
+                //g.Dispose();
+                imgPhoto.Dispose();
+                pictureBox1.Image = bitmap1;
+                //bitmap1.Dispose();
+            }
+            catch
+            {
+                ;
+            }
+        }
+
 
     }
 }

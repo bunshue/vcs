@@ -7,12 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Microsoft.Win32;
+using System.Net;
+using System.Xml;
+using System.Text.RegularExpressions;
+using System.Management;
+using System.IO;
+using Shell32;
+using System.Runtime.InteropServices;
 
-namespace test999
+namespace test2
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -31,8 +38,8 @@ namespace test999
             int dy;
 
             //button
-            x_st = 15;
-            y_st = 15;
+            x_st = 10;
+            y_st = 10;
             dx = 180;
             dy = 90;
 
@@ -55,88 +62,111 @@ namespace test999
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 4);
 
             //控件位置
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
+            bt_exit.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_exit.Size.Width, richTextBox1.Location.Y + 0);
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
-            getxx();
-            richTextBox1.Text += "獲取網關和IP\n";
-
+            //C#遍歷窗體控件
+            string find_ctrl = "button8";
+            ForeachFormControls(find_ctrl);
         }
 
-
-        //c#獲取網關和IP
-
-        private void getxx()
+        /// <summary>
+        /// Winform C#遍历窗体控件
+        /// </summary>
+        /// <param name="ctrlName">控件名称</param>
+        public void ForeachFormControls(string ctrlName)
         {
-            RegistryKey start = Registry.LocalMachine;
-            RegistryKey cardServiceName, networkKey;
-            string networkcardKey = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkCards";
-            string serviceKey = @"SYSTEM\CurrentControlSet\Services\";
-            string networkcardKeyName, deviceName;
-            string deviceServiceName, serviceName;
-            RegistryKey serviceNames = start.OpenSubKey(networkcardKey);
-            if (serviceNames == null)
+            foreach (Control ctrl in this.Controls)
             {
-                MessageBox.Show("Bad registry key");
-                return;
-            }
-            string[] networkCards = serviceNames.GetSubKeyNames();
-            serviceNames.Close();
-            foreach (string keyName in networkCards)
-            {
-                networkcardKeyName = networkcardKey + "\\" + keyName;
-                cardServiceName = start.OpenSubKey(networkcardKeyName);
-                if (cardServiceName == null)
+                if (ctrl is Panel)
                 {
-                    MessageBox.Show(networkcardKeyName);
-                    return;
+                    //相關操作代碼
+                    ctrl.BackColor = Color.Aquamarine;
                 }
-                deviceServiceName = (string)cardServiceName.GetValue("ServiceName");
-                deviceName = (string)cardServiceName.GetValue("Description");
-                MessageBox.Show(deviceName);
-                serviceName = serviceKey + deviceServiceName + "\\Parameters\\Tcpip";
-                networkKey = start.OpenSubKey(serviceName);
-                if (networkKey == null)
+                else if (ctrl is Button)
                 {
-                    //。。。。。。
+                    ctrl.ForeColor = Color.RoyalBlue;
                 }
-                else
+                else if (ctrl is TextBox)
                 {
-                    string[] ipaddresses = (string[])networkKey.GetValue("IPAddress");
-                    string[] defaultGateways = (string[])networkKey.GetValue("DefaultGateway");
+                    ctrl.Text = null;
+                }
 
-                    string[] subnetmasks = (string[])networkKey.GetValue("SubnetMask");
-                    foreach (string ipaddress in ipaddresses)
-                    {
-                        MessageBox.Show(ipaddress);
-                    }
-                    foreach (string subnetmask in subnetmasks)
-                    {
-                        //。。。。。。
-                    }
-                    foreach (string defaultGateway in defaultGateways)
-                    {
-                        MessageBox.Show(defaultGateway);
-                    }
-                    networkKey.Close();
+                //根據控件名稱找某個控件
+                if (ctrl.Name.Equals(ctrlName))
+                {
+                    //ctrl.Name = string.Empty;
+                    ctrl.BackColor = Color.Red;
                 }
             }
-            start.Close();
         }
 
+        /* 找panel1內的控件
+        /// <summary>
+        /// C#遍历子控件
+        /// </summary>
+        /// <param name="ctrlName">控件名称</param>
+        public void ForeachPanelControls(string ctrlName)
+        {
+            foreach (Control ctrl in panel1.Controls)
+            {
+                if (ctrl is Button)
+                {
+                    if (ctrl.Name.Equals(ctrlName))
+                        ctrl.ForeColor = Color.RoyalBlue;
+                    else
+                        ctrl.ForeColor = Color.SkyBlue;
+                }
+                else if (ctrl is TextBox)
+                {
+                    if (ctrl.Name.Equals(ctrlName))
+                        ctrl.Name = "当前值";
+                    else
+                        ctrl.Text = null;
+                }
+            }
+        }
+        */
+
+        /* 找chekbox內的控件
+        private void ForeachCheckBox(Control ctrls, bool currVal)
+        {
+            CheckBox cb;
+            foreach (Control ctrl in ctrls.Controls)
+            {
+                if (ctrl is CheckBox)
+                {
+                    cb = (CheckBox)ctrl;
+                    cb.Checked = currVal;
+                }
+            }
+        }
+        //same
+        private void ForeachCheckBoxes(Control ctrls, bool currVal)
+        {
+            CheckBox cb;
+            foreach (Control ctrl in ctrls.Controls.OfType<CheckBox>())
+            {
+                cb = (CheckBox)ctrl;
+                cb.Checked = currVal;
+            }
+        }
+        */
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //方法1    
+            //例：窗体的透明度为50% 
+            //this.Opacity = 0.5; 
+
+            //方法2，我用的方法2，窗体透明控件不透明了
+            // TransparencyKey只支持透明或不透明，不支持过度色，比如PNG图片中的从不透明到透明的过渡色会显示出讨厌的效果
+            this.BackColor = Color.Black;
+            this.TransparencyKey = Color.Black;
 
         }
 
@@ -209,6 +239,13 @@ namespace test999
         {
 
         }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+
     }
 }
 

@@ -95,6 +95,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(160, 70);
             this.button4.TabIndex = 4;
+            this.button4.Text = "批量生成隨機密碼";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -226,6 +227,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(160, 70);
             this.button15.TabIndex = 16;
+            this.button15.Text = "MD5加密";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

@@ -1,7 +1,149 @@
 
+
+          
+
+ 
+ 
+
+
+C# 控制台程序設置字體顏色
+
+
+Console.BackgroundColor = ConsoleColor.Blue; //設置背景色
+Console.ForegroundColor = ConsoleColor.White; //設置前景色，即字體顏色
+Console.WriteLine(“第一行白藍.”);
+
+Console.ResetColor(); //將控制台的前景色和背景色設為默認值
+Console.BackgroundColor = ConsoleColor.Green;
+Console.ForegroundColor = ConsoleColor.DarkGreen;
+string value = “第三行 綠暗綠”;
+Console.WriteLine(value.PadRight(Console.WindowWidth-value.Length)); //設置一整行的背景色
+
+
+
+//獲取CPU的序列號
+        private string GetCpuID()
+        {
+            try
+            {
+                //獲取CPU序列號代碼
+                string cpuInfo = "";//cpu序列號
+                ManagementClass mc = new ManagementClass("Win32_Processor");
+                ManagementObjectCollection moc = mc.GetInstances();
+                foreach (ManagementObject mo in moc)
+                {
+                    cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
+                }
+                moc = null;
+                mc = null;
+                return cpuInfo;
+            }
+            catch
+            {
+                return "unknow";
+            }
+            finally
+            {
+            }
+        }
+        
+        
+        
+       /// <summary>
+        /// 性能計數器，用於獲取CPU空閒百分比
+        /// </summary>
+        private static PerformanceCounter mIdle = new PerformanceCounter("Processor", "% Processor Time", "Idle");
+        private Label label1;
+        /**/
+        /// <summary>
+        /// 性能計數器，用於獲取CPU總利用率
+        /// </summary>
+        private static PerformanceCounter mTotal = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+ string  nVal = mTotal.NextValue().ToString();
+ //PerformanceCounter cpuCounter;
+            //PerformanceCounter ramCounter;
+
+            //cpuCounter = new PerformanceCounter();
+
+            //cpuCounter.CategoryName = "Processor";
+            //cpuCounter.CounterName = "% Processor Time";
+            //cpuCounter.InstanceName = "_Total";
+            //ramCounter = new PerformanceCounter("Memory", "Available MBytes");
+
+
+//當前程序的路徑
+System.AppDomain.CurrentDomain.BaseDirectory.ToString();
+
+
+
+
+
+//BinaryWrite
+MemoryStream ms = new MemoryStream();
+BinaryWrite(ms.ToArray());
+
+
 Application.StartupPath：獲取啟動了應用程序的可執行文件的路徑，不包括可執行文件的名稱。
 Application.ExecutablePath：獲取啟動了應用程序的可執行文件的路徑，包括可執行文件的名稱。
 	
+
+
+
+//C#根據原圖生成縮略圖
+
+/// <summary>
+    /// 生成縮略圖
+    /// </summary>
+    /// <param name="imgBuffer">原圖byte[]</param>
+    /// <param name="width">生成的縮略圖寬度</param>
+    /// <param name="height">生成的縮略圖高度</param>
+    /// <returns></returns>
+    private byte[] GenerateThumbImg(byte[] imgBuffer,int width,int height)
+    {
+        MemoryStream imgStream = null;
+        MemoryStream thumbStream = new MemoryStream();;
+        System.Drawing.Image img = null;
+        System.Drawing.Image thumbImg = null;
+        System.Drawing.Graphics g = null;
+        try
+        {
+            imgStream = new MemoryStream(imgBuffer);
+            img = System.Drawing.Image.FromStream(imgStream);
+            thumbImg = new System.Drawing.Bitmap(img, width, height);
+            g = System.Drawing.Graphics.FromImage(thumbImg);
+            // 設置畫布的描繪質量
+            g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.DrawImage(thumbImg, 0, 0, width, height);
+            /*g.DrawImage(img, new System.Drawing.Rectangle(0, 0, width, height),
+                0, 0, width, height, System.Drawing.GraphicsUnit.Pixel);*/
+            thumbImg.Save(thumbStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+            return thumbStream.ToArray();
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
+        finally
+        {
+            if (g != null)
+                g.Dispose();
+            if (thumbImg != null)
+                thumbImg.Dispose();
+            if (img != null)
+                img.Dispose();
+            if (thumbStream != null)
+                thumbStream.Close();
+            if (imgStream != null)
+                imgStream.Close();
+        }
+    }
+    
+
+
+
 
 
 
@@ -630,9 +772,6 @@ MessageBox.Show("已成功將文本框內容復制到剪貼板!");
                 }
             }
             
-C# MD5摘要算法、哈希算法，
-MD5即Message-Digest Algorithm 5（信息-摘要算法5），用於確保信息傳輸完整一致。是計算機廣泛使用的雜湊算法之一（又譯摘要算法、哈希算法）
-
 
 
             
@@ -673,100 +812,9 @@ MD5即Message-Digest Algorithm 5（信息-摘要算法5），用於確保信息�
 
 
 
-
-
-
-
-//MD5加密
-//MD5加密是不可以逆的，只能將字串轉為MD5值，不能將MD5值轉回字串。
-
-static void Main(string[] args)
-    {
-        //202cb962ac59075b964b07152d234b70
-        //202cb962ac5975b964b7152d234b70   ToString x引數
-        //202cb962ac59075b964b07152d234b70  ToString x2引數
-
-        // 3244185981728979115075721453575112   ToString  沒加引數
-        //ToString引數需要到百度拿來用
-        string s = GetMD5("123");
-        Console.WriteLine(s);
-        Console.ReadKey();
+  
+        
     }
-
-    public static string GetMD5(string str)
-    {
-        //建立MD5物件
-        MD5 md5 = MD5.Create();
-        //開始加密
-        //需要將字串轉為位元組陣列
-        byte[] buffer = Encoding.Default.GetBytes(str);
-        //返回一個加密好的位元組陣列
-       byte[] MD5Buffer = md5.ComputeHash(buffer);
-
-        //將位元組陣列轉換成字串
-        //位元組陣列---字串
-        //1.將位元組陣列中每個元素按照自定的編碼格式解析成字串
-        //2.直接將陣列ToString();
-        //3.將位元組陣列中的每個元素ToString()
-        //  return Encoding.Default.GetString(MD5Buffer);
-        string strNew = " ";
-        for (int i = 0; i < MD5Buffer.Length; i++)
-        {
-            //ToString("x") 加x引數將十進位制轉為十六進位制，屬於ToString的方法
-            strNew += MD5Buffer[i].ToString("x2");
-        }
-        return strNew;
-    }
-    
-    
-
-/// <summary>
-/// MD5加密
-/// </summary>
-/// <param name="str"></param>
-/// <returns></returns>
-        public string UserMd5(string str)
-        {
-         
-       
-            string cl = str;
-            string pwd = "";
-            MD5 md5 = MD5.Create();//实例化一个md5对像
-            // 加密后是一个字节类型的数组，这里要注意编码UTF8/Unicode等的选择　
-            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
-          
-            // 通过使用循环，将字节类型的数组转换为字符串，此字符串是常规字符格式化所得
-            for (int i = 0; i < s.Length; i++)
-            {
-                // 将得到的字符串使用十六进制类型格式。格式后的字符是小写的字母，如果使用大写（X）则格式后的字符是大写字符
-
-                pwd = pwd + s[i].ToString("x");
-		pwd = pwd + s[i].ToString("x2");
-            }
-            return pwd;
-        }
-    }
-
-//wenweifeng 加密出来的WEB是:E28ACEB82C41284D13A50962E1C00D56
-
-
-
-C#设置窗体透明，控件不透明
-
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //方法1    
-            //例：窗体的透明度为50% 
-            //this.Opacity = 0.5; 
-            
-            //方法2，我用的方法2，窗体透明控件不透明了
-            // TransparencyKey只支持透明或不透明，不支持过度色，比如PNG图片中的从不透明到透明的过渡色会显示出讨厌的效果
-            this.BackColor = Color.Black;
-            this.TransparencyKey = Color.Black;
- 
-        }
-
 
 emule
 http://www.ed2k.online/tushu/jsjwl/16725.html
@@ -1061,24 +1109,9 @@ c#畫三角形、並填充顏色
 	e.Graphics.FillPolygon(Brushes.Red, pntArr);
 
 
-
-
-
-C#計算文件的MD5值實例
-MD5 是 Message Digest Algorithm 5（信息摘要算法）的縮寫，MD5 一種散列(Hash)技術，廣泛用於加密、解密、數據簽名和數據完整性校驗等方面。
-
-
-
-
 C# 條形碼操作【源碼下載】
 
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185924.html
-
-
-
-
-
-
 
 
 

@@ -49,6 +49,10 @@ namespace vcs_Console_1
             //> Output: f
 
             Console.WriteLine("目前時間 : " + DateTime.Now.ToString());
+
+            Console.WriteLine("顯示Console支援的字體效果");
+            ShowColor();
+
             Console.Write("Press any key to continue"); //無換行
             Console.Write("Press any key to continue");//無換行
             Console.WriteLine("Press any key");//有換行
@@ -169,6 +173,23 @@ namespace vcs_Console_1
         public static void ProcessFile(string path)
         {
             Console.WriteLine("Processed file '{0}'.", path);
+        }
+
+        static void ShowColor()
+        {
+            Type type = typeof(ConsoleColor);
+            Console.ForegroundColor = ConsoleColor.White;
+            foreach (var name in Enum.GetNames(type))
+            {
+                Console.BackgroundColor = (ConsoleColor)Enum.Parse(type, name);
+                Console.WriteLine(name);
+            }
+            Console.BackgroundColor = ConsoleColor.Black;
+            foreach (var name in Enum.GetNames(type))
+            {
+                Console.ForegroundColor = (ConsoleColor)Enum.Parse(type, name);
+                Console.WriteLine(name);
+            }
         }
     }
 }

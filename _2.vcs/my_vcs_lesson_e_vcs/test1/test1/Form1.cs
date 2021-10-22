@@ -296,11 +296,11 @@ namespace test1
         {
             //MD5加密
             string text = "lion-mouse";
-            string result = getMd5(text);
+            string result = getMd5a(text);
             richTextBox1.Text += result + "\n";
         }
 
-        public string getMd5(string str)
+        public string getMd5a(string str)
         {
             MD5 md5 = MD5.Create();//MD5抽象类无法实例化 实例化该方法
             byte[] buffer = Encoding.Default.GetBytes(str); //将字符串转换为字节数组
@@ -316,7 +316,97 @@ namespace test1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //C#批量生成隨機密碼，必須包含數字和字母，並用加密算法加密
+
+            /*
+            要求：密碼必須包含數字和字母
+
+            思路：1.列出數字和字符。 組成字符串 ：chars
+
+                    2.利用randrom.Next(int i)返回一個小於所指定最大值的非負隨機數。
+
+                    3. 隨機取不小於chars長度的隨機數a,取字符串chars的第a位字符。
+
+                    4.循環 8次，得到8位密碼
+
+                    5.循環N次，批量得到密碼。
+            */
+
+
+            string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            Random randrom = new Random((int)DateTime.Now.Ticks);
+
+            for (int j = 0; j < 10; j++)
+            {
+                string str = "";
+                for (int i = 0; i < 8; i++)
+                {
+                    str += chars[randrom.Next(chars.Length)];//randrom.Next(int i)返回一個小於所指定最大值的非負隨機數
+                }
+                if (IsNumber(str))//判斷是否全是數字
+                    continue;
+                if (IsLetter(str))//判斷是否全是字母
+                    continue;
+                string pws = Md5(str, 32);//MD5加密
+
+                richTextBox1.Text += str + "\t" + pws + "\n";
+            }
         }
+
+        /*
+        巧用String.trim 函數，判斷是否全是數字，全是字母。
+
+        說明：string.trim   從 String 對象移除前導空白字符和尾隨空白字符。
+
+        返回：一個字符串副本，其中從該字符串的開頭和末尾移除了所有空白字符。
+
+        有一個重載：string.Trim(params char[] trimChars)   
+
+        //從當前System.string對象移除數組中指定的一組字符的所有前導匹配項和尾部匹配項
+
+         trimChars：要刪除的字符數組
+        */
+        //判斷是否全是數字
+        static bool IsNumber(string str)
+        {
+            if (str.Trim("0123456789".ToCharArray()) == "")
+                return true;
+            return false;
+        }
+        //判斷是否全是字母
+        static bool IsLetter(string str)
+        {
+            if (str.Trim("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray()) == "")
+                return true;
+            return false;
+        }
+
+        //用MD5加密，算法代碼實現如下：
+
+        /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="str">加密字元</param>
+        /// <param name="code">加密位數16/32</param>
+        /// <returns></returns>
+        public static string Md5(string str, int code)
+        {
+            string strEncrypt = string.Empty;
+
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] fromData = Encoding.GetEncoding("GB2312").GetBytes(str);
+            byte[] targetData = md5.ComputeHash(fromData);
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                strEncrypt += targetData[i].ToString("X2");
+            }
+            if (code == 16)
+            {
+                strEncrypt = strEncrypt.Substring(8, 16);
+            }
+            return strEncrypt;
+        }
+        
 
         //C#兩種方法判斷字符是否為漢字
 
@@ -1317,8 +1407,46 @@ namespace test1
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //MD5加密
+            //MD5加密是不可以逆的，只能將字串轉為MD5值，不能將MD5值轉回字串。
 
+            //202cb962ac59075b964b07152d234b70
+            //202cb962ac5975b964b7152d234b70   ToString x引數
+            //202cb962ac59075b964b07152d234b70  ToString x2引數
+
+            // 3244185981728979115075721453575112   ToString  沒加引數
+            //ToString引數需要到百度拿來用
+            string s = GetMD5b("123");
+            richTextBox1.Text += s + "\n";
         }
+
+        public static string GetMD5b(string str)
+        {
+            //建立MD5物件
+            MD5 md5 = MD5.Create();
+            //開始加密
+            //需要將字串轉為位元組陣列
+            byte[] buffer = Encoding.Default.GetBytes(str);
+            //返回一個加密好的位元組陣列
+            byte[] MD5Buffer = md5.ComputeHash(buffer);
+
+            //將位元組陣列轉換成字串
+            //位元組陣列---字串
+            //1.將位元組陣列中每個元素按照自定的編碼格式解析成字串
+            //2.直接將陣列ToString();
+            //3.將位元組陣列中的每個元素ToString()
+            //  return Encoding.Default.GetString(MD5Buffer);
+            string strNew = " ";
+            for (int i = 0; i < MD5Buffer.Length; i++)
+            {
+                //ToString("x") 加x引數將十進位制轉為十六進位制，屬於ToString的方法
+                strNew += MD5Buffer[i].ToString("x2");
+            }
+            return strNew;
+        }
+
+
+
 
 
     }
