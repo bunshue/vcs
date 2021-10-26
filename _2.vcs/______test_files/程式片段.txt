@@ -1,4 +1,19 @@
 
+//將圖片放入byte數組
+
+Image image = Image.FromFile(file);
+System.IO.MemoryStream s = new System.IO.MemoryStream();
+image.Save(s, image.RawFormat);
+Byte[] bfye = s.ToArray();
+
+
+
+
+
+        private string GetDriveData(long data)//将磁盘大小的单位由byte转化为G
+        {
+            return (data / Convert.ToDouble(1024) / Convert.ToDouble(1024) / Convert.ToDouble(1024)).ToString("0.00");
+        }
 
           
 

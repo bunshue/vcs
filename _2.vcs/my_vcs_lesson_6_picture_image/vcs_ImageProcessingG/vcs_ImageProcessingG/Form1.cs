@@ -98,6 +98,12 @@ namespace vcs_ImageProcessingG
             image_processing12(filename);
         }
 
+        private void button13_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\picture1.jpg";
+            image_processing11(filename);
+        }
+
         /*
 一. 底片效果
 原理: GetPixel方法獲得每一點像素的值, 然後再使用SetPixel方法將取反後的顏色值設置到對應的點.
@@ -652,7 +658,32 @@ namespace vcs_ImageProcessingG
             g.DrawImage(bitmap2, new Rectangle(0, 0, Width, Width));
         }
 
+        /*
+        十一: 扭曲效果
 
+        原理: 将图像缩放为一个非矩形的平等四边形即可
+         */
+
+        //扭曲效果
+        private void image_processing11(string filename)
+        {
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+
+            int Height = bitmap1.Height;
+            int Width = bitmap1.Width;
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+
+            Size offset = new Size(Width++, Height++);//设置偏移量
+            Rectangle rect = this.pictureBox1.ClientRectangle;
+            Point[] points = new Point[3];
+            points[0] = new Point(rect.Left + offset.Width, rect.Top + offset.Height);
+            points[1] = new Point(rect.Right, rect.Top + offset.Height);
+            points[2] = new Point(rect.Left, rect.Bottom - offset.Height);
+            g.Clear(Color.White);
+            g.DrawImage(bitmap1, points);
+        }
 
         /*
         十二.積木效果
@@ -707,6 +738,7 @@ namespace vcs_ImageProcessingG
                 MessageBox.Show(ex.Message, "信息提示");
             }
         }
+
     }
 }
 

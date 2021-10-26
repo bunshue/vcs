@@ -345,12 +345,30 @@ namespace draw_test1
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            //顯示豎排文字1
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawString("顯示橫排", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
+            //設置旋轉中心點
+            g.TranslateTransform(W / 2, H / 2);
+            //設置旋轉角度
+            g.RotateTransform(90);
+            //畫文字
+            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
+            //平移
+            g.TranslateTransform(100, 100);
+            //畫文字
+            g.DrawString("平移後顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
+            //恢復為默認場景
+            g.ResetTransform();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            //顯示豎排文字2
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
         }
 
         private void button6_Click(object sender, EventArgs e)

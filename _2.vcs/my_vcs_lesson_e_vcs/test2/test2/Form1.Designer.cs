@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -46,6 +47,8 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.bt_exit = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // button1
@@ -63,7 +66,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(397, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(516, 720);
+            this.richTextBox1.Size = new System.Drawing.Size(516, 378);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -74,6 +77,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(160, 70);
             this.button2.TabIndex = 2;
+            this.button2.Text = "md5";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -84,6 +88,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(160, 70);
             this.button3.TabIndex = 3;
+            this.button3.Text = "md5";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -94,6 +99,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(160, 70);
             this.button4.TabIndex = 4;
+            this.button4.Text = "md5";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -104,6 +110,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(160, 70);
             this.button5.TabIndex = 5;
+            this.button5.Text = "md5";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -114,6 +121,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(160, 70);
             this.button6.TabIndex = 6;
+            this.button6.Text = "md5";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -124,6 +132,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(160, 70);
             this.button7.TabIndex = 7;
+            this.button7.Text = "md5";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -134,6 +143,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(160, 70);
             this.button8.TabIndex = 8;
+            this.button8.Text = "格式化列印";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -144,6 +154,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(160, 70);
             this.button9.TabIndex = 9;
+            this.button9.Text = "C#使用HTTP頭檢測網絡資源是否有效";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -154,6 +165,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 70);
             this.button10.TabIndex = 10;
+            this.button10.Text = "C# 模擬鍵盤操作--SendKey(),SendKeys()";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -164,6 +176,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 70);
             this.button11.TabIndex = 11;
+            this.button11.Text = "獲取安裝軟件和路徑，通過注冊表得到";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -174,6 +187,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(160, 70);
             this.button12.TabIndex = 12;
+            this.button12.Text = "遍歷文件夾實例";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -184,6 +198,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 70);
             this.button13.TabIndex = 13;
+            this.button13.Text = "CPU Memory";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -205,6 +220,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(160, 70);
             this.button14.TabIndex = 15;
+            this.button14.Text = "LINQ to XML RW";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -215,6 +231,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(160, 70);
             this.button15.TabIndex = 16;
+            this.button15.Text = "生成圖片的縮略圖";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -229,11 +246,26 @@
             this.bt_exit.UseVisualStyleBackColor = true;
             this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
             // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(397, 401);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(516, 331);
+            this.listView1.TabIndex = 18;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 744);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
@@ -279,6 +311,8 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button bt_exit;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
