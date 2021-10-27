@@ -76,18 +76,22 @@ namespace vcs_ColorPicker1
         {
             return (byte)color;
         }
+
         static public byte GetGValue(uint color)
         {
             return ((byte)(((short)(color)) >> 8));
         }
+
         static public byte GetBValue(uint color)
         {
             return ((byte)((color) >> 16));
         }
+
         static public byte GetAValue(uint color)
         {
             return ((byte)((color) >> 24));
         }
+
         public Color GetColor(Point screenPoint)
         {
             IntPtr displayDC = CreateDC("DISPLAY", null, null, IntPtr.Zero);

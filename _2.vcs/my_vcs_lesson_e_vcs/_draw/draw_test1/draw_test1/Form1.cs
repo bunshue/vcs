@@ -373,7 +373,54 @@ namespace draw_test1
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //坐標系畫圖（C#）示例
 
+            //數據初始化   
+            string[] month = new string[12] { "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" };
+            float[] d = new float[12] { 20.5F, 60, 10.8F, 15.6F, 30, 70.9F, 50.3F, 30.7F, 70, 50.4F, 30.8F, 20 };
+            //畫圖初始化   
+            Bitmap bMap = new Bitmap(500, 500);
+            Graphics gph = Graphics.FromImage(bMap);
+            gph.Clear(Color.White);
+
+            PointF cPt = new PointF(40, 420);//中心點
+            PointF[] xPt = new PointF[3] { new PointF(cPt.Y + 15, cPt.Y), new PointF(cPt.Y, cPt.Y - 8), new PointF(cPt.Y, cPt.Y + 8) };//X軸三角形
+            PointF[] yPt = new PointF[3] { new PointF(cPt.X, cPt.X - 15), new PointF(cPt.X - 8, cPt.X), new PointF(cPt.X + 8, cPt.X) };//Y軸三角形
+            gph.DrawString("某工廠某產品月生產量圖表", new Font("宋體", 14), Brushes.Black, new PointF(cPt.X + 60, cPt.X));//圖表標題
+            //畫X軸
+            gph.DrawLine(Pens.Black, cPt.X, cPt.Y, cPt.Y, cPt.Y);
+            gph.DrawPolygon(Pens.Black, xPt);
+            gph.FillPolygon(new SolidBrush(Color.Black), xPt);
+            gph.DrawString("月份", new Font("宋體", 12), Brushes.Black, new PointF(cPt.Y + 10, cPt.Y + 10));
+            //畫Y軸
+            gph.DrawLine(Pens.Black, cPt.X, cPt.Y, cPt.X, cPt.X);
+            gph.DrawPolygon(Pens.Black, yPt);
+            gph.FillPolygon(new SolidBrush(Color.Black), yPt);
+            gph.DrawString("單位(萬)", new Font("宋體", 12), Brushes.Black, new PointF(0, 7));
+            for (int i = 1; i <= 12; i++)
+            {
+                //畫Y軸刻度
+                if (i < 11)
+                {
+                    gph.DrawString((i * 10).ToString(), new Font("宋體", 11), Brushes.Black, new PointF(cPt.X - 30, cPt.Y - i * 30 - 6));
+                    gph.DrawLine(Pens.Black, cPt.X - 3, cPt.Y - i * 30, cPt.X, cPt.Y - i * 30);
+                }
+                //畫X軸項目
+                gph.DrawString(month[i - 1].Substring(0, 1), new Font("宋體", 11), Brushes.Black, new PointF(cPt.X + i * 30 - 5, cPt.Y + 5));
+                gph.DrawString(month[i - 1].Substring(1, 1), new Font("宋體", 11), Brushes.Black, new PointF(cPt.X + i * 30 - 5, cPt.Y + 20));
+                if (month[i - 1].Length > 2) gph.DrawString(month[i - 1].Substring(2, 1), new Font("宋體", 11), Brushes.Black, new PointF(cPt.X + i * 30 - 5, cPt.Y + 35));
+                //畫點
+                gph.DrawEllipse(Pens.Black, cPt.X + i * 30 - 1.5F, cPt.Y - d[i - 1] * 3 - 1.5F, 3, 3);
+                gph.FillEllipse(new SolidBrush(Color.Black), cPt.X + i * 30 - 1.5F, cPt.Y - d[i - 1] * 3 - 1.5F, 3, 3);
+                //畫數值
+                gph.DrawString(d[i - 1].ToString(), new Font("宋體", 11), Brushes.Black, new PointF(cPt.X + i * 30, cPt.Y - d[i - 1] * 3));
+                //畫折線
+                if (i > 1) gph.DrawLine(Pens.Red, cPt.X + (i - 1) * 30, cPt.Y - d[i - 2] * 3, cPt.X + i * 30, cPt.Y - d[i - 1] * 3);
+            }
+            //儲存輸出圖片
+            //bMap.Save(Response.OutputStream, ImageFormat.Gif);
+
+            pictureBox1.Image = bMap;
         }
 
         private void button7_Click(object sender, EventArgs e)

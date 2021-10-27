@@ -1,4 +1,398 @@
 
+
+　　本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
+　　在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。接下來介紹一些畫圖函數：
+Bitmap bMap=new Bitmap(500,500)　//定義映像大小；
+bMap.Save(Stream,ImageCodecInfo) //將映像儲存到指定的輸出資料流；
+Graphics gph //定義或建立GDI繪圖對像；
+PointF cPt　//定義二維平面中x,y座標；
+DrawString(string,Font,Brush,PonitF) //用指定的Brush和Font對像在指定的矩形或點繪製指定的字串；
+DrawLine(Pen,Ponit,Ponit) //用指定的筆(Pen)對像繪製指定兩點之間直線；
+DrawPolygon(Pen,Ponit[]) //用指定的筆(Pen)對像繪製指定多邊形，比如三角形，四邊形等等；
+FillPolygon(Brush,Ponit[]) //用指定的刷子(Brush)對像填充指定的多邊形；
+DrawEllipse(Pen,x,y,Width,Height) //用指定的筆繪製一個邊框定義的橢圓；
+FillEllipse(Brush,x,y,Width,Height) //用指定的刷子填充一個邊框定義的橢圓；
+DrawRectangle(Pen,x,y,Width,Height) //用指定的筆繪製一個指定座標點、寬度、高度的矩形；
+DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一個指定座標點、寬度、高度以及兩條射線組成的扇形；
+
+
+
+
+
+
+ADO.Net方面的：
+八、連接Access數據庫：
+using System;
+using System.Data;
+using System.Data.OleDb;
+
+class TestADO
+{
+    static void Main(string[] args)
+    {
+        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:\test.mdb;
+        string strSQL = SELECT * FROM employees ;
+
+        OleDbConnection conn = new OleDbConnection(strDSN);
+        OleDbCommand cmd = new OleDbCommand( strSQL, conn );
+        OleDbDataReader reader = null;
+        try
+        {
+            conn.Open();
+            reader = cmd.ExecuteReader();
+            while (reader.Read() )
+            {
+                Console.WriteLine(First Name:{0}, Last Name:{1}, reader[FirstName], reader[LastName]);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+} 
+
+九、連接SQL Server數據庫：
+using System;
+using System.Data.SqlClIEnt;
+
+public class TestADO
+{
+    public static void Main()
+    {
+        SqlConnection conn = new SqlConnection(Data Source=localhost; Integrated Security=SSPI; Initial Catalog=pubs);
+
+SqlCommand  cmd = new SqlCommand(SELECT * FROM employees, conn);
+        try
+        {        
+            conn.Open();
+
+            SqlDataReader reader = cmd.ExecuteReader();            
+            while (reader.Read())
+            {
+                Console.WriteLine(First Name: {0}, Last Name: {1}, reader.GetString(0), reader.GetString(1));
+            }
+        
+            reader.Close();
+            conn.Close();
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(Exception Occured -->> {0},e);
+        }        
+    }
+}
+
+十、從SQL內讀數據到XML：
+using System;
+using System.Data;
+using System.XML;
+using System.Data.SqlClIEnt; 
+using System.IO; 
+
+public class TestWriteXML
+{ 
+    public static void Main()
+    { 
+
+        String strFileName=c:/temp/output.XML;
+
+        SqlConnection conn = new SqlConnection(server=localhost;uid=sa;pwd=;database=db);
+
+        String strSql = SELECT FirstName, LastName FROM employees; 
+
+        SqlDataAdapter adapter = new SqlDataAdapter(); 
+
+        adapter.SelectCommand = new SqlCommand(strSql,conn);
+
+        // Build the DataSet
+        DataSet ds = new DataSet();
+
+        adapter.Fill(ds, employees);
+
+        // Get a FileStream object
+        FileStream fs = new FileStream(strFileName,FileMode.OpenOrCreate,FileAccess.Write);
+
+        // Apply the WriteXml method to write an XML document
+        ds.WriteXML(fs);
+
+        fs.Close();
+
+    }
+}
+
+十一、用ADO添加數據到數據庫中：
+using System;
+using System.Data;   
+using System.Data.OleDb;   
+
+class TestADO
+{  
+    static void Main(string[] args)  
+
+
+
+{  
+        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;DataSource=c: est.mdb;  
+        string strSQL = INSERT INTO Employee(FirstName, LastName) VALUES(''FirstName'', ''LastName'') ;  
+                   
+        // create Objects of ADOConnection and ADOCommand   
+        OleDbConnection conn = new OleDbConnection(strDSN);  
+        OleDbCommand cmd = new OleDbCommand( strSQL, conn );  
+        try  
+        {  
+            conn.Open();  
+            cmd.ExecuteNonQuery();  
+        }  
+        catch (Exception e)  
+        {  
+            Console.WriteLine(Oooops. I did it again: {0}, e.Message);  
+        }  
+        finally  
+        {  
+            conn.Close();  
+        }          
+    } 
+}  
+
+十 二、使用OLEConn連接數據庫：
+using System;
+using System.Data;   
+using System.Data.OleDb;   
+
+class TestADO
+{  
+    static void Main(string[] args)  
+    {  
+        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;DataSource=c: est.mdb;  
+        string strSQL = SELECT * FROM employee ;  
+
+        OleDbConnection conn = new OleDbConnection(strDSN);
+        OleDbDataAdapter cmd = new OleDbDataAdapter( strSQL, conn ); 
+
+        conn.Open();
+        DataSet ds = new DataSet();
+        cmd.Fill( ds, employee );
+        DataTable dt = ds.Tables[0];
+
+        foreach( DataRow dr in dt.Rows )
+        {
+            Console.WriteLine(First name: + dr[FirstName].ToString() + Last name: + dr[LastName].ToString());
+        }
+        conn.Close();  
+    } 
+}  
+十三、讀取表的屬性：
+
+using System;
+using System.Data;   
+using System.Data.OleDb;   
+
+class TestADO
+{  
+    static void Main(string[] args)  
+    {  
+        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;DataSource=c: est.mdb;  
+        string strSQL = SELECT * FROM employee ;  
+
+        OleDbConnection conn = new OleDbConnection(strDSN);
+        OleDbDataAdapter cmd = new OleDbDataAdapter( strSQL, conn ); 
+
+        conn.Open();
+        DataSet ds = new DataSet();
+        cmd.Fill( ds, employee );
+        DataTable dt = ds.Tables[0];
+
+        Console.WriteLine(FIEld Name DataType Unique AutoIncrement AllowNull);
+        Console.WriteLine(==================================================================);
+        foreach( DataColumn dc in dt.Columns )
+        {
+            Console.WriteLine(dc.ColumnName+ , +dc.DataType + ,+dc.Unique + ,+dc.AutoIncrement+ ,+dc.AllowDBNull );
+        }
+        conn.Close();  
+    } 
+} 
+
+
+十六、運行時顯示自己定義的圖標：
+//load icon and set to form
+System.Drawing.Icon ico = new System.Drawing.Icon(@c: empapp.ico);
+this.Icon = ico;
+
+
+網絡方面的：
+十八、取得IP地址：
+using System;
+using System.Net;
+
+class GetIP
+{
+     public static void Main()
+     {
+         IPHostEntry ipEntry = Dns.GetHostByName (localhost);
+         IPAddress [] IpAddr = ipEntry.AddressList;
+         for (int i = 0; i < IpAddr.Length; i++)
+         { 
+             Console.WriteLine (IP Address {0}: {1} , i, IpAddr.ToString ());
+         }
+    }
+}
+十九、取得機器名稱：
+using System;
+using System.Net;
+
+class GetIP
+{
+    public static void Main()
+    {
+          Console.WriteLine (Host name : {0}, Dns.GetHostName());
+    }
+}
+
+二十、發送郵件：
+using System;
+using System.Web;
+using System.Web.Mail;
+
+public class TestSendMail
+{
+    public static void Main()
+    {
+        try
+        {
+            // Construct a new mail message 
+            MailMessage message = new MailMessage();
+            message.From = from@domain.com;
+            message.To   =  pengyun@cobainsoft.com;
+            message.Cc   = ;
+            message.Bcc  = ;
+            message.Subject = Subject;
+            message.Body = Content of message;
+            
+            //if you want attach file with this mail, add the line below
+            message.Attachments.Add(new MailAttachment(c:\attach.txt, MailEncoding.Base64));
+
+ 
+            // Send the message
+            SmtpMail.Send(message);  
+            System.Console.WriteLine(Message has been sent);
+        }
+
+        catch(Exception ex)
+        {
+            System.Console.WriteLine(ex.Message.ToString());
+        }
+
+    }
+}
+
+十一、根據IP地址得出機器名稱：
+using System;
+using System.Net;
+
+class ResolveIP
+{
+     public static void Main()
+     {
+         IPHostEntry ipEntr.Resolve(172.29.9.9);
+         Console.WriteLine (Host name : {0}, ipEntry.HostName);         
+     }
+}
+
+XML方面的：
+
+二十三、讀取XML文件：
+using System;
+using System.XML;  
+
+class TestReadXML
+{
+    public static void Main()
+    {
+        
+        XmlTextReader reader  = new XmlTextReader(C:\test.XML);
+        reader.Read();
+        
+        while (reader.Read())
+        {            
+            reader.MoveToElement();
+            Console.WriteLine(XMLTextReader PropertIEs Test);
+            Console.WriteLine(===================);  
+
+            // Read this propertIEs of element and display them on console
+            Console.WriteLine(Name: + reader.Name);
+            Console.WriteLine(Base URI: + reader.BaseURI);
+            Console.WriteLine(Local Name: + reader.LocalName);
+            Console.WriteLine(Attribute Count: + reader.AttributeCount.ToString());
+            Console.WriteLine(Depth: + reader.Depth.ToString());
+
+            Console.WriteLine(Line Number: + reader.LineNumber.ToString());
+            Console.WriteLine(Node Type: + reader.NodeType.ToString());
+            Console.WriteLine(Attribute Count: + reader.Value.ToString());
+      &nbsp; }        
+    }               
+} 
+二十四、寫XML文件：
+using System; 
+using System.XML; 
+
+public class TestWriteXMLFile 
+{ 
+    public static int Main(string[] args) 
+    { 
+        try 
+        {  
+            // Creates an XML file is not exist 
+            XmlTextWriter writer = new XmlTextWriter(C:\temp\xmltest.XML, null); 
+
+           // Starts a new document 
+            writer.WriteStartDocument(); 
+            //Write comments 
+            writer.WriteComment(Commentss: XMLWriter Test Program); 
+            writer.WriteProcessingInstruction(Instruction,Person Record); 
+            // Add elements to the file 
+            writer.WriteStartElement(p, person, urn:person); 
+            writer.WriteStartElement(LastName,); 
+            writer.WriteString(Chand); 
+            writer.WriteEndElement(); 
+            writer.WriteStartElement(FirstName,); 
+            writer.WriteString(Mahesh); 
+            writer.WriteEndElement(); 
+            writer.WriteElementInt16(age,, 25); 
+            // Ends the document 
+            writer.WriteEndDocument(); 
+        } 
+        catch (Exception e) 
+        {  
+            Console.WriteLine (Exception: {0}, e.ToString()); 
+        } 
+        return 0; 
+    } 
+} 
+
+
+Web Service方面的：
+二十五、一個Web Service的小例子：
+<% @WebService Language=C# Class=TestWS %>
+
+using System.Web.Services;
+
+public class TestWS : System.Web.Services.WebService
+{
+    [WebMethod()]
+    public string StringFromWebService()
+    {
+        return This is a string from web service.;
+    }
+} 
+
+
+
+
 //將圖片放入byte數組
 
 Image image = Image.FromFile(file);
