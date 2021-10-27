@@ -1,4 +1,72 @@
 
+//C#獲取圖片的指定部分
+
+        /// <summary>
+        /// http://www.cnblogs.com/KissKnife/archive/2007/10/13/923352.Html
+        /// 獲取圖片指定部分
+        /// </summary>
+        /// <param name="pPath">圖片路徑</param>
+        /// <param name="pPartStartPointX">目標圖片開始繪制處的坐標X值(通常為0)</param>
+        /// <param name="pPartStartPointY">目標圖片開始繪制處的坐標Y值(通常為0)</param>
+        /// <param name="pPartWidth">目標圖片的寬度</param>
+        /// <param name="pPartHeight">目標圖片的高度</param>
+        /// <param name="pOrigStartPointX">原始圖片開始截取處的坐標X值</param>
+        /// <param name="pOrigStartPointY">原始圖片開始截取處的坐標Y值</param>
+        static System.Drawing.Bitmap GetPart(string pPath, int pPartStartPointX, int pPartStartPointY, int pPartWidth, int pPartHeight, int pOrigStartPointX, int pOrigStartPointY)
+        ...{
+            System.Drawing.Image originalImg = System.Drawing.Image.FromFile(pPath);
+
+            System.Drawing.Bitmap partImg = new System.Drawing.Bitmap(pPartWidth, pPartHeight);
+            System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(partImg);
+            System.Drawing.Rectangle destRect = new System.Drawing.Rectangle(new System.Drawing.Point(pPartStartPointX, pPartStartPointY), new System.Drawing.Size(pPartWidth, pPartHeight));//目標位置
+            System.Drawing.Rectangle origRect = new System.Drawing.Rectangle(new System.Drawing.Point(pOrigStartPointX, pOrigStartPointY), new System.Drawing.Size(pPartWidth, pPartHeight));//原圖位置（默認從原圖中截取的圖片大小等於目標圖片的大小）
+
+            graphics.DrawImage(originalImg, destRect, origRect, System.Drawing.GraphicsUnit.Pixel);
+
+            return partImg;
+        }
+
+
+
+
+
+
+
+
+//給圖片添加版權信息(C#)
+//創建一張位圖
+
+Bitmap bitmap=new Bitmap(this.pictureBox2.Width,this.pictureBox2.Height,System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+//根據位圖獲取畫布
+
+Graphics g=Graphics.FromImage(bitmap);
+
+//清空畫布並用透明色填充
+
+g.Clear(Color.Transparent);
+
+//將另一幅圖片畫到畫布上
+
+g.DrawImage(this.pictureBox1.Image,0,0);
+
+//寫版權信息到圖片上。
+
+g.DrawString(this.textBox2.Text,new Font("黑體",15),new SolidBrush(Color.Red),new Rectangle(20,20,100,100));
+
+//顯示
+
+this.pictureBox2.Image=bitmap;
+
+//保存圖片
+
+bitmap.Save("c:\\abc.bmp",System.Drawing.Imaging.ImageFormat.Bmp);
+
+
+
+
+
+
 
 　　本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
 　　在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。接下來介紹一些畫圖函數：

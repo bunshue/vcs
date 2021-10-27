@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Mail;  //for SmtpClient
 using System.Xml;
+using System.Web.Mail;
 using System.Text.RegularExpressions;
 using System.Management;
 using System.IO;
@@ -114,7 +115,7 @@ namespace network_test3_mail
             client.EnableSsl = true;
 
             //發件人和收件人的郵箱地址
-            MailMessage mmsg = new MailMessage();
+            System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
             mmsg.From = new MailAddress(fjrtxt);
             for (int i = 0; i < msgToEmail.Length; i++)
             {
@@ -131,7 +132,7 @@ namespace network_test3_mail
             //設置為HTML格式
             mmsg.IsBodyHtml = true;
             //優先級
-            mmsg.Priority = MailPriority.High;
+            mmsg.Priority = System.Net.Mail.MailPriority.High;
             try
             {
                 client.Send(mmsg);
@@ -189,13 +190,78 @@ namespace network_test3_mail
 
         private void button2_Click(object sender, EventArgs e)
         {
+            System.Web.Mail.MailMessage mail = new System.Web.Mail.MailMessage();  //From在前, To在後
+            mail.From = "bunshue@gmail.com";
+            mail.To = "david@insighteyes.com";
 
+            //別名
+            //mail.To = "\"John\" <me@mycompany.com>";
+            //mail.From = "\"Tony Gong\" <you@yourcompany.com>";
+
+            //多人
+            //mail.To = "me@mycompany.com;him@hiscompany.com;her@hercompany.com";
+
+            mail.Subject = "this is a test email.";
+            mail.BodyFormat = MailFormat.Html;
+            //mail.Body = "this is my test email body";
+            mail.Body = "this is my test email body.<br><b>this part is in bold</b>";
+            //發送附件
+            string filename = @"C:\______test_files\picture1.jpg";
+            MailAttachment attachment = new MailAttachment(filename); //create the attachment
+            mail.Attachments.Add(attachment); //add the attachment
+
+            //mail.Fields.Add("////authenticate", "");    //帳號, 密碼, PORT, SSL....
+
+
+            System.Web.Mail.SmtpMail.SmtpServer = "smtp.gmail.com";  //your real server goes here
+            System.Web.Mail.SmtpMail.Send(mail);
+
+
+            /*
+            修改smtp服務器的端口，以及使用SSL加密
+            大部分smtp服務器的端口是25，但有些卻不是
+            同時，絕大部分Smtp服務器不需要SSL登陸，有些卻需要
+            比如Gmail，smtp端口是：465，同時支持SSL
+            */
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            sengmill_net();
 
         }
+
+        //c#如何發郵件?
+
+        private void sengmill_net()
+        {//.Net smtp類進行郵件發送，支持認證，附件添加；
+            System.Web.Mail.MailMessage mail = new System.Web.Mail.MailMessage();
+
+            mail.From = "bunshue@gmail.com";
+            mail.To = "david@insighteyes.com";
+
+            //mail.Body = this.tb_mailBody.Text.Trim();
+            mail.Subject = "test mail from hz";
+            /* 附件的粘貼, ^_^,笨了點;
+            if(this.att1.Value.ToString().Trim()!=string.Empty)
+             mail.Attachments.Add(new System.Web.Mail.MailAttachment(this.att1.Value.ToString().Trim()));
+
+            if(this.att2.Value.ToString().Trim()!=string.Empty)
+             mail.Attachments.Add(new System.Web.Mail.MailAttachment(this.att2.Value.ToString().Trim()));
+            if(this.att3.Value.ToString().Trim()!=string.Empty)
+             mail.Attachments.Add(new System.Web.Mail.MailAttachment(this.att3.Value.ToString().Trim()));
+            */
+            mail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate", "1");
+            //是否需要驗證，一般是要的    
+            mail.Fields.Add
+             ("http://schemas.microsoft.com/cdo/configuration/sendusername", "gallon_han");
+            //自己郵箱的用戶名    
+            mail.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassWord", "218500");
+            //自己郵箱的密碼 
+            System.Web.Mail.SmtpMail.SmtpServer = "smtp.gmail.com";  //your real server goes here
+            System.Web.Mail.SmtpMail.Send(mail);
+        }
+
 
         private void button4_Click(object sender, EventArgs e)
         {

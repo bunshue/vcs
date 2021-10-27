@@ -24,6 +24,34 @@ namespace test3
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// 操作系統關閉時，關閉應用程序
+        /// </summary>
+        /// <param name="m">截獲系統消息</param>
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case 0x0011://WM_QUERYENDSESSION
+                    m.Result = (IntPtr)1;
+                    richTextBox1.Text += "截獲作業系統關閉時發出的訊息\n";
+                    richTextBox1.Text += "截獲作業系統關閉時發出的訊息\n";
+                    richTextBox1.Text += "截獲作業系統關閉時發出的訊息\n";
+                    richTextBox1.Text += "截獲作業系統關閉時發出的訊息\n";
+                    break;
+                default:
+                    base.WndProc(ref m);
+                    break;
+            }
+        }
+        /*
+        做了一個定時播放器,程序運行時最小化到任務欄托盤,可這時候關閉或重啟操作系統使如果程序沒有退出,
+        則系統不能關閉.那麼如何實現關機時自動退出程序呢?其實很簡單,當windows操作系統執行關閉動作時,
+        它會發送給各個正在運行的應用程序一個消息WM_QUERYENDSESSION,告訴應用程序要關機了,如果反饋回來的消息值為1,
+        那麼windows操作系統就會自動關閉.因此,通過截獲WM_QUERYENDSESSION消息,就能實現自動退出程序.
+        */
+
+
         public Form1()
         {
             InitializeComponent();
@@ -183,6 +211,9 @@ namespace test3
 
         private void button3_Click(object sender, EventArgs e)
         {
+
+
+        
         }
 
         private void button4_Click(object sender, EventArgs e)
