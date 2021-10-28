@@ -48,7 +48,16 @@ namespace draw_test3_captcha
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
         }
 
@@ -716,19 +725,19 @@ namespace draw_test3_captcha
                      y);
             }
             // 5. 輸出字節流
-            System.IO.MemoryStream bstream = new System.IO.MemoryStream();
-            bmp.Save(bstream, ImageFormat.Jpeg);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            bmp.Save(ms, ImageFormat.Jpeg);
             //bmp.Dispose();
             pictureBox1.Image = bmp;
             graph.Dispose();
 
             strKey = strResult;
-            byte[] byteReturn = bstream.ToArray();
-            bstream.Close();
+            byte[] byteReturn = ms.ToArray();
+            ms.Close();
 
             return byteReturn;
         }
-    
+
 
 
 
@@ -743,52 +752,336 @@ namespace draw_test3_captcha
 
         private void button6_Click(object sender, EventArgs e)
         {
+            /*
+            驗證碼字符個數、生成圖片寬度、高度自定均可由構造方法自定，無參構造生成默認字符個數和默認大小的Image,
+            方法GetImgWithValidateCode()返回生成的驗證碼圖片，
+            方法 IsRight(string inputValCode) 判斷用戶輸入的驗證碼 inputValCode與圖片顯示的字符是否一致，不區分大小寫
+            */
 
+            DrawValImg drawimg = new DrawValImg();
+            Image img = drawimg.GetImgWithValidateCode();
+            pictureBox1.Image = img;
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            CreateCaptcha();
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        void CreateCaptcha()
         {
+            // 創建一個包含隨機內容的驗證碼文本
+            System.Random rand = new Random();
+            int len = rand.Next(4, 6);
+            char[] chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+            System.Text.StringBuilder myStr = new System.Text.StringBuilder();
+            for (int iCount = 0; iCount < len; iCount++)
+            {
+                myStr.Append(chars[rand.Next(chars.Length)]);
+            }
+            string text = myStr.ToString();
+            // 保存驗證碼到 session 中以便其他模塊使用
+            //this.Session["checkcode"] = text ;
+            Size ImageSize = Size.Empty;
+            Font myFont = new Font("MS Sans Serif", 20);
+            // 計算驗證 碼圖片大小
+            using (Bitmap bitmap1 = new Bitmap(10, 10))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap1))
+                {
+                    SizeF size = g.MeasureString(text, myFont, 10000);
+                    ImageSize.Width = (int)size.Width + 8;
+                    ImageSize.Height = (int)size.Height + 8;
+                }
+            }
+            // 創建驗證碼圖片
+            Bitmap bitmap2 = new Bitmap(ImageSize.Width, ImageSize.Height);
+            {
+                // 繪制驗證碼文本
+                using (Graphics g = Graphics.FromImage(bitmap2))
+                {
+                    g.Clear(Color.White);
+                    using (StringFormat f = new StringFormat())
+                    {
+                        f.Alignment = StringAlignment.Near;
+                        f.LineAlignment = StringAlignment.Center;
+                        f.FormatFlags = StringFormatFlags.NoWrap;
+                        g.DrawString(
+                           text,
+                          myFont,
+                          Brushes.Black,
+                           new RectangleF(
+                          0,
+                          0,
+                          ImageSize.Width,
+                          ImageSize.Height),
+                          f);
+                    }//using
+                }//using
+                // 制造噪聲 雜點面積占圖片面積的 30%
+                int num = ImageSize.Width * ImageSize.Height * 30 / 100;
+                for (int iCount = 0; iCount < num; iCount++)
+                {
+                    // 在隨機的位置使用隨機的顏色設置圖片的像素
+                    int x = rand.Next(ImageSize.Width);
+                    int y = rand.Next(ImageSize.Height);
+                    int r = rand.Next(255);
+                    int g = rand.Next(255);
+                    int b = rand.Next(255);
+                    Color c = Color.FromArgb(r, g, b);
+                    bitmap2.SetPixel(x, y, c);
+                }//for
 
+                pictureBox1.Image = bitmap2;
+
+                // 輸出圖片
+                System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                bitmap2.Save(ms, ImageFormat.Jpeg);
+                //this.Response.ContentType = "image/png";
+                //ms.WriteTo( this.Response.OutputStream );
+                ms.Close();
+            }//using
+            myFont.Dispose();
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
+    }
 
+
+    public class DrawValImg
+    {
+        /// <summary>
+        /// 無參構造
+        /// </summary>
+        public DrawValImg() { }
+        /// <summary>
+        /// 帶有生成字符個數的構造
+        /// </summary>
+        /// <param name="charNum">驗證碼中包含隨機字符的個數</param>
+        public DrawValImg(int charNum)
+        {
+            this.CharNum = charNum;
         }
-
-        private void button10_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 帶有驗證碼圖片寬度和高度的構造
+        /// </summary>
+        /// <param name="width">驗證碼圖片寬度</param>
+        /// <param name="height">驗證碼圖片高度</param>
+        public DrawValImg(int width, int height)
         {
-
+            this.width = width;
+            this.height = height;
         }
-
-        private void button11_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 帶有生成字符個數，驗證碼圖片寬度和高度的構造
+        /// </summary>
+        /// <param name="charNum">驗證碼中包含隨機字符的個數</param>
+        /// <param name="width">驗證碼圖片寬度</param>
+        /// <param name="height">驗證碼圖片高度</param>
+        public DrawValImg(int charNum, int width, int height)
         {
-
+            this.CharNum = charNum;
+            this.width = width;
+            this.height = height;
         }
-
-        private void button12_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 驗證碼中字符個數
+        /// </summary>
+        int charNum = 5; //默認字符個數為5
+        public int CharNum
         {
-
+            get { return charNum; }
+            set { charNum = value; }
         }
-
-        private void button13_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 字號
+        /// </summary>
+        int fontSize = 20;
+        public int FontSize
         {
-
+            get { return fontSize; }
         }
-
-        private void button14_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 圖片寬度
+        /// </summary>
+        int width = 200;
+        public int Width
         {
-
+            get { return width; }
         }
-
-        private void button15_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 圖片高度
+        /// </summary>
+        int height = 45;
+        public int Height
         {
+            get { return height; }
+            set { height = value; }
+        }
+        /// <summary>
+        /// 隨機生成的字符串
+        /// </summary>
+        string validStr = "";
+        public string ValidStr
+        {
+            get { return validStr; }
+            set { validStr = value; }
+        }
+        /// <summary>
+        /// 產生指定個數的隨機字符串，默認字符個數為5
+        /// </summary>
+        void GetValidateCode()
+        {
+            Random rd = new Random(); //創建隨機數對象
+            //產生由 charNum 個字母或數字組成的一個字符串
+            string str = "abcdefghijkmnpqrstuvwyzABCDEFGHJKLMNPQRSTUVWYZ23456789田國興";//共57個字符，除 l,o,x,I,O,X,1,0 的所有數字和大寫字母
+            for (int i = 0; i < charNum; i++)
+            {
+                validStr = validStr + str.Substring(rd.Next(57), 1);//返回0到56共57個
+            }
+        }
+        /// <summary>
+        /// 由隨機字符串，隨即顏色背景，和隨機線條產生的Image
+        /// </summary>
+        /// <returns>Image</returns>
+        public Image GetImgWithValidateCode()//返回 Image
+        {
+            //產生隨機字符串
+            GetValidateCode();
+            //聲明一個位圖對象
+            Bitmap bitMap = null;
+            //聲明一個繪圖畫面
+            Graphics gph = null;
+            //創建內存流
+            MemoryStream memStream = new MemoryStream();
+            Random random = new Random();
+            //由給定的需要生成字符串中字符個數 CharNum， 圖片寬度 Width 和高度 Height 確定字號 FontSize，
+            //確保不因字號過大而不能全部顯示在圖片上
+            int fontWidth = (int)Math.Round(width / (charNum + 2) / 1.3);
+            int fontHeight = (int)Math.Round(height / 1.5);
+            //字號取二者中小者，以確保所有字符能夠顯示，並且字符的下半部分也能顯示
+            fontSize = fontWidth <= fontHeight ? fontWidth : fontHeight;
+            //創建位圖對象
+            bitMap = new Bitmap(width + FontSize, height);
+            //根據上面創建的位圖對象創建繪圖圖面
+            gph = Graphics.FromImage(bitMap);
+            //設定驗證碼圖片背景色
+            gph.Clear(GetControllableColor(200));
+            //產生隨機干擾線條
+            for (int i = 0; i < 10; i++)
+            {
+                Pen backPen = new Pen(GetControllableColor(100), 2);
+                //線條起點
+                int x = random.Next(width);
+                int y = random.Next(height);
+                //線條終點
+                int x2 = random.Next(width);
+                int y2 = random.Next(height);
+                //劃線
+                gph.DrawLine(backPen, x, y, x2, y2);
+            }
+            //定義一個含10種字體的數組
+            String[] fontFamily ={ "Arial", "Verdana", "Comic Sans MS", "Impact", "Haettenschweiler",
+"Lucida Sans Unicode", "Garamond", "Courier New", "Book Antiqua", "Arial Narrow" };
 
+            SolidBrush sb = new SolidBrush(GetControllableColor(0));
+            //通過循環,繪制每個字符,
+            for (int i = 0; i < validStr.Length; i++)
+            {
+                Font textFont = new Font(fontFamily[random.Next(10)], fontSize, FontStyle.Bold);//字體隨機,字號大小30,加粗
+                //每次循環繪制一個字符,設置字體格式,畫筆顏色,字符相對畫布的X坐標,字符相對畫布的Y坐標
+                int space = (int)Math.Round((double)((width - fontSize * (CharNum + 2)) / CharNum));
+                //縱坐標
+                int y = (int)Math.Round((double)((height - fontSize) / 3));
+                gph.DrawString(validStr.Substring(i, 1), textFont, sb, fontSize + i * (fontSize + space), y);
+            }
+            //扭曲圖片
+            bitMap = TwistImage(bitMap, true, random.Next(3, 5), random.Next(3));
+            try
+            {
+                bitMap.Save(memStream, ImageFormat.Gif);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+            //gph.Dispose();
+            bitMap.Dispose();
+            Image img = Image.FromStream(memStream);
+            gph.DrawImage(img, 50, 20, width, 10);
+            return img;
+        }
+        /// <summary>
+        /// 產生一種 R,G,B 均大於 colorBase 隨機顏色，以確保顏色不會過深
+        /// </summary>
+        /// <returns>背景色</returns>
+        Color GetControllableColor(int colorBase)
+        {
+            Color color = Color.Black;
+            if (colorBase > 200)
+            {
+                System.Windows.Forms.MessageBox.Show("可控制顏色參數大於200，顏色默認位黑色");
+            }
+            Random random = new Random();
+            //確保 R,G,B 均大於 colorBase，這樣才能保證背景色較淺
+            color = Color.FromArgb(random.Next(56) + colorBase, random.Next(56) + colorBase, random.Next(56) + colorBase);
+            return color;
+        }
+        /// <summary>
+        /// 扭曲圖片
+        /// </summary>
+        /// <param name="srcBmp"></param>
+        /// <param name="bXDir"></param>
+        /// <param name="dMultValue"></param>
+        /// <param name="dPhase"></param>
+        /// <returns></returns>
+        Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
+        {
+            int leftMargin = 0;
+            int rightMargin = 0;
+            int topMargin = 0;
+            int bottomMargin = 0;
+            //float PI = 3.14159265358979f;
+            float PI2 = 6.28318530717959f;
+            Bitmap destBmp = new Bitmap(srcBmp.Width, srcBmp.Height);
+            double dBaseAxisLen = bXDir ? Convert.ToDouble(destBmp.Height) : Convert.ToDouble(destBmp.Width);
+            for (int i = 0; i < destBmp.Width; i++)
+            {
+                for (int j = 0; j < destBmp.Height; j++)
+                {
+                    double dx = 0;
+                    dx = bXDir ? PI2 * Convert.ToDouble(j) / dBaseAxisLen : PI2 * Convert.ToDouble(i) / dBaseAxisLen;
+                    dx += dPhase;
+                    double dy = Math.Sin(dx);
+                    //取得當前點的顏色
+                    int nOldX = 0;
+                    int nOldY = 0;
+                    nOldX = bXDir ? i + Convert.ToInt32(dy * dMultValue) : i;
+                    nOldY = bXDir ? j : j + Convert.ToInt32(dy * dMultValue);
+                    System.Drawing.Color color = srcBmp.GetPixel(i, j);
+                    if (nOldX >= leftMargin && nOldX < destBmp.Width - rightMargin && nOldY >= bottomMargin && nOldY < destBmp.Height - topMargin)
+                    {
+                        destBmp.SetPixel(nOldX, nOldY, color);
+                    }
+                }
+            }
+            return destBmp;
+        }
+        /// <summary>
+        /// 判斷驗證碼是否正確
+        /// </summary>
+        /// <param name="inputValCode">待判斷的驗證碼</param>
+        /// <returns>正確返回 true,錯誤返回 false</returns>
+        public bool IsRight(string inputValCode)
+        {
+            if (validStr.ToUpper().Equals(inputValCode.ToUpper()))//無論輸入大小寫都轉換為大些判斷
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
+
 }

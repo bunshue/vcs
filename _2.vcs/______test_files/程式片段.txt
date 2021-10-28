@@ -1,4 +1,92 @@
 
+
+
+C#自定義直線箭頭大小
+
+最近再搞個畫圖的程序，直線的方向一直弄不好，直線太細了，看不清楚箭頭的，直線太粗了，又看著惡心。
+
+發現原來可以自定義箭頭的大小的，放著以備以後使用。
+
+System.Drawing.Drawing2D.AdjustableArrowCap lineCap = new System.Drawing.Drawing2D.AdjustableArrowCap(6, 6, true);
+Pen RedPen=new Pen(Color.Red,2);
+RedPen.CustomEndCap = lineCap;
+
+然後用RedPen繪圖就可以了！
+
+
+//在C#中調用windows API函數
+
+using System.Runtime.InteropServices;
+
+/// <summary>
+/// 打開和關閉CD托盤.
+/// </summary>
+[DllImport("winmm.dll" , EntryPoint="mciSendString", CharSet=CharSet.Auto)]
+public static extern int mciSendString (string lpstrCommand,string lpstrReturnstring ,int uReturnLength,int hwndCallback);
+
+/// <summary>
+/// 顯示和隱藏鼠標指針.
+/// </summary>
+[DllImport("user32.dll", EntryPoint="ShowCursor", CharSet=CharSet.Auto)]
+public static extern int ShowCursor(int bShow);
+
+/// <summary>
+/// 清空回收站.
+/// </summary>
+[DllImport("shell32.dll", EntryPoint="SHEmptyRecycleBin", CharSet=CharSet.Auto)]
+public static extern long SHEmptyRecycleBin(IntPtr hwnd, string pszRootPath, long dwFlags);
+
+/// <summary>
+/// 打開浏覽器
+/// </summary>
+[DllImport("shell32.dll", EntryPoint="ShellExecute", CharSet=CharSet.Auto)]
+public static extern int ShellExecute(IntPtr hwnd,string lpOperation,string lpFile,string lpParameters,string lpDirectory,int nShowCmd);
+
+/// <summary>
+/// 最大化窗口，最小化窗口，正常大小窗口；
+/// </summary>
+[DllImport("user32.dll", EntryPoint="ShowWindow", CharSet=CharSet.Auto)]
+public static extern int ShowWindow(IntPtr hwnd,int nCmdShow);
+
+
+
+//打開CD托盤：
+long lngReturn = ApiCalls.mciSendString("set CDAudio door open", strReturn, 127, 0);
+//關閉CD托盤：
+long lngReturn = ApiCalls.mciSendString("set CDAudio door closed", strReturn, 127, 0);
+//在應用程序窗體中顯示鼠標指針：
+ApiCalls.ShowCursor(1);
+//在應用程序窗體中隱藏鼠標指針：
+ApiCalls.ShowCursor(0);
+//清空回收站：
+ApiCalls.SHEmptyRecycleBin(Form.ActiveForm.Handle,"",0x00000000);
+//打開浏覽器窗口，textBox1.Text中表示要訪問的URL地址：
+Long lngReturn= ApiCalls.ShellExecute(Form.ActiveForm.Handle,"Open",textBox1.Text,"","",1);
+//最大化窗口：
+ApiCalls.ShowWindow(Form.ActiveForm.Handle,3);
+//最小化窗口：
+ApiCalls.ShowWindow(Form.ActiveForm.Handle,2);
+//恢復正常大小窗口：
+ApiCalls.ShowWindow(Form.ActiveForm.Handle,1);
+ 
+
+
+//隨機顏色如下
+
+public static Color GetRandomColor()
+{
+    Random randomFirst = new Random((int)DateTime.Now.Ticks); 
+    System.Threading.Thread.Sleep(300);
+    Random randomSencond = new Random((int)DateTime.Now.Ticks);
+    System.Threading.Thread.Sleep(300);
+    Random randomThird = new Random((int)DateTime.Now.Ticks);
+    int intRed = randomFirst.Next(256);
+    int intGreen = randomSencond.Next(256);
+    int intBlue = randomThird.Next(256);
+    return Color.FromArgb(intRed, intGreen, intBlue);
+}
+        
+        
 //C#獲取圖片的指定部分
 
         /// <summary>

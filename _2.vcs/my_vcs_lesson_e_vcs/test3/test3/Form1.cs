@@ -33,7 +33,7 @@ namespace test3
             switch (m.Msg)
             {
                 case 0x0011://WM_QUERYENDSESSION
-                    m.Result = (IntPtr)1;
+                    //m.Result = (IntPtr)1;
                     richTextBox1.Text += "截獲作業系統關閉時發出的訊息\n";
                     richTextBox1.Text += "截獲作業系統關閉時發出的訊息\n";
                     richTextBox1.Text += "截獲作業系統關閉時發出的訊息\n";
@@ -93,8 +93,8 @@ namespace test3
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            label1.Location = new Point(x_st + dx * 2, y_st + dy * 0+15);
-            pictureBox1.Location = new Point(x_st + dx * 3+100, y_st + dy * 0);
+            label1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 15);
+            pictureBox1.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
 
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
@@ -175,8 +175,8 @@ namespace test3
                 //獲取Response
                 HttpWebResponse rep = (HttpWebResponse)req.GetResponse();
                 //創建StreamReader與StreamWriter文件流對象
-                StreamReader sr = new StreamReader(rep.GetResponseStream(),encode);
-                StreamWriter sw = new StreamWriter(filename, false,encode);
+                StreamReader sr = new StreamReader(rep.GetResponseStream(), encode);
+                StreamWriter sw = new StreamWriter(filename, false, encode);
                 //寫入內容
                 sw.Write(sr.ReadToEnd());
                 //清理當前緩存區，並將緩存寫入文件
@@ -211,25 +211,118 @@ namespace test3
 
         private void button3_Click(object sender, EventArgs e)
         {
-
-
-        
+            HardDiskVal hdv = new HardDiskVal();
+            string result = hdv.HDVal();
+            richTextBox1.Text += "獲取硬盤序列號 : " + result + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += CaculateWeekDay(2021, 10, 28);
         }
+
+        /*
+        C#實現的根據年月日計算星期幾的函數
+
+        基姆拉爾森計算公式
+
+        W= (d 2*m 3*(m 1)/5 y y/4-y/100 y/400) mod 7
+
+        在公式中d表示日期中的日數，m表示月份數，y表示年數。注意：在公式中有個與其他公式不同的地方：把一月和二月看成是上一年的十三月和十四月，例：如果是2004-1-10則換算成：2003-13-10來代入公式計算。
+        */
+
+        //y－年，m－月，d－日期
+        string CaculateWeekDay(int y, int m, int d)
+        {
+            if (m == 1) m = 13;
+            if (m == 2) m = 14;
+            int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400) % 7 + 1;
+
+            string weekstr = "";
+            switch (week)
+            {
+                case 1: weekstr = "星期一"; break;
+                case 2: weekstr = "星期二"; break;
+                case 3: weekstr = "星期三"; break;
+                case 4: weekstr = "星期四"; break;
+                case 5: weekstr = "星期五"; break;
+                case 6: weekstr = "星期六"; break;
+                case 7: weekstr = "星期日"; break;
+            } return weekstr;
+        }
+
+        [DllImport("kernel32.dll")]
+        public static extern bool Beep(int frequency, int duration);
 
         private void button5_Click(object sender, EventArgs e)
         {
+            Random random = new Random();
+
+            for (int i = 0; i < 10; i++)
+            {
+                Beep(random.Next(10000), 100);
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //獲取硬盤相應序列號
+            string result = clsIDE.GetAllSerialNumber();
+            richTextBox1.Text += "獲取硬盤序列號 : " + result + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //WMI 使用
+            SelectQuery query = new SelectQuery("Select * From Win32_LogicalDisk");
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
+
+            foreach (ManagementBaseObject disk in searcher.Get())
+            {
+                //Console.WriteLine("/r/n" + disk["Name"] + " " + disk["DriveType"] + " " + disk["VolumeName"]);
+                richTextBox1.Text += disk["Name"] + " " + disk["DriveType"] + " " + disk["VolumeName"] + "\n";
+            }
+            /*
+            disk["DriveType"] 的返回值意義如下:
+
+            1 No type
+            2 Floppy disk
+            3 Hard disk
+            4 Removable drive or network drive
+            5 CD-ROM
+            6 RAM disk
+            */
+
+
+            //3、如何用WMI獲得指定磁盤的容量？	  TBD
+
+            //"win32_logicaldisk.deviceid=/"c:/"");
+            /*
+            ManagementObject disk2 = new ManagementObject("win32_logicaldisk.deviceid=C://");
+            disk2.Get();
+            Console.WriteLine("Logical Disk Size = " + disk2["Size"] + " bytes");
+            */
+
+
+            ManagementClass diskClass = new ManagementClass("Win32_LogicalDisk");
+            ManagementObjectCollection disks = diskClass.GetInstances();
+            ManagementObjectCollection.ManagementObjectEnumerator disksEnumerator = disks.GetEnumerator();
+            while (disksEnumerator.MoveNext())
+            {
+                ManagementObject disk = (ManagementObject)disksEnumerator.Current;
+                richTextBox1.Text += "Disk found: " + disk["deviceid"] + "\n";
+                //Console.WriteLine("Disk found: " + disk["deviceid"]);
+            }
+
+            richTextBox1.Text += "列出機器中所有的共享資源\n";
+            ManagementObjectSearcher searcher2 = new ManagementObjectSearcher("SELECT * FROM Win32_share");
+            foreach (ManagementObject share in searcher2.Get())
+            {
+                //Console.WriteLine(share.GetText(TextFormat.Mof));
+                richTextBox1.Text += share.GetText(TextFormat.Mof) + "\n";
+
+            }
+
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -300,6 +393,134 @@ namespace test3
             //Graphics 類還有很多繪圖方法可以繪制 直線、曲線、圓等等 
             image.Save(thefullname, System.Drawing.Imaging.ImageFormat.Gif);
             return thefullname;
+        }
+    }
+
+    /// <summary>
+    /// HardDiskVal 的摘要說明。
+    /// 讀取指定盤符的硬盤序列號
+    /// 功能：讀取指定盤符的硬盤序列號
+    /// </summary>
+    public class HardDiskVal
+    {
+        [DllImport("kernel32.dll")]
+        private static extern int GetVolumeInformation(
+        string lpRootPathName,
+        string lpVolumeNameBuffer,
+        int nVolumeNameSize,
+        ref int lpVolumeSerialNumber,
+        int lpMaximumComponentLength,
+        int lpFileSystemFlags,
+        string lpFileSystemNameBuffer,
+        int nFileSystemNameSize
+        );
+
+        /// <summary>
+        /// 獲得盤符為drvID的硬盤序列號，缺省為C
+        /// </summary>
+        /// <param name="drvID"></param>
+        /// <returns></returns>
+        public string HDVal(string drvID)
+        {
+            const int MAX_FILENAME_LEN = 256;
+            int retVal = 0;
+            int a = 0;
+            int b = 0;
+            string str1 = null;
+            string str2 = null;
+            int i = GetVolumeInformation(
+            drvID + @":/",
+            str1,
+            MAX_FILENAME_LEN,
+            ref retVal,
+            a,
+            b,
+            str2,
+            MAX_FILENAME_LEN
+            );
+            return retVal.ToString();
+        }
+
+        public string HDVal()
+        {
+            const int MAX_FILENAME_LEN = 256;
+            int retVal = 0;
+            int a = 0;
+            int b = 0;
+            string str1 = null;
+            string str2 = null;
+            int i = GetVolumeInformation(
+            "c://",
+            str1,
+            MAX_FILENAME_LEN,
+            ref retVal,
+            a,
+            b,
+            str2,
+            MAX_FILENAME_LEN
+            );
+            return retVal.ToString();
+        }
+
+    }
+
+    /// <summary>
+    /// Summary description for clsIDE.
+    /// </summary>
+    public class clsIDE
+    {
+        /// <summary>
+        /// 獲取硬盤相應分區的序列號
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAllSerialNumber()
+        {
+            string Dri = "";
+
+            System.Management.ManagementClass mo = new System.Management.ManagementClass("Win32_LogicalDisk");
+
+            System.Management.ManagementObjectCollection mc = mo.GetInstances();
+
+            foreach (System.Management.ManagementObject m in mc)
+            {
+                if (Convert.ToString(m.Properties["DriveType"].Value) == "3")
+                {
+                    Dri = Dri + m.Properties["VolumeSerialNumber"].Value.ToString() + "/n";
+                }
+            }
+
+            Dri = Dri.Substring(0, Dri.Length - 1);
+
+            return Dri;
+        }
+
+        /// <summary>
+        /// 獲取硬盤相應分區的序列號
+        /// </summary>
+        /// <param name="Drive">盤符（如 C）</param>
+        /// <returns></returns>
+        public static string GetSpecialVolumeSerialNumber(string Drive)
+        {
+            string Dri = "";
+
+            System.Management.ManagementClass mo = new System.Management.ManagementClass("Win32_LogicalDisk");
+
+            System.Management.ManagementObjectCollection mc = mo.GetInstances();
+
+            foreach (System.Management.ManagementObject m in mc)
+            {
+                if (Convert.ToString(m.Properties["DriveType"].Value) == "3")
+                {
+                    if (m.Properties["Name"].Value.ToString().ToUpper().Trim().Substring(0, 1) == Drive.ToUpper().Trim())
+                    {
+                        Dri = Dri + m.Properties["VolumeSerialNumber"].Value.ToString();
+
+                        break;
+                    }
+                }
+            }
+
+            return Dri;
         }
     }
 }

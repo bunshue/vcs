@@ -147,6 +147,9 @@ namespace vcs_ImageProcessingG
         二. 浮雕效果
 
         原理: 對圖像像素點的像素值分別與相鄰像素點的像素值相減後加上128, 然後將其作為新的像素點的值.
+
+        使圖像產生浮雕的效果，主要通過對圖像像素點的像素值分別與相鄰像素點的像素值相減後加上128，然後將其作為新的像素點的值。
+        以浮雕效果顯示圖像主要通過GetPixel方法獲得每一點像素的值，通過SetPixel設置該像素點的像素值。
         */
         //浮雕效果
         private void image_processing2(string filename)
