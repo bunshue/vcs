@@ -1,5 +1,24 @@
 
 
+先使用無符號字節數組存放數據庫對應的數據集中表的image類型字段的值。例如：
+
+byte[] bytes= (byte[]) image類型字段值
+
+
+
+一、獲取程序集版本
+
+label版本.Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+二、獲取文件版本
+
+using System.Diagnostics;
+FileVersionInfo myFileVersion = FileVersionInfo.GetVersionInfo (System.Windows.Forms.Application.ExecutablePath);
+label版本.Text = myFileVersion.FileVersion; 
+
+
+
+
 
 C#自定義直線箭頭大小
 
@@ -1606,6 +1625,31 @@ GUID永遠是方便的; 對於程序開發的各個方面，.NET Framework簡化
 
 4. 在 Windows 平台上，GUID 應用非常廣泛：注冊表、類及接口標識、數據庫、甚至自動生成的機器名、目錄名等。
 
+
+
+
+
+GUID（全局統一標識符）是指在一台機器上生成的數字，它保證對在同一時空中的所有機器都是唯一的。GUID的唯一缺陷在於生成的結果串會比較大。
+
+      對於程序開發的各個方面，.NET Framework簡化了建立和處理GUID數值的過程。在.NET程序需要的地方，這一功能很容易地生成唯一的數值。
+
+1、Guid.NewGuid().ToString("N") 結果為：
+         38bddf48f43c48588e0d78761eaa1ce6
+2、Guid.NewGuid().ToString("D") 結果為：
+            57d99d89-caab-482a-a0e9-a0a803eed3ba
+3、Guid.NewGuid().ToString("B") 結果為：
+            {09f140d5-af72-44ba-a763-c861304b46f8}
+4、Guid.NewGuid().ToString("P") 結果為：
+            (778406c2-efff-4262-ab03-70a77d09c2b5)
+            
+可見默認的為第2種效果
+
+        其中：N、D、B、P分別代表一種輸出格式
+
+小注：在個人使用中，主要是在數據中某列在沒有輸入值的情況下，用於生成內碼（NOT NULL PRIMARY KEY）。
+EG:       string str = "insert into 表名(NM,BH,MC) values('" + Guid.NewGuid().ToString("N") + "','" + textBox_bh.Text + "','" + textBox_mc.Text + "')";
+            
+            
 
 
 

@@ -327,15 +327,78 @@ namespace test3
 
         private void button8_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "主機名稱：" + System.Net.Dns.GetHostName() + "\n";
+
+            richTextBox1.Text += "IP地址：" + getIPAddress() + "\n";
         }
 
+        private static string getIPAddress()
+        {
+            System.Net.IPAddress addr;
+            // 獲得本機局域網IP地址
+            addr = new System.Net.IPAddress(Dns.GetHostByName(Dns.GetHostName()).AddressList[0].Address);
+            return addr.ToString();
+        }
+
+        //設定音量1, 2  ST
+
+        //winmm控制方式，涉及Xp系統波形聲音的左右聲道，高位為左聲道，低位為右聲道：
+        //winmm
+
+        [DllImport("winmm.dll", EntryPoint = "waveOutSetVolume")]
+        public static extern int WaveOutSetVolume(IntPtr hwo, uint dwVolume);
+
+        private void SetVol1(double arg)
+        {
+            double newVolume = ushort.MaxValue * arg / 10.0;
+
+            uint v = ((uint)newVolume) & 0xffff;
+            uint vAll = v | (v << 16);
+
+            richTextBox1.Text += "setup " + vAll.ToString() + "\n";
+            int retVal = WaveOutSetVolume(IntPtr.Zero, vAll);
+        }
+
+        //user32控制方式：
+        //user32
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+        public void SetVol2()
+        {
+            p = Process.GetCurrentProcess();
+            for (int i = 0; i < 5; i++)
+            {
+                SendMessageW(p.Handle, WM_APPCOMMAND, p.Handle, (IntPtr)APPCOMMAND_VOLUME_UP);
+            }
+        }
+
+        private Process p;
+        private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
+        private const int APPCOMMAND_VOLUME_UP = 0x0a0000;
+        private const int APPCOMMAND_VOLUME_DOWN = 0x090000;
+        private const int WM_APPCOMMAND = 0x319;
+
+
+        double a = 0;
         private void button9_Click(object sender, EventArgs e)
         {
+            //useless
+            //設定音量1 winm
+            SetVol1(a);
+
+            a += 10;
         }
 
+        //設定音量2
         private void button10_Click(object sender, EventArgs e)
         {
+            //設定音量2 user32
+            SetVol2();
         }
+
+        //設定音量1, 2  SP
 
         private void button11_Click(object sender, EventArgs e)
         {
