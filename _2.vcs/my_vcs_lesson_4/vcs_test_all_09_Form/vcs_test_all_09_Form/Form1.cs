@@ -519,12 +519,14 @@ namespace vcs_test_all_09_Form
         private void button32_Click(object sender, EventArgs e)
         {
             //不規則表單 Region
+            //通過設置窗體的Region屬性，製作不規則窗體。
 
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath gp = new GraphicsPath();
             Rectangle rect = new Rectangle(0, 0, 600, 400);
-
-            path.AddEllipse(rect);
-            this.Region = new Region(path);
+            gp.AddEllipse(rect);
+            Region r = new Region(gp);
+            this.Region = r;
+            //this.Region = new Region(gp); same
         }
 
         private void button33_Click(object sender, EventArgs e)

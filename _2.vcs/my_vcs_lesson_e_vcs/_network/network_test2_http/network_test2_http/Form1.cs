@@ -238,37 +238,113 @@ namespace network_test2_http
 
         private void button5_Click(object sender, EventArgs e)
         {
-            HttpProvider httpProvider = new HttpProvider();
+            //取得網頁資料
+            string url = "http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/188537.html";
 
-            // 1. 模擬一個Get請求方式
-            HttpResponseParameter responseParameter1 = httpProvider.Excute(new HttpRequestParameter
-            {
-                Url = "http://www.baidu.com",
-                IsPost = false,
-                Encoding = Encoding.UTF8
-                //Cookie = new HttpCookieType() 如果需要Cookie
-            });
-            System.Console.WriteLine(responseParameter1.Body);
+            WebClient wc = new WebClient();
+
+            wc.Encoding = System.Text.Encoding.UTF8;
+
+            string str = wc.DownloadString(url);
+
+            richTextBox1.Text += str + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //取得網頁資料
+            //C#獲取網頁源碼，自動判斷網頁字符集編碼
+        }
 
+        private string getHtml(string url)
+        //url是要訪問的網站地址，charSet是目標網頁的編碼，如果傳入的是null或者""，那就自動分析網頁的編碼
+        {
+            WebClient myWebClient = new WebClient();
+            //創建WebClient實例myWebClient 
+            // 需要注意的：
+            //有的網頁可能下不下來，有種種原因比如需要cookie,編碼問題等等
+            //這是就要具體問題具體分析比如在頭部加入cookie 
+            // webclient.Headers.Add("Cookie", cookie); 
+            //這樣可能需要一些重載方法。根據需要寫就可以了
+            //獲取或設置用於對向 Internet 資源的請求進行身份驗證的網絡憑據。
+            myWebClient.Credentials = CredentialCache.DefaultCredentials;
+            //如果服務器要驗證用戶名,密碼 
+            //NetworkCredential mycred = new NetworkCredential(struser, strpassword);
+            //myWebClient.Credentials = mycred; 
+            //從資源下載數據並返回字節數組。（加@是因為網址中間有"/"符號）
+            byte[] myDataBuffer = myWebClient.DownloadData(url);
+            string strWebData = Encoding.Default.GetString(myDataBuffer);
+            //獲取網頁字符編碼描述信息
+            return strWebData;
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //C#獲取網上圖片的寬高代碼
+            string url = @"http://www.aspphp.online/Skin/apsp/logo.gif";
+            WebRequest request = WebRequest.Create(url);//图片src内容
+            request.Credentials = CredentialCache.DefaultCredentials;
 
+            Stream s = request.GetResponse().GetResponseStream();
+
+            byte[] b = new byte[74373];
+            MemoryStream mes_keleyi_com = new MemoryStream(b);
+            s.Read(b, 0, 74373);
+            s.Close();
+            Image image = Image.FromStream(mes_keleyi_com);
+            Console.WriteLine("高{0}，寬{1}", image.Height, image.Width);
+            richTextBox1.Text += "獲取網上圖片的寬高代碼\tW = " + image.Width.ToString() + ", H = " + image.Height.ToString() + "\n";
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            string url = @"http://www.aspphp.online/Skin/apsp/logo.gif";
 
+            WebRequest request = WebRequest.Create(url);//图片src内容
+            WebResponse response = request.GetResponse();
+            //文件流获取图片操作
+            Stream reader = response.GetResponseStream();
+            string path = "aaa.gif";        //图片路径命名 
+            FileStream writer = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+            byte[] buff = new byte[512];
+            int c = 0;                                           //实际读取的字节数   
+            while ((c = reader.Read(buff, 0, buff.Length)) > 0)
+            {
+                writer.Write(buff, 0, c);
+            }
+            //释放资源
+            writer.Close();
+            writer.Dispose();
+            reader.Close();
+            reader.Dispose();
+            response.Close();
+            richTextBox1.Text += "圖片下載成功, 檔案 : " + path + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
 
+        }
+
+        /// <summary> 
+        /// 取得HTML中所有图片的 URL
+        /// </summary> 
+        /// <param name="sHtmlText">HTML代码</param> 
+        /// <returns>图片的URL列表</returns> 
+        public static string[] GetHtmlImageUrlList(string sHtmlText)
+        {
+            // 定义正则表达式用来匹配 img 标签 
+            Regex regImg = new Regex(@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>", RegexOptions.IgnoreCase);
+            // 搜索匹配的字符串 
+            MatchCollection matches = regImg.Matches(sHtmlText);
+            int i = 0;
+            string[] sUrlList = new string[matches.Count];
+            // 取得匹配项列表 
+            foreach (Match match in matches)
+            {
+                sUrlList[i++] = match.Groups["imgUrl"].Value;
+            }
+            return sUrlList;
         }
 
         private void button10_Click(object sender, EventArgs e)

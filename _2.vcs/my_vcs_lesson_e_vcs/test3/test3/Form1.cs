@@ -19,6 +19,8 @@ using System.Security.Cryptography; //for MD5
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.Threading;
+using System.Reflection;    //for Assembly
+
 
 namespace test3
 {
@@ -279,7 +281,6 @@ namespace test3
 
             foreach (ManagementBaseObject disk in searcher.Get())
             {
-                //Console.WriteLine("/r/n" + disk["Name"] + " " + disk["DriveType"] + " " + disk["VolumeName"]);
                 richTextBox1.Text += disk["Name"] + " " + disk["DriveType"] + " " + disk["VolumeName"] + "\n";
             }
             /*
@@ -311,18 +312,14 @@ namespace test3
             {
                 ManagementObject disk = (ManagementObject)disksEnumerator.Current;
                 richTextBox1.Text += "Disk found: " + disk["deviceid"] + "\n";
-                //Console.WriteLine("Disk found: " + disk["deviceid"]);
             }
 
             richTextBox1.Text += "列出機器中所有的共享資源\n";
             ManagementObjectSearcher searcher2 = new ManagementObjectSearcher("SELECT * FROM Win32_share");
             foreach (ManagementObject share in searcher2.Get())
             {
-                //Console.WriteLine(share.GetText(TextFormat.Mof));
                 richTextBox1.Text += share.GetText(TextFormat.Mof) + "\n";
-
             }
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -330,6 +327,24 @@ namespace test3
             richTextBox1.Text += "主機名稱：" + System.Net.Dns.GetHostName() + "\n";
 
             richTextBox1.Text += "IP地址：" + getIPAddress() + "\n";
+
+
+            //本機mac地址
+
+            string mac = "";
+            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection moc = mc.GetInstances();
+
+            foreach (ManagementObject mo in moc)
+            {
+                if ((bool)mo["IPEnabled"])
+                {
+                    mac = mo["MacAddress"].ToString();
+
+                    //本機MAC
+                    richTextBox1.Text += "本機MAC：" + mac + "\n";
+                }
+            }
         }
 
         private static string getIPAddress()
@@ -402,22 +417,260 @@ namespace test3
 
         private void button11_Click(object sender, EventArgs e)
         {
+            string result = appInfo();
+            richTextBox1.Text += result + "\n";
+        }
+
+        public static string appInfo()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string result = "File Version: " + fvi.FileVersion
+                + Environment.NewLine + "Company Name: " + fvi.CompanyName
+                + Environment.NewLine + "Comments: " + fvi.Comments
+                + Environment.NewLine + "Product Name: " + fvi.ProductName
+                + Environment.NewLine + "Copyright: " + fvi.LegalCopyright
+                + Environment.NewLine + "File Name: " + fvi.FileName
+                + Environment.NewLine + "Original File Name: " + fvi.OriginalFilename
+                + Environment.NewLine + "Product Version: " + fvi.ProductVersion
+                + Environment.NewLine + "Special build: " + fvi.SpecialBuild
+                + Environment.NewLine + "" + fvi.CompanyName;
+            return result;
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //html轉txt
+            //http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184774.html
         }
+
+        /// C#過濾html標簽
+        /// 用正則表達式來做html轉txt
+        public static string Html2Text(string htmlStr)
+        {
+            if (String.IsNullOrEmpty(htmlStr))
+            {
+                return "";
+            }
+            string regEx_style = "<style[^>]*?>[\\s\\S]*?<\\/style>"; //定義style的正則表達式
+            string regEx_script = "<script[^>]*?>[\\s\\S]*?<\\/script>"; //定義script的正則表達式
+            string regEx_html = "<[^>]+>"; //定義HTML標簽的正則表達式
+            htmlStr = Regex.Replace(htmlStr, regEx_style, "");//刪除css
+            htmlStr = Regex.Replace(htmlStr, regEx_script, "");//刪除js
+            htmlStr = Regex.Replace(htmlStr, regEx_html, "");//刪除html標記
+            htmlStr = Regex.Replace(htmlStr, "\\s*|\t|\r|\n", "");//去除tab、空格、空行
+            htmlStr = htmlStr.Replace(" ", "");
+            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
+            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
+            return htmlStr.Trim();
+        }
+
+        // 顏色模板
+        //  黑、白、紅、綠、藍、黃/ 棕 、灰
+        private const int BLACK = 0;
+        private const int WHITE = 1;
+        private const int RED1 = 2;
+        private const int RED2 = 3;
+        private const int GREEN1 = 4;
+        private const int GREEN2 = 5;
+        private const int BLUE1 = 6;
+        private const int BLUE2 = 7;
+        private const int YELLOW1 = 8;
+        private const int YELLOW2 = 9;
+        private const int BROWN = 10;
+        private const int GRAY = 11;
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //顯示顏色
+            int[,] colorVelue = null;
+            colorVelue = new int[,] {
+            {50,50,50},    //黑
+            {255,255,255},  //白
+            {240,80,80}, //紅小
+            {240,160,160},  //紅大
+            {60,180,60}, //綠小
+            {160,240,160},  //綠大
+            {80,80,240}, //藍小
+            {160,160,240},  //藍大
+            {240,190,80}, //黃小
+            {240,240,160},  //黃大
+            {205,133,63},   //棕/褐
+            //{162,162,162},//灰，特殊
+            };
+
+            int total_colors = colorVelue.GetUpperBound(0) + 1;
+            richTextBox1.Text += "total_colors = " + total_colors.ToString() + "\n";
+
+            int i;
+            for (i = 0; i < total_colors; i++)
+            {
+                switch (i)
+                {
+                    case -1:
+                        richTextBox1.Text += "無此色\n";
+                        break;
+                    case 0:
+                        richTextBox1.Text += "黑\n";
+                        break;
+                    case 1:
+                        richTextBox1.Text += "白\n";
+                        break;
+                    case 2:
+                        richTextBox1.Text += "紅\n";
+                        break;
+                    case 3:
+                        richTextBox1.Text += "紅\n";
+                        break;
+                    case 4:
+                        richTextBox1.Text += "綠\n";
+                        break;
+                    case 5:
+                        richTextBox1.Text += "綠\n";
+                        break;
+                    case 6:
+                        richTextBox1.Text += "藍\n";
+                        break;
+                    case 7:
+                        richTextBox1.Text += "藍\n";
+                        break;
+                    case 8:
+                        richTextBox1.Text += "黃\n";
+                        break;
+                    case 9:
+                        richTextBox1.Text += "黃\n";
+                        break;
+                    case 10:
+                        richTextBox1.Text += "棕\n";
+                        break;
+                    case 11:
+                        richTextBox1.Text += "灰\n";
+                        break;
+                    default:
+                        richTextBox1.Text += "其他\n";
+                        break;
+                }
+
+                int R = colorVelue[i, 0];
+                int G = colorVelue[i, 1];
+                int B = colorVelue[i, 2];
+                richTextBox1.Text += "show color " + i.ToString() + " " + R.ToString() + " " + G.ToString() + " " + B.ToString() + "\n";
+
+                pictureBox1.BackColor = Color.FromArgb(R, G, B);
+                Application.DoEvents();
+                Thread.Sleep(1000);
+
+            }
+
         }
+
+
+        [StructLayout(LayoutKind.Sequential)]
+        public class OSVersionInfo
+        {
+            public int OSVersionInfoSize;
+            public int MajorVersion;
+            public int MinorVersion;
+            public int BuildNumber;
+            public int PlatformId;
+
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public String versionString;
+        }
+
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct OSVersionInfo2
+        {
+            public int OSVersionInfoSize;
+            public int MajorVersion;
+            public int MinorVersion;
+            public int BuildNumber;
+            public int PlatformId;
+
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public String versionString;
+        }
+
+
+        public class LibWrap
+        {
+            [DllImport("kernel32")]
+            public static extern bool GetVersionEx([In, Out] OSVersionInfo osvi);
+
+
+            [DllImport("kernel32", EntryPoint = "GetVersionEx")]
+            public static extern bool GetVersionEx2(ref OSVersionInfo2 osvi);
+        }
+
+        public static String OpSysName(int MajorVersion, int MinorVersion, int PlatformId)
+        {
+            String str_opn = String.Format("{0}.{1}", MajorVersion, MinorVersion);
+            switch (str_opn)
+            {
+                case "4.0":
+                    return win95_nt40(PlatformId);
+                case "4.10":
+                    return "Windows 98";
+                case "4.90":
+                    return "Windows Me";
+                case "3.51":
+                    return "Windows NT 3.51";
+                case "5.0":
+                    return "Windwos 2000";
+                case "5.1":
+                    return "Windwos XP";
+                case "5.2":
+                    return "Windows Server 2003 family";
+                default:
+                    return "This windows version is not distinguish!";
+            }
+        }
+        public static String win95_nt40(int PlatformId)
+        {
+            switch (PlatformId)
+            {
+                case 1:
+                    return "Windows 95";
+                case 2:
+                    return "Windows NT 4.0";
+                default:
+                    return "This windows version is not distinguish!";
+            }
+        }
+
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //取得Windows版本
+
+            richTextBox1.Text += " Passing OSVersionInfo as class\n";
+
+            OSVersionInfo osvi = new OSVersionInfo();
+            osvi.OSVersionInfoSize = Marshal.SizeOf(osvi);
+
+
+            LibWrap.GetVersionEx(osvi);
+
+            Console.WriteLine("Class size: {0} Operation System : {1} Pack: {2}", osvi.OSVersionInfoSize, OpSysName(osvi.MajorVersion, osvi.MinorVersion, osvi.PlatformId), osvi.versionString);
+            Console.WriteLine("{0}", osvi.PlatformId);
+
+            richTextBox1.Text += " Passing OSVersionInfo as struct\n";
+
+            OSVersionInfo2 osvi2 = new OSVersionInfo2();
+            osvi2.OSVersionInfoSize = Marshal.SizeOf(osvi2);
+
+            LibWrap.GetVersionEx2(ref osvi2);
+            Console.WriteLine("Static size: {0} Operation System : {1} Pack: {2}", osvi2.OSVersionInfoSize, OpSysName(osvi2.MajorVersion, osvi2.MinorVersion, osvi2.PlatformId), osvi2.versionString);
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //取得Windows版本
+            string version = OSInfoMation.GetOsVersion();
+            richTextBox1.Text += version + "\n";
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -586,5 +839,39 @@ namespace test3
             return Dri;
         }
     }
+
+    public class OSInfoMation
+    {
+        public static string OSBit()
+        {
+            try
+            {
+                ConnectionOptions oConn = new ConnectionOptions();
+                System.Management.ManagementScope managementScope = new System.Management.ManagementScope("\\\\localhost", oConn);
+                System.Management.ObjectQuery objectQuery = new System.Management.ObjectQuery("select AddressWidth from Win32_Processor");
+                ManagementObjectSearcher moSearcher = new ManagementObjectSearcher(managementScope, objectQuery);
+                ManagementObjectCollection moReturnCollection = null;
+                string addressWidth = null;
+                moReturnCollection = moSearcher.Get();
+                foreach (ManagementObject oReturn in moReturnCollection)
+                {
+                    addressWidth = oReturn["AddressWidth"].ToString();
+                } //www.heatpress123.net
+                return addressWidth;
+            }
+            catch
+            {
+                return "獲取錯誤";
+            }
+        }
+
+        public static string GetOsVersion()
+        {
+            string osBitString = OSBit();
+            string osVersionString = Environment.OSVersion.ToString();
+            return string.Format(@"系統：{0}。位：{1}", osVersionString, osBitString);
+        }
+    }
+
 }
 

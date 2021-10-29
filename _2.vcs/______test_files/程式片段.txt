@@ -1,4 +1,300 @@
 
+用C#和WMI獲取邏輯驅動器詳細信息
+
+
+
+SelectQuery selectQuery = new SelectQuery("win32_logicaldisk");
+
+　　或者使用wql查詢來創建查詢類的實例，代碼如下：
+
+SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
+
+　　或者只獲取類的部分屬性，代碼如下：
+
+SelectQuery selectQuery = new SelectQuery("select Name,DriveType from win32_logicaldisk");
+
+
+SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
+
+ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
+　　int i=0;
+foreach (ManagementObject disk in searcher.Get()) {
+　//獲取驅動器盤符
+　listView1.Items.Add(disk["Name"].ToString());
+}
+
+
+
+
+         /// <summary>
+        /// 實現bitmap到ico的轉換
+        /// </summary>
+        /// <param name="bitmap">原圖</param>
+        /// <returns>轉換後的指定大小的圖標</returns>
+        private Icon ConvertBitmap2Ico(Bitmap bitmap)
+        {
+            Bitmap icoBitmap = new Bitmap(bitmap, size);//創建制定大小的原位圖
+
+            //獲得原位圖的圖標句柄
+            IntPtr hIco = icoBitmap.GetHicon();
+            //從圖標的指定WINDOWS句柄創建Icon
+            Icon icon = Icon.FromHandle(hIco);
+
+            return icon;
+        }
+        
+        
+            string m_fileName = DateTime.Now.ToFileTime().ToString() + ".jpg";
+            richTextBox1.Text += m_fileName + "\n";
+
+ toolStripStatusLabel1.Text = "當前時間:" + DateTime.Now.ToLongTimeString(); 
+ 
+ 
+ 
+
+GDI+：Graphics Device Interface Plus也就是圖形設備接口,提供了各種豐富的圖形圖像處理功能;在C#.Net中，使用GDI+處理二維（2D）的圖形和圖像，使用DirectX處理三維（3D）的圖形圖像,圖形圖像處理用到的主要命名空間是System . Drawing：提供了對GDI+基本圖形功能的訪問，主要有Graphics類、Bitmap類、從Brush類繼承的類、Font類、Icon類、Image類、Pen類、Color類等.
+
+
+LINQ（Language Integrated Query）是Visual Studio 2008中的領軍人物。借助於LINQ技術，我們可以使用一種類似SQL的語法來查詢任何形式的數據。
+目前為止LINQ所支持的數據源有SQL Server、XML以及內存中的數據集合。
+
+Xml全稱可擴展標記語言（extensible marked language）,這套語言系統由於在數據處理，跨平台等方面的獨特優勢，在近幾年風靡全球。
+Xml語言系統把任何數據都作為“鍵”和“值”來進行處理，這一點類似於很多數據庫管理系統（DBMS），而且它與具體的機器指令無關，其存儲方式是純文本文件，因此具有出色的跨平台性。
+
+XML 是被設計用來傳輸和存儲數據的,
+
+            Process[] processes = System.Diagnostics.Process.GetProcessesByName(Application.CompanyName);
+            if (processes.Length > 1)
+            {
+                MessageBox.Show("應用程序已經在運行中。");
+                Thread.Sleep(1000);
+                System.Environment.Exit(1);
+            }
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new FrmServiceSetup());
+            }
+            
+            
+           
+                string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+ 
+            
+            
+            
+            
+            
+        /// 日志信息
+        public static void WriteLog(string ex)
+        {
+            if (myPath == "" || myName == "")
+                return;
+
+            string Year = DateTime.Now.Year.ToString();
+            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
+            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
+
+            //年月日文件夾是否存在，不存在則建立
+            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
+            {
+                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
+            }
+
+            //寫入日志UNDO,Exception has not been handle
+            string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
+            if (!File.Exists(LogFile))
+            {
+                System.IO.StreamWriter myFile;
+                myFile = System.IO.File.AppendText(LogFile);
+                myFile.Close();
+            }
+
+            while (true)
+            {
+                try
+                {
+                    StreamWriter sr = File.AppendText(LogFile);
+                    sr.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "  " + ex);
+                    sr.Close();
+                    break;
+                }
+                catch (Exception e)
+                {
+                    System.Threading.Thread.Sleep(50);
+                    continue;
+                }
+            }
+
+        }
+
+    }
+}
+
+            
+            
+            
+            
+            
+
+C#殺死進程
+
+private void KillProcess(string processName)
+        {
+            System.Diagnostics.Process myproc = new System.Diagnostics.Process();
+            //得到所有打開的進程
+            try
+            {
+                foreach (Process thisproc in Process.GetProcessesByName("WINPROJ"))
+                {
+                    if (!thisproc.CloseMainWindow())
+                    {
+                        thisproc.Kill();
+                    }
+                }
+            }
+            catch (System.Exception ex )
+            {
+                ScriptManager.RegisterStartupScript(this.btnUpload, GetType(), "dis", "alert(進程殺死失敗);", true);
+            }
+        }
+    
+
+
+
+        //獲取窗體的進程標識ID
+        public static int GetPid(string windowTitle)
+        {
+            int rs = 0;
+            Process[] arrayProcess = Process.GetProcesses();
+            foreach (Process p in arrayProcess)
+            {
+                if (p.MainWindowTitle.IndexOf(windowTitle) != -1)
+                {
+                    rs = p.Id;
+                    break;
+                }
+            }
+            return rs;
+        }
+
+        //根據進程名獲取PID
+        public static int GetPidByProcessName(string processName, ref IntPtr baseAddress)
+        {
+            Process[] arrayProcess = Process.GetProcessesByName(processName);
+            foreach (Process p in arrayProcess)
+            {
+                baseAddress = p.MainModule.BaseAddress;
+                return p.Id;
+            }
+
+            return 0;
+        }
+
+        //根據進程名獲取PID
+        public static int GetPidByProcessName(string processName)
+        {
+            Process[] arrayProcess = Process.GetProcessesByName(processName);
+            foreach (Process p in arrayProcess)
+            {
+                return p.Id;
+            }
+
+            return 0;
+        }
+        
+
+
+
+//???
+　　 Random　rd　=　new　Random();
+　　 textBlock1.Foreground　=　new　SolidColorBrush(
+　　　　 Color.FromRgb(
+　　　　　　 (byte)rd.Next(0,255),
+　　　　　　 (byte)rd.Next(0,　255),
+　　　　　　 (byte)rd.Next(0,　255))
+　　　　　　 );
+
+
+
+
+
+//C#抓屏(截屏)
+
+class ScreenShot
+　　{
+　　　　public static void CaptureImage(Point SourcePoint, Point DestinationPoint, Rectangle SelectionRectangle, string FilePath)
+　　　　{
+　　　　　　using (Bitmap bitmap = new Bitmap(SelectionRectangle.Width, SelectionRectangle.Height))
+　　　　　　{
+　　　　　　　　using (Graphics g = Graphics.FromImage(bitmap))
+　　　　　　　　{
+　　　　　　　　　　g.CopyFromScreen(SourcePoint, DestinationPoint, SelectionRectangle.Size);
+　　　　　　　　}
+　　　　　　　　bitmap.Save(FilePath, ImageFormat.Bmp);
+　　　　　　}
+　　　　}
+　　}
+
+
+using System.Drawing.Imaging;
+
+
+private void button1_Click(object sender, EventArgs e)
+　　　　{
+　　　　　　saveFileDialog1.DefaultExt = "bmp";
+　　　　　　saveFileDialog1.Filter = "bmp files (*.bmp)|*.bmp";
+　　　　　　saveFileDialog1.Title = "導出地圖為...";
+　　　　　　saveFileDialog1.ShowDialog();
+　　　　　　if (saveFileDialog1.FileName.Length > 0)
+　　　　　　{
+　　　　　　　　ScreenPath = saveFileDialog1.FileName;
+　　　　　　}
+　　　　　　else
+　　　　　　{
+　　　　　　　　return;
+　　　　　　}
+　　　　　　this.Refresh();
+　　　　　　//3個參數：獲得控件所在屏幕坐標，目標坐標點為(0,0)，獲得控件大小。
+　　　　　　ScreenShot.CaptureImage(axMapControl1.PointToScreen(Point.Empty), Point.Empty, new Rectangle(axMapControl1.Location, axMapControl1.Size), ScreenPath);　　　　
+　　　　}
+
+
+
+
+
+　　6、System.Text.StringBuilder("")
+
+　　字符串相加，（+號是不是也一樣？）
+
+　　如：
+
+System.Text.StringBuilder sb = new System.Text.StringBuilder("");
+sb.Append("中華");
+sb.Append("人民");
+sb.Append("共和國");
+
+
+
+
+C#自定義直線箭頭大小
+發現原來可以自定義箭頭的大小的，放著以備以後使用。
+
+System.Drawing.Drawing2D.AdjustableArrowCap lineCap = new System.Drawing.Drawing2D.AdjustableArrowCap(6, 6, true);
+Pen RedPen=new Pen(Color.Red,2);
+RedPen.CustomEndCap = lineCap;
+
+然後用RedPen繪圖就可以了！
+
+
+
+
+
+
+            
+            
 
 先使用無符號字節數組存放數據庫對應的數據集中表的image類型字段的值。例如：
 

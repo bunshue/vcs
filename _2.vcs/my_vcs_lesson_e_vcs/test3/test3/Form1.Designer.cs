@@ -145,7 +145,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(160, 70);
             this.button8.TabIndex = 8;
-            this.button8.Text = "主機名稱/IP";
+            this.button8.Text = "主機名稱/IP/MAC";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -178,6 +178,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 70);
             this.button11.TabIndex = 11;
+            this.button11.Text = "Get APP Info";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -188,6 +189,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(160, 70);
             this.button12.TabIndex = 12;
+            this.button12.Text = "html轉txt";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -198,6 +200,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 70);
             this.button13.TabIndex = 13;
+            this.button13.Text = "顯示顏色";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -219,6 +222,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(160, 70);
             this.button14.TabIndex = 15;
+            this.button14.Text = "取得Windows版本";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -229,6 +233,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(160, 70);
             this.button15.TabIndex = 16;
+            this.button15.Text = "取得Windows版本";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
