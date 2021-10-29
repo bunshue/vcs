@@ -1,4 +1,271 @@
 
+
+//C#：使用MD5對用戶密碼加密與解密
+
+    C#中常涉及到對用戶密碼的加密於解密的算法，其中使用MD5加密是最常見的的實現方式。本文總結了通用的算法並結合了自己的一點小經驗，分享給大家。
+
+一.使用16位、32位、64位MD5方法對用戶名加密
+
+1）16位的MD5加密
+
+/// <summary>
+/// 16位MD5加密
+/// </summary>
+/// <param name="password"></param>
+/// <returns></returns>
+public static string MD5Encrypt16(string password)
+{
+    var md5 = new MD5CryptoServiceProvider();
+    string t2 = BitConverter.ToString(md5.ComputeHash(Encoding.Default.GetBytes(password)), 4, 8);
+    t2 = t2.Replace("-", "");
+    return t2;
+}
+
+2）32位的MD5加密
+
+/// <summary>
+/// 32位MD5加密
+/// </summary>
+/// <param name="password"></param>
+/// <returns></returns>
+public static string MD5Encrypt32(string password)
+{
+    string cl = password;
+    string pwd = "";
+    MD5 md5 = MD5.Create(); //實例化一個md5對像
+    // 加密後是一個字節類型的數組，這裡要注意編碼UTF8/Unicode等的選擇　
+    byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
+    // 通過使用循環，將字節類型的數組轉換為字符串，此字符串是常規字符格式化所得
+    for (int i = 0; i < s.Length; i++)
+    {
+        // 將得到的字符串使用十六進制類型格式。格式後的字符是小寫的字母，如果使用大寫（X）則格式後的字符是大寫字符 
+        pwd = pwd + s[i].ToString("X");
+    }
+    return pwd;
+}
+
+3）64位的MD5加密
+
+public static string MD5Encrypt64(string password)
+{
+    string cl = password;
+    //string pwd = "";
+    MD5 md5 = MD5.Create(); //實例化一個md5對像
+    // 加密後是一個字節類型的數組，這裡要注意編碼UTF8/Unicode等的選擇　
+    byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
+    return Convert.ToBase64String(s);
+}
+
+4）使用MD5為用戶密碼加密
+
+/// <summary>
+/// 加密用戶密碼
+/// </summary>
+/// <param name="password">密碼</param>
+/// <param name="codeLength">加密位數</param>
+/// <returns>加密密碼</returns>
+public static string md5(string password, int codeLength)
+{
+    if (!string.IsNullOrEmpty(password))
+    {
+        // 16位MD5加密（取32位加密的9~25字符）  
+        if (codeLength == 16)
+        {
+            return System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(password, "MD5").ToLower().Substring(8, 16);
+        }
+
+        // 32位加密
+        if (codeLength == 32)
+        {
+            return System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(password, "MD5").ToLower();
+        }
+    }
+    return string.Empty;
+}
+
+      由於MD5是不可逆的，所以加密之後就無法解密，取用戶名和密碼時候，需要再加密一邊用戶輸入的數據與數據庫中已加密的數據進行比對。如果比對結果一致，則可以判定登陸成功！代碼如下所示：
+
+/// <summary>
+/// 登陸
+/// </summary>
+public Model.UserInfo UserLogOn(string USERID, string pwd, out string statusCode)
+{
+    //假設已經通過用戶ID獲取到UserInfo的Model對象
+    Model.UserInfo model = GetModel(USERID);
+    if (model != null)
+    {
+        if (model.PASSWORD == MD5Encrypt64(pwd))
+        {
+            statusCode = "登陸成功";
+        }
+        else {
+            statusCode = “密碼錯誤”；
+        }
+    }
+    else
+    {
+        statusCode = "用戶不存在！";
+        model = null;
+    }   
+    return model;
+}
+
+5）通過DESCryptoServiceProvider對象對字符串進行加密解密
+
+/// <summary>
+/// DES數據加密
+/// </summary>
+/// <param name="targetValue">目標值</param>
+/// <param name="key">密鑰</param>
+/// <returns>加密值</returns>
+public static string Encrypt(string targetValue, string key)
+{
+    if (string.IsNullOrEmpty(targetValue))
+    {
+        return string.Empty;
+    }
+
+    var returnValue = new StringBuilder();
+    var des = new DESCryptoServiceProvider();
+    byte[] inputByteArray = Encoding.Default.GetBytes(targetValue);
+    // 通過兩次哈希密碼設置對稱算法的初始化向量   
+    des.Key = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5").
+                                                Substring(0, 8), "sha1").Substring(0, 8));
+    // 通過兩次哈希密碼設置算法的機密密鑰   
+    des.IV = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5")
+                                                .Substring(0, 8), "md5").Substring(0, 8));
+    var ms = new MemoryStream();
+    var cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write);
+    cs.Write(inputByteArray, 0, inputByteArray.Length);
+    cs.FlushFinalBlock();
+    foreach (byte b in ms.ToArray())
+    {
+        returnValue.AppendFormat("{0:X2}", b);
+    }
+    return returnValue.ToString();
+}
+
+此種算法可以通過加密密鑰進行解密，解密方法如下：
+
+/// <summary>
+/// DES數據解密
+/// </summary>
+/// <param name="targetValue"></param>
+/// <param name="key"></param>
+/// <returns></returns>
+public static string Decrypt(string targetValue, string key)
+{
+    if (string.IsNullOrEmpty(targetValue))
+    {
+        return string.Empty;
+    }
+    // 定義DES加密對象
+    var des = new DESCryptoServiceProvider();
+    int len = targetValue.Length / 2;
+    var inputByteArray = new byte[len];
+    int x, i;
+    for (x = 0; x < len; x++)
+    {
+        i = Convert.ToInt32(targetValue.Substring(x * 2, 2), 16);
+        inputByteArray[x] = (byte)i;
+    }
+    // 通過兩次哈希密碼設置對稱算法的初始化向量   
+    des.Key = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5").
+                                                Substring(0, 8), "sha1").Substring(0, 8));
+    // 通過兩次哈希密碼設置算法的機密密鑰   
+    des.IV = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5")
+                                                .Substring(0, 8), "md5").Substring(0, 8));
+    // 定義內存流
+    var ms = new MemoryStream();
+    // 定義加密流
+    var cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
+    cs.Write(inputByteArray, 0, inputByteArray.Length);
+    cs.FlushFinalBlock();
+    return Encoding.Default.GetString(ms.ToArray());
+}
+
+
+
+
+
+
+         #region MD5加密
+         /// <summary>
+         /// MD5加密
+         /// </summary>
+         /// <param name="input">需要加密的字符串</param>
+         /// <returns></returns>
+         public static string MD5Encrypt(string input)
+         {
+             return MD5Encrypt(input, new UTF8Encoding());
+         }
+ 
+         /// <summary>
+         /// MD5加密
+         /// </summary>
+         /// <param name="input">需要加密的字符串</param>
+         /// <param name="encode">字符的編碼</param>
+         /// <returns></returns>
+         public static string MD5Encrypt(string input, Encoding encode)
+         {
+             MD5 md5 = new MD5CryptoServiceProvider();
+             byte[] t = md5.ComputeHash(encode.GetBytes(input));
+             StringBuilder sb = new StringBuilder(32);
+             for (int i = 0; i < t.Length; i++)
+                 sb.Append(t[i].ToString("x").PadLeft(2, '0'));
+             return sb.ToString();
+         }
+ 
+         /// <summary>
+         /// MD5對文件流加密
+         /// </summary>
+         /// <param name="sr"></param>
+         /// <returns></returns>
+         public static string MD5Encrypt(Stream stream)
+         {
+             MD5 md5serv = MD5CryptoServiceProvider.Create();
+             byte[] buffer = md5serv.ComputeHash(stream);
+             StringBuilder sb = new StringBuilder();
+             foreach (byte var in buffer)
+                 sb.Append(var.ToString("x2"));
+             return sb.ToString();
+         }
+ 
+         /// <summary>
+         /// MD5加密(返回16位加密串)
+         /// </summary>
+         /// <param name="input"></param>
+         /// <param name="encode"></param>
+         /// <returns></returns>
+         public static string MD5Encrypt16(string input, Encoding encode)
+         {
+             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+             string result = BitConverter.ToString(md5.ComputeHash(encode.GetBytes(input)), 4, 8);
+             result = result.Replace("-", "");
+             return result;
+         }
+         #endregion
+         
+         
+
+關於發郵件的服務器的端口號
+
+即：25是默認端口，可能因為spam等原因用不了，這時可以考慮587.一般對於非加密的請求587都能用。
+
+修改端口號為587後，果然OK。
+
+
+
+25/587/2525
+465/25025
+
+         
+         
+         
 用C#和WMI獲取邏輯驅動器詳細信息
 
 
