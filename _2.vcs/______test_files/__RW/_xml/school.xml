@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="big5"?>
+<!--啟明培訓學校學生信息：
+    1、一年級學生
+    2、二年級學生 
+  -->
+  <school name="啟明培訓學校">
+    <grades>
+     <grade id="1" name="一年級">
+         <classes>
+         <class id="101" name="一班">
+                 <teachers>
+                    <teacher teach="語文"><teacherName><![CDATA[王軍]]></teacherName></teacher>
+                    <teacher teach="數學"><teacherName><![CDATA[周傑]]></teacherName></teacher>                             
+                 </teachers>
+                 <students>
+                     <student id="10101">
+                         <name>亢陽</name>
+                          <sex>女</sex>
+                     </student>
+                     <student id="10102">
+                         <name>田鎮南</name>
+                         <sex>男</sex>
+                     </student>
+                     <student id="10103">
+                         <name>劉嘉</name>
+                         <sex>女</sex>
+                     </student>
+                 </students>
+         </class>
+        </classes>
+     </grade>
+        <grade id="2" name="二年級">
+         <classes>
+         <class id="201" name="二班">
+                 <teachers>
+                    <teacher teach="語文"><teacherName><![CDATA[胡軍]]></teacherName></teacher>
+                    <teacher teach="數學"><teacherName><![CDATA[王潔]]></teacherName></teacher>            
+                 </teachers>
+                 <students >
+                     <student id="20101">
+                         <name>胡艷</name>
+                          <sex>女</sex>
+                     </student>
+                     <student id="20102">
+                         <name>張三</name>
+                         <sex>男</sex>
+                     </student>
+                     <student id="20103">
+                         <name>李四</name>
+                         <sex>女</sex>
+                     </student>
+                 </students>
+         </class>
+        </classes>
+     </grade>
+</grades>    
+  </school>

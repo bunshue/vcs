@@ -19,6 +19,38 @@ namespace test6
 {
     public partial class Form1 : Form
     {
+        //實現控件中捕獲按鍵 只要補上這個函數就好
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            const int WM_KEYDOWN = 0x100;
+            const int WM_SYSKEYDOWN = 0x104;
+            if ((msg.Msg == WM_KEYDOWN) || (msg.Msg == WM_SYSKEYDOWN))
+            {
+                switch (keyData)
+                {
+                    case Keys.Down:
+                        this.Text = "向下鍵已經被捕捉";
+                        break;
+                    case Keys.Up:
+                        this.Text = "向上鍵已經被捕捉";
+                        break;
+                    case Keys.Left:
+                        this.Text = "向左鍵已經被捕捉";
+                        break;
+                    case Keys.Right:
+                        this.Text = "向右鍵已經被捕捉";
+                        break;
+                    case Keys.Home:
+                        this.Text = "Home 鍵已經被捕捉";
+                        break;
+                    case Keys.End:
+                        this.Text = "End 鍵已經被捕捉";
+                        break;
+                }
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
 
         public Form1()
         {

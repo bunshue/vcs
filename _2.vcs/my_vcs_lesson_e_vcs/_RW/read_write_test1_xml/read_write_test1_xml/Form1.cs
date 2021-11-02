@@ -224,7 +224,107 @@ namespace read_write_test1_xml
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //C#讀取XML中元素和屬性值的實現代碼
 
+            string filename = @"C:\______test_files\__RW\_xml\school.xml";
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename);
+
+            //學校  使用xpath表達式選擇文檔中所有的schoo的子節點
+            XmlNodeList schoolNodeList = doc.SelectNodes("/school");
+            if (schoolNodeList != null)
+            {
+                foreach (XmlNode schoolNode in schoolNodeList)
+                {
+                    //通過Attributes獲得屬性名為name的屬性
+                    string schoolName = schoolNode.Attributes["name"].Value;
+                    richTextBox1.Text += "學校：" + schoolName + "\n";
+
+                    #region 年級
+                    //通過SelectSingleNode方法獲得當前節點下的grades子節點
+                    XmlNode gradesNode = schoolNode.SelectSingleNode("grades");
+                    if (gradesNode != null)
+                    {
+                        //通過ChildNodes屬性獲得grades的所有一級子節點
+                        XmlNodeList gradeNodeList = gradesNode.ChildNodes;
+                        if (gradeNodeList != null)
+                        {
+                            foreach (XmlNode gradeNode in gradeNodeList)
+                            {
+                                richTextBox1.Text += "\t年級：" + gradeNode.Attributes["name"].Value + "   ID:" + gradeNode.Attributes["id"].Value + "\n";
+
+                                #region 班級
+                                //通過SelectSingleNode方法獲得當前節點下的classes子節點
+                                XmlNode classesNode = gradeNode.SelectSingleNode("classes");
+                                if (classesNode != null)
+                                {
+                                    //通過ChildNodes屬性獲得classes的所有一級子節點
+                                    XmlNodeList classNodeList = classesNode.ChildNodes;
+                                    if (classNodeList != null)
+                                    {
+                                        foreach (XmlNode classNode in classNodeList)
+                                        {
+                                            richTextBox1.Text += "  班級：" + classNode.Attributes["name"].Value + "    ID:" + classNode.Attributes["id"].Value + "\n";
+
+                                            #region 老師
+                                            XmlNode teachersNode = classNode.SelectSingleNode("teachers");
+                                            if (teachersNode != null)
+                                            {
+                                                XmlNodeList teacherNodeList = teachersNode.ChildNodes;
+                                                if (teacherNodeList != null)
+                                                {
+                                                    foreach (XmlNode teacherNode in teacherNodeList)
+                                                    {
+                                                        XmlNode teacherNameNode = teacherNode.FirstChild;
+                                                        XmlCDataSection cdate = (XmlCDataSection)teacherNameNode.FirstChild;
+                                                        if (cdate != null)
+                                                        {
+                                                            richTextBox1.Text += "   " + teacherNode.Attributes["teach"].Value + "老師：" + cdate.InnerText.Trim() + "\n";
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            #endregion  老師
+
+                                            #region 所有學生
+                                            XmlNode studentsNode = classNode.SelectSingleNode("students");
+                                            if (studentsNode != null)
+                                            {
+                                                XmlNodeList studentNodeList = studentsNode.ChildNodes;
+                                                if (studentNodeList != null)
+                                                {
+                                                    foreach (XmlNode studentNode in studentNodeList)
+                                                    {
+                                                        richTextBox1.Text += "    學生：" + studentNode.Attributes["id"].Value + "\n";
+
+                                                        //獲取student的屬性值name和文本
+                                                        XmlNode stu1 = studentNode.FirstChild;
+                                                        XmlElement xe1 = (XmlElement)stu1;
+                                                        if (xe1 != null)
+                                                        {
+                                                            richTextBox1.Text += "        姓名：" + xe1.InnerText.Trim() + "\n";
+                                                        }
+                                                        //獲取student的屬性值sex和文本
+                                                        XmlNode stu2 = studentNode.LastChild;
+                                                        XmlElement xe2 = (XmlElement)stu2;
+                                                        if (xe2 != null)
+                                                        {
+                                                            richTextBox1.Text += "        姓別：" + xe2.InnerText.Trim() + "\n";
+                                                        }
+                                                    }
+                                                }
+                                            #endregion 所有學生
+                                            }
+                                        }
+                                    }
+                                #endregion 班級
+                                }
+                            }
+                        }
+                    #endregion  年級
+                    }
+                }
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -493,5 +593,170 @@ namespace read_write_test1_xml
             doc.Save("Order3.xml");
             richTextBox1.Text += "存檔完成\n";
         }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            XML_RW xmlrw = new XML_RW();
+            xmlrw.ShowXml();
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    class XML_RW
+    {
+        string xml_filename = @"C:\______test_files\__RW\_xml\bookshop.xml";
+
+
+        XmlDocument xmlDoc;
+        ///<summary>
+        /// 插入節點
+        ///</summary>
+        public void InsertNode()
+        {
+            xmlDoc = new XmlDocument();
+            xmlDoc.Load(xml_filename); //加載xml文件
+
+            /*從指定的字符創加載xml文件 例如：
+            xmlDoc.LoadXml("(<Book bookID='B001'><BookName>jeff</BookName><price>45.6</price></Book>)");
+            */
+            XmlNode root = xmlDoc.SelectSingleNode("bookshop");//查找﹤bookstore﹥
+            XmlElement xe1 = xmlDoc.CreateElement("book");//創建一個﹤book﹥節點
+
+            xe1.SetAttribute("genre", "Sky_Kwolf");//設置該節點genre屬性
+            xe1.SetAttribute("ISBN", "2-3631-4");//設置該節點ISBN屬性
+
+            XmlElement xesub1 = xmlDoc.CreateElement("title");
+            xesub1.InnerText = "CSS禅意花園";//設置節點的文本值
+            xe1.AppendChild(xesub1);//添加到﹤book﹥節點中
+            XmlElement xesub2 = xmlDoc.CreateElement("author");
+            xesub2.InnerText = "Jeff";
+            xe1.AppendChild(xesub2);
+            XmlElement xesub3 = xmlDoc.CreateElement("price");
+            xesub3.InnerText = "58.3";
+            xe1.AppendChild(xesub3);
+
+            root.AppendChild(xe1);//添加到﹤bookshop﹥節點中
+            xmlDoc.Save(xml_filename); //保存其更改
+        }
+
+        ///<summary>
+        /// 修改節點
+        ///</summary>
+        public void UpdateNode()
+        {
+            xmlDoc = new XmlDocument();
+            xmlDoc.Load(xml_filename); //加載xml文件
+            //獲取bookshop節點的所有子節點
+            XmlNodeList nodeList = xmlDoc.SelectSingleNode("bookshop").ChildNodes;
+
+            //遍歷所有子節點
+            foreach (XmlNode xn in nodeList)
+            {
+                XmlElement xe = (XmlElement)xn; //將子節點類型轉換為XmlElement類型
+
+                if (xe.GetAttribute("genre") == "Sky_Kwolf")//如果genre屬性值為“Sky_Kwolf”
+                {
+                    xe.SetAttribute("genre", "update Sky_Kwolf"); //則修改該屬性為“update Sky_Kwolf”
+                    XmlNodeList nls = xe.ChildNodes;//繼續獲取xe子節點的所有子節點
+
+                    foreach (XmlNode xn1 in nls)//遍歷
+                    {
+                        XmlElement xe2 = (XmlElement)xn1; //轉換類型
+                        if (xe2.Name == "author")//如果找到
+                        {
+                            xe2.InnerText = "jason";//則修改
+                            break;//找到退出
+                        }
+                    }
+                    break;
+                }
+            }
+
+            xmlDoc.Save(xml_filename);//保存。
+        }
+
+        //顯示xml數據
+        public void ShowXml()
+        {
+            xmlDoc = new XmlDocument();
+            xmlDoc.Load(xml_filename); //加載xml文件
+            XmlNode xn = xmlDoc.SelectSingleNode("bookshop");
+
+            XmlNodeList xnl = xn.ChildNodes;
+
+            foreach (XmlNode xnf in xnl)
+            {
+                XmlElement xe = (XmlElement)xnf;
+                Console.WriteLine(xe.GetAttribute("genre"));//顯示屬性值
+                Console.WriteLine(xe.GetAttribute("ISBN"));
+
+                XmlNodeList xnf1 = xe.ChildNodes;
+                foreach (XmlNode xn2 in xnf1)
+                {
+                    Console.WriteLine(xn2.InnerText);//顯示子節點點文本
+                }
+            }
+        }
+
+
+        ///<summary>
+        /// 刪除節點
+        ///</summary>
+        public void DeleteNode()
+        {
+            xmlDoc = new XmlDocument();
+            xmlDoc.Load(xml_filename); //加載xml文件
+            XmlNodeList xnl = xmlDoc.SelectSingleNode("bookshop").ChildNodes;
+
+            foreach (XmlNode xn in xnl)
+            {
+                XmlElement xe = (XmlElement)xn;
+
+                if (xe.GetAttribute("genre") == "fantasy")
+                {
+                    xe.RemoveAttribute("genre");//刪除genre屬性
+                }
+                else if (xe.GetAttribute("genre") == "update Sky_Kwolf")
+                {
+                    xe.RemoveAll();//刪除該節點的全部內容
+                }
+            }
+            xmlDoc.Save(xml_filename);
+        }
     }
 }
+

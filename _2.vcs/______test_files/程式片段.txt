@@ -1,4 +1,122 @@
 
+c# 獲取網頁源碼 by WebClient
+
+
+private string GetWebClient(string url)
+{
+string strHTML = "";
+WebClient myWebClient = new WebClient();
+Stream myStream = myWebClient.OpenRead(url);
+StreamReader sr = new StreamReader(myStream, System.Text.Encoding.GetEncoding("utf-8"));
+strHTML = sr.ReadToEnd();
+myStream.Close();
+return strHTML;
+}
+
+c# 獲取網頁源碼 by WebRequest
+
+private string GetWebRequest(string url)
+{
+Uri uri = new Uri(url);
+WebRequest myReq = WebRequest.Create(uri);
+WebResponse result = myReq.GetResponse();
+Stream receviceStream = result.GetResponseStream();
+StreamReader readerOfStream = new StreamReader(receviceStream, System.Text.Encoding.GetEncoding("utf-8"));
+string strHTML = readerOfStream.ReadToEnd();
+readerOfStream.Close();
+receviceStream.Close();
+result.Close();
+return strHTML;
+}
+
+
+c# 獲取網頁源碼 by HttpWebRequest
+
+private string GetHttpWebRequest(string url)
+{
+Uri uri = new Uri(url);
+HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(uri);
+myReq.UserAgent = "User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705";
+myReq.Accept = "*/*";
+myReq.KeepAlive = true;
+myReq.Headers.Add("Accept-Language", "zh-cn,en-us;q=0.5");
+HttpWebResponse result = (HttpWebResponse)myReq.GetResponse();
+Stream receviceStream = result.GetResponseStream();
+StreamReader readerOfStream = new StreamReader(receviceStream, System.Text.Encoding.GetEncoding("utf-8"));
+string strHTML = readerOfStream.ReadToEnd();
+readerOfStream.Close();
+receviceStream.Close();
+result.Close();
+return strHTML;
+}
+//注意"utf-8"應與指定網頁的編碼對應。
+//可以看到HttpWebRequest 方式最復雜，但確提供了更多的選擇性。
+//有的網站檢測客戶端的UserAgent！如163.com，你如果使用WebClient WebRequest方式獲取時，將獲取到的是錯誤提示頁面內容。
+//而通過HttpWebRequest 就沒問題。
+
+
+C#如何取硬件標志
+
+  //取機器名 
+  public string GetHostName()
+  {
+   return System.Net.Dns.GetHostName(); 
+  }
+
+  //取CPU編號
+  public String GetCpuID() 
+  {
+   try
+   {
+    ManagementClass mc = new ManagementClass("Win32_Processor");
+    ManagementObjectCollection moc = mc.GetInstances();
+
+    String strCpuID = null ;
+    foreach( ManagementObject mo in moc ) 
+    {
+     strCpuID = mo.Properties["ProcessorId"].Value.ToString();
+     break; 
+    }
+    return strCpuID;
+   }
+   catch
+   {
+    return "";
+   }
+
+  }//end method
+
+  //取第一塊硬盤編號
+  public String GetHardDiskID() 
+  {
+   try
+   {
+    ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * FROM Win32_PhysicalMedia");
+    String strHardDiskID = null ;
+    foreach(ManagementObject mo in searcher.Get()) 
+    {    
+     strHardDiskID = mo["SerialNumber"].ToString().Trim();
+     break;          
+    }
+    return strHardDiskID ;
+   }
+   catch
+   {
+    return "";
+   }
+  }//end 
+
+
+
+
+
+
+//創建一個讀取器
+StreamReader sr = new StreamReader("templog.txt");
+//一次性讀取完
+Console.WriteLine(sr.ReadToEnd());
+Console.ReadLine(); 
+
 
 //C#：使用MD5對用戶密碼加密與解密
 
