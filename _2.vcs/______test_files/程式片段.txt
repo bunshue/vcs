@@ -1,4 +1,53 @@
 
+
+//計算耗時任務所需的秒數
+
+　　public int GetTimeSpan(DateTime dtStart, DateTime dtEnd)
+
+　　{
+
+　　TimeSpan tsStart = new TimeSpan(dtStart.Ticks);
+
+　　TimeSpan tsEnd = new TimeSpan(dtEnd.Ticks);
+
+　　TimeSpan ts = tsEnd.Subtract(tsStart).Duration();//秒
+
+　　//dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
+
+　　return ts.Seconds;
+
+　　}      
+
+
+MemoryStream 可以seek
+                    MemoryStream ms = new MemoryStream();
+                    XmlWt = new XmlTextWriter(ms, Encoding.Unicode);
+                    //獲取ds中的數據
+                    dt.WriteXml(XmlWt);
+                    int count = (int)ms.Length;
+                    byte[] temp = new byte[count];
+                    ms.Seek(0, SeekOrigin.Begin);
+                    ms.Read(temp, 0, count);
+                    //返回Unicode編碼的文本
+
+                        ms.Close();
+                        ms.Dispose();
+                        
+     MemoryStream stream = null;
+     XmlTextWriter writer = null;
+     try
+     {
+         stream = new MemoryStream();
+         writer = new XmlTextWriter(stream, Encoding.Default);
+         xmlDS.WriteXml(writer);
+         int count = (int)stream.Length;
+         byte[] arr = new byte[count];
+         stream.Seek(0, SeekOrigin.Begin);
+         stream.Read(arr, 0, count);
+         UTF8Encoding utf = new UTF8Encoding();
+         return utf.GetString(arr).Trim();
+         
+
 c# 獲取網頁源碼 by WebClient
 
 

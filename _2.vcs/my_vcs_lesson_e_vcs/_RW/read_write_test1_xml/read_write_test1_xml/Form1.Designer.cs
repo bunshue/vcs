@@ -256,6 +256,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(150, 60);
             this.button17.TabIndex = 40;
+            this.button17.Text = "XML類 操作";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -266,6 +267,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(150, 60);
             this.button18.TabIndex = 39;
+            this.button18.Text = "對xml進行操作的基本方法";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 

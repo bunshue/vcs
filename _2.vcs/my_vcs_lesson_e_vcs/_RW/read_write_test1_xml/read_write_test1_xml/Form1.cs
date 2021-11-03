@@ -602,12 +602,246 @@ namespace read_write_test1_xml
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //XML類 各種操作
+            //xml文件存儲路徑
+            string myXMLFilePath = "MyComputers.xml";
+
+            richTextBox1.Text += "生成xml文件\n";
+            GenerateXMLFile(myXMLFilePath);
+
+
+
+            richTextBox1.Text += "遍歷xml文件的信息\n";
+            GetXMLInformation(myXMLFilePath);
+
+            richTextBox1.Text += "修改xml文件的信息\n";
+            ModifyXmlInformation(myXMLFilePath);
+
+
+            richTextBox1.Text += "向xml文件添加節點信息\n";
+            AddXmlInformation(myXMLFilePath);
+            richTextBox1.Text += "刪除指定節點信息\n";
+            DeleteXmlInformation(myXMLFilePath);
+
+            richTextBox1.Text += "done\n";
 
         }
 
+        private void GenerateXMLFile(string xmlFilePath)
+        {
+            try
+            {
+                //初始化一個xml實例
+                XmlDocument myXmlDoc = new XmlDocument();
+                //創建xml的根節點
+                XmlElement rootElement = myXmlDoc.CreateElement("Computers");
+                //將根節點加入到xml文件中（AppendChild）
+                myXmlDoc.AppendChild(rootElement);
+
+                //初始化第一層的第一個子節點
+                XmlElement firstLevelElement1 = myXmlDoc.CreateElement("Computer");
+                //填充第一層的第一個子節點的屬性值（SetAttribute）
+                firstLevelElement1.SetAttribute("ID", "11111111");
+                firstLevelElement1.SetAttribute("Description", "Made in China");
+                //將第一層的第一個子節點加入到根節點下
+                rootElement.AppendChild(firstLevelElement1);
+                //初始化第二層的第一個子節點
+                XmlElement secondLevelElement11 = myXmlDoc.CreateElement("name");
+                //填充第二層的第一個子節點的值（InnerText）
+                secondLevelElement11.InnerText = "Lenovo";
+                firstLevelElement1.AppendChild(secondLevelElement11);
+                XmlElement secondLevelElement12 = myXmlDoc.CreateElement("price");
+                secondLevelElement12.InnerText = "5000";
+                firstLevelElement1.AppendChild(secondLevelElement12);
+
+
+                XmlElement firstLevelElement2 = myXmlDoc.CreateElement("Computer");
+                firstLevelElement2.SetAttribute("ID", "2222222");
+                firstLevelElement2.SetAttribute("Description", "Made in USA");
+                rootElement.AppendChild(firstLevelElement2);
+                XmlElement secondLevelElement21 = myXmlDoc.CreateElement("name");
+                secondLevelElement21.InnerText = "IBM";
+                firstLevelElement2.AppendChild(secondLevelElement21);
+                XmlElement secondLevelElement22 = myXmlDoc.CreateElement("price");
+                secondLevelElement22.InnerText = "10000";
+                firstLevelElement2.AppendChild(secondLevelElement22);
+
+                //將xml文件保存到指定的路徑下
+                myXmlDoc.Save(xmlFilePath);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.ToString() + "\n";
+            }
+        }
+
+        private void GetXMLInformation(string xmlFilePath)
+        {
+            try
+            {
+                //初始化一個xml實例
+                XmlDocument myXmlDoc = new XmlDocument();
+                //加載xml文件（參數為xml文件的路徑）
+                myXmlDoc.Load(xmlFilePath);
+                //獲得第一個姓名匹配的節點（SelectSingleNode）：此xml文件的根節點
+                XmlNode rootNode = myXmlDoc.SelectSingleNode("Computers");
+                //分別獲得該節點的InnerXml和OuterXml信息
+                string innerXmlInfo = rootNode.InnerXml.ToString();
+                string outerXmlInfo = rootNode.OuterXml.ToString();
+                //獲得該節點的子節點（即：該節點的第一層子節點）
+                XmlNodeList firstLevelNodeList = rootNode.ChildNodes;
+                foreach (XmlNode node in firstLevelNodeList)
+                {
+                    //獲得該節點的屬性集合
+                    XmlAttributeCollection attributeCol = node.Attributes;
+                    foreach (XmlAttribute attri in attributeCol)
+                    {
+                        //獲取屬性名稱與屬性值
+                        string name = attri.Name;
+                        string value = attri.Value;
+                        richTextBox1.Text += name + " = " + value + "\n";
+                    }
+
+                    //判斷此節點是否還有子節點
+                    if (node.HasChildNodes)
+                    {
+                        //獲取該節點的第一個子節點
+                        XmlNode secondLevelNode1 = node.FirstChild;
+                        //獲取該節點的名字
+                        string name = secondLevelNode1.Name;
+                        //獲取該節點的值（即：InnerText）
+                        string innerText = secondLevelNode1.InnerText;
+                        richTextBox1.Text += name + " = " + innerText + "\n";
+
+                        //獲取該節點的第二個子節點（用數組下標獲取）
+                        XmlNode secondLevelNode2 = node.ChildNodes[1];
+                        name = secondLevelNode2.Name;
+                        innerText = secondLevelNode2.InnerText;
+                        richTextBox1.Text += name + " = " + innerText + "\n";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.ToString() + "\n";
+            }
+        }
+
+        private void ModifyXmlInformation(string xmlFilePath)
+        {
+            try
+            {
+                XmlDocument myXmlDoc = new XmlDocument();
+                myXmlDoc.Load(xmlFilePath);
+                XmlNode rootNode = myXmlDoc.FirstChild;
+                XmlNodeList firstLevelNodeList = rootNode.ChildNodes;
+                foreach (XmlNode node in firstLevelNodeList)
+                {
+                    //修改此節點的屬性值
+                    if (node.Attributes["Description"].Value.Equals("Made in USA"))
+                    {
+                        node.Attributes["Description"].Value = "Made in HongKong";
+                    }
+                }
+                //要想使對xml文件所做的修改生效，必須執行以下Save方法
+                xmlFilePath += ".modify";
+                myXmlDoc.Save(xmlFilePath);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.ToString() + "\n";
+            }
+
+        }
+
+        private void AddXmlInformation(string xmlFilePath)
+        {
+            try
+            {
+                XmlDocument myXmlDoc = new XmlDocument();
+                myXmlDoc.Load(xmlFilePath);
+                //添加一個帶有屬性的節點信息
+                foreach (XmlNode node in myXmlDoc.FirstChild.ChildNodes)
+                {
+                    XmlElement newElement = myXmlDoc.CreateElement("color");
+                    newElement.InnerText = "black";
+                    newElement.SetAttribute("IsMixed", "Yes");
+                    node.AppendChild(newElement);
+                }
+                //保存更改
+                xmlFilePath += ".add";
+                myXmlDoc.Save(xmlFilePath);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.ToString() + "\n";
+            }
+        }
+
+        private void DeleteXmlInformation(string xmlFilePath)
+        {
+            try
+            {
+                XmlDocument myXmlDoc = new XmlDocument();
+                myXmlDoc.Load(xmlFilePath);
+                foreach (XmlNode node in myXmlDoc.FirstChild.ChildNodes)
+                {
+                    //記錄該節點下的最後一個子節點（簡稱：最後子節點）
+                    XmlNode lastNode = node.LastChild;
+                    //刪除最後子節點下的左右子節點
+                    lastNode.RemoveAll();
+                    //刪除最後子節點
+                    node.RemoveChild(lastNode);
+                }
+                //保存對xml文件所做的修改
+                xmlFilePath += ".delete";
+                myXmlDoc.Save(xmlFilePath);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.ToString() + "\n";
+            }
+        }
+
+
+
+
         private void button18_Click(object sender, EventArgs e)
         {
-
+            //TBD
+            /*
+            string filename = "MyComputers.xml";
+            //對xml進行操作的基本方法
+            //初始化一個xml實例
+            XmlDocument xml = new XmlDocument();
+            //導入指定xml文件
+            xml.Load(filename);
+            //指定一個節點
+            XmlNode root = xml.SelectSingleNode("節點名稱");
+            //獲取節點下所有直接子節點
+            XmlNodeList childlist = root.ChildNodes;
+            //判斷該節點下是否有子節點
+            //root.HasChildNodes;
+            //獲取同名同級節點集合
+            XmlNodeList nodelist = xml.SelectNodes("節點名稱");
+            //生成一個新節點
+            XmlElement node = xml.CreateElement("節點名稱");
+            //將節點加到指定節點下，作為其子節點
+            root.AppendChild(node);
+            //將節點加到指定節點下某個子節點前
+            //root.InsertBefore(node,root.ChildeNodes[i]);
+            //為指定節點的新建屬性並賦值
+            node.SetAttribute("id", "11111");
+            //為指定節點添加子節點
+            root.AppendChild(node);
+            //獲取指定節點的指定屬性值
+            string id = node.Attributes["id"].Value;
+            //獲取指定節點中的文本
+            string content = node.InnerText;
+            //保存XML文件
+            filename = "new_file2.xml";
+            xml.Save(filename);
+            */
         }
 
         private void button19_Click(object sender, EventArgs e)
