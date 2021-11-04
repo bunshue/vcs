@@ -664,7 +664,7 @@ namespace vcs_ImageProcessingG
         /*
         十一: 扭曲效果
 
-        原理: 将图像缩放为一个非矩形的平等四边形即可
+        原理: 將圖像縮放為一個非矩形的平等四邊形即可
          */
 
         //扭曲效果
@@ -678,7 +678,7 @@ namespace vcs_ImageProcessingG
             Graphics g = this.pictureBox1.CreateGraphics();
 
 
-            Size offset = new Size(Width++, Height++);//设置偏移量
+            Size offset = new Size(Width++, Height++);//設置偏移量
             Rectangle rect = this.pictureBox1.ClientRectangle;
             Point[] points = new Point[3];
             points[0] = new Point(rect.Left + offset.Width, rect.Top + offset.Height);
@@ -690,10 +690,8 @@ namespace vcs_ImageProcessingG
 
         /*
         十二.積木效果
-
         原理: 對圖像中的各個像素點著重(即加大分像素的顏色值)著色.
         */
-
 
         //積木效果
         private void image_processing12(string filename)

@@ -16,6 +16,7 @@ using Shell32;
 using System.Runtime.InteropServices;
 
 using System.Security.Cryptography; //for MD5CryptoServiceProvider
+using Microsoft.Win32;  //for RegistryKey
 
 namespace test6
 {
@@ -355,40 +356,376 @@ namespace test6
             richTextBox1.Text += "\n";
         }
 
+
+        //C#切換鼠標左右鍵習慣無需控制面板中修改
+
+        [DllImport("user32.dll")]
+        private extern static bool SwapMouseButton(bool fSwap);
+
+        [DllImport("user32.dll")]
+        private extern static int GetSystemMetrics(int index);
+
         private void button8_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 切換鼠標左右鍵\n";
 
+            int flag = GetSystemMetrics(23);//獲取當前鼠標設置狀態
+            if (flag == 0)//右手習慣
+            {
+                SwapMouseButton(true);//設置成左手
+                richTextBox1.Text += "換成左手\n";
+            }
+            else//左手習慣
+            {
+                SwapMouseButton(false);//設置成右手
+                richTextBox1.Text += "換成右手\n";
+            }
         }
+
+
+        /*
+        理解多態。
+        首先，我們先來看下怎樣用虛方法實現多態
+
+        我們都知道，喜鵲（Magpie）、老鷹（Eagle）、企鵝（Penguin）都是屬於鳥類，我們可以根據這三者的共有特性提取出鳥類（Bird）做為父類，喜鵲喜歡吃蟲子，老鷹喜歡吃肉，企鵝喜歡吃魚。
+        */
+
+        //創建基類Bird如下，添加一個虛方法Eat():
+
+
+        /*
+        /// <summary>
+        /// 鳥類：父類
+        /// </summary>
+        public class Bird
+        {
+            /// <summary>
+            /// 吃：虛方法
+            /// </summary>
+            public virtual void Eat()
+            {
+                Console.WriteLine("我是一只小小鳥，我喜歡吃蟲子~");
+            }
+        }
+        */
+
+        /// <summary>
+        /// 鳥類：基類
+        /// </summary>
+        public abstract class Bird
+        {
+            /// <summary>
+            /// 吃：抽象方法
+            /// </summary>
+            public abstract void Eat(); //抽象類Bird內添加一個Eat()抽象方法，沒有方法體。也不能實例化。
+        }
+
+        //創建子類Magpie如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
+
+        /// <summary>
+        /// 飛 接口
+        /// </summary>
+        public interface IFlyable
+        {
+            void Fly();
+        }
+
+        /*
+        /// <summary>
+        /// 喜鵲：子類
+        /// </summary>
+        public class Magpie : Bird
+        {
+            /// <summary>
+            /// 重寫父類中Eat方法
+            /// </summary>
+            public override void Eat()
+            {
+                Console.WriteLine("我是一只喜鵲，我喜歡吃蟲子~");
+            }
+        }
+
+        //創建一個子類Eagle如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
+
+        /// <summary>
+        /// 老鷹：子類
+        /// </summary>
+        public class Eagle : Bird
+        {
+            /// <summary>
+            /// 重寫父類中Eat方法
+            /// </summary>
+            public override void Eat()
+            {
+                Console.WriteLine("我是一只老鷹，我喜歡吃肉~");
+            }
+        }
+        */
+
+        //喜鵲Magpie實現IFlyable接口，代碼如下：
+
+        /// <summary>
+        /// 喜鵲：子類，實現IFlyable接口
+        /// </summary>
+        public class Magpie : Bird, IFlyable
+        {
+            /// <summary>
+            /// 重寫父類Bird中Eat方法
+            /// </summary>
+            public override void Eat()
+            {
+                Console.WriteLine("我是一只喜鵲，我喜歡吃蟲子~");
+            }
+            /// <summary>
+            /// 實現 IFlyable接口方法
+            /// </summary>
+            public void Fly()
+            {
+                Console.WriteLine("我是一只喜鵲，我可以飛哦~~");
+            }
+        }
+
+        //老鷹Eagle實現IFlyable接口，代碼如下：
+
+        /// <summary>
+        /// 老鷹：子類實現飛接口
+        /// </summary>
+        public class Eagle : Bird, IFlyable
+        {
+            /// <summary>
+            /// 重寫父類Bird中Eat方法
+            /// </summary>
+            public override void Eat()
+            {
+                Console.WriteLine("我是一只老鷹，我喜歡吃肉~");
+            }
+
+            /// <summary>
+            /// 實現 IFlyable接口方法
+            /// </summary>
+            public void Fly()
+            {
+                Console.WriteLine("我是一只老鷹，我可以飛哦~~");
+            }
+        }
+
+
+        //創建一個子類Penguin如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
+
+        /// <summary>
+        /// 企鵝：子類
+        /// </summary>
+        public class Penguin : Bird
+        {
+            /// <summary>
+            /// 重寫父類中Eat方法
+            /// </summary>
+            public override void Eat()
+            {
+                Console.WriteLine("我是一只小企鵝，我喜歡吃魚~");
+            }
+        }
+
+        /// <summary>
+        /// 飛機類，實現IFlyable接口
+        /// </summary>
+        public class Plane : IFlyable
+        {
+            /// <summary>
+            /// 實現接口方法
+            /// </summary>
+            public void Fly()
+            {
+                Console.WriteLine("我是一架飛機，我也能飛~~");
+            }
+        }
+
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //Class測試
+            //創建一個Bird基類數組，添加基類Bird對象，Magpie對象，Eagle對象，Penguin對象
+            Bird[] birds = { 
+                       //new Bird(),    用Abstract, Bird就不能創建對象了
+                       new Magpie(),
+                       new Eagle(),
+                       new Penguin()
+            };
+            //遍歷一下birds數組
+            foreach (Bird bird in birds)
+            {
+                bird.Eat();
+            }
+
+            //創建一個IFlyable接口數組，添加 Magpie對象，Eagle對象
+            IFlyable[] flys = { 
+                       new Magpie(),
+                       new Eagle()
+        };
+            //遍歷一下flys數組
+            foreach (IFlyable fly in flys)
+            {
+                fly.Fly();
+            }
+
+
+            //創建一個IFlyable接口數組，添加 Magpie對象，Eagle對象，Plane對象
+            IFlyable[] flys2 = { 
+                           new Magpie(),
+                           new Eagle(),
+                           new Plane()
+            };
+            //遍歷一下flys數組
+            foreach (IFlyable fly in flys2)
+            {
+                fly.Fly();
+            }
 
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //建立亂七八糟陣列
+            byte[] dataArray = new byte[100];//字節
+
+            new Random().NextBytes(dataArray);//創建隨機字節
+
+            for (int i = 0; i < dataArray.Length; i++)
+            {
+
+                //sf.WriteByte(dataArray[i]);//將字節寫入文件理.
+                richTextBox1.Text += dataArray[i].ToString() + " ";
+
+            }
+
+        }
+
+        //設置系統日期和時間 ST
+        public class SetSystemDateTime
+        {
+
+            [DllImportAttribute("Kernel32.dll")]
+
+            public static extern void GetLocalTime(SystemTime st);
+
+            [DllImportAttribute("Kernel32.dll")]
+
+            public static extern void SetLocalTime(SystemTime st);
+
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public class SystemTime
+        {
+
+            public ushort vYear;
+
+            public ushort vMonth;
+
+            public ushort vDayOfWeek;
+
+            public ushort vDay;
+
+            public ushort vHour;
+
+            public ushort vMinute;
+
+            public ushort vSecond;
 
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //設置系統日期和時間
+            //Romeo可用 Sugar不可用
+            //DateTime Year = this.dateTimePicker1.Value;
+            SystemTime MySystemTime = new SystemTime();
+            SetSystemDateTime.GetLocalTime(MySystemTime);
+            /*
+            MySystemTime.vYear = (ushort)this.dateTimePicker1.Value.Year;
+            MySystemTime.vMonth = (ushort)this.dateTimePicker1.Value.Month;
+            MySystemTime.vDay = (ushort)this.dateTimePicker1.Value.Day;
+            MySystemTime.vHour = (ushort)this.dateTimePicker2.Value.Hour;
+            MySystemTime.vMinute = (ushort)this.dateTimePicker2.Value.Minute;
+            MySystemTime.vSecond = (ushort)this.dateTimePicker2.Value.Second;
+            */
+            MySystemTime.vYear = 2021;
+            MySystemTime.vMonth = 11;
+            MySystemTime.vDay = 3;
+            MySystemTime.vHour = 23;
+            MySystemTime.vMinute = 37;
+            MySystemTime.vSecond = 00;
 
+            SetSystemDateTime.SetLocalTime(MySystemTime);
         }
+        //設置系統日期和時間 SP
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //用C#去讀取特定位置的Refistry Key
+            string result = ReadRegistryKey("Software\\AIMTest"); //直接給string的Registry路徑即可
+            richTextBox1.Text += "result : \t" + result + "\n";
 
         }
+
+        public string ReadRegistryKey(string RegKey)
+        {
+            //讀取Registry Key位置
+
+            RegistryKey RegK = Registry.LocalMachine.OpenSubKey(RegKey);
+            //讀取Registry Key String"test"裡面的值
+            string RegT = (string)RegK.GetValue("test");
+            //Show Registry Key值，檢查讀取的值是否正確
+            MessageBox.Show(RegT);
+            return RegT;
+
+        }
+
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //使用Shell32讀取影音文件屬性
+            /*
+            由於需要用到實時讀取影音文件(mp3、wma、wmv …)播放時間長度的功能，搜索到的結果有：
+            （1）硬編碼分析影音文件，需要分析各種媒體格式，代價最大；
+            （2）使用WMLib SDK，需要熟悉SDK各個接口，且不同版本的WM接口有別，代價次之；
+            （3）使用系統Shell32的COM接口，直接訪問媒體文體屬性，取其特定內容，代價最小。
+            顯然第3種方案見效最快，立即操刀：
+            ①引用Shell32底層接口c:\windows\system32\shell32.dll，VS自動轉換成Interop.Shell32.dll（注：64位系統和32位系統生成的Interop.Shell32.dll不一樣）
+            ②編碼讀取播放時間長度：
+            */
 
+            //取得媒體資訊
+            //string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+            int i;
+            for (i = 0; i < 30; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + GetMediaInfo(filename, i) + "\n";
+            }
         }
+
+        public string GetMediaInfo(string path, int item)
+        {
+            //參考/Shell32/右鍵/屬性/內嵌Interop型別改成False
+            try
+            {
+                string result = string.Empty;
+                Shell32.Shell shell = new Shell32.ShellClass();
+                Shell32.Folder folder = shell.NameSpace(path.Substring(0, path.LastIndexOf("\\")));
+                Shell32.FolderItem folderItem = folder.ParseName(path.Substring(path.LastIndexOf("\\") + 1));
+                return folder.GetDetailsOf(folderItem, item);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
 
         private void button15_Click(object sender, EventArgs e)
         {

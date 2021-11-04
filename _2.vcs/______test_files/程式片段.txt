@@ -1,4 +1,115 @@
 
+可以取CPU的序列號。
+string cpuInfo = "";//cpu序列號
+ManagementClass cimobject = new
+ManagementClass("Win32_Processor");
+ManagementObjectCollection moc = cimobject.GetInstances();
+foreach(ManagementObject mo in moc)
+{
+cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
+Response.Write(cpuInfo);
+} 
+
+
+
+
+用WMI查serial port可否知道是ims的comport，
+若可以知道，直接連線看看～～～
+
+
+
+
+使用C# 讀取XML 到DataGridView
+代碼如下：
+
+XmlReader xmlRead =new XmlTextReader ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
+    DataSet ds=new DataSet ();
+    //ds.ReadXml ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
+    ds.ReadXml (xmlRead);
+
+this.DataGrid1 .DataSource =ds;
+this.DataGrid1 .DataBind ();
+
+
+比較兩個檔案
+if(FileCompare(this.TextBox1.Text，this.TextBox2.Text))
+
+
+private bool FileCompare(string file1，string file2)
+{
+	//　判斷相同的文件是否被參考兩次。
+	if(file1 == file2)
+	{
+		return true；
+	}
+	int file1byte = 0；
+	int file2byte = 0；
+	using(FileStream fs1 = new FileStream(file1，FileMode.Open)，
+	fs2 = new FileStream(file2，FileMode.Open))
+	{
+	//　檢查文件大小。如果兩個文件的大小並不相同，則視為不相同。
+	if(fs1Length != fs2.Length)
+	{
+	// 關閉文件。
+	fs1.Close()；
+	fs2.Close()；
+	return false；
+	}
+	//　逐一比較兩個文件的每一個字節，直到發現不相符或已到達文件尾端為止。
+	do
+	{
+	// 從每一個文件讀取一個字節。
+	file1byte = fs1.ReadByte()；
+	file2byte = fs2.ReadByte()；
+	}
+	while ((file1byte == file2byte) && (file1byte != -1))；
+	// 關閉文件。
+	fs1.Close()；
+	fs2.Close()；
+	}
+	//　返回比較的結果。在這個時候，只有當兩個文件的內容完全相同時，
+	"file1byte" 才會等於 "file2byte"。
+	return ((file1byte - file2byte) == 0)；
+}
+
+
+
+C#使用Process類調用外部exe程序
+Process p = Process.Start("notepad.exe");
+p.WaitForExit();//關鍵，等待外部程序退出後才能往下執行 
+
+
+
+
+
+
+
+ListView添加內容範例
+        /// <summary>
+        /// listview1 顯示搜索主機
+        /// </summary>
+        private void listLanHost()
+        {
+            listView1.View = View.List;
+
+            ListViewItem aa;
+            for (int i = 0; i < 255; i++)
+            {
+                if (LanHost[i, 0] != "")
+                {
+                    aa = new ListViewItem();
+                    aa.Text = LanHost[i, 1];
+                    aa.Tag = LanHost[i, 0];
+                    listView1.Items.Add(aa);
+                }
+            }
+
+        }
+        
+        
+        
+        
+
 
 //計算耗時任務所需的秒數
 

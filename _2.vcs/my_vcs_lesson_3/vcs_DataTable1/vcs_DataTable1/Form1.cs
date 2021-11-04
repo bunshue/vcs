@@ -68,7 +68,23 @@ namespace vcs_DataTable1
             //建立DataTable 1
             //1.創建表實例
             DataTable dt = new DataTable();
+            dt=create_data_table1(dt);
 
+            show_data_table(dt);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //建立DataTable 2
+            //1.創建表實例
+            DataTable dt = new DataTable();
+            dt=create_data_table2(dt);
+
+            show_data_table(dt);
+        }
+
+        DataTable create_data_table1(DataTable dt)
+        {
             //2.建立表結構
             dt.Columns.Add("座號");
             dt.Columns.Add("姓名");
@@ -95,15 +111,11 @@ namespace vcs_DataTable1
             dr3[2] = "92";
             dt.Rows.Add(dr3);
 
-            show_data_table(dt);
+            return dt;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        DataTable create_data_table2(DataTable dt)
         {
-            //建立DataTable 2
-            //1.創建表實例
-            DataTable dt = new DataTable();
-
             //2.建立表結構
             dt.Columns.Add("座號");
             dt.Columns.Add("姓名");
@@ -113,8 +125,7 @@ namespace vcs_DataTable1
             dt.Rows.Add("1", "david", "100");
             dt.Rows.Add("5", "john", "80");
             dt.Rows.Add("12", "mary", "92");
-
-            show_data_table(dt);
+            return dt;
         }
 
         void show_data_table(DataTable dt)
@@ -122,8 +133,8 @@ namespace vcs_DataTable1
             int rows = dt.Rows.Count;
             int cols = dt.Columns.Count;
 
-            richTextBox1.Text += "直行 = " + cols.ToString() + "\n";
-            richTextBox1.Text += "橫列 = " + rows.ToString() + "\n";
+            //richTextBox1.Text += "直行 = " + cols.ToString() + "\n";
+            //richTextBox1.Text += "橫列 = " + rows.ToString() + "\n";
 
             int i;
             int j;
@@ -149,22 +160,12 @@ namespace vcs_DataTable1
             //建立DataTable 2
             //1.創建表實例
             DataTable dt = new DataTable();
-
-            //2.建立表結構
-            dt.Columns.Add("座號");
-            dt.Columns.Add("姓名");
-            dt.Columns.Add("分數");
-
-            //3.添加新行
-            dt.Rows.Add("1", "david", "100");
-            dt.Rows.Add("5", "john", "80");
-            dt.Rows.Add("12", "mary", "92");
+            dt = create_data_table2(dt);
 
             show_data_table(dt);
 
             string xml_data = DataTableToXml(dt);
             richTextBox1.Text += "DataTable轉XML\n" + xml_data + "\n";
-
         }
 
         public string DataTableToXml(DataTable dt)
@@ -201,7 +202,32 @@ namespace vcs_DataTable1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            int i;
+            //建立DataTable 2
+            //1.創建表實例
+            DataTable dt = new DataTable();
+            dt = create_data_table2(dt);
 
+            richTextBox1.Text += "原DataTable :\n";
+            show_data_table(dt);
+
+            richTextBox1.Text += "由 姓名 項列出資料\n";
+            int rows = dt.Rows.Count;
+            for (i = 0; i < rows; i++)
+            {
+                richTextBox1.Text += "找到\t" + dt.Rows[i]["姓名"].ToString() + "\n";
+            }
+
+            richTextBox1.Text += "刪除第1項後DataTable :\n";
+            dt.Rows.RemoveAt(1);
+            show_data_table(dt);
+
+            richTextBox1.Text += "由 姓名 項列出資料\n";
+            rows = dt.Rows.Count;
+            for (i = 0; i < rows; i++)
+            {
+                richTextBox1.Text += "找到\t" + dt.Rows[i]["姓名"].ToString() + "\n";
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)

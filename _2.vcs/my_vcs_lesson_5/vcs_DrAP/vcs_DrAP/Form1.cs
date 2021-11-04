@@ -1077,6 +1077,89 @@ namespace vcs_DrAP
                 return size.ToString() + " Byte";//顯示Byte值
         }
 
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            /*
+            int selNdx;
+            string fullname;
+
+            selNdx = listView1.SelectedIndices[0];
+
+
+            richTextBox2.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
+            richTextBox2.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox2.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox2.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+            */
+
+            int selNdx;
+            string fullname;
+
+            selNdx = listView1.SelectedIndices[0];
+            listView1.Items[selNdx].Selected = true;    //選到的項目
+            richTextBox2.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+            richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
+            richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+
+            if (flag_function == FUNCTION_FIND_BIG_FILES)
+            {
+                richTextBox2.Text += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
+            }
+            else
+            {
+                if (flag_function == FUNCTION_SEARCH_TEXT)
+                {
+                    //搜尋字串模式
+                    richTextBox2.Text += "aaaa b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                    richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+                    fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
+                }
+                else
+                {
+                    //轉出模式
+                    //richTextBox2.Text += "b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                    //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                    fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
+                }
+            }
+
+            if (flag_search_vcs_pattern == 0)
+            {
+                FileInfo fi = new FileInfo(fullname);
+
+                //richTextBox2.Text += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
+
+                if (fi.Extension == ".txt")
+                {
+                    //System.Diagnostics.Process.Start(text_editor_path, fullname);
+                }
+                else
+                {
+                    richTextBox2.Text += "video_player_path = " + video_player_path + "\n";
+                    richTextBox2.Text += "fullname = " + fullname + "\n";
+
+
+                    if (video_player_path == String.Empty)
+                    {
+                        //System.Diagnostics.Process.Start(fullname); //使用預設程式開啟
+                    }
+                    else
+                    {
+                        //System.Diagnostics.Process.Start(video_player_path, fullname);    //指名播放程式開啟
+                    }
+                }
+            }
+            else
+            {
+                //System.Diagnostics.Process.Start(text_editor_path, fullname);
+            }
+            
+            
+
+        }
+
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int selNdx;
@@ -1086,7 +1169,7 @@ namespace vcs_DrAP
             {
                 selNdx = listView1.SelectedIndices[0];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
-                //richTextBox.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+                //richTextBox2.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
                 richTextBox2.Text += "你選擇了資料夾:\t" + listView1.Items[selNdx].Text + "\n";
 
                 fullname = listView1.Items[selNdx].Text;
@@ -1113,7 +1196,7 @@ namespace vcs_DrAP
 
             selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
-            //richTextBox.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+            //richTextBox2.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
             //richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
             //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
 
@@ -1678,11 +1761,39 @@ namespace vcs_DrAP
 
         private void bt_test_Click(object sender, EventArgs e)
         {
+            /*
             //richTextBox2.Text += "flag_function = " + flag_function.ToString() + "\n";
 
             Properties.Settings.Default.search_path = "";
 
             Properties.Settings.Default.Save();
+            */
+
+            richTextBox1.Text += "讀出一資料夾內所有檔案 -r\n";
+            string foldername = @"C:\______test_files\";
+            get_all_files(foldername);
+        }
+
+        void get_all_files(string foldername)
+        {
+            DirectoryInfo temp3 = new DirectoryInfo(foldername);
+
+            DirectoryInfo[] idr = temp3.GetDirectories();//獲取當前目錄下的所有子目錄.
+            foreach (DirectoryInfo dir in idr)
+            {
+                richTextBox1.Text += "取得資料夾 : " + dir.FullName + "\n";
+
+                //Console.WriteLine(dir.FullName);
+            }
+
+            FileInfo[] files = temp3.GetFiles();
+
+            foreach (FileInfo file in files)
+            {
+                richTextBox1.Text += "取得檔案 : " + file.FullName + "\n";
+
+                //Console.WriteLine(file.FullName);
+            }
         }
 
         private void textBox3_KeyDown(object sender, KeyEventArgs e)
@@ -2618,6 +2729,7 @@ namespace vcs_DrAP
         {
 
         }
+
     }
 }
 

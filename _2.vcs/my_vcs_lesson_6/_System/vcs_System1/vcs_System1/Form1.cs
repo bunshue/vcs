@@ -1318,6 +1318,23 @@ namespace vcs_System1
             {
                 string DriveType;
                 DriveType = disk["DriveType"].ToString();
+
+                richTextBox1.Text += "磁盤名稱：" + disk["Name"].ToString() + "\n";
+                //獲得硬盤的可用空間
+
+                long mb = 1048576;
+                double free = 0;
+                double use = 0;
+                double total = 0;
+                free = Convert.ToInt64(disk["FreeSpace"]) / mb;
+                //獲得硬盤的已用空間
+                use = (Convert.ToInt64(disk["Size"]) - Convert.ToInt64(disk["FreeSpace"])) / mb;
+                //獲得硬盤的合計空間
+                total = Convert.ToInt64(disk["Size"]) / mb;
+                richTextBox1.Text += " 總計：" + total.ToString() + "MB\n";
+                richTextBox1.Text += "已用空間：" + use.ToString() + "MB\n";
+                richTextBox1.Text += "可用空間：" + free.ToString() + "MB\n";
+
                 if (DriveType == "4")
                 {
                     richTextBox1.Text += "取得 : " + disk["Name"].ToString() + "\n";
