@@ -1,22 +1,93 @@
 
-可以取CPU的序列號。
-string cpuInfo = "";//cpu序列號
-ManagementClass cimobject = new
-ManagementClass("Win32_Processor");
-ManagementObjectCollection moc = cimobject.GetInstances();
-foreach(ManagementObject mo in moc)
-{
-cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
-Response.Write(cpuInfo);
-} 
+//c#實現md5加密
+
+
+
+1. 首先創建MD5的哈希算法。
+
+((HashAlgorithm)System.Security.Cryptogrophy.CryptoConfig.CreateFromName("MD5")).ComputeHash(System.Text.UTF8.GetBytes(input))
+
+2.計算哈希值
+
+使用方法:ComputeHash(byte[] value);
+
+3.轉化成字符串.
+
+1protected virtual string HashMD5(string input)
+2　　　　{
+3　　　　　　byte[] result = ((HashAlgorithm)System.Security.Cryptography.CryptoConfig.CreateFromName("MD5")).ComputeHash(System.Text.Encoding.UTF8.GetBytes(input));
+4　　　　　　StringBuilder output = new StringBuilder(16);
+5
+6　　　　　　for (int i = 0; i < result.Length; i++)
+7　　　　　　{
+8　　　　　　　　// convert from hexa-decimal to character
+9　　　　　　　　output.Append((result[i]).ToString( "x2", System.Globalization.CultureInfo.InvariantCulture));
+10　　　　　　}
+11　　　　　　return output.ToString();
+12　　　　}
+13
+
+
+
+
+C#如何取硬件標志
+
+  //取機器名 
+  public string GetHostName()
+  {
+   return System.Net.Dns.GetHostName(); 
+  }
+
+  //取CPU編號
+  public String GetCpuID() 
+  {
+   try
+   {
+    ManagementClass mc = new ManagementClass("Win32_Processor");
+    ManagementObjectCollection moc = mc.GetInstances();
+
+    String strCpuID = null ;
+    foreach( ManagementObject mo in moc ) 
+    {
+     strCpuID = mo.Properties["ProcessorId"].Value.ToString();
+     break; 
+    }
+    return strCpuID;
+   }
+   catch
+   {
+    return "";
+   }
+
+  }//end method
+
+  //取第一塊硬盤編號
+  public String GetHardDiskID() 
+  {
+   try
+   {
+    ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * FROM Win32_PhysicalMedia");
+    String strHardDiskID = null ;
+    foreach(ManagementObject mo in searcher.Get()) 
+    {    
+     strHardDiskID = mo["SerialNumber"].ToString().Trim();
+     break;          
+    }
+    return strHardDiskID ;
+   }
+   catch
+   {
+    return "";
+   }
+  }//end 
+
+
 
 
 
 
 用WMI查serial port可否知道是ims的comport，
 若可以知道，直接連線看看～～～
-
-
 
 
 使用C# 讀取XML 到DataGridView
@@ -213,62 +284,6 @@ return strHTML;
 //可以看到HttpWebRequest 方式最復雜，但確提供了更多的選擇性。
 //有的網站檢測客戶端的UserAgent！如163.com，你如果使用WebClient WebRequest方式獲取時，將獲取到的是錯誤提示頁面內容。
 //而通過HttpWebRequest 就沒問題。
-
-
-C#如何取硬件標志
-
-  //取機器名 
-  public string GetHostName()
-  {
-   return System.Net.Dns.GetHostName(); 
-  }
-
-  //取CPU編號
-  public String GetCpuID() 
-  {
-   try
-   {
-    ManagementClass mc = new ManagementClass("Win32_Processor");
-    ManagementObjectCollection moc = mc.GetInstances();
-
-    String strCpuID = null ;
-    foreach( ManagementObject mo in moc ) 
-    {
-     strCpuID = mo.Properties["ProcessorId"].Value.ToString();
-     break; 
-    }
-    return strCpuID;
-   }
-   catch
-   {
-    return "";
-   }
-
-  }//end method
-
-  //取第一塊硬盤編號
-  public String GetHardDiskID() 
-  {
-   try
-   {
-    ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * FROM Win32_PhysicalMedia");
-    String strHardDiskID = null ;
-    foreach(ManagementObject mo in searcher.Get()) 
-    {    
-     strHardDiskID = mo["SerialNumber"].ToString().Trim();
-     break;          
-    }
-    return strHardDiskID ;
-   }
-   catch
-   {
-    return "";
-   }
-  }//end 
-
-
-
-
 
 
 //創建一個讀取器
@@ -1444,35 +1459,6 @@ Console.ForegroundColor = ConsoleColor.DarkGreen;
 string value = “第三行 綠暗綠”;
 Console.WriteLine(value.PadRight(Console.WindowWidth-value.Length)); //設置一整行的背景色
 
-
-
-//獲取CPU的序列號
-        private string GetCpuID()
-        {
-            try
-            {
-                //獲取CPU序列號代碼
-                string cpuInfo = "";//cpu序列號
-                ManagementClass mc = new ManagementClass("Win32_Processor");
-                ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
-                {
-                    cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
-                }
-                moc = null;
-                mc = null;
-                return cpuInfo;
-            }
-            catch
-            {
-                return "unknow";
-            }
-            finally
-            {
-            }
-        }
-        
-        
         
        /// <summary>
         /// 性能計數器，用於獲取CPU空閒百分比
@@ -2020,32 +2006,6 @@ public static void HardDisk(out string[] 制造商, out string[] 型號, out str
                 i ;
         }
 } 
-
-
-C# 獲得處理器參數程序代碼
-C# 獲得處理器參數程序代碼如下：
-public static void Processor(out string[] 制造商, out string[] 型號, out string[] 序列號)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-        制造商 = new string[searcher.Get().Count];
-        型號 = new string[searcher.Get().Count];
-        序列號 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                try
-                {
-                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
-                        序列號[i] = share.GetPropertyValue("ProcessorId").ToString();
-                }
-                catch (System.Exception er)
-                {
-                }
-                i ;
-        }
-} 
-
-
 
 
             string Year = DateTime.Now.Year.ToString();

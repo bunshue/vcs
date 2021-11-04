@@ -111,6 +111,9 @@ namespace vcs_Comport3
             lb_sn1.Text = "";
             lb_sn2.Text = "";
             lb_sn3.Text = "";
+            lb_sn_pc1.Text = "";
+            lb_sn_pc2.Text = "";
+            lb_sn_pc3.Text = "";
 
             //button
             x_st = 12;
@@ -129,9 +132,14 @@ namespace vcs_Comport3
             bt_plc_8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_plc_9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
-            lb_sn1.Location = new Point(x_st + dx * 1 - 70, y_st + dy * 2);
-            lb_sn2.Location = new Point(x_st + dx * 1 - 70, y_st + dy * 2+30);
-            lb_sn3.Location = new Point(x_st + dx * 1 - 70, y_st + dy * 2+60);
+            lb_sn1.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2);
+            lb_sn2.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 30);
+            lb_sn3.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 60);
+
+            lb_sn_pc1.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2);
+            lb_sn_pc2.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 30);
+            lb_sn_pc3.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 60);
+
             lb_sn.Location = new Point(x_st + dx * 1-70, y_st + dy * 4);
             tb_sn1.Location = new Point(x_st + dx * 1-70, y_st + dy * 5);
             tb_sn2.Location = new Point(x_st + dx * 1-70, y_st + dy * 6);
@@ -302,8 +310,23 @@ namespace vcs_Comport3
             if (input[0] == 0xAA)
             {
             }
-            else if (input[0] == 0xBB)
+            else if (input[0] == 0xC1)
             {
+                if ((input[1] == 0x00) && (input[2] == 0x00) && (input[3] == 0x00))
+                {
+                    richTextBox1.Text += "PLC -> PC : 讀取相機序號\n";
+                    show_main_message1a("PLC -> PC : 讀取相機序號", S_FALSE, 30);
+                    show_main_message2a("[PC] 收到", S_FALSE, 30);
+                }
+            }
+            else if (input[0] == 0xC0)
+            {
+                if ((input[1] == 0x12) && (input[2] == 0x34) && (input[3] == 0x56))
+                {
+                    richTextBox1.Text += "PLC -> PC : 寫入相機序號\n";
+                    show_main_message1a("PLC -> PC : 寫入相機序號", S_FALSE, 30);
+                    show_main_message2a("[PC] 收到", S_FALSE, 30);
+                }
             }
             else if (input[0] == 0xFF)
             {
@@ -561,10 +584,10 @@ namespace vcs_Comport3
                                 flag_wait_receive_data = 0;
                             }
                         }
-                        else if (BytesToRead == 37) // 5 + 16 + 16
+                        else if (BytesToRead == 27) // 5 + 10 + 12
                         {
                             int i;
-                            richTextBox1.Text += "\nBytesToRead = 37 Bytes, data\t";
+                            richTextBox1.Text += "\nBytesToRead = 27 Bytes, data\t";
                             for (i = 0; i < BytesToRead; i++)
                             {
                                 richTextBox1.Text += receive_buffer[i].ToString("X2") + " ";
@@ -577,17 +600,19 @@ namespace vcs_Comport3
                             for (i = 5; i < (32 + 5); i++)
                                 input += (char)receive_buffer[i];
 
+                            /* debug
                             richTextBox1.Text += "input data \n";
                             for (i = 0; i < 32; i++)
                             {
                                 richTextBox1.Text += ((int)input[i]).ToString("X2") + " ";
                             }
                             richTextBox1.Text += "\n";
+                            */
 
                             bool flag_no_camera_serial1 = true;
                             bool flag_no_camera_serial2 = true;
-                            lb_sn1.Text = "[S/N] : ";
-                            lb_sn2.Text = "[S/N] : ";
+                            lb_sn_pc1.Text = "[S/N]: ";
+                            lb_sn_pc2.Text = "[S/N]: ";
 
                             if ((int)input[9] == 0xff)  //9B
                             {
@@ -600,7 +625,7 @@ namespace vcs_Comport3
                                     }
                                     else
                                     {
-                                        lb_sn1.Text += (char)input[i];
+                                        lb_sn_pc1.Text += (char)input[i];
                                         flag_no_camera_serial1 = false;
                                     }
                                 }
@@ -616,37 +641,31 @@ namespace vcs_Comport3
                                     }
                                     else
                                     {
-                                        lb_sn1.Text += (char)input[i];
+                                        lb_sn_pc1.Text += (char)input[i];
                                         flag_no_camera_serial1 = false;
                                     }
                                 }
                             }
 
-                            for (i = 16; i < (16 + 11); i++)
+                            for (i = 10; i < (10 + 12); i++)
                             {
                                 //richTextBox1.Text += ((int)input[i]).ToString("X2") + "  ";
-                                if ((i > 16) && (((int)input[i] < '0') || ((int)input[i] > '9')))
                                 {
-                                    flag_no_camera_serial2 = true;
-                                    break;
-                                }
-                                else
-                                {
-                                    lb_sn2.Text += (char)input[i];
+                                    lb_sn_pc2.Text += (char)input[i];
                                     flag_no_camera_serial2 = false;
                                 }
                             }
 
                             if (flag_no_camera_serial1 == true)
                             {
-                                lb_sn1.Text = "[S/N] : 無相機序號資料1";
+                                lb_sn_pc1.Text = "[S/N]: 無相機序號資料1";
                             }
                             else
                             {
                             }
                             if (flag_no_camera_serial2 == true)
                             {
-                                lb_sn2.Text = "[S/N] : 無相機序號資料2";
+                                lb_sn_pc2.Text = "[S/N]: 無相機序號資料2";
                             }
                             else
                             {
@@ -657,6 +676,9 @@ namespace vcs_Comport3
                                 flag_receive_camera_serial = 0;
                                 flag_wait_receive_data = 0;
                             }
+
+                            richTextBox1.Text += lb_sn_pc1.Text + "\n";
+                            richTextBox1.Text += lb_sn_pc2.Text + "\n";
 
                         }
                         else if (BytesToRead == 55) // 5 + 50
@@ -2250,7 +2272,7 @@ namespace vcs_Comport3
         //22222
         private void SpyMonitorRX2()
         {
-            richTextBox1.Text += "do SpyMonitorRX() len = " + BytesToRead.ToString() + "\n";
+            richTextBox1.Text += "do SpyMonitorRX2() len = " + BytesToRead.ToString() + "\n";
 
             string message = "";
             //if (BytesToRead == 5)

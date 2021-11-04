@@ -16,6 +16,10 @@ namespace vcs_ReadWrite_BIN
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             show_item_location();
         }
 
@@ -23,29 +27,51 @@ namespace vcs_ReadWrite_BIN
         {
             int x_st = 10;
             int y_st = 10;
-            int dx = 100;
-            int dy = 50;
+            int dx = 170;
+            int dy = 53;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+
+            richTextBox1.Location = new Point(350, 10);
+
+            //控件位置
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
 
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+        }
 
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
 
-
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 11 + 20);
-
-            richTextBox1.Location = new Point(170, 10);
-
+        private void button0_Click(object sender, EventArgs e)
+        {
 
         }
 
@@ -139,7 +165,7 @@ namespace vcs_ReadWrite_BIN
             //int hh = 640 * 500 / 2048 / 4 * 16 / 2; //312.5
             int hh = 480;
 
-           
+
             int size = ww * hh * 4 + 0x36;
             int h_res = 0x0EC4;
             int v_res = 0x0EC4;
@@ -525,86 +551,6 @@ namespace vcs_ReadWrite_BIN
             */
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-            int len;
-            FileStream fs;
-
-            //隨機binary讀取
-            fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            BinaryReader br = new BinaryReader(fs);
-            len = (int)fs.Length;
-            richTextBox1.Text += "隨機binary讀取\n讀取檔案 : " + filename + "\n";
-            richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
-
-            len = 7;
-            byte[] data = new byte[7];
-
-            int i;
-            for (i = 0; i < 8; i++)
-            {
-                //讀取位元陣列
-                fs.Seek(32 * i, SeekOrigin.Begin);  //從Begin開始 32 *i 拜
-                data = br.ReadBytes(len);           //用ReadBytes從目前位置開始讀len拜
-                print_data(data, len);
-            }
-
-            //釋放資源
-            br.Close();
-            fs.Close();
-
-            richTextBox1.Text += "\n讀一個mp3檔的末128拜\n";
-            string filename2 = "C:\\______test_files\\_mp3\\aaaa.mp3";
-            len = 128;
-            //隨機binary讀取
-            fs = new FileStream(filename2, FileMode.Open, FileAccess.Read);
-            Stream stream = fs;
-            int seekPos = len;
-            //stream.Seek(-seekPos, SeekOrigin.End);  //從最後開始往回算 128 拜    //same
-            fs.Seek(-seekPos, SeekOrigin.End);  //從最後開始往回算 128 拜
-            int rl = 0;
-            byte[] data2 = new byte[seekPos];
-            rl = stream.Read(data2, 0, seekPos);
-
-            richTextBox1.Text += "讀取檔案 : " + filename2 + "\n";
-            richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
-            richTextBox1.Text += "讀末128拜\n";
-
-            //讀取位元陣列
-            print_data(data2, len);
-
-            //釋放資源
-            fs.Close();
-            stream.Close();
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            //循序binary讀取
-            FileStream fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            BinaryReader br = new BinaryReader(fs);
-            int len = System.Convert.ToInt16(fs.Length);
-            richTextBox1.Text += "讀取檔案 : " + filename + "\n";
-            richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
-
-            richTextBox1.Text += "讀前面1/3\n";
-            len /= 3;
-
-            //讀取位元陣列
-            byte[] data = br.ReadBytes(len);    //用ReadBytes讀取檔案的前幾拜(循序)
-
-            //釋放資源
-            br.Close();
-            fs.Close();
-
-            print_data(data, len);
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
             filename = "C:\\______test_files\\_mp3\\aaaa.mp3";
@@ -674,6 +620,85 @@ namespace vcs_ReadWrite_BIN
             File.WriteAllBytes(filename, data);
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //循序binary讀取
+            FileStream fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            BinaryReader br = new BinaryReader(fs);
+            int len = System.Convert.ToInt16(fs.Length);
+            richTextBox1.Text += "讀取檔案 : " + filename + "\n";
+            richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
+
+            richTextBox1.Text += "讀前面1/3\n";
+            len /= 3;
+
+            //讀取位元陣列
+            byte[] data = br.ReadBytes(len);    //用ReadBytes讀取檔案的前幾拜(循序)
+
+            //釋放資源
+            br.Close();
+            fs.Close();
+
+            print_data(data, len);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            int len;
+            FileStream fs;
+
+            //隨機binary讀取
+            fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            BinaryReader br = new BinaryReader(fs);
+            len = (int)fs.Length;
+            richTextBox1.Text += "隨機binary讀取\n讀取檔案 : " + filename + "\n";
+            richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
+
+            len = 7;
+            byte[] data = new byte[7];
+
+            int i;
+            for (i = 0; i < 8; i++)
+            {
+                //讀取位元陣列
+                fs.Seek(32 * i, SeekOrigin.Begin);  //從Begin開始 32 *i 拜
+                data = br.ReadBytes(len);           //用ReadBytes從目前位置開始讀len拜
+                print_data(data, len);
+            }
+
+            //釋放資源
+            br.Close();
+            fs.Close();
+
+            richTextBox1.Text += "\n讀一個mp3檔的末128拜\n";
+            string filename2 = "C:\\______test_files\\_mp3\\aaaa.mp3";
+            len = 128;
+            //隨機binary讀取
+            fs = new FileStream(filename2, FileMode.Open, FileAccess.Read);
+            Stream stream = fs;
+            int seekPos = len;
+            //stream.Seek(-seekPos, SeekOrigin.End);  //從最後開始往回算 128 拜    //same
+            fs.Seek(-seekPos, SeekOrigin.End);  //從最後開始往回算 128 拜
+            int rl = 0;
+            byte[] data2 = new byte[seekPos];
+            rl = stream.Read(data2, 0, seekPos);
+
+            richTextBox1.Text += "讀取檔案 : " + filename2 + "\n";
+            richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
+            richTextBox1.Text += "讀末128拜\n";
+
+            //讀取位元陣列
+            print_data(data2, len);
+
+            //釋放資源
+            fs.Close();
+            stream.Close();
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -756,9 +781,92 @@ namespace vcs_ReadWrite_BIN
                 richTextBox1.Text += "Auto save time set to: " + autoSaveTime.ToString() + "\n";
                 richTextBox1.Text += "Show status bar: " + showStatusBar.ToString() + "\n";
             }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //拜列存檔
+
+            string str = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
+            //byte[] byte_str = Convert.FromBase64String(str);    //100拜 變 75拜
+            byte[] byte_str = Encoding.Default.GetBytes(str);     //100拜 變 100拜
+            int i;
+            int len = byte_str.Length;
+            for (i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + byte_str[i].ToString() + "\n";
+            }
+
+            string filename = Application.StartupPath + "\\lion-mouse.bin";
+
+            FileStream fileStream = null;
+            try
+            {
+                //File.Create Method (String):Creates or overwrites a file in the specified path.  
+                fileStream = File.Create(filename);
+            }
+            catch (System.IO.IOException ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+            //FileStream.Write Method:Writes a block of bytes to the file stream.  
+            fileStream.Write(byte_str, 0, len);
+            //FileStream.Flush 方法:清除該流的所有緩沖區，使得所有緩沖的數據都被寫入到基礎設備。  
+            fileStream.Flush();
+            //FileStream.Close Method:Closes the file and releases any resources associated with the current file stream.  
+            fileStream.Close();  
 
 
         }
 
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

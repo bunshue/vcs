@@ -85,6 +85,7 @@ namespace system_test3_wmi
             foreach (ManagementObject mo in moc)
             {
                 richTextBox1.Text += mo["processorid"].ToString() + "\n";   //取得CPU編號
+                richTextBox1.Text += "cpu info:\t" + mo.Properties["ProcessorId"].Value.ToString() + "\n";
             }
 
             ManagementObjectSearcher mos = new ManagementObjectSearcher("Select * From Win32_Processor"); //查詢CPU訊息
@@ -93,6 +94,73 @@ namespace system_test3_wmi
                 richTextBox1.Text += mo["Manufacturer"].ToString() + "\n";//取得CPU製造商名稱
                 richTextBox1.Text += mo["Version"].ToString() + "\n";     //取得CPU版本號 
                 richTextBox1.Text += mo["Name"].ToString() + "\n";        //取得CPU產品名稱
+            }
+
+            richTextBox1.Text += "\ncall Processor() ST\n";
+            Processor();
+            richTextBox1.Text += "call Processor() SP\n";
+
+            richTextBox1.Text +="\n獲取CPU的序列號\n";
+            string result = GetCpuID();
+            richTextBox1.Text += result + "\n";
+
+
+        }
+
+        //C# 獲得處理器參數程序代碼
+        //public void Processor(out string[] Manufacturer, out string[] ID, out string[] ProcessorId)
+        public void Processor()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            string[] Manufacturer = new string[searcher.Get().Count];
+            string[] ID = new string[searcher.Get().Count];
+            string[] ProcessorId = new string[searcher.Get().Count];
+            richTextBox1.Text += "count = " + searcher.Get().Count.ToString() + "\n";
+            int i = 0;
+            foreach (ManagementObject share in searcher.Get())
+            {
+                try
+                {
+                    Manufacturer[i] = share.GetPropertyValue("Manufacturer").ToString();
+                    //ID[i] = share.GetPropertyValue("Id").ToString(); not known
+                    ProcessorId[i] = share.GetPropertyValue("ProcessorId").ToString();
+
+                    richTextBox1.Text += "i = " + i.ToString() + "\n";
+                    richTextBox1.Text += "Manufacturer : " + Manufacturer[i] + "\n";
+                    richTextBox1.Text += "ProcessorId : " + ProcessorId[i] + "\n";
+                    
+                }
+                catch (System.Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+                i++;
+            }
+        }
+
+        //獲取CPU的序列號
+        private string GetCpuID()
+        {
+            try
+            {
+                //獲取CPU序列號代碼
+                string cpuInfo = "";//cpu序列號
+                ManagementClass mc = new ManagementClass("Win32_Processor");
+                ManagementObjectCollection moc = mc.GetInstances();
+                foreach (ManagementObject mo in moc)
+                {
+                    cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
+                }
+                moc = null;
+                mc = null;
+                return cpuInfo;
+            }
+            catch
+            {
+                return "unknow";
+            }
+            finally
+            {
             }
         }
 

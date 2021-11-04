@@ -92,6 +92,9 @@
             this.bt_ims_2 = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.lb_main_mesg0 = new System.Windows.Forms.Label();
+            this.lb_sn_pc3 = new System.Windows.Forms.Label();
+            this.lb_sn_pc2 = new System.Windows.Forms.Label();
+            this.lb_sn_pc1 = new System.Windows.Forms.Label();
             this.groupBox_comport1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport1)).BeginInit();
             this.groupBox_comport2.SuspendLayout();
@@ -331,30 +334,30 @@
             // lb_sn3
             // 
             this.lb_sn3.AutoSize = true;
-            this.lb_sn3.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn3.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_sn3.Location = new System.Drawing.Point(114, 283);
             this.lb_sn3.Name = "lb_sn3";
-            this.lb_sn3.Size = new System.Drawing.Size(70, 24);
+            this.lb_sn3.Size = new System.Drawing.Size(60, 22);
             this.lb_sn3.TabIndex = 190;
             this.lb_sn3.Text = "S/N :";
             // 
             // lb_sn2
             // 
             this.lb_sn2.AutoSize = true;
-            this.lb_sn2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn2.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_sn2.Location = new System.Drawing.Point(114, 246);
             this.lb_sn2.Name = "lb_sn2";
-            this.lb_sn2.Size = new System.Drawing.Size(70, 24);
+            this.lb_sn2.Size = new System.Drawing.Size(60, 22);
             this.lb_sn2.TabIndex = 189;
             this.lb_sn2.Text = "S/N :";
             // 
             // lb_sn1
             // 
             this.lb_sn1.AutoSize = true;
-            this.lb_sn1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn1.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_sn1.Location = new System.Drawing.Point(114, 208);
             this.lb_sn1.Name = "lb_sn1";
-            this.lb_sn1.Size = new System.Drawing.Size(70, 24);
+            this.lb_sn1.Size = new System.Drawing.Size(60, 22);
             this.lb_sn1.TabIndex = 188;
             this.lb_sn1.Text = "S/N :";
             // 
@@ -512,10 +515,13 @@
             // 
             // groupBox_pc
             // 
+            this.groupBox_pc.Controls.Add(this.lb_sn_pc3);
             this.groupBox_pc.Controls.Add(this.lb_main_mesg2b);
             this.groupBox_pc.Controls.Add(this.bt_pc_8);
+            this.groupBox_pc.Controls.Add(this.lb_sn_pc2);
             this.groupBox_pc.Controls.Add(this.bt_pc_7);
             this.groupBox_pc.Controls.Add(this.bt_pc_6);
+            this.groupBox_pc.Controls.Add(this.lb_sn_pc1);
             this.groupBox_pc.Controls.Add(this.bt_pc_0);
             this.groupBox_pc.Controls.Add(this.bt_pc_5);
             this.groupBox_pc.Controls.Add(this.lb_main_mesg2a);
@@ -746,6 +752,36 @@
             this.lb_main_mesg0.TabIndex = 135;
             this.lb_main_mesg0.Text = "mesg1";
             // 
+            // lb_sn_pc3
+            // 
+            this.lb_sn_pc3.AutoSize = true;
+            this.lb_sn_pc3.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn_pc3.Location = new System.Drawing.Point(117, 281);
+            this.lb_sn_pc3.Name = "lb_sn_pc3";
+            this.lb_sn_pc3.Size = new System.Drawing.Size(60, 22);
+            this.lb_sn_pc3.TabIndex = 193;
+            this.lb_sn_pc3.Text = "S/N :";
+            // 
+            // lb_sn_pc2
+            // 
+            this.lb_sn_pc2.AutoSize = true;
+            this.lb_sn_pc2.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn_pc2.Location = new System.Drawing.Point(117, 244);
+            this.lb_sn_pc2.Name = "lb_sn_pc2";
+            this.lb_sn_pc2.Size = new System.Drawing.Size(60, 22);
+            this.lb_sn_pc2.TabIndex = 192;
+            this.lb_sn_pc2.Text = "S/N :";
+            // 
+            // lb_sn_pc1
+            // 
+            this.lb_sn_pc1.AutoSize = true;
+            this.lb_sn_pc1.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn_pc1.Location = new System.Drawing.Point(117, 206);
+            this.lb_sn_pc1.Name = "lb_sn_pc1";
+            this.lb_sn_pc1.Size = new System.Drawing.Size(60, 22);
+            this.lb_sn_pc1.TabIndex = 191;
+            this.lb_sn_pc1.Text = "S/N :";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -842,6 +878,9 @@
         private System.Windows.Forms.Label lb_sn3;
         private System.Windows.Forms.Label lb_sn2;
         private System.Windows.Forms.Label lb_sn1;
+        private System.Windows.Forms.Label lb_sn_pc3;
+        private System.Windows.Forms.Label lb_sn_pc2;
+        private System.Windows.Forms.Label lb_sn_pc1;
     }
 }
 
