@@ -225,7 +225,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(150, 48);
             this.button14.TabIndex = 17;
-            this.button14.Text = "MemoryStream 可以seek";
+            this.button14.Text = "Binary read/write";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

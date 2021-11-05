@@ -102,6 +102,14 @@ namespace test3
 
             //控件位置
             bt_exit.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_exit.Size.Width, richTextBox1.Location.Y + 0);
+
+            //控件位置
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -690,9 +698,6 @@ namespace test3
             //string thefullname = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + ".gif"; // "nowtime.gif";
             //richTextBox1.Text += thefullname + "\n";
         }
-
-
-
     }
 
     public class MyTempImage

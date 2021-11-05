@@ -55,7 +55,7 @@
             this.bt_find_small_folders = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.bt_test = new System.Windows.Forms.Button();
+            this.bt_test1 = new System.Windows.Forms.Button();
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.bt_find_same_files2 = new System.Windows.Forms.Button();
@@ -85,6 +85,7 @@
             this.bt_open_dir = new System.Windows.Forms.Button();
             this.bt_save_data = new System.Windows.Forms.Button();
             this.bt_find_empty_folders = new System.Windows.Forms.Button();
+            this.bt_test2 = new System.Windows.Forms.Button();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
@@ -352,16 +353,16 @@
             this.textBox4.Text = "10";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // bt_test
+            // bt_test1
             // 
-            this.bt_test.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test.Location = new System.Drawing.Point(1593, 77);
-            this.bt_test.Name = "bt_test";
-            this.bt_test.Size = new System.Drawing.Size(75, 23);
-            this.bt_test.TabIndex = 35;
-            this.bt_test.Text = "TEST";
-            this.bt_test.UseVisualStyleBackColor = true;
-            this.bt_test.Click += new System.EventHandler(this.bt_test_Click);
+            this.bt_test1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test1.Location = new System.Drawing.Point(1589, 77);
+            this.bt_test1.Name = "bt_test1";
+            this.bt_test1.Size = new System.Drawing.Size(38, 23);
+            this.bt_test1.TabIndex = 35;
+            this.bt_test1.Text = "T1";
+            this.bt_test1.UseVisualStyleBackColor = true;
+            this.bt_test1.Click += new System.EventHandler(this.bt_test1_Click);
             // 
             // bt_clear1
             // 
@@ -725,11 +726,23 @@
             this.bt_find_empty_folders.UseVisualStyleBackColor = true;
             this.bt_find_empty_folders.Click += new System.EventHandler(this.bt_find_empty_folders_Click);
             // 
+            // bt_test2
+            // 
+            this.bt_test2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test2.Location = new System.Drawing.Point(1630, 77);
+            this.bt_test2.Name = "bt_test2";
+            this.bt_test2.Size = new System.Drawing.Size(38, 23);
+            this.bt_test2.TabIndex = 55;
+            this.bt_test2.Text = "T2";
+            this.bt_test2.UseVisualStyleBackColor = true;
+            this.bt_test2.Click += new System.EventHandler(this.bt_test2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.bt_test2);
             this.Controls.Add(this.bt_find_empty_folders);
             this.Controls.Add(this.bt_copy_rtb_data);
             this.Controls.Add(this.bt_setup);
@@ -747,7 +760,7 @@
             this.Controls.Add(this.bt_find_same_files2);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_clear1);
-            this.Controls.Add(this.bt_test);
+            this.Controls.Add(this.bt_test1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.bt_find_small_folders);
@@ -822,7 +835,7 @@
         private System.Windows.Forms.Button bt_find_small_folders;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button bt_test;
+        private System.Windows.Forms.Button bt_test1;
         private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button bt_find_same_files2;
@@ -847,6 +860,7 @@
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_copy_rtb_data;
         private System.Windows.Forms.Button bt_find_empty_folders;
+        private System.Windows.Forms.Button bt_test2;
     }
 }
 

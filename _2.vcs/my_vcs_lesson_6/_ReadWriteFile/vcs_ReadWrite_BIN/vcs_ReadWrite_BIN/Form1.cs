@@ -805,7 +805,7 @@ namespace vcs_ReadWrite_BIN
                 //File.Create Method (String):Creates or overwrites a file in the specified path.  
                 fileStream = File.Create(filename);
             }
-            catch (System.IO.IOException ex)
+            catch (IOException ex)
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
@@ -821,6 +821,46 @@ namespace vcs_ReadWrite_BIN
 
         private void button14_Click(object sender, EventArgs e)
         {
+            string filename1 = Application.StartupPath + "\\lion-mouse.bin";
+            if (File.Exists(filename1) == false)
+            {
+                richTextBox1.Text += "檔案 : " + filename1 + " 不存在, 離開\n";
+                return;
+            }
+
+            FileStream inFile = new FileStream(filename1, FileMode.Open, FileAccess.Read);
+            byte[] binaryData = new byte[inFile.Length];
+            inFile.Read(binaryData, 0, (int)inFile.Length);
+            //string mStr = Convert.ToBase64String(binaryData); 轉換
+            int i;
+            richTextBox1.Text += "檔案內容:\n";
+            for (i = 0; i < inFile.Length; i++)
+            {
+                richTextBox1.Text += binaryData[i].ToString("X2");
+                if ((i % 30) == 29)
+                    richTextBox1.Text += "\n";
+                else
+                    richTextBox1.Text += " ";
+
+            }
+            richTextBox1.Text += "\n";
+
+
+            string filename2 = Application.StartupPath + "\\lion-mouse2.bin";
+            if (File.Exists(filename2) == true)
+            {
+                File.Delete(filename2);
+            }
+            
+            //string pic = "lion-mouse";
+            //byte[] bytes = Convert.FromBase64String(pic);//聲明一個byte[]用來存放Base64解碼轉換過來的數據流
+
+            //創建文件流並保存
+            FileStream outfile = new System.IO.FileStream(filename2, System.IO.FileMode.CreateNew);
+            outfile.Write(binaryData, 0, (int)(binaryData.Length / 2));
+            richTextBox1.Text += "存檔成一半, 檔案: " + filename2 + "\n";
+
+
 
         }
 

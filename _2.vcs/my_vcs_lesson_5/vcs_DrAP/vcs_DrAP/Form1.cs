@@ -477,6 +477,7 @@ namespace vcs_DrAP
                         FolederName = subdirectory;
                         ProcessDirectory(subdirectory);
                     }
+
                     step = 0;
                 }
                 catch (UnauthorizedAccessException ex)
@@ -1759,7 +1760,8 @@ namespace vcs_DrAP
             old_search_path.Clear();
         }
 
-        private void bt_test_Click(object sender, EventArgs e)
+        int total_number_files = 0;
+        private void bt_test1_Click(object sender, EventArgs e)
         {
             /*
             //richTextBox2.Text += "flag_function = " + flag_function.ToString() + "\n";
@@ -1769,13 +1771,223 @@ namespace vcs_DrAP
             Properties.Settings.Default.Save();
             */
 
-            richTextBox1.Text += "讀出一資料夾內所有檔案 -r\n";
-            string foldername = @"C:\______test_files\";
-            get_all_files(foldername);
+            string foldername = @"C:\______test_files\_case1\";
+            richTextBox1.Text += "讀出一資料夾內所有檔案 -r, 資料夾\t" + foldername + "\n";
+
+            //get_all_files(foldername);
+
+            //轉出
+            richTextBox2.Text += "開始計時\n";
+            this.Text = "DrAP";
+            // Create stopwatch
+            Stopwatch stopwatch = new Stopwatch();
+            // Begin timing
+            stopwatch.Start();
+
+            flag_search_mode = 0;
+            flag_search_done = 0;
+            flag_search_vcs_pattern = 0;
+
+            fileinfos.Clear();
+            total_size = 0;
+            total_files = 0;
+
+            path = foldername;
+            richTextBox2.Text += "\n搜尋路徑" + path + "\n";
+            FolederName = path;
+            ProcessDirectory(path);
+            richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+            show_file_info1();
+
+            flag_search_done = 1;
+
+            // Stop timing
+            stopwatch.Stop();
+            // Write result
+            richTextBox2.Text += "停止計時\t";
+            richTextBox2.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+            this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
         }
 
+        // Process all files in the directory passed in, recurse on any directories 
+        // that are found, and process the files they contain.
+        public void ProcessDirectory4(string targetDirectory)
+        {
+            try
+            {
+                //richTextBox1.Text += targetDirectory + "\n\n";
+                //DirectoryInfo di = new DirectoryInfo(targetDirectory);
+                //richTextBox1.Text += di.Name + "\n\n";
+
+                // Process the list of files found in the directory.
+                try
+                {
+                    string[] fileEntries = Directory.GetFiles(targetDirectory);
+                    Array.Sort(fileEntries);
+                    folder_size = 0;
+                    folder_files = 0;
+                    foreach (string fileName in fileEntries)
+                    {
+                        ProcessFile4(fileName, step);
+                    }
+                    //richTextBox1.Text += "folder_name = " + targetDirectory + "\n";
+                    //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
+                    //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
+                    if (folder_files == 0)
+                    {
+                        //richTextBox1.Text += "空資料夾 folder_name = " + targetDirectory + "\n";
+                    }
+
+                    // Recurse into subdirectories of this directory.
+                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                    Array.Sort(subdirectoryEntries);
+                    foreach (string subdirectory in subdirectoryEntries)
+                    {
+                        DirectoryInfo di = new DirectoryInfo(subdirectory);
+                        if (cb_file_l.Checked == false)
+                        {
+                            richTextBox1.Text += "\n";
+                            //for (int i = 0; i < step * 2; i++)
+                            //richTextBox1.Text += " ";
+                            richTextBox1.Text += di.Name + "\n";
+                        }
+                        step++;
+                        FolederName = subdirectory;
+                        ProcessDirectory4(subdirectory);
+                    }
+                    step = 0;
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    richTextBox1.Text += ex.Message + "\n";
+                    //MessageBox.Show(ex.Message);
+                    /*
+                    FileAttributes attr = (new FileInfo(filePath)).Attributes;
+                    Console.Write("UnAuthorizedAccessException: Unable to access file. ");
+                    if ((attr & FileAttributes.ReadOnly) > 0)
+                        Console.Write("The file is read-only.");
+                    */
+                }
+            }
+            catch (IOException e)
+            {
+                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+                /*
+                Console.WriteLine(
+                    "{0}: The write operation could not " +
+                    "be performed because the specified " +
+                    "part of the file is locked.",
+                    e.GetType().Name);
+                */
+            }
+        }
+
+        // Insert logic for processing found files here.
+        public void ProcessFile4(string path, int step)
+        {
+            //richTextBox1.Text += path + "\n";
+
+            FileInfo fi;
+
+            try
+            {   //可能會產生錯誤的程式區段
+                fi = new FileInfo(path);
+            }
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                richTextBox1.Text += "錯誤訊息1 : " + ex.Message + "\n";
+                return;
+            }
+            finally
+            {
+                //一定會被執行的程式區段
+            }
+
+            //richTextBox2.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
+
+            total_size += fi.Length;
+            total_files++;
+            folder_size += fi.Length;
+            folder_files++;
+
+            //richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
+            if (((cb_file_l.Checked == true) && (fi.Length > min_size_mb * 1024 * 1024)) || (cb_file_l.Checked == false))
+            {
+                if (flag_search_mode == 1)
+                {
+                    bool res;
+                    res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
+                    if (res == false)
+                        return;
+                    else
+                    {
+                        richTextBox1.Text += "get file : " + fi.FullName + "\n";
+                    }
+                }
+
+                for (int i = 0; i < step * 2; i++)
+                    richTextBox1.Text += " ";
+                //richTextBox1.Text += fi.Name + " len = " + fi.Length.ToString() + "\n";
+                //richTextBox1.Text += filename + "\n";
+                //richTextBox1.Text += fi.Name + "\n";
+                //richTextBox1.Text += fi.Name + " \t\t " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
+                MediaFile f = new MediaFile(fi.FullName);
+
+                //richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
+                //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
+                //richTextBox1.Text += "  Extension: " + f.Extension + "\n";
+                if ((f.InfoAvailable == true) && (f.Video.Count > 0))
+                {
+                    int w = f.Video[0].Width;
+                    int h = f.Video[0].Height;
+                    //richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                    //richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                    if (cb_generate_text.Checked == true)
+                    {
+                        richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                            fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                    }
+                }
+                else
+                {
+                    if (cb_generate_text.Checked == true)
+                    {
+                        richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                    }
+                }
+
+                //richTextBox1.Text += fi.Directory + "\n";
+                //richTextBox1.Text += fi.DirectoryName + "\n";
+
+                /*
+                ListViewItem i1 = new ListViewItem(fi.FullName);
+
+                i1.UseItemStyleForSubItems = false;
+
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+
+                //sub_i1a.Text = fi.Length.ToString();
+                sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length));
+                i1.SubItems.Add(sub_i1a);
+                sub_i1a.ForeColor = System.Drawing.Color.Blue;
+
+                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+                listView1.Items.Add(i1);
+                //設置ListView最後一行可見
+                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+                */
+
+                //或許某些時候不需要
+                fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+            }
+        }
+        
         void get_all_files(string foldername)
         {
+            total_number_files = 0;
             DirectoryInfo temp3 = new DirectoryInfo(foldername);
 
             DirectoryInfo[] idr = temp3.GetDirectories();//獲取當前目錄下的所有子目錄.
@@ -1783,17 +1995,32 @@ namespace vcs_DrAP
             {
                 richTextBox1.Text += "取得資料夾 : " + dir.FullName + "\n";
 
-                //Console.WriteLine(dir.FullName);
+
+                FileInfo[] files1 = dir.GetFiles();
+
+                foreach (FileInfo file in files1)
+                {
+                    richTextBox1.Text += "取得檔案 : " + file.FullName + "\n";
+                    total_number_files++;
+
+                    //Console.WriteLine(file.FullName);
+                }
+
+
+
             }
 
-            FileInfo[] files = temp3.GetFiles();
+            richTextBox1.Text += "目錄 : " + foldername + " 下\n";
+            FileInfo[] files2 = temp3.GetFiles();
 
-            foreach (FileInfo file in files)
+            foreach (FileInfo file in files2)
             {
                 richTextBox1.Text += "取得檔案 : " + file.FullName + "\n";
+                total_number_files++;
 
                 //Console.WriteLine(file.FullName);
             }
+            richTextBox1.Text += "共取得檔案 " + total_number_files.ToString() + " 個\n";
         }
 
         private void textBox3_KeyDown(object sender, KeyEventArgs e)
@@ -2727,6 +2954,28 @@ namespace vcs_DrAP
 
         private void bt_help_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void bt_test2_Click(object sender, EventArgs e)
+        {
+            if (fileinfos.Count == 0)
+                richTextBox2.Text += "找不到資料a\n";
+            else
+                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+
+            //排序 由小到大
+            //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+
+            //排序 由大到小  在return的地方多個負號
+            fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+
+
+            for (int i = 0; i < fileinfos.Count; i++)
+            {
+                richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
+
+            }
 
         }
 

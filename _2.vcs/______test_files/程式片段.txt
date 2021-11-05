@@ -1,34 +1,4 @@
 
-//c#實現md5加密
-
-
-
-1. 首先創建MD5的哈希算法。
-
-((HashAlgorithm)System.Security.Cryptogrophy.CryptoConfig.CreateFromName("MD5")).ComputeHash(System.Text.UTF8.GetBytes(input))
-
-2.計算哈希值
-
-使用方法:ComputeHash(byte[] value);
-
-3.轉化成字符串.
-
-1protected virtual string HashMD5(string input)
-2　　　　{
-3　　　　　　byte[] result = ((HashAlgorithm)System.Security.Cryptography.CryptoConfig.CreateFromName("MD5")).ComputeHash(System.Text.Encoding.UTF8.GetBytes(input));
-4　　　　　　StringBuilder output = new StringBuilder(16);
-5
-6　　　　　　for (int i = 0; i < result.Length; i++)
-7　　　　　　{
-8　　　　　　　　// convert from hexa-decimal to character
-9　　　　　　　　output.Append((result[i]).ToString( "x2", System.Globalization.CultureInfo.InvariantCulture));
-10　　　　　　}
-11　　　　　　return output.ToString();
-12　　　　}
-13
-
-
-
 
 C#如何取硬件標志
 
@@ -82,12 +52,197 @@ C#如何取硬件標志
   }//end 
 
 
+用C#和WMI獲取邏輯驅動器詳細信息
+	
+	SelectQuery selectQuery = new SelectQuery("win32_logicaldisk");
+	
+	　　或者使用wql查詢來創建查詢類的實例，代碼如下：
+	
+	SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
+	
+	　　或者只獲取類的部分屬性，代碼如下：
+	
+	SelectQuery selectQuery = new SelectQuery("select Name,DriveType from win32_logicaldisk");
+	
+	
+	SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
+	
+	ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
+	　　int i=0;
+	foreach (ManagementObject disk in searcher.Get()) {
+	　//獲取驅動器盤符
+	　listView1.Items.Add(disk["Name"].ToString());
+	}
+
+
+
+
+
+
+
+
+C# 獲得主板參數程序代碼
+public static void Mainboard(out string[] 制造商, out string[] 型號)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+        制造商 = new string[searcher.Get().Count];
+        型號 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                型號[i] = share.GetPropertyValue("Product").ToString();
+                i ;
+        }
+} 
+
+
+C# 獲得主板序列號程序代碼
+
+C# 獲得主板序列號程序代碼如下：
+public static void MainboardSerialNumber(out string[] 序列號)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
+        序列號 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                序列號[i] = share.GetPropertyValue("SerialNumber").ToString();
+                i ;
+        }
+}
+
+
+C# 獲得網卡參數程序代碼
+
+C# 獲得網卡參數程序代碼如下：
+public static void NetworkAdapter(out string[] 制造商, out string[] MAC地址)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+        制造商 = new string[searcher.Get().Count];
+        MAC地址 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                try
+                {
+                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                        MAC地址[i] = share.GetPropertyValue("MACAddress").ToString();
+                }
+                        catch (System.Exception er)
+                {
+                }
+                i ;
+        }
+} 
+
+
+
+C# 獲得硬盤參數程序代碼
+public static void HardDisk(out string[] 制造商, out string[] 型號, out string[] 序列號)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+        制造商 = new string[searcher.Get().Count];
+        型號 = new string[searcher.Get().Count];
+        序列號 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                try
+                        {
+                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                        型號[i] = share.GetPropertyValue("Model").ToString();
+                        序列號[i] = share.GetPropertyValue("Signature").ToString();
+                }
+                catch (System.Exception er)
+                {
+                }
+                i ;
+        }
+} 
+
+
+
+
+
+C#讀取U盤序列號
+
+	
+	private List<string> _serialNumber = new List<string>();
+	
+	/// <summary>
+	/// 調用這個函數將本機所有U盤序列號存儲到_serialNumber中
+	/// </summary>
+	private void matchDriveLetterWithSerial()
+	{
+	    string[] diskArray;
+	    string driveNumber;
+	    var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDiskToPartition");
+	    foreach (ManagementObject dm in searcher.Get())
+	    {
+	        getValueInQuotes(dm["Dependent"].ToString());
+	        diskArray = getValueInQuotes(dm["Antecedent"].ToString()).Split(,);
+	        driveNumber = diskArray[0].Remove(0, 6).Trim();
+	        var disks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+	        foreach (ManagementObject disk in disks.Get())
+	        {
+	            if (disk["Name"].ToString() == ("\\.\PHYSICALDRIVE" + driveNumber) & disk["InterfaceType"].ToString() == "USB")
+	            {
+	                _serialNumber.Add(parseSerialFromDeviceID(disk["PNPDeviceID"].ToString()));
+	            }
+	        }
+	    }
+	}
+	
+	private static string parseSerialFromDeviceID(string deviceId)
+	{
+	    var splitDeviceId = deviceId.Split(\);
+	    var arrayLen = splitDeviceId.Length - 1;
+	    var serialArray = splitDeviceId[arrayLen].Split(&);
+	    var serial = serialArray[0];
+	    return serial;
+	}
+	
 
 
 
 
 用WMI查serial port可否知道是ims的comport，
 若可以知道，直接連線看看～～～
+
+
+
+
+
+//c#實現md5加密
+
+
+
+1. 首先創建MD5的哈希算法。
+
+((HashAlgorithm)System.Security.Cryptogrophy.CryptoConfig.CreateFromName("MD5")).ComputeHash(System.Text.UTF8.GetBytes(input))
+
+2.計算哈希值
+
+使用方法:ComputeHash(byte[] value);
+
+3.轉化成字符串.
+
+1protected virtual string HashMD5(string input)
+2　　　　{
+3　　　　　　byte[] result = ((HashAlgorithm)System.Security.Cryptography.CryptoConfig.CreateFromName("MD5")).ComputeHash(System.Text.Encoding.UTF8.GetBytes(input));
+4　　　　　　StringBuilder output = new StringBuilder(16);
+5
+6　　　　　　for (int i = 0; i < result.Length; i++)
+7　　　　　　{
+8　　　　　　　　// convert from hexa-decimal to character
+9　　　　　　　　output.Append((result[i]).ToString( "x2", System.Globalization.CultureInfo.InvariantCulture));
+10　　　　　　}
+11　　　　　　return output.ToString();
+12　　　　}
+13
+
+
 
 
 使用C# 讀取XML 到DataGridView
@@ -559,32 +714,6 @@ public static string Decrypt(string targetValue, string key)
          
          
          
-用C#和WMI獲取邏輯驅動器詳細信息
-
-
-
-SelectQuery selectQuery = new SelectQuery("win32_logicaldisk");
-
-　　或者使用wql查詢來創建查詢類的實例，代碼如下：
-
-SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-
-　　或者只獲取類的部分屬性，代碼如下：
-
-SelectQuery selectQuery = new SelectQuery("select Name,DriveType from win32_logicaldisk");
-
-
-SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-
-ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
-　　int i=0;
-foreach (ManagementObject disk in searcher.Get()) {
-　//獲取驅動器盤符
-　listView1.Items.Add(disk["Name"].ToString());
-}
-
-
-
 
          /// <summary>
         /// 實現bitmap到ico的轉換
@@ -611,18 +740,6 @@ foreach (ManagementObject disk in searcher.Get()) {
  
  
  
-
-GDI+：Graphics Device Interface Plus也就是圖形設備接口,提供了各種豐富的圖形圖像處理功能;在C#.Net中，使用GDI+處理二維（2D）的圖形和圖像，使用DirectX處理三維（3D）的圖形圖像,圖形圖像處理用到的主要命名空間是System . Drawing：提供了對GDI+基本圖形功能的訪問，主要有Graphics類、Bitmap類、從Brush類繼承的類、Font類、Icon類、Image類、Pen類、Color類等.
-
-
-LINQ（Language Integrated Query）是Visual Studio 2008中的領軍人物。借助於LINQ技術，我們可以使用一種類似SQL的語法來查詢任何形式的數據。
-目前為止LINQ所支持的數據源有SQL Server、XML以及內存中的數據集合。
-
-Xml全稱可擴展標記語言（extensible marked language）,這套語言系統由於在數據處理，跨平台等方面的獨特優勢，在近幾年風靡全球。
-Xml語言系統把任何數據都作為“鍵”和“值”來進行處理，這一點類似於很多數據庫管理系統（DBMS），而且它與具體的機器指令無關，其存儲方式是純文本文件，因此具有出色的跨平台性。
-
-XML 是被設計用來傳輸和存儲數據的,
-
             Process[] processes = System.Diagnostics.Process.GetProcessesByName(Application.CompanyName);
             if (processes.Length > 1)
             {
@@ -642,10 +759,6 @@ XML 是被設計用來傳輸和存儲數據的,
                 string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
                 string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
  
-            
-            
-            
-            
             
         /// 日志信息
         public static void WriteLog(string ex)
@@ -1923,91 +2036,6 @@ private void Bind()
 
 
 
-
-
-C# 獲得主板參數程序代碼
-C# 獲得主板參數程序代碼如下：
-public static void Mainboard(out string[] 制造商, out string[] 型號)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-        制造商 = new string[searcher.Get().Count];
-        型號 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
-                型號[i] = share.GetPropertyValue("Product").ToString();
-                i ;
-        }
-} 
-
-
-C# 獲得主板序列號程序代碼
-
-C# 獲得主板序列號程序代碼如下：
-public static void MainboardSerialNumber(out string[] 序列號)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
-        序列號 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                序列號[i] = share.GetPropertyValue("SerialNumber").ToString();
-                i ;
-        }
-}
-
-
-C# 獲得網卡參數程序代碼
-
-C# 獲得網卡參數程序代碼如下：
-public static void NetworkAdapter(out string[] 制造商, out string[] MAC地址)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
-        制造商 = new string[searcher.Get().Count];
-        MAC地址 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                try
-                {
-                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
-                        MAC地址[i] = share.GetPropertyValue("MACAddress").ToString();
-                }
-                        catch (System.Exception er)
-                {
-                }
-                i ;
-        }
-} 
-
-
-
-C# 獲得硬盤參數程序代碼
-C# 獲得硬盤參數程序代碼如下：
-public static void HardDisk(out string[] 制造商, out string[] 型號, out string[] 序列號)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-        制造商 = new string[searcher.Get().Count];
-        型號 = new string[searcher.Get().Count];
-        序列號 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                try
-                        {
-                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
-                        型號[i] = share.GetPropertyValue("Model").ToString();
-                        序列號[i] = share.GetPropertyValue("Signature").ToString();
-                }
-                catch (System.Exception er)
-                {
-                }
-                i ;
-        }
-} 
-
-
             string Year = DateTime.Now.Year.ToString();
             string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
             string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
@@ -2073,48 +2101,6 @@ c# Process類使用小例
                 {
                     Console.WriteLine(ex.Message);
                 }
-
-
-
-
-
-C#讀取U盤序列號
-
-
-private List<string> _serialNumber = new List<string>();
-
-/// <summary>
-/// 調用這個函數將本機所有U盤序列號存儲到_serialNumber中
-/// </summary>
-private void matchDriveLetterWithSerial()
-{
-    string[] diskArray;
-    string driveNumber;
-    var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDiskToPartition");
-    foreach (ManagementObject dm in searcher.Get())
-    {
-        getValueInQuotes(dm["Dependent"].ToString());
-        diskArray = getValueInQuotes(dm["Antecedent"].ToString()).Split(,);
-        driveNumber = diskArray[0].Remove(0, 6).Trim();
-        var disks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-        foreach (ManagementObject disk in disks.Get())
-        {
-            if (disk["Name"].ToString() == ("\\.\PHYSICALDRIVE" + driveNumber) & disk["InterfaceType"].ToString() == "USB")
-            {
-                _serialNumber.Add(parseSerialFromDeviceID(disk["PNPDeviceID"].ToString()));
-            }
-        }
-    }
-}
-
-private static string parseSerialFromDeviceID(string deviceId)
-{
-    var splitDeviceId = deviceId.Split(\);
-    var arrayLen = splitDeviceId.Length - 1;
-    var serialArray = splitDeviceId[arrayLen].Split(&);
-    var serial = serialArray[0];
-    return serial;
-}
 
 
 
