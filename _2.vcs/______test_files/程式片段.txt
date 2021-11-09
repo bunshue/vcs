@@ -1,5 +1,98 @@
 
 
+//            return String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
+
+
+
+            string md5 = Safety.MD5(key);
+            
+
+
+
+public class Safety
+{
+       public static string MD5(string str)
+       {
+              string strResult = "";
+              MD5 md5 = System.Security.Cryptography.MD5.Create();
+              byte[] bData = md5.ComputeHash(Encoding.Unicode.GetBytes(str));
+              for (int i = 0; i < bData.Length; i++)
+              {
+                     strResult = strResult + bData[i].ToString("X");
+              }
+              return strResult;
+       }
+}
+
+
+
+//C#最簡單的文本加密，
+
+private char[] TextEncrypt(string content, string secretKey)
+{
+    char[] data = content.ToCharArray();
+    char[] key = secretKey.ToCharArray();
+
+    for (int i = 0; i < data.Length; i++)
+    {
+        data[i] ^= key[i % key.Length];
+    }
+
+    return data;
+}
+
+private string TextDecrypt(char[] data, string secretKey)
+{
+    char[] key = secretKey.ToCharArray();
+
+    for (int i = 0; i < data.Length; i++)
+    {
+        data[i] ^= key[i % key.Length];
+    }
+
+    return new string(data);
+}
+
+/*
+上面是最簡單的加密和解密文本的函數，不需要任何庫文件支持，只是把原文和密鑰進行字節的異或，想要把密文翻譯回來，很簡單，拿著密文和密鑰重新異或一次就可以。
+
+如果密鑰正確的話，就會回來正確的原始文本，如果密鑰錯誤的話，翻譯回來的就會是一堆的亂碼。
+
+所以也起到了最簡單的加密功能。
+*/
+
+
+
+//C#獲取機器碼
+
+1 /// <summary>   
+ 2     /// 機器碼   
+ 3     /// </summary>   
+ 4    public class MachineCode   
+ 5     {   
+ 6         ///   <summary>    
+ 7         ///   獲取cpu序列號        
+ 8         ///   </summary>    
+ 9         ///   <returns> string </returns>    
+10         public string GetCpuInfo()   
+11         {   
+12             string cpuInfo = " ";   
+13             using (ManagementClass cimobject = new ManagementClass("Win32_Processor"))   
+14             {   
+15                 ManagementObjectCollection moc = cimobject.GetInstances();   
+16   
+17                 foreach (ManagementObject mo in moc)   
+18                 {   
+19                     cpuInfo = mo.Properties["ProcessorId"].Value.ToString();   
+20                     mo.Dispose();   
+21                 }   
+22             }   
+23             return cpuInfo.ToString();   
+24         }   
+25   
+
+
+
 C#如何取硬件標志
 
   //取機器名 

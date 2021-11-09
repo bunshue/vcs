@@ -279,11 +279,36 @@ namespace test7
 
         private void button10_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "字串 轉 拜列\n";
 
+            string str = "this is a lion-mouse.";
+
+            richTextBox1.Text += "字串 : " + str + "\n";
+
+            byte[] byte_array = Encoding.ASCII.GetBytes(str);
+
+            int len = byte_array.Length;
+            richTextBox1.Text += "拜列長度 : " + len.ToString() + "\n";
+            richTextBox1.Text += "拜列內容 :\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + (char)byte_array[i] + "\t" + byte_array[i].ToString("X2") + "\n";
+
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            string str = "this-is-a-lion-mouse";
+            string[] word = str.Split('-');
+            richTextBox1.Text += "原字串: " + str + "\n";
+            richTextBox1.Text += "分割後, len = " + word.Length.ToString() + ", 內容:\n";
+            foreach (string s in word)
+            {
+                richTextBox1.Text += s + "\n";
+            }
+
 
         }
 

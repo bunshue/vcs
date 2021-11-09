@@ -70,10 +70,13 @@
             this.bt_plc_2 = new System.Windows.Forms.Button();
             this.lb_main_mesg1a = new System.Windows.Forms.Label();
             this.groupBox_pc = new System.Windows.Forms.GroupBox();
+            this.lb_sn_pc3 = new System.Windows.Forms.Label();
             this.lb_main_mesg2b = new System.Windows.Forms.Label();
             this.bt_pc_8 = new System.Windows.Forms.Button();
+            this.lb_sn_pc2 = new System.Windows.Forms.Label();
             this.bt_pc_7 = new System.Windows.Forms.Button();
             this.bt_pc_6 = new System.Windows.Forms.Button();
+            this.lb_sn_pc1 = new System.Windows.Forms.Label();
             this.bt_pc_0 = new System.Windows.Forms.Button();
             this.bt_pc_5 = new System.Windows.Forms.Button();
             this.lb_main_mesg2a = new System.Windows.Forms.Label();
@@ -92,9 +95,7 @@
             this.bt_ims_2 = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.lb_main_mesg0 = new System.Windows.Forms.Label();
-            this.lb_sn_pc3 = new System.Windows.Forms.Label();
-            this.lb_sn_pc2 = new System.Windows.Forms.Label();
-            this.lb_sn_pc1 = new System.Windows.Forms.Label();
+            this.bt_pc_9 = new System.Windows.Forms.Button();
             this.groupBox_comport1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport1)).BeginInit();
             this.groupBox_comport2.SuspendLayout();
@@ -424,11 +425,11 @@
             // lb_main_mesg1b
             // 
             this.lb_main_mesg1b.AutoSize = true;
-            this.lb_main_mesg1b.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg1b.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg1b.ForeColor = System.Drawing.Color.Red;
             this.lb_main_mesg1b.Location = new System.Drawing.Point(141, 37);
             this.lb_main_mesg1b.Name = "lb_main_mesg1b";
-            this.lb_main_mesg1b.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg1b.Size = new System.Drawing.Size(72, 24);
             this.lb_main_mesg1b.TabIndex = 142;
             this.lb_main_mesg1b.Text = "mesg1";
             // 
@@ -505,16 +506,17 @@
             // lb_main_mesg1a
             // 
             this.lb_main_mesg1a.AutoSize = true;
-            this.lb_main_mesg1a.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg1a.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg1a.ForeColor = System.Drawing.Color.Red;
             this.lb_main_mesg1a.Location = new System.Drawing.Point(10, 37);
             this.lb_main_mesg1a.Name = "lb_main_mesg1a";
-            this.lb_main_mesg1a.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg1a.Size = new System.Drawing.Size(72, 24);
             this.lb_main_mesg1a.TabIndex = 134;
             this.lb_main_mesg1a.Text = "mesg1";
             // 
             // groupBox_pc
             // 
+            this.groupBox_pc.Controls.Add(this.bt_pc_9);
             this.groupBox_pc.Controls.Add(this.lb_sn_pc3);
             this.groupBox_pc.Controls.Add(this.lb_main_mesg2b);
             this.groupBox_pc.Controls.Add(this.bt_pc_8);
@@ -536,14 +538,24 @@
             this.groupBox_pc.TabStop = false;
             this.groupBox_pc.Text = "PC控制台";
             // 
+            // lb_sn_pc3
+            // 
+            this.lb_sn_pc3.AutoSize = true;
+            this.lb_sn_pc3.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn_pc3.Location = new System.Drawing.Point(117, 281);
+            this.lb_sn_pc3.Name = "lb_sn_pc3";
+            this.lb_sn_pc3.Size = new System.Drawing.Size(60, 22);
+            this.lb_sn_pc3.TabIndex = 193;
+            this.lb_sn_pc3.Text = "S/N :";
+            // 
             // lb_main_mesg2b
             // 
             this.lb_main_mesg2b.AutoSize = true;
-            this.lb_main_mesg2b.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg2b.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg2b.ForeColor = System.Drawing.Color.Red;
             this.lb_main_mesg2b.Location = new System.Drawing.Point(131, 35);
             this.lb_main_mesg2b.Name = "lb_main_mesg2b";
-            this.lb_main_mesg2b.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg2b.Size = new System.Drawing.Size(72, 24);
             this.lb_main_mesg2b.TabIndex = 148;
             this.lb_main_mesg2b.Text = "mesg1";
             // 
@@ -553,9 +565,19 @@
             this.bt_pc_8.Name = "bt_pc_8";
             this.bt_pc_8.Size = new System.Drawing.Size(90, 40);
             this.bt_pc_8.TabIndex = 147;
-            this.bt_pc_8.Text = "發送命令給IMS";
+            this.bt_pc_8.Text = "發送命令給IMS START";
             this.bt_pc_8.UseVisualStyleBackColor = true;
             this.bt_pc_8.Click += new System.EventHandler(this.bt_pc_8_Click);
+            // 
+            // lb_sn_pc2
+            // 
+            this.lb_sn_pc2.AutoSize = true;
+            this.lb_sn_pc2.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn_pc2.Location = new System.Drawing.Point(117, 244);
+            this.lb_sn_pc2.Name = "lb_sn_pc2";
+            this.lb_sn_pc2.Size = new System.Drawing.Size(60, 22);
+            this.lb_sn_pc2.TabIndex = 192;
+            this.lb_sn_pc2.Text = "S/N :";
             // 
             // bt_pc_7
             // 
@@ -574,6 +596,16 @@
             this.bt_pc_6.TabIndex = 145;
             this.bt_pc_6.UseVisualStyleBackColor = true;
             this.bt_pc_6.Click += new System.EventHandler(this.bt_pc_6_Click);
+            // 
+            // lb_sn_pc1
+            // 
+            this.lb_sn_pc1.AutoSize = true;
+            this.lb_sn_pc1.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn_pc1.Location = new System.Drawing.Point(117, 206);
+            this.lb_sn_pc1.Name = "lb_sn_pc1";
+            this.lb_sn_pc1.Size = new System.Drawing.Size(60, 22);
+            this.lb_sn_pc1.TabIndex = 191;
+            this.lb_sn_pc1.Text = "S/N :";
             // 
             // bt_pc_0
             // 
@@ -597,11 +629,11 @@
             // lb_main_mesg2a
             // 
             this.lb_main_mesg2a.AutoSize = true;
-            this.lb_main_mesg2a.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg2a.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg2a.ForeColor = System.Drawing.Color.Red;
             this.lb_main_mesg2a.Location = new System.Drawing.Point(23, 35);
             this.lb_main_mesg2a.Name = "lb_main_mesg2a";
-            this.lb_main_mesg2a.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg2a.Size = new System.Drawing.Size(72, 24);
             this.lb_main_mesg2a.TabIndex = 135;
             this.lb_main_mesg2a.Text = "mesg1";
             // 
@@ -663,11 +695,11 @@
             // lb_main_mesg3b
             // 
             this.lb_main_mesg3b.AutoSize = true;
-            this.lb_main_mesg3b.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg3b.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg3b.ForeColor = System.Drawing.Color.Red;
             this.lb_main_mesg3b.Location = new System.Drawing.Point(126, 35);
             this.lb_main_mesg3b.Name = "lb_main_mesg3b";
-            this.lb_main_mesg3b.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg3b.Size = new System.Drawing.Size(72, 24);
             this.lb_main_mesg3b.TabIndex = 150;
             this.lb_main_mesg3b.Text = "mesg1";
             // 
@@ -693,11 +725,11 @@
             // lb_main_mesg3a
             // 
             this.lb_main_mesg3a.AutoSize = true;
-            this.lb_main_mesg3a.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg3a.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg3a.ForeColor = System.Drawing.Color.Red;
             this.lb_main_mesg3a.Location = new System.Drawing.Point(25, 35);
             this.lb_main_mesg3a.Name = "lb_main_mesg3a";
-            this.lb_main_mesg3a.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg3a.Size = new System.Drawing.Size(72, 24);
             this.lb_main_mesg3a.TabIndex = 136;
             this.lb_main_mesg3a.Text = "mesg1";
             // 
@@ -752,35 +784,15 @@
             this.lb_main_mesg0.TabIndex = 135;
             this.lb_main_mesg0.Text = "mesg1";
             // 
-            // lb_sn_pc3
+            // bt_pc_9
             // 
-            this.lb_sn_pc3.AutoSize = true;
-            this.lb_sn_pc3.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_sn_pc3.Location = new System.Drawing.Point(117, 281);
-            this.lb_sn_pc3.Name = "lb_sn_pc3";
-            this.lb_sn_pc3.Size = new System.Drawing.Size(60, 22);
-            this.lb_sn_pc3.TabIndex = 193;
-            this.lb_sn_pc3.Text = "S/N :";
-            // 
-            // lb_sn_pc2
-            // 
-            this.lb_sn_pc2.AutoSize = true;
-            this.lb_sn_pc2.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_sn_pc2.Location = new System.Drawing.Point(117, 244);
-            this.lb_sn_pc2.Name = "lb_sn_pc2";
-            this.lb_sn_pc2.Size = new System.Drawing.Size(60, 22);
-            this.lb_sn_pc2.TabIndex = 192;
-            this.lb_sn_pc2.Text = "S/N :";
-            // 
-            // lb_sn_pc1
-            // 
-            this.lb_sn_pc1.AutoSize = true;
-            this.lb_sn_pc1.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_sn_pc1.Location = new System.Drawing.Point(117, 206);
-            this.lb_sn_pc1.Name = "lb_sn_pc1";
-            this.lb_sn_pc1.Size = new System.Drawing.Size(60, 22);
-            this.lb_sn_pc1.TabIndex = 191;
-            this.lb_sn_pc1.Text = "S/N :";
+            this.bt_pc_9.Location = new System.Drawing.Point(107, 122);
+            this.bt_pc_9.Name = "bt_pc_9";
+            this.bt_pc_9.Size = new System.Drawing.Size(90, 40);
+            this.bt_pc_9.TabIndex = 194;
+            this.bt_pc_9.Text = "發送命令給IMS LED";
+            this.bt_pc_9.UseVisualStyleBackColor = true;
+            this.bt_pc_9.Click += new System.EventHandler(this.bt_pc_9_Click);
             // 
             // Form1
             // 
@@ -881,6 +893,7 @@
         private System.Windows.Forms.Label lb_sn_pc3;
         private System.Windows.Forms.Label lb_sn_pc2;
         private System.Windows.Forms.Label lb_sn_pc1;
+        private System.Windows.Forms.Button bt_pc_9;
     }
 }
 

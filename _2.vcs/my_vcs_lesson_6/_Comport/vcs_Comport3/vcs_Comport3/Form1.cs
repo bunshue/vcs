@@ -23,8 +23,9 @@ namespace vcs_Comport3
         bool flag_comport_pc_plc_ok = false;
         bool flag_comport_pc_ims_ok = false;
 
+        private const int UART_BUF_LENGTH1 = 7;
+        private const int UART_BUF_LENGTH2 = 5;
 
-        private const int UART_BUF_LENGTH = 5;
         private const int CAMERA_OK = 0;	//dongle + camera
         private const int CAMERA_NONE = 1;	//dongle only
         private const int DONGLE_NONE = 2;	//no dongle
@@ -63,8 +64,8 @@ namespace vcs_Comport3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.BackColor = Color.Yellow;
             show_item_location();
+            show_backcolor();
             Comport_Scan();
         }
 
@@ -154,6 +155,7 @@ namespace vcs_Comport3
             bt_pc_6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             bt_pc_7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             bt_pc_8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_pc_9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
             bt_ims_0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_ims_1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -170,6 +172,26 @@ namespace vcs_Comport3
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        void show_backcolor()
+        {
+            if ((flag_comport_pc_plc_ok == false) && (flag_comport_pc_ims_ok == false))
+            {
+                this.BackColor = Color.Pink;
+            }
+            else if (flag_comport_pc_plc_ok == false)
+            {
+                this.BackColor = Color.Yellow;
+            }
+            else if (flag_comport_pc_ims_ok == false)
+            {
+                this.BackColor = Color.LightGoldenrodYellow;
+            }
+            else
+            {
+                this.BackColor = System.Drawing.SystemColors.ControlLight;
+            }
         }
 
         private void DisplayText1(object sender, EventArgs e)
@@ -293,71 +315,77 @@ namespace vcs_Comport3
         private void SpyMonitorRX1()
         {
             input = "";
-            for (int i = 0; i < UART_BUF_LENGTH; i++)
+            for (int i = 0; i < UART_BUF_LENGTH1; i++)
                 input += (char)receive_buffer[i];
 
-            byte[] data = new byte[5];
+            byte[] data = new byte[7];
 
             data[0] = (byte)input[0];
             data[1] = (byte)input[1];
             data[2] = (byte)input[2];
             data[3] = (byte)input[3];
-            data[4] = CalcCheckSum(data, 4);
+            data[4] = (byte)input[4];
+            data[5] = (byte)input[5];
+            data[6] = CalcCheckSum(data, 6);
+
+            int cmd = input[1];
 
             richTextBox1.AppendText("[RX] : " + ((int)input[0]).ToString("X2") + " " + ((int)input[1]).ToString("X2") + " " + ((int)input[2]).ToString("X2") + " "
-                + ((int)input[3]).ToString("X2") + " " + ((int)input[4]).ToString("X2") + "  chk: " + ((int)data[4]).ToString("X2") + "\n");
+                + ((int)input[3]).ToString("X2") + " " + ((int)input[4]).ToString("X2") + " " + ((int)input[5]).ToString("X2") + " " + ((int)input[6]).ToString("X2") 
+                + "  chk: " + ((int)data[6]).ToString("X2") + "\n");
 
-            if (input[0] == 0xAA)
+            string mesg = "[RX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + " " + ((int)data[5]).ToString("X2") + " " + ((int)data[6]).ToString("X2");
+            show_main_message2a(mesg, S_FALSE, 30);
+
+            if (input[0] == 0xFF)
             {
-            }
-            else if (input[0] == 0xC1)
-            {
-                if ((input[1] == 0x00) && (input[2] == 0x00) && (input[3] == 0x00))
+                if (cmd == 0xC1)
                 {
-                    richTextBox1.Text += "PLC -> PC : 讀取相機序號\n";
-                    show_main_message1a("PLC -> PC : 讀取相機序號", S_FALSE, 30);
-                    show_main_message2a("[PC] 收到", S_FALSE, 30);
+                    //if ((input[1] == 0x00) && (input[2] == 0x00) && (input[3] == 0x00))
+                    {
+                        richTextBox1.Text += "PLC -> PC : 讀取相機序號\n";
+                        show_main_message1a("PLC -> PC : 讀取相機序號", S_FALSE, 30);
+                        //show_main_message2a("[PC] 收到", S_FALSE, 30);
+                    }
                 }
-            }
-            else if (input[0] == 0xC0)
-            {
-                if ((input[1] == 0x12) && (input[2] == 0x34) && (input[3] == 0x56))
+                else if (cmd == 0xC0)
                 {
-                    richTextBox1.Text += "PLC -> PC : 寫入相機序號\n";
-                    show_main_message1a("PLC -> PC : 寫入相機序號", S_FALSE, 30);
-                    show_main_message2a("[PC] 收到", S_FALSE, 30);
+                    //if ((input[1] == 0x12) && (input[2] == 0x34) && (input[3] == 0x56))
+                    {
+                        richTextBox1.Text += "PLC -> PC : 寫入相機序號\n";
+                        show_main_message1a("PLC -> PC : 寫入相機序號", S_FALSE, 30);
+                        //show_main_message2a("[PC] 收到", S_FALSE, 30);
+                    }
                 }
-            }
-            else if (input[0] == 0xFF)
-            {
-                if ((input[1] == 0xAA) && (input[2] == 0xBB) && (input[3] == 0xCC))
+                else if (cmd == 0x01)
                 {
                     richTextBox1.Text += "PLC -> PC : START\n";
-                    do_plc_command(5);
+                    pc_do_plc_command(cmd);
                 }
-                else if ((input[1] == 0xCC) && (input[2] == 0xBB) && (input[3] == 0xAA))
+                else if (cmd == 0x02)
                 {
                     richTextBox1.Text += "PLC -> PC : LED\n";
-                    do_plc_command(6);
+                    pc_do_plc_command(cmd);
                 }
-                else if ((input[1] == 0xAA) && (input[2] == 0xBB) && (input[3] == 0x10))
+                else if (cmd == 0x20)
                 {
                     richTextBox1.Text += "PLC -> PC : IMS影像存檔\n";
-                    do_plc_command(8);
+                    pc_do_plc_command(cmd);
                 }
-                else if ((input[1] == 0xAA) && (input[2] == 0xBB) && (input[3] == 0x55))
+                else if (cmd == 0x10)
                 {
                     richTextBox1.Text += "PLC -> PC : AWB START\n";
-                    do_plc_command(2);
+                    pc_do_plc_command(cmd);
                 }
-                else if ((input[1] == 0xAA) && (input[2] == 0xBB) && (input[3] == 0xAA))
+                else if (cmd == 0x11)
                 {
                     richTextBox1.Text += "PLC -> PC : AWB STOP\n";
+                    pc_do_plc_command(cmd);
                 }
-                else if ((input[1] == 0xAA) && (input[2] == 0xBB) && (input[3] == 0x00))
+                else if (cmd == 0x12)
                 {
                     richTextBox1.Text += "PLC -> PC : AWB Result\n";
-                    do_plc_command(3);
+                    pc_do_plc_command(cmd);
                 }
             }
         }
@@ -376,7 +404,7 @@ namespace vcs_Comport3
                 if (BytesToRead > 0)
                     richTextBox1.Text += "len = " + BytesToRead.ToString() + "\n";
 
-                if ((BytesToRead > 0) && (BytesToRead < 21) && (BytesToRead != UART_BUF_LENGTH) && (flag_need_to_merge_data == 0))
+                if ((BytesToRead > 0) && (BytesToRead < 21) && (BytesToRead != UART_BUF_LENGTH1) && (flag_need_to_merge_data == 0))
                 {
                     //serialPort1.Read(放置的位元陣列 , 從第幾個位置開始存放 , 共需存放多少位元)
                     serialPort1.Read(receive_buffer_tmp, 0, BytesToRead);
@@ -430,7 +458,7 @@ namespace vcs_Comport3
 
                     if (Comport_Mode == 0)  //iMS_Link mode
                     {
-                        if (BytesToRead == UART_BUF_LENGTH)
+                        if (BytesToRead == UART_BUF_LENGTH1)
                         {
                             SpyMonitorRX1();
                         }
@@ -584,10 +612,10 @@ namespace vcs_Comport3
                                 flag_wait_receive_data = 0;
                             }
                         }
-                        else if (BytesToRead == 27) // 5 + 10 + 12
+                        else if (BytesToRead == 29) // 7 + 10 + 12
                         {
                             int i;
-                            richTextBox1.Text += "\nBytesToRead = 27 Bytes, data\t";
+                            richTextBox1.Text += "\nBytesToRead = 29 Bytes, data\t";
                             for (i = 0; i < BytesToRead; i++)
                             {
                                 richTextBox1.Text += receive_buffer[i].ToString("X2") + " ";
@@ -784,7 +812,10 @@ namespace vcs_Comport3
             }
 
             serialPort1.Close();
-            this.BackColor = Color.Yellow;
+
+            flag_comport_pc_plc_ok = false;
+            show_backcolor();
+
             connect_comport1(comboBox_comport1.Text);
         }
 
@@ -805,7 +836,6 @@ namespace vcs_Comport3
             {
                 richTextBox1.Text += "xxx錯誤訊息c : " + ex.Message + "\n";
                 richTextBox1.Text += "無法連上 " + comport + ", 請重新連線";
-                this.BackColor = Color.Pink;
             }
 
             //serialPort1.Open(); //原本是這一行，改寫成以下。
@@ -825,13 +855,12 @@ namespace vcs_Comport3
                 serialPort1.DtrEnable = true;   //白話地說就是通知儀器說我(電腦)這邊已經準備好了
                 //MessageBox.Show("已經連上" + serialPort1.PortName);
 
-                this.BackColor = System.Drawing.SystemColors.ControlLight;
-
                 serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
                 SerialPortTimer100ms1.Stop();
                 SerialPortTimer100ms1.Start();
                 Application.DoEvents();
                 flag_comport_pc_plc_ok = true;
+                show_backcolor();
             }
             return 1;
         }
@@ -844,10 +873,10 @@ namespace vcs_Comport3
             }
             richTextBox1.Text += "已離線\n";
 
-            this.BackColor = Color.Yellow;
             //pictureBox_comport1.Image = iMS_Link.Properties.Resources.x;
             //SerialPortTimer100ms1.Enabled = false;
             flag_comport_pc_plc_ok = false;
+            show_backcolor();
         }
 
         private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -876,8 +905,6 @@ namespace vcs_Comport3
         /*
         private void button1_Click(object sender, EventArgs e)
         {
-            this.BackColor = Color.Yellow;
-
             if (serialPort1.IsOpen == true)
             {
                 serialPort1.Close();
@@ -905,7 +932,6 @@ namespace vcs_Comport3
             finally
             {
                 serialPort1.DtrEnable = true;   //白話地說就是通知儀器說我(電腦)這邊已經準備好了
-                this.BackColor = System.Drawing.SystemColors.ControlLight;
                 serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
                 SerialPortTimer100ms1.Stop();
                 SerialPortTimer100ms1.Start();
@@ -925,7 +951,6 @@ namespace vcs_Comport3
             finally
             {
                 serialPort2.DtrEnable = true;   //白話地說就是通知儀器說我(電腦)這邊已經準備好了
-                this.BackColor = System.Drawing.SystemColors.ControlLight;
                 serialPort2.DiscardInBuffer();  //丟棄UART buffer內的資料
                 SerialPortTimer100ms2.Stop();
                 SerialPortTimer100ms2.Start();
@@ -948,7 +973,10 @@ namespace vcs_Comport3
             }
 
             serialPort2.Close();
-            this.BackColor = Color.Yellow;
+
+            flag_comport_pc_ims_ok = false;
+            show_backcolor();
+
             connect_comport2(comboBox_comport2.Text);
         }
 
@@ -969,7 +997,6 @@ namespace vcs_Comport3
             {
                 richTextBox1.Text += "xxx錯誤訊息c : " + ex.Message + "\n";
                 richTextBox1.Text += "無法連上 " + comport + ", 請重新連線";
-                this.BackColor = Color.Pink;
             }
 
             //serialPort2.Open(); //原本是這一行，改寫成以下。
@@ -989,13 +1016,12 @@ namespace vcs_Comport3
                 serialPort2.DtrEnable = true;   //白話地說就是通知儀器說我(電腦)這邊已經準備好了
                 //MessageBox.Show("已經連上" + serialPort2.PortName);
 
-                this.BackColor = System.Drawing.SystemColors.ControlLight;
-
                 serialPort2.DiscardInBuffer();  //丟棄UART buffer內的資料
                 SerialPortTimer100ms2.Stop();
                 SerialPortTimer100ms2.Start();
                 Application.DoEvents();
                 flag_comport_pc_ims_ok = true;
+                show_backcolor();
             }
             return 1;
         }
@@ -1008,10 +1034,10 @@ namespace vcs_Comport3
             }
             richTextBox1.Text += "已離線\n";
 
-            this.BackColor = Color.Yellow;
             //pictureBox_comport2.Image = iMS_Link.Properties.Resources.x;
             //SerialPortTimer100ms2.Enabled = false;
             flag_comport_pc_ims_ok = false;
+            show_backcolor();
         }
 
         int timer_display_show_main_mesg0_count = 0;
@@ -1161,58 +1187,54 @@ namespace vcs_Comport3
             }
         }
 
-        public bool Send_Data_PLC_PC(byte cc, byte xx, byte yy, byte zz)
+        public bool Send_Cmd_PLC_PC(byte cmd, byte d0, byte d1, byte d2, byte d3)
         {
-            byte[] data = new byte[5];
-
-            data[0] = cc;
-            data[1] = xx;
-            data[2] = yy;
-            data[3] = zz;
-            data[4] = CalcCheckSum(data, 4);
-
-            string cmd = "[RX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2");
-            show_main_message2a(cmd, S_FALSE, 30);
-
-            if ((xx == 0xAA) && (yy == 0xBB) && (zz == 0xCC))
-            {
-                show_main_message2b("START", S_FALSE, 30);
-            }
-            else if ((xx == 0xCC) && (yy == 0xBB) && (zz == 0xAA))
-            {
-                show_main_message2b("LED", S_FALSE, 30);
-            }
-            else if ((cc == 0xFF) && (xx == 0x00) && (yy == 0x00) && (zz == 0x00))
+            if (cmd == 0x00)
             {
                 show_main_message2b("讀取連線狀態", S_FALSE, 30);
             }
-            else if ((cc == 0xC1) && (xx == 0x00) && (yy == 0x00) && (zz == 0x00))
+            else if (cmd == 0x01)
+            {
+                show_main_message2b("START", S_FALSE, 30);
+            }
+            else if (cmd == 0x02)
+            {
+                show_main_message2b("LED", S_FALSE, 30);
+            }
+            else if (cmd == 0xC1)
             {
                 show_main_message2b("讀取相機序號", S_FALSE, 30);
             }
-            else if ((cc == 0xC0) && (xx == 0x12) && (yy == 0x34) && (zz == 0x56))
+            else if (cmd == 0xC0)
             {
                 show_main_message2b("寫入相機序號", S_FALSE, 30);
             }
-            else if ((cc == 0xFF) && (xx == 0xAA) && (yy == 0xBB) && (zz == 0x55))
+            else if (cmd == 0x10)
             {
                 show_main_message2b("啟動色彩校正", S_FALSE, 30);
                 //TBD
                 return true;
             }
-            else if ((cc == 0xFF) && (xx == 0xAA) && (yy == 0xBB) && (zz == 0x00))
+            else if (cmd == 0x11)
+            {
+                show_main_message2b("停止色彩校正", S_FALSE, 30);
+                //TBD
+                return true;
+            }
+            else if (cmd == 0x12)
             {
                 show_main_message2b("讀取色彩校正結果", S_FALSE, 30);
                 //TBD
                 return true;
             }
-            else if ((cc == 0xFF) && (xx == 0xAA) && (yy == 0xBB) && (zz == 0x10))
+            else if (cmd == 0x20)
             {
                 show_main_message2b("命令ims影像存檔", S_FALSE, 30);
                 //TBD
                 return true;
             }
-            else if ((xx == 0x33) && (yy == 0x88) && (zz == 0x77))  //故意發一個錯誤命令
+            /*
+            else if ((cmd == 0x33) && (yy == 0x88) && (zz == 0x77))  //故意發一個錯誤命令
             {
                 data[4] = CalcCheckSum(data, 2);
                 cmd = "[RX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2");
@@ -1224,21 +1246,40 @@ namespace vcs_Comport3
 
                 return false;
             }
+            */
             else
             {
                 show_main_message2b("未定義", S_FALSE, 30);
             }
 
-            richTextBox1.Text += cmd + "\n";
 
-            show_main_message2a(cmd, S_FALSE, 30);
+            byte[] data = new byte[7];
 
-            Send_Data_PC_IMS(cc, xx, yy, zz);
+            data[0] = 0xFF;
+            data[1] = cmd;
+            data[2] = d0;
+            data[3] = d1;
+            data[4] = d2;
+            data[5] = d3;
+            data[6] = CalcCheckSum(data, 6);
+
+            string mesg = "[RX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + " " + ((int)data[5]).ToString("X2") + " " + ((int)data[6]).ToString("X2");
+            //show_main_message2a(mesg, S_FALSE, 30);
+
+            richTextBox1.Text += mesg + "\n";
+
+            show_main_message2a(mesg, S_FALSE, 30);
+
+            byte xx = d0;
+            byte yy = d1;
+            byte zz =d2;
+
+            Send_Data_PC_IMS(cmd, xx, yy, zz);
 
             return true;
         }
 
-        public bool Send_Data_PC_PLC(byte cc, byte xx, byte yy, byte zz)
+        public bool Send_Cmd_PC_PLC(byte cmd, byte d0, byte d1, byte d2, byte d3)
         {
             if (flag_comport_pc_plc_ok == false)
             {
@@ -1246,17 +1287,20 @@ namespace vcs_Comport3
                 return false;
             }
 
-            byte[] data = new byte[5];
+            byte[] data = new byte[7];
 
-            data[0] = cc;
-            data[1] = xx;
-            data[2] = yy;
-            data[3] = zz;
-            data[4] = CalcCheckSum(data, 4);
+            data[0] = 0xFF;
+            data[1] = cmd;
+            data[2] = d0;
+            data[3] = d1;
+            data[4] = d2;
+            data[5] = d3;
+            data[6] = CalcCheckSum(data, 6);
 
-            string cmd = "[TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2");
+            string mesg = "[TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " "
+                + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + " " + ((int)data[5]).ToString("X2") + " " + ((int)data[6]).ToString("X2");
 
-            show_main_message2b(cmd, S_FALSE, 30);
+            show_main_message2b(mesg, S_FALSE, 30);
 
             //serialPort1.Write(data, 0, data.Length);
             try
@@ -1274,84 +1318,90 @@ namespace vcs_Comport3
             return true;
         }
 
-        void do_plc_command(int item)
+        public bool Send_Cmd_PC_IMS(byte d0, byte d1, byte d2, byte d3)
         {
-            if (item == 0)
+            if (flag_comport_pc_ims_ok == false)
             {
-                Send_Data_PLC_PC(0xFF, 0x00, 0x00, 0x00);   //讀取連線狀態
+                show_main_message0("PC-IMS未連線", S_FALSE, 30);
+                return false;
             }
-            else if (item == 1)
-            {
-                show_main_message1a("還沒做好", S_FALSE, 30);
-                return;
 
-                lb_sn1.Text = "相機序號1 讀取中...";
-                lb_sn2.Text = "相機序號2 讀取中...";
-                lb_sn3.Text = "";
+            byte[] data = new byte[5];
 
-                //Send_Data_PLC_PC(0xC1, 0x00, 0x00, 0x00);   //讀取相機序號
+            data[0] = d0;
+            data[1] = d1;
+            data[2] = d2;
+            data[3] = d3;
+            data[4] = CalcCheckSum(data, 4);
 
-                //讀取相機序號
-                Get_IMS_Data(0, 0xAA, 0xAA);    //camera serial read
+            string mesg = "[TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " "
+                + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2");
 
-                int cnt = 0;
-                while ((flag_wait_receive_data == 1) && (cnt++ < 50))
-                {
-                    richTextBox1.Text += "+" + cnt.ToString();
-                    delay(100);
-                }
-                flag_wait_receive_data = 0;
+            show_main_message2b(mesg, S_FALSE, 30);
 
+            //serialPort2.Write(data, 0, data.Length);
+            try
+            {   //可能會產生錯誤的程式區段
+                serialPort2.Write(data, 0, data.Length);
             }
-            else if (item == 2)
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                richTextBox1.Text += "xxx錯誤訊息e03 : " + ex.Message + "\n";
+            }
+            finally
             {
-                Send_Data_PLC_PC(0xFF, 0xAA, 0xBB, 0x55);   //啟動色彩校正
+                //一定會被執行的程式區段
+            }
+            return true;
+        }
+
+        void pc_do_plc_command(int cmd)
+        {
+            if (cmd == 0)
+            {
+                Send_Cmd_PLC_PC(0x00, 0x00, 0x00, 0x00, 0x00);   //讀取連線狀態
+            }
+            else if (cmd == 0x10)
+            {
+                Send_Cmd_PLC_PC(0x10, 0x00, 0x00, 0x00, 0x00);   //啟動色彩校正
 
                 //通知imsLink做色彩校正就好 不用下命令給ims主機
-
             }
-            else if (item == 3)
+            else if (cmd == 0x11)
             {
-                Send_Data_PLC_PC(0xFF, 0xAA, 0xBB, 0x00);   //讀取色彩校正結果
+                Send_Cmd_PLC_PC(0x11, 0x00, 0x00, 0x00, 0x00);   //停止色彩校正
 
+                //通知imsLink做色彩校正就好 不用下命令給ims主機
             }
-            else if (item == 4)
+            else if (cmd == 0x12)
+            {
+                Send_Cmd_PLC_PC(0x12, 0x00, 0x00, 0x00, 0x00);   //讀取色彩校正結果
+            }
+            else if (cmd == 4)
             {
                 show_main_message1a("還沒做好", S_FALSE, 30);
                 return;
             }
-            else if (item == 5)
+            else if (cmd == 0x01)
             {
-
-                Send_Data_PLC_PC(0xFF, 0xAA, 0xBB, 0xCC);
-
+                Send_Cmd_PLC_PC(0x01, 0x00, 0x00, 0x00, 0x00);   //START
             }
-            else if (item == 6)
+            else if (cmd == 0x02)
             {
-
-                Send_Data_PLC_PC(0xFF, 0xCC, 0xBB, 0xAA);
-
+                Send_Cmd_PLC_PC(0x02, 0x00, 0x00, 0x00, 0x00);   //LED
             }
-            else if (item == 7)
+            else if (cmd == 0x20)
             {
-
-                Send_Data_PLC_PC(0xFF, 0x33, 0x88, 0x77);
-
+                Send_Cmd_PLC_PC(0x20, 0x00, 0x00, 0x00, 0x00);   //IMS影像存檔
             }
-            else if (item == 8)
-            {
-
-                Send_Data_PLC_PC(0xFF, 0xAA, 0xBB, 0x10);
-
-            }
-            else if (item == 9)
+            else if (cmd == 0xC0)
             {
                 if ((tb_sn1.Text.Length != 10) || (tb_sn2.Text.Length != 12))
                 {
                     make_camera_data();
                 }
 
-                Send_Data_PLC_PC(0xC0, 0x12, 0x34, 0x56);   //寫入相機序號
+                Send_Cmd_PLC_PC(0xC0, 0x00, 0x00, 0x00, 0x00);   //寫入相機序號
 
                 show_main_message2b("寫入相機序號", S_FALSE, 30);
 
@@ -1390,16 +1440,38 @@ namespace vcs_Comport3
                 serialPort2.Write(sn_data_tmp, 0, 22);
 
             }
+            else if (cmd == 0xC1)
+            {
+                show_main_message1a("還沒做好", S_FALSE, 30);
+                return;
 
+                lb_sn1.Text = "相機序號1 讀取中...";
+                lb_sn2.Text = "相機序號2 讀取中...";
+                lb_sn3.Text = "";
+
+                //Send_Data_PLC_PC(0xC1, 0x00, 0x00, 0x00);   //讀取相機序號
+
+                //讀取相機序號
+                Get_IMS_Data(0, 0xAA, 0xAA);    //camera serial read
+
+                int cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 50))
+                {
+                    richTextBox1.Text += "+" + cnt.ToString();
+                    delay(100);
+                }
+                flag_wait_receive_data = 0;
+
+            }
             return;
         }
 
-        void do_plc_command(object sender, EventArgs e, int item)
+        void pc_do_plc_command(object sender, EventArgs e, int item)
         {
             if (item == 0)
             {
                 show_main_message1a(((Button)sender).Text, S_FALSE, 30);
-                Send_Data_PLC_PC(0xFF, 0x00, 0x00, 0x00);   //讀取連線狀態
+                Send_Cmd_PLC_PC(0x00, 0x00, 0x00, 0x00, 0x00);   //讀取連線狀態
             }
             else if (item == 1)
             {
@@ -1411,7 +1483,7 @@ namespace vcs_Comport3
                 lb_sn3.Text = "";
 
                 show_main_message1a(((Button)sender).Text, S_FALSE, 30);
-                //Send_Data_PLC_PC(0xC1, 0x00, 0x00, 0x00);   //讀取相機序號
+                //Send_Cmd_PLC_PC(0xC1, 0x00, 0x00, 0x00, 0x00);   //讀取相機序號
 
                 //讀取相機序號
                 Get_IMS_Data(0, 0xAA, 0xAA);    //camera serial read
@@ -1429,7 +1501,7 @@ namespace vcs_Comport3
             {
                 show_main_message1a(((Button)sender).Text, S_FALSE, 30);
 
-                Send_Data_PLC_PC(0xFF, 0xAA, 0xBB, 0x55);   //啟動色彩校正
+                Send_Cmd_PLC_PC(0x10, 0x00, 0x00, 0x00, 0x00);   //啟動色彩校正
 
                 //通知imsLink做色彩校正就好 不用下命令給ims主機
 
@@ -1437,8 +1509,7 @@ namespace vcs_Comport3
             else if (item == 3)
             {
                 show_main_message1a(((Button)sender).Text, S_FALSE, 30);
-                Send_Data_PLC_PC(0xFF, 0xAA, 0xBB, 0x00);   //讀取色彩校正結果
-
+                Send_Cmd_PLC_PC(0x12, 0x00, 0x00, 0x00, 0x00);   //讀取色彩校正結果
             }
             else if (item == 4)
             {
@@ -1446,35 +1517,31 @@ namespace vcs_Comport3
                 return;
 
                 show_main_message1a(((Button)sender).Text, S_FALSE, 30);
-
             }
             else if (item == 5)
             {
                 show_main_message1a(((Button)sender).Text, S_FALSE, 30);
 
-                Send_Data_PLC_PC(0xFF, 0xAA, 0xBB, 0xCC);
-
+                Send_Cmd_PLC_PC(0x01, 0x00, 0x00, 0x00, 0x00);   //START
             }
             else if (item == 6)
             {
                 show_main_message1a(((Button)sender).Text, S_FALSE, 30);
 
-                Send_Data_PLC_PC(0xFF, 0xCC, 0xBB, 0xAA);
-
+                Send_Cmd_PLC_PC(0x02, 0x00, 0x00, 0x00, 0x00);   //LED
             }
             else if (item == 7)
             {
                 show_main_message1a(((Button)sender).Text, S_FALSE, 30);
 
-                Send_Data_PLC_PC(0xFF, 0x33, 0x88, 0x77);
-
+                //TBD
+                //Send_Cmd_PLC_PC(0x12, 0x00, 0x00, 0x00, 0x00);   //wrong command
             }
             else if (item == 8)
             {
                 show_main_message1a(((Button)sender).Text, S_FALSE, 30);
 
-                Send_Data_PLC_PC(0xFF, 0xAA, 0xBB, 0x10);
-
+                Send_Cmd_PLC_PC(0x20, 0x00, 0x00, 0x00, 0x00);   //save img
             }
             else if (item == 9)
             {
@@ -1483,7 +1550,7 @@ namespace vcs_Comport3
                     make_camera_data();
                 }
 
-                Send_Data_PLC_PC(0xC0, 0x12, 0x34, 0x56);   //寫入相機序號
+                Send_Cmd_PLC_PC(0xC0, 0x00, 0x00, 0x00, 0x00);   //寫入相機序號
 
                 show_main_message2b("寫入相機序號", S_FALSE, 30);
 
@@ -1520,9 +1587,7 @@ namespace vcs_Comport3
                     return;
                 }
                 serialPort2.Write(sn_data_tmp, 0, 22);
-
             }
-
             return;
         }
 
@@ -1552,52 +1617,52 @@ namespace vcs_Comport3
 
         private void bt_plc_0_Click(object sender, EventArgs e)
         {
-            do_plc_command(sender, e, 0);
+            pc_do_plc_command(sender, e, 0);
         }
 
         private void bt_plc_1_Click(object sender, EventArgs e)
         {
-            do_plc_command(sender, e, 1);
+            pc_do_plc_command(sender, e, 1);
         }
 
         private void bt_plc_2_Click(object sender, EventArgs e)
         {
-            do_plc_command(sender, e, 2);
+            pc_do_plc_command(sender, e, 2);
         }
 
         private void bt_plc_3_Click(object sender, EventArgs e)
         {
-            do_plc_command(sender, e, 3);
+            pc_do_plc_command(sender, e, 3);
         }
 
         private void bt_plc_4_Click(object sender, EventArgs e)
         {
-            do_plc_command(sender, e, 4);
+            pc_do_plc_command(sender, e, 4);
         }
 
         private void bt_plc_5_Click(object sender, EventArgs e)
         {
-            do_plc_command(sender, e, 5);
+            pc_do_plc_command(sender, e, 5);
         }
 
         private void bt_plc_6_Click(object sender, EventArgs e)
         {
-            do_plc_command(sender, e, 6);
+            pc_do_plc_command(sender, e, 6);
         }
 
         private void bt_plc_7_Click(object sender, EventArgs e)
         {
-            do_plc_command(sender, e, 7);
+            pc_do_plc_command(sender, e, 7);
         }
 
         private void bt_plc_8_Click(object sender, EventArgs e)
         {
-            do_plc_command(sender, e, 8);
+            pc_do_plc_command(sender, e, 8);
         }
 
         private void bt_plc_9_Click(object sender, EventArgs e)
         {
-            do_plc_command(sender, e, 9);
+            pc_do_plc_command(sender, e, 9);
         }
 
         private void bt_pc_0_Click(object sender, EventArgs e)
@@ -1666,11 +1731,7 @@ namespace vcs_Comport3
                 connection |= 1 << 4;
             }
 
-            byte xx = 0xFF;
-            byte yy = (byte)connection;
-            byte zz = 0;
-
-            Send_Data_PC_PLC(0xFF, xx, yy, zz);
+            Send_Cmd_PC_PLC(0x00, (byte)connection, 0x00, 0x00, 0x00);
         }
 
         private void bt_pc_1_Click(object sender, EventArgs e)
@@ -1680,11 +1741,13 @@ namespace vcs_Comport3
             richTextBox1.Text += "發送命令給PLC\n";
 
             Random r = new Random();
-            byte xx = (byte)r.Next(256);
-            byte yy = (byte)r.Next(256);
-            byte zz = (byte)r.Next(256);
+            byte cmd = (byte)r.Next(256);
+            byte d0 = (byte)r.Next(256);
+            byte d1 = (byte)r.Next(256);
+            byte d2 = (byte)r.Next(256);
+            byte d3 = (byte)r.Next(256);
 
-            Send_Data_PC_PLC(0xFF, xx, yy, zz);
+            Send_Cmd_PC_PLC(cmd, d0, d1, d2, d3);
         }
 
         private void bt_pc_2_Click(object sender, EventArgs e)
@@ -1693,15 +1756,14 @@ namespace vcs_Comport3
             show_main_message2a(((Button)sender).Text, S_FALSE, 30);
 
             Random r = new Random();
-            byte xx = 0xAA;
-            byte yy = (byte)r.Next(14);
-            byte zz = 0;
+            byte d0 = (byte)r.Next(14);
 
-            Send_Data_PC_PLC(0xFF, xx, yy, zz);
+            Send_Cmd_PC_PLC(0x12, d0, 0x00, 0x00, 0x00);
 
-            richTextBox1.Text += "回傳色彩校正結果, " + yy.ToString() + "\n";
 
-            switch (yy)
+            richTextBox1.Text += "回傳色彩校正結果, " + d0.ToString() + "\n";
+
+            switch (d0)
             {
                 case S_OK: richTextBox1.Text += "OK\n"; break;
                 case CAMERA_NONE: richTextBox1.Text += "dongle only, 有連接器, 無相機\n"; break;
@@ -1715,7 +1777,7 @@ namespace vcs_Comport3
                 case REASON_FIND_AWB_AREA_FAIL_TOO_SMALL: richTextBox1.Text += "AWB搜尋失敗, 太小\n"; break;
                 case REASON_FIND_AWB_AREA_FAIL_TOO_FAR: richTextBox1.Text += "AWB搜尋失敗, 太遠\n"; break;
                 case REASON_MANUALLY_INTERRUPT: richTextBox1.Text += "AWB人為中斷\n"; break;
-                default: richTextBox1.Text += "其他原因, "+yy.ToString()+"\n"; break;
+                default: richTextBox1.Text += "其他原因, " + d0.ToString() + "\n"; break;
             }
         }
 
@@ -1753,12 +1815,28 @@ namespace vcs_Comport3
         {
             show_main_message2a(((Button)sender).Text, S_FALSE, 30);
 
+
+            Send_Cmd_PC_IMS(0xFF, 0xAA, 0xBB, 0xCC);
+
         }
+
+
+        private void bt_pc_9_Click(object sender, EventArgs e)
+        {
+            show_main_message2a(((Button)sender).Text, S_FALSE, 30);
+
+
+            Send_Cmd_PC_IMS(0xFF, 0xCC, 0xBB, 0xAA);
+
+        }
+
+
 
 
         private void bt_ims_0_Click(object sender, EventArgs e)
         {
             show_main_message3a(((Button)sender).Text, S_FALSE, 30);
+            show_main_message3b("TBD", S_FALSE, 30);
 
         }
 
@@ -1871,7 +1949,7 @@ namespace vcs_Comport3
                 if (BytesToRead > 0)
                     richTextBox1.Text += "len = " + BytesToRead.ToString() + "\n";
 
-                if ((BytesToRead > 0) && (BytesToRead < 21) && (BytesToRead != UART_BUF_LENGTH) && (flag_need_to_merge_data == 0))
+                if ((BytesToRead > 0) && (BytesToRead < 21) && (BytesToRead != UART_BUF_LENGTH2) && (flag_need_to_merge_data == 0))
                 {
                     //serialPort2.Read(放置的位元陣列 , 從第幾個位置開始存放 , 共需存放多少位元)
                     serialPort2.Read(receive_buffer_tmp, 0, BytesToRead);
@@ -1925,7 +2003,7 @@ namespace vcs_Comport3
 
                     if (Comport_Mode == 0)  //iMS_Link mode
                     {
-                        if (BytesToRead == UART_BUF_LENGTH)
+                        if (BytesToRead == UART_BUF_LENGTH2)
                         {
                             SpyMonitorRX2();
                         }
@@ -2278,7 +2356,7 @@ namespace vcs_Comport3
             //if (BytesToRead == 5)
             {
                 input = "";
-                for (int i = 0; i < UART_BUF_LENGTH; i++)
+                for (int i = 0; i < UART_BUF_LENGTH2; i++)
                     input += (char)receive_buffer[i];
 
                 byte[] data = new byte[5];
@@ -2645,7 +2723,6 @@ namespace vcs_Comport3
             }
             */
         }
-
 
 
 
