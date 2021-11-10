@@ -1,12 +1,139 @@
 
+通過C#還可以指定當前線程的運行在哪個CPU上。
+ 
+System.Diagnostics.Process p = Process.GetCurrentProcess(); 
+p.ProcessorAffinity = (IntPtr)0x0001; 
+
+Process.ProcessorAffinity 設置當前CPU的屏蔽字，0x0001表示選用一號CPU，0x0002表示選用2號CPU。
+
+
+直接把DataTable的資料貼到DataGridView上
+
+	//C#之界面上依次出現表格（DataTable和DataGridView提高）
+	
+	C#之界面上依次出現表格（DataTable和DataGridView提高）
+	
+	效果圖：
+	
+	在textBox控件中輸入信息，點擊增加
+	
+	\
+	
+	出現如圖：
+	
+	\
+	
+	繼續：
+	
+	\
+	
+	代碼（沒用csdn插入代碼功能是插入的代碼增刪改不能選中，特別費事，所以下面代碼可能會看的有點亂）：
+	
+	//創建坡口形式選擇數據表
+	dt = new DataTable();
+	
+	//建九列
+	
+	dt.Columns.Add("name", typeof(System.String));
+	dt.Columns.Add("sex", typeof(System.String));
+	dt.Columns.Add("age", typeof(System.String));
+	
+	//將MongoDB中數據插入到該一行對應的各列中（我這裡是數據存入MongoDB中，在之前取出bson,然後foreach）
+	foreach (BsonDocument result in resultList)
+	{
+	//建一行
+	DataRow dr = dt.NewRow();
+	//行信息
+	dr[0] = 你的數據
+	dr[1] = 你的數據
+	dr[2] = 你的數據
+	//將上述該行加入DataTable中
+	dt.Rows.Add(dr);
+	
+	//綁定在sorce上
+	dataGridView1.DataSource = dt;
+	
+	
+
+
+
+
+
+
+
+
+
+使用C# 讀取XML
+代碼如下：
+
+XmlReader xmlRead =new XmlTextReader ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
+    DataSet ds=new DataSet ();
+    //ds.ReadXml ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
+    ds.ReadXml (xmlRead);
+
+this.DataGrid1 .DataSource =ds;
+this.DataGrid1 .DataBind ();
+
+
+
+
+//C# 播放聲音
+﻿﻿
+
+1.播放系統事件聲音
+　　 System.Media.SystemSounds.Asterisk.Play();
+　　 System.Media.SystemSounds.Beep.Play();
+　　 System.Media.SystemSounds.Exclamation.Play();
+　　 System.Media.SystemSounds.Hand.Play();
+　　 System.Media.SystemSounds.Question.Play();
+
+2.使用System.Media.SoundPlayer播放.wav格式聲音
+　　 SoundPlayer player = new SoundPlayer();
+player.SoundLocation = Application.StartupPath + "\\" + "sounds/WallHit.wav";
+player.Load(); //同步加載聲音
+player.Play(); //啟用新線程播放
+//player.PlayLooping(); //循環播放模式
+//player.PlaySync(); //UI線程播放
+
+3.利用Windows Media Player
+
+加載COM組件:ToolBox->Choose Items->COM Components->Windows Media Player
+
+把Windows Media Player控件拖放到Winform窗體中，把axWindowsMediaPlayer1中URL屬性設置為MP3或是AVI的文件路徑。
+
+
+4.MCI Command String多媒體設備的程序接口
+
+using System.Runtime.InteropServices;
+　　public static uint SND_ASYNC = 0x0001;
+　　public static uint SND_FILENAME = 0x00020000;
+　　[DllImport("winmm.dll")]
+　　public static extern uint mciSendString(string lpstrCommand,
+　　string lpstrReturnString, uint uReturnLength, uint hWndCallback);
+　　public void Play()
+　　{
+　　　　mciSendString(@"close temp_alias", null, 0, 0);
+　　　　mciSendString(@"open " "路徑.mp3"" alias temp_alias", null, 0, 0);
+　　　　mciSendString("play temp_alias repeat", null, 0, 0);
+　　}
+
+關於MCI Command String多媒體設備的程序接口的詳細資料，可以參看http://blog.csdn.net/psongchao/article/details/1487788
+
+  
+  
+
+
+
+Path.Combine
+            //string directory = System.AppDomain.CurrentDomain.BaseDirectory;
+            //this.iniFilePath = Path.Combine(directory, "config.ini");
+
+
 
 //            return String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
 
 
-
             string md5 = Safety.MD5(key);
-            
-
 
 
 public class Safety

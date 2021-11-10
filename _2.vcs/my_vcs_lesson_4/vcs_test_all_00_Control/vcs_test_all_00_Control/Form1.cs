@@ -149,7 +149,8 @@ namespace vcs_test_all_00_Control
             Application.Exit();
         }
 
-        //移動控件 ST
+        /*
+        //移動控件 方法一 ST
         private void control_MouseDown(object sender, MouseEventArgs e)
         {
             CPoint = new Point(e.X, e.Y);//取得滑鼠游標在文字上按下時的位置
@@ -188,7 +189,30 @@ namespace vcs_test_all_00_Control
             tem_x = e.X;//記錄移動後的X位置
             tem_y = e.Y;//記錄移動後的Y位置
         }
-        //移動控件 SP
+        //移動控件 方法一 SP
+        */
+
+        //移動控件 方法二 ST
+        //在C#中，實現可拖動控件，並顯示控件的坐標位置
+        private Point mouse_offset;
+
+        private void control_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouse_offset = new Point(-e.X, -e.Y);
+        }
+
+        private void control_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouse_offset.X, mouse_offset.Y);
+                ((Control)sender).Location = ((Control)sender).Parent.PointToClient(mousePos);
+            }
+            //this.label1.Text ="橫坐標:"+mouse_offset.X+"縱坐標"+mouse_offset.Y;
+        }
+        //移動控件 方法二 SP
+
 
         int i = 0;
         private void button1_Click(object sender, EventArgs e)
