@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="big5"?>
+<bookstore>
+  <book genre="fantasy" ISBN="2-3631-4">
+    <title>Oberon's Legacy</title>
+    <author>Corets, Eva</author>
+    <price>5.95</price>
+  </book>
+  <book genre="李贊紅" ISBN="2-3631-4">
+    <title>CS從入門到精通</title>
+    <author>候捷</author>
+    <price>58.3</price>
+  </book>
+</bookstore>

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.bt_clear = new System.Windows.Forms.Button();
@@ -70,6 +71,7 @@
             this.bt_plc_2 = new System.Windows.Forms.Button();
             this.lb_main_mesg1a = new System.Windows.Forms.Label();
             this.groupBox_pc = new System.Windows.Forms.GroupBox();
+            this.bt_pc_9 = new System.Windows.Forms.Button();
             this.lb_sn_pc3 = new System.Windows.Forms.Label();
             this.lb_main_mesg2b = new System.Windows.Forms.Label();
             this.bt_pc_8 = new System.Windows.Forms.Button();
@@ -95,7 +97,7 @@
             this.bt_ims_2 = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.lb_main_mesg0 = new System.Windows.Forms.Label();
-            this.bt_pc_9 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox_comport1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport1)).BeginInit();
             this.groupBox_comport2.SuspendLayout();
@@ -538,6 +540,16 @@
             this.groupBox_pc.TabStop = false;
             this.groupBox_pc.Text = "PC控制台";
             // 
+            // bt_pc_9
+            // 
+            this.bt_pc_9.Location = new System.Drawing.Point(107, 122);
+            this.bt_pc_9.Name = "bt_pc_9";
+            this.bt_pc_9.Size = new System.Drawing.Size(90, 40);
+            this.bt_pc_9.TabIndex = 194;
+            this.bt_pc_9.Text = "發送命令給IMS LED";
+            this.bt_pc_9.UseVisualStyleBackColor = true;
+            this.bt_pc_9.Click += new System.EventHandler(this.bt_pc_9_Click);
+            // 
             // lb_sn_pc3
             // 
             this.lb_sn_pc3.AutoSize = true;
@@ -784,15 +796,14 @@
             this.lb_main_mesg0.TabIndex = 135;
             this.lb_main_mesg0.Text = "mesg1";
             // 
-            // bt_pc_9
+            // panel1
             // 
-            this.bt_pc_9.Location = new System.Drawing.Point(107, 122);
-            this.bt_pc_9.Name = "bt_pc_9";
-            this.bt_pc_9.Size = new System.Drawing.Size(90, 40);
-            this.bt_pc_9.TabIndex = 194;
-            this.bt_pc_9.Text = "發送命令給IMS LED";
-            this.bt_pc_9.UseVisualStyleBackColor = true;
-            this.bt_pc_9.Click += new System.EventHandler(this.bt_pc_9_Click);
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.Location = new System.Drawing.Point(890, 13);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(260, 77);
+            this.panel1.TabIndex = 193;
             // 
             // Form1
             // 
@@ -807,6 +818,7 @@
             this.Controls.Add(this.groupBox_comport1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "imsLink";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -894,6 +906,7 @@
         private System.Windows.Forms.Label lb_sn_pc2;
         private System.Windows.Forms.Label lb_sn_pc1;
         private System.Windows.Forms.Button bt_pc_9;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

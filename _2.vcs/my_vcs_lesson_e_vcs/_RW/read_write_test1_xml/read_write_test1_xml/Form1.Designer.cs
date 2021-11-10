@@ -278,6 +278,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(150, 60);
             this.button19.TabIndex = 38;
+            this.button19.Text = "XML各種操作";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 

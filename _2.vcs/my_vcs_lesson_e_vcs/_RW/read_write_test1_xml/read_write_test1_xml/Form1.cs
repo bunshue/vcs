@@ -846,6 +846,117 @@ namespace read_write_test1_xml
 
         private void button19_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "XML各種操作\n";
+
+            richTextBox1.Text += "插入一個<book>節點\n";
+            string filename1a = @"../../bookstore1.xml";
+            string filename1b = @"../../bookstore1_add.xml";
+
+            //1、往<bookstore>節點中插入一個<book>節點：
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename1a);
+            XmlNode root = xmlDoc.SelectSingleNode("bookstore");//查找<bookstore>
+            XmlElement xe1 = xmlDoc.CreateElement("book");//創建一個<book>節點
+            xe1.SetAttribute("genre", "李贊紅");//設置該節點genre屬性
+            xe1.SetAttribute("ISBN", "2-3631-4");//設置該節點ISBN屬性
+            XmlElement xesub1 = xmlDoc.CreateElement("title");
+            xesub1.InnerText = "CS從入門到精通";//設置文本節點
+            xe1.AppendChild(xesub1);//添加到<book>節點中
+            XmlElement xesub2 = xmlDoc.CreateElement("author");
+            xesub2.InnerText = "候捷";
+            xe1.AppendChild(xesub2);
+            XmlElement xesub3 = xmlDoc.CreateElement("price");
+            xesub3.InnerText = "58.3";
+            xe1.AppendChild(xesub3);
+            root.AppendChild(xe1);//添加到<bookstore>節點中
+            xmlDoc.Save(filename1b);
+
+
+
+
+            string filename2a = @"../../bookstore2.xml";
+            string filename2b = @"../../bookstore2_modify.xml";
+
+            richTextBox1.Text += "修改節點\n";
+            //修改節點：將genre屬性值為“李贊紅“的節點的genre值改為“update李贊紅”，將該節點的子節點<author>的文本修改為“亞勝”。
+
+            //XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename2a);
+
+            XmlNodeList nodeList = xmlDoc.SelectSingleNode("bookstore").ChildNodes;//獲取bookstore節點的所有子節點
+            foreach (XmlNode xn in nodeList)//遍歷所有子節點
+            {
+                XmlElement xe = (XmlElement)xn;//將子節點類型轉換為XmlElement類型
+                if (xe.GetAttribute("genre") == "李贊紅")//如果genre屬性值為“李贊紅”
+                {
+                    xe.SetAttribute("genre", "update李贊紅");//則修改該屬性為“update李贊紅”
+                    XmlNodeList nls = xe.ChildNodes;//繼續獲取xe子節點的所有子節點
+                    foreach (XmlNode xn1 in nls)//遍歷
+                    {
+                        XmlElement xe2 = (XmlElement)xn1;//轉換類型
+                        if (xe2.Name == "author")//如果找到
+                        {
+                            xe2.InnerText = "亞勝";//則修改
+                            break;//找到退出來就可以了
+                        }
+                    }
+                    break;
+                }
+            }
+            xmlDoc.Save(filename2b);//保存。
+
+
+            string filename3a = @"../../bookstore3.xml";
+            string filename3b = @"../../bookstore3_delete.xml";
+
+            //XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename3a);
+
+            richTextBox1.Text += "刪除節點\n";
+            //3、刪除 <book genre="fantasy" ISBN="2-3631-4">節點的genre屬性，刪除 <book genre="update李贊紅" ISBN="2-3631-4">節點。
+
+            XmlNodeList xnl = xmlDoc.SelectSingleNode("bookstore").ChildNodes;
+            foreach (XmlNode xn in xnl)
+            {
+                XmlElement xe = (XmlElement)xn;
+
+                if (xe.GetAttribute("genre") == "fantasy")
+                {
+                    xe.RemoveAttribute("genre");//刪除genre屬性
+                }
+                else if (xe.GetAttribute("genre") == "update李贊紅")
+                {
+                    xe.RemoveAll();//刪除該節點的全部內容
+                }
+            }
+            xmlDoc.Save(filename3b);
+
+
+
+            string filename4 = @"../../bookstore2.xml";
+
+            //XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename4);
+
+
+            richTextBox1.Text += "顯示所有數據\n";
+
+            XmlNode xnb = xmlDoc.SelectSingleNode("bookstore");
+            XmlNodeList xnlb = xnb.ChildNodes;
+            foreach (XmlNode xnf in xnlb)
+            {
+                XmlElement xe = (XmlElement)xnf;
+                Console.WriteLine(xe.GetAttribute("genre"));//顯示屬性值
+                richTextBox1.Text += xe.GetAttribute("genre") + "\n";//顯示屬性值
+                Console.WriteLine(xe.GetAttribute("ISBN"));
+                richTextBox1.Text += xe.GetAttribute("ISBN") + "\n";
+                XmlNodeList xnf1 = xe.ChildNodes;
+                foreach (XmlNode xn2b in xnf1)
+                {
+                    Console.WriteLine(xn2b.InnerText);//顯示子節點點文本
+                    richTextBox1.Text += xn2b.InnerText + "\n";  //顯示子節點點文本
+                }
+            }
 
         }
 

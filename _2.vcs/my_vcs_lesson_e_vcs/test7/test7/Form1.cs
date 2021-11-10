@@ -15,6 +15,11 @@ using System.Management;
 using System.Runtime.InteropServices;
 using Shell32;
 
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+
+using vcs_MyClassLibrary;
+
 namespace test7
 {
     public partial class Form1 : Form
@@ -186,13 +191,106 @@ namespace test7
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //為圖片生成縮略圖
+            //讀取圖檔, 多一層Image結構
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image = Image.FromFile(filename);
 
+            Image image2 = GetThumbnail(image, image.Width / 2, image.Height / 2);
+
+            pictureBox1.Image = image2;
         }
+
+        /// 為圖片生成縮略圖
+        /// 原圖片的路徑
+        /// 縮略圖寬
+        /// 縮略圖高
+        /// 
+        public Image GetThumbnail(Image image, int width, int height)
+        {
+            Bitmap bmp = new Bitmap(width, height);
+            //從Bitmap創建一個Graphics
+            Graphics gr = Graphics.FromImage(bmp);
+            //設置 
+            gr.SmoothingMode = SmoothingMode.HighQuality;
+            //下面這個也設成高質量
+            gr.CompositingQuality = CompositingQuality.HighQuality;
+            //下面這個設成High
+            gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            //把原始圖像繪制成上面所設置寬高的縮小圖
+            Rectangle rectDestination = new Rectangle(0, 0, width, height);
+
+            gr.DrawImage(image, rectDestination, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+            return bmp;
+        }
+
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //用GDI+繪制驗證碼
+
+            DrawCahpcha(RandomGeneratorStyle.NumberAndChar, 20);
 
         }
+
+        public enum RandomGeneratorStyle
+        {
+            ///　<summary>
+            ///　只有數字
+            ///　</summary>
+            Number,
+            ///　<summary>
+            ///　包含數字和大小寫字符
+            ///　</summary>
+            NumberAndChar,
+            ///　<summary>
+            ///　包含數字和大寫字符
+            ///　</summary>
+            NumberAndCharIgnoreCase
+        }
+
+        public static string Generate(RandomGeneratorStyle style, int length)
+        {
+            string strValidateString = "";
+            Random rnd = new Random();
+            string strValidateStringSource;
+            switch (style)
+            {
+                case RandomGeneratorStyle.Number:
+                    strValidateStringSource = "0123456789";
+                    break;
+                case RandomGeneratorStyle.NumberAndChar:
+                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    break;
+                case RandomGeneratorStyle.NumberAndCharIgnoreCase:
+                    strValidateStringSource = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    break;
+                default:
+                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    break;
+            }
+            for (int i = 0; i < length; i++)
+            {
+                strValidateString += strValidateStringSource[rnd.Next(strValidateStringSource.Length - 1)];
+            }
+            return strValidateString;
+        }
+
+        //繪制驗證碼
+        public void DrawCahpcha(RandomGeneratorStyle style, int length)
+        {
+            Bitmap bmp = new Bitmap((int)Math.Ceiling(length * 12.5), 20);//新建一個圖 片對象
+            Graphics g = Graphics.FromImage(bmp);//利用該圖片對象生成“畫板”
+            string strCode = Generate(style, length);//生成隨機數
+            Font font = new Font("Arial", 12, FontStyle.Bold | FontStyle.Italic);//設 置字體顏色
+            SolidBrush brush = new SolidBrush(Color.Red);//新建一個畫刷,到這裡為止,我們 已經准備好了畫板、畫刷、和數據
+            g.DrawString(strCode, font, brush, 0, 0);//關鍵的一步，進行繪制。
+            //bmp.Save(curPage.Response.OutputStream, ImageFormat.Jpeg);//保存為輸出流，否則頁 面上顯示不出來
+            //g.Dispose();//釋放掉該資源
+
+            pictureBox1.Image = bmp;
+        }
+
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -314,11 +412,52 @@ namespace test7
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //做一個跟字串一樣大的圖檔
+            string str = "做一個跟字串一樣大的圖檔";
+            Bitmap newBitmap = null;
+            Graphics g = null;
+
+            try
+            {
+                Font fontCounter = new Font("Lucida Sans Unicode", 50);
+
+                // calculate size of the string.
+                newBitmap = new Bitmap(1, 1, PixelFormat.Format32bppPArgb);
+                g = Graphics.FromImage(newBitmap);
+                SizeF stringSize = g.MeasureString(str, fontCounter);
+                int nWidth = (int)stringSize.Width;
+                int nHeight = (int)stringSize.Height;
+                g.Dispose();
+                newBitmap.Dispose();
+
+                newBitmap = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppPArgb);
+                g = Graphics.FromImage(newBitmap);
+                g.FillRectangle(new SolidBrush(Color.Pink),
+                new Rectangle(0, 0, nWidth, nHeight));
+
+                g.DrawString(str, fontCounter, new SolidBrush(Color.Black), 0, 0);
+
+                newBitmap.Save("test.png", ImageFormat.Png);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                if (null != g) g.Dispose();
+                if (null != newBitmap) newBitmap.Dispose();
+            }
+
+
 
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //使用MyClassLibrary範例
+            MyClass.show();
+            MyClass.show("ims");
 
         }
 

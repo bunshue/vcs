@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="big5"?>
+<bookstore>
+<book genre="fantasy" ISBN="2-3631-4">
+<title>Oberon's Legacy</title>
+<author>Corets, Eva</author>
+<price>5.95</price>
+</book>
+</bookstore>

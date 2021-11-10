@@ -17,9 +17,6 @@ namespace vcs_test_all_09_Form_AutoSize
         public Form1()
         {
             InitializeComponent();
-            //如果加入"皮肤"，则不能在Form1_Load中记录控件的大小和位置，因为有些控件如dataGridView的子控件还未完成
-            //而要在在Form1_SizeChanged中，第一次改变时，记录控件的大小和位置
-            //this.skinEngine1.SkinFile = "EmeraldColor1.ssk";
         }
 
         //2. 为窗体添加Load事件，并在其方法Form1_Load中，调用类的初始化方法，记录窗体和其控件的初始位置和大小

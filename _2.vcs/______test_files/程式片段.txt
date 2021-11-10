@@ -1,4 +1,61 @@
 
+
+            //磁盤配額的wmi版本(C#)
+
+            try
+            {
+                ManagementClass mc1 = new ManagementClass("Win32_DiskQuota");
+                ManagementObject quota = mc1.CreateInstance();
+                quota["Limit"] = 400000000;
+                quota["WarningLimit"] = 200000000;
+                // Get user account object 
+                ManagementObject account = new
+                ManagementObject("Win32_Account.Domain=TODAY20040216,Name=ASPNET");
+                account.Get();
+                // get disk object 
+                ManagementObject disk = new
+                ManagementObject("Win32_LogicalDisk.DeviceId='F:'");
+                disk.Get();
+                quota["QuotaVolume"] = disk;
+                quota["User"] = account;
+                quota.Put(); // commit 
+
+                ManagementClass mc2 = new ManagementClass("Win32_DiskQuota");
+                Console.WriteLine(mc2.SystemProperties);
+                foreach (ManagementObject o in mc2.GetInstances())
+                {
+                    Console.WriteLine("Next : {0}", o.Path);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("error:" + ex);
+            } 
+            
+
+private void AboutBox_Load(object sender, EventArgs e)
+{
+　AssemblyInfoClass myAssembly = new AssemblyInfoClass();
+　labelProductName.Text = "產品名稱：" + myAssembly.Product;
+　labelVersion.Text = "版本：" + myAssembly.Version;
+　labelCopyright.Text = "版權宣告：" + myAssembly.Copyright;
+　labelCompanyName.Text = "公司名稱：" + myAssembly.Company;
+　textBoxDescription.Text = "細部描述：" +
+　myAssembly.Description;
+}
+
+
+string newName = Guid.NewGuid().ToString();
+
+
+C# 之程序退出的方法，
+	1.this.Close();   只是關閉當前窗口，若不是主窗體的話，是無法退出程序的，另外若有托管線程（非主線程），也無法干淨地退出；
+	2.Application.Exit();  強制所有消息中止，退出所有的窗體，但是若有托管線程（非主線程），也無法干淨地退出；
+	3.Application.ExitThread(); 強制中止調用線程上的所有消息，同樣面臨其它線程無法正確退出的問題；
+	4.System.Environment.Exit(0);   這是最徹底的退出方式，不管什麼線程都被強制退出，把程序結束的很干淨。
+
+
+
 通過C#還可以指定當前線程的運行在哪個CPU上。
  
 System.Diagnostics.Process p = Process.GetCurrentProcess(); 
