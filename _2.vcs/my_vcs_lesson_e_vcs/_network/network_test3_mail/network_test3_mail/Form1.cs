@@ -32,6 +32,7 @@ namespace network_test3_mail
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+            //ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
         }
 
         void show_item_location()
@@ -265,16 +266,181 @@ namespace network_test3_mail
 
         private void button4_Click(object sender, EventArgs e)
         {
+            string from = "bunshue@gmail.com";
+
+            string pass = "pass";
+            string to = "david@insighteyes.com";
+
+            string subject = "test mail from hz";
+
+            System.Web.Mail.MailPriority priority = System.Web.Mail.MailPriority.Normal;
+
+            string body = "this is a lion-mouse.";
+
+            string smtpServer = "smtp.gmail.com";
+
+
+            //, System.Collections.ArrayList files)
+
+
+            //發送附件
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            System.Collections.ArrayList files = new System.Collections.ArrayList();
+            files.Add(filename);
+
+            sendTxtMail(from, pass, to, subject, priority, body, smtpServer, files);
 
         }
 
+
+
+        public void sendTxtMail(string from, string pass, string to, string subject, System.Web.Mail.MailPriority priority, string body, string smtpServer, System.Collections.ArrayList files)
+        {
+            System.Web.Mail.MailMessage msg = new System.Web.Mail.MailMessage();
+            msg.From = from;
+            msg.To = to;
+            msg.Subject = subject;
+            msg.Priority = priority;
+            msg.BodyFormat = System.Web.Mail.MailFormat.Text;
+            msg.Body = body;
+            msg.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate", "1"); //basic authentication
+            msg.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusername", from.Substring(0, from.IndexOf("@"))); //set your username here
+            msg.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassword", pass); //set your passWord here
+            for (int i = 0; i < files.Count; i++)
+            {
+                if (System.IO.File.Exists(files[i].ToString()))
+                {
+                    msg.Attachments.Add(new MailAttachment(files[i].ToString()));
+                }
+            }
+            SmtpMail.SmtpServer = smtpServer;
+           
+            try
+            {
+                SmtpMail.Send(msg);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
+            }
+        }
+
+        public void sendHtmlMail(string from, string pass, string to, string subject, System.Web.Mail.MailPriority priority, string body, string smtpServer, System.Collections.ArrayList files)
+        {
+            System.Web.Mail.MailMessage msg = new System.Web.Mail.MailMessage();
+            msg.From = from;
+            msg.To = to;
+            msg.Subject = subject;
+            msg.Priority = priority;
+            msg.BodyFormat = System.Web.Mail.MailFormat.Html;
+            msg.Body = body;
+            msg.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate", "1"); //basic authentication
+            msg.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusername", from.Substring(0, from.IndexOf("@"))); //set your username here
+            msg.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassword", pass); //set your passWord here
+            for (int i = 0; i < files.Count; i++)
+            {
+                if (System.IO.File.Exists(files[i].ToString()))
+                {
+                    msg.Attachments.Add(new MailAttachment(files[i].ToString()));
+                }
+            }
+            System.Web.Mail.SmtpMail.SmtpServer = smtpServer;
+            System.Web.Mail.SmtpMail.Send(msg);
+        }
+
+
+
         private void button5_Click(object sender, EventArgs e)
         {
+
+            string from = "bunshue@gmail.com";
+
+            string pass = "pass";
+            string to = "david@insighteyes.com";
+
+            string subject = "test mail from hz";
+
+            System.Net.Mail.MailPriority priority = System.Net.Mail.MailPriority.Normal;
+
+            string body = "this is a lion-mouse.";
+
+            string smtpServer = "smtp.gmail.com";
+
+            System.Web.Mail.MailMessage mail = new System.Web.Mail.MailMessage();  //From在前, To在後
+            //System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();  //From在前, To在後
+
+            mail.From = "bunshue@gmail.com";
+            mail.To = "david@insighteyes.com";
+
+            
+            //mail.To("david@insighteyes.com");
+            //mail.To("Secondry@gmail.com");
+            mail.From = from;
+            mail.Subject = subject;
+            string Body = body;
+            mail.Body = Body;
+            //mail..IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            // smtp.Host = "smtp.gmail.com"; //Or Your SMTP Server Address
+            smtp.EnableSsl = true;
+            smtp.Credentials = new System.Net.NetworkCredential(from, pass);
+            //smtp.Port = 587;
+            //Or your Smtp Email ID and Password
+            smtp.UseDefaultCredentials = false;
+            // smtp.EnableSsl = true;
+            //smtp.Send(mail);
+
+            //System.Web.Mail.SmtpMail.SmtpServer = "smtp.gmail.com";  //your real server goes here
+            System.Web.Mail.SmtpMail.Send(mail);
+
+            //smtp.Send(System.Net.Mail mail);
+            //smtp.Send(mail);
+
+
 
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            string from = "bunshue@gmail.com";
+
+            string pass = "pass";
+            string to = "david@insighteyes.com";
+
+            string subject = "test mail from hz";
+
+            System.Net.Mail.MailPriority priority = System.Net.Mail.MailPriority.Normal;
+
+            string body = "this is a lion-mouse.";
+
+            string smtpServer = "smtp.gmail.com";
+
+
+
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.Subject = subject;
+            msg.From = new MailAddress(from);
+            msg.Body = "Message BODY";
+            msg.To.Add(new MailAddress(to));
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            //smtp.UseDefaultCredentials = false;
+            smtp.EnableSsl = true;
+            NetworkCredential nc = new NetworkCredential(from, pass);
+            smtp.Credentials = nc;
+
+            try
+            {
+                smtp.Send(msg);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Message not emailed: " + ex.ToString() + "\n";
+            }
+
+
 
         }
 
@@ -324,5 +490,18 @@ namespace network_test3_mail
         }
 
     }
+
+    /*
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
+    }
+    */
+
 }
 
