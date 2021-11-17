@@ -7,6 +7,7 @@ using System.Linq;
 //using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
@@ -273,8 +274,124 @@ namespace image_test2
             pictureBox3.Image = reduce_bitmap(bitmap1, 20);
         }
 
+
+        //C#編程 jpg縮略圖函數 使用教程
+
+
+        /// <summary>
+        /// 生成jpg縮略圖字節,本人的小軟件中需要用到的功能，所以自己做了一個函數，和大家分享
+        /// 為什麼要生成字節而不是文件，這是為了方便後續處理啦^_^
+        /// </summary>
+        /// <param name="originalImagePath">原始路徑</param>
+        /// <param name="quality">質量0-100</param>
+        /// <param name="width">寬度</param>
+        /// <param name="height">高度</param>
+        /// <param name="mode">模式：HW,W,H,Cut</param>
+        /// <returns></returns>
+        public static byte[] MakeJPGThumbnailBytes(string originalImagePath, long quality, int width, int height, string mode)
+        {
+            Image originalImage = Image.FromFile(originalImagePath);
+            MemoryStream s = new MemoryStream();
+            int towidth = width;
+            int toheight = height;
+
+            int x = 0;
+            int y = 0;
+            int ow = originalImage.Width;
+            int oh = originalImage.Height;
+
+            switch (mode)
+            {
+                case "HW"://指定高寬縮放（可能變形）
+                    break;
+                case "W"://指定寬，高按比例
+                    toheight = originalImage.Height * width / originalImage.Width;
+                    break;
+                case "H"://指定高，寬按比例
+                    towidth = originalImage.Width * height / originalImage.Height;
+                    break;
+                case "Cut"://指定高寬裁減（不變形）
+                    if ((double)originalImage.Width / (double)originalImage.Height > (double)towidth / (double)toheight)
+                    {
+                        oh = originalImage.Height;
+                        ow = originalImage.Height * towidth / toheight;
+                        y = 0;
+                        x = (originalImage.Width - ow) / 2;
+                    }
+                    else
+                    {
+                        ow = originalImage.Width;
+                        oh = originalImage.Width * height / towidth;
+                        x = 0;
+                        y = (originalImage.Height - oh) / 2;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            //新建一個bmp圖片
+            Image bitmap = new System.Drawing.Bitmap(towidth, toheight);
+
+            //新建一個畫板
+            Graphics g = System.Drawing.Graphics.FromImage(bitmap);
+
+            //設置高質量插值法
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+
+            //設置高質量,低速度呈現平滑程度
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+            //清空畫布並以透明背景色填充
+            g.Clear(Color.Transparent);
+
+            //在指定位置並且按指定大小繪制原圖片的指定部分
+            g.DrawImage(originalImage, new Rectangle(0, 0, towidth, toheight),
+            new Rectangle(x, y, ow, oh),
+            GraphicsUnit.Pixel);
+
+            try
+            {
+                //以jpg格式保存縮略圖
+                EncoderParameters eps = new EncoderParameters(1);
+                EncoderParameter ep = new EncoderParameter(Encoder.Quality, quality);
+                eps.Param[0] = ep;
+                bitmap.Save(s, GetCodecInfo("image/jpeg"), eps);
+                return s.GetBuffer();
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                originalImage.Dispose();
+                bitmap.Dispose();
+                s.Dispose();
+                g.Dispose();
+            }
+        }
+
+        /**/
+        /// <summary>
+        /// 保存JPG時用
+        /// </summary>
+        /// <param name="mimeType"></param>
+        /// <returns>得到指定mimeType的ImageCodecInfo</returns>
+        private static ImageCodecInfo GetCodecInfo(string mimeType)
+        {
+            ImageCodecInfo[] CodecInfo = ImageCodecInfo.GetImageEncoders();
+            foreach (ImageCodecInfo ici in CodecInfo)
+            {
+                if (ici.MimeType == mimeType) return ici;
+            }
+            return null;
+        }
+
+
         private void button5_Click(object sender, EventArgs e)
         {
+            //jpg縮略圖
 
         }
 

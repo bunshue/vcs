@@ -34,6 +34,8 @@ namespace network_test3_mail
         string smtp_server = "smtp.gmail.com";
         string attach_filename = @"C:\______test_files\picture1.jpg";
 
+        string addr_from_pw = string.Empty;
+
         public Form1()
         {
             InitializeComponent();
@@ -43,6 +45,33 @@ namespace network_test3_mail
         {
             show_item_location();
             //ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+
+            string filename = "C:\\______test_files\\__RW\\_txt\\gmail_key.txt";
+            if (File.Exists(filename) == false)
+            {
+                MessageBox.Show("Gmail_KEY 檔案不存在, 離開", "vcs_SendMail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
+
+            //讀取檔案
+            string kk = File.ReadAllText(filename, System.Text.Encoding.Default);
+            //richTextBox1.Text += "檔案內容 : " + kk + "\n";
+            //richTextBox1.Text += "長度：" + kk.Length.ToString() + "\n";
+
+            if (kk.Length == 15)
+            {
+                addr_from_pw = kk;
+                password = addr_from_pw;
+            }
+            else
+            {
+                addr_from_pw = "xxxx";
+
+                MessageBox.Show("Gmail_KEY 錯誤, 離開", "vcs_SendMail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
         }
 
         void show_item_location()
