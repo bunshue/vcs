@@ -347,13 +347,71 @@ namespace network_test2_http
             return sUrlList;
         }
 
+        /// <summary> 
+        ///根據url獲取網站html圖片並保存 
+        /// </summary> 
+        public void getimages(string url)
+        {
+            //創建一個request 同時可以配置requst其余屬性  
+            System.Net.WebRequest imgRequst = System.Net.WebRequest.Create(url);
+            //在這裡我是以流的方式保存圖片  
+            System.Drawing.Image downImage = System.Drawing.Image.FromStream(imgRequst.GetResponse().GetResponseStream());
+            string filename = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+
+            downImage.Save(filename);
+
+            downImage.Dispose();//用完一定要釋放  
+        }
+
         private void button10_Click(object sender, EventArgs e)
         {
+            //下載圖片
+            string url = @"http://www.aspphp.online/Skin/apsp/logo.gif";
 
+            getimages(url);
+
+        }
+
+        /// <summary> 
+        ///根據url獲取網站html內容 
+        /// </summary> 
+        /// <param name="url">url鏈接</param>
+        /// <param name="msg">返回提示信息</param>
+        public string GetHtmlContentByUrl(string url, out string msg)
+        {
+            string httpRequesttsdbTimeout = "30000";//超時值（以毫秒為單位）30S
+            var htmlContent = string.Empty;
+            try
+            {
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpWebRequest.Timeout = int.Parse(httpRequesttsdbTimeout);
+                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                var stream = httpWebResponse.GetResponseStream();
+                if (stream != null)
+                {
+                    var streamReader = new StreamReader(stream, System.Text.Encoding.UTF8);
+                    htmlContent = streamReader.ReadToEnd();
+                    streamReader.Close();
+                    streamReader.Dispose();
+                    stream.Close();
+                    stream.Dispose();
+                }
+                httpWebResponse.Close();
+                msg = "";
+                return htmlContent;
+            }
+            catch (Exception ex)
+            {
+                msg = "網絡連接失敗：" + ex.Message;
+                return "";
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxpjc/201701/132908.html";
+            string str = GetHtmlContentByUrl(url, out str);
+            richTextBox1.Text = str;
 
         }
 

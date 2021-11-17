@@ -161,6 +161,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 70);
             this.button10.TabIndex = 10;
+            this.button10.Text = "下載圖片";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -171,6 +172,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 70);
             this.button11.TabIndex = 11;
+            this.button11.Text = "下載網頁HTML源碼";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 

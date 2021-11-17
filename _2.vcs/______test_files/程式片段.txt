@@ -1,4 +1,42 @@
 
+            //生成隨機字符串
+            string random_str = RandomStringGenerator.GetRandomString();
+            richTextBox1.Text += random_str + "\n";
+
+
+        /// <summary> 
+        /// 生成隨機字符串
+        /// </summary> 
+        private class RandomStringGenerator
+        {
+            static readonly Random r = new Random();
+            const string _chars = "0123456789";
+            public static string GetRandomString()
+            {
+                char[] buffer = new char[5];
+                for (int i = 0; i < 5; i++)
+                {
+                    buffer[i] = _chars[r.Next(_chars.Length)];
+                }
+                return new string(buffer);
+            }
+        }
+
+
+
+
+
+首先准備一個畫板:
+
+創建一個畫板主要有3種方式:
+
+A: 在窗體或控件的Paint事件中直接引用Graphics對象
+
+B: 利用窗體或某個控件的CreateGraphics方法
+
+C: 從繼承自圖像的任何對象創建Graphics對象
+
+
 
 //取得系統處理器數目
 int cnt = System.Environment.ProcessorCount;
