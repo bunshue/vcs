@@ -48,11 +48,10 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(12, 111);
+            this.button1.Location = new System.Drawing.Point(12, 112);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 70);
             this.button1.TabIndex = 0;
-            this.button1.Text = "減少圖片文件大小和尺寸";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -131,7 +130,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(160, 70);
             this.button0.TabIndex = 14;
-            this.button0.Text = "改變圖片透明度";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

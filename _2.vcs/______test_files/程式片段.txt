@@ -1770,43 +1770,6 @@ class GetIP
     }
 }
 
-二十、發送郵件：
-using System;
-using System.Web;
-using System.Web.Mail;
-
-public class TestSendMail
-{
-    public static void Main()
-    {
-        try
-        {
-            // Construct a new mail message 
-            MailMessage message = new MailMessage();
-            message.From = from@domain.com;
-            message.To   =  pengyun@cobainsoft.com;
-            message.Cc   = ;
-            message.Bcc  = ;
-            message.Subject = Subject;
-            message.Body = Content of message;
-            
-            //if you want attach file with this mail, add the line below
-            message.Attachments.Add(new MailAttachment(c:\attach.txt, MailEncoding.Base64));
-
- 
-            // Send the message
-            SmtpMail.Send(message);  
-            System.Console.WriteLine(Message has been sent);
-        }
-
-        catch(Exception ex)
-        {
-            System.Console.WriteLine(ex.Message.ToString());
-        }
-
-    }
-}
-
 十一、根據IP地址得出機器名稱：
 using System;
 using System.Net;

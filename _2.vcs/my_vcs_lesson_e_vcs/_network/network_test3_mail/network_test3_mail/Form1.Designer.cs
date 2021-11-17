@@ -45,6 +45,7 @@
             this.button0 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -73,7 +74,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(160, 70);
             this.button2.TabIndex = 2;
-            this.button2.Text = "mail 2 NG";
+            this.button2.Text = "mail 2 OK";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -84,7 +85,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(160, 70);
             this.button3.TabIndex = 3;
-            this.button3.Text = "mail 3 NG";
+            this.button3.Text = "mail 3 OK";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -95,7 +96,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(160, 70);
             this.button4.TabIndex = 4;
-            this.button4.Text = "mail 4 NG";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -106,7 +106,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(160, 70);
             this.button5.TabIndex = 5;
-            this.button5.Text = "mail 5 NG";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -117,7 +116,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(160, 70);
             this.button6.TabIndex = 6;
-            this.button6.Text = "mail 6 OK";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -128,7 +126,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(160, 70);
             this.button7.TabIndex = 7;
-            this.button7.Text = "mail 7 NG";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -223,11 +220,23 @@
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(835, 695);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(78, 37);
+            this.bt_clear.TabIndex = 17;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 744);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button0);
@@ -271,6 +280,7 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

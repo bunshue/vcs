@@ -55,57 +55,13 @@ namespace image_test4_romeo
             richTextBox1.Location = new Point(x_st + dx * 4 + 90, y_st + dy * 0);
         }
 
-        public static Bitmap returnAlpha(Bitmap bmp, int alpha)
-        {
-            Color col;
-            Bitmap bmp2 = new Bitmap(bmp);
-            for (int i = 0; i < bmp.Width; i++)
-                for (int j = 0; j < bmp.Height; j++)
-                {
-                    col = bmp.GetPixel(i, j);
-                    if ((col.A - alpha) >= 0)
-                    {
-                        bmp2.SetPixel(i, j, Color.FromArgb(Math.Abs(col.A - alpha), col.R, col.G, col.B));
-                        //bmp2.SetPixel(i, j, Color.FromArgb(10, col.R, col.G, col.B));
-                    }
-                }
-            return bmp2;
-        }
-
         private void button0_Click(object sender, EventArgs e)
         {
-            //改變圖片透明度
-            string filename = @"C:\______test_files\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            pictureBox1.Image = returnAlpha(bitmap1, 80);
-            pictureBox2.Image = returnAlpha(bitmap1, 160);
-            pictureBox3.Image = returnAlpha(bitmap1, 220);
         }
 
-        Bitmap reduce_bitmap(Bitmap bitmap1, int percent)
-        {
-            //C#減少圖片文件大小和尺寸
-
-            //生成80*100的縮略圖
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-
-            int w = W * percent / 100;
-            int h = H * percent / 100;
-
-            Bitmap bitmap2 = (Bitmap)bitmap1.GetThumbnailImage(w, h, null, IntPtr.Zero);
-
-            return bitmap2;
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //減少圖片文件大小和尺寸
-            string filename = @"C:\______test_files\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            pictureBox1.Image = reduce_bitmap(bitmap1, 80);
-            pictureBox2.Image = reduce_bitmap(bitmap1, 50);
-            pictureBox3.Image = reduce_bitmap(bitmap1, 20);
         }
 
         private void button2_Click(object sender, EventArgs e)
