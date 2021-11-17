@@ -25,7 +25,7 @@ namespace network_test3_mail
         string email_addr_from = "bunshue@gmail.com";
         string email_addr_from_nicknane = "王大頭";
         string email_addr_to = "david@insighteyes.com";
-        string password = "jasmine0311wang";
+        string password = "";
         string mail_subject = "測試郵件標題";
         string mail_body = "郵件內容lion-mouse";
         string smtp_server = "smtp.gmail.com";
@@ -484,30 +484,28 @@ namespace network_test3_mail
         {
             //using System.Net.Mail;
 
-            string mailContent = "郵件內容";
-
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add("david@insighteyes.com"); //收件人
+            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
+            mail.To.Add(email_addr_to); //收件人
 
             //發件人信息
-            msg.From = new MailAddress("bunshue@gmail.com", "發送人姓名", System.Text.Encoding.UTF8);
-            msg.Subject = "這是測試郵件";   //郵件標題
-            msg.SubjectEncoding = System.Text.Encoding.UTF8;    //標題編碼
-            msg.Body = mailContent; //郵件主體
-            msg.BodyEncoding = System.Text.Encoding.UTF8;
-            msg.IsBodyHtml = true;  //是否HTML
-            msg.Priority = System.Net.Mail.MailPriority.High;   //優先級
+            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, System.Text.Encoding.UTF8);
+            mail.Subject = mail_subject + " case 7";    //郵件標題
+            mail.SubjectEncoding = System.Text.Encoding.UTF8;    //標題編碼
+            mail.Body = mail_body + DateTime.Now.ToString();    //郵件主體
+            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            mail.IsBodyHtml = true;  //是否HTML
+            mail.Priority = System.Net.Mail.MailPriority.High;   //優先級
 
             SmtpClient client = new SmtpClient();
             //設置GMail郵箱和密碼 
-            client.Credentials = new System.Net.NetworkCredential("bunshue@gmail.com", "pwd");
+            client.Credentials = new System.Net.NetworkCredential(email_addr_from, password);
             client.Port = 587;
-            client.Host = "smtp.gmail.com";
+            client.Host = smtp_server;
             client.EnableSsl = true;
-            object userState = msg;
+            object userState = mail;
             try
             {
-                client.Send(msg);
+                client.Send(mail);
                 MessageBox.Show("發送成功");
             }
             catch (Exception ex)
