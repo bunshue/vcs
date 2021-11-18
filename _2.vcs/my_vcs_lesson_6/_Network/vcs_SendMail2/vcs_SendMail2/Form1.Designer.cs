@@ -1,4 +1,4 @@
-﻿namespace network_test3_mail
+﻿namespace vcs_SendMail2
 {
     partial class Form1
     {

@@ -16,9 +16,10 @@ using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using System.Management;
 using System.Diagnostics;
+
 using Shell32;
 
-namespace network_test3_mail
+namespace vcs_SendMail2
 {
     public partial class Form1 : Form
     {

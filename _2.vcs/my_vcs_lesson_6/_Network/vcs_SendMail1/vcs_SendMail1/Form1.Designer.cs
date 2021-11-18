@@ -1,4 +1,4 @@
-﻿namespace vcs_SendMail
+﻿namespace vcs_SendMail1
 {
     partial class Form1
     {

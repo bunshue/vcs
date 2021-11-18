@@ -8,8 +8,8 @@
     <ProjectGuid>{E38AD5AE-BFB7-4088-BD5B-1D085DE7D135}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>network_test3_mail</RootNamespace>
-    <AssemblyName>network_test3_mail</AssemblyName>
+    <RootNamespace>vcs_SendMail2</RootNamespace>
+    <AssemblyName>vcs_SendMail2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>

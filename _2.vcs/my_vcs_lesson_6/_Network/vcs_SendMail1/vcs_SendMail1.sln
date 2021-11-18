@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_SendMail", "vcs_SendMail\vcs_SendMail.csproj", "{DAAFC950-D236-40A8-84D4-69DBAAF7108C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_SendMail1", "vcs_SendMail1\vcs_SendMail1.csproj", "{DAAFC950-D236-40A8-84D4-69DBAAF7108C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

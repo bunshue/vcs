@@ -395,9 +395,128 @@ namespace image_test2
 
         }
 
+        const int HEIGHT = 190;
+        const int WIDTH = 190;
         private void button6_Click(object sender, EventArgs e)
         {
+            //生成高品質小空間的縮略圖
+            string filename = @"C:\______test_files\elephant.jpg";
+            string foldername = Application.StartupPath;
+            SetThumbnail_1(filename, foldername);
+            SetThumbnail_2(filename, foldername);
+            SetThumbnail_3(filename, foldername);
+        }
 
+        static void SetThumbnail_1(string filename, string foldername)
+        {
+            using (Bitmap source = new Bitmap(filename))
+            {
+                // return the source image if it's smaller than the designated thumbnail   
+                int wi, hi;
+                wi = WIDTH;
+                hi = HEIGHT;
+                // maintain the aspect ratio despite the thumbnail size parameters   
+                if (source.Width > source.Height)
+                {
+                    wi = WIDTH;
+                    hi = (int)(source.Height * ((decimal)WIDTH / source.Width));
+                }
+                else
+                {
+                    hi = HEIGHT;
+                    wi = (int)(source.Width * ((decimal)HEIGHT / source.Height));
+                }
+                using (Image thumb = source.GetThumbnailImage(wi, hi, null, IntPtr.Zero))
+                {
+                    string targetPath = Path.Combine(foldername, "th_1.jpg");
+                    thumb.Save(targetPath);
+                }
+            }
+        }
+
+        static void SetThumbnail_2(string filename, string foldername)
+        {
+            using (Bitmap source = new Bitmap(filename))
+            {
+                // return the source image if it's smaller than the designated thumbnail   
+                int wi, hi;
+                wi = WIDTH;
+                hi = HEIGHT;
+                // maintain the aspect ratio despite the thumbnail size parameters   
+                if (source.Width > source.Height)
+                {
+                    wi = WIDTH;
+                    hi = (int)(source.Height * ((decimal)WIDTH / source.Width));
+                }
+                else
+                {
+                    hi = HEIGHT;
+                    wi = (int)(source.Width * ((decimal)HEIGHT / source.Height));
+                }
+                // original code that creates lousy thumbnails   
+                // System.Drawing.Image ret = source.GetThumbnailImage(wi,hi,null,IntPtr.Zero);   
+                using (System.Drawing.Bitmap thumb = new Bitmap(wi, hi))
+                {
+                    using (Graphics g = Graphics.FromImage(thumb))
+                    {
+                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                        g.FillRectangle(Brushes.White, 0, 0, wi, hi);
+                        g.DrawImage(source, 0, 0, wi, hi);
+                    }
+                    string targetPath = Path.Combine(foldername, "th_2.jpg");
+                    thumb.Save(targetPath);
+                }
+            }
+        }
+
+        static void SetThumbnail_3(string filename, string foldername)
+        {
+            //Configure JPEG Compression Engine   
+            System.Drawing.Imaging.EncoderParameters encoderParams = new System.Drawing.Imaging.EncoderParameters();
+            long[] quality = new long[1];
+            quality[0] = 75;
+            System.Drawing.Imaging.EncoderParameter encoderParam = new System.Drawing.Imaging.EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+            encoderParams.Param[0] = encoderParam;
+            System.Drawing.Imaging.ImageCodecInfo[] arrayICI = System.Drawing.Imaging.ImageCodecInfo.GetImageEncoders();
+            System.Drawing.Imaging.ImageCodecInfo jpegICI = null;
+            for (int x = 0; x < arrayICI.Length; x++)
+            {
+                if (arrayICI[x].FormatDescription.Equals("JPEG"))
+                {
+                    jpegICI = arrayICI[x];
+                    break;
+                }
+            }
+            using (Bitmap source = new Bitmap(filename))
+            {
+                int wi, hi;
+                wi = WIDTH;
+                hi = HEIGHT;
+                // maintain the aspect ratio despite the thumbnail size parameters   
+                if (source.Width > source.Height)
+                {
+                    wi = WIDTH;
+                    hi = (int)(source.Height * ((decimal)WIDTH / source.Width));
+                }
+                else
+                {
+                    hi = HEIGHT;
+                    wi = (int)(source.Width * ((decimal)HEIGHT / source.Height));
+                }
+                // original code that creates lousy thumbnails   
+                // System.Drawing.Image ret = source.GetThumbnailImage(wi,hi,null,IntPtr.Zero);   
+                using (System.Drawing.Bitmap thumb = new Bitmap(wi, hi))
+                {
+                    using (Graphics g = Graphics.FromImage(thumb))
+                    {
+                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                        g.FillRectangle(Brushes.White, 0, 0, wi, hi);
+                        g.DrawImage(source, 0, 0, wi, hi);
+                    }
+                    string targetPath = Path.Combine(foldername, "th_3.jpg");
+                    thumb.Save(targetPath, jpegICI, encoderParams);
+                }
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)

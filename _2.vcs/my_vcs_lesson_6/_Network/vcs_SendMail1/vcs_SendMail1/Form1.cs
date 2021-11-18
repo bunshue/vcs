@@ -27,7 +27,7 @@ using System.Net.Mime;  //for MediaTypeNames
 */
 
 
-namespace vcs_SendMail
+namespace vcs_SendMail1
 {
     public partial class Form1 : Form
     {
@@ -52,7 +52,7 @@ namespace vcs_SendMail
             string filename = "C:\\______test_files\\__RW\\_txt\\gmail_key.txt";
             if (File.Exists(filename) == false)
             {
-                MessageBox.Show("Gmail_KEY 檔案不存在, 離開", "vcs_SendMail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Gmail_KEY 檔案不存在, 離開", "vcs_SendMail1", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
                 return;
             }
@@ -70,7 +70,7 @@ namespace vcs_SendMail
             {
                 addr_from_pw = "xxxx";
 
-                MessageBox.Show("Gmail_KEY 錯誤, 離開", "vcs_SendMail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Gmail_KEY 錯誤, 離開", "vcs_SendMail1", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
                 return;
             }

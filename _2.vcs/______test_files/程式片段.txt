@@ -1,4 +1,169 @@
 
+try by sugar
+C#如何獲取遠程磁盤上的剩余空間
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/191690.html
+
+
+
+C# 條形碼操作【源碼下載】
+
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185924.html
+
+
+
+
+　　　　private ManagementClass mc;
+　　　　private ManagementObjectCollection moc;
+　　　　private ManagementObject disk;
+
+　　　　///
+　　　　/// 取得設備網卡的MAC地址
+　　　　///
+　　　　public string GetNetCardMacAddress( )
+　　　　{
+　　　　　　mc = new ManagementClass( "Win32_NetworkAdapterConfiguration" );
+　　　　　　moc = mc.GetInstances( );
+　　　　　　string str = "";
+　　　　　　foreach( ManagementObject mo in moc )
+　　　　　　{
+　　　　　　　　if( ( bool )mo["IPEnabled"] == true )
+　　　　　　　　str = mo["MacAddress"].ToString( );
+　　　　　　}
+　　　　　　return str;
+　　　　}
+
+　　　　///
+　　　　/// 取得設備硬盤的卷標號
+　　　　///
+　　　　///
+　　　　public string GetDiskVolumeSerialNumber( )
+　　　　{
+　　　　　　mc = new ManagementClass( "Win32_NetworkAdapterConfiguration" );
+　　　　　　disk = new ManagementObject( "win32_logicaldisk.deviceid=\"c:\"" );
+　　　　　　disk.Get( );
+　　　　　　return disk.GetPropertyValue( "VolumeSerialNumber" ).ToString( );
+　　　　}
+
+
+
+就可獲得CPU的編號。
+
+System.Management.ManagementClass mc = new ManagementClass("win32_processor");
+ManagementObjectCollection moc = mc.GetInstances();
+foreach (ManagementObject mo in moc)
+{
+MessageBox.Show(mo["processorid"].ToString());
+}
+
+
+//C#獲取本機的MAC地址\序列號\硬盤序列號
+
+1  /// <summary>
+ 2         /// 顯示MAC地址
+ 3         /// </summary>
+ 4         /// <returns></returns>
+ 5         private string GetMAC()
+ 6         {
+ 7             string mac = "本機的MAC地址:";
+ 8             using (ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration"))
+ 9             {
+10                 ManagementObjectCollection moc = mc.GetInstances();
+11                 foreach (ManagementObject mo in moc)
+12                 {
+13                     if ((bool)mo["IPEnabled"])
+14                     {
+15                         string[] tmpMac = mo["MacAddress"].ToString().Split(':');
+16                         for (int i = 0; i < tmpMac.Length; i++)
+17                         {
+18                             mac += tmpMac[i];
+19                         }
+20                     }
+21                 }
+22             }
+23             return mac + "\r\n";
+24         }
+25 
+26         /// <summary>
+27         /// 獲取本機CPU序列號  
+28         /// </summary>
+29         /// <returns></returns>
+30         private string GetCPUID()
+31         {
+32             string CPUID = "本機的CPU序列號:";
+33             using (ManagementClass mc = new ManagementClass("Win32_Processor"))
+34             {
+35                 ManagementObjectCollection moc = mc.GetInstances();
+36                 foreach (ManagementObject item in moc)
+37                 {
+38                     CPUID += item["ProcessorId"].ToString().Trim();
+39                 }
+40             }
+41             return CPUID + "\r\n";
+42         }
+43 
+44         /// <summary>
+45         /// 獲取本機硬盤序列號
+46         /// </summary>
+47         /// <returns></returns>
+48         private string GetHardID()
+49         {
+50             string HardID = "本機的CPU序列號:";
+51             using (ManagementClass mc = new ManagementClass("Win32_DiskDrive"))
+52             {
+53                 ManagementObjectCollection moc = mc.GetInstances();
+54                 foreach (ManagementObject item in moc)
+55                 {
+56                     HardID += item["Model"].ToString().Trim();
+57                 }
+58             }
+59             return HardID + "\r\n";
+60 
+
+
+
+
+網站的標識圖片怎麼修改？
+
+
+放favicon.ico在網站更目錄或者單獨頁面用link標簽指定圖標也行
+
+ <link rel="SHORTCUT ICON" href="/xxx/xx.ico"/>
+
+
+
+C# 網頁抓取類
+
+//--需要引用 using System.Net 以及 using System.IO;
+private string GetContentFromUrll(string _requestUrl)
+        {
+            string _StrResponse ="";
+            HttpWebRequest _WebRequest = ( HttpWebRequest )WebRequest.Create( _requestUrl );
+            _WebRequest.Method = "GET";
+            WebResponse _WebResponse = _WebRequest.GetResponse();
+            StreamReader _ResponseStream = new StreamReader( _WebResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("gb2312"));
+            _StrResponse = _ResponseStream.ReadToEnd();
+            _WebResponse.Close(); 
+            _ResponseStream.Close();
+            return _StrResponse;        
+        }
+        
+        
+//獲取文件的版本信息:
+
+FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo("D:\\TEST.DLL");
+textBox1.Text="版本號: " + myFileVersionInfo1.FileVersion;
+
+
+
+//格式化字符串，向長度小於30的字符串末尾添加特定字符，補足n個字符，使用String類的PadRight(int,char)方法：
+
+String str="1234";
+str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補足30個字符
+
+
+
+
+
             //生成隨機字符串
             string random_str = RandomStringGenerator.GetRandomString();
             richTextBox1.Text += random_str + "\n";
@@ -1478,10 +1643,6 @@ public static Color GetRandomColor()
 
 
 
-
-
-
-
 //給圖片添加版權信息(C#)
 //創建一張位圖
 
@@ -2447,11 +2608,6 @@ c# Process類使用小例
 
 作為一個小型的數據存儲傳遞的工具——XML
 
-try by sugar
-C#如何獲取遠程磁盤上的剩余空間
-http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/191690.html
-
-
 1.對於那種明知道跨線程調用不會帶來錯誤的，可以設置Form控件不檢查跨線程調用錯誤，這樣就不報錯了。
 在Form1構造方法中：
 C#代碼 
@@ -2839,11 +2995,6 @@ c#畫三角形、並填充顏色
 	Point[] pntArr = {point1, point2, point3};
 	
 	e.Graphics.FillPolygon(Brushes.Red, pntArr);
-
-
-C# 條形碼操作【源碼下載】
-
-http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185924.html
 
 
 

@@ -332,5 +332,38 @@ namespace vcs_List1
                 richTextBox1.Text += showlist.ID + "\t->\t" + showlist.Name + "\t->\t" + showlist.Level + "\n";
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            int num = 10;
+            Random rr = new Random();
+
+            List<int> myList = new List<int>();   //宣告int型態的List
+
+            for (int i = 0; i < num; i++)
+            {
+                myList.Add(i);
+            }
+            richTextBox1.Text += "建立長度為 " + num.ToString() + " 的List\t內容:\t";
+            show_list(myList);
+
+            richTextBox1.Text += "List亂序\t內容:\t";
+            myList = get_random_list(myList);
+
+            show_list(myList);
+        }
+
+        List<int> get_random_list(List<int> ContentList)
+        {
+            Random random = new Random();
+            List<int> newList = new List<int>();
+            foreach (int item in ContentList)
+            {
+                newList.Insert(random.Next(newList.Count), item);
+            }
+            return newList;
+        }
     }
 }
+
