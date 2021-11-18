@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_SendMail1
+namespace vcs_SendMail
 {
     static class Program
     {

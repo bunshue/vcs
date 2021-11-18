@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_SendMail1.Properties {
+namespace vcs_SendMail.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

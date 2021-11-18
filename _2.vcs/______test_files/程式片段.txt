@@ -10,6 +10,29 @@ C# 條形碼操作【源碼下載】
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185924.html
 
 
+用C#獲取計算機磁盤空間
+在System.IO命名空間下的DriveInfo類的GetDrives()方法可以用來獲得計算機上的所有邏輯驅動器的名稱。DriveInfo類的TotalSize屬性可義獲得磁盤的空間大小。主要代碼如下。
+private void Form1_Load(object sender, EventArgs e)
+{
+    System.IO.DriveInfo[] drive=System.IO.DriveInfo.GetDrives();
+    for (int i = 0; i < drive.Length; i++)
+    {
+        comboBox1.Items.Add(drive[i].Name);
+    }
+}
+private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+{
+    System.IO.DriveInfo[] drive = System.IO.DriveInfo.GetDrives();
+    for (int i = 0; i < drive.Length; i++)
+    {
+        if (comboBox1.SelectedItem.ToString() == drive[i].Name)
+        {
+            textBox1.Text = Convert.ToString(drive[i].TotalSize/ 1024);
+        }
+    }
+}
+
+
 
 
 　　　　private ManagementClass mc;

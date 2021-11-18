@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="big5" ?>
+<Softimite Language="正體中文">
+  <Form>
+    <!--登錄介面-->
+    <Name>Form1</Name>
+    <Controls>
+      <Controls name="LoginForm" Text="登錄" />
+      <Control name="button1" text="帳號"/>
+      <Control name="button2" text="密碼"/>
+      <Control name="button3" text="登錄"/>
+      <Control name="button4" text="修改密碼"/>
+      <Control name="radioButton1" text="遵守 XML 語法規則"/>
+	  <Control name="label1" text="正體中文"/>
+    </Controls>
+  </Form>
+</Softimite>

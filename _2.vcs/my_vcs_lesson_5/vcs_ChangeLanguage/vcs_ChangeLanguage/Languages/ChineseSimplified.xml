@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<Softimite Language="简体中文">
+  <Form>
+    <!--登录界面-->
+    <Name>Form1</Name>
+    <Controls>
+      <Control name="Form1" text="登录" />
+      <Control name="button1" text="账号"/>
+      <Control name="button2" text="密码"/>
+      <Control name="button3" text="登录"/>
+      <Control name="button4" text="修改密码"/>
+      <Control name="radioButton1" text="遵守 XML 语法规则"/>
+	  <Control name="label1" text="简体中文SC"/>
+    </Controls>
+  </Form>
+</Softimite>

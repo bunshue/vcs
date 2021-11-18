@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_SendMail2
+namespace vcs_ChangeLanguage
 {
     static class Program
     {
