@@ -35,6 +35,33 @@ namespace vcs_ChangeLanguage
             //public static void LoadLanguage(Form form, string FormName)
         }
 
+        private void change_language1_Click(object sender, EventArgs e)
+        {
+            //正中
+            string str = "ChineseTraditional";
+            richTextBox1.Text += str + "\n";
+
+            MultiLanguage.LoadLanguage(this, str);
+        }
+
+        private void change_language2_Click(object sender, EventArgs e)
+        {
+            //簡中
+            string str = "ChineseSimplified";
+            richTextBox1.Text += str + "\n";
+
+            MultiLanguage.LoadLanguage(this, str);
+
+        }
+
+        private void change_language3_Click(object sender, EventArgs e)
+        {
+            //英文
+            string str = "English";
+            richTextBox1.Text += str + "\n";
+
+            MultiLanguage.LoadLanguage(this, str);
+        }
     }
 
     static class MultiLanguage
@@ -201,12 +228,12 @@ namespace vcs_ChangeLanguage
                 //判断是否存在该语言的配置文件
                 if (!(new System.IO.FileInfo("../../Languages/" + xmlName + ".xml")).Exists)
                 {
-                    Console.WriteLine("11111");
+                    Console.WriteLine("找不到檔案");
                     return null;
                 }
                 else
                 {
-                    Console.WriteLine("22222");
+                    Console.WriteLine("檔案存在");
                     reader = new XmlTextReader("../../Languages/" + xmlName + ".xml");
                 }
                 XmlDocument doc = new XmlDocument();

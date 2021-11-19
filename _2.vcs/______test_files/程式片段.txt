@@ -1537,17 +1537,7 @@ byte[] bytes= (byte[]) image類型字段值
 
 
 一、獲取程序集版本
-
 label版本.Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-二、獲取文件版本
-
-using System.Diagnostics;
-FileVersionInfo myFileVersion = FileVersionInfo.GetVersionInfo (System.Windows.Forms.Application.ExecutablePath);
-label版本.Text = myFileVersion.FileVersion; 
-
-
-
 
 
 C#自定義直線箭頭大小

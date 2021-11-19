@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="big5" ?>
-<Softimite Language="ÕýówÖÐÎÄ">
+<Softimite Language="¥¿Åé¤¤¤å">
   <Form>
-    <!--µÇä›½éÃæ-->
+    <!--µn¿ý¤¶­±-->
     <Name>Form1</Name>
     <Controls>
-      <Controls name="LoginForm" Text="µÇä›" />
-      <Control name="button1" text="Ž¤Ì–"/>
-      <Control name="button2" text="ÃÜ´a"/>
-      <Control name="button3" text="µÇä›"/>
-      <Control name="button4" text="ÐÞ¸ÄÃÜ´a"/>
-      <Control name="radioButton1" text="×ñÊØ XML ÕZ·¨ÒŽ„t"/>
-	  <Control name="label1" text="ÕýówÖÐÎÄ"/>
+      <Control name="Form1" text="µn¿ý" />
+      <Control name="button1" text="±b¸¹"/>
+      <Control name="button2" text="±K½X"/>
+      <Control name="button3" text="µn¿ý"/>
+      <Control name="button4" text="­×§ï±K½X"/>
+      <Control name="radioButton1" text="¿í¦u XML »yªk³W«h"/>
+	  <Control name="label1" text="¥¿Åé¤¤¤å"/>
     </Controls>
   </Form>
 </Softimite>

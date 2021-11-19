@@ -40,8 +40,8 @@ namespace vcs_SendMail
         string email_addr_cc = "bunshue@gmail.com";
         MailPriority priority = MailPriority.Normal;
 
-        string mail_subject = "測試郵件標題";
-        string mail_body = "郵件內容lion-mouse";
+        string mail_subject = string.Empty; //郵件標題
+        string mail_body = string.Empty;    //郵件內容
         string smtp_server = "smtp.gmail.com";  //POP3服務器的名稱
         int smtp_server_port = 25;              //指定 SMTP 交易連接埠, 預設是25
 
@@ -56,6 +56,7 @@ namespace vcs_SendMail
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            mail_body = richTextBox_mail.Text;
             show_item_location();
 
             string filename = "C:\\______test_files\\__RW\\_txt\\gmail_key.txt";
@@ -67,7 +68,7 @@ namespace vcs_SendMail
             }
 
             //讀取檔案
-            string kk = File.ReadAllText(filename, System.Text.Encoding.Default);
+            string kk = File.ReadAllText(filename, Encoding.Default);
             //richTextBox1.Text += "檔案內容 : " + kk + "\n";
             //richTextBox1.Text += "長度：" + kk.Length.ToString() + "\n";
 
@@ -125,53 +126,59 @@ namespace vcs_SendMail
             richTextBox1.Clear();
         }
 
-        private int SendMail(SmtpClient smtp, MailMessage mail)
+        private void SendGmail(MailMessage mail)
         {
-            int ret = 0;
+            //SMTP 外寄郵件伺服器設定
+            SmtpClient smtp = new SmtpClient(smtp_server, smtp_server_port);   //實例一個SmtpClient類
+            //smtp.Host = smtp_server;
+            //smtp.Port = smtp_server_port;
+            smtp.EnableSsl = true; //gmail預設開啟驗證, 指定 SmtpClient 使用安全套接字層 (SSL) 加密連接
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
+            //smtp.Credentials = CredentialCache.DefaultNetworkCredentials;   //不可, 需要驗證寄件者
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;   //通過網絡發送到SMTP服務器
+            SendMail(smtp, mail);
+            smtp.Dispose();
+        }
+
+        private void SendMail(SmtpClient smtp, MailMessage mail)
+        {
             richTextBox1.Text += "透過gmail寄信 ST, 時間 : " + DateTime.Now.ToString() + "\n";
             Application.DoEvents();
             try
             {
                 smtp.Send(mail);  //寄送郵件
                 richTextBox1.Text += "信件已寄出, 時間 : " + DateTime.Now.ToString() + "\n";
-                ret = 0;
             }
             //Handle Mail Exceptions
             catch (InvalidOperationException exInvalidOperation)            //沒有指定 SMTP Server
             {
                 richTextBox1.Text += "信件寄送失敗1, 時間 : " + DateTime.Now.ToString() + "\t訊息 : " + exInvalidOperation.Message.ToString() + "\n";
                 richTextBox1.Text += "原因: " + exInvalidOperation.ToString() + "\n";
-                ret = 1;
             }
             catch (SmtpFailedRecipientException exSmtpFailedRecipient)      //指定錯誤的收件者
             {
                 richTextBox1.Text += "信件寄送失敗2, 時間 : " + DateTime.Now.ToString() + "\t訊息 : " + exSmtpFailedRecipient.Message.ToString() + "\n";
                 richTextBox1.Text += "原因: " + exSmtpFailedRecipient.ToString() + "\n";
-                ret = 1;
             }
             catch (SmtpException exSmtp)                                    //找不到 SMTP 或 其他的例外錯誤
             {
                 richTextBox1.Text += "信件寄送失敗3, 時間 : " + DateTime.Now.ToString() + "\t訊息 : " + exSmtp.Message.ToString() + "\n";
                 richTextBox1.Text += "原因: " + exSmtp.ToString() + "\n";
-                ret = 1;
             }
             catch (Exception ex)
             {
                 richTextBox1.Text += "信件寄送失敗4, 時間 : " + DateTime.Now.ToString() + "\t訊息 : " + ex.Message.ToString() + "\n";
                 richTextBox1.Text += "原因: " + ex.ToString() + "\n";
-                ret = 1;
             }
-            return ret;
+            richTextBox1.Text += "\n";
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
-
-            //用gmail寄信
-            MailMessage mail;
-            SmtpClient smtp;
-            //string subject = "主旨 : 用vcs寄信 用gmail寄信 1\t" + DateTime.Now.ToString();   mmmmmm
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
 
             /*
             //MailAddress 的用法
@@ -181,8 +188,8 @@ namespace vcs_SendMail
             */
 
             //MailMessage mail = new MailMessage(email_addr_from, email_addr_to, subject, "郵件內容(Body)");   //一次寫完
-            mail = new MailMessage();    //實例一個MailMessage類
-            //mail.BodyEncoding  //郵件編碼方式
+            MailMessage mail = new MailMessage();    //實例一個MailMessage類
+            mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
             mail.Priority = MailPriority.High;   //設定電子郵件的優先順序
 
             //mail.From = new MailAddress(email_addr_from);
@@ -200,24 +207,22 @@ namespace vcs_SendMail
             //密件副本
             mail.Bcc.Add(new MailAddress(email_addr_to, email_addr_to_nicknane + "密件副本"));
 
-
             //對方回復郵件時默認的接收地址
-            mail.ReplyTo = new MailAddress(email_addr_from, "IMS-Sales", Encoding.GetEncoding(950));
+            //mail.ReplyTo = new MailAddress(email_addr_from, "IMS-Sales", Encoding.GetEncoding(950));  ReplyTo已過時, 改用ReplyToList
             mail.ReplyToList.Add(new MailAddress("David@insighteyes.com", "receiver"));
 
             mail.Subject = mail_subject;    //郵件標題
             mail.SubjectEncoding = Encoding.UTF8;//郵件標題編碼
 
             //各種郵件內容的寫法
-            //mail.Body = ....      //郵件內容
             //mail.Body = "莫聽穿林打葉聲，何妨吟嘯且徐行。竹杖芒鞋輕勝馬，誰怕？一蓑煙雨任平生。料峭春風吹酒醒，微冷，山頭斜照卻相迎。回首向來蕭瑟處，歸去，也無風雨也無晴。";
-            //mail.Body = richTextBox_mail.Text;
+            //mail.Body = mail_body;
             //mailBody(mail);
-            //mail.Body = "<font color=\"red\">莫聽穿林打葉聲，何妨吟嘯且徐行</font>"; //郵件正文
+            //mail.Body = "<font color=\"red\">莫聽穿林打葉聲，何妨吟嘯且徐行</font>"; //郵件內容
             mail.Body = "<html><body><h1>牡丹亭</h1><br><img src=\"C:\\______test_files\\picture1.jpg\"></body></html>";
             mail.Body = "牡丹亭";
 
-            mail.BodyEncoding = Encoding.UTF8;//郵件內容編碼 
+            mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
             mail.IsBodyHtml = true; //是否是HTML郵件 
 
             //通知狀態 OnSuccess, OnFailure, Delay, None, Never
@@ -252,19 +257,8 @@ namespace vcs_SendMail
             }
             */
 
-            //client = new SmtpClient(smtp_server, smtp_server_port);   //實例一個SmtpClient類   same
-            smtp = new SmtpClient();   //實例一個SmtpClient類
+            SendGmail(mail);
 
-            smtp.UseDefaultCredentials = true;//SMTP服務器需要身份認證，目前基本沒有不需要認證的了
-            //smtp.Credentials = CredentialCache.DefaultNetworkCredentials;   //不可, 需要驗證寄件者
-            smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password);   //驗證寄件者
-
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network; //將client的出站方式設為 Network
-            smtp.Host = smtp_server;  //設定smtp Server
-            smtp.Port = smtp_server_port; //設定Port  //指定 SMTP 交易連接埠, 預設是25
-            smtp.EnableSsl = true;  //是否啟用 SSL    gmail預設開啟驗證 smtp服務器是否啟用SSL加密
-            SendMail(smtp, mail); //包一層 看寄信結果
-            smtp.Dispose();
             mail.Dispose();
         }
 
@@ -287,26 +281,26 @@ namespace vcs_SendMail
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //用gmail寄信
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
 
-            MailMessage mail = new MailMessage(email_addr_from, email_addr_to);  //實例一個MailMessage類
+            MailMessage mail = new MailMessage();     //實例一個MailMessage類
+            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane); //email, 顯示名稱
+            mail.To.Add(new MailAddress(email_addr_to, email_addr_to_nicknane));    //email, 顯示名稱
             mail.Subject = mail_subject;    //郵件標題
-            mail.Body = richTextBox_mail.Text;
+            mail.Body = mail_body;  //郵件內容
 
-            SmtpClient smtp = new SmtpClient(smtp_server, smtp_server_port);   //實例一個SmtpClient類
+            SendGmail(mail);
 
-            smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password);   //驗證寄件者
-            smtp.EnableSsl = true;
-
-            //smtp.Send(mail);
-            SendMail(smtp, mail); //包一層 看寄信結果
+            mail.Dispose();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //用gmail寄信
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
 
             //設定寄件人
             MailAddress from = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.GetEncoding(email_encoding));
@@ -318,7 +312,7 @@ namespace vcs_SendMail
             mail.SubjectEncoding = Encoding.GetEncoding(email_encoding);
 
             mail.Body = "<h1>這是郵件內容</h1><hr/><img src=\"signature.png\" />";
-            mail.BodyEncoding = Encoding.GetEncoding(email_encoding);
+            mail.BodyEncoding = Encoding.GetEncoding(email_encoding);   //郵件內容編碼方式
 
             mail.IsBodyHtml = true;
             mail.Priority = MailPriority.High;
@@ -334,26 +328,16 @@ namespace vcs_SendMail
             attachment.ContentDisposition.DispositionType = DispositionTypeNames.Inline;
             mail.Attachments.Add(attachment);
 
-            //SMTP 外寄郵件伺服器設定
-            SmtpClient smtp = new SmtpClient();
-            smtp = new SmtpClient(smtp_server, smtp_server_port);   //實例一個SmtpClient類
-            //smtp.Host = smtp_server;
-            //smtp.Port = smtp_server_port;
-            smtp.EnableSsl = true; //gmail預設開啟驗證
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
+            SendGmail(mail);
 
-            //smtp.Send(mail);
-            SendMail(smtp, mail); //包一層 看寄信結果
-
-            smtp.Dispose();
             mail.Dispose();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //用gmail寄信
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
 
             //設定寄件人
             MailAddress from = new MailAddress(email_addr_from, email_addr_from_nicknane);
@@ -362,193 +346,47 @@ namespace vcs_SendMail
             MailMessage mail = new MailMessage(from, to);
 
             mail.Subject = mail_subject;    //郵件標題
-            //內文，可以用html的寫法，</br> 換行
-            mail.Body = "<a href='http://tw.yahoo.com'>yahoo</a>"; //內文
-            //mail.Body = richTextBox_mail.Text;//內文
+            //內容，可以用html的寫法，</br> 換行
+            mail.Body = "<a href='http://tw.yahoo.com'>yahoo</a>"; //內容
+            //mail.Body = mail_body;
             mail.IsBodyHtml = true;//<-如果要這封郵件吃html的話~這屬性就把他設為true~~
             //加入附件
             Attachment attachment = new Attachment(attach_filename1);//<-這是附件部分~先用附件的物件把路徑指定進去~
             mail.Attachments.Add(attachment);//<-郵件訊息中加入附件
 
-            SmtpClient smtp = new SmtpClient(smtp_server, smtp_server_port);   //實例一個SmtpClient類
+            SendGmail(mail);
 
-            smtp.Port = smtp_server_port; //設定Port  //指定 SMTP 交易連接埠, 預設是25
-            smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password);   //驗證寄件者
-            smtp.EnableSsl = true;
-
-            //smtp.Send(mail);
-            SendMail(smtp, mail); //包一層 看寄信結果
-        }
-
-        private void SendMailByGmail(List<string> MailList, string Subject, string Body)
-        {
-            //用gmail寄信
-            MailMessage mail = new MailMessage();
-
-            //寄件者
-            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8); //email, 顯示名稱, 編碼
-
-            //收件者，以逗號分隔不同收件者 例如 "test1@gmail.com,test2@gmail.com"
-            //mail.To.Add(string.Join(",", MailList.ToArray()));
-            mail.To.Add(new MailAddress(email_addr_to, email_addr_to_nicknane));
-
-            mail.Subject = mail_subject + " case 5 " + DateTime.Now.ToString(); //郵件標題
-
-            //郵件標題編碼 
-            mail.SubjectEncoding = Encoding.UTF8;
-
-            //郵件內容
-            mail.Body = Body;
-            mail.IsBodyHtml = true;//支援html
-            mail.BodyEncoding = Encoding.UTF8;//郵件內容編碼
-            mail.Priority = MailPriority.Normal;//郵件優先級
-
-            /*
-            // *  outlook.com smtp.live.com port:25
-            // *  yahoo smtp.mail.yahoo.com.tw port:465
-            //
-            */
-
-            //SMTP 外寄郵件伺服器設定
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = smtp_server;
-            smtp.Port = smtp_server_port;
-            smtp.EnableSsl = true; //gmail預設開啟驗證
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
-
-            //smtp.Send(mail);
-            SendMail(smtp, mail); //包一層 看寄信結果
+            mail.Dispose();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //SendMailByGmail();
+            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
+
+            //發件人和收件人的郵箱地址
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane); //email, 顯示名稱
+            mail.To.Add(new MailAddress(email_addr_to, email_addr_to_nicknane));    //email, 顯示名稱
+            mail.Priority = MailPriority.Normal;
+            mail.Subject = mail_subject;    //郵件標題
+            mail.SubjectEncoding = Encoding.UTF8;//郵件標題編碼
+            mail.Body = mail_body;  //郵件內容
+            mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
+            mail.IsBodyHtml = true; //設置為HTML格式
+            mail.Priority = MailPriority.High;  //優先級
+
+            SendGmail(mail);
+
+            mail.Dispose();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "測試中... fail....\n";
-            return;
-
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
-
-            //設定smtp主機
-            string smtpAddress = "smtp.mail.yahoo.com";
-            //設定Port
-            int portNumber = 587;
-            bool enableSSL = true;
-            //填入寄送方email和密碼
-            string emailFrom = "bunshue@yahoo.com.tw";
-            string password = "passwd";
-            //收信方email
-            string emailTo = "David@insighteyes.com";
-            //內容
-            string body = "Hello, I'm just writing this to say Hi!";
-
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(emailFrom);
-            mail.To.Add(emailTo);
-            mail.Subject = mail_subject;    //郵件標題
-            mail.Body = body;
-            // 若你的內容是HTML格式，則為True
-            mail.IsBodyHtml = false;
-
-            //夾帶檔案
-            //mail.Attachments.Add(new Attachment("C:\\SomeFile.txt"));
-            //mail.Attachments.Add(new Attachment("C:\\SomeZip.zip"));
-
-            SmtpClient smtp = new SmtpClient(smtpAddress, portNumber);
-            smtp.Credentials = new NetworkCredential(emailFrom, password);
-            smtp.EnableSsl = enableSSL;
-
-            smtp.Send(mail);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //從 gmail 寄信到 ims
-            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
-
-            richTextBox1.Text += "透過gmail寄信 ST 0\n";
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
             Application.DoEvents();
-            int result = SendEmail(email_addr_from, email_addr_from_password, new string[] { email_addr_to }, mail_subject, mail_body + DateTime.Now.ToString(), smtp_server);
-            if (result == 0)
-            {
-                richTextBox1.Text += "透過gmail寄信 ST 0 OK\n";
-            }
-            else
-            {
-                richTextBox1.Text += "透過gmail寄信 SP 0 NG\n";
-            }
-        }
-
-        ///<summary>
-        /// 發送郵件
-        ///</summary>
-        ///<param name="sendEmailAddress">發件人郵箱</param>
-        ///<param name="sendEmailPwd">發件人密碼</param>
-        ///<param name="msgToEmail">收件人郵箱地址</param>
-        ///<param name="title">郵件標題</param>
-        ///<param name="content">郵件內容</param>
-        ///<param name="host">郵件SMTP服務器</param>
-        ///<returns>0：失敗。1：成功！</returns>
-
-        public int SendEmail(string sendEmailAddress, string sendEmailPwd, string[] msgToEmail, string title, string content, string host)
-        {
-            //OK
-            //發件者郵箱地址
-            string fjrtxt = sendEmailAddress;
-            //發件者郵箱密碼
-            string mmtxt = sendEmailPwd;
-            string[] fasong = fjrtxt.Split('@');
-
-            //SMTP 外寄郵件伺服器設定
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = smtp_server;
-            smtp.Port = smtp_server_port;
-            //QQ郵箱使用ssl加密，需要設置SmtpClient.EnableSsl 屬性為True表示“指定 SmtpClient 使用安全套接字層 (SSL) 加密連接。”
-            smtp.EnableSsl = true; //gmail預設開啟驗證
-            smtp.UseDefaultCredentials = false;
-            //通過網絡發送到Smtp服務器
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            //通過用戶名和密碼 認證
-            smtp.Credentials = new NetworkCredential(fasong[0].ToString(), email_addr_from_password);  //這裡要填正確的帳號跟密碼, 驗證寄件者
-
-            //發件人和收件人的郵箱地址
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(fjrtxt);
-            for (int i = 0; i < msgToEmail.Length; i++)
-            {
-                mail.To.Add(new MailAddress(msgToEmail[i]));
-            }
-
-            mail.Priority = MailPriority.Normal;
-            mail.Subject = title;   //郵件主題
-            mail.SubjectEncoding = Encoding.UTF8;   //主題編碼
-            mail.Body = content;    //郵件正文
-            mail.BodyEncoding = Encoding.UTF8;  //正文編碼
-            mail.IsBodyHtml = true; //設置為HTML格式
-            mail.Priority = MailPriority.High;  //優先級
-
-            richTextBox1.Text += "透過gmail寄信 ST\n";
-
-            int ret = SendMail(smtp, mail);
-
-            smtp.Dispose();
-            mail.Dispose();
-
-            return ret;
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
 
             /*
             要寄Gmail信首先要登入Gmail，
@@ -559,7 +397,7 @@ namespace vcs_SendMail
 
             MailMessage mail = new MailMessage();
             //寄件者
-            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, System.Text.Encoding.UTF8);  //包含暱稱 與編碼
+            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8);  //包含暱稱 與編碼
             //mail.From = new MailAddress(email_addr_from); //不包含暱稱
 
             /* 上面3個參數分別是發件人地址（可以隨便寫），發件人姓名，編碼*/
@@ -574,85 +412,75 @@ namespace vcs_SendMail
 
             //主旨
             mail.Subject = mail_subject;    //郵件標題
-            mail.SubjectEncoding = System.Text.Encoding.UTF8;//郵件標題編碼
-            mail.Body = mail_body + DateTime.Now.ToString();   //郵件內容
-            mail.BodyEncoding = System.Text.Encoding.UTF8;//郵件內容編碼 
+            mail.SubjectEncoding = Encoding.UTF8;//郵件標題編碼
+            mail.Body = mail_body;  //郵件內容
+            mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
             //附加檔案
             mail.Attachments.Add(new Attachment(attach_filename1));  //附件
             mail.IsBodyHtml = true;//是否是HTML郵件 
             //mail.Priority = MailPriority.High;//郵件優先級 
 
-            //SMTP 外寄郵件伺服器設定
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = smtp_server;
-            smtp.Port = smtp_server_port;
-            smtp.EnableSsl = true; //gmail預設開啟驗證
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
+            SendGmail(mail);
 
-            richTextBox1.Text += "透過gmail寄信 ST 1\n";
-            SendMail(smtp, mail);
-
-            smtp.Dispose();
             mail.Dispose();
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
 
             MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, System.Text.Encoding.UTF8);  //包含暱稱 與編碼
+            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8);  //包含暱稱 與編碼
             //mail.From = new MailAddress(email_addr_from); //不包含暱稱
             mail.To.Add(new MailAddress(email_addr_to));
             mail.Priority = MailPriority.Normal;
             mail.Subject = mail_subject;
-            mail.Body = mail_body + DateTime.Now.ToString();
-            mail.Attachments.Add(new Attachment(attach_filename1));  //附件
+            mail.Body = mail_body;  //郵件內容
 
-            //SMTP 外寄郵件伺服器設定
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = smtp_server;
-            smtp.Port = smtp_server_port;
-            smtp.EnableSsl = true; //gmail預設開啟驗證
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
+            mail.Attachments.Add(new Attachment(attach_filename1));  //發送附件
 
-            richTextBox1.Text += "透過gmail寄信 ST 2\n";
-            SendMail(smtp, mail);
+            SendGmail(mail);
 
-            smtp.Dispose();
             mail.Dispose();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
+
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8);  //包含暱稱 與編碼
+            //mail.From = new MailAddress(email_addr_from); //不包含暱稱
+            mail.To.Add(new MailAddress(email_addr_to));
+            mail.Priority = MailPriority.Normal;
+            mail.Subject = mail_subject;
+            mail.SubjectEncoding = Encoding.UTF8;
+            mail.Body = mail_body;  //郵件內容
+            mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
+            mail.IsBodyHtml = true;  //是否HTML
+
+            SendGmail(mail);
+
+            mail.Dispose();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
 
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, System.Text.Encoding.UTF8);  //包含暱稱 與編碼
-            //mail.From = new MailAddress(email_addr_from); //不包含暱稱
-            mail.To.Add(email_addr_to);
-            mail.Priority = MailPriority.Normal;
-            mail.Subject = mail_subject;
-            mail.SubjectEncoding = System.Text.Encoding.UTF8;
-            mail.Body = mail_body + DateTime.Now.ToString();
-            mail.BodyEncoding = System.Text.Encoding.UTF8;
-            mail.IsBodyHtml = true;  //是否HTML
-
-            //SMTP 外寄郵件伺服器設定
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = smtp_server;
-            smtp.Port = smtp_server_port;
-            smtp.EnableSsl = true; //gmail預設開啟驗證
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
-
-            richTextBox1.Text += "透過gmail寄信 ST 3\n";
-            SendMail(smtp, mail);
-
-            smtp.Dispose();
-            mail.Dispose();
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -660,14 +488,89 @@ namespace vcs_SendMail
 
         }
 
+        private void SendMailByGmail(List<string> MailList, string Subject, string Body)
+        {
+            mail_subject = "SendMailByGmail " + DateTime.Now.ToString(); //郵件標題
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
+
+            MailMessage mail = new MailMessage();
+
+            //寄件者
+            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8); //email, 顯示名稱, 編碼
+
+            //收件者，以逗號分隔不同收件者 例如 "test1@gmail.com,test2@gmail.com"
+            //mail.To.Add(string.Join(",", MailList.ToArray()));
+            mail.To.Add(new MailAddress(email_addr_to, email_addr_to_nicknane));
+
+            //郵件標題編碼 
+            mail.SubjectEncoding = Encoding.UTF8;
+
+            //郵件內容
+            mail.Body = Body;
+            mail.IsBodyHtml = true;//支援html
+            mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
+            mail.Priority = MailPriority.Normal;//郵件優先級
+
+            /*
+            // *  outlook.com smtp.live.com port:25
+            // *  yahoo smtp.mail.yahoo.com.tw port:465
+            //
+            */
+
+            SendGmail(mail);
+
+            mail.Dispose();
+        }
+
         private void button12_Click(object sender, EventArgs e)
         {
-
+            //SendMailByGmail();
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "測試中... fail....\n";
+            return;
 
+            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
+
+            //設定smtp主機
+            string smtp_server_y = "smtp.mail.yahoo.com";
+            //設定Port
+            int smtp_server_port_y = 587;              //指定 SMTP 交易連接埠, 預設是25
+            //填入寄送方email和密碼
+            string email_addr_from_y = "bunshue@yahoo.com.tw";
+            string email_addr_from_password_y = "passwd";
+            //收信方email
+            string emailTo = "David@insighteyes.com";
+
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(email_addr_from_y);
+            mail.To.Add(emailTo);
+            mail.Subject = mail_subject;    //郵件標題
+            mail.Body = mail_body;  //郵件內容
+            // 若你的內容是HTML格式，則為True
+            mail.IsBodyHtml = false;
+
+            //夾帶檔案
+            //mail.Attachments.Add(new Attachment("C:\\SomeFile.txt"));
+            //mail.Attachments.Add(new Attachment("C:\\SomeZip.zip"));
+
+            //SMTP 外寄郵件伺服器設定
+            SmtpClient smtp = new SmtpClient(smtp_server_y, smtp_server_port_y);   //實例一個SmtpClient類
+            //smtp.Host = smtp_server_y;
+            //smtp.Port = smtp_server_port_y;
+            smtp.EnableSsl = true; //gmail預設開啟驗證, 指定 SmtpClient 使用安全套接字層 (SSL) 加密連接
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new NetworkCredential(email_addr_from_y, email_addr_from_password_y);    //這裡要填正確的帳號跟密碼, 驗證寄件者
+
+            SendMail(smtp, mail);
+
+            smtp.Dispose();
+            mail.Dispose();
         }
     }
 }
