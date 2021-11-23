@@ -417,12 +417,31 @@ namespace network_test2_http
 
         private void button12_Click(object sender, EventArgs e)
         {
-
+            //C#下載網頁HTML源碼
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxpjc/201701/132908.html";
+            string str = DownLoad_HTML.GetHtml(url);
+            richTextBox1.Text = str;
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //網頁抓取
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxpjc/201701/132908.html";
+            string str = GetContentFromUrll(url);
+            richTextBox1.Text = str;
+        }
 
+        private string GetContentFromUrll(string _requestUrl)
+        {
+            string _StrResponse = "";
+            HttpWebRequest _WebRequest = (HttpWebRequest)WebRequest.Create(_requestUrl);
+            _WebRequest.Method = "GET";
+            WebResponse _WebResponse = _WebRequest.GetResponse();
+            StreamReader _ResponseStream = new StreamReader(_WebResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("gb2312"));
+            _StrResponse = _ResponseStream.ReadToEnd();
+            _WebResponse.Close();
+            _ResponseStream.Close();
+            return _StrResponse;
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -436,5 +455,60 @@ namespace network_test2_http
         }
 
     }
+
+
+    //C#下載網頁HTML源碼
+
+
+    public static class DownLoad_HTML
+    {
+        private static int FailCount = 0; //記錄下載失敗的次數
+
+        public static string GetHtml(string url) //傳入要下載的網址
+        {
+            string str = string.Empty;
+            try
+            {
+                System.Net.WebRequest request = System.Net.WebRequest.Create(url);
+                request.Timeout = 10000; //下載超時時間
+                request.Headers.Set("Pragma", "no-cache");
+                System.Net.WebResponse response = request.GetResponse();
+                System.IO.Stream streamReceive = response.GetResponseStream();
+                Encoding encoding = Encoding.GetEncoding("gb2312");//utf-8 網頁文字編碼
+                System.IO.StreamReader streamReader = new System.IO.StreamReader(streamReceive, encoding);
+                str = streamReader.ReadToEnd();
+                streamReader.Close();
+            }
+            catch (Exception ex)
+            {
+                FailCount++;
+
+                if (FailCount > 5)
+                {
+                    var result = System.Windows.Forms.MessageBox.Show("已下載失敗" + FailCount + "次，是否要繼續嘗試？" + Environment.NewLine + ex.ToString(), "數據下載異常", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Error);
+                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        str = GetHtml(url);
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("下載HTML失敗" + Environment.NewLine + ex.ToString(), "下載HTML失敗", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                        throw ex;
+                    }
+                }
+                else
+                {
+                    str = GetHtml(url);
+                }
+            }
+
+            FailCount = 0; //如果能執行到這一步就表示下載終於成功了
+            return str;
+        }
+
+    }
+
+
+
 }
 

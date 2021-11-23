@@ -1397,7 +1397,42 @@ namespace vcs_test_all_03_Syntax
 
         private void button39_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "\nout 語法 2\t呼叫一個函數 回傳兩個變數\n";
+            int i;
+            Random r = new Random();
+            int[] array = new int[15];
+            for (i = 0; i < array.Length; i++)
+            {
+                array[i] = r.Next(100);
+                richTextBox1.Text += array[i].ToString() + " ";
+            }
 
+            richTextBox1.Text += "\n";
+
+            int y_min;
+            int y_max;
+            GetDataValueRange(array, out y_min, out y_max);
+
+            richTextBox1.Text += "y_min = " + y_min.ToString() + "\t" + "y_max = " + y_max.ToString() + "\n";
+        }
+
+        void GetDataValueRange(int[] array, out int y_min, out int y_max)
+        {
+            int i;
+            int len = array.Length;
+            y_min = int.MaxValue;
+            y_max = int.MinValue;
+            for (i = 0; i < len; i++)
+            {
+                if (y_min > array[i])
+                {
+                    y_min = array[i];
+                }
+                if (y_max < array[i])
+                {
+                    y_max = array[i];
+                }
+            }
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -1733,7 +1768,7 @@ namespace vcs_test_all_03_Syntax
 
         private void button42_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "\nout 語法\n";
+            richTextBox1.Text += "\nout 語法 1\n";
             int r = 0;
             for (int i = 1; i < 10; i++)
             {

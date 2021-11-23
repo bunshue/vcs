@@ -1,4 +1,51 @@
 
+
+ArrayList list = new ArrayList();
+
+list.Add("alive");
+
+list.Add("silver");
+
+list.Add("dog");
+
+list.Add("Ftp");
+
+d.SetData("para", list);
+
+//將制定的值賦值給應用程序域的屬性
+
+foreach (string s in (ArrayList)d.GetData("para"))
+
+{// 獲取存在當前應用程序域中的值
+
+Console.WriteLine("you will see" + s);
+
+}
+
+
+
+//C#Hash算法MD5加密算法
+ 
+
+//這裡Hash算法用MD5算法為例，MD5加密是不可逆的，所以只有加密沒有解密。
+ 
+
+class MD5
+{
+public static string EncryptCode(string password)
+{
+//明文密碼由字符串轉換為byte數組
+byte[] clearBytes = new UnicodeEncoding().GetBytes(password);
+//由明文的byte數組計算出MD5密文byte數組
+byte[] hashedBytes = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(clearBytes);
+
+//把byte數組轉換為字符串後返回，BitConverter用於將基礎數據類型與字節數組相互轉換
+return BitConverter.ToString(hashedBytes);
+}
+}
+
+
+
 try by sugar
 C#如何獲取遠程磁盤上的剩余空間
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/191690.html
@@ -184,6 +231,33 @@ String str="1234";
 str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補足30個字符
 
 
+
+
+//C#中獲取程序當前路徑的集中方法及實現代碼
+
+string str1 =Process.GetCurrentProcess().MainModule.FileName;//可獲得當前執行的exe的文件名。
+string str2=Environment.CurrentDirectory;//獲取和設置當前目錄（即該進程從中啟動的目錄）的完全限定路徑。
+//備注 按照定義，如果該進程在本地或網絡驅動器的根目錄中啟動，則此屬性的值為驅動器名稱後跟一個尾部反斜槓（如“C:/”）。如果該進程在子目錄中啟動，則此屬性的值為不帶尾部反斜槓的驅動器和子目錄路徑（如“C:/mySubDirectory”）。
+string str3=Directory.GetCurrentDirectory();//獲取應用程序的當前工作目錄。
+string str4=AppDomain.CurrentDomain.BaseDirectory;//獲取基目錄，它由程序集沖突解決程序用來探測程序集。
+string str5=Application.StartupPath;//獲取啟動了應用程序的可執行文件的路徑，不包括可執行文件的名稱。
+string str6=Application.ExecutablePath;//獲取啟動了應用程序的可執行文件的路徑，包括可執行文件的名稱。
+string str7=AppDomain.CurrentDomain.SetupInformation.ApplicationBase;//獲取或設置包含該應用程序的目錄的名稱。
+
+1. System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName
+獲取模塊的完整路徑。
+2. System.Environment.CurrentDirectory
+獲取和設置當前目錄(該進程從中啟動的目錄)的完全限定目錄。
+3. System.IO.Directory.GetCurrentDirectory()
+獲取應用程序的當前工作目錄。這個不一定是程序從中啟動的目錄啊，有可能程序放在C:/www裡,這個函數有可能返回C:/Documents and Settings/ZYB/,或者C:/Program Files/Adobe/,有時不一定返回什麼東東，我也搞不懂了。
+4. System.AppDomain.CurrentDomain.BaseDirectory
+獲取程序的基目錄。
+5. System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase
+獲取和設置包括該應用程序的目錄的名稱。
+6. System.Windows.Forms.Application.StartupPath
+獲取啟動了應用程序的可執行文件的路徑。效果和2、5一樣。只是5返回的字符串後面多了一個"/"而已
+7. System.Windows.Forms.Application.ExecutablePath
+獲取啟動了應用程序的可執行文件的路徑及文件名，效果和1一樣。
 
 
 
