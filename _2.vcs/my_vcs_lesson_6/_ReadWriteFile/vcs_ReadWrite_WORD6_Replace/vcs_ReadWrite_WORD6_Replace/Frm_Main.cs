@@ -9,12 +9,13 @@ using System.Windows.Forms;
 
 using System.Threading;
 using Word = Microsoft.Office.Interop.Word;
+using Microsoft.Office.Interop.Word;
 
 namespace vcs_ReadWrite_WORD6_Replace
 {
-    public partial class Frm_Main : Form
+    public partial class Form1 : Form
     {
-        public Frm_Main()
+        public Form1()
         {
             InitializeComponent();
         }
@@ -26,8 +27,12 @@ namespace vcs_ReadWrite_WORD6_Replace
         //定义G_Missing字段并添加引用
         private object G_Missing = System.Reflection.Missing.Value;
 
-        private void Frm_Main_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
+            //C# 跨 Thread 存取 UI
+            Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
+            //Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
             txt_path.Text = filename;
             txt_Find.ReadOnly = false;//取消文本框的只读状态
             txt_Replace.ReadOnly = false;//取消文本框的只读状态
@@ -52,6 +57,7 @@ namespace vcs_ReadWrite_WORD6_Replace
                     G_WordApplication =//创建Word应用程序对象
                          new Microsoft.Office.Interop.Word.Application();
                     object P_FilePath = filename;//创建Object对象
+                    richTextBox1.Text += "開啟檔案 :\t" + P_FilePath + "\n";
                     Word.Document P_Document = G_WordApplication.Documents.Open(//打开Word文档
                         ref P_FilePath, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing,
@@ -86,13 +92,11 @@ namespace vcs_ReadWrite_WORD6_Replace
                         {
                             if (P_bl)//查看是否找到并替换
                             {
-                                MessageBox.Show(//弹出消息对话框
-                                    "找到字符串并替换", "提示！");
+                                MessageBox.Show("找到字符串并替换", "提示！");
                             }
                             else
                             {
-                                MessageBox.Show(//弹出消息对话框
-                                    "没有找到字符串", "提示！");
+                                MessageBox.Show("没有找到字符串", "提示！");
                             }
                             btn_Begin.Enabled = true;//启用开始替换按钮
                         }));
@@ -123,5 +127,119 @@ namespace vcs_ReadWrite_WORD6_Replace
                 });
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CreateDocument();
+        }
+
+        //Create document method  
+        private void CreateDocument()
+        {
+            //Create an instance for word app  
+            Microsoft.Office.Interop.Word.Application winword = new Microsoft.Office.Interop.Word.Application();
+
+            //Set animation status for word application  
+            winword.ShowAnimation = false;
+
+            //Set status for word application is to be visible or not.  
+            winword.Visible = false;
+
+            //Create a missing variable for missing value  
+            object missing = System.Reflection.Missing.Value;
+
+            //Create a new document  
+            Microsoft.Office.Interop.Word.Document document = winword.Documents.Add(ref missing, ref missing, ref missing, ref missing);
+
+            //页边距
+            document.PageSetup.LeftMargin = 40; //1.41CM
+            document.PageSetup.RightMargin = 40;
+            document.PageSetup.TopMargin = 40;
+            document.PageSetup.BottomMargin = 40;
+
+            //页眉 //Add header into the document
+            foreach (Microsoft.Office.Interop.Word.Section section in document.Sections)
+            {
+                //Get the header range and add the header details.
+                Microsoft.Office.Interop.Word.Range headerRange = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                headerRange.Fields.Add(headerRange, Microsoft.Office.Interop.Word.WdFieldType.wdFieldPage);
+                headerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                headerRange.Font.ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdBlue;
+                headerRange.Font.Size = 10;
+                headerRange.Text = "Header text goes here";
+            }
+
+            //页脚 Add the footers into the document
+            foreach (Microsoft.Office.Interop.Word.Section wordSection in document.Sections)
+            {
+                //Get the footer range and add the footer details.  
+                Microsoft.Office.Interop.Word.Range footerRange = wordSection.Footers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                footerRange.Font.ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdDarkRed;
+                footerRange.Font.Size = 10;
+                footerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                footerRange.Text = "Footer text goes here";
+            }
+
+            //添加内容 adding text to document
+            document.Content.SetRange(0, 0);
+            document.Content.Text = "检测报告 " + Environment.NewLine;
+
+            //添加段落 Add paragraph with Heading 1 style
+            Microsoft.Office.Interop.Word.Paragraph para1 = document.Content.Paragraphs.Add(ref missing);
+            para1.Range.Text = "Para 1 text";
+            para1.Range.InsertParagraphAfter();
+
+            //Add paragraph with Heading 2 style  
+            Microsoft.Office.Interop.Word.Paragraph para2 = document.Content.Paragraphs.Add(ref missing);
+            para2.Range.Text = "Para 2 text";
+            para2.Range.InsertParagraphAfter();
+
+            //表格 Create a 5X5 table and insert some dummy record
+            Table firstTable = document.Tables.Add(para1.Range, 5, 5, ref missing, ref missing);
+
+            firstTable.Borders.Enable = 1;
+            foreach (Row row in firstTable.Rows)
+            {
+                foreach (Cell cell in row.Cells)
+                {
+                    //表头 Header row
+                    if (cell.RowIndex == 1)
+                    {
+                        cell.Range.Text = "Column " + cell.ColumnIndex.ToString();
+                        cell.Range.Font.Bold = 1;
+                        //other format properties goes here  
+                        cell.Range.Font.Name = "verdana";
+                        cell.Range.Font.Size = 10;
+                        //cell.Range.Font.ColorIndex = WdColorIndex.wdGray25;                              
+                        cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                        //Center alignment for the Header cells  
+                        cell.VerticalAlignment = WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                        cell.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+                    }
+                    //行 Data row
+                    else
+                    {
+                        cell.Range.Text = (cell.RowIndex - 2 + cell.ColumnIndex).ToString();
+                    }
+                }
+
+                try
+                {
+                    //保存
+                    string filename = System.Windows.Forms.Application.StartupPath + "\\docx_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+                    document.SaveAs(filename);
+                    document.Close(ref missing, ref missing, ref missing);
+                    document = null;
+
+                    winword.Quit(ref missing, ref missing, ref missing);
+                    winword = null;
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+        }
     }
 }

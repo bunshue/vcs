@@ -962,7 +962,47 @@ namespace read_write_test1_xml
 
         private void button20_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\__RW\_xml\school.xml";
 
+            //將XmlDocument轉化為string函數
+            //讀取普通XML
+            XmlDocument doc = new XmlDocument();
+            //載入要讀取的XML
+            doc.Load(filename);
+
+            //獲得根節點
+            XmlElement books = doc.DocumentElement;
+
+            //獲得子節點 返回節點的集合
+            XmlNodeList xnl = books.ChildNodes;
+
+            foreach (XmlNode item in xnl)
+            {
+                richTextBox1.Text += item.InnerText + "\n";
+            }
+
+            //將XmlDocument轉化為string
+            string result = ConvertXmlToString(doc);
+            richTextBox1.Text += "result:\n" + result + "\n";
+        }
+
+        /// <summary>  
+        /// 將XmlDocument轉化為string
+        /// </summary>  
+        /// <param name="xmlDoc"></param>  
+        /// <returns></returns>  
+        public string ConvertXmlToString(XmlDocument xmlDoc)
+        {
+            MemoryStream stream = new MemoryStream();
+            XmlTextWriter writer = new XmlTextWriter(stream, null);
+            writer.Formatting = Formatting.Indented;
+            xmlDoc.Save(writer);
+            StreamReader sr = new StreamReader(stream, System.Text.Encoding.UTF8);
+            stream.Position = 0;
+            string xmlString = sr.ReadToEnd();
+            sr.Close();
+            stream.Close();
+            return xmlString;
         }
 
         private void button21_Click(object sender, EventArgs e)

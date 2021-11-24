@@ -1,6 +1,6 @@
 ﻿namespace vcs_ReadWrite_WORD6_Replace
 {
-    partial class Frm_Main
+    partial class Form1
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -37,6 +37,8 @@
             this.txt_path = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Begin = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +54,7 @@
             this.groupBox1.Controls.Add(this.btn_Begin);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(386, 149);
+            this.groupBox1.Size = new System.Drawing.Size(438, 149);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "替换Word文档中的字符串";
@@ -134,15 +136,35 @@
             this.btn_Begin.UseVisualStyleBackColor = true;
             this.btn_Begin.Click += new System.EventHandler(this.btn_Begin_Click);
             // 
-            // Frm_Main
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(12, 238);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(438, 322);
+            this.richTextBox1.TabIndex = 8;
+            this.richTextBox1.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 181);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(106, 31);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "生成Word文檔";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(462, 572);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Frm_Main";
+            this.Name = "Form1";
             this.Text = "批量替换Word文档中指定的字符串";
-            this.Load += new System.EventHandler(this.Frm_Main_Load);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -160,6 +182,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt_Find;
         private System.Windows.Forms.Button btn_Display;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

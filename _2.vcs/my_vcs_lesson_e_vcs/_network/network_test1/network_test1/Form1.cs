@@ -30,6 +30,8 @@ namespace network_test1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+
             show_item_location();
         }
 
@@ -69,10 +71,77 @@ namespace network_test1
 
         private void button0_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "檢查URL鏈接是否有效\n";
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/11093.html";
+            bool ret = CheckUri(url);
+            richTextBox1.Text += "結果 : \t" + ret.ToString() + "\n";
+
+            url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/11093XX.html";
+            ret = CheckUri(url);
+            richTextBox1.Text += "結果 : \t" + ret.ToString() + "\n";
+
+
+        }
+
+        /// <summary>
+        /// 檢查url鏈接是否有效
+        /// </summary>
+        /// <param name="strUri"></param>
+        /// <returns></returns>
+        public static bool CheckUri(string strUri)
+        {
+            try
+            {
+                System.Net.HttpWebRequest.Create(strUri).GetResponse();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //httpWebRequest 文件下載，
+            const string uri = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/SMS_K%C3%B6nig_Albert.jpg/450px-SMS_K%C3%B6nig_Albert.jpg";
+            var req = WebRequest.Create(uri) as HttpWebRequest;
+            //req.ContentType = "application/octet-stream";
+            if (req != null)
+            {
+                var response = req.GetResponse() as HttpWebResponse;
+                if (response != null)
+                {
+                    Console.WriteLine("ContentType:" + response.ContentType);
+                    var stream = response.GetResponseStream();
+                    if (stream != null)
+                    {
+                        string format = string.Empty;
+                        switch (response.ContentType)
+                        {
+                            case "image/jpeg":
+                                format = "jpg";
+                                break;
+                            case "audio/amr":
+                                format = "amr";
+                                break;
+                        }
+
+                        var path = string.Format(@"1.{0}", format);
+                        //var fs = new FileStream($"c:\\1.{format}", FileMode.Create);
+                        var fs = File.Create(path);
+                        richTextBox1.Text += "下載完成, 檔案 : \t" + path + "\n";
+
+                        int count = 0;
+                        do
+                        {
+                            var buffer = new byte[4096];
+                            count = stream.Read(buffer, 0, buffer.Length);
+                            fs.Write(buffer, 0, count);
+                        } while (count > 0);
+                    }
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -218,5 +287,16 @@ namespace network_test1
         }
 
     }
+
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
+    }
+
 }
 
