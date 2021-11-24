@@ -25,6 +25,7 @@ namespace vcs_WebCam3
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            panel1.Size = new Size(640, 480);
             wc = new WebCamera(panel1.Handle, panel1.Width, panel1.Height);
             wc.StartWebCam();
             bt_start.Enabled = false;
@@ -34,19 +35,18 @@ namespace vcs_WebCam3
         private void bt_start_Click(object sender, EventArgs e)
         {
             //Start
-            bt_start.Enabled = false;
-            bt_stop.Enabled = true;
-            panel1.Size = new Size(640, 480);
             wc = new WebCamera(panel1.Handle, panel1.Width, panel1.Height);
             wc.StartWebCam();
+            bt_start.Enabled = false;
+            bt_stop.Enabled = true;
         }
 
         private void bt_stop_Click(object sender, EventArgs e)
         {
             //Stop
+            wc.CloseWebcam();
             bt_start.Enabled = true;
             bt_stop.Enabled = false;
-            wc.CloseWebcam();
         }
     }
 

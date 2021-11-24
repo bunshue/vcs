@@ -10,28 +10,28 @@ namespace vcs_Puzzle2
 {
     public class Puzzle
     {
-        public enum Diff         //游戏难度
+        public enum Diff         //遊戲難度
         {
-            simple,//简单
+            simple,//簡單
             ordinary,//普通
-            difficulty//困难
+            difficulty//困難
         }
-        private struct Node      //单元格结构体
+        private struct Node      //拼圖單元格結構體
         {
             public Image Img;
             public int Num;
         }
-        private Image _img;      //拼图图片
-        public int Width;       //拼图边长
-        private Diff _gameDif;   //游戏难度
-        private Node[,] node;    //单元格数组
-        public int N;           //单元格数组行列数
+        private Image _img;      //拼圖圖片
+        public int Width;       //拼圖邊長
+        private Diff _gameDif;   //遊戲難度
+        private Node[,] node;    //單元格數組
+        public int N;           //單元格數組行列數
 
         /// <summary>
-        /// 构造函数
+        /// 構造函數
         /// </summary>
-        /// <param name="Img">拼图大图</param>
-        /// <param name="GameDif">游戏难度，该类下结构体Diff</param>
+        /// <param name="Img">拼圖大圖</param>
+        /// <param name="GameDif">遊戲難度，該類下結構體Diff</param>
         public Puzzle(Image Img,int Width, Diff GameDif)
         {
             this._gameDif = GameDif;
@@ -39,21 +39,21 @@ namespace vcs_Puzzle2
             this.Width = Width;
             switch(this._gameDif)
             {
-                case Diff.simple:
+                case Diff.simple:　　　　//簡單則單元格數組保存為3*3的二維數組
                     this.N = 3;
                     node=new Node[3,3];
                     break;
-                case Diff.ordinary:
+                case Diff.ordinary:　　  //一般則為5*5
                     this.N = 5;
                     node = new Node[5, 5];
                     break;
-                case Diff.difficulty:
+                case Diff.difficulty:　　//困難則為9*9
                     this.N = 9;
                     node = new Node[9, 9];
                     break;
             }
             
-            //分割图片形成各单元保存在数组中
+            //分割圖片形成各單元保存在數組中
             int Count = 0;
             for (int x = 0; x < this.N; x++)
             {
@@ -78,27 +78,27 @@ namespace vcs_Puzzle2
                     newGra.DrawLine(new Pen(Color.White), new Point(this.Width / this.N, this.Width / this.N), new Point(0,this.Width / this.N));
                 }
             }
-            //(最后一项为空单独处理)
+            //(最後一項為空單獨處理)
             node[N - 1, N - 1].Img = Image.FromFile(@"../../img/end.PNG");
             Graphics newGra2 = Graphics.FromImage(node[N - 1, N - 1].Img);
             newGra2.DrawLine(new Pen(Color.Red), new Point(1, 1), new Point(1, this.Width / this.N - 1));
             newGra2.DrawLine(new Pen(Color.Red), new Point(1, 1), new Point(this.Width / this.N - 1, 1));
             newGra2.DrawLine(new Pen(Color.Red), new Point(this.Width / this.N - 1, this.Width / this.N - 1), new Point(this.Width / this.N - 1, 1));
             newGra2.DrawLine(new Pen(Color.Red), new Point(this.Width / this.N - 1, this.Width / this.N - 1), new Point( 1,this.Width / this.N - 1));
-            //打乱拼图
+            //打亂拼圖
             this.Upset();
 
         }
 
 
         /// <summary>
-        /// 由图片fromImage中截图并返回
+        /// 由圖片fromImage中截圖並返回
         /// </summary>
-        /// <param name="fromImage">原图片</param>
-        /// <param name="width">宽</param>
+        /// <param name="fromImage">原圖片</param>
+        /// <param name="width">寬</param>
         /// <param name="height">高</param>
-        /// <param name="spaceX">起始X坐标</param>
-        /// <param name="spaceY">起始Y坐标</param>
+        /// <param name="spaceX">起始X坐標</param>
+        /// <param name="spaceY">起始Y坐標</param>
         /// <returns></returns>
         public  Image CaptureImage(Image fromImage, int width, int height, int spaceX, int spaceY)
         {
@@ -123,21 +123,21 @@ namespace vcs_Puzzle2
                 height = fromImage.Height;
             }
 
-            //创建新图位图   
+            //創建新圖位圖   
             Bitmap bitmap = new Bitmap(width, height);
-            //创建作图区域   
+            //創建作圖區域   
             Graphics graphic = Graphics.FromImage(bitmap);
-            //截取原图相应区域写入作图区   
+            //截取原圖相應區域寫入作圖區   
             graphic.DrawImage(fromImage, 0, 0, new Rectangle(x, y, width, height), GraphicsUnit.Pixel);
-            //从作图区生成新图   
+            //從作圖區生成新圖   
             Image saveImage = Image.FromHbitmap(bitmap.GetHbitmap());
             return saveImage;
         }
         /// <summary>
-        /// 移动坐标（x,y）拼图单元
+        /// 移動坐標（x,y）拼圖單元
         /// </summary>
-        /// <param name="x">拼图单元x坐标</param>
-        /// <param name="y">拼图单元y坐标</param>
+        /// <param name="x">拼圖單元x坐標</param>
+        /// <param name="y">拼圖單元y坐標</param>
         public bool Move(int x,int y)
         {
             //MessageBox.Show(" " + node[2, 2].Num);
@@ -164,7 +164,7 @@ namespace vcs_Puzzle2
             return false;
                 
         }
-        //交换
+        //交換兩個單元格
         private  void Swap(Point a, Point b)
         {
             Node temp = new Node();
@@ -189,7 +189,7 @@ namespace vcs_Puzzle2
         public Image Display()
         {
             Bitmap bitmap = new Bitmap(this.Width, this.Width);
-            //创建作图区域   
+            //創建作圖區域   
             Graphics newGra = Graphics.FromImage(bitmap);
             for (int x = 0; x < this.N; x++)
                 for (int y = 0; y < this.N; y++)
@@ -197,7 +197,7 @@ namespace vcs_Puzzle2
             return bitmap;
         }
         /// <summary>
-        /// 打乱拼图
+        /// 打亂拼圖
         /// </summary>
         public void Upset()
         {

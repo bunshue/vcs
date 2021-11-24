@@ -38,7 +38,7 @@ namespace vcs_Puzzle2
                 pictureBox1.Image = puzzle.Display();
                 if (puzzle.Judge())
                 {
-                    if (MessageBox.Show("恭喜过关", "是否重新玩一把", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    if (MessageBox.Show("恭喜過關", "是否重新玩一把", MessageBoxButtons.OKCancel) == DialogResult.OK)
                     {
                         Num = 0;
                         puzzle.Upset();

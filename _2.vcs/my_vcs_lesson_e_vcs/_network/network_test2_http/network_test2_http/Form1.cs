@@ -446,8 +446,42 @@ namespace network_test2_http
 
         private void button14_Click(object sender, EventArgs e)
         {
-
+            //下載圖片
+            string url = @"http://www.aspphp.online/Skin/apsp/logo.gif";
+            downfile(url, "aaaaaa.gif", Application.StartupPath);
         }
+
+        public static void downfile(string downloadUrl, string filename, string filepath)
+        {
+            HttpWebRequest hwr = (HttpWebRequest)WebRequest.Create(downloadUrl);
+            hwr.Timeout = 15000;
+            HttpWebResponse hwp = (HttpWebResponse)hwr.GetResponse();
+            Stream ss = hwp.GetResponseStream();
+            byte[] buffer = new byte[10240];
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            FileStream fs = new FileStream(
+            string.Format(filepath + @"\" + filename),
+            FileMode.Create);
+            try
+            {
+                int i;
+                while ((i = ss.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    fs.Write(buffer, 0, i);
+                }
+                fs.Close();
+                ss.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         private void button15_Click(object sender, EventArgs e)
         {

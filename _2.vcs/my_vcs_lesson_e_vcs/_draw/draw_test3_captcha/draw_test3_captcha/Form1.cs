@@ -844,8 +844,69 @@ namespace draw_test3_captcha
             myFont.Dispose();
         }
 
-    }
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //產生圖片驗證碼
+            Bitmap bitmap1 = Generate(RandomGeneratorStyle.Number, 10);
+            pictureBox1.Image = bitmap1;
+        }
+        public enum RandomGeneratorStyle
+        {
+            ///　<summary>
+            ///　只有數字
+            ///　</summary>
+            Number,
+            ///　<summary>
+            ///　包含數字和大小寫字符
+            ///　</summary>
+            NumberAndChar,
+            ///　<summary>
+            ///　包含數字和大寫字符
+            ///　</summary>
+            NumberAndCharIgnoreCase
+        }
 
+        public static string GenerateRandomNumber(RandomGeneratorStyle style, int length)
+        {
+            string strValidateString = "";
+            Random rnd = new Random();
+            string strValidateStringSource;
+            switch (style)
+            {
+                case RandomGeneratorStyle.Number:
+                    strValidateStringSource = "0123456789";
+                    break;
+                case RandomGeneratorStyle.NumberAndChar:
+                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    break;
+                case RandomGeneratorStyle.NumberAndCharIgnoreCase:
+                    strValidateStringSource = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    break;
+                default:
+                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    break;
+            }
+            for (int i = 0; i < length; i++)
+            {
+                strValidateString += strValidateStringSource[rnd.Next(strValidateStringSource.Length - 1)];
+            }
+            return strValidateString;
+        }
+
+        //繪制驗證碼
+        public static Bitmap Generate(RandomGeneratorStyle style, int length)
+        {
+            Bitmap bmp = new Bitmap((int)Math.Ceiling(length * 20.5), 50);//新建一個圖 片對象
+            Graphics g = Graphics.FromImage(bmp);//利用該圖片對象生成“畫板”
+            string strCode = GenerateRandomNumber(style, length);//生成隨機數
+            Font font = new Font("Arial", 24, FontStyle.Bold | FontStyle.Italic);//設 置字體顏色
+            SolidBrush brush = new SolidBrush(Color.Red);//新建一個畫刷,到這裡為止,我們 已經准備好了畫板、畫刷、和數據
+            g.DrawString(strCode, font, brush, 0, 0);//關鍵的一步，進行繪制。
+            //bmp.Save(curPage.Response.OutputStream, ImageFormat.Jpeg);//保存為輸出流，否則頁 面上顯示不出來
+            //g.Dispose();//釋放掉該資源
+            return bmp;
+        }
+    }
 
     public class DrawValImg
     {
@@ -1083,5 +1144,4 @@ namespace draw_test3_captcha
             }
         }
     }
-
 }

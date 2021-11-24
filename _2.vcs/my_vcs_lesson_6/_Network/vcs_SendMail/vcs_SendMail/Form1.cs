@@ -470,7 +470,127 @@ namespace vcs_SendMail
 
         private void button8_Click(object sender, EventArgs e)
         {
+            Send(sender);
+        }
 
+        //C#郵件發送 批量發送郵件
+        public void Send(object sender)
+        {
+            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
+
+            MailMessage mail = new MailMessage();
+            try
+            {
+                mail.Subject = mail_subject;    //郵件標題
+                mail.SubjectEncoding = System.Text.Encoding.UTF8;
+                //寄件者
+                mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8); //email, 顯示名稱, 編碼
+
+                /*  這裡這樣寫是因為可能發給多個聯系人，每個地址用 , 號隔開
+                */
+                /*
+                List mailAddress = new List();
+                foreach (string address in mailAddress)
+                {
+                    if (address != string.Empty)
+                    {
+                        mail.To.Add(new MailAddress(address, address, System.Text.Encoding.UTF8));
+                    }
+                }
+                */
+                mail.To.Add(new MailAddress(email_addr_to, email_addr_to_nicknane));
+
+                //設置郵件的內容
+                mail.Body = mail_body;
+                //設置郵件的格式
+                mail.BodyEncoding = System.Text.Encoding.UTF8;
+                //mail.IsBodyHtml = true;
+                //設置郵件的發送級別
+                mail.Priority = MailPriority.Normal;
+                //發送通知
+                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
+                SmtpClient smtp = new SmtpClient();
+                //設置用於 SMTP 事務的主機的名稱，填IP地址也可以了
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 25;
+                smtp.Timeout = 9999;
+                smtp.UseDefaultCredentials = true;
+                smtp.EnableSsl = true;
+                smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //發送email
+                smtp.Send(mail);
+            }
+            catch (Exception)
+            {
+                //當郵件發送失敗，發送異常時 使用備用方法調用備用郵箱發送
+                SendBackUp(sender);
+            }
+            finally
+            {
+                mail.Dispose();
+            }
+        }
+
+        public void SendBackUp(object sender)
+        {
+            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
+
+            MailMessage mail = new MailMessage();
+            try
+            {
+                mail.Subject = mail_subject;    //郵件標題
+                mail.SubjectEncoding = System.Text.Encoding.UTF8;
+                //寄件者
+                mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8); //email, 顯示名稱, 編碼
+                /*  這裡這樣寫是因為可能發給多個聯系人，每個地址用 , 號隔開
+                */
+                /*
+                List mailAddress = new List();
+                foreach (string address in mailAddress)
+                {
+                    if (address != string.Empty)
+                    {
+                        mail.To.Add(new MailAddress(address, address, System.Text.Encoding.UTF8));
+                    }
+                }
+                */
+                mail.To.Add(new MailAddress(email_addr_to, email_addr_to_nicknane));
+
+                //設置郵件的內容
+                mail.Body = mail_body;
+                //設置郵件的格式
+                mail.BodyEncoding = System.Text.Encoding.UTF8;
+                //mail.IsBodyHtml = true;
+                //設置郵件的發送級別
+                mail.Priority = MailPriority.Normal;
+                //發送通知
+                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
+                SmtpClient smtp = new SmtpClient();
+                //設置用於 SMTP 事務的主機的名稱，填IP地址也可以了
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 25;
+                smtp.Timeout = 9999;
+                smtp.UseDefaultCredentials = true;
+                smtp.EnableSsl = true;
+                smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //發送email
+                smtp.Send(mail);
+            }
+            catch (Exception)
+            {
+                //當郵件發送失敗，發送異常時 使用備用方法調用備用郵箱發送
+                Send(sender);
+            }
+            finally
+            {
+                mail.Dispose();
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)

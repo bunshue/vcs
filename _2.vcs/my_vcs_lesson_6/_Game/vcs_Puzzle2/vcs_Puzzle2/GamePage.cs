@@ -9,7 +9,7 @@ namespace vcs_Puzzle2
 {
     public static class GamePage
     {
-        public static Puzzle.Diff Dif;  //游戏难度
-        public static Image img;        //拼图图案
+        public static Puzzle.Diff Dif;  //遊戲難度
+        public static Image img;        //拼圖圖案
     }
 }
