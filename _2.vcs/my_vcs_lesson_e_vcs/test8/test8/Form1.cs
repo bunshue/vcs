@@ -157,7 +157,34 @@ namespace test8
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string process_name = "acdsee";
+            KillProcess(process_name);
 
+        }
+
+        private void KillProcess(string processName)
+        {
+            Process myproc = new Process();
+            //得到所有打開的進程
+            try
+            {
+                //foreach (Process thisproc in Process.GetProcessesByName("WINPROJ"))
+                foreach (Process thisproc in Process.GetProcesses())
+                {
+                    richTextBox1.Text += "get process : " + thisproc.ProcessName + "\n";
+
+                    /*
+                    if (!thisproc.CloseMainWindow())
+                    {
+                        thisproc.Kill();
+                    }
+                    */
+                }
+            }
+            catch (System.Exception ex)
+            {
+                //ScriptManager.RegisterStartupScript(this.btnUpload, GetType(), "dis", "alert(進程殺死失敗);", true);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
