@@ -61,7 +61,22 @@ namespace network_test2_http
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -488,6 +503,91 @@ namespace network_test2_http
 
         }
 
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //獲取網頁內容 1
+
+            WebRequest request = WebRequest.Create("http://www.hao123.com/");
+            // If required by the server, set the credentials.
+            request.Credentials = CredentialCache.DefaultCredentials;
+            // Get the response.
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            // Display the status.
+            //Response.Write(response.StatusDescription);
+
+            richTextBox1.Text += "StatusDescription\n" + response.StatusDescription + "\n";
+
+            // Get the stream containing content returned by the server.
+            Stream dataStream = response.GetResponseStream();
+            // Open the stream using a StreamReader for easy access.
+            StreamReader reader = new StreamReader(dataStream, Encoding.Default);// 注：漢字需要轉為UTF8格式
+            // Read the content.
+            string responseFromServer = reader.ReadToEnd();
+            // Display the content.
+            //Response.Write(responseFromServer);
+            richTextBox1.Text += "responseFromServer\n" + responseFromServer + "\n";
+
+            // Cleanup the streams and the response.
+            reader.Close();
+            dataStream.Close();
+            response.Close();
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //獲取網頁內容 2
+            WebClient client = new WebClient();
+
+            // Add a user agent header in case the
+            // requested URI contains a query.
+
+            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+            Stream data = client.OpenRead("http://www.hao123.com/");
+            StreamReader reader = new StreamReader(data, Encoding.Default); // 注：漢字需要轉為UTF8格式
+            string s = reader.ReadToEnd();
+            //Response.Write(s);
+            richTextBox1.Text += s + "\n";
+            data.Close();
+            reader.Close();
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //獲取網頁內容 3
+            WebClient client = new WebClient();
+            //client.DownloadFile("http://www.hao123.com%22,%22123.htm/");
+            string reply = client.DownloadString("http://www.hao123.com/");
+            richTextBox1.Text += "\n" + reply + "\n";
+            //Response.Write(reply);
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 
 
@@ -539,10 +639,5 @@ namespace network_test2_http
             FailCount = 0; //如果能執行到這一步就表示下載終於成功了
             return str;
         }
-
     }
-
-
-
 }
-

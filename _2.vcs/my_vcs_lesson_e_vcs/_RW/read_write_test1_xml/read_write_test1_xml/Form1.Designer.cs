@@ -53,6 +53,7 @@
             this.button21 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
             // button15
@@ -161,6 +162,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(150, 60);
             this.button7.TabIndex = 24;
+            this.button7.Text = "XML To TreeView a";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -223,7 +225,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(526, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(431, 699);
+            this.richTextBox1.Size = new System.Drawing.Size(431, 367);
             this.richTextBox1.TabIndex = 18;
             this.richTextBox1.Text = "";
             // 
@@ -300,6 +302,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(150, 60);
             this.button21.TabIndex = 36;
+            this.button21.Text = "XMLHelper 的使用";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -310,6 +313,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(150, 60);
             this.button22.TabIndex = 35;
+            this.button22.Text = "XML To TreeView b";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -323,11 +327,19 @@
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(526, 401);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(431, 320);
+            this.treeView1.TabIndex = 42;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1010, 730);
+            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button18);
@@ -387,6 +399,7 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
 

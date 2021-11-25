@@ -10,13 +10,13 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml;
 using System.Net;
-using System.Text.RegularExpressions;
 using System.Management;
+using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
-using Shell32;
-
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
+
+using Shell32;
 
 using vcs_MyClassLibrary;
 
@@ -291,15 +291,15 @@ namespace test7
             pictureBox1.Image = bmp;
         }
 
-
         private void button7_Click(object sender, EventArgs e)
         {
             //C#實現小小的日曆
-            int year = 2021;
-            int month = 11;
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
             int day = 0;
             int sum = 0;
-            for (int i = 1900; i < year; i++)
+            int i;
+            for (i = 1900; i < year; i++)
             {
                 if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
                 {
@@ -353,6 +353,7 @@ namespace test7
                     day = 31;
                     break;
             }
+
             int leap;
             /*先計算某月以前月份的總天數*/
             switch (month)
@@ -381,16 +382,27 @@ namespace test7
 
             int space = (sum + 1) % 7;
             Console.WriteLine("日\t一\t二\t三\t四\t五\t六\t");
-            for (int i = 1; i <= space + day; i++)
+            richTextBox1.Text += "日\t一\t二\t三\t四\t五\t六\n";
+            for (i = 1; i <= (space + day); i++)
             {
                 if (i <= space)
+                {
                     Console.Write("\t");
+                    richTextBox1.Text += "\t";
+                }
                 else
+                {
                     Console.Write(i - space + "\t");
+                    richTextBox1.Text += i - space + "\t";
+                }
                 if (i % 7 == 0)
+                {
                     Console.WriteLine();
+                    richTextBox1.Text += "\n";
+                }
             }
             Console.WriteLine();
+            richTextBox1.Text += "\n";
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -625,7 +637,24 @@ namespace test7
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //易經 六十四卦
+            char[] word = new char[64];
+            word = GetChars();
+            int i;
+            for (i = 0; i < 64; i++)
+            {
+                richTextBox1.Text += word[i].ToString() + "    ";
+            }
+        }
 
+        public static char[] GetChars()
+        {
+            List<char> chars = new List<char>();
+            for (int i = 19904; i <= 19967; i++)
+            {
+                chars.Add((char)i);
+            }
+            return chars.ToArray();
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

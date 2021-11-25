@@ -38,7 +38,7 @@ namespace vcs_SendMail
         string email_addr_to = "david@insighteyes.com";
         string email_addr_to_nicknane = "尊敬的收件者";    //收件者顯示的名稱
         string email_addr_cc = "bunshue@gmail.com";
-        MailPriority priority = MailPriority.Normal;
+        MailPriority priority = MailPriority.Normal;        //設定電子郵件的優先順序
 
         string mail_subject = string.Empty; //郵件標題
         string mail_body = string.Empty;    //郵件內容
@@ -132,6 +132,7 @@ namespace vcs_SendMail
             SmtpClient smtp = new SmtpClient(smtp_server, smtp_server_port);   //實例一個SmtpClient類
             //smtp.Host = smtp_server;
             //smtp.Port = smtp_server_port;
+            smtp.Timeout = 9999;
             smtp.EnableSsl = true; //gmail預設開啟驗證, 指定 SmtpClient 使用安全套接字層 (SSL) 加密連接
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
@@ -189,8 +190,6 @@ namespace vcs_SendMail
 
             //MailMessage mail = new MailMessage(email_addr_from, email_addr_to, subject, "郵件內容(Body)");   //一次寫完
             MailMessage mail = new MailMessage();    //實例一個MailMessage類
-            mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
-            mail.Priority = MailPriority.High;   //設定電子郵件的優先順序
 
             //mail.From = new MailAddress(email_addr_from);
             //mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane); //email, 顯示名稱
@@ -211,12 +210,14 @@ namespace vcs_SendMail
             //mail.ReplyTo = new MailAddress(email_addr_from, "IMS-Sales", Encoding.GetEncoding(950));  ReplyTo已過時, 改用ReplyToList
             mail.ReplyToList.Add(new MailAddress("David@insighteyes.com", "receiver"));
 
+            mail.Priority = priority;
+
             mail.Subject = mail_subject;    //郵件標題
             mail.SubjectEncoding = Encoding.UTF8;//郵件標題編碼
 
             //各種郵件內容的寫法
             //mail.Body = "莫聽穿林打葉聲，何妨吟嘯且徐行。竹杖芒鞋輕勝馬，誰怕？一蓑煙雨任平生。料峭春風吹酒醒，微冷，山頭斜照卻相迎。回首向來蕭瑟處，歸去，也無風雨也無晴。";
-            //mail.Body = mail_body;
+            //mail.Body = mail_body;  //郵件內容
             //mailBody(mail);
             //mail.Body = "<font color=\"red\">莫聽穿林打葉聲，何妨吟嘯且徐行</font>"; //郵件內容
             mail.Body = "<html><body><h1>牡丹亭</h1><br><img src=\"C:\\______test_files\\picture1.jpg\"></body></html>";
@@ -308,6 +309,8 @@ namespace vcs_SendMail
             MailAddress to = new MailAddress(email_addr_to, email_addr_to_nicknane, Encoding.GetEncoding(email_encoding));
             MailMessage mail = new MailMessage(from, to);
 
+            mail.Priority = priority;
+
             mail.Subject = mail_subject;    //郵件標題
             mail.SubjectEncoding = Encoding.GetEncoding(email_encoding);
 
@@ -315,7 +318,6 @@ namespace vcs_SendMail
             mail.BodyEncoding = Encoding.GetEncoding(email_encoding);   //郵件內容編碼方式
 
             mail.IsBodyHtml = true;
-            mail.Priority = MailPriority.High;
 
             // 設定附件檔案(Attachment)
             string strFilePath = @"C:\______test_files\_material\signature.png";
@@ -348,7 +350,7 @@ namespace vcs_SendMail
             mail.Subject = mail_subject;    //郵件標題
             //內容，可以用html的寫法，</br> 換行
             mail.Body = "<a href='http://tw.yahoo.com'>yahoo</a>"; //內容
-            //mail.Body = mail_body;
+            //mail.Body = mail_body;  //郵件內容
             mail.IsBodyHtml = true;//<-如果要這封郵件吃html的話~這屬性就把他設為true~~
             //加入附件
             Attachment attachment = new Attachment(attach_filename1);//<-這是附件部分~先用附件的物件把路徑指定進去~
@@ -369,13 +371,14 @@ namespace vcs_SendMail
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane); //email, 顯示名稱
             mail.To.Add(new MailAddress(email_addr_to, email_addr_to_nicknane));    //email, 顯示名稱
-            mail.Priority = MailPriority.Normal;
+
+            mail.Priority = priority;
+
             mail.Subject = mail_subject;    //郵件標題
             mail.SubjectEncoding = Encoding.UTF8;//郵件標題編碼
             mail.Body = mail_body;  //郵件內容
             mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
             mail.IsBodyHtml = true; //設置為HTML格式
-            mail.Priority = MailPriority.High;  //優先級
 
             SendGmail(mail);
 
@@ -407,10 +410,8 @@ namespace vcs_SendMail
             //副本
             mail.CC.Add(email_addr_cc);   //可以抄送副本給多人
 
-            //高重要性
-            mail.Priority = MailPriority.Normal;
+            mail.Priority = priority;
 
-            //主旨
             mail.Subject = mail_subject;    //郵件標題
             mail.SubjectEncoding = Encoding.UTF8;//郵件標題編碼
             mail.Body = mail_body;  //郵件內容
@@ -418,7 +419,6 @@ namespace vcs_SendMail
             //附加檔案
             mail.Attachments.Add(new Attachment(attach_filename1));  //附件
             mail.IsBodyHtml = true;//是否是HTML郵件 
-            //mail.Priority = MailPriority.High;//郵件優先級 
 
             SendGmail(mail);
 
@@ -435,8 +435,10 @@ namespace vcs_SendMail
             mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8);  //包含暱稱 與編碼
             //mail.From = new MailAddress(email_addr_from); //不包含暱稱
             mail.To.Add(new MailAddress(email_addr_to));
-            mail.Priority = MailPriority.Normal;
-            mail.Subject = mail_subject;
+
+            mail.Priority = priority;
+
+            mail.Subject = mail_subject;    //郵件標題
             mail.Body = mail_body;  //郵件內容
 
             mail.Attachments.Add(new Attachment(attach_filename1));  //發送附件
@@ -456,8 +458,10 @@ namespace vcs_SendMail
             mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8);  //包含暱稱 與編碼
             //mail.From = new MailAddress(email_addr_from); //不包含暱稱
             mail.To.Add(new MailAddress(email_addr_to));
-            mail.Priority = MailPriority.Normal;
-            mail.Subject = mail_subject;
+
+            mail.Priority = priority;
+
+            mail.Subject = mail_subject;    //郵件標題
             mail.SubjectEncoding = Encoding.UTF8;
             mail.Body = mail_body;  //郵件內容
             mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
@@ -470,127 +474,30 @@ namespace vcs_SendMail
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Send(sender);
-        }
-
-        //C#郵件發送 批量發送郵件
-        public void Send(object sender)
-        {
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
             richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
             Application.DoEvents();
 
             MailMessage mail = new MailMessage();
-            try
-            {
-                mail.Subject = mail_subject;    //郵件標題
-                mail.SubjectEncoding = System.Text.Encoding.UTF8;
-                //寄件者
-                mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8); //email, 顯示名稱, 編碼
+            mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8); //email, 顯示名稱, 編碼
+            mail.To.Add(new MailAddress(email_addr_to, email_addr_to_nicknane));
 
-                /*  這裡這樣寫是因為可能發給多個聯系人，每個地址用 , 號隔開
-                */
-                /*
-                List mailAddress = new List();
-                foreach (string address in mailAddress)
-                {
-                    if (address != string.Empty)
-                    {
-                        mail.To.Add(new MailAddress(address, address, System.Text.Encoding.UTF8));
-                    }
-                }
-                */
-                mail.To.Add(new MailAddress(email_addr_to, email_addr_to_nicknane));
+            mail.Priority = priority;
 
-                //設置郵件的內容
-                mail.Body = mail_body;
-                //設置郵件的格式
-                mail.BodyEncoding = System.Text.Encoding.UTF8;
-                //mail.IsBodyHtml = true;
-                //設置郵件的發送級別
-                mail.Priority = MailPriority.Normal;
-                //發送通知
-                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
-                SmtpClient smtp = new SmtpClient();
-                //設置用於 SMTP 事務的主機的名稱，填IP地址也可以了
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 25;
-                smtp.Timeout = 9999;
-                smtp.UseDefaultCredentials = true;
-                smtp.EnableSsl = true;
-                smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                //發送email
-                smtp.Send(mail);
-            }
-            catch (Exception)
-            {
-                //當郵件發送失敗，發送異常時 使用備用方法調用備用郵箱發送
-                SendBackUp(sender);
-            }
-            finally
-            {
-                mail.Dispose();
-            }
-        }
+            mail.Subject = mail_subject;    //郵件標題
+            mail.SubjectEncoding = System.Text.Encoding.UTF8;
 
-        public void SendBackUp(object sender)
-        {
-            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
-            richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
-            Application.DoEvents();
+            mail.Body = mail_body;  //郵件內容
+            //設置郵件的格式
+            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            //mail.IsBodyHtml = true;
+            
+            //發送通知
+            mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
 
-            MailMessage mail = new MailMessage();
-            try
-            {
-                mail.Subject = mail_subject;    //郵件標題
-                mail.SubjectEncoding = System.Text.Encoding.UTF8;
-                //寄件者
-                mail.From = new MailAddress(email_addr_from, email_addr_from_nicknane, Encoding.UTF8); //email, 顯示名稱, 編碼
-                /*  這裡這樣寫是因為可能發給多個聯系人，每個地址用 , 號隔開
-                */
-                /*
-                List mailAddress = new List();
-                foreach (string address in mailAddress)
-                {
-                    if (address != string.Empty)
-                    {
-                        mail.To.Add(new MailAddress(address, address, System.Text.Encoding.UTF8));
-                    }
-                }
-                */
-                mail.To.Add(new MailAddress(email_addr_to, email_addr_to_nicknane));
+            SendGmail(mail);
 
-                //設置郵件的內容
-                mail.Body = mail_body;
-                //設置郵件的格式
-                mail.BodyEncoding = System.Text.Encoding.UTF8;
-                //mail.IsBodyHtml = true;
-                //設置郵件的發送級別
-                mail.Priority = MailPriority.Normal;
-                //發送通知
-                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
-                SmtpClient smtp = new SmtpClient();
-                //設置用於 SMTP 事務的主機的名稱，填IP地址也可以了
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 25;
-                smtp.Timeout = 9999;
-                smtp.UseDefaultCredentials = true;
-                smtp.EnableSsl = true;
-                smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                //發送email
-                smtp.Send(mail);
-            }
-            catch (Exception)
-            {
-                //當郵件發送失敗，發送異常時 使用備用方法調用備用郵箱發送
-                Send(sender);
-            }
-            finally
-            {
-                mail.Dispose();
-            }
+            mail.Dispose();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -623,6 +530,8 @@ namespace vcs_SendMail
             //mail.To.Add(string.Join(",", MailList.ToArray()));
             mail.To.Add(new MailAddress(email_addr_to, email_addr_to_nicknane));
 
+            mail.Priority = priority;
+
             //郵件標題編碼 
             mail.SubjectEncoding = Encoding.UTF8;
 
@@ -630,7 +539,6 @@ namespace vcs_SendMail
             mail.Body = Body;
             mail.IsBodyHtml = true;//支援html
             mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
-            mail.Priority = MailPriority.Normal;//郵件優先級
 
             /*
             // *  outlook.com smtp.live.com port:25
@@ -695,3 +603,18 @@ namespace vcs_SendMail
     }
 }
 
+
+/*
+//當郵件發送失敗，發送異常時 使用備用方法調用備用郵箱發送
+
+ try
+ {
+
+ }
+ catch (Exception)
+ {
+ //當郵件發送失敗，發送異常時 使用備用方法調用備用郵箱發送
+ SendBackUp(sender);
+ }
+
+*/

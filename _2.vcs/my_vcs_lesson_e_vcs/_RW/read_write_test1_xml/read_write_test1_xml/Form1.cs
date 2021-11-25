@@ -66,6 +66,7 @@ namespace read_write_test1_xml
             button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            treeView1.Location = new Point(x_st + dx * 3, y_st + dy * 4 + 20);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -327,10 +328,50 @@ namespace read_write_test1_xml
             }
         }
 
+        //XML To TreeView ST
+
+        //讀取XML文檔 →獲取XML根元素→ 遞歸添加根元素的子元素(因為樹形的結構和XML很像)
+
         private void button7_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\__RW\_xml\school.xml";
 
+            //讀取Xml文件   this.txt_XmlPath.Text是文件路徑       
+            XDocument xmlfile = XDocument.Load(filename);
+
+            //取根元素
+            XElement rootElement = xmlfile.Root;
+
+            //給第TreeView 添加根節點 
+            TreeNode node = this.treeView1.Nodes.Add(rootElement.Name.ToString());
+
+            RecursionAddNode(node.Nodes, rootElement);
         }
+
+        private void RecursionAddNode(TreeNodeCollection nodes, XElement xElement)
+        {
+            //獲取嵌套的元素
+            IEnumerable<XElement> elements = xElement.Elements();
+            //遞歸添加
+            foreach (XElement element in elements)
+            {
+                TreeNode node = nodes.Add(element.Name.ToString() + ":" + GetAttributes(element));
+                RecursionAddNode(node.Nodes, element);
+            }
+        }
+
+        //如果要獲取屬性 就要再添加一個方法GetAttributes(element)
+        private static string GetAttributes(XElement xElement)
+        {
+            IEnumerable<XAttribute> attributes = xElement.Attributes();
+
+            foreach (XAttribute attribute in attributes)
+            {
+                return attribute.Name + "=" + attribute.Value;
+            }
+            return null;
+        }
+        //XML To TreeView SP
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -1007,12 +1048,60 @@ namespace read_write_test1_xml
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //XMLHelper的使用
+            //class已OK
 
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //XML To TreeView b
 
+            string filename = @"C:\______test_files\__RW\_xml\student.xml";
+
+            //使用xDocument来读取xml文件
+            XDocument document = XDocument.Load(filename);
+            //取出根节点
+            XElement rootElement = document.Root;
+            //将xml文件的根元素加载到treeview的根节点上
+            TreeNode rootNode = treeView1.Nodes.Add(rootElement.Name.ToString());
+            //用递归加载XML到TreeView中
+            LoadxmlToTreeView(rootElement, rootNode.Nodes);
+        }
+
+        private void LoadxmlToTreeView(XElement rootElement, TreeNodeCollection treeNodeCollection)
+        {
+            foreach (XElement x in rootElement.Elements())
+            {
+                IEnumerable<XElement> elements = x.Elements();
+                //判断该元素是否是叶子元素，即下面是否还有子元素
+                //如果有子元素则只添加元素名称，如果是叶子元素则添加元素名称和元素内容
+                if (ReturnNumber(elements) == 0)
+                {
+                    TreeNode xnode = treeNodeCollection.Add(x.Name.ToString()).Nodes.Add(x.Value.ToString());
+                }
+                else
+                {
+                    TreeNode xnode = treeNodeCollection.Add(x.Name.ToString());
+                    LoadxmlToTreeView(x, xnode.Nodes);
+                }
+
+            }
+        }
+        
+        /// <summary>
+        /// 返回传入的集合中元素的个数
+        /// </summary>
+        /// <param name="xElements"></param>
+        /// <returns></returns>
+        private int ReturnNumber(IEnumerable<XElement> xElements)
+        {
+            int count = 0;
+            foreach (var x in xElements)
+            {
+                count++;
+            }
+            return count;
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1142,6 +1231,383 @@ namespace read_write_test1_xml
             }
             xmlDoc.Save(xml_filename);
         }
+    }
+
+    ///<summary>
+    /// XMLHelper XML文檔操作管理器
+    ///</summary>
+    public class XMLHelper
+    {
+        public XMLHelper()
+        {
+            //
+            // TODO: 在此處添加構造函數邏輯
+            //
+        }
+
+
+        #region XML文檔節點查詢和讀取
+        ///<summary>
+        /// 選擇匹配XPath表達式的第一個節點XmlNode.
+        ///</summary>
+        ///<param name="xmlFileName">XML文檔完全文件名(包含物理路徑)</param>
+        ///<param name="xpath">要匹配的XPath表達式(例如:"//節點名//子節點名")</param>
+        ///<returns>返回XmlNode</returns>
+        public static XmlNode GetXmlNodeByXpath(string xmlFileName, string xpath)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            try
+            {
+                xmlDoc.Load(xmlFileName); //加載XML文檔
+                XmlNode xmlNode = xmlDoc.SelectSingleNode(xpath);
+                return xmlNode;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                //throw ex; //這裡可以定義你自己的異常處理
+            }
+        }
+
+        ///<summary>
+        /// 選擇匹配XPath表達式的節點列表XmlNodeList.
+        ///</summary>
+        ///<param name="xmlFileName">XML文檔完全文件名(包含物理路徑)</param>
+        ///<param name="xpath">要匹配的XPath表達式(例如:"//節點名//子節點名")</param>
+        ///<returns>返回XmlNodeList</returns>
+        public static XmlNodeList GetXmlNodeListByXpath(string xmlFileName, string xpath)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+
+            try
+            {
+                xmlDoc.Load(xmlFileName); //加載XML文檔
+                XmlNodeList xmlNodeList = xmlDoc.SelectNodes(xpath);
+                return xmlNodeList;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                //throw ex; //這裡可以定義你自己的異常處理
+            }
+        }
+
+        ///<summary>
+        /// 選擇匹配XPath表達式的第一個節點的匹配xmlAttributeName的屬性XmlAttribute.
+        ///</summary>
+        ///<param name="xmlFileName">XML文檔完全文件名(包含物理路徑)</param>
+        ///<param name="xpath">要匹配的XPath表達式(例如:"//節點名//子節點名</param>
+
+        ///<param name="xmlAttributeName">要匹配xmlAttributeName的屬性名稱</param>
+        ///<returns>返回xmlAttributeName</returns>
+        public static XmlAttribute GetXmlAttribute(string xmlFileName, string xpath, string xmlAttributeName)
+        {
+            string content = string.Empty;
+            XmlDocument xmlDoc = new XmlDocument();
+            XmlAttribute xmlAttribute = null;
+            try
+            {
+                xmlDoc.Load(xmlFileName); //加載XML文檔
+                XmlNode xmlNode = xmlDoc.SelectSingleNode(xpath);
+                if (xmlNode != null)
+                {
+                    if (xmlNode.Attributes.Count > 0)
+                    {
+                        xmlAttribute = xmlNode.Attributes[xmlAttributeName];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex; //這裡可以定義你自己的異常處理
+            }
+            return xmlAttribute;
+        }
+        #endregion
+
+        #region XML文檔創建和節點或屬性的添加、修改
+        ///<summary>
+        /// 創建一個XML文檔
+        ///</summary>
+        ///<param name="xmlFileName">XML文檔完全文件名(包含物理路徑)</param>
+        ///<param name="rootNodeName">XML文檔根節點名稱(須指定一個根節點名稱)</param>
+
+        ///<param name="version">XML文檔版本號(必須為:"1.0")</param>
+        ///<param name="encoding">XML文檔編碼方式</param>
+        ///<param name="standalone">該值必須是"yes"或"no",如果為null,Save方法不在XML聲明上寫出獨立屬性</param>
+        ///<returns>成功返回true,失敗返回false</returns>
+        public static bool CreateXmlDocument(string xmlFileName, string rootNodeName, string version, string encoding, string standalone)
+        {
+            bool isSuccess = false;
+            try
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                XmlDeclaration xmlDeclaration = xmlDoc.CreateXmlDeclaration(version, encoding, standalone);
+                XmlNode root = xmlDoc.CreateElement(rootNodeName);
+                xmlDoc.AppendChild(xmlDeclaration);
+                xmlDoc.AppendChild(root);
+                xmlDoc.Save(xmlFileName);
+                isSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex; //這裡可以定義你自己的異常處理
+            }
+            return isSuccess;
+        }
+
+        ///<summary>
+        /// 依據匹配XPath表達式的第一個節點來創建它的子節點(如果此節點已存在則追加一個新的同名節點
+        ///</summary>
+        ///<param name="xmlFileName">XML文檔完全文件名(包含物理路徑)</param>
+        ///<param name="xpath">要匹配的XPath表達式(例如:"//節點名//子節點名</param>
+
+        ///<param name="xmlNodeName">要匹配xmlNodeName的節點名稱</param>
+        ///<param name="innerText">節點文本值</param>
+        ///<param name="xmlAttributeName">要匹配xmlAttributeName的屬性名稱</param>
+        ///<param name="value">屬性值</param>
+        ///<returns>成功返回true,失敗返回false</returns>
+        public static bool CreateXmlNodeByXPath(string xmlFileName, string xpath, string xmlNodeName, string innerText, string xmlAttributeName, string value)
+        {
+            bool isSuccess = false;
+            XmlDocument xmlDoc = new XmlDocument();
+            try
+            {
+                xmlDoc.Load(xmlFileName); //加載XML文檔
+                XmlNode xmlNode = xmlDoc.SelectSingleNode(xpath);
+                if (xmlNode != null)
+                {
+                    //存不存在此節點都創建
+                    XmlElement subElement = xmlDoc.CreateElement(xmlNodeName);
+                    subElement.InnerXml = innerText;
+
+                    //如果屬性和值參數都不為空則在此新節點上新增屬性
+                    if (!string.IsNullOrEmpty(xmlAttributeName) && !string.IsNullOrEmpty(value))
+                    {
+                        XmlAttribute xmlAttribute = xmlDoc.CreateAttribute(xmlAttributeName);
+                        xmlAttribute.Value = value;
+                        subElement.Attributes.Append(xmlAttribute);
+                    }
+
+                    xmlNode.AppendChild(subElement);
+                }
+                xmlDoc.Save(xmlFileName); //保存到XML文檔
+                isSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex; //這裡可以定義你自己的異常處理
+            }
+            return isSuccess;
+        }
+
+        ///<summary>
+        /// 依據匹配XPath表達式的第一個節點來創建或更新它的子節點(如果節點存在則更新,不存在則創建)
+        ///</summary>
+        ///<param name="xmlFileName">XML文檔完全文件名(包含物理路徑)</param>
+        ///<param name="xpath">要匹配的XPath表達式(例如:"//節點名//子節點名</param>
+
+        ///<param name="xmlNodeName">要匹配xmlNodeName的節點名稱</param>
+        ///<param name="innerText">節點文本值</param>
+        ///<returns>成功返回true,失敗返回false</returns>
+        public static bool CreateOrUpdateXmlNodeByXPath(string xmlFileName, string xpath, string xmlNodeName, string innerText)
+        {
+            bool isSuccess = false;
+            bool isExistsNode = false;//標識節點是否存在
+            XmlDocument xmlDoc = new XmlDocument();
+            try
+            {
+                xmlDoc.Load(xmlFileName); //加載XML文檔
+                XmlNode xmlNode = xmlDoc.SelectSingleNode(xpath);
+                if (xmlNode != null)
+                {
+                    //遍歷xpath節點下的所有子節點
+                    foreach (XmlNode node in xmlNode.ChildNodes)
+                    {
+                        if (node.Name.ToLower() == xmlNodeName.ToLower())
+                        {
+                            //存在此節點則更新
+                            node.InnerXml = innerText;
+                            isExistsNode = true;
+                            break;
+                        }
+                    }
+                    if (!isExistsNode)
+                    {
+                        //不存在此節點則創建
+                        XmlElement subElement = xmlDoc.CreateElement(xmlNodeName);
+                        subElement.InnerXml = innerText;
+                        xmlNode.AppendChild(subElement);
+                    }
+                }
+                xmlDoc.Save(xmlFileName); //保存到XML文檔
+                isSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex; //這裡可以定義你自己的異常處理
+            }
+            return isSuccess;
+        }
+
+        ///<summary>
+        /// 依據匹配XPath表達式的第一個節點來創建或更新它的屬性(如果屬性存在則更新,不存在則創建)
+        ///</summary>
+        ///<param name="xmlFileName">XML文檔完全文件名(包含物理路徑)</param>
+        ///<param name="xpath">要匹配的XPath表達式(例如:"//節點名//子節點名</param>
+
+        ///<param name="xmlAttributeName">要匹配xmlAttributeName的屬性名稱</param>
+        ///<param name="value">屬性值</param>
+        ///<returns>成功返回true,失敗返回false</returns>
+        public static bool CreateOrUpdateXmlAttributeByXPath(string xmlFileName, string xpath, string xmlAttributeName, string value)
+        {
+            bool isSuccess = false;
+            bool isExistsAttribute = false;//標識屬性是否存在
+            XmlDocument xmlDoc = new XmlDocument();
+            try
+            {
+                xmlDoc.Load(xmlFileName); //加載XML文檔
+                XmlNode xmlNode = xmlDoc.SelectSingleNode(xpath);
+                if (xmlNode != null)
+                {
+                    //遍歷xpath節點中的所有屬性
+                    foreach (XmlAttribute attribute in xmlNode.Attributes)
+                    {
+                        if (attribute.Name.ToLower() == xmlAttributeName.ToLower())
+                        {
+                            //節點中存在此屬性則更新
+                            attribute.Value = value;
+                            isExistsAttribute = true;
+                            break;
+                        }
+                    }
+                    if (!isExistsAttribute)
+                    {
+                        //節點中不存在此屬性則創建
+                        XmlAttribute xmlAttribute = xmlDoc.CreateAttribute(xmlAttributeName);
+                        xmlAttribute.Value = value;
+                        xmlNode.Attributes.Append(xmlAttribute);
+                    }
+                }
+                xmlDoc.Save(xmlFileName); //保存到XML文檔
+                isSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex; //這裡可以定義你自己的異常處理
+            }
+            return isSuccess;
+        }
+        #endregion
+
+
+        #region XML文檔節點或屬性的刪除
+        ///<summary>
+        /// 刪除匹配XPath表達式的第一個節點(節點中的子元素同時會被刪除)
+        ///</summary>
+        ///<param name="xmlFileName">XML文檔完全文件名(包含物理路徑)</param>
+        ///<param name="xpath">要匹配的XPath表達式(例如:"//節點名//子節點名</param>
+        ///<returns>成功返回true,失敗返回false</returns>
+        public static bool DeleteXmlNodeByXPath(string xmlFileName, string xpath)
+        {
+            bool isSuccess = false;
+            XmlDocument xmlDoc = new XmlDocument();
+            try
+            {
+                xmlDoc.Load(xmlFileName); //加載XML文檔
+                XmlNode xmlNode = xmlDoc.SelectSingleNode(xpath);
+                if (xmlNode != null)
+                {
+                    //刪除節點
+                    xmlNode.ParentNode.RemoveChild(xmlNode);
+                }
+                xmlDoc.Save(xmlFileName); //保存到XML文檔
+                isSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex; //這裡可以定義你自己的異常處理
+            }
+            return isSuccess;
+        }
+
+        ///<summary>
+        /// 刪除匹配XPath表達式的第一個節點中的匹配參數xmlAttributeName的屬性
+        ///</summary>
+        ///<param name="xmlFileName">XML文檔完全文件名(包含物理路徑)</param>
+        ///<param name="xpath">要匹配的XPath表達式(例如:"//節點名//子節點名</param>
+
+        ///<param name="xmlAttributeName">要刪除的xmlAttributeName的屬性名稱</param>
+        ///<returns>成功返回true,失敗返回false</returns>
+        public static bool DeleteXmlAttributeByXPath(string xmlFileName, string xpath, string xmlAttributeName)
+        {
+            bool isSuccess = false;
+            bool isExistsAttribute = false;
+            XmlDocument xmlDoc = new XmlDocument();
+            try
+            {
+                xmlDoc.Load(xmlFileName); //加載XML文檔
+                XmlNode xmlNode = xmlDoc.SelectSingleNode(xpath);
+                XmlAttribute xmlAttribute = null;
+                if (xmlNode != null)
+                {
+                    //遍歷xpath節點中的所有屬性
+                    foreach (XmlAttribute attribute in xmlNode.Attributes)
+                    {
+                        if (attribute.Name.ToLower() == xmlAttributeName.ToLower())
+                        {
+                            //節點中存在此屬性
+                            xmlAttribute = attribute;
+                            isExistsAttribute = true;
+                            break;
+                        }
+                    }
+                    if (isExistsAttribute)
+                    {
+                        //刪除節點中的屬性
+                        xmlNode.Attributes.Remove(xmlAttribute);
+                    }
+                }
+                xmlDoc.Save(xmlFileName); //保存到XML文檔
+                isSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex; //這裡可以定義你自己的異常處理
+            }
+            return isSuccess;
+        }
+
+        ///<summary>
+        /// 刪除匹配XPath表達式的第一個節點中的所有屬性
+        ///</summary>
+        ///<param name="xmlFileName">XML文檔完全文件名(包含物理路徑)</param>
+        ///<param name="xpath">要匹配的XPath表達式(例如:"//節點名//子節點名</param>
+        ///<returns>成功返回true,失敗返回false</returns>
+        public static bool DeleteAllXmlAttributeByXPath(string xmlFileName, string xpath)
+        {
+            bool isSuccess = false;
+            XmlDocument xmlDoc = new XmlDocument();
+            try
+            {
+                xmlDoc.Load(xmlFileName); //加載XML文檔
+                XmlNode xmlNode = xmlDoc.SelectSingleNode(xpath);
+                if (xmlNode != null)
+                {
+                    //遍歷xpath節點中的所有屬性
+                    xmlNode.Attributes.RemoveAll();
+                }
+                xmlDoc.Save(xmlFileName); //保存到XML文檔
+                isSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex; //這裡可以定義你自己的異常處理
+            }
+            return isSuccess;
+        }
+        #endregion
+
     }
 }
 
