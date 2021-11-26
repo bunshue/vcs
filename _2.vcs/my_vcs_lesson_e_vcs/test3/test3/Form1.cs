@@ -10,17 +10,20 @@ using System.Windows.Forms;
 using System.Net;
 using System.Xml;
 using System.Xml.Linq;
-using System.Text.RegularExpressions;
 using System.Management;
-using System.IO;
-using Shell32;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography; //for MD5
-using Microsoft.Win32;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
+
+using System.IO;
+using System.IO.Ports;
 using System.Threading;
 using System.Reflection;    //for Assembly
+using System.Security;
+using System.Security.Cryptography;
 
+using Shell32;
+using Microsoft.Win32;  //for Registry
 
 namespace test3
 {
@@ -261,17 +264,8 @@ namespace test3
             } return weekstr;
         }
 
-        [DllImport("kernel32.dll")]
-        public static extern bool Beep(int frequency, int duration);
-
         private void button5_Click(object sender, EventArgs e)
         {
-            Random random = new Random();
-
-            for (int i = 0; i < 10; i++)
-            {
-                Beep(random.Next(10000), 100);
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)

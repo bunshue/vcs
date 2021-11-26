@@ -73,6 +73,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(160, 70);
             this.button2.TabIndex = 2;
+            this.button2.Text = "生成大量隨機碼";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -83,6 +84,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(160, 70);
             this.button3.TabIndex = 3;
+            this.button3.Text = "過濾html標簽";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -93,6 +95,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(160, 70);
             this.button4.TabIndex = 4;
+            this.button4.Text = "檔案資訊";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -103,6 +106,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(160, 70);
             this.button5.TabIndex = 5;
+            this.button5.Text = "雜音Beep";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -133,6 +137,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(160, 70);
             this.button8.TabIndex = 8;
+            this.button8.Text = "批量生成隨機密碼, 存檔";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -143,6 +148,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(160, 70);
             this.button9.TabIndex = 9;
+            this.button9.Text = "加密檔案";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -153,6 +159,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 70);
             this.button10.TabIndex = 10;
+            this.button10.Text = "解密檔案";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
