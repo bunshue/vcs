@@ -53,6 +53,15 @@ namespace vcs_ReadWrite_Barcode
             Bitmap bitmap1 = GetCode39(aaaaa, h, s);
             pictureBox1.Image = bitmap1;
 
+
+
+/*
+            //一維碼生成
+            //code39
+
+            Bitmap bitmap1 = GetCode39("lion-mouse 123456", 200, StringFormat.GenericDefault);
+            pictureBox1.Image = bitmap1;
+*/
         }
 
         /// <summary>
@@ -64,7 +73,7 @@ namespace vcs_ReadWrite_Barcode
         /// <returns></returns>
         public Bitmap GetCode39(string sourceCode, int barCodeHeight, StringFormat sf)
         {
-            string BarCodeText = sourceCode.ToUpper();
+            string BarCodeText = sourceCode.ToUpper();  //僅支持大寫
             int leftMargin = 5;
             int topMargin = 0;
             int thickLength = 2;

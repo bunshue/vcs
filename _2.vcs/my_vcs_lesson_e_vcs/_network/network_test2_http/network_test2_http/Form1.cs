@@ -619,7 +619,27 @@ namespace network_test2_http
 
         private void button19_Click(object sender, EventArgs e)
         {
+            string url = @"http://hovertree.com/themes/hvtimages/hwqlogo.png";
+            bool flag_available = IsWebResourceAvailable(url);
+            richTextBox1.Text += "網絡資源是否有效 : " + flag_available.ToString() + "\n";
+        }
 
+        static bool IsWebResourceAvailable(string webResourceAddress)
+        {
+            //一種行之有效的方式，就是利用HTTP頭返回的狀態碼來確定資源的可用性
+
+            try
+            {
+                HttpWebRequest req = (HttpWebRequest)WebRequest.CreateDefault(new Uri(webResourceAddress));
+                req.Method = "HEAD";
+                req.Timeout = 1000;
+                HttpWebResponse res = (HttpWebResponse)req.GetResponse();
+                return (res.StatusCode == HttpStatusCode.OK);
+            }
+            catch (WebException wex)
+            {
+                System.Diagnostics.Trace.Write(wex.Message); return false;
+            }
         }
 
         private void button20_Click(object sender, EventArgs e)

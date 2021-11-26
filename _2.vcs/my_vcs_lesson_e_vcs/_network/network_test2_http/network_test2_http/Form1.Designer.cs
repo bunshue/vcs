@@ -280,6 +280,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(160, 70);
             this.button19.TabIndex = 20;
+            this.button19.Text = "檢查網絡資源是否有效";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 

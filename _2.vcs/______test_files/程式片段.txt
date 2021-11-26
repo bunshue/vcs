@@ -1,23 +1,65 @@
 
-MD5 加密
-/// MD5加密
-/// </summary>
-/// <param name="value">需要加密的值</param>
-/// <param name="pwSalt">附加值</param>
-/// <returns></returns>
-public static string GetMD5(string value, string pwSalt)
-{
-HashAlgorithm hashAlgorithm = new MD5CryptoServiceProvider(); // or SHA1CryptoServiceProvider();
-byte[] result = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(pwSalt+value));
 
-StringBuilder sBuilder = new StringBuilder();
-for (int i = 0; i < result.Length; i++)
-{
-sBuilder.Append(result[i].ToString("x2"));
-}
-return sBuilder.ToString();
-}
+ 
 
+    /// <summary>
+    /// 獲取指定路徑下的模板的HTML源代碼
+    /// </summary>
+    /// <param name="TemplatePath">模板的路徑</param>
+    /// <param name="EncodingType">網頁類型（有些是UTF8，有些是GB2312）</param>
+    /// <returns>源代碼</returns>
+    private string GetHtmlCode(string TemplatePath, string EncodingType)
+    {
+        try
+        {
+            if (TemplatePath != string.Empty)
+            {
+                string ForesideUriPath = string.Empty;
+
+                if (!TemplatePath.ToLower().StartsWith("http://"))
+                    ForesideUriPath = HttpContext.Current.Server.MapPath("~/") + TemplatePath;
+                else
+                    ForesideUriPath = TemplatePath;
+
+                WebClient webClient = new WebClient();
+
+                //設置網絡憑證為系統憑證
+                webClient.Credentials = CredentialCache.DefaultCredentials;
+
+                //獲取指定URI的網頁的源代碼
+                byte[] byteDataBuffer = webClient.DownloadData(ForesideUriPath);
+
+                string htmlCode = "";
+                if (EncodingType == "UTF8")
+                {
+                    htmlCode = Encoding.UTF8.GetString(byteDataBuffer);
+                }
+                else
+                {
+                    htmlCode = Encoding.GetEncoding(EncodingType).GetString(byteDataBuffer);
+                }
+
+                htmlCode = Regex.Replace(htmlCode, @"<!DOCTYPE\s*HTML\s*PUBLIC[^>]+>", "", RegexOptions.Singleline);
+                htmlCode = Regex.Replace(htmlCode, @"\s+", " ", RegexOptions.Singleline);
+
+                return htmlCode;
+            }
+            else
+            {
+                return "";
+            }
+        }
+        catch (Exception ee)
+        {
+            throw (ee);
+        }
+    }
+
+ 
+ 
+ 
+                     
+                     
 
 
 C# 獲得主板序列號程序代碼如下：
@@ -140,28 +182,6 @@ foreach (string s in (ArrayList)d.GetData("para"))
 
 Console.WriteLine("you will see" + s);
 
-}
-
-
-
-//C#Hash算法MD5加密算法
- 
-
-//這裡Hash算法用MD5算法為例，MD5加密是不可逆的，所以只有加密沒有解密。
- 
-
-class MD5
-{
-public static string EncryptCode(string password)
-{
-//明文密碼由字符串轉換為byte數組
-byte[] clearBytes = new UnicodeEncoding().GetBytes(password);
-//由明文的byte數組計算出MD5密文byte數組
-byte[] hashedBytes = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(clearBytes);
-
-//把byte數組轉換為字符串後返回，BitConverter用於將基礎數據類型與字節數組相互轉換
-return BitConverter.ToString(hashedBytes);
-}
 }
 
 
@@ -668,23 +688,6 @@ Path.Combine
 //            return String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
 
 
-            string md5 = Safety.MD5(key);
-
-
-public class Safety
-{
-       public static string MD5(string str)
-       {
-              string strResult = "";
-              MD5 md5 = System.Security.Cryptography.MD5.Create();
-              byte[] bData = md5.ComputeHash(Encoding.Unicode.GetBytes(str));
-              for (int i = 0; i < bData.Length; i++)
-              {
-                     strResult = strResult + bData[i].ToString("X");
-              }
-              return strResult;
-       }
-}
 
 
 

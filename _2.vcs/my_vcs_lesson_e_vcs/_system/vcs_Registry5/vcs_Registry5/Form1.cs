@@ -43,6 +43,46 @@ namespace vcs_Registry5
 
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //獲取所有程序的安裝目錄
+            GetAllProcess();
+        }
+
+        /// <summary>
+        /// 獲取所有程序的安裝目錄
+        /// </summary>
+        public static void GetAllProcess()
+        {
+            const string Uninstall = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+            using (var registryKey = Registry.LocalMachine.OpenSubKey(Uninstall, false))
+            {
+                if (registryKey != null)//判斷對象存在
+                {
+                    foreach (var keyName in registryKey.GetSubKeyNames())//遍歷子項名稱的字符串數組
+                    {
+                        using (var key = registryKey.OpenSubKey(keyName, false))//遍歷子項節點
+                        {
+                            if (key != null)
+                            {
+                                var softwareName = key.GetValue("DisplayName", "").ToString();//獲取軟件名
+                                var installLocation = key.GetValue("InstallLocation", "").ToString();//獲取安裝路徑
+
+                                if (!string.IsNullOrEmpty(installLocation))
+                                {
+                                    Console.WriteLine(softwareName);
+                                    Console.WriteLine(installLocation);
+                                    Console.WriteLine();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
 
     public class RegistryStorage

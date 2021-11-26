@@ -33,7 +33,8 @@ namespace vcs_Mosaic
         {
             Bitmap bitmap1 = new Bitmap(filename);
             Bitmap bitmap2 = CreateMosaicImage(bitmap1);
-            pictureBox1.Image = bitmap2;
+            pictureBox1.Image = bitmap1;
+            pictureBox2.Image = bitmap2;
         }
 
         //重設大小
@@ -116,6 +117,74 @@ namespace vcs_Mosaic
             newpbmp.UnlockBits();
             return bmp;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //C#處理數碼相片之馬賽克的實現
+            string filename = @"C:\______test_files\elephant.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
+            int val = 10;
+            Bitmap bitmap2 = KiMosaic(bitmap1, val);
+            pictureBox2.Image = bitmap2;
+
+
+            //讀取圖檔
+            pictureBox1.Image = Image.FromFile(filename);
+        }
+
+        //馬賽克算法很簡單，說白了就是把一張圖片分割成若干個val * val像素的小區塊（可能在邊緣有零星的小塊，但不影響整體算法），每個小區塊的顏色都是相同的。
+        public static Bitmap KiMosaic(Bitmap b, int val)
+        {
+            if (b.Equals(null))
+            {
+                return null;
+            }
+            int w = b.Width;
+            int h = b.Height;
+            int stdR, stdG, stdB;
+            stdR = 0;
+            stdG = 0;
+            stdB = 0;
+            BitmapData srcData = b.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            unsafe
+            {
+                byte* p = (byte*)srcData.Scan0.ToPointer();
+                for (int y = 0; y < h; y++)
+                {
+                    for (int x = 0; x < w; x++)
+                    {
+                        if (y % val == 0)
+                        {
+                            if (x % val == 0)
+                            {
+                                stdR = p[2]; stdG = p[1]; stdB = p[0];
+                            }
+                            else
+                            {
+                                p[0] = (byte)stdB;
+                                p[1] = (byte)stdG;
+                                p[2] = (byte)stdR;
+                            }
+                        }
+                        else
+                        {
+                            // 復制上一行
+                            byte* pTemp = p - srcData.Stride;
+                            p[0] = (byte)pTemp[0];
+                            p[1] = (byte)pTemp[1];
+                            p[2] = (byte)pTemp[2];
+                        }
+                        p += 3;
+                    } // end of x
+                    p += srcData.Stride - w * 3;
+                } // end of y
+                b.UnlockBits(srcData);
+            }
+            return b;
+        }
+
+
     }
 
     //指針法

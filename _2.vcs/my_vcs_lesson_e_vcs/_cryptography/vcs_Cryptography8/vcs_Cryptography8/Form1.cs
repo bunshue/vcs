@@ -11,7 +11,6 @@ using System.IO;
 using System.Security;
 using System.Security.Cryptography;
 
-
 //C# MD5加密
 
 //C#開發筆記   一、C# MD5-16位加密實例,32位加密實例(兩種方法)
@@ -22,6 +21,8 @@ namespace vcs_Cryptography8
 {
     public partial class Form1 : Form
     {
+        string string_to_encrypt = "lion-mouse";
+
         public Form1()
         {
             InitializeComponent();
@@ -93,13 +94,21 @@ namespace vcs_Cryptography8
             return strIN;
         }
 
-        public string MD5Encrypt(string strIN)
+        ///   <summary>
+        ///   給一個字符串進行MD5加密
+        ///   </summary>
+        ///   <param   name="strText">待加密字符串</param>
+        ///   <returns>加密後的字符串</returns>
+        public string MD5Encrypt(string strText)
         {
-            byte[] tmpByte;
+            richTextBox1.Text += "1111111\n";
             MD5 md5 = new MD5CryptoServiceProvider();
-            tmpByte = md5.ComputeHash(GetKeyByteArray(getstrIN(strIN)));
-            md5.Clear();
-            return GetStringValue(tmpByte);
+            byte[] result = md5.ComputeHash(GetKeyByteArray(getstrIN(strText)));
+            return GetStringValue(result);
+            /* fail
+            byte[] result = md5.ComputeHash(System.Text.Encoding.Default.GetBytes(strText));
+            return System.Text.Encoding.Default.GetString(result);
+            */
         }
 
         public string SHA1Encrypt(string strIN)
@@ -233,12 +242,11 @@ namespace vcs_Cryptography8
         {
             //MD5，SHA1，SHA256，SHA512
             //此類提供MD5，SHA1，SHA256，SHA512等四種算法，加密字串的長度依次增大。
-            string str = "lion-mouse";
 
-            string s1 = MD5Encrypt(str);
-            string s2 = SHA1Encrypt(str);
-            string s3 = SHA256Encrypt(str);
-            string s4 = SHA512Encrypt(str);
+            string s1 = MD5Encrypt(string_to_encrypt);
+            string s2 = SHA1Encrypt(string_to_encrypt);
+            string s3 = SHA256Encrypt(string_to_encrypt);
+            string s4 = SHA512Encrypt(string_to_encrypt);
 
 
             richTextBox1.Text += "s1 = " + s1 + "\n";
@@ -251,8 +259,7 @@ namespace vcs_Cryptography8
         private void button1_Click(object sender, EventArgs e)
         {
             //MD5加密
-            string text = "lion-mouse";
-            string result = getMd5a(text);
+            string result = getMd5a(string_to_encrypt);
             richTextBox1.Text += result + "\n";
         }
 
@@ -312,22 +319,38 @@ namespace vcs_Cryptography8
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //MD5加密
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] result1 = Encoding.Default.GetBytes(string_to_encrypt);
+            byte[] result2 = md5.ComputeHash(result1);
 
+            string result3 = BitConverter.ToString(result2).Replace("-", "");
+            richTextBox1.Text += "MD5加密結果 : " + result3 + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //MD5加密
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] result1 = Encoding.Default.GetBytes(string_to_encrypt);
+            byte[] result2 = md5.ComputeHash(result1);
 
+            string result3 = System.Text.Encoding.Default.GetString(result2);
+            richTextBox1.Text += "XXXX MD5加密結果 : " + result3 + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            //MD5加密
+            string result = My_MD5.EncryptCode(string_to_encrypt);
+            richTextBox1.Text += result + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            //MD5加密
+            string result = Safety.MD5(string_to_encrypt);
+            richTextBox1.Text += result + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -344,9 +367,7 @@ namespace vcs_Cryptography8
         //MD5 a ST
         private void button8_Click(object sender, EventArgs e)
         {
-            string cccc = "lion-mouse";
-
-            byte[] result = Encoding.Default.GetBytes(cccc);
+            byte[] result = Encoding.Default.GetBytes(string_to_encrypt);
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] output = md5.ComputeHash(result);
 
@@ -372,9 +393,7 @@ namespace vcs_Cryptography8
 
         private void button9_Click(object sender, EventArgs e)
         {
-            string cccc = "lion-mouse";
-
-            string result = GetMD5(cccc);
+            string result = GetMD5(string_to_encrypt);
 
             richTextBox1.Text += result + "\n";
         }
@@ -397,9 +416,7 @@ namespace vcs_Cryptography8
 
         private void button10_Click(object sender, EventArgs e)
         {
-            string cccc = "lion-mouse";
-
-            string result = MD5Encrypt2(cccc);  //cf string result = MD5Encrypt(cccc);
+            string result = MD5Encrypt2(string_to_encrypt);  //cf string result = MD5Encrypt(string_to_encrypt);
 
             richTextBox1.Text += result + "\n";
         }
@@ -461,16 +478,15 @@ namespace vcs_Cryptography8
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string cccc = "lion-mouse";
+            string result1 = GetMd5StrA(string_to_encrypt);
+            richTextBox1.Text += "MD5 16位加密 加密後密碼為大寫 : \t" + result1 + "\n";
 
-            string result = GetMd5StrA(cccc);
-            richTextBox1.Text += result + "\n";
+            string result2 = GetMd5StrB(string_to_encrypt);
+            richTextBox1.Text += "MD5 16位加密 加密後密碼為小寫 : \t" + result2 + "\n";
 
-            result = GetMd5StrB(cccc);
-            richTextBox1.Text += result + "\n";
+            string result3 = UserMd5(string_to_encrypt);
+            richTextBox1.Text += "MD5 32位加密 : \t" + result3 + "\n";
 
-            result = UserMd5(cccc);
-            richTextBox1.Text += result + "\n";
         }
         //MD5 d SP
 
@@ -490,8 +506,7 @@ namespace vcs_Cryptography8
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string cccc = "lion-mouse";
-            string result = StringToMD5Hash(cccc);
+            string result = StringToMD5Hash(string_to_encrypt);
             richTextBox1.Text += result + "\n";
         }
         //MD5 e SP
@@ -503,7 +518,7 @@ namespace vcs_Cryptography8
             //獲取要加密的字段，並轉化為Byte[]數組
             byte[] data = System.Text.Encoding.Unicode.GetBytes(str.ToCharArray());
             //建立加密服務
-            System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            MD5 md5 = new MD5CryptoServiceProvider();
             //加密Byte[]數組
             byte[] result = md5.ComputeHash(data);
             */
@@ -578,6 +593,35 @@ namespace vcs_Cryptography8
             //File.Delete(inFile);
             richTextBox1.Text += "解密成功, 檔名 : " + outFile + "\n";
 
+        }
+    }
+
+    public class My_MD5
+    {
+        public static string EncryptCode(string password)
+        {
+            //明文密碼由字符串轉換為byte數組
+            byte[] clearBytes = new UnicodeEncoding().GetBytes(password);
+            //由明文的byte數組計算出MD5密文byte數組
+            byte[] hashedBytes = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(clearBytes);
+
+            //把byte數組轉換為字符串後返回，BitConverter用於將基礎數據類型與字節數組相互轉換
+            return BitConverter.ToString(hashedBytes);
+        }
+    }
+
+    public class Safety
+    {
+        public static string MD5(string str)
+        {
+            string strResult = "";
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] bData = md5.ComputeHash(Encoding.Unicode.GetBytes(str));
+            for (int i = 0; i < bData.Length; i++)
+            {
+                strResult = strResult + bData[i].ToString("X");
+            }
+            return strResult;
         }
     }
 }
@@ -772,19 +816,15 @@ namespace DESFile
                     byte[] oldHash = new byte[hasher.HashSize / 8];
                     read = cin.Read(oldHash, 0, oldHash.Length);
                     if ((oldHash.Length != read) || (!CheckByteArrays(oldHash, curHash)))
+                    {
                         throw new CryptoHelpException("文件被破壞");
+                    }
                 }
                 if (outValue != lSize)
+                {
                     throw new CryptoHelpException("文件大小不匹配");
+                }
             }
         }
-
     }
-
 }
-
-
-
-
-
-
