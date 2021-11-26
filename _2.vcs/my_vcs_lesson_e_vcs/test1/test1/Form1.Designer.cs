@@ -85,7 +85,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(160, 70);
             this.button3.TabIndex = 3;
-            this.button3.Text = "MD5加密";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -96,7 +95,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(160, 70);
             this.button4.TabIndex = 4;
-            this.button4.Text = "批量生成隨機密碼";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -162,7 +160,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 70);
             this.button10.TabIndex = 10;
-            this.button10.Text = "C#實現小小的日歷";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -173,7 +170,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 70);
             this.button11.TabIndex = 11;
-            this.button11.Text = "C#如何獲得 WINDOWS 版本";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -228,7 +224,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(160, 70);
             this.button15.TabIndex = 16;
-            this.button15.Text = "MD5加密";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

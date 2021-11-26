@@ -50,14 +50,7 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,13 +60,12 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(132, 49);
             this.button1.TabIndex = 0;
-            this.button1.Text = "jpg2bmp";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(823, 452);
+            this.richTextBox1.Location = new System.Drawing.Point(447, 452);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(470, 208);
             this.richTextBox1.TabIndex = 1;
@@ -85,7 +77,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(132, 49);
             this.button2.TabIndex = 2;
-            this.button2.Text = "ico2bmp";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -95,7 +86,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(132, 49);
             this.button3.TabIndex = 3;
-            this.button3.Text = "檢視圖片的像素";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -105,7 +95,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(132, 49);
             this.button4.TabIndex = 4;
-            this.button4.Text = "取得mp3播放長度";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -115,7 +104,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(132, 49);
             this.button5.TabIndex = 5;
-            this.button5.Text = "播放wav檔";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -143,7 +131,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(132, 49);
             this.button0.TabIndex = 8;
-            this.button0.Text = "bmp2jpg";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -266,59 +253,6 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // button20
-            // 
-            this.button20.Location = new System.Drawing.Point(298, 11);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(132, 49);
-            this.button20.TabIndex = 27;
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button21
-            // 
-            this.button21.Location = new System.Drawing.Point(298, 66);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(132, 49);
-            this.button21.TabIndex = 28;
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
-            // 
-            // button22
-            // 
-            this.button22.Location = new System.Drawing.Point(298, 121);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(132, 49);
-            this.button22.TabIndex = 29;
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
-            // 
-            // button23
-            // 
-            this.button23.Location = new System.Drawing.Point(295, 188);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(132, 49);
-            this.button23.TabIndex = 30;
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
-            // 
-            // button24
-            // 
-            this.button24.Location = new System.Drawing.Point(295, 243);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(132, 49);
-            this.button24.TabIndex = 31;
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(873, 15);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(420, 420);
-            this.pictureBox2.TabIndex = 33;
-            this.pictureBox2.TabStop = false;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(447, 15);
@@ -332,13 +266,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1304, 672);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button24);
-            this.Controls.Add(this.button23);
-            this.Controls.Add(this.button22);
-            this.Controls.Add(this.button21);
-            this.Controls.Add(this.button20);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
@@ -364,7 +292,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -394,12 +321,6 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

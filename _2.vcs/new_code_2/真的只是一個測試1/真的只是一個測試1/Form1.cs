@@ -221,87 +221,8 @@ namespace 真的只是一個測試1
                                     + dt.Second.ToString().PadLeft(2, '0') + "\n";
         }
 
-        //根据Url地址得到网页的html源码
-        private string GetWebContent(string Url)
-        {
-            string strResult = "";
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
-                //声明一个HttpWebRequest请求
-                request.Timeout = 30000;
-                //设置连接超时时间
-                request.Headers.Set("Pragma", "no-cache");
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                Stream streamReceive = response.GetResponseStream();
-                Encoding encoding = Encoding.GetEncoding("big5");
-                StreamReader streamReader = new StreamReader(streamReceive, encoding);
-                strResult = streamReader.ReadToEnd();
-            }
-            catch
-            {
-                MessageBox.Show("出错");
-            }
-            return strResult;
-        }
-
         private void button9_Click(object sender, EventArgs e)
         {
-            //抓取網頁並分析數據
-
-            //要抓取的URL地址
-            //string Url = "http://list.mp3.baidu.com/topso/mp3topsong.html?id=1#top2";
-            string Url = "https://tw.dictionary.search.yahoo.com/search;_ylt=AwrtXG3n.Oxg00wAkRB7rolQ;_ylc=X1MDMTM1MTIwMDM3OQRfcgMyBGZyAwRncHJpZAM1cFFoWDdMWFFLbTByV2N1Z3d3WThBBG5fcnNsdAMwBG5fc3VnZwMxBG9yaWdpbgN0dy5kaWN0aW9uYXJ5LnNlYXJjaC55YWhvby5jb20EcG9zAzAEcHFzdHIDBHBxc3RybAMwBHFzdHJsAzgEcXVlcnkDcHJlc3RpZ2UEdF9zdG1wAzE2MjYxNDI5Nzk-?p=prestige&fr=sfp&iscqry=";
-            //string Url = "http://mirlab.org/jang/books/matlabProgramming4beginner/example/03-%E4%BA%8C%E7%B6%AD%E5%B9%B3%E9%9D%A2%E7%B9%AA%E5%9C%96/plotxy12.m";
-            //string Url = "https://zh.wikipedia.org/wiki/%E6%98%8E%E7%A5%9E%E5%AE%97";
-            //得到指定Url的源码
-            string strWebContent = GetWebContent(Url);
-            richTextBox1.Text = strWebContent;
-
-            return;
-
-
-            //取出和数据有关的那段源码
-            int iBodyStart = strWebContent.IndexOf("<body", 0);
-            int iStart = strWebContent.IndexOf("歌曲TOP500", iBodyStart);
-            int iTableStart = strWebContent.IndexOf("<table", iStart);
-            int iTableEnd = strWebContent.IndexOf("</table>", iTableStart);
-            string strWeb = strWebContent.Substring(iTableStart, iTableEnd - iTableStart + 8);
-            //生成HtmlDocument
-            WebBrowser webb = new WebBrowser();
-            webb.Navigate("about:blank");
-            HtmlDocument htmldoc = webb.Document.OpenNew(true);
-            htmldoc.Write(strWeb);
-            HtmlElementCollection htmlTR = htmldoc.GetElementsByTagName("TR");
-            foreach (HtmlElement tr in htmlTR)
-            {
-                string strID = tr.GetElementsByTagName("TD")[0].InnerText;
-                richTextBox1.Text += "get : " + strID + "\n";
-
-                //string strName = SplitName(tr.GetElementsByTagName("TD")[1].InnerText, "MusicName");
-                //string strSinger = SplitName(tr.GetElementsByTagName("TD")[1].InnerText, "Singer");
-                strID = strID.Replace(".", "");
-                //插入DataTable
-                //AddLine(strID, strName, strSinger, "0");
-
-                string strID1 = tr.GetElementsByTagName("TD")[2].InnerText;
-                //string strName1 = SplitName(tr.GetElementsByTagName("TD")[3].InnerText, "MusicName");
-                //string strSinger1 = SplitName(tr.GetElementsByTagName("TD")[3].InnerText, "Singer");
-                //插入DataTable
-                strID1 = strID1.Replace(".", "");
-                //AddLine(strID1, strName1, strSinger1, "0");
-                string strID2 = tr.GetElementsByTagName("TD")[4].InnerText;
-                //string strName2 = SplitName(tr.GetElementsByTagName("TD")[5].InnerText, "MusicName");
-                //string strSinger2 = SplitName(tr.GetElementsByTagName("TD")[5].InnerText, "Singer");
-                //插入DataTable
-                strID2 = strID2.Replace(".", "");
-                //AddLine(strID2, strName2, strSinger2, "0");
-            }
-            //插入数据库
-            //InsertData(dt);
-
-            //dataGridView1.DataSource = dt.DefaultView;
-
 
         }
 

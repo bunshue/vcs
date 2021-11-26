@@ -236,6 +236,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(160, 70);
             this.button15.TabIndex = 16;
+            this.button15.Text = "抓取網頁資料";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

@@ -188,185 +188,40 @@ namespace test2
 
         }
 
-        //C#實現MD5加密
-
-        /*
-        MD5的全稱是message-digest algorithm 5(信息-摘要算法，在90年代初由mit laboratory for computer science和rsa data security inc的ronald l. rivest開發出來， 經md2、md3和md4發展而來。
-
-        MD5具有很好的安全性(因為它具有不可逆的特征,加過密的密文經過解密後和加密前的東東相同的可能性極小)
-        */
-
         private void button2_Click(object sender, EventArgs e)
         {
-            string cccc = "lion-mouse";
 
-            byte[] result = Encoding.Default.GetBytes(cccc);
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] output = md5.ComputeHash(result);
-
-            richTextBox1.Text += BitConverter.ToString(output).Replace("-", "") + "\n";
-
-        }
-
-        public static string GetMD5(string myString)
-        {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] fromData = System.Text.Encoding.Unicode.GetBytes(myString);
-            byte[] targetData = md5.ComputeHash(fromData);
-            string byte2String = null;
-
-            for (int i = 0; i < targetData.Length; i++)
-            {
-                byte2String += targetData[i].ToString("x");
-            }
-
-            return byte2String;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string cccc = "lion-mouse";
-
-            string result = GetMD5(cccc);
-
-            richTextBox1.Text += result + "\n";
         }
 
-
-        ///   <summary>
-        ///   給一個字符串進行MD5加密
-        ///   </summary>
-        ///   <param   name="strText">待加密字符串</param>
-        ///   <returns>加密後的字符串</returns>
-        public static string MD5Encrypt(string strText)
-        {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] result = md5.ComputeHash(System.Text.Encoding.Default.GetBytes(strText));
-            return System.Text.Encoding.Default.GetString(result);
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string cccc = "lion-mouse";
-
-            string result = MD5Encrypt(cccc);
-
-            richTextBox1.Text += result + "\n";
 
         }
 
 
-        //C# MD5加密
-
-        //C#開發筆記   一、C# MD5-16位加密實例,32位加密實例(兩種方法)
-        //1.MD5　16位加密實例
-
-        /**/
-        /// <summary>
-        /// MD5 16位加密 加密後密碼為大寫
-        /// </summary>
-        /// <param name="ConvertString"></param>
-        /// <returns></returns>
-        public static string GetMd5StrA(string ConvertString)
-        {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            string t2 = BitConverter.ToString(md5.ComputeHash(UTF8Encoding.Default.GetBytes(ConvertString)), 4, 8);
-            t2 = t2.Replace("-", "");
-            return t2;
-        }
-
-        /**/
-        /// <summary>
-        /// MD5 16位加密 加密後密碼為小寫
-        /// </summary>
-        /// <param name="ConvertString"></param>
-        /// <returns></returns>
-        public static string GetMd5StrB(string ConvertString)
-        {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            string t2 = BitConverter.ToString(md5.ComputeHash(UTF8Encoding.Default.GetBytes(ConvertString)), 4, 8);
-            t2 = t2.Replace("-", "");
-
-            t2 = t2.ToLower();
-
-            return t2;
-        }
-
-
-        /**/
-        /// <summary>
-        /// MD5　32位加密
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        static string UserMd5(string str)
-        {
-            string cl = str;
-            string pwd = "";
-            MD5 md5 = MD5.Create();//實例化一個md5對像
-            // 加密後是一個字節類型的數組，這裡要注意編碼UTF8/Unicode等的選擇　
-            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
-            // 通過使用循環，將字節類型的數組轉換為字符串，此字符串是常規字符格式化所得
-            for (int i = 0; i < s.Length; i++)
-            {
-                // 將得到的字符串使用十六進制類型格式。格式後的字符是小寫的字母，如果使用大寫（X）則格式後的字符是大寫字符
-
-                pwd = pwd + s[i].ToString("X2");
-            }
-            return pwd;
-        }
          
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string cccc = "lion-mouse";
-
-            string result = GetMd5StrA(cccc);
-            richTextBox1.Text += result + "\n";
-
-            result = GetMd5StrB(cccc);
-            richTextBox1.Text += result + "\n";
-
-            result = UserMd5(cccc);
-            richTextBox1.Text += result + "\n";
 
         }
 
 
 
-        public static string StringToMD5Hash(string inputString)
-        {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            byte[] encryptedBytes = md5.ComputeHash(Encoding.ASCII.GetBytes(inputString));
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < encryptedBytes.Length; i++)
-            {
-                sb.AppendFormat("{0:x2}", encryptedBytes[i]);
-            }
-            return sb.ToString();
-        }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string cccc = "lion-mouse";
-
-            string result = StringToMD5Hash(cccc);
-            richTextBox1.Text += result + "\n";
 
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
 
-
-            /*
-            //獲取要加密的字段，並轉化為Byte[]數組
-            byte[] data = System.Text.Encoding.Unicode.GetBytes(str.ToCharArray());
-            //建立加密服務
-            System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-            //加密Byte[]數組
-            byte[] result = md5.ComputeHash(data);
-            */
 
         }
 

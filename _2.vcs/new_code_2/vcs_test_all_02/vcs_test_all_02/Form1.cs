@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Diagnostics;       //for Process, Stopwatch
-using System.Runtime.InteropServices;   //for DllImport
 
 namespace vcs_test_all_02
 {
@@ -168,17 +167,8 @@ namespace vcs_test_all_02
 
         }
 
-        //長檔名轉短檔名
-        [DllImport("Kernel32.dll")]//声明API函数
-        private static extern Int16 GetShortPathName(string lpszLongPath, StringBuilder lpszShortPath, Int16 cchBuffer);
-
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename_long = @"C:\______test_files\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
-            StringBuilder filename_short = new System.Text.StringBuilder(256);//创建StringBuilder对象
-            GetShortPathName(filename_long, filename_short, 256);//调用API函数转换成短文件名
-            richTextBox1.Text += "長檔名：" + filename_long + "\n";
-            richTextBox1.Text += "短檔名：" + filename_short + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)

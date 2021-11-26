@@ -9,16 +9,16 @@ using System.Windows.Forms;
 
 using System.Net;
 using System.Xml;
+using System.Drawing.Imaging;
 using System.Text.RegularExpressions;
 using System.Management;
+using System.Media;     //for SoundPlayer
 using System.IO;
-using Shell32;
 using System.Runtime.InteropServices;
-
 using System.Security.Cryptography; //for MD5CryptoServiceProvider
-using Microsoft.Win32;  //for RegistryKey
 
-using System.Drawing.Imaging;
+using Shell32;
+using Microsoft.Win32;  //for RegistryKey
 
 namespace test6
 {
@@ -181,10 +181,21 @@ namespace test6
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //檢視圖片的像素
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            Image image = Image.FromFile(filename);
+            richTextBox1.Text += "檔案 : " + filename + ",\t" + "圖片像素：[" + image.Width + "*" + image.Height + "]" + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //播放wav檔
+            string filename = @"C:\______test_files\_wav\start.wav";
+            SoundPlayer player = new SoundPlayer(); //声明一个控制WAV文件的声音播放文件对象
+            player.SoundLocation = filename; //指定声音文件的路径
+            player.LoadAsync();  //设置播放的方法
+            player.Play(); //播放声音文件
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -270,32 +281,10 @@ namespace test6
             richTextBox1.Text += "\n";
         }
 
-
-        //C#切換鼠標左右鍵習慣無需控制面板中修改
-
-        [DllImport("user32.dll")]
-        private extern static bool SwapMouseButton(bool fSwap);
-
-        [DllImport("user32.dll")]
-        private extern static int GetSystemMetrics(int index);
-
         private void button8_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "你按了 切換鼠標左右鍵\n";
 
-            int flag = GetSystemMetrics(23);//獲取當前鼠標設置狀態
-            if (flag == 0)//右手習慣
-            {
-                SwapMouseButton(true);//設置成左手
-                richTextBox1.Text += "換成左手\n";
-            }
-            else//左手習慣
-            {
-                SwapMouseButton(false);//設置成右手
-                richTextBox1.Text += "換成右手\n";
-            }
         }
-
 
         /*
         理解多態。

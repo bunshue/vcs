@@ -291,9 +291,9 @@ namespace test7
             pictureBox1.Image = bmp;
         }
 
+        //C#實現小小的日歷 ST
         private void button7_Click(object sender, EventArgs e)
         {
-            //C#實現小小的日曆
             int year = DateTime.Now.Year;
             int month = DateTime.Now.Month;
             int day = 0;
@@ -404,6 +404,7 @@ namespace test7
             Console.WriteLine();
             richTextBox1.Text += "\n";
         }
+        //C#實現小小的日歷 SP
 
         private void button8_Click(object sender, EventArgs e)
         {

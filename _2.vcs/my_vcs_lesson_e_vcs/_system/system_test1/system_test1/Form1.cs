@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Runtime.InteropServices;   //for DllImport
-
 namespace system_test1
 {
     public partial class Form1 : Form
@@ -59,10 +57,6 @@ namespace system_test1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //獲取硬盤序列號代碼
-            HardDiskVal hddval = new HardDiskVal();
-            richTextBox1.Text += "C : " + hddval.HDVal("C") + "\n";
-            richTextBox1.Text += "D : " + hddval.HDVal("D") + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -141,71 +135,4 @@ namespace system_test1
         }
     }
 
-    /// <summary>
-    /// HardDiskVal 的摘要說明。
-    /// 讀取指定盤符的硬盤序列號
-    /// 功能：讀取指定盤符的硬盤序列號
-    /// </summary>
-    public class HardDiskVal
-    {
-        [DllImport("kernel32.dll")]
-        private static extern int GetVolumeInformation(
-        string lpRootPathName,
-        string lpVolumeNameBuffer,
-        int nVolumeNameSize,
-        ref int lpVolumeSerialNumber,
-        int lpMaximumComponentLength,
-        int lpFileSystemFlags,
-        string lpFileSystemNameBuffer,
-        int nFileSystemNameSize
-        );
-
-        /// <summary>
-        /// 獲得盤符為drvID的硬盤序列號，缺省為C
-        /// </summary>
-        /// <param name="drvID"></param>
-        /// <returns></returns>
-        public string HDVal(string drvID)
-        {
-            const int MAX_FILENAME_LEN = 256;
-            int retVal = 0;
-            int a = 0;
-            int b = 0;
-            string str1 = null;
-            string str2 = null;
-            int i = GetVolumeInformation(
-            drvID + @":/",
-            str1,
-            MAX_FILENAME_LEN,
-            ref retVal,
-            a,
-            b,
-            str2,
-            MAX_FILENAME_LEN
-            );
-            return retVal.ToString();
-        }
-
-        public string HDVal()
-        {
-            const int MAX_FILENAME_LEN = 256;
-            int retVal = 0;
-            int a = 0;
-            int b = 0;
-            string str1 = null;
-            string str2 = null;
-            int i = GetVolumeInformation(
-            "c://",
-            str1,
-            MAX_FILENAME_LEN,
-            ref retVal,
-            a,
-            b,
-            str2,
-            MAX_FILENAME_LEN
-            );
-            return retVal.ToString();
-        }
-    }
 }
-

@@ -194,7 +194,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(132, 49);
             this.button10.TabIndex = 12;
-            this.button10.Text = "格式化磁盤";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 

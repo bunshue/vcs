@@ -53,7 +53,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 48);
             this.button1.TabIndex = 0;
-            this.button1.Text = "用gmail寄信 b";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -110,7 +109,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(140, 48);
             this.button5.TabIndex = 6;
-            this.button5.Text = "用gmail寄信 f";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -120,7 +118,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(140, 48);
             this.button6.TabIndex = 7;
-            this.button6.Text = "用gmail寄信 g";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -130,7 +127,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(140, 48);
             this.button7.TabIndex = 8;
-            this.button7.Text = "用gmail寄信 h";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -140,7 +136,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(140, 48);
             this.button8.TabIndex = 9;
-            this.button8.Text = "用gmail寄信 i";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 

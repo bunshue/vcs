@@ -257,25 +257,8 @@ namespace vcs_test_all_03
         {
         }
 
-
-        [DllImport("shell32.dll")]
-        private static extern int SHFormatDrive(IntPtr hWnd, int drive, long fmtID, int Options);
-        public const long SHFMT_ID_DEFAULT = 0xFFFF;
         private void button10_Click(object sender, EventArgs e)
         {
-            int drive_id = 4;   //A: 0, B: 1, C: 2, D: 3, E: 4.....
-
-            //格式化磁盤
-            try
-            {
-                //偽執行
-                //SHFormatDrive(this.Handle, drive_id, SHFMT_ID_DEFAULT, 0);
-                MessageBox.Show("格式化完成", "訊息", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch
-            {
-                MessageBox.Show("格式化失敗", "訊息", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)

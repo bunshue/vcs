@@ -224,9 +224,6 @@ namespace test3
 
         private void button3_Click(object sender, EventArgs e)
         {
-            HardDiskVal hdv = new HardDiskVal();
-            string result = hdv.HDVal();
-            richTextBox1.Text += "獲取硬盤序列號 : " + result + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -357,65 +354,13 @@ namespace test3
             return addr.ToString();
         }
 
-        //設定音量1, 2  ST
-
-        //winmm控制方式，涉及Xp系統波形聲音的左右聲道，高位為左聲道，低位為右聲道：
-        //winmm
-
-        [DllImport("winmm.dll", EntryPoint = "waveOutSetVolume")]
-        public static extern int WaveOutSetVolume(IntPtr hwo, uint dwVolume);
-
-        private void SetVol1(double arg)
-        {
-            double newVolume = ushort.MaxValue * arg / 10.0;
-
-            uint v = ((uint)newVolume) & 0xffff;
-            uint vAll = v | (v << 16);
-
-            richTextBox1.Text += "setup " + vAll.ToString() + "\n";
-            int retVal = WaveOutSetVolume(IntPtr.Zero, vAll);
-        }
-
-        //user32控制方式：
-        //user32
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-
-        public void SetVol2()
-        {
-            p = Process.GetCurrentProcess();
-            for (int i = 0; i < 5; i++)
-            {
-                SendMessageW(p.Handle, WM_APPCOMMAND, p.Handle, (IntPtr)APPCOMMAND_VOLUME_UP);
-            }
-        }
-
-        private Process p;
-        private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
-        private const int APPCOMMAND_VOLUME_UP = 0x0a0000;
-        private const int APPCOMMAND_VOLUME_DOWN = 0x090000;
-        private const int WM_APPCOMMAND = 0x319;
-
-
-        double a = 0;
         private void button9_Click(object sender, EventArgs e)
         {
-            //useless
-            //設定音量1 winm
-            SetVol1(a);
-
-            a += 10;
         }
 
-        //設定音量2
         private void button10_Click(object sender, EventArgs e)
         {
-            //設定音量2 user32
-            SetVol2();
         }
-
-        //設定音量1, 2  SP
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -566,113 +511,12 @@ namespace test3
 
         }
 
-
-        [StructLayout(LayoutKind.Sequential)]
-        public class OSVersionInfo
-        {
-            public int OSVersionInfoSize;
-            public int MajorVersion;
-            public int MinorVersion;
-            public int BuildNumber;
-            public int PlatformId;
-
-
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
-            public String versionString;
-        }
-
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct OSVersionInfo2
-        {
-            public int OSVersionInfoSize;
-            public int MajorVersion;
-            public int MinorVersion;
-            public int BuildNumber;
-            public int PlatformId;
-
-
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
-            public String versionString;
-        }
-
-
-        public class LibWrap
-        {
-            [DllImport("kernel32")]
-            public static extern bool GetVersionEx([In, Out] OSVersionInfo osvi);
-
-
-            [DllImport("kernel32", EntryPoint = "GetVersionEx")]
-            public static extern bool GetVersionEx2(ref OSVersionInfo2 osvi);
-        }
-
-        public static String OpSysName(int MajorVersion, int MinorVersion, int PlatformId)
-        {
-            String str_opn = String.Format("{0}.{1}", MajorVersion, MinorVersion);
-            switch (str_opn)
-            {
-                case "4.0":
-                    return win95_nt40(PlatformId);
-                case "4.10":
-                    return "Windows 98";
-                case "4.90":
-                    return "Windows Me";
-                case "3.51":
-                    return "Windows NT 3.51";
-                case "5.0":
-                    return "Windwos 2000";
-                case "5.1":
-                    return "Windwos XP";
-                case "5.2":
-                    return "Windows Server 2003 family";
-                default:
-                    return "This windows version is not distinguish!";
-            }
-        }
-        public static String win95_nt40(int PlatformId)
-        {
-            switch (PlatformId)
-            {
-                case 1:
-                    return "Windows 95";
-                case 2:
-                    return "Windows NT 4.0";
-                default:
-                    return "This windows version is not distinguish!";
-            }
-        }
-
-
         private void button14_Click(object sender, EventArgs e)
         {
-            //取得Windows版本
-
-            richTextBox1.Text += " Passing OSVersionInfo as class\n";
-
-            OSVersionInfo osvi = new OSVersionInfo();
-            osvi.OSVersionInfoSize = Marshal.SizeOf(osvi);
-
-
-            LibWrap.GetVersionEx(osvi);
-
-            Console.WriteLine("Class size: {0} Operation System : {1} Pack: {2}", osvi.OSVersionInfoSize, OpSysName(osvi.MajorVersion, osvi.MinorVersion, osvi.PlatformId), osvi.versionString);
-            Console.WriteLine("{0}", osvi.PlatformId);
-
-            richTextBox1.Text += " Passing OSVersionInfo as struct\n";
-
-            OSVersionInfo2 osvi2 = new OSVersionInfo2();
-            osvi2.OSVersionInfoSize = Marshal.SizeOf(osvi2);
-
-            LibWrap.GetVersionEx2(ref osvi2);
-            Console.WriteLine("Static size: {0} Operation System : {1} Pack: {2}", osvi2.OSVersionInfoSize, OpSysName(osvi2.MajorVersion, osvi2.MinorVersion, osvi2.PlatformId), osvi2.versionString);
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //取得Windows版本
-            string version = OSInfoMation.GetOsVersion();
-            richTextBox1.Text += version + "\n";
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -709,74 +553,6 @@ namespace test3
             image.Save(thefullname, System.Drawing.Imaging.ImageFormat.Gif);
             return thefullname;
         }
-    }
-
-    /// <summary>
-    /// HardDiskVal 的摘要說明。
-    /// 讀取指定盤符的硬盤序列號
-    /// 功能：讀取指定盤符的硬盤序列號
-    /// </summary>
-    public class HardDiskVal
-    {
-        [DllImport("kernel32.dll")]
-        private static extern int GetVolumeInformation(
-        string lpRootPathName,
-        string lpVolumeNameBuffer,
-        int nVolumeNameSize,
-        ref int lpVolumeSerialNumber,
-        int lpMaximumComponentLength,
-        int lpFileSystemFlags,
-        string lpFileSystemNameBuffer,
-        int nFileSystemNameSize
-        );
-
-        /// <summary>
-        /// 獲得盤符為drvID的硬盤序列號，缺省為C
-        /// </summary>
-        /// <param name="drvID"></param>
-        /// <returns></returns>
-        public string HDVal(string drvID)
-        {
-            const int MAX_FILENAME_LEN = 256;
-            int retVal = 0;
-            int a = 0;
-            int b = 0;
-            string str1 = null;
-            string str2 = null;
-            int i = GetVolumeInformation(
-            drvID + @":/",
-            str1,
-            MAX_FILENAME_LEN,
-            ref retVal,
-            a,
-            b,
-            str2,
-            MAX_FILENAME_LEN
-            );
-            return retVal.ToString();
-        }
-
-        public string HDVal()
-        {
-            const int MAX_FILENAME_LEN = 256;
-            int retVal = 0;
-            int a = 0;
-            int b = 0;
-            string str1 = null;
-            string str2 = null;
-            int i = GetVolumeInformation(
-            "c://",
-            str1,
-            MAX_FILENAME_LEN,
-            ref retVal,
-            a,
-            b,
-            str2,
-            MAX_FILENAME_LEN
-            );
-            return retVal.ToString();
-        }
-
     }
 
     /// <summary>
@@ -839,38 +615,6 @@ namespace test3
         }
     }
 
-    public class OSInfoMation
-    {
-        public static string OSBit()
-        {
-            try
-            {
-                ConnectionOptions oConn = new ConnectionOptions();
-                System.Management.ManagementScope managementScope = new System.Management.ManagementScope("\\\\localhost", oConn);
-                System.Management.ObjectQuery objectQuery = new System.Management.ObjectQuery("select AddressWidth from Win32_Processor");
-                ManagementObjectSearcher moSearcher = new ManagementObjectSearcher(managementScope, objectQuery);
-                ManagementObjectCollection moReturnCollection = null;
-                string addressWidth = null;
-                moReturnCollection = moSearcher.Get();
-                foreach (ManagementObject oReturn in moReturnCollection)
-                {
-                    addressWidth = oReturn["AddressWidth"].ToString();
-                } //www.heatpress123.net
-                return addressWidth;
-            }
-            catch
-            {
-                return "獲取錯誤";
-            }
-        }
-
-        public static string GetOsVersion()
-        {
-            string osBitString = OSBit();
-            string osVersionString = Environment.OSVersion.ToString();
-            return string.Format(@"系統：{0}。位：{1}", osVersionString, osBitString);
-        }
-    }
 
 }
 

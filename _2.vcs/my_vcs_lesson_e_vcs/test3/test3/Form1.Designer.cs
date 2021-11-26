@@ -91,7 +91,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(160, 70);
             this.button3.TabIndex = 3;
-            this.button3.Text = "獲取硬盤序列號";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -156,7 +155,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(160, 70);
             this.button9.TabIndex = 9;
-            this.button9.Text = "設定音量1";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -167,7 +165,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 70);
             this.button10.TabIndex = 10;
-            this.button10.Text = "設定音量2";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -222,7 +219,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(160, 70);
             this.button14.TabIndex = 15;
-            this.button14.Text = "取得Windows版本";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -233,7 +229,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(160, 70);
             this.button15.TabIndex = 16;
-            this.button15.Text = "取得Windows版本";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

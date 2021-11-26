@@ -100,7 +100,7 @@ namespace system_test3_wmi
             Processor();
             richTextBox1.Text += "call Processor() SP\n";
 
-            richTextBox1.Text +="\n獲取CPU的序列號\n";
+            richTextBox1.Text += "\n獲取CPU的序列號\n";
             string result = GetCpuID();
             richTextBox1.Text += result + "\n";
 
@@ -128,7 +128,7 @@ namespace system_test3_wmi
                     richTextBox1.Text += "i = " + i.ToString() + "\n";
                     richTextBox1.Text += "Manufacturer : " + Manufacturer[i] + "\n";
                     richTextBox1.Text += "ProcessorId : " + ProcessorId[i] + "\n";
-                    
+
                 }
                 catch (System.Exception ex)
                 {
@@ -224,7 +224,9 @@ namespace system_test3_wmi
 
         private void button8_Click(object sender, EventArgs e)
         {
-
+            //取得Windows版本
+            string version = OSInfoMation.GetOsVersion();
+            richTextBox1.Text += version + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -260,6 +262,39 @@ namespace system_test3_wmi
         private void button15_Click(object sender, EventArgs e)
         {
 
+        }
+    }
+
+    public class OSInfoMation
+    {
+        public static string OSBit()
+        {
+            try
+            {
+                ConnectionOptions oConn = new ConnectionOptions();
+                System.Management.ManagementScope managementScope = new System.Management.ManagementScope("\\\\localhost", oConn);
+                System.Management.ObjectQuery objectQuery = new System.Management.ObjectQuery("select AddressWidth from Win32_Processor");
+                ManagementObjectSearcher moSearcher = new ManagementObjectSearcher(managementScope, objectQuery);
+                ManagementObjectCollection moReturnCollection = null;
+                string addressWidth = null;
+                moReturnCollection = moSearcher.Get();
+                foreach (ManagementObject oReturn in moReturnCollection)
+                {
+                    addressWidth = oReturn["AddressWidth"].ToString();
+                } //www.heatpress123.net
+                return addressWidth;
+            }
+            catch
+            {
+                return "獲取錯誤";
+            }
+        }
+
+        public static string GetOsVersion()
+        {
+            string osBitString = OSBit();
+            string osVersionString = Environment.OSVersion.ToString();
+            return string.Format(@"系統：{0}。位：{1}", osVersionString, osBitString);
         }
     }
 }

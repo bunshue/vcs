@@ -94,6 +94,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 70);
             this.button13.TabIndex = 30;
+            this.button13.Text = "MD5 f";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -104,6 +105,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(160, 70);
             this.button12.TabIndex = 29;
+            this.button12.Text = "MD5 e";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -114,6 +116,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 70);
             this.button11.TabIndex = 28;
+            this.button11.Text = "MD5 d";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -124,6 +127,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 70);
             this.button10.TabIndex = 27;
+            this.button10.Text = "MD5 c";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -134,6 +138,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(160, 70);
             this.button9.TabIndex = 26;
+            this.button9.Text = "MD5 b";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -144,6 +149,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(160, 70);
             this.button8.TabIndex = 25;
+            this.button8.Text = "MD5 a";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -204,6 +210,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(160, 70);
             this.button2.TabIndex = 19;
+            this.button2.Text = "MD5加密";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -222,6 +229,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 70);
             this.button1.TabIndex = 17;
+            this.button1.Text = "MD5加密";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -243,6 +251,7 @@
             this.button16.Size = new System.Drawing.Size(160, 70);
             this.button16.TabIndex = 36;
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button17
             // 
@@ -252,6 +261,7 @@
             this.button17.Size = new System.Drawing.Size(160, 70);
             this.button17.TabIndex = 37;
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button18
             // 
@@ -261,6 +271,7 @@
             this.button18.Size = new System.Drawing.Size(160, 70);
             this.button18.TabIndex = 38;
             this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // button19
             // 
@@ -270,6 +281,7 @@
             this.button19.Size = new System.Drawing.Size(160, 70);
             this.button19.TabIndex = 39;
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // button20
             // 
@@ -279,6 +291,7 @@
             this.button20.Size = new System.Drawing.Size(160, 70);
             this.button20.TabIndex = 40;
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // button21
             // 
@@ -288,6 +301,7 @@
             this.button21.Size = new System.Drawing.Size(160, 70);
             this.button21.TabIndex = 41;
             this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
             // button22
             // 
@@ -296,7 +310,9 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(160, 70);
             this.button22.TabIndex = 42;
+            this.button22.Text = "加密檔案";
             this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
             // button23
             // 
@@ -305,7 +321,9 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(160, 70);
             this.button23.TabIndex = 43;
+            this.button23.Text = "解密檔案";
             this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // Form1
             // 
