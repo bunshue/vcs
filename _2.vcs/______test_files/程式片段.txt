@@ -1,5 +1,147 @@
 
 
+// 用C#獲取硬盤序列號,CPU序列號,網卡MAC地址的源碼
+ 
+ 
+privatestring[]GetMoc()
+{
+string[]str=newstring[3];
+ManagementClassmcCpu=newManagementClass("win32_Processor");
+ManagementObjectCollectionmocCpu=mcCpu.GetInstances();
+foreach(ManagementObjectminmocCpu)
+{
+str[0]=m["ProcessorId"].ToString();
+}
+
+ManagementClassmcHD=newManagementClass("win32_logicaldisk");
+ManagementObjectCollectionmocHD=mcHD.GetInstances();
+foreach(ManagementObjectminmocHD)
+{
+if(m["DeviceID"].ToString()=="C:")
+{
+str[1]=m["VolumeSerialNumber"].ToString();
+break;
+}
+}
+
+ManagementClassmcMAC=newManagementClass("Win32_NetworkAdapterConfiguration");
+ManagementObjectCollectionmocMAC=mcMAC.GetInstances();
+foreach(ManagementObjectminmocMAC)
+{
+if((bool)m["IPEnabled"])
+{
+str[2]=m["MacAddress"].ToString();
+break;
+}
+}
+
+returnstr;
+}
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+//提取HTML代碼中文字的C#函數
+
+/// <summary>
+  /// 去除HTML標記
+  /// </summary>
+  /// <param name="strHtml">包括HTML的源碼 </param>
+  /// <returns>已經去除後的文字</returns>
+  public static string StripHTML(string strHtml)
+  {
+   string [] aryReg ={
+          @"<script[^>]*?>.*?</script>",
+
+          @"<(\/\s*)?!?((\w+:)?\w+)(\w+(\s*=?\s*(([""'])(\\[""'tbnr]|[^\7])*?\7|\w+)|.{0})|\s)*?(\/\s*)?>",
+          @"([\r\n])[\s]+",
+          @"&(quot|#34);",
+          @"&(amp|#38);",
+          @"&(lt|#60);",
+          @"&(gt|#62);", 
+          @"&(nbsp|#160);", 
+          @"&(iexcl|#161);",
+          @"&(cent|#162);",
+          @"&(pound|#163);",
+          @"&(copy|#169);",
+          @"&#(\d+);",
+          @"-->",
+          @"<!--.*\n"
+
+         };
+
+   string [] aryRep = {
+           "",
+           "",
+           "",
+           "\"",
+           "&",
+           "<",
+           ">",
+           " ",
+           "\xa1",//chr(161),
+           "\xa2",//chr(162),
+           "\xa3",//chr(163),
+           "\xa9",//chr(169),
+           "",
+           "\r\n",
+           ""
+          };
+
+   string newReg =aryReg[0];
+   string strOutput=strHtml;
+   for(int i = 0;i<aryReg.Length;i++)
+   {
+    Regex regex = new Regex(aryReg[i],RegexOptions.IgnoreCase );
+    strOutput = regex.Replace(strOutput,aryRep[i]);
+   }
+
+   strOutput.Replace("<","");
+   strOutput.Replace(">","");
+   strOutput.Replace("\r\n","");
+
+
+   return strOutput;
+  }
+
+
+
+
+
+//磁盤配額的wmi版本(C#)
+
+                   ManagementClass c = new ManagementClass("Win32_DiskQuota"); 
+                   ManagementObject quota = c.CreateInstance(); 
+                   quota["Limit"] = 400000000; 
+                   quota["WarningLimit"] = 200000000; 
+                   // Get user account object 
+                   ManagementObject account = new 
+                       ManagementObject("Win32_Account.Domain=TODAY20040216,Name=ASPNET"); 
+                   account.Get(); 
+                   // get disk object 
+                   ManagementObject disk = new 
+                       ManagementObject("Win32_LogicalDisk.DeviceId='F:'"); 
+                   disk.Get(); 
+                   quota["QuotaVolume"] = disk; 
+                   quota["User"] = account; 
+                   quota.Put(); // commit 
+                   ManagementClass c = new ManagementClass("Win32_DiskQuota"); 
+                   Console.WriteLine(c.SystemProperties); 
+                   foreach (ManagementObject o in c.GetInstances()) 
+                   {
+                       Console.WriteLine("Next : {0}", o.Path); 
+}
+
+
+
+
 //c# 生成SHA1加密字符串，
  
 
