@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using System.Net;
 using System.Xml;
 using System.Text.RegularExpressions;
-using System.Management;
-using System.IO;
-using Shell32;
 using System.Runtime.InteropServices;
+using System.IO;
+using System.Management;
+
+using Shell32;
 
 namespace network_test2_http
 {
@@ -644,6 +645,22 @@ namespace network_test2_http
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //獲取遠程網頁中的所有鏈接URL（網絡蜘蛛實現原理）
+            //使用System.Net.WebClient類獲取遠程網頁內容，然後使用URL正則表達式分析Html代碼中的鏈接。
+
+            WebClient client = new WebClient();
+            byte[] page = client.DownloadData("http://news.163.com");
+            string content = System.Text.Encoding.UTF8.GetString(page);
+            string regex = "href=[\\\"\\\'](http:\\/\\/|\\.\\/|\\/)?\\w+(\\.\\w+)*(\\/\\w+(\\.\\w+)?)*(\\/|\\?\\w*=\\w*(&\\w*=\\w*)*)?[\\\"\\\']";
+            Regex re = new Regex(regex);
+            MatchCollection matches = re.Matches(content);
+
+            System.Collections.IEnumerator enu = matches.GetEnumerator();
+            while (enu.MoveNext() && enu.Current != null)
+            {
+                Match match = (Match)(enu.Current);
+                richTextBox1.Text += match.Value + "\n";
+            }
 
         }
 

@@ -263,6 +263,51 @@ namespace test3
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //C#獲取當前星期幾的三種方法
+
+            //第一種：
+
+            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+            richTextBox1.Text += weekday + "\n";
+
+            //第二種：
+
+            richTextBox1.Text += System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek) + "\n";
+
+            //第三種：
+
+            string dt;
+            string week = string.Empty;
+            dt = DateTime.Today.DayOfWeek.ToString();
+            switch (dt)
+            {
+                case "Monday":
+                    week = "星期一";
+                    break;
+                case "Tuesday":
+                    week = "星期二";
+                    break;
+                case "Wednesday":
+                    week = "星期三";
+                    break;
+                case "Thursday":
+                    week = "星期四";
+                    break;
+                case "Friday":
+                    week = "星期五";
+                    break;
+                case "Saturday":
+                    week = "星期六";
+                    break;
+                case "Sunday":
+                    week = "星期日";
+                    break;
+                default:
+                    week = "星期日";
+                    break;
+            }
+            richTextBox1.Text += week + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)

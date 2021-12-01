@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Management;
+
 namespace system_test1
 {
     public partial class Form1 : Form
@@ -57,6 +59,8 @@ namespace system_test1
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //獲取系統版本信息方法
+            richTextBox1.Text += OSInfoMation.GetOsVersion() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -134,5 +138,37 @@ namespace system_test1
 
         }
     }
+    public class OSInfoMation
+    {
+        public static string OSBit()
+        {
+            try
+            {
+                ConnectionOptions oConn = new ConnectionOptions();
+                ManagementScope managementScope = new ManagementScope("\\\\localhost", oConn);
+                ObjectQuery objectQuery = new ObjectQuery("select AddressWidth from Win32_Processor");
 
+                ManagementObjectSearcher moSearcher = new ManagementObjectSearcher(managementScope, objectQuery);
+                ManagementObjectCollection moReturnCollection = null;
+                string addressWidth = null;
+                moReturnCollection = moSearcher.Get();
+                foreach (ManagementObject oReturn in moReturnCollection)
+                {
+                    addressWidth = oReturn["AddressWidth"].ToString();
+                } //www.heatpress123.net
+                return addressWidth;
+            }
+            catch
+            {
+                return "獲取錯誤";
+            }
+        }
+
+        public static string GetOsVersion()
+        {
+            string osBitString = OSBit();
+            string osVersionString = Environment.OSVersion.ToString();
+            return string.Format(@"系統：{0}。位：{1}", osVersionString, osBitString);
+        }
+    }
 }

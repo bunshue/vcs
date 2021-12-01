@@ -291,6 +291,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(160, 70);
             this.button20.TabIndex = 21;
+            this.button20.Text = "獲取遠程網頁中的所有鏈接URL";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 

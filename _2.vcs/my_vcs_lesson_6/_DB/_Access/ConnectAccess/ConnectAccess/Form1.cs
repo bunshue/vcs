@@ -22,18 +22,26 @@ namespace ConnectAccess
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename;  //sugar
-            //string ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + filename;     //kilo
-            OleDbConnection Olecon = new OleDbConnection(ConStr);
-            OleDbDataAdapter OleDat = new OleDbDataAdapter("select * from 帳目", Olecon);
+            //"Provider=Microsoft.Jet.OleDb.4.0;"是指數據提供者,這裡使用的是Microsoft Jet引擎,也就是Access中的數據引擎,asp.net就是靠這個和Access的數據庫連接的.
+            //"Data Source=XXXXX.mdb"是指明數據源的位置
+
+            string connection_string = "Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename;  //sugar
+            //string connection_string = "Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + filename;     //kilo
+
+            OleDbConnection connection = new OleDbConnection(connection_string);
+
+            connection.Open();  // 打開數據庫連接
+
+            OleDbDataAdapter OleDat = new OleDbDataAdapter("select * from 帳目", connection);
             DataSet ds = new DataSet();
             OleDat.Fill(ds, "帳目");
             this.dataGridView1.DataSource = ds.Tables[0].DefaultView;   //將所有資料都匯出到dataGridView上
 
             show_dataset_content(ds);   //顯示資料庫的內容
 
-            Olecon.Close();
-            Olecon.Dispose();
+            connection.Close(); // 關閉數據庫連接
+
+            connection.Dispose();
         }
 
         //顯示資料庫的內容 ST

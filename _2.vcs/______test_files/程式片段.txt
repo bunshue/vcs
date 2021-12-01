@@ -1,5 +1,32 @@
 
 
+//c# 生成SHA1加密字符串，
+ 
+
+從網上找到的一種加密代碼：
+
+         var enstr ="abcdefg";
+            var strRes = Encoding.Default.GetBytes(enstr);
+            HashAlgorithm iSha = new SHA1CryptoServiceProvider();
+            strRes = iSha.ComputeHash(strRes);
+            var enText = new StringBuilder();
+            foreach (byte iByte in strRes)
+            {
+                enText.AppendFormat("{0:x2}", iByte);
+            }    
+ 
+
+還有另一種SHA1加密，我用來做騰訊雲簽名：
+
+ 　　　　　　 HMACSHA1 hmacsha1 = new HMACSHA1(Encoding.UTF8.GetBytes(SecretKey));
+            byte[] rstRes = hmacsha1.ComputeHash(Encoding.UTF8.GetBytes(str));
+            string strs =  Convert.ToBase64String(rstRes);
+            return System.Web.HttpUtility.UrlEncode(strs);
+
+ 
+
+
+
  
 
     /// <summary>
