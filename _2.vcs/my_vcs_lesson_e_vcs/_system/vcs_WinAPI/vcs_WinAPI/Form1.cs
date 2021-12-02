@@ -447,9 +447,29 @@ namespace vcs_WinAPI
         }
         //取得mp3播放長度 SP
 
+
+        private const uint WM_SYSCOMMAND = 0x112;                    //系统消息
+        private const int SC_MONITORPOWER = 0xF170;                  //关闭显示器的系统命令
+        private const int MonitorPowerOn = -1;                       //2为PowerOff, 1为省电状态，-1为开机
+        private const int MonitorPowerSaving = 1;                    //2为PowerOff, 1为省电状态，-1为开机
+        private const int MonitorPowerOff = 2;                       //2为PowerOff, 1为省电状态，-1为开机
+        private static readonly IntPtr HWND_BROADCAST = new IntPtr(0xffff);//广播消息，所有顶级窗体都会接收
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+
         private void button10_Click(object sender, EventArgs e)
         {
+            //關閉顯示器, 但打開顯示器無效, 要自己動手按
+            richTextBox1.Text += "關閉顯示器, 偽執行\n";
+            //SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, MonitorPowerOff);
+            //SendMessage(this.Handle, WM_SYSCOMMAND,SC_MONITORPOWER, 2);     // 2 为关闭显示器, －1则打开显示器, same
 
+            //same
+            //关闭
+            //SendMessage(this.Handle, WM_SYSCOMMAND, SC_MONITORPOWER, 2);
+            //打开
+            //SendMessage(this.Handle, WM_SYSCOMMAND, SC_MONITORPOWER, -1);
         }
 
         private void button11_Click(object sender, EventArgs e)

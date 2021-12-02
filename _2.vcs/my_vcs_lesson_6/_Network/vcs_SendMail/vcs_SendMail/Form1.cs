@@ -144,7 +144,7 @@ namespace vcs_SendMail
             //smtp.Port = smtp_server_port;
             smtp.Timeout = 9999;
             smtp.EnableSsl = true; //gmail預設開啟驗證, 指定 SmtpClient 使用安全套接字層 (SSL) 加密連接
-            smtp.UseDefaultCredentials = false;
+            smtp.UseDefaultCredentials = false; //不使用默認憑證，注意此句必須放在smtp.Credentials() 的上面
             smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
             //smtp.Credentials = CredentialCache.DefaultNetworkCredentials;   //不可, 需要驗證寄件者
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;   //通過網絡發送到SMTP服務器
@@ -187,6 +187,7 @@ namespace vcs_SendMail
 
         private void button0_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
             richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
             Application.DoEvents();
@@ -265,6 +266,7 @@ namespace vcs_SendMail
             SendGmail(mail);
 
             mail.Dispose();
+            this.Cursor = Cursors.Default;
         }
 
         public void mailBody(MailMessage mail)
@@ -290,6 +292,7 @@ namespace vcs_SendMail
 
         private void button2_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
             richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
             Application.DoEvents();
@@ -324,10 +327,12 @@ namespace vcs_SendMail
             SendGmail(mail);
 
             mail.Dispose();
+            this.Cursor = Cursors.Default;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
             richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
             Application.DoEvents();
@@ -347,10 +352,12 @@ namespace vcs_SendMail
             SendGmail(mail);
 
             mail.Dispose();
+            this.Cursor = Cursors.Default;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
             richTextBox1.Text += "透過gmail寄信 ST\t" + mail_subject + "\n";
             Application.DoEvents();
@@ -372,11 +379,34 @@ namespace vcs_SendMail
             mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
             mail.IsBodyHtml = true; //是否是HTML郵件
 
+            //寄送附件方法一
             mail.Attachments.Add(new Attachment(attach_filename1));  //附件
+
+            /*
+            //寄送附件方法二, 直接將string類型結果保存為附件, 不好用
+            byte[] bytes = System.Text.Encoding.Default.GetBytes
+                (@"<table><tr><td width=150>1234567891234567
+        </td><td width=80>12345678</td></tr></table>");
+            MemoryStream ms = new MemoryStream(bytes);
+            ContentType ct = new ContentType();
+            //附件文件類型
+            ct.MediaType = MediaTypeNames.Text.Html;
+            //附件名稱，可以是其它後綴名
+            ct.Name = "附件名稱" + DateTime.Now.ToString() + ".html";
+
+            mail.Attachments.Add(new Attachment(ms, ct));
+            */
 
             SendGmail(mail);
 
             mail.Dispose();
+
+            /*
+            //寄送附件方法二
+            ms.Close();
+            ms.Dispose();
+            */
+            this.Cursor = Cursors.Default;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -491,7 +521,7 @@ namespace vcs_SendMail
             //smtp.Host = smtp_server_y;
             //smtp.Port = smtp_server_port_y;
             smtp.EnableSsl = true; //gmail預設開啟驗證, 指定 SmtpClient 使用安全套接字層 (SSL) 加密連接
-            smtp.UseDefaultCredentials = false;
+            smtp.UseDefaultCredentials = false; //不使用默認憑證，注意此句必須放在smtp.Credentials() 的上面
             smtp.Credentials = new NetworkCredential(email_addr_from_y, email_addr_from_password_y);    //這裡要填正確的帳號跟密碼, 驗證寄件者
 
             SendMail(smtp, mail);

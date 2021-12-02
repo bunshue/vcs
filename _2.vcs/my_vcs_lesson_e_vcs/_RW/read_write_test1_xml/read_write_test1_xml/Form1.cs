@@ -1104,8 +1104,200 @@ namespace read_write_test1_xml
             return count;
         }
 
+        //C# XML創建和解析
         private void button23_Click(object sender, EventArgs e)
         {
+            XMLApply xml = new XMLApply();
+            richTextBox1.Text += "建立XML\n";
+            xml.CreateXML();
+
+
+        }
+    }
+
+    //class XML_RW
+    public class XMLApply
+    {
+
+        public string fileName = "Books.xml";
+
+        private void Start()
+        {
+            CreateXML();
+
+            //UpdateXml();
+
+            //AddXml();
+
+            //ParseXML();
+        }
+
+
+        /// 
+
+        /// 創建XML文件
+        /// 
+
+        public void CreateXML()
+        {
+            string filePath = Application.StartupPath + "//" + fileName;
+
+            if (!File.Exists(filePath))
+            {
+                XmlDocument BooksXML = new XmlDocument();
+
+                XmlElement myFavoriteBooks = BooksXML.CreateElement("MyFavoriteBooks");
+                XmlElement history = BooksXML.CreateElement("History");
+                history.SetAttribute("year", "2013");
+                XmlElement item_empireOfQing = BooksXML.CreateElement("item");
+                item_empireOfQing.SetAttribute("name", "大秦帝國");
+                item_empireOfQing.SetAttribute("price", "100");
+                item_empireOfQing.InnerText = "Sara";
+
+                XmlElement item_theLastMan = BooksXML.CreateElement("item");
+                item_theLastMan.SetAttribute("name", "麥田的守望者");
+                item_theLastMan.SetAttribute("price", "70");
+                item_theLastMan.InnerText = "Lisa";
+
+                XmlElement item_worldHistory = BooksXML.CreateElement("item");
+                item_worldHistory.SetAttribute("name", "世界歷史");
+                item_worldHistory.SetAttribute("price", "40");
+                item_worldHistory.InnerText = "Michael";
+
+                XmlElement software = BooksXML.CreateElement("SOftware");
+                XmlElement item_php = BooksXML.CreateElement("PHP");
+                item_php.SetAttribute("name", "php");
+                item_php.SetAttribute("price", "35");
+                item_php.InnerText = "KD";
+
+                history.AppendChild(item_empireOfQing);
+                history.AppendChild(item_theLastMan);
+                history.AppendChild(item_worldHistory);
+                software.AppendChild(item_php);
+                myFavoriteBooks.AppendChild(history);
+                myFavoriteBooks.AppendChild(software);
+                BooksXML.AppendChild(myFavoriteBooks);
+
+                BooksXML.Save(filePath);
+
+                //Debug.Log("XML file create success.....");
+            }
+        }
+
+
+
+        /// 
+
+        /// 更新xml文件內容
+        /// 
+
+        public void UpdateXml()
+        {
+            string filePath = Application.StartupPath + "//" + fileName;
+
+            if (File.Exists(filePath))
+            {
+                //create a xml reference
+                XmlDocument BooksXML = new XmlDocument();
+                //read exists file into BooksXML
+                BooksXML.Load(filePath);
+
+                XmlNodeList nodeList = BooksXML.SelectSingleNode("MyFavoriteBooks").ChildNodes;
+
+                foreach (XmlElement node in nodeList)
+                {
+                    if (node.GetAttribute("year") == "2013")
+                    {
+                        node.SetAttribute("year", "2014");
+
+                        XmlNodeList subNodeList = node.ChildNodes;
+
+                        foreach (XmlElement subNode in subNodeList)
+                        {
+                            subNode.InnerText += "Updated...";
+                        }
+
+                        break;
+                    }
+                }
+
+                BooksXML.Save(filePath);
+                //Debug.Log("Update success...");
+            }
+
+        }
+
+
+        /// 
+
+        /// 在現有xml文件中，增加一個節點
+        /// 
+
+        public void AddXml()
+        {
+            string filePath = Application.StartupPath + "//" + fileName;
+
+            if (File.Exists(filePath))
+            {
+                XmlDocument BooksXML = new XmlDocument();
+                BooksXML.Load(filePath);
+
+                XmlNode root = BooksXML.SelectSingleNode("MyFavoriteBooks");
+                XmlElement culture = BooksXML.CreateElement("Culture");
+                culture.SetAttribute("year", "2012");
+
+                XmlElement item_China = BooksXML.CreateElement("item");
+                item_China.SetAttribute("name", "中國文化");
+                item_China.SetAttribute("price", "30");
+                item_China.InnerText = "rechard";
+
+                culture.AppendChild(item_China);
+                root.AppendChild(culture);
+                BooksXML.AppendChild(root);
+                BooksXML.Save(filePath);
+
+                //Debug.Log("Add node success...");
+            }
+        }
+
+
+        /// 
+
+        /// 解析xml文件
+        /// 
+
+        public void ParseXML()
+        {
+            string filePath = Application.StartupPath + "//" + fileName;
+            StringBuilder booksInfo = new StringBuilder("");
+
+            XmlDocument BooksXML = new XmlDocument();
+            BooksXML.Load(filePath);
+
+            XmlNode rootNode = BooksXML.FirstChild;
+
+            if (rootNode.Name == "MyFavoriteBooks")
+            {
+                XmlNodeList nodeList = rootNode.ChildNodes;
+
+                foreach (XmlElement node in nodeList)
+                {
+                    booksInfo.Append(node.Name + "\n");
+
+                    foreach (XmlElement subNode in node.SelectNodes("item"))
+                    {
+                        booksInfo.Append("\t " + subNode.GetAttribute("name") + "   , price:" + subNode.GetAttribute("price") + "\n");
+                    }
+
+                    booksInfo.Append("\n");
+                }
+
+                //Debug.Log(booksInfo.ToString());
+            }
+            else
+            {
+                //Debug.Log("YOU LOAD WRONG FILE....");
+            }
 
         }
     }
