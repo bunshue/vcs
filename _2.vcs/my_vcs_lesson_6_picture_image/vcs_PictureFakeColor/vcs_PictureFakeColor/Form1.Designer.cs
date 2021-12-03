@@ -38,7 +38,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(12, 498);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(122, 46);
             this.button1.TabIndex = 0;
@@ -48,25 +48,25 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(152, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(375, 568);
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 77);
+            this.richTextBox1.Location = new System.Drawing.Point(150, 498);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(122, 503);
+            this.richTextBox1.Size = new System.Drawing.Size(502, 182);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(542, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(670, 12);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(375, 568);
+            this.pictureBox2.Size = new System.Drawing.Size(640, 480);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
@@ -74,7 +74,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 636);
+            this.ClientSize = new System.Drawing.Size(1323, 692);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);

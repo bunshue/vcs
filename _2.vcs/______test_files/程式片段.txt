@@ -1,4 +1,36 @@
 
+        //取得CPU的型號和溫度
+        private void button6_Click(object sender, EventArgs e)
+        {
+            GetCPUTemperature();
+            GetCPUCode();
+        }
+
+        private void GetCPUTemperature()
+        {
+            double CPUtprt = 0;
+            System.Management.ManagementObjectSearcher mos
+            = new System.Management.ManagementObjectSearcher(@"root\WMI", "Select * From MSAcpi_ThermalZoneTemperature");
+
+            foreach (System.Management.ManagementObject mo in mos.Get())
+            {
+                CPUtprt = Convert.ToDouble(Convert.ToDouble(mo.GetPropertyValue("CrrentTemperature").ToString()) - 2732) / 10;
+                label1.Text = "CPU温度：" + CPUtprt.ToString() + "°C\n";
+            }
+        }
+
+        private void GetCPUCode()
+        {
+            ManagementObjectSearcher moSearch = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+
+            foreach (ManagementObject mObject in moSearch.Get())
+            {
+                this.label2.Text += (mObject["ProcessorId"].ToString());
+            }
+        }
+
+
+
 
 //C#使用MD5對用戶密碼加密與驗證
 

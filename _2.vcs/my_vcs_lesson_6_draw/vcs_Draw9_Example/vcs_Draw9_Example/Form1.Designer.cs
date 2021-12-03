@@ -731,12 +731,14 @@
             // 
             // button47
             // 
-            this.button47.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button47.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button47.Location = new System.Drawing.Point(994, 372);
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(100, 40);
             this.button47.TabIndex = 81;
+            this.button47.Text = "從DataTable畫曲線圖";
             this.button47.UseVisualStyleBackColor = true;
+            this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
             // button48
             // 

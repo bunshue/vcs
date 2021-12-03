@@ -20,17 +20,24 @@ namespace vcs_PictureFakeColor
         {
             //string filename = @"C:\______test_files\elephant.jpg";
             string filename = @"C:\______test_files\fakecolor.jpg";
+            //string filename = @"C:\______test_files\ims3.jpg";
             pictureBox1.Image = Image.FromFile(filename);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //偽彩色處理
+            /*
             //從pictureBox取得Bitmap
             Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-
             bitmap1 = gcTrans(bitmap1, true, 5);
-
             pictureBox2.Image = bitmap1;
+            */
+
+            string filename = @"C:\______test_files\fakecolor.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            Bitmap bitmap2 = gcTrans(bitmap1, true, 255 / 10);
+            pictureBox2.Image = bitmap2;
         }
 
         #region 偽彩色圖像處理

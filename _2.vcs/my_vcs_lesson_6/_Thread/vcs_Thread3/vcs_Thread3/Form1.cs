@@ -214,8 +214,38 @@ namespace vcs_Thread3
                     richTextBox1.Text += "IsBackground\t" + Th.IsBackground.ToString() + "\n";
             }
         }
-    }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Thread t1 = new Thread(new ThreadStart(thread_1));
+            t1.IsBackground = true;
+            t1.Start();
+
+            Thread t2 = new Thread(new ThreadStart(thread_2));
+            t2.IsBackground = true;
+            t2.Start();
+        }
+
+        private void thread_1()
+        {
+            while (true)
+            {
+                Console.Write("A");
+
+                System.Threading.Thread.Sleep(300);
+            }
+        }
+
+        private void thread_2()
+        {
+            while (true)
+            {
+                Console.Write("B");
+                System.Threading.Thread.Sleep(1000);
+            }
+        }
+    }
+    
     // This class's Run method displays a count in the Output window.
     class Counter
     {

@@ -36,6 +36,7 @@
             this.bt_th3 = new System.Windows.Forms.Button();
             this.bt_th2 = new System.Windows.Forms.Button();
             this.bt_th1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +54,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(191, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(545, 566);
+            this.richTextBox1.Size = new System.Drawing.Size(596, 633);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -82,7 +83,7 @@
             this.groupBox1.Controls.Add(this.bt_th3);
             this.groupBox1.Controls.Add(this.bt_th2);
             this.groupBox1.Controls.Add(this.bt_th1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 288);
+            this.groupBox1.Location = new System.Drawing.Point(12, 403);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(111, 242);
             this.groupBox1.TabIndex = 4;
@@ -119,11 +120,22 @@
             this.bt_th1.UseVisualStyleBackColor = true;
             this.bt_th1.Click += new System.EventHandler(this.bt_th1_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(12, 279);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(149, 62);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "開啟兩個Thread打印在Console";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(748, 590);
+            this.ClientSize = new System.Drawing.Size(799, 657);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -148,6 +160,7 @@
         private System.Windows.Forms.Button bt_th3;
         private System.Windows.Forms.Button bt_th2;
         private System.Windows.Forms.Button bt_th1;
+        private System.Windows.Forms.Button button4;
     }
 }
 

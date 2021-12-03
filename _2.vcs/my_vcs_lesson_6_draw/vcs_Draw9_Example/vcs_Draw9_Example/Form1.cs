@@ -7010,6 +7010,267 @@ namespace vcs_Draw9_Example
             return roundedRect;
         }
 
+        private void button47_Click(object sender, EventArgs e)
+        {
+            //從DataTable畫曲線圖
+
+            //建立DataTable
+
+            DataTable dt = new DataTable();
+
+            Random r = new Random();
+
+            //2.建立表結構
+            dt.Columns.Add("月份");
+            dt.Columns.Add("數量");
+
+            //3.創建新行
+            DataRow dr1 = dt.NewRow();
+            DataRow dr2 = dt.NewRow();
+            DataRow dr3 = dt.NewRow();
+            DataRow dr4 = dt.NewRow();
+            DataRow dr5 = dt.NewRow();
+            DataRow dr6 = dt.NewRow();
+            DataRow dr7 = dt.NewRow();
+            DataRow dr8 = dt.NewRow();
+            DataRow dr9 = dt.NewRow();
+            DataRow dr10 = dt.NewRow();
+            DataRow dr11 = dt.NewRow();
+            DataRow dr12 = dt.NewRow();
+
+            //4.為新行賦值 並 添加到DataTable
+            dr1[0] = "1";
+            dr1[1] = r.Next(30).ToString();
+            dr2[0] = "2";
+            dr2[1] = r.Next(30).ToString();
+            dr3[0] = "3";
+            dr3[1] = r.Next(30).ToString();
+            dr4[0] = "4";
+            dr4[1] = r.Next(30).ToString();
+            dr5[0] = "5";
+            dr5[1] = r.Next(30).ToString();
+            dr6[0] = "6";
+            dr6[1] = r.Next(30).ToString();
+            dr7[0] = "7";
+            dr7[1] = r.Next(30).ToString();
+            dr8[0] = "8";
+            dr8[1] = r.Next(30).ToString();
+            dr9[0] = "9";
+            dr9[1] = r.Next(30).ToString();
+            dr10[0] = "10";
+            dr10[1] = r.Next(30).ToString();
+            dr11[0] = "11";
+            dr11[1] = r.Next(30).ToString();
+            dr12[0] = "12";
+            dr12[1] = r.Next(30).ToString();
+
+            dt.Rows.Add(dr1);
+            dt.Rows.Add(dr2);
+            dt.Rows.Add(dr3);
+            dt.Rows.Add(dr4);
+            dt.Rows.Add(dr5);
+            dt.Rows.Add(dr6);
+            dt.Rows.Add(dr7);
+            dt.Rows.Add(dr8);
+            dt.Rows.Add(dr9);
+            dt.Rows.Add(dr10);
+            dt.Rows.Add(dr11);
+            dt.Rows.Add(dr12);
+
+
+            //建立DrawingCurve, 並把剛剛建立的DataTable給他用
+            DrawingCurve MyDc = new DrawingCurve();
+
+            MyDc.tbData = dt;
+
+            Bitmap bitmap1 = new Bitmap(100, 100);
+
+            bitmap1 = MyDc.DrawingImg();
+
+            Graphics g = Graphics.FromImage(MyDc.DrawingImg());
+
+            //显示图形
+            pictureBox1.Image = bitmap1;
+
+            g.Dispose();
+
+        }
+    }
+
+    /// <summary>
+    /// DrawingCurve 的摘要说明
+    /// </summary>
+    public class DrawingCurve
+    {
+
+        public int intXLong = 800;   //图片大小 长
+
+        public int intYLong = 600;   //图片大小 高
+
+        public int intXMultiple = 1;    //零刻度的值 X
+
+        public int intYMultiple = 0;    //零刻度的值 Y
+
+        public int intXMax = 12;    //最大刻度(点数) X
+
+        public int intYMax = 30;    //最大刻度(点数) Y
+
+        public int intLeft = 50;   //左边距
+
+        public int intRight = 120; //右边距
+
+        public int intTop = 30;    //上边距
+
+        public int intEnd = 50;    //下边距
+
+        public string strXText = "时间(单位:月)";    //单位 X
+
+        public string strYText = "数量(单位:个)";    //单位 Y
+
+        public string strTitle = "趋势线图";    //标题
+
+        public DataTable tbData;    //要统计的数据
+
+
+        private int intXScale = 30;    //一刻度长度 X
+
+        private int intYScale = 30;    //一刻度高度 Y
+
+        //private int intX = 0;   //0点 X坐标
+
+        //private int intY = 0;   //0点 Y坐标
+
+        public int intData = 0;    //记录数
+
+        public DrawingCurve()
+        {
+
+            intXScale = (intXLong - intLeft - intRight) / (intXMax + 1);//一刻度长度 X
+
+            intYScale = (intYLong - intTop - intEnd) / (intYMax + 1);//一刻度高度 Y
+
+            //intX = intXLong - intLeft;   //0点 X坐标
+
+            //intY = intYLong - intEnd;   //0点 Y坐标
+
+        }
+
+        public Bitmap DrawingImg()
+        {
+
+            Bitmap img = new Bitmap(intXLong, intYLong); //图片大小
+
+            Graphics g = Graphics.FromImage(img);
+
+            g.Clear(Color.Snow);
+
+            g.DrawString(strTitle, new Font("宋体", 14), Brushes.Black, new Point(5, 5));
+
+            g.DrawLine(new Pen(Color.Black, 2), intLeft, intYLong - intEnd, intXLong - intRight, intYLong - intEnd); //绘制横向
+
+            g.DrawLine(new Pen(Color.Black, 2), intLeft, intTop, intLeft, intYLong - intEnd);   //绘制纵向
+
+            //绘制纵坐标
+
+            g.DrawString(strYText, new Font("宋体", 12), Brushes.Black, new Point(intLeft, intTop));//Y 单位
+
+            Point p1 = new Point(intLeft - 10, intYLong - intEnd);
+
+            for (int j = 0; j <= intYMax; j++)
+            {
+
+                p1.Y = intYLong - intEnd - j * intYScale;
+
+                Point pt = new Point(p1.X + 10, p1.Y);
+
+                //绘制纵坐标的刻度和直线
+
+                g.DrawLine(Pens.Black, pt, new Point(p1.X + 15, p1.Y));
+
+                //绘制纵坐标的文字说明
+
+                g.DrawString(Convert.ToString(j + intYMultiple), new Font("宋体", 12), Brushes.Black, new Point(p1.X - 25, p1.Y - 8));
+
+            }
+
+            //绘制横坐标
+
+            g.DrawString(strXText, new Font("宋体", 12), Brushes.Black, new Point(intXLong - intRight, intYLong - intEnd));//X 单位
+
+            Point p = new Point(intLeft, intYLong - intEnd);
+
+            for (int i = 0; i < intXMax; i++)
+            {
+
+                p.X = intLeft + i * intXScale;
+
+                //绘制横坐标刻度和直线
+
+                g.DrawLine(Pens.Black, p, new Point(p.X, p.Y - 5));
+
+                //绘制横坐标的文字说明
+
+                g.DrawString(Convert.ToString(i + intXMultiple), new Font("宋体", 12), Brushes.Black, p);
+
+            }
+
+            intData = tbData.Rows.Count;
+
+            if (intData > 0)
+            {
+
+                //趋势线图
+
+                for (int i = 0; i < intData - 1; i++)
+                {
+
+                    DataRow Row1 = tbData.Rows[i];
+
+                    DataRow Row2 = tbData.Rows[i + 1];
+
+                    //定义起点
+
+                    Point rec = new Point(Convert.ToInt32(intLeft + ((TurnNumber(Row1[0].ToString()) - intXMultiple) * intXScale)), Convert.ToInt32(intYLong - intEnd - (TurnNumber(Row1[1].ToString()) - intYMultiple) * intYScale));
+
+                    //定义终点
+
+                    Point dec = new Point(Convert.ToInt32(intLeft + ((TurnNumber(Row2[0].ToString()) - intXMultiple) * intXScale)), Convert.ToInt32(intYLong - intEnd - (TurnNumber(Row2[1].ToString()) - intYMultiple) * intYScale));
+
+                    //绘制趋势折线
+
+                    g.DrawLine(new Pen(Color.Red), rec, dec);
+
+                }
+
+            }
+
+            return img;
+
+        }
+
+        //转换数字
+
+        private double TurnNumber(string str)
+        {
+
+            double dubReturn;
+
+            try
+            {
+
+                dubReturn = Convert.ToDouble(str);
+
+            }
+
+            catch
+            {
+
+                dubReturn = 0;
+
+            }
+
+            return dubReturn;
+
+        }
     }
 }
-

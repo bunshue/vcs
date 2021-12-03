@@ -9,17 +9,29 @@ using System.Windows.Forms;
 
 using System.IO;
 
-// C#全屏随机位置显示图片的小程序
+// 全屏隨機位置顯示圖片
 
 namespace vcs_ShowPicture3
 {
     public partial class Form1 : Form
     {
-        Rectangle bounds = Screen.GetBounds(Screen.GetBounds(Point.Empty));
+        int flag_operation_mode = MODE_0;
+        private const int MODE_0 = 0x00;   //全屏隨機位置顯示圖片
+        private const int MODE_1 = 0x01;   //全屏單圖置中顯示圖片
+        private const int MODE_2 = 0x02;   //reserved
+
+        bool debug_mode = false;
+        RichTextBox rtb = new RichTextBox();
+
+        //Rectangle bounds = Screen.GetBounds(Screen.GetBounds(Point.Empty));
+        Rectangle bounds = Screen.PrimaryScreen.Bounds;
+        //Rectangle bounds = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
         string foldername = @"C:\______test_files\_pic\";
         string filename;
+        int total_picture_count = 0;
         int sel_picture = -1;
+        bool random_sel_picture = true;
 
         public Form1()
         {
@@ -30,7 +42,6 @@ namespace vcs_ShowPicture3
         {
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.WindowState = FormWindowState.Maximized;
 
             this.ControlBox = false;
             this.MaximizeBox = false;
@@ -42,9 +53,24 @@ namespace vcs_ShowPicture3
             this.KeyPreview = true;
 
             this.KeyDown += Form1_KeyDown;
-            
+
             //this.BackgroundImage = GetNoCursor(); //複製目前桌面當背景
             this.BackColor = Color.Black;
+
+            if (debug_mode == true)
+            {
+                rtb.Width = 300;
+                rtb.Height = 800;
+                rtb.Location = new Point(0, 0);
+                this.Controls.Add(rtb);
+
+                this.Size = new Size(Screen.PrimaryScreen.Bounds.Width * 4 / 5, Screen.PrimaryScreen.Bounds.Height * 4 / 5);
+                this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -73,76 +99,94 @@ namespace vcs_ShowPicture3
             //任選一張圖
             DirectoryInfo DInfo = new DirectoryInfo(foldername);
             FileInfo[] FInfo = DInfo.GetFiles();
-            Random rand = new Random();
-            sel_picture = rand.Next(FInfo.Length);
+
+            total_picture_count = FInfo.Length;
+
+            if (random_sel_picture == true)
+            {
+                Random rand = new Random();
+                sel_picture = rand.Next(FInfo.Length);
+            }
+            else
+            {
+                sel_picture++;
+                if (sel_picture >= total_picture_count)
+                    sel_picture = 0;
+            }
 
             filename = foldername + FInfo[sel_picture].Name;
-            //richTextBox1.Text += "sel_picture = " + sel_picture.ToString() + "filename : " + filename + "\n";
-            
+
+            rtb.Text += "sel_picture = " + sel_picture.ToString() + "filename : " + filename + "\n";
+
+            string ext = Path.GetExtension(filename);
+
+            if ((ext != ".jpg") && (ext != ".bmp") && (ext != ".png"))
+            {
+                return;
+            }
 
             Image image = Image.FromFile(filename);
 
-            if (image != null)
+            if (image == null)
+                return;
+
+            int W = bounds.Right;
+            int H = bounds.Height;
+            int w = image.Width;
+            int h = image.Height;
+
+            //rtb.Text += "a1(" + W.ToString() + ", " + H.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
+
+            while (W < (w * 3))
             {
-                int W = bounds.Right;
-                int H = bounds.Height;
-                int w = image.Width;
-                int h = image.Height;
+                //rtb.Text += "X";
+                w = w * 4 / 5;
+                h = h * 4 / 5;
+            }
 
-                //richTextBox1.Text += "a1(" + W.ToString() + ", " + H.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
+            //rtb.Text += "a2(" + W.ToString() + ", " + H.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
 
-                while (W < (w * 3))
-                {
-                    //richTextBox1.Text += "X";
-                    w = w * 4 / 5;
-                    h = h * 4 / 5;
-                }
+            while (H < (h * 3))
+            {
+                //rtb.Text += "Q";
+                w = w * 4 / 5;
+                h = h * 4 / 5;
+            }
 
-                //richTextBox1.Text += "a2(" + W.ToString() + ", " + H.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
+            rtb.Text += "b(" + W.ToString() + ", " + H.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
 
-                while (H < (h * 3))
-                {
-                    //richTextBox1.Text += "Q";
-                    w = w * 4 / 5;
-                    h = h * 4 / 5;
-                }
+            Graphics g = this.CreateGraphics();
+            Random r = new Random();
 
-                //richTextBox1.Text += "b(" + W.ToString() + ", " + H.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
+            rtb.Text += "c(" + (W - w).ToString() + ", " + (H - h).ToString() + "\n";
 
-                Graphics g = this.CreateGraphics();
-                Random r = new Random();
+            if (w > W)
+            {
+                timer1.Enabled = false;
+            }
 
-                //richTextBox1.Text += "c(" + (W - w).ToString() + ", " + (H - h).ToString() + "\n";
+            if (h > H)
+            {
+                timer1.Enabled = false;
+            }
 
-                if (w > W)
-                {
-                    timer1.Enabled = false;
-                }
 
-                if (h > H)
-                {
-                    timer1.Enabled = false;
-                }
-
+            if (flag_operation_mode == MODE_0)
+            {
                 int x_st = r.Next(0, W - w);
                 int y_st = r.Next(0, H - h);
                 //Point ulCorner = new Point(x_st, y_st);
                 //g.DrawImageUnscaled(image, ulCorner);
 
                 //原圖貼上
-                //               貼上位置x      貼上位置y      貼上大小W            貼上大小H
-
-                //richTextBox1.Text += "c(" + x_st.ToString() + ", " + y_st.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
-
+                //    DrawImage   貼上位置x   貼上位置y   貼上大小W   貼上大小H
                 g.DrawImage(image, x_st, y_st, w, h);
+                rtb.Text += "c(" + x_st.ToString() + ", " + y_st.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
+
                 g.DrawRectangle(new Pen(Color.White, 10), x_st, y_st, w, h);
             }
-            else
-            {
-                timer1.Enabled = false;
-                MessageBox.Show("無圖片");
-                this.Close();
-            }
+
+            image.Dispose();
         }
 
         private void Form1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -151,3 +195,4 @@ namespace vcs_ShowPicture3
         }
     }
 }
+
