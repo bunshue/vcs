@@ -372,6 +372,71 @@ namespace test8
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //從mp3中提取信息
+
+            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+
+            byte[] b = new byte[128];
+            string sTitle;
+            string sSinger;
+            string sAlbum;
+            string sYear;
+            string sComm;
+
+            FileStream fs = new FileStream(filename, FileMode.Open);
+
+            fs.Seek(-128, SeekOrigin.End);
+            fs.Read(b, 0, 128);
+
+            bool isSet = false;
+            String sFlag = System.Text.Encoding.Default.GetString(b, 0, 3);
+            if (sFlag.CompareTo("TAG") == 0)
+            {
+                System.Console.WriteLine("Tag is setted!Replica Watches");
+                richTextBox1.Text += "Tag is setted!Replica Watches\n";
+                isSet = true;
+            }
+
+            if (isSet)
+            {
+                //http://study.pctoday.net.cn/3_Visual+Studio.aspx
+
+                sTitle = System.Text.Encoding.Default.GetString(b, 3, 30);
+
+                System.Console.WriteLine("标题:" + sTitle);
+                richTextBox1.Text += "標題:" + sTitle + "\n";
+
+                //Exclusive Replica Rolex Watches;
+
+                sSinger = System.Text.Encoding.Default.GetString(b, 33, 30);
+
+                System.Console.WriteLine("艺术家:" + sSinger);
+                richTextBox1.Text += "藝術家:" + sSinger + "\n";
+
+                //get album;
+
+                sAlbum = System.Text.Encoding.Default.GetString(b, 63, 30);
+
+                System.Console.WriteLine("唱片标题:" + sAlbum);
+                richTextBox1.Text += "唱片標題:" + sAlbum + "\n";
+
+                //egacn.com/Watches/Tag-Heuer;
+
+                sYear = System.Text.Encoding.Default.GetString(b, 93, 4);
+
+                System.Console.WriteLine("发行年:" + sYear);
+                richTextBox1.Text += "發行年:" + sYear + "\n";
+
+                //watchstylish.com;
+
+                sComm = System.Text.Encoding.Default.GetString(b, 97, 30);
+
+                System.Console.WriteLine("备注:" + sComm);
+                richTextBox1.Text += "備註:" + sComm + "\n";
+
+            }
+
+
 
         }
 
