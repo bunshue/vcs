@@ -1,4 +1,255 @@
 
+
+bw.RunWorkerAsync(new string[2] { srcFile, destFile });
+
+
+
+
+
+
+
+
+            txbxDestFile.Text =
+                Path.GetDirectoryName(srcFile) + "\\" +
+                Path.GetFileNameWithoutExtension(srcFile) + ".pdf";
+            destFile = txbxDestFile.Text;
+
+
+
+
+
+
+            //動態驗證碼變成靜態
+            string filename1 = @"C:\______test_files\__RW\_gif\run.gif";
+
+            Image imgGif = Image.FromFile(filename1);
+            FrameDimension ImgFrmDim = new FrameDimension(imgGif.FrameDimensionsList[0]);
+            System.Drawing.Bitmap bitmap1 = new Bitmap(imgGif.Size.Width, imgGif.Size.Height);
+            int nFrameCount = imgGif.GetFrameCount(ImgFrmDim);
+            for (int i = 0; i < nFrameCount; i++)
+            {
+                imgGif.SelectActiveFrame(ImgFrmDim, i);
+                System.Drawing.Bitmap nbp = new Bitmap(imgGif);
+                Color dd = nbp.GetPixel(1, 1);
+                if (i == 0)
+                {
+                    for (int x = 0; x < nbp.Width; x++)
+                    {
+                        for (int y = 0; y < nbp.Height; y++)
+                        {
+                            bitmap1.SetPixel(x, y, dd);
+                        }
+                    }
+                }
+                for (int x = 0; x < nbp.Width; x++)
+                {
+                    for (int y = 0; y < nbp.Height; y++)
+                    {
+                        Color c = nbp.GetPixel(x, y);
+                        if (c == dd)
+                            continue;
+                        bitmap1.SetPixel(x, y, c);
+                    }
+                }
+            }
+            string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            try
+            {
+                //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                bitmap1.Save(filename2, ImageFormat.Bmp);
+                //bitmap1.Save(@file3, ImageFormat.Png);
+
+                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+
+
+
+//實現任意角度旋轉圖片
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image = Image.FromFile(filename);
+
+            //以任意角度旋轉顯示圖像
+            Graphics g = this.pictureBox1.CreateGraphics();
+            float angle = 0;//旋轉的角度
+            while (angle < 360)
+            {
+                TextureBrush tb = new TextureBrush(image);
+                this.pictureBox1.Refresh();
+                tb.RotateTransform(angle);
+                g.FillRectangle(tb, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
+                angle += 0.5f;
+                System.Threading.Thread.Sleep(50);
+            } 
+
+
+
+    //C#發送郵箱，
+    /*
+    之前自己從來沒有做過發送郵箱的功能，前段時間項目需要，在找了很多帖子之後，終於實現了。
+
+    之後有整理了一下，寫了一個類。直接給類傳遞信息，就可以發送了。
+
+    這裡還需要說明的是，發送郵箱需要開通POP3/SMTP服務，否則QQ郵箱，網易郵箱等會報錯。接收的郵箱就不用開通啦，開通方法百度一下就知道啦。
+    */
+
+    public static class EmailHelper
+    {
+        /// <summary>
+        /// 發送郵件
+        /// </summary>
+        /// <param name="subject">郵件主題</param>
+        /// <param name="msg">郵件內容</param>
+        /// <param name="filePath">附件地址，如果不添加附件傳null或""</param>
+        /// <param name="senderEmail">發送人郵箱地址</param>
+        /// <param name="senderPwd">發送人郵箱密碼</param>
+        /// <param name="recipientEmail">接收人郵箱</param>
+        public static void SendMail(string subject, string msg, string filePath, string senderEmail, string senderPwd, params string[] recipientEmail)
+        {
+            if (!CheckIsNotEmptyOrNull(subject, msg, senderEmail, senderPwd) || recipientEmail == null || recipientEmail.Length == 0)
+            {
+                throw new Exception("輸入信息無效");
+            }
+            try
+            {
+                string[] sendFromUser = senderEmail.Split('@');
+
+                //構造一個Email的Message對象
+                MailMessage message = new MailMessage();
+
+                //確定smtp服務器地址。實例化一個Smtp客戶端
+                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("smtp." + sendFromUser[1]);
+
+                //構造發件人地址對象
+                message.From = new MailAddress(senderEmail, sendFromUser[0], Encoding.UTF8);
+
+                //構造收件人地址對象
+                foreach (string userName in recipientEmail)
+                {
+                    message.To.Add(new MailAddress(userName, userName.Split('@')[0], Encoding.UTF8));
+                }
+
+                if (!string.IsNullOrEmpty(filePath))
+                {
+                    Attachment attach = new Attachment(filePath);
+                    //得到文件的信息
+                    ContentDisposition disposition = attach.ContentDisposition;
+                    disposition.CreationDate = System.IO.File.GetCreationTime(filePath);
+                    disposition.ModificationDate = System.IO.File.GetLastWriteTime(filePath);
+                    disposition.ReadDate = System.IO.File.GetLastAccessTime(filePath);
+                    //向郵件添加附件
+                    message.Attachments.Add(attach);
+                }
+
+                //添加郵件主題和內容
+                message.Subject = subject;
+                message.SubjectEncoding = Encoding.UTF8;
+                message.Body = msg;
+                message.BodyEncoding = Encoding.UTF8;
+
+                //設置郵件的信息
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                message.BodyEncoding = System.Text.Encoding.UTF8;
+                message.IsBodyHtml = false;
+
+                //如果服務器支持安全連接，則將安全連接設為true。
+                //gmail,qq支持，163不支持
+                switch (sendFromUser[1])
+                {
+                    case "gmail.com":
+                    case "qq.com":
+                        client.EnableSsl = true;
+                        break;
+                    default:
+                        client.EnableSsl = false;
+                        break;
+                }
+
+                //設置用戶名和密碼。
+                client.UseDefaultCredentials = false;
+                //用戶登陸信息
+                NetworkCredential myCredentials = new NetworkCredential(senderEmail, senderPwd);
+                client.Credentials = myCredentials;
+                //發送郵件
+                client.Send(message);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
+        /// <summary>
+        /// 驗證所有傳入字符串不能為空或null
+        /// </summary>
+        /// <param name="ps">參數列表</param>
+        /// <returns>都不為空或null返回true，否則返回false</returns>
+        public static bool CheckIsNotEmptyOrNull(params string[] ps)
+        {
+            if (ps != null)
+            {
+                foreach (string item in ps)
+                {
+                    if (string.IsNullOrEmpty(item)) return false;
+                }
+                return true;
+            }
+            return false;
+        }
+    }
+
+
+
+
+            //C#繪制正弦曲線
+            Bitmap bitmap1 = new Bitmap(360, 120);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            Rectangle r1 = new Rectangle(0, 0, 360, 20);
+            Rectangle r2 = new Rectangle(0, 20, 360, 40);
+            Rectangle r3 = new Rectangle(0, 60, 360, 40);
+            Rectangle r4 = new Rectangle(0, 100, 360, 20);
+
+            Brush brush1 = new SolidBrush(Color.OrangeRed);
+            Brush brush2 = new SolidBrush(Color.SkyBlue);
+            Brush brush3 = new SolidBrush(Color.Pink);
+            Brush brush4 = new SolidBrush(Color.YellowGreen);
+
+            g.FillRectangle(brush1, r1);
+            g.FillRectangle(brush2, r2);
+            g.FillRectangle(brush2, r3);
+            g.FillRectangle(brush1, r4);
+
+            g.DrawString("0", new Font("宋體", 8), brush1, new PointF(3, 65));
+            g.DrawString("90", new Font("宋體", 8), brush1, new PointF(85, 65));
+            g.DrawString("180", new Font("宋體", 8), brush1, new PointF(170, 65));
+            g.DrawString("360", new Font("宋體", 8), brush1, new PointF(336, 65));
+
+            Point myPoint = new Point(0, 60);
+            float sinValue = 0.0F;
+
+            for (int i = 0; i < 360; i++)
+            {
+                sinValue = Convert.ToSingle(Math.Sin(Convert.ToSingle((i * Math.PI) / 180))) * 40;
+                //事實上，這裡根本無需注意 sinValue 的正負
+                //當其為負時，  60-sinValue 則會變大
+                Point thisPoint = new Point(i, Convert.ToInt32(60 - sinValue));
+                g.DrawLine(new Pen(brush3), thisPoint, myPoint);
+                myPoint = thisPoint;
+            }
+
+            pictureBox1.Image = bitmap1;
+
+
+
+
         //取得CPU的型號和溫度
         private void button6_Click(object sender, EventArgs e)
         {
