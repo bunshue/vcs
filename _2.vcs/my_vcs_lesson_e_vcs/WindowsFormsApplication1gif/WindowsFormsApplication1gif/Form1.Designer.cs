@@ -43,7 +43,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -181,23 +180,11 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(530, 337);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 78);
-            this.button8.TabIndex = 15;
-            this.button8.Text = "鼠標點擊按鈕拖動窗體";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button8_MouseDown);
-            this.button8.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button8_MouseMove);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1020, 533);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -239,7 +226,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
     }
 }
 

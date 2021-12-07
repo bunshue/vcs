@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Management;
+using Microsoft.Win32;  //for Registry
 
 //WMI是Windows Management Instrumentation的簡稱，即：視窗管理規范。
 
@@ -199,27 +200,110 @@ namespace system_test3_wmi
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //取得CPU的型號和溫度
+            GetCPUCode();
+            //GetCPUTemperature();  溫度fail
+        }
 
+        private void GetCPUCode()
+        {
+            ManagementObjectSearcher moSearch = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+
+            foreach (ManagementObject mObject in moSearch.Get())
+            {
+                richTextBox1.Text += "CPU型號：" + (mObject["ProcessorId"].ToString()) + "\n";
+            }
+        }
+
+        private void GetCPUTemperature()
+        {
+            double CPUtprt = 0;
+            System.Management.ManagementObjectSearcher mos = new System.Management.ManagementObjectSearcher(@"root\WMI", "Select * From MSAcpi_ThermalZoneTemperature");
+
+            foreach (System.Management.ManagementObject mo in mos.Get())
+            {
+                CPUtprt = Convert.ToDouble(Convert.ToDouble(mo.GetPropertyValue("CrrentTemperature").ToString()) - 2732) / 10;
+                richTextBox1.Text += "CPU温度：" + CPUtprt.ToString() + "°C\n";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //取得磁盤配額
+            try
+            {
+                ManagementClass mc1 = new ManagementClass("Win32_DiskQuota");
+                ManagementObject quota = mc1.CreateInstance();
+                quota["Limit"] = 400000000;
+                quota["WarningLimit"] = 200000000;
+                // Get user account object 
+                ManagementObject account = new ManagementObject("Win32_Account.Domain=TODAY20040216,Name=ASPNET");
+                account.Get();
+                // get disk object 
+                ManagementObject disk = new ManagementObject("Win32_LogicalDisk.DeviceId='D:'");
+                disk.Get();
+                quota["QuotaVolume"] = disk;
+                quota["User"] = account;
+                quota.Put(); // commit 
 
+                ManagementClass mc2 = new ManagementClass("Win32_DiskQuota");
+                Console.WriteLine(mc2.SystemProperties);
+                foreach (ManagementObject o in mc2.GetInstances())
+                {
+                    Console.WriteLine("Next : {0}", o.Path);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("error:" + ex);
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //取得主機板序號
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
 
+            int len = searcher.Get().Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            foreach (ManagementObject share in searcher.Get())
+            {
+                richTextBox1.Text += "取得主機板序號 :\t" + share.GetPropertyValue("SerialNumber").ToString() + "\n";
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //取得主機板參數
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+            int len = searcher.Get().Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
 
+            foreach (ManagementObject share in searcher.Get())
+            {
+                richTextBox1.Text += "取得Manufacturer :\t" + share.GetPropertyValue("Manufacturer").ToString() + "\n";
+                richTextBox1.Text += "取得Product :\t" + share.GetPropertyValue("Product").ToString() + "\n";
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            //取得網路卡參數
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+            int len = searcher.Get().Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            foreach (ManagementObject share in searcher.Get())
+            {
+                try
+                {
+                    richTextBox1.Text += "取得製造商 :\t" + share.GetPropertyValue("Manufacturer").ToString() + "\n";
+                    richTextBox1.Text += "取得MAC位址 :\t" + share.GetPropertyValue("MACAddress").ToString() + "\n";
+                }
+                catch (System.Exception er)
+                {
+                }
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -231,11 +315,36 @@ namespace system_test3_wmi
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //取得螢幕尺寸
+            SystemInfo sysInfo = new SystemInfo();
+            string id = sysInfo.GetMonitorPnpDeviceId()[0];
+            SizeF size = sysInfo.GetMonitorPhysicalSize(id);
+            richTextBox1.Text += SystemInfo.MonitorScaler(size).ToString() + " 吋\n";
+        }
 
+        /// <summary>
+        /// 获取屏幕数量
+        /// </summary>
+        /// <returns></returns>
+        public int GetMonitorCount()
+        {
+            string text = string.Empty;
+            int count = 0;
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\wmi", "Select * from WmiMonitorID");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                text += mo.GetText(TextFormat.Mof);
+                count++;
+            }
+            return count;
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //取得螢幕數量
+            //检测已连接显示器
+            richTextBox1.Text += "取得螢幕數量 : " + GetMonitorCount().ToString() + "\n";
+
 
         }
 
@@ -256,12 +365,43 @@ namespace system_test3_wmi
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //取得硬碟參數
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            int len = searcher.Get().Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
 
+            foreach (ManagementObject share in searcher.Get())
+            {
+                try
+                {
+                    richTextBox1.Text += "取得製造商 :\t" + share.GetPropertyValue("Manufacturer").ToString() + "\n";
+                    richTextBox1.Text += "取得型號 :\t" + share.GetPropertyValue("Model").ToString() + "\n";
+                    richTextBox1.Text += "取得序列號 :\t" + share.GetPropertyValue("Signature").ToString() + "\n";
+                }
+                catch (System.Exception er)
+                {
+                }
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //取得處理器參數
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            int len = searcher.Get().Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
 
+            foreach (ManagementObject share in searcher.Get())
+            {
+                try
+                {
+                    richTextBox1.Text += "取得製造商 :\t" + share.GetPropertyValue("Manufacturer").ToString() + "\n";
+                    richTextBox1.Text += "取得序列號 :\t" + share.GetPropertyValue("ProcessorId").ToString() + "\n";
+                }
+                catch (System.Exception er)
+                {
+                }
+            }
         }
     }
 
@@ -295,6 +435,52 @@ namespace system_test3_wmi
             string osBitString = OSBit();
             string osVersionString = Environment.OSVersion.ToString();
             return string.Format(@"系統：{0}。位：{1}", osVersionString, osBitString);
+        }
+    }
+    class SystemInfo
+    {
+        public virtual List<string> GetMonitorPnpDeviceId()
+        {
+            List<string> rt = new List<string>();
+            using (ManagementClass mc = new ManagementClass("Win32_DesktopMonitor"))
+            {
+                using (ManagementObjectCollection moc = mc.GetInstances())
+                {
+                    foreach (var o in moc)
+                    {
+                        var each = (ManagementObject)o;
+                        object obj = each.Properties["PNPDeviceID"].Value;
+                        if (obj == null)
+                            continue;
+
+                        rt.Add(each.Properties["PNPDeviceID"].Value.ToString());
+                    }
+                }
+            }
+
+            return rt;
+        }
+
+        public virtual byte[] GetMonitorEdid(string monitorPnpDevId)
+        {
+            return (byte[])Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\" + monitorPnpDevId + @"\Device Parameters", "EDID", new byte[] { });
+        }
+
+        //获取显示器物理尺寸(cm)
+        public virtual SizeF GetMonitorPhysicalSize(string monitorPnpDevId)
+        {
+            byte[] edid = GetMonitorEdid(monitorPnpDevId);
+            if (edid.Length < 23)
+                return SizeF.Empty;
+
+            return new SizeF(edid[21], edid[22]);
+        }
+
+        //通过屏显示器理尺寸转换为显示器大小(inch)
+        public static float MonitorScaler(SizeF moniPhySize)
+        {
+            double mDSize = Math.Sqrt(Math.Pow(moniPhySize.Width, 2) + Math.Pow(moniPhySize.Height, 2)) / 2.54d;
+            return (float)Math.Round(mDSize, 1);
         }
     }
 }

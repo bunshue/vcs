@@ -36,7 +36,7 @@ namespace vcs_ReadWrite_PDF3
             try
             {
                 string filename1 = @"C:\______test_files\picture1.jpg";
-                //string filename2 = @"aaaaa.pdf";
+                string filename2 = Application.StartupPath + "\\pdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
 
                 PdfDocument doc = new PdfDocument();
                 doc.Pages.Add(new PdfPage());
@@ -45,12 +45,11 @@ namespace vcs_ReadWrite_PDF3
 
                 xgr.DrawImage(img, 0, 0);
 
-                string filename2 = Application.StartupPath + "\\pdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
-
                 try
                 {
 
                     doc.Save(filename2);
+                    richTextBox1.Text += "存檔成功\n";
                     richTextBox1.Text += "已存檔 : " + filename2 + "\n";
                 }
                 catch (Exception ex)

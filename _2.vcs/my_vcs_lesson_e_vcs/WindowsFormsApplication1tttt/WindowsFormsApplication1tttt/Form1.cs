@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Management;
-using System.Runtime.InteropServices;
+//using System.Runtime.InteropServices;
 
-using Microsoft.Win32;
+//using Microsoft.Win32;
 
 using System.IO;
 using System.Net;
@@ -31,29 +31,6 @@ namespace WindowsFormsApplication1tttt
         {
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SystemInfo sysInfo = new SystemInfo();
-            string id = sysInfo.GetMonitorPnpDeviceId()[0];
-            SizeF size = sysInfo.GetMonitorPhysicalSize(id);
-            richTextBox1.Text += SystemInfo.MonitorScaler(size).ToString() + " 吋\n";
-        }
-
-        [DllImport("User32.dll")]
-        public extern static System.IntPtr GetDC(System.IntPtr hWnd);
-        private void button2_Click(object sender, EventArgs e)
-        {
-            System.IntPtr DesktopHandle = GetDC(System.IntPtr.Zero);
-            Graphics g = Graphics.FromHdc(DesktopHandle);
-            Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
-            for (; ; )
-            {
-                g.DrawRectangle(new Pen(Color.Red), new Rectangle(ScreenArea.Width / 2, ScreenArea.Height / 2, 1, 1));
-            }
-        }
-
-
 
 
         public class BaiDuGeoCoding
@@ -185,32 +162,6 @@ namespace WindowsFormsApplication1tttt
         }
 
 
-
-
-        /// <summary>
-        /// 获取屏幕数量
-        /// </summary>
-        /// <returns></returns>
-        public int GetMonitorCount()
-        {
-            string text = string.Empty;
-            int count = 0;
-            ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\wmi", "Select * from WmiMonitorID");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                text += mo.GetText(TextFormat.Mof);
-                count++;
-            }
-            return count;
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //检测已连接显示器
-            richTextBox1.Text += "获取屏幕数量 : " + GetMonitorCount().ToString() + "\n";
-        }
-
-
         //C#百度api 根据经纬度获取地址
 
         public string GetAddress(string lat, string lng)
@@ -288,63 +239,10 @@ namespace WindowsFormsApplication1tttt
         {
 
         }
-
-
-
-
-
-
-
-
-    }
-
-
-
-
-    class SystemInfo
-    {
-        public virtual List<string> GetMonitorPnpDeviceId()
-        {
-            List<string> rt = new List<string>();
-            using (ManagementClass mc = new ManagementClass("Win32_DesktopMonitor"))
-            {
-                using (ManagementObjectCollection moc = mc.GetInstances())
-                {
-                    foreach (var o in moc)
-                    {
-                        var each = (ManagementObject)o;
-                        object obj = each.Properties["PNPDeviceID"].Value;
-                        if (obj == null)
-                            continue;
-
-                        rt.Add(each.Properties["PNPDeviceID"].Value.ToString());
-                    }
-                }
-            }
-
-            return rt;
-        }
-
-        public virtual byte[] GetMonitorEdid(string monitorPnpDevId)
-        {
-            return (byte[])Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\" + monitorPnpDevId + @"\Device Parameters", "EDID", new byte[] { });
-        }
-
-        //获取显示器物理尺寸(cm)
-        public virtual SizeF GetMonitorPhysicalSize(string monitorPnpDevId)
-        {
-            byte[] edid = GetMonitorEdid(monitorPnpDevId);
-            if (edid.Length < 23)
-                return SizeF.Empty;
-
-            return new SizeF(edid[21], edid[22]);
-        }
-
-        //通过屏显示器理尺寸转换为显示器大小(inch)
-        public static float MonitorScaler(SizeF moniPhySize)
-        {
-            double mDSize = Math.Sqrt(Math.Pow(moniPhySize.Width, 2) + Math.Pow(moniPhySize.Height, 2)) / 2.54d;
-            return (float)Math.Round(mDSize, 1);
-        }
     }
 }
+
+
+
+
+

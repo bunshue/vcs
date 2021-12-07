@@ -45,8 +45,37 @@ namespace vcs_ReadWrite_PDF1
 
                 richTextBox2.Text += "存檔成功\n";
                 richTextBox2.Text += "已存檔 : " + filename + "\n";
-
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //TXT轉PDF
+
+            string filename1 = @"C:\_git\vcs\_2.vcs\______test_files\__RW\_txt\琵琶行.txt";
+            string filename2 = Application.StartupPath + "\\pdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
+
+            var document = new Document(PageSize.A4, 30f, 30f, 30f, 30f);
+            PdfWriter.getInstance(document, new FileStream(filename2, FileMode.Create));
+            document.Open();
+
+            BaseFont baseFont = BaseFont.createFont(@"c:\windows\fonts\SIMSUN.TTC,1", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+            iTextSharp.text.Font font = new iTextSharp.text.Font(baseFont, 20); 	//设置文档字体样式
+
+            var objReader = new StreamReader(filename1, Encoding.GetEncoding("big5"));
+            var str = "";
+            while (str != null)
+            {
+                str = objReader.ReadLine();
+                if (str != null)
+                {
+                    document.Add(new Paragraph(str, font));             //添加内容至PDF文档中
+                }
+            }
+            objReader.Close();
+            document.Close();
+            richTextBox2.Text += "存檔成功\n";
+            richTextBox2.Text += "已存檔 : " + filename2 + "\n";
         }
     }
 }

@@ -188,7 +188,6 @@ namespace WindowsFormsApplication1gif
 
             string result = NextString(lower, upper, 30);
             richTextBox1.Text += result + "\n";
-
         }
 
         public string NextString(int charLowerBound, int charUpperBound, int length)
@@ -222,41 +221,6 @@ namespace WindowsFormsApplication1gif
         private void button7_Click(object sender, EventArgs e)
         {
 
-        }
-
-
-        //鼠標點擊按鈕拖動窗體
-
-        //記錄窗體的X坐標 
-        private int startX;
-
-        //記錄窗體的Y坐標 
-        private int startY;
-
-        private void button8_MouseDown(object sender, MouseEventArgs e)
-        {
-            //判斷點擊的是不是左鍵 
-            if (e.Button == MouseButtons.Left)
-            {
-                //得到窗體的X值 
-                startX = e.X;
-
-                //得到窗體的Y值 
-                startY = e.Y;
-            }
-        }
-
-        private void button8_MouseMove(object sender, MouseEventArgs e)
-        {
-            //判斷點擊的是不是左鍵 
-            if (e.Button == MouseButtons.Left)
-            {
-                //重新繪制窗體X 
-                this.Left += e.X - startX;
-
-                //重新繪制窗體Y 
-                this.Top += e.Y - startY;
-            }
         }
     }
 }

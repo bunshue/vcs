@@ -472,24 +472,138 @@ namespace vcs_WinAPI
             //SendMessage(this.Handle, WM_SYSCOMMAND, SC_MONITORPOWER, -1);
         }
 
+        //使用API即時判斷當前的網絡的連接方式 ST
+
+        [DllImport("wininet.dll")]
+        private extern static bool InternetGetConnectedState(out int connectionDescription, int reservedValue);
+
+        [DllImport("sensapi.dll")]
+        private extern static bool IsNetworkAlive(out int connectionDescription);
+
+        static string Fun_InternetGetConnectedState()
+        {
+            int INTERNET_CONNECTION_MODEM = 1;
+            int INTERNET_CONNECTION_LAN = 2;
+            int INTERNET_CONNECTION_PROXY = 4;
+            int INTERNET_CONNECTION_MODEM_BUSY = 8;
+
+            string outPut = null;
+            int flags;//上網方式
+            bool m_bOnline = true;//是否在線 
+
+            m_bOnline = InternetGetConnectedState(out flags, 0);
+            if (m_bOnline)//在線  
+            {
+                if ((flags & INTERNET_CONNECTION_MODEM) == INTERNET_CONNECTION_MODEM)
+                {
+                    outPut = "在線：撥號上網 ";
+                }
+                if ((flags & INTERNET_CONNECTION_LAN) == INTERNET_CONNECTION_LAN)
+                {
+                    outPut = "在線：通過局域網 ";
+                }
+                if ((flags & INTERNET_CONNECTION_PROXY) == INTERNET_CONNECTION_PROXY)
+                {
+                    outPut = "在線：代理 ";
+                }
+                if ((flags & INTERNET_CONNECTION_MODEM_BUSY) == INTERNET_CONNECTION_MODEM_BUSY)
+                {
+                    outPut = "MODEM被其他非INTERNET連接占用 ";
+                }
+            }
+            else
+            {
+                outPut = "不在線 ";
+            }
+
+            return outPut;
+        }
+
+        static string Fun_IsNetworkAlive()
+        {
+            int NETWORK_ALIVE_LAN = 0;
+            int NETWORK_ALIVE_WAN = 2;
+            int NETWORK_ALIVE_AOL = 4;
+
+            string outPut = null;
+            int flags;//上網方式
+            bool m_bOnline = true;//是否在線 
+
+            m_bOnline = IsNetworkAlive(out flags);
+            if (m_bOnline)//在線  
+            {
+                if ((flags & NETWORK_ALIVE_LAN) == NETWORK_ALIVE_LAN)
+                {
+                    outPut = "在線：NETWORK_ALIVE_LAN ";
+                }
+                if ((flags & NETWORK_ALIVE_WAN) == NETWORK_ALIVE_WAN)
+                {
+                    outPut = "在線：NETWORK_ALIVE_WAN ";
+                }
+                if ((flags & NETWORK_ALIVE_AOL) == NETWORK_ALIVE_AOL)
+                {
+                    outPut = "在線：NETWORK_ALIVE_AOL ";
+                }
+            }
+            else
+            {
+                outPut = "不在線\n";
+            }
+
+            return outPut;
+        }
+
         private void button11_Click(object sender, EventArgs e)
         {
-
+            //使用API即時判斷當前的網絡的連接方式
+            Console.WriteLine("使用InternetGetConnectedState對網絡連接方式進行判斷");
+            Console.WriteLine(Fun_InternetGetConnectedState());
+            Console.WriteLine("使用IsNetworkAlive對網絡連接方式進行判斷");
+            Console.WriteLine(Fun_IsNetworkAlive());
         }
 
+        //使用API即時判斷當前的網絡的連接方式 SP
+
+
+        [DllImport("User32.dll")]
+        public extern static System.IntPtr GetDC(System.IntPtr hWnd);
         private void button12_Click(object sender, EventArgs e)
         {
+            //在螢幕上畫東西1
 
+            IntPtr DesktopHandle = GetDC(IntPtr.Zero);
+            Graphics g = Graphics.FromHdc(DesktopHandle);
+            Rectangle ScreenArea = Screen.GetBounds(this);
+            for (; ; )
+            {
+                g.DrawRectangle(new Pen(Color.Red), new Rectangle(ScreenArea.Width / 2, ScreenArea.Height / 2, 1, 1));
+
+
+                g.DrawRectangle(new Pen(Color.Red), new Rectangle(ScreenArea.Width / 2 - 50, ScreenArea.Height / 2 - 50, 100, 100));
+            }
         }
 
+        [DllImport("user32.dll")]
+        private static extern int GetDC(int hwnd);
         private void button13_Click(object sender, EventArgs e)
         {
-
+            //在螢幕上畫東西2
+            IntPtr p = (IntPtr)GetDC(0);// '取得屏幕
+            Graphics g = Graphics.FromHdc(p);
+            g.DrawRectangle(new Pen(Color.Red, 10), new Rectangle(1920 / 2 - 100, 1080 / 2 - 100, 200, 200));
         }
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern IntPtr GetDesktopWindow();
+        [DllImport("user32.dll", EntryPoint = "GetDCEx", CharSet = CharSet.Auto, ExactSpelling = true)]
+        private static extern IntPtr GetDCEx(IntPtr hWnd, IntPtr hrgnClip, int flags);
         private void button14_Click(object sender, EventArgs e)
         {
-
+            //在螢幕上畫東西3
+            IntPtr desk = GetDesktopWindow();
+            IntPtr deskDC = GetDCEx(desk, IntPtr.Zero, 0x403);
+            Graphics g = Graphics.FromHdc(deskDC);
+            g.FillEllipse(new SolidBrush(Color.Red), 0, 0, 100, 100);
         }
 
         private void button15_Click(object sender, EventArgs e)
