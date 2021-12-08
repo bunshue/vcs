@@ -82,7 +82,92 @@ namespace vcs_Registry5
             }
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //獲取網關和IP
+            getxx();
+            richTextBox1.Text += "獲取網關和IP\n";
+        }
 
+
+        //獲取網關和IP
+        private void getxx()
+        {
+            RegistryKey start = Registry.LocalMachine;
+            RegistryKey cardServiceName, networkKey;
+            string networkcardKey = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkCards";
+            string serviceKey = @"SYSTEM\CurrentControlSet\Services\";
+            string networkcardKeyName, deviceName;
+            string deviceServiceName, serviceName;
+            RegistryKey serviceNames = start.OpenSubKey(networkcardKey);
+            if (serviceNames == null)
+            {
+                MessageBox.Show("Bad registry key");
+                return;
+            }
+            string[] networkCards = serviceNames.GetSubKeyNames();
+            serviceNames.Close();
+            foreach (string keyName in networkCards)
+            {
+                networkcardKeyName = networkcardKey + "\\" + keyName;
+                cardServiceName = start.OpenSubKey(networkcardKeyName);
+                if (cardServiceName == null)
+                {
+                    MessageBox.Show(networkcardKeyName);
+                    return;
+                }
+                deviceServiceName = (string)cardServiceName.GetValue("ServiceName");
+                deviceName = (string)cardServiceName.GetValue("Description");
+                MessageBox.Show(deviceName);
+                serviceName = serviceKey + deviceServiceName + "\\Parameters\\Tcpip";
+                networkKey = start.OpenSubKey(serviceName);
+                if (networkKey == null)
+                {
+                    //。。。。。。
+                }
+                else
+                {
+                    string[] ipaddresses = (string[])networkKey.GetValue("IPAddress");
+                    string[] defaultGateways = (string[])networkKey.GetValue("DefaultGateway");
+
+                    string[] subnetmasks = (string[])networkKey.GetValue("SubnetMask");
+                    foreach (string ipaddress in ipaddresses)
+                    {
+                        MessageBox.Show(ipaddress);
+                    }
+                    foreach (string subnetmask in subnetmasks)
+                    {
+                        //。。。。。。
+                    }
+                    foreach (string defaultGateway in defaultGateways)
+                    {
+                        MessageBox.Show(defaultGateway);
+                    }
+                    networkKey.Close();
+                }
+            }
+            start.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //ReadRegistryKey
+            //用C#去讀取特定位置的Refistry Key
+            string result = ReadRegistryKey("Software\\AIMTest"); //直接給string的Registry路徑即可
+            richTextBox1.Text += "result : \t" + result + "\n";
+        }
+
+        public string ReadRegistryKey(string RegKey)
+        {
+            //讀取Registry Key位置
+
+            RegistryKey RegK = Registry.LocalMachine.OpenSubKey(RegKey);
+            //讀取Registry Key String"test"裡面的值
+            string RegT = (string)RegK.GetValue("test");
+            //Show Registry Key值，檢查讀取的值是否正確
+            MessageBox.Show(RegT);
+            return RegT;
+        }
     }
 
     public class RegistryStorage

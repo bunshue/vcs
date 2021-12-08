@@ -331,43 +331,6 @@ namespace test2
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //還沒加入listView之標題
-
-            listView1.Items.Clear();
-
-            //遍歷文件夾實例
-            string foldername = @"C:\______test_files\_pic";
-            //實例化DirectoryInfo對象
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-            //獲取指定目錄下的所有子目錄及文件類型
-            FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();
-            foreach (FileSystemInfo fsinfo in fsinfos)
-            {
-                if (fsinfo is DirectoryInfo)    //判斷是否文件夾
-                {
-                    //使用獲取的文件夾名稱實例化DirectoryInfo對象
-                    DirectoryInfo dirinfo = new DirectoryInfo(fsinfo.FullName);
-                    //為ListView控件添加文件夾信息
-                    listView1.Items.Add(dirinfo.Name);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.FullName);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add("");
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.CreationTime.ToShortDateString());
-                    richTextBox1.Text += dirinfo.Name + "\t" + dirinfo.FullName + "\t" + dirinfo.CreationTime.ToShortDateString() + "\n";
-                }
-                else
-                {
-                    //使用獲取的文件名稱實例化FileInfo對象
-                    FileInfo finfo = new FileInfo(fsinfo.FullName);
-                    //為ListView控件添加文件信息
-                    listView1.Items.Add(finfo.Name);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.FullName);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.Length.ToString());
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.CreationTime.ToShortDateString());
-                    richTextBox1.Text += finfo.Name + "\t" + finfo.FullName + "\t" + finfo.Length.ToString() + "\t" + finfo.CreationTime.ToShortDateString() + "\n";
-
-                }
-            }
-
 
         }
 

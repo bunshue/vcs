@@ -408,78 +408,11 @@ namespace test7
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //新增資料夾
-            string path = Application.StartupPath;
-            string folder = textBox1.Text;
-            NewFolder(folder, path);
-        }
 
-        /// <summary>
-        /// 新建文件夾
-        /// </summary>
-        /// <param name="filename">文件夾名</param>
-        /// <param name="path">文件夾路徑</param>
-        public static void NewFolder(string foldername, string path)
-        {
-            foldername.Trim();
-            //如果輸入信息為空，提示
-            if (foldername == "")
-            {
-                MessageBox.Show("目錄名不能為空");
-                return;
-            }
-            else
-            {
-                string FullName = path + "\\" + foldername;
-                //如果該文件以及存在
-                if (Directory.Exists(FullName))
-                {
-                    MessageBox.Show("該目錄已經存在，請重命名");
-                    return;
-                }
-                else
-                {
-                    //新建文件夾
-                    Directory.CreateDirectory(FullName);
-                    MessageBox.Show("新建文件夾 完成");
-                }
-            }
         }
-
         private void button9_Click(object sender, EventArgs e)
         {
-            //新增文件
-            string path = Application.StartupPath;
-            string filename = textBox2.Text;
-            NewFile(filename, path);
 
-        }
-
-        /// <summary>
-        /// 新建文件
-        /// </summary>
-        /// <param name="filename">文件名</param>
-        /// <param name="path">文件路徑</param>
-        public static void NewFile(string filename, string path)
-        {
-            filename.Trim();
-            if (filename == "")
-            {
-                MessageBox.Show("文件名不能為空~！");
-            }
-            else
-            {
-                if (File.Exists(path + "\\" + filename + ".txt"))
-                {
-                    MessageBox.Show("該文件名已經存在，請重命名");
-                }
-                else
-                {
-                    string FullName = path + "\\" + filename + ".txt";　　 //獲得文件完整信息
-                    StreamWriter Sw = File.CreateText(FullName);
-                    MessageBox.Show("新建文件 完成");
-                }
-            }
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -570,70 +503,6 @@ namespace test7
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
-            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
-
-            byte[] b = new byte[128];
-            string sTitle;
-            string sSinger;
-            string sAlbum;
-            string sYear;
-            string sComm;
-
-            FileStream fs = new FileStream(filename, FileMode.Open);
-
-            fs.Seek(-128, SeekOrigin.End);
-
-            fs.Read(b, 0, 128);
-
-            bool isSet = false;
-
-            String sFlag = System.Text.Encoding.Default.GetString(b, 0, 3);
-
-            if (sFlag.CompareTo("TAG") == 0)
-            {
-                System.Console.WriteLine("Tag is setted!Replica Watches");
-                richTextBox1.Text += "Tag is setted!Replica Watches" + "\n";
-                isSet = true;
-            }
-
-            if (isSet)
-            {
-                //http://study.pctoday.net.cn/3_Visual+Studio.aspx
-
-                sTitle = System.Text.Encoding.Default.GetString(b, 3, 30);
-
-                System.Console.WriteLine("标题:" + sTitle);
-                richTextBox1.Text += "标题:" + sTitle + "\n";
-
-                //Exclusive Replica Rolex Watches;
-
-                sSinger = System.Text.Encoding.Default.GetString(b, 33, 30);
-
-                System.Console.WriteLine("艺术家:" + sSinger);
-                richTextBox1.Text += "艺术家:" + sSinger + "\n";
-
-                //get album;
-
-                sAlbum = System.Text.Encoding.Default.GetString(b, 63, 30);
-
-                System.Console.WriteLine("唱片标题:" + sAlbum);
-                richTextBox1.Text += "唱片标题:" + sAlbum + "\n";
-
-                //egacn.com/Watches/Tag-Heuer;
-
-                sYear = System.Text.Encoding.Default.GetString(b, 93, 4);
-
-                System.Console.WriteLine("发行年:" + sYear);
-                richTextBox1.Text += "发行年:" + sYear + "\n";
-
-                //watchstylish.com;
-
-                sComm = System.Text.Encoding.Default.GetString(b, 97, 30);
-
-                System.Console.WriteLine("备注:" + sComm);
-                richTextBox1.Text += "备注:" + sComm + "\n";
-            }
         }
 
         private void button15_Click(object sender, EventArgs e)

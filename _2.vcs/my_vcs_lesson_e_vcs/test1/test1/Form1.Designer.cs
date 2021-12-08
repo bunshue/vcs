@@ -74,7 +74,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(160, 70);
             this.button2.TabIndex = 2;
-            this.button2.Text = "隨機生成漢字";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -116,7 +115,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(160, 70);
             this.button6.TabIndex = 6;
-            this.button6.Text = "獲取本機電腦名稱,IP,MAC地址,硬碟ID";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -191,7 +189,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 70);
             this.button13.TabIndex = 13;
-            this.button13.Text = "GUID";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -213,7 +210,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(160, 70);
             this.button14.TabIndex = 15;
-            this.button14.Text = "C#中利用process類調用外部程序以及執行dos命令";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

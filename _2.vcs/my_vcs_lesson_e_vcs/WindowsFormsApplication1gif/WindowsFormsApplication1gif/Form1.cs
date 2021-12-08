@@ -26,8 +26,6 @@ namespace WindowsFormsApplication1gif
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\_case1\_case1a\_case1aa\picture1.jpg";
-
         public Form1()
         {
             InitializeComponent();
@@ -35,29 +33,6 @@ namespace WindowsFormsApplication1gif
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            //string filename = @"C:\______test_files\picture1.jpg";
-
-            var GetFileName = Path.GetFileName(filename);
-            var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
-            var GetDirectoryName = Path.GetDirectoryName(filename);
-            var GetFullPath = Path.GetFullPath(filename);
-
-            //richTextBox1.Text += "filename\t" + filename + "\n";
-            richTextBox1.Text += "GetFullPath\t" + GetFullPath + "\n";
-            richTextBox1.Text += "GetDirectoryName\t" + GetDirectoryName + "\n";
-            //richTextBox1.Text += "GetFileName\t" + GetFileName + "\n";
-            richTextBox1.Text += "GetFileNameWithoutExtension\t" + GetFileNameWithoutExtension + "\n";
-
-            label1.Text = "原檔名 :";
-            textBox1.Text = filename;
-
-            label2.Text = "檔名 :";
-            textBox2.Text = GetFileNameWithoutExtension;
-
-            label3.Text = "新檔名 :";
-            textBox3.Text = GetFileNameWithoutExtension;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -142,43 +117,6 @@ namespace WindowsFormsApplication1gif
             //3.添加新行
             dt.Rows.Add("1", "Name");
             */
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            var ext = Path.GetExtension(filename);
-
-
-            richTextBox1.Text += "副檔名 : " + ext + "\n";
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            var GetFileName = Path.GetFileName(filename);
-            var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
-            var GetExtension = Path.GetExtension(filename);
-            var GetDirectoryName = Path.GetDirectoryName(filename);
-            var GetFullPath = Path.GetFullPath(filename);
-
-            richTextBox1.Text += "GetFullPath\t" + GetFullPath + "\n";
-            richTextBox1.Text += "GetDirectoryName\t" + GetDirectoryName + "\n";
-            richTextBox1.Text += "GetFileName\t" + GetFileName + "\n";
-            richTextBox1.Text += "GetFileNameWithoutExtension\t" + GetFileNameWithoutExtension + "\n";
-            richTextBox1.Text += "GetExtension\t" + GetExtension + "\n";
-
-
-
-            richTextBox1.Text += "新全檔名 : " + GetDirectoryName + "\\" + textBox3.Text + GetExtension + "\n";
-
         }
 
         private void button6_Click(object sender, EventArgs e)

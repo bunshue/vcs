@@ -312,91 +312,15 @@ namespace test3
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //獲取硬盤相應序列號
-            string result = clsIDE.GetAllSerialNumber();
-            richTextBox1.Text += "獲取硬盤序列號 : " + result + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //WMI 使用
-            SelectQuery query = new SelectQuery("Select * From Win32_LogicalDisk");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
 
-            foreach (ManagementBaseObject disk in searcher.Get())
-            {
-                richTextBox1.Text += disk["Name"] + " " + disk["DriveType"] + " " + disk["VolumeName"] + "\n";
-            }
-            /*
-            disk["DriveType"] 的返回值意義如下:
-
-            1 No type
-            2 Floppy disk
-            3 Hard disk
-            4 Removable drive or network drive
-            5 CD-ROM
-            6 RAM disk
-            */
-
-
-            //3、如何用WMI獲得指定磁盤的容量？	  TBD
-
-            //"win32_logicaldisk.deviceid=/"c:/"");
-            /*
-            ManagementObject disk2 = new ManagementObject("win32_logicaldisk.deviceid=C://");
-            disk2.Get();
-            Console.WriteLine("Logical Disk Size = " + disk2["Size"] + " bytes");
-            */
-
-
-            ManagementClass diskClass = new ManagementClass("Win32_LogicalDisk");
-            ManagementObjectCollection disks = diskClass.GetInstances();
-            ManagementObjectCollection.ManagementObjectEnumerator disksEnumerator = disks.GetEnumerator();
-            while (disksEnumerator.MoveNext())
-            {
-                ManagementObject disk = (ManagementObject)disksEnumerator.Current;
-                richTextBox1.Text += "Disk found: " + disk["deviceid"] + "\n";
-            }
-
-            richTextBox1.Text += "列出機器中所有的共享資源\n";
-            ManagementObjectSearcher searcher2 = new ManagementObjectSearcher("SELECT * FROM Win32_share");
-            foreach (ManagementObject share in searcher2.Get())
-            {
-                richTextBox1.Text += share.GetText(TextFormat.Mof) + "\n";
-            }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "主機名稱：" + System.Net.Dns.GetHostName() + "\n";
-
-            richTextBox1.Text += "IP地址：" + getIPAddress() + "\n";
-
-
-            //本機mac地址
-
-            string mac = "";
-            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection moc = mc.GetInstances();
-
-            foreach (ManagementObject mo in moc)
-            {
-                if ((bool)mo["IPEnabled"])
-                {
-                    mac = mo["MacAddress"].ToString();
-
-                    //本機MAC
-                    richTextBox1.Text += "本機MAC：" + mac + "\n";
-                }
-            }
-        }
-
-        private static string getIPAddress()
-        {
-            System.Net.IPAddress addr;
-            // 獲得本機局域網IP地址
-            addr = new System.Net.IPAddress(Dns.GetHostByName(Dns.GetHostName()).AddressList[0].Address);
-            return addr.ToString();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -600,65 +524,9 @@ namespace test3
         }
     }
 
-    /// <summary>
-    /// Summary description for clsIDE.
-    /// </summary>
-    public class clsIDE
-    {
-        /// <summary>
-        /// 獲取硬盤相應分區的序列號
-        /// </summary>
-        /// <returns></returns>
-        public static string GetAllSerialNumber()
-        {
-            string Dri = "";
 
-            System.Management.ManagementClass mo = new System.Management.ManagementClass("Win32_LogicalDisk");
 
-            System.Management.ManagementObjectCollection mc = mo.GetInstances();
 
-            foreach (System.Management.ManagementObject m in mc)
-            {
-                if (Convert.ToString(m.Properties["DriveType"].Value) == "3")
-                {
-                    Dri = Dri + m.Properties["VolumeSerialNumber"].Value.ToString() + "/n";
-                }
-            }
-
-            Dri = Dri.Substring(0, Dri.Length - 1);
-
-            return Dri;
-        }
-
-        /// <summary>
-        /// 獲取硬盤相應分區的序列號
-        /// </summary>
-        /// <param name="Drive">盤符（如 C）</param>
-        /// <returns></returns>
-        public static string GetSpecialVolumeSerialNumber(string Drive)
-        {
-            string Dri = "";
-
-            System.Management.ManagementClass mo = new System.Management.ManagementClass("Win32_LogicalDisk");
-
-            System.Management.ManagementObjectCollection mc = mo.GetInstances();
-
-            foreach (System.Management.ManagementObject m in mc)
-            {
-                if (Convert.ToString(m.Properties["DriveType"].Value) == "3")
-                {
-                    if (m.Properties["Name"].Value.ToString().ToUpper().Trim().Substring(0, 1) == Drive.ToUpper().Trim())
-                    {
-                        Dri = Dri + m.Properties["VolumeSerialNumber"].Value.ToString();
-
-                        break;
-                    }
-                }
-            }
-
-            return Dri;
-        }
-    }
 
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_get_system_info
+namespace vcs_Thread6_Mutex
 {
     static class Program
     {

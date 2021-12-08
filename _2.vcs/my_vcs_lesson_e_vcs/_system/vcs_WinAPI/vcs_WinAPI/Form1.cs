@@ -59,7 +59,16 @@ namespace vcs_WinAPI
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -91,6 +100,7 @@ namespace vcs_WinAPI
         private void button0_Click(object sender, EventArgs e)
         {
             Beep(500, 300);
+            //其中的Beep就是Win API的調用，使用[DllImport("kernel32")]屬性進行調用。
 
             //雜音Beep
             Random random = new Random();
@@ -100,13 +110,9 @@ namespace vcs_WinAPI
             }
 
         }
-
         //Beep SP
 
-
         //鼠標 ST
-
-
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool GetCursorPos(ref Point point);
 
@@ -123,8 +129,6 @@ namespace vcs_WinAPI
             Point point = new Point();
             bool getResult = GetCursorPos(ref point);
             bool setRight = SetCursorPos(1920 / 2, 1080 / 2);
-            //MouseClick("left");
-
         }
         //鼠標 SP
 

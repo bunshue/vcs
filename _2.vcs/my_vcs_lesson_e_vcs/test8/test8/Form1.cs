@@ -74,124 +74,12 @@ namespace test8
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //執行一條command命令 並取得其結果
-            string result = string.Empty;
 
-            GetCommandLineResult(out result);
-            richTextBox1.Text = result + "\n";
         }
-
-        /// <summary>
-        /// 獲取視頻的幀寬度和幀高度
-        /// </summary>
-        /// <returns>null表示獲取寬度或高度失敗</returns>
-        public static void GetCommandLineResult(out string result)
-        {
-            try
-            {
-                //執行命令獲取該文件的一些信息 
-                string command = "systeminfo";
-
-                string output;
-                string error;
-                ExecuteCommand(command, out output, out error);
-
-                result = output;
-            }
-            catch (Exception)
-            {
-                //width = null;
-                //height = null;
-                result = null;
-            }
-        }
-
-        /// <summary>
-        /// 執行一條command命令
-        /// </summary>
-        /// <param name="command">需要執行的Command</param>
-        /// <param name="output">輸出</param>
-        /// <param name="error">錯誤</param>
-        public static void ExecuteCommand(string command, out string output, out string error)
-        {
-            try
-            {
-                //創建一個進程
-                Process pc = new Process();
-                pc.StartInfo.FileName = command;
-                pc.StartInfo.UseShellExecute = false;
-                pc.StartInfo.RedirectStandardOutput = true;
-                pc.StartInfo.RedirectStandardError = true;
-                pc.StartInfo.CreateNoWindow = true;
-
-                //啟動進程
-                pc.Start();
-
-                //准備讀出輸出流和錯誤流
-                string outputData = string.Empty;
-                string errorData = string.Empty;
-                pc.BeginOutputReadLine();
-                pc.BeginErrorReadLine();
-
-                pc.OutputDataReceived += (ss, ee) =>
-                {
-                    outputData += ee.Data;
-                };
-
-                pc.ErrorDataReceived += (ss, ee) =>
-                {
-                    errorData += ee.Data;
-                };
-
-                //等待退出
-                pc.WaitForExit();
-
-                //關閉進程
-                pc.Close();
-
-                //返回流結果
-                output = outputData;
-                error = errorData;
-            }
-            catch (Exception)
-            {
-                output = null;
-                error = null;
-            }
-        }
-
-
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string process_name = "acdsee";
-            KillProcess(process_name);
 
-        }
-
-        private void KillProcess(string processName)
-        {
-            Process myproc = new Process();
-            //得到所有打開的進程
-            try
-            {
-                //foreach (Process thisproc in Process.GetProcessesByName("WINPROJ"))
-                foreach (Process thisproc in Process.GetProcesses())
-                {
-                    richTextBox1.Text += "get process : " + thisproc.ProcessName + "\n";
-
-                    /*
-                    if (!thisproc.CloseMainWindow())
-                    {
-                        thisproc.Kill();
-                    }
-                    */
-                }
-            }
-            catch (System.Exception ex)
-            {
-                //ScriptManager.RegisterStartupScript(this.btnUpload, GetType(), "dis", "alert(進程殺死失敗);", true);
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -254,25 +142,6 @@ namespace test8
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            var GetFileName = Path.GetFileName(filename);
-            var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
-            var GetExtension = Path.GetExtension(filename);
-            var GetDirectoryName = Path.GetDirectoryName(filename);
-            var GetFullPath = Path.GetFullPath(filename);
-
-            var GetPathRoot = Path.GetPathRoot(filename);
-            var GetRandomFileName = Path.GetRandomFileName();
-
-            richTextBox1.Text += "filename\t" + filename + "\n";
-            richTextBox1.Text += "GetFullPath\t" + GetFullPath + "\n";
-            richTextBox1.Text += "GetDirectoryName\t" + GetDirectoryName + "\n";
-            richTextBox1.Text += "GetFileName\t" + GetFileName + "\n";
-            richTextBox1.Text += "GetFileNameWithoutExtension\t" + GetFileNameWithoutExtension + "\n";
-            richTextBox1.Text += "GetExtension\t" + GetExtension + "\n";
-            richTextBox1.Text += "GetPathRoot\t" + GetPathRoot + "\n";
-            richTextBox1.Text += "GetRandomFileName\t" + GetRandomFileName + "\n";
 
         }
 
@@ -442,12 +311,116 @@ namespace test8
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //get mp3 info
+
+            //string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+
+            byte[] b = new byte[128];
+            string sTitle;
+            string sSinger;
+            string sAlbum;
+            string sYear;
+            string sComm;
+
+            FileStream fs = new FileStream(filename, FileMode.Open);
+
+            fs.Seek(-128, SeekOrigin.End);
+
+            fs.Read(b, 0, 128);
+
+            bool isSet = false;
+
+            String sFlag = System.Text.Encoding.Default.GetString(b, 0, 3);
+
+            if (sFlag.CompareTo("TAG") == 0)
+            {
+                System.Console.WriteLine("Tag is setted!Replica Watches");
+                richTextBox1.Text += "Tag is setted!Replica Watches" + "\n";
+                isSet = true;
+            }
+
+            if (isSet)
+            {
+                //http://study.pctoday.net.cn/3_Visual+Studio.aspx
+
+                sTitle = System.Text.Encoding.Default.GetString(b, 3, 30);
+
+                System.Console.WriteLine("标题:" + sTitle);
+                richTextBox1.Text += "标题:" + sTitle + "\n";
+
+                //Exclusive Replica Rolex Watches;
+
+                sSinger = System.Text.Encoding.Default.GetString(b, 33, 30);
+
+                System.Console.WriteLine("艺术家:" + sSinger);
+                richTextBox1.Text += "艺术家:" + sSinger + "\n";
+
+                //get album;
+
+                sAlbum = System.Text.Encoding.Default.GetString(b, 63, 30);
+
+                System.Console.WriteLine("唱片标题:" + sAlbum);
+                richTextBox1.Text += "唱片标题:" + sAlbum + "\n";
+
+                //egacn.com/Watches/Tag-Heuer;
+
+                sYear = System.Text.Encoding.Default.GetString(b, 93, 4);
+
+                System.Console.WriteLine("发行年:" + sYear);
+                richTextBox1.Text += "发行年:" + sYear + "\n";
+
+                //watchstylish.com;
+
+                sComm = System.Text.Encoding.Default.GetString(b, 97, 30);
+
+                System.Console.WriteLine("备注:" + sComm);
+                richTextBox1.Text += "备注:" + sComm + "\n";
+
+                fs.Close();
+            }
 
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //取得媒體資訊
+            //使用Shell32讀取影音文件屬性
+            /*
+            由於需要用到實時讀取影音文件(mp3、wma、wmv …)播放時間長度的功能，搜索到的結果有：
+            （1）硬編碼分析影音文件，需要分析各種媒體格式，代價最大；
+            （2）使用WMLib SDK，需要熟悉SDK各個接口，且不同版本的WM接口有別，代價次之；
+            （3）使用系統Shell32的COM接口，直接訪問媒體文體屬性，取其特定內容，代價最小。
+            顯然第3種方案見效最快，立即操刀：
+            ①引用Shell32底層接口c:\windows\system32\shell32.dll，VS自動轉換成Interop.Shell32.dll（注：64位系統和32位系統生成的Interop.Shell32.dll不一樣）
+            ②編碼讀取播放時間長度：
+            */
 
+            //取得媒體資訊
+            //string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+            int i;
+            for (i = 0; i < 30; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + GetMediaInfo(filename, i) + "\n";
+            }
+        }
+
+        public string GetMediaInfo(string path, int item)
+        {
+            //參考/Shell32/右鍵/屬性/內嵌Interop型別改成False
+            try
+            {
+                string result = string.Empty;
+                Shell32.Shell shell = new Shell32.ShellClass();
+                Shell32.Folder folder = shell.NameSpace(path.Substring(0, path.LastIndexOf("\\")));
+                Shell32.FolderItem folderItem = folder.ParseName(path.Substring(path.LastIndexOf("\\") + 1));
+                return folder.GetDetailsOf(folderItem, item);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)

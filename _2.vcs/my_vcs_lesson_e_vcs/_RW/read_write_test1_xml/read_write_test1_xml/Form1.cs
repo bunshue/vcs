@@ -65,8 +65,17 @@ namespace read_write_test1_xml
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
             button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            treeView1.Location = new Point(x_st + dx * 3, y_st + dy * 4 + 20);
+            button24.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button25.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button26.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button27.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button28.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button29.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            treeView1.Location = new Point(x_st + dx * 4, y_st + dy * 4 + 20);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -1088,7 +1097,7 @@ namespace read_write_test1_xml
 
             }
         }
-        
+
         /// <summary>
         /// 返回传入的集合中元素的个数
         /// </summary>
@@ -1113,36 +1122,53 @@ namespace read_write_test1_xml
 
 
         }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "建立XML\n";
+
+            XmlDocument xdoc = new XmlDocument();
+            //所有的元素使用文檔節點(XmlDocument)創建
+            XmlDeclaration xdec = xdoc.CreateXmlDeclaration("1.0", "big5", null); //xml描述
+            xdoc.AppendChild(xdec); //添加描述
+            XmlElement xele = xdoc.CreateElement("root"); //創建節點1
+            XmlElement xele2 = xdoc.CreateElement("person"); //創建節點2
+            xdoc.AppendChild(xele);  //xdoc添加節點 --根節點 
+            xele.AppendChild(xele2); //在節點1(xele)下添加一個節點2(xele2)
+            XmlAttribute xAttr = xdoc.CreateAttribute("id"); //創建屬性
+            xAttr.Value = "123";  //屬性的值
+            xele.Attributes.Append(xAttr); //把屬性插入到節點
+            XmlText txt = xdoc.CreateTextNode("我是文本節點");  //創建文本
+            xele2.AppendChild(txt); //把文本插入到節點
+
+            string filename = Application.StartupPath + "\\xml_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xml";
+            xdoc.Save(filename);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
+
+        }
     }
 
     //class XML_RW
     public class XMLApply
     {
-
         public string fileName = "Books.xml";
 
         private void Start()
         {
             CreateXML();
-
             //UpdateXml();
-
             //AddXml();
-
             //ParseXML();
         }
 
-
         /// 
-
         /// 創建XML文件
         /// 
-
         public void CreateXML()
         {
-            string filePath = Application.StartupPath + "//" + fileName;
+            string filename = Application.StartupPath + "//" + fileName;
 
-            if (!File.Exists(filePath))
+            if (!File.Exists(filename))
             {
                 XmlDocument BooksXML = new XmlDocument();
 
@@ -1178,29 +1204,24 @@ namespace read_write_test1_xml
                 myFavoriteBooks.AppendChild(software);
                 BooksXML.AppendChild(myFavoriteBooks);
 
-                BooksXML.Save(filePath);
-
-                //Debug.Log("XML file create success.....");
+                BooksXML.Save(filename);
+                Console.WriteLine("已存檔 : " + filename);
             }
         }
 
-
-
         /// 
-
         /// 更新xml文件內容
         /// 
-
         public void UpdateXml()
         {
-            string filePath = Application.StartupPath + "//" + fileName;
+            string filename = Application.StartupPath + "//" + fileName;
 
-            if (File.Exists(filePath))
+            if (File.Exists(filename))
             {
                 //create a xml reference
                 XmlDocument BooksXML = new XmlDocument();
                 //read exists file into BooksXML
-                BooksXML.Load(filePath);
+                BooksXML.Load(filename);
 
                 XmlNodeList nodeList = BooksXML.SelectSingleNode("MyFavoriteBooks").ChildNodes;
 
@@ -1220,16 +1241,12 @@ namespace read_write_test1_xml
                         break;
                     }
                 }
-
-                BooksXML.Save(filePath);
-                //Debug.Log("Update success...");
+                BooksXML.Save(filename);
+                Console.WriteLine("已存檔 : " + filename);
             }
-
         }
 
-
         /// 
-
         /// 在現有xml文件中，增加一個節點
         /// 
 
@@ -1802,4 +1819,5 @@ namespace read_write_test1_xml
 
     }
 }
+
 

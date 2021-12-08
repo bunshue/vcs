@@ -290,6 +290,108 @@ namespace vcs_test_all_07_Beep
         {
             PlayMic(7);
         }
+
         //PC喇叭音效 SP
+
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //C# 演奏月亮代表我的心
+
+            //racket 定義節拍
+            const int one = 600;//一拍
+            const int half = 300;//半拍
+            const int four_one = 150;//1/4拍
+            const int onedot = 450;//附點音符
+            ////note   定義音符
+            //const int mnote1 = 440;//do
+            //const int mnote2 = 495;//re
+            //const int mnote3 = 550;//mi
+            //const int mnote4 = 587;//fa
+            //const int mnote5 = 660;//so
+            //const int mnote6 = 733;//la
+            //const int mnote7 = 825;//si
+
+            //const int lnote5 = 325;
+
+            #region
+            //low note   低音區
+            const int lnote1 = 262;
+            const int lnote2 = 294;
+            const int lnote3 = 330;
+            const int lnote4 = 349;
+            const int lnote5 = 392;
+            const int lnote6 = 440;
+            const int lnote7 = 494;
+            //mid note   中音區
+            const int mnote1 = 523;
+            const int mnote2 = 578;
+            const int mnote3 = 659;
+            const int mnote4 = 698;
+            const int mnote5 = 784;
+            const int mnote6 = 880;
+            const int mnote7 = 988;
+            //hight note   高音區
+            const int hnote1 = 1046;
+            const int hnote2 = 1175;
+            const int hnote3 = 1318;
+            const int hnote4 = 1397;
+            const int hnote5 = 1568;
+            const int hnote6 = 1760;
+            const int hnote7 = 1976;
+            #endregion
+
+            //月亮代表我的心
+            Console.Beep(lnote5, half);
+
+            Console.Beep(mnote1, onedot);
+            Console.Beep(mnote3, half);
+            Console.Beep(mnote5, onedot);
+            Console.Beep(mnote1, half);
+
+            Console.Beep(lnote7, onedot);
+            Console.Beep(mnote3, half);
+            Console.Beep(mnote5, onedot);
+            Console.Beep(mnote5, half);
+
+
+            Console.Beep(mnote6, onedot);
+            Console.Beep(mnote7, half);
+            Console.Beep(hnote1, onedot);
+            Console.Beep(mnote6, half);
+
+            Console.Beep(mnote5, one);
+            System.Threading.Thread.Sleep(one);
+            System.Threading.Thread.Sleep(one);
+            Console.Beep(mnote3, half);
+            Console.Beep(mnote2, half);
+
+            Console.Beep(mnote1, onedot);
+            Console.Beep(mnote1, half);
+            Console.Beep(mnote1, half);
+            Console.Beep(mnote1, one);
+            Console.Beep(mnote3, half);
+            Console.Beep(mnote2, half);
+
+            Console.Beep(mnote1, onedot);
+            Console.Beep(mnote1, half);
+            Console.Beep(mnote1, half);
+            Console.Beep(mnote1, one);
+            Console.Beep(mnote2, half);
+            Console.Beep(mnote3, half);
+
+
+            Console.Beep(mnote2, onedot);
+            Console.Beep(mnote1, half);
+            Console.Beep(lnote6, one);
+            Console.Beep(mnote2, half);
+            Console.Beep(mnote3, half);
+
+            Console.Beep(mnote2, one);
+
+
+        }
+
+
     }
 }

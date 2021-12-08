@@ -1,14 +1,17 @@
 
 
+//GUID
+richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("N") + "\n";//結果為：38bddf48f43c48588e0d78761eaa1ce6
+richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("D") + "\n";//結果為：57d99d89-caab-482a-a0e9-a0a803eed3ba (默認的為第2種效果)
+richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("B") + "\n";//結果為：{09f140d5-af72-44ba-a763-c861304b46f8}
+richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("P") + "\n";//結果為：(778406c2-efff-4262-ab03-70a77d09c2b5)
+
+
+
 bw.RunWorkerAsync(new string[2] { srcFile, destFile });
 
 
-
-
 System.IO.File.AppendAllText("C:\\Mail_Log.ini", string.Format("{0:yyyy/MM/dd HH:mm:ss}\r\n{1}\r\n\r\n", DateTime.Now, ex.Message));
-
-
-
 
 
 
@@ -19,7 +22,38 @@ destFile = txbxDestFile.Text;
 
 
 
+只要文件名不要副檔名
+Path.GetFileNameWithoutExtension(pathName)
 
+FileInfo fi = new FileInfo(pathName);
+filetype = fi.Extension;//文件拓展名
+filesize = fi.Length;//文件信息的字節數
+
+
+
+        ///  讀一檔成拜列
+        public static byte[] ReadFile(string filename, int start, int length)
+        {
+            byte[] btFile = null;
+            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                btFile = new byte[length];
+                fs.Seek(start, SeekOrigin.Begin);
+                fs.Read(btFile, 0, length);
+            }
+            return btFile;
+        }
+
+
+
+            //定義一個以一種特定的編碼向流中寫入字符的對象
+            StreamWriter sw = new StreamWriter("AutoRun.inf", false);
+            sw.WriteLine("[autorun]");
+            sw.WriteLine("OPEN=AUTORUN.EXE");
+            sw.WriteLine("ICON=run.ICO");
+            sw.Close();     //關閉當前的StreamWrite對象和基礎流
+            
+            
 
 
             //動態驗證碼變成靜態
@@ -1570,16 +1604,6 @@ private bool FileCompare(string file1，string file2)
 	"file1byte" 才會等於 "file2byte"。
 	return ((file1byte - file2byte) == 0)；
 }
-
-
-
-C#使用Process類調用外部exe程序
-Process p = Process.Start("notepad.exe");
-p.WaitForExit();//關鍵，等待外部程序退出後才能往下執行 
-
-
-
-
 
 
 
