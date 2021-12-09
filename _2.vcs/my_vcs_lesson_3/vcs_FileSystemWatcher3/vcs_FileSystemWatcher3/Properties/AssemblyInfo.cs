@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("vcs_FileSystemWatcher")]
+[assembly: AssemblyTitle("vcs_FileSystemWatcher3")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("vcs_FileSystemWatcher")]
+[assembly: AssemblyProduct("vcs_FileSystemWatcher3")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("e3367e0c-e100-4636-90ec-490a06163fdb")]
+[assembly: Guid("4112bce6-0ff2-4ae7-afab-c4eea1691ee8")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_FileSystemWatcher2", "vcs_FileSystemWatcher2\vcs_FileSystemWatcher2.csproj", "{0394908D-0B9C-4135-901E-54BB0A3B5A54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_FileSystemWatcher3", "vcs_FileSystemWatcher3\vcs_FileSystemWatcher3.csproj", "{0394908D-0B9C-4135-901E-54BB0A3B5A54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

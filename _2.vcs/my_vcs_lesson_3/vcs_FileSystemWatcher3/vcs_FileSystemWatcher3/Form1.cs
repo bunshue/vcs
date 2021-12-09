@@ -11,7 +11,7 @@ using System.IO;
 
 //文件監視器
 
-namespace vcs_FileSystemWatcher2
+namespace vcs_FileSystemWatcher3
 {
     public partial class Form1 : Form
     {

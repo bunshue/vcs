@@ -17,7 +17,7 @@ using System.Threading;
 //2.或者傳遞參數，監視某一路徑文件變化。如圖，監視e盤
 
 
-namespace vcs_FileSystemWatcher
+namespace vcs_FileSystemWatcher2
 {
     public partial class Form1 : Form
     {

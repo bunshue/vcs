@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_FileSystemWatcher
+namespace vcs_FileSystemWatcher1
 {
     static class Program
     {
