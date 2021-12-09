@@ -271,6 +271,36 @@ namespace vcs_Draw6_String
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //TextRenderer的使用
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawRectangle(new Pen(Color.Red, 5), 100, 100, 100, 100);
+
+            //a.先定義一個矩形
+
+            Rectangle p1 = new Rectangle(10, 0, 200, this.pictureBox1.Height / 2);
+            Rectangle p2 = new Rectangle(210, 0, 200, this.pictureBox1.Height / 2);
+            Rectangle p3 = new Rectangle(410, 0, 100, this.pictureBox1.Height / 2);
+
+            //b.在矩形中寫入文字
+
+            g.DrawRectangle(Pens.Red, p1);
+            g.DrawRectangle(Pens.Red, p2);
+            g.DrawRectangle(Pens.Red, p3);
+            TextRenderer.DrawText(g, "寫字AAAAA", Font, p1, ForeColor, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            TextRenderer.DrawText(g, "寫字BBBBB", Font, p2, ForeColor, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            TextRenderer.DrawText(g, "寫字CCCCC", Font, p3, ForeColor, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
+            //a.先定義一個點
+
+            g.DrawRectangle(Pens.Red, this.pictureBox1.Width - 100, this.pictureBox1.Height - 100, 100 - 5, 100 - 5);
+            Point P1 = new Point(this.pictureBox1.Width - 100, this.pictureBox1.Height - 100);
+
+            //b.在點後寫入文字
+
+            TextRenderer.DrawText(g, "把字寫在右下方", Font, P1, Color.YellowGreen);
+
+            //TextFormatFlags.HorizontalCenter將邊框內的文本水平居中對齊
+            //TextFormatFlags.VerticalCenter在邊框內部垂直居中對齊文本
         }
 
         private void button5_Click(object sender, EventArgs e)

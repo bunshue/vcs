@@ -516,7 +516,94 @@ namespace image_test1
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //生成縮略圖
+            string filename1 = @"C:\______test_files\elephant.jpg";
+            string filename2 = Application.StartupPath + "\\small_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+
+            Image image = System.Drawing.Image.FromFile(filename1);
+            int W1 = image.Width;
+            int H1 = image.Height;
+            float ratio = (float)W1 / H1;
+
+            //微缩图高度和宽度  
+            int DefaultHeight = 300;    //縮略圖之高度
+            int W2 = H1 <= DefaultHeight ? W1 : Convert.ToInt32(DefaultHeight * ratio);
+            int H2 = H1 <= DefaultHeight ? H1 : DefaultHeight;
+
+            CreateThumbnailPicture(filename1, filename2, W2, H2);
+
+            richTextBox1.Text += "縮略圖之高度 = " + DefaultHeight.ToString() + "\n";
+            richTextBox1.Text += "已存檔 : " + filename2 + "\n";
         }
+
+        /// <summary>
+        /// 圖片微縮圖處理
+        /// </summary>
+        /// <param name="srcPath">源圖片</param>
+        /// <param name="destPath">目標圖片</param>
+        /// <param name="width">寬度</param>
+        /// <param name="height">高度</param>
+        public static void CreateThumbnailPicture(string srcPath, string destPath, int width, int height)
+        {
+            //根據圖片的磁盤絕對路徑獲取 源圖片 的Image對象
+            System.Drawing.Image img = System.Drawing.Image.FromFile(srcPath);
+
+            //bmp： 最終要建立的 微縮圖 位圖對象。
+            Bitmap bmp = new Bitmap(width, height);
+
+            //g: 繪制 bmp Graphics 對象
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.Transparent);
+            //為Graphics g 對象 初始化必要參數，很容易理解。
+            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+
+            //源圖片寬和高
+            int imgWidth = img.Width;
+            int imgHeight = img.Height;
+
+            //繪制微縮圖
+            g.DrawImage(img, new System.Drawing.Rectangle(0, 0, width, height), new System.Drawing.Rectangle(0, 0, imgWidth, imgHeight)
+                        , GraphicsUnit.Pixel);
+
+            ImageFormat format = img.RawFormat;
+            ImageCodecInfo info = ImageCodecInfo.GetImageEncoders().SingleOrDefault(i => i.FormatID == format.Guid);
+            EncoderParameter param = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 100L);
+            EncoderParameters parameters = new EncoderParameters(1);
+            parameters.Param[0] = param;
+            img.Dispose();
+
+            //保存已生成微缩图，这里将GIF格式转化成png格式。  
+            if (format == ImageFormat.Gif)
+            {
+                destPath = destPath.ToLower().Replace(".gif", ".png");
+                bmp.Save(destPath, ImageFormat.Png);
+            }
+            else
+            {
+                if (info != null)
+                {
+                    bmp.Save(destPath, info, parameters);
+                }
+                else
+                {
+
+                    bmp.Save(destPath, format);
+                }
+            }
+
+            img.Dispose();
+            g.Dispose();
+            bmp.Dispose();
+        }  
+
+ 
+
+							
+
+
 
     }
 }

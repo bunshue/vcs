@@ -747,7 +747,9 @@
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(100, 40);
             this.button48.TabIndex = 82;
+            this.button48.Text = "隨機連線";
             this.button48.UseVisualStyleBackColor = true;
+            this.button48.Click += new System.EventHandler(this.button48_Click);
             // 
             // button49
             // 

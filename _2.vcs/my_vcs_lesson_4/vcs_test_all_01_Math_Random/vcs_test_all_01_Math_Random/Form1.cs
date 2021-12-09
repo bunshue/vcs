@@ -134,7 +134,6 @@ namespace vcs_test_all_01_Math_Random
             bt_random6.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             bt_random_color.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             bt_random_text1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            bt_random_text2.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             bt_random7.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_random8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             bt_random9.Location = new Point(x_st + dx * 1, y_st + dy * 3);
@@ -2163,6 +2162,7 @@ namespace vcs_test_all_01_Math_Random
             return Colors[random.Next(0, Colors.Length)];
         }
 
+        //隨機生成漢字（摘錄保存的代碼），生成漢字摘錄代碼
         /*
         此函数在汉字编码范围内随机创建含两个元素的十六进制字节数组，每个字节数组代表一个汉字，并将
         四个字节数组存储在object数组中。
@@ -2170,103 +2170,14 @@ namespace vcs_test_all_01_Math_Random
         */
         public static object[] CreateRegionCode(int strlength)
         {
-            //定义一个字符串数组储存汉字编码的组成元素
-            string[] rBase = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-
-            Random rnd = new Random();
-
-            //定义一个object数组用来
-            object[] bytes = new object[strlength];
-
-            /*每循环一次产生一个含两个元素的十六进制字节数组，并将其放入bject数组中
-             每个汉字有四个区位码组成
-             区位码第1位和区位码第2位作为字节数组第一个元素
-             区位码第3位和区位码第4位作为字节数组第二个元素
-            */
-            for (int i = 0; i < strlength; i++)
-            {
-                //区位码第1位
-                int r1 = rnd.Next(11, 14);
-                string str_r1 = rBase[r1].Trim();
-
-                //区位码第2位
-                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更换随机数发生器的种子避免产生重复值
-                int r2;
-                if (r1 == 13)
-                {
-                    r2 = rnd.Next(0, 7);
-                }
-                else
-                {
-                    r2 = rnd.Next(0, 16);
-                }
-                string str_r2 = rBase[r2].Trim();
-
-                //区位码第3位
-                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
-                int r3 = rnd.Next(10, 16);
-                string str_r3 = rBase[r3].Trim();
-
-                //区位码第4位
-                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
-                int r4;
-                if (r3 == 10)
-                {
-                    r4 = rnd.Next(1, 16);
-                }
-                else if (r3 == 15)
-                {
-                    r4 = rnd.Next(0, 15);
-                }
-                else
-                {
-                    r4 = rnd.Next(0, 16);
-                }
-                string str_r4 = rBase[r4].Trim();
-
-                //定义两个字节变量存储产生的随机汉字区位码
-                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
-                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
-                //将两个字节变量存储在字节数组中
-                byte[] str_r = new byte[] { byte1, byte2 };
-
-                //将产生的一个汉字的字节数组放入object数组中
-                bytes.SetValue(str_r, i);
-            }
-            return bytes;
-        }
-
-        private string RandomText1()
-        {
-            //获取GB2312编码页（表）
-            Encoding gb = Encoding.GetEncoding("gb2312");
-
-            //调用函数产生4个随机中文汉字编码
-            object[] bytes = CreateRegionCode(4);
-
-            //根据汉字编码的字节数组解码出中文汉字
-            string str1 = gb.GetString((byte[])Convert.ChangeType(bytes[0], typeof(byte[])));
-            string str2 = gb.GetString((byte[])Convert.ChangeType(bytes[1], typeof(byte[])));
-            string str3 = gb.GetString((byte[])Convert.ChangeType(bytes[2], typeof(byte[])));
-            string str4 = gb.GetString((byte[])Convert.ChangeType(bytes[3], typeof(byte[])));
-
-            //richTextBox1.Text += str1 + str2 + str3 + str4 + "\n";
-            return "隨機文字 : " + str1 + str2 + str3 + str4;
-        }
-
-        //隨機生成漢字（摘錄保存的代碼），生成漢字摘錄代碼
-        /// <summary>
-        /// 隨機生成漢字
-        /// </summary>
-        /// <param name="strlength">長度（4位）</param>
-        /// <returns></returns>
-        public string RandomText2(int strlength)
-        {
             //定義一個字符串數組儲存漢字編碼的組成元素
             string[] r = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+
             Random rnd = new Random();
+
             //定義一個object數組用來
             object[] bytes = new object[strlength];
+
             /**/
             /*每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中
             每個漢字有四個區位碼組成
@@ -2278,18 +2189,25 @@ namespace vcs_test_all_01_Math_Random
                 //區位碼第1位
                 int r1 = rnd.Next(11, 14);
                 string str_r1 = r[r1].Trim();
+
                 //區位碼第2位
                 rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的種子避免產生重復值
                 int r2;
                 if (r1 == 13)
+                {
                     r2 = rnd.Next(0, 7);
+                }
                 else
+                {
                     r2 = rnd.Next(0, 16);
+                }
                 string str_r2 = r[r2].Trim();
+
                 //區位碼第3位
                 rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
                 int r3 = rnd.Next(10, 16);
                 string str_r3 = r[r3].Trim();
+
                 //區位碼第4位
                 rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
                 int r4;
@@ -2306,18 +2224,26 @@ namespace vcs_test_all_01_Math_Random
                     r4 = rnd.Next(0, 16);
                 }
                 string str_r4 = r[r4].Trim();
+
                 //定義兩個字節變量存儲產生的隨機漢字區位碼
                 byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
                 byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
                 //將兩個字節變量存儲在字節數組中
                 byte[] str_r = new byte[] { byte1, byte2 };
+
                 //將產生的一個漢字的字節數組放入object數組中
                 bytes.SetValue(str_r, i);
             }
+            return bytes;
+        }
 
-
+        private string RandomText1()
+        {
             //獲取GB2312編碼頁（表）
             Encoding gb = Encoding.GetEncoding("gb2312");
+
+            //调用函数产生4个随机中文汉字编码
+            object[] bytes = CreateRegionCode(4);
 
             //根據漢字編碼的字節數組解碼出中文漢字
             string str1 = gb.GetString((byte[])Convert.ChangeType(bytes[0], typeof(byte[])));
@@ -2325,7 +2251,7 @@ namespace vcs_test_all_01_Math_Random
             string str3 = gb.GetString((byte[])Convert.ChangeType(bytes[2], typeof(byte[])));
             string str4 = gb.GetString((byte[])Convert.ChangeType(bytes[3], typeof(byte[])));
             string txt = str1 + str2 + str3 + str4;
-            return txt;
+            return "隨機文字 : " + txt;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -2343,9 +2269,6 @@ namespace vcs_test_all_01_Math_Random
             bt_random_color.BackColor = RandomColor();          //same
 
             bt_random_text1.Text = RandomText1();
-
-            len = 100;  //useless
-            bt_random_text2.Text = RandomText2(len);
 
             // 產生任意矩陣
             // Randomize.

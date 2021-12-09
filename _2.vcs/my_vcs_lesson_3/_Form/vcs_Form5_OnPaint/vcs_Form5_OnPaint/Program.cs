@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace my_plot
+namespace vcs_Form5_OnPaint
 {
     static class Program
     {

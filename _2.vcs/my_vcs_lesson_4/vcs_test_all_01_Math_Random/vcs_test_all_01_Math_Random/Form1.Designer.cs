@@ -119,7 +119,6 @@
             this.button41 = new System.Windows.Forms.Button();
             this.button42 = new System.Windows.Forms.Button();
             this.button43 = new System.Windows.Forms.Button();
-            this.bt_random_text2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -358,7 +357,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.bt_random_text2);
             this.groupBox1.Controls.Add(this.bt_random_text1);
             this.groupBox1.Controls.Add(this.bt_random12);
             this.groupBox1.Controls.Add(this.bt_random_color);
@@ -1145,16 +1143,6 @@
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
             // 
-            // bt_random_text2
-            // 
-            this.bt_random_text2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random_text2.Location = new System.Drawing.Point(17, 388);
-            this.bt_random_text2.Name = "bt_random_text2";
-            this.bt_random_text2.Size = new System.Drawing.Size(321, 40);
-            this.bt_random_text2.TabIndex = 38;
-            this.bt_random_text2.Text = "隨機文字";
-            this.bt_random_text2.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1325,7 +1313,6 @@
         private System.Windows.Forms.Button button42;
         private System.Windows.Forms.Button button43;
         private System.Windows.Forms.Button bt_random_text1;
-        private System.Windows.Forms.Button bt_random_text2;
     }
 }
 

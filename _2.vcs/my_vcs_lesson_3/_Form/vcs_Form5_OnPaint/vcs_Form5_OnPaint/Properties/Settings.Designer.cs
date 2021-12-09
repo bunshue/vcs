@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace my_plot.Properties
+namespace vcs_Form5_OnPaint.Properties
 {
 
 

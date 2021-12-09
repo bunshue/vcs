@@ -82,6 +82,7 @@ namespace test4_filename
 
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             listView1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            listBox1.Location = new Point(x_st + dx * 4 + 60, y_st + dy * 5);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -293,12 +294,62 @@ namespace test4_filename
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //遍歷文件夾實例
+            string foldername = @"C:\______test_files\_pic";
+            DirectoryInfo TheFolder = new DirectoryInfo(foldername);
+
+            richTextBox1.Text += "遍歷文件夾\n";
+            //遍歷文件夾
+            foreach (DirectoryInfo NextFolder in TheFolder.GetDirectories())
+            {
+                this.listBox1.Items.Add(NextFolder.Name);
+                richTextBox1.Text += NextFolder.Name + "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "遍歷文件\n";
+            foreach (FileInfo NextFile in TheFolder.GetFiles())
+            {
+                this.listBox1.Items.Add(NextFile.Name);
+                richTextBox1.Text += NextFile.Name + "\n";
+            }
+            richTextBox1.Text += "\n";
 
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //遍歷文件夾實例
 
+            string foldername = @"C:\______test_files\_pic";
+
+            //實例化DirectoryInfo對象
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
+            //獲取指定目錄下的所有子目錄及文件類型
+            FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();
+            foreach (FileSystemInfo fsinfo in fsinfos)
+            {
+                if (fsinfo is DirectoryInfo)    //判斷是否文件夾
+                {
+                    //使用獲取的文件夾名稱實例化DirectoryInfo對象
+                    DirectoryInfo dirinfo = new DirectoryInfo(fsinfo.FullName);
+                    //為ListView控件添加文件夾信息
+                    listView1.Items.Add(dirinfo.Name);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.FullName);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add("");
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.CreationTime.ToShortDateString());
+                }
+                else
+                {
+                    //使用獲取的文件名稱實例化FileInfo對象
+                    FileInfo finfo = new FileInfo(fsinfo.FullName);
+                    //為ListView控件添加文件信息
+                    listView1.Items.Add(finfo.Name);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.FullName);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.Length.ToString());
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.CreationTime.ToShortDateString());
+                }
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)

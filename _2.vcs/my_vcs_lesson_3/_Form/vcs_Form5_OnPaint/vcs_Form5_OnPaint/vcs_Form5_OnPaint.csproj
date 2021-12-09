@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1175E98D-DA94-4DC6-8FCF-1478CFEB6A81}</ProjectGuid>
+    <ProjectGuid>{0121332F-B077-4237-94A3-D4946D269BE4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>my_plot</RootNamespace>
-    <AssemblyName>my_plot</AssemblyName>
+    <RootNamespace>vcs_Form5_OnPaint</RootNamespace>
+    <AssemblyName>vcs_Form5_OnPaint</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
