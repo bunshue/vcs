@@ -897,6 +897,97 @@ namespace vcs_test_all_00_Control
             }
         }
 
+        private void button46_Click(object sender, EventArgs e)
+        {
+            //遍歷窗體找某一控件
+            //C#遍歷窗體控件
+            string find_ctrl = "button15";
+            ForeachFormControls(find_ctrl);
+        }
+
+        /// <summary>
+        /// Winform C#遍历窗体控件
+        /// </summary>
+        /// <param name="ctrlName">控件名称</param>
+        public void ForeachFormControls(string ctrlName)
+        {
+            foreach (Control ctrl in this.Controls)
+            {
+                if (ctrl is Panel)
+                {
+                    //相關操作代碼
+                    ctrl.BackColor = Color.Aquamarine;
+                }
+                else if (ctrl is Button)
+                {
+                    ctrl.ForeColor = Color.RoyalBlue;
+                }
+                else if (ctrl is TextBox)
+                {
+                    ctrl.Text = null;
+                }
+
+                //根據控件名稱找某個控件
+                if (ctrl.Name.Equals(ctrlName))
+                {
+                    //ctrl.Name = string.Empty;
+                    ctrl.BackColor = Color.Red;
+                    richTextBox1.Text += "找到控件 : " + ctrlName + "\n";
+                }
+            }
+        }
+
+        /* 找panel1內的控件
+        /// <summary>
+        /// C#遍历子控件
+        /// </summary>
+        /// <param name="ctrlName">控件名称</param>
+        public void ForeachPanelControls(string ctrlName)
+        {
+            foreach (Control ctrl in panel1.Controls)
+            {
+                if (ctrl is Button)
+                {
+                    if (ctrl.Name.Equals(ctrlName))
+                        ctrl.ForeColor = Color.RoyalBlue;
+                    else
+                        ctrl.ForeColor = Color.SkyBlue;
+                }
+                else if (ctrl is TextBox)
+                {
+                    if (ctrl.Name.Equals(ctrlName))
+                        ctrl.Name = "当前值";
+                    else
+                        ctrl.Text = null;
+                }
+            }
+        }
+        */
+
+        /* 找chekbox內的控件
+        private void ForeachCheckBox(Control ctrls, bool currVal)
+        {
+            CheckBox cb;
+            foreach (Control ctrl in ctrls.Controls)
+            {
+                if (ctrl is CheckBox)
+                {
+                    cb = (CheckBox)ctrl;
+                    cb.Checked = currVal;
+                }
+            }
+        }
+        //same
+        private void ForeachCheckBoxes(Control ctrls, bool currVal)
+        {
+            CheckBox cb;
+            foreach (Control ctrl in ctrls.Controls.OfType<CheckBox>())
+            {
+                cb = (CheckBox)ctrl;
+                cb.Checked = currVal;
+            }
+        }
+        */
     }
 
     class MyRecordControlClass

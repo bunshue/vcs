@@ -22,16 +22,6 @@
 
 
 
-
-
-//GUID
-richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("N") + "\n";//結果為：38bddf48f43c48588e0d78761eaa1ce6
-richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("D") + "\n";//結果為：57d99d89-caab-482a-a0e9-a0a803eed3ba (默認的為第2種效果)
-richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("B") + "\n";//結果為：{09f140d5-af72-44ba-a763-c861304b46f8}
-richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("P") + "\n";//結果為：(778406c2-efff-4262-ab03-70a77d09c2b5)
-
-
-
 bw.RunWorkerAsync(new string[2] { srcFile, destFile });
 
 
@@ -1114,9 +1104,6 @@ private void AboutBox_Load(object sender, EventArgs e)
 　textBoxDescription.Text = "細部描述：" +
 　myAssembly.Description;
 }
-
-
-string newName = Guid.NewGuid().ToString();
 
 
 C# 之程序退出的方法，

@@ -27,9 +27,6 @@ namespace test2
 {
     public partial class Form1 : Form
     {
-        static PerformanceCounter cpu = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-        static PerformanceCounter memory = new PerformanceCounter("Memory", "% Committed Bytes in Use");
-
         public Form1()
         {
             InitializeComponent();
@@ -87,104 +84,11 @@ namespace test2
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //C#遍歷窗體控件
-            string find_ctrl = "button8";
-            ForeachFormControls(find_ctrl);
-        }
 
-        /// <summary>
-        /// Winform C#遍历窗体控件
-        /// </summary>
-        /// <param name="ctrlName">控件名称</param>
-        public void ForeachFormControls(string ctrlName)
-        {
-            foreach (Control ctrl in this.Controls)
-            {
-                if (ctrl is Panel)
-                {
-                    //相關操作代碼
-                    ctrl.BackColor = Color.Aquamarine;
-                }
-                else if (ctrl is Button)
-                {
-                    ctrl.ForeColor = Color.RoyalBlue;
-                }
-                else if (ctrl is TextBox)
-                {
-                    ctrl.Text = null;
-                }
-
-                //根據控件名稱找某個控件
-                if (ctrl.Name.Equals(ctrlName))
-                {
-                    //ctrl.Name = string.Empty;
-                    ctrl.BackColor = Color.Red;
-                }
-            }
         }
-
-        /* 找panel1內的控件
-        /// <summary>
-        /// C#遍历子控件
-        /// </summary>
-        /// <param name="ctrlName">控件名称</param>
-        public void ForeachPanelControls(string ctrlName)
-        {
-            foreach (Control ctrl in panel1.Controls)
-            {
-                if (ctrl is Button)
-                {
-                    if (ctrl.Name.Equals(ctrlName))
-                        ctrl.ForeColor = Color.RoyalBlue;
-                    else
-                        ctrl.ForeColor = Color.SkyBlue;
-                }
-                else if (ctrl is TextBox)
-                {
-                    if (ctrl.Name.Equals(ctrlName))
-                        ctrl.Name = "当前值";
-                    else
-                        ctrl.Text = null;
-                }
-            }
-        }
-        */
-
-        /* 找chekbox內的控件
-        private void ForeachCheckBox(Control ctrls, bool currVal)
-        {
-            CheckBox cb;
-            foreach (Control ctrl in ctrls.Controls)
-            {
-                if (ctrl is CheckBox)
-                {
-                    cb = (CheckBox)ctrl;
-                    cb.Checked = currVal;
-                }
-            }
-        }
-        //same
-        private void ForeachCheckBoxes(Control ctrls, bool currVal)
-        {
-            CheckBox cb;
-            foreach (Control ctrl in ctrls.Controls.OfType<CheckBox>())
-            {
-                cb = (CheckBox)ctrl;
-                cb.Checked = currVal;
-            }
-        }
-        */
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //方法1    
-            //例：窗体的透明度为50% 
-            //this.Opacity = 0.5; 
-
-            //方法2，我用的方法2，窗体透明控件不透明了
-            // TransparencyKey只支持透明或不透明，不支持过度色，比如PNG图片中的从不透明到透明的过渡色会显示出讨厌的效果
-            this.BackColor = Color.Black;
-            this.TransparencyKey = Color.Black;
 
         }
 
@@ -286,13 +190,6 @@ namespace test2
 
         private void button13_Click(object sender, EventArgs e)
         {
-            // CPU 與記憶體使用率
-            //建一個 PerformanceCounter 物件，指定分類、計數器名稱、執行個體，接著用 NextValue() 取值，輕鬆搞定。
-            Console.WriteLine("CPU: {0:n1}%", cpu.NextValue());
-            Console.WriteLine("Memory: {0:n0}%", memory.NextValue());
-
-            richTextBox1.Text += "CPU: " + cpu.NextValue() + "\n";
-            richTextBox1.Text += "Memory: " + memory.NextValue() + "\n";
 
         }
 
@@ -351,19 +248,6 @@ namespace test2
         {
             Close();
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            // CPU 與記憶體使用率
-            Console.WriteLine("CPU: {0:n1}%", cpu.NextValue());
-            Console.WriteLine("Memory: {0:n0}%", memory.NextValue());
-
-            richTextBox1.Text += "CPU: " + cpu.NextValue() + " %\n";
-            richTextBox1.Text += "Memory: " + memory.NextValue() + " %\n";
-
-
-        }
-
     }
 }
 

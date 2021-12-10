@@ -131,6 +131,19 @@ namespace vcs_System1
             button58.Location = new Point(x_st + dx * 4, y_st + dy * 10);
             button59.Location = new Point(x_st + dx * 4, y_st + dy * 11);
 
+            button60.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            button61.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            button62.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+            button63.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            button64.Location = new Point(x_st + dx * 5, y_st + dy * 4);
+            button65.Location = new Point(x_st + dx * 5, y_st + dy * 5);
+            button66.Location = new Point(x_st + dx * 5, y_st + dy * 6);
+            button67.Location = new Point(x_st + dx * 5, y_st + dy * 7);
+            button68.Location = new Point(x_st + dx * 5, y_st + dy * 8);
+            button69.Location = new Point(x_st + dx * 5, y_st + dy * 9);
+            button70.Location = new Point(x_st + dx * 5, y_st + dy * 10);
+            button71.Location = new Point(x_st + dx * 5, y_st + dy * 11);
+
             label6.Location = new Point(x_st + dx * 3, y_st + dy * 12 + 30);
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
@@ -469,7 +482,7 @@ namespace vcs_System1
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //C# 如何產生 GUID?
+            richTextBox1.Text += "C# 產生 GUID 1\n";
             //可以直接透過內建方法，產生 GUID
 
             Guid guid = Guid.NewGuid();
@@ -480,6 +493,17 @@ namespace vcs_System1
 
             guid = Guid.NewGuid();
             richTextBox1.Text += "GUID3 : " + guid + "\n";
+
+            richTextBox1.Text += "C# 產生 GUID 2\n";
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("N") + "\n";//結果為：38bddf48f43c48588e0d78761eaa1ce6
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("D") + "\n";//結果為：57d99d89-caab-482a-a0e9-a0a803eed3ba (默認的為第2種效果)
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("B") + "\n";//結果為：{09f140d5-af72-44ba-a763-c861304b46f8}
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("P") + "\n";//結果為：(778406c2-efff-4262-ab03-70a77d09c2b5)
+
+            string newName = Guid.NewGuid().ToString();
+
+            richTextBox1.Text += "C# 產生 GUID 3\n";
+            richTextBox1.Text += newName + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -556,8 +580,17 @@ namespace vcs_System1
             richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
+        static PerformanceCounter cpu = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+        static PerformanceCounter memory = new PerformanceCounter("Memory", "% Committed Bytes in Use");
         private void button23_Click(object sender, EventArgs e)
         {
+            //CPU 與記憶體使用率
+            //建一個 PerformanceCounter 物件，指定分類、計數器名稱、執行個體，接著用 NextValue() 取值，輕鬆搞定。
+            Console.WriteLine("CPU: {0:n1}%", cpu.NextValue());
+            Console.WriteLine("Memory: {0:n0}%", memory.NextValue());
+
+            richTextBox1.Text += "CPU: " + cpu.NextValue() + "\n";
+            richTextBox1.Text += "Memory: " + memory.NextValue() + "\n";
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1520,6 +1553,59 @@ namespace vcs_System1
 
         #endregion
 
+        private void button60_Click(object sender, EventArgs e)
+        {
+            //Environment 類別
+            richTextBox1.Text += "Environment 類別\n";
 
+            richTextBox1.Text += "處理序的命令列：" + Environment.CommandLine + "\n";
+            richTextBox1.Text += "工作目錄的完整路徑：" + Environment.CurrentDirectory + "\n";
+            richTextBox1.Text += "處理序的結束代碼：" + Environment.ExitCode + "\n";
+            richTextBox1.Text += "是否正常關機：" + Environment.HasShutdownStarted + "\n";
+            richTextBox1.Text += "NetBIOS名稱：" + Environment.MachineName + "\n";
+            richTextBox1.Text += "環境定義的新字串：" + Environment.NewLine + "\n";
+            richTextBox1.Text += "作業系統平台：" + Environment.OSVersion.Platform + "\n";
+            richTextBox1.Text += "Service Pack版本：" + Environment.OSVersion.ServicePack + "\n";
+            richTextBox1.Text += "作業系統版本：" + Environment.OSVersion.Version + "\n";
+            richTextBox1.Text += "串連字串表示：" + Environment.OSVersion.VersionString + "\n";
+            richTextBox1.Text += "處理器數目：" + Environment.ProcessorCount + "\n";
+            richTextBox1.Text += "堆疊追蹤資訊：" + Environment.StackTrace + "\n";
+            richTextBox1.Text += "系統目錄完整路徑：" + Environment.SystemDirectory + "\n";
+            richTextBox1.Text += "系統啟動後的毫秒數：" + Environment.TickCount + "\n";
+            richTextBox1.Text += "使用者網域名稱：" + Environment.UserDomainName + "\n";
+            richTextBox1.Text += "處理序是否與使用者互動：" + Environment.UserInteractive + "\n";
+            richTextBox1.Text += "使用者名稱：" + Environment.UserName + "\n";
+            richTextBox1.Text += "Version：" + Environment.Version + "\n";
+            richTextBox1.Text += "組件元件值：" + Environment.Version.Build + "\n";
+            richTextBox1.Text += "主要元件值：" + Environment.Version.Major + "\n";
+            richTextBox1.Text += "修訂編號的高 16 位元：" + Environment.Version.MajorRevision + "\n";
+            richTextBox1.Text += "次要元件值：" + Environment.Version.Minor + "\n";
+            richTextBox1.Text += "修訂編號的低 16 位元：" + Environment.Version.MinorRevision + "\n";
+            richTextBox1.Text += "修訂元件值：" + Environment.Version.Revision + "\n";
+            richTextBox1.Text += "實際記憶體數量：" + Environment.WorkingSet + "\n";
+
+            string strFinal;
+            string strQuery = "系統磁碟機：%SystemDrive% 與 系統根目錄：%SystemRoot%";
+            strFinal = Environment.ExpandEnvironmentVariables(strQuery);
+            richTextBox1.Text += strFinal + "\n";
+
+            string[] arguments = Environment.GetCommandLineArgs();
+            richTextBox1.Text += "取得命令列的Args: " + string.Join(", ", arguments) + "\n";
+
+            richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System) + "\n";
+
+            string[] drives = Environment.GetLogicalDrives();
+            richTextBox1.Text += "系統磁碟機：" + string.Join(", ", drives) + "\n";
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            // CPU 與記憶體使用率
+            Console.WriteLine("CPU: {0:n1}%", cpu.NextValue());
+            Console.WriteLine("Memory: {0:n0}%", memory.NextValue());
+
+            richTextBox1.Text += "CPU: " + cpu.NextValue() + " %\n";
+            richTextBox1.Text += "Memory: " + memory.NextValue() + " %\n";
+        }
     }
 }

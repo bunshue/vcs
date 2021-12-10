@@ -86,7 +86,7 @@ namespace vcs_Form1
             x_st = 12;
             y_st = 12;
             dx = 205;
-            dy = 50;
+            dy = 65;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -131,6 +131,10 @@ namespace vcs_Form1
             button37.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button40.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button41.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button42.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button43.Location = new Point(x_st + dx * 3, y_st + dy * 7);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -343,7 +347,17 @@ namespace vcs_Form1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "xxx\n";
+            richTextBox1.Text += "設置表單透明  控件不透明\n";
+
+            //方法1    
+            //例：窗体的透明度为50% 
+            //this.Opacity = 0.5; 
+
+            //方法2，我用的方法2，窗体透明控件不透明了
+            // TransparencyKey只支持透明或不透明，不支持过度色，比如PNG图片中的从不透明到透明的过渡色会显示出讨厌的效果
+            this.BackColor = Color.Black;
+            this.TransparencyKey = Color.Black;
+
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -648,7 +662,7 @@ namespace vcs_Form1
             string text = String.Format("用OnPaint寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " +
                 "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
             int x_st = label1.Location.X + 630;
-            int y_st = label1.Location.Y - 20;
+            int y_st = label1.Location.Y - 100;
             e.Graphics.DrawString(text,
                 new Font(this.Font, FontStyle.Italic),
                 new SolidBrush(slateBlue),
