@@ -508,6 +508,7 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(170, 75);
             this.button38.TabIndex = 40;
+            this.button38.Text = "過濾html標簽";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 

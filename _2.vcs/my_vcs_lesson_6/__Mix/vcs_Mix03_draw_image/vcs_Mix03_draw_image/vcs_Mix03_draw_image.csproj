@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EFFFF04A-47BB-45A6-99C4-714F252A757F}</ProjectGuid>
+    <ProjectGuid>{23F27780-4F36-43CB-8C90-9E155780D5AB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>test9</RootNamespace>
-    <AssemblyName>test9</AssemblyName>
+    <RootNamespace>vcs_Mix03_draw_image</RootNamespace>
+    <AssemblyName>vcs_Mix03_draw_image</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

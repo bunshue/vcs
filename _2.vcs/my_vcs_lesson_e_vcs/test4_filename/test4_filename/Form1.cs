@@ -11,6 +11,8 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
+using System.Diagnostics;   //for FileVersionInfo
+
 namespace test4_filename
 {
     public partial class Form1 : Form
@@ -354,7 +356,11 @@ namespace test4_filename
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //獲取文件的版本信息
+            string filename = @"C:\______test_files\_material\AForge.Video.dll";
 
+            FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo(filename);
+            richTextBox1.Text += "版本號: " + myFileVersionInfo1.FileVersion + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)

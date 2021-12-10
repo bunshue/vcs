@@ -117,44 +117,11 @@ namespace test3
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //獲取文件的版本信息:
-            string filename = @"C:\______test_files\_material\AForge.Video.dll";
-
-            FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo(filename);
-            richTextBox1.Text += "版本號: " + myFileVersionInfo1.FileVersion + "\n";
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "今天是 : " + GetCnWeek() + "\n";
-        }
 
-        /// <summary>
-        /// 獲得中文星期名稱
-        /// </summary>
-        /// <returns></returns>
-        public static string GetCnWeek()
-        {
-            switch (DateTime.Now.DayOfWeek)
-            {
-                case DayOfWeek.Monday:
-                    return "星期一";
-                case DayOfWeek.Tuesday:
-                    return "星期二";
-                case DayOfWeek.Wednesday:
-                    return "星期三";
-                case DayOfWeek.Thursday:
-                    return "星期四";
-                case DayOfWeek.Friday:
-                    return "星期五";
-                case DayOfWeek.Saturday:
-                    return "星期六";
-                case DayOfWeek.Sunday:
-                    return "星期日";
-                default:
-                    return "星期一";
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -168,86 +135,10 @@ namespace test3
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += CaculateWeekDay(2021, 10, 28);
-        }
-
-        /*
-        C#實現的根據年月日計算星期幾的函數
-
-        基姆拉爾森計算公式
-
-        W= (d 2*m 3*(m 1)/5 y y/4-y/100 y/400) mod 7
-
-        在公式中d表示日期中的日數，m表示月份數，y表示年數。注意：在公式中有個與其他公式不同的地方：把一月和二月看成是上一年的十三月和十四月，例：如果是2004-1-10則換算成：2003-13-10來代入公式計算。
-        */
-
-        //y－年，m－月，d－日期
-        string CaculateWeekDay(int y, int m, int d)
-        {
-            if (m == 1) m = 13;
-            if (m == 2) m = 14;
-            int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400) % 7 + 1;
-
-            string weekstr = "";
-            switch (week)
-            {
-                case 1: weekstr = "星期一"; break;
-                case 2: weekstr = "星期二"; break;
-                case 3: weekstr = "星期三"; break;
-                case 4: weekstr = "星期四"; break;
-                case 5: weekstr = "星期五"; break;
-                case 6: weekstr = "星期六"; break;
-                case 7: weekstr = "星期日"; break;
-            } return weekstr;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //C#獲取當前星期幾的三種方法
-
-            //第一種：
-
-            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
-            richTextBox1.Text += weekday + "\n";
-
-            //第二種：
-
-            richTextBox1.Text += System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek) + "\n";
-
-            //第三種：
-
-            string dt;
-            string week = string.Empty;
-            dt = DateTime.Today.DayOfWeek.ToString();
-            switch (dt)
-            {
-                case "Monday":
-                    week = "星期一";
-                    break;
-                case "Tuesday":
-                    week = "星期二";
-                    break;
-                case "Wednesday":
-                    week = "星期三";
-                    break;
-                case "Thursday":
-                    week = "星期四";
-                    break;
-                case "Friday":
-                    week = "星期五";
-                    break;
-                case "Saturday":
-                    week = "星期六";
-                    break;
-                case "Sunday":
-                    week = "星期日";
-                    break;
-                default:
-                    week = "星期日";
-                    break;
-            }
-            richTextBox1.Text += week + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)

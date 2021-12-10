@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace test8.Properties {
+namespace vcs_Mix03_draw_image.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

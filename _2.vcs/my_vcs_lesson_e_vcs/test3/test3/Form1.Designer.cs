@@ -61,7 +61,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 70);
             this.button1.TabIndex = 0;
-            this.button1.Text = "獲得中文星期名稱";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -100,7 +99,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(160, 70);
             this.button4.TabIndex = 4;
-            this.button4.Text = "星期幾";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -111,7 +109,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(160, 70);
             this.button5.TabIndex = 5;
-            this.button5.Text = "星期幾";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -205,7 +202,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(160, 70);
             this.button0.TabIndex = 14;
-            this.button0.Text = "獲取文件的版本信息";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

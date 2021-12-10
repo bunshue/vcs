@@ -37,50 +37,7 @@ namespace WindowsFormsApplication1gif
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(300, 200);
-            Graphics g = Graphics.FromImage(bmp);
-            Font f = new Font("arial", 11f);
-            Brush b = Brushes.Blue;
 
-            string txt = "Rotate text animation!";
-            SizeF sz = g.MeasureString(txt, f);
-            g.Clear(Color.WhiteSmoke);
-            g.DrawString(txt, f, b, 50 - sz.Width / 2, 50 - sz.Height / 2);
-            g.Flush();
-
-            for (int i = 1; i < 36; ++i)
-            {
-                g.Clear(Color.WhiteSmoke);
-                g.TranslateTransform(50, 50);
-                g.RotateTransform(10f * i);
-                g.DrawString(txt, f, b, sz.Width / -2, sz.Height / -2);
-                g.ResetTransform();
-                g.DrawString("Hello", f, Brushes.Red, -50 + i * 4, 20);
-                g.DrawString("Yeah", f, Brushes.Orange, 60, -20 + i * 4);
-
-                g.Flush();
-
-                pictureBox1.Image = bmp;
-                Application.DoEvents();
-                delay(300);
-            }
-
-            f.Dispose();
-            g.Dispose();
-            bmp.Dispose();
-
-        }
-
-        //delay 10000 約 10秒
-        //C# 不lag的延遲時間
-        private void delay(int delay_milliseconds)
-        {
-            delay_milliseconds *= 2;
-            DateTime time_before = DateTime.Now;
-            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
-            {
-                Application.DoEvents();
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)

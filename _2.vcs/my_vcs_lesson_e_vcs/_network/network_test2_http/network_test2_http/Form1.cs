@@ -1103,10 +1103,35 @@ namespace network_test2_http
 
         }
 
+        //過濾html標簽 ST
         private void button38_Click(object sender, EventArgs e)
         {
-
+            //過濾html標簽 
         }
+
+        //過濾html標簽
+        public static string Html2Text(string htmlStr)
+        {
+            if (String.IsNullOrEmpty(htmlStr))
+            {
+                return "";
+            }
+            string regEx_style = "<style[^>]*?>[\\s\\S]*?<\\/style>"; //定義style的正則表達式
+            string regEx_script = "<script[^>]*?>[\\s\\S]*?<\\/script>"; //定義script的正則表達式
+            string regEx_html = "<[^>]+>"; //定義HTML標簽的正則表達式
+            htmlStr = Regex.Replace(htmlStr, regEx_style, "");//刪除css
+            htmlStr = Regex.Replace(htmlStr, regEx_script, "");//刪除js
+            htmlStr = Regex.Replace(htmlStr, regEx_html, "");//刪除html標記
+            htmlStr = Regex.Replace(htmlStr, "\\s*|\t|\r|\n", "");//去除tab、空格、空行
+            htmlStr = htmlStr.Replace(" ", "");
+
+            //htmlStr = htmlStr.Replace(""", ""); //去除異常的引號" " "
+            //htmlStr = htmlStr.Replace(""", "");//去除异常的引号" " "
+            //htmlStr = htmlStr.Replace("'", ""); //去除異常的引號" " "
+            //htmlStr = htmlStr.Replace(""", "");
+            return htmlStr.Trim();
+        }
+        //過濾html標簽 SP
 
         private void button39_Click(object sender, EventArgs e)
         {
