@@ -26,6 +26,7 @@ namespace vcs_WinAPI
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+            Microsoft.Win32.SystemEvents.TimeChanged += new EventHandler(SystemEvents_TimeChanged); //for 設定系統時間
         }
 
         void show_item_location()
@@ -614,6 +615,48 @@ namespace vcs_WinAPI
         {
 
         }
+
+        //設定系統時間 ST
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Ansi)]
+        public extern static bool SetSystemTime(ref SYSTEMTIME time);
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SYSTEMTIME
+        {
+            public short Year;
+            public short Month;
+            public short DayOfWeek;
+            public short Day;
+            public short Hour;
+            public short Minute;
+            public short Second;
+            public short Miliseconds;
+        }
+
+        private void SystemEvents_TimeChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("系統日期修改成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "設定系統時間\n";
+            //設定系統時間 為 12:34:56
+            int setup_hour = 12;
+            int setup_minute = 34;
+            int setup_second = 56;
+            SYSTEMTIME t = new SYSTEMTIME();
+            t.Year = (short)DateTime.Now.Year;
+            t.Month = (short)DateTime.Now.Month;
+            t.Day = (short)DateTime.Now.Day;
+            t.Hour = (short)(setup_hour - 8);//這個函數使用的是0時區的時間,例如，要設12點，則為12-8   
+            t.Minute = (short)setup_minute;
+            t.Second = (short)setup_second;
+            //偽執行
+            //bool v = SetSystemTime(ref t);
+            richTextBox1.Text += "偽執行\n";
+        }
+        //設定系統時間 SP
     }
 
     /// <summary>

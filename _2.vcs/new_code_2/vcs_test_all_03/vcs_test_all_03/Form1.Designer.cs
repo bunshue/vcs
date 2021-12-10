@@ -139,7 +139,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(132, 49);
             this.button6.TabIndex = 6;
-            this.button6.Text = "提取網頁標題";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -203,7 +202,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(132, 49);
             this.button11.TabIndex = 13;
-            this.button11.Text = "將計算機設定為休眠狀態";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -213,7 +211,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(132, 49);
             this.button12.TabIndex = 14;
-            this.button12.Text = "設定系統時間";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

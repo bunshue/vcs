@@ -13,8 +13,6 @@ using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 
-using System.Globalization; //for CultureInfo
-
 namespace vcs_test_all_99_tmp1
 {
     public partial class Form1 : Form
@@ -23,7 +21,6 @@ namespace vcs_test_all_99_tmp1
         {
             InitializeComponent();
             show_item_location();
-            toolTip1.SetToolTip(button6, "顯示提示訊息");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -79,46 +76,8 @@ namespace vcs_test_all_99_tmp1
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
-        private void richTextBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.Text = "目前滑鼠位置：" + e.X + " : " + e.Y;
-        }
-
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
-        {
-            this.Text = "Mouse Up：" + e.X + " : " + e.Y;
-        }
-
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            this.Text = "Mouse Down：" + e.X + " : " + e.Y;
-        }
-
         private void button0_Click(object sender, EventArgs e)
         {
-            string str1 = "https://ja.wikipedia.org/wiki/和 製 英 語";
-
-            richTextBox1.Text += "原字串(a)\t\t" + str1 + "\n";
-            richTextBox1.Text += "原字串空白轉nbsp(b)\t" + str1.SpaceToNbsp() + "\n";
-
-            string str2 = str1.UrlEncode();
-
-            richTextBox1.Text += "原字串特殊符號編碼(c)\t" + str2 + "\n";
-
-            richTextBox1.Text += "(c)再解碼\t\t" + str2.UrlDecode() + "\n";
-
-            richTextBox1.Text += "(b)目前無法解碼\n";
-            richTextBox1.Text += "\n";
 
         }
 
@@ -136,48 +95,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //偵測原始檔案類型
-            openFileDialog1.Title = "測試讀取一個純文字檔";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            //openFileDialog1.DefaultExt = "*.txt";
-            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
-                richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
-
-                string builtHex = string.Empty;
-                using (Stream S = File.OpenRead(openFileDialog1.FileName))
-                {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        builtHex += S.ReadByte().ToString("X2");
-
-                        /*
-                        if (ImageTypes.ContainsKey(builtHex))
-                        {
-                            string 真實副檔名 = ImageTypes[builtHex];
-                            break;
-                        }
-                        */
-                    }
-                    richTextBox1.Text += "get " + builtHex + "\n";
-
-
-                }
-
-                //richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -203,211 +120,19 @@ namespace vcs_test_all_99_tmp1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "加入toolTip物件\n";
-            richTextBox1.Text += "在Form1()的InitializeComponent()後加入訊息\n";
         }
 
-        //偵測原始檔案類型
-        //應改用binary read
         private void button7_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "偵測原始檔案類型";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            //openFileDialog1.DefaultExt = "*.txt";
-            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "檔案 : " + openFileDialog1.FileName + "\n";
-                //richTextBox1.Text += "長度 : " + openFileDialog1.FileName.Length.ToString() + "\n";
-
-                int len = openFileDialog1.FileName.Length;
-
-                if (len < 10)
-                {
-                    richTextBox1.Text += "檔案太小, 忽略";
-                    return;
-                }
-
-
-                len = 10;
-                int[] data = new int[len];
-
-                string builtHex = string.Empty;
-                using (Stream S = File.OpenRead(openFileDialog1.FileName))
-                {
-                    for (int i = 0; i < 10; i++)
-                    {
-                        data[i] = S.ReadByte();
-                        builtHex += data[i].ToString("X2") + " ";
-
-                        /*
-                        if (ImageTypes.ContainsKey(builtHex))
-                        {
-                            string 真實副檔名 = ImageTypes[builtHex];
-                            break;
-                        }
-                        */
-                    }
-                    richTextBox1.Text += "data : " + builtHex + "\n";
-                    if ((data[0] == 0x89) && (data[1] == 'P') && (data[2] == 'N') && (data[3] == 'G'))
-                    {
-                        richTextBox1.Text += "PNG 檔案\n";
-                    }
-                    else if ((data[6] == 'J') && (data[7] == 'F') && (data[8] == 'I') && (data[9] == 'F'))
-                    {
-                        richTextBox1.Text += "JPG 檔案\n";
-                    }
-                    else if ((data[0] == 'G') && (data[1] == 'I') && (data[2] == 'F') && (data[9] == '8') && (data[9] == '9'))
-                    {
-                        richTextBox1.Text += "GIF 檔案\n";
-                    }
-                    else if ((data[0] == 'B') && (data[1] == 'M'))
-                    {
-                        richTextBox1.Text += "BMP 檔案\n";
-                    }
-                    else if ((data[0] == 0xFF) && (data[1] == 0xFE))
-                    {
-                        richTextBox1.Text += " 純文字Unicode 檔案\n";
-                    }
-                    else if ((data[0] == 'I') && (data[1] == 'D') && (data[2] == '3'))
-                    {
-                        richTextBox1.Text += "MP3 檔案\n";
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "其他 檔案\n";
-                    }
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //計算字數
-            string[] words = {
-                "Alabama",
-                "Alaska",
-                "American Samoa",
-                "Arizona",
-                "Arkansas",
-                "California",
-                "Colorado",
-                "Connecticut",
-                "Delaware",
-                "District of Columbia",
-                "Florida",
-                "Georgia",
-                "Guam",
-                "Hawaii",
-                "Idaho",
-                "Illinois",
-                "Indiana",
-                "Iowa",
-                "Kansas",
-                "Kentucky",
-                "Louisiana",
-                "Maine",
-                "Maryland",
-                "Massachusetts",
-                "Michigan",
-                "Minnesota",
-                "Mississippi",
-                "Missouri",
-                "Montana",
-                "Nebraska",
-                "Nevada",
-                "New Hampshire",
-                "New Jersey",
-                "New Mexico",
-                "New York",
-                "North Carolina",
-                "North Dakota",
-                "Northern Marianas Islands    ",
-                "Ohio",
-                "Oklahoma",
-                "Oregon",
-                "Pennsylvania",
-                "Puerto Rico",
-                "Rhode Island",
-                "South Carolina",
-                "South Dakota",
-                "Tennessee",
-                "Texas",
-                "Utah",
-                "Vermont",
-                "Virginia ",
-                "Virgin Islands ",
-                "Washington",
-                "West Virginia",
-                "Wisconsin",
-                "Wyoming"
-            };
-
-            // Get a list holding each word's unique letter count and name.
-            var count_query =
-                from string word in words
-                orderby word.ToCharArray().Distinct().Count()
-                select word.ToCharArray().Distinct().Count() + ", " + word;
-            //listView1.DataSource = count_query.ToArray();
-
-            richTextBox1.Text += count_query.ToArray().Length.ToString() + "\n";
-
-            int len = count_query.ToArray().Length;
-            for (int i = 0; i < len; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + (count_query.ToArray())[i].ToString() + "\n";
-
-
-            }
 
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //分析文章
-            string text =
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis blandit mauris, a sagittis libero. Proin a posuere justo, vel scelerisque risus.\n" +
-"Sed condimentum suscipit est in sagittis. Maecenas ac nulla in metus gravida feugiat nec vel odio. Aenean vulputate urna vel gravida rhoncus.\n" +
-"Etiam vel lacinia urna, non ultrices arcu. Curabitur eget neque nec felis facilisis lacinia. Donec sit amet neque vel ligula scelerisque cursus et quis nisl.\n" +
-"Proin convallis metus elit, eu condimentum nunc ultrices vel. Maecenas elementum orci tellus, quis pretium risus fringilla non.\n" +
-"Quisque eget diam a erat vestibulum cursus ut nec nisi. Duis non velit quis augue mattis consectetur pharetra sed dolor.\n" +
-"Pellentesque luctus tempor ornare.\n" +
-"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin pellentesque dolor in leo porttitor, dignissim sollicitudin nulla bibendum.\n" +
-"Nullam sit amet faucibus nunc, nec laoreet orci. Etiam nec rutrum mauris. Integer sapien felis, placerat id orci eu, fermentum porta dui.\n" +
-"Nam in pharetra orci, sed sollicitudin urna. Suspendisse sit amet tellus sagittis, lobortis ante quis, consectetur est.\n" +
-"Aliquam tempor ligula in augue facilisis, vehicula fermentum sem elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.";
-
-            // Split the text into paragraphs.
-            string[] paragraphs = text.Split('\n');
-
-            int i = 1;
-            // Draw each paragraph.
-            foreach (string paragraph in paragraphs)
-            {
-                richTextBox1.Text += "第 " + i.ToString() + " 行\t" + paragraph + "\n";
-                // Break the text into words.
-                string[] words = paragraph.Split(' ');
-                foreach (string word in words)
-                {
-                    richTextBox1.Text += word + "_";
-
-                }
-                richTextBox1.Text += "\n";
-
-
-                i++;
-            }
-
 
         }
 
@@ -563,7 +288,7 @@ namespace vcs_test_all_99_tmp1
 
         private void button18_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "僅顯示上下午幾點幾分幾秒:\t" + DateTime.Now.ToString("T") + "\n";
+
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -638,52 +363,10 @@ namespace vcs_test_all_99_tmp1
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //特殊的字串解碼
-
-            /*三組字串
-            =?big5?B?W01WUF0gp96zTrjqt70gZnJvbSBNVlAgcHJpdmF0ZSBuZXdzZ3JvdXA=?=
-            =?gb2312?B?S0BNUyDpX7Bs7ZjQ8g==?=
-            =?utf-8?b?N+aciOS7veaVsOaNruW6k+W6lOeUqOeoi+W6j+W8gOWPkeS6uuWRmOaWsOmXu+W/q+iurw==?=
-            */
-            string str1 = "W01WUF0gp96zTrjqt70gZnJvbSBNVlAgcHJpdmF0ZSBuZXdzZ3JvdXA=";
-            string str2 = "S0BNUyDpX7Bs7ZjQ8g==";
-            string str3 = "N+aciOS7veaVsOaNruW6k+W6lOeUqOeoi+W6j+W8gOWPkeS6uuWRmOaWsOmXu+W/q+iurw==";
-
-            string strParser1 = Encoding.GetEncoding("big5").GetString(Convert.FromBase64String(str1));
-            string strParser2 = Encoding.GetEncoding("gb2312").GetString(Convert.FromBase64String(str2));
-            string strParser3 = Encoding.GetEncoding("utf-8").GetString(Convert.FromBase64String(str3));
-
-            richTextBox1.Text += "strParser1 = " + strParser1 + "\n";
-            richTextBox1.Text += "strParser2 = " + strParser2 + "\n";
-            richTextBox1.Text += "strParser3 = " + strParser3 + "\n";
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            string str1 = "20091014223600";
-            IFormatProvider ifp = new CultureInfo("zh-TW", true);
-            DateTime dt1 = DateTime.ParseExact(str1, "yyyyMMddHHmmss", ifp);
-
-            richTextBox1.Text += "原字串:\t" + str1 + "\n";
-            richTextBox1.Text += "解讀後:\t" + dt1.ToString() + "\n";
-            //MessageBox.Show(dt1.ToString());
-
-
-            string str2 = "20091014223600";
-            DateTime dt2;
-            DateTime dtNow = DateTime.Now;
-            richTextBox1.Text += "原字串:\t" + str2 + "\n";
-            //IFormatProvider ifp = new CultureInfo("zh-TW", true);
-            if (DateTime.TryParseExact(str2, "yyyyMMddHHmmss", ifp, DateTimeStyles.None, out dt2))
-            {
-                //MessageBox.Show(dt2.ToString());
-                richTextBox1.Text += "解讀後1:\t" + dt2.ToString() + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "解讀後2:\t" + dtNow.ToString() + "\n";
-                //MessageBox.Show(dtNow.ToString());
-            }
 
         }
 
@@ -704,18 +387,5 @@ namespace vcs_test_all_99_tmp1
         {
 
         }
-
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            //表單的背景圖案   // Tile the image.
-            using (TextureBrush brush = new TextureBrush(new Bitmap(@"C:\______test_files\vcs_reference2\bg1.png")))
-            {
-                e.Graphics.FillRectangle(brush, this.ClientRectangle);
-            }
-
-        }
-
-
-
     }
 }

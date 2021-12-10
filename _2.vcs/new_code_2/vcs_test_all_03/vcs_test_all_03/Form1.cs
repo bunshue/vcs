@@ -52,7 +52,6 @@ namespace vcs_test_all_03
             label3.Text = "";
             label4.Text = "";
             label5.Text = "";
-            Microsoft.Win32.SystemEvents.TimeChanged += new EventHandler(SystemEvents_TimeChanged); //for 設定系統時間
         }
 
         void show_item_location()
@@ -207,42 +206,8 @@ namespace vcs_test_all_03
 
         }
 
-        public string getstr(string strUrl)
-        {
-            string d = @"<title>(?<title>[^<]*)</title>";
-            return Regex.Match(strUrl, d).ToString();
-        }
-
-        public bool ValidateDate1(string input)
-        {
-            return Regex.IsMatch(input, "http(s)?://([\\w-]+\\.)+[\\w-]+(//[\\w- .//?%&=]*)?");
-        }
-
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "提取網頁標題\n";
-            string url = "https://www.youtube.com/watch?v=ViyVmAU0zgo";
-
-            if (ValidateDate1(url))
-            {
-                string strl;//儲存編碼
-                WebRequest wb = WebRequest.Create(url);//請求資源
-                WebResponse webRed = wb.GetResponse();//響應請求
-                Stream redweb = webRed.GetResponseStream();//傳回數據存入流中
-                StreamReader sr = new StreamReader(redweb, Encoding.UTF8);//從流中讀出數據
-                StringBuilder sb = new StringBuilder();//可變字符
-                while ((strl = sr.ReadLine()) != null)
-                {
-                    sb.Append(strl);//讀出數據存入可變字符中
-                }
-                string result = getstr(sb.ToString());//呼叫正則表達式方法讀出標題
-                richTextBox1.Text += "網頁標題:\t" + result + "\n";
-            }
-            else
-            {
-                MessageBox.Show("請輸入正確的網址");
-                return;
-            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -263,49 +228,10 @@ namespace vcs_test_all_03
 
         private void button11_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("確定要休眠計算機嗎？") == DialogResult.OK)
-            {
-                //偽執行
-                //Application.SetSuspendState(PowerState.Hibernate, true, true);
-            }
-
-        }
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Ansi)]
-        public extern static bool SetSystemTime(ref SYSTEMTIME time);
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SYSTEMTIME
-        {
-            public short Year;
-            public short Month;
-            public short DayOfWeek;
-            public short Day;
-            public short Hour;
-            public short Minute;
-            public short Second;
-            public short Miliseconds;
-        }
-
-        private void SystemEvents_TimeChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("系統日期修改成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //設定系統時間 為 12:34:56
-            int setup_hour = 12;
-            int setup_minute = 34;
-            int setup_second = 56;
-            SYSTEMTIME t = new SYSTEMTIME();
-            t.Year = (short)DateTime.Now.Year;
-            t.Month = (short)DateTime.Now.Month;
-            t.Day = (short)DateTime.Now.Day;
-            t.Hour = (short)(setup_hour - 8);//這個函數使用的是0時區的時間,例如，要設12點，則為12-8   
-            t.Minute = (short)setup_minute;
-            t.Second = (short)setup_second;
-            //偽執行
-            //bool v = SetSystemTime(ref t);
         }
 
         private void timer1_Tick(object sender, EventArgs e)

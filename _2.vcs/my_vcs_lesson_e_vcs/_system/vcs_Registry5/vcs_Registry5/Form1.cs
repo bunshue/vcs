@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Diagnostics;   //for Process
+
 //C#實現在注冊表中保存信息
 //最近做的項目需要在注冊表中記錄一些用戶設置，方便在程序下次啟動時讀取設置，應用上次用戶保存的設置，挺簡單的。
 
@@ -239,7 +241,69 @@ namespace vcs_Registry5
             return RegT;
         }
 
+        //獲取程序安裝目錄 ST
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //獲取程序安裝目錄
+            //var notepadPath = GetPath("Notepad++");
+            var notepadPath = GetPath("Microsoft");
+            richTextBox1.Text += "程序名稱：Notepad++ \n 安裝目錄:" + notepadPath + "\n";
 
+            GetAllProcess2();
+        }
+
+
+        /// <summary>
+        /// 獲取單個程序的執行目錄
+        /// </summary>
+        /// <param name="processName"></param>
+        /// <returns></returns>
+        public static string GetPath(string processName)
+        {
+            var process = Process.GetProcessesByName(processName);
+
+            var path = string.Empty;//程序路徑
+            foreach (var p in process.Where(p => p.MainWindowHandle != IntPtr.Zero))
+            {
+                path = p.MainModule.FileName;
+                break;
+            }
+            return path;
+        }
+
+
+        /// <summary>
+        /// 獲取所有程序的安裝目錄
+        /// </summary>
+        public void GetAllProcess2()
+        {
+            const string Uninstall = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+            using (var registryKey = Registry.LocalMachine.OpenSubKey(Uninstall, false))
+            {
+                if (registryKey != null)//判斷對象存在
+                {
+                    foreach (var keyName in registryKey.GetSubKeyNames())//遍歷子項名稱的字符串數組
+                    {
+                        using (var key = registryKey.OpenSubKey(keyName, false))//遍歷子項節點
+                        {
+                            if (key != null)
+                            {
+                                var softwareName = key.GetValue("DisplayName", "").ToString();//獲取軟件名
+                                var installLocation = key.GetValue("InstallLocation", "").ToString();//獲取安裝路徑
+
+                                if (!string.IsNullOrEmpty(installLocation))
+                                {
+                                    richTextBox1.Text += softwareName + "\t" + installLocation + "\n";
+                                    Console.WriteLine(softwareName);
+                                    Console.WriteLine(installLocation);
+                                    Console.WriteLine();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public class RegistryStorage

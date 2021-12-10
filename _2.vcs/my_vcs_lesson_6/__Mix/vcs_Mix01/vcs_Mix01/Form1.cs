@@ -15,6 +15,9 @@ using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
 
+using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/加入參考/.Net/System.Web
+using System.Globalization; //for CultureInfo
+
 namespace vcs_Mix01
 {
     public partial class Form1 : Form
@@ -27,6 +30,7 @@ namespace vcs_Mix01
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+            toolTip1.SetToolTip(button6, "顯示提示訊息");
         }
 
         void show_item_location()
@@ -75,10 +79,33 @@ namespace vcs_Mix01
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.Text = "Mouse Down：" + e.X + " : " + e.Y;
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.Text = "目前滑鼠位置：" + e.X + " : " + e.Y;
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.Text = "Mouse Up：" + e.X + " : " + e.Y;
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            //表單的背景圖案   // Tile the image.
+            using (TextureBrush brush = new TextureBrush(new Bitmap(@"C:\______test_files\vcs_reference2\bg1.png")))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
         }
 
         void show_button_text(object sender)
@@ -89,18 +116,151 @@ namespace vcs_Mix01
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            
+            string str1 = "https://ja.wikipedia.org/wiki/和 製 英 語";
+
+            richTextBox1.Text += "原字串(a)\t\t" + str1 + "\n";
+            richTextBox1.Text += "原字串空白轉nbsp(b)\t" + str1.SpaceToNbsp() + "\n";
+
+            string str2 = str1.UrlEncode();
+
+            richTextBox1.Text += "原字串特殊符號編碼(c)\t" + str2 + "\n";
+
+            richTextBox1.Text += "(c)再解碼\t\t" + str2.UrlDecode() + "\n";
+
+            richTextBox1.Text += "(b)目前無法解碼\n";
+            richTextBox1.Text += "\n";
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //偵測原始檔案類型
+            openFileDialog1.Title = "測試讀取一個純文字檔";
+            //openFileDialog1.ShowHelp = true;
+            openFileDialog1.FileName = "";              //預設開啟的檔名
+            //openFileDialog1.DefaultExt = "*.txt";
+            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
+            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
+                richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
+
+                string builtHex = string.Empty;
+                using (Stream S = File.OpenRead(openFileDialog1.FileName))
+                {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        builtHex += S.ReadByte().ToString("X2");
+
+                        /*
+                        if (ImageTypes.ContainsKey(builtHex))
+                        {
+                            string 真實副檔名 = ImageTypes[builtHex];
+                            break;
+                        }
+                        */
+                    }
+                    richTextBox1.Text += "get " + builtHex + "\n";
+
+
+                }
+
+                //richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
+
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //計算字數
+            string[] words = {
+                "Alabama",
+                "Alaska",
+                "American Samoa",
+                "Arizona",
+                "Arkansas",
+                "California",
+                "Colorado",
+                "Connecticut",
+                "Delaware",
+                "District of Columbia",
+                "Florida",
+                "Georgia",
+                "Guam",
+                "Hawaii",
+                "Idaho",
+                "Illinois",
+                "Indiana",
+                "Iowa",
+                "Kansas",
+                "Kentucky",
+                "Louisiana",
+                "Maine",
+                "Maryland",
+                "Massachusetts",
+                "Michigan",
+                "Minnesota",
+                "Mississippi",
+                "Missouri",
+                "Montana",
+                "Nebraska",
+                "Nevada",
+                "New Hampshire",
+                "New Jersey",
+                "New Mexico",
+                "New York",
+                "North Carolina",
+                "North Dakota",
+                "Northern Marianas Islands    ",
+                "Ohio",
+                "Oklahoma",
+                "Oregon",
+                "Pennsylvania",
+                "Puerto Rico",
+                "Rhode Island",
+                "South Carolina",
+                "South Dakota",
+                "Tennessee",
+                "Texas",
+                "Utah",
+                "Vermont",
+                "Virginia ",
+                "Virgin Islands ",
+                "Washington",
+                "West Virginia",
+                "Wisconsin",
+                "Wyoming"
+            };
+
+            // Get a list holding each word's unique letter count and name.
+            var count_query =
+                from string word in words
+                orderby word.ToCharArray().Distinct().Count()
+                select word.ToCharArray().Distinct().Count() + ", " + word;
+            //listView1.DataSource = count_query.ToArray();
+
+            richTextBox1.Text += count_query.ToArray().Length.ToString() + "\n";
+
+            int len = count_query.ToArray().Length;
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + (count_query.ToArray())[i].ToString() + "\n";
+
+
+            }
+
 
         }
 
@@ -108,37 +268,192 @@ namespace vcs_Mix01
         {
             show_button_text(sender);
 
+            //分析文章
+            string text =
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis blandit mauris, a sagittis libero. Proin a posuere justo, vel scelerisque risus.\n" +
+"Sed condimentum suscipit est in sagittis. Maecenas ac nulla in metus gravida feugiat nec vel odio. Aenean vulputate urna vel gravida rhoncus.\n" +
+"Etiam vel lacinia urna, non ultrices arcu. Curabitur eget neque nec felis facilisis lacinia. Donec sit amet neque vel ligula scelerisque cursus et quis nisl.\n" +
+"Proin convallis metus elit, eu condimentum nunc ultrices vel. Maecenas elementum orci tellus, quis pretium risus fringilla non.\n" +
+"Quisque eget diam a erat vestibulum cursus ut nec nisi. Duis non velit quis augue mattis consectetur pharetra sed dolor.\n" +
+"Pellentesque luctus tempor ornare.\n" +
+"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin pellentesque dolor in leo porttitor, dignissim sollicitudin nulla bibendum.\n" +
+"Nullam sit amet faucibus nunc, nec laoreet orci. Etiam nec rutrum mauris. Integer sapien felis, placerat id orci eu, fermentum porta dui.\n" +
+"Nam in pharetra orci, sed sollicitudin urna. Suspendisse sit amet tellus sagittis, lobortis ante quis, consectetur est.\n" +
+"Aliquam tempor ligula in augue facilisis, vehicula fermentum sem elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.";
 
+            // Split the text into paragraphs.
+            string[] paragraphs = text.Split('\n');
+
+            int i = 1;
+            // Draw each paragraph.
+            foreach (string paragraph in paragraphs)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 行\t" + paragraph + "\n";
+                // Break the text into words.
+                string[] words = paragraph.Split(' ');
+                foreach (string word in words)
+                {
+                    richTextBox1.Text += word + "_";
+
+                }
+                richTextBox1.Text += "\n";
+
+                i++;
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
+            richTextBox1.Text += "僅顯示上下午幾點幾分幾秒:\t" + DateTime.Now.ToString("T") + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //DateTime Parse
+            string str1 = "20091014223600";
+            IFormatProvider ifp = new CultureInfo("zh-TW", true);
+            DateTime dt1 = DateTime.ParseExact(str1, "yyyyMMddHHmmss", ifp);
+
+            richTextBox1.Text += "原字串:\t" + str1 + "\n";
+            richTextBox1.Text += "解讀後:\t" + dt1.ToString() + "\n";
+            //MessageBox.Show(dt1.ToString());
+
+
+            string str2 = "20091014223600";
+            DateTime dt2;
+            DateTime dtNow = DateTime.Now;
+            richTextBox1.Text += "原字串:\t" + str2 + "\n";
+            //IFormatProvider ifp = new CultureInfo("zh-TW", true);
+            if (DateTime.TryParseExact(str2, "yyyyMMddHHmmss", ifp, DateTimeStyles.None, out dt2))
+            {
+                //MessageBox.Show(dt2.ToString());
+                richTextBox1.Text += "解讀後1:\t" + dt2.ToString() + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "解讀後2:\t" + dtNow.ToString() + "\n";
+                //MessageBox.Show(dtNow.ToString());
+            }
+
 
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
+            //測試toolTip
+            richTextBox1.Text += "加入toolTip物件\n";
+            richTextBox1.Text += "在Form1()的InitializeComponent()後加入訊息\n";
         }
 
+        //根據文件頭判斷上傳的文件類型 ST
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
+            //根據文件頭判斷上傳的文件類型
+            string filename = @"C:\______test_files\doraemon.jpg";
+            string result = getFileType(filename);
+            richTextBox1.Text += "File Type : " + result + "\n";
         }
+
+        /// <summary>
+        /// 根據文件頭判斷上傳的文件類型
+        /// </summary>
+        /// <param name="filePath">filePath是文件的完整路徑 </param>
+        /// <returns>返回true或false</returns>
+        public string getFileType(string filePath)
+        {
+            try
+            {
+                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                BinaryReader reader = new BinaryReader(fs);
+                string fileClass;
+                byte buffer;
+                buffer = reader.ReadByte();
+                fileClass = buffer.ToString();
+                buffer = reader.ReadByte();
+                fileClass += buffer.ToString();
+                reader.Close();
+                fs.Close();
+
+                //richTextBox1.Text += "fileClass == " + fileClass + "\t";
+
+                if (fileClass == "255216")
+                    return "jpg";
+                else if (fileClass == "7173")
+                    return "gif";
+                else if (fileClass == "13780")
+                    return "png";
+                else if (fileClass == "6677")
+                    return "bmp";
+                else if (fileClass == "80114")
+                    return "csv";
+                else if (fileClass == "6063")
+                    return "xml";
+                else if (fileClass == "3780")
+                    return "pdf";
+                else if (fileClass == "4948")
+                    return "txt";
+                else if (fileClass == "8075")
+                    return "zip";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else
+                {
+                    return fileClass + "\tunknown";
+
+                }
+                // 7790是exe,8297是rar 
+            }
+            catch
+            {
+                return "unknown";
+            }
+        }
+        //根據文件頭判斷上傳的文件類型 SP
 
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //創建唯一的訂單號, 考慮時間因素
+            //C#創建唯一的訂單號, 考慮時間因素
+            for (int i = 0; i < 10; i++)
+            {
+                string str = string.Format("{0}{1}", DateTime.Now.ToString("yyyyMMddHHmmss"), GetUniqueKey());
+                richTextBox1.Text += str + "\n";
+            }
+        }
 
+        //使用RNGCryptoServiceProvider類創建唯一的最多8位數字符串。
+        private static string GetUniqueKey()
+        {
+            int maxSize = 8;
+            int minSize = 5;
+            char[] chars = new char[62];
+            string a;
+            a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            chars = a.ToCharArray();
+            int size = maxSize;
+            byte[] data = new byte[1];
+            RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider();
+            crypto.GetNonZeroBytes(data);
+            size = maxSize;
+            data = new byte[size];
+            crypto.GetNonZeroBytes(data);
+            StringBuilder result = new StringBuilder(size);
+            foreach (byte b in data)
+            {
+                result.Append(chars[b % (chars.Length - 1)]);
+            }
+            return result.ToString();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -150,32 +465,343 @@ namespace vcs_Mix01
         private void button10_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //特殊的字串解碼
 
+            /*三組字串
+            =?big5?B?W01WUF0gp96zTrjqt70gZnJvbSBNVlAgcHJpdmF0ZSBuZXdzZ3JvdXA=?=
+            =?gb2312?B?S0BNUyDpX7Bs7ZjQ8g==?=
+            =?utf-8?b?N+aciOS7veaVsOaNruW6k+W6lOeUqOeoi+W6j+W8gOWPkeS6uuWRmOaWsOmXu+W/q+iurw==?=
+            */
+            string str1 = "W01WUF0gp96zTrjqt70gZnJvbSBNVlAgcHJpdmF0ZSBuZXdzZ3JvdXA=";
+            string str2 = "S0BNUyDpX7Bs7ZjQ8g==";
+            string str3 = "N+aciOS7veaVsOaNruW6k+W6lOeUqOeoi+W6j+W8gOWPkeS6uuWRmOaWsOmXu+W/q+iurw==";
+
+            string strParser1 = Encoding.GetEncoding("big5").GetString(Convert.FromBase64String(str1));
+            string strParser2 = Encoding.GetEncoding("gb2312").GetString(Convert.FromBase64String(str2));
+            string strParser3 = Encoding.GetEncoding("utf-8").GetString(Convert.FromBase64String(str3));
+
+            richTextBox1.Text += "strParser1 = " + strParser1 + "\n";
+            richTextBox1.Text += "strParser2 = " + strParser2 + "\n";
+            richTextBox1.Text += "strParser3 = " + strParser3 + "\n";
         }
 
+        //偵測原始檔案類型
+        //應改用binary read
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            openFileDialog1.Title = "偵測原始檔案類型";
+            //openFileDialog1.ShowHelp = true;
+            openFileDialog1.FileName = "";              //預設開啟的檔名
+            //openFileDialog1.DefaultExt = "*.txt";
+            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
+            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
 
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "檔案 : " + openFileDialog1.FileName + "\n";
+                //richTextBox1.Text += "長度 : " + openFileDialog1.FileName.Length.ToString() + "\n";
+
+                int len = openFileDialog1.FileName.Length;
+
+                if (len < 10)
+                {
+                    richTextBox1.Text += "檔案太小, 忽略";
+                    return;
+                }
+
+
+                len = 10;
+                int[] data = new int[len];
+
+                string builtHex = string.Empty;
+                using (Stream S = File.OpenRead(openFileDialog1.FileName))
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        data[i] = S.ReadByte();
+                        builtHex += data[i].ToString("X2") + " ";
+
+                        /*
+                        if (ImageTypes.ContainsKey(builtHex))
+                        {
+                            string 真實副檔名 = ImageTypes[builtHex];
+                            break;
+                        }
+                        */
+                    }
+                    richTextBox1.Text += "data : " + builtHex + "\n";
+                    if ((data[0] == 0x89) && (data[1] == 'P') && (data[2] == 'N') && (data[3] == 'G'))
+                    {
+                        richTextBox1.Text += "PNG 檔案\n";
+                    }
+                    else if ((data[6] == 'J') && (data[7] == 'F') && (data[8] == 'I') && (data[9] == 'F'))
+                    {
+                        richTextBox1.Text += "JPG 檔案\n";
+                    }
+                    else if ((data[0] == 'G') && (data[1] == 'I') && (data[2] == 'F') && (data[9] == '8') && (data[9] == '9'))
+                    {
+                        richTextBox1.Text += "GIF 檔案\n";
+                    }
+                    else if ((data[0] == 'B') && (data[1] == 'M'))
+                    {
+                        richTextBox1.Text += "BMP 檔案\n";
+                    }
+                    else if ((data[0] == 0xFF) && (data[1] == 0xFE))
+                    {
+                        richTextBox1.Text += " 純文字Unicode 檔案\n";
+                    }
+                    else if ((data[0] == 'I') && (data[1] == 'D') && (data[2] == '3'))
+                    {
+                        richTextBox1.Text += "MP3 檔案\n";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "其他 檔案\n";
+                    }
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
+            if (MessageBox.Show("確定要休眠計算機嗎？") == DialogResult.OK)
+            {
+                //偽執行
+                //Application.SetSuspendState(PowerState.Hibernate, true, true);
+            }
         }
 
+        //數字大寫顯示 ST
         private void button13_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
+            //數字大寫顯示
+            int money = 123456;
+            string result = MoneyToChinese(money.ToString());
+            richTextBox1.Text += result + "\n";
         }
 
+        public static string MoneyToChinese(string strAmount)
+        {
+            string functionReturnValue = null;
+            bool IsNegative = false; // 是否是負數
+            if (strAmount.Trim().Substring(0, 1) == "-")
+            {
+                // 是負數則先轉為正數
+                strAmount = strAmount.Trim().Remove(0, 1);
+                IsNegative = true;
+            }
+            string strLower = null;
+            string strUpart = null;
+            string strUpper = null;
+            int iTemp = 0;
+            // 保留兩位小數123.489→123.49　　123.4→123.4
+            strAmount = Math.Round(double.Parse(strAmount), 2).ToString();
+            if (strAmount.IndexOf(".") > 0)
+            {
+                if (strAmount.IndexOf(".") == strAmount.Length - 2)
+                {
+                    strAmount = strAmount + "0";
+                }
+            }
+            else
+            {
+                strAmount = strAmount + ".00";
+            }
+
+            strLower = strAmount;
+            iTemp = 1;
+            strUpper = "";
+            while (iTemp <= strLower.Length)
+            {
+                switch (strLower.Substring(strLower.Length - iTemp, 1))
+                {
+                    case ".":
+                        strUpart = "圓";
+                        break;
+                    case "0":
+                        strUpart = "零";
+                        break;
+                    case "1":
+                        strUpart = "壹";
+                        break;
+                    case "2":
+                        strUpart = "貳";
+                        break;
+                    case "3":
+                        strUpart = "三";
+                        break;
+                    case "4":
+                        strUpart = "肆";
+                        break;
+                    case "5":
+                        strUpart = "伍";
+                        break;
+                    case "6":
+                        strUpart = "陸";
+                        break;
+                    case "7":
+                        strUpart = "柒";
+                        break;
+                    case "8":
+                        strUpart = "捌";
+                        break;
+                    case "9":
+                        strUpart = "玖";
+                        break;
+                }
+
+                switch (iTemp)
+                {
+                    case 1:
+                        strUpart = strUpart + "分";
+                        break;
+                    case 2:
+                        strUpart = strUpart + "角";
+                        break;
+                    case 3:
+                        strUpart = strUpart + "";
+                        break;
+                    case 4:
+                        strUpart = strUpart + "";
+                        break;
+                    case 5:
+                        strUpart = strUpart + "拾";
+                        break;
+                    case 6:
+                        strUpart = strUpart + "佰";
+                        break;
+                    case 7:
+                        strUpart = strUpart + "仟";
+                        break;
+                    case 8:
+                        strUpart = strUpart + "萬";
+                        break;
+                    case 9:
+                        strUpart = strUpart + "拾";
+                        break;
+                    case 10:
+                        strUpart = strUpart + "佰";
+                        break;
+                    case 11:
+                        strUpart = strUpart + "仟";
+                        break;
+                    case 12:
+                        strUpart = strUpart + "億";
+                        break;
+                    case 13:
+                        strUpart = strUpart + "拾";
+                        break;
+                    case 14:
+                        strUpart = strUpart + "佰";
+                        break;
+                    case 15:
+                        strUpart = strUpart + "仟";
+                        break;
+                    case 16:
+                        strUpart = strUpart + "萬";
+                        break;
+                    default:
+                        strUpart = strUpart + "";
+                        break;
+                }
+                strUpper = strUpart + strUpper;
+                iTemp = iTemp + 1;
+            }
+
+            strUpper = strUpper.Replace("零拾", "零");
+            strUpper = strUpper.Replace("零佰", "零");
+            strUpper = strUpper.Replace("零仟", "零");
+            strUpper = strUpper.Replace("零零零", "零");
+            strUpper = strUpper.Replace("零零", "零");
+            strUpper = strUpper.Replace("零角零分", "整");
+            strUpper = strUpper.Replace("零分", "整");
+            strUpper = strUpper.Replace("零角", "零");
+            strUpper = strUpper.Replace("零億零萬零圓", "億圓");
+            strUpper = strUpper.Replace("億零萬零圓", "億圓");
+            strUpper = strUpper.Replace("零億零萬", "億");
+            strUpper = strUpper.Replace("零萬零圓", "萬圓");
+            strUpper = strUpper.Replace("零億", "億");
+            strUpper = strUpper.Replace("零萬", "萬");
+            strUpper = strUpper.Replace("零圓", "圓");
+            strUpper = strUpper.Replace("零零", "零");
+
+            // 對壹圓以下的金額的處理
+
+            if (strUpper.Substring(0, 1) == "圓")
+            {
+                strUpper = strUpper.Substring(1, strUpper.Length - 1);
+            }
+
+            if (strUpper.Substring(0, 1) == "零")
+            {
+                strUpper = strUpper.Substring(1, strUpper.Length - 1);
+            }
+
+            if (strUpper.Substring(0, 1) == "角")
+            {
+                strUpper = strUpper.Substring(1, strUpper.Length - 1);
+            }
+
+            if (strUpper.Substring(0, 1) == "分")
+            {
+                strUpper = strUpper.Substring(1, strUpper.Length - 1);
+            }
+
+            if (strUpper.Substring(0, 1) == "整")
+            {
+                strUpper = "零圓整";
+            }
+
+            functionReturnValue = strUpper;
+
+            if (IsNegative == true)
+            {
+                return "負" + functionReturnValue;
+            }
+            else
+            {
+                return functionReturnValue;
+            }
+        }
+        //數字大寫顯示 SP
+
+        //由日期找出星座 ST
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
+            //由日期找出星座
+            int month = 3;
+            int day = 11;
+            string result = getAstro(month, day);
+            richTextBox1.Text += result + "\n";
         }
+
+        private static String getAstro(int month, int day)
+        {
+            String[] starArr = { "魔羯座", "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處女座", "天秤座", "天蠍座", "射手座" };
+            int[] DayArr = { 22, 20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22 };  // 兩個星座分割日
+            int index = month;
+            // 所查詢日期在分割日之前，索引-1，否則不變
+            if (day < DayArr[month - 1])
+            {
+                index = index - 1;
+            }
+            index = index % 12;
+            // 返回索引指向的星座string
+            return starArr[index];
+        }
+        //由日期找出星座 SP
 
         private void button15_Click(object sender, EventArgs e)
         {
@@ -207,10 +833,28 @@ namespace vcs_Mix01
 
         }
 
+        //C#兩種方法判斷字符是否為漢字
+        //一、用漢字的 UNICODE 編碼范圍判斷
+        //漢字的 UNICODE 編碼范圍是4e00-9fbb，
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //判斷是不是漢字
+            string text = "判斷是不是漢字，ABC,keleyi.com";
+            char[] c = text.ToCharArray();
 
+            for (int i = 0; i < c.Length; i++)
+            {
+                richTextBox1.Text += c[i] + "\t";
+                if (c[i] >= 0x4e00 && c[i] <= 0x9fbb)
+                {
+                    richTextBox1.Text += "是漢字\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "不是漢字\n";
+                }
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -237,11 +881,131 @@ namespace vcs_Mix01
 
         }
 
+        //GPS定位，经纬度附近地点查询–C#实现方法 ST
+
+
+        /// <summary>
+        /// 经纬度坐标
+        /// </summary>
+
+        public class Degree
+        {
+            public Degree(double x, double y)
+            {
+                X = x;
+                Y = y;
+            }
+            private double x;
+
+            public double X
+            {
+                get { return x; }
+                set { x = value; }
+            }
+            private double y;
+
+            public double Y
+            {
+                get { return y; }
+                set { y = value; }
+            }
+        }
+
+
+        public class CoordDispose
+        {
+            private const double EARTH_RADIUS = 6378137.0;//地球半径(米)
+
+            /// <summary>
+            /// 角度数转换为弧度公式
+            /// </summary>
+            /// <param name="d"></param>
+            /// <returns></returns>
+            private static double radians(double d)
+            {
+                return d * Math.PI / 180.0;
+            }
+
+            /// <summary>
+            /// 弧度转换为角度数公式
+            /// </summary>
+            /// <param name="d"></param>
+            /// <returns></returns>
+            private static double degrees(double d)
+            {
+                return d * (180 / Math.PI);
+            }
+
+            /// <summary>
+            /// 计算两个经纬度之间的直接距离
+            /// </summary>
+
+            public static double GetDistance(Degree Degree1, Degree Degree2)
+            {
+                double radLat1 = radians(Degree1.X);
+                double radLat2 = radians(Degree2.X);
+                double a = radLat1 - radLat2;
+                double b = radians(Degree1.Y) - radians(Degree2.Y);
+
+                double s = 2 * Math.Asin(Math.Sqrt(Math.Pow(Math.Sin(a / 2), 2) +
+                 Math.Cos(radLat1) * Math.Cos(radLat2) * Math.Pow(Math.Sin(b / 2), 2)));
+                s = s * EARTH_RADIUS;
+                s = Math.Round(s * 10000) / 10000;
+                return s;
+            }
+
+            /// <summary>
+            /// 计算两个经纬度之间的直接距离(google 算法)
+            /// </summary>
+            public static double GetDistanceGoogle(Degree Degree1, Degree Degree2)
+            {
+                double radLat1 = radians(Degree1.X);
+                double radLng1 = radians(Degree1.Y);
+                double radLat2 = radians(Degree2.X);
+                double radLng2 = radians(Degree2.Y);
+
+                double s = Math.Acos(Math.Cos(radLat1) * Math.Cos(radLat2) * Math.Cos(radLng1 - radLng2) + Math.Sin(radLat1) * Math.Sin(radLat2));
+                s = s * EARTH_RADIUS;
+                s = Math.Round(s * 10000) / 10000;
+                return s;
+            }
+
+            /// <summary>
+            /// 以一个经纬度为中心计算出四个顶点
+            /// </summary>
+            /// <param name="distance">半径(米)</param>
+            /// <returns></returns>
+            public static Degree[] GetDegreeCoordinates(Degree Degree1, double distance)
+            {
+                double dlng = 2 * Math.Asin(Math.Sin(distance / (2 * EARTH_RADIUS)) / Math.Cos(Degree1.X));
+                dlng = degrees(dlng);//一定转换成角度数  原PHP文章这个地方说的不清楚根本不正确 后来lz又查了很多资料终于搞定了
+
+                double dlat = distance / EARTH_RADIUS;
+                dlat = degrees(dlat);//一定转换成角度数
+
+                return new Degree[] { new Degree(Math.Round(Degree1.X + dlat,6), Math.Round(Degree1.Y - dlng,6)),//left-top
+                                  new Degree(Math.Round(Degree1.X - dlat,6), Math.Round(Degree1.Y - dlng,6)),//left-bottom
+                                  new Degree(Math.Round(Degree1.X + dlat,6), Math.Round(Degree1.Y + dlng,6)),//right-top
+                                  new Degree(Math.Round(Degree1.X - dlat,6), Math.Round(Degree1.Y + dlng,6)) //right-bottom
+            };
+
+            }
+        }
+
         private void button25_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //GPS定位，经纬度附近地点查询–C#实现方法
+            //GPS定位，经纬度附近地点查询–C#实现方法
+            double a = CoordDispose.GetDistance(new Degree(116.412007, 39.947545), new Degree(116.412924, 39.947918));//116.416984,39.944959
+            double b = CoordDispose.GetDistanceGoogle(new Degree(116.412007, 39.947545), new Degree(116.412924, 39.947918));
+            Degree[] dd = CoordDispose.GetDegreeCoordinates(new Degree(116.412007, 39.947545), 102);
 
+            richTextBox1.Text += a + " " + b + "\n";
+            richTextBox1.Text += dd[0].X + "," + dd[0].Y + "\n";
+            richTextBox1.Text += dd[3].X + "," + dd[3].Y + "\n";
         }
+        //GPS定位，经纬度附近地点查询–C#实现方法 SP
 
         private void button26_Click(object sender, EventArgs e)
         {
@@ -267,5 +1031,28 @@ namespace vcs_Mix01
 
         }
 
+
     }
+
+    static class StringExtensions
+    {
+        // Extension to replace spaces with &nbsp;
+        public static string SpaceToNbsp(this string s)
+        {
+            return s.Replace(" ", "&nbsp;");
+        }
+
+        // Url encode an ASCII string.
+        public static string UrlEncode(this string s)
+        {
+            return HttpUtility.UrlEncode(s);
+        }
+
+        // Url decode an ASCII string.
+        public static string UrlDecode(this string s)
+        {
+            return HttpUtility.UrlDecode(s);
+        }
+    }
+
 }

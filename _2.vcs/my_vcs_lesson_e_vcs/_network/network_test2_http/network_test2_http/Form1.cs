@@ -8,11 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Net;
+using System.Net.Security;
 using System.Xml;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Management;
+
+using System.Security.Cryptography.X509Certificates;
 
 using Shell32;
 
@@ -28,6 +31,9 @@ namespace network_test2_http
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            //ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+
             show_item_location();
         }
 
@@ -42,7 +48,7 @@ namespace network_test2_http
             x_st = 10;
             y_st = 10;
             dx = 180;
-            dy = 90;
+            dy = 80;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -52,36 +58,44 @@ namespace network_test2_http
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button24.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button25.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button26.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button27.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button28.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button29.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button30.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button31.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -851,32 +865,202 @@ namespace network_test2_http
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //提取網頁標題
+            richTextBox1.Text += "提取網頁標題\n";
+            string url = "https://www.youtube.com/watch?v=ViyVmAU0zgo";
 
+            if (ValidateDate1(url))
+            {
+                string strl;//儲存編碼
+                WebRequest wb = WebRequest.Create(url);//請求資源
+                WebResponse webRed = wb.GetResponse();//響應請求
+                Stream redweb = webRed.GetResponseStream();//傳回數據存入流中
+                StreamReader sr = new StreamReader(redweb, Encoding.UTF8);//從流中讀出數據
+                StringBuilder sb = new StringBuilder();//可變字符
+                while ((strl = sr.ReadLine()) != null)
+                {
+                    sb.Append(strl);//讀出數據存入可變字符中
+                }
+                string result = getstr(sb.ToString());//呼叫正則表達式方法讀出標題
+                richTextBox1.Text += "網頁標題:\t" + result + "\n";
+            }
+            else
+            {
+                MessageBox.Show("請輸入正確的網址");
+                return;
+            }
         }
+
+        public string getstr(string strUrl)
+        {
+            string d = @"<title>(?<title>[^<]*)</title>";
+            return Regex.Match(strUrl, d).ToString();
+        }
+
+        public bool ValidateDate1(string input)
+        {
+            return Regex.IsMatch(input, "http(s)?://([\\w-]+\\.)+[\\w-]+(//[\\w- .//?%&=]*)?");
+        }
+
+        static void download_file()
+        {
+            string url = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Breathe-face-smile.svg/1200px-Breathe-face-smile.svg.png";
+            using (WebClient wc = new WebClient())
+            {
+                wc.DownloadFile(new Uri(url), "Image.png");
+            }
+        }
+
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //下載檔案
+
+            try
+            {
+                download_file();
+            }
+            catch (ExternalException ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
 
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-
+            //在 C# 中使用 DownloadFile() 方法從一個 URL 下載檔案
+            WebClient wc = new WebClient();
+            wc.DownloadFile("https://wiki.linuxfoundation.org/_media/wiki/logo.png", "aaaaa.png");
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
+            //http test 1
+            //語法01
+            //資料來源:https://shunnien.github.io/2017/07/13/Accessing-HTTPS-URL-using-csharp/
+            var url = "https://www.moi.gov.tw/";//台灣內政部網址
+            string results;
+            // 強制認為憑證都是通過的，特殊情況再使用
+            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.AutomaticDecompression = DecompressionMethods.GZip;
+            // 加入憑證驗證
+            //request.ClientCertificates.Add(new System.Security.Cryptography.X509Certificates.X509Certificate());
+            HttpWebResponse resp = (HttpWebResponse)request.GetResponse();
+            using (StreamReader sr = new StreamReader(resp.GetResponseStream()))
+            {
+                results = sr.ReadToEnd();
+                sr.Close();
+            }
+            //Console.WriteLine(results);
+            richTextBox1.Text += results;
+
+            richTextBox1.Text += "\n";
 
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
+            //http test 2
+            //語法02
+            getUrlResponse("https://www.moi.gov.tw/");
 
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
+            //http test 3
+            //語法3
+            string url1 = "https://www.moi.gov.tw/";
+            string result = PostUrl(url1, "key=123");
+            Console.WriteLine(result);
 
+        }
+
+        static private bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
+        {
+            return true;// Always accept
+        }
+
+
+        static private HttpWebResponse getUrlResponse(string url)
+        {
+            HttpWebResponse resp = null;
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+
+            if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
+            {
+                ServicePointManager.ServerCertificateValidationCallback =
+                        new RemoteCertificateValidationCallback(CheckValidationResult);
+            }
+
+            //...
+            resp = (HttpWebResponse)req.GetResponse();
+            using (StreamReader sr = new StreamReader(resp.GetResponseStream()))
+            {
+                String results = sr.ReadToEnd();
+                Console.WriteLine(results);
+                sr.Close();
+            }
+
+            //...
+            return resp;
+        }
+
+        private static string PostUrl(string url, string postData)
+        {
+            HttpWebRequest request = null;
+            if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
+            {
+                request = WebRequest.Create(url) as HttpWebRequest;
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
+                request.ProtocolVersion = HttpVersion.Version11;
+                // 這裡設置了協議類型。
+
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;// SecurityProtocolType.Tls1.2; 
+                //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+
+                request.KeepAlive = false;
+                ServicePointManager.CheckCertificateRevocationList = true;
+                ServicePointManager.DefaultConnectionLimit = 100;
+                ServicePointManager.Expect100Continue = false;
+            }
+            else
+            {
+                request = (HttpWebRequest)WebRequest.Create(url);
+            }
+
+            request.Method = "POST";//使用get方式發送數據
+            request.ContentType = null;
+            request.Referer = null;
+            request.AllowAutoRedirect = true;
+            request.UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
+            request.Accept = "*/*";
+
+            byte[] data = Encoding.UTF8.GetBytes(postData);
+            Stream newStream = request.GetRequestStream();
+            newStream.Write(data, 0, data.Length);
+            newStream.Close();
+
+            //獲取網頁響應結果
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream stream = response.GetResponseStream();
+            //client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            string result = string.Empty;
+            using (StreamReader sr = new StreamReader(stream))
+            {
+                result = sr.ReadToEnd();
+            }
+
+            return result;
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -885,6 +1069,46 @@ namespace network_test2_http
         }
 
         private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
         {
 
         }
@@ -942,4 +1166,17 @@ namespace network_test2_http
             return str;
         }
     }
+
+/*
+public class Protocols
+{
+    public const SecurityProtocolType
+        protocol_SystemDefault = 0,
+        protocol_Ssl3 = (SecurityProtocolType)48,
+        protocol_Tls = (SecurityProtocolType)192,
+        protocol_Tls11 = (SecurityProtocolType)768,
+        protocol_Tls12 = (SecurityProtocolType)3072;
+}
+*/
+
 }

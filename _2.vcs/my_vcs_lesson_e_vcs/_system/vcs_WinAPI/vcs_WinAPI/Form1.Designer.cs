@@ -257,7 +257,9 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(160, 70);
             this.button16.TabIndex = 36;
+            this.button16.Text = "(偽)設定系統時間";
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button17
             // 

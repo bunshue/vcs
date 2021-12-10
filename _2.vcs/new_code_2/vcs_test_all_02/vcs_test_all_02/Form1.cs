@@ -158,7 +158,8 @@ namespace vcs_test_all_02
 
         private void button12_Click(object sender, EventArgs e)
         {
-            FileInfo fi = new FileInfo(@"C:\_git\vcs_test_all_02\vcs_test_all_02\bin\Debug\aaa.txt");
+            string filename = @"C:\______test_files\picture1.jpg";
+            FileInfo fi = new FileInfo(filename);
             //取得檔案資訊
             //fi.CopyTo(@"C:\練習資料夾\TT2.txt");
             //MessageBox.Show("複製成功！");
