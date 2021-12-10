@@ -241,28 +241,9 @@ namespace test2
             Console.WriteLine("x format : {0:x}", 99999);
         }
 
-        static bool IsWebResourceAvailable(string webResourceAddress)
-        {
-            try
-            {
-                HttpWebRequest req = (HttpWebRequest)WebRequest.CreateDefault(new Uri(webResourceAddress));
-                req.Method = "HEAD";
-                req.Timeout = 1000;
-                HttpWebResponse res = (HttpWebResponse)req.GetResponse();
-                return (res.StatusCode == HttpStatusCode.OK);
-            }
-            catch (WebException wex)
-            {
-                System.Diagnostics.Trace.Write(wex.Message); return false;
-            }
-        }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //C#使用HTTP頭檢測網絡資源是否有效
-            string url = @"http://hovertree.com/themes/hvtimages/hwqlogo.png";
-            bool result = IsWebResourceAvailable(url);
-            richTextBox1.Text += result.ToString() + "\n";
 
         }
 
@@ -296,37 +277,6 @@ namespace test2
 
         private void button11_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "AAAA\n";
-            //獲取安裝軟件和路徑，通過注冊表得到
-            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SoftwareMicrosoftWindowsCurrentVersionUninstall", false))
-            {
-                richTextBox1.Text += "BBBB\n";
-                if (key != null)//判斷對象存在
-                {
-                    richTextBox1.Text += "CCCC\n";
-                    foreach (string keyName in key.GetSubKeyNames())//遍歷子項名稱的字符串數組
-                    {
-                        using (RegistryKey key2 = key.OpenSubKey(keyName, false))//遍歷子項節點
-                        {
-                            if (key2 != null)
-                            {
-                                string softwareName = key2.GetValue("DisplayName", "").ToString();//獲取軟件名
-                                string installLocation = key2.GetValue("InstallLocation", "").ToString();//獲取安裝路徑
-                                richTextBox1.Text += "softwareName : " + softwareName + "\n";
-                                richTextBox1.Text += "installLocation : " + installLocation + "\n";
-                                if (!string.IsNullOrEmpty(installLocation))
-                                {
-                                    //將信息添加到ListView控件中
-                                    ListViewItem item = new ListViewItem(softwareName);
-                                    item.SubItems.Add(installLocation);
-                                    //listView1.Items.Add(item);
-                                    richTextBox1.Text += "get item : " + item + "\n";
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -394,40 +344,6 @@ namespace test2
 
         private void button15_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\elephant.jpg";
-
-            System.Drawing.Image.GetThumbnailImageAbort callb = null;
-
-            try
-            {
-                // 保存到指定的文件夾
-                Image MyImage = Image.FromFile(filename);
-                // 保存大圖(原圖)
-                Image NewImage = MyImage.GetThumbnailImage(800, 1000, callb, new System.IntPtr());
-                NewImage.Save("big.jpg");
-                // 保存中圖
-                NewImage = MyImage.GetThumbnailImage(400, 500, callb, new System.IntPtr());
-                NewImage.Save("middle.jpg");
-
-                // 單款衣服的圖片大小
-                NewImage = MyImage.GetThumbnailImage(255, 319, callb, new System.IntPtr());
-                NewImage.Save("SingleImage.jpg");
-
-                // 保存小圖
-                NewImage = MyImage.GetThumbnailImage(115, 144, callb, new System.IntPtr());
-                NewImage.Save("small.jpg");
-                // 保存極小圖
-                NewImage = MyImage.GetThumbnailImage(45, 56, callb, new System.IntPtr());
-                NewImage.Save("dinky.jpg");
-
-                MyImage.Dispose();
-                NewImage.Dispose();
-                // 一定要釋放，否則進程被占用
-            }
-            catch (Exception ex)
-            {
-                //Response.Write(ex.ToString());
-            } 
 
         }
 

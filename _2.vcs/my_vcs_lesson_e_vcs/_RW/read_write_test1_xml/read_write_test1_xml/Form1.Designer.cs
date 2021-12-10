@@ -361,7 +361,9 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(150, 60);
             this.button25.TabIndex = 44;
+            this.button25.Text = "XML Read";
             this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // button26
             // 

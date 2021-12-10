@@ -159,71 +159,11 @@ namespace test3
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //獲取百度首頁生成靜態文件
-            this.DownUrltoFile("http://www.baidu.com", "baidu.htm", "GB2312");
-
-            //DownUrltoFile("http://www.xueit.com/show.aspx?pid=1", "html/news/20091224-001.html", "GB2312");
-            //其中URL：http://www.xueit.com/show.aspx?pid=1 是动态显示文章，html/news/20091224-001.html是表字段htmlFile预先保存的文件名，这样就可以生成静态文件了。
 
         }
-
-        /// 獲取遠程URL並生成文件的代碼：
-        /// <summary>
-        /// 生成網頁文件
-        /// </summary>
-        /// <param name="url">遠程URL</param>
-        /// <param name="filename">生成文件名路徑</param>
-        /// <param name="pagecode">目標URL頁面編碼</param>
-        protected void DownUrltoFile(string url, string filename, string pagecode)
-        {
-            try
-            {
-                //編碼
-                Encoding encode = Encoding.GetEncoding(pagecode);
-                //請求URL
-                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-                //設置超時(10秒)
-                req.Timeout = 10000;
-                //this.NotFolderIsCreate(filename);
-                //獲取Response
-                HttpWebResponse rep = (HttpWebResponse)req.GetResponse();
-                //創建StreamReader與StreamWriter文件流對象
-                StreamReader sr = new StreamReader(rep.GetResponseStream(), encode);
-                StreamWriter sw = new StreamWriter(filename, false, encode);
-                //寫入內容
-                sw.Write(sr.ReadToEnd());
-                //清理當前緩存區，並將緩存寫入文件
-                sw.Flush();
-                //釋放相關對象資源
-                sw.Close();
-                sw.Dispose();
-                sr.Close();
-                sr.Dispose();
-                //Response.Write("生成文件"   filename   "成功");
-            }
-            catch (Exception ex)
-            {
-                //Response.Write("生成文件"   filename   "失敗，原因："   ex.Message);
-            }
-        }
-
-        //以上代碼關鍵知識點，通過HttpWebRequest、HttpWebResponse請求獲取遠程URL數據，之後使用StreamReader、StreamWriter文件流讀寫數據寫入文件，注意還有編碼Encoding。
-
-        /*
-        /// <summary>
-        /// 文件夾不存在則創建
-        /// </summary>
-        /// <param name="filename">文件名所在路徑</param>
-        protected void NotFolderIsCreate(string filename)
-        {
-            string fileAtDir = Server.MapPath(Path.GetDirectoryName(filename));
-            if (!Directory.Exists(fileAtDir))
-                Directory.CreateDirectory(fileAtDir);
-        }
-        */
-
         private void button3_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button4_Click(object sender, EventArgs e)

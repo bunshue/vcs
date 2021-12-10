@@ -1,4 +1,5 @@
 
+
 取得控件
         private void button2_Click(object sender, EventArgs e)
         {
@@ -5253,6 +5254,25 @@ return retVal.ToString("x");
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+        /// <summary>
+        /// 將文字檔內容顯示於所指定的 TextBox
+        /// </summary>
+        /// <param name="p_TextBox">所指定的 TextBox</param>
+        private void ReadTextFile(TextBox p_TextBox)
+        {
+            string filename = @"C:\______test_files\_pic\eula.3081.txt";
+
+            sb = new StringBuilder();
+
+            string[] Txt_All_Lines = System.IO.File.ReadAllLines(filename, Encoding.Default);
+
+            foreach (string Single_Line in Txt_All_Lines)
+            {
+                sb.AppendLine(Single_Line);
+            }
+
+            p_TextBox.Text = sb.ToString();
+        }
 
 
 

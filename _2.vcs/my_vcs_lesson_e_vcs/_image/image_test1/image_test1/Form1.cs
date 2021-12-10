@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Drawing.Imaging;   //for ColorAdjustType
+using System.Drawing.Drawing2D;
 
 namespace image_test1
 {
@@ -50,8 +51,25 @@ namespace image_test1
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+
+            //控件位置
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -597,13 +615,147 @@ namespace image_test1
             img.Dispose();
             g.Dispose();
             bmp.Dispose();
-        }  
+        }
 
- 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += ((Button)sender).Text + "\n";
 
-							
+            string filename = @"C:\______test_files\elephant.jpg";
 
+            System.Drawing.Image.GetThumbnailImageAbort callb = null;
 
+            try
+            {
+                // 保存到指定的文件夾
+                Image MyImage = Image.FromFile(filename);
+                // 保存大圖(原圖)
+                Image NewImage = MyImage.GetThumbnailImage(800, 1000, callb, new System.IntPtr());
+                NewImage.Save("big.jpg");
+                // 保存中圖
+                NewImage = MyImage.GetThumbnailImage(400, 500, callb, new System.IntPtr());
+                NewImage.Save("middle.jpg");
 
+                // 單款衣服的圖片大小
+                NewImage = MyImage.GetThumbnailImage(255, 319, callb, new System.IntPtr());
+                NewImage.Save("SingleImage.jpg");
+
+                // 保存小圖
+                NewImage = MyImage.GetThumbnailImage(115, 144, callb, new System.IntPtr());
+                NewImage.Save("small.jpg");
+                // 保存極小圖
+                NewImage = MyImage.GetThumbnailImage(45, 56, callb, new System.IntPtr());
+                NewImage.Save("dinky.jpg");
+
+                MyImage.Dispose();
+                NewImage.Dispose();
+                // 一定要釋放，否則進程被占用
+            }
+            catch (Exception ex)
+            {
+                //Response.Write(ex.ToString());
+            }
+            richTextBox1.Text += "完成\n";
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //檢視圖片的像素
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            Image image = Image.FromFile(filename);
+            richTextBox1.Text += "檔案 : " + filename + ",\t" + "圖片像素：[" + image.Width + "*" + image.Height + "]" + "\n";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //圖片測試
+            string filename = @"C:\______test_files\elephant.jpg";
+            Image sample = new Bitmap(filename);
+            MemoryStream buf = new MemoryStream();
+            sample.Save(buf, ImageFormat.Bmp);
+            byte[] currentImage = buf.GetBuffer();
+
+            int[] stats = new int[3];
+            for (int i = 0; i < currentImage.Length; )
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    stats[j] += currentImage[i];
+                    ++i;
+                }
+            }
+            richTextBox1.Text += "Blue: " + stats[0] + "\n";
+            richTextBox1.Text += "Green: " + stats[1] + "\n";
+            richTextBox1.Text += "Red: " + stats[2] + "\n";
+            if ((stats[0] > stats[1]) && (stats[0] > stats[2]))
+            {
+                richTextBox1.Text += "This is a cold picture." + "\n";
+            }
+            if ((stats[1] > stats[0]) && (stats[1] > stats[2]))
+            {
+                richTextBox1.Text += "This is a summer picture." + "\n";
+            }
+            if ((stats[2] > stats[0]) && (stats[2] > stats[1]))
+            {
+                richTextBox1.Text += "This is a fiery picture." + "\n";
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //為圖片生成縮略圖
+            //為圖片生成縮略圖
+            //讀取圖檔, 多一層Image結構
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image = Image.FromFile(filename);
+
+            Image image2 = GetThumbnail(image, image.Width / 2, image.Height / 2);
+
+            pictureBox1.Image = image2;
+        }
+
+        /// 為圖片生成縮略圖
+        /// 原圖片的路徑
+        /// 縮略圖寬
+        /// 縮略圖高
+        /// 
+        public Image GetThumbnail(Image image, int width, int height)
+        {
+            Bitmap bmp = new Bitmap(width, height);
+            //從Bitmap創建一個Graphics
+            Graphics gr = Graphics.FromImage(bmp);
+            //設置 
+            gr.SmoothingMode = SmoothingMode.HighQuality;
+            //下面這個也設成高質量
+            gr.CompositingQuality = CompositingQuality.HighQuality;
+            //下面這個設成High
+            gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            //把原始圖像繪制成上面所設置寬高的縮小圖
+            Rectangle rectDestination = new Rectangle(0, 0, width, height);
+
+            gr.DrawImage(image, rectDestination, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+            return bmp;
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

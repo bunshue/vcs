@@ -71,8 +71,17 @@ namespace network_test2_http
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
             button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
+            button24.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button25.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button26.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button27.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button28.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button29.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -620,6 +629,7 @@ namespace network_test2_http
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //使用HTTP頭檢測網絡資源是否有效
             string url = @"http://hovertree.com/themes/hvtimages/hwqlogo.png";
             bool flag_available = IsWebResourceAvailable(url);
             richTextBox1.Text += "網絡資源是否有效 : " + flag_available.ToString() + "\n";
@@ -661,20 +671,220 @@ namespace network_test2_http
                 Match match = (Match)(enu.Current);
                 richTextBox1.Text += match.Value + "\n";
             }
-
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //抓取網頁資料並分析之
+            //file:///C:/_git/vcs/_1.data/_html/%E6%9C%B1%E5%86%B6%E8%95%99%E8%80%81%E5%B8%AB%E7%9A%84%E9%9B%BB%E8%85%A6%E6%95%99%E5%AE%A4.html
 
+            string url = @"file:///C:/_git/vcs/_1.data/_html/%E6%9C%B1%E5%86%B6%E8%95%99%E8%80%81%E5%B8%AB%E7%9A%84%E9%9B%BB%E8%85%A6%E6%95%99%E5%AE%A4.html";
+            string txtURL = "aaaa.txt";
+
+            GetHtmlData();
+
+            List<string> getlist = Read(txtURL);
+
+            //<h3>
+
+            int len = getlist.Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + getlist[i].ToString() + "\n";
+            }
+        }
+
+        /// <summary>
+        /// 获取页面数据保存至txt
+        /// </summary>
+        public static void GetHtmlData()
+        {
+            string url = @"file:///C:/_git/vcs/_1.data/_html/%E6%9C%B1%E5%86%B6%E8%95%99%E8%80%81%E5%B8%AB%E7%9A%84%E9%9B%BB%E8%85%A6%E6%95%99%E5%AE%A4.html";
+            string txtURL = "aaaa.txt";
+
+            WebRequest request = WebRequest.Create(url);
+            WebResponse response = request.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("gb2312"));
+            //reader.ReadToEnd() 表示取得网页的源码
+
+            FileStream fs = new FileStream(txtURL, FileMode.Create);
+            byte[] data = System.Text.Encoding.Default.GetBytes(reader.ReadToEnd());
+            //开始写入
+            fs.Write(data, 0, data.Length);
+            //清空缓冲区、关闭流
+            fs.Flush();
+            fs.Close();
+        }
+
+        /// <summary>
+        /// 根据路径读取txt文件
+        /// </summary>
+        /// <param name="path">txt路径</param>
+        /// <returns></returns>
+        public static List<string> Read(string path)
+        {
+            List<string> list = new List<string>();
+            StreamReader sr = new StreamReader(path, Encoding.Default);
+            String line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                int i = line.ToString().IndexOf("<h3>");
+                if (i > 0)
+                {
+                    //分析解讀資料
+                    list.Add(line);
+                    string titleStr = line.ToString().Substring(i + 7); //截取到title后面的值
+                    string[] titlelist = titleStr.Split('"');        //以"  截取
+                    string titledata = titlelist[0];
+                    string[] datalist = titledata.Split('&');  //以& 截取
+                    string data = datalist[0];
+                    string[] datastrlist = data.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);//以; 截取
+                    //list.Add(datastrlist);
+
+                }
+            }
+            sr.Close();
+            return list;
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //獲取百度首頁生成靜態文件
+            //獲取百度首頁生成靜態文件
+            this.DownUrltoFile("http://www.baidu.com", "baidu.htm", "GB2312");
+
+            //DownUrltoFile("http://www.xueit.com/show.aspx?pid=1", "html/news/20091224-001.html", "GB2312");
+            //其中URL：http://www.xueit.com/show.aspx?pid=1 是动态显示文章，html/news/20091224-001.html是表字段htmlFile预先保存的文件名，这样就可以生成静态文件了。
 
         }
 
+        /// 獲取遠程URL並生成文件的代碼：
+        /// <summary>
+        /// 生成網頁文件
+        /// </summary>
+        /// <param name="url">遠程URL</param>
+        /// <param name="filename">生成文件名路徑</param>
+        /// <param name="pagecode">目標URL頁面編碼</param>
+        protected void DownUrltoFile(string url, string filename, string pagecode)
+        {
+            try
+            {
+                //編碼
+                Encoding encode = Encoding.GetEncoding(pagecode);
+                //請求URL
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                //設置超時(10秒)
+                req.Timeout = 10000;
+                //this.NotFolderIsCreate(filename);
+                //獲取Response
+                HttpWebResponse rep = (HttpWebResponse)req.GetResponse();
+                //創建StreamReader與StreamWriter文件流對象
+                StreamReader sr = new StreamReader(rep.GetResponseStream(), encode);
+                StreamWriter sw = new StreamWriter(filename, false, encode);
+                //寫入內容
+                sw.Write(sr.ReadToEnd());
+                //清理當前緩存區，並將緩存寫入文件
+                sw.Flush();
+                //釋放相關對象資源
+                sw.Close();
+                sw.Dispose();
+                sr.Close();
+                sr.Dispose();
+                //Response.Write("生成文件"   filename   "成功");
+            }
+            catch (Exception ex)
+            {
+                //Response.Write("生成文件"   filename   "失敗，原因："   ex.Message);
+            }
+        }
+
+        //以上代碼關鍵知識點，通過HttpWebRequest、HttpWebResponse請求獲取遠程URL數據，之後使用StreamReader、StreamWriter文件流讀寫數據寫入文件，注意還有編碼Encoding。
+
+        /*
+        /// <summary>
+        /// 文件夾不存在則創建
+        /// </summary>
+        /// <param name="filename">文件名所在路徑</param>
+        protected void NotFolderIsCreate(string filename)
+        {
+            string fileAtDir = Server.MapPath(Path.GetDirectoryName(filename));
+            if (!Directory.Exists(fileAtDir))
+                Directory.CreateDirectory(fileAtDir);
+        }
+        */
+
         private void button23_Click(object sender, EventArgs e)
+        {
+            //HttpWebRequest
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190339.html";
+            string result = GetHtmlData(url);
+            richTextBox1.Text += result + "\n";
+        }
+
+        public string GetHtmlData(string url)
+        {
+            try
+            {
+                HttpWebRequest request;
+                request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "GET";
+                HttpWebResponse response;
+                response = (HttpWebResponse)request.GetResponse();
+                Stream s;
+                s = response.GetResponseStream();
+                string StrDate = "";
+                string strValue = "";
+                StreamReader Reader = new StreamReader(s, Encoding.UTF8);
+                while ((StrDate = Reader.ReadLine()) != null)
+                {
+                    strValue += StrDate + "\r\n";
+                }
+                return strValue;
+            }
+            catch (Exception)
+            {
+            }
+            return "";
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button31_Click(object sender, EventArgs e)
         {
 
         }

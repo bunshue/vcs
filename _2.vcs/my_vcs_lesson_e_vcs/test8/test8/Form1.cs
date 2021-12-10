@@ -19,6 +19,7 @@ using System.IO.Ports;
 using System.Threading;
 using System.Security;
 using System.Security.Cryptography;
+using System.Media;     //for SoundPlayer
 
 using Shell32;
 using Microsoft.Win32;  //for Registry
@@ -425,7 +426,12 @@ namespace test8
 
         private void button12_Click(object sender, EventArgs e)
         {
-
+            //播放wav檔
+            string filename = @"C:\______test_files\_wav\start.wav";
+            SoundPlayer player = new SoundPlayer(); //声明一个控制WAV文件的声音播放文件对象
+            player.SoundLocation = filename; //指定声音文件的路径
+            player.LoadAsync();  //设置播放的方法
+            player.Play(); //播放声音文件
         }
 
         private void button13_Click(object sender, EventArgs e)

@@ -12,7 +12,6 @@ using System.Xml;
 using System.Drawing.Imaging;
 using System.Text.RegularExpressions;
 using System.Management;
-using System.Media;     //for SoundPlayer
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography; //for MD5CryptoServiceProvider
@@ -181,21 +180,10 @@ namespace test6
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //檢視圖片的像素
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            Image image = Image.FromFile(filename);
-            richTextBox1.Text += "檔案 : " + filename + ",\t" + "圖片像素：[" + image.Width + "*" + image.Height + "]" + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //播放wav檔
-            string filename = @"C:\______test_files\_wav\start.wav";
-            SoundPlayer player = new SoundPlayer(); //声明一个控制WAV文件的声音播放文件对象
-            player.SoundLocation = filename; //指定声音文件的路径
-            player.LoadAsync();  //设置播放的方法
-            player.Play(); //播放声音文件
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -488,36 +476,6 @@ namespace test6
 
         private void button10_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\elephant.jpg";
-            Image sample = new Bitmap(filename);
-            MemoryStream buf = new MemoryStream();
-            sample.Save(buf, ImageFormat.Bmp);
-            byte[] currentImage = buf.GetBuffer();
-
-            int[] stats = new int[3];
-            for (int i = 0; i < currentImage.Length; )
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    stats[j] += currentImage[i];
-                    ++i;
-                }
-            }
-            richTextBox1.Text += "Blue: " + stats[0] + "\n";
-            richTextBox1.Text += "Green: " + stats[1] + "\n";
-            richTextBox1.Text += "Red: " + stats[2] + "\n";
-            if ((stats[0] > stats[1]) && (stats[0] > stats[2]))
-            {
-                richTextBox1.Text += "This is a cold picture." + "\n";
-            }
-            if ((stats[1] > stats[0]) && (stats[1] > stats[2]))
-            {
-                richTextBox1.Text += "This is a summer picture." + "\n";
-            }
-            if ((stats[2] > stats[0]) && (stats[2] > stats[1]))
-            {
-                richTextBox1.Text += "This is a fiery picture." + "\n";
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -608,53 +566,6 @@ namespace test6
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //C#讀取XML文檔的方法
-            //C#讀取XML文檔的方法
-
-            //這裡介紹一種讀取XML文檔的方法,示例中用的是 XmlTextReader 函數,每執行 Read() 一次,讀取一行.
-
-        }
-
-
-        public void ReadConfig(string XmlConfigFile)
-        {
-            try
-            {
-                // Open an XML file
-                System.Xml.XmlTextReader reader;
-                reader = new System.Xml.XmlTextReader(XmlConfigFile);
-                while (reader.Read())
-                {
-                    if ((reader.NodeType == XmlNodeType.EndElement)
-                    && (reader.Name == "KSBM"))
-                    {
-                        break;
-                    }
-                    if (reader.IsStartElement("ServerPath"))
-                    {
-                        reader.Read();
-                        //_conf.ServerPath = reader.Value;
-                    }
-                    else if (reader.IsStartElement("SmtpServer"))
-                    {
-                        reader.Read();
-                        //_conf.SMTPServer = reader.Value;
-                    }
-                    else if (reader.IsStartElement("ConnectString"))
-                    {
-                        reader.Read();
-                        //_conf.ConnectString = reader.Value;
-                    }
-                }
-                //return _conf;
-            }
-            catch
-            {
-                //return _conf;
-            }
-            finally
-            {
-            }
         }
     }
 }

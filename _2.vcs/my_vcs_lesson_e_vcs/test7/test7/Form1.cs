@@ -157,73 +157,13 @@ namespace test7
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190339.html";
-            string result = GetHtmlData(url);
-            richTextBox1.Text += result + "\n";
 
-        }
-
-        public string GetHtmlData(string url)
-        {
-            try
-            {
-                HttpWebRequest request;
-                request = (HttpWebRequest)WebRequest.Create(url);
-                request.Method = "GET";
-                HttpWebResponse response;
-                response = (HttpWebResponse)request.GetResponse();
-                Stream s;
-                s = response.GetResponseStream();
-                string StrDate = "";
-                string strValue = "";
-                StreamReader Reader = new StreamReader(s, Encoding.UTF8);
-                while ((StrDate = Reader.ReadLine()) != null)
-                {
-                    strValue += StrDate + "\r\n";
-                }
-                return strValue;
-            }
-            catch (Exception)
-            {
-            }
-            return "";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //為圖片生成縮略圖
-            //讀取圖檔, 多一層Image結構
-            string filename = @"C:\______test_files\picture1.jpg";
-            Image image = Image.FromFile(filename);
 
-            Image image2 = GetThumbnail(image, image.Width / 2, image.Height / 2);
-
-            pictureBox1.Image = image2;
         }
-
-        /// 為圖片生成縮略圖
-        /// 原圖片的路徑
-        /// 縮略圖寬
-        /// 縮略圖高
-        /// 
-        public Image GetThumbnail(Image image, int width, int height)
-        {
-            Bitmap bmp = new Bitmap(width, height);
-            //從Bitmap創建一個Graphics
-            Graphics gr = Graphics.FromImage(bmp);
-            //設置 
-            gr.SmoothingMode = SmoothingMode.HighQuality;
-            //下面這個也設成高質量
-            gr.CompositingQuality = CompositingQuality.HighQuality;
-            //下面這個設成High
-            gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            //把原始圖像繪制成上面所設置寬高的縮小圖
-            Rectangle rectDestination = new Rectangle(0, 0, width, height);
-
-            gr.DrawImage(image, rectDestination, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
-            return bmp;
-        }
-
 
         private void button6_Click(object sender, EventArgs e)
         {

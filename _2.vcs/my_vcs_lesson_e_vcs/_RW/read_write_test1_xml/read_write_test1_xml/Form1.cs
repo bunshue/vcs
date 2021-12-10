@@ -1146,6 +1146,58 @@ namespace read_write_test1_xml
             richTextBox1.Text += "已存檔 : " + filename + "\n";
 
         }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            //XML Read
+            //C#讀取XML文檔的方法
+            //C#讀取XML文檔的方法
+
+            //這裡介紹一種讀取XML文檔的方法,示例中用的是 XmlTextReader 函數,每執行 Read() 一次,讀取一行.
+
+        }
+
+
+        public void ReadConfig(string XmlConfigFile)
+        {
+            try
+            {
+                // Open an XML file
+                System.Xml.XmlTextReader reader;
+                reader = new System.Xml.XmlTextReader(XmlConfigFile);
+                while (reader.Read())
+                {
+                    if ((reader.NodeType == XmlNodeType.EndElement)
+                    && (reader.Name == "KSBM"))
+                    {
+                        break;
+                    }
+                    if (reader.IsStartElement("ServerPath"))
+                    {
+                        reader.Read();
+                        //_conf.ServerPath = reader.Value;
+                    }
+                    else if (reader.IsStartElement("SmtpServer"))
+                    {
+                        reader.Read();
+                        //_conf.SMTPServer = reader.Value;
+                    }
+                    else if (reader.IsStartElement("ConnectString"))
+                    {
+                        reader.Read();
+                        //_conf.ConnectString = reader.Value;
+                    }
+                }
+                //return _conf;
+            }
+            catch
+            {
+                //return _conf;
+            }
+            finally
+            {
+            }
+        }
     }
 
     //class XML_RW

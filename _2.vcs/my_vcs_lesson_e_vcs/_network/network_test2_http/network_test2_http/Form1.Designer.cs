@@ -54,6 +54,14 @@
             this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button24 = new System.Windows.Forms.Button();
+            this.button25 = new System.Windows.Forms.Button();
+            this.button26 = new System.Windows.Forms.Button();
+            this.button27 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
+            this.button31 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -69,7 +77,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(558, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(766, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(501, 720);
             this.richTextBox1.TabIndex = 1;
@@ -280,7 +288,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(160, 70);
             this.button19.TabIndex = 20;
-            this.button19.Text = "檢查網絡資源是否有效";
+            this.button19.Text = "使用HTTP頭檢測網絡資源是否有效";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -302,6 +310,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(160, 70);
             this.button21.TabIndex = 22;
+            this.button21.Text = "抓取網頁資料並分析之";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -312,6 +321,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(160, 70);
             this.button22.TabIndex = 23;
+            this.button22.Text = "獲取百度首頁生成靜態文件";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -322,6 +332,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(160, 70);
             this.button23.TabIndex = 24;
+            this.button23.Text = "HttpWebRequest";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -336,11 +347,99 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button24
+            // 
+            this.button24.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button24.Location = new System.Drawing.Point(538, 12);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(160, 70);
+            this.button24.TabIndex = 26;
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
+            // 
+            // button25
+            // 
+            this.button25.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button25.Location = new System.Drawing.Point(538, 111);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(160, 70);
+            this.button25.TabIndex = 27;
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // button26
+            // 
+            this.button26.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button26.Location = new System.Drawing.Point(538, 210);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(160, 70);
+            this.button26.TabIndex = 28;
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
+            // 
+            // button27
+            // 
+            this.button27.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button27.Location = new System.Drawing.Point(538, 304);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(160, 70);
+            this.button27.TabIndex = 29;
+            this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
+            // 
+            // button28
+            // 
+            this.button28.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button28.Location = new System.Drawing.Point(538, 401);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(160, 70);
+            this.button28.TabIndex = 30;
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
+            // button29
+            // 
+            this.button29.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button29.Location = new System.Drawing.Point(538, 487);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(160, 70);
+            this.button29.TabIndex = 31;
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
+            // button30
+            // 
+            this.button30.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button30.Location = new System.Drawing.Point(538, 573);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(160, 70);
+            this.button30.TabIndex = 32;
+            this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
+            // button31
+            // 
+            this.button31.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button31.Location = new System.Drawing.Point(538, 662);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(160, 70);
+            this.button31.TabIndex = 33;
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1083, 744);
+            this.ClientSize = new System.Drawing.Size(1279, 744);
+            this.Controls.Add(this.button31);
+            this.Controls.Add(this.button30);
+            this.Controls.Add(this.button29);
+            this.Controls.Add(this.button28);
+            this.Controls.Add(this.button27);
+            this.Controls.Add(this.button26);
+            this.Controls.Add(this.button25);
+            this.Controls.Add(this.button24);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button23);
             this.Controls.Add(this.button22);
@@ -402,6 +501,14 @@
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.Button button31;
     }
 }
 

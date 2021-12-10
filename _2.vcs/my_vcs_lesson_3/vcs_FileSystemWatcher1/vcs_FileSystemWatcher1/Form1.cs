@@ -13,6 +13,14 @@ using System.IO;
 //FileSystemWatcher 是一個當目錄或目錄內檔案變更時，接聽 (Listen) 檔案系統變更告知並引發事件。
 //會用到這類別，也是因為專案中要監控特別資料夾中的檔案是否有所變動。
 
+/*
+結果：
+1.在資料夾中建立一個新的檔案，建立後會觸發 FileSystemWatcher 所提供的事件
+2.對剛建立的檔案重新命名，重新命名後會觸發 FileSystemWatcher 所提供的事件
+3.刪除重新命名的檔案，刪除後會觸發 FileSystemWatcher 所提供的事件
+4.更改監控資料夾中檔案的內容，更改後會觸發 FileSystemWatcher 所提供的事件
+*/
+
 namespace vcs_FileSystemWatcher1
 {
     public partial class Form1 : Form

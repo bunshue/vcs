@@ -23,7 +23,77 @@ namespace vcs_Registry5
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
 
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 180;
+            dy = 90;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            //控件位置
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //獲取安裝軟件和路徑，通過注冊表得到
+            richTextBox1.Text += "AAAA\n";
+            //獲取安裝軟件和路徑，通過注冊表得到
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SoftwareMicrosoftWindowsCurrentVersionUninstall", false))
+            {
+                richTextBox1.Text += "BBBB\n";
+                if (key != null)//判斷對象存在
+                {
+                    richTextBox1.Text += "CCCC\n";
+                    foreach (string keyName in key.GetSubKeyNames())//遍歷子項名稱的字符串數組
+                    {
+                        using (RegistryKey key2 = key.OpenSubKey(keyName, false))//遍歷子項節點
+                        {
+                            if (key2 != null)
+                            {
+                                string softwareName = key2.GetValue("DisplayName", "").ToString();//獲取軟件名
+                                string installLocation = key2.GetValue("InstallLocation", "").ToString();//獲取安裝路徑
+                                richTextBox1.Text += "softwareName : " + softwareName + "\n";
+                                richTextBox1.Text += "installLocation : " + installLocation + "\n";
+                                if (!string.IsNullOrEmpty(installLocation))
+                                {
+                                    //將信息添加到ListView控件中
+                                    ListViewItem item = new ListViewItem(softwareName);
+                                    item.SubItems.Add(installLocation);
+                                    //listView1.Items.Add(item);
+                                    richTextBox1.Text += "get item : " + item + "\n";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -168,6 +238,8 @@ namespace vcs_Registry5
             MessageBox.Show(RegT);
             return RegT;
         }
+
+
     }
 
     public class RegistryStorage
