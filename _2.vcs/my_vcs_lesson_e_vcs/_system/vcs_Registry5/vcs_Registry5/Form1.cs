@@ -50,6 +50,15 @@ namespace vcs_Registry5
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             //控件位置
@@ -303,6 +312,107 @@ namespace vcs_Registry5
                     }
                 }
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //讀取注冊表的方式獲得第一塊硬盤的編號
+            richTextBox1.Text += Registry.GetValue("HKEY_Local_Machine\\HardWare\\Devicemap\\Scsi\\Scsi port 0\\Scsi Bus 0\\Target Id 0\\Logical Unit Id 0", "Identifier", "cuowu").ToString() + "\n";
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //用RegistryKey 讀USB訊息
+            /*
+RegistryKey historykey;
+//檢索當前用戶CurrentUser子項Software\\Microsoft\\Internet Explorer\\typedURLs
+historykey = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Internet Explorer\\typedURLs", true);
+if (historykey != null)
+{
+    //獲取檢索的所有值
+    String[] names = historykey.GetValueNames();
+    foreach (String str in names)
+    {
+        //listBox1.Items.Add(historykey.GetValue(str).ToString());
+        richTextBox1.Text += historykey.GetValue(str).ToString() + "\n";
+    }
+}
+*/
+
+            //獲取USB使用信息	
+            //定義注冊表頂級節點 其命名空間是using Microsoft.Win32;
+            RegistryKey USBKey;
+            //檢索子項    
+            USBKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Enum\USBSTOR", false);
+            //檢索所有子項USBSTOR下的字符串數組
+            foreach (string sub1 in USBKey.GetSubKeyNames())
+            {
+                richTextBox1.Text += "sub1 = " + sub1 + "\n";
+                RegistryKey sub1key = USBKey.OpenSubKey(sub1, false);
+                foreach (string sub2 in sub1key.GetSubKeyNames())
+                {
+                    try
+                    {
+                        //打開sub1key的子項
+                        RegistryKey sub2key = sub1key.OpenSubKey(sub2, false);
+                        //檢索Service=disk(磁盤)值的子項 cdrom(光盤)
+
+                        richTextBox1.Text += "Name = " + sub1key.Name + "\tname2 = " + sub2key.Name + "\n";
+                        if (sub2key.GetValue("Service", "").Equals("disk"))
+                        {
+                            String Path = "USBSTOR" + "\\" + sub1 + "\\" + sub2;
+                            String Name = (string)sub2key.GetValue("FriendlyName", "");
+                            richTextBox1.AppendText("USB名稱  " + Name + "\r\n");
+                            richTextBox1.AppendText("UID標記  " + sub2 + "\r\n");
+                            richTextBox1.AppendText("路徑信息 " + Path + "\r\n\r\n");
+                        }
+                    }
+                    catch (Exception msg) //異常處理
+                    {
+                        MessageBox.Show(msg.Message);
+                    }
+                }
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

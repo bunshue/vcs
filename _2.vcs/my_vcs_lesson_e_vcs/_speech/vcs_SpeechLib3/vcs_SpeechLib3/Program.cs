@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace test2
+namespace vcs_SpeechLib3
 {
     static class Program
     {

@@ -63,8 +63,8 @@ namespace vcs_System1
             //button
             x_st = 10;
             y_st = 10;
-            dx = 210;
-            dy = 42;
+            dx = 250;
+            dy = 55;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -149,7 +149,7 @@ namespace vcs_System1
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
             groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 14);
 
-            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             richTextBox1.Size = new Size(420, 600);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -284,58 +284,14 @@ namespace vcs_System1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "系統啟動後經過的時間： " + (Environment.TickCount / 1000).ToString() + "秒" + "\n";
-            richTextBox1.Text += "OSVersion： " + Environment.OSVersion + "\n";
-            richTextBox1.Text += "Version： " + Environment.Version + "\n";
-            richTextBox1.Text += "SystemPageSize： " + Environment.SystemPageSize + "\n";
-            richTextBox1.Text += "UserDomainName： " + Environment.UserDomainName + "\n";
-            richTextBox1.Text += "UserName： " + Environment.UserName + "\n";
-            richTextBox1.Text += "MachineName： " + Environment.MachineName + "\n";
-            richTextBox1.Text += "Is64BitOperatingSystem： " + Environment.Is64BitOperatingSystem + "\n";
-            richTextBox1.Text += "Is64BitProcess： " + Environment.Is64BitProcess + "\n";
-            richTextBox1.Text += "ProcessorCount： " + Environment.ProcessorCount + "\n";
-            richTextBox1.Text += "SystemDirectory： " + Environment.SystemDirectory + "\n";
-            richTextBox1.Text += "CurrentDirectory： " + Environment.CurrentDirectory + "\n";
-            richTextBox1.Text += "CommandLine： " + Environment.CommandLine + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string str = System.Environment.GetEnvironmentVariable("SystemRoot");
-            richTextBox1.Text += "作業系統在" + str + "\n";
-            string dir = str.Substring(0, 2);
-            richTextBox1.Text += "作業系統在" + dir + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            OperatingSystem os = Environment.OSVersion;
-            richTextBox1.Text += "目前系統版本： " + os.ToString() + "\n";
-            richTextBox1.Text += "目前系統版本.Version： " + os.Version.ToString() + "\n";
-            richTextBox1.Text += "目前系統版本.Platform： " + os.Platform.ToString() + "\n";
-            richTextBox1.Text += "目前系統版本： ";
-            if (os.Version.Major == 5)
-            {
-                switch (os.Version.Minor)
-                {
-                    case 0:
-                        richTextBox1.Text += "Windows 2000 " + os.ServicePack + "\n";
-                        break;
-                    case 1:
-                        richTextBox1.Text += "Windows XP " + os.ServicePack + "\n";
-                        break;
-                    case 2:
-                        richTextBox1.Text += "Windows Server 2003 " + " " + os.ServicePack + "\n";
-                        break;
-                    default:
-                        richTextBox1.Text += os.ToString() + " " + os.ServicePack + "\n";
-                        break;
-                }
-            }
-            else
-            {
-                richTextBox1.Text += os.VersionString + " " + os.ServicePack + "\n";
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -344,9 +300,9 @@ namespace vcs_System1
             //Windows 及 LINUX 都正常
 
             richTextBox1.Text += "電腦名稱 1 : " + Environment.MachineName + "\n";
-            richTextBox1.Text += "電腦名稱 2 : " + System.Net.Dns.GetHostName() + "\n";
-            richTextBox1.Text += "電腦名稱 3 : " + System.Windows.Forms.SystemInformation.ComputerName + "\n";
-            richTextBox1.Text += "電腦名稱 4 : " + System.Environment.GetEnvironmentVariable("COMPUTERNAME") + "\n";
+            richTextBox1.Text += "電腦名稱 2 : " + Dns.GetHostName() + "\n";
+            richTextBox1.Text += "電腦名稱 3 : " + SystemInformation.ComputerName + "\n";
+            richTextBox1.Text += "電腦名稱 4 : " + Environment.GetEnvironmentVariable("COMPUTERNAME") + "\n";
         }
 
         //啟動螢幕保護
@@ -420,15 +376,9 @@ namespace vcs_System1
         private void button11_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "系統預設路徑\n";
-            richTextBox1.Text += "CurrentDirectory :\t" + System.Environment.CurrentDirectory + "\n";
+            richTextBox1.Text += "CurrentDirectory :\t" + Environment.CurrentDirectory + "\n";
             richTextBox1.Text += "StartupPath :\t" + Application.StartupPath + "\n";
             richTextBox1.Text += "Form1.cs所在位置 :\t" + Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\n";
-
-            richTextBox1.Text += "\n取得系統相關資訊\n";
-            richTextBox1.Text += "目前系統目錄為：" + Environment.SystemDirectory + "\n";//顯示系統目錄
-            richTextBox1.Text += "機器名稱為：" + Environment.MachineName + "\n";//顯示機器名稱
-            richTextBox1.Text += "目前程式執行目錄：" + Environment.CurrentDirectory + "\n";//取得目前程式執行目錄
-            richTextBox1.Text += "系統版本號：" + Environment.OSVersion.VersionString + "\n";//顯示系統版本號
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -519,14 +469,6 @@ namespace vcs_System1
                 IP[i] = addresses[i].ToString();
                 richTextBox1.Text += "get ip addr : " + IP[i] + "\n";
             }
-
-            //讀取操作系統和CLR的版本
-            OperatingSystem os = System.Environment.OSVersion;
-            richTextBox1.Text += "Platform: " + os.Platform + "\n";
-            richTextBox1.Text += "Service Pack:" + os.ServicePack + "\n";
-            richTextBox1.Text += "Version: " + os.Version + "\n";
-            richTextBox1.Text += "VersionString: " + os.VersionString + "\n";
-            richTextBox1.Text += "CLR Version: " + System.Environment.Version + "\n";
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -759,12 +701,6 @@ namespace vcs_System1
             }
 
             // part 2
-            richTextBox1.Text += "目前系統目錄為：" + Environment.SystemDirectory + "\n";//顯示系統目錄
-            richTextBox1.Text += "機器名稱為：" + Environment.MachineName + "\n";//顯示機器名稱
-            richTextBox1.Text += "目前程式執行目錄：" + Environment.CurrentDirectory + "\n";//取得目前程式執行目錄
-            richTextBox1.Text += "系統版本號：" + Environment.OSVersion.VersionString + "\n";//顯示系統版本號
-
-            // part 3
             ManagementClass mc = new ManagementClass("win32_processor"); //建立ManagementClass物件
             ManagementObjectCollection moc = mc.GetInstances();          //取得CPU訊息
 
@@ -782,7 +718,7 @@ namespace vcs_System1
                 richTextBox1.Text += "CPU產品名稱\t\t" + mo["Name"].ToString() + "\n";        //取得CPU產品名稱
             }
 
-            // part 4
+            // part 3
             SelectQuery query = new SelectQuery("Select * from Win32_BaseBoard"); // 查詢主板
             ManagementObjectSearcher dev = new ManagementObjectSearcher(query);   // 執行query
             ManagementObjectCollection.ManagementObjectEnumerator enumerator = dev.Get().GetEnumerator();
@@ -1072,6 +1008,21 @@ namespace vcs_System1
         private void button48_Click(object sender, EventArgs e)
         {
             //Environment屬性
+            richTextBox1.Text += "顯示系統資訊\n";
+            richTextBox1.Text += "系統啟動後經過的時間： " + (Environment.TickCount / 1000).ToString() + "秒" + "\n";
+            richTextBox1.Text += "OSVersion： " + Environment.OSVersion + "\n";
+            richTextBox1.Text += "Version： " + Environment.Version + "\n";
+            richTextBox1.Text += "SystemPageSize： " + Environment.SystemPageSize + "\n";
+            richTextBox1.Text += "UserDomainName： " + Environment.UserDomainName + "\n";
+            richTextBox1.Text += "UserName： " + Environment.UserName + "\n";
+            richTextBox1.Text += "MachineName： " + Environment.MachineName + "\n";
+            richTextBox1.Text += "Is64BitOperatingSystem： " + Environment.Is64BitOperatingSystem + "\n";
+            richTextBox1.Text += "Is64BitProcess： " + Environment.Is64BitProcess + "\n";
+            richTextBox1.Text += "ProcessorCount： " + Environment.ProcessorCount + "\n";
+            richTextBox1.Text += "SystemDirectory： " + Environment.SystemDirectory + "\n";
+            richTextBox1.Text += "CurrentDirectory： " + Environment.CurrentDirectory + "\n";
+            richTextBox1.Text += "CommandLine： " + Environment.CommandLine + "\n";
+
             richTextBox1.Text += "\n";
             richTextBox1.Text += "Environment屬性：\n";
             richTextBox1.Text += "CommandLine: " + Environment.CommandLine + "\n";
@@ -1092,6 +1043,30 @@ namespace vcs_System1
             richTextBox1.Text += "我的文件夾位置 GetFolderPath Personal: " + Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\n";
             richTextBox1.Text += "GetFolderPath MyMusic: " + Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) + "\n";
             richTextBox1.Text += "GetFolderPath MyComputer: " + Environment.GetFolderPath(Environment.SpecialFolder.MyComputer) + "\n";
+
+            richTextBox1.Text += "\n取得系統相關資訊\n";
+            richTextBox1.Text += "目前系統目錄為：" + Environment.SystemDirectory + "\n";//顯示系統目錄
+            richTextBox1.Text += "機器名稱為：" + Environment.MachineName + "\n";//顯示機器名稱
+            richTextBox1.Text += "目前程式執行目錄：" + Environment.CurrentDirectory + "\n";//取得目前程式執行目錄
+            richTextBox1.Text += "系統版本號：" + Environment.OSVersion.VersionString + "\n";//顯示系統版本號
+
+            //讀取操作系統和CLR的版本
+            OperatingSystem os = System.Environment.OSVersion;
+            richTextBox1.Text += "Platform: " + os.Platform + "\n";
+            richTextBox1.Text += "Service Pack:" + os.ServicePack + "\n";
+            richTextBox1.Text += "Version: " + os.Version + "\n";
+            richTextBox1.Text += "VersionString: " + os.VersionString + "\n";
+            richTextBox1.Text += "CLR Version: " + System.Environment.Version + "\n";
+
+            //環境參數
+            string RootPath = Environment.GetEnvironmentVariable("HOMEDRIVE") + Environment.GetEnvironmentVariable("HOMEPATH") + @"\ScreenCapture";
+
+            richTextBox1.Text += "HOMEDRIVE :\t" + Environment.GetEnvironmentVariable("HOMEDRIVE") + "\n";
+            richTextBox1.Text += "HOMEPATH :\t" + Environment.GetEnvironmentVariable("HOMEPATH") + "\n";
+            richTextBox1.Text += "my path :\t" + RootPath + "\n";
+
+            string sys_dir = Environment.SystemDirectory;
+            richTextBox1.Text += "SystemDirectory :\t" + sys_dir + "\n";
         }
 
         private void button49_Click(object sender, EventArgs e)
@@ -1119,7 +1094,6 @@ namespace vcs_System1
             {
                 richTextBox1.Text += "\t" + drive + "\n";
             }
-
         }
 
         private void button50_Click(object sender, EventArgs e)
@@ -1131,28 +1105,19 @@ namespace vcs_System1
             //string temp_filename = Path.GetTempFileName();
             //richTextBox1.Text += temp_filename + "\n";
 
-
             richTextBox1.Text += "取得運用程序所在目錄 : " + Application.StartupPath + "\n";
 
-            richTextBox1.Text += "取得系統目前目錄 : " + System.Environment.CurrentDirectory + "\n";
+            richTextBox1.Text += "取得系統目前目錄 : " + Environment.CurrentDirectory + "\n";
 
             string foldername = @"C:\______test_files";
 
             richTextBox1.Text += "設定新的系統目前目錄\n";
-            System.Environment.CurrentDirectory = foldername;
-            richTextBox1.Text += "取得系統目前目錄 : " + System.Environment.CurrentDirectory + "\n";
-
+            Environment.CurrentDirectory = foldername;
+            richTextBox1.Text += "取得系統目前目錄 : " + Environment.CurrentDirectory + "\n";
         }
 
         private void button51_Click(object sender, EventArgs e)
         {
-            //取得系統環境變數
-            richTextBox1.Text += "環境變數" + "\t\t\t" + "變數值" + "\n";
-            foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
-            {
-                richTextBox1.Text += DEntry.Key.ToString() + "\t" + DEntry.Value.ToString() + "\n";
-            }
-
         }
 
         private void button52_Click(object sender, EventArgs e)
@@ -1282,15 +1247,6 @@ namespace vcs_System1
 
         private void button54_Click(object sender, EventArgs e)
         {
-            //環境參數
-            string RootPath = Environment.GetEnvironmentVariable("HOMEDRIVE") + Environment.GetEnvironmentVariable("HOMEPATH") + @"\ScreenCapture";
-
-            richTextBox1.Text += "HOMEDRIVE :\t" + Environment.GetEnvironmentVariable("HOMEDRIVE") + "\n";
-            richTextBox1.Text += "HOMEPATH :\t" + Environment.GetEnvironmentVariable("HOMEPATH") + "\n";
-            richTextBox1.Text += "my path :\t" + RootPath + "\n";
-
-            string sys_dir = Environment.SystemDirectory;
-            richTextBox1.Text += "SystemDirectory :\t" + sys_dir + "\n";
         }
 
         private void button55_Click(object sender, EventArgs e)
@@ -1596,6 +1552,109 @@ namespace vcs_System1
 
             string[] drives = Environment.GetLogicalDrives();
             richTextBox1.Text += "系統磁碟機：" + string.Join(", ", drives) + "\n";
+
+            //作業系統位置
+            string str = Environment.GetEnvironmentVariable("SystemRoot");
+            richTextBox1.Text += "作業系統在" + str + "\n";
+            string dir = str.Substring(0, 2);
+            richTextBox1.Text += "作業系統在" + dir + "\n";
+
+            //檢視目前系統版本
+            OperatingSystem os = Environment.OSVersion;
+            richTextBox1.Text += "目前系統版本： " + os.ToString() + "\n";
+            richTextBox1.Text += "目前系統版本.Version： " + os.Version.ToString() + "\n";
+            richTextBox1.Text += "目前系統版本.Platform： " + os.Platform.ToString() + "\n";
+            richTextBox1.Text += "目前系統版本： ";
+            if (os.Version.Major == 5)
+            {
+                switch (os.Version.Minor)
+                {
+                    case 0:
+                        richTextBox1.Text += "Windows 2000 " + os.ServicePack + "\n";
+                        break;
+                    case 1:
+                        richTextBox1.Text += "Windows XP " + os.ServicePack + "\n";
+                        break;
+                    case 2:
+                        richTextBox1.Text += "Windows Server 2003 " + " " + os.ServicePack + "\n";
+                        break;
+                    default:
+                        richTextBox1.Text += os.ToString() + " " + os.ServicePack + "\n";
+                        break;
+                }
+            }
+            else
+            {
+                richTextBox1.Text += os.VersionString + " " + os.ServicePack + "\n";
+            }
+        }
+
+        private void button61_Click(object sender, EventArgs e)
+        {
+            //取得系統環境變數
+            richTextBox1.Text += "環境變數" + "\t\t\t" + "變數值" + "\n";
+            foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
+            {
+                richTextBox1.Text += DEntry.Key.ToString() + "\t" + DEntry.Value.ToString() + "\n";
+            }
+        }
+
+        private void button62_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "UserAppDataRegistry使用\n";
+
+            richTextBox1.Text += "把數值寫進系統變數AAAA\n";
+            Application.UserAppDataRegistry.SetValue("AAAA", 123);
+
+            richTextBox1.Text += "把系統變數AAAA的內容讀出來\n";
+            int result;
+            result = (int)Application.UserAppDataRegistry.GetValue("AAAA");
+            richTextBox1.Text += "結果 : " + result.ToString() + "\n";
+        }
+
+        private void button63_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button64_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button65_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button66_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button67_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button69_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button70_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button71_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void timer3_Tick(object sender, EventArgs e)
@@ -1607,5 +1666,7 @@ namespace vcs_System1
             richTextBox1.Text += "CPU: " + cpu.NextValue() + " %\n";
             richTextBox1.Text += "Memory: " + memory.NextValue() + " %\n";
         }
+
+
     }
 }

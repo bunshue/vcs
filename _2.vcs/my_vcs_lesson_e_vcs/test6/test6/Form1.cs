@@ -480,18 +480,6 @@ namespace test6
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //建立亂七八糟陣列
-            byte[] dataArray = new byte[100];//字節
-
-            new Random().NextBytes(dataArray);//創建隨機字節
-
-            for (int i = 0; i < dataArray.Length; i++)
-            {
-
-                //sf.WriteByte(dataArray[i]);//將字節寫入文件理.
-                richTextBox1.Text += dataArray[i].ToString() + " ";
-
-            }
 
         }
 

@@ -1161,7 +1161,6 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(180, 40);
             this.button43.TabIndex = 79;
-            this.button43.Text = "DataTable用法";
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
             // 

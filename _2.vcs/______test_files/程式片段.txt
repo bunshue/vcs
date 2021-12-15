@@ -1,6 +1,35 @@
 
-return String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
 
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //html轉txt
+            //http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184774.html
+        }
+
+        /// C#過濾html標簽
+        /// 用正則表達式來做html轉txt
+        public static string Html2Text(string htmlStr)
+        {
+            if (String.IsNullOrEmpty(htmlStr))
+            {
+                return "";
+            }
+            string regEx_style = "<style[^>]*?>[\\s\\S]*?<\\/style>"; //定義style的正則表達式
+            string regEx_script = "<script[^>]*?>[\\s\\S]*?<\\/script>"; //定義script的正則表達式
+            string regEx_html = "<[^>]+>"; //定義HTML標簽的正則表達式
+            htmlStr = Regex.Replace(htmlStr, regEx_style, "");//刪除css
+            htmlStr = Regex.Replace(htmlStr, regEx_script, "");//刪除js
+            htmlStr = Regex.Replace(htmlStr, regEx_html, "");//刪除html標記
+            htmlStr = Regex.Replace(htmlStr, "\\s*|\t|\r|\n", "");//去除tab、空格、空行
+            htmlStr = htmlStr.Replace(" ", "");
+            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
+            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
+            return htmlStr.Trim();
+        }
+
+
+
+		
 
 Application.UserAppDataRegistry.SetValue("SN", sn);
 
@@ -1328,12 +1357,6 @@ using System.Runtime.InteropServices;
 Path.Combine
             //string directory = System.AppDomain.CurrentDomain.BaseDirectory;
             //this.iniFilePath = Path.Combine(directory, "config.ini");
-
-
-
-//            return String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
-
-
 
 
 
@@ -4128,19 +4151,6 @@ using System.Reflection;
 
 
 
-
-
-
-用C#獲取硬盤ID編號
-在軟件產品中常常需要制作軟件注冊碼，而根據硬件產品編號制作注冊碼是一個不錯得選擇。可以使用讀取注冊表的方式獲得第一塊硬盤的編號。 主要程序代碼。
-
-private void button1_Click(object sender, EventArgs e)
-{
-    textBox1.Text = Registry.GetValue("HKEY_Local_Machine\\HardWare\\Devicemap\\Scsi\\Scsi port 0\\Scsi Bus 0\\Target Id 1\\Logical Unit Id 0","Identifier","cuowu").ToString();
-}
-
-
-
             richTextBox1.Text += "string.PadLeft 字串統一長度或補字元\n";
             int a = 15;
             string s1 = a.ToString().PadLeft(10, '-');
@@ -4184,18 +4194,7 @@ private void button1_Click(object sender, EventArgs e)
                 }
             }
             
-                            
-
-String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 
-如:
-
-（1）
-string p1 = "Jackie";
-string p2 = "Aillo";
-Response.Write(String.Format("Hello {0}, I'm {1}", p1, p2));
-（2）
-Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
-
+                           
 
 求取字母的ASCII值
 

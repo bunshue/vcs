@@ -473,7 +473,6 @@ namespace vcs_test_all_01_DateTime
             DateTime arrival = new DateTime(2017, 3, 15, 22, 47, 0);
             TimeSpan travelTime = arrival - departure;
             richTextBox1.Text += "time = " + travelTime.ToString("T") + "\n";
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -481,7 +480,6 @@ namespace vcs_test_all_01_DateTime
             string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
             string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
             richTextBox1.Text += week + "\n";
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -1798,3 +1796,4 @@ namespace vcs_test_all_01_DateTime
         }
     }
 }
+

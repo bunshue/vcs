@@ -493,7 +493,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(1129, 464);
+            this.label1.Location = new System.Drawing.Point(642, 458);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 24);
             this.label1.TabIndex = 33;
@@ -503,7 +503,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(1199, 464);
+            this.label2.Location = new System.Drawing.Point(712, 458);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 24);
             this.label2.TabIndex = 34;
@@ -513,7 +513,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(1129, 499);
+            this.label3.Location = new System.Drawing.Point(642, 493);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 24);
             this.label3.TabIndex = 35;
@@ -523,7 +523,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(1199, 499);
+            this.label4.Location = new System.Drawing.Point(712, 493);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 24);
             this.label4.TabIndex = 36;
@@ -679,7 +679,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(1260, 464);
+            this.label5.Location = new System.Drawing.Point(773, 458);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 24);
             this.label5.TabIndex = 50;
@@ -811,7 +811,7 @@
             this.groupBox1.Controls.Add(this.txtDate);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox1.Location = new System.Drawing.Point(863, 22);
+            this.groupBox1.Location = new System.Drawing.Point(1128, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(254, 241);
             this.groupBox1.TabIndex = 61;
@@ -956,7 +956,7 @@
             this.groupBox2.Controls.Add(this.textBox8);
             this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox2.Location = new System.Drawing.Point(1130, 22);
+            this.groupBox2.Location = new System.Drawing.Point(1128, 259);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(254, 241);
             this.groupBox2.TabIndex = 62;
@@ -1150,7 +1150,7 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.listView1.Location = new System.Drawing.Point(863, 269);
+            this.listView1.Location = new System.Drawing.Point(962, 541);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(419, 165);
             this.listView1.TabIndex = 65;
@@ -1241,7 +1241,7 @@
             // bt3
             // 
             this.bt3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt3.Location = new System.Drawing.Point(1217, 392);
+            this.bt3.Location = new System.Drawing.Point(1316, 664);
             this.bt3.Name = "bt3";
             this.bt3.Size = new System.Drawing.Size(56, 39);
             this.bt3.TabIndex = 72;
@@ -1252,7 +1252,7 @@
             // bt4
             // 
             this.bt4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt4.Location = new System.Drawing.Point(1033, 568);
+            this.bt4.Location = new System.Drawing.Point(650, 394);
             this.bt4.Name = "bt4";
             this.bt4.Size = new System.Drawing.Size(126, 40);
             this.bt4.TabIndex = 73;
@@ -1392,14 +1392,12 @@
             this.Controls.Add(this.button53);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.bt4);
-            this.Controls.Add(this.bt3);
             this.Controls.Add(this.bt2);
             this.Controls.Add(this.bt1);
             this.Controls.Add(this.bt0);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button51);
-            this.Controls.Add(this.listView1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
@@ -1463,6 +1461,8 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.bt3);
+            this.Controls.Add(this.listView1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

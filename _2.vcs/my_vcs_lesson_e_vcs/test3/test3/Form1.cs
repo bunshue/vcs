@@ -164,151 +164,11 @@ namespace test3
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string result = appInfo();
-            richTextBox1.Text += result + "\n";
         }
 
-        public static string appInfo()
-        {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string result = "File Version: " + fvi.FileVersion
-                + Environment.NewLine + "Company Name: " + fvi.CompanyName
-                + Environment.NewLine + "Comments: " + fvi.Comments
-                + Environment.NewLine + "Product Name: " + fvi.ProductName
-                + Environment.NewLine + "Copyright: " + fvi.LegalCopyright
-                + Environment.NewLine + "File Name: " + fvi.FileName
-                + Environment.NewLine + "Original File Name: " + fvi.OriginalFilename
-                + Environment.NewLine + "Product Version: " + fvi.ProductVersion
-                + Environment.NewLine + "Special build: " + fvi.SpecialBuild
-                + Environment.NewLine + "" + fvi.CompanyName;
-            return result;
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //html轉txt
-            //http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184774.html
-        }
-
-        /// C#過濾html標簽
-        /// 用正則表達式來做html轉txt
-        public static string Html2Text(string htmlStr)
-        {
-            if (String.IsNullOrEmpty(htmlStr))
-            {
-                return "";
-            }
-            string regEx_style = "<style[^>]*?>[\\s\\S]*?<\\/style>"; //定義style的正則表達式
-            string regEx_script = "<script[^>]*?>[\\s\\S]*?<\\/script>"; //定義script的正則表達式
-            string regEx_html = "<[^>]+>"; //定義HTML標簽的正則表達式
-            htmlStr = Regex.Replace(htmlStr, regEx_style, "");//刪除css
-            htmlStr = Regex.Replace(htmlStr, regEx_script, "");//刪除js
-            htmlStr = Regex.Replace(htmlStr, regEx_html, "");//刪除html標記
-            htmlStr = Regex.Replace(htmlStr, "\\s*|\t|\r|\n", "");//去除tab、空格、空行
-            htmlStr = htmlStr.Replace(" ", "");
-            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
-            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
-            return htmlStr.Trim();
-        }
-
-        // 顏色模板
-        //  黑、白、紅、綠、藍、黃/ 棕 、灰
-        private const int BLACK = 0;
-        private const int WHITE = 1;
-        private const int RED1 = 2;
-        private const int RED2 = 3;
-        private const int GREEN1 = 4;
-        private const int GREEN2 = 5;
-        private const int BLUE1 = 6;
-        private const int BLUE2 = 7;
-        private const int YELLOW1 = 8;
-        private const int YELLOW2 = 9;
-        private const int BROWN = 10;
-        private const int GRAY = 11;
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //顯示顏色
-            int[,] colorVelue = null;
-            colorVelue = new int[,] {
-            {50,50,50},    //黑
-            {255,255,255},  //白
-            {240,80,80}, //紅小
-            {240,160,160},  //紅大
-            {60,180,60}, //綠小
-            {160,240,160},  //綠大
-            {80,80,240}, //藍小
-            {160,160,240},  //藍大
-            {240,190,80}, //黃小
-            {240,240,160},  //黃大
-            {205,133,63},   //棕/褐
-            //{162,162,162},//灰，特殊
-            };
-
-            int total_colors = colorVelue.GetUpperBound(0) + 1;
-            richTextBox1.Text += "total_colors = " + total_colors.ToString() + "\n";
-
-            int i;
-            for (i = 0; i < total_colors; i++)
-            {
-                switch (i)
-                {
-                    case -1:
-                        richTextBox1.Text += "無此色\n";
-                        break;
-                    case 0:
-                        richTextBox1.Text += "黑\n";
-                        break;
-                    case 1:
-                        richTextBox1.Text += "白\n";
-                        break;
-                    case 2:
-                        richTextBox1.Text += "紅\n";
-                        break;
-                    case 3:
-                        richTextBox1.Text += "紅\n";
-                        break;
-                    case 4:
-                        richTextBox1.Text += "綠\n";
-                        break;
-                    case 5:
-                        richTextBox1.Text += "綠\n";
-                        break;
-                    case 6:
-                        richTextBox1.Text += "藍\n";
-                        break;
-                    case 7:
-                        richTextBox1.Text += "藍\n";
-                        break;
-                    case 8:
-                        richTextBox1.Text += "黃\n";
-                        break;
-                    case 9:
-                        richTextBox1.Text += "黃\n";
-                        break;
-                    case 10:
-                        richTextBox1.Text += "棕\n";
-                        break;
-                    case 11:
-                        richTextBox1.Text += "灰\n";
-                        break;
-                    default:
-                        richTextBox1.Text += "其他\n";
-                        break;
-                }
-
-                int R = colorVelue[i, 0];
-                int G = colorVelue[i, 1];
-                int B = colorVelue[i, 2];
-                richTextBox1.Text += "show color " + i.ToString() + " " + R.ToString() + " " + G.ToString() + " " + B.ToString() + "\n";
-
-                pictureBox1.BackColor = Color.FromArgb(R, G, B);
-                Application.DoEvents();
-                Thread.Sleep(1000);
-
-            }
-
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -335,6 +195,11 @@ namespace test3
 
             //string thefullname = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + ".gif"; // "nowtime.gif";
             //richTextBox1.Text += thefullname + "\n";
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

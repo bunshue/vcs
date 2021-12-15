@@ -18,6 +18,9 @@ using System.Media;     //for SoundPlayer
 using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/加入參考/.Net/System.Web
 using System.Globalization; //for CultureInfo
 
+using System.Xml;
+using System.Xml.Linq;
+
 using Shell32;  //需/參考/加入參考/COM/Microsoft Shell Controls And Automation 並把 Shell32屬性的內嵌Interop型別改成False
 
 namespace vcs_Mix01
@@ -461,7 +464,35 @@ namespace vcs_Mix01
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //格式化列印
 
+            Console.WriteLine("The value 99999 in different ways:");
+            Console.WriteLine("c format : {0:c}", 99999);
+            Console.WriteLine("d9 format : {0:d9}", 99999);
+            Console.WriteLine("f format : {0:f3}", 99999);
+            Console.WriteLine("g format : {0:g}", 99999);
+
+            Console.WriteLine("n format : {0:n}", 99999);
+            Console.WriteLine("E format : {0:E}", 99999);
+            Console.WriteLine("e format : {0:e}", 99999);
+            Console.WriteLine("X format : {0:X}", 99999);
+            Console.WriteLine("x format : {0:x}", 99999);
+
+            int x1 = 3;
+            int x2 = 8;
+            int x3 = 3;
+            int x4 = 4;
+            int x5 = 2;
+            string xx = String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
+            richTextBox1.Text += "xx = " + xx + "\n";
+
+            richTextBox1.Text += "String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 \n";
+
+            string p1 = "Jackie";
+            string p2 = "Aillo";
+
+            richTextBox1.Text += String.Format("Hello {0}, I'm {1}", p1, p2) + "\n";
+            richTextBox1.Text += String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo") + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -1037,7 +1068,25 @@ namespace vcs_Mix01
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            string result = appInfo();
+            richTextBox1.Text += result + "\n";
+        }
 
+        public static string appInfo()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string result = "File Version: " + fvi.FileVersion
+                + Environment.NewLine + "Company Name: " + fvi.CompanyName
+                + Environment.NewLine + "Comments: " + fvi.Comments
+                + Environment.NewLine + "Product Name: " + fvi.ProductName
+                + Environment.NewLine + "Copyright: " + fvi.LegalCopyright
+                + Environment.NewLine + "File Name: " + fvi.FileName
+                + Environment.NewLine + "Original File Name: " + fvi.OriginalFilename
+                + Environment.NewLine + "Product Version: " + fvi.ProductVersion
+                + Environment.NewLine + "Special build: " + fvi.SpecialBuild
+                + Environment.NewLine + "" + fvi.CompanyName;
+            return result;
         }
 
         //C#兩種方法判斷字符是否為漢字
@@ -1390,23 +1439,193 @@ namespace vcs_Mix01
         {
             show_button_text(sender);
 
+            //C# 模擬鍵盤操作--SendKey(),SendKeys()
+            //https://www.cnblogs.com/wolfocme110/p/13444309.html
+
+
+            //光标移至richTextBox1
+            richTextBox1.Focus();
+
+            //模拟按下"ABCDEFG"
+            SendKeys.SendWait("(ABCDEFG)");
+            SendKeys.SendWait("{left 5}");
+            SendKeys.SendWait("{h 10}");
+
+            /*
+            更多举例:
+            SendKeys.SendWait("^C");  //Ctrl+C 组合键
+            SendKeys.SendWait("+C");  //Shift+C 组合键
+            SendKeys.SendWait("%C");  //Alt+C 组合键
+            SendKeys.SendWait("+(AX)");  //Shift+A+X 组合键
+            SendKeys.SendWait("+AX");  //Shift+A 组合键,之后按X键
+            SendKeys.SendWait("{left 5}");  //按←键 5次
+            SendKeys.SendWait("{h 10}");   //按h键 10次
+            SendKeys.Send("汉字");  //模拟输入"汉字"2个字
+            */
+
+
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //LINQ to XML write
+            /*
+            //LINQ to XML操作Xml文檔
 
+
+            //.Net中的System.Xml.Linq命名空間提供了linq to xml的支持。這個命名空間中的XDocument，XElement以及XText，XAttribute提供了讀寫xml文檔的關鍵方法。
+            1. 使用linq to xml寫xml：
+            使用XDocument的構造函數可以構造一個Xml文檔對象；使用XElement對象可以構造一個xml節點元素，使用XAttribute構造函數可以構造元素的屬性；使用XText構造函數可以構造節點內的文本。
+            */
+
+
+            var xDoc = new XDocument(new XElement("root",
+                new XElement("dog",
+                    new XText("dog said black is a beautify color"),
+                    new XAttribute("color", "black")),
+                new XElement("cat"),
+                new XElement("pig", "pig is great")));
+
+            //xDoc輸出xml的encoding是系統默認編碼，對於簡體中文操作系統是gb2312
+            //默認是縮進格式化的xml，而無須格式化設置
+            xDoc.Save("aaaa.xml");
+
+
+            //LINQ to XML read
+
+
+            var query = from item in xDoc.Element("root").Elements()
+                        select new
+                        {
+                            TypeName = item.Name,
+                            Saying = item.Value,
+                            Color = item.Attribute("color") == null ? (string)null : item.Attribute("color").Value
+                        };
+
+
+            foreach (var item in query)
+            {
+                Console.WriteLine("{0} 's color is {1},{0} said {2}", item.TypeName, item.Color ?? "Unknown", item.Saying ?? "nothing");
+                richTextBox1.Text += item.TypeName + "\t" + item.Color + "\n";
+            }
         }
+
+
+        // 顏色模板
+        //  黑、白、紅、綠、藍、黃/ 棕 、灰
+        private const int BLACK = 0;
+        private const int WHITE = 1;
+        private const int RED1 = 2;
+        private const int RED2 = 3;
+        private const int GREEN1 = 4;
+        private const int GREEN2 = 5;
+        private const int BLUE1 = 6;
+        private const int BLUE2 = 7;
+        private const int YELLOW1 = 8;
+        private const int YELLOW2 = 9;
+        private const int BROWN = 10;
+        private const int GRAY = 11;
 
         private void button28_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //顯示顏色
+            int[,] colorVelue = null;
+            colorVelue = new int[,] {
+            {50,50,50},    //黑
+            {255,255,255},  //白
+            {240,80,80}, //紅小
+            {240,160,160},  //紅大
+            {60,180,60}, //綠小
+            {160,240,160},  //綠大
+            {80,80,240}, //藍小
+            {160,160,240},  //藍大
+            {240,190,80}, //黃小
+            {240,240,160},  //黃大
+            {205,133,63},   //棕/褐
+            //{162,162,162},//灰，特殊
+            };
 
+            int total_colors = colorVelue.GetUpperBound(0) + 1;
+            richTextBox1.Text += "total_colors = " + total_colors.ToString() + "\n";
+
+            int i;
+            for (i = 0; i < total_colors; i++)
+            {
+                switch (i)
+                {
+                    case -1:
+                        richTextBox1.Text += "無此色\n";
+                        break;
+                    case 0:
+                        richTextBox1.Text += "黑\n";
+                        break;
+                    case 1:
+                        richTextBox1.Text += "白\n";
+                        break;
+                    case 2:
+                        richTextBox1.Text += "紅\n";
+                        break;
+                    case 3:
+                        richTextBox1.Text += "紅\n";
+                        break;
+                    case 4:
+                        richTextBox1.Text += "綠\n";
+                        break;
+                    case 5:
+                        richTextBox1.Text += "綠\n";
+                        break;
+                    case 6:
+                        richTextBox1.Text += "藍\n";
+                        break;
+                    case 7:
+                        richTextBox1.Text += "藍\n";
+                        break;
+                    case 8:
+                        richTextBox1.Text += "黃\n";
+                        break;
+                    case 9:
+                        richTextBox1.Text += "黃\n";
+                        break;
+                    case 10:
+                        richTextBox1.Text += "棕\n";
+                        break;
+                    case 11:
+                        richTextBox1.Text += "灰\n";
+                        break;
+                    default:
+                        richTextBox1.Text += "其他\n";
+                        break;
+                }
+
+                int R = colorVelue[i, 0];
+                int G = colorVelue[i, 1];
+                int B = colorVelue[i, 2];
+                richTextBox1.Text += "show color " + i.ToString() + " " + R.ToString() + " " + G.ToString() + " " + B.ToString() + "\n";
+
+                ((Button)sender).BackColor = Color.FromArgb(R, G, B);
+                Application.DoEvents();
+                Thread.Sleep(1000);
+
+            }
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //建立亂七八糟陣列
+            byte[] dataArray = new byte[100];//字節
+
+            new Random().NextBytes(dataArray);//創建隨機字節
+
+            for (int i = 0; i < dataArray.Length; i++)
+            {
+
+                //sf.WriteByte(dataArray[i]);//將字節寫入文件理.
+                richTextBox1.Text += dataArray[i].ToString() + " ";
+
+            }
 
         }
 
@@ -1433,5 +1652,4 @@ namespace vcs_Mix01
             return HttpUtility.UrlDecode(s);
         }
     }
-
 }

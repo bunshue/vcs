@@ -72,6 +72,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(170, 70);
             this.button29.TabIndex = 116;
+            this.button29.Text = "建立亂七八糟陣列";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -82,6 +83,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(170, 70);
             this.button28.TabIndex = 115;
+            this.button28.Text = "顯示顏色";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -92,6 +94,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(170, 70);
             this.button27.TabIndex = 114;
+            this.button27.Text = "LINQ to XML RW";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -102,6 +105,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(170, 70);
             this.button26.TabIndex = 113;
+            this.button26.Text = "C# 模擬鍵盤操作--SendKey(),SendKeys()";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -177,6 +181,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(170, 70);
             this.button19.TabIndex = 106;
+            this.button19.Text = "Get APP Info";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -220,6 +225,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(170, 70);
             this.button9.TabIndex = 102;
+            this.button9.Text = "格式化列印";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
