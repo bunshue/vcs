@@ -1,5 +1,97 @@
 
+return String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
 
+
+Application.UserAppDataRegistry.SetValue("SN", sn);
+
+
+Application.UserAppDataRegistry.SetValue("SN", sn);
+
+
+result = (int)Application.UserAppDataRegistry.GetValue("AAAA");
+
+
+            object val = Application.UserAppDataRegistry.GetValue("SN");
+
+            if (val == null)
+            {
+                desc = "未檢測到本機的序列號";
+                return -1;
+            }
+
+            string sn = val.ToString();
+
+            LicenseInfo regInfo = GetRegInfo(sn);
+            string md5 = Safety.MD5(key);
+            if (String.CompareOrdinal(md5.Substring(md5.Length - 5), regInfo.KeySn) != 0)
+            {
+                desc = "關鍵字與序列號不匹配";
+                return -2;//關鍵字與序列號不匹配
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//MD5 加密，md5加密
+
+/// <summary>
+/// MD5加密
+/// </summary>
+/// <param name="value">需要加密的值</param>
+/// <param name="pwSalt">附加值</param>
+/// <returns></returns>
+public static string GetMD5(string value, string pwSalt)
+{
+HashAlgorithm hashAlgorithm = new MD5CryptoServiceProvider(); // or SHA1CryptoServiceProvider();
+byte[] result = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(pwSalt+value));
+
+StringBuilder sBuilder = new StringBuilder();
+for (int i = 0; i < result.Length; i++)
+{
+sBuilder.Append(result[i].ToString("x2"));
+}
+return sBuilder.ToString();
+}
+
+　　
+            	//讀取一檔
+                FileStream fs = new FileStream(targetPath, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                br.BaseStream.Seek(0, SeekOrigin.Begin); //將指針設到開頭
+                while (br.BaseStream.Position < br.BaseStream.Length)
+                {
+                    try
+                    {
+                        Console.WriteLine(br.ReadString());
+                    }
+                    catch (EndOfStreamException e)
+                    {
+                        Console.WriteLine("已經到了結尾 {0}", e.ToString());
+                    }
+                }
+                br.Close();
+                fs.Close();
+
+
+        /// <summary>
+        /// 獲得電腦所有的驅動盤
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetMyLogicalDrives()
+        {
+            return Directory.GetLogicalDrives();
+        }
+        
 取得控件
         private void button2_Click(object sender, EventArgs e)
         {
@@ -5248,23 +5340,115 @@ return retVal.ToString("x");
 
 
 
+ 
+\\圖片格式轉換
+
+        public void ImageFormatter(string sourcePath, string distationPath, string format) {
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(sourcePath);
+            switch (format.ToLower()) {
+                case "bmp":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Bmp);
+                    break;
+                case "emf":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Emf);
+                    break;
+                case "gif":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Gif);
+                    break;
+                case "ico":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Icon);
+                    break;
+                case "jpg":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    break;
+                case "png":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Png);
+                    break;
+                case "tif":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Tiff);
+                    break;
+                case "wmf":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Wmf);
+                    break;
+                default: throw new Exception("無法轉換此格式！");
+            }
+        }
 
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+            //C#從剪貼板取出圖片然後寫上字保存到文件
+            IDataObject data = Clipboard.GetDataObject();
+            Image image = (Image)(data.GetData(typeof(Bitmap)));
+            Graphics g = Graphics.FromImage(image);
+            SolidBrush sb = new SolidBrush(Color.Red);
+            Font f = new Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Millimeter);
+            int x_st = image.Height - (image.Height - 25);
+            int y_st = 3;
+
+            g.DrawString("zydzydyzydydydyyydydy", f, sb, x_st, y_st);
+
+            Image small_image;
+
+            small_image = image.GetThumbnailImage(image.Width, image.Height, null, System.IntPtr.Zero);
+            small_image.Save("show_pic_small.jpg", ImageFormat.Jpeg);
+            image.Save("show_pic.jpg", ImageFormat.Jpeg);
+            image = null;
+            small_image = null;
 
 
 //--------------------------------------------------------------------------------------------------------------------------
 
+//如何將List轉換為DataTable
+
+public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
+{
+	DataTable result = new DataTable();
+	if (list.Count > 0)
+	{
+		PropertyInfo[] propertys = list[0].GetType().GetProperties();
+		foreach (PropertyInfo pi in propertys)
+		{
+			result.Columns.Add(pi.Name, pi.PropertyType);
+		}
+		for (int i = 0; i < list.Count; i++)
+		{
+			ArrayList tempList = new ArrayList();
+			foreach (PropertyInfo pi in propertys)
+			{
+				object obj = pi.GetValue(list[i], null);
+				tempList.Add(obj);
+			}
+			object[] array = tempList.ToArray();
+			result.LoadDataRow(array, true);
+		}
+	}
+	return result;
+}
+
 
 
 
 
 //--------------------------------------------------------------------------------------------------------------------------
 
+MD5
 
+string md5 = MD5(key);
+
+       public static string MD5(string str)
+       {
+              string strResult = "";
+              MD5 md5 = System.Security.Cryptography.MD5.Create();
+              byte[] bData = md5.ComputeHash(Encoding.Unicode.GetBytes(str));
+              for (int i = 0; i < bData.Length; i++)
+              {
+                     strResult = strResult + bData[i].ToString("X");
+              }
+              return strResult;
+       }
 
 
 

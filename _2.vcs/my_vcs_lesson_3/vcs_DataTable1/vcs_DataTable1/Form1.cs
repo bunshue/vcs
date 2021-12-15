@@ -247,8 +247,63 @@ namespace vcs_DataTable1
 
         private void button8_Click(object sender, EventArgs e)
         {
+            DataTable dt = new DataTable();
 
+            richTextBox1.Text += "建立DataTable, 填入資料\n";
+
+            dt = create_datatable_data();
+
+
+            richTextBox1.Text += "顯示DataTable資料a\n";
+            int i;
+            for (i = 0; i < 10; i++)
+            {
+                richTextBox1.Text += dt.Rows[i][0].ToString() + "\n";
+
+            }
+
+            richTextBox1.Text += "顯示DataTable資料b\n";
+            ShowData(dt);
         }
+
+        public DataTable create_datatable_data()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("Col");
+            string data = string.Empty;
+            for (int i = 0; i < 10; i++)
+            {
+                data = "DT資料 " + i.ToString();
+                table.Rows.Add(data);
+                richTextBox1.Text += "加入資料 : " + data + "\n";
+            }
+            return table;
+        }
+
+        public List<object> GetSomeDatas()
+        {
+            List<object> result = new List<object>();
+            DataTable dt = new DataTable();
+            dt = create_datatable_data();
+            foreach (DataRow row in dt.Rows)
+            {
+                result.Add(row[0]);
+            }
+            return result;
+        }
+
+        public void ShowData(DataTable dt)
+        {
+            List<object> datas = GetSomeDatas();
+
+            richTextBox1.Text += "共有資料 : " + datas.Count.ToString() + " 筆\n";
+
+            foreach (object item in datas)
+            {
+                richTextBox1.Text += "顯示資料 : " + item + "\n";
+            }
+        }
+         
 
         private void button9_Click(object sender, EventArgs e)
         {

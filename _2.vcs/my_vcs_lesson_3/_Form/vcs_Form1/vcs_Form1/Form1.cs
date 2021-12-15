@@ -34,6 +34,12 @@ namespace vcs_Form1
             InitializeComponent();
         }
 
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            //程式啟動時, 游標停在RichTextBox
+            this.richTextBox1.Focus();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //建立一個新的視窗物件
@@ -137,6 +143,7 @@ namespace vcs_Form1
             button43.Location = new Point(x_st + dx * 3, y_st + dy * 7);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            label5.Location = new Point(x_st + dx * 3, y_st + dy * 12);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
@@ -743,7 +750,5 @@ namespace vcs_Form1
         {
             FlashWindow(this.Handle, true);
         }
-
     }
 }
-

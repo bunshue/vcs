@@ -803,5 +803,50 @@ namespace vcs_ImageProcessing1
             pictureBox1.Image = pp(pictureBox1, cx, cy, R, 150F);
         }
         //光暈效果 SP
+
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //string filename = "C:\\______test_files\\ims_image.bmp";
+            string filename = @"C:\______test_files\ims1.bmp";
+
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            pictureBox1.Image = Image.FromFile(filename);
+
+
+            // Retrieve the image.
+            Bitmap image1 = new Bitmap(filename, true);
+
+            int x, y;
+
+            // Loop through the images pixels to reset color.
+            for (x = 0; x < image1.Width; x++)
+            {
+                for (y = 0; y < image1.Height; y++)
+                {
+                    Color pixelColor = image1.GetPixel(x, y);
+                    //Color newColor = Color.FromArgb(pixelColor.R, 0, 0);
+                    //Color newColor = Color.FromArgb(0, pixelColor.G, 0);
+                    byte newColor_r = (byte)((pixelColor.R / 20) * 20);
+                    byte newColor_g = (byte)((pixelColor.G / 20) * 20);
+                    byte newColor_b = (byte)((pixelColor.B / 20) * 20);
+
+                    Color newColor = Color.FromArgb(newColor_r, newColor_g, newColor_b);
+
+                    image1.SetPixel(x, y, newColor);
+                }
+            }
+
+            // Set the PictureBox to display the image.
+            pictureBox2.Image = image1;
+
+            richTextBox1.Text += "圖片大小 " + image1.Width.ToString() + " X " + image1.Height.ToString() + "\n";
+
+            // Display the pixel format in Label1.
+            richTextBox1.Text += "Pixel format: " + image1.PixelFormat.ToString() + "\n";
+
+
+        }
     }
 }
