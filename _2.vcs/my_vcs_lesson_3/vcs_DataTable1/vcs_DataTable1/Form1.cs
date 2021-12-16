@@ -367,6 +367,53 @@ namespace vcs_DataTable1
 
         private void button10_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "構建DataTable，給列名添加公式\n";
+
+            //計算公式
+            string expression1 = "a+b*(c-d)";
+            string expression2 = "a+b-c-d";
+
+            //構建DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.Add("a", typeof(int));
+            dt.Columns.Add("b", typeof(int));
+            dt.Columns.Add("c", typeof(int));
+            dt.Columns.Add("d", typeof(int));
+            dt.Columns.Add("e1", typeof(int));//公式列
+            dt.Columns.Add("e2", typeof(int));//公式列
+
+            //添加公式
+            dt.Columns["e1"].Expression = expression1;
+            dt.Columns["e2"].Expression = expression2;
+
+            //添加一行並賦值
+            DataRow row = dt.Rows.Add();
+            row["a"] = 1;
+            row["b"] = 2;
+            row["c"] = 4;
+            row["d"] = 3;
+
+            dt.BeginLoadData();
+            dt.EndLoadData();
+
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                Console.Write(dt.Columns[i].ColumnName + "\t");
+                richTextBox1.Text += dt.Columns[i].ColumnName + "\t";
+            }
+
+            Console.WriteLine();
+            richTextBox1.Text += "\n";
+
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                Console.Write(row[i].ToString() + "\t");
+                richTextBox1.Text += row[i].ToString() + "\t";
+            }
+
+            richTextBox1.Text += "\n";
+
+
 
         }
 

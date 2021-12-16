@@ -55,13 +55,13 @@ namespace vcs_ReadWrite_Barcode
 
 
 
-/*
-            //一維碼生成
-            //code39
+            /*
+                        //一維碼生成
+                        //code39
 
-            Bitmap bitmap1 = GetCode39("lion-mouse 123456", 200, StringFormat.GenericDefault);
-            pictureBox1.Image = bitmap1;
-*/
+                        Bitmap bitmap1 = GetCode39("lion-mouse 123456", 200, StringFormat.GenericDefault);
+                        pictureBox1.Image = bitmap1;
+            */
         }
 
         /// <summary>
@@ -282,6 +282,20 @@ namespace vcs_ReadWrite_Barcode
             }
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string number_to_encode = "3834214122";
+            pictureBox1.Image = new CSharpCode39()
+            {
+                DataToEncode = number_to_encode,
+                HumanReadable = true,
+                Checksum = true,
+                IsDisplayCheckCode = true
+                //,IsDisplayStartStopSign=true
+                //,CodeBarColor=Color.Red
+
+            }.getBitmapImage(96);
+
+        }
     }
 }
-

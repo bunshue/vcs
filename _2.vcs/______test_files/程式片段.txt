@@ -5,6 +5,18 @@
 http://pan.baidu.com/s/1o8qyWLs
 
 
+    /// <summary>
+    /// 日志等级
+    /// </summary>
+    public enum FlashLogLevel
+    {
+        Debug,
+        Info,
+        Error,
+        Warn,
+        Fatal
+    }
+    
 
 c#發送數據到剪貼板及從剪貼板獲取數據
 
@@ -5503,7 +5515,28 @@ string md5 = MD5(key);
 
 
 
+以任意角度旋轉圖像示例。
 
+ 
+
+實現任意角度旋轉圖像主要使用Graphics類提供的RotateTransform()方法。代碼如下：
+
+private void button1_Click(object sender, EventArgs e)
+{
+    //以任意角度旋轉顯示圖像
+    Graphics g = this.panel1.CreateGraphics();
+    float MyAngle = 0;//旋轉的角度
+    while (MyAngle < 360)
+    {
+        TextureBrush MyBrush = new TextureBrush(MyBitmap);
+        this.panel1.Refresh();
+        MyBrush.RotateTransform(MyAngle);
+        g.FillRectangle(MyBrush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
+        MyAngle += 0.5f;
+        System.Threading.Thread.Sleep(50);
+    }
+}
+     
 
 
 

@@ -203,6 +203,11 @@ namespace vcs_DataGridView1
             dgvc.HeaderText = "水果";//设置列标题文本
             dataGridView1.Columns.Add(dgvc);//将列添加到集合
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     class Fruit

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BB675C9F-728C-4278-9E51-2236D6BE7A1C}</ProjectGuid>
+    <ProjectGuid>{1EA27B5D-0D7E-46D6-88DC-A0D95F1F0187}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ReadWrite_Barcode</RootNamespace>
-    <AssemblyName>vcs_ReadWrite_Barcode</AssemblyName>
+    <RootNamespace>vcs_DataGridView8</RootNamespace>
+    <AssemblyName>vcs_DataGridView8</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -34,12 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BarcodeLib">
-      <HintPath>dll\BarcodeLib.dll</HintPath>
-    </Reference>
-    <Reference Include="NBarCodes">
-      <HintPath>dll\NBarCodes.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,12 +44,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="zxing">
-      <HintPath>dll\zxing.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSharpCode39.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
