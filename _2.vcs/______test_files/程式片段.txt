@@ -1,5 +1,53 @@
 
 
+下載地址
+
+http://pan.baidu.com/s/1o8qyWLs
+
+
+
+c#發送數據到剪貼板及從剪貼板獲取數據
+
+//將文字資料複製到剪貼簿
+ private void btn_send_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Clipboard.SetText(textBox1.Text);
+                MessageBox.Show("已成功將文本框內容復制到剪貼板!");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error!");
+            }
+        }
+
+//從剪貼簿取出文字資料
+        private void btn_get_Click(object sender, EventArgs e)
+        {
+            string txt2 = textBox2.Text;
+            try
+            {
+                IDataObject iData = Clipboard.GetDataObject();
+                if (iData.GetDataPresent(DataFormats.Text))
+                {
+                    //MessageBox.Show((string)iData.GetData(DataFormats.Text));
+                    textBox2.Text = (string)iData.GetData(DataFormats.UnicodeText);
+                }
+                else
+                {
+                    MessageBox.Show("目前剪貼板中數據不可轉換為文本", "錯誤");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+
+
+
         private void button12_Click(object sender, EventArgs e)
         {
             //html轉txt

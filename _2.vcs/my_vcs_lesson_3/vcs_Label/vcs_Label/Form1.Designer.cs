@@ -53,6 +53,8 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
+            this.lb_moving2 = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label4
@@ -276,11 +278,28 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // lb_moving2
+            // 
+            this.lb_moving2.AutoSize = true;
+            this.lb_moving2.Font = new System.Drawing.Font("標楷體", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_moving2.Location = new System.Drawing.Point(524, 523);
+            this.lb_moving2.Name = "lb_moving2";
+            this.lb_moving2.Size = new System.Drawing.Size(223, 29);
+            this.lb_moving2.TabIndex = 35;
+            this.lb_moving2.Text = "庭院深深深幾許";
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 500;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 628);
+            this.Controls.Add(this.lb_moving2);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button8);
@@ -337,6 +356,8 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label lb_moving2;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

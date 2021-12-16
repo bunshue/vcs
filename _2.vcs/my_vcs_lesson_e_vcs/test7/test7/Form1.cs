@@ -157,7 +157,18 @@ namespace test7
 
         private void button4_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "當前行號 : " + GetLineNum().ToString() + "\n";
+            richTextBox1.Text += "當前行號 : " + GetLineNum().ToString() + "\n";
+            richTextBox1.Text += "當前行號 : " + GetLineNum().ToString() + "\n";
+            richTextBox1.Text += "當前行號 : " + GetLineNum().ToString() + "\n";
+            richTextBox1.Text += "當前行號 : " + GetLineNum().ToString() + "\n";
+        }
 
+        //獲取當前行號
+        public static int GetLineNum()
+        {
+            System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(1, true);
+            return st.GetFrame(0).GetFileLineNumber();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -348,8 +359,78 @@ namespace test7
 
         private void button8_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("各種數據格式的輸出：");
+            // Console.WriteLine 中各種數據格式的輸出
+            Console.WriteLine("{0, 8 :C}", 2);     // $2.00
+            Console.WriteLine("{0, 8 :C3}", 2);    // $2.000
+            Console.WriteLine("{0 :D3}", 2);       // 002
+            Console.WriteLine("{0 :E}", 2);        // 2.000000E+000
+            Console.WriteLine("{0 :G}", 2);        // 2
+            Console.WriteLine("{0 :N}", 2500000.00);    // 2,500,00.00
+            Console.WriteLine("{0 :x4}", 12);      // 000c
+            Console.WriteLine("{0, 2 :x}", 12);    //  c
+            Console.WriteLine("{0 :000.000}", 12.23);   // 012.230
+            Console.WriteLine("{0 :r}", 15.62);    // 15.62
+            Console.WriteLine("{0 :d}", System.DateTime.Now);    // 2012-3-27
+            Console.WriteLine("{0 :D}", System.DateTime.Now);    // 2012年3月27日
+
+            Console.WriteLine("{0 :t}", System.DateTime.Now);    // 11:43
+            Console.WriteLine("{0 :T}", System.DateTime.Now);    // 11:43:34
+
+            Console.WriteLine("{0 :f}", System.DateTime.Now);    // 2012年3月27日 11:43
+            Console.WriteLine("{0 :F}", System.DateTime.Now);    // 2012年3月27日 11:43:34
+
+            Console.WriteLine("{0 :g}", System.DateTime.Now);    // 2012-3-27 11:43
+            Console.WriteLine("{0 :G}", System.DateTime.Now);    // 2012-3-27 11:43:34
+
+            Console.WriteLine("{0 :M}", System.DateTime.Now);    // 3月27日
+            Console.WriteLine("{0 :r}", System.DateTime.Now);// Tue, 27 Mar 2012 11:43:34 GMT
+            Console.WriteLine("{0 :s}", System.DateTime.Now);    // 2012-03-27T11:43:34
+            Console.WriteLine("{0 :u}", System.DateTime.Now);    // 2012-03-27 11:43:34Z
+            Console.WriteLine("{0 :U}", System.DateTime.Now);    // 2012年3月27日 3:43:34
+            Console.WriteLine("{0 :Y}", System.DateTime.Now);    // 2012年3月
+
+            Console.WriteLine("{0 :dd}", System.DateTime.Now);   // 27
+            Console.WriteLine("{0 :ddd}", System.DateTime.Now);  // 二
+            Console.WriteLine("{0 :dddd}", System.DateTime.Now); // 星期二
+
+            Console.WriteLine("{0 :f}", System.DateTime.Now);    // 2012年3月27日 11:46
+            Console.WriteLine("{0 :ff}", System.DateTime.Now);   // 18
+            Console.WriteLine("{0 :fff}", System.DateTime.Now);  // 187
+            Console.WriteLine("{0 :ffff}", System.DateTime.Now); // 1875
+            Console.WriteLine("{0 :fffff}", System.DateTime.Now); // 18750
+
+            Console.WriteLine("{0 :gg}", System.DateTime.Now);   // 公元
+            Console.WriteLine("{0 :ggg}", System.DateTime.Now);  // 公元
+            Console.WriteLine("{0 :gggg}", System.DateTime.Now); // 公元
+            Console.WriteLine("{0 :ggggg}", System.DateTime.Now);     // 公元
+            Console.WriteLine("{0 :gggggg}", System.DateTime.Now);    // 公元
+
+            Console.WriteLine("{0 :hh}", System.DateTime.Now);   // 11
+            Console.WriteLine("{0 :HH}", System.DateTime.Now);   // 11
+
+            Console.WriteLine("{0 :mm}", System.DateTime.Now);   // 50
+            Console.WriteLine("{0 :MM}", System.DateTime.Now);   // 03
+
+            Console.WriteLine("{0 :MMM}", System.DateTime.Now);  // 三月
+            Console.WriteLine("{0 :MMMM}", System.DateTime.Now); // 三月
+
+            Console.WriteLine("{0 :ss}", System.DateTime.Now);   // 43
+            Console.WriteLine("{0 :tt}", System.DateTime.Now);   // 上午
+
+            Console.WriteLine("{0 :yy}", System.DateTime.Now);   // 12
+            Console.WriteLine("{0 :yyyy}", System.DateTime.Now); // 2012
+            Console.WriteLine("{0 :zz}", System.DateTime.Now);   // +08
+            Console.WriteLine("{0 :zzz}", System.DateTime.Now);  // +08:00
+            Console.WriteLine("{0 :hh:mm:ss}", System.DateTime.Now);  // 11：43：34
+            Console.WriteLine("{0 :dd/MM/yyyy}", System.DateTime.Now); // 27-03-2012
+
+            // TODO: Implement Functionality Here
+
+            Console.Write("Press any key to continue . . . ");
 
         }
+
         private void button9_Click(object sender, EventArgs e)
         {
 

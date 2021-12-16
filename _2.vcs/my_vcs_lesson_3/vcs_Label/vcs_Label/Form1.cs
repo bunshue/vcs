@@ -116,6 +116,11 @@ namespace vcs_Label
             }
         }
 
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            lb_moving2.Text = lb_moving2.Text.Substring(1) + lb_moving2.Text.Substring(0, 1);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //向左

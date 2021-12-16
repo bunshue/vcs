@@ -101,6 +101,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(160, 70);
             this.button4.TabIndex = 4;
+            this.button4.Text = "獲取當前行號";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -143,6 +144,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(160, 70);
             this.button8.TabIndex = 8;
+            this.button8.Text = "(Console)各種數據格式的輸出";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -263,7 +265,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(363, 135);
+            this.pictureBox1.Location = new System.Drawing.Point(608, 88);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(305, 400);
             this.pictureBox1.TabIndex = 20;
