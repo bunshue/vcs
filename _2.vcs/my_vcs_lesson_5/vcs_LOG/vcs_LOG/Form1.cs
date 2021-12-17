@@ -9,6 +9,11 @@ using System.Windows.Forms;
 
 using System.IO;        //for Directory, File
 
+using System.Threading;
+using System.Threading.Tasks;
+
+using System.Collections.Concurrent;    //for ConcurrentQueue
+
 namespace vcs_LOG
 {
     public partial class Form1 : Form
@@ -22,8 +27,17 @@ namespace vcs_LOG
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
             LogFileName = Application.StartupPath + "\\log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
             richTextBox1.Text += "用Timer1自動存Log中.....\n";
+
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
+            _que = new ConcurrentQueue<FlashLogMessage>();
+            _mre = new ManualResetEvent(false);
+
+            Register();
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -110,6 +124,282 @@ namespace vcs_LOG
 
                 File.AppendAllText(filename, writeString, Encoding.Unicode);
             }
+        }
+
+        int i2 = 0;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "寫log的方法2\n";
+            WriteLog("寫log的方法2 " + (i2++).ToString());
+        }
+
+        private void WriteLog(string text)
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            path = System.IO.Path.Combine(path, "OutputStreamLogs\\" + DateTime.Now.ToString("yy-MM-dd"));
+
+            if (!System.IO.Directory.Exists(path))
+            {
+                System.IO.Directory.CreateDirectory(path);
+            }
+            string fileFullName = System.IO.Path.Combine(path, string.Format("{0}.log", DateTime.Now.ToString("yyMMdd-HHmmss")));
+
+            using (StreamWriter output = System.IO.File.AppendText(fileFullName))
+            {
+                output.WriteLine(text);
+                output.Close();
+            }
+        }
+
+        int i3 = 0;
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "寫log的方法3\n";
+            WriteLog2("寫log的方法3 " + (i3++).ToString());
+        }
+
+        public static void WriteLog2(string text)
+        {
+            string myPath = Application.StartupPath;
+            string myName = "david_log";
+
+            if (myPath == "" || myName == "")
+                return;
+
+            string Year = DateTime.Now.Year.ToString();
+            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
+            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
+
+            //年月日文件夾是否存在，不存在則建立
+            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
+            {
+                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
+            }
+
+            //寫入日志UNDO,Exception has not been handle
+            string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
+            if (!File.Exists(LogFile))
+            {
+                System.IO.StreamWriter myFile;
+                myFile = System.IO.File.AppendText(LogFile);
+                myFile.Close();
+            }
+
+            while (true)
+            {
+                try
+                {
+                    StreamWriter sr = File.AppendText(LogFile);
+                    sr.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "  " + text);
+                    sr.Close();
+                    break;
+                }
+                catch (Exception e)
+                {
+                    System.Threading.Thread.Sleep(50);
+                    continue;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 日志等级
+        /// </summary>
+        public enum FlashLogLevel
+        {
+            Debug,
+            Info,
+            Error,
+            Warn,
+            Fatal
+        }
+
+
+        /// <summary>
+        /// 日志内容
+        /// </summary>
+        public class FlashLogMessage
+        {
+            public string Message { get; set; }
+            public FlashLogLevel Level { get; set; }
+            public Exception Exception { get; set; }
+
+        }
+
+
+        /// <summary>
+        /// 记录消息Queue
+        /// </summary>
+        private ConcurrentQueue<FlashLogMessage> _que;
+
+        /// <summary>
+        /// 信号
+        /// </summary>
+        ManualResetEvent _mre;
+
+        /// <summary>
+        /// 日志
+        /// </summary>
+        //private readonly ILog _log;
+
+        /// <summary>
+        /// 日志
+        /// </summary>
+        //private static FlashLogger _flashLog = new FlashLogger();
+
+        /*
+        private FlashLogger()
+        {
+            var configFile = new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log4net.config"));
+            if (!configFile.Exists)
+            {
+                throw new Exception("未配置log4net配置文件！");
+            }
+
+            // 设置日志配置文件路径
+            //XmlConfigurator.Configure(configFile);
+
+            //_que = new ConcurrentQueue<FlashLogMessage>();
+            //_mre = new ManualResetEvent(false);
+            //_log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        }
+        */
+
+        /*
+        /// <summary>
+        /// 实现单例
+        /// </summary>
+        /// <returns></returns>
+        public static FlashLogger Instance()
+        {
+            return _flashLog;
+        }
+        */
+
+        /// <summary>
+        /// 另一个线程记录日志，只在程序初始化时调用一次
+        /// </summary>
+        public void Register()
+        {
+            Thread t = new Thread(new ThreadStart(WriteLog));
+            t.IsBackground = false;
+            t.Start();
+        }
+
+        /// <summary>
+        /// 从队列中写日志至磁盘
+        /// </summary>
+        private void WriteLog()
+        {
+            while (true)
+            {
+                // 等待信号通知
+                _mre.WaitOne();
+
+                FlashLogMessage msg;
+                // 判断是否有内容需要如磁盘 从列队中获取内容，并删除列队中的内容
+                while (_que.Count > 0 && _que.TryDequeue(out msg))
+                {
+                    // 判断日志等级，然后写日志
+                    switch (msg.Level)
+                    {
+                        case FlashLogLevel.Debug:
+                            //_log.Debug(msg.Message, msg.Exception);
+                            richTextBox1.Text += msg.Message + "\n";
+                            break;
+                        case FlashLogLevel.Info:
+                            //_log.Info(msg.Message, msg.Exception);
+                            richTextBox1.Text += msg.Message + "\n";
+                            break;
+                        case FlashLogLevel.Error:
+                            //_log.Error(msg.Message, msg.Exception);
+                            richTextBox1.Text += msg.Message + "\n";
+                            break;
+                        case FlashLogLevel.Warn:
+                            //_log.Warn(msg.Message, msg.Exception);
+                            richTextBox1.Text += msg.Message + "\n";
+                            break;
+                        case FlashLogLevel.Fatal:
+                            //_log.Fatal(msg.Message, msg.Exception);
+                            richTextBox1.Text += msg.Message + "\n";
+                            break;
+                    }
+                }
+
+                // 重新设置信号
+                _mre.Reset();
+                Thread.Sleep(1);
+            }
+        }
+
+
+        /// <summary>
+        /// 写日志
+        /// </summary>
+        /// <param name="message">日志文本</param>
+        /// <param name="level">等级</param>
+        /// <param name="ex">Exception</param>
+        public void EnqueueMessage(string message, FlashLogLevel level, Exception ex = null)
+        {
+            _que.Enqueue(new FlashLogMessage
+            {
+                Message = "[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff") + "]\r\n" + message,
+                Level = level,
+                Exception = ex
+            });
+
+            // 通知线程往磁盘中写日志
+            _mre.Set();
+        }
+
+        public void Debug(string msg)
+        {
+            EnqueueMessage(msg, FlashLogLevel.Debug);
+        }
+
+        public void Error(string msg)
+        {
+            EnqueueMessage(msg, FlashLogLevel.Error);
+        }
+
+        public void Fatal(string msg)
+        {
+            EnqueueMessage(msg, FlashLogLevel.Fatal);
+        }
+
+        public void Info(string msg)
+        {
+            EnqueueMessage(msg, FlashLogLevel.Info);
+        }
+
+        public void Warn(string msg)
+        {
+            EnqueueMessage(msg, FlashLogLevel.Warn);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Debug("AAAAAAAA");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Error("BBBBBBBB");
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Fatal("CCCCCCCC");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Info("DDDDDDDD");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Warn("EEEEEEEE");
         }
     }
 }

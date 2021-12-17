@@ -156,7 +156,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(170, 70);
             this.button21.TabIndex = 108;
-            this.button21.Text = "日志信息";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -297,7 +296,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(170, 70);
             this.button20.TabIndex = 95;
-            this.button20.Text = "簡單的寫日志的方法";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 

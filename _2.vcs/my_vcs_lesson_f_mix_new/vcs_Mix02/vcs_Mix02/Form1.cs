@@ -641,83 +641,15 @@ namespace vcs_Mix02
 
         }
 
-        int i = 0;
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            WriteLog("簡單的寫日志的方法 " + (i++).ToString());
-        }
-
-        private void WriteLog(string text)
-        {
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            path = System.IO.Path.Combine(path, "OutputStreamLogs\\" + DateTime.Now.ToString("yy-MM-dd"));
-
-            if (!System.IO.Directory.Exists(path))
-            {
-                System.IO.Directory.CreateDirectory(path);
-            }
-            string fileFullName = System.IO.Path.Combine(path, string.Format("{0}.log", DateTime.Now.ToString("yyMMdd-HHmmss")));
-
-            using (StreamWriter output = System.IO.File.AppendText(fileFullName))
-            {
-                output.WriteLine(text);
-                output.Close();
-            }
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            WriteLog2("日志信息 " + (i++).ToString());
         }
-
-        /// 日志信息
-        public static void WriteLog2(string text)
-        {
-            string myPath = Application.StartupPath;
-            string myName = "david_log";
-
-            if (myPath == "" || myName == "")
-                return;
-
-            string Year = DateTime.Now.Year.ToString();
-            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
-            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
-
-            //年月日文件夾是否存在，不存在則建立
-            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
-            {
-                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
-            }
-
-            //寫入日志UNDO,Exception has not been handle
-            string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
-            if (!File.Exists(LogFile))
-            {
-                System.IO.StreamWriter myFile;
-                myFile = System.IO.File.AppendText(LogFile);
-                myFile.Close();
-            }
-
-            while (true)
-            {
-                try
-                {
-                    StreamWriter sr = File.AppendText(LogFile);
-                    sr.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "  " + text);
-                    sr.Close();
-                    break;
-                }
-                catch (Exception e)
-                {
-                    System.Threading.Thread.Sleep(50);
-                    continue;
-                }
-            }
-        }
-
-
 
         private void button22_Click(object sender, EventArgs e)
         {

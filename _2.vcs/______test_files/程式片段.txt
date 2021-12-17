@@ -1,4 +1,17 @@
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+
+
+EXIF，是英文Exchangeable Image File
+
+
+
+
+
+using (Process curProcess = Process.GetCurrentProcess())
+
+
+
+
 
 
 
@@ -5258,6 +5271,47 @@ public static byte[] drawImg(string check)
 
 
 //--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+C#抓取网页Html源码
+
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //抓取網頁資料 1
+            string url = @"http://140.129.118.16/~richwang/";
+
+            string rl;
+            WebRequest Request = WebRequest.Create(url.Trim());
+
+            WebResponse Response = Request.GetResponse();
+
+            Stream resStream = Response.GetResponseStream();
+
+            StreamReader sr = new StreamReader(resStream, Encoding.Default);
+            StringBuilder sb = new StringBuilder();
+            while ((rl = sr.ReadLine()) != null)
+            {
+                sb.Append(rl);
+            }
+
+            richTextBox1.Text += sb + "\n";
+
+            richTextBox1.Text += "完成\n";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //抓取網頁資料 2
+            WebClient wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            string html = wc.DownloadString("http://www.lagou.com/");
+
+            richTextBox1.Text += html + "\n";
+
+        }
 
 
 
