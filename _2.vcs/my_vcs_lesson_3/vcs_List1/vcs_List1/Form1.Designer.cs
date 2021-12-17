@@ -53,6 +53,7 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -327,7 +328,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(660, 289);
+            this.button3.Location = new System.Drawing.Point(660, 325);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(169, 38);
             this.button3.TabIndex = 20;
@@ -335,11 +336,23 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button19
+            // 
+            this.button19.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button19.Location = new System.Drawing.Point(660, 254);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(169, 38);
+            this.button19.TabIndex = 21;
+            this.button19.Text = "建立 二維 string List";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1153, 811);
+            this.Controls.Add(this.button19);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button16);
@@ -389,6 +402,7 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button19;
     }
 }
 

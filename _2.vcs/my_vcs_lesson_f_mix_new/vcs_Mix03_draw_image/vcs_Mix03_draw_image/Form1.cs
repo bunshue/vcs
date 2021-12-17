@@ -98,8 +98,8 @@ namespace vcs_Mix03_draw_image
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            Bitmap bmp = new Bitmap(300, 200);
-            Graphics g = Graphics.FromImage(bmp);
+            Bitmap bitmap1 = new Bitmap(300, 200);
+            Graphics g = Graphics.FromImage(bitmap1);
             Font f = new Font("arial", 11f);
             Brush b = Brushes.Blue;
 
@@ -121,14 +121,14 @@ namespace vcs_Mix03_draw_image
 
                 g.Flush();
 
-                pictureBox1.Image = bmp;
+                pictureBox1.Image = bitmap1;
                 Application.DoEvents();
                 delay(300);
             }
 
             f.Dispose();
             g.Dispose();
-            bmp.Dispose();
+            bitmap1.Dispose();
 
         }
 
@@ -147,12 +147,47 @@ namespace vcs_Mix03_draw_image
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //實現任意角度旋轉圖像主要使用Graphics類提供的RotateTransform()方法
 
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            //pictureBox1.Image = bitmap1;
+
+            //以任意角度旋轉顯示圖像
+            Graphics g = this.pictureBox1.CreateGraphics();
+            float MyAngle = 0;//旋轉的角度
+            while (MyAngle < 360)
+            {
+                TextureBrush MyBrush = new TextureBrush(bitmap1);
+                this.pictureBox1.Refresh();
+                MyBrush.RotateTransform(MyAngle);
+                g.FillRectangle(MyBrush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
+                MyAngle += 0.5f;
+                System.Threading.Thread.Sleep(50);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //實現任意角度旋轉圖片
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image = Image.FromFile(filename);
+
+            //以任意角度旋轉顯示圖像
+            Graphics g = this.pictureBox1.CreateGraphics();
+            float angle = 0;//旋轉的角度
+            while (angle < 360)
+            {
+                TextureBrush tb = new TextureBrush(image);
+                this.pictureBox1.Refresh();
+                tb.RotateTransform(angle);
+                g.FillRectangle(tb, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
+                angle += 0.5f;
+                System.Threading.Thread.Sleep(50);
+            } 
+
 
 
         }
@@ -160,12 +195,58 @@ namespace vcs_Mix03_draw_image
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //繪制正弦曲線
+            Bitmap bitmap1 = new Bitmap(360, 120);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            Rectangle r1 = new Rectangle(0, 0, 360, 20);
+            Rectangle r2 = new Rectangle(0, 20, 360, 40);
+            Rectangle r3 = new Rectangle(0, 60, 360, 40);
+            Rectangle r4 = new Rectangle(0, 100, 360, 20);
+
+            Brush brush1 = new SolidBrush(Color.OrangeRed);
+            Brush brush2 = new SolidBrush(Color.SkyBlue);
+            Brush brush3 = new SolidBrush(Color.Pink);
+            Brush brush4 = new SolidBrush(Color.YellowGreen);
+
+            g.FillRectangle(brush1, r1);
+            g.FillRectangle(brush2, r2);
+            g.FillRectangle(brush2, r3);
+            g.FillRectangle(brush1, r4);
+
+            g.DrawString("0", new Font("宋體", 8), brush1, new PointF(3, 65));
+            g.DrawString("90", new Font("宋體", 8), brush1, new PointF(85, 65));
+            g.DrawString("180", new Font("宋體", 8), brush1, new PointF(170, 65));
+            g.DrawString("360", new Font("宋體", 8), brush1, new PointF(336, 65));
+
+            Point myPoint = new Point(0, 60);
+            float sinValue = 0.0F;
+
+            for (int i = 0; i < 360; i++)
+            {
+                sinValue = Convert.ToSingle(Math.Sin(Convert.ToSingle((i * Math.PI) / 180))) * 40;
+                //事實上，這裡根本無需注意 sinValue 的正負
+                //當其為負時，  60-sinValue 則會變大
+                Point thisPoint = new Point(i, Convert.ToInt32(60 - sinValue));
+                g.DrawLine(new Pen(brush3), thisPoint, myPoint);
+                myPoint = thisPoint;
+            }
+
+            pictureBox1.Image = bitmap1;
+
 
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //抓取全螢幕的小程序
+            Bitmap bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.CopyFromScreen(0, 0, 0, 0, new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
+            this.pictureBox1.Image = bitmap1;
+
 
         }
 
@@ -173,12 +254,86 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
+            Point source_point = new Point(0, 0);
+            Point destination_point = new Point(0, 0);
+            Rectangle rect = new Rectangle(0, 0, 300, 300);
+
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            CaptureImage(source_point, destination_point, rect, filename);
+        }
+
+        public void CaptureImage(Point SourcePoint, Point DestinationPoint, Rectangle SelectionRectangle, string filename)
+        {
+            using (Bitmap bitmap1 = new Bitmap(SelectionRectangle.Width, SelectionRectangle.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap1))
+                {
+                    g.CopyFromScreen(SourcePoint, DestinationPoint, SelectionRectangle.Size);
+                }
+                
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //字串旋轉列印
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawString("字串旋轉列印", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(20, 20));
 
+            Font f = new Font("標楷體", 50);
+            RotateDeawString(g, f, 35, "字串旋轉列印", 20, 20);
+        }
+
+        /// <summary>
+        /// 旋轉列印字串
+        /// </summary>
+        /// <param name="e">PrintPageEventArgs</param>
+        /// <param name="font">字型</param>
+        /// <param name="degree">旋轉角度</param>
+        /// <param name="msg">列印訊息</param>
+        /// <param name="x">重設原點 X 位置</param>
+        /// <param name="y">重設原點 Y 位置</param>
+        private void RotateDeawString(Graphics g, Font font, int degree, string msg, int x, int y)
+        {
+            // 原點位置重設
+            g.TranslateTransform(mmTo100InchX(x), mmTo100InchY(y));
+            // 設定旋轉角度
+            g.RotateTransform(degree);
+            // 標題
+            g.DrawString(msg, font, Brushes.Black, mmTo100InchX(0), mmTo100InchY(0));
+            //繪圖畫布還原
+            g.ResetTransform();
+        }
+
+        private int mmTo100InchX(int mm)
+        {
+            int times = 100;
+            double result = (mm * times / 25.4);
+            return (int)Math.Floor(result);
+        }
+
+        private int mmTo100InchY(int mm)
+        {
+            int times = 100;
+            double result = (mm * times / 25.4);
+            return (int)Math.Floor(result);
         }
 
         private void button8_Click(object sender, EventArgs e)

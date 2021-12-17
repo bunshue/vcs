@@ -364,6 +364,29 @@ namespace vcs_List1
             }
             return newList;
         }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            //二維List for string
+            List<string[]> camera_serials = new List<string[]>();
+
+            camera_serials.Clear();
+            int i;
+            for (i = 0; i < 10; i++)
+            {
+                camera_serials.Add(new string[] { "aaaa" + i.ToString(), "bbbb" + i.ToString(), DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+            }
+
+            if (camera_serials.Count > 0)
+            {
+                richTextBox1.Text += "共有 " + camera_serials.Count.ToString() + " 筆資料\t分別是:\n";
+                for (i = 0; i < camera_serials.Count; i++)
+                {
+                    richTextBox1.Text += "camera_serials[" + i.ToString() + "][0] = " + camera_serials[i][0].ToString()
+                        + "\tcamera_serials[" + i.ToString() + "][1] = " + camera_serials[i][1].ToString()
+                        + "\tcamera_serials[" + i.ToString() + "][2] = " + camera_serials[i][2].ToString() + "\n";
+                }
+            }
+        }
     }
 }
-

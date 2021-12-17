@@ -71,7 +71,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(155, 55);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -82,7 +81,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(155, 55);
             this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
+            this.button2.Text = "加入檔案右鍵選單";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -103,7 +102,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(155, 55);
             this.button4.TabIndex = 3;
-            this.button4.Text = "從檔案完整路徑分離出資料夾,檔案名稱,副檔名";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -114,7 +112,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(155, 55);
             this.button5.TabIndex = 4;
-            this.button5.Text = "char可以存放中文字";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -125,7 +122,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(155, 55);
             this.button6.TabIndex = 5;
-            this.button6.Text = "一行一行讀取文字檔";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -154,7 +150,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(155, 55);
             this.button0.TabIndex = 8;
-            this.button0.Text = "二維陣列所有元素總和";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -196,7 +191,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(155, 55);
             this.button11.TabIndex = 12;
-            this.button11.Text = "Hashtable 物件";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -207,7 +201,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(155, 55);
             this.button12.TabIndex = 13;
-            this.button12.Text = "從mp3檔名找lrc";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -347,7 +340,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(155, 55);
             this.button24.TabIndex = 28;
-            this.button24.Text = "richTextBox 內文變色";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

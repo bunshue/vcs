@@ -92,21 +92,10 @@ namespace 真的只是一個測試1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //計算二維陣列所有元素總和
-            int[,] array = new int[,] { { 0, 11, 3, 45, 17 }, { 23, 41, 5, 8, 10 }, { 9, 21, 16, 84, 51 } };
-
-            int Total = 0;
-            foreach (int element in array)
-            {
-                Total += element;
-            }
-            richTextBox1.Text += "此二維陣列的各個元素總和為: " + Total.ToString() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string strpath = Environment.SystemDirectory + "\\music";
-            richTextBox1.Text += "strpath = " + strpath + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -135,52 +124,14 @@ namespace 真的只是一個測試1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //從檔案完整路徑分離出資料夾,檔案名稱,副檔名
-            string full_filename = @"C:\______test_files\_case1\_case1a\_case1aa\eula.3081a.txt";
-            //取得資料夾路徑
-            string foldername = full_filename.Substring(0, full_filename.LastIndexOf("\\") + 1);
-            //取得檔案名稱
-            string short_filename =
-                full_filename.Substring(full_filename.LastIndexOf("\\") + 1,
-                full_filename.LastIndexOf(".") -
-                (full_filename.LastIndexOf("\\") + 1));
-            //取得副檔名
-            string ext_filename =
-                full_filename.Substring(full_filename.LastIndexOf(".") + 1,
-                full_filename.Length - full_filename.LastIndexOf(".") - 1);
-
-            richTextBox1.Text += "檔案完整路徑:\t" + full_filename + "\n";
-            richTextBox1.Text += "資料夾路徑:\t" + foldername + "\n";
-            richTextBox1.Text += "檔案名稱:\t" + short_filename + "\n";
-            richTextBox1.Text += "副檔名:\t" + ext_filename + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //char可以存放中文字
-            char[] gender = new char[5];
-            gender[0] = '男';
-            gender[1] = '女';
-            gender[2] = '男';
-            gender[3] = '男';
-            gender[4] = '女';
-            for (int i = 0; i < 5; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + gender[i] + "\n";
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //一行一行讀取文字檔
-            string filename = @"C:\______test_files\_case1\_case1a\_case1aa\eula.3081a.txt";
-
-            StreamReader SReader = new StreamReader(filename, Encoding.Default);
-            string strLine = string.Empty;
-            while ((strLine = SReader.ReadLine()) != null)
-            {
-                richTextBox1.Text += strLine + "\n";
-            }
         }
 
         private void RegFile(string sText, string sFullName)
@@ -223,7 +174,6 @@ namespace 真的只是一個測試1
 
         private void button9_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -232,179 +182,14 @@ namespace 真的只是一個測試1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "建立一個Hashtable\n";
-
-            Hashtable openWith = new Hashtable();
-
-            richTextBox1.Text += "給Hashtable賦值, key是唯一, value不唯一\n";
-            //            key     value
-            openWith.Add("txt", "notepad.exe");
-            openWith.Add("bmp", "paint.exe");
-            openWith.Add("dib", "paint.exe");
-            openWith.Add("rtf", "wordpad.exe");
-
-            // When you use foreach to enumerate hash table elements,
-            // the elements are retrieved as DictionaryEntry objects.
-            foreach (DictionaryEntry var in openWith)
-            {
-                richTextBox1.Text += var.Key + "\t" + var.Value + "\n";
-            }
         }
-
-        List<string> al = new List<string>(); //當前歌詞時間表
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\_mp3\04-三月雪(&黃妃).mp3";
-
-            string filename_lyrics = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename) + ".lrc");
-
-            richTextBox1.Text += "f1 = " + filename + "\n";
-            richTextBox1.Text += "f2 = " + filename_lyrics + "\n";
-
-            if (!File.Exists(filename_lyrics))
-            {
-                richTextBox1.Text = "無 歌詞檔案\n";
-                return;
-            }
-
-            using (StreamReader sr = new StreamReader(new FileStream(filename_lyrics, FileMode.Open), Encoding.Default))
-            {
-                string tempLrc = "";
-                while (!sr.EndOfStream)
-                {
-                    tempLrc = sr.ReadToEnd();
-                }
-
-                if (tempLrc.Trim() == "")
-                {
-                    this.richTextBox1.Text = "歌詞檔案內容為空";
-                    return;
-                }
-
-                tempLrc = tempLrc.Trim();
-                Regex rg = new Regex("\r*\n*\\[ver:(.*)\\]\r*\n*");
-                tempLrc = rg.Replace(tempLrc, "");
-                rg = new Regex("\r*\n*\\[al:(.*)\\]\r*\n*");
-                tempLrc = rg.Replace(tempLrc, "");
-                rg = new Regex("\r*\n*\\[by:(.*)\\]\r*\n*");
-                tempLrc = rg.Replace(tempLrc, "");
-                rg = new Regex("\r*\n*\\[offset:(.*)\\]\r*\n*");
-                tempLrc = rg.Replace(tempLrc, "");
-                rg = new Regex("\r*\n*\\[ar:(.*)\\]\r*\n*");
-                Match mtch;
-                mtch = rg.Match(tempLrc);
-                tempLrc = rg.Replace(tempLrc, "\n歌手:" + mtch.Groups[1].Value + "\n");
-                rg = new Regex("\r*\n*\\[ti:(.+?)\\]\r*\n*");   //這裡注意貪婪匹配問題.+?
-                mtch = rg.Match(tempLrc);
-                tempLrc = rg.Replace(tempLrc, "\n歌名:" + mtch.Groups[1].Value + "\n");
-                rg = new Regex("\r*\n*\\[[0-9][0-9]:[0-9][0-9].[0-9][0-9]\\]");
-                MatchCollection mc = rg.Matches(tempLrc);
-                al.Clear();
-
-                foreach (Match m in mc)
-                {
-                    string temp = m.Groups[0].Value;
-                    //this.Text += temp + "+";                        
-                    string mi = temp.Substring(temp.IndexOf('[') + 1, 2);
-                    string se = temp.Substring(temp.IndexOf(':') + 1, 2);
-                    string ms = temp.Substring(temp.IndexOf('.') + 1, 2);   //這是毫秒，其實我只精確到秒，毫秒後面並沒有用
-                    //this.Text += mi + ":" + se + "+";
-                    string time = Convert.ToInt32(mi) * 60 + Convert.ToInt32(se) + "";  //這裡並沒有新增毫秒
-                    al.Add(time);
-                }
-
-                tempLrc = rg.Replace(tempLrc, "\n");
-                char[] remove = { '\r', '\n', ' ' };
-                this.richTextBox1.Text = tempLrc.TrimStart(remove);
-                this.timer1.Interval = 1000;
-                this.timer1.Tick += ShowLineLrc;
-                this.timer1.Start();
-            }
-
-
-
-
         }
-
-
-        int position = 0;
-        /// <summary>
-        /// 定時器執行的方法，每隔1秒執行一次  歌詞逐行顯示
-        private void ShowLineLrc(object sender, EventArgs e)
-        {
-            //int pos = al.IndexOf(trackBarValue.ToString());
-            position++;
-            int pos = position;
-            bool isAr = this.richTextBox1.Text.Contains("歌手:");
-            bool isTi = this.richTextBox1.Text.Contains("歌名:");
-
-
-            if ((pos >= 0) && (pos < 25))
-            {
-                int n = isAr ? 1 : 0;
-                int m = isTi ? 1 : 0;
-
-                int height = 28 * (this.al.Count + m + n);
-                int max = height - this.richTextBox1.Height;
-
-
-                this.richTextBox1.SelectAll();
-                this.richTextBox1.SelectionColor = Color.Black;
-                this.richTextBox1.SelectionLength = 0;/**/
-
-                int l = this.richTextBox1.Lines[pos + m + n].Length;
-                this.richTextBox1.Select(this.richTextBox1.GetFirstCharIndexFromLine(pos + m + n), l);
-                this.richTextBox1.SelectionColor = Color.OrangeRed;
-                this.richTextBox1.SelectionLength = 0;
-                //this.Text = GetScrollPos(this.richTextBox1.Handle, SB_VERT).ToString() + "-" + al.Count + "-" + this.richTextBox1.Height;
-
-                if ((pos + m + n) * 28 <= max)
-                {
-                    int start = this.richTextBox1.GetFirstCharIndexFromLine(pos + m + n);
-                    this.richTextBox1.SelectionStart = start;
-                    this.richTextBox1.ScrollToCaret();
-
-                }
-                else
-                {
-                    /*
-                    //this.richTextBox1.Focus();
-                    SendMessage(this.richTextBox1.Handle, WM_VSCROLL, SB_BOTTOM, 0);
-                    UpdateWindow(this.richTextBox1.Handle);
-                    //this.richTextBox1.SelectionStart = this.richTextBox1.Text.Length;
-                    //this.richTextBox1.ScrollToCaret();
-                    */
-                }
-
-                /*
-                if (this.lrcForm != null)
-                {
-                    string l1 = this.richTextBox1.Lines[pos + m + n];
-                    string l2;
-                    if ((pos + m + n) < this.richTextBox1.Lines.Length - 1)
-                    {
-                        l2 = this.richTextBox1.Lines[pos + m + n + 1];
-                    }
-                    else
-                    {
-                        l2 = "。。。。。";
-                    }
-
-                    this.lrcForm.setLrc(l1, l2, pos);
-                    //this.lrcForm.setLrc(ArrayList al,);
-
-                }
-                */
-            }
-        }
-
-
 
         private void button13_Click(object sender, EventArgs e)
         {
-            int len = al.Count;
-            richTextBox1.Text = "len = " + len.ToString() + "\n";
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -663,40 +448,11 @@ namespace 真的只是一個測試1
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //richTextBox 內文變色
-
-            richTextBox1.SelectionColor = Color.Red;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Orange;
-            richTextBox1.AppendText("多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Yellow;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Green;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Blue;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Purple;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-            richTextBox1.AppendText("恢復原色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
             //使用 GetBytes() 方法將字串轉換為位元組陣列
-
 
             string myString = "This is a string.";
             byte[] byteArray = Encoding.ASCII.GetBytes(myString);
@@ -705,8 +461,6 @@ namespace 真的只是一個測試1
             {
                 richTextBox1.Text += bytes.ToString() + "\n";
             }
-
-
         }
 
         private void button26_Click(object sender, EventArgs e)
