@@ -156,6 +156,17 @@ namespace test3
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string senderEmail = @"david@insighteyes.com";
+            string[] sendFromUser = senderEmail.Split('@');
+            int len = sendFromUser.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + sendFromUser[i] + "\n";
+            }
+
+
 
         }
 

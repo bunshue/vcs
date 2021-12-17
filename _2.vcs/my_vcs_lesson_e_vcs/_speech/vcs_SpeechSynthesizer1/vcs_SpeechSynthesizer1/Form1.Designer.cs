@@ -1,4 +1,4 @@
-﻿namespace vcs_SpeechLib3
+﻿namespace vcs_SpeechSynthesizer1
 {
     partial class Form1
     {
@@ -28,33 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 63);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "讀出richtextbox裡的文字";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(123, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(584, 508);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "參考/加入參考/COM/Microsoft Speech Object Library\t//選後面為sapi.dll那一個";
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "實現語音朗讀功能\n參考/加入參考/.NET/System.Speech\nusing System.Speech.Synthesis;\n";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 63);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "讀出richtextbox裡的文字";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 532);
+            this.ClientSize = new System.Drawing.Size(727, 537);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
@@ -66,8 +66,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -202,21 +202,5 @@ namespace vcs_speech
             }
             return s;
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-
-            DotNetSpeech.SpeechVoiceSpeakFlags SSF = DotNetSpeech.SpeechVoiceSpeakFlags.SVSFlagsAsync;
-            DotNetSpeech.SpVoice vo = new SpVoiceClass();
-            vo.Speak(this.textBox1.Text, SSF);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-            SpVoice sp = new SpVoice();
-            sp.Speak("哈哈，你好，我叫胡陽, lion-mouse", spFlags);
-        }
     }
 }

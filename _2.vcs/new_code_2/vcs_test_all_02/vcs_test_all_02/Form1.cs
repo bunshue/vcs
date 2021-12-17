@@ -13,32 +13,12 @@ using System.Diagnostics;       //for Process, Stopwatch
 
 namespace vcs_test_all_02
 {
-
     public partial class Form1 : Form
     {
-        Graphics g;     //設定一個畫布g
-
         public Form1()
         {
             InitializeComponent();
-            g = this.CreateGraphics();  //這個視窗，就是畫布, 直接畫在Form上
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //轉移中
-                                //三、在某圖片中，在指定的位置切裁指定的大小並另存圖片
-            Image ii = vcs_test_all_02.Properties.Resources.picture1;
-                                Bitmap bmp = new Bitmap(500, 500);
-                                Graphics g = Graphics.FromImage(bmp);
-                                g.DrawImage(ii, new Rectangle(0, 0, ii.Width, ii.Height), new Rectangle(0, 0, ii.Width, ii.Height), GraphicsUnit.Pixel);
-                                //以上是指，在ii這張圖中，以指定的大小，畫在指定的位置，量測單位是Pixel
-
-                                g.DrawImage(bmp, 0, 0);
-
-
-        }
-
 
         private const int MODE1 = 0x01;
         private const int MODE2 = 0x02;
@@ -165,16 +145,6 @@ namespace vcs_test_all_02
             //MessageBox.Show("複製成功！");
 
             richTextBox1.Text += fi.Length.ToString() + " Bytes";
-
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
     }
 }

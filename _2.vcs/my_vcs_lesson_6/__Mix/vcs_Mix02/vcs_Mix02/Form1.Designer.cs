@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button29 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
@@ -60,6 +61,12 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label0 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button29
@@ -155,7 +162,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1093, 745);
+            this.bt_clear.Location = new System.Drawing.Point(1109, 732);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(66, 40);
             this.bt_clear.TabIndex = 107;
@@ -179,6 +186,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(170, 70);
             this.button0.TabIndex = 105;
+            this.button0.Text = "比較兩個檔案";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -249,6 +257,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(170, 70);
             this.button1.TabIndex = 98;
+            this.button1.Text = "取得所有邏輯分區";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -259,6 +268,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(170, 70);
             this.button5.TabIndex = 97;
+            this.button5.Text = "取得系統開啟的端口和狀態";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -349,6 +359,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(170, 70);
             this.button4.TabIndex = 88;
+            this.button4.Text = "取得本機MAC地址";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -359,6 +370,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(170, 70);
             this.button3.TabIndex = 87;
+            this.button3.Text = "透過IP地址取得主機名稱";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -369,6 +381,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(170, 70);
             this.button2.TabIndex = 86;
+            this.button2.Text = "透過計算機名取得IP地址";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -377,15 +390,76 @@
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(547, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(628, 790);
+            this.richTextBox1.Size = new System.Drawing.Size(628, 760);
             this.richTextBox1.TabIndex = 85;
             this.richTextBox1.Text = "";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label0
+            // 
+            this.label0.AutoSize = true;
+            this.label0.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label0.Location = new System.Drawing.Point(12, 798);
+            this.label0.Name = "label0";
+            this.label0.Size = new System.Drawing.Size(76, 21);
+            this.label0.TabIndex = 121;
+            this.label0.Text = "label0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(554, 798);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 21);
+            this.label4.TabIndex = 120;
+            this.label4.Text = "label4";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(12, 882);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 21);
+            this.label3.TabIndex = 119;
+            this.label3.Text = "label3";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Location = new System.Drawing.Point(12, 859);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 21);
+            this.label2.TabIndex = 118;
+            this.label2.Text = "label2";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(12, 833);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 21);
+            this.label1.TabIndex = 117;
+            this.label1.Text = "label1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1187, 807);
+            this.ClientSize = new System.Drawing.Size(1187, 917);
+            this.Controls.Add(this.label0);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -422,6 +496,7 @@
             this.Text = "無法分類之單項和02";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -459,6 +534,12 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label0;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 
