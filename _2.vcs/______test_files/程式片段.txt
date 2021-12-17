@@ -1,3 +1,10 @@
+
+
+                Graphics g = Graphics.FromImage(ThumbNail);
+                g.CompositingQuality = CompositingQuality.HighSpeed;
+                g.SmoothingMode = SmoothingMode.HighSpeed;
+                g.InterpolationMode = InterpolationMode.HighQualityBilinear;
+
     
     
     
@@ -5725,6 +5732,51 @@ using System.Text.RegularExpressions;
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+        public class ImageInfo
+        {
+            private string image_path;
+            private int image_width;
+            private int image_height;
+
+            public string ImagePath
+            {
+                get { return image_path; }
+                set { image_path = value; }
+            }
+
+            public int ImageWidth
+            {
+                get { return image_width; }
+                set { image_width = value; }
+            }
+
+            public int ImageHeight
+            {
+                get { return image_height; }
+                set { image_height = value; }
+            }
+
+            public ImageInfo(string ImagePath, int ImageWidth, int ImageHeight)
+            {
+                this.ImagePath = ImagePath;
+                this.ImageWidth = ImageWidth;
+                this.ImageHeight = ImageHeight;
+            }
+
+            public Bitmap GetBitmap()
+            {
+                //WebPageBitmap Shot = new WebPageBitmap(this.ImagePath, this.ImageWidth, this.ImageHeight);
+                //Shot.GetIt();
+                //Bitmap Pic = Shot.DrawBitmap(this.ImageHeight, this.ImageWidth);
+                //return Pic;
+                return null;
+            }
+        }
+        
+        
+        
+        
+        
 
 
 

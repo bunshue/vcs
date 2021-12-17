@@ -66,11 +66,11 @@ namespace vcs_TextBox
             // e.KeyChar == (Char)13-----------> Enter            
             if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || ((e.KeyChar >= 'A') && (e.KeyChar <= 'F')) || ((e.KeyChar >= 'a') && (e.KeyChar <= 'f')) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
             {
-                e.Handled = false;
+                e.Handled = false;  //未處理, 表示要顯示出來
             }
             else
             {
-                e.Handled = true;
+                e.Handled = true;   //已處理, 表示不顯示出來
             }
         }
 

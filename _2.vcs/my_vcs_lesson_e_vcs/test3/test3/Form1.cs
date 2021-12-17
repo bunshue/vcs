@@ -126,12 +126,15 @@ namespace test3
             WebBrowser webBrowser1 = new WebBrowser();
             webBrowser1.ScrollBarsEnabled = false;
             webBrowser1.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+
+            //取得網頁資料
             webBrowser1.Navigate(url);
             while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
             {
                 Application.DoEvents();
             }
 
+            //截圖
             Bitmap bitmap1 = new Bitmap(W, H);
             Rectangle DrawRect = new Rectangle(0, 0, W, H);
             webBrowser1.DrawToBitmap(bitmap1, DrawRect);
@@ -265,11 +268,4 @@ namespace test3
             return thefullname;
         }
     }
-
-
-
-
-
-
 }
-

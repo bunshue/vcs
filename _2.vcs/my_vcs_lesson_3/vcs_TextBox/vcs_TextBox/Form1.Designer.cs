@@ -51,10 +51,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -85,7 +86,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(12, 170);
+            this.label2.Location = new System.Drawing.Point(12, 188);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 24);
             this.label2.TabIndex = 11;
@@ -106,11 +107,11 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.textBox1.Location = new System.Drawing.Point(16, 106);
-            this.textBox1.MaxLength = 2;
+            this.textBox1.MaxLength = 4;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(133, 36);
             this.textBox1.TabIndex = 9;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // label1
@@ -131,7 +132,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(435, 24);
             this.label4.TabIndex = 12;
-            this.label4.Text = "TextBox最多輸入2個字的十六進位數字：";
+            this.label4.Text = "TextBox最多輸入4個字的十六進位數字：";
             // 
             // groupBox1
             // 
@@ -301,14 +302,6 @@
             this.groupBox4.TabIndex = 20;
             this.groupBox4.TabStop = false;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Location = new System.Drawing.Point(724, 468);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(300, 200);
-            this.groupBox5.TabIndex = 21;
-            this.groupBox5.TabStop = false;
-            // 
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -342,11 +335,30 @@
             this.textBox7.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox7_DragDrop);
             this.textBox7.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox7_DragEnter);
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Location = new System.Drawing.Point(724, 468);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(300, 200);
+            this.groupBox5.TabIndex = 21;
+            this.groupBox5.TabStop = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label9.Location = new System.Drawing.Point(14, 149);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(548, 19);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "(用KeyPress, 限制 TextBox只能輸入十六進位碼、Backspace、Enter)";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1044, 699);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -404,6 +416,7 @@
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Label label9;
     }
 }
 

@@ -2292,7 +2292,37 @@ namespace _vcs_MakePicture
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //製作icon
+            //一個ICON圖標的轉換程序
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
 
+            string icon_filename = Application.StartupPath + "\\ICO_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".ico";
+            FileStream fs = new FileStream(icon_filename, FileMode.Create);
+
+            Icon icon = ConvertBitmap2Ico(bitmap1);
+            this.Icon = icon;   //顯示出來
+            icon.Save(fs);//将Icon保存的指定的输出
+            fs.Close();
+        }
+
+        /// <summary>
+        /// 實現bitmap到ico的轉換
+        /// </summary>
+        /// <param name="bitmap">原圖</param>
+        /// <returns>轉換後的指定大小的圖標</returns>
+        private Icon ConvertBitmap2Ico(Bitmap bitmap)
+        {
+            Size size = new Size(256, 256); //用於保存目標圖標的大小
+            Bitmap icoBitmap = new Bitmap(bitmap, size);//創建制定大小的原位圖
+
+            //獲得原位圖的圖標句柄
+            IntPtr hIco = icoBitmap.GetHicon();
+            //從圖標的指定WINDOWS句柄創建Icon
+            Icon icon = Icon.FromHandle(hIco);
+
+            return icon;
         }
 
         private void button19_Click(object sender, EventArgs e)

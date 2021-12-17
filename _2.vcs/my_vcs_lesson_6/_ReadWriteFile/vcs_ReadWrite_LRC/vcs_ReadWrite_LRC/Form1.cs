@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections;   //for ArrayList
 
+using System.Text.RegularExpressions;
+
 namespace vcs_ReadWrite_LRC
 {
     public partial class Form1 : Form
@@ -181,7 +183,105 @@ namespace vcs_ReadWrite_LRC
         }
         #endregion
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            Lrc lrc = Lrc.InitLrc(filename);
+
+        }
+
 
 
     }
+
+
+    public class Lrc
+    {
+        /// <summary>
+        /// 歌曲
+        /// </summary>
+        public string Title { get; set; }
+        /// <summary>
+        /// 藝術家
+        /// </summary>
+        public string Artist { get; set; }
+        /// <summary>
+        /// 專輯
+        /// </summary>
+        public string Album { get; set; }
+        /// <summary>
+        /// 歌詞作者
+        /// </summary>
+        public string LrcBy { get; set; }
+        /// <summary>
+        /// 偏移量
+        /// </summary>
+        public string Offset { get; set; }
+
+        /// <summary>
+        /// 歌詞
+        /// </summary>
+        public Dictionary<double, string> LrcWord = new Dictionary<double, string>();
+
+        /// <summary>
+        /// 獲得歌詞信息
+        /// </summary>
+        /// <param name="LrcPath">歌詞路徑</param>
+        /// <returns>返回歌詞信息(Lrc實例)</returns>
+        public static Lrc InitLrc(string LrcPath)
+        {
+            Lrc lrc = new Lrc();
+            using (FileStream fs = new FileStream(LrcPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                string line;
+                using (StreamReader sr = new StreamReader(fs, Encoding.Default))
+                {
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (line.StartsWith("[ti:"))
+                        {
+                            lrc.Title = SplitInfo(line);
+                        }
+                        else if (line.StartsWith("[ar:"))
+                        {
+                            lrc.Artist = SplitInfo(line);
+                        }
+                        else if (line.StartsWith("[al:"))
+                        {
+                            lrc.Album = SplitInfo(line);
+                        }
+                        else if (line.StartsWith("[by:"))
+                        {
+                            lrc.LrcBy = SplitInfo(line);
+                        }
+                        else if (line.StartsWith("[offset:"))
+                        {
+                            lrc.Offset = SplitInfo(line);
+                        }
+                        else
+                        {
+                            Regex regex = new Regex(@"\[([0-9.:]*)\]+(.*)", RegexOptions.Compiled);
+                            MatchCollection mc = regex.Matches(line);
+                            double time = TimeSpan.Parse("00:" + mc[0].Groups[1].Value).TotalSeconds;
+                            string word = mc[0].Groups[2].Value;
+                            lrc.LrcWord.Add(time, word);
+                        }
+                    }
+                }
+            }
+            return lrc;
+        }
+
+        /// <summary>
+        /// 處理信息(私有方法)
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns>返回基礎信息</returns>
+        static string SplitInfo(string line)
+        {
+            return line.Substring(line.IndexOf(":") + 1).TrimEnd(']');
+        }
+    }
+
+
 }

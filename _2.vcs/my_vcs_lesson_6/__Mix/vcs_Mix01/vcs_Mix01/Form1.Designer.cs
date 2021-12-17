@@ -456,7 +456,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
-            this.Text = "無法分類之單項和01";
+            this.Text = "無法分類之單項和 vcs_Mix01";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
