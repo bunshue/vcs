@@ -1,13 +1,43 @@
 
 
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //關閉計算機
+            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
+            myProcess.StartInfo.FileName = "cmd.exe";//启动cmd命令
+            myProcess.StartInfo.UseShellExecute = false;//是否使用系统外壳程序启动进程
+            myProcess.StartInfo.RedirectStandardInput = true;//是否从流中读取
+            myProcess.StartInfo.RedirectStandardOutput = true;//是否写入流
+            myProcess.StartInfo.RedirectStandardError = true;//是否将错误信息写入流
+            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中启动进程
+            myProcess.Start();//启动进程
+            myProcess.StandardInput.WriteLine("shutdown -s -t 0");//执行关机命令
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //重啟計算機
+            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
+            myProcess.StartInfo.FileName = "cmd.exe";//启动cmd命令
+            myProcess.StartInfo.UseShellExecute = false;//是否使用系统外壳程序启动进程
+            myProcess.StartInfo.RedirectStandardInput = true;//是否从流中读取
+            myProcess.StartInfo.RedirectStandardOutput = true;//是否写入流
+            myProcess.StartInfo.RedirectStandardError = true;//是否将错误信息写入流
+            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中启动进程
+            myProcess.Start();//启动进程
+            myProcess.StandardInput.WriteLine("shutdown -r -t 0");//执行重启计算机命令
+        }
+
+
+
+
+
+
 EXIF，是英文Exchangeable Image File
 
 
 
-
-
-using (Process curProcess = Process.GetCurrentProcess())
 
 
 
@@ -1075,6 +1105,9 @@ str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補
 
 //C#中獲取程序當前路徑的集中方法及實現代碼
 
+
+using (Process curProcess = Process.GetCurrentProcess())
+
 string str1 =Process.GetCurrentProcess().MainModule.FileName;//可獲得當前執行的exe的文件名。
 string str2=Environment.CurrentDirectory;//獲取和設置當前目錄（即該進程從中啟動的目錄）的完全限定路徑。
 //備注 按照定義，如果該進程在本地或網絡驅動器的根目錄中啟動，則此屬性的值為驅動器名稱後跟一個尾部反斜槓（如“C:/”）。如果該進程在子目錄中啟動，則此屬性的值為不帶尾部反斜槓的驅動器和子目錄路徑（如“C:/mySubDirectory”）。
@@ -1895,20 +1928,6 @@ Console.ReadLine();
  
  
  
-            Process[] processes = System.Diagnostics.Process.GetProcessesByName(Application.CompanyName);
-            if (processes.Length > 1)
-            {
-                MessageBox.Show("應用程序已經在運行中。");
-                Thread.Sleep(1000);
-                System.Environment.Exit(1);
-            }
-            else
-            {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new FrmServiceSetup());
-            }
-            
             
            
                 string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
@@ -1917,72 +1936,8 @@ Console.ReadLine();
             
             
 
-C#殺死進程
-
-private void KillProcess(string processName)
-        {
-            System.Diagnostics.Process myproc = new System.Diagnostics.Process();
-            //得到所有打開的進程
-            try
-            {
-                foreach (Process thisproc in Process.GetProcessesByName("WINPROJ"))
-                {
-                    if (!thisproc.CloseMainWindow())
-                    {
-                        thisproc.Kill();
-                    }
-                }
-            }
-            catch (System.Exception ex )
-            {
-                ScriptManager.RegisterStartupScript(this.btnUpload, GetType(), "dis", "alert(進程殺死失敗);", true);
-            }
-        }
     
 
-
-
-        //獲取窗體的進程標識ID
-        public static int GetPid(string windowTitle)
-        {
-            int rs = 0;
-            Process[] arrayProcess = Process.GetProcesses();
-            foreach (Process p in arrayProcess)
-            {
-                if (p.MainWindowTitle.IndexOf(windowTitle) != -1)
-                {
-                    rs = p.Id;
-                    break;
-                }
-            }
-            return rs;
-        }
-
-        //根據進程名獲取PID
-        public static int GetPidByProcessName(string processName, ref IntPtr baseAddress)
-        {
-            Process[] arrayProcess = Process.GetProcessesByName(processName);
-            foreach (Process p in arrayProcess)
-            {
-                baseAddress = p.MainModule.BaseAddress;
-                return p.Id;
-            }
-
-            return 0;
-        }
-
-        //根據進程名獲取PID
-        public static int GetPidByProcessName(string processName)
-        {
-            Process[] arrayProcess = Process.GetProcessesByName(processName);
-            foreach (Process p in arrayProcess)
-            {
-                return p.Id;
-            }
-
-            return 0;
-        }
-        
 
 using System.Drawing.Imaging;
 
@@ -5324,11 +5279,68 @@ C#抓取网页Html源码
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
+            Process[] processes = System.Diagnostics.Process.GetProcessesByName(Application.CompanyName);
+            if (processes.Length > 1)
+            {
+                MessageBox.Show("應用程序已經在運行中。");
+                Thread.Sleep(1000);
+                System.Environment.Exit(1);
+            }
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new FrmServiceSetup());
+            }
+            
 
 
 
 //--------------------------------------------------------------------------------------------------------------------------
 
+
+
+        //獲取窗體的進程標識ID
+        public static int GetPid(string windowTitle)
+        {
+            int rs = 0;
+            Process[] arrayProcess = Process.GetProcesses();
+            foreach (Process p in arrayProcess)
+            {
+                if (p.MainWindowTitle.IndexOf(windowTitle) != -1)
+                {
+                    rs = p.Id;
+                    break;
+                }
+            }
+            return rs;
+        }
+
+        //根據進程名獲取PID
+        public static int GetPidByProcessName(string processName, ref IntPtr baseAddress)
+        {
+            Process[] arrayProcess = Process.GetProcessesByName(processName);
+            foreach (Process p in arrayProcess)
+            {
+                baseAddress = p.MainModule.BaseAddress;
+                return p.Id;
+            }
+
+            return 0;
+        }
+
+        //根據進程名獲取PID
+        public static int GetPidByProcessName(string processName)
+        {
+            Process[] arrayProcess = Process.GetProcessesByName(processName);
+            foreach (Process p in arrayProcess)
+            {
+                return p.Id;
+            }
+
+            return 0;
+        }
+        
 
 
 

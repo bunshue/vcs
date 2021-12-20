@@ -368,7 +368,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(160, 50);
             this.button24.TabIndex = 25;
-            this.button24.Text = "執行外部.EXE檔 並獲取結果";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -379,7 +378,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(160, 50);
             this.button25.TabIndex = 26;
-            this.button25.Text = "執行一條command命令 並取得其結果";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -401,7 +399,6 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(160, 50);
             this.button27.TabIndex = 28;
-            this.button27.Text = "C#中利用process類調用外部程序以及執行dos命令";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -412,7 +409,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(160, 50);
             this.button28.TabIndex = 29;
-            this.button28.Text = "尋找process";
+            this.button28.Text = "尋找並殺死process";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -435,6 +432,7 @@
             this.button30.Size = new System.Drawing.Size(160, 50);
             this.button30.TabIndex = 31;
             this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
             // button31
             // 

@@ -468,64 +468,11 @@ namespace vcs_Mix05
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            richTextBox1.Text += "目前只有異步模式可用\n";
-            string cmd = "cmd";
-            string parameter = "ver";
-            exec_async(cmd, parameter);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-        }
-
-        //C# 調用外部程序，並獲取輸出和錯誤信息
-
-        //1. 同步模式
-
-        public void exec_sync(string exePath, string parameters)
-        {
-            System.Diagnostics.ProcessStartInfo psi =
-            new System.Diagnostics.ProcessStartInfo();
-            psi.RedirectStandardOutput = true;
-            psi.RedirectStandardError = true;
-            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            psi.UseShellExecute = false;
-            psi.FileName = exePath;
-            psi.Arguments = parameters;
-            System.Diagnostics.Process process = System.Diagnostics.Process.Start(psi);
-            System.IO.StreamReader outputStreamReader = process.StandardOutput;
-            System.IO.StreamReader errStreamReader = process.StandardError;
-            process.WaitForExit(2000);
-            if (process.HasExited)
-            {
-                string output = outputStreamReader.ReadToEnd();
-                string error = errStreamReader.ReadToEnd();
-                MessageBox.Show(output);
-                MessageBox.Show(error);
-            }
-
-        }
-
-        //2.異步模式
-
-        public void exec_async(string exePath, string parameters)
-        {
-            Process process = new System.Diagnostics.Process();
-            process.StartInfo.FileName = exePath;
-            process.StartInfo.Arguments = parameters;
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.Start();
-            process.BeginOutputReadLine();
-            process.OutputDataReceived += new DataReceivedEventHandler(processOutputDataReceived);
-        }
-
-        private void processOutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            MessageBox.Show(e.Data);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -543,13 +490,11 @@ namespace vcs_Mix05
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button13_Click(object sender, EventArgs e)

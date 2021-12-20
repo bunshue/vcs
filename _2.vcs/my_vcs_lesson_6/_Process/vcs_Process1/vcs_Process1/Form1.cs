@@ -606,113 +606,10 @@ namespace vcs_Process1
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //執行外部.EXE檔 並獲取結果
-            //相當於輸入 cmd/netstat -an, 並獲取輸出的結果
-
-            Process process = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo("cmd.exe");
-            startInfo.UseShellExecute = false;
-            process.StartInfo = startInfo;
-            process.StartInfo.RedirectStandardInput = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.Start();
-
-            process.StandardInput.WriteLine("netstat -an");
-            process.StandardInput.WriteLine("exit");
-
-            string netMessage = process.StandardOutput.ReadToEnd();
-            process.WaitForExit();
-            process.Close();
-
-            richTextBox1.Text += netMessage + "\n";
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //執行一條command命令 並取得其結果
-            string result = string.Empty;
-
-            GetCommandLineResult(out result);
-            richTextBox1.Text = result + "\n";
-        }
-
-        /// <summary>
-        /// 獲取視頻的幀寬度和幀高度
-        /// </summary>
-        /// <returns>null表示獲取寬度或高度失敗</returns>
-        public static void GetCommandLineResult(out string result)
-        {
-            try
-            {
-                //執行命令獲取該文件的一些信息 
-                string command = "systeminfo";
-
-                string output;
-                string error;
-                ExecuteCommand(command, out output, out error);
-
-                result = output;
-            }
-            catch (Exception)
-            {
-                //width = null;
-                //height = null;
-                result = null;
-            }
-        }
-
-        /// <summary>
-        /// 執行一條command命令
-        /// </summary>
-        /// <param name="command">需要執行的Command</param>
-        /// <param name="output">輸出</param>
-        /// <param name="error">錯誤</param>
-        public static void ExecuteCommand(string command, out string output, out string error)
-        {
-            try
-            {
-                //創建一個進程
-                Process pc = new Process();
-                pc.StartInfo.FileName = command;
-                pc.StartInfo.UseShellExecute = false;
-                pc.StartInfo.RedirectStandardOutput = true;
-                pc.StartInfo.RedirectStandardError = true;
-                pc.StartInfo.CreateNoWindow = true;
-
-                //啟動進程
-                pc.Start();
-
-                //准備讀出輸出流和錯誤流
-                string outputData = string.Empty;
-                string errorData = string.Empty;
-                pc.BeginOutputReadLine();
-                pc.BeginErrorReadLine();
-
-                pc.OutputDataReceived += (ss, ee) =>
-                {
-                    outputData += ee.Data;
-                };
-
-                pc.ErrorDataReceived += (ss, ee) =>
-                {
-                    errorData += ee.Data;
-                };
-
-                //等待退出
-                pc.WaitForExit();
-
-                //關閉進程
-                pc.Close();
-
-                //返回流結果
-                output = outputData;
-                error = errorData;
-            }
-            catch (Exception)
-            {
-                output = null;
-                error = null;
-            }
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -723,50 +620,17 @@ namespace vcs_Process1
 
         private void button27_Click(object sender, EventArgs e)
         {
-            //C#中利用process類調用外部程序以及執行dos命令
-            //TBD
 
-            //C#中利用process類調用外部程序以及執行dos命令
-            //string result = RunCmd("cmd");
-            //richTextBox1.Text += result + "\n";
-
-        }
-
-        /*
-        C#中的Process類可方便的調用外部程序，所以我們可以通過調用cmd.exe程序
-        加入參數 "/c " 要執行的命令來執行一個DOS命令
-        （/c代表執行參數指定的命令後關閉cmd.exe /k參數則不關閉cmd.exe）
-        */
-
-        private string RunCmd(string command)
-        {
-            //實例一個Process類，啟動一個獨立進程
-            Process p = new Process();
-
-            //Process類有一個StartInfo屬性，這個是ProcessStartInfo類，包括了一些屬性和方法，下面我們用到了他的幾個屬性：
-
-            p.StartInfo.FileName = "cmd.exe"; //設定程序名
-            //p.StartInfo.Arguments = "/c " command; //設定程式執行參數
-            p.StartInfo.UseShellExecute = false; //關閉Shell的使用
-            p.StartInfo.RedirectStandardInput = true; //重定向標準輸入
-            p.StartInfo.RedirectStandardOutput = true; //重定向標準輸出
-            p.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
-            p.StartInfo.CreateNoWindow = true; //設置不顯示窗口
-
-            p.Start(); //啟動
-
-            //p.StandardInput.WriteLine(command); //也可以用這種方式輸入要執行的命令
-            //p.StandardInput.WriteLine("exit"); //不過要記得加上Exit要不然下一行程式執行的時候會當機
-            return p.StandardOutput.ReadToEnd(); //從輸出流取得命令執行結果
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-            //尋找process
+            //尋找並殺死process
             string process_name = "acdsee";
             KillProcess(process_name);
         }
 
+        //C#殺死進程
         private void KillProcess(string processName)
         {
             Process myproc = new Process();
@@ -781,7 +645,8 @@ namespace vcs_Process1
                     /*
                     if (!thisproc.CloseMainWindow())
                     {
-                        thisproc.Kill();
+                        //thisproc.Kill();
+                        richTextBox1.Text += "殺死進程 : " + processName + "\n";
                     }
                     */
                 }
@@ -799,6 +664,12 @@ namespace vcs_Process1
             Process p = Process.Start("notepad.exe");
             p.WaitForExit();//關鍵，等待外部程序退出後才能往下執行
         }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+        }
+
+
     }
 }
 
