@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace 真的只是一個測試1.Properties
+namespace vcs_CommandLine.Properties
 {
 
 

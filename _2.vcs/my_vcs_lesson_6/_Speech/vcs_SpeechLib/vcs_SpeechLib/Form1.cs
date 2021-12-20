@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using SpeechLib;
+using SpeechLib;        //參考/加入參考/COM/Microsoft Speech Object Library 5.4	C:\Windows\System32\Speech\Common\sapi.dll
 
 using System.Speech.Synthesis;  //參考/加入參考/.NET/System.Speech
 
@@ -33,40 +33,30 @@ namespace vcs_SpeechLib
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string article1 = "When his father died, he left an estate of one million dollars.";
-            string article2 = "他父親去世時留下了一百萬元遺產。";
-            
+            string article1 = "Insight Medical Solutions Inc.";
+            string article2 = "群曜醫電股份有限公司";
 
-            #region 應用一: 只說英文
+            richTextBox1.Text += "應用一: 只說英文\n";
+            //應用一: 只說英文
             SpVoiceClass voice1 = new SpVoiceClass();
             //Item(1)女聲
             voice1.Voice = voice1.GetVoices(string.Empty, string.Empty).Item(1);
             //SVSFDefault: Specifies that the default settings
             voice1.Speak(article1, SpeechVoiceSpeakFlags.SVSFDefault);
-            #endregion
 
-
-            #region 應用二: 說中文
+            richTextBox1.Text += "應用二: 說中文\n";
             SpVoiceClass voice2 = new SpVoiceClass();
             voice2.Voice = voice2.GetVoices(string.Empty, string.Empty).Item(0);//Item(0)中文女聲
             voice2.Speak(article2, SpeechVoiceSpeakFlags.SVSFDefault);
 
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(1000);
             voice2.Speak(article2, SpeechVoiceSpeakFlags.SVSFDefault);
 
-            System.Threading.Thread.Sleep(3000);
-            voice2.Speak(article2, SpeechVoiceSpeakFlags.SVSFDefault);
-
-            #endregion
-
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string article3 = "When his father died, he left an estate of one million dollars. 他父親去世時留下了一百萬元遺產。";
-            SpeechSynthesizer synth = new SpeechSynthesizer();
-            synth.SpeakAsync(article3);
+            richTextBox1.Text += "應用三: 說英文中文\n";
+            //讀出richtextbox裡的文字
+            SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            SpVoice sp = new SpVoice();
+            sp.Speak(article1 + article2, spFlags);
         }
     }
 }
