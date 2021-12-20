@@ -626,76 +626,387 @@ namespace vcs_Mix02
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //在 C# 中獲取 2D 陣列的長度
 
+            int[,] array2D;
+            //使用 C# 中的 Array.GetLength() 函式獲取 2D 陣列的寬度和高度
+            //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
+            array2D = new int[5, 10];
+            Console.WriteLine(array2D.GetLength(0));	//5
+            Console.WriteLine(array2D.GetLength(1));	//10
+
+            //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
+            array2D = new int[5, 10];
+            Console.WriteLine(array2D.GetUpperBound(0) + 1);	//5
+            Console.WriteLine(array2D.GetUpperBound(1) + 1);	//10
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //使用 GetBytes() 方法將字串轉換為位元組陣列
 
+            string myString = "This is a string.";
+            byte[] byteArray = Encoding.ASCII.GetBytes(myString);
+            richTextBox1.Text += "The Byte Array is:\n";
+            foreach (byte bytes in byteArray)
+            {
+                richTextBox1.Text += bytes.ToString() + "\n";
+            }
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            richTextBox1.Text += "目前應用程式路徑: \t" + Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\n";
 
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            string filename = Path.Combine(Application.StartupPath, @"..\..\Form1.cs");
+
+            richTextBox1.Text = "把這個檔案的註解抓出來\n";
+            richTextBox1.Text += "檔案" + filename + "\n";
+
+            // Extract the comments.
+            // A weirder comment.   /* Not a multi-line comment
+
+            // Display the comments.
+            richTextBox1.Text += ExtractComments(filename);
+        }
+
+        // Return a file's comments.
+        private string ExtractComments(string filename)
+        {
+            // Get the file's contents.
+            string all_text = File.ReadAllText(filename);
+
+            // Get rid of \" escape sequences.
+            all_text = all_text.Replace("\\\"", "");
+
+            // Process the file.
+            string comments = "";
+            while (all_text.Length > 0)
+            {
+                // Find the next string or comment.
+                int string_pos = all_text.IndexOf("\"");
+                int end_line_pos = all_text.IndexOf("//");
+                int multi_line_pos = all_text.IndexOf("/*");
+
+                // If there are none of these, we're done.
+                if ((string_pos < 0) && (end_line_pos < 0) && (multi_line_pos < 0)) break;
+
+                if (string_pos < 0) string_pos = all_text.Length;
+                if (end_line_pos < 0) end_line_pos = all_text.Length;
+                if (multi_line_pos < 0) multi_line_pos = all_text.Length;
+
+                // See which comes first.
+                if ((string_pos < end_line_pos) && (string_pos < multi_line_pos))
+                {
+                    // String.
+                    // Find its end.
+                    int end_pos = all_text.IndexOf("\"", string_pos + 1);
+
+                    // Extract and discard everything up to the string.
+                    if (end_pos < 0)
+                    {
+                        all_text = "";
+                    }
+                    else
+                    {
+                        all_text = all_text.Substring(end_pos + 1);
+                    }
+                }
+                else if (end_line_pos < multi_line_pos)
+                {
+                    // End of line comment.
+                    // Find its end.
+                    int end_pos = all_text.IndexOf("\r\n", end_line_pos + 2);
+
+                    // Extract the comment.
+                    if (end_pos < 0)
+                    {
+                        comments += all_text.Substring(end_line_pos) + "\r\n";
+                        all_text = "";
+                    }
+                    else
+                    {
+                        comments += all_text.Substring(end_line_pos, end_pos - end_line_pos) + "\r\n";
+                        all_text = all_text.Substring(end_pos + 2);
+                    }
+                }
+                else
+                {
+                    // Multi-line comment.
+                    // Find its end.
+                    int end_pos = all_text.IndexOf("*/", multi_line_pos + 2);
+
+                    // Extract the comment.
+                    if (end_pos < 0)
+                    {
+                        comments += all_text.Substring(multi_line_pos) + "\r\n";
+                        all_text = "";
+                    }
+                    else
+                    {
+                        comments += all_text.Substring(multi_line_pos, end_pos - multi_line_pos + 2) + "\r\n";
+                        all_text = all_text.Substring(end_pos + 2);
+                    }
+                }
+            }
+            return comments;
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+                        //搜尋檔案內的文字
+
+            string txtDirectory = @"C:\______test_files\_case1";
+            string type = "*.*";
+            string pattern = "";
+
+            richTextBox1.Clear();
+            DirectoryInfo dir_info = new DirectoryInfo(txtDirectory);
+
+            ListFiles(type, dir_info, pattern);
+        }
+
+        // Add the files in this directory's subtree 
+        // that match the pattern to the ListBox.
+        private void ListFiles(string pattern, DirectoryInfo dir_info, string target)
+        {
+            // Get the files in this directory.
+            FileInfo[] fs_infos = dir_info.GetFiles(pattern);
+            foreach (FileInfo fs_info in fs_infos)
+            {
+                if (target.Length == 0)
+                {
+                    richTextBox1.Text += fs_info.FullName + "\n";
+                }
+                else
+                {
+                    string txt = File.ReadAllText(fs_info.FullName);
+                    if (txt.IndexOf(target, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        richTextBox1.Text += fs_info.FullName + "\n";
+                    }
+                }
+            }
+
+            // Search subdirectories.
+            DirectoryInfo[] subdirs = dir_info.GetDirectories();
+            foreach (DirectoryInfo subdir in subdirs)
+            {
+                ListFiles(pattern, subdir, target);
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //亂數產生Unicode中文範圍的中文字元
+            //呼叫視窗使用Unicode字串來顯示
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            //產生1000字Unicode中文字
+            for (int i = 0; i < 1000; i++)
+            {
+                //Console.Write(getRandomUnicode().Substring(0, 1));
+                richTextBox1.Text += getRandomUnicode().Substring(0, 1);
+            }
+        }
 
+        //取得一個亂數的Unicode中文字
+        private static string getRandomUnicode()
+        {
+            //Unicode中文字範圍
+            int iMin = Convert.ToInt32("4E00", 16);
+            int iMax = Convert.ToInt32("9FFF", 16); //不考慮最末16個空白
+            //隨機一個中文字之整數
+            System.Random oRnd = new System.Random(System.Guid.NewGuid().GetHashCode());
+            int iChar = oRnd.Next(iMin, iMax);
+            //整數轉成Byte[]，再轉成字串
+            return System.Text.Encoding.Unicode.GetString(System.BitConverter.GetBytes(iChar));
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            int lower = 0x20;
+            int upper = 0xD7FF;
 
+            string result = NextString(lower, upper, 30);
+            richTextBox1.Text += result + "\n";
+        }
+
+        public string NextString(int charLowerBound, int charUpperBound, int length)
+        {
+            Random r = new Random();
+            return new String(Enumerable.Repeat(0, length).Select(p => (char)r.Next(charLowerBound, charUpperBound)).ToArray());
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //動態處理DataTable
+            //動態處理DataTable
+
+            //1.創建表實例
+            DataTable dt = new DataTable();
+
+            //2.建立表結構
+            dt.Columns.Add("ID");
+            dt.Columns.Add("Name");
+
+            //3.創建新行
+            DataRow dr = dt.NewRow();
+
+            //4.為新行賦值
+            dr[0] = "1";
+            dr[1] = "林林";
+
+            //5.將新行添加到表
+            dt.Rows.Add(dr);
+
+
+            /*
+            //1.創建表實例
+            DataTable dt=new DataTable();
+
+            //2.建立表結構
+            dt.Columns.Add("ID");
+            dt.Columns.Add("Name");
+
+            //3.添加新行
+            dt.Rows.Add("1", "Name");
+            */
         }
+
+
+        //计算两点GPS坐标距离 
+        /// <summary>
+        ///计算两点GPS坐标的距离
+        /// </summary>
+        /// <param name="n1">第一点的纬度坐标</param>
+        /// <param name="e1">第一点的经度坐标</param>
+        /// <param name="n2">第二点的纬度坐标</param>
+        /// <param name="e2">第二点的经度坐标</param>
+        /// <returns></returns>
+        public static double Distance(double n1, double e1, double n2, double e2)
+        {
+            double jl_jd = 102834.74258026089786013677476285;   // 米/度
+            double jl_wd = 111712.69150641055729984301412873;   // 米/度
+            double b = Math.Abs((e1 - e2) * jl_jd);
+            double a = Math.Abs((n1 - n2) * jl_wd);
+            return Math.Sqrt((a * a + b * b));
+        }
+
 
         private void button25_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+
 
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //字串編碼處理
+            /*
+            GB2312是簡體中文系統的標准編碼 用“區” 跟“位”的概念表示 稱之為區位碼
+            區指代大的范圍 位相當於偏移量。
+            每個漢字占兩個字節
+            高位字節”的范圍是0xB0-0xF7，“低位字節”的范圍是0xA1-0xFE。
+            它的規律好像是按拼音a到z的順序排列的
+            “啊”字是GB2312之中的第一個漢字，它的區位碼就是1601
+            為此我們現在用代碼的方式輸出一個漢字
 
+            c#下是little字節序 b0跑後面去了。
+            */
+
+            ushort u = 0xa1b0;
+
+            int i;
+            for (i = 0; i < 30; i++)
+            {
+                byte[] chs = BitConverter.GetBytes(u + i);
+                Console.Write(Encoding.GetEncoding("GB2312").GetString(chs));
+                richTextBox1.Text += Encoding.GetEncoding("GB2312").GetString(chs);
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //輸出所有的漢字
+            /*
+            GB2312是簡體中文系統的標准編碼 用“區” 跟“位”的概念表示 稱之為區位碼
+            區指代大的范圍 位相當於偏移量。
+            每個漢字占兩個字節
+            高位字節”的范圍是0xB0-0xF7，“低位字節”的范圍是0xA1-0xFE。
+            它的規律好像是按拼音a到z的順序排列的
+            “啊”字是GB2312之中的第一個漢字，它的區位碼就是1601
+            為此我們現在用代碼的方式輸出一個漢字
 
+            c#下是little字節序 b0跑後面去了。
+            */
+
+            richTextBox1.Text += "輸出所有的漢字\n";
+            //gb2312
+            //B0-F7，低字節從A1-FE
+            //byte hi = 0xB0;
+            //byte lo = 0xA1;
+            for (byte i = 0xB0; i <= 0xF7; i++)
+            {
+                for (byte j = 0xA1; j <= 0xFE; j++)
+                {
+                    //byte t = (byte)(j | (byte)0x01);
+                    Console.Write(Encoding.GetEncoding("GB2312").GetString(new byte[] { i, j }));
+                    richTextBox1.Text += Encoding.GetEncoding("GB2312").GetString(new byte[] { i, j });
+                }
+            }
+            richTextBox1.Text += "\n\n";
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            /*
+            實際上，全角字符的第一個字節總是被置為163，
+            而第二個字節則是相同半角字符碼加上128（不包括空格）。
+            如半角A為65，則全角A則是163（第一個字節）、193（第二個字節，128+65）。
+            */
 
+            richTextBox1.Text += "全形ASCII\n";
+            for (byte k = 0x00; k < 0x7f; k++)
+            {
+                byte[] ch = new byte[2];
+                ch[0] = 163;
+                ch[1] = (byte)(128 + k);
+                Console.Write(Encoding.GetEncoding("GB2312").GetString(ch));
+                richTextBox1.Text += Encoding.GetEncoding("GB2312").GetString(ch);
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
+            string senderEmail = @"david@insighteyes.com";
+            string[] sendFromUser = senderEmail.Split('@');
+            int len = sendFromUser.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + sendFromUser[i] + "\n";
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)

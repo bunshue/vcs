@@ -194,82 +194,18 @@ namespace 真的只是一個測試1
 
         private void button14_Click(object sender, EventArgs e)
         {
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
-
-            foreach (DriveInfo d in allDrives)
-            {
-                richTextBox1.Text += "Drive : " + d.Name + "\tFile type : " + d.DriveType + "\n";
-            }
-
-            foreach (DriveInfo d in allDrives)
-            {
-                //жU
-                if (d.DriveType == DriveType.Removable)
-                {
-                    richTextBox1.Text += "Removable Device : " + d.Name + "\n";
-                }
-            }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //file info
-            string filename = @"C:\______test_files\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
-
-            FileInfo fileInfo = new FileInfo(filename);
-            string fileSize = (fileInfo.Length / 1024).ToString() + " KB";
-            string temp = filename.Remove(filename.LastIndexOf('.'));
-            string fileName = Path.GetFileNameWithoutExtension(filename);
-            string fileExtension = Path.GetExtension(filename);
-
-            richTextBox1.Text += "filename = " + filename + "\n";
-            richTextBox1.Text += "fileSize = " + fileSize + "\n";
-            richTextBox1.Text += "temp = " + temp + "\n";
-            richTextBox1.Text += "fileName = " + fileName + "\n";
-            richTextBox1.Text += "fileExtension = " + fileExtension + "\n";
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //在 C# 中獲取 2D 陣列的長度
-
-            int[,] array2D;
-            //使用 C# 中的 Array.GetLength() 函式獲取 2D 陣列的寬度和高度
-            //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
-            array2D = new int[5, 10];
-            Console.WriteLine(array2D.GetLength(0));	//5
-            Console.WriteLine(array2D.GetLength(1));	//10
-
-            //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
-            array2D = new int[5, 10];
-            Console.WriteLine(array2D.GetUpperBound(0) + 1);	//5
-            Console.WriteLine(array2D.GetUpperBound(1) + 1);	//10
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //亂數產生Unicode中文範圍的中文字元
-            //呼叫視窗使用Unicode字串來顯示
-            Console.OutputEncoding = System.Text.Encoding.Unicode;
-            //產生1000字Unicode中文字
-            for (int i = 0; i < 1000; i++)
-            {
-                //Console.Write(getRandomUnicode().Substring(0, 1));
-                richTextBox1.Text += getRandomUnicode().Substring(0, 1);
-            }
-        }
-
-        //取得一個亂數的Unicode中文字
-        private static string getRandomUnicode()
-        {
-            //Unicode中文字範圍
-            int iMin = Convert.ToInt32("4E00", 16);
-            int iMax = Convert.ToInt32("9FFF", 16); //不考慮最末16個空白
-            //隨機一個中文字之整數
-            System.Random oRnd = new System.Random(System.Guid.NewGuid().GetHashCode());
-            int iChar = oRnd.Next(iMin, iMax);
-            //整數轉成Byte[]，再轉成字串
-            return System.Text.Encoding.Unicode.GetString(System.BitConverter.GetBytes(iChar));
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -406,40 +342,8 @@ namespace 真的只是一個測試1
 
         }
 
-        //找出資料夾內所有檔案
         private void button22_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\______test_files\_pic";
-
-            // Enumerate the files.
-            DirectoryInfo dir_info = new System.IO.DirectoryInfo(foldername);
-
-            foreach (DirectoryInfo d_info in dir_info.GetDirectories())
-            {
-                richTextBox1.Text += d_info.FullName + "\n";
-                richTextBox1.Text += d_info.Name + "\n";
-
-
-            }
-
-            richTextBox1.Text += "\n\n";
-
-            foreach (FileInfo file_info in dir_info.GetFiles())
-            {
-                try
-                {
-                    richTextBox1.Text += file_info.FullName + "\n";
-                    //richTextBox1.Text += file_info.Name + "\n";
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error processing file '" +
-                        file_info.Name + "'\n" + ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-            } // foreach file_info
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -452,15 +356,6 @@ namespace 真的只是一個測試1
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //使用 GetBytes() 方法將字串轉換為位元組陣列
-
-            string myString = "This is a string.";
-            byte[] byteArray = Encoding.ASCII.GetBytes(myString);
-            richTextBox1.Text += "The Byte Array is:\n";
-            foreach (byte bytes in byteArray)
-            {
-                richTextBox1.Text += bytes.ToString() + "\n";
-            }
         }
 
         private void button26_Click(object sender, EventArgs e)

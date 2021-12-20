@@ -192,81 +192,14 @@ namespace test6
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //字串編碼處理
-            /*
-            GB2312是簡體中文系統的標准編碼 用“區” 跟“位”的概念表示 稱之為區位碼
-            區指代大的范圍 位相當於偏移量。
-            每個漢字占兩個字節
-            高位字節”的范圍是0xB0-0xF7，“低位字節”的范圍是0xA1-0xFE。
-            它的規律好像是按拼音a到z的順序排列的
-            “啊”字是GB2312之中的第一個漢字，它的區位碼就是1601
-            為此我們現在用代碼的方式輸出一個漢字
-
-            c#下是little字節序 b0跑後面去了。
-            */
-
-            ushort u = 0xa1b0;
-
-            int i;
-            for (i = 0; i < 30; i++)
-            {
-                byte[] chs = BitConverter.GetBytes(u + i);
-                Console.Write(Encoding.GetEncoding("GB2312").GetString(chs));
-                richTextBox1.Text += Encoding.GetEncoding("GB2312").GetString(chs);
-            }
-            richTextBox1.Text += "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //輸出所有的漢字
-            /*
-            GB2312是簡體中文系統的標准編碼 用“區” 跟“位”的概念表示 稱之為區位碼
-            區指代大的范圍 位相當於偏移量。
-            每個漢字占兩個字節
-            高位字節”的范圍是0xB0-0xF7，“低位字節”的范圍是0xA1-0xFE。
-            它的規律好像是按拼音a到z的順序排列的
-            “啊”字是GB2312之中的第一個漢字，它的區位碼就是1601
-            為此我們現在用代碼的方式輸出一個漢字
-
-            c#下是little字節序 b0跑後面去了。
-            */
-
-            richTextBox1.Text += "輸出所有的漢字\n";
-            //gb2312
-            //B0-F7，低字節從A1-FE
-            //byte hi = 0xB0;
-            //byte lo = 0xA1;
-            for (byte i = 0xB0; i <= 0xF7; i++)
-            {
-                for (byte j = 0xA1; j <= 0xFE; j++)
-                {
-                    //byte t = (byte)(j | (byte)0x01);
-                    Console.Write(Encoding.GetEncoding("GB2312").GetString(new byte[] { i, j }));
-                    richTextBox1.Text += Encoding.GetEncoding("GB2312").GetString(new byte[] { i, j });
-                }
-            }
-            richTextBox1.Text += "\n\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            /**
-            實際上，全角字符的第一個字節總是被置為163，
-            而第二個字節則是相同半角字符碼加上128（不包括空格）。
-            如半角A為65，則全角A則是163（第一個字節）、193（第二個字節，128+65）。
-            */
-
-            richTextBox1.Text += "全形ASCII\n";
-            for (byte k = 0x00; k < 0x7f; k++)
-            {
-                byte[] ch = new byte[2];
-                ch[0] = 163;
-                ch[1] = (byte)(128 + k);
-                Console.Write(Encoding.GetEncoding("GB2312").GetString(ch));
-                richTextBox1.Text += Encoding.GetEncoding("GB2312").GetString(ch);
-            }
-            richTextBox1.Text += "\n";
         }
 
         private void button8_Click(object sender, EventArgs e)

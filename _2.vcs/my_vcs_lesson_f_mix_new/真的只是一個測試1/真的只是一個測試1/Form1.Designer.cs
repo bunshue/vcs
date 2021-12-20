@@ -211,7 +211,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(155, 55);
             this.button13.TabIndex = 14;
-            this.button13.Text = "info";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -222,7 +221,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(155, 55);
             this.button14.TabIndex = 15;
-            this.button14.Text = "偵測裝置型態";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -233,7 +231,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(155, 55);
             this.button15.TabIndex = 16;
-            this.button15.Text = "file info";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -244,7 +241,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(155, 55);
             this.button16.TabIndex = 17;
-            this.button16.Text = "在 C# 中獲取 2D 陣列的長度";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -255,7 +251,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(155, 55);
             this.button17.TabIndex = 18;
-            this.button17.Text = "亂數產生Unicode中文範圍的中文字元";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -319,7 +314,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(155, 55);
             this.button22.TabIndex = 26;
-            this.button22.Text = "找出資料夾內所有檔案";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -350,7 +344,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(155, 55);
             this.button25.TabIndex = 29;
-            this.button25.Text = "使用 GetBytes() 方法將字串轉換為位元組陣列";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 

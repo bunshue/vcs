@@ -428,6 +428,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(170, 75);
             this.button30.TabIndex = 32;
+            this.button30.Text = "網頁截圖";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 

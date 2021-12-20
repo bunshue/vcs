@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Management;
+using System.Drawing.Imaging;
 
 using System.Security.Cryptography.X509Certificates;
 
@@ -1065,7 +1066,43 @@ namespace network_test2_http
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //網頁截圖
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
 
+            string url = @"https://www.google.com.tw/";
+            WebBrowser webBrowser1 = new WebBrowser();
+            webBrowser1.ScrollBarsEnabled = false;
+            webBrowser1.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+
+            //取得網頁資料
+            webBrowser1.Navigate(url);
+            while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            //截圖
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Rectangle DrawRect = new Rectangle(0, 0, W, H);
+            webBrowser1.DrawToBitmap(bitmap1, DrawRect);
+
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            try
+            {
+                //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                bitmap1.Save(filename, ImageFormat.Bmp);
+                //bitmap1.Save(@file3, ImageFormat.Png);
+
+                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
         }
 
         private void button31_Click(object sender, EventArgs e)

@@ -60,7 +60,9 @@ namespace image_test1
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            label1.Location = new Point(x_st + dx * 2, y_st + dy * 0+20);
+            pictureBox2.Location = new Point(x_st + dx * 3+100, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
 
             //控件位置
@@ -757,5 +759,37 @@ namespace image_test1
         {
 
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            MyTempImage myTempImage = new MyTempImage();
+
+            //myTempImage.CreateImage();
+            pictureBox2.Image = Image.FromFile(myTempImage.CreateImage());
+
+
+
+            //string thefullname = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + ".gif"; // "nowtime.gif";
+            //richTextBox1.Text += thefullname + "\n";
+
+        }
     }
+
+    public class MyTempImage
+    {
+        public string CreateImage()
+        {
+            string str = DateTime.Now.ToString();
+            Bitmap image = new Bitmap(200, 30);
+            Graphics g = Graphics.FromImage(image);
+            string thefullname = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".gif"; // "nowtime.gif";
+
+            g.Clear(Color.White);
+            g.DrawString(str, new Font("CourIEr New", 10), new SolidBrush(Color.Red), 20, 5);
+            //Graphics 類還有很多繪圖方法可以繪制 直線、曲線、圓等等 
+            image.Save(thefullname, System.Drawing.Imaging.ImageFormat.Gif);
+            return thefullname;
+        }
+    }
+
 }
