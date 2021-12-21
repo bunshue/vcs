@@ -38,6 +38,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button0
@@ -126,7 +128,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(840, 497);
+            this.bt_clear.Location = new System.Drawing.Point(613, 626);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(68, 33);
             this.bt_clear.TabIndex = 31;
@@ -138,15 +140,37 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(221, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(687, 647);
+            this.richTextBox1.Size = new System.Drawing.Size(490, 647);
             this.richTextBox1.TabIndex = 30;
             this.richTextBox1.Text = "";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox2.Location = new System.Drawing.Point(720, 68);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(490, 577);
+            this.richTextBox2.TabIndex = 32;
+            this.richTextBox2.Text = "";
+            this.richTextBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox2_KeyUp);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(720, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(200, 24);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "模擬Command視窗";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(978, 675);
+            this.ClientSize = new System.Drawing.Size(1222, 675);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button0);
@@ -161,6 +185,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -176,6 +201,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Label label1;
     }
 }
 

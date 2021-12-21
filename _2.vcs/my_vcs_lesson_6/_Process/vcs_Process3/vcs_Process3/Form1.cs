@@ -21,11 +21,20 @@ namespace vcs_Process3
         {
             listBox1.Items.Clear();
             Process[] myProcesses = Process.GetProcesses();
+            richTextBox1.Text += "len = " + myProcesses.Length.ToString() + "\n";
             foreach (Process myProcess in myProcesses)
             {
+                //richTextBox1.Text += "A\t" + myProcess.ProcessName + "\t";
                 if (myProcess.MainWindowTitle.Length > 0)
                 {
+                    //僅列出 有 視窗Process
                     listBox1.Items.Add(myProcess.ProcessName.ToString().Trim());
+                    richTextBox1.Text += "取得 有 視窗Process : " + myProcess.ProcessName.ToString().Trim() + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "取得 無 視窗Process : " + myProcess.ProcessName.ToString().Trim() + "\n";
+
                 }
             }
         }

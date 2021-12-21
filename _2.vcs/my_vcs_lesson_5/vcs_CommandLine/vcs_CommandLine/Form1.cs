@@ -45,6 +45,8 @@ namespace vcs_CommandLine
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox2.Location = new Point(x_st + dx * 4 - 130, y_st + dy * 1);
+            label1.Location = new Point(x_st + dx * 4 - 130, y_st + dy * 0 + 20);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -275,6 +277,42 @@ namespace vcs_CommandLine
         {
 
         }
+
+        private void richTextBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                int count = richTextBox2.Lines.Length;
+                if (count == 0) return;
+                while (count > 0 && (string.IsNullOrEmpty(richTextBox2.Lines[count - 1])))
+                {
+                    count--;
+                }
+                if (count > 0)// && !string.IsNullOrEmpty(richTextBox2.Lines[count - 1]))
+                {
+                    ExecuteCmd(richTextBox2.Lines[count - 1]);
+                }
+            }
+        }
+
+        public void ExecuteCmd(string cmd)
+        {
+            if (cmd.ToLower() == "cmd")
+                return;
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.CreateNoWindow = true;
+            p.Start();                                  //設置自動刷新緩沖並更新   
+            p.StandardInput.AutoFlush = true;           //寫入命令     
+            p.StandardInput.WriteLine(cmd);
+            p.StandardInput.WriteLine("exit");          //等待結束  
+            richTextBox2.AppendText(p.StandardOutput.ReadToEnd());
+            p.WaitForExit();
+            p.Close();
+        }
     }
 }
-
