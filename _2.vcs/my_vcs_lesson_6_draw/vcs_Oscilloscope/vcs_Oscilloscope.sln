@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Oscilloscope", "vcs_Oscilloscope\vcs_Oscilloscope.csproj", "{0343CF71-3180-4301-90ED-C964B10323FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0343CF71-3180-4301-90ED-C964B10323FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0343CF71-3180-4301-90ED-C964B10323FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0343CF71-3180-4301-90ED-C964B10323FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0343CF71-3180-4301-90ED-C964B10323FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

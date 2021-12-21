@@ -742,6 +742,11 @@ namespace image_test1
 
         private void button12_Click(object sender, EventArgs e)
         {
+            /*
+            用到的算法是robert算子，這是一種比較簡單的算法：
+            f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
+            */
+
             //圖像邊緣提取
             Image_Test();
         }

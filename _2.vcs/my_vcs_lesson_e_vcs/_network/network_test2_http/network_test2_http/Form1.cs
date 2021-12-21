@@ -395,7 +395,7 @@ namespace network_test2_http
             //創建一個request 同時可以配置requst其余屬性  
             System.Net.WebRequest imgRequst = System.Net.WebRequest.Create(url);
             //在這裡我是以流的方式保存圖片  
-            System.Drawing.Image downImage = System.Drawing.Image.FromStream(imgRequst.GetResponse().GetResponseStream());
+            Image downImage = Image.FromStream(imgRequst.GetResponse().GetResponseStream());
             string filename = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
 
             downImage.Save(filename);
@@ -1107,7 +1107,45 @@ namespace network_test2_http
 
         private void button31_Click(object sender, EventArgs e)
         {
+            Image image = null;
+            try
+            {
+                //string fileName = imgs[i];
+                string filePath = @"http://www.aspphp.online/Skin/apsp/logo.gif";
+                string localFile = "aaaaaa.gif";
 
+                HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(filePath);
+                HttpWebResponse webresponse = (HttpWebResponse)webrequest.GetResponse();
+                if (webresponse.StatusCode == HttpStatusCode.OK)
+                {
+                    image = Image.FromStream(webresponse.GetResponseStream());
+                    //保存在服務器的本地硬盤
+
+                    image.Save(localFile);
+
+                    richTextBox1.Text += "下載圖片完成\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                string result = "遠程圖片保存失敗,原因為：\n" + ex.Message;
+                //Response.Write(result);
+                //Response.End();
+                //break;
+            }
+            finally
+            {
+                if (image != null)
+                {
+                    image.Dispose(); //釋放資源
+                }
+
+            }
+
+
+        
+        
+        
         }
 
         private void button32_Click(object sender, EventArgs e)

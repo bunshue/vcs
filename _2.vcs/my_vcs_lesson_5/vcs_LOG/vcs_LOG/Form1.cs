@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;        //for Directory, File
-
+using System.Diagnostics;   //for Process
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,6 +38,11 @@ namespace vcs_LOG
             _mre = new ManualResetEvent(false);
 
             Register();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Process.GetCurrentProcess().Kill(); //程序的退出
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -401,5 +406,32 @@ namespace vcs_LOG
         {
             Warn("EEEEEEEE");
         }
+
+        int i4 = 0;
+        private void button9_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "寫log的方法4\n";
+            LogConsole.Log("寫log的方法4 " + (i4++).ToString());
+        }
+
     }
+
+    public class LogConsole
+    {
+        static string logFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vcs_log.txt");
+
+        public static void Log(string msg)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(msg);
+
+            FileStream fs = new FileStream(logFileName, FileMode.OpenOrCreate);
+            fs.Position = fs.Length;
+            StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
+            sw.WriteLine(string.Format("{0}-{1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), msg));
+            sw.Flush();
+            sw.Close();
+            fs.Close();
+        }
+    }
+
 }

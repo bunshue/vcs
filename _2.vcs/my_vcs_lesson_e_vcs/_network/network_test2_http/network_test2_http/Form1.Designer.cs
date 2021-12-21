@@ -439,6 +439,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(170, 75);
             this.button31.TabIndex = 33;
+            this.button31.Text = "下載圖片";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
