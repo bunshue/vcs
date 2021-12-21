@@ -2979,6 +2979,11 @@ namespace vcs_DrAP
 
         }
 
+        private void textBox3_Click(object sender, EventArgs e)
+        {
+            textBox3.SelectAll();
+        }
+
     }
 }
 

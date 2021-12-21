@@ -368,6 +368,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(160, 50);
             this.button24.TabIndex = 25;
+            this.button24.Text = "啟動一個外部程序";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

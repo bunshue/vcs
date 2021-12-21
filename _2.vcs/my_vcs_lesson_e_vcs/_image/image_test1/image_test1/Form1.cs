@@ -63,7 +63,7 @@ namespace image_test1
             label1.Location = new Point(x_st + dx * 2, y_st + dy * 0+20);
             pictureBox2.Location = new Point(x_st + dx * 3+100, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6 - 50, y_st + dy * 0);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -742,7 +742,104 @@ namespace image_test1
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //圖像邊緣提取
+            Image_Test();
+        }
 
+        private void Image_Test()
+        {
+            if (this.pictureBox1.Image != null)
+            {
+                int Height = this.pictureBox1.Image.Height;
+                int Width = this.pictureBox1.Image.Width;
+                Bitmap bitmap = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
+                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image;
+                BitmapData oldData = MyBitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb); //原圖
+                BitmapData newData = bitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);  //新圖即邊緣圖
+                unsafe
+                {
+                    //首先第一段代碼是提取邊緣，邊緣置為黑色，其他部分置為白色
+                    byte* pin_1 = (byte*)(oldData.Scan0.ToPointer());
+                    byte* pin_2 = pin_1 + (oldData.Stride);
+                    byte* pout = (byte*)(newData.Scan0.ToPointer());
+                    for (int y = 0; y < oldData.Height - 1; y++)
+                    {
+                        for (int x = 0; x < oldData.Width; x++)
+                        {
+                            //使用robert算子
+                            double b = System.Math.Sqrt(((double)pin_1[0] - (double)(pin_2[0] + 3)) * ((double)pin_1[0] - (double)(pin_2[0] + 3)) + ((double)(pin_1[0] + 3) - (double)pin_2[0]) * ((double)(pin_1[0] + 3) - (double)pin_2[0]));
+                            double g = System.Math.Sqrt(((double)pin_1[1] - (double)(pin_2[1] + 3)) * ((double)pin_1[1] - (double)(pin_2[1] + 3)) + ((double)(pin_1[1] + 3) - (double)pin_2[1]) * ((double)(pin_1[1] + 3) - (double)pin_2[1]));
+                            double r = System.Math.Sqrt(((double)pin_1[2] - (double)(pin_2[2] + 3)) * ((double)pin_1[2] - (double)(pin_2[2] + 3)) + ((double)(pin_1[2] + 3) - (double)pin_2[2]) * ((double)(pin_1[2] + 3) - (double)pin_2[2]));
+                            double bgr = b + g + r;//博主一直在糾結要不要除以3，感覺沒差，選阈值的時候調整一下就好了- -
+
+                            if (bgr > 80) //阈值，超過阈值判定為邊緣（選取適當的阈值）
+                            {
+                                b = 0;
+                                g = 0;
+                                r = 0;
+                            }
+                            else
+                            {
+                                b = 255;
+                                g = 255;
+                                r = 255;
+                            }
+                            pout[0] = (byte)(b);
+                            pout[1] = (byte)(g);
+                            pout[2] = (byte)(r);
+                            pin_1 = pin_1 + 3;
+                            pin_2 = pin_2 + 3;
+                            pout = pout + 3;
+
+                        }
+                        pin_1 += oldData.Stride - oldData.Width * 3;
+                        pin_2 += oldData.Stride - oldData.Width * 3;
+                        pout += newData.Stride - newData.Width * 3;
+                    }
+
+                    //這裡博主加粗了一下線條- -，不喜歡的同學可以刪了這段代碼
+                    byte* pin_5 = (byte*)(newData.Scan0.ToPointer());
+                    for (int y = 0; y < oldData.Height - 1; y++)
+                    {
+                        for (int x = 3; x < oldData.Width; x++)
+                        {
+                            if (pin_5[0] == 0 && pin_5[1] == 0 && pin_5[2] == 0)
+                            {
+                                pin_5[-3] = 0;
+                                pin_5[-2] = 0;
+                                pin_5[-1] = 0;      //邊緣點的前一個像素點置為黑色（注意一定要是遍歷過的像素點）                                                    
+                            }
+                            pin_5 += 3;
+
+                        }
+                        pin_5 += newData.Stride - newData.Width * 3;
+                    }
+
+                    //這段代碼是把原圖和邊緣圖重合
+                    byte* pin_3 = (byte*)(oldData.Scan0.ToPointer());
+                    byte* pin_4 = (byte*)(newData.Scan0.ToPointer());
+                    for (int y = 0; y < oldData.Height - 1; y++)
+                    {
+                        for (int x = 0; x < oldData.Width; x++)
+                        {
+                            if (pin_4[0] == 255 && pin_4[1] == 255 && pin_4[2] == 255)
+                            {
+                                pin_4[0] = pin_3[0];
+                                pin_4[1] = pin_3[1];
+                                pin_4[2] = pin_3[2];
+                            }
+                            pin_3 += 3;
+                            pin_4 += 3;
+                        }
+                        pin_3 += oldData.Stride - oldData.Width * 3;
+                        pin_4 += newData.Stride - newData.Width * 3;
+                    }
+                    //......
+                    bitmap.UnlockBits(newData);
+                    MyBitmap.UnlockBits(oldData);
+                    this.pictureBox1.Image = bitmap;
+                }
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)

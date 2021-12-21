@@ -606,6 +606,46 @@ namespace vcs_Process1
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //啟動一個外部程序
+
+            ////////////聲明一個程序信息類，指定啟動進程是的參數信息     
+            ProcessStartInfo Info = new ProcessStartInfo();
+
+            //設置外部程序名
+            Info.FileName = "notepad.exe";
+            //設置外部程序的啟動參數（命令行參數）為test.txt
+            Info.Arguments = "file_to_save.txt";
+            //設置外部程序工作目錄為  C:\
+            Info.WorkingDirectory = @"C:\______test_files";
+            ///////////聲明一個程序類,也就是創建一個進程
+            Process Proc;
+            try
+            {
+                //     //啟動外部程序
+                Proc = Process.Start(Info);
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                Console.WriteLine("系統找不到指定的程序文件。\r{0}", ex);
+                return;
+            }
+            //打印出外部程序的開始執行時間
+            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
+            //等待3秒鐘
+            Proc.WaitForExit(3000);
+
+            //如果這個外部程序沒有結束運行則對其強行終止
+            if (Proc.HasExited == false)
+            {
+                Console.WriteLine("由主程序強行終止外部程序的運行！");
+                Proc.Kill();
+            }
+            else
+            {
+                Console.WriteLine("由外部程序正常退出！");
+            }
+            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
+            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -672,4 +712,28 @@ namespace vcs_Process1
 
     }
 }
+
+
+
+/*
+c# 執行外部程式(.exe，.bat…)
+
+Process p = new Process();
+//Process類有一個StartInfo屬性，這個是ProcessStartInfo類，包括了一些屬性和方法，下面用到了幾個屬性：
+p.StartInfo.FileName = "cmd.exe"; //設定程序名
+p.StartInfo.Arguments = "/c" + FullBatPath; //設定程式執行參數" /c " 執行完以下命令後停止
+p.StartInfo.UseShellExecute = false; //關閉Shell的使用
+p.StartInfo.RedirectStandardInput = true; //重定向標準輸入
+p.StartInfo.RedirectStandardOutput = true; //重定向標準輸出
+p.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+p.StartInfo.CreateNoWindow = false; //true設置不顯示窗口
+p.StartInfo.RedirectStandardError = true;
+p.Start(); //啟動
+while (!p.HasExited)
+{
+p.WaitForExit(2000); //等待20秒
+}
+p.Dispose();
+*/
+
 

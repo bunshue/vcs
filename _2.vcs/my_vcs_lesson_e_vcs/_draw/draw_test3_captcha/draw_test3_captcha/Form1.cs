@@ -924,7 +924,131 @@ namespace draw_test3_captcha
             //最後將驗證碼返回
             //return File(bytes, @"image/jpeg");
             //File(bytes, @"image/jpeg");
-            
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //調用函數將驗證碼生成圖片
+            CreateCheckCodeImage2(GenerateCheckCode());
+        }
+
+        private string GenerateCheckCode()
+        {  //產生五位的隨機字符串
+            int number;
+            char code;
+            string checkCode = String.Empty;
+
+            System.Random random = new Random();
+
+            for (int i = 0; i < 5; i++)
+            {
+                number = random.Next();
+
+                if (number % 2 == 0)
+                    code = (char)('0' + (char)(number % 10));
+                else
+                    code = (char)('a' + (char)(number % 26));
+
+                checkCode += code.ToString();
+            }
+            return checkCode;
+        }
+
+        //將驗證碼生成圖片顯示
+        private void CreateCheckCodeImage2(string checkCode)
+        {
+            if (checkCode == null || checkCode.Trim() == String.Empty)
+            {
+                return;
+            }
+
+            Bitmap bitmap1 = new Bitmap((int)Math.Ceiling((checkCode.Length * 18.5)), 28);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            try
+            {
+                //生成隨機生成器
+                Random random = new Random();
+
+                //清空圖片背景色
+                g.Clear(Color.AntiqueWhite);
+
+                //畫圖片的背景噪音線
+                for (int i = 0; i < 10; i++)
+                {
+                    int x1 = random.Next(bitmap1.Width);
+                    int x2 = random.Next(bitmap1.Width);
+                    int y1 = random.Next(bitmap1.Height);
+                    int y2 = random.Next(bitmap1.Height);
+
+                    g.DrawLine(new Pen(Color.Silver), x1, y1, x2, y2);
+                }
+
+                Font font = new Font("Arial", 18, (FontStyle.Bold | FontStyle.Italic));
+                LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Blue, Color.DarkRed, 1.2f, true);
+                g.DrawString(checkCode, font, brush, 2, 2);
+
+                //畫圖片的前景噪音點
+                for (int i = 0; i < 100; i++)
+                {
+                    int x = random.Next(bitmap1.Width);
+                    int y = random.Next(bitmap1.Height);
+
+                    bitmap1.SetPixel(x, y, Color.FromArgb(random.Next()));
+                }
+
+                //畫圖片的邊框線
+                g.DrawRectangle(new Pen(Color.Silver), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
+
+                System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                bitmap1.Save(ms, ImageFormat.Gif);
+                pictureBox1.Image = bitmap1;
+            }
+            finally
+            {
+                //g.Dispose();
+                //image.Dispose();
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Random r = new Random();
+            string str = string.Empty;
+            //生成5位随机数如 90531
+            for (int i = 0; i < 5; i++)
+            {
+                str += r.Next(0, 10);
+            }
+            Bitmap bitmap = new Bitmap(150, 40);
+            Graphics g = Graphics.FromImage(bitmap);
+            //预定义几种字体样式和颜色
+            string[] fonts = { "微软雅黑", "宋体", "黑体", "隶书", "仿宋" };
+            Color[] colors = { Color.Yellow, Color.Blue, Color.Black, Color.Red, Color.Orange };
+            //因为每一数字的字体和颜色可能不同，
+            //因此循环将生成的随机数每一数字绘制到图片
+            for (int i = 0; i < str.Length; i++)
+            {
+                Point p = new Point(i * 30, 0);
+                g.DrawString(str[i].ToString(), new Font(fonts[r.Next(0, 5)], 20, FontStyle.Bold), new SolidBrush(colors[r.Next(0, 5)]), p);
+            }
+            //循环在图片范围内绘制出50条线
+            for (int i = 0; i < 50; i++)
+            {
+                //保证线的起始点都在图片范围内
+                Point p1 = new Point(r.Next(0, bitmap.Width), r.Next(0, bitmap.Height));
+                Point p2 = new Point(r.Next(0, bitmap.Width), r.Next(0, bitmap.Height));
+                g.DrawLine(new Pen(Brushes.Green), p1, p2);
+            }
+            //添加一些像素点
+            for (int i = 0; i < 300; i++)
+            {
+                Point p1 = new Point(r.Next(0, bitmap.Width), r.Next(0, bitmap.Height));
+                bitmap.SetPixel(p1.X, p1.Y, Color.Green);
+            }
+            //在winForm中用PictureBox中显示出来
+            pictureBox1.Image = bitmap;
         }
     }
 
@@ -1312,11 +1436,11 @@ namespace draw_test3_captcha
         /// <returns></returns>
         public Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
         {
-            System.Drawing.Bitmap destBmp = new Bitmap(srcBmp.Width, srcBmp.Height);
+            Bitmap destBmp = new Bitmap(srcBmp.Width, srcBmp.Height);
             double PI2 = 6.283185307179586476925286766559;
             // 將位圖背景填充爲白色
-            System.Drawing.Graphics graph = System.Drawing.Graphics.FromImage(destBmp);
-            graph.FillRectangle(new SolidBrush(System.Drawing.Color.White), 0, 0, destBmp.Width, destBmp.Height);
+            Graphics graph = Graphics.FromImage(destBmp);
+            graph.FillRectangle(new SolidBrush(Color.White), 0, 0, destBmp.Width, destBmp.Height);
             graph.Dispose();
 
             double dBaseAxisLen = bXDir ? (double)destBmp.Height : (double)destBmp.Width;
@@ -1335,7 +1459,7 @@ namespace draw_test3_captcha
                     nOldX = bXDir ? i + (int)(dy * dMultValue) : i;
                     nOldY = bXDir ? j : j + (int)(dy * dMultValue);
 
-                    System.Drawing.Color color = srcBmp.GetPixel(i, j);
+                    Color color = srcBmp.GetPixel(i, j);
                     if (nOldX >= 0 && nOldX < destBmp.Width
                      && nOldY >= 0 && nOldY < destBmp.Height)
                     {
@@ -1651,7 +1775,7 @@ namespace draw_test3_captcha
             for (int i = 0; i < RandomStringCount; i++)
             {
 
-                Brush brush = new System.Drawing.SolidBrush(GetRandomLightColor());
+                Brush brush = new SolidBrush(GetRandomLightColor());
                 Point pot = new Point(random.Next(5, bgWidth - 5), random.Next(5, bgHeight - 5));
                 //隨機轉動的度數
                 float angle = random.Next(-randAngle, randAngle);
@@ -1859,7 +1983,7 @@ namespace draw_test3_captcha
             Bitmap backgroudImg = new Bitmap(i * 12, 16);
             Graphics g = Graphics.FromImage(backgroudImg);
             //清除畫布,背景設置爲白色            
-            g.Clear(System.Drawing.Color.White);
+            g.Clear(Color.White);
             for (int j = 0; j < i; j++)
             {
                 //g.DrawImage(maps[j], j * 11, 0, maps[j].Width, maps[j].Height);
@@ -2110,7 +2234,7 @@ namespace draw_test3_captcha
         /// <param name="bitmap">Bitmap</param>
         /// <param name="threshold">閥值 -255~255</param>
         /// <returns></returns>
-        public System.Drawing.Bitmap AdjustToRed(System.Drawing.Bitmap bitmap, int threshold)
+        public Bitmap AdjustToRed(Bitmap bitmap, int threshold)
         {
             for (int y = 0; y < bitmap.Height; y++)
             {
@@ -2123,7 +2247,7 @@ namespace draw_test3_captcha
                     pR = Math.Min(255, pR);
                     // 將改過的 RGB 寫回
                     // 只寫入紅色的值 , G B 都放零
-                    System.Drawing.Color newColor = System.Drawing.Color.FromArgb(pixel.A, pR, 0, 0);
+                    Color newColor = Color.FromArgb(pixel.A, pR, 0, 0);
                     bitmap.SetPixel(x, y, newColor);
                 }
             }
@@ -2137,7 +2261,7 @@ namespace draw_test3_captcha
         /// <param name="bitmap">一個圖片實例</param>
         /// <param name="threshold">閥值 -255~+255</param>
         /// <returns></returns>
-        public System.Drawing.Bitmap AdjustToGreen(System.Drawing.Bitmap bitmap, int threshold)
+        public Bitmap AdjustToGreen(Bitmap bitmap, int threshold)
         {
             for (int y = 0; y < bitmap.Height; y++)
             {
@@ -2152,7 +2276,7 @@ namespace draw_test3_captcha
                     if (pG < 0) pG = 0;
                     // 將改過的 RGB 寫回
                     // 只寫入綠色的值 , R B 都放零
-                    System.Drawing.Color newColor = System.Drawing.Color.FromArgb(pixel.A, 0, pG, 0);
+                    Color newColor = Color.FromArgb(pixel.A, 0, pG, 0);
                     bitmap.SetPixel(x, y, newColor);
                 }
             }
@@ -2165,7 +2289,7 @@ namespace draw_test3_captcha
         /// <param name="bitmap">一個圖片實例</param>
         /// <param name="threshold">閥值 -255~255</param>
         /// <returns></returns>
-        public System.Drawing.Bitmap AdjustToBlue(System.Drawing.Bitmap bitmap, int threshold)
+        public Bitmap AdjustToBlue(Bitmap bitmap, int threshold)
         {
             for (int y = 0; y < bitmap.Height; y++)
             {
@@ -2180,7 +2304,7 @@ namespace draw_test3_captcha
                     if (pB < 0) pB = 0;
                     // 將改過的 RGB 寫回
                     // 只寫入藍色的值 , R G 都放零
-                    System.Drawing.Color newColor = System.Drawing.Color.FromArgb(pixel.A, 0, 0, pB);
+                    Color newColor = Color.FromArgb(pixel.A, 0, 0, pB);
                     bitmap.SetPixel(x, y, newColor);
                 }
             }
@@ -2195,7 +2319,7 @@ namespace draw_test3_captcha
         /// <param name="thresholdBlue">藍色閥值</param>
         /// <param name="thresholdGreen">綠色閥值</param>
         /// <returns></returns>
-        public System.Drawing.Bitmap AdjustToCustomColor(System.Drawing.Bitmap bitmap, int thresholdRed, int thresholdGreen, int thresholdBlue)
+        public Bitmap AdjustToCustomColor(Bitmap bitmap, int thresholdRed, int thresholdGreen, int thresholdBlue)
         {
             for (int y = 0; y < bitmap.Height; y++)
             {
@@ -2220,7 +2344,7 @@ namespace draw_test3_captcha
                     if (pB < 0) pB = 0;
                     // 將改過的 RGB 寫回
                     // 只寫入綠色的值 , R B 都放零
-                    System.Drawing.Color newColor = System.Drawing.Color.FromArgb(pixel.A, pR, pG, pB);
+                    Color newColor = Color.FromArgb(pixel.A, pR, pG, pB);
                     bitmap.SetPixel(x, y, newColor);
                 }
             }
@@ -2273,13 +2397,13 @@ namespace draw_test3_captcha
         /// <summary>
         /// 增加或減少亮度
         /// </summary>
-        /// <param name="img">System.Drawing.Image Source </param>
+        /// <param name="img">Image Source </param>
         /// <param name="valBrightness">0~255</param>
         /// <returns></returns>
-        public System.Drawing.Bitmap AdjustBrightness(System.Drawing.Image img, int valBrightness)
+        public Bitmap AdjustBrightness(Image img, int valBrightness)
         {
             // 讀入欲轉換的圖片並轉成為 Bitmap
-            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(img);
+            Bitmap bitmap = new Bitmap(img);
 
             for (int y = 0; y < bitmap.Height; y++)
             {
@@ -2294,7 +2418,7 @@ namespace draw_test3_captcha
                     var pB = ((pixel.B + valBrightness > 255) ? 255 : pixel.B + valBrightness) < 0 ? 0 : ((pixel.B + valBrightness > 255) ? 255 : pixel.B + valBrightness);
 
                     // 將改過的 RGB 寫回
-                    System.Drawing.Color newColor = System.Drawing.Color.FromArgb(pixel.A, pR, pG, pB);
+                    Color newColor = Color.FromArgb(pixel.A, pR, pG, pB);
 
                     bitmap.SetPixel(x, y, newColor);
 
@@ -2975,7 +3099,7 @@ namespace draw_test3_captcha
                     int nOldY = 0;
                     nOldX = bXDir ? i + Convert.ToInt32(dy * dMultValue) : i;
                     nOldY = bXDir ? j : j + Convert.ToInt32(dy * dMultValue);
-                    System.Drawing.Color color = srcBmp.GetPixel(i, j);
+                    Color color = srcBmp.GetPixel(i, j);
                     if (nOldX >= leftMargin && nOldX < destBmp.Width - rightMargin && nOldY >= bottomMargin && nOldY < destBmp.Height - topMargin)
                     {
                         destBmp.SetPixel(nOldX, nOldY, color);

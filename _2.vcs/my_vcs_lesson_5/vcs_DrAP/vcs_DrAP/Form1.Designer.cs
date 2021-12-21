@@ -264,6 +264,7 @@
             this.textBox3.TabIndex = 24;
             this.textBox3.Text = "TBGBMBKB";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox3.Click += new System.EventHandler(this.textBox3_Click);
             this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
             this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 

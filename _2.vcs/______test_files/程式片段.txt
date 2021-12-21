@@ -31,6 +31,71 @@
 
 
 
+[C#] Graphics平移縮放旋轉
+
+【平移】
+
+private void btnTranslate_Click(object sender, EventArgs e)
+        {
+            Graphics graphics = this.CreateGraphics();
+            // 紅色筆
+            Pen pen = new Pen(Color.Red, 5);
+            Rectangle rect = new Rectangle(0, 0, 200, 50);
+            // 用紅色筆畫矩形
+            graphics.DrawRectangle(pen, rect);
+            // 向左平移100向下平移50
+            graphics.TranslateTransform(100,50);
+            // 藍色筆
+            pen.Color = Color.Blue;
+            // 用藍色筆重新畫平移之後的矩形
+            graphics.DrawRectangle(pen, rect);
+            graphics.Dispose();
+            pen.Dispose();
+        }
+
+【縮放】
+private void btnScale_Click(object sender, EventArgs e)
+        {
+            Graphics graphics = this.CreateGraphics();
+            // 紅色筆
+            Pen pen = new Pen(Color.Red, 5);
+            Rectangle rect = new Rectangle(0, 0, 200, 50);
+            // 用紅色筆畫矩形
+            graphics.DrawRectangle(pen, rect);
+            graphics.ScaleTransform(0.5f, 2);
+            // 藍色筆
+            pen.Color = Color.Blue;
+            // 用藍色筆重新畫平移之後的矩形
+            graphics.DrawRectangle(pen, rect);
+            graphics.Dispose();
+            pen.Dispose();
+        }
+
+寬縮小一半，高放大一倍
+
+
+【旋轉】
+private void btnTraslate_Click(object sender, EventArgs e)
+        {
+            Graphics graphics = this.CreateGraphics();
+            // 紅色筆
+            Pen pen = new Pen(Color.Red, 5);
+            Rectangle rect = new Rectangle(0, 0, 200, 50);
+            // 用紅色筆畫矩形
+            graphics.DrawRectangle(pen, rect);
+            graphics.TranslateTransform(200,0);
+            graphics.RotateTransform(90);
+            // 藍色筆
+            pen.Color = Color.Blue;
+            // 用藍色筆重新畫平移之後的矩形
+            graphics.DrawRectangle(pen, rect);
+            graphics.Dispose();
+            pen.Dispose();
+        }
+//坐標原點為矩形的左上點。
+
+
+
 
 
 

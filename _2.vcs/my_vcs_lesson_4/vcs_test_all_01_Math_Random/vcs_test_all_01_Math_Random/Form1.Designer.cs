@@ -1120,6 +1120,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(155, 40);
             this.button41.TabIndex = 56;
+            this.button41.Text = "產生隨機字串";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
