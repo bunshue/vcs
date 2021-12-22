@@ -753,23 +753,24 @@ namespace image_test1
 
         private void Image_Test()
         {
-            if (this.pictureBox1.Image != null)
+            if (pictureBox1.Image != null)
             {
-                int Height = this.pictureBox1.Image.Height;
-                int Width = this.pictureBox1.Image.Width;
-                Bitmap bitmap = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
-                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image;
-                BitmapData oldData = MyBitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb); //原圖
-                BitmapData newData = bitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);  //新圖即邊緣圖
+                int W = pictureBox1.Image.Width;
+                int H = pictureBox1.Image.Height;
+                Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+                Bitmap bitmap2 = new Bitmap(W, H, PixelFormat.Format24bppRgb);
+                BitmapData bitmapdata1 = bitmap1.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);  //原圖
+                BitmapData bitmapdata2 = bitmap2.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);  //新圖即邊緣圖
+
                 unsafe
                 {
                     //首先第一段代碼是提取邊緣，邊緣置為黑色，其他部分置為白色
-                    byte* pin_1 = (byte*)(oldData.Scan0.ToPointer());
-                    byte* pin_2 = pin_1 + (oldData.Stride);
-                    byte* pout = (byte*)(newData.Scan0.ToPointer());
-                    for (int y = 0; y < oldData.Height - 1; y++)
+                    byte* pin_1 = (byte*)(bitmapdata1.Scan0.ToPointer());
+                    byte* pin_2 = pin_1 + (bitmapdata1.Stride);
+                    byte* pout = (byte*)(bitmapdata2.Scan0.ToPointer());
+                    for (int y = 0; y < bitmapdata1.Height - 1; y++)
                     {
-                        for (int x = 0; x < oldData.Width; x++)
+                        for (int x = 0; x < bitmapdata1.Width; x++)
                         {
                             //使用robert算子
                             double b = System.Math.Sqrt(((double)pin_1[0] - (double)(pin_2[0] + 3)) * ((double)pin_1[0] - (double)(pin_2[0] + 3)) + ((double)(pin_1[0] + 3) - (double)pin_2[0]) * ((double)(pin_1[0] + 3) - (double)pin_2[0]));
@@ -797,16 +798,17 @@ namespace image_test1
                             pout = pout + 3;
 
                         }
-                        pin_1 += oldData.Stride - oldData.Width * 3;
-                        pin_2 += oldData.Stride - oldData.Width * 3;
-                        pout += newData.Stride - newData.Width * 3;
+                        pin_1 += bitmapdata1.Stride - bitmapdata1.Width * 3;
+                        pin_2 += bitmapdata1.Stride - bitmapdata1.Width * 3;
+                        pout += bitmapdata2.Stride - bitmapdata2.Width * 3;
                     }
 
+                    /*
                     //這裡博主加粗了一下線條- -，不喜歡的同學可以刪了這段代碼
-                    byte* pin_5 = (byte*)(newData.Scan0.ToPointer());
-                    for (int y = 0; y < oldData.Height - 1; y++)
+                    byte* pin_5 = (byte*)(bitmapdata2.Scan0.ToPointer());
+                    for (int y = 0; y < bitmapdata1.Height - 1; y++)
                     {
-                        for (int x = 3; x < oldData.Width; x++)
+                        for (int x = 3; x < bitmapdata1.Width; x++)
                         {
                             if (pin_5[0] == 0 && pin_5[1] == 0 && pin_5[2] == 0)
                             {
@@ -817,15 +819,17 @@ namespace image_test1
                             pin_5 += 3;
 
                         }
-                        pin_5 += newData.Stride - newData.Width * 3;
+                        pin_5 += bitmapdata2.Stride - bitmapdata2.Width * 3;
                     }
+                    */
 
+                    /*
                     //這段代碼是把原圖和邊緣圖重合
-                    byte* pin_3 = (byte*)(oldData.Scan0.ToPointer());
-                    byte* pin_4 = (byte*)(newData.Scan0.ToPointer());
-                    for (int y = 0; y < oldData.Height - 1; y++)
+                    byte* pin_3 = (byte*)(bitmapdata1.Scan0.ToPointer());
+                    byte* pin_4 = (byte*)(bitmapdata2.Scan0.ToPointer());
+                    for (int y = 0; y < bitmapdata1.Height - 1; y++)
                     {
-                        for (int x = 0; x < oldData.Width; x++)
+                        for (int x = 0; x < bitmapdata1.Width; x++)
                         {
                             if (pin_4[0] == 255 && pin_4[1] == 255 && pin_4[2] == 255)
                             {
@@ -836,20 +840,51 @@ namespace image_test1
                             pin_3 += 3;
                             pin_4 += 3;
                         }
-                        pin_3 += oldData.Stride - oldData.Width * 3;
-                        pin_4 += newData.Stride - newData.Width * 3;
+                        pin_3 += bitmapdata1.Stride - bitmapdata1.Width * 3;
+                        pin_4 += bitmapdata2.Stride - bitmapdata2.Width * 3;
                     }
-                    //......
-                    bitmap.UnlockBits(newData);
-                    MyBitmap.UnlockBits(oldData);
-                    this.pictureBox1.Image = bitmap;
+                    */
+
+                    bitmap1.UnlockBits(bitmapdata1);
+                    bitmap2.UnlockBits(bitmapdata2);
+
+                    pictureBox1.Image = bitmap2;
                 }
             }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //圖片剪下一塊存檔 另法
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename2 = @"C:\______test_files\picture1_cut.jpg";
 
+            pictureBox1.Image = CutForCustomx(filename1, 150, 150);
+            pictureBox1.Image.Save(filename2);
+        }
+
+        public static Image CutForCustomx(string imgPath, int top, int height)
+        {
+            FileStream fs = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
+            //從文件獲取原始圖片，並使用流中嵌入的顏色管理信息
+            System.Drawing.Image initImage = System.Drawing.Image.FromStream(fs, true);
+
+            Bitmap b = new Bitmap(initImage);
+
+            Bitmap img = b.Clone(new Rectangle(0, top, initImage.Width, height), System.Drawing.Imaging.PixelFormat.DontCare);
+            return (Image)(img);
+        }
+
+        public static Image CutForCustomx(string imgPath, Rectangle rec)
+        {
+            FileStream fs = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
+            //從文件獲取原始圖片，並使用流中嵌入的顏色管理信息
+            System.Drawing.Image initImage = System.Drawing.Image.FromStream(fs, true);
+
+            Bitmap b = new Bitmap(initImage);
+
+            Bitmap img = b.Clone(rec, System.Drawing.Imaging.PixelFormat.DontCare);
+            return (Image)(img);
         }
 
         private void button14_Click(object sender, EventArgs e)

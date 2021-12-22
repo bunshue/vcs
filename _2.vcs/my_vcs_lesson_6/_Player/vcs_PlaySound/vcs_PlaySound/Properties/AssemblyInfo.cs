@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("speech")]
+[assembly: AssemblyTitle("vcs_PlaySound")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("speech")]
+[assembly: AssemblyProduct("vcs_PlaySound")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("8ad034ad-0860-4c6c-b922-66deaadb4945")]
+[assembly: Guid("c73a8a09-cce2-41db-80e7-02ef4b686786")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

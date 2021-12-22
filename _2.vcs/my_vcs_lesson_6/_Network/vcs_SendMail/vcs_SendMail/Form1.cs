@@ -421,6 +421,44 @@ namespace vcs_SendMail
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //使用Email類別寄信
+
+            /*
+            string email_encoding = "utf-8";
+            string email_addr_from = "bunshue@gmail.com";
+            string email_addr_from_password = string.Empty;
+            string email_addr_from_nicknane = "王大頭";    //寄件者顯示的名稱
+            string email_addr_to = "david@insighteyes.com";
+            string email_addr_to_nicknane = "尊敬的收件者";    //收件者顯示的名稱
+            string email_addr_cc = "bunshue@gmail.com";
+            MailPriority priority = MailPriority.Normal;        //設定電子郵件的優先順序
+
+            string mail_subject = string.Empty; //郵件標題
+            string mail_body = string.Empty;    //郵件內容
+            string smtp_server = "smtp.gmail.com";  //POP3服務器的名稱
+            int smtp_server_port = 25;              //指定 SMTP 交易連接埠, 預設是25
+
+            string attach_filename1 = @"C:\______test_files\picture1.jpg";
+            string attach_filename2 = @"C:\______test_files\__RW\_excel\2019~2021新竹日出日沒時刻表.xls";
+            string attach_filename3 = @"C:\______test_files\__RW\_word\Step.doc";   //RTF檔案
+            */
+
+            /*
+            public static bool SendEmail(string from, string[] to, string[] cc, string[] bcc, string subject, string body,
+            bool isBodyHtml, string[] attachments, string host, string password)
+            */
+
+            string[] to = new string[] { email_addr_to };
+            string[] cc = new string[] { email_addr_cc };
+            string[] bcc = new string[] { email_addr_cc };
+
+            string[] attachments = new string[] { attach_filename1, attach_filename2, attach_filename3 };
+
+            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+
+            EmailInfo.SendEmail(email_addr_from, to, cc, bcc,
+                mail_subject, mail_body, true, attachments, smtp_server, email_addr_from_password);
+
         }
 
         private void button8_Click(object sender, EventArgs e)
