@@ -1050,6 +1050,15 @@ namespace draw_test3_captcha
             //在winForm中用PictureBox中显示出来
             pictureBox1.Image = bitmap;
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //使用驗證碼類
+            Captcha capt = new Captcha();
+            Bitmap bitmap1 = capt.GetImage();
+            pictureBox1.Image = bitmap1;
+
+        }
     }
 
 

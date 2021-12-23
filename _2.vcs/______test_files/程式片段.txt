@@ -1,5 +1,22 @@
 
 
+C#中獲取當前系統中安裝的所有字體及預定義顏色
+需要引用命名空間using System.Drawing.Text;
+
+//獲取系統字體：
+InstalledFontCollection fc = new InstalledFontCollection();
+   foreach( FontFamily font in fc.Families ){
+    ListItem tmp = new ListItem( font.Name , font.Name );
+    this.styleFont.Items.Add( tmp );
+}
+//獲取系統預定義顏色：
+Array colors = System.Enum.GetValues( typeof(KnownColor) );
+   foreach( object colorName in colors ){
+    ListItem tmp = new ListItem( colorName.ToString() , colorName.ToString());
+    this.styleColor.Items.Add( tmp );
+}
+
+
 
         private void button2_Click(object sender, EventArgs e)
         {

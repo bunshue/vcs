@@ -7179,6 +7179,35 @@ namespace vcs_Draw9_Example
                 g.DrawLine(p, pt_st[i], pt_sp[i]);
             }
         }
+
+        private void button49_Click(object sender, EventArgs e)
+        {
+            //使用Brush類繪製圖像
+            string filename = @"C:\______test_files\_icon\唐.ico";
+
+            Image theimage;
+            Image smallimage;
+            SetStyle(ControlStyles.Opaque, true);
+            Bounds = new Rectangle(0, 0, 500, 500);
+            theimage = new Bitmap(filename);
+            smallimage = new Bitmap(theimage, new Size(theimage.Width, theimage.Height));
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.FillRectangle(Brushes.White, ClientRectangle);
+
+            Brush brush = new TextureBrush(smallimage, new Rectangle(0, 0, smallimage.Width, smallimage.Height));
+            //用圖像創建畫筆,來繪制圖像
+            g.FillEllipse(brush, new Rectangle(0, 200, 200, 200));
+            //用圖像創建剛筆,來繪制圖像
+            Pen pen = new Pen(brush, 20);
+            g.DrawRectangle(pen, new Rectangle(250, 200, 200, 200));
+            //用圖像繪製文本
+            Font font = new Font("Times New Roman", 60, FontStyle.Bold | FontStyle.Italic);
+            g.DrawString("Hello Image !!", font, brush, new Rectangle(0, 0, 500, font.Height));
+
+            brush.Dispose();
+            font.Dispose();
+        }
     }
 
     /// <summary>
