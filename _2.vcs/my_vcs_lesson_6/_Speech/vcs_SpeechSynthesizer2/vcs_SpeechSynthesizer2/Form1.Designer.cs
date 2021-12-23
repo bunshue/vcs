@@ -40,6 +40,12 @@
             this.button8 = new System.Windows.Forms.Button();
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -84,18 +90,18 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(145, 25);
+            this.richTextBox1.Location = new System.Drawing.Point(145, 161);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(717, 335);
+            this.richTextBox1.Size = new System.Drawing.Size(717, 245);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "//C#把文字轉換成聲音，\n\n在System.Speech命名空間下，SpeechSynthesizer類可以把文字讀出來，一起來玩下~~\n\n首先在Windows" +
                 "窗體項目中引入System.Speech。界面部分";
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(145, 366);
+            this.richTextBox2.Location = new System.Drawing.Point(145, 413);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(717, 322);
+            this.richTextBox2.Size = new System.Drawing.Size(717, 275);
             this.richTextBox2.TabIndex = 5;
             this.richTextBox2.Text = "";
             // 
@@ -159,11 +165,51 @@
             this.bt_clear2.UseVisualStyleBackColor = true;
             this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(145, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "播放速度";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(145, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "音量大小";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(258, 26);
+            this.trackBar1.Minimum = -10;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(384, 45);
+            this.trackBar1.TabIndex = 14;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.Location = new System.Drawing.Point(258, 74);
+            this.trackBar2.Maximum = 100;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(384, 45);
+            this.trackBar2.TabIndex = 15;
+            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(874, 700);
+            this.Controls.Add(this.trackBar2);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_clear1);
             this.Controls.Add(this.button8);
@@ -179,7 +225,10 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -197,6 +246,10 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.Button bt_clear2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar trackBar2;
     }
 }
 

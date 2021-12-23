@@ -23,9 +23,11 @@ namespace vcs_FontDialog
 
         private void button1_Click(object sender, EventArgs e)
         {
-            fontDialog1.ShowApply = true;
+            fontDialog1.AllowVerticalFonts = true;//指示對話框既顯示垂直字體又顯示水平字體
+            fontDialog1.FixedPitchOnly = true; 			//只允許選擇固定間距字體
+            fontDialog1.ShowApply = true;      		//包含應用按鈕
+            fontDialog1.ShowEffects = true;    //允許指定刪除線、下畫線和文本顏色選項的控件
             fontDialog1.ShowColor = true;
-            fontDialog1.ShowEffects = true;
             fontDialog1.ShowHelp = true;
 
             fontDialog1.Font = richTextBox1.Font;           //字型對話框的預設字型

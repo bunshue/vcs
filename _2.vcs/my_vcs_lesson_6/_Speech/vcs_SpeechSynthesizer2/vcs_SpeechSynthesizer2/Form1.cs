@@ -78,6 +78,11 @@ namespace vcs_SpeechSynthesizer2
             richTextBox2.Text += "預設速度 : " + synth.Rate.ToString() + "\n";
             richTextBox2.Text += "預設音量 : " + synth.Volume.ToString() + "\n";
 
+            trackBar1.Value = synth.Rate;
+            trackBar2.Value = synth.Volume;
+            label1.Text = "播放速度 : " + trackBar1.Value.ToString();
+            label2.Text = "音量大小 : " + trackBar2.Value.ToString();
+
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
         }
@@ -133,23 +138,19 @@ namespace vcs_SpeechSynthesizer2
         private void button2_Click(object sender, EventArgs e)
         {
             synth.Pause();
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             synth.Resume();
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            /*
             SpeechSynthesizer synth = new SpeechSynthesizer();
 
-            //synth.Rate = trackBarSpeed.Value;
-
-            //synth.Volume = trackBarVolumn.Value;
+            synth.Rate = trackBar1.Value;
+            synth.Volume = trackBar2.Value;
 
             synth.SetOutputToWaveFile("aaaaa.wav");
 
@@ -158,53 +159,20 @@ namespace vcs_SpeechSynthesizer2
             synth.SetOutputToDefaultAudioDevice();
 
             MessageBox.Show("完成錄音~~", "提示");
-            */
-
-
-            /*
-            SpeechSynthesizer synth = new SpeechSynthesizer();
-
-            //synth.Rate = trackBarSpeed.Value;
-
-            //synth.Volume = trackBarVolumn.Value;
-
-            SaveFileDialog sfd = new SaveFileDialog();
-
-            sfd.Filter = "Wave Files|*.wav";
-
-            synth.SetOutputToWaveFile(sfd.FileName);
-
-            synth.Speak(richTextBox1.Text);
-
-            synth.SetOutputToDefaultAudioDevice();
-
-            MessageBox.Show("完成錄音~~", "提示");
-            */
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            richTextBox2.Text += "Rate = " + synth.Rate.ToString() + "\n";
-            richTextBox2.Text += "Volume = " + synth.Volume.ToString() + "\n";
+            richTextBox2.Text += "播放速度 Rate = " + synth.Rate.ToString() + "\n";
+            richTextBox2.Text += "音量大小 Volume = " + synth.Volume.ToString() + "\n";
             richTextBox2.Text += "Voice = " + synth.Voice + "\n";
             richTextBox2.Text += "State = " + synth.State.ToString() + "\n";
-
 
             foreach (InstalledVoice voice in synth.GetInstalledVoices())
             {
                 VoiceInfo info = voice.VoiceInfo;
                 richTextBox2.Text += " Voice Name: " + info.Name + "\n";
             }
-
-
-
-            //synth.Rate = trackBarSpeed.Value;
-            //synth.Volume = trackBarVolumn.Value;
-            //synth.Rate = 0;       //Rate：播放語速，-10~10
-            //synth.Volume = 10;    //Volume：音量調節：0~100
-
-
         }
 
         /// <summary>
@@ -227,7 +195,6 @@ namespace vcs_SpeechSynthesizer2
         {
             Thread thread = new Thread(ReadText);
             thread.Start();
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -236,7 +203,6 @@ namespace vcs_SpeechSynthesizer2
             string text = "豬屁股";
             byte[] TextBytes = SpeechToWavBytes(text);
             richTextBox2.Text += "len = " + TextBytes.Length.ToString() + "\n";
-
         }
 
         /// <summary>
@@ -264,5 +230,22 @@ namespace vcs_SpeechSynthesizer2
             }
             return result;
         }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            label1.Text = "播放速度 : " + trackBar1.Value.ToString();
+            //synth.Pause();
+            synth.Rate = trackBar1.Value;
+            //synth.Resume();
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            label2.Text = "音量大小 : " + trackBar2.Value.ToString();
+            //synth.Pause();
+            synth.Volume = trackBar2.Value;
+            //synth.Resume();
+        }
     }
 }
+
