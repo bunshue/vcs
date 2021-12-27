@@ -35,16 +35,17 @@
             this.item2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.item3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.item4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(421, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(374, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(233, 539);
+            this.richTextBox1.Size = new System.Drawing.Size(280, 539);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.richTextBox1.Text = "按表單出現ContextMenuStrip\n \n按Button出現ContextMenuStrip\n";
             // 
             // contextMenuStrip1
             // 
@@ -59,36 +60,47 @@
             // item1ToolStripMenuItem
             // 
             this.item1ToolStripMenuItem.Name = "item1ToolStripMenuItem";
-            this.item1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.item1ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.item1ToolStripMenuItem.Text = "item1";
             this.item1ToolStripMenuItem.Click += new System.EventHandler(this.item1ToolStripMenuItem_Click);
             // 
             // item2ToolStripMenuItem
             // 
             this.item2ToolStripMenuItem.Name = "item2ToolStripMenuItem";
-            this.item2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.item2ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.item2ToolStripMenuItem.Text = "item2";
             this.item2ToolStripMenuItem.Click += new System.EventHandler(this.item2ToolStripMenuItem_Click);
             // 
             // item3ToolStripMenuItem
             // 
             this.item3ToolStripMenuItem.Name = "item3ToolStripMenuItem";
-            this.item3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.item3ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.item3ToolStripMenuItem.Text = "item3";
             this.item3ToolStripMenuItem.Click += new System.EventHandler(this.item3ToolStripMenuItem_Click);
             // 
             // item4ToolStripMenuItem
             // 
             this.item4ToolStripMenuItem.Name = "item4ToolStripMenuItem";
-            this.item4ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.item4ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.item4ToolStripMenuItem.Text = "item4";
             this.item4ToolStripMenuItem.Click += new System.EventHandler(this.item4ToolStripMenuItem_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(129, 228);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(135, 64);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "按Button出現ContextMenuStrip";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(666, 563);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -106,6 +118,7 @@
         private System.Windows.Forms.ToolStripMenuItem item2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem item3ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem item4ToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
     }
 }
 
