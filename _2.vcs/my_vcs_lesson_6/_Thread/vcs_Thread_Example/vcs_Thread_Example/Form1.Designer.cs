@@ -48,6 +48,9 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer_rgb = new System.Windows.Forms.Timer(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -55,7 +58,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -221,9 +224,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 317);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 491);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(802, 246);
+            this.richTextBox1.Size = new System.Drawing.Size(802, 182);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
@@ -235,6 +238,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button11);
+            this.groupBox3.Controls.Add(this.button10);
+            this.groupBox3.Controls.Add(this.button9);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.pictureBox2);
             this.groupBox3.Controls.Add(this.button8);
@@ -245,10 +251,43 @@
             this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Location = new System.Drawing.Point(12, 128);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(611, 177);
+            this.groupBox3.Size = new System.Drawing.Size(611, 347);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "色塊";
+            // 
+            // button10
+            // 
+            this.button10.Font = new System.Drawing.Font("新細明體", 14F);
+            this.button10.Location = new System.Drawing.Point(20, 229);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(87, 42);
+            this.button10.TabIndex = 13;
+            this.button10.Text = "掛起";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button9
+            // 
+            this.button9.Font = new System.Drawing.Font("新細明體", 14F);
+            this.button9.Location = new System.Drawing.Point(20, 175);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(87, 42);
+            this.button9.TabIndex = 12;
+            this.button9.Text = "停止";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("新細明體", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label7.Location = new System.Drawing.Point(468, 74);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(76, 48);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "cnt";
             // 
             // pictureBox2
             // 
@@ -323,22 +362,22 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // label7
+            // button11
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("新細明體", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label7.Location = new System.Drawing.Point(468, 74);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(76, 48);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "cnt";
+            this.button11.Font = new System.Drawing.Font("新細明體", 14F);
+            this.button11.Location = new System.Drawing.Point(20, 285);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(87, 42);
+            this.button11.TabIndex = 14;
+            this.button11.Text = "繼續";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(861, 575);
+            this.ClientSize = new System.Drawing.Size(829, 685);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox2);
@@ -388,6 +427,9 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }
 

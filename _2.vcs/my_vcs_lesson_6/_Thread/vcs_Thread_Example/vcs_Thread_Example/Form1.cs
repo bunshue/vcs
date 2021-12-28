@@ -34,22 +34,30 @@ namespace vcs_Thread_Example
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //殺死一個線程
             if (ThreadA != null)
             {
-                // The thread is running. Stop it.
-                ThreadA.Abort();
+                if (ThreadA.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                {
+                    ThreadA.Abort();
+                }
                 ThreadA = null;
             }
 
+            //殺死一個線程
             if (ThreadB != null)
             {
-                // The thread is running. Stop it.
-                ThreadB.Abort();
+                if (ThreadB.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                {
+                    ThreadB.Abort();
+                }
                 ThreadB = null;
             }
 
             if (timechange != null)
+            {
                 timechange.stop();
+            }
         }
 
         //委派function
@@ -131,13 +139,36 @@ namespace vcs_Thread_Example
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //殺死一個線程
             if (ThreadA != null)
             {
-                // The thread is running. Stop it.
-                ThreadA.Abort();
+                if (ThreadA.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                {
+                    ThreadA.Abort();
+                }
                 ThreadA = null;
             }
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //停止
+            
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //掛起
+            
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //繼續
+        }
+
 
         private void DoThreadA()
         {
@@ -154,7 +185,6 @@ namespace vcs_Thread_Example
                 Thread.Sleep(200);
             }
         }
-
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -173,10 +203,13 @@ namespace vcs_Thread_Example
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //殺死一個線程
             if (ThreadB != null)
             {
-                // The thread is running. Stop it.
-                ThreadB.Abort();
+                if (ThreadB.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                {
+                    ThreadB.Abort();
+                }
                 ThreadB = null;
             }
         }
@@ -223,6 +256,7 @@ namespace vcs_Thread_Example
             if (timechange != null)
                 timechange.stop();
         }
+
 
     }
 }
