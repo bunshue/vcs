@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1ffffff
+namespace vcs_TrackBar
 {
     public partial class Form1 : Form
     {
@@ -16,12 +16,16 @@ namespace WindowsFormsApplication1ffffff
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         bool flag_mouse_down = false;
         private void trackBar1_MouseDown(object sender, MouseEventArgs e)
         {
             flag_mouse_down = true;
             richTextBox1.Text += trackBar1.Value.ToString() + " ";
-
         }
 
         private void trackBar1_MouseMove(object sender, MouseEventArgs e)
@@ -35,8 +39,6 @@ namespace WindowsFormsApplication1ffffff
                 int k = 100;
                 label1.Text = "ES = k * x * x / 2 = " + (k * x * x / 2).ToString();
             }
-
-
         }
 
         private void trackBar1_MouseUp(object sender, MouseEventArgs e)
@@ -45,8 +47,8 @@ namespace WindowsFormsApplication1ffffff
             richTextBox1.Text += trackBar1.Value.ToString() + " ";
 
             trackBar1.Value = 0;
-
         }
     }
 }
+
 

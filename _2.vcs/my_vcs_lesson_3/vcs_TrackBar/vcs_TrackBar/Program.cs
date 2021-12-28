@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ReadWrite_XML3
+namespace vcs_TrackBar
 {
     static class Program
     {

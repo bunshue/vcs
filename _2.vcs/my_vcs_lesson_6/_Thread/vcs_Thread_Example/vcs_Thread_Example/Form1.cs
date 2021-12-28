@@ -13,6 +13,13 @@ namespace vcs_Thread_Example
 {
     public partial class Form1 : Form
     {
+        //色塊 ST
+        private Thread ThreadA;
+        private Thread ThreadB;
+        int cnt1 = 0;
+        int cnt2 = 0;
+        //色塊 SP
+        
         private ChangeTime timechange;
         public Form1()
         {
@@ -23,6 +30,26 @@ namespace vcs_Thread_Example
         {
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ThreadA != null)
+            {
+                // The thread is running. Stop it.
+                ThreadA.Abort();
+                ThreadA = null;
+            }
+
+            if (ThreadB != null)
+            {
+                // The thread is running. Stop it.
+                ThreadB.Abort();
+                ThreadB = null;
+            }
+
+            if (timechange != null)
+                timechange.stop();
         }
 
         //委派function
@@ -89,33 +116,30 @@ namespace vcs_Thread_Example
         //螢幕畫素讀取 SP
 
         // 色塊 ST
-        private Thread MyThread;
-        int cnt = 0;
-
         private void button4_Click(object sender, EventArgs e)
         {
-            if (MyThread == null)
+            if (ThreadA == null)
             {
                 // The thread isn't running. Start it.
-                cnt = 0;
-                MyThread = new Thread(DoThread);
-                MyThread.Priority = ThreadPriority.BelowNormal;
-                MyThread.IsBackground = true;
-                MyThread.Start();
+                cnt1 = 0;
+                ThreadA = new Thread(DoThreadA);
+                ThreadA.Priority = ThreadPriority.BelowNormal;
+                ThreadA.IsBackground = true;
+                ThreadA.Start();
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (MyThread != null)
+            if (ThreadA != null)
             {
                 // The thread is running. Stop it.
-                MyThread.Abort();
-                MyThread = null;
+                ThreadA.Abort();
+                ThreadA = null;
             }
         }
 
-        private void DoThread()
+        private void DoThreadA()
         {
             while (true)
             {
@@ -124,26 +148,62 @@ namespace vcs_Thread_Example
                 else
                     this.pictureBox1.BackColor = Color.White;
 
-                label6.Text = (cnt++).ToString();
+                label6.Text = (cnt1++).ToString();
 
                 Application.DoEvents();
                 Thread.Sleep(200);
             }
         }
-        // 色塊 SP
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+
+        private void button7_Click(object sender, EventArgs e)
         {
-            if (MyThread != null)
+            if (ThreadB == null)
             {
-                // The thread is running. Stop it.
-                MyThread.Abort();
-                MyThread = null;
+                richTextBox1.Text += "等ThreadA 執行完，ThreadB 再繼續執行\n";
+                // The thread isn't running. Start it.
+                cnt2 = 0;
+                ThreadB = new Thread(DoThreadB);
+                ThreadB.Priority = ThreadPriority.BelowNormal;
+                ThreadB.IsBackground = true;
+                ThreadB.Start();
             }
 
-            if (timechange != null)
-                timechange.stop();
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (ThreadB != null)
+            {
+                // The thread is running. Stop it.
+                ThreadB.Abort();
+                ThreadB = null;
+            }
+        }
+
+        private void DoThreadB()
+        {
+            if (ThreadA != null)
+            {
+                //等待執行
+                ThreadA.Join();//ThreadB 要先讓線程 ThreadA 執行完，然後線程 ThreadB 再繼續執行
+            }
+
+            while (true)
+            {
+                if (this.pictureBox2.BackColor == Color.White)
+                    this.pictureBox2.BackColor = Color.Red;
+                else
+                    this.pictureBox2.BackColor = Color.White;
+
+                label7.Text = (cnt2++).ToString();
+
+                Application.DoEvents();
+                Thread.Sleep(200);
+            }
+        }
+
+        // 色塊 SP
 
         //啟動時鐘
         private void button5_Click(object sender, EventArgs e)
@@ -163,6 +223,7 @@ namespace vcs_Thread_Example
             if (timechange != null)
                 timechange.stop();
         }
+
     }
 }
 

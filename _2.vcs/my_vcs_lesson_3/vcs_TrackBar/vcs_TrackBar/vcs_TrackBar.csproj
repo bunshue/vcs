@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D2DFFD02-BA70-4D33-9F66-69CBDB3F971F}</ProjectGuid>
+    <ProjectGuid>{DAB46CA7-5B27-491B-B2FF-F14BE39E9DAE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ReadWrite_XML4</RootNamespace>
-    <AssemblyName>vcs_ReadWrite_XML4</AssemblyName>
+    <RootNamespace>vcs_TrackBar</RootNamespace>
+    <AssemblyName>vcs_TrackBar</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

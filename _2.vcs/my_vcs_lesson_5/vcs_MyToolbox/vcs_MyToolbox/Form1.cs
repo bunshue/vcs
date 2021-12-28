@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
-
 namespace vcs_MyToolbox
 {
     public partial class Form1 : Form
@@ -75,6 +73,14 @@ namespace vcs_MyToolbox
         }
         //自動隱藏頁面 SP
 
+        //要增加到頁面的控件
+        Button btn_00 = new Button();
+        Button btn_01 = new Button();
+        Button btn_02 = new Button();
+        Button btn_20 = new Button();
+        Button btn_21 = new Button();
+        Button btn_22 = new Button();
+
         public Form1()
         {
             InitializeComponent();
@@ -83,13 +89,15 @@ namespace vcs_MyToolbox
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            add_my_toolbox_controls();
         }
 
         void show_item_location()
         {
-            int W = Screen.PrimaryScreen.Bounds.Width;
-            int H = Screen.PrimaryScreen.Bounds.Height;
-            this.Size = new Size(W / 4, H * 4 / 5);
+            //int W = Screen.PrimaryScreen.Bounds.Width;
+            //int H = Screen.PrimaryScreen.Bounds.Height;
+            //this.Size = new Size(W / 4, H * 4 / 5);
 
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
@@ -98,6 +106,70 @@ namespace vcs_MyToolbox
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;
+        }
+
+        void add_my_toolbox_controls()
+        {
+            int x_st = 20;
+            int y_st = 50;
+            int dx = 0;
+            int dy = 0;
+            //int offset = 0;
+            int w = 0;  //控件寬度
+            int h = 0;  //控件高度
+
+            // 實例化控件
+            w = 120;
+            h = 120;
+
+            dx = w + 20;
+            dy = h + 20;
+
+            btn_00.Width = w;
+            btn_00.Height = h;
+            btn_00.Text = "Write";
+            btn_00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            //btn_00.Click += btn_cmx_click;	// 加入事件
+            this.Controls.Add(btn_00);	// 將控件加入表單
+
+            btn_01.Width = w;
+            btn_01.Height = h;
+            btn_01.Text = "Write";
+            btn_01.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            //btn_01.Click += btn_cmx_click;	// 加入事件
+            this.Controls.Add(btn_01);	// 將控件加入表單
+
+            btn_02.Width = w;
+            btn_02.Height = h;
+            btn_02.Text = "Write";
+            btn_02.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            //btn_02.Click += btn_cmx_click;	// 加入事件
+            this.Controls.Add(btn_02);	// 將控件加入表單
+
+            btn_20.Width = w;
+            btn_20.Height = h;
+            btn_20.Text = "Write";
+            btn_20.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            //btn_20.Click += btn_cmx_click;	// 加入事件
+            this.Controls.Add(btn_20);	// 將控件加入表單
+
+            btn_21.Width = w;
+            btn_21.Height = h;
+            btn_21.Text = "Write";
+            btn_21.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            //btn_21.Click += btn_cmx_click;	// 加入事件
+            this.Controls.Add(btn_21);	// 將控件加入表單
+
+            btn_22.Width = w;
+            btn_22.Height = h;
+            btn_22.Text = "Write";
+            btn_22.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            //btn_22.Click += btn_cmx_click;	// 加入事件
+            this.Controls.Add(btn_22);	// 將控件加入表單
+
+            int W = w * 3 + 20 * 4;
+            int H = Screen.PrimaryScreen.Bounds.Height;
+            this.Size = new Size(W, H * 4 / 5);
             bt_exit_setup();
         }
 

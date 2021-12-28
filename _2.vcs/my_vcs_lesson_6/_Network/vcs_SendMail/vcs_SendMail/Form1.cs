@@ -422,6 +422,10 @@ namespace vcs_SendMail
         private void button7_Click(object sender, EventArgs e)
         {
             //使用Email類別寄信1
+            this.Cursor = Cursors.WaitCursor;
+            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "使用Email類別寄信1 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
 
             /*
             string email_encoding = "utf-8";
@@ -454,26 +458,35 @@ namespace vcs_SendMail
 
             string[] attachments = new string[] { attach_filename1, attach_filename2, attach_filename3 };
 
-            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
-
-            EmailInfo.SendEmail(email_addr_from, to, cc, bcc,
-                mail_subject, mail_body, true, attachments, smtp_server, email_addr_from_password);
-
+            Console.WriteLine("subject = " + mail_subject);
+            EmailInfo.SendEmail(email_addr_from, to, cc, bcc, mail_subject, mail_body, true, attachments, smtp_server, email_addr_from_password);
+            this.Cursor = Cursors.Default;
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //使用Email類別寄信2
-
+            this.Cursor = Cursors.WaitCursor;
             mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "使用Email類別寄信2 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
 
             SmtpMail send_mail = new SmtpMail(email_addr_to, email_addr_to_nicknane, mail_subject, email_addr_from, email_addr_from_password, smtp_server, smtp_server_port);
             send_mail.SendMail(mail_body);
+            this.Cursor = Cursors.Default;
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
+            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+            richTextBox1.Text += "使用Email類別寄信3 ST\t" + mail_subject + "\n";
+            Application.DoEvents();
 
+            string[] to = new string[] { email_addr_to };
+
+            EmailHelper.SendMail(mail_subject, mail_body, attach_filename1, email_addr_from, email_addr_from_password, to);
+
+            this.Cursor = Cursors.Default;
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -630,16 +643,32 @@ namespace vcs_SendMail
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;   //通過網絡發送到SMTP服務器
             smtp.SendCompleted += new SendCompletedEventHandler(smtp_SendCompleted);
 
-            object userState = mail;
+
+            Console.WriteLine("");
+            Console.WriteLine("mailHost = " + mailHost);
+            Console.WriteLine("mailPort = " + mailPort);
+            Console.WriteLine("mailUser = " + mailUser);
+            Console.WriteLine("userPassword = " + userPassword);
+
+
+            Console.WriteLine("");
+
             try
             {
-                smtp.SendAsync(mail, userState);
+                smtp.Send(mail);
             }
+            catch (Exception ex)
+            {
+                sendMessage = ex.ToString();
+                throw new Exception(ex.Message);
+
+            }
+            /*
             catch (SmtpException ex)
             {
                 sendMessage = ex.ToString();
             }
-
+            */
             smtp.Dispose();
         }
 
@@ -662,6 +691,111 @@ namespace vcs_SendMail
             {
                 sendMessage = "Message has been sent successfully!";
             }
+        }
+    }
+
+    public static class EmailHelper
+    {
+        /// <summary>
+        /// 發送郵件
+        /// </summary>
+        /// <param name="subject">郵件主題</param>
+        /// <param name="msg">郵件內容</param>
+        /// <param name="filePath">附件地址，如果不添加附件傳null或""</param>
+        /// <param name="senderEmail">發送人郵箱地址</param>
+        /// <param name="senderPwd">發送人郵箱密碼</param>
+        /// <param name="recipientEmail">接收人郵箱</param>
+        public static void SendMail(string subject, string msg, string filePath, string senderEmail, string senderPwd, params string[] recipientEmail)
+        {
+            if (!CheckIsNotEmptyOrNull(subject, msg, senderEmail, senderPwd) || recipientEmail == null || recipientEmail.Length == 0)
+            {
+                throw new Exception("輸入信息無效");
+            }
+            try
+            {
+                string[] sendFromUser = senderEmail.Split('@');
+
+                //構造一個Email的Message對象
+                MailMessage message = new MailMessage();
+
+                //確定smtp服務器地址。實例化一個Smtp客戶端
+                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("smtp." + sendFromUser[1]);
+
+                //構造發件人地址對象
+                message.From = new MailAddress(senderEmail, sendFromUser[0], Encoding.UTF8);
+
+                //構造收件人地址對象
+                foreach (string userName in recipientEmail)
+                {
+                    message.To.Add(new MailAddress(userName, userName.Split('@')[0], Encoding.UTF8));
+                }
+
+                if (!string.IsNullOrEmpty(filePath))
+                {
+                    Attachment attach = new Attachment(filePath);
+                    //得到文件的信息
+                    ContentDisposition disposition = attach.ContentDisposition;
+                    disposition.CreationDate = System.IO.File.GetCreationTime(filePath);
+                    disposition.ModificationDate = System.IO.File.GetLastWriteTime(filePath);
+                    disposition.ReadDate = System.IO.File.GetLastAccessTime(filePath);
+                    //向郵件添加附件
+                    message.Attachments.Add(attach);
+                }
+
+                //添加郵件主題和內容
+                message.Subject = subject;
+                message.SubjectEncoding = Encoding.UTF8;
+                message.Body = msg;
+                message.BodyEncoding = Encoding.UTF8;
+
+                //設置郵件的信息
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                message.BodyEncoding = System.Text.Encoding.UTF8;
+                message.IsBodyHtml = false;
+
+                //如果服務器支持安全連接，則將安全連接設為true。
+                //gmail,qq支持，163不支持
+                switch (sendFromUser[1])
+                {
+                    case "gmail.com":
+                    case "qq.com":
+                        client.EnableSsl = true;
+                        break;
+                    default:
+                        client.EnableSsl = false;
+                        break;
+                }
+
+                //設置用戶名和密碼。
+                client.UseDefaultCredentials = false;
+                //用戶登陸信息
+                NetworkCredential myCredentials = new NetworkCredential(senderEmail, senderPwd);
+                client.Credentials = myCredentials;
+                //發送郵件
+                client.Send(message);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
+        /// <summary>
+        /// 驗證所有傳入字符串不能為空或null
+        /// </summary>
+        /// <param name="ps">參數列表</param>
+        /// <returns>都不為空或null返回true，否則返回false</returns>
+        public static bool CheckIsNotEmptyOrNull(params string[] ps)
+        {
+            if (ps != null)
+            {
+                foreach (string item in ps)
+                {
+                    if (string.IsNullOrEmpty(item)) return false;
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

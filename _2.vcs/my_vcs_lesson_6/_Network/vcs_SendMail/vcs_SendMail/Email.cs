@@ -123,7 +123,7 @@ namespace vcs_SendMail
         /// </summary>
         public void Send()
         {
-            var mailMessage = new MailMessage();
+            var mail = new MailMessage();
 
             //讀取To  接收者郵箱列表
             if (this.To != null && this.To.Length > 0)
@@ -133,7 +133,7 @@ namespace vcs_SendMail
                     if (string.IsNullOrEmpty(to)) continue;
                     try
                     {
-                        mailMessage.To.Add(new MailAddress(to.Trim()));
+                        mail.To.Add(new MailAddress(to.Trim()));
                     }
                     catch (Exception ex)
                     {
@@ -149,7 +149,7 @@ namespace vcs_SendMail
                     if (string.IsNullOrEmpty(cc)) continue;
                     try
                     {
-                        mailMessage.CC.Add(new MailAddress(cc.Trim()));
+                        mail.CC.Add(new MailAddress(cc.Trim()));
                     }
                     catch (Exception ex)
                     {
@@ -165,7 +165,7 @@ namespace vcs_SendMail
                     if (string.IsNullOrEmpty(attachment)) continue;
                     try
                     {
-                        mailMessage.Attachments.Add(new Attachment(attachment));
+                        mail.Attachments.Add(new Attachment(attachment));
                     }
                     catch (Exception ex)
                     {
@@ -181,7 +181,7 @@ namespace vcs_SendMail
                     if (string.IsNullOrEmpty(bcc)) continue;
                     try
                     {
-                        mailMessage.Bcc.Add(new MailAddress(bcc.Trim()));
+                        mail.Bcc.Add(new MailAddress(bcc.Trim()));
                     }
                     catch (Exception ex)
                     {
@@ -192,41 +192,51 @@ namespace vcs_SendMail
             //讀取From 發送人地址
             try
             {
-                mailMessage.From = new MailAddress(this.From);
+                mail.From = new MailAddress(this.From);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+
+            Console.WriteLine("");
+            Console.WriteLine("from = " + this.From);
+            Console.WriteLine("to = " + this.To);
+            Console.WriteLine("Host = " + this.Host);
+            Console.WriteLine("UserName = " + this.UserName);
+            Console.WriteLine("Password = " + this.Password);
+            Console.WriteLine("");
 
             //郵件標題
             Encoding encoding = Encoding.GetEncoding("GB2312");
-            mailMessage.Subject = string.Format("?={0}?B?{1}?=", encoding.HeaderName,
-                Convert.ToBase64String(encoding.GetBytes(this.Subject), Base64FormattingOptions.None));
+            mail.Subject = this.Subject;
             //郵件正文是否為HTML格式
-            mailMessage.IsBodyHtml = this.IsBodyHtml;
+            mail.IsBodyHtml = this.IsBodyHtml;
             //郵件正文
-            mailMessage.Body = this.Body;
-            mailMessage.BodyEncoding = this.Encoding;
+            mail.Body = this.Body;
+            mail.BodyEncoding = this.Encoding;
             //郵件優先級
-            mailMessage.Priority = this.MailPriority;
+            mail.Priority = this.MailPriority;
 
-            //發送郵件代碼實現
-            var smtpClient = new SmtpClient
-            {
-                //Host = this.Host,
-                Host = "smtp.gmail.com",
-                Credentials = new NetworkCredential(this.UserName, this.Password)
-            };
-            //認證
+            //SMTP 外寄郵件伺服器設定
+            SmtpClient smtp = new SmtpClient(this.Host, 25);   //實例一個SmtpClient類
+            //smtp.Host = smtp_server;
+            //smtp.Port = smtp_server_port;
+            smtp.Timeout = 9999;
+            smtp.EnableSsl = true; //gmail預設開啟驗證, 指定 SmtpClient 使用安全套接字層 (SSL) 加密連接
+            smtp.UseDefaultCredentials = false; //不使用默認憑證，注意此句必須放在smtp.Credentials() 的上面
+            smtp.Credentials = new NetworkCredential(this.From, this.Password); //這裡要填正確的帳號跟密碼, 驗證寄件者
+            //smtp.Credentials = CredentialCache.DefaultNetworkCredentials;   //不可, 需要驗證寄件者
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;   //通過網絡發送到SMTP服務器
             try
             {
-                smtpClient.Send(mailMessage);
+                smtp.Send(mail);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+            smtp.Dispose();
         }
 
         #endregion
@@ -259,13 +269,11 @@ namespace vcs_SendMail
             bool isBodyHtml, string[] attachments, string host, string password)
         {
             //郵箱發送不滿足，限制這些參數必須傳遞
-            /*
             Console.WriteLine("from = " + from);
             Console.WriteLine("to.len = " + to.Length.ToString());
             Console.WriteLine("subject = " + subject);
             Console.WriteLine("host = " + host);
             Console.WriteLine("password = " + password);
-            */
 
             if (from == "" || to.Length <= 0 || subject == "" || body == "" || host == "" || password == "")
             {

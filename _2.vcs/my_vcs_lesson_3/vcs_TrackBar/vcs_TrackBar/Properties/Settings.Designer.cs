@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApplication1ffffff.Properties
+namespace vcs_TrackBar.Properties
 {
 
 
