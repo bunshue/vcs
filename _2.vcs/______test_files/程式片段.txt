@@ -5497,7 +5497,34 @@ C#抓取网页Html源码
 
 //--------------------------------------------------------------------------------------------------------------------------
 
+        /// 
 
+        ///方法一:
+        ///此種加密之後的字符串是三十二位的(字母加數據)字符串  
+        /// Example: password是admin 加密變成後21232f297a57a5a743894a0e4a801fc3
+        /// 
+
+        /// 
+        /// 
+        public string MD5Encrypt(string beforeStr)
+        {
+            string afterString = "";
+            try
+            {
+                MD5 md5 = MD5.Create();
+                byte[] hashs = md5.ComputeHash(Encoding.UTF8.GetBytes(beforeStr));
+ 
+                foreach (byte by in hashs)
+                    //這裡是字母加上數據進行加密.//3y 可以,y3不可以或 x3j等應該是超過32位不可以
+                    afterString += by.ToString("x2");
+            }
+            catch (Exception ex)
+            {
+                ILog log = log4net.LogManager.GetLogger(this.GetType());
+                log.Error("==============你引起了一個錯誤是==============" + ex.Message.ToString());
+            }
+            return afterString;
+        }
 
 
 
@@ -5505,9 +5532,88 @@ C#抓取网页Html源码
 
 
 
+C#程序調用外部程序
+
+
+//聲明一個程序信息類
+System.Diagnostics.ProcessStartInfo  Info  =  new  System.Diagnostics.ProcessStartInfo();
+
+//設置外部程序名
+Info.FileName  =  "notepad.exe";
+
+//設置外部程序的啟動參數（命令行參數）為test.txt
+Info.Arguments  =  "test.txt";
+
+//設置外部程序工作目錄為  C:
+Info.WorkingDirectory  =  "C:\";
+
+//聲明一個程序類
+System.Diagnostics.Process  Proc  ;
+
+try
+{
+//
+//啟動外部程序
+//
+Proc  =  System.Diagnostics.Process.Start(Info);
+}
+catch(System.ComponentModel.Win32Exception  e)
+{
+Console.WriteLine("系統找不到指定的程序文件。{0}",  e);
+return;
+}
+
+//打印出外部程序的開始執行時間
+Console.WriteLine("外部程序的開始執行時間：{0}",  Proc.StartTime);
+
+//等待3秒鐘
+Proc.WaitForExit(3000);
+
+//如果這個外部程序沒有結束運行則對其強行終止
+if(Proc.HasExited  ==  false)
+{
+Console.WriteLine("由主程序強行終止外部程序的運行！");
+Proc.Kill();
+}
+else
+{
+Console.WriteLine("由外部程序正常退出！");
+}
+Console.WriteLine("外部程序的結束運行時間：{0}",  Proc.ExitTime);
+Console.WriteLine("外部程序在結束運行時的返回值：{0}",  Proc.ExitCode);
+}
+}
 
 
 //--------------------------------------------------------------------------------------------------------------------------
+
+
+C#中隱式操作CMD命令行窗口
+日期：2017/1/20 19:36:48      編輯：C#入門知識
+
+
+MS的CMD命令行是一種重要的操作界面，
+一些在C#中不那麼方便完成的功能，在CMD中幾個簡單的命令或許就可以輕松搞定，
+如果能在C#中能完成CMD窗口的功能，那一定可以使我們的程序簡便不少。
+
+下面介紹一種常用的在C#程序中調用CMD.exe程序，並且不顯示命令行窗口界面，來完成CMD中各種功能的簡單方法。
+
+如下所示：
+
+
+Process p=new Process();
+p.StartInfo.FileName="cmd.exe";//要執行的程序名稱
+p.StartInfo.UseShellExecute=false;
+p.StartInfo.RedirectStanderInput=true;//可能接受來自調用程序的輸入信息
+p.StartInfo.RedirectStanderOutput=true;//由調用程序獲取輸出信息
+p.StartInfo.CreateNoWindow=true;//不顯示程序窗口
+p.Start();//啟動程序
+//向CMD窗口發送輸入信息：
+p.StanderInput.WriteLine("shutdown -r t 10"); //10秒後重啟（C#中可不好做哦）
+//獲取CMD窗口的輸出信息：
+string sOutput = p.StandardOutput.ReadToEnd();
+
+//有啦以下代碼，就可以神不知鬼不覺的操作CMD啦。總之，Process類是一個非常有用的類，它十分方便的利用第三方的程序擴展了C#的功能。
 
 
 

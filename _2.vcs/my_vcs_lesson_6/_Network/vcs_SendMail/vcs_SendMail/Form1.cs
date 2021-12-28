@@ -103,7 +103,7 @@ namespace vcs_SendMail
             //button
             x_st = 10;
             y_st = 10;
-            dx = 180;
+            dx = 220;
             dy = 55;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -421,7 +421,7 @@ namespace vcs_SendMail
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //使用Email類別寄信
+            //使用Email類別寄信1
 
             /*
             string email_encoding = "utf-8";
@@ -463,7 +463,12 @@ namespace vcs_SendMail
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //使用Email類別寄信2
 
+            mail_subject = ((Button)sender).Text + "\t" + DateTime.Now.ToString();
+
+            SmtpMail send_mail = new SmtpMail(email_addr_to, email_addr_to_nicknane, mail_subject, email_addr_from, email_addr_from_password, smtp_server, smtp_server_port);
+            send_mail.SendMail(mail_body);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -566,6 +571,97 @@ namespace vcs_SendMail
 
             smtp.Dispose();
             mail.Dispose();
+        }
+    }
+
+    public class SmtpMail
+    {
+        private string toAddress = "";
+        private string mailUser = "";
+        private string userPassword = "";
+        private string displayName = "";
+        private string mailSubject = "";
+        private string sendMessage = "";
+        private int mailPort = 0;
+        private string mailHost = "";
+
+        public string Message
+        {
+            get
+            {
+                return sendMessage;
+            }
+        }
+
+        public SmtpMail(string to_address, string display_name, string mail_subject, string mail_user, string user_password, string mail_host, int mail_port)
+        {
+            toAddress = to_address;
+            displayName = display_name;
+            mailSubject = mail_subject;
+            mailUser = mail_user;
+            userPassword = user_password;
+            mailHost = mail_host;
+            mailPort = mail_port;
+        }
+
+        public void SendMail(string strBody)
+        {
+            //MailMessage mail = new MailMessage(from, to);
+            MailMessage mail = new MailMessage();
+            mail.To.Add(toAddress);
+            mail.From = new MailAddress(mailUser, displayName, System.Text.Encoding.UTF8);
+            mail.Subject = mailSubject;
+            mail.SubjectEncoding = System.Text.Encoding.UTF8;
+            mail.Body = strBody;
+            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            mail.IsBodyHtml = false;
+            mail.Priority = MailPriority.Normal;
+
+            //SMTP 外寄郵件伺服器設定
+            SmtpClient smtp = new SmtpClient(mailHost, mailPort);   //實例一個SmtpClient類
+            //smtp.Host = smtp_server;
+            //smtp.Port = smtp_server_port;
+            smtp.Timeout = 9999;
+            smtp.EnableSsl = true; //gmail預設開啟驗證, 指定 SmtpClient 使用安全套接字層 (SSL) 加密連接
+            smtp.UseDefaultCredentials = false; //不使用默認憑證，注意此句必須放在smtp.Credentials() 的上面
+            //smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
+            smtp.Credentials = new NetworkCredential(mailUser, userPassword);
+            //smtp.Credentials = CredentialCache.DefaultNetworkCredentials;   //不可, 需要驗證寄件者
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;   //通過網絡發送到SMTP服務器
+            smtp.SendCompleted += new SendCompletedEventHandler(smtp_SendCompleted);
+
+            object userState = mail;
+            try
+            {
+                smtp.SendAsync(mail, userState);
+            }
+            catch (SmtpException ex)
+            {
+                sendMessage = ex.ToString();
+            }
+
+            smtp.Dispose();
+        }
+
+        void smtp_SendCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            MailMessage mail = (MailMessage)e.UserState;
+            string subject = mail.Subject;
+
+            if (e.Cancelled)
+            {
+                string cancelled = string.Format("[{0}] Send canceled.", subject);
+                sendMessage = cancelled;
+            }
+            if (e.Error != null)
+            {
+                string error = String.Format("[{0}] {1}", subject, e.Error.ToString());
+                sendMessage = error;
+            }
+            else
+            {
+                sendMessage = "Message has been sent successfully!";
+            }
         }
     }
 }
