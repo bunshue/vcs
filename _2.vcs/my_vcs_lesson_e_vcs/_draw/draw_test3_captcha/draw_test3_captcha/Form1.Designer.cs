@@ -215,7 +215,9 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 70);
             this.button13.TabIndex = 38;
+            this.button13.Text = "用GDI+繪制驗證碼";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 

@@ -414,6 +414,42 @@ namespace vcs_LOG
             LogConsole.Log("寫log的方法4 " + (i4++).ToString());
         }
 
+
+        public List<string> Log = new List<string>();
+        int iii = 0;
+        private void AddLog(string logtext)
+        {
+            if (Log.Count < 1000)
+                Log.Add(System.DateTime.Now.ToString() + "\t" + logtext);
+            else if (Log.Count == 1000)
+                Log.Add(System.DateTime.Now.ToString() + " 達到日志上限,不再追加");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //加入LOG
+            iii++;
+            AddLog("add log " + iii.ToString());
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //顯示LOG
+            int len = Log.Count;
+            if (len <= 0)
+            {
+                richTextBox1.Text += "無資料\n";
+            }
+            else
+            {
+                richTextBox1.Text += "共有 " + Log.Count.ToString() + " 筆資料, 分別是:\n";
+                int i;
+                for (i = 0; i < len; i++)
+                {
+                    richTextBox1.Text += Log[i] + "\n";
+                }
+            }
+        }
     }
 
     public class LogConsole

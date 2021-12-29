@@ -119,6 +119,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(170, 70);
             this.button24.TabIndex = 111;
+            this.button24.Text = "使用MyClassLibrary範例";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -129,6 +130,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(170, 70);
             this.button23.TabIndex = 110;
+            this.button23.Text = "動態創建按鈕和事件";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -139,6 +141,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(170, 70);
             this.button22.TabIndex = 109;
+            this.button22.Text = "連接符 與 佔位符";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -149,6 +152,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(170, 70);
             this.button21.TabIndex = 108;
+            this.button21.Text = "split";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -190,6 +194,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 70);
             this.button14.TabIndex = 104;
+            this.button14.Text = "C#實現小小的日曆";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -200,6 +205,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(170, 70);
             this.button13.TabIndex = 103;
+            this.button13.Text = "獲取當前行號";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -220,6 +226,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(170, 70);
             this.button8.TabIndex = 101;
+            this.button8.Text = "Class測試";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -241,6 +248,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(170, 70);
             this.button10.TabIndex = 99;
+            this.button10.Text = "模擬MSN窗體抖動1";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -273,6 +281,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(170, 70);
             this.button11.TabIndex = 96;
+            this.button11.Text = "模擬MSN窗體抖動2";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -283,6 +292,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(170, 70);
             this.button20.TabIndex = 95;
+            this.button20.Text = "字串轉拜列";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -323,6 +333,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(170, 70);
             this.button15.TabIndex = 91;
+            this.button15.Text = "易經 六十四卦";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -333,6 +344,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(170, 70);
             this.button12.TabIndex = 90;
+            this.button12.Text = "(Console)各種數據格式的輸出";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -343,6 +355,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(170, 70);
             this.button7.TabIndex = 89;
+            this.button7.Text = "設置系統日期和時間";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace test6
+namespace vcs_ReadWrite_XMLB
 {
     static class Program
     {

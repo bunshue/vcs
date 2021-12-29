@@ -51,14 +51,8 @@ namespace vcs_ReadWrite_XML2
             groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
-            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            dataGridView1.Size = new Size(400, 400);
-
-            treeView1.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            treeView1.Size = new Size(400, 400);
-
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-            richTextBox1.Size = new Size(400, 1000);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Size = new Size(800, 1000);
 
             x_st = 20;
             y_st = 20;
@@ -146,14 +140,7 @@ namespace vcs_ReadWrite_XML2
         //XML操作0
         private void button00_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_xml\person.xml";
-            //開啟一XML文件檔並顯示在DataGridView上
-            //使用DataSet讀XML文件
 
-            DataSet ds = new DataSet();
-            ds.ReadXmlSchema(filename);
-            ds.ReadXml(filename);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button01_Click(object sender, EventArgs e)
@@ -176,73 +163,15 @@ namespace vcs_ReadWrite_XML2
 
         }
 
-        //開啟XML檔案到TreeView 1 ST
         private void button10_Click(object sender, EventArgs e)
         {
-            //開啟XML檔案到TreeView 1
-            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML6.xml";
-            LoadTreeViewFromXmlFile(filename, treeView1);
+
         }
 
-        // Load a TreeView control from an XML file.
-        private void LoadTreeViewFromXmlFile(string filename, TreeView trv)
-        {
-            // Load the XML document.
-            XmlDocument xml_doc = new XmlDocument();
-            xml_doc.Load(filename);
-
-            // Add the root node's children to the TreeView.
-            trv.Nodes.Clear();
-            AddTreeViewChildNodes(trv.Nodes, xml_doc.DocumentElement);
-        }
-
-        // Add the children of this XML node 
-        // to this child nodes collection.
-        private void AddTreeViewChildNodes(TreeNodeCollection parent_nodes, XmlNode xml_node)
-        {
-            foreach (XmlNode child_node in xml_node.ChildNodes)
-            {
-                // Make the new TreeView node.
-                TreeNode new_node = parent_nodes.Add(child_node.Name);
-
-                // Recursively make this node's descendants.
-                AddTreeViewChildNodes(new_node.Nodes, child_node);
-
-                // If this is a leaf node, make sure it's visible.
-                if (new_node.Nodes.Count == 0) new_node.EnsureVisible();
-            }
-        }
-        //開啟XML檔案到TreeView 1 SP
-
-        //開啟XML檔案到TreeView 2 ST
         private void button11_Click(object sender, EventArgs e)
         {
-            //開啟XML檔案到TreeView 2
-            string filename = @"C:\______test_files\__RW\_xml\NexusPoint.xml";
-            //string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML6.xml";
 
-            XmlDocument NexusDocument = new XmlDataDocument();//定義一個XML文檔對像
-            NexusDocument.Load(filename);//加載XML文件
-            RecursionTreeControl(NexusDocument.DocumentElement, treeView1.Nodes);//將加載完成的XML文件顯示在TreeView控件中
-            treeView1.ExpandAll();//展開TreeView控件中的所有項
         }
-
-        /// <summary>
-        /// RecursionTreeControl:表示將XML文件的內容顯示在TreeView控件中
-        /// </summary>
-        /// <param name="xmlNode">將要加載的XML文件中的節點元素</param>
-        /// <param name="nodes">將要加載的XML文件中的節點集合</param>
-        private void RecursionTreeControl(XmlNode xmlNode, TreeNodeCollection nodes)
-        {
-            foreach (XmlNode node in xmlNode.ChildNodes)//循環遍歷當前元素的子元素集合
-            {
-                string temp = (node.Value != null ? node.Value : (node.Attributes != null && node.Attributes.Count > 0) ? node.Attributes[0].Value : node.Name);//表示TreeNode節點的文本內容
-                TreeNode new_child = new TreeNode(temp);//定義一個TreeNode節點對像
-                nodes.Add(new_child);//向當前TreeNodeCollection集合中添加當前節點
-                RecursionTreeControl(node, new_child.Nodes);//調用本方法進行遞歸
-            }
-        }
-        //開啟XML檔案到TreeView 2 SP
 
         private void button12_Click(object sender, EventArgs e)
         {

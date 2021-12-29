@@ -66,28 +66,25 @@
             this.button52 = new System.Windows.Forms.Button();
             this.button54 = new System.Windows.Forms.Button();
             this.button53 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(994, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(1028, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(217, 705);
+            this.richTextBox1.Size = new System.Drawing.Size(424, 705);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(1098, 450);
+            this.bt_clear.Location = new System.Drawing.Point(1108, 450);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(75, 39);
             this.bt_clear.TabIndex = 1;
@@ -117,12 +114,11 @@
             // 
             // button00
             // 
-            this.button00.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button00.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button00.Location = new System.Drawing.Point(17, 18);
             this.button00.Name = "button00";
             this.button00.Size = new System.Drawing.Size(160, 60);
             this.button00.TabIndex = 4;
-            this.button00.Text = "開啟一XML文件檔並顯示在DataGridView上";
             this.button00.UseVisualStyleBackColor = true;
             this.button00.Click += new System.EventHandler(this.button00_Click);
             // 
@@ -181,7 +177,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 60);
             this.button10.TabIndex = 4;
-            this.button10.Text = "開啟XML檔案到TreeView 1";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -192,7 +187,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 60);
             this.button11.TabIndex = 2;
-            this.button11.Text = "開啟XML檔案到TreeView 2";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -482,29 +476,11 @@
             this.button53.UseVisualStyleBackColor = true;
             this.button53.Click += new System.EventHandler(this.button53_Click);
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(775, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(213, 222);
-            this.dataGridView1.TabIndex = 14;
-            // 
-            // treeView1
-            // 
-            this.treeView1.Location = new System.Drawing.Point(775, 240);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(213, 206);
-            this.treeView1.TabIndex = 15;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1204, 873);
-            this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -522,7 +498,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -567,8 +542,6 @@
         private System.Windows.Forms.Button button52;
         private System.Windows.Forms.Button button54;
         private System.Windows.Forms.Button button53;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TreeView treeView1;
     }
 }
 

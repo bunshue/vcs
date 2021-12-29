@@ -15,7 +15,10 @@ using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
 
+using System.Runtime.InteropServices;
 using Microsoft.Win32;  //for RegistryKey
+
+using vcs_MyClassLibrary;   //使用MyClassLibrary範例
 
 namespace vcs_Mix05
 {
@@ -465,15 +468,267 @@ namespace vcs_Mix05
                                     + dt.Second.ToString().PadLeft(2, '0') + "\n";
         }
 
+        //設置系統日期和時間 ST
+        public class SetSystemDateTime
+        {
+
+            [DllImportAttribute("Kernel32.dll")]
+
+            public static extern void GetLocalTime(SystemTime st);
+
+            [DllImportAttribute("Kernel32.dll")]
+
+            public static extern void SetLocalTime(SystemTime st);
+
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public class SystemTime
+        {
+
+            public ushort vYear;
+
+            public ushort vMonth;
+
+            public ushort vDayOfWeek;
+
+            public ushort vDay;
+
+            public ushort vHour;
+
+            public ushort vMinute;
+
+            public ushort vSecond;
+        }
+
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //設置系統日期和時間
+            //Romeo可用 Sugar不可用
+            //DateTime Year = this.dateTimePicker1.Value;
+            SystemTime MySystemTime = new SystemTime();
+            SetSystemDateTime.GetLocalTime(MySystemTime);
+            /*
+            MySystemTime.vYear = (ushort)this.dateTimePicker1.Value.Year;
+            MySystemTime.vMonth = (ushort)this.dateTimePicker1.Value.Month;
+            MySystemTime.vDay = (ushort)this.dateTimePicker1.Value.Day;
+            MySystemTime.vHour = (ushort)this.dateTimePicker2.Value.Hour;
+            MySystemTime.vMinute = (ushort)this.dateTimePicker2.Value.Minute;
+            MySystemTime.vSecond = (ushort)this.dateTimePicker2.Value.Second;
+            */
+            MySystemTime.vYear = 2021;
+            MySystemTime.vMonth = 11;
+            MySystemTime.vDay = 3;
+            MySystemTime.vHour = 23;
+            MySystemTime.vMinute = 37;
+            MySystemTime.vSecond = 00;
+
+            SetSystemDateTime.SetLocalTime(MySystemTime);
+        }
+        //設置系統日期和時間 SP
+
+        //Class測試 ST
+
+        /*
+        理解多態。
+        首先，我們先來看下怎樣用虛方法實現多態
+
+        我們都知道，喜鵲（Magpie）、老鷹（Eagle）、企鵝（Penguin）都是屬於鳥類，我們可以根據這三者的共有特性提取出鳥類（Bird）做為父類，喜鵲喜歡吃蟲子，老鷹喜歡吃肉，企鵝喜歡吃魚。
+        */
+
+        //創建基類Bird如下，添加一個虛方法Eat():
+
+        /*
+        /// <summary>
+        /// 鳥類：父類
+        /// </summary>
+        public class Bird
+        {
+            /// <summary>
+            /// 吃：虛方法
+            /// </summary>
+            public virtual void Eat()
+            {
+                Console.WriteLine("我是一只小小鳥，我喜歡吃蟲子~");
+            }
+        }
+        */
+
+        /// <summary>
+        /// 鳥類：基類
+        /// </summary>
+        public abstract class Bird
+        {
+            /// <summary>
+            /// 吃：抽象方法
+            /// </summary>
+            public abstract void Eat(); //抽象類Bird內添加一個Eat()抽象方法，沒有方法體。也不能實例化。
+        }
+
+        //創建子類Magpie如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
+
+        /// <summary>
+        /// 飛 接口
+        /// </summary>
+        public interface IFlyable
+        {
+            void Fly();
+        }
+
+        /*
+        /// <summary>
+        /// 喜鵲：子類
+        /// </summary>
+        public class Magpie : Bird
+        {
+            /// <summary>
+            /// 重寫父類中Eat方法
+            /// </summary>
+            public override void Eat()
+            {
+                Console.WriteLine("我是一只喜鵲，我喜歡吃蟲子~");
+            }
+        }
+
+        //創建一個子類Eagle如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
+
+        /// <summary>
+        /// 老鷹：子類
+        /// </summary>
+        public class Eagle : Bird
+        {
+            /// <summary>
+            /// 重寫父類中Eat方法
+            /// </summary>
+            public override void Eat()
+            {
+                Console.WriteLine("我是一只老鷹，我喜歡吃肉~");
+            }
+        }
+        */
+
+        //喜鵲Magpie實現IFlyable接口，代碼如下：
+
+        /// <summary>
+        /// 喜鵲：子類，實現IFlyable接口
+        /// </summary>
+        public class Magpie : Bird, IFlyable
+        {
+            /// <summary>
+            /// 重寫父類Bird中Eat方法
+            /// </summary>
+            public override void Eat()
+            {
+                Console.WriteLine("我是一只喜鵲，我喜歡吃蟲子~");
+            }
+            /// <summary>
+            /// 實現 IFlyable接口方法
+            /// </summary>
+            public void Fly()
+            {
+                Console.WriteLine("我是一只喜鵲，我可以飛哦~~");
+            }
+        }
+
+        //老鷹Eagle實現IFlyable接口，代碼如下：
+
+        /// <summary>
+        /// 老鷹：子類實現飛接口
+        /// </summary>
+        public class Eagle : Bird, IFlyable
+        {
+            /// <summary>
+            /// 重寫父類Bird中Eat方法
+            /// </summary>
+            public override void Eat()
+            {
+                Console.WriteLine("我是一只老鷹，我喜歡吃肉~");
+            }
+
+            /// <summary>
+            /// 實現 IFlyable接口方法
+            /// </summary>
+            public void Fly()
+            {
+                Console.WriteLine("我是一只老鷹，我可以飛哦~~");
+            }
+        }
+
+        //創建一個子類Penguin如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
+
+        /// <summary>
+        /// 企鵝：子類
+        /// </summary>
+        public class Penguin : Bird
+        {
+            /// <summary>
+            /// 重寫父類中Eat方法
+            /// </summary>
+            public override void Eat()
+            {
+                Console.WriteLine("我是一只小企鵝，我喜歡吃魚~");
+            }
+        }
+
+        /// <summary>
+        /// 飛機類，實現IFlyable接口
+        /// </summary>
+        public class Plane : IFlyable
+        {
+            /// <summary>
+            /// 實現接口方法
+            /// </summary>
+            public void Fly()
+            {
+                Console.WriteLine("我是一架飛機，我也能飛~~");
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //Class測試
+            //Class測試
+            //創建一個Bird基類數組，添加基類Bird對象，Magpie對象，Eagle對象，Penguin對象
+            Bird[] birds = { 
+                       //new Bird(),    用Abstract, Bird就不能創建對象了
+                       new Magpie(),
+                       new Eagle(),
+                       new Penguin()
+            };
+            //遍歷一下birds數組
+            foreach (Bird bird in birds)
+            {
+                bird.Eat();
+            }
+
+            //創建一個IFlyable接口數組，添加 Magpie對象，Eagle對象
+            IFlyable[] flys = { 
+                       new Magpie(),
+                       new Eagle()
+        };
+            //遍歷一下flys數組
+            foreach (IFlyable fly in flys)
+            {
+                fly.Fly();
+            }
+
+
+            //創建一個IFlyable接口數組，添加 Magpie對象，Eagle對象，Plane對象
+            IFlyable[] flys2 = { 
+                           new Magpie(),
+                           new Eagle(),
+                           new Plane()
+            };
+            //遍歷一下flys數組
+            foreach (IFlyable fly in flys2)
+            {
+                fly.Fly();
+            }
         }
+        //Class測試 SP
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -483,36 +738,314 @@ namespace vcs_Mix05
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //模擬MSN窗體抖動1
             show_button_text(sender);
 
+            int rand = 50;
+            int recordx = this.Left;　//保存原來窗體的左上角的x坐標
+            int recordy = this.Top;　//保存原來窗體的左上角的y坐標
+
+            Random random = new Random();
+
+            for (int i = 0; i < 100; i++)
+            {
+                int x = random.Next(rand);
+                int y = random.Next(rand);
+                if (x % 2 == 0)
+                {
+                    this.Left = this.Left + x;
+                }
+                else
+                {
+                    this.Left = this.Left - x;
+                }
+                if (y % 2 == 0)
+                {
+                    this.Top = this.Top + y;
+                }
+                else
+                {
+                    this.Top = this.Top - y;
+                }
+
+                this.Left = recordx;　//還原原始窗體的左上角的x坐標
+                this.Top = recordy;　//還原原始窗體的左上角的y坐標
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //模擬MSN窗體抖動2
             show_button_text(sender);
+
+            int rand = 10;
+            int recordx = this.Left;
+            int recordy = this.Top;
+            Random random = new Random();
+            for (int i = 0; i < 50; i++)
+            {
+                int x = random.Next(rand);
+                int y = random.Next(rand);
+                if (x % 2 == 0)
+                {
+                    this.Left = this.Left + x;
+                }
+                else
+                {
+                    this.Left = this.Left - x;
+                }
+                if (y % 2 == 0)
+                {
+                    this.Top = this.Top + y;
+                }
+                else
+                {
+                    this.Top = this.Top - y;
+                }
+                System.Threading.Thread.Sleep(1);
+            }
+            this.Left = recordx;
+            this.Top = recordy;
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //(Console)各種數據格式的輸出
+
+            Console.WriteLine("各種數據格式的輸出：");
+            // Console.WriteLine 中各種數據格式的輸出
+            Console.WriteLine("{0, 8 :C}", 2);     // $2.00
+            Console.WriteLine("{0, 8 :C3}", 2);    // $2.000
+            Console.WriteLine("{0 :D3}", 2);       // 002
+            Console.WriteLine("{0 :E}", 2);        // 2.000000E+000
+            Console.WriteLine("{0 :G}", 2);        // 2
+            Console.WriteLine("{0 :N}", 2500000.00);    // 2,500,00.00
+            Console.WriteLine("{0 :x4}", 12);      // 000c
+            Console.WriteLine("{0, 2 :x}", 12);    //  c
+            Console.WriteLine("{0 :000.000}", 12.23);   // 012.230
+            Console.WriteLine("{0 :r}", 15.62);    // 15.62
+            Console.WriteLine("{0 :d}", System.DateTime.Now);    // 2012-3-27
+            Console.WriteLine("{0 :D}", System.DateTime.Now);    // 2012年3月27日
+
+            Console.WriteLine("{0 :t}", System.DateTime.Now);    // 11:43
+            Console.WriteLine("{0 :T}", System.DateTime.Now);    // 11:43:34
+
+            Console.WriteLine("{0 :f}", System.DateTime.Now);    // 2012年3月27日 11:43
+            Console.WriteLine("{0 :F}", System.DateTime.Now);    // 2012年3月27日 11:43:34
+
+            Console.WriteLine("{0 :g}", System.DateTime.Now);    // 2012-3-27 11:43
+            Console.WriteLine("{0 :G}", System.DateTime.Now);    // 2012-3-27 11:43:34
+
+            Console.WriteLine("{0 :M}", System.DateTime.Now);    // 3月27日
+            Console.WriteLine("{0 :r}", System.DateTime.Now);// Tue, 27 Mar 2012 11:43:34 GMT
+            Console.WriteLine("{0 :s}", System.DateTime.Now);    // 2012-03-27T11:43:34
+            Console.WriteLine("{0 :u}", System.DateTime.Now);    // 2012-03-27 11:43:34Z
+            Console.WriteLine("{0 :U}", System.DateTime.Now);    // 2012年3月27日 3:43:34
+            Console.WriteLine("{0 :Y}", System.DateTime.Now);    // 2012年3月
+
+            Console.WriteLine("{0 :dd}", System.DateTime.Now);   // 27
+            Console.WriteLine("{0 :ddd}", System.DateTime.Now);  // 二
+            Console.WriteLine("{0 :dddd}", System.DateTime.Now); // 星期二
+
+            Console.WriteLine("{0 :f}", System.DateTime.Now);    // 2012年3月27日 11:46
+            Console.WriteLine("{0 :ff}", System.DateTime.Now);   // 18
+            Console.WriteLine("{0 :fff}", System.DateTime.Now);  // 187
+            Console.WriteLine("{0 :ffff}", System.DateTime.Now); // 1875
+            Console.WriteLine("{0 :fffff}", System.DateTime.Now); // 18750
+
+            Console.WriteLine("{0 :gg}", System.DateTime.Now);   // 公元
+            Console.WriteLine("{0 :ggg}", System.DateTime.Now);  // 公元
+            Console.WriteLine("{0 :gggg}", System.DateTime.Now); // 公元
+            Console.WriteLine("{0 :ggggg}", System.DateTime.Now);     // 公元
+            Console.WriteLine("{0 :gggggg}", System.DateTime.Now);    // 公元
+
+            Console.WriteLine("{0 :hh}", System.DateTime.Now);   // 11
+            Console.WriteLine("{0 :HH}", System.DateTime.Now);   // 11
+
+            Console.WriteLine("{0 :mm}", System.DateTime.Now);   // 50
+            Console.WriteLine("{0 :MM}", System.DateTime.Now);   // 03
+
+            Console.WriteLine("{0 :MMM}", System.DateTime.Now);  // 三月
+            Console.WriteLine("{0 :MMMM}", System.DateTime.Now); // 三月
+
+            Console.WriteLine("{0 :ss}", System.DateTime.Now);   // 43
+            Console.WriteLine("{0 :tt}", System.DateTime.Now);   // 上午
+
+            Console.WriteLine("{0 :yy}", System.DateTime.Now);   // 12
+            Console.WriteLine("{0 :yyyy}", System.DateTime.Now); // 2012
+            Console.WriteLine("{0 :zz}", System.DateTime.Now);   // +08
+            Console.WriteLine("{0 :zzz}", System.DateTime.Now);  // +08:00
+            Console.WriteLine("{0 :hh:mm:ss}", System.DateTime.Now);  // 11：43：34
+            Console.WriteLine("{0 :dd/MM/yyyy}", System.DateTime.Now); // 27-03-2012
+
+            // TODO: Implement Functionality Here
+
+            Console.Write("Press any key to continue . . . ");
+
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //獲取當前行號
+            richTextBox1.Text += "當前行號 : " + GetLineNum().ToString() + "\n";
+            richTextBox1.Text += "當前行號 : " + GetLineNum().ToString() + "\n";
+            richTextBox1.Text += "當前行號 : " + GetLineNum().ToString() + "\n";
+            richTextBox1.Text += "當前行號 : " + GetLineNum().ToString() + "\n";
+            richTextBox1.Text += "當前行號 : " + GetLineNum().ToString() + "\n";
+        }
 
+        //獲取當前行號
+        public static int GetLineNum()
+        {
+            System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(1, true);
+            return st.GetFrame(0).GetFileLineNumber();
+        }
+
+        //C#實現小小的日歷 ST
+        void show_calendar()
+        {
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
+            int day = 0;
+            int sum = 0;
+            int i;
+            for (i = 1900; i < year; i++)
+            {
+                if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
+                {
+                    sum += 366;
+                }
+                else
+                {
+                    sum += 365;
+                }
+            }
+
+            switch (month)
+            {
+                case 12:
+                    day = 31;
+                    break;
+                case 11:
+                    day = 30;
+                    break;
+                case 10:
+                    day = 31;
+                    break;
+                case 9:
+                    day = 30;
+                    break;
+                case 8:
+                    day = 31;
+                    break;
+                case 7:
+                    day = 31;
+                    break;
+                case 6:
+                    day = 30;
+                    break;
+                case 5:
+                    day = 31;
+                    break;
+                case 4:
+                    day = 30;
+                    break;
+                case 3:
+                    day = 31;
+                    break;
+                case 2:
+                    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+                        day = 29;
+                    else
+                        day = 28;
+                    break;
+                case 1:
+                    day = 31;
+                    break;
+            }
+
+            int leap;
+            /*先計算某月以前月份的總天數*/
+            switch (month)
+            {
+                case 1: sum += 0; break;
+                case 2: sum += 31; break;
+                case 3: sum += 59; break;
+                case 4: sum += 90; break;
+                case 5: sum += 120; break;
+                case 6: sum += 151; break;
+                case 7: sum += 181; break;
+                case 8: sum += 212; break;
+                case 9: sum += 243; break;
+                case 10: sum += 273; break;
+                case 11: sum += 304; break;
+                case 12: sum += 334; break;
+            }
+            /*判斷是不是閏年*/
+            if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+                leap = 1;
+            else
+                leap = 0;
+            /*如果是閏年且月份大於2,總天數應該加一天*/
+            if (leap == 1 && month > 2)
+                sum++;
+
+            int space = (sum + 1) % 7;
+            Console.WriteLine("日\t一\t二\t三\t四\t五\t六\t");
+            richTextBox1.Text += "日\t一\t二\t三\t四\t五\t六\n";
+            for (i = 1; i <= (space + day); i++)
+            {
+                if (i <= space)
+                {
+                    Console.Write("\t");
+                    richTextBox1.Text += "\t";
+                }
+                else
+                {
+                    Console.Write(i - space + "\t");
+                    richTextBox1.Text += i - space + "\t";
+                }
+                if (i % 7 == 0)
+                {
+                    Console.WriteLine();
+                    richTextBox1.Text += "\n";
+                }
+            }
+            Console.WriteLine();
+            richTextBox1.Text += "\n";
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
+            //C#實現小小的日曆
+            show_calendar();
         }
+        //C#實現小小的日歷 SP
 
         private void button15_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //易經 六十四卦
+            char[] word = new char[64];
+            word = GetChars();
+            int i;
+            for (i = 0; i < 64; i++)
+            {
+                richTextBox1.Text += word[i].ToString() + "    ";
+            }
+        }
 
+        public static char[] GetChars()
+        {
+            List<char> chars = new List<char>();
+            for (int i = 19904; i <= 19967; i++)
+            {
+                chars.Add((char)i);
+            }
+            return chars.ToArray();
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -542,31 +1075,92 @@ namespace vcs_Mix05
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //字串轉拜列
+            richTextBox1.Text += "字串 轉 拜列\n";
+
+            string str = "this is a lion-mouse.";
+
+            richTextBox1.Text += "字串 : " + str + "\n";
+
+            byte[] byte_array = Encoding.ASCII.GetBytes(str);
+
+            int len = byte_array.Length;
+            richTextBox1.Text += "拜列長度 : " + len.ToString() + "\n";
+            richTextBox1.Text += "拜列內容 :\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + (char)byte_array[i] + "\t" + byte_array[i].ToString("X2") + "\n";
+
+            }
 
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //split
+            string str = "this-is-a-lion-mouse";
+            string[] word = str.Split('-');
+            richTextBox1.Text += "原字串: " + str + "\n";
+            richTextBox1.Text += "分割後, len = " + word.Length.ToString() + ", 內容:\n";
+            foreach (string s in word)
+            {
+                richTextBox1.Text += s + "\n";
+            }
 
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //連接符 與 佔位符
+            string str1 = "lion";
+            string str2 = "mouse";
+            string m = String.Format("{0}", str1);   //字符串格式輸出
+            string n = String.Format("{0}", str2);
 
+            richTextBox1.Text += "str = " + m + "-" + n + "\n";     //用“+”連接符
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //動態創建按鈕和事件
 
+            int i = 0;
+            for (i = 0; i < 10; i++)
+            {
+                Button btn = new Button();//創建一個新的按鈕
+                btn.Name = "button" + i.ToString();//這是我用來區別各個按鈕的辦法
+                btn.Text = "button" + i.ToString();
+                btn.Size = new Size(80, 45);
+                Point p = new Point(400, 13 + i * 50);//創建一個坐標,用來給新的按鈕定位
+                btn.Location = p;//把按鈕的位置與剛創建的坐標綁定在一起
+
+                this.richTextBox1.Controls.Add(btn);    //向 某控件 中添加此按鈕
+
+                //動態添加控件的事件,語句:
+                //Control.Command += new CommandEventHandler(this.EventFun);
+                btn.Click += new System.EventHandler(btn_click);//將按鈕的方法綁定到按鈕的單擊事件中b.Click是按鈕的單擊事件
+            }
+        }
+
+        private void btn_click(object sender, System.EventArgs e)
+        {
+            Button b1 = (Button)sender;//將觸發此事件的對象轉換為該Button對象
+
+            richTextBox1.Text += "你按了 " + b1.Name + "\n";
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //使用MyClassLibrary範例
 
+            //使用MyClassLibrary範例
+            MyClass.show();
+            MyClass.show("ims");
         }
 
         private void button25_Click(object sender, EventArgs e)
