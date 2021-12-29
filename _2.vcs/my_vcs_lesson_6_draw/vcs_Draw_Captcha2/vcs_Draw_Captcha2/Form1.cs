@@ -13,7 +13,7 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;  //for TextRenderingHint
 using System.Drawing.Drawing2D; //for LinearGradientBrush
 
-namespace draw_test3_captcha
+namespace vcs_Draw_Captcha2
 {
     public partial class Form1 : Form
     {

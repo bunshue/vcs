@@ -129,6 +129,17 @@ namespace vcs_Draw9_Example
             button48.Location = new Point(x_st + dx * 3, y_st + dy * 9);
             button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
 
+            button50.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button51.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button52.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            button53.Location = new Point(x_st + dx * 3, y_st + dy * 10);
+            button54.Location = new Point(x_st + dx * 4, y_st + dy * 10);
+
+            button55.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button56.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button57.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            button58.Location = new Point(x_st + dx * 3, y_st + dy * 11);
+            button59.Location = new Point(x_st + dx * 4, y_st + dy * 11);
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
 
@@ -7207,6 +7218,129 @@ namespace vcs_Draw9_Example
 
             brush.Dispose();
             font.Dispose();
+        }
+
+        private void button50_Click(object sender, EventArgs e)
+        {
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.Gray);
+
+            DrawSnowMan(g);
+        }
+
+        private void DrawSnowMan(Graphics g)
+        {
+
+            const int MID = 150;
+
+            const int Top = 50;
+
+            this.Text = "simple graphics snowman";
+
+            Font font = new Font("隸書", 17);
+
+            Pen blue = new Pen(Color.Blue);
+
+            Pen yellow = new Pen(Color.Yellow);
+
+            Pen white = new Pen(Color.White);
+
+            Pen red = new Pen(Color.Red);
+
+            Pen black = new Pen(Color.Black);
+
+            Brush brWhite = white.Brush;
+
+            Brush brBlack = black.Brush;
+
+            Brush brRed = red.Brush;
+
+            g.FillRectangle(brRed, 20, 30, 30, 120);
+
+            g.FillRectangle(brRed, 250, 30, 30, 120);
+
+            g.FillRectangle(brRed, 100, 0, 100, 25);
+
+            StringFormat format = new StringFormat();
+
+            format.FormatFlags = StringFormatFlags.DirectionVertical;
+
+            g.DrawString("三杯祝福歌", font, brBlack, 250, 30, format);
+
+            g.DrawString("一曲迎春調", font, brBlack, 20, 30, format);
+
+            g.DrawString("迎春祝福", font, brBlack, 100, 0);
+
+            g.DrawRectangle(blue, 0, 175, 300, 50);　 //sky
+
+            g.DrawEllipse(yellow, -40, -40, 80, 80); //sun
+
+            g.FillEllipse(brWhite, MID - 20, Top, 40, 40); //head
+
+            g.FillEllipse(brWhite, MID - 35, Top + 35, 70, 50); //top
+
+            g.FillEllipse(brWhite, MID - 50, Top + 80, 100, 60); //bot
+
+            g.FillEllipse(brBlack, MID - 10, Top + 10, 5, 5); //l.eye
+
+            g.FillEllipse(brBlack, MID + 5, Top + 10, 5, 5);//r.eye
+
+            g.DrawArc(black, MID - 10, Top + 20, 20, 10, -190, -160);//(:
+
+            //arms
+
+            g.DrawLine(black, MID - 25, Top + 60, Top - 50, MID + 40);
+
+            g.DrawLine(black, MID + 25, Top + 60, MID + 55, Top + 60);
+
+            g.DrawLine(black, MID - 20, Top + 5, MID + 20, Top + 5);//hat,brim,top
+
+            g.FillRectangle(brBlack, MID - 15, Top - 20, 30, 25);
+        }
+
+        private void button51_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button52_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button53_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button54_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button55_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button56_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button57_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button58_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button59_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

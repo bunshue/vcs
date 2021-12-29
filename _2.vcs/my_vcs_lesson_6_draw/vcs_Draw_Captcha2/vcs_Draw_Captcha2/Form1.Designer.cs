@@ -1,4 +1,4 @@
-﻿namespace draw_test3_captcha
+﻿namespace vcs_Draw_Captcha2
 {
     partial class Form1
     {

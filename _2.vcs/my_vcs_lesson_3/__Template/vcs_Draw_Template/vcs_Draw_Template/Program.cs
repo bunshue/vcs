@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace draw_test3_captcha
+namespace vcs_Draw_Template
 {
     static class Program
     {

@@ -321,17 +321,84 @@ namespace vcs_ReadWrite_XML1B
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //建立XML檔案
+            //建立xml檔案
 
+            XmlDocument doc = new XmlDocument();
+            XmlElement name = doc.CreateElement("Name");
+            name.InnerText = "Patrick Hines";
+            XmlElement phone1 = doc.CreateElement("Phone");
+            phone1.SetAttribute("Type", "Home");
+            phone1.InnerText = "206-555-0144";
+            XmlElement phone2 = doc.CreateElement("Phone");
+            phone2.SetAttribute("Type", "Work");
+            phone2.InnerText = "425-555-0145";
+            XmlElement street1 = doc.CreateElement("Street1");
+            street1.InnerText = "123 Main St";
+            XmlElement city = doc.CreateElement("City");
+            city.InnerText = "Mercer Island";
+            XmlElement state = doc.CreateElement("State");
+            state.InnerText = "WA";
+            XmlElement postal = doc.CreateElement("Postal");
+            postal.InnerText = "68042";
+            XmlElement address = doc.CreateElement("Address");
+            address.AppendChild(street1);
+            address.AppendChild(city);
+            address.AppendChild(state);
+            address.AppendChild(postal);
+            XmlElement contact = doc.CreateElement("Contact");
+            contact.AppendChild(name);
+            contact.AppendChild(phone1);
+            contact.AppendChild(phone2);
+            contact.AppendChild(address);
+            XmlElement contacts = doc.CreateElement("Contacts");
+            contacts.AppendChild(contact);
+            doc.AppendChild(contacts);
+
+            doc.Save("aaaaa.xml");
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //讀取XML檔案
+            string filename = "aaaaa.xml";
+
+            XmlDocument booksFromFile = new XmlDocument();
+            booksFromFile.Load(filename);
 
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //新增XML節點
+            addXmlns();
+        }
 
+        public void addXmlns()
+        {
+            string xml = @"<?xml version=""1.0""?>
+                    <kml>
+                    <Document>
+                    <Placemark>
+                    </Placemark>
+                    </Document>
+                    </kml>";
+
+            var xmldoc = new XmlDocument();
+
+            xmldoc.LoadXml(xml);
+
+            xmldoc.DocumentElement.SetAttribute("xmlns", "http://www.opengis.net/kml/2.2");
+            xmldoc.DocumentElement.SetAttribute("xmlns:gx", "http://www.google.com/kml/ext/2.2");
+            xmldoc.DocumentElement.SetAttribute("xmlns:kml", "http://www.opengis.net/kml/2.2");
+            xmldoc.DocumentElement.SetAttribute("xmlns:atom", "http://www.w3.org/2005/Atom");
+            xmldoc.DocumentElement.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+
+            string message;
+            message = xmldoc.InnerXml;
+
+            Console.WriteLine(message); // shows the updated xml
+            richTextBox1.Text += message + "\n";
         }
 
         private void button23_Click(object sender, EventArgs e)
