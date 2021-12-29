@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+using vcs_MyClassLibrary;   //使用MyClassLibrary範例
+
+namespace vcs_MyClassLibraryDemo
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //使用MyClassLibrary範例
+            MyClass.show();
+            MyClass.show("ims");
+
+        }
+    }
+}

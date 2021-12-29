@@ -261,17 +261,203 @@ namespace vcs_ReadWrite_XML2
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //讀取XML
+            //C#讀取XML中元素和屬性值的實現代碼
 
+            string filename = @"C:\______test_files\__RW\_xml\school.xml";
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename);
+
+            //學校  使用xpath表達式選擇文檔中所有的schoo的子節點
+            XmlNodeList schoolNodeList = doc.SelectNodes("/school");
+            if (schoolNodeList != null)
+            {
+                foreach (XmlNode schoolNode in schoolNodeList)
+                {
+                    //通過Attributes獲得屬性名為name的屬性
+                    string schoolName = schoolNode.Attributes["name"].Value;
+                    richTextBox1.Text += "學校：" + schoolName + "\n";
+
+                    #region 年級
+                    //通過SelectSingleNode方法獲得當前節點下的grades子節點
+                    XmlNode gradesNode = schoolNode.SelectSingleNode("grades");
+                    if (gradesNode != null)
+                    {
+                        //通過ChildNodes屬性獲得grades的所有一級子節點
+                        XmlNodeList gradeNodeList = gradesNode.ChildNodes;
+                        if (gradeNodeList != null)
+                        {
+                            foreach (XmlNode gradeNode in gradeNodeList)
+                            {
+                                richTextBox1.Text += "\t年級：" + gradeNode.Attributes["name"].Value + "   ID:" + gradeNode.Attributes["id"].Value + "\n";
+
+                                #region 班級
+                                //通過SelectSingleNode方法獲得當前節點下的classes子節點
+                                XmlNode classesNode = gradeNode.SelectSingleNode("classes");
+                                if (classesNode != null)
+                                {
+                                    //通過ChildNodes屬性獲得classes的所有一級子節點
+                                    XmlNodeList classNodeList = classesNode.ChildNodes;
+                                    if (classNodeList != null)
+                                    {
+                                        foreach (XmlNode classNode in classNodeList)
+                                        {
+                                            richTextBox1.Text += "  班級：" + classNode.Attributes["name"].Value + "    ID:" + classNode.Attributes["id"].Value + "\n";
+
+                                            #region 老師
+                                            XmlNode teachersNode = classNode.SelectSingleNode("teachers");
+                                            if (teachersNode != null)
+                                            {
+                                                XmlNodeList teacherNodeList = teachersNode.ChildNodes;
+                                                if (teacherNodeList != null)
+                                                {
+                                                    foreach (XmlNode teacherNode in teacherNodeList)
+                                                    {
+                                                        XmlNode teacherNameNode = teacherNode.FirstChild;
+                                                        XmlCDataSection cdate = (XmlCDataSection)teacherNameNode.FirstChild;
+                                                        if (cdate != null)
+                                                        {
+                                                            richTextBox1.Text += "   " + teacherNode.Attributes["teach"].Value + "老師：" + cdate.InnerText.Trim() + "\n";
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            #endregion  老師
+
+                                            #region 所有學生
+                                            XmlNode studentsNode = classNode.SelectSingleNode("students");
+                                            if (studentsNode != null)
+                                            {
+                                                XmlNodeList studentNodeList = studentsNode.ChildNodes;
+                                                if (studentNodeList != null)
+                                                {
+                                                    foreach (XmlNode studentNode in studentNodeList)
+                                                    {
+                                                        richTextBox1.Text += "    學生：" + studentNode.Attributes["id"].Value + "\n";
+
+                                                        //獲取student的屬性值name和文本
+                                                        XmlNode stu1 = studentNode.FirstChild;
+                                                        XmlElement xe1 = (XmlElement)stu1;
+                                                        if (xe1 != null)
+                                                        {
+                                                            richTextBox1.Text += "        姓名：" + xe1.InnerText.Trim() + "\n";
+                                                        }
+                                                        //獲取student的屬性值sex和文本
+                                                        XmlNode stu2 = studentNode.LastChild;
+                                                        XmlElement xe2 = (XmlElement)stu2;
+                                                        if (xe2 != null)
+                                                        {
+                                                            richTextBox1.Text += "        姓別：" + xe2.InnerText.Trim() + "\n";
+                                                        }
+                                                    }
+                                                }
+                                            #endregion 所有學生
+                                            }
+                                        }
+                                    }
+                                #endregion 班級
+                                }
+                            }
+                        }
+                    #endregion  年級
+                    }
+                }
+            }
         }
 
+        //XML To TreeView ST
+        //讀取XML文檔 →獲取XML根元素→ 遞歸添加根元素的子元素(因為樹形的結構和XML很像)
         private void button21_Click(object sender, EventArgs e)
         {
+            //讀取XML至TreeView
+            string filename = @"C:\______test_files\__RW\_xml\school.xml";
 
+            //讀取Xml文件   this.txt_XmlPath.Text是文件路徑       
+            XDocument xmlfile = XDocument.Load(filename);
+
+            //取根元素
+            XElement rootElement = xmlfile.Root;
+
+            //給第TreeView 添加根節點 
+            TreeNode node = this.treeView1.Nodes.Add(rootElement.Name.ToString());
+
+            RecursionAddNode(node.Nodes, rootElement);
         }
+
+        private void RecursionAddNode(TreeNodeCollection nodes, XElement xElement)
+        {
+            //獲取嵌套的元素
+            IEnumerable<XElement> elements = xElement.Elements();
+            //遞歸添加
+            foreach (XElement element in elements)
+            {
+                TreeNode node = nodes.Add(element.Name.ToString() + ":" + GetAttributes(element));
+                RecursionAddNode(node.Nodes, element);
+            }
+        }
+
+        //如果要獲取屬性 就要再添加一個方法GetAttributes(element)
+        private static string GetAttributes(XElement xElement)
+        {
+            IEnumerable<XAttribute> attributes = xElement.Attributes();
+
+            foreach (XAttribute attribute in attributes)
+            {
+                return attribute.Name + "=" + attribute.Value;
+            }
+            return null;
+        }
+        //XML To TreeView SP
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //讀取XML至TreeView b
 
+            string filename = @"C:\______test_files\__RW\_xml\student.xml";
+
+            //使用xDocument来读取xml文件
+            XDocument document = XDocument.Load(filename);
+            //取出根节点
+            XElement rootElement = document.Root;
+            //将xml文件的根元素加载到treeview的根节点上
+            TreeNode rootNode = treeView1.Nodes.Add(rootElement.Name.ToString());
+            //用递归加载XML到TreeView中
+            LoadxmlToTreeView(rootElement, rootNode.Nodes);
+        }
+
+        private void LoadxmlToTreeView(XElement rootElement, TreeNodeCollection treeNodeCollection)
+        {
+            foreach (XElement x in rootElement.Elements())
+            {
+                IEnumerable<XElement> elements = x.Elements();
+                //判断该元素是否是叶子元素，即下面是否还有子元素
+                //如果有子元素则只添加元素名称，如果是叶子元素则添加元素名称和元素内容
+                if (ReturnNumber(elements) == 0)
+                {
+                    TreeNode xnode = treeNodeCollection.Add(x.Name.ToString()).Nodes.Add(x.Value.ToString());
+                }
+                else
+                {
+                    TreeNode xnode = treeNodeCollection.Add(x.Name.ToString());
+                    LoadxmlToTreeView(x, xnode.Nodes);
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// 返回传入的集合中元素的个数
+        /// </summary>
+        /// <param name="xElements"></param>
+        /// <returns></returns>
+        private int ReturnNumber(IEnumerable<XElement> xElements)
+        {
+            int count = 0;
+            foreach (var x in xElements)
+            {
+                count++;
+            }
+            return count;
         }
 
         private void button23_Click(object sender, EventArgs e)

@@ -18,7 +18,6 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;  //for RegistryKey
 
-using vcs_MyClassLibrary;   //使用MyClassLibrary範例
 
 namespace vcs_Mix05
 {
@@ -1156,11 +1155,6 @@ namespace vcs_Mix05
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //使用MyClassLibrary範例
-
-            //使用MyClassLibrary範例
-            MyClass.show();
-            MyClass.show("ims");
         }
 
         private void button25_Click(object sender, EventArgs e)

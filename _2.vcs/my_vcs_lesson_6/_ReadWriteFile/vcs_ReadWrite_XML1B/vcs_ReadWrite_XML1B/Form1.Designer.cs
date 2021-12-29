@@ -99,6 +99,7 @@
             this.button01.Name = "button01";
             this.button01.Size = new System.Drawing.Size(160, 60);
             this.button01.TabIndex = 2;
+            this.button01.Text = "讀取XML檔案";
             this.button01.UseVisualStyleBackColor = true;
             this.button01.Click += new System.EventHandler(this.button01_Click);
             // 
@@ -119,6 +120,7 @@
             this.button00.Name = "button00";
             this.button00.Size = new System.Drawing.Size(160, 60);
             this.button00.TabIndex = 4;
+            this.button00.Text = "建立XML檔案";
             this.button00.UseVisualStyleBackColor = true;
             this.button00.Click += new System.EventHandler(this.button00_Click);
             // 
@@ -177,6 +179,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 60);
             this.button10.TabIndex = 4;
+            this.button10.Text = "建立XML檔案";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -187,6 +190,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 60);
             this.button11.TabIndex = 2;
+            this.button11.Text = "新增XML資料";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -197,6 +201,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(160, 60);
             this.button12.TabIndex = 3;
+            this.button12.Text = "修改資料";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -217,6 +222,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 60);
             this.button13.TabIndex = 5;
+            this.button13.Text = "刪除資料";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
