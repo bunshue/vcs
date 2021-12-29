@@ -53,6 +53,7 @@
             this.button21 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button15
@@ -257,7 +258,9 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(160, 70);
             this.button17.TabIndex = 35;
+            this.button17.Text = "用C#獲取硬盤序列號,CPU序列號,網卡MAC地址";
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button18
             // 
@@ -266,7 +269,9 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(160, 70);
             this.button18.TabIndex = 36;
+            this.button18.Text = "獲得cpu序列號和硬盤序列號";
             this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // button19
             // 
@@ -275,7 +280,9 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(160, 70);
             this.button19.TabIndex = 37;
+            this.button19.Text = "取得設備網卡的MAC地址";
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // button20
             // 
@@ -284,7 +291,9 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(160, 70);
             this.button20.TabIndex = 38;
+            this.button20.Text = "取得設備硬盤的卷標號";
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // button21
             // 
@@ -293,7 +302,9 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(160, 70);
             this.button21.TabIndex = 39;
+            this.button21.Text = "獲得CPU的編號";
             this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
             // button22
             // 
@@ -303,6 +314,7 @@
             this.button22.Size = new System.Drawing.Size(160, 70);
             this.button22.TabIndex = 40;
             this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
             // button23
             // 
@@ -312,12 +324,24 @@
             this.button23.Size = new System.Drawing.Size(160, 70);
             this.button23.TabIndex = 41;
             this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(1091, 673);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(71, 35);
+            this.bt_clear.TabIndex = 42;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1183, 730);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button23);
             this.Controls.Add(this.button22);
             this.Controls.Add(this.button21);
@@ -377,6 +401,7 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

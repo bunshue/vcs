@@ -15,6 +15,7 @@ using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
 
+using System.Drawing.Text;  //for InstalledFontCollection
 using System.Runtime.InteropServices;
 using Microsoft.Win32;  //for RegistryKey
 
@@ -1050,7 +1051,27 @@ namespace vcs_Mix05
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //生成隨機字符串
+            string random_str = RandomStringGenerator.GetRandomString();
+            richTextBox1.Text += random_str + "\n";
+        }
 
+        /// <summary> 
+        /// 生成隨機字符串
+        /// </summary> 
+        private class RandomStringGenerator
+        {
+            static readonly Random r = new Random();
+            const string _chars = "0123456789";
+            public static string GetRandomString()
+            {
+                char[] buffer = new char[5];
+                for (int i = 0; i < 5; i++)
+                {
+                    buffer[i] = _chars[r.Next(_chars.Length)];
+                }
+                return new string(buffer);
+            }
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -1155,12 +1176,23 @@ namespace vcs_Mix05
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //獲取系統字體
+            InstalledFontCollection fc = new InstalledFontCollection();
+            foreach (FontFamily font in fc.Families)
+            {
+                richTextBox1.Text += "get font : " + font.Name + "\n";
+            }
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
+            //獲取系統預定義顏色
+            Array colors = System.Enum.GetValues(typeof(KnownColor));
+            foreach (object colorName in colors)
+            {
+                richTextBox1.Text += "get color : " + colorName.ToString() + "\n";
+            }
         }
 
         private void button26_Click(object sender, EventArgs e)

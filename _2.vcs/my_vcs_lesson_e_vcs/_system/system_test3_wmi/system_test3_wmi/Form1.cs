@@ -68,6 +68,13 @@ namespace system_test3_wmi
             button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -732,6 +739,144 @@ namespace system_test3_wmi
             addr = new IPAddress(Dns.GetHostByName(Dns.GetHostName()).AddressList[0].Address);
             return addr.ToString();
         }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //用C#獲取硬盤序列號,CPU序列號,網卡MAC地址
+            string[] str = new string[3];
+            ManagementClass mcCpu = new ManagementClass("win32_Processor");
+            ManagementObjectCollection mocCpu = mcCpu.GetInstances();
+            foreach (ManagementObject m in mocCpu)
+            {
+                str[0] = m["ProcessorId"].ToString();
+            }
+
+            ManagementClass mcHD = new ManagementClass("win32_logicaldisk");
+            ManagementObjectCollection mocHD = mcHD.GetInstances();
+            foreach (ManagementObject m in mocHD)
+            {
+                if (m["DeviceID"].ToString() == "C:")
+                {
+                    str[1] = m["VolumeSerialNumber"].ToString();
+                    break;
+                }
+            }
+
+            ManagementClass mcMAC = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection mocMAC = mcMAC.GetInstances();
+            foreach (ManagementObject m in mocMAC)
+            {
+                if ((bool)m["IPEnabled"])
+                {
+                    str[2] = m["MacAddress"].ToString();
+                    break;
+                }
+            }
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //獲得cpu序列號和硬盤序列號
+            string cpu_serial = string.Empty;
+            string hdd_serial = string.Empty;
+            cpu_serial = GetDiskVolumeSerialNumber();
+            hdd_serial = getCpu();
+            richTextBox1.Text += "cpu序列號 : " + cpu_serial + "\n";
+            richTextBox1.Text += "硬盤序列號 : " + hdd_serial + "\n";
+        }
+
+        //獲得CPU的序列號
+        public string getCpu()
+        {
+            string strCpu = null;
+            ManagementClass myCpu = new ManagementClass("win32_Processor");
+            ManagementObjectCollection myCpuConnection = myCpu.GetInstances();
+            foreach (ManagementObject myObject in myCpuConnection)
+            {
+                strCpu = myObject.Properties["Processorid"].Value.ToString();
+                break;
+            }
+            return strCpu;
+        }
+
+        //獲得硬盤的序列號
+        public string GetDiskVolumeSerialNumber()
+        {
+            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObject disk = new ManagementObject("win32_logicaldisk.deviceid=\"c:\"");
+            disk.Get();
+            return disk.GetPropertyValue("VolumeSerialNumber").ToString();
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            //取得設備網卡的MAC地址
+            richTextBox1.Text += "取得設備網卡的MAC地址 : " + GetNetCardMacAddress() + "\n";
+        }
+
+        ///
+        /// 取得設備網卡的MAC地址
+        ///
+        public string GetNetCardMacAddress()
+        {
+            ManagementClass mc;
+            ManagementObjectCollection moc;
+
+            mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            moc = mc.GetInstances();
+            string str = "";
+            foreach (ManagementObject mo in moc)
+            {
+                if ((bool)mo["IPEnabled"] == true)
+                    str = mo["MacAddress"].ToString();
+            }
+            return str;
+        }
+
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //取得設備硬盤的卷標號
+            richTextBox1.Text += "取得設備硬盤的卷標號 : " + GetDiskVolumeSerialNumber2() + "\n";
+        }
+
+        ///
+        /// 取得設備硬盤的卷標號
+        ///
+        ///
+        public string GetDiskVolumeSerialNumber2()
+        {
+            ManagementClass mc;
+            ManagementObject disk;
+            mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            disk = new ManagementObject("win32_logicaldisk.deviceid=\"c:\"");
+            disk.Get();
+            return disk.GetPropertyValue("VolumeSerialNumber").ToString();
+        }
+
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //獲得CPU的編號
+            System.Management.ManagementClass mc = new ManagementClass("win32_processor");
+            ManagementObjectCollection moc = mc.GetInstances();
+            foreach (ManagementObject mo in moc)
+            {
+                MessageBox.Show(mo["processorid"].ToString());
+            }
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 
     public class OSInfoMation

@@ -34,13 +34,12 @@
 
 
 
-
-
 //C#利用smtp服務器發送郵件
 
 在命名空間using System.Net.Mail中提供方法根據指定的smtp服務器來發送郵件。下面說說如何實現：
 
-　　1、首先要發送郵件，需要有一個郵箱帳號，比如網易郵箱、新郎郵箱、qq郵箱等，我以網易的163郵箱為例。然後我們需要知道163郵箱的smtp服務器地址：smtp.163.com。
+　　1、首先要發送郵件，需要有一個郵箱帳號，比如網易郵箱、新郎郵箱、qq郵箱等，我以網易的163郵箱為例。
+然後我們需要知道163郵箱的smtp服務器地址：smtp.163.com。
 一般常用的Smtp服務器地址為：
 　　  網易126：smtp.126.com
 　　  網易163：smtp.163.com
@@ -205,56 +204,6 @@ This is F2.1
 This is F1.1
  
     
-
-
-
-c#winform獲得硬盤序列號和cpu序列號
-
-
-添加引用System.Management;
-引用命名空間       using System.Management;
- public string GetDiskVolumeSerialNumber()
-        {
- 
-            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObject disk = new ManagementObject("win32_logicaldisk.deviceid=\"c:\"");
-            disk.Get();
-            return disk.GetPropertyValue("VolumeSerialNumber").ToString();
-        }
-        //獲得CPU的序列號
-        public string getCpu()
-        {
-            string strCpu = null;
-            ManagementClass myCpu = new ManagementClass("win32_Processor");
-            ManagementObjectCollection myCpuConnection = myCpu.GetInstances();
-            foreach (ManagementObject myObject in myCpuConnection)
-            {
-                strCpu = myObject.Properties["Processorid"].Value.ToString();
-                break;
-            }
-            return strCpu;
-        }
-
-
-
-C#中獲取當前系統中安裝的所有字體及預定義顏色
-需要引用命名空間using System.Drawing.Text;
-
-//獲取系統字體：
-InstalledFontCollection fc = new InstalledFontCollection();
-   foreach( FontFamily font in fc.Families ){
-    ListItem tmp = new ListItem( font.Name , font.Name );
-    this.styleFont.Items.Add( tmp );
-}
-//獲取系統預定義顏色：
-Array colors = System.Enum.GetValues( typeof(KnownColor) );
-   foreach( object colorName in colors ){
-    ListItem tmp = new ListItem( colorName.ToString() , colorName.ToString());
-    this.styleColor.Items.Add( tmp );
-}
-
-
-
         private void button2_Click(object sender, EventArgs e)
         {
             //關閉計算機
@@ -1003,53 +952,6 @@ private string GetContentFromUrll(string _requestUrl)
         return _StrResponse;
     }
 
-
-
-// 用C#獲取硬盤序列號,CPU序列號,網卡MAC地址的源碼
- 
- 
-privatestring[]GetMoc()
-{
-string[]str=newstring[3];
-ManagementClassmcCpu=newManagementClass("win32_Processor");
-ManagementObjectCollectionmocCpu=mcCpu.GetInstances();
-foreach(ManagementObjectminmocCpu)
-{
-str[0]=m["ProcessorId"].ToString();
-}
-
-ManagementClassmcHD=newManagementClass("win32_logicaldisk");
-ManagementObjectCollectionmocHD=mcHD.GetInstances();
-foreach(ManagementObjectminmocHD)
-{
-if(m["DeviceID"].ToString()=="C:")
-{
-str[1]=m["VolumeSerialNumber"].ToString();
-break;
-}
-}
-
-ManagementClassmcMAC=newManagementClass("Win32_NetworkAdapterConfiguration");
-ManagementObjectCollectionmocMAC=mcMAC.GetInstances();
-foreach(ManagementObjectminmocMAC)
-{
-if((bool)m["IPEnabled"])
-{
-str[2]=m["MacAddress"].ToString();
-break;
-}
-}
-
-returnstr;
-}
-
-
-
-
- 
- 
- 
- 
  
  
  
@@ -1271,116 +1173,6 @@ private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
 
 
 
-　　　　private ManagementClass mc;
-　　　　private ManagementObjectCollection moc;
-　　　　private ManagementObject disk;
-
-　　　　///
-　　　　/// 取得設備網卡的MAC地址
-　　　　///
-　　　　public string GetNetCardMacAddress( )
-　　　　{
-　　　　　　mc = new ManagementClass( "Win32_NetworkAdapterConfiguration" );
-　　　　　　moc = mc.GetInstances( );
-　　　　　　string str = "";
-　　　　　　foreach( ManagementObject mo in moc )
-　　　　　　{
-　　　　　　　　if( ( bool )mo["IPEnabled"] == true )
-　　　　　　　　str = mo["MacAddress"].ToString( );
-　　　　　　}
-　　　　　　return str;
-　　　　}
-
-　　　　///
-　　　　/// 取得設備硬盤的卷標號
-　　　　///
-　　　　///
-　　　　public string GetDiskVolumeSerialNumber( )
-　　　　{
-　　　　　　mc = new ManagementClass( "Win32_NetworkAdapterConfiguration" );
-　　　　　　disk = new ManagementObject( "win32_logicaldisk.deviceid=\"c:\"" );
-　　　　　　disk.Get( );
-　　　　　　return disk.GetPropertyValue( "VolumeSerialNumber" ).ToString( );
-　　　　}
-
-
-
-就可獲得CPU的編號。
-
-System.Management.ManagementClass mc = new ManagementClass("win32_processor");
-ManagementObjectCollection moc = mc.GetInstances();
-foreach (ManagementObject mo in moc)
-{
-MessageBox.Show(mo["processorid"].ToString());
-}
-
-
-//C#獲取本機的MAC地址\序列號\硬盤序列號
-
-1  /// <summary>
- 2         /// 顯示MAC地址
- 3         /// </summary>
- 4         /// <returns></returns>
- 5         private string GetMAC()
- 6         {
- 7             string mac = "本機的MAC地址:";
- 8             using (ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration"))
- 9             {
-10                 ManagementObjectCollection moc = mc.GetInstances();
-11                 foreach (ManagementObject mo in moc)
-12                 {
-13                     if ((bool)mo["IPEnabled"])
-14                     {
-15                         string[] tmpMac = mo["MacAddress"].ToString().Split(':');
-16                         for (int i = 0; i < tmpMac.Length; i++)
-17                         {
-18                             mac += tmpMac[i];
-19                         }
-20                     }
-21                 }
-22             }
-23             return mac + "\r\n";
-24         }
-25 
-26         /// <summary>
-27         /// 獲取本機CPU序列號  
-28         /// </summary>
-29         /// <returns></returns>
-30         private string GetCPUID()
-31         {
-32             string CPUID = "本機的CPU序列號:";
-33             using (ManagementClass mc = new ManagementClass("Win32_Processor"))
-34             {
-35                 ManagementObjectCollection moc = mc.GetInstances();
-36                 foreach (ManagementObject item in moc)
-37                 {
-38                     CPUID += item["ProcessorId"].ToString().Trim();
-39                 }
-40             }
-41             return CPUID + "\r\n";
-42         }
-43 
-44         /// <summary>
-45         /// 獲取本機硬盤序列號
-46         /// </summary>
-47         /// <returns></returns>
-48         private string GetHardID()
-49         {
-50             string HardID = "本機的CPU序列號:";
-51             using (ManagementClass mc = new ManagementClass("Win32_DiskDrive"))
-52             {
-53                 ManagementObjectCollection moc = mc.GetInstances();
-54                 foreach (ManagementObject item in moc)
-55                 {
-56                     HardID += item["Model"].ToString().Trim();
-57                 }
-58             }
-59             return HardID + "\r\n";
-60 
-
-
-
-
 網站的標識圖片怎麼修改？
 
 
@@ -1450,32 +1242,6 @@ string str7=AppDomain.CurrentDomain.SetupInformation.ApplicationBase;//獲取或
 獲取啟動了應用程序的可執行文件的路徑。效果和2、5一樣。只是5返回的字符串後面多了一個"/"而已
 7. System.Windows.Forms.Application.ExecutablePath
 獲取啟動了應用程序的可執行文件的路徑及文件名，效果和1一樣。
-
-
-
-            //生成隨機字符串
-            string random_str = RandomStringGenerator.GetRandomString();
-            richTextBox1.Text += random_str + "\n";
-
-
-        /// <summary> 
-        /// 生成隨機字符串
-        /// </summary> 
-        private class RandomStringGenerator
-        {
-            static readonly Random r = new Random();
-            const string _chars = "0123456789";
-            public static string GetRandomString()
-            {
-                char[] buffer = new char[5];
-                for (int i = 0; i < 5; i++)
-                {
-                    buffer[i] = _chars[r.Next(_chars.Length)];
-                }
-                return new string(buffer);
-            }
-        }
-
 
 
 
@@ -1549,20 +1315,6 @@ abstract用來修飾抽象類，表示該類只能作為父類被用於繼承，
 
 sealed用來修飾類為密封類，阻止該類被繼承。同時對一個類作abstract和sealed的修飾是沒有意義的，也是被禁止的。
 
-       
-
-private void AboutBox_Load(object sender, EventArgs e)
-{
-　AssemblyInfoClass myAssembly = new AssemblyInfoClass();
-　labelProductName.Text = "產品名稱：" + myAssembly.Product;
-　labelVersion.Text = "版本：" + myAssembly.Version;
-　labelCopyright.Text = "版權宣告：" + myAssembly.Copyright;
-　labelCompanyName.Text = "公司名稱：" + myAssembly.Company;
-　textBoxDescription.Text = "細部描述：" +
-　myAssembly.Description;
-}
-
-
 
 
 通過C#還可以指定當前線程的運行在哪個CPU上。
@@ -1623,22 +1375,6 @@ Process.ProcessorAffinity 設置當前CPU的屏蔽字，0x0001表示選用一號
 
 
 
-
-
-
-
-
-
-使用C# 讀取XML
-代碼如下：
-
-XmlReader xmlRead =new XmlTextReader ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
-    DataSet ds=new DataSet ();
-    //ds.ReadXml ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
-    ds.ReadXml (xmlRead);
-
-this.DataGrid1 .DataSource =ds;
-this.DataGrid1 .DataBind ();
 
 
 
@@ -1733,242 +1469,6 @@ private string TextDecrypt(char[] data, string secretKey)
 
 
 
-//C#獲取機器碼
-
-1 /// <summary>   
- 2     /// 機器碼   
- 3     /// </summary>   
- 4    public class MachineCode   
- 5     {   
- 6         ///   <summary>    
- 7         ///   獲取cpu序列號        
- 8         ///   </summary>    
- 9         ///   <returns> string </returns>    
-10         public string GetCpuInfo()   
-11         {   
-12             string cpuInfo = " ";   
-13             using (ManagementClass cimobject = new ManagementClass("Win32_Processor"))   
-14             {   
-15                 ManagementObjectCollection moc = cimobject.GetInstances();   
-16   
-17                 foreach (ManagementObject mo in moc)   
-18                 {   
-19                     cpuInfo = mo.Properties["ProcessorId"].Value.ToString();   
-20                     mo.Dispose();   
-21                 }   
-22             }   
-23             return cpuInfo.ToString();   
-24         }   
-25   
-
-
-
-C#如何取硬件標志
-
-  //取機器名 
-  public string GetHostName()
-  {
-   return System.Net.Dns.GetHostName(); 
-  }
-
-  //取CPU編號
-  public String GetCpuID() 
-  {
-   try
-   {
-    ManagementClass mc = new ManagementClass("Win32_Processor");
-    ManagementObjectCollection moc = mc.GetInstances();
-
-    String strCpuID = null ;
-    foreach( ManagementObject mo in moc ) 
-    {
-     strCpuID = mo.Properties["ProcessorId"].Value.ToString();
-     break; 
-    }
-    return strCpuID;
-   }
-   catch
-   {
-    return "";
-   }
-
-  }//end method
-
-  //取第一塊硬盤編號
-  public String GetHardDiskID() 
-  {
-   try
-   {
-    ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * FROM Win32_PhysicalMedia");
-    String strHardDiskID = null ;
-    foreach(ManagementObject mo in searcher.Get()) 
-    {    
-     strHardDiskID = mo["SerialNumber"].ToString().Trim();
-     break;          
-    }
-    return strHardDiskID ;
-   }
-   catch
-   {
-    return "";
-   }
-  }//end 
-
-
-用C#和WMI獲取邏輯驅動器詳細信息
-	
-	SelectQuery selectQuery = new SelectQuery("win32_logicaldisk");
-	
-	　　或者使用wql查詢來創建查詢類的實例，代碼如下：
-	
-	SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-	
-	　　或者只獲取類的部分屬性，代碼如下：
-	
-	SelectQuery selectQuery = new SelectQuery("select Name,DriveType from win32_logicaldisk");
-	
-	
-	SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-	
-	ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
-	　　int i=0;
-	foreach (ManagementObject disk in searcher.Get()) {
-	　//獲取驅動器盤符
-	　listView1.Items.Add(disk["Name"].ToString());
-	}
-
-
-
-
-
-
-
-
-C# 獲得主板參數程序代碼
-public static void Mainboard(out string[] 制造商, out string[] 型號)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-        制造商 = new string[searcher.Get().Count];
-        型號 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
-                型號[i] = share.GetPropertyValue("Product").ToString();
-                i ;
-        }
-} 
-
-
-C# 獲得主板序列號程序代碼
-
-C# 獲得主板序列號程序代碼如下：
-public static void MainboardSerialNumber(out string[] 序列號)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
-        序列號 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                序列號[i] = share.GetPropertyValue("SerialNumber").ToString();
-                i ;
-        }
-}
-
-
-C# 獲得網卡參數程序代碼
-
-C# 獲得網卡參數程序代碼如下：
-public static void NetworkAdapter(out string[] 制造商, out string[] MAC地址)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
-        制造商 = new string[searcher.Get().Count];
-        MAC地址 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                try
-                {
-                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
-                        MAC地址[i] = share.GetPropertyValue("MACAddress").ToString();
-                }
-                        catch (System.Exception er)
-                {
-                }
-                i ;
-        }
-} 
-
-
-
-C# 獲得硬盤參數程序代碼
-public static void HardDisk(out string[] 制造商, out string[] 型號, out string[] 序列號)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-        制造商 = new string[searcher.Get().Count];
-        型號 = new string[searcher.Get().Count];
-        序列號 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                try
-                        {
-                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
-                        型號[i] = share.GetPropertyValue("Model").ToString();
-                        序列號[i] = share.GetPropertyValue("Signature").ToString();
-                }
-                catch (System.Exception er)
-                {
-                }
-                i ;
-        }
-} 
-
-
-
-
-
-C#讀取U盤序列號
-
-	
-	private List<string> _serialNumber = new List<string>();
-	
-	/// <summary>
-	/// 調用這個函數將本機所有U盤序列號存儲到_serialNumber中
-	/// </summary>
-	private void matchDriveLetterWithSerial()
-	{
-	    string[] diskArray;
-	    string driveNumber;
-	    var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDiskToPartition");
-	    foreach (ManagementObject dm in searcher.Get())
-	    {
-	        getValueInQuotes(dm["Dependent"].ToString());
-	        diskArray = getValueInQuotes(dm["Antecedent"].ToString()).Split(,);
-	        driveNumber = diskArray[0].Remove(0, 6).Trim();
-	        var disks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-	        foreach (ManagementObject disk in disks.Get())
-	        {
-	            if (disk["Name"].ToString() == ("\\.\PHYSICALDRIVE" + driveNumber) & disk["InterfaceType"].ToString() == "USB")
-	            {
-	                _serialNumber.Add(parseSerialFromDeviceID(disk["PNPDeviceID"].ToString()));
-	            }
-	        }
-	    }
-	}
-	
-	private static string parseSerialFromDeviceID(string deviceId)
-	{
-	    var splitDeviceId = deviceId.Split(\);
-	    var arrayLen = splitDeviceId.Length - 1;
-	    var serialArray = splitDeviceId[arrayLen].Split(&);
-	    var serial = serialArray[0];
-	    return serial;
-	}
-	
-
-
-
 
 用WMI查serial port可否知道是ims的comport，
 若可以知道，直接連線看看～～～
@@ -2005,19 +1505,6 @@ C#讀取U盤序列號
 12　　　　}
 13
 
-
-
-
-使用C# 讀取XML 到DataGridView
-代碼如下：
-
-XmlReader xmlRead =new XmlTextReader ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
-    DataSet ds=new DataSet ();
-    //ds.ReadXml ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
-    ds.ReadXml (xmlRead);
-
-this.DataGrid1 .DataSource =ds;
-this.DataGrid1 .DataBind ();
 
 
 
@@ -2247,63 +1734,14 @@ Console.ReadLine();
  
  
  
-            
-           
-                string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
- 
-            
-            
+       
 
     
-
-
-using System.Drawing.Imaging;
-
-
-private void button1_Click(object sender, EventArgs e)
-　　　　{
-　　　　　　saveFileDialog1.DefaultExt = "bmp";
-　　　　　　saveFileDialog1.Filter = "bmp files (*.bmp)|*.bmp";
-　　　　　　saveFileDialog1.Title = "導出地圖為...";
-　　　　　　saveFileDialog1.ShowDialog();
-　　　　　　if (saveFileDialog1.FileName.Length > 0)
-　　　　　　{
-　　　　　　　　ScreenPath = saveFileDialog1.FileName;
-　　　　　　}
-　　　　　　else
-　　　　　　{
-　　　　　　　　return;
-　　　　　　}
-　　　　　　this.Refresh();
-　　　　　　//3個參數：獲得控件所在屏幕坐標，目標坐標點為(0,0)，獲得控件大小。
-　　　　　　ScreenShot.CaptureImage(axMapControl1.PointToScreen(Point.Empty), Point.Empty, new Rectangle(axMapControl1.Location, axMapControl1.Size), ScreenPath);　　　　
-　　　　}
-
-
-
-C#自定義直線箭頭大小
-發現原來可以自定義箭頭的大小的，放著以備以後使用。
-
-System.Drawing.Drawing2D.AdjustableArrowCap lineCap = new System.Drawing.Drawing2D.AdjustableArrowCap(6, 6, true);
-Pen RedPen=new Pen(Color.Red,2);
-RedPen.CustomEndCap = lineCap;
-
-然後用RedPen繪圖就可以了！
-
-
-
-            
             
 
 先使用無符號字節數組存放數據庫對應的數據集中表的image類型字段的值。例如：
 
 byte[] bytes= (byte[]) image類型字段值
-
-
-
-一、獲取程序集版本
-label版本.Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
 
 C#自定義直線箭頭大小
@@ -2640,76 +2078,6 @@ class ResolveIP
      }
 }
 
-XML方面的：
-
-二十三、讀取XML文件：
-using System;
-using System.XML;  
-
-class TestReadXML
-{
-    public static void Main()
-    {
-        
-        XmlTextReader reader  = new XmlTextReader(C:\test.XML);
-        reader.Read();
-        
-        while (reader.Read())
-        {            
-            reader.MoveToElement();
-            Console.WriteLine(XMLTextReader PropertIEs Test);
-            Console.WriteLine(===================);  
-
-            // Read this propertIEs of element and display them on console
-            Console.WriteLine(Name: + reader.Name);
-            Console.WriteLine(Base URI: + reader.BaseURI);
-            Console.WriteLine(Local Name: + reader.LocalName);
-            Console.WriteLine(Attribute Count: + reader.AttributeCount.ToString());
-            Console.WriteLine(Depth: + reader.Depth.ToString());
-
-            Console.WriteLine(Line Number: + reader.LineNumber.ToString());
-            Console.WriteLine(Node Type: + reader.NodeType.ToString());
-            Console.WriteLine(Attribute Count: + reader.Value.ToString());
-      &nbsp; }        
-    }               
-} 
-二十四、寫XML文件：
-using System; 
-using System.XML; 
-
-public class TestWriteXMLFile 
-{ 
-    public static int Main(string[] args) 
-    { 
-        try 
-        {  
-            // Creates an XML file is not exist 
-            XmlTextWriter writer = new XmlTextWriter(C:\temp\xmltest.XML, null); 
-
-           // Starts a new document 
-            writer.WriteStartDocument(); 
-            //Write comments 
-            writer.WriteComment(Commentss: XMLWriter Test Program); 
-            writer.WriteProcessingInstruction(Instruction,Person Record); 
-            // Add elements to the file 
-            writer.WriteStartElement(p, person, urn:person); 
-            writer.WriteStartElement(LastName,); 
-            writer.WriteString(Chand); 
-            writer.WriteEndElement(); 
-            writer.WriteStartElement(FirstName,); 
-            writer.WriteString(Mahesh); 
-            writer.WriteEndElement(); 
-            writer.WriteElementInt16(age,, 25); 
-            // Ends the document 
-            writer.WriteEndDocument(); 
-        } 
-        catch (Exception e) 
-        {  
-            Console.WriteLine (Exception: {0}, e.ToString()); 
-        } 
-        return 0; 
-    } 
-} 
 
 
 Web Service方面的：
@@ -3061,30 +2429,6 @@ foreach (XElement xlt in xdoc.Descendants().Where(s =>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 	
 	
 
@@ -3519,54 +2863,9 @@ this.textBox1.Text += DateTime.Now;
 EXIF是英文ExchangeableImageFile(可交換圖像文件)的 縮寫
 
 
-
-
-            //獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
-            string tempFile = System.Reflection.Assembly.GetExecutingAssembly().FullName;
-
-
 new vcs data
 
 不寫注釋是流氓，名字瞎起是扯淡
-
-
-C#讀取exe版本號
-
-	using System.Reflection;
-	using System.IO;
-	...
-	
-	Assembly currentAssembly = Assembly.LoadFile(currentAssemblyPath);
-	Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
-	
-	AssemblyName currentAssemblyName = currentAssembly.GetName();
-	AssemblyName updatedAssemblyName = updatedAssembly.GetName();
-	
-	// 比較版本號
-	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
-	{
-	    // 不需要更新
-	    return;
-	}
-	
-	using System.Reflection;
-	using System.IO;
-	...
-	
-	AssemblyName currentAssemblyName = AssemblyName.GetAssemblyName(currentAssemblyPath);
-	AssemblyName updatedAssemblyName = AssemblyName.GetAssemblyName(updatedAssemblyPath);
-	
-	// 比較版本
-	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
-	{
-	    // 不需要更新
-	    return;
-	}
-	
-	// 更新
-	File.Copy(updatedAssemblyPath, currentAssemblyPath, true);
-	
-
 
 C#對注冊表的操作
 
@@ -3686,27 +2985,6 @@ c#畫三角形、並填充顏色
  6                 pntArr[1] = new Point(x - len, y);
  7                 pntArr[2] = new Point(x - len / 2, (int)(len * Math.Sqrt(3) / 2 + y));
  8               &nbs 
-
-
-
-
-C# 控制台如何播放音頻文件，
-using System.Reflection;
-using System.Media;
- 
- 10             string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();  
-11             Assembly assembly = Assembly.GetExecutingAssembly();
-12             SoundPlayer sp = new SoundPlayer(assembly.GetManifestResourceStream(namespaceName + ".Resources" + ".STEAMBLO.WAV"));
-13             Console.Write("快看，輪船到了~！");
-14             sp.Play();
-string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();   這段代碼是獲取前文檔命名空間的名稱的，也就是對應的“ThePlay”。
-
-Assembly assembly = Assembly.GetExecutingAssembly();   獲取包含當前執行的代碼的程序集。
-SoundPlayer sp = new SoundPlayer(assembly.GetManifestResourceStream(namespaceName + ".Resources" + ".STEAMBLO.WAV"));   
-namespaceName 是上面獲取的空間名稱，Resource是音頻文件夾的名稱，STEAMBLO.WAV 是對應的音頻文件！ 區分大小寫！ 不然會導致獲取為空！ 遺憾的是，只支持.wav格式的音頻文件！
-
-什麼？還是播放不了？
-
 
 
 
@@ -4136,14 +3414,6 @@ dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirec
             }
             richTextBox1.Text += captcha + "\n";
             
-            
-using System.Reflection;
-            //取得 namespaceName
-            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
-
-            richTextBox1.Text += namespaceName + "\n";
-
-            richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
 
 
 //播放音樂
@@ -4584,14 +3854,6 @@ fileFullPath : C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\OperateCamera\b
                 videoSource = null;
             }
         }		
-
-
-
-
-			
-
-                string appDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().GetName().CodeBase);
-                path = Path.Combine(appDir, path);
 
         private static string FFMPEG_EXE_PATH = CheckRelativePath(@"ffmpeg\ffmpeg.exe");
         private static string FFPROBE_EXE_PATH = CheckRelativePath(@"ffmpeg\ffprobe.exe");
