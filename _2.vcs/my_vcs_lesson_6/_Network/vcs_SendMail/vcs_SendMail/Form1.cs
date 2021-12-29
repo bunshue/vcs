@@ -8,8 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Net;       //for NetworkCredential     NetworkCredential ：這個類別可用來提供密碼架構的驗證 (Authentication) 機制的認證。
-using System.Net.Mail;  //for MailMessage, SmtpClient
+using System.Net;       //for NetworkCredential     NetworkCredential ：這個類別可用來提供密碼架構的驗證 (Authentication) 機制的認證。 建立認證帳號需要用到
+using System.Net.Mail;  //for MailMessage, SmtpClient 新建郵件、發送郵件需要用到
+
 //using System.Web.Mail;  //據說不推薦使用了
 using System.Net.Mime;  //for MediaTypeNames
 
