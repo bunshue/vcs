@@ -43,8 +43,8 @@ namespace vcs_Mixzz
             //button
             x_st = 10;
             y_st = 10;
-            dx = 180;
-            dy = 80;
+            dx = 185;
+            dy = 85;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -56,36 +56,54 @@ namespace vcs_Mixzz
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button31.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button32.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button33.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button34.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            button35.Location = new Point(x_st + dx * 2, y_st + dy * 11);
 
-            richTextBox1.Location = new Point(x_st + dx * 8, y_st + dy * 0);
-            richTextBox1.Size = new Size(460, 1000);
-
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
+
+            int w = 0;
+            int h = 0;
+
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            w = this.ClientSize.Width - richTextBox1.Location.X - 10;   //border : 10
+            h = this.ClientSize.Height - richTextBox1.Location.Y - 10;   //border : 10
+            richTextBox1.Size = new Size(w, h);
+
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            w = this.ClientSize.Width - richTextBox1.Size.Width - pictureBox1.Location.X - 20;   //border : 10
+            h = this.ClientSize.Height - pictureBox1.Location.Y - 10;   //border : 10
+            pictureBox1.Size = new Size(w, h);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
             bt_exit_setup();
         }
 
