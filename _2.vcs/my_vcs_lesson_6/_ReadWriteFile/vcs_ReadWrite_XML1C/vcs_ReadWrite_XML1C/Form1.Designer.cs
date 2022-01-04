@@ -1,4 +1,4 @@
-﻿namespace vcs_ReadWrite_XML1B
+﻿namespace vcs_ReadWrite_XML1C
 {
     partial class Form1
     {
@@ -99,7 +99,6 @@
             this.button01.Name = "button01";
             this.button01.Size = new System.Drawing.Size(160, 60);
             this.button01.TabIndex = 2;
-            this.button01.Text = "讀取XML檔案";
             this.button01.UseVisualStyleBackColor = true;
             this.button01.Click += new System.EventHandler(this.button01_Click);
             // 
@@ -120,7 +119,6 @@
             this.button00.Name = "button00";
             this.button00.Size = new System.Drawing.Size(160, 60);
             this.button00.TabIndex = 4;
-            this.button00.Text = "建立XML檔案";
             this.button00.UseVisualStyleBackColor = true;
             this.button00.Click += new System.EventHandler(this.button00_Click);
             // 
@@ -179,7 +177,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 60);
             this.button10.TabIndex = 4;
-            this.button10.Text = "建立XML檔案";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -190,7 +187,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 60);
             this.button11.TabIndex = 2;
-            this.button11.Text = "新增XML資料";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -201,7 +197,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(160, 60);
             this.button12.TabIndex = 3;
-            this.button12.Text = "修改資料";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -222,7 +217,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 60);
             this.button13.TabIndex = 5;
-            this.button13.Text = "刪除資料";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -247,7 +241,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(160, 60);
             this.button20.TabIndex = 4;
-            this.button20.Text = "建立XML檔案";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -258,7 +251,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(160, 60);
             this.button21.TabIndex = 2;
-            this.button21.Text = "讀取XML檔案";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -269,7 +261,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(160, 60);
             this.button22.TabIndex = 3;
-            this.button22.Text = "新增XML節點";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -314,7 +305,6 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(160, 60);
             this.button30.TabIndex = 4;
-            this.button30.Text = "載入XML檔案";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -325,7 +315,6 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(160, 60);
             this.button31.TabIndex = 2;
-            this.button31.Text = "向XML中新增資料";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -336,7 +325,6 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(160, 60);
             this.button32.TabIndex = 3;
-            this.button32.Text = "修改XML內容";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -347,7 +335,6 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(160, 60);
             this.button34.TabIndex = 6;
-            this.button34.Text = "刪除節點";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -358,7 +345,6 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(160, 60);
             this.button33.TabIndex = 5;
-            this.button33.Text = "尋找節點";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -383,7 +369,6 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(160, 60);
             this.button40.TabIndex = 4;
-            this.button40.Text = "建立XML 1";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -394,7 +379,6 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(160, 60);
             this.button41.TabIndex = 2;
-            this.button41.Text = "建立XML 2";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
@@ -405,7 +389,6 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(160, 60);
             this.button42.TabIndex = 3;
-            this.button42.Text = "對XML檔案的新增";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
@@ -450,7 +433,6 @@
             this.button50.Name = "button50";
             this.button50.Size = new System.Drawing.Size(160, 60);
             this.button50.TabIndex = 4;
-            this.button50.Text = "載入XML檔案";
             this.button50.UseVisualStyleBackColor = true;
             this.button50.Click += new System.EventHandler(this.button50_Click);
             // 
@@ -461,7 +443,6 @@
             this.button51.Name = "button51";
             this.button51.Size = new System.Drawing.Size(160, 60);
             this.button51.TabIndex = 2;
-            this.button51.Text = "修改XML檔案";
             this.button51.UseVisualStyleBackColor = true;
             this.button51.Click += new System.EventHandler(this.button51_Click);
             // 
@@ -472,7 +453,6 @@
             this.button52.Name = "button52";
             this.button52.Size = new System.Drawing.Size(160, 60);
             this.button52.TabIndex = 3;
-            this.button52.Text = "其他操作";
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.button52_Click);
             // 

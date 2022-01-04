@@ -15,7 +15,7 @@ using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
 
-namespace vcs_Mixzz
+namespace vcs_Mix06
 {
     public partial class Form1 : Form
     {
@@ -96,11 +96,6 @@ namespace vcs_Mixzz
             w = this.ClientSize.Width - richTextBox1.Location.X - 10;   //border : 10
             h = this.ClientSize.Height - richTextBox1.Location.Y - 10;   //border : 10
             richTextBox1.Size = new Size(w, h);
-
-            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            w = this.ClientSize.Width - richTextBox1.Size.Width - pictureBox1.Location.X - 20;   //border : 10
-            h = this.ClientSize.Height - pictureBox1.Location.Y - 10;   //border : 10
-            pictureBox1.Size = new Size(w, h);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 

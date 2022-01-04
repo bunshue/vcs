@@ -322,7 +322,6 @@ namespace vcs_ReadWrite_XML1B
         private void button20_Click(object sender, EventArgs e)
         {
             //建立XML檔案
-            //建立xml檔案
 
             XmlDocument doc = new XmlDocument();
             XmlElement name = doc.CreateElement("Name");
@@ -412,44 +411,240 @@ namespace vcs_ReadWrite_XML1B
         }
 
         //XML操作3
+
+        XmlDocument xmlDoc;
+
+        /// <summary>
+        /// 初始化xml
+        /// </summary>
+        public void LoadXml(string filename)
+        {
+            xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename);
+        }
+
+        /// <summary> 
+        /// 向xml中新增資料 
+        /// </summary> 
+
+        public void AddElement(string FromUserName)
+        {
+            string filename1 = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
+            string filename2 = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Ba_add.xml";
+            LoadXml(filename1);
+            XmlNode xmldocSelect = xmlDoc.SelectSingleNode("Root");
+            //查詢節點
+            XmlElement el = xmlDoc.CreateElement("Person");
+            //新增person節點
+            el.SetAttribute("name", FromUserName);
+            //新增person節點的屬性"name"
+            el.SetAttribute("time", DateTime.Now.ToString());
+            xmldocSelect.AppendChild(el);
+
+            xmlDoc.Save(filename2);
+        }
+
+        //修改節點中的某個屬性
+        /// <summary>
+        /// 修改xml屬性
+        /// </summary>
+        /// <param name="FromUserName"></param>
+        public void editXml(string FromUserName)
+        {
+            string filename1 = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
+            string filename2 = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Ba_edit.xml";
+
+            LoadXml(filename1);
+            XmlNodeList xnl = xmlDoc.DocumentElement.ChildNodes;
+            foreach (XmlElement elementxml in xnl)
+            {
+                if (elementxml.Name == "Person")
+                {
+                    if (elementxml.Attributes["name"].Value == FromUserName)
+                    {
+                        elementxml.Attributes["time"].Value = DateTime.Now.ToString();
+                    }
+                }
+            }
+            xmlDoc.Save(filename2);
+        }
+
+        //刪除節點中的某個屬性
+        /// <summary>
+        /// 刪除xml屬性
+        /// </summary>
+        /// <param name="FromUserName"></param>
+        public void deleteXml(string FromUserName)
+        {
+            string filename1 = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
+            string filename2 = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Ba_delete.xml";
+
+            LoadXml(filename1);
+            XmlNodeList xnl = xmlDoc.DocumentElement.ChildNodes;
+
+            foreach (XmlElement elementxml in xnl)
+            {
+                if (elementxml.Name == "Person")
+                {
+                    if (elementxml.Attributes["name"].Value == FromUserName)
+                    {
+                        //elementxml.RemoveAttribute("name");//刪除單一節點資料
+                        elementxml.RemoveAllAttributes();   //刪除所有節點資料
+                    }
+                }
+            } xmlDoc.Save(filename2);
+        }
+
+        //判斷xml中是否含有這個屬性
+        //判斷是否已經寫入到xml中
+        public string IsExitXml(string FromUserName)
+        {
+            string datetime = "";
+            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
+            LoadXml(filename);
+            XmlNodeList xnl = xmlDoc.DocumentElement.ChildNodes;
+            foreach (XmlElement element in xnl)
+            {
+                if (element.Name == "Person")
+                {
+                    if (element.Attributes["name"].Value == FromUserName)
+                    {
+                        datetime = element.Attributes["time"].Value;
+                    }
+                }
+            }
+            return datetime;
+        }
+
         private void button30_Click(object sender, EventArgs e)
         {
-
+            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
+            richTextBox1.Text += "載入XML, 檔案 : " + filename + "\n";
+            LoadXml(filename);
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "向XML中新增資料 david wang\n";
+            AddElement("david wang");
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "修改XML內容 bbbbb 改時間\n";
+            editXml("bbbbb");
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "尋找節點 ccccc\n";
+            string result = IsExitXml("ccccc");
+            richTextBox1.Text += "找到資料 : " + result + "\n";
         }
 
         private void button34_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "刪除節點 ccccc\n";
+            deleteXml("ccccc");
         }
 
         private void button40_Click(object sender, EventArgs e)
         {
-
+            //1、建立一個XML文件
+            XmlDocument doc = new XmlDocument();
+            //2、建立第一行描述資訊
+            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "utf-8", null);
+            //3、將建立的第一行描述資訊新增到文件中
+            doc.AppendChild(dec);
+            //4、給文件新增根節點
+            XmlElement Books = doc.CreateElement("Books");
+            doc.AppendChild(Books);
+            XmlElement Book = doc.CreateElement("Book");
+            Books.AppendChild(Book);
+            XmlElement name = doc.CreateElement("name");
+            name.InnerText = "水滸傳";
+            Book.AppendChild(name);
+            XmlElement author = doc.CreateElement("author");
+            author.InnerText = "匿名";
+            author.SetAttribute("name", "wjl");
+            author.SetAttribute("count", "30");
+            Book.AppendChild(author);
+            doc.Save("Book.xml");
+            richTextBox1.Text += "儲存成功！\n";
         }
+
+        class Student
+        {
+            public int id;
+            public string name;
+            public int age;
+            public string sex;
+            public Student(int id, string name, int age, string sex)
+            {
+                this.id = id;
+                this.name = name;
+                this.age = age;
+                this.sex = sex;
+            }
+            public Student()
+            {
+            }
+        }
+
 
         private void button41_Click(object sender, EventArgs e)
         {
-
+            List<Student> list = new List<Student>();
+            list.Add(new Student(1, "david wang", 17, "男"));
+            list.Add(new Student(2, "lion mouse", 21, "男"));
+            list.Add(new Student(3, "rebecca lin", 20, "女"));
+            list.Add(new Student(4, "danny chang", 24, "男"));
+            XmlDocument xmldoc = new XmlDocument();
+            XmlDeclaration xmldec = xmldoc.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmldoc.AppendChild(xmldec);
+            XmlElement person = xmldoc.CreateElement("Person");
+            xmldoc.AppendChild(person);
+            for (int i = 0; i < list.Count; i++)
+            {
+                XmlElement stu = xmldoc.CreateElement("student");
+                stu.SetAttribute("ID", list[i].id.ToString());
+                person.AppendChild(stu);
+                XmlElement name = xmldoc.CreateElement("name");
+                XmlElement age = xmldoc.CreateElement("age");
+                name.InnerText = list[i].name;
+                age.InnerText = list[i].age.ToString();
+                stu.AppendChild(name);
+                stu.AppendChild(age);
+            }
+            xmldoc.Save("Student.xml");
         }
 
         private void button42_Click(object sender, EventArgs e)
         {
-
+            //對XML檔案的新增
+            XmlDocument doc = new XmlDocument();
+            //首先判斷檔案是否存在，如果存在則追加否則在建立一個
+            if (File.Exists("Student.xml"))
+            {
+                //載入
+                doc.Load("Student.xml");
+                //獲取根節點，給根節點新增子節點
+                XmlElement person = doc.DocumentElement;
+                XmlElement student = doc.CreateElement("student");
+                student.SetAttribute("ID", "1");
+                person.AppendChild(student);
+                XmlElement name = doc.CreateElement("name");
+                XmlElement age = doc.CreateElement("age");
+                name.InnerText = "emily li";
+                age.InnerText = "22";
+                student.AppendChild(name);
+                student.AppendChild(age);
+            }
+            else
+            {
+            }
+            doc.Save("Student2.xml");
+            richTextBox1.Text += "Student2.xml 儲存成功\n";
         }
 
         private void button43_Click(object sender, EventArgs e)
@@ -464,17 +659,74 @@ namespace vcs_ReadWrite_XML1B
 
         private void button50_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Bb.xml";
+            richTextBox1.Text += "載入XML, 檔案 : " + filename + "\n";
 
+            if (File.Exists(filename))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(filename);
+
+                // 獲取根節點
+                XmlElement orderElement = doc.DocumentElement;
+                XmlNodeList orderChildr = orderElement.ChildNodes;
+                foreach (XmlNode item in orderChildr)
+                {
+                    Console.WriteLine("節點名稱：" + item.Name + "節點的 InnerText ：" + item.InnerText);
+                    richTextBox1.Text += "節點名稱：" + item.Name + "節點的 InnerText ：" + item.InnerText + "\n";
+                }
+                XmlElement orderitem = orderElement["Items"];
+                XmlNodeList itemlist = orderitem.ChildNodes;
+                foreach (XmlNode item in itemlist)
+                {
+                    Console.WriteLine(item.Attributes["Name"].Value + " " + item.Attributes["Count"].Value);
+                    richTextBox1.Text += item.Attributes["Name"].Value + " " + item.Attributes["Count"].Value + "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "檔案不存在！\n";
+            }
         }
 
         private void button51_Click(object sender, EventArgs e)
         {
+            string filename1 = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Bb.xml";
+            string filename2 = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Bb_modify.xml";
 
+            //使用XPath的方式來讀取XML檔案
+            // 獲取文件物件
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename1);
+            //獲取根節點
+            XmlElement order = doc.DocumentElement;
+            // 獲取單個節點
+            //XmlNode xn = order.SelectSingleNode(@"/Order/CustomerName");
+            XmlNode xn = order.SelectSingleNode(@"/Order/Items/OrderItem[@Name='巧克力']");
+            xn.Attributes["Count"].Value = "10"; // 修改
+            doc.Save(filename2);
+
+            //取得資料
+            //richTextBox1.Text += "value = " + xn.Attributes["Count"].Value.ToString() + "\n";
         }
 
         private void button52_Click(object sender, EventArgs e)
         {
+            /*其他操作
+            richTextBox1.Text+="刪除元素指定的特性：\n";
+            xn.Attributes.RemoveNamedItem("Count"); //刪除元素指定的特性
 
+            richTextBox1.Text+="刪除子節點：\n";
+            XmlNode xn = order.SelectSingleNode(@"/Order/Items");
+            XmlNode xnchild = order.SelectSingleNode(@"/Order/Items/OrderItem[@Name = '雨衣']");
+            xn.RemoveChild(xnchild); //刪除指定的子節點
+
+            richTextBox1.Text+="刪除當前所有子節點：\n";
+            xn.RemoveAll(); //刪除當前節點的所有子節點
+
+            richTextBox1.Text+="刪除當前節點的所有特性：\n";
+            xnchild.Attributes.RemoveAll();　
+            */
         }
 
         private void button53_Click(object sender, EventArgs e)

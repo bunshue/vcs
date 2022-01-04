@@ -75,11 +75,13 @@ namespace WindowsFormsApplication1ex
         //選擇圖片
         private void ChooseImageFile()
         {
+            richTextBox1.Text += "請選擇圖片\n";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string name = openFileDialog1.FileName;
                 txtImageInfo.Text = name;
                 bmp = new Bitmap(name);
+                richTextBox1.Text += "已選擇圖片 : " + name + "\n";
             }
         }
         //根據用戶設定的信息創建對象 
@@ -106,8 +108,8 @@ namespace WindowsFormsApplication1ex
 
             //復制到剪貼板上，第二個參數表明程序退出時不清空剪貼板 
             Clipboard.SetDataObject(dataobj, true);
-        } 
-        
+        }
+       
 
         private void button2_Click(object sender, EventArgs e)
         {

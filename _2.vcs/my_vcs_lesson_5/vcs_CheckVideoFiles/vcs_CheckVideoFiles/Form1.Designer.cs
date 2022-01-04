@@ -126,6 +126,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(170, 70);
             this.button5.TabIndex = 97;
+            this.button5.Text = "模糊比對";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -136,7 +137,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(170, 70);
             this.button11.TabIndex = 96;
-            this.button11.Text = "find . 標準版";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -157,6 +157,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(170, 70);
             this.button4.TabIndex = 88;
+            this.button4.Text = "搜尋同樣檔名檔案";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -167,7 +168,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(170, 70);
             this.button3.TabIndex = 87;
-            this.button3.Text = "模糊比對";
+            this.button3.Text = "搜尋同樣大小檔案";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
