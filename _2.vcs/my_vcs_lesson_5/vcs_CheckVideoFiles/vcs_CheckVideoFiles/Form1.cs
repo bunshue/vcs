@@ -237,7 +237,7 @@ namespace vcs_CheckVideoFiles
         {
             show_button_text(sender);
 
-            string foldername = @"C:\______test_files\__RW\_txt";
+            string foldername = @"D:\__test_files";
 
             FindAllFiles(foldername);
         }

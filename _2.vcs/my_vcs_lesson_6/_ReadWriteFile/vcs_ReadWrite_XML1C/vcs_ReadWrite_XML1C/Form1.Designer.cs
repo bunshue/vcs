@@ -36,12 +36,11 @@
             this.button03 = new System.Windows.Forms.Button();
             this.button04 = new System.Windows.Forms.Button();
             this.groupBox0 = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
+            this.button09 = new System.Windows.Forms.Button();
+            this.button08 = new System.Windows.Forms.Button();
+            this.button07 = new System.Windows.Forms.Button();
+            this.button06 = new System.Windows.Forms.Button();
+            this.button05 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button20 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
@@ -67,7 +66,6 @@
             this.button54 = new System.Windows.Forms.Button();
             this.button53 = new System.Windows.Forms.Button();
             this.groupBox0.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -99,6 +97,7 @@
             this.button01.Name = "button01";
             this.button01.Size = new System.Drawing.Size(160, 60);
             this.button01.TabIndex = 2;
+            this.button01.Text = "建立XML檔案 2";
             this.button01.UseVisualStyleBackColor = true;
             this.button01.Click += new System.EventHandler(this.button01_Click);
             // 
@@ -109,6 +108,7 @@
             this.button02.Name = "button02";
             this.button02.Size = new System.Drawing.Size(160, 60);
             this.button02.TabIndex = 3;
+            this.button02.Text = "添加一個節點";
             this.button02.UseVisualStyleBackColor = true;
             this.button02.Click += new System.EventHandler(this.button02_Click);
             // 
@@ -119,6 +119,7 @@
             this.button00.Name = "button00";
             this.button00.Size = new System.Drawing.Size(160, 60);
             this.button00.TabIndex = 4;
+            this.button00.Text = "建立XML檔案 1";
             this.button00.UseVisualStyleBackColor = true;
             this.button00.Click += new System.EventHandler(this.button00_Click);
             // 
@@ -129,6 +130,7 @@
             this.button03.Name = "button03";
             this.button03.Size = new System.Drawing.Size(160, 60);
             this.button03.TabIndex = 5;
+            this.button03.Text = "修改節點內容 1";
             this.button03.UseVisualStyleBackColor = true;
             this.button03.Click += new System.EventHandler(this.button03_Click);
             // 
@@ -139,11 +141,17 @@
             this.button04.Name = "button04";
             this.button04.Size = new System.Drawing.Size(160, 60);
             this.button04.TabIndex = 6;
+            this.button04.Text = "修改節點內容 2";
             this.button04.UseVisualStyleBackColor = true;
             this.button04.Click += new System.EventHandler(this.button04_Click);
             // 
             // groupBox0
             // 
+            this.groupBox0.Controls.Add(this.button09);
+            this.groupBox0.Controls.Add(this.button08);
+            this.groupBox0.Controls.Add(this.button07);
+            this.groupBox0.Controls.Add(this.button06);
+            this.groupBox0.Controls.Add(this.button05);
             this.groupBox0.Controls.Add(this.button00);
             this.groupBox0.Controls.Add(this.button01);
             this.groupBox0.Controls.Add(this.button02);
@@ -151,74 +159,65 @@
             this.groupBox0.Controls.Add(this.button03);
             this.groupBox0.Location = new System.Drawing.Point(12, 12);
             this.groupBox0.Name = "groupBox0";
-            this.groupBox0.Size = new System.Drawing.Size(200, 420);
+            this.groupBox0.Size = new System.Drawing.Size(380, 420);
             this.groupBox0.TabIndex = 9;
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "XML操作0";
             // 
-            // groupBox1
+            // button09
             // 
-            this.groupBox1.Controls.Add(this.button10);
-            this.groupBox1.Controls.Add(this.button11);
-            this.groupBox1.Controls.Add(this.button12);
-            this.groupBox1.Controls.Add(this.button14);
-            this.groupBox1.Controls.Add(this.button13);
-            this.groupBox1.Location = new System.Drawing.Point(309, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 420);
-            this.groupBox1.TabIndex = 10;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "XML操作1";
+            this.button09.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button09.Location = new System.Drawing.Point(195, 305);
+            this.button09.Name = "button09";
+            this.button09.Size = new System.Drawing.Size(160, 60);
+            this.button09.TabIndex = 11;
+            this.button09.Text = "取得XML的節點內容";
+            this.button09.UseVisualStyleBackColor = true;
+            this.button09.Click += new System.EventHandler(this.button09_Click);
             // 
-            // button10
+            // button08
             // 
-            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(17, 18);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(160, 60);
-            this.button10.TabIndex = 4;
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.button08.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button08.Location = new System.Drawing.Point(195, 239);
+            this.button08.Name = "button08";
+            this.button08.Size = new System.Drawing.Size(160, 60);
+            this.button08.TabIndex = 10;
+            this.button08.Text = "取得XML的節點內容";
+            this.button08.UseVisualStyleBackColor = true;
+            this.button08.Click += new System.EventHandler(this.button08_Click);
             // 
-            // button11
+            // button07
             // 
-            this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button11.Location = new System.Drawing.Point(17, 88);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(160, 60);
-            this.button11.TabIndex = 2;
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.button07.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button07.Location = new System.Drawing.Point(195, 162);
+            this.button07.Name = "button07";
+            this.button07.Size = new System.Drawing.Size(160, 60);
+            this.button07.TabIndex = 9;
+            this.button07.Text = "讀出全部XML";
+            this.button07.UseVisualStyleBackColor = true;
+            this.button07.Click += new System.EventHandler(this.button07_Click);
             // 
-            // button12
+            // button06
             // 
-            this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(17, 162);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(160, 60);
-            this.button12.TabIndex = 3;
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.button06.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button06.Location = new System.Drawing.Point(195, 88);
+            this.button06.Name = "button06";
+            this.button06.Size = new System.Drawing.Size(160, 60);
+            this.button06.TabIndex = 8;
+            this.button06.Text = "刪除節點資料 2";
+            this.button06.UseVisualStyleBackColor = true;
+            this.button06.Click += new System.EventHandler(this.button06_Click);
             // 
-            // button14
+            // button05
             // 
-            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button14.Location = new System.Drawing.Point(17, 305);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(160, 60);
-            this.button14.TabIndex = 6;
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
-            // button13
-            // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button13.Location = new System.Drawing.Point(17, 239);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(160, 60);
-            this.button13.TabIndex = 5;
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            this.button05.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button05.Location = new System.Drawing.Point(195, 18);
+            this.button05.Name = "button05";
+            this.button05.Size = new System.Drawing.Size(160, 60);
+            this.button05.TabIndex = 7;
+            this.button05.Text = "刪除節點資料 1";
+            this.button05.UseVisualStyleBackColor = true;
+            this.button05.Click += new System.EventHandler(this.button05_Click);
             // 
             // groupBox2
             // 
@@ -485,7 +484,6 @@
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox0);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -493,7 +491,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox0.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -512,12 +509,6 @@
         private System.Windows.Forms.Button button03;
         private System.Windows.Forms.Button button04;
         private System.Windows.Forms.GroupBox groupBox0;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button13;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button21;
@@ -542,6 +533,11 @@
         private System.Windows.Forms.Button button52;
         private System.Windows.Forms.Button button54;
         private System.Windows.Forms.Button button53;
+        private System.Windows.Forms.Button button09;
+        private System.Windows.Forms.Button button08;
+        private System.Windows.Forms.Button button07;
+        private System.Windows.Forms.Button button06;
+        private System.Windows.Forms.Button button05;
     }
 }
 

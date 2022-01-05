@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Employees>
+  <Node genre="李赞红" ISBN="2-3631-4">
+    <title>CS从入门到精通</title>
+    <author>候捷</author>
+    <price>58.3</price>
+  </Node>
+  <Node genre="李赞红" ISBN="2-3631-4">
+    <title>CS从入门到精通</title>
+    <author>候捷</author>
+    <price>58.3</price>
+  </Node>
+</Employees>

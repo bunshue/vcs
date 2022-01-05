@@ -80,6 +80,7 @@ namespace vcs_MyToolbox
         Button btn_20 = new Button();
         Button btn_21 = new Button();
         Button btn_22 = new Button();
+        PictureBox pbx_clock = new PictureBox();
 
         public Form1()
         {
@@ -111,7 +112,7 @@ namespace vcs_MyToolbox
         void add_my_toolbox_controls()
         {
             int x_st = 20;
-            int y_st = 50;
+            int y_st = 20;
             int dx = 0;
             int dy = 0;
             //int offset = 0;
@@ -119,6 +120,21 @@ namespace vcs_MyToolbox
             int h = 0;  //控件高度
 
             // 實例化控件
+
+            w = 380;
+            h = 160;
+            pbx_clock.Width = w;
+            pbx_clock.Height = h;
+            pbx_clock.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pbx_clock.BackColor = Color.Red;
+            pbx_clock.Paint += pbx_clock_Paint;	// 加入事件
+            this.Controls.Add(pbx_clock);	// 將控件加入表單
+
+            //pbx_clock
+
+            x_st = 20;
+            y_st = 200;
+
             w = 120;
             h = 120;
 
@@ -167,7 +183,7 @@ namespace vcs_MyToolbox
             //btn_22.Click += btn_cmx_click;	// 加入事件
             this.Controls.Add(btn_22);	// 將控件加入表單
 
-            int W = w * 3 + 20 * 4;
+            int W = w * 3 + 20 * 4 + 20;
             int H = Screen.PrimaryScreen.Bounds.Height;
             this.Size = new Size(W, H * 4 / 5);
             bt_exit_setup();
@@ -201,6 +217,37 @@ namespace vcs_MyToolbox
         private void bt_exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void timer_clock_Tick(object sender, EventArgs e)
+        {
+            pbx_clock.Invalidate();
+        }
+
+        private void pbx_clock_Paint(object sender, PaintEventArgs e)
+        {
+            int hh = DateTime.Now.Hour;
+            int mm = DateTime.Now.Minute;
+            int ss = DateTime.Now.Second;
+
+            int x_st = 30;
+            int y_st = 30;
+            int w = 100;
+            int h = 100;
+            int dx = 10;
+
+            int i;
+            for (i = 0; i < 3; i++)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.Black), x_st + (w + dx) * i, y_st, w, h);
+            }
+
+            e.Graphics.DrawLine(new Pen(Color.Red, 6), x_st, y_st + h / 2, x_st + 380, y_st + h / 2);
+
+            int dy = 15;
+            e.Graphics.DrawString(hh.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st, y_st + dy);
+            e.Graphics.DrawString(mm.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st + (w + dx) * 1, y_st + dy);
+            e.Graphics.DrawString(ss.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st + (w + dx) * 2, y_st + dy);
         }
     }
 }
