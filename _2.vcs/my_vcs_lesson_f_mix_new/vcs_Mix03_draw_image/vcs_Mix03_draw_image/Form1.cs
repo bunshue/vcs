@@ -232,62 +232,17 @@ namespace vcs_Mix03_draw_image
                 g.DrawLine(new Pen(brush3), thisPoint, myPoint);
                 myPoint = thisPoint;
             }
-
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //抓取全螢幕的小程序
-            Bitmap bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.CopyFromScreen(0, 0, 0, 0, new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
-            this.pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            Point source_point = new Point(0, 0);
-            Point destination_point = new Point(0, 0);
-            Rectangle rect = new Rectangle(0, 0, 300, 300);
-
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-            CaptureImage(source_point, destination_point, rect, filename);
-        }
-
-        public void CaptureImage(Point SourcePoint, Point DestinationPoint, Rectangle SelectionRectangle, string filename)
-        {
-            using (Bitmap bitmap1 = new Bitmap(SelectionRectangle.Width, SelectionRectangle.Height))
-            {
-                using (Graphics g = Graphics.FromImage(bitmap1))
-                {
-                    g.CopyFromScreen(SourcePoint, DestinationPoint, SelectionRectangle.Size);
-                }
-                
-                try
-                {
-                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                    bitmap1.Save(filename, ImageFormat.Bmp);
-                    //bitmap1.Save(@file3, ImageFormat.Png);
-
-                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename + "\n";
-                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-
-            }
         }
 
         private void button7_Click(object sender, EventArgs e)

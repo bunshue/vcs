@@ -883,30 +883,6 @@ namespace vcs_System1
 
         private void button42_Click(object sender, EventArgs e)
         {
-            save_current_program_to_local_drive();
-        }
-
-        void save_current_program_to_local_drive()
-        {
-            //imsLink的方法
-            //本程式截圖
-            Bitmap bmp = new Bitmap(this.Width, this.Height);
-            Graphics g = Graphics.FromImage(bmp);
-            //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, System.Drawing.Size blockRegionSize);
-            g.CopyFromScreen(this.Location, new Point(0, 0), new Size(this.Width, this.Height));
-            //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
-            //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
-
-            //存成bmp檔
-            String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            bmp.Save(filename, ImageFormat.Bmp);
-
-            //存成jpg檔
-            //String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            //myImage.Save(filename, ImageFormat.Jpeg);
-            richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
         }
 
         private void button43_Click(object sender, EventArgs e)
@@ -976,33 +952,10 @@ namespace vcs_System1
 
         private void button46_Click(object sender, EventArgs e)
         {
-            //全螢幕截圖1
-            Rectangle rect = Screen.GetBounds(Point.Empty);
-            using (Bitmap bitmap1 = new Bitmap(rect.Width, rect.Height))
-            {
-                using (Graphics g = Graphics.FromImage(bitmap1))
-                {
-                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
-                    //存成bmp檔
-                    String filename = Application.StartupPath + "\\image_full_screen_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-                    bitmap1.Save(filename, ImageFormat.Bmp);
-                    richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
-                }
-            }
         }
 
         private void button47_Click(object sender, EventArgs e)
         {
-            //全螢幕截圖2
-            Bitmap bitmap1;
-            Graphics g;
-
-            bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            g = Graphics.FromImage(bitmap1);
-            g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
-            String filename = Application.StartupPath + "\\image_full_screen_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            bitmap1.Save(filename, ImageFormat.Bmp);
-            richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
         }
 
         private void button48_Click(object sender, EventArgs e)

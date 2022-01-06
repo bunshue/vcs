@@ -132,27 +132,6 @@ namespace vcs_DrawImage2
             //            貼上位置與大小,擷取部分圖片位置與大小,單位
 
             e.Graphics.DrawImage(img, destRect1, srcRect, units);
-
-
-
-
-
-            /*
-                //擷取部分圖片貼上
-                //            貼上位置與大小,擷取部分圖片位置與大小,單位
-                g.DrawImage(img, destRect1, srcRect, units);
-
-            Rectangle rect = Screen.GetBounds(Point.Empty);
-            using (Bitmap bitmap = new Bitmap(rect.Width, rect.Height))
-            {
-                using (Graphics g = Graphics.FromImage(bitmap))
-                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
-
-                bitmap.Save("test.jpg", ImageFormat.Jpeg);
-             */
-
-
         }
-
     }
 }

@@ -5327,3 +5327,52 @@ DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一�
 
 
 
+
+
+            //當前進程資料
+            uint uiPid = (uint)Process.GetCurrentProcess().Id;  // 當前進程 ID
+            richTextBox1.Text += "aaaaa0 :" + uiPid.ToString() + "\n";
+            richTextBox1.Text += "aaaaa3 :" + Process.GetCurrentProcess().MainWindowTitle + "\n";
+            richTextBox1.Text += "aaaaa6 :" + Process.GetCurrentProcess().SessionId + "\n";
+            richTextBox1.Text += "aaaaa9 :" + Process.GetCurrentProcess().StartTime.ToString() + "\n";
+
+
+
+
+
+            /*
+                //擷取部分圖片貼上
+                //            貼上位置與大小,擷取部分圖片位置與大小,單位
+                g.DrawImage(img, destRect1, srcRect, units);
+
+            Rectangle rect = Screen.GetBounds(Point.Empty);
+            using (Bitmap bitmap = new Bitmap(rect.Width, rect.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
+
+                bitmap.Save("test.jpg", ImageFormat.Jpeg);
+             */
+
+
+
+
+
+            //DesktopLocation的用法
+
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.ToString() + "\n";
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.X.ToString() + "\n";
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.Y.ToString() + "\n";
+
+
+            Point p = new Point(this.DesktopLocation.X - 1, this.DesktopLocation.Y);
+
+            this.DesktopLocation = p;
+
+
+
+//指定視窗出現的地方
+            Point p = new Point(600, 240);
+
+            this.DesktopLocation = p;
+

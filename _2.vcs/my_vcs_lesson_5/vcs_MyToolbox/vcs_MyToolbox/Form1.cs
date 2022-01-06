@@ -143,42 +143,42 @@ namespace vcs_MyToolbox
 
             btn_00.Width = w;
             btn_00.Height = h;
-            btn_00.Text = "Write";
+            btn_00.Text = "小算盤";
             btn_00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             //btn_00.Click += btn_cmx_click;	// 加入事件
             this.Controls.Add(btn_00);	// 將控件加入表單
 
             btn_01.Width = w;
             btn_01.Height = h;
-            btn_01.Text = "Write";
+            btn_01.Text = "WinMerge";
             btn_01.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             //btn_01.Click += btn_cmx_click;	// 加入事件
             this.Controls.Add(btn_01);	// 將控件加入表單
 
             btn_02.Width = w;
             btn_02.Height = h;
-            btn_02.Text = "Write";
+            btn_02.Text = "Matlab";
             btn_02.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             //btn_02.Click += btn_cmx_click;	// 加入事件
             this.Controls.Add(btn_02);	// 將控件加入表單
 
             btn_20.Width = w;
             btn_20.Height = h;
-            btn_20.Text = "Write";
+            btn_20.Text = "Visual C#";
             btn_20.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             //btn_20.Click += btn_cmx_click;	// 加入事件
             this.Controls.Add(btn_20);	// 將控件加入表單
 
             btn_21.Width = w;
             btn_21.Height = h;
-            btn_21.Text = "Write";
+            btn_21.Text = "";
             btn_21.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             //btn_21.Click += btn_cmx_click;	// 加入事件
             this.Controls.Add(btn_21);	// 將控件加入表單
 
             btn_22.Width = w;
             btn_22.Height = h;
-            btn_22.Text = "Write";
+            btn_22.Text = "";
             btn_22.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             //btn_22.Click += btn_cmx_click;	// 加入事件
             this.Controls.Add(btn_22);	// 將控件加入表單

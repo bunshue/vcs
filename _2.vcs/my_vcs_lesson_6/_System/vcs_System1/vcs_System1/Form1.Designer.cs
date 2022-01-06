@@ -601,7 +601,6 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(240, 50);
             this.button42.TabIndex = 60;
-            this.button42.Text = "本程式存圖";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
@@ -650,7 +649,6 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(240, 50);
             this.button46.TabIndex = 64;
-            this.button46.Text = "全螢幕截圖1";
             this.button46.UseVisualStyleBackColor = true;
             this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
@@ -838,7 +836,6 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(240, 50);
             this.button47.TabIndex = 78;
-            this.button47.Text = "全螢幕截圖2";
             this.button47.UseVisualStyleBackColor = true;
             this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
