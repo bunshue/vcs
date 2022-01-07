@@ -433,48 +433,6 @@ RecurseXmlDocument SP aIndent = 0
     }
     
 
-c#發送數據到剪貼板及從剪貼板獲取數據
-
-//將文字資料複製到剪貼簿
- private void btn_send_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Clipboard.SetText(textBox1.Text);
-                MessageBox.Show("已成功將文本框內容復制到剪貼板!");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error!");
-            }
-        }
-
-//從剪貼簿取出文字資料
-        private void btn_get_Click(object sender, EventArgs e)
-        {
-            string txt2 = textBox2.Text;
-            try
-            {
-                IDataObject iData = Clipboard.GetDataObject();
-                if (iData.GetDataPresent(DataFormats.Text))
-                {
-                    //MessageBox.Show((string)iData.GetData(DataFormats.Text));
-                    textBox2.Text = (string)iData.GetData(DataFormats.UnicodeText);
-                }
-                else
-                {
-                    MessageBox.Show("目前剪貼板中數據不可轉換為文本", "錯誤");
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error");
-            }
-        }
-
-
-
-
         private void button12_Click(object sender, EventArgs e)
         {
             //html轉txt
@@ -2543,31 +2501,6 @@ C#代碼
 CheckForIllegalCrossThreadCalls = false; 
 
 
-//發送資料到剪貼簿
-Clipboard.SetText(textBox1.Text);
-MessageBox.Show("已成功將文本框內容復制到剪貼板!");
-
-
-//從剪貼簿取得資料
-
-            try
-            {
-                IDataObject iData = Clipboard.GetDataObject();
-                if (iData.GetDataPresent(DataFormats.Text))
-                {
-                    //MessageBox.Show((string)iData.GetData(DataFormats.Text));
-                    textBox2.Text = (string)iData.GetData(DataFormats.UnicodeText);
-                }
-                else
-                {
-                    MessageBox.Show("目前剪貼板中數據不可轉換為文本", "錯誤");
-                }
-            }
-            
-
-
-            
-            
 
 //-------------------------------------------------------------
 
@@ -3351,29 +3284,7 @@ using System.Reflection;
 
             richTextBox1.Text += sb + "\n";
 
-
-
-設定資料到剪貼簿
-                Clipboard.SetText(textBox1.Text);
-                MessageBox.Show("已成功將文本框內容復制到剪貼板!");
-                
-從剪貼簿取得資料
-            string txt2 = textBox2.Text;
-            try
-            {
-                IDataObject iData = Clipboard.GetDataObject();
-                if (iData.GetDataPresent(DataFormats.Text))
-                {
-                    //MessageBox.Show((string)iData.GetData(DataFormats.Text));
-                    textBox2.Text = (string)iData.GetData(DataFormats.UnicodeText);
-                }
-                else
-                {
-                    MessageBox.Show("目前剪貼板中數據不可轉換為文本", "錯誤");
-                }
-            }
-            
-                           
+                          
 
 求取字母的ASCII值
 
@@ -4539,24 +4450,6 @@ return retVal.ToString("x");
 //--------------------------------------------------------------------------------------------------------------------------
 
 
-            //C#從剪貼板取出圖片然後寫上字保存到文件
-            IDataObject data = Clipboard.GetDataObject();
-            Image image = (Image)(data.GetData(typeof(Bitmap)));
-            Graphics g = Graphics.FromImage(image);
-            SolidBrush sb = new SolidBrush(Color.Red);
-            Font f = new Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Millimeter);
-            int x_st = image.Height - (image.Height - 25);
-            int y_st = 3;
-
-            g.DrawString("zydzydyzydydydyyydydy", f, sb, x_st, y_st);
-
-            Image small_image;
-
-            small_image = image.GetThumbnailImage(image.Width, image.Height, null, System.IntPtr.Zero);
-            small_image.Save("show_pic_small.jpg", ImageFormat.Jpeg);
-            image.Save("show_pic.jpg", ImageFormat.Jpeg);
-            image = null;
-            small_image = null;
 
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -5371,8 +5264,28 @@ DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一�
 
 
 
+            //取得某一控件的參數
+            //獲取傳入對象的所有屬性名稱
+            Type types = button1.GetType();
+            foreach (var p in types.GetProperties())
+            {
+                richTextBox1.Text += "Type : \t" + p.PropertyType + "\tName : \t" + p.Name + "\n";
+            }
+
+
+
 //指定視窗出現的地方
             Point p = new Point(600, 240);
 
             this.DesktopLocation = p;
+
+
+
+            //C#啟動另外一個C#程序，並傳遞參數
+            string filename = @"C:\______test_files\aaaaa4.txt";
+            System.Diagnostics.Process.Start("notepad.exe", filename);
+
+
+
+
 

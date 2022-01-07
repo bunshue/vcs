@@ -54,6 +54,7 @@ namespace vcs_Clipboard
             button20.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 10);
             button21.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 11);
             button22.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 12);
+            button26.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 13);
 
             groupBox1.Location = new Point(12, 350);
             y_st = 18;
@@ -478,6 +479,88 @@ namespace vcs_Clipboard
                 }
             }
         }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            //讀出剪貼簿內的資料
+            try
+            {
+                IDataObject iData = Clipboard.GetDataObject();
+                if (iData.GetDataPresent(DataFormats.Text))
+                {
+                    //richTextBox1.Text += (string)iData.GetData(DataFormats.Text) + "\n";
+                    richTextBox1.Text += (string)iData.GetData(DataFormats.UnicodeText) + "\n";
+                }
+                else
+                {
+                    MessageBox.Show("目前剪貼板中數據不可轉換為文本", "錯誤");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            //複製資料到剪貼簿
+            string data = "複製資料到剪貼簿\n";
+            try
+            {
+                Clipboard.SetText(data);
+                //MessageBox.Show("已成功將文本框內容復制到剪貼板!");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error!");
+            }
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            //累計 複製資料到剪貼簿
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            //從剪貼板取出圖片然後寫上字保存到文件
+
+            IDataObject data = Clipboard.GetDataObject();
+            Image image = (Image)(data.GetData(typeof(Bitmap)));
+            if (image == null)
+            {
+                richTextBox1.Text += "無圖片, 不儲存\n";
+                return;
+            }
+            Graphics g = Graphics.FromImage(image);
+            SolidBrush sb = new SolidBrush(Color.Red);
+            Font f = new Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Millimeter);
+            int x_st = image.Height - (image.Height - 25);
+            int y_st = 3;
+
+            g.DrawString("剪貼簿上的圖片存檔"+DateTime.Now.ToString(), f, sb, x_st, y_st);
+
+            Image small_image;
+
+            string filename = Application.StartupPath + "\\pic_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            string filename_small = Application.StartupPath + "\\pic_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_small.jpg";
+
+            small_image = image.GetThumbnailImage(image.Width, image.Height, null, System.IntPtr.Zero);
+            small_image.Save(filename_small, ImageFormat.Jpeg);
+            image.Save(filename, ImageFormat.Jpeg);
+            image = null;
+            small_image = null;
+
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
+            richTextBox1.Text += "已存檔 : " + filename_small + "\n";
+        }
+
+
+
+
     }
 
     [Serializable()]    //必要的一行
