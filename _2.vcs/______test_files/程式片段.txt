@@ -1,5 +1,36 @@
 
 
+button.BackgroundImage =Bitmap.FromFile("d:\\123.png");
+
+
+
+            //顯示詳細信息
+            listView1.View = View.Details;
+
+            //選中整行
+            listView1.FullRowSelect = true;
+
+            //顯示checkbox
+            listView1.CheckBoxes = true;
+
+                //添加項
+                listView1.Items.Add(zhuxiang);
+
+            if (listView1.SelectedItems.Count > 0)
+            {
+                MessageBox.Show(listView1.SelectedItems[0].Text);
+            }
+
+            string s = "";
+
+            foreach (ListViewItem item in listView1.CheckedItems)
+            {
+                s += item.Text + "--";
+            }
+
+            MessageBox.Show(s);
+
+
         //實現控件中捕獲按鍵 只要補上這個函數就好
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {

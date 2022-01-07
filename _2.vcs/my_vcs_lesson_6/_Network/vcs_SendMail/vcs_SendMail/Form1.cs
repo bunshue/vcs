@@ -92,6 +92,20 @@ namespace vcs_SendMail
                 Application.Exit();
                 return;
             }
+
+            tb_email_addr_from.Text = email_addr_from;
+            tb_email_addr_from_password.Text = email_addr_from_password;
+            tb_email_addr_from_password.PasswordChar = '*';
+            tb_email_addr_from_nicknane.Text = email_addr_from_nicknane;
+
+            tb_email_addr_to.Text = email_addr_to;
+            tb_email_addr_to_nicknane.Text = email_addr_to_nicknane;
+
+            tb_email_addr_cc.Text = email_addr_cc;
+
+
+
+            tb_smtp_server.Text = smtp_server;
         }
 
         void show_item_location()
@@ -123,7 +137,9 @@ namespace vcs_SendMail
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             button13.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
-            richTextBox1.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -490,7 +506,7 @@ namespace vcs_SendMail
 
         private void button10_Click(object sender, EventArgs e)
         {
-
+            //使用 EmailClass
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -795,6 +811,151 @@ namespace vcs_SendMail
                 return true;
             }
             return false;
+        }
+    }
+
+    public static class EmailClass
+    {
+        /// <summary>
+        /// 發件人
+        /// </summary>
+        public static string mailFrom { get; set; }
+
+        /// <summary>
+        /// 收件人
+        /// </summary>
+        public static string[] mailToArray { get; set; }
+
+        /// <summary>
+        /// 抄送
+        /// </summary>
+        public static string[] mailCcArray { get; set; }
+
+        /// <summary>
+        /// 標題
+        /// </summary>
+        public static string mailSubject { get; set; }
+
+        /// <summary>
+        /// 正文
+        /// </summary>
+        public static string mailBody { get; set; }
+
+        /// <summary>
+        /// 發件人密碼
+        /// </summary>
+        public static string mailPwd { get; set; }
+
+        /// <summary>
+        /// SMTP郵件服務器
+        /// </summary>
+        public static string host { get; set; }
+
+        /// <summary>
+        /// 郵件服務器端口
+        /// </summary>
+        public static int port { get; set; }
+
+        /// <summary>
+        /// 正文是否是html格式
+        /// </summary>
+        public static bool isbodyHtml { get; set; }
+
+        /// <summary>
+        /// 附件
+        /// </summary>
+        public static string[] attachmentsPath { get; set; }
+
+        public static bool Send()
+        {
+            //使用指定的郵件地址初始化MailAddress實例
+            MailAddress maddr = new MailAddress(mailFrom);
+
+            //初始化MailMessage實例
+            MailMessage myMail = new MailMessage();
+
+            //向收件人地址集合添加郵件地址
+            if (mailToArray != null)
+            {
+                for (int i = 0; i < mailToArray.Length; i++)
+                {
+                    myMail.To.Add(mailToArray[i].ToString());
+                }
+            }
+
+            //向抄送收件人地址集合添加郵件地址
+            if (mailCcArray != null)
+            {
+                for (int i = 0; i < mailCcArray.Length; i++)
+                {
+                    myMail.CC.Add(mailCcArray[i].ToString());
+                }
+            }
+            //發件人地址
+            myMail.From = maddr;
+
+            //電子郵件的標題
+            myMail.Subject = mailSubject;
+
+            //電子郵件的主題內容使用的編碼
+            myMail.SubjectEncoding = Encoding.UTF8;
+
+            //電子郵件正文
+            myMail.Body = mailBody;
+
+            //電子郵件正文的編碼
+            myMail.BodyEncoding = Encoding.Default;
+
+            //電子郵件優先級
+            myMail.Priority = MailPriority.High;
+
+            //電子郵件不是html格式
+            myMail.IsBodyHtml = isbodyHtml;
+
+            //在有附件的情況下添加附件
+            try
+            {
+                if (attachmentsPath != null && attachmentsPath.Length > 0)
+                {
+                    Attachment attachFile = null;
+                    foreach (string path in attachmentsPath)
+                    {
+                        attachFile = new Attachment(path);
+                        myMail.Attachments.Add(attachFile);
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                throw new Exception("在添加附件時有錯誤:" + err.Message);
+            }
+
+            SmtpClient client = new SmtpClient();
+
+            //指定發件人的郵件地址和密碼以驗證發件人身份
+            client.Credentials = new NetworkCredential(mailFrom, mailPwd);
+
+            //設置SMTP郵件服務器
+            //client.Host = "smtp." + myMail.From.Host;
+            client.Host = host;
+
+            //SMTP郵件服務器端口
+            client.Port = port;
+
+            //是否使用安全連接
+            //client.EnableSsl = true;
+
+            try
+            {
+                //將郵件發送到SMTP郵件服務器
+                client.Send(myMail);
+                return true;
+            }
+            catch (SmtpException ex)
+            {
+                string msg = ex.Message;
+                return false;
+            }
         }
     }
 }

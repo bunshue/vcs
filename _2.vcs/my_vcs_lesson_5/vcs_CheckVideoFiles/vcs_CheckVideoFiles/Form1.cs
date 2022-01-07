@@ -48,7 +48,7 @@ namespace vcs_CheckVideoFiles
         // 宣告fileinfos 為List
         // 以下List 裡為MyFileInfo 型態
         List<MyFileInfo> fileinfos = new List<MyFileInfo>();
-        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();
+        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();  //沒用到
 
         public class MyFileInfo
         {
@@ -277,7 +277,7 @@ namespace vcs_CheckVideoFiles
         {
             try
             {
-                richTextBox1.Text += dir + "\n\n";
+                richTextBox1.Text += "\n" + dir + "\n";
                 //DirectoryInfo di = new DirectoryInfo(dir);
                 //richTextBox1.Text += di.Name + "\n\n";
 
@@ -306,7 +306,7 @@ namespace vcs_CheckVideoFiles
                     foreach (string subdir in subdirEntries)
                     {
                         DirectoryInfo di = new DirectoryInfo(subdir);
-                        richTextBox1.Text += "搜尋子目錄\t" + di.Name + "\n";
+                        //richTextBox1.Text += "搜尋子目錄\t" + di.Name + "\n";
                         FolederName = subdir;
                         ProcessDirectory(subdir);
                     }
@@ -343,7 +343,7 @@ namespace vcs_CheckVideoFiles
                 //一定會被執行的程式區段
             }
 
-            richTextBox1.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
+            //richTextBox1.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
 
             total_size += fi.Length;
             total_files++;
@@ -387,15 +387,20 @@ namespace vcs_CheckVideoFiles
                     //richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
                     //if (cb_generate_text.Checked == true)
                     {
+                        richTextBox1.Text += "影片\t";
                         richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
                             fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+
+                        fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
                     }
                 }
                 else
                 {
                     //if (cb_generate_text.Checked == true)
                     {
+                        richTextBox1.Text += "非影片\t";
                         richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                        fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
                     }
                 }
 
@@ -422,12 +427,19 @@ namespace vcs_CheckVideoFiles
                 */
 
                 //或許某些時候不需要
-                fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+                //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
             }
         }
 
         void show_file_info1()  //轉出一層
         {
+            richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+            richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+            richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+            richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+            richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+
+
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
@@ -603,7 +615,42 @@ namespace vcs_CheckVideoFiles
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            if (fileinfos.Count == 0)
+            {
+                richTextBox1.Text += "找不到資料a\n";
+            }
+            else
+            {
+                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料\n";
+            }
 
+
+            //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+
+            //richTextBox1.Text += "Name\tFolderName\tExt\tLength\tTime\n";
+            for (int i = 0; i < fileinfos.Count; i++)
+            {
+                //richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,20} X {3,20}{4,20}{5,20}",
+                    //fileinfos[i].filename, ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)), 
+                    //fileinfos[i].filepath, fileinfos[i].fileextension, fileinfos[i].filecreationtime) + "\n";
+
+
+                //richTextBox1.Text += fileinfos[i].filename + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filesize + "\t" + fileinfos[i].filecreationtime + "\n";
+
+
+                //richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+
+
+                //richTextBox1.Text += string.Format("{0,-60}{1,-60}{2,-60}{3,-60}{4,-60}", fileinfos[i].filename, fileinfos[i].filename, fileinfos[i].filename, fileinfos[i].filename, fileinfos[i].filename);
+                //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                richTextBox1.Text += string.Format("{0,-70}{1,-10}{2,-15}{3,-60}{4,-20}", fileinfos[i].filename, fileinfos[i].fileextension, ByteConversionTBGBMBKB(fileinfos[i].filesize), fileinfos[i].filepath, fileinfos[i].filecreationtime) + "\n";
+
+
+
+
+                //ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

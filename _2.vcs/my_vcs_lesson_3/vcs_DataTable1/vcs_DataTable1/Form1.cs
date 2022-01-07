@@ -363,6 +363,59 @@ namespace vcs_DataTable1
                 richTextBox1.Text += "\n";
             }
             richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "判斷DataTable中是否包含某值\n";
+            Boolean result;
+
+            string columnName = "英文";
+            string fieldData = "90";
+
+            result = IsColumnIncludeData(dt, columnName, fieldData);
+
+            richTextBox1.Text += "科目 : " + columnName + "\t成績 : " + fieldData + "\t\t";
+
+            if (result == true)
+                richTextBox1.Text += "存在\n";
+            else
+                richTextBox1.Text += "不存在\n";
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "向DataTable中添加數據\n";
+            DataRow dr2;
+
+            for (i = 0; i < 5; i++)
+            {
+                //if (IsColumnIncludeData(dt, "SystemCode", code[i]) == false)
+                {
+                    dr2 = dt.NewRow();
+                    dr2[0] = "NNNN";
+                    dr2[1] = "EEEE";
+                    dr2[2] = "MMMM";
+                    dt.Rows.Add(dr2);
+                }
+            }
+
+            len1 = dt.Columns.Count;
+            len2 = dt.Rows.Count;
+
+            richTextBox1.Text += "len1 = " + len1.ToString() + "\n";
+            richTextBox1.Text += "len2 = " + len2.ToString() + "\n";
+
+            for (i = 0; i < len1; i++)
+            {
+                richTextBox1.Text += dt.Columns[i].ToString() + "\t";
+            }
+            richTextBox1.Text += "\n";
+
+            for (j = 0; j < len2; j++)
+            {
+                for (i = 0; i < len1; i++)
+                {
+                    richTextBox1.Text += dt.Rows[j][i].ToString() + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -441,6 +494,36 @@ namespace vcs_DataTable1
         {
 
         }
+
+        /// <summary>
+        /// 判斷DataTable中是否包含某值
+        /// </summary>
+        /// <param name="dt">DataTable</param>
+        /// <param name="columnName">列名</param>
+        /// <param name="fieldData">值</param>
+        /// <returns></returns>
+        public Boolean IsColumnIncludeData(DataTable dt, String columnName, string fieldData)
+        {
+            if (dt == null)
+            {
+                return false;
+            }
+            else
+            {
+                DataRow[] dataRows = dt.Select(columnName + "='" + fieldData + "'");
+                if (dataRows.Length.Equals(1))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+        }
+
+
     }
 }
 
