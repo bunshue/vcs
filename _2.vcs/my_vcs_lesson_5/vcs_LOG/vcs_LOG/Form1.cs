@@ -38,6 +38,10 @@ namespace vcs_LOG
             _mre = new ManualResetEvent(false);
 
             Register();
+
+            LogAPI.InitLogAPI(Application.StartupPath, "aaaaaaa.log");
+
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -447,6 +451,76 @@ namespace vcs_LOG
                 for (i = 0; i < len; i++)
                 {
                     richTextBox1.Text += Log[i] + "\n";
+                }
+            }
+        }
+
+        int i5 = 0;
+        private void button12_Click(object sender, EventArgs e)
+        {
+            LogAPI.WriteLog("寫log的方法5 " + (i5++).ToString());
+        }
+    }
+
+    public class LogAPI
+    {
+        private static string myPath = "";
+        private static string myName = "";
+
+        /// 
+        /// 初始化日志文件
+        /// 
+
+        /// 
+        /// 
+        public static void InitLogAPI(string logPath, string logName)
+        {
+            myPath = logPath;
+            myName = logName;
+        }
+
+        /// 
+        /// 寫入日志
+        /// 
+
+        /// 日志信息
+        public static void WriteLog(string ex)
+        {
+            if (myPath == "" || myName == "")
+                return;
+
+            string Year = DateTime.Now.Year.ToString();
+            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
+            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
+
+            //年月日文件夾是否存在，不存在則建立
+            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
+            {
+                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
+            }
+
+            //寫入日志UNDO,Exception has not been handle
+            string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
+            if (!File.Exists(LogFile))
+            {
+                System.IO.StreamWriter myFile;
+                myFile = System.IO.File.AppendText(LogFile);
+                myFile.Close();
+            }
+
+            while (true)
+            {
+                try
+                {
+                    StreamWriter sr = File.AppendText(LogFile);
+                    sr.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "  " + ex);
+                    sr.Close();
+                    break;
+                }
+                catch (Exception e)
+                {
+                    System.Threading.Thread.Sleep(50);
+                    continue;
                 }
             }
         }

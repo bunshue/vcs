@@ -176,6 +176,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(217, 42);
             this.button11.TabIndex = 12;
+            this.button11.Text = "c#檢測網絡連接（主要是局域網）";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 

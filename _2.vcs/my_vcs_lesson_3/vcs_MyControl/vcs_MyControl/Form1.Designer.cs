@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.myControl1 = new vcs_MyControl.MyControl();
+            this.transparentPanel1 = new vcs_MyControl.TransparentPanel();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -60,11 +62,21 @@
             this.myControl1.Text = "myControl1";
             this.myControl1.Value = 0F;
             // 
+            // transparentPanel1
+            // 
+            this.transparentPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("transparentPanel1.BackgroundImage")));
+            this.transparentPanel1.Location = new System.Drawing.Point(31, 312);
+            this.transparentPanel1.Name = "transparentPanel1";
+            this.transparentPanel1.Size = new System.Drawing.Size(534, 154);
+            this.transparentPanel1.TabIndex = 3;
+            this.transparentPanel1.Text = "transparentPanel1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 668);
+            this.Controls.Add(this.transparentPanel1);
             this.Controls.Add(this.myControl1);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
@@ -79,6 +91,7 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private MyControl myControl1;
         private System.Windows.Forms.Timer timer1;
+        private TransparentPanel transparentPanel1;
     }
 }
 

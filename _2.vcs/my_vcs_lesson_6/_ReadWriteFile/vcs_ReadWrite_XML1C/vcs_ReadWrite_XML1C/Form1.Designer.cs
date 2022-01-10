@@ -305,6 +305,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(160, 60);
             this.button30.TabIndex = 4;
+            this.button30.Text = "解析XML 1";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -315,6 +316,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(160, 60);
             this.button31.TabIndex = 2;
+            this.button31.Text = "解析XML 2";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -325,6 +327,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(160, 60);
             this.button32.TabIndex = 3;
+            this.button32.Text = "讀取XML";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -335,6 +338,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(160, 60);
             this.button34.TabIndex = 6;
+            this.button34.Text = "建立XML檔案";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -345,6 +349,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(160, 60);
             this.button33.TabIndex = 5;
+            this.button33.Text = "讀取RSS";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 

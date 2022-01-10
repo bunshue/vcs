@@ -554,22 +554,119 @@ namespace vcs_ReadWrite_XML1C
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //解析XML 1
+            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Ce.xml";
+            ReadParseXml_1(filename);
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
+            //解析XML 2
+            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Ce.xml";
+            ReadParseXml_2(filename);
         }
+
+        static void ReadParseXml_1(string filename)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename);
+            //查找<users>
+            XmlNode root = xmlDoc.SelectSingleNode("users");
+            //獲取到所有<users>的子節點
+            XmlNodeList nodeList = root.ChildNodes;
+            //遍歷所有子節點
+            foreach (XmlNode xn in nodeList)
+            {
+                XmlElement xe = (XmlElement)xn;
+                XmlNodeList subList = xe.ChildNodes;
+                foreach (XmlNode xmlNode in subList)
+                {
+                    if ("name".Equals(xmlNode.Name))
+                    {
+                        Console.WriteLine("姓名：" + xmlNode.InnerText);
+                    }
+                    else if ("email".Equals(xmlNode.Name))
+                    {
+                        Console.WriteLine("郵箱：" + xmlNode.InnerText);
+                    }
+                }
+            }
+        }
+
+        static void ReadParseXml_2(string filename)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename);
+            //查找<users>
+            XmlNode root = xmlDoc.SelectSingleNode("users");
+            //獲取到所有<users>的子節點
+            XmlNodeList nodeList = xmlDoc.SelectSingleNode("users").ChildNodes;
+            //遍歷所有子節點
+            foreach (XmlNode xn in nodeList)
+            {
+                XmlElement xe = (XmlElement)xn;
+                Console.WriteLine("節點的ID為： " + xe.GetAttribute("id"));
+                XmlNodeList subList = xe.ChildNodes;
+                foreach (XmlNode xmlNode in subList)
+                {
+                    Console.WriteLine(xmlNode.InnerText);
+                }
+            }
+        }
+
 
         private void button32_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1Ce.xml";
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename);//文件路徑或者URL地址
+            Console.WriteLine(xmlDoc.InnerXml);
+            richTextBox1.Text += "讀取XML檔案 : " + filename + "\n";
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load("http://feed.cnblogs.com/blog/picked/rss");//博客園精華帖RSS
+            Console.WriteLine(xmlDoc.InnerXml);
+
+
+            richTextBox1.Text += "讀取RSS\n";
+
         }
 
         private void button34_Click(object sender, EventArgs e)
         {
+            //建立XML檔案 1
+            string filename = "vcs_ReadWrite_XML1Cf.xml";
+
+            //創建XML文檔及設置元素值
+
+            XmlDocument xmlDoc = new XmlDocument();
+            XmlNode rootNode = xmlDoc.CreateElement("Root");//創建一個節點
+            xmlDoc.AppendChild(rootNode);
+            Console.WriteLine(xmlDoc.InnerXml);
+            Console.WriteLine("==============有逼格的分割線================");
+
+            XmlNode node = xmlDoc.CreateElement("Item");
+            XmlAttribute attribute = xmlDoc.CreateAttribute("Id");//創建節點特性
+            attribute.Value = "1";//設置特性值
+            node.Attributes.Append(attribute);
+            node.InnerText = "張三";
+            rootNode.AppendChild(node);
+            Console.WriteLine(xmlDoc.InnerXml);
+            Console.WriteLine("==============有逼格的分割線================");
+            node = xmlDoc.CreateElement("Item");
+            attribute = xmlDoc.CreateAttribute("Id");
+            attribute.Value = "2";
+            node.Attributes.Append(attribute);
+            node.InnerText = "李四";
+            rootNode.AppendChild(node);
+            Console.WriteLine(xmlDoc.InnerXml);
+
+            //保存创建好的XML文档
+            xmlDoc.Save(filename);  //保存到文件
+            richTextBox1.Text += "建立XML檔案 : " + filename + "\n";
         }
 
         private void button40_Click(object sender, EventArgs e)

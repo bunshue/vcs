@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<users>
+  <user id="1001">
+    <name>張三</name>
+    <email>123456789@136.com</email>
+    <phone>13400000000</phone>
+  </user>
+  <user id="1002">
+    <name>李四</name>
+    <email>123456789@126.com</email>
+    <phone>15800000000</phone>
+  </user>
+</users>
