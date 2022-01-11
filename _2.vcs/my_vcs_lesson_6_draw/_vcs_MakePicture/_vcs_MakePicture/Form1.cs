@@ -121,7 +121,7 @@ namespace _vcs_MakePicture
             button46.Location = new Point(x_st + dx * 6, y_st + dy * 4);
             button47.Location = new Point(x_st + dx * 7, y_st + dy * 4);
             button48.Location = new Point(x_st + dx * 8, y_st + dy * 4);
-            button49.Location = new Point(x_st + dx * 91, y_st + dy * 4);
+            button49.Location = new Point(x_st + dx * 9, y_st + dy * 4);
 
             button50.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button51.Location = new Point(x_st + dx * 1, y_st + dy * 5);
@@ -135,7 +135,7 @@ namespace _vcs_MakePicture
 
             this.Size = new Size(1570, this.Size.Height);
 
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             richTextBox1.Size = new Size(this.Width - richTextBox1.Location.X - 50, this.Height - richTextBox1.Location.Y - 50);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);

@@ -1,4 +1,22 @@
 
+大圖for unsafe
+        string filename = @"C:\______test_files\vcs_reference2\global.c.gif";
+
+
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            //畫虛線
+            Control P = (Control)sender;
+            Pen pen = new Pen(Color.FromArgb(255, 0, 0), 5);
+            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;//虛線的樣式
+            pen.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
+            Graphics g = e.Graphics;
+            //g.DrawLine(pen, 0, 0, 0, P.Height - 1);
+            g.DrawRectangle(pen, 100, 100, 200, 200);
+
+        }
+
 
 button.BackgroundImage =Bitmap.FromFile("d:\\123.png");
 
@@ -5379,6 +5397,15 @@ DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一�
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+關機
+Process.Start("shutdown", "-s -t 0");
+
+注銷
+Process.Start("shutdown", "-l ");
+
+重啟
+Process.Start("shutdown", "-r -t 0");
+
 
 
 
@@ -5387,27 +5414,106 @@ DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一�
 
 
 
+String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 
+如:
 
+（1）
+string p1 = "Jackie";
+string p2 = "Aillo";
+Response.Write(String.Format("Hello {0}, I'm {1}", p1, p2));
+（2）
+Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
+c#，使用WMI對象獲取筆記本電池剩余電量的百分比
 
+有時候需要監控到筆記本電池的剩余電量，調查後發現WMI對象可以搞定。
+在使用WMI對象前，先要添加對System.Management的引用，然後就可以調用WMI對象。
+我們使用的WMI對象是：Win32_Battery
+對象參考：http://msdn.microsoft.com/zh-cn/library/aa394074(v=VS.85).aspx
+代碼：
+ManagementClass mc = new ManagementClass("Win32_Battery");
+ManagementObjectCollection moc = mc.GetInstances();
+
+ManagementObjectCollection.ManagementObjectEnumerator mom = moc.GetEnumerator();
+if (mom.MoveNext()) {
+   Console.WriteLine("EstimatedChargeRemaining: \t{0}%", mom.Current.Properties["EstimatedChargeRemaining"].Value);
+}
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+C#實現定時全屏截圖並且保存到預先設定好的文件夾中的代碼示例
+
+public static void Snap(int x, int y, int width, int height)
+{
+try
+{
+
+//這段代碼也可以實現截圖
+//Image image = new Bitmap(width, height);
+//Graphics g = Graphics.FromImage(image);
+//g.CopyFromScreen(x, y, 0, 0, new System.Drawing.Size(width, height));
+//string hour = DateTime.Now.Minute.ToString();
+//string second = DateTime.Now.Second.ToString();
+//image.Save(ScreenshotPath + "\\" + hour + "_" + second + ".jpg");
+
+
+
+
+Bitmap image = new Bitmap(GetSystemMetrics(0), GetSystemMetrics(1));
+using (Graphics g = Graphics.FromImage(image))
+{
+g.CopyFromScreen(0, 0, 0, 0, image.Size);
+g.Dispose();
+string hour = DateTime.Now.Minute.ToString();
+string second = DateTime.Now.Second.ToString();
+image.Save(“C：” + "\\" + hour + "_" + second + ".jpg");
+}
+}
+catch
+{
+
+
+}
+}
 
 
 
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+C#最簡單的文本加密，
 
+private char[] TextEncrypt(string content, string secretKey)
+{
+    char[] data = content.ToCharArray();
+    char[] key = secretKey.ToCharArray();
 
+    for (int i = 0; i < data.Length; i++)
+    {
+        data[i] ^= key[i % key.Length];
+    }
 
-//--------------------------------------------------------------------------------------------------------------------------
+    return data;
+}
 
+private string TextDecrypt(char[] data, string secretKey)
+{
+    char[] key = secretKey.ToCharArray();
 
+    for (int i = 0; i < data.Length; i++)
+    {
+        data[i] ^= key[i % key.Length];
+    }
 
+    return new string(data);
+}
 
 
 
