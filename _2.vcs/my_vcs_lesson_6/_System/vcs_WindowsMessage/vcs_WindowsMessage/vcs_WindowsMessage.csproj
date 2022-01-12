@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{69F1E913-D6CA-4C0D-8D5F-E4F67A1F5F8A}</ProjectGuid>
+    <ProjectGuid>{1EF812F8-09F0-417C-A1CF-B496C5D7D7E3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>my_vcs_02</RootNamespace>
-    <AssemblyName>my_vcs_02</AssemblyName>
+    <RootNamespace>vcs_WindowsMessage</RootNamespace>
+    <AssemblyName>vcs_WindowsMessage</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -65,7 +65,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -76,84 +75,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\1104_22099815000.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\1431440170_file_download.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\1431440170_file_download_red.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\1431440216_file_upload.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\1431440216_file_upload_red.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\1431440241_save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\1431440286_folder_open.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\1431442199_memory.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\Chart-bar-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\chevron-left.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\chevron-right.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\close_box_red.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\direction_left.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\direction_right.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\download-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\green-ball-icone-7505-64.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\images.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\light-bulb-idea-icone-6023-64.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\Myson_Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\red-ball-icone-4261-64.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\refresh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\refresh_green.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\seo-51-128.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\upload-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\view_refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

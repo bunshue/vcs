@@ -30,6 +30,12 @@ namespace vcs_Draw9_Example
             InitializeComponent();
         }
 
+        //重寫表單的OnPaint範例 直接寫在此即可
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.Width - 10, this.Height - 10);
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();

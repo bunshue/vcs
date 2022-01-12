@@ -1831,6 +1831,23 @@ namespace vcs_Draw1
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //漸層色
+            this.pictureBox1.Size = new Size(400, 400);
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            LinearGradientBrush lgb = new LinearGradientBrush(new Point(0, 0), new Point(0, 400), Color.Red, Color.Green);
+            g.FillRectangle(lgb, 0, 0, 400, 400);
+
+
+            //另法
+            LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, Color.White, Color.Red, LinearGradientMode.Horizontal);
+            brush.SetSigmaBellShape(0.5f);
+            //Graphics g = this.CreateGraphics();
+            g.FillRectangle(brush, 50, 150, 300, 100);
+            f = new Font("Times New Roman", 60);
+            g.DrawString("文字漸層色", f, brush, 1, 1);
+
         }
 
         private void button31_Click(object sender, EventArgs e)
@@ -3213,7 +3230,32 @@ namespace vcs_Draw1
 
         private void button51_Click(object sender, EventArgs e)
         {
+            //使用Brush類繪製圖像
+            Image theimage;
+            Image smallimage;
 
+            this.pictureBox1.Size = new Size(600, 600);
+            SetStyle(ControlStyles.Opaque, true);
+            //Bounds = new Rectangle(0, 0, 600, 600);
+            string filename = @"C:\______test_files\_icon\唐.ico";
+            theimage = new Bitmap(filename);
+            smallimage = new Bitmap(theimage, new Size(theimage.Width / 2, theimage.Height / 2));
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);
+
+            Brush brush = new TextureBrush(smallimage, new Rectangle(0, 0, smallimage.Width, smallimage.Height));
+            //用圖像創建畫筆,來繪制圖像
+            g.FillEllipse(brush, new Rectangle(0, 200, 200, 200));
+            //用圖像創建剛筆,來繪制圖像
+            Pen pen = new Pen(brush, 40);
+            g.DrawRectangle(pen, new Rectangle(250, 200, 200, 200));
+            //用圖像繪製文本
+            Font font = new Font("Times New Roman", 60, FontStyle.Bold | FontStyle.Italic);
+            g.DrawString("Hello Image !!", font, brush, new Rectangle(0, 0, 500, font.Height));
+
+            brush.Dispose();
+            font.Dispose();
         }
 
         private void button52_Click(object sender, EventArgs e)

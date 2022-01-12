@@ -1,4 +1,34 @@
 
+只搜尋單層目錄檔案
+                string[] files = Directory.GetFiles(textBox1.Text);
+                //MessageBox.Show("file numbers = " + files.Length);
+                //MessageBox.Show("files = " + files);
+                for (int i = 0; i < files.Length; i++)
+                {
+                    //MessageBox.Show("i = " + i + ", filename = " + files);
+                    //MessageBox.Show("i = " + i);
+
+                    textBox2.Lines = files;
+                }
+
+
+//　產生縮略圖
+　　　　 private　void　Thumb(string　imgPath,　string　thumbPath)
+　　　　 {
+　　　　　　　　 System.Drawing.Image.GetThumbnailImageAbort　myCallback　=　 new　System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback);
+　　　　　　　　 System.Drawing.Image　img　=　System.Drawing.Image.FromFile (imgPath);　//　通過文件構造
+　　　　　　　 //生成縮略圖
+　　　　　　　 System.Drawing.Image　myThumbnail　=　img.GetThumbnailImage (100,50,myCallback,　IntPtr.Zero);
+　　　　　　　 myThumbnail.Save(thumbPath);　//　保存縮略圖
+　　　　 }
+
+
+
+
+//　寫文字的筆刷，透明度為100,淡灰色
+Brush　b　=　new　SolidBrush(Color.FromArgb(100,Color.LightGray));
+
+
 大圖for unsafe
         string filename = @"C:\______test_files\vcs_reference2\global.c.gif";
 

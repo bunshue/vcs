@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;        //for Directory
+using System.Diagnostics;   //for Process
+
 namespace vcs_MyToolbox
 {
     public partial class Form1 : Form
@@ -74,13 +77,16 @@ namespace vcs_MyToolbox
         //自動隱藏頁面 SP
 
         //要增加到頁面的控件
+        PictureBox pbx_clock = new PictureBox();
         Button btn_00 = new Button();
         Button btn_01 = new Button();
         Button btn_02 = new Button();
         Button btn_20 = new Button();
         Button btn_21 = new Button();
         Button btn_22 = new Button();
-        PictureBox pbx_clock = new PictureBox();
+        Label lb_debug0 = new Label();
+        Label lb_debug1 = new Label();
+        Label lb_debug2 = new Label();
 
         public Form1()
         {
@@ -92,6 +98,9 @@ namespace vcs_MyToolbox
             show_item_location();
 
             add_my_toolbox_controls();
+
+            this.TopMost = true;
+            this.ShowInTaskbar = false;
         }
 
         void show_item_location()
@@ -145,43 +154,65 @@ namespace vcs_MyToolbox
             btn_00.Height = h;
             btn_00.Text = "小算盤";
             btn_00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            //btn_00.Click += btn_cmx_click;	// 加入事件
+            btn_00.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_00);	// 將控件加入表單
 
             btn_01.Width = w;
             btn_01.Height = h;
             btn_01.Text = "WinMerge";
             btn_01.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            //btn_01.Click += btn_cmx_click;	// 加入事件
+            btn_01.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_01);	// 將控件加入表單
 
             btn_02.Width = w;
             btn_02.Height = h;
             btn_02.Text = "Matlab";
             btn_02.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            //btn_02.Click += btn_cmx_click;	// 加入事件
+            btn_02.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_02);	// 將控件加入表單
 
             btn_20.Width = w;
             btn_20.Height = h;
             btn_20.Text = "Visual C#";
             btn_20.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            //btn_20.Click += btn_cmx_click;	// 加入事件
+            btn_20.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_20);	// 將控件加入表單
 
             btn_21.Width = w;
             btn_21.Height = h;
             btn_21.Text = "";
             btn_21.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            //btn_21.Click += btn_cmx_click;	// 加入事件
+            btn_21.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_21);	// 將控件加入表單
 
             btn_22.Width = w;
             btn_22.Height = h;
             btn_22.Text = "";
             btn_22.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            //btn_22.Click += btn_cmx_click;	// 加入事件
+            btn_22.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_22);	// 將控件加入表單
+
+
+            //lb_debug0.Text = "AAAAAAA";
+            lb_debug0.Font = new Font("標楷體", 22);
+            lb_debug0.ForeColor = Color.Red;
+            lb_debug0.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_debug0.AutoSize = true;
+            this.Controls.Add(lb_debug0);     // 將控件加入表單
+
+            //lb_debug1.Text = "BBBBBBB";
+            lb_debug1.Font = new Font("標楷體", 22);
+            lb_debug1.ForeColor = Color.Red;
+            lb_debug1.Location = new Point(x_st + dx * 0, y_st + dy * 3+50);
+            lb_debug1.AutoSize = true;
+            this.Controls.Add(lb_debug1);     // 將控件加入表單
+
+            //lb_debug2.Text = "CCCCCCC";
+            lb_debug2.Font = new Font("標楷體", 22);
+            lb_debug2.ForeColor = Color.Red;
+            lb_debug2.Location = new Point(x_st + dx * 0, y_st + dy * 3+100);
+            lb_debug2.AutoSize = true;
+            this.Controls.Add(lb_debug2);     // 將控件加入表單
 
             int W = w * 3 + 20 * 4 + 20;
             int H = Screen.PrimaryScreen.Bounds.Height;
@@ -249,5 +280,53 @@ namespace vcs_MyToolbox
             e.Graphics.DrawString(mm.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st + (w + dx) * 1, y_st + dy);
             e.Graphics.DrawString(ss.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st + (w + dx) * 2, y_st + dy);
         }
+
+        void btn_click_function(object sender, EventArgs e)
+        {
+            string text = string.Empty;
+
+            if (sender.Equals(btn_00))
+            {
+                text = btn_00.Text;
+            }
+            else if (sender.Equals(btn_01))
+            {
+                text = btn_01.Text;
+            }
+            else if (sender.Equals(btn_02))
+            {
+                text = btn_02.Text;
+            }
+            else if (sender.Equals(btn_20))
+            {
+                text = btn_20.Text;
+                string foldername = @"C:\_git\vcs";
+                if (Directory.Exists(foldername) == true)
+                {
+                    Process.Start(foldername);
+                }
+                else
+                {
+                    lb_debug1.Text = "vcs資料夾不存在";
+                }
+            }
+            else if (sender.Equals(btn_21))
+            {
+                text = btn_21.Text;
+            }
+            else if (sender.Equals(btn_22))
+            {
+                text = btn_22.Text;
+            }
+            else
+            {
+                text = "unknown";
+            }
+
+            lb_debug0.Text = "你按了 " + text;
+
+
+        }
+
     }
 }

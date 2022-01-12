@@ -23,16 +23,18 @@ namespace vcs_ReadWrite_INI3
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public class SetupIniIP
         {
             public string path;
             [DllImport("kernel32", CharSet = CharSet.Unicode)]
-            private static extern long WritePrivateProfileString(string section,
-            string key, string val, string filePath);
+            private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
             [DllImport("kernel32", CharSet = CharSet.Unicode)]
-            private static extern int GetPrivateProfileString(string section,
-            string key, string def, StringBuilder retVal,
-            int size, string filePath);
+            private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
             public void IniWriteValue(string Section, string Key, string Value, string inipath)
             {
                 WritePrivateProfileString(Section, Key, Value, inipath);
@@ -44,7 +46,6 @@ namespace vcs_ReadWrite_INI3
                 return temp.ToString();
             }
         }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -70,7 +71,6 @@ namespace vcs_ReadWrite_INI3
             richTextBox1.Text += "Write ini data to " + filename + "\n";
             ini.IniWriteValue("Language", "lang1", textBox1.Text, filename);
             ini.IniWriteValue("Language", "lang2", textBox2.Text, filename);
-
         }
 
         private void button3_Click(object sender, EventArgs e)

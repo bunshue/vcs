@@ -533,6 +533,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(120, 42);
             this.button30.TabIndex = 55;
+            this.button30.Text = "漸層色";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -843,6 +844,7 @@
             this.button51.Name = "button51";
             this.button51.Size = new System.Drawing.Size(120, 42);
             this.button51.TabIndex = 80;
+            this.button51.Text = "使用Brush類繪製圖像";
             this.button51.UseVisualStyleBackColor = true;
             this.button51.Click += new System.EventHandler(this.button51_Click);
             // 

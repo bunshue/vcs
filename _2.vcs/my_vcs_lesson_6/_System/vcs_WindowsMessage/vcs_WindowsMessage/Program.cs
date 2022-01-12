@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace my_vcs_02
+namespace vcs_WindowsMessage
 {
     static class Program
     {

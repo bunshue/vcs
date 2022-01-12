@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("my_vcs_02")]
+[assembly: AssemblyTitle("vcs_WindowsMessage")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Home")]
-[assembly: AssemblyProduct("my_vcs_02")]
-[assembly: AssemblyCopyright("Copyright © Home 2016")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("vcs_WindowsMessage")]
+[assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("8da71caf-cc5e-4b63-b1bc-d454bea812bc")]
+[assembly: Guid("17d41752-6c13-4363-9e49-080bf75c464f")]
 
 // 組件的版本資訊是由下列四項值構成:
 //
