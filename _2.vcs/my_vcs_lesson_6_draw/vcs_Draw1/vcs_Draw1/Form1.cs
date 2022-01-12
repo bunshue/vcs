@@ -175,7 +175,9 @@ namespace vcs_Draw1
             panel2.Size = new Size(650, 100);
             panel2.Location = new Point(50, y_st);
 
-            pictureBox_text.Location = new Point(50, y_st + 150);
+            pictureBox_text.Location = new Point(50, y_st + 150 - 30);
+            groupBox2.Location = new Point(50, y_st + 150 + 30);
+            groupBox2.Size = new Size(600, 60);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -896,6 +898,7 @@ namespace vcs_Draw1
 
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
 
+            richTextBox1.Text += "反鋸齒功能\n";
             Font f = new Font("標楷體", 20);
             SolidBrush sb = new SolidBrush(Color.Purple);
 
@@ -912,6 +915,31 @@ namespace vcs_Draw1
             g.DrawLine(p, p3, p4);
             g.DrawString("反鋸齒功能\t打開", f, sb, new PointF(170, 170));
 
+            richTextBox1.Text += "有 無 Smoothing 比較\n";
+            using (Font the_font = new Font("Times New Roman", 16))
+            {
+                // Draw without smoothing.
+                int x = 30, y = 240;
+                g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+                g.DrawString("無 Smoothing", the_font, Brushes.Blue, x, y);
+                y += 50;
+                g.DrawImage(Properties.Resources.Smiley100x100, x, y, 50, 50);
+                y += 100;
+                g.DrawEllipse(Pens.Red, x, y, 100, 50);
+
+                // Draw with smoothing.
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                g.InterpolationMode = InterpolationMode.High;
+
+                x = 180;
+                y = 240;
+                g.DrawString("有 Smoothing", the_font, Brushes.Blue, x, y);
+                y += 50;
+                g.DrawImage(Properties.Resources.Smiley100x100, x, y, 50, 50);
+                y += 100;
+                g.DrawEllipse(Pens.Red, x, y, 100, 50);
+            }
             pictureBox1.Image = bitmap1;
         }
 
@@ -1852,38 +1880,6 @@ namespace vcs_Draw1
 
         private void button31_Click(object sender, EventArgs e)
         {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            using (Font the_font = new Font("Times New Roman", 16))
-            {
-                // Draw without smoothing.
-                int x = 30, y = 30;
-                g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
-                g.DrawString("無 Smoothing", the_font, Brushes.Blue, x, y);
-                y += 50;
-                g.DrawImage(Properties.Resources.Smiley100x100, x, y, 50, 50);
-                y += 100;
-                g.DrawEllipse(Pens.Red, x, y, 100, 50);
-
-                // Draw with smoothing.
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                g.InterpolationMode = InterpolationMode.High;
-
-                x = 180;
-                y = 30;
-                g.DrawString("有 Smoothing", the_font, Brushes.Blue, x, y);
-                y += 50;
-                g.DrawImage(Properties.Resources.Smiley100x100, x, y, 50, 50);
-                y += 100;
-                g.DrawEllipse(Pens.Red, x, y, 100, 50);
-            }
-            pictureBox1.Image = bitmap1;
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -3494,6 +3490,60 @@ namespace vcs_Draw1
 
         private void button59_Click(object sender, EventArgs e)
         {
+        }
+
+        int percentageValues = 0;
+        private void timer_progressbar_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox_progressbar.Invalidate();
+            percentageValues++;
+            if (percentageValues > 100)
+            {
+                percentageValues = 0;
+            }
+        }
+
+        private GraphicsPath CreateRound(Rectangle rectangle, int r)
+        {
+            int l = 2 * r;
+            // 把圆角矩形分成八段直线、弧的组合，依次加到路径中 
+            GraphicsPath gp = new GraphicsPath();
+            gp.AddLine(new Point(rectangle.X + r, rectangle.Y), new Point(rectangle.Right - r, rectangle.Y));
+            gp.AddArc(new Rectangle(rectangle.Right - l, rectangle.Y, l, l), 270F, 90F);
+            gp.AddLine(new Point(rectangle.Right, rectangle.Y + r), new Point(rectangle.Right, rectangle.Bottom - r));
+            gp.AddArc(new Rectangle(rectangle.Right - l, rectangle.Bottom - l, l, l), 0F, 90F);
+            gp.AddLine(new Point(rectangle.Right - r, rectangle.Bottom), new Point(rectangle.X + r, rectangle.Bottom));
+            gp.AddArc(new Rectangle(rectangle.X, rectangle.Bottom - l, l, l), 90F, 90F);
+            gp.AddLine(new Point(rectangle.X, rectangle.Bottom - r), new Point(rectangle.X, rectangle.Y + r));
+            gp.AddArc(new Rectangle(rectangle.X, rectangle.Y, l, l), 180F, 90F);
+            return gp;
+        }
+
+        private void pictureBox_progressbar_Paint(object sender, PaintEventArgs e)
+        {
+            //畫背景
+            Rectangle rect = e.ClipRectangle;
+            int x_st = 0;
+            int y_st = 0;
+            int w = 530;
+            int h = 12;
+            rect = new Rectangle(x_st, y_st, w - 1, h);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;//消除锯齿
+            GraphicsPath round = CreateRound(rect, 5);
+            e.Graphics.FillPath(new SolidBrush(Color.FromArgb(217, 218, 219)), round);
+
+            //畫前景進度
+            rect = new Rectangle(x_st, y_st, ((w * percentageValues) / 100) - 1, h);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;//消除锯齿
+            round = CreateRound(rect, 5);
+            if (percentageValues <= 70)
+            {
+                e.Graphics.FillPath(new SolidBrush(Color.FromArgb(25, 176, 132)), round);
+            }
+            else
+            {
+                e.Graphics.FillPath(new SolidBrush(Color.Red), round);
+            }
         }
     }
 }

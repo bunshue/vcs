@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button9 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -104,6 +105,9 @@
             this.button57 = new System.Windows.Forms.Button();
             this.button58 = new System.Windows.Forms.Button();
             this.button59 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
+            this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
@@ -111,6 +115,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_sp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -544,7 +550,6 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(120, 42);
             this.button31.TabIndex = 56;
-            this.button31.Text = "有 無 Smoothing 比較";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -931,11 +936,37 @@
             this.button59.UseVisualStyleBackColor = true;
             this.button59.Click += new System.EventHandler(this.button59_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.pictureBox_progressbar);
+            this.groupBox2.Location = new System.Drawing.Point(659, 138);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(85, 95);
+            this.groupBox2.TabIndex = 88;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "自製進度條";
+            // 
+            // pictureBox_progressbar
+            // 
+            this.pictureBox_progressbar.Location = new System.Drawing.Point(24, 22);
+            this.pictureBox_progressbar.Name = "pictureBox_progressbar";
+            this.pictureBox_progressbar.Size = new System.Drawing.Size(566, 63);
+            this.pictureBox_progressbar.TabIndex = 0;
+            this.pictureBox_progressbar.TabStop = false;
+            this.pictureBox_progressbar.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_progressbar_Paint);
+            // 
+            // timer_progressbar
+            // 
+            this.timer_progressbar.Enabled = true;
+            this.timer_progressbar.Interval = 10;
+            this.timer_progressbar.Tick += new System.EventHandler(this.timer_progressbar_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1443, 917);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button59);
             this.Controls.Add(this.button58);
             this.Controls.Add(this.button57);
@@ -1022,6 +1053,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_sp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_st)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1105,6 +1138,9 @@
         private System.Windows.Forms.Button button57;
         private System.Windows.Forms.Button button58;
         private System.Windows.Forms.Button button59;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.PictureBox pictureBox_progressbar;
+        private System.Windows.Forms.Timer timer_progressbar;
     }
 }
 
