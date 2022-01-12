@@ -40,6 +40,7 @@
             this.LblDelta = new System.Windows.Forms.Label();
             this.SliderDelta = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.PicR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Thumb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SliderColorAmount)).BeginInit();
@@ -154,6 +155,10 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Delta：";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // FrmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -197,6 +202,7 @@
         private System.Windows.Forms.Label LblDelta;
         private System.Windows.Forms.TrackBar SliderDelta;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

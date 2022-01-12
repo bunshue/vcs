@@ -6,34 +6,43 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Collections;
-using System.Runtime.InteropServices;
+
 using System.Diagnostics;
 
+/*
+一個簡單的統計圖像主顏色的算法（C#源代碼)
+
+算法的原理很簡單，就是統計出圖像中各種顏色的分布情況，然後取前N個顏色作為主成分。
+
+當然，實際上如果直接對圖像的各通道256個色階進行統計，得到的結果可能是沒有意義的，所以一般都需要先把256個色階線性的隱射到更少的色階范圍。
+*/
 
 namespace ColorStatistics
 {
     public partial class FrmTest : Form
     {
+        List<Statistics.MajorColor> MC;
+        int PixelAmount = 0;
+
         public FrmTest()
         {
             InitializeComponent();
         }
 
-        List<Statistics.MajorColor> MC;
-        int PixelAmount = 0;
+        private void FrmTest_Load(object sender, EventArgs e)
+        {
+            CmdDeal_Click(sender, e);
+        }
 
         private void CmdOpen_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.FilterIndex = 4;
-            openFileDialog.RestoreDirectory = true;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            openFileDialog1.InitialDirectory = @"C:\______test_files\";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Thumb.Image =  (Bitmap)Bitmap.FromFile(openFileDialog.FileName);
-              
+                Thumb.Image = (Bitmap)Bitmap.FromFile(openFileDialog1.FileName);
             }
         }
+
         public static Color IntToColor(int color)
         {
             int R = color & 255;
@@ -52,7 +61,6 @@ namespace ColorStatistics
             if (MC != null)
             {
                 double total = 0;
-                double total_pixel = 0;
                 e.Graphics.Clear(PicR.BackColor);
                 Font font = new Font("宋体", 9f);
                 SolidBrush B = new SolidBrush(Color.Black);
@@ -77,14 +85,14 @@ namespace ColorStatistics
 
         private void CmdDeal_Click(object sender, EventArgs e)
         {
-           
-            if (Thumb.Image !=null ) 
+
+            if (Thumb.Image != null)
             {
                 Stopwatch Sw = new Stopwatch();
                 Sw.Start();
-                MC = Statistics.PrincipalColorAnalysis((Bitmap)Thumb.Image,SliderColorAmount.Value, SliderDelta.Value);
+                MC = Statistics.PrincipalColorAnalysis((Bitmap)Thumb.Image, SliderColorAmount.Value, SliderDelta.Value);
                 Sw.Stop();
-                LblStatus.Text   = "计算主成分用时: "  +Sw.ElapsedMilliseconds.ToString() + " 毫秒";
+                LblStatus.Text = "计算主成分用时: " + Sw.ElapsedMilliseconds.ToString() + " 毫秒";
                 PixelAmount = Thumb.Image.Width * Thumb.Image.Height;
                 PicR.Refresh();
             }
@@ -99,11 +107,6 @@ namespace ColorStatistics
         {
             LblDelta.Text = SliderDelta.Value.ToString();
         }
-
-        private void FrmTest_Load(object sender, EventArgs e)
-        {
-            CmdDeal_Click(sender,e);
-        }
-
     }
 }
+
