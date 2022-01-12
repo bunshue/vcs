@@ -7,16 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Net;
-using System.Xml;
 using System.Xml.Linq;
-using System.Text.RegularExpressions;
-using System.Management;
-using System.IO;
-using Shell32;
-using System.Runtime.InteropServices;
 
-namespace vcs_test_all_05_LINQ
+namespace vcs_LINQ
 {
     public partial class Form1 : Form
     {
@@ -220,7 +213,7 @@ namespace vcs_test_all_05_LINQ
             //執行查詢
             //Console.WriteLine(studentsToXml);
             richTextBox1.Text += studentsToXml + "\n";
- 
+
 
 
 
@@ -290,7 +283,6 @@ namespace vcs_test_all_05_LINQ
         {
 
         }
-
     }
 }
 

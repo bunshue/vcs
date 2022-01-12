@@ -1,4 +1,4 @@
-﻿namespace vcs_test_all_05_LINQ
+﻿namespace vcs_LINQ
 {
     partial class Form1
     {

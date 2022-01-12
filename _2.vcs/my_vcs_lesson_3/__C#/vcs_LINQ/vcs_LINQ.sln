@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_05_LINQ", "vcs_test_all_05_LINQ\vcs_test_all_05_LINQ.csproj", "{E38AD5AE-BFB7-4088-BD5B-1D085DE7D135}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_LINQ", "vcs_LINQ\vcs_LINQ.csproj", "{E38AD5AE-BFB7-4088-BD5B-1D085DE7D135}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

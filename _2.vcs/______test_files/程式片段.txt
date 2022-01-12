@@ -29,10 +29,6 @@
 Brush　b　=　new　SolidBrush(Color.FromArgb(100,Color.LightGray));
 
 
-大圖for unsafe
-        string filename = @"C:\______test_files\vcs_reference2\global.c.gif";
-
-
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
