@@ -584,20 +584,10 @@ namespace vcs_System2
             System.Diagnostics.Process.Start("mmsys.cpl");
         }
 
-        //啟動螢幕保護 ST
-
-        private const int WM_SYSCOMMAND = 0x0112;
-        private const int SC_SCREENSAVE = 0xf140;
-
-        [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
-
         private void button36_Click(object sender, EventArgs e)
         {
-            //啟動螢幕保護
-            SendMessage(this.Handle, WM_SYSCOMMAND, SC_SCREENSAVE, 0);
+
         }
-        //啟動螢幕保護 SP
 
         private void button37_Click(object sender, EventArgs e)
         {

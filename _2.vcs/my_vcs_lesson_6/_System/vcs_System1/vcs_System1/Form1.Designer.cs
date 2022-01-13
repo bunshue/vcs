@@ -194,7 +194,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(240, 50);
             this.button7.TabIndex = 7;
-            this.button7.Text = "啟動螢幕保護";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 

@@ -101,6 +101,7 @@
             this.button57 = new System.Windows.Forms.Button();
             this.button58 = new System.Windows.Forms.Button();
             this.button59 = new System.Windows.Forms.Button();
+            this.timer_dot_line = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -790,6 +791,7 @@
             this.button51.Name = "button51";
             this.button51.Size = new System.Drawing.Size(100, 40);
             this.button51.TabIndex = 85;
+            this.button51.Text = "繪製螞蟻線";
             this.button51.UseVisualStyleBackColor = true;
             this.button51.Click += new System.EventHandler(this.button51_Click);
             // 
@@ -872,6 +874,10 @@
             this.button59.TabIndex = 93;
             this.button59.UseVisualStyleBackColor = true;
             this.button59.Click += new System.EventHandler(this.button59_Click);
+            // 
+            // timer_dot_line
+            // 
+            this.timer_dot_line.Tick += new System.EventHandler(this.timer_dot_line_Tick);
             // 
             // Form1
             // 
@@ -1033,6 +1039,7 @@
         private System.Windows.Forms.Button button57;
         private System.Windows.Forms.Button button58;
         private System.Windows.Forms.Button button59;
+        private System.Windows.Forms.Timer timer_dot_line;
     }
 }
 

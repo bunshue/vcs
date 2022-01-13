@@ -1,4 +1,19 @@
 
+
+            DataTable table = new DataTable();
+            //初始化datatale 
+            table.Columns.Add("id", typeof(string));
+            table.Columns.Add("value", typeof(int));
+            for (int i = 1; i <= 10; i++)
+            {
+                DataRow dRow = table.NewRow();
+                dRow["id"] = "id" + i.ToString();
+                dRow["value"] = i;
+                table.Rows.Add(dRow);
+            }
+
+
+
 只搜尋單層目錄檔案
                 string[] files = Directory.GetFiles(textBox1.Text);
                 //MessageBox.Show("file numbers = " + files.Length);
@@ -5226,7 +5241,7 @@ string sOutput = p.StandardOutput.ReadToEnd();
         /// <param name="pOrigStartPointX">原始圖片開始截取處的坐標X值</param>
         /// <param name="pOrigStartPointY">原始圖片開始截取處的坐標Y值</param>
         static System.Drawing.Bitmap GetPart(string pPath, int pPartStartPointX, int pPartStartPointY, int pPartWidth, int pPartHeight, int pOrigStartPointX, int pOrigStartPointY)
-        ...{
+        {
             System.Drawing.Image originalImg = System.Drawing.Image.FromFile(pPath);
 
             System.Drawing.Bitmap partImg = new System.Drawing.Bitmap(pPartWidth, pPartHeight);

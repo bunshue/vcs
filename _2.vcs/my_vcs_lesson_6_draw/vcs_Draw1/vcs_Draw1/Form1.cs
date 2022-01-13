@@ -940,6 +940,14 @@ namespace vcs_Draw1
                 y += 100;
                 g.DrawEllipse(Pens.Red, x, y, 100, 50);
             }
+
+            //畫示意圖
+            string filename = @"C:\______test_files\_material\AntiAlias.jpg";
+            //讀檔 至 Image 影像
+            Image img = Image.FromFile(filename); // 產生一個Image物件
+            //畫出來
+            g.DrawImage(img, 300, 380, img.Width/2, img.Height/2);
+
             pictureBox1.Image = bitmap1;
         }
 

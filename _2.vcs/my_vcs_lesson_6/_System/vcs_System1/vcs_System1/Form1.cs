@@ -305,14 +305,9 @@ namespace vcs_System1
             richTextBox1.Text += "電腦名稱 4 : " + Environment.GetEnvironmentVariable("COMPUTERNAME") + "\n";
         }
 
-        //啟動螢幕保護
-        private const int WM_SYSCOMMAND = 0x0112;
-        private const int SC_SCREENSAVE = 0xf140;
-        [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
         private void button7_Click(object sender, EventArgs e)
         {
-            SendMessage(this.Handle, WM_SYSCOMMAND, SC_SCREENSAVE, 0);
+            
         }
 
         //取得硬碟資訊 ST

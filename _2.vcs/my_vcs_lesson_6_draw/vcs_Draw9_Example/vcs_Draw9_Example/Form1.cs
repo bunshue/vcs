@@ -7304,10 +7304,91 @@ namespace vcs_Draw9_Example
             g.FillRectangle(brBlack, MID - 15, Top - 20, 30, 25);
         }
 
+        //繪製螞蟻線 ST
+        delegate void LINEDDAPROC(int X, int Y, IntPtr lpData);
+        [DllImport("gdi32.dll")]
+        static extern int LineDDA(int nXStart, int nYStart, int nXEnd, int nYEnd, LINEDDAPROC lpLineFunc, IntPtr lpData);
+
+        private const byte PT_CLOSEFIGURE = 1;
+        private const byte PT_LINETO = 2;
+        private const byte PT_BEZIERTO = 4;
+        private const byte PT_MOVETO = 6;
+
+        [DllImport("gdi32.dll")]
+        static extern int SetPixel(IntPtr hdc, int X, int Y, int crColor);
+
+        GraphicsPath graphicsPath = new GraphicsPath();
+        private int counter = 0;
+        private IntPtr graphicsHandle = IntPtr.Zero;
+
         private void button51_Click(object sender, EventArgs e)
         {
-
+            //繪製螞蟻線, 目前只能畫在表單上
+            graphicsPath.ClearMarkers();
+            graphicsPath.AddRectangle(new Rectangle(900, 100, 200, 200));
+            timer_dot_line.Interval = 100;
+            timer_dot_line.Enabled = true;
         }
+
+        private void MovingDots(int X, int Y, IntPtr lpData)
+        {
+            counter = (counter + 1) % 15;
+            Color vColor;
+            if (counter < 5)
+            {
+                vColor = Color.White;
+            }
+            else if (counter < 12)
+            {
+                vColor = Color.Red;
+            }
+            else
+            {
+                vColor = Color.Blue;
+            }
+            SetPixel(graphicsHandle, X, Y, vColor.R | vColor.G << 8 | vColor.B << 16);
+        }
+
+        private void timer_dot_line_Tick(object sender, EventArgs e)
+        {
+            graphicsHandle = Graphics.FromHwnd(Handle).GetHdc();
+            for (int i = 0; i < graphicsPath.PathPoints.Length; i++)
+            {
+                if (graphicsPath.PathTypes[i] == (byte)(PT_CLOSEFIGURE | PT_LINETO))
+                {
+                    for (int j = i; j >= 0; j--)
+                    {
+                        if (graphicsPath.PathTypes[j] == PT_MOVETO)
+                        {
+                            LineDDA(
+                                (int)graphicsPath.PathPoints[i].X,
+                                (int)graphicsPath.PathPoints[i].Y,
+                                (int)graphicsPath.PathPoints[j].X,
+                                (int)graphicsPath.PathPoints[j].Y,
+                                MovingDots, IntPtr.Zero);
+                            break;
+                        }
+                    }
+                    continue;
+                }
+                if (i == graphicsPath.PathPoints.Length - 1)
+                    LineDDA(
+                        (int)graphicsPath.PathPoints[i].X,
+                        (int)graphicsPath.PathPoints[i].Y,
+                        (int)graphicsPath.PathPoints[0].X,
+                        (int)graphicsPath.PathPoints[0].Y,
+                        MovingDots, IntPtr.Zero);
+                else
+                    LineDDA(
+                        (int)graphicsPath.PathPoints[i].X,
+                        (int)graphicsPath.PathPoints[i].Y,
+                        (int)graphicsPath.PathPoints[i + 1].X,
+                        (int)graphicsPath.PathPoints[i + 1].Y,
+                        MovingDots, IntPtr.Zero);
+
+            }
+        }
+        //繪製螞蟻線 SP
 
         private void button52_Click(object sender, EventArgs e)
         {
@@ -7348,6 +7429,7 @@ namespace vcs_Draw9_Example
         {
 
         }
+
     }
 
     /// <summary>
