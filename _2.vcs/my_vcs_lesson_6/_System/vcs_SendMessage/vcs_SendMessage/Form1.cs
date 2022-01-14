@@ -306,7 +306,6 @@ namespace vcs_SendMessage
         [DllImport("user32.dll", SetLastError = true)]
         static extern int SendMessage(IntPtr hWnd, int msg, int wParam, StringBuilder lParam);
 
-
         public Form1()
         {
             InitializeComponent();
@@ -384,9 +383,278 @@ namespace vcs_SendMessage
 
         //啟動螢幕保護 SP
 
+        int iii = 0;
         private void button4_Click(object sender, EventArgs e)
         {
+            const int WM_SETTEXT = 0x000C;
+
+            IntPtr MainWnd = FindWindow("Notepad", null);
+            if (MainWnd != IntPtr.Zero)
+            {
+                IntPtr ChildWnd = FindWindowEx(MainWnd, IntPtr.Zero, "Edit", "");
+                if (ChildWnd != IntPtr.Zero)
+                {
+                    StringBuilder InsStr = new StringBuilder();
+                    InsStr.Append((iii++).ToString() + "\t" + DateTime.Now.ToString() + "\n");
+                    SendMessage(ChildWnd, WM_SETTEXT, 0, InsStr);
+                    richTextBox1.Text += "傳送訊息完成\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "沒有找到子窗口\n";
+                }
+
+
+                ChildWnd = FindWindowEx(MainWnd, IntPtr.Zero, "msctls_statusbar32", "");
+                if (ChildWnd != IntPtr.Zero)
+                {
+                    /*
+                    StringBuilder InsStr = new StringBuilder();
+                    InsStr.Append((iii++).ToString() + "\t" + DateTime.Now.ToString() + "\n");
+                    SendMessage(ChildWnd, WM_SETTEXT, 0, InsStr);
+                    */
+                    richTextBox1.Text += "傳送訊息完成2222\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "沒有找到子窗口2222\n";
+                }
+
+            }
+            else
+            {
+                richTextBox1.Text += "沒有找到窗口\n";
+            }
+
+
+
         }
-        
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string str = string.Empty;
+            IntPtr i = FindWindow("MozillaWindowClass", null);
+            IntPtr i3 = FindWindow(null, "Teamviewer");
+            richTextBox1.AppendText("根據Teamviewer的title獲取句柄：" + i3.ToString("x2") + "\r\n");
+            IntPtr i1 = FindWindow(null, "TeamViewer");
+            richTextBox1.AppendText("火狐瀏覽器的句柄:" + i.ToString("x2") + "\r\n");
+            richTextBox1.AppendText("Teamviewer的句柄:" + i1.ToString("x2") + "\r\n");
+            IntPtr i2 = FindWindowEx(i1, IntPtr.Zero, "Button", "遠程控制");
+            StringBuilder sb = new StringBuilder();
+            GetWindowText(i1, sb, sb.Capacity);
+            richTextBox1.AppendText("TeamViewer的文本：" + sb.ToString() + "\r\n");
+            richTextBox1.AppendText("Teamviewer下的子窗體的句柄:" + i2.ToString("x2") + "\r\n");
+            List<WindowInfo> listInfo = GetAllDesktopWindows("MozillaWindowClass");
+            for (int s = 0; s < listInfo.Count; s++)
+            {
+                richTextBox1.AppendText("List<WindowInfo>[" + s + "]" + "句柄：" + listInfo[s].hWnd.ToString("x2") + "類名：" + listInfo[s].szClassName + "文本：" + listInfo[s].szWindowName + "\r\n");
+            }
+            WindowInfo vsInfo = GetIntPtrByWindowClName("HwndWrapper[DefaultDomain;;ec23c78e-745d-424c-a8d8-d108ad24c70f]");
+            richTextBox1.AppendText("根據vs2013的類名獲取qq窗體的信息：" + "句柄:" + vsInfo.hWnd.ToString("x2") + "文本:" + vsInfo.szWindowName + "類名:" + vsInfo.szClassName + "\r\n");
+            WindowInfo mailInfo = GetIntPtrByWindowTitle("Foxmail");
+            richTextBox1.AppendText("根據Foxmail的標題獲取句柄信息：" + "句柄：" + mailInfo.hWnd.ToString("x2") + "文本：" + mailInfo.szWindowName + "類名:" + mailInfo.szClassName + "\r\n");
+            //這一步將會打開i1的窗口
+            SetForegroundWindow(i1);
+            ShowWindow(i1, 1);
+
+        }
+
+        public struct WindowInfo
+        {
+            public IntPtr hWnd;
+            public string szWindowName;
+            public string szClassName;
+
+        }
+        /// <summary>
+        /// 根據類名獲取窗口信息
+        /// </summary>
+        /// <param name="className"></param>
+        /// <param name="windowText"></param>
+        /// <returns></returns>
+        public static List<WindowInfo> GetAllDesktopWindows(string className = "", string windowText = "")
+        {
+            List<WindowInfo> wndList = new List<WindowInfo>();
+            EnumWindows(delegate(IntPtr hWnd, int lParam)
+            {
+                WindowInfo wnd = new WindowInfo();
+                StringBuilder sb = new StringBuilder(256);
+
+                wnd.hWnd = hWnd;
+
+                GetWindowText(hWnd, sb, sb.Capacity);
+                wnd.szWindowName = sb.ToString();
+
+                GetClassName(hWnd, sb, sb.Capacity);
+                wnd.szClassName = sb.ToString();
+
+                if ((className == "" || wnd.szClassName == className)
+                    && (windowText == "" || wnd.szWindowName == windowText))
+                {
+                    wndList.Add(wnd);
+                }
+                return true;
+            }, 0);
+
+            return wndList;
+        }
+        /// <summary>
+        /// 顯示窗體
+        /// </summary>
+        /// <param name="hWnd">窗體句柄</param>
+        /// <param name="nCmdShow">指定的命令 0:關閉窗口 1:正常大小顯示窗口 2:最小化窗口3:最大化窗口</param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        public enum WindowShowStatus
+        {
+            /// <summary>
+            /// 隱藏窗口
+            /// </summary>
+            SW_HIDE = 0,
+            /// <summary>
+            /// 最大化窗口
+            /// </summary>
+            SW_MAXIMIZE = 3,
+            /// <summary>
+            /// 最小化窗口
+            /// </summary>
+            SW_MINIMIZE = 6,
+            /// <summary>
+            /// 用原來的大小和位置顯示一個窗口，同時令其進入活動狀態
+            /// </summary>
+            SW_RESTORE = 9,
+            /// <summary>
+            /// 用當前的大小和位置顯示一個窗口，同時令其進入活動狀態
+            /// </summary>
+            SW_SHOW = 5,
+            /// <summary>
+            /// 最大化窗口，並將其激活
+            /// </summary>
+            SW_SHOWMAXIMIZED = 3,
+            /// <summary>
+            /// 最小化窗口，並將其激活
+            /// </summary>
+            SW_SHOWMINIMIZED = 2,
+            /// <summary>
+            /// 最小化一個窗口，同時不改變活動窗口
+            /// </summary>
+            SW_SHOWMINNOACTIVE = 7,
+            /// <summary>
+            /// 用當前的大小和位置顯示一個窗口，不改變活動窗口
+            /// </summary>
+            SW_SHOWNA = 8,
+            /// <summary>
+            /// 用最近的大小和位置顯示一個窗口，同時不改變活動窗口
+            /// </summary>
+            SW_SHOWNOACTIVATE = 4,
+            /// <summary>
+            /// 用原來的大小和位置顯示一個窗口，同時令其進入活動狀態，與SW_RESTORE 相同
+            /// </summary>
+            SW_SHOWNORMAL = 1,
+            /// <summary>
+            /// 關閉窗體
+            /// </summary>
+            WM_CLOSE = 0x10
+        }
+        /// <summary>
+        /// 設置系統的前台窗體
+        /// </summary>
+        /// <param name="hWnd">窗體句柄</param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+        [DllImport("user32.dll")]
+        public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpWindowText, int nMaxCount);
+        [DllImport("user32.dll")]
+        public static extern void GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+
+        //[DllImport("user32.dll")]
+        //public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        /// <summary>
+        /// 獲取子窗口句柄
+        /// </summary>
+        /// <param name="hwndParent">主窗體句柄</param>
+        /// <param name="hwndChildAfter">子窗體句柄</param>
+        /// <param name="lpszClass">搜索的類名</param>
+        /// <param name="lpszWindow"></param>
+        /// <returns></returns>
+        //[DllImport("user32.dll")]//,EntryPoint="FindWindowEx"
+        //public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, String lpszClass, String lpszWindow);
+        public delegate bool CallBack(IntPtr hwnd, int lParam);
+        [DllImport("user32.dll")]
+        public static extern int EnumWindows(CallBack x, int y);
+        /// <summary>
+        /// 功能：更具窗體類名獲取窗體的信息
+        /// </summary>
+        /// <param name="strWinClassName"></param>
+        /// <returns></returns>
+        public static WindowInfo GetIntPtrByWindowClName(string strWinClassName)
+        {
+            WindowInfo windowInfo = new WindowInfo();
+
+            EnumWindows(delegate(IntPtr hWnd, int lParam)
+            {
+                WindowInfo wnd = new WindowInfo();
+                StringBuilder sb = new StringBuilder(256);
+
+                wnd.hWnd = hWnd;
+
+                GetWindowText(hWnd, sb, sb.Capacity);
+                wnd.szWindowName = sb.ToString();
+
+                GetClassName(hWnd, sb, sb.Capacity);
+                wnd.szClassName = sb.ToString();
+
+                if (wnd.szClassName == strWinClassName)
+                {
+                    windowInfo = wnd;
+                }
+                return true;
+            }, 0);
+
+            return windowInfo;
+        }
+        /// <summary>
+        /// 功能：更具窗體標題獲取窗體的信息
+        /// </summary>
+        /// <param name="strWinClassName"></param>
+        /// <returns></returns>
+        public static WindowInfo GetIntPtrByWindowTitle(string strWinHeadName)
+        {
+            WindowInfo windowInfo = new WindowInfo();
+
+            EnumWindows(delegate(IntPtr hWnd, int lParam)
+            {
+                WindowInfo wnd = new WindowInfo();
+                StringBuilder sb = new StringBuilder(256);
+
+                wnd.hWnd = hWnd;
+
+                GetWindowText(hWnd, sb, sb.Capacity);
+                wnd.szWindowName = sb.ToString();
+
+                GetClassName(hWnd, sb, sb.Capacity);
+                wnd.szClassName = sb.ToString();
+
+                if (wnd.szWindowName == strWinHeadName)
+                {
+                    windowInfo = wnd;
+                }
+                return true;
+            }, 0);
+
+            return windowInfo;
+        }
+        /// <summary>
+        /// 指定句柄的窗口發送消息
+        /// </summary>
+        /// <param name="hWnd">接收消息窗體的句柄</param>
+        /// <param name="Msg">消息標示符</param>
+        /// <param name="wParam">消息</param>
+        /// <param name="lParam"></param>
+        /// <returns></returns>
+        //[DllImport("user32.dll")]
+        //public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, string lParam);
     }
 }

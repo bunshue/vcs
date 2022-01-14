@@ -187,6 +187,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(217, 42);
             this.button12.TabIndex = 13;
+            this.button12.Text = "使用HTTP頭檢測網絡資源是否有效";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

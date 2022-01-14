@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.timer_notifyicon = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // timer1
@@ -44,6 +46,17 @@
             this.timer_clock.Enabled = true;
             this.timer_clock.Interval = 1000;
             this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
+            // timer_notifyicon
+            // 
+            this.timer_notifyicon.Enabled = true;
+            this.timer_notifyicon.Interval = 1000;
+            this.timer_notifyicon.Tick += new System.EventHandler(this.timer_notifyicon_Tick);
             // 
             // Form1
             // 
@@ -63,6 +76,8 @@
 
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer_clock;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.Timer timer_notifyicon;
     }
 }
 

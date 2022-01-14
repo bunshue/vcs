@@ -397,6 +397,48 @@ namespace vcs_Network1
 
         private void button12_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "使用HTTP頭檢測網絡資源是否有效\n";
+            /*
+我們有時候，需要知道某個網絡資源是否有效、可用，但是我們並不想打開或下載這個資源，因為這個資源可能很大（例如需要下載的某個文件）
+一種行之有效的方式，就是利用HTTP頭返回的狀態碼來確定資源的可用性；我們通常的WEB訪問，使用的是 GET 和 POST， 這裡使用的是 HEAD 方式
+            */
+
+            string url1 = @"http://hovertree.com/themes/hvtimages/hwqlogo.png";
+            string url2 = @"http://hovertree.com/themes/hvtimages/hwqlogoXXX.png";
+            bool result1 = IsWebResourceAvailable(url1);
+            if (result1 == true)
+            {
+                richTextBox1.Text += "URL : " + url1 + "\t" + "可用\n";
+            }
+            else
+            {
+                richTextBox1.Text += "URL : " + url1 + "\t" + "不可用\n";
+            }
+            bool result2 = IsWebResourceAvailable(url2);
+            if (result2 == true)
+            {
+                richTextBox1.Text += "URL : " + url2 + "\t" + "可用\n";
+            }
+            else
+            {
+                richTextBox1.Text += "URL : " + url2 + "\t" + "不可用\n";
+            }
+        }
+
+        static bool IsWebResourceAvailable(string webResourceAddress)
+        {
+            try
+            {
+                HttpWebRequest req = (HttpWebRequest)WebRequest.CreateDefault(new Uri(webResourceAddress));
+                req.Method = "HEAD";
+                req.Timeout = 1000;
+                HttpWebResponse res = (HttpWebResponse)req.GetResponse();
+                return (res.StatusCode == HttpStatusCode.OK);
+            }
+            catch (WebException wex)
+            {
+                System.Diagnostics.Trace.Write(wex.Message); return false;
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)

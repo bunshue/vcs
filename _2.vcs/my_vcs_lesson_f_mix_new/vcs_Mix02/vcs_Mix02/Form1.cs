@@ -1007,6 +1007,26 @@ namespace vcs_Mix02
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + sendFromUser[i] + "\n";
             }
+
+
+            richTextBox1.Text += "用Regular Expression拆解e-mail帳號\n";
+
+            List<string> emailList = new List<string>();
+            string email = "xue@163.,xue@163.com12,2707@qq.com,,xue@yahoo.com.cn,xue@163.com,xue@163.com12";
+            //  Regex reg2 = new Regex(@"^\da-zA-Z_]+@([-\dA-Za-z]+\.)+[a-zA-Z]{2,}$");驗證email的正則表達式  
+
+            Regex reg = new Regex(@"(?<email>[\da-zA-Z_]+@([-\dA-Za-z]+\.)+[a-zA-Z]{2,})");
+            Match m = reg.Match(email);
+            foreach (Match item in reg.Matches(email))
+            {
+                emailList.Add(item.Groups["email"].Value);
+            }
+            len = emailList.Count;
+            richTextBox1.Text += "共取得 : " + len.ToString() + " 個帳號\n";
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + emailList[i] + "\n";
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
