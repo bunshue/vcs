@@ -58,11 +58,15 @@
             this.button21 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button22 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_R)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_G)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_B)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -359,11 +363,42 @@
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button23);
+            this.groupBox1.Controls.Add(this.button22);
+            this.groupBox1.Location = new System.Drawing.Point(1113, 338);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(129, 142);
+            this.groupBox1.TabIndex = 32;
+            this.groupBox1.TabStop = false;
+            // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(17, 21);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(90, 37);
+            this.button22.TabIndex = 33;
+            this.button22.Text = "恢復";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(17, 81);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(90, 37);
+            this.button23.TabIndex = 34;
+            this.button23.Text = "白色轉為透明";
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1192, 987);
+            this.ClientSize = new System.Drawing.Size(1424, 987);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button21);
@@ -402,6 +437,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_R)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_G)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_B)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -439,6 +475,9 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.Button button22;
     }
 }
 

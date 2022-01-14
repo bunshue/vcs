@@ -707,7 +707,7 @@ namespace vcs_ImageProcessing1
                 Graphics g = Graphics.FromImage(bitmap1);
                 Pen p = new Pen(Color.Red, 1);
                 SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                Font drawFont = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
                 pHdc = g.GetHdc();
 
                 g.ReleaseHdc();
@@ -768,7 +768,7 @@ namespace vcs_ImageProcessing1
             int tem_W = Var_Bmp.Width;//獲取圖像的寬度
             int tem_H = Var_Bmp.Height;//獲取圖像的高度
             //定義一個Bitmap類的復本
-            Bitmap Var_SaveBmp = Var_Bmp.Clone(new RectangleF(0, 0, tem_W, tem_H), System.Drawing.Imaging.PixelFormat.DontCare);
+            Bitmap Var_SaveBmp = Var_Bmp.Clone(new RectangleF(0, 0, tem_W, tem_H), PixelFormat.DontCare);
             Point Var_Center = new Point(x, y);//光暈的中心點
             //遍歷圖像中的各象素
             for (int i = tem_W - 1; i >= 1; i--)
@@ -848,5 +848,26 @@ namespace vcs_ImageProcessing1
 
 
         }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //恢復
+            //讀取圖檔
+            string filename = @"C:\______test_files\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+            pictureBox1.BackColor = Color.Lime;
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            //白色轉為透明
+            //C#將圖片白色背景設置為透明
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image = Image.FromFile(filename);
+            Bitmap bitmap1 = new Bitmap(image);
+            bitmap1.MakeTransparent(Color.White);
+            pictureBox1.Image = bitmap1;
+        }
     }
 }
+

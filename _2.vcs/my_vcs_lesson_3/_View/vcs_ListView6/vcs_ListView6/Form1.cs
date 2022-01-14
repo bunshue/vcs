@@ -330,7 +330,7 @@ namespace vcs_ListView6
                     item.SubItems[4].ForeColor = Color.Red;
                 }
                 total = int.Parse(item.SubItems[2].Text) + int.Parse(item.SubItems[3].Text) + int.Parse(item.SubItems[4].Text);
-                average = (float)total /3;
+                average = (float)total / 3;
                 item.SubItems.Add(total.ToString());
                 item.SubItems.Add(average.ToString("#0.00"));
 
@@ -411,6 +411,56 @@ namespace vcs_ListView6
             flag_check_score_done = 1;
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //添加一個ListView控件
+            add_listview();
+        }
+
+        void add_listview()
+        {
+            // 初始化ListView
+            ListView lv = new ListView();
+
+            lv.Left = 12;
+            lv.Top = 350;
+            lv.Width = 700;
+            lv.Height = 250;
+            lv.GridLines = true;    //顯示各個記錄的分隔線
+            lv.FullRowSelect = true;    //要選擇就是一行
+            lv.View = View.Details; //定義列表顯示的方式
+            lv.Scrollable = true;   //需要時候顯示滾動條
+            lv.MultiSelect = false; // 不可以多行選擇
+            lv.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+
+            // 針對數據庫的字段名稱，建立與之適應顯示表頭
+            lv.Columns.Add("姓名", 60, HorizontalAlignment.Right);
+            lv.Columns.Add("住宅電話", 100, HorizontalAlignment.Left);
+            lv.Columns.Add("辦公電話", 100, HorizontalAlignment.Left);
+            lv.Columns.Add("移動電話", 100, HorizontalAlignment.Left);
+            lv.Columns.Add("居住地點", 100, HorizontalAlignment.Left);
+            lv.Columns.Add("工作單位", 100, HorizontalAlignment.Left);
+            lv.Columns.Add("電子郵件", 100, HorizontalAlignment.Left);
+            lv.Visible = true;
+
+            //添加資料
+            int i;
+            for (i = 0; i < 10; i++)
+            {
+                ListViewItem li = new ListViewItem();
+                li.SubItems.Clear();
+                li.SubItems[0].Text = "Name";
+                li.SubItems.Add("HomePhone");
+                li.SubItems.Add("WorkPhone");
+                li.SubItems.Add("MobilePhone");
+                li.SubItems.Add("City");
+                li.SubItems.Add("Address");
+                li.SubItems.Add("Email");
+                lv.Items.Add(li);
+            }
+            // 在Form中添加此列表
+            this.Controls.Add(lv);
+        }
     }
 }
 

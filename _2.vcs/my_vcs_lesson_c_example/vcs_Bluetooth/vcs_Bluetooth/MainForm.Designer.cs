@@ -21,11 +21,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Windows Form 設計工具產生的程式碼
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// 此為設計工具支援所需的方法 - 請勿使用程式碼編輯器
+        /// 修改這個方法的內容。
         /// </summary>
         private void InitializeComponent()
         {
@@ -84,7 +84,7 @@
             this.label1.Size = new System.Drawing.Size(233, 20);
             this.label1.Text = "@Jake Lin       procoder.cnblogs.com";
             // 
-            // MainForm
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -93,8 +93,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxMsg);
             this.Menu = this.mainMenu1;
-            this.Name = "MainForm";
-            this.Text = "Bluetooth using 32feet.net";
+            this.Name = "Form1";
+            this.Text = "Form1";
             this.ResumeLayout(false);
 
         }

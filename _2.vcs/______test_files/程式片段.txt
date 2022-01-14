@@ -1,5 +1,72 @@
 
 
+
+//計算耗時任務所需的秒數
+
+　　public int GetTimeSpan(DateTime dtStart, DateTime dtEnd)
+
+　　{
+
+　　TimeSpan tsStart = new TimeSpan(dtStart.Ticks);
+
+　　TimeSpan tsEnd = new TimeSpan(dtEnd.Ticks);
+
+　　TimeSpan ts = tsEnd.Subtract(tsStart).Duration();//秒
+
+　　//dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
+
+　　return ts.Seconds;
+
+　　}    
+
+
+
+C# 執行CMD命令方法
+
+        /// <summary>
+        /// 執行Cmd命令
+        /// </summary>
+        public void ExecCmd(string cmdstr)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardInput = true;
+            process.Start();
+
+            process.StandardInput.WriteLine(cmdstr);
+            process.StandardInput.AutoFlush = true;
+            process.StandardInput.WriteLine("exit");
+
+            StreamReader reader = process.StandardOutput;//截取輸出流
+
+            string output = reader.ReadLine();//每次讀取一行
+
+            while (!reader.EndOfStream)
+            {
+                PrintThrendInfo(output);
+                output = reader.ReadLine();
+            }
+
+            process.WaitForExit();
+        }
+        
+
+
+其中，getSubNode為一方法，用於獲取子目錄，以創建目錄樹節點，參數：PathName為獲取的子目錄在此節點下創建子節點，參數isEnd：結束標志,true則結束。
+
+private void getSubNode(TreeNode PathName,bool isEnd)
+
+vcs_Splitter
+
+然後，添加TreeView控件，命名為treeView，Dock屬性設為Left，再添加Splitter控件，同樣將Dock屬性設為Left。最後添加ListView控件，命名為listView，Dock屬性設為Fill。
+　　　Splitter(用於允許用戶調整TreeView和ListView的大小)；
+
+
+
+
             DataTable table = new DataTable();
             //初始化datatale 
             table.Columns.Add("id", typeof(string));
