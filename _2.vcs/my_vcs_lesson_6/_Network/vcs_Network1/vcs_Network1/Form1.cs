@@ -27,6 +27,73 @@ namespace vcs_Network1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            richTextBox1.Text += "本機IP : " + MyIP() + "\n";
+
+            //取得自己的 IP
+
+            IPAddress ip = GetIP();
+            if (ip != null)
+            {
+                richTextBox1.Text += "本機IP : " + ip.ToString() + "\n";
+            }
+
+            //取得本機電腦的主機名稱
+            string strHostName = Dns.GetHostName(); //取得本機的 IpHostEntry 類別實體
+            richTextBox1.Text += "主機名稱 ：" + strHostName + "\n";
+
+            //取得所有 IP 位址
+            richTextBox1.Text += "取得所有 IP 位址 1\n";
+            IPAddress[] IPS = Dns.GetHostEntry(strHostName).AddressList;
+            IEnumerator iEnums = IPS.GetEnumerator();
+            while (iEnums.MoveNext())
+            {
+                richTextBox1.Text += "IP : " + iEnums.Current.ToString() + "\n";
+            }
+
+            richTextBox1.Text += "\n" + "取得所有 IP 位址 2\n";
+            // 取得本機的IpHostEntry類別實體，MSDN建議新的用法
+            IPHostEntry iphostentry = Dns.GetHostEntry(strHostName);
+
+            // 取得所有 IP 位址
+            foreach (IPAddress ipaddress in iphostentry.AddressList)
+            {
+                // 只取得IP V4的Address
+                if (ipaddress.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    richTextBox1.Text += "Local IP: " + ipaddress.ToString() + "\n";
+                }
+            }
+
+        }
+
+        //找出本機IP
+        private string MyIP()
+        {
+            string ipv4_addr = "";
+            string hn = Dns.GetHostName();                          //取得本機電腦名稱
+            IPAddress[] ip = Dns.GetHostEntry(hn).AddressList;      //取得本機IP陣列(可能有多個)
+            foreach (IPAddress it in ip)                            //列舉各個IP
+            {
+                richTextBox1.Text += it.ToString() + "\t" + it.AddressFamily + "\n";  //顯示所有IP
+                if (it.AddressFamily == AddressFamily.InterNetwork) //如果是IPv4格式
+                {
+                    ipv4_addr = it.ToString();
+                }
+            }
+            return ipv4_addr;
+        }
+
+        IPAddress GetIP()
+        {
+            foreach (IPAddress ip in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip;
+                }
+            }
+            return null;
         }
 
         void show_item_location()
@@ -104,13 +171,13 @@ namespace vcs_Network1
         private void button0_Click(object sender, EventArgs e)
         {
             //連線到Google，使用預設的browser
-            System.Diagnostics.Process.Start("http://www.google.com/");
+            Process.Start("http://www.google.com/");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //連線到Google，使用IE
-            System.Diagnostics.Process.Start("IExplore.exe", "http://www.google.com");
+            Process.Start("IExplore.exe", "http://www.google.com");
         }
 
         //檢查網路連線
@@ -159,81 +226,20 @@ namespace vcs_Network1
         private void button4_Click(object sender, EventArgs e)
         {
             //開啟網頁
-            System.Diagnostics.Process.Start("https://www.google.com.tw/?gws_rd=ssl");
+            Process.Start("https://www.google.com.tw/?gws_rd=ssl");
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //取得本機電腦的主機名稱
-            string strHostName = Dns.GetHostName(); //取得本機的 IpHostEntry 類別實體
-            richTextBox1.Text += "主機名稱 ：" + strHostName + "\n";
-
-            //取得所有 IP 位址
-            richTextBox1.Text += "取得所有 IP 位址 1\n";
-            IPAddress[] IPS = Dns.GetHostEntry(strHostName).AddressList;
-            IEnumerator iEnums = IPS.GetEnumerator();
-            while (iEnums.MoveNext())
-            {
-                richTextBox1.Text += "IP : " + iEnums.Current.ToString() + "\n";
-            }
-
-            richTextBox1.Text += "\n" + "取得所有 IP 位址 2\n";
-            // 取得本機的IpHostEntry類別實體，MSDN建議新的用法
-            IPHostEntry iphostentry = Dns.GetHostEntry(strHostName);
-
-            // 取得所有 IP 位址
-            foreach (IPAddress ipaddress in iphostentry.AddressList)
-            {
-                // 只取得IP V4的Address
-                if (ipaddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                {
-                    richTextBox1.Text += "Local IP: " + ipaddress.ToString() + "\n";
-                }
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            IPAddress ip = GetIP();
-            if (ip != null)
-            {
-                richTextBox1.Text += "IP : " + ip.ToString() + "\n";
-            }
-        }
 
-        IPAddress GetIP()
-        {
-            foreach (IPAddress ip in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip;
-                }
-            }
-            return null;
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string my_ip = MyIP();
-            richTextBox1.Text += "My IP : " + my_ip + "\n";
-        }
-
-        //找出本機IP
-        private string MyIP()
-        {
-            string ipv4_addr = "";
-            string hn = Dns.GetHostName();                          //取得本機電腦名稱
-            IPAddress[] ip = Dns.GetHostEntry(hn).AddressList;      //取得本機IP陣列(可能有多個)
-            foreach (IPAddress it in ip)                            //列舉各個IP
-            {
-                richTextBox1.Text += it.ToString() + "\t" + it.AddressFamily + "\n";  //顯示所有IP
-                if (it.AddressFamily == AddressFamily.InterNetwork) //如果是IPv4格式
-                {
-                    ipv4_addr = it.ToString();
-                }
-            }
-            return ipv4_addr;
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -250,7 +256,7 @@ namespace vcs_Network1
             return (from adapter in NetworkInterface.GetAllNetworkInterfaces()
                     where adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet
                     from AddressInfo in adapter.GetIPProperties().UnicastAddresses.OfType<UnicastIPAddressInformation>()
-                    where AddressInfo.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6
+                    where AddressInfo.Address.AddressFamily == AddressFamily.InterNetworkV6
                     let ipAddress = AddressInfo.Address.ToString()
                     select ipAddress);
         }
@@ -437,7 +443,7 @@ namespace vcs_Network1
             }
             catch (WebException wex)
             {
-                System.Diagnostics.Trace.Write(wex.Message); return false;
+                Trace.Write(wex.Message); return false;
             }
         }
 

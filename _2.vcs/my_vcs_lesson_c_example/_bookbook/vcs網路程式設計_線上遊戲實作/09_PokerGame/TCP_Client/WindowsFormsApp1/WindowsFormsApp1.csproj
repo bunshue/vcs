@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{01394A6C-8532-456D-8AD7-A309C9D1ECAC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WindowsFormsApp1</RootNamespace>
+    <AssemblyName>WindowsFormsApp1</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\方塊13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\紅心13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\梅花13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑桃13.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
