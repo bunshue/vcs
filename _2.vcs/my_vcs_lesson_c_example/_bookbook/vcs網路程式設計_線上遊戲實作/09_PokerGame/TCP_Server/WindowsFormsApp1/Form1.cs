@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using System.Threading.Tasks;
+
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函數
@@ -16,20 +18,23 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
         TcpListener Server;             //伺服端網路監聽器(相當於電話總機)
         Socket Client;                  //給客戶用的連線物件(相當於電話分機)
         Thread Th_Svr;                  //伺服器監聽用執行緒(電話總機開放中)
         Thread Th_Clt;                  //客戶用的通話執行緒(電話分機連線中)
         Hashtable HT = new Hashtable(); //客戶名稱與通訊物件的集合(雜湊表)(key:Name, Socket)
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         //顯示本機IP 
         private void Form1_Load(object sender, EventArgs e)
         {
             textBox1.Text = MyIP();                            //呼叫函數找本機IP
         }
+
         //找出本機IP
         private string MyIP()
         {
@@ -44,6 +49,7 @@ namespace WindowsFormsApp1
             }
             return "";                    //找不到合格IP回傳空字串
         }
+
         //開啟 Server：用 Server Thread 來監聽 Client 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -54,6 +60,7 @@ namespace WindowsFormsApp1
             Th_Svr.Start();                     //啟動監聽執行緒
             button1.Enabled = false;            //讓按鍵無法使用(不能重複啟動伺服器) 
         }
+
         //接受客戶連線要求的程式(如同電話總機)，針對每一客戶會建立一個連線，以及獨立執行緒
         private void ServerSub()
         {
@@ -69,6 +76,7 @@ namespace WindowsFormsApp1
                 Th_Clt.Start();                 //開始執行緒的運作
             }
         }
+
         //監聽客戶訊息的程式
         private void Listen()
         {
@@ -102,7 +110,7 @@ namespace WindowsFormsApp1
                         default:                        //使用者傳送私密訊息
                             string[] C = Str.Split('|');//切開訊息與收件者
                             SendTo(Cmd + C[0], C[1]);   //C[0]是訊息，C[1]是收件者
-                            break; 
+                            break;
                     }
                 }
                 catch (Exception)
@@ -111,6 +119,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         //建立線上名單
         private string OnlineList()
         {
@@ -126,6 +135,7 @@ namespace WindowsFormsApp1
             }
             return L;
         }
+
         //傳送訊息給指定的客戶
         private void SendTo(string Str, string User)
         {
@@ -133,13 +143,17 @@ namespace WindowsFormsApp1
             Socket Sck = (Socket)HT[User];              //取出發送對象User的通訊物件
             Sck.Send(B, 0, B.Length, SocketFlags.None); //發送訊息
         }
+
         //傳送訊息給所有的線上客戶
         private void SendAll(string Str)
         {
             byte[] B = Encoding.Default.GetBytes(Str);   //訊息轉譯為Byte陣列
             foreach (Socket s in HT.Values)              //HT雜湊表內所有的Socket
+            {
                 s.Send(B, 0, B.Length, SocketFlags.None);//傳送資料
+            }
         }
+
         //關閉視窗時 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -147,3 +161,4 @@ namespace WindowsFormsApp1
         }
     }
 }
+

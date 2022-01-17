@@ -28,6 +28,11 @@ namespace vcs_test_all_24_DllImport_GetMediaLength
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             label1.Text = (GetMediaLen(filename).ToString() + " 秒");
@@ -60,4 +65,3 @@ namespace vcs_test_all_24_DllImport_GetMediaLength
         }
     }
 }
-

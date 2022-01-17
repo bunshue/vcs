@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using System.Threading.Tasks;
+
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函數
@@ -15,20 +17,23 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
         //公用變數
         Socket T;                                          //通訊物件
         Thread Th;                                         //網路監聽執行緒
         string User;                                       //使用者
         bool Xbang;                                        //拖曳球拍起點 
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         //表單載入 
         private void Form1_Load(object sender, EventArgs e)
         {
             button2.Select(); //轉移焦點到button2 
         }
+
         //登入伺服器 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -55,11 +60,13 @@ namespace WindowsFormsApp1
                 textBox4.Text = "無法連上伺服器！" + "\r\n";  //連線失敗時顯示訊息
             }
         }
+
         //選擇對手之後
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             button2.Select(); //轉移焦點到button2 
         }
+
         //移動槍枝與開槍的程式 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -92,6 +99,7 @@ namespace WindowsFormsApp1
                 button2.Select();                                     //轉移焦點到button2
             }
         }
+
         //我的砲彈
         private void MyShot()
         {
@@ -104,6 +112,7 @@ namespace WindowsFormsApp1
             B.Top = P.Top - B.Height;                    //貼齊機頭
             panel1.Controls.Add(B);                      //加入表單的panel1
         }
+
         //敵方砲彈
         private void XShot()
         {
@@ -116,6 +125,7 @@ namespace WindowsFormsApp1
             B.Top = Q.Top - B.Height;                    //貼齊機頭
             panel1.Controls.Add(B);                      //加入表單的panel1
         }
+
         //砲彈碰撞偵測程式
         private bool chkHit(Label B, PictureBox C)
         {
@@ -125,6 +135,7 @@ namespace WindowsFormsApp1
             if (B.Top > C.Bottom) return false; //子彈在物件之下(未碰撞)
             return true;                        //已碰撞
         }
+
         //子彈飛行控制 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -149,6 +160,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         //敵方砲火繪製 
         private void timer2_Tick(object sender, EventArgs e)
         {
@@ -158,12 +170,14 @@ namespace WindowsFormsApp1
                 Xbang = false; //降下旗標
             }
         }
+
         //傳送訊息給 Server
         private void Send(string Str)
         {
             byte[] B = Encoding.Default.GetBytes(Str); //翻譯文字成Byte陣列
             T.Send(B, 0, B.Length, SocketFlags.None);  //傳送訊息給伺服器
         }
+
         //監聽 Server 訊息 (Listening to the Server)
         private void Listen()
         {
@@ -206,6 +220,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         //視窗關閉，代表離線 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -217,3 +232,4 @@ namespace WindowsFormsApp1
         }
     }
 }
+

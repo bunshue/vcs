@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using System.Threading.Tasks;
+
 using System.Net;         //匯入網路通訊協定相關參數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行續功能函數
@@ -21,11 +23,13 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
         //表單載入
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text += " " + MyIP();                              //顯示本機IP於標題列
         }
+
         //找出本機IP
         private string MyIP()
         {
@@ -40,6 +44,7 @@ namespace WindowsFormsApp1
             }
             return "";                                              //找不到合格IP，回傳空字串
         }
+
         //啟動監聽按鈕程序
         private void button1_Click(object sender, EventArgs e)
         {
@@ -48,6 +53,7 @@ namespace WindowsFormsApp1
             Th.Start(); //啟動監聽執行續
             button1.Enabled = false; //使按鍵失效，不能(也不需要)重複開啟監聽
         }
+
         //監聽副程序
         private void Listen()
         {
@@ -61,6 +67,7 @@ namespace WindowsFormsApp1
                 textBox2.Text = Encoding.Default.GetString(B); //翻譯B陣列為字串
             }
         }
+
         //發送UDP訊息
         private void button2_Click(object sender, EventArgs e)
         {
@@ -71,6 +78,7 @@ namespace WindowsFormsApp1
             S.Send(B, B.Length, IP, Port);                       //發送資料到指定位置
             S.Close();                                           //關閉通訊器
         }
+
         //關閉監聽執行續(如果有的話)
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {

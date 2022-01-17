@@ -5,13 +5,14 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+
+using System.Threading.Tasks;
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函數
 using System.Collections; //匯入集合物件功能
-
 
 namespace WindowsFormsApp1
 {
@@ -21,6 +22,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
         //公用變數宣告
         UdpClient U;                                //宣告UDP通訊物件
         Thread Th;                                  //宣告監聽用執行續
@@ -28,12 +30,14 @@ namespace WindowsFormsApp1
         ArrayList ips = new ArrayList();            //線上客戶IP列表
         const short Port = 2019;                    //本程式使用的通訊埠(頻道)
         string BC = IPAddress.Broadcast.ToString(); //廣播用IP
+
         //表單載入
         private void Form1_Load(object sender, EventArgs e)
         {
             Control.CheckForIllegalCrossThreadCalls = false; //忽略跨執行緒操作的錯誤
             this.Text += " " + MyIP();                       //顯示本機IP於標題列
         }
+
         //找出本機IP
         private string MyIP()
         {
@@ -48,6 +52,7 @@ namespace WindowsFormsApp1
             }
             return "";                                              //找不到合格IP，回傳空字串
         }
+
         //上線或離線的選擇 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -74,11 +79,13 @@ namespace WindowsFormsApp1
                 button1.Text = "上線";
             }
         }
+
         //清除選取，預備廣播或離線 
         private void button2_Click(object sender, EventArgs e)
         {
             listBox1.ClearSelected(); //清除選取項目
         }
+
         //發送自訂訊息
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
@@ -96,6 +103,7 @@ namespace WindowsFormsApp1
                 textBox2.Text = "";                                        //清除訊息填寫欄
             }
         }
+
         //發送訊息副程序        
         private void Send(string ToIP, string msg, string toWhom)
         {
@@ -105,6 +113,7 @@ namespace WindowsFormsApp1
             UdpClient V = new UdpClient(ToIP, Port); //建立UDP通訊物件
             V.Send(B, B.Length);                     //發送資料
         }
+
         //監聽副程式
         private void Listen()
         {
@@ -145,6 +154,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         //關閉監聽執行續(如果有的話)
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -160,3 +170,4 @@ namespace WindowsFormsApp1
         }
     }
 }
+

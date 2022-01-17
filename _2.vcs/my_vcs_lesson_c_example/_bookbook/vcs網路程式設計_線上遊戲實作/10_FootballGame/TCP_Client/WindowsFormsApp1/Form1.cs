@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using System.Threading.Tasks;
+
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函數
@@ -16,10 +18,6 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
         //公用變數
         Socket T;                         //通訊物件
         Thread Th;                        //網路監聽執行緒
@@ -32,6 +30,12 @@ namespace WindowsFormsApp1
         int tickID;                       //踢球的隊
         int ballvector = 0;               //球的移動方向
         int ballpower = 0;                //球的移動力量
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Show();
@@ -45,6 +49,7 @@ namespace WindowsFormsApp1
                 Application.DoEvents();
             }
         }
+
         //主表單監聽到訊息後處理內容
         private void GetMessage()
         {
@@ -69,6 +74,7 @@ namespace WindowsFormsApp1
                     break;
             }
         }
+
         //上線
         private void Online(string Str)
         {
@@ -102,6 +108,7 @@ namespace WindowsFormsApp1
             }
             receive = false; Mesg = "";          //關閉收訊旗標,清空訊息
         }
+
         //產生User物件
         private void addme(string player, int i, int tm)
         {
@@ -119,6 +126,7 @@ namespace WindowsFormsApp1
             pictureBox1.Controls.Add(A);//物件加入pictureBox1
             List.Add(User, A);          //加入線上玩家名單
         }
+
         //產生隊友物件
         private void team(string player, int i)
         {
@@ -135,6 +143,7 @@ namespace WindowsFormsApp1
             pictureBox1.Controls.Add(A);   //物件加入pictureBox1
             List.Add(player, A);           //加入線上玩家名單
         }
+
         //產生敵隊物件
         private void rivals(string player, int i)
         {
@@ -151,6 +160,7 @@ namespace WindowsFormsApp1
             pictureBox1.Controls.Add(A);
             List.Add(player, A);
         }
+
         //離線
         private void Offline(string Str)
         {
@@ -174,6 +184,7 @@ namespace WindowsFormsApp1
             A.Dispose();                 //刪除離線玩家label物件
             receive = false; Mesg = "";  //關閉收訊旗標,清空訊息
         }
+
         //開始遊戲，準備發球
         private void StartGame(string Str)
         {
@@ -192,6 +203,7 @@ namespace WindowsFormsApp1
             button2.Enabled = false;   //關閉開始遊戲按鍵
             receive = false; Mesg = "";//關閉收訊旗標,清空訊息
         }
+
         //玩家移動
         private void PlayerMove(string Str)
         {
@@ -210,6 +222,7 @@ namespace WindowsFormsApp1
             }
             receive = false; Mesg = "";  //關閉收訊旗標,清空訊息
         }
+
         //踢球
         private void TickBall(string Str)
         {
@@ -247,6 +260,7 @@ namespace WindowsFormsApp1
                     break;
             }
         }
+
         //登入伺服器
         private void button1_Click(object sender, EventArgs e)
         {
@@ -276,6 +290,7 @@ namespace WindowsFormsApp1
                 textBox4.Text = "無法連上伺服器！" + "\r\n";  //連線失敗時顯示訊息
             }
         }
+
         //開始遊戲發球
         private void button2_Click(object sender, EventArgs e)
         {   //兩隊人數一樣才發球
@@ -286,6 +301,7 @@ namespace WindowsFormsApp1
             int y = (pictureBox1.Height - ball.Height) * 3 / 4;//球的Y位置
             Send("13" + n.ToString() + "," + x.ToString() + "," + y.ToString());//送訊息(1=廣播,3=開始遊戲)
         }
+
         //方向切換
         private void Turn(int n, Label A)
         {
@@ -298,6 +314,7 @@ namespace WindowsFormsApp1
             if (n == 6) A.Image = Properties.Resources.point6;
             if (n == 7) A.Image = Properties.Resources.point7;
         }
+
         //鍵盤操作事件
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -350,8 +367,11 @@ namespace WindowsFormsApp1
             Send("14" + User + "," + A.Left.ToString() + "," + A.Top.ToString() + "," + teamID.ToString());//送出User移動的位置訊息(1=廣播,4=移動)
             Application.DoEvents();
             if (chkHit(A)) //判斷是否有踢到球
+            {
                 Send("15" + teamID.ToString() + "," + A.Tag.ToString() + "," + power.Text);//有踢到球則送出踢球訊息(1=廣播,5=踢球)
+            }
         }
+
         //踢球的碰撞程式
         private bool chkHit(Label A)
         {
@@ -384,16 +404,33 @@ namespace WindowsFormsApp1
                     pt = new Point(A.Left, A.Top);                 //箭頭左上方位置
                     break;
             }
-            if (pt.X > ball.Right) return false; //箭頭X位置在球的右邊，沒踢到
-            if (pt.X < ball.Left) return false;  //箭頭X位置在球的左邊，沒踢到
-            if (pt.Y < ball.Top) return false;   //箭頭Y位置在球的上邊，沒踢到
-            if (pt.Y > ball.Bottom) return false;//箭頭Y位置在球的下邊，沒踢到
+            if (pt.X > ball.Right)
+            {
+                return false; //箭頭X位置在球的右邊，沒踢到
+            }
+            if (pt.X < ball.Left)
+            {
+                return false;  //箭頭X位置在球的左邊，沒踢到
+            }
+            if (pt.Y < ball.Top)
+            {
+                return false;   //箭頭Y位置在球的上邊，沒踢到
+            }
+            if (pt.Y > ball.Bottom)
+            {
+                return false;//箭頭Y位置在球的下邊，沒踢到
+            }
             return true;                         //踢到球
         }
+
         //球移動程式
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (ballpower == 0) return;//球沒有移動力量
+            if (ballpower == 0)
+            {
+                return;//球沒有移動力量
+            }
+
             switch (ballvector)        //球的移動方向
             {
                 case 0:
@@ -448,6 +485,7 @@ namespace WindowsFormsApp1
             ballpower -= 1;//球移動力量減少
             GameOver();//遊戲結束
         }
+
         //遊戲結束
         private void GameOver()
         {
@@ -490,12 +528,14 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         //傳送訊息給 Server
         private void Send(string Str)
         {
             byte[] B = Encoding.Default.GetBytes(Str); //翻譯文字成Byte陣列
             T.Send(B, 0, B.Length, SocketFlags.None);  //傳送訊息給伺服器
         }
+
         //監聽 Server 訊息 (Listening to the Server)
         private void Listen()
         {
@@ -551,6 +591,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         //關閉離線
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -564,3 +605,4 @@ namespace WindowsFormsApp1
         }
     }
 }
+

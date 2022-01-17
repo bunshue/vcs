@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using System.Threading.Tasks;
+
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函數
@@ -16,15 +18,28 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
         TcpListener Server;             //伺服端網路監聽器(相當於電話總機)
         Socket Client;                  //給客戶用的連線物件(相當於電話分機)
         Thread Th_Svr;                  //伺服器監聽用執行緒(電話總機開放中)
         Thread Th_Clt;                  //客戶用的通話執行緒(電話分機連線中)
         Hashtable HT = new Hashtable(); //客戶名稱與通訊物件的集合(雜湊表)(key:Name, Socket)
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //關閉視窗時 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.ExitThread(); //關閉所有執行緒 
+        }
+
         //開啟 Server：用 Server Thread 來監聽 Client 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -35,6 +50,7 @@ namespace WindowsFormsApp1
             Th_Svr.Start();                     //啟動監聽執行緒
             button1.Enabled = false;            //讓按鍵無法使用(不能重複啟動伺服器) 
         }
+
         //接受客戶連線要求的程式(如同電話總機)，針對每一客戶會建立一個連線，以及獨立執行緒
         private void ServerSub()
         {
@@ -50,6 +66,7 @@ namespace WindowsFormsApp1
                 Th_Clt.Start();                 //開始執行緒的運作
             }
         }
+
         //監聽客戶訊息的程式
         private void Listen()
         {
@@ -83,10 +100,6 @@ namespace WindowsFormsApp1
                 }
             }
         }
-        //關閉視窗時 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.ExitThread(); //關閉所有執行緒 
-        }
     }
 }
+

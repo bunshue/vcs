@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using System.Threading.Tasks;
+
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函
@@ -16,15 +18,17 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
         Socket T;    //通訊物件
         Thread Th;  //網路監聽執行緒 
         string User;//使用者 
         ShapeContainer CVS; //畫布物件(棋盤)
         byte[,] S;        //對應棋盤狀態的陣列：0為空格，1為黑子，2為白子
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         //繪製棋盤與加入畫布 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -44,6 +48,7 @@ namespace WindowsFormsApp1
             panel1.Controls.Add(CVS);                  //畫布物件加入panel1
             S = new byte[19, 19];                      //宣告棋盤資訊陣列 
         }
+
         //登入伺服器 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -68,6 +73,7 @@ namespace WindowsFormsApp1
                 textBox4.Text = "無法連上伺服器！" + "\r\n";//連線失敗時顯示訊息 
             }
         }
+
         //清除重玩按鍵 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -79,12 +85,14 @@ namespace WindowsFormsApp1
             S = new byte[19, 19];                             //清除棋盤資訊
             panel1.Enabled = true;                            //開放任一方下棋 
         }
+
         //傳送訊息給 Server(Send Message to the Server)
         private void Send(string Str)
         {
             byte[] B = Encoding.Default.GetBytes(Str);//翻譯字串Str為Byte陣列B
             T.Send(B, 0, B.Length, SocketFlags.None); //使用連線物件傳送資料
         }
+
         //監聽 Server 訊息 (Listening to the Server)
         private void Listen()
         {
@@ -138,6 +146,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         //畫棋子的副程序
         private void Chess(int i, int j, Color BW)
         {
@@ -150,6 +159,7 @@ namespace WindowsFormsApp1
             C.FillColor = BW;              //填黑或白色
             C.Parent = CVS;                //將圓形Shape加入畫布(棋盤)
         }
+
         //下棋的動作 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -164,9 +174,13 @@ namespace WindowsFormsApp1
                     Send("6" + i.ToString() + "," + j.ToString() + "|" + listBox1.SelectedItem);
                     panel1.Enabled = false;     //輪到對手，你不能繼續下棋
                 }
-                if (chk5(i, j, 1)) MessageBox.Show("你贏了！");
+                if (chk5(i, j, 1))
+                {
+                    MessageBox.Show("你贏了！");
+                }
             }
         }
+
         //檢查是否五連線的程式
         private bool chk5(int i, int j, byte tg)
         {
@@ -236,6 +250,7 @@ namespace WindowsFormsApp1
             }
             return false;                                    //未發現五子連線
         }
+
         //關閉視窗離線
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -247,3 +262,6 @@ namespace WindowsFormsApp1
         }
     }
 }
+
+
+

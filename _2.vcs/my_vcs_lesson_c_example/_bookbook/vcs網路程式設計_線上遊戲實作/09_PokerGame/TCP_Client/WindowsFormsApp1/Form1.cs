@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using System.Threading.Tasks;
+
 using System.IO;          //匯入允許讀取和寫入文件和目錄函數
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
@@ -16,10 +18,6 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
         //公用變數
         Socket T;                                    //通訊物件
         Thread Th;                                   //網路監聽執行緒
@@ -32,6 +30,12 @@ namespace WindowsFormsApp1
         string[] P7 = new string[8];                 //牌面出牌狀態
         List<PictureBox> Pk = new List<PictureBox>();//玩家手上的牌
         List<string> win = new List<string>();       //輸贏順位
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Show();
@@ -45,6 +49,7 @@ namespace WindowsFormsApp1
                 Application.DoEvents();
             }
         }
+
         //主表單監聽到訊息後處理內容
         private void GetMessage()
         {
@@ -65,6 +70,7 @@ namespace WindowsFormsApp1
                     break;
             }
         }
+
         //新增牌面物件
         private void DealCards(string S)
         {
@@ -108,6 +114,7 @@ namespace WindowsFormsApp1
                 nextOne = listBox1.Items[0].ToString();
             receive = false; Mesg = "";                       //清空訊息,關閉收到訊息旗標
         }
+
         //牌桌上顯示出牌狀態
         private void PlayCards(string S)
         {
@@ -158,6 +165,7 @@ namespace WindowsFormsApp1
             }
             receive = false; Mesg = ""; //清空訊息,關閉收到訊息旗標
         }
+
         //玩家贏牌
         private void WinCards(string S)
         {
@@ -191,7 +199,7 @@ namespace WindowsFormsApp1
                         if (nextOne == win[i]) { ck = true; break; }//此玩家已經贏了
                     }
                     if (ck == false) break;                         //此玩家尚未出完牌
-                                                                    //此玩家已經贏了找下一位
+                    //此玩家已經贏了找下一位
                     if (nextid < listBox1.Items.Count - 1)
                         nextid += 1;
                     else
@@ -200,6 +208,7 @@ namespace WindowsFormsApp1
             }
             receive = false; Mesg = "";                             //清空訊息,關閉收到訊息旗標
         }
+
         //出牌前判定規則出牌
         private bool Rules(PictureBox Pc)
         {
@@ -230,6 +239,7 @@ namespace WindowsFormsApp1
             }
             return false;//出牌錯誤
         }
+
         //出牌事件副程式
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
@@ -275,6 +285,7 @@ namespace WindowsFormsApp1
                 button3.Enabled = false;//關閉跳過按鍵
             }
         }
+
         //發牌
         private void button2_Click(object sender, EventArgs e)
         {
@@ -323,6 +334,7 @@ namespace WindowsFormsApp1
             textBox4.Text = "輪到你出牌!";             //提醒出牌
             button3.Enabled = true;                    //開啟跳過按鍵
         }
+
         //跳過
         private void button3_Click(object sender, EventArgs e)
         {
@@ -330,6 +342,7 @@ namespace WindowsFormsApp1
             textBox4.Text = "等待...";
             button3.Enabled = false;
         }
+
         //登入伺服器
         private void button1_Click(object sender, EventArgs e)
         {
@@ -356,12 +369,14 @@ namespace WindowsFormsApp1
                 textBox4.Text = "無法連上伺服器！" + "\r\n";  //連線失敗時顯示訊息
             }
         }
+
         //傳送訊息給 Server
         private void Send(string Str)
         {
             byte[] B = Encoding.Default.GetBytes(Str); //翻譯文字成Byte陣列
             T.Send(B, 0, B.Length, SocketFlags.None);  //傳送訊息給伺服器
         }
+
         //監聽 Server 訊息 (Listening to the Server)
         private void Listen()
         {
@@ -407,6 +422,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         //關閉表單
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -420,3 +436,4 @@ namespace WindowsFormsApp1
         }
     }
 }
+

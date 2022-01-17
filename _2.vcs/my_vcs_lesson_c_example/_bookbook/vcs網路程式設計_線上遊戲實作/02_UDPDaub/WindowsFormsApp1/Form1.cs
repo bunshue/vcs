@@ -5,13 +5,14 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using System.Threading.Tasks;
+
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函數
 using Microsoft.VisualBasic.PowerPacks;//匯入VB向量繪圖功能
-
 
 namespace WindowsFormsApp1
 {
@@ -21,6 +22,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
         UdpClient U; //宣告UDP通訊物件 
         Thread Th;   //宣告監聽用執行緒 
         //繪圖相關變數宣告        
@@ -28,6 +30,7 @@ namespace WindowsFormsApp1
         ShapeContainer D;             //畫布物件(遠端繪圖用)        
         Point stP;                    //繪圖起點        
         string p;                     //筆畫座標字串 
+
         //表單載入 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -36,6 +39,7 @@ namespace WindowsFormsApp1
             D = new ShapeContainer(); //建立畫布(遠端繪圖用)            
             this.Controls.Add(D);     //加入畫布D到表單
         }
+
         //啟動監聽按鍵程序
         private void button1_Click(object sender, EventArgs e)
         {
@@ -44,6 +48,7 @@ namespace WindowsFormsApp1
             Th.Start();              //啟動監聽執行緒  
             button1.Enabled = false; //按鍵失效，不能(也不需要)重複開啟監聽 
         }
+
         //監聽副程序 
         private void Listen()
         {
@@ -88,12 +93,14 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         //本機端開始繪圖
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             stP = e.Location;                              //起點            
             p = stP.X.ToString() + "," + stP.Y.ToString(); //起點座標紀錄 
         }
+
         //本機繪圖中
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -111,6 +118,7 @@ namespace WindowsFormsApp1
                 p += "/" + stP.X.ToString() + "," + stP.Y.ToString();      //持續紀錄座標
             }
         }
+
         //送出繪圖動作 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -124,6 +132,7 @@ namespace WindowsFormsApp1
             S.Send(B, B.Length);                              //發送資料            
             S.Close();                                        //關閉UDP物件 
         }
+
         //關閉接聽執行續(如果有的話)
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -139,3 +148,5 @@ namespace WindowsFormsApp1
         }
     }
 }
+
+

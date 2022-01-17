@@ -5,8 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using System.Threading.Tasks;
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函數
@@ -27,6 +28,7 @@ namespace WindowsFormsApp1
             Th.IsBackground = true;  //設定為背景執行緒
             Th.Start();              //開始監聽
         }
+
         //伺服端監聽程式
         private void Listen()
         {
