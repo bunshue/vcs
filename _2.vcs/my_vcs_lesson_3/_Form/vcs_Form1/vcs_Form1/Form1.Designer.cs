@@ -592,38 +592,45 @@
             // button40
             // 
             this.button40.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button40.Location = new System.Drawing.Point(635, 213);
+            this.button40.Location = new System.Drawing.Point(633, 218);
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(195, 60);
             this.button40.TabIndex = 47;
+            this.button40.Text = "背景變成透明 滑鼠可以穿透表單";
             this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
             // button41
             // 
             this.button41.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button41.Location = new System.Drawing.Point(635, 261);
+            this.button41.Location = new System.Drawing.Point(633, 278);
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(195, 60);
             this.button41.TabIndex = 48;
+            this.button41.Text = "背景變成透明 滑鼠不可以穿透表單";
             this.button41.UseVisualStyleBackColor = true;
+            this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
             // button42
             // 
             this.button42.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button42.Location = new System.Drawing.Point(635, 312);
+            this.button42.Location = new System.Drawing.Point(633, 338);
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(195, 60);
             this.button42.TabIndex = 49;
+            this.button42.Text = "整個窗體都變成半透明";
             this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
             // button43
             // 
             this.button43.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button43.Location = new System.Drawing.Point(635, 363);
+            this.button43.Location = new System.Drawing.Point(633, 398);
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(195, 60);
             this.button43.TabIndex = 50;
             this.button43.UseVisualStyleBackColor = true;
+            this.button43.Click += new System.EventHandler(this.button43_Click);
             // 
             // label5
             // 

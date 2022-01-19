@@ -1,24 +1,24 @@
 
+鼠標相關的事件大致有六種，分別是 ：
+"MouseHover"、"MouseLeave"、"MouseEnter"、"MouseMove"、"MouseDown"和"MouseUp"。
+
+
+對於上述的前三個事件，是用以下語法來定義的：
+"組件名稱"."事件名稱"+= new System.EventHandler（"事件名稱"）；
+下面是程序中具體實現代碼：
+button1.MouseLeave += new Syetem.EvenHandler（button1_MLeave）；
 
 
 //計算耗時任務所需的秒數
 
 　　public int GetTimeSpan(DateTime dtStart, DateTime dtEnd)
-
 　　{
-
 　　TimeSpan tsStart = new TimeSpan(dtStart.Ticks);
-
 　　TimeSpan tsEnd = new TimeSpan(dtEnd.Ticks);
-
 　　TimeSpan ts = tsEnd.Subtract(tsStart).Duration();//秒
-
 　　//dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
-
 　　return ts.Seconds;
-
 　　}    
-
 
 
 C# 執行CMD命令方法

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;    //for Stream
 using System.Net;
 using System.Xml;
 using System.Collections;   //for Hashtable
@@ -168,6 +169,79 @@ namespace vcs_ReadRSS1
             if (URL.Length != 0)
             {
                 System.Diagnostics.Process.Start(URL);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string url1 = @"https://www.mohw.gov.tw/rss-16-1.html";
+            ProcessRSSItem(url1);
+
+            string url2 = "http://www.codeguru.com/icom_includes/feeds/codeguru/rss-all.xml";
+            //ProcessRSSItem(url2);
+
+            string url3 = "http://www.developer.com/icom_includes/feeds/special/dev-5.xml";
+            //ProcessRSSItem(url3);
+
+        }
+
+        public void ProcessRSSItem(string rssURL)
+        {
+            WebRequest myRequest = WebRequest.Create(rssURL);
+            WebResponse myResponse = myRequest.GetResponse();
+
+            Stream rssStream = myResponse.GetResponseStream();
+            XmlDocument rssDoc = new XmlDocument();
+            rssDoc.Load(rssStream);
+
+            XmlNodeList rssItems = rssDoc.SelectNodes("rss/channel/item");
+
+            int i;
+            int len = rssItems.Count;
+            string title = "";
+            string link = "";
+            string description = "";
+
+            richTextBox1.Text += "RSS內容 : " + len.ToString() + " 則\n";
+            XmlNode rssDetail;
+
+            for (i = 0; i < len; i++)
+            {
+                rssDetail = rssItems.Item(i).SelectSingleNode("title");
+                if (rssDetail != null)
+                {
+                    title = rssDetail.InnerText;
+                }
+                else
+                {
+                    title = "XXX1";
+                }
+
+                rssDetail = rssItems.Item(i).SelectSingleNode("link");
+                if (rssDetail != null)
+                {
+                    link = rssDetail.InnerText;
+                }
+                else
+                {
+                    link = "XXX2";
+                }
+
+                rssDetail = rssItems.Item(i).SelectSingleNode("description");
+                if (rssDetail != null)
+                {
+                    description = rssDetail.InnerText;
+                }
+                else
+                {
+                    description = "XXX3";
+                }
+
+                richTextBox1.Text += "第 " + i.ToString() + " 則\n";
+                richTextBox1.Text += "標題 : \n" + link + "\n";
+                richTextBox1.Text += "網址 : \n" + link + "\n";
+                richTextBox1.Text += "內容 : \n" + description + "\n";
+
             }
         }
     }

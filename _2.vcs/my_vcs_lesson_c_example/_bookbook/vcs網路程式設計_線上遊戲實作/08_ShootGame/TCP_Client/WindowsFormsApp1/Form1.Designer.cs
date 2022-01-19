@@ -48,6 +48,7 @@
             this.P = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Q)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.P)).BeginInit();
@@ -207,11 +208,20 @@
             this.timer2.Interval = 25;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(651, 9);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(368, 599);
+            this.richTextBox1.TabIndex = 28;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 572);
+            this.ClientSize = new System.Drawing.Size(1031, 620);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -262,6 +272,7 @@
         private System.Windows.Forms.PictureBox P;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

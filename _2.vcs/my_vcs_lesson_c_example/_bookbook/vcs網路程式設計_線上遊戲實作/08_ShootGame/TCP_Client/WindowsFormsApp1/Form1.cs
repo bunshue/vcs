@@ -70,6 +70,7 @@ namespace WindowsFormsApp1
         //移動槍枝與開槍的程式 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            richTextBox1.Text += "x";
             switch (e.KeyCode)
             {
                 case Keys.Z:
@@ -129,16 +130,29 @@ namespace WindowsFormsApp1
         //砲彈碰撞偵測程式
         private bool chkHit(Label B, PictureBox C)
         {
-            if (B.Right < C.Left) return false; //子彈在物件之左(未碰撞)
-            if (B.Left > C.Right) return false; //子彈在物件之右(未碰撞)
-            if (B.Bottom < C.Top) return false; //子彈在物件之上(未碰撞)
-            if (B.Top > C.Bottom) return false; //子彈在物件之下(未碰撞)
+            if (B.Right < C.Left)
+            {
+                return false; //子彈在物件之左(未碰撞)
+            }
+            if (B.Left > C.Right)
+            {
+                return false; //子彈在物件之右(未碰撞)
+            }
+            if (B.Bottom < C.Top)
+            {
+                return false; //子彈在物件之上(未碰撞)
+            }
+            if (B.Top > C.Bottom)
+            {
+                return false; //子彈在物件之下(未碰撞)
+            }
             return true;                        //已碰撞
         }
 
         //子彈飛行控制 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //richTextBox1.Text += "1";
             foreach (Control c in panel1.Controls)
             {
                 string s = c.Tag.ToString();
@@ -164,6 +178,7 @@ namespace WindowsFormsApp1
         //敵方砲火繪製 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            //richTextBox1.Text += "2";
             if (Xbang)         //敵方開炮旗標豎起
             {
                 XShot();       //繪製新砲火

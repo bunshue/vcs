@@ -603,6 +603,31 @@ namespace vcs_Form1
             }
         }
 
+        private void button40_Click(object sender, EventArgs e)
+        {
+            //背景變成透明 滑鼠可以穿透表單
+            this.BackColor = Color.White;
+            this.TransparencyKey = Color.White;
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            //背景變成透明 滑鼠不可以穿透表單
+            this.BackColor = Color.Red;
+            this.TransparencyKey = Color.Red;
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            //整個窗體都變成半透明
+            this.Opacity = 0.5;
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
@@ -666,16 +691,11 @@ namespace vcs_Form1
             byte b = slateBlue.B;
             byte r = slateBlue.R;
             byte a = slateBlue.A;
-            string text = String.Format("用OnPaint寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " +
-                "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
+            string text = String.Format("用OnPaint寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
             int x_st = label1.Location.X + 630;
             int y_st = label1.Location.Y - 100;
-            e.Graphics.DrawString(text,
-                new Font(this.Font, FontStyle.Italic),
-                new SolidBrush(slateBlue),
-                new RectangleF(new PointF(x_st, y_st), this.Size));
+            e.Graphics.DrawString(text, new Font(this.Font, FontStyle.Italic), new SolidBrush(slateBlue), new RectangleF(new PointF(x_st, y_st), this.Size));
         }
-
 
         #region 引用方法:為窗體繪製圓角(新增至窗體Resize事件)
         //此方法設定窗體有效區域為圓角矩形

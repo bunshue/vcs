@@ -460,6 +460,12 @@ namespace vcs_LOG
         {
             LogAPI.WriteLog("寫log的方法5 " + (i5++).ToString());
         }
+
+        int i6 = 0;
+        private void button13_Click(object sender, EventArgs e)
+        {
+            Logger.WriteLog("寫log的方法6 " + (i6++).ToString());
+        }
     }
 
     public class LogAPI
@@ -544,4 +550,42 @@ namespace vcs_LOG
         }
     }
 
+    public class Logger
+    {
+        /// <summary>
+        /// 寫入日志.
+        /// </summary>
+        /// <param name="strList">The STR list.</param>
+        /// <remarks> </remarks>
+        /// <Description></Description>
+        //public static void WriteLog(string ex)
+        public static void WriteLog(params object[] strList)
+        {
+            if (strList.Count() == 0) return;
+            string strDicPath = "";
+            string strPath = "";
+            try
+            {
+                //LogFileName = Application.StartupPath + "\\log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+                strDicPath = Application.StartupPath + "//";
+                strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日志記錄.txt";
+            }
+            catch (Exception e)
+            {
+                strDicPath = "C:/temp/log/";
+                strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日志記錄.txt";
+            }
+
+            if (!Directory.Exists(strDicPath)) Directory.CreateDirectory(strDicPath);
+            if (!File.Exists(strPath)) using (FileStream fs = File.Create(strPath)) { }
+            string str = File.ReadAllText(strPath);
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in strList)
+            {
+                sb.Append("\r\n" + DateTime.Now.ToString() + "-----" + item + "");
+            }
+            File.WriteAllText(strPath, sb.ToString() + "\r\n-----z-----\r\n" + str);
+        }
+    }
 }
+
