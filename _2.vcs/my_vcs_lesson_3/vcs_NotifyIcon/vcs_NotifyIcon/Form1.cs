@@ -19,7 +19,7 @@ namespace vcs_NotifyIcon
         private void Form1_Load(object sender, EventArgs e)
         {
             // Set the NotifyIcon's context menu.
-            notifyIcon1.ContextMenuStrip = contextMenuStrip1;
+            notifyIcon1.ContextMenuStrip = contextMenuStrip1;   //等同於在notifyIcon1屬性 ContextMenuStrip (指向, 選contextMenuStrip1)
 
             // Don't show in the task bar, only in the tray.
             this.ShowInTaskbar = false;

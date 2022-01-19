@@ -12,6 +12,7 @@ using System.Threading;
 
 //實現語音朗讀功能
 //參考/加入參考/.NET/System.Speech
+
 using System.Speech;
 using System.Speech.Synthesis;  //for SpeechSynthesizer
 using System.Speech.AudioFormat;    //for SpeechAudioFormatInfo
@@ -173,7 +174,21 @@ namespace vcs_SpeechSynthesizer2
                 VoiceInfo info = voice.VoiceInfo;
                 richTextBox2.Text += " Voice Name: " + info.Name + "\n";
             }
+            ListInstalledVoices();
         }
+
+        void ListInstalledVoices()
+        {
+            richTextBox1.Text += "\n列出Windows 裝了哪些語音以及其支援語系\n";
+            var voice = new System.Speech.Synthesis.SpeechSynthesizer();
+            voice.GetInstalledVoices()
+                .ToList().ForEach((v) =>
+                {
+                    //Console.WriteLine(v.VoiceInfo.Name + " " +v.VoiceInfo.Culture.DisplayName);
+                    richTextBox1.Text += v.VoiceInfo.Name + " " + v.VoiceInfo.Culture.DisplayName + "\n";
+                });
+        }
+
 
         /// <summary>
         /// 開始朗讀 放在線程中
@@ -245,6 +260,28 @@ namespace vcs_SpeechSynthesizer2
             //synth.Pause();
             synth.Volume = trackBar2.Value;
             //synth.Resume();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            var voice = new System.Speech.Synthesis.SpeechSynthesizer();
+
+            voice.SelectVoice("Microsoft Hanhan Desktop");
+            voice.Speak("Hi there, I am darkthread.");
+
+            voice.SelectVoice("Microsoft Zira Desktop");
+            voice.Speak("Hi there, I am darkthread.");
+
+            var pb = new PromptBuilder();
+            pb.StartVoice("Microsoft Hanhan Desktop");
+            pb.AppendText("大家好，我是黑暗執行緒");
+            //https://msdn.microsoft.com/zh-tw/library/hh378418(v=office.14).aspx
+            pb.AppendSsmlMarkup("<voice name=\"Microsoft David Desktop\">darkthread</voice>");
+            pb.EndVoice();
+            voice.Speak(pb);
+
+            voice.SelectVoice("Microsoft Tracy Desktop");
+            voice.Speak("大家好，我是黑暗執行緒");
         }
     }
 }

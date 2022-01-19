@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_NotifyIcon4.Properties
+namespace vcs_NotifyIcon1.Properties
 {
 
 
