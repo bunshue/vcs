@@ -472,6 +472,30 @@ namespace vcs_DataTable1
 
         private void button11_Click(object sender, EventArgs e)
         {
+            int i;
+            //DataTable用法
+
+            DataTable dt = new DataTable();
+
+            richTextBox1.Text += "建立DataTable, 填入資料\n";
+
+            dt.Columns.Add("Col");
+            string data = string.Empty;
+            for (i = 0; i < 10; i++)
+            {
+                data = "DT資料 " + i.ToString();
+                dt.Rows.Add(data);
+                richTextBox1.Text += "加入資料 : " + data + "\n";
+            }
+
+
+
+            richTextBox1.Text += "顯示DataTable資料a\n";
+            for (i = 0; i < 10; i++)
+            {
+                richTextBox1.Text += dt.Rows[i][0].ToString() + "\n";
+
+            }
 
         }
 

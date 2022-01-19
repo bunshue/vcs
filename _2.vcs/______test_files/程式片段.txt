@@ -1,4 +1,168 @@
 
+
+                saveFileDialog1.CreatePrompt = true;	//如果指定不存在的文件，提示允許創建該文件
+                saveFileDialog1.OverwritePrompt = true;//如果用戶指定的文件名已存在，顯示警告
+
+
+存圖 
+                    System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
+                    switch (saveFileDialog1.FilterIndex)    		//選擇保存文件類型
+                    {
+                        case 1:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Jpeg); 		//保存為jpeg文件
+                            break;
+                        case 2:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Bmp);
+                            break;
+                        case 3:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Gif);
+                            break;
+                    }
+                    fs.Close();         					//關閉文件流
+
+
+
+       
+
+private void AboutBox_Load(object sender, EventArgs e)
+{
+　AssemblyInfoClass myAssembly = new AssemblyInfoClass();
+　labelProductName.Text = "產品名稱：" + myAssembly.Product;
+　labelVersion.Text = "版本：" + myAssembly.Version;
+　labelCopyright.Text = "版權宣告：" + myAssembly.Copyright;
+　labelCompanyName.Text = "公司名稱：" + myAssembly.Company;
+　textBoxDescription.Text = "細部描述：" +
+　myAssembly.Description;
+}
+
+
+     
+           
+                string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+ 
+            
+            
+
+
+一、獲取程序集版本
+label版本.Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+
+
+
+
+            //獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
+            string tempFile = System.Reflection.Assembly.GetExecutingAssembly().FullName;
+
+
+
+
+C#讀取exe版本號
+
+	using System.Reflection;
+	using System.IO;
+	...
+	
+	Assembly currentAssembly = Assembly.LoadFile(currentAssemblyPath);
+	Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
+	
+	AssemblyName currentAssemblyName = currentAssembly.GetName();
+	AssemblyName updatedAssemblyName = updatedAssembly.GetName();
+	
+	// 比較版本號
+	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
+	{
+	    // 不需要更新
+	    return;
+	}
+	
+	using System.Reflection;
+	using System.IO;
+	...
+	
+	AssemblyName currentAssemblyName = AssemblyName.GetAssemblyName(currentAssemblyPath);
+	AssemblyName updatedAssemblyName = AssemblyName.GetAssemblyName(updatedAssemblyPath);
+	
+	// 比較版本
+	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
+	{
+	    // 不需要更新
+	    return;
+	}
+	
+	// 更新
+	File.Copy(updatedAssemblyPath, currentAssemblyPath, true);
+	
+
+
+
+
+
+
+C# 控制台如何播放音頻文件，
+using System.Reflection;
+using System.Media;
+ 
+10             string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();  
+11             Assembly assembly = Assembly.GetExecutingAssembly();
+12             SoundPlayer sp = new SoundPlayer(assembly.GetManifestResourceStream(namespaceName + ".Resources" + ".STEAMBLO.WAV"));
+13             Console.Write("快看，輪船到了~！");
+14             sp.Play();
+string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();   這段代碼是獲取前文檔命名空間的名稱的，也就是對應的“ThePlay”。
+
+Assembly assembly = Assembly.GetExecutingAssembly();   獲取包含當前執行的代碼的程序集。
+SoundPlayer sp = new SoundPlayer(assembly.GetManifestResourceStream(namespaceName + ".Resources" + ".STEAMBLO.WAV"));   
+namespaceName 是上面獲取的空間名稱，Resource是音頻文件夾的名稱，STEAMBLO.WAV 是對應的音頻文件！ 區分大小寫！ 不然會導致獲取為空！ 遺憾的是，只支持.wav格式的音頻文件！
+
+什麼？還是播放不了？
+
+
+            
+using System.Reflection;
+            //取得 namespaceName
+            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
+
+            richTextBox1.Text += namespaceName + "\n";
+
+            richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
+
+
+
+
+			
+
+                string appDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().GetName().CodeBase);
+                path = Path.Combine(appDir, path);
+
+
+
+
+
+
+
+一、獲取程序集版本
+label版本.Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+
+
+獲取文件的版本信息:
+FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo("D:\\TEST.DLL");
+textBox1.Text="版本號: " + myFileVersionInfo1.FileVersion;
+
+
+
+格式化字符串，向長度小於30的字符串末尾添加特定字符，補足n個字符，使用String類的PadRight(int,char)方法：
+
+String str="1234";
+str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補足30個字符
+
+
+
+
+
+
+
 鼠標相關的事件大致有六種，分別是 ：
 "MouseHover"、"MouseLeave"、"MouseEnter"、"MouseMove"、"MouseDown"和"MouseUp"。
 

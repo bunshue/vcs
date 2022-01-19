@@ -747,7 +747,7 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(100, 40);
             this.button47.TabIndex = 81;
-            this.button47.Text = "從DataTable畫曲線圖";
+            this.button47.Text = "從DataTable畫曲線圖 1";
             this.button47.UseVisualStyleBackColor = true;
             this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
@@ -802,6 +802,7 @@
             this.button52.Name = "button52";
             this.button52.Size = new System.Drawing.Size(100, 40);
             this.button52.TabIndex = 86;
+            this.button52.Text = "從DataTable畫曲線圖 2";
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.button52_Click);
             // 
