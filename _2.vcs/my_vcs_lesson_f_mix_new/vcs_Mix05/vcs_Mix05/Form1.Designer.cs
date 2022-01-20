@@ -174,6 +174,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(170, 70);
             this.button19.TabIndex = 106;
+            this.button19.Text = "DataTable 測試";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -217,6 +218,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(170, 70);
             this.button9.TabIndex = 102;
+            this.button9.Text = "最短路徑分析";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -304,6 +306,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(170, 70);
             this.button18.TabIndex = 94;
+            this.button18.Text = "獲取系統進程的用戶名";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -314,6 +317,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(170, 70);
             this.button17.TabIndex = 93;
+            this.button17.Text = "列出 中文字 與 BIG5 內碼 的對應表";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

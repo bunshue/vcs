@@ -1,5 +1,24 @@
 
 
+
+Start 啟動進程資源將其與process類關聯
+
+Kill立即關閉進程
+
+waitforExit 在等待關聯進程的退出
+
+Close 釋放與此關聯的所有進程 
+
+  //啟動office中的EXCEL
+   Process.Start("EXCEL.exe");
+   
+  //啟動WINDOWS播放器
+   Process.Start("dvdplay.exe");
+
+
+
+
+
                 saveFileDialog1.CreatePrompt = true;	//如果指定不存在的文件，提示允許創建該文件
                 saveFileDialog1.OverwritePrompt = true;//如果用戶指定的文件名已存在，顯示警告
 
@@ -156,6 +175,10 @@ textBox1.Text="版本號: " + myFileVersionInfo1.FileVersion;
 
 String str="1234";
 str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補足30個字符
+
+
+
+常見的電子郵件協議有SMTP(簡單郵件傳輸協議)、POP3(郵局協議)、IMAP(Internet郵件訪問協議)
 
 
 

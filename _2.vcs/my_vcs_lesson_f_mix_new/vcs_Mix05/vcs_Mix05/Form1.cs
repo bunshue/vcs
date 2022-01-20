@@ -730,11 +730,180 @@ namespace vcs_Mix05
         }
         //Class測試 SP
 
+        //最短路徑分析 ST
+        static int length = 6;
+        static string[] shortedPath = new string[length];
+        static int noPath = 2000;
+        static int MaxSize = 1000;
+        static int[,] G =
+         {
+             { noPath, noPath, 10, noPath, 30, 100 },
+             { noPath, noPath, 5, noPath, noPath, noPath },
+             { noPath, noPath, noPath, 50, noPath, noPath },
+             { noPath, noPath, noPath, noPath, noPath, 10 },
+             { noPath, noPath, noPath, 20, noPath, 60 },
+             { noPath, noPath, noPath, noPath, noPath, noPath }
+         };
+        static string[] PathResult = new string[length];
+
+        static int[] path1 = new int[length];
+        static int[,] path2 = new int[length, length];
+        static int[] distance2 = new int[length];
+
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
+            int dist1 = getShortedPath(G, 0, 1, path1);
+            richTextBox1.Text += "點0到點5路徑:" + "\n";
+            for (int i = 0; i < path1.Length; i++)
+            {
+                Console.Write(path1[i].ToString() + " ");
+            }
+            richTextBox1.Text += "長度:" + dist1 + "\n";
+
+
+            richTextBox1.Text += "\r\n-----------------------------------------\r\n";
+
+            int[] pathdist = getShortedPath(G, 0, path2);
+            richTextBox1.Text += "點0到任意點的路徑:" + "\n";
+            for (int j = 0; j < pathdist.Length; j++)
+            {
+                richTextBox1.Text += "點0到" + j + "的路徑:" + "\n";
+                for (int i = 0; i < length; i++)
+                    richTextBox1.Text += path2[j, i].ToString() + " ";
+                richTextBox1.Text += "長度:" + pathdist[j] + "\n";
+            }
         }
+
+        //從某一源點出發，找到到某一結點的最短路徑
+        static int getShortedPath(int[,] G, int start, int end, int[] path)
+        {
+            bool[] s = new bool[length]; //表示找到起始結點與當前結點間的最短路徑
+            int min;  //最小距離臨時變量
+            int curNode = 0; //臨時結點，記錄當前正計算結點
+            int[] dist = new int[length];
+            int[] prev = new int[length];
+
+            //初始結點信息
+            for (int v = 0; v < length; v++)
+            {
+                s[v] = false;
+                dist[v] = G[start, v];
+                if (dist[v] > MaxSize)
+                    prev[v] = 0;
+                else
+                    prev[v] = start;
+            }
+            path[0] = end;
+            dist[start] = 0;
+            s[start] = true;
+            //主循環
+            for (int i = 1; i < length; i++)
+            {
+                min = MaxSize;
+                for (int w = 0; w < length; w++)
+                {
+                    if (!s[w] && dist[w] < min)
+                    {
+                        curNode = w;
+                        min = dist[w];
+                    }
+                }
+
+                s[curNode] = true;
+                for (int j = 0; j < length; j++)
+                    if (!s[j] && min + G[curNode, j] < dist[j])
+                    {
+                        dist[j] = min + G[curNode, j];
+                        prev[j] = curNode;
+                    }
+
+            }
+            //輸出路徑結點
+            int e = end, step = 0;
+            while (e != start)
+            {
+                step++;
+                path[step] = prev[e];
+                e = prev[e];
+            }
+            for (int i = step; i > step / 2; i--)
+            {
+                int temp = path[step - i];
+                path[step - i] = path[i];
+                path[i] = temp;
+            }
+            return dist[end];
+        }
+
+        //從某一源點出發，找到到所有結點的最短路徑
+        static int[] getShortedPath(int[,] G, int start, int[,] path)
+        {
+            int[] PathID = new int[length];//路徑（用編號表示）
+            bool[] s = new bool[length]; //表示找到起始結點與當前結點間的最短路徑
+            int min;  //最小距離臨時變量
+            int curNode = 0; //臨時結點，記錄當前正計算結點
+            int[] dist = new int[length];
+            int[] prev = new int[length];
+            //初始結點信息
+            for (int v = 0; v < length; v++)
+            {
+                s[v] = false;
+                dist[v] = G[start, v];
+                if (dist[v] > MaxSize)
+                    prev[v] = 0;
+                else
+                    prev[v] = start;
+                path[v, 0] = v;
+            }
+
+            dist[start] = 0;
+            s[start] = true;
+            //主循環
+            for (int i = 1; i < length; i++)
+            {
+                min = MaxSize;
+                for (int w = 0; w < length; w++)
+                {
+                    if (!s[w] && dist[w] < min)
+                    {
+                        curNode = w;
+                        min = dist[w];
+                    }
+                }
+
+                s[curNode] = true;
+
+                for (int j = 0; j < length; j++)
+                {
+                    if (!s[j] && min + G[curNode, j] < dist[j])
+                    {
+                        dist[j] = min + G[curNode, j];
+                        prev[j] = curNode;
+                    }
+                }
+            }
+            //輸出路徑結點
+            for (int k = 0; k < length; k++)
+            {
+                int e = k, step = 0;
+                while (e != start)
+                {
+                    step++;
+                    path[k, step] = prev[e];
+                    e = prev[e];
+                }
+                for (int i = step; i > step / 2; i--)
+                {
+                    int temp = path[k, step - i];
+                    path[k, step - i] = path[k, i];
+                    path[k, i] = temp;
+                }
+            }
+            return dist;
+        }
+        //最短路徑分析 SP
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -802,7 +971,7 @@ namespace vcs_Mix05
                 {
                     this.Top = this.Top - y;
                 }
-                System.Threading.Thread.Sleep(1);
+                Thread.Sleep(1);
             }
             this.Left = recordx;
             this.Top = recordy;
@@ -1078,18 +1247,95 @@ namespace vcs_Mix05
         {
             show_button_text(sender);
 
+            /*
+            以程式列出 中文字 與 BIG5 內碼 的對應表
+
+            由 Big 5 內碼表 得知，我們要的中文字自 A440 開始，換成 10 進位 = 42048，所以 for 迴圈起始值設為 42048，結束值為 63964。
+            */
+
+            richTextBox1.Clear();   // 用來顯示 10 進位 ←→ 16 進位 對應
+            richTextBox1.Clear();   // 列出 csv 格式的 BIG5 內碼 ←→ 實際對應的中文字
+
+            for (int x = 42048; x < 63965; x++)
+            {
+                // 得出 x 的 16 進位內碼
+                var sHex = x.ToString("X4");
+                // sHex = "A7DA";  // 測試範例文字: 我
+
+                // 再由內碼轉成中文字
+                byte[] codeBytes = new byte[2];
+                // 由於中文字是由 2 個 byte 組成 , 將 sHex 切成兩組
+                // 再由 16 進位轉換成 10 進位
+                codeBytes[0] = (byte)Convert.ToInt32(sHex.Substring(0, 2), 16);
+                codeBytes[1] = (byte)Convert.ToInt32(sHex.Substring(2, 2), 16);
+                var sBig5 = System.Text.Encoding.GetEncoding("BIG5").GetString(codeBytes);
+                if ((sBig5.Trim() != "?") && (sBig5.Trim() != "") && (sBig5.Trim() != ""))
+                {   // 還是會有一些不要的字，再濾掉 
+                    richTextBox1.AppendText(x.ToString() + " = " + sHex + ", " + sBig5 + "\n");
+                    richTextBox1.AppendText("\"" + sHex + "\", \"" + sBig5 + "\"\n");
+                }
+                Application.DoEvents();
+            }
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
+            foreach (Process p in Process.GetProcesses())
+            {
+                //Console.Write(p.ProcessName);
+                //Console.Write("----");
+                //Console.WriteLine(GetProcessUserName(p.Id));
+
+                richTextBox1.Text += p.ProcessName + "\t" + GetProcessUserName(p.Id) + "\n";
+            }
+        }
+
+        private static string GetProcessUserName(int pID)
+        {
+            string text1 = null;
+            SelectQuery query1 = new SelectQuery("Select * from Win32_Process WHERE processID=" + pID);
+            ManagementObjectSearcher searcher1 = new ManagementObjectSearcher(query1);
+            try
+            {
+                foreach (ManagementObject disk in searcher1.Get())
+                {
+                    ManagementBaseObject inPar = null;
+                    ManagementBaseObject outPar = null;
+                    inPar = disk.GetMethodParameters("GetOwner");
+                    outPar = disk.InvokeMethod("GetOwner", inPar, null);
+                    text1 = outPar["User"].ToString();
+                    break;
+                }
+            }
+            catch
+            {
+                text1 = "SYSTEM";
+            }
+            return text1;
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("A", typeof(bool));
+            dt.Columns.Add("B", typeof(bool));
+
+            dt.Rows.Add(true, true);
+            dt.Rows.Add(true, false);
+            dt.Rows.Add(false, true);
+            dt.Rows.Add(false, false);
+
+            richTextBox1.Text += "result : \n";
+            int i;
+            for (i = 0; i < 4; i++)
+            {
+                richTextBox1.Text += string.Format("A: {0}\tB: {1}", dt.Rows[i]["A"], dt.Rows[i]["B"]) + "\n";
+            }
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1216,8 +1462,7 @@ namespace vcs_Mix05
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
-
     }
 }
+
