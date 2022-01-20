@@ -13,14 +13,18 @@ namespace vcs_ReadWrite_CSV
 {
     public partial class Form1 : Form
     {
+        //二維List for string
+        List<string[]> MyList = new List<string[]>();
+
         public Form1()
         {
             InitializeComponent();
-            MyList.Clear();
         }
 
-        //二維List for string
-        List<string[]> MyList = new List<string[]>();
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            MyList.Clear();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -48,7 +52,6 @@ namespace vcs_ReadWrite_CSV
             {
                 richTextBox1.Text += "目前List沒有項目\n";
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -72,7 +75,6 @@ namespace vcs_ReadWrite_CSV
             sw.WriteLine(content);
             sw.Close();
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -290,7 +292,7 @@ namespace vcs_ReadWrite_CSV
             //double[][] allData = new double[readText.Length][]; //宣告一個2維double陣列，用來儲存所有的成績資料，第一維的大小是資料的列數(筆數)
             double[,] allData = new double[readText.Length, 4]; //宣告一個2維double陣列，用來儲存所有的成績資料，第一維的大小是資料的列數(筆數)
             //Point[][] colonPoints = new Point[2][];
-            int line = 0; //表第幾行(第幾列，每一列為一個學生的資料)
+            //int line = 0; //表第幾行(第幾列，每一列為一個學生的資料)
 
             foreach (string s in readText)
             {
@@ -332,5 +334,85 @@ namespace vcs_ReadWrite_CSV
                 */
             }
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "讀取CSV檔至DataTable 1 有標題\n";
+            string filename = @"C:\______test_files\__RW\_csv\vcs_ReadWrite_CSV_成績檔_有標題.csv"; //cvs文件路徑
+            DataTable dt = export_csv_to_dataTable(filename, true);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "讀取CSV檔至DataTable 2 無標題\n";
+            string filename = @"C:\______test_files\__RW\_csv\vcs_ReadWrite_CSV_成績檔.csv"; //cvs文件路徑
+            DataTable dt = export_csv_to_dataTable(filename, false);
+        }
+
+        DataTable export_csv_to_dataTable(string filename, bool flag_csv_file_with_title)
+        {
+            int intColCount = 0;
+
+            DataTable mydt = new DataTable("myTableName");
+            DataColumn mydc;
+            DataRow mydr;
+
+            string strline;
+            string[] aryline;
+
+
+            StreamReader mysr = new StreamReader(filename, Encoding.Default);    //Windows預設，就是big5
+
+            //因為csv檔沒有標題 所以要另外寫
+            if (flag_csv_file_with_title == false)
+            {
+                mydc = new DataColumn("name");
+                mydt.Columns.Add(mydc);
+                mydc = new DataColumn("chi");
+                mydt.Columns.Add(mydc);
+                mydc = new DataColumn("eng");
+                mydt.Columns.Add(mydc);
+                mydc = new DataColumn("math");
+                mydt.Columns.Add(mydc);
+                mydc = new DataColumn("science");
+                mydt.Columns.Add(mydc);
+            }
+
+            while ((strline = mysr.ReadLine()) != null)
+            {
+                aryline = strline.Split(new char[] { ',' });
+                for (int i = 0; i < aryline.Length; i++)
+                {
+                    richTextBox1.Text += aryline[i] + "-";
+                }
+                richTextBox1.Text += "\n";
+
+
+                //若csv檔的第一行是標題 直接把標題讀出來設定為每欄的名稱
+                if (flag_csv_file_with_title == true)
+                {
+                    flag_csv_file_with_title = false;
+                    intColCount = aryline.Length;
+                    for (int i = 0; i < aryline.Length; i++)
+                    {
+                        mydc = new DataColumn(aryline[i]);
+                        mydt.Columns.Add(mydc);
+                    }
+                }
+
+                mydr = mydt.NewRow();
+                for (int i = 0; i < intColCount; i++)
+                {
+                    mydr[i] = aryline[i];
+                }
+                mydt.Rows.Add(mydr);
+            }
+
+
+            richTextBox1.Text += "印出DataTable的內容\n";
+
+            return mydt;
+        }
     }
 }
+

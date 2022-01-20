@@ -168,7 +168,7 @@
             this.groupBox4.Size = new System.Drawing.Size(200, 305);
             this.groupBox4.TabIndex = 14;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "寫log";
+            this.groupBox4.Text = "用隊列寫log";
             // 
             // button8
             // 

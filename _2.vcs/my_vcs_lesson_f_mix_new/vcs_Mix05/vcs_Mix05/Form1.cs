@@ -15,6 +15,7 @@ using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
 
+using System.Management;
 using System.Drawing.Text;  //for InstalledFontCollection
 using System.Runtime.InteropServices;
 using Microsoft.Win32;  //for RegistryKey
@@ -1443,7 +1444,6 @@ namespace vcs_Mix05
 
         private void button26_Click(object sender, EventArgs e)
         {
-            show_button_text(sender);
 
         }
 

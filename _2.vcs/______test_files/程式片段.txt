@@ -1,5 +1,22 @@
 
 
+private PlayState _palystate = PlayState.Closed;
+
+     public enum PlayState
+     {
+         Opne,
+         Playing,
+         Paused,
+         Stopped,
+         Closed,
+         None,
+         Error
+     }
+     
+     
+
+
+
 
 Start 啟動進程資源將其與process類關聯
 

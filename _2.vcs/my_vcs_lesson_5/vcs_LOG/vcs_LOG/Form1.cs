@@ -211,6 +211,7 @@ namespace vcs_LOG
             }
         }
 
+        //用隊列寫log ST
         /// <summary>
         /// 日志等级
         /// </summary>
@@ -286,7 +287,7 @@ namespace vcs_LOG
         */
 
         /// <summary>
-        /// 另一个线程记录日志，只在程序初始化时调用一次
+        /// 另一個線程記錄日志，只在程序初始化時調用一次
         /// </summary>
         public void Register()
         {
@@ -296,20 +297,20 @@ namespace vcs_LOG
         }
 
         /// <summary>
-        /// 从队列中写日志至磁盘
+        /// 從隊列中寫日志至磁盤
         /// </summary>
         private void WriteLog()
         {
             while (true)
             {
-                // 等待信号通知
+                // 等待信號通知
                 _mre.WaitOne();
-
+                
                 FlashLogMessage msg;
-                // 判断是否有内容需要如磁盘 从列队中获取内容，并删除列队中的内容
+                // 判斷是否有內容需要如磁盤 // 從列隊中獲取內容，並刪除列隊中的內容
                 while (_que.Count > 0 && _que.TryDequeue(out msg))
                 {
-                    // 判断日志等级，然后写日志
+                    //判斷日志等級，然後寫日志
                     switch (msg.Level)
                     {
                         case FlashLogLevel.Debug:
@@ -335,7 +336,7 @@ namespace vcs_LOG
                     }
                 }
 
-                // 重新设置信号
+                // 重新設置信號
                 _mre.Reset();
                 Thread.Sleep(1);
             }
@@ -410,6 +411,7 @@ namespace vcs_LOG
         {
             Warn("EEEEEEEE");
         }
+        //用隊列寫log SP
 
         int i4 = 0;
         private void button9_Click(object sender, EventArgs e)
