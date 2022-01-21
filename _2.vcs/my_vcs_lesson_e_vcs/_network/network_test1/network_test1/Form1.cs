@@ -217,13 +217,28 @@ namespace network_test1
             process.Close();
             return pingrst;
         }
- 
+
 
 
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //獲取遠程網頁中的所有鏈接URL
+            string url = @"https://pydoing.blogspot.com/";
+            System.Net.WebClient client = new WebClient();
+            byte[] page = client.DownloadData(url);
+            string content = System.Text.Encoding.UTF8.GetString(page);
+            string regex = "href=[\\\"\\\'](http:\\/\\/|\\.\\/|\\/)?\\w+(\\.\\w+)*(\\/\\w+(\\.\\w+)?)*(\\/|\\?\\w*=\\w*(&\\w*=\\w*)*)?[\\\"\\\']";
+            Regex re = new Regex(regex);
+            MatchCollection matches = re.Matches(content);
 
+            System.Collections.IEnumerator enu = matches.GetEnumerator();
+            while (enu.MoveNext() && enu.Current != null)
+            {
+                Match match = (Match)(enu.Current);
+                //Console.Write(match.Value + "\r\n");
+                richTextBox1.Text += "sssss : " + match.Value + "\n";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)

@@ -1,4 +1,41 @@
 
+
+            //數字前面補0或是其他符號
+
+            string s1 = "";
+            string s2 = "";
+            int a = 123;
+            s1 = a.ToString().PadLeft(32, '0');
+
+            richTextBox1.Text += "s1 " + s1 + "\n";
+
+
+            s2 = a.ToString().PadLeft(32, '#');
+
+            richTextBox1.Text += "s2 " + s2 + "\n";
+
+
+
+string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+                Day[Convert.ToInt16(DateTime.Now.DayOfWeek)];
+                
+                
+                
+            //comport訊息
+            if (serialPort2.IsOpen)
+            {
+                richTextBox1.Text += "BaudRate = " + serialPort2.BaudRate.ToString() + "\n";
+                richTextBox1.Text += "StopBits = " + serialPort2.StopBits.ToString() + "\n";
+                richTextBox1.Text += "DataBits = " + serialPort2.DataBits.ToString() + "\n";
+                richTextBox1.Text += "Parity = " + serialPort2.Parity.ToString() + "\n";
+                richTextBox1.Text += "ReadTimeout = " + serialPort2.ReadTimeout.ToString() + "\n";
+
+
+
+            }
+
+
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             decimal n1 = nudNo1.Value;  //n1=nudNo1的Value值
@@ -6,16 +43,6 @@
             //根據nudPoint.Value來格式化顯示的數值
             lblAns.Text = (n1 + n2).ToString("F" + nudPoint.Value.ToString());
         }
-
-用WMI方式查看了一下自己筆記本電池的剩余時間，結果得到了71582788分鐘這個結果，頓感意外，第一感覺是相關的代碼寫錯了。
-
-ManagementObjectSearcher s = new ManagementObjectSearcher("select * from Win32_Battery");  
-ManagementObjectCollection m = s.Get();  
-foreach (ManagementObject mo in m)  
-{  
-    Console.WriteLine(mo["EstimatedRunTime"].ToString() + "minutes");  
-}
-
 
 
 //C#中List的使用
@@ -1852,8 +1879,6 @@ private string TextDecrypt(char[] data, string secretKey)
 
 用WMI查serial port可否知道是ims的comport，
 若可以知道，直接連線看看～～～
-
-
 
 
 
@@ -4416,20 +4441,6 @@ Console.WriteLine("花費 {0} ms 完成!!!", Environment.TickCount - URms);
 
 
 
-
-
-//紀錄開始的時間
-Stopwatch sw = new Stopwatch();//引用stopwatch物件
-
-sw.Reset();//時間歸零
-sw.Start();
-sw.Stop();
-
-            label1.Text = "經過時間: " 
-                + sw.Elapsed.Hours.ToString().PadLeft(2,'0') + ":"
-                + sw.Elapsed.Minutes.ToString().PadLeft(2, '0') + ":"
-                + sw.Elapsed.Seconds.ToString().PadLeft(2, '0');
-				
 				
 
 做一個我的 Transform範例
@@ -5802,20 +5813,8 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
-c#，使用WMI對象獲取筆記本電池剩余電量的百分比
 
-有時候需要監控到筆記本電池的剩余電量，調查後發現WMI對象可以搞定。
-在使用WMI對象前，先要添加對System.Management的引用，然後就可以調用WMI對象。
-我們使用的WMI對象是：Win32_Battery
-對象參考：http://msdn.microsoft.com/zh-cn/library/aa394074(v=VS.85).aspx
-代碼：
-ManagementClass mc = new ManagementClass("Win32_Battery");
-ManagementObjectCollection moc = mc.GetInstances();
 
-ManagementObjectCollection.ManagementObjectEnumerator mom = moc.GetEnumerator();
-if (mom.MoveNext()) {
-   Console.WriteLine("EstimatedChargeRemaining: \t{0}%", mom.Current.Properties["EstimatedChargeRemaining"].Value);
-}
 
 
 //--------------------------------------------------------------------------------------------------------------------------

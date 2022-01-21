@@ -869,6 +869,38 @@ namespace system_test3_wmi
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //用WMI方式查看了一下自己筆記本電池的剩餘時間，結果得到了71582788分鐘這個結果，頓感意外，第一感覺是相關的代碼寫錯了。
+
+            ManagementObjectSearcher s = new ManagementObjectSearcher("select * from Win32_Battery");
+            ManagementObjectCollection m = s.Get();
+            foreach (ManagementObject mo in m)
+            {
+                //Console.WriteLine(mo["EstimatedRunTime"].ToString() + "minutes");
+
+                richTextBox1.Text += "EstimatedRunTime : " + mo["EstimatedRunTime"].ToString() + "minutes" + "\n";
+            }
+
+
+
+            /*
+            c#，使用WMI對象獲取筆記本電池剩余電量的百分比
+
+            有時候需要監控到筆記本電池的剩余電量，調查後發現WMI對象可以搞定。
+            在使用WMI對象前，先要添加對System.Management的引用，然後就可以調用WMI對象。
+            我們使用的WMI對象是：Win32_Battery
+            對象參考：http://msdn.microsoft.com/zh-cn/library/aa394074(v=VS.85).aspx
+            */
+
+            ManagementClass mc = new ManagementClass("Win32_Battery");
+            ManagementObjectCollection moc = mc.GetInstances();
+
+            ManagementObjectCollection.ManagementObjectEnumerator mom = moc.GetEnumerator();
+            if (mom.MoveNext())
+            {
+                Console.WriteLine("EstimatedChargeRemaining: \t{0}%", mom.Current.Properties["EstimatedChargeRemaining"].Value);
+            }
+
+
 
         }
 

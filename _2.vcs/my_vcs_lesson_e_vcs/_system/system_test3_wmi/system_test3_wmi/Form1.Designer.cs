@@ -313,6 +313,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(160, 70);
             this.button22.TabIndex = 40;
+            this.button22.Text = "查看了一下自己筆記本電池的剩餘時間";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 

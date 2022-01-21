@@ -600,6 +600,16 @@ namespace vcs_SendMail
             smtp.Dispose();
             mail.Dispose();
         }
+
+        private void bt_send_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_browse_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class SmtpMail

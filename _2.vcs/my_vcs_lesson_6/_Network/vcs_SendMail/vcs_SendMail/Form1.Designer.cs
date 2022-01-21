@@ -46,29 +46,30 @@
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tb_email_addr_from = new System.Windows.Forms.TextBox();
-            this.tb_email_addr_from_nicknane = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.bt_browse = new System.Windows.Forms.Button();
+            this.bt_send = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tb_mail_body = new System.Windows.Forms.TextBox();
+            this.tb_email_addr_from_password = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tb_mail_subject = new System.Windows.Forms.TextBox();
+            this.tb_smtp_server = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tb_attach_filename = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tb_email_addr_bcc = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tb_email_addr_cc = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.tb_email_addr_to_nicknane = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tb_email_addr_to = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.tb_email_addr_cc = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tb_email_addr_bcc = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tb_attach_filename = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tb_smtp_server = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tb_mail_subject = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tb_email_addr_from_password = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tb_mail_body = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.bt_send = new System.Windows.Forms.Button();
+            this.tb_email_addr_from_nicknane = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tb_email_addr_from = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -252,6 +253,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_browse);
             this.groupBox1.Controls.Add(this.bt_send);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.tb_mail_body);
@@ -283,41 +285,155 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "e-mail";
             // 
-            // label1
+            // bt_browse
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(16, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "寄件者";
+            this.bt_browse.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_browse.Location = new System.Drawing.Point(435, 182);
+            this.bt_browse.Name = "bt_browse";
+            this.bt_browse.Size = new System.Drawing.Size(68, 40);
+            this.bt_browse.TabIndex = 25;
+            this.bt_browse.Text = "瀏覽...";
+            this.bt_browse.UseVisualStyleBackColor = true;
+            this.bt_browse.Click += new System.EventHandler(this.bt_browse_Click);
             // 
-            // tb_email_addr_from
+            // bt_send
             // 
-            this.tb_email_addr_from.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_email_addr_from.Location = new System.Drawing.Point(164, 33);
-            this.tb_email_addr_from.Name = "tb_email_addr_from";
-            this.tb_email_addr_from.Size = new System.Drawing.Size(253, 27);
-            this.tb_email_addr_from.TabIndex = 1;
+            this.bt_send.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_send.Location = new System.Drawing.Point(19, 270);
+            this.bt_send.Name = "bt_send";
+            this.bt_send.Size = new System.Drawing.Size(117, 84);
+            this.bt_send.TabIndex = 24;
+            this.bt_send.Text = "傳送";
+            this.bt_send.UseVisualStyleBackColor = true;
+            this.bt_send.Click += new System.EventHandler(this.bt_send_Click);
             // 
-            // tb_email_addr_from_nicknane
+            // label11
             // 
-            this.tb_email_addr_from_nicknane.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_email_addr_from_nicknane.Location = new System.Drawing.Point(164, 63);
-            this.tb_email_addr_from_nicknane.Name = "tb_email_addr_from_nicknane";
-            this.tb_email_addr_from_nicknane.Size = new System.Drawing.Size(253, 27);
-            this.tb_email_addr_from_nicknane.TabIndex = 3;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label11.Location = new System.Drawing.Point(16, 232);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(72, 16);
+            this.label11.TabIndex = 21;
+            this.label11.Text = "郵件內容";
             // 
-            // label2
+            // tb_mail_body
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(16, 66);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(120, 16);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "寄件者顯示名稱";
+            this.tb_mail_body.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_mail_body.Location = new System.Drawing.Point(164, 229);
+            this.tb_mail_body.Multiline = true;
+            this.tb_mail_body.Name = "tb_mail_body";
+            this.tb_mail_body.Size = new System.Drawing.Size(672, 125);
+            this.tb_mail_body.TabIndex = 20;
+            // 
+            // tb_email_addr_from_password
+            // 
+            this.tb_email_addr_from_password.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_email_addr_from_password.Location = new System.Drawing.Point(164, 122);
+            this.tb_email_addr_from_password.Name = "tb_email_addr_from_password";
+            this.tb_email_addr_from_password.Size = new System.Drawing.Size(253, 27);
+            this.tb_email_addr_from_password.TabIndex = 19;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label10.Location = new System.Drawing.Point(16, 125);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(40, 16);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "密碼";
+            // 
+            // tb_mail_subject
+            // 
+            this.tb_mail_subject.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_mail_subject.Location = new System.Drawing.Point(164, 194);
+            this.tb_mail_subject.Name = "tb_mail_subject";
+            this.tb_mail_subject.Size = new System.Drawing.Size(253, 27);
+            this.tb_mail_subject.TabIndex = 17;
+            // 
+            // tb_smtp_server
+            // 
+            this.tb_smtp_server.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_smtp_server.Location = new System.Drawing.Point(164, 93);
+            this.tb_smtp_server.Name = "tb_smtp_server";
+            this.tb_smtp_server.Size = new System.Drawing.Size(253, 27);
+            this.tb_smtp_server.TabIndex = 15;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label9.Location = new System.Drawing.Point(16, 197);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 16);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "標題";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label8.Location = new System.Drawing.Point(16, 96);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(90, 16);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "SMTP Server";
+            // 
+            // tb_attach_filename
+            // 
+            this.tb_attach_filename.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_attach_filename.Location = new System.Drawing.Point(583, 157);
+            this.tb_attach_filename.Multiline = true;
+            this.tb_attach_filename.Name = "tb_attach_filename";
+            this.tb_attach_filename.Size = new System.Drawing.Size(253, 54);
+            this.tb_attach_filename.TabIndex = 13;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label7.Location = new System.Drawing.Point(435, 157);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(40, 16);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "附件";
+            // 
+            // tb_email_addr_bcc
+            // 
+            this.tb_email_addr_bcc.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_email_addr_bcc.Location = new System.Drawing.Point(583, 124);
+            this.tb_email_addr_bcc.Name = "tb_email_addr_bcc";
+            this.tb_email_addr_bcc.Size = new System.Drawing.Size(253, 27);
+            this.tb_email_addr_bcc.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.Location = new System.Drawing.Point(435, 125);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(72, 16);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "密件副本";
+            // 
+            // tb_email_addr_cc
+            // 
+            this.tb_email_addr_cc.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_email_addr_cc.Location = new System.Drawing.Point(583, 93);
+            this.tb_email_addr_cc.Name = "tb_email_addr_cc";
+            this.tb_email_addr_cc.Size = new System.Drawing.Size(253, 27);
+            this.tb_email_addr_cc.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label5.Location = new System.Drawing.Point(435, 96);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 16);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "副本";
             // 
             // tb_email_addr_to_nicknane
             // 
@@ -355,143 +471,41 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "收件者";
             // 
-            // tb_email_addr_cc
+            // tb_email_addr_from_nicknane
             // 
-            this.tb_email_addr_cc.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_email_addr_cc.Location = new System.Drawing.Point(583, 93);
-            this.tb_email_addr_cc.Name = "tb_email_addr_cc";
-            this.tb_email_addr_cc.Size = new System.Drawing.Size(253, 27);
-            this.tb_email_addr_cc.TabIndex = 9;
+            this.tb_email_addr_from_nicknane.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_email_addr_from_nicknane.Location = new System.Drawing.Point(164, 63);
+            this.tb_email_addr_from_nicknane.Name = "tb_email_addr_from_nicknane";
+            this.tb_email_addr_from_nicknane.Size = new System.Drawing.Size(253, 27);
+            this.tb_email_addr_from_nicknane.TabIndex = 3;
             // 
-            // label5
+            // label2
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(435, 96);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 16);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "副本";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Location = new System.Drawing.Point(16, 66);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(120, 16);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "寄件者顯示名稱";
             // 
-            // tb_email_addr_bcc
+            // tb_email_addr_from
             // 
-            this.tb_email_addr_bcc.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_email_addr_bcc.Location = new System.Drawing.Point(583, 124);
-            this.tb_email_addr_bcc.Name = "tb_email_addr_bcc";
-            this.tb_email_addr_bcc.Size = new System.Drawing.Size(253, 27);
-            this.tb_email_addr_bcc.TabIndex = 11;
+            this.tb_email_addr_from.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_email_addr_from.Location = new System.Drawing.Point(164, 33);
+            this.tb_email_addr_from.Name = "tb_email_addr_from";
+            this.tb_email_addr_from.Size = new System.Drawing.Size(253, 27);
+            this.tb_email_addr_from.TabIndex = 1;
             // 
-            // label6
+            // label1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label6.Location = new System.Drawing.Point(435, 125);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 16);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "密件副本";
-            // 
-            // tb_attach_filename
-            // 
-            this.tb_attach_filename.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_attach_filename.Location = new System.Drawing.Point(583, 157);
-            this.tb_attach_filename.Multiline = true;
-            this.tb_attach_filename.Name = "tb_attach_filename";
-            this.tb_attach_filename.Size = new System.Drawing.Size(253, 54);
-            this.tb_attach_filename.TabIndex = 13;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label7.Location = new System.Drawing.Point(435, 160);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(40, 16);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "附件";
-            // 
-            // tb_smtp_server
-            // 
-            this.tb_smtp_server.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_smtp_server.Location = new System.Drawing.Point(164, 93);
-            this.tb_smtp_server.Name = "tb_smtp_server";
-            this.tb_smtp_server.Size = new System.Drawing.Size(253, 27);
-            this.tb_smtp_server.TabIndex = 15;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label8.Location = new System.Drawing.Point(16, 96);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(90, 16);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "SMTP Server";
-            // 
-            // tb_mail_subject
-            // 
-            this.tb_mail_subject.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_mail_subject.Location = new System.Drawing.Point(164, 194);
-            this.tb_mail_subject.Name = "tb_mail_subject";
-            this.tb_mail_subject.Size = new System.Drawing.Size(253, 27);
-            this.tb_mail_subject.TabIndex = 17;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label9.Location = new System.Drawing.Point(16, 197);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 16);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "標題";
-            // 
-            // tb_email_addr_from_password
-            // 
-            this.tb_email_addr_from_password.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_email_addr_from_password.Location = new System.Drawing.Point(164, 122);
-            this.tb_email_addr_from_password.Name = "tb_email_addr_from_password";
-            this.tb_email_addr_from_password.Size = new System.Drawing.Size(253, 27);
-            this.tb_email_addr_from_password.TabIndex = 19;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label10.Location = new System.Drawing.Point(16, 125);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(40, 16);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "密碼";
-            // 
-            // tb_mail_body
-            // 
-            this.tb_mail_body.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_mail_body.Location = new System.Drawing.Point(164, 229);
-            this.tb_mail_body.Multiline = true;
-            this.tb_mail_body.Name = "tb_mail_body";
-            this.tb_mail_body.Size = new System.Drawing.Size(672, 138);
-            this.tb_mail_body.TabIndex = 20;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label11.Location = new System.Drawing.Point(16, 220);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(72, 16);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "郵件內容";
-            // 
-            // bt_send
-            // 
-            this.bt_send.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_send.Location = new System.Drawing.Point(19, 270);
-            this.bt_send.Name = "bt_send";
-            this.bt_send.Size = new System.Drawing.Size(117, 84);
-            this.bt_send.TabIndex = 24;
-            this.bt_send.Text = "傳送";
-            this.bt_send.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(16, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "寄件者";
             // 
             // Form1
             // 
@@ -568,6 +582,7 @@
         private System.Windows.Forms.Button bt_send;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tb_mail_body;
+        private System.Windows.Forms.Button bt_browse;
     }
 }
 
