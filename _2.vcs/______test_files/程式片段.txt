@@ -1,4 +1,35 @@
 
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            decimal n1 = nudNo1.Value;  //n1=nudNo1的Value值
+            decimal n2 = nudNo2.Value;  //n2=nudNo2的Value值
+            //根據nudPoint.Value來格式化顯示的數值
+            lblAns.Text = (n1 + n2).ToString("F" + nudPoint.Value.ToString());
+        }
+
+用WMI方式查看了一下自己筆記本電池的剩余時間，結果得到了71582788分鐘這個結果，頓感意外，第一感覺是相關的代碼寫錯了。
+
+ManagementObjectSearcher s = new ManagementObjectSearcher("select * from Win32_Battery");  
+ManagementObjectCollection m = s.Get();  
+foreach (ManagementObject mo in m)  
+{  
+    Console.WriteLine(mo["EstimatedRunTime"].ToString() + "minutes");  
+}
+
+
+
+//C#中List的使用
+
+        List<User> list1 = new List<User>();  
+  
+        list1.Add(new User(1, "testOne"));  
+  
+        list1.Add(new User(2, "testTwo"));  
+  
+        list1.Add(new User(3, "testThree"));  
+  
+  
+  
 
 private PlayState _palystate = PlayState.Closed;
 
@@ -16,7 +47,37 @@ private PlayState _palystate = PlayState.Closed;
      
 
 
+public class User  
+{  
+    private int userID = 0;  
+  
+    private string userName = string.Empty;  
+  
+    public int UserID  
+    {  
+        get  
+        {  
+            return this.userID;  
+        }  
+    }  
+  
+    public string UserName  
+    {  
+        get  
+        {  
+            return this.userName;  
+        }  
+    }  
+  
+    public User(int userID, string userName)  
+    {  
+        this.userID = userID;  
+  
+        this.userName = userName;  
+    }  
+}  
 
+P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
 
 Start 啟動進程資源將其與process類關聯
 

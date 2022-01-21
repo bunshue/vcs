@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using System.Threading.Tasks;
+
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函數
@@ -147,7 +149,9 @@ namespace WindowsFormsApp1
         {
             byte[] B = Encoding.Default.GetBytes(Str);   //訊息轉譯為Byte陣列
             foreach (Socket s in HT.Values)              //HT雜湊表內所有的Socket
+            {
                 s.Send(B, 0, B.Length, SocketFlags.None);//傳送資料
+            }
         }
 
         //關閉視窗時 

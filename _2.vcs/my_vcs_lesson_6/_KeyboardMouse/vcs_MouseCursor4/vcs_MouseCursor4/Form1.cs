@@ -23,10 +23,11 @@ namespace vcs_MouseCursor4
         [DllImport("user32", EntryPoint = "SetSystemCursor")]
         public static extern void SetSystemCursor(int hcur, int i);
 
-        const int OCR_NORAAC = 32512;//标准
-        const int OCR_HAND = 32649;//手
-        const int OCR_NO = 32648;//斜的圆
-        const int OCR_SIZEALL = 32646;//移动
+        const int OCR_NORAAC = 32512;   //標準
+        const int OCR_HAND = 32649;     //手
+        const int OCR_NO = 32648;       //斜的圓
+        const int OCR_SIZEALL = 32646;  //移動
+
 
         public Form1()
         {
@@ -53,38 +54,43 @@ namespace vcs_MouseCursor4
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //設定滑鼠游標
+
+            //將要修改的標鼠圖片存入到系統的WINDOWS\Cursors目錄下
+
             //改變系統中的滑鼠游標
-            richTextBox1.Text += "3333改变系统的鼠标样式\n";
-            //设置正常选择鼠标
+            richTextBox1.Text += "3333設定正常選擇滑鼠游標\n";
+            //設定正常選擇滑鼠游標
             int cur = IntLoadCursorFromFile("..//..//image/01.cur");
             SetSystemCursor(cur, OCR_NORAAC);
-            //设置移动
+            //設定移動
             cur = IntLoadCursorFromFile("..//..//image/03.cur");
             SetSystemCursor(cur, OCR_SIZEALL);
-            //设置不可用
+            //設定不可用
             cur = IntLoadCursorFromFile("..//..//image/04.cur");
             SetSystemCursor(cur, OCR_NO);
-            //设置超链接
+            //設定超鏈接
             cur = IntLoadCursorFromFile("..//..//image/06.cur");
             SetSystemCursor(cur, OCR_HAND);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //恢復
-            richTextBox1.Text += "4444还原系统的鼠标样式\n";
-            //恢复正常选择鼠标
+            //恢復滑鼠游標
+            richTextBox1.Text += "4444恢復正常選擇滑鼠游標\n";
+            //恢復正常選擇滑鼠游標
             int cur = IntLoadCursorFromFile(@"C:\WINDOWS\Cursors\arrow_m.cur");
             SetSystemCursor(cur, OCR_NORAAC);
-            //恢复移动
+            //恢復移動
             cur = IntLoadCursorFromFile(@"C:\WINDOWS\Cursors\move_r.cur");
             SetSystemCursor(cur, OCR_SIZEALL);
-            //恢复不可用
+            //恢復不可用
             cur = IntLoadCursorFromFile(@"C:\WINDOWS\Cursors\no_r.cur");
             SetSystemCursor(cur, OCR_NO);
-            //恢复超链接
+            //恢復超鏈接
             cur = IntLoadCursorFromFile(@"C:\WINDOWS\Cursors\hand.cur");
             SetSystemCursor(cur, OCR_HAND);
         }
     }
 }
+
