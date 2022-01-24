@@ -11,6 +11,7 @@ namespace vcs_Keyboard
     public partial class Form1 : Form
     {
         Label[] labelList = new Label[27]; // A ~ Z和空白鍵
+
         public Form1()
         {
             InitializeComponent();
@@ -54,11 +55,17 @@ namespace vcs_Keyboard
                 }
             }
             if (e.KeyCode == Keys.Return)
+            {
                 lb_result.Text += "\n";
+            }
             else if (e.KeyCode == Keys.Space)
+            {
                 lb_result.Text += " ";
+            }
             else
+            {
                 lb_result.Text += e.KeyCode;
+            }
         }
 
         // 有鍵盤按鍵被放開
@@ -67,11 +74,11 @@ namespace vcs_Keyboard
             for (int i = 0; i < labelList.Length; i++)
             {
                 if (e.KeyCode == (Keys)labelList[i].Tag)
+                {
                     labelList[i].BackColor = Color.Pink; // 將被放開的按鍵 變為粉紅色
+                }
             }
         }
-
-
     }
 }
 

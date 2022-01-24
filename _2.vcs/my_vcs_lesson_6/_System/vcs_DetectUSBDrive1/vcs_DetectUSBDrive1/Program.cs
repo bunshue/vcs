@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_test_all_19_DetectRemovableDevice
+namespace vcs_DetectUSBDrive1
 {
     static class Program
     {

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;    //DriveInfo
 
-namespace vcs_test_all_19_DetectRemovableDevice
+namespace vcs_DetectUSBDrive1
 {
     //[C#]偵測是否有卸除式存放裝置插入，使用 WndProc 方法與 DriveInfo 類別
     /*

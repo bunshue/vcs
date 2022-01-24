@@ -7,11 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;
+
 namespace vcs_ImageConversion
 {
     public partial class Form1 : Form
     {
         List<String> selected_files = new List<String>();
+
+        private Bitmap bitmap1;
+        private int m_width0;
+        private int m_height0;
 
         public Form1()
         {
@@ -20,6 +26,11 @@ namespace vcs_ImageConversion
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            bitmap1 = null;
+            m_width0 = pictureBox1.Size.Width;
+            m_height0 = pictureBox1.Size.Height;
+
+
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
         }
@@ -82,6 +93,35 @@ namespace vcs_ImageConversion
                 richTextBox1.Text = "文件名：" + openFileDialog1.FileName.Substring
                 (index + 1);						//顯示文件名
                 */
+
+                //openFileDialog1.FileName
+
+                //如果是OK，則建立一個圖象對象
+
+                bitmap1 = new Bitmap(openFileDialog1.FileName);//調整pictureBox1的大小以適合圖象大小
+
+                if (bitmap1.Width > bitmap1.Height)
+                {
+
+                    //保持寬度
+
+                    pictureBox1.Width = m_width0;
+
+                    pictureBox1.Height = (int)((double)bitmap1.Height * m_width0 / bitmap1.Width);
+
+                }
+
+                else
+                {
+
+                    //保持高度
+                    pictureBox1.Height = m_height0;
+                    pictureBox1.Width = (int)((double)bitmap1.Width * m_height0 / bitmap1.Height);
+                }
+                pictureBox1.Image = bitmap1;
+
+
+
             }
             else
             {
@@ -91,8 +131,45 @@ namespace vcs_ImageConversion
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (bitmap1 == null)
+            {
+                richTextBox1.Text += "未開啟檔案\n";
+                return;
+            }
+
             //轉換
+
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+
+            string save_type = "*.bmp";
+
+            //根據不同的選項保存為相應格式的文件
+            switch (save_type)
+            {
+                case "*.bmp":
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+                    break;
+                case "*.jpg":
+                    bitmap1.Save(filename, ImageFormat.Jpeg);
+                    break;
+                case "*.gif":
+                    bitmap1.Save(filename, ImageFormat.Gif);
+                    break;
+                case "*.tif":
+                    bitmap1.Save(filename, ImageFormat.Tiff);
+                    break;
+                default:
+                    richTextBox1.Text += "未知檔案格式 : " + save_type + "\n";
+                    break;
+
+            }
+
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
+
+
 
         }
     }
 }
+

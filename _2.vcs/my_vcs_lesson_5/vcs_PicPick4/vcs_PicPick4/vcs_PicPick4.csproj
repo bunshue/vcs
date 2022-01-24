@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A94D5E57-BF84-4BE0-8727-DFC019AA904B}</ProjectGuid>
+    <ProjectGuid>{2CEDC4A6-E647-4E0D-BF0A-364B2E11BAA3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_test_all_19_DetectRemovableDevice</RootNamespace>
-    <AssemblyName>vcs_test_all_19_DetectRemovableDevice</AssemblyName>
+    <RootNamespace>vcs_PicPick4</RootNamespace>
+    <AssemblyName>vcs_PicPick4</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

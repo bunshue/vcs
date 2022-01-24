@@ -13,15 +13,14 @@ namespace vcs_Tank
 {
     public partial class Form1 : Form
     {
+        int locX, locY;     // 宣告 locX, locY用來存放坦克車開始的座標
+
         public Form1()
         {
             InitializeComponent();
         }
-         // 宣告 locX, locY用來存放坦克車開始的座標
-        int locX, locY;
 
         // 表單載入時執行
-
         private void Form1_Load(object sender, EventArgs e)
         {
             // 取得picTank的X, Y座標並指定給locX, locY
@@ -37,6 +36,7 @@ namespace vcs_Tank
             picTankL.Visible = false;  // 坦克往左圖隱藏
             picTankR.Visible = false;  // 坦克往右圖隱藏
         }
+
         // ===  在表單按下鍵盤不放時執行
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -89,9 +89,9 @@ namespace vcs_Tank
             }
             lblX.Text = "X座標：" + picTank.Location.X;
             lblY.Text = "Y座標：" + picTank.Location.Y;
-            lblMsg.Text = "現在按下" + e.KeyCode.ToString() + "鍵, 鍵值為 : "
-				          + e.KeyValue.ToString() + "!!";
+            lblMsg.Text = "現在按下" + e.KeyCode.ToString() + "鍵, 鍵值為 : " + e.KeyValue.ToString() + "!!";
         }
+
         // === 在表單放開鍵盤的按鍵時執行
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -101,3 +101,4 @@ namespace vcs_Tank
         }
     }
 }
+
