@@ -48,14 +48,15 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 70);
             this.button1.TabIndex = 0;
+            this.button1.Text = "利用GDI畫樹狀圖";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(731, 9);
+            this.richTextBox1.Location = new System.Drawing.Point(805, 9);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(335, 720);
+            this.richTextBox1.Size = new System.Drawing.Size(261, 720);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -126,6 +127,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(160, 70);
             this.button0.TabIndex = 14;
+            this.button0.Text = "繪制正弦曲線";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -133,7 +135,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(189, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(522, 717);
+            this.pictureBox1.Size = new System.Drawing.Size(599, 717);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 

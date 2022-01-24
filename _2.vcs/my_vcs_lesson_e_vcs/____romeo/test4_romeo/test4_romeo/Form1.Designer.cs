@@ -48,6 +48,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lbl_caption = new System.Windows.Forms.Label();
+            this.lbl_description = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -205,9 +207,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(363, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(363, 154);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(594, 343);
+            this.richTextBox1.Size = new System.Drawing.Size(594, 201);
             this.richTextBox1.TabIndex = 18;
             this.richTextBox1.Text = "";
             // 
@@ -218,6 +220,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 70);
             this.button1.TabIndex = 17;
+            this.button1.Text = "獲取網頁源碼，自動判斷網頁字符集編碼";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -249,11 +252,31 @@
             this.dataGridView1.Size = new System.Drawing.Size(318, 317);
             this.dataGridView1.TabIndex = 36;
             // 
+            // lbl_caption
+            // 
+            this.lbl_caption.AutoSize = true;
+            this.lbl_caption.Location = new System.Drawing.Point(389, 34);
+            this.lbl_caption.Name = "lbl_caption";
+            this.lbl_caption.Size = new System.Drawing.Size(33, 12);
+            this.lbl_caption.TabIndex = 37;
+            this.lbl_caption.Text = "label1";
+            // 
+            // lbl_description
+            // 
+            this.lbl_description.AutoSize = true;
+            this.lbl_description.Location = new System.Drawing.Point(388, 81);
+            this.lbl_description.Name = "lbl_description";
+            this.lbl_description.Size = new System.Drawing.Size(33, 12);
+            this.lbl_description.TabIndex = 38;
+            this.lbl_description.Text = "label2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 730);
+            this.Controls.Add(this.lbl_description);
+            this.Controls.Add(this.lbl_caption);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox1);
@@ -276,10 +299,12 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -305,6 +330,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label lbl_caption;
+        private System.Windows.Forms.Label lbl_description;
     }
 }
 

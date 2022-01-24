@@ -1,5 +1,446 @@
 
 
+
+C#讀取計算機CPU,HDD信息
+
+public string getCpuInfo() //讀取CPU信息
+{
+ManagementClass mobj = new ManagementClass("Win32_Processor");
+ManagementObjectCollection moc = mobj.GetInstances();
+foreach (ManagementObject mo in moc)
+{
+return mo.Properties["ProcessorId"].Value.ToString();
+}
+return "";
+}
+public string getHddInfo() //讀取硬盤信息
+{
+ManagementClass mobj = new ManagementClass("Win32_PhysicalMedia");
+ManagementObjectCollection moc = mobj.GetInstances();
+foreach (ManagementObject mo in moc)
+{
+return mo.Properties["SerialNumber"].Value.ToString();
+}
+return "";
+}
+
+
+
+C#_把dataTable數據導出到CSV,XLS文件
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190579.html
+https://blog.csdn.net/happmaoo/article/details/83814604
+
+
+
+
+使用C# 讀取XML
+XmlReader xmlRead =new XmlTextReader ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
+    DataSet ds=new DataSet ();
+    //ds.ReadXml ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
+    ds.ReadXml (xmlRead);
+
+this.DataGrid1 .DataSource =ds;
+this.DataGrid1 .DataBind ();
+
+
+
+讀取文件到一個List
+
+用法
+// 讀取cs文件內容
+                List<String> rcq = ReaderLine(e.FullName);
+ // 遍歷cs文件代碼行
+                foreach (String q in rcq)
+                {
+                    if (!StringHandle.isNote(q)) continue;// 判斷是否是注釋
+
+                    string note = StringHandle.GetNoteValue(q);// 獲取注釋內容
+
+                    if (string.IsNullOrWhiteSpace(note)) continue;
+                    :
+                    :
+
+		}                
+                
+/// <summary>
+        /// 讀取文件
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public List<String> ReaderLine(string path)
+        {
+            StreamReader sr = new StreamReader(path, Encoding.Default);
+            List<String> lines = new List<string>();
+            string line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                lines.Add(line);
+            }
+            sr.Close();
+            return lines;
+        }
+        
+
+
+ /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="input">需要加密的字符串</param>
+        /// <param name="encode">字符的編碼</param>
+        /// <returns></returns>
+        public static string MD5Encrypt(string input, Encoding encode)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] t = md5.ComputeHash(encode.GetBytes(input));
+            StringBuilder sb = new StringBuilder(32);
+            for (int i = 0; i < t.Length; i++)
+                sb.Append(t[i].ToString("x").PadLeft(2, '0'));
+            return sb.ToString();
+        }
+        
+
+
+
+C#文件系統管理，
+
+　　目錄
+
+    前言
+    Directory類和DirectoryInfo類
+    File類和FileInfo類
+    Path類
+
+ 
+ 
+ 
+                MailMessage mail = new MailMessage(); 
+
+            mail.From = new MailAddress( 
+
+                txtSend.Text, txtDisplayName.Text, Encoding.UTF8);  
+                
+
+
+LogAPI.WriteLog(ex.Message);
+
+                
+新建一個類，專門用於日志操作LogAPI.cs
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ServiceSetup
+{
+    public class LogAPI
+    {
+        private static string myPath = "";
+        private static string myName = "";
+
+        /// 
+
+        /// 初始化日志文件
+        /// 
+
+        /// 
+        /// 
+        public static void InitLogAPI(string logPath, string logName)
+        {
+            myPath = logPath;
+            myName = logName;
+        }
+
+        /// 
+
+        /// 寫入日志
+        /// 
+
+        /// 日志信息
+        public static void WriteLog(string ex)
+        {
+            if (myPath == "" || myName == "")
+                return;
+
+            string Year = DateTime.Now.Year.ToString();
+            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
+            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
+
+            //年月日文件夾是否存在，不存在則建立
+            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
+            {
+                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
+            }
+
+            //寫入日志UNDO,Exception has not been handle
+            string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
+            if (!File.Exists(LogFile))
+            {
+                System.IO.StreamWriter myFile;
+                myFile = System.IO.File.AppendText(LogFile);
+                myFile.Close();
+            }
+
+            while (true)
+            {
+                try
+                {
+                    StreamWriter sr = File.AppendText(LogFile);
+                    sr.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "  " + ex);
+                    sr.Close();
+                    break;
+                }
+                catch (Exception e)
+                {
+                    System.Threading.Thread.Sleep(50);
+                    continue;
+                }
+            }
+
+        }
+
+    }
+}
+
+
+
+
+    /// <summary>
+    /// MD5加密
+    /// </summary>
+    public class MD5Helper
+    {
+        /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="text">原文</param>
+        public static string Encrypt(string text)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] bArr = md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in bArr)
+            {
+                sb.Append(b.ToString("x2"));
+            }
+            return sb.ToString();
+        }
+    }
+    
+    
+
+
+
+
+//============================================================================================================================
+
+
+
+
+
+vcs_Form6_NotRectangle3
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\__RW\_bmp\not_rectangle.bmp";
+
+            bitmap1 = new Bitmap(filename);	//從指定的圖像初始化Bitmap對象
+            bitmap1.MakeTransparent(Color.Blue);//使用默認的透明顏色對Bitmap位圖透明
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.DrawImage((Image)bitmap1, new Point(0, 0));//在窗體上繪制圖片
+        }
+
+
+
+
+
+
+
+
+
+//============================================================================================================================
+
+
+
+
+
+微軟 SAPI.SpVoice C# 使用方法 + 實例
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/192842.html
+
+
+
+//============================================================================================================================
+
+
+
+List 與 DataTable的比較
+
+綁定的顯示控件？
+DataGridView??
+
+
+
+
+
+
+//============================================================================================================================
+
+
+
+
+
+
+C#計算文件的MD5值實例
+
+
+　　MD5 是 Message Digest Algorithm 5（信息摘要算法）的縮寫，MD5 一種散列(Hash)技術，普遍用於加密、解密、數據簽名和數據完整性校驗等方面。任何一個文件，不管是可執行程序、圖像文件、臨時文件或者其餘任何類型的文件，也無論它體積多大，均可以計算出一個MD5值，若是文件被修改過，就算只改動了一個字節，其 MD5 值也會變得徹底不一樣。所以，咱們能夠經過對比同一文件的 MD5 值，來校驗這個文件是否被「篡改」過。算法
+
+　　C# 能夠方便的計算出文件的 MD5 值：數組
+
+　　計算文件的MD5值工具
+
+　　/// <summary>網站
+
+　　/// 計算文件的 MD5 值加密
+
+　　/// </summary>htm
+
+　　/// <param name="fileName">要計算 MD5 值的文件名和路徑</param>md5
+
+　　/// <returns>MD5 值16進制字符串</returns>字符串
+
+　　public static string MD5File(string fileName)get
+
+　　{
+
+　　return HashFile(fileName, "md5");
+
+　　}
+
+　　/// <summary>
+
+　　/// 計算文件的哈希值
+
+　　/// </summary>
+
+　　/// <param name="fileName">要計算哈希值的文件名和路徑</param>
+
+　　/// <param name="algName">算法:sha1,md5</param>
+
+　　/// <returns>哈希值16進制字符串</returns>
+
+　　public static string HashFile(string fileName, string algName)
+
+　　{
+
+　　if (!System.IO.File.Exists(fileName))
+
+　　return string.Empty;
+
+　　FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+
+　　byte[] hashBytes = HashData(fs, algName);
+
+　　fs.Close();
+
+　　return ByteArrayToHexString(hashBytes);
+
+　　}
+
+歡迎進入.NET社區論壇，與200萬技術人員互動交流 >>進入
+
+　　/// <summary>
+
+　　/// 計算哈希值
+
+　　/// </summary>
+
+　　/// <param name="stream">要計算哈希值的 Stream</param>
+
+　　/// <param name="algName">算法:sha1,md5</param>
+
+　　/// <returns>哈希值字節數組</returns>
+
+　　public static byte[] HashData(Stream stream, string algName)
+
+　　{
+
+　　HashAlgorithm algorithm;
+
+　　if (algName == null)
+
+　　{
+
+　　throw new ArgumentNullException("algName 不能爲 null");
+
+　　}
+
+　　if (string.Compare(algName, "sha1", true) == 0)
+
+　　{
+
+　　algorithm = SHA1.Create();
+
+　　}
+
+　　else
+
+　　{
+
+　　if (string.Compare(algName, "md5", true) != 0)
+
+　　{
+
+　　throw new Exception("algName 只能使用 sha1 或 md5");
+
+　　}
+
+　　algorithm = MD5.Create();
+
+　　}
+
+　　return algorithm.ComputeHash(stream);
+
+　　}
+
+　　ComputeHash 方法返回的是哈希值字節數組，而文件的 MD5 值一般是用16進制的字符串表示，字節數組轉換爲16進製表示的字符串的方法在 System.Web.Configuration.MachineKeySection 中已經提供了一個名爲 ByteArrayToHexString 方法，可是該方法是 NonPublic 的，咱們不能直接調用。這裏咱們經過反射來調用 MachineKeySection 中的 ByteArrayToHexString 方法。
+
+　　經過反射調用 MachineKeySection 中的 ByteArrayToHexString 方法：
+
+　　經過反射調用 MachineKeySection 中的 ByteArrayToHexString 方法
+
+　　/// <summary>
+
+　　/// 字節數組轉換爲16進製表示的字符串
+
+　　/// </summary>
+
+　　public static string ByteArrayToHexString(byte[] buf)
+
+　　{
+
+　　int iLen = 0;
+
+　　// 經過反射獲取 MachineKeySection 中的 ByteArrayToHexString 方法，該方法用於將字節數組轉換爲16進製表示的字符串。
+
+　　Type type = typeof(System.Web.Configuration.MachineKeySection);
+
+　　MethodInfo byteArrayToHexString = type.GetMethod("ByteArrayToHexString", BindingFlags.Static | BindingFlags.NonPublic);
+
+　　// 字節數組轉換爲16進製表示的字符串
+
+　　return (string)byteArrayToHexString.Invoke(null, new object[] { buf, iLen });
+
+　　}
+
+
+
+
+
             //數字前面補0或是其他符號
 
             string s1 = "";
