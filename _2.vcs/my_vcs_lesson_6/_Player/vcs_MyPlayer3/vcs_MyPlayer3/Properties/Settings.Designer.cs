@@ -46,5 +46,17 @@ namespace vcs_MyPlayer3.Properties {
                 this["position"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int volume {
+            get {
+                return ((int)(this["volume"]));
+            }
+            set {
+                this["volume"] = value;
+            }
+        }
     }
 }
