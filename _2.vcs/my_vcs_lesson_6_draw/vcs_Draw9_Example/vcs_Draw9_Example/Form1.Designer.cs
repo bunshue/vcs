@@ -833,6 +833,7 @@
             this.button55.Name = "button55";
             this.button55.Size = new System.Drawing.Size(100, 40);
             this.button55.TabIndex = 89;
+            this.button55.Text = "繪制正弦曲線";
             this.button55.UseVisualStyleBackColor = true;
             this.button55.Click += new System.EventHandler(this.button55_Click);
             // 
@@ -843,6 +844,7 @@
             this.button56.Name = "button56";
             this.button56.Size = new System.Drawing.Size(100, 40);
             this.button56.TabIndex = 90;
+            this.button56.Text = "利用GDI畫樹狀圖";
             this.button56.UseVisualStyleBackColor = true;
             this.button56.Click += new System.EventHandler(this.button56_Click);
             // 

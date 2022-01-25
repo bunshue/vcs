@@ -44,9 +44,10 @@
             // lb_main_mesg1
             // 
             this.lb_main_mesg1.AutoSize = true;
+            this.lb_main_mesg1.BackColor = System.Drawing.Color.Black;
             this.lb_main_mesg1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg1.Location = new System.Drawing.Point(587, 9);
+            this.lb_main_mesg1.Location = new System.Drawing.Point(661, 9);
             this.lb_main_mesg1.Name = "lb_main_mesg1";
             this.lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
             this.lb_main_mesg1.TabIndex = 134;
@@ -81,8 +82,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(788, 109);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lb_main_mesg1);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
