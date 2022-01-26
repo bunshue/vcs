@@ -40,6 +40,7 @@ namespace vcs_MyPlayer3
         string mp3_filename = string.Empty;
         int mp3_position = 0;
         int mp3_volume = 50;
+        int mp3_player_height = 50;
 
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
@@ -99,16 +100,13 @@ namespace vcs_MyPlayer3
         {
             Init_WMP();
 
-            //richTextBox1.AppendText("螢幕解析度 : " + Screen.PrimaryScreen.Bounds.Width.ToString() + "*" + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n");
-
             int W = Screen.PrimaryScreen.WorkingArea.Width;
             int H = Screen.PrimaryScreen.WorkingArea.Height;
-            this.ClientSize = new Size(W, 50);
-            this.Location = new Point(0, H - 50);
-            this.pictureBox1.Size = new Size(this.pictureBox1.Size.Width, 50);
+            this.ClientSize = new Size(W, mp3_player_height);
+            this.Location = new Point(0, H - mp3_player_height);
+            this.pictureBox1.Size = new Size(this.pictureBox1.Size.Width, mp3_player_height);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.StartPosition = FormStartPosition.CenterScreen;
-            //this.WindowState = FormWindowState.Maximized;
             this.ControlBox = false;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -146,17 +144,23 @@ namespace vcs_MyPlayer3
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Escape)
-            {
-                this.Close();
-            }
-            else if (e.KeyData == Keys.X)
+            if ((e.KeyData == Keys.Escape) || (e.KeyData == Keys.X))
             {
                 this.Close();
             }
             else if (e.KeyData == Keys.H)
             {
                 show_main_message1("Help", S_OK, 30);
+
+                Help help = new Help();
+                help.Show();
+            }
+            else if (e.KeyData == Keys.I)
+            {
+                show_main_message1("mp3 info", S_OK, 30);
+
+                //Help help = new Help();
+                //help.Show();
             }
             else if (e.KeyData == Keys.O)
             {
@@ -170,7 +174,7 @@ namespace vcs_MyPlayer3
                 openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
                 openFileDialog1.RestoreDirectory = true;
                 //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-                openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
+                //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
                 openFileDialog1.Multiselect = false;    //單選
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
@@ -288,7 +292,7 @@ namespace vcs_MyPlayer3
                     show_main_message1("快進 : " + amount.ToString(), S_OK, 30);
                 }
             }
-            else if (e.KeyData == Keys.Space)
+            else if ((e.KeyData == Keys.Space) || (e.KeyData == Keys.Enter))
             {
                 //show_main_message1("空白鍵", S_OK, 30);
                 //richTextBox1.Text += "state = " + axWindowsMediaPlayer1.playState + "\n";
@@ -341,7 +345,7 @@ namespace vcs_MyPlayer3
             int W = pictureBox1.Width;
             int H = pictureBox1.Height;
             int x_st = 0;
-            int y_st = H - 15;
+            int y_st = H * 3 / 4;
 
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.Clear(Color.Black);
@@ -351,48 +355,51 @@ namespace vcs_MyPlayer3
                 int total = (int)axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration;
                 int current = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
 
-                SolidBrush sb = new SolidBrush(Color.DarkGreen);
+                SolidBrush sb = new SolidBrush(Color.Green);
                 //e.Graphics.FillRectangle(sb, 0, 0, W * current / total, H);
 
                 x_st = W * current / total;
 
-                e.Graphics.DrawLine(new Pen(Color.Gold, 10), 0, y_st, x_st, y_st);
-                e.Graphics.DrawLine(new Pen(Color.Gray, 10), x_st, y_st, W, y_st);
-                int r = 20;
-                if (flag_mouse_down_mode == 2)
-                    e.Graphics.FillEllipse(Brushes.Red, x_st - r / 2, y_st - r / 2, r, r);
-                else
-                    e.Graphics.FillEllipse(Brushes.White, x_st - r / 2, y_st - r / 2, r, r);
+                int linewidth = 5;
+                e.Graphics.DrawLine(new Pen(Color.Gold, linewidth), 0, y_st, x_st, y_st);
+                e.Graphics.DrawLine(new Pen(Color.Gray, linewidth), x_st, y_st, W, y_st);
 
-                /*
-                richTextBox1.Text += "Title:\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title") + "\n";   //標題
-                richTextBox1.Text += "Author:\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Author") + "\n"; //作者
-                richTextBox1.Text += "Artist:\t" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Artist") + "\n";
-                */
+                int r = 16;
+                if (flag_mouse_down_mode == 2)
+                {
+                    e.Graphics.FillEllipse(Brushes.Red, x_st - r / 2, y_st - r / 2, r, r);
+                    e.Graphics.DrawEllipse(new Pen(Color.White, 2), x_st - r / 2, y_st - r / 2, r, r);
+                }
+                else
+                {
+                    e.Graphics.FillEllipse(Brushes.White, x_st - r / 2, y_st - r / 2, r, r);
+                    e.Graphics.DrawEllipse(new Pen(Color.Blue, 2), x_st - r / 2, y_st - r / 2, r, r);
+                }
+
+                Font f = new Font("標楷體", 14);
+
+                int tmp_width = 0;
+                int tmp_height = 0;
 
                 string title = axWindowsMediaPlayer1.currentMedia.getItemInfo("Title");
                 string author = axWindowsMediaPlayer1.currentMedia.getItemInfo("Author");
                 string artist = axWindowsMediaPlayer1.currentMedia.getItemInfo("Artist");
 
-                Font f = new Font("標楷體", 14);
-                e.Graphics.DrawString(title, f, new SolidBrush(Color.Green), new PointF(10, 5));
+                //title = axWindowsMediaPlayer1.currentMedia.name + "(" + title + ")";
+                //title = axWindowsMediaPlayer1.currentMedia.name;
+                tmp_height = e.Graphics.MeasureString(title, f).ToSize().Height;
+                y_st = (H - tmp_height) / 4;
+                e.Graphics.DrawString(title, f, sb, new PointF(10, y_st));
 
                 string play_info = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + " / " + axWindowsMediaPlayer1.Ctlcontrols.currentItem.durationString
                     + " ( " + ((int)((100 * axWindowsMediaPlayer1.Ctlcontrols.currentPosition / axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration))).ToString() + " %)";
-
-                //richTextBox1.Text += play_info + "\n";
-
-                
-                int tmp_width = 0;
-                int tmp_height = 0;
 
                 tmp_width = e.Graphics.MeasureString(play_info, f).ToSize().Width;
                 tmp_height = e.Graphics.MeasureString(play_info, f).ToSize().Height;
                 //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
 
-                e.Graphics.DrawString(play_info, f, new SolidBrush(Color.Green), new PointF(W - tmp_width-10, 5));
-
-
+                y_st = (H - tmp_height) / 4;
+                e.Graphics.DrawString(play_info, f, sb, new PointF(W - tmp_width - 10, y_st));
             }
             else
             {
@@ -414,16 +421,14 @@ namespace vcs_MyPlayer3
             //show_main_message1(flag_mouse_down_position.ToString(), S_OK, 30);
 
             int H = pictureBox1.Height;
-            if (e.Y < H / 2)
+            if (e.Y < H / 5)
             {
                 flag_mouse_down_mode = 1;   //move position mode
-                //show_main_message1("1111111", S_OK, 30);
                 Form1_MouseDown(sender, e);
             }
             else
             {
                 flag_mouse_down_mode = 2;   //move play position mode
-                //show_main_message1("2222222", S_OK, 30);
             }
         }
 
@@ -438,12 +443,10 @@ namespace vcs_MyPlayer3
                 {
                     if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPlaying)
                     {
-                                        int total = (int)axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration;
-                //int current = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
-
+                        int total = (int)axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration;
                         int W = pictureBox1.Width;
-
                         axWindowsMediaPlayer1.Ctlcontrols.currentPosition = total * e.X / W;
+                        show_main_message1("移動播放位置", S_OK, 10);
                         this.pictureBox1.Invalidate();
                     }
                 }
@@ -463,6 +466,7 @@ namespace vcs_MyPlayer3
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
+            /*
             if (this.TopMost == false)
             {
                 this.TopMost = true;
@@ -473,6 +477,7 @@ namespace vcs_MyPlayer3
                 this.TopMost = false;
                 show_main_message1("取消置頂", S_OK, 30);
             }
+            */
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -483,12 +488,8 @@ namespace vcs_MyPlayer3
                 this.pictureBox1.Invalidate();
             }
         }
-
-
-
     }
 }
-
 
 
 

@@ -173,3 +173,44 @@ namespace vcs_ImageConversion
     }
 }
 
+
+/*
+
+轉成ico
+
+
+            if (bitmap1 == null)
+            {
+                richTextBox1.Text += "無圖片資料\n";
+                return;
+            }
+
+            //圖示中包含的圖片常見尺寸有16×16（小圖示）、32×32、48×48，另外24×24、64×64、128×128也比較常見。
+            Size size = new Size(128, 128);
+            //獲得原始圖片文件
+            //using (Bitmap bm = new Bitmap(FileName))
+            {
+                //從現有的圖像縮小, 為了得到合適的icon文件
+                using (Bitmap iconBm = new Bitmap(bitmap1, size))
+                {
+                    using (Icon icon = Icon.FromHandle(iconBm.GetHicon()))
+                    {
+                        string icon_filename = Application.StartupPath + "\\ICO_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".ico";
+                        using (Stream stream = new System.IO.FileStream(icon_filename, System.IO.FileMode.Create))
+                        {
+                            icon.Save(stream);
+                            richTextBox1.Text += "轉換成功, 路徑是 : " + icon_filename + "\n";
+                        }
+                    }
+                }
+            }
+
+
+
+
+*/
+
+
+
+
+
