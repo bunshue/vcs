@@ -119,13 +119,47 @@ namespace vcs_MyPlayer3
             lb_main_mesg1.Text = "";
             lb_main_mesg1.BringToFront();
 
+
+            bool flag_use_autoload_file = false;
+
+            //lb_main_mesg1.Text += "len = " + Environment.GetCommandLineArgs().Length.ToString();
+            if (Environment.GetCommandLineArgs().Length == 2)
+            {
+                string filename = Environment.GetCommandLineArgs()[1];
+                //lb_main_mesg1.Text = filename;
+
+                var GetExtension = Path.GetExtension(filename);
+
+                if (GetExtension.ToLower() == ".mp3")
+                {
+                    mp3_filename = filename;
+                    mp3_position = 0;
+
+                    flag_use_autoload_file = true;
+
+                }
+
+
+            }
+            int i = 0;
+            foreach (string arg in Environment.GetCommandLineArgs())
+            {
+                //lb_main_mesg1.Text += "第 " + i.ToString() + " 項 : " + arg + "\n";
+                i++;
+            }
+
             /*
             richTextBox1.Text += "取得預設資料 :\n";
             richTextBox1.Text += "filename : \t" + Properties.Settings.Default.filename + "\n";
             richTextBox1.Text += "position : \t" + Properties.Settings.Default.position.ToString() + "\n";
             */
-            mp3_filename = Properties.Settings.Default.filename;
-            mp3_position = Properties.Settings.Default.position;
+
+            if (flag_use_autoload_file == false)
+            {
+                mp3_filename = Properties.Settings.Default.filename;
+                mp3_position = Properties.Settings.Default.position;
+            }
+            
             mp3_volume = Properties.Settings.Default.volume;
             if (mp3_volume == -1)
             {
@@ -159,8 +193,8 @@ namespace vcs_MyPlayer3
             {
                 show_main_message1("mp3 info", S_OK, 30);
 
-                //Help help = new Help();
-                //help.Show();
+                MediaInfo mediaInfo = new MediaInfo("filename filename filename");
+                mediaInfo.Show();
             }
             else if (e.KeyData == Keys.O)
             {
@@ -192,6 +226,7 @@ namespace vcs_MyPlayer3
                     mp3_filename = openFileDialog1.FileName;
                     mp3_position = 0;
                     axWindowsMediaPlayer1.URL = mp3_filename;
+                    axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
                 }
                 else
                 {
@@ -385,7 +420,7 @@ namespace vcs_MyPlayer3
                 string author = axWindowsMediaPlayer1.currentMedia.getItemInfo("Author");
                 string artist = axWindowsMediaPlayer1.currentMedia.getItemInfo("Artist");
 
-                //title = axWindowsMediaPlayer1.currentMedia.name + "(" + title + ")";
+                title = axWindowsMediaPlayer1.currentMedia.sourceURL + " ( " + title + " / " + author + " )";
                 //title = axWindowsMediaPlayer1.currentMedia.name;
                 tmp_height = e.Graphics.MeasureString(title, f).ToSize().Height;
                 y_st = (H - tmp_height) / 4;
