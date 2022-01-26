@@ -61,8 +61,8 @@ namespace vcs_MyPlayer4
             this.axWindowsMediaPlayer1.Enabled = true;
             this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(0, 0);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(640*2, 480*2);
-            this.axWindowsMediaPlayer1.Dock = DockStyle.Fill;
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(640*1, 480*1);
+            //this.axWindowsMediaPlayer1.Dock = DockStyle.Fill;
             //this.axWindowsMediaPlayer1.TabIndex = 2;
             //this.axWindowsMediaPlayer1.Visible = false;   //fail
             //this.axWindowsMediaPlayer1.StatusChange += new EventHandler(axWindowsMediaPlayer1_StatusChange);
@@ -96,7 +96,7 @@ namespace vcs_MyPlayer4
             axWindowsMediaPlayer1.Ctlcontrols.play();
 
 
-            delay(200);
+            delay(300);
 
             int W = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
             int H = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
@@ -104,7 +104,7 @@ namespace vcs_MyPlayer4
             axWindowsMediaPlayer1.Height = H + 2;
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
-            this.Size = new Size(W, H);
+            //this.Size = new Size(W, H);
 
 
 
@@ -128,7 +128,7 @@ namespace vcs_MyPlayer4
             //axWindowsMediaPlayer1.uiMode
 
 
-            axWindowsMediaPlayer1.uiMode = "invisible";
+            //axWindowsMediaPlayer1.uiMode = "invisible";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -200,24 +200,39 @@ namespace vcs_MyPlayer4
         private void button6_Click(object sender, EventArgs e)
         {
             //Full
+            axWindowsMediaPlayer1.uiMode = "full";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             //Mini
+            axWindowsMediaPlayer1.uiMode = "mini";
 
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             //None
+            axWindowsMediaPlayer1.uiMode = "none";
 
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             //Invisible
+            axWindowsMediaPlayer1.uiMode = "invisible";
 
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            axWindowsMediaPlayer1.fullScreen = true;
         }
 
     }

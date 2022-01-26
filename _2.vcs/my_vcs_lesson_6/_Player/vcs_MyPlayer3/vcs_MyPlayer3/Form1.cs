@@ -233,25 +233,43 @@ namespace vcs_MyPlayer3
                     show_main_message1("未選取檔案", S_OK, 30);
                 }
             }
-            else if (e.KeyData == Keys.Up)
+            else if ((e.KeyData == Keys.D0) || (e.KeyData == Keys.NumPad0))
+            {
+                show_main_message1("恢復速度", S_OK, 30);
+            }
+            else if (e.KeyCode == Keys.Up)
             {
                 //show_main_message1("上", S_OK, 30);
-                if (mp3_volume <= 95)
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
                 {
-                    mp3_volume += 5;
-                    axWindowsMediaPlayer1.settings.volume = mp3_volume;
+                    show_main_message1("CTRL + 上", S_OK, 30);
                 }
-                show_main_message1("音量 : " + mp3_volume.ToString(), S_OK, 30);
+                else
+                {
+                    if (mp3_volume <= 95)
+                    {
+                        mp3_volume += 5;
+                        axWindowsMediaPlayer1.settings.volume = mp3_volume;
+                    }
+                    show_main_message1("音量 : " + mp3_volume.ToString(), S_OK, 30);
+                }
             }
-            else if (e.KeyData == Keys.Down)
+            else if (e.KeyCode == Keys.Down)
             {
                 //show_main_message1("下", S_OK, 30);
-                if (mp3_volume >= 5)
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
                 {
-                    mp3_volume -= 5;
-                    axWindowsMediaPlayer1.settings.volume = mp3_volume;
+                    show_main_message1("CTRL + 下", S_OK, 30);
                 }
-                show_main_message1("音量 : " + mp3_volume.ToString(), S_OK, 30);
+                else
+                {
+                    if (mp3_volume >= 5)
+                    {
+                        mp3_volume -= 5;
+                        axWindowsMediaPlayer1.settings.volume = mp3_volume;
+                    }
+                    show_main_message1("音量 : " + mp3_volume.ToString(), S_OK, 30);
+                }
             }
             else if (e.KeyCode == Keys.Left)
             {
