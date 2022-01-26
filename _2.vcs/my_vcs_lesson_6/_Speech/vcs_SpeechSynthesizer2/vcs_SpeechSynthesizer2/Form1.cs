@@ -43,10 +43,11 @@ namespace vcs_SpeechSynthesizer2
             */
 
             var voiceList = synth.GetInstalledVoices();
-            richTextBox2.Text += "voiceList len = " + voiceList.Count.ToString() + "\n";
-
+            richTextBox2.Text += "目前有安裝的人聲 有 " + voiceList.Count.ToString() + " 種\n";
+            int i = 1;
             foreach (InstalledVoice voice in synth.GetInstalledVoices())
             {
+                richTextBox2.Text += "第 " + (i++).ToString() + " 種\n";
                 VoiceInfo info = voice.VoiceInfo;
                 richTextBox2.Text += "目前有安裝的人聲 Name : " + info.Name + "\n";
                 richTextBox2.Text += "目前有安裝的人聲 Age : " + info.Age + "\n";

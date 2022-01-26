@@ -35,10 +35,12 @@
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.bt_clear2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -49,7 +51,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 40);
+            this.button1.Location = new System.Drawing.Point(18, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 42);
             this.button1.TabIndex = 0;
@@ -95,6 +97,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.button2);
@@ -105,6 +108,15 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "影像格式轉換";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(310, 56);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(72, 42);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "旋轉";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // checkBox1
             // 
@@ -126,15 +138,6 @@
             this.bt_clear2.UseVisualStyleBackColor = true;
             this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(310, 56);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(72, 42);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "旋轉";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -144,6 +147,16 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(18, 70);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 42);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "選取資料夾";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
@@ -179,6 +192,8 @@
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 
