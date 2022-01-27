@@ -38,20 +38,37 @@ namespace vcs_WebCam_AForge0
         AForge.Controls.VideoSourcePlayer vsp;
         Stopwatch stopwatch;
 
+        private const int BORDER = 30;
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        void show_item_location()
+        {
+            richTextBox1.Location = new Point(BORDER, BORDER + 480 + BORDER);
+            richTextBox1.Size = new Size(640 * 2 + BORDER, 200);
+
+            this.ClientSize = new Size(BORDER + 640 + BORDER + 640 + BORDER, BORDER + 480 + BORDER + 200 + BORDER);
+
+            lb_fps.Text = "";
+            lb_fps.Location = new Point(BORDER + 640 + BORDER + 640 + BORDER - 130, 5);
+
+            pictureBox1.Size = new Size(640, 480);
+            pictureBox1.Location = new Point(BORDER, BORDER);
+
+            vsp.Size = new Size(640, 480);
+            vsp.Location = new Point(BORDER + 640 + BORDER, BORDER);
+            button1.Location = new Point(vsp.Location.X + vsp.Size.Width - button1.Size.Width, vsp.Location.Y);
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            lb_fps.Text = "";
-            lb_fps.Location = new Point(680 + 400, 20);
-            button1.Location = new Point(800 + 400, 20);
-            richTextBox1.Location = new Point(680 + 400, 60);
-
             vsp = new AForge.Controls.VideoSourcePlayer();
             this.Controls.Add(vsp);
+
+            show_item_location();
 
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
@@ -74,13 +91,12 @@ namespace vcs_WebCam_AForge0
                 webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
                 this.Text = webcam_name;
 
+                //有抓到WebCam, 重新設定pictureBox和vsp的大小和位置
                 pictureBox1.Size = new Size(ww, hh);
-                pictureBox1.Location = new Point(20, 20);
-                //this.ClientSize = new Size(pictureBox1.Size.Width + 40, pictureBox1.Size.Height + 40);
-
+                pictureBox1.Location = new Point(BORDER, BORDER);
                 vsp.Size = new Size(ww, hh);
-                vsp.Location = new Point(20 + 640 + 30, 20);
-                //this.ClientSize = new Size(vsp.Size.Width + 250, vsp.Size.Height + 40);
+                vsp.Location = new Point(BORDER + ww + BORDER, BORDER);
+                button1.Location = new Point(vsp.Location.X + vsp.Size.Width - button1.Size.Width, vsp.Location.Y);
 
                 stopwatch = new Stopwatch();
                 stopwatch.Start();
@@ -105,7 +121,6 @@ namespace vcs_WebCam_AForge0
             vsp.SignalToStop();
             vsp.WaitForStop();
         }
-
 
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
@@ -157,4 +172,3 @@ namespace vcs_WebCam_AForge0
         }
     }
 }
-

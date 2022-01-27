@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B3930A8A-2E68-49E7-A27D-F662A2B2A93F}</ProjectGuid>
+    <ProjectGuid>{2B2F6389-4740-462B-8F0A-EA74E562CB7A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>test_listview</RootNamespace>
-    <AssemblyName>test_listview</AssemblyName>
+    <RootNamespace>vcs_ListView3</RootNamespace>
+    <AssemblyName>vcs_ListView3</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

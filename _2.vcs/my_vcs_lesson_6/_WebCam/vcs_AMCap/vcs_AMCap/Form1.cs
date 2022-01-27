@@ -118,7 +118,7 @@ namespace vcs_AMCap
                         pictureBox1.Location = new Point(140, 60);
                         this.FormBorderStyle = FormBorderStyle.FixedSingle;
                         this.WindowState = FormWindowState.Normal;
-                        this.Size = new Size(pictureBox1.Size.Width + 140 + 100, pictureBox1.Size.Height + 60 + 100);
+                        this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y + pictureBox1.Height + 50);
                     }
                 }
             }
@@ -283,20 +283,20 @@ namespace vcs_AMCap
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-                                    if (checkBox2.Checked == true)
-                                    {
-                                        flag_show_grid = true;
-                                        rb_3X3.Visible = true;
-                                        rb_4X4.Visible = true;
-                                        rb_5X5.Visible = true;
-                                    }
-                                    else
-                                    {
-                                        flag_show_grid = false;
-                                        rb_3X3.Visible = false;
-                                        rb_4X4.Visible = false;
-                                        rb_5X5.Visible = false;
-                                    }
+            if (checkBox2.Checked == true)
+            {
+                flag_show_grid = true;
+                rb_3X3.Visible = true;
+                rb_4X4.Visible = true;
+                rb_5X5.Visible = true;
+            }
+            else
+            {
+                flag_show_grid = false;
+                rb_3X3.Visible = false;
+                rb_4X4.Visible = false;
+                rb_5X5.Visible = false;
+            }
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -333,81 +333,77 @@ namespace vcs_AMCap
             this.pictureBox1.Focus();
         }
 
-                                                                void save_image_file()
-                                                                {
-                                                                    this.pictureBox1.Focus();
-                                                                    //show_main_message("存檔中...", S_OK, 10);
-                                                                    //delay(10);
+        void save_image_file()
+        {
+            this.pictureBox1.Focus();
+            //show_main_message("存檔中...", S_OK, 10);
+            //delay(10);
 
-                                                                    Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
 
-                                                                    if (bitmap1 != null)
-                                                                    {
-                                                                        IntPtr pHdc;
-                                                                        Graphics g = Graphics.FromImage(bitmap1);
-                                                                        Pen p = new Pen(Color.Red, 1);
-                                                                        SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-                                                                        Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                                                                        pHdc = g.GetHdc();
+            if (bitmap1 != null)
+            {
+                IntPtr pHdc;
+                Graphics g = Graphics.FromImage(bitmap1);
+                Pen p = new Pen(Color.Red, 1);
+                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                pHdc = g.GetHdc();
 
-                                                                        if (flag_show_time == true)
-                                                                        {   //顯示時間
-                                                                            int xPos = 10;
-                                                                            int yPos = 10;
-                                                                            string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                if (flag_show_time == true)
+                {   //顯示時間
+                    int xPos = 10;
+                    int yPos = 10;
+                    string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
-                                                                            g.ReleaseHdc();
-                                                                            g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            g.ReleaseHdc();
-                                                                        }
-                                                                        g.Dispose();
+                    g.ReleaseHdc();
+                    g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+                }
+                else
+                {
+                    g.ReleaseHdc();
+                }
+                g.Dispose();
 
-                                                                        String filename = string.Empty;
-                                                                        filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename = string.Empty;
+                filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
-                                                                        //String file1 = file + ".jpg";
-                                                                        String filename2 = filename + ".bmp";
-                                                                        //String file3 = file + ".png";
+                //String file1 = file + ".jpg";
+                String filename2 = filename + ".bmp";
+                //String file3 = file + ".png";
 
-                                                                        try
-                                                                        {
-                                                                            //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                                                                            bitmap1.Save(filename2, ImageFormat.Bmp);
-                                                                            //bitmap1.Save(@file3, ImageFormat.Png);
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename2, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
 
-                                                                            //richTextBox1.Text += "存檔成功\n";
-                                                                            //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                                                                            //richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                                                                            //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                                                                            show_main_message("已存檔 BMP", S_OK, 10);
-                                                                        }
-                                                                        catch (Exception ex)
-                                                                        {
-                                                                            //richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
-                                                                            //show_main_message1("存檔失敗", S_OK, 30);
-                                                                            //show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
-                                                                        }
+                    //richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    //richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                    show_main_message("已存檔 BMP", S_OK, 10);
+                }
+                catch (Exception ex)
+                {
+                    //richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                    //show_main_message1("存檔失敗", S_OK, 30);
+                    //show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
+                }
 
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        //richTextBox1.Text += "無圖可存\n";
-                                                                        //show_main_message("無圖可存", S_FALSE, 30);
-                                                                    }
-                                                                    return;
-                                                                }
+            }
+            else
+            {
+                //richTextBox1.Text += "無圖可存\n";
+                //show_main_message("無圖可存", S_FALSE, 30);
+            }
+            return;
+        }
 
         private void numericUpDown_time_ValueChanged(object sender, EventArgs e)
         {
             timer_auto_save.Interval = (int)numericUpDown_time.Value * 1000;
-
         }
-
-
-
-
     }
 }
+

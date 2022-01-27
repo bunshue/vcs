@@ -1,4 +1,4 @@
-﻿namespace vcs_DataTable
+﻿namespace vcs_ListView3
 {
     partial class Form1
     {
@@ -29,33 +29,34 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(13, 13);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(127, 54);
+            this.button1.Size = new System.Drawing.Size(153, 77);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Text = "顯示本機文件夾及文件在ListView上";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // richTextBox1
+            // listView1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(157, 12);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(673, 535);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.listView1.Location = new System.Drawing.Point(172, 13);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(576, 597);
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(842, 559);
-            this.Controls.Add(this.richTextBox1);
+            this.ClientSize = new System.Drawing.Size(760, 622);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -67,7 +68,7 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 

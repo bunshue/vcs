@@ -20,6 +20,7 @@ namespace vcs_WebCam_AForge1
 
         private FilterInfoCollection USBWebcams = null;
         int webcam_count = 0;
+        private const int BORDER = 30;
 
         public MainForm()
         {
@@ -28,7 +29,6 @@ namespace vcs_WebCam_AForge1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            int i;
             show_item_location();
 
             //檢查錄影存檔的資料夾
@@ -47,6 +47,7 @@ namespace vcs_WebCam_AForge1
 
             webcam_count = USBWebcams.Count;
 
+            int i;
             /*
             richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
 
@@ -81,8 +82,8 @@ namespace vcs_WebCam_AForge1
         {
             int W = 640;
             int H = 480;
-            int x_st = 10;
-            int y_st = 10;
+            int x_st = BORDER;
+            int y_st = BORDER;
             int dx = W + 50;
             int dy = H + 50;
 
@@ -96,11 +97,11 @@ namespace vcs_WebCam_AForge1
 
             //W = 640;
             H = 480;
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + 10);
-            button2.Location = new Point(1000, 10);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
+            button2.Location = new Point(1000, BORDER);
 
             richTextBox1.Size = new Size(200, 600);
-            richTextBox1.Location = new Point(1000, 50);
+            richTextBox1.Location = new Point(1000, 70);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -202,5 +203,4 @@ namespace vcs_WebCam_AForge1
         }
     }
 }
-
 

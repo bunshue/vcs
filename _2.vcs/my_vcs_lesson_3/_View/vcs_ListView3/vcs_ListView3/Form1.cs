@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 
-namespace test_listview
+namespace vcs_ListView3
 {
     public partial class Form1 : Form
     {
@@ -20,7 +20,6 @@ namespace test_listview
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //listView1.IteMactivate += new EventHandler(listView1_IteMactivate);
             listView1.ItemActivate += new EventHandler(listView1_ItemActivate);
         }
 
@@ -133,11 +132,6 @@ namespace test_listview
                 //PaintListVIEw(filename);
                 //foldCol.Add(filename);
             }
-
-
         }
-        
-
     }
 }
-

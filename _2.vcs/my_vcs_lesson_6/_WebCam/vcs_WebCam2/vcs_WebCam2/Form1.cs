@@ -17,6 +17,7 @@ namespace vcs_WebCam2
         WebCam webcam;
 
         private FilterInfoCollection USBWebcams = null;
+        private const int BORDER = 30;
         int webcam_count = 0;
 
         public Form1()
@@ -24,9 +25,26 @@ namespace vcs_WebCam2
             InitializeComponent();
         }
 
+        void show_item_location()
+        {
+            pictureBox1.Size = new Size(640, 480);
+            pictureBox1.Location = new Point(BORDER, BORDER);
+
+            richTextBox1.Location = new Point(BORDER, BORDER + 480 + BORDER);
+            richTextBox1.Size = new Size(640 * 2 + BORDER, 200);
+
+            int dx = 100;
+            button1.Location = new Point(BORDER + 640 + BORDER + dx * 0, BORDER);
+            button2.Location = new Point(BORDER + 640 + BORDER + dx * 1, BORDER);
+            button3.Location = new Point(BORDER + 640 + BORDER + dx * 2, BORDER);
+
+            this.Text = "";
+            this.ClientSize = new Size(BORDER + 640 + BORDER + 640 + BORDER, BORDER + 480 + BORDER + 200 + BORDER);
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            show_item_location();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -71,6 +89,7 @@ namespace vcs_WebCam2
                 i = 0;
                 string camera_name = USBWebcams[i].MonikerString;   //長名
                 this.webcam = new WebCam(pictureBox1, camera_name, "第 " + (i + 1).ToString() + " 台攝影機");
+                this.Text = USBWebcams[i].Name;
 
                 /*
                 richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
@@ -87,6 +106,7 @@ namespace vcs_WebCam2
             try
             {
                 this.webcam.StopCapture();
+                this.Text = "";
             }
             catch (Exception ex)
             {
@@ -95,13 +115,18 @@ namespace vcs_WebCam2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
-            int i;
-            i = 0;
-
-            richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
-            richTextBox1.Text += "cameraName\t" + this.webcam.cameraName.ToString() + "\n";
-            richTextBox1.Text += "CamMonitor\t" + this.webcam.ToString() + "\n";
+            if (this.webcam != null)
+            {
+                richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
+                int i = 0;
+                richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
+                richTextBox1.Text += "cameraName\t" + this.webcam.cameraName.ToString() + "\n";
+                richTextBox1.Text += "CamMonitor\t" + this.webcam.ToString() + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "尚未開啟WebCam\n";
+            }
         }
     }
 }

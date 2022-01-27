@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace test_listview.Properties
+namespace vcs_ListView3.Properties
 {
 
 
