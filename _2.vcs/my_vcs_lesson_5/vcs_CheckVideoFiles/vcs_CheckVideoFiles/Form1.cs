@@ -712,7 +712,27 @@ namespace vcs_CheckVideoFiles
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //搜尋一個資料夾內所有特定格式的檔案
+            string foldername = @"C:\______test_files";
 
+            ///根據路徑實例化一個對象
+            var di = new DirectoryInfo(foldername);
+
+            ///選出所有符合一定後綴的文件列表
+            FileInfo[] files = di.GetFiles("*.*", SearchOption.AllDirectories).Where(info => IsRight(info)).ToArray();
+
+            foreach (FileInfo f in files)
+            {
+                richTextBox1.Text += f.FullName + "\n";
+            }
+        }
+
+        private bool IsRight(FileInfo info)
+        {
+            //選擇的文件後綴名
+            //List<string> patterns = new List<string>() { ".png", ".jpg", ".bmp", ".tif" };
+            List<string> patterns = new List<string>() { ".png" };
+            return patterns.Contains(info.Extension);
         }
 
         private void button8_Click(object sender, EventArgs e)
