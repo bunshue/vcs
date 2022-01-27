@@ -37,9 +37,16 @@ namespace vcs_MyPlayer3
 {
     public partial class Form1 : Form
     {
+        int flag_display_mode = MODE_0;
+
+        private const int MODE_0 = 0x00;   //mp3 only
+        private const int MODE_1 = 0x01;   //mp3 + pdf
+
         string mp3_filename = string.Empty;
+        string pdf_filename = string.Empty;
         int mp3_position = 0;
         int mp3_volume = 50;
+        double mp3_rate = 1.0;
         int mp3_player_height = 50;
 
         int timer_display_show_main_mesg_count = 0;
@@ -49,6 +56,7 @@ namespace vcs_MyPlayer3
         private const int S_FALSE = 1;     //system return FALSE
 
         AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
+        WebBrowser webBrowser1;
 
         public Form1()
         {
@@ -83,6 +91,20 @@ namespace vcs_MyPlayer3
             this.Controls.Add(this.axWindowsMediaPlayer1);
         }
 
+        void Init_WebBrowser()
+        {
+            int W = Screen.PrimaryScreen.WorkingArea.Width;
+            int H = Screen.PrimaryScreen.WorkingArea.Height;
+
+            this.webBrowser1 = new WebBrowser();
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            //this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(W - 100, 500);
+            //this.webBrowser1.TabIndex = 2;
+            //this.webBrowser1.Visible = false;   //fail
+            this.Controls.Add(this.webBrowser1);
+        }
+
         protected void axWindowsMediaPlayer1_StatusChange(object sender, EventArgs e)
         {
             //richTextBox1.Text += "play state = " + axWindowsMediaPlayer1.playState.ToString() + "\n";
@@ -96,14 +118,22 @@ namespace vcs_MyPlayer3
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        void show_item_location(int mode)
         {
-            Init_WMP();
-
             int W = Screen.PrimaryScreen.WorkingArea.Width;
             int H = Screen.PrimaryScreen.WorkingArea.Height;
-            this.ClientSize = new Size(W, mp3_player_height);
-            this.Location = new Point(0, H - mp3_player_height);
+
+            if (mode == MODE_0)
+            {
+                this.ClientSize = new Size(W, mp3_player_height);
+                this.Location = new Point(0, H - mp3_player_height);
+            }
+            else
+            {
+                this.ClientSize = new Size(W, H);
+                this.Location = new Point(0, 0);
+            }
+
             this.pictureBox1.Size = new Size(this.pictureBox1.Size.Width, mp3_player_height);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -115,10 +145,14 @@ namespace vcs_MyPlayer3
             this.KeyPreview = true;
             this.TopMost = true;
 
-            lb_main_mesg1.Location = new Point(W / 2, 2);
+            lb_main_mesg1.Location = new Point(W / 2, this.pictureBox1.Location.Y + 2);
             lb_main_mesg1.Text = "";
             lb_main_mesg1.BringToFront();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Init_WMP();
 
             bool flag_use_autoload_file = false;
 
@@ -136,10 +170,14 @@ namespace vcs_MyPlayer3
                     mp3_position = 0;
 
                     flag_use_autoload_file = true;
-
                 }
+                else if (GetExtension.ToLower() == ".pdf")
+                {
+                    pdf_filename = filename;
 
-
+                    //mode 1
+                    //flag_use_autoload_file = true;
+                }
             }
             int i = 0;
             foreach (string arg in Environment.GetCommandLineArgs())
@@ -154,12 +192,23 @@ namespace vcs_MyPlayer3
             richTextBox1.Text += "position : \t" + Properties.Settings.Default.position.ToString() + "\n";
             */
 
+            //flag_display_mode = MODE_0;   區分顯示模式
+
+            flag_display_mode = MODE_0;
+
+            if (flag_display_mode == MODE_1)
+            {
+                Init_WebBrowser();
+            }
+
+            show_item_location(flag_display_mode);
+
             if (flag_use_autoload_file == false)
             {
-                mp3_filename = Properties.Settings.Default.filename;
+                mp3_filename = Properties.Settings.Default.mp3_filename;
                 mp3_position = Properties.Settings.Default.position;
             }
-            
+
             mp3_volume = Properties.Settings.Default.volume;
             if (mp3_volume == -1)
             {
@@ -235,14 +284,31 @@ namespace vcs_MyPlayer3
             }
             else if ((e.KeyData == Keys.D0) || (e.KeyData == Keys.NumPad0))
             {
-                show_main_message1("恢復速度", S_OK, 30);
+                mp3_rate = 1;
+                axWindowsMediaPlayer1.settings.rate = mp3_rate;
+                show_main_message1("恢復速度 / 位置", S_OK, 30);
+
+                int W = Screen.PrimaryScreen.WorkingArea.Width;
+                int H = Screen.PrimaryScreen.WorkingArea.Height;
+                //this.ClientSize = new Size(W, mp3_player_height);
+                this.Location = new Point(0, H - mp3_player_height);
             }
             else if (e.KeyCode == Keys.Up)
             {
                 //show_main_message1("上", S_OK, 30);
                 if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
                 {
-                    show_main_message1("CTRL + 上", S_OK, 30);
+                    if (mp3_rate < 1.0)
+                    {
+                        mp3_rate += 0.2;
+                        axWindowsMediaPlayer1.settings.rate = mp3_rate;
+                    }
+                    else if (mp3_rate < 5.0)
+                    {
+                        mp3_rate += 0.5;
+                        axWindowsMediaPlayer1.settings.rate = mp3_rate;
+                    }
+                    show_main_message1("播放速度 : " + mp3_rate.ToString("F1") + " X", S_OK, 30);
                 }
                 else
                 {
@@ -259,7 +325,17 @@ namespace vcs_MyPlayer3
                 //show_main_message1("下", S_OK, 30);
                 if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
                 {
-                    show_main_message1("CTRL + 下", S_OK, 30);
+                    if (mp3_rate >= 1.5)
+                    {
+                        mp3_rate -= 0.5;
+                        axWindowsMediaPlayer1.settings.rate = mp3_rate;
+                    }
+                    else if (mp3_rate > 0.6)
+                    {
+                        mp3_rate -= 0.2;
+                        axWindowsMediaPlayer1.settings.rate = mp3_rate;
+                    }
+                    show_main_message1("播放速度 : " + mp3_rate.ToString("F1") + " X", S_OK, 30);
                 }
                 else
                 {
@@ -352,7 +428,7 @@ namespace vcs_MyPlayer3
                 if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPlaying)
                 {
                     axWindowsMediaPlayer1.Ctlcontrols.pause();
-                    show_main_message1("暫停", S_OK, 30);
+                    show_main_message1("暫停", S_OK, 100);
                 }
                 else
                 {
@@ -364,9 +440,10 @@ namespace vcs_MyPlayer3
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.filename = mp3_filename;
+            Properties.Settings.Default.mp3_filename = mp3_filename;
             Properties.Settings.Default.position = mp3_position;
             Properties.Settings.Default.volume = mp3_volume;
+            Properties.Settings.Default.pdf_filename = pdf_filename;
 
             Properties.Settings.Default.Save();
         }
@@ -438,8 +515,8 @@ namespace vcs_MyPlayer3
                 string author = axWindowsMediaPlayer1.currentMedia.getItemInfo("Author");
                 string artist = axWindowsMediaPlayer1.currentMedia.getItemInfo("Artist");
 
-                title = axWindowsMediaPlayer1.currentMedia.sourceURL + " ( " + title + " / " + author + " )";
-                //title = axWindowsMediaPlayer1.currentMedia.name;
+                title = Path.GetFileName(mp3_filename) + "  ( " + title + " / " + author + " )";
+
                 tmp_height = e.Graphics.MeasureString(title, f).ToSize().Height;
                 y_st = (H - tmp_height) / 4;
                 e.Graphics.DrawString(title, f, sb, new PointF(10, y_st));
@@ -457,7 +534,6 @@ namespace vcs_MyPlayer3
             else
             {
                 e.Graphics.DrawLine(new Pen(Color.Gray, 10), 0, y_st, W, y_st);
-
             }
             e.Graphics.DrawRectangle(new Pen(Color.Red, 1), 0, 0, W - 1, H - 1);
         }
@@ -474,7 +550,7 @@ namespace vcs_MyPlayer3
             //show_main_message1(flag_mouse_down_position.ToString(), S_OK, 30);
 
             int H = pictureBox1.Height;
-            if (e.Y < H / 5)
+            if (e.Y < H * 3 / 5)
             {
                 flag_mouse_down_mode = 1;   //move position mode
                 Form1_MouseDown(sender, e);
@@ -514,7 +590,20 @@ namespace vcs_MyPlayer3
                 //show_main_message1(flag_mouse_up_position.ToString(), S_OK, 30);
                 flag_mouse_down = false;
                 flag_mouse_down_mode = 0;
+
+                if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPlaying)
+                {
+                    int total = (int)axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration;
+                    int W = pictureBox1.Width;
+                    axWindowsMediaPlayer1.Ctlcontrols.currentPosition = total * e.X / W;
+                    show_main_message1("移動播放位置", S_OK, 10);
+                    this.pictureBox1.Invalidate();
+                }
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
@@ -541,6 +630,7 @@ namespace vcs_MyPlayer3
                 this.pictureBox1.Invalidate();
             }
         }
+
     }
 }
 

@@ -682,6 +682,31 @@ namespace vcs_CheckVideoFiles
         {
             show_button_text(sender);
 
+            //檔案資訊
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            var GetFileName = Path.GetFileName(filename);
+            var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
+            var GetExtension = Path.GetExtension(filename);
+            var GetDirectoryName = Path.GetDirectoryName(filename);
+            var GetFullPath = Path.GetFullPath(filename);
+
+            var GetPathRoot = Path.GetPathRoot(filename);
+            var GetRandomFileName = Path.GetRandomFileName();
+
+            richTextBox1.Text += "filename\t" + filename + "\n";
+            richTextBox1.Text += "GetFullPath\t" + GetFullPath + "\n";
+            richTextBox1.Text += "GetDirectoryName\t" + GetDirectoryName + "\n";
+            richTextBox1.Text += "GetFileName\t" + GetFileName + "\n";
+            richTextBox1.Text += "GetFileNameWithoutExtension\t" + GetFileNameWithoutExtension + "\n";
+            richTextBox1.Text += "GetExtension\t" + GetExtension + "\n";
+            richTextBox1.Text += "GetPathRoot\t" + GetPathRoot + "\n";
+            richTextBox1.Text += "GetRandomFileName\t" + GetRandomFileName + "\n";
+            
+            
+            
+
+
         }
 
         private void button7_Click(object sender, EventArgs e)

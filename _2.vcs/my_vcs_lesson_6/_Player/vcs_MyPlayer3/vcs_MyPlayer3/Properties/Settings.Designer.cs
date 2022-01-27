@@ -26,12 +26,12 @@ namespace vcs_MyPlayer3.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string filename {
+        public string mp3_filename {
             get {
-                return ((string)(this["filename"]));
+                return ((string)(this["mp3_filename"]));
             }
             set {
-                this["filename"] = value;
+                this["mp3_filename"] = value;
             }
         }
         
@@ -56,6 +56,18 @@ namespace vcs_MyPlayer3.Properties {
             }
             set {
                 this["volume"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pdf_filename {
+            get {
+                return ((string)(this["pdf_filename"]));
+            }
+            set {
+                this["pdf_filename"] = value;
             }
         }
     }

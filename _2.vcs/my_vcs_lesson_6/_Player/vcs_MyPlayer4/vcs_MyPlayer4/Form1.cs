@@ -131,30 +131,6 @@ namespace vcs_MyPlayer4
             //axWindowsMediaPlayer1.uiMode = "invisible";
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //+
-            //richTextBox1.Text += "rate = " + axWindowsMediaPlayer1.settings.rate.ToString() + "\n";
-            if (mp3_rate < 5.0)
-            {
-                mp3_rate += 0.5;
-                axWindowsMediaPlayer1.settings.rate = mp3_rate;
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //-
-            //richTextBox1.Text += "rate = " + axWindowsMediaPlayer1.settings.rate.ToString() + "\n";
-            //axWindowsMediaPlayer1.Ctlcontrols.fastForward();
-            //richTextBox1.Text += "rate = " + axWindowsMediaPlayer1.settings.rate.ToString() + "\n";
-            if (mp3_rate > -5.0)
-            {
-                mp3_rate -= 0.5;
-                axWindowsMediaPlayer1.settings.rate = mp3_rate;
-            }
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             //info
@@ -194,39 +170,6 @@ namespace vcs_MyPlayer4
 
 
             //axWindowsMediaPlayer1.currentMedia.setItemInfo("Copyright", "lion-mouse");    //通過屬性名設置媒體信息
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //Full
-            axWindowsMediaPlayer1.uiMode = "full";
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //Mini
-            axWindowsMediaPlayer1.uiMode = "mini";
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            //None
-            axWindowsMediaPlayer1.uiMode = "none";
-
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //Invisible
-            axWindowsMediaPlayer1.uiMode = "invisible";
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-
 
         }
 

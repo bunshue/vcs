@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="vcs_MyPlayer3.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="filename" Type="System.String" Scope="User">
+    <Setting Name="mp3_filename" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="position" Type="System.Int32" Scope="User">
@@ -10,6 +10,9 @@
     </Setting>
     <Setting Name="volume" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="pdf_filename" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
