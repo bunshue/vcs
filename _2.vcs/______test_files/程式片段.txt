@@ -1,6 +1,5 @@
 
 
-
 C#讀取計算機CPU,HDD信息
 
 public string getCpuInfo() //讀取CPU信息
@@ -1770,20 +1769,6 @@ TopMost 改 True
 KeyPreview 改 True
 
 Form1加KeyDown
-
-
-
-//C#中如何禁止WindowsMediaPlayer双击全屏显示
-
-
-private void AxWindowsMediaPlayer1_MouseDownEvent(object sender, AxWMPLib._WMPOCXEvents_MouseDownEvent e)
-{
-    if (axWindowsMediaPlayer1.fullScreen)
-        axWindowsMediaPlayer1.fullScreen = false;
-} 
-
-
-
 
 
 // C#获取页面显示的内容 
@@ -4052,43 +4037,6 @@ XDocument　oXDoc　=　XDocument.Load(sURL);
 用C＃實現在客戶區拖動窗體
 
 
-
-C# WindowsMediaPlayer 的一些用法
-
-播放單首歌曲
-
-                player.URL = 
-
-添加多首歌曲到播放列表
-
-            IWMPPlaylist playList = player.playlistCollection.newPlaylist(); 
- (DataRow drItem = player.newMedia(drItem[].ToString()); 
-=
-
- 或者直接在當前列表上添加
-
- (DataRow drItem = player.newMedia(drItem[].ToString()); 
-
-
-設置播放器音量
-
- player.settings.volume=;
-
-
- 設置循環播放
-
-player.settings.setMode(, );
-
- 
-
-設置隨機播放
-
-
-  player.settings.setMode(, );
-
-
-
-
 C#調用默認浏覽器打開網頁的幾種方法
 
 
@@ -4751,43 +4699,6 @@ MainMenu選了之後會有打勾記號
             stretchedSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.StretchImage);
             centeredSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.CenterImage);
         }
-
-
-
-richTextBox1.Text += "測試使用WindowsMediaPlayerClass\n";
-WindowsMediaPlayerClass c;
-IWMPMedia m;
-
-c = new WindowsMediaPlayerClass();
-m = c.newMedia(mp3_filename);
-richTextBox1.Text += "歌手名:\t" + m.getItemInfo("Author") + "\n" + "歌  名:\t" + m.getItemInfo("Title") + "\n";
-
-
-getItemInfo Author Title
-
-// Store the current media object.
-var cm = Player.currentMedia;
-
-// Get the number of attributes for the current media. 
-var atCount = cm.attributeCount;
-
-// Loop through the attribute list.
-for(var i=0; i < atCount; i++){
-
-   // Print each attribute index and name.   
-   myText.value += "Attribute " + i +": ";
-   myText.value += cm.getAttributeName(i);
-   myText.value += "\n";
-}
-
-
-
-
-//添加列表
-WC = new WMPLib.WindowsMediaPlayerClass();
-MC = WC.newMedia(str);
-this.axWindowsMediaPlayer1.currentPlaylist.appendItem(MC);
-richTextBox1.Text += "add " + str + "\n";
 
 
 
@@ -5501,7 +5412,212 @@ using System.Text.RegularExpressions;
 
 
         				
-//--------------------------------------------------------------------------------------------------------------------------
+//-----wmp---------------------------------------------------------------------------------------------------------------------
+
+
+//添加列表
+WC = new WMPLib.WindowsMediaPlayerClass();
+MC = WC.newMedia(str);
+this.axWindowsMediaPlayer1.currentPlaylist.appendItem(MC);
+richTextBox1.Text += "add " + str + "\n";
+
+
+
+
+C# WindowsMediaPlayer 的一些用法
+
+播放單首歌曲
+
+                player.URL = 
+
+添加多首歌曲到播放列表
+
+            IWMPPlaylist playList = player.playlistCollection.newPlaylist(); 
+ (DataRow drItem = player.newMedia(drItem[].ToString()); 
+=
+
+ 或者直接在當前列表上添加
+
+ (DataRow drItem = player.newMedia(drItem[].ToString()); 
+
+
+設置播放器音量
+
+ player.settings.volume=;
+
+
+ 設置循環播放
+
+player.settings.setMode(, );
+
+ 
+
+設置隨機播放
+
+
+  player.settings.setMode(, );
+
+
+
+
+
+richTextBox1.Text += "測試使用WindowsMediaPlayerClass\n";
+WindowsMediaPlayerClass c;
+IWMPMedia m;
+
+c = new WindowsMediaPlayerClass();
+m = c.newMedia(mp3_filename);
+richTextBox1.Text += "歌手名:\t" + m.getItemInfo("Author") + "\n" + "歌  名:\t" + m.getItemInfo("Title") + "\n";
+
+
+getItemInfo Author Title
+
+// Store the current media object.
+var cm = Player.currentMedia;
+
+// Get the number of attributes for the current media. 
+var atCount = cm.attributeCount;
+
+// Loop through the attribute list.
+for(var i=0; i < atCount; i++){
+
+   // Print each attribute index and name.   
+   myText.value += "Attribute " + i +": ";
+   myText.value += cm.getAttributeName(i);
+   myText.value += "\n";
+}
+
+
+
+
+
+
+
+
+//C#中如何禁止WindowsMediaPlayer双击全屏显示
+
+
+private void AxWindowsMediaPlayer1_MouseDownEvent(object sender, AxWMPLib._WMPOCXEvents_MouseDownEvent e)
+{
+    if (axWindowsMediaPlayer1.fullScreen)
+        axWindowsMediaPlayer1.fullScreen = false;
+} 
+
+
+
+
+
+
+
+
+
+
+
+axWindowsMediaPlayer1
+
+
+uiMode	//播放器介面模式
+//Full, 有影像, 完整播放器介面
+axWindowsMediaPlayer1.uiMode = "full";
+
+//Mini, 有影像, 簡約播放器介面
+axWindowsMediaPlayer1.uiMode = "mini";
+
+//None, 有影像, 無播放器介面
+axWindowsMediaPlayer1.uiMode = "none";
+
+//Invisible, 無影像, 有無播放器介面
+axWindowsMediaPlayer1.uiMode = "invisible";
+
+
+在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原爲原始的大小.
+         private void ResizeOriginal()
+         {
+             int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
+             int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
+             axWindowsMediaPlayer1.Width = intWidth + 2;
+             axWindowsMediaPlayer1.Height = intHeight + 2;
+         }
+
+可能因爲媒體文件的打開需要一定時間，這裏等待媒體文件的打開
+
+顯示文件播放長度。
+
+則顯示結果很可能爲0，因此，這時候很可能獲取不到文件的播放時間長度，容易出錯。所以在利用的時候可以加一個timer控件：
+
+從WMP8開始就不支持mms/rtsp協議了，所用wmp.URL="mms://xxxx";是不行的了。點此處見詳情，而mms這個協議現在還在廣泛使用。鬱悶。因此，我們不能使用wmp來看網絡電視了。
+
+
+
+
+媒體播放器包括如下元素：
+Video Display Panel：視頻顯示面板；
+Video Border：視頻邊框；
+Closed Captioning Display Panel；字幕顯示面板；
+Track Bar；搜索欄；
+Control Bar with Audio and Position Controls：帶有聲音和位置控制的控制欄；
+Go To Bar：轉到欄；
+Display Panel：顯示面板；
+Status Bar：狀態欄；
+
+　　就是這麼幾個部分，網上有資料說控件提供方法控制它們顯示與否，但是我在sdk中並沒有找到它們。唯一可以粗略控制它們的就是uiMode屬性。它的取值前面有。
+
+
+　　七、像暴風有字幕相關信息的設置，wmp控件有這個功能嗎？
+　　當然有。就是AxWindowsMediaPlayer.closedCaption。它是IWMPClosedCaption的實例。
+
+label4.Text = axMediaPlayer1.Volume.ToString();    //音量
+axMediaPlayer1.FileName = @"mms://218.98.101.164/vod/jingwei.wma";//文件路徑
+axMediaPlayer1.Play(); //開始播放
+
+
+nResL = axRealAudio1.GetPosition(); //獲得當前影片 的播放進度
+label1.Text = axRealAudio1.GetTitle();   //獲得影片的標題
+label2.Text = "當前的帶寬: " + axRealAudio1.GetBandwidthCurrent() / 1024 + "KB";//當前影片的當前的帶寬              
+label3.Text = "連接的帶寬: " + axRealAudio1.GetConnectionBandwidth() / 1024 + "KB"; //當前的連接的帶寬
+
+AxWindowsMediaPlayer媒體文件主要方法屬性
+屬性/方法名︰ 說明︰ 
+[基本屬性]  
+URL:String; 指定媒體位置，本機或網絡地址 
+
+playState:integer; 播放狀態，1=停止，2=暫停，3=播放，6=正在緩沖，9=正在連接，10=準備就緒 
+enableContextMenu:Boolean; 啟用/禁用右鍵菜單 
+
+
+//播放器基本控製 
+
+Ctlcontrols.next; 下一曲 
+Ctlcontrols.previous; 上一曲 
+
+[settings] wmp.settings //播放器基本設置 
+settings.volume:integer; 音量，0-100 
+settings.autoStart:Boolean; 是否自動播放 
+settings.mute:Boolean; 是否靜音 
+settings.playCount:integer; 播放次數 
+
+[currentMedia] wmp.currentMedia //當前媒體屬性 
+currentMedia.duration:double; 媒體總長度 
+currentMedia.durationString:string; 媒體總長度，字符串格式。如“03:24” 
+currentMedia.getItemInfo(const string); 獲取當前媒體信息"Title"=媒體標題，"Author"=藝術家，"Copyright"=版權信息，"Description"=媒體內容描述， "Duration"=持續時間（秒），"FileSize"=文件大小，"FileType"=文件類型，"sourceURL"=原始地址 
+currentMedia.setItemInfo(const string); 通過屬性名設置媒體信息 
+currentMedia.name:string; 同 currentMedia.getItemInfo("Title") 
+
+[currentPlaylist] wmp.currentPlaylist //當前播放列表屬性 
+currentPlaylist.count:integer; 當前播放列表所包含媒體數 
+currentPlaylist.Item[integer]; 獲取或設置指定項目媒體信息，其子屬性同wmp.currentMedia 
+
+
+在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原為原始的大小.
+         private void ResizeOriginal()
+         {
+							             int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
+							             int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
+							             axWindowsMediaPlayer1.Width = intWidth + 2;
+							             axWindowsMediaPlayer1.Height = intHeight + 2;
+         }
+
+
 
 
 

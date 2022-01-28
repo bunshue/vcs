@@ -84,8 +84,8 @@ namespace vcs_MyPlayer4
         private void button1_Click(object sender, EventArgs e)
         {
             //string filename = @"C:\______test_files\__RW\_avi\i2c.avi";
-            //string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
-            string filename = @"D:\vcs\_烏龍派出所\_烏龍派出所251~300\烏龍派出所268(日語).mp4";
+            string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            //string filename = @"D:\vcs\_烏龍派出所\_烏龍派出所251~300\烏龍派出所268(日語).mp4";
 
             //axWindowsMediaPlayer1.Visible = false;
             axWindowsMediaPlayer1.URL = filename;
@@ -176,6 +176,45 @@ namespace vcs_MyPlayer4
         private void button11_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.fullScreen = true;
+        }
+
+
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            axWindowsMediaPlayer1.settings.balance = balance;
+        }
+
+        int balance = 0;
+        bool flag_balacce_to_right = true;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (flag_balacce_to_right == true)
+            {
+                if (balance < 100)
+                {
+                    balance += 10;
+                    axWindowsMediaPlayer1.settings.balance = balance;
+                }
+                else
+                {
+                    flag_balacce_to_right = false;
+                }
+            }
+            else
+            {
+                if (balance >-90)
+                {
+                    balance -= 10;
+                    axWindowsMediaPlayer1.settings.balance = balance;
+                }
+                else
+                {
+                    flag_balacce_to_right = true;
+                }
+            }
+            richTextBox1.Text += balance.ToString() + " ";
+
         }
 
     }
