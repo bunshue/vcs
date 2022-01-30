@@ -1,5 +1,85 @@
 
 
+ou could try to add page number like "#page=10" at the end of the pdf file path.
+
+Such as 
+
+file:///C:/Users/Admin/Desktop/Test.pdf#page=10
+
+
+            //string filename = "C:\\______test_files\\__RW\\_pdf\\Test.pdf";
+            string filename = @"C:\_______Data\_語言雜誌壓縮檔\_常春藤\202005常春藤生活英語\202005常春藤生活英語\202005常春藤生活英語.pdf";
+
+
+            //直接顯示
+            //webBrowser1.Navigate(filename);
+
+
+            //放大顯示比例
+            int zoomFactor = 200;
+
+            //zoom, no navigation panes, no toolbar
+            //webBrowser1.Navigate(filename + "?#zoom=" + zoomFactor.ToString() + "%&navpanes=0&toolbar=0");
+
+            //zoom, view to fit, no navigation panes, no toolbar
+            //webBrowser1.Navigate(filename + "?#zoom=" + zoomFactor.ToString() + "%&view=fit&navpanes=0&toolbar=0");
+
+            //page 20
+            webBrowser1.Navigate(filename + "?#zoom=" + zoomFactor.ToString() + "%&view=fit&navpanes=0&toolbar=0&page=20");
+
+
+
+
+
+
+            richTextBox1.Text += "C#擷取pdf文檔的頁數\n";
+
+            //string filename = @"C:\_______Data\_語言雜誌壓縮檔\_常春藤\202005常春藤生活英語\202005常春藤生活英語\202005常春藤生活英語.pdf";
+            string filename = "C:\\______test_files\\__RW\\_pdf\\Test.pdf";
+
+            int pages = GetPDFofPageCount(filename);
+            richTextBox1.Text += "pages = " + pages.ToString() + "\n";
+
+
+
+
+
+        //[操作pdf文檔]之C#判斷pdf文檔的頁數：
+        /// <summary>
+        /// 擷取pdf文檔的頁數
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>-1表示檔案不存在</returns>
+        public static int GetPDFofPageCount(string filePath)
+        {
+            int count = -1;//-1表示檔案不存在
+            if (File.Exists(filePath))
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    StreamReader reader = new StreamReader(fs);
+                    //從流的目前位置到末尾讀取流
+                    string pdfText = reader.ReadToEnd();
+                    //richTextBox1.Text += pdfText + "\n";
+                    Regex rgx = new Regex(@"/Type\s*/Page[^s]");
+                    MatchCollection matches = rgx.Matches(pdfText);
+                    count = matches.Count;
+                }
+            }
+            return count;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 C#讀取計算機CPU,HDD信息
 
 public string getCpuInfo() //讀取CPU信息
@@ -5682,7 +5762,8 @@ public static byte[] drawImg(string check)
     ht.Dispose();
     img.Dispose();
     return ms.ToArray();
-}    
+}
+    
 
 
 

@@ -163,13 +163,14 @@ namespace vcs_MyPlayer3
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
+            //this.ShowInTaskbar = false;
             this.KeyPreview = true;
-            this.TopMost = true;
+            //this.TopMost = true;
 
             lb_main_mesg1.Location = new Point(W / 2, this.pictureBox1.Location.Y + 2);
             lb_main_mesg1.Text = "";
             lb_main_mesg1.BringToFront();
+            this.Text = "MP3 Player";
         }
 
         void bt_exit_setup()
