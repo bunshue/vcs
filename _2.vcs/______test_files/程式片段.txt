@@ -1,5 +1,38 @@
 
 
+
+Image.FromFile可開啟影像檔:
+ "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
+ 
+ 
+ 
+ 檢視目前系統版本
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OperatingSystem myOS = Environment.OSVersion;
+            if (myOS.Version.Major == 5)
+            {
+                switch (myOS.Version.Minor)
+                {
+                    case 0:
+                        MessageBox.Show("系統版本：" + "Windows 2000 " + myOS.ServicePack);
+                        break;
+                    case 1:
+                        MessageBox.Show("系統版本：" + "Windows XP " + myOS.ServicePack);
+                        break;
+                    case 2:
+                        MessageBox.Show("系統版本：" + "Windows Server 2003 " + " " + myOS.ServicePack);
+                        break;
+                    default:
+                        MessageBox.Show("系統版本：" + myOS.ToString() + " " + myOS.ServicePack);
+                        break;
+                }
+            }
+            else
+                MessageBox.Show("系統版本：" + myOS.VersionString + " " + myOS.ServicePack);
+        }
+        
+
 ou could try to add page number like "#page=10" at the end of the pdf file path.
 
 Such as 
@@ -14,7 +47,7 @@ file:///C:/Users/Admin/Desktop/Test.pdf#page=10
             //直接顯示
             //webBrowser1.Navigate(filename);
 
-
+//開啟pdf時給的參數
             //放大顯示比例
             int zoomFactor = 200;
 

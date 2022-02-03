@@ -150,23 +150,5 @@ namespace WindowsFormsApplication1aaaaaa
 
             }
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void timer3_Tick(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

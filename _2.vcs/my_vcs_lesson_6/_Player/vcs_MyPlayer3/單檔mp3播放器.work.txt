@@ -11,7 +11,7 @@ MyPlayer3
 按ctrl+上下	小量的加減速
 按shift+上下	大量的加減速
 
-Backspace	跳到檔頭
+				Backspace	跳到檔頭
 
 PageUp/PageDown 同資料夾、依檔名排序的上一個、下一個檔案
 
