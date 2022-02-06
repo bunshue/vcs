@@ -1,4 +1,202 @@
 
+字幕/樣式/改 字符集為Chinese Simplified(GB2312-80)
+
+Pahali Aurat Pahala Mard
+
+
+this.digitalDisplayControl1.DigitText = "aaaa"+DateTime.Now.ToString("HH:mm:ss");
+
+
+
+
+
+
+
+//開啟pdf時給的參數
+
+Command Result
+nameddest=destination		Jump to a named destination.
+page=pagenum			Turn to the target page.
+zoom=scale			Zoom the PDFs.
+pagemode=bookmarks		Open the bookmark panel in the Navigation Pane.
+pagemode=thumbs			Open the thumbnail panel in the Navigation Pane.
+pagemode=layers			Open the layers panel in the Navigation Pane.
+pagemode=none (default)		Close all the panels in the Navigation pane.
+fdf="fdf path"			Open the FDF file.
+toolbar=1|0			Show or Hide Tool Bar.
+statusbar=1|0			Show or Hide Status Bar.
+navpanes=1|0			Show or Hide Navigation Pane.
+reverse=1/0			View pages in reverse or forward ord
+
+
+
+
+
+
+#zoom=Fit
+
+command
+file.pdf#toolbar=1 & navpanes=0 & scrollbar=1 & page=3 & view=FitV
+                                                              fitH
+                                                              fit
+zoom=70%
+navpanes=0
+toolbar=0
+page=20
+
+file.pdf#zoom=scale
+
+    <param name="initZoom" value="fitToPage" />
+
+fitToPage
+fitToWidth
+70    70% zoom
+
+
+
+filename + "?#zoom=" + zoomFactor.ToString() + "%&view=fit&navpanes=0&toolbar=0&page=20");
+
+
+
+
+
+
+ 
+
+
+Subscribe
+Lazy Diary @ Hatena Blog
+PowerShell / Java / miscellaneous things about software development, Tips & Gochas. CC BY-SA 4.0/Apache License 2.0
+20180829
+Test Page for Parameters for Opening PDF Files
+<embed> tag
+
+    (1) : page=pagenum
+    (2) : zoom=scale
+    (3) : zoom=scale,left,top
+    (4) : view=Fit
+    (5) : view=FitH
+    (6) : view=FitH,top
+    (7) : view=FitV
+    (8) : view=FitV,left
+    (9) : view=FitB
+    (10) : view=FitBH
+    (11) : view=FitBH,top
+    (12) : view=FitBV
+    (13) : view=FitBV,left
+    (14) : viewrect=left,top,wd,ht
+    (15) : scrollbar=0
+    (16) : scrollbar=1
+    (17) : toolbar=0
+    (18) : toolbar=1
+    (19) : statusbar=0
+    (20) : statusbar=1
+    (21) : navpanes=0
+    (22) : navpanes=1
+
+    (23) : highlight=lt,rt,top,btm
+
+    (a) : page=2&view=Fit&scrollbar=0&toolbar=0&statusbar=0&navpanes=0
+
+<object > tag
+
+    (1) : page=pagenum
+    (2) : zoom=scale
+    (3) : zoom=scale,left,top
+    (4) : view=Fit
+    (5) : view=FitH
+    (6) : view=FitH,top
+    (7) : view=FitV
+    (8) : view=FitV,left
+    (9) : view=FitB
+    (10) : view=FitBH
+    (11) : view=FitBH,top
+    (12) : view=FitBV
+    (13) : view=FitBV,left
+    (14) : viewrect=left,top,wd,ht
+    (15) : scrollbar=0
+    (16) : scrollbar=1
+    (17) : toolbar=0
+    (18) : toolbar=1
+    (19) : statusbar=0
+    (20) : statusbar=1
+    (21) : navpanes=0
+    (22) : navpanes=1
+
+    (23) : highlight=lt,rt,top,btm
+
+    (a) : page=2&view=Fit&scrollbar=0&toolbar=0&statusbar=0&navpanes=0
+
+with PDF.js
+
+    (1) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#page=2
+    (2) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#zoom=75
+    (3) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#zoom=75,100,100
+    (4) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#view=Fit
+    (4)' http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#zoom=page-fit
+    (5) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#view=FitH
+    (5)' http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#zoom=page-width
+    (6) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#view=FitH,100
+    (7) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#view=FitV
+    (7)' http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#zoom=page-height
+    (8) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#view=FitV,100
+    (9) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#view=FitB
+    (10) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#view=FitBH
+    (11) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#view=FitBH,100
+    (12) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#view=FitBV
+    (13) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#view=FitBV,100
+    (14) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#viewrect=100,100,100,100
+    (15) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#scrollbar=0
+    (16) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#scrollbar=1
+    (17) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#toolbar=0
+    (18) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#toolbar=1
+    (19) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#statusbar=0
+    (20) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#statusbar=1
+    (21) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#navpanes=0
+    (22) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#navpanes=1
+
+    (23) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#highlight=100,100,100,100
+
+    (a) http://mozilla.github.io/pdf.js/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf#page=2&zoom=page-fit
+
+with direct link
+
+    (1) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#page=2
+    (2) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#zoom=75
+    (3) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#zoom=75,100,100
+    (4) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#view=Fit
+    (4)' https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#zoom=page-fit
+    (5) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#view=FitH
+    (5)' https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#zoom=page-width
+    (6) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#view=FitH,100
+    (7) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#view=FitV
+    (7)' https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#zoom=page-height
+    (8) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#view=FitV,100
+    (9) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#view=FitB
+    (10) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#view=FitBH
+    (11) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#view=FitBH,100
+    (12) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#view=FitBV
+    (13) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#view=FitBV,100
+    (14) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#viewrect=100,100,100,100
+    (15) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#scrollbar=0
+    (16) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#scrollbar=1
+    (17) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#toolbar=0
+    (18) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#toolbar=1
+    (19) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#statusbar=0
+    (20) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#statusbar=1
+    (21) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#navpanes=0
+    (22) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#navpanes=1
+
+    (23) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#highlight=100,100,100,100
+
+    (a) https://www.cas.go.jp/jp/siryou/pdf/171222ninyou.pdf#page=2&view=Fit&scrollbar=0&toolbar=0&statusbar=0&navpanes=0
+
+
+
+
+
+
+
 
 
 Image.FromFile可開啟影像檔:
