@@ -44,6 +44,15 @@ namespace vcs_WebCam
 
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
+        private const int BORDER = 10;
+
+        private const int W_groupBox1 = 640 * 2 + BORDER;
+        private const int H_groupBox1 = 220;
+        private const int W_pictureBox1 = 640;
+        private const int H_pictureBox1 = 480;
+        private const int W_richTextBox1 = 640;
+        private const int H_richTextBox1 = 480;
+
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
 
@@ -146,8 +155,8 @@ namespace vcs_WebCam
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
 
-            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
-            this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
+            pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+            this.ActiveControl = pictureBox1;//选中pictureBox1，不然没法触发事件
 
             show_item_location();
             Init_WebcamSetup();
@@ -160,38 +169,46 @@ namespace vcs_WebCam
             int dx;
             int dy;
 
-            //button
-            x_st = 10;
-            y_st = 10;
-            dx = 210;
-            dy = 42;
+            groupBox1.Size = new Size(W_groupBox1, H_groupBox1);
+            groupBox1.Location = new Point(BORDER, BORDER);
 
-            groupBox1.Size = new Size(1120 + 100, 220);
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
+            pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox1 + BORDER);
 
-            pictureBox1.Size = new Size(640, 480);
-            pictureBox1.Location = new Point(10, 240);
+            richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
+            richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER + H_groupBox1 + BORDER);
 
-            richTextBox1.Size = new Size(320, 480);
-            richTextBox1.Location = new Point(900, 240);
+            int w = BORDER + W_groupBox1 + BORDER;
+            int h = BORDER + H_groupBox1 + BORDER + H_pictureBox1 + BORDER;
+            this.ClientSize = new Size(w, h);
 
-            y_st = 20;
-            int w = 260;
-            int h = 190;
+            int W = Screen.PrimaryScreen.WorkingArea.Width;
+            int H = Screen.PrimaryScreen.WorkingArea.Height;
+
+            this.Location = new Point((W - w) / 2, (H - h) / 2);    //置中顯示
+
+            w = (W_groupBox1 - BORDER * 5 - 100) / 4;
+            h = 190;
             groupBox2.Size = new Size(w, h);
             groupBox3.Size = new Size(w, h);
             groupBox4.Size = new Size(w + 100, h);
             groupBox5.Size = new Size(w, h);
 
-            dx = w + 20;
+            //button
+            x_st = BORDER;
+            y_st = BORDER;
+
+            dx = w + BORDER;
+            dy = 42;
+            y_st = BORDER * 2;
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox5.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
 
             //groupBox2
-            x_st = 10;
-            y_st = 20;
+            x_st = BORDER;
+            y_st = BORDER * 2;
             dx = 80;
             dy = 30;
             checkBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -205,8 +222,8 @@ namespace vcs_WebCam
             radioButton2.Enabled = false;
 
             //groupBox3
-            x_st = 10;
-            y_st = 20;
+            x_st = BORDER;
+            y_st = BORDER * 2;
             dx = 210;
             dy = 26;
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -221,8 +238,8 @@ namespace vcs_WebCam
             comboBox3.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
             //groupBox4
-            x_st = 10;
-            y_st = 20;
+            x_st = BORDER;
+            y_st = BORDER * 2;
             dx = 80;
             dy = 40;
             bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -253,8 +270,8 @@ namespace vcs_WebCam
             rb_5X5.Visible = false;
 
             //groupBox5
-            x_st = 10;
-            y_st = 20;
+            x_st = BORDER;
+            y_st = BORDER * 2;
             dx = 80;
             dy = 50;
             lb_main_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -595,11 +612,9 @@ namespace vcs_WebCam
                     drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                     drawBrush = new SolidBrush(Color.Yellow);
                     drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                    x_st = 10;
-                    y_st = 10;
 
                     //在畫面的上方顯示時間
-                    g.DrawString(drawDate, drawFont, drawBrush, x_st, y_st);
+                    g.DrawString(drawDate, drawFont, drawBrush, BORDER, BORDER);
                 }
 
                 if (cb_image_processing.Checked == true)
@@ -986,10 +1001,9 @@ namespace vcs_WebCam
                 this.WindowState = FormWindowState.Maximized;
                 //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
-                this.pictureBox1.Size = new Size(1920, 1080);
-                this.pictureBox1.Location = new Point(0, 0);
-                //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
-                this.pictureBox1.Focus();
+                pictureBox1.Size = new Size(1920, 1080);
+                pictureBox1.Location = new Point(0, 0);
+                pictureBox1.Focus();
             }
             else
             {
@@ -1005,10 +1019,9 @@ namespace vcs_WebCam
                 this.WindowState = FormWindowState.Normal;
                 //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
-                pictureBox1.Size = new Size(640, 480);
-                pictureBox1.Location = new Point(10, 270);
-                //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
-                this.pictureBox1.Focus();
+                pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
+                pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox1 + BORDER);
+                pictureBox1.Focus();
             }
         }
 
@@ -1135,10 +1148,9 @@ namespace vcs_WebCam
                         this.WindowState = FormWindowState.Normal;
                         //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
-                        pictureBox1.Size = new Size(640, 480);
-                        pictureBox1.Location = new Point(10, 270);
-                        //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
-                        this.pictureBox1.Focus();
+                        pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
+                        pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox1 + BORDER);
+                        pictureBox1.Focus();
                     }
                     break;
                 case Keys.X:
@@ -1195,10 +1207,9 @@ namespace vcs_WebCam
                 this.WindowState = FormWindowState.Maximized;
                 //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
-                this.pictureBox1.Size = new Size(1920, 1080);
-                this.pictureBox1.Location = new Point(0, 0);
-                //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
-                this.pictureBox1.Focus();
+                pictureBox1.Size = new Size(1920, 1080);
+                pictureBox1.Location = new Point(0, 0);
+                pictureBox1.Focus();
             }
             else
             {
@@ -1214,10 +1225,9 @@ namespace vcs_WebCam
                 this.WindowState = FormWindowState.Normal;
                 //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
-                pictureBox1.Size = new Size(640, 480);
-                pictureBox1.Location = new Point(10, 270);
-                //this.pictureBox1.Location = new Point((1920 - pictureBox1.Width) / 2, (1080 - pictureBox1.Height) / 2);
-                this.pictureBox1.Focus();
+                pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
+                pictureBox1.Location = new Point(BORDER, 270);
+                pictureBox1.Focus();
             }
         }
 
@@ -1309,3 +1319,4 @@ namespace vcs_WebCam
         }
     }
 }
+

@@ -176,8 +176,7 @@ namespace vcs_WebCam_Emgu1
                     ib4.Image = null;
                 }
             }
-
-
         }
     }
 }
+

@@ -50,7 +50,7 @@ namespace vcs_MyPlayer3
         string mp3_filename_short = string.Empty;
         string pdf_filename_short = string.Empty;
         string current_directory = string.Empty;
-        bool flag_already_use_pdf = false;
+        bool flag_already_use_webbrowser = false;
 
         int mp3_position = 0;
         int mp3_volume = 50;
@@ -167,11 +167,11 @@ namespace vcs_MyPlayer3
                 this.ClientSize = new Size(W, H);
                 this.Location = new Point(0, 0);
 
-                if (flag_already_use_pdf == false)
+                if (flag_already_use_webbrowser == false)
                 {
                     bt_control_setup();
                     bt_exit_setup();
-                    flag_already_use_pdf = true;
+                    flag_already_use_webbrowser = true;
                 }
             }
 
@@ -339,11 +339,6 @@ namespace vcs_MyPlayer3
                         current_directory = Path.GetDirectoryName(pdf_filename);
                         webBrowser1.Navigate(pdf_filename);
 
-                        /*
-                        int zoomFactor = PDF_ZOOM_FACTOR;
-                        webBrowser1.Navigate(filename + "?#zoom=" + zoomFactor.ToString() + "%&view=fit&navpanes=0&toolbar=0&page=" + PDF_PAGE.ToString());
-                        */
-
                         flag_use_autoload_pdf_file = true;
                         flag_display_mode = MODE_1;
                     }
@@ -384,19 +379,12 @@ namespace vcs_MyPlayer3
                 {
                     pdf_filename_short = Path.GetFileName(pdf_filename);
                     current_directory = Path.GetDirectoryName(pdf_filename);
+
+                    //預設
                     //webBrowser1.Navigate(pdf_filename);
 
-                    //int zoomFactor = PDF_ZOOM_FACTOR;
-
-                    //webBrowser1.Navigate(pdf_filename + "?#zoom=" + zoomFactor.ToString() + "%&view=fith&navpanes=0&toolbar=0&page=" + PDF_PAGE.ToString());
-
-                    //webBrowser1.Navigate(pdf_filename + "?#zoom=fith&view=fit&navpanes=0&toolbar=0&page=" + PDF_PAGE.ToString());
-
+                    //指名頁數
                     webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0&page=" + PDF_PAGE.ToString());
-
-                    //webBrowser1.Navigate(pdf_filename + "?#zoom=" + zoomFactor.ToString() + "%&navpanes=0&toolbar=0&page=" + PDF_PAGE.ToString());
-
-                    //webBrowser1.Navigate(pdf_filename + "?#page=" + PDF_PAGE.ToString());
 
                     flag_display_mode = MODE_1;
                     show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);

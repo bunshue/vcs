@@ -39,6 +39,14 @@ namespace vcs_WebCam_Emgu0
         private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
         VideoWriter video;
 
+        private const int BORDER = 10;
+        private const int W_groupBox1 = 640 * 2 + BORDER;
+        private const int H_groupBox1 = 220;
+        private const int W_pictureBox1 = 640;
+        private const int H_pictureBox1 = 480;
+        private const int W_richTextBox1 = 640;
+        private const int H_richTextBox1 = 480;
+
         public Form1()
         {
             InitializeComponent();
@@ -46,6 +54,19 @@ namespace vcs_WebCam_Emgu0
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
+            pictureBox1.Location = new Point(BORDER, BORDER);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -95,7 +116,7 @@ namespace vcs_WebCam_Emgu0
                     button1.Text = "關閉Webcam";
                     flag_webcam_ok = true;
 
-                    cap = new Capture(1);   //預設使用第一台的webcam
+                    cap = new Capture(0);   //預設使用第一台的webcam
                     //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
 
                     //cap.FlipHorizontal = true;  //左右相反

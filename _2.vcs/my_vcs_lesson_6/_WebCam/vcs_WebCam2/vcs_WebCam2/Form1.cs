@@ -17,7 +17,13 @@ namespace vcs_WebCam2
         WebCam webcam;
 
         private FilterInfoCollection USBWebcams = null;
+
         private const int BORDER = 30;
+        private const int W = 640;
+        private const int H = 480;
+        private const int W_richTextBox1 = W + BORDER + W;
+        private const int H_richTextBox1 = 200;
+
         int webcam_count = 0;
 
         public Form1()
@@ -27,19 +33,19 @@ namespace vcs_WebCam2
 
         void show_item_location()
         {
-            pictureBox1.Size = new Size(640, 480);
+            pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(BORDER, BORDER);
 
-            richTextBox1.Location = new Point(BORDER, BORDER + 480 + BORDER);
-            richTextBox1.Size = new Size(640 * 2 + BORDER, 200);
+            richTextBox1.Location = new Point(BORDER, BORDER + H + BORDER);
+            richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
 
             int dx = 100;
-            button1.Location = new Point(BORDER + 640 + BORDER + dx * 0, BORDER);
-            button2.Location = new Point(BORDER + 640 + BORDER + dx * 1, BORDER);
-            button3.Location = new Point(BORDER + 640 + BORDER + dx * 2, BORDER);
+            button1.Location = new Point(BORDER + W + BORDER + dx * 0, BORDER);
+            button2.Location = new Point(BORDER + W + BORDER + dx * 1, BORDER);
+            button3.Location = new Point(BORDER + W + BORDER + dx * 2, BORDER);
 
             this.Text = "";
-            this.ClientSize = new Size(BORDER + 640 + BORDER + 640 + BORDER, BORDER + 480 + BORDER + 200 + BORDER);
+            this.ClientSize = new Size(BORDER + W + BORDER + W + BORDER, BORDER + H + BORDER + 200 + BORDER);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -97,7 +103,6 @@ namespace vcs_WebCam2
                 richTextBox1.Text += "長名 : " + USBWebcams[i].MonikerString + "\n";
                 */
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -130,4 +135,3 @@ namespace vcs_WebCam2
         }
     }
 }
-
