@@ -7,25 +7,36 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_ReadWrite_PDF
+namespace vcs_ReadWrite_PDF4
 {
     public partial class Form1 : Form
     {
+        string filename = "C:\\______test_files\\__RW\\_pdf\\note_Linux_workstation.pdf";
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\__RW\\_pdf\\Test.pdf";
             webBrowser1.Navigate(filename);
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_backup\_語言雜誌壓縮檔\_常春藤\202102常春藤解析英語\常春藤解析英語-202102.pdf";
+            //string filename = @"D:\_backup\_語言雜誌壓縮檔\_常春藤\202102常春藤解析英語\常春藤解析英語-202102.pdf";
 
             string command = filename;
 
@@ -67,29 +78,23 @@ namespace vcs_ReadWrite_PDF
             command = filename + "#pagemode=bookmarks&page=12";
             command = filename + "#page=12&pagemode=thumbs";    //有頁面縮圖
 
-            command = filename + "#nameddest=02.15"; 
+            command = filename + "#nameddest=02.15";
 
             webBrowser1.Navigate(command);
 
 
-/*
+            /*
 
-                  url: 'ConferenceGuide.pdf', 
-      pdfOpenParams: { 
-           view: 'Fit', 
-           scrollbars: '0', 
-           toolbar: '0', 
-           statusbar: '0', 
-           navpanes: '0' }
-       }).embed('pdf1'); 
-  */     
+                              url: 'ConferenceGuide.pdf', 
+                  pdfOpenParams: { 
+                       view: 'Fit', 
+                       scrollbars: '0', 
+                       toolbar: '0', 
+                       statusbar: '0', 
+                       navpanes: '0' }
+                   }).embed('pdf1'); 
+              */     
 
-
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
         }
     }
 }

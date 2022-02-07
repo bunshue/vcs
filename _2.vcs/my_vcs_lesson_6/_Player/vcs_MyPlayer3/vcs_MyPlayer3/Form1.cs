@@ -42,7 +42,7 @@ namespace vcs_MyPlayer3
         private const int MODE_0 = 0x00;   //mp3 only
         private const int MODE_1 = 0x01;   //mp3 + pdf
 
-        private const int PDF_PAGE = 31;
+        private const int PDF_PAGE = 5;
         private const int PDF_ZOOM_FACTOR = 130;
 
         string mp3_filename = string.Empty;
@@ -50,6 +50,7 @@ namespace vcs_MyPlayer3
         string mp3_filename_short = string.Empty;
         string pdf_filename_short = string.Empty;
         string current_directory = string.Empty;
+        bool flag_already_use_pdf = false;
 
         int mp3_position = 0;
         int mp3_volume = 50;
@@ -147,6 +148,7 @@ namespace vcs_MyPlayer3
             else if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsStopped)
             {
                 this.pictureBox1.Invalidate();
+                mp3_position = 0;
             }
         }
 
@@ -165,8 +167,12 @@ namespace vcs_MyPlayer3
                 this.ClientSize = new Size(W, H);
                 this.Location = new Point(0, 0);
 
-                bt_control_setup();
-                bt_exit_setup();
+                if (flag_already_use_pdf == false)
+                {
+                    bt_control_setup();
+                    bt_exit_setup();
+                    flag_already_use_pdf = true;
+                }
             }
 
             this.pictureBox1.Size = new Size(this.pictureBox1.Size.Width, mp3_player_height);
@@ -308,11 +314,9 @@ namespace vcs_MyPlayer3
 
             flag_display_mode = MODE_0;
 
-            //lb_main_mesg1.Text += "len = " + Environment.GetCommandLineArgs().Length.ToString();
             if (Environment.GetCommandLineArgs().Length == 2)
             {
                 string filename = Environment.GetCommandLineArgs()[1];
-                //lb_main_mesg1.Text = filename;
 
                 var GetExtension = Path.GetExtension(filename);
 
@@ -366,8 +370,11 @@ namespace vcs_MyPlayer3
                 mp3_filename = Properties.Settings.Default.mp3_filename;
                 mp3_position = Properties.Settings.Default.position;
                 flag_display_mode = MODE_0;
-                mp3_filename_short = Path.GetFileName(mp3_filename);
-                current_directory = Path.GetDirectoryName(mp3_filename);
+                if (File.Exists(mp3_filename) == true)
+                {
+                    mp3_filename_short = Path.GetFileName(mp3_filename);
+                    current_directory = Path.GetDirectoryName(mp3_filename);
+                }
             }
 
             if (flag_use_autoload_pdf_file == false)
@@ -379,8 +386,7 @@ namespace vcs_MyPlayer3
                     current_directory = Path.GetDirectoryName(pdf_filename);
                     //webBrowser1.Navigate(pdf_filename);
 
-                    int zoomFactor = PDF_ZOOM_FACTOR;
-
+                    //int zoomFactor = PDF_ZOOM_FACTOR;
 
                     //webBrowser1.Navigate(pdf_filename + "?#zoom=" + zoomFactor.ToString() + "%&view=fith&navpanes=0&toolbar=0&page=" + PDF_PAGE.ToString());
 
@@ -421,7 +427,10 @@ namespace vcs_MyPlayer3
 
                 foreach (FileInfo fi in di.GetFiles())
                 {
-                    mp3_filename_list.Add(fi.FullName);
+                    if (fi.Extension.ToLower() == ".mp3")
+                    {
+                        mp3_filename_list.Add(fi.FullName);
+                    }
                 }
 
                 total_mp3_count = mp3_filename_list.Count;
@@ -454,11 +463,6 @@ namespace vcs_MyPlayer3
 
                 richTextBox1.Text += "len = " + total_mp3_count.ToString() + "\n";
                 richTextBox1.Text += "index = " + current_mp3_index.ToString() + "\n";
-
-
-
-
-
             }
 
             axWindowsMediaPlayer1.settings.volume = mp3_volume;
@@ -472,21 +476,13 @@ namespace vcs_MyPlayer3
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.D0)
+            if (e.KeyData == Keys.T)
             {
-                show_main_message1("D0", S_OK, 30);
-                show_item_location(MODE_0);
-
-                richTextBox1.Text += "D0 lb_main_mesg1.Location = " + lb_main_mesg1.Location.ToString() + "\n";
-                show_main_message1("D0D0" + mp3_volume.ToString(), S_OK, 30);
+                show_main_message1("Test 1", S_OK, 30);
             }
-            else if (e.KeyData == Keys.D1)
+            else if (e.KeyData == Keys.T)
             {
-                show_main_message1("D1", S_OK, 30);
-                show_item_location(MODE_1);
-
-                richTextBox1.Text += "D1 lb_main_mesg1.Location = " + lb_main_mesg1.Location.ToString() + "\n";
-                show_main_message1("D1D1" + mp3_volume.ToString(), S_OK, 30);
+                show_main_message1("Test 2", S_OK, 30);
             }
             else if (e.KeyData == Keys.PageUp)
             {
@@ -544,7 +540,41 @@ namespace vcs_MyPlayer3
             }
             else if (e.KeyData == Keys.O)
             {
-                show_main_message1("開啟檔案", S_OK, 30);
+                show_main_message1("開啟mp3/pdf檔案", S_OK, 30);
+
+                openFileDialog1.Title = "單選檔案";
+                openFileDialog1.FileName = "";              //預設開啟的檔名
+                openFileDialog1.DefaultExt = "*.mp3";
+                openFileDialog1.Filter = "mp3檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|MP4檔(*.mp4)|*.mp4|所有檔案(*.*)|*.*";   //存檔類型
+                openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+                openFileDialog1.RestoreDirectory = true;
+                //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+                //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
+                openFileDialog1.Multiselect = false;    //單選
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    /*
+                    richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
+                    FileInfo f = new FileInfo(openFileDialog1.FileName);
+                    richTextBox1.Text += "Name: " + f.Name + "\n";
+                    richTextBox1.Text += "FullName: " + f.FullName + "\n";
+                    richTextBox1.Text += "Extension: " + f.Extension + "\n";
+                    richTextBox1.Text += "size: " + f.Length.ToString() + "\n";
+                    richTextBox1.Text += "Directory: " + f.Directory + "\n";
+                    richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
+                    */
+
+
+
+
+
+                }
+
+
+            }
+            else if (e.KeyData == Keys.M)
+            {
+                show_main_message1("開啟mp3檔案", S_OK, 30);
 
                 openFileDialog1.Title = "單選檔案";
                 openFileDialog1.FileName = "";              //預設開啟的檔名
@@ -586,7 +616,10 @@ namespace vcs_MyPlayer3
 
                     foreach (FileInfo fi in di.GetFiles())
                     {
-                        mp3_filename_list.Add(fi.FullName);
+                        if (fi.Extension.ToLower() == ".mp3")
+                        {
+                            mp3_filename_list.Add(fi.FullName);
+                        }
                     }
 
                     total_mp3_count = mp3_filename_list.Count;
@@ -632,7 +665,7 @@ namespace vcs_MyPlayer3
             }
             else if (e.KeyData == Keys.P)
             {
-                show_main_message1("開啟檔案", S_OK, 30);
+                show_main_message1("開啟pdf檔案", S_OK, 30);
 
                 openFileDialog1.Title = "單選檔案";
                 openFileDialog1.FileName = "";              //預設開啟的檔名
@@ -680,13 +713,22 @@ namespace vcs_MyPlayer3
 
                 int W = Screen.PrimaryScreen.WorkingArea.Width;
                 int H = Screen.PrimaryScreen.WorkingArea.Height;
-                //this.ClientSize = new Size(W, mp3_player_height);
-                this.Location = new Point(0, H - mp3_player_height);
+
+                if (flag_display_mode == MODE_0)
+                {
+                    this.ClientSize = new Size(W, mp3_player_height);
+                    this.Location = new Point(0, H - mp3_player_height);
+                }
+                else
+                {
+                    this.ClientSize = new Size(W, H);
+                    this.Location = new Point(0, 0);
+                }
             }
             else if (e.KeyCode == Keys.Up)
             {
                 //show_main_message1("上", S_OK, 30);
-                if ((Control.ModifierKeys & Keys.Control) == Keys.Shift)
+                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
                 {
                     if (mp3_rate < 1.0)
                     {
@@ -722,7 +764,7 @@ namespace vcs_MyPlayer3
             else if (e.KeyCode == Keys.Down)
             {
                 //show_main_message1("下", S_OK, 30);
-                if ((Control.ModifierKeys & Keys.Control) == Keys.Shift)
+                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
                 {
                     if (mp3_rate >= 1.5)
                     {
