@@ -196,6 +196,6 @@ namespace vcs_MousePosition
                 Application.DoEvents();
             }
         }
-
     }
 }
+

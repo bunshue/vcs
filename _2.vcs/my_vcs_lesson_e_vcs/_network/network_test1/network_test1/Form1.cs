@@ -66,7 +66,25 @@ namespace network_test1
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            textBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+
+            //控件位置
+            bt_copy.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_copy.Size.Height * 2);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_copy_Click(object sender, EventArgs e)
+        {
+            //C# – 複製資料到剪貼簿
+            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
+            richTextBox1.Text += "已複製資料到系統剪貼簿\n";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -224,7 +242,7 @@ namespace network_test1
         private void button3_Click(object sender, EventArgs e)
         {
             //獲取遠程網頁中的所有鏈接URL
-            string url = @"https://pydoing.blogspot.com/";
+            string url = textBox1.Text;
             System.Net.WebClient client = new WebClient();
             byte[] page = client.DownloadData(url);
             string content = System.Text.Encoding.UTF8.GetString(page);
@@ -236,8 +254,15 @@ namespace network_test1
             while (enu.MoveNext() && enu.Current != null)
             {
                 Match match = (Match)(enu.Current);
-                //Console.Write(match.Value + "\r\n");
-                richTextBox1.Text += "sssss : " + match.Value + "\n";
+
+                string result = match.Value;
+
+                if (result.Contains("book"))
+                {
+                    result = result.Replace("href=\"", "");
+                    result = result.Replace("\"", "");
+                    richTextBox1.Text += result + "\n";
+                }
             }
         }
 
@@ -300,8 +325,8 @@ namespace network_test1
         {
 
         }
-
     }
+
 
     public class Protocols
     {
@@ -312,6 +337,4 @@ namespace network_test1
             protocol_Tls11 = (SecurityProtocolType)768,
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
-
 }
-

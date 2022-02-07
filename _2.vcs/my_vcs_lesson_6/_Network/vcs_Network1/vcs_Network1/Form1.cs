@@ -231,6 +231,45 @@ namespace vcs_Network1
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //IP位址資料
+
+            /*
+            IPAddress[] ipAddresses = null;
+            try
+            {
+                ipAddresses = Dns.GetHostAddresses(formatWWW(www));//Important.
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                www = inputWWW();
+                continue;
+            }
+            foreach (IPAddress ipAddress in ipAddresses)
+            {
+                Console.WriteLine(ipAddress.ToString());
+            }
+            */
+
+            //網名轉IP位址
+            IPAddress[] ip1 = Dns.GetHostAddresses("www.google.com");
+            var query1 = from p in ip1 select p;
+            foreach (var item in query1)
+            {
+                richTextBox1.Text += "get : " + item.ToString() + "\n";
+            }
+
+            //取得本機IP位址
+            IPAddress[] ip2 = Dns.GetHostAddresses(Dns.GetHostName());
+            var query2 = from p in ip2 select p;
+            foreach (var item in query2)
+            {
+                richTextBox1.Text += "get : " + item.ToString() + "\n";
+            }
+
+            //IP位址轉網名
+            IPHostEntry ip3 = Dns.GetHostEntry("192.168.2.114");
+            richTextBox1.Text += "host name : " + ip3.HostName + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)

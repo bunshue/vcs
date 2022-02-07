@@ -123,8 +123,6 @@ namespace WindowsFormsApplication1aaaaaa
             */
 
             //mouse_event(MouseEventFlag.Move, stepx, stepy, 0, UIntPtr.Zero);
-
-            label1.Text = "相較於視窗原點的鼠標位置 : " + String.Format("{0},{1}", MousePosition.X, MousePosition.Y);
         }
 
         private void button2_Click(object sender, EventArgs e)
