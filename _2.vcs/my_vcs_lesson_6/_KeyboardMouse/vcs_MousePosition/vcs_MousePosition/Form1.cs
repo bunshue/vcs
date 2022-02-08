@@ -175,9 +175,52 @@ namespace vcs_MousePosition
             delay(200);
         }
 
+
+        int x_st = 0;
+        int y_st = 0;
+        int angle = 0;
         private void button3_Click(object sender, EventArgs e)
         {
+            //強制移動鼠標至特定位置
+            //richTextBox1.Text += MousePosition.X.ToString() + ", " + MousePosition.Y.ToString() + "\n";
 
+            x_st = MousePosition.X;
+            y_st = MousePosition.Y;
+            angle = 0;
+            timer2.Enabled = true;
+        }
+
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            int r = 50;
+            int dx = (int)(r * cosd(angle));
+            int dy = (int)(r * sind(angle));
+            int x_st2 = x_st + dx;
+            int y_st2 = y_st + dy;
+
+            SetCursorPos(x_st2, y_st2);
+
+            angle += 10;
+
+            if (angle > 360)
+            {
+                timer2.Enabled = false;
+            }
         }
 
         private void timer_mouse_position_Tick(object sender, EventArgs e)
@@ -196,6 +239,7 @@ namespace vcs_MousePosition
                 Application.DoEvents();
             }
         }
+
     }
 }
 

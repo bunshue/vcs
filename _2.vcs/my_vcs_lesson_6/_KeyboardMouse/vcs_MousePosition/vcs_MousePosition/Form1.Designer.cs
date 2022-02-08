@@ -35,6 +35,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer_mouse_position = new System.Windows.Forms.Timer(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // button1
@@ -63,6 +64,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(145, 54);
             this.button3.TabIndex = 2;
+            this.button3.Text = "強制移動鼠標至特定位置";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -82,6 +84,11 @@
             this.richTextBox1.Size = new System.Drawing.Size(145, 565);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
+            // 
+            // timer2
+            // 
+            this.timer2.Interval = 50;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Form1
             // 
@@ -107,6 +114,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer_mouse_position;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 
