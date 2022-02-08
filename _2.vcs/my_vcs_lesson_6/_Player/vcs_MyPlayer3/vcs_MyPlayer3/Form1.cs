@@ -959,12 +959,7 @@ namespace vcs_MyPlayer3
                 y_st = (H - tmp_height) / 4;
                 e.Graphics.DrawString(title, f, sb, new PointF(10, y_st));
 
-                int hh = DateTime.Now.Hour;
-                int mm = DateTime.Now.Minute;
-                int ss = DateTime.Now.Second;
-                string current_time = hh.ToString("D2") + ":" + mm.ToString("D2") + ":" + ss.ToString("D2");
-                //richTextBox1.Text += current_time + "\n";
-
+                string current_time = DateTime.Now.ToString("HH:mm:ss");
                 string play_info = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + " / " + axWindowsMediaPlayer1.Ctlcontrols.currentItem.durationString
                     + " (" + ((int)((100 * axWindowsMediaPlayer1.Ctlcontrols.currentPosition / axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration))).ToString() + " %) "
                     + current_time;

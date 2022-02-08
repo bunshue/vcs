@@ -1,11 +1,39 @@
 
-字幕/樣式/改 字符集為Chinese Simplified(GB2312-80)
 
-Pahali Aurat Pahala Mard
+this.Opacity=0;//使窗體不可見 
 
 
-this.digitalDisplayControl1.DigitText = "aaaa"+DateTime.Now.ToString("HH:mm:ss");
 
+
+private void USBPort_USBDeviceAttached(objectsender, 
+             USBClass.USBDeviceEventArgs e) 
+{ 
+   if (!MyUSBDeviceConnected) 
+   { 
+      if(USBClass.GetUSBDevice(MyDeviceVID, MyDevicePID, 
+                                ref USBDeviceProperties, false)) 
+      { 
+         //My Device is connected 
+         MyUSBDeviceConnected = true; 
+      } 
+   } 
+} 
+  
+private void USBPort_USBDeviceRemoved(objectsender, 
+             USBClass.USBDeviceEventArgs e) 
+{ 
+   if(!USBClass.GetUSBDevice(MyDeviceVID, MyDevicePID, 
+                              ref USBDeviceProperties, false)) 
+   { 
+      //My Device is removed 
+      MyUSBDeviceConnected = false; 
+   } 
+}
+
+
+
+
+ 
 
 
 Image.FromFile可開啟影像檔:
@@ -69,7 +97,7 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190579.html
 https://blog.csdn.net/happmaoo/article/details/83814604
 
 
-
+//--------------------------------------------------------------------------------------------------------------------------
 
 使用C# 讀取XML
 XmlReader xmlRead =new XmlTextReader ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
@@ -81,6 +109,7 @@ this.DataGrid1 .DataSource =ds;
 this.DataGrid1 .DataBind ();
 
 
+//--------------------------------------------------------------------------------------------------------------------------
 
 讀取文件到一個List
 
@@ -118,156 +147,17 @@ this.DataGrid1 .DataBind ();
             return lines;
         }
         
+//--------------------------------------------------------------------------------------------------------------------------
 
 
- /// <summary>
-        /// MD5加密
-        /// </summary>
-        /// <param name="input">需要加密的字符串</param>
-        /// <param name="encode">字符的編碼</param>
-        /// <returns></returns>
-        public static string MD5Encrypt(string input, Encoding encode)
-        {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] t = md5.ComputeHash(encode.GetBytes(input));
-            StringBuilder sb = new StringBuilder(32);
-            for (int i = 0; i < t.Length; i++)
-                sb.Append(t[i].ToString("x").PadLeft(2, '0'));
-            return sb.ToString();
-        }
-        
-
-
-
-C#文件系統管理，
-
-　　目錄
-
-    前言
-    Directory類和DirectoryInfo類
-    File類和FileInfo類
-    Path類
-
- 
- 
- 
-                MailMessage mail = new MailMessage(); 
-
-            mail.From = new MailAddress( 
-
-                txtSend.Text, txtDisplayName.Text, Encoding.UTF8);  
-                
-
-
-LogAPI.WriteLog(ex.Message);
+//--------------------------------------------------------------------------------------------------------------------------
 
                 
-新建一個類，專門用於日志操作LogAPI.cs
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ServiceSetup
-{
-    public class LogAPI
-    {
-        private static string myPath = "";
-        private static string myName = "";
-
-        /// 
-
-        /// 初始化日志文件
-        /// 
-
-        /// 
-        /// 
-        public static void InitLogAPI(string logPath, string logName)
-        {
-            myPath = logPath;
-            myName = logName;
-        }
-
-        /// 
-
-        /// 寫入日志
-        /// 
-
-        /// 日志信息
-        public static void WriteLog(string ex)
-        {
-            if (myPath == "" || myName == "")
-                return;
-
-            string Year = DateTime.Now.Year.ToString();
-            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
-            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
-
-            //年月日文件夾是否存在，不存在則建立
-            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
-            {
-                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
-            }
-
-            //寫入日志UNDO,Exception has not been handle
-            string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
-            if (!File.Exists(LogFile))
-            {
-                System.IO.StreamWriter myFile;
-                myFile = System.IO.File.AppendText(LogFile);
-                myFile.Close();
-            }
-
-            while (true)
-            {
-                try
-                {
-                    StreamWriter sr = File.AppendText(LogFile);
-                    sr.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "  " + ex);
-                    sr.Close();
-                    break;
-                }
-                catch (Exception e)
-                {
-                    System.Threading.Thread.Sleep(50);
-                    continue;
-                }
-            }
-
-        }
-
-    }
-}
+//--------------------------------------------------------------------------------------------------------------------------
 
 
 
-
-    /// <summary>
-    /// MD5加密
-    /// </summary>
-    public class MD5Helper
-    {
-        /// <summary>
-        /// MD5加密
-        /// </summary>
-        /// <param name="text">原文</param>
-        public static string Encrypt(string text)
-        {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            byte[] bArr = md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in bArr)
-            {
-                sb.Append(b.ToString("x2"));
-            }
-            return sb.ToString();
-        }
-    }
-    
-    
 
 
 
@@ -326,154 +216,6 @@ DataGridView??
 
 
 //============================================================================================================================
-
-
-
-
-
-
-C#計算文件的MD5值實例
-
-
-　　MD5 是 Message Digest Algorithm 5（信息摘要算法）的縮寫，MD5 一種散列(Hash)技術，普遍用於加密、解密、數據簽名和數據完整性校驗等方面。任何一個文件，不管是可執行程序、圖像文件、臨時文件或者其餘任何類型的文件，也無論它體積多大，均可以計算出一個MD5值，若是文件被修改過，就算只改動了一個字節，其 MD5 值也會變得徹底不一樣。所以，咱們能夠經過對比同一文件的 MD5 值，來校驗這個文件是否被「篡改」過。算法
-
-　　C# 能夠方便的計算出文件的 MD5 值：數組
-
-　　計算文件的MD5值工具
-
-　　/// <summary>網站
-
-　　/// 計算文件的 MD5 值加密
-
-　　/// </summary>htm
-
-　　/// <param name="fileName">要計算 MD5 值的文件名和路徑</param>md5
-
-　　/// <returns>MD5 值16進制字符串</returns>字符串
-
-　　public static string MD5File(string fileName)get
-
-　　{
-
-　　return HashFile(fileName, "md5");
-
-　　}
-
-　　/// <summary>
-
-　　/// 計算文件的哈希值
-
-　　/// </summary>
-
-　　/// <param name="fileName">要計算哈希值的文件名和路徑</param>
-
-　　/// <param name="algName">算法:sha1,md5</param>
-
-　　/// <returns>哈希值16進制字符串</returns>
-
-　　public static string HashFile(string fileName, string algName)
-
-　　{
-
-　　if (!System.IO.File.Exists(fileName))
-
-　　return string.Empty;
-
-　　FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-
-　　byte[] hashBytes = HashData(fs, algName);
-
-　　fs.Close();
-
-　　return ByteArrayToHexString(hashBytes);
-
-　　}
-
-歡迎進入.NET社區論壇，與200萬技術人員互動交流 >>進入
-
-　　/// <summary>
-
-　　/// 計算哈希值
-
-　　/// </summary>
-
-　　/// <param name="stream">要計算哈希值的 Stream</param>
-
-　　/// <param name="algName">算法:sha1,md5</param>
-
-　　/// <returns>哈希值字節數組</returns>
-
-　　public static byte[] HashData(Stream stream, string algName)
-
-　　{
-
-　　HashAlgorithm algorithm;
-
-　　if (algName == null)
-
-　　{
-
-　　throw new ArgumentNullException("algName 不能爲 null");
-
-　　}
-
-　　if (string.Compare(algName, "sha1", true) == 0)
-
-　　{
-
-　　algorithm = SHA1.Create();
-
-　　}
-
-　　else
-
-　　{
-
-　　if (string.Compare(algName, "md5", true) != 0)
-
-　　{
-
-　　throw new Exception("algName 只能使用 sha1 或 md5");
-
-　　}
-
-　　algorithm = MD5.Create();
-
-　　}
-
-　　return algorithm.ComputeHash(stream);
-
-　　}
-
-　　ComputeHash 方法返回的是哈希值字節數組，而文件的 MD5 值一般是用16進制的字符串表示，字節數組轉換爲16進製表示的字符串的方法在 System.Web.Configuration.MachineKeySection 中已經提供了一個名爲 ByteArrayToHexString 方法，可是該方法是 NonPublic 的，咱們不能直接調用。這裏咱們經過反射來調用 MachineKeySection 中的 ByteArrayToHexString 方法。
-
-　　經過反射調用 MachineKeySection 中的 ByteArrayToHexString 方法：
-
-　　經過反射調用 MachineKeySection 中的 ByteArrayToHexString 方法
-
-　　/// <summary>
-
-　　/// 字節數組轉換爲16進製表示的字符串
-
-　　/// </summary>
-
-　　public static string ByteArrayToHexString(byte[] buf)
-
-　　{
-
-　　int iLen = 0;
-
-　　// 經過反射獲取 MachineKeySection 中的 ByteArrayToHexString 方法，該方法用於將字節數組轉換爲16進製表示的字符串。
-
-　　Type type = typeof(System.Web.Configuration.MachineKeySection);
-
-　　MethodInfo byteArrayToHexString = type.GetMethod("ByteArrayToHexString", BindingFlags.Static | BindingFlags.NonPublic);
-
-　　// 字節數組轉換爲16進製表示的字符串
-
-　　return (string)byteArrayToHexString.Invoke(null, new object[] { buf, iLen });
-
-　　}
 
 
 
@@ -735,10 +477,6 @@ using System.Reflection;
 
 			
 
-                string appDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().GetName().CodeBase);
-                path = Path.Combine(appDir, path);
-
-
 
 
 
@@ -760,9 +498,6 @@ textBox1.Text="版本號: " + myFileVersionInfo1.FileVersion;
 String str="1234";
 str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補足30個字符
 
-
-
-常見的電子郵件協議有SMTP(簡單郵件傳輸協議)、POP3(郵局協議)、IMAP(Internet郵件訪問協議)
 
 
 
@@ -849,20 +584,6 @@ vcs_Splitter
                 dRow["value"] = i;
                 table.Rows.Add(dRow);
             }
-
-
-
-只搜尋單層目錄檔案
-                string[] files = Directory.GetFiles(textBox1.Text);
-                //MessageBox.Show("file numbers = " + files.Length);
-                //MessageBox.Show("files = " + files);
-                for (int i = 0; i < files.Length; i++)
-                {
-                    //MessageBox.Show("i = " + i + ", filename = " + files);
-                    //MessageBox.Show("i = " + i);
-
-                    textBox2.Lines = files;
-                }
 
 
 //　產生縮略圖
@@ -959,83 +680,6 @@ button.BackgroundImage =Bitmap.FromFile("d:\\123.png");
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
-
-
-//C#利用smtp服務器發送郵件
-
-在命名空間using System.Net.Mail中提供方法根據指定的smtp服務器來發送郵件。下面說說如何實現：
-
-　　1、首先要發送郵件，需要有一個郵箱帳號，比如網易郵箱、新郎郵箱、qq郵箱等，我以網易的163郵箱為例。
-然後我們需要知道163郵箱的smtp服務器地址：smtp.163.com。
-一般常用的Smtp服務器地址為：
-　　  網易126：smtp.126.com
-　　  網易163：smtp.163.com
-　　  搜狐：smtp.sohu.com
-　　  新浪：smtp.sina.com.cn
-　　  雅虎：smtp.mail.yahoo.com
-
-　　3、下面是發送郵件的函數：
-
- public static void SendEmail(
-    string userEmail,  //發件人郵箱
-    string userPswd,   //郵箱帳號密碼
-    string toEmail,    //收件人郵箱
-    string mailServer, //郵件服務器
-    string subject,    //郵件標題
-    string mailBody,   //郵件內容
-    string[] attachFiles //郵件附件
-    )
-{
-    //郵箱帳號的登錄名
-    string username = userEmail.Substring(0, userEmail.IndexOf(@));
-    //郵件發送者
-    MailAddress from = new MailAddress(userEmail);
-    //郵件接收者
-    MailAddress to = new MailAddress(toEmail);
-    MailMessage mailobj = new MailMessage(from, to);
-    // 添加發送和抄送
-    // mailobj.To.Add("");
-    // mailobj.CC.Add("");
-
-    //郵件標題
-    mailobj.Subject = subject;
-    //郵件內容
-    mailobj.Body = mailBody;
-    foreach (string attach in attachFiles)
-    {
-        mailobj.Attachments.Add(new Attachment(attach));
-    }
-    //郵件不是html格式
-    mailobj.IsBodyHtml = false;
-    //郵件編碼格式
-    mailobj.BodyEncoding = System.Text.Encoding.GetEncoding("GB2312");
-    //郵件優先級
-    mailobj.Priority = MailPriority.High;
-
-    //Initializes a new instance of the System.Net.Mail.SmtpClient class
-    //that sends e-mail by using the specified SMTP server.
-    SmtpClient smtp = new SmtpClient(mailServer);
-    //或者用：
-    //SmtpClient smtp = new SmtpClient();
-    //smtp.Host = mailServer;
-
-    //不使用默認憑據訪問服務器
-    smtp.UseDefaultCredentials = false;
-    smtp.Credentials = new NetworkCredential(username, userPswd);
-    //使用network發送到smtp服務器
-    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-    try
-    {
-        //開始發送郵件
-        smtp.Send(mailobj);
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine(e.Message);
-        Console.WriteLine(e.StackTrace);
-    }
-}
 
 
 
@@ -1348,19 +992,6 @@ RecurseXmlDocument SP aIndent = 0
 
 
 
-    /// <summary>
-    /// 日志等级
-    /// </summary>
-    public enum FlashLogLevel
-    {
-        Debug,
-        Info,
-        Error,
-        Warn,
-        Fatal
-    }
-    
-
         private void button12_Click(object sender, EventArgs e)
         {
             //html轉txt
@@ -1389,59 +1020,6 @@ RecurseXmlDocument SP aIndent = 0
         }
 
 
-
-		
-
-Application.UserAppDataRegistry.SetValue("SN", sn);
-
-
-Application.UserAppDataRegistry.SetValue("SN", sn);
-
-
-result = (int)Application.UserAppDataRegistry.GetValue("AAAA");
-
-
-            object val = Application.UserAppDataRegistry.GetValue("SN");
-
-            if (val == null)
-            {
-                desc = "未檢測到本機的序列號";
-                return -1;
-            }
-
-            string sn = val.ToString();
-
-            LicenseInfo regInfo = GetRegInfo(sn);
-            string md5 = Safety.MD5(key);
-            if (String.CompareOrdinal(md5.Substring(md5.Length - 5), regInfo.KeySn) != 0)
-            {
-                desc = "關鍵字與序列號不匹配";
-                return -2;//關鍵字與序列號不匹配
-            }
-
-
-
-
-//MD5 加密，md5加密
-
-/// <summary>
-/// MD5加密
-/// </summary>
-/// <param name="value">需要加密的值</param>
-/// <param name="pwSalt">附加值</param>
-/// <returns></returns>
-public static string GetMD5(string value, string pwSalt)
-{
-HashAlgorithm hashAlgorithm = new MD5CryptoServiceProvider(); // or SHA1CryptoServiceProvider();
-byte[] result = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(pwSalt+value));
-
-StringBuilder sBuilder = new StringBuilder();
-for (int i = 0; i < result.Length; i++)
-{
-sBuilder.Append(result[i].ToString("x2"));
-}
-return sBuilder.ToString();
-}
 
 　　
             	//讀取一檔
@@ -1493,51 +1071,6 @@ return sBuilder.ToString();
             g.DrawLine(p, 0, 0, this.pictureBox1.Width - 1, this.pictureBox1.Height - 1);
 
 
-
-bw.RunWorkerAsync(new string[2] { srcFile, destFile });
-
-
-System.IO.File.AppendAllText("C:\\Mail_Log.ini", string.Format("{0:yyyy/MM/dd HH:mm:ss}\r\n{1}\r\n\r\n", DateTime.Now, ex.Message));
-
-
-//改副檔名?
-txbxDestFile.Text = Path.GetDirectoryName(srcFile) + "\\" + Path.GetFileNameWithoutExtension(srcFile) + ".pdf";
-destFile = txbxDestFile.Text;
-
-只要文件名不要副檔名
-Path.GetFileNameWithoutExtension(pathName)
-
-FileInfo fi = new FileInfo(pathName);
-filetype = fi.Extension;//文件拓展名
-filesize = fi.Length;//文件信息的字節數
-
-
-
-        ///  讀一檔成拜列
-        public static byte[] ReadFile(string filename, int start, int length)
-        {
-            byte[] btFile = null;
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
-            {
-                btFile = new byte[length];
-                fs.Seek(start, SeekOrigin.Begin);
-                fs.Read(btFile, 0, length);
-            }
-            return btFile;
-        }
-
-
-
-            //定義一個以一種特定的編碼向流中寫入字符的對象
-            StreamWriter sw = new StreamWriter("AutoRun.inf", false);
-            sw.WriteLine("[autorun]");
-            sw.WriteLine("OPEN=AUTORUN.EXE");
-            sw.WriteLine("ICON=run.ICO");
-            sw.Close();     //關閉當前的StreamWrite對象和基礎流
-            
-            
-
-
             //動態驗證碼變成靜態
             string filename1 = @"C:\______test_files\__RW\_gif\run.gif";
 
@@ -1587,199 +1120,6 @@ filesize = fi.Length;//文件信息的字節數
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-
-
-
-
-
-//C#使用MD5對用戶密碼加密與驗證
-//C#中常涉及到對用戶密碼的加密於解密的算法，其中使用MD5加密是最常見的的實現方式
-
-//一.使用16位、32位、64位MD5方法對用戶名加密
-
-//1）16位的MD5加密
-
-/// <summary>
-/// 16位MD5加密
-/// </summary>
-/// <param name="password"></param>
-/// <returns></returns>
-public static string MD5Encrypt16(string password)
-{
-    var md5 = new MD5CryptoServiceProvider();
-    string t2 = BitConverter.ToString(md5.ComputeHash(Encoding.Default.GetBytes(password)), 4, 8);
-    t2 = t2.Replace("-", "");
-    return t2;
-}
-
-//2）32位的MD5加密
-
-/// <summary>
-/// 32位MD5加密
-/// </summary>
-/// <param name="password"></param>
-/// <returns></returns>
-public static string MD5Encrypt32(string password)
-{
-    string cl = password;
-    string pwd = "";
-    MD5 md5 = MD5.Create(); //實例化一個md5對像
-    // 加密後是一個字節類型的數組，這裡要注意編碼UTF8/Unicode等的選擇　
-    byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
-    // 通過使用循環，將字節類型的數組轉換為字符串，此字符串是常規字符格式化所得
-    for (int i = 0; i < s.Length; i++)
-    {
-        // 將得到的字符串使用十六進制類型格式。格式後的字符是小寫的字母，如果使用大寫（X）則格式後的字符是大寫字符 
-        pwd = pwd + s[i].ToString("X");
-    }
-    return pwd;
-}
-
-//3）64位的MD5加密
-
-public static string MD5Encrypt64(string password)
-{
-    string cl = password;
-    //string pwd = "";
-    MD5 md5 = MD5.Create(); //實例化一個md5對像
-    // 加密後是一個字節類型的數組，這裡要注意編碼UTF8/Unicode等的選擇　
-    byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
-    return Convert.ToBase64String(s);
-}
-
-4）使用MD5為用戶密碼加密
-
-/// <summary>
-/// 加密用戶密碼
-/// </summary>
-/// <param name="password">密碼</param>
-/// <param name="codeLength">加密位數</param>
-/// <returns>加密密碼</returns>
-public static string md5(string str, int codeLength)
-{
-    if (!string.IsNullOrEmpty(str))
-    {
-        // 16位MD5加密（取32位加密的9~25字符）  
-        if (codeLength == 16)
-        {
-            return System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5").ToLower().Substring(8, 16);
-        }
-
-        // 32位加密
-        if (codeLength == 32)
-        {
-            return System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5").ToLower();
-        }
-    }
-    return string.Empty;
-}
-
-
-      由於MD5是不可逆的，所以加密之後就無法解密，取用戶名和密碼時候，需要再加密一邊用戶輸入的數據與數據庫中已加密的數據進行比對。如果比對結果一致，則可以判定登陸成功！代碼如下所示：
-
-/// <summary>
-/// 登陸
-/// </summary>
-public Model.UserInfo UserLogOn(string USERID, string pwd, out string statusCode)
-{
-    //假設已經通過用戶ID獲取到UserInfo的Model對象
-    Model.UserInfo model = GetModel(USERID);
-    if (model != null)
-    {
-        if (model.PASSWORD == MD5Encrypt64(pwd))
-        {
-            statusCode = "登陸成功";
-        }
-        else {
-            statusCode = “密碼錯誤”；
-        }
-    }
-    else
-    {
-        statusCode = "用戶不存在！";
-        model = null;
-    }   
-    return model;
-}
-
-5）通過DESCryptoServiceProvider對象對字符串進行加密解密
-
-/// <summary>
-/// DES數據加密
-/// </summary>
-/// <param name="targetValue">目標值</param>
-/// <param name="key">密鑰</param>
-/// <returns>加密值</returns>
-public static string Encrypt(string targetValue, string key)
-{
-    if (string.IsNullOrEmpty(targetValue))
-    {
-        return string.Empty;
-    }
-
-    var returnValue = new StringBuilder();
-    var des = new DESCryptoServiceProvider();
-    byte[] inputByteArray = Encoding.Default.GetBytes(targetValue);
-    // 通過兩次哈希密碼設置對稱算法的初始化向量   
-    des.Key = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
-                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5").
-                                                Substring(0, 8), "sha1").Substring(0, 8));
-    // 通過兩次哈希密碼設置算法的機密密鑰   
-    des.IV = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
-                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5")
-                                                .Substring(0, 8), "md5").Substring(0, 8));
-    var ms = new MemoryStream();
-    var cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write);
-    cs.Write(inputByteArray, 0, inputByteArray.Length);
-    cs.FlushFinalBlock();
-    foreach (byte b in ms.ToArray())
-    {
-        returnValue.AppendFormat("{0:X2}", b);
-    }
-    return returnValue.ToString();
-}
-
-此種算法可以通過加密密鑰進行解密，解密方法如下：
-
-/// <summary>
-/// DES數據解密
-/// </summary>
-/// <param name="targetValue"></param>
-/// <param name="key"></param>
-/// <returns></returns>
-public static string Decrypt(string targetValue, string key)
-{
-    if (string.IsNullOrEmpty(targetValue))
-    {
-        return string.Empty;
-    }
-    // 定義DES加密對象
-    var des = new DESCryptoServiceProvider();
-    int len = targetValue.Length / 2;
-    var inputByteArray = new byte[len];
-    int x, i;
-    for (x = 0; x < len; x++)
-    {
-        i = Convert.ToInt32(targetValue.Substring(x * 2, 2), 16);
-        inputByteArray[x] = (byte)i;
-    }
-    // 通過兩次哈希密碼設置對稱算法的初始化向量   
-    des.Key = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
-                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5").
-                                                Substring(0, 8), "sha1").Substring(0, 8));
-    // 通過兩次哈希密碼設置算法的機密密鑰   
-    des.IV = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
-                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5")
-                                                .Substring(0, 8), "md5").Substring(0, 8));
-    // 定義內存流
-    var ms = new MemoryStream();
-    // 定義加密流
-    var cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
-    cs.Write(inputByteArray, 0, inputByteArray.Length);
-    cs.FlushFinalBlock();
-    return Encoding.Default.GetString(ms.ToArray());
-}
-
 
 
 
@@ -2082,37 +1422,6 @@ str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補
 
 
 
-//C#中獲取程序當前路徑的集中方法及實現代碼
-
-
-using (Process curProcess = Process.GetCurrentProcess())
-
-string str1 =Process.GetCurrentProcess().MainModule.FileName;//可獲得當前執行的exe的文件名。
-string str2=Environment.CurrentDirectory;//獲取和設置當前目錄（即該進程從中啟動的目錄）的完全限定路徑。
-//備注 按照定義，如果該進程在本地或網絡驅動器的根目錄中啟動，則此屬性的值為驅動器名稱後跟一個尾部反斜槓（如“C:/”）。如果該進程在子目錄中啟動，則此屬性的值為不帶尾部反斜槓的驅動器和子目錄路徑（如“C:/mySubDirectory”）。
-string str3=Directory.GetCurrentDirectory();//獲取應用程序的當前工作目錄。
-string str4=AppDomain.CurrentDomain.BaseDirectory;//獲取基目錄，它由程序集沖突解決程序用來探測程序集。
-string str5=Application.StartupPath;//獲取啟動了應用程序的可執行文件的路徑，不包括可執行文件的名稱。
-string str6=Application.ExecutablePath;//獲取啟動了應用程序的可執行文件的路徑，包括可執行文件的名稱。
-string str7=AppDomain.CurrentDomain.SetupInformation.ApplicationBase;//獲取或設置包含該應用程序的目錄的名稱。
-
-1. System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName
-獲取模塊的完整路徑。
-2. System.Environment.CurrentDirectory
-獲取和設置當前目錄(該進程從中啟動的目錄)的完全限定目錄。
-3. System.IO.Directory.GetCurrentDirectory()
-獲取應用程序的當前工作目錄。這個不一定是程序從中啟動的目錄啊，有可能程序放在C:/www裡,這個函數有可能返回C:/Documents and Settings/ZYB/,或者C:/Program Files/Adobe/,有時不一定返回什麼東東，我也搞不懂了。
-4. System.AppDomain.CurrentDomain.BaseDirectory
-獲取程序的基目錄。
-5. System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase
-獲取和設置包括該應用程序的目錄的名稱。
-6. System.Windows.Forms.Application.StartupPath
-獲取啟動了應用程序的可執行文件的路徑。效果和2、5一樣。只是5返回的字符串後面多了一個"/"而已
-7. System.Windows.Forms.Application.ExecutablePath
-獲取啟動了應用程序的可執行文件的路徑及文件名，效果和1一樣。
-
-
-
 
 首先准備一個畫板:
 
@@ -2294,83 +1603,8 @@ using System.Runtime.InteropServices;
 
 
 
-Path.Combine
-            //string directory = System.AppDomain.CurrentDomain.BaseDirectory;
-            //this.iniFilePath = Path.Combine(directory, "config.ini");
-
-
-
-//C#最簡單的文本加密，
-
-private char[] TextEncrypt(string content, string secretKey)
-{
-    char[] data = content.ToCharArray();
-    char[] key = secretKey.ToCharArray();
-
-    for (int i = 0; i < data.Length; i++)
-    {
-        data[i] ^= key[i % key.Length];
-    }
-
-    return data;
-}
-
-private string TextDecrypt(char[] data, string secretKey)
-{
-    char[] key = secretKey.ToCharArray();
-
-    for (int i = 0; i < data.Length; i++)
-    {
-        data[i] ^= key[i % key.Length];
-    }
-
-    return new string(data);
-}
-
-/*
-上面是最簡單的加密和解密文本的函數，不需要任何庫文件支持，只是把原文和密鑰進行字節的異或，想要把密文翻譯回來，很簡單，拿著密文和密鑰重新異或一次就可以。
-
-如果密鑰正確的話，就會回來正確的原始文本，如果密鑰錯誤的話，翻譯回來的就會是一堆的亂碼。
-
-所以也起到了最簡單的加密功能。
-*/
-
-
-
-
 用WMI查serial port可否知道是ims的comport，
 若可以知道，直接連線看看～～～
-
-
-
-//c#實現md5加密
-
-
-
-1. 首先創建MD5的哈希算法。
-
-((HashAlgorithm)System.Security.Cryptogrophy.CryptoConfig.CreateFromName("MD5")).ComputeHash(System.Text.UTF8.GetBytes(input))
-
-2.計算哈希值
-
-使用方法:ComputeHash(byte[] value);
-
-3.轉化成字符串.
-
-1protected virtual string HashMD5(string input)
-2　　　　{
-3　　　　　　byte[] result = ((HashAlgorithm)System.Security.Cryptography.CryptoConfig.CreateFromName("MD5")).ComputeHash(System.Text.Encoding.UTF8.GetBytes(input));
-4　　　　　　StringBuilder output = new StringBuilder(16);
-5
-6　　　　　　for (int i = 0; i < result.Length; i++)
-7　　　　　　{
-8　　　　　　　　// convert from hexa-decimal to character
-9　　　　　　　　output.Append((result[i]).ToString( "x2", System.Globalization.CultureInfo.InvariantCulture));
-10　　　　　　}
-11　　　　　　return output.ToString();
-12　　　　}
-13
-
 
 
 
@@ -2506,74 +1740,7 @@ return strHTML;
 //而通過HttpWebRequest 就沒問題。
 
 
-//創建一個讀取器
-StreamReader sr = new StreamReader("templog.txt");
-//一次性讀取完
-Console.WriteLine(sr.ReadToEnd());
-Console.ReadLine(); 
 
-
-
-
-
-         #region MD5加密
-         /// <summary>
-         /// MD5加密
-         /// </summary>
-         /// <param name="input">需要加密的字符串</param>
-         /// <returns></returns>
-         public static string MD5Encrypt(string input)
-         {
-             return MD5Encrypt(input, new UTF8Encoding());
-         }
- 
-         /// <summary>
-         /// MD5加密
-         /// </summary>
-         /// <param name="input">需要加密的字符串</param>
-         /// <param name="encode">字符的編碼</param>
-         /// <returns></returns>
-         public static string MD5Encrypt(string input, Encoding encode)
-         {
-             MD5 md5 = new MD5CryptoServiceProvider();
-             byte[] t = md5.ComputeHash(encode.GetBytes(input));
-             StringBuilder sb = new StringBuilder(32);
-             for (int i = 0; i < t.Length; i++)
-                 sb.Append(t[i].ToString("x").PadLeft(2, '0'));
-             return sb.ToString();
-         }
- 
-         /// <summary>
-         /// MD5對文件流加密
-         /// </summary>
-         /// <param name="sr"></param>
-         /// <returns></returns>
-         public static string MD5Encrypt(Stream stream)
-         {
-             MD5 md5serv = MD5CryptoServiceProvider.Create();
-             byte[] buffer = md5serv.ComputeHash(stream);
-             StringBuilder sb = new StringBuilder();
-             foreach (byte var in buffer)
-                 sb.Append(var.ToString("x2"));
-             return sb.ToString();
-         }
- 
-         /// <summary>
-         /// MD5加密(返回16位加密串)
-         /// </summary>
-         /// <param name="input"></param>
-         /// <param name="encode"></param>
-         /// <returns></returns>
-         public static string MD5Encrypt16b(string input, Encoding encode)
-         {
-             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-             string result = BitConverter.ToString(md5.ComputeHash(encode.GetBytes(input)), 4, 8);
-             result = result.Replace("-", "");
-             return result;
-         }
-         #endregion
-         
-         
 
          /// <summary>
         /// 實現bitmap到ico的轉換
@@ -3022,45 +2189,6 @@ Console.WriteLine(value.PadRight(Console.WindowWidth-value.Length)); //設置一
             //ramCounter = new PerformanceCounter("Memory", "Available MBytes");
 
 
-//當前程序的路徑
-System.AppDomain.CurrentDomain.BaseDirectory.ToString();
-
-
-
-
-
-//BinaryWrite
-MemoryStream ms = new MemoryStream();
-BinaryWrite(ms.ToArray());
-
-
-Application.StartupPath：獲取啟動了應用程序的可執行文件的路徑，不包括可執行文件的名稱。
-Application.ExecutablePath：獲取啟動了應用程序的可執行文件的路徑，包括可執行文件的名稱。
-	
-
-
-
-
-
-Directory类
-
-用来操作文件夹的
-
-Directory.CreateDirectory("d:/ccc/cc"); //创建文件夹
-
-Directory.Delete("d:/ccc",true); //true删除非空文件夹
-
-Directory.Move(@"d:/ccc", @"d:/cccc"); //剪切操作 源目录没了 必须同一卷轴d盘
-
-string[] s = Directory.GetFiles(@"D:\项目\Web\Images\shiji"); //获得文件夹目录下所有文件全路径
-
-string[] s = Directory.GetFiles(@"D:\项目\Web\Images\shiji","*.jpg"); //获得文件夹目录下指定后缀名文件全路径
-
-string[] s = Directory.GetDirectories(@"D:\项目\Web\Images"); //获得文件夹目录下的文件夹的全路径
-
-Directory.Exists(@"D:\项目\Web\Images") //是否存在某文件夹
-
-
 进程
 
 我们可以把计算机中每一个运行的应用程序当作是一个进程
@@ -3324,19 +2452,6 @@ private void Bind()
     GridView1.DataBind();
 }
     
-
-
-
-
-            string Year = DateTime.Now.Year.ToString();
-            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
-            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
-
-            //年月日文件夾是否存在，不存在則建立
-            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
-            {
-                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
-            }
 
 
 
@@ -3746,19 +2861,6 @@ GetValue //獲取鍵值
 
 SetValue //設置鍵值
 
-
-
-//獲取某文件夾所有文件
-public static string[] GetFiles(string Path)
-{
-	return Directory.GetFiles(Path);
-}
-
-//讀取文件內容到字符串 www.2cto.com
-public static string OpenFile(string Path)
-{
-	return File.ReadAllText(Path);
-}
 
 
 檢測 USB 設備撥插的 C# 類庫：USBClassLibrary
@@ -4738,21 +3840,6 @@ MainMenu選了之後會有打勾記號
 
 
 
-            /*  無法依子目錄排序 廢棄
-            if (path == String.Empty)
-                path = search_path;
-
-            //C# 取得資料夾下的所有檔案(包括子目錄)
-            string[] files = Directory.GetFiles(path, filetype2, System.IO.SearchOption.AllDirectories);
-            foreach (string filename in files)
-            {
-                //richTextBox1.Text += filename + "\n";
-                FileInfo fi = new FileInfo(filename);
-                richTextBox1.Text += fi.Name + "\n";
-            }
-            */
-
-
 
 string newID = id.Insert(6, "19");
 
@@ -5307,22 +4394,6 @@ public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
 
 //--------------------------------------------------------------------------------------------------------------------------
 
-MD5
-
-string md5 = MD5(key);
-
-       public static string MD5(string str)
-       {
-              string strResult = "";
-              MD5 md5 = System.Security.Cryptography.MD5.Create();
-              byte[] bData = md5.ComputeHash(Encoding.Unicode.GetBytes(str));
-              for (int i = 0; i < bData.Length; i++)
-              {
-                     strResult = strResult + bData[i].ToString("X");
-              }
-              return strResult;
-       }
-
 
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -5869,50 +4940,6 @@ C#抓取网页Html源码
 //--------------------------------------------------------------------------------------------------------------------------
 
 
-首先,先簡單介紹一下MD5
-
-MD5的全稱是message-digest algorithm 5(信息-摘要算法，在90年代初由mit laboratory for computer science和rsa data security inc的ronald l. rivest開發出來， 經md2、md3和md4發展而來。
-
-MD5具有很好的安全性(因為它具有不可逆的特征,加過密的密文經過解密後和加密前的東東相同的可能性極小) 
-
-
-//而C#默認的是16位的字節數組，需要略加修改，轉為32個字節的字符串，
-
-//C# MD5 校驗32位的字符串
-
-使用這個 MD5 函數非常簡單， 在下面的代碼示例中，數據是包含有 “hello world” 的一個字符串， 密鑰位123， 使用Md5Sum算出32位的校驗碼字符串。
-
-            string data = hello world;
-            string key = 123;
-            Md5Sum(data + key);  // 返回
-            
-            
-public static string Md5Sum(string strToEncrypt)
-        {
-            // 將需要加密的字符串轉為byte數組
-            byte[] bs = UTF8Encoding.UTF8.GetBytes(strToEncrypt);
-
-            // 創建md5 對象
-            System.Security.Cryptography.MD5 md5;
-            md5 = System.Security.Cryptography.MD5CryptoServiceProvider.Create();
-
-            // 生成16位的二進制校驗碼
-            byte[] hashBytes = md5.ComputeHash(bs);
-
-            // 轉為32位字符串
-            string hashString = ;
-            for (int i = 0; i < hashBytes.Length; i++)
-            {
-                hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
-            }
-
-            return hashString.PadLeft(32, '0');
-        }
-
-
-
-
-
 C# 播放鈴聲
 
 4             //播放鈴聲 
@@ -5966,36 +4993,6 @@ C# 播放鈴聲
 
 
 //--------------------------------------------------------------------------------------------------------------------------
-
-        /// 
-
-        ///方法一:
-        ///此種加密之後的字符串是三十二位的(字母加數據)字符串  
-        /// Example: password是admin 加密變成後21232f297a57a5a743894a0e4a801fc3
-        /// 
-
-        /// 
-        /// 
-        public string MD5Encrypt(string beforeStr)
-        {
-            string afterString = "";
-            try
-            {
-                MD5 md5 = MD5.Create();
-                byte[] hashs = md5.ComputeHash(Encoding.UTF8.GetBytes(beforeStr));
- 
-                foreach (byte by in hashs)
-                    //這裡是字母加上數據進行加密.//3y 可以,y3不可以或 x3j等應該是超過32位不可以
-                    afterString += by.ToString("x2");
-            }
-            catch (Exception ex)
-            {
-                ILog log = log4net.LogManager.GetLogger(this.GetType());
-                log.Error("==============你引起了一個錯誤是==============" + ex.Message.ToString());
-            }
-            return afterString;
-        }
-
 
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -6450,81 +5447,6 @@ catch
 
 
 
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-C#最簡單的文本加密，
-
-private char[] TextEncrypt(string content, string secretKey)
-{
-    char[] data = content.ToCharArray();
-    char[] key = secretKey.ToCharArray();
-
-    for (int i = 0; i < data.Length; i++)
-    {
-        data[i] ^= key[i % key.Length];
-    }
-
-    return data;
-}
-
-private string TextDecrypt(char[] data, string secretKey)
-{
-    char[] key = secretKey.ToCharArray();
-
-    for (int i = 0; i < data.Length; i++)
-    {
-        data[i] ^= key[i % key.Length];
-    }
-
-    return new string(data);
-}
-
-
-
-
-
-        				
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-C# MD5驗證
-
- string data = hello world;
-            string key = 123;
-            Md5Sum(data + key);  // 返回
-            
-            
-        public static string Md5Sum(string strToEncrypt)
-        {
-            // 將需要加密的字符串轉為byte數組
-            byte[] bs = UTF8Encoding.UTF8.GetBytes(strToEncrypt);
-
-            // 創建md5 對象
-            System.Security.Cryptography.MD5 md5;
-            md5 = System.Security.Cryptography.MD5CryptoServiceProvider.Create();
-
-            // 生成16位的二進制校驗碼
-            byte[] hashBytes = md5.ComputeHash(bs);
-
-            // 轉為32位字符串
-            string hashString = ;
-            for (int i = 0; i < hashBytes.Length; i++)
-            {
-                hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
-            }
-
-            return hashString.PadLeft(32, '0');
-        }
-        
-        
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-
-
 
 //--------------------------------------------------------------------------------------------------------------------------
 
@@ -6625,4 +5547,320 @@ C# MD5驗證
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 

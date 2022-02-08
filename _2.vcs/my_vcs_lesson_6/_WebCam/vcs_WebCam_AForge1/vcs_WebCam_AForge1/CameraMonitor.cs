@@ -185,7 +185,7 @@ namespace vcs_WebCam_AForge1
             VideoFileWriter writer = new VideoFileWriter();
 
             //ex : 第 1 台攝影機_2021-09-22_09-23-29.avi
-            writer.Open("C:\\dddddddddd\\" + this.cameraName + String.Format("{0:_yyyy-MM-dd_hh-mm-ss}", DateTime.Now) + ".avi", this.Width, this.Height, 30);
+            writer.Open("C:\\dddddddddd\\" + this.cameraName + String.Format("{0:_yyyy-MM-dd_hh-mm-ss}", DateTime.Now) + ".avi", this.Width, this.Height, 15);
 
             // as long as we're recording
             // we dequeue the BitMaps waiting in the Queue and write them to the file
