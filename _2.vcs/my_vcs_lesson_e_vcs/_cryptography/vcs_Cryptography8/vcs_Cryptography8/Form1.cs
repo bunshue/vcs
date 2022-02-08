@@ -73,7 +73,16 @@ namespace vcs_Cryptography8
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
             button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button24.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button25.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button26.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button27.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button28.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button29.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -594,6 +603,46 @@ namespace vcs_Cryptography8
             richTextBox1.Text += "解密成功, 檔名 : " + outFile + "\n";
 
         }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class My_MD5
@@ -828,3 +877,6 @@ namespace DESFile
         }
     }
 }
+
+
+

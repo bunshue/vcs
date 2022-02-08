@@ -561,8 +561,30 @@ namespace vcs_DataTable1
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //創建一個 DataTable 來存放資料庫
+
+            DataTable dt = new DataTable();
+
+            //加入所需要欄位
+
+            dt.Columns.Add("學號", typeof(string));    //加入欄位名稱為學號，是字串型別
+            dt.Columns.Add("姓名", typeof(string)); //加入欄位名稱為姓名，是字串型別
+            dt.Columns.Add("座號", typeof(string)); //加入欄位名稱為座號，是字串型別
+
+            //欄位新增完成，加入內容
+
+            DataRow datarow1 = dt.NewRow();
+
+            datarow1["學號"] = "001";   //指定加入學號為001
+            datarow1["姓名"] = "大熊";  //指定加入姓名為大熊
+            datarow1["座號"] = "01";   //指定加入座號為01
+            dt.Rows.Add(datarow1);       //將 datarow1 的內容加入到 dt.Rows 裡
+
+
 
         }
+
+
 
         private void button13_Click(object sender, EventArgs e)
         {

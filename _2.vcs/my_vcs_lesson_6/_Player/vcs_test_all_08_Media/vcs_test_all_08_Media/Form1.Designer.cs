@@ -72,7 +72,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(193, 35);
             this.button3.TabIndex = 3;
-            this.button3.Text = "取得多媒體檔案長度";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

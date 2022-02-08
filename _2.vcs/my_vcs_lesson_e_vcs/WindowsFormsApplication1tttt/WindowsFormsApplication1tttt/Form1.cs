@@ -234,15 +234,6 @@ namespace WindowsFormsApplication1tttt
             richTextBox1.Text += result + "\n";
 
         }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
-
-
-
-
 
