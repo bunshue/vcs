@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApplication111111.Properties
+namespace network_test3.Properties
 {
 
 

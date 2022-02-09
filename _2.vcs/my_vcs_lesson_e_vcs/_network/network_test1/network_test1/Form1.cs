@@ -7,16 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Net;
-using System.Net.Mail;  //for SmtpClient
 using System.Xml;
+using System.Net;   //for HttpWebRequest
 using System.Text.RegularExpressions;
 using System.Management;
 using System.IO;
-using Shell32;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace network_test1
 {
@@ -288,7 +287,70 @@ namespace network_test1
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //獲取gateway和IP
+            getxx();
+        }
 
+        private void getxx()
+        {
+            RegistryKey start = Registry.LocalMachine;
+            RegistryKey cardServiceName, networkKey;
+            string networkcardKey = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkCards";
+            string serviceKey = @"SYSTEM\CurrentControlSet\Services\";
+            string networkcardKeyName, deviceName;
+            string deviceServiceName, serviceName;
+            RegistryKey serviceNames = start.OpenSubKey(networkcardKey);
+            if (serviceNames == null)
+            {
+                MessageBox.Show("Bad registry key");
+                return;
+            }
+            string[] networkCards = serviceNames.GetSubKeyNames();
+            serviceNames.Close();
+            foreach (string keyName in networkCards)
+            {
+                richTextBox1.Text += "get keyName : " + keyName + "\n";
+                networkcardKeyName = networkcardKey + "\\" + keyName;
+                cardServiceName = start.OpenSubKey(networkcardKeyName);
+                if (cardServiceName == null)
+                {
+                    MessageBox.Show(networkcardKeyName);
+                    return;
+                }
+                deviceServiceName = (string)cardServiceName.GetValue("ServiceName");
+                richTextBox1.Text += "deviceServiceName : " + deviceServiceName + "\n";
+                deviceName = (string)cardServiceName.GetValue("Description");
+                richTextBox1.Text += "deviceName : " + deviceName + "\n";
+                MessageBox.Show(deviceName);
+                serviceName = serviceKey + deviceServiceName + "\\Parameters\\Tcpip";
+                richTextBox1.Text += "serviceName : " + serviceName + "\n";
+                networkKey = start.OpenSubKey(serviceName);
+                if (networkKey == null)
+                {
+                    //。。。。。。
+                }
+                else
+                {
+                    string[] ipaddresses = (string[])networkKey.GetValue("IPAddress");
+                    string[] defaultGateways = (string[])networkKey.GetValue("DefaultGateway");
+                    string[] subnetmasks = (string[])networkKey.GetValue("SubnetMask");
+                    foreach (string ipaddress in ipaddresses)
+                    {
+                        MessageBox.Show(ipaddress);
+                    }
+
+                    foreach (string subnetmask in subnetmasks)
+                    {
+                        //。。。。。。
+                    }
+                    foreach (string defaultGateway in defaultGateways)
+                    {
+                        MessageBox.Show(defaultGateway);
+                    }
+                    networkKey.Close();
+                }
+            }
+            start.Close();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -326,7 +388,6 @@ namespace network_test1
 
         }
     }
-
 
     public class Protocols
     {

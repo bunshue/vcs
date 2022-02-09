@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1pppp
+namespace network_test3
 {
     static class Program
     {

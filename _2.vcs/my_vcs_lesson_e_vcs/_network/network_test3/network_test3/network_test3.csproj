@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8A264AAA-889E-452C-9A61-54F53B1051F2}</ProjectGuid>
+    <ProjectGuid>{B05903D4-41E0-4556-9D2D-15E5CF07E9F7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication1pppp</RootNamespace>
-    <AssemblyName>WindowsFormsApplication1pppp</AssemblyName>
+    <RootNamespace>network_test3</RootNamespace>
+    <AssemblyName>network_test3</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

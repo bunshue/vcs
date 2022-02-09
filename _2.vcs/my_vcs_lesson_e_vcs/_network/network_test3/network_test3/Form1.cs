@@ -15,8 +15,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-
-namespace WindowsFormsApplication1pppp
+namespace network_test3
 {
     public partial class Form1 : Form
     {
@@ -28,11 +27,9 @@ namespace WindowsFormsApplication1pppp
             InitializeComponent();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
-
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -43,12 +40,12 @@ namespace WindowsFormsApplication1pppp
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void bt_start_Click(object sender, EventArgs e)
         {
             DateTime dtStart = DateTime.Now;
-            button3.Enabled = true;
-            button2.Enabled = true;
-            button1.Enabled = false;
+            bt_resume.Enabled = true;
+            bt_pause.Enabled = true;
+            bt_start.Enabled = false;
             int page = 0;
             int count = 0;
             int personCount = 0;
@@ -58,7 +55,7 @@ namespace WindowsFormsApplication1pppp
             richTextBox1.Text += "aaaaaaaaaa\n";
             for (int i = 1; i <= 10; i++)
             {
-                
+
                 thread = new Thread(new ParameterizedThreadStart(delegate(object obj)
                 {
                     for (int j = 1; j <= 10; j++)
@@ -121,7 +118,7 @@ namespace WindowsFormsApplication1pppp
 
                         if (page == 100)
                         {
-                            button1.Invoke(new Action(delegate() { button1.Enabled = true; }));
+                            bt_start.Invoke(new Action(delegate() { bt_start.Enabled = true; }));
                             MessageBox.Show("完成！");
                         }
                     }
@@ -131,9 +128,9 @@ namespace WindowsFormsApplication1pppp
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void bt_pause_Click(object sender, EventArgs e)
         {
-            button1.Invoke(new Action(delegate()
+            bt_start.Invoke(new Action(delegate()
             {
                 foreach (Thread thread in threadList)
                 {
@@ -143,14 +140,14 @@ namespace WindowsFormsApplication1pppp
                     }
                     thread.Abort();
                 }
-                button1.Enabled = true;
-                button2.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = false;
+                bt_start.Enabled = true;
+                bt_pause.Enabled = false;
+                bt_resume.Enabled = false;
+                bt_stop.Enabled = false;
             }));
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void bt_resume_Click(object sender, EventArgs e)
         {
             foreach (Thread thread in threadList)
             {
@@ -159,11 +156,11 @@ namespace WindowsFormsApplication1pppp
                     thread.Suspend();
                 }
             }
-            button3.Enabled = false;
-            button4.Enabled = true;
+            bt_resume.Enabled = false;
+            bt_stop.Enabled = true;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void bt_stop_Click(object sender, EventArgs e)
         {
             foreach (Thread thread in threadList)
             {
@@ -172,8 +169,8 @@ namespace WindowsFormsApplication1pppp
                     thread.Resume();
                 }
             }
-            button3.Enabled = true;
-            button4.Enabled = false;
+            bt_resume.Enabled = true;
+            bt_stop.Enabled = false;
         }
     }
 
@@ -239,4 +236,3 @@ namespace WindowsFormsApplication1pppp
         }
     }
 }
-

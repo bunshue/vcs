@@ -207,17 +207,12 @@ namespace network_test2_http
                 richTextBox1.Text += result + "\n";
                 //result.Dump();
             }
-
         }
-
-
-
 
         private void button3_Click(object sender, EventArgs e)
         {
             //下載網頁HTML源碼
             //要抓取的URL位址
-            //string Url = "HTTP://list.mp3.baidu.com/topso/mp3topsong.html?id=1#top2";
             string Url = "http://jsonplaceholder.typicode.com/posts";
 
             //得到指定Url的源碼
@@ -250,7 +245,6 @@ namespace network_test2_http
             }
             return strResult;
         }
-
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -1139,18 +1133,11 @@ namespace network_test2_http
                 {
                     image.Dispose(); //釋放資源
                 }
-
             }
-
-
-        
-        
-        
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button33_Click(object sender, EventArgs e)
