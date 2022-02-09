@@ -133,6 +133,12 @@ namespace vcs_WebBrowser8
                 }
             }
 
+            //顯示出來
+            for (int i = 0; i < doc.All.Count; i++)
+            {
+                //richTextBox1.Text += doc.All[i]. + "\n";
+            }
+            //richTextBox1.Text += "done\n";
 
             //另外還有些用法
 
