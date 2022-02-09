@@ -168,27 +168,6 @@ this.DataGrid1 .DataBind ();
 
 
 
-vcs_Form6_NotRectangle3
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            string filename = @"C:\______test_files\__RW\_bmp\not_rectangle.bmp";
-
-            bitmap1 = new Bitmap(filename);	//從指定的圖像初始化Bitmap對象
-            bitmap1.MakeTransparent(Color.Blue);//使用默認的透明顏色對Bitmap位圖透明
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            e.Graphics.DrawImage((Image)bitmap1, new Point(0, 0));//在窗體上繪制圖片
-        }
-
-
-
-
-
-
-
-
 
 //============================================================================================================================
 
@@ -586,42 +565,6 @@ vcs_Splitter
             }
 
 
-//　產生縮略圖
-　　　　 private　void　Thumb(string　imgPath,　string　thumbPath)
-　　　　 {
-　　　　　　　　 System.Drawing.Image.GetThumbnailImageAbort　myCallback　=　 new　System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback);
-　　　　　　　　 System.Drawing.Image　img　=　System.Drawing.Image.FromFile (imgPath);　//　通過文件構造
-　　　　　　　 //生成縮略圖
-　　　　　　　 System.Drawing.Image　myThumbnail　=　img.GetThumbnailImage (100,50,myCallback,　IntPtr.Zero);
-　　　　　　　 myThumbnail.Save(thumbPath);　//　保存縮略圖
-　　　　 }
-
-
-
-
-//　寫文字的筆刷，透明度為100,淡灰色
-Brush　b　=　new　SolidBrush(Color.FromArgb(100,Color.LightGray));
-
-
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            //畫虛線
-            Control P = (Control)sender;
-            Pen pen = new Pen(Color.FromArgb(255, 0, 0), 5);
-            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;//虛線的樣式
-            pen.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
-            Graphics g = e.Graphics;
-            //g.DrawLine(pen, 0, 0, 0, P.Height - 1);
-            g.DrawRectangle(pen, 100, 100, 200, 200);
-
-        }
-
-
-button.BackgroundImage =Bitmap.FromFile("d:\\123.png");
-
-
-
             //顯示詳細信息
             listView1.View = View.Details;
 
@@ -775,102 +718,6 @@ This is Main.2
 This is F2.1
 This is F1.1
  
-    
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //關閉計算機
-            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
-            myProcess.StartInfo.FileName = "cmd.exe";//启动cmd命令
-            myProcess.StartInfo.UseShellExecute = false;//是否使用系统外壳程序启动进程
-            myProcess.StartInfo.RedirectStandardInput = true;//是否从流中读取
-            myProcess.StartInfo.RedirectStandardOutput = true;//是否写入流
-            myProcess.StartInfo.RedirectStandardError = true;//是否将错误信息写入流
-            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中启动进程
-            myProcess.Start();//启动进程
-            myProcess.StandardInput.WriteLine("shutdown -s -t 0");//执行关机命令
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //重啟計算機
-            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
-            myProcess.StartInfo.FileName = "cmd.exe";//启动cmd命令
-            myProcess.StartInfo.UseShellExecute = false;//是否使用系统外壳程序启动进程
-            myProcess.StartInfo.RedirectStandardInput = true;//是否从流中读取
-            myProcess.StartInfo.RedirectStandardOutput = true;//是否写入流
-            myProcess.StartInfo.RedirectStandardError = true;//是否将错误信息写入流
-            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中启动进程
-            myProcess.Start();//启动进程
-            myProcess.StandardInput.WriteLine("shutdown -r -t 0");//执行重启计算机命令
-        }
-
-
-
-[C#] Graphics平移縮放旋轉
-
-【平移】
-
-private void btnTranslate_Click(object sender, EventArgs e)
-        {
-            Graphics graphics = this.CreateGraphics();
-            // 紅色筆
-            Pen pen = new Pen(Color.Red, 5);
-            Rectangle rect = new Rectangle(0, 0, 200, 50);
-            // 用紅色筆畫矩形
-            graphics.DrawRectangle(pen, rect);
-            // 向左平移100向下平移50
-            graphics.TranslateTransform(100,50);
-            // 藍色筆
-            pen.Color = Color.Blue;
-            // 用藍色筆重新畫平移之後的矩形
-            graphics.DrawRectangle(pen, rect);
-            graphics.Dispose();
-            pen.Dispose();
-        }
-
-【縮放】
-private void btnScale_Click(object sender, EventArgs e)
-        {
-            Graphics graphics = this.CreateGraphics();
-            // 紅色筆
-            Pen pen = new Pen(Color.Red, 5);
-            Rectangle rect = new Rectangle(0, 0, 200, 50);
-            // 用紅色筆畫矩形
-            graphics.DrawRectangle(pen, rect);
-            graphics.ScaleTransform(0.5f, 2);
-            // 藍色筆
-            pen.Color = Color.Blue;
-            // 用藍色筆重新畫平移之後的矩形
-            graphics.DrawRectangle(pen, rect);
-            graphics.Dispose();
-            pen.Dispose();
-        }
-
-寬縮小一半，高放大一倍
-
-
-【旋轉】
-private void btnTraslate_Click(object sender, EventArgs e)
-        {
-            Graphics graphics = this.CreateGraphics();
-            // 紅色筆
-            Pen pen = new Pen(Color.Red, 5);
-            Rectangle rect = new Rectangle(0, 0, 200, 50);
-            // 用紅色筆畫矩形
-            graphics.DrawRectangle(pen, rect);
-            graphics.TranslateTransform(200,0);
-            graphics.RotateTransform(90);
-            // 藍色筆
-            pen.Color = Color.Blue;
-            // 用藍色筆重新畫平移之後的矩形
-            graphics.DrawRectangle(pen, rect);
-            graphics.Dispose();
-            pen.Dispose();
-        }
-//坐標原點為矩形的左上點。
-
-
-
 
 
 
@@ -882,21 +729,6 @@ EXIF，是英文Exchangeable Image File
 
 
 
-
-
-
-
-Graphics g = Graphics.FromImage(ThumbNail);
-
-// 設置畫布的描繪質量
-g.CompositingQuality = CompositingQuality.HighSpeed;
-g.CompositingQuality = CompositingQuality.HighQuality;
-g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-g.SmoothingMode = SmoothingMode.HighSpeed;
-g.SmoothingMode = SmoothingMode.AntiAlias;	//反鋸齒
-g.SmoothingMode = SmoothingMode.HighQuality;
-g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-g.InterpolationMode = InterpolationMode.HighQualityBilinear;
 
 
 哪些事需要快捷鍵??
@@ -1776,18 +1608,6 @@ return strHTML;
 
 byte[] bytes= (byte[]) image類型字段值
 
-
-C#自定義直線箭頭大小
-
-最近再搞個畫圖的程序，直線的方向一直弄不好，直線太細了，看不清楚箭頭的，直線太粗了，又看著惡心。
-
-發現原來可以自定義箭頭的大小的，放著以備以後使用。
-
-System.Drawing.Drawing2D.AdjustableArrowCap lineCap = new System.Drawing.Drawing2D.AdjustableArrowCap(6, 6, true);
-Pen RedPen=new Pen(Color.Red,2);
-RedPen.CustomEndCap = lineCap;
-
-然後用RedPen繪圖就可以了！
 
 
 //在C#中調用windows API函數
@@ -4206,22 +4026,6 @@ for(i=0; i<360;i++)
 
 
 
-
-從顏色的名稱 取得顏色的分量
-				
-				
-    Color slateBlue = Color.FromName("SlateBlue");
-    byte g = slateBlue.G;
-    byte b = slateBlue.B;
-    byte r = slateBlue.R;
-    byte a = slateBlue.A;
-    string text = String.Format("Slate Blue has these ARGB values: Alpha:{0}, " +
-        "red:{1}, green: {2}, blue {3}", new object[]{a, r, g, b});
-    e.Graphics.DrawString(text, 
-        new Font(this.Font, FontStyle.Italic), 
-        new SolidBrush(slateBlue), 
-        new RectangleF(new PointF(0.0F, 0.0F), this.Size));
-
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
@@ -4315,42 +4119,6 @@ return retVal.ToString("x");
 //--------------------------------------------------------------------------------------------------------------------------
 
 
-
-
-
- 
-\\圖片格式轉換
-
-        public void ImageFormatter(string sourcePath, string distationPath, string format) {
-            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(sourcePath);
-            switch (format.ToLower()) {
-                case "bmp":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Bmp);
-                    break;
-                case "emf":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Emf);
-                    break;
-                case "gif":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Gif);
-                    break;
-                case "ico":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Icon);
-                    break;
-                case "jpg":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    break;
-                case "png":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Png);
-                    break;
-                case "tif":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Tiff);
-                    break;
-                case "wmf":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Wmf);
-                    break;
-                default: throw new Exception("無法轉換此格式！");
-            }
-        }
 
 
         				
@@ -4490,24 +4258,6 @@ using System.Text.RegularExpressions;
 
 
 //--------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-            //在System.Drawing.Drawing2D底下有更多的筆刷
-            Graphics g = e.Graphics;
-            //漸層色
-            LinearGradientBrush lgBrush = new LinearGradientBrush(new Point(0, 0), new Point(220, 100), Color.Yellow, Color.Green);
-            g.FillEllipse(lgBrush, 20, 20, 200, 100);
-            g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), lgBrush, 10, 200);
-
-            //條紋
-            HatchBrush hBrush = new HatchBrush(HatchStyle.DarkHorizontal, Color.Gold);
-            using (Pen p = new Pen(hBrush, 10))
-            {
-                g.DrawLine(p, 10, 30, 200, 200);
-            }
 
 
 
@@ -5157,175 +4907,6 @@ string sOutput = p.StandardOutput.ReadToEnd();
 
 
 
-
-
-        
-//C#獲取圖片的指定部分
-
-        /// <summary>
-        /// http://www.cnblogs.com/KissKnife/archive/2007/10/13/923352.Html
-        /// 獲取圖片指定部分
-        /// </summary>
-        /// <param name="pPath">圖片路徑</param>
-        /// <param name="pPartStartPointX">目標圖片開始繪制處的坐標X值(通常為0)</param>
-        /// <param name="pPartStartPointY">目標圖片開始繪制處的坐標Y值(通常為0)</param>
-        /// <param name="pPartWidth">目標圖片的寬度</param>
-        /// <param name="pPartHeight">目標圖片的高度</param>
-        /// <param name="pOrigStartPointX">原始圖片開始截取處的坐標X值</param>
-        /// <param name="pOrigStartPointY">原始圖片開始截取處的坐標Y值</param>
-        static System.Drawing.Bitmap GetPart(string pPath, int pPartStartPointX, int pPartStartPointY, int pPartWidth, int pPartHeight, int pOrigStartPointX, int pOrigStartPointY)
-        {
-            System.Drawing.Image originalImg = System.Drawing.Image.FromFile(pPath);
-
-            System.Drawing.Bitmap partImg = new System.Drawing.Bitmap(pPartWidth, pPartHeight);
-            System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(partImg);
-            System.Drawing.Rectangle destRect = new System.Drawing.Rectangle(new System.Drawing.Point(pPartStartPointX, pPartStartPointY), new System.Drawing.Size(pPartWidth, pPartHeight));//目標位置
-            System.Drawing.Rectangle origRect = new System.Drawing.Rectangle(new System.Drawing.Point(pOrigStartPointX, pOrigStartPointY), new System.Drawing.Size(pPartWidth, pPartHeight));//原圖位置（默認從原圖中截取的圖片大小等於目標圖片的大小）
-
-            graphics.DrawImage(originalImg, destRect, origRect, System.Drawing.GraphicsUnit.Pixel);
-
-            return partImg;
-        }
-
-
-
-
-//給圖片添加版權信息(C#)
-//創建一張位圖
-
-Bitmap bitmap=new Bitmap(this.pictureBox2.Width,this.pictureBox2.Height,System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-
-//根據位圖獲取畫布
-
-Graphics g=Graphics.FromImage(bitmap);
-
-//清空畫布並用透明色填充
-
-g.Clear(Color.Transparent);
-
-//將另一幅圖片畫到畫布上
-
-g.DrawImage(this.pictureBox1.Image,0,0);
-
-//寫版權信息到圖片上。
-
-g.DrawString(this.textBox2.Text,new Font("黑體",15),new SolidBrush(Color.Red),new Rectangle(20,20,100,100));
-
-//顯示
-
-this.pictureBox2.Image=bitmap;
-
-//保存圖片
-
-bitmap.Save("c:\\abc.bmp",System.Drawing.Imaging.ImageFormat.Bmp);
-
-
-
-
-
-
-
-　　本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
-　　在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。接下來介紹一些畫圖函數：
-Bitmap bMap=new Bitmap(500,500)　//定義映像大小；
-bMap.Save(Stream,ImageCodecInfo) //將映像儲存到指定的輸出資料流；
-Graphics gph //定義或建立GDI繪圖對像；
-PointF cPt　//定義二維平面中x,y座標；
-DrawString(string,Font,Brush,PonitF) //用指定的Brush和Font對像在指定的矩形或點繪製指定的字串；
-DrawLine(Pen,Ponit,Ponit) //用指定的筆(Pen)對像繪製指定兩點之間直線；
-DrawPolygon(Pen,Ponit[]) //用指定的筆(Pen)對像繪製指定多邊形，比如三角形，四邊形等等；
-FillPolygon(Brush,Ponit[]) //用指定的刷子(Brush)對像填充指定的多邊形；
-DrawEllipse(Pen,x,y,Width,Height) //用指定的筆繪製一個邊框定義的橢圓；
-FillEllipse(Brush,x,y,Width,Height) //用指定的刷子填充一個邊框定義的橢圓；
-DrawRectangle(Pen,x,y,Width,Height) //用指定的筆繪製一個指定座標點、寬度、高度的矩形；
-DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一個指定座標點、寬度、高度以及兩條射線組成的扇形；
-
-
-
-
-
-
-//C#根據原圖生成縮略圖
-
-/// <summary>
-    /// 生成縮略圖
-    /// </summary>
-    /// <param name="imgBuffer">原圖byte[]</param>
-    /// <param name="width">生成的縮略圖寬度</param>
-    /// <param name="height">生成的縮略圖高度</param>
-    /// <returns></returns>
-    private byte[] GenerateThumbImg(byte[] imgBuffer,int width,int height)
-    {
-        MemoryStream imgStream = null;
-        MemoryStream thumbStream = new MemoryStream();;
-        System.Drawing.Image img = null;
-        System.Drawing.Image thumbImg = null;
-        System.Drawing.Graphics g = null;
-        try
-        {
-            imgStream = new MemoryStream(imgBuffer);
-            img = System.Drawing.Image.FromStream(imgStream);
-            thumbImg = new System.Drawing.Bitmap(img, width, height);
-            g = System.Drawing.Graphics.FromImage(thumbImg);
-            g.DrawImage(thumbImg, 0, 0, width, height);
-            /*g.DrawImage(img, new System.Drawing.Rectangle(0, 0, width, height),
-                0, 0, width, height, System.Drawing.GraphicsUnit.Pixel);*/
-            thumbImg.Save(thumbStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-            return thumbStream.ToArray();
-        }
-        catch(Exception ex)
-        {
-            return null;
-        }
-        finally
-        {
-            if (g != null)
-                g.Dispose();
-            if (thumbImg != null)
-                thumbImg.Dispose();
-            if (img != null)
-                img.Dispose();
-            if (thumbStream != null)
-                thumbStream.Close();
-            if (imgStream != null)
-                imgStream.Close();
-        }
-    }
-    
-
-
-
-
-
-            //當前進程資料
-            uint uiPid = (uint)Process.GetCurrentProcess().Id;  // 當前進程 ID
-            richTextBox1.Text += "aaaaa0 :" + uiPid.ToString() + "\n";
-            richTextBox1.Text += "aaaaa3 :" + Process.GetCurrentProcess().MainWindowTitle + "\n";
-            richTextBox1.Text += "aaaaa6 :" + Process.GetCurrentProcess().SessionId + "\n";
-            richTextBox1.Text += "aaaaa9 :" + Process.GetCurrentProcess().StartTime.ToString() + "\n";
-
-
-
-
-
-            /*
-                //擷取部分圖片貼上
-                //            貼上位置與大小,擷取部分圖片位置與大小,單位
-                g.DrawImage(img, destRect1, srcRect, units);
-
-            Rectangle rect = Screen.GetBounds(Point.Empty);
-            using (Bitmap bitmap = new Bitmap(rect.Width, rect.Height))
-            {
-                using (Graphics g = Graphics.FromImage(bitmap))
-                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
-
-                bitmap.Save("test.jpg", ImageFormat.Jpeg);
-             */
-
-
-
-
-
             //DesktopLocation的用法
 
             richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.ToString() + "\n";
@@ -5408,42 +4989,6 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 
 //--------------------------------------------------------------------------------------------------------------------------
-
-
-C#實現定時全屏截圖並且保存到預先設定好的文件夾中的代碼示例
-
-public static void Snap(int x, int y, int width, int height)
-{
-try
-{
-
-//這段代碼也可以實現截圖
-//Image image = new Bitmap(width, height);
-//Graphics g = Graphics.FromImage(image);
-//g.CopyFromScreen(x, y, 0, 0, new System.Drawing.Size(width, height));
-//string hour = DateTime.Now.Minute.ToString();
-//string second = DateTime.Now.Second.ToString();
-//image.Save(ScreenshotPath + "\\" + hour + "_" + second + ".jpg");
-
-
-
-
-Bitmap image = new Bitmap(GetSystemMetrics(0), GetSystemMetrics(1));
-using (Graphics g = Graphics.FromImage(image))
-{
-g.CopyFromScreen(0, 0, 0, 0, image.Size);
-g.Dispose();
-string hour = DateTime.Now.Minute.ToString();
-string second = DateTime.Now.Second.ToString();
-image.Save(“C：” + "\\" + hour + "_" + second + ".jpg");
-}
-}
-catch
-{
-
-
-}
-}
 
 
 

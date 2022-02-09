@@ -46,7 +46,7 @@
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bt_browse = new System.Windows.Forms.Button();
+            this.bt_browse_attachments = new System.Windows.Forms.Button();
             this.bt_send = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.tb_mail_body = new System.Windows.Forms.TextBox();
@@ -70,6 +70,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tb_email_addr_from = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.bt_clear_attachments = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -253,7 +255,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.bt_browse);
+            this.groupBox1.Controls.Add(this.bt_clear_attachments);
+            this.groupBox1.Controls.Add(this.bt_browse_attachments);
             this.groupBox1.Controls.Add(this.bt_send);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.tb_mail_body);
@@ -285,16 +288,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "e-mail";
             // 
-            // bt_browse
+            // bt_browse_attachments
             // 
-            this.bt_browse.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_browse.Location = new System.Drawing.Point(435, 182);
-            this.bt_browse.Name = "bt_browse";
-            this.bt_browse.Size = new System.Drawing.Size(68, 40);
-            this.bt_browse.TabIndex = 25;
-            this.bt_browse.Text = "瀏覽...";
-            this.bt_browse.UseVisualStyleBackColor = true;
-            this.bt_browse.Click += new System.EventHandler(this.bt_browse_Click);
+            this.bt_browse_attachments.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_browse_attachments.Location = new System.Drawing.Point(435, 182);
+            this.bt_browse_attachments.Name = "bt_browse_attachments";
+            this.bt_browse_attachments.Size = new System.Drawing.Size(68, 40);
+            this.bt_browse_attachments.TabIndex = 25;
+            this.bt_browse_attachments.Text = "瀏覽...";
+            this.bt_browse_attachments.UseVisualStyleBackColor = true;
+            this.bt_browse_attachments.Click += new System.EventHandler(this.bt_browse_attachments_Click);
             // 
             // bt_send
             // 
@@ -507,6 +510,21 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "寄件者";
             // 
+            // bt_clear_attachments
+            // 
+            this.bt_clear_attachments.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear_attachments.Location = new System.Drawing.Point(509, 182);
+            this.bt_clear_attachments.Name = "bt_clear_attachments";
+            this.bt_clear_attachments.Size = new System.Drawing.Size(68, 40);
+            this.bt_clear_attachments.TabIndex = 26;
+            this.bt_clear_attachments.Text = "清除";
+            this.bt_clear_attachments.UseVisualStyleBackColor = true;
+            this.bt_clear_attachments.Click += new System.EventHandler(this.bt_clear_attachments_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -582,7 +600,9 @@
         private System.Windows.Forms.Button bt_send;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tb_mail_body;
-        private System.Windows.Forms.Button bt_browse;
+        private System.Windows.Forms.Button bt_browse_attachments;
+        private System.Windows.Forms.Button bt_clear_attachments;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

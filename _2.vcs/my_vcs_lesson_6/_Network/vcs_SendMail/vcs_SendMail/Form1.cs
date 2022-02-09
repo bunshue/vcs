@@ -195,6 +195,7 @@ namespace vcs_SendMail
             catch (Exception ex)
             {
                 richTextBox1.Text += "信件寄送失敗4, 時間 : " + DateTime.Now.ToString() + "\t訊息 : " + ex.Message.ToString() + "\n";
+                richTextBox1.Text += "原因: " + ex.StackTrace.ToString() + "\n";
                 richTextBox1.Text += "原因: " + ex.ToString() + "\n";
             }
             richTextBox1.Text += "\n";
@@ -231,7 +232,7 @@ namespace vcs_SendMail
             //mail.ReplyTo = new MailAddress(email_addr_from, "IMS-Sales", Encoding.GetEncoding(950));  ReplyTo已過時, 改用ReplyToList
             mail.ReplyToList.Add(new MailAddress("David@insighteyes.com", "receiver"));
 
-            mail.Priority = priority;
+            mail.Priority = priority;       //郵件優先級
 
             mail.Subject = mail_subject;    //郵件標題
             mail.SubjectEncoding = Encoding.UTF8;//郵件標題編碼
@@ -245,6 +246,9 @@ namespace vcs_SendMail
             mail.Body = "牡丹亭";
 
             mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
+            //                  Encoding.GetEncoding("GB2312");
+            //                  Encoding.Default;
+
             mail.IsBodyHtml = true; //是否是HTML郵件
 
             /*
@@ -606,9 +610,27 @@ namespace vcs_SendMail
 
         }
 
-        private void bt_browse_Click(object sender, EventArgs e)
-        {
+        private Attachment att;       //用於構造郵件附件屬性和方法
 
+        private void bt_browse_attachments_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.CheckFileExists = true;  //不存在文件名稱顯示警告
+            openFileDialog1.ValidateNames = true;    //值接受Win32文件
+            openFileDialog1.Multiselect = false;     //不同意多選文件
+            openFileDialog1.Filter = "全部文件(*.*)|*.*";
+
+            //加入附件 現僅支持加入一個附件
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text = openFileDialog1.FileName;
+                att = new Attachment(openFileDialog1.FileName);
+                //msg.Attachments.Add(att);
+            }
+        }
+
+        private void bt_clear_attachments_Click(object sender, EventArgs e)
+        {
+            //msg.Attachments.Clear();
         }
     }
 

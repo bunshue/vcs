@@ -208,6 +208,35 @@ namespace vcs_DataGridView1
         {
 
         }
+
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //標題行上點擊右鍵，出現快捷菜單。
+            //只有在 CellMouseClick 事件中才能響應右鍵
+            // 判斷是否右鍵點擊
+            if (e.Button == MouseButtons.Right)
+            {
+                // 得到點擊所在的行和列信息。相關函數查 MSDN
+                DataGridView.HitTestInfo hitinfo = dataGridView1.HitTest(e.X, e.Y);
+                // 如果 RowIndex < 0,就是標題行了。 
+                if (hitinfo.RowIndex < 0)
+                {
+                    // 如果你只要指定的列顯示菜單，則加入對 hitinfo.ColumnIndex 的判斷
+                    //contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+                    richTextBox1.Text += "標題行上點擊右鍵，出現快捷菜單\n";
+                }
+            }
+
+        }
+
+        private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                //加入显示右键弹出菜单
+                richTextBox1.Text += "標題行上點擊右鍵，出現快捷菜單   無用\n";
+            }
+        }
     }
 
     class Fruit
