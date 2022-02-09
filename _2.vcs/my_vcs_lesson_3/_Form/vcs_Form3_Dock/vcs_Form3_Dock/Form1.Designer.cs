@@ -68,6 +68,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Move += new System.EventHandler(this.Form1_Move);
             this.ResumeLayout(false);
             this.PerformLayout();

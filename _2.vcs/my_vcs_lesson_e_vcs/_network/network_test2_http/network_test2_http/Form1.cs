@@ -1138,7 +1138,44 @@ namespace network_test2_http
 
         private void button32_Click(object sender, EventArgs e)
         {
+            //下載網頁HTML源碼
+
+            string filename = Application.StartupPath + "\\html_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html";
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/188350.html";
+            //產業群首頁
+            string tempGroupData = GetHttpData(url);
+            using (StreamWriter sw = new StreamWriter(filename, false, System.Text.Encoding.GetEncoding("utf-8")))
+            {
+                sw.Write(tempGroupData);
+                sw.Flush();
+            }
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
+
+        public string GetHttpData(string sUrl)
+        {
+            string sRslt = null;
+            WebResponse oWebRps = null;
+            WebRequest oWebRqst = WebRequest.Create(sUrl);
+            oWebRqst.Timeout = 50000;
+            try
+            {
+                oWebRps = oWebRqst.GetResponse();
+            }
+
+            finally
+            {
+                if (oWebRps != null)
+                {
+                    StreamReader oStreamRd = new StreamReader(oWebRps.GetResponseStream(), System.Text.Encoding.GetEncoding("utf-8"));
+                    sRslt = oStreamRd.ReadToEnd();
+                    oStreamRd.Close();
+                    oWebRps.Close();
+                }
+            }
+            return sRslt;
+        } 
+
 
         private void button33_Click(object sender, EventArgs e)
         {

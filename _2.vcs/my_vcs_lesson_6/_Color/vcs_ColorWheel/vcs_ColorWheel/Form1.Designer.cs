@@ -38,8 +38,12 @@
             this.picSample = new System.Windows.Forms.PictureBox();
             this.btnColor2 = new System.Windows.Forms.Button();
             this.btnColor1 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // picWheel
@@ -142,11 +146,41 @@
             this.btnColor1.UseVisualStyleBackColor = true;
             this.btnColor1.Click += new System.EventHandler(this.btnColor1_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(25, 360);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(400, 400);
+            this.pictureBox1.TabIndex = 24;
+            this.pictureBox1.TabStop = false;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(442, 360);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(400, 400);
+            this.richTextBox1.TabIndex = 25;
+            this.richTextBox1.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(25, 320);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 34);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "畫 Color Wheel";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 308);
+            this.ClientSize = new System.Drawing.Size(870, 786);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.picSample);
             this.Controls.Add(this.btnColor2);
             this.Controls.Add(this.btnColor1);
@@ -162,6 +196,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,6 +214,9 @@
         private System.Windows.Forms.PictureBox picSample;
         private System.Windows.Forms.Button btnColor2;
         private System.Windows.Forms.Button btnColor1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

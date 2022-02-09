@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace draw_color_wheel.Properties
+namespace vcs_MovePictureBox.Properties
 {
 
 

@@ -72,6 +72,7 @@ namespace vcs_MyPlayer3
         RichTextBox richTextBox1;
 
         bool flag_debug_mode = true;
+        bool flag_repeat_mode = true;
 
         public Form1()
         {
@@ -149,7 +150,33 @@ namespace vcs_MyPlayer3
             {
                 this.pictureBox1.Invalidate();
                 mp3_position = 0;
+
+                //判断视频是否已停止播放
+                if (flag_repeat_mode == true)
+                {
+                    //停顿2秒钟再重新播放
+                    System.Threading.Thread.Sleep(2000);
+                    //重新播放
+                    axWindowsMediaPlayer1.Ctlcontrols.play();
+                }
             }
+
+            //通过控件的状态改变，来实现视频循环播放
+            /*  0 Undefined Windows Media Player is in an undefined state.(未定义)
+                1 Stopped Playback of the current media item is stopped.(停止)
+                2 Paused Playback of the current media item is paused. When a media item is paused, resuming playback begins from the same location.(停留)
+                3 Playing The current media item is playing.(播放)
+                4 ScanForward The current media item is fast forwarding.
+                5 ScanReverse The current media item is fast rewinding.
+                6 Buffering The current media item is getting additional data from the server.(转换)
+                7 Waiting Connection is established, but the server is not sending data. Waiting for session to begin.(暂停)
+                8 MediaEnded Media item has completed playback. (播放结束)
+                9 Transitioning Preparing new media item.
+                10 Ready Ready to begin playing.(准备就绪)
+                11 Reconnecting Reconnecting to stream.(重新连接)
+            */
+
+            //flag_repeat_mode
         }
 
         void show_item_location(int mode)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace draw_axis
+namespace vcs_MovePictureBox
 {
     static class Program
     {

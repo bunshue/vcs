@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3D9A2B71-66C8-4BF0-B194-203ACB29DEFF}</ProjectGuid>
+    <ProjectGuid>{4F0FF2DB-E59D-4CEF-AF08-E05E7E660476}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>draw_color_wheel</RootNamespace>
-    <AssemblyName>draw_color_wheel</AssemblyName>
+    <RootNamespace>vcs_MovePictureBox</RootNamespace>
+    <AssemblyName>vcs_MovePictureBox</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

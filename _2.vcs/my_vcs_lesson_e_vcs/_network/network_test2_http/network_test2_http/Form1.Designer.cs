@@ -450,6 +450,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(170, 75);
             this.button32.TabIndex = 34;
+            this.button32.Text = "下載網頁HTML源碼";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
