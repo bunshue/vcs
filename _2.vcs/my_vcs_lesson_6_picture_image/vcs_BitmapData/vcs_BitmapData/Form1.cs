@@ -36,15 +36,15 @@ namespace vcs_BitmapData
             sw.Start();
 
             int i;
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bitmap1 = new Bitmap(filename);
 
-            int W = bmp.Width;
-            int H = bmp.Height;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
 
             //獲取圖像的BitmapData對像
             Rectangle rect = new Rectangle(0, 0, W, H);
-            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);   // Lock the bits.
-            //BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb); //指明PixelFormat
+            BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, bitmap1.PixelFormat);   // Lock the bits.
+            //BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb); //指明PixelFormat
 
             // Get the address of the first line.
             IntPtr ptr = bmpData.Scan0;
@@ -107,9 +107,9 @@ namespace vcs_BitmapData
 
             // Copy the RGB values back to the bitmap
             Marshal.Copy(rgbValues, 0, ptr, len);
-            bmp.UnlockBits(bmpData);        // Unlock the bits.
+            bitmap1.UnlockBits(bmpData);        // Unlock the bits.
 
-            pictureBox1.Image = bmp;
+            pictureBox1.Image = bitmap1;
             sw.Stop();
             richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
@@ -121,15 +121,15 @@ namespace vcs_BitmapData
 
             int i;
             int j;
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bitmap1 = new Bitmap(filename);
 
-            int W = bmp.Width;
-            int H = bmp.Height;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
 
             //獲取圖像的BitmapData對像
             Rectangle rect = new Rectangle(0, 0, W, H);
-            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);   // Lock the bits.
-            //BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb); //指明PixelFormat
+            BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, bitmap1.PixelFormat);   // Lock the bits.
+            //BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb); //指明PixelFormat
 
             //循環處理
             unsafe
@@ -188,9 +188,9 @@ namespace vcs_BitmapData
                 }
                 //richTextBox1.Text += "\n\n\n";
 
-                bmp.UnlockBits(bmpData);        // Unlock the bits.
+                bitmap1.UnlockBits(bmpData);        // Unlock the bits.
 
-                pictureBox1.Image = bmp;
+                pictureBox1.Image = bitmap1;
                 sw.Stop();
                 richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
             }

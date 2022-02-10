@@ -395,6 +395,31 @@ namespace _vcs_MakePicture
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 256;
+            height = 30;
+            bitmap1 = new Bitmap(width, height);
+
+            for (yy = 0; yy < height/3; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (xx % 256), 0, 0));
+                    bitmap1.SetPixel(xx, yy + height / 3, Color.FromArgb(255, 0, (xx % 256), 0));
+                    bitmap1.SetPixel(xx, yy + height / 3 * 2, Color.FromArgb(255, 0, 0, (xx % 256)));
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            //g.DrawRectangle(p, new Rectangle(0, 0, width - 1, height - 1));
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button12_Click(object sender, EventArgs e)

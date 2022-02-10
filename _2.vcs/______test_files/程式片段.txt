@@ -1,5 +1,6 @@
 
 
+
 this.Opacity=0;//使窗體不可見 
 
 
@@ -190,6 +191,8 @@ List 與 DataTable的比較
 DataGridView??
 
 
+List比較像陣列
+DataTable可以加標題 比較像EXCEL表單
 
 
 
