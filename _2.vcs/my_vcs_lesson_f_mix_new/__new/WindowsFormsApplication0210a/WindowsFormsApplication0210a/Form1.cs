@@ -35,14 +35,24 @@ namespace WindowsFormsApplication0210a
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"..\..\pic\rgb.bmp";
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);  //使用Image.FromFile創建圖形對象:
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            string filename = @"..\..\pic\rgb.jpg";
+
+            richTextBox1.Text += "filename : " + filename + "\n";
+            //Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);  //使用Image.FromFile創建圖形對象 same
+            Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
 
-            //把圖像復制到內存中:
+            int bytes_per_pixel = 0;    //每個像素使用的拜數 bmp/png每點用4拜, jpg每點用3拜
+
+            g.DrawImage(bitmap1, 0, 0);
+
+            //把圖像複製到內存中
+
             //獲取圖像的BitmapData對像
             Rectangle rect = new Rectangle(0, 0, W, H);	//位圖矩形
 
@@ -53,8 +63,12 @@ namespace WindowsFormsApplication0210a
             // Get the address of the first line.
             IntPtr ptr = bmpData.Scan0; //得到首地址
 
+            // Declare an array to hold the bytes of the bitmap.
             //int len = W * 4 * H;    //每個pixel要用4拜存資料 R G B A
-            int len = Math.Abs(bmpData.Stride) * H;   //24位BMP位圖字節數 stride = W * 4, 每個pixel要用4拜存資料 R G B A
+            int len = Math.Abs(bmpData.Stride) * H;   //24位BMP位圖字節數 stride = W * 4, 每個pixel要用4拜存資料 R G B A, 也有可能是3拜
+            //stride : 每個掃描行的長度
+
+            bytes_per_pixel = Math.Abs(bmpData.Stride) / W;
 
             richTextBox1.Text += "stride = " + bmpData.Stride.ToString() + "\n";
             richTextBox1.Text += "len = " + len.ToString() + "\n";
@@ -63,15 +77,24 @@ namespace WindowsFormsApplication0210a
             byte[] rgbValues = new byte[len]; //定義位圖數組
 
             richTextBox1.Text += "len = " + len.ToString() + "\n";
-            Marshal.Copy(ptr, rgbValues, 0, len); //復制被鎖定的位圖像素到位圖數組
+            // Copy the RGB values into the array.
+            Marshal.Copy(ptr, rgbValues, 0, len); //複製被鎖定的位圖像素到位圖數組
 
             richTextBox1.Text += "len2 = " + rgbValues.Length.ToString() + "\n";
             int i;
             string result = string.Empty;
             for (i = 0; i < len; i++)
             {
+                if ((bytes_per_pixel == 4) && (((i % (256 * bytes_per_pixel)) == (256 * bytes_per_pixel - 1))))
+                {
+                    result += "\n";
+                }
+
+                if ((bytes_per_pixel == 4) && ((i % 4) == 3))
+                    continue;
+
                 result += rgbValues[i].ToString("X2");
-                if ((i % (256 * 4)) == (256 * 4 - 1))
+                if ((i % (256 * bytes_per_pixel)) == (256 * bytes_per_pixel - 1))
                 {
                     result += "\n";
                 }
@@ -80,44 +103,10 @@ namespace WindowsFormsApplication0210a
                     result += " ";
                 }
             }
-            //richTextBox1.Text += result + "\n";
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Graphics g = this.pictureBox1.CreateGraphics();
-
-            string filename = @"..\..\pic\rgb.bmp";
-            //Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);  //使用Image.FromFile創建圖形對象 same
-            Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-
-            g.DrawImage(bitmap1, 0, 0);
-
-            Rectangle rect = new Rectangle(0, 0, W, H);	//位圖矩形
-
-            //以可讀寫的方式鎖定全部位圖像素
-            BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, bitmap1.PixelFormat);   // Lock the bits.
-            //BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb); //指明PixelFormat
-
-            // Get the address of the first line.
-            IntPtr ptr = bmpData.Scan0; //得到首地址
-
-            // Declare an array to hold the bytes of the bitmap.
-            int len = Math.Abs(bmpData.Stride) * H;   //24位BMP位圖字節數 stride = W * 4, 每個pixel要用4拜存資料 R G B A
-
-            richTextBox1.Text += "stride = " + bmpData.Stride.ToString() + "\n";
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-
-            //存bitmap資料的陣列
-            byte[] rgbValues = new byte[len]; //定義位圖數組
-
-            // Copy the RGB values into the array.
-            Marshal.Copy(ptr, rgbValues, 0, len);
+            richTextBox1.Text += result + "\n";
 
             // Set every third value to 255. A 24bpp bitmap will look red.  
-            for (int counter = 2; counter < rgbValues.Length; counter += 4)
+            for (int counter = 2; counter < rgbValues.Length; counter += bytes_per_pixel)
             {
                 rgbValues[counter] = 255;
             }
@@ -129,54 +118,75 @@ namespace WindowsFormsApplication0210a
             bitmap1.UnlockBits(bmpData);
 
             // Draw the modified image.
-            //e.Graphics.DrawImage(bitmap1, 0, 150);
             g.DrawImage(bitmap1, 0, 50);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "無 MakeTransparent\n";
+            string filename = @"..\..\pic\lion.bmp";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "有 MakeTransparent\n";
+            string filename = @"..\..\pic\lion.bmp";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            bitmap1.MakeTransparent(Color.White);//將圖片白色部分透明化;
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
             Graphics g = this.pictureBox1.CreateGraphics();
 
-            string filename = @"..\..\pic\rgb.bmp";
-            //Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);  //使用Image.FromFile創建圖形對象 same
+            string filename = @"..\..\pic\lion.bmp";
+
             Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
 
-            g.DrawImage(bitmap1, 0, 0);
+            // Draw bitmap1 to the screen.
+            g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
 
-            Rectangle rect = new Rectangle(0, 0, W, H);	//位圖矩形
+            // Make the default transparent color transparent for bitmap1.
+            bitmap1.MakeTransparent();    //沒寫就是預設的     程式碼會讓系統預設透明色彩透明
+            //bitmap1.MakeTransparent(Color.White); //將此 Bitmap 的指定色彩變為透明。
 
-            //以可讀寫的方式鎖定全部位圖像素
-            BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, bitmap1.PixelFormat);   // Lock the bits.
-            //BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb); //指明PixelFormat
+            // Draw the transparent bitmap to the screen.
+            g.DrawImage(bitmap1, 0, 200, bitmap1.Width, bitmap1.Height);
 
-            // Get the address of the first line.
-            IntPtr ptr = bmpData.Scan0;
 
-            // Declare an array to hold the bytes of the bitmap.
-            int bytes = Math.Abs(bmpData.Stride) * H;
-            byte[] rgbValues = new byte[bytes];
 
-            // Copy the RGB values into the array.
-            Marshal.Copy(ptr, rgbValues, 0, bytes);
+        }
 
-            // Set every third value to 255. A 24bpp bitmap will look red.  
-            for (int counter = 2; counter < rgbValues.Length; counter += 4)
-            {
-                rgbValues[counter] = 255;
-            }
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Graphics g = this.pictureBox1.CreateGraphics();
 
-            // Copy the RGB values back to the bitmap
-            Marshal.Copy(rgbValues, 0, ptr, bytes);
+            string filename = @"..\..\pic\lion.bmp";
 
-            // Unlock the bits.
-            bitmap1.UnlockBits(bmpData);
+            Bitmap bitmap1 = new Bitmap(filename);
 
-            // Draw the modified image.
-            //e.Graphics.DrawImage(bitmap1, 0, 150);
-            g.DrawImage(bitmap1, 0, 50);
+            // Draw bitmap1 to the screen.
+            g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
 
+            Color backColor = bitmap1.GetPixel(1, 1);   //選取圖片邊緣的一個點的顏色當成背景色
+
+            bitmap1.MakeTransparent(backColor); //將此背景色設定為透明
+
+            // Draw the transparent bitmap to the screen.
+            g.DrawImage(bitmap1, 0, 200, bitmap1.Width, bitmap1.Height);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Control con = (Control)sender;  //取得控件本身
+
+            Graphics g = con.CreateGraphics();
+            g.DrawRectangle(Pens.Red, 3, 3, 30, 30);
         }
     }
 }

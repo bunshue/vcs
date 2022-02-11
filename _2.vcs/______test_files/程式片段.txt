@@ -1,5 +1,43 @@
 
 
+可以錄影的那個webcam版本 x86可用的
+用的AForge是比較舊的版本
+目前會認版本
+只能使用特定舊的AForge版本
+
+要不要做一個極簡化AForge/EMGU版本的WebCam
+
+
+
+
+
+
+
+1.對於那種明知道跨線程調用不會帶來錯誤的，可以設置Form控件不檢查跨線程調用錯誤，這樣就不報錯了。
+在Form1構造方法中：
+C#代碼 
+CheckForIllegalCrossThreadCalls = false; 
+
+
+
+
+2 C#圖像處理的基本方法
+
+C#處理圖像有三種方法:像素法、內存法和指針法。
+像素法應用GDI+中的方法,易於理解,方法簡單,但運行速度慢;
+內存法把圖像復制到內存中,直接對內存中的數據進行處理,運行速度比像素法快得多,程序難度也不大;
+指針法直接利用指針來對圖像進行處理,速度最快。
+
+但C#建議不使用指針,因為使用指針,代碼不僅難以編寫和調試,而且無法利用CRL的內存類型安全檢查,不能發揮C#的特長。
+
+下面介紹用內存法對圖像處理的基本方法。
+
+首先在處理圖像的窗體類中定義一個字符串(圖像文件名)和一個Bitmap類型的數據成員(圖像對象),然後可以利用OpenFileDialog選擇圖像文件並讀取文件名,再使用Image.FromFile創建圖形對象。比如:
+
+
+
+
+
 
 this.Opacity=0;//使窗體不可見 
 
@@ -40,74 +78,9 @@ private void USBPort_USBDeviceRemoved(objectsender,
 Image.FromFile可開啟影像檔:
  "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
  
- 
-檢視目前系統版本
-        private void button2_Click(object sender, EventArgs e)
-        {
-            OperatingSystem myOS = Environment.OSVersion;
-            if (myOS.Version.Major == 5)
-            {
-                switch (myOS.Version.Minor)
-                {
-                    case 0:
-                        MessageBox.Show("系統版本：" + "Windows 2000 " + myOS.ServicePack);
-                        break;
-                    case 1:
-                        MessageBox.Show("系統版本：" + "Windows XP " + myOS.ServicePack);
-                        break;
-                    case 2:
-                        MessageBox.Show("系統版本：" + "Windows Server 2003 " + " " + myOS.ServicePack);
-                        break;
-                    default:
-                        MessageBox.Show("系統版本：" + myOS.ToString() + " " + myOS.ServicePack);
-                        break;
-                }
-            }
-            else
-                MessageBox.Show("系統版本：" + myOS.VersionString + " " + myOS.ServicePack);
-        }
-
-
-C#讀取計算機CPU,HDD信息
-
-public string getCpuInfo() //讀取CPU信息
-{
-ManagementClass mobj = new ManagementClass("Win32_Processor");
-ManagementObjectCollection moc = mobj.GetInstances();
-foreach (ManagementObject mo in moc)
-{
-return mo.Properties["ProcessorId"].Value.ToString();
-}
-return "";
-}
-public string getHddInfo() //讀取硬盤信息
-{
-ManagementClass mobj = new ManagementClass("Win32_PhysicalMedia");
-ManagementObjectCollection moc = mobj.GetInstances();
-foreach (ManagementObject mo in moc)
-{
-return mo.Properties["SerialNumber"].Value.ToString();
-}
-return "";
-}
-
-
-
-C#_把dataTable數據導出到CSV,XLS文件
-http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190579.html
-https://blog.csdn.net/happmaoo/article/details/83814604
 
 
 //--------------------------------------------------------------------------------------------------------------------------
-
-使用C# 讀取XML
-XmlReader xmlRead =new XmlTextReader ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
-    DataSet ds=new DataSet ();
-    //ds.ReadXml ("C:/XMLWebServicesSBS/xml2/xml/XMLFile1.xml");
-    ds.ReadXml (xmlRead);
-
-this.DataGrid1 .DataSource =ds;
-this.DataGrid1 .DataBind ();
 
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -309,23 +282,6 @@ public class User
 
 P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
 
-Start 啟動進程資源將其與process類關聯
-
-Kill立即關閉進程
-
-waitforExit 在等待關聯進程的退出
-
-Close 釋放與此關聯的所有進程 
-
-  //啟動office中的EXCEL
-   Process.Start("EXCEL.exe");
-   
-  //啟動WINDOWS播放器
-   Process.Start("dvdplay.exe");
-
-
-
-
 
                 saveFileDialog1.CreatePrompt = true;	//如果指定不存在的文件，提示允許創建該文件
                 saveFileDialog1.OverwritePrompt = true;//如果用戶指定的文件名已存在，顯示警告
@@ -349,7 +305,15 @@ Close 釋放與此關聯的所有進程
 
 
 
+        				
+//---Assembly 用法 ST-----------------------------------------------------------------------------------------------------------------------
        
+using System.Reflection;
+
+            Assembly asm = Assembly.GetExecutingAssembly();
+            string name = asm.GetName().Name;
+            richTextBox1.Text += "name : " + name + "\n";
+
 
 private void AboutBox_Load(object sender, EventArgs e)
 {
@@ -365,7 +329,7 @@ private void AboutBox_Load(object sender, EventArgs e)
 
      
            
-                string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string location = Assembly.GetExecutingAssembly().Location;
                 string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
  
             
@@ -373,14 +337,14 @@ private void AboutBox_Load(object sender, EventArgs e)
 
 
 一、獲取程序集版本
-label版本.Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
 
 
 
 
             //獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
-            string tempFile = System.Reflection.Assembly.GetExecutingAssembly().FullName;
+            string tempFile = Assembly.GetExecutingAssembly().FullName;
 
 
 
@@ -424,9 +388,6 @@ C#讀取exe版本號
 
 
 
-
-
-
 C# 控制台如何播放音頻文件，
 using System.Reflection;
 using System.Media;
@@ -455,17 +416,11 @@ using System.Reflection;
             richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
 
 
-
-
-			
-
-
-
-
-
-
 一、獲取程序集版本
-label版本.Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+
+//---Assembly 用法 SP-----------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -507,39 +462,6 @@ button1.MouseLeave += new Syetem.EvenHandler（button1_MLeave）；
 　　//dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
 　　return ts.Seconds;
 　　}    
-
-
-C# 執行CMD命令方法
-
-        /// <summary>
-        /// 執行Cmd命令
-        /// </summary>
-        public void ExecCmd(string cmdstr)
-        {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardInput = true;
-            process.Start();
-
-            process.StandardInput.WriteLine(cmdstr);
-            process.StandardInput.AutoFlush = true;
-            process.StandardInput.WriteLine("exit");
-
-            StreamReader reader = process.StandardOutput;//截取輸出流
-
-            string output = reader.ReadLine();//每次讀取一行
-
-            while (!reader.EndOfStream)
-            {
-                PrintThrendInfo(output);
-                output = reader.ReadLine();
-            }
-
-            process.WaitForExit();
-        }
         
 
 
@@ -553,19 +475,6 @@ vcs_Splitter
 　　　Splitter(用於允許用戶調整TreeView和ListView的大小)；
 
 
-
-
-            DataTable table = new DataTable();
-            //初始化datatale 
-            table.Columns.Add("id", typeof(string));
-            table.Columns.Add("value", typeof(int));
-            for (int i = 1; i <= 10; i++)
-            {
-                DataRow dRow = table.NewRow();
-                dRow["id"] = "id" + i.ToString();
-                dRow["value"] = i;
-                table.Rows.Add(dRow);
-            }
 
 
             //顯示詳細信息
@@ -786,47 +695,6 @@ vcs richtextbox2
 
 
 
-
-<?xml version="1.0" encoding="utf-8"?>
-<books xmlns="http://www.contoso.com/books">
-  <book genre="novel" ISBN="1-861001-57-8" publicationdate="1823-01-28">
-    <title>Pride And Prejudice</title>
-    <price>24.95</price>
-  </book>
-  <book genre="novel" ISBN="1-861002-30-1" publicationdate="1985-01-01">
-    <title>The Handmaid's Tale</title>
-    <price>29.95</price>
-  </book>
-</books>
-
-RecurseXmlDocument ST aIndent = 0	取得 XmlElement
-	RecurseXmlDocument ST aIndent = 2	取得 XmlElement
-		RecurseXmlDocument ST aIndent = 4	取得 XmlElement
-				RecurseXmlDocument ST aIndent = 6	取得 XmlText	文本 sText3 = "Pride And Prejudice"
-				RecurseXmlDocument SP aIndent = 6
-			RecurseXmlDocument ST aIndent = 4	取得 XmlElement
-				RecurseXmlDocument ST aIndent = 6	取得 XmlText	文本 sText3 = "24.95"
-				RecurseXmlDocument SP aIndent = 6
-			RecurseXmlDocument SP aIndent = 4
-		RecurseXmlDocument SP aIndent = 4
-	
-	RecurseXmlDocument ST aIndent = 2	取得 XmlElement
-		RecurseXmlDocument ST aIndent = 4	取得 XmlElement
-				RecurseXmlDocument ST aIndent = 6	取得 XmlText	文本 sText3 = "The Handmaid's Tale"
-				RecurseXmlDocument SP aIndent = 6
-			RecurseXmlDocument ST aIndent = 4	取得 XmlElement
-				RecurseXmlDocument ST aIndent = 6	取得 XmlText	文本 sText3 = "29.95"
-				RecurseXmlDocument SP aIndent = 6
-			RecurseXmlDocument SP aIndent = 4
-		RecurseXmlDocument SP aIndent = 4
-	RecurseXmlDocument SP aIndent = 2
-	
-	RecurseXmlDocument SP aIndent = 2
-RecurseXmlDocument SP aIndent = 0
-
-
-
-
         private void button12_Click(object sender, EventArgs e)
         {
             //html轉txt
@@ -875,27 +743,6 @@ RecurseXmlDocument SP aIndent = 0
                 br.Close();
                 fs.Close();
 
-
-        /// <summary>
-        /// 獲得電腦所有的驅動盤
-        /// </summary>
-        /// <returns></returns>
-        public string[] GetMyLogicalDrives()
-        {
-            return Directory.GetLogicalDrives();
-        }
-        
-取得控件
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //#畫虛線
-            Control con = (Control)sender;
-            :
-            :
-            Graphics g = con.CreateGraphics();
-            :
-            :
-	}
 
 
             //#畫虛線
@@ -1092,67 +939,18 @@ private string GetContentFromUrll(string _requestUrl)
 
 
  
-
-    /// <summary>
-    /// 獲取指定路徑下的模板的HTML源代碼
-    /// </summary>
-    /// <param name="TemplatePath">模板的路徑</param>
-    /// <param name="EncodingType">網頁類型（有些是UTF8，有些是GB2312）</param>
-    /// <returns>源代碼</returns>
-    private string GetHtmlCode(string TemplatePath, string EncodingType)
-    {
-        try
-        {
-            if (TemplatePath != string.Empty)
-            {
-                string ForesideUriPath = string.Empty;
-
-                if (!TemplatePath.ToLower().StartsWith("http://"))
-                    ForesideUriPath = HttpContext.Current.Server.MapPath("~/") + TemplatePath;
-                else
-                    ForesideUriPath = TemplatePath;
-
-                WebClient webClient = new WebClient();
-
-                //設置網絡憑證為系統憑證
-                webClient.Credentials = CredentialCache.DefaultCredentials;
-
-                //獲取指定URI的網頁的源代碼
-                byte[] byteDataBuffer = webClient.DownloadData(ForesideUriPath);
-
-                string htmlCode = "";
-                if (EncodingType == "UTF8")
-                {
-                    htmlCode = Encoding.UTF8.GetString(byteDataBuffer);
-                }
-                else
-                {
-                    htmlCode = Encoding.GetEncoding(EncodingType).GetString(byteDataBuffer);
-                }
-
-                htmlCode = Regex.Replace(htmlCode, @"<!DOCTYPE\s*HTML\s*PUBLIC[^>]+>", "", RegexOptions.Singleline);
-                htmlCode = Regex.Replace(htmlCode, @"\s+", " ", RegexOptions.Singleline);
-
-                return htmlCode;
-            }
-            else
-            {
-                return "";
-            }
-        }
-        catch (Exception ee)
-        {
-            throw (ee);
-        }
-    }
-
- 
  
  
                      
 
 使用icon
 this.Icon = new Icon(@"C:\______test_files\_icon\唐.ico");
+
+
+使用鼠標
+this.Cursor = new Cursor(xxxxxx);
+
+
 
 
 
@@ -1270,11 +1068,6 @@ C: 從繼承自圖像的任何對象創建Graphics對象
 
 
 
-//取得系統處理器數目
-int cnt = System.Environment.ProcessorCount;
-label1.Text = "cnt = " + cnt.ToString();
-
-
 在C＃環境下的多態就是重載和覆寫。
 在一個類中，兩個以上的方法有著相同的名字，不同的參數類型，但是返回值可以不相同，
 
@@ -1329,59 +1122,7 @@ sealed用來修飾類為密封類，阻止該類被繼承。同時對一個類�
 
 
 
-通過C#還可以指定當前線程的運行在哪個CPU上。
- 
-System.Diagnostics.Process p = Process.GetCurrentProcess(); 
-p.ProcessorAffinity = (IntPtr)0x0001; 
 
-Process.ProcessorAffinity 設置當前CPU的屏蔽字，0x0001表示選用一號CPU，0x0002表示選用2號CPU。
-
-
-直接把DataTable的資料貼到DataGridView上
-
-	//C#之界面上依次出現表格（DataTable和DataGridView提高）
-	
-	C#之界面上依次出現表格（DataTable和DataGridView提高）
-	
-	效果圖：
-	
-	在textBox控件中輸入信息，點擊增加
-	
-	\
-	
-	出現如圖：
-	
-	\
-	
-	繼續：
-	
-	\
-	
-	代碼（沒用csdn插入代碼功能是插入的代碼增刪改不能選中，特別費事，所以下面代碼可能會看的有點亂）：
-	
-	//創建坡口形式選擇數據表
-	dt = new DataTable();
-	
-	//建九列
-	
-	dt.Columns.Add("name", typeof(System.String));
-	dt.Columns.Add("sex", typeof(System.String));
-	dt.Columns.Add("age", typeof(System.String));
-	
-	//將MongoDB中數據插入到該一行對應的各列中（我這裡是數據存入MongoDB中，在之前取出bson,然後foreach）
-	foreach (BsonDocument result in resultList)
-	{
-	//建一行
-	DataRow dr = dt.NewRow();
-	//行信息
-	dr[0] = 你的數據
-	dr[1] = 你的數據
-	dr[2] = 你的數據
-	//將上述該行加入DataTable中
-	dt.Rows.Add(dr);
-	
-	//綁定在sorce上
-	dataGridView1.DataSource = dt;
 	
 	
 
@@ -1518,64 +1259,6 @@ MemoryStream 可以seek
          UTF8Encoding utf = new UTF8Encoding();
          return utf.GetString(arr).Trim();
          
-
-c# 獲取網頁源碼 by WebClient
-
-
-private string GetWebClient(string url)
-{
-string strHTML = "";
-WebClient myWebClient = new WebClient();
-Stream myStream = myWebClient.OpenRead(url);
-StreamReader sr = new StreamReader(myStream, System.Text.Encoding.GetEncoding("utf-8"));
-strHTML = sr.ReadToEnd();
-myStream.Close();
-return strHTML;
-}
-
-c# 獲取網頁源碼 by WebRequest
-
-private string GetWebRequest(string url)
-{
-Uri uri = new Uri(url);
-WebRequest myReq = WebRequest.Create(uri);
-WebResponse result = myReq.GetResponse();
-Stream receviceStream = result.GetResponseStream();
-StreamReader readerOfStream = new StreamReader(receviceStream, System.Text.Encoding.GetEncoding("utf-8"));
-string strHTML = readerOfStream.ReadToEnd();
-readerOfStream.Close();
-receviceStream.Close();
-result.Close();
-return strHTML;
-}
-
-
-c# 獲取網頁源碼 by HttpWebRequest
-
-private string GetHttpWebRequest(string url)
-{
-Uri uri = new Uri(url);
-HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(uri);
-myReq.UserAgent = "User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705";
-myReq.Accept = "*/*";
-myReq.KeepAlive = true;
-myReq.Headers.Add("Accept-Language", "zh-cn,en-us;q=0.5");
-HttpWebResponse result = (HttpWebResponse)myReq.GetResponse();
-Stream receviceStream = result.GetResponseStream();
-StreamReader readerOfStream = new StreamReader(receviceStream, System.Text.Encoding.GetEncoding("utf-8"));
-string strHTML = readerOfStream.ReadToEnd();
-readerOfStream.Close();
-receviceStream.Close();
-result.Close();
-return strHTML;
-}
-//注意"utf-8"應與指定網頁的編碼對應。
-//可以看到HttpWebRequest 方式最復雜，但確提供了更多的選擇性。
-//有的網站檢測客戶端的UserAgent！如163.com，你如果使用WebClient WebRequest方式獲取時，將獲取到的是錯誤提示頁面內容。
-//而通過HttpWebRequest 就沒問題。
-
-
-
 
          /// <summary>
         /// 實現bitmap到ico的轉換
@@ -1990,293 +1673,6 @@ string value = “第三行 綠暗綠”;
 Console.WriteLine(value.PadRight(Console.WindowWidth-value.Length)); //設置一整行的背景色
 
         
-       /// <summary>
-        /// 性能計數器，用於獲取CPU空閒百分比
-        /// </summary>
-        private static PerformanceCounter mIdle = new PerformanceCounter("Processor", "% Processor Time", "Idle");
-        private Label label1;
-        /**/
-        /// <summary>
-        /// 性能計數器，用於獲取CPU總利用率
-        /// </summary>
-        private static PerformanceCounter mTotal = new PerformanceCounter("Processor", "% Processor Time", "_Total");
- string  nVal = mTotal.NextValue().ToString();
- //PerformanceCounter cpuCounter;
-            //PerformanceCounter ramCounter;
-
-            //cpuCounter = new PerformanceCounter();
-
-            //cpuCounter.CategoryName = "Processor";
-            //cpuCounter.CounterName = "% Processor Time";
-            //cpuCounter.InstanceName = "_Total";
-            //ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-
-
-进程
-
-我们可以把计算机中每一个运行的应用程序当作是一个进程
-	
-///获得当前程序中正在运行的进程
-Process[] pros = Process.GetProcesses();
-foreach (var item in pros)
-{　　　　//item.Kill(); //关闭所有进程.　　　　//item.ProcessName; //进程名
-    Console.Write(item.ToString());
-}
-//通过进程打开一些程序
-Process.Start("calc"); //打开计算器
-Process.Start("notepad"); //打开记事本
-//打开指定文件
-ProcessStartInfo pro = new ProcessStartInfo(@"d:\11.txt");
-Process pr = new Process();
-pr.StartInfo = pro;
-pr.Start();
-
-线程
-
-每一个进程是由多个线程组成的。
-
-单线程：让程序做多件事时，会引发卡死 假死状态。
-
-多线程：让一个程序同时处理多个事情，后台运行程序，提高程序的运行效率。
-
-前台线程：只有所有的前台线程都关闭才能完成程序关闭。(winform多窗口时)
-
-后台线程：只要所有的前台线程结束，后台线程自动结束。
-	
-	
-//实例化Thread类，并传入一个指向线程所要运行的方法。（这时线程已经产生，但还没有运行）
-//调用Thread类的Start方法，标记线程可以被CPU执行了，但具体执行事件由CPU决定。
-Thread th = new Thread(Test); //创建一个线程去执行这个方法。
-th.IsBackground = true; //将线程设置为后台线程，前台关闭后 线程结束。
-th.Start(); //标记准备就绪，可以随意被执行，具体什么时候执行由CPU决定。
-//在.net下是不允许跨线程访问的。
-//有时候需要手动释放线程 关闭时 判断线程是否关闭
-if (th != null)
-{
-    th.Abort(); //结束这个线程 不能再Start()
-}
-Thread.Sleep(3000); //睡眠3秒后执行
-//线程执行带参数方法
-Thread.Start("123")； object类型参数 在start后括号写参数
-
-
-
-
-
-XML文件
-
-可扩展标记性语言，用来保存轻量级数据。
-
-XML的标签是成对出现的、并且是区分大小写的。
-
-XML文档必须包含根节点，且只有一个。
-
-创建XML文件
-
-//创建XML对象
-XmlDocument doc = new XmlDocument();
-//创建文档描述信息
-XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "utf-8", null);
-doc.AppendChild(dec);
-
-//创建根节点
-XmlElement books = doc.CreateElement("Books");
-doc.AppendChild(books);
-
-//创建子节点
-XmlElement book1 = doc.CreateElement("Book");
-books.AppendChild(book1); //将子节点添加到books
-
-//给book1子节点追加子节点
-XmlElement name1 = doc.CreateElement("Name");
-name1.InnerText = "c#"; //赋值 文本值
-book1.AppendChild(name1);
-
-XmlElement price1 = doc.CreateElement("Price");
-price1.InnerXml = "<b>10.0</b>"; //赋值 html标签
-book1.AppendChild(price1);
-
-XmlElement items = doc.CreateElement("Items");
-//给节点增加属性
-items.SetAttribute("Name", "c#");
-items.SetAttribute("Price", "10.0");
-book1.AppendChild(items);
-
-doc.Save("Books.xml"); //保存
-
-//创建后
-<?xml version="1.0" encoding="utf-8"?>
-<Books>
-  <Book>
-    <Name>c#</Name>
-    <Price>
-      <b>10.0</b>
-    </Price>
-    <Items Name="c#" Price="10.0" />
-  </Book>
-</Books>
-
-
-向已有XML文件中追加
-XmlDocument doc = new XmlDocument();
-if (File.Exists("Books.xml"))
-{
-    doc.Load("Books.xml"); //加载 xml
-    XmlElement books = doc.DocumentElement; //得到根节点
-    //再建立元素进行追加
-}
-
-获取XML文件
-
-XmlDocument doc = new XmlDocument();
-doc.Load("Books.xml");
-
-XmlElement books = doc.DocumentElement;
-XmlNodeList xnl = books.ChildNodes; //得到所有节点
-
-foreach (XmlNode v in xnl) //遍历得到所有节点值
-{
-    Console.WriteLine(v.InnerText);
-}
-
-XmlNodeList xnl1 = doc.SelectNodes("Books/Book/Items"); //查找节点列表
-foreach (XmlNode node in xnl1)
-{
-    Console.WriteLine(node.Attributes["Name"].Value); //得到name属性的值
-    Console.WriteLine(node.Attributes["Price"].Value); //得到price属性的值
-}
-
-删除XML文件
-
-XmlDocument doc = new XmlDocument();
-doc.Load("Books.xml");
-
-XmlNode xnl = doc.SelectSingleNode("Books/Book"); //查找单一节点
-xnl.RemoveAll(); //删除全部
-doc.Save("Books.xml");
-Console.ReadKey();
-
-
-LinqToXml
-
-//兼容传统方法创建
-XDocument xDoc = new XDocument();
-//xDoc.Declaration = new XDeclaration() 默认UTF-8 第一行不需要单独建
-XElement xRoot = new XElement("root", "值"); //定义元素
-
-XElement xRoot1 = new XElement("root1");  //定义元素２
-xRoot1.Value = "值1";
-
-XAttribute xattr = new XAttribute("Id", "1"); //定义属性
-
-xDoc.Add(xRoot); //统一使用add添加
-xRoot.Add(xattr);
-
-xDoc.Save(@"d:\linqtoxml.xml");
-
-//真正的linq语法
-//F#  函数式编程语言
-new XDocument(
-    new XElement("root",
-        new XAttribute("id", "001"),
-        "值")
-    ).Save(@"d:\2.xml");
-//链式编程，流水线生产 f1().f2().f3()...
-
-//查找xml
-XDocument xdoc = new XDocument(new XElement("root"));//根节点
-xdoc.Root.Add(new XElement("person",
-    new XAttribute("id", "1"),
-    new XAttribute("name", "zhangsan"),
-    new XAttribute("sex", "1")
-    )); //添加子节点
-xdoc.Root.Add(new XElement("person",
-   new XAttribute("id", "2"),
-   new XAttribute("name", "lisi"),
-   new XAttribute("sex", "2")
-   ));
-xdoc.Save(@"d:\2.xml");
-
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <person id="1" name="zhangsan" sex="1" />
-  <person id="2" name="lisi" sex="2" />
-</root>
-
-//开始查找、修改、删除
-
-XDocument xdoc = XDocument.Load(@"d:\2.xml"); //加载xml
-foreach (XElement xlt in xdoc.Root.Elements()) //Root根节点 Elements 元素集合
-{
-    if (xlt.Name.LocalName == "person") //Name节点名 LocalName不带命名空间的节点名
-    {
-        if (xlt.Attribute("id").Value == "1") //判断属性值为1时
-        {
-            Response.Write(xlt.Attribute("name").Value); //输出name
-            xlt.Attribute("name").Value = "newname"; //修改name
-            xlt.Remove(); //删除此节点
-            xdoc.Save(@"d:2.xml");
-        }
-    }
-}
-
-//Linq查询语法
-//Descendants()所有子节点 可加某节点下所有节点
-var query = from s in xdoc.Descendants() //从集合里找
-            where s.Name.LocalName == "person"
-            select s;
-foreach (XElement xlt in query)
-{
-    Response.Write(xlt.Value);
-}
-
-//Linq方法语法(lambda表达式)
-foreach (XElement xlt in xdoc.Descendants().Where(s =>
-{
-    if (s.Name.LocalName == "name")
-    {
-        return true;
-    }
-    return false;
-}))
-{
-    Response.Write(xlt.Value);
-}
-
-
-
-
-	
-	
-
-
-DataTable中使用Order By排序與Where過濾
-
-/// <summary>
-/// DataTable中使用Order By排序與Where過濾
-/// </summary>
-private void Bind()
-{
-    //這裡構造一個數據源
-    DataTable dt = new DataTable();
-    dt.Columns.Add("ID", typeof(System.String));
-    dt.Columns.Add("uName", typeof(System.String));
-    dt.Columns.Add("uDate", typeof(System.DateTime));
-    for (int i = 0; i < 10; i++)
-    {
-        DataRow dr = dt.NewRow();
-        dr["ID"] = i.ToString();
-        dr["uName"] = "name" + i;
-        dt.Rows.Add(dr);
-    }
-    dt.DefaultView.Sort = "ID asc";//相當於Order By
-    dt.DefaultView.RowFilter = "ID>5";//相當於Where
-    GridView1.DataSource = dt;
-    GridView1.DataBind();
-}
-    
-
-
 
 
         public Bitmap bmpobj; 
@@ -2311,41 +1707,6 @@ private void Bind()
             } 
         } 
  
-
-
-
-
-
-c# Process類使用小例
-
-               
-                Process myProcess = new Process();
-                try
-                {
-                    myProcess.StartInfo.UseShellExecute = false;
-                    myProcess.StartInfo.FileName = exe_filename;
-                    myProcess.StartInfo.CreateNoWindow = true;
-                    myProcess.Start();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-
-
-
-
-
-
-
-
-作為一個小型的數據存儲傳遞的工具——XML
-
-1.對於那種明知道跨線程調用不會帶來錯誤的，可以設置Form控件不檢查跨線程調用錯誤，這樣就不報錯了。
-在Form1構造方法中：
-C#代碼 
-CheckForIllegalCrossThreadCalls = false; 
-
 
 
 //-------------------------------------------------------------
@@ -2493,19 +1854,6 @@ ed2k://|file|[www.ed2k.online][C#%E5%85%A8%E8%83%BD%E9%80%9F%E6%9F%A5%E5%AE%9D%E
     
     
 
-
-/*
-XmlDocument 用來存放XML文件的類別
-
-XmlElement 存取節點屬性的類別
-
-XmlNode 選取節點的類別
-
-
-使用XmlDocument.CreateElement 方法建立節點
-*/
-			
-       
 
 
 byte[]與Image Image與 byte[] 之間的轉換
@@ -2761,39 +2109,6 @@ c#畫三角形、並填充顏色
         }
 
 
-                //創建一個進程
-                Process pc = new Process();
-                pc.StartInfo.FileName = command;
-                pc.StartInfo.UseShellExecute = false;
-                pc.StartInfo.RedirectStandardOutput = true;
-                pc.StartInfo.RedirectStandardError = true;
-                pc.StartInfo.CreateNoWindow = true;
-
-                //啟動進程
-                pc.Start();
-
-                //准備讀出輸出流和錯誤流
-                string outputData = string.Empty;
-                string errorData = string.Empty;
-                pc.BeginOutputReadLine();
-                pc.BeginErrorReadLine();
-
-                pc.OutputDataReceived += (ss, ee) =>
-                {
-                    outputData += ee.Data;
-                };
-
-                pc.ErrorDataReceived += (ss, ee) =>
-                {
-                    errorData += ee.Data;
-                };
-
-                //等待退出
-                pc.WaitForExit();
-
-                //關閉進程
-                pc.Close();
-
 
 //字符串轉數組
 string mystring="this is a string"
@@ -2827,43 +2142,6 @@ AllPaintingInWmPaint
 
 DoubleBuffer
 如果為 true，則繪制在緩沖區中進行，完成後將結果輸出到屏幕上。雙重緩沖區可防止由控件重繪引起的閃爍。要完全啟用雙重緩沖，還必須將 UserPaint 和 AllPaintingInWmPaint 樣式位設置為 true。
-
-
-/// <summary>
-/// 根據url獲取遠程html源碼
-/// </summary>
-/// <param name="url">搜索url</param>
-/// <returns>返回DownloadData</returns>
-public static string GetSearchHtml(string url)
-{
-    WebClient MyWebClient = new WebClient();
-    MyWebClient.Credentials = CredentialCache.DefaultCredentials;   //獲取或設置用於對向Internet資源的請求進行身份驗證的網絡憑據。
-    Byte[] pageData = MyWebClient.DownloadData(url);                //從指定url下載數據
-    return Encoding.UTF8.GetString(pageData);                       //獲取網站頁面采用的是UTF-8
-}
-
-
-
-
-C# 關閉窗體立即停止進程
-C#在關閉窗體的時候，有時線程還在後台執行，沒有及時退出。
-處理方案：
-　　為Form添加FormClosing事件，加入以下語句，在退出時，殺死本進程。
-System.Diagnostics.Process.GetCurrentProcess().Kill();  
-
-
-
-C#的WebBrowser控件浏覽網頁
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            string add = "";
-            if (!(txtUrl.Text.Trim().StartsWith("http://")))
-            {
-                add = "http://" + txtUrl.Text.Trim();
-                txtUrl.Text = add;
-            }
-            webBrowser1.Url = new Uri(add);
-        }
 
 
 //初始化加載皮膚 
@@ -2980,19 +2258,6 @@ StreamWriter outStream = new StreamWriter( filepath,false,System.Text.Encoding.G
 using ( StreamReader sr = new StreamReader( filepath,System.Text.Encoding.GetEncoding( 936 ) ) )
 
 
-
-
-//Winform中如何讀取局域網路由的IP地址代碼
-System.Net.WebClient client = new System.Net.WebClient();
-client.Encoding = System.Text.Encoding.Default;
-string lip = client.DownloadString("http://www.ip138.com/ip2city.asp");
-string sip = reply.Substring(reply.IndexOf("您的IP地址是"), reply.IndexOf("</center>") - reply.IndexOf("您的IP地址是"));
-MessageBox.Show(sip);
-
-
-C#之讀取web上的xml
-string　sURL　=　"http://localhost:9058/GameServerInfo/XMLFile.xml";
-XDocument　oXDoc　=　XDocument.Load(sURL);
 
 用C＃實現在客戶區拖動窗體
 
@@ -4132,34 +3397,6 @@ return retVal.ToString("x");
 
 //--------------------------------------------------------------------------------------------------------------------------
 
-//如何將List轉換為DataTable
-
-public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
-{
-	DataTable result = new DataTable();
-	if (list.Count > 0)
-	{
-		PropertyInfo[] propertys = list[0].GetType().GetProperties();
-		foreach (PropertyInfo pi in propertys)
-		{
-			result.Columns.Add(pi.Name, pi.PropertyType);
-		}
-		for (int i = 0; i < list.Count; i++)
-		{
-			ArrayList tempList = new ArrayList();
-			foreach (PropertyInfo pi in propertys)
-			{
-				object obj = pi.GetValue(list[i], null);
-				tempList.Add(obj);
-			}
-			object[] array = tempList.ToArray();
-			result.LoadDataRow(array, true);
-		}
-	}
-	return result;
-}
-
-
 
 
 
@@ -4554,48 +3791,6 @@ public static byte[] drawImg(string check)
 
 
 
-C#抓取网页Html源码
-
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //抓取網頁資料 1
-            string url = @"http://140.129.118.16/~richwang/";
-
-            string rl;
-            WebRequest Request = WebRequest.Create(url.Trim());
-
-            WebResponse Response = Request.GetResponse();
-
-            Stream resStream = Response.GetResponseStream();
-
-            StreamReader sr = new StreamReader(resStream, Encoding.Default);
-            StringBuilder sb = new StringBuilder();
-            while ((rl = sr.ReadLine()) != null)
-            {
-                sb.Append(rl);
-            }
-
-            richTextBox1.Text += sb + "\n";
-
-            richTextBox1.Text += "完成\n";
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //抓取網頁資料 2
-            WebClient wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            string html = wc.DownloadString("http://www.lagou.com/");
-
-            richTextBox1.Text += html + "\n";
-
-        }
-
-
-
-
-
 
 
 
@@ -4603,68 +3798,10 @@ C#抓取网页Html源码
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
-            Process[] processes = System.Diagnostics.Process.GetProcessesByName(Application.CompanyName);
-            if (processes.Length > 1)
-            {
-                MessageBox.Show("應用程序已經在運行中。");
-                Thread.Sleep(1000);
-                System.Environment.Exit(1);
-            }
-            else
-            {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new FrmServiceSetup());
-            }
-            
-
 
 
 //--------------------------------------------------------------------------------------------------------------------------
 
-
-
-        //獲取窗體的進程標識ID
-        public static int GetPid(string windowTitle)
-        {
-            int rs = 0;
-            Process[] arrayProcess = Process.GetProcesses();
-            foreach (Process p in arrayProcess)
-            {
-                if (p.MainWindowTitle.IndexOf(windowTitle) != -1)
-                {
-                    rs = p.Id;
-                    break;
-                }
-            }
-            return rs;
-        }
-
-        //根據進程名獲取PID
-        public static int GetPidByProcessName(string processName, ref IntPtr baseAddress)
-        {
-            Process[] arrayProcess = Process.GetProcessesByName(processName);
-            foreach (Process p in arrayProcess)
-            {
-                baseAddress = p.MainModule.BaseAddress;
-                return p.Id;
-            }
-
-            return 0;
-        }
-
-        //根據進程名獲取PID
-        public static int GetPidByProcessName(string processName)
-        {
-            Process[] arrayProcess = Process.GetProcessesByName(processName);
-            foreach (Process p in arrayProcess)
-            {
-                return p.Id;
-            }
-
-            return 0;
-        }
-        
 
 
 
@@ -4749,96 +3886,6 @@ C# 播放鈴聲
 
 
 //--------------------------------------------------------------------------------------------------------------------------
-
-
-
-C#程序調用外部程序
-
-
-//聲明一個程序信息類
-System.Diagnostics.ProcessStartInfo  Info  =  new  System.Diagnostics.ProcessStartInfo();
-
-//設置外部程序名
-Info.FileName  =  "notepad.exe";
-
-//設置外部程序的啟動參數（命令行參數）為test.txt
-Info.Arguments  =  "test.txt";
-
-//設置外部程序工作目錄為  C:
-Info.WorkingDirectory  =  "C:\";
-
-//聲明一個程序類
-System.Diagnostics.Process  Proc  ;
-
-try
-{
-//
-//啟動外部程序
-//
-Proc  =  System.Diagnostics.Process.Start(Info);
-}
-catch(System.ComponentModel.Win32Exception  e)
-{
-Console.WriteLine("系統找不到指定的程序文件。{0}",  e);
-return;
-}
-
-//打印出外部程序的開始執行時間
-Console.WriteLine("外部程序的開始執行時間：{0}",  Proc.StartTime);
-
-//等待3秒鐘
-Proc.WaitForExit(3000);
-
-//如果這個外部程序沒有結束運行則對其強行終止
-if(Proc.HasExited  ==  false)
-{
-Console.WriteLine("由主程序強行終止外部程序的運行！");
-Proc.Kill();
-}
-else
-{
-Console.WriteLine("由外部程序正常退出！");
-}
-Console.WriteLine("外部程序的結束運行時間：{0}",  Proc.ExitTime);
-Console.WriteLine("外部程序在結束運行時的返回值：{0}",  Proc.ExitCode);
-}
-}
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-C#中隱式操作CMD命令行窗口
-日期：2017/1/20 19:36:48      編輯：C#入門知識
-
-
-MS的CMD命令行是一種重要的操作界面，
-一些在C#中不那麼方便完成的功能，在CMD中幾個簡單的命令或許就可以輕松搞定，
-如果能在C#中能完成CMD窗口的功能，那一定可以使我們的程序簡便不少。
-
-下面介紹一種常用的在C#程序中調用CMD.exe程序，並且不顯示命令行窗口界面，來完成CMD中各種功能的簡單方法。
-
-如下所示：
-
-
-Process p=new Process();
-p.StartInfo.FileName="cmd.exe";//要執行的程序名稱
-p.StartInfo.UseShellExecute=false;
-p.StartInfo.RedirectStanderInput=true;//可能接受來自調用程序的輸入信息
-p.StartInfo.RedirectStanderOutput=true;//由調用程序獲取輸出信息
-p.StartInfo.CreateNoWindow=true;//不顯示程序窗口
-p.Start();//啟動程序
-//向CMD窗口發送輸入信息：
-p.StanderInput.WriteLine("shutdown -r t 10"); //10秒後重啟（C#中可不好做哦）
-//獲取CMD窗口的輸出信息：
-string sOutput = p.StandardOutput.ReadToEnd();
-
-//有啦以下代碼，就可以神不知鬼不覺的操作CMD啦。總之，Process類是一個非常有用的類，它十分方便的利用第三方的程序擴展了C#的功能。
-
-
-
-
-
 
 
 
@@ -4953,16 +4000,6 @@ string sOutput = p.StandardOutput.ReadToEnd();
 
 
 //--------------------------------------------------------------------------------------------------------------------------
-
-
-關機
-Process.Start("shutdown", "-s -t 0");
-
-注銷
-Process.Start("shutdown", "-l ");
-
-重啟
-Process.Start("shutdown", "-r -t 0");
 
 
 
@@ -5371,11 +4408,52 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+//如何將List轉換為DataTable
+
+public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
+{
+	DataTable result = new DataTable();
+	if (list.Count > 0)
+	{
+		PropertyInfo[] propertys = list[0].GetType().GetProperties();
+		foreach (PropertyInfo pi in propertys)
+		{
+			result.Columns.Add(pi.Name, pi.PropertyType);
+		}
+		for (int i = 0; i < list.Count; i++)
+		{
+			ArrayList tempList = new ArrayList();
+			foreach (PropertyInfo pi in propertys)
+			{
+				object obj = pi.GetValue(list[i], null);
+				tempList.Add(obj);
+			}
+			object[] array = tempList.ToArray();
+			result.LoadDataRow(array, true);
+		}
+	}
+	return result;
+}
+
+
 
 
 
 //--------------------------------------------------------------------------------------------------------------------------
 
+
+
+            DataTable table = new DataTable();
+            //初始化datatale 
+            table.Columns.Add("id", typeof(string));
+            table.Columns.Add("value", typeof(int));
+            for (int i = 1; i <= 10; i++)
+            {
+                DataRow dRow = table.NewRow();
+                dRow["id"] = "id" + i.ToString();
+                dRow["value"] = i;
+                table.Rows.Add(dRow);
+            }
 
 
 
@@ -5388,6 +4466,53 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 
 
+直接把DataTable的資料貼到DataGridView上
+
+	//C#之界面上依次出現表格（DataTable和DataGridView提高）
+	
+	C#之界面上依次出現表格（DataTable和DataGridView提高）
+	
+	效果圖：
+	
+	在textBox控件中輸入信息，點擊增加
+	
+	\
+	
+	出現如圖：
+	
+	\
+	
+	繼續：
+	
+	\
+	
+	代碼（沒用csdn插入代碼功能是插入的代碼增刪改不能選中，特別費事，所以下面代碼可能會看的有點亂）：
+	
+	//創建坡口形式選擇數據表
+	dt = new DataTable();
+	
+	//建九列
+	
+	dt.Columns.Add("name", typeof(System.String));
+	dt.Columns.Add("sex", typeof(System.String));
+	dt.Columns.Add("age", typeof(System.String));
+	
+	//將MongoDB中數據插入到該一行對應的各列中（我這裡是數據存入MongoDB中，在之前取出bson,然後foreach）
+	foreach (BsonDocument result in resultList)
+	{
+	//建一行
+	DataRow dr = dt.NewRow();
+	//行信息
+	dr[0] = 你的數據
+	dr[1] = 你的數據
+	dr[2] = 你的數據
+	//將上述該行加入DataTable中
+	dt.Rows.Add(dr);
+	
+	//綁定在sorce上
+	dataGridView1.DataSource = dt;
+
+
 
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -5395,8 +4520,41 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 
 
+DataTable中使用Order By排序與Where過濾
+
+/// <summary>
+/// DataTable中使用Order By排序與Where過濾
+/// </summary>
+private void Bind()
+{
+    //這裡構造一個數據源
+    DataTable dt = new DataTable();
+    dt.Columns.Add("ID", typeof(System.String));
+    dt.Columns.Add("uName", typeof(System.String));
+    dt.Columns.Add("uDate", typeof(System.DateTime));
+    for (int i = 0; i < 10; i++)
+    {
+        DataRow dr = dt.NewRow();
+        dr["ID"] = i.ToString();
+        dr["uName"] = "name" + i;
+        dt.Rows.Add(dr);
+    }
+    dt.DefaultView.Sort = "ID asc";//相當於Order By
+    dt.DefaultView.RowFilter = "ID>5";//相當於Where
+    GridView1.DataSource = dt;
+    GridView1.DataBind();
+}
+    
+
+
 
 //--------------------------------------------------------------------------------------------------------------------------
+
+
+
+C#_把dataTable數據導出到CSV,XLS文件
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190579.html
+https://blog.csdn.net/happmaoo/article/details/83814604
 
 
 
