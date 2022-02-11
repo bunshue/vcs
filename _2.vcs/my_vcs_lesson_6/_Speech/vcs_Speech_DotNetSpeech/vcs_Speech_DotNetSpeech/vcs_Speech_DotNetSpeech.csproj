@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{24955535-A2DE-49AC-B5C0-A53F73F61C14}</ProjectGuid>
+    <ProjectGuid>{C2B56962-39DE-4B02-A0FA-1A59DBBCCB65}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_speech</RootNamespace>
-    <AssemblyName>vcs_speech</AssemblyName>
+    <RootNamespace>vcs_Speech_DotNetSpeech</RootNamespace>
+    <AssemblyName>vcs_Speech_DotNetSpeech</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

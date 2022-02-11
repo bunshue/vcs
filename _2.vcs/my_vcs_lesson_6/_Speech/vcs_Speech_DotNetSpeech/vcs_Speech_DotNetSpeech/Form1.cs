@@ -12,9 +12,13 @@ using System.Threading;
 
 using System.IO;
 
-//微軟 SAPI.SpVoice C# 使用方法 + 實例
+//使用DotNetSpeech 做 文字轉語音
+//微軟 SAPI.SpVoice C# 使用方法
 
-namespace vcs_speech
+//參考/加入參考, 選DotNetSpeech.dll
+//DotNetSpeech屬性/內嵌Interop型別 改false
+
+namespace vcs_Speech_DotNetSpeech
 {
     public partial class Form1 : Form
     {
@@ -204,3 +208,4 @@ namespace vcs_speech
         }
     }
 }
+

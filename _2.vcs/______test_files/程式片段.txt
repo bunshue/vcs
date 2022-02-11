@@ -1,5 +1,21 @@
 
 
+
+dll檔案選sapi.dll
+
+參考出現SpeechLib
+
+引用要寫 using SpeechLib;
+ 
+                SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+                SpVoice voice = new SpVoice();
+                
+                    voice.Speak(this.textBox1.Text, spFlags);
+
+            
+            
+            
+
 可以錄影的那個webcam版本 x86可用的
 用的AForge是比較舊的版本
 目前會認版本
@@ -131,6 +147,35 @@ Image.FromFile可開啟影像檔:
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //c#生成大量隨機碼
+            StreamWriter swriter = new StreamWriter("1.txt", true);
+
+            for (int i = 0; i < 1000; i++)
+            {
+                swriter.Write(generateRandomString(20));
+                swriter.WriteLine();
+                Console.WriteLine("Number: {0}", i);
+            }
+
+            swriter.Flush();
+
+            swriter.Close();
+        }
+
+        static Random random = new Random();
+        static string generateRandomString(int length)
+        {
+            var chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < length; i++)
+            {
+                int index = random.Next(chars.Length);
+                result.Append(chars[index]);
+            }
+            return result.ToString();
+        }
 
 
 

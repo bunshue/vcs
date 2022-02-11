@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_speech.Properties
+namespace vcs_Speech_DotNetSpeech.Properties
 {
 
 

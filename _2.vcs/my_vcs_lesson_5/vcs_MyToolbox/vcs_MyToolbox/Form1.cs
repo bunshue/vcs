@@ -173,14 +173,14 @@ namespace vcs_MyToolbox
 
             btn_20.Width = w;
             btn_20.Height = h;
-            btn_20.Text = "Visual C#";
+            btn_20.Text = "Git";
             btn_20.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             btn_20.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_20);	// 將控件加入表單
 
             btn_21.Width = w;
             btn_21.Height = h;
-            btn_21.Text = "";
+            btn_21.Text = "Visual C#";
             btn_21.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             btn_21.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_21);	// 將控件加入表單
@@ -310,7 +310,7 @@ namespace vcs_MyToolbox
                 }
                 else
                 {
-                    lb_debug1.Text = "vcs資料夾不存在";
+                    lb_debug1.Text = "Git資料夾不存在";
                 }
             }
             else if (sender.Equals(btn_21))
