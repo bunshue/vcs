@@ -537,6 +537,7 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(170, 75);
             this.button39.TabIndex = 41;
+            this.button39.Text = "獲取指定路徑下的HTML源代碼";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
@@ -547,6 +548,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(170, 75);
             this.button40.TabIndex = 42;
+            this.button40.Text = "根據url獲取遠程html源碼";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -557,6 +559,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(170, 75);
             this.button41.TabIndex = 43;
+            this.button41.Text = "httpWebRequest 文件下載";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
@@ -567,6 +570,7 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(170, 75);
             this.button42.TabIndex = 44;
+            this.button42.Text = "檢查URL鏈接是否有效";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 

@@ -69,16 +69,7 @@ namespace network_test1
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
             //控件位置
-            bt_copy.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_copy.Size.Height * 2);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-        }
-
-        private void bt_copy_Click(object sender, EventArgs e)
-        {
-            //C# – 複製資料到剪貼簿
-            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
-            Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
-            richTextBox1.Text += "已複製資料到系統剪貼簿\n";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -88,77 +79,10 @@ namespace network_test1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "檢查URL鏈接是否有效\n";
-            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/11093.html";
-            bool ret = CheckUri(url);
-            richTextBox1.Text += "結果 : \t" + ret.ToString() + "\n";
-
-            url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/11093XX.html";
-            ret = CheckUri(url);
-            richTextBox1.Text += "結果 : \t" + ret.ToString() + "\n";
-
-
-        }
-
-        /// <summary>
-        /// 檢查url鏈接是否有效
-        /// </summary>
-        /// <param name="strUri"></param>
-        /// <returns></returns>
-        public static bool CheckUri(string strUri)
-        {
-            try
-            {
-                System.Net.HttpWebRequest.Create(strUri).GetResponse();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //httpWebRequest 文件下載，
-            const string uri = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/SMS_K%C3%B6nig_Albert.jpg/450px-SMS_K%C3%B6nig_Albert.jpg";
-            var req = WebRequest.Create(uri) as HttpWebRequest;
-            //req.ContentType = "application/octet-stream";
-            if (req != null)
-            {
-                var response = req.GetResponse() as HttpWebResponse;
-                if (response != null)
-                {
-                    Console.WriteLine("ContentType:" + response.ContentType);
-                    var stream = response.GetResponseStream();
-                    if (stream != null)
-                    {
-                        string format = string.Empty;
-                        switch (response.ContentType)
-                        {
-                            case "image/jpeg":
-                                format = "jpg";
-                                break;
-                            case "audio/amr":
-                                format = "amr";
-                                break;
-                        }
-
-                        var path = string.Format(@"1.{0}", format);
-                        //var fs = new FileStream($"c:\\1.{format}", FileMode.Create);
-                        var fs = File.Create(path);
-                        richTextBox1.Text += "下載完成, 檔案 : \t" + path + "\n";
-
-                        int count = 0;
-                        do
-                        {
-                            var buffer = new byte[4096];
-                            count = stream.Read(buffer, 0, buffer.Length);
-                            fs.Write(buffer, 0, count);
-                        } while (count > 0);
-                    }
-                }
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -235,39 +159,20 @@ namespace network_test1
             return pingrst;
         }
 
-
-
-
         private void button3_Click(object sender, EventArgs e)
         {
-            //獲取遠程網頁中的所有鏈接URL
-            string url = textBox1.Text;
-            System.Net.WebClient client = new WebClient();
-            byte[] page = client.DownloadData(url);
-            string content = System.Text.Encoding.UTF8.GetString(page);
-            string regex = "href=[\\\"\\\'](http:\\/\\/|\\.\\/|\\/)?\\w+(\\.\\w+)*(\\/\\w+(\\.\\w+)?)*(\\/|\\?\\w*=\\w*(&\\w*=\\w*)*)?[\\\"\\\']";
-            Regex re = new Regex(regex);
-            MatchCollection matches = re.Matches(content);
+            //讀取局域網路由的IP地址
+            System.Net.WebClient client = new System.Net.WebClient();
+            client.Encoding = System.Text.Encoding.Default;
+            string lip = client.DownloadString("http://www.ip138.com/ip2city.asp");
+            //string sip = reply.Substring(reply.IndexOf("您的IP地址是"), reply.IndexOf("</center>") - reply.IndexOf("您的IP地址是"));
+            //MessageBox.Show(sip);
 
-            System.Collections.IEnumerator enu = matches.GetEnumerator();
-            while (enu.MoveNext() && enu.Current != null)
-            {
-                Match match = (Match)(enu.Current);
-
-                string result = match.Value;
-
-                if (result.Contains("book"))
-                {
-                    result = result.Replace("href=\"", "");
-                    result = result.Replace("\"", "");
-                    richTextBox1.Text += result + "\n";
-                }
-            }
+            //TBD
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button5_Click(object sender, EventArgs e)

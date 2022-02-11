@@ -1328,22 +1328,151 @@ namespace network_test2_http
 
         private void button39_Click(object sender, EventArgs e)
         {
-
+            //獲取指定路徑下的模板的HTML源代碼
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/10747.html";
+            string result = GetHtmlCode(url, "UTF8");
+            richTextBox1.Text += result + "\n";
         }
+
+        /// <summary>
+        /// 獲取指定路徑下的HTML源代碼
+        /// </summary>
+        /// <param name="EncodingType">網頁類型（有些是UTF8，有些是GB2312）</param>
+        /// <returns>源代碼</returns>
+        private string GetHtmlCode(string url, string EncodingType)
+        {
+            try
+            {
+                if (url != string.Empty)
+                {
+                    WebClient webClient = new WebClient();
+
+                    //設置網絡憑證為系統憑證
+                    webClient.Credentials = CredentialCache.DefaultCredentials;
+
+                    //獲取指定URI的網頁的源代碼
+                    byte[] byteDataBuffer = webClient.DownloadData(url);
+
+                    string htmlCode = "";
+                    if (EncodingType == "UTF8")
+                    {
+                        htmlCode = Encoding.UTF8.GetString(byteDataBuffer);
+                    }
+                    else
+                    {
+                        htmlCode = Encoding.GetEncoding(EncodingType).GetString(byteDataBuffer);
+                    }
+
+                    htmlCode = Regex.Replace(htmlCode, @"<!DOCTYPE\s*HTML\s*PUBLIC[^>]+>", "", RegexOptions.Singleline);
+                    htmlCode = Regex.Replace(htmlCode, @"\s+", " ", RegexOptions.Singleline);
+
+                    return htmlCode;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception ee)
+            {
+                throw (ee);
+            }
+        }
+
 
         private void button40_Click(object sender, EventArgs e)
         {
+            //根據url獲取遠程html源碼
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/10747.html";
+            string result = GetSearchHtml(url);
+            richTextBox1.Text += result + "\n";
+        }
 
+        /// <summary>
+        /// 根據url獲取遠程html源碼
+        /// </summary>
+        /// <param name="url">搜索url</param>
+        /// <returns>返回DownloadData</returns>
+        public static string GetSearchHtml(string url)
+        {
+            WebClient MyWebClient = new WebClient();
+            MyWebClient.Credentials = CredentialCache.DefaultCredentials;   //獲取或設置用於對向Internet資源的請求進行身份驗證的網絡憑據。
+            Byte[] pageData = MyWebClient.DownloadData(url);                //從指定url下載數據
+            return Encoding.UTF8.GetString(pageData);                       //獲取網站頁面采用的是UTF-8
         }
 
         private void button41_Click(object sender, EventArgs e)
         {
+            //httpWebRequest 文件下載
+            const string uri = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/SMS_K%C3%B6nig_Albert.jpg/450px-SMS_K%C3%B6nig_Albert.jpg";
+            var req = WebRequest.Create(uri) as HttpWebRequest;
+            //req.ContentType = "application/octet-stream";
+            if (req != null)
+            {
+                var response = req.GetResponse() as HttpWebResponse;
+                if (response != null)
+                {
+                    Console.WriteLine("ContentType:" + response.ContentType);
+                    var stream = response.GetResponseStream();
+                    if (stream != null)
+                    {
+                        string format = string.Empty;
+                        switch (response.ContentType)
+                        {
+                            case "image/jpeg":
+                                format = "jpg";
+                                break;
+                            case "audio/amr":
+                                format = "amr";
+                                break;
+                        }
 
+                        var path = string.Format(@"1.{0}", format);
+                        //var fs = new FileStream($"c:\\1.{format}", FileMode.Create);
+                        var fs = File.Create(path);
+                        richTextBox1.Text += "下載完成, 檔案 : \t" + path + "\n";
+
+                        int count = 0;
+                        do
+                        {
+                            var buffer = new byte[4096];
+                            count = stream.Read(buffer, 0, buffer.Length);
+                            fs.Write(buffer, 0, count);
+                        } while (count > 0);
+                    }
+                }
+            }
         }
 
         private void button42_Click(object sender, EventArgs e)
         {
+            //檢查URL鏈接是否有效
+            richTextBox1.Text += "檢查URL鏈接是否有效\n";
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/11093.html";
+            bool ret = CheckUri(url);
+            richTextBox1.Text += "結果 : \t" + ret.ToString() + "\n";
 
+            url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/11093XX.html";
+            ret = CheckUri(url);
+            richTextBox1.Text += "結果 : \t" + ret.ToString() + "\n";
+        }
+
+        /// <summary>
+        /// 檢查url鏈接是否有效
+        /// </summary>
+        /// <param name="strUri"></param>
+        /// <returns></returns>
+        public static bool CheckUri(string strUri)
+        {
+            try
+            {
+                System.Net.HttpWebRequest.Create(strUri).GetResponse();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private void button43_Click(object sender, EventArgs e)
@@ -1432,17 +1561,17 @@ namespace network_test2_http
             return str;
         }
     }
+    /*
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
+    }
+    */
 
-/*
-public class Protocols
-{
-    public const SecurityProtocolType
-        protocol_SystemDefault = 0,
-        protocol_Ssl3 = (SecurityProtocolType)48,
-        protocol_Tls = (SecurityProtocolType)192,
-        protocol_Tls11 = (SecurityProtocolType)768,
-        protocol_Tls12 = (SecurityProtocolType)3072;
 }
-*/
 
-}

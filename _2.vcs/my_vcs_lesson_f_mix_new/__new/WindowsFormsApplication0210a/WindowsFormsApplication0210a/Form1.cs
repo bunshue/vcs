@@ -183,10 +183,7 @@ namespace WindowsFormsApplication0210a
 
         private void button7_Click(object sender, EventArgs e)
         {
-            Control con = (Control)sender;  //取得控件本身
-
-            Graphics g = con.CreateGraphics();
-            g.DrawRectangle(Pens.Red, 3, 3, 30, 30);
+            
         }
     }
 }

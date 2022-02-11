@@ -122,7 +122,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(114, 66);
             this.button7.TabIndex = 9;
-            this.button7.Text = "控件畫圖";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 

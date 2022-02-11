@@ -241,7 +241,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(180, 40);
             this.button9.TabIndex = 9;
-            this.button9.Text = "List用法";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -252,7 +251,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 40);
             this.button10.TabIndex = 11;
-            this.button10.Text = "顯示控件上的文字";
+            this.button10.Text = "取得控件本身";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -285,7 +284,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(180, 40);
             this.button13.TabIndex = 14;
-            this.button13.Text = "二維List Add";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -296,7 +294,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(180, 40);
             this.button14.TabIndex = 15;
-            this.button14.Text = "二維List Show";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

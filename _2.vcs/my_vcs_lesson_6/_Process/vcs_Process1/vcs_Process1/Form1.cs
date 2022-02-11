@@ -89,20 +89,16 @@ namespace vcs_Process1
 
             groupBox1.Size = new Size(180, 200);
             groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            bt_ffmpeg0.Location = new Point(x_st + dx * 0, y_st + dy * 0+10);
-            bt_ffmpeg1.Location = new Point(x_st + dx * 0, y_st + dy * 1+10);
-            bt_ffmpeg2.Location = new Point(x_st + dx * 0, y_st + dy * 2+10);
+            bt_ffmpeg0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
+            bt_ffmpeg1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 10);
+            bt_ffmpeg2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 10);
 
-            richTextBox1.Location = new Point(x_st + dx * 5+70, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5 + 70, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
-            string pdf_path = "C:\\______test_files\\note_Linux_workstation.pdf";
-            Process process;
-            process = Process.Start(pdf_path);
-            process.WaitForExit();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -204,19 +200,15 @@ namespace vcs_Process1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //使用IE
-            //Process.Start("IExplore.exe", "www.google.com.tw");   //same
-            Process.Start("iexplore.exe", "www.google.com.tw");
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Process.Start("Firefox.exe", "www.google.com.tw");
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            Process.Start("Firefox.exe");
+            
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -248,24 +240,14 @@ namespace vcs_Process1
             //呼叫系統內建小鍵盤     fail
             //Process.Start("" + Environment.SystemDirectory + "/osk.exe");
 
-            //開啟特定程式
-            //Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
-
-            //開啟小算盤應用程式
-            //Process.Start(@"C:\WINDOWS\system32\calc.exe");
 
             //開啟檔案 由預設程式開啟
             //Process.Start("C:\\______test_files\\my_text_file.txt");
 
-            //開啟記事本程式
-            //Process.Start("notepad.exe");
 
             //開啟程式
             //Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
-            Process.Start("winver.exe ");              //--打開Windows版本信息
-
-            //開啟imsLink
-            //Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
+            
 
             //呼叫外部的Exe文件
             //Process.Start(textBox1.Text);  //呼叫 *.exe
@@ -273,27 +255,10 @@ namespace vcs_Process1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo processStartInfo = new ProcessStartInfo();
-            processStartInfo.FileName = "explorer.exe";  //資源管理器
-            processStartInfo.Arguments = @"C:\";
-            Process.Start(processStartInfo);
-
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //開啟檔案總管
-            String pathname = "C:\\";
-            Process.Start(pathname);
-            /*
-            if (Directory.Exists(this.FolderPath))
-            {
-                Process.Start(this.FolderPath);
-                return true;
-            }
-            else
-                return false;
-             */
 
         }
 
@@ -607,52 +572,10 @@ namespace vcs_Process1
                 //p.Kill(); 指名刪除這個process
                 richTextBox1.Text += p.ProcessName + "\n";
             }
-
-
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //啟動一個外部程序
-
-            ////////////聲明一個程序信息類，指定啟動進程是的參數信息     
-            ProcessStartInfo Info = new ProcessStartInfo();
-
-            //設置外部程序名
-            Info.FileName = "notepad.exe";
-            //設置外部程序的啟動參數（命令行參數）為test.txt
-            Info.Arguments = "file_to_save.txt";
-            //設置外部程序工作目錄為  C:\
-            Info.WorkingDirectory = @"C:\______test_files";
-            ///////////聲明一個程序類,也就是創建一個進程
-            Process Proc;
-            try
-            {
-                //     //啟動外部程序
-                Proc = Process.Start(Info);
-            }
-            catch (System.ComponentModel.Win32Exception ex)
-            {
-                Console.WriteLine("系統找不到指定的程序文件。\r{0}", ex);
-                return;
-            }
-            //打印出外部程序的開始執行時間
-            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
-            //等待3秒鐘
-            Proc.WaitForExit(3000);
-
-            //如果這個外部程序沒有結束運行則對其強行終止
-            if (Proc.HasExited == false)
-            {
-                Console.WriteLine("由主程序強行終止外部程序的運行！");
-                Proc.Kill();
-            }
-            else
-            {
-                Console.WriteLine("由外部程序正常退出！");
-            }
-            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
-            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -661,13 +584,10 @@ namespace vcs_Process1
 
         private void button26_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "(偽)關機\n";
-            //Process.Start("shutdown","-s -t 0");//關機程序
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -1015,16 +935,27 @@ namespace vcs_Process1
 
             }
         }
-
         //FFMPEG的使用 SP
 
+        private void bt_system0_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "(偽)關機\n";
+            //Process.Start("shutdown", "-s -t 0");
+        }
 
+        private void bt_system1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "(偽)註銷\n";
+            //Process.Start("shutdown", "-l ");
+        }
 
-
-
+        private void bt_system2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "(偽)重啟\n";
+            //Process.Start("shutdown", "-r -t 0");
+        }
     }
 }
-
 
 
 /*

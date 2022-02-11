@@ -34,6 +34,10 @@ using System.Net.Mime;  //for MediaTypeNames
 選擇開啟，否則會無法正常寄信
 */
 
+/*
+常見的電子郵件協議有SMTP(簡單郵件傳輸協議)、POP3(郵局協議)、IMAP(Internet郵件訪問協議)
+*/
+
 namespace vcs_SendMail
 {
     public partial class Form1 : Form

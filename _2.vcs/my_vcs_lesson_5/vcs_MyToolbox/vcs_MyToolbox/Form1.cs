@@ -287,10 +287,13 @@ namespace vcs_MyToolbox
 
             if (sender.Equals(btn_00))
             {
+                //Process.Start(@"C:\WINDOWS\system32\calc.exe");   same
+                Process.Start("calc");
                 text = btn_00.Text;
             }
             else if (sender.Equals(btn_01))
             {
+                Process.Start(@"C:\Program Files (x86)\WinMerge\WinMergeU.exe");
                 text = btn_01.Text;
             }
             else if (sender.Equals(btn_02))

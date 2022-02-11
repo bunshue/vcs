@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -47,7 +46,6 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.bt_copy = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -58,7 +56,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 70);
             this.button1.TabIndex = 0;
-            this.button1.Text = "httpWebRequest 文件下載";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -88,7 +85,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(160, 70);
             this.button3.TabIndex = 3;
-            this.button3.Text = "獲取遠程網頁中的所有鏈接URL";
+            this.button3.Text = "讀取局域網路由的IP地址";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -200,7 +197,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(160, 70);
             this.button0.TabIndex = 14;
-            this.button0.Text = "檢查URL鏈接是否有效";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -233,19 +229,6 @@
             this.textBox1.TabIndex = 17;
             this.textBox1.Text = "https://pydoing.blogspot.com/";
             // 
-            // bt_copy
-            // 
-            this.bt_copy.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_copy.BackgroundImage")));
-            this.bt_copy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bt_copy.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_copy.ForeColor = System.Drawing.Color.Black;
-            this.bt_copy.Location = new System.Drawing.Point(834, 614);
-            this.bt_copy.Name = "bt_copy";
-            this.bt_copy.Size = new System.Drawing.Size(50, 50);
-            this.bt_copy.TabIndex = 44;
-            this.bt_copy.UseVisualStyleBackColor = true;
-            this.bt_copy.Click += new System.EventHandler(this.bt_copy_Click);
-            // 
             // bt_clear
             // 
             this.bt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -265,7 +248,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(908, 744);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.bt_copy);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
@@ -312,7 +294,6 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button bt_copy;
         private System.Windows.Forms.Button bt_clear;
     }
 }

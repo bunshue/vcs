@@ -172,6 +172,34 @@ namespace network_test3
             bt_resume.Enabled = true;
             bt_stop.Enabled = false;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //獲取遠程網頁中的所有鏈接URL
+            string url = textBox1.Text;
+            System.Net.WebClient client = new WebClient();
+            byte[] page = client.DownloadData(url);
+            string content = System.Text.Encoding.UTF8.GetString(page);
+            string regex = "href=[\\\"\\\'](http:\\/\\/|\\.\\/|\\/)?\\w+(\\.\\w+)*(\\/\\w+(\\.\\w+)?)*(\\/|\\?\\w*=\\w*(&\\w*=\\w*)*)?[\\\"\\\']";
+            Regex re = new Regex(regex);
+            MatchCollection matches = re.Matches(content);
+
+            System.Collections.IEnumerator enu = matches.GetEnumerator();
+            while (enu.MoveNext() && enu.Current != null)
+            {
+                Match match = (Match)(enu.Current);
+
+                string result = match.Value;
+
+                if (result.Contains("book"))
+                {
+                    result = result.Replace("href=\"", "");
+                    result = result.Replace("\"", "");
+                    richTextBox1.Text += result + "\n";
+                }
+            }
+
+        }
     }
 
     /// <summary>

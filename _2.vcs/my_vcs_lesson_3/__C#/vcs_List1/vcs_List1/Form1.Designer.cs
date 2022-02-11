@@ -54,6 +54,7 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
+            this.button20 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -347,11 +348,23 @@
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
+            // button20
+            // 
+            this.button20.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button20.Location = new System.Drawing.Point(660, 438);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(169, 38);
+            this.button20.TabIndex = 22;
+            this.button20.Text = "List用法";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1153, 811);
+            this.Controls.Add(this.button20);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button15);
@@ -403,6 +416,7 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button20;
     }
 }
 

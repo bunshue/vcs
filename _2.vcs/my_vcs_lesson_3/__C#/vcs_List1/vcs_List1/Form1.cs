@@ -135,8 +135,6 @@ namespace vcs_List1
             richTextBox1.Text += "Result : " + MyList1[1][1].ToString() + "\n";
             richTextBox1.Text += "Count : " + MyList1.Count.ToString() + "\n";
 
-
-
             //二維List for int
             List<List<int>> MyList2 = new List<List<int>>();
             List<int> sublist = new List<int>();
@@ -154,13 +152,11 @@ namespace vcs_List1
                 richTextBox1.Text += "i = " + i.ToString() + "\n";
                 MyList2[i][0] = i;
                 MyList2[i][1] = MyList2.Count - i;
-
             }
 
             for (i = 0; i < MyList2.Count; i++)
             {
                 richTextBox1.Text += "MyList2[" + i.ToString() + "][0] = " + MyList2[i][0].ToString() + " MyList2[" + i.ToString() + "][1] = " + MyList2[i][1].ToString() + "\n";
-
             }
 
             List<List<string>> MyList3 = new List<List<string>>();
@@ -173,7 +169,6 @@ namespace vcs_List1
             richTextBox1.Text += "result : " + MyList3[0][1] + "\n"; // 輸出: 0,1: Jane
             richTextBox1.Text += "result : " + MyList3[1][0] + "\n"; // 輸出: 1,0: Jack
             richTextBox1.Text += "result : " + MyList3[1][1] + "\n"; // 輸出: 1,1: John
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -240,7 +235,6 @@ namespace vcs_List1
             {
                 myList.Add(rr.Next(10));
             }
-
 
             /*
             //特定分配
@@ -309,9 +303,7 @@ namespace vcs_List1
             {
                 richTextBox1.Text += showlist[0] + "\t->\t" + showlist[1] + "\n";
             }
-
         }
-
 
         private class myList
         {
@@ -323,12 +315,18 @@ namespace vcs_List1
         private void button15_Click(object sender, EventArgs e)
         {
             List<myList> myList = new List<myList>();
+
+            //二維List Add
             myList.Add(new myList { ID = "A001", Name = "David", Level = "A" });
-            myList.Add(new myList { ID = "A002", Name = "John", Level = "B" });
+            //myList.Add(new myList { ID = "A002", Name = "John", Level = "B" });
+            myList.Add(new myList { ID = "A002", Name = "John" });  //可缺項
             myList.Add(new myList { ID = "A003", Name = "Tom", Level = "A" });
+
+            //二維List Show
             richTextBox1.Text += "學號\t->\t姓名\t->\t等級\n";
             foreach (var showlist in myList)
             {
+                //richTextBox1.Text += "ID : " + showlist.ID + "\tName : " + showlist.Name + "\tLevel : " + showlist.Level + "\n";
                 richTextBox1.Text += showlist.ID + "\t->\t" + showlist.Name + "\t->\t" + showlist.Level + "\n";
             }
         }
@@ -387,6 +385,80 @@ namespace vcs_List1
                         + "\tcamera_serials[" + i.ToString() + "][2] = " + camera_serials[i][2].ToString() + "\n";
                 }
             }
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //不用宣告長度的陣列(Array)
+            // 宣告myIntLists 為List
+            // 以下List 裡為int 型態
+            List<int> myIntLists = new List<int>();
+
+            // 宣告myStringLists 為List
+            // 以下List 裡為string 型態
+            List<string> myStringLists = new List<string>();
+
+            // 在List 裡新增int 整數
+            myIntLists.Add(12);
+            myIntLists.Add(34);
+            myIntLists.Add(56);
+
+            // 在List 裡新增string 字串
+            myStringLists.Add("lion");
+            myStringLists.Add("mouse");
+            myStringLists.Add("cat");
+            myStringLists.Add("dog");
+
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "myIntLists has" + myIntLists.Count.ToString() + " elements\n";
+            richTextBox1.Text += "myStringLists has" + myStringLists.Count.ToString() + " elements\n";
+
+            // 可用foreach 取出List 裡的值
+            richTextBox1.Text += "取出List內容：";
+            foreach (int ii in myIntLists)
+            {
+                richTextBox1.Text += "\t" + ii.ToString();
+            }
+            richTextBox1.Text += "\n";
+
+            // 可用foreach 取出List 裡的值
+            richTextBox1.Text += "取出List內容：";
+            foreach (string str in myStringLists)
+            {
+                richTextBox1.Text += "\t" + str;
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "經過排序：\n";
+            myStringLists.Sort();
+            // 可用foreach 取出List 裡的值
+            richTextBox1.Text += "取出List內容：";
+            foreach (string str in myStringLists)
+            {
+                richTextBox1.Text += "\t" + str;
+            }
+            richTextBox1.Text += "\n";
+
+
+            richTextBox1.Text += "增加內容：\n";
+            myStringLists.Insert(2, "elephant");
+            // 可用foreach 取出List 裡的值
+            richTextBox1.Text += "取出List內容：";
+            foreach (string str in myStringLists)
+            {
+                richTextBox1.Text += "\t" + str;
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "刪除內容：\n";
+            myStringLists.Remove("cat");
+            // 可用foreach 取出List 裡的值
+            richTextBox1.Text += "取出List內容：";
+            foreach (string str in myStringLists)
+            {
+                richTextBox1.Text += "\t" + str;
+            }
+            richTextBox1.Text += "\n";
         }
     }
 }

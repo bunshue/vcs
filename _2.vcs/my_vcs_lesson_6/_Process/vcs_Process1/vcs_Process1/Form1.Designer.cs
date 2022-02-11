@@ -76,7 +76,12 @@
             this.bt_ffmpeg1 = new System.Windows.Forms.Button();
             this.bt_ffmpeg2 = new System.Windows.Forms.Button();
             this.bt_ffmpeg0 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.bt_system1 = new System.Windows.Forms.Button();
+            this.bt_system2 = new System.Windows.Forms.Button();
+            this.bt_system0 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -130,7 +135,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(160, 50);
             this.button5.TabIndex = 4;
-            this.button5.Text = "IExplore";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -154,7 +158,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(160, 50);
             this.button6.TabIndex = 6;
-            this.button6.Text = "Firefox";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -165,7 +168,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(160, 50);
             this.button7.TabIndex = 7;
-            this.button7.Text = "Firefox";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -198,7 +200,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 50);
             this.button10.TabIndex = 10;
-            this.button10.Text = "開啟檔案總管 C槽";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -209,7 +210,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 50);
             this.button11.TabIndex = 11;
-            this.button11.Text = "開啟檔案總管";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -297,7 +297,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(160, 50);
             this.button0.TabIndex = 19;
-            this.button0.Text = "用adobe 打開PDF檔";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -373,7 +372,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(160, 50);
             this.button24.TabIndex = 25;
-            this.button24.Text = "啟動一個外部程序";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -394,7 +392,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(160, 50);
             this.button26.TabIndex = 27;
-            this.button26.Text = "(偽)關機";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -572,11 +569,54 @@
             this.bt_ffmpeg0.UseVisualStyleBackColor = true;
             this.bt_ffmpeg0.Click += new System.EventHandler(this.bt_ffmpeg0_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.bt_system1);
+            this.groupBox2.Controls.Add(this.bt_system2);
+            this.groupBox2.Controls.Add(this.bt_system0);
+            this.groupBox2.Location = new System.Drawing.Point(693, 253);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(196, 225);
+            this.groupBox2.TabIndex = 44;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "system";
+            // 
+            // bt_system1
+            // 
+            this.bt_system1.Location = new System.Drawing.Point(17, 91);
+            this.bt_system1.Name = "bt_system1";
+            this.bt_system1.Size = new System.Drawing.Size(160, 50);
+            this.bt_system1.TabIndex = 6;
+            this.bt_system1.Text = "(偽)註銷";
+            this.bt_system1.UseVisualStyleBackColor = true;
+            this.bt_system1.Click += new System.EventHandler(this.bt_system1_Click);
+            // 
+            // bt_system2
+            // 
+            this.bt_system2.Location = new System.Drawing.Point(17, 156);
+            this.bt_system2.Name = "bt_system2";
+            this.bt_system2.Size = new System.Drawing.Size(160, 50);
+            this.bt_system2.TabIndex = 5;
+            this.bt_system2.Text = "(偽)重啟";
+            this.bt_system2.UseVisualStyleBackColor = true;
+            this.bt_system2.Click += new System.EventHandler(this.bt_system2_Click);
+            // 
+            // bt_system0
+            // 
+            this.bt_system0.Location = new System.Drawing.Point(17, 21);
+            this.bt_system0.Name = "bt_system0";
+            this.bt_system0.Size = new System.Drawing.Size(160, 50);
+            this.bt_system0.TabIndex = 4;
+            this.bt_system0.Text = "(偽)關機";
+            this.bt_system0.UseVisualStyleBackColor = true;
+            this.bt_system0.Click += new System.EventHandler(this.bt_system0_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1335, 565);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button39);
             this.Controls.Add(this.button38);
@@ -624,6 +664,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -677,6 +718,10 @@
         private System.Windows.Forms.Button bt_ffmpeg1;
         private System.Windows.Forms.Button bt_ffmpeg2;
         private System.Windows.Forms.Button bt_ffmpeg0;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button bt_system1;
+        private System.Windows.Forms.Button bt_system2;
+        private System.Windows.Forms.Button bt_system0;
     }
 }
 
