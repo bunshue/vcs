@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="gb2312" ?>
-<bookshop>
-<book genre="fantasy" ISBN="2-2312-2">
-<title>Oberon Legacy</title>
-<author>Eva</author>
-<price>56.5</price>
-</book>
-</bookshop>
