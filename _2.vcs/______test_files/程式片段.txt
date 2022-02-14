@@ -1,0 +1,4617 @@
+
+
+
+dll檔案選sapi.dll
+
+參考出現SpeechLib
+
+引用要寫 using SpeechLib;
+ 
+                SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+                SpVoice voice = new SpVoice();
+                
+                    voice.Speak(this.textBox1.Text, spFlags);
+
+            
+            
+            
+
+可以錄影的那個webcam版本 x86可用的
+用的AForge是比較舊的版本
+目前會認版本
+只能使用特定舊的AForge版本
+
+要不要做一個極簡化AForge/EMGU版本的WebCam
+
+
+
+
+
+
+
+1.對於那種明知道跨線程調用不會帶來錯誤的，可以設置Form控件不檢查跨線程調用錯誤，這樣就不報錯了。
+在Form1構造方法中：
+C#代碼 
+CheckForIllegalCrossThreadCalls = false; 
+
+
+
+
+2 C#圖像處理的基本方法
+
+C#處理圖像有三種方法:像素法、內存法和指針法。
+像素法應用GDI+中的方法,易於理解,方法簡單,但運行速度慢;
+內存法把圖像復制到內存中,直接對內存中的數據進行處理,運行速度比像素法快得多,程序難度也不大;
+指針法直接利用指針來對圖像進行處理,速度最快。
+
+但C#建議不使用指針,因為使用指針,代碼不僅難以編寫和調試,而且無法利用CRL的內存類型安全檢查,不能發揮C#的特長。
+
+下面介紹用內存法對圖像處理的基本方法。
+
+首先在處理圖像的窗體類中定義一個字符串(圖像文件名)和一個Bitmap類型的數據成員(圖像對象),然後可以利用OpenFileDialog選擇圖像文件並讀取文件名,再使用Image.FromFile創建圖形對象。比如:
+
+
+
+
+
+
+this.Opacity=0;//使窗體不可見 
+
+
+
+
+private void USBPort_USBDeviceAttached(objectsender, 
+             USBClass.USBDeviceEventArgs e) 
+{ 
+   if (!MyUSBDeviceConnected) 
+   { 
+      if(USBClass.GetUSBDevice(MyDeviceVID, MyDevicePID, 
+                                ref USBDeviceProperties, false)) 
+      { 
+         //My Device is connected 
+         MyUSBDeviceConnected = true; 
+      } 
+   } 
+} 
+  
+private void USBPort_USBDeviceRemoved(objectsender, 
+             USBClass.USBDeviceEventArgs e) 
+{ 
+   if(!USBClass.GetUSBDevice(MyDeviceVID, MyDevicePID, 
+                              ref USBDeviceProperties, false)) 
+   { 
+      //My Device is removed 
+      MyUSBDeviceConnected = false; 
+   } 
+}
+
+
+
+
+ 
+
+
+Image.FromFile可開啟影像檔:
+ "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
+ 
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+讀取文件到一個List
+
+用法
+// 讀取cs文件內容
+                List<String> rcq = ReaderLine(e.FullName);
+ // 遍歷cs文件代碼行
+                foreach (String q in rcq)
+                {
+                    if (!StringHandle.isNote(q)) continue;// 判斷是否是注釋
+
+                    string note = StringHandle.GetNoteValue(q);// 獲取注釋內容
+
+                    if (string.IsNullOrWhiteSpace(note)) continue;
+                    :
+                    :
+
+		}                
+                
+/// <summary>
+        /// 讀取文件
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public List<String> ReaderLine(string path)
+        {
+            StreamReader sr = new StreamReader(path, Encoding.Default);
+            List<String> lines = new List<string>();
+            string line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                lines.Add(line);
+            }
+            sr.Close();
+            return lines;
+        }
+        
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+                
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //c#生成大量隨機碼
+            StreamWriter swriter = new StreamWriter("1.txt", true);
+
+            for (int i = 0; i < 1000; i++)
+            {
+                swriter.Write(generateRandomString(20));
+                swriter.WriteLine();
+                Console.WriteLine("Number: {0}", i);
+            }
+
+            swriter.Flush();
+
+            swriter.Close();
+        }
+
+        static Random random = new Random();
+        static string generateRandomString(int length)
+        {
+            var chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < length; i++)
+            {
+                int index = random.Next(chars.Length);
+                result.Append(chars[index]);
+            }
+            return result.ToString();
+        }
+
+
+
+
+
+//============================================================================================================================
+
+
+
+
+
+
+//============================================================================================================================
+
+
+
+
+
+微軟 SAPI.SpVoice C# 使用方法 + 實例
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/192842.html
+
+
+
+//============================================================================================================================
+
+
+
+List 與 DataTable的比較
+
+綁定的顯示控件？
+DataGridView??
+
+
+List比較像陣列
+DataTable可以加標題 比較像EXCEL表單
+
+
+
+
+//============================================================================================================================
+
+
+
+
+
+            //數字前面補0或是其他符號
+
+            string s1 = "";
+            string s2 = "";
+            int a = 123;
+            s1 = a.ToString().PadLeft(32, '0');
+
+            richTextBox1.Text += "s1 " + s1 + "\n";
+
+
+            s2 = a.ToString().PadLeft(32, '#');
+
+            richTextBox1.Text += "s2 " + s2 + "\n";
+
+
+
+string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+                Day[Convert.ToInt16(DateTime.Now.DayOfWeek)];
+                
+                
+                
+            //comport訊息
+            if (serialPort2.IsOpen)
+            {
+                richTextBox1.Text += "BaudRate = " + serialPort2.BaudRate.ToString() + "\n";
+                richTextBox1.Text += "StopBits = " + serialPort2.StopBits.ToString() + "\n";
+                richTextBox1.Text += "DataBits = " + serialPort2.DataBits.ToString() + "\n";
+                richTextBox1.Text += "Parity = " + serialPort2.Parity.ToString() + "\n";
+                richTextBox1.Text += "ReadTimeout = " + serialPort2.ReadTimeout.ToString() + "\n";
+
+
+
+            }
+
+
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            decimal n1 = nudNo1.Value;  //n1=nudNo1的Value值
+            decimal n2 = nudNo2.Value;  //n2=nudNo2的Value值
+            //根據nudPoint.Value來格式化顯示的數值
+            lblAns.Text = (n1 + n2).ToString("F" + nudPoint.Value.ToString());
+        }
+
+
+//C#中List的使用
+
+        List<User> list1 = new List<User>();  
+  
+        list1.Add(new User(1, "testOne"));  
+  
+        list1.Add(new User(2, "testTwo"));  
+  
+        list1.Add(new User(3, "testThree"));  
+  
+  
+  
+
+private PlayState _palystate = PlayState.Closed;
+
+     public enum PlayState
+     {
+         Opne,
+         Playing,
+         Paused,
+         Stopped,
+         Closed,
+         None,
+         Error
+     }
+     
+     
+
+
+public class User  
+{  
+    private int userID = 0;  
+  
+    private string userName = string.Empty;  
+  
+    public int UserID  
+    {  
+        get  
+        {  
+            return this.userID;  
+        }  
+    }  
+  
+    public string UserName  
+    {  
+        get  
+        {  
+            return this.userName;  
+        }  
+    }  
+  
+    public User(int userID, string userName)  
+    {  
+        this.userID = userID;  
+  
+        this.userName = userName;  
+    }  
+}  
+
+P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
+
+
+                saveFileDialog1.CreatePrompt = true;	//如果指定不存在的文件，提示允許創建該文件
+                saveFileDialog1.OverwritePrompt = true;//如果用戶指定的文件名已存在，顯示警告
+
+
+存圖 
+                    System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
+                    switch (saveFileDialog1.FilterIndex)    		//選擇保存文件類型
+                    {
+                        case 1:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Jpeg); 		//保存為jpeg文件
+                            break;
+                        case 2:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Bmp);
+                            break;
+                        case 3:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Gif);
+                            break;
+                    }
+                    fs.Close();         					//關閉文件流
+
+
+
+        				
+//---Assembly 用法 ST-----------------------------------------------------------------------------------------------------------------------
+       
+using System.Reflection;
+
+            Assembly asm = Assembly.GetExecutingAssembly();
+            string name = asm.GetName().Name;
+            richTextBox1.Text += "name : " + name + "\n";
+
+
+private void AboutBox_Load(object sender, EventArgs e)
+{
+　AssemblyInfoClass myAssembly = new AssemblyInfoClass();
+　labelProductName.Text = "產品名稱：" + myAssembly.Product;
+　labelVersion.Text = "版本：" + myAssembly.Version;
+　labelCopyright.Text = "版權宣告：" + myAssembly.Copyright;
+　labelCompanyName.Text = "公司名稱：" + myAssembly.Company;
+　textBoxDescription.Text = "細部描述：" +
+　myAssembly.Description;
+}
+
+
+     
+           
+                string location = Assembly.GetExecutingAssembly().Location;
+                string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+ 
+            
+            
+
+
+一、獲取程序集版本
+label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+
+
+
+
+            //獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
+            string tempFile = Assembly.GetExecutingAssembly().FullName;
+
+
+
+
+C#讀取exe版本號
+
+	using System.Reflection;
+	using System.IO;
+	...
+	
+	Assembly currentAssembly = Assembly.LoadFile(currentAssemblyPath);
+	Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
+	
+	AssemblyName currentAssemblyName = currentAssembly.GetName();
+	AssemblyName updatedAssemblyName = updatedAssembly.GetName();
+	
+	// 比較版本號
+	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
+	{
+	    // 不需要更新
+	    return;
+	}
+	
+	using System.Reflection;
+	using System.IO;
+	...
+	
+	AssemblyName currentAssemblyName = AssemblyName.GetAssemblyName(currentAssemblyPath);
+	AssemblyName updatedAssemblyName = AssemblyName.GetAssemblyName(updatedAssemblyPath);
+	
+	// 比較版本
+	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
+	{
+	    // 不需要更新
+	    return;
+	}
+	
+	// 更新
+	File.Copy(updatedAssemblyPath, currentAssemblyPath, true);
+	
+
+
+
+C# 控制台如何播放音頻文件，
+using System.Reflection;
+using System.Media;
+ 
+10             string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();  
+11             Assembly assembly = Assembly.GetExecutingAssembly();
+12             SoundPlayer sp = new SoundPlayer(assembly.GetManifestResourceStream(namespaceName + ".Resources" + ".STEAMBLO.WAV"));
+13             Console.Write("快看，輪船到了~！");
+14             sp.Play();
+string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();   這段代碼是獲取前文檔命名空間的名稱的，也就是對應的“ThePlay”。
+
+Assembly assembly = Assembly.GetExecutingAssembly();   獲取包含當前執行的代碼的程序集。
+SoundPlayer sp = new SoundPlayer(assembly.GetManifestResourceStream(namespaceName + ".Resources" + ".STEAMBLO.WAV"));   
+namespaceName 是上面獲取的空間名稱，Resource是音頻文件夾的名稱，STEAMBLO.WAV 是對應的音頻文件！ 區分大小寫！ 不然會導致獲取為空！ 遺憾的是，只支持.wav格式的音頻文件！
+
+什麼？還是播放不了？
+
+
+            
+using System.Reflection;
+            //取得 namespaceName
+            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
+
+            richTextBox1.Text += namespaceName + "\n";
+
+            richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
+
+
+一、獲取程序集版本
+label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+
+//---Assembly 用法 SP-----------------------------------------------------------------------------------------------------------------------
+
+
+
+獲取文件的版本信息:
+FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo("D:\\TEST.DLL");
+textBox1.Text="版本號: " + myFileVersionInfo1.FileVersion;
+
+
+
+格式化字符串，向長度小於30的字符串末尾添加特定字符，補足n個字符，使用String類的PadRight(int,char)方法：
+
+String str="1234";
+str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補足30個字符
+
+
+
+
+
+
+
+
+鼠標相關的事件大致有六種，分別是 ：
+"MouseHover"、"MouseLeave"、"MouseEnter"、"MouseMove"、"MouseDown"和"MouseUp"。
+
+
+對於上述的前三個事件，是用以下語法來定義的：
+"組件名稱"."事件名稱"+= new System.EventHandler（"事件名稱"）；
+下面是程序中具體實現代碼：
+button1.MouseLeave += new Syetem.EvenHandler（button1_MLeave）；
+
+
+//計算耗時任務所需的秒數
+
+　　public int GetTimeSpan(DateTime dtStart, DateTime dtEnd)
+　　{
+　　TimeSpan tsStart = new TimeSpan(dtStart.Ticks);
+　　TimeSpan tsEnd = new TimeSpan(dtEnd.Ticks);
+　　TimeSpan ts = tsEnd.Subtract(tsStart).Duration();//秒
+　　//dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
+　　return ts.Seconds;
+　　}    
+        
+
+
+其中，getSubNode為一方法，用於獲取子目錄，以創建目錄樹節點，參數：PathName為獲取的子目錄在此節點下創建子節點，參數isEnd：結束標志,true則結束。
+
+private void getSubNode(TreeNode PathName,bool isEnd)
+
+vcs_Splitter
+
+然後，添加TreeView控件，命名為treeView，Dock屬性設為Left，再添加Splitter控件，同樣將Dock屬性設為Left。最後添加ListView控件，命名為listView，Dock屬性設為Fill。
+　　　Splitter(用於允許用戶調整TreeView和ListView的大小)；
+
+
+
+
+            //顯示詳細信息
+            listView1.View = View.Details;
+
+            //選中整行
+            listView1.FullRowSelect = true;
+
+            //顯示checkbox
+            listView1.CheckBoxes = true;
+
+                //添加項
+                listView1.Items.Add(zhuxiang);
+
+            if (listView1.SelectedItems.Count > 0)
+            {
+                MessageBox.Show(listView1.SelectedItems[0].Text);
+            }
+
+            string s = "";
+
+            foreach (ListViewItem item in listView1.CheckedItems)
+            {
+                s += item.Text + "--";
+            }
+
+            MessageBox.Show(s);
+
+
+        //實現控件中捕獲按鍵 只要補上這個函數就好
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            const int WM_KEYDOWN = 0x100;
+            const int WM_SYSKEYDOWN = 0x104;
+            if ((msg.Msg == WM_KEYDOWN) || (msg.Msg == WM_SYSKEYDOWN))
+            {
+                switch (keyData)
+                {
+                    case Keys.Down:
+                        this.Text = "向下鍵已經被捕捉";
+                        break;
+                    case Keys.Up:
+                        this.Text = "向上鍵已經被捕捉";
+                        break;
+                    case Keys.Left:
+                        this.Text = "向左鍵已經被捕捉";
+                        break;
+                    case Keys.Right:
+                        this.Text = "向右鍵已經被捕捉";
+                        break;
+                    case Keys.Home:
+                        this.Text = "Home 鍵已經被捕捉";
+                        break;
+                    case Keys.End:
+                        this.Text = "End 鍵已經被捕捉";
+                        break;
+                }
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
+
+
+
+停止一個線程
+
+Thread.Sleep 方法能夠在一個固定周期類停止一個線程
+
+thread.Sleep(); 
+ 
+設定線程優先級
+線程類中的ThreadPriority 屬性是用來設定一個ThreadPriority的優先級別。線程優先級別包括Normal, AboveNormal, BelowNormal, Highest, and Lowest幾種。
+	
+thread.Priority = ThreadPriority.Highest; 
+
+掛起一個線程
+調用線程類的Suspend()方法將掛起一個線程直到使用Resume()方法喚起她。在掛起一個線程起前應該判斷線程是否在活動期間。
+
+if (thread.ThreadState = ThreadState.Running )
+{
+thread.Suspend();
+} 
+
+喚起一個線程
+
+通過使用Resume()方法可以喚起一個被掛起線程。在掛起一個線程起前應該判斷線程是否在掛起期間，如果
+線程未被掛起則方法不起作用。
+
+
+if (thread.ThreadState = ThreadState.Suspended )
+{
+thread.Resume();
+} 
+
+
+
+
+
+
+
+//------------------------------------------------------
+
+
+Thread.Join()用法的理解
+
+
+指在一線程裡面調用另一線程join方法時，表示將本線程阻塞直至另一線程終止時再執行  
+  比如  
+
+ 1using System;
+ 2
+ 3namespace TestThreadJoin
+ 4{
+ 5    class Program
+ 6    {
+ 7        static void Main()
+ 8        {
+ 9            System.Threading.Thread x = new System.Threading.Thread(new System.Threading.ThreadStart(f1));
+10            x.Start();
+11            Console.WriteLine("This is Main.{0}", 1);
+12            x.Join();
+13            Console.WriteLine("This is Main.{0}", 2);
+14            Console.ReadLine();
+15        }
+16        static void f1()
+17        {
+18            System.Threading.Thread y = new System.Threading.Thread(new System.Threading.ThreadStart(f2));
+19            y.Start();
+20            y.Join();
+21            Console.WriteLine("This is F1.{0}",1);
+22        }
+23
+24        static void f2()
+25        {
+26            Console.WriteLine("This is F2.{0}", 1);
+27        }
+28    }
+29}
+
+
+這兒有三個線程在處理(包括主線程),大家可看看執行結果.
+結果:
+This is Main.1
+This is F2.1
+This is F1.1
+This is Main.2
+
+如果: 注釋//  x.Join();
+結果:
+This is Main.1
+This is Main.2
+This is F2.1
+This is F1.1
+ 
+
+
+
+EXIF，是英文Exchangeable Image File
+
+
+
+
+
+
+
+
+
+哪些事需要快捷鍵??
+全螢幕截圖
+計算機
+我的時鐘、倒數計時鐘、
+Drap
+
+
+
+vcs
+非強制回應 Modeless
+強制回應 Modal
+
+非強制回應表單	Form2 f2 = new Form2();	f2.Show();
+
+Form1關閉Form2   f2.Close();
+Form1隱藏Form2   f2.Hide();
+
+
+強制回應表單	Form2 f2 = new Form2();	f2.ShowDialog();
+可以取得回應
+if(f3.DialogResult == DialogREsult.OK)
+  ....
+  
+
+
+
+
+
+vcs richtextbox2
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            richTextBox1.Focus();
+        }
+
+        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Control.ModifierKeys == Keys.Control)
+            {
+                if (e.KeyCode == Keys.F)
+                {
+                    richTextBox2.Text += "§A«�trl + F\n";
+                }
+
+
+            }
+
+
+        }
+
+
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //html轉txt
+            //http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184774.html
+        }
+
+        /// C#過濾html標簽
+        /// 用正則表達式來做html轉txt
+        public static string Html2Text(string htmlStr)
+        {
+            if (String.IsNullOrEmpty(htmlStr))
+            {
+                return "";
+            }
+            string regEx_style = "<style[^>]*?>[\\s\\S]*?<\\/style>"; //定義style的正則表達式
+            string regEx_script = "<script[^>]*?>[\\s\\S]*?<\\/script>"; //定義script的正則表達式
+            string regEx_html = "<[^>]+>"; //定義HTML標簽的正則表達式
+            htmlStr = Regex.Replace(htmlStr, regEx_style, "");//刪除css
+            htmlStr = Regex.Replace(htmlStr, regEx_script, "");//刪除js
+            htmlStr = Regex.Replace(htmlStr, regEx_html, "");//刪除html標記
+            htmlStr = Regex.Replace(htmlStr, "\\s*|\t|\r|\n", "");//去除tab、空格、空行
+            htmlStr = htmlStr.Replace(" ", "");
+            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
+            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
+            return htmlStr.Trim();
+        }
+
+
+
+　　
+            	//讀取一檔
+                FileStream fs = new FileStream(targetPath, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                br.BaseStream.Seek(0, SeekOrigin.Begin); //將指針設到開頭
+                while (br.BaseStream.Position < br.BaseStream.Length)
+                {
+                    try
+                    {
+                        Console.WriteLine(br.ReadString());
+                    }
+                    catch (EndOfStreamException e)
+                    {
+                        Console.WriteLine("已經到了結尾 {0}", e.ToString());
+                    }
+                }
+                br.Close();
+                fs.Close();
+
+
+
+            //#畫虛線
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Pen p = new Pen(Color.Red, 5);
+            p.DashStyle = DashStyle.Custom;//虛線的樣式
+            p.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
+            g.DrawLine(p, 0, 0, this.pictureBox1.Width - 1, this.pictureBox1.Height - 1);
+
+
+            //動態驗證碼變成靜態
+            string filename1 = @"C:\______test_files\__RW\_gif\run.gif";
+
+            Image imgGif = Image.FromFile(filename1);
+            FrameDimension ImgFrmDim = new FrameDimension(imgGif.FrameDimensionsList[0]);
+            System.Drawing.Bitmap bitmap1 = new Bitmap(imgGif.Size.Width, imgGif.Size.Height);
+            int nFrameCount = imgGif.GetFrameCount(ImgFrmDim);
+            for (int i = 0; i < nFrameCount; i++)
+            {
+                imgGif.SelectActiveFrame(ImgFrmDim, i);
+                System.Drawing.Bitmap nbp = new Bitmap(imgGif);
+                Color dd = nbp.GetPixel(1, 1);
+                if (i == 0)
+                {
+                    for (int x = 0; x < nbp.Width; x++)
+                    {
+                        for (int y = 0; y < nbp.Height; y++)
+                        {
+                            bitmap1.SetPixel(x, y, dd);
+                        }
+                    }
+                }
+                for (int x = 0; x < nbp.Width; x++)
+                {
+                    for (int y = 0; y < nbp.Height; y++)
+                    {
+                        Color c = nbp.GetPixel(x, y);
+                        if (c == dd)
+                            continue;
+                        bitmap1.SetPixel(x, y, c);
+                    }
+                }
+            }
+            string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            try
+            {
+                //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                bitmap1.Save(filename2, ImageFormat.Bmp);
+                //bitmap1.Save(@file3, ImageFormat.Png);
+
+                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+
+
+
+讀取網頁 回傳資料 看看是甚麼樣子 xml? html?
+http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding
+
+
+全屏隨機位置顯示圖片
+
+Form1之屬性
+StartPosition 改 CenterScreen
+WindowState 改 Maximized
+
+ControlBox 改 False
+MaximizeBox 改 False
+MinimizeBox 改 False
+ShowIcon 改 False
+ShowInTaskbar 改 False
+
+TopMost 改 True
+
+KeyPreview 改 True
+
+Form1加KeyDown
+
+
+// C#获取页面显示的内容 
+private string GetContentFromUrll(string _requestUrl)
+    {
+        string _StrResponse = "";
+        HttpWebRequest _WebRequest = (HttpWebRequest)WebRequest.Create(_requestUrl);
+        _WebRequest.Method = "GET";
+        WebResponse _WebResponse = _WebRequest.GetResponse();
+        StreamReader _ResponseStream = new StreamReader(_WebResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("gb2312"));
+        _StrResponse = _ResponseStream.ReadToEnd();
+        _WebResponse.Close();
+        _ResponseStream.Close();
+        return _StrResponse;
+    }
+
+ 
+ 
+ 
+//提取HTML代碼中文字的C#函數
+
+/// <summary>
+  /// 去除HTML標記
+  /// </summary>
+  /// <param name="strHtml">包括HTML的源碼 </param>
+  /// <returns>已經去除後的文字</returns>
+  public static string StripHTML(string strHtml)
+  {
+   string [] aryReg ={
+          @"<script[^>]*?>.*?</script>",
+
+          @"<(\/\s*)?!?((\w+:)?\w+)(\w+(\s*=?\s*(([""'])(\\[""'tbnr]|[^\7])*?\7|\w+)|.{0})|\s)*?(\/\s*)?>",
+          @"([\r\n])[\s]+",
+          @"&(quot|#34);",
+          @"&(amp|#38);",
+          @"&(lt|#60);",
+          @"&(gt|#62);", 
+          @"&(nbsp|#160);", 
+          @"&(iexcl|#161);",
+          @"&(cent|#162);",
+          @"&(pound|#163);",
+          @"&(copy|#169);",
+          @"&#(\d+);",
+          @"-->",
+          @"<!--.*\n"
+
+         };
+
+   string [] aryRep = {
+           "",
+           "",
+           "",
+           "\"",
+           "&",
+           "<",
+           ">",
+           " ",
+           "\xa1",//chr(161),
+           "\xa2",//chr(162),
+           "\xa3",//chr(163),
+           "\xa9",//chr(169),
+           "",
+           "\r\n",
+           ""
+          };
+
+   string newReg =aryReg[0];
+   string strOutput=strHtml;
+   for(int i = 0;i<aryReg.Length;i++)
+   {
+    Regex regex = new Regex(aryReg[i],RegexOptions.IgnoreCase );
+    strOutput = regex.Replace(strOutput,aryRep[i]);
+   }
+
+   strOutput.Replace("<","");
+   strOutput.Replace(">","");
+   strOutput.Replace("\r\n","");
+
+
+   return strOutput;
+  }
+
+
+
+
+//c# 生成SHA1加密字符串，
+ 
+
+從網上找到的一種加密代碼：
+
+         var enstr ="abcdefg";
+            var strRes = Encoding.Default.GetBytes(enstr);
+            HashAlgorithm iSha = new SHA1CryptoServiceProvider();
+            strRes = iSha.ComputeHash(strRes);
+            var enText = new StringBuilder();
+            foreach (byte iByte in strRes)
+            {
+                enText.AppendFormat("{0:x2}", iByte);
+            }    
+ 
+
+還有另一種SHA1加密，我用來做騰訊雲簽名：
+
+ 　　　　　　 HMACSHA1 hmacsha1 = new HMACSHA1(Encoding.UTF8.GetBytes(SecretKey));
+            byte[] rstRes = hmacsha1.ComputeHash(Encoding.UTF8.GetBytes(str));
+            string strs =  Convert.ToBase64String(rstRes);
+            return System.Web.HttpUtility.UrlEncode(strs);
+
+ 
+
+
+
+ 
+ 
+ 
+                     
+
+使用icon
+this.Icon = new Icon(@"C:\______test_files\_icon\唐.ico");
+
+
+使用鼠標
+this.Cursor = new Cursor(xxxxxx);
+
+
+
+
+
+ArrayList list = new ArrayList();
+
+list.Add("alive");
+
+list.Add("silver");
+
+list.Add("dog");
+
+list.Add("Ftp");
+
+d.SetData("para", list);
+
+//將制定的值賦值給應用程序域的屬性
+
+foreach (string s in (ArrayList)d.GetData("para"))
+
+{// 獲取存在當前應用程序域中的值
+
+Console.WriteLine("you will see" + s);
+
+}
+
+
+
+try by sugar
+C#如何獲取遠程磁盤上的剩余空間
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/191690.html
+
+
+
+C# 條形碼操作【源碼下載】
+
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185924.html
+
+
+用C#獲取計算機磁盤空間
+在System.IO命名空間下的DriveInfo類的GetDrives()方法可以用來獲得計算機上的所有邏輯驅動器的名稱。DriveInfo類的TotalSize屬性可義獲得磁盤的空間大小。主要代碼如下。
+private void Form1_Load(object sender, EventArgs e)
+{
+    System.IO.DriveInfo[] drive=System.IO.DriveInfo.GetDrives();
+    for (int i = 0; i < drive.Length; i++)
+    {
+        comboBox1.Items.Add(drive[i].Name);
+    }
+}
+private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+{
+    System.IO.DriveInfo[] drive = System.IO.DriveInfo.GetDrives();
+    for (int i = 0; i < drive.Length; i++)
+    {
+        if (comboBox1.SelectedItem.ToString() == drive[i].Name)
+        {
+            textBox1.Text = Convert.ToString(drive[i].TotalSize/ 1024);
+        }
+    }
+}
+
+
+
+
+網站的標識圖片怎麼修改？
+
+
+放favicon.ico在網站更目錄或者單獨頁面用link標簽指定圖標也行
+
+ <link rel="SHORTCUT ICON" href="/xxx/xx.ico"/>
+
+
+
+C# 網頁抓取類
+
+//--需要引用 using System.Net 以及 using System.IO;
+private string GetContentFromUrll(string _requestUrl)
+        {
+            string _StrResponse ="";
+            HttpWebRequest _WebRequest = ( HttpWebRequest )WebRequest.Create( _requestUrl );
+            _WebRequest.Method = "GET";
+            WebResponse _WebResponse = _WebRequest.GetResponse();
+            StreamReader _ResponseStream = new StreamReader( _WebResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("gb2312"));
+            _StrResponse = _ResponseStream.ReadToEnd();
+            _WebResponse.Close(); 
+            _ResponseStream.Close();
+            return _StrResponse;        
+        }
+        
+        
+//獲取文件的版本信息:
+
+FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo("D:\\TEST.DLL");
+textBox1.Text="版本號: " + myFileVersionInfo1.FileVersion;
+
+
+
+//格式化字符串，向長度小於30的字符串末尾添加特定字符，補足n個字符，使用String類的PadRight(int,char)方法：
+
+String str="1234";
+str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補足30個字符
+
+
+
+
+
+首先准備一個畫板:
+
+創建一個畫板主要有3種方式:
+
+A: 在窗體或控件的Paint事件中直接引用Graphics對象
+
+B: 利用窗體或某個控件的CreateGraphics方法
+
+C: 從繼承自圖像的任何對象創建Graphics對象
+
+
+
+在C＃環境下的多態就是重載和覆寫。
+在一個類中，兩個以上的方法有著相同的名字，不同的參數類型，但是返回值可以不相同，
+
+覆寫就是子類為了實現某一個功能而重復定義父類的某個方法，覆寫方法比重載方法要更加嚴格：只有虛方法和抽象方法才可以被覆寫，同時覆寫時必須滿足一下幾個條件：相同的方法名字，參數列表和返回值類型，缺一不可。
+
+
+　　18、把字符轉為數字，查代碼點，注意是單引號。
+
+　　(int)'字符'
+
+　　如：
+
+Response.Write((int)'中'); //結果為中字的代碼：20013
+
+　　19、把數字轉為字符，查代碼代表的字符：(char)代碼
+
+　　如：
+
+Response.Write((char)22269); //返回“國”字。
+
+　　26、在字串左（或右）加空格或指定char字符，使字串達到指定長度：PadLeft()、PadRight() ，如：
+
+＜%
+string str1="中國人";
+str1=str1.PadLeft(10,'1'); //無第二參數為加空格
+Response.Write(str1); //結果為“1111111中國人” ， 字串長為10
+%＞
+
+　　字符型轉換 轉為字符串
+　　12345.ToString("n"); //生成 12,345.00
+　　12345.ToString("C"); //生成 ￥12,345.00
+　　12345.ToString("e"); //生成 1.234500e+004
+　　12345.ToString("f4"); //生成 12345.0000
+　　12345.ToString("x"); //生成 3039 (16進制)
+　　12345.ToString("p"); //生成 1,234,500.00%
+
+　　C#用多種修飾符來表達類的不同性質。根據其保護級C#的類有五種不同的限制修飾符：
+    public可以被任意存取；
+    protected只可以被本類和其繼承子類存取；
+    internal只可以被本組合體（Assembly）內所有的類存取，組合體是C#語言中類被組合後的邏輯單位和物理單位，其編譯後的文件擴展名往往是“.DLL”或“.EXE”。
+    protected internal唯一的一種組合限制修飾符，它只可以被本組合體內所有的類和這些類的繼承子類所存取。
+    private只可以被本類所存取。
+    
+
+　　如果不是嵌套的類，命名空間或編譯單元內的類只有public和internal兩種修飾。
+
+　　new修飾符只能用於嵌套的類，表示對繼承父類同名類型的隱藏。
+
+abstract用來修飾抽象類，表示該類只能作為父類被用於繼承，而不能進行對象實例化。抽象類可以包含抽象的成員，但這並非必須。abstract不能和new同時用。
+
+sealed用來修飾類為密封類，阻止該類被繼承。同時對一個類作abstract和sealed的修飾是沒有意義的，也是被禁止的。
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+//C# 播放聲音
+﻿﻿
+
+1.播放系統事件聲音
+　　 System.Media.SystemSounds.Asterisk.Play();
+　　 System.Media.SystemSounds.Beep.Play();
+　　 System.Media.SystemSounds.Exclamation.Play();
+　　 System.Media.SystemSounds.Hand.Play();
+　　 System.Media.SystemSounds.Question.Play();
+
+2.使用System.Media.SoundPlayer播放.wav格式聲音
+　　 SoundPlayer player = new SoundPlayer();
+player.SoundLocation = Application.StartupPath + "\\" + "sounds/WallHit.wav";
+player.Load(); //同步加載聲音
+player.Play(); //啟用新線程播放
+//player.PlayLooping(); //循環播放模式
+//player.PlaySync(); //UI線程播放
+
+3.利用Windows Media Player
+
+加載COM組件:ToolBox->Choose Items->COM Components->Windows Media Player
+
+把Windows Media Player控件拖放到Winform窗體中，把axWindowsMediaPlayer1中URL屬性設置為MP3或是AVI的文件路徑。
+
+
+4.MCI Command String多媒體設備的程序接口
+
+using System.Runtime.InteropServices;
+　　public static uint SND_ASYNC = 0x0001;
+　　public static uint SND_FILENAME = 0x00020000;
+　　[DllImport("winmm.dll")]
+　　public static extern uint mciSendString(string lpstrCommand,
+　　string lpstrReturnString, uint uReturnLength, uint hWndCallback);
+　　public void Play()
+　　{
+　　　　mciSendString(@"close temp_alias", null, 0, 0);
+　　　　mciSendString(@"open " "路徑.mp3"" alias temp_alias", null, 0, 0);
+　　　　mciSendString("play temp_alias repeat", null, 0, 0);
+　　}
+
+關於MCI Command String多媒體設備的程序接口的詳細資料，可以參看http://blog.csdn.net/psongchao/article/details/1487788
+
+  
+  
+
+
+
+用WMI查serial port可否知道是ims的comport，
+若可以知道，直接連線看看～～～
+
+
+
+
+ListView添加內容範例
+        /// <summary>
+        /// listview1 顯示搜索主機
+        /// </summary>
+        private void listLanHost()
+        {
+            listView1.View = View.List;
+
+            ListViewItem aa;
+            for (int i = 0; i < 255; i++)
+            {
+                if (LanHost[i, 0] != "")
+                {
+                    aa = new ListViewItem();
+                    aa.Text = LanHost[i, 1];
+                    aa.Tag = LanHost[i, 0];
+                    listView1.Items.Add(aa);
+                }
+            }
+
+        }
+        
+        
+        
+        
+
+
+//計算耗時任務所需的秒數
+
+　　public int GetTimeSpan(DateTime dtStart, DateTime dtEnd)
+
+　　{
+
+　　TimeSpan tsStart = new TimeSpan(dtStart.Ticks);
+
+　　TimeSpan tsEnd = new TimeSpan(dtEnd.Ticks);
+
+　　TimeSpan ts = tsEnd.Subtract(tsStart).Duration();//秒
+
+　　//dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
+
+　　return ts.Seconds;
+
+　　}      
+
+
+MemoryStream 可以seek
+                    MemoryStream ms = new MemoryStream();
+                    XmlWt = new XmlTextWriter(ms, Encoding.Unicode);
+                    //獲取ds中的數據
+                    dt.WriteXml(XmlWt);
+                    int count = (int)ms.Length;
+                    byte[] temp = new byte[count];
+                    ms.Seek(0, SeekOrigin.Begin);
+                    ms.Read(temp, 0, count);
+                    //返回Unicode編碼的文本
+
+                        ms.Close();
+                        ms.Dispose();
+                        
+     MemoryStream stream = null;
+     XmlTextWriter writer = null;
+     try
+     {
+         stream = new MemoryStream();
+         writer = new XmlTextWriter(stream, Encoding.Default);
+         xmlDS.WriteXml(writer);
+         int count = (int)stream.Length;
+         byte[] arr = new byte[count];
+         stream.Seek(0, SeekOrigin.Begin);
+         stream.Read(arr, 0, count);
+         UTF8Encoding utf = new UTF8Encoding();
+         return utf.GetString(arr).Trim();
+         
+
+         /// <summary>
+        /// 實現bitmap到ico的轉換
+        /// </summary>
+        /// <param name="bitmap">原圖</param>
+        /// <returns>轉換後的指定大小的圖標</returns>
+        private Icon ConvertBitmap2Ico(Bitmap bitmap)
+        {
+            Bitmap icoBitmap = new Bitmap(bitmap, size);//創建制定大小的原位圖
+
+            //獲得原位圖的圖標句柄
+            IntPtr hIco = icoBitmap.GetHicon();
+            //從圖標的指定WINDOWS句柄創建Icon
+            Icon icon = Icon.FromHandle(hIco);
+
+            return icon;
+        }
+        
+        
+            string m_fileName = DateTime.Now.ToFileTime().ToString() + ".jpg";
+            richTextBox1.Text += m_fileName + "\n";
+
+ toolStripStatusLabel1.Text = "當前時間:" + DateTime.Now.ToLongTimeString(); 
+ 
+ 
+ 
+       
+
+    
+            
+
+先使用無符號字節數組存放數據庫對應的數據集中表的image類型字段的值。例如：
+
+byte[] bytes= (byte[]) image類型字段值
+
+
+
+//在C#中調用windows API函數
+
+using System.Runtime.InteropServices;
+
+/// <summary>
+/// 打開和關閉CD托盤.
+/// </summary>
+[DllImport("winmm.dll" , EntryPoint="mciSendString", CharSet=CharSet.Auto)]
+public static extern int mciSendString (string lpstrCommand,string lpstrReturnstring ,int uReturnLength,int hwndCallback);
+
+/// <summary>
+/// 顯示和隱藏鼠標指針.
+/// </summary>
+[DllImport("user32.dll", EntryPoint="ShowCursor", CharSet=CharSet.Auto)]
+public static extern int ShowCursor(int bShow);
+
+/// <summary>
+/// 清空回收站.
+/// </summary>
+[DllImport("shell32.dll", EntryPoint="SHEmptyRecycleBin", CharSet=CharSet.Auto)]
+public static extern long SHEmptyRecycleBin(IntPtr hwnd, string pszRootPath, long dwFlags);
+
+/// <summary>
+/// 打開浏覽器
+/// </summary>
+[DllImport("shell32.dll", EntryPoint="ShellExecute", CharSet=CharSet.Auto)]
+public static extern int ShellExecute(IntPtr hwnd,string lpOperation,string lpFile,string lpParameters,string lpDirectory,int nShowCmd);
+
+/// <summary>
+/// 最大化窗口，最小化窗口，正常大小窗口；
+/// </summary>
+[DllImport("user32.dll", EntryPoint="ShowWindow", CharSet=CharSet.Auto)]
+public static extern int ShowWindow(IntPtr hwnd,int nCmdShow);
+
+
+
+//打開CD托盤：
+long lngReturn = ApiCalls.mciSendString("set CDAudio door open", strReturn, 127, 0);
+//關閉CD托盤：
+long lngReturn = ApiCalls.mciSendString("set CDAudio door closed", strReturn, 127, 0);
+//在應用程序窗體中顯示鼠標指針：
+ApiCalls.ShowCursor(1);
+//在應用程序窗體中隱藏鼠標指針：
+ApiCalls.ShowCursor(0);
+//清空回收站：
+ApiCalls.SHEmptyRecycleBin(Form.ActiveForm.Handle,"",0x00000000);
+//打開浏覽器窗口，textBox1.Text中表示要訪問的URL地址：
+Long lngReturn= ApiCalls.ShellExecute(Form.ActiveForm.Handle,"Open",textBox1.Text,"","",1);
+//最大化窗口：
+ApiCalls.ShowWindow(Form.ActiveForm.Handle,3);
+//最小化窗口：
+ApiCalls.ShowWindow(Form.ActiveForm.Handle,2);
+//恢復正常大小窗口：
+ApiCalls.ShowWindow(Form.ActiveForm.Handle,1);
+ 
+
+
+//隨機顏色如下
+
+public static Color GetRandomColor()
+{
+    Random randomFirst = new Random((int)DateTime.Now.Ticks); 
+    System.Threading.Thread.Sleep(300);
+    Random randomSencond = new Random((int)DateTime.Now.Ticks);
+    System.Threading.Thread.Sleep(300);
+    Random randomThird = new Random((int)DateTime.Now.Ticks);
+    int intRed = randomFirst.Next(256);
+    int intGreen = randomSencond.Next(256);
+    int intBlue = randomThird.Next(256);
+    return Color.FromArgb(intRed, intGreen, intBlue);
+}
+        
+
+
+
+ADO.Net方面的：
+八、連接Access數據庫：
+using System;
+using System.Data;
+using System.Data.OleDb;
+
+class TestADO
+{
+    static void Main(string[] args)
+    {
+        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:\test.mdb;
+        string strSQL = SELECT * FROM employees ;
+
+        OleDbConnection conn = new OleDbConnection(strDSN);
+        OleDbCommand cmd = new OleDbCommand( strSQL, conn );
+        OleDbDataReader reader = null;
+        try
+        {
+            conn.Open();
+            reader = cmd.ExecuteReader();
+            while (reader.Read() )
+            {
+                Console.WriteLine(First Name:{0}, Last Name:{1}, reader[FirstName], reader[LastName]);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+} 
+
+九、連接SQL Server數據庫：
+using System;
+using System.Data.SqlClIEnt;
+
+public class TestADO
+{
+    public static void Main()
+    {
+        SqlConnection conn = new SqlConnection(Data Source=localhost; Integrated Security=SSPI; Initial Catalog=pubs);
+
+SqlCommand  cmd = new SqlCommand(SELECT * FROM employees, conn);
+        try
+        {        
+            conn.Open();
+
+            SqlDataReader reader = cmd.ExecuteReader();            
+            while (reader.Read())
+            {
+                Console.WriteLine(First Name: {0}, Last Name: {1}, reader.GetString(0), reader.GetString(1));
+            }
+        
+            reader.Close();
+            conn.Close();
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(Exception Occured -->> {0},e);
+        }        
+    }
+}
+
+十、從SQL內讀數據到XML：
+using System;
+using System.Data;
+using System.XML;
+using System.Data.SqlClIEnt; 
+using System.IO; 
+
+public class TestWriteXML
+{ 
+    public static void Main()
+    { 
+
+        String strFileName=c:/temp/output.XML;
+
+        SqlConnection conn = new SqlConnection(server=localhost;uid=sa;pwd=;database=db);
+
+        String strSql = SELECT FirstName, LastName FROM employees; 
+
+        SqlDataAdapter adapter = new SqlDataAdapter(); 
+
+        adapter.SelectCommand = new SqlCommand(strSql,conn);
+
+        // Build the DataSet
+        DataSet ds = new DataSet();
+
+        adapter.Fill(ds, employees);
+
+        // Get a FileStream object
+        FileStream fs = new FileStream(strFileName,FileMode.OpenOrCreate,FileAccess.Write);
+
+        // Apply the WriteXml method to write an XML document
+        ds.WriteXML(fs);
+
+        fs.Close();
+
+    }
+}
+
+十一、用ADO添加數據到數據庫中：
+using System;
+using System.Data;   
+using System.Data.OleDb;   
+
+class TestADO
+{  
+    static void Main(string[] args)  
+
+
+
+{  
+        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;DataSource=c: est.mdb;  
+        string strSQL = INSERT INTO Employee(FirstName, LastName) VALUES(''FirstName'', ''LastName'') ;  
+                   
+        // create Objects of ADOConnection and ADOCommand   
+        OleDbConnection conn = new OleDbConnection(strDSN);  
+        OleDbCommand cmd = new OleDbCommand( strSQL, conn );  
+        try  
+        {  
+            conn.Open();  
+            cmd.ExecuteNonQuery();  
+        }  
+        catch (Exception e)  
+        {  
+            Console.WriteLine(Oooops. I did it again: {0}, e.Message);  
+        }  
+        finally  
+        {  
+            conn.Close();  
+        }          
+    } 
+}  
+
+十 二、使用OLEConn連接數據庫：
+using System;
+using System.Data;   
+using System.Data.OleDb;   
+
+class TestADO
+{  
+    static void Main(string[] args)  
+    {  
+        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;DataSource=c: est.mdb;  
+        string strSQL = SELECT * FROM employee ;  
+
+        OleDbConnection conn = new OleDbConnection(strDSN);
+        OleDbDataAdapter cmd = new OleDbDataAdapter( strSQL, conn ); 
+
+        conn.Open();
+        DataSet ds = new DataSet();
+        cmd.Fill( ds, employee );
+        DataTable dt = ds.Tables[0];
+
+        foreach( DataRow dr in dt.Rows )
+        {
+            Console.WriteLine(First name: + dr[FirstName].ToString() + Last name: + dr[LastName].ToString());
+        }
+        conn.Close();  
+    } 
+}  
+十三、讀取表的屬性：
+
+using System;
+using System.Data;   
+using System.Data.OleDb;   
+
+class TestADO
+{  
+    static void Main(string[] args)  
+    {  
+        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;DataSource=c: est.mdb;  
+        string strSQL = SELECT * FROM employee ;  
+
+        OleDbConnection conn = new OleDbConnection(strDSN);
+        OleDbDataAdapter cmd = new OleDbDataAdapter( strSQL, conn ); 
+
+        conn.Open();
+        DataSet ds = new DataSet();
+        cmd.Fill( ds, employee );
+        DataTable dt = ds.Tables[0];
+
+        Console.WriteLine(FIEld Name DataType Unique AutoIncrement AllowNull);
+        Console.WriteLine(==================================================================);
+        foreach( DataColumn dc in dt.Columns )
+        {
+            Console.WriteLine(dc.ColumnName+ , +dc.DataType + ,+dc.Unique + ,+dc.AutoIncrement+ ,+dc.AllowDBNull );
+        }
+        conn.Close();  
+    } 
+} 
+
+
+十六、運行時顯示自己定義的圖標：
+//load icon and set to form
+System.Drawing.Icon ico = new System.Drawing.Icon(@c: empapp.ico);
+this.Icon = ico;
+
+
+網絡方面的：
+十八、取得IP地址：
+using System;
+using System.Net;
+
+class GetIP
+{
+     public static void Main()
+     {
+         IPHostEntry ipEntry = Dns.GetHostByName (localhost);
+         IPAddress [] IpAddr = ipEntry.AddressList;
+         for (int i = 0; i < IpAddr.Length; i++)
+         { 
+             Console.WriteLine (IP Address {0}: {1} , i, IpAddr.ToString ());
+         }
+    }
+}
+十九、取得機器名稱：
+using System;
+using System.Net;
+
+class GetIP
+{
+    public static void Main()
+    {
+          Console.WriteLine (Host name : {0}, Dns.GetHostName());
+    }
+}
+
+十一、根據IP地址得出機器名稱：
+using System;
+using System.Net;
+
+class ResolveIP
+{
+     public static void Main()
+     {
+         IPHostEntry ipEntr.Resolve(172.29.9.9);
+         Console.WriteLine (Host name : {0}, ipEntry.HostName);         
+     }
+}
+
+
+
+Web Service方面的：
+二十五、一個Web Service的小例子：
+<% @WebService Language=C# Class=TestWS %>
+
+using System.Web.Services;
+
+public class TestWS : System.Web.Services.WebService
+{
+    [WebMethod()]
+    public string StringFromWebService()
+    {
+        return This is a string from web service.;
+    }
+} 
+
+
+
+
+//將圖片放入byte數組
+
+Image image = Image.FromFile(file);
+System.IO.MemoryStream s = new System.IO.MemoryStream();
+image.Save(s, image.RawFormat);
+Byte[] bfye = s.ToArray();
+
+
+
+
+
+        private string GetDriveData(long data)//将磁盘大小的单位由byte转化为G
+        {
+            return (data / Convert.ToDouble(1024) / Convert.ToDouble(1024) / Convert.ToDouble(1024)).ToString("0.00");
+        }
+
+          
+
+ 
+ 
+
+
+C# 控制台程序設置字體顏色
+
+
+Console.BackgroundColor = ConsoleColor.Blue; //設置背景色
+Console.ForegroundColor = ConsoleColor.White; //設置前景色，即字體顏色
+Console.WriteLine(“第一行白藍.”);
+
+Console.ResetColor(); //將控制台的前景色和背景色設為默認值
+Console.BackgroundColor = ConsoleColor.Green;
+Console.ForegroundColor = ConsoleColor.DarkGreen;
+string value = “第三行 綠暗綠”;
+Console.WriteLine(value.PadRight(Console.WindowWidth-value.Length)); //設置一整行的背景色
+
+        
+
+
+        public Bitmap bmpobj; 
+ 
+        public VerifyCode(Bitmap pic) 
+        { 
+            bmpobj = new Bitmap(pic);    //轉換為Format32bppRgb 
+        } 
+ 
+        /// <summary> 
+        /// 根據RGB，計算灰度值 
+        /// </summary> 
+        /// <param name="posClr">Color值</param> 
+        /// <returns>灰度值，整型</returns> 
+        private int GetGrayNumColor(System.Drawing.Color posClr) 
+        { 
+            return (posClr.R * 19595 + posClr.G * 38469 + posClr.B * 7472) >> 16; 
+        } 
+ 
+        /// <summary> 
+        /// 灰度轉換,逐點方式 
+        /// </summary> 
+        public void GrayByPixels() 
+        { 
+            for (int i = 0; i < bmpobj.Height; i++) 
+            { 
+                for (int j = 0; j < bmpobj.Width; j++) 
+                { 
+                    int tmpValue = GetGrayNumColor(bmpobj.GetPixel(j, i)); 
+                    bmpobj.SetPixel(j, i, Color.FromArgb(tmpValue, tmpValue, tmpValue)); 
+                } 
+            } 
+        } 
+ 
+
+
+//-------------------------------------------------------------
+
+
+emule
+http://www.ed2k.online/tushu/jsjwl/16725.html
+
+
+ed2k://|file|[www.ed2k.online][C#%E5%85%A8%E8%83%BD%E9%80%9F%E6%9F%A5%E5%AE%9D%E5%85%B8].%E6%98%8E%E6%97%A5%E7%A7%91%E6%8A%80%E7%AD%89.%E6%89%AB%E6%8F%8F%E7%89%88.pdf|255157709|83403adcb05aaf95a0a0ef19846a00aa|h=pk25dcx3grk63emqyukmuh2eb6zuhpg5|/
+
+
+
+
+
+
+
+
+
+    2. 接下來為了方便在這之上進行截圖，有一個很重要的設計實現方式：用全屏幕窗體代替現有真實屏幕，這樣就可以把截圖過程的所有操作都在那個窗體上實現（該窗體設置成無邊框，高寬等於屏幕大小即可），另外為了顯示掩蔽效果（只能正常顯示選擇的部分屏幕內容，而其實部分用一個如半透明層覆蓋），就添加一層半透明位置位圖。具體代碼如下：
+
+    public partial class FullScreenForm : Form
+    {
+	    private Rectangle rectSelected = Rectangle.Empty;
+	
+	    private bool isClipping = false;
+	
+	    private Bitmap screen;
+	
+	    private Bitmap coverLayer = null;
+	
+	    private Color coverColor;
+	
+	    private Brush rectBrush = null;
+	
+	    private Bitmap resultBmp = null;
+	
+	    public FullScreenForm(Bitmap screen)
+	    {
+		    InitializeComponent();
+		
+		    int width = Screen.PrimaryScreen.Bounds.Width;
+		
+		    int height = Screen.PrimaryScreen.Bounds.Height;
+		
+		    coverLayer = new Bitmap(width, height);
+		
+		    coverColor = Color.FromArgb(50, 200, 0, 0);
+		
+		    rectBrush = new SolidBrush(coverColor);
+		
+		    using (Graphics g = Graphics.FromImage(coverLayer)) {
+		
+		    g.Clear(coverColor);
+	    }
+	
+	    this.Bounds = new Rectangle(0, 0, width, height);
+	
+	    this.screen = screen;
+	
+	    this.DoubleBuffered = true;
+    }
+
+    protected override void OnMouseDown(MouseEventArgs e)
+    {
+	    if (e.Button == MouseButtons.Left)
+	    {
+		    isClipping = true;
+		    rectSelected.Location = e.Location;
+	    }
+	    else if (e.Button == MouseButtons.Right)
+	    {
+	    	this.DialogResult = DialogResult.OK;
+	    }
+    }
+
+    protected override void OnMouseMove(MouseEventArgs e)
+    {
+	    if (e.Button == MouseButtons.Left & & isClipping)
+	    {
+		    rectSelected.Width = e.X - rectSelected.X;
+		    rectSelected.Height = e.Y - rectSelected.Y;
+		    this.Invalidate();
+	    }
+    }
+
+    protected override void OnMouseUp(MouseEventArgs e)
+    {
+	    if (e.Button == MouseButtons.Left && isClipping)
+	    {
+		    rectSelected.Width = e.X - rectSelected.X;
+		    rectSelected.Height = e.Y - rectSelected.Y;
+		    this.Invalidate();
+		    resultBmp = new Bitmap(rectSelected.Width, rectSelected.Height);
+		    using (Graphics g = Graphics.FromImage(resultBmp))
+		    {
+		    	g.DrawImage(screen,new Rectangle(0, 0, rectSelected.Width, rectSelected.Height), rectSelected, GraphicsUnit.Pixel);
+		    }
+		    this.DialogResult = DialogResult.OK;
+	    }
+    }
+
+    protected override void OnPaint(PaintEventArgs e)
+    {
+	    Graphics g = e.Graphics;
+	    g.DrawImage(screen, 0, 0);
+	    g.DrawImage(coverLayer, 0, 0);
+	    PaintRectangle();
+    }
+
+    protected override void OnPaintBackground(PaintEventArgs e)
+    {
+    }
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+	    if (e.KeyCode == Keys.Escape)
+	    {
+	    	this.DialogResult = DialogResult.Cancel;
+	    }
+    }
+
+    private void PaintRectangle()
+    {
+	    using (Graphics g = Graphics.FromImage(coverLayer))
+	    {
+		    g.Clear(coverColor);
+		    GraphicsPath path = new GraphicsPath();
+		    path.AddRectangle(this.Bounds);
+		    path.AddRectangle(rectSelected);
+		    g.FillPath(rectBrush, path);
+		    g.DrawRectangle(Pens.Blue, rectSelected);
+	    }
+    }
+
+    public Bitmap ResultBitmap
+    {
+    	get { return resultBmp; }
+    }
+    
+    
+
+}
+
+    
+    
+
+
+
+byte[]與Image Image與 byte[] 之間的轉換
+
+/// <summary>
+/// 將byte[]轉換為Image
+/// </summary>
+/// <param name="bytes">字節數組</param>
+/// <returns>Image</returns>
+public Image ReadImage(byte[] bytes)
+{
+     MemoryStream ms=new MemoryStream(bytes,0,bytes.Length);
+     BinaryFormatter bf = new BinaryFormatter();
+     object obj=bf.Deserialize(ms);  
+　　ms.Close();
+　　return (Image)obj;
+}
+/// <summary>
+/// 將Image轉換為byte[]
+/// </summary>
+/// <param name="image">Image</param>
+/// <returns>byte[]</returns>
+public byte[] ConvertImage(Image image)
+{
+     MemoryStream ms=new MemoryStream();
+     BinaryFormatter bf = new BinaryFormatter();
+     bf.Serialize(ms,(object)image);
+     ms.Close();
+     return ms.ToArray();
+}
+
+
+
+
+C# GUID介紹和的使用，
+
+GUID（全局統一標識符）是指在一台機器上生成的數字，它保證對在同一時空中的所有機器都是唯一的。通常平台會提供生成GUID的API。生成算法很有意思，用到了以太網卡地址、納秒級時間、芯片ID碼和許多可能的數字。GUID的唯一缺陷在於生成的結果串會比較大。
+
+GUID永遠是方便的; 對於程序開發的各個方面，.NET Framework簡化了建立和處理GUID數值的過程。在.NET程序需要的地方，這一功能很容易地生成唯一的數值。
+
+ 
+
+1. 一個GUID為一個128位的整數(16字節)，在使用唯一標識符的情況下，你可以在所有計算機和網絡之間使用這一整數。
+
+2. GUID 的格式為“xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx”，其中每個 x 是 0-9 或 a-f 范圍內的一個十六進制的數字。例如：337c7f2b-7a34-4f50-9141-bab9e6478cc8 即為有效的 GUID 值。
+
+3. 世界上（Koffer注：應該是地球上）的任何兩台計算機都不會生成重復的 GUID 值。GUID 主要用於在擁有多個節點、多台計算機的網絡或系統中，分配必須具有唯一性的標識符。
+
+4. 在 Windows 平台上，GUID 應用非常廣泛：注冊表、類及接口標識、數據庫、甚至自動生成的機器名、目錄名等。
+
+
+
+
+
+GUID（全局統一標識符）是指在一台機器上生成的數字，它保證對在同一時空中的所有機器都是唯一的。GUID的唯一缺陷在於生成的結果串會比較大。
+
+      對於程序開發的各個方面，.NET Framework簡化了建立和處理GUID數值的過程。在.NET程序需要的地方，這一功能很容易地生成唯一的數值。
+
+1、Guid.NewGuid().ToString("N") 結果為：
+         38bddf48f43c48588e0d78761eaa1ce6
+2、Guid.NewGuid().ToString("D") 結果為：
+            57d99d89-caab-482a-a0e9-a0a803eed3ba
+3、Guid.NewGuid().ToString("B") 結果為：
+            {09f140d5-af72-44ba-a763-c861304b46f8}
+4、Guid.NewGuid().ToString("P") 結果為：
+            (778406c2-efff-4262-ab03-70a77d09c2b5)
+            
+可見默認的為第2種效果
+
+        其中：N、D、B、P分別代表一種輸出格式
+
+小注：在個人使用中，主要是在數據中某列在沒有輸入值的情況下，用於生成內碼（NOT NULL PRIMARY KEY）。
+EG:       string str = "insert into 表名(NM,BH,MC) values('" + Guid.NewGuid().ToString("N") + "','" + textBox_bh.Text + "','" + textBox_mc.Text + "')";
+            
+            
+
+
+
+
+//拜列轉字串(16進制)
+
+	static int buffersize = 18;   //十六進制數的大小（假設為6Byte）
+	byte[] buffer = new Byte[buffersize];   //創建緩沖區
+	
+	private void button1_Click(object sender, EventArgs e)
+	{
+	    serialPort1.Read(buffer, 0, buffersize);
+	    string ss;
+	    ss = byteToHexStr(buffer); //用到函數byteToHexStr
+	    textBox2.Text = ss;
+	    serialPort1.Close();
+	    MessageBox.Show("數據接收成功！", "系統提示");
+	}
+	
+	//字節數組轉16進制字符串
+	public static string byteToHexStr(byte[] bytes)
+	{
+	    string returnStr = "";
+	    if (bytes != null)
+	    {
+	        for (int i = 0; i < bytes.Length; i++)
+	        {
+	            returnStr += bytes[i].ToString("X2");
+	        }
+	    }
+	    return returnStr;
+	}
+	
+
+c#畫三角形、並填充顏色
+目前知道有兩種方法：畫多邊形、GraphicsPath。但是用畫多邊形的方式畫三角形不太好。老畫不正的，截圖放大就明顯了。
+
+	Point point1 = new Point(0, 0);
+	Point point2 = new Point(11, 0);
+	Point point3 = new Point(5, 8);
+	Point[] pntArr = {point1, point2, point3};
+	
+	e.Graphics.FillPolygon(Brushes.Red, pntArr);
+
+
+
+this.toolStripStatusLabel3.Text = DateTime.Now.DayOfWeek.ToString();
+this.textBox1.SelectedText = DateTime.Now.ToString();
+this.textBox1.Text += DateTime.Now;
+
+
+//c#記事本實現代碼
+
+
+
+
+目前大部分數碼相機都將所拍照的圖像保存成JPG格式，
+而像拍照日期這樣的 信息統稱為EXIF信息。
+EXIF是英文ExchangeableImageFile(可交換圖像文件)的 縮寫
+
+
+new vcs data
+
+不寫注釋是流氓，名字瞎起是扯淡
+
+C#對注冊表的操作
+
+C#中提供的與注冊表相關的最主要的是兩個類：
+
+Registry 和 RegistryKey，這兩個類屬於Microsoft.Win32命名空間
+
+ 
+
+Registry類包含5個公共的靜態域，分別代表5個基本主鍵分別是：
+
+Registry.ClassesRoot
+
+Registry.CurrentUser
+
+Registry.LocalMachine
+
+Registry.Users
+
+Registry.Current Config
+
+這5個類分別對應注冊表的第二級目錄的五個預定義主鍵
+
+ 
+
+RegistryKey類中提供了對注冊表操作的方法
+
+CreateSubKey //建立一個子鍵
+
+OpenSubKey //打開一個子鍵
+
+DeleteKey //刪除一個子鍵
+
+DeleteKeyTree//刪除一個鍵及其下的全部鍵
+
+GetValue //獲取鍵值
+
+SetValue //設置鍵值
+
+
+
+檢測 USB 設備撥插的 C# 類庫：USBClassLibrary
+
+private void USBPort_USBDeviceAttached(objectsender, USBClass.USBDeviceEventArgs e)
+{
+	if (!MyUSBDeviceConnected)
+	{
+		if(USBClass.GetUSBDevice(MyDeviceVID, MyDevicePID, ref USBDeviceProperties, false))
+		{
+			//My Device is connected
+			MyUSBDeviceConnected = true;
+		}
+	}
+}
+
+private void USBPort_USBDeviceRemoved(objectsender, USBClass.USBDeviceEventArgs e)
+{
+	if(!USBClass.GetUSBDevice(MyDeviceVID, MyDevicePID, ref USBDeviceProperties, false))
+	{
+		//My Device is removed 
+		MyUSBDeviceConnected = false;
+	}
+}
+
+
+
+C# TabControl標簽的隱藏
+	當你想要隱藏的時候
+	
+	if (this.tabMain.TabPages[ "tabpageThePage "] != null)
+	
+	{
+	
+	this.tabMain.TabPages.Remove(tabpageThePage);
+	
+	}
+	
+	當你想要顯示的時候
+	
+	if (this.tabMain.TabPages[ "tabpageThePage "] == null)
+	
+	{
+	
+	this.tabMain.TabPages.Add(tabpageThePage);
+	
+	}
+
+
+c#畫三角形、並填充顏色
+
+代碼 1     Point point1 = new Point(0, 0);
+2     Point point2 = new Point(11, 0);
+3     Point point3 = new Point(5, 8);
+4     Point[] pntArr = {point1, point2, point3};
+5 
+6     e.Graphics.FillPolygon(Brushes.Red, pntArr);
+
+
+代碼  1                 int len = 10;                       
+ 2                 int x = 0;
+ 3                 int y = 0;
+ 4                 Point[] pntArr = new Point[3];
+ 5                 pntArr[0] = new Point(x, y);
+ 6                 pntArr[1] = new Point(x - len, y);
+ 7                 pntArr[2] = new Point(x - len / 2, (int)(len * Math.Sqrt(3) / 2 + y));
+ 8               &nbs 
+
+
+
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            //不進行背景的繪制
+        }
+
+
+
+//字符串轉數組
+string mystring="this is a string"
+char[] mychars=mystring.ToCharArray();
+
+//foreach循環處理char數組
+foreach(char mychar in mystring)
+{
+Console.WriteLine(mychar);
+}
+mystring.Length //獲取元素的個數 
+
+
+        
+        
+
+c# 控件閃爍處理方法
+如果你在Form中繪圖的話，不論是不是采用的雙緩存，都會看到圖片在更新的時候都會不斷地閃爍，解決方法就是在這個窗體的構造函數中增加以下三行代碼：
+
+請在構造函數裡面底下加上如下幾行：
+SetStyle(ControlStyles.UserPaint, true);
+SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+SetStyle(ControlStyles.DoubleBuffer, true); // 雙緩沖
+參數說明：
+
+UserPaint
+如果為 true，控件將自行繪制，而不是通過操作系統來繪制。此樣式僅適用於派生自 Control 的類。
+
+AllPaintingInWmPaint
+如果為 true，控件將忽略 WM_ERASEBKGND 窗口消息以減少閃爍。僅當 UserPaint 位設置為 true 時，才應當應用該樣式。
+
+DoubleBuffer
+如果為 true，則繪制在緩沖區中進行，完成後將結果輸出到屏幕上。雙重緩沖區可防止由控件重繪引起的閃爍。要完全啟用雙重緩沖，還必須將 UserPaint 和 AllPaintingInWmPaint 樣式位設置為 true。
+
+
+//初始化加載皮膚 
+            skinEngine1.SkinFile = "MacOS.ssk"; 
+
+ skinEngine1.SkinFile = "PageColor.ssk"; 
+
+
+objStreamWriter = new StreamWriter(objFileStream, System.Text.Encoding.Unicode); 
+
+
+
+   private DataSet ReadExcel(string strFileName, string sheetName)//使用OLE操作數據庫的方法讀取excel數據，導入到系統 
+        { 
+            if (strFileName == string.Empty) 
+            { 
+                return null; 
+            } 
+            else 
+            { 
+                string strConnection = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source = " + strFileName + ";Extended Properties = Excel 8.0"; 
+                OleDbConnection oleConnection = new OleDbConnection(strConnection); 
+                oleConnection.Open(); 
+                DataSet dsRead = new DataSet(); 
+                OleDbDataAdapter oleAdper = new OleDbDataAdapter(" SELECT *  FROM [" + sheetName + "$]", oleConnection); 
+                oleAdper.Fill(dsRead, "result"); 
+                oleConnection.Close(); 
+                return dsRead;  
+            }                                      
+        } 
+        
+        
+        
+        
+        
+        
+        
+        
+
+C#:判斷當前程序是否通過管理員運行，
+
+public bool IsAdministrator()
+{
+WindowsIdentity current = WindowsIdentity.GetCurrent();
+WindowsPrincipal windowsPrincipal = new WindowsPrincipal(current);
+return windowsPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
+}
+
+
+C# 文件創建時間，修改時間，
+
+System.IO.FileInfo fi = new System.IO.FileInfo(@"D:\site\EKECMS\skin\Grey\default#.html");
+Response.Write("修改時間：" + fi.LastWriteTime.ToString() + "<br>");
+Response.Write("創建時間：" + fi.CreationTime.ToString() + "<br>");
+
+//在代碼中設置控件的padding 設置Label的字體
+如果要在代碼中設置margin，可以使用如下代碼：
+this.label1.Padding = new Padding(20,8,20,8);
+或者=new Padding(20);
+
+設置Label的字體代碼：
+this.label1.Font = new Font(label1.Font.FontFamily,10f);
+
+設置Label的背景色代碼：
+this.label1.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
+
+
+
+在不設置Cookie、PostData的情況下要獲得一個頁面 的HTML的方法很簡單：
+
+public static string GetHtml(string URL)
+　 　　　{
+　　　　　　WebRequest wrt;
+　　　　　　wrt = WebRequest.Create(URL);
+　　　　　　wrt.Credentials = CredentialCache.DefaultCredentials;
+　　　　　　WebResponse wrp;
+　　　 　　　wrp = wrt.GetResponse();
+　　　　　　return new StreamReader (wrp.GetResponseStream(), Encoding.Default).ReadToEnd();
+　　　　} 
+
+
+
+地支時間與現在時間的對應關系：
+
+【子時】夜半，又名子夜、中夜：十二時辰的第一個時辰。（23時至次日01時）。
+
+【丑時】雞鳴，又名荒雞：十二時辰的第二個時辰。（01時至03時）。
+
+【寅時】平旦，又稱黎明、早晨、日旦等：時是夜與日的交替之際。（03時至05時）。
+
+【卯時】日出，又名日始、破曉、旭日等：指太陽剛剛露臉，冉冉初升的那段時間。（05 時至07時）。
+
+【辰時】食時，又名早食等：古人“朝食”之時也就是吃早飯時間，（07時至 09時）。
+
+【巳時】隅中，又名日禺等：臨近中午的時候稱為隅中。（09時至11時）。
+
+【午時】日中，又名日正、中午等：（11時至13時）。
+
+【未時】日昳，又名日跌、日央等：太陽偏西為日跌。（13時至15時）。
+
+【申時】哺時，又名日鋪、夕食等：（15時至17時）。
+
+【酉時】日入，又名日落、日沉、傍晚：意為太陽落山的時候。（17時至19時）。　
+
+【戌時】黃昏，又名日夕、日暮、日晚等：此時太陽已經落山，天將黑未黑。天地昏黃，萬物朦胧 ，故稱黃昏。（19時至21時）。
+
+【亥時】人定，又名定昏等：此時夜色已深，人們也已經停止活動，安歇睡眠了。人定也就是人靜 。（21時至23時）。
+
+
+
+
+開關檔案 使用指定的編碼
+StreamWriter outStream = new StreamWriter( filepath,false,System.Text.Encoding.GetEncoding( 950 ) );
+using ( StreamReader sr = new StreamReader( filepath,System.Text.Encoding.GetEncoding( 936 ) ) )
+
+
+
+用C＃實現在客戶區拖動窗體
+
+
+C#調用默認浏覽器打開網頁的幾種方法
+
+
+
+
+方法一：從注冊表中讀取默認浏覽器可執行文件路徑
+
+ 
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //從注冊表中讀取默認浏覽器可執行文件路徑
+            RegistryKey key = Registry.ClassesRoot.OpenSubKey(@httpshellopencommand);
+            string s = key.GetValue().ToString();
+
+            //s就是你的默認浏覽器，不過後面帶了參數，把它截去，不過需要注意的是：不同的浏覽器後面的參數不一樣！
+            //D:Program Files (x86)GoogleChromeApplicationchrome.exe -- %1
+            System.Diagnostics.Process.Start(s.Substring(0, s.Length - 8), http://blog.csdn.net/testcs_dn);
+        }
+方法二：
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //調用系統默認的浏覽器 
+            System.Diagnostics.Process.Start(explorer.exe, http://blog.csdn.net/testcs_dn);
+        }
+方法三：
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //調用系統默認的浏覽器 
+            System.Diagnostics.Process.Start(http://blog.csdn.net/testcs_dn);
+        }
+
+方法四：調用IE浏覽器
+
+
+從原理上來講，方法二和方法三應該是一樣的，不過方法三的代碼更短一點。 
+
+
+
+
+命令行msinfo32
+
+
+三、添加office相關引用
+Microsoft.Office.Interop.Word 12.0.0.0
+
+
+
+
+
+using System.Data.OleDb;
+using System.Data.SqlClient;
+using System.IO;
+using Microsoft.Office.Core;
+using Word=Microsoft.Office.Interop.Word;
+using System.Reflection;
+
+如果其路徑包含後綴名的話，要取得後綴名，只需要一行代碼即可：
+1 var ext = System.IO.Path.GetExtension("C:\\soar.jpg");
+
+
+
+            richTextBox1.Text += "string.PadLeft 字串統一長度或補字元\n";
+            int a = 15;
+            string s1 = a.ToString().PadLeft(10, '-');
+            richTextBox1.Text += s1 + "\n";
+
+            string s2 = string.Format("{0:00000}", Convert.ToInt16(a));
+            richTextBox1.Text += s2 + "\n";
+
+
+
+
+
+            //System.Text.StringBuilder("")
+            //字元串相加，（+號是不是也一樣？）
+            System.Text.StringBuilder sb = new System.Text.StringBuilder("");
+            sb.Append("AB");
+            sb.Append("CD");
+            sb.Append("EFG");
+
+            richTextBox1.Text += sb + "\n";
+
+                          
+
+求取字母的ASCII值
+
+            Console.Write("輸入一個字符："); 
+            char c = Console.ReadKey().KeyChar; 
+            Console.WriteLine("\r\n字符{0}的ASCII值是：{1}", c, (int)c); 
+            Console.ReadKey(false); 
+
+
+
+DataGridView 指定欄位排序
+
+// 根據 資料行1 (Name) 做 大到小 排序
+dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Descending); 
+
+// 根據 資料行1 (Name) 做 小到大 排序 
+dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending); 
+
+
+
+    
+    
+            //                    來源位置             目的位置      要傳輸的區域大小  判斷在像素複製作業中來源色彩如何與目的色彩結合以產生最後的色彩
+            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h), CopyPixelOperation.SourceInvert);
+            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h));
+            g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
+
+
+//隨機生成四位驗證碼（0~9，a~Z）
+            int LEN = 4;
+            Random r = new Random();
+            string code = "0123456789abcdefghjklmnopqistuvwxyzABCDEFGHIJKLMNOPQISTUVWXYZ";
+            string captcha = "";
+            for (int i = 0; i < LEN; i++)
+            {
+                int ra = r.Next(code.Length);
+                captcha = code.Substring(ra, 1) + captcha;
+            }
+            richTextBox1.Text += captcha + "\n";
+            
+
+
+//播放音樂
+using System.Media;
+            string filename = @"C:\______test_files\_wav\start.wav";
+            SoundPlayer sp = new SoundPlayer(filename);
+            sp.Play();
+        
+        
+      //挪用體系默許的閱讀器 
+      System.Diagnostics.Process.Start( "http://www.谷歌.cn");  
+
+
+16進制與字符串、字節數組之間的轉換。，
+
+1.將十進制數的字符串轉化成十六進制數的字符串
+
+//十進制轉二進制
+Console.WriteLine("十進制166的二進制表示: "+Convert.ToString(166, 2));
+//十進制轉八進制
+Console.WriteLine("十進制166的八進制表示: "+Convert.ToString(166, 8));
+//十進制轉十六進制
+Console.WriteLine("十進制166的十六進制表示: "+Convert.ToString(166, 16));
+    
+//二進制轉十進制
+Console.WriteLine("二進制 111101 的十進制表示: "+Convert.ToInt32("111101", 2));
+//八進制轉十進制
+Console.WriteLine("八進制 44 的十進制表示: "+Convert.ToInt32("44", 8));
+//十六進制轉十進制
+Console.WriteLine("十六進制 CC的十進制表示: "+Convert.ToInt32("CC", 16));
+
+2.16進制與字符串、字節數組之間的轉換
+
+            richTextBox1.Text += "取得網頁資料\n";
+            string strUrl = "https://www.google.com.tw/"; //獲得IP的網址了
+
+            Uri uri = new Uri(strUrl);
+            System.Net.WebRequest wr = System.Net.WebRequest.Create(uri);
+            System.IO.Stream s = wr.GetResponse().GetResponseStream();
+            System.IO.StreamReader sr = new System.IO.StreamReader(s, Encoding.Default);
+            string all = sr.ReadToEnd(); //讀取網站的數據
+            richTextBox1.Text += all + "\n";
+
+
+
+ C# 修改啟始Form [複製鏈接]
+打開program.cs，修改Application.Run(new Form1());，將Form1改為要啟始的頁面即可!
+
+
+網際網路時間伺服器，
+從原來的 time.windows.com 改為 time.nist.gov，
+
+
+C# 播放 wav 或音樂檔方式
+
+在 C# 內播放 wav或音樂檔案方式，可使用下面範例實現
+Sample Code
+
+System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
+sp.SoundLocation = @"C:\Wave音效檔\DoReMe.wav";
+sp.Play(); // 撥放
+..
+..
+..
+sp.Stop(); // 停止
+
+ 
+ 
+ 
+
+
+
+//如何取得網路上的圖片並顯示 
+            string url = @"https://upload.wikimedia.org/wikipedia/commons/0/0f/Ic-photo-intel-D4004.png";
+            this.pictureBox1.Image = ReadImageFromUrl(url);
+
+        private Image ReadImageFromUrl(string urlImagePath)
+        {
+            Uri uri = new Uri(urlImagePath);
+            WebRequest webRequest = WebRequest.Create(uri);
+            Stream stream = webRequest.GetResponse().GetResponseStream();
+            Image res = Image.FromStream(stream);
+            return res;
+
+        }
+
+
+
+3. 如何为一个窗体设置一个默认按钮？（How to set the default button for a form?）
+
+form1.AcceptButton = button1;
+
+4. 如何为一个窗体设置一个取消按钮？（How to set the Cancel button for a form?）
+
+form1.CancelButton = button1;
+
+5. 如何阻止一个窗体标题显示在任务栏上？（How to prevent a form from being shown in the taskbar?）
+
+设置窗体的ShowIntaskbar属性为False
+
+9. 如何获取应用程序当前执行的路径？（How to get the path to my running EXE?）
+
+string appPath = Application.ExecutablePath; 
+
+23. 如何使Windows Form上的Panel或者Label控件半透明？（How to make a Panel or Label semi-transparent on a Windows Form? ）
+
+通过设置控件背景色的alpha值
+panel1.BackColor = Color.FromA#41ccd4;
+注意：在设计时手动输入这些值，不要用颜色选取
+
+
+設定倒數計時
+        DateTime dtTarget;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //dtTarget = DateTime.Now.AddHours(2);  //設定兩小時後
+            dtTarget = new DateTime(2021, 9, 30, 12, 0, 0);   //設定特定時間
+
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            TimeSpan diffTime = dtTarget.Subtract(DateTime.Now);
+
+            string diffHour = Convert.ToString(diffTime.Hours);
+            string diffMin = Convert.ToString(diffTime.Minutes);
+            string diffSec = Convert.ToString(diffTime.Seconds);
+            label1.Text = "距離 " + dtTarget.ToString() + " 還有 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒";
+
+        }
+
+
+        //執行時期 顯示 屬性編輯視窗
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            PropertyGrid PG = new PropertyGrid();
+            Form PGForm = new Form();
+            PGForm.Owner = this;
+            PGForm.StartPosition = FormStartPosition.Manual;
+            PGForm.Left = this.Left + this.Width;
+            PGForm.Top = this.Top;
+            PGForm.ShowInTaskbar = false;
+            PGForm.Controls.Add(PG);
+            PG.Dock = DockStyle.Fill;
+            PG.SelectedObject = this.label1;  //選擇要顯示的控件名稱
+            PGForm.Text = "Label 屬性編輯視窗";
+            PGForm.Show();
+        }
+
+
+
+驗證台灣手機號碼
+            bool match;
+            match = System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, @"^09[0-9]{8}$");
+            if (match == true)
+            {
+                richTextBox1.Text += "OK\n";
+                     
+            }
+            else
+            {
+                richTextBox1.Text += "NG\n";
+            }
+
+
+
+陣列
+一群資料型態相同的變數集合在一起
+
+反向運算子
+
+
+
+要顯示 & 以 ＆amp;取代
+要顯示 < 以 ＆lt;取代
+要顯示 > 以 ＆gt;取代
+要顯示 " 以 ＆quot;取代
+要顯示 ' 以 ＆apos;取代
+
+Unicode中文字碼（CJK Unified Ideographs；中日韓統一表意文字）的範圍落在0x4E00至0x9FFF（UTF-32），但迄今（Unicode v11.0）最末的0x9FF0～0x9FFF這16個字仍是空白。
+
+
+#define abs(a, b)	(((a) > (b)) ? (a - b) : (b - a))
+
+printf("function: %s:%s(%d) debug message\r\n",__FILE__,__func__,__LINE__);
+       
+
+內建函式
+
+if(isprint(ch))
+系統時間
+
+函式 abs dec2hex hex2dec print9X9_Table
+
+VC#
+資料型態	string(字串) bool(布耳)
+各種控件	button richtextbox picturebox timer
+
+ENUM的用法
+        // 定義WeekDays列舉內容7個成員
+        // 用來表示一星期的星期日到星期六的列舉常數值
+        enum WeekDays : int
+        {
+            Monday = 1,      	// 星期一
+            Tuesday = 2,         // 星期二
+            Wednesday = 3,       // 星期三
+            Thursday = 4,        // 星期四
+            Friday = 5,          // 星期五
+            Saturday = 6,        // 星期六
+            Sunday = 7           // 星期日
+        };
+
+        static void Main(string[] args)
+        {
+            // 取出WeekDays.Wednesday列舉常數值之後再轉成整數
+            Console.WriteLine("星期三列舉常數值：{0}", (int)WeekDays.Wednesday);
+            Console.WriteLine("星期五列舉常數值：{0}", (int)WeekDays.Friday);
+            Console.Read();
+        }
+        
+
+colsole mode的scanf        
+        
+            // 宣告字串資料型別ProductName變數，用來存放品名
+            string ProductName;
+            // 宣告整數資料型別Price變數，用來存放單價
+            int Price;
+            Console.Write("請輸入品名：");        // 印出 "請輸入品名："
+            // 由鍵盤輸入品名資料並按 [Enter]鍵，即將品名存放至ProductName變數
+            ProductName = Console.ReadLine();
+            Console.Write("請輸入單價：");         // 印出 "請輸入單價："
+            // 由鍵盤輸入單價並按 [Enter]鍵，將單價轉成整數之後
+            // 再將單價放至Price變數
+            Price = int.Parse(Console.ReadLine());
+            Console.WriteLine("品名：{0}　單價：{1}　這筆記錄儲存成功",ProductName, Price);
+            Console.Read();
+
+console mode讀取double數字
+            double netIncome;
+            int taxRate;
+
+            Console.Write("請輸入全年綜合所得淨額(單位:萬元) : ");
+            netIncome = double.Parse(Console.ReadLine());
+
+console mode讀取字串
+            // 宣告Ans字串變數用來存放使用者由鍵盤輸入的答案
+            string Ans = Console.ReadLine();
+                        
+struct用法
+
+        // 定義Product產品結構資料型別
+        struct Product
+        {
+            // Product產品結構內含No編號欄位、Name品名欄位、Price單價欄位
+            public string No, Name;
+            public int Price;
+       }
+
+       static void Main(string[] args)
+        {
+            // 宣告game結構變數為Product結構型別
+             Product game;
+            // 設定game.No編號欄位的值為 "G01"
+            game.No = "G01";
+            // 設定game.Name品名欄位的值為"XBox One"
+            game.Name = "XBox One";
+            // 設定game.Price單價欄位的值為10000
+            game.Price = 10000;
+            Product cookie;        // 宣告cookie結構變數為Product結構型別
+            Console.Write(" 請輸入產品編號：");
+            // 由鍵盤輸入編號再指定給cookie.No編號欄位
+            cookie.No = Console.ReadLine();
+            Console.Write(" 請輸入產品名稱：");
+            // 由鍵盤輸入品名再指定給cookie.Name品名欄位
+            cookie.Name = Console.ReadLine();
+            Console.Write(" 請輸入產品單價：");
+            // 由鍵盤輸入單價並轉成整數再指定給cookie.Price單價欄位
+            cookie.Price = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            Console.WriteLine(" ====== 產品單價清單 ====== ");
+            Console.WriteLine();
+            // 印出game及cookie結構的編號、品名及單價
+            Console.WriteLine(" 產品編號：{0} ", game.No);
+            Console.WriteLine(" 產品名稱：{0} ", game.Name);
+            Console.WriteLine(" 產品單價：{0} ", game.Price);
+            Console.WriteLine(" 產品編號：{0} ", cookie.No);
+            Console.WriteLine(" 產品名稱：{0} ", cookie.Name);
+            Console.WriteLine(" 產品單價：{0} ", cookie.Price);
+            Console.Read();
+        }
+
+
+
+        
+        
+        
+#include <stdio.h>
+int main(int argc,char* argv[])
+{
+
+
+
+    /*
+	int i;
+
+	time_t time_ptr;
+
+	printf("david: This is a c template.\n");
+
+	printf("function: %s:%s(%d) debug message\r\n",__FILE__,__func__,__LINE__);
+
+
+	time(&time_ptr);
+
+	printf("現在時間 : %s\n", asctime(localtime(&time_ptr)));
+*/
+
+
+    time_t t1 = time(NULL);
+    struct tm *nPtr = localtime(&t1);
+    char *now = asctime(nPtr);
+
+    printf("現在時間 : %s\n", now);
+    printf("len = %d\n",sizeof(now));
+
+    int i;
+
+    for(i=0;i<sizeof(now);i++)
+    {
+        printf("%c\n", now[i]);
+
+
+    }
+
+
+
+    //srand(123);
+    srand(now[0]);
+
+    for(i=0;i<10;i++)
+    {
+        printf("%c\n", 'A' + rand() % 26);
+
+    }
+
+	return 0;
+}
+        
+        
+        
+        
+
+
+
+Display_Cam1
+
+            //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+            bm = (Bitmap)eventArgs.Frame.Clone();
+            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+            pictureBox1.Image = bm;
+
+            GC.Collect();       //回收資源
+
+//--------------------------
+
+            //录像
+            //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+            bm = (Bitmap)eventArgs.Frame.Clone();
+            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+			
+            Graphics g = Graphics.FromImage(image);
+			
+			
+										SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+
+										Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+										int xPos = image.Width - (image.Width - 15);
+										int yPos = 10;
+										//写到屏幕上的时间
+										string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+										g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+
+            ////创建文件路径
+            string fileFullPath = videoPath + "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+            if (stopREC)
+            {
+                stopREC = true;
+                createNewFile = true;  //这里要设置为true表示要创建新文件
+                if (videoWriter != null)
+                    videoWriter.Close();
+            }
+            else
+            {
+										//开始录像
+										if (createNewFile)
+										{
+
+											createNewFile = false;
+											if (videoWriter != null)
+											{
+												videoWriter.Close();
+												videoWriter.Dispose();
+											}
+											richTextBox1.Text += "開啟檔案 : " + fileFullPath + "\n";
+
+											videoWriter = new VideoFileWriter();
+											//这里必须是全路径，否则会默认保存到程序运行根据录下了
+											videoWriter.Open(fileFullPath, image.Width, image.Height, 30, VideoCodec.MPEG4);
+											videoWriter.WriteVideoFrame(image);
+										}
+										else
+										{
+											videoWriter.WriteVideoFrame(image);
+										}
+            }
+
+
+
+fileFullPath : C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\OperateCamera\bin\Debug\V12021-08-20-15-39-07
+
+
+
+
+
+關掉AForge的VSP
+        // Close currently open camera if any
+        private void CloseCamera()
+        {
+            if (videoSource != null)
+            {
+                videoSourcePlayer.VideoSource = null;
+
+                videoSource.SignalToStop();
+                videoSource.WaitForStop();
+                videoSource = null;
+            }
+        }		
+
+        private static string FFMPEG_EXE_PATH = CheckRelativePath(@"ffmpeg\ffmpeg.exe");
+        private static string FFPROBE_EXE_PATH = CheckRelativePath(@"ffmpeg\ffprobe.exe");
+
+            string cmdParams = String.Format("-hide_banner -ss {0} -i {1} -r 1 -t 1 -f image2 {2}", atPositioin, filename, tmpFileName);
+
+                // Execute command to let FFMPEG extract the frame
+                Execute(FFMPEG_EXE_PATH, cmdParams);
+
+        private static string Execute(string exePath, string parameters)
+        {
+            string result = String.Empty;
+
+            using (Process p = new Process())
+            {
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.FileName = exePath;
+                p.StartInfo.Arguments = parameters;
+                p.Start();
+                p.WaitForExit();
+
+                result = p.StandardOutput.ReadToEnd();
+            }
+
+            return result;
+        }
+
+
+
+在 C# 中使用 File.ReadAllText() 方法將檔案讀取為字串
+string text = File.ReadAllText(@"C:\File\file.txt");
+Console.WriteLine(text);
+
+在 C# 中使用 StreamReader.ReadToEnd() 方法將檔案讀取為字串
+StreamReader fileReader = new StreamReader(@"C:\File\file.txt");
+string text = fileReader.ReadToEnd();
+Console.WriteLine(text);			
+
+使用 C# 中的 FileInfo.Length 屬性獲取檔案大小
+
+
+
+            FileInfo fileinfo = new FileInfo("dark.jpg");
+            Console.WriteLine(fileinfo.Length);
+FileInfo 類提供了用於在 C# 中建立，開啟，複製，刪除和移動檔案的方法。
+
+
+在 C# 中使用 BitConverter.ToString() 方法將字串轉換為十六進位制
+
+            string decString = "0123456789";
+            byte[] bytes = Encoding.Default.GetBytes(decString);
+            string hexString = BitConverter.ToString(bytes);
+            hexString = hexString.Replace("-", "");
+            Console.WriteLine(hexString);
+
+
+
+在 C# 中使用 String.Format() 方法將字串轉換為十六進位制
+            string decString = "0123456789";
+            var hexString = string.Join("",
+                decString.Select(c => String.Format("{0:X2}", Convert.ToInt32(c))));
+            Console.WriteLine(hexString);
+
+
+Process.Start("http://www.mrbccd.com");
+
+//打开注册表
+string regeditstr = Environment.GetEnvironmentVariable("WinDir");//WinDir系统环境变量的名称
+Process.Start(regeditstr + "\\regedit.exe");//打开注册表
+
+
+//開啟檔案總管到指定的目錄
+string Path = @"C:\dddddddddd";
+Process.Start("explorer.exe", Path);
+
+Process.Start(textBox1.Text);//打开文件夹进行查看
+
+richTextBox1.Text += "在任務欄中顯示\n";
+this.ShowInTaskbar = true;
+
+richTextBox1.Text += "不在任務欄中顯示\n";
+this.ShowInTaskbar = false;
+
+
+this.StartPosition = FormStartPosition.CenterScreen;//視窗居中顯示
+
+
+MainMenu選了之後會有打勾記號
+
+        // On Size menu item popup
+        private void sizeItem_Popup(object sender, System.EventArgs e)
+        {
+            normalSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.Normal);
+            stretchedSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.StretchImage);
+            centeredSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.CenterImage);
+        }
+
+
+
+
+
+string newID = id.Insert(6, "19");
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "檢查IP合法性\n";
+            string[] lines = new string[4];
+            string s = ".";
+            string ip = "192.168.0.123";
+
+            lines = ip.Split(s.ToCharArray(), 4);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (Convert.ToInt32(lines[i]) >= 255)
+                {
+                    richTextBox1.Text += "不合法\n";
+                    return;
+                }
+            }
+            richTextBox1.Text += "合法\n";
+			
+
+        }
+
+
+
+
+如何清除播放清單
+
+顯示播放清單的內容
+
+播放清單移除特定檔案
+
+
+
+
+
+
+        public override string show()
+        {
+            return base.show() +
+                   ": 寬 = " + width +
+                   ", 高 = " + height;
+        }
+		
+        public string listing()
+        {
+            string res = "";
+
+            for (int i = 0; i < count; i++)
+            {   // polymorphism
+                Shape s = shapeArray[i];
+                res += s.show() + ", 面積 = " + s.area() +
+                       "\r\n-----------------------\r\n";
+            }
+
+            return res;
+        }
+
+
+
+
+計算程式執行的時間
+
+int URms = System.Environment.TickCount;
+
+XXXXXXXXX
+
+Console.WriteLine("花費 {0} ms 完成!!!", Environment.TickCount - URms);
+
+
+
+
+				
+
+做一個我的 Transform範例
+
+角度-180~+180
+正弦值 -1~+1
+
+xmin = -180;
+xmax = 180;
+ymin = -1;
+ymax = 1;
+xmargin = 10;
+ymargin = 0.2;
+
+顯示區域寬度W  if 720
+顯示區域高度H  if 360
+
+xratio = W/(xmax-xmin+xmargin*2);     //2 倍
+yratio = H/(ymax-ymin+ymargin*2);     //180 倍
+
+x=xmin:1:xmax;
+y=sind(x);
+
+先不考慮margin  把圖畫在中間
+
+畫x時 每點相距 2 pixel
+
+畫y時 要放大180倍
+
+for(i=0; i<360;i++)
+{
+ x_new = x_old*2;
+ y_new = y_old*180;
+}
+
+
+            e.Graphics.Clear(picGraph.BackColor);
+            if (Balance.Count < 2) return;
+
+            // Scale to make the data fit.
+            float xmin = -1;
+            float xmax = Contributions.Count + 1;
+            float ymax = Balance.Max(pt => pt.Y);
+            float ymin = -ymax * 0.05f;
+            RectangleF rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
+            PointF[] pts =
+            {
+                new PointF(0, picGraph.ClientSize.Height),
+                new PointF(picGraph.ClientSize.Width, picGraph.ClientSize.Height),
+                new PointF(0, 0),
+            };
+            Transform = new Matrix(rect, pts);
+            e.Graphics.Transform = Transform;
+
+
+
+
+        string drap_setup_filename = "drap_setup.ini";
+
+        void update_setup_file()
+        {
+            richTextBox2.Text += "update_setup_file ST\n";
+            richTextBox2.Text += "length of old_search_path = " + old_search_path.Count.ToString() + "\n";
+
+            {
+                StreamWriter sw = File.CreateText(drap_setup_filename);
+                string content = "";
+                //定義系統版本
+                Version ver = Environment.OSVersion.Version;
+                //Major主版本號,Minor副版本號
+                if (ver.Major == 6 && ver.Minor == 1)
+                {
+                    //Windows7
+                    content += "\"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+                }
+                else
+                {
+                    //Windows10
+                    content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+                }
+                content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
+                content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
+                content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
+                content += SelectedLanguage.ToString() + "\n";
+                content += comboBox1.SelectedIndex.ToString() + "\n";
+                if (cb_video_only.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_video_l.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_video_m.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_video_s.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_size.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_l.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_m.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_s.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_generate_text.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+
+                /*
+                //Major主版本號,Minor副版本號
+                if (ver.Major == 6 && ver.Minor == 1)
+                {
+                    //Windows7
+                    video_player_path = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+                }
+                else
+                {
+                    //Windows10
+                    video_player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
+                }
+                audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
+                picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
+                text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
+                */
+
+                richTextBox2.Text += "目前共有 " + listBox1.Items.Count.ToString() + " 條搜尋路徑\n";
+
+                if (listBox1.Items.Count == 0)
+                {
+                    content += "C:\\______test_files\n";
+                    old_search_path.Add("C:\\______test_files");
+                }
+                else
+                {
+                    for (int i = 0; i < listBox1.Items.Count; i++)
+                    {
+                        richTextBox2.Text += listBox1.Items[i] + "\n";
+                        content += listBox1.Items[i] + "\n";
+                    }
+                }
+                content += "\n";
+
+                sw.WriteLine(content, Encoding.UTF8);
+                sw.Close();
+            }
+        }
+
+        void Read_Setup_File()
+        {
+            int i;
+            int tmp;
+            if (File.Exists(drap_setup_filename) == false)
+            {
+                richTextBox2.Text += "檔案 " + drap_setup_filename + " 不存在，製作一個。\n";
+                update_setup_file();
+            }
+            else
+            {
+                richTextBox2.Text += "檔案 " + drap_setup_filename + " 存在, 開啟，並讀入設定\n";
+                string line;
+                StreamReader sr = new StreamReader(drap_setup_filename, Encoding.UTF8);
+                i = 0;
+                while (!sr.EndOfStream)
+                {               // 每次讀取一行，直到檔尾
+                    line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
+                    richTextBox2.Text += "第 " + i.ToString() + " 行資料 : " + line + "\n";
+                    switch (i)
+                    {
+                        case 0:
+                            video_player_path = line;
+                            break;
+                        case 1:
+                            audio_player_path = line;
+                            break;
+                        case 2:
+                            picture_viewer_path = line;
+                            break;
+                        case 3:
+                            text_editor_path = line;
+                            break;
+                        case 4:
+                            SelectedLanguage = int.Parse(line);
+                            break;
+                        case 5:
+                            tmp = int.Parse(line);
+                            comboBox1.SelectedIndex = tmp;
+                            break;
+                        case 6:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_only.Checked = true;
+                            else
+                                cb_video_only.Checked = false;
+                            break;
+                        case 7:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_l.Checked = true;
+                            else
+                                cb_video_l.Checked = false;
+                            break;
+                        case 8:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_m.Checked = true;
+                            else
+                                cb_video_m.Checked = false;
+                            break;
+                        case 9:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_s.Checked = true;
+                            else
+                                cb_video_s.Checked = false;
+                            break;
+                        case 10:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_size.Checked = true;
+                            else
+                                cb_file_size.Checked = false;
+                            break;
+                        case 11:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_l.Checked = true;
+                            else
+                                cb_file_l.Checked = false;
+                            break;
+                        case 12:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_m.Checked = true;
+                            else
+                                cb_file_m.Checked = false;
+                            break;
+                        case 13:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_s.Checked = true;
+                            else
+                                cb_file_s.Checked = false;
+                            break;
+                        case 14:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_generate_text.Checked = true;
+                            else
+                                cb_generate_text.Checked = false;
+                            break;
+                        case 15:
+                            search_path = line;
+                            break;
+                        default:
+                            break;
+                    }
+                    if (i >= 15)
+                    {
+                        if (line.Length > 0)
+                        {
+                            richTextBox2.Text += "加入路徑 : " + line + "\n";
+                            old_search_path.Add(line);
+                        }
+                        else
+                        {
+                            richTextBox2.Text += "空行\n";
+                        }
+                    }
+                    i++;
+                }
+                sr.Close();
+            }
+        }
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+//較完整 可一段一段貼上範例程式
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+//C#獲取硬盤序列號
+
+using System;
+using System.Runtime.InteropServices;
+
+namespace ArLi.CommonPrj {
+
+#region how use this?
+/*
+string sVol = getvol.GetVolOf("C");
+*/
+#endregion
+
+public class getvol{
+
+[DllImport("kernel32.dll")]
+private static extern int GetVolumeInformation(
+string lpRootPathName,
+string lpVolumeNameBuffer,
+int nVolumeNameSize,
+ref int lpVolumeSerialNumber,
+int lpMaximumComponentLength,
+int lpFileSystemFlags,
+string lpFileSystemNameBuffer,
+int nFileSystemNameSize
+);
+
+public static string GetVolOf(string drvID){
+const int MAX_FILENAME_LEN = 256;
+int retVal = 0;
+int a =0;
+int b =0;
+string str1 = null;
+string str2 = null;
+
+
+int i = GetVolumeInformation(
+drvID + @":\",
+str1,
+MAX_FILENAME_LEN,
+ref retVal,
+a,
+b,
+str2,
+MAX_FILENAME_LEN
+);
+
+return retVal.ToString("x");
+}
+}
+}
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+        /// <summary>
+        /// 將文字檔內容顯示於所指定的 TextBox
+        /// </summary>
+        /// <param name="p_TextBox">所指定的 TextBox</param>
+        private void ReadTextFile(TextBox p_TextBox)
+        {
+            string filename = @"C:\______test_files\_pic\eula.3081.txt";
+
+            sb = new StringBuilder();
+
+            string[] Txt_All_Lines = System.IO.File.ReadAllLines(filename, Encoding.Default);
+
+            foreach (string Single_Line in Txt_All_Lines)
+            {
+                sb.AppendLine(Single_Line);
+            }
+
+            p_TextBox.Text = sb.ToString();
+        }
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+   
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+//C#檢查url鏈接是否有效
+//檢查url地址是否能訪問,代碼如下:   
+
+     /// <summary>
+    /// 檢查url鏈接是否有效
+     /// </summary>
+    /// <param name="strUri"></param>
+    /// <returns></returns>
+    public static bool CheckUri(string strUri)
+    {
+        try
+        {
+            System.Net.HttpWebRequest.Create(strUri).GetResponse();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
+    
+
+.net(C#)從html中提取中文字（正則表達式）
+用正則表達式提取html中的純文本,代碼實現如下: 
+
+using System.Text.RegularExpressions;      
+
+ private string StripHT(string strHtml)  //從html中提取純文本
+        {
+            Regex regex = new Regex("<.+?>", RegexOptions.IgnoreCase);
+            string strOutput = regex.Replace(strHtml, "");//替換掉"<"和">"之間的內容
+            strOutput = strOutput.Replace("<", "");
+            strOutput = strOutput.Replace(">", "");
+            strOutput = strOutput.Replace("&nbsp;", "");
+            return strOutput;
+        }
+    
+    
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+        				
+//-----wmp---------------------------------------------------------------------------------------------------------------------
+
+
+//添加列表
+WC = new WMPLib.WindowsMediaPlayerClass();
+MC = WC.newMedia(str);
+this.axWindowsMediaPlayer1.currentPlaylist.appendItem(MC);
+richTextBox1.Text += "add " + str + "\n";
+
+
+
+
+C# WindowsMediaPlayer 的一些用法
+
+播放單首歌曲
+
+                player.URL = 
+
+添加多首歌曲到播放列表
+
+            IWMPPlaylist playList = player.playlistCollection.newPlaylist(); 
+ (DataRow drItem = player.newMedia(drItem[].ToString()); 
+=
+
+ 或者直接在當前列表上添加
+
+ (DataRow drItem = player.newMedia(drItem[].ToString()); 
+
+
+設置播放器音量
+
+ player.settings.volume=;
+
+
+ 設置循環播放
+
+player.settings.setMode(, );
+
+ 
+
+設置隨機播放
+
+
+  player.settings.setMode(, );
+
+
+
+
+
+richTextBox1.Text += "測試使用WindowsMediaPlayerClass\n";
+WindowsMediaPlayerClass c;
+IWMPMedia m;
+
+c = new WindowsMediaPlayerClass();
+m = c.newMedia(mp3_filename);
+richTextBox1.Text += "歌手名:\t" + m.getItemInfo("Author") + "\n" + "歌  名:\t" + m.getItemInfo("Title") + "\n";
+
+
+getItemInfo Author Title
+
+// Store the current media object.
+var cm = Player.currentMedia;
+
+// Get the number of attributes for the current media. 
+var atCount = cm.attributeCount;
+
+// Loop through the attribute list.
+for(var i=0; i < atCount; i++){
+
+   // Print each attribute index and name.   
+   myText.value += "Attribute " + i +": ";
+   myText.value += cm.getAttributeName(i);
+   myText.value += "\n";
+}
+
+
+
+
+
+
+
+
+//C#中如何禁止WindowsMediaPlayer双击全屏显示
+
+
+private void AxWindowsMediaPlayer1_MouseDownEvent(object sender, AxWMPLib._WMPOCXEvents_MouseDownEvent e)
+{
+    if (axWindowsMediaPlayer1.fullScreen)
+        axWindowsMediaPlayer1.fullScreen = false;
+} 
+
+
+
+
+
+
+
+
+
+
+
+axWindowsMediaPlayer1
+
+
+uiMode	//播放器介面模式
+//Full, 有影像, 完整播放器介面
+axWindowsMediaPlayer1.uiMode = "full";
+
+//Mini, 有影像, 簡約播放器介面
+axWindowsMediaPlayer1.uiMode = "mini";
+
+//None, 有影像, 無播放器介面
+axWindowsMediaPlayer1.uiMode = "none";
+
+//Invisible, 無影像, 有無播放器介面
+axWindowsMediaPlayer1.uiMode = "invisible";
+
+
+在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原爲原始的大小.
+         private void ResizeOriginal()
+         {
+             int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
+             int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
+             axWindowsMediaPlayer1.Width = intWidth + 2;
+             axWindowsMediaPlayer1.Height = intHeight + 2;
+         }
+
+可能因爲媒體文件的打開需要一定時間，這裏等待媒體文件的打開
+
+顯示文件播放長度。
+
+則顯示結果很可能爲0，因此，這時候很可能獲取不到文件的播放時間長度，容易出錯。所以在利用的時候可以加一個timer控件：
+
+從WMP8開始就不支持mms/rtsp協議了，所用wmp.URL="mms://xxxx";是不行的了。點此處見詳情，而mms這個協議現在還在廣泛使用。鬱悶。因此，我們不能使用wmp來看網絡電視了。
+
+
+
+
+媒體播放器包括如下元素：
+Video Display Panel：視頻顯示面板；
+Video Border：視頻邊框；
+Closed Captioning Display Panel；字幕顯示面板；
+Track Bar；搜索欄；
+Control Bar with Audio and Position Controls：帶有聲音和位置控制的控制欄；
+Go To Bar：轉到欄；
+Display Panel：顯示面板；
+Status Bar：狀態欄；
+
+　　就是這麼幾個部分，網上有資料說控件提供方法控制它們顯示與否，但是我在sdk中並沒有找到它們。唯一可以粗略控制它們的就是uiMode屬性。它的取值前面有。
+
+
+　　七、像暴風有字幕相關信息的設置，wmp控件有這個功能嗎？
+　　當然有。就是AxWindowsMediaPlayer.closedCaption。它是IWMPClosedCaption的實例。
+
+label4.Text = axMediaPlayer1.Volume.ToString();    //音量
+axMediaPlayer1.FileName = @"mms://218.98.101.164/vod/jingwei.wma";//文件路徑
+axMediaPlayer1.Play(); //開始播放
+
+
+nResL = axRealAudio1.GetPosition(); //獲得當前影片 的播放進度
+label1.Text = axRealAudio1.GetTitle();   //獲得影片的標題
+label2.Text = "當前的帶寬: " + axRealAudio1.GetBandwidthCurrent() / 1024 + "KB";//當前影片的當前的帶寬              
+label3.Text = "連接的帶寬: " + axRealAudio1.GetConnectionBandwidth() / 1024 + "KB"; //當前的連接的帶寬
+
+AxWindowsMediaPlayer媒體文件主要方法屬性
+屬性/方法名︰ 說明︰ 
+[基本屬性]  
+URL:String; 指定媒體位置，本機或網絡地址 
+
+playState:integer; 播放狀態，1=停止，2=暫停，3=播放，6=正在緩沖，9=正在連接，10=準備就緒 
+enableContextMenu:Boolean; 啟用/禁用右鍵菜單 
+
+
+//播放器基本控製 
+
+Ctlcontrols.next; 下一曲 
+Ctlcontrols.previous; 上一曲 
+
+[settings] wmp.settings //播放器基本設置 
+settings.volume:integer; 音量，0-100 
+settings.autoStart:Boolean; 是否自動播放 
+settings.mute:Boolean; 是否靜音 
+settings.playCount:integer; 播放次數 
+
+[currentMedia] wmp.currentMedia //當前媒體屬性 
+currentMedia.duration:double; 媒體總長度 
+currentMedia.durationString:string; 媒體總長度，字符串格式。如“03:24” 
+currentMedia.getItemInfo(const string); 獲取當前媒體信息"Title"=媒體標題，"Author"=藝術家，"Copyright"=版權信息，"Description"=媒體內容描述， "Duration"=持續時間（秒），"FileSize"=文件大小，"FileType"=文件類型，"sourceURL"=原始地址 
+currentMedia.setItemInfo(const string); 通過屬性名設置媒體信息 
+currentMedia.name:string; 同 currentMedia.getItemInfo("Title") 
+
+[currentPlaylist] wmp.currentPlaylist //當前播放列表屬性 
+currentPlaylist.count:integer; 當前播放列表所包含媒體數 
+currentPlaylist.Item[integer]; 獲取或設置指定項目媒體信息，其子屬性同wmp.currentMedia 
+
+
+在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原為原始的大小.
+         private void ResizeOriginal()
+         {
+							             int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
+							             int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
+							             axWindowsMediaPlayer1.Width = intWidth + 2;
+							             axWindowsMediaPlayer1.Height = intHeight + 2;
+         }
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+画验证码
+
+
+
+/// <summary>
+/// 字符
+/// </summary>
+/// <param name="len">几位</param>
+/// <returns></returns>
+public static string validation(int cd)
+{
+    var ran = new Random();
+    int num, tem;
+    string rtuStr = "";
+    for (int i = 0; i < cd; i++)
+    {
+        num = ran.Next();
+        if (i % 2 == 1)
+            tem = num % 10 + '0'; //数字
+        else
+            tem = num % 26 + 'A'; //字母
+        rtuStr += Convert.ToChar(tem).ToString();
+    }
+    //写入cookie
+    HttpCookie cookie = new HttpCookie("check");
+    cookie.Value = rtuStr.ToLower();
+    HttpContext.Current.Response.Cookies.Add(cookie);
+    return rtuStr;
+}
+
+/// <summary>
+/// 生成图像
+/// </summary>
+/// <param name="check">字符</param>
+public static byte[] drawImg(string check)
+{
+    Bitmap img = new Bitmap(90, 34);
+    var ht = Graphics.FromImage(img);
+    ht.Clear(Color.White);
+    ht.DrawLine(new Pen(Color.SpringGreen), 1, 1, 90, 34);
+    Font font = new Font("微软雅黑", 20, FontStyle.Bold);
+    var jianbian = new LinearGradientBrush(new Rectangle(0, 0, img.Width, img.Height), Color.Teal, Color.Snow, 2f, true);
+    ht.DrawString(check, font, jianbian, 0, 0);
+    ht.DrawRectangle(new Pen(Color.Aqua), 0, 0, img.Width - 1, img.Height - 1);
+    MemoryStream ms = new MemoryStream();
+    img.Save(ms, ImageFormat.Jpeg);
+    ht.Dispose();
+    img.Dispose();
+    return ms.ToArray();
+}
+    
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+C# 播放鈴聲
+
+4             //播放鈴聲 
+
+5 System.Media.SoundPlayer sndPlayer =new   System.Media.SoundPlayer(Application.StartupPath + @"/ring.wav");    //wav格式的鈴聲 
+
+6              sndPlayer.PlayLooping(); 
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+用C#實現全屏幕截圖
+
+
+今天一位同事想寫一個全屏幕截圖的代碼。當然要實現的第一步是能夠獲取整個屏幕的位圖，記得Win32 API的CreateDC, BitBlt等函數可以使用。於是上網查了下，果然屏幕截圖用這些函數。但winform已經可以把API都忘記了，所以得尋找一個無Win32 API的實現方式。綜合了網上的實現，以及自己的一些設計，實現思路如下：
+
+1. 開始截圖時，創建一個與屏幕大小一樣的位圖，然後用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上。這是很關鍵的一步，這樣所有的操作就都可以在該位圖上進行了，而無實際屏幕無關了。
+    int width = Screen.PrimaryScreen.Bounds.Width;
+
+    int height = Screen.PrimaryScreen.Bounds.Height;
+
+    Bitmap bmp = new Bitmap(width, height);
+
+    using (Graphics g = Graphics.FromImage(bmp))
+    {
+    g.CopyFromScreen(0, 0, 0, 0, new Size(width, height));
+    }
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+        public class ImageInfo
+        {
+            private string image_path;
+            private int image_width;
+            private int image_height;
+
+            public string ImagePath
+            {
+                get { return image_path; }
+                set { image_path = value; }
+            }
+
+            public int ImageWidth
+            {
+                get { return image_width; }
+                set { image_width = value; }
+            }
+
+            public int ImageHeight
+            {
+                get { return image_height; }
+                set { image_height = value; }
+            }
+
+            public ImageInfo(string ImagePath, int ImageWidth, int ImageHeight)
+            {
+                this.ImagePath = ImagePath;
+                this.ImageWidth = ImageWidth;
+                this.ImageHeight = ImageHeight;
+            }
+
+            public Bitmap GetBitmap()
+            {
+                //WebPageBitmap Shot = new WebPageBitmap(this.ImagePath, this.ImageWidth, this.ImageHeight);
+                //Shot.GetIt();
+                //Bitmap Pic = Shot.DrawBitmap(this.ImageHeight, this.ImageWidth);
+                //return Pic;
+                return null;
+            }
+        }
+        
+        
+        
+        
+        
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+            //DesktopLocation的用法
+
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.ToString() + "\n";
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.X.ToString() + "\n";
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.Y.ToString() + "\n";
+
+
+            Point p = new Point(this.DesktopLocation.X - 1, this.DesktopLocation.Y);
+
+            this.DesktopLocation = p;
+
+
+
+            //取得某一控件的參數
+            //獲取傳入對象的所有屬性名稱
+            Type types = button1.GetType();
+            foreach (var p in types.GetProperties())
+            {
+                richTextBox1.Text += "Type : \t" + p.PropertyType + "\tName : \t" + p.Name + "\n";
+            }
+
+
+
+//指定視窗出現的地方
+            Point p = new Point(600, 240);
+
+            this.DesktopLocation = p;
+
+
+
+            //C#啟動另外一個C#程序，並傳遞參數
+            string filename = @"C:\______test_files\aaaaa4.txt";
+            System.Diagnostics.Process.Start("notepad.exe", filename);
+
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 
+如:
+
+（1）
+string p1 = "Jackie";
+string p2 = "Aillo";
+Response.Write(String.Format("Hello {0}, I'm {1}", p1, p2));
+（2）
+Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+//如何將List轉換為DataTable
+
+public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
+{
+	DataTable result = new DataTable();
+	if (list.Count > 0)
+	{
+		PropertyInfo[] propertys = list[0].GetType().GetProperties();
+		foreach (PropertyInfo pi in propertys)
+		{
+			result.Columns.Add(pi.Name, pi.PropertyType);
+		}
+		for (int i = 0; i < list.Count; i++)
+		{
+			ArrayList tempList = new ArrayList();
+			foreach (PropertyInfo pi in propertys)
+			{
+				object obj = pi.GetValue(list[i], null);
+				tempList.Add(obj);
+			}
+			object[] array = tempList.ToArray();
+			result.LoadDataRow(array, true);
+		}
+	}
+	return result;
+}
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+            DataTable table = new DataTable();
+            //初始化datatale 
+            table.Columns.Add("id", typeof(string));
+            table.Columns.Add("value", typeof(int));
+            for (int i = 1; i <= 10; i++)
+            {
+                DataRow dRow = table.NewRow();
+                dRow["id"] = "id" + i.ToString();
+                dRow["value"] = i;
+                table.Rows.Add(dRow);
+            }
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+直接把DataTable的資料貼到DataGridView上
+
+	//C#之界面上依次出現表格（DataTable和DataGridView提高）
+	
+	C#之界面上依次出現表格（DataTable和DataGridView提高）
+	
+	效果圖：
+	
+	在textBox控件中輸入信息，點擊增加
+	
+	\
+	
+	出現如圖：
+	
+	\
+	
+	繼續：
+	
+	\
+	
+	代碼（沒用csdn插入代碼功能是插入的代碼增刪改不能選中，特別費事，所以下面代碼可能會看的有點亂）：
+	
+	//創建坡口形式選擇數據表
+	dt = new DataTable();
+	
+	//建九列
+	
+	dt.Columns.Add("name", typeof(System.String));
+	dt.Columns.Add("sex", typeof(System.String));
+	dt.Columns.Add("age", typeof(System.String));
+	
+	//將MongoDB中數據插入到該一行對應的各列中（我這裡是數據存入MongoDB中，在之前取出bson,然後foreach）
+	foreach (BsonDocument result in resultList)
+	{
+	//建一行
+	DataRow dr = dt.NewRow();
+	//行信息
+	dr[0] = 你的數據
+	dr[1] = 你的數據
+	dr[2] = 你的數據
+	//將上述該行加入DataTable中
+	dt.Rows.Add(dr);
+	
+	//綁定在sorce上
+	dataGridView1.DataSource = dt;
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+DataTable中使用Order By排序與Where過濾
+
+/// <summary>
+/// DataTable中使用Order By排序與Where過濾
+/// </summary>
+private void Bind()
+{
+    //這裡構造一個數據源
+    DataTable dt = new DataTable();
+    dt.Columns.Add("ID", typeof(System.String));
+    dt.Columns.Add("uName", typeof(System.String));
+    dt.Columns.Add("uDate", typeof(System.DateTime));
+    for (int i = 0; i < 10; i++)
+    {
+        DataRow dr = dt.NewRow();
+        dr["ID"] = i.ToString();
+        dr["uName"] = "name" + i;
+        dt.Rows.Add(dr);
+    }
+    dt.DefaultView.Sort = "ID asc";//相當於Order By
+    dt.DefaultView.RowFilter = "ID>5";//相當於Where
+    GridView1.DataSource = dt;
+    GridView1.DataBind();
+}
+    
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+C#_把dataTable數據導出到CSV,XLS文件
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190579.html
+https://blog.csdn.net/happmaoo/article/details/83814604
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+

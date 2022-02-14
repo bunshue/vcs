@@ -1,0 +1,1149 @@
+[Common]
+DefaultCharset=134
+DefaultFont=微软正黑体
+
+/* 1:识别码 2:标题 3:Hint  4:Left 5:Top 6:Width 7:Height 8:FontSize 9:字体粗体 */
+[Main_Message]
+mainmsgExitFSHD=确定退出Filing System HD ?
+
+[Message_UI]
+hdspMsgYes=是,,-1,-1,-1,-1,-1,-1
+hdspMsgNo=否,,-1,-1,-1,-1,-1,-1
+
+[Worklist_UI]
+cuspClose=退出,,-1,-1,-1,-1,-1,-1
+sbhdNewStudyQuery=查询,,-1,-1,-1,-1,-1,-1
+sbhdNewStudyKeyIn=患者资料,,-1,-1,-1,-1,-1,-1
+sbhdNewStudyNext=开始检查,,-1,-1,-1,-1,-1,-1
+gphdNewStudyDataTitle=↓患者资料,,-1,-1,-1,-1,-1,-1
+nslbsPatientID=患者号码,,-1,-1,-1,-1,-1,-1
+nslbsSex=性别,,-1,-1,-1,-1,-1,-1
+nslbsStudyDate=检查日期,,-1,-1,-1,-1,-1,-1
+nslbsPerformingDr=放射技师,,-1,-1,-1,-1,-1,-1
+nslbsPatientName=患者姓名,,-1,-1,-1,-1,-1,-1
+nslbsBirthDay=出生日期,,-1,-1,-1,-1,-1,-1
+nscbsModality=ES_|US_|CR_|SC_|,,-1,-1,-1,-1,-1,-1
+nslbsReferingDr=主治医师,,-1,-1,-1,-1,-1,-1
+nslbsAccessionNumber=检查单号,,-1,-1,-1,-1,-1,-1
+nslbsModality=检查种类,,-1,-1,-1,-1,-1,-1
+nslbsReportDr=报告医师,,-1,-1,-1,-1,-1,-1
+nslbsDescription=检查说明,,-1,-1,-1,-1,-1,-1
+gphdNewStudyQueryTitle=↓查询条件,,-1,-1,-1,-1,-1,-1
+nslbPatientID=患者号码,,-1,-1,-1,-1,-1,-1
+nslbStartStudyDate=检查开始日期,,-1,-1,-1,-1,-1,-1
+nslbPatientName=患者姓名,,-1,-1,-1,-1,-1,-1
+nslbEndStudyDate=检查结束日期,,-1,-1,-1,-1,-1,-1
+nslbAccessionNumber=检查单号,,-1,-1,-1,-1,-1,-1
+nslbModality=检查种类,,-1,-1,-1,-1,-1,-1
+nslbSort=排序种类,,-1,-1,-1,-1,-1,-1
+nsgpBasicWorklistManager=工作清单列表,,-1,-1,-1,-1,-1,-1
+lbhdNewStudyReKeyCountStart=查询结果 : (,,-1,-1,-1,-1,-1,-1
+lbhdNewStudyReKeyCountEnd= )笔,,-1,-1,-1,-1,-1,-1
+nslbCFindRequesting=服务启动中,请稍候...,,-1,-1,-1,-1,-1,-1
+nslvCFindReturnKeys=检查单号_|患者号码_|患者姓名_|检查种类_|检查日期_|出生日期_|性别_|主治医师_|检查说明_|,,-1,-1,-1,-1,-1,-1
+
+cbSort_PatientID=@病历号码
+cbSort_PatientName=@病历姓名
+cbSort_Modality=@种类
+cbSort_StudyDate=@检查日期
+cbSort_AccessionNumber=@检查单号
+cbSort_StudyDescription=@检查说明
+cbSort_None=@无
+
+[Worklist_Message]
+wlmsgCFindServiceRequesting=服务启动中，请稍候...
+wlmsgWorklistServerIsntEnabled=工作清单服务器尚未启动!
+wlmsgPatientIDAndModalityCannotBeEmpty=患者号码或检查种类不得为空!
+wlmsgDefaultModalityIs=预设检查种类为:
+wlmsgCFindDefaultModalityIs=预设查询检查种类为:
+wlmsgCFindDefaultSortIs=预设排序检查种类为:
+wlmsgPleaseUseWorklistData=请套用Worklist再进行检查.
+
+[Grabber_UI]
+hdspPrevStep=工作清单,,-1,-1,-1,-1,-1,-1
+hdspGrabberImage=撷取图像,,-1,-1,-1,-1,-1,-1
+hdspRecording=录影,,-1,-1,-1,-1,-1,-1
+lbhdGrabRecMark=录影中,,-1,-1,-1,-1,-1,-1
+hdspNextStep=保存病历,,-1,-1,-1,-1,-1,-1
+lbhdGrabPatientID=患者号码,,-1,-1,-1,-1,-1,-1
+lbhdGrabPatientName=患者姓名,,-1,-1,-1,-1,-1,-1
+lbhdGrabStudyDate=检查日期,,-1,-1,-1,-1,-1,-1
+lbhdGrabModality=检查种类,,-1,-1,-1,-1,-1,-1
+lbhdGrabStudyDesc=检查说明,,-1,-1,-1,-1,-1,-1
+lbhdGrabAccNumber=检查单号,,-1,-1,-1,-1,-1,-1
+lbhdGrabRefDr=主治医师,,-1,-1,-1,-1,-1,-1
+lbhdGrabSex=性别,,-1,-1,-1,-1,-1,-1
+lbhdGrabPerDr=放射技师,,-1,-1,-1,-1,-1,-1
+lbhdGrabBirthDate=出生日期,,-1,-1,-1,-1,-1,-1
+lbhdGrabReportDr=报告医师,,-1,-1,-1,-1,-1,-1
+lbhdGrabStudyInsUID=检查唯一码,,-1,-1,-1,-1,-1,-1
+lbhdGrabCapImgCountTitle=图像张数 :,,-1,-1,-1,-1,20,-1
+lbhdGrabCapImgSelect=0,,-1,-1,-1,-1,24,-1
+lbhdGrabCapImgMiddle=/,,-1,-1,-1,-1,24,-1
+lbhdGrabCapImgCount=0,,-1,-1,-1,-1,24,-1
+lbhdGrabRecVdoCountTitle=录影档数 :,,-1,-1,-1,-1,20,-1
+lbhdGrabRecVdoCount=0,,-1,-1,-1,-1,24,-1
+lbhdGrabRecVdoSelect=0,,-1,-1,-1,-1,24,-1
+lbhdGrabRecVdoMiddle=/,,-1,-1,-1,-1,24,-1
+hdspCStore=传送,,-1,-1,-1,-1,-1,-1
+
+[Grabber_Message]
+grbmsgCannotBackToMainInRec=无法在录影时退出
+grbmsgQuitWithoutSavePatient=病历尚未保存，确定退出 ?
+grbmsgCannotBacktoWLInRec=无法在录影时退出
+grbmsgCaptureToMaxCount=已到达撷取图像数量最大值 :
+grbmsgNoImageOrVideoToSave=没有撷取任何图像或者录影，无法存档
+grbmsgNoImageToCStore=没有影像，无法上传
+grbmsgMakeSureToSave=确定保存此病历 ?
+grbmsgClearTheImage=删除此图像 ?
+grbmsgClearAllImage=删除全部图像 ?
+grbmsgSavingNow=保存中，请稍候......
+grbmsgRecording=录影
+grbmsgStopRecording=停止录影
+grbmsgNowVideoFormatIs=现在格式 :
+grbmsgScanEndoModelCode=请扫描镜子序号
+
+[Finally_UI]
+sfspReturn=退出,,-1,-1,-1,-1,-1,-1
+sfspCStored=传送,,-1,-1,-1,-1,-1,-1
+sfspOpenImageAndVideo=导入图像,,-1,-1,-1,-1,-1,-1
+sfspNewStudy=新的检查,,-1,-1,-1,-1,-1,-1
+/* Add 20151224 Ku */
+sfspOpenAllImage=历史图像,,-1,-1,-1,-1,-1,-1
+sfspNewStudy=新的检查,,-1,-1,-1,-1,-1,-1
+
+[Finally_Message]
+finmsgNoAnyPacsSetToCStore=没有任何可用的PACS设置
+
+[CStore_UI]
+lbhdMsgPatietNameTitle=患者姓名 :,,-1,-1,-1,-1,-1,-1
+lbhdMsgFilCountTitle=图像数量 :,,-1,-1,-1,-1,-1,-1
+lbhdMsgTotalByteTitle=总共位元组 :,,-1,-1,-1,-1,-1,-1
+lbhdMsgProgressByteTitle=处理位元组 :,,-1,-1,-1,-1,-1,-1
+lbhdMsgStatusTitle=传送状态 :,,-1,-1,-1,-1,-1,-1
+lbhdMsgServerNameTitle=PACS Server名称 :,,-1,-1,-1,-1,-1,-1
+
+[CStore_Message]
+cstmsgStartCStore=开始传送
+cstmsgCStoring=传送中
+cstmsgCStoreFinish=传送完成
+cstmsgPreparing=准备中
+cstmsgGetImageFail=取得图像失败
+cstmsgCStoreFail=传送图像失败
+
+[CStoreList_UI]
+sbhdCLToday=今日,,-1,-1,-1,-1,-1,-1
+sbhdCLOneDay=指定日期查询,,-1,-1,-1,-1,-1,-1
+sbhdCLCStore=传送,,-1,-1,-1,-1,-1,-1
+lvhdCLDataList=患者号码_|患者姓名_|检查单号_|检查说明_|传送状态_|,,-1,-1,-1,-1,-1,-1
+
+[HisQuery_UI]
+hssbSearchToday=今日,,-1,-1,-1,-1,-1,-1
+hssbSearchWeek=当周,,-1,-1,-1,-1,-1,-1
+hssbSearchMonth=当月,,-1,-1,-1,-1,-1,-1
+hsspCompositionQuery=进阶查询,,-1,-1,-1,-1,-1,-1
+sbhdHQQuery=查询,,-1,-1,-1,-1,-1,-1
+sbhdHQLoadImage=载入,,-1,-1,-1,-1,-1,-1
+SpeedButton1=载入,,-1,-1,-1,-1,-1,-1
+SpeedButton2=载入,,-1,-1,-1,-1,-1,-1
+SpeedButton3=载入,,-1,-1,-1,-1,-1,-1
+sbhdQueryExport1=汇出,,-1,-1,-1,-1,-1,-1
+sbhdQueryExport2=汇出,,-1,-1,-1,-1,-1,-1
+sbhdQueryExport3=汇出,,-1,-1,-1,-1,-1,-1
+sbhdQueryExport4=汇出,,-1,-1,-1,-1,-1,-1
+/* Add 20151222 Ku */
+sbhdHQEdit1=,编辑患者资料,,-1,-1,-1,-1,-1,-1
+sbhdHQEdit2=,编辑患者资料,,-1,-1,-1,-1,-1,-1
+sbhdHQEdit3=,编辑患者资料,,-1,-1,-1,-1,-1,-1
+sbhdHQEdit4=,编辑患者资料,,-1,-1,-1,-1,-1,-1
+
+hslbPatientID1=患者号码 :,,-1,-1,-1,-1,-1,-1
+hslbPatientName1=患者姓名 :,,-1,-1,-1,-1,-1,-1
+hslbAccessionNumber1=检查单号 :,,-1,-1,-1,-1,-1,-1
+hslbStudyDate1=检查日期 :,,-1,-1,-1,-1,-1,-1
+hslbDescription1=检查说明 :,,-1,-1,-1,-1,-1,-1
+hslbNumOfImage1=图像数量 :,,-1,-1,-1,-1,-1,-1
+hslbNumOfVideo1=录影数量 :,,-1,-1,-1,-1,-1,-1
+
+hslbPatientID2=患者号码 :,,-1,-1,-1,-1,-1,-1
+hslbPatientName2=患者姓名 :,,-1,-1,-1,-1,-1,-1
+hslbAccessionNumber2=检查单号 :,,-1,-1,-1,-1,-1,-1
+hslbStudyDate2=检查日期 :,,-1,-1,-1,-1,-1,-1
+hslbDescription2=检查说明 :,,-1,-1,-1,-1,-1,-1
+hslbNumOfImage2=图像数量 :,,-1,-1,-1,-1,-1,-1
+hslbNumOfVideo2=录影数量 :,,-1,-1,-1,-1,-1,-1
+
+hslbPatientID3=患者号码 :,,-1,-1,-1,-1,-1,-1
+hslbPatientName3=患者姓名 :,,-1,-1,-1,-1,-1,-1
+hslbAccessionNumber3=检查单号 :,,-1,-1,-1,-1,-1,-1
+hslbStudyDate3=检查日期 :,,-1,-1,-1,-1,-1,-1
+hslbDescription3=检查说明 :,,-1,-1,-1,-1,-1,-1
+hslbNumOfImage3=图像数量 :,,-1,-1,-1,-1,-1,-1
+hslbNumOfVideo3=录影数量 :,,-1,-1,-1,-1,-1,-1
+
+hslbPatientID4=患者号码 :,,-1,-1,-1,-1,-1,-1
+hslbPatientName4=患者姓名 :,,-1,-1,-1,-1,-1,-1
+hslbAccessionNumber4=检查单号 :,,-1,-1,-1,-1,-1,-1
+hslbStudyDate4=检查日期 :,,-1,-1,-1,-1,-1,-1
+hslbDescription4=检查说明 :,,-1,-1,-1,-1,-1,-1
+hslbNumOfImage4=图像数量 :,,-1,-1,-1,-1,-1,-1
+hslbNumOfVideo4=录影数量 :,,-1,-1,-1,-1,-1,-1
+
+[HisQuery_Message]
+hsqrymsgLoadImage=导入图像
+hsqrymsgLoadingImageNow=导入中
+
+[Burn_UI]
+bugpBurnTitle=刻录,,-1,-1,-1,-1,-1,-1
+buspBurn=开始刻录,,-1,-1,-1,-1,-1,-1
+buspClear=清除,,-1,-1,-1,-1,-1,-1
+buspClearAll=清除全部,,-1,-1,-1,-1,-1,-1
+bulbBurnDevice=光碟机装置列表,,-1,-1,-1,-1,-1,-1
+bulbTotalProcess=所有光碟烧录总进度,,-1,-1,-1,-1,-1,-1
+bulbDeviceBufferSize=缓冲区使用状况,,-1,-1,-1,-1,-1,-1
+bugpDVDCapacity=目前选择总刻录容量 : 0 MB,,-1,-1,-1,-1,-1,-1
+bulvBurnList=识别码_|患者号码_|容量大小_|,,-1,-1,-1,-1,-1,-1
+
+[Burn_Message]
+burnmsgNowTotalSize=目前选择总刻录容量 :
+burnmsgAddToBurn=加入刻录
+burnmsgTheDeviceIsntABurner=此装置不是一台刻录机.
+burnmsgStartBurnDVD=开始刻录
+burnmsgPrepareBurnData=准备刻录资料中
+burnmsgPlzWait=请稍候
+burnmsgDICOMDIRSuccess=包装 DICOMDIR 成功
+burnmsgNeedCountDiscStart=需要
+burnmsgNeedCountDiscEnd= 片光碟
+burnmsgBurnFail=刻录失败，请确认光碟机状态且再试一次
+burnmsgDICOMDIRFail=包装 DICOMDIR 失败
+burnmsgBurnFinish=刻录完成
+burnmsgStartBurnFrom=开始刻录第 :
+burnmsgBurnTheDVDSuccess=刻录此片光碟成功
+burnmsgBurnTheDVDFail=刻录此片光碟失败
+burnmsgBurnTheDVDFinish=刻录此片光碟完成
+burnmsgPlzInsertNextDVD=请放入下一片空白光碟片
+burnmsgDiscTypeFail=请确认光碟格式
+burnmsgMakeSureBurn=是否刻录?
+
+[Print_Message]
+printmsgAddToPrint=加入打印
+
+[PrintViewer_UI]
+gphdPrintViewerMidTitle=图像打印,,-1,-1,-1,-1,-1,-1
+sbhdAddSelectImage=单张加入,,-1,-1,-1,-1,-1,-1
+sbhdAddAll=全部加入,,-1,-1,-1,-1,-1,-1
+sbhdClearSlectedImage=删除单张,,-1,-1,-1,-1,-1,-1
+sbhdClearAll=删除全部,,-1,-1,-1,-1,-1,-1
+sbhdPaperPrint=打印,,-1,-1,-1,-1,-1,-1
+lvhdPriViewerRow=行 :,,-1,-1,-1,-1,-1,-1
+lvhdPriViewerCol=列 :,,-1,-1,-1,-1,-1,-1
+
+[PrintViewer_Message]
+printmsgPrintNow=打印中.......
+
+[Viewer_UI]
+vilbRows=行 :,,-1,-1,-1,-1,-1,-1
+vilbCols=列 :,,-1,-1,-1,-1,-1,-1
+/* Add 20151028 Ku */
+hdspSelectAll=全选,,-1,-1,-1,-1,-1,-1
+hdspCStore=传送,,-1,-1,-1,-1,-1,-1
+
+[SingleViewer_UI]
+vsspRecovery=,复原,-1,-1,-1,-1,-1,-1
+vsspVerticality=,垂直翻转,-1,-1,-1,-1,-1,-1
+vsspHorizontal=,水平翻转,-1,-1,-1,-1,-1,-1
+vsspPlus90=,顺时针旋转90度,-1,-1,-1,-1,-1,-1
+vsspMinus90=,逆时针旋转90度,-1,-1,-1,-1,-1,-1
+vsspZoomIn=,放大,-1,-1,-1,-1,-1,-1
+vsspZoomOut=,缩小,-1,-1,-1,-1,-1,-1
+vsspZoom100=,100%显示,-1,-1,-1,-1,-1,-1
+sbhdSVMoveImage=,图像移动,-1,-1,-1,-1,-1,-1
+sbhdSVMagnifier=,放大镜,-1,-1,-1,-1,-1,-1
+sbhdSVPartMagnifier=,局部放大,-1,-1,-1,-1,-1,-1
+sbhdSVPreImg=,上一张图像,-1,-1,-1,-1,-1,-1
+sbhdSVNextImg=,下一张图像,-1,-1,-1,-1,-1,-1
+
+[Video_UI]
+vispVideoFit=,符合视窗大小显示,-1,-1,-1,-1,-1,-1
+vispOriginalVideoSize=,100%显示,-1,-1,-1,-1,-1,-1
+vispPauseMovie=,暂停,-1,-1,-1,-1,-1,-1
+visbStopMovie=,停止,-1,-1,-1,-1,-1,-1
+vispStepOneFrame=,下一个Frame,-1,-1,-1,-1,-1,-1
+visbPlayMovie=,播放,-1,-1,-1,-1,-1,-1
+sbhdSVDPreVideo=,上一个影片,-1,-1,-1,-1,-1,-1
+sbhdSVDNextVideo=,下一个影片,-1,-1,-1,-1,-1,-1
+vilbVideoDuration=,目前播放时间,-1,-1,-1,-1,-1,-1
+vilbVideoTotalDuration=,影片长度,-1,-1,-1,-1,-1,-1
+trbhdVideoPosition=,播放进度,-1,-1,-1,-1,-1,-1
+trckbhdVideoOptions=,滑鼠拖曳以调整播放进度,-1,-1,-1,-1,-1,-1
+
+[Setting_UI]
+sbhdSetPACS=PACS,,-1,-1,-1,-1,-1,-1
+sbhdSetDICOM=DICOM,,-1,-1,-1,-1,-1,-1
+sbhdSetWorklist=Worklist,,-1,-1,-1,-1,-1,-1
+sbhdSetImgDev=图像设置,,-1,-1,-1,-1,-1,-1
+sbhdSetVdoDev=录影设置,,-1,-1,-1,-1,-1,-1
+sbhdSetAccount=帐号设置,,-1,-1,-1,-1,-1,-1
+sbhdSetBurn=刻录设置,,-1,-1,-1,-1,-1,-1
+sbhdSetImgSet=裁切设置,,-1,-1,-1,-1,-1,-1
+/* Add 20151224 Ku */
+sbhdSetReport=报告设定,,-1,-1,-1,-1,-1,-1
+
+/* Add 20180808 Ku */
+sbhdSetPACS2=DICOM,,-1,-1,-1,-1,-1,-1
+sbhdSetWorklist2=Worklist,,-1,-1,-1,-1,-1,-1
+sbhdSetSmmit2=C-Commit,,-1,-1,-1,-1,-1,-1
+sbnhdMPPS=MPPS,,-1,-1,-1,-1,-1,-1
+lbhdSetUseMPPS=使用MPPS,,-1,-1,-1,-1,-1,-1
+lbhdSetMppsLocalAE=本地端AE :,,-1,-1,-1,-1,-1,-1
+lbhdSetMppsServerAE=服务器AE :,,-1,-1,-1,-1,-1,-1
+lbhdSetMppsServerIP=服务器 IP :,,-1,-1,-1,-1,-1,-1
+lbhdSetMppsServerPort=服务器端口 :,,-1,-1,-1,-1,-1,-1
+rbtnStartMPPSY=开启,,-1,-1,-1,-1,-1,-1
+rbtnStartMPPSN=关闭,,-1,-1,-1,-1,-1,-1
+edMPPSLocalAE=,,-1,-1,-1,-1,-1,-1
+edMPPSServerAE=,,-1,-1,-1,-1,-1,-1
+edMPPSServerIP=,,-1,-1,-1,-1,-1,-1
+edMPPSServerPort=,,-1,-1,-1,-1,-1,-1
+
+ledhdSetSetName=设置名称 :,,-1,-1,-1,-1,-1,-1
+ledhdSetLocalAE=本地端AE :,,-1,-1,-1,-1,-1,-1
+ledhdSetServerAE=服务器AE :,,-1,-1,-1,-1,-1,-1
+ledhdSetServerIP=服务器 IP :,,-1,-1,-1,-1,-1,-1
+ledhdSetServerPort=服务器连接埠 :,,-1,-1,-1,-1,-1,-1
+ckbhdSetNetworkUse=启用,,-1,-1,-1,-1,-1,-1
+lvhdSetNetData=设置名称_|本地端AE_|服务器AE_|服务器IP_|服务器连接埠_|启用_|,,-1,-1,-1,-1,-1,-1
+/* Add 20160808 Ku */
+lbhdSetCharacter1=查询 :,,-1,-1,-1,-1,-1,-1
+lbhdSetCharacter2=结果 :,,-1,-1,-1,-1,-1,-1
+cbhdSetCharacter1=AUTO_|UTF-8_|ANSI_|,,-1,-1,-1,-1,-1,-1
+cbhdSetCharacter2=AUTO_|UTF-8_|ANSI_|,,-1,-1,-1,-1,-1,-1
+
+ledhdSetDeviceID=装置名称 :,,-1,-1,-1,-1,-1,-1
+ledhdSetImagePath=图像保存路径 :,,-1,-1,-1,-1,-1,-1
+sbhdSetConfirmDir=确定,,-1,-1,-1,-1,-1,-1
+ledhdSetDescription=说明,,-1,-1,-1,-1,-1,-1
+ckbhdSetImgDevUse=启用,,-1,-1,-1,-1,-1,-1
+lvhdSetImageDeviceData=装置名称_|图像路径_|说明_|启用_|,,-1,-1,-1,-1,-1,-1
+
+lbhdVideoVideoSectionTitle=视讯装置 :,,-1,-1,-1,-1,-1,-1
+lbhdVideoVideoFormatSectionTitle=视讯格式 :,,-1,-1,-1,-1,-1,-1
+lbhdAudioSectionTitle=音讯装置 :,,-1,-1,-1,-1,-1,-1
+lbhdAudioVideoFormatSectionTitle=音讯格式 :,,-1,-1,-1,-1,-1,-1
+lbhdVideoVideoUseCompTitle=录影压缩 :,,-1,-1,-1,-1,-1,-1
+rdobtnhdSetCompressYes=打开,,-1,-1,-1,-1,-1,-1
+rdobtnhdSetCompressNo=关闭,,-1,-1,-1,-1,-1,-1
+lbhdSetUseResumeRec=自动分段录影 :,,-1,-1,-1,-1,-1,-1
+lbhdUseResumeRecYes=打开,,-1,-1,-1,-1,-1,-1
+lbhdUseResumeRecNo=关闭,,-1,-1,-1,-1,-1,-1
+lbhdRecResumeInterval=分段间隔(秒),,-1,-1,-1,-1,-1,-1
+lbhdSetImageCom=图像压缩设置 :,,-1,-1,-1,-1,-1,-1
+lbhdSetImageCompressParam=参数 :,,-1,-1,-1,-1,-1,-1
+lbhdSetImagePreview=图像预览最大张数 :,,-1,-1,-1,-1,-1,-1
+bshdSetDetectionSignal=,讯号侦测,-1,-1,-1,-1,-1,-1
+
+ledhdAccountID=帐号名称 :,,-1,-1,-1,-1,-1,-1
+ledhdSetPassowrd=密码 :,,-1,-1,-1,-1,-1,-1
+ledhdSetPasswordCheck=确认密码 :,,-1,-1,-1,-1,-1,-1
+ledhdSetDrName=医师姓名 :,,-1,-1,-1,-1,-1,-1
+ledhdSetDepartment=科室 :,,-1,-1,-1,-1,-1,-1
+lvhdSetAccountData=帐号_|医师姓名_|科室_|权限_|,,-1,-1,-1,-1,-1,-1
+
+lbhdSetBurnDevice=装置 :,,-1,-1,-1,-1,-1,-1
+lbhdSetDiscMaxCapacity=单片最大容量 :,,-1,-1,-1,-1,-1,-1
+cbhdSetDiscMaxCapacity=4096_|20480_|,,-1,-1,-1,-1,-1,-1
+lbhdSetBurnDiscType=光碟格式 :,,-1,-1,-1,-1,-1,-1
+rdobtnhdSetDVD=一般DVD,,-1,-1,-1,-1,-1,-1
+rdobtnhdSetBRDVD=蓝光DVD,,-1,-1,-1,-1,-1,-1
+ledhdSetBurnFileSetID=光碟标题 :,,-1,-1,-1,-1,-1,-1
+
+lbhdSetImgCutSetTitle=图像撷取裁切设置 :,,-1,-1,-1,-1,-1,-1
+lbhdSetImgCutUse=启用裁切 :,,-1,-1,-1,-1,-1,-1
+lbhdSetImgCutLeftTitle=裁切左距 :,,-1,-1,-1,-1,-1,-1
+lbhdSetImgCutTopTitle=裁切上距 :,,-1,-1,-1,-1,-1,-1
+lbhdSetImgCutWidthTitle=图像宽度 :,,-1,-1,-1,-1,-1,-1
+lbhdSetImgCutHeightTitle=图像高度 :,,-1,-1,-1,-1,-1,-1
+rbtnhdSetImgCutUseYes=是,,-1,-1,-1,-1,-1,-1
+rbtnhdSetImgCutUseNo=否,,-1,-1,-1,-1,-1,-1
+
+/* Add 20151224 Ku */
+lbrsSetCopies=打印份数 :,,-1,-1,-1,-1,-1,-1
+cbrsSetCopies=1_|2_|3_|4_|5_|6_|7_|8_|9_|,,-1,-1,-1,-1,-1,-1
+lbrsSetPrintAllPages=打印全部页次 :,,-1,-1,-1,-1,-1,-1
+rbrsSetPrintAllPagesY=开启,,-1,-1,-1,-1,-1,-1
+rbrsSetPrintAllPagesN=关闭,,-1,-1,-1,-1,-1,-1
+lbrsSetLogoPath=Logo路径 :,,-1,-1,-1,-1,-1,-1
+edrsSetLogoPath=,,-1,-1,-1,-1,-1,-1
+sbrsSetLogoPath=...,,-1,-1,-1,-1,-1,-1
+lbrsSetMapping=使用报告对应 :,,-1,-1,-1,-1,-1,-1
+rbrsSetMappingY=开启,,-1,-1,-1,-1,-1,-1
+rbrsSetMappingN=关闭,,-1,-1,-1,-1,-1,-1
+cbrsSetMapping=,,-1,-1,-1,-1,-1,-1
+lbrsSetImport=报告汇入 :,,-1,-1,-1,-1,-1,-1
+sbrsSetImport=汇入,,-1,-1,-1,-1,-1,-1
+lbrsSetCustomModality=自定义Modality :,,-1,-1,-1,-1,-1,-1
+rbrsSetCustomModalityY=开启,,-1,-1,-1,-1,-1,-1
+rbrsSetCustomModalityN=关闭,,-1,-1,-1,-1,-1,-1
+cbrsSetCustomModality=SC_|ES_|,,-1,-1,-1,-1,-1,-1
+
+/* Add 20151224 Ku */
+lvhdSetReportList=报告_|关键词_|上传页次_|建立日期_|,,-1,-1,-1,-1,-1,-1
+
+/* Add 20151224 Ku */
+leriSetPath=报告路径 :,,-1,-1,-1,-1,-1,-1
+sbriSetPath=...,,-1,-1,-1,-1,-1,-1
+leriSetNote=报告名称 :,,-1,-1,-1,-1,-1,-1
+leriSetKeyWord=关键词 :,,-1,-1,-1,-1,-1,-1
+lbriSetStorePage=上传页次 :,,-1,-1,-1,-1,-1,-1
+edriSetStorePageS=,,-1,-1,-1,-1,-1,-1
+lbriSetStorePageBetween=~,,-1,-1,-1,-1,-1,-1
+edriSetStorePageE=,,-1,-1,-1,-1,-1,-1
+
+sbhdSetCreate=新增,,-1,-1,-1,-1,-1,-1
+sbhdSetModify=修改,,-1,-1,-1,-1,-1,-1
+sbhdSetDelete=删除,,-1,-1,-1,-1,-1,-1
+sbhdSetCEcho=Echo,,-1,-1,-1,-1,-1,-1
+sbhdSetSave=保存,,-1,-1,-1,-1,-1,-1
+sbhdSetCancel=取消,,-1,-1,-1,-1,-1,-1
+sbhdSetMainSave=保存,,-1,-1,-1,-1,-1,-1
+
+[Setting_Message]
+setmsgDeleteTheSet=删除此笔设置 ?
+setmsgDeleteTheAccount=删除此帐号 ?
+setmsgImgCompressQuality=品质 :
+setmsgImgCompressRate=倍率 :
+setmsgCEchoSuccess=C-Echo 连线测试成功!
+setmsgCEchoFail=C-Echo 连线测试失败.
+setmsgImgCutWidthFail=无效的图像宽度，建议值为 :
+setmsgPasswordReCheckFail=密码及确认密码不一致.
+setmsgAccountDataNotEnough=任一栏位资料不得为空.
+setmsgAccountLimitNotEnough=请至少选择一种权限. 
+setmsgNoSelectDeckLinkCard=@无侦测到DeckLink采集卡
+setmsgNo4KDeckLinkCard=@无侦测到DeckLink4K采集卡
+setmsgNoSourceSignal=@无来源讯号
+setmsgDetectionSuccess=@侦测讯号成功
+/* Add 20151224 Ku */
+setmsgReportNoteIsEmpty=@报告名称空白
+setmsgReportNoteIsExists=@报告已存在
+setmsgReportPathIsEmpty=@路径空白
+setmsgReportImportFail=@汇入失败
+setmsgReportUpdateFail=@更新失败
+
+[Login_UI]
+lbhdLoginID=帐号 :,,-1,-1,-1,-1,-1,-1
+lbhdLoginPW=密码 :,,-1,-1,-1,-1,-1,-1
+sbhdLogin=登入,,-1,-1,-1,-1,-1,-1
+sphdLoginExit=退出,,-1,-1,-1,-1,-1,-1
+
+[Login_Message]
+loginmsgIDorPWDError=帐号或密码输入错误.
+
+[QueryControlObj]
+titleQCOPatientID=患者号码
+titleQCOPatientName=患者姓名
+titleQCOSex=性别
+titleQCOBirthDate=出生日期
+titleQCOStudyStartDate=开始检查日期
+titleQCOStudyEndDate=结束检查日期
+titleQCOAccNum=检查单号
+titleQCOReferDr=主治医师
+titleQCOPerforDr=放射技师
+titleQCOStudyDr=报告医师
+titleQCOModality=检查种类
+
+[PrinterList_UI]
+hdlbPLPrinterName=印表机名称列表 : ,,-1,-1,-1,-1,-1,-1
+hdcbPLPrinterList=,,-1,-1,-1,-1,-1,-1
+hdlbPLNumOfCopies=列印份数 : ,,-1,-1,-1,-1,-1,-1
+hdcbPLNumOfCopies=1_|2_|3_|4_|5_|6_|7_|8_|9_|,,-1,-1,-1,-1,-1,-1
+hdsbPrintConfirm=确定,,-1,-1,-1,-1,-1,-1
+hdsbPrintCancel=取消,,-1,-1,-1,-1,-1,-1
+
+[Export_UI]
+sbhdExportStart=汇出,,-1,-1,-1,-1,-1,-1
+sbhdExportRefresh=重新整理,重新侦测系统硬体装置,-1,-1,-1,-1,-1,-1
+sbhdExportSetDefaultExportPath=设为预设路径,将目前选择路径设定成预设汇出路径,-1,-1,-1,-1,-1,-1
+gphdExportDeviceTitle=汇出装置选择,,-1,-1,-1,-1,-1,-1
+gphdExportProcessTitle=汇出档案种类选择,,-1,-1,-1,-1,-1,-1
+sbhdExportSetOtherDefault=,储存汇出状态,-1,-1,-1,-1,-1,-1
+sbhdExportSetTiffDefault=,储存汇出状态,-1,-1,-1,-1,-1,-1
+sbhdExportSetCompVideoDefault=,储存汇出状态,-1,-1,-1,-1,-1,-1
+sbhdExportSetDicomDefault=,储存汇出状态,-1,-1,-1,-1,-1,-1
+sbhdExportSetVideoDefault=,储存汇出状态,-1,-1,-1,-1,-1,-1
+ckbhdExportOther=汇出JPG影像档案,,-1,-1,-1,-1,-1,-1
+ckbhdExportCompressVideo=汇出压缩检查录影档案,,-1,-1,-1,-1,-1,-1
+ckbhdExportDicom=汇出原始DICOM影像档案,,-1,-1,-1,-1,-1,-1
+ckbhdExportVideo=汇出原始检查录影档案,,-1,-1,-1,-1,-1,-1
+ckbhdExportTiff=汇出原始TIFF图像文件案,,-1,-1,-1,-1,-1,-1
+
+[Export_Message]
+hdExportMsgUnknownDevice=无法识别的装置
+hdExportMsgNoRootPathDevice=没有根目录的装置
+hdExportMsgMoveAbleDevice=外接硬碟
+hdExportMsgHDDDevice=本机磁碟
+hdExportMsgOnlineDevice=网路磁碟
+hdExportMsgCDRomDevice=光碟机
+hdExportMsgRamDevice=RAM磁碟机
+hdExportMsgStartToExport=开始汇出，请稍候
+hdExportMsgEndOfExport=汇出作业完成
+
+[VideoCompressList_UI]
+lvhdVCLResultList=,,-1,-1,-1,-1,-1,-1
+lvhdVCLResultCaption=项次
+lvhdVCLResultItem1=病历号码
+lvhdVCLResultItem2=病历姓名
+lvhdVCLResultItem3=检查日期
+lvhdVCLResultItem4=检查单号
+lvhdVCLResultItem5=检查说明
+gphdVCLVideoTitle=检查录影档列表,,-1,-1,-1,-1,-1,-1
+lvhdVCLVideoList=,,-1,-1,-1,-1,-1,-1
+lvhdVCLVideoListCaption=项次
+lvhdVCLVideoListItem1=档案路径
+lvhdVCLVideoListItem2=压缩状态
+sbhdVCLAddToExport=加入压缩
+
+[VideoCompressList_Message]
+hdVCLMessagePlzChooseExam=请至少选择一笔检查
+hdVCLMessageHasAddToCompress=已将选取检查加入压缩排程
+
+[VideoCompress_UI]
+gphdVCCompressProgress=目前录影档压缩进度 :,,-1,-1,-1,-1,-1,-1
+lvVCCompressVideoListCaption=项次
+lvVCCompressVideoListItem1=档案路径
+lvVCCompressVideoListItem2=压缩状态
+sbhdVCExitFromFSHD=离开FSHD
+
+[VideoCompress_Message]
+hdVCMsgNoAnyVideoNeedToCompress=没有任何录影档需要压缩
+hdVCMsgAllVideoCompressFinish=所有录影档压缩完成
+hdVCMsgCompressNotYet=等待中
+hdVCMsgCompressCompressing=压缩中
+hdVCMsgCompressFinished=已完成
+hdVCMsgCompressNotAllFinishedMakeSureExit=尚未压缩完成. 确定要离开?
+
+/*Add 20151111 Ku*/
+[SendVideo_Message]
+mainmsgExitFSHDHaveVideo=@录像文件尚未压缩完成. 确定要离开?
+
+[MainUI]
+sphdMainNewStudy=,,-1,-1,-1,-1,-1,-1
+sbhdMainQuery=,,-1,-1,-1,-1,-1,-1
+sbhdMainPACS=,,-1,-1,-1,-1,-1,-1
+sbhdMainCompressList=,,5000,5000,-1,-1,-1,-1
+sbhdMainBurn=,,-1,-1,-1,-1,-1,-1
+shhdMainPrint=,,-1,-1,-1,-1,-1,-1
+sbhdMainSetup=,,-1,-1,-1,-1,-1,-1
+sbhdMainExit=,,-1,-1,-1,-1,-1,-1
+
+/* Add 20151224 Ku */
+[DisplayFrameUI]
+viplViewerClient=,,-1,-1,-1,-1,-1,-1
+
+[CompareListUI]
+cilvExamList=检查日期_|检查时间_|,,-1,-1,-1,-1,-1,-1
+
+[CompareImageUI]
+
+[ReportUI]
+rulbTemplate=范本 :,,-1,-1,-1,-1,-1,-1
+ruedTemplate=,,-1,-1,-1,-1,-1,-1
+rusbTemplateAdd=,加入模板,-1,-1,-1,-1,-1,-1
+rucbReportList=,,-1,-1,-1,-1,-1,-1
+rusbReportUnlock=,报告解锁,-1,-1,-1,-1,-1,-1
+rusbFirstPage=,第一页,-1,-1,-1,-1,-1,-1
+rusbPreviousPage=,上一页,-1,-1,-1,-1,-1,-1
+rusbNextPage=,下一页,-1,-1,-1,-1,-1,-1
+rusbLastPage=,最后页,-1,-1,-1,-1,-1,-1
+lbPageInfo=000/000,,-1,-1,-1,-1,-1,-1
+plRReportClient=,,-1,-1,-1,-1,-1,-1
+rusbAddOneSeries=,加入全部,-1,-1,-1,-1,-1,-1
+rusbClearSeriesData=,清除全部,-1,-1,-1,-1,-1,-1
+rusbMark=标记,,-1,-1,-1,-1,-1,-1
+vuRIMyuNormal=,一般,-1,-1,-1,-1,-1,-1
+vuRIMyuNormalLine=,两点直线,-1,-1,-1,-1,-1,-1
+vuRIMyuArrow=,标记箭头,-1,-1,-1,-1,-1,-1
+vuRIMyuEllipseROI=,圆形 ROI,-1,-1,-1,-1,-1,-1
+vuRIMyuRectROI=,矩形 ROI,-1,-1,-1,-1,-1,-1
+vuRIMyuAnnotation=,批注信息,-1,-1,-1,-1,-1,-1
+vuRIMyuRandomLine=,任意线,-1,-1,-1,-1,-1,-1
+ruplImageClient=,,-1,-1,-1,-1,-1,-1
+rusbPreview=预览,,-1,-1,-1,-1,-1,-1
+rusbPrint=打印,,-1,-1,-1,-1,-1,-1
+rusbSendToPACS=上传,,-1,-1,-1,-1,-1,-1
+rusbSave=储存,,-1,-1,-1,-1,-1,-1
+rusbClearKeyin=清除,,-1,-1,-1,-1,-1,-1
+rusbLexicon=词库,,-1,-1,-1,-1,-1,-1
+rusbTemplate=范本,,-1,-1,-1,-1,-1,-1
+
+[Report_Message]
+mgSureDeleteTheData=要删除该笔数据吗?
+mgTempNumHaveNoneOfNull=样板编号不允许空值!!
+mgTheIdExistsIn=该编号已经存在!!
+mgUpdateTempDataFail=@更新样板数据发生错误,请重新操作一次!!
+mgGotADifferenceStudyImageSaveReport=@加载不同检查影像中,是否储存报告?
+mgSaveReportErrorWithPat=@储存报告发生错误,病历号码:
+mgSaveReportSuccessWithPat=@储存报告完成,病历号码:
+mgWhetherClearReport=是否清除报告内容?
+mgReportHasBeenStoredNoNeedReedit=无须解除.
+mgMakesureReeditReport=确定要解除报告?
+mgLexiconNumHaveNoneOfNull=词库编号不允许空值!!
+mgLexiconNumExistsIn=该词库编号已经存在!!
+mgReportHotKeyWarning=没有选择要插入词库的字段
+setmsgDeleteTheReport=要删除该笔报告吗?
+
+[HotKeyUI]
+cbSearchKind=,,-1,-1,-1,-1,-1,-1
+rgdbgHotKeyList=词库编号_|内容_|种类_|备注_|,,-1,-1,-1,-1,-1,-1
+vuLxlbLexiconNum=词库编号,,-1,-1,-1,-1,-1,-1
+edLexicnID=,,-1,-1,-1,-1,-1,-1
+vuLxlbLexiconKind=种类,,-1,-1,-1,-1,-1,-1
+cbType=,,-1,-1,-1,-1,-1,-1
+vuLxlbLexiconContent=内容,,-1,-1,-1,-1,-1,-1
+mmContext=,,-1,-1,-1,-1,-1,-1
+vuLxlbLexiconMemo=备注,,-1,-1,-1,-1,-1,-1
+edMemo=,,-1,-1,-1,-1,-1,-1
+rhsbAdd=新增,,-1,-1,-1,-1,-1,-1
+rhsbModify=修改,,-1,-1,-1,-1,-1,-1
+rhsbDelete=删除,,-1,-1,-1,-1,-1,-1
+rhsbSave=储存,,-1,-1,-1,-1,-1,-1
+rhsbCancel=取消,,-1,-1,-1,-1,-1,-1
+
+[TemplateUI]
+vuRtlbTemplateNum=范本编号,,-1,-1,-1,-1,-1,-1
+edCodeNumber=,,-1,-1,-1,-1,-1,-1
+vuRtlbMemo=备注,,-1,-1,-1,-1,-1,-1
+edNote=,,-1,-1,-1,-1,-1,-1
+sbRTMPFirstPage=,第一页,-1,-1,-1,-1,-1,-1
+sbRTMPPreviousPage=,上一页,-1,-1,-1,-1,-1,-1
+sbRTMPNextPage=,下一页,-1,-1,-1,-1,-1,-1
+sbRTMPLastPage=,最后页,-1,-1,-1,-1,-1,-1
+pnlFrame=,,-1,-1,-1,-1,-1,-1
+rtdbgTempList=模板编号_|备注_|建立日期_|修改日期_|,,-1,-1,-1,-1,-1,-1
+rtsbLoad=载入,,-1,-1,-1,-1,-1,-1
+rtsbInsert=新增,,-1,-1,-1,-1,-1,-1
+rtsbModify=修改,,-1,-1,-1,-1,-1,-1
+rtsbDelete=删除,,-1,-1,-1,-1,-1,-1
+rtsbSave=储存,,-1,-1,-1,-1,-1,-1
+rtsbCancel=取消,,-1,-1,-1,-1,-1,-1
+
+[PreviewUI]
+rpusbFirstPage=,第一页,-1,-1,-1,-1,-1,-1
+rpusbPreviousPage=,上一页,-1,-1,-1,-1,-1,-1
+rpusbNextPage=,下一页,-1,-1,-1,-1,-1,-1
+rpusbLastPage=,最后页,-1,-1,-1,-1,-1,-1
+lbPageInfo=000/000,,-1,-1,-1,-1,-1,-1
+rpusbPrint=打印,,-1,-1,-1,-1,-1,-1
+rpusbSendToPACS=上传,,-1,-1,-1,-1,-1,-1
+
+[PrintSettingUI]
+psulbPrinterName=打印机 :,,-1,-1,-1,-1,-1,-1
+psucbPrinterName=,,-1,-1,-1,-1,-1,-1
+psulbNumOfCopies=打印份数 :,,-1,-1,-1,-1,-1,-1
+psucbNumOfCopies=1_|2_|3_|4_|5_|6_|7_|8_|9_|,,-1,-1,-1,-1,-1,-1
+psulbPrintRange=打印区域 :,,-1,-1,-1,-1,-1,-1
+psucbPrintFront=,,-1,-1,-1,-1,-1,-1
+psulbBetween=~,,-1,-1,-1,-1,-1,-1
+psucbPrintTo=,,-1,-1,-1,-1,-1,-1
+psulbEndPage=页,,-1,-1,-1,-1,-1,-1
+psusbYes=是,,-1,-1,-1,-1,-1,-1
+psusbNo=否,,-1,-1,-1,-1,-1,-1
+
+[AnnotionUI]
+vuAnedAnnotion=请输入影像批注信息,,-1,-1,-1,-1,-1,-1
+iausbYes=是,,-1,-1,-1,-1,-1,-1
+iausbNo=否,,-1,-1,-1,-1,-1,-1
+
+[ImageMarkerUI]
+vuRIMmiImgFlagClear=影像标记清除,,-1,-1,-1,-1,-1,-1
+vuRIMmiDelete=删除,,-1,-1,-1,-1,-1,-1
+vuRIMsbSave=,,-1,-1,-1,-1,-1,-1
+vuRIMpgFunctionBar=标记,,-1,-1,-1,-1,-1,-1
+vuRIMyuNormal=,一般,-1,-1,-1,-1,-1,-1
+vuRIMyuNormalLine=,两点直线,-1,-1,-1,-1,-1,-1
+vuRIMyuArrow=,标记箭头,-1,-1,-1,-1,-1,-1
+vuRIMyuEllipseROI=,圆形 ROI,-1,-1,-1,-1,-1,-1
+vuRIMyuRectROI=,矩形 ROI,-1,-1,-1,-1,-1,-1
+vuRIMyuAnnotation=,批注信息,-1,-1,-1,-1,-1,-1
+vuRIMyuRandomLine=,任意线,-1,-1,-1,-1,-1,-1
+plRIMColorTitle=标记颜色,,-1,-1,-1,-1,-1,-1
+shRIMColorPreview=,,-1,-1,-1,-1,-1,-1
+shRIMColorTextPreview=,,-1,-1,-1,-1,-1,-1
+lbRIMColorPreview=标记颜色,,-1,-1,-1,-1,-1,-1
+lbRIMColorTextPreview=文字颜色,,-1,-1,-1,-1,-1,-1
+plRIMLineTitle=标记粗细,,-1,-1,-1,-1,-1,-1
+rbRIMLineWidth1=1,,-1,-1,-1,-1,-1,-1
+rbRIMLineWidth2=2,,-1,-1,-1,-1,-1,-1
+rbRIMLineWidth3=3,,-1,-1,-1,-1,-1,-1
+rbRIMLineWidth4=4,,-1,-1,-1,-1,-1,-1
+rbRIMLineWidth5=5,,-1,-1,-1,-1,-1,-1
+plRIMFontTitle=文本属性,,-1,-1,-1,-1,-1,-1
+lbRIMFontName=字型,,-1,-1,-1,-1,-1,-1
+cbRIMFontName=,,-1,-1,-1,-1,-1,-1
+lbRIMFontSize=大小,,-1,-1,-1,-1,-1,-1
+cbRIMFontSize=,,-1,-1,-1,-1,-1,-1
+plRIMColor01=,,-1,-1,-1,-1,-1,-1
+plRIMColor02=,,-1,-1,-1,-1,-1,-1
+plRIMColor03=,,-1,-1,-1,-1,-1,-1
+plRIMColor04=,,-1,-1,-1,-1,-1,-1
+plRIMColor05=,,-1,-1,-1,-1,-1,-1
+plRIMColor06=,,-1,-1,-1,-1,-1,-1
+plRIMColor07=,,-1,-1,-1,-1,-1,-1
+plRIMColor08=,,-1,-1,-1,-1,-1,-1
+plRIMColor09=,,-1,-1,-1,-1,-1,-1
+plRIMColor10=,,-1,-1,-1,-1,-1,-1
+plRIMColor11=,,-1,-1,-1,-1,-1,-1
+plRIMColor12=,,-1,-1,-1,-1,-1,-1
+plRIMColor13=,,-1,-1,-1,-1,-1,-1
+plRIMColor14=,,-1,-1,-1,-1,-1,-1
+plRIMColor15=,,-1,-1,-1,-1,-1,-1
+plRIMColor16=,,-1,-1,-1,-1,-1,-1
+plRIMColor17=,,-1,-1,-1,-1,-1,-1
+plRIMColor18=,,-1,-1,-1,-1,-1,-1
+plRIMColor19=,,-1,-1,-1,-1,-1,-1
+plRIMColor20=,,-1,-1,-1,-1,-1,-1
+plRIMColor21=,,-1,-1,-1,-1,-1,-1
+plRIMColor22=,,-1,-1,-1,-1,-1,-1
+plRIMColor23=,,-1,-1,-1,-1,-1,-1
+plRIMColor24=,,-1,-1,-1,-1,-1,-1
+plRIMColor25=,,-1,-1,-1,-1,-1,-1
+plRIMColor26=,,-1,-1,-1,-1,-1,-1
+plRIMColor27=,,-1,-1,-1,-1,-1,-1
+plRIMColor28=,,-1,-1,-1,-1,-1,-1
+lbRIMColor01=,,-1,-1,-1,-1,-1,-1
+lbRIMColor02=,,-1,-1,-1,-1,-1,-1
+lbRIMColor03=,,-1,-1,-1,-1,-1,-1
+lbRIMColor04=,,-1,-1,-1,-1,-1,-1
+lbRIMColor05=,,-1,-1,-1,-1,-1,-1
+lbRIMColor06=,,-1,-1,-1,-1,-1,-1
+lbRIMColor07=,,-1,-1,-1,-1,-1,-1
+lbRIMColor08=,,-1,-1,-1,-1,-1,-1
+lbRIMColor09=,,-1,-1,-1,-1,-1,-1
+lbRIMColor10=,,-1,-1,-1,-1,-1,-1
+lbRIMColor11=,,-1,-1,-1,-1,-1,-1
+lbRIMColor12=,,-1,-1,-1,-1,-1,-1
+lbRIMColor13=,,-1,-1,-1,-1,-1,-1
+lbRIMColor14=,,-1,-1,-1,-1,-1,-1
+lbRIMColor15=,,-1,-1,-1,-1,-1,-1
+lbRIMColor16=,,-1,-1,-1,-1,-1,-1
+lbRIMColor17=,,-1,-1,-1,-1,-1,-1
+lbRIMColor18=,,-1,-1,-1,-1,-1,-1
+lbRIMColor19=,,-1,-1,-1,-1,-1,-1
+lbRIMColor20=,,-1,-1,-1,-1,-1,-1
+lbRIMColor21=,,-1,-1,-1,-1,-1,-1
+lbRIMColor22=,,-1,-1,-1,-1,-1,-1
+lbRIMColor23=,,-1,-1,-1,-1,-1,-1
+lbRIMColor24=,,-1,-1,-1,-1,-1,-1
+lbRIMColor25=,,-1,-1,-1,-1,-1,-1
+lbRIMColor26=,,-1,-1,-1,-1,-1,-1
+lbRIMColor27=,,-1,-1,-1,-1,-1,-1
+lbRIMColor28=,,-1,-1,-1,-1,-1,-1
+
+/*FS-HD Backup*/
+[BackupMain_UI]
+sbhdbkExit=退出,,-1,-1,-1,-1,-1,-1
+sbhkbkBackup=备份,,-1,-1,-1,-1,-1,-1
+sbhdbkRestore=还原,,,-1,-1,-1,-1,-1,-1
+sbhdbkBurn=刻录,,-1,-1,-1,-1,-1,-1
+sbhdbkConfig=设置,,-1,-1,-1,-1,-1,-1
+lbhdbkTitle=FilingSystem HD 备份
+lbhdbkNumOfPatient=病历数 :,,-1,-1,-1,-1,-1,-1
+lbhdbkNumOfImage=图像数 :,,-1,-1,-1,-1,-1,-1
+lbhdbkNumOfBackupImage=已备份图像数 :,,-1,-1,-1,-1,-1,-1
+lvBackupStatus=日期_|备份日期_|备份路径_|刻录状态_|,,-1,-1,-1,-1,-1,-1
+
+[BackupMain_Message]
+backupmainmsgExitBackupMain=确定退出FilingSystem HD Backup?
+backupmainmsgBurned=已刻录
+backupmainmsgNoBurn=未刻录
+
+[Config_UI]
+plhdbkConfigTopTitle=设置,,-1,-1,-1,-1,-1,-1
+plhdbkConfigMidTitle=各项设置,,-1,-1,-1,-1,-1,-1
+gropbxhdbkBackupDICOMFile=自动备份设置,,-1,-1,-1,-1,-1,-1
+edAutoBackupDays=备份 :,,-1,-1,-1,-1,-1,-1
+laAutoBackupDays=天,,-1,-1,-1,-1,-1,-1
+lbhdbkSetBackupTo=备份到 :,,-1,-1,-1,-1,-1,-1
+btnAutoBackupOK=保存,,-1,-1,-1,-1,-1,-1
+lbhdbkSetNextBackupDateFrom=下次备份起始日期 :,,-1,-1,-1,-1,-1,-1
+lbhdbkSetNextBackupDateTo=下次备份结束日期 :,,-1,-1,-1,-1,-1,-1
+cbBackupUse=启用,,-1,-1,-1,-1,-1,-1
+plhdbkConfigTopTitle=设置,,-1,-1,-1,-1,-1,-1
+gropbxhdbkMoveFile=搬移档案设置,,-1,-1,-1,-1,-1,-1
+edKeepDays=保留 :,,-1,-1,-1,-1,-1,-1
+laKeepDays=天,,-1,-1,-1,-1,-1,-1
+lbhdbkSetMoveTo=搬移至 :,,-1,-1,-1,-1,-1,-1
+btnLongTrimOK=保存,,-1,-1,-1,-1,-1,-1
+lbhdbkSetKeepFileDateFrom=保留起始日期 :,,-1,-1,-1,-1,-1,-1
+lbhdbkSetKeepFileDateTo=保留结束日期 :,,-1,-1,-1,-1,-1,-1
+cbLongTrimUse=启用,,-1,-1,-1,-1,-1,-1
+gropbxhdbkAtOnceOfMoveFile=批次搬移档案设置,,-1,-1,-1,-1,-1,-1
+lbhdbkSetMove=搬移 :,,-1,-1,-1,-1,-1,-1
+lbhdbkSetStartDate=搬移起始日期 :,,-1,-1,-1,-1,-1,-1
+lbhdbkSetEndDate=搬移结束日期 :,,-1,-1,-1,-1,-1,-1
+lbhdbkSetAtMoveTo=搬移至 :,,-1,-1,-1,-1,-1,-1
+btnNowMove=搬移,,-1,-1,-1,-1,-1,-1
+gropbxhdbkAutoShortTrimMoveFile=自动搬移档案设置,,-1,-1,-1,-1,-1,-1
+lbhdbkAutoShortMove=自动搬移日期区间 :,,-1,-1,-1,-1,-1,-1
+lbhdbkAutoShortMoveTo=搬移至 :,,-1,-1,-1,-1,-1,-1
+cbShortMoveDate=一个月_|三个月_|六个月_|九个月_|,,-1,-1,-1,-1,-1,-1
+btnShortTrimOK=保存,,-1,-1,-1,-1,-1,-1
+cbShortTrimUse=启用,,-1,-1,-1,-1,-1,-1
+
+[Config_Message]
+backupconfmsgplzChooseOneBackupDevice=请选择一个保存装置，谢谢。
+backupconfmsgCancelAutoBackup=取消自动备份
+backupconfmsgDayCannotBeZero=日数不得为空白或0
+backupconfmsgChangeAutoBackupDays=变更自动备份日数
+backupconfmsgAutoBackupDays=天
+backupconfmsgAutoBackupDateStart=起始日期 :
+backupconfmsgAutoBackupDateEnd=结束日期 :
+backupconfmsgAutoBackupDevice=到装置 :
+backupconfmsgTimerAutoBackupFile=自动备份档案，档案日期为
+backupconfmsgTimerBackupFinally=自动备份完成
+backupconfmsgTimerNextDate=下次备份日期
+
+backupconfmsgAutoShortTrimMove=变更自动搬移日数
+
+backupconfmsgCancelAutoMoveLongTrim=取消自动保留
+backupconfmsgplzChooseOneMoveLongTrimDevice=请选择保留装置，谢谢。
+backupconfmsgChangeAutoMoveLongTrim=变更自动保留
+backupconfmsgKeepFile=保留档案
+
+backupconfmsgNowMoveMakeSureToDo=确定搬移档案至指定的装置路径 ?
+backupconfmsgPlzChooseOneMoveDevice=请选择一个指定搬移的装置名称，谢谢。
+backupconfmsgNoMatchMoveDevice=找不到匹配的装置
+backupconfmsgMoveFileDateStart=搬移档案，档案起始日期为
+backupconfmsgMoveFileTo=至
+backupconfmsgMoveFileFail=搬移档案失败.
+backupconfmsgCannotCreateDir=无法建立路径
+backupconfmsgCannotMoveFile=无法移动档案
+backupconfmsgMoveFile=移动档案
+backupconfmsgSuccess=成功
+backupconfmsgDeleteFile=删除档案
+backupconfmsgUpdateImageTableFail=更新资料表(EZ_Image)失败
+
+[Backup_UI]
+gphdbkBackupTopTitle=备份,,-1,-1,-1,-1,-1,-1
+gphdbkBackupFunction=备份方式,,-1,-1,-1,-1,-1,-1
+lbhdbkStudyDateFrom=备份起始日期 :,,-1,-1,-1,-1,-1,-1
+lbhdbkStudyDateTo=备份结束日期 :,,-1,-1,-1,-1,-1,-1
+sbBackupInterval=日期区间备份,,-1,-1,-1,-1,-1,-1
+sbBackupAll=全部备份,,-1,-1,-1,-1,-1,-1
+
+[Backup_Message]
+backupbackupmsgPlzChooseType=<<请选择一种备份方式>>
+backupbackupmsgMakeSureBackupWithDate=确定进行日期区间备份?
+backupbackupmsgBackupDateStart=开始备份，起始日期为
+backupbackupmsgUpdateImageTableFinally=更新资料表(EZ_Image)完成
+backupbackupmsgBackupFinally=备份完成
+backupbackupmsgMakeSureBackupWithAll=确定进行全部备份?
+
+[BackupTool_Message]
+backupbktoolmsgBackupPatientFail=备份<<Patient>>资料失败
+backupbktoolmsgBackupPatientSuccess=备份<<Patient>>资料成功
+backupbktoolmsgBackupStudyFail=备份<<Study>>资料失败
+backupbktoolmsgBackupStudySuccess=备份<<Study>>资料成功
+backupbktoolmsgBackupSeriesFail=备份<<Series>>资料失败
+backupbktoolmsgBackupSeriesSucces=备份<<Series>>资料成功
+backupbktoolmsgBackupImageDeviceFail=备份<<ImageDevice>>资料失败
+backupbktoolmsgBackupImageDeviceSucces=备份<<ImageDevice>>资料成功
+backupbktoolmsgBackupImageFail=备份<<Image>>资料失败
+backupbktoolmsgBackupImageSucces=备份<<Image>>资料完成
+backupbktoolmsgBackupStartDICOMImage=开始备份DICOM图像，请稍等。
+backupbktoolmsgBackupDICOMImage=备份DICOM图像
+backupbktoolmsgBackupDICOMImageFail=失败
+backupbktoolmsgBackupStartVideo=开始备份录影档，请稍等。
+backupbktoolmsgBackupVideo=备份录影档
+
+[TableDataTransation_Message]
+backupDataTransBkPatientNumSuccess=备份<<PatientNum>>资料成功
+backupDataTransBkPatientNumFail=备份<<PatientNum>>资料失败
+backupDataTransRePatientNumSuccess=还原<<PatientNum>>资料成功
+backupDataTransRePatientNumFail=还原<<PatientNum>>资料失败
+backupDataTransPrePatientNumSuccess=准备<<PatientNum>>资料成功
+backupDataTransPrePatientNumFail=准备<<PatientNum>>资料失败
+
+backupDataTransBkPatientSuccess=备份<<Patient>>资料成功
+backupDataTransBkPatientFail=备份<<Patient>>资料失败
+backupDataTransRePatientSuccess=还原<<Patient>>资料成功
+backupDataTransRePatientFail=还原<<Patient>>资料失败
+backupDataTransPrePatientSuccess=准备<<Patient>>资料成功
+backupDataTransPrePatientFail=准备<<Patient>>资料失败
+
+backupDataTransBkStudyNumSuccess=备份<<StudyNum>>资料成功
+backupDataTransBkStudyNumFail=备份<<StudyNum>>资料失败
+backupDataTransReStudyNumSuccess=还原<<StudyNum>>资料成功
+backupDataTransReStudyNumFail=还原<<StudyNum>>资料失败
+backupDataTransPreStudyNumSuccess=准备<<Patient>>资料成功
+backupDataTransPreStudyNumFail=准备<<StudyNum>>资料失败
+
+backupDataTransBkStudySuccess=备份<<Study>>资料成功
+backupDataTransBkStudyFail=备份<<Study>>资料失败
+backupDataTransReStudySuccess=还原<<Study>>资料成功
+backupDataTransReStudyFail=还原<<Study>>资料失败
+backupDataTransPreStudySuccess=准备<<Study>>资料成功
+backupDataTransPreStudyFail=准备<<Study>>资料失败
+
+backupDataTransBkSeriesNumSuccess=备份<<SeriesNum>>资料成功
+backupDataTransBkSeriesNumFail=备份<<SeriesNum>>资料失败
+backupDataTransReSeriesNumSuccess=还原<<SeriesNum>>资料成功
+backupDataTransReSeriesNumFail=还原<<SeriesNum>>资料失败
+backupDataTransPreSeriesNumSuccess=准备<<SeriesNum>>资料成功
+backupDataTransPreSeriesNumFail=准备<<SeriesNum>>资料失败
+
+backupDataTransBkSeriesSuccess=备份<<Series>>资料成功
+backupDataTransBkSeriesFail=备份<<Series>>资料失败
+backupDataTransReSeriesSuccess=还原<<Series>>资料成功
+backupDataTransReSeriesFail=还原<<Series>>资料失败
+backupDataTransPreSeriesSuccess=准备<<Series>>资料成功
+backupDataTransPreSeriesFail=准备<<Series>>资料失败
+
+backupDataTransBkImageNumSuccess=备份<<ImageNum>>资料成功
+backupDataTransBkImageNumFail=备份<<ImageNum>>资料失败
+backupDataTransReImageNumSuccess=还原<<ImageNum>>资料成功
+backupDataTransReImageNumFail=还原<<ImageNum>>资料失败
+backupDataTransPreImageNumSuccess=准备<<ImageNum>>资料成功
+backupDataTransPreImageNumFail=准备<<ImageNum>>资料失败
+
+backupDataTransBkImageSuccess=备份<<Image>>资料成功
+backupDataTransBkImageFail=备份<<Image>>资料失败
+backupDataTransReImageSuccess=还原<<Image>>资料成功
+backupDataTransReImageFail=还原<<Image>>资料失败
+backupDataTransPreImageSuccess=准备<<Image>>资料成功
+backupDataTransPreImageFail=准备<<Image>>资料失败
+
+backupDataTransStartBackup=开始备份DICOM图像，请稍等。
+backupDataTransStartRestore=开始还原DICOM图像，请稍等。
+
+backupDataTransBackupDicomFile=备份DICOM图像
+backupDataTransRestoreDicomFile=还原DICOM图像
+backupDataTransDicomFile=DICOM图像
+
+backupDataTransStartBackupVideo=开始备份录影档，请稍等。
+backupDataTransStartRestoreVideo=开始还原录影档，请稍等。
+
+backupDataTransBackupVideoFile=备份录影档
+backupDataTransRestoreVideoFile=还原录影档
+backupDataTransVideoFile=录影档
+
+backupDataTransBkImageDeviceSuccess=备份<<ImageDevice>>资料成功
+backupDataTransBkImageDeviceFail=备份<<ImageDevice>>资料失败
+backupDataTransReImageDeviceSuccess=还原<<ImageDevice>>资料成功
+backupDataTransReImageDeviceFail=还原<<ImageDevice>>资料失败
+backupDataTransPreImageDeviceSuccess=准备<<ImageDevice>>资料成功
+backupDataTransPrImageDeviceFail=准备<<ImageDevice>>资料失败
+
+backupDataTransBkVideoSuccess=备份<<Video>>资料成功
+backupDataTransBkVideoFail=备份<<Video>>资料失败
+backupDataTransReVideoSuccess=还原<<Video>>资料成功
+backupDataTransReVideoFail=还原<<Video>>资料失败
+backupDataTransPreVideoSuccess=准备<<Video>>资料成功
+backupDataTransPrVideoFail=准备<<Video>>资料失败
+
+/* Add 20151111 Ku */
+backupDataTransBkVideoStampSuccess=备份<<VideoStamp>>资料成功
+backupDataTransBkVideoStampFail=备份<<VideoStamp>>资料失败
+backupDataTransReVideoStampSuccess=还原<<VideoStamp>>数据成功
+backupDataTransReVideoStampFail=还原<<VideoStamp>>数据失败
+backupDataTransPreVideoStampSuccess=准备<<VideoStamp>>资料成功
+backupDataTransPrVideoStampFail=准备<<VideoStamp>>资料失败
+
+/* Add 20151224 Ku */
+backupDataTransBkReportSuccess=备份<<Report>>资料成功
+backupDataTransBkReportFail=备份<<Report>>资料失败
+backupDataTransReReportSuccess=还原<<Report>>数据成功
+backupDataTransReReportFail=还原<<Report>>数据失败
+backupDataTransPreReportSuccess=准备<<Report>>资料成功
+backupDataTransPrReportFail=准备<<Report>>资料失败
+
+backupDataTransBackupStartReportFile=开始备份报告档案，请稍等。
+backupDataTransBackupReportFile=备份报告
+backupDataTransBackupReportFileFail=失败
+backupDataTransRestoreStartReportFile=开始还原报告档案，请稍等。
+backupDataTransRestoreReportFile=还原报告
+backupDataTransRestoreReportFileFail=失败
+backupDataTransBurnStartReportFile=开始准备报告档案，请稍等。
+backupDataTransBurnReportFile=准备报告
+backupDataTransBurnReportFileFail=失败
+
+backupDataTransBackupStartTemplateFile=开始备份范本档案，请稍等。
+backupDataTransBackupTemplateFile=备份范本
+backupDataTransBackupTemplateFileFail=失败
+backupDataTransRestoreStartTemplateFile=开始还原范本档案，请稍等。
+backupDataTransRestoreTemplateFile=还原范本
+backupDataTransRestoreTemplateFileFail=失败
+backupDataTransBurnStartTemplateFile=开始准备范本档案，请稍等。
+backupDataTransBurnTemplateFile=准备范本
+backupDataTransBurnTemplateFileFail=失败
+
+backupDataTransBackupStartFormatFile=开始备份报告格式档案，请稍等。
+backupDataTransBackupFormatFile=备份报告格式
+backupDataTransBackupFormatFileFail=失败
+backupDataTransRestoreStartFormatFile=开始还原报告档案，请稍等。
+backupDataTransRestoreFormatFile=还原报告格式
+backupDataTransRestoreFormatFileFail=失败
+backupDataTransBurnStartFormatFile=开始准备报告格式档案，请稍等。
+backupDataTransBurnFormatFile=准备报告格式
+backupDataTransBurnFormatFileFail=失败
+
+backupDataTransBkReportFormatSuccess=备份<<ReportFormat>>资料成功
+backupDataTransBkReportFormatFail=备份<<ReportFormat>>资料失败
+backupDataTransReReportFormatSuccess=还原<<ReportFormat>>数据成功
+backupDataTransReReportFormatFail=还原<<ReportFormat>>数据失败
+backupDataTransPreReportFormatSuccess=准备<<ReportFormat>>资料成功
+backupDataTransPrReportFormatFail=准备<<ReportFormat>>资料失败
+
+backupDataTransBkReportTemplateSuccess=备份<<Template>>资料成功
+backupDataTransBkReportTemplateFail=备份<<Template>>资料失败
+backupDataTransReReportTemplateSuccess=还原<<Template>>数据成功
+backupDataTransReReportTemplateFail=还原<<Template>>数据失败
+backupDataTransPreReportTemplateSuccess=准备<<Template>>资料成功
+backupDataTransPrReportTemplateFail=准备<<Template>>资料失败
+
+backupDataTransBkUseWordSuccess=备份<<UseWord>>资料成功
+backupDataTransBkUseWordFail=备份<<UseWord>>资料失败
+backupDataTransReUseWordSuccess=还原<<UseWord>>数据成功
+backupDataTransReUseWordFail=还原<<UseWord>>数据失败
+backupDataTransPreUseWordSuccess=准备<<UseWord>>资料成功
+backupDataTransPrUseWordFail=准备<<UseWord>>资料失败
+
+backupDataTransBkCustomizeImageSuccess=备份<<CustomizeImage>>资料成功
+backupDataTransBkCustomizeImageFail=备份<<CustomizeImage>>资料失败
+backupDataTransReCustomizeImageSuccess=还原<<CustomizeImage>>数据成功
+backupDataTransReCustomizeImageFail=还原<<CustomizeImage>>数据失败
+backupDataTransPreCustomizeImageSuccess=准备<<CustomizeImage>>资料成功
+backupDataTransPrCustomizeImageFail=准备<<CustomizeImage>>资料失败
+
+[Restore_UI]
+gphdbkRestoreTopTitle=还原,,-1,-1,-1,-1,-1,-1
+plFunctiontTitle=还原方式,,-1,-1,-1,-1,-1,-1
+rbBackupDevice=从记录档还原,,-1,-1,-1,-1,-1,-1
+rbOtherDevice=从装置还原,,-1,-1,-1,-1,-1,-1
+rbDVDRom=从光碟片还原,,-1,-1,-1,-1,-1,-1
+cbDataBase=还原资料库,,-1,-1,-1,-1,-1,-1
+cbFile=还原档案,,-1,-1,-1,-1,-1,-1
+sbStartRestore=开始还原,,-1,-1,-1,-1,-1,-1
+plRestoreHistory=还原记录,,-1,-1,-1,-1,-1,-1
+lbhdbkRestoreDeviceName=装置名称 :,,-1,-1,-1,-1,-1,-1
+lbhdbkCDRomName=光碟机名称 :,,-1,-1,-1,-1,-1,-1
+lvBackupStatus=起始日期_|结束日期_|备份日期_|,,-1,-1,-1,-1,-1,-1
+lstOtherDevicePath=其他装置路径_|,,-1,-1,-1,-1,-1,-1
+pchdbkRestore=还原信息_|档案信息_|,,-1,-1,-1,-1,-1,-1
+
+[Restore_Message]
+backupRestoremsgMakeSureRestore=确定进行还原?
+backupRestoremsgPlzChooseOneRecord=请选择一个记录档
+backupRestoremsgPlzChooseOneDirectory=请选择一个目录
+backupRestoremsgDriverNotABurner=所选择装置非刻录机
+
+backupRestoremsgNoFoundDeviceOfDB=找不到还原资料库记录的还原装置
+backupRestoremsgNotAValidBkDevice=这个不是有效的还原装置
+backupRestoremsgRestoreDBAndImage=还原FilingSystem HD资料库及图像
+backupRestoremsgRestoreStart=开始还原FilingSystem HD资料库及图像，请稍候
+backupRestoremsgRestoreBkRecord=还原备份记录
+backupRestoremsgRestoreBkTotal=总共
+backupRestoremsgRestoreBkCurrent=当前
+backupRestoremsgRestoreMakeSureContinue=确定继续?
+backupRestoremsgRestoreFinally=还原完成
+backupRestoremsgRestoreDate=还原日期
+backupRestoremsgRestore=还原
+
+[Burn_UI]
+gphdbkTopTitle=刻录,,-1,-1,-1,-1,-1,-1
+gphdbkBurnFunction=刻录方式,,-1,-1,-1,-1,-1,-1
+cbShortTrimUse=启用,,-1,-1,-1,-1,-1,-1
+cbShortTrimUse=启用,,-1,-1,-1,-1,-1,-1
+sbStartBurnCD=开始刻录,,-1,-1,-1,-1,-1,-1
+plBurnHistory=刻录列表,,-1,-1,-1,-1,-1,-1
+plBurnCDMsg=刻录信息,,-1,-1,-1,-1,-1,-1
+lbhdbkBurnProgress=进度 :,,-1,-1,-1,-1,-1,-1
+lbhdbkBurnBuffer=缓冲区 :,,-1,-1,-1,-1,-1,-1
+lvBackupStatus=开始日期_|结束日期_|备份日期_|刻录,,-1,-1,-1,-1,-1,-1
+lvhdbkBurnOtherDevice=其他装置路径_|,,-1,-1,-1,-1,-1,-1
+ckbBurnBackupDevice=刻录记录档,,-1,-1,-1,-1,-1,-1
+ckbBurnOtherDevice=刻录图像装置,,-1,-1,-1,-1,-1,-1
+lbhdbkDeviceName=图像装置 :,,-1,-1,-1,-1,-1,-1
+
+[Burn_Message]
+backupBurnmsgMakeSureBurn=确定进行刻录?
+backupBurnmsgUserCancel=使用者取消
+backupBurnmsgStartBurn=开始刻录，请稍候
+backupBurnmsgNotAValidBkPath=这个不是有效的备份路径
+backupBurnmsgCanNotCreateTempDir=无法建立暂存路径
+
+/* Add 20151028 Ku */
+[ImageViewerUI]
+hdimspSelectAll=全选,,-1,-1,-1,-1,-1,-1
+hdimspCStore=传送,,-1,-1,-1,-1,-1,-1
+hdimspPrevStep=返回,,-1,-1,-1,-1,-1,-1
+/* ADD BY JB 20161205 */
+sbFormPreviewCancel=隐藏,,-1,-1,-1,-1,-1,-1
+lbResolution=分辨率,,-1,-1,-1,-1,-1,-1
+sbApplySize=套用,,-1,-1,-1,-1,-1,-1
+
+/* Add 20151222 Ku*/
+[PatientEditUI]
+gphdNewStudyDataTitle2=↓患者资料,,-1,-1,-1,-1,-1,-1
+gphdNewStudyQueryTitle2=,,-1,-1,-1,-1,-1,-1
+nslbsPatientID2=患者号码,,-1,-1,-1,-1,-1,-1
+nslbsSex2=性别,,-1,-1,-1,-1,-1,-1
+nslbsStudyDate2=检查日期,,-1,-1,-1,-1,-1,-1
+nslbsPerformingDr2=放射技师,,-1,-1,-1,-1,-1,-1
+nslbsPatientName2=患者姓名,,-1,-1,-1,-1,-1,-1
+nslbsBirthDay2=出生日期,,-1,-1,-1,-1,-1,-1
+nscbsModality2=ES_| US_| CR_| SC_|,,-1,-1,-1,-1,-1,-1
+nslbsReferingDr2=主治医师,,-1,-1,-1,-1,-1,-1
+nslbsAccessionNumber2=检查单号,,-1,-1,-1,-1,-1,-1
+nslbsModality2=检查种类,,-1,-1,-1,-1,-1,-1
+nslbsReportDr2=报告医师,,-1,-1,-1,-1,-1,-1
+nslbsDescription2=检查说明,,-1,-1,-1,-1,-1,-1
+mgModifiedExamFail=@修改失败!
+mgModifiedExamSuccess=@修改成功
+
+/*FS-HD CDViewer*/
+[Viewer_UI]
+sbhdCDVExit=退出,,-1,-1,-1,-1,-1,-1
+sbhdcdvOpenList=打开清单,,-1,-1,-1,-1,-1,-1
+
+[Viewer_Message]
+cdvViewermsgMakeSureExit=确定退出CD Viewer?
+
+[CDViewerList_UI]
+sbhdcdvlOpenDicomDir=DICOMDIR,,-1,-1,-1,-1,-1,-1
+sbhdcdvlLoadImage=导入图像,,-1,-1,-1,-1,-1,-1
+sbhdcdvlOpenVideo=录影档,,-1,-1,-1,-1,-1,-1
+hdcdvlRecordHeader=患者号码_|患者姓名_|性别_|检查单号_|检查日期_|检查医师_|检查说明_|,,-1,-1,-1,-1,-1,-1
+lvhdcdvlVideoList=档案名称_|档案路径_|,,-1,-1,-1,-1,-1,-1
+
+[CDViewerList_Message]
+cdvCDVListmsgLoadImgNow=导入图像中，请稍候
+
+[EndoScanFormMsg]
+msScanEndoModelNumber=请扫描镜子序号
+
+[EndoScanForm]
+lbEndoNumber=镜子序号,,-1,-1,-1,-1,-1,-1
+tgpTitle=请扫描镜子序号,,-1,-1,-1,-1,-1,-1
+tgpEndoModelNumber=镜子序号列表,,-1,-1,-1,-1,-1,-1
+lvEndoModelNumber=项目_|镜子序号_|,,-1,-1,-1,-1,-1,-1
+sbEndoDelete=删除,,-1,-1,-1,-1,-1,-1
+spReturn=返回,,-1,-1,-1,-1,-1,-1
+
+
+[MainForm]
+labHospitalName=,,-1,-1,-1,-1,-1,-1
+
+[FormStorage]
+btnSCBackToMain=返 回,,-1,-1,-1,-1,-1,-1
+btnSCRefresh=验 证,,-1,-1,-1,-1,-1,-1
+lvSCServerList=Title_|Server AE_|Server_|Server Port_|,,-1,-1,-1,-1,-1,-1
+lvSCGetInfo=检查单号_|影像编号_|查询状态_|验证结果_|,,-1,-1,-1,-1,-1,-1
+
+[Message String]
+SCommitStateDoing=@执行Storage Commitment中，请稍后...
+SCommitStateReasonFailure=@失败原因--
+SCommitStateReasonScss=@0
+SCommitStateReasonNoReturn=@服务器无回应
+SCommitStateScss=@成功
+SCommitStateFailure=@失败
+

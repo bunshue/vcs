@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<current>
+  <city id="1675151" name="Hsinchu">
+    <coord lon="120.9686" lat="24.8036">
+    </coord>
+    <country>TW</country>
+    <timezone>28800</timezone>
+    <sun rise="2021-02-24T22:22:44" set="2021-02-25T09:56:04">
+    </sun>
+  </city>
+  <temperature value="68.77" min="62.6" max="75" unit="fahrenheit">
+  </temperature>
+  <feels_like value="71.49" unit="fahrenheit">
+  </feels_like>
+  <humidity value="88" unit="%">
+  </humidity>
+  <pressure value="1010" unit="hPa">
+  </pressure>
+  <wind>
+    <speed value="4.61" unit="mph" name="Light breeze">
+    </speed>
+    <gusts>
+    </gusts>
+    <direction value="260" code="W" name="West">
+    </direction>
+  </wind>
+  <clouds value="75" name="broken clouds">
+  </clouds>
+  <visibility value="3000">
+  </visibility>
+  <precipitation mode="no">
+  </precipitation>
+  <weather number="701" value="mist" icon="50n">
+  </weather>
+  <lastupdate value="2021-02-25T13:36:20">
+  </lastupdate>
+</current>

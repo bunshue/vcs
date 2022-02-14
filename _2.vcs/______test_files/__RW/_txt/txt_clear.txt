@@ -1,0 +1,26 @@
+        string filename = @"C:\______test_files\picture1.jpg";
+        // Load the image normally.
+        private void btnLoadNormally_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+                pictureBox1.Image.Dispose();
+            pictureBox1.Image = new Bitmap(filename);
+        }
+
+        // Load the bitmap without locking it.
+        private void btnLoadUnlocked_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+                pictureBox1.Image.Dispose();
+            pictureBox1.Image = LoadBitmapUnlocked(filename);
+        }
+
+        // Load a bitmap without locking it.
+        private Bitmap LoadBitmapUnlocked(string file_name)
+        {
+            using (Bitmap bm = new Bitmap(file_name))
+            {
+                return new Bitmap(bm);
+            }
+        }
+
