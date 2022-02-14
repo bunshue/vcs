@@ -106,11 +106,6 @@ namespace vcs_Mix01
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            //表單的背景圖案   // Tile the image.
-            using (TextureBrush brush = new TextureBrush(new Bitmap(@"C:\______test_files\vcs_reference2\bg1.png")))
-            {
-                e.Graphics.FillRectangle(brush, this.ClientRectangle);
-            }
         }
 
         void show_button_text(object sender)

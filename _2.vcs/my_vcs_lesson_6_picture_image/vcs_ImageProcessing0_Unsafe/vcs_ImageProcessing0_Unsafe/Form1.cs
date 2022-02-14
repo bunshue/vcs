@@ -14,7 +14,7 @@ namespace vcs_ImageProcessing0_Unsafe
 {
     public partial class Form1 : Form
     {
-        //string filename = @"C:\______test_files\vcs_reference2\global.c.gif";   //超大圖, 要很久
+        //string filename = @"C:\______test_files\__pic\global.c.gif";   //超大圖, 要很久
         string filename = @"C:\______test_files\elephant.jpg";
 
         public Form1()
@@ -151,3 +151,5 @@ namespace vcs_ImageProcessing0_Unsafe
         }
     }
 }
+
+

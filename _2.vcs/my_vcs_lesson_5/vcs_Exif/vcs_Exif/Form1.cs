@@ -19,12 +19,16 @@ namespace vcs_Exif
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\vcs_reference2\\_icon\\IMG_20180228_215525.jpg";
+            string filename = @"C:\______test_files\__pic\_icon\IMG_20180228_215525.jpg";
 
             richTextBox1.Text += "讀取檔案:\t" + filename + "\n";
 
@@ -69,7 +73,7 @@ namespace vcs_Exif
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\vcs_reference2\\_icon\\IMG_20180228_215525.jpg";
+            string filename = @"C:\______test_files\__pic\_icon\IMG_20180228_215525.jpg";
 
             richTextBox1.Text += "相片檔案:\t" + filename + "\n";
 
@@ -107,5 +111,6 @@ namespace vcs_Exif
             return "N/A";
         }
         #endregion
+
     }
 }

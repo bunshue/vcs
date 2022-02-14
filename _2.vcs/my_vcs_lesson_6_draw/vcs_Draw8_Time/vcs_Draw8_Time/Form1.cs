@@ -14,7 +14,7 @@ namespace vcs_Draw8_Time
     public partial class Form1 : Form
     {
         Bitmap bitmap1;
-        string filename = "C:\\______test_files\\vcs_reference2\\書頁\\2016122615573727.jpg";
+        string filename = @"C:\______test_files\__pic\_book\2016122615573727.jpg";
 
         public struct RGB
         {
@@ -109,7 +109,7 @@ namespace vcs_Draw8_Time
             {
                 Application.DoEvents();
             }
-        } 
+        }
 
         public Form1()
         {
@@ -207,3 +207,4 @@ namespace vcs_Draw8_Time
         }
     }
 }
+

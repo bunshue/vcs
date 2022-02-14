@@ -75,9 +75,11 @@ namespace vcs_Form1
             F2.TopMost = true;
 
 
+            //表單的背景圖案 法一
             //方案總管/加入/現有項目/選圖片
             //圖片之屬性 複製到輸出目錄 改成 有更新時才複製
-            BackgroundImage = new Bitmap(@"C:\______test_files\vcs_reference2\bg1.png");
+            string filename = @"C:\______test_files\__pic\_背景圖\bg1.png";
+            BackgroundImage = new Bitmap(filename);
             //ClientSize = BackgroundImage.Size;    //表單符合圖片大小
         }
 
@@ -621,6 +623,9 @@ namespace vcs_Form1
         {
             //整個窗體都變成半透明
             this.Opacity = 0.5;
+
+
+            //this.Opacity = 0; //使窗體不可見 
         }
 
         private void button43_Click(object sender, EventArgs e)
@@ -682,6 +687,16 @@ namespace vcs_Form1
             g.DrawRectangle(new Pen(Color.Green, 10), new Rectangle(00, 00, this.ClientSize.Width - 1, this.ClientSize.Height - 1));    //畫邊框
 
             ShowPropertiesOfSlateBlue(e);   //用OnPaint寫字範例
+
+            /*
+            //表單的背景圖案 法二  // Tile the image.
+            string filename = @"C:\______test_files\__pic\_背景圖\bg2.png";
+            
+            using (TextureBrush brush = new TextureBrush(new Bitmap(filename)))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
+            */
         }
 
         private void ShowPropertiesOfSlateBlue(PaintEventArgs e)
@@ -772,3 +787,4 @@ namespace vcs_Form1
         }
     }
 }
+
