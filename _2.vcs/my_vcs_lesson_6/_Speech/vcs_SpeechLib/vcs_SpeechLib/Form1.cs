@@ -63,5 +63,193 @@ namespace vcs_SpeechLib
             SpVoice sp = new SpVoice();
             sp.Speak(article1 + article2, spFlags);
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //fail
+
+            return;
+
+            Speach sp = Speach.instance();
+            sp.Volume = 100;
+            sp.Rate = 1;
+            sp.AnalyseSpeak(this.richTextBox1.Text.Trim());
+            //try
+            //{
+            //   SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            //   SpVoice Voice = new SpVoice();
+            //   ///3表示是汉用，0124都表示英语，就是口音不同
+            //   Voice.Voice = Voice.GetVoices(string.Empty, string.Empty).Item(0);
+            //   //voice.Voice =voice.GetVoices(string.Empty, string.Empty).Item(0);
+            //   Voice.Speak(this.textBox1.Text, SpFlags);
+            //}
+            //catch (Exception er)
+            //{
+            //   MessageBox.Show("An Error Occured!", "SpeechApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string filename = Application.StartupPath + "\\wav_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
+
+                SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+                SpVoice Voice = new SpVoice();
+
+                SpeechStreamFileMode SpFileMode = SpeechStreamFileMode.SSFMCreateForWrite;
+                SpFileStream SpFileStream = new SpFileStream();
+                SpFileStream.Open(filename, SpFileMode, false);
+                Voice.AudioOutputStream = SpFileStream;
+                Voice.Speak(this.richTextBox1.Text, SpFlags);
+                Voice.WaitUntilDone(100);
+                SpFileStream.Close();
+
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An Error Occured!", "SpeechApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
     }
+
+    public class Speach
+    {
+        private static Speach _Instance = null;
+        private SpeechLib.SpVoiceClass voice = null;
+        private Speach()
+        {
+            BuildSpeach();
+        }
+        public static Speach instance()
+        {
+            if (_Instance == null)
+                _Instance = new Speach();
+            return _Instance;
+        }
+        private void SetChinaVoice()
+        {
+            voice.Voice = voice.GetVoices(string.Empty, string.Empty).Item(3);
+        }
+        private void SetEnglishVoice()
+        {
+            voice.Voice = voice.GetVoices(string.Empty, string.Empty).Item(1);
+        }
+        private void SpeakChina(string strSpeak)
+        {
+            SetChinaVoice();
+            Speak(strSpeak);
+        }
+        private void SpeakEnglishi(string strSpeak)
+        {
+            SetEnglishVoice();
+            Speak(strSpeak);
+        }
+
+        public void AnalyseSpeak(string strSpeak)
+        {
+            int iCbeg = 0;
+            int iEbeg = 0;
+            bool IsChina = true;
+            for (int i = 0; i < strSpeak.Length; i++)
+            {
+                /*
+                char chr = strSpeak;
+                if (IsChina)
+                {
+                    if (chr <= 122 && chr >= 65)
+                    {
+                        int iLen = i - iCbeg;
+                        string strValue = strSpeak.Substring(iCbeg, iLen);
+                        SpeakChina(strValue);
+                        iEbeg = i;
+                        IsChina = false;
+                    }
+                }
+                else
+                {
+                    if (chr > 122 || chr < 65)
+                    {
+                        int iLen = i - iEbeg;
+                        string strValue = strSpeak.Substring(iEbeg, iLen);
+
+                        this.SpeakEnglishi(strValue);
+                        iCbeg = i;
+                        IsChina = true;
+                    }
+                }
+                */
+            }//end for
+            if (IsChina)
+            {
+                int iLen = strSpeak.Length - iCbeg;
+                string strValue = strSpeak.Substring(iCbeg, iLen);
+                SpeakChina(strValue);
+            }
+            else
+            {
+                int iLen = strSpeak.Length - iEbeg;
+                string strValue = strSpeak.Substring(iEbeg, iLen);
+                SpeakEnglishi(strValue);
+            }
+
+        }
+        private void BuildSpeach()
+        {
+            if (voice == null)
+                voice = new SpVoiceClass();
+        }
+        public int Volume
+        {
+            get
+            {
+                return voice.Volume;
+            }
+            set
+            {
+                voice.SetVolume((ushort)(value));
+            }
+        }
+        public int Rate
+        {
+            get
+            {
+                return voice.Rate;
+            }
+            set
+            {
+                voice.SetRate(value);
+            }
+        }
+        private void Speak(string strSpeack)
+        {
+            try
+            {
+                voice.Speak(strSpeack, SpeechVoiceSpeakFlags.SVSFlagsAsync);
+            }
+            catch (Exception err)
+            {
+                throw (new Exception("发生一个错误：" + err.Message));
+            }
+        }
+
+        public void Stop()
+        {
+            voice.Speak(string.Empty, SpeechLib.SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak);
+        }
+        public void Pause()
+        {
+            voice.Pause();
+        }
+        public void Continue()
+        {
+            voice.Resume();
+        }
+
+
+    }//end class
 }

@@ -42,7 +42,7 @@ namespace vcs_SpeechSynthesizer2
             SpeakProgress：朗讀過程事件，可以繼續一些進度條處理。
             */
 
-            var voiceList = synth.GetInstalledVoices();
+            var voiceList = synth.GetInstalledVoices();		//GetInstalledVoices 獲取當前系統中安裝的語音播放人，返回一個VoiceInfo對象集合
             richTextBox2.Text += "目前有安裝的人聲 有 " + voiceList.Count.ToString() + " 種\n";
             int i = 1;
             foreach (InstalledVoice voice in synth.GetInstalledVoices())

@@ -41,6 +41,10 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.richTextBox_html = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.bt_clear2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,7 +153,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(544, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(730, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(356, 428);
             this.richTextBox1.TabIndex = 48;
@@ -167,7 +171,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(22, 317);
+            this.button3.Location = new System.Drawing.Point(449, 270);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(172, 70);
             this.button3.TabIndex = 50;
@@ -175,11 +179,54 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // richTextBox_html
+            // 
+            this.richTextBox_html.Location = new System.Drawing.Point(22, 364);
+            this.richTextBox_html.Name = "richTextBox_html";
+            this.richTextBox_html.Size = new System.Drawing.Size(702, 437);
+            this.richTextBox_html.TabIndex = 51;
+            this.richTextBox_html.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(730, 731);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(172, 70);
+            this.button1.TabIndex = 52;
+            this.button1.Text = "獲取此網頁原始碼中所有鏈接URL";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(1005, 403);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(75, 23);
+            this.bt_clear.TabIndex = 53;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // bt_clear2
+            // 
+            this.bt_clear2.Location = new System.Drawing.Point(631, 597);
+            this.bt_clear2.Name = "bt_clear2";
+            this.bt_clear2.Size = new System.Drawing.Size(75, 23);
+            this.bt_clear2.TabIndex = 54;
+            this.bt_clear2.Text = "Clear";
+            this.bt_clear2.UseVisualStyleBackColor = true;
+            this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(912, 624);
+            this.ClientSize = new System.Drawing.Size(1107, 813);
+            this.Controls.Add(this.bt_clear2);
+            this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.richTextBox_html);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.richTextBox1);
@@ -210,6 +257,10 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.RichTextBox richTextBox_html;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button bt_clear2;
     }
 }
 

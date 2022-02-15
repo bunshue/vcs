@@ -80,31 +80,42 @@ namespace vcs_HtmlAgility
             int dy;
 
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 170;
-            dy = 75;
+            x_st = 20;
+            y_st = 30;
+            dx = 120;
+            dy = 65;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+
+            x_st = 20;
+            y_st = 20;
+            dx = 200;
+            dy = 75;
+            groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
             //fail
 
+            return;
+
             //指定來源網頁
             WebClient wc = new WebClient();
             //將網頁來源資料暫存到記憶體內
-            MemoryStream ms = new MemoryStream(wc.DownloadData("http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm"));
+            MemoryStream ms = new MemoryStream(wc.DownloadData("http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm"));    //fail在此
             //以台灣銀行為範例
 
             // 使用預設編碼讀入 HTML 
@@ -146,6 +157,9 @@ namespace vcs_HtmlAgility
         {
             //https://dotblogs.com.tw/jackbgova/2014/06/10/145471       台泥
             string url = @"http://tw.stock.yahoo.com/q/q?s=1101";
+
+
+            return;
 
             //指定來源網頁
 
@@ -256,6 +270,110 @@ namespace vcs_HtmlAgility
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //M$範例 鴻海
+            //fail
+
+            return;
+
+            // 下載 Yahoo 奇摩股市資料 (範例為 2317 鴻海)
+            WebClient client = new WebClient();
+            MemoryStream ms = new MemoryStream(client.DownloadData(
+        "http://tw.stock.yahoo.com/q/q?s=2317"));
+
+            // 使用預設編碼讀入 HTML
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.Load(ms, Encoding.Default);
+
+            // 裝載第一層查詢結果
+            HtmlAgilityPack.HtmlDocument docStockContext = new HtmlAgilityPack.HtmlDocument();
+
+            docStockContext.LoadHtml(doc.DocumentNode.SelectSingleNode(
+        "/html[1]/body[1]/center[1]/table[2]/tr[1]/td[1]/table[1]").InnerHtml);
+
+            // 取得個股標頭
+            HtmlNodeCollection nodeHeaders =
+         docStockContext.DocumentNode.SelectNodes("./tr[1]/th");
+            // 取得個股數值
+            string[] values = docStockContext.DocumentNode.SelectSingleNode(
+        "./tr[2]").InnerText.Trim().Split('\n');
+            int i = 0;
+
+            // 輸出資料
+            foreach (HtmlNode nodeHeader in nodeHeaders)
+            {
+                Console.WriteLine("Header: {0}, Value: {1}",
+        nodeHeader.InnerText, values[i].Trim());
+                i++;
+            }
+
+            doc = null;
+            docStockContext = null;
+            client = null;
+            ms.Close();
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //https://dotblogs.com.tw/jackbgova/2014/12/08/147553
+            //fail
+            //指定來源網頁
+            WebClient url = new WebClient();
+            //將網頁來源資料暫存到記憶體內
+            MemoryStream ms = new MemoryStream(url.DownloadData("http://tw.stock.yahoo.com/q/q?s=3008"));
+            //以奇摩股市為例http://tw.stock.yahoo.com，3008以大立光為例
+
+            // 使用預設編碼讀入 HTML
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.Load(ms, Encoding.Default);
+
+            //XPath 來解讀它 /html[1]/body[1]/center[1]/table[2]/tr[1]/td[1]/table[1]
+            doc.LoadHtml(doc.DocumentNode.SelectSingleNode("/html[1]/body[1]/center[1]/table[2]/tr[1]/td[1]/table[1]").InnerHtml);
+
+            // 取得個股標頭
+            HtmlNodeCollection htnode = doc.DocumentNode.SelectNodes("./tr[1]/th");
+            // 取得個股數值
+            string[] txt = doc.DocumentNode.SelectSingleNode("./tr[2]").InnerText.Trim().Split('\n');
+
+            int i = 0;
+
+            // 輸出資料
+            foreach (HtmlNode nodeHeader in htnode)
+            {
+                //將 "加到投資組合" 這個字串過濾掉
+                //Response.Write(nodeHeader.InnerText + ":" + txt[i].Trim().Replace("加到投資組合", "") + "<br />");
+                richTextBox1.Text += nodeHeader.InnerText + ":" + txt[i].Trim().Replace("加到投資組合", "") + "\n";
+                i++;
+            }
+            //清除資料
+            doc = null;
+            url = null;
+            ms.Close();
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void bt_00_Click(object sender, EventArgs e)
+        {
             string url = @"https://tw.news.yahoo.com/weather/%E8%87%BA%E7%81%A3/%E8%87%BA%E5%8C%97%E5%B8%82/%E8%87%BA%E5%8C%97%E5%B8%82-2306179";
 
             HtmlWeb hap = new HtmlWeb();
@@ -272,7 +390,7 @@ namespace vcs_HtmlAgility
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void bt_01_Click(object sender, EventArgs e)
         {
             string url = @"https://tw.stock.yahoo.com/quote/1101";
 
@@ -285,90 +403,27 @@ namespace vcs_HtmlAgility
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void bt_02_Click(object sender, EventArgs e)
         {
-            //M$範例
-            //讀取 W3C 首頁中最新公告的程式碼
-
-            string url = @"http://www.w3.org/";
-
-            HtmlWeb hap = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = hap.Load(url);
-
-            HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("/html[1]/body[1]/div[1]/div[2]/div[3]/div[2]/div[1]/div[1]/div[1]/div");
-
-            richTextBox1.Text += "取得資料:\n";
-            foreach (HtmlNode node in nodes)
-            {
-                richTextBox1.Text += node.InnerText.Trim() + "\n";
-            }
-
-            doc = null;
-            nodes = null;
-            hap = null;
-
-            richTextBox1.Text += "完成\n";
-        }
-
-        //private WebClient webClient = new WebClient();
-        //private MemoryStream memoryStream = null;
-
-        public string UpdateDate = "";
-        public DataTable dt = new DataTable();
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //https://wings890109.pixnet.net/blog/post/67905792-c%23-htmlagilitypack
-            string url = @"http://www.taifex.com.tw/cht/5/stockMargining";
-
-            WebClient wc = new WebClient();
-
-            //HTML Agility Pack預設編碼應是法文編碼，所以如果是讀取中文 HTML 內容的話，
-            //無法直接使用HtmlDocument.LoadHtml() 方法，而要透過MemoryStream使用HtmlDocument.Load()方法，才可以指定中文的編碼。
-            MemoryStream memoryStream = new MemoryStream(wc.DownloadData(url));
-
-            //使用HtmlDocument.Load()進行編碼，使用UTF8編譯，取得整份網頁結構
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.Load(memoryStream, Encoding.UTF8);
-
-
-            //從doc向下取得目標資料的html結構
-            HtmlAgilityPack.HtmlDocument docData = new HtmlAgilityPack.HtmlDocument();
-            docData.LoadHtml(doc.DocumentNode.SelectSingleNode(@"//div[@name='printhere']")
-                                             .InnerHtml);
-
-            //獲得更新日期
-            UpdateDate = docData.DocumentNode.SelectSingleNode(@"/div/p/span").InnerText;
-
-            //從docData向下取得網頁上目標表格的html結構
-            HtmlAgilityPack.HtmlDocument dt_html = new HtmlAgilityPack.HtmlDocument();
-            dt_html.LoadHtml(docData.DocumentNode.SelectSingleNode(@"//table[@class='table_c']")
-                                                 .InnerHtml);
-
-            //批次取得th資料，利用這些資料進行IEnumarable創造dt的Column
-            HtmlNodeCollection headers = dt_html.DocumentNode.SelectNodes(@"//tbody/tr/th");
-
-            foreach (HtmlNode header in headers)
-            {
-                dt.Columns.Add(header.InnerText);
-            }
-
-            //可用rows取得所有列的資料，也可直接寫在foreach裡面，tr[td]的意思是選取「所有tr之下有td」的tr們
-            //HtmlNodeCollection rows = dt_html.DocumentNode.SelectNodes(@"//tr[td]");
-            foreach (HtmlNode row in dt_html.DocumentNode.SelectNodes(@"//tr[td]"))
-            {
-                //再用SelectNodes批次取得所有td的資料，利用lambda語法取得所有InnerText
-                dt.Rows.Add(row.SelectNodes(@"td").Select(td => td.InnerText.Trim()).ToArray());
-            }
-
-            label1.Text = UpdateDate;
-            dataGridView1.DataSource = new BindingSource(dt, null);
-            dataGridView1.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void bt_03_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_04_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_05_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_10_Click(object sender, EventArgs e)
         {
             //https://exfast.me/2016/07/c-use-the-htmlagilitypack-to-collect-web-pages/
             //原價屋
@@ -427,88 +482,102 @@ namespace vcs_HtmlAgility
                     }
                 }
             }
+
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void bt_11_Click(object sender, EventArgs e)
         {
-            //M$範例 鴻海
-            //fail
+            //M$範例
+            //讀取 W3C 首頁中最新公告的程式碼
 
-            return;
+            string url = @"http://www.w3.org/";
 
-            // 下載 Yahoo 奇摩股市資料 (範例為 2317 鴻海)
-            WebClient client = new WebClient();
-            MemoryStream ms = new MemoryStream(client.DownloadData(
-        "http://tw.stock.yahoo.com/q/q?s=2317"));
+            HtmlWeb hap = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = hap.Load(url);
 
-            // 使用預設編碼讀入 HTML
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.Load(ms, Encoding.Default);
+            HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("/html[1]/body[1]/div[1]/div[2]/div[3]/div[2]/div[1]/div[1]/div[1]/div");
 
-            // 裝載第一層查詢結果
-            HtmlAgilityPack.HtmlDocument docStockContext = new HtmlAgilityPack.HtmlDocument();
-
-            docStockContext.LoadHtml(doc.DocumentNode.SelectSingleNode(
-        "/html[1]/body[1]/center[1]/table[2]/tr[1]/td[1]/table[1]").InnerHtml);
-
-            // 取得個股標頭
-            HtmlNodeCollection nodeHeaders =
-         docStockContext.DocumentNode.SelectNodes("./tr[1]/th");
-            // 取得個股數值
-            string[] values = docStockContext.DocumentNode.SelectSingleNode(
-        "./tr[2]").InnerText.Trim().Split('\n');
-            int i = 0;
-
-            // 輸出資料
-            foreach (HtmlNode nodeHeader in nodeHeaders)
+            richTextBox1.Text += "取得資料:\n";
+            foreach (HtmlNode node in nodes)
             {
-                Console.WriteLine("Header: {0}, Value: {1}",
-        nodeHeader.InnerText, values[i].Trim());
-                i++;
+                richTextBox1.Text += node.InnerText.Trim() + "\n";
             }
 
             doc = null;
-            docStockContext = null;
-            client = null;
-            ms.Close();
+            nodes = null;
+            hap = null;
+
+            richTextBox1.Text += "完成\n";
+
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void bt_12_Click(object sender, EventArgs e)
         {
-            //https://dotblogs.com.tw/jackbgova/2014/12/08/147553
-            //fail
-            //指定來源網頁
-            WebClient url = new WebClient();
-            //將網頁來源資料暫存到記憶體內
-            MemoryStream ms = new MemoryStream(url.DownloadData("http://tw.stock.yahoo.com/q/q?s=3008"));
-            //以奇摩股市為例http://tw.stock.yahoo.com，3008以大立光為例
+            //https://wings890109.pixnet.net/blog/post/67905792-c%23-htmlagilitypack
+            string url = @"http://www.taifex.com.tw/cht/5/stockMargining";
 
-            // 使用預設編碼讀入 HTML
+            WebClient wc = new WebClient();
+
+            //HTML Agility Pack預設編碼應是法文編碼，所以如果是讀取中文 HTML 內容的話，
+            //無法直接使用HtmlDocument.LoadHtml() 方法，而要透過MemoryStream使用HtmlDocument.Load()方法，才可以指定中文的編碼。
+            MemoryStream memoryStream = new MemoryStream(wc.DownloadData(url));
+
+            //使用HtmlDocument.Load()進行編碼，使用UTF8編譯，取得整份網頁結構
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.Load(ms, Encoding.Default);
+            doc.Load(memoryStream, Encoding.UTF8);
 
-            //XPath 來解讀它 /html[1]/body[1]/center[1]/table[2]/tr[1]/td[1]/table[1]
-            doc.LoadHtml(doc.DocumentNode.SelectSingleNode("/html[1]/body[1]/center[1]/table[2]/tr[1]/td[1]/table[1]").InnerHtml);
 
-            // 取得個股標頭
-            HtmlNodeCollection htnode = doc.DocumentNode.SelectNodes("./tr[1]/th");
-            // 取得個股數值
-            string[] txt = doc.DocumentNode.SelectSingleNode("./tr[2]").InnerText.Trim().Split('\n');
+            //從doc向下取得目標資料的html結構
+            HtmlAgilityPack.HtmlDocument docData = new HtmlAgilityPack.HtmlDocument();
+            docData.LoadHtml(doc.DocumentNode.SelectSingleNode(@"//div[@name='printhere']")
+                                             .InnerHtml);
 
-            int i = 0;
+            //獲得更新日期
+            string UpdateDate = docData.DocumentNode.SelectSingleNode(@"/div/p/span").InnerText;
 
-            // 輸出資料
-            foreach (HtmlNode nodeHeader in htnode)
+            //從docData向下取得網頁上目標表格的html結構
+            HtmlAgilityPack.HtmlDocument dt_html = new HtmlAgilityPack.HtmlDocument();
+            dt_html.LoadHtml(docData.DocumentNode.SelectSingleNode(@"//table[@class='table_c']")
+                                                 .InnerHtml);
+
+            //批次取得th資料，利用這些資料進行IEnumarable創造dt的Column
+            HtmlNodeCollection headers = dt_html.DocumentNode.SelectNodes(@"//tbody/tr/th");
+
+            DataTable dt = new DataTable();
+            foreach (HtmlNode header in headers)
             {
-                //將 "加到投資組合" 這個字串過濾掉
-                //Response.Write(nodeHeader.InnerText + ":" + txt[i].Trim().Replace("加到投資組合", "") + "<br />");
-                richTextBox1.Text += nodeHeader.InnerText + ":" + txt[i].Trim().Replace("加到投資組合", "") + "\n";
-                i++;
+                dt.Columns.Add(header.InnerText);
             }
-            //清除資料
-            doc = null;
-            url = null;
-            ms.Close();
+
+            //可用rows取得所有列的資料，也可直接寫在foreach裡面，tr[td]的意思是選取「所有tr之下有td」的tr們
+            //HtmlNodeCollection rows = dt_html.DocumentNode.SelectNodes(@"//tr[td]");
+            foreach (HtmlNode row in dt_html.DocumentNode.SelectNodes(@"//tr[td]"))
+            {
+                //再用SelectNodes批次取得所有td的資料，利用lambda語法取得所有InnerText
+                dt.Rows.Add(row.SelectNodes(@"td").Select(td => td.InnerText.Trim()).ToArray());
+            }
+
+            richTextBox1.Text += UpdateDate + "\n";
+            dataGridView1.DataSource = new BindingSource(dt, null);
+            dataGridView1.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+
+        }
+
+        private void bt_13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_15_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

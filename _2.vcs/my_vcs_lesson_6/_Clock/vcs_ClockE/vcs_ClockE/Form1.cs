@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Runtime.InteropServices;   //for DllImport
+
 //Form1屬性的BackColor改成Color.White
 //Form1屬性的TransparencyKey改成Color.White
 
@@ -14,8 +16,19 @@ namespace vcs_ClockE
 {
     public partial class Form1 : Form
     {
-        int W = 200;
-        int H = 200;
+        //移動無邊框窗體 ST
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        [DllImport("user32.dll")]
+        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
+        public const int WM_SYSCOMMAND = 0x0112;
+        public const int SC_MOVE = 0xF010;
+        public const int HTCAPTION = 0x0002;
+        //移動無邊框窗體 SP
+
+        int R = 100;
+        int total_time = 10;
+        int remaining_time = 6;
 
         public Form1()
         {
@@ -24,7 +37,7 @@ namespace vcs_ClockE
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.ClientSize = new Size(W, H);
+            this.ClientSize = new Size(R * 2, R * 2);
 
             this.FormBorderStyle = FormBorderStyle.None;
             this.TransparencyKey = Color.White;
@@ -43,22 +56,38 @@ namespace vcs_ClockE
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Pen p = new Pen(Color.Blue, 8);
-            e.Graphics.DrawEllipse(p, 10, 10, W - 20, H - 20);
+            Pen p;
+            
+            p = new Pen(Color.Red, 2);
+
+            e.Graphics.DrawRectangle(p, this.ClientRectangle);
+
+            int linewidth = 10;
+            p = new Pen(Color.Blue, linewidth);
+            e.Graphics.DrawEllipse(p, linewidth, linewidth, R * 2 - linewidth * 2, R * 2 - linewidth * 2);
 
             SolidBrush sb = new SolidBrush(Color.Blue);
-            Font f = new Font("標楷體", 30);
+            Font f = new Font("標楷體", 26);
             string current_time = DateTime.Now.ToString("HH:mm:ss");
             int tmp_width = 0;
             int tmp_height = 0;
 
-
             tmp_width = e.Graphics.MeasureString(current_time, f).ToSize().Width;
             tmp_height = e.Graphics.MeasureString(current_time, f).ToSize().Height;
 
-            e.Graphics.DrawString(current_time, f, sb, new PointF((W - tmp_width) / 2 - 10, (H - tmp_height) / 2));
+            e.Graphics.DrawString(current_time, f, sb, new PointF((R * 2 - tmp_width) / 2, (R * 2 - tmp_height) / 2));
 
-
+            p = new Pen(Color.Red, 2);
+            e.Graphics.DrawRectangle(p, (R * 2 - tmp_width) / 2, (R * 2 - tmp_height) / 2,tmp_width,tmp_height);
         }
+
+        //移動無邊框窗體 ST
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
+        }
+        //移動無邊框窗體 SP
     }
 }
+
