@@ -39,6 +39,9 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button7 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,9 +57,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(701, 14);
+            this.richTextBox1.Location = new System.Drawing.Point(181, 21);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(356, 624);
+            this.richTextBox1.Size = new System.Drawing.Size(882, 334);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -66,7 +69,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 60);
             this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
+            this.button2.Text = "匯率2";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -96,7 +99,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(130, 60);
             this.button5.TabIndex = 5;
-            this.button5.Text = "M$範例";
+            this.button5.Text = "M$範例 W3C";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -106,13 +109,14 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(130, 60);
             this.button6.TabIndex = 6;
+            this.button6.Text = "臺灣期貨交易所";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(179, 43);
+            this.label1.Location = new System.Drawing.Point(192, 367);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 12);
             this.label1.TabIndex = 7;
@@ -121,10 +125,10 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(294, 103);
+            this.dataGridView1.Location = new System.Drawing.Point(181, 392);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(377, 398);
+            this.dataGridView1.Size = new System.Drawing.Size(882, 315);
             this.dataGridView1.TabIndex = 8;
             // 
             // button7
@@ -133,6 +137,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(130, 60);
             this.button7.TabIndex = 9;
+            this.button7.Text = "原價屋";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -142,13 +147,47 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(130, 60);
             this.button0.TabIndex = 10;
+            this.button0.Text = "匯率1 fail";
             this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(12, 647);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(130, 60);
+            this.button8.TabIndex = 11;
+            this.button8.Text = "M$範例 鴻海";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(507, 367);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 12);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "label2";
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(12, 692);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(130, 60);
+            this.button9.TabIndex = 13;
+            this.button9.Text = "大立光";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1075, 720);
+            this.ClientSize = new System.Drawing.Size(1075, 764);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.dataGridView1);
@@ -182,6 +221,9 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button9;
     }
 }
 
