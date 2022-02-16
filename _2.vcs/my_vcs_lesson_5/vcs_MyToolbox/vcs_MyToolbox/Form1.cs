@@ -10,10 +10,41 @@ using System.Windows.Forms;
 using System.IO;        //for Directory
 using System.Diagnostics;   //for Process
 
+using AxWMPLib;
+
 namespace vcs_MyToolbox
 {
     public partial class Form1 : Form
     {
+        string mp3_filename = string.Empty;
+        string pdf_filename = string.Empty;
+        string mp3_filename_short = string.Empty;
+        string pdf_filename_short = string.Empty;
+        string current_directory = string.Empty;
+        bool flag_already_use_webbrowser = false;
+
+        int mp3_position = 0;
+        int mp3_volume = 50;
+        double mp3_rate = 1.0;
+        int mp3_player_height = 50;
+
+        List<String> mp3_filename_list = new List<String>();
+        int current_mp3_index = 0;
+        int total_mp3_count = 0;
+
+        int timer_display_show_main_mesg_count = 0;
+        int timer_display_show_main_mesg_count_target = 0;
+
+        private const int S_OK = 0;     //system return OK
+        private const int S_FALSE = 1;     //system return FALSE
+
+        AxWindowsMediaPlayer axWindowsMediaPlayer1;
+        RichTextBox richTextBox1;
+
+        bool flag_debug_mode = true;
+        bool flag_repeat_mode = true;
+
+
         //自動隱藏頁面 ST
         internal AnchorStyles StopAnhor = AnchorStyles.None;
         private void mStopAnhor()

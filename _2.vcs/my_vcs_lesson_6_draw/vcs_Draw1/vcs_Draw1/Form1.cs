@@ -2742,7 +2742,7 @@ namespace vcs_Draw1
 
             //貼圖
             g.DrawString("貼圖", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(W - 80, 30));
-            Bitmap bmp = new Bitmap(@"C:\______test_files\red-ball-icon.png");
+            Bitmap bmp = new Bitmap(@"C:\______test_files\__pic\_ball\red-ball-icon.png");
             for (y_st = 60; y_st < H; y_st += 80)
             {
                 g.DrawImage(bmp, W - 75, y_st);
