@@ -15,12 +15,13 @@ using System.IO;    //for Path
 加入工具箱
 
 工具箱/滑鼠右鍵/選擇項目/
-/COM 元件 頁籤 /勾選Windows Media Player(wmp.dll)	/ 確定
+/COM元件 頁籤 /勾選Windows Media Player(wmp.dll)	/ 確定
 
 
 會發現工具箱多了個Windows Media Player的控制項
 就是 axWindowsMediaPlayer
 
+拉一個Windows Media Player控件進表單, 參考裡面就會出現AxWMPLib和WMPLib
 */
 
 /* old

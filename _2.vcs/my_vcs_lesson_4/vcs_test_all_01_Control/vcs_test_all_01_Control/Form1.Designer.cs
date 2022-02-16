@@ -1,4 +1,4 @@
-﻿namespace vcs_test_all_00_Control
+﻿namespace vcs_test_all_01_Control
 {
     partial class Form1
     {
@@ -1238,7 +1238,7 @@
             // button36
             // 
             this.button36.BackColor = System.Drawing.Color.Yellow;
-            this.button36.Image = global::vcs_test_all_00_Control.Properties.Resources.purple_bacground;
+            this.button36.Image = global::vcs_test_all_01_Control.Properties.Resources.purple_bacground;
             this.button36.Location = new System.Drawing.Point(644, 571);
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(135, 120);
@@ -1249,7 +1249,7 @@
             // button35
             // 
             this.button35.BackColor = System.Drawing.Color.Yellow;
-            this.button35.Image = global::vcs_test_all_00_Control.Properties.Resources.purple_bacground;
+            this.button35.Image = global::vcs_test_all_01_Control.Properties.Resources.purple_bacground;
             this.button35.Location = new System.Drawing.Point(782, 571);
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(135, 120);

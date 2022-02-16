@@ -1,4 +1,4 @@
-﻿namespace vcs_test_all_00_Control
+﻿namespace vcs_test_all_01_Control
 {
     partial class MainForm
     {

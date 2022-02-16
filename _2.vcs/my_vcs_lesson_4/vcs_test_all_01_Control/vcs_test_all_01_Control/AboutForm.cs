@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_test_all_00_Control
+namespace vcs_test_all_01_Control
 {
     public partial class AboutForm : Form
     {

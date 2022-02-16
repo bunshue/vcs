@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace vcs_test_all_00_Control
+namespace vcs_test_all_01_Control
 {
     public partial class MainForm :System.Windows.Forms.Form
     {

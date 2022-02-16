@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Reflection;                //for BindingFlags  //刪除控件的事件的方法
 using System.Text.RegularExpressions;
 
-namespace vcs_test_all_00_Control
+namespace vcs_test_all_01_Control
 {
     public partial class Form1 : Form
     {

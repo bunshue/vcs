@@ -55,6 +55,7 @@
             this.bt_11 = new System.Windows.Forms.Button();
             this.bt_10 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -345,11 +346,22 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "fail   new";
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(1038, 628);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(79, 35);
+            this.bt_clear.TabIndex = 30;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1189, 764);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox0);
@@ -395,6 +407,7 @@
         private System.Windows.Forms.Button bt_11;
         private System.Windows.Forms.Button bt_10;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 
