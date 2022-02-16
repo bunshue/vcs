@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button0 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -39,11 +40,15 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lb_main_mesg1 = new System.Windows.Forms.Label();
+            this.timer_display = new System.Windows.Forms.Timer(this.components);
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button0
             // 
+            this.button0.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button0.Location = new System.Drawing.Point(12, 12);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(140, 60);
@@ -54,6 +59,7 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(12, 77);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 60);
@@ -64,46 +70,54 @@
             // 
             // button2
             // 
+            this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button2.Location = new System.Drawing.Point(12, 142);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(140, 60);
             this.button2.TabIndex = 2;
+            this.button2.Text = "三角函數";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.Location = new System.Drawing.Point(12, 208);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(140, 60);
             this.button3.TabIndex = 3;
+            this.button3.Text = "顯示訊息";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button4.Location = new System.Drawing.Point(12, 273);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(140, 60);
             this.button4.TabIndex = 4;
+            this.button4.Text = "使用WMP";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
+            this.button5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button5.Location = new System.Drawing.Point(12, 339);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(140, 60);
             this.button5.TabIndex = 5;
+            this.button5.Text = "使用WebCam";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(180, 10);
+            this.pictureBox1.Location = new System.Drawing.Point(319, 239);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(430, 478);
+            this.pictureBox1.Size = new System.Drawing.Size(374, 478);
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -112,9 +126,10 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(630, 10);
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.richTextBox1.Location = new System.Drawing.Point(732, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(619, 696);
+            this.richTextBox1.Size = new System.Drawing.Size(525, 745);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
@@ -132,7 +147,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(12, 526);
+            this.label1.Location = new System.Drawing.Point(342, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(178, 24);
             this.label1.TabIndex = 9;
@@ -142,17 +157,45 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(12, 566);
+            this.label2.Location = new System.Drawing.Point(342, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(159, 24);
             this.label2.TabIndex = 10;
             this.label2.Text = "移動PictureBox";
             // 
+            // lb_main_mesg1
+            // 
+            this.lb_main_mesg1.AutoSize = true;
+            this.lb_main_mesg1.BackColor = System.Drawing.SystemColors.Control;
+            this.lb_main_mesg1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg1.Location = new System.Drawing.Point(346, 163);
+            this.lb_main_mesg1.Name = "lb_main_mesg1";
+            this.lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg1.TabIndex = 135;
+            this.lb_main_mesg1.Text = "mesg1";
+            // 
+            // timer_display
+            // 
+            this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(346, 109);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(106, 24);
+            this.label3.TabIndex = 136;
+            this.label3.Text = "顯示訊息";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1257, 720);
+            this.ClientSize = new System.Drawing.Size(1257, 745);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lb_main_mesg1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bt_clear);
@@ -187,6 +230,9 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lb_main_mesg1;
+        private System.Windows.Forms.Timer timer_display;
+        private System.Windows.Forms.Label label3;
     }
 }
 

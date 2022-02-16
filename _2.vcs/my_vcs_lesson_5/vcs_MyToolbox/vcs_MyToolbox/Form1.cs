@@ -12,6 +12,27 @@ using System.Diagnostics;   //for Process
 
 using AxWMPLib;
 
+/*
+點開 方案總管/vcs_XXXXX/Properties/Settings.settings
+
+加入要儲存的參數 的 名稱 型別 預設值
+
+若是數字 一定要給預設值
+*/
+
+/*  sugar
+使用AxWindowsMediaPlayer播放多媒體
+
+加入工具箱
+
+工具箱/滑鼠右鍵/選擇項目/
+/COM元件 頁籤 /勾選Windows Media Player(wmp.dll)	/ 確定
+
+會發現工具箱多了個Windows Media Player的控制項
+就是 axWindowsMediaPlayer
+
+*/
+
 namespace vcs_MyToolbox
 {
     public partial class Form1 : Form
@@ -112,6 +133,9 @@ namespace vcs_MyToolbox
         Button btn_00 = new Button();
         Button btn_01 = new Button();
         Button btn_02 = new Button();
+        Button btn_10 = new Button();
+        Button btn_11 = new Button();
+        Button btn_12 = new Button();
         Button btn_20 = new Button();
         Button btn_21 = new Button();
         Button btn_22 = new Button();
@@ -130,8 +154,40 @@ namespace vcs_MyToolbox
 
             add_my_toolbox_controls();
 
+            Init_Controls();
+
             this.TopMost = true;
             this.ShowInTaskbar = false;
+        }
+
+        void Init_Controls()
+        {
+            this.axWindowsMediaPlayer1 = new AxWindowsMediaPlayer();
+            this.axWindowsMediaPlayer1.Enabled = true;
+            //this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(0, 400);
+            //this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            //this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(800, 500);
+            //this.axWindowsMediaPlayer1.TabIndex = 2;
+            //this.axWindowsMediaPlayer1.Visible = false;   //fail
+            this.axWindowsMediaPlayer1.StatusChange += new EventHandler(axWindowsMediaPlayer1_StatusChange);
+            this.Controls.Add(this.axWindowsMediaPlayer1);
+        }
+
+        protected void axWindowsMediaPlayer1_StatusChange(object sender, EventArgs e)
+        {
+            if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsStopped)
+            {
+                mp3_position = 0;
+
+                //判断视频是否已停止播放
+                if (flag_repeat_mode == true)
+                {
+                    //停顿2秒钟再重新播放
+                    System.Threading.Thread.Sleep(2000);
+                    //重新播放
+                    axWindowsMediaPlayer1.Ctlcontrols.play();
+                }
+            }
         }
 
         void show_item_location()
@@ -202,27 +258,47 @@ namespace vcs_MyToolbox
             btn_02.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_02);	// 將控件加入表單
 
+            btn_10.Width = w;
+            btn_10.Height = h;
+            btn_10.Text = "Git";
+            btn_10.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            btn_10.Click += btn_click_function;	// 加入事件
+            this.Controls.Add(btn_10);	// 將控件加入表單
+
+            btn_11.Width = w;
+            btn_11.Height = h;
+            btn_11.Text = "Visual C#";
+            btn_11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            btn_11.Click += btn_click_function;	// 加入事件
+            this.Controls.Add(btn_11);	// 將控件加入表單
+
+            btn_12.Width = w;
+            btn_12.Height = h;
+            btn_12.Text = "";
+            btn_12.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            btn_12.Click += btn_click_function;	// 加入事件
+            this.Controls.Add(btn_12);	// 將控件加入表單
+
             btn_20.Width = w;
             btn_20.Height = h;
-            btn_20.Text = "Git";
-            btn_20.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            btn_20.Text = "mp3";
+            btn_20.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             btn_20.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_20);	// 將控件加入表單
 
             btn_21.Width = w;
             btn_21.Height = h;
-            btn_21.Text = "Visual C#";
-            btn_21.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            btn_21.Text = "pdf";
+            btn_21.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             btn_21.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_21);	// 將控件加入表單
 
             btn_22.Width = w;
             btn_22.Height = h;
             btn_22.Text = "";
-            btn_22.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            btn_22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             btn_22.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_22);	// 將控件加入表單
-
 
             //lb_debug0.Text = "AAAAAAA";
             lb_debug0.Font = new Font("標楷體", 22);
@@ -331,9 +407,9 @@ namespace vcs_MyToolbox
             {
                 text = btn_02.Text;
             }
-            else if (sender.Equals(btn_20))
+            else if (sender.Equals(btn_10))
             {
-                text = btn_20.Text;
+                text = btn_10.Text;
                 string foldername = @"C:\_git\vcs";
                 if (Directory.Exists(foldername) == true)
                 {
@@ -343,6 +419,22 @@ namespace vcs_MyToolbox
                 {
                     lb_debug1.Text = "Git資料夾不存在";
                 }
+            }
+            else if (sender.Equals(btn_11))
+            {
+                text = btn_11.Text;
+            }
+            else if (sender.Equals(btn_12))
+            {
+                text = btn_12.Text;
+            }
+            else if (sender.Equals(btn_20))
+            {
+                text = btn_20.Text;
+                lb_debug1.Text = "播放mp3";
+
+                string mp3_filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+                axWindowsMediaPlayer1.URL = mp3_filename;
             }
             else if (sender.Equals(btn_21))
             {
@@ -358,8 +450,6 @@ namespace vcs_MyToolbox
             }
 
             lb_debug0.Text = "你按了 " + text;
-
-
         }
 
         //string filename = @"C:\______test_files\_icon\快.ico";

@@ -71,7 +71,7 @@ namespace vcs_SendMail
             mail_body = richTextBox_mail.Text;
             show_item_location();
 
-            string filename = "C:\\______test_files\\__RW\\_txt\\gmail_key.txt";
+            string filename = @"C:\______test_files\_key\gmail_key.txt";
             if (File.Exists(filename) == false)
             {
                 MessageBox.Show("Gmail_KEY 檔案不存在, 離開", "vcs_SendMail", MessageBoxButtons.OK, MessageBoxIcon.Error);

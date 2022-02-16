@@ -32,9 +32,18 @@ namespace network_test3
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_clear_html1.Location = new Point(richTextBox_html1.Location.X + richTextBox_html1.Size.Width - bt_clear_html1.Size.Width, richTextBox_html1.Location.Y + richTextBox_html1.Size.Height - bt_clear_html1.Size.Height);
+            bt_clear_html2.Location = new Point(richTextBox_html2.Location.X + richTextBox_html2.Size.Width - bt_clear_html2.Size.Width, richTextBox_html2.Location.Y + richTextBox_html2.Size.Height - bt_clear_html2.Size.Height);
 
-            bt_clear2.Location = new Point(richTextBox_html.Location.X + richTextBox_html.Size.Width - bt_clear2.Size.Width, richTextBox_html.Location.Y + richTextBox_html.Size.Height - bt_clear2.Size.Height);
-
+            string filename = @"C:\______test_files\mmmmm.txt";
+            try
+            {
+                richTextBox_html2.LoadFile(filename, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                richTextBox_html2.Text += "找不到檔案\n";
+            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -208,7 +217,7 @@ namespace network_test3
         private void button1_Click(object sender, EventArgs e)
         {
             //獲取此網頁原始碼中所有鏈接URL
-            string content = richTextBox_html.Text;
+            string content = richTextBox_html1.Text;
             string regex = "href=[\\\"\\\'](http:\\/\\/|\\.\\/|\\/)?\\w+(\\.\\w+)*(\\/\\w+(\\.\\w+)?)*(\\/|\\?\\w*=\\w*(&\\w*=\\w*)*)?[\\\"\\\']";
             Regex re = new Regex(regex);
             MatchCollection matches = re.Matches(content);
@@ -227,7 +236,30 @@ namespace network_test3
                     richTextBox1.Text += result + "\n";
                 }
             }
+        }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //獲取此網頁原始碼中所有鏈接URL
+            string content = richTextBox_html1.Text;
+            string regex = "href=[\\\"\\\'](http:\\/\\/|\\.\\/|\\/)?\\w+(\\.\\w+)*(\\/\\w+(\\.\\w+)?)*(\\/|\\?\\w*=\\w*(&\\w*=\\w*)*)?[\\\"\\\']";
+            Regex re = new Regex(regex);
+            MatchCollection matches = re.Matches(content);
+
+            System.Collections.IEnumerator enu = matches.GetEnumerator();
+            while (enu.MoveNext() && enu.Current != null)
+            {
+                Match match = (Match)(enu.Current);
+
+                string result = match.Value;
+
+                if (result.Contains("book"))
+                {
+                    result = result.Replace("href=\"", "");
+                    result = result.Replace("\"", "");
+                    richTextBox1.Text += result + "\n";
+                }
+            }
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -235,10 +267,16 @@ namespace network_test3
             richTextBox1.Clear();
         }
 
-        private void bt_clear2_Click(object sender, EventArgs e)
+        private void bt_clear_html1_Click(object sender, EventArgs e)
         {
-            richTextBox_html.Clear();
+            richTextBox_html1.Clear();
         }
+
+        private void bt_clear_html2_Click(object sender, EventArgs e)
+        {
+            richTextBox_html2.Clear();
+        }
+
     }
 
     /// <summary>

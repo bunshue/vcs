@@ -26,6 +26,9 @@ namespace vcs_test_all_00_Usually
         public const int HTCAPTION = 0x0002;
         //移動無邊框窗體 SP
 
+        private const int S_OK = 0;     //system return OK
+        private const int S_FALSE = 1;     //system return FALSE
+
         public Form1()
         {
             InitializeComponent();
@@ -89,6 +92,11 @@ namespace vcs_test_all_00_Usually
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+
+            label1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 30);
+            label3.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 60);
+            lb_main_mesg1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 90);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -173,18 +181,51 @@ namespace vcs_test_all_00_Usually
 
         }
 
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
+            int x;
+            int y;
+            richTextBox1.Text += "y = sin(x)\n";
+            for (x = 0; x <= 360; x += 30)
+            {
+                y = (int)(100 * sind(x));
+                richTextBox1.Text += "x = " + x.ToString() + ", y = " + y.ToString() + "\n";
+            }
+
+            for (x = 0; x <= 360; x += 30)
+            {
+                richTextBox1.Text += "x = " + x.ToString() + "\t" + (rad(x) / Math.PI).ToString() + " pi rad\t" + 100 * sind(x) + "\n";
+            }
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            show_main_message1("顯示訊息", S_OK, 10);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //使用WMP
+
+
+
+
 
         }
 
@@ -234,6 +275,33 @@ namespace vcs_test_all_00_Usually
         }
         //移動PictureBox SP
 
+        //顯示訊息 ST
+        int timer_display_show_main_mesg_count = 0;
+        int timer_display_show_main_mesg_count_target = 0;
+
+
+        void show_main_message1(string mesg, int number, int timeout)
+        {
+            lb_main_mesg1.Text = mesg;
+            //playSound(number);
+
+            timer_display_show_main_mesg_count = 0;
+            timer_display_show_main_mesg_count_target = timeout;   //timeout in 0.1 sec
+            timer_display.Enabled = true;
+        }
+
+        private void timer_display_Tick(object sender, EventArgs e)
+        {
+            if (timer_display_show_main_mesg_count < timer_display_show_main_mesg_count_target)      //display main message timeout
+            {
+                timer_display_show_main_mesg_count++;
+                if (timer_display_show_main_mesg_count >= timer_display_show_main_mesg_count_target)
+                {
+                    lb_main_mesg1.Text = "";
+                }
+            }
+        }
+        //顯示訊息 SP
     }
 
     //3Form1之外
@@ -246,5 +314,4 @@ namespace vcs_test_all_00_Usually
             protocol_Tls11 = (SecurityProtocolType)768,
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
-
 }
