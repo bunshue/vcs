@@ -56,6 +56,9 @@
             this.bt_10 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -186,6 +189,9 @@
             // 
             // groupBox0
             // 
+            this.groupBox0.Controls.Add(this.radioButton3);
+            this.groupBox0.Controls.Add(this.radioButton2);
+            this.groupBox0.Controls.Add(this.radioButton1);
             this.groupBox0.Controls.Add(this.bt_05);
             this.groupBox0.Controls.Add(this.bt_03);
             this.groupBox0.Controls.Add(this.bt_04);
@@ -201,10 +207,12 @@
             // 
             // bt_05
             // 
+            this.bt_05.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_05.Location = new System.Drawing.Point(24, 297);
             this.bt_05.Name = "bt_05";
-            this.bt_05.Size = new System.Drawing.Size(120, 40);
+            this.bt_05.Size = new System.Drawing.Size(65, 45);
             this.bt_05.TabIndex = 29;
+            this.bt_05.Text = "Yahoo股市";
             this.bt_05.UseVisualStyleBackColor = true;
             this.bt_05.Click += new System.EventHandler(this.bt_05_Click);
             // 
@@ -356,6 +364,38 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(95, 295);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(59, 16);
+            this.radioButton1.TabIndex = 30;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "台積電";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(95, 315);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(59, 16);
+            this.radioButton2.TabIndex = 31;
+            this.radioButton2.Text = "聯發科";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(95, 335);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(59, 16);
+            this.radioButton3.TabIndex = 32;
+            this.radioButton3.Text = "大立光";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -372,6 +412,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox0.ResumeLayout(false);
+            this.groupBox0.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -408,6 +449,9 @@
         private System.Windows.Forms.Button bt_10;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
 

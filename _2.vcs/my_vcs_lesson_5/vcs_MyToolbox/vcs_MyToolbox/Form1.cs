@@ -60,7 +60,6 @@ namespace vcs_MyToolbox
         private const int S_FALSE = 1;     //system return FALSE
 
         AxWindowsMediaPlayer axWindowsMediaPlayer1;
-        RichTextBox richTextBox1;
 
         bool flag_debug_mode = true;
         bool flag_repeat_mode = true;
@@ -142,6 +141,7 @@ namespace vcs_MyToolbox
         Label lb_debug0 = new Label();
         Label lb_debug1 = new Label();
         Label lb_debug2 = new Label();
+        RichTextBox richTextBox1 = new RichTextBox();
 
         public Form1()
         {
@@ -171,6 +171,7 @@ namespace vcs_MyToolbox
             //this.axWindowsMediaPlayer1.Visible = false;   //fail
             this.axWindowsMediaPlayer1.StatusChange += new EventHandler(axWindowsMediaPlayer1_StatusChange);
             this.Controls.Add(this.axWindowsMediaPlayer1);
+            axWindowsMediaPlayer1.Visible = false;
         }
 
         protected void axWindowsMediaPlayer1_StatusChange(object sender, EventArgs e)
@@ -299,6 +300,11 @@ namespace vcs_MyToolbox
             btn_22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             btn_22.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_22);	// 將控件加入表單
+
+            richTextBox1.Width = w * 3 + 40;
+            richTextBox1.Height = h * 2 - 20;
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            this.Controls.Add(richTextBox1);	// 將控件加入表單
 
             //lb_debug0.Text = "AAAAAAA";
             lb_debug0.Font = new Font("標楷體", 22);
@@ -439,6 +445,11 @@ namespace vcs_MyToolbox
             else if (sender.Equals(btn_21))
             {
                 text = btn_21.Text;
+
+                //用Adobe開啟pdf檔案
+                string filename = "C:\\______test_files\\__RW\\_pdf\\note_Linux_workstation.pdf";
+                Process process;
+                process = Process.Start(filename);
             }
             else if (sender.Equals(btn_22))
             {

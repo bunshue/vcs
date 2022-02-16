@@ -16,16 +16,6 @@ namespace vcs_ClockE
 {
     public partial class Form1 : Form
     {
-        //移動無邊框窗體 ST
-        [DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-        [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
-        public const int WM_SYSCOMMAND = 0x0112;
-        public const int SC_MOVE = 0xF010;
-        public const int HTCAPTION = 0x0002;
-        //移動無邊框窗體 SP
-
         int R = 100;
         int total_time = 10;
         int remaining_time = 6;
@@ -35,6 +25,22 @@ namespace vcs_ClockE
         {
             InitializeComponent();
         }
+
+        //移動無邊框窗體 ST
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        [DllImport("user32.dll")]
+        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
+        public const int WM_SYSCOMMAND = 0x0112;
+        public const int SC_MOVE = 0xF010;
+        public const int HTCAPTION = 0x0002;
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
+        }
+        //移動無邊框窗體 SP
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -92,13 +98,6 @@ namespace vcs_ClockE
 
         }
 
-        //移動無邊框窗體 ST
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
-        }
-        //移動無邊框窗體 SP
     }
 }
 
