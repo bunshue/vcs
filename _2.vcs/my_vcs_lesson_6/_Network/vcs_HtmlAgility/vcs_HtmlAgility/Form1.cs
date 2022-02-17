@@ -502,28 +502,192 @@ namespace vcs_HtmlAgility
 
         private void button10_Click(object sender, EventArgs e)
         {
+            datascraper();
 
+        }
+
+        public void datascraper()
+        {
+            string url = @"http://www.bbc.co.uk/sport/football/results/partial/competition-118996114";
+            HtmlWeb htmlWeb = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument { OptionUseIdAttribute = true };
+
+            doc = htmlWeb.Load(url);
+            HtmlNodeCollection mtchrslts = doc.DocumentNode.SelectNodes("//tr[@id]");
+
+            string date;
+            string ateam;
+            string hteam;
+            string score;
+            string idmess;
+            string idnum;
+            string[] teamscores;
+            string teamscoreh;
+            string teamscorea;
+
+            foreach (HtmlNode matchresult in mtchrslts)
+            {
+                idmess = matchresult.SelectSingleNode("//tr[@id]").Id;
+                idnum = idmess.Replace("match-row-", "");
+                score = matchresult.SelectSingleNode("//abbr[@title='Score']").InnerText;
+                teamscores = score.Split('-');
+                teamscoreh = teamscores[0];
+                teamscorea = teamscores[1];
+                hteam = matchresult.SelectSingleNode("//p[(@class='team-home teams')]").InnerText;
+                ateam = matchresult.SelectSingleNode("//p[(@class='team-away teams')]").InnerText;
+                date = matchresult.SelectSingleNode("//td[(@class='match-date')]").InnerText;
+            }
+
+            return;
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            List<string> outList = new List<string>();
 
+            string url = @"https://yandex.by/search/?numdoc=10&p=0&rdrnd=601861&text=kinogo.co%20Один%20дома%201990%20&lr=157";
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            var web = new HtmlWeb
+            {
+                AutoDetectEncoding = false,
+                OverrideEncoding = Encoding.UTF8 //GetEncoding("windows-1251")
+            };
+
+            doc = web.Load(url);
+
+            HtmlNodeCollection NoAltElements = doc.DocumentNode.SelectNodes("//div");
+
+            if (NoAltElements != null)
+            {
+                foreach (HtmlNode node in NoAltElements)
+                {
+
+                    string outputText = node.InnerHtml;
+                    richTextBox1.Text += "找到" + outputText + "\n\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "找不到資料\n";
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //List<String> strings;
+            //richTextBox1.Text += "len = " + strings.Count.ToString() + "\n";
+
+
+
 
         }
 
+
+
         private void button13_Click(object sender, EventArgs e)
         {
+            string url = @"http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.31.3487";
+            string result = getBibTex(url);
+            richTextBox1.Text += "此網頁中 BibTeX 欄位內的資料:\n" + result + "\n";
 
+            //抓此網頁中 BibTeX 欄位內的資料
+
+
+            url = @"http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.112.4035&rank=3&q=Composite&osm=&ossid=";
+            result = getBibTex(url);
+            richTextBox1.Text += "此網頁中 BibTeX 欄位內的資料:\n" + result + "\n";
+
+
+            url = @"http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.112.4035";
+            result = getBibTex(url);
+            richTextBox1.Text += "此網頁中 BibTeX 欄位內的資料:\n" + result + "\n";
+        }
+
+        public string getBibTex(string url)
+        {
+            string res = "", temp = "";
+
+            HtmlWeb htmlWeb = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc;
+            HtmlNode n;
+
+            if (url.Contains("viewdoc"))//e.g. http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.31.3487
+            {
+                doc = htmlWeb.Load(url);
+
+                if (doc != null)
+                {
+                    Console.WriteLine("Document Loaded!");
+                    richTextBox1.Text += "Document Loaded!\n";
+                }
+                else
+                {
+                    Console.WriteLine("Load Error!");
+                    richTextBox1.Text += "Load Error!\n";
+                }
+                try
+                {
+                    if ((n = doc.DocumentNode.SelectSingleNode("//*[@id=\"bibtex\"]/p")) != null)
+                    {
+                        temp = n.InnerText;
+                        temp = temp.Replace(",", ",\n").Replace("&nbsp;", " ");
+                    }
+                }
+                catch (Exception e) { }
+                res = temp;
+                return res;
+            }
+            else//e.g. http://citeseer.ist.psu.edu/showciting?cid=2131272
+                return res;
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            int ret = GetFaceBookLikes();
+            richTextBox1.Text += "links = " + ret.ToString() + "\n";
 
         }
+
+        /// <summary>
+        /// WebCrawl facebook to get likes from ordbogen.com page
+        /// </summary>
+        /// <returns>int</returns>
+        public int GetFaceBookLikes()
+        {
+            int numOfLikes = 0;
+            string searchStart = "omBeskedDelMere";
+            string searchEnd = " ";
+            try
+            {
+                HtmlAgilityPack.HtmlDocument doc = new HtmlWeb().Load("https://www.facebook.com/ABCNetwork/");
+
+                if (doc != null)
+                {
+                    var divNodes = doc.DocumentNode.SelectNodes("//div");
+                    foreach (var div in divNodes)
+                    {
+                        if (div.InnerText.Contains("personer synes godt om dette"))
+                        {
+                            int start = div.InnerText.IndexOf(searchStart, 0) + searchStart.Length;
+                            int end = div.InnerText.IndexOf(searchEnd, start);
+                            string number = div.InnerText.Substring(start, end - start);
+                            int.TryParse(number, out numOfLikes);
+                            return numOfLikes;
+                        }
+                    }
+                    return -1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception)
+            {
+                return -3;
+            }
+        }
+
 
         private void button15_Click(object sender, EventArgs e)
         {
@@ -542,28 +706,98 @@ namespace vcs_HtmlAgility
 
         private void button18_Click(object sender, EventArgs e)
         {
+            string url = "http://www.baidu.com";
+            HtmlWeb web = new HtmlWeb();
+            //从url中加载
+            HtmlAgilityPack.HtmlDocument doc = web.Load(url);
+            //获得title标签节点，其子标签下的所有节点也在其中
+            HtmlNode headNode = doc.DocumentNode.SelectSingleNode("//title");
+            
+            //获得title标签中的内容
+            string Title = headNode.InnerText;
 
+            richTextBox1.Text += "取得標題:\t" + Title + "\n";
+
+            //获得id选择器为u1标签（是u1非ul（L）)节点
+            HtmlNode aNode = doc.DocumentNode.SelectSingleNode("//div[@id='u1']");
+            //获得ul标签下的所有子节点
+            HtmlNodeCollection aCollection = aNode.ChildNodes;
+            foreach (var item in aCollection)
+            {
+                /*
+                //获得标签属性为href的值
+                string aValue = item.Attributes["href"].Value;
+                //获得标签内的内容
+                string aInterText = item.InnerText;
+                Console.WriteLine("属性值：" + aValue + "\t" + "标签内容:" + aInterText);
+                */
+                richTextBox1.Text += item.InnerText.ToString() + "\n";
+            }
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //string url = @"https://www.syhtcgf.com/perl/perl-toc/about_toc.html";
+            string url = @"https://www.syhtcgf.com/perl/perl-toc/ch09.html";
 
+            try
+            {
+                HtmlWeb htmlWeb = new HtmlWeb();
+                HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
+
+                foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
+                {
+                    try
+                    {
+                        HtmlAttribute att = link.Attributes["href"];
+                        Console.WriteLine(att.Value);
+                        richTextBox1.Text += "找到 href \t" + att.Value + "\n";
+                        //this._results.Add(new Uri(att.Value));
+                    }
+                    catch
+                    {
+
+                    }
+                }
+
+                foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//article[@id]"))
+                {
+                    try
+                    {
+                        HtmlAttribute att = link.Attributes["id"];
+                        Console.WriteLine(att.Value);
+                        richTextBox1.Text += "找到 id \t" + att.Value + "\n";
+                        //this._results.Add(new Uri(att.Value));
+                    }
+                    catch
+                    {
+
+                    }
+                }
+
+
+            }
+            catch
+            {
+                //What Should I Do Here?
+                //Maybe Nothing for Now
+            }
         }
 
         private void bt_00_Click(object sender, EventArgs e)
         {
             string url = @"https://tw.news.yahoo.com/weather/%E8%87%BA%E7%81%A3/%E8%87%BA%E5%8C%97%E5%B8%82/%E8%87%BA%E5%8C%97%E5%B8%82-2306179";
 
-            HtmlWeb hap = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument html = hap.Load(url);
+            HtmlWeb htmlWeb = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
 
-            string location = html.DocumentNode.SelectSingleNode(@"//*[@id=""Lead-1-WeatherLocationAndTemperature""]/div/section[1]/div[1]/div/h1").InnerText;
+            string location = doc.DocumentNode.SelectSingleNode(@"//*[@id=""Lead-1-WeatherLocationAndTemperature""]/div/section[1]/div[1]/div/h1").InnerText;
             richTextBox1.Text += "位置：" + location + "\n";
 
-            string weather = html.DocumentNode.SelectSingleNode(@"//*[@id=""Lead-1-WeatherLocationAndTemperature""]/div/section[2]/div/div[1]/span[2]").InnerText;
+            string weather = doc.DocumentNode.SelectSingleNode(@"//*[@id=""Lead-1-WeatherLocationAndTemperature""]/div/section[2]/div/div[1]/span[2]").InnerText;
             richTextBox1.Text += "現在天氣：" + weather + "\n";
 
-            string temperature = html.DocumentNode.SelectSingleNode(@"//*[@id=""Lead-1-WeatherLocationAndTemperature""]/div/section[2]/div/div[3]/span[1]").InnerText;
+            string temperature = doc.DocumentNode.SelectSingleNode(@"//*[@id=""Lead-1-WeatherLocationAndTemperature""]/div/section[2]/div/div[3]/span[1]").InnerText;
             richTextBox1.Text += "現在溫度：" + temperature + "\n";
 
         }
@@ -572,17 +806,62 @@ namespace vcs_HtmlAgility
         {
             string url = @"https://tw.stock.yahoo.com/quote/1101";
 
-            HtmlWeb hap = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument html = hap.Load(url);
+            HtmlWeb htmlWeb = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
 
             //*[@id="main-0-QuoteHeader-Proxy"]/div/div[2]/div[1]/div/span[1]
-            string stock = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[1]").InnerText;
+            string stock = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[1]").InnerText;
             richTextBox1.Text += "台泥 1101：" + stock + "\n";
 
         }
 
         private void bt_02_Click(object sender, EventArgs e)
         {
+            //短XPATH //*[@id="entry-272"]/div/div/blockquote/pre[1]
+            //長XPATH /html/body/div/div[2]/article/div/div/blockquote/pre[1]
+
+            string url = @"https://www.syhtcgf.com/perl/perl-toc/ch09.html";
+
+            //拷貝來的長短XPATH要包在 @"..." 以內
+            //拷貝來的短XPATH要在 " 前多一個 "
+            string xpath_short = @"//*[@id=""entry-272""]/div/div/blockquote/pre[1]";
+            string xpath_full = @"/html/body/div/div[2]/article/div/div/blockquote/pre[1]";
+
+            HtmlWeb htmlWeb = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
+            string str = string.Empty;
+
+            str = doc.DocumentNode.SelectSingleNode(xpath_short).InnerText;
+            richTextBox1.Text += "使用短XPATH:\t" + str + "\n";
+
+            str = doc.DocumentNode.SelectSingleNode(xpath_full).InnerText;
+            richTextBox1.Text += "使用長XPATH:\t" + str + "\n";
+
+
+            String fullTitle = doc.DocumentNode.SelectSingleNode("//head/title").InnerText;
+            richTextBox1.Text += "文件標題 : " + fullTitle + "\n";
+
+
+            //get urls in page
+            foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
+            {
+                string href = link.GetAttributeValue("href", string.Empty);
+                HashSet<String> links = new HashSet<String>();
+                String[] hrefSplit = href.Split('/');
+                String html = hrefSplit[hrefSplit.Length - 1];
+                //if the href is not in the disallowed urls, is not already crawled, is not a duplicate link, is a valid html page, and on cnn or bleacherreport
+                //if (!disallowedUrls.Any(s => href.Contains(s)) && !alreadyVisitedUrls.Any(s => s.Equals(href)) && !links.Contains(href) && rgx.IsMatch(html) && (href.Contains("cnn.com") || href.Contains("bleacherreport.com")))
+                {
+                    //store remaining into queue
+                    //urlQueue.AddMessage(new CloudQueueMessage(href));
+
+                    //adds link to current link set
+                    links.Add(href);
+                    richTextBox1.Text += "取得連結 : " + href + "\n";
+                }
+            }
+                    
+
 
         }
 
@@ -626,8 +905,8 @@ namespace vcs_HtmlAgility
             //string url = @"https://tw.stock.yahoo.com/quote/1101";
 
 
-            HtmlWeb hap = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument html = hap.Load(url);
+            HtmlWeb htmlWeb = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
 
             //richTextBox1.Text += html.Text.ToString();  //顯示頁面原始碼
 
@@ -637,144 +916,144 @@ namespace vcs_HtmlAgility
             string name = string.Empty;
             string value = string.Empty;
 
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[1]/h1").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[1]/h1").InnerText;
             richTextBox1.Text += str + "\t";
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[1]/span").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[1]/span").InnerText;
             richTextBox1.Text += str + "\t";
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[1]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[1]").InnerText;
             richTextBox1.Text += str + "\t";
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[2]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[2]").InnerText;
             richTextBox1.Text += str + "\t";
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[3]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[3]").InnerText;
             richTextBox1.Text += str + "\n";
 
 
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[1]/span[1]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[1]/span[1]").InnerText;
             richTextBox1.Text += str + "\t";
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[1]/span[2]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[1]/span[2]").InnerText;
             richTextBox1.Text += str + "\n";
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[2]/span[1]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[2]/span[1]").InnerText;
             richTextBox1.Text += str + "\t";
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[2]/span[2]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[2]/span[2]").InnerText;
             richTextBox1.Text += str + "\n";
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[3]/span[1]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[3]/span[1]").InnerText;
             richTextBox1.Text += str + "\t";
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[3]/span[2]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[3]/span[2]").InnerText;
             richTextBox1.Text += str + "\n";
 
 
             //成交
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[1]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[1]").InnerText;
             richTextBox1.Text += str + "\n";
 
             richTextBox1.Text += "name與value 一起表示\n";
             //成交
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[1]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[1]").InnerText;
             richTextBox1.Text += str + "\n";
 
             //開盤
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[2]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[2]").InnerText;
             richTextBox1.Text += str + "\n";
 
             //最高
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[3]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[3]").InnerText;
             richTextBox1.Text += str + "\n";
 
             //最低
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[4]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[4]").InnerText;
             richTextBox1.Text += str + "\n";
 
             //均價
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[5]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[5]").InnerText;
             richTextBox1.Text += str + "\n";
 
             //成交值(億)
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[6]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[6]").InnerText;
             richTextBox1.Text += str + "\n";
 
             //昨收
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[7]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[7]").InnerText;
             richTextBox1.Text += str + "\n";
 
             //漲跌幅
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[8]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[8]").InnerText;
             richTextBox1.Text += str + "\n";
 
             //漲跌
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[9]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[9]").InnerText;
             richTextBox1.Text += str + "\n";
 
             //總量
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[10]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[10]").InnerText;
             richTextBox1.Text += str + "\n";
 
             //昨量
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[11]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[11]").InnerText;
             richTextBox1.Text += str + "\n";
 
             //振幅
-            str = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[12]").InnerText;
+            str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[12]").InnerText;
             richTextBox1.Text += str + "\n";
 
             richTextBox1.Text += "name與value 分開表示\n";
             //成交
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[1]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[1]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[1]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[1]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
 
             //開盤
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[2]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[2]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[2]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[2]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
 
             //最高
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[3]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[3]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[3]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[3]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
 
             //最低
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[4]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[4]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[4]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[4]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
 
             //均價
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[5]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[5]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[5]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[5]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
 
             //成交值(億)
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[6]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[6]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[6]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[6]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
 
             //昨收
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[7]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[7]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[7]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[7]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
 
             //漲跌幅
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[8]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[8]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[8]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[8]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
 
             //漲跌
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[9]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[9]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[9]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[9]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
 
             //總量
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[10]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[10]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[10]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[10]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
 
             //昨量
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[11]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[11]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[11]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[11]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
 
             //振幅
-            name = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[12]/span[1]").InnerText;
-            value = html.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[12]/span[2]").InnerText;
+            name = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[12]/span[1]").InnerText;
+            value = doc.DocumentNode.SelectSingleNode(@"//*[@id=""qsp-overview-realtime-info""]/div[2]/div[2]/div/ul/li[12]/span[2]").InnerText;
             richTextBox1.Text += name + "\t\t" + value + "\n";
         }
 
@@ -847,8 +1126,8 @@ namespace vcs_HtmlAgility
 
             string url = @"http://www.w3.org/";
 
-            HtmlWeb hap = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = hap.Load(url);
+            HtmlWeb htmlWeb = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
 
             HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("/html[1]/body[1]/div[1]/div[2]/div[3]/div[2]/div[1]/div[1]/div[1]/div");
 
@@ -860,7 +1139,7 @@ namespace vcs_HtmlAgility
 
             doc = null;
             nodes = null;
-            hap = null;
+            htmlWeb = null;
 
             richTextBox1.Text += "完成\n";
 
@@ -884,16 +1163,14 @@ namespace vcs_HtmlAgility
 
             //從doc向下取得目標資料的html結構
             HtmlAgilityPack.HtmlDocument docData = new HtmlAgilityPack.HtmlDocument();
-            docData.LoadHtml(doc.DocumentNode.SelectSingleNode(@"//div[@name='printhere']")
-                                             .InnerHtml);
+            docData.LoadHtml(doc.DocumentNode.SelectSingleNode(@"//div[@name='printhere']").InnerHtml);
 
             //獲得更新日期
             string UpdateDate = docData.DocumentNode.SelectSingleNode(@"/div/p/span").InnerText;
 
             //從docData向下取得網頁上目標表格的html結構
             HtmlAgilityPack.HtmlDocument dt_html = new HtmlAgilityPack.HtmlDocument();
-            dt_html.LoadHtml(docData.DocumentNode.SelectSingleNode(@"//table[@class='table_c']")
-                                                 .InnerHtml);
+            dt_html.LoadHtml(docData.DocumentNode.SelectSingleNode(@"//table[@class='table_c']").InnerHtml);
 
             //批次取得th資料，利用這些資料進行IEnumarable創造dt的Column
             HtmlNodeCollection headers = dt_html.DocumentNode.SelectNodes(@"//tbody/tr/th");
@@ -916,8 +1193,6 @@ namespace vcs_HtmlAgility
             dataGridView1.DataSource = new BindingSource(dt, null);
             dataGridView1.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-
         }
 
         private void bt_13_Click(object sender, EventArgs e)

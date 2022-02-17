@@ -285,6 +285,7 @@
             this.bt_02.Name = "bt_02";
             this.bt_02.Size = new System.Drawing.Size(120, 40);
             this.bt_02.TabIndex = 27;
+            this.bt_02.Text = "Perl 長短XPATH";
             this.bt_02.UseVisualStyleBackColor = true;
             this.bt_02.Click += new System.EventHandler(this.bt_02_Click);
             // 
@@ -416,6 +417,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(100, 50);
             this.button19.TabIndex = 23;
+            this.button19.Text = "href ok";
             this.button19.UseVisualStyleBackColor = false;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -426,6 +428,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(100, 50);
             this.button18.TabIndex = 22;
+            this.button18.Text = "百度";
             this.button18.UseVisualStyleBackColor = false;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -466,6 +469,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(100, 50);
             this.button14.TabIndex = 18;
+            this.button14.Text = "GetFaceBookLikes";
             this.button14.UseVisualStyleBackColor = false;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -476,6 +480,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(100, 50);
             this.button13.TabIndex = 17;
+            this.button13.Text = "4 OK";
             this.button13.UseVisualStyleBackColor = false;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -486,6 +491,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(100, 50);
             this.button12.TabIndex = 16;
+            this.button12.Text = "3";
             this.button12.UseVisualStyleBackColor = false;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -496,6 +502,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(100, 50);
             this.button11.TabIndex = 15;
+            this.button11.Text = "2 ok";
             this.button11.UseVisualStyleBackColor = false;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -506,6 +513,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(100, 50);
             this.button10.TabIndex = 14;
+            this.button10.Text = "1";
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
