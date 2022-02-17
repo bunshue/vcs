@@ -405,7 +405,7 @@ namespace _vcs_MakePicture
             height = 30;
             bitmap1 = new Bitmap(width, height);
 
-            for (yy = 0; yy < height/3; yy++)
+            for (yy = 0; yy < height / 3; yy++)
             {
                 for (xx = 0; xx < width; xx++)
                 {
@@ -2352,7 +2352,260 @@ namespace _vcs_MakePicture
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //畫在一起
+            Pen p;
+            SolidBrush sb;
+            Color foreground_color = Color.Red;
+            Color background_color = Color.White;
 
+            p = new Pen(foreground_color, 3);
+            sb = new SolidBrush(foreground_color);
+
+            Bitmap bitmap1 = new Bitmap(1640, 480);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            int width = 80;  //每個icon的大小 寬
+            int height = 80; //每個icon的大小 高
+            int xx;
+            int yy;
+
+            Point[] points;
+            int dx = width + 20;
+            int dy = height + 20;
+            int x_st = 0;
+            int y_st = 0;
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            //play-pause
+            points = new Point[3];
+            points[0] = new Point(x_st + width / 8, y_st + height * 2 / 8);
+            points[1] = new Point(x_st + width / 2, y_st + height / 2);
+            points[2] = new Point(x_st + width / 8, y_st + height * 6 / 8);
+            g.FillPolygon(sb, points);
+
+            g.FillRectangle(sb, new Rectangle(x_st + width / 2, y_st + height * 2 / 8, width / 8, height / 2));
+            g.FillRectangle(sb, new Rectangle(x_st + width / 2 + width * 2 / 8, y_st + height * 2 / 8, width / 8, height / 2));
+
+            x_st += dx;
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            // stop
+            g.FillRectangle(sb, new Rectangle(x_st + width / 8, y_st + height / 8, width * 6 / 8, height * 6 / 8));
+
+
+            x_st += dx;
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            //pause
+            g.FillRectangle(sb, new Rectangle(x_st + width * 3 / 16, y_st + height * 2 / 8, width * 4 / 16, height / 2));
+            g.FillRectangle(sb, new Rectangle(x_st + width * 9 / 16, y_st + height * 2 / 8, width * 4 / 16, height / 2));
+
+
+
+
+            x_st += dx;
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            // stop
+            //g.FillRectangle(sb, new Rectangle(x_st + width / 8, y_st + height / 8, width * 6 / 8, height * 6 / 8));
+
+
+            x_st += dx;
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            //next
+            points = new Point[3];
+            points[0] = new Point(x_st + width / 8 + width / 8, y_st + height * 2 / 8);
+            points[1] = new Point(x_st + width / 2 + width / 8, y_st + height / 2);
+            points[2] = new Point(x_st + width / 8 + width / 8, y_st + height * 6 / 8);
+            g.FillPolygon(sb, points);
+
+            g.FillRectangle(sb, new Rectangle(x_st + width / 2 + width / 8, y_st + height * 2 / 8, width / 8, height / 2));
+
+
+
+            x_st += dx;
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            //previous
+            points = new Point[3];
+            points[0] = new Point(x_st + width * 6 / 8, y_st + height * 2 / 8);
+            points[1] = new Point(x_st + width / 8 + width / 8 + width / 8, y_st + height / 2);
+            points[2] = new Point(x_st + width * 6 / 8, y_st + height * 6 / 8);
+            g.FillPolygon(sb, points);
+
+            g.FillRectangle(sb, new Rectangle(x_st + width / 8 + width / 8, y_st + height * 2 / 8, width / 8, height / 2));
+
+
+            x_st = 0;
+            y_st += dy;
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            //plus
+            g.FillRectangle(sb, new Rectangle(x_st + width / 8, y_st + height * 7 / 16, width * 6 / 8, height * 2 / 16));
+            g.FillRectangle(sb, new Rectangle(x_st + width * 7 / 16, y_st + height / 8, width * 2 / 16, height * 6 / 8));
+
+
+
+            x_st += dx;
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            //minus
+            g.FillRectangle(sb, new Rectangle(x_st + width / 8, y_st + height * 7 / 16, width * 6 / 8, height * 2 / 16));
+
+            x_st += dx;
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            //left
+            points = new Point[3];
+            points[0] = new Point(x_st + width * 2 / 8, y_st + height * 4 / 8);
+            points[1] = new Point(x_st + width * 6 / 8, y_st + height * 2 / 8);
+            points[2] = new Point(x_st + width * 6 / 8, y_st + height * 6 / 8);
+            g.FillPolygon(sb, points);
+            x_st += dx;
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            //right
+            points = new Point[3];
+            points[0] = new Point(x_st + width * 2 / 8, y_st + height * 2 / 8);
+            points[1] = new Point(x_st + width * 6 / 8, y_st + height * 4 / 8);
+            points[2] = new Point(x_st + width * 2 / 8, y_st + height * 6 / 8);
+            g.FillPolygon(sb, points);
+
+
+            x_st += dx;
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            //up
+            points = new Point[3];
+            points[0] = new Point(x_st + width * 4 / 8, y_st + height * 2 / 8);
+            points[1] = new Point(x_st + width * 6 / 8, y_st + height * 6 / 8);
+            points[2] = new Point(x_st + width * 2 / 8, y_st + height * 6 / 8);
+            g.FillPolygon(sb, points);
+
+
+            x_st += dx;
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            //down
+            points = new Point[3];
+            points[0] = new Point(x_st + width * 4 / 8, y_st + height * 6 / 8);
+            points[1] = new Point(x_st + width * 6 / 8, y_st + height * 2 / 8);
+            points[2] = new Point(x_st + width * 2 / 8, y_st + height * 2 / 8);
+            g.FillPolygon(sb, points);
+
+
+
+
+
+
+
+
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button0_Click(object sender, EventArgs e)

@@ -95,6 +95,16 @@ namespace vcs_HtmlAgility
             button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             button8.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             button9.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button10.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button16.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button17.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button18.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button19.Location = new Point(x_st + dx * 3, y_st + dy * 4);
 
             x_st = 20;
             y_st = 20;
@@ -368,14 +378,176 @@ namespace vcs_HtmlAgility
 
         private void button7_Click(object sender, EventArgs e)
         {
+            List<String> strings;
+            strings = GetNodeFirstValue("http://www.cqcp.net/game/ssc/", "//*[@id=\"openlist\"]", "./ul[{0}]/li", Encoding.GetEncoding("gb2312"), 1);
+            richTextBox1.Text += "len = " + strings.Count.ToString() + "\n";
         }
+        /// <summary>
+        /// Get table value for html
+        /// Example: GetNodeTableValue("http://www.cqcp.net/game/ssc/", "//*[@id=\"openlist\"]", "./ul[{0}]/li", Encoding.GetEncoding("gb2312"), 1);
+        /// </summary>
+        /// <param name="Url">Url path</param>
+        /// <param name="xPathFirst">All xPath</param>
+        /// <param name="xPathSecond">Second xPath</param>
+        /// <param name="encoding">Encoding</param>
+        /// <param name="TableRowNum">Table row nunber</param>
+        /// <returns></returns>
+        public List<string> GetNodeFirstValue(string Url, string xPathFirst, string xPathSecond, Encoding encoding, int TableRowNum)
+        {
+            List<string> ListData = new List<string>();
+
+            using (WebClient client = new WebClient())
+            {
+                using (MemoryStream ms = new MemoryStream(client.DownloadData(Url)))
+                {
+                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                    doc.Load(ms, encoding);
+
+                    // All content
+                    HtmlAgilityPack.HtmlDocument docStockContext = new HtmlAgilityPack.HtmlDocument();
+
+                    docStockContext.LoadHtml(doc.DocumentNode.SelectSingleNode(xPathFirst).InnerHtml);
+
+                    // Content value
+                    HtmlNodeCollection nodeHeaders = docStockContext.DocumentNode.SelectNodes(string.Format(xPathSecond, TableRowNum));
+
+                    foreach (HtmlNode nodeHeader in nodeHeaders)
+                    {
+                        ListData.Add(nodeHeader.InnerHtml);
+                    }
+                }
+            }
+
+            return ListData;
+        }
+
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //https://dotblogs.com.tw/jakeuj/2016/06/14/HtmlAgilityPack
+
+            string url = @"http://gnn.gamer.com.tw/4/133124.html";
+
+            //指定來源網頁
+            WebClient wc = new WebClient();
+            //將網頁來源資料暫存到記憶體內
+            MemoryStream ms = new MemoryStream(wc.DownloadData(url));
+            //以巴哈新聞例http://gnn.gamer.com.tw/
+            //4/133124.html 表示為文章編號
+
+            // 使用 UTF8 編碼讀入 HTML 
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.Load(ms, Encoding.UTF8);
+
+            // 裝載第一層查詢結果 
+            HtmlAgilityPack.HtmlDocument hdc = new HtmlAgilityPack.HtmlDocument();
+
+            //XPath 來解讀它 /html[1]/body[1]/div[3]
+            hdc.LoadHtml(doc.DocumentNode.SelectSingleNode("/html[1]/body[1]/div[3]").InnerHtml);
+            //這邊因為公告內文含有 img tag 所以需使用 InnerHtml
+            string txt = hdc.DocumentNode.SelectSingleNode(".").InnerHtml.Trim();
+            // 去頭
+            int p = txt.IndexOf("<!--區塊1開始-->");
+            txt = txt.Substring(p);
+            // 去尾
+            p = txt.IndexOf("<!--新聞內容結束-->");
+            txt = txt.Substring(0, p);
+            // 解析 標題與內文 以字串 "<!--新聞內容開始-->" 分隔
+            string[] txts = txt.Split(new string[] { "<!--新聞內容開始-->" }, StringSplitOptions.RemoveEmptyEntries);
+            // 輸出結果
+            string result = string.Format("標題：{0}<br>內文：<br>{1}", txts[0], txts[1]);
+
+            richTextBox1.Text += result + "\n";
+
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //https://dotblogs.com.tw/jakeuj/2016/06/14/HtmlAgilityPack
+
+
+            string url = @"http://gnn.gamer.com.tw/index.php?k=4";
+
+            //查詢新聞連結清單
+
+            string link, XPath;
+
+            link = url;
+            XPath = "/html[1]/body[1]/div[3]/div[1]/div[5]/div[2]";
+
+            // 指定來源網頁
+            WebClient wc = new WebClient();
+            // 將網頁來源資料暫存到記憶體內
+            MemoryStream ms = new MemoryStream(wc.DownloadData(link));
+
+            // 使用 UTF8 編碼讀入 HTML 
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.Load(ms, Encoding.UTF8);
+
+            // 裝載第一層查詢結果 
+            HtmlAgilityPack.HtmlDocument hdc = new HtmlAgilityPack.HtmlDocument();
+
+            // XPath 來解讀它
+            hdc.LoadHtml(doc.DocumentNode.SelectSingleNode(XPath).InnerHtml);
+
+            HtmlNodeCollection htnode = hdc.DocumentNode.SelectNodes(@"//div[@class='GN-lbox2B']/div/a");
+
+            foreach (HtmlNode currNode in htnode)
+            {
+                string currLink = currNode.SelectSingleNode(".").Attributes["href"].Value;
+                //Response.Write(currLink + "<br/>");
+                richTextBox1.Text += currLink + "\n";
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void bt_00_Click(object sender, EventArgs e)
@@ -770,7 +942,6 @@ namespace vcs_HtmlAgility
 
         public string name { get; set; }
     }
-
 
     public class Protocols
     {

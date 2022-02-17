@@ -12,10 +12,42 @@ using System.Net;   //for SecurityProtocolType
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Runtime.InteropServices;   //for DllImport
 
+using AForge.Video;             //需要添加這兩個.dll
+using AForge.Video.DirectShow;
+
+using AxWMPLib;
+/*  sugar
+使用AxWindowsMediaPlayer播放多媒體
+
+加入工具箱
+
+工具箱/滑鼠右鍵/選擇項目/
+/COM元件 頁籤 /勾選Windows Media Player(wmp.dll)	/ 確定
+
+會發現工具箱多了個Windows Media Player的控制項
+就是 axWindowsMediaPlayer
+
+拉一個Windows Media Player控件進表單, 參考裡面就會出現AxWMPLib和WMPLib
+*/
+
 namespace vcs_test_all_00_Usually
 {
     public partial class Form1 : Form
     {
+        //WebCam ST
+        //參考
+        //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
+        //https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
+
+        //AForge下載鏈結
+        //http://www.aforgenet.com/framework/downloads.html
+
+        //參考/右鍵/加入參考/瀏覽AForge.Video.dll和AForge.Video.DirectShow.dll
+
+        public FilterInfoCollection USBWebcams = null;
+        public VideoCaptureDevice Cam = null;
+        //WebCam SP
+
         //移動無邊框窗體 ST
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
@@ -28,6 +60,9 @@ namespace vcs_test_all_00_Usually
 
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
+
+        AxWindowsMediaPlayer axWindowsMediaPlayer1;
+        bool flag_repeat_mode = true;
 
         public Form1()
         {
@@ -72,7 +107,6 @@ namespace vcs_test_all_00_Usually
             pictureBox1.ClientSize = new Size(image.Width, image.Height);
         }
 
-
         void show_item_location()
         {
             int x_st;
@@ -92,6 +126,7 @@ namespace vcs_test_all_00_Usually
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
             label1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 30);
@@ -178,7 +213,6 @@ namespace vcs_test_all_00_Usually
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-
         }
 
         private double rad(double d)
@@ -211,7 +245,6 @@ namespace vcs_test_all_00_Usually
             {
                 richTextBox1.Text += "x = " + x.ToString() + "\t" + (rad(x) / Math.PI).ToString() + " pi rad\t" + 100 * sind(x) + "\n";
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -222,17 +255,156 @@ namespace vcs_test_all_00_Usually
         private void button4_Click(object sender, EventArgs e)
         {
             //使用WMP
+            this.axWindowsMediaPlayer1 = new AxWindowsMediaPlayer();
+            this.axWindowsMediaPlayer1.Enabled = true;
+            //this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(0, 400);
+            //this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            //this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(800, 500);
+            //this.axWindowsMediaPlayer1.TabIndex = 2;
+            //this.axWindowsMediaPlayer1.Visible = false;   //fail
+            this.axWindowsMediaPlayer1.StatusChange += new EventHandler(axWindowsMediaPlayer1_StatusChange);
+            this.Controls.Add(this.axWindowsMediaPlayer1);
+            axWindowsMediaPlayer1.Visible = false;
 
-
-
-
-
+            string mp3_filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            axWindowsMediaPlayer1.URL = mp3_filename;
         }
 
+        protected void axWindowsMediaPlayer1_StatusChange(object sender, EventArgs e)
+        {
+            if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsStopped)
+            {
+                //mp3_position = 0;
+
+                //判斷影片是否已經停止播放
+                if (flag_repeat_mode == true)
+                {
+                    //停頓2秒後再重新播放
+                    System.Threading.Thread.Sleep(2000);
+                    //重新播放
+                    axWindowsMediaPlayer1.Ctlcontrols.play();
+                }
+            }
+        }
+
+
+        //WebCam ST
         private void button5_Click(object sender, EventArgs e)
         {
-
+            if (button5.Text == "開啟WebCam")
+            {
+                button5.Text = "關閉WebCam";
+                start_webcam();
+            }
+            else
+            {
+                button5.Text = "開啟WebCam";
+                stop_webcam();
+            }
         }
+
+        void start_webcam()
+        {
+            //richTextBox1.Text += "重新抓取USB影像\t";
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+            {
+                //button12.Enabled = false;
+                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
+                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                Cam.Start();   // WebCam starts capturing images.
+                //richTextBox1.Text += "有影像裝置\n";
+
+                Cam.VideoResolution = Cam.VideoCapabilities[0];
+
+                string webcam_name = string.Empty;
+
+                int ww;
+                int hh;
+                ww = Cam.VideoCapabilities[0].FrameSize.Width;
+                hh = Cam.VideoCapabilities[0].FrameSize.Height;
+
+                webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                this.Text = webcam_name;
+
+                pictureBox1.Size = new Size(ww / 1, hh / 1);
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                //pictureBox1.Location = new Point(50, 50);
+            }
+            else
+            {
+                this.Text = "無影像裝置\n";
+            }
+        }
+
+        void stop_webcam()
+        {
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
+        }
+
+        public Bitmap bm = null;
+        //自定義函數, 捕獲每一幀圖像並顯示
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            try
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                bm = (Bitmap)eventArgs.Frame.Clone();
+                //pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                //richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+            }
+
+            Graphics g = Graphics.FromImage(bm);
+
+            int w;
+            int h;
+            try
+            {
+                w = bm.Width;
+                h = bm.Height;
+            }
+            catch (Exception ex)
+            {
+                //richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                return;
+            }
+
+            //顯示時間
+            string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            SolidBrush sb = new SolidBrush(Color.Yellow);
+            Font f = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+            int x_st = 10;
+            int y_st = 10;
+            g.DrawString(drawDate, f, sb, x_st, y_st);
+
+            try
+            {
+                pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                //richTextBox1.Text += "xxx錯誤訊息a : " + ex.Message + "\n";
+            }
+            GC.Collect();       //回收資源
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            stop_webcam();
+        }
+        //WebCam SP
 
         //移動PictureBox ST
         //pictureBox1 initial location
@@ -301,7 +473,43 @@ namespace vcs_test_all_00_Usually
                 }
             }
         }
+
         //顯示訊息 SP
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            int i;
+            Int64 total_size = 0;
+
+            total_size = 123;
+            for (i = 1; i < 20; i++)
+            {
+                total_size *= i;
+                richTextBox1.Text += "total_size = " + total_size.ToString() + "\t檔案大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+            }
+        }
+
+        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
+        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
+        const int MB = 1024 * 1024;//定義MB的計算常量
+        const int KB = 1024;//定義KB的計算常量
+        public string ByteConversionTBGBMBKB(Int64 size)
+        {
+            if (size < 0)
+                return "不合法的數值";
+            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
+                return "無法表示";
+            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
+                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
+            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
+                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
+            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
+                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
+            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
+                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KGB
+            else
+                return size.ToString() + " Byte";//顯示Byte值
+        }
     }
 
     //3Form1之外

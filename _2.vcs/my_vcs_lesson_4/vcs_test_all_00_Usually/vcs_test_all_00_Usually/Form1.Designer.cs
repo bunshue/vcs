@@ -43,6 +43,7 @@
             this.lb_main_mesg1 = new System.Windows.Forms.Label();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.label3 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,14 +109,14 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(140, 60);
             this.button5.TabIndex = 5;
-            this.button5.Text = "使用WebCam";
+            this.button5.Text = "開啟WebCam";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(319, 239);
+            this.pictureBox1.Location = new System.Drawing.Point(169, 208);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(374, 478);
             this.pictureBox1.TabIndex = 6;
@@ -127,9 +128,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.richTextBox1.Location = new System.Drawing.Point(732, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(817, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(525, 745);
+            this.richTextBox1.Size = new System.Drawing.Size(440, 745);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
@@ -189,11 +190,23 @@
             this.label3.TabIndex = 136;
             this.label3.Text = "顯示訊息";
             // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button6.Location = new System.Drawing.Point(12, 405);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(140, 60);
+            this.button6.TabIndex = 137;
+            this.button6.Text = "ByteConversionTBGBMBKB";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1257, 745);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lb_main_mesg1);
             this.Controls.Add(this.label2);
@@ -209,6 +222,7 @@
             this.Controls.Add(this.button0);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -233,6 +247,7 @@
         private System.Windows.Forms.Label lb_main_mesg1;
         private System.Windows.Forms.Timer timer_display;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button6;
     }
 }
 

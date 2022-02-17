@@ -39,8 +39,39 @@ namespace vcs_ClockE
         {
             ReleaseCapture();
             SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
+
+            if (e.Button == MouseButtons.Right) //檢查滑鼠右鍵
+            {
+                contextMenuStrip1.Show(this, e.Location); //顯示ContextMenu
+                return;
+            }
         }
         //移動無邊框窗體 SP
+
+        private void toolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //richTextBox1.Text += "Text : " + ((ToolStripMenuItem)sender).Text + "\n";
+
+            //richTextBox1.Text += "aaa\n";
+            if ((ToolStripMenuItem)sender == toolStripMenuItem1)
+            {
+                this.BackColor = Color.Red;
+            }
+            else if ((ToolStripMenuItem)sender == toolStripMenuItem2)
+            {
+                //this.BackColor = Color.Green;
+                flag_draw_countdown = false;
+            }
+            else if ((ToolStripMenuItem)sender == toolStripMenuItem3)
+            {
+                //this.BackColor = Color.Blue;
+                Application.Exit();
+            }
+            else
+            {
+                this.BackColor = Color.Yellow;
+            }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -94,7 +125,10 @@ namespace vcs_ClockE
             p = new Pen(Color.Red, 2);
             //e.Graphics.DrawRectangle(p, (R * 2 - tmp_width) / 2, (R * 2 - tmp_height) / 2,tmp_width,tmp_height);
 
-            e.Graphics.DrawArc(new Pen(Color.Green, 5), new Rectangle(linewidth, linewidth, R * 2 - linewidth * 2, R * 2 - linewidth * 2), current_value - 90, -current_value);
+            if (flag_draw_countdown == true)
+            {
+                e.Graphics.DrawArc(new Pen(Color.Green, 5), new Rectangle(linewidth, linewidth, R * 2 - linewidth * 2, R * 2 - linewidth * 2), current_value - 90, -current_value);
+            }
 
         }
 

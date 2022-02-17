@@ -10,16 +10,14 @@ using System.Windows.Forms;
 using System.IO;        //for Directory
 using System.Diagnostics;   //for Process
 
-using AxWMPLib;
-
 /*
+儲存參數
 點開 方案總管/vcs_XXXXX/Properties/Settings.settings
-
 加入要儲存的參數 的 名稱 型別 預設值
-
 若是數字 一定要給預設值
 */
 
+using AxWMPLib;
 /*  sugar
 使用AxWindowsMediaPlayer播放多媒體
 
@@ -31,6 +29,7 @@ using AxWMPLib;
 會發現工具箱多了個Windows Media Player的控制項
 就是 axWindowsMediaPlayer
 
+拉一個Windows Media Player控件進表單, 參考裡面就會出現AxWMPLib和WMPLib
 */
 
 namespace vcs_MyToolbox
@@ -180,10 +179,10 @@ namespace vcs_MyToolbox
             {
                 mp3_position = 0;
 
-                //判断视频是否已停止播放
+                //判斷影片是否已經停止播放
                 if (flag_repeat_mode == true)
                 {
-                    //停顿2秒钟再重新播放
+                    //停頓2秒後再重新播放
                     System.Threading.Thread.Sleep(2000);
                     //重新播放
                     axWindowsMediaPlayer1.Ctlcontrols.play();
