@@ -83,38 +83,38 @@ namespace vcs_HtmlAgility
             x_st = 20;
             y_st = 30;
             dx = 120;
-            dy = 65;
+            dy = 55;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button10.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button16.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button17.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button18.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button19.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button20.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 4, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            button26.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-            button27.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-            button28.Location = new Point(x_st + dx * 5, y_st + dy * 3);
-            button29.Location = new Point(x_st + dx * 5, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             x_st = 20;
             y_st = 20;
@@ -123,6 +123,7 @@ namespace vcs_HtmlAgility
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -730,26 +731,6 @@ namespace vcs_HtmlAgility
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //可解析本地文件
-
-            string url = @"C:\______test_files\aaaaa.html";
-            //string url = @"C:\_git\vcs\_1.data\_html\官網.html";
-
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            
-            doc.OptionOutputOriginalCase = true;    //正確區分大小寫
-
-            doc.Load(url);
-            //HtmlNodeCollection node_collection = doc.DocumentNode.SelectNodes("//div");
-            HtmlNodeCollection node_collection = doc.DocumentNode.SelectNodes("//img");
-            foreach (HtmlNode node in node_collection)
-            {
-                string templateString = node.InnerHtml; //lower case happens here.....
-
-                richTextBox1.Text += "aaaaa" + templateString + "\n";
-
-            }
-
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -812,51 +793,6 @@ namespace vcs_HtmlAgility
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //string url = @"https://www.syhtcgf.com/perl/perl-toc/about_toc.html";
-            string url = @"https://www.syhtcgf.com/perl/perl-toc/ch09.html";
-
-            try
-            {
-                HtmlWeb htmlWeb = new HtmlWeb();
-                HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
-
-                foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
-                {
-                    try
-                    {
-                        HtmlAttribute att = link.Attributes["href"];
-                        Console.WriteLine(att.Value);
-                        richTextBox1.Text += "找到 href \t" + att.Value + "\n";
-                        //this._results.Add(new Uri(att.Value));
-                    }
-                    catch
-                    {
-
-                    }
-                }
-
-                foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//article[@id]"))
-                {
-                    try
-                    {
-                        HtmlAttribute att = link.Attributes["id"];
-                        Console.WriteLine(att.Value);
-                        richTextBox1.Text += "找到 id \t" + att.Value + "\n";
-                        //this._results.Add(new Uri(att.Value));
-                    }
-                    catch
-                    {
-
-                    }
-                }
-
-
-            }
-            catch
-            {
-                //What Should I Do Here?
-                //Maybe Nothing for Now
-            }
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -888,71 +824,6 @@ namespace vcs_HtmlAgility
 
         private void button21_Click(object sender, EventArgs e)
         {
-
-            //ok
-            //string url = @"C:\______test_files\sample.html";
-            string url = @"C:\_git\vcs\_1.data\_html\My_Link2.html";
-
-            HtmlAgilityPack.HtmlDocument document2 = new HtmlAgilityPack.HtmlDocument();
-            document2.Load(url, Encoding.UTF8);     //指定編碼格式
-
-
-            //Get all Hyperlinks in a page
-            HtmlNode[] nodes = document2.DocumentNode.SelectNodes("//a").ToArray();
-            foreach (HtmlNode item in nodes)
-            {
-                Console.WriteLine(item.InnerHtml);
-                richTextBox1.Text += "aaa\t" + item.InnerHtml + "\n";
-            }
-            return;
-
-            //Select a specific div in a page
-
-            //Approach 1  
-            HtmlNode node = document2.DocumentNode.SelectNodes("//div[@id='div1']").First();
-
-            HtmlNode[] aNodes = node.SelectNodes(".//a").ToArray();
-
-            //Approach 2  
-            HtmlNode[] aNodes2 = document2.DocumentNode.SelectNodes("//div[@id='div1']//a").ToArray();
-
-
-
-            HtmlNode[] nodes3 = document2.DocumentNode.SelectNodes("//a").Where(x => x.InnerHtml.Contains("div2")).ToArray();
-            foreach (HtmlNode item in nodes3)
-            {
-                Console.WriteLine(item.InnerHtml);
-                richTextBox1.Text += "ccc\t" + item.InnerHtml + "\n";
-            }
-
-
-            richTextBox1.Text += "\n\n================================================================================\n";
-            richTextBox1.Text += "================================================================================\n";
-            richTextBox1.Text += "================================================================================\n\n\n";
-
-
-            /* fail
-            //指定來源網頁
-            WebClient wc = new WebClient();
-            //將網頁來源資料暫存到記憶體內
-            MemoryStream ms = new MemoryStream(wc.DownloadData(url));
-
-            // 使用 UTF8 編碼讀入 HTML 
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.Load(ms, Encoding.UTF8);
-
-            // 裝載第一層查詢結果 
-            HtmlAgilityPack.HtmlDocument hdc = new HtmlAgilityPack.HtmlDocument();
-
-            HtmlNode[] nodes2 = hdc.DocumentNode.SelectNodes("//a").ToArray();
-            foreach (HtmlNode item in nodes2)
-            {
-                Console.WriteLine(item.InnerHtml);
-                richTextBox1.Text += "aaa\t" + item.InnerHtml + "\n";
-            }
-
-            */
-
 
         }
 
@@ -1103,22 +974,6 @@ namespace vcs_HtmlAgility
             richTextBox1.Text += "ccccc" + navNode.InnerHtml + "\n";
             */
 
-            /*
-            //博客來
-            var url = @"https://www.books.com.tw/products/0010916142";
-
-            var web = new HtmlWeb();
-            var doc = web.Load(url);
-
-            string str;
-            str = doc.DocumentNode.SelectSingleNode("/html/body/div[4]/div/div[1]/div[2]/div[1]/h1").InnerText;
-            richTextBox1.Text += str + "\n";
-            str = doc.DocumentNode.SelectSingleNode("/html/body/div[4]/div/div[1]/div[2]/div[1]/h2").InnerText;
-            richTextBox1.Text += str + "\n";
-            */
-
-
-
             //通过HtmlDocument类加载html数据
             string htmlstr = @"http://www.zhishilin.com";
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
@@ -1197,29 +1052,6 @@ namespace vcs_HtmlAgility
 
         private void button26_Click(object sender, EventArgs e)
         {
-            string url = @"https://www.technologycrowds.com/";
-
-            ExtractHref(url);
-        }
-
-        void ExtractHref(string URL)
-        {
-            HtmlWeb web = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc = web.Load(URL);
-
-            // extracting all links
-            foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
-            {
-                HtmlAttribute att = link.Attributes["href"];
-
-                if (att.Value.Contains("a"))
-                {
-                    // showing output
-                    Console.WriteLine(att.Value);
-                    richTextBox1.Text += "取得連結:\t" + att.Value + "\n";
-                }
-            }
         }
 
 
@@ -1322,7 +1154,6 @@ namespace vcs_HtmlAgility
 
         private void bt_03_Click(object sender, EventArgs e)
         {
-
         }
 
         private void bt_04_Click(object sender, EventArgs e)
@@ -1661,7 +1492,17 @@ namespace vcs_HtmlAgility
 
         private void bt_13_Click(object sender, EventArgs e)
         {
+            //博客來
+            var url = @"https://www.books.com.tw/products/0010916142";
 
+            var web = new HtmlWeb();
+            var doc = web.Load(url);
+
+            string str;
+            str = doc.DocumentNode.SelectSingleNode("/html/body/div[4]/div/div[1]/div[2]/div[1]/h1").InnerText;
+            richTextBox1.Text += str + "\n";
+            str = doc.DocumentNode.SelectSingleNode("/html/body/div[4]/div/div[1]/div[2]/div[1]/h2").InnerText;
+            richTextBox1.Text += str + "\n";
         }
 
         private void bt_14_Click(object sender, EventArgs e)
@@ -1672,6 +1513,188 @@ namespace vcs_HtmlAgility
         private void bt_15_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void bt_20_Click(object sender, EventArgs e)
+        {
+
+            //ok
+            //string url = @"C:\______test_files\sample.html";
+            string url = @"C:\_git\vcs\_1.data\_html\My_Link2.html";
+
+            HtmlAgilityPack.HtmlDocument document2 = new HtmlAgilityPack.HtmlDocument();
+            document2.Load(url, Encoding.UTF8);     //指定編碼格式
+
+
+            //Get all Hyperlinks in a page
+            HtmlNode[] nodes = document2.DocumentNode.SelectNodes("//a").ToArray();
+            foreach (HtmlNode item in nodes)
+            {
+                Console.WriteLine(item.InnerHtml);
+                richTextBox1.Text += "aaa\t" + item.InnerHtml + "\n";
+            }
+            return;
+
+            //Select a specific div in a page
+
+            //Approach 1  
+            HtmlNode node = document2.DocumentNode.SelectNodes("//div[@id='div1']").First();
+
+            HtmlNode[] aNodes = node.SelectNodes(".//a").ToArray();
+
+            //Approach 2  
+            HtmlNode[] aNodes2 = document2.DocumentNode.SelectNodes("//div[@id='div1']//a").ToArray();
+
+
+
+            HtmlNode[] nodes3 = document2.DocumentNode.SelectNodes("//a").Where(x => x.InnerHtml.Contains("div2")).ToArray();
+            foreach (HtmlNode item in nodes3)
+            {
+                Console.WriteLine(item.InnerHtml);
+                richTextBox1.Text += "ccc\t" + item.InnerHtml + "\n";
+            }
+
+
+            richTextBox1.Text += "\n\n================================================================================\n";
+            richTextBox1.Text += "================================================================================\n";
+            richTextBox1.Text += "================================================================================\n\n\n";
+
+
+            /* fail
+            //指定來源網頁
+            WebClient wc = new WebClient();
+            //將網頁來源資料暫存到記憶體內
+            MemoryStream ms = new MemoryStream(wc.DownloadData(url));
+
+            // 使用 UTF8 編碼讀入 HTML 
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.Load(ms, Encoding.UTF8);
+
+            // 裝載第一層查詢結果 
+            HtmlAgilityPack.HtmlDocument hdc = new HtmlAgilityPack.HtmlDocument();
+
+            HtmlNode[] nodes2 = hdc.DocumentNode.SelectNodes("//a").ToArray();
+            foreach (HtmlNode item in nodes2)
+            {
+                Console.WriteLine(item.InnerHtml);
+                richTextBox1.Text += "aaa\t" + item.InnerHtml + "\n";
+            }
+
+            */
+
+
+        }
+
+        private void bt_21_Click(object sender, EventArgs e)
+        {
+            //可解析本地文件
+
+            string url = @"C:\______test_files\aaaaa.html";
+            //string url = @"C:\_git\vcs\_1.data\_html\官網.html";
+
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+
+            doc.OptionOutputOriginalCase = true;    //正確區分大小寫
+
+            doc.Load(url);
+            //HtmlNodeCollection node_collection = doc.DocumentNode.SelectNodes("//div");
+            HtmlNodeCollection node_collection = doc.DocumentNode.SelectNodes("//img");
+            foreach (HtmlNode node in node_collection)
+            {
+                string templateString = node.InnerHtml; //lower case happens here.....
+
+                richTextBox1.Text += "aaaaa" + templateString + "\n";
+
+            }
+
+
+        }
+
+        private void bt_22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_24_Click(object sender, EventArgs e)
+        {
+            //string url = @"https://www.syhtcgf.com/perl/perl-toc/about_toc.html";
+            string url = @"https://www.syhtcgf.com/perl/perl-toc/ch09.html";
+
+            try
+            {
+                HtmlWeb htmlWeb = new HtmlWeb();
+                HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
+
+                foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
+                {
+                    try
+                    {
+                        HtmlAttribute att = link.Attributes["href"];
+                        Console.WriteLine(att.Value);
+                        richTextBox1.Text += "找到 href \t" + att.Value + "\n";
+                        //this._results.Add(new Uri(att.Value));
+                    }
+                    catch
+                    {
+
+                    }
+                }
+
+                foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//article[@id]"))
+                {
+                    try
+                    {
+                        HtmlAttribute att = link.Attributes["id"];
+                        Console.WriteLine(att.Value);
+                        richTextBox1.Text += "找到 id \t" + att.Value + "\n";
+                        //this._results.Add(new Uri(att.Value));
+                    }
+                    catch
+                    {
+
+                    }
+                }
+
+
+            }
+            catch
+            {
+                //What Should I Do Here?
+                //Maybe Nothing for Now
+            }
+
+        }
+
+        private void bt_25_Click(object sender, EventArgs e)
+        {
+            string url = @"https://www.technologycrowds.com/";
+
+            ExtractHref(url);
+        }
+
+        void ExtractHref(string URL)
+        {
+            HtmlWeb web = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc = web.Load(URL);
+
+            // extracting all links
+            foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
+            {
+                HtmlAttribute att = link.Attributes["href"];
+
+                if (att.Value.Contains("a"))
+                {
+                    // showing output
+                    Console.WriteLine(att.Value);
+                    richTextBox1.Text += "取得連結:\t" + att.Value + "\n";
+                }
+            }
         }
     }
 
