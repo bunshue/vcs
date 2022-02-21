@@ -175,13 +175,17 @@ namespace vcs_ReadRSS1
         private void button2_Click(object sender, EventArgs e)
         {
             string url1 = @"https://www.mohw.gov.tw/rss-16-1.html";
-            ProcessRSSItem(url1);
+            //ProcessRSSItem(url1);
 
             string url2 = "http://www.codeguru.com/icom_includes/feeds/codeguru/rss-all.xml";
             //ProcessRSSItem(url2);
 
             string url3 = "http://www.developer.com/icom_includes/feeds/special/dev-5.xml";
             //ProcessRSSItem(url3);
+
+            //中央氣象局 新竹市氣象
+            string url4 = "https://www.cwb.gov.tw/rss/forecast/36_14.xml";
+            ProcessRSSItem(url4);
 
         }
 

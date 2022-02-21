@@ -105,6 +105,16 @@ namespace vcs_HtmlAgility
             button17.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             button18.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             button19.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button20.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            button26.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            button27.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+            button28.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            button29.Location = new Point(x_st + dx * 5, y_st + dy * 4);
 
             x_st = 20;
             y_st = 20;
@@ -691,17 +701,82 @@ namespace vcs_HtmlAgility
 
         private void button15_Click(object sender, EventArgs e)
         {
+            string url = @"https://www.cwb.gov.tw/V8/C/E/index.html";
+
+            WebClient wc = new WebClient();
+
+            //HTML Agility Pack預設編碼應是法文編碼，所以如果是讀取中文 HTML 內容的話，
+            //無法直接使用HtmlDocument.LoadHtml() 方法，而要透過MemoryStream使用HtmlDocument.Load()方法，才可以指定中文的編碼。
+            MemoryStream memoryStream = new MemoryStream(wc.DownloadData(url));
+
+            //使用HtmlDocument.Load()進行編碼，使用UTF8編譯，取得整份網頁結構
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.Load(memoryStream, Encoding.UTF8);
+
+            //從doc向下取得目標資料的html結構
+            HtmlAgilityPack.HtmlDocument docData = new HtmlAgilityPack.HtmlDocument();
+
+            string pattern = @"/html/body/div[3]/main/div/div[2]/table/caption";
+
+            string str = doc.DocumentNode.SelectSingleNode(pattern).InnerHtml;
+
+
+            richTextBox1.Text += "str = " + str + "\n";
+
+            //return;
+
 
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //可解析本地文件
+
+            string url = @"C:\______test_files\aaaaa.html";
+            //string url = @"C:\_git\vcs\_1.data\_html\官網.html";
+
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            
+            doc.OptionOutputOriginalCase = true;    //正確區分大小寫
+
+            doc.Load(url);
+            //HtmlNodeCollection node_collection = doc.DocumentNode.SelectNodes("//div");
+            HtmlNodeCollection node_collection = doc.DocumentNode.SelectNodes("//img");
+            foreach (HtmlNode node in node_collection)
+            {
+                string templateString = node.InnerHtml; //lower case happens here.....
+
+                richTextBox1.Text += "aaaaa" + templateString + "\n";
+
+            }
 
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            string url = @"https://easun.org/perl/perl-toc/ch08.html";
 
+            string result = GetContentFromUrl(url);
+
+            richTextBox1.Text += result + "\n";
+
+
+
+
+        }
+
+        // C#获取页面显示的内容 
+        private string GetContentFromUrl(string url)
+        {
+            string _StrResponse = "";
+            HttpWebRequest _WebRequest = (HttpWebRequest)WebRequest.Create(url);
+            _WebRequest.Method = "GET";
+            WebResponse _WebResponse = _WebRequest.GetResponse();
+            StreamReader _ResponseStream = new StreamReader(_WebResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("utf-8"));
+            _StrResponse = _ResponseStream.ReadToEnd();
+            _WebResponse.Close();
+            _ResponseStream.Close();
+            return _StrResponse;
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -783,6 +858,386 @@ namespace vcs_HtmlAgility
                 //Maybe Nothing for Now
             }
         }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            string url = "https://news.ycombinator.com/";
+            ParseHtml(url);
+
+        }
+
+        private void ParseHtml(string html)
+        {
+            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var programmerLinks = htmlDoc.DocumentNode.Descendants("tr")
+                    .Where(node => node.GetAttributeValue("class", "").Contains("athing")).Take(10).ToList();
+
+            foreach (var link in programmerLinks)
+            {
+                var rank = link.SelectSingleNode(".//span[@class='rank']").InnerText;
+                var storyName = link.SelectSingleNode(".//a[@class='storylink']").InnerText;
+                var url = link.SelectSingleNode(".//a[@class='storylink']").GetAttributeValue("href", string.Empty);
+                var score = link.SelectSingleNode("..//span[@class='score']").InnerText;
+
+
+                richTextBox1.Text += storyName + "\n";
+            }
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+            //ok
+            //string url = @"C:\______test_files\sample.html";
+            string url = @"C:\_git\vcs\_1.data\_html\My_Link2.html";
+
+            HtmlAgilityPack.HtmlDocument document2 = new HtmlAgilityPack.HtmlDocument();
+            document2.Load(url, Encoding.UTF8);     //指定編碼格式
+
+
+            //Get all Hyperlinks in a page
+            HtmlNode[] nodes = document2.DocumentNode.SelectNodes("//a").ToArray();
+            foreach (HtmlNode item in nodes)
+            {
+                Console.WriteLine(item.InnerHtml);
+                richTextBox1.Text += "aaa\t" + item.InnerHtml + "\n";
+            }
+            return;
+
+            //Select a specific div in a page
+
+            //Approach 1  
+            HtmlNode node = document2.DocumentNode.SelectNodes("//div[@id='div1']").First();
+
+            HtmlNode[] aNodes = node.SelectNodes(".//a").ToArray();
+
+            //Approach 2  
+            HtmlNode[] aNodes2 = document2.DocumentNode.SelectNodes("//div[@id='div1']//a").ToArray();
+
+
+
+            HtmlNode[] nodes3 = document2.DocumentNode.SelectNodes("//a").Where(x => x.InnerHtml.Contains("div2")).ToArray();
+            foreach (HtmlNode item in nodes3)
+            {
+                Console.WriteLine(item.InnerHtml);
+                richTextBox1.Text += "ccc\t" + item.InnerHtml + "\n";
+            }
+
+
+            richTextBox1.Text += "\n\n================================================================================\n";
+            richTextBox1.Text += "================================================================================\n";
+            richTextBox1.Text += "================================================================================\n\n\n";
+
+
+            /* fail
+            //指定來源網頁
+            WebClient wc = new WebClient();
+            //將網頁來源資料暫存到記憶體內
+            MemoryStream ms = new MemoryStream(wc.DownloadData(url));
+
+            // 使用 UTF8 編碼讀入 HTML 
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.Load(ms, Encoding.UTF8);
+
+            // 裝載第一層查詢結果 
+            HtmlAgilityPack.HtmlDocument hdc = new HtmlAgilityPack.HtmlDocument();
+
+            HtmlNode[] nodes2 = hdc.DocumentNode.SelectNodes("//a").ToArray();
+            foreach (HtmlNode item in nodes2)
+            {
+                Console.WriteLine(item.InnerHtml);
+                richTextBox1.Text += "aaa\t" + item.InnerHtml + "\n";
+            }
+
+            */
+
+
+        }
+
+        public class Util
+        {
+
+            //Get byte[] format page source    
+            public static byte[] GetPageSourceBytes(string url)
+            {
+                WebClient wc = new WebClient();
+                byte[] pageSourceBytes = wc.DownloadData(new Uri(url));
+                return pageSourceBytes;
+            }
+
+            //get string format page source    
+            public static string GetPageSource(string url, string encodingType)
+            {
+                byte[] pageSourceBytes = GetPageSourceBytes(url);
+                string pageSource = Encoding.GetEncoding(encodingType).GetString(pageSourceBytes);
+                return pageSource;
+            }
+
+            //Save image to local file    
+            public static void SavaImagesToFile(string url, string dirPath, string fileName)
+            {
+                if (!Directory.Exists(dirPath))
+                {
+                    Directory.CreateDirectory(dirPath);
+                }
+                WebClient wc = new WebClient();
+                wc.DownloadFile(url, Path.Combine(dirPath, fileName + Guid.NewGuid().ToString()));
+            }
+        }  
+
+        public class ImageInfo
+        {
+            public string Title;
+            public string SrcPath;
+            public static List<ImageInfo> GetImageInfoList(string url)
+            {
+                // URL:http://browse.deviantart.com/customization/wallpaper/widescreen/?order=15
+                string pageSource = Util.GetPageSource(url, "gb2312");
+                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(pageSource);
+
+                HtmlNodeCollection spanNodeList = doc.DocumentNode.SelectNodes("//span[@class='tt-w']");
+
+                List<ImageInfo> imageList = new List<ImageInfo>();
+                for (int i = 0; i < 24; i++)
+                {
+                    HtmlNode curSpanNode = spanNodeList[i];
+                    HtmlNode curImageNode = curSpanNode.SelectSingleNode("//img");
+                    HtmlNode curLinkNode = curSpanNode.SelectSingleNode("a");
+
+                    ImageInfo image = new ImageInfo();
+                    image.Title = curLinkNode.InnerText;
+                    image.SrcPath = curImageNode.Attributes["src"].Value;
+                    imageList.Add(image);
+                }
+                return imageList;
+            } 
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            string url = @"https://www.deviantart.com/?order=15";
+
+            int sumCount = 100;
+            //string baseUrl = "http://browse.deviantart.com/customization/wallpaper/widescreen/?order=15";
+
+            List<ImageInfo> imageInfoList = new List<ImageInfo>();
+            imageInfoList = GetSumImageInfoList(sumCount, url);
+
+            foreach (ImageInfo imageInfo in imageInfoList)
+            {
+                Util.SavaImagesToFile(imageInfo.SrcPath, @"c:\dddddddddd", GetValidFilename(imageInfo.Title));
+            }
+
+            return;
+        }
+
+        static string GetValidFilename(string filename)
+        {
+            foreach (char c in Path.GetInvalidFileNameChars())
+            {
+                filename = filename.Replace(c, '_');
+            }
+            return filename;
+        }
+
+        static List<ImageInfo> GetSumImageInfoList(int sum, string baseUri)
+        {
+            List<ImageInfo> resultList = new List<ImageInfo>();
+            int c = (sum - 1) / 24 + 1;
+            for (int i = 0; i < c; i++)
+            {
+                int offset = i * 24;
+                string url = string.Format("{0}&offset={1}", baseUri, offset);
+                List<ImageInfo> curResultList = ImageInfo.GetImageInfoList(url);
+                foreach (ImageInfo imageInfo in curResultList)
+                {
+                    if (resultList.Count < sum)
+                    {
+                        resultList.Add(imageInfo);
+                    }
+                }
+            }
+            return resultList;
+        }             
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            string pageUrl = "http://top.baidu.com/buzz.php?p=top_keyword";
+            WebClient wc = new WebClient();
+            byte[] pageSourceBytes = wc.DownloadData(new Uri(pageUrl));
+            string pageSource = Encoding.GetEncoding("gb2312").GetString(pageSourceBytes);
+
+            //Regex searchKeyRegex = new Regex("<td class=\"key\">.*?target=\"_blank\">(?<keyWord>.*?)</a></td>");
+            //MatchCollection mc = searchKeyRegex.Matches(pageSource);
+            //List<string> keyWordList = new List<string>();
+            //foreach(Match m in mc)
+            //{
+            //    keyWordList.Add(m.Groups["keyWord"].Value);
+            //}
+
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(pageSource);
+
+            HtmlNodeCollection keyNodes = doc.DocumentNode.SelectNodes("//td[@class='key']/a[@ target='_blank']");
+            List<string> keyWords = new List<string>();
+            foreach (HtmlNode keyNode in keyNodes)
+            {
+                keyWords.Add(keyNode.InnerText);
+            }
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            /*
+            string url = @"C:\_git\vcs\_1.data\_html\My_Link2.html";
+
+            //get HtmlAgilityPack.HtmlDocument object   
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            //load HTML   
+            doc.LoadHtml(url);
+            //get HtmlNode by ID   
+            HtmlNode navNode = doc.GetElementbyId("TD");
+            richTextBox1.Text += "ccccc" + navNode.InnerHtml + "\n";
+            */
+
+            /*
+            //博客來
+            var url = @"https://www.books.com.tw/products/0010916142";
+
+            var web = new HtmlWeb();
+            var doc = web.Load(url);
+
+            string str;
+            str = doc.DocumentNode.SelectSingleNode("/html/body/div[4]/div/div[1]/div[2]/div[1]/h1").InnerText;
+            richTextBox1.Text += str + "\n";
+            str = doc.DocumentNode.SelectSingleNode("/html/body/div[4]/div/div[1]/div[2]/div[1]/h2").InnerText;
+            richTextBox1.Text += str + "\n";
+            */
+
+
+
+            //通过HtmlDocument类加载html数据
+            string htmlstr = @"http://www.zhishilin.com";
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(htmlstr);
+            //XPath路径表达式，这里表示选取所有span节点中的font最后一个子节点，其中span节点的class属性值为num
+            HtmlNode rootnode = doc.DocumentNode;
+            //根据网页的内容设置XPath路径表达式
+            string xpathstring = "//span[@class='num']/font[last()]";
+            HtmlNodeCollection aa = rootnode.SelectNodes(xpathstring);    //所有找到的节点都是一个集合
+
+            if (aa != null)
+            {
+                string innertext = aa[0].InnerText;
+                //获取color属性，第二个参数为默认值
+                string color = aa[0].GetAttributeValue("color", "");
+                //其他属性大家自己尝试
+
+                richTextBox1.Text += "aaaa = " + innertext + "\n";
+                richTextBox1.Text += "cccc = " + color + "\n";
+
+            }
+
+
+        }
+
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            /*
+            var html = new HtmlAgilityPack.HtmlDocument();
+            html.LoadHtml(new WebClient().DownloadString("http://www.asp.net"));
+            var root = html.DocumentNode;
+            var nodes = root.Descendants();
+            var totalNodes = nodes.Count();
+
+
+            richTextBox1.Text += "cnt = " + totalNodes + "\n";
+            */
+
+            /*
+            var html = new HtmlAgilityPack.HtmlDocument();
+            html.LoadHtml(new WebClient().DownloadString("http://www.asp.net"));
+            var root = html.DocumentNode;
+            var anchors = root.Descendants("a");
+            var unorderedLists = root.Descendants("ul");
+
+            richTextBox1.Text += unorderedLists + "\n";
+            */
+
+            /*
+            var html = new HtmlAgilityPack.HtmlDocument();
+            html.LoadHtml(new WebClient().DownloadString("http://www.asp.net"));
+            var root = html.DocumentNode;
+            var commonPosts = root.Descendants().Where(n => n.GetAttributeValue("class", "").Equals("common-post"));
+
+            richTextBox1.Text += "aaaa " + commonPosts.ToString() + "\n";
+            */
+
+            /*
+            //fail
+            var html = new HtmlAgilityPack.HtmlDocument();
+            html.LoadHtml(new WebClient().DownloadString("http://forums.asp.net/members/Mikesdotnetting.aspx"));
+            var root = html.DocumentNode;
+            var p = root.Descendants()
+                .Where(n => n.GetAttributeValue("class", "").Equals("module-profile-recognition"))
+                .Single()
+                .Descendants("p")
+                .Single();
+            var content = p.InnerText;
+
+            richTextBox1.Text += content + "\n";
+            */
+
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            string url = @"https://www.technologycrowds.com/";
+
+            ExtractHref(url);
+        }
+
+        void ExtractHref(string URL)
+        {
+            HtmlWeb web = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc = web.Load(URL);
+
+            // extracting all links
+            foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
+            {
+                HtmlAttribute att = link.Attributes["href"];
+
+                if (att.Value.Contains("a"))
+                {
+                    // showing output
+                    Console.WriteLine(att.Value);
+                    richTextBox1.Text += "取得連結:\t" + att.Value + "\n";
+                }
+            }
+        }
+
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
         private void bt_00_Click(object sender, EventArgs e)
         {
@@ -1163,6 +1618,14 @@ namespace vcs_HtmlAgility
 
             //從doc向下取得目標資料的html結構
             HtmlAgilityPack.HtmlDocument docData = new HtmlAgilityPack.HtmlDocument();
+
+
+            string str = doc.DocumentNode.SelectSingleNode(@"//div[@name='printhere']").InnerHtml;
+
+            //richTextBox1.Text += "str = " + str + "\n";
+            //return;
+
+
             docData.LoadHtml(doc.DocumentNode.SelectSingleNode(@"//div[@name='printhere']").InnerHtml);
 
             //獲得更新日期
@@ -1179,6 +1642,7 @@ namespace vcs_HtmlAgility
             foreach (HtmlNode header in headers)
             {
                 dt.Columns.Add(header.InnerText);
+                //richTextBox1.Text += "取得\t" + header.InnerText + "\n";
             }
 
             //可用rows取得所有列的資料，也可直接寫在foreach裡面，tr[td]的意思是選取「所有tr之下有td」的tr們

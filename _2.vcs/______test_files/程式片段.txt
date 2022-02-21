@@ -1,4 +1,46 @@
 
+<a> 超連結 如何取得文字 :
+
+Name = htmlNode.InnerText
+
+<a> 超連結 如何取得連結 :
+
+Url = htmlNode.GetAttributeValue("href", "")
+
+
+
+
+
+
+
+
+十六、運行時顯示自己定義的圖標：
+//load icon and set to form
+System.Drawing.Icon ico = new System.Drawing.Icon(@c: empapp.ico);
+this.Icon = ico;
+
+
+
+
+
+----------------vcs +++ ST----------------
+
+
+
+
+
+vcs_test_all_00_Usually +
+開新表單範例
+
+
+vcs_MyToolbox+
+日曆功能
+年月日星期
+農曆
+
+vcs_HtmlAgility+
+氣象 水 電 空氣 covid-19
+博客來
 
 
 comport的應用加一個ims溫度測試當範例 回傳溫度數值用ims_link裡面的溫度chart獨立出來
@@ -7,6 +49,122 @@ comport的應用加一個ims溫度測試當範例 回傳溫度數值用ims_link�
 
 再做一個模擬comport按鈕
 
+
+
+
+vcs_MyLibrary
+1. 三角函數
+2. 檔案屬性參數 檔案大小時間影片大小長度
+3. drawcircle fillcircle
+WebCam Comport使用
+若要讀取info 回傳一個string即可
+
+
+MyPlayer3
+		1. 取消最上層顯示
+2. 可以在開啟pdf時指明到某一頁，但無法知道目前顯示到哪一頁，無法記下來，開啟時就不知道要開啟到哪一頁了
+3. pictureBox1的double click失效
+4. 做個地方可以做筆記, 筆記可存檔
+		5. 在已開啟mp3後，點選其他mp3檔，要能夠改播放新檔
+6. 不用鍵盤用滑鼠也能操作.....開檔、播放、、、、
+
+
+操作類:
+	按ctrl+上下	小量的加減速
+	按shift+上下	大量的加減速
+	Backspace	跳到檔頭
+	PageUp/PageDown 同資料夾、依檔名排序的上一個、下一個檔案
+	
+
+
+----------------vcs +++ SP----------------
+
+
+
+HtmlAgilityPack 訊息
+
+
+            WebClient wc = new WebClient();
+            wc.BaseAddress = "http://www.juedui100.com/";
+            wc.Encoding = Encoding.UTF8;
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            string html = wc.DownloadString("aaaa.html");
+            doc.LoadHtml(html);
+            HtmlNode node = doc.DocumentNode.SelectSingleNode("/html/body/div[4]/div[1]/div[2]/ul[1]");     //根据XPath查找节点，跟XmlNode差不多
+            Console.WriteLine(node.InnerText);  //输出节点内容      年龄：21～30之间 婚史：未婚 ......      与InnerHtml的区别在于，它不会输出HTML代码
+            Console.WriteLine(node.InnerHtml);  //输出节点Html <li>年龄：21～30之间</li> <li>婚史：未婚</li> ....
+            Console.WriteLine(node.Name);       //输出 ul    Html元素名 
+
+
+
+
+Name　　　　　　　　　　　　　　  Html元素名
+Id　　　　　　　　　　　　　　　　 获取该节点的Id属性
+InnerHtml　　　　　　　　　　　　 获取该节点的Html代码
+InnerText　　　　　　　　　　　　 获取该节点的内容，与InnerHtml不同的地方在于它会过滤掉Html代码，而InnerHtml是连Html代码一起输出
+NodeType　　　　　　　　　　　　  获取该节点的节点类型
+
+
+
+
+静态属性
+
+public static Dictionary<string, HtmlElementFlag> //ElementsFlags;获取集合的定义为特定的元素节点的特定行为的标志。表包含小写标记名称作为键和作为值的 HtmlElementFlags 组合 DictionaryEntry 列表。
+public static readonly string HtmlNodeTypeNameComment;　　//获取一个注释节点的名称。实际上，它被定义为 '#comment
+public static readonly string HtmlNodeTypeNameDocument;　  //获取文档节点的名称。实际上，它被定义为 '#document'
+public static readonly string HtmlNodeTypeNameText;　　　　  //获取一个文本节点的名称。实际上，它被定义为 '#text'
+
+二、属性
+
+Attributes 　　　　　　　　　　　　获取节点的属性集合
+ChildNodes　　　　　　　　　　　　获取子节点集合(包括文本节点)
+Closed　　　　　　　　　　　　　　该节点是否已关闭(</xxx>)
+ClosingAttributes　　　　　　　　  在关闭标签的属性集合
+FirstChild　　　　　　　　　　　　  获取第一个子节点
+HasAttributes　　　　　　　　　　  判断该节点是否含有属性
+HasChildNodes　　　　　　　　　　判断该节点是否含有子节点
+HasClosingAttributes　　　　　　  判断该节点的关闭标签是否含有属性(</xxx class="xxx">)
+LastChild　　　　　　　　　　　　  获取最后一个子节点
+Line　　　　　　　　　　　　　　　 获取该节点的开始标签或开始代码位于整个HTML源代码的第几行(行号)
+LinePosition　　　　　　　　　　　 获取该节点位于第几列
+NextSibling　　　　　　　　　　　　获取下一个兄弟节点
+OriginalName　　　　　　　　　　　获取原始的未经更改的元素名
+OuterHtml　　　　　　　　　　　　 整个节点的代码
+OwnerDocument　　　　　　　　　节点所在的HtmlDocument文档
+ParentNode　　　　　　　　　　　　获取该节点的父节点
+PreviousSibling　　　　　　　　　　获取前一个兄弟节点
+StreamPosition　　　　　　　　　　该节点位于整个Html文档的字符位置
+XPath　　　　　　　　　　　　　　  根据节点返回该节点的XPath
+
+
+
+http://bsubramanyamraju.blogspot.com/2019/03/htmlagilitypack-html-parsing-in.html
+https://github.com/SubramanymRajuB/Xamarin.Forms/tree/master/HtmlParsing
+
+
+c# - C#htmlagilitypack Node.InnerHTML不正确区分大小写，如何拉正确大小写 
+
+
+
+
+
+  
+  
+  var response1 = await http.GetByteArrayAsync("http://www.nsfund.ir/news?"+link);
+                String source1 = Encoding.GetEncoding("utf-8").GetString(response1, 0, response1.Length - 1);
+                source1 = WebUtility.HtmlDecode(source1);
+                HtmlDocument resultat1 = new HtmlDocument();
+                resultat1.LoadHtml(source1);
+               var val = resultat1.DocumentNode.SelectSingleNode("//div[@class='news_content_container']").InnerText;
+               
+               
+               
+               
+               
+               
+               
+               
+               
 
             
 
@@ -156,36 +314,6 @@ Image.FromFile可開啟影像檔:
 //--------------------------------------------------------------------------------------------------------------------------
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //c#生成大量隨機碼
-            StreamWriter swriter = new StreamWriter("1.txt", true);
-
-            for (int i = 0; i < 1000; i++)
-            {
-                swriter.Write(generateRandomString(20));
-                swriter.WriteLine();
-                Console.WriteLine("Number: {0}", i);
-            }
-
-            swriter.Flush();
-
-            swriter.Close();
-        }
-
-        static Random random = new Random();
-        static string generateRandomString(int length)
-        {
-            var chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < length; i++)
-            {
-                int index = random.Next(chars.Length);
-                result.Append(chars[index]);
-            }
-            return result.ToString();
-        }
-
 
 
 
@@ -273,19 +401,6 @@ string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三"
             //根據nudPoint.Value來格式化顯示的數值
             lblAns.Text = (n1 + n2).ToString("F" + nudPoint.Value.ToString());
         }
-
-
-//C#中List的使用
-
-        List<User> list1 = new List<User>();  
-  
-        list1.Add(new User(1, "testOne"));  
-  
-        list1.Add(new User(2, "testTwo"));  
-  
-        list1.Add(new User(3, "testThree"));  
-  
-  
   
 
 private PlayState _palystate = PlayState.Closed;
@@ -882,117 +997,6 @@ KeyPreview 改 True
 Form1加KeyDown
 
 
-// C#获取页面显示的内容 
-private string GetContentFromUrll(string _requestUrl)
-    {
-        string _StrResponse = "";
-        HttpWebRequest _WebRequest = (HttpWebRequest)WebRequest.Create(_requestUrl);
-        _WebRequest.Method = "GET";
-        WebResponse _WebResponse = _WebRequest.GetResponse();
-        StreamReader _ResponseStream = new StreamReader(_WebResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("gb2312"));
-        _StrResponse = _ResponseStream.ReadToEnd();
-        _WebResponse.Close();
-        _ResponseStream.Close();
-        return _StrResponse;
-    }
-
- 
- 
- 
-//提取HTML代碼中文字的C#函數
-
-/// <summary>
-  /// 去除HTML標記
-  /// </summary>
-  /// <param name="strHtml">包括HTML的源碼 </param>
-  /// <returns>已經去除後的文字</returns>
-  public static string StripHTML(string strHtml)
-  {
-   string [] aryReg ={
-          @"<script[^>]*?>.*?</script>",
-
-          @"<(\/\s*)?!?((\w+:)?\w+)(\w+(\s*=?\s*(([""'])(\\[""'tbnr]|[^\7])*?\7|\w+)|.{0})|\s)*?(\/\s*)?>",
-          @"([\r\n])[\s]+",
-          @"&(quot|#34);",
-          @"&(amp|#38);",
-          @"&(lt|#60);",
-          @"&(gt|#62);", 
-          @"&(nbsp|#160);", 
-          @"&(iexcl|#161);",
-          @"&(cent|#162);",
-          @"&(pound|#163);",
-          @"&(copy|#169);",
-          @"&#(\d+);",
-          @"-->",
-          @"<!--.*\n"
-
-         };
-
-   string [] aryRep = {
-           "",
-           "",
-           "",
-           "\"",
-           "&",
-           "<",
-           ">",
-           " ",
-           "\xa1",//chr(161),
-           "\xa2",//chr(162),
-           "\xa3",//chr(163),
-           "\xa9",//chr(169),
-           "",
-           "\r\n",
-           ""
-          };
-
-   string newReg =aryReg[0];
-   string strOutput=strHtml;
-   for(int i = 0;i<aryReg.Length;i++)
-   {
-    Regex regex = new Regex(aryReg[i],RegexOptions.IgnoreCase );
-    strOutput = regex.Replace(strOutput,aryRep[i]);
-   }
-
-   strOutput.Replace("<","");
-   strOutput.Replace(">","");
-   strOutput.Replace("\r\n","");
-
-
-   return strOutput;
-  }
-
-
-
-
-//c# 生成SHA1加密字符串，
- 
-
-從網上找到的一種加密代碼：
-
-         var enstr ="abcdefg";
-            var strRes = Encoding.Default.GetBytes(enstr);
-            HashAlgorithm iSha = new SHA1CryptoServiceProvider();
-            strRes = iSha.ComputeHash(strRes);
-            var enText = new StringBuilder();
-            foreach (byte iByte in strRes)
-            {
-                enText.AppendFormat("{0:x2}", iByte);
-            }    
- 
-
-還有另一種SHA1加密，我用來做騰訊雲簽名：
-
- 　　　　　　 HMACSHA1 hmacsha1 = new HMACSHA1(Encoding.UTF8.GetBytes(SecretKey));
-            byte[] rstRes = hmacsha1.ComputeHash(Encoding.UTF8.GetBytes(str));
-            string strs =  Convert.ToBase64String(rstRes);
-            return System.Web.HttpUtility.UrlEncode(strs);
-
- 
-
-
-
- 
  
  
                      
@@ -1005,30 +1009,6 @@ this.Icon = new Icon(@"C:\______test_files\_icon\唐.ico");
 this.Cursor = new Cursor(xxxxxx);
 
 
-
-
-
-ArrayList list = new ArrayList();
-
-list.Add("alive");
-
-list.Add("silver");
-
-list.Add("dog");
-
-list.Add("Ftp");
-
-d.SetData("para", list);
-
-//將制定的值賦值給應用程序域的屬性
-
-foreach (string s in (ArrayList)d.GetData("para"))
-
-{// 獲取存在當前應用程序域中的值
-
-Console.WriteLine("you will see" + s);
-
-}
 
 
 
@@ -1407,24 +1387,6 @@ ApiCalls.ShowWindow(Form.ActiveForm.Handle,1);
  
 
 
-//隨機顏色如下
-
-public static Color GetRandomColor()
-{
-    Random randomFirst = new Random((int)DateTime.Now.Ticks); 
-    System.Threading.Thread.Sleep(300);
-    Random randomSencond = new Random((int)DateTime.Now.Ticks);
-    System.Threading.Thread.Sleep(300);
-    Random randomThird = new Random((int)DateTime.Now.Ticks);
-    int intRed = randomFirst.Next(256);
-    int intGreen = randomSencond.Next(256);
-    int intBlue = randomThird.Next(256);
-    return Color.FromArgb(intRed, intGreen, intBlue);
-}
-        
-
-
-
 ADO.Net方面的：
 八、連接Access數據庫：
 using System;
@@ -1621,13 +1583,6 @@ class TestADO
         conn.Close();  
     } 
 } 
-
-
-十六、運行時顯示自己定義的圖標：
-//load icon and set to form
-System.Drawing.Icon ico = new System.Drawing.Icon(@c: empapp.ico);
-this.Icon = ico;
-
 
 網絡方面的：
 十八、取得IP地址：
