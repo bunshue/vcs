@@ -642,58 +642,9 @@ namespace vcs_Comport_Sample_Temperature
                         {
                             //溫度偵測顯示
                             temperature_data = input[2] * 256 + input[3];
-                            //richTextBox1.Text += temperature_data.ToString("X4") + "  ";
-                            float temperature = ((((float)(temperature_data) / 65536.0f) / 0.00198421639f) - 273.15f);
-                            //richTextBox1.Text += temperature.ToString()+" C ";
 
-                            if (temperature > 70)
-                                lb_temperature.ForeColor = Color.Red;
-                            else
-                                lb_temperature.ForeColor = Color.Blue;
+                            draw_chart_temperature(temperature_data);
 
-                            lb_temperature.Text = temperature.ToString("#0.000") + " C ";
-
-                            /*
-                            #define XAdcPs_RawToTemperature(AdcData)				\
-                            ((((float)(AdcData)/65536.0f)/0.00198421639f ) - 273.15f)
-                            */
-
-                            //溫度偵測圖表
-                            // Define some variables
-                            int numberOfPointsInChart = 15;
-                            int numberOfPointsAfterRemoval = 15;
-
-                            // Simulate adding new data points
-                            float x = pointIndex + 1;
-                            //int y = (int)(2500 * Math.Sin(Math.PI * x * 40 / 180) + 2500);
-                            float y = temperature;
-
-                            chart_temperature.Series[0].Points.AddXY(x, y);
-                            ++pointIndex;
-
-                            // Adjust Y & X axis scale
-                            chart_temperature.ResetAutoValues();
-                            if (chart_temperature.ChartAreas["Default"].AxisX.Maximum < pointIndex)
-                            {
-                                chart_temperature.ChartAreas["Default"].AxisX.Maximum = pointIndex;
-                            }
-
-                            // Keep a constant number of points by removing them from the left
-                            while (chart_temperature.Series[0].Points.Count > numberOfPointsInChart)
-                            {
-                                // Remove data points on the left side
-                                while (chart_temperature.Series[0].Points.Count > numberOfPointsAfterRemoval)
-                                {
-                                    chart_temperature.Series[0].Points.RemoveAt(0);
-                                }
-
-                                // Adjust X axis scale
-                                chart_temperature.ChartAreas["Default"].AxisX.Minimum = pointIndex - numberOfPointsAfterRemoval;
-                                chart_temperature.ChartAreas["Default"].AxisX.Maximum = chart_temperature.ChartAreas["Default"].AxisX.Minimum + numberOfPointsInChart;
-                            }
-
-                            // Redraw chart
-                            chart_temperature.Invalidate();
                         }
                     }
                 }
@@ -726,6 +677,73 @@ namespace vcs_Comport_Sample_Temperature
                 richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
             }
             */
+        }
+
+        void draw_chart_temperature(int temperature_data)
+        {
+            //richTextBox1.Text += temperature_data.ToString("X4") + "  ";
+            float temperature = ((((float)(temperature_data) / 65536.0f) / 0.00198421639f) - 273.15f);
+            //richTextBox1.Text += temperature.ToString()+" C ";
+
+            if (temperature > 70)
+                lb_temperature.ForeColor = Color.Red;
+            else
+                lb_temperature.ForeColor = Color.Blue;
+
+            lb_temperature.Text = temperature.ToString("#0.000") + " C ";
+
+            /*
+            #define XAdcPs_RawToTemperature(AdcData)				\
+            ((((float)(AdcData)/65536.0f)/0.00198421639f ) - 273.15f)
+            */
+
+            //溫度偵測圖表
+            // Define some variables
+            int numberOfPointsInChart = 15;
+            int numberOfPointsAfterRemoval = 15;
+
+            // Simulate adding new data points
+            float x = pointIndex + 1;
+            //int y = (int)(2500 * Math.Sin(Math.PI * x * 40 / 180) + 2500);
+            float y = temperature;
+
+            chart_temperature.Series[0].Points.AddXY(x, y);
+            ++pointIndex;
+
+            // Adjust Y & X axis scale
+            chart_temperature.ResetAutoValues();
+            if (chart_temperature.ChartAreas["Default"].AxisX.Maximum < pointIndex)
+            {
+                chart_temperature.ChartAreas["Default"].AxisX.Maximum = pointIndex;
+            }
+
+            // Keep a constant number of points by removing them from the left
+            while (chart_temperature.Series[0].Points.Count > numberOfPointsInChart)
+            {
+                // Remove data points on the left side
+                while (chart_temperature.Series[0].Points.Count > numberOfPointsAfterRemoval)
+                {
+                    chart_temperature.Series[0].Points.RemoveAt(0);
+                }
+
+                // Adjust X axis scale
+                chart_temperature.ChartAreas["Default"].AxisX.Minimum = pointIndex - numberOfPointsAfterRemoval;
+                chart_temperature.ChartAreas["Default"].AxisX.Maximum = chart_temperature.ChartAreas["Default"].AxisX.Minimum + numberOfPointsInChart;
+            }
+
+            // Redraw chart
+            chart_temperature.Invalidate();
+        }
+
+        private void bt_demo_Click(object sender, EventArgs e)
+        {
+            timer_demo.Enabled = true;
+
+        }
+
+        private void timer_demo_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -17,16 +17,6 @@ namespace WindowsFormsApplication1accept
             label1.Text = "";
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            label1.Text = "Accept";
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            label1.Text = "Cancel";
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             this.AcceptButton = button1;
@@ -34,5 +24,16 @@ namespace WindowsFormsApplication1accept
 
             this.ShowInTaskbar = false;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            label1.Text = "你按了 Accept";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            label1.Text = "你按了Cancel";
+        }
+
     }
 }

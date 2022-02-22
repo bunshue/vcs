@@ -79,7 +79,7 @@ namespace vcs_WebCam0
         {
             if (Cam != null)
             {
-                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                if (Cam.IsRunning == true)  // When Form1 closes itself, WebCam must stop, too.
                 {
                     Cam.Stop();   // WebCam stops capturing images.
                     Cam.SignalToStop();
@@ -87,11 +87,16 @@ namespace vcs_WebCam0
                 }
             }
         }
-        
+
+        int frame_count = 0;        //計算fps用
+        int frame_count_old = 0;    //計算fps用
+        DateTime dt_old = DateTime.Now;
+
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            frame_count++;
             try
             {
                 //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
@@ -136,6 +141,21 @@ namespace vcs_WebCam0
                 //richTextBox1.Text += "xxx錯誤訊息a : " + ex.Message + "\n";
             }
             GC.Collect();       //回收資源
+        }
+
+        private void timer_clock_Tick(object sender, EventArgs e)
+        {
+            if (Cam.IsRunning == true)
+            {
+                DateTime dt = DateTime.Now;
+                lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F2") + " fps";
+                dt_old = dt;
+                frame_count_old = frame_count;
+            }
+            else
+            {
+                lb_fps.Text = "";
+            }
         }
     }
 }

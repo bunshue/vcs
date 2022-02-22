@@ -42,6 +42,8 @@
             this.bt_temperature_on = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SerialPortTimer100ms = new System.Windows.Forms.Timer(this.components);
+            this.bt_demo = new System.Windows.Forms.Button();
+            this.timer_demo = new System.Windows.Forms.Timer(this.components);
             this.groupBox_comport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
             this.groupBox20.SuspendLayout();
@@ -49,6 +51,7 @@
             // 
             // groupBox_comport
             // 
+            this.groupBox_comport.Controls.Add(this.bt_demo);
             this.groupBox_comport.Controls.Add(this.comboBox_comport);
             this.groupBox_comport.Controls.Add(this.pictureBox_comport);
             this.groupBox_comport.Controls.Add(this.bt_comport_scan);
@@ -169,6 +172,21 @@
             this.SerialPortTimer100ms.Enabled = true;
             this.SerialPortTimer100ms.Tick += new System.EventHandler(this.SerialPortTimer100ms_Tick);
             // 
+            // bt_demo
+            // 
+            this.bt_demo.Location = new System.Drawing.Point(409, 17);
+            this.bt_demo.Name = "bt_demo";
+            this.bt_demo.Size = new System.Drawing.Size(46, 35);
+            this.bt_demo.TabIndex = 23;
+            this.bt_demo.Text = "Demo";
+            this.bt_demo.UseVisualStyleBackColor = true;
+            this.bt_demo.Click += new System.EventHandler(this.bt_demo_Click);
+            // 
+            // timer_demo
+            // 
+            this.timer_demo.Interval = 1000;
+            this.timer_demo.Tick += new System.EventHandler(this.timer_demo_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -204,6 +222,8 @@
         private System.Windows.Forms.Button bt_temperature_on;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Timer SerialPortTimer100ms;
+        private System.Windows.Forms.Button bt_demo;
+        private System.Windows.Forms.Timer timer_demo;
     }
 }
 

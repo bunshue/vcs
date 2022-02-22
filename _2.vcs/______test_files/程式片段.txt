@@ -892,7 +892,6 @@ vcs richtextbox2
         }
 
 
-
 　　
             	//讀取一檔
                 FileStream fs = new FileStream(targetPath, FileMode.Open, FileAccess.Read);
@@ -911,67 +910,6 @@ vcs richtextbox2
                 }
                 br.Close();
                 fs.Close();
-
-
-
-            //#畫虛線
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Pen p = new Pen(Color.Red, 5);
-            p.DashStyle = DashStyle.Custom;//虛線的樣式
-            p.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
-            g.DrawLine(p, 0, 0, this.pictureBox1.Width - 1, this.pictureBox1.Height - 1);
-
-
-            //動態驗證碼變成靜態
-            string filename1 = @"C:\______test_files\__RW\_gif\run.gif";
-
-            Image imgGif = Image.FromFile(filename1);
-            FrameDimension ImgFrmDim = new FrameDimension(imgGif.FrameDimensionsList[0]);
-            System.Drawing.Bitmap bitmap1 = new Bitmap(imgGif.Size.Width, imgGif.Size.Height);
-            int nFrameCount = imgGif.GetFrameCount(ImgFrmDim);
-            for (int i = 0; i < nFrameCount; i++)
-            {
-                imgGif.SelectActiveFrame(ImgFrmDim, i);
-                System.Drawing.Bitmap nbp = new Bitmap(imgGif);
-                Color dd = nbp.GetPixel(1, 1);
-                if (i == 0)
-                {
-                    for (int x = 0; x < nbp.Width; x++)
-                    {
-                        for (int y = 0; y < nbp.Height; y++)
-                        {
-                            bitmap1.SetPixel(x, y, dd);
-                        }
-                    }
-                }
-                for (int x = 0; x < nbp.Width; x++)
-                {
-                    for (int y = 0; y < nbp.Height; y++)
-                    {
-                        Color c = nbp.GetPixel(x, y);
-                        if (c == dd)
-                            continue;
-                        bitmap1.SetPixel(x, y, c);
-                    }
-                }
-            }
-            string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-            try
-            {
-                //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                bitmap1.Save(filename2, ImageFormat.Bmp);
-                //bitmap1.Save(@file3, ImageFormat.Png);
-
-                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-
 
 
 讀取網頁 回傳資料 看看是甚麼樣子 xml? html?
@@ -1682,40 +1620,6 @@ string value = “第三行 綠暗綠”;
 Console.WriteLine(value.PadRight(Console.WindowWidth-value.Length)); //設置一整行的背景色
 
         
-
-
-        public Bitmap bmpobj; 
- 
-        public VerifyCode(Bitmap pic) 
-        { 
-            bmpobj = new Bitmap(pic);    //轉換為Format32bppRgb 
-        } 
- 
-        /// <summary> 
-        /// 根據RGB，計算灰度值 
-        /// </summary> 
-        /// <param name="posClr">Color值</param> 
-        /// <returns>灰度值，整型</returns> 
-        private int GetGrayNumColor(System.Drawing.Color posClr) 
-        { 
-            return (posClr.R * 19595 + posClr.G * 38469 + posClr.B * 7472) >> 16; 
-        } 
- 
-        /// <summary> 
-        /// 灰度轉換,逐點方式 
-        /// </summary> 
-        public void GrayByPixels() 
-        { 
-            for (int i = 0; i < bmpobj.Height; i++) 
-            { 
-                for (int j = 0; j < bmpobj.Width; j++) 
-                { 
-                    int tmpValue = GetGrayNumColor(bmpobj.GetPixel(j, i)); 
-                    bmpobj.SetPixel(j, i, Color.FromArgb(tmpValue, tmpValue, tmpValue)); 
-                } 
-            } 
-        } 
- 
 
 
 //-------------------------------------------------------------

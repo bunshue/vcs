@@ -31,9 +31,6 @@ namespace WindowsFormsApplication1tttt
 {
     public partial class Form1 : Form
     {
-        private System.Xml.XmlDocument mXmlDoc;
-        private System.Xml.XmlDocument doc;
-
         public Form1()
         {
             InitializeComponent();
@@ -41,14 +38,8 @@ namespace WindowsFormsApplication1tttt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.button1.Text = "生成xml";
-            this.button2.Text = "生成doc";
-            this.button3.Text = "加載doc";
-            this.button4.Text = "加載xml";
-
-
-
-
+            this.button3.Text += "   加載doc";
+            this.button4.Text += "   加載xml";
         }
 
         /// <summary>
@@ -58,55 +49,7 @@ namespace WindowsFormsApplication1tttt
         /// <param name="e"></param>
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            mXmlDoc = null;
-            doc = null;
         }
-
-        /// <summary>
-        /// 把加載的Office文件轉換為xml文件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, System.EventArgs e)
-        {
-            saveFileDialog1.Filter = "xml 文件|*.xml";//設置打開對話框的文件過濾條件
-            saveFileDialog1.Title = "保存成 xml 文件";//設置打開對話框的標題
-            saveFileDialog1.FileName = "";
-            saveFileDialog1.ShowDialog();//打開對話框
-            if (saveFileDialog1.FileName != "")//檢測用戶是否輸入了保存文件名
-            {
-                mXmlDoc.Save(saveFileDialog1.FileName);//用私有對象mXmlDoc保存文件,mXmlDoc在前面聲明過
-                MessageBox.Show("保存成功");
-            }
-        }
-
-        /// <summary>
-        /// 把加載的xml文件轉換為Office文件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, System.EventArgs e)
-        {
-            //從私有對象dox裡選取me節點,這裡的一些對xml對象的操作詳細說明可以參考msdn以獲取更多信息
-            XmlNode node = doc.DocumentElement.SelectSingleNode("me");
-            XmlElement ele = (XmlElement)node;//獲取一個xml元素
-            string pic = ele.GetAttribute("aa");//獲取ele元素的aa屬性並報訊在一個臨時字符串變量pic
-            byte[] bytes = Convert.FromBase64String(pic);//聲明一個byte[]用來存放Base64解碼轉換過來的數據流
-
-            //從保存對話框裡獲取文件保存地址
-            saveFileDialog1.Filter = "Office Documents(*.doc, *.xls, *.ppt)|*.doc;*.xls;*.ppt";
-            saveFileDialog1.Title = "保存成 office 文件";
-            saveFileDialog1.FileName = "";
-            saveFileDialog1.ShowDialog();
-            if (saveFileDialog1.FileName != "")
-            {
-                //創建文件流並保存
-                FileStream outfile = new System.IO.FileStream(saveFileDialog1.FileName, System.IO.FileMode.CreateNew);
-                outfile.Write(bytes, 0, (int)bytes.Length);
-                MessageBox.Show("保存成功");
-            }
-        }
-
 
         /// <summary>
         /// 加載office文件並編碼序列花為一個XmlDocument變量
@@ -115,26 +58,28 @@ namespace WindowsFormsApplication1tttt
         /// <param name="e"></param>
         private void button3_Click(object sender, System.EventArgs e)
         {
-            string strFileName;
-            openFileDialog1.Filter = "Office Documents(*.doc, *.xls, *.ppt)|*.doc;*.xls;*.ppt";
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.FileName = "";
-            openFileDialog1.ShowDialog();
-            strFileName = openFileDialog1.FileName;
-            if (strFileName.Length != 0)
-            {
-                System.IO.FileStream inFile = new FileStream(strFileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-                byte[] binaryData = new byte[inFile.Length];
-                inFile.Read(binaryData, 0, (int)inFile.Length);
-                string mStr = Convert.ToBase64String(binaryData);
-                string hh = mStr;
-                mXmlDoc = new System.Xml.XmlDocument();
+            string filename1 = @"C:\______test_files\__RW\_word\Step.doc";
+            FileStream inFile = new FileStream(filename1, FileMode.Open, FileAccess.Read);
+            byte[] binaryData = new byte[inFile.Length];
+            inFile.Read(binaryData, 0, (int)inFile.Length);
+            string mStr = Convert.ToBase64String(binaryData);
+            string hh = mStr;
+            XmlDocument mXmlDoc = new System.Xml.XmlDocument();
 
-                mStr = string.Format("<wawa><me aa=\"{0}\"/></wawa>", mStr);
-                mXmlDoc.LoadXml(mStr);
-                MessageBox.Show("加載成功");
-            }
+            mStr = string.Format("<wawa><me aa=\"{0}\"/></wawa>", mStr);
+            mXmlDoc.LoadXml(mStr);
+
+            richTextBox1.Text += "doc轉XmlDocument變量 成功\n";
+
+
+            richTextBox1.Text += "另存成xml檔\n";
+            string filename2 = Application.StartupPath + "\\xml_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xml";
+
+            mXmlDoc.Save(filename2);//用私有對象mXmlDoc保存文件,mXmlDoc在前面聲明過
+            richTextBox1.Text += "保存成功\n";
         }
+
+
         /// <summary>
         /// 加載xml文件到私有對象dox
         /// </summary>
@@ -142,24 +87,27 @@ namespace WindowsFormsApplication1tttt
         /// <param name="e"></param>
         private void button4_Click(object sender, System.EventArgs e)
         {
-            string strFileName;
-            openFileDialog1.Filter = "xml 文件|*.xml";
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.FileName = "";
-            openFileDialog1.ShowDialog();
-            strFileName = openFileDialog1.FileName;
-            //If the user does not cancel, open the document.
-            if (strFileName.Length != 0)
-            {
-                doc = new XmlDocument();
-                doc.Load(strFileName);
-                MessageBox.Show("加載成功");
-            }
+            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1.xml";
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename);
+            richTextBox1.Text += "加載成功\n";
 
 
+            //把加載的xml文件轉換為Office文件
+            //從私有對象dox裡選取me節點,這裡的一些對xml對象的操作詳細說明可以參考msdn以獲取更多信息
+            XmlNode node = doc.DocumentElement.SelectSingleNode("book");
+            XmlElement ele = (XmlElement)node;//獲取一個xml元素
+            string pic = ele.GetAttribute("title");//獲取ele元素的aa屬性並報訊在一個臨時字符串變量pic
+            byte[] bytes = Convert.FromBase64String(pic);//聲明一個byte[]用來存放Base64解碼轉換過來的數據流
 
+
+            richTextBox1.Text += "另存成doc檔\n";
+            string filename2 = Application.StartupPath + "\\doc_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
+
+            //創建文件流並保存
+            FileStream outfile = new FileStream(filename2, FileMode.CreateNew);
+            outfile.Write(bytes, 0, (int)bytes.Length);
+            richTextBox1.Text += "保存成功\n";
         }
     }
 }
-
-

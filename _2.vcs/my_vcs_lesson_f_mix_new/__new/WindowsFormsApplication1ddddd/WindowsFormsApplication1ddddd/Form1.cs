@@ -24,17 +24,15 @@ namespace WindowsFormsApplication1ddddd
 
         }
 
-        /// <summary>
-        /// 畫曲線圖
-        /// </summary>
-        /// <param name="dsParameter"></param>
-        /// <returns></returns>
-        public override Bitmap DrawImage(DataSet dsParameter)
+        private void button1_Click(object sender, EventArgs e)
         {
+            //畫曲線圖
+
             Curve2D cuv2D = new Curve2D();
 
             cuv2D.Fit();
-            return cuv2D.CreateImage();
+            Bitmap bitmap1 = cuv2D.CreateImage();
+            pictureBox1.Image = bitmap1;
         }
     }
 

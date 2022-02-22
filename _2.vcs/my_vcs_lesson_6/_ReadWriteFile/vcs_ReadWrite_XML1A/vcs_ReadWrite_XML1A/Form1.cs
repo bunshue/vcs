@@ -138,9 +138,9 @@ namespace vcs_ReadWrite_XML1A
         }
 
         //XML操作0
-        string filename0 = "C:\\______test_files\\__RW\\_xml\\vcs_ReadWrite_XML1.xml";
-        string filename0_add = "C:\\______test_files\\__RW\\_xml\\vcs_ReadWrite_XML1_add.xml";
-        string filename0_delete = "C:\\______test_files\\__RW\\_xml\\vcs_ReadWrite_XML1_delete.xml";
+        string filename0 = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1.xml";
+        string filename0_add = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1_add.xml";
+        string filename0_delete = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML1_delete.xml";
 
         private void button00_Click(object sender, EventArgs e)
         {
@@ -334,7 +334,7 @@ namespace vcs_ReadWrite_XML1A
         //XML操作1
         private void button10_Click(object sender, EventArgs e)
         {
-            string filename1a = "C:\\______test_files\\__RW\\_xml\\宅之力R.xml";
+            string filename1a = @"C:\______test_files\__RW\_xml\宅之力R.xml";
             if (File.Exists(filename1a))
             {
                 XmlDocument document = new XmlDocument();
@@ -354,7 +354,7 @@ namespace vcs_ReadWrite_XML1A
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string filename1b = "C:\\______test_files\\__RW\\_xml\\宅之力W.xml";
+            string filename1b = @"C:\______test_files\__RW\_xml\宅之力W.xml";
 
             XmlDocument document = new XmlDocument();
             document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", ""));//將宣告節點加入document中
@@ -385,7 +385,7 @@ namespace vcs_ReadWrite_XML1A
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string filename1c = "C:\\______test_files\\__RW\\_xml\\仙人的設計之路2.xml";
+            string filename1c = @"C:\______test_files\__RW\_xml\仙人的設計之路2.xml";
             if (File.Exists(filename1c))
             {
                 XmlDocument document = new XmlDocument();

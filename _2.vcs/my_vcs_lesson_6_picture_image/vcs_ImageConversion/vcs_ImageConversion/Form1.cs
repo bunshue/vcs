@@ -218,4 +218,53 @@ namespace vcs_ImageConversion
 
 
 
+/*
+            //bmp2jpg
+            Bitmap bitmap;
+            string filename1 = @"C:\______test_files\bear.bmp";
+            bitmap = new Bitmap(filename1);
+            pictureBox1.Image = bitmap;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            FileInfo f1 = new FileInfo(filename1);
+
+            string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            //string fileName = saveFileDialog.FileName;
+            bitmap.Save(filename2, ImageFormat.Jpeg);
+            FileInfo f2 = new FileInfo(filename2);
+
+            richTextBox1.Text += "圖像轉換 : " + f1.Name + " 轉換成 " + f2.Name + "\n";
+
+
+            //jpg2bmp
+            Bitmap bitmap;
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            bitmap = new Bitmap(filename1);
+            pictureBox1.Image = bitmap;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            FileInfo f1 = new FileInfo(filename1);
+
+            string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            //string fileName = saveFileDialog.FileName;
+            bitmap.Save(filename2, ImageFormat.Bmp);
+            FileInfo f2 = new FileInfo(filename2);
+
+            richTextBox1.Text += "圖像轉換 : " + f1.Name + " 轉換成 " + f2.Name + "\n";
+
+            //ico2bmp
+            Bitmap bitmap;
+            string filename1 = @"C:\______test_files\_icon\唐.ico";
+            bitmap = new Bitmap(filename1);
+            pictureBox1.Image = bitmap;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            FileInfo f1 = new FileInfo(filename1);
+
+            string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            //string fileName = saveFileDialog.FileName;
+            bitmap.Save(filename2, ImageFormat.Bmp);
+            FileInfo f2 = new FileInfo(filename2);
+
+            richTextBox1.Text += "圖像轉換 : " + f1.Name + " 轉換成 " + f2.Name + "\n";
+
+*/
+
 

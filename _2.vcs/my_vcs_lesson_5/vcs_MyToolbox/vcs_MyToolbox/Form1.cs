@@ -447,8 +447,20 @@ namespace vcs_MyToolbox
 
                 //用Adobe開啟pdf檔案
                 string filename = "C:\\______test_files\\__RW\\_pdf\\note_Linux_workstation.pdf";
-                Process process;
-                process = Process.Start(filename);
+                //Process process;
+                //process = Process.Start(filename);
+                int page = 5;
+
+                if (File.Exists(filename) == true)
+                {
+                    Form2 fm = new Form2(filename, page);
+                    fm.Show();
+                    flag_already_use_webbrowser = true;
+                }
+                else
+                {
+
+                }
             }
             else if (sender.Equals(btn_22))
             {

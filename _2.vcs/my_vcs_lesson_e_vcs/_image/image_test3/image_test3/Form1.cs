@@ -56,54 +56,14 @@ namespace image_test3
 
         private void button0_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap;
-            string filename1 = @"C:\______test_files\bear.bmp";
-            bitmap = new Bitmap(filename1);
-            pictureBox1.Image = bitmap;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            FileInfo f1 = new FileInfo(filename1);
-
-            string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            //string fileName = saveFileDialog.FileName;
-            bitmap.Save(filename2, ImageFormat.Jpeg);
-            FileInfo f2 = new FileInfo(filename2);
-
-            richTextBox1.Text += "圖像轉換 : " + f1.Name + " 轉換成 " + f2.Name + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap;
-            string filename1 = @"C:\______test_files\picture1.jpg";
-            bitmap = new Bitmap(filename1);
-            pictureBox1.Image = bitmap;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            FileInfo f1 = new FileInfo(filename1);
-
-            string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            //string fileName = saveFileDialog.FileName;
-            bitmap.Save(filename2, ImageFormat.Bmp);
-            FileInfo f2 = new FileInfo(filename2);
-
-            richTextBox1.Text += "圖像轉換 : " + f1.Name + " 轉換成 " + f2.Name + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //ico2bmp
-            Bitmap bitmap;
-            string filename1 = @"C:\______test_files\_icon\唐.ico";
-            bitmap = new Bitmap(filename1);
-            pictureBox1.Image = bitmap;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            FileInfo f1 = new FileInfo(filename1);
-
-            string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            //string fileName = saveFileDialog.FileName;
-            bitmap.Save(filename2, ImageFormat.Bmp);
-            FileInfo f2 = new FileInfo(filename2);
-
-            richTextBox1.Text += "圖像轉換 : " + f1.Name + " 轉換成 " + f2.Name + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -112,7 +72,6 @@ namespace image_test3
 
         private void button4_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button5_Click(object sender, EventArgs e)
