@@ -634,7 +634,10 @@ namespace vcs_HtmlAgility
                         temp = temp.Replace(",", ",\n").Replace("&nbsp;", " ");
                     }
                 }
-                catch (Exception e) { }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
                 res = temp;
                 return res;
             }
@@ -949,18 +952,6 @@ namespace vcs_HtmlAgility
 
         private void button24_Click(object sender, EventArgs e)
         {
-            /*
-            string url = @"../../html/My_Link2.html";
-
-            //get HtmlAgilityPack.HtmlDocument object   
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            //load HTML   
-            doc.LoadHtml(url);
-            //get HtmlNode by ID   
-            HtmlNode navNode = doc.GetElementbyId("TD");
-            richTextBox1.Text += "ccccc" + navNode.InnerHtml + "\n";
-            */
-
             //通过HtmlDocument类加载html数据
             string url = @"http://www.zhishilin.com";
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
@@ -1595,7 +1586,20 @@ namespace vcs_HtmlAgility
 
         private void bt_22_Click(object sender, EventArgs e)
         {
+            string url = @"../../html/My_Link2.html";
 
+            //get HtmlAgilityPack.HtmlDocument object   
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            //load HTML   
+            doc.LoadHtml(url);
+            //get HtmlNode by ID   
+
+            //fail
+
+            return;
+
+            HtmlNode navNode = doc.GetElementbyId("CENTER");
+            richTextBox1.Text += "ccccc" + navNode.InnerHtml + "\n";
         }
 
         private void bt_23_Click(object sender, EventArgs e)
