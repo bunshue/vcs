@@ -20,7 +20,6 @@ namespace ScanPort
             InitializeComponent();
         }
 
-        #region 实例化类对象和公共变量
         //实例化DirectoryEntry对象，以便获得局域网组名和计算机名
         DirectoryEntry DEMain = new DirectoryEntry("WinNT:");
         TcpClient TClient = null;       //实例化连接侦听对象
@@ -30,7 +29,6 @@ namespace ScanPort
         int intport = 0;                //记录已用端口号
         int intstart = 0;               //扫描的开始端口号
         int intend = 0;                 //扫描的结束端口号
-        #endregion
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -151,7 +149,6 @@ namespace ScanPort
             }
         }
 
-        #region 扫描端口号
         /// <summary>
         /// 扫描端口号
         /// </summary>
@@ -171,6 +168,5 @@ namespace ScanPort
                 }
             }
         }
-        #endregion
     }
 }

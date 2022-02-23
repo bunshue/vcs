@@ -111,12 +111,12 @@ namespace vcs_HtmlAgility
             x_st = 20;
             y_st = 20;
             dx = 200;
-            dy = 75;
+            dy = 360;
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -1095,7 +1095,17 @@ namespace vcs_HtmlAgility
             //指定來源網頁
             WebClient wc = new WebClient();
             //將網頁來源資料暫存到記憶體內
-            MemoryStream ms = new MemoryStream(wc.DownloadData(url));    //fail在此
+            MemoryStream ms = new MemoryStream(wc.DownloadData(url));
+
+            /* 將網頁顯示出來
+            string result = "";
+            StreamReader reader = new StreamReader(ms);
+            result = reader.ReadToEnd();
+            reader.Close();
+
+            richTextBox1.Text += result + "\n";
+
+            */
 
             //拷貝來的長短XPATH要包在 @"..." 以內
             //拷貝來的短XPATH要在 " 前多一個 "

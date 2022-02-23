@@ -69,9 +69,9 @@
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(133, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(142, 21);
+            this.label1.Size = new System.Drawing.Size(256, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "冬奥会倒计时";
+            this.label1.Text = "2024年巴黎奧運倒數計時";
             // 
             // groupBox1
             // 
@@ -87,7 +87,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(120, 30);
+            this.textBox2.Location = new System.Drawing.Point(162, 30);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(235, 22);
             this.textBox2.TabIndex = 3;
@@ -98,13 +98,13 @@
             this.label3.ForeColor = System.Drawing.Color.Blue;
             this.label3.Location = new System.Drawing.Point(13, 36);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 12);
+            this.label3.Size = new System.Drawing.Size(143, 12);
             this.label3.TabIndex = 2;
-            this.label3.Text = "冬奥会开幕时间：";
+            this.label3.Text = "2024巴黎奧運會開幕時間 :";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(120, 6);
+            this.textBox1.Location = new System.Drawing.Point(162, 6);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(235, 22);
             this.textBox1.TabIndex = 1;
@@ -138,7 +138,7 @@
             this.groupBox2.Size = new System.Drawing.Size(398, 115);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "距离冬奥会开幕还有";
+            this.groupBox2.Text = "距離2024年巴黎奧運開幕還有";
             // 
             // textday
             // 
@@ -342,7 +342,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "使用Timer组件实现冬奥会倒计时";
+            this.Text = "使用Timer组件实现奧運會倒计时";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

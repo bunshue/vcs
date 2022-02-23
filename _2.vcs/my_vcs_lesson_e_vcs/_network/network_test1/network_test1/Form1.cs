@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Xml;
-using System.Net;   //for HttpWebRequest
+using System.Net;   //for HttpWebRequest, WebClient
 using System.Text.RegularExpressions;
 using System.Management;
 using System.IO;
@@ -162,9 +162,9 @@ namespace network_test1
         private void button3_Click(object sender, EventArgs e)
         {
             //讀取局域網路由的IP地址
-            System.Net.WebClient client = new System.Net.WebClient();
-            client.Encoding = System.Text.Encoding.Default;
-            string lip = client.DownloadString("http://www.ip138.com/ip2city.asp");
+            WebClient wc = new WebClient(); // 建立 WebClient
+            wc.Encoding = Encoding.Default; // 指定 WebClient 的編碼
+            string lip = wc.DownloadString("http://www.ip138.com/ip2city.asp");
             //string sip = reply.Substring(reply.IndexOf("您的IP地址是"), reply.IndexOf("</center>") - reply.IndexOf("您的IP地址是"));
             //MessageBox.Show(sip);
 

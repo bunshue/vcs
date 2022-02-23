@@ -28,8 +28,8 @@ namespace vcs_WebClient3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var client = new System.Net.WebClient();
-            byte[] buffer = client.DownloadData("http://k-db.com/?p=all&download=csv");
+            WebClient wc = new WebClient();     // 建立 WebClient
+            byte[] buffer = wc.DownloadData("http://k-db.com/?p=all&download=csv");
             string str = Encoding.Default.GetString(buffer);
             string[] rows = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
@@ -55,13 +55,11 @@ namespace vcs_WebClient3
                     };
                 */
             });
-
-
         }
 
         public string[] GetCSVData()
         {
-            var wc = new WebClient();
+            WebClient wc = new WebClient();     // 建立 WebClient
             byte[] buffer = wc.DownloadData("http://k-db.com/?p=all&download=csv");
             string str = Encoding.Default.GetString(buffer);
             return str.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
@@ -80,7 +78,7 @@ namespace vcs_WebClient3
 
         private void SendGETRequest(string url)
         {
-            using (WebClient wc = new WebClient())
+            using (WebClient wc = new WebClient())  // 建立 WebClient
             {
                 wc.DownloadStringAsync(new Uri(url));
             }
@@ -91,7 +89,7 @@ namespace vcs_WebClient3
             //string sourceResource = "http://blogs.telerik.com/images/default-source/miroslav-miroslav/super_ninja.png?sfvrsn=2";
             string sourceResource = @"https://www.telerik.com/sfimages/default-source/blogs/super_ninja-png";
             string localFileName = Path.GetFileName(sourceResource);
-            using (WebClient wc = new WebClient())
+            using (WebClient wc = new WebClient())  // 建立 WebClient
             {
                 try
                 {
@@ -124,10 +122,9 @@ namespace vcs_WebClient3
 
         private void button4_Click(object sender, EventArgs e)
         {
-            WebClient wc = new WebClient();
+            WebClient wc = new WebClient();     // 建立 WebClient
             try
             {
-
                 //wc.DownloadFile(url, fileName);
                 wc.DownloadFile("http://www.devbg.org/img/Logo-BASD.jpg", @"C:\dddddddddd\txt.jpg");
                 richTextBox1.Text += "下載完成\n";
@@ -150,12 +147,11 @@ namespace vcs_WebClient3
             {
                 Console.WriteLine("{0} - {1}", allExp.GetType(), allExp.Message);
             }
-
         }
 
         public string SendSms(List<string> mobiles)
         {
-            using (var wc = new WebClient())
+            using (WebClient wc = new WebClient())    // 建立 WebClient
             {
                 try
                 {
@@ -179,7 +175,6 @@ namespace vcs_WebClient3
 
                     return ex.Message;
                 }
-
             }
         }
 
@@ -191,7 +186,6 @@ namespace vcs_WebClient3
             mobiles.Add("0922188156");
             string result = SendSms(mobiles);
             richTextBox1.Text += "result = " + result + "\n";
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -206,7 +200,7 @@ namespace vcs_WebClient3
             try
             {
                 string xml;
-                using (WebClient wc = new WebClient())
+                using (WebClient wc = new WebClient())  // 建立 WebClient
                 {
                     xml = wc.DownloadString("url" + "/main.xml");
                 }
@@ -239,13 +233,11 @@ namespace vcs_WebClient3
         private void button7_Click(object sender, EventArgs e)
         {
             LoadData();
-
         }
-
 
         public void LoadData()
         {
-            WebClient wc = new WebClient();
+            WebClient wc = new WebClient();     // 建立 WebClient
             wc.DownloadStringAsync(new Uri("http://data.taipei.gov.tw/opendata/apply/json/RjQzRThDNjUtMzU3OS00MTU5LUEwOUEtMUI2NzFDOTE5NDcz"));
             wc.DownloadStringCompleted += wc_DownloadStringCompleted;
         }
@@ -256,4 +248,3 @@ namespace vcs_WebClient3
         }
     }
 }
-

@@ -13,12 +13,23 @@ namespace TimeNow
     public partial class Frm_Main : Form
     {
         //目標時間
-        DateTime dt_target = Convert.ToDateTime(Convert.ToDateTime("2024-2-4 00:00:00"));
+        DateTime dt_target = Convert.ToDateTime(Convert.ToDateTime("2024-7-26 00:00:00"));
 
         public Frm_Main()
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //显示冬奥会时间
+            textBox2.Text = "2024/7/26  00:00:00" + "　　星期五";
+            label10.Text = dt_target.ToString();
+
+
+            timer1.Enabled = true;//开启计时器
+        }
+
 
         //变量用于存储年、月、日、时、分、秒
         public long LogYear, logMonth, logDay, logHour, logMinte, logSencon;
@@ -60,14 +71,5 @@ namespace TimeNow
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //显示冬奥会时间
-            textBox2.Text = "2022/2/4  00:00:00" + "　　星期五";
-            label10.Text = dt_target.ToString();
-
-
-            timer1.Enabled = true;//开启计时器
-        }
     }
 }

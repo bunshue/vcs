@@ -86,11 +86,13 @@
             this.bt_22 = new System.Windows.Forms.Button();
             this.bt_21 = new System.Windows.Forms.Button();
             this.bt_20 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -731,11 +733,22 @@
             this.bt_20.UseVisualStyleBackColor = true;
             this.bt_20.Click += new System.EventHandler(this.bt_20_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 378);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(582, 229);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 32;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1425, 881);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox3);
@@ -752,6 +765,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -816,6 +830,7 @@
         private System.Windows.Forms.Button bt_22;
         private System.Windows.Forms.Button bt_21;
         private System.Windows.Forms.Button bt_20;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

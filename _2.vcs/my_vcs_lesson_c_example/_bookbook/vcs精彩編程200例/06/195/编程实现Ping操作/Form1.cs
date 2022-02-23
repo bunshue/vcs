@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Net.NetworkInformation;
+
 namespace 编程实现Ping操作
 {
     public partial class Form1 : Form
@@ -15,6 +16,11 @@ namespace 编程实现Ping操作
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,19 +43,14 @@ namespace 编程实现Ping操作
                 }
                 else
                 {
-                    MessageBox.Show("无法Ping通");
+                    richTextBox1.Text += "無法Ping通\n";
                 }
             }
-            catch (Exception ey)
+            catch (Exception ex)
             {
-                MessageBox.Show(ey.Message);
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
+

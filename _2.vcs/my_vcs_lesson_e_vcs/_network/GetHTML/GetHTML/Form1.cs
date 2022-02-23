@@ -51,8 +51,8 @@ namespace GetHTML
 		private string GetWebClient(string url)
 		{
 			string strHTML = "";
-			WebClient myWebClient = new WebClient();
-			Stream myStream = myWebClient.OpenRead(url);
+            WebClient wc = new WebClient();     // 建立 WebClient
+			Stream myStream = wc.OpenRead(url);
 			StreamReader sr = new StreamReader(myStream, System.Text.Encoding.GetEncoding(this.txtEncoder.Text));
 			strHTML = sr.ReadToEnd();
 			myStream.Close();

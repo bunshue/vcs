@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Net;   //for WebClient
+
 //http://vip.astro.sina.com.cn/astro/view/libra
 
 
@@ -106,8 +108,6 @@ namespace vcs_WebClient2
 
         public static FateResult GetFateToday(string title)
         {
-
-
             var sInfo = Datas.SingleOrDefault(x => x.Title == title);
             if (sInfo == null)
             {
@@ -118,9 +118,11 @@ namespace vcs_WebClient2
             var result = new StarSignsUtil.FateResult();
             result.StarSign = sInfo;
 
-            var wc = new System.Net.WebClient();
-            wc.Encoding = System.Text.Encoding.UTF8;
-            var source = wc.DownloadString("http://vip.astro.sina.com.cn/astro/view/" + sInfo.Id + "/");
+            string url = @"http://vip.astro.sina.com.cn/astro/view/" + sInfo.Id + "/";
+
+            WebClient wc = new WebClient();     // 建立 WebClient
+            wc.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
+            string source = wc.DownloadString(url);
             //MessageBox.Show(sInfo.Id);
 
             var regex = new System.Text.RegularExpressions.Regex(@"<div class=[\s""']tab[\s""']><h4>(?<KEY>.*?)</h4><p>(?<VALUE>.*?)</p>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
@@ -178,4 +180,5 @@ namespace vcs_WebClient2
         }
     }
 }
+
 

@@ -286,9 +286,8 @@ namespace network_test2_http
             //取得網頁資料
             string url = "http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/188537.html";
 
-            WebClient wc = new WebClient();
-
-            wc.Encoding = System.Text.Encoding.UTF8;
+            WebClient wc = new WebClient();     // 建立 WebClient
+            wc.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
 
             string str = wc.DownloadString(url);
 
@@ -304,7 +303,7 @@ namespace network_test2_http
         private string getHtml(string url)
         //url是要訪問的網站地址，charSet是目標網頁的編碼，如果傳入的是null或者""，那就自動分析網頁的編碼
         {
-            WebClient myWebClient = new WebClient();
+            WebClient wc = new WebClient();     // 建立 WebClient
             //創建WebClient實例myWebClient 
             // 需要注意的：
             //有的網頁可能下不下來，有種種原因比如需要cookie,編碼問題等等
@@ -312,12 +311,12 @@ namespace network_test2_http
             // webclient.Headers.Add("Cookie", cookie); 
             //這樣可能需要一些重載方法。根據需要寫就可以了
             //獲取或設置用於對向 Internet 資源的請求進行身份驗證的網絡憑據。
-            myWebClient.Credentials = CredentialCache.DefaultCredentials;
+            wc.Credentials = CredentialCache.DefaultCredentials;
             //如果服務器要驗證用戶名,密碼 
             //NetworkCredential mycred = new NetworkCredential(struser, strpassword);
             //myWebClient.Credentials = mycred; 
             //從資源下載數據並返回字節數組。（加@是因為網址中間有"/"符號）
-            byte[] myDataBuffer = myWebClient.DownloadData(url);
+            byte[] myDataBuffer = wc.DownloadData(url);
             string strWebData = Encoding.Default.GetString(myDataBuffer);
             //獲取網頁字符編碼描述信息
             return strWebData;
@@ -434,7 +433,7 @@ namespace network_test2_http
                 var stream = httpWebResponse.GetResponseStream();
                 if (stream != null)
                 {
-                    var streamReader = new StreamReader(stream, System.Text.Encoding.UTF8);
+                    var streamReader = new StreamReader(stream, Encoding.UTF8);
                     htmlContent = streamReader.ReadToEnd();
                     streamReader.Close();
                     streamReader.Dispose();
@@ -482,7 +481,7 @@ namespace network_test2_http
             HttpWebRequest _WebRequest = (HttpWebRequest)WebRequest.Create(_requestUrl);
             _WebRequest.Method = "GET";
             WebResponse _WebResponse = _WebRequest.GetResponse();
-            StreamReader _ResponseStream = new StreamReader(_WebResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("gb2312"));
+            StreamReader _ResponseStream = new StreamReader(_WebResponse.GetResponseStream(), Encoding.GetEncoding("gb2312"));
             _StrResponse = _ResponseStream.ReadToEnd();
             _WebResponse.Close();
             _ResponseStream.Close();
@@ -621,14 +620,14 @@ namespace network_test2_http
         private void button17_Click(object sender, EventArgs e)
         {
             //獲取網頁內容 2
-            WebClient client = new WebClient();
+            WebClient wc = new WebClient();     // 建立 WebClient
 
             // Add a user agent header in case the
             // requested URI contains a query.
 
-            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+            wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
 
-            Stream data = client.OpenRead("http://www.hao123.com/");
+            Stream data = wc.OpenRead("http://www.hao123.com/");
             StreamReader reader = new StreamReader(data, Encoding.Default); // 注：漢字需要轉為UTF8格式
             string s = reader.ReadToEnd();
             //Response.Write(s);
@@ -640,9 +639,9 @@ namespace network_test2_http
         private void button18_Click(object sender, EventArgs e)
         {
             //獲取網頁內容 3
-            WebClient client = new WebClient();
+            WebClient wc = new WebClient();     // 建立 WebClient
             //client.DownloadFile("http://www.hao123.com%22,%22123.htm/");
-            string reply = client.DownloadString("http://www.hao123.com/");
+            string reply = wc.DownloadString("http://www.hao123.com/");
             richTextBox1.Text += "\n" + reply + "\n";
             //Response.Write(reply);
         }
@@ -678,9 +677,9 @@ namespace network_test2_http
             //獲取遠程網頁中的所有鏈接URL（網絡蜘蛛實現原理）
             //使用System.Net.WebClient類獲取遠程網頁內容，然後使用URL正則表達式分析Html代碼中的鏈接。
 
-            WebClient client = new WebClient();
-            byte[] page = client.DownloadData("http://news.163.com");
-            string content = System.Text.Encoding.UTF8.GetString(page);
+            WebClient wc = new WebClient();     // 建立 WebClient
+            byte[] page = wc.DownloadData("http://news.163.com");
+            string content = Encoding.UTF8.GetString(page);
             string regex = "href=[\\\"\\\'](http:\\/\\/|\\.\\/|\\/)?\\w+(\\.\\w+)*(\\/\\w+(\\.\\w+)?)*(\\/|\\?\\w*=\\w*(&\\w*=\\w*)*)?[\\\"\\\']";
             Regex re = new Regex(regex);
             MatchCollection matches = re.Matches(content);
@@ -730,7 +729,7 @@ namespace network_test2_http
             //reader.ReadToEnd() 表示取得网页的源码
 
             FileStream fs = new FileStream(txtURL, FileMode.Create);
-            byte[] data = System.Text.Encoding.Default.GetBytes(reader.ReadToEnd());
+            byte[] data = Encoding.Default.GetBytes(reader.ReadToEnd());
             //开始写入
             fs.Write(data, 0, data.Length);
             //清空缓冲区、关闭流
@@ -911,7 +910,7 @@ namespace network_test2_http
         static void download_file()
         {
             string url = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Breathe-face-smile.svg/1200px-Breathe-face-smile.svg.png";
-            using (WebClient wc = new WebClient())
+            using (WebClient wc = new WebClient())  // 建立 WebClient
             {
                 wc.DownloadFile(new Uri(url), "Image.png");
             }
@@ -943,7 +942,7 @@ namespace network_test2_http
         private void button26_Click(object sender, EventArgs e)
         {
             //在 C# 中使用 DownloadFile() 方法從一個 URL 下載檔案
-            WebClient wc = new WebClient();
+            WebClient wc = new WebClient();     // 建立 WebClient
             wc.DownloadFile("https://wiki.linuxfoundation.org/_media/wiki/logo.png", "aaaaa.png");
         }
 
@@ -1155,7 +1154,7 @@ namespace network_test2_http
             string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/188350.html";
             //產業群首頁
             string tempGroupData = GetHttpData(url);
-            using (StreamWriter sw = new StreamWriter(filename, false, System.Text.Encoding.GetEncoding("utf-8")))
+            using (StreamWriter sw = new StreamWriter(filename, false, Encoding.GetEncoding("utf-8")))
             {
                 sw.Write(tempGroupData);
                 sw.Flush();
@@ -1178,7 +1177,7 @@ namespace network_test2_http
             {
                 if (oWebRps != null)
                 {
-                    StreamReader oStreamRd = new StreamReader(oWebRps.GetResponseStream(), System.Text.Encoding.GetEncoding("utf-8"));
+                    StreamReader oStreamRd = new StreamReader(oWebRps.GetResponseStream(), Encoding.GetEncoding("utf-8"));
                     sRslt = oStreamRd.ReadToEnd();
                     oStreamRd.Close();
                     oWebRps.Close();
@@ -1199,9 +1198,9 @@ namespace network_test2_http
         private string GetWebClient(string url)
         {
             string strHTML = "";
-            WebClient myWebClient = new WebClient();
-            Stream myStream = myWebClient.OpenRead(url);
-            StreamReader sr = new StreamReader(myStream, System.Text.Encoding.GetEncoding("utf-8"));
+            WebClient wc = new WebClient();     // 建立 WebClient
+            Stream myStream = wc.OpenRead(url);
+            StreamReader sr = new StreamReader(myStream, Encoding.GetEncoding("utf-8"));
             strHTML = sr.ReadToEnd();
             myStream.Close();
             return strHTML;
@@ -1222,7 +1221,7 @@ namespace network_test2_http
             WebRequest myReq = WebRequest.Create(uri);
             WebResponse result = myReq.GetResponse();
             Stream receviceStream = result.GetResponseStream();
-            StreamReader readerOfStream = new StreamReader(receviceStream, System.Text.Encoding.GetEncoding("utf-8"));
+            StreamReader readerOfStream = new StreamReader(receviceStream, Encoding.GetEncoding("utf-8"));
             string strHTML = readerOfStream.ReadToEnd();
             readerOfStream.Close();
             receviceStream.Close();
@@ -1251,7 +1250,7 @@ namespace network_test2_http
             myReq.Headers.Add("Accept-Language", "zh-cn,en-us;q=0.5");
             HttpWebResponse result = (HttpWebResponse)myReq.GetResponse();
             Stream receviceStream = result.GetResponseStream();
-            StreamReader readerOfStream = new StreamReader(receviceStream, System.Text.Encoding.GetEncoding("utf-8"));
+            StreamReader readerOfStream = new StreamReader(receviceStream, Encoding.GetEncoding("utf-8"));
             string strHTML = readerOfStream.ReadToEnd();
             readerOfStream.Close();
             receviceStream.Close();
@@ -1291,8 +1290,9 @@ namespace network_test2_http
         private void button37_Click(object sender, EventArgs e)
         {
             //抓取網頁資料 2
-            WebClient wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
+            WebClient wc = new WebClient();     // 建立 WebClient
+            wc.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
+
             string html = wc.DownloadString("http://www.lagou.com/");
 
             richTextBox1.Text += html + "\n";
@@ -1345,13 +1345,13 @@ namespace network_test2_http
             {
                 if (url != string.Empty)
                 {
-                    WebClient webClient = new WebClient();
+                    WebClient wc = new WebClient();     // 建立 WebClient
 
                     //設置網絡憑證為系統憑證
-                    webClient.Credentials = CredentialCache.DefaultCredentials;
+                    wc.Credentials = CredentialCache.DefaultCredentials;
 
                     //獲取指定URI的網頁的源代碼
-                    byte[] byteDataBuffer = webClient.DownloadData(url);
+                    byte[] byteDataBuffer = wc.DownloadData(url);
 
                     string htmlCode = "";
                     if (EncodingType == "UTF8")
@@ -1395,9 +1395,9 @@ namespace network_test2_http
         /// <returns>返回DownloadData</returns>
         public static string GetSearchHtml(string url)
         {
-            WebClient MyWebClient = new WebClient();
-            MyWebClient.Credentials = CredentialCache.DefaultCredentials;   //獲取或設置用於對向Internet資源的請求進行身份驗證的網絡憑據。
-            Byte[] pageData = MyWebClient.DownloadData(url);                //從指定url下載數據
+            WebClient wc = new WebClient();     // 建立 WebClient
+            wc.Credentials = CredentialCache.DefaultCredentials;   //獲取或設置用於對向Internet資源的請求進行身份驗證的網絡憑據。
+            Byte[] pageData = wc.DownloadData(url);                //從指定url下載數據
             return Encoding.UTF8.GetString(pageData);                       //獲取網站頁面采用的是UTF-8
         }
 

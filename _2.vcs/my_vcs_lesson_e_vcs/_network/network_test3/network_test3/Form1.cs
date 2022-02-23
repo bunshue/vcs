@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 
-using System.Net;   //for HttpWebRequest
+using System.Net;   //for HttpWebRequest, 
 
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -191,8 +191,8 @@ namespace network_test3
         {
             //獲取遠程網頁中的所有鏈接URL
             string url = textBox1.Text;
-            System.Net.WebClient client = new WebClient();
-            byte[] page = client.DownloadData(url);
+            WebClient wc = new WebClient();     // 建立 WebClient
+            byte[] page = wc.DownloadData(url);
             string content = System.Text.Encoding.UTF8.GetString(page);
             string regex = "href=[\\\"\\\'](http:\\/\\/|\\.\\/|\\/)?\\w+(\\.\\w+)*(\\/\\w+(\\.\\w+)?)*(\\/|\\?\\w*=\\w*(&\\w*=\\w*)*)?[\\\"\\\']";
             Regex re = new Regex(regex);

@@ -60,10 +60,10 @@ namespace vcs_WebClient
             string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
             //string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
 
-            WebClient client1 = new WebClient();     // 建立 webclient
+            WebClient wc1 = new WebClient();     // 建立 WebClient
             try  // Get the response string from the URL.
             {
-                string data = client1.DownloadString(url_file1);          //抓網頁資料到記憶體
+                string data = wc1.DownloadString(url_file1);          //抓網頁資料到記憶體
                 //richTextBox1.Text += data + "\n";
                 richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
             }
@@ -81,11 +81,11 @@ namespace vcs_WebClient
 
             string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
 
-            WebClient client3 = new WebClient();     // 建立 webclient
+            WebClient wc3 = new WebClient();     // 建立 WebClient
             try  // Get the response string from the URL.
             {
                 // Get the response string from the URL.
-                string xml = client3.DownloadString(url_weather);        //抓資料
+                string xml = wc3.DownloadString(url_weather);        //抓資料
                 //richTextBox1.Text += "data\n" + xml + "\n";
                 richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
             }
@@ -100,11 +100,12 @@ namespace vcs_WebClient
 
             richTextBox1.Text += "\nWebClient DownloadString 3\t網路下載純文字檔案......\n";
 
-            WebClient client = new WebClient();     // 建立 webclient
+            WebClient wc = new WebClient();     // 建立 WebClient
             try
             {
+                string url1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
                 //下載純文字
-                string result = client.DownloadString("http://snowball.tartarus.org/otherlangs/english_cpp.txt");
+                string result = wc.DownloadString(url1);
                 //richTextBox1.Text += result;  //skip
                 richTextBox1.Text += "網路下載純文字檔案\tOK\n";
             }
@@ -120,14 +121,14 @@ namespace vcs_WebClient
 
             richTextBox1.Text += "\nWebClient DownloadString 4\t網路下載純文字檔案......\n";
 
-            string url = "http://jsonplaceholder.typicode.com/posts";
+            string url2 = "http://jsonplaceholder.typicode.com/posts";
 
-            WebClient client2 = new WebClient();     // 建立 webclient
-            client2.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
-            client2.Headers.Add(HttpRequestHeader.ContentType, "application/json");  // 指定 WebClient 的 Content-Type header
+            WebClient wc2 = new WebClient();     // 建立 WebClient
+            wc2.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
+            wc2.Headers.Add(HttpRequestHeader.ContentType, "application/json");  // 指定 WebClient 的 Content-Type header
 
             // 從網路 url 上取得資料
-            var result2 = client2.DownloadString(url);
+            var result2 = wc2.DownloadString(url2);
             richTextBox1.Text += result2 + "\n";
 
             richTextBox1.Text += "\nWebClient DownloadString 測試\t完成\n";
@@ -136,10 +137,10 @@ namespace vcs_WebClient
 
         private void DownloadFile(string url, string filename)
         {
-            WebClient client = new WebClient();     // 建立 webclient
+            WebClient wc = new WebClient();     // 建立 WebClient
             try
             {
-                client.DownloadFile(url, filename);     // Download the file.
+                wc.DownloadFile(url, filename);     // Download the file.
             }
             catch (WebException ex)
             {
@@ -197,7 +198,7 @@ namespace vcs_WebClient
             this.Cursor = Cursors.Default;
         }
 
-        private WebClient client = new WebClient();     // 建立 webclient
+        private WebClient wc = new WebClient();     // 建立 WebClient
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "開啟一個Thread, 下載一個網頁......\n";
@@ -221,7 +222,7 @@ namespace vcs_WebClient
 
             try
             {
-                Stream stream = client.OpenRead(url);
+                Stream stream = wc.OpenRead(url);
                 StreamReader reader = new StreamReader(stream);
 
                 FileStream outputStream = new FileStream(Path, FileMode.OpenOrCreate);
@@ -270,11 +271,11 @@ namespace vcs_WebClient
             //string url = "http://www.yahoo.com.tw";
             string web_data = "";
 
-            WebClient client1 = new WebClient();     // 建立 webclient
-            client1.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
+            WebClient wc1 = new WebClient();     // 建立 WebClient
+            wc1.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
             try
             {
-                byte[] bd = client1.DownloadData(url);
+                byte[] bd = wc1.DownloadData(url);
                 web_data = (Encoding.Default.GetString(bd));
                 richTextBox1.Text += "抓取網頁成功\n";
             }
@@ -292,7 +293,7 @@ namespace vcs_WebClient
 
             url = "http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP950.TXT";
             string result = "";
-            WebClient client2 = new WebClient();     // 建立 webclient
+            WebClient wc2 = new WebClient();     // 建立 WebClient
             try
             {
                 url = url.Trim();
@@ -301,7 +302,7 @@ namespace vcs_WebClient
                     url = "http://" + url;
                 }
 
-                MemoryStream image_stream = new MemoryStream(client2.DownloadData(url));
+                MemoryStream image_stream = new MemoryStream(wc2.DownloadData(url));
                 StreamReader reader = new StreamReader(image_stream);
                 result = reader.ReadToEnd();
                 reader.Close();
@@ -325,7 +326,7 @@ namespace vcs_WebClient
             url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
             richTextBox1.Text += "圖片所在網址 : " + url + "\n";
 
-            WebClient client3 = new WebClient();     // 建立 webclient
+            WebClient wc3 = new WebClient();     // 建立 WebClient
             try
             {
                 //圖片下載並顯示
@@ -333,7 +334,7 @@ namespace vcs_WebClient
 
                 try
                 {
-                    MemoryStream image_stream = new MemoryStream(client3.DownloadData(url));
+                    MemoryStream image_stream = new MemoryStream(wc3.DownloadData(url));
                     img = Image.FromStream(image_stream);
                 }
                 catch (WebException ex)
@@ -371,7 +372,7 @@ namespace vcs_WebClient
 
             //string url4 = "https://www.google.com.tw/";
             string url4 = "http://antwrp.gsfc.nasa.gov/apod/";
-            WebClient client4 = new WebClient();     // 建立 webclient
+            WebClient wc4 = new WebClient();     // 建立 WebClient
 
             // Download home page data.
             richTextBox1.Text += "Downloading " + url4 + " ...\n";
@@ -380,7 +381,7 @@ namespace vcs_WebClient
             //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-            byte[] data = client4.DownloadData(url4);
+            byte[] data = wc4.DownloadData(url4);
 
             // Display the downloaded data.
             string result4 = Encoding.ASCII.GetString(data);
@@ -401,10 +402,10 @@ namespace vcs_WebClient
             string url = "file:///C:/_git/vcs/_1.data/_html/My_Link.html";
             //string url = "https://www.google.com.tw/";
 
-            WebClient client = new WebClient();     // 建立 webclient
+            WebClient wc = new WebClient();     // 建立 WebClient
             try
             {
-                Stream response = client.OpenRead(url); // Get the indicated URL.
+                Stream response = wc.OpenRead(url); // Get the indicated URL.
                 richTextBox1.Text += "取得網頁資料並存成檔案, len = " + response.Length.ToString() + "\n";
                 richTextBox1.Text += "CanSeek = " + response.CanSeek.ToString() + "\n";
 
@@ -447,11 +448,11 @@ namespace vcs_WebClient
 
             string url2 = "http://jsonplaceholder.typicode.com/posts";
 
-            WebClient client2 = new WebClient();     // 建立 webclient
+            WebClient wc2 = new WebClient();     // 建立 WebClient
             // Add a user agent header in case the requested URI contains a query.
-            client2.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+            wc2.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
 
-            using (Stream stream = client2.OpenRead(url2))        // 從 url2 讀取資訊至 stream
+            using (Stream stream = wc2.OpenRead(url2))        // 從 url2 讀取資訊至 stream
             {
                 using (StreamReader sr = new StreamReader(stream))      // 使用 StreamReader 讀取 stream 內的字元
                 {
@@ -503,11 +504,11 @@ namespace vcs_WebClient
             string filename2 = "LCC_IR1_CR_2750/LCC_IR1_CR_2750.jpg";
             string myStringWebResource = null;
 
-            WebClient client = new WebClient();     // 建立 webclient
+            WebClient wc = new WebClient();     // 建立 WebClient
 
-            //client.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
-            client.Headers.Add(HttpRequestHeader.ContentType, "application/json");  // 指定 WebClient 的 Content-Type header
-            //client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+            //wc.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
+            wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");  // 指定 WebClient 的 Content-Type header
+            //wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
 
             // Concatenate the domain with the Web resource filename.
             myStringWebResource = url2 + filename2;
@@ -515,7 +516,7 @@ namespace vcs_WebClient
             // Download the Web resource and save it into the current filesystem folder.
             try
             {
-                client.DownloadFile(myStringWebResource, filename2);
+                wc.DownloadFile(myStringWebResource, filename2);
                 richTextBox1.Text += "OK\n";
             }
             catch (Exception ex)
@@ -545,8 +546,9 @@ namespace vcs_WebClient
             richTextBox1.Text += "WebClient DownloadString\t讓 WebClient 擁有 Timeout 功能......\n";
             Application.DoEvents();
 
+            string url = @"http://www.google.com.tw/";
             MyWebClient MWC = new MyWebClient();
-            string HTML = MWC.DownloadString("http://www.google.com.tw/");
+            string HTML = MWC.DownloadString(url);
             richTextBox1.Text += HTML;
             this.Cursor = Cursors.Default;
         }
@@ -618,7 +620,7 @@ namespace vcs_WebClient
         {
             //richTextBox1.Text += "下載圖片 : " + url + "\n";
 
-            WebClient client = new WebClient();     // 建立 webclient
+            WebClient wc = new WebClient();     // 建立 WebClient
 
             int pos = url.LastIndexOf('/');
             string filename = url.Substring(pos + 1);
@@ -632,21 +634,21 @@ namespace vcs_WebClient
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
             // Download the file.
-            client.DownloadFile(url, filename);
+            wc.DownloadFile(url, filename);
         }
 
         // Download a file from the internet.
         // Get the picture at a given URL.
         private Image GetPicture(string url)
         {
-            WebClient client = new WebClient();     // 建立 webclient
+            WebClient wc = new WebClient();     // 建立 WebClient
             try
             {
                 // Use one of the following.
                 //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                MemoryStream image_stream = new MemoryStream(client.DownloadData(url));
+                MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
                 return Image.FromStream(image_stream);
             }
             catch (Exception ex)
@@ -695,7 +697,7 @@ namespace vcs_WebClient
         //保存網頁訊息
         private void saveInfo(string strPath, string strDown)
         {
-            WebClient wc = new WebClient();
+            WebClient wc = new WebClient();     // 建立 WebClient
             wc.DownloadFile(strDown, strPath);
         }
 
@@ -738,7 +740,6 @@ namespace vcs_WebClient
             saveInfo(filename, this.url.Trim().ToString());
             MessageBox.Show("保存成功");
         }
-
         //提取並保存網頁源碼 SP
     }
 
@@ -752,3 +753,4 @@ namespace vcs_WebClient
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }
+
