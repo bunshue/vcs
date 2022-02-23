@@ -570,6 +570,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(100, 50);
             this.button17.TabIndex = 21;
+            this.button17.Text = "讀取網頁資料";
             this.button17.UseVisualStyleBackColor = false;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

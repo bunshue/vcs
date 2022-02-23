@@ -163,14 +163,97 @@ namespace vcs_MyToolbox
             this.TopMost = true;
             this.ShowInTaskbar = false;
 
-
+            //pdf
+            pdf_filename = Properties.Settings.Default.pdf_filename;
             pdf_page = Properties.Settings.Default.pdf_page;
+
+            if (File.Exists(pdf_filename) == true)
+            {
+                pdf_filename_short = Path.GetFileName(pdf_filename);
+                current_directory = Path.GetDirectoryName(pdf_filename);
+
+            }
 
             if (pdf_page == -1)
             {
                 pdf_page = 0;
             }
             tb_pdf_page.Text = pdf_page.ToString();
+
+            //mp3
+            mp3_filename = Properties.Settings.Default.mp3_filename;
+            mp3_position = Properties.Settings.Default.position;
+            if (File.Exists(mp3_filename) == true)
+            {
+                mp3_filename_short = Path.GetFileName(mp3_filename);
+                current_directory = Path.GetDirectoryName(mp3_filename);
+
+                //axWindowsMediaPlayer1.URL = mp3_filename; //不立刻播放
+
+                mp3_filename_short = Path.GetFileName(mp3_filename);
+                current_directory = Path.GetDirectoryName(mp3_filename);
+                //show_main_message1("檔案 : " + mp3_filename_short.ToString(), S_OK, 30);
+
+                FileInfo f = new FileInfo(mp3_filename);
+                string foldername = f.DirectoryName;
+
+                DirectoryInfo di = new DirectoryInfo(foldername);
+
+                mp3_filename_list.Clear();
+
+                foreach (FileInfo fi in di.GetFiles())
+                {
+                    if (fi.Extension.ToLower() == ".mp3")
+                    {
+                        mp3_filename_list.Add(fi.FullName);
+                    }
+                }
+
+                total_mp3_count = mp3_filename_list.Count;
+
+                mp3_filename_list.Sort();
+
+                // 取出單一個List 裡的值，如同陣列(Array)用法
+                for (i = 0; i < mp3_filename_list.Count; i++)
+                {
+                    //richTextBox1.Text += mp3_filename_list[i] + "\n";
+                    if (mp3_filename_list[i] == mp3_filename)
+                    {
+                        current_mp3_index = i;
+                        richTextBox1.Text += "select i = " + current_mp3_index.ToString() + "\n";
+                    }
+                }
+
+
+                /*
+                richTextBox1.Text += "共有 " + mp3_filename_list.Count.ToString() + " 個字串\n";
+
+                mp3_filename_list.Sort();
+
+                // 取出單一個List 裡的值，如同陣列(Array)用法
+                for (int i = 0; i < mp3_filename_list.Count; i++)
+                {
+                    richTextBox1.Text += mp3_filename_list[i] + "\n";
+                }
+                */
+
+                richTextBox1.Text += "len = " + total_mp3_count.ToString() + "\n";
+                richTextBox1.Text += "index = " + current_mp3_index.ToString() + "\n";
+
+            }
+
+            mp3_volume = Properties.Settings.Default.volume;
+            if (mp3_volume == -1)
+            {
+                mp3_volume = 50;
+            }
+
+            axWindowsMediaPlayer1.settings.volume = mp3_volume;
+            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
+
+            richTextBox1.Text += "mp3檔案 : " + mp3_filename + "\n";
+            richTextBox1.Text += "位置 : " + mp3_position.ToString() + "\n";
+            richTextBox1.Text += "音量 : " + mp3_volume.ToString() + "\n";
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -185,6 +268,7 @@ namespace vcs_MyToolbox
                 richTextBox1.Text += "int.TryParse 失敗\n";
             }
 
+            mp3_position = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
             Properties.Settings.Default.mp3_filename = mp3_filename;
             Properties.Settings.Default.position = mp3_position;
             Properties.Settings.Default.volume = mp3_volume;
@@ -428,6 +512,7 @@ namespace vcs_MyToolbox
                 richTextBox1.Text += "int.TryParse 失敗\n";
             }
 
+            mp3_position = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
             Properties.Settings.Default.mp3_filename = mp3_filename;
             Properties.Settings.Default.position = mp3_position;
             Properties.Settings.Default.volume = mp3_volume;
@@ -516,21 +601,109 @@ namespace vcs_MyToolbox
                 text = btn_20.Text;
                 lb_debug1.Text = "播放mp3";
 
-                string mp3_filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
-                axWindowsMediaPlayer1.URL = mp3_filename;
+                if (File.Exists(mp3_filename) == true)
+                {
+                    //string mp3_filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+                    axWindowsMediaPlayer1.URL = mp3_filename;
+                }
+                else
+                {
+                    richTextBox1.Text += "無 mp3 檔案\n";
+                }
             }
             else if (sender.Equals(btn_20s))
             {
                 richTextBox1.Text += "你按了開啟 mp3 檔案\n";
+
+                openFileDialog1.Title = "單選檔案";
+                openFileDialog1.FileName = "";              //預設開啟的檔名
+                openFileDialog1.DefaultExt = "*.mp3";
+                openFileDialog1.Filter = "mp3檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|MP4檔(*.mp4)|*.mp4|所有檔案(*.*)|*.*";   //存檔類型
+                openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+                openFileDialog1.RestoreDirectory = true;
+                //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+                //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
+                openFileDialog1.Multiselect = false;    //單選
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    /*
+                    richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
+                    FileInfo f = new FileInfo(openFileDialog1.FileName);
+                    richTextBox1.Text += "Name: " + f.Name + "\n";
+                    richTextBox1.Text += "FullName: " + f.FullName + "\n";
+                    richTextBox1.Text += "Extension: " + f.Extension + "\n";
+                    richTextBox1.Text += "size: " + f.Length.ToString() + "\n";
+                    richTextBox1.Text += "Directory: " + f.Directory + "\n";
+                    richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
+                    */
+
+                    mp3_filename = openFileDialog1.FileName;
+                    mp3_filename_short = Path.GetFileName(mp3_filename);
+                    current_directory = Path.GetDirectoryName(mp3_filename);
+                    mp3_position = 0;
+                    axWindowsMediaPlayer1.URL = mp3_filename;
+                    axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
+                    axWindowsMediaPlayer1.Ctlcontrols.play();
+                    //show_main_message1("檔案 : " + mp3_filename_short.ToString(), S_OK, 30);
+
+                    FileInfo f = new FileInfo(openFileDialog1.FileName);
+                    string foldername = f.DirectoryName;
+
+                    DirectoryInfo di = new DirectoryInfo(foldername);
+
+                    mp3_filename_list.Clear();
+
+                    foreach (FileInfo fi in di.GetFiles())
+                    {
+                        if (fi.Extension.ToLower() == ".mp3")
+                        {
+                            mp3_filename_list.Add(fi.FullName);
+                        }
+                    }
+
+                    total_mp3_count = mp3_filename_list.Count;
+
+                    mp3_filename_list.Sort();
+
+                    // 取出單一個List 裡的值，如同陣列(Array)用法
+                    for (int i = 0; i < mp3_filename_list.Count; i++)
+                    {
+                        //richTextBox1.Text += mp3_filename_list[i] + "\n";
+                        if (mp3_filename_list[i] == openFileDialog1.FileName)
+                        {
+                            current_mp3_index = i;
+                            richTextBox1.Text += "select i = " + current_mp3_index.ToString() + "\n";
+                        }
+                    }
+
+
+                    /*
+                    richTextBox1.Text += "共有 " + mp3_filename_list.Count.ToString() + " 個字串\n";
+
+                    mp3_filename_list.Sort();
+
+                    // 取出單一個List 裡的值，如同陣列(Array)用法
+                    for (int i = 0; i < mp3_filename_list.Count; i++)
+                    {
+                        richTextBox1.Text += mp3_filename_list[i] + "\n";
+                    }
+                    */
+
+                    richTextBox1.Text += "len = " + total_mp3_count.ToString() + "\n";
+                    richTextBox1.Text += "index = " + current_mp3_index.ToString() + "\n";
+
+                }
+                else
+                {
+                    //show_main_message1("未選取檔案", S_OK, 30);
+                    mp3_filename = "";
+                    mp3_position = 0;
+                }
+
             }
             else if (sender.Equals(btn_21))
             {
                 text = btn_21.Text;
-
-                //用Adobe開啟pdf檔案
-                string filename = "C:\\______test_files\\__RW\\_pdf\\note_Linux_workstation.pdf";
-                //Process process;
-                //process = Process.Start(filename);
 
                 bool conversionSuccessful = int.TryParse(tb_pdf_page.Text, out pdf_page);    //out為必須
                 if (conversionSuccessful == true)
@@ -543,9 +716,14 @@ namespace vcs_MyToolbox
                     pdf_page = 0;
                 }
 
-                if (File.Exists(filename) == true)
+                //用Adobe開啟pdf檔案
+                //string filename = "C:\\______test_files\\__RW\\_pdf\\note_Linux_workstation.pdf";
+                //Process process;
+                //process = Process.Start(filename);
+
+                if (File.Exists(pdf_filename) == true)
                 {
-                    Form2 fm = new Form2(filename, pdf_page);
+                    Form2 fm = new Form2(pdf_filename, pdf_page);
                     fm.Show();
                     flag_already_use_webbrowser = true;
                 }
@@ -558,11 +736,47 @@ namespace vcs_MyToolbox
             {
                 richTextBox1.Text += "你按了開啟 pdf 檔案\n";
 
+                openFileDialog1.Title = "單選檔案";
+                openFileDialog1.FileName = "";              //預設開啟的檔名
+                openFileDialog1.DefaultExt = "*.pdf";
+                openFileDialog1.Filter = "pdf檔(*.pdf)|*.pdf|所有檔案(*.*)|*.*";   //存檔類型
+                //openFileDialog1.Filter = "mp3檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|MP4檔(*.mp4)|*.mp4|所有檔案(*.*)|*.*";   //存檔類型
+                openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+                openFileDialog1.RestoreDirectory = true;
+                //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+                //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
+                openFileDialog1.Multiselect = false;    //單選
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    /*
+                    richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
+                    FileInfo f = new FileInfo(openFileDialog1.FileName);
+                    richTextBox1.Text += "Name: " + f.Name + "\n";
+                    richTextBox1.Text += "FullName: " + f.FullName + "\n";
+                    richTextBox1.Text += "Extension: " + f.Extension + "\n";
+                    richTextBox1.Text += "size: " + f.Length.ToString() + "\n";
+                    richTextBox1.Text += "Directory: " + f.Directory + "\n";
+                    richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
+                    */
 
+                    pdf_filename = openFileDialog1.FileName;
+                    pdf_filename_short = Path.GetFileName(pdf_filename);
+                    current_directory = Path.GetDirectoryName(pdf_filename);
 
+                    pdf_page = 0;
+                    tb_pdf_page.Text = pdf_page.ToString();
 
-                pdf_page = 0;
-                tb_pdf_page.Text = pdf_page.ToString();
+                    Form2 fm = new Form2(pdf_filename, pdf_page);
+                    fm.Show();
+                    flag_already_use_webbrowser = true;
+
+                }
+                else
+                {
+                    //show_main_message1("未選取檔案", S_OK, 30);
+                    pdf_filename = "";
+                }
+
             }
             else if (sender.Equals(btn_22))
             {

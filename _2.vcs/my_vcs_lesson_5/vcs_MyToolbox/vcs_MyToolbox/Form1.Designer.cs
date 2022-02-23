@@ -34,6 +34,7 @@
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.timer_notifyicon = new System.Windows.Forms.Timer(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // timer1
@@ -58,6 +59,10 @@
             this.timer_notifyicon.Interval = 1000;
             this.timer_notifyicon.Tick += new System.EventHandler(this.timer_notifyicon_Tick);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -79,6 +84,7 @@
         private System.Windows.Forms.Timer timer_clock;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.Timer timer_notifyicon;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

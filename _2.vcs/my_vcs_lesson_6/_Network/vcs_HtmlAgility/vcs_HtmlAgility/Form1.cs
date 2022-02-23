@@ -166,15 +166,6 @@ namespace vcs_HtmlAgility
             doc = null;
             wc = null;
             ms.Close();
-
-
-
-
-
-
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -205,16 +196,16 @@ namespace vcs_HtmlAgility
             doc1.LoadHtml(doc.DocumentNode.SelectSingleNode("/html[1]/body[1]/center[1]/table[2]/tr[1]/td[1]/table[1]").InnerHtml);
 
             // 取得個股標頭 
-            HtmlNodeCollection htnode = doc1.DocumentNode.SelectNodes("./tr[1]/th");
+            HtmlNodeCollection nodes = doc1.DocumentNode.SelectNodes("./tr[1]/th");
             // 取得個股數值 
             string[] txt = doc1.DocumentNode.SelectSingleNode("./tr[2]").InnerText.Trim().Split('\n');
             int i = 0;
 
             // 輸出資料 
-            foreach (HtmlNode nodeHeader in htnode)
+            foreach (HtmlNode node in nodes)
             {
                 //將 "加到投資組合" 這個字串過濾掉
-                richTextBox1.Text += nodeHeader.InnerText + ":" + txt[i].Trim().Replace("加到投資組合", "") + "\n";
+                richTextBox1.Text += node.InnerText + ":" + txt[i].Trim().Replace("加到投資組合", "") + "\n";
                 i++;
             }
 
@@ -317,15 +308,15 @@ namespace vcs_HtmlAgility
             doc1.LoadHtml(doc.DocumentNode.SelectSingleNode("/html[1]/body[1]/center[1]/table[2]/tr[1]/td[1]/table[1]").InnerHtml);
 
             // 取得個股標頭
-            HtmlNodeCollection nodeHeaders = doc1.DocumentNode.SelectNodes("./tr[1]/th");
+            HtmlNodeCollection nodes = doc1.DocumentNode.SelectNodes("./tr[1]/th");
             // 取得個股數值
             string[] values = doc1.DocumentNode.SelectSingleNode("./tr[2]").InnerText.Trim().Split('\n');
             int i = 0;
 
             // 輸出資料
-            foreach (HtmlNode nodeHeader in nodeHeaders)
+            foreach (HtmlNode node in nodes)
             {
-                Console.WriteLine("Header: {0}, Value: {1}", nodeHeader.InnerText, values[i].Trim());
+                Console.WriteLine("Header: {0}, Value: {1}", node.InnerText, values[i].Trim());
                 i++;
             }
 
@@ -355,18 +346,18 @@ namespace vcs_HtmlAgility
             doc.LoadHtml(doc.DocumentNode.SelectSingleNode("/html[1]/body[1]/center[1]/table[2]/tr[1]/td[1]/table[1]").InnerHtml);
 
             // 取得個股標頭
-            HtmlNodeCollection htnode = doc.DocumentNode.SelectNodes("./tr[1]/th");
+            HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("./tr[1]/th");
             // 取得個股數值
             string[] txt = doc.DocumentNode.SelectSingleNode("./tr[2]").InnerText.Trim().Split('\n');
 
             int i = 0;
 
             // 輸出資料
-            foreach (HtmlNode nodeHeader in htnode)
+            foreach (HtmlNode node in nodes)
             {
                 //將 "加到投資組合" 這個字串過濾掉
-                //Response.Write(nodeHeader.InnerText + ":" + txt[i].Trim().Replace("加到投資組合", "") + "<br />");
-                richTextBox1.Text += nodeHeader.InnerText + ":" + txt[i].Trim().Replace("加到投資組合", "") + "\n";
+                //Response.Write(node.InnerText + ":" + txt[i].Trim().Replace("加到投資組合", "") + "<br />");
+                richTextBox1.Text += node.InnerText + ":" + txt[i].Trim().Replace("加到投資組合", "") + "\n";
                 i++;
             }
             //清除資料
@@ -417,11 +408,11 @@ namespace vcs_HtmlAgility
                     doc1.LoadHtml(doc.DocumentNode.SelectSingleNode(xPathFirst).InnerHtml);
 
                     // Content value
-                    HtmlNodeCollection nodeHeaders = doc1.DocumentNode.SelectNodes(string.Format(xPathSecond, TableRowNum));
+                    HtmlNodeCollection nodes = doc1.DocumentNode.SelectNodes(string.Format(xPathSecond, TableRowNum));
 
-                    foreach (HtmlNode nodeHeader in nodeHeaders)
+                    foreach (HtmlNode node in nodes)
                     {
-                        ListData.Add(nodeHeader.InnerHtml);
+                        ListData.Add(node.InnerHtml);
                     }
                 }
             }
@@ -495,11 +486,11 @@ namespace vcs_HtmlAgility
             // XPath 來解讀它
             doc1.LoadHtml(doc.DocumentNode.SelectSingleNode(XPath).InnerHtml);
 
-            HtmlNodeCollection htnode = doc1.DocumentNode.SelectNodes(@"//div[@class='GN-lbox2B']/div/a");
+            HtmlNodeCollection nodes = doc1.DocumentNode.SelectNodes(@"//div[@class='GN-lbox2B']/div/a");
 
-            foreach (HtmlNode currNode in htnode)
+            foreach (HtmlNode node in nodes)
             {
-                string currLink = currNode.SelectSingleNode(".").Attributes["href"].Value;
+                string currLink = node.SelectSingleNode(".").Attributes["href"].Value;
                 //Response.Write(currLink + "<br/>");
                 richTextBox1.Text += currLink + "\n";
             }
@@ -518,7 +509,7 @@ namespace vcs_HtmlAgility
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument { OptionUseIdAttribute = true };
             doc = htmlWeb.Load(url);
 
-            HtmlNodeCollection mtchrslts = doc.DocumentNode.SelectNodes("//tr[@id]");
+            HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//tr[@id]");
 
             string date;
             string ateam;
@@ -530,17 +521,17 @@ namespace vcs_HtmlAgility
             string teamscoreh;
             string teamscorea;
 
-            foreach (HtmlNode matchresult in mtchrslts)
+            foreach (HtmlNode node in nodes)
             {
-                idmess = matchresult.SelectSingleNode("//tr[@id]").Id;
+                idmess = node.SelectSingleNode("//tr[@id]").Id;
                 idnum = idmess.Replace("match-row-", "");
-                score = matchresult.SelectSingleNode("//abbr[@title='Score']").InnerText;
+                score = node.SelectSingleNode("//abbr[@title='Score']").InnerText;
                 teamscores = score.Split('-');
                 teamscoreh = teamscores[0];
                 teamscorea = teamscores[1];
-                hteam = matchresult.SelectSingleNode("//p[(@class='team-home teams')]").InnerText;
-                ateam = matchresult.SelectSingleNode("//p[(@class='team-away teams')]").InnerText;
-                date = matchresult.SelectSingleNode("//td[(@class='match-date')]").InnerText;
+                hteam = node.SelectSingleNode("//p[(@class='team-home teams')]").InnerText;
+                ateam = node.SelectSingleNode("//p[(@class='team-away teams')]").InnerText;
+                date = node.SelectSingleNode("//td[(@class='match-date')]").InnerText;
             }
 
             return;
@@ -559,11 +550,11 @@ namespace vcs_HtmlAgility
             };
             doc = htmlWeb.Load(url);
 
-            HtmlNodeCollection NoAltElements = doc.DocumentNode.SelectNodes("//div");
+            HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div");
 
-            if (NoAltElements != null)
+            if (nodes != null)
             {
-                foreach (HtmlNode node in NoAltElements)
+                foreach (HtmlNode node in nodes)
                 {
 
                     string outputText = node.InnerHtml;
@@ -609,7 +600,8 @@ namespace vcs_HtmlAgility
 
         public string getBibTex(string url)
         {
-            string res = "", temp = "";
+            string res = "";
+            string temp = "";
 
             HtmlWeb htmlWeb = new HtmlWeb();
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
@@ -735,7 +727,8 @@ namespace vcs_HtmlAgility
         private void button17_Click(object sender, EventArgs e)
         {
             //Perl學習手札
-            string url = @"https://easun.org/perl/perl-toc/ch08.html";
+            //string url = @"https://easun.org/perl/perl-toc/ch08.html";
+            string url = @"https://www.syhtcgf.com/perl/perl-toc/ch09.html";
 
             string result = GetContentFromUrl(url);
 
@@ -745,15 +738,15 @@ namespace vcs_HtmlAgility
         // C#获取页面显示的内容 
         private string GetContentFromUrl(string url)
         {
-            string _StrResponse = "";
-            HttpWebRequest _WebRequest = (HttpWebRequest)WebRequest.Create(url);
-            _WebRequest.Method = "GET";
-            WebResponse _WebResponse = _WebRequest.GetResponse();
-            StreamReader _ResponseStream = new StreamReader(_WebResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("utf-8"));
-            _StrResponse = _ResponseStream.ReadToEnd();
-            _WebResponse.Close();
-            _ResponseStream.Close();
-            return _StrResponse;
+            string result = "";
+            HttpWebRequest hwr = (HttpWebRequest)WebRequest.Create(url);
+            hwr.Method = "GET";
+            WebResponse wr = hwr.GetResponse();
+            StreamReader sr = new StreamReader(wr.GetResponseStream(), System.Text.Encoding.GetEncoding("utf-8"));
+            result = sr.ReadToEnd();
+            wr.Close();
+            sr.Close();
+            return result;
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -764,27 +757,27 @@ namespace vcs_HtmlAgility
             doc = htmlWeb.Load(url);
 
             //获得title标签节点，其子标签下的所有节点也在其中
-            HtmlNode headNode = doc.DocumentNode.SelectSingleNode("//title");
+            HtmlNode node = doc.DocumentNode.SelectSingleNode("//title");
 
             //获得title标签中的内容
-            string Title = headNode.InnerText;
+            string Title = node.InnerText;
 
             richTextBox1.Text += "取得標題:\t" + Title + "\n";
 
             //获得id选择器为u1标签（是u1非ul（L）)节点
-            HtmlNode aNode = doc.DocumentNode.SelectSingleNode("//div[@id='u1']");
+            HtmlNode node2 = doc.DocumentNode.SelectSingleNode("//div[@id='u1']");
             //获得ul标签下的所有子节点
-            HtmlNodeCollection aCollection = aNode.ChildNodes;
-            foreach (var item in aCollection)
+            HtmlNodeCollection nodes = node2.ChildNodes;
+            foreach (var nn in nodes)
             {
                 /*
                 //获得标签属性为href的值
-                string aValue = item.Attributes["href"].Value;
+                string aValue = nn.Attributes["href"].Value;
                 //获得标签内的内容
-                string aInterText = item.InnerText;
+                string aInterText = nn.InnerText;
                 Console.WriteLine("属性值：" + aValue + "\t" + "标签内容:" + aInterText);
                 */
-                richTextBox1.Text += item.InnerText.ToString() + "\n";
+                richTextBox1.Text += nn.InnerText.ToString() + "\n";
             }
         }
 
@@ -864,14 +857,14 @@ namespace vcs_HtmlAgility
                 HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
                 doc.LoadHtml(pageSource);
 
-                HtmlNodeCollection spanNodeList = doc.DocumentNode.SelectNodes("//span[@class='tt-w']");
+                HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//span[@class='tt-w']");
 
                 List<ImageInfo> imageList = new List<ImageInfo>();
                 for (int i = 0; i < 24; i++)
                 {
-                    HtmlNode curSpanNode = spanNodeList[i];
-                    HtmlNode curImageNode = curSpanNode.SelectSingleNode("//img");
-                    HtmlNode curLinkNode = curSpanNode.SelectSingleNode("a");
+                    HtmlNode node = nodes[i];
+                    HtmlNode curImageNode = node.SelectSingleNode("//img");
+                    HtmlNode curLinkNode = node.SelectSingleNode("a");
 
                     ImageInfo image = new ImageInfo();
                     image.Title = curLinkNode.InnerText;
@@ -947,11 +940,11 @@ namespace vcs_HtmlAgility
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(pageSource);
 
-            HtmlNodeCollection keyNodes = doc.DocumentNode.SelectNodes("//td[@class='key']/a[@ target='_blank']");
+            HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//td[@class='key']/a[@ target='_blank']");
             List<string> keyWords = new List<string>();
-            foreach (HtmlNode keyNode in keyNodes)
+            foreach (HtmlNode node in nodes)
             {
-                keyWords.Add(keyNode.InnerText);
+                keyWords.Add(node.InnerText);
             }
         }
 
@@ -962,16 +955,16 @@ namespace vcs_HtmlAgility
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(url);
             //XPath路径表达式，这里表示选取所有span节点中的font最后一个子节点，其中span节点的class属性值为num
-            HtmlNode rootnode = doc.DocumentNode;
+            HtmlNode node = doc.DocumentNode;
             //根据网页的内容设置XPath路径表达式
             string xpathstring = "//span[@class='num']/font[last()]";
-            HtmlNodeCollection aa = rootnode.SelectNodes(xpathstring);    //所有找到的节点都是一个集合
+            HtmlNodeCollection nodes = node.SelectNodes(xpathstring);    //所有找到的节点都是一个集合
 
-            if (aa != null)
+            if (nodes != null)
             {
-                string innertext = aa[0].InnerText;
+                string innertext = nodes[0].InnerText;
                 //获取color属性，第二个参数为默认值
-                string color = aa[0].GetAttributeValue("color", "");
+                string color = nodes[0].GetAttributeValue("color", "");
                 //其他属性大家自己尝试
 
                 richTextBox1.Text += "aaaa = " + innertext + "\n";
@@ -1099,9 +1092,9 @@ namespace vcs_HtmlAgility
 
             /* 將網頁顯示出來
             string result = "";
-            StreamReader reader = new StreamReader(ms);
-            result = reader.ReadToEnd();
-            reader.Close();
+            StreamReader sr = new StreamReader(ms);
+            result = sr.ReadToEnd();
+            sr.Close();
 
             richTextBox1.Text += result + "\n";
 
@@ -1128,9 +1121,9 @@ namespace vcs_HtmlAgility
             richTextBox1.Text += "文件標題 : " + fullTitle + "\n";
 
             //get urls in page
-            foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
+            foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//a[@href]"))
             {
-                string href = link.GetAttributeValue("href", string.Empty);
+                string href = node.GetAttributeValue("href", string.Empty);
                 HashSet<String> links = new HashSet<String>();
                 String[] hrefSplit = href.Split('/');
                 String html = hrefSplit[hrefSplit.Length - 1];
@@ -1459,21 +1452,21 @@ namespace vcs_HtmlAgility
             doc2.LoadHtml(doc1.DocumentNode.SelectSingleNode(@"//table[@class='table_c']").InnerHtml);
 
             //批次取得th資料，利用這些資料進行IEnumarable創造dt的Column
-            HtmlNodeCollection headers = doc2.DocumentNode.SelectNodes(@"//tbody/tr/th");
+            HtmlNodeCollection nodes = doc2.DocumentNode.SelectNodes(@"//tbody/tr/th");
 
             DataTable dt = new DataTable();
-            foreach (HtmlNode header in headers)
+            foreach (HtmlNode node in nodes)
             {
-                dt.Columns.Add(header.InnerText);
+                dt.Columns.Add(node.InnerText);
                 //richTextBox1.Text += "取得\t" + header.InnerText + "\n";
             }
 
             //可用rows取得所有列的資料，也可直接寫在foreach裡面，tr[td]的意思是選取「所有tr之下有td」的tr們
-            //HtmlNodeCollection rows = dt_html.DocumentNode.SelectNodes(@"//tr[td]");
-            foreach (HtmlNode row in doc2.DocumentNode.SelectNodes(@"//tr[td]"))
+            //HtmlNodeCollection nodes = dt_html.DocumentNode.SelectNodes(@"//tr[td]");
+            foreach (HtmlNode node in doc2.DocumentNode.SelectNodes(@"//tr[td]"))
             {
                 //再用SelectNodes批次取得所有td的資料，利用lambda語法取得所有InnerText
-                dt.Rows.Add(row.SelectNodes(@"td").Select(td => td.InnerText.Trim()).ToArray());
+                dt.Rows.Add(node.SelectNodes(@"td").Select(td => td.InnerText.Trim()).ToArray());
             }
 
             richTextBox1.Text += UpdateDate + "\n";
@@ -1516,13 +1509,12 @@ namespace vcs_HtmlAgility
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.Load(url, Encoding.UTF8);     //指定編碼格式
 
-
             //Get all Hyperlinks in a page
             HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//a").ToArray();
-            foreach (HtmlNode item in nodes)
+            foreach (HtmlNode nodez in nodes)
             {
-                Console.WriteLine(item.InnerHtml);
-                richTextBox1.Text += "aaa\t" + item.InnerHtml + "\n";
+                Console.WriteLine(nodez.InnerHtml);
+                richTextBox1.Text += "aaa\t" + nodez.InnerHtml + "\n";
             }
             return;
 
@@ -1537,10 +1529,10 @@ namespace vcs_HtmlAgility
             HtmlNode[] aNodes2 = doc.DocumentNode.SelectNodes("//div[@id='div1']//a").ToArray();
 
             HtmlNode[] nodes3 = doc.DocumentNode.SelectNodes("//a").Where(x => x.InnerHtml.Contains("div2")).ToArray();
-            foreach (HtmlNode item in nodes3)
+            foreach (HtmlNode node2 in nodes3)
             {
-                Console.WriteLine(item.InnerHtml);
-                richTextBox1.Text += "ccc\t" + item.InnerHtml + "\n";
+                Console.WriteLine(node2.InnerHtml);
+                richTextBox1.Text += "ccc\t" + node2.InnerHtml + "\n";
             }
 
             richTextBox1.Text += "\n\n================================================================================\n";
@@ -1561,10 +1553,10 @@ namespace vcs_HtmlAgility
             HtmlAgilityPack.HtmlDocument doc1 = new HtmlAgilityPack.HtmlDocument();
 
             HtmlNode[] nodes2 = doc1.DocumentNode.SelectNodes("//a").ToArray();
-            foreach (HtmlNode item in nodes2)
+            foreach (HtmlNode node in nodes2)
             {
-                Console.WriteLine(item.InnerHtml);
-                richTextBox1.Text += "aaa\t" + item.InnerHtml + "\n";
+                Console.WriteLine(node.InnerHtml);
+                richTextBox1.Text += "aaa\t" + node.InnerHtml + "\n";
             }
             */
         }
@@ -1580,9 +1572,9 @@ namespace vcs_HtmlAgility
             doc.OptionOutputOriginalCase = true;    //正確區分大小寫
 
             doc.Load(url);
-            //HtmlNodeCollection node_collection = doc.DocumentNode.SelectNodes("//div");
-            HtmlNodeCollection node_collection = doc.DocumentNode.SelectNodes("//img");
-            foreach (HtmlNode node in node_collection)
+            //HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div");
+            HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//img");
+            foreach (HtmlNode node in nodes)
             {
                 string templateString = node.InnerHtml; //lower case happens here.....
 
@@ -1604,8 +1596,8 @@ namespace vcs_HtmlAgility
 
             return;
 
-            HtmlNode navNode = doc.GetElementbyId("CENTER");
-            richTextBox1.Text += "ccccc" + navNode.InnerHtml + "\n";
+            HtmlNode node = doc.GetElementbyId("CENTER");
+            richTextBox1.Text += "ccccc" + node.InnerHtml + "\n";
         }
 
         private void bt_23_Click(object sender, EventArgs e)
@@ -1625,11 +1617,11 @@ namespace vcs_HtmlAgility
                 HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
                 doc = htmlWeb.Load(url);
 
-                foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
+                foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//a[@href]"))
                 {
                     try
                     {
-                        HtmlAttribute att = link.Attributes["href"];
+                        HtmlAttribute att = node.Attributes["href"];
                         Console.WriteLine(att.Value);
                         richTextBox1.Text += "找到 href \t" + att.Value + "\n";
                         //this._results.Add(new Uri(att.Value));
@@ -1640,11 +1632,11 @@ namespace vcs_HtmlAgility
                     }
                 }
 
-                foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//article[@id]"))
+                foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//article[@id]"))
                 {
                     try
                     {
-                        HtmlAttribute att = link.Attributes["id"];
+                        HtmlAttribute att = node.Attributes["id"];
                         Console.WriteLine(att.Value);
                         richTextBox1.Text += "找到 id \t" + att.Value + "\n";
                         //this._results.Add(new Uri(att.Value));
@@ -1676,9 +1668,9 @@ namespace vcs_HtmlAgility
             doc = htmlWeb.Load(url);
 
             // extracting all links
-            foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
+            foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//a[@href]"))
             {
-                HtmlAttribute att = link.Attributes["href"];
+                HtmlAttribute att = node.Attributes["href"];
 
                 if (att.Value.Contains("a"))
                 {
@@ -1707,4 +1699,3 @@ namespace vcs_HtmlAgility
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }
-
