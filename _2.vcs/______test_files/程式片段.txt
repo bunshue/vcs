@@ -25,9 +25,7 @@ this.Icon = ico;
 
 ----------------vcs +++ ST----------------
 
-
-
-
+DrAP的關閉按鈕左邊再多一個最小化按鈕
 
 vcs_test_all_00_Usually +
 開新表單範例
@@ -37,6 +35,11 @@ vcs_MyToolbox+
 日曆功能
 年月日星期
 農曆
+MyToolBox 加一個類似 vcs_MyPlayer3的mp3播放器
+需求：
+記憶檔案 記憶播放位置
+
+手動播放 
 
 vcs_HtmlAgility+
 氣象 水 電 空氣 covid-19

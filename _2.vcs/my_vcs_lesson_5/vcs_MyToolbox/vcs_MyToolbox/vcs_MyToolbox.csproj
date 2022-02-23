@@ -90,6 +90,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="img\pic_open.png" />
     <Content Include="快.ico" />
   </ItemGroup>
   <ItemGroup>

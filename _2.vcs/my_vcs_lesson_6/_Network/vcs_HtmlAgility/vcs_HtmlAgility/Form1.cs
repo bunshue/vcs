@@ -131,11 +131,15 @@ namespace vcs_HtmlAgility
 
             return;
 
-            string url = @"http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm";
+            //here
+            string url = @"http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm";   //台銀的 不能用
+            //string url = @"https://www.syhtcgf.com/perl/perl-toc/ch09.html";        //perl的 可以用
+
             //指定來源網頁
             WebClient wc = new WebClient();
             //將網頁來源資料暫存到記憶體內
             MemoryStream ms = new MemoryStream(wc.DownloadData(url));    //fail在此
+
             //以台灣銀行為範例
 
             // 使用預設編碼讀入 HTML 
@@ -512,8 +516,8 @@ namespace vcs_HtmlAgility
             string url = @"http://www.bbc.co.uk/sport/football/results/partial/competition-118996114";
             HtmlWeb htmlWeb = new HtmlWeb();
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument { OptionUseIdAttribute = true };
-
             doc = htmlWeb.Load(url);
+
             HtmlNodeCollection mtchrslts = doc.DocumentNode.SelectNodes("//tr[@id]");
 
             string date;
@@ -548,13 +552,12 @@ namespace vcs_HtmlAgility
 
             string url = @"https://yandex.by/search/?numdoc=10&p=0&rdrnd=601861&text=kinogo.co%20Один%20дома%201990%20&lr=157";
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            var web = new HtmlWeb
+            HtmlWeb htmlWeb = new HtmlWeb
             {
                 AutoDetectEncoding = false,
                 OverrideEncoding = Encoding.UTF8 //GetEncoding("windows-1251")
             };
-
-            doc = web.Load(url);
+            doc = htmlWeb.Load(url);
 
             HtmlNodeCollection NoAltElements = doc.DocumentNode.SelectNodes("//div");
 
@@ -609,8 +612,8 @@ namespace vcs_HtmlAgility
             string res = "", temp = "";
 
             HtmlWeb htmlWeb = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc;
-            HtmlNode n;
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            HtmlNode node;
 
             if (url.Contains("viewdoc"))//e.g. http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.31.3487
             {
@@ -628,9 +631,9 @@ namespace vcs_HtmlAgility
                 }
                 try
                 {
-                    if ((n = doc.DocumentNode.SelectSingleNode("//*[@id=\"bibtex\"]/p")) != null)
+                    if ((node = doc.DocumentNode.SelectSingleNode("//*[@id=\"bibtex\"]/p")) != null)
                     {
-                        temp = n.InnerText;
+                        temp = node.InnerText;
                         temp = temp.Replace(",", ",\n").Replace("&nbsp;", " ");
                     }
                 }
@@ -665,7 +668,8 @@ namespace vcs_HtmlAgility
             {
                 string url = @"https://www.facebook.com/ABCNetwork/";
                 HtmlWeb htmlWeb = new HtmlWeb();
-                HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
+                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                doc = htmlWeb.Load(url);
 
                 if (doc != null)
                 {
@@ -756,11 +760,12 @@ namespace vcs_HtmlAgility
         {
             string url = "http://www.baidu.com";
             HtmlWeb htmlWeb = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc = htmlWeb.Load(url);
 
             //获得title标签节点，其子标签下的所有节点也在其中
             HtmlNode headNode = doc.DocumentNode.SelectSingleNode("//title");
-            
+
             //获得title标签中的内容
             string Title = headNode.InnerText;
 
@@ -846,7 +851,7 @@ namespace vcs_HtmlAgility
                 WebClient wc = new WebClient();
                 wc.DownloadFile(url, Path.Combine(dirPath, fileName + Guid.NewGuid().ToString()));
             }
-        }  
+        }
 
         public class ImageInfo
         {
@@ -874,7 +879,7 @@ namespace vcs_HtmlAgility
                     imageList.Add(image);
                 }
                 return imageList;
-            } 
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -922,7 +927,7 @@ namespace vcs_HtmlAgility
                 }
             }
             return resultList;
-        }             
+        }
 
         private void button23_Click(object sender, EventArgs e)
         {
@@ -978,7 +983,7 @@ namespace vcs_HtmlAgility
         {
             /*
             string url = @"http://www.asp.net";
-            var doc = new HtmlAgilityPack.HtmlDocument();
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(new WebClient().DownloadString(url));
             var root = doc.DocumentNode;
             var nodes = root.Descendants();
@@ -990,7 +995,7 @@ namespace vcs_HtmlAgility
 
             /*
             string url = @"http://www.asp.net";
-            var doc = new HtmlAgilityPack.HtmlDocument();
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(new WebClient().DownloadString(url));
             var root = doc.DocumentNode;
             var anchors = root.Descendants("a");
@@ -1001,7 +1006,7 @@ namespace vcs_HtmlAgility
 
             /*
             string url = @"http://www.asp.net";
-            var doc = new HtmlAgilityPack.HtmlDocument();
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(new WebClient().DownloadString(url));
             var root = doc.DocumentNode;
             var commonPosts = root.Descendants().Where(n => n.GetAttributeValue("class", "").Equals("common-post"));
@@ -1012,7 +1017,7 @@ namespace vcs_HtmlAgility
             /*
             //fail
             string url = @"http://forums.asp.net/members/Mikesdotnetting.aspx";
-            var doc = new HtmlAgilityPack.HtmlDocument();
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(new WebClient().DownloadString(url));
             var root = doc.DocumentNode;
             var p = root.Descendants()
@@ -1051,9 +1056,9 @@ namespace vcs_HtmlAgility
         {
             //Yahoo氣象 台北
             string url = @"https://tw.news.yahoo.com/weather/%E8%87%BA%E7%81%A3/%E8%87%BA%E5%8C%97%E5%B8%82/%E8%87%BA%E5%8C%97%E5%B8%82-2306179";
-
             HtmlWeb htmlWeb = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc = htmlWeb.Load(url);
 
             string location = doc.DocumentNode.SelectSingleNode(@"//*[@id=""Lead-1-WeatherLocationAndTemperature""]/div/section[1]/div[1]/div/h1").InnerText;
             richTextBox1.Text += "位置：" + location + "\n";
@@ -1070,9 +1075,9 @@ namespace vcs_HtmlAgility
         {
             //Yahoo股市 台泥
             string url = @"https://tw.stock.yahoo.com/quote/1101";
-
             HtmlWeb htmlWeb = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc = htmlWeb.Load(url);
 
             //*[@id="main-0-QuoteHeader-Proxy"]/div/div[2]/div[1]/div/span[1]
             string stock = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[1]").InnerText;
@@ -1087,13 +1092,20 @@ namespace vcs_HtmlAgility
             //Perl學習手札
             string url = @"https://www.syhtcgf.com/perl/perl-toc/ch09.html";
 
+            //指定來源網頁
+            WebClient wc = new WebClient();
+            //將網頁來源資料暫存到記憶體內
+            MemoryStream ms = new MemoryStream(wc.DownloadData(url));    //fail在此
+
             //拷貝來的長短XPATH要包在 @"..." 以內
             //拷貝來的短XPATH要在 " 前多一個 "
             string xpath_short = @"//*[@id=""entry-272""]/div/div/blockquote/pre[1]";
             string xpath_full = @"/html/body/div/div[2]/article/div/div/blockquote/pre[1]";
 
             HtmlWeb htmlWeb = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.Load(ms, Encoding.UTF8); //指定編碼格式
+
             string str = string.Empty;
 
             str = doc.DocumentNode.SelectSingleNode(xpath_short).InnerText;
@@ -1102,10 +1114,8 @@ namespace vcs_HtmlAgility
             str = doc.DocumentNode.SelectSingleNode(xpath_full).InnerText;
             richTextBox1.Text += "使用長XPATH:\t" + str + "\n";
 
-
             String fullTitle = doc.DocumentNode.SelectSingleNode("//head/title").InnerText;
             richTextBox1.Text += "文件標題 : " + fullTitle + "\n";
-
 
             //get urls in page
             foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
@@ -1125,9 +1135,6 @@ namespace vcs_HtmlAgility
                     richTextBox1.Text += "取得連結 : " + href + "\n";
                 }
             }
-                    
-
-
         }
 
         private void bt_03_Click(object sender, EventArgs e)
@@ -1171,7 +1178,8 @@ namespace vcs_HtmlAgility
             //string url = @"https://tw.stock.yahoo.com/quote/1101";
 
             HtmlWeb htmlWeb = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc = htmlWeb.Load(url);
 
             //richTextBox1.Text += html.Text.ToString();  //顯示頁面原始碼
 
@@ -1192,7 +1200,6 @@ namespace vcs_HtmlAgility
             str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[3]").InnerText;
             richTextBox1.Text += str + "\n";
 
-
             str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[1]/span[1]").InnerText;
             richTextBox1.Text += str + "\t";
             str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[1]/span[2]").InnerText;
@@ -1205,7 +1212,6 @@ namespace vcs_HtmlAgility
             richTextBox1.Text += str + "\t";
             str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[2]/div[3]/span[2]").InnerText;
             richTextBox1.Text += str + "\n";
-
 
             //成交
             str = doc.DocumentNode.SelectSingleNode(@"//*[@id=""main-0-QuoteHeader-Proxy""]/div/div[2]/div[1]/div/span[1]").InnerText;
@@ -1392,7 +1398,8 @@ namespace vcs_HtmlAgility
             string url = @"http://www.w3.org/";
 
             HtmlWeb htmlWeb = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc = htmlWeb.Load(url);
 
             HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("/html[1]/body[1]/div[1]/div[2]/div[3]/div[2]/div[1]/div[1]/div[1]/div");
 
@@ -1407,7 +1414,6 @@ namespace vcs_HtmlAgility
             htmlWeb = null;
 
             richTextBox1.Text += "完成\n";
-
         }
 
         private void bt_12_Click(object sender, EventArgs e)
@@ -1470,9 +1476,9 @@ namespace vcs_HtmlAgility
         {
             //博客來
             var url = @"https://www.books.com.tw/products/0010916142";
-
-            var htmlWeb = new HtmlWeb();
-            var doc = htmlWeb.Load(url);
+            HtmlWeb htmlWeb = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc = htmlWeb.Load(url);
 
             string str;
             str = doc.DocumentNode.SelectSingleNode("/html/body/div[4]/div/div[1]/div[2]/div[1]/h1").InnerText;
@@ -1520,8 +1526,6 @@ namespace vcs_HtmlAgility
             //Approach 2  
             HtmlNode[] aNodes2 = doc.DocumentNode.SelectNodes("//div[@id='div1']//a").ToArray();
 
-
-
             HtmlNode[] nodes3 = doc.DocumentNode.SelectNodes("//a").Where(x => x.InnerHtml.Contains("div2")).ToArray();
             foreach (HtmlNode item in nodes3)
             {
@@ -1529,11 +1533,9 @@ namespace vcs_HtmlAgility
                 richTextBox1.Text += "ccc\t" + item.InnerHtml + "\n";
             }
 
-
             richTextBox1.Text += "\n\n================================================================================\n";
             richTextBox1.Text += "================================================================================\n";
             richTextBox1.Text += "================================================================================\n\n\n";
-
 
             /* fail
             //指定來源網頁
@@ -1554,10 +1556,7 @@ namespace vcs_HtmlAgility
                 Console.WriteLine(item.InnerHtml);
                 richTextBox1.Text += "aaa\t" + item.InnerHtml + "\n";
             }
-
             */
-
-
         }
 
         private void bt_21_Click(object sender, EventArgs e)
@@ -1578,10 +1577,7 @@ namespace vcs_HtmlAgility
                 string templateString = node.InnerHtml; //lower case happens here.....
 
                 richTextBox1.Text += "aaaaa" + templateString + "\n";
-
             }
-
-
         }
 
         private void bt_22_Click(object sender, EventArgs e)
@@ -1616,7 +1612,8 @@ namespace vcs_HtmlAgility
             try
             {
                 HtmlWeb htmlWeb = new HtmlWeb();
-                HtmlAgilityPack.HtmlDocument doc = htmlWeb.Load(url);
+                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                doc = htmlWeb.Load(url);
 
                 foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
                 {
@@ -1647,15 +1644,12 @@ namespace vcs_HtmlAgility
 
                     }
                 }
-
-
             }
             catch
             {
                 //What Should I Do Here?
                 //Maybe Nothing for Now
             }
-
         }
 
         private void bt_25_Click(object sender, EventArgs e)
@@ -1665,11 +1659,11 @@ namespace vcs_HtmlAgility
             ExtractHref(url);
         }
 
-        void ExtractHref(string URL)
+        void ExtractHref(string url)
         {
             HtmlWeb htmlWeb = new HtmlWeb();
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc = htmlWeb.Load(URL);
+            doc = htmlWeb.Load(url);
 
             // extracting all links
             foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
@@ -1703,3 +1697,4 @@ namespace vcs_HtmlAgility
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }
+

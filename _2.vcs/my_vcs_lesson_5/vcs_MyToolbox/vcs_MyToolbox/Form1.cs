@@ -48,6 +48,8 @@ namespace vcs_MyToolbox
         double mp3_rate = 1.0;
         int mp3_player_height = 50;
 
+        int pdf_page = 0;
+
         List<String> mp3_filename_list = new List<String>();
         int current_mp3_index = 0;
         int total_mp3_count = 0;
@@ -137,9 +139,12 @@ namespace vcs_MyToolbox
         Button btn_20 = new Button();
         Button btn_21 = new Button();
         Button btn_22 = new Button();
+        Button btn_20s = new Button();
+        Button btn_21s = new Button();
         Label lb_debug0 = new Label();
         Label lb_debug1 = new Label();
         Label lb_debug2 = new Label();
+        TextBox tb_pdf_page = new TextBox();
         RichTextBox richTextBox1 = new RichTextBox();
 
         public Form1()
@@ -157,6 +162,37 @@ namespace vcs_MyToolbox
 
             this.TopMost = true;
             this.ShowInTaskbar = false;
+
+
+            pdf_page = Properties.Settings.Default.pdf_page;
+
+            if (pdf_page == -1)
+            {
+                pdf_page = 0;
+            }
+            tb_pdf_page.Text = pdf_page.ToString();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            bool conversionSuccessful = int.TryParse(tb_pdf_page.Text, out pdf_page);    //out為必須
+            if (conversionSuccessful == true)
+            {
+                richTextBox1.Text += "得到int數字： " + pdf_page + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "int.TryParse 失敗\n";
+            }
+
+            Properties.Settings.Default.mp3_filename = mp3_filename;
+            Properties.Settings.Default.position = mp3_position;
+            Properties.Settings.Default.volume = mp3_volume;
+            Properties.Settings.Default.pdf_filename = pdf_filename;
+
+            Properties.Settings.Default.pdf_page = pdf_page;
+
+            Properties.Settings.Default.Save();
         }
 
         void Init_Controls()
@@ -285,6 +321,13 @@ namespace vcs_MyToolbox
             btn_20.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             btn_20.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_20);	// 將控件加入表單
+            btn_20s.Width = w / 3;
+            btn_20s.Height = h / 3;
+            btn_20s.Text = "open";
+            btn_20s.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            btn_20s.Click += btn_click_function;	// 加入事件
+            this.Controls.Add(btn_20s);	// 將控件加入表單
+            btn_20s.BringToFront();
 
             btn_21.Width = w;
             btn_21.Height = h;
@@ -292,6 +335,22 @@ namespace vcs_MyToolbox
             btn_21.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             btn_21.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_21);	// 將控件加入表單
+            btn_21s.Width = w/3;
+            btn_21s.Height = h/3;
+            btn_21s.Text = "open";
+            btn_21s.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            btn_21s.Click += btn_click_function;	// 加入事件
+            this.Controls.Add(btn_21s);	// 將控件加入表單
+            btn_21s.BringToFront();
+
+            tb_pdf_page.Width = w / 3;
+            tb_pdf_page.Height = h / 3;
+            tb_pdf_page.Text = "5";
+            tb_pdf_page.TextAlign = HorizontalAlignment.Center;
+            tb_pdf_page.Location = new Point(x_st + dx * 1, y_st + dy * 2 + btn_21.Height - tb_pdf_page.Height);
+            tb_pdf_page.Click += btn_click_function;	// 加入事件
+            this.Controls.Add(tb_pdf_page);	// 將控件加入表單
+            tb_pdf_page.BringToFront();
 
             btn_22.Width = w;
             btn_22.Height = h;
@@ -359,6 +418,25 @@ namespace vcs_MyToolbox
 
         private void bt_exit_Click(object sender, EventArgs e)
         {
+            bool conversionSuccessful = int.TryParse(tb_pdf_page.Text, out pdf_page);    //out為必須
+            if (conversionSuccessful == true)
+            {
+                richTextBox1.Text += "得到int數字： " + pdf_page + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "int.TryParse 失敗\n";
+            }
+
+            Properties.Settings.Default.mp3_filename = mp3_filename;
+            Properties.Settings.Default.position = mp3_position;
+            Properties.Settings.Default.volume = mp3_volume;
+            Properties.Settings.Default.pdf_filename = pdf_filename;
+
+            Properties.Settings.Default.pdf_page = pdf_page;
+
+            Properties.Settings.Default.Save();
+
             Application.Exit();
         }
 
@@ -441,6 +519,10 @@ namespace vcs_MyToolbox
                 string mp3_filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
                 axWindowsMediaPlayer1.URL = mp3_filename;
             }
+            else if (sender.Equals(btn_20s))
+            {
+                richTextBox1.Text += "你按了開啟 mp3 檔案\n";
+            }
             else if (sender.Equals(btn_21))
             {
                 text = btn_21.Text;
@@ -449,11 +531,21 @@ namespace vcs_MyToolbox
                 string filename = "C:\\______test_files\\__RW\\_pdf\\note_Linux_workstation.pdf";
                 //Process process;
                 //process = Process.Start(filename);
-                int page = 5;
+
+                bool conversionSuccessful = int.TryParse(tb_pdf_page.Text, out pdf_page);    //out為必須
+                if (conversionSuccessful == true)
+                {
+                    richTextBox1.Text += "得到int數字： " + pdf_page + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "int.TryParse 失敗\n";
+                    pdf_page = 0;
+                }
 
                 if (File.Exists(filename) == true)
                 {
-                    Form2 fm = new Form2(filename, page);
+                    Form2 fm = new Form2(filename, pdf_page);
                     fm.Show();
                     flag_already_use_webbrowser = true;
                 }
@@ -462,9 +554,32 @@ namespace vcs_MyToolbox
 
                 }
             }
+            else if (sender.Equals(btn_21s))
+            {
+                richTextBox1.Text += "你按了開啟 pdf 檔案\n";
+
+
+
+
+                pdf_page = 0;
+                tb_pdf_page.Text = pdf_page.ToString();
+            }
             else if (sender.Equals(btn_22))
             {
                 text = btn_22.Text;
+
+
+                pdf_page = 6;
+
+                Properties.Settings.Default.pdf_page = pdf_page;
+
+                Properties.Settings.Default.Save();
+
+
+
+                pdf_page = Properties.Settings.Default.pdf_page;
+
+                richTextBox1.Text += "pdf_page = " + pdf_page.ToString() + "\n";
             }
             else
             {
@@ -492,6 +607,7 @@ namespace vcs_MyToolbox
                 this.notifyIcon1.Icon = icon2;
             }
         }
+
 
     }
 }
