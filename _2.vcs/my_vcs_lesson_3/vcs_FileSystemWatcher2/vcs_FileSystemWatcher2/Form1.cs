@@ -33,7 +33,7 @@ namespace vcs_FileSystemWatcher2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\______test_files\_pic";
+            string foldername = @"C:\______test_files\__pic";
             //watcher組
             FileSystemWatcher[] watchers;
 

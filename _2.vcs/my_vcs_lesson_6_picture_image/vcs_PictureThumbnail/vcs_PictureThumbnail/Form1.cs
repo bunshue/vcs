@@ -21,7 +21,7 @@ namespace vcs_PictureThumbnail
             [MarshalAs(UnmanagedType.LPTStr)] StringBuilder buffer,
             int bufferSize);
 
-        string foldername = @"C:\______test_files\_pic";
+        string foldername = @"C:\______test_files\__pic";
 
         public Form1()
         {

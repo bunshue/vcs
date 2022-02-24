@@ -14,7 +14,7 @@ namespace vcs_Wallpaper2
 {
     public partial class Form1 : Form
     {
-        string foldername = @"C:\______test_files\_pic\";
+        string foldername = @"C:\______test_files\__pic\";
         string filename;
         int sel_picture = -1;
 

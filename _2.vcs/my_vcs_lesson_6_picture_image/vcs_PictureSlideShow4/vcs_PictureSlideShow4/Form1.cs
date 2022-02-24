@@ -12,7 +12,7 @@ namespace vcs_PictureSlideShow4
 {
     public partial class Form1 : Form
     {
-        string foldername = @"C:\______test_files\_pic";
+        string foldername = @"C:\______test_files\__pic";
 
         string strPath;
         string strInfo="";

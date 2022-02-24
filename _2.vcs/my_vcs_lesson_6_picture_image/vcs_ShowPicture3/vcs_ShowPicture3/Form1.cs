@@ -27,7 +27,7 @@ namespace vcs_ShowPicture3
         Rectangle bounds = Screen.PrimaryScreen.Bounds;
         //Rectangle bounds = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
-        string foldername = @"C:\______test_files\_pic\";
+        string foldername = @"C:\______test_files\__pic\";
         string filename;
         int total_picture_count = 0;
         int sel_picture = -1;

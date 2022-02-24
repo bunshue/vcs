@@ -18,9 +18,9 @@ namespace vcs_MovePicture
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename1 = @"C:\______test_files\peony2\p1.jpg";
-            string filename2 = @"C:\______test_files\peony2\p2.jpg";
-            string filename3 = @"C:\______test_files\peony2\p3.jpg";
+            string filename1 = @"C:\______test_files\__pic\_peony1\p1.jpg";
+            string filename2 = @"C:\______test_files\__pic\_peony1\p2.jpg";
+            string filename3 = @"C:\______test_files\__pic\_peony1\p3.jpg";
             pictureBox1.Image = Image.FromFile(filename1);
             pictureBox1.ClientSize = new Size(pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2);
             pictureBox2.Image = Image.FromFile(filename2);

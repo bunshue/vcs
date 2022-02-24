@@ -18,7 +18,7 @@ namespace vcs_ShowPicture2
         int Num = 0;
         int Count = 0;
 
-        string foldername = @"C:\______test_files\_pic";
+        string foldername = @"C:\______test_files\__pic";
 
         public Frm_Main()
         {

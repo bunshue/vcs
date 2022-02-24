@@ -118,7 +118,7 @@ namespace vcs_Mix04_filename
             listView1.Items.Clear();
 
             //遍歷文件夾實例
-            string foldername = @"C:\______test_files\_pic";
+            string foldername = @"C:\______test_files\__pic";
             //實例化DirectoryInfo對象
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
             //獲取指定目錄下的所有子目錄及文件類型
@@ -172,7 +172,7 @@ namespace vcs_Mix04_filename
             listView1.Items.Clear();
 
             //遍歷文件夾實例
-            string foldername = @"C:\______test_files\_pic";
+            string foldername = @"C:\______test_files\__pic";
             //實例化DirectoryInfo對象
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
             //獲取指定目錄下的所有子目錄及文件類型
@@ -312,7 +312,7 @@ namespace vcs_Mix04_filename
         private void button6_Click(object sender, EventArgs e)
         {
             //遍歷文件夾實例
-            string foldername = @"C:\______test_files\_pic";
+            string foldername = @"C:\______test_files\__pic";
             DirectoryInfo TheFolder = new DirectoryInfo(foldername);
 
             richTextBox1.Text += "遍歷文件夾\n";
@@ -338,7 +338,7 @@ namespace vcs_Mix04_filename
         {
             //遍歷文件夾實例
 
-            string foldername = @"C:\______test_files\_pic";
+            string foldername = @"C:\______test_files\__pic";
 
             //實例化DirectoryInfo對象
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
@@ -461,7 +461,7 @@ namespace vcs_Mix04_filename
         private void button11_Click(object sender, EventArgs e)
         {
             //找出資料夾內所有檔案
-            string foldername = @"C:\______test_files\_pic";
+            string foldername = @"C:\______test_files\__pic";
 
             // Enumerate the files.
             DirectoryInfo dir_info = new System.IO.DirectoryInfo(foldername);

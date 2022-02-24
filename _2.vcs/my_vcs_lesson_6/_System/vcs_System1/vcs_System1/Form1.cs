@@ -1387,7 +1387,7 @@ namespace vcs_System1
         // Save the current settings.
         private void SaveSettings()
         {
-            string dir_name = @"C:\______test_files\peony";
+            string dir_name = @"C:\______test_files\__pic\_peony2";
 
             Properties.Settings.Default.PictureDirectory = dir_name;
             Properties.Settings.Default.UpdateRegistry = true;

@@ -35,7 +35,7 @@ namespace vcs_PictureSlideShow6
                 bool flag = false;
                 //string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bgImages");
                 //string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bgImages");
-                string foldername = @"C:\______test_files\peony2";
+                string foldername = @"C:\______test_files\__pic\_peony1";
 
                 DirectoryInfo root = new DirectoryInfo(foldername);
                 FileInfo[] files = root.GetFiles();

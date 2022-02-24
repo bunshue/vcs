@@ -71,7 +71,7 @@ namespace WindowsFormsApplication0223a
         {
             //將純文字檔拆成一行一行的字串陣列, 可以去除前後空白
             string[] patterns;
-            patterns = File.ReadAllLines("filename.txt").Select(i => i.Trim()).Where(i => i != string.Empty).ToArray();
+            patterns = File.ReadAllLines(@"../../filename.txt").Select(i => i.Trim()).Where(i => i != string.Empty).ToArray();
             int len = patterns.Length;
             //richTextBox1.Text += "len = " + len.ToString() + "\n";
             int ii;
@@ -79,9 +79,6 @@ namespace WindowsFormsApplication0223a
             {
                 richTextBox1.Text += patterns[ii] + "\n";
             }
-
-
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -113,11 +110,6 @@ namespace WindowsFormsApplication0223a
                 string imgURL = fileName[0];
                 richTextBox1.Text += imgURL + "\n";
             }
-
-
-
-
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -177,26 +169,8 @@ namespace WindowsFormsApplication0223a
                     richTextBox1.Text += image.FullName + "\n";
                     richTextBox1.Text += image.Extension + "\n";
                     richTextBox1.Text += image.Length.ToString() + "\n";
-
-
-
                 }
-
-
-
             }
-
-
-
-
         }
-
-
-
-
-
-
-
-
     }
 }

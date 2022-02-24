@@ -12,7 +12,7 @@ namespace vcs_PictureSlideShow5
     {
         int width = 0, heigh = 0;
         string strpath;
-        string foldername = @"C:\______test_files\_pic";
+        string foldername = @"C:\______test_files\__pic";
 
         public Form1()
         {

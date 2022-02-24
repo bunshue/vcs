@@ -368,7 +368,7 @@ namespace vcs_test_all_06_DirectoryFile2
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //string foldername = @"C:\______test_files\_pic";
+            //string foldername = @"C:\______test_files\__pic";
             //string foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\";
             string foldername = @"C:\dddddddddd\_music_from_yt";
 
