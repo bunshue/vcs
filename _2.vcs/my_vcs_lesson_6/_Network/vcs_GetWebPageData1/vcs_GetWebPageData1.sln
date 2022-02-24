@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ReadWrite_HTML", "vcs_ReadWrite_HTML\vcs_ReadWrite_HTML.csproj", "{6A644F1A-A620-49DB-A19B-3C97E1F4534A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_GetWebPageData1", "vcs_GetWebPageData1\vcs_GetWebPageData1.csproj", "{6A644F1A-A620-49DB-A19B-3C97E1F4534A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

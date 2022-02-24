@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.groupBox_comport = new System.Windows.Forms.GroupBox();
+            this.bt_demo = new System.Windows.Forms.Button();
             this.comboBox_comport = new System.Windows.Forms.ComboBox();
             this.pictureBox_comport = new System.Windows.Forms.PictureBox();
             this.bt_comport_scan = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.bt_temperature_on = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SerialPortTimer100ms = new System.Windows.Forms.Timer(this.components);
-            this.bt_demo = new System.Windows.Forms.Button();
             this.timer_demo = new System.Windows.Forms.Timer(this.components);
             this.groupBox_comport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
@@ -62,6 +62,16 @@
             this.groupBox_comport.Size = new System.Drawing.Size(461, 68);
             this.groupBox_comport.TabIndex = 136;
             this.groupBox_comport.TabStop = false;
+            // 
+            // bt_demo
+            // 
+            this.bt_demo.Location = new System.Drawing.Point(409, 17);
+            this.bt_demo.Name = "bt_demo";
+            this.bt_demo.Size = new System.Drawing.Size(46, 35);
+            this.bt_demo.TabIndex = 23;
+            this.bt_demo.Text = "Demo";
+            this.bt_demo.UseVisualStyleBackColor = true;
+            this.bt_demo.Click += new System.EventHandler(this.bt_demo_Click);
             // 
             // comboBox_comport
             // 
@@ -118,7 +128,7 @@
             this.groupBox20.Controls.Add(this.bt_temperature_on);
             this.groupBox20.Location = new System.Drawing.Point(728, 12);
             this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Size = new System.Drawing.Size(172, 136);
+            this.groupBox20.Size = new System.Drawing.Size(217, 136);
             this.groupBox20.TabIndex = 187;
             this.groupBox20.TabStop = false;
             // 
@@ -127,7 +137,7 @@
             this.bt_temperature_off.BackColor = System.Drawing.SystemColors.Control;
             this.bt_temperature_off.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_temperature_off.ForeColor = System.Drawing.Color.Red;
-            this.bt_temperature_off.Location = new System.Drawing.Point(33, 95);
+            this.bt_temperature_off.Location = new System.Drawing.Point(51, 96);
             this.bt_temperature_off.Name = "bt_temperature_off";
             this.bt_temperature_off.Size = new System.Drawing.Size(118, 32);
             this.bt_temperature_off.TabIndex = 184;
@@ -140,7 +150,7 @@
             this.lb_temperature.AutoSize = true;
             this.lb_temperature.Font = new System.Drawing.Font("Arial", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_temperature.ForeColor = System.Drawing.Color.Red;
-            this.lb_temperature.Location = new System.Drawing.Point(11, 16);
+            this.lb_temperature.Location = new System.Drawing.Point(29, 16);
             this.lb_temperature.Name = "lb_temperature";
             this.lb_temperature.Size = new System.Drawing.Size(37, 41);
             this.lb_temperature.TabIndex = 185;
@@ -151,7 +161,7 @@
             this.bt_temperature_on.BackColor = System.Drawing.SystemColors.Control;
             this.bt_temperature_on.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_temperature_on.ForeColor = System.Drawing.Color.Red;
-            this.bt_temperature_on.Location = new System.Drawing.Point(33, 60);
+            this.bt_temperature_on.Location = new System.Drawing.Point(51, 61);
             this.bt_temperature_on.Name = "bt_temperature_on";
             this.bt_temperature_on.Size = new System.Drawing.Size(118, 32);
             this.bt_temperature_on.TabIndex = 183;
@@ -163,7 +173,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(728, 263);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(172, 287);
+            this.richTextBox1.Size = new System.Drawing.Size(217, 287);
             this.richTextBox1.TabIndex = 188;
             this.richTextBox1.Text = "";
             // 
@@ -172,26 +182,16 @@
             this.SerialPortTimer100ms.Enabled = true;
             this.SerialPortTimer100ms.Tick += new System.EventHandler(this.SerialPortTimer100ms_Tick);
             // 
-            // bt_demo
-            // 
-            this.bt_demo.Location = new System.Drawing.Point(409, 17);
-            this.bt_demo.Name = "bt_demo";
-            this.bt_demo.Size = new System.Drawing.Size(46, 35);
-            this.bt_demo.TabIndex = 23;
-            this.bt_demo.Text = "Demo";
-            this.bt_demo.UseVisualStyleBackColor = true;
-            this.bt_demo.Click += new System.EventHandler(this.bt_demo_Click);
-            // 
             // timer_demo
             // 
-            this.timer_demo.Interval = 1000;
+            this.timer_demo.Interval = 300;
             this.timer_demo.Tick += new System.EventHandler(this.timer_demo_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(910, 625);
+            this.ClientSize = new System.Drawing.Size(957, 625);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox20);
             this.Controls.Add(this.groupBox_comport);

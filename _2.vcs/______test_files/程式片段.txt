@@ -1,4 +1,8 @@
 
+webBrowser1 空白頁
+this.webBrowser1.Navigate("about:blank");
+
+
 <a> 超連結 如何取得文字 :
 
 Name = htmlNode.InnerText
@@ -4245,6 +4249,44 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 
 //--------------------------------------------------------------------------------------------------------------------------
+using System.Threading;
+
+
+        //#制作閃動的窗體
+        private void button1_Click(object sender, EventArgs e)
+        {
+            while (Visible) // 關閉窗體時，停止循環
+            {
+                for (int c = 0; c < 254 && Visible; c++)
+                {
+                    this.BackColor = Color.FromArgb(c, 255 - c, c); // 此方法指定三個數字：red/green/blue.
+                    Application.DoEvents(); // 此語句使操作系統能夠在程序之外執行其他操作。否則
+                    // 程序將占用所有CPU周期
+                    Thread.Sleep(3); // 此語句在循環中插入3毫秒的延遲。
+                }
+                for (int c = 254; c >= 0 && Visible; c--)
+                {
+                    this.BackColor = Color.FromArgb(c, 255 - c, c);
+                    Application.DoEvents();
+                    Thread.Sleep(3);
+                }
+            }
+
+        }
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -4260,23 +4302,6 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 
 
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-        				
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
 //--------------------------------------------------------------------------------------------------------------------------
 
 
@@ -4303,10 +4328,88 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 
 
+利用线程的方法 做延时 不卡界面
+
+Thread t = new Thread(o => Thread.Sleep(500));
+                    t.Start(this);
+                    while (t.IsAlive)
+                    {
+                        Application.DoEvents();
+                    }
+
+
+ 不用线程 也可以这样不卡界面 
+
+public static void Delay(int mm)
+        {
+            DateTime current = DateTime.Now;
+            while (current.AddMilliseconds(mm) > DateTime.Now)
+            {
+                Application.DoEvents();
+            }
+            return;
+        } 
+
+
 
 
 //--------------------------------------------------------------------------------------------------------------------------
 
+
+//线程常用的方法
+
+/// <summary>
+/// 一个示例方法 - 无参数
+/// </summary>
+private void TestMethod()
+{
+    Console.WriteLine("我是测试线程");
+}
+//无参数线程的创建
+Thread Thd = new Thread(TestMethod);
+
+/// <summary>
+/// 一个示例方法 - 有参数
+/// </summary>
+private void TestMethod(int Obj)
+{
+    Console.WriteLine("我是测试线程");
+}
+//有参数线程的创建
+int Obj = 0;
+Thread Thd = new Thread(() => TestMethod(Obj));
+
+//如果要设置线程为MTA模型
+Thd.SetApartmentState(ApartmentState.MTA);
+
+//如果设置线程为后台线程（有人说这个就是MTA模型的线程，不过未经考证）
+Thd.IsBackground = true;
+
+//设置这个线程的名字
+Thd.Name = "MyThread";
+
+//线程激活
+Thd.Start();
+
+//线程挂起（类似线程暂停）
+Thd.Suspend();
+
+//线程恢复（将挂起线程恢复运行状态）
+Thd.Resume();
+
+//线程强制终止（强制退出）
+Thd.Abort();
+//为了保证线程被终止，要加入一句Join
+Thd.Join();
+
+//得到当前线程的名字
+string MyThreadName = Thread.CurrentThread.Name;
+
+//判断线程是否存活
+if (Thd.IsAlive)
+{
+    //如果存活，则执行....
+}
 
 
 

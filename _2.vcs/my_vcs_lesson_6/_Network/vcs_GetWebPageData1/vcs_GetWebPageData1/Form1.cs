@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Net;   //for WebRequest
 using System.IO;    //for Stream
 
-namespace vcs_ReadWrite_HTML
+namespace vcs_GetWebPageData1
 {
     public partial class Form1 : Form
     {

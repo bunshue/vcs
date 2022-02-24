@@ -42,6 +42,7 @@ namespace vcs_Comport_Sample_Temperature
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            lb_temperature.Text = "";
             this.BackColor = Color.Yellow;
             Comport_Scan();
         }
@@ -644,7 +645,7 @@ namespace vcs_Comport_Sample_Temperature
                             temperature_data = input[2] * 256 + input[3];
 
                             draw_chart_temperature(temperature_data);
-
+                            richTextBox1.Text += ((int)input[2]).ToString() + " " + ((int)input[3]).ToString() + "\n";
                         }
                     }
                 }
@@ -737,13 +738,40 @@ namespace vcs_Comport_Sample_Temperature
 
         private void bt_demo_Click(object sender, EventArgs e)
         {
-            timer_demo.Enabled = true;
+            if (flag_show_cpu_temperature == false)
+            {
+                flag_show_cpu_temperature = true;
+                //溫度偵測 ON
 
+
+                //demo
+                timer_demo.Enabled = true;
+
+                this.Controls.Add(chart_temperature);
+            }
+            else
+            {
+                flag_show_cpu_temperature = false;
+                //溫度偵測 OFF
+
+                //demo
+                timer_demo.Enabled = false;
+
+                lb_temperature.Text = "";
+                this.Controls.Remove(chart_temperature);
+            }
         }
 
         private void timer_demo_Tick(object sender, EventArgs e)
         {
+            Random r = new Random();
+            int hh = r.Next(172, 175);
+            int ll = r.Next(0, 256);
+            //溫度偵測顯示
+            temperature_data = hh * 256 + ll;
 
+            draw_chart_temperature(temperature_data);
+            richTextBox1.Text += hh.ToString() + " " + ll.ToString() + "\n";
         }
     }
 }
