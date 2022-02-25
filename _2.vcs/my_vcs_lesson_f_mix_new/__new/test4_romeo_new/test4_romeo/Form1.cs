@@ -25,6 +25,8 @@ using System.Text.RegularExpressions;
 
 using System.Threading;
 
+using System.Xml;
+
 namespace test4_romeo
 {
     public partial class Form1 : Form
@@ -92,7 +94,7 @@ namespace test4_romeo
 
         private void delegateEventMethod()
         {
-            eventMethod();
+            //eventMethod();
         }
 
         public static Form1 getLoading()
@@ -130,11 +132,11 @@ namespace test4_romeo
                 }
                 if (!caption.Equals(""))
                 {
-                    Form1.lbl_caption.Text = caption;
+                    //Form1.lbl_caption.Text = caption;
                 }
                 if (!description.Equals(""))
                 {
-                    Form1.lbl_description.Text = description;
+                    //Form1.lbl_description.Text = description;
                 }
             }
         }
@@ -273,15 +275,164 @@ namespace test4_romeo
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //read_xml.xml
 
+            string filename = @"../../read_xml.xml";
+
+
+            //XDocument doc = XDocument.Load(Server.MapPath("html5Reader/ReaderData.xml")); 
+            StringBuilder sb = new StringBuilder();
+            XmlDocument dc = new XmlDocument();
+            dc.Load(filename);
+
+            XmlNodeList xnl = dc.SelectNodes("chapter");
+            sb.Append("<ul>");
+            readxml(xnl, sb);
+            sb.Append("</ul>");
+
+
+            richTextBox1.Text += sb.ToString() + "\n";
+            //this.html.InnerHtml = sb.ToString(); 
+
+        }
+
+        private void readxml(XmlNodeList xmlnl, StringBuilder sb_)
+        {
+            richTextBox1.Text += "rrrrrr len = " + xmlnl.Count.ToString() + "\n";
+            foreach (XmlNode xl in xmlnl)
+            {
+                if (xl.ChildNodes.Count == 0)
+                {
+                    sb_.Append("<li><a>" + xl.Attributes["value"].Value + "</a></li>");
+                    richTextBox1.Text += "11111";
+                }
+                else
+                {
+                    sb_.Append("<li><a>" + xl.Attributes["value"].Value + "</a><ul>");
+                    readxml(xl.ChildNodes, sb_);
+                    sb_.Append("</ul></li>");
+                    richTextBox1.Text += "22222";
+                }
+            }
+        }
+
+
+
+
+
+
+
+        public class Student
+        {
+            public long Id { get; set; }
+            public string Name { get; set; }
+            public short Age { get; set; }
+            public DateTime DateOfCreation { get; set; }
+            public bool? IsActive { get; set; }
+        }
+
+        public class Teacher
+        {
+            public long Id { get; set; }
+            public string Name { get; set; }
+            public Nullable<int> DepartmentId { get; set; }
+        }
+
+
+        public class Data
+        {
+            public static List<Student> GetStudents()
+            {
+                var list = new List<Student>
+        {
+            new Student {Id = 1, Name = "Smith", Age = 18, DateOfCreation = DateTime.Now, IsActive = true},
+            new Student {Id = 2, Name = "Hook", Age = 16, DateOfCreation = DateTime.Now.AddDays(-1), IsActive = true},
+            new Student {Id = 3, Name = "Jhon", Age = 15, DateOfCreation = DateTime.Now.AddDays(-2), IsActive = true},
+            new Student {Id = 4, Name = "Alan", Age = 21, DateOfCreation = DateTime.Now.AddDays(-3), IsActive = true}
+        };
+                return list;
+            }
+
+            public static List<Teacher> GetTeachers()
+            {
+                var list = new List<Teacher>
+        {
+            new Teacher {Id = 1, Name = "Smith", DepartmentId = 18 },
+            new Teacher {Id = 2, Name = "Hook", DepartmentId = 16 },
+            new Teacher {Id = 3, Name = "Jhon", DepartmentId = 15 },
+            new Teacher {Id = 4, Name = "Alan", DepartmentId = 21 }
+        };
+                return list;
+            }
+
+            public static DataTable DbNullInt()
+            {
+                DataTable table = new DataTable();
+                table.Columns.Add("Id", typeof(long));
+                table.Columns.Add("Name", typeof(string));
+
+                DataColumn column;
+                column = new DataColumn("DepartmentId", System.Type.GetType("System.Int32"));
+                column.AllowDBNull = true;
+                table.Columns.Add(column);
+
+                table.Rows.Add(1, "Smith", DBNull.Value);
+                table.Rows.Add(2, "Hook", 1);
+
+
+                return table;
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            /*
+            List<Student> students = Data.GetStudents();
+            
+           //List to DataTable conversion
+            DataTable studentTbl = students.ToDataTable();
+            
+             * //DataTable to List conversion
+            List<Student> newStudents = studentTbl.ToList<Student>();//ExtensionUtility.ToList<Student>(newStudents);
+            this.dataGridView1.DataSource = newStudents;
+
+            //List to DataTable conversion
+            DataTable teacherTbl = Data.DbNullInt();
+            //DataTable to List conversion
+            List<Teacher> newTeachers = teacherTbl.ToList<Teacher>();
+
+
+            this.dataGridView2.DataSource = newTeachers;
+            */
+
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //C# 模擬鍵盤操作--SendKey(),SendKeys()
+            //模擬鍵盤輸入就是使用以下2個語法實現的.
+            //SendKeys.Send(string keys);  //模擬漢字(文本)輸入
+            //SendKeys.SendWait(string keys); //模擬按鍵輸入
+
+            //光标移至richTextBox1
+            richTextBox1.Focus();
+
+            //模拟按下"ABCDEFG"
+            SendKeys.SendWait("(ABCDEFG)");
+            SendKeys.SendWait("{left 5}");
+            SendKeys.SendWait("{h 10}");
+
+            /*
+            更多举例:
+            SendKeys.SendWait("^C");  //Ctrl+C 组合键
+            SendKeys.SendWait("+C");  //Shift+C 组合键
+            SendKeys.SendWait("%C");  //Alt+C 组合键
+            SendKeys.SendWait("+(AX)");  //Shift+A+X 组合键
+            SendKeys.SendWait("+AX");  //Shift+A 组合键,之后按X键
+            SendKeys.SendWait("{left 5}");  //按←键 5次
+            SendKeys.SendWait("{h 10}");   //按h键 10次
+            SendKeys.Send("汉字");  //模拟输入"汉字"2个字
+            */
 
         }
 

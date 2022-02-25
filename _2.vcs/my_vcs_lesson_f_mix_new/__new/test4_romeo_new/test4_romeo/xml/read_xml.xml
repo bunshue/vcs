@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root value="审计报告及合并财务报表">
+
+    <chapter value="审计报告及合并财务报表B0001A"></chapter>
+
+    <chapter value="审计报告B0101A"></chapter>
+    <chapter value="财务报表B0102A">
+      <node value="（一）合并资产负债表B0201C"></node>
+      <node value="（二）资产负债表B0202C"></node>
+      <node value="（四）利润表B0204C"></node>
+      <node value="（五）合并现金流量B0205C"></node>
+      <node value="（六）现金流量表B0206C"></node>
+      <node value="（七）合并所有者权益变动表B0207C"></node>
+      <node value="（八）所有者权益变动表B0208C"></node>
+    </chapter>
+    <chapter value="财务报表附注B0103A">
+      <node value="一、公司基本情况B0201C"></node>
+      <node value="二、公司主要会计政策、会计估计和前期差错更正B0202A">
+        <knobble value="（一）财务报表的编制基础B0301C"></knobble>
+        <knobble value="（二）遵循企业会计准则的声明B0302C"></knobble>
+        <knobble value="（三）财务报告的批准报出B0303C"></knobble>
+        <knobble value="（四）会计期间B0304C"></knobble>
+        <knobble value="（五）记账本位币 B0305C"></knobble>
+        <knobble value="（六）同一控制下和非同一控制下企业合并的会计处理方法B0306A"></knobble>
+        <knobble value="（七）合并财务报表的编制方法B0307A"></knobble>
+        <knobble value="（八）现金及现金等价物的确定标准B0308C"></knobble>
+        <knobble value="（九）外币业务和外币报表折算B0309A"></knobble>
+　　　</node>
+　　</chapter>
+</root>

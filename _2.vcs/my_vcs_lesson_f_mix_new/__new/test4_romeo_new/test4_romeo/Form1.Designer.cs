@@ -50,8 +50,10 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lbl_caption = new System.Windows.Forms.Label();
             this.lbl_description = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // button15
@@ -270,11 +272,21 @@
             this.lbl_description.TabIndex = 38;
             this.lbl_description.Text = "label2";
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(554, 12);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(298, 268);
+            this.dataGridView2.TabIndex = 39;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 730);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.lbl_description);
             this.Controls.Add(this.lbl_caption);
             this.Controls.Add(this.dataGridView1);
@@ -303,6 +315,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -332,6 +345,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label lbl_caption;
         private System.Windows.Forms.Label lbl_description;
+        private System.Windows.Forms.DataGridView dataGridView2;
     }
 }
 
