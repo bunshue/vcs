@@ -19,9 +19,19 @@ namespace vcs_GetWebPageData1
             InitializeComponent();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            //網頁protocol	解決  要求已經中止: 無法建立 SSL/TLS 的安全通道。
+            // Allow TLS 1.1 and TLS 1.2 protocols for file download.
+            //for Sugar     3840 Romeo也可用
+            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+            //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,6 +74,10 @@ namespace vcs_GetWebPageData1
             return strResult;
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             //C#,從網頁上下載檔案範例
@@ -88,5 +102,45 @@ namespace vcs_GetWebPageData1
             richTextBox1.Text += "Done at " + DateTime.Now.ToString("HH:mm:ss.fff") + "\n";
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string url = "http://blog.darkthread.net/images/darkthreadbanner.gif";
+            string path = "aaaa.gif";
+            string result = HttpDownloadFile(url, path);
+            richTextBox1.Text += result + "\n";
+        }
+
+        /// <summary> 
+        /// Http下載文件 
+        /// </summary> 
+        public static string HttpDownloadFile(string url, string path)
+        {
+            // 設置參數
+            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest; //發送請求並獲取相應回應數據
+            HttpWebResponse response = request.GetResponse() as HttpWebResponse; //直到request.GetResponse()程序才開始向目標網頁發送Post請求
+            Stream responseStream = response.GetResponseStream(); //創建本地文件寫入流
+            Stream stream = new FileStream(path, FileMode.Create);
+            byte[] bArr = new byte[1024];
+            int size = responseStream.Read(bArr, 0, (int)bArr.Length);
+            while (size > 0)
+            {
+                stream.Write(bArr, 0, size);
+                size = responseStream.Read(bArr, 0, (int)bArr.Length);
+            }
+            stream.Close();
+            responseStream.Close();
+            return path;
+        }
+    }
+
+    //3Form1之外
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }

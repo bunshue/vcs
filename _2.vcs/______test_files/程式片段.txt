@@ -39,7 +39,7 @@ vcs_MyToolbox+
 日曆功能
 年月日星期
 農曆
-MyToolBox 加一個類似 vcs_MyPlayer3的mp3播放器
+
 需求：
 記憶檔案 記憶播放位置
 
@@ -48,7 +48,6 @@ MyToolBox 加一個類似 vcs_MyPlayer3的mp3播放器
 vcs_HtmlAgility+
 氣象 水 電 空氣 covid-19
 博客來
-
 
 comport的應用加一個ims溫度測試當範例 回傳溫度數值用ims_link裡面的溫度chart獨立出來
 

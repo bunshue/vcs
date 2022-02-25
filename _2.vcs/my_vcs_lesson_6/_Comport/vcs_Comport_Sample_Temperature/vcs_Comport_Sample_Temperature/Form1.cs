@@ -33,7 +33,6 @@ namespace vcs_Comport_Sample_Temperature
         //溫度偵測圖表
         private int pointIndex = 0;
         Chart chart_temperature = new RealtimeChart().GetChart;
-        int temperature_data = 0;
 
         public Form1()
         {
@@ -45,6 +44,8 @@ namespace vcs_Comport_Sample_Temperature
             lb_temperature.Text = "";
             this.BackColor = Color.Yellow;
             Comport_Scan();
+
+            pictureBox1.Location = new Point(chart_temperature.Location.X + chart_temperature.Width + 30, chart_temperature.Location.Y);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -88,7 +89,6 @@ namespace vcs_Comport_Sample_Temperature
 
         private void bt_comport_connect_Click(object sender, EventArgs e)
         {
-
             this.BackColor = Color.Yellow;
             bt_comport_connect.Enabled = true;
             bt_comport_disconnect.Enabled = false;
@@ -181,11 +181,8 @@ namespace vcs_Comport_Sample_Temperature
                 {
                     //MessageBox.Show("無法連上Comport, 請重新連線");
                     richTextBox1.Text += "無法連上 " + serialPort1.PortName + ", 請重新連線";
-
                 }
             }
-
-
 
             //計算serialPort1中有多少位元組 
             BytesToRead = serialPort1.BytesToRead;
@@ -195,8 +192,6 @@ namespace vcs_Comport_Sample_Temperature
                 //開啟程式時, 把所有serialPort的資料讀出來, 並丟棄之
                 serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
             }
-
-
         }
 
         private void bt_comport_disconnect_Click(object sender, EventArgs e)
@@ -585,7 +580,6 @@ namespace vcs_Comport_Sample_Temperature
             }
         }
 
-
         private void SpyMonitorRX()
         {
             //richTextBox1.Text += "do SpyMonitorRX() len = " + BytesToRead.ToString() + "\n";
@@ -642,10 +636,10 @@ namespace vcs_Comport_Sample_Temperature
                         if (flag_show_cpu_temperature == true)
                         {
                             //溫度偵測顯示
-                            temperature_data = input[2] * 256 + input[3];
+                            int temperature_data = input[2] * 256 + input[3];
 
                             draw_chart_temperature(temperature_data);
-                            richTextBox1.Text += ((int)input[2]).ToString() + " " + ((int)input[3]).ToString() + "\n";
+                            //richTextBox1.Text += ((int)input[2]).ToString() + " " + ((int)input[3]).ToString() + "\n";
                         }
                     }
                 }
@@ -682,7 +676,7 @@ namespace vcs_Comport_Sample_Temperature
 
         void draw_chart_temperature(int temperature_data)
         {
-            //richTextBox1.Text += temperature_data.ToString("X4") + "  ";
+            //richTextBox1.Text += temperature_data.ToString() + "  ";
             float temperature = ((((float)(temperature_data) / 65536.0f) / 0.00198421639f) - 273.15f);
             //richTextBox1.Text += temperature.ToString()+" C ";
 
@@ -743,7 +737,6 @@ namespace vcs_Comport_Sample_Temperature
                 flag_show_cpu_temperature = true;
                 //溫度偵測 ON
 
-
                 //demo
                 timer_demo.Enabled = true;
 
@@ -759,6 +752,14 @@ namespace vcs_Comport_Sample_Temperature
 
                 lb_temperature.Text = "";
                 this.Controls.Remove(chart_temperature);
+
+                Graphics g = pictureBox1.CreateGraphics();
+                g.Clear(Color.Yellow);
+                //順道清掉舊資料
+                for (int i = 0; i < (N); i++)
+                {
+                    temp_data[i] = 0;
+                }
             }
         }
 
@@ -768,10 +769,145 @@ namespace vcs_Comport_Sample_Temperature
             int hh = r.Next(172, 175);
             int ll = r.Next(0, 256);
             //溫度偵測顯示
-            temperature_data = hh * 256 + ll;
+            int temperature_data = hh * 256 + ll;
 
             draw_chart_temperature(temperature_data);
-            richTextBox1.Text += hh.ToString() + " " + ll.ToString() + "\n";
+            //richTextBox1.Text += hh.ToString() + " " + ll.ToString() + "\n";
+
+            draw_temperature_picture(temperature_data);
+        }
+
+        private const int N = 15;
+
+        int[] temp_data = new int[N];
+
+        //int demo_duty = 36;
+        void draw_temperature_picture(int temperature_data)
+        {
+            /*
+            demo_duty++;
+            if (demo_duty >= 100)
+                demo_duty = 36;
+            */
+
+            Graphics g = pictureBox1.CreateGraphics();
+            //g.Clear(BackColor);
+            g.Clear(Color.White);
+            DrawXY();
+            //DrawXLine();
+            //DrawYLine();
+            g.Dispose();
+
+            demo_record_function(temperature_data);
+        }
+
+        void demo_record_function(int temperature_data)
+        {
+            //richTextBox1.Text += temperature_data.ToString() + "  ";
+            float temperature = ((((float)(temperature_data) / 65536.0f) / 0.00198421639f) - 273.15f);
+            //richTextBox1.Text += temperature.ToString() + " C ";
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+
+            int temp_value = 0;
+            int ratio = 0;
+
+            int x_st = 0;
+            int x_step = 0;
+            int h_st = 0;
+
+            x_st = W * 10 / 100;
+            x_step = W * 80 / 100 / (N - 1);
+            h_st = H * 90 / 100;
+
+            //ratio = (H * 80 / 100) / 100;
+            ratio = 80960 / (H * 80 / 100) + 2;
+
+            //richTextBox1.Text += "a " + H.ToString() + " ";
+            //richTextBox1.Text += "b "+ratio.ToString() + " ";
+
+            temp_value = temperature_data / ratio;
+
+            for (int i = 0; i < 14; i++)
+            {
+                temp_data[i] = temp_data[i + 1];
+            }
+            temp_data[14] = temp_value;
+
+            Graphics g = pictureBox1.CreateGraphics();
+            // Create pens.
+            Pen greenPen = new Pen(Color.Green, 3);
+
+            // Create points that define curve.
+            Point point0 = new Point(x_st + x_step * 0, h_st - temp_data[0]);
+            Point point1 = new Point(x_st + x_step * 1, h_st - temp_data[1]);
+            Point point2 = new Point(x_st + x_step * 2, h_st - temp_data[2]);
+            Point point3 = new Point(x_st + x_step * 3, h_st - temp_data[3]);
+            Point point4 = new Point(x_st + x_step * 4, h_st - temp_data[4]);
+            Point point5 = new Point(x_st + x_step * 5, h_st - temp_data[5]);
+            Point point6 = new Point(x_st + x_step * 6, h_st - temp_data[6]);
+            Point point7 = new Point(x_st + x_step * 7, h_st - temp_data[7]);
+            Point point8 = new Point(x_st + x_step * 8, h_st - temp_data[8]);
+            Point point9 = new Point(x_st + x_step * 9, h_st - temp_data[9]);
+            Point point10 = new Point(x_st + x_step * 10, h_st - temp_data[10]);
+            Point point11 = new Point(x_st + x_step * 11, h_st - temp_data[11]);
+            Point point12 = new Point(x_st + x_step * 12, h_st - temp_data[12]);
+            Point point13 = new Point(x_st + x_step * 13, h_st - temp_data[13]);
+            Point point14 = new Point(x_st + x_step * 14, h_st - temp_data[14]);
+
+            Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12, point13, point14 };
+
+            // Draw lines between original points to screen.
+            //g.DrawLines(greenPen, curvePoints);   //畫直線
+
+            // Draw curve to screen.
+            g.DrawCurve(greenPen, curvePoints); //畫曲線
+
+            g.Dispose();
+        }
+
+        //以下為自己畫的
+        private void DrawXY()//画X轴Y轴
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Point px1 = new Point(W * 10 / 100, H * 90 / 100);
+            Point px2 = new Point(W * 90 / 100, H * 90 / 100);
+            g.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
+            Point py1 = new Point(W * 10 / 100, H * 90 / 100);
+            Point py2 = new Point(W * 10 / 100, H * 10 / 100);
+            g.DrawLine(new Pen(Brushes.Black, 5), py1, py2);
+            g.Dispose();
+        }
+
+        private void DrawXLine()    //画X轴平行线
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            for (int i = 1; i < 9; i++)
+            {
+                Point px1 = new Point(0, H - i * 50);
+                Point px2 = new Point(W, H - i * 50);
+                g.DrawLine(new Pen(Brushes.Black, 1), px1, px2);
+            }
+            g.Dispose();
+        }
+        private void DrawYLine()    //画X轴刻度
+        {
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            for (int i = 1; i < 9; i++)
+            {
+                Point py1 = new Point(100 * i, H - 5);
+                Point py2 = new Point(100 * i, H);
+                g.DrawLine(new Pen(Brushes.Red, 1), py1, py2);
+            }
+            g.Dispose();
         }
     }
 }

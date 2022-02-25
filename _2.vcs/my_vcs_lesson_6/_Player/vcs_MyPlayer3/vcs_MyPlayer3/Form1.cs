@@ -42,7 +42,6 @@ namespace vcs_MyPlayer3
         private const int MODE_0 = 0x00;   //mp3 only
         private const int MODE_1 = 0x01;   //mp3 + pdf
 
-        private const int PDF_PAGE = 5;
         private const int PDF_ZOOM_FACTOR = 130;
 
         string mp3_filename = string.Empty;
@@ -57,6 +56,8 @@ namespace vcs_MyPlayer3
         double mp3_rate = 1.0;
         int mp3_player_height = 50;
 
+        int pdf_page = 0;
+
         List<String> mp3_filename_list = new List<String>();
         int current_mp3_index = 0;
         int total_mp3_count = 0;
@@ -69,6 +70,7 @@ namespace vcs_MyPlayer3
 
         AxWindowsMediaPlayer axWindowsMediaPlayer1;
         WebBrowser webBrowser1;
+        TextBox tb_pdf_page = new TextBox();
         RichTextBox richTextBox1;
 
         bool flag_debug_mode = true;
@@ -126,6 +128,16 @@ namespace vcs_MyPlayer3
                 this.richTextBox1.Location = new System.Drawing.Point(W - richtextbox_width, 0);
                 this.richTextBox1.Size = new System.Drawing.Size(richtextbox_width, H - mp3_player_height);
                 this.Controls.Add(this.richTextBox1);
+
+                int w = 120;
+                int h = 120;
+                tb_pdf_page.Width = w / 3;
+                tb_pdf_page.Height = h / 3;
+                tb_pdf_page.Text = "5";
+                tb_pdf_page.TextAlign = HorizontalAlignment.Center;
+                tb_pdf_page.Location = new Point(this.richTextBox1.Location.X, this.richTextBox1.Location.Y + this.richTextBox1.Height - tb_pdf_page.Height);
+                this.Controls.Add(tb_pdf_page);	// 將控件加入表單
+                tb_pdf_page.BringToFront();
             }
 
             this.axWindowsMediaPlayer1 = new AxWindowsMediaPlayer();
@@ -289,7 +301,25 @@ namespace vcs_MyPlayer3
 
         private void bt_exit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            bool conversionSuccessful = int.TryParse(tb_pdf_page.Text, out pdf_page);    //out為必須
+            if (conversionSuccessful == true)
+            {
+                richTextBox1.Text += "得到int數字： " + pdf_page + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "int.TryParse 失敗\n";
+            }
+
+            Properties.Settings.Default.mp3_filename = mp3_filename;
+            Properties.Settings.Default.position = mp3_position;
+            Properties.Settings.Default.volume = mp3_volume;
+            Properties.Settings.Default.pdf_filename = pdf_filename;
+            Properties.Settings.Default.pdf_page = pdf_page;
+
+            Properties.Settings.Default.Save();
+
+            Application.Exit();
         }
 
         private void bt_right_Click(object sender, EventArgs e)
@@ -402,6 +432,14 @@ namespace vcs_MyPlayer3
             if (flag_use_autoload_pdf_file == false)
             {
                 pdf_filename = Properties.Settings.Default.pdf_filename;
+                pdf_page = Properties.Settings.Default.pdf_page;
+
+                if (pdf_page == -1)
+                {
+                    pdf_page = 0;
+                }
+                tb_pdf_page.Text = pdf_page.ToString();
+
                 if (File.Exists(pdf_filename) == true)
                 {
                     pdf_filename_short = Path.GetFileName(pdf_filename);
@@ -411,7 +449,14 @@ namespace vcs_MyPlayer3
                     //webBrowser1.Navigate(pdf_filename);
 
                     //指名頁數
-                    webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0&page=" + PDF_PAGE.ToString());
+                    if (pdf_page > 0)
+                    {
+                        webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0&page=" + pdf_page.ToString());
+                    }
+                    else
+                    {
+                        webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0");
+                    }
 
                     flag_display_mode = MODE_1;
                     show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);
@@ -556,8 +601,7 @@ namespace vcs_MyPlayer3
             else if (e.KeyData == Keys.O)
             {
                 show_main_message1("開啟mp3/pdf檔案", S_OK, 30);
-
-                openFileDialog1.Title = "單選檔案";
+                openFileDialog1.Title = "開啟mp3/pdf檔案";
                 openFileDialog1.FileName = "";              //預設開啟的檔名
                 openFileDialog1.DefaultExt = "*.mp3";
                 openFileDialog1.Filter = "mp3檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|MP4檔(*.mp4)|*.mp4|所有檔案(*.*)|*.*";   //存檔類型
@@ -590,8 +634,7 @@ namespace vcs_MyPlayer3
             else if (e.KeyData == Keys.M)
             {
                 show_main_message1("開啟mp3檔案", S_OK, 30);
-
-                openFileDialog1.Title = "單選檔案";
+                openFileDialog1.Title = "開啟mp3檔案";
                 openFileDialog1.FileName = "";              //預設開啟的檔名
                 openFileDialog1.DefaultExt = "*.mp3";
                 openFileDialog1.Filter = "mp3檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|MP4檔(*.mp4)|*.mp4|所有檔案(*.*)|*.*";   //存檔類型
@@ -681,8 +724,7 @@ namespace vcs_MyPlayer3
             else if (e.KeyData == Keys.P)
             {
                 show_main_message1("開啟pdf檔案", S_OK, 30);
-
-                openFileDialog1.Title = "單選檔案";
+                openFileDialog1.Title = "開啟pdf檔案";
                 openFileDialog1.FileName = "";              //預設開啟的檔名
                 openFileDialog1.DefaultExt = "*.pdf";
                 openFileDialog1.Filter = "pdf檔(*.pdf)|*.pdf|所有檔案(*.*)|*.*";   //存檔類型
@@ -711,6 +753,8 @@ namespace vcs_MyPlayer3
                     current_directory = Path.GetDirectoryName(pdf_filename);
                     webBrowser1.Navigate(pdf_filename);
                     show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);
+                    pdf_page = 0;
+                    tb_pdf_page.Text = pdf_page.ToString();
                 }
                 else
                 {
@@ -905,10 +949,21 @@ namespace vcs_MyPlayer3
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            bool conversionSuccessful = int.TryParse(tb_pdf_page.Text, out pdf_page);    //out為必須
+            if (conversionSuccessful == true)
+            {
+                richTextBox1.Text += "得到int數字： " + pdf_page + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "int.TryParse 失敗\n";
+            }
+
             Properties.Settings.Default.mp3_filename = mp3_filename;
             Properties.Settings.Default.position = mp3_position;
             Properties.Settings.Default.volume = mp3_volume;
             Properties.Settings.Default.pdf_filename = pdf_filename;
+            Properties.Settings.Default.pdf_page = pdf_page;
 
             Properties.Settings.Default.Save();
         }

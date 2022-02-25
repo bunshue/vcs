@@ -89,5 +89,34 @@ namespace vcs_ArrayList
         {
             ArrayListData.Insert(3, "David"); //插入一個元素
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //建立一個ArrayList
+
+
+            ArrayList list = new ArrayList();
+
+            list.Add("alive");
+
+            list.Add("silver");
+
+            list.Add("dog");
+
+            list.Add("Ftp");
+
+            //d.SetData("para", list);
+
+            //將制定的值賦值給應用程序域的屬性
+
+            //foreach (string s in (ArrayList)d.GetData("para"))
+            {// 獲取存在當前應用程序域中的值
+
+                //Console.WriteLine("you will see" + s);
+
+            }
+
+
+        }
     }
 }

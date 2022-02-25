@@ -460,5 +460,56 @@ namespace vcs_List1
             }
             richTextBox1.Text += "\n";
         }
+
+
+        public class tb_SensorRecordModel
+        {
+            public int ID { get; set; }
+            public decimal Value1 { get; set; }
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            List<tb_SensorRecordModel> list = new List<tb_SensorRecordModel>();
+            list.Add(new tb_SensorRecordModel { ID = 1, Value1 = 1 });
+            list.Add(new tb_SensorRecordModel { ID = 2, Value1 = 2 });
+            list.Add(new tb_SensorRecordModel { ID = 3, Value1 = 3 });
+
+            //1、改变list中某个元素的值
+            var model = list.Where(c => c.ID == 2).FirstOrDefault();
+            model.Value1 = 2222;
+
+            list.ForEach(c =>
+            {
+                //打印的数据表明 list中的那个元素 确实被改变了
+                //知识：引用、地址
+                richTextBox1.Text += "ID : " + c.ID.ToString() + "\tValue : " + c.Value1.ToString() + "\n";
+            });
+
+            //2、替换某一段数据
+            List<tb_SensorRecordModel> list1 = new List<tb_SensorRecordModel>();
+            list1.Add(new tb_SensorRecordModel { ID = 1, Value1 = 1 });
+            list1.Add(new tb_SensorRecordModel { ID = 2, Value1 = 2 });
+            list1.Add(new tb_SensorRecordModel { ID = 3, Value1 = 3 });
+            list1.Add(new tb_SensorRecordModel { ID = 4, Value1 = 4 });
+            list1.Add(new tb_SensorRecordModel { ID = 5, Value1 = 5 });
+
+            //构造新的一段数据
+            List<tb_SensorRecordModel> list2 = new List<tb_SensorRecordModel>();
+            list2.Add(new tb_SensorRecordModel { ID = 2, Value1 = 2222 });
+            list2.Add(new tb_SensorRecordModel { ID = 3, Value1 = 3333 });
+
+            //删除 旧的 那段数据
+            list1.RemoveRange(1, 2);
+
+            //将新的 这段数据 插入到 指定位置
+            list1.InsertRange(1, list2);
+
+            list1.ForEach(c =>
+            {
+                //Console.WriteLine($"{c.ID},{c.Value1}");
+                richTextBox1.Text += "ID : " + c.ID.ToString() + "\tValue : " + c.Value1.ToString() + "\n";
+            });
+        }
     }
 }
