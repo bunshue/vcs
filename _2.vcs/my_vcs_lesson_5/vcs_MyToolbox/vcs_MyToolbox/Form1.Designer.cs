@@ -35,7 +35,6 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.timer_notifyicon = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.lb_main_mesg1 = new System.Windows.Forms.Label();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -65,18 +64,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // lb_main_mesg1
-            // 
-            this.lb_main_mesg1.AutoSize = true;
-            this.lb_main_mesg1.BackColor = System.Drawing.SystemColors.Control;
-            this.lb_main_mesg1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg1.Location = new System.Drawing.Point(204, 24);
-            this.lb_main_mesg1.Name = "lb_main_mesg1";
-            this.lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
-            this.lb_main_mesg1.TabIndex = 135;
-            this.lb_main_mesg1.Text = "mesg1";
-            // 
             // timer_display
             // 
             this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
@@ -86,7 +73,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 703);
-            this.Controls.Add(this.lb_main_mesg1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
@@ -95,7 +81,6 @@
             this.LocationChanged += new System.EventHandler(this.Form1_LocationChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -106,7 +91,6 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.Timer timer_notifyicon;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Label lb_main_mesg1;
         private System.Windows.Forms.Timer timer_display;
     }
 }

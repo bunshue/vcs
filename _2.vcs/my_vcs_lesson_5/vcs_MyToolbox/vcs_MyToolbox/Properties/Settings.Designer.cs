@@ -82,5 +82,17 @@ namespace vcs_MyToolbox.Properties {
                 this["pdf_page"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string video_filename {
+            get {
+                return ((string)(this["video_filename"]));
+            }
+            set {
+                this["video_filename"] = value;
+            }
+        }
     }
 }

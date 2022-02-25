@@ -57,6 +57,17 @@ namespace vcs_Process_Start
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -117,7 +128,8 @@ namespace vcs_Process_Start
 
         private void button8_Click(object sender, EventArgs e)
         {
-
+            //打開D槽
+            Process.Start("d:");
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -133,22 +145,22 @@ namespace vcs_Process_Start
 
         private void button11_Click(object sender, EventArgs e)
         {
-
+            Process.Start("cmd.exe");
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-
+            Process.Start("regedit.exe");
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-
+            Process.Start("mspaint.exe");
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-
+            Process.Start("write.exe");
         }
 
         private void button15_Click(object sender, EventArgs e)

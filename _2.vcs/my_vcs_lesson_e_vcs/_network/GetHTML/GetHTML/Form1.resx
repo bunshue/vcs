@@ -166,27 +166,4 @@
 	return strHTML;
 }</value>
   </data>
-  <data name="txtContent.Text" xml:space="preserve">
-    <value>private void btnSend_Click(object sender, EventArgs e)
-{
-	MailMessage mailMessage = new MailMessage();
-	mailMessage.To.Add(this.txtTo.Text);
-	mailMessage.From = new System.Net.Mail.MailAddress(this.txtFrom.Text);
-	mailMessage.Subject = this.txtTitle.Text;
-	mailMessage.Body = this.txtContent.Text;
-	mailMessage.IsBodyHtml = true;
-	mailMessage.BodyEncoding = System.Text.Encoding.UTF8;
-	mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
-	this.password = Password;
-
-	SmtpClient smtpClient = new SmtpClient();
-	smtpClient.Credentials = new System.Net.NetworkCredential(mailMessage.From.Address, this.txtPassword.Text);
-	smtpClient.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
-	smtpClient.Host = "smtp." + mailMessage.From.Host;
-	smtpClient.Port = 25;
-	smtpClient.Timeout = 3000;
-	smtpClient.EnableSsl = false;
-	smtpClient.Send(mailMessage);
-}</value>
-  </data>
 </root>

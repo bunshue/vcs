@@ -29,34 +29,17 @@ this.Icon = ico;
 
 ----------------vcs +++ ST----------------
 
-DrAP的關閉按鈕左邊再多一個最小化按鈕
-
 vcs_test_all_00_Usually +
 開新表單範例
-
 
 vcs_MyToolbox+
 日曆功能
 年月日星期
 農曆
 
-需求：
-記憶檔案 記憶播放位置
-
-手動播放 
-
 vcs_HtmlAgility+
 氣象 水 電 空氣 covid-19
 博客來
-
-comport的應用加一個ims溫度測試當範例 回傳溫度數值用ims_link裡面的溫度chart獨立出來
-
-目前使用chart做  應再加一個自己畫的在旁邊
-
-再做一個模擬comport按鈕
-
-
-
 
 vcs_MyLibrary
 1. 三角函數
@@ -68,12 +51,8 @@ WebCam Comport使用
 
 MyPlayer3
 		1. 取消最上層顯示
-2. 可以在開啟pdf時指明到某一頁，但無法知道目前顯示到哪一頁，無法記下來，開啟時就不知道要開啟到哪一頁了
-3. pictureBox1的double click失效
 4. 做個地方可以做筆記, 筆記可存檔
-		5. 在已開啟mp3後，點選其他mp3檔，要能夠改播放新檔
 6. 不用鍵盤用滑鼠也能操作.....開檔、播放、、、、
-
 
 操作類:
 	按ctrl+上下	小量的加減速
@@ -81,8 +60,6 @@ MyPlayer3
 	Backspace	跳到檔頭
 	PageUp/PageDown 同資料夾、依檔名排序的上一個、下一個檔案
 	
-
-
 ----------------vcs +++ SP----------------
 
 

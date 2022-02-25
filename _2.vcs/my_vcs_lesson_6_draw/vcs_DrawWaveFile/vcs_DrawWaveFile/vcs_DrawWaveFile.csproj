@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6F930821-4DDB-404B-9B8E-6046DE5B94EF}</ProjectGuid>
+    <ProjectGuid>{11FEAEDF-373E-46F6-B1B9-21F38B283F67}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>draw_wave</RootNamespace>
-    <AssemblyName>draw_wave</AssemblyName>
+    <RootNamespace>vcs_DrawWaveFile</RootNamespace>
+    <AssemblyName>vcs_DrawWaveFile</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

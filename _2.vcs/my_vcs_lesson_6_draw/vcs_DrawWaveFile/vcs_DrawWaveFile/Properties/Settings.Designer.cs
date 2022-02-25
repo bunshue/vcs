@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace draw_wave.Properties
+namespace vcs_DrawWaveFile.Properties
 {
 
 

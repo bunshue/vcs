@@ -362,9 +362,9 @@ namespace vcs_System2
         public static extern int mciSendString(string lpstrCommand, string lpstrReturnString, System.UInt16 uReturnLength, System.IntPtr HwndCallback);
         private void button13_Click(object sender, EventArgs e)
         {
-            //光碟機打開
-            int i = mciSendString("Set cdaudio door open wait", "", 0, this.Handle);
-            if (i == 0)
+            //打開光碟機
+            int result = mciSendString("Set cdaudio door open wait", "", 0, this.Handle);
+            if (result == 0)
             {
                 richTextBox1.Text += "光碟機打開\n";
             }
@@ -372,14 +372,30 @@ namespace vcs_System2
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //光碟機關閉
-            int i = mciSendString("Set cdaudio door Closed wait", "", 0, this.Handle);
-            if (i == 0)
+            //關閉光碟機
+            int result = mciSendString("Set cdaudio door Closed wait", "", 0, this.Handle);
+            if (result == 0)
             {
                 richTextBox1.Text += "光碟機關閉\n";
             }
         }
         //光碟機開關 SP
+
+        /* 另外的寫法
+        [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
+        public static extern int mciSendString(string lpstrCommand, string lpstrReturnstring, int uReturnLength, int hwndCallback);
+
+        public static void 彈出光驅()
+        {
+            mciSendString("set CDAudio door open", null, 127, 0);
+        }
+
+        public static void 關閉光驅()
+        {
+            mciSendString("set CDAudio door closed", null, 127, 0);
+        }
+        */
+
 
         //取得任務欄尺寸大小 ST
 

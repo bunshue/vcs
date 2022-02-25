@@ -118,8 +118,9 @@ namespace network_test2_http
         private void button0_Click(object sender, EventArgs e)
         {
             //c# 下載網頁源碼 獲取http狀態碼
-            //c# 下載網頁源碼 獲取http狀態碼
-            HttpWebRequest hwr = (HttpWebRequest)WebRequest.Create("http://www.baidu.com");
+            string url = @"http://www.baidu.com";
+
+            HttpWebRequest hwr = (HttpWebRequest)WebRequest.Create(url);
             hwr.AllowAutoRedirect = false; //不允許重定向
             hwr.Timeout = 10000; //連接超時時間設置
             hwr.Method = "GET"; //協議：GET、HEAD、POST、PUT、DELETE、TRACE 或OPTIONS。
@@ -201,10 +202,12 @@ namespace network_test2_http
         {
             //下載網頁HTML源碼
 
+            string url = @"http://jsonplaceholder.typicode.com/posts";
+
             //建立 WebRequest 並指定目標的 uri
-            WebRequest request = WebRequest.Create("http://jsonplaceholder.typicode.com/posts");
+            WebRequest request = WebRequest.Create(url);
             // 使用 HttpWebRequest.Create 實際上也是呼叫 WebRequest.Create
-            //WebRequest request = HttpWebRequest.Create("http://jsonplaceholder.typicode.com/posts");
+            //WebRequest request = HttpWebRequest.Create(url);
             //指定 request 使用的 http verb
             request.Method = "GET";
             //使用 GetResponse 方法將 request 送出，如果不是用 using 包覆，請記得手動 close WebResponse 物件，避免連線持續被佔用而無法送出新的 request
@@ -224,7 +227,7 @@ namespace network_test2_http
         {
             //下載網頁HTML源碼
             //要抓取的URL位址
-            string url = "http://jsonplaceholder.typicode.com/posts";
+            string url = @"http://jsonplaceholder.typicode.com/posts";
 
             //得到指定Url的源碼
 
@@ -261,7 +264,7 @@ namespace network_test2_http
         {
             //下載網頁HTML源碼
 
-            string url = "http://www.google.com/webhp?hl=zh-TW";
+            string url = @"http://www.google.com/webhp?hl=zh-TW";
             HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);
             req.Method = "GET";
             using (WebResponse wr = req.GetResponse())
@@ -274,17 +277,13 @@ namespace network_test2_http
                 string strResult = streamReader.ReadToEnd();
 
                 richTextBox1.Text += strResult + "\n";
-
-
-
             }
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             //取得網頁資料
-            string url = "http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/188537.html";
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/188537.html";
 
             WebClient wc = new WebClient();     // 建立 WebClient
             wc.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
@@ -413,7 +412,6 @@ namespace network_test2_http
             string url = @"http://www.aspphp.online/Skin/apsp/logo.gif";
 
             getimages(url);
-
         }
 
         /// <summary> 
@@ -455,7 +453,7 @@ namespace network_test2_http
         {
             string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxpjc/201701/132908.html";
             string str = GetHtmlContentByUrl(url, out str);
-            richTextBox1.Text = str;
+            richTextBox1.Text = str + "\n";
 
         }
 
@@ -464,7 +462,7 @@ namespace network_test2_http
             //C#下載網頁HTML源碼
             string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxpjc/201701/132908.html";
             string str = DownLoad_HTML.GetHtml(url);
-            richTextBox1.Text = str;
+            richTextBox1.Text = str + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -472,7 +470,7 @@ namespace network_test2_http
             //網頁抓取
             string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxpjc/201701/132908.html";
             string str = GetContentFromUrll(url);
-            richTextBox1.Text = str;
+            richTextBox1.Text = str + "\n";
         }
 
         private string GetContentFromUrll(string _requestUrl)
@@ -521,11 +519,9 @@ namespace network_test2_http
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
-
 
         private void button15_Click(object sender, EventArgs e)
         {
@@ -533,16 +529,15 @@ namespace network_test2_http
             //抓取網頁並分析數據
 
             //要抓取的URL地址
-            //string url = "http://list.mp3.baidu.com/topso/mp3topsong.html?id=1#top2";
-            string url = "https://tw.dictionary.search.yahoo.com/search;_ylt=AwrtXG3n.Oxg00wAkRB7rolQ;_ylc=X1MDMTM1MTIwMDM3OQRfcgMyBGZyAwRncHJpZAM1cFFoWDdMWFFLbTByV2N1Z3d3WThBBG5fcnNsdAMwBG5fc3VnZwMxBG9yaWdpbgN0dy5kaWN0aW9uYXJ5LnNlYXJjaC55YWhvby5jb20EcG9zAzAEcHFzdHIDBHBxc3RybAMwBHFzdHJsAzgEcXVlcnkDcHJlc3RpZ2UEdF9zdG1wAzE2MjYxNDI5Nzk-?p=prestige&fr=sfp&iscqry=";
-            //string url = "http://mirlab.org/jang/books/matlabProgramming4beginner/example/03-%E4%BA%8C%E7%B6%AD%E5%B9%B3%E9%9D%A2%E7%B9%AA%E5%9C%96/plotxy12.m";
-            //string url = "https://zh.wikipedia.org/wiki/%E6%98%8E%E7%A5%9E%E5%AE%97";
+            //string url = @"http://list.mp3.baidu.com/topso/mp3topsong.html?id=1#top2";
+            string url = @"https://tw.dictionary.search.yahoo.com/search;_ylt=AwrtXG3n.Oxg00wAkRB7rolQ;_ylc=X1MDMTM1MTIwMDM3OQRfcgMyBGZyAwRncHJpZAM1cFFoWDdMWFFLbTByV2N1Z3d3WThBBG5fcnNsdAMwBG5fc3VnZwMxBG9yaWdpbgN0dy5kaWN0aW9uYXJ5LnNlYXJjaC55YWhvby5jb20EcG9zAzAEcHFzdHIDBHBxc3RybAMwBHFzdHJsAzgEcXVlcnkDcHJlc3RpZ2UEdF9zdG1wAzE2MjYxNDI5Nzk-?p=prestige&fr=sfp&iscqry=";
+            //string url = @"http://mirlab.org/jang/books/matlabProgramming4beginner/example/03-%E4%BA%8C%E7%B6%AD%E5%B9%B3%E9%9D%A2%E7%B9%AA%E5%9C%96/plotxy12.m";
+            //string url = @"https://zh.wikipedia.org/wiki/%E6%98%8E%E7%A5%9E%E5%AE%97";
             //得到指定Url的源码
             string strWebContent = GetWebContent(url);
             richTextBox1.Text = strWebContent;
 
             return;
-
 
             //取出和数据有关的那段源码
             int iBodyStart = strWebContent.IndexOf("<body", 0);
@@ -591,7 +586,9 @@ namespace network_test2_http
         {
             //獲取網頁內容 1
 
-            WebRequest request = WebRequest.Create("http://www.hao123.com/");
+            string url = @"http://www.hao123.com/";
+
+            WebRequest request = WebRequest.Create(url);
             // If required by the server, set the credentials.
             request.Credentials = CredentialCache.DefaultCredentials;
             // Get the response.
@@ -620,6 +617,9 @@ namespace network_test2_http
         private void button17_Click(object sender, EventArgs e)
         {
             //獲取網頁內容 2
+
+            string url = @"http://www.hao123.com/";
+
             WebClient wc = new WebClient();     // 建立 WebClient
 
             // Add a user agent header in case the
@@ -627,7 +627,7 @@ namespace network_test2_http
 
             wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
 
-            Stream data = wc.OpenRead("http://www.hao123.com/");
+            Stream data = wc.OpenRead(url);
             StreamReader reader = new StreamReader(data, Encoding.Default); // 注：漢字需要轉為UTF8格式
             string s = reader.ReadToEnd();
             //Response.Write(s);
@@ -639,11 +639,12 @@ namespace network_test2_http
         private void button18_Click(object sender, EventArgs e)
         {
             //獲取網頁內容 3
+            string url = @"http://www.hao123.com/";
+
             WebClient wc = new WebClient();     // 建立 WebClient
-            //client.DownloadFile("http://www.hao123.com%22,%22123.htm/");
-            string reply = wc.DownloadString("http://www.hao123.com/");
-            richTextBox1.Text += "\n" + reply + "\n";
-            //Response.Write(reply);
+            wc.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
+            string str = wc.DownloadString(url);
+            richTextBox1.Text += str + "\n";
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -677,8 +678,10 @@ namespace network_test2_http
             //獲取遠程網頁中的所有鏈接URL（網絡蜘蛛實現原理）
             //使用System.Net.WebClient類獲取遠程網頁內容，然後使用URL正則表達式分析Html代碼中的鏈接。
 
+            string url = @"http://news.163.com";
+
             WebClient wc = new WebClient();     // 建立 WebClient
-            byte[] page = wc.DownloadData("http://news.163.com");
+            byte[] page = wc.DownloadData(url);
             string content = Encoding.UTF8.GetString(page);
             string regex = "href=[\\\"\\\'](http:\\/\\/|\\.\\/|\\/)?\\w+(\\.\\w+)*(\\/\\w+(\\.\\w+)?)*(\\/|\\?\\w*=\\w*(&\\w*=\\w*)*)?[\\\"\\\']";
             Regex re = new Regex(regex);
@@ -771,8 +774,10 @@ namespace network_test2_http
         private void button22_Click(object sender, EventArgs e)
         {
             //獲取百度首頁生成靜態文件
-            //獲取百度首頁生成靜態文件
-            this.DownUrltoFile("http://www.baidu.com", "baidu.htm", "GB2312");
+
+            string url = @"http://www.baidu.com";
+
+            this.DownUrltoFile(url, "baidu.htm", "GB2312");
 
             //DownUrltoFile("http://www.xueit.com/show.aspx?pid=1", "html/news/20091224-001.html", "GB2312");
             //其中URL：http://www.xueit.com/show.aspx?pid=1 是动态显示文章，html/news/20091224-001.html是表字段htmlFile预先保存的文件名，这样就可以生成静态文件了。
@@ -838,8 +843,8 @@ namespace network_test2_http
         {
             //HttpWebRequest
             string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190339.html";
-            string result = GetHtmlData(url);
-            richTextBox1.Text += result + "\n";
+            string str = GetHtmlData(url);
+            richTextBox1.Text += str + "\n";
         }
 
         public string GetHtmlData(string url)
@@ -872,7 +877,8 @@ namespace network_test2_http
         {
             //提取網頁標題
             richTextBox1.Text += "提取網頁標題\n";
-            string url = "https://www.youtube.com/watch?v=ViyVmAU0zgo";
+
+            string url = @"https://www.youtube.com/watch?v=ViyVmAU0zgo";
 
             if (ValidateDate1(url))
             {
@@ -909,7 +915,7 @@ namespace network_test2_http
 
         static void download_file()
         {
-            string url = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Breathe-face-smile.svg/1200px-Breathe-face-smile.svg.png";
+            string url = @"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Breathe-face-smile.svg/1200px-Breathe-face-smile.svg.png";
             using (WebClient wc = new WebClient())  // 建立 WebClient
             {
                 wc.DownloadFile(new Uri(url), "Image.png");
@@ -942,8 +948,11 @@ namespace network_test2_http
         private void button26_Click(object sender, EventArgs e)
         {
             //在 C# 中使用 DownloadFile() 方法從一個 URL 下載檔案
+
+            string url = @"https://wiki.linuxfoundation.org/_media/wiki/logo.png";
+
             WebClient wc = new WebClient();     // 建立 WebClient
-            wc.DownloadFile("https://wiki.linuxfoundation.org/_media/wiki/logo.png", "aaaaa.png");
+            wc.DownloadFile(url, "aaaaa.png");
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -951,7 +960,7 @@ namespace network_test2_http
             //http test 1
             //語法01
             //資料來源:https://shunnien.github.io/2017/07/13/Accessing-HTTPS-URL-using-csharp/
-            var url = "https://www.moi.gov.tw/";//台灣內政部網址
+            var url = @"https://www.moi.gov.tw/";//台灣內政部網址
             string results;
             // 強制認為憑證都是通過的，特殊情況再使用
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
@@ -965,36 +974,30 @@ namespace network_test2_http
                 results = sr.ReadToEnd();
                 sr.Close();
             }
-            //Console.WriteLine(results);
-            richTextBox1.Text += results;
-
-            richTextBox1.Text += "\n";
-
+            richTextBox1.Text += results + "\n";
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
             //http test 2
             //語法02
-            getUrlResponse("https://www.moi.gov.tw/");
-
+            string url = @"https://www.moi.gov.tw/";
+            getUrlResponse(url);
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
             //http test 3
             //語法3
-            string url1 = "https://www.moi.gov.tw/";
-            string result = PostUrl(url1, "key=123");
-            Console.WriteLine(result);
-
+            string url = @"https://www.moi.gov.tw/";
+            string result = PostUrl(url, "key=123");
+            richTextBox1.Text += result + "\n";
         }
 
         static private bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
         {
             return true;// Always accept
         }
-
 
         static private HttpWebResponse getUrlResponse(string url)
         {
@@ -1003,11 +1006,9 @@ namespace network_test2_http
 
             if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
             {
-                ServicePointManager.ServerCertificateValidationCallback =
-                        new RemoteCertificateValidationCallback(CheckValidationResult);
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
             }
 
-            //...
             resp = (HttpWebResponse)req.GetResponse();
             using (StreamReader sr = new StreamReader(resp.GetResponseStream()))
             {
@@ -1016,7 +1017,6 @@ namespace network_test2_http
                 sr.Close();
             }
 
-            //...
             return resp;
         }
 
@@ -1064,7 +1064,6 @@ namespace network_test2_http
             {
                 result = sr.ReadToEnd();
             }
-
             return result;
         }
 
@@ -1075,6 +1074,7 @@ namespace network_test2_http
             int H = Screen.PrimaryScreen.Bounds.Height;
 
             string url = @"https://www.google.com.tw/";
+
             WebBrowser webBrowser1 = new WebBrowser();
             webBrowser1.ScrollBarsEnabled = false;
             webBrowser1.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
@@ -1115,10 +1115,12 @@ namespace network_test2_http
             try
             {
                 //string fileName = imgs[i];
-                string filePath = @"http://www.aspphp.online/Skin/apsp/logo.gif";
+
+                string url = @"http://www.aspphp.online/Skin/apsp/logo.gif";
+
                 string localFile = "aaaaaa.gif";
 
-                HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(filePath);
+                HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(url);
                 HttpWebResponse webresponse = (HttpWebResponse)webrequest.GetResponse();
                 if (webresponse.StatusCode == HttpStatusCode.OK)
                 {
@@ -1190,7 +1192,7 @@ namespace network_test2_http
         private void button33_Click(object sender, EventArgs e)
         {
             //c# 獲取網頁源碼 by WebClient
-            string url = "http://www.google.com/webhp?hl=zh-TW";
+            string url = @"http://www.google.com/webhp?hl=zh-TW";
             string result = GetWebClient(url);
             richTextBox1.Text += result + "\n";
         }
@@ -1210,7 +1212,7 @@ namespace network_test2_http
         private void button34_Click(object sender, EventArgs e)
         {
             //c# 獲取網頁源碼 by WebRequest
-            string url = "http://www.google.com/webhp?hl=zh-TW";
+            string url = @"http://www.google.com/webhp?hl=zh-TW";
             string result = GetWebRequest(url);
             richTextBox1.Text += result + "\n";
         }
@@ -1235,7 +1237,7 @@ namespace network_test2_http
             //差很多~~~~~
 
             //c# 獲取網頁源碼 by HttpWebRequest
-            string url = "http://www.google.com/webhp?hl=zh-TW";
+            string url = @"http://www.google.com/webhp?hl=zh-TW";
             string result = GetHttpWebRequest(url);
             richTextBox1.Text += result + "\n";
         }
@@ -1290,12 +1292,14 @@ namespace network_test2_http
         private void button37_Click(object sender, EventArgs e)
         {
             //抓取網頁資料 2
+            string url = @"http://www.lagou.com/";
+
             WebClient wc = new WebClient();     // 建立 WebClient
             wc.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
 
-            string html = wc.DownloadString("http://www.lagou.com/");
+            string str = wc.DownloadString(url);
 
-            richTextBox1.Text += html + "\n";
+            richTextBox1.Text += str + "\n";
         }
 
         //過濾html標簽 ST
@@ -1330,8 +1334,8 @@ namespace network_test2_http
         {
             //獲取指定路徑下的模板的HTML源代碼
             string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/10747.html";
-            string result = GetHtmlCode(url, "UTF8");
-            richTextBox1.Text += result + "\n";
+            string str = GetHtmlCode(url, "UTF8");
+            richTextBox1.Text += str + "\n";
         }
 
         /// <summary>
@@ -1384,8 +1388,8 @@ namespace network_test2_http
         {
             //根據url獲取遠程html源碼
             string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/10747.html";
-            string result = GetSearchHtml(url);
-            richTextBox1.Text += result + "\n";
+            string str = GetSearchHtml(url);
+            richTextBox1.Text += str + "\n";
         }
 
         /// <summary>
@@ -1404,7 +1408,7 @@ namespace network_test2_http
         private void button41_Click(object sender, EventArgs e)
         {
             //httpWebRequest 文件下載
-            const string uri = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/SMS_K%C3%B6nig_Albert.jpg/450px-SMS_K%C3%B6nig_Albert.jpg";
+            string uri = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/SMS_K%C3%B6nig_Albert.jpg/450px-SMS_K%C3%B6nig_Albert.jpg";
             var req = WebRequest.Create(uri) as HttpWebRequest;
             //req.ContentType = "application/octet-stream";
             if (req != null)

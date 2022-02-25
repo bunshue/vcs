@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;        //for Directory
 using System.Diagnostics;   //for Process
+using System.Drawing.Drawing2D; //for SmoothingMode
 
 /*
 儲存參數
@@ -38,8 +39,10 @@ namespace vcs_MyToolbox
     {
         string mp3_filename = string.Empty;
         string pdf_filename = string.Empty;
+        string video_filename = string.Empty;
         string mp3_filename_short = string.Empty;
         string pdf_filename_short = string.Empty;
+        string video_filename_short = string.Empty;
         string current_directory = string.Empty;
         bool flag_already_use_webbrowser = false;
 
@@ -64,7 +67,7 @@ namespace vcs_MyToolbox
 
         bool flag_debug_mode = true;
         bool flag_repeat_mode = true;
-
+        bool flag_pause_mode = false;
 
         //自動隱藏頁面 ST
         internal AnchorStyles StopAnhor = AnchorStyles.None;
@@ -141,10 +144,9 @@ namespace vcs_MyToolbox
         Button btn_22 = new Button();
         Button btn_20s = new Button();
         Button btn_21s = new Button();
-        Label lb_debug0 = new Label();
-        Label lb_debug1 = new Label();
-        Label lb_debug2 = new Label();
+        Label lb_main_mesg1 = new Label();
         TextBox tb_pdf_page = new TextBox();
+        PictureBox pictureBox1 = new PictureBox();
         RichTextBox richTextBox1 = new RichTextBox();
 
         public Form1()
@@ -163,6 +165,14 @@ namespace vcs_MyToolbox
             this.TopMost = true;
             this.ShowInTaskbar = false;
 
+            //video
+            video_filename = Properties.Settings.Default.video_filename;
+            if (File.Exists(video_filename) == true)
+            {
+                video_filename_short = Path.GetFileName(video_filename);
+                current_directory = Path.GetDirectoryName(video_filename);
+            }
+
             //pdf
             pdf_filename = Properties.Settings.Default.pdf_filename;
             pdf_page = Properties.Settings.Default.pdf_page;
@@ -171,7 +181,6 @@ namespace vcs_MyToolbox
             {
                 pdf_filename_short = Path.GetFileName(pdf_filename);
                 current_directory = Path.GetDirectoryName(pdf_filename);
-
             }
 
             if (pdf_page == -1)
@@ -224,7 +233,6 @@ namespace vcs_MyToolbox
                     }
                 }
 
-
                 /*
                 richTextBox1.Text += "共有 " + mp3_filename_list.Count.ToString() + " 個字串\n";
 
@@ -239,7 +247,6 @@ namespace vcs_MyToolbox
 
                 richTextBox1.Text += "len = " + total_mp3_count.ToString() + "\n";
                 richTextBox1.Text += "index = " + current_mp3_index.ToString() + "\n";
-
             }
 
             mp3_volume = Properties.Settings.Default.volume;
@@ -276,6 +283,7 @@ namespace vcs_MyToolbox
             Properties.Settings.Default.volume = mp3_volume;
             Properties.Settings.Default.pdf_filename = pdf_filename;
             Properties.Settings.Default.pdf_page = pdf_page;
+            Properties.Settings.Default.video_filename = video_filename;
 
             Properties.Settings.Default.Save();
         }
@@ -443,34 +451,31 @@ namespace vcs_MyToolbox
             btn_22.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_22);	// 將控件加入表單
 
-            lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 3 - 13);
-            lb_main_mesg1.Text = "";
+            //lb_main_mesg1.Text = "AAAAAAA";
+            lb_main_mesg1.Font = new Font("標楷體", 20);
+            lb_main_mesg1.ForeColor = Color.Red;
+            //lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 3 - 16);
+            lb_main_mesg1.AutoSize = true;
+            this.Controls.Add(lb_main_mesg1);     // 將控件加入表單
+
+            //pictureBox1
+            pictureBox1.Width = w * 3 + 40;
+            pictureBox1.Height = h / 2;
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 22);
+            pictureBox1.BackColor = Color.Pink;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            //pictureBox1.Click += pictureBox1_click;	// 加入事件
+            pictureBox1.Paint += pictureBox1_Paint; // 加入事件
+            pictureBox1.MouseDown += pictureBox1_MouseDown;
+            pictureBox1.MouseUp += pictureBox1_MouseUp;
+
+            this.Controls.Add(pictureBox1);	// 將控件加入表單
 
             richTextBox1.Width = w * 3 + 40;
-            richTextBox1.Height = h * 2 - 20;
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 20);
+            richTextBox1.Height = h * 1 + 10;
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 4 - 40);
             this.Controls.Add(richTextBox1);	// 將控件加入表單
-
-            //lb_debug0.Text = "AAAAAAA";
-            lb_debug0.Font = new Font("標楷體", 22);
-            lb_debug0.ForeColor = Color.Red;
-            lb_debug0.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            lb_debug0.AutoSize = true;
-            this.Controls.Add(lb_debug0);     // 將控件加入表單
-
-            //lb_debug1.Text = "BBBBBBB";
-            lb_debug1.Font = new Font("標楷體", 22);
-            lb_debug1.ForeColor = Color.Red;
-            lb_debug1.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 50);
-            lb_debug1.AutoSize = true;
-            this.Controls.Add(lb_debug1);     // 將控件加入表單
-
-            //lb_debug2.Text = "CCCCCCC";
-            lb_debug2.Font = new Font("標楷體", 22);
-            lb_debug2.ForeColor = Color.Red;
-            lb_debug2.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 100);
-            lb_debug2.AutoSize = true;
-            this.Controls.Add(lb_debug2);     // 將控件加入表單
 
             int W = w * 3 + 20 * 4 + 20;
             int H = Screen.PrimaryScreen.Bounds.Height;
@@ -521,6 +526,7 @@ namespace vcs_MyToolbox
             Properties.Settings.Default.volume = mp3_volume;
             Properties.Settings.Default.pdf_filename = pdf_filename;
             Properties.Settings.Default.pdf_page = pdf_page;
+            Properties.Settings.Default.video_filename = video_filename;
 
             Properties.Settings.Default.Save();
 
@@ -587,7 +593,7 @@ namespace vcs_MyToolbox
                 }
                 else
                 {
-                    lb_debug1.Text = "Git資料夾不存在";
+                    show_main_message1("Git資料夾不存在", S_OK, 30);
                 }
             }
             else if (sender.Equals(btn_11))
@@ -601,16 +607,35 @@ namespace vcs_MyToolbox
             else if (sender.Equals(btn_20))
             {
                 text = btn_20.Text;
-                lb_debug1.Text = "播放mp3";
 
-                if (File.Exists(mp3_filename) == true)
+                if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPlaying)
                 {
-                    //string mp3_filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
-                    axWindowsMediaPlayer1.URL = mp3_filename;
+                    flag_pause_mode = true;
+                    axWindowsMediaPlayer1.Ctlcontrols.pause();
+                    show_main_message1("暫停", S_OK, 100);
                 }
                 else
                 {
-                    richTextBox1.Text += "無 mp3 檔案\n";
+                    if (flag_pause_mode == false)
+                    {
+                        show_main_message1("播放mp3", S_OK, 30);
+                        //axWindowsMediaPlayer1.Ctlcontrols.play();
+
+                        if (File.Exists(mp3_filename) == true)
+                        {
+                            //string mp3_filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+                            axWindowsMediaPlayer1.URL = mp3_filename;
+                        }
+                        else
+                        {
+                            richTextBox1.Text += "無 mp3 檔案\n";
+                        }
+                    }
+                    else
+                    {
+                        axWindowsMediaPlayer1.Ctlcontrols.play();
+                        show_main_message1("繼續", S_OK, 100);
+                    }
                 }
             }
             else if (sender.Equals(btn_20s))
@@ -788,7 +813,7 @@ namespace vcs_MyToolbox
                 text = "unknown";
             }
 
-            lb_debug0.Text = "你按了 " + text;
+            //show_main_message1("你按了 " + text, S_OK, 30);
         }
 
         //string filename = @"C:\______test_files\_icon\快.ico";
@@ -1249,6 +1274,87 @@ namespace vcs_MyToolbox
             }
         }
 
+        int flag_mouse_down_mode = 0;   //nothing
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down_mode = 1;   //move position mode
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down_mode = 0;
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            int x_st = 0;
+            int y_st = H * 3 / 4;
+
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.Clear(Color.Black);
+
+            if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            {
+                int total = (int)axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration;
+                int current = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+
+                SolidBrush sb = new SolidBrush(Color.Green);
+                //e.Graphics.FillRectangle(sb, 0, 0, W * current / total, H);
+
+                x_st = W * current / total;
+
+                int linewidth = 5;
+                e.Graphics.DrawLine(new Pen(Color.Gold, linewidth), 0, y_st, x_st, y_st);
+                e.Graphics.DrawLine(new Pen(Color.Gray, linewidth), x_st, y_st, W, y_st);
+
+                int r = 16;
+                if (flag_mouse_down_mode == 2)
+                {
+                    e.Graphics.FillEllipse(Brushes.Red, x_st - r / 2, y_st - r / 2, r, r);
+                    e.Graphics.DrawEllipse(new Pen(Color.White, 2), x_st - r / 2, y_st - r / 2, r, r);
+                }
+                else
+                {
+                    e.Graphics.FillEllipse(Brushes.White, x_st - r / 2, y_st - r / 2, r, r);
+                    e.Graphics.DrawEllipse(new Pen(Color.Blue, 2), x_st - r / 2, y_st - r / 2, r, r);
+                }
+
+                Font f = new Font("標楷體", 14);
+
+                int tmp_width = 0;
+                int tmp_height = 0;
+
+                string title = axWindowsMediaPlayer1.currentMedia.getItemInfo("Title");
+                string author = axWindowsMediaPlayer1.currentMedia.getItemInfo("Author");
+                string artist = axWindowsMediaPlayer1.currentMedia.getItemInfo("Artist");
+
+                title = Path.GetFileName(mp3_filename) + "  ( " + title + " / " + author + " )";
+
+                tmp_height = e.Graphics.MeasureString(title, f).ToSize().Height;
+                y_st = (H - tmp_height) / 4;
+                e.Graphics.DrawString(title, f, sb, new PointF(10, y_st));
+
+                string current_time = DateTime.Now.ToString("HH:mm:ss");
+                string play_info = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + " / " + axWindowsMediaPlayer1.Ctlcontrols.currentItem.durationString
+                    + " (" + ((int)((100 * axWindowsMediaPlayer1.Ctlcontrols.currentPosition / axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration))).ToString() + " %) "
+                    + current_time;
+
+                tmp_width = e.Graphics.MeasureString(play_info, f).ToSize().Width;
+                tmp_height = e.Graphics.MeasureString(play_info, f).ToSize().Height;
+                //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
+
+                y_st = (H - tmp_height) / 4;
+                e.Graphics.DrawString(play_info, f, sb, new PointF(W - tmp_width - 10, y_st));
+            }
+            else
+            {
+                e.Graphics.DrawLine(new Pen(Color.Gray, 10), 0, y_st, W, y_st);
+            }
+            e.Graphics.DrawRectangle(new Pen(Color.Red, 1), 0, 0, W - 1, H - 1);
+        }
     }
 }
 
