@@ -52,7 +52,7 @@ namespace vcs_DataTable1
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0+50);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 50);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -68,9 +68,35 @@ namespace vcs_DataTable1
             //建立DataTable 1
             //1.創建表實例
             DataTable dt = new DataTable();
-            dt=create_data_table1(dt);
+            dt = create_data_table1(dt);
 
             show_data_table(dt);
+
+            string html_result = newHtml(dt, 3);
+            richTextBox1.Text += "DataTable轉HTML\n" + html_result + "\n";
+        }
+
+        public string newHtml(DataTable table, int z)
+        {
+            int rows = table.Rows.Count;
+
+            string a = " <Html> abc";
+
+            a += " <table> ";
+            for (int i = 0; i < rows; i++)
+            {
+                a += " <tr> ";
+                for (int j = 0; j < z; j++)
+                {
+                    a += " <td> ";
+                    a += table.Rows[i][j];
+                    a += " </td> ";
+                }
+                a += "</tr>";
+            }
+            a += " </table> ";
+            a += " </Html> ";
+            return a;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -78,7 +104,7 @@ namespace vcs_DataTable1
             //建立DataTable 2
             //1.創建表實例
             DataTable dt = new DataTable();
-            dt=create_data_table2(dt);
+            dt = create_data_table2(dt);
 
             show_data_table(dt);
         }
@@ -626,10 +652,6 @@ namespace vcs_DataTable1
                     return false;
                 }
             }
-
         }
-
-
     }
 }
-

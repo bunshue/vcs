@@ -134,6 +134,8 @@ namespace vcs_MyPlayer3
                 tb_pdf_page.Width = w / 3;
                 tb_pdf_page.Height = h / 3;
                 tb_pdf_page.Text = "5";
+                //this.tb_file_l.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+                tb_pdf_page.KeyPress += new System.Windows.Forms.KeyPressEventHandler(tb_pdf_page_KeyPress);
                 tb_pdf_page.TextAlign = HorizontalAlignment.Center;
                 tb_pdf_page.Location = new Point(this.richTextBox1.Location.X, this.richTextBox1.Location.Y + this.richTextBox1.Height - tb_pdf_page.Height);
                 this.Controls.Add(tb_pdf_page);	// 將控件加入表單
@@ -210,6 +212,7 @@ namespace vcs_MyPlayer3
                 {
                     bt_control_setup();
                     bt_exit_setup();
+                    bt_minimize_setup();
                     flag_already_use_webbrowser = true;
                 }
             }
@@ -322,6 +325,37 @@ namespace vcs_MyPlayer3
             Application.Exit();
         }
 
+        void bt_minimize_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_minimize = new Button();  // 實例化按鈕
+            bt_minimize.Size = new Size(w, h);
+            bt_minimize.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            //g.DrawLine(p, 0, 0, w - 1, h - 1);
+            //g.DrawLine(p, w - 1, 0, 0, h - 1);
+            g.DrawLine(p, w / 4, h / 2 - 1, w * 3 / 4, h / 2 - 1);
+            bt_minimize.Image = bmp;
+
+            bt_minimize.Location = new Point(this.ClientSize.Width - bt_minimize.Width * 2 - 2, 0);
+            bt_minimize.Click += bt_minimize_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_minimize); // 將按鈕加入表單
+            bt_minimize.BringToFront();     //移到最上層
+        }
+
+        private void bt_minimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;   //設定表單最小化
+        }
+
         private void bt_right_Click(object sender, EventArgs e)
         {
             int amount = 0;
@@ -339,8 +373,6 @@ namespace vcs_MyPlayer3
                 axWindowsMediaPlayer1.Ctlcontrols.currentPosition += amount;
                 show_main_message1("快進 : " + amount.ToString(), S_OK, 30);
             }
-
-
         }
 
         private void bt_left_Click(object sender, EventArgs e)
@@ -359,6 +391,15 @@ namespace vcs_MyPlayer3
                 //快退
                 axWindowsMediaPlayer1.Ctlcontrols.currentPosition -= amount;
                 show_main_message1("快退 : " + amount.ToString(), S_OK, 30);
+            }
+        }
+
+        private void tb_pdf_page_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)13)
+            {
+                this.richTextBox1.Focus();
+                e.Handled = true;
             }
         }
 
@@ -531,7 +572,7 @@ namespace vcs_MyPlayer3
 
             //show_main_message1("音量 : " + mp3_volume.ToString(), S_OK, 30);
 
-            this.Focus();
+            //this.Focus();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -718,7 +759,7 @@ namespace vcs_MyPlayer3
                     mp3_filename = "";
                     mp3_position = 0;
                 }
-                this.Focus();
+                //this.Focus();
                 this.KeyPreview = true;
             }
             else if (e.KeyData == Keys.P)
@@ -761,7 +802,7 @@ namespace vcs_MyPlayer3
                     show_main_message1("未選取檔案", S_OK, 30);
                     pdf_filename = "";
                 }
-                this.Focus();
+                //this.Focus();
                 this.KeyPreview = true;
             }
             else if ((e.KeyData == Keys.D0) || (e.KeyData == Keys.NumPad0))

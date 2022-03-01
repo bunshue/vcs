@@ -51,13 +51,10 @@ namespace vcs_Button
             }
         }
 
-
         public void Toggle()
         {
             State = State == SwitchState.On ? SwitchState.Off : SwitchState.On;
         }
-
-
 
         public Form1()
         {
@@ -180,7 +177,7 @@ namespace vcs_Button
         //在Button上畫圖
         private void button2_Paint(object sender, PaintEventArgs e)
         {
-            string filename = @"C:\______test_files\cat\cat1.png";
+            string filename = @"C:\______test_files\__pic\_cat\cat1.png";
             Bitmap bmp;//實例Bitmap對像
             bmp = new Bitmap(filename);
             Graphics g = e.Graphics;

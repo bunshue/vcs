@@ -6,19 +6,24 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Collections;   //for ArrayList
 
 namespace vcs_ArrayList
 {
     public partial class Form1 : Form
     {
+        ArrayList ArrayListData = new ArrayList();
+
         public Form1()
         {
             InitializeComponent();
-            label1.Text = "共有 " + ArrayListData.Count.ToString() + " 個項目";
         }
 
-        ArrayList ArrayListData = new ArrayList();
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            label1.Text = "共有 " + ArrayListData.Count.ToString() + " 個項目";
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -58,8 +63,10 @@ namespace vcs_ArrayList
         private void button5_Click(object sender, EventArgs e)
         {
             int item = int.Parse(textBox2.Text);
-            if((item > 0) && (item <= ArrayListData.Count))
+            if ((item > 0) && (item <= ArrayListData.Count))
+            {
                 ArrayListData.RemoveAt(item - 1);      //刪除特定項目
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -79,10 +86,14 @@ namespace vcs_ArrayList
                 return;
             tmp = textBox3.Text;  //取得所輸入的資料
             if (ArrayListData.IndexOf(tmp) < 0)
+            {
                 //若超過陣列索引值則表示找不到符合的資料
                 richTextBox1.Text += "找不到您所輸入的資料\n";
+            }
             else
+            {
                 richTextBox1.Text += "您所尋找的資料在第 " + (ArrayListData.IndexOf(tmp) + 1).ToString() + " 筆\n";
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -93,7 +104,6 @@ namespace vcs_ArrayList
         private void button10_Click(object sender, EventArgs e)
         {
             //建立一個ArrayList
-
 
             ArrayList list = new ArrayList();
 
@@ -113,10 +123,32 @@ namespace vcs_ArrayList
             {// 獲取存在當前應用程序域中的值
 
                 //Console.WriteLine("you will see" + s);
-
             }
+        }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //建立和初始化 ArrayList ，以及顯示其值
 
+            // Creates and initializes a new ArrayList.
+            ArrayList myAL = new ArrayList();
+            myAL.Add("Hello");
+            myAL.Add("World");
+            myAL.Add("!");
+
+            // Displays the properties and values of the ArrayList.
+            Console.WriteLine("myAL");
+            Console.WriteLine("    Count:    {0}", myAL.Count);
+            Console.WriteLine("    Capacity: {0}", myAL.Capacity);
+            Console.Write("    Values:");
+            PrintValues(myAL);
+        }
+
+        public static void PrintValues(IEnumerable myList)
+        {
+            foreach (Object obj in myList)
+                Console.Write("   {0}", obj);
+            Console.WriteLine();
         }
     }
 }
