@@ -2145,7 +2145,7 @@ namespace _vcs_MakePicture
 
             //linewidth = 2;
             int dx = 6;
-            int dy = 6;
+            //int dy = 6;
 
             sb = new SolidBrush(Color.White);
             Point[] points = new Point[6];
@@ -2243,7 +2243,6 @@ namespace _vcs_MakePicture
 
         private void button3_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -2353,259 +2352,83 @@ namespace _vcs_MakePicture
         private void button19_Click(object sender, EventArgs e)
         {
             //畫在一起
-            Pen p;
-            SolidBrush sb;
-            Color foreground_color = Color.Red;
-            Color background_color = Color.White;
-
-            p = new Pen(foreground_color, 3);
-            sb = new SolidBrush(foreground_color);
-
             Bitmap bitmap1 = new Bitmap(1640, 480);
-            Graphics g = Graphics.FromImage(bitmap1);
+            Color background_color = Color.White;
+            Color foreground_color = Color.Red;
+            pictureBox1.Image = bitmap1;
 
-            int width = 80;  //每個icon的大小 寬
-            int height = 80; //每個icon的大小 高
-            int xx;
-            int yy;
-
-            Point[] points;
+            int type = 0;       //種類
+            int x_st = 0;     //icon的 位置 X
+            int y_st = 0;     //icon的 位置 Y
+            int width = 80;     //icon的 寬
+            int height = 80;    //icon的 高
             int dx = width + 20;
             int dy = height + 20;
-            int x_st = 0;
-            int y_st = 0;
 
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
-
-            //play-pause
-            points = new Point[3];
-            points[0] = new Point(x_st + width / 8, y_st + height * 2 / 8);
-            points[1] = new Point(x_st + width / 2, y_st + height / 2);
-            points[2] = new Point(x_st + width / 8, y_st + height * 6 / 8);
-            g.FillPolygon(sb, points);
-
-            g.FillRectangle(sb, new Rectangle(x_st + width / 2, y_st + height * 2 / 8, width / 8, height / 2));
-            g.FillRectangle(sb, new Rectangle(x_st + width / 2 + width * 2 / 8, y_st + height * 2 / 8, width / 8, height / 2));
-
-            x_st += dx;
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
-
-            // stop
-            g.FillRectangle(sb, new Rectangle(x_st + width / 8, y_st + height / 8, width * 6 / 8, height * 6 / 8));
-
-
-            x_st += dx;
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
-
-            //pause
-            g.FillRectangle(sb, new Rectangle(x_st + width * 3 / 16, y_st + height * 2 / 8, width * 4 / 16, height / 2));
-            g.FillRectangle(sb, new Rectangle(x_st + width * 9 / 16, y_st + height * 2 / 8, width * 4 / 16, height / 2));
-
-
-
-
-            x_st += dx;
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
-
-            // stop
-            //g.FillRectangle(sb, new Rectangle(x_st + width / 8, y_st + height / 8, width * 6 / 8, height * 6 / 8));
-
-
-            x_st += dx;
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
-
-            //next
-            points = new Point[3];
-            points[0] = new Point(x_st + width / 8 + width / 8, y_st + height * 2 / 8);
-            points[1] = new Point(x_st + width / 2 + width / 8, y_st + height / 2);
-            points[2] = new Point(x_st + width / 8 + width / 8, y_st + height * 6 / 8);
-            g.FillPolygon(sb, points);
-
-            g.FillRectangle(sb, new Rectangle(x_st + width / 2 + width / 8, y_st + height * 2 / 8, width / 8, height / 2));
-
-
-
-            x_st += dx;
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
-
-            //previous
-            points = new Point[3];
-            points[0] = new Point(x_st + width * 6 / 8, y_st + height * 2 / 8);
-            points[1] = new Point(x_st + width / 8 + width / 8 + width / 8, y_st + height / 2);
-            points[2] = new Point(x_st + width * 6 / 8, y_st + height * 6 / 8);
-            g.FillPolygon(sb, points);
-
-            g.FillRectangle(sb, new Rectangle(x_st + width / 8 + width / 8, y_st + height * 2 / 8, width / 8, height / 2));
-
-
+            type = ICON_PLAY_PAUSE;
             x_st = 0;
-            y_st += dy;
+            y_st = 0;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
-
-            //plus
-            g.FillRectangle(sb, new Rectangle(x_st + width / 8, y_st + height * 7 / 16, width * 6 / 8, height * 2 / 16));
-            g.FillRectangle(sb, new Rectangle(x_st + width * 7 / 16, y_st + height / 8, width * 2 / 16, height * 6 / 8));
-
-
-
+            type = ICON_STOP;
             x_st += dx;
+            y_st = 0;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
-
-            //minus
-            g.FillRectangle(sb, new Rectangle(x_st + width / 8, y_st + height * 7 / 16, width * 6 / 8, height * 2 / 16));
-
+            type = ICON_PAUSE;
             x_st += dx;
+            y_st = 0;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
-
-            //left
-            points = new Point[3];
-            points[0] = new Point(x_st + width * 2 / 8, y_st + height * 4 / 8);
-            points[1] = new Point(x_st + width * 6 / 8, y_st + height * 2 / 8);
-            points[2] = new Point(x_st + width * 6 / 8, y_st + height * 6 / 8);
-            g.FillPolygon(sb, points);
+            type = ICON_EMPTY;
             x_st += dx;
+            y_st = 0;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
-
-            //right
-            points = new Point[3];
-            points[0] = new Point(x_st + width * 2 / 8, y_st + height * 2 / 8);
-            points[1] = new Point(x_st + width * 6 / 8, y_st + height * 4 / 8);
-            points[2] = new Point(x_st + width * 2 / 8, y_st + height * 6 / 8);
-            g.FillPolygon(sb, points);
-
-
+            type = ICON_NEXT;
             x_st += dx;
+            y_st = 0;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
-
-            //up
-            points = new Point[3];
-            points[0] = new Point(x_st + width * 4 / 8, y_st + height * 2 / 8);
-            points[1] = new Point(x_st + width * 6 / 8, y_st + height * 6 / 8);
-            points[2] = new Point(x_st + width * 2 / 8, y_st + height * 6 / 8);
-            g.FillPolygon(sb, points);
-
-
+            type = ICON_PREVIOUS;
             x_st += dx;
+            y_st = 0;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
-            //background
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
-                }
-            }
+            type = ICON_PLUS;
+            x_st = 0;
+            y_st = dy;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
-            //down
-            points = new Point[3];
-            points[0] = new Point(x_st + width * 4 / 8, y_st + height * 6 / 8);
-            points[1] = new Point(x_st + width * 6 / 8, y_st + height * 2 / 8);
-            points[2] = new Point(x_st + width * 2 / 8, y_st + height * 2 / 8);
-            g.FillPolygon(sb, points);
+            type = ICON_MINUS;
+            x_st += dx;
+            y_st = dy;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
+            type = ICON_LEFT;
+            x_st += dx;
+            y_st = dy;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
+            type = ICON_RIGHT;
+            x_st += dx;
+            y_st = dy;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
+            type = ICON_UP;
+            x_st += dx;
+            y_st = dy;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
+            type = ICON_DOWN;
+            x_st += dx;
+            y_st = dy;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
 
-
-
-
-
-            pictureBox1.Image = bitmap1;
+            type = ICON_RECORD;
+            x_st = 0;
+            y_st = dy * 2;
+            draw_icon(bitmap1, type, x_st, y_st, width, height, background_color, foreground_color);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -2697,6 +2520,145 @@ namespace _vcs_MakePicture
             pointa = new Point(cx - r, cy - r);
             pointb = new Point(cx + r, cy + r);
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+        }
+
+        private const int ICON_EMPTY = 0;   //空白
+        private const int ICON_PLAY = 1;   //播放
+        private const int ICON_PLAY_PAUSE = 2;   //播放/暫停
+        private const int ICON_PAUSE = 3;   //暫停
+        private const int ICON_STOP = 4;   //停止
+        private const int ICON_NEXT = 5;   //下一首
+        private const int ICON_PREVIOUS = 6;   //上一首
+        private const int ICON_FASTF = 7;   //快進
+        private const int ICON_REVERSEF = 8;   //快退
+        private const int ICON_RECORD = 9;   //錄影
+        private const int ICON_PLUS = 10;   //加
+        private const int ICON_MINUS = 11;   //減
+        private const int ICON_UP = 12;   //上
+        private const int ICON_DOWN = 13;   //下
+        private const int ICON_LEFT = 14;   //左
+        private const int ICON_RIGHT = 15;   //右
+        private const int ICON_OPEN = 20;   //開啟檔案
+        private const int ICON_CLOSE = 21;   //關閉檔案
+
+        void draw_icon(Bitmap bitmap1, int type, int x_st, int y_st, int width, int height, Color background_color, Color foreground_color)
+        {
+            //畫在一起
+            Pen p;
+            SolidBrush sb;
+
+            p = new Pen(foreground_color, 3);
+            sb = new SolidBrush(foreground_color);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            int xx;
+            int yy;
+            Point[] points;
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, background_color);
+                }
+            }
+
+            if (type == ICON_PLAY_PAUSE)    //播放/暫停
+            {
+                points = new Point[3];
+                points[0] = new Point(x_st + width / 8, y_st + height * 2 / 8);
+                points[1] = new Point(x_st + width / 2, y_st + height / 2);
+                points[2] = new Point(x_st + width / 8, y_st + height * 6 / 8);
+                g.FillPolygon(sb, points);
+
+                g.FillRectangle(sb, new Rectangle(x_st + width / 2, y_st + height * 2 / 8, width / 8, height / 2));
+                g.FillRectangle(sb, new Rectangle(x_st + width / 2 + width * 2 / 8, y_st + height * 2 / 8, width / 8, height / 2));
+            }
+            else if (type == ICON_STOP)    //停止
+            {
+                g.FillRectangle(sb, new Rectangle(x_st + width / 8, y_st + height / 8, width * 6 / 8, height * 6 / 8));
+            }
+            else if (type == ICON_PAUSE)    //暫停
+            {
+                g.FillRectangle(sb, new Rectangle(x_st + width * 3 / 16, y_st + height * 2 / 8, width * 4 / 16, height / 2));
+                g.FillRectangle(sb, new Rectangle(x_st + width * 9 / 16, y_st + height * 2 / 8, width * 4 / 16, height / 2));
+            }
+            else if (type == ICON_EMPTY)    //空白
+            {
+
+            }
+            else if (type == ICON_NEXT)    //下一首
+            {
+                points = new Point[3];
+                points[0] = new Point(x_st + width / 8 + width / 8, y_st + height * 2 / 8);
+                points[1] = new Point(x_st + width / 2 + width / 8, y_st + height / 2);
+                points[2] = new Point(x_st + width / 8 + width / 8, y_st + height * 6 / 8);
+                g.FillPolygon(sb, points);
+
+                g.FillRectangle(sb, new Rectangle(x_st + width / 2 + width / 8, y_st + height * 2 / 8, width / 8, height / 2));
+            }
+            else if (type == ICON_PREVIOUS)    //上一首
+            {
+                points = new Point[3];
+                points[0] = new Point(x_st + width * 6 / 8, y_st + height * 2 / 8);
+                points[1] = new Point(x_st + width / 8 + width / 8 + width / 8, y_st + height / 2);
+                points[2] = new Point(x_st + width * 6 / 8, y_st + height * 6 / 8);
+                g.FillPolygon(sb, points);
+
+                g.FillRectangle(sb, new Rectangle(x_st + width / 8 + width / 8, y_st + height * 2 / 8, width / 8, height / 2));
+
+            }
+            else if (type == ICON_PLUS)    //加
+            {
+                g.FillRectangle(sb, new Rectangle(x_st + width / 8, y_st + height * 7 / 16, width * 6 / 8, height * 2 / 16));
+                g.FillRectangle(sb, new Rectangle(x_st + width * 7 / 16, y_st + height / 8, width * 2 / 16, height * 6 / 8));
+            }
+            else if (type == ICON_MINUS)    //減
+            {
+                g.FillRectangle(sb, new Rectangle(x_st + width / 8, y_st + height * 7 / 16, width * 6 / 8, height * 2 / 16));
+            }
+            else if (type == ICON_UP)    //上
+            {
+                points = new Point[3];
+                points[0] = new Point(x_st + width * 4 / 8, y_st + height * 2 / 8);
+                points[1] = new Point(x_st + width * 6 / 8, y_st + height * 6 / 8);
+                points[2] = new Point(x_st + width * 2 / 8, y_st + height * 6 / 8);
+                g.FillPolygon(sb, points);
+            }
+            else if (type == ICON_DOWN)    //下
+            {
+                points = new Point[3];
+                points[0] = new Point(x_st + width * 4 / 8, y_st + height * 6 / 8);
+                points[1] = new Point(x_st + width * 6 / 8, y_st + height * 2 / 8);
+                points[2] = new Point(x_st + width * 2 / 8, y_st + height * 2 / 8);
+                g.FillPolygon(sb, points);
+
+            }
+            else if (type == ICON_LEFT)    //左
+            {
+                points = new Point[3];
+                points[0] = new Point(x_st + width * 2 / 8, y_st + height * 4 / 8);
+                points[1] = new Point(x_st + width * 6 / 8, y_st + height * 2 / 8);
+                points[2] = new Point(x_st + width * 6 / 8, y_st + height * 6 / 8);
+                g.FillPolygon(sb, points);
+            }
+            else if (type == ICON_RIGHT)    //右
+            {
+                points = new Point[3];
+                points[0] = new Point(x_st + width * 2 / 8, y_st + height * 2 / 8);
+                points[1] = new Point(x_st + width * 6 / 8, y_st + height * 4 / 8);
+                points[2] = new Point(x_st + width * 2 / 8, y_st + height * 6 / 8);
+                g.FillPolygon(sb, points);
+            }
+            else if (type == ICON_RECORD)    //錄影
+            {
+                g.FillEllipse(sb, new Rectangle(x_st + width / 4, y_st + height / 4, width / 2, height / 2));
+            }
+
+
         }
     }
 }

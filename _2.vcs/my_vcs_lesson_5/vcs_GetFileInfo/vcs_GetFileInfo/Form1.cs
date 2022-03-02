@@ -13,6 +13,8 @@ namespace vcs_GetFileInfo
 {
     public partial class Form1 : Form
     {
+        string foldername = @"C:\______test_files";
+
         public Form1()
         {
             InitializeComponent();
@@ -20,7 +22,7 @@ namespace vcs_GetFileInfo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text = @"C:\______test_files";
+            textBox1.Text = foldername;
 
             listView1.Items.Clear();
             List<FileInfo> myFiles = new List<FileInfo>();
@@ -35,7 +37,9 @@ namespace vcs_GetFileInfo
             foreach (var vFiles in values)
             {
                 foreach (var f in vFiles)
+                {
                     listView1.Items.Add(f.FullName);
+                }
             }
         }
 
@@ -57,7 +61,9 @@ namespace vcs_GetFileInfo
                 foreach (var vFiles in values)
                 {
                     foreach (var f in vFiles)
+                    {
                         listView1.Items.Add(f.FullName);
+                    }
                 }
             }
         }
@@ -80,15 +86,20 @@ namespace vcs_GetFileInfo
                              };
                 foreach (var v in values)
                 {
-                    textBox2.Text = v.Name.ToString();
-                    textBox4.Text = v.Size.ToString();
-                    textBox3.Text = v.Exten.ToString();
-                    textBox5.Text = v.CTime.ToString();
-                    textBox6.Text = v.WTime.ToString();
-                    textBox7.Text = v.ReadOnly.ToString();
+                    string fileinfo = string.Empty;
+                    fileinfo += "檔案訊息 :\n";
+                    fileinfo += "檔案名 : \t" + v.Name.ToString() + "\n";
+                    fileinfo += "副檔名 : \t" + v.Exten.ToString() + "\n";
+                    fileinfo += "檔案大小 : \t" + v.Size.ToString() + " KB\n";
+                    fileinfo += "建立時間 : \t" + v.CTime.ToString() + "\n";
+                    fileinfo += "最後修改時間 : \t" + v.WTime.ToString() + "\n";
+                    fileinfo += "唯讀 : \t" + v.ReadOnly.ToString() + "\n";
+
+                    richTextBox_fileinfo.Text = fileinfo;
                 }
             }
         }
-
     }
 }
+
+
