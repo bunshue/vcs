@@ -692,6 +692,7 @@
             this.bt_23.Name = "bt_23";
             this.bt_23.Size = new System.Drawing.Size(120, 40);
             this.bt_23.TabIndex = 28;
+            this.bt_23.Text = "解析本地文件";
             this.bt_23.UseVisualStyleBackColor = true;
             this.bt_23.Click += new System.EventHandler(this.bt_23_Click);
             // 

@@ -433,9 +433,9 @@ namespace vcs_HtmlAgility
         /// <returns></returns>
         private static List<Model> GetMessage(Stream myStream)
         {
-            var document = new HtmlAgilityPack.HtmlDocument();
-            document.Load(myStream, Encoding.UTF8);
-            var rootNode = document.DocumentNode;
+            var doc = new HtmlAgilityPack.HtmlDocument();
+            doc.Load(myStream, Encoding.UTF8);
+            var rootNode = doc.DocumentNode;
             var messageNodeList = rootNode.SelectNodes(MessageListXPath);
             return messageNodeList.Select(messageNode => HtmlNode.CreateNode(messageNode.OuterHtml)).Select(temp => new Model
             {
@@ -1679,9 +1679,77 @@ namespace vcs_HtmlAgility
             richTextBox1.Text += "ccccc" + node.InnerHtml + "\n";
         }
 
+        /// <summary>  
+        /// 定義的實體類用於接收數據  
+        /// </summary>  
+        public class Data
+        {
+            public string 時間 { get; set; }
+            public string 類型 { get; set; }
+            public string 名稱 { get; set; }
+            public string 單位 { get; set; }
+            public string 金額 { get; set; }
+        }
+
         private void bt_23_Click(object sender, EventArgs e)
         {
+            string strWebContent = @"<table><thead>  
+        <tr>  
+          <th>時間</th>  
+          <th>類型</th>  
+          <th>名稱</th>  
+          <th>單位</th>  
+          <th>金額</th>  
+        </tr>  
+        </thead>  
+        <tbody>" +
+@"<tr>  
+          <td>2013-12-29</td>  
+          <td>發票1</td>  
+          <td>採購物資發票1</td>  
+          <td>某某公司1</td>  
+          <td>123元</td>  
+        </tr>" +
+@"<tr>  
+          <td>2013-12-29</td>  
+          <td>發票2</td>  
+          <td>採購物資發票2</td>  
+          <td>某某公司2</td>  
+          <td>321元</td>  
+        </tr>  
+        </tbody>  
+      </table>  
+    ";
 
+            string url = @"../../html/buy.html";
+
+            List<Data> datas = new List<Data>();//定義1個列表用於保存結果  
+
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            
+            doc.LoadHtml(strWebContent);//加載HTML字符串，如果是文件可以用htmlDocument.Load方法加載
+            //doc.LoadHtml(url);    fail
+
+            HtmlNodeCollection collection = doc.DocumentNode.SelectSingleNode("table/tbody").ChildNodes;//跟Xpath一樣，輕鬆的定位到相應節點下  
+            foreach (HtmlNode node in collection)
+            {
+                //去除\r\n以及空格，獲取到相應td裏面的數據  
+                string[] line = node.InnerText.Split(new char[] { '\r', '\n', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                //如果符合條件，就加載到對象列表裏面  
+                if (line.Length == 5)
+                {
+                    datas.Add(new Data() { 時間 = line[0], 類型 = line[1], 名稱 = line[2], 單位 = line[3], 金額 = line[4] });
+                }
+            }
+
+            //循環輸出查看結果是否正確  
+            foreach (var v in datas)
+            {
+                Console.WriteLine(string.Join(",", v.時間, v.類型, v.名稱, v.單位, v.金額));
+
+                richTextBox1.Text += string.Join(",", v.時間, v.類型, v.名稱, v.單位, v.金額) + "\n";
+            }
         }
 
         private void bt_24_Click(object sender, EventArgs e)
