@@ -63,14 +63,14 @@ namespace vcs_GetFileIcon
                 pictureBox1.Image = imageList1.Images[aa];
 
                 label1.Text = aa.ToString() + ",  " + imageList1.Images[aa].Width.ToString() + " X " + imageList1.Images[aa].Height.ToString();
-                
+
             }
         }
 
         /// <summary>
-        /// 获得指定路径下面的所有文件及文件夹
+        /// 獲得指定路徑下面的所有文件及文件夾
         /// </summary>
-        /// <param name="path">路径</param>
+        /// <param name="path">路徑</param>
         /// <returns></returns>
         public ArrayList GetListViewItem(string path, ImageList imglist)
         {
@@ -85,7 +85,7 @@ namespace vcs_GetFileIcon
                 {
                     string[] info = new string[4];
                     DirectoryInfo dir = new DirectoryInfo(dirs[i]);
-                    //获得图标
+                    //獲得圖標
                     Win32.SHGetFileInfo(dirs[i],
                                         (uint)0x80,
                                         ref shfi,
@@ -93,28 +93,28 @@ namespace vcs_GetFileIcon
                                         (uint)(0x100 | 0x400)); //取得Icon和TypeName
 
                     richTextBox1.Text += "dir name = " + dir.Name + "\n";
-                    //添加图标
+                    //添加圖標
                     imglist.Images.Add(dir.Name, (Icon)Icon.FromHandle(shfi.hIcon).Clone());
                     info[0] = dir.Name;
                     info[1] = "";
-                    info[2] = "文件夹";
+                    info[2] = "文件夾";
                     info[3] = dir.LastWriteTime.ToString();
                     ListViewItem item = new ListViewItem(info, dir.Name);
                     itemarr.Add(item);
-                    //销毁图标
+                    //銷毀圖標
                     Win32.DestroyIcon(shfi.hIcon);
                 }
                 for (int i = 0; i < files.Length; i++)
                 {
                     string[] info = new string[4];
                     FileInfo fi = new FileInfo(files[i]);
-                    //获得图标
+                    //獲得圖標
                     Win32.SHGetFileInfo(files[i],
                                         (uint)0x80,
                                         ref shfi,
                                         (uint)System.Runtime.InteropServices.Marshal.SizeOf(shfi),
                                         (uint)(0x100 | 0x400)); //取得Icon和TypeName
-                    //添加图标
+                    //添加圖標
                     richTextBox1.Text += "file name = " + fi.Name + "\n";
                     imglist.Images.Add(fi.Name, (Icon)Icon.FromHandle(shfi.hIcon).Clone());
                     info[0] = fi.Name;
@@ -123,7 +123,7 @@ namespace vcs_GetFileIcon
                     info[3] = fi.LastWriteTime.ToString();
                     ListViewItem item = new ListViewItem(info, fi.Name);
                     itemarr.Add(item);
-                    //销毁图标
+                    //銷毀圖標
                     Win32.DestroyIcon(shfi.hIcon);
                 }
                 return itemarr;
@@ -134,11 +134,7 @@ namespace vcs_GetFileIcon
                 return null;
             }
         }
-
-
-
     }
-
 
     public class Win32
     {
@@ -164,3 +160,25 @@ namespace vcs_GetFileIcon
         };
     }
 }
+
+/*
+SHGetFileInfo 的最後一個參數 Flags
+uFlags常數：
+  SHGFI_ICON                                   =   0x100   
+  SHGFI_DISPLAYNAME                   =   0x200,            
+  SHGFI_TYPENAME                        =   0x400,          
+  SHGFI_ATTRIBUTES                     =   0x800,        
+  SHGFI_ICONLOCATION                 =   0x1000,            
+  SHGFI_EXETYPE                           =   0x2000,            
+  SHGFI_SYSICONINDEX                 =   0x4000,          
+  SHGFI_LINKOVERLAY                  =   0x8000,            
+  SHGFI_SELECTED                        =   0x10000,            
+  SHGFI_ATTR_SPECIFIED             =   0x20000,            
+  SHGFI_LARGEICON                      =   0x0,            
+  SHGFI_SMALLICON                     =   0x1,            
+  SHGFI_OPENICON                        =   0x2,            
+  SHGFI_SHELLICONSIZE              =   0x4,            
+  SHGFI_PIDL                                 =   0x8,            
+  SHGFI_USEFILEATTRIBUTES      =   0x10
+*/
+

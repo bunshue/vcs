@@ -367,9 +367,88 @@ namespace vcs_HtmlAgility
 
         }
 
+        public class Model
+        {
+            public string Title { get; set; } //標題
+            public string Content { get; set; } //內容
+            public string Href { get; set; } //文章鏈接
+            public string ComeFrom { get; set; } //來源
+            public DateTime Time { get; set; } //發布時間
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
+            //0303a
         }
+
+        //1.下面這句話是 獲取全部 class為list_item article_item開始的div
+        /// <summary>
+        /// 獲取文章列表
+        /// </summary>
+        private const string MessageListXPath = "//div[starts-with(@class,'list_item article_item')]";
+
+        //2.下面這句話是 獲取上面獲取出來的集合裡面每一項的標題
+        /// <summary>
+        /// 獲取標題 解釋: 第一個div,下的第一個div,下的第一個h1,下的第一個span,下的第一個a標簽
+        /// </summary>
+        private const string MessageNameXPath = "/div[1]/div[1]/h1[1]/span[1]/a[1]";
+
+        //3.和上面一樣這個是獲取內容
+        /// <summary>
+        /// 獲取內容 解釋： 第一個div,下的第二個div
+        /// </summary>
+        private const string MessageContxtXPath = "/div[1]/div[2]";
+
+        //4.這個是獲取發布時間
+        /// <summary>
+        /// 獲取時間 這個就是 獲取 第一個div,下的第3個div,下的span
+        /// </summary>
+        private const string MessageTimeXPath = "/div[1]/div[3]/span";
+
+        //1. 獲網頁的Html
+
+        #region 獲取文章列表 +GetHtml(string url)
+        /// <summary>
+        /// 獲取文章列表 Add shuaibi 2015-03-08
+        /// </summary>
+        /// <param name="url">頁面地址</param>
+        /// <returns>文章列表</returns>
+        public List<Model> GetHtml(string url)
+        {
+            var myWebClient = new WebClient();
+            var myStream = myWebClient.OpenRead(url);
+            var list = GetMessage(myStream); //這裡調用的是下面的方法
+            if (myStream != null) myStream.Close();
+            return list;
+        }
+        #endregion
+
+        //2. 用Html Agility Pack 找出我們想要的東西
+
+        #region 處理文章信息 +GetMessage(Stream myStream)
+        /// <summary>
+        /// 處理文章信息 Add shuaibi 2015-03-08
+        /// </summary>
+        /// <param name="myStream">網頁的數據流</param>
+        /// <returns></returns>
+        private static List<Model> GetMessage(Stream myStream)
+        {
+            var document = new HtmlAgilityPack.HtmlDocument();
+            document.Load(myStream, Encoding.UTF8);
+            var rootNode = document.DocumentNode;
+            var messageNodeList = rootNode.SelectNodes(MessageListXPath);
+            return messageNodeList.Select(messageNode => HtmlNode.CreateNode(messageNode.OuterHtml)).Select(temp => new Model
+            {
+                Title = temp.SelectSingleNode(MessageNameXPath).InnerText,
+                Href = "http://blog.csdn.net" + temp.SelectSingleNode(MessageNameXPath).Attributes["href"].Value,
+                Content = temp.SelectSingleNode(MessageContxtXPath).InnerText,
+                Time = Convert.ToDateTime(temp.SelectSingleNode(MessageTimeXPath).InnerText),
+                ComeFrom = "csdn"
+            }).ToList();
+        }
+        #endregion
+
+
 
         private void button6_Click(object sender, EventArgs e)
         {

@@ -37,7 +37,9 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox_fileinfo = new System.Windows.Forms.RichTextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -47,14 +49,14 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(421, 53);
+            this.groupBox1.Size = new System.Drawing.Size(439, 53);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "設定";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(372, 20);
+            this.button1.Location = new System.Drawing.Point(388, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(34, 23);
             this.button1.TabIndex = 2;
@@ -66,7 +68,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(88, 21);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(278, 22);
+            this.textBox1.Size = new System.Drawing.Size(294, 22);
             this.textBox1.TabIndex = 1;
             // 
             // label1
@@ -91,7 +93,7 @@
             this.listView1.Location = new System.Drawing.Point(12, 61);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(421, 464);
+            this.listView1.Size = new System.Drawing.Size(439, 565);
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -99,7 +101,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(457, 325);
+            this.richTextBox1.Location = new System.Drawing.Point(466, 426);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(383, 200);
             this.richTextBox1.TabIndex = 6;
@@ -107,17 +109,27 @@
             // 
             // richTextBox_fileinfo
             // 
-            this.richTextBox_fileinfo.Location = new System.Drawing.Point(457, 61);
+            this.richTextBox_fileinfo.Location = new System.Drawing.Point(466, 253);
             this.richTextBox_fileinfo.Name = "richTextBox_fileinfo";
-            this.richTextBox_fileinfo.Size = new System.Drawing.Size(383, 258);
+            this.richTextBox_fileinfo.Size = new System.Drawing.Size(383, 167);
             this.richTextBox_fileinfo.TabIndex = 7;
             this.richTextBox_fileinfo.Text = "";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(466, 7);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(383, 240);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 537);
+            this.ClientSize = new System.Drawing.Size(862, 638);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.richTextBox_fileinfo);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
@@ -128,6 +140,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -143,6 +156,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.RichTextBox richTextBox_fileinfo;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

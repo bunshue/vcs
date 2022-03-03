@@ -38,6 +38,11 @@ namespace vcs_test_all_01_Control
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
 
             //不同Button共用一個事件
             button6.Click += new EventHandler(button6_Click);//按下button6觸發button1_Click
@@ -45,16 +50,11 @@ namespace vcs_test_all_01_Control
             button8.Click += new EventHandler(button6_Click);//按下button8觸發button1_Click
             button9.Click += new EventHandler(button6_Click);//按下button9觸發button1_Click
 
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
             //移動控件 ST
             W = this.ClientSize.Width;
             H = this.ClientSize.Height - 100;
             //移動控件 SP
-        }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
             //先顯示一個訊息, 再開啟主程式
             string str = "";
             for (int i = 1; i <= 6; i++)		// 被乘數
@@ -87,7 +87,6 @@ namespace vcs_test_all_01_Control
             Opacity = 0;//指定窗體完全透明
             timer2.Enabled = true;
 
-
             //使用ToolTip
             tooltip1.SetToolTip(button41, "在控件上加ToolTip 41");
             tooltip1.ToolTipIcon = ToolTipIcon.Info;	//ToolTipIcon:取得或設定值,以便定義要顯示在工具提示文字旁的圖示類型
@@ -109,6 +108,46 @@ namespace vcs_test_all_01_Control
             tooltip3.BackColor = Color.LightGray;	//BackColor:取得或設定工具提示的背景色彩.
             tooltip3.AutoPopDelay = 5000;	//AutoPopDelay:當指標靜止於控制項上時,ToolTip 保持可見的時間 (以毫秒為單位).預設值為 5000.
             tooltip3.ToolTipTitle = "vcs";	//ToolTipTitle:取得或設定工具提示視窗的標題.
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 20;
+            y_st = 30;
+            dx = 130;
+            dy = 70;
+
+            x_st = 1300;
+
+            bt_help.Location = new Point(x_st - dx * 1, y_st + dy * 0);
+            bt_about.Location = new Point(x_st - dx * 1, y_st + dy * 1);
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button37.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button40.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button46.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            bt_rtb_info.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_rtb_info.Size.Height);
         }
 
         // 做出 去背景 的效果
@@ -363,20 +402,6 @@ namespace vcs_test_all_01_Control
 
         private void button12_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Bounds = " + richTextBox1.Bounds.ToString() + "\n";
-
-            richTextBox1.Text += "左上點座標 = (x_st, y_st) = (Left, Top)\n";
-            richTextBox1.Text += "x_st = Left = " + richTextBox1.Left.ToString() + "\n";
-            richTextBox1.Text += "y_st = Top = " + richTextBox1.Top.ToString() + "\n";
-
-            richTextBox1.Text += "右下點座標 = (x_sp, y_sp) = (x_st + W, y_st + H) = (Right, Bottom)\n";
-            richTextBox1.Text += "x_sp = Right = " + richTextBox1.Right.ToString() + "\n";
-            richTextBox1.Text += "y_sp = Bottom = " + richTextBox1.Bottom.ToString() + "\n";
-
-            richTextBox1.Text += "BackColor = " + richTextBox1.BackColor.ToString() + "\n";
-
-            richTextBox1.Text += "Size = " + richTextBox1.Size.ToString() + "\n";
-            richTextBox1.Text += "ClientSize = " + richTextBox1.ClientSize.ToString() + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -769,10 +794,6 @@ namespace vcs_test_all_01_Control
 
         private void button37_Click(object sender, EventArgs e)
         {
-            // Show About dialog
-            AboutForm form = new AboutForm();
-
-            form.ShowDialog();
         }
 
         private void button38_Click(object sender, EventArgs e)
@@ -791,11 +812,6 @@ namespace vcs_test_all_01_Control
             {
                 richTextBox1.Text += "取得控件 : " + cont.Name.ToString() + "\tText : " + cont.Text + "\tType : " + cont.GetType().ToString() + "\n";
             }
-        }
-
-        private void btn_help_Click(object sender, EventArgs e)
-        {
-            Help.ShowHelp(this, "help.hlp");
         }
 
         private void button41_Click(object sender, EventArgs e)
@@ -906,9 +922,9 @@ namespace vcs_test_all_01_Control
         }
 
         /// <summary>
-        /// Winform C#遍历窗体控件
+        /// Winform C#遍歷窗體控件
         /// </summary>
-        /// <param name="ctrlName">控件名称</param>
+        /// <param name="ctrlName">控件名稱</param>
         public void ForeachFormControls(string ctrlName)
         {
             foreach (Control ctrl in this.Controls)
@@ -937,31 +953,67 @@ namespace vcs_test_all_01_Control
             }
         }
 
+        private void bt_rtb_info_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Bounds = " + richTextBox1.Bounds.ToString() + "\n";
+
+            richTextBox1.Text += "左上點座標 = (x_st, y_st) = (Left, Top)\n";
+            richTextBox1.Text += "x_st = Left = " + richTextBox1.Left.ToString() + "\n";
+            richTextBox1.Text += "y_st = Top = " + richTextBox1.Top.ToString() + "\n";
+
+            richTextBox1.Text += "右下點座標 = (x_sp, y_sp) = (x_st + W, y_st + H) = (Right, Bottom)\n";
+            richTextBox1.Text += "x_sp = Right = " + richTextBox1.Right.ToString() + "\n";
+            richTextBox1.Text += "y_sp = Bottom = " + richTextBox1.Bottom.ToString() + "\n";
+
+            richTextBox1.Text += "BackColor = " + richTextBox1.BackColor.ToString() + "\n";
+
+            richTextBox1.Text += "Size = " + richTextBox1.Size.ToString() + "\n";
+            richTextBox1.Text += "ClientSize = " + richTextBox1.ClientSize.ToString() + "\n";
+        }
+
+        private void bt_help_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, "help.hlp");
+        }
+
+        private void bt_about_Click(object sender, EventArgs e)
+        {
+            // Show About dialog
+            AboutForm form = new AboutForm();
+
+            form.ShowDialog();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
+        }
+
         /* 找panel1內的控件
         /// <summary>
-        /// C#遍历子控件
-        /// </summary>
-        /// <param name="ctrlName">控件名称</param>
-        public void ForeachPanelControls(string ctrlName)
-        {
-            foreach (Control ctrl in panel1.Controls)
-            {
-                if (ctrl is Button)
-                {
-                    if (ctrl.Name.Equals(ctrlName))
-                        ctrl.ForeColor = Color.RoyalBlue;
-                    else
-                        ctrl.ForeColor = Color.SkyBlue;
-                }
-                else if (ctrl is TextBox)
-                {
-                    if (ctrl.Name.Equals(ctrlName))
-                        ctrl.Name = "当前值";
-                    else
-                        ctrl.Text = null;
-                }
-            }
-        }
+　　    /// C#遍歷子控件
+　　    /// </summary>
+　　    /// <param name="ctrlName">控件名稱</param>
+　　    public void ForeachPanelControls(string ctrlName)
+　　    {
+　　　　    foreach (Control ctrl in panel1.Controls)
+　　　　    {
+　　　　　　    if (ctrl is Button)
+　　　　　　    {
+　　　　　　　　    if (ctrl.Name.Equals(ctrlName))
+　　　　　　　　　　    ctrl.ForeColor = Color.RoyalBlue;
+　　　　　　　　    else
+　　　　　　　　　　    ctrl.ForeColor = Color.SkyBlue;
+　　　　　　    }
+　　　　　　    else if (ctrl is TextBox)
+　　　　　　    {
+　　　　　　　　    if (ctrl.Name.Equals(ctrlName))
+　　　　　　　　　　    ctrl.Name = "當前值";
+　　　　　　　　    else
+　　　　　　　　　　    ctrl.Text = null;
+　　　　　　    }
+　　　　    }
+　　    }
         */
 
         /* 找chekbox內的控件

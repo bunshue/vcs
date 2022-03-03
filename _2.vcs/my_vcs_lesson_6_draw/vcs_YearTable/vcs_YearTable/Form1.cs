@@ -50,7 +50,10 @@ namespace vcs_YearTable
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             p = new Pen(Color.Red, 3);
             sb = new SolidBrush(Color.Red);
@@ -72,45 +75,48 @@ namespace vcs_YearTable
             int dy;
 
             //button
-            x_st = 1200;
-            y_st = 10;
+            x_st = 20;
+            y_st = 900;
             dx = 100;
             dy = 42;
 
-            //row 0
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button5.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            button6.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            button7.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            button8.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 9, y_st + dy * 0);
 
-            //row 1
-            button14.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button13.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button15.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            button16.Location = new Point(x_st + dx * 6, y_st + dy * 1);
+            button17.Location = new Point(x_st + dx * 7, y_st + dy * 1);
+            button18.Location = new Point(x_st + dx * 8, y_st + dy * 1);
+            button19.Location = new Point(x_st + dx * 9, y_st + dy * 1);
 
-            //row 2
-            button13.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button24.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button25.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+            button26.Location = new Point(x_st + dx * 6, y_st + dy * 2);
+            bt_info.Location = new Point(x_st + dx * 7, y_st + dy * 2);
+            bt_save.Location = new Point(x_st + dx * 8, y_st + dy * 2);
+            bt_exit.Location = new Point(x_st + dx * 9, y_st + dy * 2);
 
-            //row 3
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            richTextBox1.Location = new Point(x_st + dx * 10, y_st - dy * 3);
 
-            //row 4
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button2.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-
-            //row 5
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-
-            //row 6
-            button17.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-
-
-
-            //row 7
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button9.Location = new Point(x_st + dx * 1 - dx / 4 + 5, y_st + dy * 7);
-            button5.Location = new Point(x_st + dx * 1 + dx / 3 + 10, y_st + dy * 7);
-
+            //控件位置
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -123,11 +129,6 @@ namespace vcs_YearTable
 
                 pictureBox1.Image = bitmap1;
             }
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
         }
 
         private class eraNameList
@@ -284,34 +285,6 @@ namespace vcs_YearTable
 
                 pictureBox1.Image = bitmap1;
             }
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //儲存圖檔
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\YearTable_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                //string filename1 = filename + ".jpg";
-                string filename2 = filename + ".bmp";
-                //string filename3 = filename + ".png";
-
-                //bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                bitmap1.Save(@filename2, ImageFormat.Bmp);
-                //bitmap1.Save(@filename3, ImageFormat.Png);
-
-                richTextBox1.Text += "存檔成功\n";
-                //richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                //richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "現在年 " + DateTime.Now.Year.ToString() + "\n";
         }
 
         private const int EMPEROR_DATA_SUI = 0x00;      //emperor data 0, Sui
@@ -1463,11 +1436,6 @@ namespace vcs_YearTable
 
         #endregion
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
             Application.Exit();
@@ -1587,8 +1555,46 @@ namespace vcs_YearTable
             }
 
             richTextBox1.Text += "done\n";
+        }
 
+        private void bt_info_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "現在年 " + DateTime.Now.Year.ToString() + "\n";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            //儲存圖檔
+            if (bitmap1 != null)
+            {
+                string filename = Application.StartupPath + "\\YearTable_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                //string filename1 = filename + ".jpg";
+                string filename2 = filename + ".bmp";
+                //string filename3 = filename + ".png";
+
+                //bitmap1.Save(@filename1, ImageFormat.Jpeg);
+                bitmap1.Save(@filename2, ImageFormat.Bmp);
+                //bitmap1.Save(@filename3, ImageFormat.Png);
+
+                richTextBox1.Text += "存檔成功\n";
+                //richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                //richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
-

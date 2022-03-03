@@ -25,12 +25,12 @@ namespace vcs_GetFileInfo
             textBox1.Text = foldername;
 
             listView1.Items.Clear();
-            List<FileInfo> myFiles = new List<FileInfo>();
+            List<FileInfo> fi = new List<FileInfo>();
             foreach (string strFile in Directory.GetFiles(textBox1.Text))
             {
-                myFiles.Add(new FileInfo(strFile));
+                fi.Add(new FileInfo(strFile));
             }
-            var values = from strFile in myFiles
+            var values = from strFile in fi
                          group strFile by strFile.Extension into FExten
                          orderby FExten.Key
                          select FExten;
@@ -49,12 +49,12 @@ namespace vcs_GetFileInfo
             {
                 listView1.Items.Clear();
                 textBox1.Text = folderBrowserDialog1.SelectedPath;
-                List<FileInfo> myFiles = new List<FileInfo>();
+                List<FileInfo> fi = new List<FileInfo>();
                 foreach (string strFile in Directory.GetFiles(textBox1.Text))
                 {
-                    myFiles.Add(new FileInfo(strFile));
+                    fi.Add(new FileInfo(strFile));
                 }
-                var values = from strFile in myFiles
+                var values = from strFile in fi
                              group strFile by strFile.Extension into FExten
                              orderby FExten.Key
                              select FExten;
@@ -72,8 +72,8 @@ namespace vcs_GetFileInfo
         {
             if (listView1.SelectedItems.Count != 0)
             {
-                FileInfo myFile = new FileInfo(listView1.SelectedItems[0].Text);
-                string[] strAttribute = new string[] { myFile.Name, Convert.ToDouble(myFile.Length / 1024).ToString(), myFile.Extension, myFile.CreationTime.ToString(), myFile.IsReadOnly.ToString(), myFile.LastWriteTime.ToString() };
+                FileInfo fi = new FileInfo(listView1.SelectedItems[0].Text);
+                string[] strAttribute = new string[] { fi.Name, Convert.ToDouble(fi.Length / 1024).ToString(), fi.Extension, fi.CreationTime.ToString(), fi.IsReadOnly.ToString(), fi.LastWriteTime.ToString() };
                 var values = from str in strAttribute
                              select new
                              {
@@ -97,9 +97,18 @@ namespace vcs_GetFileInfo
 
                     richTextBox_fileinfo.Text = fileinfo;
                 }
+
+                string ext = fi.Extension.ToLower();
+                if ((ext == ".bmp") || (ext == ".jpg") || (ext == ".png"))
+                {
+                    pictureBox1.Image = Image.FromFile(listView1.SelectedItems[0].Text);
+                }
+                else
+                {
+                    pictureBox1.Image = null;
+                }
             }
         }
     }
 }
-
 

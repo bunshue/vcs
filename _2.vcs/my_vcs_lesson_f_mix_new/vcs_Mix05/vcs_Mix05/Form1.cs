@@ -1444,25 +1444,294 @@ namespace vcs_Mix05
 
         private void button26_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
+            //2007年4月24日
+            richTextBox1.Text += DateTime.Now.ToString("D") + "\n";
+            //2007-4-24
+            richTextBox1.Text += DateTime.Now.ToString("d") + "\n";
+
+            //2007年4月24日 16:30:15
+            richTextBox1.Text += DateTime.Now.ToString("F") + "\n";
+            //2007年4月24日 16:30
+            richTextBox1.Text += DateTime.Now.ToString("f") + "\n";
+
+            //2007-4-24 16:30:15
+            richTextBox1.Text += DateTime.Now.ToString("G") + "\n";
+            //2007-4-24 16:30
+            richTextBox1.Text += DateTime.Now.ToString("g") + "\n";
+
+            //16:30:15
+            richTextBox1.Text += DateTime.Now.ToString("T") + "\n";
+            //16:30
+            richTextBox1.Text += DateTime.Now.ToString("t") + "\n";
+
+            //2007年4月24日 8:30:15
+            richTextBox1.Text += DateTime.Now.ToString("U") + "\n";
+            //2007-04-24 16:30:15Z
+            richTextBox1.Text += DateTime.Now.ToString("u") + "\n";
+
+            //4月24日
+            richTextBox1.Text += DateTime.Now.ToString("m") + "\n";
+            richTextBox1.Text += DateTime.Now.ToString("M") + "\n";
+            //Tue, 24 Apr 2007 16:30:15 GMT
+            richTextBox1.Text += DateTime.Now.ToString("r") + "\n";
+            richTextBox1.Text += DateTime.Now.ToString("R") + "\n";
+            //2007年4月 
+            richTextBox1.Text += DateTime.Now.ToString("y") + "\n";
+            richTextBox1.Text += DateTime.Now.ToString("Y") + "\n";
+            //2007-04-24T15:52:19.1562500+08:00
+            richTextBox1.Text += DateTime.Now.ToString("o") + "\n";
+            richTextBox1.Text += DateTime.Now.ToString("O") + "\n";
+            //2007-04-24T16:30:15
+            richTextBox1.Text += DateTime.Now.ToString("s") + "\n";
+            //2007-04-24 15:52:19
+            richTextBox1.Text += DateTime.Now.ToString("yyyy-MM-dd HH：mm：ss：ffff") + "\n";
+            //2007年04月24 15時56分48秒
+            richTextBox1.Text += DateTime.Now.ToString("yyyy年MM月dd HH時mm分ss秒") + "\n";
+
+            //星期二, 四月 24 2007
+            richTextBox1.Text += DateTime.Now.ToString("dddd, MMMM dd yyyy") + "\n";
+            //二, 四月 24 '07
+            richTextBox1.Text += DateTime.Now.ToString("ddd, MMM d \"'\"yy") + "\n";
+            //星期二, 四月 24
+            richTextBox1.Text += DateTime.Now.ToString("dddd, MMMM dd") + "\n";
+            //4-07
+            richTextBox1.Text += DateTime.Now.ToString("M/yy") + "\n";
+            //24-04-07
+            richTextBox1.Text += DateTime.Now.ToString("dd-MM-yy") + "\n";
+
 
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
+            richTextBox1.Text += "111\t" + 12345.ToString("n") + "\n"; //生成 12,345.00
+            richTextBox1.Text += "111\t" + 12345.ToString("C") + "\n"; //生成 ￥12,345.00
+            richTextBox1.Text += "111\t" + 12345.ToString("e") + "\n"; //生成 1.234500e+004
+            richTextBox1.Text += "111\t" + 12345.ToString("f4") + "\n"; //生成 12345.0000
+            richTextBox1.Text += "111\t" + 12345.ToString("x") + "\n"; //生成 3039 (16進制)
+            richTextBox1.Text += "111\t" + 12345.ToString("p") + "\n"; //生成 1,234,500
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //陽歷轉換成陰歷的類
+
+
 
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+/*            
+//時間比較
+use "DateTime.Compare" static method
+
+DateTime.Compare( dt1, dt2 ) > 0 : dt1 > dt2
+DateTime.Compare( dt1, dt2 ) == 0 : dt1 == dt2
+DateTime.Compare( dt1, dt2 ) < 0 : dt1 < dt2
+       
+
+DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元9999年12月31日23點59分59秒之間的具體日期時刻。
+因此，你可以用DateTime值類型來描述任何在想象范圍之內的時間。
+*/
+            DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 20);
+            DateTime dt2 = DateTime.Now;
+            string diff = DateDiff(dt1, dt2);
+            richTextBox1.Text += "diff = " + diff + "\n";
+
+            dt1 = new DateTime(1939, 9, 1);
+            dt2 = new DateTime(1945, 9, 2);
+            diff = DateDiff(dt1, dt2);
+            richTextBox1.Text += "diff = " + diff + "\n";
+        }
+
+        /// <summary>
+        /// 計算兩個日期的時間間隔
+        /// </summary>
+        /// <param name="DateTime1">第一個日期和時間</param>
+        /// <param name="DateTime2">第二個日期和時間</param>
+        /// <returns></returns>
+        private string DateDiff(DateTime DateTime1, DateTime DateTime2)
+        {
+            string dateDiff = null;
+
+            TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
+            TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+            dateDiff = ts.Days.ToString() + "天"
+                + ts.Hours.ToString() + "小時"
+                + ts.Minutes.ToString() + "分鐘"
+                + ts.Seconds.ToString() + "秒";
+
+            return dateDiff;
+        }
+    }
+
+    public class LunarDate
+    {
+        public const int MAX_YEAR = 2011;
+        public const int MIN_YEAR = 1900;
+
+        static readonly string[] lookupTable = new string[] 
+    { 
+        "0100101101101080131", "0100101011100000219", "1010010101110000208",
+        "0101001001101050129", "1101001001100000216", "1101100101010000204",
+        "0110101010101040125", "0101011010100000213", "1001101011010000202", 
+        "0100101011101020122", "0100101011100000210", "1010010011011060130",
+        "1010010011010000218", "1101001001010000206", "1101010101001050126",
+        "1011010101010000214", "0101011010100000204", "1001011011010020123", 
+        "1001010110110000211", "0100100110111070201", "0100100110110000220", 
+        "1010010010110000208", "1011001001011050128", "0110101001010000216", 
+        "0110110101000000205", "1010110110101040124", "0010101101100000213", 
+        "1001010101110000202", "0100100101111020123", "0100100101110000210", 
+        "0110010010110060130", "1101010010100000217", "1110101001010000206", 
+        "0110110101001050126", "0101101011010000214", "0010101101100000204", 
+        "1001001101110030124", "1001001011100000211", "1100100101101070131", 
+        "1100100101010000219", "1101010010100000208", "1101101001010060127",
+        "1011010101010000215", "0101011010100000205", "1010101011011040125", 
+        "0010010111010000213", "1001001011010000202", "1100100101011020122", 
+        "1010100101010000210", "1011010010101070129", "0110110010100000217", 
+        "1011010101010000206", "0101010110101050127", "0100110110100000214", 
+        "1010010110110000203", "0101001010111030124", "0101001010110000212", 
+        "1010100101010080131", "1110100101010000218", "0110101010100000208", 
+        "1010110101010060128", "1010101101010000215", "0100101101100000205",
+        "1010010101110040125", "1010010101110000213", "0101001001100000202",
+        "1110100100110030121", "1101100101010000209", "0101101010101070130",
+        "0101011010100000217", "1001011011010000206", "0100101011101050127",
+        "0100101011010000215", "1010010011010000203", "1101001001101040123",
+        "1101001001010000211", "1101010100101080131", "1011010101000000218",
+        "1011011010100000207", "1001011011010060128", "1001010110110000216", 
+        "0100100110110000205", "1010010010111040125", "1010010010110000213", 
+        "1011001001011100202", "0110101001010000220", "0110110101000000209", 
+        "1010110110101060129", "1010101101100000217", "1001001101110000206",
+        "0100100101111050127", "0100100101110000215", "0110010010110000204", 
+        "0110101001010030123", "1110101001010000210", "0110101100101080131",
+        "0101101011000000219", "1010101101100000207", "1001001101101050128", 
+        "1001001011100000216", "1100100101100000205", "1101010010101040124",
+        "1101010010100000212", "1101101001010000201", "0101101010101020122",
+        "0101011010100000209", "1010101011011070129", "0010010111010000218",
+        "1001001011010000207", "1100100101011050126", "1010100101010000214",
+        "1011010010100000214" 
+    };
+
+        /**/
+        /// <summary>十二生肖</summary>
+        static readonly string animalsTable = "鼠牛虎兔龍蛇馬羊猴雞狗豬";
+        static readonly string monthsTable = "正二三四五六七八九十寒臘";
+        static readonly string daysTable = "初一初二初三初四初五初六初七初八初九初十十一十二十三十四十五十六十七十八十九二十廿一廿二廿三廿四廿五廿六廿七廿八廿九三十";
+
+        /**/
+        /// <summary>天干地支</summary>
+        static readonly string[] chineseEra;
+        static LunarDate()
+        {
+            string sky = "甲乙丙丁戊已庚辛壬癸";        //天干
+            string earth = "子丑寅卯辰巳午未申酉戌亥";  //地支
+            chineseEra = new string[60];
+            for (int i = 0; i < 60; i++)
+                chineseEra[i] = sky.Substring(i % 10, 1) + earth.Substring(i % 12, 1);
+        }
+
+        public LunarDate(int year, int month, int day)
+        {
+            if ((year < MIN_YEAR) || (year > MAX_YEAR))
+                throw new ArgumentOutOfRangeException("year to0 large or too small");
+
+            // 計算農歷年
+            int lunarYear;
+            int lunarMonth;
+            int lunarDay;
+
+            lunarYear = year;
+            // 農歷新年月份
+            lunarMonth = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(15, 2)));
+            // 農歷新年日子
+            lunarDay = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(17, 2))); ;
+            if ((month < lunarMonth) || ((month == lunarMonth) && (day < lunarDay)))
+            {
+                lunarYear--;
+                // 農歷新年月份
+                lunarMonth = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(15, 2)));
+                // 農歷新年日子
+                lunarDay = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(17, 2))); ;
+            }
+
+            // 計算農歷月
+            DateTime date = new DateTime(year, month, day);
+            DateTime lunarDate = new DateTime(lunarYear, lunarMonth, lunarDay);
+            TimeSpan span = date - lunarDate;
+            int dayCount = span.Days;
+            lunarMonth = 1;
+            lunarDay = 1;
+            bool leapMonth = false; //閏月
+            for (int i = 0; i < dayCount; i++)
+            {
+                lunarDay++;
+                if (lunarDay == 30 + Convert.ToInt32(lookupTable[lunarYear - MIN_YEAR].Substring(lunarMonth - 1, 1)) ||
+                (leapMonth == true && (lunarDay == 30 + Convert.ToInt32(lookupTable[lunarYear - MIN_YEAR].Substring(12, 1)))))
+                {
+                    if (
+                        (leapMonth == false) &&
+                        (lunarMonth == Convert.ToInt32(lookupTable[lunarYear - MIN_YEAR].Substring(13, 2)))
+                        )
+                    {
+                        leapMonth = true;
+                    }
+                    else
+                    {
+                        leapMonth = false;
+                        lunarMonth++;
+                    }
+                    lunarDay = 1;
+                }
+                else
+                {
+                }
+            }
+
+            // 計算農歷日
+            lunarDayText = daysTable.Substring((lunarDay - 1) * 2, 2);
+            // 計算農歷月
+            lunarMonthText = monthsTable.Substring(lunarMonth - 1, 1) + "月";
+            if (leapMonth == true) lunarMonthText = "閏" + lunarMonthText;
+            // 農歷年
+            lunarYearText = Convert.ToString(lunarYear, 10) + "年";
+            // 計算天干地支
+            chineseEarText = chineseEra[(lunarYear - 4) % 60];
+            // 計算生肖
+            aminalsText = animalsTable.Substring((lunarYear - 4) % 12, 1);
+        }
+
+        //農歷日
+        private string lunarDayText;
+        public string LunarDay { get { return this.lunarDayText; } }
+
+        //農歷月
+        private string lunarMonthText;
+        public string LunarMonth { get { return this.lunarMonthText; } }
+
+        //農歷年
+        private string lunarYearText;
+        public string LunarYear { get { return this.lunarYearText; } }
+
+        //天干地支
+        private string chineseEarText;
+        public string chineseEar { get { return this.chineseEarText; } }
+
+        //生肖
+        private string aminalsText;
+        public string Aminals { get { return this.aminalsText; } }
+
+        public override string ToString()
+        {
+            return aminalsText + "," + chineseEarText + "," + lunarYearText + lunarMonthText + lunarDayText;
         }
     }
 }
+
 

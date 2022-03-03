@@ -29,6 +29,10 @@ this.Icon = ico;
 
 ----------------vcs +++ ST----------------
 
+找一些標準icon  放在vcs裏
+開啟檔案 儲存檔案 新增檔案 關閉檔案........
+
+
 vcs_test_all_00_Usually +
 開新表單範例
 
@@ -4265,7 +4269,31 @@ using System.Threading;
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+c# 自定義位數生成激活碼，
 
+ 
+
+Random random = new Random(~unchecked((int)DateTime.Now.Ticks));
+private string CreateAndCheckCode(Random random, string code, int length) // code 激活碼前綴
+{
+
+char[] Pattern = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+string result = code;
+int n = Pattern.Length;
+for (int i = 0; i < length; i++)
+{
+int rnd = random.Next(0, n);
+result += Pattern[rnd];
+}
+if (數據庫中不存在)
+{
+return result;
+}
+else
+{
+return CreateAndCheckCode(random, code, length);
+}
+}
 
 
 
@@ -4560,6 +4588,16 @@ https://blog.csdn.net/happmaoo/article/details/83814604
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
+
+
+
+            //如何取得系統其他進程的啟動參數？
+            //可以使用WMI來查詢得到數據
+
+            foreach (ManagementObject p in new ManagementObjectSearcher(new SelectQuery("SELECT * FROM Win32_Process")).Get())
+            {
+                richTextBox1.Text += p.Properties["commandLine"].Value + "\n";
+            }
 
 
 

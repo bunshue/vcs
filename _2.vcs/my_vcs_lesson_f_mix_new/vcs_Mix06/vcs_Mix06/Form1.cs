@@ -140,8 +140,48 @@ namespace vcs_Mix06
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            
+            int[] rs = new int[10];
+            for (int i = 0; i < 10; i++)
+                rs[i] = GetRandom1();
+
+            richTextBox1.Text += "方法一, 取得亂數 : ";
+            for (int i = 0; i < 10; i++)
+            {
+                richTextBox1.Text += rs[i].ToString() + " ";
+
+            }
+            richTextBox1.Text += "\t大部分都一樣\n";
+
+
+            for (int i = 0; i < 10; i++)
+                rs[i] = GetRandom2();
+
+            richTextBox1.Text += "方法二, 取得亂數 : ";
+            for (int i = 0; i < 10; i++)
+            {
+                richTextBox1.Text += rs[i].ToString() + " ";
+
+            }
+            richTextBox1.Text += "\t可取得亂數\n";
         }
+
+        private int GetRandom1()
+        {
+            Random r = new Random();
+            return r.Next(0, 1000);
+        }
+
+        //定義一個自增的數字作為種子
+        private static int _RandomSeed = (int)DateTime.Now.Ticks;
+        private int GetRandom2()
+        {
+            if (_RandomSeed == int.MaxValue)
+                _RandomSeed = 1;
+
+            Random r = new Random(_RandomSeed++);
+            return r.Next(0, 1000);
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
