@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Threading;
 
-namespace WindowsFormsApplication0223a
+namespace vcs_Mix06
 {
     public partial class LoadingControl : Form
     {
@@ -30,6 +30,7 @@ namespace WindowsFormsApplication0223a
             Thread t = new Thread(new ThreadStart(delegateEventMethod));
             t.IsBackground = true;
             t.Start();
+
         }
 
         private void LoadingControl_FormClosing(object sender, FormClosingEventArgs e)
@@ -38,6 +39,7 @@ namespace WindowsFormsApplication0223a
             {
                 this.Dispose(true);
             }
+
         }
 
         private void initLoadintForm()

@@ -20,53 +20,6 @@ namespace WindowsFormsApplication0223a
             InitializeComponent();
         }
 
-        //#制作閃動的窗體
-        private void button1_Click(object sender, EventArgs e)
-        {
-            while (Visible) // 關閉窗體時，停止循環
-            {
-                for (int c = 0; c < 254 && Visible; c++)
-                {
-                    this.BackColor = Color.FromArgb(c, 255 - c, c); // 此方法指定三個數字：red/green/blue.
-                    Application.DoEvents(); // 此語句使操作系統能夠在程序之外執行其他操作。否則
-                    // 程序將占用所有CPU周期
-                    Thread.Sleep(3); // 此語句在循環中插入3毫秒的延遲。
-                }
-                for (int c = 254; c >= 0 && Visible; c--)
-                {
-                    this.BackColor = Color.FromArgb(c, 255 - c, c);
-                    Application.DoEvents();
-                    Thread.Sleep(3);
-                }
-            }
-
-        }
-
-        //顯示Loading窗體
-        private void button2_Click(object sender, EventArgs e)
-        {
-            LoadingControl pLoading = LoadingControl.getLoading();
-            pLoading.SetExecuteMethod(method);
-            pLoading.ShowDialog();
-
-        }
-
-        private void method()
-        {
-            LoadingControl pLoading = LoadingControl.getLoading();
-            for (int i = 0; i < 10; i++)
-            {
-                pLoading.SetCaptionAndDescription("", "", "執行進度" + i.ToString() + "/10");
-
-                //XXXXXXX
-
-                Thread.Sleep(1000);
-            }
-            LoadingControl.getLoading().CloseLoadingForm();
-
-
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             //將純文字檔拆成一行一行的字串陣列, 可以去除前後空白

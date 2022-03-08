@@ -74,11 +74,20 @@ namespace vcs_Clipboard
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "\n取得系統剪貼簿裏的資料類型:\n";
-            IDataObject data_object = Clipboard.GetDataObject();
+            IDataObject data_object = Clipboard.GetDataObject();    //讀取數據 
             int i = 1;
             foreach (string format in data_object.GetFormats())
             {
                 richTextBox1.Text += (i++).ToString() + "\t" + format + "\n";
+            }
+
+            //根據指定的DataFormat獲取數據對象 
+            if (Clipboard.ContainsData(DataFormats.UnicodeText) == true)
+            {
+                richTextBox1.Text += "取得 UnicodeText\n";
+                IDataObject clipobj = Clipboard.GetDataObject();    //讀取數據 
+                string str = clipobj.GetData(DataFormats.UnicodeText) as string;
+                MessageBox.Show(str);
             }
 
             richTextBox1.Text += "\n把系統剪貼簿裏的資料拿出來, 區分資料類型:\n";
@@ -175,6 +184,9 @@ namespace vcs_Clipboard
             //Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
             string poem = "\n唐王翰涼州詞\n葡萄美酒夜光杯，欲飲琵琶馬上催。醉臥沙場君莫笑，古來征戰幾人回。\n";
             Clipboard.SetDataObject("複製資料到剪貼簿" + poem + " " + DateTime.Now.ToString() + "\n");      //建議用此  //將poem字串填到Clipboard裏。
+
+            //復制到剪貼板上，第二個參數表明程序退出時不清空剪貼板 
+            //Clipboard.SetDataObject(dataobj, true);
         }
 
         private void button7_Click(object sender, EventArgs e)

@@ -176,25 +176,10 @@ namespace test4_romeo
             dy = 90;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 4);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -226,51 +211,6 @@ namespace test4_romeo
                 }
             }
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //C#獲取網頁源碼，自動判斷網頁字符集編碼
-
-        }
-
-        private string getHtml(string url, string charSet)//url是要訪問的網站地址，charSet是目標網頁的編碼，如果傳入的是null或者""，那就自動分析網頁的編碼
-        {
-            WebClient myWebClient = new WebClient(); //創建WebClient實例myWebClient
-
-            // 需要注意的：
-            //有的網頁可能下不下來，有種種原因比如需要cookie,編碼問題等等
-            //這是就要具體問題具體分析比如在頭部加入cookie 
-            // webclient.Headers.Add("Cookie", cookie); 
-            //這樣可能需要一些重載方法。根據需要寫就可以了
-            //獲取或設置用於對向 Internet 資源的請求進行身份驗證的網絡憑據。
-
-            myWebClient.Credentials = CredentialCache.DefaultCredentials;
-            //如果服務器要驗證用戶名,密碼
-            //NetworkCredential mycred = new NetworkCredential(struser, strpassword);
-            //myWebClient.Credentials = mycred;
-            //從資源下載數據並返回字節數組。（加@是因為網址中間有"/"符號）
-            byte[] myDataBuffer = myWebClient.DownloadData(url);
-            string strWebData = Encoding.Default.GetString(myDataBuffer);
-
-            //獲取網頁字符編碼描述信息
-            Match charSetMatch = Regex.Match(strWebData, "<meta([^<]*)charset=([^<]*)\"", RegexOptions.IgnoreCase | RegexOptions.Multiline);
-            string webCharSet = charSetMatch.Groups[2].Value;
-            if (charSet == null || charSet == "")
-                charSet = webCharSet;
-
-            if (charSet != null && charSet != "" && Encoding.GetEncoding(charSet) != Encoding.Default)
-                strWebData = Encoding.GetEncoding(charSet).GetString(myDataBuffer);
-            return strWebData;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
-            int W = SystemInformation.PrimaryMonitorSize.Width;
-            int H = SystemInformation.PrimaryMonitorSize.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -436,55 +376,7 @@ namespace test4_romeo
 
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 

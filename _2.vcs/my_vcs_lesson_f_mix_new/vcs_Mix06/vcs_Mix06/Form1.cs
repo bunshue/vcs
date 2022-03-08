@@ -247,6 +247,7 @@ namespace vcs_Mix06
             return result;
         }
 
+        //#制作閃動的窗體
         private void button3_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
@@ -348,21 +349,25 @@ namespace vcs_Mix06
             {
                 Console.Write(c + " ");
             }
-
-
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //字符型轉換 轉為字符串
 
+            int value = 12345;
+            richTextBox1.Text += "a\t" + value.ToString("n") + "\n"; //生成 12,345.00
+            richTextBox1.Text += "b\t" + value.ToString("C") + "\n"; //生成 ￥12,345.00
+            richTextBox1.Text += "c\t" + value.ToString("e") + "\n"; //生成 1.234500e+004
+            richTextBox1.Text += "d\t" + value.ToString("f4") + "\n"; //生成 12345.0000
+            richTextBox1.Text += "e\t" + value.ToString("x") + "\n"; //生成 3039 (16進制)
+            richTextBox1.Text += "f\t" + value.ToString("p") + "\n"; //生成 1,234,500.00%
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -392,7 +397,24 @@ namespace vcs_Mix06
         private void button12_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //顯示Loading窗體
+            LoadingControl pLoading = LoadingControl.getLoading();
+            pLoading.SetExecuteMethod(method);
+            pLoading.ShowDialog();
+        }
 
+        private void method()
+        {
+            LoadingControl pLoading = LoadingControl.getLoading();
+            for (int i = 0; i < 10; i++)
+            {
+                pLoading.SetCaptionAndDescription("", "", "執行進度" + i.ToString() + "/10");
+
+                //XXXXXXX
+
+                Thread.Sleep(200);
+            }
+            LoadingControl.getLoading().CloseLoadingForm();
         }
 
         private void button13_Click(object sender, EventArgs e)

@@ -236,6 +236,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(170, 70);
             this.button6.TabIndex = 100;
+            this.button6.Text = "數字顯示";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -338,6 +339,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(170, 70);
             this.button12.TabIndex = 90;
+            this.button12.Text = "製作窗體Loading";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

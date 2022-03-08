@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication0223a
+﻿namespace vcs_Mix06
 {
     partial class LoadingControl
     {
@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbl_description = new System.Windows.Forms.Label();
             this.lbl_caption = new System.Windows.Forms.Label();
+            this.lbl_description = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // lbl_description
-            // 
-            this.lbl_description.AutoSize = true;
-            this.lbl_description.Location = new System.Drawing.Point(33, 67);
-            this.lbl_description.Name = "lbl_description";
-            this.lbl_description.Size = new System.Drawing.Size(33, 12);
-            this.lbl_description.TabIndex = 0;
-            this.lbl_description.Text = "label1";
             // 
             // lbl_caption
             // 
             this.lbl_caption.AutoSize = true;
-            this.lbl_caption.Location = new System.Drawing.Point(33, 124);
+            this.lbl_caption.Location = new System.Drawing.Point(72, 147);
             this.lbl_caption.Name = "lbl_caption";
             this.lbl_caption.Size = new System.Drawing.Size(33, 12);
-            this.lbl_caption.TabIndex = 1;
+            this.lbl_caption.TabIndex = 3;
             this.lbl_caption.Text = "label1";
+            // 
+            // lbl_description
+            // 
+            this.lbl_description.AutoSize = true;
+            this.lbl_description.Location = new System.Drawing.Point(72, 90);
+            this.lbl_description.Name = "lbl_description";
+            this.lbl_description.Size = new System.Drawing.Size(33, 12);
+            this.lbl_description.TabIndex = 2;
+            this.lbl_description.Text = "label1";
             // 
             // LoadingControl
             // 
@@ -68,7 +68,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lbl_description;
         private System.Windows.Forms.Label lbl_caption;
+        private System.Windows.Forms.Label lbl_description;
     }
 }

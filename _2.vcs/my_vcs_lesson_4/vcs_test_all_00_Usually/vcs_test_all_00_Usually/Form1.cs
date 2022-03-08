@@ -231,7 +231,11 @@ namespace vcs_test_all_00_Usually
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = new Bitmap(640, 480);
+            //Bitmap bitmap1 = new Bitmap(640, 480);
+
+            string filename0 = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename0);	//Bitmap.FromFile出來的是Image格式
+            //pictureBox1.Image = bitmap1;
 
             //自動檔名 與 存檔語法
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";

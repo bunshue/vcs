@@ -295,12 +295,11 @@ namespace network_test2_http
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //取得網頁資料
+            //取得網頁資料, 尋找資料
             //C#獲取網頁源碼，自動判斷網頁字符集編碼
         }
 
-        private string getHtml(string url)
-        //url是要訪問的網站地址，charSet是目標網頁的編碼，如果傳入的是null或者""，那就自動分析網頁的編碼
+        private string getHtml(string url, string charSet)  //url是要訪問的網站地址，charSet是目標網頁的編碼，如果傳入的是null或者""，那就自動分析網頁的編碼
         {
             WebClient wc = new WebClient();     // 建立 WebClient
             //創建WebClient實例myWebClient 
@@ -317,7 +316,15 @@ namespace network_test2_http
             //從資源下載數據並返回字節數組。（加@是因為網址中間有"/"符號）
             byte[] myDataBuffer = wc.DownloadData(url);
             string strWebData = Encoding.Default.GetString(myDataBuffer);
+
             //獲取網頁字符編碼描述信息
+            Match charSetMatch = Regex.Match(strWebData, "<meta([^<]*)charset=([^<]*)\"", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            string webCharSet = charSetMatch.Groups[2].Value;
+            if (charSet == null || charSet == "")
+                charSet = webCharSet;
+
+            if (charSet != null && charSet != "" && Encoding.GetEncoding(charSet) != Encoding.Default)
+                strWebData = Encoding.GetEncoding(charSet).GetString(myDataBuffer);
             return strWebData;
         }
 
