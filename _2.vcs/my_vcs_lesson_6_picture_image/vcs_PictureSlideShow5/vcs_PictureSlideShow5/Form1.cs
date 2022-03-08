@@ -10,19 +10,17 @@ namespace vcs_PictureSlideShow5
 {
     public partial class Form1 : Form
     {
-        int width = 0, heigh = 0;
-        string strpath;
-        string foldername = @"C:\______test_files\__pic";
+        int width = 0;
+        int heigh = 0;
+        string foldername = @"C:\______test_files\__pic\_MU";
 
         public Form1()
         {
             InitializeComponent();
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            strpath = foldername;
             Cursor.Hide();
             this.timer1.Enabled = true;
             width = this.Width;
@@ -38,14 +36,14 @@ namespace vcs_PictureSlideShow5
 
         private void drowImage()
         {
-            Graphics myGraphics = this.CreateGraphics();
-            myGraphics.Clear(Color.Black);
-            Bitmap myBitmap = new Bitmap(strpath + "\\id_card_0" + new Random().Next(1, 6).ToString() + ".jpg");
-            //richTextBox1.Text += "filename " + strpath + "\\id_card_0" + new Random().Next(1, 6).ToString() + ".jpg" + "\n";
+            Graphics g = this.CreateGraphics();
+            g.Clear(Color.Black);
+            Bitmap bitmap1 = new Bitmap(foldername + "\\id_card_0" + new Random().Next(1, 6).ToString() + ".jpg");
+            //richTextBox1.Text += "filename " + foldername + "\\id_card_0" + new Random().Next(1, 6).ToString() + ".jpg" + "\n";
 
-            myGraphics.DrawImage(myBitmap, new Random().Next(0, width - myBitmap.Width), new Random().Next(0, heigh - myBitmap.Height));
-            //richTextBox1.Text += "a " + (new Random().Next(0, width - myBitmap.Width)).ToString() + "\n";
-            //richTextBox1.Text += "b " + (new Random().Next(0, heigh - myBitmap.Height)).ToString() + "\n";
+            g.DrawImage(bitmap1, new Random().Next(0, width - bitmap1.Width), new Random().Next(0, heigh - bitmap1.Height));
+            //richTextBox1.Text += "a " + (new Random().Next(0, width - bitmap1.Width)).ToString() + "\n";
+            //richTextBox1.Text += "b " + (new Random().Next(0, heigh - bitmap1.Height)).ToString() + "\n";
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -65,5 +63,6 @@ namespace vcs_PictureSlideShow5
         }
     }
 }
+
 
 
