@@ -1260,11 +1260,6 @@ namespace my_vcs_17_cmp
             radioButton2.Checked = true;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            ShowSystemTime.Text = DateTime.Now.ToString();
-        }
-
         private void button_timer_start_Click(object sender, EventArgs e)
         {
             byte timer_on = 0;

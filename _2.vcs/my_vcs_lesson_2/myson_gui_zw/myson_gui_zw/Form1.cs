@@ -978,11 +978,6 @@ namespace myson_gui_zw
             Send_Print_Test_Data_Cmd();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = DateTime.Now.ToString();
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             OperatingSystem OSv = System.Environment.OSVersion;

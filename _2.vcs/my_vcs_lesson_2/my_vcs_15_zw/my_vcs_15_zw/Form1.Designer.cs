@@ -72,6 +72,9 @@
             this.tabPage8_PCA = new System.Windows.Forms.TabPage();
             this.tabPage9_GPIO = new System.Windows.Forms.TabPage();
             this.tabPage6_ZW = new System.Windows.Forms.TabPage();
+            this.status_power = new System.Windows.Forms.Label();
+            this.status_motor = new System.Windows.Forms.Label();
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.tb_svpwm_m = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -112,9 +115,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.status_motor = new System.Windows.Forms.Label();
-            this.status_power = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1_ADC.SuspendLayout();
             this.tabPage2_DAC.SuspendLayout();
@@ -387,10 +387,10 @@
             this.tabPage1_ADC.Controls.Add(this.label3);
             this.tabPage1_ADC.Controls.Add(this.label5);
             this.tabPage1_ADC.Controls.Add(this.label4);
-            this.tabPage1_ADC.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1_ADC.Location = new System.Drawing.Point(4, 22);
             this.tabPage1_ADC.Name = "tabPage1_ADC";
             this.tabPage1_ADC.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1_ADC.Size = new System.Drawing.Size(766, 319);
+            this.tabPage1_ADC.Size = new System.Drawing.Size(766, 318);
             this.tabPage1_ADC.TabIndex = 0;
             this.tabPage1_ADC.Text = "ADC";
             this.tabPage1_ADC.UseVisualStyleBackColor = true;
@@ -408,10 +408,10 @@
             this.tabPage2_DAC.Controls.Add(this.button11);
             this.tabPage2_DAC.Controls.Add(this.label6);
             this.tabPage2_DAC.Controls.Add(this.comboBox3);
-            this.tabPage2_DAC.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2_DAC.Location = new System.Drawing.Point(4, 22);
             this.tabPage2_DAC.Name = "tabPage2_DAC";
             this.tabPage2_DAC.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2_DAC.Size = new System.Drawing.Size(766, 319);
+            this.tabPage2_DAC.Size = new System.Drawing.Size(766, 318);
             this.tabPage2_DAC.TabIndex = 1;
             this.tabPage2_DAC.Text = "DAC";
             this.tabPage2_DAC.UseVisualStyleBackColor = true;
@@ -538,45 +538,45 @@
             // 
             // tabPage3_CMP
             // 
-            this.tabPage3_CMP.Location = new System.Drawing.Point(4, 21);
+            this.tabPage3_CMP.Location = new System.Drawing.Point(4, 22);
             this.tabPage3_CMP.Name = "tabPage3_CMP";
-            this.tabPage3_CMP.Size = new System.Drawing.Size(766, 319);
+            this.tabPage3_CMP.Size = new System.Drawing.Size(766, 318);
             this.tabPage3_CMP.TabIndex = 2;
             this.tabPage3_CMP.Text = "CMP";
             this.tabPage3_CMP.UseVisualStyleBackColor = true;
             // 
             // tabPage4_PWM
             // 
-            this.tabPage4_PWM.Location = new System.Drawing.Point(4, 21);
+            this.tabPage4_PWM.Location = new System.Drawing.Point(4, 22);
             this.tabPage4_PWM.Name = "tabPage4_PWM";
-            this.tabPage4_PWM.Size = new System.Drawing.Size(766, 319);
+            this.tabPage4_PWM.Size = new System.Drawing.Size(766, 318);
             this.tabPage4_PWM.TabIndex = 3;
             this.tabPage4_PWM.Text = "PWM";
             this.tabPage4_PWM.UseVisualStyleBackColor = true;
             // 
             // tabPage5_Timer
             // 
-            this.tabPage5_Timer.Location = new System.Drawing.Point(4, 21);
+            this.tabPage5_Timer.Location = new System.Drawing.Point(4, 22);
             this.tabPage5_Timer.Name = "tabPage5_Timer";
-            this.tabPage5_Timer.Size = new System.Drawing.Size(766, 319);
+            this.tabPage5_Timer.Size = new System.Drawing.Size(766, 318);
             this.tabPage5_Timer.TabIndex = 4;
             this.tabPage5_Timer.Text = "Timer";
             this.tabPage5_Timer.UseVisualStyleBackColor = true;
             // 
             // tabPage8_PCA
             // 
-            this.tabPage8_PCA.Location = new System.Drawing.Point(4, 21);
+            this.tabPage8_PCA.Location = new System.Drawing.Point(4, 22);
             this.tabPage8_PCA.Name = "tabPage8_PCA";
-            this.tabPage8_PCA.Size = new System.Drawing.Size(766, 319);
+            this.tabPage8_PCA.Size = new System.Drawing.Size(766, 318);
             this.tabPage8_PCA.TabIndex = 7;
             this.tabPage8_PCA.Text = "PCA";
             this.tabPage8_PCA.UseVisualStyleBackColor = true;
             // 
             // tabPage9_GPIO
             // 
-            this.tabPage9_GPIO.Location = new System.Drawing.Point(4, 21);
+            this.tabPage9_GPIO.Location = new System.Drawing.Point(4, 22);
             this.tabPage9_GPIO.Name = "tabPage9_GPIO";
-            this.tabPage9_GPIO.Size = new System.Drawing.Size(766, 319);
+            this.tabPage9_GPIO.Size = new System.Drawing.Size(766, 318);
             this.tabPage9_GPIO.TabIndex = 8;
             this.tabPage9_GPIO.Text = "GPIO";
             this.tabPage9_GPIO.UseVisualStyleBackColor = true;
@@ -599,12 +599,41 @@
             this.tabPage6_ZW.Controls.Add(this.groupBox3);
             this.tabPage6_ZW.Controls.Add(this.groupBox2);
             this.tabPage6_ZW.Controls.Add(this.groupBox1);
-            this.tabPage6_ZW.Location = new System.Drawing.Point(4, 21);
+            this.tabPage6_ZW.Location = new System.Drawing.Point(4, 22);
             this.tabPage6_ZW.Name = "tabPage6_ZW";
-            this.tabPage6_ZW.Size = new System.Drawing.Size(766, 319);
+            this.tabPage6_ZW.Size = new System.Drawing.Size(766, 318);
             this.tabPage6_ZW.TabIndex = 5;
             this.tabPage6_ZW.Text = "ZW";
             this.tabPage6_ZW.UseVisualStyleBackColor = true;
+            // 
+            // status_power
+            // 
+            this.status_power.AutoSize = true;
+            this.status_power.CausesValidation = false;
+            this.status_power.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.status_power.Location = new System.Drawing.Point(541, 274);
+            this.status_power.Name = "status_power";
+            this.status_power.Size = new System.Drawing.Size(0, 27);
+            this.status_power.TabIndex = 26;
+            this.status_power.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // status_motor
+            // 
+            this.status_motor.AutoSize = true;
+            this.status_motor.CausesValidation = false;
+            this.status_motor.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.status_motor.Location = new System.Drawing.Point(541, 226);
+            this.status_motor.Name = "status_motor";
+            this.status_motor.Size = new System.Drawing.Size(0, 27);
+            this.status_motor.TabIndex = 25;
+            this.status_motor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // progressBar2
+            // 
+            this.progressBar2.Location = new System.Drawing.Point(448, 271);
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(81, 30);
+            this.progressBar2.TabIndex = 24;
             // 
             // progressBar1
             // 
@@ -969,7 +998,7 @@
             this.trackBar1.Maximum = 24;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(56, 104);
+            this.trackBar1.Size = new System.Drawing.Size(45, 104);
             this.trackBar1.TabIndex = 0;
             this.trackBar1.Value = 1;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -983,9 +1012,9 @@
             this.tabPage7_About.Controls.Add(this.label10);
             this.tabPage7_About.Controls.Add(this.label9);
             this.tabPage7_About.Controls.Add(this.pictureBox1);
-            this.tabPage7_About.Location = new System.Drawing.Point(4, 21);
+            this.tabPage7_About.Location = new System.Drawing.Point(4, 22);
             this.tabPage7_About.Name = "tabPage7_About";
-            this.tabPage7_About.Size = new System.Drawing.Size(766, 319);
+            this.tabPage7_About.Size = new System.Drawing.Size(766, 318);
             this.tabPage7_About.TabIndex = 6;
             this.tabPage7_About.Text = "About";
             this.tabPage7_About.UseVisualStyleBackColor = true;
@@ -1064,35 +1093,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // progressBar2
-            // 
-            this.progressBar2.Location = new System.Drawing.Point(448, 271);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(81, 30);
-            this.progressBar2.TabIndex = 24;
-            // 
-            // status_motor
-            // 
-            this.status_motor.AutoSize = true;
-            this.status_motor.CausesValidation = false;
-            this.status_motor.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.status_motor.Location = new System.Drawing.Point(541, 226);
-            this.status_motor.Name = "status_motor";
-            this.status_motor.Size = new System.Drawing.Size(0, 27);
-            this.status_motor.TabIndex = 25;
-            this.status_motor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // status_power
-            // 
-            this.status_power.AutoSize = true;
-            this.status_power.CausesValidation = false;
-            this.status_power.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.status_power.Location = new System.Drawing.Point(541, 274);
-            this.status_power.Name = "status_power";
-            this.status_power.Size = new System.Drawing.Size(0, 27);
-            this.status_power.TabIndex = 26;
-            this.status_power.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1110,9 +1110,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Myson Century, Inc.  ZW";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1_ADC.ResumeLayout(false);

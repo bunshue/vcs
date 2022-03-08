@@ -132,9 +132,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage6_ZW.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -148,7 +145,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.tabPage7_About.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -322,9 +318,9 @@
             this.tabPage6_ZW.Controls.Add(this.groupBox3);
             this.tabPage6_ZW.Controls.Add(this.groupBox2);
             this.tabPage6_ZW.Controls.Add(this.groupBox1);
-            this.tabPage6_ZW.Location = new System.Drawing.Point(4, 21);
+            this.tabPage6_ZW.Location = new System.Drawing.Point(4, 22);
             this.tabPage6_ZW.Name = "tabPage6_ZW";
-            this.tabPage6_ZW.Size = new System.Drawing.Size(873, 331);
+            this.tabPage6_ZW.Size = new System.Drawing.Size(873, 330);
             this.tabPage6_ZW.TabIndex = 5;
             this.tabPage6_ZW.Text = "ZW";
             this.tabPage6_ZW.UseVisualStyleBackColor = true;
@@ -896,7 +892,7 @@
             this.trackBar1.Maximum = 24;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(56, 104);
+            this.trackBar1.Size = new System.Drawing.Size(45, 104);
             this.trackBar1.TabIndex = 0;
             this.trackBar1.Value = 1;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -927,9 +923,9 @@
             this.tabPage8_SVPWM.Controls.Add(this.label6);
             this.tabPage8_SVPWM.Controls.Add(this.label5);
             this.tabPage8_SVPWM.Controls.Add(this.numericUpDown3);
-            this.tabPage8_SVPWM.Location = new System.Drawing.Point(4, 21);
+            this.tabPage8_SVPWM.Location = new System.Drawing.Point(4, 22);
             this.tabPage8_SVPWM.Name = "tabPage8_SVPWM";
-            this.tabPage8_SVPWM.Size = new System.Drawing.Size(873, 331);
+            this.tabPage8_SVPWM.Size = new System.Drawing.Size(873, 330);
             this.tabPage8_SVPWM.TabIndex = 7;
             this.tabPage8_SVPWM.Text = "SVPWM";
             this.tabPage8_SVPWM.UseVisualStyleBackColor = true;
@@ -1247,9 +1243,9 @@
             this.tabPage7_About.Controls.Add(this.label10);
             this.tabPage7_About.Controls.Add(this.label9);
             this.tabPage7_About.Controls.Add(this.pictureBox1);
-            this.tabPage7_About.Location = new System.Drawing.Point(4, 21);
+            this.tabPage7_About.Location = new System.Drawing.Point(4, 22);
             this.tabPage7_About.Name = "tabPage7_About";
-            this.tabPage7_About.Size = new System.Drawing.Size(873, 331);
+            this.tabPage7_About.Size = new System.Drawing.Size(873, 330);
             this.tabPage7_About.TabIndex = 6;
             this.tabPage7_About.Text = "About";
             this.tabPage7_About.UseVisualStyleBackColor = true;
@@ -1328,33 +1324,11 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 863);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(908, 22);
-            this.statusStrip1.TabIndex = 23;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(908, 885);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.comboBox2);
@@ -1367,9 +1341,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Myson Century, Inc.  ZW";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage6_ZW.ResumeLayout(false);
@@ -1389,8 +1361,6 @@
             this.tabPage7_About.ResumeLayout(false);
             this.tabPage7_About.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1459,9 +1429,6 @@
         private System.Windows.Forms.Button button_update_status;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label_speed;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button bt_svpwm_phase;
         private System.Windows.Forms.Label label3;

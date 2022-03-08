@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace my_vcs_04_comport
+namespace vcs_Comport_Sample_PuTTY
 {
     static class Program
     {

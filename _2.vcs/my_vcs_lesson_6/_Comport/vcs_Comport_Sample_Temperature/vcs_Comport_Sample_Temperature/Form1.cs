@@ -153,29 +153,20 @@ namespace vcs_Comport_Sample_Temperature
 
                     Application.DoEvents();
 
-
-                    /*
-                                        if (flag_comport_connection_ok == true)
-                                        {
-                                            if (serialPort1.IsOpen)
-                                            {
-                                                bt_comport_connect1b.Enabled = false;
-                                                bt_comport_disconnect1b.Enabled = true;
-                                                this.BackColor = SystemColors.ControlLight;
-                                                flag_comport_ok = true;
-                                            }
-                                            else
-                                            {
-                                                bt_comport_connect1b.Enabled = true;
-                                                bt_comport_disconnect1b.Enabled = false;
-                                                this.BackColor = Color.Pink;
-                                                flag_comport_ok = false;
-                                            }
-                                        }
-                                        else
-                                            flag_comport_ok = false;
-                        
-                                            */
+                    if (serialPort1.IsOpen)
+                    {
+                        bt_comport_connect.Enabled = false;
+                        bt_comport_disconnect.Enabled = true;
+                        this.BackColor = SystemColors.ControlLight;
+                        flag_comport_ok = true;
+                    }
+                    else
+                    {
+                        bt_comport_connect.Enabled = true;
+                        bt_comport_disconnect.Enabled = false;
+                        this.BackColor = Color.Pink;
+                        flag_comport_ok = false;
+                    }
                 }
                 else
                 {

@@ -124,14 +124,6 @@ namespace my_vcs_15_mytty
             richTextBox1.Clear();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (fontDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Font = fontDialog1.Font;
-            }
-        }
-
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
             //RichTextBox顯示訊息自動捲動 顯示最後一行

@@ -135,9 +135,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.ShowSystemTime = new System.Windows.Forms.ToolStripStatusLabel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.tabPage1_ADC.SuspendLayout();
@@ -151,7 +148,6 @@
             this.tabPage5_Timer.SuspendLayout();
             this.tabPage7_About.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -412,10 +408,10 @@
             this.tabPage1_ADC.Controls.Add(this.label3);
             this.tabPage1_ADC.Controls.Add(this.label5);
             this.tabPage1_ADC.Controls.Add(this.label4);
-            this.tabPage1_ADC.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1_ADC.Location = new System.Drawing.Point(4, 22);
             this.tabPage1_ADC.Name = "tabPage1_ADC";
             this.tabPage1_ADC.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1_ADC.Size = new System.Drawing.Size(766, 172);
+            this.tabPage1_ADC.Size = new System.Drawing.Size(766, 171);
             this.tabPage1_ADC.TabIndex = 0;
             this.tabPage1_ADC.Text = "ADC";
             this.tabPage1_ADC.UseVisualStyleBackColor = true;
@@ -446,10 +442,10 @@
             this.tabPage2_DAC.Controls.Add(this.button11);
             this.tabPage2_DAC.Controls.Add(this.label6);
             this.tabPage2_DAC.Controls.Add(this.comboBox3);
-            this.tabPage2_DAC.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2_DAC.Location = new System.Drawing.Point(4, 22);
             this.tabPage2_DAC.Name = "tabPage2_DAC";
             this.tabPage2_DAC.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2_DAC.Size = new System.Drawing.Size(766, 172);
+            this.tabPage2_DAC.Size = new System.Drawing.Size(766, 171);
             this.tabPage2_DAC.TabIndex = 1;
             this.tabPage2_DAC.Text = "DAC";
             this.tabPage2_DAC.UseVisualStyleBackColor = true;
@@ -581,9 +577,9 @@
             this.tabPage3_CMP.Controls.Add(this.button19);
             this.tabPage3_CMP.Controls.Add(this.comboBox_comparator);
             this.tabPage3_CMP.Controls.Add(this.label20);
-            this.tabPage3_CMP.Location = new System.Drawing.Point(4, 21);
+            this.tabPage3_CMP.Location = new System.Drawing.Point(4, 22);
             this.tabPage3_CMP.Name = "tabPage3_CMP";
-            this.tabPage3_CMP.Size = new System.Drawing.Size(766, 172);
+            this.tabPage3_CMP.Size = new System.Drawing.Size(766, 171);
             this.tabPage3_CMP.TabIndex = 2;
             this.tabPage3_CMP.Text = "CMP";
             this.tabPage3_CMP.UseVisualStyleBackColor = true;
@@ -719,9 +715,9 @@
             this.tabPage4_PWM.Controls.Add(this.cb_BP);
             this.tabPage4_PWM.Controls.Add(this.cb_AN);
             this.tabPage4_PWM.Controls.Add(this.cb_AP);
-            this.tabPage4_PWM.Location = new System.Drawing.Point(4, 21);
+            this.tabPage4_PWM.Location = new System.Drawing.Point(4, 22);
             this.tabPage4_PWM.Name = "tabPage4_PWM";
-            this.tabPage4_PWM.Size = new System.Drawing.Size(766, 172);
+            this.tabPage4_PWM.Size = new System.Drawing.Size(766, 171);
             this.tabPage4_PWM.TabIndex = 3;
             this.tabPage4_PWM.Text = "PWM";
             this.tabPage4_PWM.UseVisualStyleBackColor = true;
@@ -1094,9 +1090,9 @@
             this.tabPage5_Timer.Controls.Add(this.cb_timer4);
             this.tabPage5_Timer.Controls.Add(this.cb_timer3);
             this.tabPage5_Timer.Controls.Add(this.cb_timer1);
-            this.tabPage5_Timer.Location = new System.Drawing.Point(4, 21);
+            this.tabPage5_Timer.Location = new System.Drawing.Point(4, 22);
             this.tabPage5_Timer.Name = "tabPage5_Timer";
-            this.tabPage5_Timer.Size = new System.Drawing.Size(766, 172);
+            this.tabPage5_Timer.Size = new System.Drawing.Size(766, 171);
             this.tabPage5_Timer.TabIndex = 4;
             this.tabPage5_Timer.Text = "Timer";
             this.tabPage5_Timer.UseVisualStyleBackColor = true;
@@ -1287,18 +1283,18 @@
             // 
             // tabPage8_PCA
             // 
-            this.tabPage8_PCA.Location = new System.Drawing.Point(4, 21);
+            this.tabPage8_PCA.Location = new System.Drawing.Point(4, 22);
             this.tabPage8_PCA.Name = "tabPage8_PCA";
-            this.tabPage8_PCA.Size = new System.Drawing.Size(766, 172);
+            this.tabPage8_PCA.Size = new System.Drawing.Size(766, 171);
             this.tabPage8_PCA.TabIndex = 7;
             this.tabPage8_PCA.Text = "PCA";
             this.tabPage8_PCA.UseVisualStyleBackColor = true;
             // 
             // tabPage9_GPIO
             // 
-            this.tabPage9_GPIO.Location = new System.Drawing.Point(4, 21);
+            this.tabPage9_GPIO.Location = new System.Drawing.Point(4, 22);
             this.tabPage9_GPIO.Name = "tabPage9_GPIO";
-            this.tabPage9_GPIO.Size = new System.Drawing.Size(766, 172);
+            this.tabPage9_GPIO.Size = new System.Drawing.Size(766, 171);
             this.tabPage9_GPIO.TabIndex = 8;
             this.tabPage9_GPIO.Text = "GPIO";
             this.tabPage9_GPIO.UseVisualStyleBackColor = true;
@@ -1312,9 +1308,9 @@
             this.tabPage7_About.Controls.Add(this.label10);
             this.tabPage7_About.Controls.Add(this.label9);
             this.tabPage7_About.Controls.Add(this.pictureBox1);
-            this.tabPage7_About.Location = new System.Drawing.Point(4, 21);
+            this.tabPage7_About.Location = new System.Drawing.Point(4, 22);
             this.tabPage7_About.Name = "tabPage7_About";
-            this.tabPage7_About.Size = new System.Drawing.Size(766, 172);
+            this.tabPage7_About.Size = new System.Drawing.Size(766, 171);
             this.tabPage7_About.TabIndex = 6;
             this.tabPage7_About.Text = "About";
             this.tabPage7_About.UseVisualStyleBackColor = true;
@@ -1393,28 +1389,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ShowSystemTime});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 740);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(805, 24);
-            this.statusStrip1.TabIndex = 23;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // ShowSystemTime
-            // 
-            this.ShowSystemTime.Name = "ShowSystemTime";
-            this.ShowSystemTime.Size = new System.Drawing.Size(158, 19);
-            this.ShowSystemTime.Text = "toolStripStatusLabel1";
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // panel1
             // 
             this.panel1.Location = new System.Drawing.Point(12, 299);
@@ -1427,7 +1401,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(805, 764);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.comboBox2);
@@ -1441,9 +1414,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Myson Century, Inc.  CM2209A Demo System";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1_ADC.ResumeLayout(false);
@@ -1465,8 +1436,6 @@
             this.tabPage7_About.ResumeLayout(false);
             this.tabPage7_About.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1558,9 +1527,6 @@
         private System.Windows.Forms.CheckBox cb_timer3;
         private System.Windows.Forms.CheckBox cb_timer1;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel ShowSystemTime;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox TL5;
         private System.Windows.Forms.TextBox TH5;
         private System.Windows.Forms.TextBox TL4;
