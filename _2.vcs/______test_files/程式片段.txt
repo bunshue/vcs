@@ -1,4 +1,78 @@
 
+here
+richTextBox2.Text += "text_editor_path = " + text_editor_path + "\t" + "fullname = " + fullname + "\n";
+text_editor_path = 	fullname = C:\_git\vcs\_2.vcs\my_vcs_lesson_f_mix_new\__new\vcs_WindowsAPICodePack\vcs_WindowsAPICodePack\Form1.cs
+
+
+
+            textBox1.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
+            textBox5.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
+
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || ((e.KeyChar >= 'A') && (e.KeyChar <= 'F')) || ((e.KeyChar >= 'a') && (e.KeyChar <= 'f')) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+        
+        
+        
+        public double hex2dec(string hex_data)
+        {
+            byte value = 0;
+            double dec_value = 0;
+            //MessageBox.Show("data = " + hex_data);
+            for (int i = 0; i < hex_data.Length; i++)
+            {
+                if ((hex_data[i] >= (Char)48 && hex_data[i] <= (Char)57))
+                {
+                    value = (byte)(hex_data[i] - 48);
+
+                }
+                else if ((hex_data[i] >= 'A') && (hex_data[i] <= 'F'))
+                {
+                    value = (byte)(hex_data[i] - 'A' + 10);
+                }
+                else if ((hex_data[i] >= 'a') && (hex_data[i] <= 'f'))
+                {
+                    value = (byte)(hex_data[i] - 'a' + 10);
+                }
+                dec_value = dec_value * 16 + value;
+                //MessageBox.Show("data : " + hex_data[i] + " value : " + value);
+            }
+            return dec_value;
+        }
+        
+        
+        
+
             //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
             int W = SystemInformation.PrimaryMonitorSize.Width;
             int H = SystemInformation.PrimaryMonitorSize.Height;

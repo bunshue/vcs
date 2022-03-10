@@ -8,9 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;    //for FileInfo DirectoryInfo
-using System.Diagnostics;
+using System.Diagnostics;   //for Process
 using System.Globalization; //for CultureInfo
-
 using MediaInfoNET;
 
 namespace vcs_DrAP
@@ -55,6 +54,12 @@ namespace vcs_DrAP
         string picture_viewer_path = String.Empty;
         string text_editor_path = String.Empty;
         string search_path = String.Empty;
+
+        //string default_vcs_path = @"C:\_git\vcs\_2.vcs";
+        string default_vcs_path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_f_mix_new\__new";
+
+        string default_python_path = @"C:\_git\vcs\_4.cmpp\_python_test";
+        string default_matlab_path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
 
         private const int SEARCH_MODE_VCS = 0x00;	    //search vcs code, 搜尋vcs內的關鍵字
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
@@ -1166,7 +1171,7 @@ namespace vcs_DrAP
 
                 if (fi.Extension == ".txt")
                 {
-                    //System.Diagnostics.Process.Start(text_editor_path, fullname);
+                    //Process.Start(text_editor_path, fullname);
                 }
                 else
                 {
@@ -1176,17 +1181,17 @@ namespace vcs_DrAP
 
                     if (video_player_path == String.Empty)
                     {
-                        //System.Diagnostics.Process.Start(fullname); //使用預設程式開啟
+                        //Process.Start(fullname); //使用預設程式開啟
                     }
                     else
                     {
-                        //System.Diagnostics.Process.Start(video_player_path, fullname);    //指名播放程式開啟
+                        //Process.Start(video_player_path, fullname);    //指名播放程式開啟
                     }
                 }
             }
             else
             {
-                //System.Diagnostics.Process.Start(text_editor_path, fullname);
+                //Process.Start(text_editor_path, fullname);
             }
             
             
@@ -1211,14 +1216,14 @@ namespace vcs_DrAP
                 /* old
                 //開啟檔案總管
                 if (Directory.GetParent(fullname) == null)
-                    System.Diagnostics.Process.Start(fullname);             //若是跟目錄 不要擷取其父目錄的路徑
+                    Process.Start(fullname);             //若是跟目錄 不要擷取其父目錄的路徑
                 else
-                    System.Diagnostics.Process.Start(Directory.GetParent(fullname).ToString()); //GetParent 擷取其父目錄的路徑
+                    Process.Start(Directory.GetParent(fullname).ToString()); //GetParent 擷取其父目錄的路徑
                 */
                 //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
                 string file = @"C:\Windows\explorer.exe";
                 string argument = @"/select, " + fullname;
-                System.Diagnostics.Process.Start(file, argument);
+                Process.Start(file, argument);
 
                 return;
             }
@@ -1265,7 +1270,7 @@ namespace vcs_DrAP
 
                 if (fi.Extension == ".txt")
                 {
-                    System.Diagnostics.Process.Start(text_editor_path, fullname);
+                    Process.Start(text_editor_path, fullname);
                 }
                 else
                 {
@@ -1274,17 +1279,18 @@ namespace vcs_DrAP
 
                     if (video_player_path == String.Empty)
                     {
-                        System.Diagnostics.Process.Start(fullname); //使用預設程式開啟
+                        Process.Start(fullname); //使用預設程式開啟
                     }
                     else
                     {
-                        System.Diagnostics.Process.Start(video_player_path, fullname);    //指名播放程式開啟
+                        Process.Start(video_player_path, fullname);    //指名播放程式開啟
                     }
                 }
             }
             else
             {
-                System.Diagnostics.Process.Start(text_editor_path, fullname);
+                richTextBox2.Text += "text_editor_path = " + text_editor_path + "\t" + "fullname = " + fullname + "\n";
+                Process.Start(text_editor_path, fullname);
             }
         }
 
@@ -1358,11 +1364,11 @@ namespace vcs_DrAP
                 if (video_player_path == String.Empty)
                 {
                     all_filename = all_filename.Trim().Replace("\"", "");
-                    System.Diagnostics.Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
+                    Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
                 }
                 else
                 {
-                    System.Diagnostics.Process.Start(video_player_path, all_filename);    //指名播放程式開啟
+                    Process.Start(video_player_path, all_filename);    //指名播放程式開啟
                 }
 
                 /*
@@ -1375,7 +1381,7 @@ namespace vcs_DrAP
             }
             else
             {
-                System.Diagnostics.Process.Start(text_editor_path, all_filename);
+                Process.Start(text_editor_path, all_filename);
             }
         }
 
@@ -2705,7 +2711,7 @@ namespace vcs_DrAP
 
         void do_search_mode(int mode)
         {
-            string path;
+            string path = string.Empty;
             richTextBox1.Clear();
             richTextBox2.Clear();
             removeDrawDiskSpace();
@@ -2719,7 +2725,7 @@ namespace vcs_DrAP
 
                 bt_search_pattern_vcs.BackgroundImage = null;
                 bt_search_pattern_vcs.BackColor = Color.Red;
-                path = @"C:\_git\vcs\_2.vcs";
+                path = default_vcs_path;
             }
             else if (mode == SEARCH_MODE_PYTHON)
             {
@@ -2729,7 +2735,7 @@ namespace vcs_DrAP
 
                 bt_search_pattern_python.BackgroundImage = null;
                 bt_search_pattern_python.BackColor = Color.Red;
-                path = @"C:\_git\vcs\_4.cmpp\_python_test";
+                path = default_python_path;
             }
             else if (mode == SEARCH_MODE_MATLAB)
             {
@@ -2739,17 +2745,11 @@ namespace vcs_DrAP
 
                 bt_search_pattern_matlab.BackgroundImage = null;
                 bt_search_pattern_matlab.BackColor = Color.Red;
-                path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
+                path = default_matlab_path;
             }
             else
             {
-                search_mode = SEARCH_MODE_VCS;
-                richTextBox1.Text += "搜尋開始vcs\n";
-                richTextBox2.Text += "搜尋開始vcs\n\n";
-
-                bt_search_pattern_vcs.BackgroundImage = null;
-                bt_search_pattern_vcs.BackColor = Color.Red;
-                path = @"C:\_git\vcs\_2.vcs";
+                //其他搜尋模式
             }
 
             bt_start_files.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
@@ -2778,7 +2778,9 @@ namespace vcs_DrAP
                 // This path is a directory
                 ProcessDirectoryS(path);
             }
+            richTextBox2.Text += "111111\n";
             show_file_info3();
+            richTextBox2.Text += "222222\n";
             flag_search_vcs_pattern = 1;
             if (mode == SEARCH_MODE_VCS)
             {
@@ -2800,6 +2802,7 @@ namespace vcs_DrAP
                 bt_search_pattern_vcs.BackColor = System.Drawing.SystemColors.ControlLight;
                 bt_search_pattern_vcs.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
             }
+            richTextBox2.Text += "33333333\n";
             return;
         }
 
@@ -2898,7 +2901,7 @@ namespace vcs_DrAP
                 richTextBox1.Text += "資料夾: " + Path + " 存在\n";
             */
 
-            //string path = @"C:\_git\vcs\_2.vcs";
+            //string path = default_vcs_path;
             string path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
             //string path = search_path;
 
