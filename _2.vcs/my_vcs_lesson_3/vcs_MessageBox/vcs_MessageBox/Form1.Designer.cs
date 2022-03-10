@@ -55,6 +55,7 @@ namespace vcs_MessageBox
             this.Icon2 = new System.Windows.Forms.RadioButton();
             this.Icon1 = new System.Windows.Forms.RadioButton();
             this.txtResult = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.grpDefaultButton.SuspendLayout();
             this.GroupBox2.SuspendLayout();
             this.GroupBox1.SuspendLayout();
@@ -91,9 +92,9 @@ namespace vcs_MessageBox
             this.grpDefaultButton.Controls.Add(this.DefaultButton3);
             this.grpDefaultButton.Controls.Add(this.DefaultButton2);
             this.grpDefaultButton.Controls.Add(this.DefaultButton1);
-            this.grpDefaultButton.Location = new System.Drawing.Point(205, 74);
+            this.grpDefaultButton.Location = new System.Drawing.Point(211, 112);
             this.grpDefaultButton.Name = "grpDefaultButton";
-            this.grpDefaultButton.Size = new System.Drawing.Size(144, 124);
+            this.grpDefaultButton.Size = new System.Drawing.Size(169, 124);
             this.grpDefaultButton.TabIndex = 33;
             this.grpDefaultButton.TabStop = false;
             this.grpDefaultButton.Text = "Default Button";
@@ -108,9 +109,9 @@ namespace vcs_MessageBox
             // 
             // txtCaption
             // 
-            this.txtCaption.Location = new System.Drawing.Point(65, 38);
+            this.txtCaption.Location = new System.Drawing.Point(65, 55);
             this.txtCaption.Name = "txtCaption";
-            this.txtCaption.Size = new System.Drawing.Size(200, 22);
+            this.txtCaption.Size = new System.Drawing.Size(218, 22);
             this.txtCaption.TabIndex = 30;
             // 
             // Button2
@@ -123,7 +124,7 @@ namespace vcs_MessageBox
             // 
             // Label2
             // 
-            this.Label2.Location = new System.Drawing.Point(9, 42);
+            this.Label2.Location = new System.Drawing.Point(9, 59);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(60, 16);
             this.Label2.TabIndex = 36;
@@ -139,7 +140,7 @@ namespace vcs_MessageBox
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(277, 10);
+            this.btnShow.Location = new System.Drawing.Point(295, 13);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(76, 24);
             this.btnShow.TabIndex = 34;
@@ -148,14 +149,14 @@ namespace vcs_MessageBox
             // 
             // txtMsg
             // 
-            this.txtMsg.Location = new System.Drawing.Point(65, 10);
+            this.txtMsg.Location = new System.Drawing.Point(65, 13);
             this.txtMsg.Name = "txtMsg";
-            this.txtMsg.Size = new System.Drawing.Size(200, 22);
+            this.txtMsg.Size = new System.Drawing.Size(218, 22);
             this.txtMsg.TabIndex = 29;
             // 
             // Label1
             // 
-            this.Label1.Location = new System.Drawing.Point(9, 14);
+            this.Label1.Location = new System.Drawing.Point(9, 17);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(60, 16);
             this.Label1.TabIndex = 35;
@@ -169,7 +170,7 @@ namespace vcs_MessageBox
             this.GroupBox2.Controls.Add(this.Button3);
             this.GroupBox2.Controls.Add(this.Button2);
             this.GroupBox2.Controls.Add(this.Button1);
-            this.GroupBox2.Location = new System.Drawing.Point(9, 202);
+            this.GroupBox2.Location = new System.Drawing.Point(14, 258);
             this.GroupBox2.Name = "GroupBox2";
             this.GroupBox2.Size = new System.Drawing.Size(188, 160);
             this.GroupBox2.TabIndex = 32;
@@ -204,7 +205,7 @@ namespace vcs_MessageBox
             // 
             // lblResult
             // 
-            this.lblResult.Location = new System.Drawing.Point(209, 210);
+            this.lblResult.Location = new System.Drawing.Point(227, 315);
             this.lblResult.Name = "lblResult";
             this.lblResult.Size = new System.Drawing.Size(56, 20);
             this.lblResult.TabIndex = 37;
@@ -220,7 +221,7 @@ namespace vcs_MessageBox
             this.GroupBox1.Controls.Add(this.Icon3);
             this.GroupBox1.Controls.Add(this.Icon2);
             this.GroupBox1.Controls.Add(this.Icon1);
-            this.GroupBox1.Location = new System.Drawing.Point(9, 74);
+            this.GroupBox1.Location = new System.Drawing.Point(11, 112);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.Size = new System.Drawing.Size(188, 124);
             this.GroupBox1.TabIndex = 31;
@@ -296,17 +297,26 @@ namespace vcs_MessageBox
             // txtResult
             // 
             this.txtResult.Enabled = false;
-            this.txtResult.Location = new System.Drawing.Point(209, 234);
+            this.txtResult.Location = new System.Drawing.Point(227, 339);
             this.txtResult.Name = "txtResult";
             this.txtResult.Size = new System.Drawing.Size(136, 22);
             this.txtResult.TabIndex = 38;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(397, 10);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(424, 494);
+            this.richTextBox1.TabIndex = 39;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AcceptButton = this.btnShow;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 373);
+            this.ClientSize = new System.Drawing.Size(833, 516);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.grpDefaultButton);
             this.Controls.Add(this.txtCaption);
             this.Controls.Add(this.Label2);
@@ -360,6 +370,7 @@ namespace vcs_MessageBox
         internal System.Windows.Forms.RadioButton Icon2;
         internal System.Windows.Forms.RadioButton Icon1;
         internal System.Windows.Forms.TextBox txtResult;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

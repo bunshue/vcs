@@ -1,7 +1,0 @@
-C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_GetFileInfo\vcs_GetFileInfo\bin\Debug\vcs_GetFileInfo.exe
-C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_GetFileInfo\vcs_GetFileInfo\bin\Debug\vcs_GetFileInfo.pdb
-C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_GetFileInfo\vcs_GetFileInfo\obj\Debug\vcs_GetFileInfo.Form1.resources
-C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_GetFileInfo\vcs_GetFileInfo\obj\Debug\vcs_GetFileInfo.Properties.Resources.resources
-C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_GetFileInfo\vcs_GetFileInfo\obj\Debug\vcs_GetFileInfo.csproj.GenerateResource.Cache
-C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_GetFileInfo\vcs_GetFileInfo\obj\Debug\vcs_GetFileInfo.exe
-C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_GetFileInfo\vcs_GetFileInfo\obj\Debug\vcs_GetFileInfo.pdb

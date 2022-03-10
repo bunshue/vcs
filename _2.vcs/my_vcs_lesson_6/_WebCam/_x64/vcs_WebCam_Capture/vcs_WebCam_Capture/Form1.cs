@@ -84,6 +84,11 @@ namespace vcs_WebCam_Capture
         {
             webcam.AdvanceSetting();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            webcam.Info();
+        }
     }
 }
 

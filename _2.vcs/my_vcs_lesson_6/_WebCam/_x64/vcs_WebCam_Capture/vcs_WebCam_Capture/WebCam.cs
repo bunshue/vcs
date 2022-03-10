@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+
 using WebCam_Capture;
 using System.Collections.Generic;
 
@@ -11,9 +13,9 @@ namespace vcs_WebCam_Capture
     class WebCam
     {
         private WebCamCapture webcam;
-        private System.Windows.Forms.PictureBox _FrameImage;
+        private PictureBox pictureBox1;
         private int FrameNumber = 30;
-        public void InitializeWebCam(ref System.Windows.Forms.PictureBox ImageControl, ref System.Windows.Forms.RichTextBox rtb)
+        public void InitializeWebCam(ref PictureBox pbx, ref RichTextBox rtb)
         {
             webcam = new WebCamCapture();
 
@@ -30,16 +32,17 @@ namespace vcs_WebCam_Capture
             webcam.FrameNumber = ((ulong)(0ul));
             webcam.TimeToCapture_milliseconds = FrameNumber;
             webcam.ImageCaptured += new WebCamCapture.WebCamEventHandler(webcam_ImageCaptured);
-            _FrameImage = ImageControl;
+            pictureBox1 = pbx;
         }
 
         void webcam_ImageCaptured(object source, WebcamEventArgs e)
         {
-            _FrameImage.Image = e.WebCamImage;
+            pictureBox1.Image = e.WebCamImage;
         }
 
         public void Start()
         {
+            Console.WriteLine("webcam start");
             webcam.TimeToCapture_milliseconds = FrameNumber;
             webcam.Start(0);
         }
@@ -60,6 +63,7 @@ namespace vcs_WebCam_Capture
 
         public void ResolutionSetting()
         {
+            Console.WriteLine("webcam config");
             webcam.Config();
         }
 
@@ -67,5 +71,25 @@ namespace vcs_WebCam_Capture
         {
             webcam.Config2();
         }
+
+        public void Info()
+        {
+            Console.WriteLine("webcam ifno");
+            //webcam.Info();
+
+            Console.WriteLine("webcam W " + webcam.CaptureWidth.ToString());
+            Console.WriteLine("webcam H " + webcam.CaptureHeight.ToString());
+            Console.WriteLine("webcam N " + webcam.FrameNumber.ToString());
+            Console.WriteLine("webcam T " + webcam.TimeToCapture_milliseconds.ToString());
+        }
+
     }
 }
+
+
+/*
+        public int CaptureHeight { get; set; }
+        public int CaptureWidth { get; set; }
+        public ulong FrameNumber { get; set; }
+        public int TimeToCapture_milliseconds { get; set; }
+*/

@@ -47,6 +47,8 @@ namespace vcs_WebCam_Emgu0
         private const int W_richTextBox1 = 640;
         private const int H_richTextBox1 = 480;
 
+        int WEBCAM_NO = 0;    //預設使用的webcam
+
         public Form1()
         {
             InitializeComponent();
@@ -110,41 +112,89 @@ namespace vcs_WebCam_Emgu0
         {
             if (flag_webcam_ok == false)    //如果webcam沒啟動
             {
-                try
+                int webcam_no = 0;
+                while (true)
                 {
-                    richTextBox1.Text += "開啟Webcam ......\n";
-                    button1.Text = "關閉Webcam";
-                    flag_webcam_ok = true;
+                    try
+                    {
+                        richTextBox1.Text += "開啟Webcam ......try webcam_no = " + webcam_no.ToString() + "\n";
 
-                    cap = new Capture(0);   //預設使用第一台的webcam
-                    //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
+                        cap = new Capture(webcam_no);   //預設使用的webcam
+                        //cap = new Capture("C:\\______test_files\\__RW\\_avi\\\i2c.avi");
 
-                    //cap.FlipHorizontal = true;  //左右相反
-                    //cap.FlipVertical = true;    //上下顛倒
+                        if (cap == null)
+                        {
+                            richTextBox1.Text += "空的\n";
+                            webcam_no++;
 
-                    richTextBox1.Text += "W = " + cap.Width.ToString() + ", ";
-                    richTextBox1.Text += "H = " + cap.Height.ToString() + "\n";
+                            if (webcam_no > 5)
+                            {
+                                richTextBox1.Text += "找不到了, 放棄\n";
+                                break;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
 
-                    Application.Idle += new EventHandler(Application_Idle); // 在Idle的event下，把畫面設定到pictureBox上
+                        richTextBox1.Text += "W = " + cap.Width.ToString() + ", ";
+                        richTextBox1.Text += "H = " + cap.Height.ToString() + "\n";
 
-                    //  information
-                    double W;
-                    double H;
-                    double frame_count;
-                    double fps;
-                    W = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
-                    H = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
-                    frame_count = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-                    fps = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
+                        if (webcam_no > 5)
+                        {
+                            richTextBox1.Text += "找不到了, 放棄\n";
+                            break;
+                        }
 
-                    richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
-                    richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
-                    richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
-                    richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
-                }
-                catch (NullReferenceException excpt)
-                {
-                    MessageBox.Show(excpt.Message);
+                        if (cap.Width == 1920)
+                        {
+                            richTextBox1.Text += "跳過\n";
+                            webcam_no++;
+                            continue;
+                        }
+
+
+                        //cap.FlipHorizontal = true;  //左右相反
+                        //cap.FlipVertical = true;    //上下顛倒
+
+
+                        Application.Idle += new EventHandler(Application_Idle); // 在Idle的event下，把畫面設定到pictureBox上
+
+                        //  information
+                        double W;
+                        double H;
+                        double frame_count;
+                        double fps;
+                        W = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
+                        H = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
+                        frame_count = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+                        fps = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
+
+                        richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
+                        richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
+                        richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
+                        richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
+
+                        richTextBox1.Text += "CV_CAP_PROP_FORMAT = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FORMAT).ToString() + "\n";
+                        richTextBox1.Text += "CV_CAP_PROP_MODE = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_MODE).ToString() + "\n";
+                        richTextBox1.Text += "CV_CAP_PROP_CONVERT_RGB = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_CONVERT_RGB).ToString() + "\n";
+                        richTextBox1.Text += "CV_CAP_PROP_MONOCROME = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_MONOCROME).ToString() + "\n";
+                        richTextBox1.Text += "CV_CAP_PROP_FOURCC = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FOURCC).ToString() + "\n";
+                        richTextBox1.Text += "CV_CAP_PROP_POS_FRAMES = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_POS_FRAMES).ToString() + "\n";
+                        richTextBox1.Text += "CV_CAP_PROP_POS_AVI_RATIO = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_POS_AVI_RATIO).ToString() + "\n";
+
+                        button1.Text = "關閉Webcam";
+                        WEBCAM_NO = webcam_no;
+                        flag_webcam_ok = true;
+                        break;
+
+
+                    }
+                    catch (NullReferenceException excpt)
+                    {
+                        MessageBox.Show(excpt.Message);
+                    }
                 }
             }
             else
@@ -309,7 +359,7 @@ namespace vcs_WebCam_Emgu0
         private void button6_Click(object sender, EventArgs e)
         {
             //錄製影像(有壓縮)
-            cap = new Capture(1);   //預設使用第一台的webcam
+            cap = new Capture(WEBCAM_NO);   //預設使用的webcam
             //double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
 
             if (cap == null)

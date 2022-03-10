@@ -35,6 +35,12 @@ namespace vcs_Process_Start
             dx = 170;
             dy = 62;
 
+            groupBox1.Location = new Point(10, 10);
+            groupBox2.Location = new Point(10 + dx * 3+40, 10);
+            groupBox3.Location = new Point(10 + dx * 4+100, 10);
+            richTextBox1.Location = new Point(10 + dx * 5 + 160, 10);
+
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -300,6 +306,29 @@ namespace vcs_Process_Start
 
         private void button29_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            //開啟Notepad程序
+            process1.StartInfo.FileName = "notepad.exe";
+            process1.Start();
+
+
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            //關閉Notepad程序
+            Process[] myProcesses;
+            myProcesses = Process.GetProcessesByName("Notepad");
+            foreach (Process instance in myProcesses)
+            {
+                instance.CloseMainWindow();
+                instance.WaitForExit(3000);
+                instance.Close();
+            }
 
         }
     }

@@ -65,7 +65,7 @@ namespace vcs_test_all_01_Control
                 }
                 str += '\n';   // 換行
             }
-            MessageBox.Show(str);  //顯示結果
+            MessageBox.Show(str, "用MessageBox先顯示一個訊息, 再開啟主程式");  //顯示結果
 
             // Set the small and large sizes.
             SmallSize = flp1.Size;
