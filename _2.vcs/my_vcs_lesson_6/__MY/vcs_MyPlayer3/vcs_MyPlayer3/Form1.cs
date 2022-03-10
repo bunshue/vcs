@@ -57,7 +57,7 @@ namespace vcs_MyPlayer3
         int mp3_volume = 50;
         double mp3_rate = 1.0;
         int mp3_player_height = 50;
-        int debug_panel_width = 150;
+        int debug_panel_width = 128;
         int debug_panel_height = 0;
 
         int pdf_page = 0;
@@ -149,8 +149,8 @@ namespace vcs_MyPlayer3
                 //this.tb_file_l.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
                 tb_pdf_page.KeyPress += new System.Windows.Forms.KeyPressEventHandler(tb_pdf_page_KeyPress);
                 tb_pdf_page.TextAlign = HorizontalAlignment.Center;
-                tb_pdf_page.Location = new Point(this.richTextBox1.Location.X, this.richTextBox1.Height - tb_pdf_page.Height);
-                this.richTextBox1.Controls.Add(tb_pdf_page);    // 將控件加入表單
+                tb_pdf_page.Location = new Point(0, this.panel1.Height / 2 - tb_pdf_page.Height);
+                this.panel1.Controls.Add(tb_pdf_page);    // 將控件加入表單
                 tb_pdf_page.BringToFront();
             }
 
@@ -262,7 +262,7 @@ namespace vcs_MyPlayer3
             int height = 40; //設定按鈕大小 H
             int dx = width + 2;
             int dy = height + 2;
-            int X = 15;    //這一群按鍵的起始點(最左邊)
+            int X = 2;    //這一群按鍵的起始點(最左邊)
             int Y = 150;
 
             width = 50;
@@ -1343,9 +1343,8 @@ namespace vcs_MyPlayer3
             openFileDialog1.Title = "開啟pdf檔案";
             openFileDialog1.FileName = "";              //預設開啟的檔名
             openFileDialog1.DefaultExt = "*.pdf";
-            openFileDialog1.Filter = "pdf檔(*.pdf)|*.pdf|所有檔案(*.*)|*.*";   //存檔類型
-            //openFileDialog1.Filter = "mp3檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|MP4檔(*.mp4)|*.mp4|所有檔案(*.*)|*.*";   //存檔類型
-            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.Filter = "pdf檔(*.pdf)|*.pdf";
+            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
@@ -1387,8 +1386,8 @@ namespace vcs_MyPlayer3
             openFileDialog1.Title = "開啟mp3檔案";
             openFileDialog1.FileName = "";              //預設開啟的檔名
             openFileDialog1.DefaultExt = "*.mp3";
-            openFileDialog1.Filter = "mp3檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|MP4檔(*.mp4)|*.mp4|所有檔案(*.*)|*.*";   //存檔類型
-            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.Filter = "音樂檔案(*.mp3,*.wav,*.flac)|*.mp3;*.wav;*.flac";
+            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
@@ -1478,8 +1477,8 @@ namespace vcs_MyPlayer3
             openFileDialog1.Title = "開啟mp3/pdf檔案";
             openFileDialog1.FileName = "";              //預設開啟的檔名
             openFileDialog1.DefaultExt = "*.mp3";
-            openFileDialog1.Filter = "mp3檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|MP4檔(*.mp4)|*.mp4|所有檔案(*.*)|*.*";   //存檔類型
-            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.Filter = "開啟檔案(*.pdf,*.mp3,*.wav,*.flac)|*.pdf;*.mp3;*.wav;*.flac";
+            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑

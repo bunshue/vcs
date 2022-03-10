@@ -145,11 +145,18 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.bt_dtp_get = new System.Windows.Forms.Button();
             this.bt_dtp_set = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.bt_special_00 = new System.Windows.Forms.Button();
+            this.bt_special_01 = new System.Windows.Forms.Button();
+            this.bt_special_02 = new System.Windows.Forms.Button();
+            this.bt_special_03 = new System.Windows.Forms.Button();
+            this.bt_special_04 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -441,7 +448,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(164, 46);
             this.button25.TabIndex = 30;
-            this.button25.Text = "和曆";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -639,7 +645,6 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(164, 46);
             this.button38.TabIndex = 39;
-            this.button38.Text = "民國記年";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
@@ -661,7 +666,6 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(164, 46);
             this.button40.TabIndex = 47;
-            this.button40.Text = "民國/農曆";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -758,7 +762,6 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(164, 46);
             this.button47.TabIndex = 59;
-            this.button47.Text = "日本紀年";
             this.button47.UseVisualStyleBackColor = true;
             this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
@@ -1377,11 +1380,80 @@
             this.bt_dtp_set.UseVisualStyleBackColor = true;
             this.bt_dtp_set.Click += new System.EventHandler(this.bt_dtp_set_Click);
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.bt_special_04);
+            this.groupBox6.Controls.Add(this.bt_special_03);
+            this.groupBox6.Controls.Add(this.bt_special_02);
+            this.groupBox6.Controls.Add(this.bt_special_01);
+            this.groupBox6.Controls.Add(this.bt_special_00);
+            this.groupBox6.Location = new System.Drawing.Point(637, 2);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(152, 293);
+            this.groupBox6.TabIndex = 85;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "特殊曆法";
+            // 
+            // bt_special_00
+            // 
+            this.bt_special_00.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_special_00.Location = new System.Drawing.Point(13, 24);
+            this.bt_special_00.Name = "bt_special_00";
+            this.bt_special_00.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_00.TabIndex = 82;
+            this.bt_special_00.Text = "民國";
+            this.bt_special_00.UseVisualStyleBackColor = true;
+            this.bt_special_00.Click += new System.EventHandler(this.bt_special_00_Click);
+            // 
+            // bt_special_01
+            // 
+            this.bt_special_01.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_special_01.Location = new System.Drawing.Point(13, 76);
+            this.bt_special_01.Name = "bt_special_01";
+            this.bt_special_01.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_01.TabIndex = 83;
+            this.bt_special_01.Text = "日本";
+            this.bt_special_01.UseVisualStyleBackColor = true;
+            this.bt_special_01.Click += new System.EventHandler(this.bt_special_01_Click);
+            // 
+            // bt_special_02
+            // 
+            this.bt_special_02.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_special_02.Location = new System.Drawing.Point(13, 128);
+            this.bt_special_02.Name = "bt_special_02";
+            this.bt_special_02.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_02.TabIndex = 84;
+            this.bt_special_02.Text = "農曆";
+            this.bt_special_02.UseVisualStyleBackColor = true;
+            this.bt_special_02.Click += new System.EventHandler(this.bt_special_02_Click);
+            // 
+            // bt_special_03
+            // 
+            this.bt_special_03.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_special_03.Location = new System.Drawing.Point(13, 177);
+            this.bt_special_03.Name = "bt_special_03";
+            this.bt_special_03.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_03.TabIndex = 85;
+            this.bt_special_03.Text = "農曆";
+            this.bt_special_03.UseVisualStyleBackColor = true;
+            this.bt_special_03.Click += new System.EventHandler(this.bt_special_03_Click);
+            // 
+            // bt_special_04
+            // 
+            this.bt_special_04.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_special_04.Location = new System.Drawing.Point(13, 228);
+            this.bt_special_04.Name = "bt_special_04";
+            this.bt_special_04.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_04.TabIndex = 86;
+            this.bt_special_04.UseVisualStyleBackColor = true;
+            this.bt_special_04.Click += new System.EventHandler(this.bt_special_04_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1660, 715);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.button59);
             this.Controls.Add(this.button58);
@@ -1473,6 +1545,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1596,6 +1669,12 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button bt_dtp_set;
         private System.Windows.Forms.Button bt_dtp_get;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button bt_special_04;
+        private System.Windows.Forms.Button bt_special_03;
+        private System.Windows.Forms.Button bt_special_02;
+        private System.Windows.Forms.Button bt_special_01;
+        private System.Windows.Forms.Button bt_special_00;
     }
 }
 

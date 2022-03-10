@@ -135,6 +135,8 @@ namespace vcs_test_all_01_DateTime
             button58.Location = new Point(x_st + dx * 3, y_st + dy * 13);
             button59.Location = new Point(x_st + dx * 3, y_st + dy * 14);
 
+            groupBox6.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
             //button
             x_st = 10;
             y_st = 10;
@@ -827,16 +829,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button25_Click(object sender, EventArgs e)
         {
-            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("ja-JP", true);
-            culture.DateTimeFormat.Calendar = new System.Globalization.JapaneseCalendar();
-            DateTime today = DateTime.Today;
-
-            // 西暦の出力方法
-            richTextBox1.Text += today + "\n";
-            richTextBox1.Text += today.ToString("yyyy/MM/dd") + "\n";
-
-            // 和暦の出力方法
-            richTextBox1.Text += today.ToString("ggyy年MM月dd日(ddd)", culture) + "\n";
         }
 
         public struct Age
@@ -913,10 +905,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button38_Click(object sender, EventArgs e)
         {
-            //民國記年
-            CultureInfo cui = new CultureInfo("zh-TW", true);
-            cui.DateTimeFormat.Calendar = new TaiwanCalendar();
-            richTextBox1.Text += dateTimePicker1.Value.ToString("yy/M/d", cui) + "\n";
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -1251,34 +1239,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button40_Click(object sender, EventArgs e)
         {
-            DateTime dd = new DateTime(2006, 3, 11);
-            TaiwanCalendar tc = new TaiwanCalendar();
-
-
-            int year = tc.GetYear(dd);
-
-            int month = tc.GetMonth(dd);
-
-            int dayOfMonth = tc.GetDayOfMonth(dd);             //日
-
-            int daysInMonth = tc.GetDaysInMonth(year, month);   //整個月的天數
-
-            richTextBox1.Text += "民國" + year.ToString() + "年" + month.ToString() + "月" + dayOfMonth.ToString() + "日\n";
-
-            TaiwanLunisolarCalendar tlc = new TaiwanLunisolarCalendar();
-
-            // 取得目前支援的農曆日曆到幾年幾月幾日( 2051-02-10 )
-            tlc.MaxSupportedDateTime.ToShortDateString();
-
-            // 取得今天的農曆年月日
-            /*
-            txtContent.Text =
-            tlc.GetYear(DateTime.Now).ToString() + "-" +
-            tlc.GetMonth(DateTime.Now).ToString() + "-" +
-            tlc.GetDayOfMonth(DateTime.Now).ToString();
-            */
-            richTextBox1.Text += "農曆" + tlc.GetYear(DateTime.Now).ToString() + "年" + tlc.GetMonth(DateTime.Now).ToString() + "月" + tlc.GetDayOfMonth(DateTime.Now).ToString() + "日\n";
-
         }
 
         private void button45_Click(object sender, EventArgs e)
@@ -1308,22 +1268,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button47_Click(object sender, EventArgs e)
         {
-            var japaneseCal = new JapaneseCalendar();
-            var jaJp = new CultureInfo("ja-JP");
-            jaJp.DateTimeFormat.Calendar = japaneseCal;
-
-            var date = new DateTime(1905, 2, 12);
-            richTextBox1.Text += "Gregorian calendar date: " + date.ToString("d") + "\n";
-
-            // Call the ToString(IFormatProvider) method.
-            richTextBox1.Text += "Japanese calendar date: " + date.ToString("d", jaJp) + "\n";
-
-            var date2 = new DateTime(2, 5, 10, japaneseCal);
-
-            richTextBox1.Text += "Gregorian calendar date: " + date2.ToString("d") + "\n";
-            richTextBox1.Text += "Japanese calendar date: " + date2.ToString("d", jaJp) + "\n";
-
-            richTextBox1.Text += "Japanese calendar date: " + DateTime.Now.ToString("d", jaJp) + "\n";
         }
 
         //y－年，m－月，d－日期
@@ -1793,6 +1737,91 @@ namespace vcs_test_all_01_DateTime
             string[] CTime = "子|丑|寅|卯|辰|巳|午|未|申|酉|戌|亥".Split('|');
 
             return "【" + CTime[hour / 2] + "時】";
+        }
+
+        private void bt_special_00_Click(object sender, EventArgs e)
+        {
+            //民國記年
+            CultureInfo cui = new CultureInfo("zh-TW", true);
+            cui.DateTimeFormat.Calendar = new TaiwanCalendar();
+            richTextBox1.Text += dateTimePicker1.Value.ToString("yy/M/d", cui) + "\n";
+
+
+            DateTime dd = new DateTime(2006, 3, 11);
+            TaiwanCalendar tc = new TaiwanCalendar();
+
+
+            int year = tc.GetYear(dd);
+
+            int month = tc.GetMonth(dd);
+
+            int dayOfMonth = tc.GetDayOfMonth(dd);             //日
+
+            int daysInMonth = tc.GetDaysInMonth(year, month);   //整個月的天數
+
+            richTextBox1.Text += "民國" + year.ToString() + "年" + month.ToString() + "月" + dayOfMonth.ToString() + "日\n";
+
+        }
+
+        private void bt_special_01_Click(object sender, EventArgs e)
+        {
+            var japaneseCal = new JapaneseCalendar();
+            var jaJp = new CultureInfo("ja-JP");
+            jaJp.DateTimeFormat.Calendar = japaneseCal;
+
+            var date = new DateTime(1905, 2, 12);
+            richTextBox1.Text += "Gregorian calendar date: " + date.ToString("d") + "\n";
+
+            // Call the ToString(IFormatProvider) method.
+            richTextBox1.Text += "Japanese calendar date: " + date.ToString("d", jaJp) + "\n";
+
+            var date2 = new DateTime(2, 5, 10, japaneseCal);
+
+            richTextBox1.Text += "Gregorian calendar date: " + date2.ToString("d") + "\n";
+            richTextBox1.Text += "Japanese calendar date: " + date2.ToString("d", jaJp) + "\n";
+
+            richTextBox1.Text += "Japanese calendar date: " + DateTime.Now.ToString("d", jaJp) + "\n";
+
+
+            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("ja-JP", true);
+            culture.DateTimeFormat.Calendar = new System.Globalization.JapaneseCalendar();
+            DateTime today = DateTime.Today;
+
+            // 西暦の出力方法
+            richTextBox1.Text += today + "\n";
+            richTextBox1.Text += today.ToString("yyyy/MM/dd") + "\n";
+
+            // 和暦の出力方法
+            richTextBox1.Text += today.ToString("ggyy年MM月dd日(ddd)", culture) + "\n";
+        }
+
+        private void bt_special_02_Click(object sender, EventArgs e)
+        {
+            TaiwanLunisolarCalendar tlc = new TaiwanLunisolarCalendar();
+
+            // 取得目前支援的農曆日曆到幾年幾月幾日( 2051-02-10 )
+            tlc.MaxSupportedDateTime.ToShortDateString();
+
+            // 取得今天的農曆年月日
+            /*
+            txtContent.Text =
+            tlc.GetYear(DateTime.Now).ToString() + "-" +
+            tlc.GetMonth(DateTime.Now).ToString() + "-" +
+            tlc.GetDayOfMonth(DateTime.Now).ToString();
+            */
+            richTextBox1.Text += "農曆" + tlc.GetYear(DateTime.Now).ToString() + "年" + tlc.GetMonth(DateTime.Now).ToString() + "月" + tlc.GetDayOfMonth(DateTime.Now).ToString() + "日\n";
+
+
+        }
+
+        private void bt_special_03_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_special_04_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
