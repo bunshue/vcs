@@ -49,6 +49,7 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_clear_html1 = new System.Windows.Forms.Button();
             this.bt_clear_html2 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -175,7 +176,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(449, 270);
+            this.button3.Location = new System.Drawing.Point(449, 230);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(172, 70);
             this.button3.TabIndex = 50;
@@ -251,11 +252,23 @@
             this.bt_clear_html2.UseVisualStyleBackColor = true;
             this.bt_clear_html2.Click += new System.EventHandler(this.bt_clear_html2_Click);
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(449, 302);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(172, 70);
+            this.button2.TabIndex = 60;
+            this.button2.Text = "獲取遠程網頁中的所有鏈接URL";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1107, 828);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.bt_clear_html2);
             this.Controls.Add(this.bt_clear_html1);
             this.Controls.Add(this.bt_clear);
@@ -300,6 +313,7 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_clear_html1;
         private System.Windows.Forms.Button bt_clear_html2;
+        private System.Windows.Forms.Button button2;
     }
 }
 

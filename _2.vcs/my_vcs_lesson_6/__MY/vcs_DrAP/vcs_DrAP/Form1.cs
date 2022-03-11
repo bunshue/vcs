@@ -55,9 +55,7 @@ namespace vcs_DrAP
         string text_editor_path = String.Empty;
         string search_path = String.Empty;
 
-        //string default_vcs_path = @"C:\_git\vcs\_2.vcs";
-        string default_vcs_path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_f_mix_new\__new";
-
+        string default_vcs_path = @"C:\_git\vcs\_2.vcs";
         string default_python_path = @"C:\_git\vcs\_4.cmpp\_python_test";
         string default_matlab_path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
 
@@ -196,7 +194,7 @@ namespace vcs_DrAP
             int dx = 10;
             int dy = 25;
 
-            x_st += listBox1.Size.Width+dx;
+            x_st += listBox1.Size.Width + dx;
             bt_add_dir.Location = new Point(x_st, y_st + dy * 0);
             bt_remove_dir.Location = new Point(x_st, y_st + dy * 1);
             bt_clear_dir.Location = new Point(x_st, y_st + dy * 2);
@@ -300,7 +298,7 @@ namespace vcs_DrAP
             g.DrawLine(p, w / 4, h / 2 - 1, w * 3 / 4, h / 2 - 1);
             bt_minimize.Image = bmp;
 
-            bt_minimize.Location = new Point(this.ClientSize.Width - bt_minimize.Width * 2-2, 0);
+            bt_minimize.Location = new Point(this.ClientSize.Width - bt_minimize.Width * 2 - 2, 0);
             bt_minimize.Click += bt_minimize_Click;     // 加入按鈕事件
 
             this.Controls.Add(bt_minimize); // 將按鈕加入表單
@@ -381,14 +379,14 @@ namespace vcs_DrAP
             FolederName = path;
             richTextBox1.Text += path + "\n\n";
 
-            if (System.IO.File.Exists(path))
+            if (System.IO.File.Exists(path) == true)
             {
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                 ProcessFile(path, 0);
                 richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
             }
-            else if (Directory.Exists(path))
+            else if (Directory.Exists(path) == true)
             {
                 // This path is a directory
                 //ProcessDirectory(path);
@@ -1023,7 +1021,7 @@ namespace vcs_DrAP
 
                 richTextBox2.Text += "\n搜尋路徑" + path + "\n";
 
-                if (System.IO.File.Exists(path))
+                if (System.IO.File.Exists(path) == true)
                 {
                     // This path is a file
                     richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
@@ -1031,7 +1029,7 @@ namespace vcs_DrAP
                     richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
                     flag_search_done = 1;
                 }
-                else if (Directory.Exists(path))
+                else if (Directory.Exists(path) == true)
                 {
                     // This path is a directory
                     FolederName = path;
@@ -1193,8 +1191,8 @@ namespace vcs_DrAP
             {
                 //Process.Start(text_editor_path, fullname);
             }
-            
-            
+
+
 
         }
 
@@ -1270,7 +1268,10 @@ namespace vcs_DrAP
 
                 if (fi.Extension == ".txt")
                 {
-                    Process.Start(text_editor_path, fullname);
+                    if (System.IO.File.Exists(text_editor_path) == true)
+                    {
+                        Process.Start(text_editor_path, fullname);
+                    }
                 }
                 else
                 {
@@ -1283,14 +1284,24 @@ namespace vcs_DrAP
                     }
                     else
                     {
-                        Process.Start(video_player_path, fullname);    //指名播放程式開啟
+                        if (System.IO.File.Exists(video_player_path) == true)
+                        {
+                            Process.Start(video_player_path, fullname);    //指名播放程式開啟
+                        }
                     }
                 }
             }
             else
             {
-                richTextBox2.Text += "text_editor_path = " + text_editor_path + "\t" + "fullname = " + fullname + "\n";
-                Process.Start(text_editor_path, fullname);
+                //richTextBox2.Text += "text_editor_path = " + text_editor_path + "\t" + "fullname = " + fullname + "\n";
+                if (System.IO.File.Exists(text_editor_path) == true)
+                {
+                    Process.Start(text_editor_path, fullname);
+                }
+                else
+                {
+                    richTextBox2.Text += "開啟程式不存在\n";
+                }
             }
         }
 
@@ -1381,7 +1392,10 @@ namespace vcs_DrAP
             }
             else
             {
-                Process.Start(text_editor_path, all_filename);
+                if (System.IO.File.Exists(text_editor_path) == true)
+                {
+                    Process.Start(text_editor_path, all_filename);
+                }
             }
         }
 
@@ -2022,7 +2036,7 @@ namespace vcs_DrAP
                 fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
             }
         }
-        
+
         void get_all_files(string foldername)
         {
             total_number_files = 0;
@@ -2220,7 +2234,7 @@ namespace vcs_DrAP
 
             total_folders = 0;
 
-            if (System.IO.File.Exists(path))
+            if (System.IO.File.Exists(path) == true)
             {
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
@@ -2228,7 +2242,7 @@ namespace vcs_DrAP
                 richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
                 flag_search_done = 1;
             }
-            else if (Directory.Exists(path))
+            else if (Directory.Exists(path) == true)
             {
                 // This path is a directory
                 FolederName = path;
@@ -2402,12 +2416,12 @@ namespace vcs_DrAP
                     //找資料夾所在的硬碟的標籤
                     //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
 
-                    if (System.IO.File.Exists(path))
+                    if (System.IO.File.Exists(path) == true)
                     {
                         // This path is a file
                         richTextBox1.Text += "是個檔案\n";
                     }
-                    else if (Directory.Exists(path))
+                    else if (Directory.Exists(path) == true)
                     {
                         // This path is a directory
                         DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
@@ -2466,14 +2480,14 @@ namespace vcs_DrAP
 
                 richTextBox2.Text += "\n搜尋路徑" + path + "\n";
 
-                if (System.IO.File.Exists(path))
+                if (System.IO.File.Exists(path) == true)
                 {
                     // This path is a file
                     richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                     ProcessFile(path, 0);
                     richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
                 }
-                else if (Directory.Exists(path))
+                else if (Directory.Exists(path) == true)
                 {
                     // This path is a directory
                     FolederName = path;
@@ -2510,12 +2524,12 @@ namespace vcs_DrAP
 
                     //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
 
-                    if (System.IO.File.Exists(path))
+                    if (System.IO.File.Exists(path) == true)
                     {
                         // This path is a file
                         richTextBox1.Text += "是個檔案\n";
                     }
-                    else if (Directory.Exists(path))
+                    else if (Directory.Exists(path) == true)
                     {
                         // This path is a directory
                         DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
@@ -2767,20 +2781,18 @@ namespace vcs_DrAP
                 path = search_path;
 
             richTextBox1.Text += "資料夾: " + path + "\n\n";
-            if (System.IO.File.Exists(path))
+            if (System.IO.File.Exists(path) == true)
             {
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                 ProcessFileS(path);
             }
-            else if (Directory.Exists(path))
+            else if (Directory.Exists(path) == true)
             {
                 // This path is a directory
                 ProcessDirectoryS(path);
             }
-            richTextBox2.Text += "111111\n";
             show_file_info3();
-            richTextBox2.Text += "222222\n";
             flag_search_vcs_pattern = 1;
             if (mode == SEARCH_MODE_VCS)
             {
@@ -2802,7 +2814,6 @@ namespace vcs_DrAP
                 bt_search_pattern_vcs.BackColor = System.Drawing.SystemColors.ControlLight;
                 bt_search_pattern_vcs.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
             }
-            richTextBox2.Text += "33333333\n";
             return;
         }
 
@@ -2909,7 +2920,7 @@ namespace vcs_DrAP
             //folder_name.Clear();
 
             //richTextBox1.Text += "資料夾: " + path + "\n\n";
-            if (Directory.Exists(path))
+            if (Directory.Exists(path) == true)
             {
                 // This path is a directory
                 ProcessDirectory3(path);
@@ -2995,9 +3006,13 @@ namespace vcs_DrAP
         private void bt_test2_Click(object sender, EventArgs e)
         {
             if (fileinfos.Count == 0)
+            {
                 richTextBox2.Text += "找不到資料a\n";
+            }
             else
+            {
                 richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+            }
 
             //排序 由小到大
             //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
@@ -3005,20 +3020,16 @@ namespace vcs_DrAP
             //排序 由大到小  在return的地方多個負號
             fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
 
-
             for (int i = 0; i < fileinfos.Count; i++)
             {
                 richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
-
             }
-
         }
 
         private void textBox3_Click(object sender, EventArgs e)
         {
             textBox3.SelectAll();
         }
-
     }
 }
 

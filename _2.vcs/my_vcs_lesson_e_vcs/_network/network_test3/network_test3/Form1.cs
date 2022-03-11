@@ -277,6 +277,24 @@ namespace network_test3
             richTextBox_html2.Clear();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //相同的
+
+            WebClient wc = new WebClient();
+            byte[] page = wc.DownloadData("http://news.163.com");
+            string content = System.Text.Encoding.UTF8.GetString(page);
+            string regex = "href=[\\\"\\\'](http:\\/\\/|\\.\\/|\\/)?\\w+(\\.\\w+)*(\\/\\w+(\\.\\w+)?)*(\\/|\\?\\w*=\\w*(&\\w*=\\w*)*)?[\\\"\\\']";
+            Regex re = new Regex(regex);
+            MatchCollection matches = re.Matches(content);
+
+            System.Collections.IEnumerator enu = matches.GetEnumerator();
+            while (enu.MoveNext() && enu.Current != null)
+            {
+                Match match = (Match)(enu.Current);
+                Console.Write(match.Value + "\r\n");
+            }
+        }
     }
 
     /// <summary>

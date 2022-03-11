@@ -16,7 +16,7 @@ namespace vcs_ListViewE
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             CreateMyListView();
         }
@@ -69,9 +69,9 @@ namespace vcs_ListViewE
             // Create columns for the items and subitems.
             // Width of -2 indicates auto-size.
             listView1.Columns.Add("第一欄", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("subitem2", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("subitem3", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("subitem4", -2, HorizontalAlignment.Center);
+            listView1.Columns.Add("第二欄", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("第三欄", 60, HorizontalAlignment.Left);
+            listView1.Columns.Add("第四欄", 120, HorizontalAlignment.Center);
 
             //Add the items to the ListView.
             listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3, item4 });
@@ -93,6 +93,6 @@ namespace vcs_ListViewE
             // Add the ListView to the control collection.
             this.Controls.Add(listView1);
         }
-
     }
 }
+

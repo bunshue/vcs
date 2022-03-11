@@ -31,6 +31,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -45,26 +46,37 @@
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(105, 12);
+            this.listView1.Location = new System.Drawing.Point(100, 12);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(436, 325);
+            this.listView1.Size = new System.Drawing.Size(480, 360);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(105, 353);
+            this.richTextBox1.Location = new System.Drawing.Point(100, 380);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(436, 261);
+            this.richTextBox1.Size = new System.Drawing.Size(480, 360);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(517, 703);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(63, 37);
+            this.bt_clear.TabIndex = 3;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 703);
+            this.ClientSize = new System.Drawing.Size(595, 752);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button1);
@@ -80,6 +92,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

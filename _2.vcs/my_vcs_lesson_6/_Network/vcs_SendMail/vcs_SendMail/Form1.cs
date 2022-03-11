@@ -11,11 +11,12 @@ using System.IO;
 using System.Net;       //for NetworkCredential     NetworkCredential ：這個類別可用來提供密碼架構的驗證 (Authentication) 機制的認證。 建立認證帳號需要用到
 using System.Net.Mail;  //for MailMessage, SmtpClient 新建郵件、發送郵件需要用到
 
-//using System.Web.Mail;  //據說不推薦使用了
+//using System.Web.Mail;  //早期的.NET版本, 不推薦使用了
 using System.Net.Mime;  //for MediaTypeNames
 
 /*
-
+郵箱必須開啟POP3/SMTP服務才可以
+ 
 要寄Gmail信首先要登入Gmail，
 然後到 https://www.google.com/settings/security/lesssecureapps
 低安全性應用程式 → 開啟較低的應用程式存取權限
@@ -25,13 +26,6 @@ using System.Net.Mime;  //for MediaTypeNames
 修改網址 https://www.google.com/settings/security/lesssecureapps
 進入頁面之後選擇 安全性較低的應用程式存取權限 [啟用] 
 
-*/
-
-/*
-要寄Gmail信首先要登入Gmail，
-然後到 https://www.google.com/settings/security/lesssecureapps
-低安全性應用程式 → 開啟較低的應用程式存取權限
-選擇開啟，否則會無法正常寄信
 */
 
 /*
@@ -178,6 +172,13 @@ namespace vcs_SendMail
             try
             {
                 smtp.Send(mail);  //寄送郵件
+
+                richTextBox1.Text += "BBBBBBBBB\n";
+
+                /*
+                object userState = mail;
+                smtp.SendAsync(mail, userState);   //寄送郵件
+                */
                 richTextBox1.Text += "信件已寄出, 時間 : " + DateTime.Now.ToString() + "\n";
             }
             //Handle Mail Exceptions

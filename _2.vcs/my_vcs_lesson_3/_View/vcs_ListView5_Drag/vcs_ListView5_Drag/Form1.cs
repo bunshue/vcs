@@ -15,11 +15,17 @@ namespace vcs_ListView5_Drag
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void listView1_ItemDrag(object sender, ItemDragEventArgs e)
         {
             //起動拖放放操作，設置拖放類型
             listView1.DoDragDrop(listView1.SelectedItems, DragDropEffects.Move);
         }
+
         //選擇要拖動的項
         private void listView1_DragEnter(object sender, DragEventArgs e)
         {
@@ -32,6 +38,7 @@ namespace vcs_ListView5_Drag
                 }
             }
         }
+
         private void listView1_DragDrop(object sender, DragEventArgs e)
         {
             //判斷是否選擇拖放的項
@@ -69,10 +76,7 @@ namespace vcs_ListView5_Drag
                 listView1.Items.Remove(dragItem);
             }
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
+
+

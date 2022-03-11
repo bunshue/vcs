@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Diagnostics;
 
 namespace vcs_ListView3
 {
@@ -25,14 +26,14 @@ namespace vcs_ListView3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            createHeadersAndFillListVIEw();
+            createHeadersAndFillListView();
 
             string foldername = @"C:\______test_files";
 
-            PaintListView(foldername);
+            ShowListView(foldername);
         }
 
-        void createHeadersAndFillListVIEw()
+        void createHeadersAndFillListView()
         {
             ColumnHeader colHead;
             colHead = new ColumnHeader();
@@ -48,7 +49,7 @@ namespace vcs_ListView3
             listView1.Columns.Add(colHead);
         }
 
-        void PaintListView(string root)
+        void ShowListView(string root)
         {
             try
             {
@@ -61,9 +62,7 @@ namespace vcs_ListView3
                 DirectoryInfo[] dirs = dir.GetDirectories();
                 FileInfo[] files = dir.GetFiles();
 
-
                 //顯示本機文件夾及文件
-
 
                 listView1.Items.Clear();
 
@@ -120,7 +119,7 @@ namespace vcs_ListView3
             {
                 try
                 {
-                    System.Diagnostics.Process.Start(filename);
+                    Process.Start(filename);
                 }
                 catch
                 {
@@ -129,9 +128,10 @@ namespace vcs_ListView3
             }
             else
             {
-                //PaintListVIEw(filename);
+                //ShowListView(filename);
                 //foldCol.Add(filename);
             }
         }
     }
 }
+

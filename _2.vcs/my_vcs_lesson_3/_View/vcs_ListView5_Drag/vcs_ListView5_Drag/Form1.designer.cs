@@ -51,7 +51,7 @@ namespace vcs_ListView5_Drag
             this.listView1.LargeImageList = this.imageList1;
             this.listView1.Location = new System.Drawing.Point(3, 12);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(262, 167);
+            this.listView1.Size = new System.Drawing.Size(257, 167);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listView1_ItemDrag);
@@ -72,7 +72,7 @@ namespace vcs_ListView5_Drag
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(293, 423);
+            this.ClientSize = new System.Drawing.Size(425, 423);
             this.Controls.Add(this.listView1);
             this.Name = "Form1";
             this.Text = "在清單視界中拖曳圖項";
