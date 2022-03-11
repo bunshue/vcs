@@ -36,9 +36,6 @@ namespace vcs_WebCam_Emgu0
         private Capture cap = null;             //宣告一個Webcam物件
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
 
-        private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
-        VideoWriter video;
-
         private const int BORDER = 10;
         private const int W_groupBox1 = 640 * 2 + BORDER;
         private const int H_groupBox1 = 220;
@@ -46,8 +43,12 @@ namespace vcs_WebCam_Emgu0
         private const int H_pictureBox1 = 480;
         private const int W_richTextBox1 = 640;
         private const int H_richTextBox1 = 480;
-
         int WEBCAM_NO = 0;    //預設使用的webcam
+
+        private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
+        private string recording_filename = string.Empty;
+        VideoWriter vw;
+        DateTime recording_time_st = DateTime.Now;
 
         public Form1()
         {
@@ -57,6 +58,7 @@ namespace vcs_WebCam_Emgu0
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+            recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
         }
 
         void show_item_location()
@@ -78,7 +80,7 @@ namespace vcs_WebCam_Emgu0
             {
                 //錄影完需將影像停止不然會出錯
                 flag_recording = false;
-                video.Dispose();
+                vw.Dispose();
                 richTextBox1.Text += "停止錄影\n";
             }
         }
@@ -91,7 +93,18 @@ namespace vcs_WebCam_Emgu0
         void Application_Idle(object sender, EventArgs e)
         {
             Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+
+            if (flag_recording == true) //錄影1
+            {
+                vw.WriteFrame<Bgr, byte>(image); //將影格寫入影片中, 將每張圖片製作成影片
+            }
+            else
+            {
+
+            }
+            //Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
             pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
+
 
             /*  其他處理
             pictureBox1.Image = image.Not().ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
@@ -100,12 +113,6 @@ namespace vcs_WebCam_Emgu0
             Image<Gray, Byte> smoothedGrayFrame = smallGrayFrame.PyrUp();
             Image<Gray, Byte> cannyFrame = smoothedGrayFrame.Canny(new Gray(100), new Gray(60));
             */
-
-            //錄影模式
-            if (flag_recording == true) //錄影1
-            {
-                video.WriteFrame<Bgr, byte>(image); //將影格寫入影片中
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -217,7 +224,7 @@ namespace vcs_WebCam_Emgu0
             {
                 //錄影完需將影像停止不然會出錯
                 flag_recording = false;
-                video.Dispose();
+                vw.Dispose();
                 richTextBox1.Text += "停止錄影\n";
             }
 
@@ -275,46 +282,50 @@ namespace vcs_WebCam_Emgu0
                     richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                 }
             }
-
         }
 
-        //錄影1
+        //錄影 ST
         private void button5_Click(object sender, EventArgs e)
         {
-            if (cap == null)
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            {
+                richTextBox1.Text += "尚未啟動相機\n";
                 return;
-
-            //錄影
-            if (button5.Text == "錄影")
-            {
-                button5.Text = "停止錄影";
-
-                string filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
-
-                richTextBox1.Text += "filename : " + filename + "\n";
-                richTextBox1.Text += "Width : " + cap.Width.ToString() + "\n";
-                richTextBox1.Text += "Height : " + cap.Height.ToString() + "\n";
-
-                //cap.Width 取得攝影機可支援的最大寬度
-                //cap.Height 取得攝影機可支援的最大高度
-                video = new VideoWriter(filename, 0, 10, cap.Width, cap.Height, true);  //一秒10張, 未壓縮, 應該是1秒10張bmp的圖疊合成一個檔案
-
-                //開啟錄影模式
-                flag_recording = true;
-
-                richTextBox1.Text += "開始錄影\n";
             }
-            else
+
+            recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+
+            richTextBox1.Text += "filename : " + recording_filename + "\n";
+            richTextBox1.Text += "Width : " + cap.Width.ToString() + "\n";
+            richTextBox1.Text += "Height : " + cap.Height.ToString() + "\n";
+
+            //cap.Width 取得攝影機可支援的最大寬度
+            //cap.Height 取得攝影機可支援的最大高度
+
+            //未壓縮
+            vw = new VideoWriter(recording_filename, 0, 10, cap.Width, cap.Height, true);  //一秒10張, 未壓縮, 應該是1秒10張bmp的圖疊合成一個檔案
+
+            //有壓縮
+            vw = new VideoWriter(recording_filename, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 30, 640, 480, true);
+
+            //開啟錄影模式
+            flag_recording = true;
+
+            richTextBox1.Text += "錄影開始\t時間 : " + DateTime.Now.ToString() + "\n";
+            recording_time_st = DateTime.Now;
+        }
+
+        //錄影 SP
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (flag_recording == true)
             {
-                button5.Text = "錄影";
-                //停止錄影
-                if (flag_recording == true)
-                {
-                    //錄影完需將影像停止不然會出錯
-                    flag_recording = false;
-                    video.Dispose();
-                    richTextBox1.Text += "停止錄影\n";
-                }
+                //錄影完需將影像停止不然會出錯
+                flag_recording = false;
+                vw.Dispose();
+                richTextBox1.Text += "錄影結束\t時間 : " + DateTime.Now.ToString() + "\n";
+                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n\n";
+                //richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n\n";
             }
         }
 
@@ -354,42 +365,6 @@ namespace vcs_WebCam_Emgu0
             richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
             richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
 
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //錄製影像(有壓縮)
-            cap = new Capture(WEBCAM_NO);   //預設使用的webcam
-            //double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
-
-            if (cap == null)
-            {
-                MessageBox.Show("找不到攝影機", "error");
-            }
-            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
-
-            string filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
-
-            VideoWriter video = new VideoWriter(filename, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 30, 640, 480, true);
-
-            while (image != null)
-            {
-                CvInvoke.cvShowImage("錄製影像, 按ESC停止錄影", image.Ptr);
-                image = cap.QueryFrame(); // Query WebCam 的畫面
-                video.WriteFrame<Bgr, byte>(image); //將每張圖片製作成影片
-
-                int c = CvInvoke.cvWaitKey(20);
-                //遇到事件停止錄影
-                if (c == 27)
-                    break;
-            }
-            video.Dispose();
-            CvInvoke.cvDestroyWindow("錄製影像, 按ESC停止錄影"); //關閉剛剛開啟的CV視窗
-
-            //錄影完需將影像停止不然會出錯
-            flag_webcam_ok = false;
-            button1.Text = "開始";
-            Application.Idle -= Application_Idle;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -441,6 +416,27 @@ namespace vcs_WebCam_Emgu0
             video.Dispose();
 
             richTextBox1.Text += "圖片轉影片, 完成\n";
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (cap == null)
+            {
+                MessageBox.Show("找不到攝影機");
+                return;
+            }
+
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+
+            if (image != null)
+            {
+                CvInvoke.cvShowImage("使用cvShowImage抓一圖", image.Ptr);
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            CvInvoke.cvDestroyWindow("使用cvShowImage抓一圖");   //關閉剛剛開啟的CV視窗
         }
     }
 }
