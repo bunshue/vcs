@@ -1,4 +1,42 @@
 
+
+要輸入帳號密碼的 WebClient
+                        // Upload the file to the server.
+                        WebClient myWebClient = new WebClient();
+                        NetworkCredential myCredentials = new NetworkCredential("snijhof", "MKD7529s09");
+                        myWebClient.Credentials = myCredentials;
+                        byte[] responseArray = myWebClient.UploadFile("ftp://student.aii.avans.nl/GRP/42IN11EWd/Videos/" + fileName, filePath);
+
+                        String temp = System.Text.Encoding.ASCII.GetString(responseArray);
+
+                        // Decode and display the response.
+                        Console.WriteLine("\nResponse Received.The contents of the file uploaded are:\n{0}",
+                            System.Text.Encoding.ASCII.GetString(responseArray));
+
+
+
+
+
+
+
+
+            DateTime dt = DateTime.Now;
+
+            string filename = String.Format("{0}-{1}-{2}_{3}-{4}-{5}",
+                                            dt.Year, dt.Month, dt.Day,
+                                            dt.Hour, dt.Minute,
+                                            dt.Second);
+
+            richTextBox1.Text += filename + "\n";
+
+
+            richTextBox1.Text += DateTime.Now.Ticks.ToString() +"\n";
+
+
+            richTextBox1.Text += Environment.NewLine + "Conversion finished @ " + DateTime.Now.ToString();
+
+
+
             textBox1.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
             textBox5.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
 

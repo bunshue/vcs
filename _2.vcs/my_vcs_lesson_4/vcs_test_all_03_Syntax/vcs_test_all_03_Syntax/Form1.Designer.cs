@@ -900,7 +900,6 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(180, 40);
             this.button39.TabIndex = 57;
-            this.button39.Text = "out 語法 2";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
@@ -1158,6 +1157,7 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(180, 40);
             this.button43.TabIndex = 79;
+            this.button43.Text = "out 語法 2";
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
             // 

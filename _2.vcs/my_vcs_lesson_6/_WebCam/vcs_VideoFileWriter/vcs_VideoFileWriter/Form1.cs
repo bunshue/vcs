@@ -1,0 +1,333 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+using System.IO;
+using System.Threading;
+
+using AForge.Video;
+using AForge.Video.DirectShow;  // Video Recording
+using AForge.Video.FFMPEG;
+
+using System.Drawing.Drawing2D;
+
+using System.Drawing.Imaging;   //for PixelFormat
+
+namespace vcs_VideoFileWriter
+{
+    public partial class Form1 : Form
+    {
+        private const int BORDER = 10;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st = BORDER;
+            int y_st = BORDER;
+            int dx = 140 + 50;
+            int dy = 50 + 20;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+
+            richTextBox1.Size = new Size(750, 600);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            string filename = "test0.avi";
+            int W = 640;
+            int H = 480;
+            int frameRate = 25;
+
+            VideoFileWriter writer = new VideoFileWriter();
+            writer.Open("test_video.avi", W, H, 25, VideoCodec.MPEG4);
+
+            Bitmap image = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(image);
+            g.FillRectangle(Brushes.Black, 0, 0, W, H);
+            Brush[] brushList = new Brush[] { Brushes.Green, Brushes.Red, Brushes.Yellow, Brushes.Pink, Brushes.LimeGreen };
+            Random rnd = new Random();
+
+            for (int i = 0; i < 250; i++)
+            {
+                int rndTmp = rnd.Next(1, 3);
+                Application.DoEvents();
+                g.FillRectangle(brushList[i % 5], (i % W) * 2, (i % H) * 0.5f, i % 30, i % 30);
+                g.FillRectangle(brushList[i % 5], (i % W) * 2, (i % H) * 2, i % 30, i % 30);
+                g.FillRectangle(brushList[i % 5], (i % W) * 0.5f, (i % H) * 2, i % 30, i % 30);
+                g.Save();
+                writer.WriteVideoFrame(image);
+            }
+
+            g.DrawString("(c) 2016 - Test Video", new System.Drawing.Font("Calibri", 30), Brushes.White, 80, 240);
+            g.Save();
+            for (int i = 0; i < 125; i++)
+            {
+                writer.WriteVideoFrame(image);
+            }
+
+            writer.Close();
+            richTextBox1.Text += "製作影片完成, 檔案 : " + filename + "\n";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //int frameRate = 25;
+            int W = 512;
+            int H = 512;
+            int[] frameRates = { 60, 120, 180 };
+
+            double preamblePostamble = 0.5;    // seconds
+            double movieLength = 60.0;    // seconds
+
+            foreach (var frameRate in frameRates)
+            {
+                VideoFileWriter writer = new VideoFileWriter();
+                VideoCodec codec = VideoCodec.WMV2;
+
+                string filename = "test1." + codec.ToString() + "." + frameRate.ToString("000") + "Hz." + movieLength.ToString() + "sec." + W.ToString() + "." + H.ToString() + ".avi";
+                writer.Open(filename, W, H, frameRate, codec);
+
+                RectangleF rectText = new RectangleF(W / 2, 0, W / 2, H);
+                RectangleF rectBlock = new RectangleF(0, 0, W / 2, H);
+
+                Bitmap bmp = new Bitmap(W, H, PixelFormat.Format24bppRgb);
+                SolidBrush brushWhite = new SolidBrush(Color.White);
+                SolidBrush brushBlack = new SolidBrush(Color.Black);
+                var font = new Font("Tahoma", W <= 64 ? 8 : W <= 128 ? 12 : W <= 256 ? 16 : 20);
+
+                // Preamble
+                for (int i = 0; i < (int)(frameRate * preamblePostamble); i++)
+                {
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        g.Clear(Color.Black);
+                        g.Flush();
+                    }
+                    writer.WriteVideoFrame(bmp);
+                }
+
+                for (int i = 0; i < (int)(frameRate * movieLength); i++)
+                {
+                    bmp.SetPixel(i % W, i % H, Color.Blue);
+
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        g.Clear(Color.Black);
+                        g.SmoothingMode = SmoothingMode.AntiAlias;
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                        g.DrawString(i.ToString(), font, Brushes.White, rectText);
+
+                        g.FillRectangle(((i & 1) == 0) ? brushWhite : brushBlack, rectBlock);
+                        g.Flush();
+                    }
+                    writer.WriteVideoFrame(bmp);
+                }
+
+                // Postamble
+                for (int i = 0; i < (int)(frameRate * preamblePostamble); i++)
+                {
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        g.Clear(Color.Black);
+                        g.Flush();
+                    }
+                    writer.WriteVideoFrame(bmp);
+                }
+
+                writer.Close();
+                richTextBox1.Text += "製作影片完成, 檔案 : " + filename + "\n";
+            }
+            richTextBox1.Text += "完成\n";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "XXXXXX\n";
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string filename = "test3.wmv";
+            int W = 320;
+            int H = 240;
+            int frameRate = 25;
+
+            VideoFileWriter writer = new VideoFileWriter();
+            writer.Open(filename, W, H, frameRate, VideoCodec.MPEG4);
+
+            // create a bitmap to save into the video file
+            Bitmap image = new Bitmap(W, H, PixelFormat.Format24bppRgb);
+
+            // write 1000 video frames
+            for (int i = 0; i < 1000; i++)
+            {
+                image.SetPixel(i % W, i % H, Color.Red);
+                writer.WriteVideoFrame(image);
+            }
+            writer.Close();
+
+            richTextBox1.Text += "製作影片完成, 檔案 : " + filename + "\n";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string filename = "test4.avi";
+            int W = 990;
+            int H = 742;
+            int frameRate = 1;  //一秒一張
+
+            VideoFileWriter writer = new VideoFileWriter();
+            writer.Open(filename, W, H, frameRate, VideoCodec.MPEG4);
+
+            Bitmap image = new Bitmap(W, H);
+
+            string pic_filename = @"C:\______test_files\bear.bmp";
+
+            image = new Bitmap(pic_filename);
+
+            for (int i = 0; i < 360; i++)   //一秒一張  所以是6分鐘
+            {
+                writer.WriteVideoFrame(image);
+            }
+            image.Dispose();
+
+            writer.Close();
+
+            richTextBox1.Text += "製作影片完成, 檔案 : " + filename + "\n";
+
+            /*
+            VideoFileWriter writer = new VideoFileWriter();
+
+            int W = 800;
+            int H = 600;
+            int frameRate = 24;
+            string path = "output.avi";
+            int videoBitRate = 1200 * 1000;
+            //int audioBitRate = 320 * 1000;
+
+            writer.Open(path, W, H, frameRate, VideoCodec.WMV1, videoBitRate);
+
+            var m2i = new MatrixToImage();
+            Bitmap frame;
+
+            for (byte i = 0; i < 255; i++)
+            {
+                byte[,] matrix = Matrix.Create(H, W, i);
+                m2i.Convert(matrix, out frame);
+                writer.WriteVideoFrame(frame, TimeSpan.FromSeconds(i));
+            }
+
+            writer.Close();
+
+            //Assert.IsTrue(File.Exists(path));
+            */
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string filename = "test5.avi";
+            string foldername = @"C:\______test_files\__pic\_MU";
+            var dinfo = new DirectoryInfo(foldername);
+            var files = dinfo.GetFiles().OrderBy(p => p.Name).ToArray();
+            string pic_filename = @"C:\______test_files\__pic\_MU\id_card_01.jpg";
+            Bitmap image = (Bitmap)Image.FromFile(pic_filename);
+            VideoFileWriter vFWriter = new VideoFileWriter();
+
+            int frameRate = 1;  //一秒一張  若是30，就是一秒30張
+
+            vFWriter.Open(filename, image.Width, image.Height, frameRate, VideoCodec.MPEG4);
+            foreach (var file in files)
+            {
+                if (file.FullName.Contains("id_card") == true)
+                {
+                    Console.WriteLine(file.FullName);
+                    image = (Bitmap)Image.FromFile(file.FullName);
+                    vFWriter.WriteVideoFrame(image);
+                }
+            }
+            vFWriter.Close();
+
+
+            richTextBox1.Text += "製作影片完成, 檔案 : " + filename + "\n";
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string filename_read = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\vcs_VideoFileWriter\vcs_VideoFileWriter\bin\Debug\test5.avi";
+            string filename_write = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\vcs_VideoFileWriter\vcs_VideoFileWriter\bin\Debug\test5b.avi";
+
+            VideoFileReader reader = new VideoFileReader();
+            VideoFileWriter writer = new VideoFileWriter();
+
+            reader.Open(filename_read);
+
+            richTextBox1.Text += "CodecName = " + reader.CodecName.ToString() + "\n";
+            richTextBox1.Text += "Width = " + reader.Width.ToString() + "\n";
+            richTextBox1.Text += "Height = " + reader.Height.ToString() + "\n";
+            richTextBox1.Text += "FrameCount = " + reader.FrameCount.ToString() + "\n";
+            richTextBox1.Text += "FrameRate = " + reader.FrameRate.ToString() + "\n";
+            richTextBox1.Text += "CodecName = " + reader.CodecName + "\n";
+
+
+            richTextBox1.Text += "Duration = " + (reader.FrameCount / reader.FrameRate).ToString() + " 秒\n";
+
+            int end = (int)reader.FrameCount;
+
+            int W = reader.Width;
+            int H = reader.Height;
+            int frameRate = reader.FrameRate;
+
+            writer.Open(filename_write, W, H, frameRate, VideoCodec.MPEG4);
+
+            for (int i = 0; i < end; i++)
+            {
+                Bitmap videoFrame = reader.ReadVideoFrame();
+                writer.WriteVideoFrame(videoFrame);
+                videoFrame.Dispose();
+
+                if (i == 5)     //切斷影片
+                {
+                    writer.Close();
+                    break;
+                }
+            }
+            writer.Close();
+            reader.Close();
+
+
+            richTextBox1.Text += "讀取檔案 : " + filename_read + "\n";
+            richTextBox1.Text += "寫入檔案 : " + filename_write + "\n";
+
+        }
+    }
+}
+
