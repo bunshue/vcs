@@ -19,6 +19,8 @@ using System.Drawing.Drawing2D;
 
 using System.Drawing.Imaging;   //for PixelFormat
 
+using AviFile;
+
 namespace vcs_VideoFileWriter
 {
     public partial class Form1 : Form
@@ -215,7 +217,6 @@ namespace vcs_VideoFileWriter
             writer.Close();
 
             richTextBox1.Text += "製作影片完成, 檔案 : " + filename + "\n";
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -342,6 +343,13 @@ namespace vcs_VideoFileWriter
             richTextBox1.Text += "FrameRate = " + reader.FrameRate.ToString() + "\n";
             richTextBox1.Text += "CodecName = " + reader.CodecName + "\n";
 
+            // print some of its attributes
+            richTextBox1.Text += "Width: " + reader.Width + "px" + Environment.NewLine;
+            richTextBox1.Text += ("Height: " + reader.Height + "px" + Environment.NewLine);
+            richTextBox1.Text += ("Fps: " + reader.FrameRate + "fps" + Environment.NewLine);
+            richTextBox1.Text += ("Codec: " + reader.CodecName + Environment.NewLine);
+            richTextBox1.Text += ("Frames: " + reader.FrameCount + Environment.NewLine);
+
 
             richTextBox1.Text += "Duration = " + (reader.FrameCount / reader.FrameRate).ToString() + " 秒\n";
 
@@ -356,6 +364,7 @@ namespace vcs_VideoFileWriter
             for (int i = 0; i < end; i++)
             {
                 Bitmap videoFrame = reader.ReadVideoFrame();
+                                    reader.ReadVideoFrame();
                 writer.WriteVideoFrame(videoFrame);
                 videoFrame.Dispose();
 
@@ -438,6 +447,34 @@ namespace vcs_VideoFileWriter
 
         private void button9_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "將.avi的聲音分離出來\n";
+            string audio_filename = "test9.wav";
+
+            string filename = @"C:\______test_files\__RW\_avi\i2c.avi";
+
+            AviManager aviManager = new AviManager(filename, true);
+
+            //try to read the stream
+            try
+            { 
+                AudioStream waveStream = aviManager.GetWaveStream();
+                richTextBox1.Text += Environment.NewLine + "Audio stream found:";
+                richTextBox1.Text += Environment.NewLine + "Sample Rate: " + waveStream.CountSamplesPerSecond.ToString();
+                richTextBox1.Text += Environment.NewLine + "Bits:" + waveStream.CountBitsPerSample.ToString();
+                richTextBox1.Text += Environment.NewLine + "Number of Channels: " + waveStream.CountChannels.ToString();
+
+                waveStream.ExportStream(audio_filename);
+
+                waveStream.Close();
+                aviManager.Close();
+
+                richTextBox1.Text += "聲音分離完成, 檔案 : " + audio_filename + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
+            }
+
 
 
         }

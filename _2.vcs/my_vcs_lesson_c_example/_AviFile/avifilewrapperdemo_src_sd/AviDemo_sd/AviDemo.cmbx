@@ -1,0 +1,20 @@
+<Combine fileversion="1.0" name="AviDemo" description="">
+  <StartMode startupentry="AviDemo" single="True">
+    <Execute entry="AviDemo" type="None" />
+    <Execute entry="AviFile" type="None" />
+  </StartMode>
+  <Entries>
+    <Entry filename=".\.\AviDemo.prjx" />
+    <Entry filename="..\AviFile_sd\AviFile.prjx" />
+  </Entries>
+  <Configurations active="Debug">
+    <Configuration name="Release">
+      <Entry name="AviDemo" configurationname="Debug" build="False" />
+      <Entry name="AviFile" configurationname="Debug" build="False" />
+    </Configuration>
+    <Configuration name="Debug">
+      <Entry name="AviDemo" configurationname="Debug" build="False" />
+      <Entry name="AviFile" configurationname="Debug" build="False" />
+    </Configuration>
+  </Configurations>
+</Combine>

@@ -1,5 +1,191 @@
 
 
+
+測試out功能
+
+C#通過POP3協議驗證 Email 賬號
+
+static bool ValidateEmailAccount(string server, int port, string userName, string password, out string ErrorMessage) 
+        { 
+            ErrorMessage = ""; 
+            //create a tcp connection 
+            TcpClient _server = new TcpClient(server, port); 
+            //prepare  
+            NetworkStream netStream = _server.GetStream(); 
+            StreamReader reader = new StreamReader(_server.GetStream()); 
+            if (!reader.ReadLine().Contains("+OK")) 
+           { 
+                //失敗 
+                ErrorMessage = "server鏈接失敗"; 
+                return false; 
+            } 
+            string data; 
+            byte[] charData; 
+            string CRLF = "\r\n"; 
+            //login 
+            data = "USER " + userName + CRLF; 
+            charData = System.Text.Encoding.ASCII.GetBytes(data); 
+            netStream.Write(charData, 0, charData.Length); 
+            if (!reader.ReadLine().Contains("+OK")) 
+            { 
+                //賬戶錯誤 
+                ErrorMessage = "賬戶錯誤"; 
+                return false; 
+            } 
+            data = "PASS " + password + CRLF; 
+            charData = System.Text.Encoding.ASCII.GetBytes(data); 
+            netStream.Write(charData, 0, charData.Length); 
+            if (!reader.ReadLine().Contains("+OK")) 
+            { 
+                //密碼錯誤 
+                ErrorMessage = "密碼錯誤"; 
+                return false; 
+            } 
+            return true; 
+        } 
+ 調用
+
+string errorMessage; 
+
+bool isContains = ValidateEmailAccount("pop3.163.com", 110, "wise_sandy@XXX.com", "************", out errorMessage); 
+
+ 
+
+Console.WriteLine(isContains ? "用戶存在" : errorMessage); 
+
+ 
+
+
+
+
+
+
+string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
+
+
+                /*
+                Supported Formats:
+                    Raw	        Raw (uncompressed) video.
+	                MPEG2	    MPEG-2 part 2.
+	                FLV1	    Flash Video (FLV) / Sorenson Spark / Sorenson H.263.
+	                H263P	    H.263+ / H.263-1998 / H.263 version 2.
+	                MSMPEG4v3	MPEG-4 part 2 Microsoft variant version 3.
+	                MSMPEG4v2	MPEG-4 part 2 Microsoft variant version 2.
+	                WMV2	    Windows Media Video 8.
+	                WMV1	    Windows Media Video 7.
+	                MPEG4	    MPEG-4 part 2.
+	                Default	    Default video codec, which FFmpeg library selects for the specified file format.
+                    missing : H264        
+                */
+
+
+
+            // as long as we're recording
+            // we dequeue the BitMaps waiting in the Queue and write them to the file
+            while (IsRecording)
+            {
+                if (frames.Count > 0)
+                {
+                    Bitmap bmp = frames.Dequeue();
+                    writer.WriteVideoFrame(bmp);
+                    bmp.Dispose();
+                }
+            }
+            writer.Close();
+
+
+
+                                using (MemoryStream ms = new MemoryStream(solImage.ImageData))
+                                using (Bitmap bitmap = (Bitmap)Image.FromStream(ms))
+                                {
+                                    if (bitmap.Width == videoWriter.Width && bitmap.Height == videoWriter.Height)
+                                    {
+                                        using (Bitmap newBitmap = new Bitmap(bitmap.Width, bitmap.Height))
+                                        using (Graphics g = Graphics.FromImage(newBitmap))
+                                        {
+                                            g.DrawImage(bitmap, 0, 0);
+                                            g.DrawString(String.Format("{0} - Sol: {1}", solImage.Cam, solImage.Sol), new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold), Brushes.White, new PointF(10, 10));
+
+                                            for (int i = 0; i < 4; i++)
+                                            {
+                                                videoWriter.WriteVideoFrame(newBitmap);
+                                            }
+
+
+
+Example #25
+0
+File: Camera.cs Project: alienwow/CSharpProjects
+
+        private void Video_Player_NewFrame(object sender, ref Bitmap image)
+        {
+            //录像
+            Graphics g = Graphics.FromImage(image);
+
+            SolidBrush drawBrush = new SolidBrush(Color.Red);
+
+            Font drawFont = new Font("Arial", 4, FontStyle.Italic, GraphicsUnit.Millimeter);
+            int xPos = image.Width - (image.Width - 15);
+            int yPos = 10;
+            //写到屏幕上的时间
+            drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+            if (!Directory.Exists(videoPath))
+                Directory.CreateDirectory(videoPath);
+
+            //开始录像
+            if (createNewFile)
+            {
+                //videoFileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".flv";
+                videoFileName = "wuwh.flv";
+                videoFileFullPath = videoPath + "/" + videoFileName;
+                createNewFile = false;
+                if (videoWriter != null)
+                {
+                    videoWriter.Close();
+                    videoWriter.Dispose();
+                }
+                videoWriter = new VideoFileWriter();
+                //这里必须是全路径，否则会默认保存到程序运行根据录下了
+                videoWriter.Open(videoFileFullPath, image.Width, image.Height, frameRate, VideoCodec.FLV1);
+                videoWriter.WriteVideoFrame(image);
+
+                VideoFileSource videoFileSource = new VideoFileSource(videoFileFullPath);
+
+            }
+            else
+            {
+                videoWriter.WriteVideoFrame(image);
+            }
+        }
+
+
+
+
+
+
+
+
+
+Image ImgOrnek = (Image.FromFile(pic_filename) as Bitmap).Clone() as Image;
+int width = ImgOrnek.Width;
+int height = ImgOrnek.Height;
+ImgOrnek.Dispose();
+VideoFileWriter writer = new VideoFileWriter();
+writer.Open(filename, width, height, this.Videofps, VideoCodec.MPEG4);
+
+
+
+
+                image = (Bitmap)Image.FromFile("C:\\Users\\Halil\\Desktop\\newframes\\image" + i + ".jpg");
+                writer.WriteVideoFrame(image);
+                
+                
+
+
+
+
 要輸入帳號密碼的 WebClient
                         // Upload the file to the server.
                         WebClient myWebClient = new WebClient();

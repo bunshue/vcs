@@ -241,6 +241,35 @@ namespace vcs_Mix03_draw_image
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //用GetThumbnailImage製作小圖
+
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
+
+
+            Bitmap bitmap2 = (Bitmap)bitmap1.GetThumbnailImage(bitmap1.Width / 3, bitmap1.Height / 3, null, IntPtr.Zero);
+            pictureBox1.Image = bitmap2;
+
+            //自動檔名 與 存檔語法
+            string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            try
+            {
+                //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                bitmap2.Save(filename2, ImageFormat.Bmp);
+                //bitmap1.Save(@file3, ImageFormat.Png);
+
+                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+
         }
 
         private void button6_Click(object sender, EventArgs e)
