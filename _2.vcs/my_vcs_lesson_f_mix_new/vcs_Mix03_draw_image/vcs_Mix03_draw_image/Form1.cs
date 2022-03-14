@@ -19,6 +19,8 @@ namespace vcs_Mix03_draw_image
 {
     public partial class Form1 : Form
     {
+        DateTime start_time = DateTime.Now;
+
         public Form1()
         {
             InitializeComponent();
@@ -76,7 +78,8 @@ namespace vcs_Mix03_draw_image
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 6 + 10);
+            pictureBox_time.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7 + 25);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -186,7 +189,7 @@ namespace vcs_Mix03_draw_image
                 g.FillRectangle(tb, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
                 angle += 0.5f;
                 System.Threading.Thread.Sleep(50);
-            } 
+            }
 
 
 
@@ -423,6 +426,31 @@ namespace vcs_Mix03_draw_image
 
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox_time.Invalidate();
+        }
+
+        private void pictureBox_time_Paint(object sender, PaintEventArgs e)
+        {
+            Font f = new Font("arial", 30f);
+
+
+            DateTime current_time = DateTime.Now;
+
+            TimeSpan use_time = current_time - start_time;
+
+            string text = DateTime.Now + "    " + use_time.ToString(@"hh\:mm\:ss");
+
+            for (var i = -1; i <= 1; ++i)
+            {
+                for (var j = -1; j <= 1; ++j)
+                {
+                    e.Graphics.DrawString(text, f, Brushes.Black, 2 + i, 2 + j);
+                }
+            }
+            e.Graphics.DrawString(text, f, Brushes.White, 2, 2);
+        }
     }
 
     public class ImageManager

@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;   //for ImageAttributes
-
 namespace vcs_DrawImage
 {
     public partial class Form1 : Form
@@ -17,6 +15,8 @@ namespace vcs_DrawImage
         Pen p;
         SolidBrush sb;
         Bitmap bitmap1;
+
+        string filename = @"C:\______test_files\picture1.jpg";
 
         public Form1()
         {
@@ -27,7 +27,7 @@ namespace vcs_DrawImage
         {
             show_item_location();
 
-            pictureBox_old.Image = Image.FromFile("c:\\______test_files\\picture1.jpg"); //載入圖檔，由檔案
+            pictureBox_old.Image = Image.FromFile(filename); //載入圖檔，由檔案
 
             p = new Pen(Color.Red, 3);
 
@@ -62,8 +62,8 @@ namespace vcs_DrawImage
         private void button1_Click(object sender, EventArgs e)
         {
             //載入圖檔，由檔案
-            Bitmap bmp = new Bitmap("c:\\______test_files\\picture1.jpg");
-            Image img = Image.FromFile("c:\\______test_files\\picture1.jpg");
+            Bitmap bmp = new Bitmap(filename);
+            Image img = Image.FromFile(filename);
 
             int x_st = 20;
             int y_st = 20;
@@ -109,7 +109,7 @@ namespace vcs_DrawImage
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Image img = Image.FromFile("c:\\______test_files\\picture1.jpg");
+            Image img = Image.FromFile(filename);
             int W = img.Width;
             int H = img.Height;
             
@@ -218,10 +218,6 @@ namespace vcs_DrawImage
             // Draw image to screen.
             g.DrawImage(img, destRect, srcRect3, units);
 
-
-
-
-
             pictureBox1.Image = bitmap1;
 
             g.DrawString("擷取部分圖片貼上", new Font("Arial", 50), Brushes.Red, new PointF(100, 400));
@@ -231,7 +227,7 @@ namespace vcs_DrawImage
         {
             //改變Bitmap大小
             //Bitmap bmp = new Bitmap(@"C:\______test_files\ims_image.bmp", true);
-            Bitmap bmp = new Bitmap("c:\\______test_files\\picture1.jpg", true);
+            Bitmap bmp = new Bitmap(filename, true);
             Bitmap bmp_zoom;
 
             int i;
@@ -250,7 +246,7 @@ namespace vcs_DrawImage
         private void button4_Click(object sender, EventArgs e)
         {
             //改變Bitmap大小
-            Bitmap bmp = new Bitmap("c:\\______test_files\\picture1.jpg", true);
+            Bitmap bmp = new Bitmap(filename, true);
             Bitmap bmp_zoom;
 
             bmp_zoom = new Bitmap(bmp, bmp.Width, bmp.Height);
@@ -275,74 +271,11 @@ namespace vcs_DrawImage
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //一般貼上banner
-            Bitmap bm = new Bitmap(pictureBox_old.ClientSize.Width, pictureBox_old.ClientSize.Height);
-
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                Image img = Image.FromFile("c:\\______test_files\\picture1.jpg");
-                gr.Clear(Color.White);
-                gr.DrawImage(img, 0, 0, img.Width, img.Height);
-                Image banner = Image.FromFile("c:\\______test_files\\_material\\ims3.bmp");
-                gr.DrawImage(banner, 0, 200, 300, 130);
-            }
-            pictureBox_old.Image = bm;
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //半透明貼上banner
-            // With translucency.
-            Bitmap bm = new Bitmap(pictureBox_old.ClientSize.Width, pictureBox_old.ClientSize.Height);
 
-            // Make adjusted images.
-            Image banner = AdjustAlpha(Image.FromFile("c:\\______test_files\\_material\\ims3.bmp"), 0.60f);
-
-            // Draw the adjusted images.
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                Image img = Image.FromFile("c:\\______test_files\\picture1.jpg");
-                gr.Clear(Color.White);
-                gr.DrawImage(img, 0, 0, img.Width, img.Height);
-                gr.DrawImage(banner, 0, 200, 300, 130);
-            }
-            pictureBox_old.Image = bm;
-        }
-
-        // Adjust an image's translucency.
-        private Bitmap AdjustAlpha(Image image, float translucency)
-        {
-            // Make the ColorMatrix.
-            float t = translucency;
-            ColorMatrix cm = new ColorMatrix(new float[][]
-                {
-                    new float[] {1, 0, 0, 0, 0},
-                    new float[] {0, 1, 0, 0, 0},
-                    new float[] {0, 0, 1, 0, 0},
-                    new float[] {0, 0, 0, t, 0},
-                    new float[] {0, 0, 0, 0, 1},
-                });
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetColorMatrix(cm);
-
-            // Draw the image onto the new bitmap while applying the new ColorMatrix.
-            Point[] points =
-            {
-                new Point(0, 0),
-                new Point(image.Width, 0),
-                new Point(0, image.Height),
-            };
-            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
-
-            // Make the result bitmap.
-            Bitmap bm = new Bitmap(image.Width, image.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
-            }
-
-            // Return the result.
-            return bm;
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

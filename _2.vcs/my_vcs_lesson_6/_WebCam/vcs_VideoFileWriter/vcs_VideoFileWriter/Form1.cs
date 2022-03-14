@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Threading;
+using System.Diagnostics;   //for Stopwatch
 
 using AForge.Video;
 using AForge.Video.DirectShow;  // Video Recording
@@ -39,7 +40,7 @@ namespace vcs_VideoFileWriter
             int x_st = BORDER;
             int y_st = BORDER;
             int dx = 140 + 50;
-            int dy = 50 + 20;
+            int dy = 50 + 15;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -48,14 +49,12 @@ namespace vcs_VideoFileWriter
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(750, 600);
+            richTextBox1.Size = new Size(750, 670);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -66,7 +65,7 @@ namespace vcs_VideoFileWriter
             int frameRate = 25;
 
             VideoFileWriter writer = new VideoFileWriter();
-            writer.Open("test_video.avi", W, H, 25, VideoCodec.MPEG4);
+            writer.Open(filename, W, H, frameRate, VideoCodec.MPEG4);
 
             Bitmap image = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(image);
@@ -170,7 +169,52 @@ namespace vcs_VideoFileWriter
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "XXXXXX\n";
+            richTextBox1.Text += "桌面錄影 10秒\n";
+
+            string filename = "test2.avi";
+            int W = 800;
+            int H = 600;
+            int frameRate = 5;  //5 fps, 所以要錄50張
+
+            int frameCount = frameRate * 10;
+
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+
+            VideoFileWriter writer = new VideoFileWriter();
+
+            writer.Open(filename, W, H, frameRate, VideoCodec.MPEG4);
+
+            int i = 0;
+            for (i = 0; i < frameCount; i++)
+            {
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+                using (Bitmap bmpScreenCapture = new Bitmap(W, H))
+                {
+                    using (Graphics g = Graphics.FromImage(bmpScreenCapture))
+                    {
+                        g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
+
+                        //錄製滑鼠游標
+                        Rectangle cursorBounds = new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), Cursors.Default.Size);
+                        Cursors.Default.Draw(g, cursorBounds);
+                    }
+                    writer.WriteVideoFrame(bmpScreenCapture);
+
+                    sw.Stop();
+                    var t = sw.ElapsedMilliseconds;
+
+                    if (200 - t > 0)
+                        Thread.Sleep((int)(200 - t));
+                }
+            }
+
+            writer.Close();
+
+            richTextBox1.Text += "製作影片完成, 檔案 : " + filename + "\n";
 
         }
 
@@ -227,14 +271,12 @@ namespace vcs_VideoFileWriter
             /*
             VideoFileWriter writer = new VideoFileWriter();
 
+            string filename = "test4.avi";
             int W = 800;
             int H = 600;
             int frameRate = 24;
-            string path = "output.avi";
-            int videoBitRate = 1200 * 1000;
-            //int audioBitRate = 320 * 1000;
 
-            writer.Open(path, W, H, frameRate, VideoCodec.WMV1, videoBitRate);
+            writer.Open(filename, W, H, frameRate, VideoCodec.WMV1);
 
             var m2i = new MatrixToImage();
             Bitmap frame;
@@ -248,34 +290,37 @@ namespace vcs_VideoFileWriter
 
             writer.Close();
 
-            //Assert.IsTrue(File.Exists(path));
+            //Assert.IsTrue(File.Exists(filename));
             */
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             string filename = "test5.avi";
+            int W = 0;
+            int H = 0;
+            int frameRate = 1;  //一秒一張  若是30，就是一秒30張
+
             string foldername = @"C:\______test_files\__pic\_MU";
             var dinfo = new DirectoryInfo(foldername);
             var files = dinfo.GetFiles().OrderBy(p => p.Name).ToArray();
             string pic_filename = @"C:\______test_files\__pic\_MU\id_card_01.jpg";
             Bitmap image = (Bitmap)Image.FromFile(pic_filename);
-            VideoFileWriter vFWriter = new VideoFileWriter();
+            VideoFileWriter writer = new VideoFileWriter();
 
-            int frameRate = 1;  //一秒一張  若是30，就是一秒30張
-
-            vFWriter.Open(filename, image.Width, image.Height, frameRate, VideoCodec.MPEG4);
+            W = image.Width;
+            H = image.Height;
+            writer.Open(filename, W, H, frameRate, VideoCodec.MPEG4);
             foreach (var file in files)
             {
                 if (file.FullName.Contains("id_card") == true)
                 {
                     Console.WriteLine(file.FullName);
                     image = (Bitmap)Image.FromFile(file.FullName);
-                    vFWriter.WriteVideoFrame(image);
+                    writer.WriteVideoFrame(image);
                 }
             }
-            vFWriter.Close();
-
+            writer.Close();
 
             richTextBox1.Text += "製作影片完成, 檔案 : " + filename + "\n";
         }
@@ -326,6 +371,74 @@ namespace vcs_VideoFileWriter
 
             richTextBox1.Text += "讀取檔案 : " + filename_read + "\n";
             richTextBox1.Text += "寫入檔案 : " + filename_write + "\n";
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string filename = "test7.avi";
+            int W = 640;
+            int H = 480;
+            int frameRate = 1;  //一秒一張  若是30，就是一秒30張
+
+
+            var residualBuffer = new Bitmap(W, H, PixelFormat.Format32bppArgb);
+            var residualBufferGraphics = Graphics.FromImage(residualBuffer);
+            residualBufferGraphics.CompositingMode = CompositingMode.SourceOver;
+            residualBufferGraphics.CompositingQuality = CompositingQuality.HighSpeed;
+
+            Image residualSpriteImage = null;
+            Point mapOrigin = Point.Empty;
+            Size mapSize = Size.Empty;
+            Point dataOrigin = Point.Empty;
+            Size dataSize = Size.Empty;
+
+            var heatMapFadeMatrix = new ColorMatrix();
+
+            heatMapFadeMatrix.Matrix33 = 0.95f;// alphaFade;
+
+            var heatMapFadeImageAttributes = new ImageAttributes();
+            heatMapFadeImageAttributes.SetColorMatrix(heatMapFadeMatrix);
+
+            var residualFadeMatrix = new ColorMatrix();
+            residualFadeMatrix.Matrix00 = 0.45f;
+            residualFadeMatrix.Matrix01 = 0.45f;
+            residualFadeMatrix.Matrix02 = 0.45f;
+            residualFadeMatrix.Matrix10 = 0.45f;
+            residualFadeMatrix.Matrix11 = 0.45f;
+            residualFadeMatrix.Matrix12 = 0.45f;
+            residualFadeMatrix.Matrix20 = 0.45f;
+            residualFadeMatrix.Matrix21 = 0.45f;
+            residualFadeMatrix.Matrix22 = 0.45f;
+
+
+            var residualFadeImageAttributes = new ImageAttributes();
+            residualFadeImageAttributes.SetColorMatrix(residualFadeMatrix);
+
+            var lastTime = 0u;
+            //var endPadding = 8 * options.Duration * frameRate;
+            var endPadding = 8 * 50 * frameRate;
+
+            var font = new Font("Consolas", 10.0f);
+            var pens = new[] {
+                new Pen(Color.FromArgb(unchecked((int) 0x080000FF))),
+                new Pen(Color.FromArgb(unchecked((int) 0x08FF0000)))
+             };
+            residualBufferGraphics.CompositingMode = CompositingMode.SourceOver;
+
+
+
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
 
         }
     }

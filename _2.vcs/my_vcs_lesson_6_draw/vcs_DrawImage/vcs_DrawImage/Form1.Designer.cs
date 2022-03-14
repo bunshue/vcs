@@ -139,7 +139,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(204, 41);
             this.button6.TabIndex = 9;
-            this.button6.Text = "一般貼上banner";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -150,7 +149,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(204, 41);
             this.button7.TabIndex = 10;
-            this.button7.Text = "半透明貼上banner";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
