@@ -16,6 +16,11 @@ namespace vcs_DataGridView1
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             print_dataGridView_data(dataGridView1);
@@ -68,13 +73,17 @@ namespace vcs_DataGridView1
             string[] row5 = { "6/10/2003", "13", "Scatterbrain. (As Dead As Leaves.)", "Radiohead", "Hail to the Thief" };
             string[] row6 = { "6/30/1992", "3", "Dress", "P J Harvey", "Dry" };
 
-            dataGridView1.Rows.Add(row0);
-            dataGridView1.Rows.Add(row1);
-            dataGridView1.Rows.Add(row2);
-            dataGridView1.Rows.Add(row3);
-            dataGridView1.Rows.Add(row4);
-            dataGridView1.Rows.Add(row5);
-            dataGridView1.Rows.Add(row6);
+            int i;
+            for (i = 0; i < 10; i++)
+            {
+                dataGridView1.Rows.Add(row0);
+                dataGridView1.Rows.Add(row1);
+                dataGridView1.Rows.Add(row2);
+                dataGridView1.Rows.Add(row3);
+                dataGridView1.Rows.Add(row4);
+                dataGridView1.Rows.Add(row5);
+                dataGridView1.Rows.Add(row6);
+            }
 
             /*
             //dataGridView 顯示欄排序
@@ -204,11 +213,6 @@ namespace vcs_DataGridView1
             dataGridView1.Columns.Add(dgvc);//将列添加到集合
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             //標題行上點擊右鍵，出現快捷菜單。
@@ -236,6 +240,11 @@ namespace vcs_DataGridView1
                 //加入显示右键弹出菜单
                 richTextBox1.Text += "標題行上點擊右鍵，出現快捷菜單   無用\n";
             }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            dataGridView1.FirstDisplayedScrollingRowIndex = dataGridView1.RowCount - 1;
         }
     }
 
