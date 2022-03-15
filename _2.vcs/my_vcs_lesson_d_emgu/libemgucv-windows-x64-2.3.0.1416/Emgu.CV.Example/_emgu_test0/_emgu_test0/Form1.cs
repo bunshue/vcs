@@ -281,15 +281,15 @@ namespace _emgu_test0
             pictureBox1.Image = img1.ToBitmap();
             label1.Text = "原圖";
 
-            Image<Bgr, Byte> img2 = img1.Flip(Emgu.CV.CvEnum.FLIP.HORIZONTAL);
+            Image<Bgr, Byte> img2 = img1.Flip(FLIP.HORIZONTAL);
             pictureBox2.Image = img2.ToBitmap();
             label2.Text = "左右相反";
 
-            Image<Bgr, Byte> img3 = img1.Flip(Emgu.CV.CvEnum.FLIP.VERTICAL);
+            Image<Bgr, Byte> img3 = img1.Flip(FLIP.VERTICAL);
             pictureBox3.Image = img3.ToBitmap();
             label3.Text = "上下顛倒";
 
-            Image<Bgr, Byte> img4 = img1.Flip(Emgu.CV.CvEnum.FLIP.HORIZONTAL).Flip(Emgu.CV.CvEnum.FLIP.VERTICAL);
+            Image<Bgr, Byte> img4 = img1.Flip(FLIP.HORIZONTAL).Flip(FLIP.VERTICAL);
             pictureBox4.Image = img4.ToBitmap();
             label4.Text = "左右相反 + 上下顛倒";
 
@@ -429,11 +429,10 @@ namespace _emgu_test0
         {
             String win1 = "Test Window"; //The name of the window
             CvInvoke.cvNamedWindow(win1); //Create the window using the specific name
-
             Image<Bgr, Byte> img = new Image<Bgr, byte>(400, 200, new Bgr(255, 0, 0)); //Create an image of 400x200 of Blue color
-            MCvFont f = new MCvFont(FONT.CV_FONT_HERSHEY_COMPLEX, 1.0, 1.0); //Create the font
+            MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_COMPLEX, 1.0, 1.0); //Create the font
 
-            img.Draw("Hello, world", ref f, new System.Drawing.Point(10, 80), new Bgr(0, 255, 0)); //Draw "Hello, world." on the image using the specific font
+            img.Draw("Hello, world", ref font, new Point(10, 80), new Bgr(0, 255, 0)); //Draw "Hello, world." on the image using the specific font
 
             CvInvoke.cvShowImage(win1, img); //Show the image
             CvInvoke.cvWaitKey(0);  //Wait for the key pressing event

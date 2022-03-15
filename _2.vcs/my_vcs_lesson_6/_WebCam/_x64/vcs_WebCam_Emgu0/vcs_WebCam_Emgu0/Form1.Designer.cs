@@ -148,6 +148,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(91, 33);
             this.button7.TabIndex = 24;
+            this.button7.Text = "另開視窗錄影";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 

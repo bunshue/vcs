@@ -160,5 +160,22 @@ namespace ShapeDetection
                 fileNameTextBox.Text = openFileDialog1.FileName;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            Image<Bgr, Byte> img = new Image<Bgr, byte>(filename).Resize(200, 200, Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR, true);
+            //CV_INTER_CUBIC
+
+            //imageBox1.Image = img;
+
+
+            //Âà¦Ç¶¥
+            Image<Gray, Byte> gray = img.Convert<Gray, Byte>();
+            //Image<Gray, Byte> gray = img.Convert<Gray, Byte>().PyrDown().PyrUp();
+
+            imageBox1.Image = gray;
+        }
     }
 }

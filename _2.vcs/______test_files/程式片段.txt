@@ -1,5 +1,17 @@
 
 
+            if (File.ReadAllText("setting.txt") != null)
+            {
+                folderPath = File.ReadAllText("setting.txt");
+            }
+            else
+            {
+
+                    File.WriteAllText(@"setting.txt", folderPath);
+
+
+
+
 
 測試out功能
 

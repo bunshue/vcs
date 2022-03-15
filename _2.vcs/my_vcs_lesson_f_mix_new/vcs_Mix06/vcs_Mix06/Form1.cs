@@ -368,6 +368,15 @@ namespace vcs_Mix06
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            long seconds = DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
+
+            richTextBox1.Text += "現在時間用Ticks表示 : " + DateTime.Now.Ticks.ToString() + "\n";
+            richTextBox1.Text += "每秒有幾個Ticks : " + TimeSpan.TicksPerSecond.ToString() + "\n";
+            richTextBox1.Text += "現在時間用秒表示 : " + seconds.ToString() + "\n";
+
+
+
         }
 
         private void button8_Click(object sender, EventArgs e)

@@ -103,17 +103,19 @@ namespace vcs_WebCam_Emgu0
 
             font.thickness = 1;
 
-            image.Draw(DateTime.Now.ToString(), ref font, new Point(20, 40), new Bgr(Color.Gold));
-
-
             if (flag_recording == true) //錄影1
             {
+                if (DateTime.Now.Millisecond > 500)
+                {
+                    image.Draw(DateTime.Now.ToString() + "  Recording", ref font, new Point(20, 40), new Bgr(Color.Red));
+                }
                 vw.WriteFrame<Bgr, byte>(image); //將影格寫入影片中, 將每張圖片製作成影片
             }
             else
             {
-
+                image.Draw(DateTime.Now.ToString(), ref font, new Point(20, 40), new Bgr(Color.Gold));
             }
+
             //Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
             pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
 
@@ -202,6 +204,10 @@ namespace vcs_WebCam_Emgu0
                         richTextBox1.Text += "CV_CAP_PROP_FOURCC = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FOURCC).ToString() + "\n";
                         richTextBox1.Text += "CV_CAP_PROP_POS_FRAMES = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_POS_FRAMES).ToString() + "\n";
                         richTextBox1.Text += "CV_CAP_PROP_POS_AVI_RATIO = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_POS_AVI_RATIO).ToString() + "\n";
+
+
+                        double fourcc = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FOURCC);
+                        richTextBox1.Text += "4-character code of codec : " + fourcc.ToString() + "\n";
 
                         button1.Text = "關閉Webcam";
                         WEBCAM_NO = webcam_no;
@@ -387,6 +393,39 @@ namespace vcs_WebCam_Emgu0
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //錄製影像(有壓縮)
+            cap = new Capture(WEBCAM_NO);   //預設使用的webcam
+            //double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
+
+            if (cap == null)
+            {
+                MessageBox.Show("找不到攝影機", "error");
+            }
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+
+            string filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+
+            VideoWriter video = new VideoWriter(filename, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 30, 640, 480, true);
+
+            while (image != null)
+            {
+                CvInvoke.cvShowImage("錄製影像, 按ESC停止錄影", image.Ptr);
+                image = cap.QueryFrame(); // Query WebCam 的畫面
+                video.WriteFrame<Bgr, byte>(image); //將每張圖片製作成影片
+
+                int c = CvInvoke.cvWaitKey(20);
+                //遇到事件停止錄影
+                if (c == 27)
+                    break;
+            }
+            video.Dispose();
+            CvInvoke.cvDestroyWindow("錄製影像, 按ESC停止錄影"); //關閉剛剛開啟的CV視窗
+
+            //錄影完需將影像停止不然會出錯
+            flag_webcam_ok = false;
+            button1.Text = "開始";
+            Application.Idle -= Application_Idle;
+
         }
 
         private void button8_Click(object sender, EventArgs e)
