@@ -144,11 +144,10 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(784, 220);
+            this.button7.Location = new System.Drawing.Point(891, 226);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(91, 33);
             this.button7.TabIndex = 24;
-            this.button7.Text = "圖片轉影片";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 

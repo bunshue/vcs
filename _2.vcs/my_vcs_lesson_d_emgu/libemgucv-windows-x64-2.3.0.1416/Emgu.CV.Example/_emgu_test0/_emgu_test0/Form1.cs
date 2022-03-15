@@ -128,7 +128,11 @@ namespace _emgu_test0
 
             //EmguCV 影像格式 Image<Bgr, Byte>: a wrapper to IplImage of OpenCV
             Image<Bgr, Byte> image = new Image<Bgr, byte>(filename);
-            CvInvoke.cvShowImage("Image<Bgr, Byte>", image);
+            if (image != null)
+            {
+                //CvInvoke.cvShowImage("使用cvShowImage開啟一圖", image);   //same
+                CvInvoke.cvShowImage("使用cvShowImage開啟一圖", image.Ptr);
+            }
 
             /*
             //same
@@ -491,6 +495,11 @@ namespace _emgu_test0
             //Bitmap 轉成 Image
             Image<Bgr, Byte> image = new Image<Bgr, Byte>(bmp);
             imageBox1.Image = image;
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            CvInvoke.cvDestroyWindow("使用cvShowImage開啟一圖");   //關閉剛剛開啟的CV視窗
         }
     }
 }

@@ -28,11 +28,33 @@ namespace _emgu_test1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
 
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 180;
+            dy = 60;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
         }
 
         //用EMGU播放檔案 需要 opencv_ffmpeg_64.dll
-        private void button1_Click(object sender, EventArgs e)
+        private void button0_Click(object sender, EventArgs e)
         {
             //string filename = "F:\\Naval Legends Yamato  World of Warships.mp4";
             string filename = @"D:\\Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4";
@@ -84,17 +106,12 @@ namespace _emgu_test1
 
             Image<Bgr, Byte> image = cap2.QueryFrame();
             pictureBox1.Image = image.ToBitmap();
-
-
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             //Image<Gray, int> inputImage = new Image<Gray, byte>(new Size(640, 480));
             //pictureBox1.Image = inputImage.ToBitmap();
-
-
-
 
             //string filename = @"C:\______test_files\pic_256X100.jpg";
             string filename = @"C:\______test_files\pic_256X100b.bmp";
@@ -152,7 +169,77 @@ namespace _emgu_test1
             Image<Bgr, Byte> img4 = img1.Flip(Emgu.CV.CvEnum.FLIP.HORIZONTAL).Flip(Emgu.CV.CvEnum.FLIP.VERTICAL);
             pictureBox4.Image = img4.ToBitmap();
             */
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //圖片轉影片
+            Image<Bgr, Byte> img;
+
+            string filenamej;
+
+            string filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+
+            VideoWriter video = new VideoWriter(filename, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 1, 640, 480, true);
+
+            filenamej = @"C:\______test_files\__pic\_MU\id_card_01.jpg";
+            pictureBox1.Image = Image.FromFile(filenamej);
+            img = new Image<Bgr, byte>(filenamej);
+            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(1000);
+
+            filenamej = @"C:\______test_files\__pic\_MU\id_card_02.jpg";
+            pictureBox1.Image = Image.FromFile(filenamej);
+            img = new Image<Bgr, byte>(filenamej);
+            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(1000);
+
+            filenamej = @"C:\______test_files\__pic\_MU\id_card_03.jpg";
+            pictureBox1.Image = Image.FromFile(filenamej);
+            img = new Image<Bgr, byte>(filenamej);
+            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(1000);
+
+            filenamej = @"C:\______test_files\__pic\_MU\id_card_04.jpg";
+            pictureBox1.Image = Image.FromFile(filenamej);
+            img = new Image<Bgr, byte>(filenamej);
+            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(1000);
+
+            filenamej = @"C:\______test_files\__pic\_MU\id_card_05.jpg";
+            pictureBox1.Image = Image.FromFile(filenamej);
+            img = new Image<Bgr, byte>(filenamej);
+            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(1000);
+
+            video.Dispose();
+
+            richTextBox1.Text += "圖片轉影片, 完成\n";
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
 
         }
     }

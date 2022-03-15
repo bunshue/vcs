@@ -94,6 +94,18 @@ namespace vcs_WebCam_Emgu0
         {
             Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
 
+            //MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_COMPLEX, 1.0, 1.0);
+            //MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.5d, 0.5d);
+            //MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_PLAIN, 1.0, 1.0);
+            //MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_DUPLEX, 1d, 1d);
+            //MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_PLAIN, 3.0, 3.0);
+            MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_SIMPLEX, 0.5, 0.5);
+
+            font.thickness = 1;
+
+            image.Draw(DateTime.Now.ToString(), ref font, new Point(20, 40), new Bgr(Color.Gold));
+
+
             if (flag_recording == true) //錄影1
             {
                 vw.WriteFrame<Bgr, byte>(image); //將影格寫入影片中, 將每張圖片製作成影片
@@ -303,10 +315,16 @@ namespace vcs_WebCam_Emgu0
             //cap.Height 取得攝影機可支援的最大高度
 
             //未壓縮
-            vw = new VideoWriter(recording_filename, 0, 10, cap.Width, cap.Height, true);  //一秒10張, 未壓縮, 應該是1秒10張bmp的圖疊合成一個檔案
+            //public VideoWriter(string fileName, int compressionCode, int fps, int width, int height, bool isColor);
+            //vw = new VideoWriter(recording_filename, 0, 10, cap.Width, cap.Height, true);  //一秒10張, 未壓縮, 應該是1秒10張bmp的圖疊合成一個檔案
 
             //有壓縮
-            vw = new VideoWriter(recording_filename, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 30, 640, 480, true);
+            //public VideoWriter(string fileName, int compressionCode, int fps, int width, int height, bool isColor);
+            vw = new VideoWriter(recording_filename, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 30, 640, 480, true);   //一秒30張
+
+            //XXXXXXXX
+            //public VideoWriter(string fileName, int fps, int width, int height, bool isColor);
+            //vw = new VideoWriter(recording_filename, 30, 640, 480, true);   //一秒30張
 
             //開啟錄影模式
             flag_recording = true;
@@ -369,53 +387,6 @@ namespace vcs_WebCam_Emgu0
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //圖片轉影片
-            Image<Bgr, Byte> img;
-
-            string filenamej;
-
-            string filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
-
-            VideoWriter video = new VideoWriter(filename, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 1, 640, 480, true);
-
-            filenamej = @"C:\______test_files\_pic\id_card_01.jpg";
-            pictureBox1.Image = Image.FromFile(filenamej);
-            img = new Image<Bgr, byte>(filenamej);
-            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
-            Application.DoEvents();
-            System.Threading.Thread.Sleep(1000);
-
-            filenamej = @"C:\______test_files\_pic\id_card_02.jpg";
-            pictureBox1.Image = Image.FromFile(filenamej);
-            img = new Image<Bgr, byte>(filenamej);
-            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
-            Application.DoEvents();
-            System.Threading.Thread.Sleep(1000);
-
-            filenamej = @"C:\______test_files\_pic\id_card_03.jpg";
-            pictureBox1.Image = Image.FromFile(filenamej);
-            img = new Image<Bgr, byte>(filenamej);
-            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
-            Application.DoEvents();
-            System.Threading.Thread.Sleep(1000);
-
-            filenamej = @"C:\______test_files\_pic\id_card_04.jpg";
-            pictureBox1.Image = Image.FromFile(filenamej);
-            img = new Image<Bgr, byte>(filenamej);
-            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
-            Application.DoEvents();
-            System.Threading.Thread.Sleep(1000);
-
-            filenamej = @"C:\______test_files\_pic\id_card_05.jpg";
-            pictureBox1.Image = Image.FromFile(filenamej);
-            img = new Image<Bgr, byte>(filenamej);
-            video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
-            Application.DoEvents();
-            System.Threading.Thread.Sleep(1000);
-
-            video.Dispose();
-
-            richTextBox1.Text += "圖片轉影片, 完成\n";
         }
 
         private void button8_Click(object sender, EventArgs e)

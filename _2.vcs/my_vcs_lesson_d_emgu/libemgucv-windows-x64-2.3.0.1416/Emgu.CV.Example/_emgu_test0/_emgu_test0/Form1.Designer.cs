@@ -261,7 +261,9 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(120, 40);
             this.button16.TabIndex = 41;
+            this.button16.Text = "關閉cvShowImage";
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button17
             // 
