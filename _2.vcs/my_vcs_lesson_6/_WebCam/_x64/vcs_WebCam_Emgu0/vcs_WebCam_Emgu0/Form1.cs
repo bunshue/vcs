@@ -210,9 +210,21 @@ namespace vcs_WebCam_Emgu0
                         //cap.FlipVertical = true;    //上下顛倒
 
 
+                        //cap.SetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FOURCC, CvInvoke.CV_FOURCC('M', 'J', 'P', 'G'));
+
                         Application.Idle += new EventHandler(Application_Idle); // 在Idle的event下，把畫面設定到pictureBox上
 
-                        cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_BRIGHTNESS, 80);
+                        //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_BRIGHTNESS, 80);
+
+                        double codec_double = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
+                        string s = new string(System.Text.Encoding.UTF8.GetString(BitConverter.GetBytes(Convert.ToUInt32(codec_double))).ToCharArray());
+
+
+                        richTextBox1.Text += "Codec: " + codec_double.ToString() + "\n";
+                        richTextBox1.Text += "Codec: " + s + "\n";
+
+
+
 
                         WEBCAM_NO = webcam_no;
                         flag_webcam_ok = true;
@@ -341,39 +353,46 @@ namespace vcs_WebCam_Emgu0
                 return;
             }
 
-            recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+            if (flag_recording == false)
+            {
+                //開啟錄影模式
+                flag_recording = true;
 
-            richTextBox1.Text += "filename : " + recording_filename + "\n";
-            richTextBox1.Text += "Width : " + cap.Width.ToString() + "\n";
-            richTextBox1.Text += "Height : " + cap.Height.ToString() + "\n";
+                recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
 
-            //cap.Width 取得攝影機可支援的最大寬度
-            //cap.Height 取得攝影機可支援的最大高度
+                richTextBox1.Text += "filename : " + recording_filename + "\n";
+                richTextBox1.Text += "Width : " + cap.Width.ToString() + "\n";
+                richTextBox1.Text += "Height : " + cap.Height.ToString() + "\n";
 
-            //未壓縮
-            //public VideoWriter(string fileName, int compressionCode, int fps, int width, int height, bool isColor);
-            //vw = new VideoWriter(recording_filename, 0, 10, cap.Width, cap.Height, true);  //一秒10張, 未壓縮, 應該是1秒10張bmp的圖疊合成一個檔案
+                //cap.Width 取得攝影機可支援的最大寬度
+                //cap.Height 取得攝影機可支援的最大高度
 
-            //int codec = CvInvoke.CV_FOURCC('P', 'I', 'M', '1');
-            int codec = CvInvoke.CV_FOURCC('X', 'V', 'I', 'D');
+                //未壓縮
+                //public VideoWriter(string fileName, int compressionCode, int fps, int width, int height, bool isColor);
+                //vw = new VideoWriter(recording_filename, 0, 10, cap.Width, cap.Height, true);  //一秒10張, 未壓縮, 應該是1秒10張bmp的圖疊合成一個檔案
 
-            int fps = 30;
-            int W = 640;
-            int H = 480;
+                //int codec = CvInvoke.CV_FOURCC('P', 'I', 'M', '1');
+                int codec = CvInvoke.CV_FOURCC('X', 'V', 'I', 'D');
 
-            //有壓縮
-            //public VideoWriter(string fileName, int compressionCode, int fps, int width, int height, bool isColor);
-            vw = new VideoWriter(recording_filename, codec, fps, W, H, true);   //一秒30張
+                int fps = 30;
+                int W = 640;
+                int H = 480;
 
-            //XXXXXXXX
-            //public VideoWriter(string fileName, int fps, int width, int height, bool isColor);
-            //vw = new VideoWriter(recording_filename, fps, W, H, true);   //一秒30張
+                //有壓縮
+                //public VideoWriter(string fileName, int compressionCode, int fps, int width, int height, bool isColor);
+                vw = new VideoWriter(recording_filename, codec, fps, W, H, true);   //一秒30張
 
-            //開啟錄影模式
-            flag_recording = true;
+                //XXXXXXXX
+                //public VideoWriter(string fileName, int fps, int width, int height, bool isColor);
+                //vw = new VideoWriter(recording_filename, fps, W, H, true);   //一秒30張
 
-            richTextBox1.Text += "錄影開始\t時間 : " + DateTime.Now.ToString() + "\n";
-            recording_time_st = DateTime.Now;
+                richTextBox1.Text += "錄影開始\t時間 : " + DateTime.Now.ToString() + "\n";
+                recording_time_st = DateTime.Now;
+            }
+            else
+            {
+                richTextBox1.Text += "已在錄影\n";
+            }
         }
 
         //錄影 SP
@@ -387,6 +406,10 @@ namespace vcs_WebCam_Emgu0
                 richTextBox1.Text += "錄影結束\t時間 : " + DateTime.Now.ToString() + "\n";
                 richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n\n";
                 //richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n\n";
+            }
+            else
+            {
+                richTextBox1.Text += "並沒有在錄影\n";
             }
         }
 
@@ -643,6 +666,18 @@ namespace vcs_WebCam_Emgu0
 
             //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH, 320);
             //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT, 240);
+
+            //取得目前所播放的幀數 對播放檔案才有用
+            double frame_no = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES);
+            richTextBox1.Text += frame_no.ToString() + "\n";
+
+
+            double time_index = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_MSEC);
+            richTextBox1.Text += "Time: " + TimeSpan.FromMilliseconds(time_index).ToString().Substring(0, 8) + "\n";
+
+
+            //跳至第100幀
+            cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES, 100);
 
         }
 

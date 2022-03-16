@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -39,13 +40,19 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lb_fps = new System.Windows.Forms.Label();
+            this.timer_fps = new System.Windows.Forms.Timer(this.components);
+            this.bt_record_start = new System.Windows.Forms.Button();
+            this.bt_record_stop = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(202, 10);
+            this.richTextBox1.Location = new System.Drawing.Point(793, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(810, 673);
+            this.richTextBox1.Size = new System.Drawing.Size(255, 673);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
             // 
@@ -152,11 +159,60 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(180, 10);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
+            // lb_fps
+            // 
+            this.lb_fps.AutoSize = true;
+            this.lb_fps.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_fps.Location = new System.Drawing.Point(1063, 12);
+            this.lb_fps.Name = "lb_fps";
+            this.lb_fps.Size = new System.Drawing.Size(43, 21);
+            this.lb_fps.TabIndex = 20;
+            this.lb_fps.Text = "fps";
+            // 
+            // timer_fps
+            // 
+            this.timer_fps.Enabled = true;
+            this.timer_fps.Interval = 1000;
+            this.timer_fps.Tick += new System.EventHandler(this.timer_fps_Tick);
+            // 
+            // bt_record_start
+            // 
+            this.bt_record_start.Location = new System.Drawing.Point(516, 496);
+            this.bt_record_start.Name = "bt_record_start";
+            this.bt_record_start.Size = new System.Drawing.Size(140, 50);
+            this.bt_record_start.TabIndex = 21;
+            this.bt_record_start.Text = "錄影 3分鐘 ST";
+            this.bt_record_start.UseVisualStyleBackColor = true;
+            this.bt_record_start.Click += new System.EventHandler(this.bt_record_start_Click);
+            // 
+            // bt_record_stop
+            // 
+            this.bt_record_stop.Location = new System.Drawing.Point(680, 496);
+            this.bt_record_stop.Name = "bt_record_stop";
+            this.bt_record_stop.Size = new System.Drawing.Size(140, 50);
+            this.bt_record_stop.TabIndex = 22;
+            this.bt_record_stop.Text = "錄影 SP";
+            this.bt_record_stop.UseVisualStyleBackColor = true;
+            this.bt_record_stop.Click += new System.EventHandler(this.bt_record_stop_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1024, 695);
+            this.ClientSize = new System.Drawing.Size(1179, 695);
+            this.Controls.Add(this.bt_record_stop);
+            this.Controls.Add(this.bt_record_start);
+            this.Controls.Add(this.lb_fps);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -170,8 +226,11 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -188,6 +247,11 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lb_fps;
+        private System.Windows.Forms.Timer timer_fps;
+        private System.Windows.Forms.Button bt_record_start;
+        private System.Windows.Forms.Button bt_record_stop;
     }
 }
 

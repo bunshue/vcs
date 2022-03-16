@@ -1,4 +1,31 @@
 
+
+貼個黑圖
+pictureBox1.Image = Properties.Resources.blank;
+
+//========================================================================================
+
+
+            Image<Bgr, byte> img = capture.QueryFrame();
+            img = capture.QueryFrame();
+            ImageViewer viewer = new ImageViewer();
+            viewer.Image = img;
+            viewer.ShowDialog();
+
+
+
+
+cap.SetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FOURCC, 4);
+
+
+int codec = Emgu.CV.CvInvoke.CV_FOURCC('P', 'I', 'M', '1');
+
+
+
+
+
+
+
 VideoFileWriter	
 AForge用的 vcs_VideoFileWriter OK 但是在WebCam上有些問題 總是Memory不足
 
