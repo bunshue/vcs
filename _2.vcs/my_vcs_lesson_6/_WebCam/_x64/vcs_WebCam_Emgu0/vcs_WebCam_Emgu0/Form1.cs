@@ -24,6 +24,7 @@ using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
+using Emgu.CV.UI;   //for ImageViewer
 
 /*
 using Emgu.Util;
@@ -50,6 +51,7 @@ namespace vcs_WebCam_Emgu0
         private string recording_filename = string.Empty;
         VideoWriter vw;
         DateTime recording_time_st = DateTime.Now;
+        int total_frame_count = 0;
 
         public Form1()
         {
@@ -102,6 +104,21 @@ namespace vcs_WebCam_Emgu0
 
             button0.Enabled = true;
             button1.Enabled = false;
+
+            x_st = 10;
+            y_st = BORDER * 2;
+            dx = 130;
+            dy = 45;
+
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button23.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button24.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button25.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+
+            lb_frame.Location = new Point(x_st + dx * 6 + 50, y_st + dy * 0 + 8);
+            lb_frame.Text = "";
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -188,6 +205,12 @@ namespace vcs_WebCam_Emgu0
                                 continue;
                             }
                         }
+
+                        //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH, 1280);
+                        //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT, 720);
+                        //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS, 30);
+
+
 
                         richTextBox1.Text += "W = " + cap.Width.ToString() + ", ";
                         richTextBox1.Text += "H = " + cap.Height.ToString() + "\n";
@@ -472,136 +495,11 @@ namespace vcs_WebCam_Emgu0
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //播放影片檔案
-            string filename = @"C:\______test_files\__RW\_avi\i2c.avi";
-
-            //Opens the movie file
-            cap = new Capture(filename);
-
-            richTextBox1.Text += "此影片檔案格式:\n";
-
-            double W = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
-            double H = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
-            double frame_count = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-            double fps = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS);
-
-            richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
-            richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
-            richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
-            richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
-            richTextBox1.Text += "影片長度 = " + (frame_count / fps).ToString() + " 秒\n";
-
-            int FCapturePeriod = (int)(1000.0d / fps);
-            richTextBox1.Text += "兩幀間距 = " + FCapturePeriod.ToString() + " msec\n";
-
-
-            int FPS = (int)cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS);
-            int frameCount = (int)cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-
-            //msec between frames
-            int msec = (int)(1000 / FPS);
-
-            richTextBox1.Text += "msec = " + msec.ToString() + "\n";
-
-            if (fps > 0)
-            {
-                timer1.Interval = (int)Math.Ceiling((1000 / fps)) - 3;
-            }
-            else
-            {
-                fps = 25;
-                timer1.Interval = 40;
-            }
-
-            timer1.Interval = msec;
-            timer1.Enabled = true;
-
-            double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
-            richTextBox1.Text += "4-character code of codec : " + fourcc.ToString() + "\n";
-
-            double brightness = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_BRIGHTNESS);
-            richTextBox1.Text += "brightness : " + brightness.ToString() + "\n";
-
-            double totalFrameCount = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-            //cap.ImageGrabbed += ProcessFrame;
-
-            //Application.Idle += ProcessFrame;
-
-            //timer.Start();
-            //cap.ImageGrabbed += ProcessFrame;
-            //if (timer.ElapsedMilliseconds == 1000) cap.Stop();
-
-
-            pictureBox1.Width = cap.Width;
-            pictureBox1.Height = cap.Height;
-
-
-            //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS, 5);
-            //cap.ImageGrabbed += VideoCaptureInterface_ImageGrabbed;
-
-
-
 
         }
-
-        void ProcessFrame(object sender, EventArgs e)
-        {
-            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
-            /*
-            //MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_COMPLEX, 1.0, 1.0);
-            //MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_TRIPLEX, 0.5d, 0.5d);
-            //MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_PLAIN, 1.0, 1.0);
-            //MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_DUPLEX, 1d, 1d);
-            //MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_PLAIN, 3.0, 3.0);
-            MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_SIMPLEX, 0.5, 0.5);
-
-            font.thickness = 1;
-
-            if (flag_recording == true) //錄影1
-            {
-                if (DateTime.Now.Millisecond > 500)
-                {
-                    image.Draw(DateTime.Now.ToString() + "  Recording", ref font, new Point(20, 40), new Bgr(Color.Red));
-                }
-                vw.WriteFrame<Bgr, byte>(image); //將影格寫入影片中, 將每張圖片製作成影片
-            }
-            else
-            {
-                image.Draw(DateTime.Now.ToString(), ref font, new Point(20, 40), new Bgr(Color.Gold));
-            }
-            */
-            //Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
-            pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
-
-
-            /*  其他處理
-            pictureBox1.Image = image.Not().ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
-            Image<Gray, Byte> grayFrame = image.Convert<Gray, Byte>();      //彩色轉灰階
-            Image<Gray, Byte> smallGrayFrame = grayFrame.PyrDown();
-            Image<Gray, Byte> smoothedGrayFrame = smallGrayFrame.PyrUp();
-            Image<Gray, Byte> cannyFrame = smoothedGrayFrame.Canny(new Gray(100), new Gray(60));
-            */
-        }
-
 
         private void button11_Click(object sender, EventArgs e)
         {
-            double frame_count = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-            double frame_number = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES);
-
-            richTextBox1.Text += "Total = " + frame_count.ToString() + "\n";
-            richTextBox1.Text += "Current = " + frame_number.ToString() + "\n";
-
-            double new_number = frame_count / 2;
-
-            cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES, new_number);
-
-            //richTextBox1.Text += "Current = " + frame_number.ToString() + "\n";
-
-
-
-            //_capture.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES, frameNumber);
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -649,7 +547,16 @@ namespace vcs_WebCam_Emgu0
 
         private void button17_Click(object sender, EventArgs e)
         {
+            using (Image<Bgr, Byte> image = new Image<Bgr, byte>(500, 200, new Bgr(255, 0, 0)))
+            {
+                MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_COMPLEX, 1.0, 1.0);
 
+                image.Draw("EMGU ImageViewer Test", ref font, new Point(10, 80), new Bgr(0, 255, 0));
+
+                //Show the image using ImageViewer from Emgu.CV.UI
+                ImageViewer viewer = new ImageViewer(image, "EMGU Test");
+                viewer.ShowDialog();
+            }
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -666,7 +573,7 @@ namespace vcs_WebCam_Emgu0
 
             //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH, 320);
             //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT, 240);
-
+            /*
             //取得目前所播放的幀數 對播放檔案才有用
             double frame_no = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES);
             richTextBox1.Text += frame_no.ToString() + "\n";
@@ -678,6 +585,19 @@ namespace vcs_WebCam_Emgu0
 
             //跳至第100幀
             cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES, 100);
+            */
+
+            /*
+            double codec_double = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
+            string s = new string(System.Text.Encoding.UTF8.GetString(BitConverter.GetBytes(Convert.ToUInt32(codec_double))).ToCharArray());
+
+
+            richTextBox1.Text += "Codec: " + codec_double.ToString() + "\n";
+            richTextBox1.Text += "Codec: " + s + "\n\n";
+            */
+
+
+
 
         }
 
@@ -755,5 +675,198 @@ namespace vcs_WebCam_Emgu0
 
 
         }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            //播放影片檔案
+            //string filename = @"C:\______test_files\__RW\_avi\i2c.avi";
+
+            //string filename = @"D:\內視鏡影片\院長平島徹朗が実際に胃内視鏡検査を受けました Full ver [720p].mp4";
+            string filename = @"D:\aaaa.mp4";
+
+            //Opens the movie file
+            cap = new Capture(filename);
+
+            richTextBox1.Text += "此影片檔案格式:\n";
+
+            double W = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
+            double H = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
+            double frame_count = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+            double fps = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS);
+
+            richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
+            richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
+            richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
+            richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
+            richTextBox1.Text += "影片長度 = " + (frame_count / fps).ToString() + " 秒\n";
+
+            int FCapturePeriod = (int)(1000.0d / fps);
+            richTextBox1.Text += "兩幀間距 = " + FCapturePeriod.ToString() + " msec\n";
+
+
+            int FPS = (int)cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS);
+            int frameCount = (int)cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+
+            //msec between frames
+            int msec = (int)(1000 / FPS);
+
+            richTextBox1.Text += "msec = " + msec.ToString() + "\n";
+
+            if (fps > 0)
+            {
+                timer1.Interval = (int)Math.Ceiling((1000 / fps)) - 3;
+            }
+            else
+            {
+                fps = 25;
+                timer1.Interval = 40;
+            }
+
+            timer1.Interval = msec;
+            timer1.Enabled = true;
+
+            double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
+            richTextBox1.Text += "4-character code of codec : " + fourcc.ToString() + "\n";
+
+            double brightness = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_BRIGHTNESS);
+            richTextBox1.Text += "brightness : " + brightness.ToString() + "\n";
+
+            double totalFrameCount = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+            //cap.ImageGrabbed += ProcessFrame;
+
+            //Application.Idle += ProcessFrame;
+
+            //timer.Start();
+            //cap.ImageGrabbed += ProcessFrame;
+            //if (timer.ElapsedMilliseconds == 1000) cap.Stop();
+
+
+            //pictureBox1.Width = cap.Width;
+            //pictureBox1.Height = cap.Height;
+
+
+            //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS, 5);
+            //cap.ImageGrabbed += VideoCaptureInterface_ImageGrabbed;
+
+            total_frame_count = (int)frame_count;
+            trackBar1.Maximum = (int)frame_count;
+        }
+
+        void ProcessFrame(object sender, EventArgs e)
+        {
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+            /*
+            //MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_COMPLEX, 1.0, 1.0);
+            //MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_TRIPLEX, 0.5d, 0.5d);
+            //MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_PLAIN, 1.0, 1.0);
+            //MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_DUPLEX, 1d, 1d);
+            //MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_PLAIN, 3.0, 3.0);
+            MCvFont font = new MCvFont(FONT.CV_FONT_HERSHEY_SIMPLEX, 0.5, 0.5);
+
+            font.thickness = 1;
+
+            if (flag_recording == true) //錄影1
+            {
+                if (DateTime.Now.Millisecond > 500)
+                {
+                    image.Draw(DateTime.Now.ToString() + "  Recording", ref font, new Point(20, 40), new Bgr(Color.Red));
+                }
+                vw.WriteFrame<Bgr, byte>(image); //將影格寫入影片中, 將每張圖片製作成影片
+            }
+            else
+            {
+                image.Draw(DateTime.Now.ToString(), ref font, new Point(20, 40), new Bgr(Color.Gold));
+            }
+            */
+            //Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+            pictureBox1.Image = image.ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
+
+
+            /*  其他處理
+            pictureBox1.Image = image.Not().ToBitmap(); // 把畫面轉換成bitmap型態，再丟給pictureBox元件
+            Image<Gray, Byte> grayFrame = image.Convert<Gray, Byte>();      //彩色轉灰階
+            Image<Gray, Byte> smallGrayFrame = grayFrame.PyrDown();
+            Image<Gray, Byte> smoothedGrayFrame = smallGrayFrame.PyrUp();
+            Image<Gray, Byte> cannyFrame = smoothedGrayFrame.Canny(new Gray(100), new Gray(60));
+            */
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //快進
+            double frame_count = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+            double frame_number = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES);
+
+            richTextBox1.Text += "Total = " + frame_count.ToString() + "\n";
+            richTextBox1.Text += "Current = " + frame_number.ToString() + "\n";
+
+            double new_number = frame_count / 2;
+
+            cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES, new_number);
+
+            //richTextBox1.Text += "Current = " + frame_number.ToString() + "\n";
+
+
+
+            //_capture.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES, frameNumber);
+
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            //richTextBox1.Text += trackBar1.Value.ToString() + " ";
+
+        }
+
+        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar1_MouseMove(object sender, MouseEventArgs e)
+        {
+            lb_frame.Text = trackBar1.Value.ToString() + " / " + total_frame_count.ToString();
+
+        }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (cap == null)
+            {
+                return;
+
+            }
+            //int new_position = trackBar1.Value;
+
+            //richTextBox1.Text += new_position.ToString() + "  " + ((double)new_position / total_frame_count).ToString("p") + "  ";
+
+
+            cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES, 300);
+
+
+        }
     }
 }
+

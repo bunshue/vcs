@@ -1,4 +1,48 @@
 
+            Bitmap bitmap1 = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            //重置背景顏色,可以自定義
+            g.Clear(Color.White);
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;//消除鋸齒
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+
+
+
+//c#中接收16進制串口數據(com), 在textbox顯示
+
+static int buffersize = 18;   //十六進制數的大小（假設為6Byte）
+byte[] buffer = new Byte[buffersize];   //創建緩沖區
+
+private void button1_Click(object sender, EventArgs e)
+{
+    serialPort1.Read(buffer, 0, buffersize);
+    string ss;
+    ss = byteToHexStr(buffer); //用到函數byteToHexStr
+    textBox2.Text = ss;
+    serialPort1.Close();
+    MessageBox.Show("數據接收成功！", "系統提示");
+}
+
+//字節數組轉16進制字符串
+public static string byteToHexStr(byte[] bytes)
+{
+    string returnStr = "";
+    if (bytes != null)
+    {
+        for (int i = 0; i < bytes.Length; i++)
+        {
+            returnStr += bytes[i].ToString("X2");
+        }
+    }
+    return returnStr;
+}
+
+
+
 
 貼個黑圖
 pictureBox1.Image = Properties.Resources.blank;
