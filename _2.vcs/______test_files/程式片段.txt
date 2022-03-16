@@ -1,4 +1,13 @@
 
+VideoFileWriter	
+AForge用的 vcs_VideoFileWriter OK 但是在WebCam上有些問題 總是Memory不足
+
+
+VideoWriter
+EMGU用的 在sugar使用OK
+
+ 
+
 
             if (File.ReadAllText("setting.txt") != null)
             {

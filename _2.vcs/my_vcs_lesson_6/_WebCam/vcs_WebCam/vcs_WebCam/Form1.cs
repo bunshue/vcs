@@ -13,7 +13,7 @@ using System.Diagnostics;       //for Process
 
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;
-
+//using AForge.Video.FFMPEG;      //for VideoFileWriter
 
 //參考
 //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
@@ -61,6 +61,10 @@ namespace vcs_WebCam
         bool flag_show_grid = true;     //顯示格線
         bool flag_invert = false;        //反相, SC700需要反相
         bool flag_auto_save = false;    //自動存檔
+
+        int webcam_w = 0;
+        int webcam_h = 0;
+        int webcam_fps = 0;
 
         public struct RGB
         {
@@ -245,6 +249,7 @@ namespace vcs_WebCam
             bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_pause.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_stop.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_record.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_refresh.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_snapshot.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 1);
@@ -280,6 +285,10 @@ namespace vcs_WebCam
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             lb_main_mesg.Text = "";
+
+            bt_start.Enabled = true;
+            bt_stop.Enabled = false;
+            bt_record.Enabled = false;
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -486,7 +495,6 @@ namespace vcs_WebCam
             {
                 bt_start.Enabled = true;
                 bt_pause.Enabled = true;
-                bt_stop.Enabled = true;
                 bt_refresh.Enabled = true;
                 bt_snapshot.Enabled = true;
                 bt_fullscreen.Enabled = true;
@@ -495,11 +503,13 @@ namespace vcs_WebCam
             {
                 bt_start.Enabled = false;
                 bt_pause.Enabled = false;
-                bt_stop.Enabled = false;
                 bt_refresh.Enabled = false;
                 bt_snapshot.Enabled = false;
                 bt_fullscreen.Enabled = false;
             }
+            bt_stop.Enabled = false;
+            bt_record.Enabled = false;
+
             return;
         }
 
@@ -534,13 +544,20 @@ namespace vcs_WebCam
 
             //以下為WebCam訊息
             string webcam_name = string.Empty;
-            int ww;
-            int hh;
-            ww = Cam.VideoCapabilities[comboBox2.SelectedIndex].FrameSize.Width;
-            hh = Cam.VideoCapabilities[comboBox2.SelectedIndex].FrameSize.Height;
-            webcam_name = camera_short_name[comboBox1.SelectedIndex] + " " + Cam.VideoCapabilities[comboBox2.SelectedIndex].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[comboBox2.SelectedIndex].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[comboBox2.SelectedIndex].AverageFrameRate.ToString() + " Hz";
+            int ww = Cam.VideoCapabilities[comboBox2.SelectedIndex].FrameSize.Width;
+            int hh = Cam.VideoCapabilities[comboBox2.SelectedIndex].FrameSize.Height;
+            int fps = Cam.VideoCapabilities[comboBox2.SelectedIndex].AverageFrameRate;
+
+            webcam_name = camera_short_name[comboBox1.SelectedIndex] + " " 
+                + ww.ToString() + " X " 
+                + hh.ToString() + " @ " 
+                + fps.ToString() + " Hz";
             this.Text = webcam_name;
             show_main_message(webcam_name, S_OK, 20);
+
+            webcam_w = ww;
+            webcam_h = hh;
+            webcam_fps = fps;
 
             Cam.Start();   // WebCam starts capturing images.
         }
@@ -884,18 +901,11 @@ namespace vcs_WebCam
         bool camera_start = false;
         private void bt_start_Click(object sender, EventArgs e)
         {
-            if (camera_start == false)
-            {
-                camera_start = true;
-                bt_start.Text = "停止";
-                Start_Webcam();
-            }
-            else
-            {
-                camera_start = false;
-                bt_start.Text = "啟動";
-                Stop_Webcam();
-            }
+            camera_start = true;
+            Start_Webcam();
+            bt_start.Enabled = false;
+            bt_stop.Enabled = true;
+            bt_record.Enabled = true;
         }
 
         private void bt_pause_Click(object sender, EventArgs e)
@@ -906,8 +916,10 @@ namespace vcs_WebCam
         private void bt_stop_Click(object sender, EventArgs e)
         {
             camera_start = false;
-            bt_start.Text = "啟動";
             Stop_Webcam();
+            bt_start.Enabled = true;
+            bt_stop.Enabled = false;
+            bt_record.Enabled = false;
         }
 
         //重抓WebCam, 只有關了再開
@@ -1316,6 +1328,28 @@ namespace vcs_WebCam
                 rb_4X4.Visible = false;
                 rb_5X5.Visible = false;
             }
+        }
+
+        private void bt_record_Click(object sender, EventArgs e)
+        {
+            string filename = "test0.avi";
+            int W = 640;
+            int H = 480;
+            int frameRate = 25;
+            if (File.Exists(filename) == true)
+            {
+                File.Delete(filename);
+            }
+
+            richTextBox1.Text += "W = " + webcam_w.ToString() + "\n";
+            richTextBox1.Text += "H = " + webcam_h.ToString() + "\n";
+            richTextBox1.Text += "F = " + webcam_fps.ToString() + "\n";
+
+            richTextBox1.Text += "目前 AForge.Video.FFMPEG.dll 在 Sugar 上還不能用\n";
+            //VideoFileWriter writer = new VideoFileWriter();
+
+            //writer.Open(filename, webcam_w, webcam_h, webcam_fps, VideoCodec.MPEG4);
+
         }
     }
 }

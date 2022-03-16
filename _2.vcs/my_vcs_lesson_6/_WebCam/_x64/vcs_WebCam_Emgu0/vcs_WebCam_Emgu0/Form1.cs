@@ -64,7 +64,7 @@ namespace vcs_WebCam_Emgu0
 
         void show_item_location()
         {
-            int x_st = 1000;
+            int x_st = 670;
             int y_st = BORDER;
             int dx = 130;
             int dy = 45;
@@ -79,19 +79,29 @@ namespace vcs_WebCam_Emgu0
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
-            bt_info.Location = new Point(x_st + dx * 0, y_st + dy * 14);
-            bt_exit.Location = new Point(x_st + dx * 0, y_st + dy * 15);
+
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            bt_exit.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
             pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
             pictureBox1.Location = new Point(BORDER, BORDER);
 
             richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
-            richTextBox1.Location = new Point(x_st - dx * 2-70, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            button0.Enabled = true;
+            button1.Enabled = false;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -151,22 +161,6 @@ namespace vcs_WebCam_Emgu0
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC, 4);
-
-
-            //double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
-            //richTextBox1.Text += "4-character code of codec : " + fourcc.ToString() + "\n";
-
-            //this->camRef.set(CV_CAP_PROP_FOURCC,CV_FOURCC('M','J','P','G'));
-
-            //改變camera的設定
-
-            cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH, 320);
-            cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT, 240);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
             if (flag_webcam_ok == false)    //如果webcam沒啟動
             {
                 int webcam_no = 0;
@@ -181,7 +175,7 @@ namespace vcs_WebCam_Emgu0
 
                         if (cap == null)
                         {
-                            richTextBox1.Text += "空的\n";
+                            richTextBox1.Text += "無相機\n";
                             webcam_no++;
 
                             if (webcam_no > 5)
@@ -218,41 +212,12 @@ namespace vcs_WebCam_Emgu0
 
                         Application.Idle += new EventHandler(Application_Idle); // 在Idle的event下，把畫面設定到pictureBox上
 
-                        //  information
-                        double W;
-                        double H;
-                        double frame_count;
-                        double fps;
-                        W = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
-                        H = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
-                        frame_count = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-                        fps = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS);
-
-                        richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
-                        richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
-                        richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
-                        richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
-
-                        richTextBox1.Text += "CV_CAP_PROP_FORMAT = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FORMAT).ToString() + "\n";
-                        richTextBox1.Text += "CV_CAP_PROP_MODE = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_MODE).ToString() + "\n";
-                        richTextBox1.Text += "CV_CAP_PROP_CONVERT_RGB = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_CONVERT_RGB).ToString() + "\n";
-                        richTextBox1.Text += "CV_CAP_PROP_MONOCROME = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_MONOCROME).ToString() + "\n";
-                        richTextBox1.Text += "CV_CAP_PROP_FOURCC = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC).ToString() + "\n";
-                        richTextBox1.Text += "CV_CAP_PROP_POS_FRAMES = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES).ToString() + "\n";
-                        richTextBox1.Text += "CV_CAP_PROP_POS_AVI_RATIO = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_AVI_RATIO).ToString() + "\n";
-
-
-                        double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
-                        richTextBox1.Text += "4-character code of codec : " + fourcc.ToString() + "\n";
-
-                        double brightness = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_BRIGHTNESS);
-                        richTextBox1.Text += "brightness : " + brightness.ToString() + "\n";
-
                         cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_BRIGHTNESS, 80);
 
-                        button1.Text = "關閉Webcam";
                         WEBCAM_NO = webcam_no;
                         flag_webcam_ok = true;
+                        button0.Enabled = false;
+                        button1.Enabled = true;
                         break;
 
 
@@ -265,13 +230,22 @@ namespace vcs_WebCam_Emgu0
             }
             else
             {
+                richTextBox1.Text += "相機已開啟\n";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (flag_webcam_ok == true)    //如果webcam已啟動
+            {
                 richTextBox1.Text += "關閉Webcam ......\n";
-                button1.Text = "開啟Webcam";
                 flag_webcam_ok = false;
                 pictureBox1.Image = null;
                 Application.Idle -= new EventHandler(Application_Idle);
                 cap.Dispose();
                 cap = null;
+                button0.Enabled = true;
+                button1.Enabled = false;
             }
         }
 
@@ -301,6 +275,12 @@ namespace vcs_WebCam_Emgu0
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            {
+                richTextBox1.Text += "無相機\n";
+                return;
+            }
+
             //上下顛倒
             if (cap != null)
             {
@@ -310,6 +290,12 @@ namespace vcs_WebCam_Emgu0
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            {
+                richTextBox1.Text += "無相機\n";
+                return;
+            }
+
             //左右相反
             if (cap != null)
             {
@@ -320,7 +306,10 @@ namespace vcs_WebCam_Emgu0
         private void button4_Click(object sender, EventArgs e)
         {
             if (flag_webcam_ok == false)    //如果webcam沒啟動
+            {
+                richTextBox1.Text += "無相機\n";
                 return;
+            }
 
             //截圖
             if (cap != null)
@@ -348,7 +337,7 @@ namespace vcs_WebCam_Emgu0
         {
             if (flag_webcam_ok == false)    //如果webcam沒啟動
             {
-                richTextBox1.Text += "尚未啟動相機\n";
+                richTextBox1.Text += "無相機\n";
                 return;
             }
 
@@ -401,64 +390,6 @@ namespace vcs_WebCam_Emgu0
             }
         }
 
-        private void bt_info_Click(object sender, EventArgs e)
-        {
-            if (cap == null)
-                return;
-
-            // Bitmap -> Image
-            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
-
-            richTextBox1.Text += "Size = " + image.Size.ToString() + "\n";
-            richTextBox1.Text += "Width = " + image.Width.ToString() + "\n";
-            richTextBox1.Text += "Height = " + image.Height.ToString() + "\n";
-            richTextBox1.Text += "Rows = " + image.Rows.ToString() + "\n";
-            richTextBox1.Text += "Cols = " + image.Cols.ToString() + "\n";
-            richTextBox1.Text += "Bytes.Rank = " + image.Bytes.Rank.ToString() + "\n";
-            richTextBox1.Text += "Bytes.Length = " + image.Bytes.Length.ToString() + "\n";
-            //richTextBox1.Text += "W = " + image.Data.Length.ToString() + "\n";
-            //richTextBox1.Text += "W = " + image.Data.Rank.ToString() + "\n";
-
-            richTextBox1.Text += "NumberOfChannels = " + image.NumberOfChannels.ToString() + "\n";
-            richTextBox1.Text += "ROI = " + image.ROI.ToString() + "\n";
-
-            double W;
-            double H;
-            double frame_count;
-            double fps;
-
-            W = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
-            H = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
-            frame_count = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-            fps = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS);
-
-            richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
-            richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
-            richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
-            richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
-
-            richTextBox1.Text += "info = " + GetVideoInformation(cap) + "\n";
-        }
-
-        private string GetVideoInformation(Capture capture)
-        {
-            var width = capture.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
-            var height = capture.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
-            var frameRate = capture.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS);
-            var totalFrames = capture.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-            var codecDouble = capture.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
-            //var codec = ConvertToStringCaptureProperty(codecDouble);
-
-            var codec = 123;
-
-            return String.Format("Format: {0}x{1}\nFPS: {2}\nFrames: {3}\nCodec: {4}",
-                width,
-                height,
-                frameRate,
-                totalFrames,
-                codec);
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
             //錄製影像(有壓縮)
@@ -467,8 +398,9 @@ namespace vcs_WebCam_Emgu0
 
             if (cap == null)
             {
-                MessageBox.Show("找不到攝影機", "error");
+                richTextBox1.Text += "無相機\n";
             }
+
             Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
 
             string filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
@@ -491,16 +423,14 @@ namespace vcs_WebCam_Emgu0
 
             //錄影完需將影像停止不然會出錯
             flag_webcam_ok = false;
-            button1.Text = "開始";
             Application.Idle -= Application_Idle;
-
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             if (cap == null)
             {
-                MessageBox.Show("找不到攝影機");
+                richTextBox1.Text += "無相機\n";
                 return;
             }
 
@@ -526,14 +456,11 @@ namespace vcs_WebCam_Emgu0
             cap = new Capture(filename);
 
             richTextBox1.Text += "此影片檔案格式:\n";
-            double W;
-            double H;
-            double frame_count;
-            double fps;
-            W = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
-            H = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
-            frame_count = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-            fps = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS);
+
+            double W = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
+            double H = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
+            double frame_count = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+            double fps = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS);
 
             richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
             richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
@@ -566,33 +493,6 @@ namespace vcs_WebCam_Emgu0
             timer1.Interval = msec;
             timer1.Enabled = true;
 
-            richTextBox1.Text += "CV_CAP_PROP_FORMAT = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FORMAT).ToString() + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_MODE = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_MODE).ToString() + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_CONVERT_RGB = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_CONVERT_RGB).ToString() + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_MONOCROME = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_MONOCROME).ToString() + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_FOURCC = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC).ToString() + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_POS_FRAMES = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES).ToString() + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_POS_AVI_RATIO = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_AVI_RATIO).ToString() + "\n";
-
-
-            richTextBox1.Text += "CV_CAP_PROP_CONTRAST = " + (int)cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_CONTRAST) + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_BRIGHTNESS = " + (int)cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_BRIGHTNESS) + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_GAIN = " + (int)cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_GAIN) + "\n";
-
-
-            richTextBox1.Text += "CV_CAP_PROP_BRIGHTNESS = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_BRIGHTNESS) + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_CONTRAST = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_CONTRAST) + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_SHARPNESS = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_SHARPNESS) + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_SATURATION = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_SATURATION) + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_WHITE_BALANCE_BLUE_U = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_WHITE_BALANCE_BLUE_U) + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_WHITE_BALANCE_RED_V = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_WHITE_BALANCE_RED_V) + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_HUE = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_HUE) + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_GAIN = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_GAIN) + "\n";
-            richTextBox1.Text += "CV_CAP_PROP_GAMMA = " + cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_GAMMA) + "\n";
-
-
-
-
             double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
             richTextBox1.Text += "4-character code of codec : " + fourcc.ToString() + "\n";
 
@@ -602,7 +502,7 @@ namespace vcs_WebCam_Emgu0
             double totalFrameCount = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
             //cap.ImageGrabbed += ProcessFrame;
 
-           //Application.Idle += ProcessFrame;
+            //Application.Idle += ProcessFrame;
 
             //timer.Start();
             //cap.ImageGrabbed += ProcessFrame;
@@ -677,7 +577,7 @@ namespace vcs_WebCam_Emgu0
 
 
 
-            //_capture.SetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_POS_FRAMES, frameNumber);
+            //_capture.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES, frameNumber);
 
         }
 
@@ -709,6 +609,116 @@ namespace vcs_WebCam_Emgu0
 
         }
 
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC, 4);
+
+
+            //double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
+            //richTextBox1.Text += "4-character code of codec : " + fourcc.ToString() + "\n";
+
+            //this->camRef.set(CV_CAP_PROP_FOURCC,CV_FOURCC('M','J','P','G'));
+
+            //改變camera的設定
+
+            //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH, 320);
+            //cap.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT, 240);
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            if (cap == null)
+            {
+                richTextBox1.Text += "無相機\n";
+                return;
+            }
+
+            // Bitmap -> Image
+            Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+
+            richTextBox1.Text += "Size = " + image.Size.ToString() + "\n";
+            richTextBox1.Text += "Width = " + image.Width.ToString() + "\n";
+            richTextBox1.Text += "Height = " + image.Height.ToString() + "\n";
+            richTextBox1.Text += "Rows = " + image.Rows.ToString() + "\n";
+            richTextBox1.Text += "Cols = " + image.Cols.ToString() + "\n";
+            richTextBox1.Text += "Bytes.Rank = " + image.Bytes.Rank.ToString() + "\n";
+            richTextBox1.Text += "Bytes.Length = " + image.Bytes.Length.ToString() + "\n";
+            //richTextBox1.Text += "W = " + image.Data.Length.ToString() + "\n";
+            //richTextBox1.Text += "W = " + image.Data.Rank.ToString() + "\n";
+
+            richTextBox1.Text += "NumberOfChannels = " + image.NumberOfChannels.ToString() + "\n";
+            richTextBox1.Text += "ROI = " + image.ROI.ToString() + "\n";
+
+            richTextBox1.Text += "info = \n";
+            GetVideoInformation(cap);
+        }
+
+        private void GetVideoInformation(Capture cap)
+        {
+            //  information
+            double W = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
+            double H = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
+            double frame_count = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+            double fps = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS);
+
+            richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
+            richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
+            richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
+            richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
+
+            richTextBox1.Text += "CV_CAP_PROP_FORMAT = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FORMAT).ToString() + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_MODE = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_MODE).ToString() + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_CONVERT_RGB = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_CONVERT_RGB).ToString() + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_MONOCROME = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_MONOCROME).ToString() + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_FOURCC = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC).ToString() + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_POS_FRAMES = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_FRAMES).ToString() + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_POS_AVI_RATIO = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_POS_AVI_RATIO).ToString() + "\n";
+
+            richTextBox1.Text += "CV_CAP_PROP_CONTRAST = " + (int)cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_CONTRAST) + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_BRIGHTNESS = " + (int)cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_BRIGHTNESS) + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_GAIN = " + (int)cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_GAIN) + "\n";
+
+            richTextBox1.Text += "CV_CAP_PROP_BRIGHTNESS = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_BRIGHTNESS) + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_CONTRAST = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_CONTRAST) + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_SHARPNESS = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_SHARPNESS) + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_SATURATION = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_SATURATION) + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_WHITE_BALANCE_BLUE_U = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_WHITE_BALANCE_BLUE_U) + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_WHITE_BALANCE_RED_V = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_WHITE_BALANCE_RED_V) + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_HUE = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_HUE) + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_GAIN = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_GAIN) + "\n";
+            richTextBox1.Text += "CV_CAP_PROP_GAMMA = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_GAMMA) + "\n";
+
+            double fourcc = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
+            richTextBox1.Text += "4-character code of codec : " + fourcc.ToString() + "\n";
+
+            double brightness = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_BRIGHTNESS);
+            richTextBox1.Text += "brightness : " + brightness.ToString() + "\n";
+
+            var codecDouble = cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FOURCC);
+            //var codec = ConvertToStringCaptureProperty(codecDouble);
+
+
+        }
     }
 }
-

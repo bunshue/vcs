@@ -73,6 +73,7 @@
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
             this.timer_qr_code = new System.Windows.Forms.Timer(this.components);
+            this.bt_record = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -127,6 +128,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.bt_record);
             this.groupBox4.Controls.Add(this.rb_5X5);
             this.groupBox4.Controls.Add(this.rb_4X4);
             this.groupBox4.Controls.Add(this.rb_3X3);
@@ -322,7 +324,7 @@
             // bt_stop
             // 
             this.bt_stop.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_stop.Location = new System.Drawing.Point(194, 38);
+            this.bt_stop.Location = new System.Drawing.Point(188, 38);
             this.bt_stop.Name = "bt_stop";
             this.bt_stop.Size = new System.Drawing.Size(75, 30);
             this.bt_stop.TabIndex = 7;
@@ -573,6 +575,17 @@
             this.timer_qr_code.Interval = 1000;
             this.timer_qr_code.Tick += new System.EventHandler(this.timer_qr_code_Tick);
             // 
+            // bt_record
+            // 
+            this.bt_record.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_record.Location = new System.Drawing.Point(269, 38);
+            this.bt_record.Name = "bt_record";
+            this.bt_record.Size = new System.Drawing.Size(75, 30);
+            this.bt_record.TabIndex = 23;
+            this.bt_record.Text = "錄影";
+            this.bt_record.UseVisualStyleBackColor = true;
+            this.bt_record.Click += new System.EventHandler(this.bt_record_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -646,6 +659,7 @@
         private System.Windows.Forms.RadioButton rb_5X5;
         private System.Windows.Forms.RadioButton rb_4X4;
         private System.Windows.Forms.RadioButton rb_3X3;
+        private System.Windows.Forms.Button bt_record;
     }
 }
 

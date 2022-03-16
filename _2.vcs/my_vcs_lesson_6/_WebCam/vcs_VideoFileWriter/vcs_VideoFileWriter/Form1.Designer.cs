@@ -118,7 +118,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(140, 50);
             this.button6.TabIndex = 15;
-            this.button6.Text = "test VideoFile R/W";
+            this.button6.Text = "轉錄";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 

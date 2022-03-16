@@ -13,7 +13,7 @@ using System.Diagnostics;   //for Stopwatch
 
 using AForge.Video;
 using AForge.Video.DirectShow;  // Video Recording
-using AForge.Video.FFMPEG;
+using AForge.Video.FFMPEG;      //for VideoFileWriter
 
 using System.Drawing.Drawing2D;
 
@@ -65,6 +65,10 @@ namespace vcs_VideoFileWriter
             int W = 640;
             int H = 480;
             int frameRate = 25;
+            if (File.Exists(filename) == true)
+            {
+                File.Delete(filename);
+            }
 
             VideoFileWriter writer = new VideoFileWriter();
             writer.Open(filename, W, H, frameRate, VideoCodec.MPEG4);
@@ -105,14 +109,22 @@ namespace vcs_VideoFileWriter
             int[] frameRates = { 60, 120, 180 };
 
             double preamblePostamble = 0.5;    // seconds
-            double movieLength = 60.0;    // seconds
+            double movieLength = 20.0;    // seconds
 
             foreach (var frameRate in frameRates)
             {
+                richTextBox1.Text += "frameRate = " + frameRate.ToString() + "\n";
+                Application.DoEvents();
+
                 VideoFileWriter writer = new VideoFileWriter();
                 VideoCodec codec = VideoCodec.WMV2;
 
                 string filename = "test1." + codec.ToString() + "." + frameRate.ToString("000") + "Hz." + movieLength.ToString() + "sec." + W.ToString() + "." + H.ToString() + ".avi";
+                if (File.Exists(filename) == true)
+                {
+                    File.Delete(filename);
+                }
+
                 writer.Open(filename, W, H, frameRate, codec);
 
                 RectangleF rectText = new RectangleF(W / 2, 0, W / 2, H);
@@ -177,10 +189,8 @@ namespace vcs_VideoFileWriter
             int W = 800;
             int H = 600;
             int frameRate = 5;  //5 fps, 所以要錄50張
-
             int frameCount = frameRate * 10;
-
-            if (File.Exists(filename))
+            if (File.Exists(filename) == true)
             {
                 File.Delete(filename);
             }
@@ -206,6 +216,7 @@ namespace vcs_VideoFileWriter
                     }
                     writer.WriteVideoFrame(bmpScreenCapture);
 
+                    //隔一陣子再抓圖存圖, 用以達到固定fps桌面錄影功能
                     sw.Stop();
                     var t = sw.ElapsedMilliseconds;
 
@@ -221,10 +232,17 @@ namespace vcs_VideoFileWriter
 
         private void button3_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "錄影 1000張圖, 25fps, 所以是40秒\n";
+
             string filename = "test3.wmv";
-            int W = 320;
-            int H = 240;
-            int frameRate = 25;
+            int W = 800;
+            int H = 600;
+            int frameRate = 25;  //25 fps
+            int frameCount = 1000;
+            if (File.Exists(filename) == true)
+            {
+                File.Delete(filename);
+            }
 
             VideoFileWriter writer = new VideoFileWriter();
             writer.Open(filename, W, H, frameRate, VideoCodec.MPEG4);
@@ -233,7 +251,7 @@ namespace vcs_VideoFileWriter
             Bitmap image = new Bitmap(W, H, PixelFormat.Format24bppRgb);
 
             // write 1000 video frames
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < frameCount; i++)
             {
                 image.SetPixel(i % W, i % H, Color.Red);
                 writer.WriteVideoFrame(image);
@@ -249,8 +267,14 @@ namespace vcs_VideoFileWriter
             int W = 990;
             int H = 742;
             int frameRate = 1;  //一秒一張
+            int frameCount = 360;   //一秒一張  所以是6分鐘
+            if (File.Exists(filename) == true)
+            {
+                File.Delete(filename);
+            }
 
             VideoFileWriter writer = new VideoFileWriter();
+            //writer.Open(filename, W, H, frameRate, VideoCodec.WMV1);
             writer.Open(filename, W, H, frameRate, VideoCodec.MPEG4);
 
             Bitmap image = new Bitmap(W, H);
@@ -259,7 +283,7 @@ namespace vcs_VideoFileWriter
 
             image = new Bitmap(pic_filename);
 
-            for (int i = 0; i < 360; i++)   //一秒一張  所以是6分鐘
+            for (int i = 0; i < frameCount; i++)
             {
                 writer.WriteVideoFrame(image);
             }
@@ -268,31 +292,6 @@ namespace vcs_VideoFileWriter
             writer.Close();
 
             richTextBox1.Text += "製作影片完成, 檔案 : " + filename + "\n";
-
-            /*
-            VideoFileWriter writer = new VideoFileWriter();
-
-            string filename = "test4.avi";
-            int W = 800;
-            int H = 600;
-            int frameRate = 24;
-
-            writer.Open(filename, W, H, frameRate, VideoCodec.WMV1);
-
-            var m2i = new MatrixToImage();
-            Bitmap frame;
-
-            for (byte i = 0; i < 255; i++)
-            {
-                byte[,] matrix = Matrix.Create(H, W, i);
-                m2i.Convert(matrix, out frame);
-                writer.WriteVideoFrame(frame, TimeSpan.FromSeconds(i));
-            }
-
-            writer.Close();
-
-            //Assert.IsTrue(File.Exists(filename));
-            */
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -301,6 +300,10 @@ namespace vcs_VideoFileWriter
             int W = 0;
             int H = 0;
             int frameRate = 1;  //一秒一張  若是30，就是一秒30張
+            if (File.Exists(filename) == true)
+            {
+                File.Delete(filename);
+            }
 
             string foldername = @"C:\______test_files\__pic\_MU";
             var dinfo = new DirectoryInfo(foldername);
@@ -330,6 +333,16 @@ namespace vcs_VideoFileWriter
         {
             string filename_read = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\vcs_VideoFileWriter\vcs_VideoFileWriter\bin\Debug\test5.avi";
             string filename_write = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\vcs_VideoFileWriter\vcs_VideoFileWriter\bin\Debug\test5b.avi";
+            if (File.Exists(filename_read) == false)
+            {
+                richTextBox1.Text += "檔案 : " + filename_read + " 不存在, 離開\n";
+                return;
+            }
+
+            if (File.Exists(filename_write) == true)
+            {
+                File.Delete(filename_write);
+            }
 
             VideoFileReader reader = new VideoFileReader();
             VideoFileWriter writer = new VideoFileWriter();
@@ -350,7 +363,6 @@ namespace vcs_VideoFileWriter
             richTextBox1.Text += ("Codec: " + reader.CodecName + Environment.NewLine);
             richTextBox1.Text += ("Frames: " + reader.FrameCount + Environment.NewLine);
 
-
             richTextBox1.Text += "Duration = " + (reader.FrameCount / reader.FrameRate).ToString() + " 秒\n";
 
             int end = (int)reader.FrameCount;
@@ -359,12 +371,18 @@ namespace vcs_VideoFileWriter
             int H = reader.Height;
             int frameRate = reader.FrameRate;
 
+            /*
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+            richTextBox1.Text += "frameRate = " + frameRate.ToString() + "\n";
+            richTextBox1.Text += "end = " + end.ToString() + "\n";
+            */
+
             writer.Open(filename_write, W, H, frameRate, VideoCodec.MPEG4);
 
             for (int i = 0; i < end; i++)
             {
                 Bitmap videoFrame = reader.ReadVideoFrame();
-                                    reader.ReadVideoFrame();
                 writer.WriteVideoFrame(videoFrame);
                 videoFrame.Dispose();
 
@@ -377,10 +395,8 @@ namespace vcs_VideoFileWriter
             writer.Close();
             reader.Close();
 
-
             richTextBox1.Text += "讀取檔案 : " + filename_read + "\n";
             richTextBox1.Text += "寫入檔案 : " + filename_write + "\n";
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -389,7 +405,10 @@ namespace vcs_VideoFileWriter
             int W = 640;
             int H = 480;
             int frameRate = 1;  //一秒一張  若是30，就是一秒30張
-
+            if (File.Exists(filename) == true)
+            {
+                File.Delete(filename);
+            }
 
             var residualBuffer = new Bitmap(W, H, PixelFormat.Format32bppArgb);
             var residualBufferGraphics = Graphics.FromImage(residualBuffer);
@@ -449,6 +468,10 @@ namespace vcs_VideoFileWriter
         {
             richTextBox1.Text += "將.avi的聲音分離出來\n";
             string audio_filename = "test9.wav";
+            if (File.Exists(audio_filename) == true)
+            {
+                File.Delete(audio_filename);
+            }
 
             string filename = @"C:\______test_files\__RW\_avi\i2c.avi";
 
@@ -456,7 +479,7 @@ namespace vcs_VideoFileWriter
 
             //try to read the stream
             try
-            { 
+            {
                 AudioStream waveStream = aviManager.GetWaveStream();
                 richTextBox1.Text += Environment.NewLine + "Audio stream found:";
                 richTextBox1.Text += Environment.NewLine + "Sample Rate: " + waveStream.CountSamplesPerSecond.ToString();
@@ -474,9 +497,6 @@ namespace vcs_VideoFileWriter
             {
                 richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
             }
-
-
-
         }
     }
 }
