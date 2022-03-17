@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ReadWrite_PDF3
+namespace vcs_WebCam_AForge2_Record
 {
     static class Program
     {

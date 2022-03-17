@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_ReadWrite_PDF3.Properties
+namespace vcs_WebCam_AForge2_Record.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace vcs_ReadWrite_PDF3.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_ReadWrite_PDF3.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_WebCam_AForge2_Record.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;    //for Path
 
+//參考/加入參考/PdfSharp.dll
 using PdfSharp;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
@@ -71,6 +72,39 @@ namespace vcs_ReadWrite_PDF5
                 richTextBox1.Text += "圖片 : " + filename1 + "\n";
                 richTextBox1.Text += "pdf :  " + filename2 + "\n";
                 richTextBox1.Text += "轉換完成\n";
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string filename1 = @"C:\______test_files\picture1.jpg";
+                string filename2 = Application.StartupPath + "\\pdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
+
+                PdfDocument doc = new PdfDocument();
+                doc.Pages.Add(new PdfPage());
+                XGraphics xgr = XGraphics.FromPdfPage(doc.Pages[0]);
+                XImage img = XImage.FromFile(filename1);
+
+                xgr.DrawImage(img, 0, 0);
+
+                try
+                {
+
+                    doc.Save(filename2);
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+                doc.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

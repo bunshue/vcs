@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E859D068-ED93-48F5-B8FD-79E4958BA81E}</ProjectGuid>
+    <ProjectGuid>{E893F7CF-3CAD-44E8-BE32-72937D894801}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ReadWrite_PDF3</RootNamespace>
-    <AssemblyName>vcs_ReadWrite_PDF3</AssemblyName>
+    <RootNamespace>vcs_WebCam_AForge2_Record</RootNamespace>
+    <AssemblyName>vcs_WebCam_AForge2_Record</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -34,8 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PdfSharp">
-      <HintPath>dll\PdfSharp.dll</HintPath>
+    <Reference Include="AForge.Video">
+      <HintPath>dll\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow">
+      <HintPath>dll\AForge.Video.DirectShow.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
