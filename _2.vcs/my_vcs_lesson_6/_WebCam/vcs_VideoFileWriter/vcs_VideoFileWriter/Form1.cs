@@ -33,6 +33,7 @@ namespace vcs_VideoFileWriter
         private const int BORDER = 10;
 
         private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
+        private bool flag_limit_recording_time = false;
         private string recording_filename = string.Empty;
         VideoFileWriter writer = new VideoFileWriter();
         DateTime recording_time_st = DateTime.Now;
@@ -100,6 +101,11 @@ namespace vcs_VideoFileWriter
                     Cam.WaitForStop();
                 }
             }
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         public Bitmap bm = null;
@@ -181,6 +187,8 @@ namespace vcs_VideoFileWriter
 
             richTextBox1.Size = new Size(300, 670);
             richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             lb_fps.Text = "";
             lb_fps.Location = new Point(750, 5);
@@ -626,8 +634,7 @@ namespace vcs_VideoFileWriter
             }
         }
 
-        //錄影 ST
-        private void bt_record_start_Click(object sender, EventArgs e)
+        void do_record()
         {
             if (flag_webcam_ok == false)    //如果webcam沒啟動
             {
@@ -659,6 +666,20 @@ namespace vcs_VideoFileWriter
             }
         }
 
+        //錄影 ST
+        private void bt_record_start_Click(object sender, EventArgs e)
+        {
+            flag_limit_recording_time = false;
+            do_record();
+        }
+
+        //錄影 ST, 有限時
+        private void bt_record_start2_Click(object sender, EventArgs e)
+        {
+            flag_limit_recording_time = true;
+            do_record();
+        }
+
         //錄影 SP
         private void bt_record_stop_Click(object sender, EventArgs e)
         {
@@ -670,8 +691,10 @@ namespace vcs_VideoFileWriter
                 writer.Close();
 
                 richTextBox1.Text += "錄影結束\t時間 : " + DateTime.Now.ToString() + "\n";
-                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n\n";
+                richTextBox1.Text += "錄影時間 :\t" + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
                 //richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n\n";
+                richTextBox1.Text += "檔案 :\t\t" + recording_filename + "\n\n";
+                flag_limit_recording_time = false;
             }
             else
             {
@@ -679,6 +702,7 @@ namespace vcs_VideoFileWriter
             }
         }
 
+        int min_old = 0;
         private void timer_fps_Tick(object sender, EventArgs e)
         {
             if (flag_webcam_ok == true)
@@ -690,9 +714,20 @@ namespace vcs_VideoFileWriter
 
                 if (flag_recording == true)
                 {
-                    if ((DateTime.Now - recording_time_st).TotalSeconds > 180)
+                    int min = (int)((DateTime.Now - recording_time_st).TotalMinutes);
+                    if ((min > 0) && (min != min_old))
                     {
-                        bt_record_stop_Click(sender, e);
+                        richTextBox1.Text += "已錄影 " + min.ToString() + " 分\n";
+                        min_old = min;
+                    }
+
+                    if (flag_limit_recording_time == true)
+                    {
+                        if ((DateTime.Now - recording_time_st).TotalSeconds > 180)
+                        {
+                            flag_limit_recording_time = false;
+                            bt_record_stop_Click(sender, e);
+                        }
                     }
                 }
             }
@@ -701,6 +736,7 @@ namespace vcs_VideoFileWriter
                 lb_fps.Text = "";
             }
         }
+
     }
 }
 

@@ -45,6 +45,8 @@
             this.timer_fps = new System.Windows.Forms.Timer(this.components);
             this.bt_record_start = new System.Windows.Forms.Button();
             this.bt_record_stop = new System.Windows.Forms.Button();
+            this.bt_record_start2 = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -190,7 +192,7 @@
             this.bt_record_start.Name = "bt_record_start";
             this.bt_record_start.Size = new System.Drawing.Size(140, 50);
             this.bt_record_start.TabIndex = 21;
-            this.bt_record_start.Text = "錄影 3分鐘 ST";
+            this.bt_record_start.Text = "錄影 ST";
             this.bt_record_start.UseVisualStyleBackColor = true;
             this.bt_record_start.Click += new System.EventHandler(this.bt_record_start_Click);
             // 
@@ -204,11 +206,33 @@
             this.bt_record_stop.UseVisualStyleBackColor = true;
             this.bt_record_stop.Click += new System.EventHandler(this.bt_record_stop_Click);
             // 
+            // bt_record_start2
+            // 
+            this.bt_record_start2.Location = new System.Drawing.Point(516, 552);
+            this.bt_record_start2.Name = "bt_record_start2";
+            this.bt_record_start2.Size = new System.Drawing.Size(140, 50);
+            this.bt_record_start2.TabIndex = 23;
+            this.bt_record_start2.Text = "錄影 3分鐘 ST";
+            this.bt_record_start2.UseVisualStyleBackColor = true;
+            this.bt_record_start2.Click += new System.EventHandler(this.bt_record_start2_Click);
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(977, 442);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(71, 30);
+            this.bt_clear.TabIndex = 24;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1179, 695);
+            this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.bt_record_start2);
             this.Controls.Add(this.bt_record_stop);
             this.Controls.Add(this.bt_record_start);
             this.Controls.Add(this.lb_fps);
@@ -252,6 +276,8 @@
         private System.Windows.Forms.Timer timer_fps;
         private System.Windows.Forms.Button bt_record_start;
         private System.Windows.Forms.Button bt_record_stop;
+        private System.Windows.Forms.Button bt_record_start2;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 
