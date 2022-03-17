@@ -1,4 +1,41 @@
 
+
+                float newSize = Convert.ToSingle(richTextBox1.Text.Trim());
+                FontFamily currentFontFamily;
+                Font newFont;
+                currentFontFamily = richTextBox1.SelectionFont.FontFamily;
+                newFont = new Font(currentFontFamily, newSize);
+                richTextBox1.SelectionFont = newFont;
+
+
+
+C#中改變顯示器的分辨率和刷新率
+http://www.aspphp.online/bianchen/cyuyan/gycyy/201701/82983.html
+
+Google 地图API Key
+https://www.runoob.com/googleapi/google-maps-api-key.html
+
+编程猎人
+https://www.programminghunter.com/article/24871085741/
+https://www.programminghunter.com/article/92861346439/
+
+ 台部落 
+C# 畫圖控件CHART 自定義座標軸刻度標籤
+https://www.twblogs.net/a/5b82e24d2b717766a1ea3990
+
+初行
+衣带渐宽终不悔，为伊消得人憔悴。
+https://www.cnblogs.com/zxlovenet/
+https://www.cnblogs.com/zxlovenet/tag/C%23/
+                
+        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.LinkText);
+        }
+
+
+
+
             Bitmap bitmap1 = new Bitmap(w, h);
             Graphics g = Graphics.FromImage(bitmap1);
 

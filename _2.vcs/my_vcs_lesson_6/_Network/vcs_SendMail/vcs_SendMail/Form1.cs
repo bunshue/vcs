@@ -440,7 +440,7 @@ namespace vcs_SendMail
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            //TBD
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -520,7 +520,19 @@ namespace vcs_SendMail
 
         private void button11_Click(object sender, EventArgs e)
         {
-
+            //使用 SendMail Class
+            try
+            {
+                SendMail mail = new SendMail();
+                mail.Host = smtp_server;//服務器smtp地址 
+                mail.SmtpUsername = email_addr_from;//登陸用戶名 
+                mail.SmtpPassWord = email_addr_from_password;//登錄密碼 
+                mail.Send(email_addr_from, email_addr_to, mail_subject, mail_body, null, null);//發件人地址,收件人地址,標題,內容,其他,其他 
+            }
+            catch (Exception ex)
+            {
+                //可以捕獲異常 
+            }
         }
 
         private void SendMailByGmail(List<string> MailList, string Subject, string Body)
@@ -995,7 +1007,144 @@ namespace vcs_SendMail
             }
         }
     }
+
+
+    public class SendMail
+    {
+        private string _host;
+        public string Host
+        {
+            get { return _host; }
+            set { _host = value; }
+        }
+        private int _port;
+        public int Port
+        {
+            get { return _port; }
+            set { _port = value; }
+        }
+        private string _smtpUsername;
+        public string SmtpUsername
+        {
+            get { return _smtpUsername; }
+            set { _smtpUsername = value; }
+        }
+        private string _smtpPassWord;
+        public string SmtpPassWord
+        {
+            get { return _smtpPassWord; }
+            set { _smtpPassWord = value; }
+        }
+        public void Send(string from, string to, string subject, string body, string[] cc, string[] bcc)
+        {
+            // Create mail message 
+            MailMessage message = new MailMessage(from, to, subject, body);
+            message.BodyEncoding = Encoding.GetEncoding(936);
+            if (cc != null && cc.Length > 0)
+            {
+                foreach (string ccAddress in cc)
+                    message.CC.Add(new MailAddress(ccAddress));
+            }
+            if (bcc != null && bcc.Length > 0)
+            {
+                foreach (string bccAddress in bcc)
+                {
+                    message.Bcc.Add(new MailAddress(bccAddress));
+                }
+            }
+            // Send email 
+            SmtpClient client = new SmtpClient(this._host, 25);
+            if (!String.IsNullOrEmpty(this._smtpUsername) && !String.IsNullOrEmpty(this._smtpPassWord))
+
+                client.Credentials = new NetworkCredential(this._smtpUsername, this._smtpPassWord);
+            client.EnableSsl = false;
+            client.Send(message);
+        }
+    }
+
+    public class SmtpMail2
+    {
+        private string toAddress = "";
+        private string mailUser = "";
+        private string userPassword = "";
+        private string displayName = "";
+        private string mailSubject = "";
+        private string sendMessage = "";
+        private int mailPort = 0;
+        private string mailHost = "";
+
+        public string Message
+        {
+            get
+            {
+                return sendMessage;
+            }
+        }
+
+        public SmtpMail2(string to_address, string display_name, string mail_subject, string mail_user, string user_password, int mail_port, string mail_host)
+        {
+            toAddress = to_address;
+            displayName = display_name;
+            mailSubject = mail_subject;
+            mailUser = mail_user;
+            userPassword = user_password;
+            mailPort = mail_port;
+            mailHost = mail_host;
+        }
+
+        public void SendMail(string strBody)
+        {
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.To.Add(toAddress);
+            msg.From = new MailAddress(mailUser, displayName, System.Text.Encoding.UTF8);
+            msg.Subject = mailSubject;
+            msg.SubjectEncoding = System.Text.Encoding.UTF8;
+            msg.Body = strBody;
+            msg.BodyEncoding = System.Text.Encoding.UTF8;
+            msg.IsBodyHtml = false;
+            msg.Priority = MailPriority.Normal;
+
+            SmtpClient client = new SmtpClient();
+            client.Credentials = new System.Net.NetworkCredential
+                (mailUser, userPassword);
+            client.Port = mailPort;
+            client.Host = mailHost;
+            client.EnableSsl = false;
+            client.SendCompleted += new SendCompletedEventHandler(client_SendCompleted);
+            object userState = msg;
+            try
+            {
+                client.SendAsync(msg, userState);
+            }
+            catch (System.Net.Mail.SmtpException ex)
+            {
+                sendMessage = ex.ToString();
+            }
+        }
+
+        void client_SendCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            MailMessage mail = (MailMessage)e.UserState;
+            string subject = mail.Subject;
+
+            if (e.Cancelled)
+            {
+                string cancelled = string.Format("[{0}] Send canceled.", subject);
+                sendMessage = cancelled;
+            }
+            if (e.Error != null)
+            {
+                string error = String.Format("[{0}] {1}", subject, e.Error.ToString());
+                sendMessage = error;
+            }
+            else
+            {
+                sendMessage = "Message has been sent successfully!";
+            }
+        }
+    }
 }
+
 
 
 /*

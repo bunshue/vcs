@@ -46,6 +46,7 @@
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_clear_attachments = new System.Windows.Forms.Button();
             this.bt_browse_attachments = new System.Windows.Forms.Button();
             this.bt_send = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -70,7 +71,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tb_email_addr_from = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.bt_clear_attachments = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -152,6 +152,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(160, 48);
             this.button6.TabIndex = 7;
+            this.button6.Text = "使用SmtpMail2類別寄信";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -228,6 +229,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 48);
             this.button11.TabIndex = 20;
+            this.button11.Text = "使用SendMail類別寄信4";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -287,6 +289,17 @@
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "e-mail";
+            // 
+            // bt_clear_attachments
+            // 
+            this.bt_clear_attachments.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear_attachments.Location = new System.Drawing.Point(509, 182);
+            this.bt_clear_attachments.Name = "bt_clear_attachments";
+            this.bt_clear_attachments.Size = new System.Drawing.Size(68, 40);
+            this.bt_clear_attachments.TabIndex = 26;
+            this.bt_clear_attachments.Text = "清除";
+            this.bt_clear_attachments.UseVisualStyleBackColor = true;
+            this.bt_clear_attachments.Click += new System.EventHandler(this.bt_clear_attachments_Click);
             // 
             // bt_browse_attachments
             // 
@@ -509,17 +522,6 @@
             this.label1.Size = new System.Drawing.Size(56, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "寄件者";
-            // 
-            // bt_clear_attachments
-            // 
-            this.bt_clear_attachments.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear_attachments.Location = new System.Drawing.Point(509, 182);
-            this.bt_clear_attachments.Name = "bt_clear_attachments";
-            this.bt_clear_attachments.Size = new System.Drawing.Size(68, 40);
-            this.bt_clear_attachments.TabIndex = 26;
-            this.bt_clear_attachments.Text = "清除";
-            this.bt_clear_attachments.UseVisualStyleBackColor = true;
-            this.bt_clear_attachments.Click += new System.EventHandler(this.bt_clear_attachments_Click);
             // 
             // openFileDialog1
             // 
