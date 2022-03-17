@@ -198,44 +198,6 @@ namespace vcs_Mix03_draw_image
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //繪制正弦曲線
-            Bitmap bitmap1 = new Bitmap(360, 120);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            Rectangle r1 = new Rectangle(0, 0, 360, 20);
-            Rectangle r2 = new Rectangle(0, 20, 360, 40);
-            Rectangle r3 = new Rectangle(0, 60, 360, 40);
-            Rectangle r4 = new Rectangle(0, 100, 360, 20);
-
-            Brush brush1 = new SolidBrush(Color.OrangeRed);
-            Brush brush2 = new SolidBrush(Color.SkyBlue);
-            Brush brush3 = new SolidBrush(Color.Pink);
-            Brush brush4 = new SolidBrush(Color.YellowGreen);
-
-            g.FillRectangle(brush1, r1);
-            g.FillRectangle(brush2, r2);
-            g.FillRectangle(brush2, r3);
-            g.FillRectangle(brush1, r4);
-
-            g.DrawString("0", new Font("宋體", 8), brush1, new PointF(3, 65));
-            g.DrawString("90", new Font("宋體", 8), brush1, new PointF(85, 65));
-            g.DrawString("180", new Font("宋體", 8), brush1, new PointF(170, 65));
-            g.DrawString("360", new Font("宋體", 8), brush1, new PointF(336, 65));
-
-            Point myPoint = new Point(0, 60);
-            float sinValue = 0.0F;
-
-            for (int i = 0; i < 360; i++)
-            {
-                sinValue = Convert.ToSingle(Math.Sin(Convert.ToSingle((i * Math.PI) / 180))) * 40;
-                //事實上，這裡根本無需注意 sinValue 的正負
-                //當其為負時，  60-sinValue 則會變大
-                Point thisPoint = new Point(i, Convert.ToInt32(60 - sinValue));
-                g.DrawLine(new Pen(brush3), thisPoint, myPoint);
-                myPoint = thisPoint;
-            }
-            pictureBox1.Image = bitmap1;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -462,14 +424,13 @@ namespace vcs_Mix03_draw_image
 
         private void pictureBox_time_Paint(object sender, PaintEventArgs e)
         {
-            Font f = new Font("arial", 30f);
-
+            Font f = new Font("arial", 26f);
 
             DateTime current_time = DateTime.Now;
 
             TimeSpan use_time = current_time - start_time;
 
-            string text = DateTime.Now + "    " + use_time.ToString(@"hh\:mm\:ss");
+            string text = "空心字體 " + DateTime.Now + "    " + use_time.ToString(@"hh\:mm\:ss");
 
             for (var i = -1; i <= 1; ++i)
             {

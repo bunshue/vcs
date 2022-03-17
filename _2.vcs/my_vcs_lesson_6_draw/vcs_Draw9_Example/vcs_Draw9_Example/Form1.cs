@@ -7611,10 +7611,10 @@ namespace vcs_Draw9_Example
         private void button55_Click(object sender, EventArgs e)
         {
             //繪制正弦曲線
-            Bitmap sinImage = new Bitmap(360, 120);
-            Graphics myGraphics = Graphics.FromImage(sinImage);
-            myGraphics.Clear(Color.White);
-            myGraphics.SmoothingMode = SmoothingMode.AntiAlias;
+            Bitmap bitmap1 = new Bitmap(360, 120);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             Rectangle r1 = new Rectangle(0, 0, 360, 20);
             Rectangle r2 = new Rectangle(0, 20, 360, 40);
             Rectangle r3 = new Rectangle(0, 60, 360, 40);
@@ -7625,15 +7625,15 @@ namespace vcs_Draw9_Example
             Brush brush3 = new SolidBrush(Color.Pink);
             Brush brush4 = new SolidBrush(Color.YellowGreen);
 
-            myGraphics.FillRectangle(brush1, r1);
-            myGraphics.FillRectangle(brush2, r2);
-            myGraphics.FillRectangle(brush2, r3);
-            myGraphics.FillRectangle(brush1, r4);
+            g.FillRectangle(brush1, r1);
+            g.FillRectangle(brush2, r2);
+            g.FillRectangle(brush2, r3);
+            g.FillRectangle(brush1, r4);
 
-            myGraphics.DrawString("0", new Font("宋體", 8), brush1, new PointF(3, 65));
-            myGraphics.DrawString("90", new Font("宋體", 8), brush1, new PointF(85, 65));
-            myGraphics.DrawString("180", new Font("宋體", 8), brush1, new PointF(170, 65));
-            myGraphics.DrawString("360", new Font("宋體", 8), brush1, new PointF(336, 65));
+            g.DrawString("0", new Font("宋體", 8), brush1, new PointF(3, 65));
+            g.DrawString("90", new Font("宋體", 8), brush1, new PointF(85, 65));
+            g.DrawString("180", new Font("宋體", 8), brush1, new PointF(170, 65));
+            g.DrawString("360", new Font("宋體", 8), brush1, new PointF(336, 65));
 
             Point myPoint = new Point(0, 60);
 
@@ -7645,11 +7645,10 @@ namespace vcs_Draw9_Example
                 //事實上，這裡根本無需注意 sinValue 的正負
                 //當其為負時，  60-sinValue 則會變大
                 Point thisPoint = new Point(i, Convert.ToInt32(60 - sinValue));
-                myGraphics.DrawLine(new Pen(brush3), thisPoint, myPoint);
+                g.DrawLine(new Pen(brush3), thisPoint, myPoint);
                 myPoint = thisPoint;
             }
-            pictureBox1.Image = sinImage;
-
+            pictureBox1.Image = bitmap1;
         }
 
         private void button56_Click(object sender, EventArgs e)

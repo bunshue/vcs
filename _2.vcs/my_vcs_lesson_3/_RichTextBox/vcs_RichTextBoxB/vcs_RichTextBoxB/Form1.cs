@@ -23,6 +23,11 @@ namespace vcs_RichTextBoxB
 
         }
 
+        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.LinkText);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //開啟RTF檔案
@@ -132,6 +137,32 @@ namespace vcs_RichTextBoxB
             richTextBox1.SelectionFont = newFont;
             this.richTextBox1.Focus();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.SelectionLength <= 0)
+            {
+                return;
+            }
+
+            Font oldFont;
+            Font newFont;
+            oldFont = richTextBox1.SelectionFont;
+
+            float font_size = richTextBox1.SelectionFont.Size;
+            font_size++;
+            newFont = new Font(oldFont.Name, font_size);
+            richTextBox1.SelectionFont = newFont;
+            this.richTextBox1.Focus();
+            
+            /*
+            FontFamily currentFontFamily = richTextBox1.SelectionFont.FontFamily;
+            Font newFont = new Font(currentFontFamily, font_size);
+            richTextBox1.SelectionFont = newFont;
+            this.richTextBox1.Focus();
+            */
+        }
+
     }
 }
 

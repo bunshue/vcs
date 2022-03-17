@@ -36,6 +36,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -105,12 +106,24 @@
             this.richTextBox1.Size = new System.Drawing.Size(862, 535);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(720, 12);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(56, 48);
+            this.button7.TabIndex = 7;
+            this.button7.Text = "+";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 625);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -134,6 +147,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button7;
     }
 }
 
