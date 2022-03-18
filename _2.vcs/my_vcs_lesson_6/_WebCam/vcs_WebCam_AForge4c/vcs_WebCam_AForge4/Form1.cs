@@ -18,6 +18,9 @@ namespace vcs_WebCam_AForge4
 {
     public partial class Form1 : Form
     {
+        private string recording_filename = string.Empty;
+        DateTime recording_time_st = DateTime.Now;
+
         CameraMonitor CamMonitor;
 
         private FilterInfoCollection USBWebcams = null;
@@ -32,18 +35,6 @@ namespace vcs_WebCam_AForge4
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            //檢查錄影存檔的資料夾
-            string Path = @"C:\dddddddddd";
-            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
-            {
-                Directory.CreateDirectory(Path);
-                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
-            }
-            else
-            {
-                //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
-            }
 
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
 
@@ -115,8 +106,15 @@ namespace vcs_WebCam_AForge4
         //錄影 ST, 僅x86可用
         private void button1_Click(object sender, EventArgs e)
         {
+            recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+
+            this.CamMonitor.RecordingFilename = recording_filename;
             this.CamMonitor.StartRecording();
             this.CamMonitor.forceRecord = true;
+
+            recording_time_st = DateTime.Now;
+            richTextBox1.Text += "錄影開始\t時間 : " + DateTime.Now.ToString() + "\n";
+            richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
         }
 
         //錄影 SP, 僅x86可用
@@ -124,6 +122,11 @@ namespace vcs_WebCam_AForge4
         {
             this.CamMonitor.StopRecording();
             this.CamMonitor.forceRecord = false;
+
+            richTextBox1.Text += "錄影結束\t時間 : " + DateTime.Now.ToString() + "\n";
+            richTextBox1.Text += "錄影時間 :\t" + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
+            //richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n\n";
+            richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
         }
     }
 
@@ -162,29 +165,28 @@ namespace vcs_WebCam_AForge4
         {
             using (Font f = new Font("Arial", 14, FontStyle.Bold))
             {
-                string str = string.Empty;
-                SolidBrush sb;
-
-                str = DateTime.Now.ToString();
-                sb = new SolidBrush(Color.Green);
+                string str = DateTime.Now.ToString();
+                SolidBrush sb = new SolidBrush(Color.Green);
 
                 e.Graphics.DrawString(str, f, sb, new Point(10, 10));
 
-                if (this.IsRecording == true)
+                if (flag_recording == true)
                 {
-                    if (this.showRecordMarkerCount > 10)
-                    {
-                        e.Graphics.DrawString("錄影中", f, Brushes.Red, new Point(2, 14));
-
-                        if (this.showRecordMarkerCount == 20)
-                        {
-                            this.showRecordMarkerCount = 0;
-                        }
-                    }
-                    this.showRecordMarkerCount++;
+                    e.Graphics.DrawString("錄影中", f, Brushes.Red, new Point(240, 10));
                 }
             }
         }
+
+        private const int BORDER = 10;
+        public Bitmap bm = null;
+        //int frame_cnt = 0;          //每多少張做一個計算
+        int frame_count = 0;        //計算fps用
+        int frame_count_old = 0;    //計算fps用
+        DateTime dt_old = DateTime.Now;
+
+        Graphics g;
+        //SolidBrush drawBrush;
+        //Font drawFont1;
 
         //自定義函數, 捕獲每一幀圖像並顯示
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -202,16 +204,8 @@ namespace vcs_WebCam_AForge4
 
                 this.display.Image = (Bitmap)bitmap1.Clone(); // displays the current frame on the main form
 
-                if (IsRecording)
+                if (flag_recording == true)
                 {
-                    // if recording is enabled we enqueue the current frame to be encoded to a video file
-                    Graphics g = Graphics.FromImage(bitmap1);
-                    Pen p = new Pen(Color.Red);
-                    p.Width = 5.0f;
-                    using (Font f = new Font("Tahoma", 10, FontStyle.Bold))
-                    {
-                        g.DrawString(DateTime.Now.ToString(), f, Brushes.Red, new Point(2, 2));
-                    }
                     frames.Enqueue((Bitmap)bitmap1.Clone());
                 }
             }
@@ -228,7 +222,9 @@ namespace vcs_WebCam_AForge4
         int Width = 0;
         int Height = 0;
 
-        public bool IsRecording = false; // recording flag
+        private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
+
+        public string RecordingFilename = "aaaaa.avi";
 
         Queue<Bitmap> frames = new Queue<Bitmap>(); // Queue that stores frames to be written by the recorder thread
 
@@ -238,11 +234,12 @@ namespace vcs_WebCam_AForge4
             VideoFileWriter writer = new VideoFileWriter();
 
             //ex : 第 1 台攝影機_2021-09-22_09-23-29.avi
-            writer.Open("C:\\dddddddddd\\" + this.cameraName + String.Format("{0:_yyyy-MM-dd_hh-mm-ss}", DateTime.Now) + ".avi", this.Width, this.Height, 15);
+            //writer.Open("C:\\dddddddddd\\" + this.cameraName + String.Format("{0:_yyyy-MM-dd_hh-mm-ss}", DateTime.Now) + ".avi", this.Width, this.Height, 15);
+            writer.Open(RecordingFilename, this.Width, this.Height, 15);
 
             // as long as we're recording
             // we dequeue the BitMaps waiting in the Queue and write them to the file
-            while (IsRecording == true)
+            while (flag_recording == true)
             {
                 if (frames.Count > 0)
                 {
@@ -253,13 +250,12 @@ namespace vcs_WebCam_AForge4
             writer.Close();
         }
 
-        int showRecordMarkerCount = 0; // used to display message on the main form
         public void StartRecording()
         {
-            if (IsRecording == false)
+            if (flag_recording == false)
             {
                 // if were not already recording we start the recording thread
-                this.IsRecording = true;
+                flag_recording = true;
                 Thread th = new Thread(DoRecord);
                 th.Start();
             }
@@ -268,7 +264,7 @@ namespace vcs_WebCam_AForge4
         // stops recording
         public void StopRecording()
         {
-            this.IsRecording = false;
+            flag_recording = false;
         }
     }
 }
