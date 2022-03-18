@@ -9,12 +9,12 @@ using System.Windows.Forms;
 
 using System.Collections;   //for ArrayList
 
-using System.Drawing.Drawing2D; //for CompositingQuality, SmoothingMode
+using System.Drawing.Drawing2D; //for CompositingQuality, SmoothingMode //提供畫高級二維，矢量圖形功能
+using System.Drawing.Imaging;   //for ImageFormat   //提供畫GDI+圖形的高級功能
 
-using System.Drawing.Imaging;   //for ImageFormat
 using System.Runtime.InteropServices;   //for Marshal
 
-using System.Drawing.Text;      //for TextRenderingHint
+using System.Drawing.Text;      //for TextRenderingHint //提供畫GDI+圖形的高級功能
 
 using System.Diagnostics;       //for Debug
 
@@ -148,6 +148,18 @@ namespace vcs_Draw9_Example
             button57.Location = new Point(x_st + dx * 2, y_st + dy * 11);
             button58.Location = new Point(x_st + dx * 3, y_st + dy * 11);
             button59.Location = new Point(x_st + dx * 4, y_st + dy * 11);
+
+            button60.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            button61.Location = new Point(x_st + dx * 1, y_st + dy * 12);
+            button62.Location = new Point(x_st + dx * 2, y_st + dy * 12);
+            button63.Location = new Point(x_st + dx * 3, y_st + dy * 12);
+            button64.Location = new Point(x_st + dx * 4, y_st + dy * 12);
+
+            button65.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            button66.Location = new Point(x_st + dx * 1, y_st + dy * 13);
+            button67.Location = new Point(x_st + dx * 2, y_st + dy * 13);
+            button68.Location = new Point(x_st + dx * 3, y_st + dy * 13);
+            button69.Location = new Point(x_st + dx * 4, y_st + dy * 13);
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
 
@@ -8054,6 +8066,163 @@ namespace vcs_Draw9_Example
                 myp.Y = pZero.Y + Math.Abs(p.Y / by);
             return myp;
         }
+
+        private void button60_Click(object sender, EventArgs e)
+        {
+            // 在此處放置用戶代碼以初始化頁面
+            System.Drawing.Graphics objGraphics;//建立畫板對象
+            Bitmap objBitMap = new Bitmap(600, 300);//建立位圖對象
+            objGraphics = Graphics.FromImage(objBitMap);//根據位圖對象建立畫板對象
+            objGraphics.Clear(Color.Gray);//設置畫板對象的背景色
+            int[] arrValues = { 0, 0, 0, 0, 0, 0 };//數據數組
+            arrValues[0] = 100;
+            arrValues[1] = 60;
+            arrValues[2] = 50;
+            arrValues[3] = 40;
+            arrValues[4] = 50;
+            arrValues[5] = 220;
+            string[] arrValueNames = { "0", "0", "0", "0", "0", "0" };//月份
+            arrValueNames[0] = "一月";
+            arrValueNames[1] = "二月";
+            arrValueNames[2] = "三月";
+            arrValueNames[3] = "四月";
+            arrValueNames[4] = "五月";
+            arrValueNames[5] = "六月";
+
+            objGraphics.DrawString("上半年銷售情況統計", new Font("宋體", 16), Brushes.Black, new PointF(0, 0));
+
+            //創建圖例文字
+            PointF symbolLeg = new PointF(335, 20);
+            PointF descLeg = new PointF(360, 18);
+
+            //畫出圖例。利用objGraphics圖形對象的3個方法畫出圖例：
+            //FillRectangle()方法畫出填充矩形，DrawRectangle()方法畫出矩形的邊框
+            //DrawString()方法畫出說明文字。這3個圖像對象的方法在.NET框架類庫中均已重載
+            //可以很方便根據不同的參數來畫出圖形
+            //畫出各個月的標示圖形
+            for (int i = 0; i < arrValueNames.Length; i++)
+            {
+                objGraphics.FillRectangle(new SolidBrush(GetColor(i)), symbolLeg.X, symbolLeg.Y, 20, 10);
+
+                objGraphics.DrawRectangle(Pens.Black, symbolLeg.X, symbolLeg.Y, 20, 10);
+
+                objGraphics.DrawString(arrValueNames[i].ToString(), new Font("宋體", 10), Brushes.Black, descLeg);
+
+                symbolLeg.Y += 15;
+                descLeg.Y += 15;
+            }
+            //畫矩形圖
+            for (int j = 0; j < arrValues.Length; j++)
+            {
+                objGraphics.FillRectangle(new SolidBrush(GetColor(j)), (j * 35) + 15, 200 - arrValues[j], 20, arrValues[j]);
+                objGraphics.DrawRectangle(Pens.Black, (j * 35) + 15, 200 - arrValues[j], 20, arrValues[j]);
+            }
+
+            float sglCurrentAngle;
+            float sglTotalAngle = 0;
+
+            for (int a = 0; a < arrValues.Length - 1; a++)
+            {
+                //取得數據總量
+                sglTotalAngle += arrValues[a];
+            }
+
+            for (int b = 0; b < arrValues.Length; b++)
+            {
+                //求出該數據所占總數據的百分比
+                sglCurrentAngle = arrValues[b] / sglTotalAngle * 360;
+                //畫出橢圓
+                objGraphics.FillPie(new SolidBrush(GetColor(b)), 220, 95, 100, 100, sglTotalAngle, sglCurrentAngle);
+                sglTotalAngle += sglCurrentAngle;
+            }
+            //該位圖對象以“GIF”格式輸出
+            //objBitMap.Save(Response.OutputStream, ImageFormat.Gif);
+            pictureBox1.Image = objBitMap;
+        }
+
+        private Color GetColor(int itemIndex)
+        {
+            Color objColor = new Color();
+            switch (itemIndex)
+            {
+                case 0:
+                    objColor = Color.Blue;
+                    break;
+                case 1:
+                    objColor = Color.Yellow;
+                    break;
+                case 2:
+                    objColor = Color.Red;
+                    break;
+                case 3:
+                    objColor = Color.Orange;
+                    break;
+                case 4:
+                    objColor = Color.Purple;
+                    break;
+                case 5:
+                    objColor = Color.Brown;
+                    break;
+                case 6:
+                default:
+                    objColor = Color.Blue;
+                    break;
+
+            }
+            return objColor;
+        }
+
+        private void button61_Click(object sender, EventArgs e)
+        {
+            PieChart pc = new PieChart();
+
+            //pc.Render(title, subTitle, width, height, ds, Response.OutputStream);
+
+
+            BarChart bc = new BarChart();
+            //bc.Render(title, subTitle, width, height, ds, Response.OutputStream);
+
+        }
+
+        private void button62_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button63_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button64_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button65_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button66_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button67_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button69_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     /// <summary>
@@ -8173,5 +8342,220 @@ namespace vcs_Draw9_Example
             return dubReturn;
         }
     }
+
+
+
+    public class PieChart
+    {
+        public PieChart()
+        {
+        }
+        public void Render(string title, string subTitle, int width, int height, DataSet chartData, string target)
+        {
+            const int SIDE_LENGTH = 400;
+            const int PIE_DIAMETER = 200;
+            DataTable dt = chartData.Tables[0];
+
+            //通過輸入參數，取得餅圖中的總基數
+            float sumData = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                sumData += Convert.ToSingle(dr[1]);
+            }
+            //產生一個image對象，並由此產生一個Graphics對象
+            Bitmap bm = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(bm);
+            //設置對象g的屬性
+            g.ScaleTransform((Convert.ToSingle(width)) / SIDE_LENGTH, (Convert.ToSingle(height)) / SIDE_LENGTH);
+            g.SmoothingMode = SmoothingMode.Default;
+            g.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+            //畫布和邊的設定
+            g.Clear(Color.White);
+            g.DrawRectangle(Pens.Black, 0, 0, SIDE_LENGTH - 1, SIDE_LENGTH - 1);
+            //畫餅圖標題
+            g.DrawString(title, new Font("Tahoma", 24), Brushes.Black, new PointF(5, 5));
+            //畫餅圖的圖例
+            g.DrawString(subTitle, new Font("Tahoma", 14), Brushes.Black, new PointF(7, 35));
+            //畫餅圖
+            float curAngle = 0;
+            float totalAngle = 0;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                curAngle = Convert.ToSingle(dt.Rows[i][1]) / sumData * 360;
+
+                g.FillPie(new SolidBrush(ChartUtil.GetChartItemColor(i)), 100, 65, PIE_DIAMETER, PIE_DIAMETER, totalAngle, curAngle);
+                g.DrawPie(Pens.Black, 100, 65, PIE_DIAMETER, PIE_DIAMETER, totalAngle, curAngle);
+                totalAngle += curAngle;
+            }
+            //畫圖例框及其文字
+            g.DrawRectangle(Pens.Black, 200, 300, 199, 99);
+            g.DrawString("Legend", new Font("Tahoma", 12, FontStyle.Bold), Brushes.Black, new PointF(200, 300));
+
+            //畫圖例各項
+            PointF boxOrigin = new PointF(210, 330);
+            PointF textOrigin = new PointF(235, 326);
+            float percent = 0;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                g.FillRectangle(new SolidBrush(ChartUtil.GetChartItemColor(i)), boxOrigin.X, boxOrigin.Y, 20, 10);
+                g.DrawRectangle(Pens.Black, boxOrigin.X, boxOrigin.Y, 20, 10);
+                percent = Convert.ToSingle(dt.Rows[i][1]) / sumData * 100;
+                g.DrawString(dt.Rows[i][0].ToString() + " - " + dt.Rows[i][1].ToString() + " (" + percent.ToString("0") + "%)", new Font("Tahoma", 10), Brushes.Black, textOrigin);
+                boxOrigin.Y += 15;
+                textOrigin.Y += 15;
+            }
+            //通過Response.OutputStream，將圖形的內容發送到瀏覽器
+            bm.Save(target, ImageFormat.Gif);
+            //回收資源
+            bm.Dispose();
+            g.Dispose();
+        }
+    }
+
+    //畫條形圖
+    public class BarChart
+    {
+        public BarChart()
+        {
+        }
+
+        /// <summary>
+        /// 画条形图方法
+        /// </summary>
+        /// <param name="title">大标题</param>
+        /// <param name="subTitle">小标题</param>
+        /// <param name="width">宽度</param>
+        /// <param name="height">高度</param>
+        /// <param name="chartData">DataSet数据源</param>
+        /// <param name="target">系统二进制</param>
+        public void Render(string title, string subTitle, int width, int height, DataSet chartData, string target)
+        {
+            const int SIDE_LENGTH = 400;
+            const int CHART_TOP = 75;
+            const int CHART_HEIGHT = 200;
+            const int CHART_LEFT = 50;
+            const int CHART_WIDTH = 300;
+            DataTable dt = chartData.Tables[0];
+
+            //計算最高的點
+            float highPoint = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (highPoint < Convert.ToSingle(dr[1]))
+                {
+                    highPoint = Convert.ToSingle(dr[1]);
+                }
+            }
+            //建立一個Graphics對象實例
+            Bitmap bm = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(bm);
+            //設置條圖圖形和文字屬性
+            g.ScaleTransform((Convert.ToSingle(width)) / SIDE_LENGTH, (Convert.ToSingle(height)) / SIDE_LENGTH);
+            g.SmoothingMode = SmoothingMode.Default;
+            g.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+            //設定畫布和邊
+            g.Clear(Color.White);
+            g.DrawRectangle(Pens.Black, 0, 0, SIDE_LENGTH - 1, SIDE_LENGTH - 1);
+            //畫大標題
+            g.DrawString(title, new Font("Tahoma", 24), Brushes.Black, new PointF(5, 5));
+            //畫小標題
+            g.DrawString(subTitle, new Font("Tahoma", 14), Brushes.Black, new PointF(7, 35));
+            //畫條形圖
+            float barWidth = CHART_WIDTH / (dt.Rows.Count * 2);
+            PointF barOrigin = new PointF(CHART_LEFT + (barWidth / 2), 0);
+            float barHeight = dt.Rows.Count;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                barHeight = Convert.ToSingle(dt.Rows[i][1]) * 200 / highPoint;
+                barOrigin.Y = CHART_TOP + CHART_HEIGHT - barHeight;
+                g.FillRectangle(new SolidBrush(ChartUtil.GetChartItemColor(i)), barOrigin.X, barOrigin.Y, barWidth, barHeight);
+                barOrigin.X = barOrigin.X + (barWidth * 2);
+            }
+            //設置邊
+            g.DrawLine(new Pen(Color.Black, 2), new Point(CHART_LEFT, CHART_TOP), new Point(CHART_LEFT, CHART_TOP + CHART_HEIGHT));
+            g.DrawLine(new Pen(Color.Black, 2), new Point(CHART_LEFT, CHART_TOP + CHART_HEIGHT), new Point(CHART_LEFT + CHART_WIDTH, CHART_TOP + CHART_HEIGHT));
+            //畫圖例框和文字
+            g.DrawRectangle(new Pen(Color.Black, 1), 200, 300, 199, 99);
+            g.DrawString("Legend", new Font("Tahoma", 12, FontStyle.Bold), Brushes.Black, new PointF(200, 300));
+
+            //畫圖例
+            PointF boxOrigin = new PointF(210, 330);
+            PointF textOrigin = new PointF(235, 326);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                g.FillRectangle(new SolidBrush(ChartUtil.GetChartItemColor(i)), boxOrigin.X, boxOrigin.Y, 20, 10);
+                g.DrawRectangle(Pens.Black, boxOrigin.X, boxOrigin.Y, 20, 10);
+                g.DrawString(dt.Rows[i][0].ToString() + " - " + dt.Rows[i][1].ToString(), new Font("Tahoma", 10), Brushes.Black, textOrigin);
+                boxOrigin.Y += 15;
+                textOrigin.Y += 15;
+            }
+            //輸出圖形
+            bm.Save(target, ImageFormat.Gif);
+
+            //資源回收
+            bm.Dispose();
+            g.Dispose();
+        }
+    }
+    public class ChartUtil
+    {
+        public ChartUtil()
+        {
+        }
+        public static Color GetChartItemColor(int itemIndex)
+        {
+            Color selectedColor;
+            switch (itemIndex)
+            {
+                case 0:
+                    selectedColor = Color.Blue;
+                    break;
+                case 1:
+                    selectedColor = Color.Red;
+                    break;
+                case 2:
+                    selectedColor = Color.Yellow;
+                    break;
+                case 3:
+                    selectedColor = Color.Purple;
+                    break;
+                case 4:
+                    selectedColor = Color.Green;
+                    break;
+                case 5:
+                    selectedColor = Color.CadetBlue;
+                    break;
+                case 6:
+                    selectedColor = Color.Black;
+                    break;
+                case 7:
+                    selectedColor = Color.BlanchedAlmond;
+                    break;
+                case 8:
+                    selectedColor = Color.BlueViolet;
+                    break;
+                case 9:
+                    selectedColor = Color.Brown;
+                    break;
+                case 10:
+                    selectedColor = Color.BurlyWood;
+                    break;
+                case 11:
+                    selectedColor = Color.Coral;
+                    break;
+                case 12:
+                    selectedColor = Color.Chartreuse;
+                    break;
+                default:
+                    selectedColor = Color.Green;
+                    break;
+            }
+            return selectedColor;
+        }
+    }
 }
+
+
 

@@ -20,6 +20,7 @@ namespace vcs_WebCam_AForge4
     {
         private string recording_filename = string.Empty;
         DateTime recording_time_st = DateTime.Now;
+        private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
 
         CameraMonitor CamMonitor;
 
@@ -106,30 +107,61 @@ namespace vcs_WebCam_AForge4
         //錄影 ST, 僅x86可用
         private void button1_Click(object sender, EventArgs e)
         {
-            recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+            /*
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            {
+                richTextBox1.Text += "無相機\n";
+                return;
+            }
+            */
 
-            this.CamMonitor.RecordingFilename = recording_filename;
-            this.CamMonitor.StartRecording();
-            this.CamMonitor.forceRecord = true;
+            if (flag_recording == false)
+            {
+                //開啟錄影模式
+                flag_recording = true;
 
-            recording_time_st = DateTime.Now;
-            richTextBox1.Text += "錄影開始\t時間 : " + DateTime.Now.ToString() + "\n";
-            richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
+                recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+
+                richTextBox1.Text += "filename : " + recording_filename + "\n";
+                //richTextBox1.Text += "Width : " + webcam_w.ToString() + "\n";
+                //richTextBox1.Text += "Height : " + webcam_h.ToString() + "\n";
+
+                this.CamMonitor.RecordingFilename = recording_filename;
+                this.CamMonitor.StartRecording();
+                this.CamMonitor.forceRecord = true;
+
+                richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
+                richTextBox1.Text += "錄影開始\t時間 : " + DateTime.Now.ToString() + "\n";
+                recording_time_st = DateTime.Now;
+            }
+            else
+            {
+                richTextBox1.Text += "已在錄影\n";
+            }
         }
 
         //錄影 SP, 僅x86可用
         private void button2_Click(object sender, EventArgs e)
         {
-            this.CamMonitor.StopRecording();
-            this.CamMonitor.forceRecord = false;
+            if (flag_recording == true)
+            {
+                //錄影完需將影像停止不然會出錯
+                flag_recording = false;
 
-            richTextBox1.Text += "錄影結束\t時間 : " + DateTime.Now.ToString() + "\n";
-            richTextBox1.Text += "錄影時間 :\t" + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
-            //richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n\n";
-            richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
+                this.CamMonitor.StopRecording();
+                this.CamMonitor.forceRecord = false;
+
+                richTextBox1.Text += "錄影結束\t時間 : " + DateTime.Now.ToString() + "\n";
+                richTextBox1.Text += "錄影時間 :\t" + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
+                //richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n\n";
+                richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
+            }
+            else
+            {
+                richTextBox1.Text += "並沒有在錄影\n";
+            }
         }
     }
-
 
     class CameraMonitor
     {

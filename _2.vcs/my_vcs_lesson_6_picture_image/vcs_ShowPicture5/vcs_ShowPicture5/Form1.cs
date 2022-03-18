@@ -10,20 +10,19 @@ using System.Windows.Forms;
 /*
 全屏隨機位置顯示圖片
 
-
 Form1的屬性
 
-StartPosition改CenterScreen
-WindowState改Maximized
+StartPosition 改 CenterScreen
+WindowState 改 Maximized
 
-ConrolBox改False
-MaximizeBox改False
-MinimizeBox改False
-ShowIcon改False
-ShowInTaskbar改False
-TopMost改True
+ConrolBox 改 False
+MaximizeBox 改 False
+MinimizeBox 改 False
+ShowIcon 改 False
+ShowInTaskbar 改 False
+TopMost 改 True
 
-KeyPreview改True
+KeyPreview 改 True
 */
 
 namespace vcs_ShowPicture5
