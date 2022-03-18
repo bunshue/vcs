@@ -243,8 +243,14 @@ namespace vcs_WebCam_AForge4
             {
                 if (frames.Count > 0)
                 {
-                    Bitmap bitmap1 = frames.Dequeue();
-                    writer.WriteVideoFrame(bitmap1);
+                    try
+                    {
+                        Bitmap bitmap1 = frames.Dequeue();
+                        writer.WriteVideoFrame(bitmap1);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
                 }
             }
             writer.Close();
