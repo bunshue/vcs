@@ -972,6 +972,16 @@ namespace vcs_test_all_03_Syntax
         //結構與結構陣列的用法 SP
 
         enum Products { HardDrive = 0, PenDrive = 4, Keyboard = 8 };
+
+        enum ANIMAL
+        {
+            mouse = 1,
+            cow = 2,
+            tiger = 3,
+            rabbit = 4,
+            dragon = 5
+        }
+
         private void button29_Click(object sender, EventArgs e)
         {
             //ENUM的用法
@@ -997,6 +1007,16 @@ namespace vcs_test_all_03_Syntax
             else
             {
                 richTextBox1.Text += prod3 + " 比 " + prod2 + " 等同\n";
+            }
+
+
+            richTextBox1.Text += "打印ENUM的內容\n";
+            string s;
+            byte c;
+            for (c = 0; c <= 8; c++)
+            {
+                ANIMAL a = (ANIMAL)c;
+                richTextBox1.Text += a.ToString() + "\n";
             }
         }
 

@@ -283,7 +283,7 @@ namespace vcs_WebCam_AForge4
         }
 
         private const int BORDER = 10;
-        public Bitmap bm = null;
+        public Bitmap bitmap1 = null;
         //int frame_cnt = 0;          //每多少張做一個計算
         int frame_count = 0;        //計算fps用
         int frame_count_old = 0;    //計算fps用
@@ -298,7 +298,7 @@ namespace vcs_WebCam_AForge4
         {
             try
             {
-                Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
+                bitmap1 = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
                 if (this.isResolutionSet == false)
                 {
                     // this is run once to set the resolution for the VideoRecorder
@@ -324,6 +324,7 @@ namespace vcs_WebCam_AForge4
                     {
                     }
                 }
+                GC.Collect();       //回收資源
             }
             catch (InvalidOperationException ex)
             {
@@ -347,7 +348,7 @@ namespace vcs_WebCam_AForge4
             // we set our VideoFileWriter as well as the file name, resolution and fps
             VideoFileWriter writer1 = new VideoFileWriter();
 
-            writer1.Open(RecordingFilename, this.Width, this.Height, 15);
+            writer1.Open(RecordingFilename, this.Width, this.Height, 30);
 
             // as long as we're recording
             // we dequeue the BitMaps waiting in the Queue and write them to the file
@@ -390,7 +391,7 @@ namespace vcs_WebCam_AForge4
             if (flag_recording2 == false)
             {
                 flag_recording2 = true;
-                writer2.Open(RecordingFilename, this.Width, this.Height, 15);
+                writer2.Open(RecordingFilename, this.Width, this.Height, 30);
             }
         }
 

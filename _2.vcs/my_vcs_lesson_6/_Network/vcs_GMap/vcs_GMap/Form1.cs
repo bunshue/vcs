@@ -45,8 +45,8 @@ namespace vcs_GMap
             gMapControl1.CacheLocation = Environment.CurrentDirectory + "\\GMapCache\\"; //缓存位置
             //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            gMapControl1.MinZoom = 2;  //最小比例
-            gMapControl1.MaxZoom = 24; //最大比例
+            gMapControl1.MinZoom = 2;  //最小比例 >=1
+            gMapControl1.MaxZoom = 24; //最大比例 <=24
             gMapControl1.Zoom = 17;     //当前比例
             gMapControl1.ShowCenter = false; //不显示中心十字点
             gMapControl1.DragButton = MouseButtons.Left; //左键拖拽地图
