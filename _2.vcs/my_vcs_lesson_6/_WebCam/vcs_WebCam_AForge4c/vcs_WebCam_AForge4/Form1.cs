@@ -20,7 +20,8 @@ namespace vcs_WebCam_AForge4
     {
         private string recording_filename = string.Empty;
         DateTime recording_time_st = DateTime.Now;
-        private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
+        private bool flag_recording1 = false;    //判斷是否啟動錄影的旗標, for 錄影1, 使用Thread
+        private bool flag_recording2 = false;    //判斷是否啟動錄影的旗標, for 錄影2, 不使用Thread
 
         CameraMonitor CamMonitor;
 
@@ -86,8 +87,9 @@ namespace vcs_WebCam_AForge4
 
             richTextBox1.Size = new Size(200, H);
             richTextBox1.Location = new Point(x_st + dx * 0 + BORDER + 640, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
-            button2.Location = new Point(x_st + 150, y_st + dy * 0 + H + BORDER);
+
+            button2.Enabled = false;
+            button4.Enabled = false;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -95,7 +97,8 @@ namespace vcs_WebCam_AForge4
             //離開程式前, 關閉相機(錄影與播放)
             try
             {
-                this.CamMonitor.StopRecording();
+                this.CamMonitor.StopRecording1();
+                this.CamMonitor.StopRecording2();
                 this.CamMonitor.StopCapture();
             }
             catch (Exception ex)
@@ -104,7 +107,7 @@ namespace vcs_WebCam_AForge4
 
         }
 
-        //錄影 ST, 僅x86可用
+        //錄影 ST, 使用thread
         private void button1_Click(object sender, EventArgs e)
         {
             /*
@@ -115,10 +118,10 @@ namespace vcs_WebCam_AForge4
             }
             */
 
-            if (flag_recording == false)
+            if (flag_recording1 == false)
             {
                 //開啟錄影模式
-                flag_recording = true;
+                flag_recording1 = true;
 
                 recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
 
@@ -127,12 +130,14 @@ namespace vcs_WebCam_AForge4
                 //richTextBox1.Text += "Height : " + webcam_h.ToString() + "\n";
 
                 this.CamMonitor.RecordingFilename = recording_filename;
-                this.CamMonitor.StartRecording();
-                this.CamMonitor.forceRecord = true;
+                this.CamMonitor.StartRecording1();
 
                 richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
                 richTextBox1.Text += "錄影開始\t時間 : " + DateTime.Now.ToString() + "\n";
                 recording_time_st = DateTime.Now;
+                groupBox2.Enabled = false;
+                button1.Enabled = false;
+                button2.Enabled = true;
             }
             else
             {
@@ -140,21 +145,85 @@ namespace vcs_WebCam_AForge4
             }
         }
 
-        //錄影 SP, 僅x86可用
+        //錄影 SP, 使用Thread
         private void button2_Click(object sender, EventArgs e)
         {
-            if (flag_recording == true)
+            if (flag_recording1 == true)
             {
                 //錄影完需將影像停止不然會出錯
-                flag_recording = false;
+                flag_recording1 = false;
 
-                this.CamMonitor.StopRecording();
-                this.CamMonitor.forceRecord = false;
+                this.CamMonitor.StopRecording1();
 
                 richTextBox1.Text += "錄影結束\t時間 : " + DateTime.Now.ToString() + "\n";
                 richTextBox1.Text += "錄影時間 :\t" + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
                 //richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n\n";
                 richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
+                groupBox2.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = false;
+            }
+            else
+            {
+                richTextBox1.Text += "並沒有在錄影\n";
+            }
+        }
+
+        //錄影 ST, 不使用thread
+        private void button3_Click(object sender, EventArgs e)
+        {
+            /*
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            {
+                richTextBox1.Text += "無相機\n";
+                return;
+            }
+            */
+
+            if (flag_recording2 == false)
+            {
+                //開啟錄影模式
+                flag_recording2 = true;
+
+                recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+
+                richTextBox1.Text += "filename : " + recording_filename + "\n";
+                //richTextBox1.Text += "Width : " + webcam_w.ToString() + "\n";
+                //richTextBox1.Text += "Height : " + webcam_h.ToString() + "\n";
+
+                this.CamMonitor.RecordingFilename = recording_filename;
+                this.CamMonitor.StartRecording2();
+
+                richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
+                richTextBox1.Text += "錄影開始\t時間 : " + DateTime.Now.ToString() + "\n";
+                recording_time_st = DateTime.Now;
+                groupBox1.Enabled = false;
+                button3.Enabled = false;
+                button4.Enabled = true;
+            }
+            else
+            {
+                richTextBox1.Text += "已在錄影\n";
+            }
+        }
+
+        //錄影 SP, 不使用Thread
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (flag_recording2 == true)
+            {
+                //錄影完需將影像停止不然會出錯
+                flag_recording2 = false;
+
+                this.CamMonitor.StopRecording2();
+
+                richTextBox1.Text += "錄影結束\t時間 : " + DateTime.Now.ToString() + "\n";
+                richTextBox1.Text += "錄影時間 :\t" + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
+                //richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n\n";
+                richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
+                groupBox1.Enabled = true;
+                button3.Enabled = true;
+                button4.Enabled = false;
             }
             else
             {
@@ -168,6 +237,7 @@ namespace vcs_WebCam_AForge4
         PictureBox display;    // a refrence to the PictureBox on the MainForm
         private VideoCaptureDevice Cam = null; // refrence to the actual VidioCaptureDevice (webcam)
         public String cameraName; // string for display purposes
+        VideoFileWriter writer2 = new VideoFileWriter();
 
         public CameraMonitor(PictureBox display, string monikerString, String cameraName)
         {
@@ -202,9 +272,12 @@ namespace vcs_WebCam_AForge4
 
                 e.Graphics.DrawString(str, f, sb, new Point(10, 10));
 
-                if (flag_recording == true)
+                if ((flag_recording1 == true) || (flag_recording2 == true))
                 {
-                    e.Graphics.DrawString("錄影中", f, Brushes.Red, new Point(240, 10));
+                    if (DateTime.Now.Millisecond < 500)
+                    {
+                        e.Graphics.DrawString("錄影中", f, Brushes.Red, new Point(240, 10));
+                    }
                 }
             }
         }
@@ -236,9 +309,20 @@ namespace vcs_WebCam_AForge4
 
                 this.display.Image = (Bitmap)bitmap1.Clone(); // displays the current frame on the main form
 
-                if (flag_recording == true)
+                if (flag_recording1 == true)    //使用thread
                 {
                     frames.Enqueue((Bitmap)bitmap1.Clone());
+                }
+
+                if (flag_recording2 == true)
+                {
+                    try
+                    {
+                        writer2.WriteVideoFrame(bitmap1);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
                 }
             }
             catch (InvalidOperationException ex)
@@ -246,15 +330,13 @@ namespace vcs_WebCam_AForge4
             }
         }
 
-        // different option toggles
-        public bool forceRecord = false;
-
         // output video resolution info
         bool isResolutionSet = false;
         int Width = 0;
         int Height = 0;
 
-        private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
+        private bool flag_recording1 = false;    //判斷是否啟動錄影的旗標, for 錄影1, 使用Thread
+        private bool flag_recording2 = false;    //判斷是否啟動錄影的旗標, for 錄影2, 不使用Thread
 
         public string RecordingFilename = "aaaaa.avi";
 
@@ -263,46 +345,59 @@ namespace vcs_WebCam_AForge4
         private void DoRecord()
         {
             // we set our VideoFileWriter as well as the file name, resolution and fps
-            VideoFileWriter writer = new VideoFileWriter();
+            VideoFileWriter writer1 = new VideoFileWriter();
 
-            //ex : 第 1 台攝影機_2021-09-22_09-23-29.avi
-            //writer.Open("C:\\dddddddddd\\" + this.cameraName + String.Format("{0:_yyyy-MM-dd_hh-mm-ss}", DateTime.Now) + ".avi", this.Width, this.Height, 15);
-            writer.Open(RecordingFilename, this.Width, this.Height, 15);
+            writer1.Open(RecordingFilename, this.Width, this.Height, 15);
 
             // as long as we're recording
             // we dequeue the BitMaps waiting in the Queue and write them to the file
-            while (flag_recording == true)
+            while (flag_recording1 == true)
             {
                 if (frames.Count > 0)
                 {
                     try
                     {
                         Bitmap bitmap1 = frames.Dequeue();
-                        writer.WriteVideoFrame(bitmap1);
+                        writer1.WriteVideoFrame(bitmap1);
                     }
                     catch (Exception ex)
                     {
                     }
                 }
             }
-            writer.Close();
+            writer1.Close();
         }
 
-        public void StartRecording()
+        public void StartRecording1()
         {
-            if (flag_recording == false)
+            if (flag_recording1 == false)
             {
                 // if were not already recording we start the recording thread
-                flag_recording = true;
+                flag_recording1 = true;
                 Thread th = new Thread(DoRecord);
                 th.Start();
             }
         }
 
         // stops recording
-        public void StopRecording()
+        public void StopRecording1()
         {
-            flag_recording = false;
+            flag_recording1 = false;
+        }
+
+        public void StartRecording2()
+        {
+            if (flag_recording2 == false)
+            {
+                flag_recording2 = true;
+                writer2.Open(RecordingFilename, this.Width, this.Height, 15);
+            }
+        }
+
+        public void StopRecording2()
+        {
+            flag_recording2 = false;
+            writer2.Close();
         }
     }
 }

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Net;
+
 using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.MapProviders;
@@ -25,9 +27,14 @@ namespace vcs_GMap
 
         private void Form1_Load(object sender, EventArgs e)
         {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
             try
             {
-                System.Net.IPHostEntry iphe = System.Net.Dns.GetHostEntry("ditu.google.cn");
+                //IPHostEntry iphe = Dns.GetHostEntry("ditu.google.cn");
+                IPHostEntry iphe = Dns.GetHostEntry("maps.google.com.tw");
             }
             catch
             {
@@ -36,24 +43,25 @@ namespace vcs_GMap
             }
 
             gMapControl1.CacheLocation = Environment.CurrentDirectory + "\\GMapCache\\"; //缓存位置
-            gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //google china 地图
+            //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
             gMapControl1.MinZoom = 2;  //最小比例
             gMapControl1.MaxZoom = 24; //最大比例
-            gMapControl1.Zoom = 10;     //当前比例
+            gMapControl1.Zoom = 17;     //当前比例
             gMapControl1.ShowCenter = false; //不显示中心十字点
-            gMapControl1.DragButton = System.Windows.Forms.MouseButtons.Left; //左键拖拽地图
-            gMapControl1.Position = new PointLatLng(32.064, 118.704); //地图中心位置：南京
+            gMapControl1.DragButton = MouseButtons.Left; //左键拖拽地图
+            //gMapControl1.Position = new PointLatLng(32.064, 118.704); //地图中心位置：南京
+            gMapControl1.Position = new PointLatLng(24.838, 121.003); //地图中心位置：竹北
 
             gMapControl1.Overlays.Add(markersOverlay);
 
             gMapControl1.MouseClick += new MouseEventHandler(gMapControl1_MouseClick);
 
-
         }
 
         void gMapControl1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
                 GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
@@ -63,5 +71,8 @@ namespace vcs_GMap
 
 
 
+
+
     }
 }
+
