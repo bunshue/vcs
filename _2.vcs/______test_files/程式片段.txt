@@ -1,5 +1,14 @@
 
 
+C# 獲得圖片的分辨率和大小，
+
+double DPI = pictureBox1.Image.HorizontalResolution;//獲得分辨率 gisoracle
+double w = 1.0 * pictureBox1.Image.Width / DPI * 25.4;
+
+double h = 1.0 * pictureBox1.Image.Height / DPI * 25.4; 
+MessageBox.Show(w.ToString("f2") + ":" + h.ToString("f2"));
+
+
             Bitmap bitmap1 = new Bitmap(w, h);
             Graphics g = Graphics.FromImage(bitmap1);
 

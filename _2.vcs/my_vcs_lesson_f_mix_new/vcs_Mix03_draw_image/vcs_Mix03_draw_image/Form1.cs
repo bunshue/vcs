@@ -198,6 +198,71 @@ namespace vcs_Mix03_draw_image
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //不規則圖形裁剪圖片
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename, false);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            GraphicsPath path = new GraphicsPath();
+
+            Point[] p = {
+                            new Point(W/2,10),
+                            new Point(W/5,H/5),
+                            new Point(10,H/2),
+                            new Point(W/5,H*4/5),
+                            new Point(W/2,H-10),
+                            new Point(W*4/5,H*4/5),
+                            new Point(W-10,H/2),
+                            new Point(W*4/5,H/5),
+                            new Point(W/2,10)
+                        };
+            path.AddLines(p);
+
+            Bitmap bitmap2 = null;
+            BitmapCrop(bitmap1, path, out bitmap2);
+            pictureBox1.Image = bitmap2;
+
+            bitmap2.Save(@"aaaaa.jpg");
+        }
+
+        /// <summary>
+        /// 圖片截圖
+        /// </summary>
+        /// <param name="bitmap">原圖</param>
+        /// <param name="path">裁剪路徑</param>
+        /// <param name="outputBitmap">輸出圖</param>
+        /// <returns></returns>
+        public static Bitmap BitmapCrop(Bitmap bitmap, GraphicsPath path, out Bitmap outputBitmap)
+        {
+            RectangleF rect = path.GetBounds();
+            int left = (int)rect.Left;
+            int top = (int)rect.Top;
+            int width = (int)rect.Width;
+            int height = (int)rect.Height;
+            Bitmap image = (Bitmap)bitmap.Clone();
+            outputBitmap = new Bitmap(width, height);
+            for (int i = left; i < left + width; i++)
+            {
+                for (int j = top; j < top + height; j++)
+                {
+                    //判斷坐標是否在路徑中   
+                    if (path.IsVisible(i, j))
+                    {
+                        //復制原圖區域的像素到輸出圖片   
+                        outputBitmap.SetPixel(i - left, j - top, image.GetPixel(i, j));
+                        //設置原圖這部分區域為透明   
+                        image.SetPixel(i, j, Color.FromArgb(0, image.GetPixel(i, j)));
+                    }
+                    else
+                    {
+                        outputBitmap.SetPixel(i - left, j - top, Color.FromArgb(0, 255, 255, 255));
+                    }
+                }
+            }
+            bitmap.Dispose();
+            return image;
         }
 
         private void button5_Click(object sender, EventArgs e)
