@@ -484,7 +484,88 @@ namespace vcs_ZedGraph
             zedGraphControl1.Refresh();//这句话非常重要，否则不会立即显示
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //Form1初始化後創建設置控件的方法並將當前ZedGraph控件傳遞
+            createPane(zedGraphControl1);
+
+        }
+        public void createPane(ZedGraphControl zgc)
+        {
+            GraphPane myPane = zgc.GraphPane;
+
+            //設置圖表標題 和 x y 軸標題
+            myPane.Title.Text = "霸道測試標題";
+
+            myPane.XAxis.Title.Text = "X軸標題";
+
+            myPane.YAxis.Title.Text = "Y軸標題";
+
+            //更改標題的字體
+
+            FontSpec myFont = new FontSpec("Arial", 20, Color.Red, false, false, false);
+
+            myPane.Title.FontSpec = myFont;
+
+            myPane.XAxis.Title.FontSpec = myFont;
+
+            myPane.YAxis.Title.FontSpec = myFont;
+
+            // 造一些數據，PointPairList裏有數據對x，y的數組
+
+            Random y = new Random();
+
+            PointPairList list1 = new PointPairList();
+
+            for (int i = 0; i < 36; i++)
+            {
+
+                double x = i;
+
+                //double y1 = 1.5 + Math.Sin((double)i * 0.2);
+
+                double y1 = y.NextDouble() * 1000;
+
+                list1.Add(x, y1); //添加一組數據
+
+            }
+
+            // 用list1生產一條曲線，標註是“曲線1”
+
+            LineItem myCurve = myPane.AddCurve("曲線1", list1, Color.Red, SymbolType.Star);
+
+            //填充圖表顏色
+
+            myPane.Fill = new Fill(Color.White, Color.FromArgb(200, 200, 255), 45.0f);
+
+            //以上生成的圖標X軸爲數字，下面將轉換爲日期的文本
+
+            string[] labels = new string[36];
+
+            for (int i = 0; i < 36; i++)
+            {
+
+                labels[i] = System.DateTime.Now.AddDays(i).ToShortDateString();
+
+            }
+
+            myPane.XAxis.Scale.TextLabels = labels; //X軸文本取值
+
+            myPane.XAxis.Type = AxisType.Text;   //X軸類型
+
+            //畫到zedGraphControl1控件中，此句必加
+
+            zgc.AxisChange();//在數據變化時繪圖
+
+            //更新圖表
+
+            zedGraphControl1.Invalidate();
+
+            //重繪控件
+
+            Refresh();
+        }
     }
 }
-
 

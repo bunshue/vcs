@@ -31,7 +31,7 @@ namespace vcs_Queue
         {
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
             frames.Enqueue((Bitmap)bitmap1.Clone());
-            richTextBox1.Text += "將第1張圖放入Queue\n";
+            richTextBox1.Text += "將第1張圖放入Queue, 從尾加\n";
             update_queue_count();
         }
 
@@ -39,7 +39,7 @@ namespace vcs_Queue
         {
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename2);	//Bitmap.FromFile出來的是Image格式
             frames.Enqueue((Bitmap)bitmap1.Clone());
-            richTextBox1.Text += "將第2張圖放入Queue\n";
+            richTextBox1.Text += "將第2張圖放入Queue, 從尾加\n";
             update_queue_count();
         }
 
@@ -47,7 +47,7 @@ namespace vcs_Queue
         {
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename3);	//Bitmap.FromFile出來的是Image格式
             frames.Enqueue((Bitmap)bitmap1.Clone());
-            richTextBox1.Text += "將第3張圖放入Queue\n";
+            richTextBox1.Text += "將第3張圖放入Queue, 從尾加\n";
             update_queue_count();
         }
 
@@ -59,7 +59,7 @@ namespace vcs_Queue
                 {
                     Bitmap bitmap1 = frames.Dequeue();
                     pictureBox_show.Image = bitmap1;
-                    richTextBox1.Text += "從Queue中讀出第1張圖\n";
+                    richTextBox1.Text += "從Queue中讀出第1張圖, 從頭取\n";
                 }
                 catch (Exception ex)
                 {
@@ -109,6 +109,47 @@ namespace vcs_Queue
                 
 
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            frames.Clear();
+            richTextBox1.Text += "清除Queue\n";
+            update_queue_count();
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Queue<char> q = new Queue<char>();
+
+            q.Enqueue('A');
+            q.Enqueue('B');
+            q.Enqueue('C');
+            q.Enqueue('D');
+
+            richTextBox1.Text += "Current queue: " + "\n";
+            foreach (char c in q)
+            {
+                richTextBox1.Text += c + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            q.Enqueue('E');
+            q.Enqueue('F');
+            richTextBox1.Text += "Current queue: " + "\n";
+            foreach (char c in q)
+            {
+                richTextBox1.Text += c + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "Removing some values " + "\n";
+            char ch = (char)q.Dequeue();
+            richTextBox1.Text += "The removed value: " + ch + "\n";
+            ch = (char)q.Dequeue();
+            richTextBox1.Text += "The removed value: " + ch + "\n";
+
         }
     }
 }

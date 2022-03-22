@@ -1,4 +1,40 @@
 
+\\圖片格式轉換
+
+        public void ImageFormatter(string sourcePath, string distationPath, string format) {
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(sourcePath);
+            switch (format.ToLower()) {
+                case "bmp":
+                    bitmap.Save(distationPath, ImageFormat.Bmp);
+                    break;
+                case "emf":
+                    bitmap.Save(distationPath, ImageFormat.Emf);
+                    break;
+                case "gif":
+                    bitmap.Save(distationPath, ImageFormat.Gif);
+                    break;
+                case "ico":
+                    bitmap.Save(distationPath, ImageFormat.Icon);
+                    break;
+                case "jpg":
+                    bitmap.Save(distationPath, ImageFormat.Jpeg);
+                    break;
+                case "png":
+                    bitmap.Save(distationPath, ImageFormat.Png);
+                    break;
+                case "tif":
+                    bitmap.Save(distationPath, ImageFormat.Tiff);
+                    break;
+                case "wmf":
+                    bitmap.Save(distationPath, ImageFormat.Wmf);
+                    break;
+                default: throw new Exception("無法轉換此格式！");
+            }
+        }
+
+    
+
+
 
 C# 獲得圖片的分辨率和大小，
 

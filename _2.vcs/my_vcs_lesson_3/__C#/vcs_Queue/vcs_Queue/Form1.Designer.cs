@@ -36,6 +36,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox_count = new System.Windows.Forms.PictureBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_show)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_count)).BeginInit();
             this.SuspendLayout();
@@ -119,11 +121,33 @@
             this.pictureBox_count.TabStop = false;
             this.pictureBox_count.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_count_Paint);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(543, 42);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(92, 49);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "clear";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(829, 129);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(120, 60);
+            this.button6.TabIndex = 9;
+            this.button6.Text = "字元隊列範例";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(961, 605);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.pictureBox_count);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
@@ -152,6 +176,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox_count;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
 
