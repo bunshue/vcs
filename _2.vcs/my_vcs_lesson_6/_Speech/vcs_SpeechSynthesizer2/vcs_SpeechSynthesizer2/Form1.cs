@@ -109,9 +109,9 @@ namespace vcs_SpeechSynthesizer2
             richTextBox2.Text += "播放\n";
             //synth.Rate = 0;       //Rate：播放語速，-10~10
             //synth.Volume = 10;    //Volume：音量調節：0~100
-            //synth.SelectVoice("Microsoft Hanhan Desktop");
+            //synth.SelectVoice("Microsoft Hanhan Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
             richTextBox2.Text += "使用聲音 : " + synth.Voice.Name + "\n";
-            synth.SpeakAsync(richTextBox1.Text);
+            synth.SpeakAsync(richTextBox1.Text);	//開始進行異步朗讀，參數是朗讀的文本。
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -119,16 +119,17 @@ namespace vcs_SpeechSynthesizer2
             richTextBox2.Text += "錄音存檔\n";
             string filename = Application.StartupPath + "\\wav_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
 
-            synth.SetOutputToWaveFile(filename);    //保存語音文件
+            synth.SetOutputToWaveFile(filename);    //保存語音文件,調用該方法後需要調用Speak方法。參數是保存文件的路徑。
             //synth.SetOutputToWaveFile(filename, new SpeechAudioFormatInfo(48000, AudioBitsPerSample.Sixteen, AudioChannel.Stereo));
             //synth.SetOutputToWaveFile(filename, new SpeechAudioFormatInfo(16025, AudioBitsPerSample.Sixteen, AudioChannel.Mono));
 
             try
             {
-                synth.SpeakAsync(richTextBox1.Text);
+                synth.SpeakAsync(richTextBox1.Text);	//開始進行異步朗讀，參數是朗讀的文本。
                 //synth.SetOutputToNull();    //保存文件結束語句，必須調用該語句，否則生產的語音文件無法播放。
-                //synth.SetOutputToDefaultAudioDevice();
+                //      SetOutputToNull()：保存文件結束語句，必須調用該語句，否則生產的語音文件無法播放。
 
+                //synth.SetOutputToDefaultAudioDevice();
                 richTextBox2.Text += "已存檔 : " + filename + "\n";
             }
             catch (Exception ex)
@@ -149,18 +150,21 @@ namespace vcs_SpeechSynthesizer2
 
         private void button4_Click(object sender, EventArgs e)
         {
-            SpeechSynthesizer synth = new SpeechSynthesizer();
+            richTextBox2.Text += "錄音存檔\n";
+            string filename = Application.StartupPath + "\\wav_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
+
+            synth = new SpeechSynthesizer();
 
             synth.Rate = trackBar1.Value;
             synth.Volume = trackBar2.Value;
 
-            synth.SetOutputToWaveFile("aaaaa.wav");
+            synth.SetOutputToWaveFile(filename);	//保存語音文件,調用該方法後需要調用Speak方法。參數是保存文件的路徑。
 
-            synth.Speak(richTextBox1.Text);
+            synth.Speak(richTextBox1.Text);	//開始進行朗讀，參數是朗讀的文本
 
             synth.SetOutputToDefaultAudioDevice();
 
-            MessageBox.Show("完成錄音~~", "提示");
+            richTextBox2.Text += "已存檔 : " + filename + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -181,15 +185,14 @@ namespace vcs_SpeechSynthesizer2
         void ListInstalledVoices()
         {
             richTextBox1.Text += "\n列出Windows 裝了哪些語音以及其支援語系\n";
-            var voice = new System.Speech.Synthesis.SpeechSynthesizer();
-            voice.GetInstalledVoices()
+            synth = new SpeechSynthesizer();
+            synth.GetInstalledVoices()
                 .ToList().ForEach((v) =>
                 {
                     //Console.WriteLine(v.VoiceInfo.Name + " " +v.VoiceInfo.Culture.DisplayName);
                     richTextBox1.Text += v.VoiceInfo.Name + " " + v.VoiceInfo.Culture.DisplayName + "\n";
                 });
         }
-
 
         /// <summary>
         /// 開始朗讀 放在線程中
@@ -199,7 +202,7 @@ namespace vcs_SpeechSynthesizer2
         {
             try
             {
-                synth.SpeakAsync(richTextBox1.Text);
+                synth.SpeakAsync(richTextBox1.Text);	//開始進行異步朗讀，參數是朗讀的文本。
             }
             catch (Exception er)
             {
@@ -236,10 +239,10 @@ namespace vcs_SpeechSynthesizer2
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                SpeechSynthesizer synth = new SpeechSynthesizer();
+                synth = new SpeechSynthesizer();
 
                 synth.SetOutputToWaveStream(memoryStream);
-                synth.Speak(text);
+                synth.Speak(text);	//開始進行朗讀，參數是朗讀的文本
 
                 memoryStream.Flush();
                 result = memoryStream.ToArray();
@@ -265,13 +268,13 @@ namespace vcs_SpeechSynthesizer2
 
         private void button9_Click(object sender, EventArgs e)
         {
-            var voice = new System.Speech.Synthesis.SpeechSynthesizer();
+            synth = new SpeechSynthesizer();
 
-            voice.SelectVoice("Microsoft Hanhan Desktop");
-            voice.Speak("Hi there, I am darkthread.");
+            synth.SelectVoice("Microsoft Hanhan Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
+            synth.Speak("Hi there, I am darkthread.");		//開始進行朗讀，參數是朗讀的文本
 
-            voice.SelectVoice("Microsoft Zira Desktop");
-            voice.Speak("Hi there, I am darkthread.");
+            synth.SelectVoice("Microsoft Zira Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
+            synth.Speak("Hi there, I am darkthread.");		//開始進行朗讀，參數是朗讀的文本
 
             var pb = new PromptBuilder();
             pb.StartVoice("Microsoft Hanhan Desktop");
@@ -279,10 +282,10 @@ namespace vcs_SpeechSynthesizer2
             //https://msdn.microsoft.com/zh-tw/library/hh378418(v=office.14).aspx
             pb.AppendSsmlMarkup("<voice name=\"Microsoft David Desktop\">darkthread</voice>");
             pb.EndVoice();
-            voice.Speak(pb);
+            synth.Speak(pb);	//開始進行朗讀，參數是朗讀的文本
 
-            voice.SelectVoice("Microsoft Tracy Desktop");
-            voice.Speak("大家好，我是黑暗執行緒");
+            synth.SelectVoice("Microsoft Tracy Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
+            synth.Speak("大家好，我是黑暗執行緒");		//開始進行朗讀，參數是朗讀的文本
         }
     }
 }

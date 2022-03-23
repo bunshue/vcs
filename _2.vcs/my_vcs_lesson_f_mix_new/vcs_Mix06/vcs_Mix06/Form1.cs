@@ -14,13 +14,20 @@ using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
+using System.Text.RegularExpressions;
 
 using System.Collections;   //for Stack
+
+//參考/加入參考 /COM/Microsoft Shell Controls and Automation
+using Shell32;  //for Shell
+
 
 namespace vcs_Mix06
 {
     public partial class Form1 : Form
     {
+        string ffmpeg = @"C:\______test_files\_exe\ffmpeg\ffmpeg.exe";
+
         public Form1()
         {
             InitializeComponent();
@@ -400,10 +407,6 @@ namespace vcs_Mix06
 
         public string CatchImg(string vFileName)
         {
-            //取得ffmpeg.exe的路徑,路徑配置在Web.Config中,如:<add key="ffmpeg" value="E:\ffmpeg\ffmpeg.exe" />
-            //string ffmpeg=System.Configuration.ConfigurationSettings.APPSettings["ffmpeg"];
-            string ffmpeg = @"C:\______test_files\_exe\ffmpeg\ffmpeg.exe";
-
             if ((!File.Exists(ffmpeg)) || (!File.Exists(vFileName)))
             {
                 return "";
@@ -451,11 +454,102 @@ namespace vcs_Mix06
         {
             show_button_text(sender);
 
+            string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+
+            richTextBox1.Text += "音樂長度\n";
+            string[] result = GetMP3Time(filename);
+            foreach (string str in result)
+            {
+                richTextBox1.Text += str + " ";
+            }
+            richTextBox1.Text += "\n";
         }
+
+
+        /// <summary>  
+        /// 获得音乐长度  
+        /// </summary>  
+        /// <param name="filePath">文件的完整路径  
+        public static string[] GetMP3Time(string filePath)
+        {
+            string dirName = Path.GetDirectoryName(filePath);
+            string SongName = Path.GetFileName(filePath);//获得歌曲名称             
+            Shell sh = new Shell();
+            Folder dir = sh.NameSpace(dirName);
+            FolderItem item = dir.ParseName(SongName);
+            string SongTime = dir.GetDetailsOf(item, 27);//27为获得歌曲持续时间 ，28为获得音乐速率，1为获得音乐文件大小      
+            string[] time = Regex.Split(SongTime, ":");
+            return time;
+        }
+
+        /// <summary>  
+        /// 转换函数  
+        /// </summary>  
+        /// <param name="exe">ffmpeg程序  
+        /// <param name="arg">执行参数       
+        public static void ExcuteProcess(string exe, string arg)
+        {
+            using (var p = new Process())
+            {
+                p.StartInfo.FileName = exe;
+                p.StartInfo.Arguments = arg;
+                p.StartInfo.UseShellExecute = false;    //输出信息重定向  
+                p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.RedirectStandardError = true;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.Start();                    //启动线程  
+                p.BeginOutputReadLine();
+                p.BeginErrorReadLine();
+                p.WaitForExit();//等待进程结束                                        
+            }
+        }
+
+
 
         private void button10_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            string fromMusic = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            string toMusic = @"C:\______test_files\_mp3\ccccc.mp3";
+
+            int bitrate = Convert.ToInt32(10) * 1000;//恒定码率  
+            int Hz = 3000;//采样频率  
+
+            try
+            {
+                ExcuteProcess(ffmpeg, "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + fromMusic + "\" \"" + toMusic + "\"");
+
+                richTextBox1.Text += "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + fromMusic + "\" \"" + toMusic + "\"";
+
+                //转换完成  
+                MessageBox.Show("转换完成");
+            }
+            catch (Exception ex)
+            { MessageBox.Show(ex.ToString()); }
+
+            string fromPath = fromMusic;//要切割音乐的物理路径  
+
+            /*
+            string startTime = string.Format("0:{0}:{1}", txtBeginM.Text, txtBeginS.Text).Trim();//歌曲起始时间  
+            int duration = (Convert.ToInt32(this.txtEndM.Text) * 60 + Convert.ToInt32(this.txtEndS.Text)) - (Convert.ToInt32(this.txtBeginM.Text) * 60 + Convert.ToInt32(this.txtBeginS.Text));
+            string endTime = string.Format("0:{0}:{1}", duration / 60, duration % 60);//endTime是持续的时间，不是歌曲结束的时间  
+            */
+
+            string startTime = "0:0:0";
+            string endTime = "0:1:0";
+
+            string savePath = toMusic;//切割后音乐保存的物理路径  
+                try
+                {
+                    ExcuteProcess(ffmpeg, "-y -i \"" + fromPath + "\" -ss " + startTime + " -t " + endTime + " -acodec copy \"" + savePath + "\"");//-acodec copy表示歌曲的码率和采样频率均与前者相同  
+                    MessageBox.Show("已切割完成");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+
 
         }
 
@@ -533,7 +627,7 @@ namespace vcs_Mix06
             show_button_text(sender);
 
             /// 利用C#來解讀MP3文件的TAG區信息。
-            string mp3_filename = @"C:\______test_files\_mp3\aaaa.mp3";
+            //string mp3_filename = @"C:\______test_files\_mp3\aaaa.mp3";
 
             // TBD
 
@@ -548,6 +642,100 @@ namespace vcs_Mix06
         {
             show_button_text(sender);
 
+            //獲取GB2312編碼頁（表）
+            Encoding gb = Encoding.GetEncoding("gb2312");
+
+            int len = 20;
+            //調用函數產生隨機中文漢字編碼
+            object[] bytes = CreateRegionCode(len);
+
+            //根據漢字編碼的字節數組解碼出中文漢字
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
+
+            }
+            richTextBox1.Text += "\n";
+
+        }
+
+
+        /**//*
+        此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將
+        四個字節數組存儲在object數組中。
+        參數：strlength，代表需要產生的漢字個數
+        */
+        public static object[] CreateRegionCode(int strlength)
+        {
+            //定義一個字符串數組儲存漢字編碼的組成元素
+            string[] rBase = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+
+            Random rnd = new Random();
+
+            //定義一個object數組用來
+            object[] bytes = new object[strlength];
+
+            /**/
+            /*每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中
+            每個漢字有四個區位碼組成
+            區位碼第1位和區位碼第2位作為字節數組第一個元素
+            區位碼第3位和區位碼第4位作為字節數組第二個元素
+            */
+
+            for (int i = 0; i < strlength; i++)
+            {
+                //區位碼第1位
+                int r1 = rnd.Next(11, 14);
+                string str_r1 = rBase[r1].Trim();
+
+                //區位碼第2位
+                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的種子避免產生重復值
+                int r2;
+                if (r1 == 13)
+                {
+                    r2 = rnd.Next(0, 7);
+                }
+                else
+                {
+                    r2 = rnd.Next(0, 16);
+                }
+                string str_r2 = rBase[r2].Trim();
+
+                //區位碼第3位
+                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r3 = rnd.Next(10, 16);
+                string str_r3 = rBase[r3].Trim();
+
+                //區位碼第4位
+                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r4;
+                if (r3 == 10)
+                {
+                    r4 = rnd.Next(1, 16);
+                }
+                else if (r3 == 15)
+                {
+                    r4 = rnd.Next(0, 15);
+                }
+                else
+                {
+                    r4 = rnd.Next(0, 16);
+                }
+                string str_r4 = rBase[r4].Trim();
+
+                //定義兩個字節變量存儲產生的隨機漢字區位碼
+                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
+                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
+                //將兩個字節變量存儲在字節數組中
+                byte[] str_r = new byte[] { byte1, byte2 };
+
+                //將產生的一個漢字的字節數組放入object數組中
+                bytes.SetValue(str_r, i);
+
+            }
+
+            return bytes;
         }
 
         private void button16_Click(object sender, EventArgs e)

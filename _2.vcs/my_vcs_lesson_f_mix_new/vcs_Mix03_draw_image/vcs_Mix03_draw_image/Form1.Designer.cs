@@ -236,6 +236,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(170, 70);
             this.button6.TabIndex = 100;
+            this.button6.Text = "使用GDI畫坐標圖(支持負值)";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -246,6 +247,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(170, 70);
             this.button10.TabIndex = 99;
+            this.button10.Text = "對圖片做預處理";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 

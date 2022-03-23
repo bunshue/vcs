@@ -302,6 +302,78 @@ namespace vcs_Mix03_draw_image
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format24bppRgb);
+            Graphics g = Graphics.FromImage(bitmap1);
+            //Graphics g = this.CreateGraphics();
+            g.Clear(Color.White);
+            Font font = new Font(Font.Name, 11);
+            SolidBrush brush = new SolidBrush(Color.Black);
+            Pen pen = new Pen(Color.Black);
+            pen.EndCap = LineCap.ArrowAnchor;
+            pen.DashStyle = DashStyle.Solid;
+            //坐标轴
+            Point pCenter = new Point(300, 260);
+            g.DrawLine(pen, new Point(pCenter.X - 200, pCenter.Y), new Point(pCenter.X + 200, pCenter.Y));//x
+            g.DrawLine(pen, new Point(pCenter.X, pCenter.Y + 200), new Point(pCenter.X, pCenter.Y - 200));//y            
+            int iX = 30;
+            //轴标格
+            for (int i = 0; i < 5; i++)
+            {
+                g.DrawLine(Pens.Black, new Point(pCenter.X - iX * i, pCenter.Y), new Point(pCenter.X - iX * i, pCenter.Y - 4));//x
+                g.DrawString((-i).ToString(), font, brush, new PointF(pCenter.X - iX * i, pCenter.Y));
+                g.DrawLine(Pens.Black, new Point(pCenter.X + iX * i, pCenter.Y), new Point(pCenter.X + iX * i, pCenter.Y - 4));//x
+                g.DrawString(i.ToString(), font, brush, new PointF(pCenter.X + iX * i, pCenter.Y));
+                g.DrawLine(Pens.Black, new Point(pCenter.X, pCenter.Y - iX * i), new Point(pCenter.X + 4, pCenter.Y - iX * i));//y
+                g.DrawString(i.ToString(), font, brush, new PointF(pCenter.X, pCenter.Y - iX * i));
+                g.DrawLine(Pens.Black, new Point(pCenter.X, pCenter.Y + iX * i), new Point(pCenter.X + 4, pCenter.Y + iX * i));//y
+                g.DrawString((-i).ToString(), font, brush, new PointF(pCenter.X, pCenter.Y + iX * i));
+            }
+
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Far;
+            g.DrawString("x", font, brush, new PointF(pCenter.X + 200, pCenter.Y));
+            g.DrawString("y", font, brush, new PointF(pCenter.X, pCenter.Y - 200));
+            g.DrawString("0", font, brush, new PointF(pCenter.X, pCenter.Y));
+            //定义比例尺
+            int BX = 4;
+            int BY = 4;
+            Point new1 = getNewPoint(new Point(200, 300), pCenter, BX, BY);
+            Point new2 = getNewPoint(new Point(-300, 400), pCenter, BX, BY);
+            Point new3 = getNewPoint(new Point(-400, -500), pCenter, BX, BY);
+            Point new4 = getNewPoint(new Point(500, -300), pCenter, BX, BY);
+            //g.DrawLine(Pens.Black, pCenter, new1);
+            g.DrawArc(Pens.Black, new1.X, new1.Y, 1, 1, 45.0F, 360.0F);
+            g.DrawString("p1", font, brush, new PointF(new1.X, new1.Y));
+            g.DrawArc(Pens.Black, new2.X, new2.Y, 1, 1, 45.0F, 360.0F);
+            g.DrawString("p2", font, brush, new PointF(new2.X, new2.Y));
+            g.DrawArc(Pens.Black, new3.X, new3.Y, 1, 1, 45.0F, 360.0F);
+            g.DrawString("p3", font, brush, new PointF(new3.X, new3.Y));
+            g.DrawArc(Pens.Black, new4.X, new4.Y, 1, 1, 45.0F, 360.0F);
+            g.DrawString("p4", font, brush, new PointF(new4.X, new4.Y));
+            g.DrawLine(Pens.Black, new1, new2);
+            g.DrawLine(Pens.Black, new2, new3);
+            g.DrawLine(Pens.Black, new3, new4);
+            g.DrawLine(Pens.Black, new4, new1);
+            bitmap1.Save("aaa.bmp");
+
+            pictureBox1.Image = bitmap1;
+            g.Dispose();
+
+        }
+
+
+
+        Point getNewPoint(Point p, Point pZero, int bx, int by)
+        {
+            Point myp = new Point();
+            myp.X = pZero.X + p.X / bx;
+            if (p.Y > 0)
+                myp.Y = pZero.Y - Math.Abs(p.Y / by);
+            else
+                myp.Y = pZero.Y + Math.Abs(p.Y / by);
+            return myp;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -366,6 +438,52 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+
+            Bitmap bitmap2 = Process(bitmap1);
+
+            pictureBox1.Image = bitmap2;
+
+
+        }
+
+        private static Bitmap Process(Bitmap bitmap)
+        {
+            //1.創建一個新的圖片
+            Bitmap newBitmap = new Bitmap(bitmap.Width, bitmap.Height);
+            //2.遍歷整個圖片
+            for (int x = 0; x < bitmap.Width; x++)
+            {
+                for (int y = 0; y < bitmap.Height; y++)
+                {
+                    //3.去掉邊框操作
+                    if (x == 0 || y == 0 || x == bitmap.Width - 1 || y == bitmap.Height - 1)
+                    {
+                        newBitmap.SetPixel(x, y, Color.White);
+                    }
+                    else
+                    {
+
+                        Color color = bitmap.GetPixel(x, y);
+                        //4.如果點的顏色是背景干擾色就設置為白色
+                        if (color.Equals(Color.FromArgb(204, 204, 51)) ||
+                        color.Equals(Color.FromArgb(153, 204, 51)) ||
+                        color.Equals(Color.FromArgb(204, 204, 204)) ||
+                        color.Equals(Color.FromArgb(204, 255, 51)) ||
+                        color.Equals(Color.FromArgb(204, 255, 102)))
+                        {
+                            newBitmap.SetPixel(x, y, Color.White);
+                        }
+                        else
+                        {
+                            //5.否則就設成原來的顏色
+                            newBitmap.SetPixel(x, y, color);
+                        }
+                    }
+                }
+            }
+            return newBitmap;
         }
 
         private void button11_Click(object sender, EventArgs e)

@@ -218,6 +218,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(170, 70);
             this.button9.TabIndex = 102;
+            this.button9.Text = "取得mp3音樂長度";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -250,6 +251,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(170, 70);
             this.button10.TabIndex = 99;
+            this.button10.Text = "音頻切割";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -332,6 +334,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(170, 70);
             this.button15.TabIndex = 91;
+            this.button15.Text = "產生隨機漢字";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

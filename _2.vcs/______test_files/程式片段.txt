@@ -1,4 +1,32 @@
 
+
+            //WebBrowser 轉 RichTextBox
+            
+            string testString = @"<FONT face=Verdana><FONT face=Verdana> 
+<P><FONT face=Verdana>測試內容：</FONT></P> 
+<P><FONT face=Verdana>    哈哈       <BR>    吃飯啦<BR>     下班啦   <BR>     回家<BR>     睡覺       </FONT></P> 
+<P><FONT face=Verdana>呵呵呵<BR>神馬</FONT></P> 
+<P><FONT face=Verdana><BR></FONT> </P></FONT> 
+<P><FONT face=Verdana><BR></FONT> </P></FONT>";
+
+            webBrowser1.DocumentText = testString;
+            webBrowser1.Document.Write(testString);
+
+            webBrowser1.Refresh();
+
+            using (WebBrowser webBrowser = new WebBrowser())
+            {
+                webBrowser.Visible = false;
+
+                webBrowser.DocumentText = testString;
+
+                webBrowser.Document.Write(testString);
+
+                richTextBox1.Text = webBrowser.Document.Body.OuterText;
+            } 
+
+
+
 \\圖片格式轉換
 
         public void ImageFormatter(string sourcePath, string distationPath, string format) {

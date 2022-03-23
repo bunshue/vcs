@@ -2734,8 +2734,8 @@ namespace vcs_DrAP
             if (mode == SEARCH_MODE_VCS)
             {
                 search_mode = SEARCH_MODE_VCS;
-                richTextBox1.Text += "搜尋開始vcs\n";
-                richTextBox2.Text += "搜尋開始vcs\n\n";
+                richTextBox1.Text += "搜尋開始vcs\t" + textBox3.Text + "\n";
+                richTextBox2.Text += "搜尋開始vcs\t" + textBox3.Text + "\n";
 
                 bt_search_pattern_vcs.BackgroundImage = null;
                 bt_search_pattern_vcs.BackColor = Color.Red;
