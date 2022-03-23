@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;    //for FileInfo DirectoryInfo
 using System.Diagnostics;   //for Process
 using System.Globalization; //for CultureInfo
+
 using MediaInfoNET;
 
 namespace vcs_DrAP
@@ -231,9 +232,7 @@ namespace vcs_DrAP
             x_st += bt_help.Size.Width + dx;
             bt_delete_file.Location = new Point(x_st, y_st + dy * 0);
 
-
-
-
+            bt_save_file_data.Location = new Point(bt_search_pattern_python.Location.X + 125, bt_search_pattern_python.Location.Y);
 
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_copy_rtb_data.Location = new Point(bt_clear2.Location.X, bt_copy_rtb_data.Location.Y);
@@ -3029,6 +3028,11 @@ namespace vcs_DrAP
         private void textBox3_Click(object sender, EventArgs e)
         {
             textBox3.SelectAll();
+        }
+
+        private void bt_save_file_data_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

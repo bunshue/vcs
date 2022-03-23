@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Draw_DoubleBuffer
+namespace vcs_Screensaver7
 {
     static class Program
     {
@@ -15,7 +15,7 @@ namespace vcs_Draw_DoubleBuffer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new screen());
         }
     }
 }

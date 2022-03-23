@@ -109,8 +109,7 @@ namespace vcs_Process2
             foreach (var instance in instances)
             {
 
-                using (var counter = new PerformanceCounter(category.CategoryName,
-                     "ID Process", instance, true))
+                using (var counter = new PerformanceCounter(category.CategoryName, "ID Process", instance, true))
                 {
                     int val = (int)counter.RawValue;
                     if (val == pid)

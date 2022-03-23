@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6C9FBD9C-3654-4328-9DF5-6F1D043C37F3}</ProjectGuid>
+    <ProjectGuid>{2692AFEB-CC3C-4DB2-AE9C-1FED6B1661CE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Draw_DoubleBuffer</RootNamespace>
-    <AssemblyName>vcs_Draw_DoubleBuffer</AssemblyName>
+    <RootNamespace>vcs_Screensaver7</RootNamespace>
+    <AssemblyName>vcs_Screensaver7</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

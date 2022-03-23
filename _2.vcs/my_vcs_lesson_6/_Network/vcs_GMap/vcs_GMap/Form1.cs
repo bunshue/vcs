@@ -53,7 +53,8 @@ namespace vcs_GMap
             gMapControl1.MouseDown += new MouseEventHandler(mapControl_MouseDown);
             gMapControl1.MouseMove += new MouseEventHandler(mapControl_MouseMove);
             gMapControl1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
-
+            gMapControl1.MouseClick += new MouseEventHandler(gMapControl1_MouseClick);
+            gMapControl1.Overlays.Add(markersOverlay);
             gMapControl1.Overlays.Add(RouteMark);
             update_gMapControl1_info();
         }
@@ -93,12 +94,8 @@ namespace vcs_GMap
             gMapControl1.MinZoom = 2;  //最小比例 >=1
             gMapControl1.MaxZoom = 24; //最大比例 <=24
             gMapControl1.Zoom = 16;     //当前比例
-            //gMapControl1.Position = new PointLatLng(32.064, 118.704); //地图中心位置：南京
             gMapControl1.Position = new PointLatLng(24.838, 121.003); //地图中心位置：竹北
 
-            gMapControl1.Overlays.Add(markersOverlay);
-
-            gMapControl1.MouseClick += new MouseEventHandler(gMapControl1_MouseClick);
             update_gMapControl1_info();
         }
 
@@ -106,14 +103,15 @@ namespace vcs_GMap
         {
             if (e.Button == MouseButtons.Right)
             {
-                PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+                if (checkBox2.Checked == true)   //滑鼠右鍵畫標記
+                {
+                    PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
 
-                richTextBox1.Text += "控件座標(" + e.X.ToString() + ", " + e.Y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
+                    richTextBox1.Text += "控件座標(" + e.X.ToString() + ", " + e.Y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
 
-
-                GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
-                markersOverlay.Markers.Add(marker);
-
+                    GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
+                    markersOverlay.Markers.Add(marker);
+                }
             }
         }
 
@@ -126,11 +124,6 @@ namespace vcs_GMap
             string[] studentName = new string[4] { "121.00410306376308, 24.83923062590916", "121.00929660194892, 24.83900079788313", "121.00903566227302, 24.835634744818194", "121.01120945267155, 24.836966817989957" };
 
             SetLableOnMap_fore(studentName, markersOverlay);
-
-
-
-
-
         }
 
         public void SetLableOnMap_fore(string[] LatLngInfo, GMapOverlay markers_Overlay)
@@ -210,17 +203,20 @@ namespace vcs_GMap
             //richTextBox1.Text += "MouseDown\n";
             if (e.Button == MouseButtons.Left)
             {
-                PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
-                if (Route == null)
+                if (checkBox1.Checked == true)   //滑鼠左鍵連線
                 {
-                    Route = new GmapMarkerRoute(point);
-                    Route.Origin.X = gMapControl1.Size.Width / 2;
-                    Route.Origin.Y = gMapControl1.Size.Height / 2;
-                    Route.OriginOffset.X = DragOffsetX;
-                    Route.OriginOffset.Y = DragOffsetY;
-                    RouteMark.Markers.Add(Route as GMapMarker);
+                    PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+                    if (Route == null)
+                    {
+                        Route = new GmapMarkerRoute(point);
+                        Route.Origin.X = gMapControl1.Size.Width / 2;
+                        Route.Origin.Y = gMapControl1.Size.Height / 2;
+                        Route.OriginOffset.X = DragOffsetX;
+                        Route.OriginOffset.Y = DragOffsetY;
+                        RouteMark.Markers.Add(Route as GMapMarker);
+                    }
+                    Route.AddPoint(point);
                 }
-                Route.AddPoint(point);
             }
             else if (e.Button == MouseButtons.Right)
             {

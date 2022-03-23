@@ -1,4 +1,72 @@
 
+        //直接寫一個OnPaint在此
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            //test_double_buffer1(e); //不使用雙倍緩衝
+            test_double_buffer2(e); //使用雙倍緩衝
+        }
+
+
+
+使用Brush類繪製圖像
+
+
+public partial class TextureBruse : Form
+    {
+        private Image theimage;
+        private Image smallimage;
+
+        public TextureBruse()
+        {
+            InitializeComponent();
+
+            SetStyle(ControlStyles.Opaque, true);
+            Bounds = new Rectangle(0, 0, 500, 500);
+            theimage = new Bitmap("ico.gif");      //Application.StartupPath+@"ico.gif"
+            smallimage = new Bitmap(theimage, new Size(theimage.Width, theimage.Height));
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.FillRectangle(Brushes.White,ClIEntRectangle);
+            
+            Brush brush = new TextureBrush(smallimage, new&nbs(0, 0,smallimage.Width, smallimage.Height));
+            //用圖像創建畫筆,來繪制圖像
+            g.FillEllipse(brush, new Rectangle(0,200,200,200));
+            //用圖像創建剛筆,來繪制圖像
+            Pen pen=new Pen(brush,20);
+            g.DrawRectangle(pen, new Rectangle(250, 200, 200, 200));
+            //用圖像繪製文本
+            Font font = new Font("Times New Roman", 40, FontStyle.Bold | FontStyle.Italic);
+            g.DrawString("Hello Image !!", font, brush, new Rectangle(0,0,500,font.Height));
+
+            brush.Dispose();
+            font.Dispose();
+        }
+    }
+
+
+
+
+//餅圖的一種畫法
+
+  void Page_Load(object sender,EventArgs e)
+  {
+  Bitmap image=new Bitmap(350,200);
+  Graphics g=Graphics.FromImage(image);
+  g.Clear(Color.White);
+  Rectangle outline=new Rectangle(10,5,300,100);
+  g.DrawEllipse(new Pen(Color.Black,8.0f),outline);
+  g.FillPIE(new SolidBrush(Color.Red),outline,-20f,120f);
+  //這些角度的大小可以由數據庫中的對比數據計算決定
+  g.FillPIE(new SolidBrush(Color.Yellow),outline,100f,120f);
+  g.FillPIE(new SolidBrush(Color.Blue),outline,220f,100f);
+
+  g.FillPIE(new SolidBrush(Color.Green),outline,320f,40f);
+  image.Save(Response.OutputStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+  }
+
+
 
             //WebBrowser 轉 RichTextBox
             

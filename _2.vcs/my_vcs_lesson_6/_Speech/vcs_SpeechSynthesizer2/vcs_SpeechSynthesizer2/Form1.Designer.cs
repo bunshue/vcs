@@ -45,6 +45,7 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.button9 = new System.Windows.Forms.Button();
+            this.bt_info = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.SuspendLayout();
@@ -95,8 +96,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(717, 245);
             this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "//C#把文字轉換成聲音，\n\n在System.Speech命名空間下，SpeechSynthesizer類可以把文字讀出來，一起來玩下~~\n\n首先在Windows" +
-                "窗體項目中引入System.Speech。界面部分";
+            this.richTextBox1.Text = "//C#把文字轉換成聲音，\n在System.Speech命名空間下，\nSpeechSynthesizer類可以把文字讀出來";
             // 
             // richTextBox2
             // 
@@ -108,11 +108,10 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(12, 396);
+            this.button5.Location = new System.Drawing.Point(12, 385);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(104, 45);
             this.button5.TabIndex = 6;
-            this.button5.Text = "Info";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -212,11 +211,22 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // bt_info
+            // 
+            this.bt_info.Location = new System.Drawing.Point(758, 12);
+            this.bt_info.Name = "bt_info";
+            this.bt_info.Size = new System.Drawing.Size(104, 45);
+            this.bt_info.TabIndex = 17;
+            this.bt_info.Text = "Info";
+            this.bt_info.UseVisualStyleBackColor = true;
+            this.bt_info.Click += new System.EventHandler(this.bt_info_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(874, 700);
+            this.Controls.Add(this.bt_info);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.trackBar2);
             this.Controls.Add(this.trackBar1);
@@ -263,6 +273,7 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button bt_info;
     }
 }
 

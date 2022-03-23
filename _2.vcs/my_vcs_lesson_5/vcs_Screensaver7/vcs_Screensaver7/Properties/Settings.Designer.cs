@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Draw_DoubleBuffer.Properties
+namespace vcs_Screensaver7.Properties
 {
 
 

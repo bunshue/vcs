@@ -33,8 +33,8 @@ namespace vcs_System1
     {
         DateTime start_time = DateTime.Now;
 
-        //PerformanceCounter cpuPerformance = new PerformanceCounter(); 若未給參數 要在使用時給參數
-        static PerformanceCounter cpuPerformance = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+        //PerformanceCounter pc = new PerformanceCounter(); 若未給參數 要在使用時給參數
+        static PerformanceCounter pc = new PerformanceCounter("Processor", "% Processor Time", "_Total");
 
         public Form1()
         {
@@ -1367,14 +1367,14 @@ namespace vcs_System1
             label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024) + " MB";
 
             timer2.Interval = 2000;
-            double cpu_usage = cpuPerformance.NextValue();
+            double cpu_usage = pc.NextValue();
             label5.Text = "CPU使用率 " + cpu_usage.ToString() + " %";
             richTextBox1.Text += "CPU使用率 " + cpu_usage.ToString() + " %\n";
 
             /*
-            cpuPerformance.CategoryName = "Processor";
-            cpuPerformance.CounterName = "% Processor Time";
-            cpuPerformance.InstanceName = "_Total";
+            pc.CategoryName = "Processor";
+            pc.CounterName = "% Processor Time";
+            pc.InstanceName = "_Total";
             */
         }
 

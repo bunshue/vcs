@@ -34,56 +34,17 @@ namespace vcs_SpeechSynthesizer2
 
             synth = new SpeechSynthesizer();
             synth.SpeakCompleted += new EventHandler<SpeakCompletedEventArgs>(synth_SpeakCompleted);
-            //synth.SpeakStarted += SpeakStarted;
-            //synth.SpeakCompleted += SpeakCompleted;
+            //synth.SpeakStarted += synth_SpeakStarted;
             /*
             SpeakCompleted：朗讀完成事件，朗讀完成後會觸發該時間。可以在該事件中處理播放完成後的流程。
             SpeakStarted：朗讀開始事件。
             SpeakProgress：朗讀過程事件，可以繼續一些進度條處理。
             */
 
-            var voiceList = synth.GetInstalledVoices();		//GetInstalledVoices 獲取當前系統中安裝的語音播放人，返回一個VoiceInfo對象集合
-            richTextBox2.Text += "目前有安裝的人聲 有 " + voiceList.Count.ToString() + " 種\n";
-            int i = 1;
-            foreach (InstalledVoice voice in synth.GetInstalledVoices())
-            {
-                richTextBox2.Text += "第 " + (i++).ToString() + " 種\n";
-                VoiceInfo info = voice.VoiceInfo;
-                richTextBox2.Text += "目前有安裝的人聲 Name : " + info.Name + "\n";
-                richTextBox2.Text += "目前有安裝的人聲 Age : " + info.Age + "\n";
-                richTextBox2.Text += "目前有安裝的人聲 Culture : " + info.Culture + "\n";
-                richTextBox2.Text += "目前有安裝的人聲 AdditionalInfo : " + info.AdditionalInfo + "\n";
-                richTextBox2.Text += "目前有安裝的人聲 Description : " + info.Description + "\n";
-                richTextBox2.Text += "目前有安裝的人聲 Gender : " + info.Gender + "\n";
-                richTextBox2.Text += "目前有安裝的人聲 Id : " + info.Id + "\n";
-                richTextBox2.Text += "目前有安裝的人聲 SupportedAudioFormats Counts : " + info.SupportedAudioFormats.Count.ToString() + "\n";
-
-                string AudioFormats = "";
-                foreach (SpeechAudioFormatInfo fmt in info.SupportedAudioFormats)
-                {
-                    AudioFormats += String.Format("{0}\n", fmt.EncodingFormat.ToString());
-                    richTextBox2.Text += "支援的 AudioFormats : " + AudioFormats + "\n";
-                }
-
-                string msg = string.Empty;
-                foreach (string key in synth.Voice.AdditionalInfo.Keys)
-                {
-                    msg += String.Format("  {0}: {1}\n", key, synth.Voice.AdditionalInfo[key]);
-                }
-                richTextBox2.Text += "目前有安裝的人聲 AdditionalInfo : " + msg + "\n";
-                richTextBox2.Text += "\n";
-            }
-
-            //Rate：播放語速，-10 ~ 10
-            //Volume：音量調節：0 ~ 100
-
-            richTextBox2.Text += "預設速度 : " + synth.Rate.ToString() + "\n";
-            richTextBox2.Text += "預設音量 : " + synth.Volume.ToString() + "\n";
-
             trackBar1.Value = synth.Rate;
             trackBar2.Value = synth.Volume;
-            label1.Text = "播放速度 : " + trackBar1.Value.ToString();
-            label2.Text = "音量大小 : " + trackBar2.Value.ToString();
+
+            update_rate_volume();
 
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
@@ -169,29 +130,7 @@ namespace vcs_SpeechSynthesizer2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            richTextBox2.Text += "播放速度 Rate = " + synth.Rate.ToString() + "\n";
-            richTextBox2.Text += "音量大小 Volume = " + synth.Volume.ToString() + "\n";
-            richTextBox2.Text += "Voice = " + synth.Voice + "\n";
-            richTextBox2.Text += "State = " + synth.State.ToString() + "\n";
-
-            foreach (InstalledVoice voice in synth.GetInstalledVoices())
-            {
-                VoiceInfo info = voice.VoiceInfo;
-                richTextBox2.Text += " Voice Name: " + info.Name + "\n";
-            }
-            ListInstalledVoices();
-        }
-
-        void ListInstalledVoices()
-        {
-            richTextBox1.Text += "\n列出Windows 裝了哪些語音以及其支援語系\n";
-            synth = new SpeechSynthesizer();
-            synth.GetInstalledVoices()
-                .ToList().ForEach((v) =>
-                {
-                    //Console.WriteLine(v.VoiceInfo.Name + " " +v.VoiceInfo.Culture.DisplayName);
-                    richTextBox1.Text += v.VoiceInfo.Name + " " + v.VoiceInfo.Culture.DisplayName + "\n";
-                });
+            
         }
 
         /// <summary>
@@ -252,18 +191,12 @@ namespace vcs_SpeechSynthesizer2
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            label1.Text = "播放速度 : " + trackBar1.Value.ToString();
-            //synth.Pause();
-            synth.Rate = trackBar1.Value;
-            //synth.Resume();
+            update_rate_volume();
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            label2.Text = "音量大小 : " + trackBar2.Value.ToString();
-            //synth.Pause();
-            synth.Volume = trackBar2.Value;
-            //synth.Resume();
+            update_rate_volume();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -287,6 +220,82 @@ namespace vcs_SpeechSynthesizer2
             synth.SelectVoice("Microsoft Tracy Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
             synth.Speak("大家好，我是黑暗執行緒");		//開始進行朗讀，參數是朗讀的文本
         }
+
+        void show_speech_info()
+        {
+            richTextBox2.Clear();
+            richTextBox2.Text += "播放速度 Rate = " + synth.Rate.ToString() + "\t\t範圍 : -10 ~ 10\n";
+            richTextBox2.Text += "音量大小 Volume = " + synth.Volume.ToString() + "\t範圍 : 0 ~ 100\n";
+
+            //richTextBox2.Text += "Voice = " + synth.Voice + "\n";
+            richTextBox2.Text += "當前朗讀的人員 = " + synth.Voice.Name + "\n";
+            //richTextBox2.Text += "State = " + synth.State.ToString() + "\n";
+
+            foreach (InstalledVoice voice in synth.GetInstalledVoices())
+            {
+                VoiceInfo info = voice.VoiceInfo;
+                richTextBox2.Text += "目前已安裝的朗讀人員 : " + info.Name + "\n";
+            }
+            ListInstalledVoices();
+        }
+
+        void ListInstalledVoices()
+        {
+            richTextBox2.Text += "\n列出Windows 裝了哪些語音以及其支援語系\n";
+            synth = new SpeechSynthesizer();
+
+            var voiceList = synth.GetInstalledVoices();		//GetInstalledVoices 獲取當前系統中安裝的語音播放人員，返回一個VoiceInfo對象集合
+            richTextBox2.Text += "目前有安裝的人聲 有 " + voiceList.Count.ToString() + " 種\n";
+            int i = 1;
+            foreach (InstalledVoice voice in synth.GetInstalledVoices())
+            {
+                richTextBox2.Text += "第 " + (i++).ToString() + " 種\n";
+                VoiceInfo info = voice.VoiceInfo;
+                richTextBox2.Text += "目前有安裝的人聲 Name : " + info.Name + "\n";
+                richTextBox2.Text += "目前有安裝的人聲 Age : " + info.Age + "\n";
+                richTextBox2.Text += "目前有安裝的人聲 DisplayName : " + info.Culture.DisplayName + "\n";
+                richTextBox2.Text += "目前有安裝的人聲 Culture : " + info.Culture + "\n";
+                richTextBox2.Text += "目前有安裝的人聲 AdditionalInfo : " + info.AdditionalInfo + "\n";
+                richTextBox2.Text += "目前有安裝的人聲 Description : " + info.Description + "\n";
+                richTextBox2.Text += "目前有安裝的人聲 Gender : " + info.Gender + "\n";
+                richTextBox2.Text += "目前有安裝的人聲 Id : " + info.Id + "\n";
+                richTextBox2.Text += "目前有安裝的人聲 SupportedAudioFormats Counts : " + info.SupportedAudioFormats.Count.ToString() + "\n";
+
+                string AudioFormats = "";
+                foreach (SpeechAudioFormatInfo fmt in info.SupportedAudioFormats)
+                {
+                    AudioFormats += String.Format("{0}\n", fmt.EncodingFormat.ToString());
+                    richTextBox2.Text += "支援的 AudioFormats : " + AudioFormats + "\n";
+                }
+
+                string msg = string.Empty;
+                foreach (string key in synth.Voice.AdditionalInfo.Keys)
+                {
+                    msg += String.Format("  {0}: {1}\n", key, synth.Voice.AdditionalInfo[key]);
+                }
+                richTextBox2.Text += "目前有安裝的人聲 AdditionalInfo : " + msg + "\n";
+                richTextBox2.Text += "\n";
+            }
+            richTextBox2.Text += "預設速度 : " + synth.Rate.ToString() + "\n";
+            richTextBox2.Text += "預設音量 : " + synth.Volume.ToString() + "\n";
+        }
+
+        void update_rate_volume()
+        {
+            label1.Text = "播放速度 : " + trackBar1.Value.ToString();
+            //synth.Pause();
+            synth.Rate = trackBar1.Value;
+            //synth.Resume();
+
+            label2.Text = "音量大小 : " + trackBar2.Value.ToString();
+            //synth.Pause();
+            synth.Volume = trackBar2.Value;
+            //synth.Resume();
+        }
+
+        private void bt_info_Click(object sender, EventArgs e)
+        {
+            show_speech_info();
+        }
     }
 }
-
