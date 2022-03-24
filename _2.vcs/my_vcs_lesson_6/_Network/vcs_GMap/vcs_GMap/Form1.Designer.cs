@@ -43,6 +43,7 @@
             this.tb_zoom = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.button0 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gMapControl1
@@ -54,7 +55,7 @@
             this.gMapControl1.GrayScaleMode = false;
             this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gMapControl1.LevelsKeepInMemmory = 5;
-            this.gMapControl1.Location = new System.Drawing.Point(12, 74);
+            this.gMapControl1.Location = new System.Drawing.Point(12, 153);
             this.gMapControl1.MarkersEnabled = true;
             this.gMapControl1.MaxZoom = 2;
             this.gMapControl1.MinZoom = 2;
@@ -68,15 +69,15 @@
             this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl1.ShowTileGridLines = false;
-            this.gMapControl1.Size = new System.Drawing.Size(800, 500);
+            this.gMapControl1.Size = new System.Drawing.Size(960, 540);
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(13, 13);
+            this.button1.Location = new System.Drawing.Point(115, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 39);
+            this.button1.Size = new System.Drawing.Size(100, 40);
             this.button1.TabIndex = 1;
             this.button1.Text = "載入地圖 竹北";
             this.button1.UseVisualStyleBackColor = true;
@@ -84,9 +85,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(140, 13);
+            this.button2.Location = new System.Drawing.Point(218, 12);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 39);
+            this.button2.Size = new System.Drawing.Size(100, 40);
             this.button2.TabIndex = 2;
             this.button2.Text = "加圖標";
             this.button2.UseVisualStyleBackColor = true;
@@ -94,17 +95,17 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(908, 129);
+            this.richTextBox1.Location = new System.Drawing.Point(978, 153);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(213, 445);
+            this.richTextBox1.Size = new System.Drawing.Size(250, 540);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(273, 12);
+            this.button3.Location = new System.Drawing.Point(321, 12);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(97, 39);
+            this.button3.Size = new System.Drawing.Size(100, 40);
             this.button3.TabIndex = 4;
             this.button3.Text = "載入地圖";
             this.button3.UseVisualStyleBackColor = true;
@@ -112,18 +113,18 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(395, 13);
+            this.button4.Location = new System.Drawing.Point(424, 12);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(97, 39);
+            this.button4.Size = new System.Drawing.Size(100, 40);
             this.button4.TabIndex = 5;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(527, 13);
+            this.button5.Location = new System.Drawing.Point(527, 12);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(97, 39);
+            this.button5.Size = new System.Drawing.Size(100, 40);
             this.button5.TabIndex = 6;
             this.button5.Text = "載入地圖";
             this.button5.UseVisualStyleBackColor = true;
@@ -131,9 +132,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(715, 12);
+            this.button6.Location = new System.Drawing.Point(630, 12);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(97, 39);
+            this.button6.Size = new System.Drawing.Size(100, 40);
             this.button6.TabIndex = 7;
             this.button6.Text = "Save";
             this.button6.UseVisualStyleBackColor = true;
@@ -141,9 +142,9 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(835, 63);
+            this.button7.Location = new System.Drawing.Point(748, 7);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(49, 39);
+            this.button7.Size = new System.Drawing.Size(50, 35);
             this.button7.TabIndex = 8;
             this.button7.Text = "+";
             this.button7.UseVisualStyleBackColor = true;
@@ -151,9 +152,9 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(835, 108);
+            this.button8.Location = new System.Drawing.Point(748, 48);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(49, 39);
+            this.button8.Size = new System.Drawing.Size(50, 35);
             this.button8.TabIndex = 9;
             this.button8.Text = "-";
             this.button8.UseVisualStyleBackColor = true;
@@ -161,9 +162,9 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(835, 153);
+            this.button9.Location = new System.Drawing.Point(748, 89);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(49, 39);
+            this.button9.Size = new System.Drawing.Size(50, 35);
             this.button9.TabIndex = 10;
             this.button9.Text = "Reload";
             this.button9.UseVisualStyleBackColor = true;
@@ -171,9 +172,9 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(835, 218);
+            this.button10.Location = new System.Drawing.Point(804, 44);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(49, 39);
+            this.button10.Size = new System.Drawing.Size(50, 35);
             this.button10.TabIndex = 11;
             this.button10.Text = "info";
             this.button10.UseVisualStyleBackColor = true;
@@ -182,16 +183,16 @@
             // tb_zoom
             // 
             this.tb_zoom.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_zoom.Location = new System.Drawing.Point(835, 19);
+            this.tb_zoom.Location = new System.Drawing.Point(803, 5);
             this.tb_zoom.Name = "tb_zoom";
-            this.tb_zoom.Size = new System.Drawing.Size(49, 33);
+            this.tb_zoom.Size = new System.Drawing.Size(50, 33);
             this.tb_zoom.TabIndex = 12;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox1.Location = new System.Drawing.Point(908, 19);
+            this.checkBox1.Location = new System.Drawing.Point(1059, 12);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(142, 23);
             this.checkBox1.TabIndex = 13;
@@ -202,18 +203,28 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox2.Location = new System.Drawing.Point(908, 51);
+            this.checkBox2.Location = new System.Drawing.Point(1059, 44);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(161, 23);
             this.checkBox2.TabIndex = 14;
             this.checkBox2.Text = "滑鼠右鍵畫標記";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
+            // button0
+            // 
+            this.button0.Location = new System.Drawing.Point(12, 12);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(100, 40);
+            this.button0.TabIndex = 15;
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1133, 592);
+            this.ClientSize = new System.Drawing.Size(1275, 712);
+            this.Controls.Add(this.button0);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.tb_zoom);
@@ -254,6 +265,7 @@
         private System.Windows.Forms.TextBox tb_zoom;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Button button0;
     }
 }
 

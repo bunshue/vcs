@@ -39,6 +39,7 @@ namespace vcs_GMap
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
 
             gMapControl1.Manager.ImportFromGMDB(CurrentDir + "\\GMapCache\\mapdata.gmdb");
 
@@ -57,6 +58,40 @@ namespace vcs_GMap
             gMapControl1.Overlays.Add(markersOverlay);
             gMapControl1.Overlays.Add(RouteMark);
             update_gMapControl1_info();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 20;
+            y_st = 20;
+            dx = 110;
+            dy = 50;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button5.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            button6.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+
+            button7.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            button8.Location = new Point(x_st + dx * 7, y_st + dy * 1-10);
+            button9.Location = new Point(x_st + dx * 7, y_st + dy * 2-20);
+            button10.Location = new Point(x_st + dx * 7+60, y_st + dy * 1-10);
+            tb_zoom.Location = new Point(x_st + dx * 7 + 60, y_st + dy * 0);
+
+            x_st = 20;
+            y_st = 150;
+            gMapControl1.Location = new Point(x_st, y_st);
+            richTextBox1.Location = new Point(x_st + 960 + 20, y_st);
+            
         }
 
         void setup_gMapControl1()
@@ -85,6 +120,11 @@ namespace vcs_GMap
         void update_gMapControl1_info()
         {
             tb_zoom.Text = gMapControl1.Zoom.ToString();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -310,6 +350,7 @@ namespace vcs_GMap
             richTextBox1.Text += "W = " + gMapControl1.Width.ToString() + "\n";
             richTextBox1.Text += "H = " + gMapControl1.Height.ToString() + "\n";
         }
+
     }
 
     class GmapMarkerRoute : GMapMarker

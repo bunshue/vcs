@@ -1,4 +1,63 @@
 
+　　（2）現在我們來設計程序的主界面：
+
+Form1的屬性
+　　先將窗體的Name屬性設置為screen
+、Text屬性設置為空，
+
+BackColor屬性設置為Black
+Size屬性設置為(800, 600)
+ControlBox、MaximizeBox、MinimizeBox、ShowInTaskbar屬性設置均為false
+FormBorderStyle屬性設置為None
+
+
+
+
+
+　/// 應用程序的主入口點。
+
+　///
+
+　[STAThread]
+
+　static void Main(string[] args)
+
+　{
+
+　　if(args.Length==1)
+
+　　　if(args[0].Substring(0,2).Equals("/c"))
+
+　　　{
+
+　　　　MessageBox.Show("沒有設置項功能","C# Screen Saver");
+
+　　　　Application.Exit();
+
+　　　}
+
+　　　else if(args[0]=="/s")
+
+　　　Application.Run(new screen());
+
+　　else if(args[0]=="/a")
+
+　　{
+
+　　　MessageBox.Show("沒有口令功能","C# Screen saver");
+
+　　　Application.Exit();
+
+　　}
+
+　　else
+
+　　Application.Run(new screen());
+
+　}
+　　最後運行該程序，把screen_saver.exe改為screen_saver.scr，拷入Windows系統目錄中，這樣就可以運行該屏幕保護程序。
+
+
 
 
 

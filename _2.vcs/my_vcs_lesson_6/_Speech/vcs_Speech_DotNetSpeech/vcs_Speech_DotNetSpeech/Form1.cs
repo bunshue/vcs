@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using DotNetSpeech;
+using System.IO;
 using System.Threading;
 
-using System.IO;
+using DotNetSpeech; //for SpVoice
 
 //使用DotNetSpeech 做 文字轉語音
 //微軟 SAPI.SpVoice C# 使用方法
@@ -22,7 +22,7 @@ namespace vcs_Speech_DotNetSpeech
 {
     public partial class Form1 : Form
     {
-        SpVoice voice = new DotNetSpeech.SpVoiceClass();
+        SpVoice voice = new SpVoiceClass();
 
         public delegate void CallBack(bool b, int InputWordPosition, int InputWordLength);
 
@@ -71,7 +71,7 @@ namespace vcs_Speech_DotNetSpeech
         public List<string> getDescription()
         {
             List<string> list = new List<string>();
-            DotNetSpeech.ISpeechObjectTokens obj = voice.GetVoices();
+            ISpeechObjectTokens obj = voice.GetVoices();
             int count = obj.Count;//獲取語音庫總數
             for (int i = 0; i < count; i++)
             {
@@ -88,7 +88,7 @@ namespace vcs_Speech_DotNetSpeech
         public bool setDescription(string name)
         {
             List<string> list = new List<string>();
-            DotNetSpeech.ISpeechObjectTokens obj = voice.GetVoices();
+            ISpeechObjectTokens obj = voice.GetVoices();
             int count = obj.Count;//獲取語音庫總數
             bool result = false;
             for (int i = 0; i < count; i++)
@@ -156,7 +156,7 @@ namespace vcs_Speech_DotNetSpeech
             SpeechStreamFileMode SpFileMode = SpeechStreamFileMode.SSFMCreateForWrite;
             SpFileStream SpFileStream = new SpFileStream();
             SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-            SpAudioFormat SpAudio = new DotNetSpeech.SpAudioFormat();
+            SpAudioFormat SpAudio = new SpAudioFormat();
             SpAudio.Type = SpAudioType;
             SpFileStream.Format = SpAudio;
             SpFileStream.Open(path, SpFileMode, false);
@@ -186,7 +186,7 @@ namespace vcs_Speech_DotNetSpeech
             text = AddKongGeToPlateNo(text).Trim();
             setRate(0);
             setVolume(100);
-            WreiteToWAV("aaa.wav", text, DotNetSpeech.SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono); //SAFT11kHz16BitMono 生成wav文件
+            WreiteToWAV("aaa.wav", text, SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono); //SAFT11kHz16BitMono 生成wav文件
         }
 
         // 连续字母中加空格

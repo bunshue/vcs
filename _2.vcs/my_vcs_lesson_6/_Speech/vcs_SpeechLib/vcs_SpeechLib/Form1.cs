@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using SpeechLib;
+using SpeechLib;    //for SpVoiceClass
 /*
 參考/加入參考/COM/Microsoft Speech Object Library 5.4 選 C:\Windows\System32\Speech\Common\sapi.dll
 
@@ -30,10 +30,6 @@ namespace vcs_SpeechLib
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //讀出richtextbox裡的文字
-            SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-            SpVoice sp = new SpVoice();
-            sp.Speak(richTextBox1.Text, spFlags);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -41,27 +37,30 @@ namespace vcs_SpeechLib
             string article1 = "Insight Medical Solutions Inc.";
             string article2 = "群曜醫電股份有限公司";
 
+            SpeechVoiceSpeakFlags spFlags1 = SpeechVoiceSpeakFlags.SVSFDefault;
+            SpeechVoiceSpeakFlags spFlags2 = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+
             richTextBox1.Text += "\n應用一: 只說英文\n";
             //應用一: 只說英文
-            SpVoiceClass voice1 = new SpVoiceClass();
+            SpVoiceClass spvc1 = new SpVoiceClass();
             //Item(1)女聲
-            voice1.Voice = voice1.GetVoices(string.Empty, string.Empty).Item(1);
+            spvc1.Voice = spvc1.GetVoices(string.Empty, string.Empty).Item(1);
             //SVSFDefault: Specifies that the default settings
-            voice1.Speak(article1, SpeechVoiceSpeakFlags.SVSFDefault);
+            spvc1.Speak(article1, spFlags1);
 
             richTextBox1.Text += "應用二: 說中文\n";
-            SpVoiceClass voice2 = new SpVoiceClass();
-            voice2.Voice = voice2.GetVoices(string.Empty, string.Empty).Item(0);//Item(0)中文女聲
-            voice2.Speak(article2, SpeechVoiceSpeakFlags.SVSFDefault);
+            SpVoiceClass spvc2 = new SpVoiceClass();
+            spvc2.Voice = spvc2.GetVoices(string.Empty, string.Empty).Item(0);//Item(0)中文女聲
+            spvc2.Speak(article2, spFlags1);
 
             System.Threading.Thread.Sleep(1000);
-            voice2.Speak(article2, SpeechVoiceSpeakFlags.SVSFDefault);
+            spvc2.Speak(article2, spFlags1);
 
             richTextBox1.Text += "應用三: 說英文中文\n";
             //讀出richtextbox裡的文字
-            SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+
             SpVoice sp = new SpVoice();
-            sp.Speak(article1 + article2, spFlags);
+            sp.Speak(article1 + article2, spFlags2);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -120,7 +119,7 @@ namespace vcs_SpeechLib
     public class Speach
     {
         private static Speach _Instance = null;
-        private SpeechLib.SpVoiceClass voice = null;
+        private SpVoiceClass spvc = null;
         private Speach()
         {
             BuildSpeach();
@@ -133,11 +132,11 @@ namespace vcs_SpeechLib
         }
         private void SetChinaVoice()
         {
-            voice.Voice = voice.GetVoices(string.Empty, string.Empty).Item(3);
+            spvc.Voice = spvc.GetVoices(string.Empty, string.Empty).Item(3);
         }
         private void SetEnglishVoice()
         {
-            voice.Voice = voice.GetVoices(string.Empty, string.Empty).Item(1);
+            spvc.Voice = spvc.GetVoices(string.Empty, string.Empty).Item(1);
         }
         private void SpeakChina(string strSpeak)
         {
@@ -196,40 +195,45 @@ namespace vcs_SpeechLib
                 string strValue = strSpeak.Substring(iEbeg, iLen);
                 SpeakEnglishi(strValue);
             }
-
         }
+
         private void BuildSpeach()
         {
-            if (voice == null)
-                voice = new SpVoiceClass();
+            if (spvc == null)
+            {
+                spvc = new SpVoiceClass();
+            }
         }
+
         public int Volume
         {
             get
             {
-                return voice.Volume;
+                return spvc.Volume;
             }
             set
             {
-                voice.SetVolume((ushort)(value));
+                spvc.SetVolume((ushort)(value));
             }
         }
+
         public int Rate
         {
             get
             {
-                return voice.Rate;
+                return spvc.Rate;
             }
             set
             {
-                voice.SetRate(value);
+                spvc.SetRate(value);
             }
         }
+
         private void Speak(string strSpeack)
         {
             try
             {
-                voice.Speak(strSpeack, SpeechVoiceSpeakFlags.SVSFlagsAsync);
+                spvc.Speak(strSpeack, SpeechVoiceSpeakFlags.SVSFlagsAsync);
             }
             catch (Exception err)
             {
@@ -239,17 +243,18 @@ namespace vcs_SpeechLib
 
         public void Stop()
         {
-            voice.Speak(string.Empty, SpeechLib.SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak);
+            spvc.Speak(string.Empty, SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak);
         }
+
         public void Pause()
         {
-            voice.Pause();
+            spvc.Pause();
         }
+
         public void Continue()
         {
-            voice.Resume();
+            spvc.Resume();
         }
-
-
     }//end class
 }
+

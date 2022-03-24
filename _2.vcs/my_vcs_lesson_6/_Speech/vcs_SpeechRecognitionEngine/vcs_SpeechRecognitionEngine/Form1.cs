@@ -7,20 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Speech;
-using System.Speech.Recognition;    //for SpeechRecognitionEngine
-//參考/加入參考/.NET/System.Speech
-
-using System.Speech.Synthesis;
 using System.Threading;
-
 using System.Globalization; //for CultureInfo
+
+using System.Speech;
+using System.Speech.Recognition;    //for SpeechRecognitionEngine   //參考/加入參考/.NET/System.Speech
+using System.Speech.Synthesis;
 
 //語音識別
 /*
 在.NET4.0中，我可以借助System.Speech組件讓電腦來識別我們的聲音。
-
-[1]
 
 以上，當我說"name"，顯示"Darren"，我說"age",顯示"永遠21"。如何做呢？
 
@@ -29,8 +25,6 @@ using System.Globalization; //for CultureInfo
 右鍵電腦右下方的揚聲器，選擇"錄音設備"。
 
 點擊默認的"麥克風"，再點擊左下角的"配置"按鈕。
-
-[2]
 
 點擊"啟動語音識別"。
 */
@@ -145,9 +139,7 @@ namespace vcs_SpeechRecognitionEngine
         {
             SpeechRecognitionEngine sr = new SpeechRecognitionEngine();
             sr.SetInputToDefaultAudioDevice();
-
         }
-
 
         /*
         public void load_listen(VI_Profile profile, VI_Settings settings, ListView statusContainer)
@@ -182,6 +174,5 @@ namespace vcs_SpeechRecognitionEngine
             recEngine.RecognizeAsync(RecognizeMode.Multiple);
         }
         */
-
     }
 }

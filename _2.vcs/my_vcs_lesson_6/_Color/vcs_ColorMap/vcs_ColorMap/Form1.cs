@@ -180,6 +180,7 @@ namespace vcs_ColorMap
                 comboBox1.Items.Add(item);
             }
             comboBox1.SelectedIndex = 0;
+            richTextBox1.Text += "共有 " + comboBox1.Items.Count.ToString() + " 種顏色\n";
         }
 
         private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
@@ -195,7 +196,6 @@ namespace vcs_ColorMap
                 g.FillRectangle(brush, rect.X + 5, rect.Y, 50, rect.Height);
                 g.DrawString(colorName, font, Brushes.Black, rect.X + 15, rect.Top);
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -214,6 +214,8 @@ namespace vcs_ColorMap
                     (Color)field_info.GetValue(null, null),
                     field_info.Name);
             }
+
+            richTextBox1.Text += "共有 " + type.GetProperties().Length.ToString() + " 種顏色\n";
         }
 
         // Display a color sample.
@@ -227,6 +229,6 @@ namespace vcs_ColorMap
             gr.DrawString(clr_name, this.Font, Brushes.Black, 110, y);
             y += 20;
         }
-
     }
 }
+

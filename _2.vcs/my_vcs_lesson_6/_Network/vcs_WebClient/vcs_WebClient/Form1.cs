@@ -665,8 +665,6 @@ namespace vcs_WebClient
         }
 
         //提取並保存網頁源碼 ST
-
-
         string url = @"http://www.google.com";
 
         public string strS;//存取網頁內容
@@ -741,6 +739,47 @@ namespace vcs_WebClient
             MessageBox.Show("保存成功");
         }
         //提取並保存網頁源碼 SP
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+        
     }
 
     public class Protocols
