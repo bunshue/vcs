@@ -1,9 +1,39 @@
 
-        //直接寫一個OnPaint在此
-        protected override void OnPaint(PaintEventArgs e)
+
+
+
+
+        public class Person
         {
-            //test_double_buffer1(e); //不使用雙倍緩衝
-            test_double_buffer2(e); //使用雙倍緩衝
+            public string Name { get; set; }
+            public int Age { get; set; }
+            public int Weight { get; set; }
+            public int Height { get; set; }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Person p = new Person() { Name = "Hong", Age = 25, Weight = 65, Height = 170 };
+
+        }
+        
+        
+        
+        /// <summary>  
+        /// 獲取驗證碼【字符串】  
+        /// </summary>  
+        /// <param name="Length">驗證碼長度【必須大於0】</param>  
+        /// <returns></returns>  
+        public static string VerficationText(int Length)
+        {
+            char[] _verfication = new char[Length];
+            Random _random = new Random();
+            char[] _dictionary = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            for (int i = 0; i < Length; i++)
+            {
+                _verfication[i] = _dictionary[_random.Next(_dictionary.Length - 1)];
+            }
+            return new string(_verfication);
         }
 
 
@@ -47,24 +77,6 @@ public partial class TextureBruse : Form
 
 
 
-
-//餅圖的一種畫法
-
-  void Page_Load(object sender,EventArgs e)
-  {
-  Bitmap image=new Bitmap(350,200);
-  Graphics g=Graphics.FromImage(image);
-  g.Clear(Color.White);
-  Rectangle outline=new Rectangle(10,5,300,100);
-  g.DrawEllipse(new Pen(Color.Black,8.0f),outline);
-  g.FillPIE(new SolidBrush(Color.Red),outline,-20f,120f);
-  //這些角度的大小可以由數據庫中的對比數據計算決定
-  g.FillPIE(new SolidBrush(Color.Yellow),outline,100f,120f);
-  g.FillPIE(new SolidBrush(Color.Blue),outline,220f,100f);
-
-  g.FillPIE(new SolidBrush(Color.Green),outline,320f,40f);
-  image.Save(Response.OutputStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-  }
 
 
 
@@ -129,16 +141,24 @@ public partial class TextureBruse : Form
         }
 
     
+存圖 
+                    System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
+                    switch (saveFileDialog1.FilterIndex)    		//選擇保存文件類型
+                    {
+                        case 1:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Jpeg); 		//保存為jpeg文件
+                            break;
+                        case 2:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Bmp);
+                            break;
+                        case 3:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Gif);
+                            break;
+                    }
+                    fs.Close();         					//關閉文件流
 
 
 
-C# 獲得圖片的分辨率和大小，
-
-double DPI = pictureBox1.Image.HorizontalResolution;//獲得分辨率 gisoracle
-double w = 1.0 * pictureBox1.Image.Width / DPI * 25.4;
-
-double h = 1.0 * pictureBox1.Image.Height / DPI * 25.4; 
-MessageBox.Show(w.ToString("f2") + ":" + h.ToString("f2"));
 
 
             Bitmap bitmap1 = new Bitmap(w, h);
@@ -192,10 +212,10 @@ pictureBox1.Image = Properties.Resources.blank;
 //========================================================================================
 
 
-            Image<Bgr, byte> img = capture.QueryFrame();
-            img = capture.QueryFrame();
+            Image<Bgr, byte> image1 = capture.QueryFrame();
+            image1 = capture.QueryFrame();
             ImageViewer viewer = new ImageViewer();
-            viewer.Image = img;
+            viewer.Image = image1;
             viewer.ShowDialog();
 
 
@@ -525,13 +545,6 @@ writer.Open(filename, width, height, this.Videofps, VideoCodec.MPEG4);
         
         
 
-            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
-            int W = SystemInformation.PrimaryMonitorSize.Width;
-            int H = SystemInformation.PrimaryMonitorSize.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
-
-
 
 有一點注意事項就是在你關閉From2的時候一定要在關閉窗體前把主程序終止,也就是在Form2_FormClosed事件中執行Application.Exit();
 
@@ -576,7 +589,7 @@ vcs_test_all_00_Usually +
 
 
 usually + 繪圖基本範例
-bitmap -> graphics -> picturebox1
+bitmap -> graphics -> pictureBox1
 
 
 
@@ -983,24 +996,6 @@ P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
 
                 saveFileDialog1.CreatePrompt = true;	//如果指定不存在的文件，提示允許創建該文件
                 saveFileDialog1.OverwritePrompt = true;//如果用戶指定的文件名已存在，顯示警告
-
-
-存圖 
-                    System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
-                    switch (saveFileDialog1.FilterIndex)    		//選擇保存文件類型
-                    {
-                        case 1:
-                            this.pictureBox1.Image.Save(fs, ImageFormat.Jpeg); 		//保存為jpeg文件
-                            break;
-                        case 2:
-                            this.pictureBox1.Image.Save(fs, ImageFormat.Bmp);
-                            break;
-                        case 3:
-                            this.pictureBox1.Image.Save(fs, ImageFormat.Gif);
-                            break;
-                    }
-                    fs.Close();         					//關閉文件流
-
 
 
         				
@@ -3017,7 +3012,7 @@ if(isprint(ch))
 
 VC#
 資料型態	string(字串) bool(布耳)
-各種控件	button richtextbox picturebox timer
+各種控件	button richTextBox pictureBox timer
 
 ENUM的用法
         // 定義WeekDays列舉內容7個成員
@@ -4152,18 +4147,18 @@ public static string validation(int cd)
 /// <param name="check">字符</param>
 public static byte[] drawImg(string check)
 {
-    Bitmap img = new Bitmap(90, 34);
-    var ht = Graphics.FromImage(img);
+    Bitmap bitmap1 = new Bitmap(90, 34);
+    var ht = Graphics.FromImage(bitmap1);
     ht.Clear(Color.White);
     ht.DrawLine(new Pen(Color.SpringGreen), 1, 1, 90, 34);
     Font font = new Font("微软雅黑", 20, FontStyle.Bold);
-    var jianbian = new LinearGradientBrush(new Rectangle(0, 0, img.Width, img.Height), Color.Teal, Color.Snow, 2f, true);
+    var jianbian = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Teal, Color.Snow, 2f, true);
     ht.DrawString(check, font, jianbian, 0, 0);
-    ht.DrawRectangle(new Pen(Color.Aqua), 0, 0, img.Width - 1, img.Height - 1);
+    ht.DrawRectangle(new Pen(Color.Aqua), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
     MemoryStream ms = new MemoryStream();
-    img.Save(ms, ImageFormat.Jpeg);
+    bitmap1.Save(ms, ImageFormat.Jpeg);
     ht.Dispose();
-    img.Dispose();
+    bitmap1.Dispose();
     return ms.ToArray();
 }
     
@@ -4245,26 +4240,6 @@ C# 播放鈴聲
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
-
-
-
-用C#實現全屏幕截圖
-
-
-今天一位同事想寫一個全屏幕截圖的代碼。當然要實現的第一步是能夠獲取整個屏幕的位圖，記得Win32 API的CreateDC, BitBlt等函數可以使用。於是上網查了下，果然屏幕截圖用這些函數。但winform已經可以把API都忘記了，所以得尋找一個無Win32 API的實現方式。綜合了網上的實現，以及自己的一些設計，實現思路如下：
-
-1. 開始截圖時，創建一個與屏幕大小一樣的位圖，然後用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上。這是很關鍵的一步，這樣所有的操作就都可以在該位圖上進行了，而無實際屏幕無關了。
-    int width = Screen.PrimaryScreen.Bounds.Width;
-
-    int height = Screen.PrimaryScreen.Bounds.Height;
-
-    Bitmap bmp = new Bitmap(width, height);
-
-    using (Graphics g = Graphics.FromImage(bmp))
-    {
-    g.CopyFromScreen(0, 0, 0, 0, new Size(width, height));
-    }
-
 
 
 

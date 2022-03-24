@@ -36,10 +36,10 @@ namespace vcs_Screensaver2
             this.CenterToScreen();       //將表單置中顯示
 
             //讀取圖檔
-            string filename = @"C:\______test_files\_pic\poster_01.jpg";
+            string filename = @"C:\______test_files\picture1.jpg";
             this.BackgroundImage = Image.FromFile(filename);
             //this.ClientSize = this.BackgroundImage.Size;
-            this.ClientSize = new Size(this.BackgroundImage.Size.Width * 1 / 4, this.BackgroundImage.Size.Height * 1 / 4);
+            this.ClientSize = new Size(this.BackgroundImage.Size.Width * 1 / 1, this.BackgroundImage.Size.Height * 1 / 1);  //調整圖片大小
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;

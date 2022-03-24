@@ -30,7 +30,7 @@ namespace vcs_Screensaver5
     public partial class Form1 : Form
     {
 
-        //file://加入私有成員變量
+        //加入私有成員變量
 
         //private System.ComponentModel.IContainer components;
 
@@ -38,11 +38,11 @@ namespace vcs_Screensaver5
 
         private string str = "福建南紡股份公司計算機中心";
 
-        //file://定義文本字體及大小
+        //定義文本字體及大小
 
         private System.Drawing.Font TextStringFont = new System.Drawing.Font("宋體", 10, System.Drawing.FontStyle.Bold);
 
-        private Color TextStringcolor = System.Drawing.Color.Yellow;    // file://文本字體顏色
+        private Color TextStringcolor = System.Drawing.Color.Yellow;    // 文本字體顏色
 
         private int iDistance;
 
@@ -56,11 +56,11 @@ namespace vcs_Screensaver5
 
         int width1, height1;
 
-        //private System.Windows.Forms.Timer timerSaver;//　 file://計時器控件
+        //private System.Windows.Forms.Timer timerSaver;    //計時器控件
 
-        //private System.Windows.Forms.PictureBox picture1;// file://圖形控件
+        //private System.Windows.Forms.PictureBox picture1; //圖形控件
 
-        //private System.Windows.Forms.Label Word;// file://文本顯示控件
+        //private System.Windows.Forms.Label Word;  //文本顯示控件
 
 
 
@@ -179,11 +179,11 @@ namespace vcs_Screensaver5
             speed = 0;
 
             System.Drawing.Rectangle ssWorkArea = System.Windows.Forms.Screen.GetWorkingArea(this);
-            //file://屏幕顯示區域
+            //屏幕顯示區域
 
-            width1 = ssWorkArea.Width;  // file://屏幕寬度
+            width1 = ssWorkArea.Width;  //屏幕寬度
 
-            height1 = ssWorkArea.Height;    // file://屏幕高度
+            height1 = ssWorkArea.Height;    //屏幕高度
 
         }
 
@@ -194,21 +194,21 @@ namespace vcs_Screensaver5
 
             label1.Text = str;
 
-            label1.Height = label1.Font.Height; //file://設置文本的高度
+            label1.Height = label1.Font.Height; //設置文本的高度
 
-            label1.Width = label1.Text.Length * (int)label1.Font.Size * 2;    //file://設置文本的寬度
+            label1.Width = label1.Text.Length * (int)label1.Font.Size * 2;    //設置文本的寬度
 
             PlayScreenSaver();
         }
 
-        private void PlayScreenSaver() //file://自定義函數
+        private void PlayScreenSaver() //自定義函數
         {
 
-            //file://下面設置文本顯示框的位置坐標
+            //下面設置文本顯示框的位置坐標
 
             label1.Location = new System.Drawing.Point(width1 - iDistance, label1.Location.Y);
 
-            label1.Visible = true;    // file://設置為可見
+            label1.Visible = true;    // 設置為可見
 
             iDistance += iSpeed;
 
@@ -231,7 +231,7 @@ namespace vcs_Screensaver5
 
             }
 
-            //file://下面是計算圖片框移動坐標
+            //下面是計算圖片框移動坐標
 
             speed++;
 
@@ -333,7 +333,7 @@ namespace vcs_Screensaver5
 
         }
 
-        private void StopScreenSaver() //file://停止屏幕保護程序運行
+        private void StopScreenSaver() //停止屏幕保護程序運行
         {
 
             System.Windows.Forms.Cursor.Show();

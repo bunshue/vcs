@@ -31,6 +31,12 @@ namespace vcs_Mix03_draw_image
             show_item_location();
         }
 
+        //直接寫一個OnPaint在此
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
+        }
+
         void show_item_location()
         {
             int x_st;
@@ -151,7 +157,6 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
             //實現任意角度旋轉圖像主要使用Graphics類提供的RotateTransform()方法
-
 
             string filename = @"C:\______test_files\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
@@ -425,13 +430,46 @@ namespace vcs_Mix03_draw_image
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            draw_TextureBrush();
+        }
 
+        public void draw_TextureBrush()
+        {
+            int W = 305;
+            int H = 400;
+
+            string filename = @"C:\______test_files\picture1.jpg";  //使用一張背景圖
+
+            Bitmap _bitmap = new Bitmap(filename);
+            TextureBrush tb = new TextureBrush(_bitmap);
+
+            Font f = new Font("Arial", 60, FontStyle.Bold);
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            //清空背景色  
+            g.Clear(Color.White);
+            //繪制驗證碼  
+
+            g.DrawString("牡丹亭", f, tb, 0, 150);
+            pictureBox1.Image = bitmap1;
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
+            Bitmap bitmap1 = new Bitmap(350, 200);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            Rectangle outline = new Rectangle(10, 5, 300, 100);
+            g.DrawEllipse(new Pen(Color.Black, 8.0f), outline);
+            g.FillPie(new SolidBrush(Color.Red), outline, -20f, 120f);
+            //這些角度的大小可以由數據庫中的對比數據計算決定
+            g.FillPie(new SolidBrush(Color.Yellow), outline, 100f, 120f);
+            g.FillPie(new SolidBrush(Color.Blue), outline, 220f, 100f);
+            g.FillPie(new SolidBrush(Color.Green), outline, 320f, 40f);
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -489,13 +527,34 @@ namespace vcs_Mix03_draw_image
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //全屏幕截圖
 
+            int W = Screen.PrimaryScreen.Bounds.Width;
+
+            int H = Screen.PrimaryScreen.Bounds.Height;
+
+            Bitmap bitmap1 = new Bitmap(W, H); //創建一個與屏幕大小一樣的位圖
+
+            using (Graphics g = Graphics.FromImage(bitmap1))
+            {
+                g.CopyFromScreen(0, 0, 0, 0, new Size(W, H));  //用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
+            string filename = @"C:\______test_files\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+
+
+            double DPI = pictureBox1.Image.HorizontalResolution;//獲得分辨率 gisoracle
+            double w = 1.0 * pictureBox1.Image.Width / DPI * 25.4;
+            double h = 1.0 * pictureBox1.Image.Height / DPI * 25.4;
+
+            MessageBox.Show(w.ToString("f2") + ":" + h.ToString("f2"));
         }
 
         private void button13_Click(object sender, EventArgs e)

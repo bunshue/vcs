@@ -741,7 +741,15 @@ namespace vcs_Mix06
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
+            int W = SystemInformation.PrimaryMonitorSize.Width;
+            int H = SystemInformation.PrimaryMonitorSize.Height;
 
+            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
+
+            richTextBox1.Text += "取得桌面大小\n";
+            richTextBox1.Text += "桌面寬度 : \t" + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
+            richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
