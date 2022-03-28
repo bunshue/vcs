@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Runtime.InteropServices;
 using System.Reflection;                //for BindingFlags  //刪除控件的事件的方法
 using System.Text.RegularExpressions;
 
@@ -987,6 +988,47 @@ namespace vcs_test_all_01_Control
         private void button0_Click(object sender, EventArgs e)
         {
 
+        }
+
+        [DllImportAttribute("user32.dll")]
+        private extern static bool ReleaseCapture();
+        [DllImportAttribute("user32.dll")]
+        private extern static int SendMessage(IntPtr handle, int m, int p, int h);
+
+        private void bt_move_form_MouseDown(object sender, MouseEventArgs e)
+        {
+            //由控件移動窗體
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Cursor = Cursors.SizeAll;
+                ReleaseCapture();
+                SendMessage(this.Handle, 0xA1, 0x2, 0);
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        private void bt_move_control_MouseDown(object sender, MouseEventArgs e)
+        {
+            //控件在窗體內移動
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Cursor = Cursors.SizeAll;
+                ReleaseCapture();
+                SendMessage(this.bt_move_control.Handle, 0xA1, 0x2, 0); //只有這行不一樣
+                this.Cursor = Cursors.Default;
+            }
+
+
+        }
+
+        private void bt_move_form_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "由控件移動窗體\n";
+        }
+
+        private void bt_move_control_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "控件在窗體內移動\n";
         }
 
         /* 找panel1內的控件

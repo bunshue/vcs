@@ -1419,7 +1419,6 @@ namespace vcs_Mix01
         {
             show_button_text(sender);
             //GPS定位，经纬度附近地点查询–C#实现方法
-            //GPS定位，经纬度附近地点查询–C#实现方法
             double a = CoordDispose.GetDistance(new Degree(116.412007, 39.947545), new Degree(116.412924, 39.947918));//116.416984,39.944959
             double b = CoordDispose.GetDistanceGoogle(new Degree(116.412007, 39.947545), new Degree(116.412924, 39.947918));
             Degree[] dd = CoordDispose.GetDegreeCoordinates(new Degree(116.412007, 39.947545), 102);
@@ -1430,6 +1429,7 @@ namespace vcs_Mix01
         }
         //GPS定位，经纬度附近地点查询–C#实现方法 SP
 
+        int cnt = 0;
         private void button26_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
@@ -1458,6 +1458,17 @@ namespace vcs_Mix01
             SendKeys.Send("汉字");  //模拟输入"汉字"2个字
             */
 
+            richTextBox1.Text += "到richTextBox裡面添加一些文字\n";
+            richTextBox1.Focus();
+            SendKeys.Send("到richTextBox裡面添加一些文字  " + (cnt++).ToString() + "\n");
+            SendKeys.Send("到richTextBox裡面添加一些文字  " + (cnt++).ToString() + "\n");
+            SendKeys.Send("到richTextBox裡面添加一些文字  " + (cnt++).ToString() + "\n");
+            SendKeys.Send("{TAB}"); //按了Tab
+            SendKeys.Send("123456");
+            SendKeys.Send("{ENTER}");   //添加Enter
+            SendKeys.Send("{ENTER}");
+            SendKeys.Send("{ENTER}");
+            SendKeys.Send("到richTextBox裡面添加一些文字  " + (cnt++).ToString() + "\n");
 
         }
 
