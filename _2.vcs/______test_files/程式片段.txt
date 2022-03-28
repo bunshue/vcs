@@ -1,4 +1,132 @@
 
+
+
+
+            //抓網頁
+            string url = @"https://tw.dictionary.search.yahoo.com/";
+            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+            httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+            httpWebRequest.Method = "POST";
+            var data = Encoding.UTF8.GetBytes(string.Format("{0}", "tiger"));
+
+            using (Stream stream = httpWebRequest.GetRequestStream())
+            {
+                stream.Write(data, 0, data.Length);
+                stream.Close();
+            }
+            data = null;
+            //Result result = new Result();
+            string result;
+
+            try
+            {
+                HttpWebResponse webResponse = httpWebRequest.GetResponse() as HttpWebResponse;
+                using (StreamReader stream = new StreamReader(webResponse.GetResponseStream()))
+                {
+                    //result = Newtonsoft.Json.JsonConvert.DeserializeObject<Result>(stream.ReadToEnd());
+                    richTextBox1.Text += stream.ReadToEnd();
+                }
+                httpWebRequest = null;
+                webResponse.Close();
+                webResponse = null;
+            }
+            catch { }
+            //result.billInfo.consNo = consNo.ToString();
+            //Write(result);
+
+
+
+
+
+使用WMI取得USB資訊
+            ManagementObjectSearcher search = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
+            ManagementObjectCollection collection = search.Get();
+            var usbList = from u in collection.Cast<ManagementBaseObject>()
+                          select new
+                          {
+                              id = u.GetPropertyValue("DeviceID"),
+                              name = u.GetPropertyValue("Name"),
+                              status = u.GetPropertyValue("Status"),
+                              system = u.GetPropertyValue("SystemName"),
+                              caption = u.GetPropertyValue("Caption"),
+                              pnp = u.GetPropertyValue("PNPDeviceID"),
+                              description = u.GetPropertyValue("Description")
+                          };
+            foreach (var u in usbList)
+            {
+                richTextBox1.Text += String.Format("{0}{7}{1}{7}{2}{7}{3}{7}{4}{7}{5}{7}{6}{7}{7}{7}", u.id, u.name, u.status, u.system, u.caption, u.pnp, u.description, Environment.NewLine);
+            }
+
+
+
+
+ C# 透過Win32取得滑鼠位置 GetCursorPos
+
+        [DllImport("User32")]
+        internal extern static bool GetCursorPos(out MousePoint point);
+
+        internal struct MousePoint {
+            public int x;
+            public int y;
+        };
+
+        public Form1()
+        {
+            InitializeComponent();
+            MousePoint point;
+            GetCursorPos(out point);
+            Console.WriteLine(point.x + "," + point.y);
+        }
+    }
+}
+
+
+移動鼠標
+
+
+
+        [DllImport("User32")]
+        public static extern void mouse_event(
+            int dwFlags,
+            int dx,
+            int dy,
+            int dwData,
+            int dwExtraInfo
+        );
+
+        const int MOUSEEVENTF_ABSOLUTE = 0x8000;
+        const int MOUSEEVENTF_LEFTDOWN = 0x0002;
+        const int MOUSEEVENTF_LEFTUP = 0x0004;
+        const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
+        const int MOUSEEVENTF_MIDDLEUP = 0x0040;
+        const int MOUSEEVENTF_MOVE = 0x0001;
+        const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
+        const int MOUSEEVENTF_RIGHTUP = 0x0010;
+        const int MOUSEEVENTF_WHEEL = 0x0800;
+        const int MOUSEEVENTF_XDOWN = 0x0080;
+        const int MOUSEEVENTF_XUP = 0x1000;
+        const int MOUSEEVENTF_HWHEEL = 0x01000;
+
+
+
+            int dx = 100;
+            int dy = 100;
+            mouse_event(MOUSEEVENTF_MOVE, dx, dy, 0, 0);
+        
+        
+
+東經：EEast longitude
+西經：WWest longitude
+
+北緯：NNorth latitude
+南緯：SSouth latitude 30 degrees north lat.
+
+gMapControl1.Manager.Mode = AccessMode.CacheOnly;
+
+
+
+
+
 　　（2）現在我們來設計程序的主界面：
 
 Form1的屬性

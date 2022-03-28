@@ -561,11 +561,78 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
+            string filename = @"C:\______test_files\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+
+
+            /*
+使圖像產生浮雕的效果，主要通過對圖像像素點的像素值分別與相鄰像素點的像素值相減後加上128，然後將其作為新的像素點的值。
+
+以浮雕效果顯示圖像主要通過GetPixel方法獲得每一點像素的值，通過SetPixel設置該像素點的像素值。
+*/
+
+            //以浮雕效果顯示圖像
+            try
+            {
+                int Height = this.pictureBox1.Image.Height;
+                int Width = this.pictureBox1.Image.Width;
+                Bitmap newBitmap = new Bitmap(Width, Height);
+                Bitmap oldBitmap = (Bitmap)this.pictureBox1.Image;
+                Color pixel1, pixel2;
+                for (int x = 0; x < Width - 1; x++)
+                {
+                    for (int y = 0; y < Height - 1; y++)
+                    {
+                        int r = 0, g = 0, b = 0;
+                        pixel1 = oldBitmap.GetPixel(x, y);
+                        pixel2 = oldBitmap.GetPixel(x + 1, y + 1);
+                        r = Math.Abs(pixel1.R - pixel2.R + 128);
+                        g = Math.Abs(pixel1.G - pixel2.G + 128);
+                        b = Math.Abs(pixel1.B - pixel2.B + 128);
+                        if (r > 255)
+                            r = 255;
+                        if (r < 0)
+                            r = 0;
+                        if (g > 255)
+                            g = 255;
+                        if (g < 0)
+                            g = 0;
+                        if (b > 255)
+                            b = 255;
+                        if (b < 0)
+                            b = 0;
+                        newBitmap.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+                this.pictureBox1.Image = newBitmap;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "信息提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+
+
+
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //獲得當前屏幕的分辨率
+            Screen scr = Screen.PrimaryScreen;
+            Rectangle rc = scr.Bounds;
+            int iWidth = rc.Width;
+            int iHeight = rc.Height;
+            //創建一個和屏幕一樣大的Bitmap
+            Image myImage = new Bitmap(iWidth, iHeight);
+            //從一個繼承自Image類的對象中創建Graphics對象
+            Graphics g = Graphics.FromImage(myImage);
+            //抓屏並拷貝到myimage裡
+            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(iWidth, iHeight));
+            //保存為文件
+            myImage.Save("aaaaaa.jpeg");
 
         }
 

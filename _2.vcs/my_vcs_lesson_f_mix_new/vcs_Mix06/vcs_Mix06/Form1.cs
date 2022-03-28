@@ -141,6 +141,11 @@ namespace vcs_Mix06
             Application.Exit();
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         void show_button_text(object sender)
         {
             richTextBox1.Text += ((Button)sender).Text + "\n";
@@ -540,15 +545,15 @@ namespace vcs_Mix06
             string endTime = "0:1:0";
 
             string savePath = toMusic;//切割后音乐保存的物理路径  
-                try
-                {
-                    ExcuteProcess(ffmpeg, "-y -i \"" + fromPath + "\" -ss " + startTime + " -t " + endTime + " -acodec copy \"" + savePath + "\"");//-acodec copy表示歌曲的码率和采样频率均与前者相同  
-                    MessageBox.Show("已切割完成");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+            try
+            {
+                ExcuteProcess(ffmpeg, "-y -i \"" + fromPath + "\" -ss " + startTime + " -t " + endTime + " -acodec copy \"" + savePath + "\"");//-acodec copy表示歌曲的码率和采样频率均与前者相同  
+                MessageBox.Show("已切割完成");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
 
         }
@@ -661,11 +666,12 @@ namespace vcs_Mix06
         }
 
 
-        /**//*
-        此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將
-        四個字節數組存儲在object數組中。
-        參數：strlength，代表需要產生的漢字個數
-        */
+        /**/
+        /*
+    此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將
+    四個字節數組存儲在object數組中。
+    參數：strlength，代表需要產生的漢字個數
+    */
         public static object[] CreateRegionCode(int strlength)
         {
             //定義一個字符串數組儲存漢字編碼的組成元素
@@ -754,8 +760,6 @@ namespace vcs_Mix06
 
         private void button17_Click(object sender, EventArgs e)
         {
-            show_button_text(sender);
-
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -863,7 +867,6 @@ namespace vcs_Mix06
         private void button35_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
     }
 

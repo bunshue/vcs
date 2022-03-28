@@ -891,7 +891,18 @@ namespace vcs_HtmlAgility
 
         private void button21_Click(object sender, EventArgs e)
         {
-
+            string url = @"https://find.ruten.com.tw/s/?cateid=001100060001&q=win10";
+            HtmlWeb htmlWeb = new HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc = htmlWeb.Load(url);
+            var docNode = doc.DocumentNode;
+            var titleNodes = docNode.SelectNodes(@"//dl[@class='search_form s_grid']//div[@class='prod_info']//h5//a");
+            var priceNodes = docNode.SelectNodes(@"//dl[@class='search_form s_grid']//div[@class='prod_info']//ul//li//span[@class='price'][1]");
+            int count = titleNodes.Count;
+            for (int index = 0; index < count; index++)
+            {
+                Console.WriteLine("{0} price={1}", titleNodes[index].InnerText, priceNodes[index].InnerText);
+            }
         }
 
         public class Util

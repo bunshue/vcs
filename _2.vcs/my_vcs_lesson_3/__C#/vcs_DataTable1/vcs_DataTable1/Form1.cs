@@ -323,6 +323,54 @@ namespace vcs_DataTable1
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //DataTable用法
+
+            //初始化一個DataTable, 並給定名稱
+            DataTable dt = new DataTable("Table_AX");
+
+            //添加資料1
+            dt.Columns.Add("column0", System.Type.GetType("System.String"));
+            //添加資料2
+            DataColumn dc = new DataColumn("column1", System.Type.GetType("System.Boolean"));
+            dt.Columns.Add(dc);
+
+
+
+            DataRow dr = dt.NewRow();
+            dr["column0"] = "AX";
+            dr["column1"] = true;
+            dt.Rows.Add(dr);
+            //Doesn't initialize the row
+            DataRow dr1 = dt.NewRow();
+            dt.Rows.Add(dr1);
+
+            //Search the second row 如果沒有賦值,則用is null來select
+            DataRow[] drs = dt.Select("column1 is null");
+            DataRow[] drss = dt.Select("column0 = 'AX'");
+
+
+            //複製DataTable, 全部
+            DataTable dtNew = dt.Copy();
+
+
+            //複製DataTable, 僅Scheme
+            DataTable dtOnlyScheme = dt.Clone();
+
+
+            //對dt的操作
+            //Method 1
+            DataRow drOperate = dt.Rows[0];
+            drOperate["column0"] = "AXzhz";
+            drOperate["column1"] = false;
+            //Method 2
+            drOperate[0] = "AXzhz";
+            drOperate[1] = false;
+            //Method 3
+            dt.Rows[0]["column0"] = "AXzhz";
+            dt.Rows[0]["column1"] = false;
+            //Method 4
+            dt.Rows[0][0] = "AXzhz";
+            dt.Rows[0][1] = false;
 
         }
 
