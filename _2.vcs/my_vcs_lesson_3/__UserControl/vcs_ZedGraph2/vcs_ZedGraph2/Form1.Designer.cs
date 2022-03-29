@@ -1,4 +1,4 @@
-﻿namespace vcs_ZedGraph
+﻿namespace vcs_ZedGraph2
 {
     partial class Form1
     {
@@ -51,7 +51,7 @@
             // 
             // zedGraphControl1
             // 
-            this.zedGraphControl1.Location = new System.Drawing.Point(225, 20);
+            this.zedGraphControl1.Location = new System.Drawing.Point(120, 20);
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.ScrollGrace = 0D;
             this.zedGraphControl1.ScrollMaxX = 0D;
@@ -127,7 +127,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1133, 681);
+            this.ClientSize = new System.Drawing.Size(948, 577);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);

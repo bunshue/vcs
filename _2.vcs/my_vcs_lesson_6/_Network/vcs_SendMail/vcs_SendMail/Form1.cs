@@ -116,7 +116,7 @@ namespace vcs_SendMail
             //button
             x_st = 10;
             y_st = 10;
-            dx = 220;
+            dx = 165;
             dy = 55;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -135,9 +135,17 @@ namespace vcs_SendMail
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             button13.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
-            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button15.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button19.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 6);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            richTextBox_mail.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -685,6 +693,41 @@ namespace vcs_SendMail
         private void bt_clear_attachments_Click(object sender, EventArgs e)
         {
             //msg.Attachments.Clear();
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

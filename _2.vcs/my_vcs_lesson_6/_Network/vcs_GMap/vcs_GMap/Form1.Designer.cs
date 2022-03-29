@@ -51,6 +51,10 @@
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
+            this.btn_north = new System.Windows.Forms.Button();
+            this.btn_south = new System.Windows.Forms.Button();
+            this.btn_east = new System.Windows.Forms.Button();
+            this.btn_west = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gMapControl1
@@ -86,7 +90,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 40);
             this.button1.TabIndex = 1;
-            this.button1.Text = "載入地圖 竹北";
+            this.button1.Text = "竹北 加圖標";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -96,7 +100,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 40);
             this.button2.TabIndex = 2;
-            this.button2.Text = "加圖標";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -219,11 +222,11 @@
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(12, 12);
+            this.button0.Location = new System.Drawing.Point(9, 12);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(100, 40);
             this.button0.TabIndex = 15;
-            this.button0.Text = "載入地圖 四川";
+            this.button0.Text = "載入地圖 竹北";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -233,7 +236,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(100, 40);
             this.button11.TabIndex = 17;
-            this.button11.Text = "載入地圖 四川 test";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -243,7 +245,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(100, 40);
             this.button12.TabIndex = 18;
-            this.button12.Text = "竹北 加圖標";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -253,6 +254,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(100, 40);
             this.button13.TabIndex = 18;
+            this.button13.Text = "test";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -280,7 +282,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(100, 40);
             this.button16.TabIndex = 21;
-            this.button16.Text = "往北移動";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -293,11 +294,55 @@
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
+            // btn_north
+            // 
+            this.btn_north.Location = new System.Drawing.Point(898, 9);
+            this.btn_north.Name = "btn_north";
+            this.btn_north.Size = new System.Drawing.Size(32, 32);
+            this.btn_north.TabIndex = 23;
+            this.btn_north.Text = "北";
+            this.btn_north.UseVisualStyleBackColor = true;
+            this.btn_north.Click += new System.EventHandler(this.btn_north_Click);
+            // 
+            // btn_south
+            // 
+            this.btn_south.Location = new System.Drawing.Point(898, 75);
+            this.btn_south.Name = "btn_south";
+            this.btn_south.Size = new System.Drawing.Size(32, 32);
+            this.btn_south.TabIndex = 24;
+            this.btn_south.Text = "南";
+            this.btn_south.UseVisualStyleBackColor = true;
+            this.btn_south.Click += new System.EventHandler(this.btn_south_Click);
+            // 
+            // btn_east
+            // 
+            this.btn_east.Location = new System.Drawing.Point(933, 41);
+            this.btn_east.Name = "btn_east";
+            this.btn_east.Size = new System.Drawing.Size(32, 32);
+            this.btn_east.TabIndex = 25;
+            this.btn_east.Text = "東";
+            this.btn_east.UseVisualStyleBackColor = true;
+            this.btn_east.Click += new System.EventHandler(this.btn_east_Click);
+            // 
+            // btn_west
+            // 
+            this.btn_west.Location = new System.Drawing.Point(869, 39);
+            this.btn_west.Name = "btn_west";
+            this.btn_west.Size = new System.Drawing.Size(32, 32);
+            this.btn_west.TabIndex = 26;
+            this.btn_west.Text = "西";
+            this.btn_west.UseVisualStyleBackColor = true;
+            this.btn_west.Click += new System.EventHandler(this.btn_west_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1341, 712);
+            this.Controls.Add(this.btn_west);
+            this.Controls.Add(this.btn_east);
+            this.Controls.Add(this.btn_south);
+            this.Controls.Add(this.btn_north);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
@@ -354,6 +399,10 @@
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button btn_north;
+        private System.Windows.Forms.Button btn_south;
+        private System.Windows.Forms.Button btn_east;
+        private System.Windows.Forms.Button btn_west;
     }
 }
 

@@ -41,6 +41,9 @@ namespace vcs_GMap
 
         string gMapCacheLocation = "GMapCache"; //緩存位置
 
+        double latitude = 24.838;   //緯度
+        double longitude = 121.003; //經度
+
         public Form1()
         {
             InitializeComponent();
@@ -109,6 +112,16 @@ namespace vcs_GMap
             y_st = 150;
             gMapControl1.Location = new Point(x_st, y_st);
             richTextBox1.Location = new Point(x_st + 960 + 70, y_st);
+
+            x_st = 940;
+            y_st = 30;
+            btn_north.Location = new Point(x_st, y_st);
+            btn_east.Location = new Point(x_st + 32, y_st + 32);
+            btn_west.Location = new Point(x_st - 32, y_st + 32);
+            btn_south.Location = new Point(x_st, y_st + 64);
+
+
+
         }
 
         void setup_controls()
@@ -122,6 +135,7 @@ namespace vcs_GMap
             }
             catch
             {
+                //gMapControl1.Manager.Mode = AccessMode.ServerOnly;
                 //gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
                 gMapControl1.Manager.Mode = AccessMode.CacheOnly;
                 MessageBox.Show("No internet connection avaible, going to CacheOnly mode.", "GMap.NET Demo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -134,6 +148,7 @@ namespace vcs_GMap
             //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
             //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
             gMapControl1.ShowCenter = false; //不显示中心十字点
+            gMapControl1.IsAccessible = false;  //??
             gMapControl1.DragButton = MouseButtons.Left; //左键拖拽地图
 
             gMapControl1.MinZoom = 1;  //設置控件最小縮放比例 >=1
@@ -155,9 +170,14 @@ namespace vcs_GMap
             gMapControl1.MarkersEnabled = true;
             gMapControl1.PolygonsEnabled = true;
             gMapControl1.RoutesEnabled = true;
-            //gMapControl1.MouseClick += gMapControl1_MouseClick;
             //gMapControl1.OnMarkerClick += gMapControl1_OnMarkerClick;
             //gMapControl1.OnPositionChanged += gMapControl1_OnPositionChanged;
+            //gMapControl1.OnTileLoadComplete += GMap_OnTileLoadComplete;
+            //gMapControl1.OnTileLoadStart += GMap_OnTileLoadStart;
+
+            //GMapProvider.Language = LanguageType.ChineseSimplified; //设置地图默认语言
+            GMapProvider.Language = LanguageType.ChineseTraditional; //设置地图默认语言
+            GMapProvider.TimeoutMs = 1000;//地图加载完成后设置timeoutms为1000(或者其他大于领零的数值自己尝试0)
 
             trackBar1.Orientation = Orientation.Vertical;
             trackBar1.TickStyle = TickStyle.Both;
@@ -165,47 +185,12 @@ namespace vcs_GMap
             trackBar1.Maximum = 100;
             trackBar1.Minimum = 1;
             trackBar1.Value = 10;
-            trackBar1.Height = gMapControl1.Height * 4 / 5;
+            trackBar1.Height = gMapControl1.Height * 9 / 10;
             trackBar1.Width = 30;
-            trackBar1.Location = new Point(gMapControl1.Location.X + gMapControl1.Width + 10, gMapControl1.Location.Y + gMapControl1.Height / 10);
+            trackBar1.Location = new Point(gMapControl1.Location.X + gMapControl1.Width + 10, gMapControl1.Location.Y + gMapControl1.Height / 20);
             trackBar1.ValueChanged += trackBar1_ValueChanged;
             this.Controls.Add(trackBar1);
             trackBar1.BringToFront();
-        }
-
-        private void trackBar1_ValueChanged(object sender, EventArgs e)
-        {
-            richTextBox1.Text += trackBar1.Value.ToString() + "  ";
-        }
-
-        void update_controls_info()
-        {
-            tb_zoom.Text = gMapControl1.Zoom.ToString();
-
-            trackBar1.Maximum = gMapControl1.MaxZoom;
-            trackBar1.Minimum = gMapControl1.MinZoom;
-            trackBar1.Value = (int)gMapControl1.Zoom;
-        }
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-            gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-            //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-
-            gMapControl1.Position = new PointLatLng(30.6658229803096, 104.0647315979); //地图中心位置
-            gMapControl1.Zoom = 14;     //当前比例
-
-            update_controls_info();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-
-            gMapControl1.Position = new PointLatLng(24.838, 121.003); //地图中心位置：竹北
-            gMapControl1.Zoom = 16;     //当前比例
-
-            update_controls_info();
         }
 
         void gMapControl1_MouseClick(object sender, MouseEventArgs e)
@@ -224,14 +209,38 @@ namespace vcs_GMap
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            //添加Markers
-            gMapControl1.Position = new PointLatLng(24.838, 121.003); //地图中心位置：江理工图书馆
+            richTextBox1.Text += trackBar1.Value.ToString() + "  ";
+        }
+
+        void update_controls_info()
+        {
+            tb_zoom.Text = gMapControl1.Zoom.ToString();
+
+            trackBar1.Maximum = gMapControl1.MaxZoom;
+            trackBar1.Minimum = gMapControl1.MinZoom;
+            trackBar1.Value = (int)gMapControl1.Zoom;
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
+            //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
+            //竹北座標
+            latitude = 24.838;   //緯度
+            longitude = 121.003; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 16; //當前比例
+
+            update_controls_info();
+
+            //加 圖標 Markers
             gMapControl1.Overlays.Add(markersOverlay);   //MapControl添加图markersOverlay_before,null);//图层再添加marker
-
             string[] studentName = new string[4] { "121.00410306376308, 24.83923062590916", "121.00929660194892, 24.83900079788313", "121.00903566227302, 24.835634744818194", "121.01120945267155, 24.836966817989957" };
-
             SetLableOnMap_fore(studentName, markersOverlay);
         }
 
@@ -252,22 +261,41 @@ namespace vcs_GMap
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double lat = 24.836494165650475 + 10;
+            double lon = 121.01959461339993 + 10;
+
+            DrawPoint(gMapControl1, lat, lon);
+        }
+
+        public void DrawPoint(GMapControl map, double latitude, double longitude)   //緯 經
+        {
+
+            overlay.Markers.Add(new GMarkerGoogle(new PointLatLng(latitude, longitude), GMarkerGoogleType.red));
+
+            map.Overlays.Add(overlay);
+            richTextBox1.Text += "北緯 " + latitude.ToString() + "\t東經 " + longitude.ToString() + "\n";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
-            gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
+            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
+            gMapControl1.MapProvider = GMapProviders.GoogleMap;
 
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+
             //gMapControl1.SetPositionByKeywords("china,harbin");//设置初始中心为china harbin 
 
-            GMapProvider.Language = LanguageType.ChineseSimplified; //设置地图默认语言
-            //gMapControl1.MapProvider = GMapProvidersExt.AMapProvider.Instance;
+            //北京座標
+            latitude = 39.9804435664783;   //緯度
+            longitude = 116.345880031586; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
 
-            //设置控件显示的当前中心位置  
-            gMapControl1.Position = new PointLatLng(39.9804435664783, 116.345880031586);
-            gMapControl1.Zoom = 12; //设置控件当前的缩放比例
-
-            gMapControl1.IsAccessible = false;
-            GMapProvider.TimeoutMs = 1000;//地图加载完成后设置timeoutms为1000（或者其他大于领零的数值自己尝试0）
+            gMapControl1.Zoom = 12; //當前比例
 
             update_controls_info();
         }
@@ -391,14 +419,14 @@ namespace vcs_GMap
         private void button7_Click(object sender, EventArgs e)
         {
             //放大
-            gMapControl1.Zoom += 1;
+            gMapControl1.Zoom += 1; //當前比例
             update_controls_info();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             //縮小
-            gMapControl1.Zoom -= 1;
+            gMapControl1.Zoom -= 1; //當前比例
             update_controls_info();
         }
 
@@ -417,46 +445,29 @@ namespace vcs_GMap
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-
-            gMapControl1.Position = new PointLatLng(50.619900, 26.251617);
-            gMapControl1.Zoom = 9;
-
-            update_controls_info();
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            double lat = 24.836494165650475 + 10;
-            double lon = 121.01959461339993 + 10;
-
-            DrawPoint(gMapControl1, lat, lon);
-        }
-
-        public void DrawPoint(GMapControl map, double latitude, double longitude)   //緯 經
-        {
-
-            overlay.Markers.Add(new GMarkerGoogle(new PointLatLng(latitude, longitude), GMarkerGoogleType.red));
-
-            map.Overlays.Add(overlay);
-            richTextBox1.Text += "北緯 " + latitude.ToString() + "\t東經 " + longitude.ToString() + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //??????
+            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
+            //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
-            gMapControl1.Manager.Mode = AccessMode.ServerOnly;
+            //竹北座標
+            latitude = 24.838;   //緯度
+            longitude = 121.003; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
 
-            gMapControl1.Zoom = 14;
+            gMapControl1.Zoom = 14; //當前比例
 
-            gMapControl1.Position = gMapControl1.Position;
             gMapControl1.EmptyTileColor = System.Drawing.Color.Aquamarine;
-            gMapControl1.GrayScaleMode = true;
+            //gMapControl1.GrayScaleMode = true;    //黑白地圖
             gMapControl1.Manager.UsePlacemarkCache = false;
-            //gMapControl1.OnTileLoadComplete += GMap_OnTileLoadComplete;
-            //gMapControl1.OnTileLoadStart += GMap_OnTileLoadStart;
             gMapControl1.Manager.UseMemoryCache = true;
             //gMapControl1.Manager.CancelTileCaching();
 
@@ -467,11 +478,8 @@ namespace vcs_GMap
                     var r = new GMapRoute(route.Name);
                     r.Points.AddRange(route.Points);
                     r.Stroke = route.Stroke;
-
                 }
-
             }
-
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -506,32 +514,49 @@ namespace vcs_GMap
                 //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMarkerGoogleType.GMapMarkerGoogleGreen(new PointLatLng(allMapPoints.First().Lat, allMapPoints.First().Lng)));
                 //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMapMarkerGoogleRed(new PointLatLng(allMapPoints.Last().Lat, allMapPoints.Last().Lng)));
             }
-
             overlay.Routes.Add(route);
             map.Overlays.Add(overlay);
         }
-
 
         private void button15_Click(object sender, EventArgs e)
         {
         }
 
-        double lat = 24.838;
-        double lon = 121.003;
-
         private void button16_Click(object sender, EventArgs e)
         {
-            //往北移動
-
-            lat += 0.005;
-            //lon += 0.05;
-
-            gMapControl1.Position = new PointLatLng(lat, lon); //地图中心位置：竹北
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_north_Click(object sender, EventArgs e)
+        {
+            //往北移動
+            latitude += 0.005;
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+        }
+
+        private void btn_south_Click(object sender, EventArgs e)
+        {
+            //往南移動
+            latitude -= 0.005;
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+        }
+
+        private void btn_east_Click(object sender, EventArgs e)
+        {
+            //往東移動
+            longitude += 0.005;
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+        }
+
+        private void btn_west_Click(object sender, EventArgs e)
+        {
+            //往西移動
+            longitude -= 0.005;
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
         }
     }
 
@@ -573,10 +598,8 @@ namespace vcs_GMap
 
         }
 
-
         public override void OnRender(Graphics g)
         {
-
             GPoint gp = new GPoint();
 
             //地图拖拽
@@ -630,3 +653,4 @@ namespace vcs_GMap
         }
     }
 }
+
