@@ -138,18 +138,6 @@ Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠�
         
         
 
-東經：EEast longitude
-西經：WWest longitude
-
-北緯：NNorth latitude
-南緯：SSouth latitude 30 degrees north lat.
-
-gMapControl1.Manager.Mode = AccessMode.CacheOnly;
-
-
-
-
-
 　　（2）現在我們來設計程序的主界面：
 
 Form1的屬性
@@ -160,9 +148,6 @@ BackColor屬性設置為Black
 Size屬性設置為(800, 600)
 ControlBox、MaximizeBox、MinimizeBox、ShowInTaskbar屬性設置均為false
 FormBorderStyle屬性設置為None
-
-
-
 
 
 　/// 應用程序的主入口點。

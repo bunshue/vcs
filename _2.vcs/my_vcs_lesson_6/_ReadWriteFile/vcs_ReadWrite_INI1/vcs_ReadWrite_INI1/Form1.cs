@@ -29,6 +29,11 @@ namespace vcs_ReadWrite_INI1
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern int GetPrivateProfileInt(string lpAppName, string lpKeyName, int lpDefault, string lpFileName);
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             string filename = "c:\\______test_files\\__RW\\_ini\\vcs_ReadWrite_INI1b.ini";
@@ -88,4 +93,3 @@ namespace vcs_ReadWrite_INI1
         }
     }
 }
-
