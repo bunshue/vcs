@@ -1,6 +1,29 @@
 
 
 
+Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠标 
+        //局部圖像放大
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            int r = 20;
+            int ratio = 2;
+            try
+            {
+                Cursor.Current = myCursor;								//定义鼠标
+                Graphics graphics = pictureBox1.CreateGraphics();				//实例化pictureBox1控件的Graphics类
+                //声明两个Rectangle对象，分别用来指定要放大的区域和放大后的区域
+                Rectangle sourceRectangle = new Rectangle(e.X - r, e.Y - r, r*2, r*2);	//要放大的区域 
+                Rectangle destRectangle = new Rectangle(e.X - r * ratio, e.Y - r * ratio, r * 2 * ratio, r * 2 * ratio);
+                //调用DrawImage方法对选定区域进行重新绘制，以放大该部分
+                graphics.DrawImage(myImage, destRectangle, sourceRectangle, GraphicsUnit.Pixel);
+            }
+            catch { }
+
+        }
+
+
+
+
 
             //抓網頁
             string url = @"https://tw.dictionary.search.yahoo.com/";

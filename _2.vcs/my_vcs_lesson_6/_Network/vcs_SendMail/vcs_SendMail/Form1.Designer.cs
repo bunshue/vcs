@@ -142,6 +142,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(160, 48);
             this.button5.TabIndex = 6;
+            this.button5.Text = "用gmail寄信 f";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

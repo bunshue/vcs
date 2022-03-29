@@ -19,8 +19,13 @@ namespace vcs_GMap
 {
     public partial class Form1 : Form
     {
-        private GMapOverlay markersOverlay = new GMapOverlay("markers"); //放置marker的图层
-        private GMapOverlay RouteMark = new GMapOverlay("RouteMark");//放置区域标记图层
+        GMapOverlay markersOverlay = new GMapOverlay("markers"); //放置marker的图层
+        GMapOverlay markersOverlay2 = new GMapOverlay("markers");
+        GMapOverlay RouteMark = new GMapOverlay("RouteMark");//放置区域标记图层
+        GMapOverlay polygons = new GMapOverlay("polygons");
+        GMapOverlay routeOverlay = new GMapOverlay("routes");
+        GMapOverlay overlay = new GMapOverlay("Stop"); //放置marker的图层
+        GMapOverlay overlay2 = new GMapOverlay("Overlay");
 
         /// <summary>
         /// 路径轨迹
@@ -57,9 +62,12 @@ namespace vcs_GMap
             CurrentDir3 = vcs_GMap
             CurrentDir4 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap
             CurrentDir5 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap
-                        */
 
             //private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
+            */
+
+            setup_controls();
+            update_controls_info();
         }
 
         void show_item_location()
@@ -100,29 +108,10 @@ namespace vcs_GMap
             x_st = 20;
             y_st = 150;
             gMapControl1.Location = new Point(x_st, y_st);
-            richTextBox1.Location = new Point(x_st + 960 + 20, y_st);
-
-            trackBar1.Orientation = Orientation.Vertical;
-            trackBar1.TickStyle = TickStyle.Both;
-            trackBar1.TickFrequency = 10;
-            trackBar1.Maximum = 100;
-            trackBar1.Minimum = 1;
-            //trackBar1.Value = (int)((gMapControl1.Zoom - gMapControl1.MinZoom) / gMapControl1.MaxZoom * trackBar1.Maximum);
-            trackBar1.Value = 10;
-            trackBar1.Height = gMapControl1.Height * 4 / 5;
-            trackBar1.Width = 30;
-            trackBar1.Location = new Point(gMapControl1.Location.X + gMapControl1.Width - trackBar1.Width - 5, gMapControl1.Location.Y + gMapControl1.Height / 10);
-            trackBar1.ValueChanged += trackBar1_ValueChanged;
-            this.Controls.Add(trackBar1);
-            trackBar1.BringToFront();
+            richTextBox1.Location = new Point(x_st + 960 + 70, y_st);
         }
 
-        private void trackBar1_ValueChanged(object sender, EventArgs e)
-        {
-            richTextBox1.Text += trackBar1.Value.ToString() + "  ";
-        }
-
-        void setup_gMapControl1()
+        void setup_controls()
         {
             //檢查網路狀態, 以設定gmap存取模式
             try
@@ -140,56 +129,83 @@ namespace vcs_GMap
 
             //gMapControl1.CacheLocation = Environment.CurrentDirectory + "\\GMapCache\\"; //缓存位置
             gMapControl1.CacheLocation = gMapCacheLocation; //緩存位置
+            gMapControl1.Manager.ImportFromGMDB(@"gMapCacheLocation\mapdata.gmdb");
+
             //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
             gMapControl1.ShowCenter = false; //不显示中心十字点
             gMapControl1.DragButton = MouseButtons.Left; //左键拖拽地图
+
+            gMapControl1.MinZoom = 1;  //設置控件最小縮放比例 >=1
+            gMapControl1.MaxZoom = 24; //設置控件最大縮放比例 <=24
+            gMapControl1.Zoom = 14;     //當前比例
+
+            gMapControl1.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
+            gMapControl1.MouseDown += new MouseEventHandler(mapControl_MouseDown);
+            gMapControl1.MouseMove += new MouseEventHandler(mapControl_MouseMove);
+            gMapControl1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
+            gMapControl1.MouseClick += new MouseEventHandler(gMapControl1_MouseClick);
+            //gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
+
+
+            gMapControl1.Overlays.Add(markersOverlay);
+            gMapControl1.Overlays.Add(RouteMark);
+
+            //gMapControl1.Dock = DockStyle.Fill;
+            gMapControl1.MarkersEnabled = true;
+            gMapControl1.PolygonsEnabled = true;
+            gMapControl1.RoutesEnabled = true;
+            //gMapControl1.MouseClick += gMapControl1_MouseClick;
+            //gMapControl1.OnMarkerClick += gMapControl1_OnMarkerClick;
+            //gMapControl1.OnPositionChanged += gMapControl1_OnPositionChanged;
+
+            trackBar1.Orientation = Orientation.Vertical;
+            trackBar1.TickStyle = TickStyle.Both;
+            trackBar1.TickFrequency = 10;
+            trackBar1.Maximum = 100;
+            trackBar1.Minimum = 1;
+            trackBar1.Value = 10;
+            trackBar1.Height = gMapControl1.Height * 4 / 5;
+            trackBar1.Width = 30;
+            trackBar1.Location = new Point(gMapControl1.Location.X + gMapControl1.Width + 10, gMapControl1.Location.Y + gMapControl1.Height / 10);
+            trackBar1.ValueChanged += trackBar1_ValueChanged;
+            this.Controls.Add(trackBar1);
+            trackBar1.BringToFront();
         }
 
-        void update_gMapControl1_info()
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            richTextBox1.Text += trackBar1.Value.ToString() + "  ";
+        }
+
+        void update_controls_info()
         {
             tb_zoom.Text = gMapControl1.Zoom.ToString();
 
             trackBar1.Maximum = gMapControl1.MaxZoom;
             trackBar1.Minimum = gMapControl1.MinZoom;
             trackBar1.Value = (int)gMapControl1.Zoom;
-            trackBar1.Location = new Point(gMapControl1.Width - trackBar1.Width - 5, gMapControl1.Height - trackBar1.Height - 10);
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //gMapControl1.CacheLocation = gMapCacheLocation;   //緩存位置
-            gMapControl1.Manager.ImportFromGMDB(@"gMapCacheLocation\mapdata.gmdb");
-
             gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
             //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
-            gMapControl1.MinZoom = 2;  //最小比例 >=1
-            gMapControl1.MaxZoom = 17; //最大比例 <=24
+            gMapControl1.Position = new PointLatLng(30.6658229803096, 104.0647315979); //地图中心位置
             gMapControl1.Zoom = 14;     //当前比例
 
-            gMapControl1.Position = new PointLatLng(30.6658229803096, 104.0647315979); //地图中心位置
-            gMapControl1.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
-            gMapControl1.MouseDown += new MouseEventHandler(mapControl_MouseDown);
-            gMapControl1.MouseMove += new MouseEventHandler(mapControl_MouseMove);
-            gMapControl1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
-            gMapControl1.MouseClick += new MouseEventHandler(gMapControl1_MouseClick);
-            gMapControl1.Overlays.Add(markersOverlay);
-            gMapControl1.Overlays.Add(RouteMark);
-
-            update_gMapControl1_info();
+            update_controls_info();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            setup_gMapControl1();
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
-            gMapControl1.MinZoom = 2;  //最小比例 >=1
-            gMapControl1.MaxZoom = 24; //最大比例 <=24
-            gMapControl1.Zoom = 16;     //当前比例
             gMapControl1.Position = new PointLatLng(24.838, 121.003); //地图中心位置：竹北
+            gMapControl1.Zoom = 16;     //当前比例
 
-            update_gMapControl1_info();
+            update_controls_info();
         }
 
         void gMapControl1_MouseClick(object sender, MouseEventArgs e)
@@ -238,8 +254,6 @@ namespace vcs_GMap
 
         private void button3_Click(object sender, EventArgs e)
         {
-            setup_gMapControl1();
-
             gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
 
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
@@ -247,16 +261,15 @@ namespace vcs_GMap
 
             GMapProvider.Language = LanguageType.ChineseSimplified; //设置地图默认语言
             //gMapControl1.MapProvider = GMapProvidersExt.AMapProvider.Instance;
+
             //设置控件显示的当前中心位置  
             gMapControl1.Position = new PointLatLng(39.9804435664783, 116.345880031586);
-            gMapControl1.MaxZoom = 24;  //设置控件最大的缩放比例
-            gMapControl1.MinZoom = 0;   //设置控件最小的缩放比例
             gMapControl1.Zoom = 12; //设置控件当前的缩放比例
-            //gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
+
             gMapControl1.IsAccessible = false;
             GMapProvider.TimeoutMs = 1000;//地图加载完成后设置timeoutms为1000（或者其他大于领零的数值自己尝试0）
 
-            update_gMapControl1_info();
+            update_controls_info();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -267,7 +280,6 @@ namespace vcs_GMap
             route_1.Stroke.Color = Color.AliceBlue; 
             */
 
-            GMapOverlay polygons = new GMapOverlay("polygons");
             GMapControl map = new GMapControl();
             var form = new Form() { Size = new Size(1024, 768), WindowState = FormWindowState.Maximized };
             map.Dock = DockStyle.Fill;
@@ -281,6 +293,7 @@ namespace vcs_GMap
 
         private void button5_Click(object sender, EventArgs e)
         {
+
         }
 
         /// <summary>
@@ -379,21 +392,21 @@ namespace vcs_GMap
         {
             //放大
             gMapControl1.Zoom += 1;
-            update_gMapControl1_info();
+            update_controls_info();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             //縮小
             gMapControl1.Zoom -= 1;
-            update_gMapControl1_info();
+            update_controls_info();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             //重新載入
             gMapControl1.ReloadMap();
-            update_gMapControl1_info();
+            update_controls_info();
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -404,27 +417,13 @@ namespace vcs_GMap
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //GMapControl gMapControl1 = new GMapControl();
             //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            gMapControl1.Position = new PointLatLng(50.619900, 26.251617);
 
-            gMapControl1.MinZoom = 3;
-            gMapControl1.MaxZoom = 20;
+            gMapControl1.Position = new PointLatLng(50.619900, 26.251617);
             gMapControl1.Zoom = 9;
 
-            //gMapControl1.Dock = DockStyle.Fill;
-            gMapControl1.MarkersEnabled = true;
-            gMapControl1.PolygonsEnabled = true;
-            gMapControl1.RoutesEnabled = true;
-            //gMapControl1.MouseClick += gMapControl1_MouseClick;
-            //gMapControl1.OnMarkerClick += gMapControl1_OnMarkerClick;
-            //gMapControl1.OnPositionChanged += gMapControl1_OnPositionChanged;
-            //Controls.Add(gMapControl1);
-
-            GMapOverlay markersOverlay = new GMapOverlay("markers");
-            GMapOverlay routeOverlay = new GMapOverlay("routes");
-            //isAddMarker = true;
+            update_controls_info();
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -437,13 +436,11 @@ namespace vcs_GMap
 
         public void DrawPoint(GMapControl map, double latitude, double longitude)   //緯 經
         {
-            GMapOverlay overlay = new GMapOverlay("Stop"); //放置marker的图层
 
             overlay.Markers.Add(new GMarkerGoogle(new PointLatLng(latitude, longitude), GMarkerGoogleType.red));
 
             map.Overlays.Add(overlay);
             richTextBox1.Text += "北緯 " + latitude.ToString() + "\t東經 " + longitude.ToString() + "\n";
-
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -452,9 +449,7 @@ namespace vcs_GMap
 
             gMapControl1.Manager.Mode = AccessMode.ServerOnly;
 
-            //gMapControl1.MinZoom = gMapControl1.MinZoom;
-            //gMapControl1.MaxZoom = gMapControl1.MaxZoom;
-            //gMapControl1.Zoom = gMapControl1.Zoom;
+            gMapControl1.Zoom = 14;
 
             gMapControl1.Position = gMapControl1.Position;
             gMapControl1.EmptyTileColor = System.Drawing.Color.Aquamarine;
@@ -499,6 +494,7 @@ namespace vcs_GMap
             Pen pen = new Pen(color, 3.0f);
 
             List<PointLatLng> allMapPoints = points.Select(point => new PointLatLng(point.X, point.Y)).ToList();
+
             GMapRoute route = new GMapRoute(allMapPoints, "Route");
             route.Stroke = pen;
             map.ZoomAndCenterRoute(route);
@@ -510,6 +506,7 @@ namespace vcs_GMap
                 //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMarkerGoogleType.GMapMarkerGoogleGreen(new PointLatLng(allMapPoints.First().Lat, allMapPoints.First().Lng)));
                 //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMapMarkerGoogleRed(new PointLatLng(allMapPoints.Last().Lat, allMapPoints.Last().Lng)));
             }
+
             overlay.Routes.Add(route);
             map.Overlays.Add(overlay);
         }
@@ -517,9 +514,6 @@ namespace vcs_GMap
 
         private void button15_Click(object sender, EventArgs e)
         {
-            GMapControl gMapControl1 = new GMapControl();
-            //gMapControl1.CacheLocation = Path.GetDirectoryName(Application.ExecutablePath) + "/gmapcache/";
-            gMapControl1.CacheLocation = gMapCacheLocation; //緩存位置
         }
 
         double lat = 24.838;

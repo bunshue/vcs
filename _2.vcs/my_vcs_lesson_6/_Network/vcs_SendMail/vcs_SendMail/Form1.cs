@@ -435,7 +435,17 @@ namespace vcs_SendMail
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            var from = new MailAddress("bunshue@gmail.com", "bunshue");
+            var to = new MailAddress("David@insighteyes.com", "david");
+            var message = new MailMessage(from, to);
+            message.Subject = "The subject 2";
+            message.Body = "The message body";
+            message.IsBodyHtml = true;
+            var host = "smtp.gmail.com";
+            var client = new SmtpClient(host, 587);
+            client.EnableSsl = true;
+            client.Credentials = new NetworkCredential("bunshue", email_addr_from_password);
+            client.Send(message);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -516,6 +526,33 @@ namespace vcs_SendMail
         private void button10_Click(object sender, EventArgs e)
         {
             //使用 EmailClass
+
+
+
+
+            //使用EmailHelper2
+
+
+            //獲得各種參數，不需要的用空字符串
+
+            string smtpServer = "smtp.gmail.com";//163郵箱的smtp服務器 
+            int port = 25;//端口
+            string mailFrom = "bunshue@gmail.com";//發件人郵箱 
+            string pwd = email_addr_from_password;//密碼
+            string mailTo = "David@insighteyes.com";//收件人郵箱,多個用戶用逗號隔開
+            string mailCC = "";//抄送人,多個用戶用逗號隔開
+            string mailBcc = "";//密送
+            string mailSubject = "測試郵件";//主題
+            string mailContent = "HI,這是我發給你的一個測試郵件";//內容
+            string ah = attach_filename1 + "," + attach_filename2; //附件-文件路徑
+            if (EmailHelper2.SendEmail(smtpServer, port, mailFrom, pwd, mailTo, mailCC, mailBcc, mailSubject, mailContent, ah) == true)
+            {
+                richTextBox1.Text += "發送成功!\n";
+            }
+            else
+            {
+                richTextBox1.Text += "發送失敗\n";
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -863,6 +900,80 @@ namespace vcs_SendMail
         }
     }
 
+
+
+    public class EmailHelper2
+    {
+        /// <summary>
+        /// 發送郵件
+        /// </summary>
+        /// <param name="smtpServer">smtp服務器</param>
+        /// <param name="port">端口</param>
+        /// <param name="mailFrom">發件人郵箱</param>
+        /// <param name="userPassword">密碼</param>
+        /// <param name="mailTo">收件人</param>
+        /// <param name="strcc">抄送人</param>
+        /// <param name="strBcc">密送</param>
+        /// <param name="mailSubject">郵件主題</param>
+        /// <param name="mailContent">內容</param>
+        /// <param name="strs">附件</param>
+        /// <returns>發送成功返回true否則false</returns>
+        public static bool SendEmail(string smtpServer, int port, string mailFrom, string userPassword, string mailTo, string strcc, string strBcc, string mailSubject, string mailContent, string strs)
+        {
+            try
+            {
+                // 設置發送方的郵件信息
+                // 郵件服務設置
+                SmtpClient smtpClient = new SmtpClient();
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;//指定電子郵件發送方式
+                smtpClient.Host = smtpServer; //指定SMTP服務器
+                smtpClient.Port = port;//端口
+                smtpClient.Credentials = new System.Net.NetworkCredential(mailFrom, userPassword);//驗證用戶名和密碼
+                smtpClient.EnableSsl = true; //使用SSL
+                // 發送郵件設置        
+                MailMessage mailMessage = new MailMessage(mailFrom, mailTo); // 發送人和收件人
+
+                mailMessage.Subject = mailSubject;//主題
+                mailMessage.Body = mailContent;//內容
+                mailMessage.BodyEncoding = Encoding.UTF8;//正文編碼
+                mailMessage.IsBodyHtml = true;//設置為HTML格式
+                mailMessage.Priority = MailPriority.Normal;//優先級
+                //抄送人
+                if (!string.IsNullOrEmpty(strcc))
+                    mailMessage.CC.Add(strcc);
+                //密送
+                if (!string.IsNullOrEmpty(strBcc))
+                    mailMessage.Bcc.Add(strBcc);
+                //附件
+                if (!string.IsNullOrEmpty(strs))
+                {
+                    List<string> paths = new List<string>();
+                    if (strs.Contains(","))
+                    {
+                        paths = strs.Split(',').ToList();
+                    }
+                    else
+                    {
+                        paths.Add(strs);
+                    }
+                    foreach (var path in paths)
+                    {
+                        mailMessage.Attachments.Add(new Attachment(strs));
+                    }
+                }
+                smtpClient.Send(mailMessage); // 發送郵件
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                //定義產生錯誤時的例外處理程式碼
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+    }
+    
     public static class EmailClass
     {
         /// <summary>

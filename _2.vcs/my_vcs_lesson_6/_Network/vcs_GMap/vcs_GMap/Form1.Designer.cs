@@ -193,6 +193,7 @@
             this.tb_zoom.Name = "tb_zoom";
             this.tb_zoom.Size = new System.Drawing.Size(50, 33);
             this.tb_zoom.TabIndex = 12;
+            this.tb_zoom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // checkBox1
             // 
@@ -296,7 +297,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1275, 712);
+            this.ClientSize = new System.Drawing.Size(1341, 712);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
