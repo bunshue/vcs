@@ -20,12 +20,9 @@ namespace vcs_GMap
     public partial class Form1 : Form
     {
         GMapOverlay markersOverlay = new GMapOverlay("markers"); //放置marker的图层
-        GMapOverlay markersOverlay2 = new GMapOverlay("markers");
         GMapOverlay RouteMark = new GMapOverlay("RouteMark");//放置区域标记图层
-        GMapOverlay polygons = new GMapOverlay("polygons");
-        GMapOverlay routeOverlay = new GMapOverlay("routes");
-        GMapOverlay overlay = new GMapOverlay("Stop"); //放置marker的图层
-        GMapOverlay overlay2 = new GMapOverlay("Overlay");
+        GMapOverlay markersOverlay_polygons = new GMapOverlay("polygons");
+        GMapOverlay markersOverlay_stop = new GMapOverlay("Stop"); //放置marker的图层
 
         /// <summary>
         /// 路径轨迹
@@ -34,7 +31,6 @@ namespace vcs_GMap
         private GmapMarkerRoute Route = null;
         private Point RightBDPoint;
         private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
-        //private Timer blinkTimer = new Timer();
         private Point BeforeZoomChangeMousePoint = new Point();
 
         TrackBar trackBar1 = new TrackBar();
@@ -99,14 +95,7 @@ namespace vcs_GMap
             button9.Location = new Point(x_st + dx * 7, y_st + dy * 2 - 20);
             button10.Location = new Point(x_st + dx * 7 + 60, y_st + dy * 1 - 10);
             tb_zoom.Location = new Point(x_st + dx * 7 + 60, y_st + dy * 0);
-
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button15.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            button16.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-            button17.Location = new Point(x_st + dx * 6, y_st + dy * 1);
+            bt_save.Location = new Point(x_st + dx * 7 + 60, y_st + dy * 2 - 20);
 
             x_st = 20;
             y_st = 150;
@@ -119,12 +108,15 @@ namespace vcs_GMap
             btn_east.Location = new Point(x_st + 32, y_st + 32);
             btn_west.Location = new Point(x_st - 32, y_st + 32);
             btn_south.Location = new Point(x_st, y_st + 64);
-
-
-
         }
 
         void setup_controls()
+        {
+            setup_gMapControl();
+            setup_trackBar();
+        }
+
+        void setup_gMapControl()
         {
             //檢查網路狀態, 以設定gmap存取模式
             try
@@ -162,8 +154,7 @@ namespace vcs_GMap
             gMapControl1.MouseClick += new MouseEventHandler(gMapControl1_MouseClick);
             //gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
 
-
-            gMapControl1.Overlays.Add(markersOverlay);
+            gMapControl1.Overlays.Add(markersOverlay);  //添加 圖標 Markers 的圖層
             gMapControl1.Overlays.Add(RouteMark);
 
             //gMapControl1.Dock = DockStyle.Fill;
@@ -178,7 +169,10 @@ namespace vcs_GMap
             //GMapProvider.Language = LanguageType.ChineseSimplified; //设置地图默认语言
             GMapProvider.Language = LanguageType.ChineseTraditional; //设置地图默认语言
             GMapProvider.TimeoutMs = 1000;//地图加载完成后设置timeoutms为1000(或者其他大于领零的数值自己尝试0)
+        }
 
+        void setup_trackBar()
+        {
             trackBar1.Orientation = Orientation.Vertical;
             trackBar1.TickStyle = TickStyle.Both;
             trackBar1.TickFrequency = 10;
@@ -234,14 +228,9 @@ namespace vcs_GMap
             latitude = 24.838;   //緯度
             longitude = 121.003; //經度
             gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-            gMapControl1.Zoom = 16; //當前比例
+            gMapControl1.Zoom = 14; //當前比例
 
             update_controls_info();
-
-            //加 圖標 Markers
-            gMapControl1.Overlays.Add(markersOverlay);   //MapControl添加图markersOverlay_before,null);//图层再添加marker
-            string[] studentName = new string[4] { "121.00410306376308, 24.83923062590916", "121.00929660194892, 24.83900079788313", "121.00903566227302, 24.835634744818194", "121.01120945267155, 24.836966817989957" };
-            SetLableOnMap_fore(studentName, markersOverlay);
         }
 
         public void SetLableOnMap_fore(string[] LatLngInfo, GMapOverlay markers_Overlay)
@@ -251,9 +240,9 @@ namespace vcs_GMap
             {
                 string[] LatLng = LatLngInfo[i].Split(',');
                 //在坐标点上绘制一绿色点并向图层中添加标签 
-                markers_Overlay.Markers.Add(new GMarkerGoogle(new PointLatLng(double.Parse(LatLng[1]), double.Parse(LatLng[0])), GMarkerGoogleType.red));
+                markers_Overlay.Markers.Add(new GMarkerGoogle(new PointLatLng(double.Parse(LatLng[0]), double.Parse(LatLng[1])), GMarkerGoogleType.green));
 
-                richTextBox1.Text += (double.Parse(LatLng[1])).ToString() + "\t" + (double.Parse(LatLng[0])).ToString() + "\n";
+                richTextBox1.Text += (double.Parse(LatLng[0])).ToString() + "\t" + (double.Parse(LatLng[1])).ToString() + "\n";
                 //方便之后寻找到是第几个GMapMarker   
                 markers_Overlay.Markers[i].Tag = i;
                 markers_Overlay.Markers[i].Tag = "xxxx";
@@ -263,23 +252,73 @@ namespace vcs_GMap
 
         private void button1_Click(object sender, EventArgs e)
         {
+            double R = 0.015;
+            double angle = 0;
+            double cx = latitude;
+            double cy = longitude;
+            string[] marker_position = new string[12];
+            for (angle = 0; angle < 360; angle += 30)
+            {
+                marker_position[(int)(angle / 30)] = (cx + R * cosd(angle)).ToString() + ", " + (cy + R * sind(angle)).ToString();
+
+                richTextBox1.Text += angle.ToString() + "\t" + (cx + R * cosd(angle)).ToString() + "\t" + (cy + R * sind(angle)).ToString() + "\n";
+            }
+
+            //string[] marker_position = new string[4] { "24.83923062590916, 121.00410306376308", "24.83900079788313, 121.00929660194892", "24.835634744818194, 121.00903566227302", "24.836966817989957, 121.01120945267155" };
+
+            SetLableOnMap_fore(marker_position, markersOverlay);
+
+            /* under test
             double lat = 24.836494165650475 + 10;
             double lon = 121.01959461339993 + 10;
 
-            DrawPoint(gMapControl1, lat, lon);
+            //DrawPoint(gMapControl1, lat, lon);
+
+            //竹北座標
+            latitude = 24.838;   //緯度
+            longitude = (121.003+0.02); //經度
+
+            //DrawPoint(gMapControl1, latitude, longitude);
+            */
         }
 
         public void DrawPoint(GMapControl map, double latitude, double longitude)   //緯 經
         {
+            markersOverlay_stop.Markers.Add(new GMarkerGoogle(new PointLatLng(latitude, longitude), GMarkerGoogleType.red));
 
-            overlay.Markers.Add(new GMarkerGoogle(new PointLatLng(latitude, longitude), GMarkerGoogleType.red));
-
-            map.Overlays.Add(overlay);
+            map.Overlays.Add(markersOverlay_stop);
             richTextBox1.Text += "北緯 " + latitude.ToString() + "\t東經 " + longitude.ToString() + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
+            //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
+            //竹北座標
+            latitude = 24.838;   //緯度
+            longitude = 121.003; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+
+            gMapControl1.Zoom = 14; //當前比例
+
+            gMapControl1.EmptyTileColor = System.Drawing.Color.Aquamarine;
+            //gMapControl1.GrayScaleMode = true;    //黑白地圖
+            gMapControl1.Manager.UsePlacemarkCache = false;
+            gMapControl1.Manager.UseMemoryCache = true;
+            //gMapControl1.Manager.CancelTileCaching();
+
+            foreach (GMapOverlay overlay in gMapControl1.Overlays)
+            {
+                foreach (var route in overlay.Routes)
+                {
+                    var r = new GMapRoute(route.Name);
+                    r.Points.AddRange(route.Points);
+                    r.Stroke = route.Stroke;
+                }
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -313,15 +352,43 @@ namespace vcs_GMap
             map.Dock = DockStyle.Fill;
             map.MapProvider = GMapProviders.GoogleSatelliteMap;
             map.MaxZoom = 20;
-            map.Overlays.Add(polygons);
+            map.Overlays.Add(markersOverlay_polygons);
             form.Controls.Add(map);
             form.Show();
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            /*
+List<PointLatLng> PointLL = new List<PointLatLng>();
+PointLL.Add(double.Parse("121.00410306376308"), double.Parse("24.83923062590916"));
 
+
+Point.Add(new Point((int)gp.X - Origin.X - OriginOffset.X, (int)gp.Y - Origin.Y - OriginOffset.Y));
+PointLL.Add(NewPointLatLng);
+*/
+
+        }
+
+        public static void DrawMap(GMapControl map, List<Point> points, Color color, bool includeMarkers)
+        {
+            Pen pen = new Pen(color, 3.0f);
+
+            List<PointLatLng> allMapPoints = points.Select(point => new PointLatLng(point.X, point.Y)).ToList();
+
+            GMapRoute route = new GMapRoute(allMapPoints, "Route");
+            route.Stroke = pen;
+            map.ZoomAndCenterRoute(route);
+
+            GMapOverlay overlay = new GMapOverlay("Overlay");
+            if (includeMarkers)
+            {
+                //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMapMarkerGoogleGreen(new PointLatLng(allMapPoints.First().Lat, allMapPoints.First().Lng)));
+                //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMarkerGoogleType.GMapMarkerGoogleGreen(new PointLatLng(allMapPoints.First().Lat, allMapPoints.First().Lng)));
+                //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMapMarkerGoogleRed(new PointLatLng(allMapPoints.Last().Lat, allMapPoints.Last().Lng)));
+            }
+            overlay.Routes.Add(route);
+            map.Overlays.Add(overlay);
         }
 
         /// <summary>
@@ -399,21 +466,7 @@ namespace vcs_GMap
 
         private void button6_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string filename = Application.StartupPath + "\\map_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
 
-                Image image = gMapControl1.ToImage();
-                if (image != null)
-                {
-                    image.Save(filename);
-                    richTextBox1.Text += "已存檔 : " + filename + "\n";
-                }
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -443,92 +496,23 @@ namespace vcs_GMap
             richTextBox1.Text += "H = " + gMapControl1.Height.ToString() + "\n";
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void bt_save_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
-            //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-
-            //竹北座標
-            latitude = 24.838;   //緯度
-            longitude = 121.003; //經度
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-
-            gMapControl1.Zoom = 14; //當前比例
-
-            gMapControl1.EmptyTileColor = System.Drawing.Color.Aquamarine;
-            //gMapControl1.GrayScaleMode = true;    //黑白地圖
-            gMapControl1.Manager.UsePlacemarkCache = false;
-            gMapControl1.Manager.UseMemoryCache = true;
-            //gMapControl1.Manager.CancelTileCaching();
-
-            foreach (GMapOverlay overlay in gMapControl1.Overlays)
+            try
             {
-                foreach (var route in overlay.Routes)
+                string filename = Application.StartupPath + "\\map_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
+
+                Image image = gMapControl1.ToImage();
+                if (image != null)
                 {
-                    var r = new GMapRoute(route.Name);
-                    r.Points.AddRange(route.Points);
-                    r.Stroke = route.Stroke;
+                    image.Save(filename);
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
                 }
             }
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            /*
-            List<PointLatLng> PointLL = new List<PointLatLng>();
-            PointLL.Add(double.Parse("121.00410306376308"), double.Parse("24.83923062590916"));
-
-
-            Point.Add(new Point((int)gp.X - Origin.X - OriginOffset.X, (int)gp.Y - Origin.Y - OriginOffset.Y));
-            PointLL.Add(NewPointLatLng);
-            */
-
-            //string[] studentName = new string[4] { "121.00410306376308, 24.83923062590916", "121.00929660194892, 24.83900079788313", "121.00903566227302, 24.835634744818194", "121.01120945267155, 24.836966817989957" };
-
-        }
-
-        public static void DrawMap(GMapControl map, List<Point> points, Color color, bool includeMarkers)
-        {
-            Pen pen = new Pen(color, 3.0f);
-
-            List<PointLatLng> allMapPoints = points.Select(point => new PointLatLng(point.X, point.Y)).ToList();
-
-            GMapRoute route = new GMapRoute(allMapPoints, "Route");
-            route.Stroke = pen;
-            map.ZoomAndCenterRoute(route);
-
-            GMapOverlay overlay = new GMapOverlay("Overlay");
-            if (includeMarkers)
+            catch (Exception ex)
             {
-                //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMapMarkerGoogleGreen(new PointLatLng(allMapPoints.First().Lat, allMapPoints.First().Lng)));
-                //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMarkerGoogleType.GMapMarkerGoogleGreen(new PointLatLng(allMapPoints.First().Lat, allMapPoints.First().Lng)));
-                //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMapMarkerGoogleRed(new PointLatLng(allMapPoints.Last().Lat, allMapPoints.Last().Lng)));
+                richTextBox1.Text += ex.Message + "\n";
             }
-            overlay.Routes.Add(route);
-            map.Overlays.Add(overlay);
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btn_north_Click(object sender, EventArgs e)
@@ -558,6 +542,22 @@ namespace vcs_GMap
             longitude -= 0.005;
             gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
         }
+
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
     }
 
     class GmapMarkerRoute : GMapMarker
@@ -653,4 +653,5 @@ namespace vcs_GMap
         }
     }
 }
+
 

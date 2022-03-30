@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Screensaver4.Properties
+namespace vcs_test_all_01_Random.Properties
 {
 
 

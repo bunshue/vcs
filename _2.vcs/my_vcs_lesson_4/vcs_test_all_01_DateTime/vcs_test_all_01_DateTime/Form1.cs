@@ -827,9 +827,126 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - start_time).ToString() + " 秒\n";
         }
 
+        //C#實現小小的日歷 ST
+        void show_calendar()
+        {
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
+            int day = 0;
+            int sum = 0;
+            int i;
+            for (i = 1900; i < year; i++)
+            {
+                if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
+                {
+                    sum += 366;
+                }
+                else
+                {
+                    sum += 365;
+                }
+            }
+
+            switch (month)
+            {
+                case 12:
+                    day = 31;
+                    break;
+                case 11:
+                    day = 30;
+                    break;
+                case 10:
+                    day = 31;
+                    break;
+                case 9:
+                    day = 30;
+                    break;
+                case 8:
+                    day = 31;
+                    break;
+                case 7:
+                    day = 31;
+                    break;
+                case 6:
+                    day = 30;
+                    break;
+                case 5:
+                    day = 31;
+                    break;
+                case 4:
+                    day = 30;
+                    break;
+                case 3:
+                    day = 31;
+                    break;
+                case 2:
+                    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+                        day = 29;
+                    else
+                        day = 28;
+                    break;
+                case 1:
+                    day = 31;
+                    break;
+            }
+
+            int leap;
+            /*先計算某月以前月份的總天數*/
+            switch (month)
+            {
+                case 1: sum += 0; break;
+                case 2: sum += 31; break;
+                case 3: sum += 59; break;
+                case 4: sum += 90; break;
+                case 5: sum += 120; break;
+                case 6: sum += 151; break;
+                case 7: sum += 181; break;
+                case 8: sum += 212; break;
+                case 9: sum += 243; break;
+                case 10: sum += 273; break;
+                case 11: sum += 304; break;
+                case 12: sum += 334; break;
+            }
+            /*判斷是不是閏年*/
+            if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+                leap = 1;
+            else
+                leap = 0;
+            /*如果是閏年且月份大於2,總天數應該加一天*/
+            if (leap == 1 && month > 2)
+                sum++;
+
+            int space = (sum + 1) % 7;
+            Console.WriteLine("日\t一\t二\t三\t四\t五\t六\t");
+            richTextBox1.Text += "日\t一\t二\t三\t四\t五\t六\n";
+            for (i = 1; i <= (space + day); i++)
+            {
+                if (i <= space)
+                {
+                    Console.Write("\t");
+                    richTextBox1.Text += "\t";
+                }
+                else
+                {
+                    Console.Write(i - space + "\t");
+                    richTextBox1.Text += i - space + "\t";
+                }
+                if (i % 7 == 0)
+                {
+                    Console.WriteLine();
+                    richTextBox1.Text += "\n";
+                }
+            }
+            Console.WriteLine();
+            richTextBox1.Text += "\n";
+        }
+
         private void button25_Click(object sender, EventArgs e)
         {
+            //C#實現小小的日曆
+            show_calendar();
         }
+        //C#實現小小的日歷 SP
 
         public struct Age
         {

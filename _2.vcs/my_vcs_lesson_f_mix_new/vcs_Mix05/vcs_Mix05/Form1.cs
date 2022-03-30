@@ -302,9 +302,6 @@ namespace vcs_Mix05
 
             //int a = WeekOfMonth(DateTime.Now, false);//
             //richTextBox1.Text += "本月第幾周\t" + a + "\n";
-
-
-
         }
 
         //本年第幾周
@@ -422,9 +419,6 @@ namespace vcs_Mix05
             Console.WriteLine(person2.Skill);
             Console.WriteLine((person2.Skill & Skill.Cook) > 0); //結果為True，（1111 & 0010 = 0010）
             Console.WriteLine((person2.Skill & Skill.Cook) == Skill.Cook); //結果為True
-
-
-
         }
         //ENUM測試 SP
 
@@ -461,9 +455,7 @@ namespace vcs_Mix05
         {
             show_button_text(sender);
             //分出 時:分:秒 再組合
-
             DateTime dt = DateTime.Now;
-
             richTextBox1.Text += dt.Hour.ToString().PadLeft(2, '0') + ":"
                                     + dt.Minute.ToString().PadLeft(2, '0') + ":"
                                     + dt.Second.ToString().PadLeft(2, '0') + "\n";
@@ -472,33 +464,21 @@ namespace vcs_Mix05
         //設置系統日期和時間 ST
         public class SetSystemDateTime
         {
-
             [DllImportAttribute("Kernel32.dll")]
-
             public static extern void GetLocalTime(SystemTime st);
-
             [DllImportAttribute("Kernel32.dll")]
-
             public static extern void SetLocalTime(SystemTime st);
-
         }
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
         public class SystemTime
         {
-
             public ushort vYear;
-
             public ushort vMonth;
-
             public ushort vDayOfWeek;
-
             public ushort vDay;
-
             public ushort vHour;
-
             public ushort vMinute;
-
             public ushort vSecond;
         }
 
@@ -1073,128 +1053,10 @@ namespace vcs_Mix05
             return st.GetFrame(0).GetFileLineNumber();
         }
 
-        //C#實現小小的日歷 ST
-        void show_calendar()
-        {
-            int year = DateTime.Now.Year;
-            int month = DateTime.Now.Month;
-            int day = 0;
-            int sum = 0;
-            int i;
-            for (i = 1900; i < year; i++)
-            {
-                if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
-                {
-                    sum += 366;
-                }
-                else
-                {
-                    sum += 365;
-                }
-            }
-
-            switch (month)
-            {
-                case 12:
-                    day = 31;
-                    break;
-                case 11:
-                    day = 30;
-                    break;
-                case 10:
-                    day = 31;
-                    break;
-                case 9:
-                    day = 30;
-                    break;
-                case 8:
-                    day = 31;
-                    break;
-                case 7:
-                    day = 31;
-                    break;
-                case 6:
-                    day = 30;
-                    break;
-                case 5:
-                    day = 31;
-                    break;
-                case 4:
-                    day = 30;
-                    break;
-                case 3:
-                    day = 31;
-                    break;
-                case 2:
-                    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
-                        day = 29;
-                    else
-                        day = 28;
-                    break;
-                case 1:
-                    day = 31;
-                    break;
-            }
-
-            int leap;
-            /*先計算某月以前月份的總天數*/
-            switch (month)
-            {
-                case 1: sum += 0; break;
-                case 2: sum += 31; break;
-                case 3: sum += 59; break;
-                case 4: sum += 90; break;
-                case 5: sum += 120; break;
-                case 6: sum += 151; break;
-                case 7: sum += 181; break;
-                case 8: sum += 212; break;
-                case 9: sum += 243; break;
-                case 10: sum += 273; break;
-                case 11: sum += 304; break;
-                case 12: sum += 334; break;
-            }
-            /*判斷是不是閏年*/
-            if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
-                leap = 1;
-            else
-                leap = 0;
-            /*如果是閏年且月份大於2,總天數應該加一天*/
-            if (leap == 1 && month > 2)
-                sum++;
-
-            int space = (sum + 1) % 7;
-            Console.WriteLine("日\t一\t二\t三\t四\t五\t六\t");
-            richTextBox1.Text += "日\t一\t二\t三\t四\t五\t六\n";
-            for (i = 1; i <= (space + day); i++)
-            {
-                if (i <= space)
-                {
-                    Console.Write("\t");
-                    richTextBox1.Text += "\t";
-                }
-                else
-                {
-                    Console.Write(i - space + "\t");
-                    richTextBox1.Text += i - space + "\t";
-                }
-                if (i % 7 == 0)
-                {
-                    Console.WriteLine();
-                    richTextBox1.Text += "\n";
-                }
-            }
-            Console.WriteLine();
-            richTextBox1.Text += "\n";
-        }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            show_button_text(sender);
-            //C#實現小小的日曆
-            show_calendar();
         }
-        //C#實現小小的日歷 SP
-
         private void button15_Click(object sender, EventArgs e)
         {
             show_button_text(sender);

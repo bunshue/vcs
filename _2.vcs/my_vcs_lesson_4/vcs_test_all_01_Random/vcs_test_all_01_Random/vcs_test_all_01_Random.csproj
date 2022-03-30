@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{45FAA759-C5D1-4ECE-8ACA-BB1B66363ACB}</ProjectGuid>
+    <ProjectGuid>{3510F5AD-28A8-4680-8E2F-168D6D2E53A6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Screensaver4</RootNamespace>
-    <AssemblyName>vcs_Screensaver4</AssemblyName>
+    <RootNamespace>vcs_test_all_01_Random</RootNamespace>
+    <AssemblyName>vcs_test_all_01_Random</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

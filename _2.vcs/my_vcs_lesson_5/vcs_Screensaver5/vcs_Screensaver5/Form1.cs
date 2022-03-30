@@ -7,6 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
+/*
+Form1之屬性
+FormBoderStyle屬性為None
+ShowInTaskbar屬性為False
+WindowState屬性為Maximized
+*/
+
+/*
+最後把bin/debug或者bin/release下的可執行程序後綴改成scr，並拷貝到系統盤Windows的system32下。
+這樣通過桌面個性化的屏幕保護程序設置一下就可以投入使用了，
+*/
+
 namespace vcs_Screensaver5
 {
     public partial class Form1 : Form
