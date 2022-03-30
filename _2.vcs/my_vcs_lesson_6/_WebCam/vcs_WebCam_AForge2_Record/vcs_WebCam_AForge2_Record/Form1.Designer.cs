@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -37,6 +38,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.timer_fps = new System.Windows.Forms.Timer(this.components);
+            this.lb_fps = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -133,11 +136,28 @@
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
             // 
+            // timer_fps
+            // 
+            this.timer_fps.Enabled = true;
+            this.timer_fps.Interval = 1000;
+            this.timer_fps.Tick += new System.EventHandler(this.timer_fps_Tick);
+            // 
+            // lb_fps
+            // 
+            this.lb_fps.AutoSize = true;
+            this.lb_fps.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_fps.Location = new System.Drawing.Point(681, 27);
+            this.lb_fps.Name = "lb_fps";
+            this.lb_fps.Size = new System.Drawing.Size(43, 21);
+            this.lb_fps.TabIndex = 26;
+            this.lb_fps.Text = "fps";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.lb_fps);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -151,6 +171,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -165,6 +186,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Timer timer_fps;
+        private System.Windows.Forms.Label lb_fps;
     }
 }
 

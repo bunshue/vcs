@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Screensaver5.Properties
+namespace vcs_Screensaver4.Properties
 {
 
 

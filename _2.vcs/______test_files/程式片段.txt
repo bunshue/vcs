@@ -1,41 +1,25 @@
 
+使用資源檔的圖片
+
+屬性/資源/加入資源/加入現有檔案/ 選取檔案 picture1.jpg
+此時, Resources 會出現 picture1.jpg
+點選picture1.jpg, 屬性
+建置動作 改成 內嵌資源
+
+
+using System.Reflection;    //for Assembly
+using System.IO;    //for Stream
+
+            Assembly asm = this.GetType().Assembly;
+            Stream stream = asm.GetManifestResourceStream("vcs_test.Resources.picture1.jpg");
+            this.BackgroundImage = new Bitmap(stream);
+
+
 
 
 
 https://www.zhangshengrong.com/p/yOXD5ejR1B/
 
-
-
-/*
-全屏隨機位置顯示圖片
-Form1之屬性
-FormBorderStyle 改 None		//無邊框
-StartPosition 改 CenterScreen	//視窗居中顯示
-WindowState 改 Maximized	//畫面最大化
-ControlBox 改 False
-MaximizeBox 改 False
-MinimizeBox 改 False
-ShowIcon 改 False
-ShowInTaskbar 改 False
-TopMost 改 True
-KeyPreview 改 True
-*/
-
-this.FormBorderStyle = FormBorderStyle.None;	//無邊框
-this.StartPosition = FormStartPosition.CenterScreen;	//視窗居中顯示
-this.WindowState = FormWindowState.Maximized;   //畫面最大化
-this.ControlBox = false;
-this.MaximizeBox = false;
-this.MinimizeBox = false;
-this.ShowIcon = false;
-this.ShowInTaskbar = false;	//不在任務欄中顯示
-this.KeyPreview = true;
-this.TopMost = true;
-this.BackColor = Color.White;
-
-this.AutoSize = true;
-//this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
-//this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份
 
 
 

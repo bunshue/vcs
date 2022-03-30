@@ -27,7 +27,8 @@ namespace vcs_Remove_Bin_Obj
         private void Form1_Load(object sender, EventArgs e)
         {
             int x_st = 15;
-            int y_st = 80;
+            int y_st = 15;
+            int dx = 200;
             int dy = 40;
             checkBox3.Location = new Point(x_st, y_st + dy * 0);
             checkBox1.Location = new Point(x_st, y_st + dy * 1);
@@ -43,13 +44,15 @@ namespace vcs_Remove_Bin_Obj
             checkBox6.Location = new Point(x_st, y_st + dy * 11);
             button3.Location = new Point(x_st, y_st + dy * 12);
 
+            lb_main_mesg.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
 
-            tb_location.Text = currentPath;
-            //richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+            this.Text = "目前位置 : " + currentPath;
             search_path = currentPath;
             lb_main_mesg.Text = "";
         }

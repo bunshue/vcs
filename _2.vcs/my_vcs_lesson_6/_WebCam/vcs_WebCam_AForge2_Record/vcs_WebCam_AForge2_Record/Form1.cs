@@ -90,6 +90,9 @@ namespace vcs_WebCam_AForge2_Record
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            lb_fps.Text = "";
+            lb_fps.Location = new Point(680, 10);
+
             button2.Enabled = false;
             button4.Enabled = false;
         }
@@ -231,6 +234,33 @@ namespace vcs_WebCam_AForge2_Record
             {
                 richTextBox1.Text += "並沒有在錄影\n";
             }
+        }
+
+        int min_old = 0;
+        private void timer_fps_Tick(object sender, EventArgs e)
+        {
+            /*
+            if (flag_webcam_ok == true)
+            {
+                DateTime dt = DateTime.Now;
+                lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F2") + " fps";
+                dt_old = dt;
+                frame_count_old = frame_count;
+
+                if (flag_recording == true)
+                {
+                    int min = (int)((DateTime.Now - recording_time_st).TotalMinutes);
+                    if ((min > 0) && (min != min_old))
+                    {
+                        richTextBox1.Text += "已錄影 " + min.ToString() + " 分\n";
+                        min_old = min;
+                    }
+            }
+            else
+            {
+                lb_fps.Text = "";
+            }
+            */
         }
     }
 
