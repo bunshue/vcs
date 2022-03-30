@@ -79,14 +79,16 @@ namespace vcs_WebCam_AForge2_Record
             int H = 480;
             int x_st = BORDER;
             int y_st = BORDER;
-            int dx = W + 50;
-            int dy = H + 50;
+            int dx = 140 + 50;
+            int dy = 50 + 15;
 
             pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(200, H);
-            richTextBox1.Location = new Point(x_st + dx * 0 + BORDER + 640, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 600);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 70, y_st + dy * 0);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             button2.Enabled = false;
             button4.Enabled = false;

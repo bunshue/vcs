@@ -166,20 +166,23 @@ namespace vcs_WebCam_AForge1_Record
 
         void show_item_location()
         {
+            int W = 640;
+            int H = 480;
             int x_st = BORDER;
             int y_st = BORDER;
             int dx = 140 + 50;
             int dy = 50 + 15;
 
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox1.Size = new Size(W, H);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(300, 670);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 600);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 70, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             lb_fps.Text = "";
-            lb_fps.Location = new Point(750, 5);
+            lb_fps.Location = new Point(680, 10);
         }
 
         void do_record()

@@ -155,9 +155,33 @@ namespace vcs_test_all_05_RegularExpression
 
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //驗證台灣手機號碼
+            bool match;
+            match = System.Text.RegularExpressions.Regex.IsMatch(textBox3.Text, @"^09[0-9]{8}$");
+            if (match == true)
+            {
+                richTextBox1.Text += "OK\n";
 
+            }
+            else
+            {
+                richTextBox1.Text += "NG\n";
+            }
+        }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (Regex.IsMatch(textBox4.Text, @"^[\d,\.]+$"))
+            {
+                richTextBox1.Text += "是數值\n";
+            }
+            else
+            {
+                richTextBox1.Text += "不是數值\n";
+            }
 
-
+        }
     }
 }

@@ -325,19 +325,6 @@ namespace vcs_GMap
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
-            gMapControl1.MapProvider = GMapProviders.GoogleMap;
-
-            //gMapControl1.SetPositionByKeywords("china,harbin");//设置初始中心为china harbin 
-
-            //北京座標
-            latitude = 39.9804435664783;   //緯度
-            longitude = 116.345880031586; //經度
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-
-            gMapControl1.Zoom = 12; //當前比例
-
-            update_controls_info();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -347,28 +334,18 @@ namespace vcs_GMap
             route_1.Stroke = (Pen)route_1.Stroke.Clone();
             route_1.Stroke.Color = Color.AliceBlue; 
             */
-
-            GMapControl map = new GMapControl();
-            var form = new Form() { Size = new Size(1024, 768), WindowState = FormWindowState.Maximized };
-            map.Dock = DockStyle.Fill;
-            map.MapProvider = GMapProviders.GoogleSatelliteMap;
-            map.MaxZoom = 20;
-            map.Overlays.Add(markersOverlay_polygons);
-            form.Controls.Add(map);
-            form.Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             /*
-List<PointLatLng> PointLL = new List<PointLatLng>();
-PointLL.Add(double.Parse("121.00410306376308"), double.Parse("24.83923062590916"));
+            List<PointLatLng> PointLL = new List<PointLatLng>();
+            PointLL.Add(double.Parse("121.00410306376308"), double.Parse("24.83923062590916"));
 
 
-Point.Add(new Point((int)gp.X - Origin.X - OriginOffset.X, (int)gp.Y - Origin.Y - OriginOffset.Y));
-PointLL.Add(NewPointLatLng);
-*/
-
+            Point.Add(new Point((int)gp.X - Origin.X - OriginOffset.X, (int)gp.Y - Origin.Y - OriginOffset.Y));
+            PointLL.Add(NewPointLatLng);
+            */
         }
 
         public static void DrawMap(GMapControl map, List<Point> points, Color color, bool includeMarkers)
@@ -467,6 +444,8 @@ PointLL.Add(NewPointLatLng);
 
         private void button6_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "test 6\n";
+            gMapControl1.SetPositionByKeywords("竹東鎮");  //設置初始中心, 看似無效
 
         }
 

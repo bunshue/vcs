@@ -1,5 +1,7 @@
 
 
+
+
 https://www.zhangshengrong.com/p/yOXD5ejR1B/
 
 
@@ -93,9 +95,6 @@ Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠�
             catch { }
             //result.billInfo.consNo = consNo.ToString();
             //Write(result);
-
-
-
 
 
 使用WMI取得USB資訊
@@ -258,6 +257,11 @@ Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠�
         }
 
 
+
+    .NET 4.6 內建支援且預設使用 TLS 1.2
+    .NET 4.5 內建支援，但需透過 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 設為預設協定
+    .NET 4 本身不支援，但安裝 .NET 4.5 後即可使用 TLS 1.2，指定 TLS 1.2 的寫法為 ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072; 
+    
 
 使用Brush類繪製圖像
 
@@ -3167,18 +3171,6 @@ panel1.BackColor = Color.FromA#41ccd4;
 
 
 
-驗證台灣手機號碼
-            bool match;
-            match = System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, @"^09[0-9]{8}$");
-            if (match == true)
-            {
-                richTextBox1.Text += "OK\n";
-                     
-            }
-            else
-            {
-                richTextBox1.Text += "NG\n";
-            }
 
 
 

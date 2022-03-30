@@ -42,9 +42,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(793, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(851, 10);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(255, 673);
+            this.richTextBox1.Size = new System.Drawing.Size(255, 585);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
             // 
@@ -75,7 +75,7 @@
             // 
             // bt_record_start
             // 
-            this.bt_record_start.Location = new System.Drawing.Point(516, 496);
+            this.bt_record_start.Location = new System.Drawing.Point(40, 511);
             this.bt_record_start.Name = "bt_record_start";
             this.bt_record_start.Size = new System.Drawing.Size(140, 50);
             this.bt_record_start.TabIndex = 21;
@@ -85,7 +85,7 @@
             // 
             // bt_record_stop
             // 
-            this.bt_record_stop.Location = new System.Drawing.Point(680, 496);
+            this.bt_record_stop.Location = new System.Drawing.Point(204, 511);
             this.bt_record_stop.Name = "bt_record_stop";
             this.bt_record_stop.Size = new System.Drawing.Size(140, 50);
             this.bt_record_stop.TabIndex = 22;
@@ -95,7 +95,7 @@
             // 
             // bt_record_start2
             // 
-            this.bt_record_start2.Location = new System.Drawing.Point(516, 552);
+            this.bt_record_start2.Location = new System.Drawing.Point(40, 567);
             this.bt_record_start2.Name = "bt_record_start2";
             this.bt_record_start2.Size = new System.Drawing.Size(140, 50);
             this.bt_record_start2.TabIndex = 23;
@@ -117,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1179, 695);
+            this.ClientSize = new System.Drawing.Size(1184, 661);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bt_record_start2);
             this.Controls.Add(this.bt_record_stop);

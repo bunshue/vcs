@@ -246,5 +246,61 @@ namespace vcs_WebClient3
         {
             //e.Result
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string url = @"https://www.google.com.tw/";
+                WebClient wc = new WebClient();
+
+                //ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+                //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
+
+                string res = wc.DownloadString(url);
+
+                richTextBox1.Text += res + "\n";
+            }
+
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "ERROR=" + ex.ToString() + "\n";
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //GetSecurityProtocol();
+            ServicePointManager.SecurityProtocol = GetSecurityProtocol();
+
+        }
+
+
+
+        private static SecurityProtocolType GetSecurityProtocol()
+        {
+            var result = 0;
+            foreach (var value in Enum.GetValues(typeof(SecurityProtocolType)))
+            {
+                result += (int)value;
+                Console.WriteLine(result.ToString());
+            }
+
+            return (SecurityProtocolType)result;
+        }
+
     }
+
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
+    }
+
 }

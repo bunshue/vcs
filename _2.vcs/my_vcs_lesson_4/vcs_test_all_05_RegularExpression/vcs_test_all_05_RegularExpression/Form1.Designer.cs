@@ -59,6 +59,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -308,15 +312,15 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(653, 233);
+            this.richTextBox1.Location = new System.Drawing.Point(759, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(269, 334);
+            this.richTextBox1.Size = new System.Drawing.Size(387, 555);
             this.richTextBox1.TabIndex = 21;
             this.richTextBox1.Text = "";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(369, 226);
+            this.textBox1.Location = new System.Drawing.Point(369, 297);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(171, 22);
             this.textBox1.TabIndex = 20;
@@ -325,7 +329,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(369, 261);
+            this.button1.Location = new System.Drawing.Point(369, 332);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(171, 23);
             this.button1.TabIndex = 22;
@@ -335,7 +339,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(369, 354);
+            this.button2.Location = new System.Drawing.Point(369, 419);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(171, 23);
             this.button2.TabIndex = 24;
@@ -345,7 +349,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(369, 319);
+            this.textBox2.Location = new System.Drawing.Point(369, 384);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(171, 22);
             this.textBox2.TabIndex = 23;
@@ -354,7 +358,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(369, 415);
+            this.button3.Location = new System.Drawing.Point(369, 480);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(171, 23);
             this.button3.TabIndex = 25;
@@ -362,11 +366,53 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(369, 253);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(171, 23);
+            this.button4.TabIndex = 27;
+            this.button4.Text = "檢查台灣手機號";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(369, 218);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(171, 22);
+            this.textBox3.TabIndex = 26;
+            this.textBox3.Text = "0922123456";
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(562, 253);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(171, 23);
+            this.button5.TabIndex = 29;
+            this.button5.Text = "檢查是否為數值";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(562, 218);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(171, 22);
+            this.textBox4.TabIndex = 28;
+            this.textBox4.Text = "0x1234";
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(934, 579);
+            this.ClientSize = new System.Drawing.Size(1158, 579);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
@@ -423,6 +469,10 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }
 

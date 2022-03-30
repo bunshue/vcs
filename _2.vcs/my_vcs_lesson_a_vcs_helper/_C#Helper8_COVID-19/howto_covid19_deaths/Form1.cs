@@ -46,6 +46,16 @@ namespace howto_covid19_deaths
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Allow TLS 1.1 and TLS 1.2 protocols for file download.
+            //for Sugar     3840 Romeo¤]¥i¥Î
+            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+            richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+
+            //for Romeo and Sugar    3072
+            //ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3840;
+            //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+
             // Load the case data.
             LoadCaseData();
 
@@ -619,5 +629,15 @@ namespace howto_covid19_deaths
             // Redisplay the graph using the selected data.
             RedrawGraph();
         }
+    }
+
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }

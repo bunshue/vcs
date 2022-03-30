@@ -52,8 +52,7 @@ namespace howto_covid19_states
         private void Form1_Load(object sender, EventArgs e)
         {
             // Allow TLS 1.1 and TLS 1.2 protocols for file download.
-            ServicePointManager.SecurityProtocol =
-                Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
 
             // Initialize the CheckBoxes array.
             CheckBoxes = new CheckBox[]
