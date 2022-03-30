@@ -7,14 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
-/*
-Form1之屬性
-FormBoderStyle屬性為None
-ShowInTaskbar屬性為False
-WindowState屬性為Maximized
-*/
-
 /*
 最後把bin/debug或者bin/release下的可執行程序後綴改成scr，並拷貝到系統盤Windows的system32下。
 這樣通過桌面個性化的屏幕保護程序設置一下就可以投入使用了，
@@ -34,6 +26,24 @@ namespace vcs_Screensaver5
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.None;	//無邊框
+            this.StartPosition = FormStartPosition.CenterScreen;	//視窗居中顯示
+            this.WindowState = FormWindowState.Maximized;   //畫面最大化
+            this.ControlBox = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.ShowIcon = false;
+            //this.ShowInTaskbar = false;	//不在任務欄中顯示
+
+            this.KeyPreview = true;
+            this.TopMost = true;
+            this.BackColor = Color.White;
+            this.BackgroundImageLayout = ImageLayout.Center;
+
+            this.AutoSize = true;
+            //this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
+            //this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份
+
             this.DoubleBuffered = true;//設置本窗體
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);

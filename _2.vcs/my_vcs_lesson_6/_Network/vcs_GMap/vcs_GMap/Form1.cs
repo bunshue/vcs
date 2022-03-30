@@ -21,7 +21,6 @@ namespace vcs_GMap
     {
         GMapOverlay markersOverlay = new GMapOverlay("markers"); //放置marker的图层
         GMapOverlay RouteMark = new GMapOverlay("RouteMark");//放置区域标记图层
-        GMapOverlay markersOverlay_polygons = new GMapOverlay("polygons");
         GMapOverlay markersOverlay_stop = new GMapOverlay("Stop"); //放置marker的图层
 
         /// <summary>
@@ -137,8 +136,10 @@ namespace vcs_GMap
             gMapControl1.CacheLocation = gMapCacheLocation; //緩存位置
             gMapControl1.Manager.ImportFromGMDB(@"gMapCacheLocation\mapdata.gmdb");
 
+            //設定MapProvider
             //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
             //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
             gMapControl1.ShowCenter = false; //不显示中心十字点
             gMapControl1.IsAccessible = false;  //??
             gMapControl1.DragButton = MouseButtons.Left; //左键拖拽地图
@@ -223,6 +224,7 @@ namespace vcs_GMap
             //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
             //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
 
             //竹北座標
             latitude = 24.838;   //緯度
@@ -325,7 +327,6 @@ namespace vcs_GMap
         {
             //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
-
 
             //gMapControl1.SetPositionByKeywords("china,harbin");//设置初始中心为china harbin 
 

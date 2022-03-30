@@ -1,5 +1,42 @@
 
 
+https://www.zhangshengrong.com/p/yOXD5ejR1B/
+
+
+
+/*
+全屏隨機位置顯示圖片
+Form1之屬性
+FormBorderStyle 改 None		//無邊框
+StartPosition 改 CenterScreen	//視窗居中顯示
+WindowState 改 Maximized	//畫面最大化
+ControlBox 改 False
+MaximizeBox 改 False
+MinimizeBox 改 False
+ShowIcon 改 False
+ShowInTaskbar 改 False
+TopMost 改 True
+KeyPreview 改 True
+*/
+
+this.FormBorderStyle = FormBorderStyle.None;	//無邊框
+this.StartPosition = FormStartPosition.CenterScreen;	//視窗居中顯示
+this.WindowState = FormWindowState.Maximized;   //畫面最大化
+this.ControlBox = false;
+this.MaximizeBox = false;
+this.MinimizeBox = false;
+this.ShowIcon = false;
+this.ShowInTaskbar = false;	//不在任務欄中顯示
+this.KeyPreview = true;
+this.TopMost = true;
+this.BackColor = Color.White;
+
+this.AutoSize = true;
+//this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
+//this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份
+
+
+
 
 Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠标 
         //局部圖像放大
@@ -137,17 +174,6 @@ Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠�
             mouse_event(MOUSEEVENTF_MOVE, dx, dy, 0, 0);
         
         
-
-　　（2）現在我們來設計程序的主界面：
-
-Form1的屬性
-　　先將窗體的Name屬性設置為screen
-、Text屬性設置為空，
-
-BackColor屬性設置為Black
-Size屬性設置為(800, 600)
-ControlBox、MaximizeBox、MinimizeBox、ShowInTaskbar屬性設置均為false
-FormBorderStyle屬性設置為None
 
 
 　/// 應用程序的主入口點。
@@ -1634,27 +1660,6 @@ vcs richtextbox2
 讀取網頁 回傳資料 看看是甚麼樣子 xml? html?
 http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding
 
-
-全屏隨機位置顯示圖片
-
-Form1之屬性
-StartPosition 改 CenterScreen
-WindowState 改 Maximized
-
-ControlBox 改 False
-MaximizeBox 改 False
-MinimizeBox 改 False
-ShowIcon 改 False
-ShowInTaskbar 改 False
-
-TopMost 改 True
-
-KeyPreview 改 True
-
-Form1加KeyDown
-
-
- 
  
                      
 
@@ -3481,16 +3486,6 @@ string Path = @"C:\dddddddddd";
 Process.Start("explorer.exe", Path);
 
 Process.Start(textBox1.Text);//打开文件夹进行查看
-
-richTextBox1.Text += "在任務欄中顯示\n";
-this.ShowInTaskbar = true;
-
-richTextBox1.Text += "不在任務欄中顯示\n";
-this.ShowInTaskbar = false;
-
-
-this.StartPosition = FormStartPosition.CenterScreen;//視窗居中顯示
-
 
 MainMenu選了之後會有打勾記號
 
