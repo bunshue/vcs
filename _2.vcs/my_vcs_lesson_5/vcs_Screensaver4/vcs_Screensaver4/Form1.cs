@@ -12,6 +12,12 @@ using System.Windows.Forms;
 這樣通過桌面個性化的屏幕保護程序設置一下就可以投入使用了，
 */
 
+/*
+1)屏保运行起来是一个整个屏幕且无边框的窗体，不能显示任务栏，鼠标点击就会退出。当然你还可以在界面上自定义一些东西，如显示系统时间，屏保里面显示Rss内容等。
+
+2)屏幕保护程序的扩展名虽然是".scr"，但本质是一个可执行的".exe"文件。
+*/
+
 namespace vcs_Screensaver4
 {
     public partial class Form1 : Form

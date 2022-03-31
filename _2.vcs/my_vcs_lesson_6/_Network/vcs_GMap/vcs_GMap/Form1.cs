@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Net;
+using System.Diagnostics;
 
 using GMap.NET;
 using GMap.NET.WindowsForms;
@@ -68,6 +69,12 @@ namespace vcs_GMap
             update_controls_info();
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+        }
+
         void show_item_location()
         {
             int x_st;
@@ -107,6 +114,15 @@ namespace vcs_GMap
             btn_east.Location = new Point(x_st + 32, y_st + 32);
             btn_west.Location = new Point(x_st - 32, y_st + 32);
             btn_south.Location = new Point(x_st, y_st + 64);
+
+            x_st = 1010;
+            y_st = 10;
+            groupBox1.Location = new Point(x_st, y_st);
+
+            x_st = 1150;
+            y_st = 15;
+            checkBox1.Location = new Point(x_st, y_st);
+            checkBox2.Location = new Point(x_st, y_st + 30);
         }
 
         void setup_controls()
@@ -538,6 +554,32 @@ namespace vcs_GMap
             return Math.Cos(d * Math.PI / 180.0);
         }
 
+        private void radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            }
+            else if (radioButton2.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+
+            }
+            else if (radioButton3.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleTerrainMap; //地形圖
+
+            }
+            else if (radioButton4.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
+            }
+            else if (radioButton5.Checked == true)
+            {
+                //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
+                //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
+            }
+        }
     }
 
     class GmapMarkerRoute : GMapMarker
@@ -633,5 +675,4 @@ namespace vcs_GMap
         }
     }
 }
-
 

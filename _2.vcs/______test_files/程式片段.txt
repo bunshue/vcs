@@ -1,4 +1,16 @@
 
+Beep
+
+        [DllImport("kernel32.dll")]
+        public static extern bool Beep(int freq, int duration);
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Beep(800, 3000);
+
+        }
+
+
+
 使用資源檔的圖片
 
 屬性/資源/加入資源/加入現有檔案/ 選取檔案 picture1.jpg
