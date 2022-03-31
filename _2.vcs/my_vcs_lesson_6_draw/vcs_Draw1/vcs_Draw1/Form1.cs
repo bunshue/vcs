@@ -2072,10 +2072,8 @@ namespace vcs_Draw1
 
             int radius = 80;
             int linewidth = 5;
-            Point pt = new Point();
-
-            pt = new Point(100, 100);
-            DrawStar(g, pt, radius, linewidth, Color.Red);
+            Point center = new Point(100, 100);
+            DrawStar(g, center, radius, linewidth, Color.Red);
             pictureBox1.Image = bitmap1;
         }
 
@@ -2089,10 +2087,8 @@ namespace vcs_Draw1
             richTextBox1.Text += "畫一些實心星形\n";
 
             int radius = 80;
-            Point pt = new Point();
-
-            pt = new Point(100, 100);
-            FillStar(g, pt, radius, Color.Red);
+            Point center = new Point(100, 100);
+            FillStar(g, center, radius, Color.Red);
             pictureBox1.Image = bitmap1;
         }
 

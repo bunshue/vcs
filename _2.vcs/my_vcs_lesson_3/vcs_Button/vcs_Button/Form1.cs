@@ -199,6 +199,52 @@ namespace vcs_Button
         {
             richTextBox1.Text += "你按了文字化按鈕\n";
         }
+
+        private void bt_star_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了不規則形狀Button\n";
+        }
+
+        private void bt_star_Paint(object sender, PaintEventArgs e)
+        {
+            string filename = @"C:\______test_files\_icon\star.bmp";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            GraphicsPath graphicsPath = CalculateControlGraphicsPath(bitmap1);
+            this.bt_star.Region = new Region(graphicsPath);
+
+            this.bt_star.Cursor = Cursors.Hand;
+        }
+
+        private static GraphicsPath CalculateControlGraphicsPath(Bitmap bitmap)
+        {
+            GraphicsPath graphicsPath = new GraphicsPath();
+            Color colorTransparent = bitmap.GetPixel(0, 0);
+            //Color colorTransparent = Color.Black;
+            int colOpaquePixel = 0;
+            for (int row = 0; row < bitmap.Height; row++)
+            {
+                colOpaquePixel = 0;
+
+                for (int col = 0; col < bitmap.Width; col++)
+                {
+                    if (bitmap.GetPixel(col, row) != colorTransparent)
+                    {
+                        colOpaquePixel = col;
+                        int colNext = col;
+                        for (colNext = colOpaquePixel; colNext < bitmap.Width; colNext++)
+                        {
+                            if (bitmap.GetPixel(colNext, row) == colorTransparent)
+                            {
+                                break;
+                            }
+                        }
+                        graphicsPath.AddRectangle(new Rectangle(colOpaquePixel, row, colNext - colOpaquePixel, 1));
+                        col = colNext;
+                    }
+                }
+            }
+            return graphicsPath;
+        }
     }
 }
 

@@ -1,4 +1,16 @@
 
+
+            //vcs史上最早時間
+            DateTime minTime = DateTime.MinValue;
+
+            //vcs史上最晚時間
+            DateTime maxTime = DateTime.MaxValue;
+
+            richTextBox1.Text += "vcs史上最早時間 : " + minTime.ToString() + "\n";
+            richTextBox1.Text += "vcs史上最晚時間 : " + maxTime.ToString() + "\n";
+
+
+
 Beep
 
         [DllImport("kernel32.dll")]

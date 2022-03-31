@@ -38,6 +38,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.bt_star = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,11 +149,34 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // bt_star
+            // 
+            this.bt_star.BackColor = System.Drawing.Color.Blue;
+            this.bt_star.Location = new System.Drawing.Point(39, 215);
+            this.bt_star.Name = "bt_star";
+            this.bt_star.Size = new System.Drawing.Size(128, 128);
+            this.bt_star.TabIndex = 41;
+            this.bt_star.UseVisualStyleBackColor = false;
+            this.bt_star.Click += new System.EventHandler(this.bt_star_Click);
+            this.bt_star.Paint += new System.Windows.Forms.PaintEventHandler(this.bt_star_Paint);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(17, 346);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(168, 21);
+            this.label1.TabIndex = 42;
+            this.label1.Text = "不規則形狀Button";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1013, 616);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.bt_star);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -167,6 +192,7 @@
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -182,6 +208,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button bt_star;
+        private System.Windows.Forms.Label label1;
     }
 }
 

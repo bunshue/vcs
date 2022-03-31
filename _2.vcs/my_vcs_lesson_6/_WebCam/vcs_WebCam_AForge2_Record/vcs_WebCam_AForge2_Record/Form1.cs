@@ -12,20 +12,19 @@ using System.Threading;
 
 using AForge.Video;
 using AForge.Video.DirectShow;  // Video Recording
-using AForge.Video.FFMPEG;
+using AForge.Video.FFMPEG;      //for VideoFileWriter
 
 namespace vcs_WebCam_AForge2_Record
 {
     public partial class Form1 : Form
     {
-        private string recording_filename = string.Empty;
-        DateTime recording_time_st = DateTime.Now;
+        private FilterInfoCollection USBWebcams = null;
+        CameraMonitor CamMonitor;
         private bool flag_recording1 = false;    //判斷是否啟動錄影的旗標, for 錄影1, 使用Thread
         private bool flag_recording2 = false;    //判斷是否啟動錄影的旗標, for 錄影2, 不使用Thread
-
-        CameraMonitor CamMonitor;
-
-        private FilterInfoCollection USBWebcams = null;
+        private string recording_filename = string.Empty;
+        DateTime recording_time_st = DateTime.Now;
+        
         int webcam_count = 0;
         private const int BORDER = 30;
 
@@ -73,6 +72,20 @@ namespace vcs_WebCam_AForge2_Record
             }
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //離開程式前, 關閉相機(錄影與播放)
+            try
+            {
+                this.CamMonitor.StopRecording1();
+                this.CamMonitor.StopRecording2();
+                this.CamMonitor.StopCapture();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
         void show_item_location()
         {
             int W = 640;
@@ -95,21 +108,6 @@ namespace vcs_WebCam_AForge2_Record
 
             button2.Enabled = false;
             button4.Enabled = false;
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //離開程式前, 關閉相機(錄影與播放)
-            try
-            {
-                this.CamMonitor.StopRecording1();
-                this.CamMonitor.StopRecording2();
-                this.CamMonitor.StopCapture();
-            }
-            catch (Exception ex)
-            {
-            }
-
         }
 
         //錄影 ST, 使用thread

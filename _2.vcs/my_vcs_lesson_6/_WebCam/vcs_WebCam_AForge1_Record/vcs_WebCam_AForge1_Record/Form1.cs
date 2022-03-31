@@ -20,9 +20,6 @@ namespace vcs_WebCam_AForge1_Record
         public FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
-
-        private const int BORDER = 10;
-
         private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
         private bool flag_limit_recording_time = false;
         private string recording_filename = string.Empty;
@@ -32,6 +29,7 @@ namespace vcs_WebCam_AForge1_Record
         int webcam_w = 0;
         int webcam_h = 0;
         //int webcam_fps = 0;
+        private const int BORDER = 10;
 
         public Form1()
         {
@@ -183,6 +181,8 @@ namespace vcs_WebCam_AForge1_Record
 
             lb_fps.Text = "";
             lb_fps.Location = new Point(680, 10);
+
+            bt_record_stop.Enabled = false;
         }
 
         void do_record()
@@ -220,15 +220,35 @@ namespace vcs_WebCam_AForge1_Record
         //錄影 ST
         private void bt_record_start_Click(object sender, EventArgs e)
         {
-            flag_limit_recording_time = false;
-            do_record();
+            if (flag_recording == false)
+            {
+                flag_limit_recording_time = false;
+                do_record();
+
+                bt_record_start.Enabled = false;
+                bt_record_stop.Enabled = true;
+            }
+            else
+            {
+                richTextBox1.Text += "已在錄影\n";
+            }
         }
 
         //錄影 ST, 有限時
         private void bt_record_start2_Click(object sender, EventArgs e)
         {
-            flag_limit_recording_time = true;
-            do_record();
+            if (flag_limit_recording_time == false)
+            {
+                flag_limit_recording_time = true;
+                do_record();
+
+                bt_record_start.Enabled = false;
+                bt_record_stop.Enabled = true;
+            }
+            else
+            {
+                richTextBox1.Text += "已在限時錄影\n";
+            }
         }
 
         //錄影 SP
@@ -246,6 +266,8 @@ namespace vcs_WebCam_AForge1_Record
                 //richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n\n";
                 richTextBox1.Text += "檔案 :\t\t" + recording_filename + "\n\n";
                 flag_limit_recording_time = false;
+                bt_record_start.Enabled = true;
+                bt_record_stop.Enabled = false;
             }
             else
             {

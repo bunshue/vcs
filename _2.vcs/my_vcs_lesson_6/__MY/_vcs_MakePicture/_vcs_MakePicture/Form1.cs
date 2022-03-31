@@ -2279,7 +2279,98 @@ namespace _vcs_MakePicture
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 128;
+            height = 128;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, Color.Black);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            int radius = width * 5 / 10;
+            Point center = new Point(width / 2, height / 2);
+            FillStar(g, center, radius, Color.Red);
+
+            radius = width * 3 / 10;
+            FillStar(g, center, radius, Color.Blue);
+
+            radius = width * 1 / 10;
+            FillStar(g, center, radius, Color.White);
+
+            pictureBox1.Image = bitmap1;
         }
+
+        private void FillStar(Graphics g, PointF center, int radius, Color c)
+        {
+            //FillStar
+
+            PointF[] pt1 = new PointF[5];    //一維陣列內有5個Point, 外圈
+            PointF[] pt2 = new PointF[5];    //一維陣列內有5個Point, 內圈
+            int angle;
+
+            int i;
+            for (i = 0; i < 5; i++)
+            {
+                angle = -90 + 72 * i;
+                pt1[i].X = (int)(radius * Math.Cos(angle * Math.PI / 180));
+                pt1[i].Y = (int)(radius * Math.Sin(angle * Math.PI / 180));
+
+                //richTextBox1.Text += "pt1[" + i.ToString() + "].X " + pt1[i].X.ToString() + "\t" + "pt1[" + i.ToString() + "].Y " + pt1[i].Y.ToString() + "\n";
+                pt1[i].X += center.X;
+                pt1[i].Y += center.Y;
+            }
+
+            double radius2;
+            radius2 = (double)radius * Math.Sin(18 * Math.PI / 180) / Math.Sin(54 * Math.PI / 180);
+            for (i = 0; i < 5; i++)
+            {
+                angle = 72 * i - 54;
+                pt2[i].X = (int)(radius2 * Math.Cos(angle * Math.PI / 180));
+                pt2[i].Y = (int)(radius2 * Math.Sin(angle * Math.PI / 180));
+
+                //richTextBox1.Text += "pt2[" + i.ToString() + "].X " + pt2[i].X.ToString() + "\t" + "pt2[" + i.ToString() + "].Y " + pt2[i].Y.ToString() + "\n";
+                pt2[i].X += center.X;
+                pt2[i].Y += center.Y;
+            }
+            sb = new SolidBrush(c);
+
+            PointF[] pt3 = new PointF[3];    //一維陣列內有3個Point
+            pt3[0] = pt1[0];
+            pt3[1] = pt2[1];
+            pt3[2] = pt2[3];
+            g.FillPolygon(sb, pt3);
+            pt3[0] = pt1[1];
+            pt3[1] = pt2[2];
+            pt3[2] = pt2[4];
+            g.FillPolygon(sb, pt3);
+            pt3[0] = pt1[2];
+            pt3[1] = pt2[3];
+            pt3[2] = pt2[0];
+            g.FillPolygon(sb, pt3);
+            pt3[0] = pt1[3];
+            pt3[1] = pt2[4];
+            pt3[2] = pt2[1];
+            g.FillPolygon(sb, pt3);
+            pt3[0] = pt1[4];
+            pt3[1] = pt2[0];
+            pt3[2] = pt2[2];
+            g.FillPolygon(sb, pt3);
+        }
+
 
         private void button10_Click(object sender, EventArgs e)
         {
