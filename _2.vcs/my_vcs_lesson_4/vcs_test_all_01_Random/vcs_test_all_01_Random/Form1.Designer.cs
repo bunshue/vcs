@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.bt_random_text1 = new System.Windows.Forms.Button();
             this.bt_random12 = new System.Windows.Forms.Button();
@@ -56,13 +57,17 @@
             this.bt_random1 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.bt_random_text1);
             this.groupBox1.Controls.Add(this.bt_random12);
             this.groupBox1.Controls.Add(this.bt_random_color);
@@ -95,6 +100,7 @@
             this.bt_random_text1.TabIndex = 37;
             this.bt_random_text1.Text = "隨機文字";
             this.bt_random_text1.UseVisualStyleBackColor = true;
+            this.bt_random_text1.Click += new System.EventHandler(this.bt_random_text1_Click);
             // 
             // bt_random12
             // 
@@ -105,6 +111,7 @@
             this.bt_random12.TabIndex = 36;
             this.bt_random12.Text = "亂數方法比較";
             this.bt_random12.UseVisualStyleBackColor = true;
+            this.bt_random12.Click += new System.EventHandler(this.bt_random12_Click);
             // 
             // bt_random_color
             // 
@@ -115,6 +122,7 @@
             this.bt_random_color.TabIndex = 35;
             this.bt_random_color.Text = "隨機顏色";
             this.bt_random_color.UseVisualStyleBackColor = true;
+            this.bt_random_color.Click += new System.EventHandler(this.bt_random_color_Click);
             // 
             // groupBox4
             // 
@@ -241,6 +249,7 @@
             this.bt_random11.TabIndex = 32;
             this.bt_random11.Text = "產生任意字串";
             this.bt_random11.UseVisualStyleBackColor = true;
+            this.bt_random11.Click += new System.EventHandler(this.bt_random11_Click);
             // 
             // bt_random10
             // 
@@ -251,6 +260,7 @@
             this.bt_random10.TabIndex = 31;
             this.bt_random10.Text = "整個string array都變成亂數陣列";
             this.bt_random10.UseVisualStyleBackColor = true;
+            this.bt_random10.Click += new System.EventHandler(this.bt_random10_Click);
             // 
             // bt_random9
             // 
@@ -261,6 +271,7 @@
             this.bt_random9.TabIndex = 30;
             this.bt_random9.Text = "整個int array都變成亂數陣列";
             this.bt_random9.UseVisualStyleBackColor = true;
+            this.bt_random9.Click += new System.EventHandler(this.bt_random9_Click);
             // 
             // bt_random8
             // 
@@ -271,6 +282,7 @@
             this.bt_random8.TabIndex = 29;
             this.bt_random8.Text = "整個array都變成亂數陣列";
             this.bt_random8.UseVisualStyleBackColor = true;
+            this.bt_random8.Click += new System.EventHandler(this.bt_random8_Click);
             // 
             // bt_random7
             // 
@@ -281,6 +293,7 @@
             this.bt_random7.TabIndex = 28;
             this.bt_random7.Text = "隨機產生一些英文字母, 統計各種字母出現次數";
             this.bt_random7.UseVisualStyleBackColor = true;
+            this.bt_random7.Click += new System.EventHandler(this.bt_random7_Click);
             // 
             // bt_random2
             // 
@@ -291,6 +304,7 @@
             this.bt_random2.TabIndex = 27;
             this.bt_random2.Text = "產生不重複亂數";
             this.bt_random2.UseVisualStyleBackColor = true;
+            this.bt_random2.Click += new System.EventHandler(this.bt_random2_Click);
             // 
             // bt_random6
             // 
@@ -301,6 +315,7 @@
             this.bt_random6.TabIndex = 26;
             this.bt_random6.Text = "name score";
             this.bt_random6.UseVisualStyleBackColor = true;
+            this.bt_random6.Click += new System.EventHandler(this.bt_random6_Click);
             // 
             // bt_random5
             // 
@@ -311,6 +326,7 @@
             this.bt_random5.TabIndex = 25;
             this.bt_random5.Text = "產生一組亂數";
             this.bt_random5.UseVisualStyleBackColor = true;
+            this.bt_random5.Click += new System.EventHandler(this.bt_random5_Click);
             // 
             // bt_random4
             // 
@@ -321,6 +337,7 @@
             this.bt_random4.TabIndex = 24;
             this.bt_random4.Text = "產生亂數的方式";
             this.bt_random4.UseVisualStyleBackColor = true;
+            this.bt_random4.Click += new System.EventHandler(this.bt_random4_Click);
             // 
             // bt_random3
             // 
@@ -331,6 +348,7 @@
             this.bt_random3.TabIndex = 23;
             this.bt_random3.Text = "產生任意字串";
             this.bt_random3.UseVisualStyleBackColor = true;
+            this.bt_random3.Click += new System.EventHandler(this.bt_random3_Click);
             // 
             // bt_random1
             // 
@@ -341,6 +359,7 @@
             this.bt_random1.TabIndex = 22;
             this.bt_random1.Text = "亂數";
             this.bt_random1.UseVisualStyleBackColor = true;
+            this.bt_random1.Click += new System.EventHandler(this.bt_random1_Click);
             // 
             // bt_clear
             // 
@@ -361,6 +380,22 @@
             this.richTextBox1.TabIndex = 25;
             this.richTextBox1.Text = "";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox1.Location = new System.Drawing.Point(386, 21);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox1.TabIndex = 47;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -377,6 +412,7 @@
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -411,6 +447,8 @@
         private System.Windows.Forms.Button bt_random1;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

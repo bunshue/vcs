@@ -305,6 +305,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(170, 70);
             this.button18.TabIndex = 94;
+            this.button18.Text = "畫折線圖";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -315,6 +316,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(170, 70);
             this.button17.TabIndex = 93;
+            this.button17.Text = "畫柱狀圖";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
