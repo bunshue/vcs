@@ -55,6 +55,7 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,7 +90,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(115, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 40);
+            this.button1.Size = new System.Drawing.Size(90, 40);
             this.button1.TabIndex = 1;
             this.button1.Text = "竹北 加圖標";
             this.button1.UseVisualStyleBackColor = true;
@@ -99,7 +100,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(218, 12);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 40);
+            this.button2.Size = new System.Drawing.Size(90, 40);
             this.button2.TabIndex = 2;
             this.button2.Text = "test";
             this.button2.UseVisualStyleBackColor = true;
@@ -117,7 +118,7 @@
             // 
             this.button3.Location = new System.Drawing.Point(321, 12);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 40);
+            this.button3.Size = new System.Drawing.Size(90, 40);
             this.button3.TabIndex = 4;
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -126,7 +127,7 @@
             // 
             this.button4.Location = new System.Drawing.Point(424, 12);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 40);
+            this.button4.Size = new System.Drawing.Size(90, 40);
             this.button4.TabIndex = 5;
             this.button4.Text = "test";
             this.button4.UseVisualStyleBackColor = true;
@@ -136,7 +137,7 @@
             // 
             this.button5.Location = new System.Drawing.Point(527, 12);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 40);
+            this.button5.Size = new System.Drawing.Size(90, 40);
             this.button5.TabIndex = 6;
             this.button5.Text = "test";
             this.button5.UseVisualStyleBackColor = true;
@@ -146,7 +147,7 @@
             // 
             this.button6.Location = new System.Drawing.Point(630, 12);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 40);
+            this.button6.Size = new System.Drawing.Size(90, 40);
             this.button6.TabIndex = 7;
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
@@ -226,7 +227,7 @@
             // 
             this.button0.Location = new System.Drawing.Point(9, 12);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(100, 40);
+            this.button0.Size = new System.Drawing.Size(90, 40);
             this.button0.TabIndex = 15;
             this.button0.Text = "載入地圖 竹北";
             this.button0.UseVisualStyleBackColor = true;
@@ -353,11 +354,22 @@
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(1136, 502);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(71, 30);
+            this.bt_clear.TabIndex = 29;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1341, 712);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.btn_west);
@@ -420,6 +432,7 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

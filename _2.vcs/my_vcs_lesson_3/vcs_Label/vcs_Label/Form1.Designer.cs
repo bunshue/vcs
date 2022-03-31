@@ -55,6 +55,8 @@
             this.button8 = new System.Windows.Forms.Button();
             this.lb_moving2 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label_auto = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label4
@@ -294,11 +296,33 @@
             this.timer2.Interval = 500;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // label_auto
+            // 
+            this.label_auto.AutoSize = true;
+            this.label_auto.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_auto.Location = new System.Drawing.Point(808, 63);
+            this.label_auto.Name = "label_auto";
+            this.label_auto.Size = new System.Drawing.Size(85, 19);
+            this.label_auto.TabIndex = 36;
+            this.label_auto.Text = "自動換行";
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(810, 12);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(120, 40);
+            this.button9.TabIndex = 37;
+            this.button9.Text = "Label自動換行";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 628);
+            this.ClientSize = new System.Drawing.Size(1000, 628);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.label_auto);
             this.Controls.Add(this.lb_moving2);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button7);
@@ -358,6 +382,8 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label lb_moving2;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label label_auto;
+        private System.Windows.Forms.Button button9;
     }
 }
 

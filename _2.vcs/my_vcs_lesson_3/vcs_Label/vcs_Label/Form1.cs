@@ -196,5 +196,15 @@ namespace vcs_Label
                 this.label_run2.Left = this.Width;   //標簽左位置為當前控件寬度
             }
         }
+
+        int cnt = 0;
+        private void button9_Click(object sender, EventArgs e)
+        {
+            label_auto.Text += "abc" + cnt.ToString();
+            label_auto.AutoSize = false;
+            label_auto.Width = 120;
+            label_auto.Height = 200;
+
+        }
     }
 }

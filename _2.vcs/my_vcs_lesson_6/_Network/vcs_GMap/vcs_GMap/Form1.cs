@@ -107,6 +107,7 @@ namespace vcs_GMap
             y_st = 150;
             gMapControl1.Location = new Point(x_st, y_st);
             richTextBox1.Location = new Point(x_st + 960 + 70, y_st);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 940;
             y_st = 30;
@@ -123,6 +124,11 @@ namespace vcs_GMap
             y_st = 15;
             checkBox1.Location = new Point(x_st, y_st);
             checkBox2.Location = new Point(x_st, y_st + 30);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         void setup_controls()
