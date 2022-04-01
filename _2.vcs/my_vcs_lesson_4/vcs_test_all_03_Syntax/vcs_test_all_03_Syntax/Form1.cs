@@ -479,6 +479,20 @@ namespace vcs_test_all_03_Syntax
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //StringBuilder語法
+
+            richTextBox1.Text += "StringBuilder test\n";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\r\n\r\n\r\n");
+            sb.Append("*******興隆超市*******\n");
+            sb.Append("品名-----數量-----價格\n");
+            sb.Append("精品白沙   1       8元\n");
+            sb.Append("張新發槟榔 1      10元\n");
+            sb.Append("合計：     2      18元\n");
+            sb.Append("---收銀員：張三---\n");
+            sb.Append("---技術支持：李四---\n\n\n");
+
+            richTextBox1.Text += sb.ToString() + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)

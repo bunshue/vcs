@@ -295,6 +295,36 @@ namespace vcs_ReadWrite_Barcode
                 //,CodeBarColor=Color.Red
 
             }.getBitmapImage(96);
+        }
+
+        /// <summary>
+        /// 根據字符串生成條碼圖片( 需添加引用：BarcodeLib.dll )
+        /// </summary>
+        /// <param name="BarcodeString">條碼字符串</param>
+        /// <param name="ImgWidth">圖片寬帶</param>
+        /// <param name="ImgHeight">圖片高度</param>
+        /// <returns></returns>
+        public Image CreateBarcodePicture(string BarcodeString, int ImgWidth, int ImgHeight)
+        {
+            BarcodeLib.Barcode b = new BarcodeLib.Barcode();//實例化一個條碼對象
+            BarcodeLib.TYPE type = BarcodeLib.TYPE.CODE128;//編碼類型
+
+            //獲取條碼圖片
+            Image BarcodePicture = b.Encode(type, BarcodeString, Color.Black, Color.White, ImgWidth, ImgHeight);
+
+            //BarcodePicture.Save(@"D:\Barcode.jpg");
+
+            b.Dispose();
+
+            return BarcodePicture;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string BarcodeString = "13043404455";//條碼
+            int ImgWidth = 300;
+            int ImgHeight = 120;
+            pictureBox4.Image = CreateBarcodePicture(BarcodeString, ImgWidth, ImgHeight);
 
         }
     }

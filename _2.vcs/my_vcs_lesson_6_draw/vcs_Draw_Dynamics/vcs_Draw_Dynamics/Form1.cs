@@ -68,12 +68,14 @@ namespace vcs_Draw_Dynamics
             x_st = 0;
             y_st = INITIAL_HEIGHT;
             lb_main_mesg.Text = "";
+            lb_pig_mesg.Text = "";
+
             lb_shoot_count.Text = "發射次數 : " + try_count.ToString();
             //lb_energy_ek.Text = "";
             //lb_energy_ep.Text = "";
             //lb_energy_es.Text = "";
             //lb_energy_et.Text = "";
-             
+
             //lb_initial_speed.Text = "";
             trackBar1_Scroll(sender, e);
             rb_bird_CheckedChanged(sender, e);
@@ -145,6 +147,7 @@ namespace vcs_Draw_Dynamics
 
             lb_shoot_count.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - 300, pictureBox1.Location.Y + 20);
             lb_main_mesg.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - 300, pictureBox1.Location.Y + 20 + 40);
+            lb_pig_mesg.Location = new Point(pictureBox1.Width - 100 - 100 / 2 + 20, 600 - 100 / 2 - 30);
 
             x_st = 25;
             y_st = 25;
@@ -697,6 +700,20 @@ namespace vcs_Draw_Dynamics
                 default:
                     System.Media.SystemSounds.Beep.Play();
                     break;
+            }
+        }
+
+        int cnt_pig = 0;
+        private void timer_pig_Tick(object sender, EventArgs e)
+        {
+            cnt_pig++;
+            if (((cnt_pig) % 10) > 5)
+            {
+                lb_pig_mesg.Text = " 笨蛋~~\n打不到~~";
+            }
+            else
+            {
+                lb_pig_mesg.Text = "";
             }
         }
     }

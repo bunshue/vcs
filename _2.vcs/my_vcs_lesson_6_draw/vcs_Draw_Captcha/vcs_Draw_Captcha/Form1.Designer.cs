@@ -41,6 +41,7 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha4 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -50,6 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha4)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -151,11 +153,21 @@
             this.pictureBox6.TabIndex = 68;
             this.pictureBox6.TabStop = false;
             // 
+            // pictureBox_captcha4
+            // 
+            this.pictureBox_captcha4.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox_captcha4.Location = new System.Drawing.Point(298, 181);
+            this.pictureBox_captcha4.Name = "pictureBox_captcha4";
+            this.pictureBox_captcha4.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox_captcha4.TabIndex = 69;
+            this.pictureBox_captcha4.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 706);
+            this.Controls.Add(this.pictureBox_captcha4);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox4);
@@ -179,6 +191,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -197,6 +210,7 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox_captcha4;
     }
 }
 

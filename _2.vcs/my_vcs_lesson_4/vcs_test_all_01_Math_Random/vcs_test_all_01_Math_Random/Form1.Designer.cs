@@ -49,8 +49,6 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bt_random12 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnRandomize = new System.Windows.Forms.Button();
@@ -62,9 +60,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnPick = new System.Windows.Forms.Button();
             this.txtNames = new System.Windows.Forms.TextBox();
-            this.bt_random11 = new System.Windows.Forms.Button();
-            this.bt_random10 = new System.Windows.Forms.Button();
-            this.bt_random7 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button20 = new System.Windows.Forms.Button();
@@ -106,7 +101,6 @@
             this.button41 = new System.Windows.Forms.Button();
             this.button42 = new System.Windows.Forms.Button();
             this.button43 = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -341,38 +335,13 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.bt_random12);
-            this.groupBox1.Controls.Add(this.groupBox4);
-            this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Controls.Add(this.bt_random11);
-            this.groupBox1.Controls.Add(this.bt_random10);
-            this.groupBox1.Controls.Add(this.bt_random7);
-            this.groupBox1.Location = new System.Drawing.Point(813, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(344, 875);
-            this.groupBox1.TabIndex = 24;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "亂數";
-            // 
-            // bt_random12
-            // 
-            this.bt_random12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random12.Location = new System.Drawing.Point(183, 296);
-            this.bt_random12.Name = "bt_random12";
-            this.bt_random12.Size = new System.Drawing.Size(155, 40);
-            this.bt_random12.TabIndex = 36;
-            this.bt_random12.Text = "亂數方法比較";
-            this.bt_random12.UseVisualStyleBackColor = true;
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.btnRandomize);
             this.groupBox4.Controls.Add(this.lstArray);
             this.groupBox4.Controls.Add(this.lstList);
-            this.groupBox4.Location = new System.Drawing.Point(17, 441);
+            this.groupBox4.Location = new System.Drawing.Point(734, 12);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(321, 182);
             this.groupBox4.TabIndex = 34;
@@ -427,7 +396,7 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.btnPick);
             this.groupBox3.Controls.Add(this.txtNames);
-            this.groupBox3.Location = new System.Drawing.Point(45, 629);
+            this.groupBox3.Location = new System.Drawing.Point(762, 200);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(258, 170);
             this.groupBox3.TabIndex = 33;
@@ -484,36 +453,6 @@
             this.txtNames.Text = "Ann\r\nBob\r\nCindy\r\nDan\r\nEdwina\r\nFrank\r\nGina\r\nHarry\r\nIvy\r\nJack\r\nKlaudia\r\nLeonard\r\nMa" +
                 "rcie\r\nNate\r\nOlivia\r\nPaul\r\nQueenie\r\nRussell\r\nSally\r\nTim\r\nUma\r\nVern\r\nWendy\r\nXavier" +
                 "\r\nYoko\r\nZack";
-            // 
-            // bt_random11
-            // 
-            this.bt_random11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random11.Location = new System.Drawing.Point(183, 250);
-            this.bt_random11.Name = "bt_random11";
-            this.bt_random11.Size = new System.Drawing.Size(155, 40);
-            this.bt_random11.TabIndex = 32;
-            this.bt_random11.Text = "產生任意字串";
-            this.bt_random11.UseVisualStyleBackColor = true;
-            // 
-            // bt_random10
-            // 
-            this.bt_random10.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random10.Location = new System.Drawing.Point(184, 203);
-            this.bt_random10.Name = "bt_random10";
-            this.bt_random10.Size = new System.Drawing.Size(155, 40);
-            this.bt_random10.TabIndex = 31;
-            this.bt_random10.Text = "整個string array都變成亂數陣列";
-            this.bt_random10.UseVisualStyleBackColor = true;
-            // 
-            // bt_random7
-            // 
-            this.bt_random7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random7.Location = new System.Drawing.Point(184, 21);
-            this.bt_random7.Name = "bt_random7";
-            this.bt_random7.Size = new System.Drawing.Size(155, 84);
-            this.bt_random7.TabIndex = 28;
-            this.bt_random7.Text = "隨機產生一些英文字母, 統計各種字母出現次數";
-            this.bt_random7.UseVisualStyleBackColor = true;
             // 
             // button0
             // 
@@ -966,7 +905,6 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(155, 40);
             this.button41.TabIndex = 56;
-            this.button41.Text = "產生隨機字串";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
@@ -995,6 +933,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1399, 957);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.button43);
             this.Controls.Add(this.button42);
             this.Controls.Add(this.button41);
@@ -1028,7 +968,6 @@
             this.Controls.Add(this.button20);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button0);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
@@ -1054,7 +993,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.groupBox1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1089,8 +1027,6 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button bt_random7;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button20;
@@ -1099,8 +1035,6 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button bt_random10;
-        private System.Windows.Forms.Button bt_random11;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button24;
@@ -1133,7 +1067,6 @@
         private System.Windows.Forms.ListBox lstList;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label lb_ordinal;
-        private System.Windows.Forms.Button bt_random12;
         private System.Windows.Forms.Button button32;
         private System.Windows.Forms.Button button33;
         private System.Windows.Forms.Button button34;

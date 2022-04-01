@@ -59,6 +59,8 @@
             this.lb_energy_ep = new System.Windows.Forms.Label();
             this.lb_energy_es = new System.Windows.Forms.Label();
             this.lb_energy_et = new System.Windows.Forms.Label();
+            this.lb_pig_mesg = new System.Windows.Forms.Label();
+            this.timer_pig = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox_bird.SuspendLayout();
@@ -343,11 +345,30 @@
             this.lb_energy_et.TabIndex = 22;
             this.lb_energy_et.Text = "總能量";
             // 
+            // lb_pig_mesg
+            // 
+            this.lb_pig_mesg.AutoSize = true;
+            this.lb_pig_mesg.BackColor = System.Drawing.Color.White;
+            this.lb_pig_mesg.Font = new System.Drawing.Font("標楷體", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_pig_mesg.ForeColor = System.Drawing.Color.Red;
+            this.lb_pig_mesg.Location = new System.Drawing.Point(496, 304);
+            this.lb_pig_mesg.Name = "lb_pig_mesg";
+            this.lb_pig_mesg.Size = new System.Drawing.Size(237, 37);
+            this.lb_pig_mesg.TabIndex = 23;
+            this.lb_pig_mesg.Text = "lb_pig_mesg";
+            // 
+            // timer_pig
+            // 
+            this.timer_pig.Enabled = true;
+            this.timer_pig.Interval = 1000;
+            this.timer_pig.Tick += new System.EventHandler(this.timer_pig_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1336, 627);
+            this.Controls.Add(this.lb_pig_mesg);
             this.Controls.Add(this.lb_energy_et);
             this.Controls.Add(this.lb_energy_es);
             this.Controls.Add(this.lb_energy_ep);
@@ -415,6 +436,8 @@
         private System.Windows.Forms.Label lb_energy_ep;
         private System.Windows.Forms.Label lb_energy_es;
         private System.Windows.Forms.Label lb_energy_et;
+        private System.Windows.Forms.Label lb_pig_mesg;
+        private System.Windows.Forms.Timer timer_pig;
     }
 }
 

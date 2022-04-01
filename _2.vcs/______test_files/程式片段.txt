@@ -1,5 +1,39 @@
 
+class 範例
+        public class Classmate  //事件訂閱者
+        {
+            private string name;
+            public Classmate(string Name)
+            {
+                name = Name;
+            }
+            public void SendResponse()  //事件處理函數，要與自定義委托類型匹配
+            {
+                Console.WriteLine("來自：" + this.name + "的回復: 已經收到邀請，隨時可以開始！");
+            }
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Classmate classmate1 = new Classmate("Alice");
+            Classmate classmate2 = new Classmate("Banana");
+            Classmate classmate3 = new Classmate("Cherry");
+            Classmate classmate4 = new Classmate("Daisy");
+
+            classmate1.SendResponse();
+            classmate2.SendResponse();
+            classmate3.SendResponse();
+            classmate4.SendResponse();
+
+
+        }
+
+
+//是否是指名serial port讀取長度 未達目的決不罷休?
+serial.Read(bytData, 0, bytData.Length, Timeout.Infinite);
+
+
+//DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元9999年12月31日23點59分59秒之間的具體日期時刻
             //vcs史上最早時間
             DateTime minTime = DateTime.MinValue;
 

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -42,7 +43,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -64,6 +65,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "自己畫";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(628, 84);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(116, 57);
+            this.button6.TabIndex = 4;
+            this.button6.Text = "製作一維條碼";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // pictureBox1
             // 
@@ -162,6 +173,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.button7);
             this.groupBox4.Controls.Add(this.pictureBox4);
             this.groupBox4.Controls.Add(this.button4);
             this.groupBox4.Location = new System.Drawing.Point(12, 526);
@@ -189,15 +201,15 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button6
+            // button7
             // 
-            this.button6.Location = new System.Drawing.Point(628, 84);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(116, 57);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "製作一維條碼";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button7.Location = new System.Drawing.Point(628, 84);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(116, 57);
+            this.button7.TabIndex = 6;
+            this.button7.Text = "製作一維條碼";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Form1
             // 
@@ -241,6 +253,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }
 

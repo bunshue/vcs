@@ -119,13 +119,6 @@ namespace vcs_test_all_01_Math_Random
             button42.Location = new Point(x_st + dx * 3, y_st + dy * 10);
             button43.Location = new Point(x_st + dx * 3, y_st + dy * 11);
 
-            groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-
-            bt_random7.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_random10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            bt_random11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            bt_random12.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-
             richTextBox1.Location = new Point(x_st + dx * 7 + 20, y_st + dy * 0);
             richTextBox1.Size = new Size(680, 1000);
 
@@ -1820,29 +1813,6 @@ namespace vcs_test_all_01_Math_Random
 
         private void button41_Click(object sender, EventArgs e)
         {
-            //產生隨機字串
-            int len = 10;
-            string result = GenCode(len);
-
-            richTextBox1.Text += "產生隨機字串 : " + result + "\n";
-        }
-
-        private string GenCode(int num)
-        {
-            //string str = "的一是在不123456789了Q有和人這Q中大為W上個國我以要他時來E用ASDFGHJKLIUYTREWQZXCVBNM3們生到作地R於出就分對成會可主發年動同工也能下2過子2說產43種ASDFGHJKLIUYTREWQZXCVBNM3面而方後多定行學法0所民得經十三之進著等部度sASDFGHJKLIUYTREWQZXCVBNM3家電力裡如水化高自二k123456789q加量都兩體制機9當使點從業1本去把性3好應開它E合R還因由其D些然前外天政ASDFGHJKLIUYTREWQZXCVBNM3W四日那社E義事平SWQ形RFE相a全h表間樣與關j各重新線內數正心反8你明l看原又麼z利比或T但質123456789氣第4向道命W3此變43條只DF沒結0S解a問A意建8月公0無7系軍很情AUF者4W最立代想D1已L通G並提7g直4L34題H黨123456789程展五U3果料U象員革4位入常文2總次品式活設U及AY管A特件長求w老頭基資5邊流2路F級S少圖3山統接知5TK較S將0組3見計F別她手5角期b根0論ASDFGHJKLIUYTREWQZXCVBNM3油思s術極交受U123456789聯20什認六共S權F收asdecvrrtfghujnmkiolpz證改F清D己美4再采轉更7單SD風5切U8打白J2教速花帶安IM場123456789身車J例真務具萬每目至達G走積r,示345議聲U報N斗完類0八離ASDFGHJKLIUYTREWQ123456789ZXCVBNM3華名確A才SS科張CDXG信U馬節話XZ米U整空Z元Y況D今集a溫傳土許步pGBY群廣J石記asdecvrrtfghujnmk123456789iolpz需段H4研界拉J林律叫K且究O觀越H織K6裝U影casdecvr123456789rtfghujnmkiolpzL算低持v音眾o3書t布A復TV容兒8際商Z非驗連斷HJ深難近礦千周委素M技備半辦V青VT5省PD列n習響B約s支般史d感I勞便團9往5酸歷市克何除消構府u稱太准精值號Zi率族G維XB劃選標C寫存候毛3親快2效M斯Masdecvrrtfghujnmkiolpz3院C查江4型眼5王4B按格5養N易5置M派5層片U始C卻專狀育7廠U京asdecvrrtfghujnmkiolpz識7適屬圓8包火住調m滿縣局7照參紅細引聽該鐵價嚴";
-            string str = "123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ";//去掉的O容易混淆的字母
-            char[] chastr = str.ToCharArray();
-            // string[] source ={ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#", "$", "%", "&", "@" };
-            string code = "";
-            Random rd = new Random();
-            int i;
-            for (i = 0; i < num; i++)
-            {
-                //code += source[rd.Next(0, source.Length)];
-                code += str.Substring(rd.Next(0, str.Length), 1);
-
-            }
-            return code;
         }
 
         private void button42_Click(object sender, EventArgs e)

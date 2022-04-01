@@ -56,11 +56,13 @@ namespace vcs_test_all_04_Font2
             // Get the font family name.
             string family_name = "Times New Roman";
             if (!(lstFonts.SelectedItem == null))
+            {
                 family_name = lstFonts.SelectedItem.ToString();
+            }
 
             // Set the sample's font.
-            txtSample.Font = new Font(family_name, font_size, font_style);
-            txtSample.Text = "字型: " + family_name + Environment.NewLine + sample_string;
+            richTextBox1.Font = new Font(family_name, font_size, font_style);
+            richTextBox1.Text = "字型: " + family_name + Environment.NewLine + sample_string;
         }
 
         // If something changes, display a new sample of the selected font.
@@ -69,6 +71,20 @@ namespace vcs_test_all_04_Font2
         private void SomethingChanged(object sender, EventArgs e)
         {
             ShowSample();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //指明使用特定字型檔
+            //路徑             
+            string path = @"../../font/金梅重黑浮體白字.ttf";
+            //讀取字體文件             
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            pfc.AddFontFile(path);
+            //實例化字體             
+            Font f = new Font(pfc.Families[0], 40);
+            //設置字體            
+            richTextBox1.Font = f;
         }
     }
 }

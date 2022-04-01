@@ -31,6 +31,7 @@ namespace vcs_Draw_Captcha
             CreateImage();
 
             CodeImage(CheckCode(), pictureBox3);
+            timer1_Tick(sender, e);
         }
 
         void show_item_location()
@@ -41,6 +42,7 @@ namespace vcs_Draw_Captcha
             pictureBox_captcha1.Size = new Size(W + 50, 110);
             pictureBox_captcha2.Size = new Size(W + 50, 110);
             pictureBox_captcha3.Size = new Size(W + 50, 110);
+            pictureBox_captcha4.Size = new Size(W + 50, 110);
 
             int x_st;
             int y_st;
@@ -55,6 +57,7 @@ namespace vcs_Draw_Captcha
             pictureBox_captcha1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox_captcha2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 120);
             pictureBox_captcha3.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 120 * 2);
+            pictureBox_captcha4.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 120 * 3);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -76,6 +79,7 @@ namespace vcs_Draw_Captcha
             draw_captcha4();
             draw_captcha5();
             draw_captcha6();
+            draw_captcha7();
         }
 
         //中文驗證法碼 ST
@@ -631,6 +635,18 @@ namespace vcs_Draw_Captcha
             pictureBox6.Image = bmp;
         }
         //6種 Captcha SP
+
+
+        void draw_captcha7()
+        {
+            VryImgGen captcha = new VryImgGen();
+            captcha.Length = 10;
+            string code = captcha.CreateVerifyCode();
+            //richTextBox1.Text += code + "\n";
+
+            Bitmap bitmap1 = captcha.CreateImage(code);
+            pictureBox_captcha4.Image = bitmap1;
+        }
     }
 
     /// <summary>
@@ -820,4 +836,326 @@ namespace vcs_Draw_Captcha
         #endregion
 
     }
+
+    /// <summary>
+    /// VryImgGen 的摘要說明
+    /// </summary>
+    public class VryImgGen
+    {
+        public static string ChineseChars = String.Empty;
+
+        /// <summary>
+        /// 英文與數字串
+        /// </summary>
+        protected static readonly string EnglishOrNumChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        public VryImgGen()
+        {
+            rnd = new Random(unchecked((int)DateTime.Now.Ticks));
+        }
+
+        /// <summary>
+        /// 全局隨機數生成器
+        /// </summary>
+        private Random rnd;
+
+        int length = 5;
+        /// <summary>
+        /// 驗證碼長度(默認6個驗證碼的長度)
+        /// </summary>
+        public int Length
+        {
+            get { return length; }
+            set { length = value; }
+        }
+
+        int fontSize = 20;
+        /// <summary>
+        /// 驗證碼字體大小(為了顯示扭曲效果，默認30像素，可以自行修改)
+        /// </summary>
+        public int FontSize
+        {
+            get { return fontSize; }
+            set { fontSize = value; }
+        }
+
+        int padding = 4;
+        /// <summary>
+        /// 邊框補(默認4像素)
+        /// </summary>
+        public int Padding
+        {
+            get { return padding; }
+            set { padding = value; }
+        }
+
+        bool chaos = true;
+        /// <summary>
+        /// 是否輸出燥點(默認輸出)
+        /// </summary>
+        public bool Chaos
+        {
+            get { return chaos; }
+            set { chaos = value; }
+        }
+
+        Color chaosColor = Color.LightGray;
+        /// <summary>
+        /// 輸出燥點的顏色(默認灰色)
+        /// </summary>
+        public Color ChaosColor
+        {
+            get { return chaosColor; }
+            set { chaosColor = value; }
+        }
+
+        int chaosWight = 1;
+        /// <summary>
+        /// 輸出燥點的濃度
+        /// </summary>
+        public int ChaosWight
+        {
+            get { return chaosWight; }
+            set { chaosWight = value; }
+        }
+
+        Color backgroundColor = Color.White;
+        /// <summary>
+        /// 自定義背景色(默認白色)
+        /// </summary>
+        public Color BackgroundColor
+        {
+            get { return backgroundColor; }
+            set { backgroundColor = value; }
+        }
+
+        Color[] colors = { Color.Black, Color.Red, Color.DarkBlue, Color.Green, Color.Orange, Color.Brown, Color.DarkCyan, Color.Purple };
+        /// <summary>
+        /// 自定義隨機顏色數組
+        /// </summary>
+        public Color[] Colors
+        {
+            get { return colors; }
+            set { colors = value; }
+        }
+
+        string[] fonts = { "Arial", "Georgia" };
+        /// <summary>
+        /// 自定義字體數組
+        /// </summary>
+        public string[] Fonts
+        {
+            get { return fonts; }
+            set { fonts = value; }
+        }
+
+        #region 產生波形濾鏡效果
+
+        private const double PI = 3.1415926535897932384626433832795;
+        private const double PI2 = 6.283185307179586476925286766559;
+
+        /// <summary>
+        /// 正弦曲線Wave扭曲圖片（Edit By 51aspx.com）
+        /// </summary>
+        /// <param name="srcBmp">圖片路徑</param>
+        /// <param name="bXDir">如果扭曲則選擇為True</param>
+        /// <param name="nMultValue">波形的幅度倍數，越大扭曲的程度越高，一般為3</param>
+        /// <param name="dPhase">波形的起始相位，取值區間[0-2*PI)</param>
+        /// <returns></returns>
+        public Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
+        {
+            Bitmap destBmp = new Bitmap(srcBmp.Width, srcBmp.Height);
+
+            // 將位圖背景填充為白色
+            Graphics graph = Graphics.FromImage(destBmp);
+            graph.FillRectangle(new SolidBrush(Color.White), 0, 0, destBmp.Width, destBmp.Height);
+            graph.Dispose();
+
+            double dBaseAxisLen = bXDir ? (double)destBmp.Height : (double)destBmp.Width;
+
+            for (int i = 0; i < destBmp.Width; i++)
+            {
+                for (int j = 0; j < destBmp.Height; j++)
+                {
+                    double dx = 0;
+                    dx = bXDir ? (PI2 * (double)j) / dBaseAxisLen : (PI2 * (double)i) / dBaseAxisLen;
+                    dx += dPhase;
+                    double dy = Math.Sin(dx);
+
+                    // 取得當前點的顏色
+                    int nOldX = 0, nOldY = 0;
+                    nOldX = bXDir ? i + (int)(dy * dMultValue) : i;
+                    nOldY = bXDir ? j : j + (int)(dy * dMultValue);
+
+                    Color color = srcBmp.GetPixel(i, j);
+                    if (nOldX >= 0 && nOldX < destBmp.Width
+                     && nOldY >= 0 && nOldY < destBmp.Height)
+                    {
+                        destBmp.SetPixel(nOldX, nOldY, color);
+                    }
+                }
+            }
+
+            return destBmp;
+        }
+
+
+
+        #endregion
+
+        /// <summary>
+        /// 生成校驗碼圖片
+        /// </summary>
+        /// <param name="code">驗證碼</param>
+        /// <returns></returns>
+        public Bitmap CreateImage(string code)
+        {
+            int fSize = FontSize;
+            int fWidth = fSize + Padding;
+
+            int imageWidth = (int)(code.Length * fWidth) + 4 + Padding * 2;
+            int imageHeight = fSize * 2 + Padding * 2;
+
+            Bitmap image = new Bitmap(imageWidth - 10, imageHeight - 10);
+
+            Graphics g = Graphics.FromImage(image);
+
+            g.Clear(BackgroundColor);
+
+            //給背景添加隨機生成的燥點
+            if (this.Chaos)
+            {
+
+                Pen pen = new Pen(ChaosColor, 0);
+                int c = ChaosWight * 10;
+
+                for (int i = 0; i < c; i++)
+                {
+                    int x = rnd.Next(image.Width);
+                    int y = rnd.Next(image.Height);
+
+                    g.DrawRectangle(pen, x, y, 1, 1);
+                }
+            }
+
+            int left = 0, top = 0, top1 = 1, top2 = 1;
+
+            int n1 = (imageHeight - FontSize - Padding * 2);
+            int n2 = n1 / 4;
+            top1 = n2;
+            top2 = n2 * 2;
+
+            Font f;
+            Brush b;
+
+            int cindex, findex;
+
+            //隨機字體和顏色的驗證碼字符
+            for (int i = 0; i < code.Length; i++)
+            {
+                cindex = rnd.Next(Colors.Length - 1);
+                findex = rnd.Next(Fonts.Length - 1);
+
+                f = new Font(Fonts[findex], fSize, FontStyle.Bold);
+                b = new SolidBrush(Colors[cindex]);
+
+                if (i % 2 == 1)
+                {
+                    top = top2;
+                }
+                else
+                {
+                    top = top1;
+                }
+
+                left = i * fWidth;
+
+                g.DrawString(code.Substring(i, 1), f, b, left, top);
+            }
+
+            //畫一個邊框 邊框顏色為Color.Gainsboro
+            g.DrawRectangle(new Pen(Color.Gainsboro, 0), 0, 0, image.Width - 1, image.Height - 1);
+            g.Dispose();
+
+            //產生波形（Add By 51aspx.com）
+            image = TwistImage(image, true, 8, 4);
+
+            return image;
+        }
+
+        /// <summary>
+        /// 生成隨機字符碼
+        /// </summary>
+        /// <param name="codeLen">字符串長度</param>
+        /// <param name="zhCharsCount">中文字符數</param>
+        /// <returns></returns>
+        public string CreateVerifyCode(int codeLen, int zhCharsCount)
+        {
+            char[] chs = new char[codeLen];
+
+            int index;
+            for (int i = 0; i < zhCharsCount; i++)
+            {
+                index = rnd.Next(0, codeLen);
+                if (chs[index] == '\0')
+                    chs[index] = CreateZhChar();
+                else
+                    --i;
+            }
+            for (int i = 0; i < codeLen; i++)
+            {
+                if (chs[i] == '\0')
+                    chs[i] = CreateEnOrNumChar();
+            }
+
+            return new string(chs, 0, chs.Length);
+        }
+
+        /// <summary>
+        /// 生成默認長度5的隨機字符碼
+        /// </summary>
+        /// <returns></returns>
+        public string CreateVerifyCode()
+        {
+            return CreateVerifyCode(Length, 0);
+        }
+
+        /// <summary>
+        /// 生成英文或數字字符
+        /// </summary>
+        /// <returns></returns>
+        protected char CreateEnOrNumChar()
+        {
+            return EnglishOrNumChars[rnd.Next(0, EnglishOrNumChars.Length)];
+        }
+
+        /// <summary>
+        /// 生成漢字字符
+        /// </summary>
+        /// <returns></returns>
+        protected char CreateZhChar()
+        {
+            //若提供了漢字集，查詢漢字集選取漢字
+            if (ChineseChars.Length > 0)
+            {
+                return ChineseChars[rnd.Next(0, ChineseChars.Length)];
+            }
+            //若沒有提供漢字集，則根據《GB2312簡體中文編碼表》編碼規則構造漢字
+            else
+            {
+                byte[] bytes = new byte[2];
+
+                //第一個字節值在0xb0, 0xf7之間
+                bytes[0] = (byte)rnd.Next(0xb0, 0xf8);
+                //第二個字節值在0xa1, 0xfe之間
+                bytes[1] = (byte)rnd.Next(0xa1, 0xff);
+
+                //根據漢字編碼的字節數組解碼出中文漢字
+                string str1 = Encoding.GetEncoding("gb2312").GetString(bytes);
+
+                return str1[0];
+            }
+        }
+    }
 }
+
