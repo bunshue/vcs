@@ -347,6 +347,38 @@ namespace vcs_GMap
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
+            //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
+
+            //上海座標
+            latitude = 31.128199299112;   //緯度
+            longitude = 121.489562988281; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 10; //當前比例
+
+            update_controls_info();
+
+            string[] marker_position = new string[10];
+
+            marker_position[0] = "31.420147, 121.488286";
+            marker_position[1] = "31.294828, 121.702154";
+            marker_position[2] = "31.141157, 121.780918";
+            marker_position[3] = "30.941157, 121.782068";
+            marker_position[4] = "30.909931, 121.492885";
+            marker_position[5] = "30.890099, 121.22325";
+            marker_position[6] = "31.015526, 121.161482";
+            marker_position[7] = "31.226239, 121.076395";
+            marker_position[8] = "31.339688, 121.189873";
+            marker_position[9] = "31.41368, 121.459509";
+
+
+            SetLableOnMap_fore(marker_position, markersOverlay);
+
+
+
         }
 
         private void button4_Click(object sender, EventArgs e)
