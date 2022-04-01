@@ -1116,8 +1116,8 @@ namespace vcs_HtmlAgility
 
         private void button26_Click(object sender, EventArgs e)
         {
-        }
 
+        }
 
         private void button27_Click(object sender, EventArgs e)
         {
@@ -1133,7 +1133,6 @@ namespace vcs_HtmlAgility
         {
 
         }
-
 
         private void bt_00_Click(object sender, EventArgs e)
         {
