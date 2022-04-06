@@ -117,6 +117,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(170, 70);
             this.button5.TabIndex = 97;
+            this.button5.Text = "使用TextureBrush類繪製圖像";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -137,6 +138,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(170, 70);
             this.button4.TabIndex = 88;
+            this.button4.Text = "使用WMI取得USB資訊";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -167,7 +169,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(862, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(444, 790);
+            this.richTextBox1.Size = new System.Drawing.Size(400, 790);
             this.richTextBox1.TabIndex = 85;
             this.richTextBox1.Text = "";
             // 
@@ -180,23 +182,24 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(200, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(639, 452);
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
             this.pictureBox1.TabIndex = 108;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(200, 470);
+            this.webBrowser1.Location = new System.Drawing.Point(200, 498);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(639, 250);
+            this.webBrowser1.Size = new System.Drawing.Size(640, 300);
             this.webBrowser1.TabIndex = 109;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1318, 807);
+            this.ClientSize = new System.Drawing.Size(1284, 811);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);

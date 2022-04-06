@@ -32,6 +32,9 @@ namespace vcs_Mix00
 {
     public partial class Form1 : Form
     {
+        Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠标 
+        Bitmap bitmap1;
+
         public Form1()
         {
             InitializeComponent();
@@ -50,6 +53,13 @@ namespace vcs_Mix00
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 
             show_item_location();
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
+
+
         }
 
         void show_item_location()
@@ -211,11 +221,74 @@ namespace vcs_Mix00
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            string strServiceName = string.Empty;
+
+
+            string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+
+
+            //Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠标 
+
+            //使用WMI取得USB資訊
+
+            ManagementObjectSearcher search = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
+            ManagementObjectCollection collection = search.Get();
+            var usbList = from u in collection.Cast<ManagementBaseObject>()
+                          select new
+                          {
+                              id = u.GetPropertyValue("DeviceID"),
+                              name = u.GetPropertyValue("Name"),
+                              status = u.GetPropertyValue("Status"),
+                              system = u.GetPropertyValue("SystemName"),
+                              caption = u.GetPropertyValue("Caption"),
+                              pnp = u.GetPropertyValue("PNPDeviceID"),
+                              description = u.GetPropertyValue("Description")
+                          };
+            foreach (var u in usbList)
+            {
+                richTextBox1.Text += String.Format("{0}{7}{1}{7}{2}{7}{3}{7}{4}{7}{5}{7}{6}{7}{7}{7}", u.id, u.name, u.status, u.system, u.caption, u.pnp, u.description, Environment.NewLine);
+            }
+
+
+
+
         }
+
+        private Image theimage;
+        private Image smallimage;
 
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //使用TextureBrush類繪製圖像
+
+            string filename = @"C:\______test_files\__RW\_gif\sky.gif";
+
+            SetStyle(ControlStyles.Opaque, true);
+            Bounds = new Rectangle(0, 0, 1300, 850);
+            theimage = new Bitmap(filename);
+            smallimage = new Bitmap(theimage, new Size(theimage.Width, theimage.Height));
+
+            Graphics g = pictureBox1.CreateGraphics();
+            g.FillRectangle(Brushes.White, ClientRectangle);
+
+            Brush brush = new TextureBrush(smallimage, new Rectangle(0, 0, smallimage.Width, smallimage.Height));
+            //用圖像創建畫筆,來繪制圖像
+            g.FillEllipse(brush, new Rectangle(0, 200, 200, 200));
+            //用圖像創建剛筆,來繪制圖像
+            Pen pen = new Pen(brush, 20);
+            g.DrawRectangle(pen, new Rectangle(250, 200, 200, 200));
+            //用圖像繪製文本
+            Font font = new Font("Times New Roman", 40, FontStyle.Bold | FontStyle.Italic);
+            g.DrawString("Hello Image !!", font, brush, new Rectangle(0, 0, 500, font.Height));
+
+            brush.Dispose();
+            font.Dispose();
+
+
+
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -236,6 +309,26 @@ namespace vcs_Mix00
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+        }
+
+        //局部圖像放大
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            int r = 20;
+            int ratio = 2;
+            try
+            {
+                //局部圖像放大
+                Cursor.Current = myCursor;								//定义鼠标
+                Graphics graphics = pictureBox1.CreateGraphics();				//实例化pictureBox1控件的Graphics类
+                //声明两个Rectangle对象，分别用来指定要放大的区域和放大后的区域
+                Rectangle sourceRectangle = new Rectangle(e.X - r, e.Y - r, r * 2, r * 2);	//要放大的区域 
+                Rectangle destRectangle = new Rectangle(e.X - r * ratio, e.Y - r * ratio, r * 2 * ratio, r * 2 * ratio);
+                //调用DrawImage方法对选定区域进行重新绘制，以放大该部分
+                graphics.DrawImage(bitmap1, destRectangle, sourceRectangle, GraphicsUnit.Pixel);
+            }
+            catch { }
+
         }
     }
 

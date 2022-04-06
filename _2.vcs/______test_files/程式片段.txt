@@ -1,4 +1,37 @@
 
+
+對類中得所有成員有五種訪問權限：
+
+· “public” 可以被所有代碼訪問；
+· “protected” 只可以被繼承類訪問；
+· “internal” 只可以被同一個項目的代碼訪問;
+· “protected internal”只可以被同一個項目的代碼或繼承類訪問；
+· “private” 只可以被本類中的代碼訪問。
+缺省狀態是“private”。
+
+
+
+
+
+
+
+class 範例
+
+        public class Person
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+            public int Weight { get; set; }
+            public int Height { get; set; }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Person p = new Person() { Name = "Hong", Age = 25, Weight = 65, Height = 170 };
+
+        }
+
+
 class 範例
         public class Classmate  //事件訂閱者
         {
@@ -82,30 +115,6 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
 
 
 
-Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠标 
-        //局部圖像放大
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            int r = 20;
-            int ratio = 2;
-            try
-            {
-                Cursor.Current = myCursor;								//定义鼠标
-                Graphics graphics = pictureBox1.CreateGraphics();				//实例化pictureBox1控件的Graphics类
-                //声明两个Rectangle对象，分别用来指定要放大的区域和放大后的区域
-                Rectangle sourceRectangle = new Rectangle(e.X - r, e.Y - r, r*2, r*2);	//要放大的区域 
-                Rectangle destRectangle = new Rectangle(e.X - r * ratio, e.Y - r * ratio, r * 2 * ratio, r * 2 * ratio);
-                //调用DrawImage方法对选定区域进行重新绘制，以放大该部分
-                graphics.DrawImage(myImage, destRectangle, sourceRectangle, GraphicsUnit.Pixel);
-            }
-            catch { }
-
-        }
-
-
-
-
-
             //抓網頁
             string url = @"https://tw.dictionary.search.yahoo.com/";
             HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
@@ -137,26 +146,6 @@ Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠�
             catch { }
             //result.billInfo.consNo = consNo.ToString();
             //Write(result);
-
-
-使用WMI取得USB資訊
-            ManagementObjectSearcher search = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
-            ManagementObjectCollection collection = search.Get();
-            var usbList = from u in collection.Cast<ManagementBaseObject>()
-                          select new
-                          {
-                              id = u.GetPropertyValue("DeviceID"),
-                              name = u.GetPropertyValue("Name"),
-                              status = u.GetPropertyValue("Status"),
-                              system = u.GetPropertyValue("SystemName"),
-                              caption = u.GetPropertyValue("Caption"),
-                              pnp = u.GetPropertyValue("PNPDeviceID"),
-                              description = u.GetPropertyValue("Description")
-                          };
-            foreach (var u in usbList)
-            {
-                richTextBox1.Text += String.Format("{0}{7}{1}{7}{2}{7}{3}{7}{4}{7}{5}{7}{6}{7}{7}{7}", u.id, u.name, u.status, u.system, u.caption, u.pnp, u.description, Environment.NewLine);
-            }
 
 
 
@@ -260,25 +249,6 @@ Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠�
 　}
 　　最後運行該程序，把screen_saver.exe改為screen_saver.scr，拷入Windows系統目錄中，這樣就可以運行該屏幕保護程序。
 
-
-
-
-
-
-        public class Person
-        {
-            public string Name { get; set; }
-            public int Age { get; set; }
-            public int Weight { get; set; }
-            public int Height { get; set; }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Person p = new Person() { Name = "Hong", Age = 25, Weight = 65, Height = 170 };
-
-        }
-        
         
         
         /// <summary>  
@@ -304,47 +274,6 @@ Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠�
     .NET 4.5 內建支援，但需透過 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 設為預設協定
     .NET 4 本身不支援，但安裝 .NET 4.5 後即可使用 TLS 1.2，指定 TLS 1.2 的寫法為 ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072; 
     
-
-使用Brush類繪製圖像
-
-
-public partial class TextureBruse : Form
-    {
-        private Image theimage;
-        private Image smallimage;
-
-        public TextureBruse()
-        {
-            InitializeComponent();
-
-            SetStyle(ControlStyles.Opaque, true);
-            Bounds = new Rectangle(0, 0, 500, 500);
-            theimage = new Bitmap("ico.gif");      //Application.StartupPath+@"ico.gif"
-            smallimage = new Bitmap(theimage, new Size(theimage.Width, theimage.Height));
-        }
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            g.FillRectangle(Brushes.White,ClIEntRectangle);
-            
-            Brush brush = new TextureBrush(smallimage, new&nbs(0, 0,smallimage.Width, smallimage.Height));
-            //用圖像創建畫筆,來繪制圖像
-            g.FillEllipse(brush, new Rectangle(0,200,200,200));
-            //用圖像創建剛筆,來繪制圖像
-            Pen pen=new Pen(brush,20);
-            g.DrawRectangle(pen, new Rectangle(250, 200, 200, 200));
-            //用圖像繪製文本
-            Font font = new Font("Times New Roman", 40, FontStyle.Bold | FontStyle.Italic);
-            g.DrawString("Hello Image !!", font, brush, new Rectangle(0,0,500,font.Height));
-
-            brush.Dispose();
-            font.Dispose();
-        }
-    }
-
-
-
-
 
 
             //WebBrowser 轉 RichTextBox
