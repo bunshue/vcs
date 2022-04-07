@@ -23,6 +23,7 @@ namespace vcs_GMap
         GMapOverlay markersOverlay = new GMapOverlay("markers"); //放置marker的图层
         GMapOverlay RouteMark = new GMapOverlay("RouteMark");//放置区域标记图层
         GMapOverlay markersOverlay_stop = new GMapOverlay("Stop"); //放置marker的图层
+        GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的图层
 
         /// <summary>
         /// 路径轨迹
@@ -178,6 +179,7 @@ namespace vcs_GMap
             //gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
 
             gMapControl1.Overlays.Add(markersOverlay);  //添加 圖標 Markers 的圖層
+            gMapControl1.Overlays.Add(markers_polygon);  //添加 圖標 Markers 的圖層
             gMapControl1.Overlays.Add(RouteMark);
 
             //gMapControl1.Dock = DockStyle.Fill;
@@ -305,6 +307,21 @@ namespace vcs_GMap
 
             //DrawPoint(gMapControl1, latitude, longitude);
             */
+
+            PointLatLng point = gMapControl1.FromLocalToLatLng(1920 / 2 / 2, 1080 / 2 / 2);
+
+            //richTextBox1.Text += "控件座標(" + e.X.ToString() + ", " + e.Y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
+
+            GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red);
+
+            //markersOverlay.Markers.Add(marker);
+            markersOverlay.Markers.Add(marker);
+            marker.ToolTipText = "地圖正中央圖示";
+            marker.ToolTip.Fill = Brushes.Blue;
+            marker.ToolTip.Foreground = Brushes.White;
+            marker.ToolTip.Stroke = Pens.Black;
+            marker.ToolTip.TextPadding = new Size(20, 20);
+            marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
         }
 
         public void DrawPoint(GMapControl map, double latitude, double longitude)   //緯 經
@@ -389,6 +406,22 @@ namespace vcs_GMap
             route_1.Stroke = (Pen)route_1.Stroke.Clone();
             route_1.Stroke.Color = Color.AliceBlue; 
             */
+
+
+
+            Graphics g = gMapControl1.CreateGraphics();
+            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+
+
+            List<Point> Point = new List<Point>();
+            Point.Clear();
+            Point.Add(new Point(500, 113));
+            Point.Add(new Point(686, 160));
+            Point.Add(new Point(655, 437));
+            Point.Add(new Point(475, 351));
+            g.DrawLines(Pens.Red, Point.ToArray());
+
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -438,6 +471,7 @@ namespace vcs_GMap
                 if (checkBox1.Checked == true)   //滑鼠左鍵連線
                 {
                     PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+                    //richTextBox1.Text += "控件座標(" + e.X.ToString() + ", " + e.Y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
                     if (Route == null)
                     {
                         Route = new GmapMarkerRoute(point);
@@ -502,7 +536,6 @@ namespace vcs_GMap
             richTextBox1.Text += "test 6\n";
             //gMapControl1.SetPositionByKeywords("竹東鎮");  //設置初始中心, 看似無效
 
-            GMapOverlay polyOverlay = new GMapOverlay("polygons");
             List<PointLatLng> points = new List<PointLatLng>();
             points.Add(new PointLatLng(24.8516278269032, 121.004190444946));
             points.Add(new PointLatLng(24.8357387372186, 121.020069122314));
@@ -511,11 +544,12 @@ namespace vcs_GMap
             GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
             polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
             polygon.Stroke = new Pen(Color.Red, 1);
-            polyOverlay.Polygons.Add(polygon);
-            gMapControl1.Overlays.Add(polyOverlay);
+            markers_polygon.Polygons.Add(polygon);
+            gMapControl1.Overlays.Add(markers_polygon);
 
-
-            gMapControl1.Refresh();
+            //gMapControl1.Refresh();
+            //gMapControl1.ShowTileGridLines = true;//显示瓦片，也就是显示方格
+            //gMapControl1.ReloadMap();
         }
 
         private void button7_Click(object sender, EventArgs e)

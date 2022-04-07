@@ -1,5 +1,11 @@
 
 
+                        GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
+                        marker.ToolTipText = place.Value.Address;
+                        marker.ToolTipMode = MarkerTooltipMode.Always;
+                        markersOverlay.Markers.Add(marker);
+                        
+
 對類中得所有成員有五種訪問權限：
 
 · “public” 可以被所有代碼訪問；
