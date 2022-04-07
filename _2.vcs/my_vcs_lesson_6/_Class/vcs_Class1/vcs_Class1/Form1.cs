@@ -175,6 +175,7 @@ namespace vcs_Class1
             groupBox10.Size = new Size(w, h);
             groupBox11.Size = new Size(w, h);
             groupBox12.Size = new Size(w, h);
+            groupBox13.Size = new Size(w, h);
 
             //大的groupBox
             h = 250;
@@ -202,6 +203,8 @@ namespace vcs_Class1
             groupBox10.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             groupBox11.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             groupBox12.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            groupBox13.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+
 
             groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -238,6 +241,9 @@ namespace vcs_Class1
 
             button29.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button30.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+            button31.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button32.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -837,6 +843,67 @@ namespace vcs_Class1
             //解構子
             richTextBox1.Text += "銷毀\n";
             GC.Collect();       // Force garbage collection.
+
+        }
+
+        //創建一個簡單的類來表示產品，產品有ID,類別，和價格
+        public sealed class Product2
+        {
+            public int Id { get; set; }
+            public string Category { get; set; }
+            public double Value { get; set; }
+
+
+            public override string ToString()
+            {
+                return string.Format("[{0}: {1} - {2}]", Id, Category, Value);
+            }
+        }
+
+        public static List<Product2> GetList()
+        {
+            var products = new List<Product2>
+            {
+            new Product2 {Id = 1, Category = "Electronics", Value = 15.0},
+            new Product2 {Id = 2, Category = "Groceries", Value = 40.0},
+            new Product2 {Id = 3, Category = "Garden", Value = 210.3},
+            new Product2 {Id = 4, Category = "Pets", Value = 2.1},
+            new Product2 {Id = 5, Category = "Electronics", Value = 19.95},
+            new Product2 {Id = 6, Category = "Pets", Value = 21.25},
+            new Product2 {Id = 7, Category = "Pets", Value = 5.50},
+            new Product2 {Id = 8, Category = "Garden", Value = 13.0},
+            new Product2 {Id = 9, Category = "Automotive", Value = 10.0},
+            new Product2 {Id = 10, Category = "Electronics", Value = 250.0},
+            };
+            return products;
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            List<Product2> list = GetList();
+
+            richTextBox1.Text += "len = " + list.Count.ToString() + "\n";
+            int cnt = list.Count;
+            int i;
+            for (i = 0; i < cnt; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + list[i].ToString() + "\n";
+            }
+
+
+            richTextBox1.Text += "按類別列出一個物品清單，用GroupBy\n";
+            foreach (var group in list.GroupBy(p => p.Category))
+            {
+                Console.WriteLine(group.Key);
+                foreach (var item in group)
+                {
+                    richTextBox1.Text += "	" + item + "\n";
+                }
+            }
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
 
         }
     }

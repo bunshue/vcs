@@ -20,6 +20,7 @@ using System.Threading;
 using System.Media;     //for SoundPlayer
 using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/加入參考/.Net/System.Web
 using System.Globalization; //for CultureInfo
+using System.Text.RegularExpressions;
 
 using System.Collections;
 
@@ -164,58 +165,50 @@ namespace vcs_Mix00
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
 
-            richTextBox1.Text += week + "\n";
-
+            double realCoord, imagCoord;
+            double realTemp, imagTemp, realTemp2, arg;
+            int iterations;
+            for (imagCoord = 1.2; imagCoord >= -1.2; imagCoord -= 0.05)
+            {
+                for (realCoord = -0.6; realCoord <= 1.77; realCoord += 0.03)
+                {
+                    iterations = 0;
+                    realTemp = realCoord;
+                    imagTemp = imagCoord;
+                    arg = (realCoord * realCoord) + (imagCoord * imagCoord);
+                    while ((arg < 4) && (iterations < 40))
+                    {
+                        realTemp2 = (realTemp * realTemp) - (imagTemp * imagTemp) - realCoord;
+                        imagTemp = (2 * realTemp * imagTemp) - imagCoord;
+                        realTemp = realTemp2;
+                        arg = (realTemp * realTemp) + (imagTemp * imagTemp);
+                        iterations += 1;
+                    }
+                    switch (iterations % 4)
+                    {
+                        case 0:
+                            richTextBox1.Text += ".";break;
+                        case 1:
+                            richTextBox1.Text += "o";break;
+                        case 2:
+                            richTextBox1.Text += "O";break;
+                        case 3:
+                            richTextBox1.Text += "@";break;
+                    }
+                }
+                richTextBox1.Text += "\n";
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //從windows剪貼板獲取內容
-            IDataObject iData = Clipboard.GetDataObject();
-            if (iData.GetDataPresent(DataFormats.Text))
-            {
-                richTextBox1.Text += "取得文字:\n";
-                Console.WriteLine((String)iData.GetData(DataFormats.Text));
-            }
-            if (iData.GetDataPresent(DataFormats.Bitmap))
-            {
-                richTextBox1.Text += "取得圖片\n";
-                Image img = (Bitmap)iData.GetData(DataFormats.Bitmap);
-                pictureBox1.Image = img;
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //計算兩個日期的時間間隔
-            DateTime dt2 = new DateTime(1974, 9, 24);
-            DateTime dt1 = new DateTime(1999, 3, 8);
-            string diff = DateDiff(dt1, dt2);
-            richTextBox1.Text += "時間間隔 : " + diff + "\n";
-        }
-
-        /// <summary>
-        /// 計算兩個日期的時間間隔
-        /// </summary>
-        /// <param name="DateTime1">第一個日期和時間</param>
-        /// <param name="DateTime2">第二個日期和時間</param>
-        /// <returns></returns>
-        private string DateDiff(DateTime DateTime1, DateTime DateTime2)
-        {
-            string dateDiff = null;
-            TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
-            TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
-            TimeSpan ts = ts1.Subtract(ts2).Duration();
-            dateDiff = ts.Days.ToString() + "天"
-                + ts.Hours.ToString() + "小時"
-                + ts.Minutes.ToString() + "分鐘"
-                + ts.Seconds.ToString() + "秒";
-            return dateDiff;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -256,37 +249,8 @@ namespace vcs_Mix00
 
         }
 
-        private Image theimage;
-        private Image smallimage;
-
         private void button5_Click(object sender, EventArgs e)
         {
-            show_button_text(sender);
-            //使用TextureBrush類繪製圖像
-
-            string filename = @"C:\______test_files\__RW\_gif\sky.gif";
-
-            SetStyle(ControlStyles.Opaque, true);
-            Bounds = new Rectangle(0, 0, 1300, 850);
-            theimage = new Bitmap(filename);
-            smallimage = new Bitmap(theimage, new Size(theimage.Width, theimage.Height));
-
-            Graphics g = pictureBox1.CreateGraphics();
-            g.FillRectangle(Brushes.White, ClientRectangle);
-
-            Brush brush = new TextureBrush(smallimage, new Rectangle(0, 0, smallimage.Width, smallimage.Height));
-            //用圖像創建畫筆,來繪制圖像
-            g.FillEllipse(brush, new Rectangle(0, 200, 200, 200));
-            //用圖像創建剛筆,來繪制圖像
-            Pen pen = new Pen(brush, 20);
-            g.DrawRectangle(pen, new Rectangle(250, 200, 200, 200));
-            //用圖像繪製文本
-            Font font = new Font("Times New Roman", 40, FontStyle.Bold | FontStyle.Italic);
-            g.DrawString("Hello Image !!", font, brush, new Rectangle(0, 0, 500, font.Height));
-
-            brush.Dispose();
-            font.Dispose();
-
 
 
         }
@@ -295,92 +259,7 @@ namespace vcs_Mix00
         {
             show_button_text(sender);
 
-            //折線圖
-            Pic();
-
         }
-
-        private void Pic()
-        {
-            //測試數據
-            DataTable table = new DataTable("Data");
-            DataRow Dr;
-            DataColumn Dc = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn Dc2 = new DataColumn("Num", Type.GetType("System.Int32"));
-            DataColumn Dc3 = new DataColumn("name", Type.GetType("System.String"));
-            table.Columns.Add(Dc);
-            table.Columns.Add(Dc2);
-            table.Columns.Add(Dc3);
-            Random rnd = new Random();
-            for (int n = 0; n < 61; n++)
-            {
-                Dr = table.NewRow();
-                Dr[0] = n;
-                Dr[1] = rnd.Next(10, 140);
-                Dr[2] = n.ToString();
-                table.Rows.Add(Dr);
-            }
-            //畫圖參數
-            int BG_Width = 450;
-            int BG_Height = 180;
-            int Pic_Width = 450;
-            int Pic_Height = 180;
-            int pic_X = 6;
-            int pic_H = 1;
-            int pic_tr = 5;
-            int pic_td = 12;
-            Rectangle rec = new Rectangle(50, 15, 360, 150);
-            Pen Pic_Bolder = new Pen(Color.Black, 1);
-            Pen Pic_line = new Pen(Color.Gray, 1);
-            Pen Pic_Data = new Pen(Color.Red, 2);
-            SolidBrush brusth = new SolidBrush(Color.Blue);
-            Point[] DataPt = new Point[table.Rows.Count];
-            int x;
-            int y;
-            for (int n = 0; n < table.Rows.Count; n++)
-            {
-                Dr = table.Rows[n];
-                x = (int)Dr[0] * pic_X + rec.X;
-                y = (int)Dr[1] * pic_H + rec.Y;
-                DataPt[n] = new Point(x, y);
-            }
-            Bitmap Bg = new Bitmap(BG_Width, BG_Height, PixelFormat.Format24bppRgb);
-            Graphics Ph = Graphics.FromImage(Bg);
-            Ph.Clear(Color.White);
-            Ph.DrawRectangle(Pic_Bolder, rec);
-            //畫折線
-            Ph.DrawCurve(Pic_Data, DataPt);
-            //rec.
-            Point SPoint = new Point();
-            Point Epoint = new Point();
-            //畫橫線
-            for (int n = 1; n < pic_tr; n++)
-            {
-                //cell[0] = new Point(rec.X);
-                SPoint.X = 0 + rec.X;
-                SPoint.Y = n * 30 + rec.Y;
-                Epoint.X = rec.Width + rec.X;
-                Epoint.Y = n * 30 + rec.Y;
-                Ph.DrawLine(Pic_line, SPoint, Epoint);
-            }
-            //畫豎線
-            for (int n = 1; n < pic_td; n++)
-            {
-                SPoint.X = n * 30 + rec.X;
-                SPoint.Y = rec.Y;
-                Epoint.X = n * 30 + rec.X;
-                Epoint.Y = rec.Height + rec.Y;
-                Ph.DrawLine(Pic_line, SPoint, Epoint);
-            }
-            //畫標題
-            string Title = "畫折線測試";
-            SolidBrush brush = new SolidBrush(Color.RoyalBlue);
-            Ph.DrawString(Title, new Font("Franklin Gothic Demi", 12, FontStyle.Italic), brush, new Point(200, 0));
-            Ph.Save();
-            //Bg.Save(Response.OutputStream, ImageFormat.Gif);
-            pictureBox1.Image = Bg;
-        }
-
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -390,7 +269,26 @@ namespace vcs_Mix00
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //根據url獲取遠程html源碼
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190697.html";
+            string result = GetSearchHtml(url);
+            richTextBox1.Text += result + "\n";
+
         }
+
+        /// <summary>
+        /// 根據url獲取遠程html源碼
+        /// </summary>
+        /// <param name="url">搜索url</param>
+        /// <returns>返回DownloadData</returns>
+        public static string GetSearchHtml(string url)
+        {
+            WebClient MyWebClient = new WebClient();
+            MyWebClient.Credentials = CredentialCache.DefaultCredentials;   //獲取或設置用於對向Internet資源的請求進行身份驗證的網絡憑據。
+            Byte[] pageData = MyWebClient.DownloadData(url);                //從指定url下載數據
+            return Encoding.UTF8.GetString(pageData);                       //獲取網站頁面采用的是UTF-8
+        }
+
 
         private void button9_Click(object sender, EventArgs e)
         {

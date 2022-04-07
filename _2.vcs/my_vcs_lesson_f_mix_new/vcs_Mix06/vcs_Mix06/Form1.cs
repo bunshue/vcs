@@ -299,68 +299,31 @@ namespace vcs_Mix06
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            /*
-            堆栈（Stack）代表了一个后进先出的对象集合。
-            当您需要对各项进行后进先出的访问时，则使用堆栈。
-            当您在列表中添加一项，称为推入元素，
-            当您从列表中移除一项时，称为弹出元素。
+            //計算兩個日期的時間間隔
+            //計算兩個日期的時間間隔
+            DateTime dt2 = new DateTime(1974, 9, 24);
+            DateTime dt1 = new DateTime(1999, 3, 8);
+            string diff = DateDiff(dt1, dt2);
+            richTextBox1.Text += "時間間隔 : " + diff + "\n";
+        }
 
-
-            属性	描述
-            Count	获取 Stack 中包含的元素个数。
-
-            下表列出了 Stack 类的一些常用的 方法：
-            序号	方法名 & 描述
-            1	public virtual void Clear();
-            从 Stack 中移除所有的元素。
-            2	public virtual bool Contains( object obj );
-            判断某个元素是否在 Stack 中。
-            3	public virtual object Peek();
-            返回在 Stack 的顶部的对象，但不移除它。
-            4	public virtual object Pop();
-            移除并返回在 Stack 的顶部的对象。
-            5	public virtual void Push( object obj );
-            向 Stack 的顶部添加一个对象。
-            6	public virtual object[] ToArray();
-            复制 Stack 到一个新的数组中。
-            */
-
-
-            Stack st = new Stack();
-
-            st.Push('A');
-            st.Push('M');
-            st.Push('G');
-            st.Push('W');
-
-            Console.WriteLine("Current stack: ");
-            foreach (char c in st)
-            {
-                Console.Write(c + " ");
-            }
-            Console.WriteLine();
-
-            st.Push('V');
-            st.Push('H');
-            Console.WriteLine("The next poppable value in stack: {0}",
-            st.Peek());
-            Console.WriteLine("Current stack: ");
-            foreach (char c in st)
-            {
-                Console.Write(c + " ");
-            }
-            Console.WriteLine();
-
-            Console.WriteLine("Removing values ");
-            st.Pop();
-            st.Pop();
-            st.Pop();
-
-            Console.WriteLine("Current stack: ");
-            foreach (char c in st)
-            {
-                Console.Write(c + " ");
-            }
+        /// <summary>
+        /// 計算兩個日期的時間間隔
+        /// </summary>
+        /// <param name="DateTime1">第一個日期和時間</param>
+        /// <param name="DateTime2">第二個日期和時間</param>
+        /// <returns></returns>
+        private string DateDiff(DateTime DateTime1, DateTime DateTime2)
+        {
+            string dateDiff = null;
+            TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
+            TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+            dateDiff = ts.Days.ToString() + "天"
+                + ts.Hours.ToString() + "小時"
+                + ts.Minutes.ToString() + "分鐘"
+                + ts.Seconds.ToString() + "秒";
+            return dateDiff;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -760,12 +723,30 @@ namespace vcs_Mix06
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //星期幾
+            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+
+            richTextBox1.Text += week + "\n";
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
+            //從windows剪貼板獲取內容
+            IDataObject iData = Clipboard.GetDataObject();
+            if (iData.GetDataPresent(DataFormats.Text))
+            {
+                richTextBox1.Text += "取得文字:\n";
+                Console.WriteLine((String)iData.GetData(DataFormats.Text));
+            }
+            if (iData.GetDataPresent(DataFormats.Bitmap))
+            {
+                richTextBox1.Text += "取得圖片\n";
+                Image img = (Bitmap)iData.GetData(DataFormats.Bitmap);
+                //pictureBox1.Image = img;
+            }
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -801,19 +782,145 @@ namespace vcs_Mix06
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //統計英文文本中的單詞數並排序
+            //統計英文文本中的單詞數並排序
 
+            string filename = @"C:\______test_files\__RW\_txt\english_text.txt";
+            StatisticsWords(filename);
+        }
+
+        public void StatisticsWords(string path)
+        {
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("文件不存在！");
+                return;
+            }
+            Hashtable ht = new Hashtable(StringComparer.OrdinalIgnoreCase);
+            StreamReader sr = new StreamReader(path, System.Text.Encoding.UTF8);
+            string line = sr.ReadLine();
+
+            string[] wordArr = null;
+            int num = 0;
+            while (line.Length > 0)
+            {
+                //   MatchCollection mc =  Regex.Matches(line, @"\b[a-z]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                //foreach (Match m in mc)
+                //{
+                //    if (ht.ContainsKey(m.Value))
+                //    {
+                //        num = Convert.ToInt32(ht[m.Value]) + 1;
+                //        ht[m.Value] = num;
+                //    }
+                //    else
+                //    {
+                //        ht.Add(m.Value, 1);
+                //    }
+                //}
+                //line = sr.ReadLine();
+
+                wordArr = line.Split(' ');
+                foreach (string s in wordArr)
+                {
+                    if (s.Length == 0)
+                        continue;
+                    //去除標點
+                    line = Regex.Replace(line, @"[\p{P}*]", "", RegexOptions.Compiled);
+                    //將單詞加入哈希表
+                    if (ht.ContainsKey(s))
+                    {
+                        num = Convert.ToInt32(ht[s]) + 1;
+                        ht[s] = num;
+                    }
+                    else
+                    {
+                        ht.Add(s, 1);
+                    }
+                }
+                line = sr.ReadLine();
+            }
+
+            ArrayList keysList = new ArrayList(ht.Keys);
+            //對Hashtable中的Keys按字母序排列
+            keysList.Sort();
+            //按次數進行插入排序【穩定排序】，所以相同次數的單詞依舊是字母序
+            string tmp = String.Empty;
+            int valueTmp = 0;
+            for (int i = 1; i < keysList.Count; i++)
+            {
+                tmp = keysList[i].ToString();
+                valueTmp = (int)ht[keysList[i]];//次數
+                int j = i;
+                while (j > 0 && valueTmp > (int)ht[keysList[j - 1]])
+                {
+                    keysList[j] = keysList[j - 1];
+                    j--;
+                }
+                keysList[j] = tmp;//j=0
+            }
+            //打印出來
+            foreach (object item in keysList)
+            {
+                //Console.WriteLine((string)item + ":" + (string)ht[item]);
+                Console.WriteLine(item.ToString() + ":" + ht[item].ToString());
+            }
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
+            DateTime dt = DateTime.Now;
+
+            string filename = String.Format("{0}-{1}-{2}_{3}-{4}-{5}",
+                                            dt.Year, dt.Month, dt.Day,
+                                            dt.Hour, dt.Minute,
+                                            dt.Second);
+
+            richTextBox1.Text += filename + "\n";
+
+
+            richTextBox1.Text += DateTime.Now.Ticks.ToString() + "\n";
+
+
+            richTextBox1.Text += Environment.NewLine + "Conversion finished @ " + DateTime.Now.ToString();
+
+
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //MD5驗證  32 位元
 
+            string data = "hello world";
+            string key = "123";
+            string result = Md5Sum(data + key);  // 返回
+            richTextBox1.Text += result + "\n";
+
+        }
+
+
+        public static string Md5Sum(string strToEncrypt)
+        {
+            // 將需要加密的字符串轉為byte數組
+            byte[] bs = UTF8Encoding.UTF8.GetBytes(strToEncrypt);
+
+            // 創建md5 對象
+            System.Security.Cryptography.MD5 md5;
+            md5 = System.Security.Cryptography.MD5CryptoServiceProvider.Create();
+
+            // 生成16位的二進制校驗碼
+            byte[] hashBytes = md5.ComputeHash(bs);
+
+            // 轉為32位字符串
+            string hashString = "";
+            for (int i = 0; i < hashBytes.Length; i++)
+            {
+                hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
+            }
+
+            return hashString.PadLeft(32, '0');
         }
 
         private void button27_Click(object sender, EventArgs e)

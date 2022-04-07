@@ -7214,31 +7214,6 @@ namespace vcs_Draw9_Example
 
         private void button49_Click(object sender, EventArgs e)
         {
-            //使用Brush類繪製圖像
-            string filename = @"C:\______test_files\_icon\唐.ico";
-
-            Image theimage;
-            Image smallimage;
-            SetStyle(ControlStyles.Opaque, true);
-            Bounds = new Rectangle(0, 0, 500, 500);
-            theimage = new Bitmap(filename);
-            smallimage = new Bitmap(theimage, new Size(theimage.Width, theimage.Height));
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.FillRectangle(Brushes.White, ClientRectangle);
-
-            Brush brush = new TextureBrush(smallimage, new Rectangle(0, 0, smallimage.Width, smallimage.Height));
-            //用圖像創建畫筆,來繪制圖像
-            g.FillEllipse(brush, new Rectangle(0, 200, 200, 200));
-            //用圖像創建剛筆,來繪制圖像
-            Pen pen = new Pen(brush, 20);
-            g.DrawRectangle(pen, new Rectangle(250, 200, 200, 200));
-            //用圖像繪製文本
-            Font font = new Font("Times New Roman", 60, FontStyle.Bold | FontStyle.Italic);
-            g.DrawString("Hello Image !!", font, brush, new Rectangle(0, 0, 500, font.Height));
-
-            brush.Dispose();
-            font.Dispose();
         }
 
         private void button50_Click(object sender, EventArgs e)
@@ -8187,7 +8162,89 @@ namespace vcs_Draw9_Example
 
         private void button62_Click(object sender, EventArgs e)
         {
+            //折線圖
+            Pic();
+        }
 
+        private void Pic()
+        {
+            //測試數據
+            DataTable table = new DataTable("Data");
+            DataRow Dr;
+            DataColumn Dc = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn Dc2 = new DataColumn("Num", Type.GetType("System.Int32"));
+            DataColumn Dc3 = new DataColumn("name", Type.GetType("System.String"));
+            table.Columns.Add(Dc);
+            table.Columns.Add(Dc2);
+            table.Columns.Add(Dc3);
+            Random rnd = new Random();
+            for (int n = 0; n < 61; n++)
+            {
+                Dr = table.NewRow();
+                Dr[0] = n;
+                Dr[1] = rnd.Next(10, 140);
+                Dr[2] = n.ToString();
+                table.Rows.Add(Dr);
+            }
+            //畫圖參數
+            int BG_Width = 450;
+            int BG_Height = 180;
+            //int Pic_Width = 450;
+            //int Pic_Height = 180;
+            int pic_X = 6;
+            int pic_H = 1;
+            int pic_tr = 5;
+            int pic_td = 12;
+            Rectangle rec = new Rectangle(50, 15, 360, 150);
+            Pen Pic_Bolder = new Pen(Color.Black, 1);
+            Pen Pic_line = new Pen(Color.Gray, 1);
+            Pen Pic_Data = new Pen(Color.Red, 2);
+            SolidBrush brusth = new SolidBrush(Color.Blue);
+            Point[] DataPt = new Point[table.Rows.Count];
+            int x;
+            int y;
+            for (int n = 0; n < table.Rows.Count; n++)
+            {
+                Dr = table.Rows[n];
+                x = (int)Dr[0] * pic_X + rec.X;
+                y = (int)Dr[1] * pic_H + rec.Y;
+                DataPt[n] = new Point(x, y);
+            }
+            Bitmap Bg = new Bitmap(BG_Width, BG_Height, PixelFormat.Format24bppRgb);
+            Graphics Ph = Graphics.FromImage(Bg);
+            Ph.Clear(Color.White);
+            Ph.DrawRectangle(Pic_Bolder, rec);
+            //畫折線
+            Ph.DrawCurve(Pic_Data, DataPt);
+            //rec.
+            Point SPoint = new Point();
+            Point Epoint = new Point();
+            //畫橫線
+            for (int n = 1; n < pic_tr; n++)
+            {
+                //cell[0] = new Point(rec.X);
+                SPoint.X = 0 + rec.X;
+                SPoint.Y = n * 30 + rec.Y;
+                Epoint.X = rec.Width + rec.X;
+                Epoint.Y = n * 30 + rec.Y;
+                Ph.DrawLine(Pic_line, SPoint, Epoint);
+            }
+            //畫豎線
+            for (int n = 1; n < pic_td; n++)
+            {
+                SPoint.X = n * 30 + rec.X;
+                SPoint.Y = rec.Y;
+                Epoint.X = n * 30 + rec.X;
+                Epoint.Y = rec.Height + rec.Y;
+                Ph.DrawLine(Pic_line, SPoint, Epoint);
+            }
+            //畫標題
+            string Title = "畫折線測試";
+            SolidBrush brush = new SolidBrush(Color.RoyalBlue);
+            Ph.DrawString(Title, new Font("Franklin Gothic Demi", 12, FontStyle.Italic), brush, new Point(200, 0));
+            Ph.Save();
+            //Bg.Save(Response.OutputStream, ImageFormat.Gif);
+            pictureBox1.Image = Bg;
         }
 
         private void button63_Click(object sender, EventArgs e)
