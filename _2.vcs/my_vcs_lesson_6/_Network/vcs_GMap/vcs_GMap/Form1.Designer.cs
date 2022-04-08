@@ -63,6 +63,8 @@
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btn_draw_profile = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -439,11 +441,31 @@
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(1107, 82);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(166, 20);
+            this.comboBox1.TabIndex = 36;
+            // 
+            // btn_draw_profile
+            // 
+            this.btn_draw_profile.Location = new System.Drawing.Point(1144, 104);
+            this.btn_draw_profile.Name = "btn_draw_profile";
+            this.btn_draw_profile.Size = new System.Drawing.Size(100, 40);
+            this.btn_draw_profile.TabIndex = 37;
+            this.btn_draw_profile.Text = "畫出輪廓圖";
+            this.btn_draw_profile.UseVisualStyleBackColor = true;
+            this.btn_draw_profile.Click += new System.EventHandler(this.btn_draw_profile_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1341, 712);
+            this.Controls.Add(this.btn_draw_profile);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
@@ -522,6 +544,8 @@
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btn_draw_profile;
     }
 }
 

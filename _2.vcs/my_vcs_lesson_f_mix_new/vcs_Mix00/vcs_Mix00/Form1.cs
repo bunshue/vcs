@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Net;
+using System.Collections;
 using System.Drawing.Text;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
@@ -21,8 +22,7 @@ using System.Media;     //for SoundPlayer
 using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/加入參考/.Net/System.Web
 using System.Globalization; //for CultureInfo
 using System.Text.RegularExpressions;
-
-using System.Collections;
+using System.Runtime.InteropServices;
 
 using System.Xml;
 using System.Xml.Linq;
@@ -161,44 +161,10 @@ namespace vcs_Mix00
             return crc;
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
-            double realCoord, imagCoord;
-            double realTemp, imagTemp, realTemp2, arg;
-            int iterations;
-            for (imagCoord = 1.2; imagCoord >= -1.2; imagCoord -= 0.05)
-            {
-                for (realCoord = -0.6; realCoord <= 1.77; realCoord += 0.03)
-                {
-                    iterations = 0;
-                    realTemp = realCoord;
-                    imagTemp = imagCoord;
-                    arg = (realCoord * realCoord) + (imagCoord * imagCoord);
-                    while ((arg < 4) && (iterations < 40))
-                    {
-                        realTemp2 = (realTemp * realTemp) - (imagTemp * imagTemp) - realCoord;
-                        imagTemp = (2 * realTemp * imagTemp) - imagCoord;
-                        realTemp = realTemp2;
-                        arg = (realTemp * realTemp) + (imagTemp * imagTemp);
-                        iterations += 1;
-                    }
-                    switch (iterations % 4)
-                    {
-                        case 0:
-                            richTextBox1.Text += ".";break;
-                        case 1:
-                            richTextBox1.Text += "o";break;
-                        case 2:
-                            richTextBox1.Text += "O";break;
-                        case 3:
-                            richTextBox1.Text += "@";break;
-                    }
-                }
-                richTextBox1.Text += "\n";
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)

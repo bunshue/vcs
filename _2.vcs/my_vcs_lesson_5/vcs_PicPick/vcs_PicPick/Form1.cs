@@ -313,10 +313,7 @@ namespace vcs_PicPick
             VisibleBm.Dispose();
             ScreenBm = null;
             VisibleBm = null;
-
         }
-
-
- 
     }
 }
+

@@ -54,7 +54,7 @@ namespace WinBaseTerm
             {
                 settings = new CommBaseTermSettings();
             }
-            settings.baudRate = 9600;
+            settings.baudRate = 115200;
             settings.txWhenRxXoff = false;
             term = new MonitorTerm();
             form = new GPSReadForm();

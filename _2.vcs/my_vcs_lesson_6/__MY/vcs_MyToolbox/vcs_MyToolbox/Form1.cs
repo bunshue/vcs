@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;        //for Directory
 using System.Diagnostics;   //for Process
 using System.Drawing.Drawing2D; //for SmoothingMode
+using System.Drawing.Imaging;   //for ImageFormat
 
 /*
 儲存參數
@@ -37,6 +38,8 @@ namespace vcs_MyToolbox
 {
     public partial class Form1 : Form
     {
+        //string foldername = @"C:\dddddddddd";
+
         string mp3_filename = string.Empty;
         string pdf_filename = string.Empty;
         string video_filename = string.Empty;
@@ -62,6 +65,12 @@ namespace vcs_MyToolbox
 
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
+
+        // The image of the whole screen.
+        private Bitmap ScreenBm, VisibleBm;
+
+        // The area we are selecting.
+        private int X0, Y0, X1, Y1;
 
         AxWindowsMediaPlayer axWindowsMediaPlayer1;
 
@@ -148,6 +157,10 @@ namespace vcs_MyToolbox
         TextBox tb_pdf_page = new TextBox();
         PictureBox pictureBox1 = new PictureBox();
         RichTextBox richTextBox1 = new RichTextBox();
+        GroupBox groupBox1 = new GroupBox();
+        Button btn_capture0 = new Button();
+        Button btn_capture1 = new Button();
+        Button btn_capture2 = new Button();
 
         public Form1()
         {
@@ -157,6 +170,19 @@ namespace vcs_MyToolbox
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            /*
+            //檢查存圖的資料夾
+            if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(foldername);
+                richTextBox1.Text += "已建立一個新資料夾: " + foldername + "\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "資料夾: " + foldername + " 已存在，不用再建立\n";
+            }
+            */
 
             add_my_toolbox_controls();
 
@@ -361,7 +387,7 @@ namespace vcs_MyToolbox
             y_st = 200;
 
             w = 120;
-            h = 120;
+            h = 90;
 
             dx = w + 20;
             dy = h + 20;
@@ -451,18 +477,49 @@ namespace vcs_MyToolbox
             btn_22.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_22);	// 將控件加入表單
 
+            //groupBox1 ST
+            groupBox1.Width = w * 2 - 20;
+            groupBox1.Height = h + 35;
+            groupBox1.Text = "截圖";
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            groupBox1.BackColor = Color.Pink;
+            //groupBox1.Click += btn_click_function;	// 加入事件
+            this.Controls.Add(groupBox1);	// 將控件加入表單
+
+            btn_capture0.Width = w * 3 / 4;
+            btn_capture0.Height = h * 3 / 5;
+            btn_capture0.Text = "截圖存檔";
+            btn_capture0.Location = new Point(10, 10);
+            btn_capture0.Click += btn_click_function;	// 加入事件
+            this.groupBox1.Controls.Add(btn_capture0);	// 將控件加入表單
+
+            btn_capture1.Width = w * 3 / 4;
+            btn_capture1.Height = h * 3 / 5;
+            btn_capture1.Text = "全屏截圖";
+            btn_capture1.Location = new Point(110, 10);
+            btn_capture1.Click += btn_click_function;	// 加入事件
+            this.groupBox1.Controls.Add(btn_capture1);	// 將控件加入表單
+
+            btn_capture2.Width = w * 3 / 4;
+            btn_capture2.Height = h * 3 / 5;
+            btn_capture2.Text = "自選截圖";
+            btn_capture2.Location = new Point(110, 65);
+            btn_capture2.Click += btn_click_function;	// 加入事件
+            this.groupBox1.Controls.Add(btn_capture2);	// 將控件加入表單
+            //groupBox1 SP
+
             //lb_main_mesg1.Text = "AAAAAAA";
             lb_main_mesg1.Font = new Font("標楷體", 20);
             lb_main_mesg1.ForeColor = Color.Red;
             //lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 3 - 16);
+            lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 3 - 16 + 150);
             lb_main_mesg1.AutoSize = true;
             this.Controls.Add(lb_main_mesg1);     // 將控件加入表單
 
             //pictureBox1
             pictureBox1.Width = w * 3 + 40;
             pictureBox1.Height = h / 2;
-            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 22);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 22 + 150);
             pictureBox1.BackColor = Color.Pink;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             //pictureBox1.Click += pictureBox1_click;	// 加入事件
@@ -474,7 +531,7 @@ namespace vcs_MyToolbox
 
             richTextBox1.Width = w * 3 + 40;
             richTextBox1.Height = h * 1 + 10;
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 4 - 40);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 4 - 40 + 150);
             this.Controls.Add(richTextBox1);	// 將控件加入表單
 
             int W = w * 3 + 20 * 4 + 20;
@@ -808,12 +865,231 @@ namespace vcs_MyToolbox
             {
                 text = btn_22.Text;
             }
+            else if (sender.Equals(btn_capture0))
+            {
+                text = btn_capture0.Text;
+
+                //截圖存檔
+
+                IDataObject dataObject = Clipboard.GetDataObject();   //GetDataObject() 讀取當前剪貼簿中的數據內容
+                if (dataObject.GetDataPresent(DataFormats.Bitmap))  //圖片類
+                {
+                    richTextBox1.Text += "取得圖片\n";
+
+                    //取出Bitmap資料, 可做處理
+                    Bitmap bitmap1 = (Bitmap)dataObject.GetData(DataFormats.Bitmap);  //取得Bitmap資料
+                    if (bitmap1 != null)
+                    {
+                        string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                        try
+                        {
+                            bitmap1.Save(@filename, ImageFormat.Jpeg);
+
+                            richTextBox1.Text += "存檔成功\n";
+                            richTextBox1.Text += "已存檔 : " + filename + "\n";
+                            timer1.Enabled = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                        }
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "無圖可存\n";
+                        timer1.Enabled = true;
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text += "無圖片\n";
+                    timer1.Enabled = true;
+                }
+
+
+
+
+            }
+            else if (sender.Equals(btn_capture1))
+            {
+                text = btn_capture1.Text;
+
+                //全螢幕截圖
+
+                this.Hide();    // Hide this form.
+                delay(100);
+
+                /*
+                //全螢幕截圖 法一
+                //建立空白畫布
+                Bitmap bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+                //取得畫布的繪圖物件用以繪圖
+                Graphics g = Graphics.FromImage(bitmap1);
+                g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
+                IntPtr dc1 = g.GetHdc();
+                g.ReleaseHdc(dc1);
+
+                //將裁切出的矩形存成JPG圖檔。
+                string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                try
+                {
+                    bitmap1.Save(@filename, ImageFormat.Jpeg);
+                    //richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
+                    label1.Text = "存檔成功";
+                    timer1.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+                */
+
+                //全螢幕截圖 法二
+                // Get the screen's image.
+                using (Bitmap bitmap1 = GetScreenImage())
+                {
+                    //存成bmp檔
+                    string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                    bitmap1.Save(filename, ImageFormat.Jpeg);
+                    richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
+                    timer1.Enabled = true;
+                }
+                this.Show();    // Show this form again.
+
+            }
+            else if (sender.Equals(btn_capture2))
+            {
+                text = btn_capture2.Text;
+
+                //自選截圖
+                // Get the whole screen's image.
+                ScreenBm = GetScreenImage();
+
+                // Display a copy.
+                VisibleBm = (Bitmap)ScreenBm.Clone();
+
+                // Display it.
+                //button1.Visible = false;
+                //button2.Visible = false;
+                //button3.Visible = false;
+                this.BackgroundImage = VisibleBm;
+                this.Location = new Point(0, 0);
+                this.ClientSize = VisibleBm.Size;
+                this.MouseDown += Form1_MouseDown;
+                this.Show();
+            }
             else
             {
                 text = "unknown";
             }
 
-            //show_main_message1("你按了 " + text, S_OK, 30);
+            show_main_message1("你按了 " + text, S_OK, 30);
+        }
+
+        // Get the screen's image.
+        private Bitmap GetScreenImage()
+        {
+            // Make a bitmap to hold the result.
+            Bitmap bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb);
+
+            // Copy the image into the bitmap.
+            using (Graphics g = Graphics.FromImage(bitmap1))
+            {
+                g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+            }
+
+            // Return the result.
+            return bitmap1;
+        }
+
+        private void delay(int delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        }
+
+        // Start selecting an area.
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            //richTextBox1.Text += "Down\n";
+            X0 = e.X;
+            Y0 = e.Y;
+            X1 = e.X;
+            Y1 = e.Y;
+
+            this.MouseDown -= Form1_MouseDown;
+            this.MouseMove += Form1_MouseMove;
+            this.MouseUp += Form1_MouseUp;
+        }
+
+        // Continue selecting an area.
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            X1 = e.X;
+            Y1 = e.Y;
+
+            using (Graphics gr = Graphics.FromImage(VisibleBm))
+            {
+                // Copy the original image.
+                gr.DrawImage(ScreenBm, 0, 0);
+
+                // Draw the selected area.
+                Rectangle rect = new Rectangle(
+                    Math.Min(X0, X1),
+                    Math.Min(Y0, Y1),
+                    Math.Abs(X1 - X0),
+                    Math.Abs(Y1 - Y0));
+                gr.DrawRectangle(Pens.Yellow, rect);
+            }
+            this.Refresh();
+        }
+
+        // Finish selecting an area.
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            //richTextBox1.Text += "Up\n";
+            this.Visible = false;
+            this.MouseMove -= Form1_MouseMove;
+            this.MouseUp -= Form1_MouseUp;
+
+            // Save the selected part of the image.
+            int wid = Math.Abs(X1 - X0);
+            int hgt = Math.Abs(Y1 - Y0);
+            Rectangle dest_rect = new Rectangle(0, 0, wid, hgt);
+            Rectangle source_rect = new Rectangle(
+                Math.Min(X0, X1),
+                Math.Min(Y0, Y1),
+                Math.Abs(X1 - X0),
+                Math.Abs(Y1 - Y0));
+
+            using (Bitmap selection = new Bitmap(wid, hgt))
+            {
+                // Copy the selected area.
+                using (Graphics gr = Graphics.FromImage(selection))
+                {
+                    gr.DrawImage(ScreenBm, dest_rect, source_rect, GraphicsUnit.Pixel);
+                }
+
+                // Save the selected area.
+                //存成bmp檔
+                string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                selection.Save(filename, ImageFormat.Jpeg);
+                richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
+                Form1_Load(sender, e);
+                timer1.Enabled = true;
+                this.Show();    // Show this form again.
+            }
+
+            // Dispose of the other bitmaps.
+            this.BackgroundImage = null;
+            ScreenBm.Dispose();
+            VisibleBm.Dispose();
+            ScreenBm = null;
+            VisibleBm = null;
         }
 
         //string filename = @"C:\______test_files\_icon\快.ico";

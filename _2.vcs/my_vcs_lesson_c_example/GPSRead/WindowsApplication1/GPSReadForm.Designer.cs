@@ -50,12 +50,12 @@
             this.cbDK.FormattingEnabled = true;
             this.cbDK.Location = new System.Drawing.Point(37, 6);
             this.cbDK.Name = "cbDK";
-            this.cbDK.Size = new System.Drawing.Size(122, 20);
+            this.cbDK.Size = new System.Drawing.Size(177, 20);
             this.cbDK.TabIndex = 1;
             // 
             // bt
             // 
-            this.bt.Location = new System.Drawing.Point(175, 4);
+            this.bt.Location = new System.Drawing.Point(269, 6);
             this.bt.Name = "bt";
             this.bt.Size = new System.Drawing.Size(75, 23);
             this.bt.TabIndex = 2;
@@ -66,16 +66,16 @@
             // 
             // rt
             // 
-            this.rt.Location = new System.Drawing.Point(4, 61);
+            this.rt.Location = new System.Drawing.Point(4, 35);
             this.rt.Name = "rt";
-            this.rt.Size = new System.Drawing.Size(585, 204);
+            this.rt.Size = new System.Drawing.Size(807, 554);
             this.rt.TabIndex = 3;
             this.rt.Text = "";
             this.rt.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // btClear
             // 
-            this.btClear.Location = new System.Drawing.Point(12, 32);
+            this.btClear.Location = new System.Drawing.Point(736, 566);
             this.btClear.Name = "btClear";
             this.btClear.Size = new System.Drawing.Size(75, 23);
             this.btClear.TabIndex = 2;
@@ -86,7 +86,7 @@
             // lbM
             // 
             this.lbM.AutoSize = true;
-            this.lbM.Location = new System.Drawing.Point(94, 42);
+            this.lbM.Location = new System.Drawing.Point(392, 14);
             this.lbM.Name = "lbM";
             this.lbM.Size = new System.Drawing.Size(71, 12);
             this.lbM.TabIndex = 4;
@@ -96,13 +96,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 277);
+            this.ClientSize = new System.Drawing.Size(823, 601);
             this.Controls.Add(this.lbM);
-            this.Controls.Add(this.rt);
             this.Controls.Add(this.btClear);
             this.Controls.Add(this.bt);
             this.Controls.Add(this.cbDK);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.rt);
             this.Name = "GPSReadForm";
             this.Text = "GPS读取";
             this.Load += new System.EventHandler(this.GPSReadForm_Load);

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+//關於Dictionary<K,V>，的key是不能重復的，如果添加相同的key就會拋出 ArgumentException異常
+
 namespace vcs_Dictionary
 {
     public partial class Form1 : Form
@@ -140,6 +142,8 @@ namespace vcs_Dictionary
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Dictionary字典用法3\n";
+
             Dictionary<string, long> population_dict = new Dictionary<string, long>();
 
             // Population data from https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population.
@@ -210,7 +214,8 @@ namespace vcs_Dictionary
 
             richTextBox1.Text += "顯示此Dictionary的資料\n";
             richTextBox1.Text += "共有 " + population_dict.Count.ToString() + " 筆資料\n";
-            foreach (string n in population_dict.Keys)
+
+            foreach (string n in population_dict.Keys)  //使用Keys和values屬性迭代集合中的鍵和值, 也可從Values找回Keys
             {
                 long p;
                 richTextBox1.Text += "找到 州 " + n + "\t";
@@ -219,6 +224,13 @@ namespace vcs_Dictionary
                 else
                     p = 0;
                 richTextBox1.Text += "人口 : " + p.ToString() + "\n";
+            }
+
+            richTextBox1.Text += "另法顯示所有資料\n";
+            //迭代集合中的各個項，把每個項作為一個 KeyValuePair<K,V>實例來獲取所有Dictionary資料
+            foreach (KeyValuePair<string, long> pop in population_dict)
+            {
+                richTextBox1.Text += "州 : " + pop.Key + "\t人口 : " + pop.Value + "\n";
             }
 
             string state_name;
