@@ -34,28 +34,46 @@ namespace vcs_test_all_01_Random
             //button
             x_st = 12;
             y_st = 12;
-            dx = 170;
-            dy = 48;
-
+            dx = 160;
+            dy = 70;
 
             pictureBox1.Size = new Size(256, 256);
             pictureBox1.Location = new Point(550, 20);
+
+            pictureBox2.Size = new Size(256 / 2, 50);
+            pictureBox2.Location = new Point(550, 20 + 256 + 10);
+
+            pictureBox3.Size = new Size(256 / 2, 50);
+            pictureBox3.Location = new Point(550 + 256 / 2, 20 + 256 + 10);
+
+            tb_random_text1.Size = new Size(256, 50);
+            tb_random_text1.Location = new Point(550, 20 + 256 + 10 + 50 + 10);
+
+            tb_random_text2.Size = new Size(256, 50);
+            tb_random_text2.Location = new Point(550, 20 + 256 + 10 + 50 + 10 + 50 + 10);
+
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            bt_random1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_random2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            bt_random3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            bt_random4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            bt_random5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            bt_random6.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            bt_random_color.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            bt_random_text1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            bt_random7.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_random0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_random1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_random2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_random3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_random4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_random5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+
+            bt_random6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_random7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             bt_random8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             bt_random9.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             bt_random10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             bt_random11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            bt_random12.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+
+            bt_random12.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_random13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_random14.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            bt_random15.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            bt_random16.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            bt_random17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
 
             richTextBox1.Location = new Point(x_st + dx * 7 + 20, y_st + dy * 0);
             richTextBox1.Size = new Size(680, 1000);
@@ -98,6 +116,110 @@ namespace vcs_test_all_01_Random
             bt_exit.BringToFront();     //移到最上層
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_random0_Click(object sender, EventArgs e)
+        {
+            //產生隨機漢字
+            //獲取GB2312編碼頁（表）
+            Encoding gb = Encoding.GetEncoding("gb2312");
+
+            int len = 20;
+            //調用函數產生隨機中文漢字編碼
+            object[] bytes = CreateRegionCode2(len);
+
+            //根據漢字編碼的字節數組解碼出中文漢字
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
+
+            }
+            richTextBox1.Text += "\n";
+
+        }
+
+
+        /**/
+        /*
+    此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將
+    四個字節數組存儲在object數組中。
+    參數：strlength，代表需要產生的漢字個數
+    */
+        public static object[] CreateRegionCode2(int strlength)
+        {
+            //定義一個字符串數組儲存漢字編碼的組成元素
+            string[] rBase = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+
+            Random rnd = new Random();
+
+            //定義一個object數組用來
+            object[] bytes = new object[strlength];
+
+            /**/
+            /*每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中
+            每個漢字有四個區位碼組成
+            區位碼第1位和區位碼第2位作為字節數組第一個元素
+            區位碼第3位和區位碼第4位作為字節數組第二個元素
+            */
+
+            for (int i = 0; i < strlength; i++)
+            {
+                //區位碼第1位
+                int r1 = rnd.Next(11, 14);
+                string str_r1 = rBase[r1].Trim();
+
+                //區位碼第2位
+                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的種子避免產生重復值
+                int r2;
+                if (r1 == 13)
+                {
+                    r2 = rnd.Next(0, 7);
+                }
+                else
+                {
+                    r2 = rnd.Next(0, 16);
+                }
+                string str_r2 = rBase[r2].Trim();
+
+                //區位碼第3位
+                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r3 = rnd.Next(10, 16);
+                string str_r3 = rBase[r3].Trim();
+
+                //區位碼第4位
+                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r4;
+                if (r3 == 10)
+                {
+                    r4 = rnd.Next(1, 16);
+                }
+                else if (r3 == 15)
+                {
+                    r4 = rnd.Next(0, 15);
+                }
+                else
+                {
+                    r4 = rnd.Next(0, 16);
+                }
+                string str_r4 = rBase[r4].Trim();
+
+                //定義兩個字節變量存儲產生的隨機漢字區位碼
+                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
+                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
+                //將兩個字節變量存儲在字節數組中
+                byte[] str_r = new byte[] { byte1, byte2 };
+
+                //將產生的一個漢字的字節數組放入object數組中
+                bytes.SetValue(str_r, i);
+
+            }
+
+            return bytes;
+        }
 
         private void bt_random1_Click(object sender, EventArgs e)
         {
@@ -276,6 +398,8 @@ namespace vcs_test_all_01_Random
         List<MySearchInfo> result = new List<MySearchInfo>();
         private void bt_random7_Click(object sender, EventArgs e)
         {
+            //隨機產生一些英文字母, 統計各種字母出現次數
+
             int i;
             int j;
 
@@ -533,11 +657,30 @@ namespace vcs_test_all_01_Random
         }
         //亂數方法比較 SP
 
-        private void bt_random_color_Click(object sender, EventArgs e)
+        private void bt_random13_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "隨機顏色\t顏色陣列與使用\n";
+
         }
 
+        private void bt_random14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_random15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_random16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_random17_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private Color[] Colors = new Color[]
         {
@@ -713,9 +856,9 @@ namespace vcs_test_all_01_Random
 
         //隨機生成漢字（摘錄保存的代碼），生成漢字摘錄代碼
         /*
-        此函数在汉字编码范围内随机创建含两个元素的十六进制字节数组，每个字节数组代表一个汉字，并将
-        四个字节数组存储在object数组中。
-        参数：strlength，代表需要产生的汉字个数
+        此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將
+        四個字節數組存儲在object數組中。
+        參數：strlength，代表需要產生的漢字個數
         */
         public static object[] CreateRegionCode(int strlength)
         {
@@ -788,10 +931,12 @@ namespace vcs_test_all_01_Random
 
         private string RandomText1()
         {
+            //產生隨機漢字
             //獲取GB2312編碼頁（表）
             Encoding gb = Encoding.GetEncoding("gb2312");
 
-            //调用函数产生4个随机中文汉字编码
+            int len = 20;
+            //調用函數產生隨機中文漢字編碼
             object[] bytes = CreateRegionCode(4);
 
             //根據漢字編碼的字節數組解碼出中文漢字
@@ -824,16 +969,66 @@ namespace vcs_test_all_01_Random
 
             //richTextBox1.Text += index.ToString() + " ";
 
-            //bt_random_color.BackColor = Colors[index % len];  //same
-            bt_random_color.BackColor = RandomColor();          //same
+            //pictureBox2.BackColor = Colors[index % len];  //same
+            pictureBox2.BackColor = RandomColor();          //same
 
-            bt_random_text1.Text = RandomText1();
+            Random rd = new Random();
+            pictureBox3.BackColor = Color.FromArgb(
+                (byte)rd.Next(0, 255),
+                (byte)rd.Next(0, 255),
+                (byte)rd.Next(0, 255));
+
+            tb_random_text1.Text = RandomText1();
+
+            //產生隨機字串
+            len = 10;
+            string result = GenCode(len);
+
+            tb_random_text2.Text = "隨機字串 : " + result;
 
             // 產生任意矩陣
             // Randomize.
             Values.Randomize2();
             this.pictureBox1.Refresh();
 
+            /*
+            //任意中文字, 有點問題
+            int lower = 0x20;
+            int upper = 0xD7FF;
+
+            result = NextString(lower, upper, 4);
+            richTextBox1.Text += result + "\n";
+            */
+
+            //亂數產生Unicode中文範圍的中文字元
+            //呼叫視窗使用Unicode字串來顯示
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            //產生1000字Unicode中文字
+            for (int i = 0; i < 4; i++)
+            {
+                //Console.Write(getRandomUnicode().Substring(0, 1));
+                richTextBox1.Text += getRandomUnicode().Substring(0, 1);
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        public string NextString(int charLowerBound, int charUpperBound, int length)
+        {
+            Random r = new Random();
+            return new String(Enumerable.Repeat(0, length).Select(p => (char)r.Next(charLowerBound, charUpperBound)).ToArray());
+        }
+
+        //取得一個亂數的Unicode中文字
+        private static string getRandomUnicode()
+        {
+            //Unicode中文字範圍
+            int iMin = Convert.ToInt32("4E00", 16);
+            int iMax = Convert.ToInt32("9FFF", 16); //不考慮最末16個空白
+            //隨機一個中文字之整數
+            System.Random oRnd = new System.Random(System.Guid.NewGuid().GetHashCode());
+            int iChar = oRnd.Next(iMin, iMax);
+            //整數轉成Byte[]，再轉成字串
+            return System.Text.Encoding.Unicode.GetString(System.BitConverter.GetBytes(iChar));
         }
 
         // Draw the values.
@@ -865,20 +1060,6 @@ namespace vcs_test_all_01_Random
                     }
                 }
             }
-        }
-
-        private void bt_random_text1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "隨機文字\t產生隨機簡體中文字\n";
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //產生隨機字串
-            int len = 10;
-            string result = GenCode(len);
-
-            richTextBox1.Text += "產生隨機字串 : " + result + "\n";
         }
 
         private string GenCode(int num)
@@ -917,6 +1098,4 @@ namespace vcs_test_all_01_Random
             }
         }
     }
-
-
 }

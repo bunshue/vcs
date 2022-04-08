@@ -617,112 +617,11 @@ namespace vcs_Mix06
 
             // TBD
 
-
-
-
-
-
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //獲取GB2312編碼頁（表）
-            Encoding gb = Encoding.GetEncoding("gb2312");
-
-            int len = 20;
-            //調用函數產生隨機中文漢字編碼
-            object[] bytes = CreateRegionCode(len);
-
-            //根據漢字編碼的字節數組解碼出中文漢字
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
-
-            }
-            richTextBox1.Text += "\n";
-
-        }
-
-
-        /**/
-        /*
-    此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將
-    四個字節數組存儲在object數組中。
-    參數：strlength，代表需要產生的漢字個數
-    */
-        public static object[] CreateRegionCode(int strlength)
-        {
-            //定義一個字符串數組儲存漢字編碼的組成元素
-            string[] rBase = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-
-            Random rnd = new Random();
-
-            //定義一個object數組用來
-            object[] bytes = new object[strlength];
-
-            /**/
-            /*每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中
-            每個漢字有四個區位碼組成
-            區位碼第1位和區位碼第2位作為字節數組第一個元素
-            區位碼第3位和區位碼第4位作為字節數組第二個元素
-            */
-
-            for (int i = 0; i < strlength; i++)
-            {
-                //區位碼第1位
-                int r1 = rnd.Next(11, 14);
-                string str_r1 = rBase[r1].Trim();
-
-                //區位碼第2位
-                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的種子避免產生重復值
-                int r2;
-                if (r1 == 13)
-                {
-                    r2 = rnd.Next(0, 7);
-                }
-                else
-                {
-                    r2 = rnd.Next(0, 16);
-                }
-                string str_r2 = rBase[r2].Trim();
-
-                //區位碼第3位
-                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
-                int r3 = rnd.Next(10, 16);
-                string str_r3 = rBase[r3].Trim();
-
-                //區位碼第4位
-                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
-                int r4;
-                if (r3 == 10)
-                {
-                    r4 = rnd.Next(1, 16);
-                }
-                else if (r3 == 15)
-                {
-                    r4 = rnd.Next(0, 15);
-                }
-                else
-                {
-                    r4 = rnd.Next(0, 16);
-                }
-                string str_r4 = rBase[r4].Trim();
-
-                //定義兩個字節變量存儲產生的隨機漢字區位碼
-                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
-                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
-                //將兩個字節變量存儲在字節數組中
-                byte[] str_r = new byte[] { byte1, byte2 };
-
-                //將產生的一個漢字的字節數組放入object數組中
-                bytes.SetValue(str_r, i);
-
-            }
-
-            return bytes;
         }
 
         private void button16_Click(object sender, EventArgs e)

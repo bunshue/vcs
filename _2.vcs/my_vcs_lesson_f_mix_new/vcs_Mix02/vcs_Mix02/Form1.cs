@@ -384,12 +384,6 @@ namespace vcs_Mix02
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            Random rd = new Random();
-            this.BackColor = Color.FromArgb(
-                (byte)rd.Next(0, 255),
-                (byte)rd.Next(0, 255),
-                (byte)rd.Next(0, 255));
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -807,44 +801,11 @@ namespace vcs_Mix02
         private void button22_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //亂數產生Unicode中文範圍的中文字元
-            //呼叫視窗使用Unicode字串來顯示
-            Console.OutputEncoding = System.Text.Encoding.Unicode;
-            //產生1000字Unicode中文字
-            for (int i = 0; i < 1000; i++)
-            {
-                //Console.Write(getRandomUnicode().Substring(0, 1));
-                richTextBox1.Text += getRandomUnicode().Substring(0, 1);
-            }
-        }
-
-        //取得一個亂數的Unicode中文字
-        private static string getRandomUnicode()
-        {
-            //Unicode中文字範圍
-            int iMin = Convert.ToInt32("4E00", 16);
-            int iMax = Convert.ToInt32("9FFF", 16); //不考慮最末16個空白
-            //隨機一個中文字之整數
-            System.Random oRnd = new System.Random(System.Guid.NewGuid().GetHashCode());
-            int iChar = oRnd.Next(iMin, iMax);
-            //整數轉成Byte[]，再轉成字串
-            return System.Text.Encoding.Unicode.GetString(System.BitConverter.GetBytes(iChar));
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            int lower = 0x20;
-            int upper = 0xD7FF;
-
-            string result = NextString(lower, upper, 30);
-            richTextBox1.Text += result + "\n";
-        }
-
-        public string NextString(int charLowerBound, int charUpperBound, int length)
-        {
-            Random r = new Random();
-            return new String(Enumerable.Repeat(0, length).Select(p => (char)r.Next(charLowerBound, charUpperBound)).ToArray());
         }
 
         private void button24_Click(object sender, EventArgs e)

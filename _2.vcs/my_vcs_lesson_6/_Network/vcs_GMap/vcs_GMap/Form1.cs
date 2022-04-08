@@ -375,7 +375,9 @@ namespace vcs_GMap
             points.Add(new PointLatLng(24.8304419206983, 121.004705429077));
             points.Add(new PointLatLng(24.8322335163524, 121.001529693604));
             points.Add(new PointLatLng(24.8334798284745, 120.99835395813));
-            points.Add(new PointLatLng(24.8361282000777, 120.99723815918));
+
+            /*
+             * points.Add(new PointLatLng(24.8361282000777, 120.99723815918));
             points.Add(new PointLatLng(24.83425876718, 120.99268913269));
             points.Add(new PointLatLng(24.8313766694912, 120.987539291382));
             points.Add(new PointLatLng(24.8322335163524, 120.982732772827));
@@ -389,7 +391,7 @@ namespace vcs_GMap
             points.Add(new PointLatLng(24.8460201458526, 120.995092391968));
             points.Add(new PointLatLng(24.8475778605281, 120.995864868164));
             points.Add(new PointLatLng(24.8492913240205, 120.99663734436));
-
+            */
             DrawRoute(points);
         }
 
@@ -407,9 +409,23 @@ namespace vcs_GMap
             markersOverlay.Routes.Clear();
             markersOverlay.Routes.Add(playRoute);
 
+            gMapControl1.ZoomAndCenterRoute(playRoute); //將playRoute這條路初始為檢視中心，顯示時以playRoute為中心顯示
+
             //算距離
             string dist = ((float)playRoute.Distance * 1000f).ToString("0.##") + " m";
             richTextBox1.Text += "總距離 : " + dist + "\n";
+
+            /*
+            //畫起點
+            PointLatLng point = new PointLatLng(points.First().Lat, points.First().Lng);
+            GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green_big_go);
+            markersOverlay.Markers.Add(marker);
+
+            //畫終點
+            point = new PointLatLng(points.Last().Lat, points.Last().Lng);
+            marker = new GMarkerGoogle(point, GMarkerGoogleType.red_big_stop);
+            markersOverlay.Markers.Add(marker);
+            */
 
             //畫範圍
             GMapPolygon kmlpolygon = new GMapPolygon(points, "kmlpolygon");
@@ -518,25 +534,6 @@ namespace vcs_GMap
 
         private void button5_Click(object sender, EventArgs e)
         {
-        }
-
-        public static void DrawMap(GMapControl map, List<Point> points, Color color, bool includeMarkers)
-        {
-            List<PointLatLng> allMapPoints = points.Select(point => new PointLatLng(point.X, point.Y)).ToList();
-
-            GMapRoute route = new GMapRoute(allMapPoints, "Route");
-            route.Stroke = new Pen(color, 3.0f);
-            map.ZoomAndCenterRoute(route);
-
-            GMapOverlay overlay = new GMapOverlay("Overlay");
-            if (includeMarkers)
-            {
-                //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMapMarkerGoogleGreen(new PointLatLng(allMapPoints.First().Lat, allMapPoints.First().Lng)));
-                //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMarkerGoogleType.GMapMarkerGoogleGreen(new PointLatLng(allMapPoints.First().Lat, allMapPoints.First().Lng)));
-                //overlay.Markers.Add(new GMap.NET.WindowsForms.Markers.GMapMarkerGoogleRed(new PointLatLng(allMapPoints.Last().Lat, allMapPoints.Last().Lng)));
-            }
-            overlay.Routes.Add(route);
-            map.Overlays.Add(overlay);
         }
 
         /// <summary>
@@ -735,52 +732,34 @@ namespace vcs_GMap
 
         private void button11_Click(object sender, EventArgs e)
         {
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
             //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
             //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
             //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
 
             //竹北座標
             latitude = 24.838;   //緯度
             longitude = 121.003; //經度
             gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-
+            //gMapControl1.SetPositionByKeywords("china,harbin");//設定初始中心為china harbin  已不支援此功能
             gMapControl1.Zoom = 14; //當前比例
 
-            gMapControl1.EmptyTileColor = System.Drawing.Color.Aquamarine;
-            //gMapControl1.GrayScaleMode = true;    //黑白地圖
-            gMapControl1.Manager.UsePlacemarkCache = false;
-            gMapControl1.Manager.UseMemoryCache = true;
-            //gMapControl1.Manager.CancelTileCaching();
+            update_controls_info();
 
-            foreach (GMapOverlay overlay in gMapControl1.Overlays)
-            {
-                foreach (var route in overlay.Routes)
-                {
-                    var r = new GMapRoute(route.Name);
-                    r.Points.AddRange(route.Points);
-                    r.Stroke = route.Stroke;
-                }
-            }
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //初始化地圖為google map 並設定初始中心位置為china
-            gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleChinaMapProvider.Instance;
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-            gMapControl1.Position = new PointLatLng(45.74740199642105, 126.69570922851562);//此為定初始位置的另一種方式
-            //gMapControl1.SetPositionByKeywords("china,harbin");//設定初始中心為china harbin  已不支援此功能
-
+            //以上相同
 
             //建立圖層(overlay)和標籤(marker)，將標籤加入圖層，再將圖層加入控制元件中
-            //在(45.7，126.695）上繪製一綠色點
-            GMapMarker gMapMarker = new GMarkerGoogle(new PointLatLng(45.74740199642105, 126.69570922851562), GMarkerGoogleType.green);
+            //在(latitude, longitude）上繪製一綠色點
+            PointLatLng point = new PointLatLng(latitude, longitude);
+            GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
             GMapOverlay gMapOverlay = new GMapOverlay("mark");　　//建立圖層
-            gMapOverlay.Markers.Add(gMapMarker);　　//向圖層中新增標籤
+            gMapOverlay.Markers.Add(marker);　　//向圖層中新增標籤
             gMapControl1.Overlays.Add(gMapOverlay);　　//向控制元件中新增圖層
-
 
             //畫出道路
 
@@ -788,7 +767,7 @@ namespace vcs_GMap
             //應該是已不支援由地址搜尋座標功能
             string start = "花園街, 哈爾濱, china";
             string end = "密山路, 哈爾濱, china";
-            MapRoute route = GMap.NET.MapProviders.GoogleMapProvider.Instance.GetRoute(
+            MapRoute route = GoogleMapProvider.Instance.GetRoute(
               start, end, false, false, 15);//找到start到end的一條路
 
 
@@ -941,6 +920,22 @@ Point.Add(new Point((int)gp.X - Origin.X - OriginOffset.X, (int)gp.Y - Origin.Y 
 points.Add(NewPointLatLng);
 */
 
+            gMapControl1.EmptyTileColor = System.Drawing.Color.Aquamarine;
+            //gMapControl1.GrayScaleMode = true;    //黑白地圖
+            gMapControl1.Manager.UsePlacemarkCache = false;
+            gMapControl1.Manager.UseMemoryCache = true;
+            //gMapControl1.Manager.CancelTileCaching();
+
+            foreach (GMapOverlay overlay in gMapControl1.Overlays)
+            {
+                foreach (var route in overlay.Routes)
+                {
+                    var r = new GMapRoute(route.Name);
+                    r.Points.AddRange(route.Points);
+                    r.Stroke = route.Stroke;
+                }
+            }
+
 
 
 
@@ -1008,7 +1003,6 @@ points.Add(NewPointLatLng);
 
             double lat_center = (lat_south + lat_north) / 2;
             double lng_center = (lng_east + lng_west) / 2;
-
 
             int i;
             for (i = 0; i < len / 10; i++)
