@@ -1,5 +1,29 @@
 
 
+
+        private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
+
+            richTextBox1.Text += "CurrentDir1 = " + Environment.CurrentDirectory + "\n";
+            richTextBox1.Text += "CurrentDir2 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent + "\n";
+            richTextBox1.Text += "CurrentDir3 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent + "\n";
+            richTextBox1.Text += "CurrentDir4 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName + "\n";
+            richTextBox1.Text += "CurrentDir5 = " + CurrentDir + "\n";
+
+            /*
+            CurrentDir1 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap\bin\Debug
+            CurrentDir2 = bin
+            CurrentDir3 = vcs_GMap
+            CurrentDir4 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap
+            CurrentDir5 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap
+
+            //private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
+            */
+
+
+
+
+
+
                         GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
                         marker.ToolTipText = place.Value.Address;
                         marker.ToolTipMode = MarkerTooltipMode.Always;

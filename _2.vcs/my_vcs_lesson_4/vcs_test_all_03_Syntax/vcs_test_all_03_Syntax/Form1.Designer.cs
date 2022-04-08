@@ -306,7 +306,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(180, 40);
             this.button15.TabIndex = 16;
-            this.button15.Text = "Dictionary字典用法1";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -317,7 +316,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(180, 40);
             this.button16.TabIndex = 17;
-            this.button16.Text = "測試Dictionary與Class語法";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -361,7 +359,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(180, 40);
             this.button20.TabIndex = 21;
-            this.button20.Text = "Dictionary字典用法2";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -416,7 +413,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(180, 40);
             this.button26.TabIndex = 26;
-            this.button26.Text = "Dictionary字典用法3";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
