@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Net;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
@@ -15,7 +16,7 @@ using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
 using System.Text.RegularExpressions;
-
+using System.Runtime.InteropServices;
 using System.Collections;   //for Stack
 
 //參考/加入參考 /COM/Microsoft Shell Controls and Automation
@@ -27,6 +28,21 @@ namespace vcs_Mix06
     public partial class Form1 : Form
     {
         string ffmpeg = @"C:\______test_files\_exe\ffmpeg\ffmpeg.exe";
+
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorPos(out POINT lpPoint);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            public int X;
+            public int Y;
+            public POINT(int x, int y)
+            {
+                this.X = x;
+                this.Y = y;
+            }
+        }
 
         public Form1()
         {
@@ -93,6 +109,8 @@ namespace vcs_Mix06
             button33.Location = new Point(x_st + dx * 2, y_st + dy * 9);
             button34.Location = new Point(x_st + dx * 2, y_st + dy * 10);
             button35.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+
+            label1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 10);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -926,19 +944,16 @@ namespace vcs_Mix06
         private void button27_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -974,6 +989,14 @@ namespace vcs_Mix06
         private void button35_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            POINT pt = new POINT();
+            GetCursorPos(out pt);
+            //label1.Text = "滑鼠位置 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")";    same
+            label1.Text = "滑鼠位置 : (" + string.Format("X:{0}, Y:{1}", pt.X, pt.Y) + ")";
         }
     }
 

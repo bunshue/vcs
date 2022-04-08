@@ -110,7 +110,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(90, 40);
             this.button2.TabIndex = 2;
-            this.button2.Text = "test";
+            this.button2.Text = "竹北 畫範圍";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -148,7 +148,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(90, 40);
             this.button5.TabIndex = 6;
-            this.button5.Text = "test";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -158,7 +157,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(90, 40);
             this.button6.TabIndex = 7;
-            this.button6.Text = "畫範圍(竹北)";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -380,7 +378,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(90, 40);
             this.button11.TabIndex = 30;
-            this.button11.Text = "GMapRoute";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -400,6 +397,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(90, 40);
             this.button13.TabIndex = 32;
+            this.button13.Text = "量測距離";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -409,6 +407,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(90, 40);
             this.button14.TabIndex = 32;
+            this.button14.Text = "測試開啟GPS資料檔";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -436,6 +435,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(90, 40);
             this.button17.TabIndex = 35;
+            this.button17.Text = "Test";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

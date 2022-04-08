@@ -1175,6 +1175,7 @@ namespace vcs_Mix01
                 richTextBox1.Text += "備註:" + sComm + "\n";
 
             }
+            fs.Close();
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1246,9 +1247,8 @@ namespace vcs_Mix01
 
                 System.Console.WriteLine("备注:" + sComm);
                 richTextBox1.Text += "备注:" + sComm + "\n";
-
-                fs.Close();
             }
+            fs.Close();
         }
 
         private void button23_Click(object sender, EventArgs e)
