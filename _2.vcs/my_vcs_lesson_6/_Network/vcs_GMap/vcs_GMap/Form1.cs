@@ -38,11 +38,6 @@ namespace vcs_GMap
         //需要绘制的经纬度点集
         private List<PointLatLng> line_point = new List<PointLatLng>();
 
-        /// <summary>
-        /// 路径轨迹
-        /// </summary> 
-        private Point RightBDPoint;
-
         TrackBar trackBar1 = new TrackBar();
 
         string gMapCacheLocation = "GMapCache"; //緩存位置
@@ -232,7 +227,7 @@ namespace vcs_GMap
             trackBar1.Width = 30;
             trackBar1.Location = new Point(gMapControl1.Location.X + gMapControl1.Width + 10, gMapControl1.Location.Y + gMapControl1.Height / 20);
             trackBar1.ValueChanged += trackBar1_ValueChanged;
-            this.Controls.Add(trackBar1);
+            Controls.Add(trackBar1);
             trackBar1.BringToFront();
         }
 
@@ -480,18 +475,18 @@ namespace vcs_GMap
             richTextBox1.Text += "總距離 : " + dist + "\n";
 
             /*
-            //畫起點
+            richTextBox1.Text += "畫起點\n";
             PointLatLng point = new PointLatLng(points.First().Lat, points.First().Lng);
             GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green_big_go);
             markersOverlay.Markers.Add(marker);
 
-            //畫終點
+            richTextBox1.Text += "畫終點\n";
             point = new PointLatLng(points.Last().Lat, points.Last().Lng);
             marker = new GMarkerGoogle(point, GMarkerGoogleType.red_big_stop);
             markersOverlay.Markers.Add(marker);
             */
 
-            //畫範圍
+            richTextBox1.Text += "畫範圍 GMapPolygon\n";
             GMapPolygon kmlpolygon = new GMapPolygon(points, "kmlpolygon");
             kmlpolygon.Stroke.Color = Color.Purple;
             kmlpolygon.Fill = new SolidBrush(Color.FromArgb(30, Color.Blue));
@@ -511,7 +506,6 @@ namespace vcs_GMap
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "畫範圍 GMapPolygon 1\n";
-
             List<PointLatLng> points = new List<PointLatLng>();
             points.Add(new PointLatLng(24.8516278269032, 121.004190444946));
             points.Add(new PointLatLng(24.8357387372186, 121.020069122314));
@@ -522,10 +516,6 @@ namespace vcs_GMap
             polygon.Stroke = new Pen(Color.Red, 1);
             markers_polygon.Polygons.Add(polygon);
             gMapControl1.Overlays.Add(markers_polygon);
-
-            //gMapControl1.Refresh();
-            //gMapControl1.ShowTileGridLines = true;//显示瓦片，也就是显示方格
-            //gMapControl1.ReloadMap();
 
             richTextBox1.Text += "畫範圍 GMapPolygon 2\n";
             //List<PointLatLng> points = new List<PointLatLng>();
@@ -572,12 +562,6 @@ namespace vcs_GMap
         {
         }
 
-        /// <summary>
-        /// 地图拖拽向量
-        /// 在进行地图的缩放后需要将该偏移量清零
-        /// </summary>
-        private int DragOffsetX = 0, DragOffsetY = 0;
-
         void mapControl_MouseDown(object sender, MouseEventArgs e)
         {
             //richTextBox1.Text += "MouseDown\n";
@@ -592,12 +576,6 @@ namespace vcs_GMap
                     draw_line_point();
                 }
             }
-            else if (e.Button == MouseButtons.Right)
-            {
-                //记录鼠标按下位置
-                RightBDPoint.X = e.X;
-                RightBDPoint.Y = e.Y;
-            }
         }
 
         void mapControl_MouseMove(object sender, MouseEventArgs e)
@@ -608,21 +586,12 @@ namespace vcs_GMap
 
         void mapControl_MouseUp(object sender, MouseEventArgs e)
         {
-            //richTextBox1.Text += "MouseUp\n";
-            if (e.Button == MouseButtons.Right)
-            {
-                //在拖拽地图后地图原点和视窗原点的偏移量
-                DragOffsetX = DragOffsetX + e.X - RightBDPoint.X;
-                DragOffsetY = DragOffsetY + e.Y - RightBDPoint.Y;
-            }
         }
 
         void mapControl_OnMapZoomChanged()
         {
             //richTextBox1.Text += "OnMapZoomChanged\n";
-            //在进行地图的缩放后，视图的原点会重新回到MapControl控件的中心点
-            DragOffsetX = 0;
-            DragOffsetY = 0;
+            trackBar1.Value = (int)gMapControl1.Zoom;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -672,6 +641,8 @@ namespace vcs_GMap
                     //其畫筆 route.Stroke
                 }
             }
+
+            richTextBox1.Text += "Zoom :\t" + gMapControl1.Zoom.ToString() + "\n";
         }
 
         private void bt_save_Click(object sender, EventArgs e)
@@ -826,7 +797,7 @@ namespace vcs_GMap
             PointLatLng startPoint = new PointLatLng(24.8493692081609, 120.996723175049);
             PointLatLng endPoint = new PointLatLng(24.8403343208788, 121.021013259888);
 
-            RoutingProvider rp = this.gMapControl1.MapProvider as RoutingProvider;
+            RoutingProvider rp = gMapControl1.MapProvider as RoutingProvider;
             //獲取路徑
             //根據起止點經緯度查找路徑
             //MapRoute GetRoute(PointLatLng start, PointLatLng end, bool avoidHighways, bool walkingMode, int Zoom);
@@ -836,7 +807,7 @@ namespace vcs_GMap
             //walkingMode：是否步行
             //zoom：查找路徑時的zoom
 
-            MapRoute route = rp.GetRoute(startPoint, endPoint, false, false, (int)this.gMapControl1.Zoom);
+            MapRoute route = rp.GetRoute(startPoint, endPoint, false, false, (int)gMapControl1.Zoom);
             if (route != null)
             {
                 //添加routes圖層
@@ -845,8 +816,8 @@ namespace vcs_GMap
                 r.Stroke = new Pen(Color.Red, 3);
                 routes.Routes.Add(r);
                 //添加到地圖
-                this.gMapControl1.Overlays.Add(routes);
-                this.gMapControl1.ZoomAndCenterRoute(r);
+                gMapControl1.Overlays.Add(routes);
+                gMapControl1.ZoomAndCenterRoute(r);
             }
             else
             {
@@ -970,12 +941,11 @@ namespace vcs_GMap
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //添加多邊形 北京故宮
+            richTextBox1.Text += "畫範圍 GMapPolygon 北京故宮\n";
 
-            //添加多邊形和添加標記的原理是一樣的。
+            gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
 
             GMapOverlay polygons = new GMapOverlay("polygons");
-            // 多邊形的頂點
             List<PointLatLng> points = new List<PointLatLng>();
             points.Add(new PointLatLng(39.92244, 116.3922));
             points.Add(new PointLatLng(39.92280, 116.4015));
@@ -985,14 +955,25 @@ namespace vcs_GMap
             polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
             polygon.Stroke = new Pen(Color.Red, 1);
             polygons.Polygons.Add(polygon);
-            this.gMapControl1.Overlays.Add(polygons);
+            gMapControl1.Overlays.Add(polygons);
 
+            latitude = (39.92244 + 39.92280 + 39.91378 + 39.91346) / 4;
+            longitude = (116.3922 + 116.4015 + 116.4019 + 116.3926) / 4;
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 15; //當前比例
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
             //重新載入
             gMapControl1.ReloadMap();
+
+            //gMapControl1.Refresh();
+            //gMapControl1.ShowTileGridLines = true;//显示瓦片，也就是显示方格
+            //gMapControl1.ReloadMap();
+
+
+
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -1006,7 +987,7 @@ namespace vcs_GMap
             //將標記添加到圖層
             markers.Markers.Add(marker);
             //將圖層添加到地圖
-            this.gMapControl1.Overlays.Add(markers);
+            gMapControl1.Overlays.Add(markers);
 
             /*
             //添加線
@@ -1023,12 +1004,13 @@ namespace vcs_GMap
             //将route添加到图层
             lay.Routes.Add(route1);
             //将图层添加到地图
-            this.gMapControl1.Overlays.Add(lay);
+            gMapControl1.Overlays.Add(lay);
             //更新显示route
-            this.gMapControl1.UpdateRouteLocalPosition(route1);
-*/
+            gMapControl1.UpdateRouteLocalPosition(route1);
+            */
 
-            //添加多邊形
+
+            richTextBox1.Text += "畫範圍 GMapPolygon\n";
 
             //创建“lay”图层
             GMapOverlay lay = new GMapOverlay("lay");
@@ -1045,9 +1027,9 @@ namespace vcs_GMap
             //将polygon添加到图层
             lay.Polygons.Add(polygon);
             //将图层添加到地图
-            this.gMapControl1.Overlays.Add(lay);
+            gMapControl1.Overlays.Add(lay);
             //更新显示polygon
-            this.gMapControl1.UpdatePolygonLocalPosition(polygon);
+            gMapControl1.UpdatePolygonLocalPosition(polygon);
 
         }
 

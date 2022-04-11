@@ -570,16 +570,14 @@ namespace vcs_test_all_03_Syntax
             cookie.No = "A123";
             cookie.Name = "LION_MOUSE";
             cookie.Price = 1234;
-            Console.WriteLine();
-            Console.WriteLine(" ====== 產品單價清單 ====== ");
-            Console.WriteLine();
+            richTextBox1.Text += "====== 產品單價清單 ======\n";
             // 印出game及cookie結構的編號、品名及單價
-            Console.WriteLine(" 產品編號：{0} ", game.No);
-            Console.WriteLine(" 產品名稱：{0} ", game.Name);
-            Console.WriteLine(" 產品單價：{0} ", game.Price);
-            Console.WriteLine(" 產品編號：{0} ", cookie.No);
-            Console.WriteLine(" 產品名稱：{0} ", cookie.Name);
-            Console.WriteLine(" 產品單價：{0} ", cookie.Price);
+            richTextBox1.Text += "產品編號： " + game.No + "\n";
+            richTextBox1.Text += "產品名稱： " + game.Name + "\n";
+            richTextBox1.Text += "產品單價： " + game.Price + "\n";
+            richTextBox1.Text += "產品編號： " + cookie.No + "\n";
+            richTextBox1.Text += "產品名稱： " + cookie.Name + "\n";
+            richTextBox1.Text += "產品單價： " + cookie.Price + "\n";
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -800,6 +798,20 @@ namespace vcs_test_all_03_Syntax
             dragon = 5
         }
 
+        //ENUM的用法
+        // 定義WeekDays列舉內容7個成員
+        // 用來表示一星期的星期日到星期六的列舉常數值
+        enum WeekDays : int
+        {
+            Monday = 1,      	// 星期一
+            Tuesday = 2,         // 星期二
+            Wednesday = 3,       // 星期三
+            Thursday = 4,        // 星期四
+            Friday = 5,          // 星期五
+            Saturday = 6,        // 星期六
+            Sunday = 7           // 星期日
+        };
+
         private void button29_Click(object sender, EventArgs e)
         {
             //ENUM的用法
@@ -836,6 +848,11 @@ namespace vcs_test_all_03_Syntax
                 ANIMAL a = (ANIMAL)c;
                 richTextBox1.Text += a.ToString() + "\n";
             }
+
+            richTextBox1.Text += "ENUM的用法\n";
+            // 取出WeekDays.Wednesday列舉常數值之後再轉成整數
+            richTextBox1.Text += "星期三列舉常數值：" + (int)WeekDays.Wednesday + "\n";
+            richTextBox1.Text += "星期五列舉常數值：" + (int)WeekDays.Friday + "\n";
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -1196,15 +1213,12 @@ namespace vcs_test_all_03_Syntax
             // C# Extension Method: Guid - In
             if (guid.In(guids))
             {
-                Console.WriteLine("{0} exists in the list.", guid);
-                richTextBox1.Text += "111 guid = " + guid + "\n";
+                richTextBox1.Text += "guid = " + guid + "exists in the list.\n";
             }
             else
             {
-                Console.WriteLine("{0} doesn't exists in the list.", guid);
-                richTextBox1.Text += "222 guid = " + guid + "\n";
+                richTextBox1.Text += "guid = " + guid + "doesn't exists in the list.\n";
             }
-
         }
 
         //swap範例 ST

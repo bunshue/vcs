@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Drawing.Imaging;   //for ImageFormat
-using System.Drawing.Drawing2D;
+using System.Drawing.Drawing2D;  // for GraphicsPath
 using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
@@ -1158,6 +1158,40 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
+            Graphics g = pictureBox1.CreateGraphics();
+
+            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+
+            Point p1 = new Point(10, 20); // 直線的兩端
+            Point p2 = new Point(100, 20);
+
+            //GraphicsPath - AddLine() 頭尾相連的兩條直線
+            gp.AddLine(p1, p2); // 將 直線 加入到 GraphicsPath物件
+            //gp.AddLine(10, 20, 100, 20);  same
+
+            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
+
+            //gp.CloseFigure(); // 先封閉 第一條直線
+
+            Point p3 = new Point(10, 50); // 直線的兩端
+            Point p4 = new Point(100, 50);
+            gp.AddLine(p3, p4); // 將第二條直線 加入到 GraphicsPath物件
+
+            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
+
+            /*
+            //GraphicsPath - AddLines() 一系列的直線
+            //GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+            Point[] pt = new Point[3];  // 點陣列
+            pt[0] = new Point(20, 120);
+            pt[1] = new Point(120, 20);
+            pt[2] = new Point(220, 120);
+
+            gp.AddLines(pt); // 將 一系列的直線 加入到 GraphicsPath物件
+            //gp.CloseFigure(); // 封閉 該形狀
+
+            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
+            */
         }
 
         private void button24_Click(object sender, EventArgs e)

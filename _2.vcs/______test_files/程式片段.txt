@@ -58,54 +58,6 @@ return System.Text.RegularExpressions.Regex.IsMatch(str_url, @"http(s)?://([/w-]
 
 
 
-
-class 範例
-
-        public class Person
-        {
-            public string Name { get; set; }
-            public int Age { get; set; }
-            public int Weight { get; set; }
-            public int Height { get; set; }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Person p = new Person() { Name = "Hong", Age = 25, Weight = 65, Height = 170 };
-
-        }
-
-
-class 範例
-        public class Classmate  //事件訂閱者
-        {
-            private string name;
-            public Classmate(string Name)
-            {
-                name = Name;
-            }
-            public void SendResponse()  //事件處理函數，要與自定義委托類型匹配
-            {
-                Console.WriteLine("來自：" + this.name + "的回復: 已經收到邀請，隨時可以開始！");
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Classmate classmate1 = new Classmate("Alice");
-            Classmate classmate2 = new Classmate("Banana");
-            Classmate classmate3 = new Classmate("Cherry");
-            Classmate classmate4 = new Classmate("Daisy");
-
-            classmate1.SendResponse();
-            classmate2.SendResponse();
-            classmate3.SendResponse();
-            classmate4.SendResponse();
-
-
-        }
-
-
 //是否是指名serial port讀取長度 未達目的決不罷休?
 serial.Read(bytData, 0, bytData.Length, Timeout.Infinite);
 
@@ -495,7 +447,7 @@ EMGU用的 在sugar使用OK
 
 
 
-測試out功能
+測試out 語法
 
 C#通過POP3協議驗證 Email 賬號
 
@@ -977,50 +929,8 @@ C#處理圖像有三種方法:像素法、內存法和指針法。
 首先在處理圖像的窗體類中定義一個字符串(圖像文件名)和一個Bitmap類型的數據成員(圖像對象),然後可以利用OpenFileDialog選擇圖像文件並讀取文件名,再使用Image.FromFile創建圖形對象。比如:
 
 
-
-
-
-
-
-
-
-
-
-private void USBPort_USBDeviceAttached(objectsender, 
-             USBClass.USBDeviceEventArgs e) 
-{ 
-   if (!MyUSBDeviceConnected) 
-   { 
-      if(USBClass.GetUSBDevice(MyDeviceVID, MyDevicePID, 
-                                ref USBDeviceProperties, false)) 
-      { 
-         //My Device is connected 
-         MyUSBDeviceConnected = true; 
-      } 
-   } 
-} 
-  
-private void USBPort_USBDeviceRemoved(objectsender, 
-             USBClass.USBDeviceEventArgs e) 
-{ 
-   if(!USBClass.GetUSBDevice(MyDeviceVID, MyDevicePID, 
-                              ref USBDeviceProperties, false)) 
-   { 
-      //My Device is removed 
-      MyUSBDeviceConnected = false; 
-   } 
-}
-
-
-
-
- 
-
-
 Image.FromFile可開啟影像檔:
  "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
- 
-
 
 //--------------------------------------------------------------------------------------------------------------------------
 
@@ -1219,32 +1129,24 @@ P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
 //---Assembly 用法 ST-----------------------------------------------------------------------------------------------------------------------
        
 using System.Reflection;
-
-            Assembly asm = Assembly.GetExecutingAssembly();
-            string name = asm.GetName().Name;
-            richTextBox1.Text += "name : " + name + "\n";
+	Assembly asm = Assembly.GetExecutingAssembly();
+	string name = asm.GetName().Name;
+	richTextBox1.Text += "name : " + name + "\n";
 
 
 private void AboutBox_Load(object sender, EventArgs e)
 {
-　AssemblyInfoClass myAssembly = new AssemblyInfoClass();
-　labelProductName.Text = "產品名稱：" + myAssembly.Product;
-　labelVersion.Text = "版本：" + myAssembly.Version;
-　labelCopyright.Text = "版權宣告：" + myAssembly.Copyright;
-　labelCompanyName.Text = "公司名稱：" + myAssembly.Company;
-　textBoxDescription.Text = "細部描述：" +
-　myAssembly.Description;
+	AssemblyInfoClass myAssembly = new AssemblyInfoClass();
+	labelProductName.Text = "產品名稱：" + myAssembly.Product;
+	labelVersion.Text = "版本：" + myAssembly.Version;
+	labelCopyright.Text = "版權宣告：" + myAssembly.Copyright;
+	labelCompanyName.Text = "公司名稱：" + myAssembly.Company;
+	textBoxDescription.Text = "細部描述：" +
+	myAssembly.Description;
 }
 
-
-     
-           
                 string location = Assembly.GetExecutingAssembly().Location;
                 string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
- 
-            
-            
-
 
 一、獲取程序集版本
 label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -1577,34 +1479,6 @@ if(f3.DialogResult == DialogREsult.OK)
   ....
   
 
-
-
-
-
-vcs richtextbox2
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            richTextBox1.Focus();
-        }
-
-        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (Control.ModifierKeys == Keys.Control)
-            {
-                if (e.KeyCode == Keys.F)
-                {
-                    richTextBox2.Text += "§A«�trl + F\n";
-                }
-
-
-            }
-
-
-        }
-
-
-
         private void button12_Click(object sender, EventArgs e)
         {
             //html轉txt
@@ -1679,31 +1553,6 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/191690.html
 C# 條形碼操作【源碼下載】
 
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185924.html
-
-
-用C#獲取計算機磁盤空間
-在System.IO命名空間下的DriveInfo類的GetDrives()方法可以用來獲得計算機上的所有邏輯驅動器的名稱。DriveInfo類的TotalSize屬性可義獲得磁盤的空間大小。主要代碼如下。
-private void Form1_Load(object sender, EventArgs e)
-{
-    System.IO.DriveInfo[] drive=System.IO.DriveInfo.GetDrives();
-    for (int i = 0; i < drive.Length; i++)
-    {
-        comboBox1.Items.Add(drive[i].Name);
-    }
-}
-private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
-{
-    System.IO.DriveInfo[] drive = System.IO.DriveInfo.GetDrives();
-    for (int i = 0; i < drive.Length; i++)
-    {
-        if (comboBox1.SelectedItem.ToString() == drive[i].Name)
-        {
-            textBox1.Text = Convert.ToString(drive[i].TotalSize/ 1024);
-        }
-    }
-}
-
-
 
 
 網站的標識圖片怎麼修改？
@@ -2150,9 +1999,6 @@ using System.Data.OleDb;
 class TestADO
 {  
     static void Main(string[] args)  
-
-
-
 {  
         string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;DataSource=c: est.mdb;  
         string strSQL = INSERT INTO Employee(FirstName, LastName) VALUES(''FirstName'', ''LastName'') ;  
@@ -2471,13 +2317,7 @@ ed2k://|file|[www.ed2k.online][C#%E5%85%A8%E8%83%BD%E9%80%9F%E6%9F%A5%E5%AE%9D%E
     {
     	get { return resultBmp; }
     }
-    
-    
-
 }
-
-    
-    
 
 
 
@@ -2708,24 +2548,20 @@ C# TabControl標簽的隱藏
 
 c#畫三角形、並填充顏色
 
-代碼 1     Point point1 = new Point(0, 0);
-2     Point point2 = new Point(11, 0);
-3     Point point3 = new Point(5, 8);
-4     Point[] pntArr = {point1, point2, point3};
-5 
-6     e.Graphics.FillPolygon(Brushes.Red, pntArr);
+Point point1 = new Point(0, 0);
+Point point2 = new Point(11, 0);
+Point point3 = new Point(5, 8);
+Point[] pntArr = {point1, point2, point3};
+e.Graphics.FillPolygon(Brushes.Red, pntArr);
 
 
-代碼  1                 int len = 10;                       
- 2                 int x = 0;
- 3                 int y = 0;
- 4                 Point[] pntArr = new Point[3];
- 5                 pntArr[0] = new Point(x, y);
- 6                 pntArr[1] = new Point(x - len, y);
- 7                 pntArr[2] = new Point(x - len / 2, (int)(len * Math.Sqrt(3) / 2 + y));
- 8               &nbs 
-
-
+int len = 10;                       
+int x = 0;
+int y = 0;
+Point[] pntArr = new Point[3];
+pntArr[0] = new Point(x, y);
+pntArr[1] = new Point(x - len, y);
+pntArr[2] = new Point(x - len / 2, (int)(len * Math.Sqrt(3) / 2 + y));
 
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -3198,28 +3034,6 @@ VC#
 資料型態	string(字串) bool(布耳)
 各種控件	button richTextBox pictureBox timer
 
-ENUM的用法
-        // 定義WeekDays列舉內容7個成員
-        // 用來表示一星期的星期日到星期六的列舉常數值
-        enum WeekDays : int
-        {
-            Monday = 1,      	// 星期一
-            Tuesday = 2,         // 星期二
-            Wednesday = 3,       // 星期三
-            Thursday = 4,        // 星期四
-            Friday = 5,          // 星期五
-            Saturday = 6,        // 星期六
-            Sunday = 7           // 星期日
-        };
-
-        static void Main(string[] args)
-        {
-            // 取出WeekDays.Wednesday列舉常數值之後再轉成整數
-            Console.WriteLine("星期三列舉常數值：{0}", (int)WeekDays.Wednesday);
-            Console.WriteLine("星期五列舉常數值：{0}", (int)WeekDays.Friday);
-            Console.Read();
-        }
-        
 
 colsole mode的scanf        
         

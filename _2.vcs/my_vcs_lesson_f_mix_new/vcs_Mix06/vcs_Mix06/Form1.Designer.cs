@@ -88,6 +88,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(170, 70);
             this.button28.TabIndex = 115;
+            this.button28.Text = "抓取網頁資料 2";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -98,6 +99,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(170, 70);
             this.button27.TabIndex = 114;
+            this.button27.Text = "抓取網頁資料 1";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -182,6 +184,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(170, 70);
             this.button19.TabIndex = 106;
+            this.button19.Text = "class 範例 2";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -301,6 +304,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(170, 70);
             this.button20.TabIndex = 95;
+            this.button20.Text = "獲取計算機磁盤空間";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -344,6 +348,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(170, 70);
             this.button15.TabIndex = 91;
+            this.button15.Text = "class 範例";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

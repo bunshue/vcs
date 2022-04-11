@@ -50,6 +50,8 @@
             this.btn_west = new System.Windows.Forms.Button();
             this.bt_save = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -65,8 +67,6 @@
             this.button17 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btn_draw_profile = new System.Windows.Forms.Button();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -313,6 +313,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "MapProvider";
             // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Location = new System.Drawing.Point(20, 112);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(47, 16);
+            this.radioButton7.TabIndex = 5;
+            this.radioButton7.Text = "其他";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(20, 98);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(59, 16);
+            this.radioButton6.TabIndex = 4;
+            this.radioButton6.Text = "腳踏車";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
@@ -425,6 +447,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(90, 40);
             this.button15.TabIndex = 33;
+            this.button15.Text = "標示北京故宮";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -464,28 +487,6 @@
             this.btn_draw_profile.Text = "畫出輪廓圖";
             this.btn_draw_profile.UseVisualStyleBackColor = true;
             this.btn_draw_profile.Click += new System.EventHandler(this.btn_draw_profile_Click);
-            // 
-            // radioButton6
-            // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(20, 98);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(59, 16);
-            this.radioButton6.TabIndex = 4;
-            this.radioButton6.Text = "腳踏車";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // radioButton7
-            // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(20, 112);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(47, 16);
-            this.radioButton7.TabIndex = 5;
-            this.radioButton7.Text = "其他";
-            this.radioButton7.UseVisualStyleBackColor = true;
-            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // Form1
             // 

@@ -619,9 +619,34 @@ namespace vcs_Mix06
 
         }
 
+        public class Classmate  //事件訂閱者
+        {
+            private string name;
+            public Classmate(string Name)
+            {
+                name = Name;
+            }
+            public void SendResponse()  //事件處理函數，要與自定義委托類型匹配
+            {
+                Console.WriteLine("來自：" + this.name + "的回復: 已經收到邀請，隨時可以開始！");
+            }
+        }
+
         private void button15_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //c
+            Classmate classmate1 = new Classmate("Alice");
+            Classmate classmate2 = new Classmate("Banana");
+            Classmate classmate3 = new Classmate("Cherry");
+            Classmate classmate4 = new Classmate("Daisy");
+
+            classmate1.SendResponse();
+            classmate2.SendResponse();
+            classmate3.SendResponse();
+            classmate4.SendResponse();
+
+
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -666,15 +691,46 @@ namespace vcs_Mix06
             }
         }
 
+        public class Person
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+            public int Weight { get; set; }
+            public int Height { get; set; }
+        }
+
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //class 範例 2
+
+            Person p = new Person() { Name = "Hong", Age = 25, Weight = 65, Height = 170 };
 
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //獲取計算機磁盤空間
+            //在System.IO命名空間下的DriveInfo類的GetDrives()方法可以用來獲得計算機上的所有邏輯驅動器的名稱。DriveInfo類的TotalSize屬性可義獲得磁盤的空間大小。
+            System.IO.DriveInfo[] drive = System.IO.DriveInfo.GetDrives();
+            for (int i = 0; i < drive.Length; i++)
+            {
+                richTextBox1.Text += "取得磁碟 : " + drive[i].Name;
+
+                if (drive[i].IsReady == true)
+                {
+                    richTextBox1.Text += "\t空間 : " + Convert.ToString(drive[i].TotalSize / 1024 / 1024 / 1024) + "GB\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "\n";
+                }
+
+            }
+
+
+
 
         }
 
@@ -843,11 +899,37 @@ namespace vcs_Mix06
         private void button27_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //抓取網頁資料 1
+            string url = @"http://140.129.118.16/~richwang/";
+
+            string rl;
+            WebRequest Request = WebRequest.Create(url.Trim());
+
+            WebResponse Response = Request.GetResponse();
+
+            Stream resStream = Response.GetResponseStream();
+
+            StreamReader sr = new StreamReader(resStream, Encoding.Default);
+            StringBuilder sb = new StringBuilder();
+            while ((rl = sr.ReadLine()) != null)
+            {
+                sb.Append(rl);
+            }
+
+            richTextBox1.Text += sb + "\n";
+
+            richTextBox1.Text += "完成\n";
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //抓取網頁資料 2
+            WebClient wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            string html = wc.DownloadString("http://www.lagou.com/");
+
+            richTextBox1.Text += html + "\n";
         }
 
         private void button29_Click(object sender, EventArgs e)
