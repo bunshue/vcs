@@ -1,4 +1,35 @@
 
+
+           //在cmd控制台輸入命令
+        private void create(string str)
+        {
+            //process用於調用外部程序
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            //調用cmd.exe
+            p.StartInfo.FileName = "cmd.exe";
+            //是否指定操作系統外殼進程啟動程序
+            p.StartInfo.UseShellExecute = false;
+            //可能接受來自調用程序的輸入信息
+            //重定向標准輸入
+            p.StartInfo.RedirectStandardInput = true;
+            //重定向標准輸出
+            p.StartInfo.RedirectStandardOutput = true;
+            //重定向錯誤輸出
+            p.StartInfo.RedirectStandardError = true;
+            //不顯示程序窗口
+            p.StartInfo.CreateNoWindow = true;
+            //啟動程序
+            p.Start();
+            //睡眠1s。
+            System.Threading.Thread.Sleep(1000);
+            //輸入命令
+            p.StandardInput.WriteLine(str);
+            //一定要關閉。
+            p.StandardInput.WriteLine("exit");
+        }
+
+
+
 C# 正則表達式驗證Email格式、URl網址
 驗證Email格式的主要代碼如下：
 public bool IsEmail(string str_Email)

@@ -265,11 +265,10 @@ namespace vcs_GMap
 
         void update_controls_info()
         {
-            tb_zoom.Text = gMapControl1.Zoom.ToString();
-
             trackBar1.Maximum = gMapControl1.MaxZoom;
             trackBar1.Minimum = gMapControl1.MinZoom;
             trackBar1.Value = (int)gMapControl1.Zoom;
+            tb_zoom.Text = gMapControl1.Zoom.ToString();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -592,6 +591,7 @@ namespace vcs_GMap
         {
             //richTextBox1.Text += "OnMapZoomChanged\n";
             trackBar1.Value = (int)gMapControl1.Zoom;
+            tb_zoom.Text = gMapControl1.Zoom.ToString();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -641,7 +641,6 @@ namespace vcs_GMap
                     //其畫筆 route.Stroke
                 }
             }
-
             richTextBox1.Text += "Zoom :\t" + gMapControl1.Zoom.ToString() + "\n";
         }
 

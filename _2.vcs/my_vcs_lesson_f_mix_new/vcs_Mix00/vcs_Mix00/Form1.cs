@@ -15,6 +15,7 @@ using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Management;
 using System.Reflection;    //for Assembly
+using System.Security;
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
@@ -161,9 +162,153 @@ namespace vcs_Mix00
             return crc;
         }
 
+        private string GetStringValue(byte[] Byte)
+        {
+            string tmpString = "";
+
+            /*
+            //1111
+            ASCIIEncoding Asc = new ASCIIEncoding();
+            tmpString = Asc.GetString(Byte);
+            */
+
+            //2222
+            int iCounter;
+            for (iCounter = 0; iCounter < Byte.Length; iCounter++)
+            {
+                tmpString = tmpString + Byte[iCounter].ToString();
+            }
+
+            return tmpString;
+        }
+        private byte[] GetKeyByteArray(string strKey)
+        {
+            ASCIIEncoding Asc = new ASCIIEncoding();
+            int tmpStrLen = strKey.Length;
+            byte[] tmpByte = new byte[tmpStrLen - 1];
+            tmpByte = Asc.GetBytes(strKey);
+            return tmpByte;
+        }
+
+        /// <summary>
+        /// 使用DES加密（Added by niehl 2005-4-6）
+        /// </summary>
+        /// <param name="originalValue">待加密的字符串</param>
+        /// <param name="key">密鑰(最大長度8)</param>
+        /// <param name="IV">初始化向量(最大長度8)</param>
+        /// <returns>加密後的字符串</returns>
+        public string DESEncrypt(string originalValue, string key, string IV)
+        {
+            //將key和IV處理成8個字符
+            key += "12345678";
+            IV += "12345678";
+            key = key.Substring(0, 8);
+            IV = IV.Substring(0, 8);
+            SymmetricAlgorithm sa;
+            ICryptoTransform ct;
+            MemoryStream ms;
+            CryptoStream cs;
+            byte[] byt;
+            sa = new DESCryptoServiceProvider();
+            sa.Key = Encoding.UTF8.GetBytes(key);
+            sa.IV = Encoding.UTF8.GetBytes(IV);
+            ct = sa.CreateEncryptor();
+            byt = Encoding.UTF8.GetBytes(originalValue);
+            ms = new MemoryStream();
+            cs = new CryptoStream(ms, ct, CryptoStreamMode.Write);
+            cs.Write(byt, 0, byt.Length);
+            cs.FlushFinalBlock();
+            cs.Close();
+            return Convert.ToBase64String(ms.ToArray());
+        }
+
+        public string DESEncrypt(string originalValue, string key)
+        {
+            return DESEncrypt(originalValue, key, key);
+        }
+        /// <summary>
+        /// 使用DES解密（Added by niehl 2005-4-6）
+        /// </summary>
+        /// <param name="encryptedValue">待解密的字符串</param>
+        /// <param name="key">密鑰(最大長度8)</param>
+        /// <param name="IV">m初始化向量(最大長度8)</param>
+        /// <returns>解密後的字符串</returns>
+        public string DESDecrypt(string encryptedValue, string key, string IV)
+        {
+            //將key和IV處理成8個字符
+            key += "12345678";
+            IV += "12345678";
+            key = key.Substring(0, 8);
+            IV = IV.Substring(0, 8);
+            SymmetricAlgorithm sa;
+            ICryptoTransform ct;
+            MemoryStream ms;
+            CryptoStream cs;
+            byte[] byt;
+            sa = new DESCryptoServiceProvider();
+            sa.Key = Encoding.UTF8.GetBytes(key);
+            sa.IV = Encoding.UTF8.GetBytes(IV);
+            ct = sa.CreateDecryptor();
+            byt = Convert.FromBase64String(encryptedValue);
+            ms = new MemoryStream();
+            cs = new CryptoStream(ms, ct, CryptoStreamMode.Write);
+            cs.Write(byt, 0, byt.Length);
+            cs.FlushFinalBlock();
+            cs.Close();
+            return Encoding.UTF8.GetString(ms.ToArray());
+        }
+
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            string initial_data = "12345";
+            byte[] tmpByte;
+            MD5 md5 = new MD5CryptoServiceProvider();
+            tmpByte = md5.ComputeHash(GetKeyByteArray(initial_data));
+            md5.Clear();
+            string md5_result = GetStringValue(tmpByte);
+
+
+            richTextBox1.Text += "MD5 = " + md5_result + "\n";
+
+
+
+            //byte[] tmpByte;
+            SHA1 sha1 = new SHA1CryptoServiceProvider();
+            tmpByte = sha1.ComputeHash(GetKeyByteArray(initial_data));
+            sha1.Clear();
+            string sha1_result = GetStringValue(tmpByte);
+
+            richTextBox1.Text += "SHA1 = " + sha1_result + "\n";
+
+
+            //byte[] tmpByte;
+            SHA256 sha256 = new SHA256Managed();
+            tmpByte = sha256.ComputeHash(GetKeyByteArray(initial_data));
+            sha256.Clear();
+            string sha256_result = GetStringValue(tmpByte);
+
+            richTextBox1.Text += "SHA256 = " + sha256_result + "\n";
+
+
+            //byte[] tmpByte;
+            SHA512 sha512 = new SHA512Managed();
+            tmpByte = sha512.ComputeHash(GetKeyByteArray(initial_data));
+            sha512.Clear();
+            string sha512_result = GetStringValue(tmpByte);
+            richTextBox1.Text += "SHA512 = " + sha512_result + "\n";
+
+
+            string key = "abc";
+            string DES_result = DESEncrypt(initial_data, key);
+            richTextBox1.Text += "DES Enc = " + DES_result + "\n";
+
+
+            string DES_decrypt_result = DESDecrypt(DES_result, key, "0");
+            richTextBox1.Text += "DES Dec = " + DES_decrypt_result + "\n";
 
         }
 

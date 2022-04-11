@@ -734,15 +734,91 @@ namespace vcs_Mix06
 
         }
 
+        public class Shoe
+        {
+            public string Color;
+        }
+
+        public class Dude
+        {
+            public string Name;
+            public Shoe RightShoe;
+            public Shoe LeftShoe;
+
+            public Dude CopyDude()
+            {
+                Dude newPerson = new Dude();
+                newPerson.Name = Name;
+                newPerson.LeftShoe = LeftShoe;
+                newPerson.RightShoe = RightShoe;
+
+                return newPerson;
+            }
+
+            public override string ToString()
+            {
+                return (Name + " : Dude!, I have a " + RightShoe.Color + " shoe on my right foot, and a " + LeftShoe.Color + " on my left foot.");
+            }
+        }
+
+
         private void button21_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //class 範例 3
+
+            Dude Bill = new Dude();
+            Bill.Name = "Bill";
+            Bill.LeftShoe = new Shoe();
+            Bill.RightShoe = new Shoe();
+            Bill.LeftShoe.Color = "Blue";
+            Bill.RightShoe.Color = "Blue";
+
+            Dude Ted = Bill.CopyDude();
+            Ted.Name = "Ted";
+            Ted.LeftShoe.Color = "Red";
+            Ted.RightShoe.Color = "Red";
+
+            richTextBox1.Text += "Bill\n" + Bill.ToString() + "\n";
+            richTextBox1.Text += "Ted\n" + Ted.ToString() + "\n";
+
 
         }
+
+        public class People
+        {
+            private string Id;
+            private string Name;
+            private string Address;
+        }        
 
         private void button22_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //class 範例 4
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Id", typeof(string));
+            dt.Columns.Add("Name", typeof(string));
+            dt.Columns.Add("Address", typeof(string));
+            dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
+
+            dt.Rows.Add("0001", "張三", "武漢市");
+            dt.Rows.Add("0002", "李四", "北京市");
+            dt.AcceptChanges();
+            dt.Rows.Add("0003", "王五", "深圳市");
+
+            //List<People> allPeople = new List<People>();
+            //List<People> allPeople = new List<People>();
+
+
+            /*
+            List<People> allPeople = new List<People>()
+            {
+              new People(){ Id="0001", Name="張三", Address ="武漢市"},
+              new People(){ Id="0002", Name="李四", Address ="北京市"},
+              new People(){ Id="0003", Name="王五", Address ="深圳市"}
+            };
+            */
 
         }
 

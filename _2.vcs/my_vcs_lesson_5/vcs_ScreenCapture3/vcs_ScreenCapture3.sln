@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ScreenCapture3", "vcs_ScreenCapture3\vcs_ScreenCapture3.csproj", "{B1B088C1-965F-4860-9B05-397207A2938B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1B088C1-965F-4860-9B05-397207A2938B}.Debug|x86.ActiveCfg = Debug|x86
+		{B1B088C1-965F-4860-9B05-397207A2938B}.Debug|x86.Build.0 = Debug|x86
+		{B1B088C1-965F-4860-9B05-397207A2938B}.Release|x86.ActiveCfg = Release|x86
+		{B1B088C1-965F-4860-9B05-397207A2938B}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
