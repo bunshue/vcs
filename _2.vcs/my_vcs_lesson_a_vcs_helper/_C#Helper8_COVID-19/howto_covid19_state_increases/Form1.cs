@@ -51,9 +51,11 @@ namespace howto_covid19_state_increases
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //網頁protocol	解決  要求已經中止: 無法建立 SSL/TLS 的安全通道。
             // Allow TLS 1.1 and TLS 1.2 protocols for file download.
-            ServicePointManager.SecurityProtocol =
-                Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+            //for Sugar     3840 Romeo也可用
+            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+            //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
 
             // Initialize the CheckBoxes array.
             CheckBoxes = new CheckBox[]
@@ -778,4 +780,16 @@ namespace howto_covid19_state_increases
 
         }
     }
+
+    //3Form1之外
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
+    }
+
 }

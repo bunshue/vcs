@@ -34,12 +34,14 @@ namespace vcs_GMap
 
         Dictionary<string, string> regionDictionary = new Dictionary<string, string>();
 
+        //按滑鼠左鍵連線
+        //需要绘制的经纬度点集
+        private List<PointLatLng> line_point = new List<PointLatLng>();
+
         /// <summary>
         /// 路径轨迹
         /// </summary> 
-        private GmapMarkerRoute Route = null;
         private Point RightBDPoint;
-        private Point BeforeZoomChangeMousePoint = new Point();
 
         TrackBar trackBar1 = new TrackBar();
 
@@ -128,6 +130,18 @@ namespace vcs_GMap
             checkBox2.Location = new Point(x_st, y_st + 30);
             comboBox1.Location = new Point(x_st, y_st + 60);
             btn_draw_profile.Location = new Point(x_st + 30, y_st + 85);
+
+            x_st = 20;
+            y_st = 15;
+            dy=16;
+
+            radioButton1.Location = new Point(x_st, y_st + dy * 0);
+            radioButton2.Location = new Point(x_st, y_st + dy * 1);
+            radioButton3.Location = new Point(x_st, y_st + dy * 2);
+            radioButton4.Location = new Point(x_st, y_st + dy * 3);
+            radioButton5.Location = new Point(x_st, y_st + dy * 4);
+            radioButton6.Location = new Point(x_st, y_st + dy * 5);
+            radioButton7.Location = new Point(x_st, y_st + dy * 6);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -152,6 +166,7 @@ namespace vcs_GMap
             }
             catch
             {
+                //設置控件的管理模式
                 //gMapControl1.Manager.Mode = AccessMode.ServerOnly;
                 //gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
                 gMapControl1.Manager.Mode = AccessMode.CacheOnly;
@@ -159,6 +174,7 @@ namespace vcs_GMap
                 richTextBox1.Text += "無網路, 使用記憶體快取\n";
             }
 
+            gMapControl1.EmptyTileColor = Color.Pink;  //設置沒有數據的切片所顯示的顏色
             gMapControl1.CacheLocation = gMapCacheLocation; //緩存位置
             gMapControl1.Manager.ImportFromGMDB(@"gMapCacheLocation\mapdata.gmdb");
 
@@ -185,12 +201,13 @@ namespace vcs_GMap
             gMapControl1.Overlays.Add(markers_polygon);  //添加 圖標 Markers 的圖層
             gMapControl1.Overlays.Add(RouteMark);
 
-            //gMapControl1.Dock = DockStyle.Fill;
+            //gMapControl1.Dock = DockStyle.Fill;   //將控件全屏顯示
             gMapControl1.CanDragMap = true; //滑鼠右鍵拖動地圖
             gMapControl1.MarkersEnabled = true; //顯示markers
             gMapControl1.PolygonsEnabled = true;    //顯示polygon
             gMapControl1.RoutesEnabled = true;
             //gMapControl1.ShowTileGridLines = true;  //顯示座標格網  常有問題 可能是timeout
+            //gMapControl1.GrayScaleMode = true;    //黑白地圖
 
             //gMapControl1.OnMarkerClick += gMapControl1_OnMarkerClick;
             //gMapControl1.OnPositionChanged += gMapControl1_OnPositionChanged;
@@ -199,7 +216,7 @@ namespace vcs_GMap
 
             //GMapProvider.Language = LanguageType.ChineseSimplified; //设置地图默认语言
             GMapProvider.Language = LanguageType.ChineseTraditional; //设置地图默认语言
-            GMapProvider.TimeoutMs = 1000;//地图加载完成后设置timeoutms为1000(或者其他大于领零的数值自己尝试0)
+            GMapProvider.TimeoutMs = 5000;//地图加载完成后设置timeoutms为1000(或者其他大于领零的数值自己尝试0)
             //GMapProvider.Language = LanguageType.ChineseSimplified; //使用的语言，默认是英文
         }
 
@@ -225,6 +242,7 @@ namespace vcs_GMap
             {
                 if (checkBox2.Checked == true)   //滑鼠右鍵畫標記
                 {
+                    //從地圖上的滑鼠座標畫標記
                     PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
                     richTextBox1.Text += "控件座標(" + e.X.ToString() + ", " + e.Y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
 
@@ -237,9 +255,12 @@ namespace vcs_GMap
             }
         }
 
+        //標記點擊事件
         private void gMapControl1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         {
             richTextBox1.Text += "你按了圖標 " + item.ToolTipText + "\n";
+
+            //試者將此點設為地圖中心
         }
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
@@ -263,6 +284,10 @@ namespace vcs_GMap
             //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
             //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
+            //gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
+            //gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
+            //gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
+
 
             //竹北座標
             latitude = 24.838;   //緯度
@@ -270,26 +295,48 @@ namespace vcs_GMap
             gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
             gMapControl1.Zoom = 14; //當前比例
 
+            gMapControl1.ShowCenter = true; //顯示地圖正中的紅十字
+
             update_controls_info();
         }
 
-        public void SetLableOnMap_fore(string[] LatLngInfo, GMapOverlay markers_Overlay)
+        public void DrawMarker(string[] LatLngInfo, GMapOverlay gMapOverlay1)
         {
-            //给每个坐标打点
-            for (int i = 0; i < LatLngInfo.Length; i++)
+            int len = LatLngInfo.Length;
+            for (int i = 0; i < len; i++)
             {
                 string[] LatLng = LatLngInfo[i].Split(',');
 
                 //在坐标点上绘制一绿色点并向图层中添加标签
                 PointLatLng point = new PointLatLng(double.Parse(LatLng[0]), double.Parse(LatLng[1]));
-                GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
-                markers_Overlay.Markers.Add(marker);
 
-                richTextBox1.Text += (double.Parse(LatLng[0])).ToString() + "\t" + (double.Parse(LatLng[1])).ToString() + "\n";
+                //GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
+
+                string filename = @"C:\______test_files\__pic\_icon\face1.png";
+                Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+                GMapMarker marker = new GMarkerGoogle(point, bitmap1);
+
+                //直接寫
+                //GMapMarker marker2 = new GMarkerGoogle(point, new Bitmap(filename));
+
+                gMapOverlay1.Markers.Add(marker);
+
+                //richTextBox1.Text += (double.Parse(LatLng[0])).ToString() + "\t" + (double.Parse(LatLng[1])).ToString() + "\n";
+
                 //方便之后寻找到是第几个GMapMarker   
-                markers_Overlay.Markers[i].Tag = i;
-                markers_Overlay.Markers[i].Tag = "xxxx";
-                markers_Overlay.Id = "markroad";
+                gMapOverlay1.Markers[i].Tag = i;
+                gMapOverlay1.Markers[i].Tag = "xxxx";
+                gMapOverlay1.Id = "markroad";
+
+
+                marker.ToolTipText = "告警源编号：";
+                marker.ToolTip.Fill = Brushes.Blue;
+                marker.ToolTip.Foreground = Brushes.White;
+                marker.ToolTip.Stroke = Pens.Black;
+                marker.ToolTip.TextPadding = new Size(20, 20);
+                marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
+
+
             }
         }
 
@@ -299,6 +346,8 @@ namespace vcs_GMap
             double angle = 0;
             double cx = latitude;
             double cy = longitude;
+
+            //製作 marker_position 資料
             string[] marker_position = new string[12];
             for (angle = 0; angle < 360; angle += 30)
             {
@@ -307,9 +356,24 @@ namespace vcs_GMap
                 richTextBox1.Text += angle.ToString() + "\t" + (cx + R * cosd(angle)).ToString() + "\t" + (cy + R * sind(angle)).ToString() + "\n";
             }
 
+            /* marker_position 語法
             //string[] marker_position = new string[4] { "24.83923062590916, 121.00410306376308", "24.83900079788313, 121.00929660194892", "24.835634744818194, 121.00903566227302", "24.836966817989957, 121.01120945267155" };
 
-            SetLableOnMap_fore(marker_position, markersOverlay);
+            string[] marker_position = new string[10];
+
+            marker_position[0] = "31.420147, 121.488286";
+            marker_position[1] = "31.294828, 121.702154";
+            marker_position[2] = "31.141157, 121.780918";
+            marker_position[3] = "30.941157, 121.782068";
+            marker_position[4] = "30.909931, 121.492885";
+            marker_position[5] = "30.890099, 121.22325";
+            marker_position[6] = "31.015526, 121.161482";
+            marker_position[7] = "31.226239, 121.076395";
+            marker_position[8] = "31.339688, 121.189873";
+            marker_position[9] = "31.41368, 121.459509";
+            */
+
+            DrawMarker(marker_position, markersOverlay);
 
             /* under test
             double lat = 24.836494165650475 + 10;
@@ -485,34 +549,6 @@ namespace vcs_GMap
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
-            //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
-
-            //上海座標
-            latitude = 31.128199299112;   //緯度
-            longitude = 121.489562988281; //經度
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-            gMapControl1.Zoom = 10; //當前比例
-
-            update_controls_info();
-
-            string[] marker_position = new string[10];
-
-            marker_position[0] = "31.420147, 121.488286";
-            marker_position[1] = "31.294828, 121.702154";
-            marker_position[2] = "31.141157, 121.780918";
-            marker_position[3] = "30.941157, 121.782068";
-            marker_position[4] = "30.909931, 121.492885";
-            marker_position[5] = "30.890099, 121.22325";
-            marker_position[6] = "31.015526, 121.161482";
-            marker_position[7] = "31.226239, 121.076395";
-            marker_position[8] = "31.339688, 121.189873";
-            marker_position[9] = "31.41368, 121.459509";
-
-            SetLableOnMap_fore(marker_position, markersOverlay);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -551,16 +587,9 @@ namespace vcs_GMap
                 {
                     PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
                     //richTextBox1.Text += "控件座標(" + e.X.ToString() + ", " + e.Y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
-                    if (Route == null)
-                    {
-                        Route = new GmapMarkerRoute(point);
-                        Route.Origin.X = gMapControl1.Size.Width / 2;
-                        Route.Origin.Y = gMapControl1.Size.Height / 2;
-                        Route.OriginOffset.X = DragOffsetX;
-                        Route.OriginOffset.Y = DragOffsetY;
-                        RouteMark.Markers.Add(Route as GMapMarker);
-                    }
-                    Route.AddPoint(point);
+
+                    line_point.Add(point);
+                    draw_line_point();
                 }
             }
             else if (e.Button == MouseButtons.Right)
@@ -575,9 +604,6 @@ namespace vcs_GMap
         {
             //richTextBox1.Text += "MouseMove\n";
             PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
-
-            BeforeZoomChangeMousePoint.X = e.X;
-            BeforeZoomChangeMousePoint.Y = e.Y;
         }
 
         void mapControl_MouseUp(object sender, MouseEventArgs e)
@@ -588,12 +614,6 @@ namespace vcs_GMap
                 //在拖拽地图后地图原点和视窗原点的偏移量
                 DragOffsetX = DragOffsetX + e.X - RightBDPoint.X;
                 DragOffsetY = DragOffsetY + e.Y - RightBDPoint.Y;
-                if (Route != null)
-                {
-                    //设置Route的中心偏移
-                    Route.OriginOffset.X = DragOffsetX;
-                    Route.OriginOffset.Y = DragOffsetY;
-                }
             }
         }
 
@@ -603,15 +623,13 @@ namespace vcs_GMap
             //在进行地图的缩放后，视图的原点会重新回到MapControl控件的中心点
             DragOffsetX = 0;
             DragOffsetY = 0;
-
-            if (Route != null)
-            {
-                Route.IsZoomChanged = true;
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            markersOverlay.Clear();
+
+            gMapControl1.Overlays.Remove(markers_polygon);
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -637,8 +655,23 @@ namespace vcs_GMap
 
         private void button10_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "W = " + gMapControl1.Width.ToString() + "\n";
-            richTextBox1.Text += "H = " + gMapControl1.Height.ToString() + "\n";
+            richTextBox1.Text += "地圖大小 W = " + gMapControl1.Width.ToString() + ", H = " + gMapControl1.Height.ToString() + "\n";
+
+            richTextBox1.Text += "滑鼠左鍵連線點數 : " + line_point.Count.ToString() + "\n";
+            richTextBox1.Text += "滑鼠右鍵標記個數 : " + markersOverlay.Markers.Count.ToString() + "\n";
+
+            richTextBox1.Text += "目前 GMapOverlay 有 " + gMapControl1.Overlays.Count.ToString() + "層\n";
+            foreach (GMapOverlay overlay in gMapControl1.Overlays)
+            {
+                richTextBox1.Text += "get overlay " + overlay.Control.Name + "\n";
+
+                foreach (var route in overlay.Routes)
+                {
+                    richTextBox1.Text += "這一層有 Routes\t名稱 :\t" + route.Name + "\n";
+                    //其點數 route.Points
+                    //其畫筆 route.Stroke
+                }
+            }
         }
 
         private void bt_save_Click(object sender, EventArgs e)
@@ -712,12 +745,10 @@ namespace vcs_GMap
             else if (radioButton2.Checked == true)
             {
                 gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-
             }
             else if (radioButton3.Checked == true)
             {
                 gMapControl1.MapProvider = GMapProviders.GoogleTerrainMap; //地形圖
-
             }
             else if (radioButton4.Checked == true)
             {
@@ -725,64 +756,102 @@ namespace vcs_GMap
             }
             else if (radioButton5.Checked == true)
             {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
+            }
+            else if (radioButton6.Checked == true)
+            {
+                gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
+            }
+            else if (radioButton7.Checked == true)
+            {
                 //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
                 //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
+                //gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
             }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            latitude = 24.838;   //緯度
+            longitude = 121.003; //經度
+
+            PointLatLng initialPoint = new PointLatLng(latitude, longitude);
+
+            latitude = 25.838;   //緯度
+            PointLatLng finalPoint = new PointLatLng(latitude, longitude);
+
+
+            //應該是已不支援
+            MapRoute route = GMapProviders.OpenCycleMap.GetRoute(initialPoint, finalPoint, true, true, Convert.ToInt32(gMapControl1.Zoom));
+
+
+            if (route != null)
+            {
+                richTextBox1.Text += "AAAAAAAAA\n";
+                GMapRoute mapRoute = new GMapRoute(route.Points, "A to B");
+                markersOverlay.Routes.Add(mapRoute);
+            }
+            else
+            {
+                richTextBox1.Text += "NNNNNNNN\n";
+            }
+
+
+
+            return;
+
+
+            GMarkerGoogle curPos = new GMarkerGoogle(initialPoint, GMarkerGoogleType.blue_pushpin);
+
+            //應該是已不支援GetRoute功能
+            MapRoute path = GoogleMapProvider.Instance.GetRoute(initialPoint, finalPoint, false, false, 15);
+
+
+            return;
+            richTextBox1.Text += "aaaaaa" + path.Points.Count.ToString() + "\n";
+
+            return;
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
-            //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
+            test_route();
 
-            //竹北座標
-            latitude = 24.838;   //緯度
-            longitude = 121.003; //經度
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-            //gMapControl1.SetPositionByKeywords("china,harbin");//設定初始中心為china harbin  已不支援此功能
-            gMapControl1.Zoom = 14; //當前比例
+        }
 
-            update_controls_info();
+        void test_route()
+        {
+            //查找路徑, 無效～～～～
 
-            //以上相同
+            PointLatLng startPoint = new PointLatLng(24.8493692081609, 120.996723175049);
+            PointLatLng endPoint = new PointLatLng(24.8403343208788, 121.021013259888);
 
-            //建立圖層(overlay)和標籤(marker)，將標籤加入圖層，再將圖層加入控制元件中
-            //在(latitude, longitude）上繪製一綠色點
-            PointLatLng point = new PointLatLng(latitude, longitude);
-            GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
-            GMapOverlay gMapOverlay = new GMapOverlay("mark");　　//建立圖層
-            gMapOverlay.Markers.Add(marker);　　//向圖層中新增標籤
-            gMapControl1.Overlays.Add(gMapOverlay);　　//向控制元件中新增圖層
+            RoutingProvider rp = this.gMapControl1.MapProvider as RoutingProvider;
+            //獲取路徑
+            //根據起止點經緯度查找路徑
+            //MapRoute GetRoute(PointLatLng start, PointLatLng end, bool avoidHighways, bool walkingMode, int Zoom);
+            //根據起止點地址查找路徑
+            //MapRoute GetRoute(string start, string end, bool avoidHighways, bool walkingMode, int Zoom);
+            //avoidHighways：是否避免走高速公路
+            //walkingMode：是否步行
+            //zoom：查找路徑時的zoom
 
-            //畫出道路
-
-            /*
-            //應該是已不支援由地址搜尋座標功能
-            string start = "花園街, 哈爾濱, china";
-            string end = "密山路, 哈爾濱, china";
-            MapRoute route = GoogleMapProvider.Instance.GetRoute(
-              start, end, false, false, 15);//找到start到end的一條路
-
-
-            GMapRoute r = new GMapRoute(route.Points, "My route");//將路轉換成線
-            r.Stroke.Width = 5;
-            r.Stroke.Color = Color.Black;
-
-            GMapOverlay routesOverlay = new GMapOverlay("routes");//新建圖層，目的是放置道路GMapRoute
-            routesOverlay.Routes.Add(r);//將道路加入圖層
-            gMapControl1.ZoomAndCenterRoute(r);//將r這條路初始為檢視中心，顯示時以r為中心顯示
-
-            gMapControl1.Overlays.Add(routesOverlay);
-            */
-
-
+            MapRoute route = rp.GetRoute(startPoint, endPoint, false, false, (int)this.gMapControl1.Zoom);
+            if (route != null)
+            {
+                //添加routes圖層
+                GMapOverlay routes = new GMapOverlay("routes");
+                GMapRoute r = new GMapRoute(route.Points, route.Name);
+                r.Stroke = new Pen(Color.Red, 3);
+                routes.Routes.Add(r);
+                //添加到地圖
+                this.gMapControl1.Overlays.Add(routes);
+                this.gMapControl1.ZoomAndCenterRoute(r);
+            }
+            else
+            {
+                MessageBox.Show("未能找到路線");
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -901,47 +970,84 @@ namespace vcs_GMap
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //添加多邊形 北京故宮
+
+            //添加多邊形和添加標記的原理是一樣的。
+
+            GMapOverlay polygons = new GMapOverlay("polygons");
+            // 多邊形的頂點
+            List<PointLatLng> points = new List<PointLatLng>();
+            points.Add(new PointLatLng(39.92244, 116.3922));
+            points.Add(new PointLatLng(39.92280, 116.4015));
+            points.Add(new PointLatLng(39.91378, 116.4019));
+            points.Add(new PointLatLng(39.91346, 116.3926));
+            GMapPolygon polygon = new GMapPolygon(points, "故宮");
+            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
+            polygon.Stroke = new Pen(Color.Red, 1);
+            polygons.Polygons.Add(polygon);
+            this.gMapControl1.Overlays.Add(polygons);
+
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-
+            //重新載入
+            gMapControl1.ReloadMap();
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //所有測試中的
+            //畫一個圖釘
+            //創建一個名爲“markers”的圖層
+            GMapOverlay markers = new GMapOverlay("markers");
+            //創建標記，並設置位置及樣式
+            //GMapMarker marker = new GMarkerGoogle(new PointLatLng(24.8443066370601, 121.002216339111), GMarkerGoogleType.blue_pushpin);
+            GMapMarker marker = new GMarkerGoogle(new PointLatLng(24.8443066370601, 121.002216339111), GMarkerGoogleType.arrow);
+            //將標記添加到圖層
+            markers.Markers.Add(marker);
+            //將圖層添加到地圖
+            this.gMapControl1.Overlays.Add(markers);
+
             /*
-List<PointLatLng> points = new List<PointLatLng>();
-points.Add(double.Parse("121.00410306376308"), double.Parse("24.83923062590916"));
-
-
-Point.Add(new Point((int)gp.X - Origin.X - OriginOffset.X, (int)gp.Y - Origin.Y - OriginOffset.Y));
-points.Add(NewPointLatLng);
+            //添加線
+            //创建“lay”图层
+            GMapOverlay lay = new GMapOverlay("lay");
+            //创建一条route
+            GMapRoute route1 = new GMapRoute("route1");
+            //设置route的颜色和粗细
+            route1.Stroke = new Pen(Color.Red, 2);
+            //向route中添加点
+            route1.Points.Add(new PointLatLng(24.8443066370601, 121.002216339111));
+            route1.Points.Add(new PointLatLng(24.8473066370601, 121.022216339111));
+            route1.Points.Add(new PointLatLng(24.8443066370601, 121.002216339111));
+            //将route添加到图层
+            lay.Routes.Add(route1);
+            //将图层添加到地图
+            this.gMapControl1.Overlays.Add(lay);
+            //更新显示route
+            this.gMapControl1.UpdateRouteLocalPosition(route1);
 */
 
-            gMapControl1.EmptyTileColor = System.Drawing.Color.Aquamarine;
-            //gMapControl1.GrayScaleMode = true;    //黑白地圖
-            gMapControl1.Manager.UsePlacemarkCache = false;
-            gMapControl1.Manager.UseMemoryCache = true;
-            //gMapControl1.Manager.CancelTileCaching();
+            //添加多邊形
 
-            foreach (GMapOverlay overlay in gMapControl1.Overlays)
-            {
-                foreach (var route in overlay.Routes)
-                {
-                    var r = new GMapRoute(route.Name);
-                    r.Points.AddRange(route.Points);
-                    r.Stroke = route.Stroke;
-                }
-            }
-
-
-
-
-
-
-
+            //创建“lay”图层
+            GMapOverlay lay = new GMapOverlay("lay");
+            //创建一条route
+            GMapPolygon polygon = new GMapPolygon(new List<PointLatLng>(), "polygon");
+            //设置polygon的颜色和粗细
+            polygon.Stroke = new Pen(Color.Red, 2);
+            //设置polygon的填充颜色
+            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Green));
+            //向polygon中添加点
+            polygon.Points.Add(new PointLatLng(24.8443066370601, 121.002216339111));
+            polygon.Points.Add(new PointLatLng(24.8443066370601, 121.022216339111));
+            polygon.Points.Add(new PointLatLng(24.8493066370601, 121.002216339111));
+            //将polygon添加到图层
+            lay.Polygons.Add(polygon);
+            //将图层添加到地图
+            this.gMapControl1.Overlays.Add(lay);
+            //更新显示polygon
+            this.gMapControl1.UpdatePolygonLocalPosition(polygon);
 
         }
 
@@ -1073,100 +1179,33 @@ points.Add(NewPointLatLng);
             }
             comboBox1.SelectedIndex = 0;
         }
-    }
 
-    class GmapMarkerRoute : GMapMarker
-    {
-        //用户绘制在视窗中的点，是将经纬度转换成GPoint再加上偏移处理后的点
-        private List<Point> Point = new List<Point>();
-
-        //需要绘制的经纬度点集
-        private List<PointLatLng> points = new List<PointLatLng>();
-
-        // 是否有新的点加入
-        private bool HasNewPoint = false;
-
-        //新加入点的经纬度
-        private PointLatLng NewPointLatLng;
-
-        /// <summary>
-        /// 图层缩放比例是否变化
-        /// </summary>
-        public bool IsZoomChanged = false;
-        /// <summary>
-        /// 拖拽地图后图层原点与视窗原点的偏差向量
-        /// </summary>
-        public Point OriginOffset = new Point();
-        /// <summary>
-        /// 视窗原点相对于图层原点的像素偏差向量
-        /// 视窗原点默认是视窗中心点
-        /// 图层原点默认是视窗左上角的点
-        /// </summary>
-        public Point Origin = new Point();
-        /// <summary>
-        /// 绘制点集的pen
-        /// </summary>
-        public Pen pen = new Pen(Color.Red, 1);
-
-
-        public GmapMarkerRoute(GMap.NET.PointLatLng p)
-            : base(p)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
+            //滑鼠左鍵連線
+            line_point.Clear();
+            draw_line_point();
         }
 
-        public override void OnRender(Graphics g)
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            GPoint gp = new GPoint();
-
-            //地图拖拽
-            if (Overlay.Control.IsDragging)
-            {
-                pen.Color = Color.Green;
-            }
-            //地图缩放比例改变后需要重新计算Point    
-            else if (IsZoomChanged)
-            {
-                pen.Color = Color.Black;
-                OriginOffset.X = 0;
-                OriginOffset.Y = 0;
-                if (points.Count > 1)
-                {
-                    Point.Clear();
-                    {
-                        foreach (PointLatLng p in points)
-                        {
-                            gp = Overlay.Control.FromLatLngToLocal(p);
-                            Point.Add(new Point((int)(gp.X - Origin.X), (int)(gp.Y - Origin.Y)));
-                        }
-                    }
-                }
-                IsZoomChanged = false;
-            }
-            //其他事件
-            else
-            {
-                pen.Color = Color.Red;
-            }
-            //判断是否有新的点加入,如果有将其添加进Point点集
-            //同时也添加相应的经纬度到相关点集
-            if (HasNewPoint)
-            {
-                gp = Overlay.Control.FromLatLngToLocal(NewPointLatLng);
-                Point.Add(new Point((int)gp.X - Origin.X - OriginOffset.X, (int)gp.Y - Origin.Y - OriginOffset.Y));
-                points.Add(NewPointLatLng);
-                HasNewPoint = false;
-            }
-            if (Point.Count > 1)
-            {
-                g.DrawLines(pen, Point.ToArray());
-            }
+            //滑鼠右鍵畫標記
+            markersOverlay.Markers.Clear();
         }
 
-        public void AddPoint(PointLatLng p)
+        void draw_line_point()
         {
-            NewPointLatLng = p;
-            HasNewPoint = true;
+            GMapRoute playRoute = new GMapRoute(line_point, "my route");
+            //playRoute.Stroke.Color = Color.Red;
+            //playRoute.Stroke = new Pen(Color.FromArgb(144, Color.Red)); //半透明
+
+            playRoute.Stroke = new Pen(Color.FromArgb(127, Color.Blue), 10);    //連寬度一起寫
+
+            //playRoute.Stroke.Width = 5;
+            playRoute.Stroke.DashStyle = DashStyle.Solid;
+
+            markersOverlay.Routes.Clear();
+            markersOverlay.Routes.Add(playRoute);
         }
     }
 }
@@ -1194,14 +1233,48 @@ void mapControl_MouseDoubleClick(object sender, MouseEventArgs e)
             }
         }
 
+            //重新載入
+            gMapControl1.ReloadMap();
 
 
+            //建立圖層(overlay)和標籤(marker)，將標籤加入圖層，再將圖層加入控制元件中
+
+            //在(latitude, longitude）上繪製一綠色點
+            PointLatLng point = new PointLatLng(latitude, longitude);
+            GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
+            GMapOverlay gMapOverlay = new GMapOverlay("mark");　　//建立圖層
+            gMapOverlay.Markers.Add(marker);　　//向圖層中新增標籤
+            gMapControl1.Overlays.Add(gMapOverlay);　　//向控制元件中新增圖層
 
  * 
  * 
  * 
             //gMapControl1.SetPositionByKeywords("竹東鎮");  //設置初始中心, 看似無效
+            //gMapControl1.SetPositionByKeywords("china,harbin");//設定初始中心為china harbin  已不支援此功能
+            //gMapControl1.SetPositionByKeywords("Hong Kong");  //已不支援此功能
 
+ * 
+
+ * 
+             //應該是已不支援由地址搜尋座標功能
+            string start = "花園街, 哈爾濱, china";
+            string end = "密山路, 哈爾濱, china";
+            
+            //應該是已不支援GetRoute功能
+            MapRoute route = GoogleMapProvider.Instance.GetRoute(start, end, false, false, 15);//找到start到end的一條路
+
+
+            GMapRoute r = new GMapRoute(route.Points, "My route");//將路轉換成線
+            r.Stroke.Width = 5;
+            r.Stroke.Color = Color.Black;
+
+            GMapOverlay routesOverlay = new GMapOverlay("routes");//新建圖層，目的是放置道路GMapRoute
+            routesOverlay.Routes.Add(r);//將道路加入圖層
+            gMapControl1.ZoomAndCenterRoute(r);//將r這條路初始為檢視中心，顯示時以r為中心顯示
+
+            gMapControl1.Overlays.Add(routesOverlay);
+
+ * * * 
  * 
             //gMapControl1.UpdateRouteLocalPosition(route);
 * 
@@ -1220,4 +1293,16 @@ void mapControl_MouseDoubleClick(object sender, MouseEventArgs e)
  * 
  * 
 */
+
+
+/*
+GMapRoute route = new GMapRoute(path.Points, "My route");
+markersOverlay.Routes.Clear();
+markersOverlay.Routes.Add(route);
+gMapControl1.Overlays.Add(markersOverlay);
+//label10.Text = (path.Distance * 1000).ToString();
+richTextBox1.Text += (path.Distance * 1000).ToString() + "\n";
+gMapControl1.Refresh();
+*/
+
 

@@ -22,16 +22,11 @@ namespace vcs_covid19_test1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //網頁protocol	解決  要求已經中止: 無法建立 SSL/TLS 的安全通道。
             // Allow TLS 1.1 and TLS 1.2 protocols for file download.
             //for Sugar     3840 Romeo也可用
             ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
-            richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
-
-            //for Romeo and Sugar    3072
-            //ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3840;
             //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
-
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -140,10 +135,9 @@ namespace vcs_covid19_test1
                 }
             }
         }
-
-
     }
 
+    //3Form1之外
     public class Protocols
     {
         public const SecurityProtocolType

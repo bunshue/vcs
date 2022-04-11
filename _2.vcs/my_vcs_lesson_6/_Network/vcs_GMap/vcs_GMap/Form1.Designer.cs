@@ -65,6 +65,8 @@
             this.button17 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btn_draw_profile = new System.Windows.Forms.Button();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,7 +132,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(90, 40);
             this.button3.TabIndex = 4;
-            this.button3.Text = "上海";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -159,6 +160,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(90, 40);
             this.button6.TabIndex = 7;
+            this.button6.Text = "Clear";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -221,6 +223,7 @@
             this.checkBox1.TabIndex = 13;
             this.checkBox1.Text = "滑鼠左鍵連線";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -232,6 +235,7 @@
             this.checkBox2.TabIndex = 14;
             this.checkBox2.Text = "滑鼠右鍵畫標記";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // button0
             // 
@@ -295,6 +299,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButton7);
+            this.groupBox1.Controls.Add(this.radioButton6);
             this.groupBox1.Controls.Add(this.radioButton5);
             this.groupBox1.Controls.Add(this.radioButton4);
             this.groupBox1.Controls.Add(this.radioButton3);
@@ -310,18 +316,18 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(20, 100);
+            this.radioButton5.Location = new System.Drawing.Point(20, 85);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(47, 16);
             this.radioButton5.TabIndex = 3;
-            this.radioButton5.Text = "其他";
+            this.radioButton5.Text = "混合";
             this.radioButton5.UseVisualStyleBackColor = true;
             this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(20, 80);
+            this.radioButton4.Location = new System.Drawing.Point(20, 68);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(59, 16);
             this.radioButton4.TabIndex = 2;
@@ -332,7 +338,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(20, 60);
+            this.radioButton3.Location = new System.Drawing.Point(20, 51);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(59, 16);
             this.radioButton3.TabIndex = 2;
@@ -343,7 +349,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(20, 40);
+            this.radioButton2.Location = new System.Drawing.Point(20, 34);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(47, 16);
             this.radioButton2.TabIndex = 1;
@@ -355,7 +361,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(20, 20);
+            this.radioButton1.Location = new System.Drawing.Point(20, 17);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(47, 16);
             this.radioButton1.TabIndex = 0;
@@ -380,6 +386,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(90, 40);
             this.button11.TabIndex = 30;
+            this.button11.Text = "test";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -389,7 +396,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(90, 40);
             this.button12.TabIndex = 31;
-            this.button12.Text = "test";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -428,6 +434,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(90, 40);
             this.button16.TabIndex = 34;
+            this.button16.Text = "Reload";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -437,7 +444,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(90, 40);
             this.button17.TabIndex = 35;
-            this.button17.Text = "Test";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -458,6 +464,28 @@
             this.btn_draw_profile.Text = "畫出輪廓圖";
             this.btn_draw_profile.UseVisualStyleBackColor = true;
             this.btn_draw_profile.Click += new System.EventHandler(this.btn_draw_profile_Click);
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(20, 98);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(59, 16);
+            this.radioButton6.TabIndex = 4;
+            this.radioButton6.Text = "腳踏車";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Location = new System.Drawing.Point(20, 112);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(47, 16);
+            this.radioButton7.TabIndex = 5;
+            this.radioButton7.Text = "其他";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // Form1
             // 
@@ -546,6 +574,8 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button btn_draw_profile;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton radioButton6;
     }
 }
 

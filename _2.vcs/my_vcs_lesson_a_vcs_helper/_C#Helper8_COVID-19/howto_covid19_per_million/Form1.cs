@@ -26,7 +26,7 @@ namespace howto_covid19_per_million
         }
 
         // The data.
-//@        private Dictionary<string, int> Population;
+        //@        private Dictionary<string, int> Population;
         private List<CountryData> CountryList = null;
         private List<CountryData> SelectedCountries =
             new List<CountryData>();
@@ -43,6 +43,12 @@ namespace howto_covid19_per_million
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //網頁protocol	解決  要求已經中止: 無法建立 SSL/TLS 的安全通道。
+            // Allow TLS 1.1 and TLS 1.2 protocols for file download.
+            //for Sugar     3840 Romeo也可用
+            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+            //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+
             // Load the case data.
             LoadCaseData();
 
@@ -191,7 +197,7 @@ namespace howto_covid19_per_million
 
             // Get the used range.
             Excel.Range used_range = sheet.UsedRange;
-    
+
             // Get the sheet's values.
             object[,] values = (object[,])used_range.Value2;
 
@@ -526,7 +532,7 @@ namespace howto_covid19_per_million
             CountryList.Sort(Comparer);
 
             // Redraw the graph.
-            RedrawGraph();        
+            RedrawGraph();
         }
 
         // A data set radio button has been clicked. Update the graph.
@@ -546,5 +552,16 @@ namespace howto_covid19_per_million
             // Redisplay the graph using the selected data.
             RedrawGraph();
         }
+    }
+
+    //3Form1之外
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }
