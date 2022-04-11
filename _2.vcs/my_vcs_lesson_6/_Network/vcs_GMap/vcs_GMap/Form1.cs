@@ -45,6 +45,10 @@ namespace vcs_GMap
         double latitude = 24.838;   //緯度
         double longitude = 121.003; //經度
 
+        bool flag_measure_first_point = false;
+        PointLatLng pt1 = new PointLatLng(0, 0);
+        PointLatLng pt2 = new PointLatLng(0, 0);
+
         public Form1()
         {
             InitializeComponent();
@@ -120,15 +124,17 @@ namespace vcs_GMap
             groupBox1.Location = new Point(x_st, y_st);
 
             x_st = 1150;
-            y_st = 15;
-            checkBox1.Location = new Point(x_st, y_st);
-            checkBox2.Location = new Point(x_st, y_st + 30);
-            comboBox1.Location = new Point(x_st, y_st + 60);
-            btn_draw_profile.Location = new Point(x_st + 30, y_st + 85);
+            y_st = 12;
+            dy = 25;
+            checkBox1.Location = new Point(x_st, y_st + dy * 0);
+            checkBox2.Location = new Point(x_st, y_st + dy * 1);
+            checkBox3.Location = new Point(x_st, y_st + dy * 2);
+            comboBox1.Location = new Point(x_st, y_st + dy * 3);
+            btn_draw_profile.Location = new Point(x_st + 30, y_st + dy * 4);
 
             x_st = 20;
             y_st = 15;
-            dy=16;
+            dy = 16;
 
             radioButton1.Location = new Point(x_st, y_st + dy * 0);
             radioButton2.Location = new Point(x_st, y_st + dy * 1);
@@ -486,10 +492,10 @@ namespace vcs_GMap
             */
 
             richTextBox1.Text += "畫範圍 GMapPolygon\n";
-            GMapPolygon kmlpolygon = new GMapPolygon(points, "kmlpolygon");
-            kmlpolygon.Stroke.Color = Color.Purple;
-            kmlpolygon.Fill = new SolidBrush(Color.FromArgb(30, Color.Blue));
-            markersOverlay.Polygons.Add(kmlpolygon);
+            GMapPolygon polygon = new GMapPolygon(points, "polygon");
+            polygon.Stroke.Color = Color.Purple;
+            polygon.Fill = new SolidBrush(Color.FromArgb(30, Color.Blue));
+            markersOverlay.Polygons.Add(polygon);
         }
 
         public void DrawPoint(GMapControl map, double latitude, double longitude)   //緯 經
@@ -530,10 +536,10 @@ namespace vcs_GMap
             points.Add(new PointLatLng(24.8268586516249, 121.01019859314));
 
             int a = 1;
-            GMapPolygon poly = new GMapPolygon(points, a.ToString());
-            poly.Stroke = new Pen(Color.FromArgb(250 - ((a * 5) % 240), 250 - ((a * 3) % 240), 250 - ((a * 9) % 240)), 1);
-            poly.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));
-            markersOverlay.Polygons.Add(poly);
+            polygon = new GMapPolygon(points, a.ToString());
+            polygon.Stroke = new Pen(Color.FromArgb(250 - ((a * 5) % 240), 250 - ((a * 3) % 240), 250 - ((a * 9) % 240)), 1);
+            polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));
+            markersOverlay.Polygons.Add(polygon);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -566,13 +572,29 @@ namespace vcs_GMap
             //richTextBox1.Text += "MouseDown\n";
             if (e.Button == MouseButtons.Left)
             {
+                PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+                //richTextBox1.Text += "控件座標(" + e.X.ToString() + ", " + e.Y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
                 if (checkBox1.Checked == true)   //滑鼠左鍵連線
                 {
-                    PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
-                    //richTextBox1.Text += "控件座標(" + e.X.ToString() + ", " + e.Y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
-
                     line_point.Add(point);
                     draw_line_point();
+                }
+                else if (checkBox3.Checked == true)   //滑鼠左鍵量測距離
+                {
+                    line_point.Add(point);
+                    draw_line_point();
+                    if (flag_measure_first_point == false)
+                    {
+                        pt1 = point;
+                        flag_measure_first_point = true;
+                    }
+                    else
+                    {
+                        pt2 = point;
+                        string dist1 = ((float)getDistance(pt1, pt2) * 1000f).ToString("0.##");
+                        richTextBox1.Text += "量測距離 直線 : " + dist1 + " 公尺\n";
+                        pt1 = point;
+                    }
                 }
             }
         }
@@ -942,7 +964,14 @@ namespace vcs_GMap
         {
             richTextBox1.Text += "畫範圍 GMapPolygon 北京故宮\n";
 
+            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
             gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
+            //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
+            //gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
+            //gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
+            //gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
 
             GMapOverlay polygons = new GMapOverlay("polygons");
             List<PointLatLng> points = new List<PointLatLng>();
@@ -956,10 +985,15 @@ namespace vcs_GMap
             polygons.Polygons.Add(polygon);
             gMapControl1.Overlays.Add(polygons);
 
-            latitude = (39.92244 + 39.92280 + 39.91378 + 39.91346) / 4;
-            longitude = (116.3922 + 116.4015 + 116.4019 + 116.3926) / 4;
+            //故宮中心座標
+            latitude = (39.92244 + 39.92280 + 39.91378 + 39.91346) / 4;     //緯度
+            longitude = (116.3922 + 116.4015 + 116.4019 + 116.3926) / 4;    //經度
             gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
             gMapControl1.Zoom = 15; //當前比例
+
+            gMapControl1.ShowCenter = false; //顯示地圖正中的紅十字
+
+            update_controls_info();
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1078,10 +1112,10 @@ namespace vcs_GMap
             points2.Add(new PointLatLng(lat_north, lng_east));
             points2.Add(new PointLatLng(lat_south, lng_east));
             int a = 1;
-            GMapPolygon poly = new GMapPolygon(points2, a.ToString());
-            poly.Stroke = new Pen(Color.FromArgb(250 - ((a * 5) % 240), 250 - ((a * 3) % 240), 250 - ((a * 9) % 240)), 1);
-            poly.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));
-            markersOverlay.Polygons.Add(poly);
+            GMapPolygon polygon = new GMapPolygon(points2, a.ToString());
+            polygon.Stroke = new Pen(Color.FromArgb(250 - ((a * 5) % 240), 250 - ((a * 3) % 240), 250 - ((a * 9) % 240)), 1);
+            polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));
+            markersOverlay.Polygons.Add(polygon);
             //把最東最西最南最北框出來 SP
             */
 
@@ -1174,6 +1208,14 @@ namespace vcs_GMap
             markersOverlay.Markers.Clear();
         }
 
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            //滑鼠左鍵量測距離
+            flag_measure_first_point = false;
+            line_point.Clear();
+            draw_line_point();
+        }
+
         void draw_line_point()
         {
             GMapRoute playRoute = new GMapRoute(line_point, "my route");
@@ -1187,10 +1229,15 @@ namespace vcs_GMap
 
             markersOverlay.Routes.Clear();
             markersOverlay.Routes.Add(playRoute);
+
+            if (line_point.Count > 0)
+            {
+                GMapMarker marker = new GMarkerGoogle(line_point[line_point.Count - 1], GMarkerGoogleType.green);
+                markersOverlay.Markers.Add(marker);
+            }
         }
     }
 }
-
 
 /*
  * 

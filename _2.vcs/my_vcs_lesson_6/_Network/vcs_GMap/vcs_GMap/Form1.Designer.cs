@@ -67,6 +67,7 @@
             this.button17 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btn_draw_profile = new System.Windows.Forms.Button();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -217,7 +218,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox1.Location = new System.Drawing.Point(1112, 15);
+            this.checkBox1.Location = new System.Drawing.Point(1112, 9);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(142, 23);
             this.checkBox1.TabIndex = 13;
@@ -229,7 +230,7 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox2.Location = new System.Drawing.Point(1112, 47);
+            this.checkBox2.Location = new System.Drawing.Point(1112, 29);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(161, 23);
             this.checkBox2.TabIndex = 14;
@@ -482,17 +483,30 @@
             // 
             this.btn_draw_profile.Location = new System.Drawing.Point(1144, 104);
             this.btn_draw_profile.Name = "btn_draw_profile";
-            this.btn_draw_profile.Size = new System.Drawing.Size(100, 40);
+            this.btn_draw_profile.Size = new System.Drawing.Size(100, 34);
             this.btn_draw_profile.TabIndex = 37;
             this.btn_draw_profile.Text = "畫出輪廓圖";
             this.btn_draw_profile.UseVisualStyleBackColor = true;
             this.btn_draw_profile.Click += new System.EventHandler(this.btn_draw_profile_Click);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox3.Location = new System.Drawing.Point(1112, 53);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(142, 23);
+            this.checkBox3.TabIndex = 38;
+            this.checkBox3.Text = "左鍵量測距離";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1341, 712);
+            this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.btn_draw_profile);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button17);
@@ -577,6 +591,7 @@
         private System.Windows.Forms.Button btn_draw_profile;
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }
 
