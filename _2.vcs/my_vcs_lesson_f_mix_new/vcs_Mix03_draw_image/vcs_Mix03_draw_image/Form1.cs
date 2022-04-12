@@ -527,7 +527,7 @@ namespace vcs_Mix03_draw_image
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //全屏幕截圖
+            //全屏幕截圖 1
 
             int W = Screen.PrimaryScreen.Bounds.Width;
 
@@ -540,6 +540,43 @@ namespace vcs_Mix03_draw_image
                 g.CopyFromScreen(0, 0, 0, 0, new Size(W, H));  //用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上
             }
             pictureBox1.Image = bitmap1;
+
+
+
+            //全屏幕截圖 2
+            int width = Screen.PrimaryScreen.Bounds.Width;
+            int height = Screen.PrimaryScreen.Bounds.Height;
+
+            Bitmap bmp = new Bitmap(width, height);
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.CopyFromScreen(0, 0, 0, 0, new Size(width, height));
+            }
+            bmp.Save("111.jpg");
+
+            //bmp.Dispose();
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Image = bmp;
+
+
+
+            //全屏幕截圖 3
+            //獲得當前屏幕的分辨率
+            Screen scr = Screen.PrimaryScreen;
+            Rectangle rc = scr.Bounds;
+            int iWidth = rc.Width;
+            int iHeight = rc.Height;
+            //創建一個和屏幕一樣大的Bitmap
+            Image myImage = new Bitmap(iWidth, iHeight);
+            //從一個繼承自Image類的對象中創建Graphics對象
+            Graphics g3 = Graphics.FromImage(myImage);
+            //抓屏並拷貝到myimage裡
+            g3.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(iWidth, iHeight));
+            //保存為文件
+            myImage.Save("aaaaaa.jpeg");
+
+
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -619,20 +656,43 @@ namespace vcs_Mix03_draw_image
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //依字體大小調整圖片大小
+            string show_word = "群曜醫電";
+            Bitmap newBitmap = null;
+            Graphics g = null;
 
-            //獲得當前屏幕的分辨率
-            Screen scr = Screen.PrimaryScreen;
-            Rectangle rc = scr.Bounds;
-            int iWidth = rc.Width;
-            int iHeight = rc.Height;
-            //創建一個和屏幕一樣大的Bitmap
-            Image myImage = new Bitmap(iWidth, iHeight);
-            //從一個繼承自Image類的對象中創建Graphics對象
-            Graphics g = Graphics.FromImage(myImage);
-            //抓屏並拷貝到myimage裡
-            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(iWidth, iHeight));
-            //保存為文件
-            myImage.Save("aaaaaa.jpeg");
+            try
+            {
+                Font fontCounter = new Font("Lucida Sans Unicode", 70);
+
+                // calculate size of the string.
+                newBitmap = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
+                g = Graphics.FromImage(newBitmap);
+                SizeF stringSize = g.MeasureString(show_word, fontCounter);
+                int nWidth = (int)stringSize.Width;
+                int nHeight = (int)stringSize.Height;
+                g.Dispose();
+                newBitmap.Dispose();
+
+                newBitmap = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppArgb);
+                g = Graphics.FromImage(newBitmap);
+                g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, nWidth, nHeight));
+
+                g.DrawString(show_word, fontCounter, new SolidBrush(Color.Black), 0, 0);
+
+                newBitmap.Save("test.png", ImageFormat.Png);
+                pictureBox1.Image = newBitmap;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                if (null != g) g.Dispose();
+                //if (null != newBitmap) newBitmap.Dispose();
+            }
+
 
         }
 

@@ -21,7 +21,7 @@ namespace vcs_CombinePicture
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\______test_files\_pic_combine3";
+            string foldername = @"C:\______test_files\__pic\_pic_combine";
 
             richTextBox1.Text += "撈出資料夾 " + foldername + " 內所有圖片檔案合併\n";
 

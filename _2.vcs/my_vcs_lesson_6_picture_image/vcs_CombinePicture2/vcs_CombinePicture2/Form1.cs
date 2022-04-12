@@ -111,9 +111,8 @@ namespace vcs_CombinePicture2
         private void button1_Click(object sender, EventArgs e)
         {
             //把多個圖片合成為一個圖片
-            const string foldername = @"C:\______test_files\_pic_combine";
-
-            //const string folderPath = @"C:\______test_files\_pic_combine";
+            const string foldername = @"C:\______test_files\__pic\_pic_combine";
+            
             var images = new DirectoryInfo(foldername).GetFiles("*.jpg", SearchOption.TopDirectoryOnly);
 
             CombineImages(images, ImageMergeOrientation.Horizontal);

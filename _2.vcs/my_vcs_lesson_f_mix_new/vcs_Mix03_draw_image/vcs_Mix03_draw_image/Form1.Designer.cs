@@ -202,7 +202,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 70);
             this.button14.TabIndex = 104;
-            this.button14.Text = "全螢幕截圖";
+            this.button14.Text = "依字體大小調整圖片大小";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -290,7 +290,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(170, 70);
             this.button11.TabIndex = 96;
-            this.button11.Text = "全屏幕截圖";
+            this.button11.Text = "全屏幕截圖 3種";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
