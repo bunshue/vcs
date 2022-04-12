@@ -46,19 +46,6 @@ namespace vcs_ListView6
             }
         }
 
-        public static string GetRandomString2(int length)
-        {
-            var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            //var next = new Random();
-            Random Rnd = new Random(); //加入Random，產生的數字不會重覆
-            var builder = new StringBuilder();
-            for (var i = 0; i < length; i++)
-            {
-                builder.Append(str[Rnd.Next(0, str.Length)]);
-            }
-            return builder.ToString();
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             Random Rnd = new Random(); //加入Random，產生的數字不會重覆

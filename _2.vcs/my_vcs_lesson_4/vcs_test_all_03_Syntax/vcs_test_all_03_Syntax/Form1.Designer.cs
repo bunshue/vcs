@@ -274,7 +274,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(180, 40);
             this.button12.TabIndex = 13;
-            this.button12.Text = "巢狀自訂型態";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -295,7 +294,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(180, 40);
             this.button14.TabIndex = 15;
-            this.button14.Text = "struct用法";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -423,7 +421,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(180, 40);
             this.button28.TabIndex = 29;
-            this.button28.Text = "結構與結構陣列的用法";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 

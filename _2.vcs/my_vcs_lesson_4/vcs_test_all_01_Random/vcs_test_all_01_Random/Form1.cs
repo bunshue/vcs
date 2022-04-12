@@ -672,14 +672,47 @@ namespace vcs_test_all_01_Random
 
         }
 
+        private void nudgeWindow()
+        {
+            // 記錄視窗舊位置
+            int oldLeft = Left;
+            int oldTop = Top;
+            // 變動位置
+            Random r = new Random();
+            for (int i = 0; i <= 500; i++)
+            {
+                int left = r.Next(Left - 20, Left + 20);
+                Left = left;
+                int top = r.Next(Top - 20, Top + 20);
+                Top = top;
+                Left = oldLeft;
+                Top = oldTop;
+            }
+        }
+
         private void bt_random16_Click(object sender, EventArgs e)
         {
-
+            this.WindowState = FormWindowState.Normal;
+            //來電震動視窗1
+            nudgeWindow();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void bt_random17_Click(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Normal;
+            //來電震動視窗2
+            Point now_p = this.Location;
+            Random r = new Random();
 
+            for (int i = 0; i < 50; i++)
+            {
+                Point new_p = new Point(now_p.X + r.Next(-10, 10), now_p.Y + r.Next(-10, 10)); //新的位置
+                this.Location = new_p;
+                System.Threading.Thread.Sleep(20);
+                this.Location = now_p; //還原位置
+            }
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private Color[] Colors = new Color[]

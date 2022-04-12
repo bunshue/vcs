@@ -87,9 +87,14 @@ namespace vcs_Cryptography_new
             //將加密後的數組轉化為字段(普通加密)  
             string testResult = System.Text.Encoding.Unicode.GetString(resultEncrypt);
 
-            //作為密碼方式加密   
-            //string Encrypt_PWD = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(test, "MD5");  
+            //作為密碼方式加密
+            //需要改用.NetFramework4.0 且 參考/加入參考 .NET /System.Web
+            string str = "加密在實際中的應用";
+            string str1 = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "SHA1");
+            string str2 = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5");
 
+            richTextBox1.Text += "SHA1加密的密碼:" + str1 + "\tSHA1加密長度是：" + str1.Length + "\n";
+            richTextBox1.Text += "MD5加密的密碼：" + str2 + "\tMD5加密長度是：" + str2.Length + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)

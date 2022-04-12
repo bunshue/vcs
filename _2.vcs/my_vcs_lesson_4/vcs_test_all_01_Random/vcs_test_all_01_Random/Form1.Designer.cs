@@ -116,6 +116,7 @@
             this.bt_random17.Name = "bt_random17";
             this.bt_random17.Size = new System.Drawing.Size(150, 60);
             this.bt_random17.TabIndex = 58;
+            this.bt_random17.Text = "來電震動視窗2";
             this.bt_random17.UseVisualStyleBackColor = true;
             this.bt_random17.Click += new System.EventHandler(this.bt_random17_Click);
             // 
@@ -126,6 +127,7 @@
             this.bt_random16.Name = "bt_random16";
             this.bt_random16.Size = new System.Drawing.Size(150, 60);
             this.bt_random16.TabIndex = 57;
+            this.bt_random16.Text = "來電震動視窗1";
             this.bt_random16.UseVisualStyleBackColor = true;
             this.bt_random16.Click += new System.EventHandler(this.bt_random16_Click);
             // 

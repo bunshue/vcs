@@ -67,7 +67,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(170, 70);
             this.button1.TabIndex = 110;
-            this.button1.Text = "Struct 結構 用法2";
+            this.button1.Text = "Struct 結構 用法2 巢狀自訂型態";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -109,7 +109,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(170, 70);
             this.button2.TabIndex = 106;
-            this.button2.Text = "Struct 結構 用法3";
+            this.button2.Text = "Struct 結構 用法3 結構與結構陣列的用法";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
