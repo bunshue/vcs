@@ -72,7 +72,6 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(170, 70);
             this.button29.TabIndex = 116;
-            this.button29.Text = "建立亂七八糟陣列";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -192,7 +191,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(170, 70);
             this.button0.TabIndex = 105;
-            this.button0.Text = "編碼轉換";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

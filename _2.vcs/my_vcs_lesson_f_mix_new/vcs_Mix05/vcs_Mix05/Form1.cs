@@ -888,74 +888,12 @@ namespace vcs_Mix05
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //模擬MSN窗體抖動1
             show_button_text(sender);
-
-            int rand = 50;
-            int recordx = this.Left;　//保存原來窗體的左上角的x坐標
-            int recordy = this.Top;　//保存原來窗體的左上角的y坐標
-
-            Random random = new Random();
-
-            for (int i = 0; i < 100; i++)
-            {
-                int x = random.Next(rand);
-                int y = random.Next(rand);
-                if (x % 2 == 0)
-                {
-                    this.Left = this.Left + x;
-                }
-                else
-                {
-                    this.Left = this.Left - x;
-                }
-                if (y % 2 == 0)
-                {
-                    this.Top = this.Top + y;
-                }
-                else
-                {
-                    this.Top = this.Top - y;
-                }
-
-                this.Left = recordx;　//還原原始窗體的左上角的x坐標
-                this.Top = recordy;　//還原原始窗體的左上角的y坐標
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //模擬MSN窗體抖動2
             show_button_text(sender);
-
-            int rand = 10;
-            int recordx = this.Left;
-            int recordy = this.Top;
-            Random random = new Random();
-            for (int i = 0; i < 50; i++)
-            {
-                int x = random.Next(rand);
-                int y = random.Next(rand);
-                if (x % 2 == 0)
-                {
-                    this.Left = this.Left + x;
-                }
-                else
-                {
-                    this.Left = this.Left - x;
-                }
-                if (y % 2 == 0)
-                {
-                    this.Top = this.Top + y;
-                }
-                else
-                {
-                    this.Top = this.Top - y;
-                }
-                Thread.Sleep(1);
-            }
-            this.Left = recordx;
-            this.Top = recordy;
         }
 
         private void button12_Click(object sender, EventArgs e)

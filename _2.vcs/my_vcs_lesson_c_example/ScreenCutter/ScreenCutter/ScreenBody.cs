@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,13 +10,13 @@ namespace ScreenCutter
 {
     public partial class ScreenBody : Form
     {
-        private Graphics MainPainter;
-        private Pen pen;
-        private bool isDowned;
-        private Image baseImage;
-        private Rectangle Rect;
-        private bool RectReady;
-        private Point downPoint;
+        private Graphics MainPainter;  //主画笔
+        private Pen pen;               //就是笔咯
+        private bool isDowned;         //判断鼠标是否按下
+        private bool RectReady;         //矩形是否绘制完成
+        private Image baseImage;       //基本图形(原来的画面)
+        private Rectangle Rect;        //就是要保存的矩形
+        private Point downPoint;        //鼠标按下的点
         private bool change;
         Rectangle[] Rectpoints;
         int point;
@@ -120,10 +120,10 @@ namespace ScreenCutter
                     //this.Cursor = Cursors.Hand;
                     if (isDowned == true && change == false)
                     {
-                        //����һ�ε�λ�ñȽϻ�ȡƫ����
+                        //和上一次的位置比较获取偏移量
                         Rect.X = Rect.X + e.X - tmpx;
                         Rect.Y = Rect.Y + e.Y - tmpy;
-                        //��¼���ڵ�λ��
+                        //记录现在的位置
                         tmpx = e.X;
                         tmpy = e.Y;
                         MoveRect((Image)baseImage.Clone(), Rect);
@@ -257,7 +257,7 @@ namespace ScreenCutter
                     {
                         Rect.Size = new Size(tmpx - Position_x + Rect.Width, Rect.Height);
                         Rect.X = Position_x;
-                        //��¼���ڵ�λ��
+                        //记录现在的位置
                         tmpx = Position_x;
                     }
                     else

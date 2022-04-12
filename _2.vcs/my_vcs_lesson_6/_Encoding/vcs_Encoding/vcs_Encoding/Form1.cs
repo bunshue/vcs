@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/加入參考/.Net/System.Web
+
 namespace vcs_Encoding
 {
     public partial class Form1 : Form
@@ -137,6 +139,21 @@ namespace vcs_Encoding
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //編碼轉換
+            string str1 = "https://ja.wikipedia.org/wiki/和 製 英 語";
+
+            richTextBox1.Text += "原字串(a)\t\t" + str1 + "\n";
+            richTextBox1.Text += "原字串空白轉nbsp(b)\t" + str1.SpaceToNbsp() + "\n";
+
+            string str2 = str1.UrlEncode();
+
+            richTextBox1.Text += "原字串特殊符號編碼(c)\t" + str2 + "\n";
+
+            richTextBox1.Text += "(c)再解碼\t\t" + str2.UrlDecode() + "\n";
+
+            richTextBox1.Text += "(b)目前無法解碼\n";
+            richTextBox1.Text += "\n";
+
 
         }
 
@@ -181,4 +198,26 @@ namespace vcs_Encoding
         }
 
     }
+
+    static class StringExtensions
+    {
+        // Extension to replace spaces with &nbsp;
+        public static string SpaceToNbsp(this string s)
+        {
+            return s.Replace(" ", "&nbsp;");
+        }
+
+        // Url encode an ASCII string.
+        public static string UrlEncode(this string s)
+        {
+            return HttpUtility.UrlEncode(s);
+        }
+
+        // Url decode an ASCII string.
+        public static string UrlDecode(this string s)
+        {
+            return HttpUtility.UrlDecode(s);
+        }
+    }
+
 }

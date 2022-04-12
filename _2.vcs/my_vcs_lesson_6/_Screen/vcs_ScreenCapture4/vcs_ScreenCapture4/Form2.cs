@@ -37,22 +37,18 @@ namespace vcs_ScreenCapture4
             baseImage = this.BackgroundImage;
             Rect = new Rectangle();
             RectReady = false;
-
-
         }
 
         private void Form2_DoubleClick(object sender, EventArgs e)
         {
             if (((MouseEventArgs)e).Button == MouseButtons.Left && Rect.Contains(((MouseEventArgs)e).X, ((MouseEventArgs)e).Y))
             {
-                //保存的时候有很多种方法的......我这里只用了这种
                 Image memory = new Bitmap(Rect.Width, Rect.Height);
                 Graphics g = Graphics.FromImage(memory);
                 g.CopyFromScreen(Rect.X + 1, Rect.Y + 1, 0, 0, Rect.Size);
                 Clipboard.SetImage(memory);
                 this.Close();
             }
-
         }
 
         private void Form2_MouseDown(object sender, MouseEventArgs e)
@@ -169,4 +165,3 @@ namespace vcs_ScreenCapture4
         }
     }
 }
-

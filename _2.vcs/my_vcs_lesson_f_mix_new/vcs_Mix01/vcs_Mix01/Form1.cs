@@ -116,20 +116,6 @@ namespace vcs_Mix01
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            string str1 = "https://ja.wikipedia.org/wiki/和 製 英 語";
-
-            richTextBox1.Text += "原字串(a)\t\t" + str1 + "\n";
-            richTextBox1.Text += "原字串空白轉nbsp(b)\t" + str1.SpaceToNbsp() + "\n";
-
-            string str2 = str1.UrlEncode();
-
-            richTextBox1.Text += "原字串特殊符號編碼(c)\t" + str2 + "\n";
-
-            richTextBox1.Text += "(c)再解碼\t\t" + str2.UrlDecode() + "\n";
-
-            richTextBox1.Text += "(b)目前無法解碼\n";
-            richTextBox1.Text += "\n";
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -881,7 +867,7 @@ namespace vcs_Mix01
             string weekday2 = Day[Convert.ToInt16(DateTime.Now.DayOfWeek)]; //same
             richTextBox1.Text += weekday1 + "\n";
             richTextBox1.Text += weekday2 + "\n";
- 
+
             //第二種：
 
             richTextBox1.Text += System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek) + "\n";
@@ -1622,42 +1608,7 @@ namespace vcs_Mix01
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //建立亂七八糟陣列
-            byte[] dataArray = new byte[100];//字節
-
-            new Random().NextBytes(dataArray);//創建隨機字節
-
-            for (int i = 0; i < dataArray.Length; i++)
-            {
-
-                //sf.WriteByte(dataArray[i]);//將字節寫入文件理.
-                richTextBox1.Text += dataArray[i].ToString() + " ";
-
-            }
-
-        }
-
-
-    }
-
-    static class StringExtensions
-    {
-        // Extension to replace spaces with &nbsp;
-        public static string SpaceToNbsp(this string s)
-        {
-            return s.Replace(" ", "&nbsp;");
-        }
-
-        // Url encode an ASCII string.
-        public static string UrlEncode(this string s)
-        {
-            return HttpUtility.UrlEncode(s);
-        }
-
-        // Url decode an ASCII string.
-        public static string UrlDecode(this string s)
-        {
-            return HttpUtility.UrlDecode(s);
         }
     }
 }
+

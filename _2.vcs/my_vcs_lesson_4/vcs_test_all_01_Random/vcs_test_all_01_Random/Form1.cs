@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Text;  //for TextRenderingHint
 using System.Security.Cryptography;     //for RNGCryptoServiceProvider
+using System.Threading;
 
 namespace vcs_test_all_01_Random
 {
@@ -38,19 +39,19 @@ namespace vcs_test_all_01_Random
             dy = 70;
 
             pictureBox1.Size = new Size(256, 256);
-            pictureBox1.Location = new Point(550, 20);
+            pictureBox1.Location = new Point(750, 20);
 
             pictureBox2.Size = new Size(256 / 2, 50);
-            pictureBox2.Location = new Point(550, 20 + 256 + 10);
+            pictureBox2.Location = new Point(750, 20 + 256 + 10);
 
             pictureBox3.Size = new Size(256 / 2, 50);
-            pictureBox3.Location = new Point(550 + 256 / 2, 20 + 256 + 10);
+            pictureBox3.Location = new Point(750 + 256 / 2, 20 + 256 + 10);
 
             tb_random_text1.Size = new Size(256, 50);
-            tb_random_text1.Location = new Point(550, 20 + 256 + 10 + 50 + 10);
+            tb_random_text1.Location = new Point(750, 20 + 256 + 10 + 50 + 10);
 
             tb_random_text2.Size = new Size(256, 50);
-            tb_random_text2.Location = new Point(550, 20 + 256 + 10 + 50 + 10 + 50 + 10);
+            tb_random_text2.Location = new Point(750, 20 + 256 + 10 + 50 + 10 + 50 + 10);
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
@@ -60,20 +61,26 @@ namespace vcs_test_all_01_Random
             bt_random3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             bt_random4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_random5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_random6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_random7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_random8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_random9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            bt_random6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_random7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_random8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            bt_random9.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            bt_random10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            bt_random11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            bt_random10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_random11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_random12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_random13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            bt_random14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            bt_random15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            bt_random16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            bt_random17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            bt_random18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            bt_random19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            bt_random12.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            bt_random13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            bt_random14.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            bt_random15.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            bt_random16.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            bt_random17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            bt_random20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_random21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_random22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            bt_random23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
 
             richTextBox1.Location = new Point(x_st + dx * 7 + 20, y_st + dy * 0);
             richTextBox1.Size = new Size(680, 1000);
@@ -659,17 +666,93 @@ namespace vcs_test_all_01_Random
 
         private void bt_random13_Click(object sender, EventArgs e)
         {
+            //建立亂七八糟陣列
+            byte[] dataArray = new byte[100];//字節
+
+            new Random().NextBytes(dataArray);//創建隨機字節
+
+            for (int i = 0; i < dataArray.Length; i++)
+            {
+
+                //sf.WriteByte(dataArray[i]);//將字節寫入文件理.
+                richTextBox1.Text += dataArray[i].ToString() + " ";
+
+            }
 
         }
 
         private void bt_random14_Click(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Normal;
+            //來電震動視窗1
 
+            int rand = 50;
+            int recordx = this.Left;　//保存原來窗體的左上角的x坐標
+            int recordy = this.Top;　//保存原來窗體的左上角的y坐標
+
+            Random random = new Random();
+
+            for (int i = 0; i < 100; i++)
+            {
+                int x = random.Next(rand);
+                int y = random.Next(rand);
+                if (x % 2 == 0)
+                {
+                    this.Left = this.Left + x;
+                }
+                else
+                {
+                    this.Left = this.Left - x;
+                }
+                if (y % 2 == 0)
+                {
+                    this.Top = this.Top + y;
+                }
+                else
+                {
+                    this.Top = this.Top - y;
+                }
+
+                this.Left = recordx;　//還原原始窗體的左上角的x坐標
+                this.Top = recordy;　//還原原始窗體的左上角的y坐標
+            }
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void bt_random15_Click(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Normal;
+            //來電震動視窗2
+            int rand = 10;
+            int recordx = this.Left;
+            int recordy = this.Top;
+            Random random = new Random();
+            for (int i = 0; i < 50; i++)
+            {
+                int x = random.Next(rand);
+                int y = random.Next(rand);
+                if (x % 2 == 0)
+                {
+                    this.Left = this.Left + x;
+                }
+                else
+                {
+                    this.Left = this.Left - x;
+                }
+                if (y % 2 == 0)
+                {
+                    this.Top = this.Top + y;
+                }
+                else
+                {
+                    this.Top = this.Top - y;
+                }
+                Thread.Sleep(1);
+            }
+            this.Left = recordx;
+            this.Top = recordy;
 
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void nudgeWindow()
@@ -693,7 +776,7 @@ namespace vcs_test_all_01_Random
         private void bt_random16_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
-            //來電震動視窗1
+            //來電震動視窗3
             nudgeWindow();
             this.WindowState = FormWindowState.Maximized;
         }
@@ -701,7 +784,7 @@ namespace vcs_test_all_01_Random
         private void bt_random17_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
-            //來電震動視窗2
+            //來電震動視窗4
             Point now_p = this.Location;
             Random r = new Random();
 
@@ -1131,6 +1214,36 @@ namespace vcs_test_all_01_Random
 
             }
             return code;
+        }
+
+        private void bt_random18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_random19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_random20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_random21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_random22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_random23_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

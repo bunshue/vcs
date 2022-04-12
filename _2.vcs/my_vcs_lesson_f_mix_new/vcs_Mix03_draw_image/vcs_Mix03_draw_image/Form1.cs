@@ -1489,7 +1489,7 @@ namespace vcs_Mix03_draw_image
             }
             src.UnlockBits(bmpData);
             return back;
-        }  
+        }
 
 
 
@@ -1497,7 +1497,64 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
+            //格式轉換
+            //Stream 和 byte[] 之間的轉換
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+
+            // 打開文件
+            FileStream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
+
+            // 讀取文件的 byte[]
+            byte[] bytes1 = new byte[fileStream.Length];
+            fileStream.Read(bytes1, 0, bytes1.Length);
+            fileStream.Close();
+
+            // 把 byte[] 轉換成 Stream
+            Stream stream = new MemoryStream(bytes1);
+
+
+
+            // 將 Stream 轉成 byte[]
+            byte[] bytes2 = new byte[stream.Length];
+            stream.Read(bytes2, 0, bytes2.Length);
+            // 設置當前流的位置為流的開始
+            stream.Seek(0, SeekOrigin.Begin);
+
+            // 將 byte[] 轉成 Stream
+            Stream stream2 = new MemoryStream(bytes2);
+
+
+            //將 Stream 寫入文件
+            // 把 Stream 轉換成 byte[]
+            byte[] bytes3 = new byte[stream.Length];
+            stream.Read(bytes3, 0, bytes3.Length);
+            // 設置當前流的位置為流的開始
+            stream.Seek(0, SeekOrigin.Begin);
+
+            // 把 byte[] 寫入文件
+            FileStream fs = new FileStream("aaaaaa.jpg", FileMode.Create);
+            BinaryWriter bw = new BinaryWriter(fs);
+            bw.Write(bytes3);
+            bw.Close();
+            fs.Close();
+
+
+            //二進制轉換成圖片
+
+            MemoryStream ms = new MemoryStream(bytes3);
+            ms.Position = 0;
+            Image img = Image.FromStream(ms);
+            ms.Close();
+            pictureBox1.Image = img;
+
+
+
+
+
         }
+
 
         private void button28_Click(object sender, EventArgs e)
         {
