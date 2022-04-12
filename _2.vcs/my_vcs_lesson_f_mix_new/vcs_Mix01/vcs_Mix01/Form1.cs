@@ -870,16 +870,18 @@ namespace vcs_Mix01
             show_button_text(sender);
             //星期幾
             richTextBox1.Text += CaculateWeekDay(2021, 10, 28);
-
+            richTextBox1.Text += "\n";
 
             //C#獲取當前星期幾的三種方法
 
             //第一種：
 
             string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
-            richTextBox1.Text += weekday + "\n";
-
+            string weekday1 = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();    //same
+            string weekday2 = Day[Convert.ToInt16(DateTime.Now.DayOfWeek)]; //same
+            richTextBox1.Text += weekday1 + "\n";
+            richTextBox1.Text += weekday2 + "\n";
+ 
             //第二種：
 
             richTextBox1.Text += System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek) + "\n";

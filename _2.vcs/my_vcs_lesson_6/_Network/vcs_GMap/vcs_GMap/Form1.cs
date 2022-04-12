@@ -275,6 +275,57 @@ namespace vcs_GMap
             trackBar1.Minimum = gMapControl1.MinZoom;
             trackBar1.Value = (int)gMapControl1.Zoom;
             tb_zoom.Text = gMapControl1.Zoom.ToString();
+            update_MapProvider_info();
+        }
+
+        void update_MapProvider_info()
+        {
+            if (gMapControl1.MapProvider == GMapProviders.GoogleMap)    //正中地圖
+            {
+                if (radioButton1.Checked != true)
+                {
+                    radioButton1.Checked = true;
+                }
+            }
+            else if (gMapControl1.MapProvider == GMapProviders.GoogleChinaMap)  //簡中地圖
+            {
+                if (radioButton2.Checked != true)
+                {
+                    radioButton2.Checked = true;
+                }
+            }
+            else if (gMapControl1.MapProvider == GMapProviders.GoogleTerrainMap)    //地形圖
+            {
+                if (radioButton3.Checked != true)
+                {
+                    radioButton3.Checked = true;
+                }
+            }
+            else if (gMapControl1.MapProvider == GMapProviders.GoogleSatelliteMap)  //衛星地圖
+            {
+                if (radioButton4.Checked != true)
+                {
+                    radioButton4.Checked = true;
+                }
+            }
+            else if (gMapControl1.MapProvider == GMapProviders.GoogleChinaHybridMap)    //混合地圖
+            {
+                if (radioButton5.Checked != true)
+                {
+                    radioButton5.Checked = true;
+                }
+            }
+            else if (gMapControl1.MapProvider == OpenCycleMapProvider.Instance) //腳踏車專用地圖
+            {
+                if (radioButton6.Checked != true)
+                {
+                    radioButton6.Checked = true;
+                }
+            }
+            else
+            {
+
+            }
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -287,7 +338,6 @@ namespace vcs_GMap
             //gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
             //gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
             //gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
-
 
             //竹北座標
             latitude = 24.838;   //緯度
@@ -535,9 +585,8 @@ namespace vcs_GMap
             points.Add(new PointLatLng(24.8283387101149, 121.016464233398));
             points.Add(new PointLatLng(24.8268586516249, 121.01019859314));
 
-            int a = 1;
-            polygon = new GMapPolygon(points, a.ToString());
-            polygon.Stroke = new Pen(Color.FromArgb(250 - ((a * 5) % 240), 250 - ((a * 3) % 240), 250 - ((a * 9) % 240)), 1);
+            polygon = new GMapPolygon(points, "畫範圍");
+            polygon.Stroke = new Pen(Color.Red, 1);
             polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));
             markersOverlay.Polygons.Add(polygon);
         }
@@ -565,6 +614,36 @@ namespace vcs_GMap
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //拼接地圖
+
+
+            int x = 0;
+            int y = 0;
+            PointLatLng point = new PointLatLng(x, y);
+
+            //從地圖上的滑鼠座標畫標記
+
+            x = 0;
+            y = 0;
+            point = gMapControl1.FromLocalToLatLng(x, y);
+            richTextBox1.Text += "控件座標(" + x.ToString() + ", " + y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
+
+            x = 960 / 2;
+            y = 540 / 2;
+            point = gMapControl1.FromLocalToLatLng(x, y);
+            richTextBox1.Text += "控件座標(" + x.ToString() + ", " + y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
+
+            x = 960 - 1;
+            y = 540 - 1;
+            point = gMapControl1.FromLocalToLatLng(x, y);
+            richTextBox1.Text += "控件座標(" + x.ToString() + ", " + y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
+
+
+            x = 960 + 100;
+            y = 540 + 100;
+            point = gMapControl1.FromLocalToLatLng(x, y);
+            richTextBox1.Text += "控件座標(" + x.ToString() + ", " + y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
+
         }
 
         void mapControl_MouseDown(object sender, MouseEventArgs e)
@@ -808,7 +887,6 @@ namespace vcs_GMap
         private void button12_Click(object sender, EventArgs e)
         {
             test_route();
-
         }
 
         void test_route()
@@ -1111,9 +1189,8 @@ namespace vcs_GMap
             points2.Add(new PointLatLng(lat_north, lng_west));
             points2.Add(new PointLatLng(lat_north, lng_east));
             points2.Add(new PointLatLng(lat_south, lng_east));
-            int a = 1;
-            GMapPolygon polygon = new GMapPolygon(points2, a.ToString());
-            polygon.Stroke = new Pen(Color.FromArgb(250 - ((a * 5) % 240), 250 - ((a * 3) % 240), 250 - ((a * 9) % 240)), 1);
+            GMapPolygon polygon = new GMapPolygon(points2, "畫範圍");
+            polygon.Stroke = new Pen(Color.Red, 1);
             polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));
             markersOverlay.Polygons.Add(polygon);
             //把最東最西最南最北框出來 SP

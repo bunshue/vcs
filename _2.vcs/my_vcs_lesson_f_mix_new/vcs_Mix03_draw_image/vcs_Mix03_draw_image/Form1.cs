@@ -1197,20 +1197,241 @@ namespace vcs_Mix03_draw_image
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //畫棒圖
+            Draw_Imgbar();
+        }
 
+        //畫棒圖
+        void Draw_Imgbar()
+        {
+            //創建一個長度爲400，寬帶爲400的Bitmap實例
+            Bitmap bmp = new Bitmap(400, 300);
+            Graphics g;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Snow);
+            string[] sitem = { "很好", "好", "一般", "差" };
+            int[] num = { 1000, 69, 90, 2000 };
+            int cnt, i, len, iBarWidth;
+            float scale;
+            float[] nflt;
+            string header;
+            header = "";
+            cnt = 0;
+            iBarWidth = 40;
+            scale = 1;
+            len = num.Length;
+            //nflt.Length = len;
+            nflt = new float[len];
+            for (i = 0; i < len; i++)
+            {
+                cnt += num[i];
+            }
+            //flt = cnt /len;
+            for (i = 0; i < len; i++)
+            {
+                nflt[i] = 200 * num[i] / cnt;
+                //nflt[i] = scale * num[i]/cnt;
+            }
+
+
+            header = "調查統計結果一覽圖";
+            g.DrawString(header, new Font("宋體", 12, FontStyle.Bold), Brushes.Black, new Point(75, 10));
+            Point myRec = new Point(300, 40);
+            Point myDec = new Point(320, 40);
+
+
+            for (i = 0; i < len; i++)
+            {
+                g.DrawRectangle(Pens.Black, myRec.X, myRec.Y, 20, 10);
+                //繪製小方塊
+                g.FillRectangle(new SolidBrush(Return_Color(i)), myRec.X, myRec.Y, 20, 10);
+                //填充小方塊
+                g.DrawString(" " + sitem[i], new Font("宋體", 9), Brushes.Black, myDec);
+                //繪製小方塊右邊的文字
+                myRec.Y += 15;
+                myDec.Y += 15;
+
+                g.DrawRectangle(Pens.Black, (i * iBarWidth) + 15, 290 - (nflt[i] * scale), 20, (nflt[i] * scale) + 5);
+                //繪製Bar圖
+                g.FillRectangle(new SolidBrush(Return_Color(i)), (i * iBarWidth) + 15, 290 - (nflt[i] * scale), 20, (nflt[i] * scale) + 5);
+                //以指定的色彩填充Bar圖
+                g.DrawString(num[i].ToString(), new Font("宋體", 9), Brushes.Black, (i * iBarWidth) + 20, 275 - (nflt[i] * scale));
+                //顯示Bar圖代表的數據
+
+                //s = s + nflt[i];    
+            }
+            Pen p = new Pen(Color.Black, 1);
+            g.DrawRectangle(p, 1, 1, 398, 298);
+            //bmp.Save(Response.OutputStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+            bmp.Dispose();
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
+            //畫餅圖
+            Draw_Img();
         }
+
+        //畫餅圖
+        void Draw_Img()
+        {
+            Bitmap bmp = new Bitmap(400, 300);
+            //創建一個長度爲400，寬帶爲400的Bitmap實例
+            Graphics g;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Snow);
+            string[] sitem = { "很好", "好", "一般", "差" };
+            int[] num = { 1000, 69, 90, 20 };
+            int cnt, i, len;
+            float s;
+            float[] nflt;
+            string header;
+            header = "";
+            cnt = 0;
+            s = 0;
+            len = num.Length;
+            //nflt.Length = len;
+            nflt = new float[len];
+            for (i = 0; i < len; i++)
+            {
+                cnt += num[i];
+            }
+            //flt = cnt /len;
+            for (i = 0; i < len; i++)
+            {
+
+                nflt[i] = 360 * num[i] / cnt;
+            }
+
+
+            header = "調查統計結果一覽圖";
+            g.DrawString(header, new Font("宋體", 12, FontStyle.Bold), Brushes.Black, new Point(75, 10));
+            g.DrawString("單位：次", new Font("宋體", 9), Brushes.Black, new Point(300, 25));
+
+            Point myRec = new Point(300, 40);
+            Point myDec = new Point(320, 40);
+
+
+            for (i = 0; i < len; i++)
+            {
+                if (i == len - 1)
+                {
+                    //s = 360-s;
+                    nflt[i] = 360 - s;
+                }
+
+                g.DrawRectangle(Pens.Black, myRec.X, myRec.Y, 20, 10);
+                //繪製小方塊
+                g.FillRectangle(new SolidBrush(Return_Color(i)), myRec.X, myRec.Y, 20, 10);
+                //填充小方塊
+                g.DrawString(" " + sitem[i] + " " + num[i], new Font("宋體", 9), Brushes.Black, myDec);
+                //繪製小方塊右邊的文字
+                myRec.Y += 15;
+                myDec.Y += 15;
+
+                g.FillPie(new SolidBrush(Return_Color(i)), 50, 50, 200, 200, s, nflt[i]);
+                g.DrawPie(Pens.Black, 50, 50, 200, 200, s, nflt[i]);
+                s = s + nflt[i];
+            }
+            Pen p = new Pen(Color.Black, 1);
+            g.DrawRectangle(p, 1, 1, 398, 298);
+            //bmp.Save(Response.OutputStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+        }
+        public Color Return_Color(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    return Color.Red;
+                //break;
+                case 1:
+                    return Color.Blue;
+                //break;
+                case 2:
+                    return Color.Yellow;
+                case 3:
+                    return Color.Green;
+                //break;
+                case 4:
+                    return Color.Pink;
+                //break;
+                case 5:
+                    return Color.Plum;
+                //break;
+                case 6:
+                    return Color.Gray;
+                //break;
+                case 7:
+                    return Color.Salmon;
+                //break;
+                case 8:
+                    return Color.RosyBrown;
+                //break;
+                case 9:
+                    return Color.Teal;
+                //break;
+                case 10:
+                    return Color.Orange;
+                //break;
+                case 11:
+                    return Color.Thistle;
+                //break;
+                case 12:
+                    return Color.Maroon;
+                //break;
+                default:
+                    return Color.WhiteSmoke;
+                //break;
+
+            }
+        }
+
+
 
         private void button26_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //色階調整
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+
+            Bitmap bitmap2 = img_color_gradation(bitmap1, 0, 100, 0);
+
+            pictureBox1.Image = bitmap2;
+
 
         }
+
+        //色階調整
+        public static unsafe Bitmap img_color_gradation(Bitmap src, int r, int g, int b)
+        {
+            int width = src.Width;
+            int height = src.Height;
+            Bitmap back = new Bitmap(width, height);
+            Rectangle rect = new Rectangle(0, 0, width, height);
+            //這種速度最快  
+            BitmapData bmpData = src.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);//24位rgb顯示一個像素，即一個像素點3個字節，每個字節是BGR分量。Format32bppRgb是用4個字節表示一個像素  
+            byte* ptr = (byte*)(bmpData.Scan0);
+            for (int j = 0; j < height; j++)
+            {
+                for (int i = 0; i < width; i++)
+                {
+                    //ptr[2]爲r值，ptr[1]爲g值，ptr[0]爲b值  
+                    int red = ptr[2] + r; if (red > 255) red = 255; if (red < 0) red = 0;
+                    int green = ptr[1] + g; if (green > 255) green = 255; if (green < 0) green = 0;
+                    int blue = ptr[0] + b; if (blue > 255) blue = 255; if (blue < 0) blue = 0;
+                    back.SetPixel(i, j, Color.FromArgb(red, green, blue));
+                    ptr += 3; //Format24bppRgb格式每個像素佔3字節  
+                }
+                ptr += bmpData.Stride - bmpData.Width * 3;//每行讀取到最後“有用”數據時，跳過未使用空間XX  
+            }
+            src.UnlockBits(bmpData);
+            return back;
+        }  
+
+
 
         private void button27_Click(object sender, EventArgs e)
         {

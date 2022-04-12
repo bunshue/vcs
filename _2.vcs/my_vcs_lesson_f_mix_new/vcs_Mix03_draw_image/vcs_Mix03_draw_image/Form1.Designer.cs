@@ -105,6 +105,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(170, 70);
             this.button26.TabIndex = 113;
+            this.button26.Text = "色階調整";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -115,6 +116,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(170, 70);
             this.button25.TabIndex = 112;
+            this.button25.Text = "畫餅圖";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -125,6 +127,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(170, 70);
             this.button24.TabIndex = 111;
+            this.button24.Text = "畫棒圖";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

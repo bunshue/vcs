@@ -95,6 +95,36 @@ namespace vcs_Chart0
             draw_mode = 1;
             drawChart(draw_mode);
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //畫chart, 自定義座標軸刻度標籤
+
+            Series s1 = new Series();
+            Series s2 = new Series();
+            Random r = new Random();
+            for (int i = 1; i < 13; i++)
+            {
+                s1.Points.AddXY(i, r.Next(20, 30));
+                s2.Points.AddXY(i, r.Next(10, 30));
+            }
+            chart1.Series.Add(s1);
+            chart1.Series.Add(s2);
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Green;
+            DateTime t = DateTime.Parse("8:30");
+            for (int i = 1; i < 26; i++)
+            {
+                if (i % 2 == 1)
+                {
+                    CustomLabel label = new CustomLabel();
+                    label.Text = t.ToShortTimeString();
+                    label.ToPosition = i;
+                    chart1.ChartAreas[0].AxisX.CustomLabels.Add(label);
+                    label.GridTicks = GridTickTypes.Gridline;
+                    t = t.AddHours(1);
+                }
+            }
+        }
     }
 }
 

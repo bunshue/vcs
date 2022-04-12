@@ -1009,7 +1009,27 @@ namespace vcs_test_all_01_Random
                 //Console.Write(getRandomUnicode().Substring(0, 1));
                 richTextBox1.Text += getRandomUnicode().Substring(0, 1);
             }
-            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\t";
+
+            result = VerficationText(10);
+            richTextBox1.Text += result + "\n";
+        }
+
+        /// <summary>  
+        /// 獲取驗證碼【字符串】  
+        /// </summary>  
+        /// <param name="Length">驗證碼長度【必須大於0】</param>  
+        /// <returns></returns>  
+        public static string VerficationText(int Length)
+        {
+            char[] _verfication = new char[Length];
+            Random _random = new Random();
+            char[] _dictionary = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            for (int i = 0; i < Length; i++)
+            {
+                _verfication[i] = _dictionary[_random.Next(_dictionary.Length - 1)];
+            }
+            return new string(_verfication);
         }
 
         public string NextString(int charLowerBound, int charUpperBound, int length)
