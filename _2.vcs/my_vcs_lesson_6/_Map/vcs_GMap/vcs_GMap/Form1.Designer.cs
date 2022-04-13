@@ -410,7 +410,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(90, 40);
             this.button11.TabIndex = 30;
-            this.button11.Text = "test";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -459,7 +458,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(90, 40);
             this.button16.TabIndex = 34;
-            this.button16.Text = "Reload";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 

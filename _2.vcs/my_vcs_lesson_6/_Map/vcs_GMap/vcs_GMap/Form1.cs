@@ -28,9 +28,6 @@ namespace vcs_GMap
     public partial class Form1 : Form
     {
         GMapOverlay markersOverlay = new GMapOverlay("markers"); //放置marker的图层
-        GMapOverlay RouteMark = new GMapOverlay("RouteMark");//放置区域标记图层
-        GMapOverlay markersOverlay_stop = new GMapOverlay("Stop"); //放置marker的图层
-        GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的图层
 
         Dictionary<string, string> regionDictionary = new Dictionary<string, string>();
 
@@ -45,9 +42,13 @@ namespace vcs_GMap
         double latitude = 24.838;   //緯度
         double longitude = 121.003; //經度
 
+        //量測距離用
         bool flag_measure_first_point = false;
         PointLatLng pt1 = new PointLatLng(0, 0);
         PointLatLng pt2 = new PointLatLng(0, 0);
+        double total_distance = 0;
+
+        bool david_test = true;
 
         public Form1()
         {
@@ -199,8 +200,6 @@ namespace vcs_GMap
             //gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
 
             gMapControl1.Overlays.Add(markersOverlay);  //添加 圖標 Markers 的圖層
-            gMapControl1.Overlays.Add(markers_polygon);  //添加 圖標 Markers 的圖層
-            gMapControl1.Overlays.Add(RouteMark);
 
             //gMapControl1.Dock = DockStyle.Fill;   //將控件全屏顯示
             gMapControl1.CanDragMap = true; //滑鼠右鍵拖動地圖
@@ -237,6 +236,7 @@ namespace vcs_GMap
             trackBar1.BringToFront();
         }
 
+        int cnt = 0;
         void gMapControl1_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -248,12 +248,19 @@ namespace vcs_GMap
                     richTextBox1.Text += "控件座標(" + e.X.ToString() + ", " + e.Y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
 
                     GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
+                    cnt++;
+                    marker.Tag = cnt;
+                    marker.ToolTipText = marker.Tag.ToString();
                     markersOverlay.Markers.Add(marker);
                 }
-                PointLatLng pts = gMapControl1.FromLocalToLatLng(e.X, e.Y);
-                richTextBox1.Text += "points.Add(new PointLatLng(" + pts.Lat.ToString() + ", " + pts.Lng.ToString() + "));\n";
+                //PointLatLng pts = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+                //richTextBox1.Text += "points.Add(new PointLatLng(" + pts.Lat.ToString() + ", " + pts.Lng.ToString() + "));\n";
 
             }
+
+            PointLatLng pts = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+            richTextBox1.Text += "points.Add(new PointLatLng(" + pts.Lat.ToString() + ", " + pts.Lng.ToString() + "));\n";
+
         }
 
         //標記點擊事件
@@ -263,6 +270,16 @@ namespace vcs_GMap
 
             //試者將此點設為地圖中心
         }
+
+        /*
+        //標記點擊事件
+        private void gMapControl1_OnPositionChanged(GMapMarker item, MouseEventArgs e)
+        {
+            richTextBox1.Text += "你按了圖標 " + item.ToolTipText + "\n";
+
+            //試者將此點設為地圖中心
+        }
+        */
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
@@ -552,9 +569,10 @@ namespace vcs_GMap
         {
             PointLatLng point = new PointLatLng(latitude, longitude);
             GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red);
+            GMapOverlay markersOverlay_stop = new GMapOverlay("Stop"); //放置marker的图层
             markersOverlay_stop.Markers.Add(marker);
-
             map.Overlays.Add(markersOverlay_stop);
+
             richTextBox1.Text += "北緯 " + latitude.ToString() + "\t東經 " + longitude.ToString() + "\n";
         }
 
@@ -569,8 +587,10 @@ namespace vcs_GMap
             GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
             polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
             polygon.Stroke = new Pen(Color.Red, 1);
+
+            GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的图层
             markers_polygon.Polygons.Add(polygon);
-            gMapControl1.Overlays.Add(markers_polygon);
+            gMapControl1.Overlays.Add(markers_polygon);  //添加 圖標 Markers 的圖層
 
             richTextBox1.Text += "畫範圍 GMapPolygon 2\n";
             //List<PointLatLng> points = new List<PointLatLng>();
@@ -648,7 +668,7 @@ namespace vcs_GMap
 
         void mapControl_MouseDown(object sender, MouseEventArgs e)
         {
-            //richTextBox1.Text += "MouseDown\n";
+            richTextBox1.Text += "MouseDown\n";
             if (e.Button == MouseButtons.Left)
             {
                 PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
@@ -670,8 +690,11 @@ namespace vcs_GMap
                     else
                     {
                         pt2 = point;
-                        string dist1 = ((float)getDistance(pt1, pt2) * 1000f).ToString("0.##");
-                        richTextBox1.Text += "量測距離 直線 : " + dist1 + " 公尺\n";
+                        double distance = getDistance(pt1, pt2);
+                        total_distance += distance;
+                        string dist1 = ((float)distance * 1000f).ToString("0.##");
+                        string dist2 = ((float)total_distance * 1000f).ToString("0.##");
+                        richTextBox1.Text += "量測距離 直線 : " + dist1 + " 公尺\t總距離 : " + dist2 + " 公尺\n";
                         pt1 = point;
                     }
                 }
@@ -698,8 +721,6 @@ namespace vcs_GMap
         private void button6_Click(object sender, EventArgs e)
         {
             markersOverlay.Clear();
-
-            gMapControl1.Overlays.Remove(markers_polygon);
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -718,17 +739,30 @@ namespace vcs_GMap
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //重新載入
-            gMapControl1.ReloadMap();
+            gMapControl1.ReloadMap();   //重新載入
             update_controls_info();
+
+            //gMapControl1.Refresh();
+            //gMapControl1.ShowTileGridLines = true;//显示瓦片，也就是显示方格
         }
 
+        //info
         private void button10_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "地圖大小 W = " + gMapControl1.Width.ToString() + ", H = " + gMapControl1.Height.ToString() + "\n";
 
             richTextBox1.Text += "滑鼠左鍵連線點數 : " + line_point.Count.ToString() + "\n";
             richTextBox1.Text += "滑鼠右鍵標記個數 : " + markersOverlay.Markers.Count.ToString() + "\n";
+            richTextBox1.Text += "內容 : ";
+            int len = markersOverlay.Markers.Count;
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += i.ToString() + "\t" + markersOverlay.Markers[i].Position.ToString() + "\n";
+
+
+            }
+
 
             richTextBox1.Text += "目前 GMapOverlay 有 " + gMapControl1.Overlays.Count.ToString() + "層\n";
             foreach (GMapOverlay overlay in gMapControl1.Overlays)
@@ -843,45 +877,6 @@ namespace vcs_GMap
 
         private void button11_Click(object sender, EventArgs e)
         {
-            latitude = 24.838;   //緯度
-            longitude = 121.003; //經度
-
-            PointLatLng initialPoint = new PointLatLng(latitude, longitude);
-
-            latitude = 25.838;   //緯度
-            PointLatLng finalPoint = new PointLatLng(latitude, longitude);
-
-
-            //應該是已不支援
-            MapRoute route = GMapProviders.OpenCycleMap.GetRoute(initialPoint, finalPoint, true, true, Convert.ToInt32(gMapControl1.Zoom));
-
-
-            if (route != null)
-            {
-                richTextBox1.Text += "AAAAAAAAA\n";
-                GMapRoute mapRoute = new GMapRoute(route.Points, "A to B");
-                markersOverlay.Routes.Add(mapRoute);
-            }
-            else
-            {
-                richTextBox1.Text += "NNNNNNNN\n";
-            }
-
-
-
-            return;
-
-
-            GMarkerGoogle curPos = new GMarkerGoogle(initialPoint, GMarkerGoogleType.blue_pushpin);
-
-            //應該是已不支援GetRoute功能
-            MapRoute path = GoogleMapProvider.Instance.GetRoute(initialPoint, finalPoint, false, false, 15);
-
-
-            return;
-            richTextBox1.Text += "aaaaaa" + path.Points.Count.ToString() + "\n";
-
-            return;
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -929,7 +924,8 @@ namespace vcs_GMap
             //量測距離 直線
             PointLatLng pt1 = new PointLatLng(24.839008233119472, 121.00927283881413);
             PointLatLng pt2 = new PointLatLng(24.840091217715898, 120.99410979639839);
-            string dist1 = ((float)getDistance(pt1, pt2) * 1000f).ToString("0.##");
+            double distance = getDistance(pt1, pt2);
+            string dist1 = ((float)distance * 1000f).ToString("0.##");
             richTextBox1.Text += "量測距離 直線 : " + dist1 + " 公尺\n";
 
             //量測距離 曲線
@@ -1076,15 +1072,6 @@ namespace vcs_GMap
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //重新載入
-            gMapControl1.ReloadMap();
-
-            //gMapControl1.Refresh();
-            //gMapControl1.ShowTileGridLines = true;//显示瓦片，也就是显示方格
-            //gMapControl1.ReloadMap();
-
-
-
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -1289,6 +1276,7 @@ namespace vcs_GMap
         {
             //滑鼠左鍵量測距離
             flag_measure_first_point = false;
+            total_distance = 0;
             line_point.Clear();
             draw_line_point();
         }
@@ -1337,10 +1325,6 @@ void mapControl_MouseDoubleClick(object sender, MouseEventArgs e)
                 }
             }
         }
-
-            //重新載入
-            gMapControl1.ReloadMap();
-
 
             //建立圖層(overlay)和標籤(marker)，將標籤加入圖層，再將圖層加入控制元件中
 
@@ -1408,6 +1392,42 @@ gMapControl1.Overlays.Add(markersOverlay);
 //label10.Text = (path.Distance * 1000).ToString();
 richTextBox1.Text += (path.Distance * 1000).ToString() + "\n";
 gMapControl1.Refresh();
+*/
+
+/*
+試著能否移動marker
+若可 就可以把歪歪曲曲路線 的總距離全部算出來
+
+
+
+ * //若 markers_polygon 為 global 才可清除
+            //gMapControl1.Overlays.Remove(markers_polygon);
+
+
+*/
+
+
+
+/*
+            //應該是已不支援
+            MapRoute route = GMapProviders.OpenCycleMap.GetRoute(initialPoint, finalPoint, true, true, Convert.ToInt32(gMapControl1.Zoom));
+
+
+            if (route != null)
+            {
+                richTextBox1.Text += "AAAAAAAAA\n";
+                GMapRoute mapRoute = new GMapRoute(route.Points, "A to B");
+                markersOverlay.Routes.Add(mapRoute);
+            }
+            else
+            {
+                richTextBox1.Text += "NNNNNNNN\n";
+            }
+
+            //應該是已不支援GetRoute功能
+            MapRoute path = GoogleMapProvider.Instance.GetRoute(initialPoint, finalPoint, false, false, 15);
+            richTextBox1.Text += "aaaaaa" + path.Points.Count.ToString() + "\n";
+
 */
 
 
