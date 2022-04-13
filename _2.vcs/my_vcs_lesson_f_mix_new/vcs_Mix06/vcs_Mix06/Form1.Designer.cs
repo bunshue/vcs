@@ -218,6 +218,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(170, 70);
             this.button13.TabIndex = 103;
+            this.button13.Text = "現在時間";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 

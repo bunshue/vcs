@@ -249,6 +249,7 @@ namespace vcs_GMap
 
                     GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
                     cnt++;
+                    marker.ToolTip = new GMapToolTip(marker);
                     marker.Tag = cnt;
                     marker.ToolTipText = marker.Tag.ToString();
                     markersOverlay.Markers.Add(marker);
@@ -269,6 +270,7 @@ namespace vcs_GMap
             richTextBox1.Text += "你按了圖標 " + item.ToolTipText + "\n";
 
             //試者將此點設為地圖中心
+            //map.Position = new PointLatLng(coords.Latitude, coords.Longitude);
         }
 
         /*
@@ -355,6 +357,15 @@ namespace vcs_GMap
             //gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
             //gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
             //gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
+            //gMapControl1.MapProvider = GoogleMapProvider.Instance;
+
+            //gMapControl1.MapProvider = GMapProviders.BingHybridMap; //Bing混合地圖
+            //gMapControl1.MapProvider = GMapProviders.BingSatelliteMap;  //Bing衛星地圖
+            //gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;     //Google混合地圖
+            //gMapControl1.MapProvider = GMapProviders.OviSatelliteMap; //不能用
+            //gMapControl1.MapProvider = GMapProviders.OviHybridMap;  //不能用
+
+            //GeocodingProvider gp = GMapProviders.OpenStreetMap as GeocodingProvider;
 
             //竹北座標
             latitude = 24.838;   //緯度
@@ -875,48 +886,58 @@ namespace vcs_GMap
             }
         }
 
+        int cc = 0;
+        void AddMarker(double lat, double lng, GMarkerGoogleType type)
+        {
+            GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lng), type);
+
+            cc++;
+            marker.Tag = cc;
+            marker.ToolTip = new GMapToolTip(marker);
+            marker.ToolTipText = string.Format("{0} - {1}:{2}", cc.ToString(), lat, lng);
+            markersOverlay.Markers.Add(marker);
+        }
+
         private void button11_Click(object sender, EventArgs e)
         {
+            //各種marker
+            latitude = gMapControl1.Position.Lat;   //緯度
+            longitude = gMapControl1.Position.Lng; //經度
+
+            double dd = 0.008;
+
+            AddMarker(latitude + dd * 1, longitude - dd, GMarkerGoogleType.red);
+            AddMarker(latitude + dd * 1, longitude + dd * 0, GMarkerGoogleType.green);
+            AddMarker(latitude + dd * 1, longitude + dd * 1, GMarkerGoogleType.blue);
+
+            AddMarker(latitude + dd * 0, longitude - dd, GMarkerGoogleType.green_big_go);
+            AddMarker(latitude + dd * 0, longitude + dd * 0, GMarkerGoogleType.red_big_stop);
+            AddMarker(latitude + dd * 0, longitude + dd * 1, GMarkerGoogleType.blue_pushpin);
+            AddMarker(latitude + dd * 0, longitude + dd * 2, GMarkerGoogleType.arrow);
+
+            AddMarker(latitude - dd * 1, longitude - dd, GMarkerGoogleType.red_dot);
+            AddMarker(latitude - dd * 1, longitude + dd * 0, GMarkerGoogleType.green_dot);
+            AddMarker(latitude - dd * 1, longitude + dd * 1, GMarkerGoogleType.blue_dot);
+            AddMarker(latitude - dd * 1, longitude + dd * 2, GMarkerGoogleType.pink_dot);
+
+            AddMarker(latitude - dd * 2, longitude - dd, GMarkerGoogleType.red_small);
+            AddMarker(latitude - dd * 2, longitude + dd * 0, GMarkerGoogleType.gray_small);
+            AddMarker(latitude - dd * 2, longitude + dd * 1, GMarkerGoogleType.orange_small);
+
+            PointLatLng point = new PointLatLng(latitude, longitude);
+            GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
+            point = new PointLatLng(latitude, longitude - dd - dd);
+            string filename = @"C:\______test_files\__pic\_icon\face1.png";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            marker = new GMarkerGoogle(point, bitmap1);
+            marker.ToolTip = new GMapToolTip(marker);
+            marker.Tag = "12345";
+            marker.ToolTipText = marker.Tag.ToString();
+            markersOverlay.Markers.Add(marker);
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            test_route();
-        }
-
-        void test_route()
-        {
-            //查找路徑, 無效～～～～
-
-            PointLatLng startPoint = new PointLatLng(24.8493692081609, 120.996723175049);
-            PointLatLng endPoint = new PointLatLng(24.8403343208788, 121.021013259888);
-
-            RoutingProvider rp = gMapControl1.MapProvider as RoutingProvider;
-            //獲取路徑
-            //根據起止點經緯度查找路徑
-            //MapRoute GetRoute(PointLatLng start, PointLatLng end, bool avoidHighways, bool walkingMode, int Zoom);
-            //根據起止點地址查找路徑
-            //MapRoute GetRoute(string start, string end, bool avoidHighways, bool walkingMode, int Zoom);
-            //avoidHighways：是否避免走高速公路
-            //walkingMode：是否步行
-            //zoom：查找路徑時的zoom
-
-            MapRoute route = rp.GetRoute(startPoint, endPoint, false, false, (int)gMapControl1.Zoom);
-            if (route != null)
-            {
-                //添加routes圖層
-                GMapOverlay routes = new GMapOverlay("routes");
-                GMapRoute r = new GMapRoute(route.Points, route.Name);
-                r.Stroke = new Pen(Color.Red, 3);
-                routes.Routes.Add(r);
-                //添加到地圖
-                gMapControl1.Overlays.Add(routes);
-                gMapControl1.ZoomAndCenterRoute(r);
-            }
-            else
-            {
-                MessageBox.Show("未能找到路線");
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1072,6 +1093,19 @@ namespace vcs_GMap
 
         private void button16_Click(object sender, EventArgs e)
         {
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //竹北座標
+            latitude = 24.838;   //緯度
+            longitude = 121.003; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 14; //當前比例
+
+
+
+
+
+
+
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -1295,14 +1329,24 @@ namespace vcs_GMap
             markersOverlay.Routes.Clear();
             markersOverlay.Routes.Add(playRoute);
 
+            //只畫起始點
             if (line_point.Count > 0)
             {
-                GMapMarker marker = new GMarkerGoogle(line_point[line_point.Count - 1], GMarkerGoogleType.green);
+                GMapMarker marker = new GMarkerGoogle(line_point[line_point.Count - 1], GMarkerGoogleType.gray_small);
+
+                if (line_point.Count == 1)
+                {
+                    marker = new GMarkerGoogle(line_point[line_point.Count - 1], GMarkerGoogleType.green);
+                }
+                else
+                {
+                }
                 markersOverlay.Markers.Add(marker);
             }
         }
     }
 }
+
 
 /*
  * 
@@ -1429,5 +1473,44 @@ gMapControl1.Refresh();
             richTextBox1.Text += "aaaaaa" + path.Points.Count.ToString() + "\n";
 
 */
+/*
+        void test_route()   //查找路徑, 無效～～～～
+        {
+            PointLatLng startPoint = new PointLatLng(24.8493692081609, 120.996723175049);
+            PointLatLng endPoint = new PointLatLng(24.8403343208788, 121.021013259888);
 
+            RoutingProvider rp = gMapControl1.MapProvider as RoutingProvider;
+            //獲取路徑
+            //根據起止點經緯度查找路徑
+            //MapRoute GetRoute(PointLatLng start, PointLatLng end, bool avoidHighways, bool walkingMode, int Zoom);
+            //根據起止點地址查找路徑
+            //MapRoute GetRoute(string start, string end, bool avoidHighways, bool walkingMode, int Zoom);
+            //avoidHighways：是否避免走高速公路
+            //walkingMode：是否步行
+            //zoom：查找路徑時的zoom
+
+            MapRoute route = rp.GetRoute(startPoint, endPoint, false, false, (int)gMapControl1.Zoom);
+            if (route != null)
+            {
+                //添加routes圖層
+                GMapOverlay routes = new GMapOverlay("routes");
+                GMapRoute r = new GMapRoute(route.Points, route.Name);
+                r.Stroke = new Pen(Color.Red, 3);
+                routes.Routes.Add(r);
+                //添加到地圖
+                gMapControl1.Overlays.Add(routes);
+                gMapControl1.ZoomAndCenterRoute(r);
+            }
+            else
+            {
+                MessageBox.Show("未能找到路線");
+            }
+        }
+
+gMapControl1.MapScaleInfoEnabled = true;    //比例尺
+ * 
+             // this.gMapControl1.Dock = DockStyle.Fill;//将控件全屏显示
+
+ * 
+ */
 

@@ -1,4 +1,4 @@
-﻿namespace vcs_ScreenCapture3
+﻿namespace vcs_LabelTimer
 {
     partial class Form1
     {
@@ -28,21 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.labelTimer1 = new vcs_LabelTimer.LabelTimer();
             this.SuspendLayout();
             // 
-            // timer1
+            // labelTimer1
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1300;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.labelTimer1.Location = new System.Drawing.Point(94, 161);
+            this.labelTimer1.Name = "labelTimer1";
+            this.labelTimer1.Size = new System.Drawing.Size(435, 150);
+            this.labelTimer1.TabIndex = 0;
+            this.labelTimer1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelTimer1.USER_Color_Background = System.Drawing.Color.Pink;
+            this.labelTimer1.USER_Color_Foreground = System.Drawing.Color.Black;
+            this.labelTimer1.USER_use_24hr = vcs_LabelTimer.LabelTimer.USE24HR.YES;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(680, 521);
+            this.Controls.Add(this.labelTimer1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -52,7 +57,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer timer1;
+        private LabelTimer labelTimer1;
     }
 }
 

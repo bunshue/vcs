@@ -39,15 +39,17 @@ namespace vcs_ScreenCapture3
             Rectangle rect = new Rectangle();
             rect = System.Windows.Forms.Screen.GetWorkingArea(this);
             Size mySize = new Size(rect.Width, rect.Height);
-            Bitmap bitmap = new Bitmap(rect.Width, rect.Height);
-            Graphics g = Graphics.FromImage(bitmap);
+            Bitmap bitmap1 = new Bitmap(rect.Width, rect.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
             g.CopyFromScreen(0, 0, 0, 0, mySize);
-            string ImageName = DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".jpg";
-            bitmap.Save(ImageName);
+
+            string filename = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            bitmap1.Save(filename);
             //釋放資源  
-            bitmap.Dispose();
+            bitmap1.Dispose();
             g.Dispose();
             GC.Collect();
         }
     }
 }
+

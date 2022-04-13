@@ -1,13 +1,13 @@
-﻿namespace vcs_ScreenCapture3
+﻿namespace vcs_LabelTimer
 {
-    partial class Form1
+    partial class LabelTimer
     {
-        /// <summary>
+        /// <summary> 
         /// 設計工具所需的變數。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// 清除任何使用中的資源。
         /// </summary>
         /// <param name="disposing">如果應該處置 Managed 資源則為 true，否則為 false。</param>
@@ -20,9 +20,9 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form 設計工具產生的程式碼
+        #region 元件設計工具產生的程式碼
 
-        /// <summary>
+        /// <summary> 
         /// 此為設計工具支援所需的方法 - 請勿使用程式碼編輯器
         /// 修改這個方法的內容。
         /// </summary>
@@ -35,17 +35,16 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 1300;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // Form1
+            // LabelTimer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "LabelTimer";
+            this.Size = new System.Drawing.Size(435, 150);
+            this.Load += new System.EventHandler(this.LabelTimer_Load);
             this.ResumeLayout(false);
 
         }
@@ -55,4 +54,3 @@
         private System.Windows.Forms.Timer timer1;
     }
 }
-

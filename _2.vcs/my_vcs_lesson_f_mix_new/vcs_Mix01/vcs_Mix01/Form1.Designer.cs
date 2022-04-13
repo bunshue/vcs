@@ -172,6 +172,7 @@
             this.bt_clear.TabIndex = 107;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // button19
             // 
@@ -191,6 +192,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(170, 70);
             this.button0.TabIndex = 105;
+            this.button0.Text = "動態加入控件";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -406,9 +408,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(547, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(547, 216);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(628, 790);
+            this.richTextBox1.Size = new System.Drawing.Size(628, 586);
             this.richTextBox1.TabIndex = 85;
             this.richTextBox1.Text = "";
             // 

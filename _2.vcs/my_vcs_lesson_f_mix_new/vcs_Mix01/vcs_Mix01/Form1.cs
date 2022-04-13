@@ -84,9 +84,14 @@ namespace vcs_Mix01
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -116,6 +121,32 @@ namespace vcs_Mix01
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //1.建立Button物件
+            Button[] btuArray = new Button[3];
+            btuArray[0] = new Button();
+            btuArray[1] = new Button();
+            btuArray[2] = new Button();
+
+            for (int i = 0; i != btuArray.Length; i++)
+            {
+                //2.加入控制項
+                this.Controls.Add(btuArray[i]);
+                btuArray[i].Size = new Size(80, 60);
+                btuArray[i].Text = "Dynamic " + i;
+                //btuArray[i].Top = 12 + btuArray[i].Height * i;
+                //btuArray[i].Left = 13;
+                btuArray[i].Location = new Point(550 + i * 90, 20);
+                //3.為Click事件註冊
+                btuArray[i].Click += new EventHandler(button_Click);
+            }
+        }
+
+        private void button_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按下 :\t控件種類 : " + sender.ToString() + "\t";
+            richTextBox1.Text += "文字 :  " + ((Button)(sender)).Text + "\t";
+            richTextBox1.Text += "索引 :  " + ((Button)(sender)).TabIndex.ToString() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1608,7 +1639,7 @@ namespace vcs_Mix01
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
         }
     }
 }
-

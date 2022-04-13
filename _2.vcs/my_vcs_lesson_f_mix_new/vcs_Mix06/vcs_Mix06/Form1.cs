@@ -571,6 +571,11 @@ namespace vcs_Mix06
         private void button13_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            DateTime dt = DateTime.Now;
+
+            richTextBox1.Text += "現在時間 : " + DateTime.Now.ToString("hh:mm:ss.fff") + "\n";
+
         }
 
         private void button14_Click(object sender, EventArgs e)
