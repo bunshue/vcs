@@ -1,0 +1,5 @@
+Author: Alex Leo
+Email: alexleo321@hotmail.com
+Blog: http://www.cnblogs.com/conexpress/
+
+本程序是用C#实现的计算器，模仿MSSQL的查询分析器，可以输入表达式计算，支持多行表达式，支持选择部分表达式，能定位语法错误，支持数值、字符串和逻辑运算。运算符的具体用法请参考bin\Debug\TokenRecord.xml文件，其中对每个运算符都给出了使用示例。本程序还存在一些细节上的bug，有兴趣的朋友可以完善一下。如果需要添加更多操作符和函数，可以根据blog中的文章自行扩展。如果需要在其他地方使用本程序中的代码，请保留原作者信息。

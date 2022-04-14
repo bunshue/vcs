@@ -37,7 +37,6 @@
             this.labelTimer1.Name = "labelTimer1";
             this.labelTimer1.Size = new System.Drawing.Size(435, 150);
             this.labelTimer1.TabIndex = 0;
-            this.labelTimer1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelTimer1.USER_Color_Background = System.Drawing.Color.Pink;
             this.labelTimer1.USER_Color_Foreground = System.Drawing.Color.Black;
             this.labelTimer1.USER_use_24hr = vcs_LabelTimer.LabelTimer.USE24HR.YES;

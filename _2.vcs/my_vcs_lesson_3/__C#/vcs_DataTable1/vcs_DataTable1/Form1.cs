@@ -653,20 +653,62 @@ namespace vcs_DataTable1
             datarow1["姓名"] = "大熊";  //指定加入姓名為大熊
             datarow1["座號"] = "01";   //指定加入座號為01
             dt.Rows.Add(datarow1);       //將 datarow1 的內容加入到 dt.Rows 裡
-
-
-
         }
-
-
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //動態處理DataTable
 
+            //1.創建表實例
+            DataTable dt = new DataTable();
+
+            //2.建立表結構
+            dt.Columns.Add("ID");
+            dt.Columns.Add("Name");
+
+            //3.創建新行
+            DataRow dr = dt.NewRow();
+
+            //4.為新行賦值
+            dr[0] = "1";
+            dr[1] = "林林";
+
+            //5.將新行添加到表
+            dt.Rows.Add(dr);
+
+
+            /*
+            //1.創建表實例
+            DataTable dt=new DataTable();
+
+            //2.建立表結構
+            dt.Columns.Add("ID");
+            dt.Columns.Add("Name");
+
+            //3.添加新行
+            dt.Rows.Add("1", "Name");
+            */
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("A", typeof(bool));
+            dt.Columns.Add("B", typeof(bool));
+
+            dt.Rows.Add(true, true);
+            dt.Rows.Add(true, false);
+            dt.Rows.Add(false, true);
+            dt.Rows.Add(false, false);
+
+            richTextBox1.Text += "result : \n";
+            int i;
+            for (i = 0; i < 4; i++)
+            {
+                richTextBox1.Text += string.Format("A: {0}\tB: {1}", dt.Rows[i]["A"], dt.Rows[i]["B"]) + "\n";
+            }
 
         }
 

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="ConExpress.Calculator.TokenFactory">
+    <Position X="3" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>SyntaxAnalyse\TokenRecord\TokenFactory\TokenFactory.cs</FileName>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConExpress.Calculator.TokenKeywordFactory">
+    <Position X="4.5" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>SyntaxAnalyse\TokenRecord\TokenFactory\TokenKeywordFactory.cs</FileName>
+      <HashCode>DAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAEAABAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConExpress.Calculator.TokenNumberFactory">
+    <Position X="4.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>SyntaxAnalyse\TokenRecord\TokenFactory\TokenNumberFactory.cs</FileName>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConExpress.Calculator.TokenSymbolFactory">
+    <Position X="1.5" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>SyntaxAnalyse\TokenRecord\TokenFactory\TokenSymbolFactory.cs</FileName>
+      <HashCode>BAAAAAAAQAAAAAAAAAAAgAAAAAAAABAAAAAAAAAAAgA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConExpress.Calculator.TokenStringFactory">
+    <Position X="1.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>SyntaxAnalyse\TokenRecord\TokenFactory\TokenStringFactory.cs</FileName>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+</ClassDiagram>

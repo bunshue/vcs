@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="ConExpress.Calculator.TokenRecord">
+    <Position X="0.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>SyntaxAnalyse\TokenRecord\TokenRecord.cs</FileName>
+      <HashCode>AAAIAAAAEAACAAUGCAAAAIABAAAAgAAgAAEgBKAACAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConExpress.Calculator.TokenValue">
+    <Position X="3.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SyntaxAnalyse\TokenRecord\TokenValue.cs</FileName>
+      <HashCode>AAAAAAAAAAACAAQAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConExpress.Calculator.TokenMethod">
+    <Position X="3.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SyntaxAnalyse\TokenRecord\Method\TokenMethod.cs</FileName>
+      <HashCode>AAAAAAAAAAACAAQAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConExpress.Calculator.TokenSymbol">
+    <Position X="3.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SyntaxAnalyse\TokenRecord\Symbol\TokenSymbol.cs</FileName>
+      <HashCode>AAAAAAAAAAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+</ClassDiagram>

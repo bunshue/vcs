@@ -482,17 +482,25 @@ namespace vcs_test_all_03_Syntax
             //StringBuilder語法
 
             richTextBox1.Text += "StringBuilder test\n";
-            StringBuilder sb = new StringBuilder();
-            sb.Append("\r\n\r\n\r\n");
-            sb.Append("*******興隆超市*******\n");
-            sb.Append("品名-----數量-----價格\n");
-            sb.Append("精品白沙   1       8元\n");
-            sb.Append("張新發槟榔 1      10元\n");
-            sb.Append("合計：     2      18元\n");
-            sb.Append("---收銀員：張三---\n");
-            sb.Append("---技術支持：李四---\n\n\n");
+            StringBuilder sb1 = new StringBuilder();
+            sb1.Append("\r\n\r\n\r\n");
+            sb1.Append("*******興隆超市*******\n");
+            sb1.Append("品名-----數量-----價格\n");
+            sb1.Append("精品白沙   1       8元\n");
+            sb1.Append("張新發槟榔 1      10元\n");
+            sb1.Append("合計：     2      18元\n");
+            sb1.Append("---收銀員：張三---\n");
+            sb1.Append("---技術支持：李四---\n\n\n");
 
-            richTextBox1.Text += sb.ToString() + "\n";
+            richTextBox1.Text += sb1.ToString() + "\n";
+
+            //StringBuilder 就是 字符串相加
+            StringBuilder sb2 = new StringBuilder("");
+            sb2.Append("群曜");
+            sb2.Append("醫電");
+            sb2.Append("股份有限公司");
+
+            richTextBox1.Text += "取得字串 : " + sb2 + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -715,6 +723,64 @@ namespace vcs_test_all_03_Syntax
             Sunday = 7           // 星期日
         };
 
+        //默認從0開始：分別為0，1，2，3
+        enum Level1
+        {
+            Employee,
+            Manager,
+            Boss,
+            BigBoss,
+        }
+
+        //未指定的列舉名的值將依著最后一個指定值向后依次遞增（注意是最后一個指定值）
+        //列舉中定義的可以自定義整數值
+        enum Level2
+        {
+            Employee = 100,
+            Manager,
+            Boss,
+            BigBoss,
+        }
+        //結果為100，101，102，103
+
+        //列舉中定義的整數值可以部分預設
+        enum Level3
+        {
+            Employee = 100,
+            Manager,
+            Boss = 102,
+            BigBoss,
+        }
+        //Manager自動為101，BigBoss自動為103
+
+        enum Level4
+        {
+            Employee = 100,
+            Manager,
+            Boss = 101,
+            BigBoss,
+        }
+        //結果為100，101，101，102，有兩個101也是合法的
+        //但不能有兩個Manager，即enum中的名稱不能重復，
+
+        //位元位式用法
+
+        enum Skill
+        {
+            Drive = 1,  //二進制  0001
+            Cook = 2,  //二進制  0010
+            Program = 4, //二進制  0100
+            Teach = 8, //二進制  1000
+        }
+
+        class Person
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
+            public Level1 Level { get; set; }
+            public Skill Skill { get; set; }
+        }
+
         private void button29_Click(object sender, EventArgs e)
         {
             //ENUM的用法
@@ -756,6 +822,30 @@ namespace vcs_test_all_03_Syntax
             // 取出WeekDays.Wednesday列舉常數值之後再轉成整數
             richTextBox1.Text += "星期三列舉常數值：" + (int)WeekDays.Wednesday + "\n";
             richTextBox1.Text += "星期五列舉常數值：" + (int)WeekDays.Friday + "\n";
+
+
+            //ENUM的用法
+
+
+
+
+            Person person1 = new Person();
+            person1.Level = Level1.Employee;
+
+            richTextBox1.Text += "result : " + ((int)Level1.Boss).ToString() + "\n";
+            //結果為2
+
+            Person person2 = new Person();
+            person2.Skill = Skill.Drive | Skill.Cook | Skill.Program | Skill.Teach; //二進制  1111，十進制的15 //結果為15
+
+            richTextBox1.Text += "Skill : " + ((int)person2.Skill).ToString() + "\n";
+            richTextBox1.Text += "Skill a : " + ((person2.Skill & Skill.Cook) > 0).ToString() + "\n";
+            richTextBox1.Text += "Skill b : " + ((person2.Skill & Skill.Cook) == Skill.Cook).ToString() + "\n";
+
+            Console.WriteLine(person2.Skill);
+            Console.WriteLine((person2.Skill & Skill.Cook) > 0); //結果為True，（1111 & 0010 = 0010）
+            Console.WriteLine((person2.Skill & Skill.Cook) == Skill.Cook); //結果為True
+
         }
 
         private void button30_Click(object sender, EventArgs e)

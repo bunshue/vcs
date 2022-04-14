@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TokenRecord>
+  <TokenKeyword>
+    <!--以下字符串处理函数记号对象-->
+    <Token Word="mid" Class="TokenMid" Example="截取部分字符串&#10;示例：mid('abcdefg',2,3) = 'bcd'&#10;参数1:源字符串&#10;参数2:起始位置,从1开始&#10;参数3:可选，截取长度&#10;错误:超出范围则报错" />
+    <Token Word="left" Class="TokenLeft" Example="截取左边部分字符串&#10;示例：left('abcdefg',5) = 'abcde'&#10;参数1：源字符串&#10;参数2：要截取的长度" />
+    <Token Word="right" Class="TokenRight" Example="截取右边部分字符串&#13;&#10;示例：right('abcdefg',5) = 'cdefg'&#10;参数1：源字符串&#10;参数2：要截取的长度" />
+    <Token Word="string" Class="TokenToString" Example="转换为字符串&#10;示例：string(53.6) = '53.6'" />
+    <!--以下为数学运算记号对象-->
+    <Token Word="round" Class="TokenRound" Example="截取部分小数位&#10;示例：round(0.12345,3) = 0.123&#10;参数1：数值&#10;要截取的小数位长度" />
+    <Token Word="abs" Class="TokenAbs" Example="计算绝对值&#10;示例：abs(-5) = 5" />
+    <Token Word="max" Class="TokenMax" Example="计算最大值&#10;示例：max(3,5) = 5&#10;参数必须多于1个" />
+    <Token Word="min" Class="TokenMin" Example="计算最小值&#10;示例：min(3,5) = 3&#10;参数必须多于1个" />
+    <Token Word="sum" Class="TokenSum" Example="计算多个数值的和&#10;示例：sum(1,2,3) = 6&#10;参数个数不限，但至少为1个" />
+    <Token Word="avg" Class="TokenAvg" Example="计算多个数值的平均值&#10;示例：avg(1,2,3,4) = 2.5&#10;参数个数不限，但至少为1个" />
+    <!--如果希望取余采用VB的Mod函数，形如Mod(5.4,2) = 1.4，将TokenMod修改为继承自TokenMethod即可，此时用%必须形如%(5.4,2)-->
+    <!--<Token Word="mod" Class="TokenMod" Example="5.4 mod 2 = 1.4，mod后必须带空格" />-->
+    <Token Word="pow" Class="TokenPow" Example="计算次方，格式pow(n,m)表示n的m次方&#10;示例：pow(2,3) = 8&#10;参数1：要乘幂的底数&#10;参数2：乘幂的指数" />
+    <!--以下为三角函数记号对象，均采用角度计算而非弧度-->
+    <Token Word="sin" Class="TokenSin" Example="计算正弦&#10;示例：sin(30) = 0.5" />
+    <Token Word="asin" Class="TokenAsin" Example="计算反正弦&#10;示例：asin(0.5) = 30" />
+    <Token Word="cos" Class="TokenCos" Example="计算余弦&#10;示例：cos(60) = 0.5" />
+    <Token Word="acos" Class="TokenAcos" Example="计算反余弦&#10;示例：acos(0.5) = 60" />
+    <Token Word="tan" Class="TokenTan" Example="计算正切&#10;示例：tan(45) = 1" />
+    <Token Word="atan" Class="TokenAtan" Example="计算反正切&#10;示例：atan(1) = 45" />
+    <Token Word="atan2" Class="TokenAtan2" Example="通过坐标计算反正切&#10;示例：atan2(30,30) = 45" />
+    <!--以下为逻辑运算记号对象，可以同时表示为关键字和运算符，因为它们的格式一致，都为true operate false-->
+    <Token Word="and" Class="TokenAnd" Example="逻辑与运算&#10;示例：true and false = false" />
+    <Token Word="andalso" Class="TokenAndAlso" Example="逻辑与运算(短路操作)&#10;示例：true andalso false = false" />
+    <Token Word="or" Class="TokenOr" Example="逻辑或运算&#10;示例：true or false = true" />
+    <Token Word="orelse" Class="TokenOrElse" Example="逻辑或运算(短路操作)&#10;示例：true or false = true" />
+    <Token Word="not" Class="TokenNot" Example="逻辑非运算&#10;示例：not true = false" />
+    <Token Word="xor" Class="TokenXor" Example="逻辑异或运算&#10;示例：true xor false = true" />
+    <!--以下为常量记号对象-->
+    <Token Word="pi" Class="TokenValue" Example="常量圆周率π&#10;此字段的值为 3.14159265358979323846。" />
+    <Token Word="e" Class="TokenValue" Example="常量自然对数的底&#10;此字段的值为 2.7182818284590452354" />
+    <Token Word="true" Class="TokenValue" Example="逻辑常量真&#10;示例：true and false = false" />
+    <Token Word="false" Class="TokenValue" Example="逻辑常量假&#10;示例：true and false = false" />
+    <!--以下为其他记号对象-->
+    <Token Word="if" Class="TokenIf" Example="通过条件返回值&#10;示例：if(3>5,12,24) = 24&#10;相当于C#中的：Condition ? TrueValue : FalseValue" />
+  </TokenKeyword>
+  <TokenSymbol>
+    <!--以下为分隔符-->
+    <Token Word="(" Class="TokenLeftBracket" Example="左括号&#10;示例：2*(5-3) = 4" />
+    <Token Word=")" Class="TokenRightBracket" Example="右括号&#10;示例：2*(5-3) = 4" />
+    <Token Word="," Class="TokenComma" Example="分隔符(逗号)，用在函数中&#10;示例：left('abcdefg',5) = 'abcde'" />
+    <!--以下为数学运算符-->
+    <Token Word="+" Class="TokenPlus" Example="加法运算&#10;示例：2+3 = 5 或 'abc' + 'def' = 'abcdef'" />
+    <Token Word="-" Class="TokenMinus" Example="减法运算&#10;示例：5-3 = 2" />
+    <Token Word="*" Class="TokenMultiply" Example="乘法运算&#10;示例：3*4 = 12" />
+    <Token Word="/" Class="TokenDivide" Example="除法运算&#10;示例：8/2 = 4" />
+    <Token Word="%" Class="TokenMod" Example="取模运算&#10;示例：5.4%2 = 1.4" />
+    <!--如果希望求幂采用VB的^算法，形如2^3 = 8，将TokenPow修改为继承自TokenArithmetic即可，此时用pow则必须输入2 pow 3，pow后必须带空格-->
+    <!--<Token Word="^" Class="TokenPow" Example="^(2,3) = 8" />-->
+    <!--以下为比较运算符-->
+    <Token Word="=" Class="TokenEvaluate" Example="赋值运算&#10;示例：i=3" />
+    <Token Word="==" Class="TokenEqual" Example="等于运算&#10;示例：if(3==5,12,24) = 24" />
+    <Token Word="&lt;&gt;" Class="TokenNotEqual" Example="不等于运算&#10;示例：if(3&lt;&gt;5,12,24) = 12" />
+    <Token Word="!=" Class="TokenNotEqual" Example="不等于运算&#10;示例：if(3!=5,12,24) = 12" />
+    <Token Word="&gt;" Class="TokenGreatThan" Example="大于运算&#10;示例：if(3&gt;5,12,24) = 24" />
+    <Token Word="&gt;=" Class="TokenGreatOrEqual" Example="大于等于运算&#10;示例：if(3&gt;=5,12,24) = 24" />
+    <Token Word="&lt;" Class="TokenLessThan" Example="小于运算&#10;示例：if(3&lt;5,12,24) = 12" />
+    <Token Word="&lt;=" Class="TokenLessOrEqual" Example="小于等于运算&#10;示例：if(3&lt;=5,12,24) = 12" />
+    <!--以下为逻辑运算符-->
+    <Token Word="!" Class="TokenNot" Example="逻辑非运算&#10;示例：!true = false" />
+    <Token Word="&amp;" Class="TokenAnd" Example="逻辑与运算&#10;示例：true &amp; false = false" />
+    <Token Word="&amp;&amp;" Class="TokenAndAlso" Example="逻辑与运算(短路操作)&#10;示例：true &amp;&amp; false = false" />
+    <Token Word="|" Class="TokenOr" Example="逻辑或运算&#10;示例：true | false = true" />
+    <Token Word="||" Class="TokenOrElse" Example="逻辑或运算(短路操作)&#10;示例：true || false = true" />
+  </TokenSymbol>
+</TokenRecord>

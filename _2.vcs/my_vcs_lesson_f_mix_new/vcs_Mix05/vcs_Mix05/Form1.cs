@@ -339,92 +339,12 @@ namespace vcs_Mix05
             DateTime lastDay = DateTime.Now;
         }
 
-        //ENUM測試 ST
-
-        //默認從0開始：分別為0，1，2，3
-        enum Level1
-        {
-            Employee,
-            Manager,
-            Boss,
-            BigBoss,
-        }
-
-        //未指定的列舉名的值將依著最后一個指定值向后依次遞增（注意是最后一個指定值）
-        //列舉中定義的可以自定義整數值
-        enum Level2
-        {
-            Employee = 100,
-            Manager,
-            Boss,
-            BigBoss,
-        }
-        //結果為100，101，102，103
-
-        //列舉中定義的整數值可以部分預設
-        enum Level3
-        {
-            Employee = 100,
-            Manager,
-            Boss = 102,
-            BigBoss,
-        }
-        //Manager自動為101，BigBoss自動為103
-
-        enum Level4
-        {
-            Employee = 100,
-            Manager,
-            Boss = 101,
-            BigBoss,
-        }
-        //結果為100，101，101，102，有兩個101也是合法的
-        //但不能有兩個Manager，即enum中的名稱不能重復，
-
-        //位元位式用法
-
-        enum Skill
-        {
-            Drive = 1,  //二進制  0001
-            Cook = 2,  //二進制  0010
-            Program = 4, //二進制  0100
-            Teach = 8, //二進制  1000
-        }
-
-        class Person
-        {
-            public int ID { get; set; }
-            public string Name { get; set; }
-            public Level1 Level { get; set; }
-            public Skill Skill { get; set; }
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            Person person1 = new Person();
-            person1.Level = Level1.Employee;
-
-            richTextBox1.Text += "result : " + ((int)Level1.Boss).ToString() + "\n";
-            //結果為2
-
-            Person person2 = new Person();
-            person2.Skill = Skill.Drive | Skill.Cook | Skill.Program | Skill.Teach; //二進制  1111，十進制的15 //結果為15
-
-            richTextBox1.Text += "Skill : " + ((int)person2.Skill).ToString() + "\n";
-            richTextBox1.Text += "Skill a : " + ((person2.Skill & Skill.Cook) > 0).ToString() + "\n";
-            richTextBox1.Text += "Skill b : " + ((person2.Skill & Skill.Cook) == Skill.Cook).ToString() + "\n";
-
-            Console.WriteLine(person2.Skill);
-            Console.WriteLine((person2.Skill & Skill.Cook) > 0); //結果為True，（1111 & 0010 = 0010）
-            Console.WriteLine((person2.Skill & Skill.Cook) == Skill.Cook); //結果為True
         }
-        //ENUM測試 SP
-
 
         //class test ST
-
         class P
         {
             private string pname;
@@ -1047,36 +967,6 @@ namespace vcs_Mix05
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            /*
-            以程式列出 中文字 與 BIG5 內碼 的對應表
-
-            由 Big 5 內碼表 得知，我們要的中文字自 A440 開始，換成 10 進位 = 42048，所以 for 迴圈起始值設為 42048，結束值為 63964。
-            */
-
-            richTextBox1.Clear();   // 用來顯示 10 進位 ←→ 16 進位 對應
-            richTextBox1.Clear();   // 列出 csv 格式的 BIG5 內碼 ←→ 實際對應的中文字
-
-            for (int x = 42048; x < 63965; x++)
-            {
-                // 得出 x 的 16 進位內碼
-                var sHex = x.ToString("X4");
-                // sHex = "A7DA";  // 測試範例文字: 我
-
-                // 再由內碼轉成中文字
-                byte[] codeBytes = new byte[2];
-                // 由於中文字是由 2 個 byte 組成 , 將 sHex 切成兩組
-                // 再由 16 進位轉換成 10 進位
-                codeBytes[0] = (byte)Convert.ToInt32(sHex.Substring(0, 2), 16);
-                codeBytes[1] = (byte)Convert.ToInt32(sHex.Substring(2, 2), 16);
-                var sBig5 = System.Text.Encoding.GetEncoding("BIG5").GetString(codeBytes);
-                if ((sBig5.Trim() != "?") && (sBig5.Trim() != "") && (sBig5.Trim() != ""))
-                {   // 還是會有一些不要的字，再濾掉 
-                    richTextBox1.AppendText(x.ToString() + " = " + sHex + ", " + sBig5 + "\n");
-                    richTextBox1.AppendText("\"" + sHex + "\", \"" + sBig5 + "\"\n");
-                }
-                Application.DoEvents();
-            }
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1120,23 +1010,6 @@ namespace vcs_Mix05
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("A", typeof(bool));
-            dt.Columns.Add("B", typeof(bool));
-
-            dt.Rows.Add(true, true);
-            dt.Rows.Add(true, false);
-            dt.Rows.Add(false, true);
-            dt.Rows.Add(false, false);
-
-            richTextBox1.Text += "result : \n";
-            int i;
-            for (i = 0; i < 4; i++)
-            {
-                richTextBox1.Text += string.Format("A: {0}\tB: {1}", dt.Rows[i]["A"], dt.Rows[i]["B"]) + "\n";
-            }
         }
 
         private void button20_Click(object sender, EventArgs e)

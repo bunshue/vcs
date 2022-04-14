@@ -26,6 +26,44 @@ namespace vcs_LabelTimer
             this.Invalidate();
         }
 
+        //顯示在控件屬性的項目 : USER_size_width USER_size_height USER_use_24hr USER_Font USER_Color_Foreground USER_Color_Background
+
+        private int size_width = 300;
+        [
+        Category("Alignment"),
+        Description("控制項寬度")
+        ]
+        public int USER_size_width
+        {
+            get
+            {
+                return size_width;
+            }
+            set
+            {
+                size_width = value;
+                Invalidate();
+            }
+        }
+
+        private int size_height = 100;
+        [
+        Category("Alignment"),
+        Description("控制項高度")
+        ]
+        public int USER_size_height
+        {
+            get
+            {
+                return size_height;
+            }
+            set
+            {
+                size_height = value;
+                Invalidate();
+            }
+        }
+
         public enum USE24HR
         {
             NO = 0,
@@ -33,9 +71,10 @@ namespace vcs_LabelTimer
         }
 
         private USE24HR flag_use_24_hr = USE24HR.YES;
-        private Color Color_foreground = Color.Black;
-        private Color Color_background = Color.Pink;
-
+        [
+        Category("Alignment"),
+        Description("使用12小時制 或是 使用24小時制")
+        ]
         public USE24HR USER_use_24hr
         {
             get
@@ -49,6 +88,29 @@ namespace vcs_LabelTimer
             }
         }
 
+        private Font use_font = new Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+        [
+        Category("Alignment"),
+        Description("用來顯示控制項文字的字型。")
+        ]
+        public Font USER_Font
+        {
+            get
+            {
+                return use_font;
+            }
+            set
+            {
+                use_font = value;
+                Invalidate();
+            }
+        }
+
+        private Color Color_foreground = Color.Black;
+        [
+        Category("Alignment"),
+        Description("用來顯示文字之元件的前景色彩。")
+        ]
         public Color USER_Color_Foreground
         {
             get
@@ -62,8 +124,14 @@ namespace vcs_LabelTimer
             }
         }
 
+        private Color Color_background = Color.Pink;
+        [
+        Category("Alignment"),
+        Description("元件的背景色彩。")
+        ]
         public Color USER_Color_Background
         {
+
             get
             {
                 return Color_background;
@@ -75,61 +143,22 @@ namespace vcs_LabelTimer
             }
         }
 
-        // ContentAlignment is an enumeration defined in the System.Drawing
-        // namespace that specifies the alignment of content on a drawing
-        // surface.
-        private ContentAlignment alignmentValue = ContentAlignment.MiddleLeft;
-
-        [
-        Category("Alignment"),
-        Description("Specifies the alignment of text.")
-        ]
-        public ContentAlignment TextAlignment
-        {
-
-            get
-            {
-                return alignmentValue;
-            }
-            set
-            {
-                alignmentValue = value;
-
-                // The Invalidate method invokes the OnPaint method described
-                // in step 3.
-                Invalidate();
-            }
-        }
-
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            StringFormat style = new StringFormat();
-            style.Alignment = StringAlignment.Near;
-            switch (alignmentValue)
-            {
-                case ContentAlignment.MiddleLeft:
-                    style.Alignment = StringAlignment.Near;
-                    break;
-                case ContentAlignment.MiddleRight:
-                    style.Alignment = StringAlignment.Far;
-                    break;
-                case ContentAlignment.MiddleCenter:
-                    style.Alignment = StringAlignment.Center;
-                    break;
-            }
 
-            // Call the DrawString method of the System.Drawing class to write
-            // text. Text and ClientRectangle are properties inherited from
-            // Control.
+            this.Size = new Size(size_width, size_height);
+
+            e.Graphics.Clear(Color_background);
             e.Graphics.DrawString(
                 Text + DateTime.Now.ToString(),
                 Font,
-                new SolidBrush(ForeColor),
-                ClientRectangle, style);
+                new SolidBrush(Color_foreground),
+                ClientRectangle);
+
+            //g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
         }
-
-
-
     }
 }
+
+

@@ -159,7 +159,37 @@ namespace vcs_Encoding
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //列出 中文字 與 BIG5 內碼 的對應表
 
+            /*
+            以程式列出 中文字 與 BIG5 內碼 的對應表
+
+            由 Big 5 內碼表 得知，我們要的中文字自 A440 開始，換成 10 進位 = 42048，所以 for 迴圈起始值設為 42048，結束值為 63964。
+            */
+
+            richTextBox1.Clear();   // 用來顯示 10 進位 ←→ 16 進位 對應
+            richTextBox1.Clear();   // 列出 csv 格式的 BIG5 內碼 ←→ 實際對應的中文字
+
+            for (int x = 42048; x < 63965; x++)
+            {
+                // 得出 x 的 16 進位內碼
+                var sHex = x.ToString("X4");
+                // sHex = "A7DA";  // 測試範例文字: 我
+
+                // 再由內碼轉成中文字
+                byte[] codeBytes = new byte[2];
+                // 由於中文字是由 2 個 byte 組成 , 將 sHex 切成兩組
+                // 再由 16 進位轉換成 10 進位
+                codeBytes[0] = (byte)Convert.ToInt32(sHex.Substring(0, 2), 16);
+                codeBytes[1] = (byte)Convert.ToInt32(sHex.Substring(2, 2), 16);
+                var sBig5 = System.Text.Encoding.GetEncoding("BIG5").GetString(codeBytes);
+                if ((sBig5.Trim() != "?") && (sBig5.Trim() != "") && (sBig5.Trim() != ""))
+                {   // 還是會有一些不要的字，再濾掉 
+                    richTextBox1.AppendText(x.ToString() + " = " + sHex + ", " + sBig5 + "\n");
+                    richTextBox1.AppendText("\"" + sHex + "\", \"" + sBig5 + "\"\n");
+                }
+                Application.DoEvents();
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)

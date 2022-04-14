@@ -101,6 +101,11 @@ namespace vcs_Mix02
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         void show_button_text(object sender)
         {
             richTextBox1.Text += ((Button)sender).Text + "\n";
@@ -219,7 +224,7 @@ namespace vcs_Mix02
             string filename1 = @"C:\______test_files\compare\aaaa.txt";
             string filename2 = @"C:\______test_files\compare\bbbb.txt";
 
-            if (FileCompare(filename1, filename2)==true)
+            if (FileCompare(filename1, filename2) == true)
             {
                 richTextBox1.Text += "兩個檔案相同\n";
             }
@@ -264,11 +269,6 @@ namespace vcs_Mix02
             return ((file1byte - file2byte) == 0);
         }
 
-
-
-
-
-
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
@@ -282,8 +282,6 @@ namespace vcs_Mix02
                 Total += element;
             }
             richTextBox1.Text += "此二維陣列的各個元素總和為: " + Total.ToString() + "\n";
-
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -307,8 +305,6 @@ namespace vcs_Mix02
             richTextBox1.Text += "資料夾路徑:\t" + foldername + "\n";
             richTextBox1.Text += "檔案名稱:\t" + short_filename + "\n";
             richTextBox1.Text += "副檔名:\t" + ext_filename + "\n";
-
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -334,7 +330,6 @@ namespace vcs_Mix02
             Thread thread = new Thread(new ThreadStart(ThreadRun));
             thread.IsBackground = true;//這樣能隨主程序一起結束
             thread.Start();
-
         }
 
         delegate void Delegate_do();
@@ -389,14 +384,6 @@ namespace vcs_Mix02
         private void button12_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //StringBuilder 就是 字符串相加
-            StringBuilder sb = new StringBuilder("");
-            sb.Append("群曜");
-            sb.Append("醫電");
-            sb.Append("股份有限公司");
-
-            richTextBox1.Text += "取得字串 : " + sb + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -756,7 +743,7 @@ namespace vcs_Mix02
         private void button21_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-                        //搜尋檔案內的文字
+            //搜尋檔案內的文字
 
             string txtDirectory = @"C:\______test_files\_case1";
             string type = "*.*";
@@ -811,41 +798,7 @@ namespace vcs_Mix02
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //動態處理DataTable
-            //動態處理DataTable
-
-            //1.創建表實例
-            DataTable dt = new DataTable();
-
-            //2.建立表結構
-            dt.Columns.Add("ID");
-            dt.Columns.Add("Name");
-
-            //3.創建新行
-            DataRow dr = dt.NewRow();
-
-            //4.為新行賦值
-            dr[0] = "1";
-            dr[1] = "林林";
-
-            //5.將新行添加到表
-            dt.Rows.Add(dr);
-
-
-            /*
-            //1.創建表實例
-            DataTable dt=new DataTable();
-
-            //2.建立表結構
-            dt.Columns.Add("ID");
-            dt.Columns.Add("Name");
-
-            //3.添加新行
-            dt.Rows.Add("1", "Name");
-            */
         }
-
 
         //计算两点GPS坐标距离 
         /// <summary>
@@ -1000,9 +953,9 @@ namespace vcs_Mix02
             label3.Text = "可用虛擬內存（M）：" + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024);
 
             label4.Text = "系統啟動後經過的時間： " + (Environment.TickCount / 1000).ToString() + " 秒";
-
-
         }
-
     }
 }
+
+
+
