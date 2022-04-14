@@ -26,8 +26,11 @@ namespace vcs_ScreenCapture4
             Image img = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);
             Graphics g = Graphics.FromImage(img);
             g.CopyFromScreen(new Point(0, 0), new Point(0, 0), Screen.AllScreens[0].Bounds.Size);
+            IntPtr dc = g.GetHdc();
+            g.ReleaseHdc(dc);
             Form2 f2 = new Form2();
             f2.BackgroundImage = img;
+            //f2.Parent = this;
             f2.Show();
         }
     }

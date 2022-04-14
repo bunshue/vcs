@@ -18,6 +18,9 @@ namespace vcs_ScreenCapture4
         private Image baseImage;       //基本图形(原来的画面)
         private Rectangle Rect;        //就是要保存的矩形
         private Point downPoint;        //鼠标按下的点
+        private bool change;
+        Rectangle[] Rectpoints;
+        int point;
         int tmpx;
         int tmpy;
 
@@ -37,16 +40,31 @@ namespace vcs_ScreenCapture4
             baseImage = this.BackgroundImage;
             Rect = new Rectangle();
             RectReady = false;
+            change = false;
+            Rectpoints = new Rectangle[8];
+            for (int i = 0; i < Rectpoints.Length; i++)
+            {
+                Rectpoints[i].Size = new Size(4, 4);
+            }
+            //myRect mRect = new myRect();
+            //mRect.Init(0,0,
         }
 
         private void Form2_DoubleClick(object sender, EventArgs e)
         {
             if (((MouseEventArgs)e).Button == MouseButtons.Left && Rect.Contains(((MouseEventArgs)e).X, ((MouseEventArgs)e).Y))
             {
-                Image memory = new Bitmap(Rect.Width, Rect.Height);
-                Graphics g = Graphics.FromImage(memory);
+                Bitmap bitmap1 = new Bitmap(Rect.Width, Rect.Height);
+                Graphics g = Graphics.FromImage(bitmap1);
                 g.CopyFromScreen(Rect.X + 1, Rect.Y + 1, 0, 0, Rect.Size);
-                Clipboard.SetImage(memory);
+                //IntPtr dc = g.GetHdc();
+                //g.ReleaseHdc(dc);
+                string filename = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                bitmap1.Save(filename);
+                //釋放資源  
+                bitmap1.Dispose();
+                g.Dispose();
+                GC.Collect();
                 this.Close();
             }
         }
@@ -68,6 +86,15 @@ namespace vcs_ScreenCapture4
                     tmpx = e.X;
                     tmpy = e.Y;
                 }
+                for (int i = 0; i < Rectpoints.Length; i++)
+                {
+                    if (Rectpoints[i].Contains(e.X, e.Y))
+                    {
+                        change = true;
+                        point = i + 1;
+                    }
+                }
+
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -76,7 +103,7 @@ namespace vcs_ScreenCapture4
                     this.Close();
                     return;
                 }
-                MainPainter.DrawImage(baseImage, 0, 0);
+                this.CreateGraphics().DrawImage(baseImage, 0, 0);
                 RectReady = false;
             }
 
@@ -98,7 +125,7 @@ namespace vcs_ScreenCapture4
                 if (Rect.Contains(e.X, e.Y))
                 {
                     //this.Cursor = Cursors.Hand;
-                    if (isDowned == true)
+                    if (isDowned == true && change == false)
                     {
                         //和上一次的位置比较获取偏移量
                         Rect.X = Rect.X + e.X - tmpx;
@@ -109,8 +136,33 @@ namespace vcs_ScreenCapture4
                         MoveRect((Image)baseImage.Clone(), Rect);
                     }
                 }
-            }
+                if (change == true && isDowned == true)
+                {
+                    switch (point)
+                    {
+                        case 1:
 
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            ChangeRect((Image)baseImage.Clone(), e.X, e.Y, ChangeSide.RightTop);
+                            break;
+                        case 7:
+                            ChangeRect((Image)baseImage.Clone(), e.X, e.Y, ChangeSide.Right);
+                            break;
+                        case 8:
+                            ChangeRect((Image)baseImage.Clone(), e.X, e.Y, ChangeSide.RightBottom);
+                            break;
+                    }
+                }
+            }
         }
 
         private void Form2_MouseUp(object sender, MouseEventArgs e)
@@ -119,6 +171,7 @@ namespace vcs_ScreenCapture4
             {
                 isDowned = false;
                 RectReady = true;
+                change = false;
             }
 
         }
@@ -146,7 +199,29 @@ namespace vcs_ScreenCapture4
                 width = Mouse_x - downPoint.X;
             }
             Rect.Size = new Size(width, heigth);
+            DrawRects(Painter);
+        }
+        private void DrawRects(Graphics Painter)
+        {
             Painter.DrawRectangle(pen, Rect);
+
+            Rectpoints[0].X = Rect.X - 2;
+            Rectpoints[0].Y = Rect.Y - 2;
+            Rectpoints[1].X = Rect.X - 2;
+            Rectpoints[1].Y = Rect.Y - 2 + Rect.Height / 2;
+            Rectpoints[2].X = Rect.X - 2;
+            Rectpoints[2].Y = Rect.Y - 2 + Rect.Height;
+            Rectpoints[3].X = Rect.X - 2 + Rect.Width / 2;
+            Rectpoints[3].Y = Rect.Y - 2;
+            Rectpoints[4].X = Rect.X - 2 + Rect.Width / 2;
+            Rectpoints[4].Y = Rect.Y - 2 + Rect.Height;
+            Rectpoints[5].X = Rect.X - 2 + Rect.Width;
+            Rectpoints[5].Y = Rect.Y - 2;
+            Rectpoints[6].X = Rect.X - 2 + Rect.Width;
+            Rectpoints[6].Y = Rect.Y - 2 + Rect.Height / 2;
+            Rectpoints[7].X = Rect.X - 2 + Rect.Width;
+            Rectpoints[7].Y = Rect.Y - 2 + Rect.Height;
+            Painter.FillRectangles(Brushes.Blue, Rectpoints);
         }
 
         private Image DrawScreen(Image back, int Mouse_x, int Mouse_y)
@@ -159,9 +234,91 @@ namespace vcs_ScreenCapture4
         {
             Graphics Painter = Graphics.FromImage(image);
             Painter.DrawRectangle(pen, Rect.X, Rect.Y, Rect.Width, Rect.Height);
-            //DrawRects(Painter);
+            DrawRects(Painter);
             MainPainter.DrawImage(image, 0, 0);
             image.Dispose();
         }
+
+        private void ChangeRect(Image image, int Position_x, int Position_y, ChangeSide Side)
+        {
+            int width = 0;
+            int height = 0;
+            Graphics Painter = Graphics.FromImage(image);
+            switch (Side)
+            {
+                case ChangeSide.Left:
+                    break;
+                case ChangeSide.LeftBottom:
+                    break;
+                case ChangeSide.LeftTop:
+                    Rect.Y = Position_y;
+                    break;
+                case ChangeSide.Bottom:
+                    break;
+                case ChangeSide.Top:
+                    break;
+                case ChangeSide.Right:
+                    if (Position_x < Rect.X)
+                    {
+                        Rect.Size = new Size(tmpx - Position_x + Rect.Width, Rect.Height);
+                        Rect.X = Position_x;
+                        //记录现在的位置
+                        tmpx = Position_x;
+                    }
+                    else
+                        Rect.Size = new Size(Position_x - Rect.X, Rect.Height);
+                    break;
+                case ChangeSide.RightBottom:
+                    Rect.Size = new Size(Position_x - Rect.X, Position_y - Rect.Y);
+                    break;
+                case ChangeSide.RightTop:
+                    //Rect.Y = Position_y;
+                    Rect.Size = new Size(Position_x - Rect.X, Rect.Height + Rectpoints[5].Y - Position_y);
+                    break;
+            }
+            //Painter.DrawRectangle(pen, Rect.X, Rect.Y, Rect.Width, Rect.Height);
+            DrawRects(Painter);
+            MainPainter.DrawImage(image, 0, 0);
+            image.Dispose();
+            /*
+            MainPainter.DrawImage(New, 0, 0);
+            New.Dispose();*/
+        }
+
+        private void ChangeRect(Image image, int Position, ChangeSide Side)
+        {
+
+        }
+
+        enum ChangeSide
+        {
+            Left,
+            LeftTop,
+            LeftBottom,
+            Right,
+            RightTop,
+            RightBottom,
+            Top,
+            Bottom
+        }
+
+        struct myRect
+        {
+            public int x;
+            public int y;
+            public int width;
+            public int height;
+            public Rectangle[] RectPoints;
+
+            public void Init(int x, int y, int width, int height, int number)
+            {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+                RectPoints = new Rectangle[number];
+            }
+        }
     }
 }
+

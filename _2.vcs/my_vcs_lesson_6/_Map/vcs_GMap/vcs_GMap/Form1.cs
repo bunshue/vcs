@@ -248,10 +248,7 @@ namespace vcs_GMap
                     richTextBox1.Text += "控件座標(" + e.X.ToString() + ", " + e.Y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
 
                     GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
-                    cnt++;
-                    marker.ToolTip = new GMapToolTip(marker);
-                    marker.Tag = cnt;
-                    marker.ToolTipText = marker.Tag.ToString();
+                    setup_marker_tooltip(marker, (cnt++).ToString());   //設置marker訊息
                     markersOverlay.Markers.Add(marker);
                 }
                 //PointLatLng pts = gMapControl1.FromLocalToLatLng(e.X, e.Y);
@@ -388,14 +385,7 @@ namespace vcs_GMap
                 //在坐标点上绘制一绿色点并向图层中添加标签
                 PointLatLng point = new PointLatLng(double.Parse(LatLng[0]), double.Parse(LatLng[1]));
 
-                //GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
-
-                string filename = @"C:\______test_files\__pic\_icon\face1.png";
-                Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-                GMapMarker marker = new GMarkerGoogle(point, bitmap1);
-
-                //直接寫
-                //GMapMarker marker2 = new GMarkerGoogle(point, new Bitmap(filename));
+                GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
 
                 gMapOverlay1.Markers.Add(marker);
 
@@ -406,15 +396,7 @@ namespace vcs_GMap
                 gMapOverlay1.Markers[i].Tag = "xxxx";
                 gMapOverlay1.Id = "markroad";
 
-
-                marker.ToolTipText = "告警源编号：";
-                marker.ToolTip.Fill = Brushes.Blue;
-                marker.ToolTip.Foreground = Brushes.White;
-                marker.ToolTip.Stroke = Pens.Black;
-                marker.ToolTip.TextPadding = new Size(20, 20);
-                marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
-
-
+                setup_marker_tooltip(marker, "告警源编号："); //設置marker訊息
             }
         }
 
@@ -472,18 +454,7 @@ namespace vcs_GMap
 
             GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red);
             markersOverlay.Markers.Add(marker);
-
-            //GMapMarker還可以設置ToolTip
-            marker.ToolTipText = "地圖正中央圖示";
-            //marker.ToolTip.Fill = Brushes.Blue;
-            marker.ToolTip.Fill = new SolidBrush(Color.FromArgb(100, Color.Black)); //半透明
-            marker.ToolTip.Foreground = Brushes.White;
-            marker.ToolTip.Stroke = Pens.Black;
-            marker.ToolTip.TextPadding = new Size(20, 20);
-            marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;   //滑鼠靠近才顯示
-            //marker.ToolTipMode = MarkerTooltipMode.Always;  //總是顯示
-            marker.ToolTip.Format.Alignment = StringAlignment.Near;
-
+            setup_marker_tooltip(marker, "地圖正中央圖示");    //設置marker訊息
 
             string lngstr, latstr;
             if (point.Lng > 0)
@@ -494,8 +465,8 @@ namespace vcs_GMap
                 latstr = point.Lat.ToString("F06") + " N";
             else
                 latstr = (-point.Lat).ToString("F06") + " S";
-            marker.ToolTipText = "GPS\r\n經度=" + lngstr + "\r\n緯度=" + latstr;
 
+            setup_marker_tooltip(marker, "GPS\r\n經度=" + lngstr + "\r\n緯度=" + latstr);   //設置marker訊息
 
             //畫Route ST
             List<PointLatLng> points = new List<PointLatLng>();
@@ -890,11 +861,8 @@ namespace vcs_GMap
         void AddMarker(double lat, double lng, GMarkerGoogleType type)
         {
             GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lng), type);
-
             cc++;
-            marker.Tag = cc;
-            marker.ToolTip = new GMapToolTip(marker);
-            marker.ToolTipText = string.Format("{0} - {1}:{2}", cc.ToString(), lat, lng);
+            setup_marker_tooltip(marker, string.Format("{0} - {1}:{2}", cc.ToString(), lat, lng));  //設置marker訊息
             markersOverlay.Markers.Add(marker);
         }
 
@@ -930,9 +898,11 @@ namespace vcs_GMap
             string filename = @"C:\______test_files\__pic\_icon\face1.png";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             marker = new GMarkerGoogle(point, bitmap1);
-            marker.ToolTip = new GMapToolTip(marker);
-            marker.Tag = "12345";
-            marker.ToolTipText = marker.Tag.ToString();
+            //直接寫
+            //GMapMarker marker2 = new GMarkerGoogle(point, new Bitmap(filename));
+
+            setup_marker_tooltip(marker, "12345");  //設置marker訊息
+
             markersOverlay.Markers.Add(marker);
         }
 
@@ -1344,6 +1314,21 @@ namespace vcs_GMap
                 markersOverlay.Markers.Add(marker);
             }
         }
+
+        void setup_marker_tooltip(GMapMarker marker, string text)
+        {
+            //設置marker訊息
+            marker.ToolTip = new GMapToolTip(marker);
+            marker.ToolTipText = text;
+            //marker.ToolTip.Fill = Brushes.Blue;
+            marker.ToolTip.Fill = new SolidBrush(Color.FromArgb(100, Color.Black)); //半透明
+            marker.ToolTip.Foreground = Brushes.White;
+            marker.ToolTip.Stroke = Pens.Black;
+            marker.ToolTip.TextPadding = new Size(20, 20);
+            marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;   //滑鼠靠近才顯示
+            //marker.ToolTipMode = MarkerTooltipMode.Always;  //總是顯示
+            marker.ToolTip.Format.Alignment = StringAlignment.Near;
+        }
     }
 }
 
@@ -1362,8 +1347,8 @@ void mapControl_MouseDoubleClick(object sender, MouseEventArgs e)
                 if (statusCode == GeoCoderStatusCode.G_GEO_SUCCESS)
                 {
                     GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
-                    marker.ToolTipText = place.Value.Address;
-                    marker.ToolTipMode = MarkerTooltipMode.Always;
+ 
+                    setup_marker_tooltip(marker, place.Value.Address);  //設置marker訊息
 
                     locations.Markers.Add(marker);
                 }

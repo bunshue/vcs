@@ -20,20 +20,16 @@ namespace vcs_ScreenCapture1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             //主窗體桌面不顯示 僅在進程中顯示
             InitializeComponent();
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
             SetVisibleCore(false);
-        }
 
-        protected override void SetVisibleCore(bool value)
-        {
-            base.SetVisibleCore(value);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
             if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
             {
                 Directory.CreateDirectory(foldername);
@@ -45,19 +41,25 @@ namespace vcs_ScreenCapture1
             }
         }
 
+        protected override void SetVisibleCore(bool value)
+        {
+            base.SetVisibleCore(value);
+        }
+
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             //獲得當前屏幕的大小   
             Rectangle rect = new Rectangle();
             rect = System.Windows.Forms.Screen.GetWorkingArea(this);
             Size mySize = new Size(rect.Width, rect.Height);
-            Bitmap bitmap = new Bitmap(rect.Width, rect.Height);
-            Graphics g = Graphics.FromImage(bitmap);
+            Bitmap bitmap1 = new Bitmap(rect.Width, rect.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
             g.CopyFromScreen(0, 0, 0, 0, mySize);
             string ImageName = DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".jpg";
-            bitmap.Save(foldername + "/" + ImageName);
+            bitmap1.Save(foldername + "/" + ImageName);
             //釋放資源  
-            bitmap.Dispose();
+            bitmap1.Dispose();
             g.Dispose();
             GC.Collect();
         }
