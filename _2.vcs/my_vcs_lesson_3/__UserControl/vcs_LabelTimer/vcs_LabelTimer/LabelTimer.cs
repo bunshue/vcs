@@ -150,15 +150,33 @@ namespace vcs_LabelTimer
             this.Size = new Size(size_width, size_height);
 
             e.Graphics.Clear(Color_background);
-            e.Graphics.DrawString(
-                Text + DateTime.Now.ToString(),
-                Font,
-                new SolidBrush(Color_foreground),
-                ClientRectangle);
 
-            //g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
+            float font_size = use_font.Size;
+            int W = size_width;
+            int H = size_height;
+            int w = 0;
+            int h = 0;
+            int x_st = 0;
+            int y_st = 0;
+            string str = Text + DateTime.Now.ToString();
+
+            w = e.Graphics.MeasureString(str, use_font).ToSize().Width;
+            h = e.Graphics.MeasureString(str, use_font).ToSize().Height;
+            string result = "w = " + w.ToString() + ", h = " + h.ToString() + ", W = " + size_width.ToString() + ", H = " + size_height.ToString();
+
+            if (W > w)
+            {
+                x_st = (W - w) / 2;
+            }
+            if (H > h)
+            {
+                y_st = (H - h) / 2;
+            }
+
+            e.Graphics.DrawString(str, use_font, new SolidBrush(Color_foreground), x_st, y_st);
+
+            //e.Graphics.DrawRectangle(Pens.Red, x_st, y_st, w, h);
         }
     }
 }
-
 

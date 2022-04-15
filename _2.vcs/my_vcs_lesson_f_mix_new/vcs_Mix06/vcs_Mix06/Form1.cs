@@ -172,48 +172,7 @@ namespace vcs_Mix06
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            int[] rs = new int[10];
-            for (int i = 0; i < 10; i++)
-                rs[i] = GetRandom1();
-
-            richTextBox1.Text += "方法一, 取得亂數 : ";
-            for (int i = 0; i < 10; i++)
-            {
-                richTextBox1.Text += rs[i].ToString() + " ";
-
-            }
-            richTextBox1.Text += "\t大部分都一樣\n";
-
-
-            for (int i = 0; i < 10; i++)
-                rs[i] = GetRandom2();
-
-            richTextBox1.Text += "方法二, 取得亂數 : ";
-            for (int i = 0; i < 10; i++)
-            {
-                richTextBox1.Text += rs[i].ToString() + " ";
-
-            }
-            richTextBox1.Text += "\t可取得亂數\n";
         }
-
-        private int GetRandom1()
-        {
-            Random r = new Random();
-            return r.Next(0, 1000);
-        }
-
-        //定義一個自增的數字作為種子
-        private static int _RandomSeed = (int)DateTime.Now.Ticks;
-        private int GetRandom2()
-        {
-            if (_RandomSeed == int.MaxValue)
-                _RandomSeed = 1;
-
-            Random r = new Random(_RandomSeed++);
-            return r.Next(0, 1000);
-        }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -255,26 +214,6 @@ namespace vcs_Mix06
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            int len = 20;
-            string random_pattern = CreateAndCheckCode(random, len);
-
-            richTextBox1.Text += "取得random字串 : \t" + random_pattern + "\n";
-        }
-
-        Random random = new Random(~unchecked((int)DateTime.Now.Ticks));
-        private string CreateAndCheckCode(Random random, int length) // code 激活碼前綴
-        {
-            //char[] Pattern = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-            char[] Pattern = new char[] { '1', '2', '3', 'A', 'B', 'C' };
-            string result = string.Empty;
-            int n = Pattern.Length;
-            for (int i = 0; i < length; i++)
-            {
-                int rnd = random.Next(0, n);
-                result += Pattern[rnd];
-            }
-            return result;
         }
 
         //#制作閃動的窗體

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Drawing.Text;  //for TextRenderingHint
 using System.Security.Cryptography;     //for RNGCryptoServiceProvider
 using System.Threading;
@@ -15,6 +16,10 @@ namespace vcs_test_all_01_Random
 {
     public partial class Form1 : Form
     {
+        //任意陣列
+        private string[] ItemArray;
+        private List<string> ItemList;
+
         public Form1()
         {
             InitializeComponent();
@@ -23,6 +28,15 @@ namespace vcs_test_all_01_Random
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //任意陣列
+            // Initialize the array and list.
+            ItemArray = new string[] { "Apple", "Banana", "Cherry", "Date", "Eagle", "Fish", "Golf", "Harp", "Ibex", "Jackel", "Kangaroo" };
+            ItemList = new List<string>(ItemArray);
+
+            // Display the array and list in ListBoxes.
+            lstArray.DataSource = ItemArray;
+            lstList.DataSource = ItemList;
         }
 
         void show_item_location()
@@ -47,11 +61,20 @@ namespace vcs_test_all_01_Random
             pictureBox3.Size = new Size(256 / 2, 50);
             pictureBox3.Location = new Point(750 + 256 / 2, 20 + 256 + 10);
 
+            pictureBox4.Size = new Size(256 / 2, 50);
+            pictureBox4.Location = new Point(750, 20 + 256 + 10 + 50 + 10);
+
             tb_random_text1.Size = new Size(256, 50);
-            tb_random_text1.Location = new Point(750, 20 + 256 + 10 + 50 + 10);
+            tb_random_text1.Location = new Point(750, 20 + 256 + 10 + 150 + 10);
 
             tb_random_text2.Size = new Size(256, 50);
-            tb_random_text2.Location = new Point(750, 20 + 256 + 10 + 50 + 10 + 50 + 10);
+            tb_random_text2.Location = new Point(750, 20 + 256 + 10 + 150 + 10 + 50 + 10);
+
+            tb_random_text3.Size = new Size(256, 50);
+            tb_random_text3.Location = new Point(750, 20 + 256 + 10 + 150 + 10 + 50 + 10 + 50 + 10);
+
+            tb_random_text4.Size = new Size(256, 50);
+            tb_random_text4.Location = new Point(750, 20 + 256 + 10 + 150 + 10 + 50 + 10 + 50 + 10 + 50 + 10);
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
@@ -970,6 +993,100 @@ namespace vcs_test_all_01_Random
             return Colors[random.Next(0, Colors.Length)];
         }
 
+        // 顏色模板
+        //  黑、白、紅、綠、藍、黃/ 棕 、灰
+        private const int BLACK = 0;
+        private const int WHITE = 1;
+        private const int RED1 = 2;
+        private const int RED2 = 3;
+        private const int GREEN1 = 4;
+        private const int GREEN2 = 5;
+        private const int BLUE1 = 6;
+        private const int BLUE2 = 7;
+        private const int YELLOW1 = 8;
+        private const int YELLOW2 = 9;
+        private const int BROWN = 10;
+        private const int GRAY = 11;
+
+        void show_random_color()
+        {
+            //顯示顏色
+            int[,] colorVelue = null;
+            colorVelue = new int[,] {
+            {50,50,50},    //黑
+            {255,255,255},  //白
+            {240,80,80}, //紅小
+            {240,160,160},  //紅大
+            {60,180,60}, //綠小
+            {160,240,160},  //綠大
+            {80,80,240}, //藍小
+            {160,160,240},  //藍大
+            {240,190,80}, //黃小
+            {240,240,160},  //黃大
+            {205,133,63},   //棕/褐
+            //{162,162,162},//灰，特殊
+            };
+
+            int total_colors = colorVelue.GetUpperBound(0) + 1;
+            //richTextBox1.Text += "total_colors = " + total_colors.ToString() + "\n";
+
+            Random r = new Random();
+            int sel = r.Next(total_colors);
+            /*
+            switch (sel)
+            {
+                case -1:
+                    richTextBox1.Text += "無此色\n";
+                    break;
+                case 0:
+                    richTextBox1.Text += "黑\n";
+                    break;
+                case 1:
+                    richTextBox1.Text += "白\n";
+                    break;
+                case 2:
+                    richTextBox1.Text += "紅\n";
+                    break;
+                case 3:
+                    richTextBox1.Text += "紅\n";
+                    break;
+                case 4:
+                    richTextBox1.Text += "綠\n";
+                    break;
+                case 5:
+                    richTextBox1.Text += "綠\n";
+                    break;
+                case 6:
+                    richTextBox1.Text += "藍\n";
+                    break;
+                case 7:
+                    richTextBox1.Text += "藍\n";
+                    break;
+                case 8:
+                    richTextBox1.Text += "黃\n";
+                    break;
+                case 9:
+                    richTextBox1.Text += "黃\n";
+                    break;
+                case 10:
+                    richTextBox1.Text += "棕\n";
+                    break;
+                case 11:
+                    richTextBox1.Text += "灰\n";
+                    break;
+                default:
+                    richTextBox1.Text += "其他\n";
+                    break;
+            }
+            */
+            int R = colorVelue[sel, 0];
+            int G = colorVelue[sel, 1];
+            int B = colorVelue[sel, 2];
+            //richTextBox1.Text += "show color " + sel.ToString() + " " + R.ToString() + " " + G.ToString() + " " + B.ToString() + "\n";
+
+            pictureBox4.BackColor = Color.FromArgb(R, G, B);
+        }
+
         //隨機生成漢字（摘錄保存的代碼），生成漢字摘錄代碼
         /*
         此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將
@@ -1094,6 +1211,8 @@ namespace vcs_test_all_01_Random
                 (byte)rd.Next(0, 255),
                 (byte)rd.Next(0, 255));
 
+            show_random_color();
+
             tb_random_text1.Text = RandomText1();
 
             //產生隨機字串
@@ -1101,11 +1220,6 @@ namespace vcs_test_all_01_Random
             string result = GenCode(len);
 
             tb_random_text2.Text = "隨機字串 : " + result;
-
-            // 產生任意矩陣
-            // Randomize.
-            Values.Randomize2();
-            this.pictureBox1.Refresh();
 
             /*
             //任意中文字, 有點問題
@@ -1120,15 +1234,19 @@ namespace vcs_test_all_01_Random
             //呼叫視窗使用Unicode字串來顯示
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             //產生1000字Unicode中文字
+            tb_random_text3.Text = "";
             for (int i = 0; i < 4; i++)
             {
-                //Console.Write(getRandomUnicode().Substring(0, 1));
-                richTextBox1.Text += getRandomUnicode().Substring(0, 1);
+                tb_random_text3.Text += getRandomUnicode().Substring(0, 1);
             }
-            richTextBox1.Text += "\t";
 
             result = VerficationText(10);
-            richTextBox1.Text += result + "\n";
+            tb_random_text4.Text = result;
+
+            // 產生任意矩陣
+            // Randomize.
+            Values.Randomize2();
+            this.pictureBox1.Refresh();
         }
 
         /// <summary>  
@@ -1216,35 +1334,246 @@ namespace vcs_test_all_01_Random
             return code;
         }
 
+        //生成大量隨機碼 ST
         private void bt_random18_Click(object sender, EventArgs e)
         {
-
+            //生成大量隨機碼
+            StreamWriter swriter = new StreamWriter("1.txt", true);
+            for (int i = 0; i < 100; i++)
+            {
+                swriter.Write(generateRandomString(20));
+                swriter.WriteLine();
+                Console.WriteLine("Number: {0}", i);
+            }
+            swriter.Flush();
+            swriter.Close();
         }
 
+        static Random random2 = new Random();
+        static string generateRandomString(int length)
+        {
+            var chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < length; i++)
+            {
+                int index = random2.Next(chars.Length);
+                result.Append(chars[index]);
+            }
+            return result.ToString();
+        }
+        //生成大量隨機碼 SP
+
+        //批量生成隨機密碼, 存檔 ST
         private void bt_random19_Click(object sender, EventArgs e)
         {
+            //批量生成隨機密碼, 存檔
 
+            //批量生成隨機密碼，必須包含數字和字母，並用加密算法加密
+            /*
+            要求：密碼必須包含數字和字母
+
+            思路：1.列出數字和字符。 組成字符串 ：chars
+
+            2.利用randrom.Next(int i)返回一個小於所指定最大值的非負隨機數。
+
+            3. 隨機取不小於chars長度的隨機數a,取字符串chars的第a位字符。
+
+            4.循環 8次，得到8位密碼
+
+            5.循環N次，批量得到密碼。
+            */
+            string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            Random randrom = new Random((int)DateTime.Now.Ticks);
+            string path1 = "pwd.txt";
+            for (int j = 0; j < 1000; j++)
+            {
+                string str = "";
+                for (int i = 0; i < 8; i++)
+                {
+                    str += chars[randrom.Next(chars.Length)];//randrom.Next(int i)返回一個小於所指定最大值的非負隨機數
+                }
+                if (IsNumber(str))//判斷是否全是數字
+                    continue;
+                if (IsLetter(str))//判斷是否全是字母
+                    continue;
+                File.AppendAllText(path1, str);
+                string pws = Md5(str, 32);//MD5加密
+                File.AppendAllText(path1, "," + pws + "\r\n");
+            }
+
+            richTextBox1.Text += "批量生成隨機密碼，必須包含數字和字母，並用加密算法加密，完成\n";
         }
+
+        //判斷是否全是數字
+        static bool IsNumber(string str)
+        {
+            if (str.Trim("0123456789".ToCharArray()) == "")
+                return true;
+            return false;
+        }
+        //判斷是否全是字母
+        static bool IsLetter(string str)
+        {
+            if (str.Trim("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray()) == "")
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="str">加密字元</param>
+        /// <param name="code">加密位數16/32</param>
+        /// <returns></returns>
+        public static string Md5(string str, int code)
+        {
+            string strEncrypt = string.Empty;
+
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] fromData = Encoding.GetEncoding("GB2312").GetBytes(str);
+            byte[] targetData = md5.ComputeHash(fromData);
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                strEncrypt += targetData[i].ToString("X2");
+            }
+            if (code == 16)
+            {
+                strEncrypt = strEncrypt.Substring(8, 16);
+            }
+            return strEncrypt;
+        }
+        //批量生成隨機密碼, 存檔 SP
 
         private void bt_random20_Click(object sender, EventArgs e)
         {
+            //生成隨機字符串
+            string random_str = RandomStringGenerator.GetRandomString();
+            richTextBox1.Text += random_str + "\n";
+        }
 
+        /// <summary> 
+        /// 生成隨機字符串
+        /// </summary> 
+        private class RandomStringGenerator
+        {
+            static readonly Random r = new Random();
+            const string _chars = "0123456789";
+            public static string GetRandomString()
+            {
+                char[] buffer = new char[5];
+                for (int i = 0; i < 5; i++)
+                {
+                    buffer[i] = _chars[r.Next(_chars.Length)];
+                }
+                return new string(buffer);
+            }
         }
 
         private void bt_random21_Click(object sender, EventArgs e)
         {
+            //取得任意字串
+            int len = 20;
+            string random_pattern = CreateAndCheckCode(real_random, len);
 
+            richTextBox1.Text += "取得random字串 : \t" + random_pattern + "\n";
+        }
+
+        Random real_random = new Random(~unchecked((int)DateTime.Now.Ticks));
+        private string CreateAndCheckCode(Random random, int length) // code 激活碼前綴
+        {
+            //char[] Pattern = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+            char[] Pattern = new char[] { '1', '2', '3', 'A', 'B', 'C' };
+            string result = string.Empty;
+            int n = Pattern.Length;
+            for (int i = 0; i < length; i++)
+            {
+                int rnd = random.Next(0, n);
+                result += Pattern[rnd];
+            }
+            return result;
         }
 
         private void bt_random22_Click(object sender, EventArgs e)
         {
+            //取得亂數的方法
+            int[] rs = new int[10];
+            for (int i = 0; i < 10; i++)
+                rs[i] = GetRandom1();
 
+            richTextBox1.Text += "方法一, 取得亂數 : ";
+            for (int i = 0; i < 10; i++)
+            {
+                richTextBox1.Text += rs[i].ToString() + " ";
+
+            }
+            richTextBox1.Text += "\t大部分都一樣\n";
+
+
+            for (int i = 0; i < 10; i++)
+                rs[i] = GetRandom2();
+
+            richTextBox1.Text += "方法二, 取得亂數 : ";
+            for (int i = 0; i < 10; i++)
+            {
+                richTextBox1.Text += rs[i].ToString() + " ";
+
+            }
+            richTextBox1.Text += "\t可取得亂數\n";
+        }
+
+        private int GetRandom1()
+        {
+            Random r = new Random();
+            return r.Next(0, 1000);
+        }
+
+        //定義一個自增的數字作為種子
+        private static int _RandomSeed = (int)DateTime.Now.Ticks;
+        private int GetRandom2()
+        {
+            if (_RandomSeed == int.MaxValue)
+                _RandomSeed = 1;
+
+            Random r = new Random(_RandomSeed++);
+            return r.Next(0, 1000);
         }
 
         private void bt_random23_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void btnPick_Click(object sender, EventArgs e)
+        {
+            // Pick a random line from the TextBox.
+            txtResult.Text = txtNames.Lines.PickRandom();
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            // Pick some items.
+            int num_values = 5;
+            txtResult.Lines = txtNames.Lines.PickRandom(num_values).ToArray();
+        }
+
+        //任意陣列
+        private void btnRandomize_Click(object sender, EventArgs e)
+        {
+            RandomizeLists();
+        }
+
+        private void RandomizeLists()
+        {
+            ItemArray.Randomize();
+            ItemList.Randomize();
+
+            // Redisplay the values.
+            lstArray.DataSource = null;
+            lstArray.DataSource = ItemArray;
+            lstList.DataSource = null;
+            lstList.DataSource = ItemList;
+        }
+
     }
 
     class Randomizer
@@ -1261,6 +1590,118 @@ namespace vcs_test_all_01_Random
                 T temp = items[i];
                 items[i] = items[j];
                 items[j] = temp;
+            }
+        }
+    }
+
+    public static class RandomTools
+    {
+        // The Random object this method uses.
+        private static Random Rand = null;
+
+        // Return a random value.
+        public static T PickRandom<T>(this T[] values)
+        {
+            // Create the Random object if it doesn't exist.
+            if (Rand == null) Rand = new Random();
+
+            // Pick an item and return it.
+            return values[Rand.Next(0, values.Length)];
+        }
+
+        // Return num_items random values.
+        public static List<T> PickRandom<T>(this T[] values, int num_values)
+        {
+            // Create the Random object if it doesn't exist.
+            if (Rand == null) Rand = new Random();
+
+            // Don't exceed the array's length.
+            if (num_values >= values.Length)
+                num_values = values.Length - 1;
+
+            // Make an array of indexes 0 through values.Length - 1.
+            int[] indexes = Enumerable.Range(0, values.Length).ToArray();
+
+            // Build the return list.
+            List<T> results = new List<T>();
+
+            // Randomize the first num_values indexes.
+            for (int i = 0; i < num_values; i++)
+            {
+                // Pick a random entry between i and values.Length - 1.
+                int j = Rand.Next(i, values.Length);
+
+                // Swap the values.
+                int temp = indexes[i];
+                indexes[i] = indexes[j];
+                indexes[j] = temp;
+
+                // Save the ith value.
+                results.Add(values[indexes[i]]);
+            }
+
+            // Return the selected items.
+            return results;
+        }
+    }
+
+    // Extension methods to randomize different kinds of collections.
+    public static class RandomizationExtensions
+    {
+        private static Random Rand = new Random();
+
+        // Randomize an array.
+        public static void Randomize<T>(this T[] items)
+        {
+            // For each spot in the array, pick
+            // a random item to swap into that spot.
+            for (int i = 0; i < items.Length - 1; i++)
+            {
+                int j = Rand.Next(i, items.Length);
+                T temp = items[i];
+                items[i] = items[j];
+                items[j] = temp;
+            }
+        }
+
+        // Randomize a list.
+        public static void Randomize<T>(this List<T> items)
+        {
+            // Convert into an array.
+            T[] item_array = items.ToArray();
+
+            // Randomize.
+            item_array.Randomize();
+
+            // Copy the items back into the list.
+            items.Clear();
+            items.AddRange(item_array);
+        }
+
+        // Randomize a 2D array.
+        public static void Randomize<T>(this T[,] values)
+        {
+            // Get the dimensions.
+            int num_rows = values.GetUpperBound(0) + 1;
+            int num_cols = values.GetUpperBound(1) + 1;
+            int num_cells = num_rows * num_cols;
+
+            // Randomize the array.
+            for (int i = 0; i < num_cells - 1; i++)
+            {
+                // Pick a random cell between i and the end of the array.
+                int j = Rand.Next(i, num_cells);
+
+                // Convert to row/column indexes.
+                int row_i = i / num_cols;
+                int col_i = i % num_cols;
+                int row_j = j / num_cols;
+                int col_j = j % num_cols;
+
+                // Swap cells i and j.
+                T temp = values[row_i, col_i];
+                values[row_i, col_i] = values[row_j, col_j];
+                values[row_j, col_j] = temp;
             }
         }
     }

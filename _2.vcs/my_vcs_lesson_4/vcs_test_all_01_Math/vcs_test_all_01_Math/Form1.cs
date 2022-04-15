@@ -23,11 +23,6 @@ namespace vcs_test_all_01_Math
 
         int[] sd_num = new int[] { 16, 19, 14, 17, 4, 4, 11, 27, 9, 8, 8, 12, 29, 28, 5, 18, 13, 7, 8, 4, 26, 25, 15, 6, 8, 12, 26, 13, 13, 27, 12, 3, 1, 8, 4, 22, 28, 23, 23, 19, 29, 17, 12, 17, 28, 19, 25, 16, 12, 7, 23, 1, 19, 24, 1, 21, 4, 8, 9, 22, 8, 27, 15, 12, 25, 6, 11, 22, 25, 13 };
 
-        #region 任意陣列
-        private string[] ItemArray;
-        private List<string> ItemList;
-        #endregion
-
         public Form1()
         {
             InitializeComponent();
@@ -39,15 +34,6 @@ namespace vcs_test_all_01_Math
 
             textBox2.Text = "123";
 
-            #region 任意陣列
-            // Initialize the array and list.
-            ItemArray = new string[] { "Apple", "Banana", "Cherry", "Date", "Eagle", "Fish", "Golf", "Harp", "Ibex", "Jackel", "Kangaroo" };
-            ItemList = new List<string>(ItemArray);
-
-            // Display the array and list in ListBoxes.
-            lstArray.DataSource = ItemArray;
-            lstList.DataSource = ItemList;
-            #endregion
 
         }
 
@@ -1178,37 +1164,6 @@ namespace vcs_test_all_01_Math
         }
         #endregion
 
-        private void btnPick_Click(object sender, EventArgs e)
-        {
-            // Pick a random line from the TextBox.
-            txtResult.Text = txtNames.Lines.PickRandom();
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-            // Pick some items.
-            int num_values = 5;
-            txtResult.Lines = txtNames.Lines.PickRandom(num_values).ToArray();
-        }
-
-        #region 任意陣列
-        // Randomize the array and list.
-        private void btnRandomize_Click(object sender, EventArgs e)
-        {
-            RandomizeLists();
-        }
-        private void RandomizeLists()
-        {
-            ItemArray.Randomize();
-            ItemList.Randomize();
-
-            // Redisplay the values.
-            lstArray.DataSource = null;
-            lstArray.DataSource = ItemArray;
-            lstList.DataSource = null;
-            lstList.DataSource = ItemList;
-        }
-        #endregion
 
         // Display the ordinal version of the number.
         private void textBox2_TextChanged(object sender, EventArgs e)

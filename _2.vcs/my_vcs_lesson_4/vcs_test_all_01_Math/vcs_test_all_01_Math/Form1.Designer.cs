@@ -49,17 +49,6 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnRandomize = new System.Windows.Forms.Button();
-            this.lstArray = new System.Windows.Forms.ListBox();
-            this.lstList = new System.Windows.Forms.ListBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button31 = new System.Windows.Forms.Button();
-            this.txtResult = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnPick = new System.Windows.Forms.Button();
-            this.txtNames = new System.Windows.Forms.TextBox();
             this.button0 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button20 = new System.Windows.Forms.Button();
@@ -101,8 +90,6 @@
             this.button41 = new System.Windows.Forms.Button();
             this.button42 = new System.Windows.Forms.Button();
             this.button43 = new System.Windows.Forms.Button();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -332,125 +319,6 @@
             this.bt_clear.Text = "clear";
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.btnRandomize);
-            this.groupBox4.Controls.Add(this.lstArray);
-            this.groupBox4.Controls.Add(this.lstList);
-            this.groupBox4.Location = new System.Drawing.Point(734, 12);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(321, 182);
-            this.groupBox4.TabIndex = 34;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "任意陣列";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(74, 12);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(155, 16);
-            this.label4.TabIndex = 44;
-            this.label4.Text = "Array                      List";
-            // 
-            // btnRandomize
-            // 
-            this.btnRandomize.Location = new System.Drawing.Point(115, 154);
-            this.btnRandomize.Name = "btnRandomize";
-            this.btnRandomize.Size = new System.Drawing.Size(75, 21);
-            this.btnRandomize.TabIndex = 7;
-            this.btnRandomize.Text = "Randomize";
-            this.btnRandomize.UseVisualStyleBackColor = true;
-            this.btnRandomize.Click += new System.EventHandler(this.btnRandomize_Click);
-            // 
-            // lstArray
-            // 
-            this.lstArray.FormattingEnabled = true;
-            this.lstArray.IntegralHeight = false;
-            this.lstArray.ItemHeight = 12;
-            this.lstArray.Location = new System.Drawing.Point(14, 30);
-            this.lstArray.Name = "lstArray";
-            this.lstArray.Size = new System.Drawing.Size(140, 120);
-            this.lstArray.TabIndex = 5;
-            // 
-            // lstList
-            // 
-            this.lstList.FormattingEnabled = true;
-            this.lstList.IntegralHeight = false;
-            this.lstList.ItemHeight = 12;
-            this.lstList.Location = new System.Drawing.Point(162, 30);
-            this.lstList.Name = "lstList";
-            this.lstList.Size = new System.Drawing.Size(140, 120);
-            this.lstList.TabIndex = 6;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.button31);
-            this.groupBox3.Controls.Add(this.txtResult);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.btnPick);
-            this.groupBox3.Controls.Add(this.txtNames);
-            this.groupBox3.Location = new System.Drawing.Point(762, 200);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(258, 170);
-            this.groupBox3.TabIndex = 33;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "選幾個";
-            // 
-            // button31
-            // 
-            this.button31.Location = new System.Drawing.Point(165, 54);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(75, 21);
-            this.button31.TabIndex = 8;
-            this.button31.Text = "選5個";
-            this.button31.UseVisualStyleBackColor = true;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
-            // 
-            // txtResult
-            // 
-            this.txtResult.Location = new System.Drawing.Point(160, 81);
-            this.txtResult.Multiline = true;
-            this.txtResult.Name = "txtResult";
-            this.txtResult.ReadOnly = true;
-            this.txtResult.Size = new System.Drawing.Size(92, 80);
-            this.txtResult.TabIndex = 7;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(122, 106);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 12);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Result:";
-            // 
-            // btnPick
-            // 
-            this.btnPick.Location = new System.Drawing.Point(165, 27);
-            this.btnPick.Name = "btnPick";
-            this.btnPick.Size = new System.Drawing.Size(75, 21);
-            this.btnPick.TabIndex = 5;
-            this.btnPick.Text = "選一個";
-            this.btnPick.UseVisualStyleBackColor = true;
-            this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
-            // 
-            // txtNames
-            // 
-            this.txtNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtNames.Location = new System.Drawing.Point(16, 27);
-            this.txtNames.Multiline = true;
-            this.txtNames.Name = "txtNames";
-            this.txtNames.Size = new System.Drawing.Size(100, 124);
-            this.txtNames.TabIndex = 4;
-            this.txtNames.Text = "Ann\r\nBob\r\nCindy\r\nDan\r\nEdwina\r\nFrank\r\nGina\r\nHarry\r\nIvy\r\nJack\r\nKlaudia\r\nLeonard\r\nMa" +
-                "rcie\r\nNate\r\nOlivia\r\nPaul\r\nQueenie\r\nRussell\r\nSally\r\nTim\r\nUma\r\nVern\r\nWendy\r\nXavier" +
-                "\r\nYoko\r\nZack";
             // 
             // button0
             // 
@@ -931,8 +799,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1399, 957);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.button43);
             this.Controls.Add(this.button42);
             this.Controls.Add(this.button41);
@@ -991,10 +857,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -1052,17 +914,6 @@
         public System.Windows.Forms.Label _Label1_2;
         public System.Windows.Forms.Label _Label1_1;
         public System.Windows.Forms.Label _Label1_0;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox txtResult;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnPick;
-        private System.Windows.Forms.TextBox txtNames;
-        private System.Windows.Forms.Button button31;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnRandomize;
-        private System.Windows.Forms.ListBox lstArray;
-        private System.Windows.Forms.ListBox lstList;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label lb_ordinal;
         private System.Windows.Forms.Button button32;

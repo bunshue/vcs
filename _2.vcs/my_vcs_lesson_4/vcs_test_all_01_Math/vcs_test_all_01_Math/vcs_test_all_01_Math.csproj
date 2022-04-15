@@ -58,9 +58,7 @@
     <Compile Include="PairsTools.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomizationExtensions.cs" />
     <Compile Include="RandomizeStuff.cs" />
-    <Compile Include="RandomTools.cs" />
     <Compile Include="StatsStuff.cs" />
     <Compile Include="StringStuff.cs" />
     <Compile Include="Transform.cs" />

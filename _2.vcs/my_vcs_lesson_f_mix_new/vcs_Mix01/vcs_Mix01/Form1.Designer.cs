@@ -82,7 +82,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(170, 70);
             this.button28.TabIndex = 115;
-            this.button28.Text = "顯示顏色";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -137,7 +136,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(170, 70);
             this.button23.TabIndex = 110;
-            this.button23.Text = "取得媒體資訊";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -313,7 +311,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(170, 70);
             this.button18.TabIndex = 94;
-            this.button18.Text = "批量生成隨機密碼, 存檔";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -324,7 +321,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(170, 70);
             this.button17.TabIndex = 93;
-            this.button17.Text = "生成大量隨機碼";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

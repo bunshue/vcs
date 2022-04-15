@@ -968,116 +968,15 @@ namespace vcs_Mix01
             } return weekstr;
         }
 
-        //生成大量隨機碼 ST
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            StreamWriter swriter = new StreamWriter("1.txt", true);
-            for (int i = 0; i < 100; i++)
-            {
-                swriter.Write(generateRandomString(20));
-                swriter.WriteLine();
-                Console.WriteLine("Number: {0}", i);
-            }
-            swriter.Flush();
-            swriter.Close();
         }
 
-        static Random random = new Random();
-        static string generateRandomString(int length)
-        {
-            var chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < length; i++)
-            {
-                int index = random.Next(chars.Length);
-                result.Append(chars[index]);
-            }
-            return result.ToString();
-        }
-        //生成大量隨機碼 SP
-
-        //批量生成隨機密碼, 存檔 ST
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //批量生成隨機密碼, 存檔
-
-            //批量生成隨機密碼，必須包含數字和字母，並用加密算法加密
-            /*
-            要求：密碼必須包含數字和字母
-
-            思路：1.列出數字和字符。 組成字符串 ：chars
-
-            2.利用randrom.Next(int i)返回一個小於所指定最大值的非負隨機數。
-
-            3. 隨機取不小於chars長度的隨機數a,取字符串chars的第a位字符。
-
-            4.循環 8次，得到8位密碼
-
-            5.循環N次，批量得到密碼。
-            */
-            string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-            Random randrom = new Random((int)DateTime.Now.Ticks);
-            string path1 = "pwd.txt";
-            for (int j = 0; j < 1000; j++)
-            {
-                string str = "";
-                for (int i = 0; i < 8; i++)
-                {
-                    str += chars[randrom.Next(chars.Length)];//randrom.Next(int i)返回一個小於所指定最大值的非負隨機數
-                }
-                if (IsNumber(str))//判斷是否全是數字
-                    continue;
-                if (IsLetter(str))//判斷是否全是字母
-                    continue;
-                File.AppendAllText(path1, str);
-                string pws = Md5(str, 32);//MD5加密
-                File.AppendAllText(path1, "," + pws + "\r\n");
-            }
-
-            richTextBox1.Text += "批量生成隨機密碼，必須包含數字和字母，並用加密算法加密，完成\n";
         }
-
-        //判斷是否全是數字
-        static bool IsNumber(string str)
-        {
-            if (str.Trim("0123456789".ToCharArray()) == "")
-                return true;
-            return false;
-        }
-        //判斷是否全是字母
-        static bool IsLetter(string str)
-        {
-            if (str.Trim("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray()) == "")
-                return true;
-            return false;
-        }
-
-        /// <summary>
-        /// MD5加密
-        /// </summary>
-        /// <param name="str">加密字元</param>
-        /// <param name="code">加密位數16/32</param>
-        /// <returns></returns>
-        public static string Md5(string str, int code)
-        {
-            string strEncrypt = string.Empty;
-
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] fromData = Encoding.GetEncoding("GB2312").GetBytes(str);
-            byte[] targetData = md5.ComputeHash(fromData);
-            for (int i = 0; i < targetData.Length; i++)
-            {
-                strEncrypt += targetData[i].ToString("X2");
-            }
-            if (code == 16)
-            {
-                strEncrypt = strEncrypt.Substring(8, 16);
-            }
-            return strEncrypt;
-        }
-        //批量生成隨機密碼, 存檔 SP
 
         private void button19_Click(object sender, EventArgs e)
         {
@@ -1273,43 +1172,6 @@ namespace vcs_Mix01
         private void button23_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //取得媒體資訊
-            //使用Shell32讀取影音文件屬性
-            /*
-            由於需要用到實時讀取影音文件(mp3、wma、wmv …)播放時間長度的功能，搜索到的結果有：
-            （1）硬編碼分析影音文件，需要分析各種媒體格式，代價最大；
-            （2）使用WMLib SDK，需要熟悉SDK各個接口，且不同版本的WM接口有別，代價次之；
-            （3）使用系統Shell32的COM接口，直接訪問媒體文體屬性，取其特定內容，代價最小。
-            顯然第3種方案見效最快，立即操刀：
-            ①引用Shell32底層接口c:\windows\system32\shell32.dll，VS自動轉換成Interop.Shell32.dll（注：64位系統和32位系統生成的Interop.Shell32.dll不一樣）
-            ②編碼讀取播放時間長度：
-            */
-
-            //取得媒體資訊
-            //string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
-            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
-            int i;
-            for (i = 0; i < 30; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + GetMediaInfo(filename, i) + "\n";
-            }
-        }
-
-        public string GetMediaInfo(string path, int item)
-        {
-            //參考/Shell32/右鍵/屬性/內嵌Interop型別改成False
-            try
-            {
-                string result = string.Empty;
-                Shell32.Shell shell = new Shell32.ShellClass();
-                Shell32.Folder folder = shell.NameSpace(path.Substring(0, path.LastIndexOf("\\")));
-                Shell32.FolderItem folderItem = folder.ParseName(path.Substring(path.LastIndexOf("\\") + 1));
-                return folder.GetDetailsOf(folderItem, item);
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1536,104 +1398,9 @@ namespace vcs_Mix01
             }
         }
 
-
-        // 顏色模板
-        //  黑、白、紅、綠、藍、黃/ 棕 、灰
-        private const int BLACK = 0;
-        private const int WHITE = 1;
-        private const int RED1 = 2;
-        private const int RED2 = 3;
-        private const int GREEN1 = 4;
-        private const int GREEN2 = 5;
-        private const int BLUE1 = 6;
-        private const int BLUE2 = 7;
-        private const int YELLOW1 = 8;
-        private const int YELLOW2 = 9;
-        private const int BROWN = 10;
-        private const int GRAY = 11;
-
         private void button28_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //顯示顏色
-            int[,] colorVelue = null;
-            colorVelue = new int[,] {
-            {50,50,50},    //黑
-            {255,255,255},  //白
-            {240,80,80}, //紅小
-            {240,160,160},  //紅大
-            {60,180,60}, //綠小
-            {160,240,160},  //綠大
-            {80,80,240}, //藍小
-            {160,160,240},  //藍大
-            {240,190,80}, //黃小
-            {240,240,160},  //黃大
-            {205,133,63},   //棕/褐
-            //{162,162,162},//灰，特殊
-            };
-
-            int total_colors = colorVelue.GetUpperBound(0) + 1;
-            richTextBox1.Text += "total_colors = " + total_colors.ToString() + "\n";
-
-            int i;
-            for (i = 0; i < total_colors; i++)
-            {
-                switch (i)
-                {
-                    case -1:
-                        richTextBox1.Text += "無此色\n";
-                        break;
-                    case 0:
-                        richTextBox1.Text += "黑\n";
-                        break;
-                    case 1:
-                        richTextBox1.Text += "白\n";
-                        break;
-                    case 2:
-                        richTextBox1.Text += "紅\n";
-                        break;
-                    case 3:
-                        richTextBox1.Text += "紅\n";
-                        break;
-                    case 4:
-                        richTextBox1.Text += "綠\n";
-                        break;
-                    case 5:
-                        richTextBox1.Text += "綠\n";
-                        break;
-                    case 6:
-                        richTextBox1.Text += "藍\n";
-                        break;
-                    case 7:
-                        richTextBox1.Text += "藍\n";
-                        break;
-                    case 8:
-                        richTextBox1.Text += "黃\n";
-                        break;
-                    case 9:
-                        richTextBox1.Text += "黃\n";
-                        break;
-                    case 10:
-                        richTextBox1.Text += "棕\n";
-                        break;
-                    case 11:
-                        richTextBox1.Text += "灰\n";
-                        break;
-                    default:
-                        richTextBox1.Text += "其他\n";
-                        break;
-                }
-
-                int R = colorVelue[i, 0];
-                int G = colorVelue[i, 1];
-                int B = colorVelue[i, 2];
-                richTextBox1.Text += "show color " + i.ToString() + " " + R.ToString() + " " + G.ToString() + " " + B.ToString() + "\n";
-
-                ((Button)sender).BackColor = Color.FromArgb(R, G, B);
-                Application.DoEvents();
-                Thread.Sleep(1000);
-
-            }
         }
 
         private void button29_Click(object sender, EventArgs e)

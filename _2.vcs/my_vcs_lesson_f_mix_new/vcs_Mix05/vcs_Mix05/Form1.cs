@@ -941,27 +941,6 @@ namespace vcs_Mix05
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //生成隨機字符串
-            string random_str = RandomStringGenerator.GetRandomString();
-            richTextBox1.Text += random_str + "\n";
-        }
-
-        /// <summary> 
-        /// 生成隨機字符串
-        /// </summary> 
-        private class RandomStringGenerator
-        {
-            static readonly Random r = new Random();
-            const string _chars = "0123456789";
-            public static string GetRandomString()
-            {
-                char[] buffer = new char[5];
-                for (int i = 0; i < 5; i++)
-                {
-                    buffer[i] = _chars[r.Next(_chars.Length)];
-                }
-                return new string(buffer);
-            }
         }
 
         private void button17_Click(object sender, EventArgs e)
