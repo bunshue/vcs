@@ -362,14 +362,12 @@ namespace vcs_Mix00
 
         private void button5_Click(object sender, EventArgs e)
         {
-
-
+            show_button_text(sender);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button7_Click(object sender, EventArgs e)
