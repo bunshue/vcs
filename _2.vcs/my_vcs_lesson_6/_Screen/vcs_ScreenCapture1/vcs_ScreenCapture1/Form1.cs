@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Drawing.Imaging;
 
 //C# 屏幕監控 自動截屏程序 主窗體隱藏，僅在進程中顯示
 
@@ -15,8 +16,6 @@ namespace vcs_ScreenCapture1
 {
     public partial class Form1 : Form
     {
-        string foldername = @"C:\dddddddddd\_screen_capture_" + DateTime.Now.ToString("yyyy-MM-dd");
-
         public Form1()
         {
             InitializeComponent();
@@ -25,20 +24,11 @@ namespace vcs_ScreenCapture1
         private void Form1_Load(object sender, EventArgs e)
         {
             //主窗體桌面不顯示 僅在進程中顯示
-            InitializeComponent();
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
             SetVisibleCore(false);
 
-            if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
-            {
-                Directory.CreateDirectory(foldername);
-                //richTextBox1.Text += "已建立一個新資料夾: " + foldername + "\n";
-            }
-            else
-            {
-                //richTextBox1.Text += "資料夾: " + foldername + " 已存在，不用再建立\n";
-            }
+            timer1.Enabled = true;
         }
 
         protected override void SetVisibleCore(bool value)
@@ -56,8 +46,8 @@ namespace vcs_ScreenCapture1
             Bitmap bitmap1 = new Bitmap(rect.Width, rect.Height);
             Graphics g = Graphics.FromImage(bitmap1);
             g.CopyFromScreen(0, 0, 0, 0, mySize);
-            string ImageName = DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".jpg";
-            bitmap1.Save(foldername + "/" + ImageName);
+            string filename = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            bitmap1.Save(filename);
             //釋放資源  
             bitmap1.Dispose();
             g.Dispose();
@@ -65,4 +55,3 @@ namespace vcs_ScreenCapture1
         }
     }
 }
-

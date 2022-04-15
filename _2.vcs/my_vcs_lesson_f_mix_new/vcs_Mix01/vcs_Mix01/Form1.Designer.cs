@@ -114,7 +114,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(170, 70);
             this.button25.TabIndex = 112;
-            this.button25.Text = "GPS定位，经纬度附近地点查询–C#实现方法";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 

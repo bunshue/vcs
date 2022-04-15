@@ -263,16 +263,6 @@ namespace draw_test2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Graphics g = this.pictureBox1.CreateGraphics();
-            GraphicsPath gp = new GraphicsPath();
-            Pen p = new Pen(Color.Blue, 1);
-            Point[] pts = { new Point(15, 30), new Point(30, 40), new Point(50, 30) };
-            gp.AddArc(15, 20, 80, 50, 210, 120);
-            gp.StartFigure();
-            gp.AddCurve(pts);
-            gp.AddString("圖形路徑", new FontFamily("標楷體"), (int)FontStyle.Underline, 50, new PointF(20, 50), new StringFormat());
-            gp.AddPie(180, 20, 80, 50, 210, 120);
-            g.DrawPath(p, gp);
 
         }
 

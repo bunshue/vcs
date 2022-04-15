@@ -182,6 +182,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(170, 70);
             this.button19.TabIndex = 106;
+            this.button19.Text = "文本轉成圖片";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -236,7 +237,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(170, 70);
             this.button8.TabIndex = 101;
-            this.button8.Text = "使用 TextureBrush";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 

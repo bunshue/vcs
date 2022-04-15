@@ -64,6 +64,9 @@ namespace vcs_test_all_01_Random
             pictureBox4.Size = new Size(256 / 2, 50);
             pictureBox4.Location = new Point(750, 20 + 256 + 10 + 50 + 10);
 
+            pictureBox5.Size = new Size(256 / 2, 50);
+            pictureBox5.Location = new Point(750 + 256 / 2, 20 + 256 + 10 + 50 + 10);
+
             tb_random_text1.Size = new Size(256, 50);
             tb_random_text1.Location = new Point(750, 20 + 256 + 10 + 150 + 10);
 
@@ -988,9 +991,23 @@ namespace vcs_test_all_01_Random
 
         private Random random = new Random();
 
-        private Color RandomColor()
+        private Color GetRandomColor2()
         {
             return Colors[random.Next(0, Colors.Length)];
+        }
+
+        //隨機顏色如下
+        public static Color GetRandomColor5()
+        {
+            Random randomFirst = new Random((int)DateTime.Now.Ticks);
+            System.Threading.Thread.Sleep(300);
+            Random randomSencond = new Random((int)DateTime.Now.Ticks);
+            System.Threading.Thread.Sleep(300);
+            Random randomThird = new Random((int)DateTime.Now.Ticks);
+            int intRed = randomFirst.Next(256);
+            int intGreen = randomSencond.Next(256);
+            int intBlue = randomThird.Next(256);
+            return Color.FromArgb(intRed, intGreen, intBlue);
         }
 
         // 顏色模板
@@ -1203,7 +1220,7 @@ namespace vcs_test_all_01_Random
             //richTextBox1.Text += index.ToString() + " ";
 
             //pictureBox2.BackColor = Colors[index % len];  //same
-            pictureBox2.BackColor = RandomColor();          //same
+            pictureBox2.BackColor = GetRandomColor2();          //same
 
             Random rd = new Random();
             pictureBox3.BackColor = Color.FromArgb(
@@ -1212,6 +1229,8 @@ namespace vcs_test_all_01_Random
                 (byte)rd.Next(0, 255));
 
             show_random_color();
+
+            pictureBox5.BackColor = GetRandomColor5();
 
             tb_random_text1.Text = RandomText1();
 

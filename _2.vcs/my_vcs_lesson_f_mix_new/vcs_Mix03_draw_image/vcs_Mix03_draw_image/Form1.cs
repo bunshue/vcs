@@ -430,28 +430,6 @@ namespace vcs_Mix03_draw_image
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            draw_TextureBrush();
-        }
-
-        public void draw_TextureBrush()
-        {
-            int W = 305;
-            int H = 400;
-
-            string filename = @"C:\______test_files\picture1.jpg";  //使用一張背景圖
-
-            Bitmap _bitmap = new Bitmap(filename);
-            TextureBrush tb = new TextureBrush(_bitmap);
-
-            Font f = new Font("Arial", 60, FontStyle.Bold);
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
-            //清空背景色  
-            g.Clear(Color.White);
-            //繪制驗證碼  
-
-            g.DrawString("牡丹亭", f, tb, 0, 150);
-            pictureBox1.Image = bitmap1;
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1123,7 +1101,73 @@ namespace vcs_Mix03_draw_image
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //文本轉成圖片
 
+            //讀取純文字檔到richTextBox裏
+            try
+            {
+                richTextBox1.LoadFile(@"C:\______test_files\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+            }
+            catch (FileNotFoundException)
+            {
+                richTextBox1.Text += "找不到檔案\n";
+                return;
+            }
+
+            //獲取文本
+            string text = richTextBox1.Text;
+
+            //得到Bitmap(傳入Rectangle.Empty自動計算寬高)
+            Bitmap bitmap1 = TextToBitmap(text, this.richTextBox1.Font, Rectangle.Empty, this.richTextBox1.ForeColor, this.richTextBox1.BackColor);
+
+            //用PictureBox顯示
+            this.pictureBox1.Image = bitmap1;
+
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(filename, ImageFormat.Bmp);
+        }
+
+        //通過系統Graphics繪圖把文字繪制到位圖上，然後顯示或保存起來，這裡用定義該函數
+        /// <summary>
+        /// 把文字轉換才Bitmap
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="font"></param>
+        /// <param name="rect">用於輸出的矩形，文字在這個矩形內顯示，為空時自動計算</param>
+        /// <param name="fontcolor">字體顏色</param>
+        /// <param name="backColor">背景顏色</param>
+        /// <returns></returns>
+        private Bitmap TextToBitmap(string text, Font font, Rectangle rect, Color fontcolor, Color backColor)
+        {
+            Graphics g;
+            Bitmap bitmap1;
+            StringFormat format = new StringFormat(StringFormatFlags.NoClip);
+            if (rect == Rectangle.Empty)
+            {
+                bitmap1 = new Bitmap(1, 1);
+                g = Graphics.FromImage(bitmap1);
+                //計算繪制文字所需的區域大小（根據寬度計算長度），重新創建矩形區域繪圖
+                SizeF sizef = g.MeasureString(text, font, PointF.Empty, format);
+
+                int width = (int)(sizef.Width + 1);
+                int height = (int)(sizef.Height + 1);
+                rect = new Rectangle(0, 0, width, height);
+                bitmap1.Dispose();
+
+                bitmap1 = new Bitmap(width, height);
+            }
+            else
+            {
+                bitmap1 = new Bitmap(rect.Width, rect.Height);
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            //使用ClearType字體功能
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            g.FillRectangle(new SolidBrush(backColor), rect);
+            g.DrawString(text, font, Brushes.Black, rect, format);
+            return bitmap1;
         }
 
         private void button20_Click(object sender, EventArgs e)

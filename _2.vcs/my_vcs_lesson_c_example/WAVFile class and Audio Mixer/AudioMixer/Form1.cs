@@ -39,8 +39,21 @@ namespace AudioMerger
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //C# 跨 Thread 存取 UI
+            //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
             mSoundFilePaths = new ArrayList();
-            richTextBox1.Text += "Ready!\n";
+
+            string filename1 = @"C:\______test_files\_wav\1.wav";
+            string filename2 = @"C:\______test_files\_wav\2.wav";
+            string filename3 = @"C:\______test_files\_wav\3.wav";
+            string filename4 = @"C:\______test_files\_wav\4.wav";
+            AddAudioFilename(filename1);
+            AddAudioFilename(filename2);
+            AddAudioFilename(filename3);
+            AddAudioFilename(filename4);
+
         }
 
         /// <summary>
@@ -60,7 +73,6 @@ namespace AudioMerger
             FilenameGrid.Enabled = true;
             MixAudioButton.Enabled = true;
             ClearListButton.Enabled = true;
-            fileToolStripMenuItem.Enabled = true;
         }
 
         /// <summary>
@@ -71,7 +83,6 @@ namespace AudioMerger
             FilenameGrid.Enabled = false;
             MixAudioButton.Enabled = false;
             ClearListButton.Enabled = false;
-            fileToolStripMenuItem.Enabled = false;
         }
 
         private void FilenameGrid_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
@@ -153,19 +164,9 @@ namespace AudioMerger
             return filename;
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         // Merge button event function - Merges the WAV files together.
         private void MergeAudioButton_Click(object sender, EventArgs e)
         {
-            // Get the user's home directory, and also create the temporary directory name.
-            String userDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            userDir = userDir.Substring(0, userDir.LastIndexOf('\\'));
-            String tempDir = userDir + "\\AudioMergerTemp";
-
             try
             {
                 // If there are less than 2 audio files, then there is nothing to do.
@@ -181,26 +182,7 @@ namespace AudioMerger
                     return;
                 }
 
-                // 2. Create the temporary directory in the user's home dir
-                Directory.CreateDirectory(tempDir);
-                if (!Directory.Exists(tempDir))
-                {
-                    throw new SystemException("Unable to create temporary work directory: " + tempDir);
-                }
-
-                // 3. Prompt the user for the output filename
-                OpenFileDialog fileDlg = new OpenFileDialog();
-                fileDlg.Filter = "WAV audio files (*.wav)|*.wav";
-                fileDlg.Title = "Choose an output file";
-                fileDlg.CheckFileExists = false;
-                // Show the dialog, and if the user chooses to cancel, then
-                // just return.
-                if (fileDlg.ShowDialog() != DialogResult.OK)
-                {
-                    Directory.Delete(tempDir);
-                    return;
-                }
-                String mixOutputFilename = fileDlg.FileName;
+                string mixOutputFilename = DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
 
                 richTextBox1.Text += "Working...\n";
 
@@ -212,7 +194,7 @@ namespace AudioMerger
                 }
 
                 // Perform the audio mix
-                AudioMergeThread mergeThread = new AudioMergeThread(this, audioFilenames, fileDlg.FileName, tempDir);
+                AudioMergeThread mergeThread = new AudioMergeThread(this, audioFilenames, mixOutputFilename, Application.StartupPath);
                 mergeThread.mThread.Start();
             }
             catch (Exception exc)
@@ -242,11 +224,14 @@ namespace AudioMerger
         /// <param name="e">Contains information for the data grid click event</param>
         private void FilenameGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            richTextBox1.Text += "你按了 ColumnIndex = " + e.ColumnIndex.ToString() + "\n";
+
             // If the user clicked on the button (column 1), then remove the audio file from the list.
             if (e.ColumnIndex == 1)
             {
                 try
                 {
+                    richTextBox1.Text += "你按了第 " + e.RowIndex.ToString() + " 項\n";
                     FilenameGrid.Rows.RemoveAt(e.RowIndex);
                     mSoundFilePaths.RemoveAt(e.RowIndex);
                 }
@@ -257,31 +242,6 @@ namespace AudioMerger
                 }
             }
         }
-
-        /// <summary>
-        /// Event function for when the user selects the "Add audio file(s)" option
-        /// from the File menu.  This allows the user to add 1 or more audio files
-        /// to the GUI.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FileAddMenuItem_Click(object sender, EventArgs e)
-        {
-            // Create an "open" dialog to allow the user to select 1 or more
-            // WAV audio files.
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "WAV audio files|*.wav";
-            dlg.Multiselect = true;
-
-            // Show the dialog, and if the user clicks OK, then add the audio files
-            // to the GUI.
-            if (dlg.ShowDialog(this) == DialogResult.OK)
-            {
-                foreach (String filename in dlg.FileNames)
-                {
-                    AddAudioFilename(filename);
-                }
-            }
-        }
     }
 }
+

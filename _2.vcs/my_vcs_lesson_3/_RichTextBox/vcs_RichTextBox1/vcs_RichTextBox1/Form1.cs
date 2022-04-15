@@ -514,7 +514,7 @@ namespace vcs_RichTextBox1
 
                 richTextBox1.LoadFile(filename);
             }
-            catch (System.IO.FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 MessageBox.Show("File not found!");
             }
@@ -787,7 +787,7 @@ namespace vcs_RichTextBox1
             {
                 richTextBox1.LoadFile(@"C:\______test_files\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
             }
-            catch (System.IO.FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 richTextBox2.Text += "找不到檔案\n";
             }
@@ -801,7 +801,7 @@ namespace vcs_RichTextBox1
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 // 運用 ReadAllText 方法 (String, Encoding) ，其中 Encoding 針對您txt檔案的編碼做變更，讀出的資料才不會有亂碼
-                richTextBox1.Text += System.IO.File.ReadAllText(openFileDialog1.FileName, System.Text.Encoding.Default);
+                richTextBox1.Text += File.ReadAllText(openFileDialog1.FileName, System.Text.Encoding.Default);
             }
             else
             {

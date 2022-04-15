@@ -14,6 +14,16 @@ namespace vcs_ReadWrite_CSV4
 {
     public partial class Form1 : Form
     {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Structure to hold price data.
         private struct PriceData
         {
@@ -26,24 +36,6 @@ namespace vcs_ReadWrite_CSV4
             }
         };
 
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
-        // Draw the graph.
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            DrawGraph();
-        }
-
-        // Draw the graph.
-        private void picRefresh_Click(object sender, EventArgs e)
-        {
-            DrawGraph();
-        }
-
-        // Draw the graph.
         private void DrawGraph()
         {
             this.Cursor = Cursors.WaitCursor;
@@ -197,6 +189,11 @@ namespace vcs_ReadWrite_CSV4
 
             // Restore the original transformation.
             gr.Transform = old_transformation;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DrawGraph();
         }
     }
 }

@@ -111,7 +111,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="UtilityFunctions.cs" />
     <Compile Include="WAVFile.cs" />
     <Compile Include="WAVFileExceptions.cs" />
     <Compile Include="WAVFormat.cs" />

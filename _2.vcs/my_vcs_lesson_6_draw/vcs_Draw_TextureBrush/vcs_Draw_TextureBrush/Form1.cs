@@ -85,7 +85,28 @@ namespace vcs_Draw_TextureBrush
 
         private void button1_Click(object sender, EventArgs e)
         {
+            draw_TextureBrush();
+        }
 
+        public void draw_TextureBrush()
+        {
+            int W = 305;
+            int H = 400;
+
+            string filename = @"C:\______test_files\picture1.jpg";  //使用一張背景圖
+
+            Bitmap _bitmap = new Bitmap(filename);
+            TextureBrush tb = new TextureBrush(_bitmap);
+
+            Font f = new Font("Arial", 60, FontStyle.Bold);
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            //清空背景色  
+            g.Clear(Color.White);
+            //繪制驗證碼  
+
+            g.DrawString("牡丹亭", f, tb, 0, 150);
+            pictureBox1.Image = bitmap1;
         }
 
         private void button2_Click(object sender, EventArgs e)

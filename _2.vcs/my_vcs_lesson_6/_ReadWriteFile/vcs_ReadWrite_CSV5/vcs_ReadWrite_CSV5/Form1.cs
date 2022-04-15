@@ -14,6 +14,15 @@ namespace vcs_ReadWrite_CSV5
 {
     public partial class Form1 : Form
     {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        }
+
         // Structure to hold price data.
         private struct PriceData
         {
@@ -26,11 +35,6 @@ namespace vcs_ReadWrite_CSV5
             }
         };
 
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The historical prices.
         private List<PriceData> Prices;
 
@@ -41,25 +45,6 @@ namespace vcs_ReadWrite_CSV5
         private const float InitialInvestment = 4000;   // The money we start with.
         private const float BaseInterestRate = 0.01f;   // Interest rate for uninvested money.
 
-        // Draw the graph.
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // Load the data.
-            Prices = GetDjiPrices();
-
-            // Make investments.
-            MakeInvestments();
-
-            DrawGraph();
-        }
-
-        // Draw the graph.
-        private void picRefresh_Click(object sender, EventArgs e)
-        {
-            DrawGraph();
-        }
-
-        // Draw the graph.
         private void DrawGraph()
         {
             this.Cursor = Cursors.WaitCursor;
@@ -551,6 +536,17 @@ namespace vcs_ReadWrite_CSV5
                 shares += investment_per_period / price;
                 money_left -= investment_per_period;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Load the data.
+            Prices = GetDjiPrices();
+
+            // Make investments.
+            MakeInvestments();
+
+            DrawGraph();
         }
     }
 }

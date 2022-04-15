@@ -49,14 +49,6 @@ namespace AudioMerger
                 mAppForm.DisableAudioMergeGUIElements();
                 // Merge the audio files.  When done, set the status text in the GUI to say "Done.".
                 WAVFile.MergeAudioFiles(mAudioFilenames, mDestFilename, mTempDir);
-
-                // Clean and remove the temporary directory
-                String retval = UtilityFunctions.DeleteDir(mTempDir);
-                if (retval != "")
-                {
-                    MessageBox.Show(mAppForm, "Error removing temporary directory:\n" + mTempDir + "\n" + retval, "Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
             catch (WAVFileAudioMergeException exc)
             {
