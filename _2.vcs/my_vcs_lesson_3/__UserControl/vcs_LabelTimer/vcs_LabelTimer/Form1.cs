@@ -23,7 +23,6 @@ namespace vcs_LabelTimer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            labelTimer1.Location = new System.Drawing.Point(30, 30);
             labelTimer1.Text = "現在時間 : ";
         }
     }

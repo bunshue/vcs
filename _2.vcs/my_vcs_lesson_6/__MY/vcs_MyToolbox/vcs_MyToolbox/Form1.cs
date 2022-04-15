@@ -162,6 +162,9 @@ namespace vcs_MyToolbox
         Button btn_capture1 = new Button();
         Button btn_capture2 = new Button();
 
+        Button btn_stopwatch = new Button();
+        Button btn_countdown = new Button();
+
         public Form1()
         {
             InitializeComponent();
@@ -476,6 +479,22 @@ namespace vcs_MyToolbox
             btn_22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             btn_22.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_22);	// 將控件加入表單
+
+            btn_stopwatch.Width = w * 3 / 4;
+            btn_stopwatch.Height = h * 3 / 5;
+            btn_stopwatch.Text = "碼表";
+            btn_stopwatch.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            btn_stopwatch.Click += btn_click_function;	// 加入事件
+            this.Controls.Add(btn_stopwatch);	// 將控件加入表單
+
+
+            btn_countdown.Width = w * 3 / 4;
+            btn_countdown.Height = h * 3 / 5;
+            btn_countdown.Text = "倒數";
+            btn_countdown.Location = new Point(x_st + dx * 2, y_st + dy * 3 + 60);
+            btn_countdown.Click += btn_click_function;	// 加入事件
+            this.Controls.Add(btn_countdown);	// 將控件加入表單
+
 
             //groupBox1 ST
             groupBox1.Width = w * 2 - 20;
@@ -905,10 +924,6 @@ namespace vcs_MyToolbox
                     richTextBox1.Text += "無圖片\n";
                     timer1.Enabled = true;
                 }
-
-
-
-
             }
             else if (sender.Equals(btn_capture1))
             {
@@ -978,11 +993,18 @@ namespace vcs_MyToolbox
                 this.MouseDown += Form1_MouseDown;
                 this.Show();
             }
+            else if (sender.Equals(btn_stopwatch))
+            {
+                text = btn_stopwatch.Text;
+            }
+            else if (sender.Equals(btn_countdown))
+            {
+                text = btn_countdown.Text;
+            }
             else
             {
                 text = "unknown";
             }
-
             show_main_message1("你按了 " + text, S_OK, 30);
         }
 

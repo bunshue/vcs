@@ -971,6 +971,44 @@ namespace vcs_Mix01
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            String[, ,] items =
+            new String[,,] {
+            {
+            { "A1", "A2", "A3", "☆", "○" },
+            { "B1", "B2", "B3", "☆", "○" },
+            { "C1", "C2", "C3", "☆", "○" },
+            { "D1", "D2", "D3", "☆", "○" }
+            }, {
+            { "E1", "E2", "E3", "☆", "○" },
+            { "F1", "F2", "F3", "☆", "○" },
+            { "G1", "G2", "G3", "☆", "○" },
+            { "H1", "H2", "H3", "☆", "○" }
+            }
+            };
+
+            //GetUpperBound(0) 返回數組的第一維的索引上限，GetUpperBound(i)返回數組的i+1維的上限，GetUpperBound(Rank-1)返回數組的最後一維的上限，也就是列數-1
+
+            System.Console.WriteLine("Items.Rank =" + items.Rank);
+            System.Console.WriteLine("Items.GetUpperBound(0)=" + items.GetUpperBound(0));
+
+            System.Console.WriteLine("Items.GetUpperBound(1)=" + items.GetUpperBound(1));
+            System.Console.WriteLine("Items.GetUpperBound(2)=" + items.GetUpperBound(items.Rank - 1));
+
+            System.Console.WriteLine("Items[0, 0, 0]=" + items[0, 0, 0]);
+            System.Console.WriteLine("Items[0, 0, 1]=" + items[0, 0, 1]);
+            System.Console.WriteLine("Items[0, 0, 2]=" + items[0, 0, 2]);
+            System.Console.WriteLine("Items[0, 0, 3]=" + items[0, 0, 3]);
+            System.Console.WriteLine("Items[0, 0, 4]=" + items[0, 0, 4]);
+
+
+            System.Console.WriteLine("Items[0, 1, 0]=" + items[0, 1, 0]);
+            System.Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 1]);
+            System.Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 2]);
+            System.Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 3]);
+
+            System.Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 4]);
+
         }
 
         private void button18_Click(object sender, EventArgs e)

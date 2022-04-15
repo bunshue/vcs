@@ -320,6 +320,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(170, 70);
             this.button17.TabIndex = 93;
+            this.button17.Text = "多維陣列";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
