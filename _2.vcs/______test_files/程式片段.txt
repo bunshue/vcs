@@ -1,5 +1,85 @@
 
 
+//C# 圖片裁剪代碼，
+
+        /// <summary>
+        /// 縮小裁剪圖片
+        /// </summary>
+        /// <param name="int_Width">要縮小裁剪圖片寬度</param>
+        /// <param name="int_Height">要縮小裁剪圖片長度</param>
+        /// <param name="input_ImgUrl">要處理圖片路徑</param>
+        /// <param name="out_ImgUrl">處理完畢圖片路徑</param>
+        public void ImgReduceCutOut(int int_Width, int int_Height, string input_ImgUrl, string out_ImgUrl)
+        {
+            // ＝＝＝上傳標准圖大小＝＝＝
+            int int_Standard_Width = 160;
+            int int_Standard_Height = 160;
+
+            int Reduce_Width = 0; // 縮小的寬度
+            int Reduce_Height = 0; // 縮小的高度
+            int CutOut_Width = 0; // 裁剪的寬度
+            int CutOut_Height = 0; // 裁剪的高度
+            int level = 100; //縮略圖的質量 1-100的范圍
+
+            // ＝＝＝獲得縮小，裁剪大小＝＝＝
+            if (int_Standard_Height * int_Width / int_Standard_Width > int_Height)
+            {
+                Reduce_Width = int_Width;
+                Reduce_Height = int_Standard_Height * int_Width / int_Standard_Width;
+                CutOut_Width = int_Width;
+                CutOut_Height = int_Height;
+            }
+            else if (int_Standard_Height * int_Width / int_Standard_Width < int_Height)
+            {
+                Reduce_Width = int_Standard_Width * int_Height / int_Standard_Height;
+                Reduce_Height = int_Height;
+                CutOut_Width = int_Width;
+                CutOut_Height = int_Height;
+            }
+            else
+            {
+                Reduce_Width = int_Width;
+                Reduce_Height = int_Height;
+                CutOut_Width = int_Width;
+                CutOut_Height = int_Height;
+            }
+
+            // ＝＝＝通過連接創建Image對象＝＝＝
+            System.Drawing.Image oldimage = System.Drawing.Image.FromFile(Server.MapPath(input_ImgUrl));
+
+            // ＝＝＝縮小圖片＝＝＝
+            System.Drawing.Image thumbnailImage = oldimage.GetThumbnailImage(Reduce_Width, Reduce_Height, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
+            Bitmap bm = new Bitmap(thumbnailImage);
+
+            // ＝＝＝處理JPG質量的函數＝＝＝
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+            ImageCodecInfo ici = null;
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.MimeType == "image/jpeg")
+                    ici = codec;
+            }
+            EncoderParameters ep = new EncoderParameters();
+            ep.Param[0] = new EncoderParameter(Encoder.Quality, (long)level);
+
+            //bm.Save(Server.MapPath("2.jpg"), ici, ep);
+
+            // ＝＝＝裁剪圖片＝＝＝
+            Rectangle cloneRect = new Rectangle(0, 0, CutOut_Width, CutOut_Height);
+            PixelFormat format = bm.PixelFormat;
+            Bitmap cloneBitmap = bm.Clone(cloneRect, format);
+
+            // ＝＝＝保存圖片＝＝＝
+            cloneBitmap.Save(Server.MapPath(out_ImgUrl), ici, ep);
+        }
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
         public static string GetRandomString2(int length)
         {
             var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -15,6 +95,9 @@
 
 
 		
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
                 
 
            //在cmd控制台輸入命令
@@ -4619,7 +4702,8 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 
         				
-//--------------------------------------------------------------------------------------------------------------------------
+//----------------------
+----------------------------------------------------------------------------------------------------
 
 
 
@@ -4629,6 +4713,37 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+//C# 執行CMD命令方法
+
+        /// <summary>
+        /// 執行Cmd命令
+        /// </summary>
+        public void ExecCmd(string cmdstr)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardInput = true;
+            process.Start();
+
+            process.StandardInput.WriteLine(cmdstr);
+            process.StandardInput.AutoFlush = true;
+            process.StandardInput.WriteLine("exit");
+
+            StreamReader reader = process.StandardOutput;//截取輸出流
+
+            string output = reader.ReadLine();//每次讀取一行
+
+            while (!reader.EndOfStream)
+            {
+                PrintThrendInfo(output);
+                output = reader.ReadLine();
+            }
+
+            process.WaitForExit();
+        }
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
@@ -4909,7 +5024,6 @@ private void Bind()
 C#_把dataTable數據導出到CSV,XLS文件
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190579.html
 https://blog.csdn.net/happmaoo/article/details/83814604
-
 
 
 

@@ -23,17 +23,17 @@ namespace CirecleCCS
             pictureBox1.Image = Image.FromFile(filename);
         }
 
-        private void pictureBox_x_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             ccs.DrawRubberBand(pictureBox1, e);
         }
 
-        private void pictureBox_x_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             ccs.StartPoint(pictureBox1, e);
         }
 
-        private void pictureBox_x_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             ccs.TrackRubberBand(pictureBox1, e);
             label_xval.Text = "E->X:" + e.X.ToString();
@@ -42,7 +42,7 @@ namespace CirecleCCS
             label_CcsY.Text = "CcsY:" + ccs.Y.ToString();
         }
 
-        private void pictureBox_x_MouseUp(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             ccs.EndPoint(pictureBox1, e);
         }

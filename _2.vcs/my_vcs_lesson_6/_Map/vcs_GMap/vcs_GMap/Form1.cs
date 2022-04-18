@@ -396,7 +396,7 @@ namespace vcs_GMap
                 gMapOverlay1.Markers[i].Tag = "xxxx";
                 gMapOverlay1.Id = "markroad";
 
-                setup_marker_tooltip(marker, "告警源编号："); //設置marker訊息
+                setup_marker_tooltip(marker, "顯示訊息"); //設置marker訊息
             }
         }
 
@@ -857,12 +857,10 @@ namespace vcs_GMap
             }
         }
 
-        int cc = 0;
-        void AddMarker(double lat, double lng, GMarkerGoogleType type)
+        void AddMarker(double lat, double lng, GMarkerGoogleType type, string message)
         {
             GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lng), type);
-            cc++;
-            setup_marker_tooltip(marker, string.Format("{0} - {1}:{2}", cc.ToString(), lat, lng));  //設置marker訊息
+            setup_marker_tooltip(marker, message);  //設置marker訊息
             markersOverlay.Markers.Add(marker);
         }
 
@@ -874,23 +872,23 @@ namespace vcs_GMap
 
             double dd = 0.008;
 
-            AddMarker(latitude + dd * 1, longitude - dd, GMarkerGoogleType.red);
-            AddMarker(latitude + dd * 1, longitude + dd * 0, GMarkerGoogleType.green);
-            AddMarker(latitude + dd * 1, longitude + dd * 1, GMarkerGoogleType.blue);
+            AddMarker(latitude + dd * 1, longitude - dd, GMarkerGoogleType.red, "red");
+            AddMarker(latitude + dd * 1, longitude + dd * 0, GMarkerGoogleType.green, "green");
+            AddMarker(latitude + dd * 1, longitude + dd * 1, GMarkerGoogleType.blue, "blue");
 
-            AddMarker(latitude + dd * 0, longitude - dd, GMarkerGoogleType.green_big_go);
-            AddMarker(latitude + dd * 0, longitude + dd * 0, GMarkerGoogleType.red_big_stop);
-            AddMarker(latitude + dd * 0, longitude + dd * 1, GMarkerGoogleType.blue_pushpin);
-            AddMarker(latitude + dd * 0, longitude + dd * 2, GMarkerGoogleType.arrow);
+            AddMarker(latitude + dd * 0, longitude - dd, GMarkerGoogleType.green_big_go, "green_big_go");
+            AddMarker(latitude + dd * 0, longitude + dd * 0, GMarkerGoogleType.red_big_stop, "red_big_stop");
+            AddMarker(latitude + dd * 0, longitude + dd * 1, GMarkerGoogleType.blue_pushpin, "blue_pushpin");
+            AddMarker(latitude + dd * 0, longitude + dd * 2, GMarkerGoogleType.arrow, "arrow");
 
-            AddMarker(latitude - dd * 1, longitude - dd, GMarkerGoogleType.red_dot);
-            AddMarker(latitude - dd * 1, longitude + dd * 0, GMarkerGoogleType.green_dot);
-            AddMarker(latitude - dd * 1, longitude + dd * 1, GMarkerGoogleType.blue_dot);
-            AddMarker(latitude - dd * 1, longitude + dd * 2, GMarkerGoogleType.pink_dot);
+            AddMarker(latitude - dd * 1, longitude - dd, GMarkerGoogleType.red_dot, "red_dot");
+            AddMarker(latitude - dd * 1, longitude + dd * 0, GMarkerGoogleType.green_dot, "green_dot");
+            AddMarker(latitude - dd * 1, longitude + dd * 1, GMarkerGoogleType.blue_dot, "blue_dot");
+            AddMarker(latitude - dd * 1, longitude + dd * 2, GMarkerGoogleType.pink_dot, "pink_dot");
 
-            AddMarker(latitude - dd * 2, longitude - dd, GMarkerGoogleType.red_small);
-            AddMarker(latitude - dd * 2, longitude + dd * 0, GMarkerGoogleType.gray_small);
-            AddMarker(latitude - dd * 2, longitude + dd * 1, GMarkerGoogleType.orange_small);
+            AddMarker(latitude - dd * 2, longitude - dd, GMarkerGoogleType.red_small, "red_small");
+            AddMarker(latitude - dd * 2, longitude + dd * 0, GMarkerGoogleType.gray_small, "gray_small");
+            AddMarker(latitude - dd * 2, longitude + dd * 1, GMarkerGoogleType.orange_small, "orange_small");
 
             PointLatLng point = new PointLatLng(latitude, longitude);
             GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
@@ -908,6 +906,100 @@ namespace vcs_GMap
 
         private void button12_Click(object sender, EventArgs e)
         {
+            string[,] station = null;
+
+            station = new string[,] { 
+            { "台北", "25.047778", "121.517222"},
+            { "新竹", "24.80205", "120.971817"},
+            { "台中", "24.136944", "120.684722"},
+            { "台南", "23.001389", "120.2175"},
+            { "高雄", "22.64", "120.302778"},
+            { "台東", "22.791389", "121.118889"},
+            { "花蓮", "23.992694", "121.600861"},
+            { "宜蘭", "24.750278", "121.7625"},
+            };
+
+            int total_station = station.GetUpperBound(0) + 1;
+            richTextBox1.Text += "total_station = " + total_station.ToString() + "\n";
+
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
+            latitude = double.Parse(station[0, 1]);
+            longitude = double.Parse(station[0, 2]);
+
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 10; //當前比例
+
+            gMapControl1.ShowCenter = true; //顯示地圖正中的紅十字
+
+            update_controls_info();
+
+
+            int i;
+            for (i = 0; i < total_station; i++)
+            {
+                latitude = double.Parse(station[i, 1]);
+                longitude = double.Parse(station[i, 2]);
+
+                AddMarker(latitude, longitude, GMarkerGoogleType.blue_dot, station[i, 0]);
+            }
+
+
+
+            richTextBox1.Text += "畫範圍 GMapPolygon 1\n";
+            List<PointLatLng> points = new List<PointLatLng>();
+
+            for (i = 0; i < total_station; i++)
+            {
+                latitude = double.Parse(station[i, 1]);
+                longitude = double.Parse(station[i, 2]);
+
+                points.Add(new PointLatLng(latitude, longitude));
+            }
+            GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
+            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
+            polygon.Stroke = new Pen(Color.Red, 1);
+
+            GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的图层
+            markers_polygon.Polygons.Add(polygon);
+            gMapControl1.Overlays.Add(markers_polygon);  //添加 圖標 Markers 的圖層
+
+            richTextBox1.Text += "畫範圍 GMapPolygon 2\n";
+            //List<PointLatLng> points = new List<PointLatLng>();
+            points.Clear();
+            for (i = 0; i < total_station; i++)
+            {
+                latitude = double.Parse(station[i, 1]);
+                longitude = double.Parse(station[i, 2]);
+
+                points.Add(new PointLatLng(latitude, longitude));
+            }
+
+            polygon = new GMapPolygon(points, "畫範圍");
+            polygon.Stroke = new Pen(Color.Red, 1);
+            polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));
+            markersOverlay.Polygons.Add(polygon);
+
+
+            //量測距離 直線
+            PointLatLng pt1;
+            PointLatLng pt2;
+            double distance;
+            string dist;
+
+            for (i = 0; i < (total_station - 1); i++)
+            {
+                latitude = double.Parse(station[i, 1]);
+                longitude = double.Parse(station[i, 2]);
+
+                pt1 = new PointLatLng(double.Parse(station[i, 1]), double.Parse(station[i, 2]));
+                pt2 = new PointLatLng(double.Parse(station[i + 1, 1]), double.Parse(station[i + 1, 2]));
+                distance = getDistance(pt1, pt2);
+                dist = ((float)distance * 1f).ToString("0.##");
+                richTextBox1.Text += station[i, 0] + " 到 " + station[i + 1, 0] + " 直線距離 : " + dist + " 公里\n";
+
+
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)

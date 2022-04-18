@@ -279,16 +279,16 @@ namespace vcs_PicPick
             this.MouseUp -= Form1_MouseUp;
 
             // Save the selected part of the image.
-            int wid = Math.Abs(X1 - X0);
-            int hgt = Math.Abs(Y1 - Y0);
-            Rectangle dest_rect = new Rectangle(0, 0, wid, hgt);
+            int W = Math.Abs(X1 - X0);
+            int H = Math.Abs(Y1 - Y0);
+            Rectangle dest_rect = new Rectangle(0, 0, W, H);
             Rectangle source_rect = new Rectangle(
                 Math.Min(X0, X1),
                 Math.Min(Y0, Y1),
                 Math.Abs(X1 - X0),
                 Math.Abs(Y1 - Y0));
 
-            using (Bitmap selection = new Bitmap(wid, hgt))
+            using (Bitmap selection = new Bitmap(W, H))
             {
                 // Copy the selected area.
                 using (Graphics gr = Graphics.FromImage(selection))
