@@ -8,13 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Drawing2D; //for DashStyle
+
 namespace vcs_DrawD_Map
 {
     public partial class Form1 : Form
     {
         Graphics g;
         Pen p;
-        SolidBrush sb;
         Bitmap bitmap1;
 
         private float MapScale = 1;
@@ -38,12 +38,7 @@ namespace vcs_DrawD_Map
             pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
             pictureBox1.ClientSize = new Size(pictureBox1.Image.Size.Width, pictureBox1.Image.Size.Height);
 
-            this.Size = new Size(pictureBox1.Image.Size.Width + 200, pictureBox1.Image.Size.Height + 50);
-            button1.Location = new Point(pictureBox1.Image.Width + 20, 10);
-            button2.Location = new Point(pictureBox1.Image.Width + 20+80, 10);
-
-            richTextBox1.Location = new Point(pictureBox1.Image.Width + 20, 60);
-            richTextBox1.Size = new Size(150, pictureBox1.Size.Height - 60);
+            show_item_location();
 
             // The hotspots.
             // Initialize the hotspots.
@@ -75,6 +70,16 @@ namespace vcs_DrawD_Map
             g = pictureBox1.CreateGraphics();
         }
 
+        void show_item_location()
+        {
+            this.Size = new Size(pictureBox1.Image.Size.Width + 200, pictureBox1.Image.Size.Height + 50);
+            button1.Location = new Point(pictureBox1.Image.Width + 20, 10);
+            button2.Location = new Point(pictureBox1.Image.Width + 20 + 80, 10);
+
+            richTextBox1.Location = new Point(pictureBox1.Image.Width + 20, 60);
+            richTextBox1.Size = new Size(150, pictureBox1.Size.Height - 60);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             int len = Hotspots.Count;
@@ -103,7 +108,9 @@ namespace vcs_DrawD_Map
         {
             int i = HotspotAtPoint(e.Location);
             if (i >= 0)
+            {
                 richTextBox1.Text += "你點中景點 " + i.ToString() + "\n";
+            }
         }
 
         // See if we're over a hotspot.
@@ -117,7 +124,9 @@ namespace vcs_DrawD_Map
                 pictureBox1.Cursor = Cursors.Hand;
             }
             else
+            {
                 pictureBox1.Cursor = Cursors.Default;
+            }
         }
 
         // Return the index of the hotspot at this point
@@ -130,7 +139,12 @@ namespace vcs_DrawD_Map
             //return Hotspots.FindIndex(hotspot => hotspot.Contains(mouse_point));
 
             for (int i = 0; i < Hotspots.Count; i++)
-                if (Hotspots[i].Contains(mouse_point)) return i;
+            {
+                if (Hotspots[i].Contains(mouse_point))
+                {
+                    return i;
+                }
+            }
 
             // We didn't find a hotspot that contains the point.
             return -1;
@@ -203,14 +217,10 @@ namespace vcs_DrawD_Map
             float y = Math.Min(HotspotStart.Y, HotspotEnd.Y) * MapScale;
             float wid = Math.Abs(HotspotStart.X - HotspotEnd.X) * MapScale;
             float hgt = Math.Abs(HotspotStart.Y - HotspotEnd.Y) * MapScale;
-            Console.WriteLine(
-                "            Hotspots.Add(new Rectangle({0}, {1}, {2}, {3}));",
-                (int)x, (int)y, (int)wid, (int)hgt);
-
-
             richTextBox1.Text += "Hotspots.Add(new Rectangle(" + ((int)x).ToString() + "," + ((int)y).ToString() + "," + ((int)wid).ToString() + "," + ((int)hgt).ToString() + "));\n";
 
             Hotspots_new.Add(new Rectangle((int)x, (int)y, (int)wid, (int)hgt));
         }
     }
 }
+

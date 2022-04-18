@@ -315,6 +315,33 @@ namespace vcs_Mix00
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //長方形的Contains功能
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawRectangle(Pens.Red, 100, 100, 150, 150);
+            Rectangle rec = new Rectangle(100, 100, 150, 150);
+            Point pt1 = new Point(180, 180);
+            Point pt2 = new Point(280, 280);
+            g.FillEllipse(Brushes.Green, pt1.X, pt1.Y, 20, 20);
+            g.FillEllipse(Brushes.Red, pt2.X, pt2.Y, 20, 20);
+
+            if (rec.Contains(pt1))
+            {
+                richTextBox1.Text += "pt1 在 rec 之內\n";
+            }
+            else
+            {
+                richTextBox1.Text += "pt1 在 rec 之外\n";
+            }
+
+            if (rec.Contains(pt2))
+            {
+                richTextBox1.Text += "pt2 在 rec 之內\n";
+            }
+            else
+            {
+                richTextBox1.Text += "pt2 在 rec 之外\n";
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
