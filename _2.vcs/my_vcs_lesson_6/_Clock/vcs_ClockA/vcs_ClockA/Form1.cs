@@ -16,6 +16,11 @@ namespace vcs_ClockA
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void colorOption1_Click(object sender, EventArgs e)
         {
             clockText.ForeColor = Color.Black;
@@ -37,11 +42,11 @@ namespace vcs_ClockA
                 clockText.Text = "180";
             else if (timeOption3.Checked)
                 clockText.Text = "60";
-            else{
+            else
+            {
                 MessageBox.Show("您尚未選定倒數的時間長短");
                 clockText.Text = "0";
             }
-
             timer1.Enabled = true;
         }
 
@@ -49,11 +54,13 @@ namespace vcs_ClockA
         {
             int oldTime = Int32.Parse(clockText.Text);
 
-            if (oldTime == 0){
+            if (oldTime == 0)
+            {
                 timer1.Enabled = false;
                 MessageBox.Show("倒數計時結束!!!");
             }
-            else{
+            else
+            {
                 int newTime = --oldTime;
                 clockText.Text = newTime.ToString();
 
@@ -65,7 +72,6 @@ namespace vcs_ClockA
                     progressBar1.Value = (60 - newTime) * 100 / 60;
             }
         }
-
-
     }
 }
+

@@ -24,7 +24,8 @@ namespace vcs_ClockD
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            timer1_Tick(sender, e);
+            Application.DoEvents();
         }
 
         private void timer1_Tick(object sender, EventArgs e)

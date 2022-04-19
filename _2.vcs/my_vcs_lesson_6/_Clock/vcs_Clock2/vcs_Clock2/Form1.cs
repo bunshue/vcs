@@ -47,6 +47,7 @@ namespace vcs_Clock2
             numericUpDown3.Value = Convert.ToInt32(strHour);
             numericUpDown2.Value = Convert.ToInt32(strMouit);
             numericUpDown1.Value = Convert.ToInt32(strSecon);
+            timer1_Tick(sender, e);
         }
 
         private void timer1_Tick(object sender, EventArgs e)

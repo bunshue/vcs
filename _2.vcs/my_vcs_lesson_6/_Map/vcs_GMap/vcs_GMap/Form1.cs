@@ -514,7 +514,7 @@ namespace vcs_GMap
             //playRoute.Stroke.Color = Color.Red;
             //playRoute.Stroke = new Pen(Color.FromArgb(144, Color.Red)); //半透明
 
-            playRoute.Stroke = new Pen(Color.FromArgb(127, Color.Blue), 10);    //連寬度一起寫
+            playRoute.Stroke = new Pen(Color.FromArgb(127, Color.Blue), 10);    //連線顏色與大小
 
             //playRoute.Stroke.Width = 5;
             playRoute.Stroke.DashStyle = DashStyle.Solid;
@@ -542,8 +542,8 @@ namespace vcs_GMap
 
             richTextBox1.Text += "畫範圍 GMapPolygon\n";
             GMapPolygon polygon = new GMapPolygon(points, "polygon");
-            polygon.Stroke.Color = Color.Purple;
-            polygon.Fill = new SolidBrush(Color.FromArgb(30, Color.Blue));
+            polygon.Stroke.Color = Color.Purple;    //邊框顏色
+            polygon.Fill = new SolidBrush(Color.FromArgb(30, Color.Blue));  //有填滿 半透明, 若不寫.Fill, 即無填滿
             markersOverlay.Polygons.Add(polygon);
         }
 
@@ -567,8 +567,8 @@ namespace vcs_GMap
             points.Add(new PointLatLng(24.8316103555869, 121.002731323242));
             points.Add(new PointLatLng(24.8438393123624, 120.994234085083));
             GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
-            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
-            polygon.Stroke = new Pen(Color.Red, 1);
+            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));   //有填滿 半透明, 若不寫.Fill, 即無填滿
+            polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
 
             GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的图层
             markers_polygon.Polygons.Add(polygon);
@@ -588,8 +588,8 @@ namespace vcs_GMap
             points.Add(new PointLatLng(24.8268586516249, 121.01019859314));
 
             polygon = new GMapPolygon(points, "畫範圍");
-            polygon.Stroke = new Pen(Color.Red, 1);
-            polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));
+            polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
+            polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));    //有填滿 半透明, 若不寫.Fill, 即無填滿
             markersOverlay.Polygons.Add(polygon);
         }
 
@@ -872,6 +872,8 @@ namespace vcs_GMap
 
             double dd = 0.008;
 
+            longitude -= dd * 2;
+
             AddMarker(latitude + dd * 1, longitude - dd, GMarkerGoogleType.red, "red");
             AddMarker(latitude + dd * 1, longitude + dd * 0, GMarkerGoogleType.green, "green");
             AddMarker(latitude + dd * 1, longitude + dd * 1, GMarkerGoogleType.blue, "blue");
@@ -902,6 +904,11 @@ namespace vcs_GMap
             setup_marker_tooltip(marker, "12345");  //設置marker訊息
 
             markersOverlay.Markers.Add(marker);
+
+
+
+
+
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -957,8 +964,8 @@ namespace vcs_GMap
                 points.Add(new PointLatLng(latitude, longitude));
             }
             GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
-            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
-            polygon.Stroke = new Pen(Color.Red, 1);
+            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));   //有填滿 半透明, 若不寫.Fill, 即無填滿
+            polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
 
             GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的图层
             markers_polygon.Polygons.Add(polygon);
@@ -976,8 +983,8 @@ namespace vcs_GMap
             }
 
             polygon = new GMapPolygon(points, "畫範圍");
-            polygon.Stroke = new Pen(Color.Red, 1);
-            polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));
+            polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
+            polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));    //有填滿 半透明, 若不寫.Fill, 即無填滿
             markersOverlay.Polygons.Add(polygon);
 
 
@@ -1137,8 +1144,8 @@ namespace vcs_GMap
             points.Add(new PointLatLng(39.91378, 116.4019));
             points.Add(new PointLatLng(39.91346, 116.3926));
             GMapPolygon polygon = new GMapPolygon(points, "故宮");
-            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
-            polygon.Stroke = new Pen(Color.Red, 1);
+            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));   //有填滿 半透明, 若不寫.Fill, 即無填滿
+            polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
             polygons.Polygons.Add(polygon);
             gMapControl1.Overlays.Add(polygons);
 
@@ -1155,19 +1162,31 @@ namespace vcs_GMap
 
         private void button16_Click(object sender, EventArgs e)
         {
+            /*
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
             //竹北座標
             latitude = 24.838;   //緯度
             longitude = 121.003; //經度
             gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
             gMapControl1.Zoom = 14; //當前比例
+            */
+
+            /*
+            */
+
+            //竹北座標
+            latitude = 48.866383;   //緯度
+            longitude = 2.323575; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 15; //當前比例
+
+
+            gMapControl1.MapProvider = BingHybridMapProvider.Instance;
+            gMapControl1.MapProvider = BingHybridMapProvider.Instance;
 
 
 
-
-
-
-
+        
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -1190,7 +1209,7 @@ namespace vcs_GMap
             //创建一条route
             GMapRoute route1 = new GMapRoute("route1");
             //设置route的颜色和粗细
-            route1.Stroke = new Pen(Color.Red, 2);
+            route1.Stroke = new Pen(Color.Red, 2);  //連線顏色與大小
             //向route中添加点
             route1.Points.Add(new PointLatLng(24.8443066370601, 121.002216339111));
             route1.Points.Add(new PointLatLng(24.8473066370601, 121.022216339111));
@@ -1211,9 +1230,9 @@ namespace vcs_GMap
             //创建一条route
             GMapPolygon polygon = new GMapPolygon(new List<PointLatLng>(), "polygon");
             //设置polygon的颜色和粗细
-            polygon.Stroke = new Pen(Color.Red, 2);
+            polygon.Stroke = new Pen(Color.Red, 2); //邊框顏色與大小
             //设置polygon的填充颜色
-            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Green));
+            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Green)); //有填滿 半透明, 若不寫.Fill, 即無填滿
             //向polygon中添加点
             polygon.Points.Add(new PointLatLng(24.8443066370601, 121.002216339111));
             polygon.Points.Add(new PointLatLng(24.8443066370601, 121.022216339111));
@@ -1273,8 +1292,8 @@ namespace vcs_GMap
             points2.Add(new PointLatLng(lat_north, lng_east));
             points2.Add(new PointLatLng(lat_south, lng_east));
             GMapPolygon polygon = new GMapPolygon(points2, "畫範圍");
-            polygon.Stroke = new Pen(Color.Red, 1);
-            polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));
+            polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
+            polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));    //有填滿 半透明, 若不寫.Fill, 即無填滿
             markersOverlay.Polygons.Add(polygon);
             //把最東最西最南最北框出來 SP
             */
@@ -1380,7 +1399,7 @@ namespace vcs_GMap
         void draw_line_point()
         {
             GMapRoute playRoute = new GMapRoute(line_point, "my route");
-            //playRoute.Stroke.Color = Color.Red;
+            //playRoute.Stroke.Color = Color.Red;   //連線顏色
             //playRoute.Stroke = new Pen(Color.FromArgb(144, Color.Red)); //半透明
 
             playRoute.Stroke = new Pen(Color.FromArgb(127, Color.Blue), 10);    //連寬度一起寫
@@ -1412,8 +1431,8 @@ namespace vcs_GMap
             //設置marker訊息
             marker.ToolTip = new GMapToolTip(marker);
             marker.ToolTipText = text;
-            //marker.ToolTip.Fill = Brushes.Blue;
-            marker.ToolTip.Fill = new SolidBrush(Color.FromArgb(100, Color.Black)); //半透明
+            //marker.ToolTip.Fill = Brushes.Blue;   //有填滿 全色, 若不寫.Fill, 即無填滿
+            marker.ToolTip.Fill = new SolidBrush(Color.FromArgb(100, Color.Black)); //有填滿 半透明, 若不寫.Fill, 即無填滿
             marker.ToolTip.Foreground = Brushes.White;
             marker.ToolTip.Stroke = Pens.Black;
             marker.ToolTip.TextPadding = new Size(20, 20);
@@ -1572,7 +1591,7 @@ gMapControl1.Refresh();
                 //添加routes圖層
                 GMapOverlay routes = new GMapOverlay("routes");
                 GMapRoute r = new GMapRoute(route.Points, route.Name);
-                r.Stroke = new Pen(Color.Red, 3);
+                r.Stroke = new Pen(Color.Red, 3);   //連線顏色與大小
                 routes.Routes.Add(r);
                 //添加到地圖
                 gMapControl1.Overlays.Add(routes);
@@ -1584,10 +1603,22 @@ gMapControl1.Refresh();
             }
         }
 
-gMapControl1.MapScaleInfoEnabled = true;    //比例尺
- * 
+  
+ gMapControl1.MapScaleInfoEnabled = true;    //比例尺
+  
              // this.gMapControl1.Dock = DockStyle.Fill;//将控件全屏显示
 
  * 
  */
+
+
+/*
+            gMapControl1.MapProvider = BingMapProvider.Instance;
+            gMapControl1.MapProvider = CloudMadeMapProvider.Instance;
+            gMapControl1.MapProvider = GoogleMapProvider.Instance;
+            gMapControl1.MapProvider = OpenCycleMapProvider.Instance;
+            gMapControl1.MapProvider = OpenStreetMapProvider.Instance;
+            gMapControl1.MapProvider = WikiMapiaMapProvider.Instance;
+            gMapControl1.MapProvider = YahooMapProvider.Instance;
+*/
 

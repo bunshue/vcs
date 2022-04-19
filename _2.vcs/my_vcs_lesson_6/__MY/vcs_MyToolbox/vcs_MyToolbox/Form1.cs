@@ -34,6 +34,10 @@ using AxWMPLib;
 拉一個Windows Media Player控件進表單, 參考裡面就會出現AxWMPLib和WMPLib
 */
 
+//為了數字時鐘
+//拷貝進來 A1XXX, DigitalXXXX Globals.cs共6個檔案 加入現有項目 *.cs 4個
+//編譯後 工具箱出現新控件
+
 namespace vcs_MyToolbox
 {
     public partial class Form1 : Form

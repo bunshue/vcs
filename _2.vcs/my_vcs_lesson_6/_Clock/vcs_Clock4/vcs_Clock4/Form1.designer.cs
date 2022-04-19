@@ -64,7 +64,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(196, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "2020年東京奧運會";
+            this.label1.Text = "2024年巴黎奧運會";
             // 
             // groupBox1
             // 
@@ -131,7 +131,7 @@
             this.groupBox2.Size = new System.Drawing.Size(398, 115);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "距離東京2020年奧運會開幕還有";
+            this.groupBox2.Text = "距離2024年巴黎奧運會開幕還有";
             // 
             // textday
             // 

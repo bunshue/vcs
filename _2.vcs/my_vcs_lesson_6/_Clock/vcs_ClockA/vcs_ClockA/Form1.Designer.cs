@@ -116,7 +116,6 @@
             this.timeOption1.Name = "timeOption1";
             this.timeOption1.Size = new System.Drawing.Size(59, 16);
             this.timeOption1.TabIndex = 10;
-            this.timeOption1.TabStop = true;
             this.timeOption1.Text = "五分鐘";
             this.timeOption1.UseVisualStyleBackColor = true;
             // 
@@ -127,13 +126,13 @@
             this.timeOption2.Name = "timeOption2";
             this.timeOption2.Size = new System.Drawing.Size(59, 16);
             this.timeOption2.TabIndex = 8;
-            this.timeOption2.TabStop = true;
             this.timeOption2.Text = "三分鐘";
             this.timeOption2.UseVisualStyleBackColor = true;
             // 
             // timeOption3
             // 
             this.timeOption3.AutoSize = true;
+            this.timeOption3.Checked = true;
             this.timeOption3.Location = new System.Drawing.Point(6, 65);
             this.timeOption3.Name = "timeOption3";
             this.timeOption3.Size = new System.Drawing.Size(59, 16);
@@ -178,6 +177,7 @@
             this.Controls.Add(this.colorGroup);
             this.Name = "Form1";
             this.Text = "倒數計時器";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.colorGroup.ResumeLayout(false);
             this.colorGroup.PerformLayout();
             this.timeGroup.ResumeLayout(false);
