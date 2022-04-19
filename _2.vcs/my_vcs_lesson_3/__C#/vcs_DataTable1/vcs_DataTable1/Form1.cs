@@ -52,7 +52,16 @@ namespace vcs_DataTable1
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 50);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 50);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -376,6 +385,19 @@ namespace vcs_DataTable1
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //DataTable用法
+            DataTable table = new DataTable();
+            //初始化datatale 
+            table.Columns.Add("id", typeof(string));
+            table.Columns.Add("value", typeof(int));
+            for (int i = 1; i <= 10; i++)
+            {
+                DataRow dRow = table.NewRow();
+                dRow["id"] = "id" + i.ToString();
+                dRow["value"] = i;
+                table.Rows.Add(dRow);
+            }
+
 
         }
 
@@ -692,7 +714,7 @@ namespace vcs_DataTable1
 
         private void button14_Click(object sender, EventArgs e)
         {
-
+            //DataTable用法
 
             DataTable dt = new DataTable();
             dt.Columns.Add("A", typeof(bool));
