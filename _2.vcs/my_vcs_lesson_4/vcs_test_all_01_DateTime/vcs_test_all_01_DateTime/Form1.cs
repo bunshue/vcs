@@ -136,6 +136,7 @@ namespace vcs_test_all_01_DateTime
             button59.Location = new Point(x_st + dx * 3, y_st + dy * 14);
 
             groupBox6.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            groupBox7.Location = new Point(x_st + dx * 5, y_st + dy * 0);
 
             //button
             x_st = 10;
@@ -479,9 +480,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
-            richTextBox1.Text += week + "\n";
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -779,26 +777,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button30_Click(object sender, EventArgs e)
         {
-            //尋找13號星期五
-            int year_st = 2020;
-            int year_sp = 2030;
-
-            // Loop over the selected years.
-            for (int year = year_st; year <= year_sp; year++)
-            {
-                // Loop over the months in the year.
-                for (int month = 1; month <= 12; month++)
-                {
-                    // See if this month's 13th is a Friday.
-                    DateTime dt = new DateTime(year, month, 13);
-
-                    // See if this is a Friday.
-                    if (dt.DayOfWeek == DayOfWeek.Friday)
-                    {
-                        richTextBox1.Text += dt.ToShortDateString() + "\n";
-                    }
-                }
-            }
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -1416,23 +1394,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button48_Click(object sender, EventArgs e)
         {
-            //幾年幾月幾日星期幾
-            int year;
-            int month;
-            int day;
-            string result;
-
-            year = 2006;
-            month = 3;
-            day = 11;
-            result = CaculateWeekDay(year, month, day);
-            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\n";
-
-            year = 1941;
-            month = 12;
-            day = 7;
-            result = CaculateWeekDay(year, month, day);
-            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\t珍珠港事變\n";
         }
 
         private void button39_Click(object sender, EventArgs e)
@@ -1841,19 +1802,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button54_Click(object sender, EventArgs e)
         {
-            //取得時辰
-            DateTime dt = DateTime.Now;
-            string ctime = getChineseTime(dt.Hour);
-
-            richTextBox1.Text += "目前時辰 : " + ctime + "\n";
-        }
-
-        string getChineseTime(int hour)
-        {
-            //地支時間做成數組
-            string[] CTime = "子|丑|寅|卯|辰|巳|午|未|申|酉|戌|亥".Split('|');
-
-            return "【" + CTime[hour / 2] + "時】";
         }
 
         private void bt_special_00_Click(object sender, EventArgs e)
@@ -1962,6 +1910,83 @@ namespace vcs_test_all_01_DateTime
         }
 
         private void bt_special_04_Click(object sender, EventArgs e)
+        {
+            //取得時辰
+            DateTime dt = DateTime.Now;
+            string ctime = getChineseTime(dt.Hour);
+
+            richTextBox1.Text += "目前時辰 : " + ctime + "\n";
+        }
+
+        string getChineseTime(int hour)
+        {
+            //地支時間做成數組
+            string[] CTime = "子|丑|寅|卯|辰|巳|午|未|申|酉|戌|亥".Split('|');
+
+            return "【" + CTime[hour / 2] + "時】";
+        }
+
+        private void bt_weekday_00_Click(object sender, EventArgs e)
+        {
+            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+            richTextBox1.Text += week + "\n";
+
+        }
+
+        private void bt_weekday_01_Click(object sender, EventArgs e)
+        {
+            //幾年幾月幾日星期幾
+            int year;
+            int month;
+            int day;
+            string result;
+
+            year = 2006;
+            month = 3;
+            day = 11;
+            result = CaculateWeekDay(year, month, day);
+            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\n";
+
+            year = 1941;
+            month = 12;
+            day = 7;
+            result = CaculateWeekDay(year, month, day);
+            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\t珍珠港事變\n";
+
+        }
+
+        private void bt_weekday_02_Click(object sender, EventArgs e)
+        {
+            //尋找13號星期五
+            int year_st = 2020;
+            int year_sp = 2030;
+
+            // Loop over the selected years.
+            for (int year = year_st; year <= year_sp; year++)
+            {
+                // Loop over the months in the year.
+                for (int month = 1; month <= 12; month++)
+                {
+                    // See if this month's 13th is a Friday.
+                    DateTime dt = new DateTime(year, month, 13);
+
+                    // See if this is a Friday.
+                    if (dt.DayOfWeek == DayOfWeek.Friday)
+                    {
+                        richTextBox1.Text += dt.ToShortDateString() + "\n";
+                    }
+                }
+            }
+
+        }
+
+        private void bt_weekday_03_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_weekday_04_Click(object sender, EventArgs e)
         {
 
         }
