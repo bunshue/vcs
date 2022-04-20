@@ -1,5 +1,97 @@
 
 
+
+https://www.cnblogs.com/wpwen/archive/2009/01/01/1366719.html
+
+ 自绘进度条的其余代码…
+
+				
+
+圖片與二進制互轉
+
+       /// <summary>
+        /// Image轉二進制
+        /// </summary>
+        /// <param name="img">圖片</param>
+        /// <returns>轉換得到的二進制</returns>
+        public byte[] GetByteByImage(System.Drawing.Image img)
+        {
+            try
+            {
+                byte[] bt = null;
+                if (!img.Equals(null))
+                {
+                    using (MemoryStream mostream = new MemoryStream())
+                    {
+                        Bitmap bmp = new Bitmap(img);
+                        bmp.Save(mostream, System.Drawing.Imaging.ImageFormat.Bmp);//將圖像以指定的格式存入緩存內存流
+                        bt = new byte[mostream.Length];
+                        mostream.Position = 0;//設置留的初始位置
+                        mostream.Read(bt, 0, Convert.ToInt32(bt.Length));
+                    }
+                }
+                return bt;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 字節流轉換成圖片
+        /// </summary>
+        /// <param name="byt">要轉換的字節流</param>
+        /// <returns>轉換得到的Image對象</returns>
+        public static Image BytToImg(byte[] byt)
+        {
+            MemoryStream ms = new MemoryStream(byt);
+            Image img = Image.FromStream(ms);
+            return img;
+        }
+
+
+C# 以MP3的格式將錄製的音頻數據寫入文件流
+https://www.twblogs.net/a/5f02b56e9644181341a1b6e0
+
+
+
+    class UtilityFunctions
+    {
+        /// <summary>
+        /// Removes a directory, including all the files in it.
+        /// </summary>
+        /// <param name="pPath">The directory to remove</param>
+        /// <returns>A blank string upon success, or a warning upon error.  If the directory does not exist, that is not an error.</returns>
+        public static String DeleteDir(String pPath)
+        {
+            String retval = "";
+
+            if (Directory.Exists(pPath))
+            {
+                try
+                {
+                    // Delete all the files
+                    String[] filenames = Directory.GetFiles(pPath);
+                    foreach (String filename in filenames)
+                        File.Delete(filename);
+                    // Delete the directory
+                    Directory.Delete(pPath, true);
+                }
+                catch (System.Exception exc)
+                {
+                    retval = exc.Message;
+                }
+            }
+
+            return retval;
+        }
+    }
+
+
+
+
+
 //C# 圖片裁剪代碼，
 
         /// <summary>
@@ -4869,6 +4961,21 @@ if (Thd.IsAlive)
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
+
+寫日誌範例 : 
+2022-04-14 10:03:13 INFO  :VirtualHere Client 5.2.9 starting (Compiled: Feb 14 2022 07:50:45)
+2022-04-14 10:03:13 INFO  :Client OS is Windows 10 (build 19044), 64-bit edition
+2022-04-14 10:03:13 INFO  :Using config at C:\Users\070601\AppData\Roaming\vhui.ini
+2022-04-14 10:03:13 INFO  :IPC available at \\.\pipe\vhclient
+2022-04-14 10:03:13 INFO  :Auto-find (Bonjour) on
+2022-04-14 10:03:13 INFO  :Auto-find (Bonjour SSL) on
+2022-04-14 10:03:15 INFO  :Drivers are up-to-date
+2022-04-14 10:03:15 INFO  :Connected to the VirtualHere Client Driver (Version 2)
+2022-04-14 10:26:13 ERROR :Data stream corruption, compressedSize=2810554238, uncompressedSize=2827462782
+2022-04-14 10:26:25 INFO  :Server ping timeout, shutting down connection 1...
+
+
+
 
 
 //C# 寫日志文件
