@@ -54,10 +54,21 @@ namespace vcs_Draw_Captcha
             dx = 160;
             dy = 50;
 
-            pictureBox_captcha1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox_captcha2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 120);
-            pictureBox_captcha3.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 120 * 2);
-            pictureBox_captcha4.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 120 * 3);
+            lb_captcha1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            lb_captcha2.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            lb_captcha3.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            lb_captcha4.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            lb_captcha5.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            lb_captcha1.Text = "";
+            lb_captcha2.Text = "";
+            lb_captcha3.Text = "";
+            lb_captcha4.Text = "";
+            lb_captcha5.Text = "";
+
+            pictureBox_captcha1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox_captcha2.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 120);
+            pictureBox_captcha3.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 120 * 2);
+            pictureBox_captcha4.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 120 * 3);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -102,7 +113,7 @@ namespace vcs_Draw_Captcha
                 return;
             }
 
-            richTextBox1.Text += txt + "\n";
+            lb_captcha1.Text = txt;
 
             Bitmap image = new Bitmap((int)Math.Ceiling((txt.Length * 20.5)) * 3, 22 * 3);
             Graphics g = Graphics.FromImage(image);
@@ -511,7 +522,7 @@ namespace vcs_Draw_Captcha
             Bitmap bitmap1 = VerifyCodeHelper.CreateVerifyCodeBmp(out code);
             Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
 
-            richTextBox1.Text += code + "\n";
+            lb_captcha4.Text = code;
             pictureBox4.Image = bitmap1;
             //pictureBox4.Image = bitmap2;  //改變大小
 
@@ -1158,4 +1169,3 @@ namespace vcs_Draw_Captcha
         }
     }
 }
-

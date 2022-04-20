@@ -72,5 +72,16 @@ namespace vcs_Wallpaper1
             string filename = @"C:\______test_files\_material\ims1.bmp";
             SetDesktopPicture(filename);
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //下次開機後才套用
+            string filename = @"C:\______test_files\picture1.bmp";
+
+            RegistryKey myRegKey = Registry.CurrentUser.OpenSubKey("Control Panel\\Desktop", true);
+            myRegKey.SetValue("TileWallpaper", "0");
+            myRegKey.SetValue("WallpagerStyle", "2");
+            myRegKey.SetValue("WallPaper", filename);
+        }
     }
 }

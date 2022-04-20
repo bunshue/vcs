@@ -1,5 +1,19 @@
 
 
+            //任選一張圖
+            DirectoryInfo DInfo = new DirectoryInfo(foldername);
+            FileInfo[] FInfo = DInfo.GetFiles();
+            Random rand = new Random();
+            sel_picture = rand.Next(FInfo.Length);
+
+            filename = foldername + FInfo[sel_picture].Name;
+            richTextBox1.Text += "sel_picture = " + sel_picture.ToString() + "filename : " + filename + "\n";
+
+            //讀取圖檔
+            pictureBox1.Image = Image.FromFile(filename);
+
+
+
 
 https://www.cnblogs.com/wpwen/archive/2009/01/01/1366719.html
 

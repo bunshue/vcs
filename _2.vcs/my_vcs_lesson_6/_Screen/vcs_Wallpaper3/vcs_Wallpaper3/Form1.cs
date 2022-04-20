@@ -38,10 +38,10 @@ namespace vcs_Wallpaper3
             //新增圖檔
             //字串陣列的寫法(一維)：
             string[] files = { 
-            @"C:\______test_files\_pic\poster_01.jpg",
-            @"C:\______test_files\_pic\poster_02.jpg",
-            @"C:\______test_files\_pic\poster_03.jpg",
-            @"C:\______test_files\_pic\poster_04.jpg"
+            @"C:\______test_files\__pic\_MU\poster_01.jpg",
+            @"C:\______test_files\__pic\_MU\poster_02.jpg",
+            @"C:\______test_files\__pic\_MU\poster_03.jpg",
+            @"C:\______test_files\__pic\_MU\poster_04.jpg"
             };
 
             //listView1.Items.Clear();
@@ -57,8 +57,6 @@ namespace vcs_Wallpaper3
                 ListViewItem lvi = new ListViewItem(fileinfo);
                 listView1.Items.Add(lvi);
             }
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -109,7 +107,6 @@ namespace vcs_Wallpaper3
             {
                 listView1.Items.RemoveAt(listView1.SelectedItems[0].Index);
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -119,3 +116,4 @@ namespace vcs_Wallpaper3
         }
     }
 }
+
