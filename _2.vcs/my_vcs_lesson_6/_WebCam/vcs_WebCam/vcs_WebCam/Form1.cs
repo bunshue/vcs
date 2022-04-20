@@ -66,6 +66,8 @@ namespace vcs_WebCam
         int webcam_h = 0;
         int webcam_fps = 0;
 
+        bool debug_mode = false;
+
         public struct RGB
         {
             private byte _r;
@@ -205,10 +207,31 @@ namespace vcs_WebCam
             dx = w + BORDER;
             dy = 42;
             y_st = BORDER * 2;
-            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox5.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
+
+            if (debug_mode == true)
+            {
+                groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+                groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+                groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+                groupBox5.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
+            }
+            else
+            {
+                groupBox2.Visible = false;
+                groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+                groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+                groupBox5.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 0);
+                groupBox5.Size = new Size(w+250, h);
+                richTextBox1.Visible = false;
+                bt_record.Visible = false;
+                bt_clear.Visible = false;
+                cb_image_processing.Visible = false;
+                cb_auto_save.Visible = false;
+                cb_show_grid.Visible = false;
+                rb1.Visible = false;
+                rb2.Visible = false;
+                rb3.Visible = false;
+            }
 
             //groupBox2
             x_st = BORDER;
@@ -1022,8 +1045,11 @@ namespace vcs_WebCam
                 flag_fullscreen = false;
                 show_main_message("復原", S_OK, 20);
                 groupBox1.Visible = true;
-                richTextBox1.Visible = true;
-                bt_clear.Visible = true;
+                if (debug_mode == true)
+                {
+                    richTextBox1.Visible = true;
+                    bt_clear.Visible = true;
+                }
 
                 this.BackColor = System.Drawing.SystemColors.ControlLight;
                 //最大化螢幕
@@ -1228,8 +1254,11 @@ namespace vcs_WebCam
                 flag_fullscreen = false;
                 show_main_message("復原", S_OK, 20);
                 groupBox1.Visible = true;
-                richTextBox1.Visible = true;
-                bt_clear.Visible = true;
+                if (debug_mode == true)
+                {
+                    richTextBox1.Visible = true;
+                    bt_clear.Visible = true;
+                }
 
                 this.BackColor = System.Drawing.SystemColors.ControlLight;
                 //最大化螢幕
@@ -1238,7 +1267,7 @@ namespace vcs_WebCam
                 //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
                 pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
-                pictureBox1.Location = new Point(BORDER, 270);
+                pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox1 + BORDER);
                 pictureBox1.Focus();
             }
         }

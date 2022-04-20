@@ -68,7 +68,16 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btn_draw_profile = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rb_location6 = new System.Windows.Forms.RadioButton();
+            this.rb_location5 = new System.Windows.Forms.RadioButton();
+            this.rb_location4 = new System.Windows.Forms.RadioButton();
+            this.rb_location3 = new System.Windows.Forms.RadioButton();
+            this.rb_location2 = new System.Windows.Forms.RadioButton();
+            this.rb_location1 = new System.Windows.Forms.RadioButton();
+            this.rb_location0 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // gMapControl1
@@ -219,7 +228,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox1.Location = new System.Drawing.Point(1112, 9);
+            this.checkBox1.Location = new System.Drawing.Point(1251, 10);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(142, 23);
             this.checkBox1.TabIndex = 13;
@@ -231,7 +240,7 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox2.Location = new System.Drawing.Point(1112, 29);
+            this.checkBox2.Location = new System.Drawing.Point(1251, 30);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(161, 23);
             this.checkBox2.TabIndex = 14;
@@ -310,7 +319,7 @@
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Location = new System.Drawing.Point(970, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(125, 134);
+            this.groupBox1.Size = new System.Drawing.Size(99, 134);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "MapProvider";
@@ -420,7 +429,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(90, 40);
             this.button12.TabIndex = 31;
-            this.button12.Text = "台灣火車站";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -450,7 +458,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(90, 40);
             this.button15.TabIndex = 33;
-            this.button15.Text = "標示北京故宮";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -475,14 +482,14 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(1107, 82);
+            this.comboBox1.Location = new System.Drawing.Point(1246, 83);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(166, 20);
             this.comboBox1.TabIndex = 36;
             // 
             // btn_draw_profile
             // 
-            this.btn_draw_profile.Location = new System.Drawing.Point(1144, 104);
+            this.btn_draw_profile.Location = new System.Drawing.Point(1283, 105);
             this.btn_draw_profile.Name = "btn_draw_profile";
             this.btn_draw_profile.Size = new System.Drawing.Size(100, 34);
             this.btn_draw_profile.TabIndex = 37;
@@ -494,7 +501,7 @@
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox3.Location = new System.Drawing.Point(1112, 53);
+            this.checkBox3.Location = new System.Drawing.Point(1251, 54);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(142, 23);
             this.checkBox3.TabIndex = 38;
@@ -502,11 +509,105 @@
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rb_location6);
+            this.groupBox2.Controls.Add(this.rb_location5);
+            this.groupBox2.Controls.Add(this.rb_location4);
+            this.groupBox2.Controls.Add(this.rb_location3);
+            this.groupBox2.Controls.Add(this.rb_location2);
+            this.groupBox2.Controls.Add(this.rb_location1);
+            this.groupBox2.Controls.Add(this.rb_location0);
+            this.groupBox2.Location = new System.Drawing.Point(1073, 13);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(107, 134);
+            this.groupBox2.TabIndex = 29;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Location";
+            // 
+            // rb_location6
+            // 
+            this.rb_location6.AutoSize = true;
+            this.rb_location6.Location = new System.Drawing.Point(20, 112);
+            this.rb_location6.Name = "rb_location6";
+            this.rb_location6.Size = new System.Drawing.Size(14, 13);
+            this.rb_location6.TabIndex = 5;
+            this.rb_location6.UseVisualStyleBackColor = true;
+            this.rb_location6.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
+            // 
+            // rb_location5
+            // 
+            this.rb_location5.AutoSize = true;
+            this.rb_location5.Location = new System.Drawing.Point(20, 98);
+            this.rb_location5.Name = "rb_location5";
+            this.rb_location5.Size = new System.Drawing.Size(14, 13);
+            this.rb_location5.TabIndex = 4;
+            this.rb_location5.UseVisualStyleBackColor = true;
+            this.rb_location5.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
+            // 
+            // rb_location4
+            // 
+            this.rb_location4.AutoSize = true;
+            this.rb_location4.Location = new System.Drawing.Point(20, 85);
+            this.rb_location4.Name = "rb_location4";
+            this.rb_location4.Size = new System.Drawing.Size(59, 16);
+            this.rb_location4.TabIndex = 3;
+            this.rb_location4.Text = "馬立波";
+            this.rb_location4.UseVisualStyleBackColor = true;
+            this.rb_location4.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
+            // 
+            // rb_location3
+            // 
+            this.rb_location3.AutoSize = true;
+            this.rb_location3.Location = new System.Drawing.Point(20, 68);
+            this.rb_location3.Name = "rb_location3";
+            this.rb_location3.Size = new System.Drawing.Size(59, 16);
+            this.rb_location3.TabIndex = 2;
+            this.rb_location3.Text = "羅浮宮";
+            this.rb_location3.UseVisualStyleBackColor = true;
+            this.rb_location3.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
+            // 
+            // rb_location2
+            // 
+            this.rb_location2.AutoSize = true;
+            this.rb_location2.Location = new System.Drawing.Point(20, 51);
+            this.rb_location2.Name = "rb_location2";
+            this.rb_location2.Size = new System.Drawing.Size(71, 16);
+            this.rb_location2.TabIndex = 2;
+            this.rb_location2.Text = "北京故宮";
+            this.rb_location2.UseVisualStyleBackColor = true;
+            this.rb_location2.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
+            // 
+            // rb_location1
+            // 
+            this.rb_location1.AutoSize = true;
+            this.rb_location1.Location = new System.Drawing.Point(20, 34);
+            this.rb_location1.Name = "rb_location1";
+            this.rb_location1.Size = new System.Drawing.Size(83, 16);
+            this.rb_location1.TabIndex = 1;
+            this.rb_location1.Text = "台灣火車站";
+            this.rb_location1.UseVisualStyleBackColor = true;
+            this.rb_location1.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
+            // 
+            // rb_location0
+            // 
+            this.rb_location0.AutoSize = true;
+            this.rb_location0.Checked = true;
+            this.rb_location0.Location = new System.Drawing.Point(20, 17);
+            this.rb_location0.Name = "rb_location0";
+            this.rb_location0.Size = new System.Drawing.Size(47, 16);
+            this.rb_location0.TabIndex = 0;
+            this.rb_location0.TabStop = true;
+            this.rb_location0.Text = "竹北";
+            this.rb_location0.UseVisualStyleBackColor = true;
+            this.rb_location0.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1341, 712);
+            this.ClientSize = new System.Drawing.Size(1427, 712);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.btn_draw_profile);
             this.Controls.Add(this.comboBox1);
@@ -546,6 +647,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -593,6 +696,14 @@
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rb_location6;
+        private System.Windows.Forms.RadioButton rb_location5;
+        private System.Windows.Forms.RadioButton rb_location4;
+        private System.Windows.Forms.RadioButton rb_location3;
+        private System.Windows.Forms.RadioButton rb_location2;
+        private System.Windows.Forms.RadioButton rb_location1;
+        private System.Windows.Forms.RadioButton rb_location0;
     }
 }
 

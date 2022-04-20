@@ -123,8 +123,9 @@ namespace vcs_GMap
             x_st = 1010;
             y_st = 10;
             groupBox1.Location = new Point(x_st, y_st);
+            groupBox2.Location = new Point(x_st+120, y_st);
 
-            x_st = 1150;
+            x_st = 1250;
             y_st = 12;
             dy = 25;
             checkBox1.Location = new Point(x_st, y_st + dy * 0);
@@ -913,100 +914,6 @@ namespace vcs_GMap
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string[,] station = null;
-
-            station = new string[,] { 
-            { "台北", "25.047778", "121.517222"},
-            { "新竹", "24.80205", "120.971817"},
-            { "台中", "24.136944", "120.684722"},
-            { "台南", "23.001389", "120.2175"},
-            { "高雄", "22.64", "120.302778"},
-            { "台東", "22.791389", "121.118889"},
-            { "花蓮", "23.992694", "121.600861"},
-            { "宜蘭", "24.750278", "121.7625"},
-            };
-
-            int total_station = station.GetUpperBound(0) + 1;
-            richTextBox1.Text += "total_station = " + total_station.ToString() + "\n";
-
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-
-            latitude = double.Parse(station[0, 1]);
-            longitude = double.Parse(station[0, 2]);
-
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-            gMapControl1.Zoom = 10; //當前比例
-
-            gMapControl1.ShowCenter = true; //顯示地圖正中的紅十字
-
-            update_controls_info();
-
-
-            int i;
-            for (i = 0; i < total_station; i++)
-            {
-                latitude = double.Parse(station[i, 1]);
-                longitude = double.Parse(station[i, 2]);
-
-                AddMarker(latitude, longitude, GMarkerGoogleType.blue_dot, station[i, 0]);
-            }
-
-
-
-            richTextBox1.Text += "畫範圍 GMapPolygon 1\n";
-            List<PointLatLng> points = new List<PointLatLng>();
-
-            for (i = 0; i < total_station; i++)
-            {
-                latitude = double.Parse(station[i, 1]);
-                longitude = double.Parse(station[i, 2]);
-
-                points.Add(new PointLatLng(latitude, longitude));
-            }
-            GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
-            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));   //有填滿 半透明, 若不寫.Fill, 即無填滿
-            polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
-
-            GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的图层
-            markers_polygon.Polygons.Add(polygon);
-            gMapControl1.Overlays.Add(markers_polygon);  //添加 圖標 Markers 的圖層
-
-            richTextBox1.Text += "畫範圍 GMapPolygon 2\n";
-            //List<PointLatLng> points = new List<PointLatLng>();
-            points.Clear();
-            for (i = 0; i < total_station; i++)
-            {
-                latitude = double.Parse(station[i, 1]);
-                longitude = double.Parse(station[i, 2]);
-
-                points.Add(new PointLatLng(latitude, longitude));
-            }
-
-            polygon = new GMapPolygon(points, "畫範圍");
-            polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
-            polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));    //有填滿 半透明, 若不寫.Fill, 即無填滿
-            markersOverlay.Polygons.Add(polygon);
-
-
-            //量測距離 直線
-            PointLatLng pt1;
-            PointLatLng pt2;
-            double distance;
-            string dist;
-
-            for (i = 0; i < (total_station - 1); i++)
-            {
-                latitude = double.Parse(station[i, 1]);
-                longitude = double.Parse(station[i, 2]);
-
-                pt1 = new PointLatLng(double.Parse(station[i, 1]), double.Parse(station[i, 2]));
-                pt2 = new PointLatLng(double.Parse(station[i + 1, 1]), double.Parse(station[i + 1, 2]));
-                distance = getDistance(pt1, pt2);
-                dist = ((float)distance * 1f).ToString("0.##");
-                richTextBox1.Text += station[i, 0] + " 到 " + station[i + 1, 0] + " 直線距離 : " + dist + " 公里\n";
-
-
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1126,38 +1033,6 @@ namespace vcs_GMap
 
         private void button15_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "畫範圍 GMapPolygon 北京故宮\n";
-
-            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
-            gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
-            //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
-            //gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
-            //gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
-            //gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
-
-            GMapOverlay polygons = new GMapOverlay("polygons");
-            List<PointLatLng> points = new List<PointLatLng>();
-            points.Add(new PointLatLng(39.92244, 116.3922));
-            points.Add(new PointLatLng(39.92280, 116.4015));
-            points.Add(new PointLatLng(39.91378, 116.4019));
-            points.Add(new PointLatLng(39.91346, 116.3926));
-            GMapPolygon polygon = new GMapPolygon(points, "故宮");
-            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));   //有填滿 半透明, 若不寫.Fill, 即無填滿
-            polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
-            polygons.Polygons.Add(polygon);
-            gMapControl1.Overlays.Add(polygons);
-
-            //故宮中心座標
-            latitude = (39.92244 + 39.92280 + 39.91378 + 39.91346) / 4;     //緯度
-            longitude = (116.3922 + 116.4015 + 116.4019 + 116.3926) / 4;    //經度
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-            gMapControl1.Zoom = 15; //當前比例
-
-            gMapControl1.ShowCenter = false; //顯示地圖正中的紅十字
-
-            update_controls_info();
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1439,6 +1314,187 @@ namespace vcs_GMap
             marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;   //滑鼠靠近才顯示
             //marker.ToolTipMode = MarkerTooltipMode.Always;  //總是顯示
             marker.ToolTip.Format.Alignment = StringAlignment.Near;
+        }
+
+        private void radioButton_location_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_location0.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
+                //竹北座標
+                latitude = 24.838;   //緯度
+                longitude = 121.003; //經度
+                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+                gMapControl1.Zoom = 14; //當前比例
+
+                gMapControl1.ShowCenter = true; //顯示地圖正中的紅十字
+
+                update_controls_info();
+            }
+            else if (rb_location1.Checked == true)
+            {
+                string[,] station = null;
+
+                station = new string[,] { 
+            { "台北", "25.047778", "121.517222"},
+            { "新竹", "24.80205", "120.971817"},
+            { "台中", "24.136944", "120.684722"},
+            { "台南", "23.001389", "120.2175"},
+            { "高雄", "22.64", "120.302778"},
+            { "台東", "22.791389", "121.118889"},
+            { "花蓮", "23.992694", "121.600861"},
+            { "宜蘭", "24.750278", "121.7625"},
+            };
+
+                int total_station = station.GetUpperBound(0) + 1;
+                richTextBox1.Text += "total_station = " + total_station.ToString() + "\n";
+
+                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
+                latitude = double.Parse(station[0, 1]);
+                longitude = double.Parse(station[0, 2]);
+
+                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+                gMapControl1.Zoom = 10; //當前比例
+
+                gMapControl1.ShowCenter = true; //顯示地圖正中的紅十字
+
+                update_controls_info();
+
+
+                int i;
+                for (i = 0; i < total_station; i++)
+                {
+                    latitude = double.Parse(station[i, 1]);
+                    longitude = double.Parse(station[i, 2]);
+
+                    AddMarker(latitude, longitude, GMarkerGoogleType.blue_dot, station[i, 0]);
+                }
+
+
+
+                richTextBox1.Text += "畫範圍 GMapPolygon 1\n";
+                List<PointLatLng> points = new List<PointLatLng>();
+
+                for (i = 0; i < total_station; i++)
+                {
+                    latitude = double.Parse(station[i, 1]);
+                    longitude = double.Parse(station[i, 2]);
+
+                    points.Add(new PointLatLng(latitude, longitude));
+                }
+                GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
+                polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));   //有填滿 半透明, 若不寫.Fill, 即無填滿
+                polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
+
+                GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的图层
+                markers_polygon.Polygons.Add(polygon);
+                gMapControl1.Overlays.Add(markers_polygon);  //添加 圖標 Markers 的圖層
+
+                richTextBox1.Text += "畫範圍 GMapPolygon 2\n";
+                //List<PointLatLng> points = new List<PointLatLng>();
+                points.Clear();
+                for (i = 0; i < total_station; i++)
+                {
+                    latitude = double.Parse(station[i, 1]);
+                    longitude = double.Parse(station[i, 2]);
+
+                    points.Add(new PointLatLng(latitude, longitude));
+                }
+
+                polygon = new GMapPolygon(points, "畫範圍");
+                polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
+                polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));    //有填滿 半透明, 若不寫.Fill, 即無填滿
+                markersOverlay.Polygons.Add(polygon);
+
+
+                //量測距離 直線
+                PointLatLng pt1;
+                PointLatLng pt2;
+                double distance;
+                string dist;
+
+                for (i = 0; i < (total_station - 1); i++)
+                {
+                    latitude = double.Parse(station[i, 1]);
+                    longitude = double.Parse(station[i, 2]);
+
+                    pt1 = new PointLatLng(double.Parse(station[i, 1]), double.Parse(station[i, 2]));
+                    pt2 = new PointLatLng(double.Parse(station[i + 1, 1]), double.Parse(station[i + 1, 2]));
+                    distance = getDistance(pt1, pt2);
+                    dist = ((float)distance * 1f).ToString("0.##");
+                    richTextBox1.Text += station[i, 0] + " 到 " + station[i + 1, 0] + " 直線距離 : " + dist + " 公里\n";
+
+
+                }
+            }
+            else if (rb_location2.Checked == true)
+            {
+                richTextBox1.Text += "畫範圍 GMapPolygon 北京故宮\n";
+
+                //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+                //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
+                //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+                //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
+                //gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
+                //gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
+                //gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
+
+                GMapOverlay polygons = new GMapOverlay("polygons");
+                List<PointLatLng> points = new List<PointLatLng>();
+                points.Add(new PointLatLng(39.92244, 116.3922));
+                points.Add(new PointLatLng(39.92280, 116.4015));
+                points.Add(new PointLatLng(39.91378, 116.4019));
+                points.Add(new PointLatLng(39.91346, 116.3926));
+                GMapPolygon polygon = new GMapPolygon(points, "故宮");
+                polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));   //有填滿 半透明, 若不寫.Fill, 即無填滿
+                polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
+                polygons.Polygons.Add(polygon);
+                gMapControl1.Overlays.Add(polygons);
+
+                //故宮中心座標
+                latitude = (39.92244 + 39.92280 + 39.91378 + 39.91346) / 4;     //緯度
+                longitude = (116.3922 + 116.4015 + 116.4019 + 116.3926) / 4;    //經度
+                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+                gMapControl1.Zoom = 15; //當前比例
+
+                gMapControl1.ShowCenter = false; //顯示地圖正中的紅十字
+
+                update_controls_info();
+            }
+            else if (rb_location3.Checked == true)
+            {
+
+            }
+            else if (rb_location4.Checked == true)
+            {
+                //馬立波
+                //47.095833, 37.549444（转换） 
+                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
+                //竹北座標
+                latitude = 47.095833;   //緯度
+                longitude = 37.549444; //經度
+                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+                gMapControl1.Zoom = 6; //當前比例
+
+                gMapControl1.ShowCenter = true; //顯示地圖正中的紅十字
+
+                update_controls_info();
+
+
+            }
+            else if (rb_location5.Checked == true)
+            {
+
+            }
+            else if (rb_location6.Checked == true)
+            {
+
+            }
+
         }
     }
 }

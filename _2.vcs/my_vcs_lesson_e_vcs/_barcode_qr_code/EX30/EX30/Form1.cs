@@ -144,7 +144,7 @@ namespace EX30
             Bitmap img = wr.Write(this.ContentTxt.Text);
 
             // 3.在二维码的Bitmap对象上绘制logo图片
-            Bitmap logoImg = Bitmap.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "\\logo.jpg") as Bitmap;
+            Bitmap logoImg = Bitmap.FromFile("../../logo.jpg") as Bitmap;
             Graphics g = Graphics.FromImage(img);
             Rectangle logoRec = new Rectangle(); // 设置logo图片的大小和绘制位置
             logoRec.Width = img.Width / 6;

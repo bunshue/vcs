@@ -4871,6 +4871,62 @@ if (Thd.IsAlive)
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+//C# 寫日志文件
+
+public static void WriteLog(string txt)
+
+        {
+
+            try
+
+            {
+
+                string path = Application.StartupPath + @"\log\" + DateTime.Now.ToString("yyyy-MM-dd") + @"\";
+
+                if (!Directory.Exists(path))
+
+                {
+
+                    Directory.CreateDirectory(path);
+
+                }
+
+                path +=  DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HH") + ".txt";
+
+                if (!File.Exists(path))
+
+                {
+
+                    File.Create(path);
+
+                }
+
+                FileStream fs;
+
+                StreamWriter sw;
+
+                fs = new FileStream(path, FileMode.Append);
+
+                sw = new StreamWriter(fs, Encoding.Default);
+
+                sw.Write(DateTime.Now.ToString("HH:mm:ss") + " " + txt + "\r\n");
+
+                sw.Close();
+
+                fs.Close();
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                WriteLog("程序發生異常（WriteLog）。詳情：" + ex.Message);
+
+            }
+
+        }
+
 
 
 
