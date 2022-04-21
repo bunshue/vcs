@@ -542,6 +542,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(160, 50);
             this.button14.TabIndex = 24;
+            this.button14.Text = "異步發送郵件";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

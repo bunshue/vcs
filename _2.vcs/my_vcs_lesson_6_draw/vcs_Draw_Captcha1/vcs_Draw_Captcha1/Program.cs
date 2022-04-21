@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_draw_captcha1
+namespace vcs_Draw_Captcha1
 {
     static class Program
     {

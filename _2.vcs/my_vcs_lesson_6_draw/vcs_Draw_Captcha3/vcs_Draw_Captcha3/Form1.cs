@@ -12,8 +12,7 @@ using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 
-
-namespace vcs_draw_captcha1
+namespace vcs_Draw_Captcha3
 {
     public partial class Form1 : Form
     {

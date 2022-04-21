@@ -166,6 +166,7 @@ namespace vcs_MyToolbox
         Button btn_capture1 = new Button();
         Button btn_capture2 = new Button();
 
+        Button btn_clock = new Button();
         Button btn_stopwatch = new Button();
         Button btn_countdown = new Button();
 
@@ -484,18 +485,24 @@ namespace vcs_MyToolbox
             btn_22.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_22);	// 將控件加入表單
 
-            btn_stopwatch.Width = w * 3 / 4;
-            btn_stopwatch.Height = h * 3 / 5;
+            btn_clock.Width = w * 6 / 10;
+            btn_clock.Height = h * 5 / 10;
+            btn_clock.Text = "時鐘";
+            btn_clock.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            btn_clock.Click += btn_click_function;	// 加入事件
+            this.Controls.Add(btn_clock);	// 將控件加入表單
+
+            btn_stopwatch.Width = w * 6 / 10;
+            btn_stopwatch.Height = h * 5 / 10;
             btn_stopwatch.Text = "碼表";
-            btn_stopwatch.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            btn_stopwatch.Location = new Point(x_st + dx * 2, y_st + dy * 3+45);
             btn_stopwatch.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_stopwatch);	// 將控件加入表單
 
-
-            btn_countdown.Width = w * 3 / 4;
-            btn_countdown.Height = h * 3 / 5;
+            btn_countdown.Width = w * 6 / 10;
+            btn_countdown.Height = h * 5 / 10;
             btn_countdown.Text = "倒數";
-            btn_countdown.Location = new Point(x_st + dx * 2, y_st + dy * 3 + 60);
+            btn_countdown.Location = new Point(x_st + dx * 2, y_st + dy * 3 + 90);
             btn_countdown.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_countdown);	// 將控件加入表單
 
@@ -997,13 +1004,20 @@ namespace vcs_MyToolbox
                 this.MouseDown += Form1_MouseDown;
                 this.Show();
             }
+            else if (sender.Equals(btn_clock))
+            {
+                text = btn_clock.Text;
+                //時鐘
+            }
             else if (sender.Equals(btn_stopwatch))
             {
                 text = btn_stopwatch.Text;
+                //碼表
             }
             else if (sender.Equals(btn_countdown))
             {
                 text = btn_countdown.Text;
+                //倒數
             }
             else
             {

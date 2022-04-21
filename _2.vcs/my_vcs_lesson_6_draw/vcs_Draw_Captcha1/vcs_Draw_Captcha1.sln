@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Draw_Captcha", "vcs_Draw_Captcha\vcs_Draw_Captcha.csproj", "{66DEA481-3502-4408-9C3B-C84C16EBA1BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Draw_Captcha1", "vcs_Draw_Captcha1\vcs_Draw_Captcha1.csproj", "{66DEA481-3502-4408-9C3B-C84C16EBA1BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

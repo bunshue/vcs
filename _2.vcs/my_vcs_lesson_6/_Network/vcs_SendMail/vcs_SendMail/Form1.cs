@@ -697,7 +697,60 @@ namespace vcs_SendMail
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //異步發送郵件
 
+            //創建MailMessage對象
+            MailAddress from = new MailAddress(email_addr_from);
+            MailAddress to = new MailAddress(email_addr_to);
+            MailMessage mailMessage = new MailMessage(from, to);
+            mailMessage.Subject = "主題";
+            mailMessage.Body = "這是一封來自遠方的郵件.";
+
+            //附件
+            Attachment attachment01 = new Attachment(attach_filename1);
+            Attachment attachment02 = new Attachment(attach_filename1);
+            mailMessage.Attachments.Add(attachment01);
+            mailMessage.Attachments.Add(attachment02);
+
+            SmtpClient smtp = new SmtpClient(smtp_server, smtp_server_port);   //實例一個SmtpClient類
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = new NetworkCredential(email_addr_from, email_addr_from_password); //這裡要填正確的帳號跟密碼, 驗證寄件者
+            //smtp.Timeout = 5000;
+            try
+            {
+                //使用異步發送,不會阻塞該線程
+                smtp.SendCompleted += new //完成發送調用回調函數
+                SendCompletedEventHandler(SendCompletedCallback);
+                smtp.SendAsync(mailMessage, mailMessage);
+            }
+            catch (Exception ex)
+            {
+                mailMessage.Dispose();    //主動釋放資源
+                smtp.Dispose();
+                MessageBox.Show("發送失敗!  " + System.Environment.NewLine + "錯誤信息:" + ex.Message);
+            }
+            return;
+        }
+
+        //異步發送完成的回調函數:
+        public static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
+        {
+            SmtpClient smtp = (SmtpClient)sender;
+            //MailMessage mailMessage = (MailMessage)e.UserState;
+            if (e.Cancelled)
+            {
+                MessageBox.Show("Send canceled.");
+            }
+            if (e.Error != null)
+            {
+                MessageBox.Show("錯誤信息: " + e.Error.ToString());
+            }
+            else
+            {
+                MessageBox.Show("Message Sent.");
+                smtp.Dispose();
+                //mailMessage.Dispose();
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)

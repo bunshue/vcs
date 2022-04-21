@@ -15,7 +15,7 @@ using System.Drawing.Text;      //for TextRenderingHint
 //（英語：Completely Automated Public Turing test to tell Computers and Humans Apart，簡稱CAPTCHA）
 // 俗稱驗證碼
 
-namespace vcs_Draw_Captcha
+namespace vcs_Draw_Captcha1
 {
     public partial class Form1 : Form
     {
@@ -39,10 +39,19 @@ namespace vcs_Draw_Captcha
             int W = 250;
             //int H = 250;
 
+            pictureBox_captcha0.Size = new Size(W + 50, 110);
             pictureBox_captcha1.Size = new Size(W + 50, 110);
             pictureBox_captcha2.Size = new Size(W + 50, 110);
             pictureBox_captcha3.Size = new Size(W + 50, 110);
             pictureBox_captcha4.Size = new Size(W + 50, 110);
+            pictureBox_captcha5.Size = new Size(W + 50, 110);
+            pictureBox_captcha6.Size = new Size(W + 50, 110);
+            pictureBox_captcha7.Size = new Size(W + 50, 110);
+            pictureBox_captcha8.Size = new Size(W + 50, 110);
+            pictureBox_captcha9.Size = new Size(W + 50, 110);
+            pictureBox_captcha10.Size = new Size(W + 50, 110);
+            pictureBox_captcha11.Size = new Size(W + 50, 110);
+            
 
             int x_st;
             int y_st;
@@ -51,25 +60,55 @@ namespace vcs_Draw_Captcha
 
             x_st = 20;
             y_st = 20;
-            dx = 160;
-            dy = 50;
+            dx = 220;
+            dy = 70;
 
-            lb_captcha1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            lb_captcha2.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            lb_captcha3.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            lb_captcha4.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            lb_captcha5.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            pictureBox4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            pictureBox5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            pictureBox6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            pictureBox7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            pictureBox8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+
+            lb_captcha0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            lb_captcha1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            lb_captcha2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            lb_captcha3.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            lb_captcha4.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            lb_captcha5.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            lb_captcha6.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            lb_captcha7.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            lb_captcha8.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            lb_captcha0.Text = "";
             lb_captcha1.Text = "";
             lb_captcha2.Text = "";
             lb_captcha3.Text = "";
             lb_captcha4.Text = "";
             lb_captcha5.Text = "";
+            lb_captcha6.Text = "";
+            lb_captcha7.Text = "";
+            lb_captcha8.Text = "";
 
-            pictureBox_captcha1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            pictureBox_captcha2.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 120);
-            pictureBox_captcha3.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 120 * 2);
-            pictureBox_captcha4.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 120 * 3);
+            dx = 180;
+            dy = 120;
+            pictureBox_captcha0.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox_captcha1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox_captcha2.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            pictureBox_captcha3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox_captcha4.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            pictureBox_captcha5.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            dx = 230;
+            pictureBox_captcha6.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox_captcha7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            pictureBox_captcha8.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            pictureBox_captcha9.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            pictureBox_captcha10.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            pictureBox_captcha11.Location = new Point(x_st + dx * 3, y_st + dy * 5);
 
+            richTextBox1.Location = new Point(x_st + dx * 4 + 80, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
