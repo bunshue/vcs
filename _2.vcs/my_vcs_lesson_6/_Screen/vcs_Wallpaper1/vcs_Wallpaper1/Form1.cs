@@ -117,7 +117,47 @@ namespace vcs_Wallpaper1
             ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
             //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
 
+            if (Properties.Settings.Default.foldername != null)
+            {
+                if (Directory.Exists(Properties.Settings.Default.foldername) == true)     //確認資料夾是否存在
+                {
+                    foldername = Properties.Settings.Default.foldername;
+                }
+            }
+
+            show_item_location();
         }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 120;
+            dy = 40;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+
+            bt_folder.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+
+            richTextBox1.Location = new Point(x_st + dx * 1+50, y_st + dy * 0);
+
+
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -164,13 +204,16 @@ namespace vcs_Wallpaper1
         private void button6_Click(object sender, EventArgs e)
         {
             timer1.Enabled = true;
-
-
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
+            {
+                this.Text = "無圖片";
+                return;
+            }
+
             //任選一張圖
             DirectoryInfo DInfo = new DirectoryInfo(foldername);
             FileInfo[] FInfo = DInfo.GetFiles();
@@ -178,6 +221,7 @@ namespace vcs_Wallpaper1
             sel_picture = rand.Next(FInfo.Length);
 
             string filename = foldername + FInfo[sel_picture].Name;
+            this.Text = filename;
             //richTextBox1.Text += "sel_picture = " + sel_picture.ToString() + "filename : " + filename + "\n";
 
             //讀取圖檔
@@ -284,6 +328,34 @@ namespace vcs_Wallpaper1
 
         }
 
+        private void bt_folder_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.SelectedPath = "c:\\______test_files";  //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                foldername = folderBrowserDialog1.SelectedPath + "\\";
+                /*
+                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
+                richTextBox1.Text += "RootFolder: " + folderBrowserDialog1.RootFolder + "\n";
+                richTextBox1.Text += "Container: " + folderBrowserDialog1.Container + "\n";
+                richTextBox1.Text += "Description: " + folderBrowserDialog1.Description + "\n";
+                richTextBox1.Text += "ShowNewFolderButton: " + folderBrowserDialog1.ShowNewFolderButton + "\n";
+                richTextBox1.Text += "Site: " + folderBrowserDialog1.Site + "\n";
+                richTextBox1.Text += "Tag: " + folderBrowserDialog1.Tag + "\n";
+                */
+
+            }
+            else
+            {
+                //richTextBox1.Text = "未選取資料夾\n";
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.foldername = foldername;
+            Properties.Settings.Default.Save();
+        }
     }
 
     public class Protocols

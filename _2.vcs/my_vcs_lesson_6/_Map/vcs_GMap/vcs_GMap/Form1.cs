@@ -12,6 +12,7 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Net;
 using System.Diagnostics;
+using System.Threading;
 
 using System.Xml;
 using System.Xml.Linq;
@@ -182,7 +183,6 @@ namespace vcs_GMap
             gMapControl1.Manager.ImportFromGMDB(@"gMapCacheLocation\mapdata.gmdb");
 
             //設定MapProvider
-            //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
             //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
             gMapControl1.ShowCenter = false; //隱藏中心十字
@@ -218,7 +218,6 @@ namespace vcs_GMap
             //GMapProvider.Language = LanguageType.ChineseSimplified; //设置地图默认语言
             GMapProvider.Language = LanguageType.ChineseTraditional; //设置地图默认语言
             GMapProvider.TimeoutMs = 5000;//地图加载完成后设置timeoutms为1000(或者其他大于领零的数值自己尝试0)
-            //GMapProvider.Language = LanguageType.ChineseSimplified; //使用的语言，默认是英文
         }
 
         void setup_trackBar()
@@ -347,23 +346,7 @@ namespace vcs_GMap
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
-            //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
-            //gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
-            //gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
-            //gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
-            //gMapControl1.MapProvider = GoogleMapProvider.Instance;
-
-            //gMapControl1.MapProvider = GMapProviders.BingHybridMap; //Bing混合地圖
-            //gMapControl1.MapProvider = GMapProviders.BingSatelliteMap;  //Bing衛星地圖
-            //gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;     //Google混合地圖
-            //gMapControl1.MapProvider = GMapProviders.OviSatelliteMap; //不能用
-            //gMapControl1.MapProvider = GMapProviders.OviHybridMap;  //不能用
-
-            //GeocodingProvider gp = GMapProviders.OpenStreetMap as GeocodingProvider;
 
             //竹北座標
             latitude = 24.838;   //緯度
@@ -852,9 +835,8 @@ namespace vcs_GMap
             }
             else if (radioButton7.Checked == true)
             {
-                //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
-                //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
-                //gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
+                //其他
+                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
             }
         }
 
@@ -1033,51 +1015,75 @@ namespace vcs_GMap
 
         private void button15_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            /*
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
             //竹北座標
             latitude = 24.838;   //緯度
             longitude = 121.003; //經度
             gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
             gMapControl1.Zoom = 14; //當前比例
-            */
 
-            /*
-            */
+            gMapControl1.ShowCenter = true; //顯示地圖正中的紅十字
 
-            //竹北座標
-            latitude = 48.866383;   //緯度
-            longitude = 2.323575; //經度
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-            gMapControl1.Zoom = 15; //當前比例
+            update_controls_info();
 
+            //畫Route ST
+            List<PointLatLng> points = new List<PointLatLng>();
 
-            gMapControl1.MapProvider = BingHybridMapProvider.Instance;
-            gMapControl1.MapProvider = BingHybridMapProvider.Instance;
+            points.Add(new PointLatLng(24.8493692081609, 120.996723175049));
+            points.Add(new PointLatLng(24.8489019025833, 121.003332138062));
+            points.Add(new PointLatLng(24.8492134398311, 121.005306243896));
+            points.Add(new PointLatLng(24.8505374643828, 121.009511947632));
+            points.Add(new PointLatLng(24.8509268806719, 121.010885238647));
+            points.Add(new PointLatLng(24.8498365119735, 121.013631820679));
+            points.Add(new PointLatLng(24.8483567105118, 121.017322540283));
+            points.Add(new PointLatLng(24.8449297339118, 121.02032661438));
+            points.Add(new PointLatLng(24.8403343208788, 121.021013259888));
+            points.Add(new PointLatLng(24.83690712212, 121.020669937134));
+            points.Add(new PointLatLng(24.8326229902382, 121.018524169922));
+            points.Add(new PointLatLng(24.8283387101149, 121.016464233398));
+            points.Add(new PointLatLng(24.824287981682, 121.014575958252));
+            points.Add(new PointLatLng(24.8268586516249, 121.01019859314));
+            points.Add(new PointLatLng(24.8304419206983, 121.004705429077));
+            points.Add(new PointLatLng(24.8322335163524, 121.001529693604));
+            points.Add(new PointLatLng(24.8334798284745, 120.99835395813));
+            points.Add(new PointLatLng(24.8361282000777, 120.99723815918));
+            points.Add(new PointLatLng(24.83425876718, 120.99268913269));
+            points.Add(new PointLatLng(24.8313766694912, 120.987539291382));
+            points.Add(new PointLatLng(24.8322335163524, 120.982732772827));
+            points.Add(new PointLatLng(24.8379197134477, 120.984363555908));
+            points.Add(new PointLatLng(24.8416584404391, 120.98539352417));
+            points.Add(new PointLatLng(24.8465653482197, 120.987367630005));
+            points.Add(new PointLatLng(24.84640957636, 120.988655090332));
+            points.Add(new PointLatLng(24.8461759182027, 120.989942550659));
+            points.Add(new PointLatLng(24.8453191678509, 120.99157333374));
+            points.Add(new PointLatLng(24.8437614247412, 120.993976593018));
+            points.Add(new PointLatLng(24.8460201458526, 120.995092391968));
+            points.Add(new PointLatLng(24.8475778605281, 120.995864868164));
+            points.Add(new PointLatLng(24.8492913240205, 120.99663734436));
 
+            int len = points.Count;
+            richTextBox1.Text += "共有 " + len.ToString() + " 點\n";
 
+            List<PointLatLng> points2 = new List<PointLatLng>();
 
-        
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                points2.Add(points[i]);
+
+                draw_route(points2);
+                Application.DoEvents();
+                Thread.Sleep(300);
+            }
         }
 
-        private void button17_Click(object sender, EventArgs e)
+        public void draw_route(List<PointLatLng> points)
         {
-            //畫一個圖釘
-            //創建一個名爲“markers”的圖層
-            GMapOverlay markers = new GMapOverlay("markers");
-            //創建標記，並設置位置及樣式
-            //GMapMarker marker = new GMarkerGoogle(new PointLatLng(24.8443066370601, 121.002216339111), GMarkerGoogleType.blue_pushpin);
-            GMapMarker marker = new GMarkerGoogle(new PointLatLng(24.8443066370601, 121.002216339111), GMarkerGoogleType.arrow);
-            //將標記添加到圖層
-            markers.Markers.Add(marker);
-            //將圖層添加到地圖
-            gMapControl1.Overlays.Add(markers);
+            int len = points.Count;
 
-            /*
+            if (len < 2)
+                return;
+
             //添加線
             //创建“lay”图层
             GMapOverlay lay = new GMapOverlay("lay");
@@ -1086,39 +1092,46 @@ namespace vcs_GMap
             //设置route的颜色和粗细
             route1.Stroke = new Pen(Color.Red, 2);  //連線顏色與大小
             //向route中添加点
-            route1.Points.Add(new PointLatLng(24.8443066370601, 121.002216339111));
-            route1.Points.Add(new PointLatLng(24.8473066370601, 121.022216339111));
-            route1.Points.Add(new PointLatLng(24.8443066370601, 121.002216339111));
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                route1.Points.Add(new PointLatLng(points[i].Lat, points[i].Lng));
+            }
             //将route添加到图层
             lay.Routes.Add(route1);
             //将图层添加到地图
             gMapControl1.Overlays.Add(lay);
+
             //更新显示route
             gMapControl1.UpdateRouteLocalPosition(route1);
-            */
+        }
 
+        private void button16_Click(object sender, EventArgs e)
+        {
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //竹北座標
+            latitude = 24.838;   //緯度
+            longitude = 121.003; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 14; //當前比例
 
-            richTextBox1.Text += "畫範圍 GMapPolygon\n";
+            gMapControl1.ShowCenter = true; //顯示地圖正中的紅十字
 
-            //创建“lay”图层
-            GMapOverlay lay = new GMapOverlay("lay");
-            //创建一条route
-            GMapPolygon polygon = new GMapPolygon(new List<PointLatLng>(), "polygon");
-            //设置polygon的颜色和粗细
-            polygon.Stroke = new Pen(Color.Red, 2); //邊框顏色與大小
-            //设置polygon的填充颜色
-            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Green)); //有填滿 半透明, 若不寫.Fill, 即無填滿
-            //向polygon中添加点
-            polygon.Points.Add(new PointLatLng(24.8443066370601, 121.002216339111));
-            polygon.Points.Add(new PointLatLng(24.8443066370601, 121.022216339111));
-            polygon.Points.Add(new PointLatLng(24.8493066370601, 121.002216339111));
-            //将polygon添加到图层
-            lay.Polygons.Add(polygon);
-            //将图层添加到地图
-            gMapControl1.Overlays.Add(lay);
-            //更新显示polygon
-            gMapControl1.UpdatePolygonLocalPosition(polygon);
+            update_controls_info();
+        }
 
+        private void button17_Click(object sender, EventArgs e)
+        {
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //竹北座標
+            latitude = 24.838;   //緯度
+            longitude = 121.003; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 14; //當前比例
+
+            gMapControl1.ShowCenter = true; //顯示地圖正中的紅十字
+
+            update_controls_info();
         }
 
         private void btn_draw_profile_Click(object sender, EventArgs e)
@@ -1185,11 +1198,7 @@ namespace vcs_GMap
                 //richTextBox1.Text += "i = " + i.ToString() + "\t" + points[i].Lat.ToString() + "\t" + points[i].Lng.ToString() + "\n";
             }
 
-            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
             gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
-            //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
 
             latitude = lat_center;   //緯度
             longitude = lng_center; //經度
@@ -1433,14 +1442,7 @@ namespace vcs_GMap
             {
                 richTextBox1.Text += "畫範圍 GMapPolygon 北京故宮\n";
 
-                //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
                 gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-                //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
-                //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-                //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
-                //gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
-                //gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
-                //gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
 
                 GMapOverlay polygons = new GMapOverlay("polygons");
                 List<PointLatLng> points = new List<PointLatLng>();
@@ -1470,11 +1472,9 @@ namespace vcs_GMap
             }
             else if (rb_location4.Checked == true)
             {
-                //馬立波
-                //47.095833, 37.549444（转换） 
                 gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
-                //竹北座標
+                //馬立波
                 latitude = 47.095833;   //緯度
                 longitude = 37.549444; //經度
                 gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
@@ -1483,12 +1483,17 @@ namespace vcs_GMap
                 gMapControl1.ShowCenter = true; //顯示地圖正中的紅十字
 
                 update_controls_info();
-
-
             }
             else if (rb_location5.Checked == true)
             {
+                gMapControl1.MapProvider = BingHybridMapProvider.Instance;
 
+                //巴黎
+                latitude = 48.866383;   //緯度
+                longitude = 2.323575; //經度
+
+                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+                gMapControl1.Zoom = 15; //當前比例
             }
             else if (rb_location6.Checked == true)
             {
@@ -1558,11 +1563,6 @@ void mapControl_MouseDoubleClick(object sender, MouseEventArgs e)
             gMapControl1.ZoomAndCenterRoute(r);//將r這條路初始為檢視中心，顯示時以r為中心顯示
 
             gMapControl1.Overlays.Add(routesOverlay);
-
- * * * 
- * 
-            //gMapControl1.UpdateRouteLocalPosition(route);
-* 
 
                     string lat = datarow.Cells[index+2].Value.ToString();
                     string lng = datarow.Cells[index2+2].Value.ToString();
@@ -1667,14 +1667,40 @@ gMapControl1.Refresh();
  * 
  */
 
+//MapProvider 大集合
 
-/*
-            gMapControl1.MapProvider = BingMapProvider.Instance;
-            gMapControl1.MapProvider = CloudMadeMapProvider.Instance;
-            gMapControl1.MapProvider = GoogleMapProvider.Instance;
-            gMapControl1.MapProvider = OpenCycleMapProvider.Instance;
-            gMapControl1.MapProvider = OpenStreetMapProvider.Instance;
-            gMapControl1.MapProvider = WikiMapiaMapProvider.Instance;
-            gMapControl1.MapProvider = YahooMapProvider.Instance;
-*/
+//gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+//gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+//gMapControl1.MapProvider = GMapProviders.GoogleTerrainMap; //地形圖
+//gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
+
+//gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
+//gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
+
+//其他
+//gMapControl1.MapProvider = BingHybridMapProvider.Instance;	//可用
+//gMapControl1.MapProvider = BingMapProvider.Instance;
+//gMapControl1.MapProvider = GMapProviders.BingHybridMap; //Bing混合地圖
+//gMapControl1.MapProvider = GMapProviders.BingSatelliteMap;  //Bing衛星地圖
+
+//不能用
+//gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
+//gMapControl1.MapProvider = GMapProviders.OviSatelliteMap; //不能用
+//gMapControl1.MapProvider = GMapProviders.OviHybridMap;  //不能用
+//gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
+
+//測試中
+//gMapControl1.MapProvider = CloudMadeMapProvider.Instance;
+//gMapControl1.MapProvider = GoogleMapProvider.Instance;
+//gMapControl1.MapProvider = OpenStreetMapProvider.Instance;
+//gMapControl1.MapProvider = WikiMapiaMapProvider.Instance;
+//gMapControl1.MapProvider = YahooMapProvider.Instance;
+
+//gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;     //Google混合地圖
+//gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
+
+//語法
+//GeocodingProvider gp = GMapProviders.OpenStreetMap as GeocodingProvider;
+
+
 

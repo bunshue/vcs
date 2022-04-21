@@ -458,6 +458,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(90, 40);
             this.button15.TabIndex = 33;
+            this.button15.Text = "更新顯示Route";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -540,8 +541,9 @@
             this.rb_location5.AutoSize = true;
             this.rb_location5.Location = new System.Drawing.Point(20, 98);
             this.rb_location5.Name = "rb_location5";
-            this.rb_location5.Size = new System.Drawing.Size(14, 13);
+            this.rb_location5.Size = new System.Drawing.Size(47, 16);
             this.rb_location5.TabIndex = 4;
+            this.rb_location5.Text = "巴黎";
             this.rb_location5.UseVisualStyleBackColor = true;
             this.rb_location5.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
             // 
