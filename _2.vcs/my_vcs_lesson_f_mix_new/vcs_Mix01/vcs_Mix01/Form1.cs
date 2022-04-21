@@ -1014,6 +1014,16 @@ namespace vcs_Mix01
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            Mp3Info mp3 = new Mp3Info(filename);
+            string artist = mp3.Artist;
+            string album = mp3.Album;
+            string title = mp3.Title;
+
+            richTextBox1.Text += "artist : " + artist + "\n";
+            richTextBox1.Text += "album : " + album + "\n";
+            richTextBox1.Text += "title : " + title + "\n";
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1210,6 +1220,20 @@ namespace vcs_Mix01
         private void button23_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //讀取exe版本號
+
+            string filename = @"C:\______test_files\_material\_dll\AForge.Video.dll";
+
+            Assembly currentAssembly = Assembly.LoadFile(filename);
+            //Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
+
+            AssemblyName currentAssemblyName = currentAssembly.GetName();
+            //AssemblyName updatedAssemblyName = updatedAssembly.GetName();
+
+            richTextBox1.Text += currentAssembly.GetName() + "\n";
+
+
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1323,6 +1347,31 @@ namespace vcs_Mix01
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+        }
+    }
+
+    struct Mp3Info
+    {
+        public string Title;  //歌曲名,30个字节     3-62 
+        public string Artist; //歌手名,30个字节     33-62
+        public string Album;  //专辑名,30个字节     63-92
+        //public string Year;//年,4个字符     
+        //public string Comment;//注释,28个字节      
+        //public char reserved1;//保留位，一个字节        
+        //public char reserved2;//保留位，一个字节        
+        //public char reserved3;//保留位，一个字节  
+
+        public Mp3Info(string fileName)
+        {
+            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            fs.Seek(-128, SeekOrigin.End);
+            byte[] Info = new byte[128];
+            int length = fs.Read(Info, 0, 128);
+            fs.Close();
+
+            Title = Encoding.Default.GetString(Info, 3, 30).Replace("\0", string.Empty);
+            Artist = Encoding.Default.GetString(Info, 33, 30).Replace("\0", string.Empty);
+            Album = Encoding.Default.GetString(Info, 63, 30).Replace("\0", string.Empty);
         }
     }
 }

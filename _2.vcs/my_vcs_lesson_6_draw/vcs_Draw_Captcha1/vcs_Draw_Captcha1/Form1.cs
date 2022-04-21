@@ -27,10 +27,6 @@ namespace vcs_Draw_Captcha1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            CreateImage();
-
-            CodeImage(CheckCode(), pictureBox3);
             timer1_Tick(sender, e);
         }
 
@@ -51,7 +47,7 @@ namespace vcs_Draw_Captcha1
             pictureBox_captcha9.Size = new Size(W + 50, 110);
             pictureBox_captcha10.Size = new Size(W + 50, 110);
             pictureBox_captcha11.Size = new Size(W + 50, 110);
-            
+
 
             int x_st;
             int y_st;
@@ -119,22 +115,21 @@ namespace vcs_Draw_Captcha1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            CreateImage();
+            CreateImage1();     //for pictureBox1
+            CodeImage(CheckCode(), pictureBox3);    //for //for pictureBox3
+            CreateImage4();    //for pictureBox4
+            CreateImage5();    //for pictureBox5
+            CreateImage6();    //for pictureBox6
 
-            CodeImage(CheckCode(), pictureBox3);
-
-            draw_captcha1();
-            draw_captcha2();
-            draw_captcha3();
-            draw_captcha4();
-            draw_captcha5();
-            draw_captcha6();
-            draw_captcha7();
+            draw_captcha1();    //for pictureBox_captcha1
+            draw_captcha2();    //for pictureBox_captcha2
+            draw_captcha3();    //for pictureBox_captcha3
+            draw_captcha7();    //for pictureBox_captcha7
         }
 
         //中文驗證法碼 ST
         public string txt = "";
-        private void CreateImage()
+        private void CreateImage1()
         {
             //获取GB2312编码页（表） 
             Encoding gb = Encoding.GetEncoding("gb2312");
@@ -555,7 +550,7 @@ namespace vcs_Draw_Captcha1
             return bm;
         }
 
-        void draw_captcha4()
+        void CreateImage4()
         {
             string code;
             Bitmap bitmap1 = VerifyCodeHelper.CreateVerifyCodeBmp(out code);
@@ -586,7 +581,7 @@ namespace vcs_Draw_Captcha1
             */
         }
 
-        void draw_captcha5()
+        void CreateImage5()
         {
             string ccc = "this is a lion-mouse";
             CreateImage(ccc);
@@ -638,7 +633,7 @@ namespace vcs_Draw_Captcha1
             pictureBox5.Image = bitmap1;
         }
 
-        void draw_captcha6()
+        void CreateImage6()
         {
             //製作驗證碼3
             //C#生成驗證碼例子及代碼
@@ -695,7 +690,7 @@ namespace vcs_Draw_Captcha1
             //richTextBox1.Text += code + "\n";
 
             Bitmap bitmap1 = captcha.CreateImage(code);
-            pictureBox_captcha4.Image = bitmap1;
+            pictureBox_captcha7.Image = bitmap1;
         }
     }
 
@@ -1208,3 +1203,4 @@ namespace vcs_Draw_Captcha1
         }
     }
 }
+

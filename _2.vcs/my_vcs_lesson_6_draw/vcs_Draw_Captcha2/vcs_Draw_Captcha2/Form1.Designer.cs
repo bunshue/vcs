@@ -28,266 +28,252 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button0 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox_captcha04 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha05 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha09 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha06 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha08 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha10 = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_captcha14 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha13 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha15 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha12 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha11 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha16 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha17 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha18 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_captcha19 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha04)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha05)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha09)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha06)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha08)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha19)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button0
-            // 
-            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button0.Location = new System.Drawing.Point(12, 12);
-            this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(160, 70);
-            this.button0.TabIndex = 31;
-            this.button0.Text = "產生圖片驗證碼";
-            this.button0.UseVisualStyleBackColor = true;
-            this.button0.Click += new System.EventHandler(this.button0_Click);
-            // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(12, 661);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(160, 70);
-            this.button7.TabIndex = 24;
-            this.button7.Text = "產生圖片驗證碼";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button6
-            // 
-            this.button6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(12, 573);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(160, 70);
-            this.button6.TabIndex = 23;
-            this.button6.Text = "產生圖片驗證碼";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(12, 487);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(160, 70);
-            this.button5.TabIndex = 22;
-            this.button5.Text = "產生中文圖片驗證碼";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(12, 401);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(160, 70);
-            this.button4.TabIndex = 21;
-            this.button4.Text = "產生圖片驗證碼";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(12, 304);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(160, 70);
-            this.button3.TabIndex = 20;
-            this.button3.Text = "產生圖片驗證碼";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(12, 210);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(160, 70);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "產生圖片驗證碼";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(715, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(633, 13);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(257, 699);
+            this.richTextBox1.Size = new System.Drawing.Size(257, 529);
             this.richTextBox1.TabIndex = 18;
             this.richTextBox1.Text = "";
             // 
-            // button1
+            // pictureBox_captcha04
             // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(12, 111);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 70);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "產生圖片驗證碼";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.pictureBox_captcha04.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha04.Location = new System.Drawing.Point(12, 13);
+            this.pictureBox_captcha04.Name = "pictureBox_captcha04";
+            this.pictureBox_captcha04.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha04.TabIndex = 87;
+            this.pictureBox_captcha04.TabStop = false;
             // 
-            // pictureBox1
+            // pictureBox_captcha05
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(369, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(328, 699);
-            this.pictureBox1.TabIndex = 32;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox_captcha05.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha05.Location = new System.Drawing.Point(12, 79);
+            this.pictureBox_captcha05.Name = "pictureBox_captcha05";
+            this.pictureBox_captcha05.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha05.TabIndex = 88;
+            this.pictureBox_captcha05.TabStop = false;
             // 
-            // button8
+            // pictureBox_captcha09
             // 
-            this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(190, 12);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(160, 70);
-            this.button8.TabIndex = 33;
-            this.button8.Text = "產生圖片驗證碼";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.pictureBox_captcha09.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha09.Location = new System.Drawing.Point(12, 277);
+            this.pictureBox_captcha09.Name = "pictureBox_captcha09";
+            this.pictureBox_captcha09.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha09.TabIndex = 89;
+            this.pictureBox_captcha09.TabStop = false;
             // 
-            // button9
+            // pictureBox_captcha06
             // 
-            this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(190, 111);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(160, 70);
-            this.button9.TabIndex = 34;
-            this.button9.Text = "產生圖片驗證碼 (很複雜)";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.pictureBox_captcha06.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha06.Location = new System.Drawing.Point(12, 145);
+            this.pictureBox_captcha06.Name = "pictureBox_captcha06";
+            this.pictureBox_captcha06.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha06.TabIndex = 89;
+            this.pictureBox_captcha06.TabStop = false;
             // 
-            // button10
+            // pictureBox_captcha08
             // 
-            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(190, 210);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(160, 70);
-            this.button10.TabIndex = 35;
-            this.button10.Text = "畫驗證碼";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.pictureBox_captcha08.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha08.Location = new System.Drawing.Point(12, 211);
+            this.pictureBox_captcha08.Name = "pictureBox_captcha08";
+            this.pictureBox_captcha08.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha08.TabIndex = 90;
+            this.pictureBox_captcha08.TabStop = false;
             // 
-            // button11
+            // pictureBox_captcha10
             // 
-            this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button11.Location = new System.Drawing.Point(190, 304);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(160, 70);
-            this.button11.TabIndex = 36;
-            this.button11.Text = "產生驗證圖片";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.pictureBox_captcha10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha10.Location = new System.Drawing.Point(12, 343);
+            this.pictureBox_captcha10.Name = "pictureBox_captcha10";
+            this.pictureBox_captcha10.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha10.TabIndex = 91;
+            this.pictureBox_captcha10.TabStop = false;
             // 
-            // button12
+            // timer1
             // 
-            this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(190, 401);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(160, 70);
-            this.button12.TabIndex = 37;
-            this.button12.Text = "使用驗證碼類";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // button13
+            // pictureBox_captcha14
             // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button13.Location = new System.Drawing.Point(190, 487);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(160, 70);
-            this.button13.TabIndex = 38;
-            this.button13.Text = "用GDI+繪制驗證碼";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            this.pictureBox_captcha14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha14.Location = new System.Drawing.Point(218, 13);
+            this.pictureBox_captcha14.Name = "pictureBox_captcha14";
+            this.pictureBox_captcha14.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha14.TabIndex = 96;
+            this.pictureBox_captcha14.TabStop = false;
             // 
-            // button14
+            // pictureBox_captcha13
             // 
-            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button14.Location = new System.Drawing.Point(190, 573);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(160, 70);
-            this.button14.TabIndex = 39;
-            this.button14.UseVisualStyleBackColor = true;
+            this.pictureBox_captcha13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha13.Location = new System.Drawing.Point(12, 541);
+            this.pictureBox_captcha13.Name = "pictureBox_captcha13";
+            this.pictureBox_captcha13.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha13.TabIndex = 95;
+            this.pictureBox_captcha13.TabStop = false;
             // 
-            // button15
+            // pictureBox_captcha15
             // 
-            this.button15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button15.Location = new System.Drawing.Point(190, 661);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(160, 70);
-            this.button15.TabIndex = 40;
-            this.button15.UseVisualStyleBackColor = true;
+            this.pictureBox_captcha15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha15.Location = new System.Drawing.Point(218, 79);
+            this.pictureBox_captcha15.Name = "pictureBox_captcha15";
+            this.pictureBox_captcha15.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha15.TabIndex = 94;
+            this.pictureBox_captcha15.TabStop = false;
+            // 
+            // pictureBox_captcha12
+            // 
+            this.pictureBox_captcha12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha12.Location = new System.Drawing.Point(12, 475);
+            this.pictureBox_captcha12.Name = "pictureBox_captcha12";
+            this.pictureBox_captcha12.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha12.TabIndex = 93;
+            this.pictureBox_captcha12.TabStop = false;
+            // 
+            // pictureBox_captcha11
+            // 
+            this.pictureBox_captcha11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha11.Location = new System.Drawing.Point(12, 409);
+            this.pictureBox_captcha11.Name = "pictureBox_captcha11";
+            this.pictureBox_captcha11.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha11.TabIndex = 92;
+            this.pictureBox_captcha11.TabStop = false;
+            // 
+            // pictureBox_captcha16
+            // 
+            this.pictureBox_captcha16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha16.Location = new System.Drawing.Point(218, 145);
+            this.pictureBox_captcha16.Name = "pictureBox_captcha16";
+            this.pictureBox_captcha16.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha16.TabIndex = 98;
+            this.pictureBox_captcha16.TabStop = false;
+            // 
+            // pictureBox_captcha17
+            // 
+            this.pictureBox_captcha17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha17.Location = new System.Drawing.Point(218, 211);
+            this.pictureBox_captcha17.Name = "pictureBox_captcha17";
+            this.pictureBox_captcha17.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha17.TabIndex = 97;
+            this.pictureBox_captcha17.TabStop = false;
+            // 
+            // pictureBox_captcha18
+            // 
+            this.pictureBox_captcha18.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha18.Location = new System.Drawing.Point(218, 277);
+            this.pictureBox_captcha18.Name = "pictureBox_captcha18";
+            this.pictureBox_captcha18.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha18.TabIndex = 100;
+            this.pictureBox_captcha18.TabStop = false;
+            // 
+            // pictureBox_captcha19
+            // 
+            this.pictureBox_captcha19.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_captcha19.Location = new System.Drawing.Point(218, 343);
+            this.pictureBox_captcha19.Name = "pictureBox_captcha19";
+            this.pictureBox_captcha19.Size = new System.Drawing.Size(200, 60);
+            this.pictureBox_captcha19.TabIndex = 99;
+            this.pictureBox_captcha19.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1019, 761);
-            this.Controls.Add(this.button15);
-            this.Controls.Add(this.button14);
-            this.Controls.Add(this.button13);
-            this.Controls.Add(this.button12);
-            this.Controls.Add(this.button11);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button0);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(922, 809);
+            this.Controls.Add(this.pictureBox_captcha18);
+            this.Controls.Add(this.pictureBox_captcha19);
+            this.Controls.Add(this.pictureBox_captcha16);
+            this.Controls.Add(this.pictureBox_captcha17);
+            this.Controls.Add(this.pictureBox_captcha14);
+            this.Controls.Add(this.pictureBox_captcha13);
+            this.Controls.Add(this.pictureBox_captcha15);
+            this.Controls.Add(this.pictureBox_captcha12);
+            this.Controls.Add(this.pictureBox_captcha11);
+            this.Controls.Add(this.pictureBox_captcha10);
+            this.Controls.Add(this.pictureBox_captcha08);
+            this.Controls.Add(this.pictureBox_captcha06);
+            this.Controls.Add(this.pictureBox_captcha09);
+            this.Controls.Add(this.pictureBox_captcha05);
+            this.Controls.Add(this.pictureBox_captcha04);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha04)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha05)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha09)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha06)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha08)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha19)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.PictureBox pictureBox_captcha04;
+        private System.Windows.Forms.PictureBox pictureBox_captcha05;
+        private System.Windows.Forms.PictureBox pictureBox_captcha09;
+        private System.Windows.Forms.PictureBox pictureBox_captcha06;
+        private System.Windows.Forms.PictureBox pictureBox_captcha08;
+        private System.Windows.Forms.PictureBox pictureBox_captcha10;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pictureBox_captcha14;
+        private System.Windows.Forms.PictureBox pictureBox_captcha13;
+        private System.Windows.Forms.PictureBox pictureBox_captcha15;
+        private System.Windows.Forms.PictureBox pictureBox_captcha12;
+        private System.Windows.Forms.PictureBox pictureBox_captcha11;
+        private System.Windows.Forms.PictureBox pictureBox_captcha16;
+        private System.Windows.Forms.PictureBox pictureBox_captcha17;
+        private System.Windows.Forms.PictureBox pictureBox_captcha18;
+        private System.Windows.Forms.PictureBox pictureBox_captcha19;
     }
 }
 

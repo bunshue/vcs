@@ -25,6 +25,7 @@ namespace vcs_Draw_Captcha2
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+            timer1_Tick(sender, e);
         }
 
         void show_item_location()
@@ -34,40 +35,38 @@ namespace vcs_Draw_Captcha2
             int dx;
             int dy;
 
-            //button
             x_st = 15;
             y_st = 15;
             dx = 180;
             dy = 90;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
         }
 
-        private void button0_Click(object sender, EventArgs e)
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            draw_captcha04();    //for pictureBox_captcha04
+            draw_captcha05();    //for pictureBox_captcha05
+            draw_captcha06();    //for pictureBox_captcha06
+
+            draw_captcha08();    //for pictureBox_captcha08
+            draw_captcha09();    //for pictureBox_captcha09
+            draw_captcha10();    //for pictureBox_captcha10
+
+            draw_captcha11();    //for pictureBox_captcha11
+            draw_captcha12();    //for pictureBox_captcha12
+            draw_captcha13();    //for pictureBox_captcha13
+            draw_captcha14();    //for pictureBox_captcha14
+            draw_captcha15();    //for pictureBox_captcha15
+
+        }
+
+        void draw_captcha04()
         {
             //產生圖片驗證碼
             string tmp = RndNum(4);
             Create(out tmp);
-
         }
 
         /// <summary>
@@ -149,7 +148,7 @@ namespace vcs_Draw_Captcha2
             //回收資源
             g.Dispose();
 
-            pictureBox1.Image = Img;
+            pictureBox_captcha04.Image = Img;
             //Img.Dispose();
             return ms;
         }
@@ -183,12 +182,12 @@ namespace vcs_Draw_Captcha2
             //Response.ContentType = "image/Jpeg ";
             //Response.BinaryWrite(ms.ToArray());
             g.Dispose();
-            pictureBox1.Image = Img;
+            pictureBox_captcha05.Image = Img;
             //Img.Dispose();
             //Response.End();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        void draw_captcha05()
         {
             string tmp = RndNum(4);
             //HttpCookie a = new HttpCookie("ImageV ", tmp);
@@ -196,7 +195,7 @@ namespace vcs_Draw_Captcha2
             this.ValidateCode(tmp);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        void draw_captcha06()
         {
             ProcessRequest();
         }
@@ -274,11 +273,11 @@ namespace vcs_Draw_Captcha2
           */
 
             g.Dispose();
-            pictureBox1.Image = bitmap1;
+            pictureBox_captcha06.Image = bitmap1;
             //bitmap1.Dispose();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        void draw_captcha08()
         {
             //CreateCheckCodeImage(GenerateCheckCodes(10));
             GetCheckCode();
@@ -404,7 +403,7 @@ namespace vcs_Draw_Captcha2
                 //畫圖片的邊框線
                 g.DrawRectangle(new Pen(Color.Silver), 0, 0, image.Width - 1, image.Height - 1);
 
-                pictureBox1.Image = image;
+                pictureBox_captcha08.Image = image;
 
                 MemoryStream ms = new MemoryStream();
                 image.Save(ms, ImageFormat.Jpeg);
@@ -439,7 +438,7 @@ namespace vcs_Draw_Captcha2
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        void draw_captcha09()
         {
             string strValidCode;
             // 產生5位隨機字元
@@ -489,8 +488,9 @@ namespace vcs_Draw_Captcha2
             {
                 g.Dispose();
                 //image.Dispose();
-                pictureBox1.Image = image;
+                pictureBox_captcha09.Image = image;
             }
+
         }
 
         /*
@@ -729,7 +729,7 @@ namespace vcs_Draw_Captcha2
             System.IO.MemoryStream ms = new System.IO.MemoryStream();
             bmp.Save(ms, ImageFormat.Jpeg);
             //bmp.Dispose();
-            pictureBox1.Image = bmp;
+            pictureBox_captcha10.Image = bmp;
             graph.Dispose();
 
             strKey = strResult;
@@ -739,10 +739,7 @@ namespace vcs_Draw_Captcha2
             return byteReturn;
         }
 
-
-
-
-        private void button5_Click(object sender, EventArgs e)
+        void draw_captcha10()
         {
             string strKey = "";
             int _nlen = 6;
@@ -751,7 +748,7 @@ namespace vcs_Draw_Captcha2
             //Page.Response.OutputStream.Write(data, 0, data.Length);
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        void draw_captcha11()
         {
             /*
             驗證碼字符個數、生成圖片寬度、高度自定均可由構造方法自定，無參構造生成默認字符個數和默認大小的Image,
@@ -761,15 +758,10 @@ namespace vcs_Draw_Captcha2
 
             DrawValImg drawimg = new DrawValImg();
             Image img = drawimg.GetImgWithValidateCode();
-            pictureBox1.Image = img;
+            pictureBox_captcha11.Image = img;
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            CreateCaptcha();
-        }
-
-        void CreateCaptcha()
+        void draw_captcha12()
         {
             // 創建一個包含隨機內容的驗證碼文本
             System.Random rand = new Random();
@@ -833,7 +825,7 @@ namespace vcs_Draw_Captcha2
                     bitmap2.SetPixel(x, y, c);
                 }//for
 
-                pictureBox1.Image = bitmap2;
+                pictureBox_captcha12.Image = bitmap2;
 
                 // 輸出圖片
                 System.IO.MemoryStream ms = new System.IO.MemoryStream();
@@ -845,12 +837,13 @@ namespace vcs_Draw_Captcha2
             myFont.Dispose();
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        void draw_captcha13()
         {
             //產生圖片驗證碼
             Bitmap bitmap1 = Generate(RandomGeneratorStyle.Number, 10);
-            pictureBox1.Image = bitmap1;
+            pictureBox_captcha13.Image = bitmap1;
         }
+
         public enum RandomGeneratorStyle
         {
             ///　<summary>
@@ -908,7 +901,8 @@ namespace vcs_Draw_Captcha2
             return bmp;
         }
 
-        private void button9_Click(object sender, EventArgs e)
+
+        void draw_captcha14()
         {
             //產生圖片驗證碼(很複雜)
 
@@ -919,15 +913,14 @@ namespace vcs_Draw_Captcha2
             //創建驗證碼的圖片
             Bitmap bitmap1 = validateCode.CreateImage(code);
 
-            pictureBox1.Image = bitmap1;
+            pictureBox_captcha14.Image = bitmap1;
 
             //最後將驗證碼返回
             //return File(bytes, @"image/jpeg");
             //File(bytes, @"image/jpeg");
-
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        void draw_captcha15()
         {
             //調用函數將驗證碼生成圖片
             CreateCheckCodeImage2(GenerateCheckCode());
@@ -1003,7 +996,7 @@ namespace vcs_Draw_Captcha2
 
                 System.IO.MemoryStream ms = new System.IO.MemoryStream();
                 bitmap1.Save(ms, ImageFormat.Gif);
-                pictureBox1.Image = bitmap1;
+                pictureBox_captcha15.Image = bitmap1;
             }
             finally
             {
@@ -1012,7 +1005,7 @@ namespace vcs_Draw_Captcha2
             }
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        void draw_captcha16()
         {
             Random r = new Random();
             string str = string.Empty;
@@ -1048,20 +1041,19 @@ namespace vcs_Draw_Captcha2
                 bitmap.SetPixel(p1.X, p1.Y, Color.Green);
             }
             //在winForm中用PictureBox中显示出来
-            pictureBox1.Image = bitmap;
+            pictureBox_captcha16.Image = bitmap;
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        void draw_captcha17()
         {
             //使用驗證碼類
             Captcha capt = new Captcha();
             Bitmap bitmap1 = capt.GetImage();
-            pictureBox1.Image = bitmap1;
-
+            pictureBox_captcha17.Image = bitmap1;
         }
 
         //用GDI+繪制驗證碼 ST
-        private void button13_Click(object sender, EventArgs e)
+        void draw_captcha18()
         {
             //用GDI+繪制驗證碼
             DrawCahpcha(RandomGeneratorStyle.NumberAndChar, 20);
@@ -1124,8 +1116,9 @@ namespace vcs_Draw_Captcha2
             //bmp.Save(curPage.Response.OutputStream, ImageFormat.Jpeg);//保存為輸出流，否則頁 面上顯示不出來
             //g.Dispose();//釋放掉該資源
 
-            pictureBox1.Image = bmp;
+            pictureBox_captcha18.Image = bmp;
         }
+
         //用GDI+繪制驗證碼 SP
     }
 

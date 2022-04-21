@@ -210,7 +210,7 @@ namespace vcs_Wallpaper1
         {
             if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
             {
-                this.Text = "無圖片";
+                richTextBox1.Text += "無圖片\n";
                 return;
             }
 
@@ -221,8 +221,7 @@ namespace vcs_Wallpaper1
             sel_picture = rand.Next(FInfo.Length);
 
             string filename = foldername + FInfo[sel_picture].Name;
-            this.Text = filename;
-            //richTextBox1.Text += "sel_picture = " + sel_picture.ToString() + "filename : " + filename + "\n";
+            richTextBox1.Text += "sel_picture = " + sel_picture.ToString() + "filename : " + filename + "\n";
 
             //讀取圖檔
             //pictureBox1.Image = Image.FromFile(filename);
@@ -242,7 +241,7 @@ namespace vcs_Wallpaper1
         private void timer_weather_Tick(object sender, EventArgs e)
         {
             cnt++;
-            this.Text += "第 " + cnt.ToString() + " 次";
+            richTextBox1.Text += "第 " + cnt.ToString() + " 次\n";
 
             Load_SatelliteImages();
         }
@@ -304,7 +303,8 @@ namespace vcs_Wallpaper1
 
                     pictureBox1.Image.Save(filename);
 
-                    SetWallPaper(filename, Style.Fit);  //等比例放大/縮小至螢幕最大
+                    //SetWallPaper(filename, Style.Fit);  //等比例放大/縮小至螢幕最大
+                    SetWallPaper(filename, Style.Center);  //原始比例顯示正中間那一塊
 
                     /*
                     richTextBox1.Text += "URL = " + mapURL + "\n";

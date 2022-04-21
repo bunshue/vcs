@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;
+
 namespace vcs_PictureCrop9
 {
     public partial class Form1 : Form
@@ -15,6 +17,11 @@ namespace vcs_PictureCrop9
         public Point secondPoint = new Point(0, 0);  //鼠標第二點 
         public bool begin = false;   //是否開始畫矩形 
         Graphics g;
+
+        int crop_x_st = 0;
+        int crop_y_st = 0;
+        int crop_w = 0;
+        int crop_h = 0;
 
         public Form1()
         {
@@ -66,8 +73,13 @@ namespace vcs_PictureCrop9
                 int maxX = Math.Max(firstPoint.X, secondPoint.X);
                 int maxY = Math.Max(firstPoint.Y, secondPoint.Y);
 
+                crop_x_st = minX;
+                crop_y_st = minY;
+                crop_w = maxX - minX;
+                crop_h = maxY - minY;
+
                 //畫矩形
-                g.DrawRectangle(new Pen(Color.Red), minX, minY, maxX - minX, maxY - minY);
+                g.DrawRectangle(new Pen(Color.Red), crop_x_st, crop_y_st, crop_w, crop_h);
             }
         }
 
@@ -78,6 +90,10 @@ namespace vcs_PictureCrop9
             pictureBox1.MouseMove -= new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseMove);
             pictureBox1.MouseUp -= new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseUp);
             button1.Text = "截圖";
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+            Rectangle cropArea = new Rectangle(crop_x_st, crop_y_st, crop_w, crop_h);    //要截取的區域大小
+            pictureBox2.Image = bitmap1.Clone(cropArea, PixelFormat.Format32bppArgb);
         }
     }
 }

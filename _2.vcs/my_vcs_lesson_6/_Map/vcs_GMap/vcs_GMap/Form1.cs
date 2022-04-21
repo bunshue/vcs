@@ -1669,38 +1669,37 @@ gMapControl1.Refresh();
 
 //MapProvider 大集合
 
-//gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-//gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-//gMapControl1.MapProvider = GMapProviders.GoogleTerrainMap; //地形圖
-//gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
+            //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+            //gMapControl1.MapProvider = GMapProviders.GoogleTerrainMap; //地形圖
+            //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
 
-//gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
-//gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
+            //gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
+            //gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
 
-//其他
-//gMapControl1.MapProvider = BingHybridMapProvider.Instance;	//可用
-//gMapControl1.MapProvider = BingMapProvider.Instance;
-//gMapControl1.MapProvider = GMapProviders.BingHybridMap; //Bing混合地圖
-//gMapControl1.MapProvider = GMapProviders.BingSatelliteMap;  //Bing衛星地圖
+            //其他 可用
+            //gMapControl1.MapProvider = BingMapProvider.Instance;    //英文
+            //gMapControl1.MapProvider = BingHybridMapProvider.Instance;	//Bing混和地圖
+            //gMapControl1.MapProvider = GMapProviders.BingSatelliteMap;  //Bing衛星地圖
+            //gMapControl1.MapProvider = GMapProviders.BingHybridMap;       //Bing混合地圖
+            //gMapControl1.MapProvider = GoogleMapProvider.Instance;
+            //gMapControl1.MapProvider = WikiMapiaMapProvider.Instance;
+            //gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;     //Google混合地圖
+            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance; //簡中地圖
 
-//不能用
-//gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
-//gMapControl1.MapProvider = GMapProviders.OviSatelliteMap; //不能用
-//gMapControl1.MapProvider = GMapProviders.OviHybridMap;  //不能用
-//gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; // 設置地圖源, 不能用
+            //不能用
+            //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
+            //gMapControl1.MapProvider = GMapProviders.OviSatelliteMap; //不能用
+            //gMapControl1.MapProvider = GMapProviders.OviHybridMap;  //不能用
+            //gMapControl1.MapProvider = OpenStreet4UMapProvider.Instance; //不能用
+            //gMapControl1.MapProvider = CloudMadeMapProvider.Instance;   //不能用
+            //gMapControl1.MapProvider = OpenStreetMapProvider.Instance;  //不能用
+            //gMapControl1.MapProvider = YahooMapProvider.Instance;//不能用
 
-//測試中
-//gMapControl1.MapProvider = CloudMadeMapProvider.Instance;
-//gMapControl1.MapProvider = GoogleMapProvider.Instance;
-//gMapControl1.MapProvider = OpenStreetMapProvider.Instance;
-//gMapControl1.MapProvider = WikiMapiaMapProvider.Instance;
-//gMapControl1.MapProvider = YahooMapProvider.Instance;
+            //測試中
 
-//gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;     //Google混合地圖
-//gMapControl1.MapProvider = GoogleChinaMapProvider.Instance;
-
-//語法
-//GeocodingProvider gp = GMapProviders.OpenStreetMap as GeocodingProvider;
+            //語法
+            //GeocodingProvider gp = GMapProviders.OpenStreetMap as GeocodingProvider;
 
 
 
