@@ -95,7 +95,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(1144, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(233, 682);
+            this.richTextBox1.Size = new System.Drawing.Size(197, 682);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -125,7 +125,7 @@
             // 
             // pictureBox15
             // 
-            this.pictureBox15.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox15.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox15.Location = new System.Drawing.Point(124, 175);
             this.pictureBox15.Name = "pictureBox15";
@@ -135,7 +135,7 @@
             // 
             // pictureBox14
             // 
-            this.pictureBox14.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox14.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox14.Location = new System.Drawing.Point(124, 118);
             this.pictureBox14.Name = "pictureBox14";
@@ -145,7 +145,7 @@
             // 
             // pictureBox13
             // 
-            this.pictureBox13.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox13.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox13.Location = new System.Drawing.Point(124, 62);
             this.pictureBox13.Name = "pictureBox13";
@@ -192,7 +192,7 @@
             // 
             // pictureBox16
             // 
-            this.pictureBox16.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox16.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox16.Location = new System.Drawing.Point(124, 231);
             this.pictureBox16.Name = "pictureBox16";
@@ -211,7 +211,7 @@
             // 
             // pictureBox12
             // 
-            this.pictureBox12.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox12.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox12.Location = new System.Drawing.Point(124, 6);
             this.pictureBox12.Name = "pictureBox12";
@@ -221,7 +221,7 @@
             // 
             // pictureBox17
             // 
-            this.pictureBox17.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox17.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox17.Location = new System.Drawing.Point(124, 287);
             this.pictureBox17.Name = "pictureBox17";
@@ -231,7 +231,7 @@
             // 
             // pictureBox18
             // 
-            this.pictureBox18.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox18.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox18.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox18.Location = new System.Drawing.Point(189, 6);
             this.pictureBox18.Name = "pictureBox18";
@@ -241,7 +241,7 @@
             // 
             // pictureBox19
             // 
-            this.pictureBox19.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox19.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox19.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox19.Location = new System.Drawing.Point(189, 62);
             this.pictureBox19.Name = "pictureBox19";
@@ -251,7 +251,7 @@
             // 
             // pictureBox20
             // 
-            this.pictureBox20.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox20.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox20.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox20.Location = new System.Drawing.Point(189, 118);
             this.pictureBox20.Name = "pictureBox20";
@@ -261,7 +261,7 @@
             // 
             // pictureBox21
             // 
-            this.pictureBox21.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox21.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox21.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox21.Location = new System.Drawing.Point(189, 175);
             this.pictureBox21.Name = "pictureBox21";
@@ -271,7 +271,7 @@
             // 
             // pictureBox22
             // 
-            this.pictureBox22.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox22.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox22.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox22.Location = new System.Drawing.Point(189, 231);
             this.pictureBox22.Name = "pictureBox22";
@@ -281,7 +281,7 @@
             // 
             // pictureBox23
             // 
-            this.pictureBox23.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox23.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox23.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox23.Location = new System.Drawing.Point(189, 287);
             this.pictureBox23.Name = "pictureBox23";
@@ -338,7 +338,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1436, 760);
+            this.ClientSize = new System.Drawing.Size(1467, 760);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.pictureBox09);

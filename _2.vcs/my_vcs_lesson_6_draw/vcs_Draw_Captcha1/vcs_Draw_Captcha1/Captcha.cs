@@ -6,7 +6,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace vcs_Draw_Captcha2
+namespace vcs_Draw_Captcha1
 {
     /// <summary>
     /// Captcha
