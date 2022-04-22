@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;   //for SecurityProtocolType
 using System.Runtime.InteropServices;
+using System.Drawing.Imaging;
 using Microsoft.Win32;
 
 namespace vcs_Wallpaper1
@@ -55,7 +56,7 @@ namespace vcs_Wallpaper1
         const int SPIF_UPDATEINIFILE = 0x01;
         const int SPIF_SENDWININICHANGE = 0x02;
 
-        private static void SetWallPaper(string wpaper, Style style)
+        private static void SetWallPaper(string filename, Style style)
         {
             using (RegistryKey myRegKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true))
             {
@@ -93,7 +94,7 @@ namespace vcs_Wallpaper1
 
             SystemParametersInfo(SPI_SETDESKWALLPAPER,
                     0,
-                    wpaper,
+                    filename,
                     SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
         }
 
@@ -233,6 +234,7 @@ namespace vcs_Wallpaper1
         {
             timer_weather_Tick(sender, e);
 
+            //看起來是相隔10分鐘更新一次
             //定時切換 衛星雲圖
             timer_weather.Enabled = true;
         }
@@ -245,6 +247,9 @@ namespace vcs_Wallpaper1
 
             Load_SatelliteImages();
         }
+
+        string satellite_image_version = "";
+        string satellite_image_version_old = "";
 
         void Load_SatelliteImages()
         {
@@ -299,18 +304,40 @@ namespace vcs_Wallpaper1
                 {   //可能會產生錯誤的程式區段
                     pictureBox1.Load(mapURL);
 
-                    string filename = Application.StartupPath + "\\SatelliteImage_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                    satellite_image_version = dt.Year + "-" + dt.Month.ToString("00") + "-" + dt.Day.ToString("00") + "-" + dt.Hour.ToString("00") + "-" + Minute.ToString("00");
 
-                    pictureBox1.Image.Save(filename);
+                    if (satellite_image_version == satellite_image_version_old)
+                    {
+                        richTextBox1.Text += "取得相同資料, 忽略\n";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "取得新資料, 更新\n";
 
-                    //SetWallPaper(filename, Style.Fit);  //等比例放大/縮小至螢幕最大
-                    SetWallPaper(filename, Style.Center);  //原始比例顯示正中間那一塊
+                        string filename1 = Application.StartupPath + "\\SatelliteImage1_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                        string filename2 = Application.StartupPath + "\\SatelliteImage2_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
 
-                    /*
-                    richTextBox1.Text += "URL = " + mapURL + "\n";
-                    richTextBox1.Text += "W = " + pictureBox1.Image.Size.Width.ToString() + "\n";
-                    richTextBox1.Text += "H = " + pictureBox1.Image.Size.Height.ToString() + "\n";
-                    */
+                        pictureBox1.Image.Save(filename1);
+
+                        Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);
+                        int W = bitmap1.Width;
+                        int H = bitmap1.Height;
+                        Graphics g = Graphics.FromImage(bitmap1);
+
+                        g.DrawString(satellite_image_version, new Font("標楷體", 50), new SolidBrush(Color.Red), new PointF(W * 2 / 3 - 130, H / 4 - 50));
+
+                        bitmap1.Save(filename2, ImageFormat.Jpeg);
+
+                        //SetWallPaper(filename, Style.Fit);  //等比例放大/縮小至螢幕最大
+                        SetWallPaper(filename2, Style.Center);  //原始比例顯示正中間那一塊
+
+                        /*
+                        richTextBox1.Text += "URL = " + mapURL + "\n";
+                        richTextBox1.Text += "W = " + pictureBox1.Image.Size.Width.ToString() + "\n";
+                        richTextBox1.Text += "H = " + pictureBox1.Image.Size.Height.ToString() + "\n";
+                        */
+                        satellite_image_version_old = satellite_image_version;
+                    }
                     break;
                 }
                 catch (Exception ex)

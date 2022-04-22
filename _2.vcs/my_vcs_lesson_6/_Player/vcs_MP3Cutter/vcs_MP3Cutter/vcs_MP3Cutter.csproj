@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{18716E56-862A-4DC3-B9C2-84EBFB1651C6}</ProjectGuid>
+    <ProjectGuid>{69B968AD-9191-4413-8AB9-FD462F658D10}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_DynamicAddRemoveControls8</RootNamespace>
-    <AssemblyName>vcs_DynamicAddRemoveControls8</AssemblyName>
+    <RootNamespace>vcs_MP3Cutter</RootNamespace>
+    <AssemblyName>vcs_MP3Cutter</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

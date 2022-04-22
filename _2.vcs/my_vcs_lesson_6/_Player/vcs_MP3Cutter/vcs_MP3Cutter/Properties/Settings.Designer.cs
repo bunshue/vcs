@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_DynamicAddRemoveControls8.Properties
+namespace vcs_MP3Cutter.Properties
 {
 
 

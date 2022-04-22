@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_DynamicAddRemoveControls8
+namespace vcs_MP3Cutter
 {
     static class Program
     {
