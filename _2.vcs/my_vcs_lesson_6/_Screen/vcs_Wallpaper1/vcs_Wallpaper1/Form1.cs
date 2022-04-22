@@ -92,10 +92,7 @@ namespace vcs_Wallpaper1
                 }
             }
 
-            SystemParametersInfo(SPI_SETDESKWALLPAPER,
-                    0,
-                    filename,
-                    SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
+            SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, filename, SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
         }
 
         int sel_picture = 0;
@@ -154,7 +151,7 @@ namespace vcs_Wallpaper1
 
             bt_folder.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
-            richTextBox1.Location = new Point(x_st + dx * 1+50, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0);
 
 
         }
@@ -236,6 +233,9 @@ namespace vcs_Wallpaper1
 
             //看起來是相隔10分鐘更新一次
             //定時切換 衛星雲圖
+            int update_time = 3;
+            richTextBox1.Text += "每隔 " + update_time.ToString() + " 分鐘 更新一次衛星雲圖\n";
+            timer_weather.Interval = update_time * 60 * 1000;
             timer_weather.Enabled = true;
         }
 
@@ -243,7 +243,7 @@ namespace vcs_Wallpaper1
         private void timer_weather_Tick(object sender, EventArgs e)
         {
             cnt++;
-            richTextBox1.Text += "第 " + cnt.ToString() + " 次\n";
+            richTextBox1.Text += "第 " + cnt.ToString() + " 次\t時間 : " + DateTime.Now.ToString() + "\t";
 
             Load_SatelliteImages();
         }
@@ -394,5 +394,5 @@ namespace vcs_Wallpaper1
             protocol_Tls11 = (SecurityProtocolType)768,
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
-
 }
+

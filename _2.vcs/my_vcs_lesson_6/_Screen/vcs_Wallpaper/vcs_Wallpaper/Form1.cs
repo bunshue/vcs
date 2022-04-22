@@ -37,12 +37,18 @@ namespace vcs_Wallpaper
         {
             // Load the list of files.
             if (Directory.Exists(dir_name))
+            {
                 FileNames = FindFiles(dir_name, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
+            }
             else
+            {
                 FileNames = new List<string>();
+            }
 
             for (int i = 0; i < FileNames.Count; i++)
+            {
                 richTextBox1.Text += "get file \t" + FileNames[i] + "\n";
+            }
 
             // Display the first picture.
             ChangeDesktopPicture();
@@ -154,3 +160,4 @@ namespace vcs_Wallpaper
         }
     }
 }
+
