@@ -32,79 +32,73 @@ namespace vcs_Draw_Captcha1
 
         void show_item_location()
         {
-            int W = 250;
-            //int H = 250;
+            int W = 300;
+            int H = 110;
 
-            pictureBox_captcha0.Size = new Size(W + 50, 110);
-            pictureBox_captcha1.Size = new Size(W + 50, 110);
-            pictureBox_captcha2.Size = new Size(W + 50, 110);
-            pictureBox_captcha3.Size = new Size(W + 50, 110);
-            pictureBox_captcha4.Size = new Size(W + 50, 110);
-            pictureBox_captcha5.Size = new Size(W + 50, 110);
-            pictureBox_captcha6.Size = new Size(W + 50, 110);
-            pictureBox_captcha7.Size = new Size(W + 50, 110);
-            pictureBox_captcha8.Size = new Size(W + 50, 110);
-            pictureBox_captcha9.Size = new Size(W + 50, 110);
-            pictureBox_captcha10.Size = new Size(W + 50, 110);
-            pictureBox_captcha11.Size = new Size(W + 50, 110);
-
+            pictureBox00.Size = new Size(W, H);
+            pictureBox01.Size = new Size(W, H);
+            pictureBox02.Size = new Size(W, H);
+            pictureBox03.Size = new Size(W, H);
+            pictureBox04.Size = new Size(W, H);
+            pictureBox05.Size = new Size(W, H);
+            pictureBox06.Size = new Size(W, H);
+            pictureBox07.Size = new Size(W, H);
+            pictureBox08.Size = new Size(W, H);
+            pictureBox09.Size = new Size(W, H);
+            pictureBox10.Size = new Size(W, H);
+            pictureBox11.Size = new Size(W, H);
+            pictureBox12.Size = new Size(W, H);
+            pictureBox13.Size = new Size(W, H);
+            pictureBox14.Size = new Size(W, H);
+            pictureBox15.Size = new Size(W, H);
+            pictureBox16.Size = new Size(W, H);
+            pictureBox17.Size = new Size(W, H);
+            pictureBox18.Size = new Size(W, H);
+            pictureBox19.Size = new Size(W, H);
+            pictureBox20.Size = new Size(W, H);
+            pictureBox21.Size = new Size(W, H);
+            pictureBox22.Size = new Size(W, H);
+            pictureBox23.Size = new Size(W, H);
 
             int x_st;
             int y_st;
             int dx;
             int dy;
 
-            x_st = 20;
-            y_st = 20;
-            dx = 220;
-            dy = 70;
+            x_st = 10;
+            y_st = 10;
+            dx = W + 10;
+            dy = H + 10;
 
-            pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            pictureBox4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            pictureBox5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            pictureBox6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            pictureBox7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            pictureBox8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            pictureBox00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            pictureBox04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            pictureBox05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
-            lb_captcha0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            lb_captcha1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            lb_captcha2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            lb_captcha3.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            lb_captcha4.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            lb_captcha5.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            lb_captcha6.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            lb_captcha7.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            lb_captcha8.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            lb_captcha0.Text = "";
-            lb_captcha1.Text = "";
-            lb_captcha2.Text = "";
-            lb_captcha3.Text = "";
-            lb_captcha4.Text = "";
-            lb_captcha5.Text = "";
-            lb_captcha6.Text = "";
-            lb_captcha7.Text = "";
-            lb_captcha8.Text = "";
+            pictureBox06.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox07.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox08.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            pictureBox09.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            pictureBox10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            pictureBox11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
 
-            dx = 180;
-            dy = 120;
-            pictureBox_captcha0.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox_captcha1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            pictureBox_captcha2.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            pictureBox_captcha3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            pictureBox_captcha4.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            pictureBox_captcha5.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            dx = 230;
-            pictureBox_captcha6.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            pictureBox_captcha7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            pictureBox_captcha8.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            pictureBox_captcha9.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            pictureBox_captcha10.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            pictureBox_captcha11.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            pictureBox12.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox14.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            pictureBox15.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox16.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            pictureBox17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
 
-            richTextBox1.Location = new Point(x_st + dx * 4 + 80, y_st + dy * 0);
+            pictureBox18.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox19.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            pictureBox20.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            pictureBox21.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            pictureBox22.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            pictureBox23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -115,21 +109,34 @@ namespace vcs_Draw_Captcha1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            CreateImage1();     //for pictureBox1
-            CodeImage(CheckCode(), pictureBox3);    //for //for pictureBox3
-            CreateImage4();    //for pictureBox4
-            CreateImage5();    //for pictureBox5
-            CreateImage6();    //for pictureBox6
-
-            draw_captcha1();    //for pictureBox_captcha1
-            draw_captcha2();    //for pictureBox_captcha2
-            draw_captcha3();    //for pictureBox_captcha3
-            draw_captcha7();    //for pictureBox_captcha7
+            draw_captcha00();   //for pictureBox00
+            draw_captcha01();   //for pictureBox01
+            draw_captcha02();   //for pictureBox02
+            draw_captcha03();   //for pictureBox03
+            draw_captcha04();   //for pictureBox04
+            draw_captcha05();   //for pictureBox05
+            draw_captcha06();   //for pictureBox06
+            draw_captcha07();   //for pictureBox07
+            draw_captcha08();   //for pictureBox08
         }
 
+        //Captcha 00 ST
+        private void draw_captcha00()
+        {
+            VryImgGen captcha = new VryImgGen();
+            captcha.Length = 10;
+            string code = captcha.CreateVerifyCode();
+            //richTextBox1.Text += code + "\n";
+
+            Bitmap bitmap1 = captcha.CreateImage(code);
+            pictureBox00.Image = bitmap1;
+        }
+        //Captcha 00 SP
+
+        //Captcha 01 ST
         //中文驗證法碼 ST
         public string txt = "";
-        private void CreateImage1()
+        private void draw_captcha01()
         {
             //获取GB2312编码页（表） 
             Encoding gb = Encoding.GetEncoding("gb2312");
@@ -147,7 +154,7 @@ namespace vcs_Draw_Captcha1
                 return;
             }
 
-            lb_captcha1.Text = txt;
+            //lb_captcha1.Text = txt;
 
             Bitmap image = new Bitmap((int)Math.Ceiling((txt.Length * 20.5)) * 3, 22 * 3);
             Graphics g = Graphics.FromImage(image);
@@ -175,7 +182,7 @@ namespace vcs_Draw_Captcha1
                 }
                 //画图片的边框线
                 g.DrawRectangle(new Pen(Color.Silver), 0, 0, image.Width - 1, image.Height - 1);
-                pictureBox1.Image = image;
+                pictureBox01.Image = image;
             }
             catch { }
         }
@@ -243,105 +250,10 @@ namespace vcs_Draw_Captcha1
             return bytes;
         }
         //中文驗證法碼 SP
+        //Captcha 01 SP
 
-        //英數驗證碼 ST
-        private string CheckCode()
-        {
-            int number;
-            char code;
-            string checkCode = String.Empty;
-
-            Random random = new Random();
-
-            for (int i = 0; i < 4; i++)
-            {
-                number = random.Next();
-
-                if (number % 2 == 0)
-                    code = (char)('0' + (char)(number % 10));
-                else
-                    code = (char)('A' + (char)(number % 26));
-
-                checkCode += " " + code.ToString();
-            }
-            return checkCode;
-        }
-
-        private void CodeImage(string checkCode, PictureBox pbx)
-        {
-            if (checkCode == null || checkCode.Trim() == String.Empty)
-                return;
-
-            Bitmap image = new Bitmap((int)Math.Ceiling((checkCode.Length * 20.0)), 50);
-            Graphics g = Graphics.FromImage(image);
-
-            try
-            {
-                //產生隨機產生器
-                Random random = new Random();
-                //清空圖片背景色
-                g.Clear(Color.White);
-                //畫圖片的背景噪音線
-                for (int i = 0; i < 3; i++)
-                {
-                    int x1 = random.Next(image.Width);
-                    int x2 = random.Next(image.Width);
-                    int y1 = random.Next(image.Height);
-                    int y2 = random.Next(image.Height);
-                    g.DrawLine(new Pen(Color.Black), x1, y1, x2, y2);
-                }
-                Font font = new Font("Arial", 24, (FontStyle.Bold));
-                g.DrawString(checkCode, font, new SolidBrush(Color.Red), 2, 2);
-
-                //畫圖片的前景噪音點
-                for (int i = 0; i < 150; i++)
-                {
-                    int x = random.Next(image.Width);
-                    int y = random.Next(image.Height);
-
-                    image.SetPixel(x, y, Color.FromArgb(random.Next()));
-                }
-                //畫圖片的邊框線
-                g.DrawRectangle(new Pen(Color.Silver), 0, 0, image.Width - 1, image.Height - 1);
-                pbx.Width = image.Width;
-                pbx.Height = image.Height;
-                pbx.BackgroundImage = image;
-            }
-            catch
-            { }
-        }
-
-        //英數驗證碼 SP
-
-
-        //6種 Captcha ST
-
-        void draw_captcha1()
-        {
-            string txt = "This is a lion-mouse";
-
-            Bitmap bm = MakeCaptchaImge1(txt,
-                50, 70,
-                pictureBox_captcha1.ClientSize.Width,
-                pictureBox_captcha1.ClientSize.Height);
-            pictureBox_captcha1.Image = bm;
-        }
-
-        void draw_captcha2()
-        {
-            string txt = "This is a lion-mouse";
-
-            using (Font the_font = new Font("Times New Roman", 30))
-            {
-                pictureBox_captcha2.Image = MakeCaptchaImage2(txt,
-                    pictureBox_captcha2.ClientSize.Width,
-                    pictureBox_captcha2.ClientSize.Height,
-                    the_font, Brushes.Blue);
-            }
-        }
-
-        //產生驗證圖片 ST
-        void draw_captcha3()
+        //Captcha 02 ST
+        void draw_captcha02()
         {
             //產生驗證圖片
 
@@ -436,9 +348,176 @@ namespace vcs_Draw_Captcha1
             {
                 g.FillRectangle(bb, rr.Next(ww), rr.Next(hh), 2, 2);
             }
-            pictureBox_captcha3.Image = vaildNumImage;
+            pictureBox02.Image = vaildNumImage;
         }
-        //產生驗證圖片 SP
+        //Captcha 02 SP
+
+        //Captcha 03 ST
+        private void draw_captcha03()
+        {
+            CodeImage(CheckCode(), pictureBox03);    //for //for pictureBox03
+        }
+
+        private string CheckCode()
+        {
+            int number;
+            char code;
+            string checkCode = String.Empty;
+
+            Random random = new Random();
+
+            for (int i = 0; i < 4; i++)
+            {
+                number = random.Next();
+
+                if (number % 2 == 0)
+                    code = (char)('0' + (char)(number % 10));
+                else
+                    code = (char)('A' + (char)(number % 26));
+
+                checkCode += " " + code.ToString();
+            }
+            return checkCode;
+        }
+
+        private void CodeImage(string checkCode, PictureBox pbx)
+        {
+            if (checkCode == null || checkCode.Trim() == String.Empty)
+                return;
+
+            Bitmap image = new Bitmap((int)Math.Ceiling((checkCode.Length * 20.0)), 50);
+            Graphics g = Graphics.FromImage(image);
+
+            try
+            {
+                //產生隨機產生器
+                Random random = new Random();
+                //清空圖片背景色
+                g.Clear(Color.White);
+                //畫圖片的背景噪音線
+                for (int i = 0; i < 3; i++)
+                {
+                    int x1 = random.Next(image.Width);
+                    int x2 = random.Next(image.Width);
+                    int y1 = random.Next(image.Height);
+                    int y2 = random.Next(image.Height);
+                    g.DrawLine(new Pen(Color.Black), x1, y1, x2, y2);
+                }
+                Font font = new Font("Arial", 24, (FontStyle.Bold));
+                g.DrawString(checkCode, font, new SolidBrush(Color.Red), 2, 2);
+
+                //畫圖片的前景噪音點
+                for (int i = 0; i < 150; i++)
+                {
+                    int x = random.Next(image.Width);
+                    int y = random.Next(image.Height);
+
+                    image.SetPixel(x, y, Color.FromArgb(random.Next()));
+                }
+                //畫圖片的邊框線
+                g.DrawRectangle(new Pen(Color.Silver), 0, 0, image.Width - 1, image.Height - 1);
+                pbx.Width = image.Width;
+                pbx.Height = image.Height;
+                pbx.BackgroundImage = image;
+            }
+            catch
+            { }
+        }
+        //Captcha 03 SP
+
+        //Captcha 04 ST
+        void draw_captcha04()
+        {
+            string code;
+            Bitmap bitmap1 = VerifyCodeHelper.CreateVerifyCodeBmp(out code);
+            Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
+
+            //lb_captcha4.Text = code;
+            pictureBox04.Image = bitmap1;
+            //pictureBox4.Image = bitmap2;  //改變大小
+        }
+        //Captcha 04 SP
+
+        //Captcha 05 ST
+
+        //Captcha 05 SP
+
+
+        //Captcha 06 ST
+        void draw_captcha06()
+        {
+            //製作驗證碼3
+            //C#生成驗證碼例子及代碼
+
+            Random r = new Random();
+            string str = "";
+            for (int i = 0; i < 5; i++)
+            {
+                int rNumber = r.Next(0, 10);
+                str += rNumber;
+            }
+
+            //創建一個圖片對象
+            Bitmap bmp = new Bitmap(120, 25);
+            //創建GDI對象
+            Graphics g = Graphics.FromImage(bmp);
+            // MessageBox.Show(str);
+
+            string[] fonts = { "黑體", "楷體", "微軟雅黑", "宋體", "隸書" };
+            Color[] colors = { Color.Red, Color.Yellow, Color.Blue, Color.Black, Color.Green };
+
+            for (int i = 0; i < 5; i++)
+            {
+                Point p = new Point(i * 20, 0);//0,0 20 0
+                g.DrawString(str[i].ToString(), new Font(fonts[r.Next(0, 5)], 20, FontStyle.Bold), new SolidBrush(colors[r.Next(0, 5)]), p);
+            }
+
+            //畫線
+            for (int i = 0; i < 25; i++)
+            {
+                Point p1 = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
+                Point p2 = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
+                g.DrawLine(new Pen(Color.Green), p1, p2);
+            }
+
+            //畫像素顆粒
+            for (int i = 0; i < 100; i++)
+            {
+                Point p = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
+                bmp.SetPixel(p.X, p.Y, Color.Black);
+            }
+
+            //把畫好的圖片放到PictureBox上
+            pictureBox06.Image = bmp;
+        }
+        //Captcha 06 SP
+
+        //Captcha 07 ST
+        void draw_captcha07()
+        {
+            string txt = "This is a lion-mouse";
+
+            Bitmap bm = MakeCaptchaImge1(txt,
+                50, 70,
+                pictureBox13.ClientSize.Width,
+                pictureBox13.ClientSize.Height);
+            pictureBox07.Image = bm;
+        }
+        //Captcha 07 SP
+
+        //Captcha 08 ST
+        void draw_captcha08()
+        {
+            string txt = "This is a lion-mouse";
+
+            using (Font the_font = new Font("Times New Roman", 30))
+            {
+                pictureBox08.Image = MakeCaptchaImage2(txt,
+                    pictureBox14.ClientSize.Width,
+                    pictureBox14.ClientSize.Height,
+                    the_font, Brushes.Blue);
+            }
+        }
 
         private Random Rand = new Random();
 
@@ -550,38 +629,7 @@ namespace vcs_Draw_Captcha1
             return bm;
         }
 
-        void CreateImage4()
-        {
-            string code;
-            Bitmap bitmap1 = VerifyCodeHelper.CreateVerifyCodeBmp(out code);
-            Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
-
-            lb_captcha4.Text = code;
-            pictureBox4.Image = bitmap1;
-            //pictureBox4.Image = bitmap2;  //改變大小
-
-            /*
-            //自動檔名 與 存檔語法
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-            try
-            {
-                //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                bitmap1.Save(filename, ImageFormat.Bmp);
-                //bitmap1.Save(@file3, ImageFormat.Png);
-
-                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-            */
-        }
-
-        void CreateImage5()
+        void draw_captcha05()
         {
             string ccc = "this is a lion-mouse";
             CreateImage(ccc);
@@ -630,67 +678,7 @@ namespace vcs_Draw_Captcha1
 
             g.Dispose();
 
-            pictureBox5.Image = bitmap1;
-        }
-
-        void CreateImage6()
-        {
-            //製作驗證碼3
-            //C#生成驗證碼例子及代碼
-
-            Random r = new Random();
-            string str = "";
-            for (int i = 0; i < 5; i++)
-            {
-                int rNumber = r.Next(0, 10);
-                str += rNumber;
-            }
-
-            //創建一個圖片對象
-            Bitmap bmp = new Bitmap(120, 25);
-            //創建GDI對象
-            Graphics g = Graphics.FromImage(bmp);
-            // MessageBox.Show(str);
-
-            string[] fonts = { "黑體", "楷體", "微軟雅黑", "宋體", "隸書" };
-            Color[] colors = { Color.Red, Color.Yellow, Color.Blue, Color.Black, Color.Green };
-
-            for (int i = 0; i < 5; i++)
-            {
-                Point p = new Point(i * 20, 0);//0,0 20 0
-                g.DrawString(str[i].ToString(), new Font(fonts[r.Next(0, 5)], 20, FontStyle.Bold), new SolidBrush(colors[r.Next(0, 5)]), p);
-            }
-
-            //畫線
-            for (int i = 0; i < 25; i++)
-            {
-                Point p1 = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
-                Point p2 = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
-                g.DrawLine(new Pen(Color.Green), p1, p2);
-            }
-
-            //畫像素顆粒
-            for (int i = 0; i < 100; i++)
-            {
-                Point p = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
-                bmp.SetPixel(p.X, p.Y, Color.Black);
-            }
-
-            //把畫好的圖片放到PictureBox上
-            pictureBox6.Image = bmp;
-        }
-        //6種 Captcha SP
-
-
-        void draw_captcha7()
-        {
-            VryImgGen captcha = new VryImgGen();
-            captcha.Length = 10;
-            string code = captcha.CreateVerifyCode();
-            //richTextBox1.Text += code + "\n";
-
-            Bitmap bitmap1 = captcha.CreateImage(code);
-            pictureBox_captcha7.Image = bitmap1;
+            pictureBox05.Image = bitmap1;
         }
     }
 

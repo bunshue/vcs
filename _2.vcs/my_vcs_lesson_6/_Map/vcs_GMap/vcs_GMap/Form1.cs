@@ -124,9 +124,9 @@ namespace vcs_GMap
             x_st = 1010;
             y_st = 10;
             groupBox1.Location = new Point(x_st, y_st);
-            groupBox2.Location = new Point(x_st+120, y_st);
+            groupBox2.Location = new Point(x_st + 240, y_st);
 
-            x_st = 1250;
+            x_st = 1370;
             y_st = 12;
             dy = 25;
             checkBox1.Location = new Point(x_st, y_st + dy * 0);
@@ -146,6 +146,21 @@ namespace vcs_GMap
             radioButton5.Location = new Point(x_st, y_st + dy * 4);
             radioButton6.Location = new Point(x_st, y_st + dy * 5);
             radioButton7.Location = new Point(x_st, y_st + dy * 6);
+
+            radioButton1.Text = "正中地圖";
+            radioButton2.Text = "簡中地圖";
+            radioButton3.Text = "地形圖";
+            radioButton4.Text = "衛星地圖";
+            radioButton5.Text = "混合地圖";
+            radioButton6.Text = "腳踏車";
+            radioButton7.Text = "英文";
+            radioButton8.Text = "Bing混和地圖";
+            radioButton9.Text = "Bing衛星地圖";
+            radioButton10.Text = "Bing混合地圖";
+            radioButton11.Text = "Google";
+            radioButton12.Text = "WikiMapia";
+            radioButton13.Text = "Google混合地圖";
+            radioButton14.Text = "簡中地圖";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -835,8 +850,35 @@ namespace vcs_GMap
             }
             else if (radioButton7.Checked == true)
             {
-                //其他
-                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+                gMapControl1.MapProvider = BingMapProvider.Instance;    //英文
+            }
+            else if (radioButton8.Checked == true)
+            {
+                gMapControl1.MapProvider = BingHybridMapProvider.Instance;	//Bing混和地圖
+            }
+            else if (radioButton9.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.BingSatelliteMap;  //Bing衛星地圖
+            }
+            else if (radioButton10.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.BingHybridMap;       //Bing混合地圖
+            }
+            else if (radioButton11.Checked == true)
+            {
+                gMapControl1.MapProvider = GoogleMapProvider.Instance;
+            }
+            else if (radioButton12.Checked == true)
+            {
+                gMapControl1.MapProvider = WikiMapiaMapProvider.Instance;
+            }
+            else if (radioButton13.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;     //Google混合地圖
+            }
+            else if (radioButton14.Checked == true)
+            {
+                gMapControl1.MapProvider = GoogleChinaMapProvider.Instance; //簡中地圖
             }
         }
 
@@ -1666,26 +1708,42 @@ gMapControl1.Refresh();
 
  * 
  */
-
+/*
 //MapProvider 大集合
-
+            1
             //gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            2
             //gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+            3
             //gMapControl1.MapProvider = GMapProviders.GoogleTerrainMap; //地形圖
+            4
             //gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
-
+            5
             //gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
+            6
             //gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
+            7
+            //gMapControl1.MapProvider = BingMapProvider.Instance;    //英文
+            8
+            //gMapControl1.MapProvider = BingHybridMapProvider.Instance;	//Bing混和地圖
+            9
+            //gMapControl1.MapProvider = GMapProviders.BingSatelliteMap;  //Bing衛星地圖
+            10
+            //gMapControl1.MapProvider = GMapProviders.BingHybridMap;       //Bing混合地圖
+            11
+            //gMapControl1.MapProvider = GoogleMapProvider.Instance;
+            12
+            //gMapControl1.MapProvider = WikiMapiaMapProvider.Instance;
+            13
+            //gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;     //Google混合地圖
+
+            14
+            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance; //簡中地圖
 
             //其他 可用
-            //gMapControl1.MapProvider = BingMapProvider.Instance;    //英文
-            //gMapControl1.MapProvider = BingHybridMapProvider.Instance;	//Bing混和地圖
-            //gMapControl1.MapProvider = GMapProviders.BingSatelliteMap;  //Bing衛星地圖
-            //gMapControl1.MapProvider = GMapProviders.BingHybridMap;       //Bing混合地圖
-            //gMapControl1.MapProvider = GoogleMapProvider.Instance;
-            //gMapControl1.MapProvider = WikiMapiaMapProvider.Instance;
-            //gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;     //Google混合地圖
-            //gMapControl1.MapProvider = GoogleChinaMapProvider.Instance; //簡中地圖
+
+*/
+//gMapControl1.MapProvider = GoogleChinaMapProvider.Instance; //簡中地圖
 
             //不能用
             //gMapControl1.MapProvider = GMapProviders.OpenStreetMap;    //不能用
