@@ -44,12 +44,17 @@ namespace vcs_GMap
         double longitude = 121.003; //經度
 
         //量測距離用
+        int flag_measure_distance = 0;  //0 : 無量測, 1 : 量測距離 單程, 2 : 量測距離 連續
         bool flag_measure_first_point = false;
         PointLatLng pt1 = new PointLatLng(0, 0);
         PointLatLng pt2 = new PointLatLng(0, 0);
         double total_distance = 0;
 
         bool flag_fullscreen = false;
+
+        private const int ICON_LINEWDITH = 5; //設定按鈕畫線線寬
+        private const int ICON_W = 50; //設定按鈕大小 W
+        private const int ICON_H = 50; //設定按鈕大小 H
 
         public Form1()
         {
@@ -131,7 +136,11 @@ namespace vcs_GMap
             dy = 25;
             checkBox1.Location = new Point(x_st, y_st + dy * 0);
             checkBox2.Location = new Point(x_st, y_st + dy * 1);
-            checkBox3.Location = new Point(x_st, y_st + dy * 2);
+
+            rb_km.Location = new Point(x_st, y_st + dy * 2);
+            rb_m.Location = new Point(x_st+45, y_st + dy * 2);
+            lb_distance.Location = new Point(x_st + 90, y_st + dy * 2);
+
             comboBox1.Location = new Point(x_st, y_st + dy * 3);
             btn_draw_profile.Location = new Point(x_st + 30, y_st + dy * 4);
 
@@ -161,6 +170,7 @@ namespace vcs_GMap
             radioButton12.Text = "WikiMapia";
             radioButton13.Text = "Google混合地圖";
             radioButton14.Text = "簡中地圖";
+            lb_distance.Text = "";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -215,7 +225,10 @@ namespace vcs_GMap
             gMapControl1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
             gMapControl1.MouseClick += new MouseEventHandler(gMapControl1_MouseClick);
             gMapControl1.MouseDoubleClick += new MouseEventHandler(gMapControl1_MouseDoubleClick);
+            gMapControl1.Paint += new PaintEventHandler(gMapControl1_Paint);
             //gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
+            gMapControl1.KeyDown += new KeyEventHandler(gMapControl1_KeyDown);
+            this.ActiveControl = this.gMapControl1;//选中pictureBox1，不然没法触发事件
 
             gMapControl1.Overlays.Add(markersOverlay);  //添加 圖標 Markers 的圖層
 
@@ -234,7 +247,7 @@ namespace vcs_GMap
 
             //GMapProvider.Language = LanguageType.ChineseSimplified; //设置地图默认语言
             GMapProvider.Language = LanguageType.ChineseTraditional; //设置地图默认语言
-            GMapProvider.TimeoutMs = 5000;//地图加载完成后设置timeoutms为1000(或者其他大于领零的数值自己尝试0)
+            GMapProvider.TimeoutMs = 10000;//地图加载完成后设置timeoutms为1000(或者其他大于领零的数值自己尝试0)
         }
 
         void setup_trackBar()
@@ -256,6 +269,11 @@ namespace vcs_GMap
         int cnt = 0;
         void gMapControl1_MouseClick(object sender, MouseEventArgs e)
         {
+            if ((e.Location.X > (gMapControl1.Size.Width - ICON_W)) && (e.Location.Y < ICON_H))
+            {
+                Application.Exit();
+            }
+
             if (e.Button == MouseButtons.Right)
             {
                 if (checkBox2.Checked == true)   //滑鼠右鍵畫標記
@@ -280,11 +298,47 @@ namespace vcs_GMap
 
         void gMapControl1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (flag_fullscreen == true)
+            if ((e.Location.X > (gMapControl1.Size.Width - ICON_W)) && (e.Location.Y < ICON_H))
+            {
+                Application.Exit();
+            }
+
+            if (flag_fullscreen == false)
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    flag_fullscreen = true;
+                    toolStripMenuItem1.Text = "離開全螢幕";
+
+                    //全螢幕
+                    //按Alt+F4關閉程式
+
+                    //隱藏 除 gMapControl1 外所有控件  全螢幕顯示
+
+                    //最大化螢幕
+                    this.FormBorderStyle = FormBorderStyle.None;
+                    this.WindowState = FormWindowState.Maximized;
+
+                    gMapControl1.Dock = DockStyle.Fill;   //將控件全屏顯示
+
+                    for (int i = 0; i < this.Controls.Count; i++)
+                    {
+                        //richTextBox1.Text += "Name: " + this.Controls[i].Name + "\t";
+                        //richTextBox1.Text += "Text: " + this.Controls[i].Text + "\t";
+                        //richTextBox1.Text += "這項是：" + this.Controls[i].GetType() + "\n";
+                        if (this.Controls[i].Name != "gMapControl1")
+                        {
+                            this.Controls[i].Visible = false;
+                        }
+                    }
+                }
+            }
+            else if (flag_fullscreen == true)
             {
                 if (e.Button == MouseButtons.Left)
                 {
                     flag_fullscreen = false;
+                    toolStripMenuItem1.Text = "全螢幕";
 
                     //離開全螢幕
                     this.FormBorderStyle = FormBorderStyle.Sizable;
@@ -301,6 +355,35 @@ namespace vcs_GMap
                         }
                     }
                 }
+            }
+        }
+
+        void gMapControl1_Paint(object sender, PaintEventArgs e)
+        {
+            int width = ICON_LINEWDITH; //設定按鈕畫線線寬
+            int w = ICON_W; //設定按鈕大小 W
+            int h = ICON_H; //設定按鈕大小 H
+
+            Pen p = new Pen(Color.Red, width);
+            int x_st = gMapControl1.Size.Width - ICON_W;
+            int y_st = 0;
+            e.Graphics.DrawRectangle(p, x_st - width, y_st, ICON_W, ICON_H);
+            e.Graphics.DrawLine(p, x_st - width, y_st, x_st + ICON_W - width, y_st + ICON_H);
+            e.Graphics.DrawLine(p, x_st + ICON_W - width, y_st, x_st - width, y_st + ICON_H);
+        }
+
+        void gMapControl1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == Keys.Return) || (e.KeyCode == Keys.Escape))
+            {
+                //richTextBox1.Text += "你按了" + e.KeyCode.ToString() + "\n";
+
+                flag_measure_distance = 0;  //0 : 無量測, 1 : 量測距離 單程, 2 : 量測距離 連續
+                flag_measure_first_point = false;
+            }
+            else
+            {
+                richTextBox1.Text += "你按了" + e.KeyCode.ToString() + "\n";
             }
         }
 
@@ -550,8 +633,17 @@ namespace vcs_GMap
             gMapControl1.ZoomAndCenterRoute(playRoute); //將playRoute這條路初始為檢視中心，顯示時以playRoute為中心顯示
 
             //算距離
-            string dist = ((float)playRoute.Distance * 1000f).ToString("0.##") + " m";
+            string dist = "";
+            if (rb_km.Checked == true)  //公里
+            {
+                dist = ((float)playRoute.Distance * 1f).ToString("0.##") + " 公里";
+            }
+            else
+            {
+                dist = ((float)playRoute.Distance * 1000f).ToString("0.##") + " 公尺";
+            }
             richTextBox1.Text += "總距離 : " + dist + "\n";
+            lb_distance.Text = dist;
 
             /*
             richTextBox1.Text += "畫起點\n";
@@ -676,7 +768,13 @@ namespace vcs_GMap
         void mapControl_MouseDown(object sender, MouseEventArgs e)
         {
             richTextBox1.Text += "MouseDown\n";
-            if (e.Button == MouseButtons.Left)
+
+            if (e.Button == MouseButtons.Right) //檢查滑鼠右鍵
+            {
+                contextMenuStrip1.Show(gMapControl1, e.Location);   //顯示ContextMenu
+                return;
+            }
+            else if (e.Button == MouseButtons.Left)
             {
                 PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
                 //richTextBox1.Text += "控件座標(" + e.X.ToString() + ", " + e.Y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
@@ -685,7 +783,8 @@ namespace vcs_GMap
                     line_point.Add(point);
                     draw_line_point();
                 }
-                else if (checkBox3.Checked == true)   //滑鼠左鍵量測距離
+
+                if (flag_measure_distance > 0)  //0 : 無量測, 1 : 量測距離 單程, 2 : 量測距離 連續
                 {
                     line_point.Add(point);
                     draw_line_point();
@@ -699,10 +798,31 @@ namespace vcs_GMap
                         pt2 = point;
                         double distance = getDistance(pt1, pt2);
                         total_distance += distance;
-                        string dist1 = ((float)distance * 1000f).ToString("0.##");
-                        string dist2 = ((float)total_distance * 1000f).ToString("0.##");
-                        richTextBox1.Text += "量測距離 直線 : " + dist1 + " 公尺\t總距離 : " + dist2 + " 公尺\n";
+
+                        //算直線距離
+                        string dist1 = "";
+                        string dist2 = "";
+
+                        if (rb_km.Checked == true)  //公里
+                        {
+                            dist1 = ((float)distance * 1f).ToString("0.##") + " 公里";
+                            dist2 = ((float)total_distance * 1f).ToString("0.##") + " 公里";
+                        }
+                        else
+                        {
+                            dist1 = ((float)distance * 1000f).ToString("0.##") + " 公尺";
+                            dist2 = ((float)total_distance * 1000f).ToString("0.##") + " 公尺";
+                        }
+
+                        richTextBox1.Text += "量測距離 直線 : " + dist1 + "\t總距離 : " + dist2 + "\n";
+                        lb_distance.Text = dist2;
                         pt1 = point;
+
+                        if (flag_measure_distance == 1) //0 : 無量測, 1 : 量測距離 單程, 2 : 量測距離 連續
+                        {
+                            flag_measure_distance = 0;
+                            flag_measure_first_point = false;
+                        }
                     }
                 }
             }
@@ -972,8 +1092,19 @@ namespace vcs_GMap
             PointLatLng pt1 = new PointLatLng(24.839008233119472, 121.00927283881413);
             PointLatLng pt2 = new PointLatLng(24.840091217715898, 120.99410979639839);
             double distance = getDistance(pt1, pt2);
-            string dist1 = ((float)distance * 1000f).ToString("0.##");
-            richTextBox1.Text += "量測距離 直線 : " + dist1 + " 公尺\n";
+
+            //算直線距離
+            string dist1 = "";
+            if (rb_km.Checked == true)  //公里
+            {
+                dist1 = ((float)distance * 1f).ToString("0.##") + " 公里";
+            }
+            else
+            {
+                dist1 = ((float)distance * 1000f).ToString("0.##") + " 公尺";
+            }
+            richTextBox1.Text += "量測距離 直線 : " + dist1 + "\n";
+            lb_distance.Text = dist1;
 
             //量測距離 曲線
             List<PointLatLng> points = new List<PointLatLng>();
@@ -1009,9 +1140,19 @@ namespace vcs_GMap
             points.Add(new PointLatLng(24.8475778605281, 120.995864868164));
             points.Add(new PointLatLng(24.8492913240205, 120.99663734436));
             GMapRoute playRoute = new GMapRoute(points, "my route");
+
             //算曲線距離
-            string dist2 = ((float)playRoute.Distance * 1000f).ToString("0.##");
-            richTextBox1.Text += "量測距離 曲線 : " + dist2 + " 公尺\n";
+            string dist2 = "";
+            if (rb_km.Checked == true)  //公里
+            {
+                dist2 = ((float)playRoute.Distance * 1f).ToString("0.##") + " 公里";
+            }
+            else
+            {
+                dist2 = ((float)playRoute.Distance * 1000f).ToString("0.##") + " 公尺";
+            }
+            richTextBox1.Text += "量測距離 直線 : " + dist2 + "\n";
+            lb_distance.Text = dist2;
         }
 
         public double getDistance(PointLatLng p1, PointLatLng p2)
@@ -1186,29 +1327,6 @@ namespace vcs_GMap
 
         private void button17_Click(object sender, EventArgs e)
         {
-            flag_fullscreen = true;
-
-            //全螢幕
-            //按Alt+F4關閉程式
-
-            //隱藏 除 gMapControl1 外所有控件  全螢幕顯示
-
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-
-            gMapControl1.Dock = DockStyle.Fill;   //將控件全屏顯示
-
-            for (int i = 0; i < this.Controls.Count; i++)
-            {
-                //richTextBox1.Text += "Name: " + this.Controls[i].Name + "\t";
-                //richTextBox1.Text += "Text: " + this.Controls[i].Text + "\t";
-                //richTextBox1.Text += "這項是：" + this.Controls[i].GetType() + "\n";
-                if (this.Controls[i].Name != "gMapControl1")
-                {
-                    this.Controls[i].Visible = false;
-                }
-            }
         }
 
         private void btn_draw_profile_Click(object sender, EventArgs e)
@@ -1348,15 +1466,6 @@ namespace vcs_GMap
             markersOverlay.Markers.Clear();
         }
 
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            //滑鼠左鍵量測距離
-            flag_measure_first_point = false;
-            total_distance = 0;
-            line_point.Clear();
-            draw_line_point();
-        }
-
         void draw_line_point()
         {
             GMapRoute playRoute = new GMapRoute(line_point, "my route");
@@ -1487,7 +1596,6 @@ namespace vcs_GMap
                 polygon.Fill = new SolidBrush(Color.FromArgb(40, Color.Purple));    //有填滿 半透明, 若不寫.Fill, 即無填滿
                 markersOverlay.Polygons.Add(polygon);
 
-
                 //量測距離 直線
                 PointLatLng pt1;
                 PointLatLng pt2;
@@ -1502,10 +1610,18 @@ namespace vcs_GMap
                     pt1 = new PointLatLng(double.Parse(station[i, 1]), double.Parse(station[i, 2]));
                     pt2 = new PointLatLng(double.Parse(station[i + 1, 1]), double.Parse(station[i + 1, 2]));
                     distance = getDistance(pt1, pt2);
-                    dist = ((float)distance * 1f).ToString("0.##");
-                    richTextBox1.Text += station[i, 0] + " 到 " + station[i + 1, 0] + " 直線距離 : " + dist + " 公里\n";
 
-
+                    //算距離
+                    if (rb_km.Checked == true)  //公里
+                    {
+                        dist = ((float)distance * 1f).ToString("0.##") + " 公里";
+                    }
+                    else
+                    {
+                        dist = ((float)distance * 1000f).ToString("0.##") + " 公尺";
+                    }
+                    richTextBox1.Text += station[i, 0] + " 到 " + station[i + 1, 0] + " 直線距離 : " + dist + "\n";
+                    lb_distance.Text = dist;
                 }
             }
             else if (rb_location2.Checked == true)
@@ -1565,6 +1681,97 @@ namespace vcs_GMap
             {
 
             }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //全螢幕
+            if (flag_fullscreen == false)
+            {
+                flag_fullscreen = true;
+                toolStripMenuItem1.Text = "離開全螢幕";
+
+                //全螢幕
+                //按Alt+F4關閉程式
+
+                //隱藏 除 gMapControl1 外所有控件  全螢幕顯示
+
+                //最大化螢幕
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+
+                gMapControl1.Dock = DockStyle.Fill;   //將控件全屏顯示
+
+                for (int i = 0; i < this.Controls.Count; i++)
+                {
+                    //richTextBox1.Text += "Name: " + this.Controls[i].Name + "\t";
+                    //richTextBox1.Text += "Text: " + this.Controls[i].Text + "\t";
+                    //richTextBox1.Text += "這項是：" + this.Controls[i].GetType() + "\n";
+                    if (this.Controls[i].Name != "gMapControl1")
+                    {
+                        this.Controls[i].Visible = false;
+                    }
+                }
+            }
+            else if (flag_fullscreen == true)
+            {
+                flag_fullscreen = false;
+                toolStripMenuItem1.Text = "全螢幕";
+
+                //離開全螢幕
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.WindowState = FormWindowState.Normal;
+                gMapControl1.Dock = DockStyle.None;
+                for (int i = 0; i < this.Controls.Count; i++)
+                {
+                    //richTextBox1.Text += "Name: " + this.Controls[i].Name + "\t";
+                    //richTextBox1.Text += "Text: " + this.Controls[i].Text + "\t";
+                    //richTextBox1.Text += "這項是：" + this.Controls[i].GetType() + "\n";
+                    if (this.Controls[i].Name != "gMapControl1")
+                    {
+                        this.Controls[i].Visible = true;
+                    }
+                }
+            }
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            //量測距離 單程
+            flag_measure_distance = 1;  //0 : 無量測, 1 : 量測距離 單程, 2 : 量測距離 連續
+            total_distance = 0;
+            line_point.Clear();
+            draw_line_point();
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            //量測距離 連續
+            flag_measure_distance = 2;  //0 : 無量測, 1 : 量測距離 單程, 2 : 量測距離 連續
+            total_distance = 0;
+            line_point.Clear();
+            draw_line_point();
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            //離開
+            this.Close();
         }
     }
 }

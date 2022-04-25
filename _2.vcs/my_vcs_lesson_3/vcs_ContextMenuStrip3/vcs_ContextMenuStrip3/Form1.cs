@@ -38,10 +38,13 @@ namespace vcs_ContextMenuStrip3
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            richTextBox1.Text += "按 表單 MOuseDown\n";
-            // 參數一為被綁定的控件
-            // 參數二為彈出式菜單的顯示位置(0,0與被綁定控件的原點重合)
-            contextMenuStrip1.Show(this, e.Location);
+            if (e.Button == MouseButtons.Right)
+            {
+                richTextBox1.Text += "按 表單 MOuseDown\n";
+                // 參數一為被綁定的控件
+                // 參數二為彈出式菜單的顯示位置(0,0與被綁定控件的原點重合)
+                contextMenuStrip1.Show(this, e.Location);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

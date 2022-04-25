@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -74,7 +75,6 @@
             this.button17 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btn_draw_profile = new System.Windows.Forms.Button();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rb_location6 = new System.Windows.Forms.RadioButton();
             this.rb_location5 = new System.Windows.Forms.RadioButton();
@@ -83,8 +83,20 @@
             this.rb_location2 = new System.Windows.Forms.RadioButton();
             this.rb_location1 = new System.Windows.Forms.RadioButton();
             this.rb_location0 = new System.Windows.Forms.RadioButton();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rb_km = new System.Windows.Forms.RadioButton();
+            this.rb_m = new System.Windows.Forms.RadioButton();
+            this.lb_distance = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gMapControl1
@@ -568,7 +580,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(90, 40);
             this.button17.TabIndex = 35;
-            this.button17.Text = "全螢幕";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -589,18 +600,6 @@
             this.btn_draw_profile.Text = "畫出輪廓圖";
             this.btn_draw_profile.UseVisualStyleBackColor = true;
             this.btn_draw_profile.Click += new System.EventHandler(this.btn_draw_profile_Click);
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox3.Location = new System.Drawing.Point(1329, 54);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(142, 23);
-            this.checkBox3.TabIndex = 38;
-            this.checkBox3.Text = "左鍵量測距離";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -696,13 +695,106 @@
             this.rb_location0.UseVisualStyleBackColor = true;
             this.rb_location0.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem4,
+            this.toolStripMenuItem5,
+            this.toolStripMenuItem6,
+            this.toolStripMenuItem7});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 158);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem1.Text = "全螢幕";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem2.Text = "量測距離 單程";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem3.Text = "量測距離 連續";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem7.Text = "離開";
+            this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
+            // 
+            // rb_km
+            // 
+            this.rb_km.AutoSize = true;
+            this.rb_km.Checked = true;
+            this.rb_km.Location = new System.Drawing.Point(1329, 59);
+            this.rb_km.Name = "rb_km";
+            this.rb_km.Size = new System.Drawing.Size(47, 16);
+            this.rb_km.TabIndex = 6;
+            this.rb_km.TabStop = true;
+            this.rb_km.Text = "公里";
+            this.rb_km.UseVisualStyleBackColor = true;
+            // 
+            // rb_m
+            // 
+            this.rb_m.AutoSize = true;
+            this.rb_m.Location = new System.Drawing.Point(1382, 59);
+            this.rb_m.Name = "rb_m";
+            this.rb_m.Size = new System.Drawing.Size(47, 16);
+            this.rb_m.TabIndex = 38;
+            this.rb_m.Text = "公尺";
+            this.rb_m.UseVisualStyleBackColor = true;
+            // 
+            // lb_distance
+            // 
+            this.lb_distance.AutoSize = true;
+            this.lb_distance.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_distance.Location = new System.Drawing.Point(1432, 57);
+            this.lb_distance.Name = "lb_distance";
+            this.lb_distance.Size = new System.Drawing.Size(53, 19);
+            this.lb_distance.TabIndex = 39;
+            this.lb_distance.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1545, 712);
+            this.ClientSize = new System.Drawing.Size(1612, 712);
+            this.Controls.Add(this.lb_distance);
+            this.Controls.Add(this.rb_m);
+            this.Controls.Add(this.rb_km);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.btn_draw_profile);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button17);
@@ -743,6 +835,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -789,7 +882,6 @@
         private System.Windows.Forms.Button btn_draw_profile;
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton rb_location6;
         private System.Windows.Forms.RadioButton rb_location5;
@@ -805,6 +897,17 @@
         private System.Windows.Forms.RadioButton radioButton8;
         private System.Windows.Forms.RadioButton radioButton14;
         private System.Windows.Forms.RadioButton radioButton13;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+        private System.Windows.Forms.RadioButton rb_km;
+        private System.Windows.Forms.RadioButton rb_m;
+        private System.Windows.Forms.Label lb_distance;
     }
 }
 

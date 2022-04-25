@@ -20,11 +20,8 @@ namespace vcs_ContextMenuStrip4
         {
             if (e.Button == MouseButtons.Right)
             {
-                contextMenuStrip1.Show(this.Location.X + e.X + 8, this.Location.Y + e.Y + 30);
-
+                contextMenuStrip1.Show(this, e.Location);   //顯示ContextMenu
             }
-
-
         }
     }
 }
