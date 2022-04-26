@@ -27,12 +27,12 @@ namespace vcs_PictureCrop8
         private int w = 0;  //擷取圖的寬
         private int h = 0;  //擷取圖的高
 
-        Image image;
-
         int x_st = 0;
         int y_st = 0;
         int x_sp = 0;
         int y_sp = 0;
+
+        Image image;
 
         public Form1()
         {

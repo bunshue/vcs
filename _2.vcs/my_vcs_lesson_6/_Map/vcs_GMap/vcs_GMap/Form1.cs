@@ -22,6 +22,8 @@ using GMap.NET.WindowsForms;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms.Markers;
 
+using GMapChinaRegion;
+
 //需要GMap.NET.Core.dll 和 GMap.NET.WindowsForms.dll這兩個檔案。
 
 namespace vcs_GMap
@@ -1310,6 +1312,43 @@ namespace vcs_GMap
 
         private void button17_Click(object sender, EventArgs e)
         {
+            List<string> regionNames = GMapChinaRegion.MapRegion.GetAllRegionName();
+            foreach (var regionName in regionNames)
+            {
+                //this.comboBoxRegion.Items.Add(regionName);
+                richTextBox1.Text += "get " + regionName + "\n";
+            }
+
+
+
+            string selectedName = "北京";
+            GMapPolygon p = GMapChinaRegion.MapRegion.CreateMapPolygon(selectedName);
+            if (p != null)
+            {
+                //if (selectedName == "海南")
+                //{
+                //    StringBuilder sb = new StringBuilder();
+                //    for (int i = 0; i < p.Points.Count; ++i)
+                //    {
+                //        sb.Append(p.Points[i].Lng);
+                //        sb.Append(" ");
+                //        sb.Append(p.Points[i].Lat);
+                //        if (i != p.Points.Count - 1)
+                //        {
+                //            sb.Append(",");
+                //        }
+                //    }
+                //    File.WriteAllText("aaa.txt", sb.ToString());
+                //}
+                markersOverlay.Polygons.Clear();
+                markersOverlay.Polygons.Add(p);
+                RectLatLng rect = GMapChinaRegion.MapRegion.GetRegionMaxRect(p);
+                this.gMapControl1.SetZoomToFitRect(rect);
+            }
+
+
+
+
         }
 
         private void btn_draw_profile_Click(object sender, EventArgs e)

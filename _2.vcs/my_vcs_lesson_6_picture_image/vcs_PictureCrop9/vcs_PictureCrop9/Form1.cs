@@ -18,10 +18,17 @@ namespace vcs_PictureCrop9
         public bool begin = false;   //是否開始畫矩形 
         Graphics g;
 
-        int crop_x_st = -1;
-        int crop_y_st = -1;
-        int crop_w = 0;
-        int crop_h = 0;
+        private int W = 0;  //原圖的寬
+        private int H = 0;  //原圖的高
+        private int w = 0;  //擷取圖的寬
+        private int h = 0;  //擷取圖的高
+
+        int x_st = -1;
+        int y_st = -1;
+        int x_sp = 0;
+        int y_sp = 0;
+
+        Image image;
 
         public Form1()
         {
@@ -84,17 +91,17 @@ namespace vcs_PictureCrop9
                 int maxX = Math.Max(firstPoint.X, secondPoint.X);
                 int maxY = Math.Max(firstPoint.Y, secondPoint.Y);
 
-                crop_x_st = minX;
-                crop_y_st = minY;
-                crop_w = maxX - minX;
-                crop_h = maxY - minY;
+                x_st = minX;
+                y_st = minY;
+                w = maxX - minX;
+                h = maxY - minY;
 
                 //畫矩形
-                g.DrawRectangle(new Pen(Color.Red), crop_x_st, crop_y_st, crop_w, crop_h);
-                nud_x_st.Value = crop_x_st;
-                nud_y_st.Value = crop_y_st;
-                nud_w.Value = crop_w;
-                nud_h.Value = crop_h;
+                g.DrawRectangle(new Pen(Color.Red), x_st, y_st, w, h);
+                nud_x_st.Value = x_st;
+                nud_y_st.Value = y_st;
+                nud_w.Value = w;
+                nud_h.Value = h;
 
             }
         }
@@ -108,7 +115,7 @@ namespace vcs_PictureCrop9
             button1.Text = "選取";
 
             Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-            Rectangle cropArea = new Rectangle(crop_x_st, crop_y_st, crop_w, crop_h);    //要截取的區域大小
+            Rectangle cropArea = new Rectangle(x_st, y_st, w, h);    //要截取的區域大小
             pictureBox2.Image = bitmap1.Clone(cropArea, PixelFormat.Format32bppArgb);
         }
 
@@ -135,7 +142,7 @@ namespace vcs_PictureCrop9
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if ((crop_x_st < 0) || (crop_y_st < 0) || (crop_w <= 0) || (crop_h <= 0))
+            if ((x_st < 0) || (y_st < 0) || (w <= 0) || (h <= 0))
             {
                 richTextBox1.Text += "選取位置錯誤\n";
 
@@ -147,7 +154,7 @@ namespace vcs_PictureCrop9
             try
             {
                 Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-                Rectangle cropArea = new Rectangle(crop_x_st, crop_y_st, crop_w, crop_h);    //要截取的區域大小
+                Rectangle cropArea = new Rectangle(x_st, y_st, w, h);    //要截取的區域大小
                 //pictureBox2.Image = bitmap1.Clone(cropArea, PixelFormat.Format32bppArgb);
 
                 bitmap1.Clone(cropArea, PixelFormat.Format32bppArgb).Save(filename, ImageFormat.Bmp);
@@ -178,17 +185,17 @@ namespace vcs_PictureCrop9
             this.Refresh();
             //獲取新的右下角坐標 
 
-            crop_x_st = (int)nud_x_st.Value;
-            crop_y_st = (int)nud_y_st.Value;
-            crop_w = (int)nud_w.Value;
-            crop_h = (int)nud_h.Value;
+            x_st = (int)nud_x_st.Value;
+            y_st = (int)nud_y_st.Value;
+            w = (int)nud_w.Value;
+            h = (int)nud_h.Value;
 
             //畫矩形
-            g.DrawRectangle(new Pen(Color.Red), crop_x_st, crop_y_st, crop_w, crop_h);
+            g.DrawRectangle(new Pen(Color.Red), x_st, y_st, w, h);
 
 
             Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-            Rectangle cropArea = new Rectangle(crop_x_st, crop_y_st, crop_w, crop_h);    //要截取的區域大小
+            Rectangle cropArea = new Rectangle(x_st, y_st, w, h);    //要截取的區域大小
             pictureBox2.Image = bitmap1.Clone(cropArea, PixelFormat.Format32bppArgb);
 
 
