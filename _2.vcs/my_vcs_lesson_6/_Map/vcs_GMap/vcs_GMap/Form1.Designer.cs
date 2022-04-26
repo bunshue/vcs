@@ -95,9 +95,21 @@
             this.rb_m = new System.Windows.Forms.RadioButton();
             this.lb_distance = new System.Windows.Forms.Label();
             this.btn_draw_profile2 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.bt_test00 = new System.Windows.Forms.Button();
+            this.bt_test01 = new System.Windows.Forms.Button();
+            this.bt_test02 = new System.Windows.Forms.Button();
+            this.bt_test03 = new System.Windows.Forms.Button();
+            this.bt_test04 = new System.Windows.Forms.Button();
+            this.bt_test09 = new System.Windows.Forms.Button();
+            this.bt_test08 = new System.Windows.Forms.Button();
+            this.bt_test07 = new System.Windows.Forms.Button();
+            this.bt_test06 = new System.Windows.Forms.Button();
+            this.bt_test05 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // gMapControl1
@@ -798,11 +810,122 @@
             this.btn_draw_profile2.UseVisualStyleBackColor = true;
             this.btn_draw_profile2.Click += new System.EventHandler(this.btn_draw_profile2_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.bt_test09);
+            this.groupBox3.Controls.Add(this.bt_test08);
+            this.groupBox3.Controls.Add(this.bt_test07);
+            this.groupBox3.Controls.Add(this.bt_test06);
+            this.groupBox3.Controls.Add(this.bt_test05);
+            this.groupBox3.Controls.Add(this.bt_test04);
+            this.groupBox3.Controls.Add(this.bt_test03);
+            this.groupBox3.Controls.Add(this.bt_test02);
+            this.groupBox3.Controls.Add(this.bt_test01);
+            this.groupBox3.Controls.Add(this.bt_test00);
+            this.groupBox3.Location = new System.Drawing.Point(1382, 170);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(218, 258);
+            this.groupBox3.TabIndex = 41;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "測試MapDownloader";
+            // 
+            // bt_test00
+            // 
+            this.bt_test00.Location = new System.Drawing.Point(18, 21);
+            this.bt_test00.Name = "bt_test00";
+            this.bt_test00.Size = new System.Drawing.Size(90, 40);
+            this.bt_test00.TabIndex = 42;
+            this.bt_test00.Text = "列出省市界資料";
+            this.bt_test00.UseVisualStyleBackColor = true;
+            this.bt_test00.Click += new System.EventHandler(this.bt_test00_Click);
+            // 
+            // bt_test01
+            // 
+            this.bt_test01.Location = new System.Drawing.Point(18, 67);
+            this.bt_test01.Name = "bt_test01";
+            this.bt_test01.Size = new System.Drawing.Size(90, 40);
+            this.bt_test01.TabIndex = 43;
+            this.bt_test01.UseVisualStyleBackColor = true;
+            this.bt_test01.Click += new System.EventHandler(this.bt_test01_Click);
+            // 
+            // bt_test02
+            // 
+            this.bt_test02.Location = new System.Drawing.Point(18, 113);
+            this.bt_test02.Name = "bt_test02";
+            this.bt_test02.Size = new System.Drawing.Size(90, 40);
+            this.bt_test02.TabIndex = 44;
+            this.bt_test02.UseVisualStyleBackColor = true;
+            this.bt_test02.Click += new System.EventHandler(this.bt_test02_Click);
+            // 
+            // bt_test03
+            // 
+            this.bt_test03.Location = new System.Drawing.Point(18, 159);
+            this.bt_test03.Name = "bt_test03";
+            this.bt_test03.Size = new System.Drawing.Size(90, 40);
+            this.bt_test03.TabIndex = 45;
+            this.bt_test03.UseVisualStyleBackColor = true;
+            this.bt_test03.Click += new System.EventHandler(this.bt_test03_Click);
+            // 
+            // bt_test04
+            // 
+            this.bt_test04.Location = new System.Drawing.Point(18, 205);
+            this.bt_test04.Name = "bt_test04";
+            this.bt_test04.Size = new System.Drawing.Size(90, 40);
+            this.bt_test04.TabIndex = 46;
+            this.bt_test04.UseVisualStyleBackColor = true;
+            this.bt_test04.Click += new System.EventHandler(this.bt_test04_Click);
+            // 
+            // bt_test09
+            // 
+            this.bt_test09.Location = new System.Drawing.Point(114, 205);
+            this.bt_test09.Name = "bt_test09";
+            this.bt_test09.Size = new System.Drawing.Size(90, 40);
+            this.bt_test09.TabIndex = 51;
+            this.bt_test09.UseVisualStyleBackColor = true;
+            this.bt_test09.Click += new System.EventHandler(this.bt_test09_Click);
+            // 
+            // bt_test08
+            // 
+            this.bt_test08.Location = new System.Drawing.Point(114, 159);
+            this.bt_test08.Name = "bt_test08";
+            this.bt_test08.Size = new System.Drawing.Size(90, 40);
+            this.bt_test08.TabIndex = 50;
+            this.bt_test08.UseVisualStyleBackColor = true;
+            this.bt_test08.Click += new System.EventHandler(this.bt_test08_Click);
+            // 
+            // bt_test07
+            // 
+            this.bt_test07.Location = new System.Drawing.Point(114, 113);
+            this.bt_test07.Name = "bt_test07";
+            this.bt_test07.Size = new System.Drawing.Size(90, 40);
+            this.bt_test07.TabIndex = 49;
+            this.bt_test07.UseVisualStyleBackColor = true;
+            this.bt_test07.Click += new System.EventHandler(this.bt_test07_Click);
+            // 
+            // bt_test06
+            // 
+            this.bt_test06.Location = new System.Drawing.Point(114, 67);
+            this.bt_test06.Name = "bt_test06";
+            this.bt_test06.Size = new System.Drawing.Size(90, 40);
+            this.bt_test06.TabIndex = 48;
+            this.bt_test06.UseVisualStyleBackColor = true;
+            this.bt_test06.Click += new System.EventHandler(this.bt_test06_Click);
+            // 
+            // bt_test05
+            // 
+            this.bt_test05.Location = new System.Drawing.Point(114, 21);
+            this.bt_test05.Name = "bt_test05";
+            this.bt_test05.Size = new System.Drawing.Size(90, 40);
+            this.bt_test05.TabIndex = 47;
+            this.bt_test05.UseVisualStyleBackColor = true;
+            this.bt_test05.Click += new System.EventHandler(this.bt_test05_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1612, 712);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btn_draw_profile2);
             this.Controls.Add(this.lb_distance);
             this.Controls.Add(this.rb_m);
@@ -849,6 +972,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -922,6 +1046,17 @@
         private System.Windows.Forms.RadioButton rb_m;
         private System.Windows.Forms.Label lb_distance;
         private System.Windows.Forms.Button btn_draw_profile2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button bt_test09;
+        private System.Windows.Forms.Button bt_test08;
+        private System.Windows.Forms.Button bt_test07;
+        private System.Windows.Forms.Button bt_test06;
+        private System.Windows.Forms.Button bt_test05;
+        private System.Windows.Forms.Button bt_test04;
+        private System.Windows.Forms.Button bt_test03;
+        private System.Windows.Forms.Button bt_test02;
+        private System.Windows.Forms.Button bt_test01;
+        private System.Windows.Forms.Button bt_test00;
     }
 }
 

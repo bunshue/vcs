@@ -69,7 +69,6 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(170, 70);
             this.button29.TabIndex = 116;
-            this.button29.Text = "時間比較";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -242,7 +241,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(170, 70);
             this.button6.TabIndex = 100;
-            this.button6.Text = "分出 時:分:秒 再組合";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 

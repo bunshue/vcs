@@ -1,4 +1,12 @@
-﻿using System;
+﻿
+#region KML GPX 操作
+
+
+
+
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +19,6 @@ using System.Net;
 using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using GMap.NET.MapProviders;
 using GMap.NET.CacheProviders;
 using NetUtil;
 using GMapUtil;
@@ -21,11 +28,6 @@ using GMapPolygonLib;
 using GMapMarkerLib;
 using GMapDrawTools;
 using GMapCommonType;
-using GMapProvidersExt;
-using GMapProvidersExt.Tencent;
-using GMapProvidersExt.AMap;
-using GMapProvidersExt.Baidu;
-using GMapExport;
 using GMapHeat;
 using GMapDownload;
 using GMapPOI;
@@ -106,7 +108,7 @@ namespace MapDownloader
                 {
                     if (mapControl != null)
                     {
-                        mapControl.Position = new PointLatLng(double.Parse(centerPoints[1]), double.Parse(centerPoints[0]));
+                        gMapControl1.Position = new PointLatLng(double.Parse(centerPoints[1]), double.Parse(centerPoints[0]));
                     }
                 }
                 retryNum = int.Parse(retryStr);
@@ -128,39 +130,38 @@ namespace MapDownloader
         // Init map
         private void InitMap()
         {
-            mapControl.ShowCenter = false;
-            mapControl.DragButton = System.Windows.Forms.MouseButtons.Left;
-            mapControl.CacheLocation = Environment.CurrentDirectory + "\\MapCache\\"; // Map cache location
-            //mapControl.MapProvider = GMapProviders.GoogleChinaMap;
-            //mapControl.MapProvider = GMapProvidersExt.AMap.AMapProvider.Instance;
-            //mapControl.Position = new PointLatLng(32.043, 118.773);
-            //mapControl.MinZoom = 1;
-            //mapControl.MaxZoom = 18;
-            //mapControl.Zoom = 9;
-            //mapControl.ShowTileGridLines = true;
-            mapControl.MapProvider = GMapProvidersExt.Baidu.BaiduMapProvider.Instance;
-            mapControl.MinZoom = BaiduMapProvider.Instance.MinZoom;
-            mapControl.MaxZoom = BaiduMapProvider.Instance.MaxZoom.Value;
-            mapControl.Zoom = 15;
+            gMapControl1.ShowCenter = false;
+            gMapControl1.DragButton = System.Windows.Forms.MouseButtons.Left;
+            gMapControl1.CacheLocation = Environment.CurrentDirectory + "\\MapCache\\"; // Map cache location
+            //
+            //gMapControl1.Position = new PointLatLng(32.043, 118.773);
+            //gMapControl1.MinZoom = 1;
+            //gMapControl1.MaxZoom = 18;
+            //gMapControl1.Zoom = 9;
+            //gMapControl1.ShowTileGridLines = true;
+            gMapControl1.MapProvider = GMapProvidersExt.Baidu.BaiduMapProvider.Instance;
+            gMapControl1.MinZoom = BaiduMapProvider.Instance.MinZoom;
+            gMapControl1.MaxZoom = BaiduMapProvider.Instance.MaxZoom.Value;
+            gMapControl1.Zoom = 15;
 
-            mapControl.Overlays.Add(polygonsOverlay);
-            mapControl.Overlays.Add(regionOverlay);
-            mapControl.Overlays.Add(poiOverlay);
-            mapControl.Overlays.Add(routeOverlay);
+            gMapControl1.Overlays.Add(polygonsOverlay);
+            gMapControl1.Overlays.Add(regionOverlay);
+            gMapControl1.Overlays.Add(poiOverlay);
+            gMapControl1.Overlays.Add(routeOverlay);
 
-            this.mapControl.MouseClick += new MouseEventHandler(mapControl_MouseClick);
-            this.mapControl.MouseMove += new MouseEventHandler(mapControl_MouseMove);
-            this.mapControl.MouseDown += new MouseEventHandler(mapControl_MouseDown);
-            this.mapControl.MouseUp += new MouseEventHandler(mapControl_MouseUp);
-            this.mapControl.OnMarkerEnter += new MarkerEnter(mapControl_OnMarkerEnter);
-            this.mapControl.OnMarkerLeave += new MarkerLeave(mapControl_OnMarkerLeave);
-            this.mapControl.OnMarkerClick += new MarkerClick(mapControl_OnMarkerClick);
-            this.mapControl.OnPolygonClick += new PolygonClick(mapControl_OnPolygonClick);
-            this.mapControl.OnPolygonEnter += new PolygonEnter(mapControl_OnPolygonEnter);
-            this.mapControl.OnPolygonLeave += new PolygonLeave(mapControl_OnPolygonLeave);
-            this.mapControl.OnPositionChanged += new PositionChanged(mapControl_OnPositionChanged);
-            this.mapControl.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
-            this.mapControl.OnPolygonDoubleClick += new PolygonDoubleClick(mapControl_OnPolygonDoubleClick);
+            this.gMapControl1.MouseClick += new MouseEventHandler(mapControl_MouseClick);
+            this.gMapControl1.MouseMove += new MouseEventHandler(mapControl_MouseMove);
+            this.gMapControl1.MouseDown += new MouseEventHandler(mapControl_MouseDown);
+            this.gMapControl1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
+            this.gMapControl1.OnMarkerEnter += new MarkerEnter(mapControl_OnMarkerEnter);
+            this.gMapControl1.OnMarkerLeave += new MarkerLeave(mapControl_OnMarkerLeave);
+            this.gMapControl1.OnMarkerClick += new MarkerClick(mapControl_OnMarkerClick);
+            this.gMapControl1.OnPolygonClick += new PolygonClick(mapControl_OnPolygonClick);
+            this.gMapControl1.OnPolygonEnter += new PolygonEnter(mapControl_OnPolygonEnter);
+            this.gMapControl1.OnPolygonLeave += new PolygonLeave(mapControl_OnPolygonLeave);
+            this.gMapControl1.OnPositionChanged += new PositionChanged(mapControl_OnPositionChanged);
+            this.gMapControl1.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
+            this.gMapControl1.OnPolygonDoubleClick += new PolygonDoubleClick(mapControl_OnPolygonDoubleClick);
 
             draw = new Draw(this.mapControl);
             draw.DrawComplete += new EventHandler<DrawEventArgs>(draw_DrawComplete);
@@ -189,7 +190,7 @@ namespace MapDownloader
 
         void mapControl_OnMapZoomChanged()
         {
-            if (this.mapControl.Zoom >= 14)
+            if (this.gMapControl1.Zoom >= 14)
             {
                 //Allow routing on map
                 allowRouting = true;
@@ -201,8 +202,8 @@ namespace MapDownloader
 
             if (heatMarker != null)
             {
-                var tl = mapControl.FromLatLngToLocal(heatRect.LocationTopLeft);
-                var br = mapControl.FromLatLngToLocal(heatRect.LocationRightBottom);
+                var tl = gMapControl1.FromLatLngToLocal(heatRect.LocationTopLeft);
+                var br = gMapControl1.FromLatLngToLocal(heatRect.LocationRightBottom);
 
                 heatMarker.Position = heatRect.LocationTopLeft;
                 heatMarker.Size = new System.Drawing.Size((int)(br.X - tl.X), (int)(br.Y - tl.Y));
@@ -217,41 +218,12 @@ namespace MapDownloader
             centerPositionWorker.RunWorkerAsync(point);
         }
 
-        void centerPositionWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            try
-            {
-                Placemark place = (Placemark)e.Result;
-                if (!place.Equals(Placemark.Empty))
-                {
-                    this.toolStripStatusCenter.Text = "地图中心:" + place.ProvinceName + "," + place.CityName + "," + place.DistrictName;
-                    currentCenterCityName = place.CityName;
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("Locate the map center error: " + ex);
-            }
-        }
-
         void centerPositionWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             PointLatLng p = (PointLatLng)e.Argument;
             //Placemark centerPosPlace = SoSoMapProvider.Instance.GetCenterNameByLocation(p);
             Placemark centerPosPlace = AMapProvider.Instance.GetCenterNameByLocation(p);
             e.Result = centerPosPlace;
-        }
-
-        void mapControl_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                leftClickPoint = new GPoint(e.X, e.Y);
-                if (allowRouting)
-                {
-                    this.contextMenuStripLocation.Show(Cursor.Position);
-                }
-            }
         }
 
         void mapControl_OnMarkerClick(GMapMarker item, MouseEventArgs e)
@@ -268,9 +240,9 @@ namespace MapDownloader
                         overlay.Markers.Remove(item);
                     }
 
-                    if (this.mapControl.Overlays.Contains(overlay))
+                    if (this.gMapControl1.Overlays.Contains(overlay))
                     {
-                        this.mapControl.Overlays.Remove(overlay);
+                        this.gMapControl1.Overlays.Remove(overlay);
                     }
                 }
             }
@@ -320,11 +292,10 @@ namespace MapDownloader
         {
             try
             {
-                PointLatLng p = this.mapControl.FromLocalToLatLng(e.X, e.Y);
+                PointLatLng p = this.gMapControl1.FromLocalToLatLng(e.X, e.Y);
 
-                int zoom = (int)this.mapControl.Zoom;
-                double resolution = this.mapControl.MapProvider.Projection.GetLevelResolution(zoom);
-                this.toolStripStatusTip.Text = string.Format("显示级别：{0} 分辨率：{1:F3}米/像素 坐标：{2:F4},{3:F4}", zoom, resolution, p.Lng, p.Lat);
+                int zoom = (int)this.gMapControl1.Zoom;
+                double resolution = this.gMapControl1.MapProvider.Projection.GetLevelResolution(zoom);
 
                 if (isLeftButtonDown && currentDragableNode != null)
                 {
@@ -336,13 +307,9 @@ namespace MapDownloader
                         if (nullable2.GetValueOrDefault() < count)
                         {
                             this.currentAreaPolygon.Points[tag.Value] = p;
-                            this.mapControl.UpdatePolygonLocalPosition(this.currentAreaPolygon);
+                            this.gMapControl1.UpdatePolygonLocalPosition(this.currentAreaPolygon);
                         }
                     }
-                    this.currentDragableNode.Position = p;
-                    this.currentDragableNode.ToolTipText = string.Format("X={0} Y={1}", p.Lng.ToString("0.0000"), p.Lat.ToString("0.0000"));
-                    this.currentDragableNode.ToolTipMode = MarkerTooltipMode.OnMouseOver;
-                    this.mapControl.UpdateMarkerLocalPosition(this.currentDragableNode);
                 }
             }
             catch (Exception ex)
@@ -379,13 +346,6 @@ namespace MapDownloader
 
         void mapControl_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                if (item is GMapAreaPolygon && currentAreaPolygon != null)
-                {
-                    this.contextMenuStripSelectedArea.Show(Cursor.Position);
-                }
-            }
         }
 
         #endregion
@@ -489,51 +449,6 @@ namespace MapDownloader
             this.advTreeChina.NodeMouseClick += new TreeNodeMouseClickEventHandler(advTreeChina_NodeMouseClick);
         }
 
-        void advTreeChina_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            this.advTreeChina.SelectedNode = sender as TreeNode;
-            if (e.Button == MouseButtons.Left || e.Button == MouseButtons.Right)
-            {
-                string name = e.Node.Text;
-                string rings = null;
-                switch (e.Node.Level)
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        Province province = e.Node.Tag as Province;
-                        name = province.name;
-                        rings = province.rings;
-                        break;
-                    case 2:
-                        City city = e.Node.Tag as City;
-                        name = city.name;
-                        rings = city.rings;
-                        break;
-                    case 3:
-                        Piecearea piecearea = e.Node.Tag as Piecearea;
-                        name = piecearea.name;
-                        rings = piecearea.rings;
-                        break;
-                }
-                if (rings != null && !string.IsNullOrEmpty(rings))
-                {
-                    GMapPolygon polygon = ChinaMapRegion.GetRegionPolygon(name, rings);
-                    if (polygon != null)
-                    {
-                        GMapAreaPolygon areaPolygon = new GMapAreaPolygon(polygon.Points, name);
-                        currentAreaPolygon = areaPolygon;
-                        RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
-                        GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
-                        regionOverlay.Clear();
-                        regionOverlay.Polygons.Add(areaPolygon);
-                        regionOverlay.Markers.Add(textMarker);
-                        this.mapControl.SetZoomToFitRect(rect);
-                    }
-                }
-            }
-        }
-
         void loadChinaWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (china == null)
@@ -571,13 +486,13 @@ namespace MapDownloader
             switch (storeType)
             {
                 case 0:
-                    mapControl.Manager.PrimaryCache = sqliteCache;
+                    gMapControl1.Manager.PrimaryCache = sqliteCache;
                     break;
                 case 1:
-                    mapControl.Manager.PrimaryCache = mysqlCache;
+                    gMapControl1.Manager.PrimaryCache = mysqlCache;
                     break;
                 default:
-                    mapControl.Manager.PrimaryCache = sqliteCache;
+                    gMapControl1.Manager.PrimaryCache = sqliteCache;
                     break;
             }
         }
@@ -588,9 +503,9 @@ namespace MapDownloader
 
         private void ResetToServerAndCacheMode()
         {
-            if (this.mapControl.Manager.Mode != AccessMode.ServerAndCache)
+            if (this.gMapControl1.Manager.Mode != AccessMode.ServerAndCache)
             {
-                this.mapControl.Manager.Mode = AccessMode.ServerAndCache;
+                this.gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
                 this.serverAndCacheToolStripMenuItem.Checked = true;
                 this.本地缓存ToolStripMenuItem.Checked = false;
                 this.在线服务ToolStripMenuItem.Checked = false;
@@ -610,7 +525,7 @@ namespace MapDownloader
                     RectLatLng area = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
                     try
                     {
-                        DownloadCfgForm downloadCfgForm = new DownloadCfgForm(area, this.mapControl.MapProvider);
+                        DownloadCfgForm downloadCfgForm = new DownloadCfgForm(area, this.gMapControl1.MapProvider);
                         if (downloadCfgForm.ShowDialog() == DialogResult.OK)
                         {
                             TileDownloaderArgs downloaderArgs = downloadCfgForm.GetDownloadTileGPoints();
@@ -664,16 +579,6 @@ namespace MapDownloader
         }
 
         private delegate void UpdateDownloadProress(int completedCount, int totalCount);
-
-        private void UpdateDownloadBar(int completedCount, int totalCount)
-        {
-            if (this.toolStripProgressBarDownload.Visible)
-            {
-                int value = completedCount * 100 / totalCount;
-                this.toolStripStatusDownload.Text = string.Format("下载进度：{0}/{1}", completedCount, totalCount);
-                this.toolStripProgressBarDownload.Value = value;
-            }
-        }
 
         void tileDownloader_PrefetchTileProgress(object sender, TileDownloadEventArgs e)
         {
@@ -740,11 +645,11 @@ namespace MapDownloader
                 {
                     ResetToServerAndCacheMode();
                     int zoom = int.Parse(this.textBoxImageZoom.Text);
-                    //int retry = this.mapControl.Manager.Mode == AccessMode.CacheOnly ? 0 : 1; //是否重试
+                    //int retry = this.gMapControl1.Manager.Mode == AccessMode.CacheOnly ? 0 : 1; //是否重试
                     TileImageConnector tileImage = new TileImageConnector();
                     tileImage.Retry = retryNum;
                     tileImage.ImageTileComplete += new EventHandler(tileImage_ImageTileComplete);
-                    tileImage.Start(this.mapControl.MapProvider, area, zoom);
+                    tileImage.Start(this.gMapControl1.MapProvider, area, zoom);
                 }
                 catch (Exception ex)
                 {
@@ -766,271 +671,222 @@ namespace MapDownloader
 
         #region 地图切换
 
-        private void UpdateMainFormText(string mapName)
-        {
-            this.Text = "地图下载器" + "--" + mapName;
-        }
-
         private void 福建街道地图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianMapProviderWithAnno.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianMapProviderWithAnno.Instance;
             UpdateMainFormText(GMapProvidersExt.TianDitu.Fujian.TiandituFujianMapProviderWithAnno.Instance.CnName);
-            this.mapControl.Position = new PointLatLng(26.0651, 119.2786);
+            this.gMapControl1.Position = new PointLatLng(26.0651, 119.2786);
         }
 
         private void 福建卫星地图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProvider.Instance.CnName);
-            this.mapControl.Position = new PointLatLng(26.0651, 119.2786);
+            this.gMapControl1.Position = new PointLatLng(26.0651, 119.2786);
         }
 
         private void 福建混合地图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProviderWithAnno.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProviderWithAnno.Instance;
             UpdateMainFormText(GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProviderWithAnno.Instance.CnName);
-            this.mapControl.Position = new PointLatLng(26.0651, 119.2786);
+            this.gMapControl1.Position = new PointLatLng(26.0651, 119.2786);
         }
 
         //船舶地图
         private void 船舶ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.Ship.ShipMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.Ship.ShipMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Ship.ShipMapProvider.Instance.CnName);
-        }
-
-        //Google地图
-        private void 普通地图ToolStripMenuItem6_Click_1(object sender, EventArgs e)
-        {
-            this.mapControl.MapProvider = GMapProviders.GoogleMap;
-            UpdateMainFormText("Google普通地图");
-        }
-
-        private void 卫星地图ToolStripMenuItem6_Click(object sender, EventArgs e)
-        {
-            this.mapControl.MapProvider = GMapProviders.GoogleSatelliteMap;
-            UpdateMainFormText("Google卫星地图");
-        }
-
-        private void 混合地图ToolStripMenuItem6_Click(object sender, EventArgs e)
-        {
-            this.mapControl.MapProvider = GMapProviders.GoogleHybridMap;
-            UpdateMainFormText("Google混合地图");
-        }
-
-        //Google中国地图
-        private void 普通地图ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            mapControl.MapProvider = GMapProviders.GoogleChinaMap;
-            UpdateMainFormText("Google中国普通地图");
-        }
-
-        private void 卫星地图ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            mapControl.MapProvider = GMapProviders.GoogleChinaSatelliteMap;
-            UpdateMainFormText("Google中国卫星地图");
-        }
-
-        private void 混合地图ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            mapControl.MapProvider = GMapProviders.GoogleChinaHybridMap;
-            UpdateMainFormText("Google中国混合地图");
-        }
-
-        private void 地形图ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.mapControl.MapProvider = GMapProviders.GoogleChinaTerrainMap;
-            UpdateMainFormText("Google中国地形地图");
         }
 
         //Baidu地图
         private void 普通地图ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.Baidu.BaiduMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.Baidu.BaiduMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Baidu.BaiduMapProvider.Instance.CnName);
         }
 
         private void 卫星地图ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.Baidu.BaiduSatelliteMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.Baidu.BaiduSatelliteMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Baidu.BaiduSatelliteMapProvider.Instance.CnName);
         }
 
         private void 混合地图ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.Baidu.BaiduHybridMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.Baidu.BaiduHybridMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Baidu.BaiduHybridMapProvider.Instance.CnName);
         }
 
         //高德地图
         private void 普通地图ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.AMap.AMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.AMap.AMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.AMap.AMapProvider.Instance.CnName);
         }
 
         private void 卫星地图ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.AMap.AMapSateliteProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.AMap.AMapSateliteProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.AMap.AMapSateliteProvider.Instance.CnName);
         }
 
         private void 混合地图ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.AMap.AMapHybirdProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.AMap.AMapHybirdProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.AMap.AMapHybirdProvider.Instance.CnName);
         }
 
         //SoSo地图
         private void 普通地图ToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.Tencent.TencentMapProvider.Instance;
-            //this.mapControl.MapProvider = GMapProvidersExt.SoSo.SosoMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.Tencent.TencentMapProvider.Instance;
+            //this.gMapControl1.MapProvider = GMapProvidersExt.SoSo.SosoMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Tencent.TencentMapProvider.Instance.CnName);
         }
 
         private void 卫星地图ToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.Tencent.TencentMapSateliteProvider.Instance;
-            //this.mapControl.MapProvider = GMapProvidersExt.SoSo.SosoMapSateliteProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.Tencent.TencentMapSateliteProvider.Instance;
+            //this.gMapControl1.MapProvider = GMapProvidersExt.SoSo.SosoMapSateliteProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Tencent.TencentMapSateliteProvider.Instance.CnName);
         }
 
         private void 混合地图ToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.Tencent.TencentMapHybridProvider.Instance;
-            //this.mapControl.MapProvider = GMapProvidersExt.SoSo.SosoMapHybridProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.Tencent.TencentMapHybridProvider.Instance;
+            //this.gMapControl1.MapProvider = GMapProvidersExt.SoSo.SosoMapHybridProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Tencent.TencentMapHybridProvider.Instance.CnName);
         }
 
         private void 地形地图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = TencentTerrainMapAnnoProvider.Instance;
+            this.gMapControl1.MapProvider = TencentTerrainMapAnnoProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Tencent.TencentTerrainMapAnnoProvider.Instance.CnName);
         }
 
         //Here地图
         private void 普通地图ToolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            mapControl.MapProvider = GMapProvidersExt.Here.NokiaMapProvider.Instance;
+            gMapControl1.MapProvider = GMapProvidersExt.Here.NokiaMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Here.NokiaMapProvider.Instance.CnName);
         }
 
         private void 卫星地图ToolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            mapControl.MapProvider = GMapProvidersExt.Here.NokiaSatelliteMapProvider.Instance;
+            gMapControl1.MapProvider = GMapProvidersExt.Here.NokiaSatelliteMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Here.NokiaSatelliteMapProvider.Instance.CnName);
         }
 
         private void 混合地图ToolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            mapControl.MapProvider = GMapProvidersExt.Here.NokiaHybridMapProvider.Instance;
+            gMapControl1.MapProvider = GMapProvidersExt.Here.NokiaHybridMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Here.NokiaHybridMapProvider.Instance.CnName);
         }
 
         //Bing地图
         private void 普通地图ToolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProviders.BingMap;
+            this.gMapControl1.MapProvider = GMapProviders.BingMap;
             UpdateMainFormText("Bing普通地图");
         }
 
         private void 卫星地图ToolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProviders.BingSatelliteMap;
+            this.gMapControl1.MapProvider = GMapProviders.BingSatelliteMap;
             UpdateMainFormText("Bing卫星地图");
         }
 
         private void 混合地图ToolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProviders.BingHybridMap;
+            this.gMapControl1.MapProvider = GMapProviders.BingHybridMap;
             UpdateMainFormText("Bing混合地图");
         }
 
         private void 普通地图中文ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.Bing.BingChinaMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.Bing.BingChinaMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Bing.BingChinaMapProvider.Instance.CnName);
         }
 
         //搜狗地图
         private void 普通地图ToolStripMenuItem6_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.Sogou.SogouMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.Sogou.SogouMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.Sogou.SogouMapProvider.Instance.CnName);
         }
 
         //天地图
         private void 街道地图球面墨卡托ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno.Instance;
             UpdateMainFormText(GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno.Instance.CnName);
         }
 
         private void 卫星地图球面墨卡托ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider.Instance.CnName);
         }
 
         private void 混合地图球面墨卡托ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno.Instance;
             UpdateMainFormText(GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno.Instance.CnName);
         }
 
         private void 街道地图WGS84ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno4326.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno4326.Instance;
             UpdateMainFormText(GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno4326.Instance.CnName);
         }
 
         private void 卫星地图WGS84ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider4326.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider4326.Instance;
             UpdateMainFormText(GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider4326.Instance.CnName);
         }
 
         private void 混合地图WGS84ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno4326.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno4326.Instance;
             UpdateMainFormText(GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno4326.Instance.CnName);
         }
 
         //ArcGIS地图
         private void arcGIS街道地图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.ArcGIS.ArcGISMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.ArcGIS.ArcGISMapProvider.Instance.CnName);
         }
 
         private void arcGIS街道地图无POIToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.ArcGIS.ArcGISMapProviderNoPoi.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISMapProviderNoPoi.Instance;
             UpdateMainFormText(GMapProvidersExt.ArcGIS.ArcGISMapProviderNoPoi.Instance.CnName);
         }
 
         private void arcGIS街道地图冷色版ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.ArcGIS.ArcGISColdMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISColdMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.ArcGIS.ArcGISColdMapProvider.Instance.CnName);
         }
 
         private void arcGIS街道地图灰色版ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.ArcGIS.ArcGISGrayMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISGrayMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.ArcGIS.ArcGISGrayMapProvider.Instance.CnName);
         }
 
         private void arcGIS街道地图暖色版ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.ArcGIS.ArcGISWarmMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISWarmMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.ArcGIS.ArcGISWarmMapProvider.Instance.CnName);
         }
 
         private void arcGIS卫星地图无偏移ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.MapProvider = GMapProvidersExt.ArcGIS.ArcGISSatelliteMapProvider.Instance;
+            this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISSatelliteMapProvider.Instance;
             UpdateMainFormText(GMapProvidersExt.ArcGIS.ArcGISSatelliteMapProvider.Instance.CnName);
         }
 
@@ -1103,11 +959,7 @@ namespace MapDownloader
                         GMapAreaPolygon areaPolygon = new GMapAreaPolygon(drawPolygon.Points, "下载区域");
                         currentAreaPolygon = areaPolygon;
                         RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
-                        GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
-                        regionOverlay.Clear();
-                        regionOverlay.Polygons.Add(areaPolygon);
-                        regionOverlay.Markers.Add(textMarker);
-                        this.mapControl.SetZoomToFitRect(rect);
+                        this.gMapControl1.SetZoomToFitRect(rect);
                     }
                 }
             }
@@ -1131,7 +983,7 @@ namespace MapDownloader
             if (e != null)
             {
                 GMapOverlay distanceOverlay = new GMapOverlay();
-                this.mapControl.Overlays.Add(distanceOverlay);
+                this.gMapControl1.Overlays.Add(distanceOverlay);
                 foreach (LineMarker line in e.LineMarkers)
                 {
                     distanceOverlay.Markers.Add(line);
@@ -1151,7 +1003,7 @@ namespace MapDownloader
 
         private void serverAndCacheToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.Manager.Mode = AccessMode.ServerAndCache;
+            this.gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
             this.serverAndCacheToolStripMenuItem.Checked = true;
             this.本地缓存ToolStripMenuItem.Checked = false;
             this.在线服务ToolStripMenuItem.Checked = false;
@@ -1159,7 +1011,7 @@ namespace MapDownloader
 
         private void 在线服务ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.Manager.Mode = AccessMode.ServerOnly;
+            this.gMapControl1.Manager.Mode = AccessMode.ServerOnly;
             this.serverAndCacheToolStripMenuItem.Checked = false;
             this.本地缓存ToolStripMenuItem.Checked = false;
             this.在线服务ToolStripMenuItem.Checked = true;
@@ -1167,7 +1019,7 @@ namespace MapDownloader
 
         private void 本地缓存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mapControl.Manager.Mode = AccessMode.CacheOnly;
+            this.gMapControl1.Manager.Mode = AccessMode.CacheOnly;
             this.serverAndCacheToolStripMenuItem.Checked = false;
             this.本地缓存ToolStripMenuItem.Checked = true;
             this.在线服务ToolStripMenuItem.Checked = false;
@@ -1178,11 +1030,11 @@ namespace MapDownloader
             this.显示网格ToolStripMenuItem.Checked = !this.显示网格ToolStripMenuItem.Checked;
             if (this.显示网格ToolStripMenuItem.Checked)
             {
-                this.mapControl.ShowTileGridLines = true;
+                this.gMapControl1.ShowTileGridLines = true;
             }
             else
             {
-                this.mapControl.ShowTileGridLines = false;
+                this.gMapControl1.ShowTileGridLines = false;
             }
         }
 
@@ -1209,7 +1061,7 @@ namespace MapDownloader
                     try
                     {
                         string objectXml = File.ReadAllText(dialog.FileName);
-                        gpxType type = this.mapControl.Manager.DeserializeGPX(objectXml);
+                        gpxType type = this.gMapControl1.Manager.DeserializeGPX(objectXml);
                         if (type != null)
                         {
                             if ((type.trk != null) && (type.trk.Length > 0))
@@ -1262,7 +1114,7 @@ namespace MapDownloader
                                     this.polygonsOverlay.Markers.Add(marker);
                                 }
                             }
-                            this.mapControl.ZoomAndCenterRoutes(null);
+                            this.gMapControl1.ZoomAndCenterRoutes(null);
                         }
                     }
                     catch (Exception exception)
@@ -1364,7 +1216,7 @@ namespace MapDownloader
                             }
                             if (centerToMark)
                             {
-                                this.mapControl.ZoomAndCenterMarkers(this.polygonsOverlay.Id);
+                                this.gMapControl1.ZoomAndCenterMarkers(this.polygonsOverlay.Id);
                             }
                             return;
                         }
@@ -1389,7 +1241,7 @@ namespace MapDownloader
                             this.polygonsOverlay.Routes.Add(route);
                             if (centerToMark)
                             {
-                                this.mapControl.ZoomAndCenterRoute(route);
+                                this.gMapControl1.ZoomAndCenterRoute(route);
                             }
                             return;
                         }
@@ -1417,7 +1269,7 @@ namespace MapDownloader
                             this.polygonsOverlay.Polygons.Add(polygon);
                             if (centerToMark)
                             {
-                                this.mapControl.ZoomAndCenterRoute(polygon);
+                                this.gMapControl1.ZoomAndCenterRoute(polygon);
                                 return;
                             }
                             return;
@@ -1454,8 +1306,8 @@ namespace MapDownloader
                 polygon.Points.AddRange(mark.Geometry.Points);
             }
             BoundingBox envelope = polygon.Envelope;
-            this.mapControl.SetZoomToFitRect(RectLatLng.FromLTRB(envelope.Left, envelope.Top, envelope.Right, envelope.Bottom));
-            this.mapControl.Position = new PointLatLng(envelope.Center.Y, envelope.Center.X);
+            this.gMapControl1.SetZoomToFitRect(RectLatLng.FromLTRB(envelope.Left, envelope.Top, envelope.Right, envelope.Bottom));
+            this.gMapControl1.Position = new PointLatLng(envelope.Center.Y, envelope.Center.X);
         }
 
         #endregion
@@ -1648,7 +1500,7 @@ namespace MapDownloader
                         GMarkerGoogle marker = new GMarkerGoogle(p, GMarkerGoogleType.blue_dot);
                         marker.ToolTipText = placemark.Address;
                         this.routeOverlay.Markers.Add(marker);
-                        this.mapControl.Position = p;
+                        this.gMapControl1.Position = p;
                     }
                 }
             }
@@ -1656,7 +1508,7 @@ namespace MapDownloader
 
         private void 搜索该点的地址ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PointLatLng p = this.mapControl.FromLocalToLatLng((int)leftClickPoint.X, (int)leftClickPoint.Y);
+            PointLatLng p = this.gMapControl1.FromLocalToLatLng((int)leftClickPoint.X, (int)leftClickPoint.Y);
             GeoCoderStatusCode statusCode;
             //Placemark? place = SoSoMapProvider.Instance.GetPlacemark(p, out statusCode);
             Placemark? place = AMapProvider.Instance.GetPlacemark(p, out statusCode);
@@ -1764,7 +1616,7 @@ namespace MapDownloader
                             //marker.CheckedKey = checkedKey;
                             overlay.Markers.Add(marker);
                         }
-                        this.mapControl.Overlays.Add(overlay);
+                        this.gMapControl1.Overlays.Add(overlay);
                     }
                 }
             }
@@ -1780,14 +1632,14 @@ namespace MapDownloader
 
         private void 以此为起点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            routeStartPoint = this.mapControl.FromLocalToLatLng((int)leftClickPoint.X, (int)leftClickPoint.Y);
+            routeStartPoint = this.gMapControl1.FromLocalToLatLng((int)leftClickPoint.X, (int)leftClickPoint.Y);
             GMapImageMarker marker = new GMapImageMarker(routeStartPoint, Properties.Resources.MapMarker_Bubble_Pink);
             this.routeOverlay.Markers.Add(marker);
         }
 
         private void 以此为终点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            routeEndPoint = this.mapControl.FromLocalToLatLng((int)leftClickPoint.X, (int)leftClickPoint.Y);
+            routeEndPoint = this.gMapControl1.FromLocalToLatLng((int)leftClickPoint.X, (int)leftClickPoint.Y);
             GMapImageMarker marker = new GMapImageMarker(routeEndPoint, Properties.Resources.MapMarker_Bubble_Chartreuse);
             this.routeOverlay.Markers.Add(marker);
 
@@ -1798,7 +1650,7 @@ namespace MapDownloader
                 if (mapRoute != null)
                 {
                     this.routeOverlay.Routes.Add(mapRoute);
-                    this.mapControl.ZoomAndCenterRoute(mapRoute);
+                    this.gMapControl1.ZoomAndCenterRoute(mapRoute);
                 }
             }
         }
@@ -1852,7 +1704,7 @@ namespace MapDownloader
 
                         using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(f))
                         {
-                            string fileFullPath = mapControl.CacheLocation + name;
+                            string fileFullPath = gMapControl1.CacheLocation + name;
 
                             if (fileFullPath.Contains("gmap.html"))
                             {
@@ -1898,7 +1750,7 @@ namespace MapDownloader
             {
                 try
                 {
-                    mapControl.Manager.EnableTileHost(8899);
+                    gMapControl1.Manager.EnableTileHost(8899);
                     TryExtractLeafletjs();
                 }
                 catch (Exception ex)
@@ -1908,7 +1760,7 @@ namespace MapDownloader
             }
             else
             {
-                mapControl.Manager.DisableTileHost();
+                gMapControl1.Manager.DisableTileHost();
             }
         }
 
@@ -2074,7 +1926,7 @@ namespace MapDownloader
 
         private void 热力图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int zoom = (int)this.mapControl.Zoom;
+            int zoom = (int)this.gMapControl1.Zoom;
 
             List<PointLatLng> ps = GetRandomPoint();
             foreach (var p in ps)
@@ -2085,13 +1937,13 @@ namespace MapDownloader
 
             //热力图范围
             heatRect = GMapUtils.GetPointsMaxRect(ps);
-            GPoint plt = this.mapControl.MapProvider.Projection.FromLatLngToPixel(heatRect.LocationTopLeft, zoom);
-            GPoint prb = this.mapControl.MapProvider.Projection.FromLatLngToPixel(heatRect.LocationRightBottom, zoom);
+            GPoint plt = this.gMapControl1.MapProvider.Projection.FromLatLngToPixel(heatRect.LocationTopLeft, zoom);
+            GPoint prb = this.gMapControl1.MapProvider.Projection.FromLatLngToPixel(heatRect.LocationRightBottom, zoom);
 
             List<HeatPoint> hps = new List<HeatPoint>();
             foreach (var p in ps)
             {
-                GPoint gp = this.mapControl.MapProvider.Projection.FromLatLngToPixel(p, zoom);
+                GPoint gp = this.gMapControl1.MapProvider.Projection.FromLatLngToPixel(p, zoom);
                 HeatPoint hp = new HeatPoint();
                 hp.X = gp.X - plt.X;
                 hp.Y = gp.Y - plt.Y;
@@ -2118,7 +1970,7 @@ namespace MapDownloader
 
         private void 地图截屏ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Image img = this.mapControl.ToImage();
+            Image img = this.gMapControl1.ToImage();
             SaveFileDialog openDialog = new SaveFileDialog();
             openDialog.Filter = "(*.png)|*.png|(*.jpg)|*.jpg|(*.bmp)|*.bmp";
             if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)

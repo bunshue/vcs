@@ -120,13 +120,7 @@ namespace GMapWinFormDemo
             mapProviderType = MapProviderType.google;
 
             this.panelMap.SizeChanged += new EventHandler(panelMap_SizeChanged);
-            List<string> regionNames = GMapChinaRegion.MapRegion.GetAllRegionName();
-            foreach (var regionName in regionNames)
-            {
-                this.comboBoxRegion.Items.Add(regionName);
-            }
-            this.comboBoxRegion.SelectedValueChanged += new EventHandler(comboBoxRegion_SelectedValueChanged);
-
+            
             InitHistoryLayerUI();
 
             this.checkBoxFollow.CheckedChanged += new EventHandler(checkBoxFollow_CheckedChanged);
@@ -233,115 +227,6 @@ namespace GMapWinFormDemo
 
             //this.treeView1.NodeMouseDoubleClick += new TreeNodeMouseClickEventHandler(treeView1_NodeMouseDoubleClick);
             this.treeView1.AfterCheck += new TreeViewEventHandler(treeView1_AfterCheck);
-        }
-
-        void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
-        {
-            if (e.Node.Checked)
-            {
-                string name = e.Node.Text;
-                string rings = null;
-                switch (e.Node.Level)
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        Province province = e.Node.Tag as Province;
-                        name = province.name;
-                        rings = province.rings;
-                        break;
-                    case 2:
-                        City city = e.Node.Tag as City;
-                        name = city.name;
-                        rings = city.rings;
-                        break;
-                }
-                if (rings != null)
-                {
-                    GMapPolygon polygon = ChinaMapRegion.GetRegionPolygon(name, rings);
-                    if (polygon != null)
-                    {
-                        //regionOverlay.Polygons.Clear();
-                        regionOverlay.Polygons.Add(polygon);
-                        RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
-                        this.mapControl.SetZoomToFitRect(rect);
-                    }
-                }
-            }
-            else
-            {
-                string name = e.Node.Text;
-                for (int i = regionOverlay.Polygons.Count-1; i >=0; --i)
-                {
-                    if (regionOverlay.Polygons[i].Name == name)
-                    {
-                        regionOverlay.Polygons.RemoveAt(i);
-                    }
-                }
-            }
-        }
-
-        void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                string name = e.Node.Text;
-                string rings = null;
-                switch (e.Node.Level)
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        Province province = e.Node.Tag as Province;
-                        name = province.name;
-                        rings = province.rings;
-                        break;
-                    case 2:
-                        City city = e.Node.Tag as City;
-                        name = city.name;
-                        rings = city.rings;
-                        break;
-                }
-                if (rings != null)
-                {
-                    GMapPolygon polygon = ChinaMapRegion.GetRegionPolygon(name, rings);
-                    if (polygon != null)
-                    {
-                        regionOverlay.Polygons.Clear();
-                        regionOverlay.Polygons.Add(polygon);
-                        RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
-                        this.mapControl.SetZoomToFitRect(rect);
-                    }
-                }
-            }
-        }
-
-        void comboBoxRegion_SelectedValueChanged(object sender, EventArgs e)
-        {
-            string selectedName = this.comboBoxRegion.GetItemText(this.comboBoxRegion.SelectedItem);
-            GMapPolygon p = GMapChinaRegion.MapRegion.CreateMapPolygon(selectedName);
-            if (p != null)
-            {
-                //if (selectedName == "海南")
-                //{
-                //    StringBuilder sb = new StringBuilder();
-                //    for (int i = 0; i < p.Points.Count; ++i)
-                //    {
-                //        sb.Append(p.Points[i].Lng);
-                //        sb.Append(" ");
-                //        sb.Append(p.Points[i].Lat);
-                //        if (i != p.Points.Count - 1)
-                //        {
-                //            sb.Append(",");
-                //        }
-                //    }
-                //    File.WriteAllText("aaa.txt", sb.ToString());
-                //}
-                regionOverlay.Polygons.Clear();
-                regionOverlay.Polygons.Add(p);
-                RectLatLng rect = GMapChinaRegion.MapRegion.GetRegionMaxRect(p);
-                this.mapControl.SetZoomToFitRect(rect);
-            }
         }
 
         #endregion

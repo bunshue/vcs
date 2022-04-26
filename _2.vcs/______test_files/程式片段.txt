@@ -1,3 +1,11 @@
+EMGU讀取WebCam
+Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+EMGU讀取圖片檔案
+//Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
+string filename = @"C:\______test_files\ims01.bmp";
+Image<Bgr, Byte> image = new Image<Bgr, byte>(filename);
+
+            
 
 高德地圖
 https://www.amap.com/

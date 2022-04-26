@@ -29,6 +29,12 @@ namespace vcs_PictureColor
         int y_sp = 0;
 
         Image image;
+        int[] brightness_data = new int[256];
+
+        int max = 255;
+        int min = 0;
+        int brightness = 128;
+        int contrast = 128;
 
         public Form1()
         {
@@ -65,6 +71,8 @@ namespace vcs_PictureColor
             lb_max.Text = "";
             lb_min.Text = "";
             lb_ratio.Text = "";
+
+            measure_brightness();
         }
 
         void show_item_location()
@@ -80,10 +88,10 @@ namespace vcs_PictureColor
             pictureBox0.Size = new Size(W, H);
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
-            pictureBox3.Size = new Size(512, 200);
+            pictureBox3.Size = new Size(512, 300);
             pictureBox4.Size = new Size(512, 200);
             pictureBox5.Size = new Size(512, 200);
-            groupBox1.Size = new Size(W * 2 - 20, 1080 - 480 - 200 - 10);
+            groupBox1.Size = new Size(W * 2 - 20, 1080 - 480 - 200 - 150);
             richTextBox1.Size = new Size(W, 1080 - 480 - 200);
 
             x_st = 0;
@@ -97,14 +105,53 @@ namespace vcs_PictureColor
             pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            groupBox1.Location = new Point(x_st + dx * 0 + 10, y_st + dy * 1 + 200);
+            groupBox1.Location = new Point(x_st + dx * 0 + 10, y_st + dy * 1 + 330);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 200);
 
             //button
             x_st = 20;
             y_st = 30;
-            dx = 160;
-            dy = 70;
+            dx = 190;
+            dy = 30;
+
+            x_st = 610;
+            y_st = 30;
+            hScrollBar1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            hScrollBar2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            hScrollBar3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            hScrollBar4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            lb_v1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            lb_v2.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            lb_v3.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            lb_v4.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+
+            hScrollBar1.Size = new Size(180, 20);
+            hScrollBar2.Size = new Size(180, 20);
+            hScrollBar3.Size = new Size(180, 20);
+            hScrollBar4.Size = new Size(180, 20);
+            hScrollBar1.Minimum = 0;
+            hScrollBar2.Minimum = 0;
+            hScrollBar3.Minimum = 0;
+            hScrollBar4.Minimum = 0;
+            hScrollBar1.Maximum = 255;
+            hScrollBar2.Maximum = 255;
+            hScrollBar3.Maximum = 255;
+            hScrollBar4.Maximum = 255;
+            hScrollBar1.Value = 0;
+            hScrollBar2.Value = 255;
+            hScrollBar3.Value = 128;
+            hScrollBar4.Value = 128;
+            max = 255;
+            min = 0;
+            brightness = 128;
+            contrast = 128;
+            lb_v1.Text = hScrollBar1.Value.ToString();
+            lb_v2.Text = hScrollBar2.Value.ToString();
+            lb_v3.Text = hScrollBar3.Value.ToString();
+            lb_v4.Text = hScrollBar4.Value.ToString();
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -417,72 +464,7 @@ namespace vcs_PictureColor
 
         private void button3_Click(object sender, EventArgs e)
         {
-            x_st = 50;
-            y_st = 50;
-            w = 640 - 100;
-            h = 480 - 100;
-
-            Bitmap bitmap1 = (Bitmap)pictureBox0.Image;
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-            int i;
-            int j;
-            int[] brightness = new int[256];
-            int total_points = 0;
-
-            for (j = y_st; j < (y_st + h); j++)
-            {
-                for (i = x_st; i < (x_st + w); i++)
-                {
-                    byte rrr = bitmap1.GetPixel(i, j).R;
-                    //richTextBox1.Text += rrr.ToString() + "-";
-                    brightness[rrr]++;
-                    total_points++;
-                }
-            }
-
-
-
-            richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
-
-            int most = 0;
-            for (i = 0; i < 256; i++)
-            {
-                richTextBox1.Text += brightness[i].ToString() + " ";
-                if (brightness[i] > most)
-                    most = brightness[i];
-                if (brightness[i] == 0)
-                    brightness[i] = 5;
-            }
-            richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
-
-            int ww = 512;
-            int hh = 200;
-            Bitmap bitmap2 = new Bitmap(ww, hh);
-            Graphics g2 = Graphics.FromImage(bitmap2);
-            //g2.Clear(Color.Pink);
-
-            double ratio = 0;
-            ratio = (double)hh / most;
-
-            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
-
-            for (i = 0; i < 256; i++)
-            {
-                //g2.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(brightness[i] * ratio));
-
-
-                g2.FillRectangle(Brushes.Red, i * 2, hh - (float)(brightness[i] * ratio), 2, (float)(brightness[i] * ratio));
-
-            }
-
-            g2.DrawRectangle(Pens.Red, 0, 0, ww - 1, hh - 1);
-
-
-
-
-            pictureBox3.Image = bitmap2;
+            measure_brightness();
 
         }
 
@@ -505,7 +487,7 @@ namespace vcs_PictureColor
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
             int i;
             int j;
-            int[] brightness = new int[256];
+            brightness_data = new int[256];
             int total_points = 0;
 
             for (j = y_st; j < (y_st + h); j++)
@@ -514,25 +496,23 @@ namespace vcs_PictureColor
                 {
                     byte rrr = bitmap2.GetPixel(i, j).R;
                     //richTextBox1.Text += rrr.ToString() + "-";
-                    brightness[rrr]++;
+                    brightness_data[rrr]++;
                     total_points++;
                 }
             }
 
-
-
-            richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
+            //richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
 
             int most = 0;
             for (i = 0; i < 256; i++)
             {
-                richTextBox1.Text += brightness[i].ToString() + " ";
-                if (brightness[i] > most)
-                    most = brightness[i];
-                if (brightness[i] == 0)
-                    brightness[i] = 5;
+                richTextBox1.Text += brightness_data[i].ToString() + " ";
+                if (brightness_data[i] > most)
+                    most = brightness_data[i];
+                if (brightness_data[i] == 0)
+                    brightness_data[i] = 5;
             }
-            richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
+            //richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
 
             int ww = 512;
             int hh = 200;
@@ -543,14 +523,14 @@ namespace vcs_PictureColor
             double ratio = 0;
             ratio = (double)hh / most;
 
-            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
+            //richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
             for (i = 0; i < 256; i++)
             {
-                //g2.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(brightness[i] * ratio));
+                //g2.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(brightness_data[i] * ratio));
 
 
-                g3.FillRectangle(Brushes.Red, i * 2, hh - (float)(brightness[i] * ratio), 2, (float)(brightness[i] * ratio));
+                g3.FillRectangle(Brushes.Red, i * 2, hh - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
 
             }
 
@@ -561,6 +541,199 @@ namespace vcs_PictureColor
 
             pictureBox4.Image = bitmap3;
         }
+
+        void measure_brightness()
+        {
+            brightness_data = new int[256];
+
+            x_st = 50;
+            y_st = 50;
+            w = 640 - 100;
+            h = 480 - 100;
+
+            Bitmap bitmap1 = (Bitmap)pictureBox0.Image;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            int i;
+            int j;
+            int total_points = 0;
+
+            for (j = y_st; j < (y_st + h); j++)
+            {
+                for (i = x_st; i < (x_st + w); i++)
+                {
+                    byte rrr = bitmap1.GetPixel(i, j).R;
+                    //richTextBox1.Text += rrr.ToString() + "-";
+                    brightness_data[rrr]++;
+                    total_points++;
+                }
+            }
+
+
+
+            richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
+
+
+            draw_brightness();
+
+        }
+
+        void draw_brightness()
+        {
+            int i;
+            int most = 0;
+            for (i = 0; i < 256; i++)
+            {
+                //richTextBox1.Text += brightness_data[i].ToString() + " ";
+                if (brightness_data[i] > most)
+                    most = brightness_data[i];
+                if (brightness_data[i] == 0)
+                    brightness_data[i] = 5;
+            }
+            //richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
+
+            int ww = 512;
+            int hh1 = 300;
+            int hh2 = 256;
+            Bitmap bitmap2 = new Bitmap(ww, hh1);
+            Graphics g2 = Graphics.FromImage(bitmap2);
+            g2.Clear(Color.Pink);
+            Pen p = new Pen(Color.Red, 2);
+
+            double ratio = 0;
+            ratio = (double)hh2 / most;
+
+            //richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
+
+            for (i = 0; i < 256; i++)
+            {
+                //g2.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(brightness_data[i] * ratio));
+
+
+                g2.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
+
+            }
+
+
+            g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
+            g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
+
+            p = new Pen(Color.Green, 3);
+
+            g2.DrawLine(p, min * 2, hh2, max * 2, 0);
+
+            Font f = new Font("標楷體", 20);
+
+            g2.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, hh2));
+
+            g2.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(256 * 2 - 50, hh2));
+
+
+
+            pictureBox3.Image = bitmap2;
+
+
+
+
+        }
+
+        private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+            //min
+            if (hScrollBar1.Value > hScrollBar2.Value)
+            {
+                hScrollBar2.Value = hScrollBar1.Value;
+            }
+
+            hScrollBar3.Value = 128 - hScrollBar1.Value / 2;
+            hScrollBar4.Value = 128 + hScrollBar1.Value / 2;
+
+            min = hScrollBar1.Value;
+            max = hScrollBar2.Value;
+            lb_v1.Text = hScrollBar1.Value.ToString();
+            draw_brightness();
+        }
+
+        private void hScrollBar2_Scroll(object sender, ScrollEventArgs e)
+        {
+            //max
+            if (hScrollBar2.Value < hScrollBar1.Value)
+            {
+                hScrollBar1.Value = hScrollBar2.Value;
+            }
+
+            hScrollBar3.Value = 255 - hScrollBar2.Value / 2;
+            hScrollBar4.Value = 255 - hScrollBar2.Value / 2;
+
+            min = hScrollBar1.Value;
+            max = hScrollBar2.Value;
+            lb_v2.Text = hScrollBar2.Value.ToString();
+            draw_brightness();
+        }
+
+        private void hScrollBar3_Scroll(object sender, ScrollEventArgs e)
+        {
+            //brightness
+
+
+            lb_v3.Text = hScrollBar3.Value.ToString();
+        }
+
+        int already_move = 0;
+        private void hScrollBar4_Scroll(object sender, ScrollEventArgs e)
+        {
+            //contrast
+            int dd = 0;
+            if (hScrollBar4.Value > 128)
+            {
+                dd = hScrollBar4.Value - 128;
+                richTextBox1.Text += dd.ToString() + " ";
+
+                if (min < hScrollBar1.Minimum)
+                {
+                    hScrollBar1.Value = hScrollBar1.Minimum;
+                }
+                else
+                {
+                    hScrollBar1.Value = min;
+
+                }
+                if (max > hScrollBar2.Maximum)
+                {
+                    hScrollBar2.Value = hScrollBar2.Maximum;
+                }
+                else
+                {
+                    hScrollBar2.Value = max;
+
+                }
+
+                draw_brightness();
+
+
+            }
+
+            lb_v4.Text = hScrollBar4.Value.ToString();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            hScrollBar1.Value = 0;
+            hScrollBar2.Value = 255;
+            hScrollBar3.Value = 128;
+            hScrollBar4.Value = 128;
+            max = 255;
+            min = 0;
+            brightness = 128;
+            contrast = 128;
+            lb_v1.Text = hScrollBar1.Value.ToString();
+            lb_v2.Text = hScrollBar2.Value.ToString();
+            lb_v3.Text = hScrollBar3.Value.ToString();
+            lb_v4.Text = hScrollBar4.Value.ToString();
+
+        }
     }
 }
+
 

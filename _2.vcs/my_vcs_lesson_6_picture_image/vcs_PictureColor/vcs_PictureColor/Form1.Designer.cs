@@ -55,6 +55,15 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.hScrollBar4 = new System.Windows.Forms.HScrollBar();
+            this.hScrollBar3 = new System.Windows.Forms.HScrollBar();
+            this.hScrollBar2 = new System.Windows.Forms.HScrollBar();
+            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.lb_v1 = new System.Windows.Forms.Label();
+            this.lb_v2 = new System.Windows.Forms.Label();
+            this.lb_v3 = new System.Windows.Forms.Label();
+            this.lb_v4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
@@ -287,11 +296,9 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox3.Location = new System.Drawing.Point(330, 12);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox3.TabIndex = 23;
             this.pictureBox3.TabStop = false;
             // 
@@ -327,8 +334,17 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lb_v4);
+            this.groupBox1.Controls.Add(this.lb_v3);
+            this.groupBox1.Controls.Add(this.lb_v2);
+            this.groupBox1.Controls.Add(this.lb_v1);
+            this.groupBox1.Controls.Add(this.button8);
+            this.groupBox1.Controls.Add(this.hScrollBar4);
+            this.groupBox1.Controls.Add(this.hScrollBar3);
             this.groupBox1.Controls.Add(this.nud_x_st);
+            this.groupBox1.Controls.Add(this.hScrollBar2);
             this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.hScrollBar1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.nud_y_st);
             this.groupBox1.Controls.Add(this.label2);
@@ -350,6 +366,92 @@
             this.groupBox1.Size = new System.Drawing.Size(620, 280);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(431, 234);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(80, 40);
+            this.button8.TabIndex = 32;
+            this.button8.Text = "恢復";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // hScrollBar4
+            // 
+            this.hScrollBar4.LargeChange = 1;
+            this.hScrollBar4.Location = new System.Drawing.Point(379, 206);
+            this.hScrollBar4.Name = "hScrollBar4";
+            this.hScrollBar4.Size = new System.Drawing.Size(150, 20);
+            this.hScrollBar4.TabIndex = 31;
+            this.hScrollBar4.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar4_Scroll);
+            // 
+            // hScrollBar3
+            // 
+            this.hScrollBar3.LargeChange = 1;
+            this.hScrollBar3.Location = new System.Drawing.Point(379, 172);
+            this.hScrollBar3.Name = "hScrollBar3";
+            this.hScrollBar3.Size = new System.Drawing.Size(150, 20);
+            this.hScrollBar3.TabIndex = 30;
+            this.hScrollBar3.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar3_Scroll);
+            // 
+            // hScrollBar2
+            // 
+            this.hScrollBar2.LargeChange = 1;
+            this.hScrollBar2.Location = new System.Drawing.Point(379, 129);
+            this.hScrollBar2.Name = "hScrollBar2";
+            this.hScrollBar2.Size = new System.Drawing.Size(150, 20);
+            this.hScrollBar2.TabIndex = 29;
+            this.hScrollBar2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar2_Scroll);
+            // 
+            // hScrollBar1
+            // 
+            this.hScrollBar1.LargeChange = 1;
+            this.hScrollBar1.Location = new System.Drawing.Point(379, 90);
+            this.hScrollBar1.Name = "hScrollBar1";
+            this.hScrollBar1.Size = new System.Drawing.Size(150, 20);
+            this.hScrollBar1.TabIndex = 28;
+            this.hScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
+            // 
+            // lb_v1
+            // 
+            this.lb_v1.AutoSize = true;
+            this.lb_v1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v1.Location = new System.Drawing.Point(541, 90);
+            this.lb_v1.Name = "lb_v1";
+            this.lb_v1.Size = new System.Drawing.Size(32, 24);
+            this.lb_v1.TabIndex = 33;
+            this.lb_v1.Text = "v1";
+            // 
+            // lb_v2
+            // 
+            this.lb_v2.AutoSize = true;
+            this.lb_v2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v2.Location = new System.Drawing.Point(541, 126);
+            this.lb_v2.Name = "lb_v2";
+            this.lb_v2.Size = new System.Drawing.Size(32, 24);
+            this.lb_v2.TabIndex = 34;
+            this.lb_v2.Text = "v2";
+            // 
+            // lb_v3
+            // 
+            this.lb_v3.AutoSize = true;
+            this.lb_v3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v3.Location = new System.Drawing.Point(541, 168);
+            this.lb_v3.Name = "lb_v3";
+            this.lb_v3.Size = new System.Drawing.Size(32, 24);
+            this.lb_v3.TabIndex = 35;
+            this.lb_v3.Text = "v3";
+            // 
+            // lb_v4
+            // 
+            this.lb_v4.AutoSize = true;
+            this.lb_v4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v4.Location = new System.Drawing.Point(541, 206);
+            this.lb_v4.Name = "lb_v4";
+            this.lb_v4.Size = new System.Drawing.Size(32, 24);
+            this.lb_v4.TabIndex = 36;
+            this.lb_v4.Text = "v4";
             // 
             // Form1
             // 
@@ -413,6 +515,15 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.HScrollBar hScrollBar1;
+        private System.Windows.Forms.HScrollBar hScrollBar2;
+        private System.Windows.Forms.HScrollBar hScrollBar3;
+        private System.Windows.Forms.HScrollBar hScrollBar4;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label lb_v4;
+        private System.Windows.Forms.Label lb_v3;
+        private System.Windows.Forms.Label lb_v2;
+        private System.Windows.Forms.Label lb_v1;
     }
 }
 

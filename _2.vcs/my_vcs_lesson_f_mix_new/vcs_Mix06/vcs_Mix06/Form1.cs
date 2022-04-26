@@ -256,31 +256,6 @@ namespace vcs_Mix06
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //計算兩個日期的時間間隔
-            //計算兩個日期的時間間隔
-            DateTime dt2 = new DateTime(1974, 9, 24);
-            DateTime dt1 = new DateTime(1999, 3, 8);
-            string diff = DateDiff(dt1, dt2);
-            richTextBox1.Text += "時間間隔 : " + diff + "\n";
-        }
-
-        /// <summary>
-        /// 計算兩個日期的時間間隔
-        /// </summary>
-        /// <param name="DateTime1">第一個日期和時間</param>
-        /// <param name="DateTime2">第二個日期和時間</param>
-        /// <returns></returns>
-        private string DateDiff(DateTime DateTime1, DateTime DateTime2)
-        {
-            string dateDiff = null;
-            TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
-            TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
-            TimeSpan ts = ts1.Subtract(ts2).Duration();
-            dateDiff = ts.Days.ToString() + "天"
-                + ts.Hours.ToString() + "小時"
-                + ts.Minutes.ToString() + "分鐘"
-                + ts.Seconds.ToString() + "秒";
-            return dateDiff;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -300,15 +275,6 @@ namespace vcs_Mix06
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            long seconds = DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
-
-            richTextBox1.Text += "現在時間用Ticks表示 : " + DateTime.Now.Ticks.ToString() + "\n";
-            richTextBox1.Text += "每秒有幾個Ticks : " + TimeSpan.TicksPerSecond.ToString() + "\n";
-            richTextBox1.Text += "現在時間用秒表示 : " + seconds.ToString() + "\n";
-
-
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -379,130 +345,17 @@ namespace vcs_Mix06
         {
             show_button_text(sender);
 
-            richTextBox1.Text += "取得音樂檔案長度 :\n";
-
-            string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
-
-            richTextBox1.Text += "檔案 : " + filename + "\n";
-            richTextBox1.Text += "音樂長度 : ";
-            string[] result = GetMP3Time(filename);
-            foreach (string str in result)
-            {
-                richTextBox1.Text += str + " ";
-            }
-            richTextBox1.Text += "\n";
         }
-
-
-        /// <summary>  
-        /// 获得音乐长度  
-        /// </summary>  
-        /// <param name="filePath">文件的完整路径</param>
-        public static string[] GetMP3Time(string filePath)
-        {
-            string dirName = Path.GetDirectoryName(filePath);
-            string SongName = Path.GetFileName(filePath);//获得歌曲名称             
-            Shell sh = new Shell();
-            //ShellClass sh = new ShellClass();  or
-            Folder dir = sh.NameSpace(dirName);
-            FolderItem item = dir.ParseName(SongName);
-            string SongTime = dir.GetDetailsOf(item, 27);//27为获得歌曲持续时间 ，28为获得音乐速率，1为获得音乐文件大小      
-            string[] time = Regex.Split(SongTime, ":");
-            return time;
-        }
-
-        /// <summary>
-        /// 转换函数
-        /// </summary>
-        /// <param name="exe">ffmpeg程序</param>
-        /// <param name="arg">执行参数</param>
-        public static void ExcuteProcess(string exe, string arg)
-        {
-            using (var p = new Process())
-            {
-                p.StartInfo.FileName = exe;
-                p.StartInfo.Arguments = arg;
-                p.StartInfo.UseShellExecute = false;    //输出信息重定向  
-                p.StartInfo.CreateNoWindow = true;
-                p.StartInfo.RedirectStandardError = true;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.Start();                    //启动线程  
-                p.BeginOutputReadLine();
-                p.BeginErrorReadLine();
-                p.WaitForExit();//等待进程结束                                        
-            }
-        }
-
-
 
         private void button10_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //音频转换
-            //string fromMusic = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
-            string fromMusic = @"C:\______test_files\_wav\WindowsShutdown.wav";
-            string toMusic = @"aaaaa.wav";
-
-            int bitrate = 12 * 1000;//恒定码率
-            int Hz = 3000;//采样频率  
-
-            try
-            {
-                ExcuteProcess(ffmpeg, "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + fromMusic + "\" \"" + toMusic + "\"");
-
-                richTextBox1.Text += "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + fromMusic + "\" \"" + toMusic + "\"";
-                richTextBox1.Text += "轉換完成\n";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-            //音频切割
-            string fromPath = @"C:\______test_files\_wav\harumi99.wav";
-            string savePath = @"bbbbb.wav";
-
-
-            /*
-                        int BeginM = 0;
-                        int BeginS = 0;
-                        int EndM = 0;
-                        int EndS = 10;
-
-                        string startTime = string.Format("0:{0}:{1}", BeginM.ToString(), BeginS.ToString()).Trim();//歌曲起始时间
-                        //int duration = (Convert.ToInt32(this.txtEndM.Text) * 60 + Convert.ToInt32(this.txtEndS.Text)) - (Convert.ToInt32(this.txtBeginM.Text) * 60 + Convert.ToInt32(this.txtBeginS.Text));
-                        int duration = (EndM * 60 + EndS) - (BeginM * 60 + BeginS);
-                        string endTime = string.Format("0:{0}:{1}", duration / 60, duration % 60);//endTime是持续的时间，不是歌曲结束的时间
-                        string savePath = @"aaaaaa.wav";//切割后音乐保存的物理路径
-            */
-
-            /*
-            string startTime = string.Format("0:{0}:{1}", txtBeginM.Text, txtBeginS.Text).Trim();//歌曲起始时间  
-            int duration = (Convert.ToInt32(this.txtEndM.Text) * 60 + Convert.ToInt32(this.txtEndS.Text)) - (Convert.ToInt32(this.txtBeginM.Text) * 60 + Convert.ToInt32(this.txtBeginS.Text));
-            string endTime = string.Format("0:{0}:{1}", duration / 60, duration % 60);//endTime是持续的时间，不是歌曲结束的时间  
-            */
-
-            string startTime = "0:0:30";
-            string endTime = "0:1:30";
-
-            try
-            {
-                ExcuteProcess(ffmpeg, "-y -i \"" + fromPath + "\" -ss " + startTime + " -t " + endTime + " -acodec copy \"" + savePath + "\"");//-acodec copy表示歌曲的码率和采样频率均与前者相同
-
-                richTextBox1.Text += "已切割完成\n";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
 
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -531,11 +384,6 @@ namespace vcs_Mix06
         private void button13_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            DateTime dt = DateTime.Now;
-
-            richTextBox1.Text += "現在時間 : " + DateTime.Now.ToString("hh:mm:ss.fff") + "\n";
-
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -595,11 +443,6 @@ namespace vcs_Mix06
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //星期幾
-            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
-
-            richTextBox1.Text += week + "\n";
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -848,23 +691,6 @@ namespace vcs_Mix06
         private void button25_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            DateTime dt = DateTime.Now;
-
-            string filename = String.Format("{0}-{1}-{2}_{3}-{4}-{5}",
-                                            dt.Year, dt.Month, dt.Day,
-                                            dt.Hour, dt.Minute,
-                                            dt.Second);
-
-            richTextBox1.Text += filename + "\n";
-
-
-            richTextBox1.Text += DateTime.Now.Ticks.ToString() + "\n";
-
-
-            richTextBox1.Text += Environment.NewLine + "Conversion finished @ " + DateTime.Now.ToString();
-
-
         }
 
         private void button26_Click(object sender, EventArgs e)

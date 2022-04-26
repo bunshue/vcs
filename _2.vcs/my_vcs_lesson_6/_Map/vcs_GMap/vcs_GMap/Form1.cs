@@ -24,6 +24,8 @@ using GMap.NET.WindowsForms.Markers;
 
 using GMapChinaRegion;
 
+using GMapDownload;
+
 //需要GMap.NET.Core.dll 和 GMap.NET.WindowsForms.dll這兩個檔案。
 
 namespace vcs_GMap
@@ -146,7 +148,8 @@ namespace vcs_GMap
 
             comboBox1.Location = new Point(x_st, y_st + dy * 3);
             btn_draw_profile.Location = new Point(x_st, y_st + dy * 4);
-            btn_draw_profile2.Location = new Point(x_st+85, y_st + dy * 4);
+            btn_draw_profile2.Location = new Point(x_st + 85, y_st + dy * 4);
+            groupBox3.Location = new Point(x_st, y_st + dy * 5+20);
 
             x_st = 20;
             y_st = 15;
@@ -801,6 +804,12 @@ namespace vcs_GMap
 
                         richTextBox1.Text += "量測距離 直線 : " + dist1 + "\t總距離 : " + dist2 + "\n";
                         lb_distance.Text = dist2;
+
+                        //在地圖上寫字
+                        PointLatLng point_middle = new PointLatLng((pt1.Lat + pt2.Lat) / 2, (pt1.Lng + pt2.Lng) / 2);
+                        GMapTextMarker textMarker = new GMapTextMarker(point_middle, dist2);
+                        markersOverlay.Markers.Add(textMarker);
+
                         pt1 = point;
 
                         if (flag_measure_distance == 1) //0 : 無量測, 1 : 量測距離 單程, 2 : 量測距離 連續
@@ -1416,15 +1425,6 @@ namespace vcs_GMap
                 return;
             }
 
-            /*
-            List<string> regionNames = GMapChinaRegion.MapRegion.GetAllRegionName();
-            foreach (var regionName in regionNames)
-            {
-                //this.comboBoxRegion.Items.Add(regionName);
-                richTextBox1.Text += "get " + regionName + "\n";
-            }
-            */
-
             gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
             GMapPolygon p = GMapChinaRegion.MapRegion.CreateMapPolygon(location);
             if (p != null)
@@ -1780,6 +1780,63 @@ namespace vcs_GMap
                 int dy = 25;
                 lb_distance.Location = new Point(x_st + 90, y_st + dy * 2);
             }
+        }
+
+        private void bt_test00_Click(object sender, EventArgs e)
+        {
+            //列出省市界資料
+
+            List<string> regionNames = GMapChinaRegion.MapRegion.GetAllRegionName();
+            foreach (var regionName in regionNames)
+            {
+                richTextBox1.Text += "get " + regionName + "\n";
+            }
+        }
+
+        private void bt_test01_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void bt_test02_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test03_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test04_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test05_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test06_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test07_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test08_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test09_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

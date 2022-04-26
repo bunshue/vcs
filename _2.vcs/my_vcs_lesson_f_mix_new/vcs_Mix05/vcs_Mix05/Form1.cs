@@ -374,11 +374,6 @@ namespace vcs_Mix05
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //分出 時:分:秒 再組合
-            DateTime dt = DateTime.Now;
-            richTextBox1.Text += dt.Hour.ToString().PadLeft(2, '0') + ":"
-                                    + dt.Minute.ToString().PadLeft(2, '0') + ":"
-                                    + dt.Second.ToString().PadLeft(2, '0') + "\n";
         }
 
         //設置系統日期和時間 ST
@@ -1179,48 +1174,6 @@ namespace vcs_Mix05
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-/*            
-//時間比較
-use "DateTime.Compare" static method
-
-DateTime.Compare( dt1, dt2 ) > 0 : dt1 > dt2
-DateTime.Compare( dt1, dt2 ) == 0 : dt1 == dt2
-DateTime.Compare( dt1, dt2 ) < 0 : dt1 < dt2
-       
-
-DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元9999年12月31日23點59分59秒之間的具體日期時刻。
-因此，你可以用DateTime值類型來描述任何在想象范圍之內的時間。
-*/
-            DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 20);
-            DateTime dt2 = DateTime.Now;
-            string diff = DateDiff(dt1, dt2);
-            richTextBox1.Text += "diff = " + diff + "\n";
-
-            dt1 = new DateTime(1939, 9, 1);
-            dt2 = new DateTime(1945, 9, 2);
-            diff = DateDiff(dt1, dt2);
-            richTextBox1.Text += "diff = " + diff + "\n";
-        }
-
-        /// <summary>
-        /// 計算兩個日期的時間間隔
-        /// </summary>
-        /// <param name="DateTime1">第一個日期和時間</param>
-        /// <param name="DateTime2">第二個日期和時間</param>
-        /// <returns></returns>
-        private string DateDiff(DateTime DateTime1, DateTime DateTime2)
-        {
-            string dateDiff = null;
-
-            TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
-            TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
-            TimeSpan ts = ts1.Subtract(ts2).Duration();
-            dateDiff = ts.Days.ToString() + "天"
-                + ts.Hours.ToString() + "小時"
-                + ts.Minutes.ToString() + "分鐘"
-                + ts.Seconds.ToString() + "秒";
-
-            return dateDiff;
         }
     }
 

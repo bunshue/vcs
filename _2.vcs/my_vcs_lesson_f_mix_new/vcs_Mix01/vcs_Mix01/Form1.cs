@@ -322,7 +322,6 @@ namespace vcs_Mix01
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            richTextBox1.Text += "僅顯示上下午幾點幾分幾秒:\t" + DateTime.Now.ToString("T") + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)

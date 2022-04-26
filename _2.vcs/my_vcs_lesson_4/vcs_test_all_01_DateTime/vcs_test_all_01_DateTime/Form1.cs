@@ -326,6 +326,11 @@ namespace vcs_test_all_01_DateTime
 
         private void button2_Click(object sender, EventArgs e)
         {
+            long seconds = DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
+
+            richTextBox1.Text += "現在時間用Ticks表示 : " + DateTime.Now.Ticks.ToString() + "\n";
+            richTextBox1.Text += "每秒有幾個Ticks : " + TimeSpan.TicksPerSecond.ToString() + "\n";
+            richTextBox1.Text += "現在時間用秒表示 : " + seconds.ToString() + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1022,6 +1027,33 @@ namespace vcs_test_all_01_DateTime
 
         private void button38_Click(object sender, EventArgs e)
         {
+            //計算兩個日期的時間間隔
+
+            //計算兩個日期的時間間隔
+            //計算兩個日期的時間間隔
+            DateTime dt2 = new DateTime(1974, 9, 24);
+            DateTime dt1 = new DateTime(1999, 3, 8);
+            string diff = DateDiff3(dt1, dt2);
+            richTextBox1.Text += "時間間隔 : " + diff + "\n";
+        }
+
+        /// <summary>
+        /// 計算兩個日期的時間間隔
+        /// </summary>
+        /// <param name="DateTime1">第一個日期和時間</param>
+        /// <param name="DateTime2">第二個日期和時間</param>
+        /// <returns></returns>
+        private string DateDiff3(DateTime DateTime1, DateTime DateTime2)
+        {
+            string dateDiff = null;
+            TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
+            TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+            dateDiff = ts.Days.ToString() + "天"
+                + ts.Hours.ToString() + "小時"
+                + ts.Minutes.ToString() + "分鐘"
+                + ts.Seconds.ToString() + "秒";
+            return dateDiff;
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -1195,6 +1227,10 @@ namespace vcs_test_all_01_DateTime
 
         private void button31_Click(object sender, EventArgs e)
         {
+            //僅顯示上下午幾點幾分幾秒
+
+            richTextBox1.Text += "僅顯示上下午幾點幾分幾秒:\t" + DateTime.Now.ToString("T") + "\n";
+
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -1228,6 +1264,13 @@ namespace vcs_test_all_01_DateTime
 
         private void button47_Click(object sender, EventArgs e)
         {
+            //分出 時:分:秒 再組合
+            DateTime dt = DateTime.Now;
+            richTextBox1.Text += dt.Hour.ToString().PadLeft(2, '0') + ":"
+                                    + dt.Minute.ToString().PadLeft(2, '0') + ":"
+                                    + dt.Second.ToString().PadLeft(2, '0') + "\n";
+
+            richTextBox1.Text += "現在時間 : " + DateTime.Now.ToString("hh:mm:ss.fff") + "\n";
         }
 
         //y－年，m－月，d－日期
@@ -1259,6 +1302,25 @@ namespace vcs_test_all_01_DateTime
 
         private void button48_Click(object sender, EventArgs e)
         {
+            //依時間建立檔案
+
+            DateTime dt = DateTime.Now;
+
+            string filename = String.Format("{0}-{1}-{2}_{3}-{4}-{5}",
+                                            dt.Year, dt.Month, dt.Day,
+                                            dt.Hour, dt.Minute,
+                                            dt.Second);
+
+            richTextBox1.Text += filename + "\n";
+
+
+            richTextBox1.Text += DateTime.Now.Ticks.ToString() + "\n";
+
+
+            richTextBox1.Text += Environment.NewLine + "Conversion finished @ " + DateTime.Now.ToString();
+
+
+
         }
 
         private void button39_Click(object sender, EventArgs e)
@@ -1667,6 +1729,50 @@ namespace vcs_test_all_01_DateTime
 
         private void button54_Click(object sender, EventArgs e)
         {
+            //時間比較
+
+            /*            
+//時間比較
+use "DateTime.Compare" static method
+
+DateTime.Compare( dt1, dt2 ) > 0 : dt1 > dt2
+DateTime.Compare( dt1, dt2 ) == 0 : dt1 == dt2
+DateTime.Compare( dt1, dt2 ) < 0 : dt1 < dt2
+       
+
+DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元9999年12月31日23點59分59秒之間的具體日期時刻。
+因此，你可以用DateTime值類型來描述任何在想象范圍之內的時間。
+*/
+            DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 20);
+            DateTime dt2 = DateTime.Now;
+            string diff = DateDiff2(dt1, dt2);
+            richTextBox1.Text += "diff = " + diff + "\n";
+
+            dt1 = new DateTime(1939, 9, 1);
+            dt2 = new DateTime(1945, 9, 2);
+            diff = DateDiff2(dt1, dt2);
+            richTextBox1.Text += "diff = " + diff + "\n";
+        }
+
+        /// <summary>
+        /// 計算兩個日期的時間間隔
+        /// </summary>
+        /// <param name="DateTime1">第一個日期和時間</param>
+        /// <param name="DateTime2">第二個日期和時間</param>
+        /// <returns></returns>
+        private string DateDiff2(DateTime DateTime1, DateTime DateTime2)
+        {
+            string dateDiff = null;
+
+            TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
+            TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+            dateDiff = ts.Days.ToString() + "天"
+                + ts.Hours.ToString() + "小時"
+                + ts.Minutes.ToString() + "分鐘"
+                + ts.Seconds.ToString() + "秒";
+
+            return dateDiff;
         }
 
         private void bt_special_00_Click(object sender, EventArgs e)
@@ -2113,6 +2219,13 @@ namespace vcs_test_all_01_DateTime
                     break;
             }
             richTextBox1.Text += week + "\n";
+
+
+            //星期幾
+            string[] Day2 = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            string week2 = Day2[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+
+            richTextBox1.Text += week2 + "\n";
         }
 
         /*
