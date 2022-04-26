@@ -136,7 +136,7 @@ namespace vcs_test_all_01_DateTime
             button59.Location = new Point(x_st + dx * 3, y_st + dy * 14);
 
             groupBox6.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            groupBox7.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            groupBox7.Location = new Point(x_st + dx * 6-70, y_st + dy * 0);
 
             //button
             x_st = 10;
@@ -775,9 +775,31 @@ namespace vcs_test_all_01_DateTime
 
         }
 
+        //由日期找出星座 ST
         private void button30_Click(object sender, EventArgs e)
         {
+            //由日期找出星座
+            int month = 3;
+            int day = 11;
+            string result = getAstro(month, day);
+            richTextBox1.Text += result + "\n";
         }
+
+        private static String getAstro(int month, int day)
+        {
+            String[] starArr = { "魔羯座", "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處女座", "天秤座", "天蠍座", "射手座" };
+            int[] DayArr = { 22, 20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22 };  // 兩個星座分割日
+            int index = month;
+            // 所查詢日期在分割日之前，索引-1，否則不變
+            if (day < DayArr[month - 1])
+            {
+                index = index - 1;
+            }
+            index = index % 12;
+            // 返回索引指向的星座string
+            return starArr[index];
+        }
+        //由日期找出星座 SP
 
         private void button28_Click(object sender, EventArgs e)
         {
@@ -1171,165 +1193,8 @@ namespace vcs_test_all_01_DateTime
 
         }
 
-
-        //天干
-        private static string[] TianGan = { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸" };
-
-        //地支
-        private static string[] DiZhi = { "子", "醜", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥" };
-
-        //十二生肖
-        private static string[] ShengXiao = { "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬" };
-
-        //農曆日期
-        private static string[] DayName = {"*","初一","初二","初三","初四","初五",
-"初六","初七","初八","初九","初十",
-"十一","十二","十三","十四","十五",
-"十六","十七","十八","十九","二十",
-"廿一","廿二","廿三","廿四","廿五",
-"廿六","廿七","廿八","廿九","三十"};
-
-        //農曆月份
-        private static string[] MonthName = { "*", "正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "臘" };
-
-        //西曆月計數天
-        private static int[] MonthAdd = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
-
-        //農曆資料
-        private static int[] LunarData = {2635,333387,1701,1748,267701,694,2391,133423,1175,396438
-,3402,3749,331177,1453,694,201326,2350,465197,3221,3402
-,400202,2901,1386,267611,605,2349,137515,2709,464533,1738
-,2901,330421,1242,2651,199255,1323,529706,3733,1706,398762
-,2741,1206,267438,2647,1318,204070,3477,461653,1386,2413
-,330077,1197,2637,268877,3365,531109,2900,2922,398042,2395
-,1179,267415,2635,661067,1701,1748,398772,2742,2391,330031
-,1175,1611,200010,3749,527717,1452,2742,332397,2350,3222
-,268949,3402,3493,133973,1386,464219,605,2349,334123,2709
-,2890,267946,2773,592565,1210,2651,395863,1323,2707,265877};
-
-
         private void button31_Click(object sender, EventArgs e)
         {
-            DateTime dt = DateTime.Now;
-            string lunar_date;
-            lunar_date = GetLunarCalendar(dt);
-            richTextBox1.Text += lunar_date + "\n";
-
-        }
-
-        /// <summary>
-        /// 獲取對應日期的農曆
-        /// </summary>
-        /// <param name="dtDay">西曆日期</param>
-        /// <returns></returns>
-
-        public string GetLunarCalendar(DateTime dtDay)
-        {
-            string sYear = dtDay.Year.ToString();
-            string sMonth = dtDay.Month.ToString();
-            string sDay = dtDay.Day.ToString();
-            int year;
-            int month;
-            int day;
-            try
-            {
-                year = int.Parse(sYear);
-                month = int.Parse(sMonth);
-                day = int.Parse(sDay);
-            }
-            catch
-            {
-                year = DateTime.Now.Year;
-                month = DateTime.Now.Month;
-                day = DateTime.Now.Day;
-            }
-
-            int nTheDate;
-            int nIsEnd;
-            int k, m, n, nBit, i;
-            string calendar = string.Empty;
-            //計算到初始時間1921年2月8日的天數：1921-2-8(正月初一)
-            nTheDate = (year - 1921) * 365 + (year - 1921) / 4 + day + MonthAdd[month - 1] - 38;
-            if ((year % 4 == 0) && (month > 2))
-                nTheDate += 1;
-            //計算天干，地支，月，日
-            nIsEnd = 0;
-            m = 0;
-            k = 0;
-            n = 0;
-            while (nIsEnd != 1)
-            {
-                if (LunarData[m] < 4095)
-                {
-                    k = 11;
-                }
-                else
-                {
-                    k = 12;
-                }
-                n = k;
-                while (n >= 0)
-                {
-                    //獲取LunarData[m]的第n個二進位的值
-                    nBit = LunarData[m];
-                    for (i = 1; i < n + 1; i++)
-                    {
-                        nBit = nBit / 2;
-                    }
-                    nBit = nBit % 2;
-                    if (nTheDate <= (29 + nBit))
-                    {
-                        nIsEnd = 1;
-                        break;
-                    }
-                    nTheDate = nTheDate - 29 - nBit;
-                    n = n - 1;
-                }
-                if (nIsEnd == 1)
-                {
-                    break;
-                }
-                m = m + 1;
-            }
-            year = 1921 + m;
-            month = k - n + 1;
-            day = nTheDate;
-            //return year + "-" + month + "-" + day;
-
-            if (k == 12)
-            {
-                if (month == LunarData[m] / 65536 + 1)
-                {
-                    month = 1 - month;
-                }
-                else if (month > LunarData[m] / 65536 + 1)
-                {
-                    month = month - 1;
-                }
-            }
-            //年
-            calendar = year + "年";
-            //生肖
-            calendar += ShengXiao[(year - 4) % 60 % 12].ToString() + "年 ";
-            // //天干
-            calendar += TianGan[(year - 4) % 60 % 10].ToString();
-            // //地支
-            calendar += DiZhi[(year - 4) % 60 % 12].ToString() + " ";
-
-            //農曆月
-            if (month < 1)
-            {
-                calendar += "閏" + MonthName[-1 * month].ToString() + "月";
-            }
-            else
-            {
-                calendar += MonthName[month].ToString() + "月";
-            }
-
-            //農曆日
-            calendar += DayName[day].ToString() + "日";
-
-            return calendar;
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -1926,6 +1791,187 @@ namespace vcs_test_all_01_DateTime
             return "【" + CTime[hour / 2] + "時】";
         }
 
+        //農曆 ST
+        private void bt_special_05_Click(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            string lunar_date;
+            lunar_date = GetLunarCalendar(dt);
+            richTextBox1.Text += lunar_date + "\n";
+        }
+
+        //天干
+        private static string[] TianGan = { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸" };
+
+        //地支
+        private static string[] DiZhi = { "子", "醜", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥" };
+
+        //十二生肖
+        private static string[] ShengXiao = { "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬" };
+
+        //農曆日期
+        private static string[] DayName = {"*","初一","初二","初三","初四","初五",
+"初六","初七","初八","初九","初十",
+"十一","十二","十三","十四","十五",
+"十六","十七","十八","十九","二十",
+"廿一","廿二","廿三","廿四","廿五",
+"廿六","廿七","廿八","廿九","三十"};
+
+        //農曆月份
+        private static string[] MonthName = { "*", "正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "臘" };
+
+        //西曆月計數天
+        private static int[] MonthAdd = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
+
+        //農曆資料
+        private static int[] LunarData = {2635,333387,1701,1748,267701,694,2391,133423,1175,396438
+,3402,3749,331177,1453,694,201326,2350,465197,3221,3402
+,400202,2901,1386,267611,605,2349,137515,2709,464533,1738
+,2901,330421,1242,2651,199255,1323,529706,3733,1706,398762
+,2741,1206,267438,2647,1318,204070,3477,461653,1386,2413
+,330077,1197,2637,268877,3365,531109,2900,2922,398042,2395
+,1179,267415,2635,661067,1701,1748,398772,2742,2391,330031
+,1175,1611,200010,3749,527717,1452,2742,332397,2350,3222
+,268949,3402,3493,133973,1386,464219,605,2349,334123,2709
+,2890,267946,2773,592565,1210,2651,395863,1323,2707,265877};
+
+        /// <summary>
+        /// 獲取對應日期的農曆
+        /// </summary>
+        /// <param name="dtDay">西曆日期</param>
+        /// <returns></returns>
+
+        public string GetLunarCalendar(DateTime dtDay)
+        {
+            string sYear = dtDay.Year.ToString();
+            string sMonth = dtDay.Month.ToString();
+            string sDay = dtDay.Day.ToString();
+            int year;
+            int month;
+            int day;
+            try
+            {
+                year = int.Parse(sYear);
+                month = int.Parse(sMonth);
+                day = int.Parse(sDay);
+            }
+            catch
+            {
+                year = DateTime.Now.Year;
+                month = DateTime.Now.Month;
+                day = DateTime.Now.Day;
+            }
+
+            int nTheDate;
+            int nIsEnd;
+            int k, m, n, nBit, i;
+            string calendar = string.Empty;
+            //計算到初始時間1921年2月8日的天數：1921-2-8(正月初一)
+            nTheDate = (year - 1921) * 365 + (year - 1921) / 4 + day + MonthAdd[month - 1] - 38;
+            if ((year % 4 == 0) && (month > 2))
+                nTheDate += 1;
+            //計算天干，地支，月，日
+            nIsEnd = 0;
+            m = 0;
+            k = 0;
+            n = 0;
+            while (nIsEnd != 1)
+            {
+                if (LunarData[m] < 4095)
+                {
+                    k = 11;
+                }
+                else
+                {
+                    k = 12;
+                }
+                n = k;
+                while (n >= 0)
+                {
+                    //獲取LunarData[m]的第n個二進位的值
+                    nBit = LunarData[m];
+                    for (i = 1; i < n + 1; i++)
+                    {
+                        nBit = nBit / 2;
+                    }
+                    nBit = nBit % 2;
+                    if (nTheDate <= (29 + nBit))
+                    {
+                        nIsEnd = 1;
+                        break;
+                    }
+                    nTheDate = nTheDate - 29 - nBit;
+                    n = n - 1;
+                }
+                if (nIsEnd == 1)
+                {
+                    break;
+                }
+                m = m + 1;
+            }
+            year = 1921 + m;
+            month = k - n + 1;
+            day = nTheDate;
+            //return year + "-" + month + "-" + day;
+
+            if (k == 12)
+            {
+                if (month == LunarData[m] / 65536 + 1)
+                {
+                    month = 1 - month;
+                }
+                else if (month > LunarData[m] / 65536 + 1)
+                {
+                    month = month - 1;
+                }
+            }
+            //年
+            calendar = year + "年";
+            //生肖
+            calendar += ShengXiao[(year - 4) % 60 % 12].ToString() + "年 ";
+            // //天干
+            calendar += TianGan[(year - 4) % 60 % 10].ToString();
+            // //地支
+            calendar += DiZhi[(year - 4) % 60 % 12].ToString() + " ";
+
+            //農曆月
+            if (month < 1)
+            {
+                calendar += "閏" + MonthName[-1 * month].ToString() + "月";
+            }
+            else
+            {
+                calendar += MonthName[month].ToString() + "月";
+            }
+
+            //農曆日
+            calendar += DayName[day].ToString() + "日";
+
+            return calendar;
+        }
+        //農曆 SP
+
+        private void bt_special_06_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_special_07_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_special_08_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_special_09_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
         private void bt_weekday_00_Click(object sender, EventArgs e)
         {
             string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
@@ -1953,7 +1999,6 @@ namespace vcs_test_all_01_DateTime
             day = 7;
             result = CaculateWeekDay(year, month, day);
             richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\t珍珠港事變\n";
-
         }
 
         private void bt_weekday_02_Click(object sender, EventArgs e)
@@ -1983,15 +2028,125 @@ namespace vcs_test_all_01_DateTime
 
         private void bt_weekday_03_Click(object sender, EventArgs e)
         {
-
+            //獲得中文星期名稱
+            richTextBox1.Text += "今天是 : " + GetCnWeek() + "\n";
         }
+
+        /// <summary>
+        /// 獲得中文星期名稱
+        /// </summary>
+        /// <returns></returns>
+        public static string GetCnWeek()
+        {
+            switch (DateTime.Now.DayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    return "星期一";
+                case DayOfWeek.Tuesday:
+                    return "星期二";
+                case DayOfWeek.Wednesday:
+                    return "星期三";
+                case DayOfWeek.Thursday:
+                    return "星期四";
+                case DayOfWeek.Friday:
+                    return "星期五";
+                case DayOfWeek.Saturday:
+                    return "星期六";
+                case DayOfWeek.Sunday:
+                    return "星期日";
+                default:
+                    return "星期一";
+            }
+        }
+
 
         private void bt_weekday_04_Click(object sender, EventArgs e)
         {
+            //星期幾
+            richTextBox1.Text += CaculateWeekDay2(2021, 10, 28);
+            richTextBox1.Text += "\n";
 
+            //C#獲取當前星期幾的三種方法
+
+            //第一種：
+
+            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            string weekday1 = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();    //same
+            string weekday2 = Day[Convert.ToInt16(DateTime.Now.DayOfWeek)]; //same
+            richTextBox1.Text += weekday1 + "\n";
+            richTextBox1.Text += weekday2 + "\n";
+
+            //第二種：
+
+            richTextBox1.Text += System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek) + "\n";
+
+            //第三種：
+
+            string dt;
+            string week = string.Empty;
+            dt = DateTime.Today.DayOfWeek.ToString();
+            switch (dt)
+            {
+                case "Monday":
+                    week = "星期一";
+                    break;
+                case "Tuesday":
+                    week = "星期二";
+                    break;
+                case "Wednesday":
+                    week = "星期三";
+                    break;
+                case "Thursday":
+                    week = "星期四";
+                    break;
+                case "Friday":
+                    week = "星期五";
+                    break;
+                case "Saturday":
+                    week = "星期六";
+                    break;
+                case "Sunday":
+                    week = "星期日";
+                    break;
+                default:
+                    week = "星期日";
+                    break;
+            }
+            richTextBox1.Text += week + "\n";
         }
-    }
 
+        /*
+        C#實現的根據年月日計算星期幾的函數
+
+        基姆拉爾森計算公式
+
+        W= (d 2*m 3*(m 1)/5 y y/4-y/100 y/400) mod 7
+
+        在公式中d表示日期中的日數，m表示月份數，y表示年數。注意：在公式中有個與其他公式不同的地方：把一月和二月看成是上一年的十三月和十四月，例：如果是2004-1-10則換算成：2003-13-10來代入公式計算。
+        */
+
+        //y－年，m－月，d－日期
+        string CaculateWeekDay2(int y, int m, int d)
+        {
+            if (m == 1) m = 13;
+            if (m == 2) m = 14;
+            int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400) % 7 + 1;
+
+            string weekstr = "";
+            switch (week)
+            {
+                case 1: weekstr = "星期一"; break;
+                case 2: weekstr = "星期二"; break;
+                case 3: weekstr = "星期三"; break;
+                case 4: weekstr = "星期四"; break;
+                case 5: weekstr = "星期五"; break;
+                case 6: weekstr = "星期六"; break;
+                case 7: weekstr = "星期日"; break;
+            }
+            return weekstr;
+        }
+
+    }
 
     #region LunarDate
 

@@ -201,7 +201,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 70);
             this.button14.TabIndex = 104;
-            this.button14.Text = "由日期找出星座";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -333,7 +332,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(170, 70);
             this.button16.TabIndex = 92;
-            this.button16.Text = "星期幾";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -344,7 +342,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(170, 70);
             this.button15.TabIndex = 91;
-            this.button15.Text = "獲得中文星期名稱";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

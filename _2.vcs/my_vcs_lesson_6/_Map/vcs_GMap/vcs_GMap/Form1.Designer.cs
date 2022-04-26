@@ -94,6 +94,7 @@
             this.rb_km = new System.Windows.Forms.RadioButton();
             this.rb_m = new System.Windows.Forms.RadioButton();
             this.lb_distance = new System.Windows.Forms.Label();
+            this.btn_draw_profile2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -593,9 +594,9 @@
             // 
             // btn_draw_profile
             // 
-            this.btn_draw_profile.Location = new System.Drawing.Point(1361, 105);
+            this.btn_draw_profile.Location = new System.Drawing.Point(1324, 114);
             this.btn_draw_profile.Name = "btn_draw_profile";
-            this.btn_draw_profile.Size = new System.Drawing.Size(100, 34);
+            this.btn_draw_profile.Size = new System.Drawing.Size(80, 34);
             this.btn_draw_profile.TabIndex = 37;
             this.btn_draw_profile.Text = "畫出輪廓圖";
             this.btn_draw_profile.UseVisualStyleBackColor = true;
@@ -706,52 +707,52 @@
             this.toolStripMenuItem6,
             this.toolStripMenuItem7});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 180);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 158);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem1.Text = "全螢幕";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem2.Text = "量測距離 單程";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem3.Text = "量測距離 連續";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem4.Text = "讀取座標";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem7.Text = "離開";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
@@ -787,11 +788,22 @@
             this.lb_distance.TabIndex = 39;
             this.lb_distance.Text = "label1";
             // 
+            // btn_draw_profile2
+            // 
+            this.btn_draw_profile2.Location = new System.Drawing.Point(1410, 114);
+            this.btn_draw_profile2.Name = "btn_draw_profile2";
+            this.btn_draw_profile2.Size = new System.Drawing.Size(80, 34);
+            this.btn_draw_profile2.TabIndex = 40;
+            this.btn_draw_profile2.Text = "畫出輪廓圖";
+            this.btn_draw_profile2.UseVisualStyleBackColor = true;
+            this.btn_draw_profile2.Click += new System.EventHandler(this.btn_draw_profile2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1612, 712);
+            this.Controls.Add(this.btn_draw_profile2);
             this.Controls.Add(this.lb_distance);
             this.Controls.Add(this.rb_m);
             this.Controls.Add(this.rb_km);
@@ -909,6 +921,7 @@
         private System.Windows.Forms.RadioButton rb_km;
         private System.Windows.Forms.RadioButton rb_m;
         private System.Windows.Forms.Label lb_distance;
+        private System.Windows.Forms.Button btn_draw_profile2;
     }
 }
 

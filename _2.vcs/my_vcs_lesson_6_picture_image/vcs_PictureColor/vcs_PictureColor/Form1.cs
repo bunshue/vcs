@@ -37,18 +37,20 @@ namespace vcs_PictureColor
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             x_st = 50;
             y_st = 50;
             w = 640 - 100;
             h = 480 - 100;
 
             string filename = @"C:\______test_files\ims01.bmp";
-            pictureBox1.Image = Image.FromFile(filename);
+            pictureBox0.Image = Image.FromFile(filename);
 
-            g1 = this.pictureBox1.CreateGraphics();
+            g1 = this.pictureBox0.CreateGraphics();
 
-            int W = pictureBox1.Image.Width;
-            int H = pictureBox1.Image.Height;
+            int W = pictureBox0.Image.Width;
+            int H = pictureBox0.Image.Height;
 
             nud_x_st.Maximum = W;
             nud_y_st.Maximum = H;
@@ -59,6 +61,95 @@ namespace vcs_PictureColor
             nud_w.Value = w;
             nud_h.Value = h;
             update_crop_picture();
+
+            lb_max.Text = "";
+            lb_min.Text = "";
+            lb_ratio.Text = "";
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            int W = 640;
+            int H = 480;
+
+            pictureBox0.Size = new Size(W, H);
+            pictureBox1.Size = new Size(W, H);
+            pictureBox2.Size = new Size(W, H);
+            pictureBox3.Size = new Size(512, 200);
+            pictureBox4.Size = new Size(512, 200);
+            pictureBox5.Size = new Size(512, 200);
+            groupBox1.Size = new Size(W * 2 - 20, 1080 - 480 - 200 - 10);
+            richTextBox1.Size = new Size(W, 1080 - 480 - 200);
+
+            x_st = 0;
+            y_st = 00;
+            dx = W;
+            dy = H;
+
+            pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            groupBox1.Location = new Point(x_st + dx * 0 + 10, y_st + dy * 1 + 200);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 200);
+
+            //button
+            x_st = 20;
+            y_st = 30;
+            dx = 160;
+            dy = 70;
+
+            //控件位置
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+
+            //離開按鈕的寫法
+            bt_exit_setup();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -70,7 +161,7 @@ namespace vcs_PictureColor
                 h = 0;
                 nud_w.Value = w;
                 nud_h.Value = h;
-                pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseDown);
+                pictureBox0.MouseDown += new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseDown);
             }
             else
             {
@@ -90,9 +181,9 @@ namespace vcs_PictureColor
             w = 0;
             h = 0;
 
-            pictureBox1.MouseDown -= new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseDown);
-            pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseMove);
-            pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseUp);
+            pictureBox0.MouseDown -= new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox0.MouseMove += new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox0.MouseUp += new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseUp);
 
             nud_x_st.Value = e.X;
             nud_y_st.Value = e.Y;
@@ -129,11 +220,11 @@ namespace vcs_PictureColor
         {
             begin = false;
 
-            pictureBox1.MouseMove -= new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseMove);
-            pictureBox1.MouseUp -= new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseUp);
+            pictureBox0.MouseMove -= new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox0.MouseUp -= new System.Windows.Forms.MouseEventHandler(pictureBox1_MouseUp);
             button1.Text = "選取";
 
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+            Bitmap bitmap1 = (Bitmap)pictureBox0.Image;
             Rectangle cropArea = new Rectangle(x_st, y_st, w, h);    //要截取的區域大小
             //pictureBox2.Image = bitmap1.Clone(cropArea, PixelFormat.Format32bppArgb);
         }
@@ -172,7 +263,7 @@ namespace vcs_PictureColor
 
             try
             {
-                Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+                Bitmap bitmap1 = (Bitmap)pictureBox0.Image;
                 Rectangle cropArea = new Rectangle(x_st, y_st, w, h);    //要截取的區域大小
                 //pictureBox2.Image = bitmap1.Clone(cropArea, PixelFormat.Format32bppArgb);
 
@@ -212,7 +303,7 @@ namespace vcs_PictureColor
             //畫矩形
             g1.DrawRectangle(new Pen(Color.Green), x_st, y_st, w, h);
 
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+            Bitmap bitmap1 = (Bitmap)pictureBox0.Image;
             Rectangle cropArea = new Rectangle(x_st, y_st, w, h);    //要截取的區域大小
             //pictureBox2.Image = bitmap1.Clone(cropArea, PixelFormat.Format32bppArgb);
         }
@@ -230,7 +321,7 @@ namespace vcs_PictureColor
 
             Bitmap bmp0 = new Bitmap(filename);
             Bitmap bmp = new Bitmap(filename);
-            pictureBox1.Image = bmp0;
+            pictureBox0.Image = bmp0;
 
             int xx;
             int yy;
@@ -249,7 +340,7 @@ namespace vcs_PictureColor
                     bmp.SetPixel(xx, yy, zz);
                 }
             }
-            pictureBox1.Image = bmp;
+            pictureBox0.Image = bmp;
             //pictureBox2.Image = bmp;
         }
 
@@ -257,7 +348,7 @@ namespace vcs_PictureColor
         {
             //加強
 
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image.Clone();
+            Bitmap bitmap1 = (Bitmap)pictureBox0.Image.Clone();
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
@@ -279,13 +370,13 @@ namespace vcs_PictureColor
                 }
             }
             richTextBox1.Text += "\nmax = " + max.ToString() + ", min = " + min.ToString() + "\n";
-            lb_max.Text = max.ToString();
-            lb_min.Text = min.ToString();
+            lb_max.Text = "最大 : " + max.ToString();
+            lb_min.Text = "最小 : " + min.ToString();
 
             double ratio = 255.0 / (max - min);
 
             richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
-            lb_ratio.Text = ratio.ToString();
+            lb_ratio.Text = "倍率 : " + ratio.ToString();
 
             for (j = y_st; j < (y_st + h); j++)
             {
@@ -320,7 +411,7 @@ namespace vcs_PictureColor
 
             richTextBox1.Text += "\nmax = " + max.ToString() + ", min = " + min.ToString() + "\n";
 
-            pictureBox2.Image = bitmap1;
+            pictureBox1.Image = bitmap1;
 
         }
 
@@ -329,9 +420,9 @@ namespace vcs_PictureColor
             x_st = 50;
             y_st = 50;
             w = 640 - 100;
-            h = 480-100;
+            h = 480 - 100;
 
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+            Bitmap bitmap1 = (Bitmap)pictureBox0.Image;
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
@@ -372,7 +463,7 @@ namespace vcs_PictureColor
             Graphics g2 = Graphics.FromImage(bitmap2);
             //g2.Clear(Color.Pink);
 
-            double ratio =0;
+            double ratio = 0;
             ratio = (double)hh / most;
 
             richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
@@ -386,12 +477,12 @@ namespace vcs_PictureColor
 
             }
 
-            g2.DrawRectangle(Pens.Red, 0, 0, ww-1, hh-1);
+            g2.DrawRectangle(Pens.Red, 0, 0, ww - 1, hh - 1);
 
 
 
 
-            pictureBox2.Image = bitmap2;
+            pictureBox3.Image = bitmap2;
 
         }
 
@@ -408,7 +499,7 @@ namespace vcs_PictureColor
             w = 640 - 100;
             h = 480 - 100;
 
-            Bitmap bitmap2 = (Bitmap)pictureBox2.Image;
+            Bitmap bitmap2 = (Bitmap)pictureBox1.Image;
             int W = bitmap2.Width;
             int H = bitmap2.Height;
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
@@ -468,10 +559,8 @@ namespace vcs_PictureColor
 
 
 
-            pictureBox3.Image = bitmap3;
-
+            pictureBox4.Image = bitmap3;
         }
-
     }
 }
 
