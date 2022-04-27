@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;                //for Directory
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Diagnostics;       //for Process
 
 namespace vcs_PicPick
 {
@@ -68,9 +69,13 @@ namespace vcs_PicPick
             button3.Size = new Size(115, 25);
             button3.Visible = true;
 
+            bt_open_folder.Location = new Point(button2.Location.X + button2.Size.Width + 5, button2.Location.Y + 5);
+            bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
+            bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
+
             label1.Location = new Point(10, button2.Location.Y + button2.Size.Height + button3.Size.Height + 15);
 
-            this.Size = new Size(205 + 30, 110 + 35);
+            this.Size = new Size(205 + 50, 110 + 35);
 
             //設定執行後的表單起始位置, 在螢幕的最右下方
             const int margin = 0;
@@ -313,6 +318,13 @@ namespace vcs_PicPick
             VisibleBm.Dispose();
             ScreenBm = null;
             VisibleBm = null;
+        }
+
+        private void bt_open_folder_Click(object sender, EventArgs e)
+        {
+            //開啟檔案總管
+            Process.Start(foldername);
+
         }
     }
 }

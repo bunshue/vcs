@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace test_LinearGradientBrush
+namespace vcs_Draw_LinearGradientBrush
 {
     static class Program
     {

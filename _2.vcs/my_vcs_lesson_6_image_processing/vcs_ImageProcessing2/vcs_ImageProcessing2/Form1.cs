@@ -22,27 +22,6 @@ namespace vcs_ImageProcessing2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; //原圖
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox9.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox10.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox11.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox12.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox13.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox_gamma.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox15.SizeMode = PictureBoxSizeMode.Zoom;
-            //pictureBox16.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox17.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox18.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox19.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox20.SizeMode = PictureBoxSizeMode.Zoom;
-
             show_item_location();
 
             string filename = @"C:\______test_files\picture1.jpg";
@@ -82,6 +61,27 @@ namespace vcs_ImageProcessing2
 
         void show_item_location()
         {
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; //原圖
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox9.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox10.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox11.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox12.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox13.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox_gamma.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox15.SizeMode = PictureBoxSizeMode.Zoom;
+            //pictureBox16.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox17.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox18.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox19.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox20.SizeMode = PictureBoxSizeMode.Zoom;
+
             int x_st;
             int y_st;
             int dx;

@@ -11,7 +11,7 @@ using System.Drawing.Drawing2D;
 
 //兩種漸層色使用範例
 
-namespace test_LinearGradientBrush
+namespace vcs_Draw_LinearGradientBrush
 {
     public partial class Form1 : Form
     {
@@ -25,15 +25,14 @@ namespace test_LinearGradientBrush
 
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            UseHorizontalLinearGradients1(e);
-
+            UseHorizontalLinearGradients1();
         }
 
-        public void UseHorizontalLinearGradients1(PaintEventArgs e)
+        void UseHorizontalLinearGradients1()
         {
-            Graphics g = e.Graphics;
+            Graphics g = this.pictureBox1.CreateGraphics();
             Rectangle r = new Rectangle(10, 10, 100, 100);
 
             LinearGradientBrush theBrush = null;
@@ -44,19 +43,24 @@ namespace test_LinearGradientBrush
             for (int x = 0; x < obj.Length; x++)
             {
                 LinearGradientMode temp = (LinearGradientMode)obj.GetValue(x);
-                theBrush = new LinearGradientBrush(r, Color.Red,
-                  Color.Blue, temp);
+                theBrush = new LinearGradientBrush(r, Color.Red, Color.Blue, temp);
 
-                g.DrawString(temp.ToString(), new Font("Times New Roman", 10),
-                  new SolidBrush(Color.Black), 0, yOffSet);
+                g.DrawString(temp.ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), 0, yOffSet);
 
                 g.FillRectangle(theBrush, 120, yOffSet, 200, 50);
                 yOffSet += 80;
             }
         }
 
-        public void UseHorizontalLinearGradients2(PaintEventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
+            UseHorizontalLinearGradients2();
+        }
+
+        public void UseHorizontalLinearGradients2()
+        {
+            Graphics g = this.pictureBox1.CreateGraphics();
+
             LinearGradientBrush linGrBrush = new LinearGradientBrush(
                new Point(0, 10),
                new Point(200, 10),
@@ -65,9 +69,10 @@ namespace test_LinearGradientBrush
 
             Pen pen = new Pen(linGrBrush);
 
-            e.Graphics.DrawLine(pen, 0, 10, 200, 10);
-            e.Graphics.FillEllipse(linGrBrush, 0, 30, 200, 100);
-            e.Graphics.FillRectangle(linGrBrush, 0, 155, 500, 30);
+            g.DrawLine(pen, 0, 10, 200, 10);
+            g.FillEllipse(linGrBrush, 0, 30, 200, 100);
+            g.FillRectangle(linGrBrush, 0, 155, 500, 30);
         }
     }
 }
+

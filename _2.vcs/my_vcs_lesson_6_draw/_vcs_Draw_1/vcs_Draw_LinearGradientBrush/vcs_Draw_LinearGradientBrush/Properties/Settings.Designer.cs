@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace test_LinearGradientBrush.Properties
+namespace vcs_Draw_LinearGradientBrush.Properties
 {
 
 

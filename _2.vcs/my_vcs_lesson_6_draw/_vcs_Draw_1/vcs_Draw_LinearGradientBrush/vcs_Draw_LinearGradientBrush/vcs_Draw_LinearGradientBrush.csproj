@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{638342B1-A98B-463E-9773-BA746898343C}</ProjectGuid>
+    <ProjectGuid>{2A90EB41-4B30-457F-B8AB-64279A049E0C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>test_LinearGradientBrush</RootNamespace>
-    <AssemblyName>test_LinearGradientBrush</AssemblyName>
+    <RootNamespace>vcs_Draw_LinearGradientBrush</RootNamespace>
+    <AssemblyName>vcs_Draw_LinearGradientBrush</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

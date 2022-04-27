@@ -409,77 +409,7 @@ namespace vcs_PictureColor
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //加強
-
-            Bitmap bitmap1 = (Bitmap)pictureBox0.Image.Clone();
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-            int i;
-            int j;
-            byte max = 0;
-            byte min = 255;
-
-            for (j = y_st; j < (y_st + h); j++)
-            {
-                for (i = x_st; i < (x_st + w); i++)
-                {
-                    byte rrr = bitmap1.GetPixel(i, j).R;
-                    //richTextBox1.Text += rrr.ToString() + " ";
-                    if (rrr > max)
-                        max = rrr;
-                    if (rrr < min)
-                        min = rrr;
-                }
-            }
-            richTextBox1.Text += "\nmax = " + max.ToString() + ", min = " + min.ToString() + "\n";
-            lb_max.Text = "最大 : " + max.ToString();
-            lb_min.Text = "最小 : " + min.ToString();
-
-            double ratio = 255.0 / (max - min);
-
-            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
-            lb_ratio.Text = "倍率 : " + ratio.ToString();
-
-            for (j = y_st; j < (y_st + h); j++)
-            {
-                for (i = x_st; i < (x_st + w); i++)
-                {
-                    byte rrr = bitmap1.GetPixel(i, j).R;
-                    //richTextBox1.Text += rrr.ToString() + "-";
-
-                    double gray = ratio * (rrr - min);
-                    if (gray > 255)
-                        gray = 255;
-                    else if (gray < 0)
-                        gray = 0;
-
-                    //richTextBox1.Text += gray.ToString() + " ";
-
-                    Color zz = Color.FromArgb(255, (int)gray, (int)gray, (int)gray);
-
-                    bitmap1.SetPixel(i, j, zz);
-
-                    if (gray > 240)
-                    {
-                        //bitmap1.SetPixel(i, j, Color.Red);
-                    }
-                    else if (gray < 10)
-                    {
-                        //bitmap1.SetPixel(i, j, Color.Green);
-
-                    }
-
-
-                }
-
-
-            }
-
-            richTextBox1.Text += "\nmax = " + max.ToString() + ", min = " + min.ToString() + "\n";
-
-            pictureBox1.Image = bitmap1;
-
+            do_brightness_contrast(1);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -572,16 +502,43 @@ namespace vcs_PictureColor
             g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
             g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
 
+
+            Brush b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
+
+            g2.FillRectangle(b, min * 2, 0, (max - min) * 2, hh1);
+
+
             p = new Pen(Color.Green, 3);
 
             g2.DrawLine(p, min * 2, hh2, max * 2, 0);
 
             Font f = new Font("標楷體", 20);
 
-            g2.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, hh2));
+            if ((min >= 0) && (min <= 103))
+            {
+                g2.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, hh2));
+            }
+            else if (min < 0)
+            {
+                g2.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, hh2));
+            }
+            else
+            {
+                g2.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, hh2));
+            }
 
-            g2.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(256 * 2 - 50, hh2));
-
+            if ((max <= 255) && (max >= 152))
+            {
+                g2.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, hh2));
+            }
+            else if (max > 255)
+            {
+                g2.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, hh2));
+            }
+            else
+            {
+                g2.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
+            }
             pbox.Image = bitmap2;
         }
 
@@ -699,10 +656,14 @@ namespace vcs_PictureColor
             lb_v2.Text = hScrollBar2.Value.ToString();
             lb_v3.Text = hScrollBar3.Value.ToString();
             lb_v4.Text = hScrollBar4.Value.ToString();
-
         }
 
         private void button9_Click(object sender, EventArgs e)
+        {
+            do_brightness_contrast(0);
+        }
+
+        void do_brightness_contrast(int auto)
         {
             //加強
 
@@ -712,6 +673,26 @@ namespace vcs_PictureColor
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
             int i;
             int j;
+
+            if (auto == 1)
+            {
+                max = 0;
+                min = 255;
+
+                for (j = y_st; j < (y_st + h); j++)
+                {
+                    for (i = x_st; i < (x_st + w); i++)
+                    {
+                        byte rrr = bitmap1.GetPixel(i, j).R;
+                        //richTextBox1.Text += rrr.ToString() + " ";
+                        if (rrr > max)
+                            max = rrr;
+                        if (rrr < min)
+                            min = rrr;
+                    }
+                }
+                richTextBox1.Text += "\nmax = " + max.ToString() + ", min = " + min.ToString() + "\n";
+            }
 
             lb_max.Text = "最大 : " + max.ToString();
             lb_min.Text = "最小 : " + min.ToString();
@@ -759,9 +740,6 @@ namespace vcs_PictureColor
             richTextBox1.Text += "\nmax = " + max.ToString() + ", min = " + min.ToString() + "\n";
 
             pictureBox1.Image = bitmap1;
-
         }
     }
 }
-
-
