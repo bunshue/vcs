@@ -64,6 +64,11 @@
             this.hScrollBar3 = new System.Windows.Forms.HScrollBar();
             this.hScrollBar2 = new System.Windows.Forms.HScrollBar();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.lb_v4_name = new System.Windows.Forms.Label();
+            this.lb_v3_name = new System.Windows.Forms.Label();
+            this.lb_v2_name = new System.Windows.Forms.Label();
+            this.lb_v1_name = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
@@ -238,7 +243,7 @@
             // 
             this.lb_max.AutoSize = true;
             this.lb_max.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_max.Location = new System.Drawing.Point(266, 99);
+            this.lb_max.Location = new System.Drawing.Point(266, 116);
             this.lb_max.Name = "lb_max";
             this.lb_max.Size = new System.Drawing.Size(49, 24);
             this.lb_max.TabIndex = 18;
@@ -248,7 +253,7 @@
             // 
             this.lb_min.AutoSize = true;
             this.lb_min.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_min.Location = new System.Drawing.Point(266, 144);
+            this.lb_min.Location = new System.Drawing.Point(266, 156);
             this.lb_min.Name = "lb_min";
             this.lb_min.Size = new System.Drawing.Size(45, 24);
             this.lb_min.TabIndex = 17;
@@ -258,7 +263,7 @@
             // 
             this.lb_ratio.AutoSize = true;
             this.lb_ratio.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_ratio.Location = new System.Drawing.Point(266, 190);
+            this.lb_ratio.Location = new System.Drawing.Point(266, 198);
             this.lb_ratio.Name = "lb_ratio";
             this.lb_ratio.Size = new System.Drawing.Size(51, 24);
             this.lb_ratio.TabIndex = 19;
@@ -313,7 +318,6 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox5.Location = new System.Drawing.Point(542, 12);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(100, 100);
@@ -333,6 +337,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button9);
+            this.groupBox1.Controls.Add(this.lb_v4_name);
+            this.groupBox1.Controls.Add(this.lb_v3_name);
+            this.groupBox1.Controls.Add(this.lb_v2_name);
+            this.groupBox1.Controls.Add(this.lb_v1_name);
             this.groupBox1.Controls.Add(this.lb_v4);
             this.groupBox1.Controls.Add(this.lb_v3);
             this.groupBox1.Controls.Add(this.lb_v2);
@@ -452,6 +461,56 @@
             this.hScrollBar1.TabIndex = 28;
             this.hScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
             // 
+            // lb_v4_name
+            // 
+            this.lb_v4_name.AutoSize = true;
+            this.lb_v4_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v4_name.Location = new System.Drawing.Point(578, 206);
+            this.lb_v4_name.Name = "lb_v4_name";
+            this.lb_v4_name.Size = new System.Drawing.Size(32, 24);
+            this.lb_v4_name.TabIndex = 40;
+            this.lb_v4_name.Text = "v4";
+            // 
+            // lb_v3_name
+            // 
+            this.lb_v3_name.AutoSize = true;
+            this.lb_v3_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v3_name.Location = new System.Drawing.Point(578, 168);
+            this.lb_v3_name.Name = "lb_v3_name";
+            this.lb_v3_name.Size = new System.Drawing.Size(32, 24);
+            this.lb_v3_name.TabIndex = 39;
+            this.lb_v3_name.Text = "v3";
+            // 
+            // lb_v2_name
+            // 
+            this.lb_v2_name.AutoSize = true;
+            this.lb_v2_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v2_name.Location = new System.Drawing.Point(578, 126);
+            this.lb_v2_name.Name = "lb_v2_name";
+            this.lb_v2_name.Size = new System.Drawing.Size(32, 24);
+            this.lb_v2_name.TabIndex = 38;
+            this.lb_v2_name.Text = "v2";
+            // 
+            // lb_v1_name
+            // 
+            this.lb_v1_name.AutoSize = true;
+            this.lb_v1_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v1_name.Location = new System.Drawing.Point(578, 90);
+            this.lb_v1_name.Name = "lb_v1_name";
+            this.lb_v1_name.Size = new System.Drawing.Size(32, 24);
+            this.lb_v1_name.TabIndex = 37;
+            this.lb_v1_name.Text = "v1";
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(340, 68);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(80, 40);
+            this.button9.TabIndex = 41;
+            this.button9.Text = "加強";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -523,6 +582,11 @@
         private System.Windows.Forms.Label lb_v3;
         private System.Windows.Forms.Label lb_v2;
         private System.Windows.Forms.Label lb_v1;
+        private System.Windows.Forms.Label lb_v4_name;
+        private System.Windows.Forms.Label lb_v3_name;
+        private System.Windows.Forms.Label lb_v2_name;
+        private System.Windows.Forms.Label lb_v1_name;
+        private System.Windows.Forms.Button button9;
     }
 }
 

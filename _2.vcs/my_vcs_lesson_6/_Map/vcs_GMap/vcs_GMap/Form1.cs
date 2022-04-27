@@ -16,6 +16,7 @@ using System.Threading;
 
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 using GMap.NET;
 using GMap.NET.WindowsForms;
@@ -231,19 +232,28 @@ namespace vcs_GMap
             gMapControl1.Zoom = 14;     //當前比例
 
             //各種地圖的事件
-            gMapControl1.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
-            gMapControl1.MouseDown += new MouseEventHandler(mapControl_MouseDown);
-            gMapControl1.MouseMove += new MouseEventHandler(mapControl_MouseMove);
-            gMapControl1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
+            gMapControl1.OnMapZoomChanged += new MapZoomChanged(gMapControl1_OnMapZoomChanged);
+            gMapControl1.MouseDown += new MouseEventHandler(gMapControl1_MouseDown);
+            gMapControl1.MouseMove += new MouseEventHandler(gMapControl1_MouseMove);
+            gMapControl1.MouseUp += new MouseEventHandler(gMapControl1_MouseUp);
             gMapControl1.MouseClick += new MouseEventHandler(gMapControl1_MouseClick);
             gMapControl1.MouseDoubleClick += new MouseEventHandler(gMapControl1_MouseDoubleClick);
             gMapControl1.Paint += new PaintEventHandler(gMapControl1_Paint);
             //gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
             gMapControl1.KeyDown += new KeyEventHandler(gMapControl1_KeyDown);
-            //gMapControl1.OnMarkerClick += gMapControl1_OnMarkerClick;
+            gMapControl1.OnMarkerClick += gMapControl1_OnMarkerClick;
+            //gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
             //gMapControl1.OnPositionChanged += gMapControl1_OnPositionChanged;
+            //gMapControl1.OnPositionChanged += new PositionChanged(gMapControl1_OnPositionChanged);
             //gMapControl1.OnTileLoadComplete += GMap_OnTileLoadComplete;
             //gMapControl1.OnTileLoadStart += GMap_OnTileLoadStart;
+
+            gMapControl1.OnMarkerEnter += new MarkerEnter(gMapControl1_OnMarkerEnter);
+            gMapControl1.OnMarkerLeave += new MarkerLeave(gMapControl1_OnMarkerLeave);
+            gMapControl1.OnPolygonClick += new PolygonClick(gMapControl1_OnPolygonClick);
+            gMapControl1.OnPolygonEnter += new PolygonEnter(gMapControl1_OnPolygonEnter);
+            gMapControl1.OnPolygonLeave += new PolygonLeave(gMapControl1_OnPolygonLeave);
+            //gMapControl1.OnPolygonDoubleClick += new PolygonDoubleClick(gMapControl1_OnPolygonDoubleClick);
 
             this.ActiveControl = this.gMapControl1;//选中pictureBox1，不然没法触发事件
 
@@ -398,6 +408,89 @@ namespace vcs_GMap
             //試者將此點設為地圖中心
         }
         */
+
+
+        void gMapControl1_OnMarkerEnter(GMapMarker item)
+        {
+        }
+
+        void gMapControl1_OnMarkerLeave(GMapMarker item)
+        {
+        }
+
+
+        //void gMapControl1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
+        //{
+            //if (e.Button == MouseButtons.Left)
+            //{
+                /*
+                    GMapOverlay overlay = item.Overlay;
+                    if (overlay.Markers.Contains(item))
+                    {
+                        overlay.Markers.Remove(item);
+                    }
+
+                    if (gMapControl1.Overlays.Contains(overlay))
+                    {
+                        gMapControl1.Overlays.Remove(overlay);
+                    }
+                 */
+            //}
+        //}
+
+        void gMapControl1_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
+        {
+        }
+
+
+
+        void gMapControl1_OnPolygonEnter(GMapPolygon item)
+        {
+            /*
+            if (item is GMapAreaPolygon)
+            {
+                GMapAreaPolygon areaPolygon = item as GMapAreaPolygon;
+                if (currentAreaPolygon != null && currentAreaPolygon == areaPolygon)
+                {
+                    currentAreaPolygon = item as GMapAreaPolygon;
+                    currentAreaPolygon.Stroke.Color = Color.Red;
+                }
+            }
+           */
+        }
+
+        void gMapControl1_OnPolygonLeave(GMapPolygon item)
+        {
+            /*
+            if (item is GMapAreaPolygon)
+            {
+                GMapAreaPolygon areaPolygon = item as GMapAreaPolygon;
+                if (currentAreaPolygon != null && currentAreaPolygon == areaPolygon)
+                {
+                    currentAreaPolygon = item as GMapAreaPolygon;
+                    currentAreaPolygon.Stroke.Color = Color.Blue;
+                }
+            }
+            */
+        }
+
+        void gMapControl1_OnPolygonDoubleClick(GMapPolygon item, MouseEventArgs e)
+        {
+            /*
+            if (item is GMapAreaPolygon)
+            {
+                if (currentAreaPolygon != null)
+                {
+                    DownloadMap(currentAreaPolygon);
+                }
+                else
+                {
+                    CommonTools.MessageBox.ShowTipMessage("请先用画图工具画下载的区域多边形或选择省市区域！");
+                }
+            }
+            */
+        }
+
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
@@ -757,7 +850,7 @@ namespace vcs_GMap
             richTextBox1.Text += "控件座標(" + x.ToString() + ", " + y.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
         }
 
-        void mapControl_MouseDown(object sender, MouseEventArgs e)
+        void gMapControl1_MouseDown(object sender, MouseEventArgs e)
         {
             //richTextBox1.Text += "MouseDown\n";
 
@@ -828,17 +921,17 @@ namespace vcs_GMap
             }
         }
 
-        void mapControl_MouseMove(object sender, MouseEventArgs e)
+        void gMapControl1_MouseMove(object sender, MouseEventArgs e)
         {
             //richTextBox1.Text += "MouseMove\n";
             PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
         }
 
-        void mapControl_MouseUp(object sender, MouseEventArgs e)
+        void gMapControl1_MouseUp(object sender, MouseEventArgs e)
         {
         }
 
-        void mapControl_OnMapZoomChanged()
+        void gMapControl1_OnMapZoomChanged()
         {
             //richTextBox1.Text += "OnMapZoomChanged\n";
             trackBar1.Value = (int)gMapControl1.Zoom;
@@ -1959,7 +2052,42 @@ namespace vcs_GMap
 
         private void bt_test03_Click(object sender, EventArgs e)
         {
+            //test DownloadMap
+        }
 
+        private void DownloadMap(GMapPolygon polygon)
+        {
+            /*
+            if (polygon != null)
+            {
+                RectLatLng area = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
+                try
+                {
+                    DownloadCfgForm downloadCfgForm = new DownloadCfgForm(area, this.gMapControl1.MapProvider);
+                    if (downloadCfgForm.ShowDialog() == DialogResult.OK)
+                    {
+                        TileDownloaderArgs downloaderArgs = downloadCfgForm.GetDownloadTileGPoints();
+                        ResetToServerAndCacheMode();
+
+                        if (this.comboBoxStore.SelectedIndex == 2)
+                        {
+                            tileDownloader.TilePath = this.tilePath;
+                        }
+                        tileDownloader.Retry = retryNum;
+                        tileDownloader.StartDownload(downloaderArgs);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //log.Error(ex);
+                }
+            }
+            else
+            {
+                //CommonTools.MessageBox.ShowTipMessage("请先用画图工具画下载的区域多边形或选择省市区域！");
+            }
+            */
         }
 
         private void bt_test04_Click(object sender, EventArgs e)
@@ -1992,5 +2120,82 @@ namespace vcs_GMap
 
         }
     }
+
+    public class Piecearea
+    {
+        [XmlAttribute]
+        public string code { set; get; }
+
+        [XmlAttribute]
+        public string name { set; get; }
+
+        [XmlAttribute]
+        public string rings { set; get; }
+    }
+
+    public class City
+    {
+        [XmlAttribute]
+        public string code { set; get; }
+
+        [XmlAttribute]
+        public string name { set; get; }
+
+        [XmlAttribute]
+        public string rings { set; get; }
+
+        [XmlElement]
+        public List<Piecearea> Piecearea { set; get; }
+    }
+
+    public class Province
+    {
+        [XmlAttribute]
+        public string ID { set; get; }
+
+        [XmlAttribute]
+        public string code { set; get; }
+
+        [XmlAttribute]
+        public string name { set; get; }
+
+        [XmlAttribute]
+        public string rings { set; get; }
+
+        [XmlElement]
+        public List<City> City { set; get; }
+    }
+
+    public class Country
+    {
+        [XmlAttribute]
+        public string ID { set; get; }
+
+        [XmlAttribute]
+        public string code { set; get; }
+
+        [XmlAttribute]
+        public string name { set; get; }
+
+        [XmlElement]
+        public List<Province> Province { set; get; }
+    }
+
+    public class GMapAreaPolygon : GMapPolygon
+    {
+        public GMapAreaPolygon(List<PointLatLng> points, string name)
+            : base(points, name)
+        {
+            this.Stroke = new Pen(Color.Blue);
+            this.Stroke.Width = 3f;
+            this.Stroke.DashStyle = DashStyle.Dash;
+            //this.Fill = new SolidBrush(Color.Azure);
+            this.Fill = new SolidBrush(Color.FromArgb(100, 240, 255, 255));
+
+            this.IsHitTestVisible = true;
+        }
+    }
+
+
 }
 

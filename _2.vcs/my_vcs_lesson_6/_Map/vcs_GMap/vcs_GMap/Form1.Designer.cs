@@ -51,6 +51,9 @@
             this.btn_west = new System.Windows.Forms.Button();
             this.bt_save = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton17 = new System.Windows.Forms.RadioButton();
+            this.radioButton16 = new System.Windows.Forms.RadioButton();
+            this.radioButton15 = new System.Windows.Forms.RadioButton();
             this.radioButton14 = new System.Windows.Forms.RadioButton();
             this.radioButton13 = new System.Windows.Forms.RadioButton();
             this.radioButton12 = new System.Windows.Forms.RadioButton();
@@ -106,9 +109,6 @@
             this.bt_test02 = new System.Windows.Forms.Button();
             this.bt_test01 = new System.Windows.Forms.Button();
             this.bt_test00 = new System.Windows.Forms.Button();
-            this.radioButton15 = new System.Windows.Forms.RadioButton();
-            this.radioButton16 = new System.Windows.Forms.RadioButton();
-            this.radioButton17 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -368,6 +368,36 @@
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "MapProvider";
+            // 
+            // radioButton17
+            // 
+            this.radioButton17.AutoSize = true;
+            this.radioButton17.Location = new System.Drawing.Point(194, 51);
+            this.radioButton17.Name = "radioButton17";
+            this.radioButton17.Size = new System.Drawing.Size(47, 16);
+            this.radioButton17.TabIndex = 15;
+            this.radioButton17.Text = "其他";
+            this.radioButton17.UseVisualStyleBackColor = true;
+            // 
+            // radioButton16
+            // 
+            this.radioButton16.AutoSize = true;
+            this.radioButton16.Location = new System.Drawing.Point(194, 34);
+            this.radioButton16.Name = "radioButton16";
+            this.radioButton16.Size = new System.Drawing.Size(47, 16);
+            this.radioButton16.TabIndex = 14;
+            this.radioButton16.Text = "其他";
+            this.radioButton16.UseVisualStyleBackColor = true;
+            // 
+            // radioButton15
+            // 
+            this.radioButton15.AutoSize = true;
+            this.radioButton15.Location = new System.Drawing.Point(194, 15);
+            this.radioButton15.Name = "radioButton15";
+            this.radioButton15.Size = new System.Drawing.Size(47, 16);
+            this.radioButton15.TabIndex = 13;
+            this.radioButton15.Text = "其他";
+            this.radioButton15.UseVisualStyleBackColor = true;
             // 
             // radioButton14
             // 
@@ -894,6 +924,7 @@
             this.bt_test03.Name = "bt_test03";
             this.bt_test03.Size = new System.Drawing.Size(90, 40);
             this.bt_test03.TabIndex = 45;
+            this.bt_test03.Text = "test DownloadMap";
             this.bt_test03.UseVisualStyleBackColor = true;
             this.bt_test03.Click += new System.EventHandler(this.bt_test03_Click);
             // 
@@ -926,36 +957,6 @@
             this.bt_test00.Text = "列出省市界資料";
             this.bt_test00.UseVisualStyleBackColor = true;
             this.bt_test00.Click += new System.EventHandler(this.bt_test00_Click);
-            // 
-            // radioButton15
-            // 
-            this.radioButton15.AutoSize = true;
-            this.radioButton15.Location = new System.Drawing.Point(194, 15);
-            this.radioButton15.Name = "radioButton15";
-            this.radioButton15.Size = new System.Drawing.Size(47, 16);
-            this.radioButton15.TabIndex = 13;
-            this.radioButton15.Text = "其他";
-            this.radioButton15.UseVisualStyleBackColor = true;
-            // 
-            // radioButton16
-            // 
-            this.radioButton16.AutoSize = true;
-            this.radioButton16.Location = new System.Drawing.Point(194, 34);
-            this.radioButton16.Name = "radioButton16";
-            this.radioButton16.Size = new System.Drawing.Size(47, 16);
-            this.radioButton16.TabIndex = 14;
-            this.radioButton16.Text = "其他";
-            this.radioButton16.UseVisualStyleBackColor = true;
-            // 
-            // radioButton17
-            // 
-            this.radioButton17.AutoSize = true;
-            this.radioButton17.Location = new System.Drawing.Point(194, 51);
-            this.radioButton17.Name = "radioButton17";
-            this.radioButton17.Size = new System.Drawing.Size(47, 16);
-            this.radioButton17.TabIndex = 15;
-            this.radioButton17.Text = "其他";
-            this.radioButton17.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

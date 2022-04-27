@@ -1,38 +1,4 @@
 ﻿
-//各種地圖的事件
-gMapControl1.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
-gMapControl1.MouseDown += new MouseEventHandler(mapControl_MouseDown);
-gMapControl1.MouseMove += new MouseEventHandler(mapControl_MouseMove);
-gMapControl1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
-gMapControl1.MouseClick += new MouseEventHandler(gMapControl1_MouseClick);
-gMapControl1.MouseDoubleClick += new MouseEventHandler(gMapControl1_MouseDoubleClick);
-gMapControl1.Paint += new PaintEventHandler(gMapControl1_Paint);
-//gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
-gMapControl1.KeyDown += new KeyEventHandler(gMapControl1_KeyDown);
-//gMapControl1.OnMarkerClick += gMapControl1_OnMarkerClick;
-//gMapControl1.OnPositionChanged += gMapControl1_OnPositionChanged;
-//gMapControl1.OnTileLoadComplete += GMap_OnTileLoadComplete;
-//gMapControl1.OnTileLoadStart += GMap_OnTileLoadStart;
-
-
-gMapControl1.MouseClick += new MouseEventHandler(mapControl_MouseClick);
-gMapControl1.MouseMove += new MouseEventHandler(mapControl_MouseMove);
-gMapControl1.MouseDown += new MouseEventHandler(mapControl_MouseDown);
-gMapControl1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
-gMapControl1.OnMarkerEnter += new MarkerEnter(mapControl_OnMarkerEnter);
-gMapControl1.OnMarkerLeave += new MarkerLeave(mapControl_OnMarkerLeave);
-gMapControl1.OnMarkerClick += new MarkerClick(mapControl_OnMarkerClick);
-gMapControl1.OnPolygonClick += new PolygonClick(mapControl_OnPolygonClick);
-gMapControl1.OnPolygonEnter += new PolygonEnter(mapControl_OnPolygonEnter);
-gMapControl1.OnPolygonLeave += new PolygonLeave(mapControl_OnPolygonLeave);
-gMapControl1.OnPositionChanged += new PositionChanged(mapControl_OnPositionChanged);
-gMapControl1.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
-gMapControl1.OnPolygonDoubleClick += new PolygonDoubleClick(mapControl_OnPolygonDoubleClick);
-
-
-
-
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -77,7 +43,6 @@ namespace MapDownloader
         private GMapOverlay poiOverlay = new GMapOverlay("poiOverlay");
 
         // China boundry
-        private Country china;
         private bool isCountryLoad = false;
         private GMapOverlay regionOverlay = new GMapOverlay("region");
 
@@ -88,6 +53,7 @@ namespace MapDownloader
         // Current dragable node when editing "current area polygon"
         private GMapMarkerEllipse currentDragableNode = null;
         private List<GMapMarkerEllipse> currentDragableNodes;
+        
         // Current area polygon for downloading
         private GMapAreaPolygon currentAreaPolygon;
 
@@ -100,8 +66,6 @@ namespace MapDownloader
         private GMapOverlay routeOverlay = new GMapOverlay("routeOverlay");
         private string currentCenterCityName = "南京市";
 
-        // Tile Downloader, init 5 threads
-        private TileDownloader tileDownloader = new TileDownloader(5);
 
         public MainForm()
         {
@@ -115,22 +79,6 @@ namespace MapDownloader
 
         }
 
-        // Double click to download the map
-        void mapControl_OnPolygonDoubleClick(GMapPolygon item, MouseEventArgs e)
-        {
-            if (item is GMapAreaPolygon)
-            {
-                if (currentAreaPolygon != null)
-                {
-                    DownloadMap(currentAreaPolygon);
-                }
-                else
-                {
-                    CommonTools.MessageBox.ShowTipMessage("请先用画图工具画下载的区域多边形或选择省市区域！");
-                }
-            }
-        }
-
         #region Map event
 
         void centerPositionWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -141,51 +89,8 @@ namespace MapDownloader
             e.Result = centerPosPlace;
         }
 
-        void mapControl_OnMarkerClick(GMapMarker item, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                if (item is DrawDeleteMarker)
-                {
-                    currentAreaPolygon = null;
 
-                    GMapOverlay overlay = item.Overlay;
-                    if (overlay.Markers.Contains(item))
-                    {
-                        overlay.Markers.Remove(item);
-                    }
-
-                    if (gMapControl1.Overlays.Contains(overlay))
-                    {
-                        gMapControl1.Overlays.Remove(overlay);
-                    }
-                }
-            }
-        }
-
-        void mapControl_OnMarkerLeave(GMapMarker item)
-        {
-            if (!isLeftButtonDown)
-            {
-                if (item is GMapMarkerEllipse)
-                {
-                    currentDragableNode = null;
-                }
-            }
-        }
-
-        void mapControl_OnMarkerEnter(GMapMarker item)
-        {
-            if (!isLeftButtonDown)
-            {
-                if (item is GMapMarkerEllipse)
-                {
-                    currentDragableNode = item as GMapMarkerEllipse;
-                }
-            }
-        }
-
-        void mapControl_MouseUp(object sender, MouseEventArgs e)
+        void gMapControl1_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -194,7 +99,7 @@ namespace MapDownloader
             }
         }
 
-        void mapControl_MouseDown(object sender, MouseEventArgs e)
+        void gMapControl1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -203,7 +108,7 @@ namespace MapDownloader
         }
 
         // Mouse move evnet
-        void mapControl_MouseMove(object sender, MouseEventArgs e)
+        void gMapControl1_MouseMove(object sender, MouseEventArgs e)
         {
             try
             {
@@ -232,46 +137,6 @@ namespace MapDownloader
                 log.Error(ex);
             }
         }
-
-        void mapControl_OnPolygonLeave(GMapPolygon item)
-        {
-            if (item is GMapAreaPolygon)
-            {
-                GMapAreaPolygon areaPolygon = item as GMapAreaPolygon;
-                if (currentAreaPolygon != null && currentAreaPolygon == areaPolygon)
-                {
-                    currentAreaPolygon = item as GMapAreaPolygon;
-                    currentAreaPolygon.Stroke.Color = Color.Blue;
-                }
-            }
-        }
-
-        void mapControl_OnPolygonEnter(GMapPolygon item)
-        {
-            if (item is GMapAreaPolygon)
-            {
-                GMapAreaPolygon areaPolygon = item as GMapAreaPolygon;
-                if (currentAreaPolygon != null && currentAreaPolygon == areaPolygon)
-                {
-                    currentAreaPolygon = item as GMapAreaPolygon;
-                    currentAreaPolygon.Stroke.Color = Color.Red;
-                }
-            }
-        }
-
-        void mapControl_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
-        {
-        }
-
-        #endregion
-
-        // Init UI
-        private void InitUI()
-        {
-            ShowDownloadTip(false);
-            this.toolStripStatusPOIDownload.Visible = false;
-            this.toolStripStatusExport.Visible = false;
-	}
 	
         void dataGridViewPOI_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -289,81 +154,6 @@ namespace MapDownloader
 
         #region 加载中国区域
 
-        void xPanderPanel2_ExpandClick(object sender, EventArgs e)
-        {
-            if (!isCountryLoad)
-            {
-                InitChinaRegion();
-                isCountryLoad = true;
-            }
-        }
-
-
-        private void InitCountryTree()
-        {
-            try
-            {
-                if (china.Province != null)
-                {
-                    foreach (var provice in china.Province)
-                    {
-                        TreeNode pNode = new TreeNode(provice.name);
-                        pNode.Tag = provice;
-                        if (provice.City != null)
-                        {
-                            foreach (var city in provice.City)
-                            {
-                                TreeNode cNode = new TreeNode(city.name);
-                                cNode.Tag = city;
-                                if (city.Piecearea != null)
-                                {
-                                    foreach (var piecearea in city.Piecearea)
-                                    {
-                                        TreeNode areaNode = new TreeNode(piecearea.name);
-                                        areaNode.Tag = piecearea;
-                                        cNode.Nodes.Add(areaNode);
-                                    }
-                                }
-                                pNode.Nodes.Add(cNode);
-                            }
-                        }
-                        TreeNode rootNode = this.advTreeChina.Nodes[0];
-                        rootNode.Nodes.Add(pNode);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-            }
-        }
-
-        void loadChinaWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (china == null)
-            {
-                log.Error("加载中国省市边界失败！");
-                return;
-            }
-
-            InitPOICountrySearchCondition();
-
-            InitCountryTree();
-        }
-
-        void loadChinaWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City;
-                byte[] buffer = Properties.Resources.ChinaBoundary;
-                china = GMapChinaRegion.ChinaMapRegion.GetChinaRegionFromJsonBinaryBytes(buffer);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-            }
-        }
 
         #endregion 
 
@@ -401,84 +191,6 @@ namespace MapDownloader
             }
         }
 
-        private void DownloadMap(GMapPolygon polygon)
-        {
-            if (polygon != null)
-            {
-                if (!tileDownloader.IsComplete)
-                {
-                    CommonTools.MessageBox.ShowWarningMessage("正在下载地图，等待下载完成！");
-                }
-                else
-                {
-                    RectLatLng area = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
-                    try
-                    {
-                        DownloadCfgForm downloadCfgForm = new DownloadCfgForm(area, this.gMapControl1.MapProvider);
-                        if (downloadCfgForm.ShowDialog() == DialogResult.OK)
-                        {
-                            TileDownloaderArgs downloaderArgs = downloadCfgForm.GetDownloadTileGPoints();
-                            ResetToServerAndCacheMode();
-
-                            if (this.comboBoxStore.SelectedIndex == 2)
-                            {
-                                tileDownloader.TilePath = this.tilePath;
-                            }
-                            tileDownloader.Retry = retryNum;
-                            tileDownloader.StartDownload(downloaderArgs);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        log.Error(ex);
-                    }
-                }
-            }
-            else
-            {
-                CommonTools.MessageBox.ShowTipMessage("请先用画图工具画下载的区域多边形或选择省市区域！");
-            }
-        }
-
-        private void ShowDownloadTip(bool isVisible)
-        {
-            if (this.Created && this.InvokeRequired)
-            {
-                this.Invoke(new Action(() =>
-                {
-                    this.toolStripProgressBarDownload.Visible = isVisible;
-                    this.toolStripStatusDownload.Visible = isVisible;
-                }));
-            }
-            else
-            {
-                this.toolStripProgressBarDownload.Visible = isVisible;
-                this.toolStripStatusDownload.Visible = isVisible;
-            }
-        }
-
-        void tileDownloader_PrefetchTileComplete(object sender, TileDownloadEventArgs e)
-        {
-            MessageBox.Show("地图下载完成！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            ShowDownloadTip(false);
-        }
-
-        private delegate void UpdateDownloadProress(int completedCount, int totalCount);
-
-        void tileDownloader_PrefetchTileProgress(object sender, TileDownloadEventArgs e)
-        {
-            if (e != null)
-            {
-                if (this.IsDisposed || !this.IsHandleCreated) return;
-                this.Invoke(new UpdateDownloadProress(UpdateDownloadBar), e.TileCompleteNum, e.TileAllNum);
-            }
-        }
-
-        void tileDownloader_PrefetchTileStart(object sender, TileDownloadEventArgs e)
-        {
-            ShowDownloadTip(true);
-        }
 
         private void 下载地图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1229,44 +941,6 @@ namespace MapDownloader
             toolStripStatusPOIDownload.Visible = true;
         }
 
-        private void InitPOISearch()
-        {
-            if (!isCountryLoad)
-            {
-                InitChinaRegion();
-                isCountryLoad = true;
-            }
-            this.comboBoxPOIMap.SelectedIndex = 0;
-        }
-
-        private void InitPOICountrySearchCondition()
-        {
-            if (china != null)
-            {
-                foreach (var provice in china.Province)
-                {
-                    this.comboBoxProvince.Items.Add(provice);
-                }
-                this.comboBoxProvince.DisplayMember = "name";
-                //this.comboBoxProvince.SelectedIndex = 0;
-                this.comboBoxProvince.SelectedValueChanged += ComboBoxProvince_SelectedValueChanged;
-            }
-        }
-
-        private void ComboBoxProvince_SelectedValueChanged(object sender, EventArgs e)
-        {
-            Province province = this.comboBoxProvince.SelectedItem as Province;
-            if (province != null)
-            {
-                this.comboBoxCity.Items.Clear();
-                foreach (var city in province.City)
-                {
-                    this.comboBoxCity.Items.Add(city);
-                }
-                this.comboBoxCity.DisplayMember = "name";
-                this.comboBoxCity.SelectedIndex = 0;
-            }
-        }
 
         #endregion
 

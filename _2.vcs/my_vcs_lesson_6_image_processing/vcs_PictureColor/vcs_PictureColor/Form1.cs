@@ -34,7 +34,9 @@ namespace vcs_PictureColor
         int max = 255;
         int min = 0;
         int brightness = 128;
+        int brightness_old = 128;
         int contrast = 128;
+        int contrast_old = 128;
 
         public Form1()
         {
@@ -71,8 +73,13 @@ namespace vcs_PictureColor
             lb_max.Text = "";
             lb_min.Text = "";
             lb_ratio.Text = "";
+            lb_v1_name.Text = "Minimum";
+            lb_v2_name.Text = "Maximum";
+            lb_v3_name.Text = "Brightness";
+            lb_v4_name.Text = "Contrast";
 
             measure_brightness(pictureBox0, pictureBox3);
+            this.BackColor = Color.Yellow;
         }
 
         void show_item_location()
@@ -90,7 +97,7 @@ namespace vcs_PictureColor
             pictureBox2.Size = new Size(W, H);
             pictureBox3.Size = new Size(512, 300);
             pictureBox4.Size = new Size(512, 300);
-            pictureBox5.Size = new Size(512, 200);
+            pictureBox5.Size = new Size(512, 300);
             groupBox1.Size = new Size(W * 2 - 20, 1080 - 480 - 200 - 150);
             richTextBox1.Size = new Size(W, 1080 - 480 - 200);
 
@@ -106,7 +113,7 @@ namespace vcs_PictureColor
             pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             groupBox1.Location = new Point(x_st + dx * 0 + 10, y_st + dy * 1 + 330);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 200);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 330);
 
             //button
             x_st = 20;
@@ -116,6 +123,13 @@ namespace vcs_PictureColor
 
             x_st = 610;
             y_st = 30;
+
+            lb_v1_name.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            lb_v2_name.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            lb_v3_name.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lb_v4_name.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            x_st += 110;
             hScrollBar1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             hScrollBar2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             hScrollBar3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -147,7 +161,9 @@ namespace vcs_PictureColor
             max = 255;
             min = 0;
             brightness = 128;
+            brightness_old = 128;
             contrast = 128;
+            contrast_old = 128;
             lb_v1.Text = hScrollBar1.Value.ToString();
             lb_v2.Text = hScrollBar2.Value.ToString();
             lb_v3.Text = hScrollBar3.Value.ToString();
@@ -433,6 +449,10 @@ namespace vcs_PictureColor
                     //richTextBox1.Text += rrr.ToString() + "-";
 
                     double gray = ratio * (rrr - min);
+                    if (gray > 255)
+                        gray = 255;
+                    else if (gray < 0)
+                        gray = 0;
 
                     //richTextBox1.Text += gray.ToString() + " ";
 
@@ -608,10 +628,28 @@ namespace vcs_PictureColor
         }
 
         int already_move = 0;
+        int hScrollBar4_value_old = 128;
         private void hScrollBar4_Scroll(object sender, ScrollEventArgs e)
         {
             //contrast
             int dd = 0;
+
+            contrast = hScrollBar4.Value;
+            dd = contrast - contrast_old;
+
+            min += dd;
+            max -= dd;
+
+            contrast_old = contrast;
+
+            if (min >= 0)
+                hScrollBar1.Value = min;
+            if (max <= 255)
+                hScrollBar2.Value = max;
+
+            draw_brightness(pictureBox3);
+
+            /*
             if (hScrollBar4.Value > 128)
             {
                 dd = hScrollBar4.Value - 128;
@@ -640,6 +678,7 @@ namespace vcs_PictureColor
 
 
             }
+            */
 
             lb_v4.Text = hScrollBar4.Value.ToString();
         }
@@ -653,11 +692,73 @@ namespace vcs_PictureColor
             max = 255;
             min = 0;
             brightness = 128;
+            brightness_old = 128;
             contrast = 128;
+            contrast_old = 128;
             lb_v1.Text = hScrollBar1.Value.ToString();
             lb_v2.Text = hScrollBar2.Value.ToString();
             lb_v3.Text = hScrollBar3.Value.ToString();
             lb_v4.Text = hScrollBar4.Value.ToString();
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //加強
+
+            Bitmap bitmap1 = (Bitmap)pictureBox0.Image.Clone();
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            int i;
+            int j;
+
+            lb_max.Text = "最大 : " + max.ToString();
+            lb_min.Text = "最小 : " + min.ToString();
+
+            double ratio = 255.0 / (max - min);
+
+            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
+            lb_ratio.Text = "倍率 : " + ratio.ToString();
+
+            for (j = y_st; j < (y_st + h); j++)
+            {
+                for (i = x_st; i < (x_st + w); i++)
+                {
+                    byte rrr = bitmap1.GetPixel(i, j).R;
+                    //richTextBox1.Text += rrr.ToString() + "-";
+
+                    double gray = ratio * (rrr - min);
+                    if (gray > 255)
+                        gray = 255;
+                    else if (gray < 0)
+                        gray = 0;
+
+                    //richTextBox1.Text += gray.ToString() + " ";
+
+                    Color zz = Color.FromArgb(255, (int)gray, (int)gray, (int)gray);
+
+                    bitmap1.SetPixel(i, j, zz);
+
+                    if (gray > 240)
+                    {
+                        //bitmap1.SetPixel(i, j, Color.Red);
+                    }
+                    else if (gray < 10)
+                    {
+                        //bitmap1.SetPixel(i, j, Color.Green);
+
+                    }
+
+
+                }
+
+
+            }
+
+            richTextBox1.Text += "\nmax = " + max.ToString() + ", min = " + min.ToString() + "\n";
+
+            pictureBox1.Image = bitmap1;
 
         }
     }
