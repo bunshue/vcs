@@ -14,7 +14,7 @@ namespace vcs_LockBitmap
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\doraemon.jpg";
+        string filename = @"C:\______test_files\__pic\_anime\doraemon1.jpg";
 
         public Form1()
         {

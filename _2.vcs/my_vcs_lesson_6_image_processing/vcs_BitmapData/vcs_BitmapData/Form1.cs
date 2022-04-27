@@ -15,8 +15,8 @@ namespace vcs_BitmapData
 {
     public partial class Form1 : Form
     {
-        string filename = "c:\\______test_files\\doraemon.jpg";
-        //string filename = "c:\\______test_files\\pic_256X100.bmp";
+        string filename = @"C:\______test_files\__pic\_anime\doraemon1.jpg";
+        //string filename = @"C:\______test_files\pic_256X100.bmp";
 
         Stopwatch sw = new Stopwatch();
 
