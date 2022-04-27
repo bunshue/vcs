@@ -96,16 +96,19 @@
             this.lb_distance = new System.Windows.Forms.Label();
             this.btn_draw_profile2 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.bt_test00 = new System.Windows.Forms.Button();
-            this.bt_test01 = new System.Windows.Forms.Button();
-            this.bt_test02 = new System.Windows.Forms.Button();
-            this.bt_test03 = new System.Windows.Forms.Button();
-            this.bt_test04 = new System.Windows.Forms.Button();
             this.bt_test09 = new System.Windows.Forms.Button();
             this.bt_test08 = new System.Windows.Forms.Button();
             this.bt_test07 = new System.Windows.Forms.Button();
             this.bt_test06 = new System.Windows.Forms.Button();
             this.bt_test05 = new System.Windows.Forms.Button();
+            this.bt_test04 = new System.Windows.Forms.Button();
+            this.bt_test03 = new System.Windows.Forms.Button();
+            this.bt_test02 = new System.Windows.Forms.Button();
+            this.bt_test01 = new System.Windows.Forms.Button();
+            this.bt_test00 = new System.Windows.Forms.Button();
+            this.radioButton15 = new System.Windows.Forms.RadioButton();
+            this.radioButton16 = new System.Windows.Forms.RadioButton();
+            this.radioButton17 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -342,6 +345,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButton17);
+            this.groupBox1.Controls.Add(this.radioButton16);
+            this.groupBox1.Controls.Add(this.radioButton15);
             this.groupBox1.Controls.Add(this.radioButton14);
             this.groupBox1.Controls.Add(this.radioButton13);
             this.groupBox1.Controls.Add(this.radioButton12);
@@ -358,7 +364,7 @@
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Location = new System.Drawing.Point(970, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(230, 134);
+            this.groupBox1.Size = new System.Drawing.Size(295, 134);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "MapProvider";
@@ -366,7 +372,7 @@
             // radioButton14
             // 
             this.radioButton14.AutoSize = true;
-            this.radioButton14.Location = new System.Drawing.Point(103, 112);
+            this.radioButton14.Location = new System.Drawing.Point(98, 112);
             this.radioButton14.Name = "radioButton14";
             this.radioButton14.Size = new System.Drawing.Size(47, 16);
             this.radioButton14.TabIndex = 12;
@@ -377,7 +383,7 @@
             // radioButton13
             // 
             this.radioButton13.AutoSize = true;
-            this.radioButton13.Location = new System.Drawing.Point(103, 96);
+            this.radioButton13.Location = new System.Drawing.Point(98, 96);
             this.radioButton13.Name = "radioButton13";
             this.radioButton13.Size = new System.Drawing.Size(47, 16);
             this.radioButton13.TabIndex = 11;
@@ -388,7 +394,7 @@
             // radioButton12
             // 
             this.radioButton12.AutoSize = true;
-            this.radioButton12.Location = new System.Drawing.Point(103, 80);
+            this.radioButton12.Location = new System.Drawing.Point(98, 80);
             this.radioButton12.Name = "radioButton12";
             this.radioButton12.Size = new System.Drawing.Size(47, 16);
             this.radioButton12.TabIndex = 10;
@@ -399,7 +405,7 @@
             // radioButton11
             // 
             this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(103, 64);
+            this.radioButton11.Location = new System.Drawing.Point(98, 64);
             this.radioButton11.Name = "radioButton11";
             this.radioButton11.Size = new System.Drawing.Size(47, 16);
             this.radioButton11.TabIndex = 9;
@@ -410,7 +416,7 @@
             // radioButton10
             // 
             this.radioButton10.AutoSize = true;
-            this.radioButton10.Location = new System.Drawing.Point(103, 49);
+            this.radioButton10.Location = new System.Drawing.Point(98, 49);
             this.radioButton10.Name = "radioButton10";
             this.radioButton10.Size = new System.Drawing.Size(47, 16);
             this.radioButton10.TabIndex = 8;
@@ -421,7 +427,7 @@
             // radioButton9
             // 
             this.radioButton9.AutoSize = true;
-            this.radioButton9.Location = new System.Drawing.Point(103, 32);
+            this.radioButton9.Location = new System.Drawing.Point(98, 32);
             this.radioButton9.Name = "radioButton9";
             this.radioButton9.Size = new System.Drawing.Size(47, 16);
             this.radioButton9.TabIndex = 7;
@@ -432,7 +438,7 @@
             // radioButton8
             // 
             this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(103, 16);
+            this.radioButton8.Location = new System.Drawing.Point(98, 16);
             this.radioButton8.Name = "radioButton8";
             this.radioButton8.Size = new System.Drawing.Size(47, 16);
             this.radioButton8.TabIndex = 6;
@@ -564,7 +570,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(90, 40);
             this.button14.TabIndex = 32;
-            this.button14.Text = "測試開啟GPS資料檔";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -829,52 +834,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "測試MapDownloader";
             // 
-            // bt_test00
-            // 
-            this.bt_test00.Location = new System.Drawing.Point(18, 21);
-            this.bt_test00.Name = "bt_test00";
-            this.bt_test00.Size = new System.Drawing.Size(90, 40);
-            this.bt_test00.TabIndex = 42;
-            this.bt_test00.Text = "列出省市界資料";
-            this.bt_test00.UseVisualStyleBackColor = true;
-            this.bt_test00.Click += new System.EventHandler(this.bt_test00_Click);
-            // 
-            // bt_test01
-            // 
-            this.bt_test01.Location = new System.Drawing.Point(18, 67);
-            this.bt_test01.Name = "bt_test01";
-            this.bt_test01.Size = new System.Drawing.Size(90, 40);
-            this.bt_test01.TabIndex = 43;
-            this.bt_test01.UseVisualStyleBackColor = true;
-            this.bt_test01.Click += new System.EventHandler(this.bt_test01_Click);
-            // 
-            // bt_test02
-            // 
-            this.bt_test02.Location = new System.Drawing.Point(18, 113);
-            this.bt_test02.Name = "bt_test02";
-            this.bt_test02.Size = new System.Drawing.Size(90, 40);
-            this.bt_test02.TabIndex = 44;
-            this.bt_test02.UseVisualStyleBackColor = true;
-            this.bt_test02.Click += new System.EventHandler(this.bt_test02_Click);
-            // 
-            // bt_test03
-            // 
-            this.bt_test03.Location = new System.Drawing.Point(18, 159);
-            this.bt_test03.Name = "bt_test03";
-            this.bt_test03.Size = new System.Drawing.Size(90, 40);
-            this.bt_test03.TabIndex = 45;
-            this.bt_test03.UseVisualStyleBackColor = true;
-            this.bt_test03.Click += new System.EventHandler(this.bt_test03_Click);
-            // 
-            // bt_test04
-            // 
-            this.bt_test04.Location = new System.Drawing.Point(18, 205);
-            this.bt_test04.Name = "bt_test04";
-            this.bt_test04.Size = new System.Drawing.Size(90, 40);
-            this.bt_test04.TabIndex = 46;
-            this.bt_test04.UseVisualStyleBackColor = true;
-            this.bt_test04.Click += new System.EventHandler(this.bt_test04_Click);
-            // 
             // bt_test09
             // 
             this.bt_test09.Location = new System.Drawing.Point(114, 205);
@@ -920,11 +879,89 @@
             this.bt_test05.UseVisualStyleBackColor = true;
             this.bt_test05.Click += new System.EventHandler(this.bt_test05_Click);
             // 
+            // bt_test04
+            // 
+            this.bt_test04.Location = new System.Drawing.Point(18, 205);
+            this.bt_test04.Name = "bt_test04";
+            this.bt_test04.Size = new System.Drawing.Size(90, 40);
+            this.bt_test04.TabIndex = 46;
+            this.bt_test04.UseVisualStyleBackColor = true;
+            this.bt_test04.Click += new System.EventHandler(this.bt_test04_Click);
+            // 
+            // bt_test03
+            // 
+            this.bt_test03.Location = new System.Drawing.Point(18, 159);
+            this.bt_test03.Name = "bt_test03";
+            this.bt_test03.Size = new System.Drawing.Size(90, 40);
+            this.bt_test03.TabIndex = 45;
+            this.bt_test03.UseVisualStyleBackColor = true;
+            this.bt_test03.Click += new System.EventHandler(this.bt_test03_Click);
+            // 
+            // bt_test02
+            // 
+            this.bt_test02.Location = new System.Drawing.Point(18, 113);
+            this.bt_test02.Name = "bt_test02";
+            this.bt_test02.Size = new System.Drawing.Size(90, 40);
+            this.bt_test02.TabIndex = 44;
+            this.bt_test02.Text = "座標轉換";
+            this.bt_test02.UseVisualStyleBackColor = true;
+            this.bt_test02.Click += new System.EventHandler(this.bt_test02_Click);
+            // 
+            // bt_test01
+            // 
+            this.bt_test01.Location = new System.Drawing.Point(18, 67);
+            this.bt_test01.Name = "bt_test01";
+            this.bt_test01.Size = new System.Drawing.Size(90, 40);
+            this.bt_test01.TabIndex = 43;
+            this.bt_test01.Text = "讀取GPX檔案";
+            this.bt_test01.UseVisualStyleBackColor = true;
+            this.bt_test01.Click += new System.EventHandler(this.bt_test01_Click);
+            // 
+            // bt_test00
+            // 
+            this.bt_test00.Location = new System.Drawing.Point(18, 21);
+            this.bt_test00.Name = "bt_test00";
+            this.bt_test00.Size = new System.Drawing.Size(90, 40);
+            this.bt_test00.TabIndex = 42;
+            this.bt_test00.Text = "列出省市界資料";
+            this.bt_test00.UseVisualStyleBackColor = true;
+            this.bt_test00.Click += new System.EventHandler(this.bt_test00_Click);
+            // 
+            // radioButton15
+            // 
+            this.radioButton15.AutoSize = true;
+            this.radioButton15.Location = new System.Drawing.Point(194, 15);
+            this.radioButton15.Name = "radioButton15";
+            this.radioButton15.Size = new System.Drawing.Size(47, 16);
+            this.radioButton15.TabIndex = 13;
+            this.radioButton15.Text = "其他";
+            this.radioButton15.UseVisualStyleBackColor = true;
+            // 
+            // radioButton16
+            // 
+            this.radioButton16.AutoSize = true;
+            this.radioButton16.Location = new System.Drawing.Point(194, 34);
+            this.radioButton16.Name = "radioButton16";
+            this.radioButton16.Size = new System.Drawing.Size(47, 16);
+            this.radioButton16.TabIndex = 14;
+            this.radioButton16.Text = "其他";
+            this.radioButton16.UseVisualStyleBackColor = true;
+            // 
+            // radioButton17
+            // 
+            this.radioButton17.AutoSize = true;
+            this.radioButton17.Location = new System.Drawing.Point(194, 51);
+            this.radioButton17.Name = "radioButton17";
+            this.radioButton17.Size = new System.Drawing.Size(47, 16);
+            this.radioButton17.TabIndex = 15;
+            this.radioButton17.Text = "其他";
+            this.radioButton17.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1612, 712);
+            this.ClientSize = new System.Drawing.Size(1657, 712);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btn_draw_profile2);
             this.Controls.Add(this.lb_distance);
@@ -1057,6 +1094,9 @@
         private System.Windows.Forms.Button bt_test02;
         private System.Windows.Forms.Button bt_test01;
         private System.Windows.Forms.Button bt_test00;
+        private System.Windows.Forms.RadioButton radioButton17;
+        private System.Windows.Forms.RadioButton radioButton16;
+        private System.Windows.Forms.RadioButton radioButton15;
     }
 }
 

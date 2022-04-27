@@ -1,12 +1,4 @@
 
-gMapControl1.MapProvider = GMapProviders.GoogleChinaMap;	//Google中?普通地?
-gMapControl1.MapProvider = GMapProviders.GoogleChinaSatelliteMap;//Google中??星地?");
-gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;//Google中?混合地?");
-gMapControl1.MapProvider = GMapProviders.GoogleChinaTerrainMap;//Google中?地形地?");
-gMapControl1.MapProvider = GMapProviders.GoogleMap;//Google普通地?");
-gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;//Google?星地?");
-gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;//Google混合地?");
-
 
 
 

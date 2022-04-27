@@ -55,15 +55,15 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lb_v4 = new System.Windows.Forms.Label();
+            this.lb_v3 = new System.Windows.Forms.Label();
+            this.lb_v2 = new System.Windows.Forms.Label();
+            this.lb_v1 = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
             this.hScrollBar4 = new System.Windows.Forms.HScrollBar();
             this.hScrollBar3 = new System.Windows.Forms.HScrollBar();
             this.hScrollBar2 = new System.Windows.Forms.HScrollBar();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
-            this.lb_v1 = new System.Windows.Forms.Label();
-            this.lb_v2 = new System.Windows.Forms.Label();
-            this.lb_v3 = new System.Windows.Forms.Label();
-            this.lb_v4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
@@ -304,7 +304,6 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox4.Location = new System.Drawing.Point(436, 12);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(100, 100);
@@ -367,6 +366,46 @@
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             // 
+            // lb_v4
+            // 
+            this.lb_v4.AutoSize = true;
+            this.lb_v4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v4.Location = new System.Drawing.Point(541, 206);
+            this.lb_v4.Name = "lb_v4";
+            this.lb_v4.Size = new System.Drawing.Size(32, 24);
+            this.lb_v4.TabIndex = 36;
+            this.lb_v4.Text = "v4";
+            // 
+            // lb_v3
+            // 
+            this.lb_v3.AutoSize = true;
+            this.lb_v3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v3.Location = new System.Drawing.Point(541, 168);
+            this.lb_v3.Name = "lb_v3";
+            this.lb_v3.Size = new System.Drawing.Size(32, 24);
+            this.lb_v3.TabIndex = 35;
+            this.lb_v3.Text = "v3";
+            // 
+            // lb_v2
+            // 
+            this.lb_v2.AutoSize = true;
+            this.lb_v2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v2.Location = new System.Drawing.Point(541, 126);
+            this.lb_v2.Name = "lb_v2";
+            this.lb_v2.Size = new System.Drawing.Size(32, 24);
+            this.lb_v2.TabIndex = 34;
+            this.lb_v2.Text = "v2";
+            // 
+            // lb_v1
+            // 
+            this.lb_v1.AutoSize = true;
+            this.lb_v1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v1.Location = new System.Drawing.Point(541, 90);
+            this.lb_v1.Name = "lb_v1";
+            this.lb_v1.Size = new System.Drawing.Size(32, 24);
+            this.lb_v1.TabIndex = 33;
+            this.lb_v1.Text = "v1";
+            // 
             // button8
             // 
             this.button8.Location = new System.Drawing.Point(431, 234);
@@ -412,46 +451,6 @@
             this.hScrollBar1.Size = new System.Drawing.Size(150, 20);
             this.hScrollBar1.TabIndex = 28;
             this.hScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
-            // 
-            // lb_v1
-            // 
-            this.lb_v1.AutoSize = true;
-            this.lb_v1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_v1.Location = new System.Drawing.Point(541, 90);
-            this.lb_v1.Name = "lb_v1";
-            this.lb_v1.Size = new System.Drawing.Size(32, 24);
-            this.lb_v1.TabIndex = 33;
-            this.lb_v1.Text = "v1";
-            // 
-            // lb_v2
-            // 
-            this.lb_v2.AutoSize = true;
-            this.lb_v2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_v2.Location = new System.Drawing.Point(541, 126);
-            this.lb_v2.Name = "lb_v2";
-            this.lb_v2.Size = new System.Drawing.Size(32, 24);
-            this.lb_v2.TabIndex = 34;
-            this.lb_v2.Text = "v2";
-            // 
-            // lb_v3
-            // 
-            this.lb_v3.AutoSize = true;
-            this.lb_v3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_v3.Location = new System.Drawing.Point(541, 168);
-            this.lb_v3.Name = "lb_v3";
-            this.lb_v3.Size = new System.Drawing.Size(32, 24);
-            this.lb_v3.TabIndex = 35;
-            this.lb_v3.Text = "v3";
-            // 
-            // lb_v4
-            // 
-            this.lb_v4.AutoSize = true;
-            this.lb_v4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_v4.Location = new System.Drawing.Point(541, 206);
-            this.lb_v4.Name = "lb_v4";
-            this.lb_v4.Size = new System.Drawing.Size(32, 24);
-            this.lb_v4.TabIndex = 36;
-            this.lb_v4.Text = "v4";
             // 
             // Form1
             // 

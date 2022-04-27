@@ -1,4 +1,9 @@
-﻿namespace GMap.NET.WindowsPresentation
+﻿      public PointLatLng FromLocalToLatLng(int x, int y)
+      public GPoint FromLatLngToLocal(PointLatLng point)
+
+
+
+namespace GMap.NET.WindowsPresentation
 {
    using System;
    using System.Collections.Generic;
@@ -1504,123 +1509,6 @@
          }
       }
 
-      /// <summary>
-      /// reverses MouseWheel zooming direction
-      /// </summary>
-      public bool InvertedMouseWheelZooming = false;
-
-      /// <summary>
-      /// lets you zoom by MouseWheel even when pointer is in area of marker
-      /// </summary>
-      public bool IgnoreMarkerOnMouseWheel = false;
-
-      protected override void OnMouseWheel(MouseWheelEventArgs e)
-      {
-         base.OnMouseWheel(e);
-
-         if(MouseWheelZoomEnabled && (IsMouseDirectlyOver || IgnoreMarkerOnMouseWheel) && !Core.IsDragging)
-         {
-            System.Windows.Point p = e.GetPosition(this);
-
-            if(MapScaleTransform != null)
-            {
-               p = MapScaleTransform.Inverse.Transform(p);
-            }
-
-            p = ApplyRotationInversion(p.X, p.Y);
-
-            if(Core.mouseLastZoom.X != (int)p.X && Core.mouseLastZoom.Y != (int)p.Y)
-            {
-               if(MouseWheelZoomType == MouseWheelZoomType.MousePositionAndCenter)
-               {
-                  Core.position = FromLocalToLatLng((int)p.X, (int)p.Y);
-               }
-               else if(MouseWheelZoomType == MouseWheelZoomType.ViewCenter)
-               {
-                  Core.position = FromLocalToLatLng((int)ActualWidth / 2, (int)ActualHeight / 2);
-               }
-               else if(MouseWheelZoomType == MouseWheelZoomType.MousePositionWithoutCenter)
-               {
-                  Core.position = FromLocalToLatLng((int)p.X, (int)p.Y);
-               }
-
-               Core.mouseLastZoom.X = (int)p.X;
-               Core.mouseLastZoom.Y = (int)p.Y;
-            }
-
-            // set mouse position to map center
-            if(MouseWheelZoomType != MouseWheelZoomType.MousePositionWithoutCenter)
-            {
-               System.Windows.Point ps = PointToScreen(new System.Windows.Point(ActualWidth / 2, ActualHeight / 2));
-               Stuff.SetCursorPos((int)ps.X, (int)ps.Y);
-            }
-
-            Core.MouseWheelZooming = true;
-
-            if(e.Delta > 0)
-            {
-               if(!InvertedMouseWheelZooming)
-               {
-                  Zoom = ((int)Zoom) + 1;
-               }
-               else
-               {
-                  Zoom = ((int)(Zoom + 0.99)) - 1;
-               }
-            }
-            else
-            {
-               if(InvertedMouseWheelZooming)
-               {
-                  Zoom = ((int)Zoom) + 1;
-               }
-               else
-               {
-                  Zoom = ((int)(Zoom + 0.99)) - 1;
-               }
-            }
-
-            Core.MouseWheelZooming = false;
-         }
-      }
-
-      bool isSelected = false;
-
-      protected override void OnMouseDown(MouseButtonEventArgs e)
-      {
-         base.OnMouseDown(e);
-
-         if(CanDragMap && e.ChangedButton == DragButton)
-         {
-            Point p = e.GetPosition(this);
-
-            if(MapScaleTransform != null)
-            {
-               p = MapScaleTransform.Inverse.Transform(p);
-            }
-
-            p = ApplyRotationInversion(p.X, p.Y);
-
-            Core.mouseDown.X = (int)p.X;
-            Core.mouseDown.Y = (int)p.Y;
-
-            InvalidateVisual();
-         }
-         else
-         {
-            if(!isSelected)
-            {
-               Point p = e.GetPosition(this);
-               isSelected = true;
-               SelectedArea = RectLatLng.Empty;
-               selectionEnd = PointLatLng.Empty;
-               selectionStart = FromLocalToLatLng((int)p.X, (int)p.Y);
-            }
-         }
-      }
-
-      int onMouseUpTimestamp = 0;
-
       protected override void OnMouseUp(MouseButtonEventArgs e)
       {
          base.OnMouseUp(e);
@@ -1786,33 +1674,6 @@
          }
       }
 
-      /// <summary>
-      /// if true, selects area just by holding mouse and moving
-      /// </summary>
-      public bool DisableAltForSelection = false;
-
-      protected override void OnStylusDown(StylusDownEventArgs e)
-      {
-         base.OnStylusDown(e);
-
-         if(TouchEnabled && CanDragMap && !e.InAir)
-         {
-            Point p = e.GetPosition(this);
-
-            if(MapScaleTransform != null)
-            {
-               p = MapScaleTransform.Inverse.Transform(p);
-            }
-
-            p = ApplyRotationInversion(p.X, p.Y);
-
-            Core.mouseDown.X = (int)p.X;
-            Core.mouseDown.Y = (int)p.Y;
-
-            InvalidateVisual();
-         }
-      }
-
       protected override void OnStylusUp(StylusEventArgs e)
       {
          base.OnStylusUp(e);
@@ -1847,85 +1708,6 @@
             else
             {
                Core.mouseDown = GPoint.Empty;
-               InvalidateVisual();
-            }
-         }
-      }
-
-      protected override void OnStylusMove(StylusEventArgs e)
-      {
-         base.OnStylusMove(e);
-
-         if(TouchEnabled)
-         {
-            // wpf generates to many events if mouse is over some visual
-            // and OnMouseUp is fired, wtf, anyway...
-            // http://greatmaps.codeplex.com/workitem/16013
-            if((e.Timestamp & Int32.MaxValue) - onMouseUpTimestamp < 55)
-            {
-               Debug.WriteLine("OnMouseMove skipped: " + ((e.Timestamp & Int32.MaxValue) - onMouseUpTimestamp) + "ms");
-               return;
-            }
-
-            if(!Core.IsDragging && !Core.mouseDown.IsEmpty)
-            {
-               Point p = e.GetPosition(this);
-
-               if(MapScaleTransform != null)
-               {
-                  p = MapScaleTransform.Inverse.Transform(p);
-               }
-
-               p = ApplyRotationInversion(p.X, p.Y);
-
-               // cursor has moved beyond drag tolerance
-               if(Math.Abs(p.X - Core.mouseDown.X) * 2 >= SystemParameters.MinimumHorizontalDragDistance || Math.Abs(p.Y - Core.mouseDown.Y) * 2 >= SystemParameters.MinimumVerticalDragDistance)
-               {
-                  Core.BeginDrag(Core.mouseDown);
-               }
-            }
-
-            if(Core.IsDragging)
-            {
-               if(!isDragging)
-               {
-                  isDragging = true;
-                  Debug.WriteLine("IsDragging = " + isDragging);
-                  cursorBefore = Cursor;
-                  Cursor = Cursors.SizeAll;
-                  Mouse.Capture(this);
-               }
-
-               if(BoundsOfMap.HasValue && !BoundsOfMap.Value.Contains(Position))
-               {
-                  // ...
-               }
-               else
-               {
-                  Point p = e.GetPosition(this);
-
-                  if(MapScaleTransform != null)
-                  {
-                     p = MapScaleTransform.Inverse.Transform(p);
-                  }
-
-                  p = ApplyRotationInversion(p.X, p.Y);
-
-                  Core.mouseCurrent.X = (int)p.X;
-                  Core.mouseCurrent.Y = (int)p.Y;
-                  {
-                     Core.Drag(Core.mouseCurrent);
-                  }
-
-                  if(IsRotated)
-                  {
-                     ForceUpdateOverlays();
-                  }
-                  else
-                  {
-                     UpdateMarkersOffset();
-                  }
-               }
                InvalidateVisual();
             }
          }
@@ -2107,53 +1889,8 @@
          return status;
       }
 
-      /// <summary>
-      /// gets position using geocoder
-      /// </summary>
-      /// <param name="keys"></param>
-      /// <returns></returns>
-      public PointLatLng GetPositionByKeywords(string keys)
-      {
-         GeoCoderStatusCode status = GeoCoderStatusCode.Unknow;
-
-         GeocodingProvider gp = MapProvider as GeocodingProvider;
-         if(gp == null)
-         {
-            gp = GMapProviders.OpenStreetMap as GeocodingProvider;
-         }
-
-         if(gp != null)
-         {
-            var pt = gp.GetPoint(keys, out status);
-            if(status == GeoCoderStatusCode.G_GEO_SUCCESS && pt.HasValue)
-            {
-               return pt.Value;
-            }
-         }
-
-         return new PointLatLng();
-      }
 
       public PointLatLng FromLocalToLatLng(int x, int y)
-      {
-         if(MapScaleTransform != null)
-         {
-            var tp = MapScaleTransform.Inverse.Transform(new System.Windows.Point(x, y));
-            x = (int)tp.X;
-            y = (int)tp.Y;
-         }
-
-         if(IsRotated)
-         {
-            var f = rotationMatrixInvert.Transform(new System.Windows.Point(x, y));
-
-            x = (int)f.X;
-            y = (int)f.Y;
-         }
-
-         return Core.FromLocalToLatLng(x, y);
-      }
-
       public GPoint FromLatLngToLocal(PointLatLng point)
       {
          GPoint ret = Core.FromLatLngToLocal(point);

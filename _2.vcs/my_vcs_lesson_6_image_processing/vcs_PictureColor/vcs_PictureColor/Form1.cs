@@ -72,7 +72,7 @@ namespace vcs_PictureColor
             lb_min.Text = "";
             lb_ratio.Text = "";
 
-            measure_brightness();
+            measure_brightness(pictureBox0, pictureBox3);
         }
 
         void show_item_location()
@@ -89,7 +89,7 @@ namespace vcs_PictureColor
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
             pictureBox3.Size = new Size(512, 300);
-            pictureBox4.Size = new Size(512, 200);
+            pictureBox4.Size = new Size(512, 300);
             pictureBox5.Size = new Size(512, 200);
             groupBox1.Size = new Size(W * 2 - 20, 1080 - 480 - 200 - 150);
             richTextBox1.Size = new Size(W, 1080 - 480 - 200);
@@ -464,86 +464,27 @@ namespace vcs_PictureColor
 
         private void button3_Click(object sender, EventArgs e)
         {
-            measure_brightness();
-
+            measure_brightness(pictureBox0, pictureBox3);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             Form1_Load(sender, e);
-
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            x_st = 50;
-            y_st = 50;
-            w = 640 - 100;
-            h = 480 - 100;
-
-            Bitmap bitmap2 = (Bitmap)pictureBox1.Image;
-            int W = bitmap2.Width;
-            int H = bitmap2.Height;
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-            int i;
-            int j;
-            brightness_data = new int[256];
-            int total_points = 0;
-
-            for (j = y_st; j < (y_st + h); j++)
-            {
-                for (i = x_st; i < (x_st + w); i++)
-                {
-                    byte rrr = bitmap2.GetPixel(i, j).R;
-                    //richTextBox1.Text += rrr.ToString() + "-";
-                    brightness_data[rrr]++;
-                    total_points++;
-                }
-            }
-
-            //richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
-
-            int most = 0;
-            for (i = 0; i < 256; i++)
-            {
-                richTextBox1.Text += brightness_data[i].ToString() + " ";
-                if (brightness_data[i] > most)
-                    most = brightness_data[i];
-                if (brightness_data[i] == 0)
-                    brightness_data[i] = 5;
-            }
-            //richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
-
-            int ww = 512;
-            int hh = 200;
-            Bitmap bitmap3 = new Bitmap(ww, hh);
-            Graphics g3 = Graphics.FromImage(bitmap3);
-            //g3.Clear(Color.Pink);
-
-            double ratio = 0;
-            ratio = (double)hh / most;
-
-            //richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
-
-            for (i = 0; i < 256; i++)
-            {
-                //g2.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(brightness_data[i] * ratio));
-
-
-                g3.FillRectangle(Brushes.Red, i * 2, hh - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
-
-            }
-
-            g3.DrawRectangle(Pens.Red, 0, 0, ww - 1, hh - 1);
-
-
-
-
-            pictureBox4.Image = bitmap3;
+            measure_brightness(pictureBox1, pictureBox4);
         }
 
-        void measure_brightness()
+        void measure_brightness(PictureBox pbox1, PictureBox pbox2)
         {
+            if (pbox1.Image == null)
+            {
+                richTextBox1.Text += pbox1.Name + " 無影像, 離開\n";
+                return;
+            }
+
             brightness_data = new int[256];
 
             x_st = 50;
@@ -551,7 +492,7 @@ namespace vcs_PictureColor
             w = 640 - 100;
             h = 480 - 100;
 
-            Bitmap bitmap1 = (Bitmap)pictureBox0.Image;
+            Bitmap bitmap1 = (Bitmap)pbox1.Image;
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
@@ -570,16 +511,12 @@ namespace vcs_PictureColor
                 }
             }
 
-
-
             richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
 
-
-            draw_brightness();
-
+            draw_brightness(pbox2);
         }
 
-        void draw_brightness()
+        void draw_brightness(PictureBox pbox)
         {
             int i;
             int most = 0;
@@ -609,12 +546,8 @@ namespace vcs_PictureColor
             for (i = 0; i < 256; i++)
             {
                 //g2.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(brightness_data[i] * ratio));
-
-
                 g2.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
-
             }
-
 
             g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
             g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
@@ -629,13 +562,7 @@ namespace vcs_PictureColor
 
             g2.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(256 * 2 - 50, hh2));
 
-
-
-            pictureBox3.Image = bitmap2;
-
-
-
-
+            pbox.Image = bitmap2;
         }
 
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
@@ -652,7 +579,7 @@ namespace vcs_PictureColor
             min = hScrollBar1.Value;
             max = hScrollBar2.Value;
             lb_v1.Text = hScrollBar1.Value.ToString();
-            draw_brightness();
+            draw_brightness(pictureBox3);
         }
 
         private void hScrollBar2_Scroll(object sender, ScrollEventArgs e)
@@ -669,7 +596,7 @@ namespace vcs_PictureColor
             min = hScrollBar1.Value;
             max = hScrollBar2.Value;
             lb_v2.Text = hScrollBar2.Value.ToString();
-            draw_brightness();
+            draw_brightness(pictureBox3);
         }
 
         private void hScrollBar3_Scroll(object sender, ScrollEventArgs e)
@@ -709,7 +636,7 @@ namespace vcs_PictureColor
 
                 }
 
-                draw_brightness();
+                draw_brightness(pictureBox3);
 
 
             }

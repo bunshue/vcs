@@ -134,9 +134,9 @@ namespace vcs_GMap
             x_st = 1010;
             y_st = 10;
             groupBox1.Location = new Point(x_st, y_st);
-            groupBox2.Location = new Point(x_st + 240, y_st);
+            groupBox2.Location = new Point(x_st + 300, y_st);
 
-            x_st = 1370;
+            x_st = 1370 + 50;
             y_st = 12;
             dy = 25;
             checkBox1.Location = new Point(x_st, y_st + dy * 0);
@@ -149,7 +149,7 @@ namespace vcs_GMap
             comboBox1.Location = new Point(x_st, y_st + dy * 3);
             btn_draw_profile.Location = new Point(x_st, y_st + dy * 4);
             btn_draw_profile2.Location = new Point(x_st + 85, y_st + dy * 4);
-            groupBox3.Location = new Point(x_st, y_st + dy * 5+20);
+            groupBox3.Location = new Point(x_st, y_st + dy * 5 + 20);
 
             x_st = 20;
             y_st = 15;
@@ -177,6 +177,9 @@ namespace vcs_GMap
             radioButton12.Text = "WikiMapia";
             radioButton13.Text = "Google混合地圖";
             radioButton14.Text = "簡中地圖";
+            radioButton15.Text = "中國衛星地圖";
+            radioButton16.Text = "中國地形地圖";
+            radioButton17.Text = "其他";
             lb_distance.Text = "";
         }
 
@@ -227,6 +230,7 @@ namespace vcs_GMap
             gMapControl1.MaxZoom = 24; //設置控件最大縮放比例 <=24
             gMapControl1.Zoom = 14;     //當前比例
 
+            //各種地圖的事件
             gMapControl1.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
             gMapControl1.MouseDown += new MouseEventHandler(mapControl_MouseDown);
             gMapControl1.MouseMove += new MouseEventHandler(mapControl_MouseMove);
@@ -236,6 +240,11 @@ namespace vcs_GMap
             gMapControl1.Paint += new PaintEventHandler(gMapControl1_Paint);
             //gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
             gMapControl1.KeyDown += new KeyEventHandler(gMapControl1_KeyDown);
+            //gMapControl1.OnMarkerClick += gMapControl1_OnMarkerClick;
+            //gMapControl1.OnPositionChanged += gMapControl1_OnPositionChanged;
+            //gMapControl1.OnTileLoadComplete += GMap_OnTileLoadComplete;
+            //gMapControl1.OnTileLoadStart += GMap_OnTileLoadStart;
+
             this.ActiveControl = this.gMapControl1;//选中pictureBox1，不然没法触发事件
 
             gMapControl1.Overlays.Add(markersOverlay);  //添加 圖標 Markers 的圖層
@@ -247,11 +256,6 @@ namespace vcs_GMap
             gMapControl1.RoutesEnabled = true;
             //gMapControl1.ShowTileGridLines = true;  //顯示座標格網  常有問題 可能是timeout
             //gMapControl1.GrayScaleMode = true;    //黑白地圖
-
-            //gMapControl1.OnMarkerClick += gMapControl1_OnMarkerClick;
-            //gMapControl1.OnPositionChanged += gMapControl1_OnPositionChanged;
-            //gMapControl1.OnTileLoadComplete += GMap_OnTileLoadComplete;
-            //gMapControl1.OnTileLoadStart += GMap_OnTileLoadStart;
 
             //GMapProvider.Language = LanguageType.ChineseSimplified; //设置地图默认语言
             GMapProvider.Language = LanguageType.ChineseTraditional; //设置地图默认语言
@@ -808,6 +812,8 @@ namespace vcs_GMap
                         //在地圖上寫字
                         PointLatLng point_middle = new PointLatLng((pt1.Lat + pt2.Lat) / 2, (pt1.Lng + pt2.Lng) / 2);
                         GMapTextMarker textMarker = new GMapTextMarker(point_middle, dist2);
+                        textMarker.TipFont = new Font("標楷體", 20);
+                        textMarker.TipBrush = new SolidBrush(Color.Navy);
                         markersOverlay.Markers.Add(textMarker);
 
                         pt1 = point;
@@ -1020,6 +1026,19 @@ namespace vcs_GMap
             {
                 gMapControl1.MapProvider = GoogleChinaMapProvider.Instance; //簡中地圖
             }
+            else if (radioButton15.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaSatelliteMap; //中國衛星地圖
+            }
+            else if (radioButton16.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaTerrainMap; //中國地形地圖
+            }
+            else if (radioButton17.Checked == true)
+            {
+                //其他
+                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            }
         }
 
         void AddMarker(double lat, double lng, GMarkerGoogleType type, string message)
@@ -1163,23 +1182,6 @@ namespace vcs_GMap
 
         private void button14_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_xml\gps_test.gpx";
-
-            GMapRoute playRoute = GetRouteFromKml(filename);
-
-            if (playRoute == null)
-            {
-                richTextBox1.Text += "無法開啟檔案\n";
-                return;
-
-            }
-            //playRoute.Stroke.Color = Color.Red;
-            playRoute.Stroke = new Pen(Color.FromArgb(144, Color.Red)); //半透明
-            playRoute.Stroke.Width = 5;
-            playRoute.Stroke.DashStyle = DashStyle.Solid;
-            //playRoute.Stroke.DashStyle = DashStyle.Dash;
-
-            markersOverlay.Routes.Add(playRoute);
         }
 
         public static GMapRoute GetRouteFromKml(string fileName)
@@ -1795,14 +1797,165 @@ namespace vcs_GMap
 
         private void bt_test01_Click(object sender, EventArgs e)
         {
+            //讀取GPX檔案
+
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
+            string filename = @"C:\______test_files\__RW\_xml\gps_bicycle.gpx";
+
+            try
+            {
+                string objectXml = File.ReadAllText(filename);
+                gpxType type = this.gMapControl1.Manager.DeserializeGPX(objectXml);
+                if (type != null)
+                {
+                    if ((type.trk != null) && (type.trk.Length > 0))
+                    {
+                        List<PointLatLng> points = new List<PointLatLng>();
+                        foreach (trkType trk in type.trk)
+                        {
+                            foreach (trksegType seg in trk.trkseg)
+                            {
+                                foreach (wptType p in seg.trkpt)
+                                {
+                                    points.Add(new PointLatLng((double)p.lat, (double)p.lon));
+                                }
+                            }
+                            string name = string.IsNullOrEmpty(trk.name) ? string.Empty : trk.name;
+                            GMapRoute item = new GMapRoute(points, name)
+                            {
+                                Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
+                            };
+                            item.Stroke.Width = 5f;
+                            item.Stroke.DashStyle = DashStyle.DashDot;
+                            this.markersOverlay.Routes.Add(item);
+                        }
+                    }
+                    if ((type.rte != null) && (type.rte.Length > 0))
+                    {
+                        List<PointLatLng> points = new List<PointLatLng>();
+                        foreach (rteType rte in type.rte)
+                        {
+                            foreach (wptType p in rte.rtept)
+                            {
+                                points.Add(new PointLatLng((double)p.lat, (double)p.lon));
+                            }
+                            string str3 = string.IsNullOrEmpty(rte.name) ? string.Empty : rte.name;
+                            GMapRoute route2 = new GMapRoute(points, str3)
+                            {
+                                Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
+                            };
+                            route2.Stroke.Width = 5f;
+                            route2.Stroke.DashStyle = DashStyle.DashDot;
+                            this.markersOverlay.Routes.Add(route2);
+                        }
+                    }
+                    if (type.wpt != null && type.wpt.Length > 0)
+                    {
+                        foreach (wptType p in type.wpt)
+                        {
+                            PointLatLng point = new PointLatLng((double)p.lat, (double)p.lon);
+                            GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
+                            this.markersOverlay.Markers.Add(marker);
+                        }
+                    }
+                    this.gMapControl1.ZoomAndCenterRoutes(null);
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+        
+            }
+
+            /*old
+            string filename = @"C:\______test_files\__RW\_xml\gps_bicycle.gpx";
+
+            GMapRoute playRoute = GetRouteFromKml(filename);
+
+            if (playRoute == null)
+            {
+                richTextBox1.Text += "無法開啟檔案\n";
+                return;
+
+            }
+            //playRoute.Stroke.Color = Color.Red;
+            playRoute.Stroke = new Pen(Color.FromArgb(144, Color.Red)); //半透明
+            playRoute.Stroke.Width = 5;
+            playRoute.Stroke.DashStyle = DashStyle.Solid;
+            //playRoute.Stroke.DashStyle = DashStyle.Dash;
+
+            markersOverlay.Routes.Add(playRoute);
+            */
+
 
         }
-
 
         private void bt_test02_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "座標轉換\n";
+            //從地圖上的滑鼠座標畫標記
+            int x_st;
+            int y_st;
+            PointLatLng point;
+
+            x_st = 100;
+            y_st = 100;
+            point = gMapControl1.FromLocalToLatLng(x_st, y_st);
+            richTextBox1.Text += "控件座標(" + x_st.ToString() + ", " + y_st.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
+
+            x_st = 200;
+            y_st = 200;
+            point = gMapControl1.FromLocalToLatLng(x_st, y_st);
+            richTextBox1.Text += "控件座標(" + x_st.ToString() + ", " + y_st.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
+
+            x_st = 300;
+            y_st = 300;
+            point = gMapControl1.FromLocalToLatLng(x_st, y_st);
+            richTextBox1.Text += "控件座標(" + x_st.ToString() + ", " + y_st.ToString() + ")\t地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\n";
+
+
+            //竹北座標
+            latitude = 24.838;   //緯度
+            longitude = 121.003; //經度
+
+            point = new PointLatLng(latitude,longitude);
+            GPoint gp = this.markersOverlay.Control.FromLatLngToLocal(point);
+            richTextBox1.Text += "地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\t控件座標(" + gp.X.ToString() + ", " + gp.Y.ToString() + ")\n";
+
 
         }
+
+        /// <summary>
+        /// gets position using geocoder
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        public PointLatLng GetPositionByKeywords(string keys)
+        {
+            GeoCoderStatusCode status = GeoCoderStatusCode.Unknow;
+
+            GeocodingProvider gp = gMapControl1.MapProvider as GeocodingProvider;
+            if (gp == null)
+            {
+                gp = GMapProviders.OpenStreetMap as GeocodingProvider;
+                richTextBox1.Text += "1111";
+            }
+
+            if (gp != null)
+            {
+                richTextBox1.Text += "2222";
+                var pt = gp.GetPoint(keys, out status);
+                if (status == GeoCoderStatusCode.G_GEO_SUCCESS && pt.HasValue)
+                {
+                    richTextBox1.Text += "3333";
+                    return pt.Value;
+                }
+            }
+
+            return new PointLatLng();
+        }
+
 
         private void bt_test03_Click(object sender, EventArgs e)
         {

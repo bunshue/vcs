@@ -1,6 +1,33 @@
 ﻿
-#region KML GPX 操作
+//各種地圖的事件
+gMapControl1.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
+gMapControl1.MouseDown += new MouseEventHandler(mapControl_MouseDown);
+gMapControl1.MouseMove += new MouseEventHandler(mapControl_MouseMove);
+gMapControl1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
+gMapControl1.MouseClick += new MouseEventHandler(gMapControl1_MouseClick);
+gMapControl1.MouseDoubleClick += new MouseEventHandler(gMapControl1_MouseDoubleClick);
+gMapControl1.Paint += new PaintEventHandler(gMapControl1_Paint);
+//gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
+gMapControl1.KeyDown += new KeyEventHandler(gMapControl1_KeyDown);
+//gMapControl1.OnMarkerClick += gMapControl1_OnMarkerClick;
+//gMapControl1.OnPositionChanged += gMapControl1_OnPositionChanged;
+//gMapControl1.OnTileLoadComplete += GMap_OnTileLoadComplete;
+//gMapControl1.OnTileLoadStart += GMap_OnTileLoadStart;
 
+
+gMapControl1.MouseClick += new MouseEventHandler(mapControl_MouseClick);
+gMapControl1.MouseMove += new MouseEventHandler(mapControl_MouseMove);
+gMapControl1.MouseDown += new MouseEventHandler(mapControl_MouseDown);
+gMapControl1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
+gMapControl1.OnMarkerEnter += new MarkerEnter(mapControl_OnMarkerEnter);
+gMapControl1.OnMarkerLeave += new MarkerLeave(mapControl_OnMarkerLeave);
+gMapControl1.OnMarkerClick += new MarkerClick(mapControl_OnMarkerClick);
+gMapControl1.OnPolygonClick += new PolygonClick(mapControl_OnPolygonClick);
+gMapControl1.OnPolygonEnter += new PolygonEnter(mapControl_OnPolygonEnter);
+gMapControl1.OnPolygonLeave += new PolygonLeave(mapControl_OnPolygonLeave);
+gMapControl1.OnPositionChanged += new PositionChanged(mapControl_OnPositionChanged);
+gMapControl1.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
+gMapControl1.OnPolygonDoubleClick += new PolygonDoubleClick(mapControl_OnPolygonDoubleClick);
 
 
 
@@ -56,8 +83,6 @@ namespace MapDownloader
 
         private int retryNum = 3;
         private string tilePath = "D:\\GisMap";
-        private SQLitePureImageCache sqliteCache = new SQLitePureImageCache();
-        private MySQLPureImageCacheMulti mysqlCache = new MySQLPureImageCacheMulti();
 
         private bool isLeftButtonDown = false;
         // Current dragable node when editing "current area polygon"
@@ -88,86 +113,6 @@ namespace MapDownloader
 
             InitPOISearch();
 
-            InitMySQLConString();
-        }
-
-        // Init App, load configurations
-        private void InitMySQLConString()
-        {
-            try
-            {
-                string ip = ConfigHelper.GetAppConfig("MySQLServerIP");
-                string port = ConfigHelper.GetAppConfig("MySQLServerPort");
-                string dbName = ConfigHelper.GetAppConfig("Database");
-                string userID = ConfigHelper.GetAppConfig("UserID");
-                string password = ConfigHelper.GetAppConfig("Password");
-                string retryStr = ConfigHelper.GetAppConfig("Retry");
-                string center = ConfigHelper.GetAppConfig("MapCenter");
-                string[] centerPoints = center.Split(',');
-                if (centerPoints.Length == 2)
-                {
-                    if (mapControl != null)
-                    {
-                        gMapControl1.Position = new PointLatLng(double.Parse(centerPoints[1]), double.Parse(centerPoints[0]));
-                    }
-                }
-                retryNum = int.Parse(retryStr);
-
-                conString = string.Format(conStringFormat, ip, port, dbName, userID, password);
-                if (mysqlCache != null)
-                {
-                    mysqlCache.ConnectionString = conString;
-                }
-
-                tilePath = ConfigHelper.GetAppConfig("TilePath");
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-            }
-        }
-
-        // Init map
-        private void InitMap()
-        {
-            gMapControl1.ShowCenter = false;
-            gMapControl1.DragButton = System.Windows.Forms.MouseButtons.Left;
-            gMapControl1.CacheLocation = Environment.CurrentDirectory + "\\MapCache\\"; // Map cache location
-            //
-            //gMapControl1.Position = new PointLatLng(32.043, 118.773);
-            //gMapControl1.MinZoom = 1;
-            //gMapControl1.MaxZoom = 18;
-            //gMapControl1.Zoom = 9;
-            //gMapControl1.ShowTileGridLines = true;
-            gMapControl1.MapProvider = GMapProvidersExt.Baidu.BaiduMapProvider.Instance;
-            gMapControl1.MinZoom = BaiduMapProvider.Instance.MinZoom;
-            gMapControl1.MaxZoom = BaiduMapProvider.Instance.MaxZoom.Value;
-            gMapControl1.Zoom = 15;
-
-            gMapControl1.Overlays.Add(polygonsOverlay);
-            gMapControl1.Overlays.Add(regionOverlay);
-            gMapControl1.Overlays.Add(poiOverlay);
-            gMapControl1.Overlays.Add(routeOverlay);
-
-            this.gMapControl1.MouseClick += new MouseEventHandler(mapControl_MouseClick);
-            this.gMapControl1.MouseMove += new MouseEventHandler(mapControl_MouseMove);
-            this.gMapControl1.MouseDown += new MouseEventHandler(mapControl_MouseDown);
-            this.gMapControl1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
-            this.gMapControl1.OnMarkerEnter += new MarkerEnter(mapControl_OnMarkerEnter);
-            this.gMapControl1.OnMarkerLeave += new MarkerLeave(mapControl_OnMarkerLeave);
-            this.gMapControl1.OnMarkerClick += new MarkerClick(mapControl_OnMarkerClick);
-            this.gMapControl1.OnPolygonClick += new PolygonClick(mapControl_OnPolygonClick);
-            this.gMapControl1.OnPolygonEnter += new PolygonEnter(mapControl_OnPolygonEnter);
-            this.gMapControl1.OnPolygonLeave += new PolygonLeave(mapControl_OnPolygonLeave);
-            this.gMapControl1.OnPositionChanged += new PositionChanged(mapControl_OnPositionChanged);
-            this.gMapControl1.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
-            this.gMapControl1.OnPolygonDoubleClick += new PolygonDoubleClick(mapControl_OnPolygonDoubleClick);
-
-            draw = new Draw(this.mapControl);
-            draw.DrawComplete += new EventHandler<DrawEventArgs>(draw_DrawComplete);
-
-            drawDistance = new DrawDistance(this.mapControl);
-            drawDistance.DrawComplete += new EventHandler<DrawDistanceEventArgs>(drawDistance_DrawComplete);
         }
 
         // Double click to download the map
@@ -187,36 +132,6 @@ namespace MapDownloader
         }
 
         #region Map event
-
-        void mapControl_OnMapZoomChanged()
-        {
-            if (this.gMapControl1.Zoom >= 14)
-            {
-                //Allow routing on map
-                allowRouting = true;
-            }
-            else
-            {
-                allowRouting = false;
-            }
-
-            if (heatMarker != null)
-            {
-                var tl = gMapControl1.FromLatLngToLocal(heatRect.LocationTopLeft);
-                var br = gMapControl1.FromLatLngToLocal(heatRect.LocationRightBottom);
-
-                heatMarker.Position = heatRect.LocationTopLeft;
-                heatMarker.Size = new System.Drawing.Size((int)(br.X - tl.X), (int)(br.Y - tl.Y));
-            }
-        }
-
-        void mapControl_OnPositionChanged(PointLatLng point)
-        {
-            BackgroundWorker centerPositionWorker = new BackgroundWorker();
-            centerPositionWorker.DoWork += new DoWorkEventHandler(centerPositionWorker_DoWork);
-            centerPositionWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(centerPositionWorker_RunWorkerCompleted);
-            centerPositionWorker.RunWorkerAsync(point);
-        }
 
         void centerPositionWorker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -240,9 +155,9 @@ namespace MapDownloader
                         overlay.Markers.Remove(item);
                     }
 
-                    if (this.gMapControl1.Overlays.Contains(overlay))
+                    if (gMapControl1.Overlays.Contains(overlay))
                     {
-                        this.gMapControl1.Overlays.Remove(overlay);
+                        gMapControl1.Overlays.Remove(overlay);
                     }
                 }
             }
@@ -292,9 +207,9 @@ namespace MapDownloader
         {
             try
             {
-                PointLatLng p = this.gMapControl1.FromLocalToLatLng(e.X, e.Y);
+                PointLatLng p = gMapControl1.FromLocalToLatLng(e.X, e.Y);
 
-                int zoom = (int)this.gMapControl1.Zoom;
+                int zoom = (int)gMapControl1.Zoom;
                 double resolution = this.gMapControl1.MapProvider.Projection.GetLevelResolution(zoom);
 
                 if (isLeftButtonDown && currentDragableNode != null)
@@ -356,20 +271,8 @@ namespace MapDownloader
             ShowDownloadTip(false);
             this.toolStripStatusPOIDownload.Visible = false;
             this.toolStripStatusExport.Visible = false;
-
-            this.serverAndCacheToolStripMenuItem.Checked = true;
-            this.xPanderPanel2.ExpandClick += new EventHandler<EventArgs>(xPanderPanel2_ExpandClick);
-
-            this.comboBoxStore.SelectedIndex = 0;
-            this.comboBoxStore.SelectedIndexChanged += new EventHandler(comboBoxStore_SelectedIndexChanged);
-
-            this.buttonMapImage.Click += new EventHandler(buttonMapImage_Click);
-
-            this.dataGridViewPOI.AutoSize = true;
-            this.dataGridViewPOI.RowPostPaint += new DataGridViewRowPostPaintEventHandler(dataGridViewPOI_RowPostPaint);
-            this.comboBoxPoiSave.SelectedIndex = 0;
-        }
-
+	}
+	
         void dataGridViewPOI_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X,
@@ -395,18 +298,6 @@ namespace MapDownloader
             }
         }
 
-        private void InitChinaRegion()
-        {
-            TreeNode rootNode = new TreeNode("中国");
-            this.advTreeChina.Nodes.Add(rootNode);
-            rootNode.Expand();
-
-            //异步加载中国省市边界
-            BackgroundWorker loadChinaWorker = new BackgroundWorker();
-            loadChinaWorker.DoWork += new DoWorkEventHandler(loadChinaWorker_DoWork);
-            loadChinaWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(loadChinaWorker_RunWorkerCompleted);
-            loadChinaWorker.RunWorkerAsync();
-        }
 
         private void InitCountryTree()
         {
@@ -445,8 +336,6 @@ namespace MapDownloader
             {
                 log.Error(ex);
             }
-
-            this.advTreeChina.NodeMouseClick += new TreeNodeMouseClickEventHandler(advTreeChina_NodeMouseClick);
         }
 
         void loadChinaWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -536,9 +425,6 @@ namespace MapDownloader
                                 tileDownloader.TilePath = this.tilePath;
                             }
                             tileDownloader.Retry = retryNum;
-                            tileDownloader.PrefetchTileStart += new EventHandler<TileDownloadEventArgs>(tileDownloader_PrefetchTileStart);
-                            tileDownloader.PrefetchTileProgress += new EventHandler<TileDownloadEventArgs>(tileDownloader_PrefetchTileProgress);
-                            tileDownloader.PrefetchTileComplete += new EventHandler<TileDownloadEventArgs>(tileDownloader_PrefetchTileComplete);
                             tileDownloader.StartDownload(downloaderArgs);
                         }
                     }
@@ -648,7 +534,6 @@ namespace MapDownloader
                     //int retry = this.gMapControl1.Manager.Mode == AccessMode.CacheOnly ? 0 : 1; //是否重试
                     TileImageConnector tileImage = new TileImageConnector();
                     tileImage.Retry = retryNum;
-                    tileImage.ImageTileComplete += new EventHandler(tileImage_ImageTileComplete);
                     tileImage.Start(this.gMapControl1.MapProvider, area, zoom);
                 }
                 catch (Exception ex)
@@ -1040,92 +925,6 @@ namespace MapDownloader
 
         #endregion
 
-        #region KML GPX 操作
-
-        private void 读取GPXToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (FileDialog dialog = new OpenFileDialog())
-            {
-                dialog.InitialDirectory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "gpx";
-                dialog.CheckPathExists = true;
-                dialog.CheckFileExists = false;
-                dialog.AddExtension = true;
-                dialog.DefaultExt = "gpx";
-                dialog.ValidateNames = true;
-                dialog.Title = "选择GPX文件";
-                dialog.Filter = "GPX文件 (*.gpx)|*.gpx|所有文件 (*.*)|*.*";
-                dialog.FilterIndex = 1;
-                dialog.RestoreDirectory = true;
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        string objectXml = File.ReadAllText(dialog.FileName);
-                        gpxType type = this.gMapControl1.Manager.DeserializeGPX(objectXml);
-                        if (type != null)
-                        {
-                            if ((type.trk != null) && (type.trk.Length > 0))
-                            {
-                                List<PointLatLng> points = new List<PointLatLng>();
-                                foreach (trkType trk in type.trk)
-                                {
-                                    foreach (trksegType seg in trk.trkseg)
-                                    {
-                                        foreach (wptType p in seg.trkpt)
-                                        {
-                                            points.Add(new PointLatLng((double)p.lat, (double)p.lon));
-                                        }
-                                    }
-                                    string name = string.IsNullOrEmpty(trk.name) ? string.Empty : trk.name;
-                                    GMapRoute item = new GMapRoute(points, name)
-                                    {
-                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
-                                    };
-                                    item.Stroke.Width = 5f;
-                                    item.Stroke.DashStyle = DashStyle.DashDot;
-                                    this.polygonsOverlay.Routes.Add(item);
-                                }
-                            }
-                            if ((type.rte != null) && (type.rte.Length > 0))
-                            {
-                                List<PointLatLng> points = new List<PointLatLng>();
-                                foreach (rteType rte in type.rte)
-                                {
-                                    foreach (wptType p in rte.rtept)
-                                    {
-                                        points.Add(new PointLatLng((double)p.lat, (double)p.lon));
-                                    }
-                                    string str3 = string.IsNullOrEmpty(rte.name) ? string.Empty : rte.name;
-                                    GMapRoute route2 = new GMapRoute(points, str3)
-                                    {
-                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
-                                    };
-                                    route2.Stroke.Width = 5f;
-                                    route2.Stroke.DashStyle = DashStyle.DashDot;
-                                    this.polygonsOverlay.Routes.Add(route2);
-                                }
-                            }
-                            if (type.wpt != null && type.wpt.Length > 0)
-                            {
-                                foreach (wptType p in type.wpt)
-                                {
-                                    PointLatLng point = new PointLatLng((double)p.lat, (double)p.lon);
-                                    GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
-                                    this.polygonsOverlay.Markers.Add(marker);
-                                }
-                            }
-                            this.gMapControl1.ZoomAndCenterRoutes(null);
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        log.Error("Read GPX file error: " + exception);
-                        CommonTools.MessageBox.ShowTipMessage("读取GPX文件错误");
-                    }
-                }
-            }
-        }
-
         private void 读取KMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -1428,10 +1227,6 @@ namespace MapDownloader
             }
 
             toolStripStatusPOIDownload.Visible = true;
-            BackgroundWorker poiWorker = new BackgroundWorker();
-            poiWorker.DoWork += new DoWorkEventHandler(poiWorker_DoWork);
-            poiWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(poiWorker_RunWorkerCompleted);
-            poiWorker.RunWorkerAsync(argument);
         }
 
         private void InitPOISearch()
@@ -1776,9 +1571,6 @@ namespace MapDownloader
             {
                 ExportParameter exportParameter = form.GetExportParameter();
                 TileExport tileExport = new TileExport();
-                tileExport.TileExportStart += new EventHandler<TileExportEventArgs>(tileExport_TileExportStart);
-                tileExport.TileExportComplete += new EventHandler<TileExportEventArgs>(tileExport_TileExportComplete);
-                tileExport.TileExportProgress += new EventHandler<TileExportEventArgs>(tileExport_TileExportProgress);
                 tileExport.Start(exportParameter, this.conString);
             }
         }
@@ -1815,9 +1607,6 @@ namespace MapDownloader
                     CommonTools.MessageBox.ShowTipMessage("POI数据为空，无法保存！");
                     return;
                 }
-                BackgroundWorker poiExportWorker = new BackgroundWorker();
-                poiExportWorker.DoWork += new DoWorkEventHandler(poiExportWorker_DoWork);
-                poiExportWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(poiExportWorker_RunWorkerCompleted);
 
                 int selectIndex = this.comboBoxPoiSave.SelectedIndex;
                 if (selectIndex == 0)
