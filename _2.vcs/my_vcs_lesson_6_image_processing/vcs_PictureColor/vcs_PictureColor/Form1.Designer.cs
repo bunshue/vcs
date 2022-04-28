@@ -55,20 +55,22 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.trackBar4 = new System.Windows.Forms.TrackBar();
+            this.trackBar3 = new System.Windows.Forms.TrackBar();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.button9 = new System.Windows.Forms.Button();
+            this.lb_v4_name = new System.Windows.Forms.Label();
+            this.lb_v3_name = new System.Windows.Forms.Label();
+            this.lb_v2_name = new System.Windows.Forms.Label();
+            this.lb_v1_name = new System.Windows.Forms.Label();
             this.lb_v4 = new System.Windows.Forms.Label();
             this.lb_v3 = new System.Windows.Forms.Label();
             this.lb_v2 = new System.Windows.Forms.Label();
             this.lb_v1 = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
-            this.hScrollBar4 = new System.Windows.Forms.HScrollBar();
-            this.hScrollBar3 = new System.Windows.Forms.HScrollBar();
-            this.hScrollBar2 = new System.Windows.Forms.HScrollBar();
-            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
-            this.lb_v4_name = new System.Windows.Forms.Label();
-            this.lb_v3_name = new System.Windows.Forms.Label();
-            this.lb_v2_name = new System.Windows.Forms.Label();
-            this.lb_v1_name = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
@@ -80,6 +82,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox0
@@ -337,6 +343,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.button10);
+            this.groupBox1.Controls.Add(this.trackBar4);
+            this.groupBox1.Controls.Add(this.trackBar3);
+            this.groupBox1.Controls.Add(this.trackBar2);
+            this.groupBox1.Controls.Add(this.trackBar1);
             this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.lb_v4_name);
             this.groupBox1.Controls.Add(this.lb_v3_name);
@@ -347,12 +359,8 @@
             this.groupBox1.Controls.Add(this.lb_v2);
             this.groupBox1.Controls.Add(this.lb_v1);
             this.groupBox1.Controls.Add(this.button8);
-            this.groupBox1.Controls.Add(this.hScrollBar4);
-            this.groupBox1.Controls.Add(this.hScrollBar3);
             this.groupBox1.Controls.Add(this.nud_x_st);
-            this.groupBox1.Controls.Add(this.hScrollBar2);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.hScrollBar1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.nud_y_st);
             this.groupBox1.Controls.Add(this.label2);
@@ -371,9 +379,111 @@
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Location = new System.Drawing.Point(32, 456);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(620, 280);
+            this.groupBox1.Size = new System.Drawing.Size(671, 280);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
+            // 
+            // trackBar4
+            // 
+            this.trackBar4.LargeChange = 1;
+            this.trackBar4.Location = new System.Drawing.Point(122, 229);
+            this.trackBar4.Maximum = 100;
+            this.trackBar4.Name = "trackBar4";
+            this.trackBar4.Size = new System.Drawing.Size(150, 45);
+            this.trackBar4.TabIndex = 45;
+            this.trackBar4.Scroll += new System.EventHandler(this.trackBar4_Scroll);
+            this.trackBar4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar4_MouseDown);
+            this.trackBar4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.trackBar4_MouseMove);
+            this.trackBar4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar4_MouseUp);
+            // 
+            // trackBar3
+            // 
+            this.trackBar3.LargeChange = 1;
+            this.trackBar3.Location = new System.Drawing.Point(122, 206);
+            this.trackBar3.Maximum = 100;
+            this.trackBar3.Name = "trackBar3";
+            this.trackBar3.Size = new System.Drawing.Size(150, 45);
+            this.trackBar3.TabIndex = 44;
+            this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
+            this.trackBar3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar3_MouseDown);
+            this.trackBar3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.trackBar3_MouseMove);
+            this.trackBar3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar3_MouseUp);
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.LargeChange = 1;
+            this.trackBar2.Location = new System.Drawing.Point(43, 229);
+            this.trackBar2.Maximum = 100;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(150, 45);
+            this.trackBar2.TabIndex = 43;
+            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.trackBar2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar2_MouseDown);
+            this.trackBar2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.trackBar2_MouseMove);
+            this.trackBar2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar2_MouseUp);
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.LargeChange = 1;
+            this.trackBar1.Location = new System.Drawing.Point(43, 206);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(150, 45);
+            this.trackBar1.TabIndex = 42;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.trackBar1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseDown);
+            this.trackBar1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseMove);
+            this.trackBar1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseUp);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(340, 68);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(80, 40);
+            this.button9.TabIndex = 41;
+            this.button9.Text = "加強";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // lb_v4_name
+            // 
+            this.lb_v4_name.AutoSize = true;
+            this.lb_v4_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v4_name.Location = new System.Drawing.Point(578, 206);
+            this.lb_v4_name.Name = "lb_v4_name";
+            this.lb_v4_name.Size = new System.Drawing.Size(32, 24);
+            this.lb_v4_name.TabIndex = 40;
+            this.lb_v4_name.Text = "v4";
+            // 
+            // lb_v3_name
+            // 
+            this.lb_v3_name.AutoSize = true;
+            this.lb_v3_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v3_name.Location = new System.Drawing.Point(578, 168);
+            this.lb_v3_name.Name = "lb_v3_name";
+            this.lb_v3_name.Size = new System.Drawing.Size(32, 24);
+            this.lb_v3_name.TabIndex = 39;
+            this.lb_v3_name.Text = "v3";
+            // 
+            // lb_v2_name
+            // 
+            this.lb_v2_name.AutoSize = true;
+            this.lb_v2_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v2_name.Location = new System.Drawing.Point(578, 126);
+            this.lb_v2_name.Name = "lb_v2_name";
+            this.lb_v2_name.Size = new System.Drawing.Size(32, 24);
+            this.lb_v2_name.TabIndex = 38;
+            this.lb_v2_name.Text = "v2";
+            // 
+            // lb_v1_name
+            // 
+            this.lb_v1_name.AutoSize = true;
+            this.lb_v1_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_v1_name.Location = new System.Drawing.Point(578, 90);
+            this.lb_v1_name.Name = "lb_v1_name";
+            this.lb_v1_name.Size = new System.Drawing.Size(32, 24);
+            this.lb_v1_name.TabIndex = 37;
+            this.lb_v1_name.Text = "v1";
             // 
             // lb_v4
             // 
@@ -425,91 +535,26 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
-            // hScrollBar4
+            // button10
             // 
-            this.hScrollBar4.LargeChange = 1;
-            this.hScrollBar4.Location = new System.Drawing.Point(379, 206);
-            this.hScrollBar4.Name = "hScrollBar4";
-            this.hScrollBar4.Size = new System.Drawing.Size(150, 20);
-            this.hScrollBar4.TabIndex = 31;
-            this.hScrollBar4.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar4_Scroll);
+            this.button10.Location = new System.Drawing.Point(591, 27);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(80, 40);
+            this.button10.TabIndex = 46;
+            this.button10.Text = "顏色統計";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
-            // hScrollBar3
+            // checkBox1
             // 
-            this.hScrollBar3.LargeChange = 1;
-            this.hScrollBar3.Location = new System.Drawing.Point(379, 172);
-            this.hScrollBar3.Name = "hScrollBar3";
-            this.hScrollBar3.Size = new System.Drawing.Size(150, 20);
-            this.hScrollBar3.TabIndex = 30;
-            this.hScrollBar3.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar3_Scroll);
-            // 
-            // hScrollBar2
-            // 
-            this.hScrollBar2.LargeChange = 1;
-            this.hScrollBar2.Location = new System.Drawing.Point(379, 129);
-            this.hScrollBar2.Name = "hScrollBar2";
-            this.hScrollBar2.Size = new System.Drawing.Size(150, 20);
-            this.hScrollBar2.TabIndex = 29;
-            this.hScrollBar2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar2_Scroll);
-            // 
-            // hScrollBar1
-            // 
-            this.hScrollBar1.LargeChange = 1;
-            this.hScrollBar1.Location = new System.Drawing.Point(379, 90);
-            this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(150, 20);
-            this.hScrollBar1.TabIndex = 28;
-            this.hScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
-            // 
-            // lb_v4_name
-            // 
-            this.lb_v4_name.AutoSize = true;
-            this.lb_v4_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_v4_name.Location = new System.Drawing.Point(578, 206);
-            this.lb_v4_name.Name = "lb_v4_name";
-            this.lb_v4_name.Size = new System.Drawing.Size(32, 24);
-            this.lb_v4_name.TabIndex = 40;
-            this.lb_v4_name.Text = "v4";
-            // 
-            // lb_v3_name
-            // 
-            this.lb_v3_name.AutoSize = true;
-            this.lb_v3_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_v3_name.Location = new System.Drawing.Point(578, 168);
-            this.lb_v3_name.Name = "lb_v3_name";
-            this.lb_v3_name.Size = new System.Drawing.Size(32, 24);
-            this.lb_v3_name.TabIndex = 39;
-            this.lb_v3_name.Text = "v3";
-            // 
-            // lb_v2_name
-            // 
-            this.lb_v2_name.AutoSize = true;
-            this.lb_v2_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_v2_name.Location = new System.Drawing.Point(578, 126);
-            this.lb_v2_name.Name = "lb_v2_name";
-            this.lb_v2_name.Size = new System.Drawing.Size(32, 24);
-            this.lb_v2_name.TabIndex = 38;
-            this.lb_v2_name.Text = "v2";
-            // 
-            // lb_v1_name
-            // 
-            this.lb_v1_name.AutoSize = true;
-            this.lb_v1_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_v1_name.Location = new System.Drawing.Point(578, 90);
-            this.lb_v1_name.Name = "lb_v1_name";
-            this.lb_v1_name.Size = new System.Drawing.Size(32, 24);
-            this.lb_v1_name.TabIndex = 37;
-            this.lb_v1_name.Text = "v1";
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(340, 68);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(80, 40);
-            this.button9.TabIndex = 41;
-            this.button9.Text = "加強";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(340, 123);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(48, 16);
+            this.checkBox1.TabIndex = 47;
+            this.checkBox1.Text = "全圖";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // Form1
             // 
@@ -540,6 +585,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -573,10 +622,6 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.HScrollBar hScrollBar1;
-        private System.Windows.Forms.HScrollBar hScrollBar2;
-        private System.Windows.Forms.HScrollBar hScrollBar3;
-        private System.Windows.Forms.HScrollBar hScrollBar4;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label lb_v4;
         private System.Windows.Forms.Label lb_v3;
@@ -587,6 +632,12 @@
         private System.Windows.Forms.Label lb_v2_name;
         private System.Windows.Forms.Label lb_v1_name;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.TrackBar trackBar4;
+        private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

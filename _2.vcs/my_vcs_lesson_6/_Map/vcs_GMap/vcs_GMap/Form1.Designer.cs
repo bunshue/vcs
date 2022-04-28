@@ -915,6 +915,7 @@
             this.bt_test04.Name = "bt_test04";
             this.bt_test04.Size = new System.Drawing.Size(90, 40);
             this.bt_test04.TabIndex = 46;
+            this.bt_test04.Text = "測試JSON";
             this.bt_test04.UseVisualStyleBackColor = true;
             this.bt_test04.Click += new System.EventHandler(this.bt_test04_Click);
             // 

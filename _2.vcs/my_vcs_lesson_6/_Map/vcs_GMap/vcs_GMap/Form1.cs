@@ -29,6 +29,10 @@ using GMapDownload;
 
 //需要GMap.NET.Core.dll 和 GMap.NET.WindowsForms.dll這兩個檔案。
 
+
+using Newtonsoft.Json;
+
+
 namespace vcs_GMap
 {
     public partial class Form1 : Form
@@ -421,21 +425,21 @@ namespace vcs_GMap
 
         //void gMapControl1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         //{
-            //if (e.Button == MouseButtons.Left)
-            //{
-                /*
-                    GMapOverlay overlay = item.Overlay;
-                    if (overlay.Markers.Contains(item))
-                    {
-                        overlay.Markers.Remove(item);
-                    }
+        //if (e.Button == MouseButtons.Left)
+        //{
+        /*
+            GMapOverlay overlay = item.Overlay;
+            if (overlay.Markers.Contains(item))
+            {
+                overlay.Markers.Remove(item);
+            }
 
-                    if (gMapControl1.Overlays.Contains(overlay))
-                    {
-                        gMapControl1.Overlays.Remove(overlay);
-                    }
-                 */
-            //}
+            if (gMapControl1.Overlays.Contains(overlay))
+            {
+                gMapControl1.Overlays.Remove(overlay);
+            }
+         */
+        //}
         //}
 
         void gMapControl1_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
@@ -1608,7 +1612,7 @@ namespace vcs_GMap
             {
                 string[,] station = null;
 
-                station = new string[,] { 
+                station = new string[,] {
             { "台北", "25.047778", "121.517222"},
             { "新竹", "24.80205", "120.971817"},
             { "台中", "24.136944", "120.684722"},
@@ -1958,7 +1962,7 @@ namespace vcs_GMap
             catch (Exception ex)
             {
                 richTextBox1.Text += ex.Message + "\n";
-        
+
             }
 
             /*old
@@ -2012,7 +2016,7 @@ namespace vcs_GMap
             latitude = 24.838;   //緯度
             longitude = 121.003; //經度
 
-            point = new PointLatLng(latitude,longitude);
+            point = new PointLatLng(latitude, longitude);
             GPoint gp = this.markersOverlay.Control.FromLatLngToLocal(point);
             richTextBox1.Text += "地理座標" + point.Lat.ToString() + "\t" + point.Lng.ToString() + "\t控件座標(" + gp.X.ToString() + ", " + gp.Y.ToString() + ")\n";
 
@@ -2092,9 +2096,49 @@ namespace vcs_GMap
 
         private void bt_test04_Click(object sender, EventArgs e)
         {
+            //json
+            Country china;
+            try
+            {
+                //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City;
+                byte[] buffer = Properties.Resources.ChinaBoundary;
+                china = ChinaMapRegion.GetChinaRegionFromJsonBinaryBytes(buffer);
 
+
+                if (china != null)
+                {
+                    foreach (var provice in china.Province)
+                    {
+                        //this.comboBoxProvince.Items.Add(provice);
+                        //richTextBox1.Text += provice + "\n";
+                        richTextBox1.Text += provice.name + "\n";
+                    }
+                    //this.comboBoxProvince.DisplayMember = "name";
+                    //this.comboBoxProvince.SelectedIndex = 0;
+                    //this.comboBoxProvince.SelectedValueChanged += ComboBoxProvince_SelectedValueChanged;
+
+                    richTextBox1.Text += "\n\n";
+                    Province province = china.Province[9];  //江蘇省
+                    if (province != null)
+                    {
+                        //this.comboBoxCity.Items.Clear();
+                        foreach (var city in province.City)
+                        {
+                            richTextBox1.Text += city.name + "\n";
+                        }
+                        //this.comboBoxCity.DisplayMember = "name";
+                        //this.comboBoxCity.SelectedIndex = 0;
+                    }
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //log.Error(ex);
+            }
         }
-
         private void bt_test05_Click(object sender, EventArgs e)
         {
 
@@ -2196,6 +2240,53 @@ namespace vcs_GMap
         }
     }
 
+    public static class ChinaMapRegion
+    {
+        public static Country GetChinaRegionFromJsonBinaryBytes(byte[] buffer)
+        {
+            Country china = JsonHelper.JsonDeserializeFromBinaryBytes<Country>(buffer);
+            return china;
+        }
 
+        public static Country GetChinaRegionFromJsonFile(string filePath)
+        {
+            Country china = JsonHelper.JsonDeserializeFromFile<Country>(filePath, Encoding.UTF8);
+            return china;
+        }
+
+        public static Country GetChinaRegionFromXmlFile(string filePath)
+        {
+            Country china = XmlHelper.XmlDeserializeFromFile<Country>(filePath, Encoding.UTF8);
+            return china;
+        }
+
+        /*
+        public static GMapPolygon GetRegionPolygon(string name, string rings)
+        {
+            if (string.IsNullOrEmpty(rings))
+            {
+                return null;
+            }
+            else
+            {
+                List<PointLatLng> pointList = new List<PointLatLng>();
+                string[] pairPoints = rings.Split(',');
+                foreach (var points in pairPoints)
+                {
+                    string[] point = points.Split(' ');
+                    if (point.Length == 2)
+                    {
+                        PointLatLng p = new PointLatLng(double.Parse(point[1]), double.Parse(point[0]));
+                        pointList.Add(p);
+                    }
+                }
+                GMapPolygon polygon = new GMapPolygon(pointList, name);
+                polygon.Fill = new SolidBrush(Color.FromArgb(0, Color.White));
+                return polygon;
+            }
+        }
+        */
+
+    }
 }
 

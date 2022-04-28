@@ -26,7 +26,7 @@ namespace vcs_Oscilloscope
         private void btnLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog fd = new OpenFileDialog();
-            fd.InitialDirectory = Application.StartupPath + "//..//..";
+            fd.InitialDirectory = Path.Combine(Application.StartupPath, @"..\..\data");
 
             if (fd.ShowDialog() == DialogResult.OK && File.Exists(fd.FileName))
             {
@@ -44,14 +44,16 @@ namespace vcs_Oscilloscope
                     {
                         int xxx = Convert.ToInt32(info);
                         if (xxx > 0)
+                        {
                             mapData.Add(xxx);
+                        }
                     }
                     catch (System.Exception ex)
                     {
                     }
                 }
                 UCOscilloscope1.MappingDatas = mapData;
-                Console.WriteLine("Read end");
+                //Console.WriteLine("Read end");
             }
             else
             {

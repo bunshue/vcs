@@ -86,23 +86,23 @@ namespace vcs_DrawMaze
             string filename = string.Empty;
             if (direction == 0)
             {
-                filename = @"C:\_git\vcs\_2.vcs\______test_files\_pic\_car\car_potato.right.jpg";
+                filename = @"C:\_git\vcs\_2.vcs\______test_files\__pic\_car\car_potato.right.jpg";
             }
             else if (direction == 1)
             {
-                filename = @"C:\_git\vcs\_2.vcs\______test_files\_pic\_car\car_potato.down.jpg";
+                filename = @"C:\_git\vcs\_2.vcs\______test_files\__pic\_car\car_potato.down.jpg";
             }
             else if (direction == 2)
             {
-                filename = @"C:\_git\vcs\_2.vcs\______test_files\_pic\_car\car_potato.left.jpg";
+                filename = @"C:\_git\vcs\_2.vcs\______test_files\__pic\_car\car_potato.left.jpg";
             }
             else if (direction == 3)
             {
-                filename = @"C:\_git\vcs\_2.vcs\______test_files\_pic\_car\car_potato.up.jpg";
+                filename = @"C:\_git\vcs\_2.vcs\______test_files\__pic\_car\car_potato.up.jpg";
             }
             else
             {
-                filename = @"C:\_git\vcs\_2.vcs\______test_files\_pic\_car\car_potato.right.jpg";
+                filename = @"C:\_git\vcs\_2.vcs\______test_files\__pic\_car\car_potato.right.jpg";
             }
 
             GraphicsUnit units = GraphicsUnit.Pixel;

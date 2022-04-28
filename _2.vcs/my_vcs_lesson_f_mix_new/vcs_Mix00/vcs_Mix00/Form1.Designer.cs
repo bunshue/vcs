@@ -149,6 +149,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(170, 70);
             this.button3.TabIndex = 87;
+            this.button3.Text = "測試移除邊緣";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

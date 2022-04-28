@@ -114,6 +114,7 @@
             this.button69 = new System.Windows.Forms.Button();
             this.button70 = new System.Windows.Forms.Button();
             this.button71 = new System.Windows.Forms.Button();
+            this.bt_reset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -1022,11 +1023,23 @@
             this.button71.UseVisualStyleBackColor = true;
             this.button71.Click += new System.EventHandler(this.button71_Click);
             // 
+            // bt_reset
+            // 
+            this.bt_reset.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_reset.Location = new System.Drawing.Point(1219, 649);
+            this.bt_reset.Name = "bt_reset";
+            this.bt_reset.Size = new System.Drawing.Size(120, 45);
+            this.bt_reset.TabIndex = 106;
+            this.bt_reset.Text = "Reset";
+            this.bt_reset.UseVisualStyleBackColor = true;
+            this.bt_reset.Click += new System.EventHandler(this.bt_reset_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1475, 830);
+            this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.button71);
             this.Controls.Add(this.button70);
             this.Controls.Add(this.button69);
@@ -1207,6 +1220,7 @@
         private System.Windows.Forms.Button button69;
         private System.Windows.Forms.Button button70;
         private System.Windows.Forms.Button button71;
+        private System.Windows.Forms.Button bt_reset;
     }
 }
 

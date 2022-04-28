@@ -164,6 +164,7 @@ namespace vcs_Draw9_Example
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
 
+            bt_reset.Location = new Point(x_st + dx * 4, y_st + dy * 15);
             bt_save.Location = new Point(x_st + dx * 5, y_st + dy * 15);
 
             cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 14);
@@ -3659,7 +3660,7 @@ namespace vcs_Draw9_Example
             y_st = H - dh;
             g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
 
-            Bitmap bmp = new Bitmap("c:\\______test_files\\BMW.jfif");
+            Bitmap bmp = new Bitmap(@"C:\______test_files\__pic\BMW.jfif");
 
             Rectangle destRect1 = new Rectangle(x_st + 12, y_st + 10, 180, 180);
 
@@ -5560,6 +5561,29 @@ namespace vcs_Draw9_Example
             bitmap1 = null;
             pictureBox1.Image = null;
             richTextBox1.Clear();
+        }
+
+        private void bt_reset_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Location = new Point(10, 10);
+            pictureBox1.Size = new Size(800, 600);
+            pictureBox1.BackColor = Color.White;
+
+
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+
+            //----開新的Bitmap----
+            bitmap1 = new Bitmap(W, H);
+            //----使用上面的Bitmap畫圖----
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
+            sb = new SolidBrush(Color.Blue);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+
         }
 
         private void bt_save_Click(object sender, EventArgs e)
@@ -8336,6 +8360,7 @@ namespace vcs_Draw9_Example
         {
 
         }
+
     }
 
     /// <summary>

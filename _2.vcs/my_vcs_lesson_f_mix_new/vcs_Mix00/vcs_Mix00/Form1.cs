@@ -347,6 +347,33 @@ namespace vcs_Mix00
         private void button3_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            richTextBox1.Text += "測試移除邊緣\n";
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int i;
+            int j;
+
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    byte rrr = bitmap1.GetPixel(i, j).R;
+                    byte ggg = bitmap1.GetPixel(i, j).G;
+                    byte bbb = bitmap1.GetPixel(i, j).B;
+
+                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
+                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
+
+                    bitmap1.SetPixel(i, j, zz);
+                }
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         private void button4_Click(object sender, EventArgs e)

@@ -38,6 +38,8 @@ namespace vcs_PictureColor
         int contrast = 128;
         int contrast_old = 128;
 
+        bool flag_no_update_crop_picture = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -47,10 +49,20 @@ namespace vcs_PictureColor
         {
             show_item_location();
 
-            x_st = 50;
-            y_st = 50;
-            w = 640 - 100;
-            h = 480 - 100;
+            if (checkBox1.Checked == true)
+            {
+                x_st = 0;
+                y_st = 0;
+                w = 640;
+                h = 480;
+            }
+            else
+            {
+                x_st = 50;
+                y_st = 50;
+                w = 640 - 100;
+                h = 480 - 100;
+            }
 
             string filename = @"C:\______test_files\ims01.bmp";
             pictureBox0.Image = Image.FromFile(filename);
@@ -119,7 +131,7 @@ namespace vcs_PictureColor
             x_st = 20;
             y_st = 30;
             dx = 190;
-            dy = 30;
+            dy = 45;
 
             x_st = 610;
             y_st = 30;
@@ -130,44 +142,50 @@ namespace vcs_PictureColor
             lb_v4_name.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
             x_st += 110;
-            hScrollBar1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            hScrollBar2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            hScrollBar3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            hScrollBar4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            trackBar1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            trackBar2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            trackBar3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            trackBar4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
             lb_v1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             lb_v2.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             lb_v3.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             lb_v4.Location = new Point(x_st + dx * 1, y_st + dy * 3);
 
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button8.Location = new Point(x_st + dx * 1 - 20, y_st + dy * 3 + 30);
+            button8.BringToFront();
 
-            hScrollBar1.Size = new Size(180, 20);
-            hScrollBar2.Size = new Size(180, 20);
-            hScrollBar3.Size = new Size(180, 20);
-            hScrollBar4.Size = new Size(180, 20);
-            hScrollBar1.Minimum = 0;
-            hScrollBar2.Minimum = 0;
-            hScrollBar3.Minimum = 0;
-            hScrollBar4.Minimum = 0;
-            hScrollBar1.Maximum = 255;
-            hScrollBar2.Maximum = 255;
-            hScrollBar3.Maximum = 255;
-            hScrollBar4.Maximum = 255;
-            hScrollBar1.Value = 0;
-            hScrollBar2.Value = 255;
-            hScrollBar3.Value = 128;
-            hScrollBar4.Value = 128;
+
+            button10.Location = new Point(button7.Location.X + 500, button7.Location.Y);
+
+            trackBar1.Size = new Size(180, 20);
+            trackBar2.Size = new Size(180, 20);
+            trackBar3.Size = new Size(180, 20);
+            trackBar4.Size = new Size(180, 20);
+            trackBar1.Minimum = 0;
+            trackBar2.Minimum = 0;
+            trackBar3.Minimum = 0;
+            trackBar4.Minimum = 0;
+            trackBar1.Maximum = 255;
+            trackBar2.Maximum = 255;
+            trackBar3.Maximum = 255;
+            trackBar4.Maximum = 255;
+            trackBar1.Value = 0;
+            trackBar2.Value = 255;
+            trackBar3.Value = 128;
+            trackBar4.Value = 128;
             max = 255;
             min = 0;
             brightness = 128;
             brightness_old = 128;
             contrast = 128;
             contrast_old = 128;
-            lb_v1.Text = hScrollBar1.Value.ToString();
-            lb_v2.Text = hScrollBar2.Value.ToString();
-            lb_v3.Text = hScrollBar3.Value.ToString();
-            lb_v4.Text = hScrollBar4.Value.ToString();
+            lb_v1.Text = trackBar1.Value.ToString();
+            lb_v2.Text = trackBar2.Value.ToString();
+            lb_v3.Text = trackBar3.Value.ToString();
+            lb_v4.Text = trackBar4.Value.ToString();
+
+            checkBox1.Location = new Point(nud_h.Location.X, nud_h.Location.Y + 50);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -175,6 +193,7 @@ namespace vcs_PictureColor
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
+            //this.Size = new Size(1300, 1080);
 
             //離開按鈕的寫法
             bt_exit_setup();
@@ -310,7 +329,6 @@ namespace vcs_PictureColor
         private void nud_h_ValueChanged(object sender, EventArgs e)
         {
             update_crop_picture();
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -348,6 +366,11 @@ namespace vcs_PictureColor
 
         void update_crop_picture()
         {
+            if (flag_no_update_crop_picture == true)
+            {
+                return;
+            }
+
             if ((nud_x_st.Value < 0) || (nud_y_st.Value < 0) || (nud_w.Value <= 0) || (nud_h.Value <= 0))
             {
                 //richTextBox1.Text += "選取位置錯誤\n";
@@ -376,6 +399,11 @@ namespace vcs_PictureColor
             //SetPixel 彩色轉灰階
             string filename = @"C:\______test_files\ims01.bmp";
             color_to_gray_1(filename);
+
+            draw_brightness(pictureBox3);
+            do_brightness_contrast(0);
+            measure_brightness(pictureBox0, pictureBox3);
+            measure_brightness(pictureBox1, pictureBox4);
         }
 
         void color_to_gray_1(string filename)
@@ -437,10 +465,20 @@ namespace vcs_PictureColor
 
             brightness_data = new int[256];
 
-            x_st = 50;
-            y_st = 50;
-            w = 640 - 100;
-            h = 480 - 100;
+            if (checkBox1.Checked == true)
+            {
+                x_st = 0;
+                y_st = 0;
+                w = 640;
+                h = 480;
+            }
+            else
+            {
+                x_st = 50;
+                y_st = 50;
+                w = 640 - 100;
+                h = 480 - 100;
+            }
 
             Bitmap bitmap1 = (Bitmap)pbox1.Image;
             int W = bitmap1.Width;
@@ -542,56 +580,70 @@ namespace vcs_PictureColor
             pbox.Image = bitmap2;
         }
 
-        private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        private void trackBar1_Scroll(object sender, EventArgs e)
         {
             //min
-            if (hScrollBar1.Value > hScrollBar2.Value)
+            if (trackBar1.Value > trackBar2.Value)
             {
-                hScrollBar2.Value = hScrollBar1.Value;
+                trackBar2.Value = trackBar1.Value;
             }
 
-            hScrollBar3.Value = 128 - hScrollBar1.Value / 2;
-            hScrollBar4.Value = 128 + hScrollBar1.Value / 2;
+            trackBar3.Value = 128 - trackBar1.Value / 2;
+            trackBar4.Value = 128 + trackBar1.Value / 2;
 
-            min = hScrollBar1.Value;
-            max = hScrollBar2.Value;
-            lb_v1.Text = hScrollBar1.Value.ToString();
+            min = trackBar1.Value;
+            max = trackBar2.Value;
+
+            lb_v1.Text = trackBar1.Value.ToString();
             draw_brightness(pictureBox3);
         }
 
-        private void hScrollBar2_Scroll(object sender, ScrollEventArgs e)
+        private void trackBar2_Scroll(object sender, EventArgs e)
         {
             //max
-            if (hScrollBar2.Value < hScrollBar1.Value)
+            if (trackBar2.Value < trackBar1.Value)
             {
-                hScrollBar1.Value = hScrollBar2.Value;
+                trackBar1.Value = trackBar2.Value;
             }
 
-            hScrollBar3.Value = 255 - hScrollBar2.Value / 2;
-            hScrollBar4.Value = 255 - hScrollBar2.Value / 2;
+            trackBar3.Value = 255 - trackBar2.Value / 2;
+            trackBar4.Value = 255 - trackBar2.Value / 2;
 
-            min = hScrollBar1.Value;
-            max = hScrollBar2.Value;
-            lb_v2.Text = hScrollBar2.Value.ToString();
+            min = trackBar1.Value;
+            max = trackBar2.Value;
+
+            lb_v2.Text = trackBar2.Value.ToString();
             draw_brightness(pictureBox3);
         }
 
-        private void hScrollBar3_Scroll(object sender, ScrollEventArgs e)
+        private void trackBar3_Scroll(object sender, EventArgs e)
         {
             //brightness
+            int dd = 0;
 
+            brightness = trackBar3.Value;
+            dd = brightness - brightness_old;
 
-            lb_v3.Text = hScrollBar3.Value.ToString();
+            min -= dd;
+            max -= dd;
+
+            brightness_old = brightness;
+
+            if (min >= 0)
+                trackBar1.Value = min;
+            if (max <= 255)
+                trackBar2.Value = max;
+
+            lb_v3.Text = trackBar3.Value.ToString();
+            draw_brightness(pictureBox3);
         }
 
-        int already_move = 0;
-        int hScrollBar4_value_old = 128;
-        private void hScrollBar4_Scroll(object sender, ScrollEventArgs e)
+        private void trackBar4_Scroll(object sender, EventArgs e)
         {
             //contrast
             int dd = 0;
 
-            contrast = hScrollBar4.Value;
+            contrast = trackBar4.Value;
             dd = contrast - contrast_old;
 
             min += dd;
@@ -600,62 +652,35 @@ namespace vcs_PictureColor
             contrast_old = contrast;
 
             if (min >= 0)
-                hScrollBar1.Value = min;
+                trackBar1.Value = min;
             if (max <= 255)
-                hScrollBar2.Value = max;
+                trackBar2.Value = max;
 
+            lb_v4.Text = trackBar4.Value.ToString();
             draw_brightness(pictureBox3);
-
-            /*
-            if (hScrollBar4.Value > 128)
-            {
-                dd = hScrollBar4.Value - 128;
-                richTextBox1.Text += dd.ToString() + " ";
-
-                if (min < hScrollBar1.Minimum)
-                {
-                    hScrollBar1.Value = hScrollBar1.Minimum;
-                }
-                else
-                {
-                    hScrollBar1.Value = min;
-
-                }
-                if (max > hScrollBar2.Maximum)
-                {
-                    hScrollBar2.Value = hScrollBar2.Maximum;
-                }
-                else
-                {
-                    hScrollBar2.Value = max;
-
-                }
-
-                draw_brightness(pictureBox3);
-
-
-            }
-            */
-
-            lb_v4.Text = hScrollBar4.Value.ToString();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            hScrollBar1.Value = 0;
-            hScrollBar2.Value = 255;
-            hScrollBar3.Value = 128;
-            hScrollBar4.Value = 128;
+            trackBar1.Value = 0;
+            trackBar2.Value = 255;
+            trackBar3.Value = 128;
+            trackBar4.Value = 128;
             max = 255;
             min = 0;
             brightness = 128;
             brightness_old = 128;
             contrast = 128;
             contrast_old = 128;
-            lb_v1.Text = hScrollBar1.Value.ToString();
-            lb_v2.Text = hScrollBar2.Value.ToString();
-            lb_v3.Text = hScrollBar3.Value.ToString();
-            lb_v4.Text = hScrollBar4.Value.ToString();
+            lb_v1.Text = trackBar1.Value.ToString();
+            lb_v2.Text = trackBar2.Value.ToString();
+            lb_v3.Text = trackBar3.Value.ToString();
+            lb_v4.Text = trackBar4.Value.ToString();
+
+            draw_brightness(pictureBox3);
+            do_brightness_contrast(0);
+            measure_brightness(pictureBox0, pictureBox3);
+            measure_brightness(pictureBox1, pictureBox4);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -740,6 +765,184 @@ namespace vcs_PictureColor
             richTextBox1.Text += "\nmax = " + max.ToString() + ", min = " + min.ToString() + "\n";
 
             pictureBox1.Image = bitmap1;
+        }
+
+        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar1_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+            do_brightness_contrast(0);
+            measure_brightness(pictureBox1, pictureBox4);
+        }
+
+        private void trackBar2_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar2_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar2_MouseUp(object sender, MouseEventArgs e)
+        {
+            do_brightness_contrast(0);
+            measure_brightness(pictureBox1, pictureBox4);
+        }
+
+        private void trackBar3_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar3_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar3_MouseUp(object sender, MouseEventArgs e)
+        {
+            do_brightness_contrast(0);
+            measure_brightness(pictureBox1, pictureBox4);
+        }
+
+        private void trackBar4_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar4_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar4_MouseUp(object sender, MouseEventArgs e)
+        {
+            do_brightness_contrast(0);
+            measure_brightness(pictureBox1, pictureBox4);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //顏色統計
+            //string filename = @"C:\______test_files\ims01.bmp";
+            richTextBox1.Text += "顏色統計\n";
+
+            int[] r_data = new int[256];
+            int[] g_data = new int[256];
+            int[] b_data = new int[256];
+
+            //Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int i;
+            int j;
+
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    byte rr = bitmap1.GetPixel(i, j).R;
+                    byte gg = bitmap1.GetPixel(i, j).G;
+                    byte bb = bitmap1.GetPixel(i, j).B;
+
+                    r_data[rr]++;
+                    g_data[gg]++;
+                    b_data[bb]++;
+                }
+            }
+
+
+            int ww = 512;
+            int hh1 = 300;
+            int hh2 = 256;
+            Bitmap bitmap2 = new Bitmap(ww, hh1);
+            Graphics g2 = Graphics.FromImage(bitmap2);
+            g2.Clear(Color.Pink);
+
+            Pen p = new Pen(Color.Red, 2);
+
+            g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
+            g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
+
+
+            draw_rgb_data(g2, r_data, Color.Red);
+            draw_rgb_data(g2, b_data, Color.Blue);
+            draw_rgb_data(g2, g_data, Color.Green);
+
+
+
+            pictureBox5.Image = bitmap2;
+
+        }
+
+        void draw_rgb_data(Graphics g, int[] rgb_data, Color c)
+        {
+            int hh2 = 256;
+            int i;
+            int most = 0;
+            for (i = 0; i < 256; i++)
+            {
+                //richTextBox1.Text += r_data[i].ToString() + " ";
+                if (rgb_data[i] > most)
+                    most = rgb_data[i];
+                if (rgb_data[i] == 0)
+                    rgb_data[i] = 5;
+            }
+            //richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
+
+            double ratio = 0;
+            ratio = (double)hh2 / most;
+
+            //richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
+
+            Brush b = new SolidBrush(Color.FromArgb(150, c.R, c.G, c.B));
+
+            for (i = 0; i < 256; i++)
+            {
+                //g2.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(r_data[i] * ratio));
+                g.FillRectangle(b, i * 2, hh2 - (float)(rgb_data[i] * ratio), 2, (float)(rgb_data[i] * ratio));
+            }
+
+
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            flag_no_update_crop_picture = true;
+            if (checkBox1.Checked == true)
+            {
+                button1.Enabled = false;
+                x_st = 0;
+                y_st = 0;
+                w = 640;
+                h = 480;
+            }
+            else
+            {
+                button1.Enabled = true;
+                x_st = 50;
+                y_st = 50;
+                w = 640 - 100;
+                h = 480 - 100;
+            }
+            nud_x_st.Value = x_st;
+            nud_y_st.Value = y_st;
+            nud_w.Value = w;
+            nud_h.Value = h;
+            flag_no_update_crop_picture = false;
         }
     }
 }
