@@ -7,10 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
+using System.Drawing.Imaging;   //for ImageAttributes
+
 namespace vcs_ImageProcessingH
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
+
+
         public Form1()
         {
             InitializeComponent();
@@ -19,15 +25,17 @@ namespace vcs_ImageProcessingH
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            pictureBox0.Image = Image.FromFile(filename);
         }
 
         void show_item_location()
         {
-            pictureBox0.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox0.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox3.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox4.SizeMode = PictureBoxSizeMode.Normal;
 
             int x_st;
             int y_st;
@@ -43,12 +51,12 @@ namespace vcs_ImageProcessingH
             //richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
             //bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            int W = 250;
-            int H = 250;
+            int W = 305;
+            int H = 400;
             x_st = 12;
             y_st = 50;
-            dx = 270;
-            dy = 300;
+            dx = W+20;
+            dy = H+50;
             pictureBox0.Size = new Size(W, H);
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
@@ -70,11 +78,9 @@ namespace vcs_ImageProcessingH
 
 
             label0.Text = "原圖";
-            label2.Text = "Sepia";
-            label3.Text = "灰階SetPixel";
-            label4.Text = "灰階Marshal";
-
-
+            label2.Text = "";
+            label3.Text = "";
+            label4.Text = "";
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -112,6 +118,166 @@ namespace vcs_ImageProcessingH
         {
             Application.Exit();
         }
+
+        float gamma = 0.1f;
+        float brightness = 0.1f;
+        float threshold = 0.01f;
+        int binary = 20;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            gamma += 0.3f;
+            if (gamma > 2.5f)
+                gamma = 0.1f;
+            pictureBox1.Image = apply_gamma(filename, gamma);
+
+            brightness += 0.3f;
+            if (brightness > 2.5f)
+                brightness = 0.1f;
+            pictureBox2.Image = apply_brightness(filename, brightness);
+
+            threshold += 0.06f;
+            if (threshold > 1.0f)
+                threshold = 0.01f;
+            pictureBox3.Image = apply_threshold(filename, threshold);
+
+            binary += 13;
+            if (binary > 255)
+                binary -= 255;
+            pictureBox4.Image = apply_contrast_enhancement(filename, binary);
+        }
+
+        private Bitmap apply_gamma(string filename, float gamma)
+        {
+            label1.Text = "Gamma = " + gamma.ToString();
+
+            Image image = Image.FromFile(filename);
+
+            // Set the ImageAttributes object's gamma value.
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetGamma(gamma);
+
+            // Draw the image onto the new bitmap while applying the new gamma value.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width, 0),
+                new Point(0, image.Height),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(image.Width, image.Height);
+            using (Graphics g = Graphics.FromImage(bm))
+            {
+                g.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+
+            // Return the result.
+            return bm;
+        }
+
+        private Bitmap apply_brightness(string filename, float brightness)
+        {
+            label2.Text = "Brightness = " + brightness.ToString();
+
+            Image image = Image.FromFile(filename);
+
+            // Make the ColorMatrix.
+            float b = brightness;
+            ColorMatrix cm = new ColorMatrix(new float[][]
+                {
+                    new float[] {b, 0, 0, 0, 0},
+                    new float[] {0, b, 0, 0, 0},
+                    new float[] {0, 0, b, 0, 0},
+                    new float[] {0, 0, 0, 1, 0},
+                    new float[] {0, 0, 0, 0, 1},
+                });
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width, 0),
+                new Point(0, image.Height),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+
+            // Return the result.
+            return bm;
+        }
+
+        private Bitmap apply_threshold(string filename, float threshold)
+        {
+            label3.Text = "Threshold = " + threshold.ToString();
+
+            Image image = Image.FromFile(filename);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(image.Width, image.Height);
+
+            // Make the ImageAttributes object and set the threshold.
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetThreshold(threshold);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width, 0),
+                new Point(0, image.Height),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+
+            // Return the result.
+            return bm;
+        }
+
+
+        //二值化對比 ST
+        //private Bitmap apply_threshold(string filename, float threshold)
+        private Bitmap apply_contrast_enhancement(string filename, int binary)
+        {
+            label4.Text = "二值化對比 " + binary.ToString();
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            BinaryContrast(bitmap1, 3 * binary);
+
+            return bitmap1;
+        }
+
+        // Perform binary contrast enhancement on the bitmap.
+        private void BinaryContrast(Bitmap bm, int cutoff)
+        {
+            for (int y = 0; y < bm.Height; y++)
+            {
+                for (int x = 0; x < bm.Width; x++)
+                {
+                    Color clr = bm.GetPixel(x, y);
+                    if (clr.R + clr.G + clr.B > cutoff)
+                        bm.SetPixel(x, y, Color.White);
+                    else
+                        bm.SetPixel(x, y, Color.Black);
+                }
+            }
+        }
+
+        //二值化對比 SP
+
+
 
     }
 }

@@ -177,6 +177,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(90, 40);
             this.button3.TabIndex = 4;
+            this.button3.Text = "在gMap上畫圖";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -906,7 +907,6 @@
             this.bt_test05.Name = "bt_test05";
             this.bt_test05.Size = new System.Drawing.Size(90, 40);
             this.bt_test05.TabIndex = 47;
-            this.bt_test05.Text = "draw tools 畫圖";
             this.bt_test05.UseVisualStyleBackColor = true;
             this.bt_test05.Click += new System.EventHandler(this.bt_test05_Click);
             // 

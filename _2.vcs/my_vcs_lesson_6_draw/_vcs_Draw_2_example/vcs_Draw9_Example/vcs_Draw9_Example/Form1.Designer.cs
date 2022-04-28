@@ -85,7 +85,7 @@
             this.cb_manual = new System.Windows.Forms.CheckBox();
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.rb2 = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button45 = new System.Windows.Forms.Button();
             this.button46 = new System.Windows.Forms.Button();
             this.button47 = new System.Windows.Forms.Button();
@@ -115,8 +115,16 @@
             this.button70 = new System.Windows.Forms.Button();
             this.button71 = new System.Windows.Forms.Button();
             this.bt_reset = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_long0 = new System.Windows.Forms.Button();
+            this.bt_long1 = new System.Windows.Forms.Button();
+            this.bt_long2 = new System.Windows.Forms.Button();
+            this.bt_long3 = new System.Windows.Forms.Button();
+            this.bt_long4 = new System.Windows.Forms.Button();
+            this.bt_long5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -509,7 +517,6 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(135, 45);
             this.button30.TabIndex = 60;
-            this.button30.Text = "百葉窗效果";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -520,7 +527,6 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(135, 45);
             this.button31.TabIndex = 61;
-            this.button31.Text = "任意角度旋轉圖片";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -531,7 +537,6 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(135, 45);
             this.button32.TabIndex = 62;
-            this.button32.Text = "以四周擴散形式顯示圖片";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -542,7 +547,6 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(135, 45);
             this.button33.TabIndex = 63;
-            this.button33.Text = "圖片的上下對接顯示";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -586,7 +590,6 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(135, 45);
             this.button37.TabIndex = 67;
-            this.button37.Text = "謝爾平斯基的三角形";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -721,15 +724,15 @@
             this.rb2.Text = "type 2";
             this.rb2.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // groupBox2
             // 
-            this.groupBox1.Controls.Add(this.rb2);
-            this.groupBox1.Controls.Add(this.rb1);
-            this.groupBox1.Location = new System.Drawing.Point(756, 624);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(71, 70);
-            this.groupBox1.TabIndex = 78;
-            this.groupBox1.TabStop = false;
+            this.groupBox2.Controls.Add(this.rb2);
+            this.groupBox2.Controls.Add(this.rb1);
+            this.groupBox2.Location = new System.Drawing.Point(756, 624);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(71, 70);
+            this.groupBox2.TabIndex = 78;
+            this.groupBox2.TabStop = false;
             // 
             // button45
             // 
@@ -1034,11 +1037,92 @@
             this.bt_reset.UseVisualStyleBackColor = true;
             this.bt_reset.Click += new System.EventHandler(this.bt_reset_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bt_long5);
+            this.groupBox1.Controls.Add(this.bt_long4);
+            this.groupBox1.Controls.Add(this.bt_long3);
+            this.groupBox1.Controls.Add(this.bt_long2);
+            this.groupBox1.Controls.Add(this.bt_long1);
+            this.groupBox1.Controls.Add(this.bt_long0);
+            this.groupBox1.Location = new System.Drawing.Point(22, 705);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(861, 100);
+            this.groupBox1.TabIndex = 107;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "耗時久";
+            // 
+            // bt_long0
+            // 
+            this.bt_long0.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long0.Location = new System.Drawing.Point(6, 32);
+            this.bt_long0.Name = "bt_long0";
+            this.bt_long0.Size = new System.Drawing.Size(135, 45);
+            this.bt_long0.TabIndex = 108;
+            this.bt_long0.Text = "百葉窗效果";
+            this.bt_long0.UseVisualStyleBackColor = true;
+            this.bt_long0.Click += new System.EventHandler(this.bt_long0_Click);
+            // 
+            // bt_long1
+            // 
+            this.bt_long1.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long1.Location = new System.Drawing.Point(147, 32);
+            this.bt_long1.Name = "bt_long1";
+            this.bt_long1.Size = new System.Drawing.Size(135, 45);
+            this.bt_long1.TabIndex = 109;
+            this.bt_long1.Text = "任意角度旋轉圖片";
+            this.bt_long1.UseVisualStyleBackColor = true;
+            this.bt_long1.Click += new System.EventHandler(this.bt_long1_Click);
+            // 
+            // bt_long2
+            // 
+            this.bt_long2.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long2.Location = new System.Drawing.Point(288, 32);
+            this.bt_long2.Name = "bt_long2";
+            this.bt_long2.Size = new System.Drawing.Size(135, 45);
+            this.bt_long2.TabIndex = 110;
+            this.bt_long2.Text = "以四周擴散形式顯示圖片";
+            this.bt_long2.UseVisualStyleBackColor = true;
+            this.bt_long2.Click += new System.EventHandler(this.bt_long2_Click);
+            // 
+            // bt_long3
+            // 
+            this.bt_long3.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long3.Location = new System.Drawing.Point(429, 32);
+            this.bt_long3.Name = "bt_long3";
+            this.bt_long3.Size = new System.Drawing.Size(135, 45);
+            this.bt_long3.TabIndex = 111;
+            this.bt_long3.Text = "圖片的上下對接顯示";
+            this.bt_long3.UseVisualStyleBackColor = true;
+            this.bt_long3.Click += new System.EventHandler(this.bt_long3_Click);
+            // 
+            // bt_long4
+            // 
+            this.bt_long4.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long4.Location = new System.Drawing.Point(570, 32);
+            this.bt_long4.Name = "bt_long4";
+            this.bt_long4.Size = new System.Drawing.Size(135, 45);
+            this.bt_long4.TabIndex = 112;
+            this.bt_long4.Text = "謝爾平斯基的三角形";
+            this.bt_long4.UseVisualStyleBackColor = true;
+            this.bt_long4.Click += new System.EventHandler(this.bt_long4_Click);
+            // 
+            // bt_long5
+            // 
+            this.bt_long5.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long5.Location = new System.Drawing.Point(711, 32);
+            this.bt_long5.Name = "bt_long5";
+            this.bt_long5.Size = new System.Drawing.Size(135, 45);
+            this.bt_long5.TabIndex = 113;
+            this.bt_long5.UseVisualStyleBackColor = true;
+            this.bt_long5.Click += new System.EventHandler(this.bt_long5_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1475, 830);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.button71);
             this.Controls.Add(this.button70);
@@ -1067,7 +1151,7 @@
             this.Controls.Add(this.button47);
             this.Controls.Add(this.button46);
             this.Controls.Add(this.button45);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button40);
             this.Controls.Add(this.button41);
             this.Controls.Add(this.button42);
@@ -1126,8 +1210,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1191,7 +1276,7 @@
         private System.Windows.Forms.CheckBox cb_manual;
         private System.Windows.Forms.RadioButton rb1;
         private System.Windows.Forms.RadioButton rb2;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button45;
         private System.Windows.Forms.Button button46;
         private System.Windows.Forms.Button button47;
@@ -1221,6 +1306,13 @@
         private System.Windows.Forms.Button button70;
         private System.Windows.Forms.Button button71;
         private System.Windows.Forms.Button bt_reset;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button bt_long3;
+        private System.Windows.Forms.Button bt_long2;
+        private System.Windows.Forms.Button bt_long1;
+        private System.Windows.Forms.Button bt_long0;
+        private System.Windows.Forms.Button bt_long5;
+        private System.Windows.Forms.Button bt_long4;
     }
 }
 

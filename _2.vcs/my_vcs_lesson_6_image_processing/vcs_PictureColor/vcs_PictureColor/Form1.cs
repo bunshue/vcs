@@ -833,6 +833,13 @@ namespace vcs_PictureColor
 
         private void button10_Click(object sender, EventArgs e)
         {
+            if (pictureBox1.Image == null)
+            {
+                pictureBox1.Image = pictureBox0.Image;
+                //richTextBox1.Text += pictureBox1.Name + " 無影像, 離開\n";
+                //return;
+            }
+
             //顏色統計
             //string filename = @"C:\______test_files\ims01.bmp";
             richTextBox1.Text += "顏色統計\n";
@@ -863,7 +870,6 @@ namespace vcs_PictureColor
                 }
             }
 
-
             int ww = 512;
             int hh1 = 300;
             int hh2 = 256;
@@ -876,15 +882,11 @@ namespace vcs_PictureColor
             g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
             g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
 
-
             draw_rgb_data(g2, r_data, Color.Red);
             draw_rgb_data(g2, b_data, Color.Blue);
             draw_rgb_data(g2, g_data, Color.Green);
 
-
-
             pictureBox5.Image = bitmap2;
-
         }
 
         void draw_rgb_data(Graphics g, int[] rgb_data, Color c)

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -52,7 +51,6 @@
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_gamma = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -70,8 +68,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
-            this.timer_gamma = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox14 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -85,12 +82,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gamma)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -297,15 +294,6 @@
             this.pictureBox13.TabIndex = 26;
             this.pictureBox13.TabStop = false;
             // 
-            // pictureBox_gamma
-            // 
-            this.pictureBox_gamma.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_gamma.Location = new System.Drawing.Point(234, 577);
-            this.pictureBox_gamma.Name = "pictureBox_gamma";
-            this.pictureBox_gamma.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox_gamma.TabIndex = 27;
-            this.pictureBox_gamma.TabStop = false;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -466,27 +454,20 @@
             this.label20.TabIndex = 46;
             this.label20.Text = "label20";
             // 
-            // hScrollBar1
+            // pictureBox14
             // 
-            this.hScrollBar1.Location = new System.Drawing.Point(672, 42);
-            this.hScrollBar1.Maximum = 264;
-            this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(286, 20);
-            this.hScrollBar1.TabIndex = 47;
-            this.hScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
-            // 
-            // timer_gamma
-            // 
-            this.timer_gamma.Enabled = true;
-            this.timer_gamma.Interval = 1000;
-            this.timer_gamma.Tick += new System.EventHandler(this.timer_gamma_Tick);
+            this.pictureBox14.Location = new System.Drawing.Point(234, 577);
+            this.pictureBox14.Name = "pictureBox14";
+            this.pictureBox14.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox14.TabIndex = 48;
+            this.pictureBox14.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1647, 908);
-            this.Controls.Add(this.hScrollBar1);
+            this.Controls.Add(this.pictureBox14);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label18);
@@ -504,7 +485,6 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.pictureBox_gamma);
             this.Controls.Add(this.pictureBox13);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.pictureBox10);
@@ -544,12 +524,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gamma)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -580,7 +560,6 @@
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.PictureBox pictureBox13;
-        private System.Windows.Forms.PictureBox pictureBox_gamma;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
@@ -598,8 +577,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.HScrollBar hScrollBar1;
-        private System.Windows.Forms.Timer timer_gamma;
+        private System.Windows.Forms.PictureBox pictureBox14;
     }
 }
 

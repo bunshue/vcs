@@ -804,6 +804,115 @@ namespace vcs_GMap
 
         private void button3_Click(object sender, EventArgs e)
         {
+            markersOverlay = new GMapOverlay("markersOverlay");
+
+            GMapDrawCircle Circle = null;
+            GMapDrawLine Line = null;
+            GMapPolygon Polygon = null;
+            GMapDrawRoute Route = null;
+            GMapDrawRectangle myRectangle = null;
+
+            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
+            latitude = 24.839;   //緯度
+            longitude = 121.004; //經度
+            Pen stroke = new Pen(Color.Red, 5);
+            Brush fill = null;
+
+            //畫圓
+            PointLatLng center = new PointLatLng(latitude, longitude);
+
+            int x_st = 0;
+            int y_st = 0;
+            PointLatLng currentPos = new PointLatLng(latitude, longitude);
+
+            x_st = 480;
+            y_st = 0;
+            currentPos = gMapControl1.FromLocalToLatLng(x_st, y_st);
+            //currentPos = new PointLatLng(latitude + 0.01, longitude + 0.01);
+
+            //Circle = new GMapDrawCircle(center, currentPos);  //多載
+            Circle = new GMapDrawCircle(center, currentPos, stroke, fill);  //多載, 使用畫筆色
+            //                          圓心    圓邊
+            markersOverlay.Markers.Add(Circle);
+
+            PointLatLng p1 = gMapControl1.FromLocalToLatLng(100, 100);  //圓心
+            PointLatLng p2 = gMapControl1.FromLocalToLatLng(0, 100);      //圓邊
+            Circle = new GMapDrawCircle(p1, p2, stroke, fill);  //多載, 使用畫筆色
+            markersOverlay.Markers.Add(Circle);
+
+            //畫線, 連線
+            List<PointLatLng> points = new List<PointLatLng>();
+            points.Add(new PointLatLng(24.8493692081609, 120.996723175049));
+            points.Add(new PointLatLng(24.8489019025833, 121.003332138062));
+            points.Add(new PointLatLng(24.8492134398311, 121.005306243896));
+            points.Add(new PointLatLng(24.8505374643828, 121.009511947632));
+            points.Add(new PointLatLng(24.8509268806719, 121.010885238647));
+            points.Add(new PointLatLng(24.8498365119735, 121.013631820679));
+            points.Add(new PointLatLng(24.8483567105118, 121.017322540283));
+            points.Add(new PointLatLng(24.8449297339118, 121.02032661438));
+            points.Add(new PointLatLng(24.8403343208788, 121.021013259888));
+            points.Add(new PointLatLng(24.83690712212, 121.020669937134));
+            Line = new GMapDrawLine(points, "AAAAAAAA");
+            markersOverlay.Routes.Add(Line);
+
+            //畫多邊形
+            latitude = 24.839;   //緯度
+            longitude = 121.004; //經度
+
+            double dd = 0.015;
+            points = new List<PointLatLng>();
+            points.Add(new PointLatLng(latitude + dd, longitude));
+            points.Add(new PointLatLng(latitude, longitude + dd));
+            points.Add(new PointLatLng(latitude - dd, longitude));
+            points.Add(new PointLatLng(latitude, longitude - dd));
+            Polygon = new GMapPolygon(points, "BBBB");
+            markersOverlay.Polygons.Add(Polygon);
+
+            //畫路線
+            points = new List<PointLatLng>();
+            points.Add(new PointLatLng(24.83425876718, 120.99268913269));
+            points.Add(new PointLatLng(24.8313766694912, 120.987539291382));
+            points.Add(new PointLatLng(24.8322335163524, 120.982732772827));
+            points.Add(new PointLatLng(24.8379197134477, 120.984363555908));
+            points.Add(new PointLatLng(24.8416584404391, 120.98539352417));
+            points.Add(new PointLatLng(24.8465653482197, 120.987367630005));
+            points.Add(new PointLatLng(24.84640957636, 120.988655090332));
+            points.Add(new PointLatLng(24.8461759182027, 120.989942550659));
+            points.Add(new PointLatLng(24.8453191678509, 120.99157333374));
+            points.Add(new PointLatLng(24.8437614247412, 120.993976593018));
+            points.Add(new PointLatLng(24.8460201458526, 120.995092391968));
+            points.Add(new PointLatLng(24.8475778605281, 120.995864868164));
+            points.Add(new PointLatLng(24.8492913240205, 120.99663734436));
+
+            Route = new GMapDrawRoute(points, "Route");
+            markersOverlay.Routes.Add(Route);
+
+
+            //畫長方形
+            latitude = 24.839;   //緯度
+            longitude = 121.004; //經度
+
+            dd = 0.015;
+            points = new List<PointLatLng>();
+            points.Add(new PointLatLng(latitude + dd, longitude - dd));
+            points.Add(new PointLatLng(latitude + dd, longitude + dd));
+            points.Add(new PointLatLng(latitude - dd, longitude + dd));
+            points.Add(new PointLatLng(latitude - dd, longitude - dd));
+            myRectangle = new GMapDrawRectangle(points, "BBBB");
+            markersOverlay.Polygons.Add(myRectangle);
+
+            gMapControl1.Overlays.Add(markersOverlay);
+            gMapControl1.Refresh();
+
+            //寫字
+            //在地圖上寫字, 寫在markersOverlay上
+            latitude = 24.839;   //緯度
+            longitude = 121.004; //經度
+            PointLatLng position = new PointLatLng(latitude + 0.005, longitude - 0.005);
+            GMapTextMarker textMarker = new GMapTextMarker(position, "竹北市中心");
+            textMarker.TipFont = new Font("標楷體", 30);
+            textMarker.TipBrush = new SolidBrush(Color.Blue);
+            markersOverlay.Markers.Add(textMarker);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -1312,7 +1421,7 @@ namespace vcs_GMap
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
             }
             return null;
         }
@@ -1964,7 +2073,6 @@ namespace vcs_GMap
             catch (Exception ex)
             {
                 richTextBox1.Text += ex.Message + "\n";
-
             }
 
             /*old
@@ -2085,8 +2193,7 @@ namespace vcs_GMap
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //log.Error(ex);
+                    richTextBox1.Text += ex.Message + "\n";
                 }
             }
             else
@@ -2129,118 +2236,16 @@ namespace vcs_GMap
                         //this.comboBoxCity.DisplayMember = "name";
                         //this.comboBoxCity.SelectedIndex = 0;
                     }
-
-
                 }
-
             }
             catch (Exception ex)
             {
-                //log.Error(ex);
+                richTextBox1.Text += ex.Message + "\n";
             }
         }
+
         private void bt_test05_Click(object sender, EventArgs e)
         {
-            markersOverlay = new GMapOverlay("markersOverlay");
-
-            GMapDrawCircle Circle = null;
-            GMapDrawLine Line = null;
-            GMapPolygon Polygon = null;
-            GMapDrawRoute Route = null;
-            GMapDrawRectangle myRectangle = null;
-
-            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
-            latitude = 24.839;   //緯度
-            longitude = 121.004; //經度
-            Pen stroke = new Pen(Color.Red, 5);
-            Brush fill = null;
-
-            //畫圓
-            PointLatLng center = new PointLatLng(latitude, longitude);
-
-            int x_st = 0;
-            int y_st = 0;
-            PointLatLng currentPos = new PointLatLng(latitude, longitude);
-
-            x_st = 480;
-            y_st = 0;
-            currentPos = gMapControl1.FromLocalToLatLng(x_st, y_st);
-            //currentPos = new PointLatLng(latitude + 0.01, longitude + 0.01);
-
-            //Circle = new GMapDrawCircle(center, currentPos);  //多載
-            Circle = new GMapDrawCircle(center, currentPos, stroke, fill);  //多載, 使用畫筆色
-            //                          圓心    圓邊
-            markersOverlay.Markers.Add(Circle);
-
-            PointLatLng p1 = gMapControl1.FromLocalToLatLng(100, 100);  //圓心
-            PointLatLng p2 = gMapControl1.FromLocalToLatLng(0, 100);      //圓邊
-            Circle = new GMapDrawCircle(p1, p2, stroke, fill);  //多載, 使用畫筆色
-            markersOverlay.Markers.Add(Circle);
-
-            //畫線, 連線
-            List<PointLatLng> points = new List<PointLatLng>();
-            points.Add(new PointLatLng(24.8493692081609, 120.996723175049));
-            points.Add(new PointLatLng(24.8489019025833, 121.003332138062));
-            points.Add(new PointLatLng(24.8492134398311, 121.005306243896));
-            points.Add(new PointLatLng(24.8505374643828, 121.009511947632));
-            points.Add(new PointLatLng(24.8509268806719, 121.010885238647));
-            points.Add(new PointLatLng(24.8498365119735, 121.013631820679));
-            points.Add(new PointLatLng(24.8483567105118, 121.017322540283));
-            points.Add(new PointLatLng(24.8449297339118, 121.02032661438));
-            points.Add(new PointLatLng(24.8403343208788, 121.021013259888));
-            points.Add(new PointLatLng(24.83690712212, 121.020669937134));
-            Line = new GMapDrawLine(points, "AAAAAAAA");
-            markersOverlay.Routes.Add(Line);
-
-            //畫多邊形
-            latitude = 24.839;   //緯度
-            longitude = 121.004; //經度
-
-            double dd = 0.015;
-            points = new List<PointLatLng>();
-            points.Add(new PointLatLng(latitude + dd, longitude));
-            points.Add(new PointLatLng(latitude, longitude + dd));
-            points.Add(new PointLatLng(latitude - dd, longitude));
-            points.Add(new PointLatLng(latitude, longitude - dd));
-            Polygon = new GMapPolygon(points, "BBBB");
-            markersOverlay.Polygons.Add(Polygon);
-
-            //畫路線
-            points = new List<PointLatLng>();
-            points.Add(new PointLatLng(24.83425876718, 120.99268913269));
-            points.Add(new PointLatLng(24.8313766694912, 120.987539291382));
-            points.Add(new PointLatLng(24.8322335163524, 120.982732772827));
-            points.Add(new PointLatLng(24.8379197134477, 120.984363555908));
-            points.Add(new PointLatLng(24.8416584404391, 120.98539352417));
-            points.Add(new PointLatLng(24.8465653482197, 120.987367630005));
-            points.Add(new PointLatLng(24.84640957636, 120.988655090332));
-            points.Add(new PointLatLng(24.8461759182027, 120.989942550659));
-            points.Add(new PointLatLng(24.8453191678509, 120.99157333374));
-            points.Add(new PointLatLng(24.8437614247412, 120.993976593018));
-            points.Add(new PointLatLng(24.8460201458526, 120.995092391968));
-            points.Add(new PointLatLng(24.8475778605281, 120.995864868164));
-            points.Add(new PointLatLng(24.8492913240205, 120.99663734436));
-
-            Route = new GMapDrawRoute(points, "Route");
-            markersOverlay.Routes.Add(Route);
-
-
-            //畫長方形
-            latitude = 24.839;   //緯度
-            longitude = 121.004; //經度
-
-            dd = 0.015;
-            points = new List<PointLatLng>();
-            points.Add(new PointLatLng(latitude + dd, longitude - dd));
-            points.Add(new PointLatLng(latitude+dd, longitude + dd));
-            points.Add(new PointLatLng(latitude - dd, longitude+dd));
-            points.Add(new PointLatLng(latitude-dd, longitude - dd));
-            myRectangle = new GMapDrawRectangle(points, "BBBB");
-            markersOverlay.Polygons.Add(myRectangle);
-
-            gMapControl1.Overlays.Add(markersOverlay);
-            gMapControl1.Refresh();
-
         }
 
         private void bt_test06_Click(object sender, EventArgs e)

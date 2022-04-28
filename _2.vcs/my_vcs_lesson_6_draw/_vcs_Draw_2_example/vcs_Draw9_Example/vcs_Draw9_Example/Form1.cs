@@ -18,6 +18,7 @@ using System.Drawing.Text;      //for TextRenderingHint //提供畫GDI+圖形的
 
 using System.Diagnostics;       //for Debug
 using System.Reflection;    //PropertyInfo
+using System.Threading;
 
 namespace vcs_Draw9_Example
 {
@@ -162,7 +163,9 @@ namespace vcs_Draw9_Example
             button70.Location = new Point(x_st + dx * 4, y_st + dy * 11);
             button71.Location = new Point(x_st + dx * 5, y_st + dy * 11);
 
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 14);
 
             bt_reset.Location = new Point(x_st + dx * 4, y_st + dy * 15);
             bt_save.Location = new Point(x_st + dx * 5, y_st + dy * 15);
@@ -5760,135 +5763,19 @@ namespace vcs_Draw9_Example
 
         private void button30_Click(object sender, EventArgs e)
         {
-            //百葉窗效果
-
-            string filename = @"C:\______test_files\picture1.jpg";
-            try
-            {
-                Bitmap bitmap1 = new Bitmap(filename);
-                int W = bitmap1.Width;
-                int H = bitmap1.Height / 20;
-                Graphics g = this.CreateGraphics();
-                g.Clear(Color.WhiteSmoke);
-                Point[] myPoint = new Point[30];
-                for (int i = 0; i < 30; i++)
-                {
-                    myPoint[i].X = 0;
-                    myPoint[i].Y = i * H;
-                }
-                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-                for (int m = 0; m < H; m++)
-                {
-                    for (int n = 0; n < 20; n++)
-                    {
-                        for (int j = 0; j < W; j++)
-                        {
-                            bitmap2.SetPixel(myPoint[n].X + j, myPoint[n].Y + m, bitmap1.GetPixel(myPoint[n].X + j, myPoint[n].Y + m));
-                        }
-                    }
-                    this.pictureBox1.Refresh();
-                    this.pictureBox1.Image = bitmap2;
-                    System.Threading.Thread.Sleep(100);
-                }
-            }
-            catch { }
-
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
-            //任意角度旋轉圖片
-            string filename = @"C:\______test_files\picture1.jpg";
-            CircumgyrateEffect(filename.Trim(), pictureBox1);//呼叫自定義方法
         }
-
-
-        public void CircumgyrateEffect(string Str, PictureBox pictureBox1)
-        {
-            Bitmap tem_Bitmap = new Bitmap(Str);//透過字串實例化Bitmap類
-            Bitmap Var_Bitmap = new Bitmap(tem_Bitmap, pictureBox1.Width, pictureBox1.Height);//透過panel按件的大小實例化Bitmap類
-
-            Graphics g = pictureBox1.CreateGraphics();//實例化panel控制元件的Graphics類
-            float Var_Angle = 0;//設定圖片的旋轉角度
-            while (Var_Angle <= 360)//使圖片旋轉360度
-            {
-                TextureBrush Var_Brush = new TextureBrush(Var_Bitmap);//實例化TextureBrush類
-                pictureBox1.Refresh();//使工作區無效
-                Var_Brush.RotateTransform(Var_Angle);//以指定角度旋轉圖片
-                //繪製旋轉後的圖片
-                g.FillRectangle(Var_Brush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
-                Var_Angle += 2f;//增加旋轉的角度
-                System.Threading.Thread.Sleep(30);//掛掉目前線程
-            }
-        }
-
 
         private void button32_Click(object sender, EventArgs e)
         {
-            //以四周擴散形式顯示圖片
-            string filename = @"C:\______test_files\picture1.jpg";
-            DiffuseEffect(filename.Trim(), pictureBox1);//呼叫自定義方法完成圖片向四周的擴充
-        }
-
-        public void DiffuseEffect(string Str, PictureBox pictureBox1)
-        {
-            Bitmap tem_Bitmap = new Bitmap(Str);//根據字串實例化Bitmap類
-            Bitmap Var_Bitmap = new Bitmap(tem_Bitmap, pictureBox1.Width, pictureBox1.Height);//根據大小實例化Bitmap類
-            int Var_W = Var_Bitmap.Width; //圖片寬度 
-            int Var_H = Var_Bitmap.Height; //圖片高度 
-            Graphics g = pictureBox1.CreateGraphics();//取得Graphics對像 
-            g.Clear(pictureBox1.BackColor); //初始為全灰色 
-            for (int i = 0; i <= Var_W / 2; i++)
-            {
-                //取得高和寬的比例
-                int j = Convert.ToInt32(i * (Convert.ToSingle(Var_H) / Convert.ToSingle(Var_W)));
-                //設定縮小後圖片的大小
-                Rectangle Var_D_Rect = new Rectangle(Var_W / 2 - i, Var_H / 2 - j, 2 * i, 2 * j);
-                //取得原圖片大小
-                Rectangle Var_S_Rect = new Rectangle(0, 0, Var_Bitmap.Width, Var_Bitmap.Height);
-                g.DrawImage(Var_Bitmap, Var_D_Rect, Var_S_Rect, GraphicsUnit.Pixel);//按照指定的大小繪製原圖片
-                System.Threading.Thread.Sleep(10);//線程序掛掉
-            }
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
-            //圖片的上下對接顯示
-            string filename = @"C:\______test_files\picture1.jpg";
-            UpDownConnect(filename.Trim(), pictureBox1);//呼叫自定義方法
         }
-
-        public void UpDownConnect(string Str, PictureBox pictureBox1)
-        {
-            Bitmap tem_Bitmap = new Bitmap(Str);
-            Bitmap Var_Bitmap = new Bitmap(tem_Bitmap, pictureBox1.Width, pictureBox1.Height);
-
-            int Var_W = Var_Bitmap.Width; //圖片寬度 
-            int Var_H = Var_Bitmap.Height; //圖片高度 
-            Graphics g = pictureBox1.CreateGraphics();//實例化Graphics類
-            g.Clear(Color.Gray);//清空panel控制元件
-            Bitmap Tem_bmp = new Bitmap(Var_W, Var_H);//透過圖片大小實例化Bitmap類
-            int n = 0;
-            //搜尋圖片中的各象素
-            while (n <= Var_H / 2)
-            {
-                for (int i = 0; i <= Var_W - 1; i++)//取得上半張圖片的象素
-                {
-                    Tem_bmp.SetPixel(i, n, Var_Bitmap.GetPixel(i, n));//根據象素取得目前象的顏色，並記錄在Bitmap類中
-                }
-                for (int i = 0; i <= Var_W - 1; i++)//取得下半張圖片的象素
-                {
-                    //根據象素取得目前象的顏色，並記錄在Bitmap類中
-                    Tem_bmp.SetPixel(i, Var_H - n - 1, Var_Bitmap.GetPixel(i, Var_H - n - 1));
-                }
-                n++;
-                pictureBox1.Refresh();//設定工作區無效
-                g.DrawImage(Tem_bmp, 0, 0);//繪製圖片
-                System.Threading.Thread.Sleep(5);//掛掉線程
-            }
-        }
-
-
 
         private void button34_Click(object sender, EventArgs e)
         {
@@ -6188,68 +6075,9 @@ namespace vcs_Draw9_Example
 
         //在餅型圖的外圍顯示說明文字 SP
 
-        //謝爾平斯基的三角形 ST
-        //Sierpinski triangle 謝爾平斯基的三角形
         private void button37_Click(object sender, EventArgs e)
         {
-            PointF[] pt = new PointF[3];  // 3個點座標陣列
-            // 中心點　在視窗客戶區的　正中心
-            PointF center = new PointF(this.pictureBox1.ClientSize.Width / 2, this.pictureBox1.ClientSize.Height / 2);
-            // 半徑　取短的
-            float D = Math.Min(this.pictureBox1.ClientSize.Width / 2, this.pictureBox1.ClientSize.Height / 2) - 10;
-
-            // 　　　　p0
-            //      p2     p1 
-            for (int i = 0; i < 3; i++) // 定義一個正三角形 的三個角的座標
-            {
-                pt[i].X = (float)(center.X + D * Math.Cos(-Math.PI / 2 + i * 2 * Math.PI / 3));
-                pt[i].Y = (float)(center.Y + D * Math.Sin(-Math.PI / 2 + i * 2 * Math.PI / 3));
-            }
-
-            DrawTriangle(pt[0], pt[1], pt[2]); // 畫出第一個 正三角形
-            Sierp(pt[0], pt[1], pt[2], 0);
         }
-
-        private void DrawTriangle(PointF p0, PointF p1, PointF p2)
-        {
-            Graphics g = this.pictureBox1.CreateGraphics();// 取得 表單畫布
-            g.DrawLine(Pens.Black, p0, p1); // 畫出三角形
-            g.DrawLine(Pens.Black, p1, p2);
-            g.DrawLine(Pens.Black, p2, p0);
-        }
-
-        void Sierp(PointF p0, PointF p1, PointF p2, int n)
-        {
-            PointF m0 = new PointF(); // 新的三個點座標
-            PointF m1 = new PointF();
-            PointF m2 = new PointF();
-
-            if (n < 10)
-            {
-                // 　　　　p0
-                //       /     \
-                //     m1        m2
-                //    /            \
-                // p2 ---- m0 ----  p1
-                //
-                m2.X = (p0.X + p1.X) / 2; // 新的三個點座標
-                m2.Y = (p0.Y + p1.Y) / 2;
-
-                m1.X = (p0.X + p2.X) / 2;
-                m1.Y = (p0.Y + p2.Y) / 2;
-
-                m0.X = (p2.X + p1.X) / 2;
-                m0.Y = (p2.Y + p1.Y) / 2;
-
-                DrawTriangle(m0, m1, m2); // 畫出 新的三角形
-
-                // 以三個新的三角形 往下呼叫
-                Sierp(p0, m2, m1, n + 1);
-                Sierp(m1, m0, p2, n + 1);
-                Sierp(m2, p1, m0, n + 1);
-            }
-        }
-        //謝爾平斯基的三角形 SP
 
         //圓圈拼圖 ST
         private void button38_Click(object sender, EventArgs e)
@@ -8357,6 +8185,202 @@ namespace vcs_Draw9_Example
         }
 
         private void button71_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_long0_Click(object sender, EventArgs e)
+        {
+            //百葉窗效果
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            try
+            {
+                Bitmap bitmap1 = new Bitmap(filename);
+                int W = bitmap1.Width;
+                int H = bitmap1.Height / 20;
+                Graphics g = this.CreateGraphics();
+                g.Clear(Color.WhiteSmoke);
+                Point[] myPoint = new Point[30];
+                for (int i = 0; i < 30; i++)
+                {
+                    myPoint[i].X = 0;
+                    myPoint[i].Y = i * H;
+                }
+                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+                for (int m = 0; m < H; m++)
+                {
+                    for (int n = 0; n < 20; n++)
+                    {
+                        for (int j = 0; j < W; j++)
+                        {
+                            bitmap2.SetPixel(myPoint[n].X + j, myPoint[n].Y + m, bitmap1.GetPixel(myPoint[n].X + j, myPoint[n].Y + m));
+                        }
+                    }
+                    this.pictureBox1.Refresh();
+                    this.pictureBox1.Image = bitmap2;
+                    Thread.Sleep(100);
+                }
+            }
+            catch { }
+        }
+
+        private void bt_long1_Click(object sender, EventArgs e)
+        {
+            //任意角度旋轉圖片
+            string filename = @"C:\______test_files\picture1.jpg";
+            CircumgyrateEffect(filename.Trim(), pictureBox1);//呼叫自定義方法
+        }
+
+        public void CircumgyrateEffect(string Str, PictureBox pictureBox1)
+        {
+            Bitmap tem_Bitmap = new Bitmap(Str);//透過字串實例化Bitmap類
+            Bitmap Var_Bitmap = new Bitmap(tem_Bitmap, pictureBox1.Width, pictureBox1.Height);//透過panel按件的大小實例化Bitmap類
+
+            Graphics g = pictureBox1.CreateGraphics();//實例化panel控制元件的Graphics類
+            float Var_Angle = 0;//設定圖片的旋轉角度
+            while (Var_Angle <= 360)//使圖片旋轉360度
+            {
+                TextureBrush Var_Brush = new TextureBrush(Var_Bitmap);//實例化TextureBrush類
+                pictureBox1.Refresh();//使工作區無效
+                Var_Brush.RotateTransform(Var_Angle);//以指定角度旋轉圖片
+                //繪製旋轉後的圖片
+                g.FillRectangle(Var_Brush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
+                Var_Angle += 2f;//增加旋轉的角度
+                Thread.Sleep(30);//掛掉目前線程
+            }
+        }
+
+        private void bt_long2_Click(object sender, EventArgs e)
+        {
+            //以四周擴散形式顯示圖片
+            string filename = @"C:\______test_files\picture1.jpg";
+            DiffuseEffect(filename.Trim(), pictureBox1);//呼叫自定義方法完成圖片向四周的擴充
+        }
+
+        public void DiffuseEffect(string Str, PictureBox pictureBox1)
+        {
+            Bitmap tem_Bitmap = new Bitmap(Str);//根據字串實例化Bitmap類
+            Bitmap Var_Bitmap = new Bitmap(tem_Bitmap, pictureBox1.Width, pictureBox1.Height);//根據大小實例化Bitmap類
+            int Var_W = Var_Bitmap.Width; //圖片寬度 
+            int Var_H = Var_Bitmap.Height; //圖片高度 
+            Graphics g = pictureBox1.CreateGraphics();//取得Graphics對像 
+            g.Clear(pictureBox1.BackColor); //初始為全灰色 
+            for (int i = 0; i <= Var_W / 2; i++)
+            {
+                //取得高和寬的比例
+                int j = Convert.ToInt32(i * (Convert.ToSingle(Var_H) / Convert.ToSingle(Var_W)));
+                //設定縮小後圖片的大小
+                Rectangle Var_D_Rect = new Rectangle(Var_W / 2 - i, Var_H / 2 - j, 2 * i, 2 * j);
+                //取得原圖片大小
+                Rectangle Var_S_Rect = new Rectangle(0, 0, Var_Bitmap.Width, Var_Bitmap.Height);
+                g.DrawImage(Var_Bitmap, Var_D_Rect, Var_S_Rect, GraphicsUnit.Pixel);//按照指定的大小繪製原圖片
+                Thread.Sleep(10);//線程序掛掉
+            }
+        }
+
+        private void bt_long3_Click(object sender, EventArgs e)
+        {
+            //圖片的上下對接顯示
+            string filename = @"C:\______test_files\picture1.jpg";
+            UpDownConnect(filename.Trim(), pictureBox1);//呼叫自定義方法
+        }
+
+        public void UpDownConnect(string Str, PictureBox pictureBox1)
+        {
+            Bitmap tem_Bitmap = new Bitmap(Str);
+            Bitmap Var_Bitmap = new Bitmap(tem_Bitmap, pictureBox1.Width, pictureBox1.Height);
+
+            int Var_W = Var_Bitmap.Width; //圖片寬度 
+            int Var_H = Var_Bitmap.Height; //圖片高度 
+            Graphics g = pictureBox1.CreateGraphics();//實例化Graphics類
+            g.Clear(Color.Gray);//清空panel控制元件
+            Bitmap Tem_bmp = new Bitmap(Var_W, Var_H);//透過圖片大小實例化Bitmap類
+            int n = 0;
+            //搜尋圖片中的各象素
+            while (n <= Var_H / 2)
+            {
+                for (int i = 0; i <= Var_W - 1; i++)//取得上半張圖片的象素
+                {
+                    Tem_bmp.SetPixel(i, n, Var_Bitmap.GetPixel(i, n));//根據象素取得目前象的顏色，並記錄在Bitmap類中
+                }
+                for (int i = 0; i <= Var_W - 1; i++)//取得下半張圖片的象素
+                {
+                    //根據象素取得目前象的顏色，並記錄在Bitmap類中
+                    Tem_bmp.SetPixel(i, Var_H - n - 1, Var_Bitmap.GetPixel(i, Var_H - n - 1));
+                }
+                n++;
+                pictureBox1.Refresh();//設定工作區無效
+                g.DrawImage(Tem_bmp, 0, 0);//繪製圖片
+                Thread.Sleep(5);//掛掉線程
+            }
+        }
+
+        //謝爾平斯基的三角形 ST
+        //Sierpinski triangle 謝爾平斯基的三角形
+        private void bt_long4_Click(object sender, EventArgs e)
+        {
+            PointF[] pt = new PointF[3];  // 3個點座標陣列
+            // 中心點　在視窗客戶區的　正中心
+            PointF center = new PointF(this.pictureBox1.ClientSize.Width / 2, this.pictureBox1.ClientSize.Height / 2);
+            // 半徑　取短的
+            float D = Math.Min(this.pictureBox1.ClientSize.Width / 2, this.pictureBox1.ClientSize.Height / 2) - 10;
+
+            // 　　　　p0
+            //      p2     p1 
+            for (int i = 0; i < 3; i++) // 定義一個正三角形 的三個角的座標
+            {
+                pt[i].X = (float)(center.X + D * Math.Cos(-Math.PI / 2 + i * 2 * Math.PI / 3));
+                pt[i].Y = (float)(center.Y + D * Math.Sin(-Math.PI / 2 + i * 2 * Math.PI / 3));
+            }
+
+            DrawTriangle(pt[0], pt[1], pt[2]); // 畫出第一個 正三角形
+            Sierp(pt[0], pt[1], pt[2], 0);
+        }
+
+        private void DrawTriangle(PointF p0, PointF p1, PointF p2)
+        {
+            Graphics g = this.pictureBox1.CreateGraphics();// 取得 表單畫布
+            g.DrawLine(Pens.Black, p0, p1); // 畫出三角形
+            g.DrawLine(Pens.Black, p1, p2);
+            g.DrawLine(Pens.Black, p2, p0);
+        }
+
+        void Sierp(PointF p0, PointF p1, PointF p2, int n)
+        {
+            PointF m0 = new PointF(); // 新的三個點座標
+            PointF m1 = new PointF();
+            PointF m2 = new PointF();
+
+            if (n < 10)
+            {
+                // 　　　　p0
+                //       /     \
+                //     m1        m2
+                //    /            \
+                // p2 ---- m0 ----  p1
+                //
+                m2.X = (p0.X + p1.X) / 2; // 新的三個點座標
+                m2.Y = (p0.Y + p1.Y) / 2;
+
+                m1.X = (p0.X + p2.X) / 2;
+                m1.Y = (p0.Y + p2.Y) / 2;
+
+                m0.X = (p2.X + p1.X) / 2;
+                m0.Y = (p2.Y + p1.Y) / 2;
+
+                DrawTriangle(m0, m1, m2); // 畫出 新的三角形
+
+                // 以三個新的三角形 往下呼叫
+                Sierp(p0, m2, m1, n + 1);
+                Sierp(m1, m0, p2, n + 1);
+                Sierp(m2, p1, m0, n + 1);
+            }
+        }
+        //謝爾平斯基的三角形 SP
+
+
+        private void bt_long5_Click(object sender, EventArgs e)
         {
 
         }
