@@ -654,23 +654,7 @@ namespace GMap.NET.WindowsForms
             }
         }
 
-        /// <summary>
-        /// updates markers local position
-        /// </summary>
-        /// <param name="marker"></param>
-        public void UpdateMarkerLocalPosition(GMapMarker marker)
-        {
-            GPoint p = FromLatLngToLocal(marker.Position);
-            {
-#if !PocketPC
-                if (!MobileMode)
-                {
-                    p.OffsetNegative(Core.renderOffset);
-                }
-#endif
-                marker.LocalPosition = new System.Drawing.Point((int)(p.X + marker.Offset.X), (int)(p.Y + marker.Offset.Y));
-            }
-        }
+
 
         /// <summary>
         /// updates routes local position

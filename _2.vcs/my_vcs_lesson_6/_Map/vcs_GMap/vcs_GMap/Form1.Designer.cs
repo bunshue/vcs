@@ -906,6 +906,7 @@
             this.bt_test05.Name = "bt_test05";
             this.bt_test05.Size = new System.Drawing.Size(90, 40);
             this.bt_test05.TabIndex = 47;
+            this.bt_test05.Text = "draw tools 畫圖";
             this.bt_test05.UseVisualStyleBackColor = true;
             this.bt_test05.Click += new System.EventHandler(this.bt_test05_Click);
             // 

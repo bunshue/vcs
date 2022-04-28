@@ -59,15 +59,5 @@ namespace vcs_JSON.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   查詢類型 System.Byte[] 的當地語系化資源。
-        /// </summary>
-        internal static byte[] ChinaBoundary {
-            get {
-                object obj = ResourceManager.GetObject("ChinaBoundary", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }
