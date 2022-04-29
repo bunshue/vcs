@@ -143,7 +143,7 @@ namespace vcs_GMap
             groupBox1.Location = new Point(x_st, y_st);
             groupBox2.Location = new Point(x_st + 300, y_st);
 
-            x_st = 1370 + 50;
+            x_st = 1370 + 50 + 80;
             y_st = 12;
             dy = 25;
             checkBox1.Location = new Point(x_st, y_st + dy * 0);
@@ -1875,6 +1875,53 @@ namespace vcs_GMap
             {
 
             }
+            else if (rb_location7.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
+                //阿拉曼   30.833333, 28.95
+                latitude = 30.833333;   //緯度
+                longitude = 28.95; //經度
+                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+                gMapControl1.Zoom = 6; //當前比例
+
+                update_controls_info();
+
+
+            }
+            else if (rb_location8.Checked == true)
+            {
+
+            }
+            else if (rb_location9.Checked == true)
+            {
+
+            }
+            else if (rb_location10.Checked == true)
+            {
+
+            }
+            else if (rb_location11.Checked == true)
+            {
+
+            }
+            else if (rb_location12.Checked == true)
+            {
+
+            }
+            else if (rb_location13.Checked == true)
+            {
+
+            }
+            else
+            {
+
+            }
+
+
+
+
+            
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2228,14 +2275,34 @@ namespace vcs_GMap
                     Province province = china.Province[9];  //江蘇省
                     if (province != null)
                     {
-                        //this.comboBoxCity.Items.Clear();
+                        richTextBox1.Text += province.name + " 有 " + province.City.Count.ToString() + " 個城市\n";
+                        int i=0;
                         foreach (var city in province.City)
                         {
-                            richTextBox1.Text += city.name + "\n";
+                            richTextBox1.Text += "第 " + i.ToString() + " 個 : " + city.name + "\n";
+                            i++;
+                            if (city.name == "南京市")
+                            {
+                                richTextBox1.Text += city.Piecearea.Count.ToString() + "\n";
+                                int len = city.Piecearea.Count;
+
+                                richTextBox1.Text += "Piecearea 個數 : " + len.ToString() + "\n";
+                                /*
+                                int j;
+                                for (j = 0; j < len; j++)
+                                {
+                                    richTextBox1.Text += "\n\nj = " + j.ToString() + "\n";
+                                    richTextBox1.Text += city.Piecearea[j].rings + "\n";
+
+                                }
+                                */
+                            }
                         }
                         //this.comboBoxCity.DisplayMember = "name";
                         //this.comboBoxCity.SelectedIndex = 0;
                     }
+
+
                 }
             }
             catch (Exception ex)

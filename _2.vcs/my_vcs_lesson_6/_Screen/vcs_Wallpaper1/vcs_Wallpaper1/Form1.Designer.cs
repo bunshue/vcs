@@ -44,6 +44,8 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button0 = new System.Windows.Forms.Button();
+            this.bt_folder2 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,7 +116,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(12, 338);
+            this.button7.Location = new System.Drawing.Point(12, 381);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(120, 35);
             this.button7.TabIndex = 6;
@@ -130,9 +132,9 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 379);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 424);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(164, 119);
+            this.pictureBox1.Size = new System.Drawing.Size(164, 164);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
@@ -141,7 +143,7 @@
             // 
             this.bt_folder.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_folder.BackgroundImage")));
             this.bt_folder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_folder.Location = new System.Drawing.Point(134, 297);
+            this.bt_folder.Location = new System.Drawing.Point(138, 289);
             this.bt_folder.Name = "bt_folder";
             this.bt_folder.Size = new System.Drawing.Size(46, 45);
             this.bt_folder.TabIndex = 8;
@@ -150,9 +152,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(186, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(218, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(257, 439);
+            this.richTextBox1.Size = new System.Drawing.Size(429, 528);
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
@@ -164,12 +166,36 @@
             this.button0.TabIndex = 10;
             this.button0.Text = "設置桌面圖片0";
             this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // bt_folder2
+            // 
+            this.bt_folder2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_folder2.BackgroundImage")));
+            this.bt_folder2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_folder2.Location = new System.Drawing.Point(138, 334);
+            this.bt_folder2.Name = "bt_folder2";
+            this.bt_folder2.Size = new System.Drawing.Size(46, 45);
+            this.bt_folder2.TabIndex = 12;
+            this.bt_folder2.UseVisualStyleBackColor = true;
+            this.bt_folder2.Click += new System.EventHandler(this.bt_folder2_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(12, 338);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(120, 35);
+            this.button9.TabIndex = 11;
+            this.button9.Text = "定時切換 桌面圖片";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 463);
+            this.ClientSize = new System.Drawing.Size(622, 550);
+            this.Controls.Add(this.bt_folder2);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.bt_folder);
@@ -206,6 +232,8 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button bt_folder2;
+        private System.Windows.Forms.Button button9;
     }
 }
 

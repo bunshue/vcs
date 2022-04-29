@@ -146,16 +146,26 @@ namespace vcs_Wallpaper1
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            bt_folder.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            bt_folder.Location = new Point(x_st + dx * 1+3, y_st + dy * 6-8);
+            bt_folder2.Location = new Point(x_st + dx * 1+3, y_st + dy * 7-3);
 
-            richTextBox1.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0);
-
-
+            richTextBox1.Location = new Point(x_st + dx * 1 + 55, y_st + dy * 0);
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.foldername = foldername;
+            Properties.Settings.Default.Save();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -178,7 +188,7 @@ namespace vcs_Wallpaper1
         private void button4_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\_material\ims1.bmp";
-            //SetDesktopPicture(filename);
+            SetDesktopPicture(filename);
 
             //SetWallPaper(filename, Style.Center); //置中
             //SetWallPaper(filename, Style.Fill);   //填滿
@@ -314,8 +324,20 @@ namespace vcs_Wallpaper1
                     {
                         richTextBox1.Text += "取得新資料, 更新\n";
 
-                        string filename1 = Application.StartupPath + "\\SatelliteImage1_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-                        string filename2 = Application.StartupPath + "\\SatelliteImage2_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                        //string filename1 = Application.StartupPath + "\\SatelliteImage1_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                        //string filename2 = Application.StartupPath + "\\SatelliteImage2_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+                        string filename1 = Application.StartupPath + "\\SatelliteImage1.jpg";
+                        string filename2 = Application.StartupPath + "\\SatelliteImage2.bmp";
+
+                        if (File.Exists(filename1) == true)
+                        {
+                            File.Delete(filename1);
+                        }
+                        if (File.Exists(filename2) == true)
+                        {
+                            File.Delete(filename2);
+                        }
 
                         pictureBox1.Image.Save(filename1);
 
@@ -326,7 +348,7 @@ namespace vcs_Wallpaper1
 
                         g.DrawString(satellite_image_version, new Font("標楷體", 50), new SolidBrush(Color.Red), new PointF(W * 2 / 3 - 130, H / 4 - 50));
 
-                        bitmap1.Save(filename2, ImageFormat.Jpeg);
+                        bitmap1.Save(filename2, ImageFormat.Bmp);
 
                         //SetWallPaper(filename, Style.Fit);  //等比例放大/縮小至螢幕最大
                         SetWallPaper(filename2, Style.Center);  //原始比例顯示正中間那一塊
@@ -378,10 +400,14 @@ namespace vcs_Wallpaper1
             }
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void button9_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.foldername = foldername;
-            Properties.Settings.Default.Save();
+
+        }
+
+        private void bt_folder2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
