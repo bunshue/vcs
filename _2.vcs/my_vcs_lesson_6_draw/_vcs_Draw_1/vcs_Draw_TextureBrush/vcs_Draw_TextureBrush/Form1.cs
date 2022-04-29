@@ -19,6 +19,10 @@ namespace vcs_Draw_TextureBrush
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            image = new Bitmap(filename);
+            textureBrush = new TextureBrush(image);
+            p = new Pen(textureBrush, 40);
         }
 
         void show_item_location()
@@ -149,5 +153,45 @@ namespace vcs_Draw_TextureBrush
 
         }
 
+
+        //以塗刷新增畫筆, 刮刮樂效果 ST
+
+        Bitmap image;
+        TextureBrush textureBrush;
+        Pen p;
+        int x, y;　// 紀錄上一個筆畫的起始點
+        Graphics g2; // 畫布物件
+
+        string filename = @"C:\______test_files\picture1.jpg";
+        bool flag_mouse_down = false;
+
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = true;
+            x = e.X; // 紀錄筆畫的起始點
+            y = e.Y;
+        }
+
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_mouse_down == true)
+            {
+                if (e.Button == MouseButtons.Left) // 滑鼠的左鍵
+                {
+                    g2 = this.pictureBox2.CreateGraphics();
+                    g2.DrawLine(p, x, y, e.X, e.Y);　// 寫到　buffer
+
+                    x = e.X; // 結束點 就是 下一次的 開始點
+                    y = e.Y;
+                }
+            }
+        }
+
+        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = false;
+        }
+        //以塗刷新增畫筆, 刮刮樂效果 SP
     }
 }
+

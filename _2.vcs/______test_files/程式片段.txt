@@ -1,3 +1,14 @@
+
+
+test 下載
+
+源码及Demo下载地址：http://www.chungen90.com/?news_2/
+
+完整代码下载地址：http://pan.baidu.com/s/1o8Lkozw
+https://pan.baidu.com/s/1o8Lkozw?errmsg=Auth+Login+Params+Not+Corret&errno=2&ssnerror=0#list/path=%2F
+
+
+
 EMGU讀取WebCam
 Image<Bgr, Byte> image = cap.QueryFrame(); // Query WebCam 的畫面
 EMGU讀取圖片檔案
@@ -5206,6 +5217,81 @@ https://blog.csdn.net/happmaoo/article/details/83814604
             {
                 richTextBox1.Text += p.Properties["commandLine"].Value + "\n";
             }
+
+
+
+
+
+
+
+ffmpeg的用法
+
+//从开始分割600秒视频命令如下：
+ffmpeg -ss 00:00:00 -i sample.mp4 -c copy -t  600  dst.mp4 
+//-y : 強制覆蓋檔案
+//-i : 要擷取的原始檔案
+//-ss : 起始時間
+//-t : 擷取長度, -t sec 或 -t hh:mm:ss
+//-acodec copy : 音訊編碼格式和來源檔案相同
+//-vcodec copy : 影像編碼格式和來源檔案相同
+
+
+//影片轉mp3
+ffmpeg -i test.mp4 -f mp3 -vn test.mp3
+
+参数解释：
+-i 表示input，即输入文件
+-f 表示format，即输出格式
+-vn表示vedio not，即输出不包含视频
+
+
+
+//查看视频文件的音视频编解码格式，视频时长，比特率等，如下：
+
+root@jackfan: ~$ ffmpeg -i test.mp3
+
+
+//擷取影片
+//从 00:00:08 开始截取 1分钟，那么就是 00:01:00，终端执行：
+ffmpeg -i 视频.avi -ss 00:00:08 -t 00:01:00 -acodec copy -vcodec copy 截取.avi
+
+ffmpeg.exe -i xxx.mp4 -f mp3 -vn xxx.mp3并回车。
+
+参数解释：-i表示input，-f表示format，-vn表示video not
+
+//多个mp3文件合并成一个mp3文件
+一种方法是连接到一起
+ffmpeg64.exe -i "concat:123.mp3|124.mp3" -acodec copy output.mp3
+解释：-i代表输入参数
+          contact:123.mp3|124.mp3代表着需要连接到一起的音频文件
+           -acodec copy output.mp3 重新编码并复制到新文件中
+另一种方法是混合到一起
+ffmpeg64.exe -i 124.mp3 -i 123.mp3 -filter_complex amix=inputs=2:duration=first:dropout_transition=2 -f mp3 remix.mp3
+解释：-i代表输入参数
+           -filter_complex ffmpeg滤镜功能，非常强大，详细请查看文档
+           amix是混合多个音频到单个音频输出
+           inputs=2代表是2个音频文件，如果更多则代表对应数字
+           duration 确定最终输出文件的长度
+               longest(最长)|shortest（最短）|first（第一个文件）
+            dropout_transition
+The transition time, in seconds, for volume renormalization when an input stream ends. The default value is 2 seconds.
+            -f mp3  输出文件格式
+音频文件截取指定时间部分
+ffmpeg64.exe -i 124.mp3 -vn -acodec copy -ss 00:00:00 -t 00:01:32 output.mp3
+解释：-i代表输入参数
+          -acodec copy output.mp3 重新编码并复制到新文件中
+           -ss 开始截取的时间点
+           -t 截取音频时间长度
+           
+音频文件格式转换
+ffmpeg64.exe -i null.ape -ar 44100 -ac 2 -ab 16k -vol 50 -f mp3 null.mp3
+解释：-i代表输入参数
+           -acodec aac（音频编码用AAC） 
+          -ar 设置音频采样频率
+          -ac  设置音频通道数
+          -ab 设定声音比特率
+           -vol <百分比> 设定音量
+
 
 
 

@@ -2283,19 +2283,48 @@ namespace vcs_GMap
                             i++;
                             if (city.name == "南京市")
                             {
-                                richTextBox1.Text += city.Piecearea.Count.ToString() + "\n";
                                 int len = city.Piecearea.Count;
+                                richTextBox1.Text += "共有 : " + len.ToString() + " 區\n";
 
-                                richTextBox1.Text += "Piecearea 個數 : " + len.ToString() + "\n";
-                                /*
                                 int j;
                                 for (j = 0; j < len; j++)
                                 {
-                                    richTextBox1.Text += "\n\nj = " + j.ToString() + "\n";
-                                    richTextBox1.Text += city.Piecearea[j].rings + "\n";
+                                    richTextBox1.Text += "j = " + j.ToString() + "\t" + city.Piecearea[j].name + "\n";
+                                    //區界座標
+                                    //richTextBox1.Text += city.Piecearea[j].rings + "\n";
+
+                                    if (j == 3)
+                                    {
+                                        gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+
+                                        richTextBox1.Text += "AAAAAAAAAAAAAAAAAAAAAAA\n";
+                                        string name = city.Piecearea[j].name;
+                                        string rings = city.Piecearea[j].rings;
+
+                                        if (rings != null && !string.IsNullOrEmpty(rings))
+                                        {
+                                            GMapPolygon polygon = GetRegionPolygon(name, rings);
+                                            if (polygon != null)
+                                            {
+                                                GMapAreaPolygon areaPolygon = new GMapAreaPolygon(polygon.Points, name);
+                                                RectLatLng rect = GMapChinaRegion.MapRegion.GetRegionMaxRect(polygon);
+                                                GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, name);
+                                                markersOverlay.Clear();
+                                                markersOverlay.Polygons.Add(areaPolygon);
+                                                markersOverlay.Markers.Add(textMarker);
+                                                this.gMapControl1.SetZoomToFitRect(rect);
+                                            }
+                                        }
+
+
+
+
+
+
+                                    }
+
 
                                 }
-                                */
                             }
                         }
                         //this.comboBoxCity.DisplayMember = "name";
@@ -2311,8 +2340,105 @@ namespace vcs_GMap
             }
         }
 
+        public static GMapPolygon GetRegionPolygon(string name, string rings)
+        {
+            if (string.IsNullOrEmpty(rings))
+            {
+                return null;
+            }
+            else
+            {
+                List<PointLatLng> pointList = new List<PointLatLng>();
+                string[] pairPoints = rings.Split(',');
+                foreach (var points in pairPoints)
+                {
+                    string[] point = points.Split(' ');
+                    if (point.Length == 2)
+                    {
+                        PointLatLng p = new PointLatLng(double.Parse(point[1]), double.Parse(point[0]));
+                        pointList.Add(p);
+                    }
+                }
+                GMapPolygon polygon = new GMapPolygon(pointList, name);
+                polygon.Fill = new SolidBrush(Color.FromArgb(0, Color.White));
+                return polygon;
+            }
+        }
+
+
         private void bt_test05_Click(object sender, EventArgs e)
         {
+            //地址解析
+            string currentCenterCityName = "南京市";
+            GMapAreaPolygon currentAreaPolygon;
+
+            string address = "雨花台";
+
+            if (!string.IsNullOrEmpty(address))
+            {
+                this.markersOverlay.Markers.Clear();
+                Placemark placemark = new Placemark(address);
+                placemark.CityName = currentCenterCityName;
+                //if (currentAreaPolygon != null)
+                {
+                    placemark.CityName = "AAAAA";
+                }
+                List<PointLatLng> points = new List<PointLatLng>();
+                //GeoCoderStatusCode statusCode = SoSoMapProvider.Instance.GetPoints(placemark, out points);
+
+                /*
+                GeoCoderStatusCode statusCode = AMapProvider.Instance.GetPoints(placemark, out points);
+
+                if (statusCode == GeoCoderStatusCode.G_GEO_SUCCESS)
+                {
+                    foreach (PointLatLng p in points)
+                    {
+                        GMarkerGoogle marker = new GMarkerGoogle(p, GMarkerGoogleType.blue_dot);
+                        marker.ToolTipText = placemark.Address;
+                        this.markersOverlay.Markers.Add(marker);
+                        this.gMapControl1.Position = p;
+                    }
+                }
+                */
+
+            }
+
+
+            /*
+            GMapPolygon polygon = ChinaMapRegion.GetRegionPolygon(name, rings);
+            if (polygon != null)
+            {
+                GMapAreaPolygon areaPolygon = new GMapAreaPolygon(polygon.Points, name);
+                currentAreaPolygon = areaPolygon;
+                RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
+                GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
+                regionOverlay.Clear();
+                regionOverlay.Polygons.Add(areaPolygon);
+                regionOverlay.Markers.Add(textMarker);
+                this.mapControl.SetZoomToFitRect(rect);
+            }
+            */
+            /*
+            GMapAreaPolygon areaPolygon = new GMapAreaPolygon(drawPolygon.Points, "下载区域");
+            currentAreaPolygon = areaPolygon;
+            RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
+            GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
+            regionOverlay.Clear();
+            regionOverlay.Polygons.Add(areaPolygon);
+            regionOverlay.Markers.Add(textMarker);
+            this.mapControl.SetZoomToFitRect(rect);
+*/
+
+            /*
+            if (currentAreaPolygon != null)
+            {
+                RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
+                argument.Rectangle = string.Format("{0},{1},{2},{3}",
+                    new object[] { rect.LocationRightBottom.Lat, rect.LocationTopLeft.Lng, rect.LocationTopLeft.Lat, rect.LocationRightBottom.Lng });
+            }
+            */
+
+
         }
 
         private void bt_test06_Click(object sender, EventArgs e)
@@ -2455,5 +2581,113 @@ namespace vcs_GMap
         */
 
     }
+
+    /// <summary>
+    /// represents place info
+    /// </summary>
+    public struct Placemark
+    {
+        public static readonly Placemark Empty = new Placemark();
+
+        //string address;
+
+        /// <summary>
+        /// the address
+        /// </summary>
+        public string Address;
+        //{
+        //    get
+        //    {
+        //        return address;
+        //    }
+        //    internal set
+        //    {
+        //        address = value;
+        //    }
+        //}
+
+        /// <summary>
+        /// the accuracy of address
+        /// </summary>
+        public int Accuracy;
+
+        // parsed values from address      
+        public string ThoroughfareName;
+        public string LocalityName;
+        public string PostalCodeNumber;
+        public string CountryName;
+        public string AdministrativeAreaName;
+        public string DistrictName;
+        public string SubAdministrativeAreaName;
+        public string Neighborhood;
+        public string StreetNumber;
+
+        public string CountryNameCode;
+        public string HouseNo;
+
+        //Added for Map
+        public PointLatLng Point;
+        public string Name;
+        public string CountryCode;
+        public string ProvinceName;
+        public string CityName;
+        public string Tel;
+        public string Category;
+        public RectLatLng LatLonBox;
+
+        public Placemark(string address)
+        {
+            //this.address = address;
+            Address = address;
+
+            Accuracy = 0;
+            HouseNo = string.Empty;
+            ThoroughfareName = string.Empty;
+            DistrictName = string.Empty;
+            LocalityName = string.Empty;
+            PostalCodeNumber = string.Empty;
+            CountryName = string.Empty;
+            CountryNameCode = string.Empty;
+            AdministrativeAreaName = string.Empty;
+            SubAdministrativeAreaName = string.Empty;
+            Neighborhood = string.Empty;
+            StreetNumber = string.Empty;
+
+            Point = PointLatLng.Empty;
+            LatLonBox = RectLatLng.Empty;
+            Name = string.Empty;
+            CountryCode = string.Empty;
+            ProvinceName = string.Empty;
+            CityName = string.Empty;
+            Tel = string.Empty;
+            Category = string.Empty;
+        }
+
+        public Placemark(Placemark oth)
+        {
+            this.Address = oth.Address;
+            this.Category = oth.Category;
+            this.ProvinceName = oth.ProvinceName;
+            this.CityName = oth.CityName;
+            this.CountryCode = oth.CountryCode;
+            this.LatLonBox = oth.LatLonBox;
+            this.Name = oth.Name;
+            this.Tel = oth.Tel;
+            this.Point = oth.Point;
+            this.Accuracy = oth.Accuracy;
+            this.HouseNo = oth.HouseNo;
+            this.ThoroughfareName = oth.ThoroughfareName;
+            this.DistrictName = oth.DistrictName;
+            this.LocalityName = oth.LocalityName;
+            this.PostalCodeNumber = oth.PostalCodeNumber;
+            this.CountryName = oth.CountryName;
+            this.CountryNameCode = oth.CountryNameCode;
+            this.AdministrativeAreaName = oth.AdministrativeAreaName;
+            this.SubAdministrativeAreaName = oth.SubAdministrativeAreaName;
+            this.Neighborhood = oth.Neighborhood;
+            this.StreetNumber = oth.StreetNumber;
+        }
+    }
+
 }
 

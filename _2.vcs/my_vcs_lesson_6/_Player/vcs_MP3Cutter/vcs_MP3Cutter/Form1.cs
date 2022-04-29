@@ -35,10 +35,10 @@ namespace vcs_MP3Cutter
         {
             show_item_location();
 
-            lb_st.Text = "";
-            lb_sp.Text = "";
-            lb_total.Text = "";
-            lb_diff.Text = "";
+            lb_total.Text = "全長 : ";
+            lb_st.Text = "起始 : ";
+            lb_sp.Text = "結束 : ";
+            lb_cut.Text = "選取 : ";
             trackBar_st.Maximum = 100;
             trackBar_st.Minimum = 0;
             trackBar_st.Value = 0;
@@ -100,48 +100,28 @@ namespace vcs_MP3Cutter
                 MessageBox.Show(ex.ToString());
             }
 
-            //音频切割
+            //音頻切割
             string mp3_filename = @"C:\______test_files\_wav\harumi99.wav";
-            //string mp3_cut_filename = @"bbbbb.wav";
-            string mp3_cut_filename = @"C:\dddddddddd\cutcut.wav";
-
-
-            /*
-                        int BeginM = 0;
-                        int BeginS = 0;
-                        int EndM = 0;
-                        int EndS = 10;
-
-                        string startTime = string.Format("0:{0}:{1}", BeginM.ToString(), BeginS.ToString()).Trim();//歌曲起始时间
-                        //int duration = (Convert.ToInt32(this.txtEndM.Text) * 60 + Convert.ToInt32(this.txtEndS.Text)) - (Convert.ToInt32(this.txtBeginM.Text) * 60 + Convert.ToInt32(this.txtBeginS.Text));
-                        int duration = (EndM * 60 + EndS) - (BeginM * 60 + BeginS);
-                        string endTime = string.Format("0:{0}:{1}", duration / 60, duration % 60);//endTime是持续的时间，不是歌曲结束的时间
-                        string mp3_cut_filename = @"aaaaaa.wav";//切割后音乐保存的物理路径
-            */
-
-            /*
-            string startTime = string.Format("0:{0}:{1}", txtBeginM.Text, txtBeginS.Text).Trim();//歌曲起始时间  
-            int duration = (Convert.ToInt32(this.txtEndM.Text) * 60 + Convert.ToInt32(this.txtEndS.Text)) - (Convert.ToInt32(this.txtBeginM.Text) * 60 + Convert.ToInt32(this.txtBeginS.Text));
-            string endTime = string.Format("0:{0}:{1}", duration / 60, duration % 60);//endTime是持续的时间，不是歌曲结束的时间  
-            */
+            string mp3_cut_filename = Application.StartupPath + "\\cut_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
 
             string startTime = "0:0:30";
-            string endTime = "0:1:30";
+            string cutTime = "0:0:30";
 
             try
             {
                 //-y : 強制覆蓋檔案
+                //-i : 要擷取的原始檔案
                 //-ss : 起始時間
-                //-t : 結束時間
-                //-acodec copy : 編碼格式和來源檔案相同
-                string command_arg = "-y -i \"" + mp3_filename + "\" -ss " + startTime + " -t " + endTime + " -acodec copy \"" + mp3_cut_filename + "\"";
+                //-t : 擷取長度, -t sec 或 -t hh:mm:ss
+                //-acodec copy : 音訊編碼格式和來源檔案相同
+                //-vcodec copy : 影像編碼格式和來源檔案相同
+                string command_arg = "-y -i \"" + mp3_filename + "\" -ss " + startTime + " -t " + cutTime + " -acodec copy \"" + mp3_cut_filename + "\"";
 
                 ExcuteProcess(ffmpeg, command_arg);
 
                 richTextBox1.Text += "命令 : " + ffmpeg + "\n";
                 richTextBox1.Text += "參數 : " + command_arg + "\n";
-
-                richTextBox1.Text += "已切割完成\n";
+                richTextBox1.Text += "已切割完成\t檔案 : " + mp3_cut_filename + "\n";
             }
             catch (Exception ex)
             {
@@ -228,7 +208,7 @@ namespace vcs_MP3Cutter
             int total_length = 0;
 
             total_length = int.Parse(result[0]) * 60 * 60 + int.Parse(result[1]) * 60 + int.Parse(result[2]);
-            lb_total.Text = (total_length / 3600).ToString("D2") + " : " + ((total_length / 60) % 60).ToString("D2") + " : " + (total_length % 60).ToString("D2") + "    " + total_length.ToString();
+            lb_total.Text = "全長 : " + (total_length / 3600).ToString("D2") + " : " + ((total_length / 60) % 60).ToString("D2") + " : " + (total_length % 60).ToString("D2") + "    " + total_length.ToString();
             richTextBox1.Text += "total_length = " + total_length.ToString() + "\n";
 
             trackBar_st.Maximum = total_length;
@@ -244,6 +224,12 @@ namespace vcs_MP3Cutter
             axWindowsMediaPlayer1.Ctlcontrols.stop();
             mp3_position = 0;
             mp3_filename = filename;
+
+            lb_st.Text = "起始 : " + (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
+            lb_sp.Text = "結束 : " + (total_length / 3600).ToString("D2") + " : " + ((total_length / 60) % 60).ToString("D2") + " : " + (total_length % 60).ToString("D2") + "    " + total_length.ToString();
+
+            int cut = trackBar_sp.Value - trackBar_st.Value;
+            lb_cut.Text = "選取 : " + (cut / 3600).ToString("D2") + " : " + ((cut / 60) % 60).ToString("D2") + " : " + (cut % 60).ToString("D2") + "    " + cut.ToString();
         }
 
         private void bt_save_file_Click(object sender, EventArgs e)
@@ -256,6 +242,7 @@ namespace vcs_MP3Cutter
 
             int cut1 = trackBar_st.Value;
             int cut2 = trackBar_sp.Value;
+            int cut_time = 0;
 
             if (cut1 >= cut2)
             {
@@ -263,48 +250,29 @@ namespace vcs_MP3Cutter
                 return;
             }
 
-            richTextBox1.Text += "擷取範圍 : " + cut1.ToString() + " 到 " + cut2.ToString() + "\t共 " + (cut2 - cut1).ToString() + " 秒\n";
+            cut_time = cut2 - cut1;
+            richTextBox1.Text += "擷取範圍 : " + cut1.ToString() + " 到 " + cut2.ToString() + "\t共 " + cut_time.ToString() + " 秒\n";
 
-            //音频切割
-            string mp3_cut_filename = @"C:\dddddddddd\cutcut.mp3";
-
-
-            /*
-                        int BeginM = 0;
-                        int BeginS = 0;
-                        int EndM = 0;
-                        int EndS = 10;
-
-                        string startTime = string.Format("0:{0}:{1}", BeginM.ToString(), BeginS.ToString()).Trim();//歌曲起始时间
-                        //int duration = (Convert.ToInt32(this.txtEndM.Text) * 60 + Convert.ToInt32(this.txtEndS.Text)) - (Convert.ToInt32(this.txtBeginM.Text) * 60 + Convert.ToInt32(this.txtBeginS.Text));
-                        int duration = (EndM * 60 + EndS) - (BeginM * 60 + BeginS);
-                        string endTime = string.Format("0:{0}:{1}", duration / 60, duration % 60);//endTime是持续的时间，不是歌曲结束的时间
-                        string mp3_cut_filename = @"aaaaaa.wav";//切割后音乐保存的物理路径
-            */
-
-            /*
-            string startTime = string.Format("0:{0}:{1}", txtBeginM.Text, txtBeginS.Text).Trim();//歌曲起始时间  
-            int duration = (Convert.ToInt32(this.txtEndM.Text) * 60 + Convert.ToInt32(this.txtEndS.Text)) - (Convert.ToInt32(this.txtBeginM.Text) * 60 + Convert.ToInt32(this.txtBeginS.Text));
-            string endTime = string.Format("0:{0}:{1}", duration / 60, duration % 60);//endTime是持续的时间，不是歌曲结束的时间  
-            */
-
+            //音頻切割
+            string mp3_cut_filename = Application.StartupPath + "\\cut_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
             string startTime = (cut1 / 3600).ToString("D2") + ":" + ((cut1 / 60) % 60).ToString("D2") + ":" + (cut1 % 60).ToString("D2");
-            string endTime = (cut2 / 3600).ToString("D2") + ":" + ((cut2 / 60) % 60).ToString("D2") + ":" + (cut2 % 60).ToString("D2");
+            string cutTime = (cut_time / 3600).ToString("D2") + ":" + ((cut_time / 60) % 60).ToString("D2") + ":" + (cut_time % 60).ToString("D2");
 
             try
             {
                 //-y : 強制覆蓋檔案
+                //-i : 要擷取的原始檔案
                 //-ss : 起始時間
-                //-t : 結束時間
-                //-acodec copy : 編碼格式和來源檔案相同
-                string command_arg = "-y -i \"" + mp3_filename + "\" -ss " + startTime + " -t " + endTime + " -acodec copy \"" + mp3_cut_filename + "\"";
+                //-t : 擷取長度, -t sec 或 -t hh:mm:ss
+                //-acodec copy : 音訊編碼格式和來源檔案相同
+                //-vcodec copy : 影像編碼格式和來源檔案相同
+                string command_arg = "-y -i \"" + mp3_filename + "\" -ss " + startTime + " -t " + cutTime + " -acodec copy \"" + mp3_cut_filename + "\"";
 
                 ExcuteProcess(ffmpeg, command_arg);
 
                 richTextBox1.Text += "命令 : " + ffmpeg + "\n";
                 richTextBox1.Text += "參數 : " + command_arg + "\n";
-
-                richTextBox1.Text += "已切割完成\n";
+                richTextBox1.Text += "已切割完成\t檔案 : " + mp3_cut_filename + "\n";
             }
             catch (Exception ex)
             {
@@ -345,12 +313,12 @@ namespace vcs_MP3Cutter
         {
             mp3_position = trackBar_st.Value;
             axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
-            lb_st.Text = (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
+            lb_st.Text = "起始 : " + (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
 
             if (trackBar_st.Value < trackBar_sp.Value)
             {
                 int cut = trackBar_sp.Value - trackBar_st.Value;
-                lb_diff.Text = cut.ToString();
+                lb_cut.Text = "選取 : " + (cut / 3600).ToString("D2") + " : " + ((cut / 60) % 60).ToString("D2") + " : " + (cut % 60).ToString("D2") + "    " + cut.ToString();
             }
         }
 
@@ -358,16 +326,13 @@ namespace vcs_MP3Cutter
         {
             mp3_position = trackBar_sp.Value;
             axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
-            lb_sp.Text = (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
+            lb_sp.Text = "結束 : " + (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
 
             if (trackBar_st.Value < trackBar_sp.Value)
             {
                 int cut = trackBar_sp.Value - trackBar_st.Value;
-                lb_diff.Text = cut.ToString();
+                lb_cut.Text = "選取 : " + (cut / 3600).ToString("D2") + " : " + ((cut / 60) % 60).ToString("D2") + " : " + (cut % 60).ToString("D2") + "    " + cut.ToString();
             }
-
         }
-
-
     }
 }

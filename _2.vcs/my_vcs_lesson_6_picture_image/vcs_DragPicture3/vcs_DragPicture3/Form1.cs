@@ -14,10 +14,17 @@ namespace vcs_DragPicture3
         bool isPress = false;   //判斷是否有按下
         int oldX, oldY;         //記錄按下的位置
 
+        string filename = @"C:\______test_files\very_long_pic.jpg";
+
         public Form1()
         {
             InitializeComponent();
-            Image image = Image.FromFile("C:\\______test_files\\very_long_pic.jpg");
+        }
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Image image = Image.FromFile(filename);
             int width = image.Width;
             int height = image.Height;
 
@@ -51,16 +58,14 @@ namespace vcs_DragPicture3
             {
                 if (Math.Abs(label1.Left - oldX) > Math.Abs(label1.Top - oldY))
                 {
-                label1.Left = e.X + (label1.Left - oldX);
+                    label1.Left = e.X + (label1.Left - oldX);
                 }
                 else
                 {
-                label1.Top = e.Y + (label1.Top - oldY);
+                    label1.Top = e.Y + (label1.Top - oldY);
                 }
                 //按下的點，可能在圖上的任一點，所以抓出對應的座標並加回去
-
             }
-
         }
 
         private void label1_MouseUp(object sender, MouseEventArgs e)
@@ -79,3 +84,4 @@ namespace vcs_DragPicture3
         }
     }
 }
+

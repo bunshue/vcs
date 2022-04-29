@@ -43,7 +43,7 @@
             this.lb_st = new System.Windows.Forms.Label();
             this.lb_sp = new System.Windows.Forms.Label();
             this.lb_total = new System.Windows.Forms.Label();
-            this.lb_diff = new System.Windows.Forms.Label();
+            this.lb_cut = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_sp)).BeginInit();
@@ -119,7 +119,7 @@
             // 
             this.bt_open_file.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_open_file.BackgroundImage")));
             this.bt_open_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_open_file.Location = new System.Drawing.Point(924, 23);
+            this.bt_open_file.Location = new System.Drawing.Point(962, 23);
             this.bt_open_file.Name = "bt_open_file";
             this.bt_open_file.Size = new System.Drawing.Size(64, 64);
             this.bt_open_file.TabIndex = 45;
@@ -130,7 +130,7 @@
             // 
             this.bt_save_file.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_save_file.BackgroundImage")));
             this.bt_save_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_save_file.Location = new System.Drawing.Point(995, 23);
+            this.bt_save_file.Location = new System.Drawing.Point(1033, 23);
             this.bt_save_file.Name = "bt_save_file";
             this.bt_save_file.Size = new System.Drawing.Size(64, 64);
             this.bt_save_file.TabIndex = 46;
@@ -141,7 +141,7 @@
             // 
             this.bt_play_pause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_play_pause.BackgroundImage")));
             this.bt_play_pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_play_pause.Location = new System.Drawing.Point(924, 112);
+            this.bt_play_pause.Location = new System.Drawing.Point(962, 112);
             this.bt_play_pause.Name = "bt_play_pause";
             this.bt_play_pause.Size = new System.Drawing.Size(64, 64);
             this.bt_play_pause.TabIndex = 47;
@@ -152,7 +152,7 @@
             // 
             this.bt_stop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_stop.BackgroundImage")));
             this.bt_stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_stop.Location = new System.Drawing.Point(995, 112);
+            this.bt_stop.Location = new System.Drawing.Point(1033, 112);
             this.bt_stop.Name = "bt_stop";
             this.bt_stop.Size = new System.Drawing.Size(64, 64);
             this.bt_stop.TabIndex = 48;
@@ -189,15 +189,15 @@
             this.lb_total.TabIndex = 51;
             this.lb_total.Text = "label1";
             // 
-            // lb_diff
+            // lb_cut
             // 
-            this.lb_diff.AutoSize = true;
-            this.lb_diff.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_diff.Location = new System.Drawing.Point(711, 99);
-            this.lb_diff.Name = "lb_diff";
-            this.lb_diff.Size = new System.Drawing.Size(58, 21);
-            this.lb_diff.TabIndex = 52;
-            this.lb_diff.Text = "label2";
+            this.lb_cut.AutoSize = true;
+            this.lb_cut.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_cut.Location = new System.Drawing.Point(711, 99);
+            this.lb_cut.Name = "lb_cut";
+            this.lb_cut.Size = new System.Drawing.Size(58, 21);
+            this.lb_cut.TabIndex = 52;
+            this.lb_cut.Text = "label2";
             // 
             // bt_clear
             // 
@@ -215,7 +215,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1169, 419);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.lb_diff);
+            this.Controls.Add(this.lb_cut);
             this.Controls.Add(this.lb_total);
             this.Controls.Add(this.trackBar_sp);
             this.Controls.Add(this.lb_sp);
@@ -256,7 +256,7 @@
         private System.Windows.Forms.Label lb_st;
         private System.Windows.Forms.Label lb_sp;
         private System.Windows.Forms.Label lb_total;
-        private System.Windows.Forms.Label lb_diff;
+        private System.Windows.Forms.Label lb_cut;
         private System.Windows.Forms.Button bt_clear;
     }
 }

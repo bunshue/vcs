@@ -11,7 +11,8 @@ namespace vcs_DragPicture7
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\cat\cat1.png";
+        string filename = @"C:\______test_files\picture1.jpg";
+
         bool flag = false;
         int x, y;
 

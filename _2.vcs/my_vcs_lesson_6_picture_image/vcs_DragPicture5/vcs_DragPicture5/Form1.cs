@@ -13,6 +13,8 @@ namespace vcs_DragPicture5
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\very_long_pic.jpg";
+
         private Bitmap bitmap1;
         private float CurrentScale;
         private Bitmap VisibleImage = null;
@@ -26,7 +28,7 @@ namespace vcs_DragPicture5
             InitializeComponent();
         }
 
-		// Initially display at full scale.
+        // Initially display at full scale.
         private void Form1_Load(object sender, EventArgs e)
         {
             // Use a grabbing hand cursor.
@@ -34,7 +36,7 @@ namespace vcs_DragPicture5
 
             // Get the map image.
             //bitmap1 = Properties.Resources.Map;
-            bitmap1 = (Bitmap)Image.FromFile(@"C:\______test_files\_case1\pic6.jpg");
+            bitmap1 = (Bitmap)Image.FromFile(filename);
 
             richTextBox1.Text += "W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
 
@@ -118,7 +120,7 @@ namespace vcs_DragPicture5
             // Update the display.
             pictureBox1.Refresh();
         }
-    
+
         // Let the user drag the image around.
         private bool Dragging = false;
         private int LastX, LastY;
@@ -134,7 +136,7 @@ namespace vcs_DragPicture5
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (!Dragging) return;
-            
+
             PicX += e.X - LastX;
             PicY += e.Y - LastY;
             LastX = e.X;
@@ -147,7 +149,6 @@ namespace vcs_DragPicture5
         {
             Dragging = false;
         }
-
-
     }
 }
+

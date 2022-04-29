@@ -246,7 +246,7 @@ namespace vcs_PictureListDrag
             int i = 0;
 
             //撈出資料夾內所有png檔
-            string folder_name = @"C:\______test_files\_books2";
+            string folder_name = @"C:\______test_files\__pic\_book_magazine\_books2";
 
             List<String> filenames = find_all_files(folder_name);
 
