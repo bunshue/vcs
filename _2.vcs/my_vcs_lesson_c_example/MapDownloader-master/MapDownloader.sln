@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual C# Express 2010
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMapWPFDemo", "GMapWPFDemo\GMapWPFDemo.csproj", "{4A75ABDC-6C56-41A4-AD4D-90F07BD9CF87}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMapMarkerLib", "GMapMarkerLib\GMapMarkerLib.csproj", "{E25D9C8F-534F-4D86-BD45-9469AD9727E0}"
@@ -346,5 +348,8 @@ Global
 		{E06DEF77-F933-42FB-AFD7-DB2D0D8D6A98} = {FAEB9DD3-4A0B-47F7-A6C0-35D0AB7BBA5F}
 		{644FE7D4-0184-400F-B2D7-99CB41360658} = {FAEB9DD3-4A0B-47F7-A6C0-35D0AB7BBA5F}
 		{210BD892-533E-44FA-88B1-44B404B17D81} = {FAEB9DD3-4A0B-47F7-A6C0-35D0AB7BBA5F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E613E681-5E9D-4423-B8B9-67FF15CF2FD0}
 	EndGlobalSection
 EndGlobal

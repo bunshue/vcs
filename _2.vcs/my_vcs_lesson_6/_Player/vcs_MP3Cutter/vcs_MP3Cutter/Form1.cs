@@ -28,6 +28,13 @@ namespace vcs_MP3Cutter
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            trackBar_st.Maximum = 100;
+            trackBar_st.Minimum = 0;
+            trackBar_st.Value = 0;
+
+            trackBar_sp.Maximum = 100;
+            trackBar_sp.Minimum = 0;
+            trackBar_sp.Value = 100;
 
         }
 
@@ -154,6 +161,46 @@ namespace vcs_MP3Cutter
             string[] time = Regex.Split(SongTime, ":");
             return time;
 
+        }
+
+        private void bt_open_file_Click(object sender, EventArgs e)
+        {
+            //取得mp3音樂長度
+
+            richTextBox1.Text += "取得音樂檔案長度 :\n";
+
+            string filename = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_日本演歌\__石川さゆり\Ishikawa Sayuri 【アルバム】[演歌] 石川さゆり ‐ 全曲集 Super Best.mp3";
+
+            richTextBox1.Text += "檔案 : " + filename + "\n";
+            richTextBox1.Text += "音樂長度 : ";
+            string[] result = GetMP3Time(filename);
+            foreach (string str in result)
+            {
+                richTextBox1.Text += str + " ";
+            }
+            richTextBox1.Text += "\n";
+            int total_length = 0;
+
+            total_length = int.Parse(result[0]) * 60 * 60 + int.Parse(result[1]) * 60 + int.Parse(result[2]);
+
+            richTextBox1.Text += "total_length = " + total_length.ToString() + "\n";
+
+            trackBar_st.Maximum = total_length;
+            trackBar_st.Minimum = 0;
+            trackBar_st.Value = 0;
+
+            trackBar_sp.Maximum = total_length;
+            trackBar_sp.Minimum = 0;
+            trackBar_sp.Value = total_length;
+
+        }
+
+        private void bt_save_file_Click(object sender, EventArgs e)
+        {
+            int cut1 = trackBar_st.Value;
+            int cut2 = trackBar_sp.Value;
+
+            richTextBox1.Text += "擷取範圍 : " + cut1.ToString() + " 到 " + cut2.ToString() + "\n";
         }
 
     }
