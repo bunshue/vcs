@@ -45,13 +45,30 @@
             this.lb_total = new System.Windows.Forms.Label();
             this.lb_cut = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_ffmpeg1 = new System.Windows.Forms.Button();
+            this.bt_ffmpeg2 = new System.Windows.Forms.Button();
+            this.bt_ffmpeg0 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_sp)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 143);
+            this.button1.Location = new System.Drawing.Point(26, 143);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(127, 52);
             this.button1.TabIndex = 0;
@@ -63,7 +80,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(26, 201);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1129, 206);
+            this.richTextBox1.Size = new System.Drawing.Size(864, 206);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -201,7 +218,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(1072, 375);
+            this.bt_clear.Location = new System.Drawing.Point(772, 358);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(69, 32);
             this.bt_clear.TabIndex = 53;
@@ -209,11 +226,168 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(6, 21);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(100, 40);
+            this.button5.TabIndex = 54;
+            this.button5.Text = "test 1";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(112, 21);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(100, 40);
+            this.button6.TabIndex = 55;
+            this.button6.Text = "test 2 影片轉mp3";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(218, 21);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(100, 40);
+            this.button7.TabIndex = 56;
+            this.button7.Text = "test 3";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(324, 21);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(100, 40);
+            this.button8.TabIndex = 57;
+            this.button8.Text = "test 4 視頻截圖";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bt_ffmpeg1);
+            this.groupBox1.Controls.Add(this.bt_ffmpeg2);
+            this.groupBox1.Controls.Add(this.bt_ffmpeg0);
+            this.groupBox1.Location = new System.Drawing.Point(962, 201);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(196, 225);
+            this.groupBox1.TabIndex = 58;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "ffmpeg";
+            // 
+            // bt_ffmpeg1
+            // 
+            this.bt_ffmpeg1.Location = new System.Drawing.Point(17, 91);
+            this.bt_ffmpeg1.Name = "bt_ffmpeg1";
+            this.bt_ffmpeg1.Size = new System.Drawing.Size(160, 50);
+            this.bt_ffmpeg1.TabIndex = 6;
+            this.bt_ffmpeg1.Text = "獲取視頻時長";
+            this.bt_ffmpeg1.UseVisualStyleBackColor = true;
+            this.bt_ffmpeg1.Click += new System.EventHandler(this.bt_ffmpeg1_Click);
+            // 
+            // bt_ffmpeg2
+            // 
+            this.bt_ffmpeg2.Location = new System.Drawing.Point(17, 156);
+            this.bt_ffmpeg2.Name = "bt_ffmpeg2";
+            this.bt_ffmpeg2.Size = new System.Drawing.Size(160, 50);
+            this.bt_ffmpeg2.TabIndex = 5;
+            this.bt_ffmpeg2.Text = "獲取視頻第一秒圖片";
+            this.bt_ffmpeg2.UseVisualStyleBackColor = true;
+            this.bt_ffmpeg2.Click += new System.EventHandler(this.bt_ffmpeg2_Click);
+            // 
+            // bt_ffmpeg0
+            // 
+            this.bt_ffmpeg0.Location = new System.Drawing.Point(17, 21);
+            this.bt_ffmpeg0.Name = "bt_ffmpeg0";
+            this.bt_ffmpeg0.Size = new System.Drawing.Size(160, 50);
+            this.bt_ffmpeg0.TabIndex = 4;
+            this.bt_ffmpeg0.Text = "取得影片的寬高";
+            this.bt_ffmpeg0.UseVisualStyleBackColor = true;
+            this.bt_ffmpeg0.Click += new System.EventHandler(this.bt_ffmpeg0_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button14);
+            this.groupBox2.Controls.Add(this.button13);
+            this.groupBox2.Controls.Add(this.button12);
+            this.groupBox2.Controls.Add(this.button11);
+            this.groupBox2.Controls.Add(this.button10);
+            this.groupBox2.Controls.Add(this.button9);
+            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Controls.Add(this.button8);
+            this.groupBox2.Controls.Add(this.button7);
+            this.groupBox2.Location = new System.Drawing.Point(26, 428);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(551, 126);
+            this.groupBox2.TabIndex = 59;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "new";
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(430, 21);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(100, 40);
+            this.button9.TabIndex = 58;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(6, 67);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(100, 40);
+            this.button10.TabIndex = 59;
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(112, 67);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(100, 40);
+            this.button11.TabIndex = 60;
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(218, 67);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(100, 40);
+            this.button12.TabIndex = 61;
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(324, 67);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(100, 40);
+            this.button13.TabIndex = 62;
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(430, 67);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(100, 40);
+            this.button14.TabIndex = 63;
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1169, 419);
+            this.ClientSize = new System.Drawing.Size(1325, 629);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.lb_cut);
             this.Controls.Add(this.lb_total);
@@ -235,6 +409,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_st)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_sp)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,6 +434,21 @@
         private System.Windows.Forms.Label lb_total;
         private System.Windows.Forms.Label lb_cut;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button bt_ffmpeg1;
+        private System.Windows.Forms.Button bt_ffmpeg2;
+        private System.Windows.Forms.Button bt_ffmpeg0;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button9;
     }
 }
 

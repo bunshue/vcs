@@ -35,15 +35,15 @@ namespace vcs_PictureBox5_Slider
         {
             MouseIsDown = true;
             SetValue(XtoValue(e.X));
-
-
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!MouseIsDown) return;
+            if (!MouseIsDown)
+            {
+                return;
+            }
             SetValue(XtoValue(e.X));
-
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -53,7 +53,6 @@ namespace vcs_PictureBox5_Slider
 
             // Take action here if desired.
             label1.Text = SliderValue.ToString("0.00");
-
         }
 
         // Draw the needle.
@@ -87,15 +86,13 @@ namespace vcs_PictureBox5_Slider
         // Convert an X coordinate to a value.
         private float XtoValue(int x)
         {
-            return MinimumValue + (MaximumValue - MinimumValue) *
-                x / (float)(pictureBox1.ClientSize.Width - 1);
+            return MinimumValue + (MaximumValue - MinimumValue) * x / (float)(pictureBox1.ClientSize.Width - 1);
         }
 
         // Convert value to an X coordinate.
         private float ValueToX(float value)
         {
-            return (pictureBox1.ClientSize.Width - 1) *
-                (value - MinimumValue) / (float)(MaximumValue - MinimumValue);
+            return (pictureBox1.ClientSize.Width - 1) * (value - MinimumValue) / (float)(MaximumValue - MinimumValue);
         }
 
         // Set the slider's value. If the value has changed,
@@ -103,11 +100,20 @@ namespace vcs_PictureBox5_Slider
         private void SetValue(float value)
         {
             // Make sure the new value is within bounds.
-            if (value < MinimumValue) value = MinimumValue;
-            if (value > MaximumValue) value = MaximumValue;
+            if (value < MinimumValue)
+            {
+                value = MinimumValue;
+            }
+            if (value > MaximumValue)
+            {
+                value = MaximumValue;
+            }
 
             // See if the value has changed.
-            if (SliderValue == value) return;
+            if (SliderValue == value)
+            {
+                return;
+            }
 
             // Save the new value.
             SliderValue = value;
@@ -123,8 +129,6 @@ namespace vcs_PictureBox5_Slider
             // Take action here if desired.
             label1.Text = SliderValue.ToString("0.00");
         }
-
-
-
     }
 }
+

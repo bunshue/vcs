@@ -15,11 +15,6 @@ namespace vcs_PictureObscure
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The original image.
         private Bitmap OriginalImage = null;
 
@@ -37,6 +32,16 @@ namespace vcs_PictureObscure
 
         // The kernel size.
         private int KernelSize = 3;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         // Open an image file.
         private void mnuFileOpen_Click(object sender, EventArgs e)
@@ -302,5 +307,6 @@ namespace vcs_PictureObscure
                 MessageBox.Show("Error applying filter\n" + ex.Message);
             }
         }
+
     }
 }

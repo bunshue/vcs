@@ -73,7 +73,7 @@
             this.toolsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(724, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1074, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -85,14 +85,14 @@
             this.toolStripMenuItem1,
             this.mnuFileExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // mnuFileOpen
             // 
             this.mnuFileOpen.Name = "mnuFileOpen";
             this.mnuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuFileOpen.Size = new System.Drawing.Size(171, 22);
+            this.mnuFileOpen.Size = new System.Drawing.Size(168, 22);
             this.mnuFileOpen.Text = "&Open...";
             this.mnuFileOpen.ToolTipText = "Open an image file";
             this.mnuFileOpen.Click += new System.EventHandler(this.mnuFileOpen_Click);
@@ -101,7 +101,7 @@
             // 
             this.mnuFileSaveAs.Name = "mnuFileSaveAs";
             this.mnuFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSaveAs.Size = new System.Drawing.Size(171, 22);
+            this.mnuFileSaveAs.Size = new System.Drawing.Size(168, 22);
             this.mnuFileSaveAs.Text = "&Save As...";
             this.mnuFileSaveAs.ToolTipText = "Save the result file";
             this.mnuFileSaveAs.Click += new System.EventHandler(this.mnuFileSaveAs_Click);
@@ -109,12 +109,12 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(168, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(165, 6);
             // 
             // mnuFileExit
             // 
             this.mnuFileExit.Name = "mnuFileExit";
-            this.mnuFileExit.Size = new System.Drawing.Size(171, 22);
+            this.mnuFileExit.Size = new System.Drawing.Size(168, 22);
             this.mnuFileExit.Text = "E&xit";
             this.mnuFileExit.ToolTipText = "Exit the application";
             this.mnuFileExit.Click += new System.EventHandler(this.mnuFileExit_Click);
@@ -125,14 +125,14 @@
             this.mnuToolsRevert,
             this.mnuToolsParameters});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // mnuToolsRevert
             // 
             this.mnuToolsRevert.Name = "mnuToolsRevert";
             this.mnuToolsRevert.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.mnuToolsRevert.Size = new System.Drawing.Size(191, 22);
+            this.mnuToolsRevert.Size = new System.Drawing.Size(188, 22);
             this.mnuToolsRevert.Text = "&Revert";
             this.mnuToolsRevert.ToolTipText = "Revert to the original image";
             this.mnuToolsRevert.Click += new System.EventHandler(this.mnuToolsRevert_Click);
@@ -141,7 +141,7 @@
             // 
             this.mnuToolsParameters.Name = "mnuToolsParameters";
             this.mnuToolsParameters.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mnuToolsParameters.Size = new System.Drawing.Size(191, 22);
+            this.mnuToolsParameters.Size = new System.Drawing.Size(188, 22);
             this.mnuToolsParameters.Text = "&Parameters...";
             this.mnuToolsParameters.ToolTipText = "Set the fuzziness parameters";
             this.mnuToolsParameters.Click += new System.EventHandler(this.mnuToolsParameters_Click);
@@ -155,11 +155,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(724, 514);
+            this.ClientSize = new System.Drawing.Size(1074, 604);
             this.Controls.Add(this.picImage);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "vcs_PictureObscure";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

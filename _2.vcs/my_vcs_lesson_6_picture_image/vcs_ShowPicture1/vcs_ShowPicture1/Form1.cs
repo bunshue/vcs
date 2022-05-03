@@ -15,7 +15,7 @@ namespace vcs_ShowPicture1
     {
         Hashtable ht = new Hashtable();
 
-        string dirname = @"C:\______test_files\_pic";
+        string dirname = @"C:\______test_files\__pic";
 
         public Form1()
         {

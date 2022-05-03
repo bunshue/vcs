@@ -21,6 +21,8 @@ namespace vcs_PicturePixellate
         // The current image without the rubberband rectangle.
         private Bitmap CurrentBitmap = null;
 
+        string filename = "C:\\______test_files\\elephant.jpg";
+
         public Form1()
         {
             InitializeComponent();
@@ -28,16 +30,15 @@ namespace vcs_PicturePixellate
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\elephant.jpg";
+            ClientSize = new Size(pictureBox1.Right + pictureBox1.Left + 150, pictureBox1.Bottom + pictureBox1.Left); //表單跟圖片框一樣大
 
             try
             {
-                using (Bitmap bm = new Bitmap(filename))
+                using (Bitmap bitmap1 = new Bitmap(filename))
                 {
-                    CurrentBitmap = bm.Clone() as Bitmap;
-                    pictureBox1.Image = bm.Clone() as Image;
+                    CurrentBitmap = bitmap1.Clone() as Bitmap;
+                    pictureBox1.Image = bitmap1.Clone() as Image;
                 }
-                ClientSize = new Size(pictureBox1.Right + pictureBox1.Left, pictureBox1.Bottom + pictureBox1.Left); //表單跟圖片框一樣大
             }
             catch (Exception ex)
             {
@@ -106,9 +107,9 @@ namespace vcs_PicturePixellate
         private void PixellateRectangle(Rectangle rect)
         {
             // Restrict the rectangle to fit on the image.
-            int bm_wid = CurrentBitmap.Width;
-            int bm_hgt = CurrentBitmap.Height;
-            rect = Rectangle.Intersect(rect, new Rectangle(0, 0, bm_wid, bm_hgt));
+            int W = CurrentBitmap.Width;
+            int H = CurrentBitmap.Height;
+            rect = Rectangle.Intersect(rect, new Rectangle(0, 0, W, H));
 
             // Process the rectangle.
             const int box_wid = 8;
@@ -126,10 +127,10 @@ namespace vcs_PicturePixellate
                         int total_r = 0, total_g = 0, total_b = 0, num_pixels = 0;
                         for (int dy = 0; dy < box_wid; dy++)
                         {
-                            if (y + dy >= bm_hgt) break;
+                            if (y + dy >= H) break;
                             for (int dx = 0; dx < box_wid; dx++)
                             {
-                                if (x + dx >= bm_wid) break;
+                                if (x + dx >= W) break;
                                 Color pixel_color = CurrentBitmap.GetPixel(x + dx, y + dy);
                                 total_r += pixel_color.R;
                                 total_g += pixel_color.G;
@@ -155,6 +156,21 @@ namespace vcs_PicturePixellate
                 pictureBox1.Refresh();
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (Bitmap bitmap1 = new Bitmap(filename))
+                {
+                    CurrentBitmap = bitmap1.Clone() as Bitmap;
+                    pictureBox1.Image = bitmap1.Clone() as Image;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
-

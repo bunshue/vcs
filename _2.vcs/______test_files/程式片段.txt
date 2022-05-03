@@ -1,30 +1,98 @@
 
 
 
+gmap+
 
-vcs_mp3cutter
-應該為vcs_FFMPEG大集合
+方圓百里 畫圖
 
-所有FFMPEG的使用
-
-
+戰役主要戰場 標示出來
 
 
-ContextMenuStrip可否做成多層次的
+C# 播放 wav 或音樂檔方式
 
-例如 地圖種類項 點選後會出現下一層選項  正中、簡中、地形、衛星、、、、、、
+在 C# 內播放 wav或音樂檔案方式，可使用下面範例實現
+Sample Code
 
-用以動態切換地圖種類
+System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
+sp.SoundLocation = @"C:\Wave音效檔\DoReMe.wav";
+sp.Play(); // 撥放
+..
+..
+..
+sp.Stop(); // 停止
 
-ContextMenuStrip 選取項目 按右鍵 編輯DropDownItems(E)
+ 
+ 
+ 
+vcs範例
+取得相片的拍攝時間(若有的話)
 
+
+
+
+
+要做成的範例
+1. 正中簡中 互換 範例
+
+
+
+獲取遠端圖片 這樣可以節省抓取衛星雲圖的程式碼
+
+桌布程式  可以選擇 置中 shrink zoom........
 
 做成桌面圖的程式
 
 應加上圖形顯示模式 是 zoom stretch shrink .......
 
-法源寺
 
+衛星雲圖可選其他氣象局的圖
+
+
+
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Player\vcs_MP3Cutter
+應改成 AudioVideo 轉換程式
+
+
+目前是 mp3 切割程式
+
+改成
+ + mp4 切割程式
+ mp3/mp4 info
+ mp3 <-> wav 轉換
+ mp3合併
+  
+ 除切割程式外 簡單就好 做成範例就好
+ 做成FFMPEG全部應用
+
+
+vcs_mp3cutter
+應該為vcs_FFMPEG大集合
+
+
+
+
+
+
+
+
+            //簡易播放wav的方法，僅可播放wav，不可播放mp3
+            string filename = @"C:\______test_files\_wav\WindowsShutdown.wav";
+            SoundPlayer simpleSound = new SoundPlayer(filename);
+            simpleSound.Play();
+
+
+
+
+
+
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6_picture_image
+和
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Screen
+裡面的有些混用到listBox的  應分離出來使用
+
+
+多層次ContextMenuStrip
+ContextMenuStrip 選取項目 按右鍵 編輯DropDownItems(E)
 
 
 //String用法 Remove
@@ -136,6 +204,42 @@ ContextMenuStrip 選取項目 按右鍵 編輯DropDownItems(E)
 
 
 
+
+
+        private DrawingMode drawingMode = DrawingMode.None;
+
+
+drawingMode = DrawingMode.None;
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace GMapDrawTools
+{
+    public enum DrawingMode
+    {
+        None,
+        Circle,
+        Rectangle,
+        Polygon,
+        Route,
+        Line
+    }
+}
+
+
+
+            this.MapControl.CanDragMap = false;
+        }
+
+        private void Deactive()
+        {
+            this.MapControl.CanDragMap = true;
 
 
 
@@ -3264,23 +3368,6 @@ Console.WriteLine("十六進制 CC的十進制表示: "+Convert.ToInt32("CC", 16
 從原來的 time.windows.com 改為 time.nist.gov，
 
 
-C# 播放 wav 或音樂檔方式
-
-在 C# 內播放 wav或音樂檔案方式，可使用下面範例實現
-Sample Code
-
-System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
-sp.SoundLocation = @"C:\Wave音效檔\DoReMe.wav";
-sp.Play(); // 撥放
-..
-..
-..
-sp.Stop(); // 停止
-
- 
- 
- 
-
 
 
 //如何取得網路上的圖片並顯示 
@@ -3555,8 +3642,6 @@ fileFullPath : C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\OperateCamera\b
 
 
 
-
-
 關掉AForge的VSP
         // Close currently open camera if any
         private void CloseCamera()
@@ -3570,35 +3655,6 @@ fileFullPath : C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\OperateCamera\b
                 videoSource = null;
             }
         }		
-
-        private static string FFMPEG_EXE_PATH = CheckRelativePath(@"ffmpeg\ffmpeg.exe");
-        private static string FFPROBE_EXE_PATH = CheckRelativePath(@"ffmpeg\ffprobe.exe");
-
-            string cmdParams = String.Format("-hide_banner -ss {0} -i {1} -r 1 -t 1 -f image2 {2}", atPositioin, filename, tmpFileName);
-
-                // Execute command to let FFMPEG extract the frame
-                Execute(FFMPEG_EXE_PATH, cmdParams);
-
-        private static string Execute(string exePath, string parameters)
-        {
-            string result = String.Empty;
-
-            using (Process p = new Process())
-            {
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.CreateNoWindow = true;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.FileName = exePath;
-                p.StartInfo.Arguments = parameters;
-                p.Start();
-                p.WaitForExit();
-
-                result = p.StandardOutput.ReadToEnd();
-            }
-
-            return result;
-        }
-
 
 
 在 C# 中使用 File.ReadAllText() 方法將檔案讀取為字串
@@ -4024,8 +4080,6 @@ for(i=0; i<360;i++)
                 sr.Close();
             }
         }
-
-
 
 
         				
@@ -4938,6 +4992,17 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
+            // 判斷是否已有程式在執行
+            string proc = Process.GetCurrentProcess().ProcessName;
+            Process[] processes = Process.GetProcessesByName(proc);
+
+            richTextBox1.Text += "ProcessName : " + proc + "\tlen = " + processes.Length.ToString() + "\n";
+            if (processes.Length > 1)
+            {
+                MessageBox.Show("PrintScreen " + proc + " 已經在執行", "重複執行錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Close();
+            }
+
 
 
 
@@ -5373,16 +5438,6 @@ ffmpeg -ss 00:00:00 -i sample.mp4 -c copy -t  600  dst.mp4
 //-t : 擷取長度, -t sec 或 -t hh:mm:ss
 //-acodec copy : 音訊編碼格式和來源檔案相同
 //-vcodec copy : 影像編碼格式和來源檔案相同
-
-
-//影片轉mp3
-ffmpeg -i test.mp4 -f mp3 -vn test.mp3
-
-参数解释：
--i 表示input，即输入文件
--f 表示format，即输出格式
--vn表示vedio not，即输出不包含视频
-
 
 
 //查看视频文件的音视频编解码格式，视频时长，比特率等，如下：

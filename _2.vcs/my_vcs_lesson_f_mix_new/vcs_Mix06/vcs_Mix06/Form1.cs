@@ -27,8 +27,6 @@ namespace vcs_Mix06
 {
     public partial class Form1 : Form
     {
-        string ffmpeg = @"C:\______test_files\_exe\ffmpeg\ffmpeg.exe";
-
         [DllImport("user32.dll")]
         public static extern bool GetCursorPos(out POINT lpPoint);
 
@@ -280,65 +278,6 @@ namespace vcs_Mix06
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            string filename = @"D:\vcs\_烏龍派出所\_烏龍派出所151~200\烏龍派出所181(日語).mp4";
-            CatchImg(filename);
-        }
-
-        /// <summary>
-        /// @從視頻文件截圖,生成在視頻文件所在文件夾
-        /// 在Web.Config 中需要兩個前置配置項:
-        /// 1.ffmpeg.exe文件的路徑
-        /// <add key="ffmpeg" value="E:\ffmpeg\ffmpeg.exe" />
-        /// 2.截圖的尺寸大小
-        /// <add key="CatchFlvImgSize" value="240x180" />
-        /// 3.視頻處理程序ffmpeg.exe
-        /// </summary>
-        /// <param name="vFileName">視頻文件地址,如:/Web/FlvFile/User1/00001.Flv</param>
-        /// <returns>成功:返回圖片虛擬地址; 失敗:返回空字符串</returns>
-
-        public string CatchImg(string vFileName)
-        {
-            if ((!File.Exists(ffmpeg)) || (!File.Exists(vFileName)))
-            {
-                return "";
-            }
-
-            //獲得圖片相對路徑/最後存儲到數據庫的路徑,如:/Web/FlvFile/User1/00001.jpg
-            string flv_img = Path.ChangeExtension(vFileName, ".jpg");
-
-            //圖片絕對路徑,如:D:\Video\Web\FlvFile\User1\0001.jpg
-            //string flv_img_p = HttpContext.Current.Server.MapPath(flv_img);
-            string flv_img_p = "aaaaaa.jpg";
-
-            //截圖的尺寸大小,配置在Web.Config中,如:<add key="CatchFlvImgSize" value="240x180" />
-            //string FlvImgSize = System.Configuration.ConfigurationSettings.APPSettings["CatchFlvImgSize"];
-
-            ProcessStartInfo startInfo = new ProcessStartInfo(ffmpeg);
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-
-            //此處組合成ffmpeg.exe文件需要的參數即可,此處命令在ffmpeg 0.4.9調試通過
-            //startInfo.Arguments = " -i " + vFileName + " -y -f image2 -t 0.001 -s " + FlvImgSize + " " + flv_img_p ;
-            //startInfo.Arguments = " -i " + vFileName + " -y -f image2 -t 0.001 -s " + "960x540" + " " + flv_img_p;
-            startInfo.Arguments = " -i " + vFileName + " -y -f image2 -t 0.001 -s " + "960x480" + " " + flv_img_p;
-
-            try
-            {
-                Process.Start(startInfo);
-            }
-            catch
-            {
-                return "";
-            }
-
-            ///注意:圖片截取成功後,數據由內存緩存寫到磁盤需要時間較長,大概在3,4秒甚至更長;
-            ///這兒需要延時後再檢測,我服務器延時8秒,即如果超過8秒圖片仍不存在,認為截圖失敗;
-            ///此處略去延時代碼.如有那位知道如何捕捉ffmpeg.exe截圖失敗消息,請告知,先謝過!
-            if (File.Exists(flv_img_p))
-            {
-                return flv_img;
-            }
-
-            return "";
         }
 
         private void button9_Click(object sender, EventArgs e)

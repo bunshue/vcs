@@ -139,10 +139,9 @@ namespace vcs_OptimizeJpg
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error loading file //" + ofdPicture.FileName + "//\n" + ex.Message, "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                 }
             }
-
         }
 
         // Save the file with the selected compression level.
@@ -150,19 +149,19 @@ namespace vcs_OptimizeJpg
         {
             if (OriginalImage == null)
             {
+                richTextBox1.Text += "尚未開啟圖檔\n";
                 return;
             }
 
-            if (sfdPicture.ShowDialog() == DialogResult.OK)
+            try
             {
-                try
-                {
-                    OriginalImage.Save(sfdPicture.FileName, ImageFormat.Jpeg);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error saving file //" + sfdPicture.FileName + "//\n" + ex.Message, "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                string filename = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                OriginalImage.Save(filename, ImageFormat.Jpeg);
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
 
         }

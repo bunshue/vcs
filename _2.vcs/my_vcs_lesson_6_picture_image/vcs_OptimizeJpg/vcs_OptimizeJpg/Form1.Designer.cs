@@ -36,11 +36,11 @@
             this.cboCI = new System.Windows.Forms.ComboBox();
             this.Label1 = new System.Windows.Forms.Label();
             this.ofdPicture = new System.Windows.Forms.OpenFileDialog();
-            this.sfdPicture = new System.Windows.Forms.SaveFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -131,10 +131,6 @@
             // 
             this.ofdPicture.Filter = "Graphic Files|*.bmp;*.gif;*.jpg;*.jpeg;*.png;*.tif;*.tiff|All Files|*.*";
             // 
-            // sfdPicture
-            // 
-            this.sfdPicture.Filter = " Graphic Files|*.bmp,*.gif,*.jpg,*.jpeg,*.png,*.tif,*.tiff|All Files|*.*";
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
@@ -151,9 +147,9 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(12, 99);
+            this.panel1.Location = new System.Drawing.Point(12, 164);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(931, 639);
+            this.panel1.Size = new System.Drawing.Size(1104, 574);
             this.panel1.TabIndex = 20;
             // 
             // button1
@@ -176,11 +172,20 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(574, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(542, 146);
+            this.richTextBox1.TabIndex = 23;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(955, 749);
+            this.ClientSize = new System.Drawing.Size(1128, 749);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
@@ -212,11 +217,11 @@
         internal System.Windows.Forms.ComboBox cboCI;
         internal System.Windows.Forms.Label Label1;
         private System.Windows.Forms.OpenFileDialog ofdPicture;
-        private System.Windows.Forms.SaveFileDialog sfdPicture;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

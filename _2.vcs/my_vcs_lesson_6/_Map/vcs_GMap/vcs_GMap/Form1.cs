@@ -143,7 +143,7 @@ namespace vcs_GMap
             groupBox1.Location = new Point(x_st, y_st);
             groupBox2.Location = new Point(x_st + 300, y_st);
 
-            x_st = 1370 + 50 + 80;
+            x_st = 1370 + 50 + 80 + 10;
             y_st = 12;
             dy = 25;
             checkBox1.Location = new Point(x_st, y_st + dy * 0);
@@ -1891,6 +1891,27 @@ namespace vcs_GMap
             }
             else if (rb_location8.Checked == true)
             {
+                //徐蚌會戰
+                //徐蚌會戰
+                //徐州	34.205, 117.283
+                //蚌埠	32.917625, 117.382417
+                //蚌埠市位於東經116°45′-118°04′，北緯32°43′至33°30′之間，其中市區位於東經117°31′-117°11′、北緯33°01′-32°49′之間
+                //海州/連雲港市	34.597, 119.222
+
+
+
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+
+                //徐州	34.205, 117.283
+                latitude = 34.205;   //緯度
+                longitude = 117.283; //經度
+                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+                gMapControl1.Zoom = 12; //當前比例
+
+                update_controls_info();
+
+
+
 
             }
             else if (rb_location9.Checked == true)
@@ -1921,7 +1942,7 @@ namespace vcs_GMap
 
 
 
-            
+
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2276,7 +2297,7 @@ namespace vcs_GMap
                     if (province != null)
                     {
                         richTextBox1.Text += province.name + " 有 " + province.City.Count.ToString() + " 個城市\n";
-                        int i=0;
+                        int i = 0;
                         foreach (var city in province.City)
                         {
                             richTextBox1.Text += "第 " + i.ToString() + " 個 : " + city.name + "\n";
@@ -2455,6 +2476,40 @@ namespace vcs_GMap
 
         private void bt_test09_Click(object sender, EventArgs e)
         {
+        }
+
+        private void selectMapProvider(object sender, EventArgs e)
+        {
+            //richTextBox1.Text += "你選擇了 : " + ((ToolStripMenuItem)sender).Name + "\n";
+            if (((ToolStripMenuItem)sender).Name == "selectMapProvider1")
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            }
+            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider2")
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+            }
+            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider3")
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleTerrainMap; //地形圖
+            }
+            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider4")
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
+            }
+            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider5")
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
+            }
+            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider6")
+            {
+                gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
+            }
+            else
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            }
+
         }
     }
 
@@ -2688,6 +2743,5 @@ namespace vcs_GMap
             this.StreetNumber = oth.StreetNumber;
         }
     }
-
 }
 
