@@ -634,27 +634,22 @@ namespace vcs_Alphanumeric
             draw_string(str, size, forecolor, backcolor, x_st, y_st, dx);
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             string current_time = DateTime.Now.ToString("HH:mm:ss");
 
             richTextBox1.Text += current_time + "\n";
 
-            int size = 10;
+            int size = 6;
             Color forecolor = Color.Red;
             Color backcolor = Color.Gray;
-            int x_st = 20;
+            int x_st = 600;
             int y_st = 20;
             int dx = size * 7 + 10;
 
             g.Clear(BackColor);
             draw_string(current_time, size, forecolor, backcolor, x_st, y_st, dx);
-
         }
     }
 }
+

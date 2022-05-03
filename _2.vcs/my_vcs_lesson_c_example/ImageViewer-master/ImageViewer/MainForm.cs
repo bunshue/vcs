@@ -555,7 +555,7 @@ namespace ImageViewer
 
         private void bt_open_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\ims_image.bmp";
+            string filename = @"C:\______test_files\ims01.bmp";
             OpenImageFile(filename);
 
             /*

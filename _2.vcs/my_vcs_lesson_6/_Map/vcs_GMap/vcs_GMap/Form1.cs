@@ -1896,19 +1896,42 @@ namespace vcs_GMap
                 //徐州	34.205, 117.283
                 //蚌埠	32.917625, 117.382417
                 //蚌埠市位於東經116°45′-118°04′，北緯32°43′至33°30′之間，其中市區位於東經117°31′-117°11′、北緯33°01′-32°49′之間
-                //海州/連雲港市	34.597, 119.222
+                //海州 = 連雲港市	34.597, 119.222
 
 
+                string[,] station = null;
+
+                station = new string[,] {
+            { "徐州", "34.205", "117.283"},
+            { "蚌埠", "32.917625", "117.382417"},
+            { "海州", "34.597", "119.222"},
+            };
+
+                int total_station = station.GetUpperBound(0) + 1;
+                richTextBox1.Text += "total_station = " + total_station.ToString() + "\n";
 
                 gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
 
-                //徐州	34.205, 117.283
-                latitude = 34.205;   //緯度
-                longitude = 117.283; //經度
+                latitude = double.Parse(station[0, 1]);
+                longitude = double.Parse(station[0, 2]);
+
                 gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-                gMapControl1.Zoom = 12; //當前比例
+                gMapControl1.Zoom = 7; //當前比例
 
                 update_controls_info();
+
+                int i;
+                for (i = 0; i < total_station; i++)
+                {
+                    latitude = double.Parse(station[i, 1]);
+                    longitude = double.Parse(station[i, 2]);
+
+                    AddMarker(latitude, longitude, GMarkerGoogleType.blue_dot, station[i, 0]);
+                }
+
+
+
+
 
 
 
