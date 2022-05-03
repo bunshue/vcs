@@ -1,5 +1,144 @@
 
 
+
+
+vcs_mp3cutter
+應該為vcs_FFMPEG大集合
+
+所有FFMPEG的使用
+
+
+
+
+ContextMenuStrip可否做成多層次的
+
+例如 地圖種類項 點選後會出現下一層選項  正中、簡中、地形、衛星、、、、、、
+
+用以動態切換地圖種類
+
+ContextMenuStrip 選取項目 按右鍵 編輯DropDownItems(E)
+
+
+做成桌面圖的程式
+
+應加上圖形顯示模式 是 zoom stretch shrink .......
+
+法源寺
+
+
+
+//String用法 Remove
+
+
+            string str = "0123456789";
+            string delstr1;
+            string delstr2;
+            delstr1 = str.Remove(6);//刪除字符串索引為6後面的字符
+            delstr2 = str.Remove(5,5);//刪除字符串索引自5開始後數5個長度的字符
+            Console.WriteLine(delstr1);
+            Console.WriteLine(delstr2);
+            Console.ReadLine();
+            
+
+//String用法 CopyTo
+            string str = "This is a string";
+            string copystr;
+            copystr = string.Copy(str);
+            char[] newchar=new char[20];
+            str.CopyTo(5,newchar,0,11);
+            Console.WriteLine(copystr);
+            Console.WriteLine(newchar);
+            Console.ReadLine();
+            
+//String用法 大小寫
+            string str = "This is a string";
+            string lowerstr;
+            string upperstr;
+            lowerstr = str.ToLower();
+            upperstr = str.ToUpper();
+            Console.WriteLine("小寫形式：{0}",lowerstr);
+            Console.WriteLine("大寫形式：{0}",upperstr);
+            Console.ReadLine();
+
+
+//String用法 字串查找
+            string str = "This is a string";
+            int rh1 = str.IndexOf("i");
+            int rh2 = str.LastIndexOf("i");
+            if (rh1>=0)
+            {
+                Console.WriteLine("字符i在字符串str第一次出現的位置是：{0}",rh1);
+                Console.WriteLine("字符i在字符串str最後一次出現的位置是：{0}", rh2);
+            }
+            else
+            {
+                Console.WriteLine("字符i在字符串str未出現");
+            }
+            
+            
+
+//字串的追加
+            StringBuilder str =new StringBuilder( "Hellow World!");
+            Console.WriteLine("---Append---");
+            str.Append("What a beautiful day");
+            Console.WriteLine("追加後的字符串為：{0}",str);
+
+
+
+//轉義字符 @
+
+            Console.WriteLine(@"C:\Windows\system32");//第一種輸出格式就是在前面加@
+            Console.WriteLine("C:\\Windows\\system32");//第二種輸出格式就是將"\"改成"\\"
+            Console.ReadLine();
+                        
+
+
+
+//關於c#在DataTable中根據條件刪除某一行，
+
+我們經常會將數據源放在DataTable裡面,但是有時候也需要移除不想要的行,下面的代碼告訴你們
+
+　　　　　　DataTable dts；
+                DataRow[] foundRow;
+                foundRow = dts.Select("ID=99", "");
+                foreach (DataRow row in foundRow)
+                {
+                    dts.Rows.Remove(row);
+                }
+
+其實就是用DataTable的Select方法
+
+上面就是如何Datatable中某一行的id為99，就移除這一行,id為字段名
+
+
+
+
+
+
+        //從沒被用到過
+        bool IsInELP(Point Cusorpostion, Point ElpCenter, int radius)
+        {
+            int elpX = ElpCenter.X;
+            int elpY = ElpCenter.Y;
+            int csX = Cusorpostion.X;
+            int csY = Cusorpostion.Y;
+            if (!((elpX - csX) * (elpX - csX) + (elpY - csY) * (elpY - csY) >= radius * radius))
+            {
+                richTextBox1.Text += "真";
+                return true;
+            }
+            else
+            {
+                richTextBox1.Text += "假";
+                return false;
+            }
+        }
+
+
+
+
+
+
 test 下載
 
 源码及Demo下载地址：http://www.chungen90.com/?news_2/
