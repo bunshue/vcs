@@ -15,6 +15,9 @@ namespace vcs_test_all_04_Font
     {
         int WordSize;
         int SelectFont;
+
+        string sample_string = "流水落花春去也，天上人間。ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()";
+
         public Form1()
         {
             InitializeComponent();
@@ -29,6 +32,16 @@ namespace vcs_test_all_04_Font
             SizeLabelFont(label3);
             SizeLabelFont(label4);
             SizeLabelFont(label5);
+
+            // List the font families.
+            InstalledFontCollection fonts = new InstalledFontCollection();
+            foreach (FontFamily font_family in fonts.Families)
+            {
+                listBox2.Items.Add(font_family.Name);
+            }
+
+            // Select the first font.
+            listBox2.SelectedIndex = 0;
         }
 
         // Copy this text into the Label using the biggest font that will fit.
@@ -255,5 +268,54 @@ namespace vcs_test_all_04_Font
             }
 
         }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //指明使用特定字型檔
+            //路徑             
+            string path = @"../../font/金梅重黑浮體白字.ttf";
+            //讀取字體文件             
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            pfc.AddFontFile(path);
+            //實例化字體             
+            Font f = new Font(pfc.Families[0], 40);
+            //設置字體            
+            richTextBox2.Font = f;
+
+        }
+
+        private void DisPlaySelectedFont(object sender, EventArgs e)
+        {
+            // Compose the font style.
+            FontStyle font_style = FontStyle.Regular;
+            if (chkBold.Checked) font_style |= FontStyle.Bold;
+            if (chkItalic.Checked) font_style |= FontStyle.Italic;
+            if (chkUnderline.Checked) font_style |= FontStyle.Underline;
+            if (chkStrikeout.Checked) font_style |= FontStyle.Strikeout;
+
+            // Get the font size.
+            float font_size = 8;
+            try
+            {
+                font_size = float.Parse(txtSize.Text);
+            }
+            catch
+            {
+            }
+
+            // Get the font family name.
+            string family_name = "Times New Roman";
+            if (!(listBox2.SelectedItem == null))
+            {
+                family_name = listBox2.SelectedItem.ToString();
+            }
+
+            // Set the sample's font.
+            richTextBox2.Font = new Font(family_name, font_size, font_style);
+            richTextBox2.Text = "字型: " + family_name + Environment.NewLine + sample_string;
+        }
+
+
+
     }
 }

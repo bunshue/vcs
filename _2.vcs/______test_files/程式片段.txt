@@ -1,4 +1,42 @@
 
+灰階 與 亮度 的差異
+
+黑白圖片 講 灰階, 最黑是0, 最亮是255, 只有黑白兩色
+彩色圖片 講 亮度, 最暗是0, 最亮是255, 有各種顏色
+
+灰階 和 亮度(Y) 在黑白圖片上 是一樣的
+彩色圖片只有亮度(Y) 
+
+黑白圖片的每一個點 R=G=B=Y
+彩色圖片上 RGBY都是不一樣的
+
+剛剛做了實驗
+
+彩色圖片經過適當的轉換成黑白照片 彩色圖片的亮度Y 會等於 轉換之後黑白照片的RGBY的值
+
+但是 這跟轉換公式有關 轉換公式不同 就不是以上結果
+
+如果轉換公式可靠的話 確實是可以把 亮度 拿來當 灰階 用的
+
+晚些時候 我再寄個圖給你看
+ 
+  
+
+如附圖
+
+左邊是原本彩色 中間是RGBY值
+
+彩色經過某轉轉換成黑白 畫在右邊
+
+你再用工具去量右邊黑白圖片的亮度 是不是等於彩色時的亮度Y
+
+所以
+
+只要能確保轉換公式可靠
+
+彩色的亮度 = 黑白的灰階
+
+
 
 
 gmap+
@@ -5288,6 +5326,23 @@ public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+/// <summary> 
+ /// 生成隨機字符串 
+ /// </summary> 
+ private class RandomStringGenerator 
+ { 
+     static readonly Random r = new Random(); 
+     const string _chars = "0123456789"; 
+     public static string GetRandomString() 
+     { 
+         char[] buffer = new char[5]; 
+         for (int i = 0; i < 5; i++) 
+         { 
+             buffer[i] = _chars[r.Next(_chars.Length)]; 
+          } 
+          return new string(buffer); 
+      } 
+ }
 
 
 

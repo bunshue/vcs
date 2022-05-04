@@ -105,6 +105,88 @@ namespace vcs_ColorMap
 "gray（灰）","dark red（暗紅）","copper（銅色）","aquamarine（碧綠）"};
 
 
+        public struct RGB
+        {
+            private byte _r;
+            private byte _g;
+            private byte _b;
+
+            public RGB(byte r, byte g, byte b)
+            {
+                this._r = r;
+                this._g = g;
+                this._b = b;
+            }
+
+            public byte R
+            {
+                get { return this._r; }
+                set { this._r = value; }
+            }
+
+            public byte G
+            {
+                get { return this._g; }
+                set { this._g = value; }
+            }
+
+            public byte B
+            {
+                get { return this._b; }
+                set { this._b = value; }
+            }
+
+            public bool Equals(RGB rgb)
+            {
+                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
+            }
+        }
+
+        public struct YUV
+        {
+            private double _y;
+            private double _u;
+            private double _v;
+
+            public YUV(double y, double u, double v)
+            {
+                this._y = y;
+                this._u = u;
+                this._v = v;
+            }
+
+            public double Y
+            {
+                get { return this._y; }
+                set { this._y = value; }
+            }
+
+            public double U
+            {
+                get { return this._u; }
+                set { this._u = value; }
+            }
+
+            public double V
+            {
+                get { return this._v; }
+                set { this._v = value; }
+            }
+
+            public bool Equals(YUV yuv)
+            {
+                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
+            }
+        }
+
+        public static YUV RGBToYUV(RGB rgb)
+        {
+            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
+            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
+            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
+
+            return new YUV(y, u, v);
+        }
 
         public Form1()
         {
@@ -141,24 +223,47 @@ namespace vcs_ColorMap
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int w = pictureBox1.ClientSize.Width;
-            int h = pictureBox1.ClientSize.Height;
+            int W = 600;
+            int H = 700;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
 
             g.Clear(Color.White);
             Brush b;
             int i;
             int N = rgb_array2.Length / 3;
             int hh = 50;
-            int border = 20;
+            int border = 40;
+
+            string str = "R   G   B   Y";
+
+            i = 0;
+            g.DrawString(str, new Font("標楷體", 18), new SolidBrush(Color.Blue), new PointF(border + 160, i * hh + border - 30));
 
             for (i = 0; i < N; i++)
             {
                 b = new SolidBrush(Color.FromArgb(255, rgb_array2[i, 0], rgb_array2[i, 1], rgb_array2[i, 2]));
-                //rgb_array
-                //g.FillRectangle(b, 0, i * 50, 300, 50);
-                g.FillRectangle(b, border, i * hh + border, w - border * 2, hh);
-            }
+                g.FillRectangle(b, border, i * hh + border, W / 4, hh);
 
+                RGB pp = new RGB((byte)rgb_array2[i, 0], (byte)rgb_array2[i, 1], (byte)rgb_array2[i, 2]);
+                YUV yyy = new YUV();
+                yyy = RGBToYUV(pp);
+
+                str = rgb_array2[i, 0].ToString("D3") + " " + rgb_array2[i, 1].ToString("D3") + " " + rgb_array2[i, 2].ToString("D3") + " " + ((int)yyy.Y).ToString("D3");
+                g.DrawString(str, new Font("標楷體", 18), new SolidBrush(Color.Blue), new PointF(border + 150, i * hh + border));
+
+                byte rrr = (byte)rgb_array2[i, 0];
+                byte ggg = (byte)rgb_array2[i, 1];
+                byte bbb = (byte)rgb_array2[i, 2];
+
+                int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
+                Color zz = Color.FromArgb(255, Gray, Gray, Gray);
+
+                b = new SolidBrush(zz);
+                g.FillRectangle(b, border + 350, i * hh + border, W / 4, hh);
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         /*
@@ -231,4 +336,3 @@ namespace vcs_ColorMap
         }
     }
 }
-

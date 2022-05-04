@@ -55,8 +55,19 @@
             this.comboBox_font = new System.Windows.Forms.ComboBox();
             this.button12 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkStrikeout = new System.Windows.Forms.CheckBox();
+            this.chkUnderline = new System.Windows.Forms.CheckBox();
+            this.chkItalic = new System.Windows.Forms.CheckBox();
+            this.chkBold = new System.Windows.Forms.CheckBox();
+            this.txtSize = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button13 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -220,14 +231,14 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(870, 51);
+            this.listBox1.Location = new System.Drawing.Point(762, 51);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(219, 316);
             this.listBox1.TabIndex = 15;
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(870, 12);
+            this.button10.Location = new System.Drawing.Point(762, 12);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(219, 23);
             this.button10.TabIndex = 16;
@@ -237,7 +248,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(870, 383);
+            this.richTextBox1.Location = new System.Drawing.Point(762, 383);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(219, 304);
             this.richTextBox1.TabIndex = 17;
@@ -348,16 +359,126 @@
             this.groupBox2.Controls.Add(this.checkBox3);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(822, 359);
+            this.groupBox2.Size = new System.Drawing.Size(738, 359);
             this.groupBox2.TabIndex = 50;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "字型";
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 12;
+            this.listBox2.Location = new System.Drawing.Point(1108, 51);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(219, 316);
+            this.listBox2.TabIndex = 51;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.DisPlaySelectedFont);
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(1108, 383);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(219, 304);
+            this.richTextBox2.TabIndex = 52;
+            this.richTextBox2.Text = "流水落花春去也，天上人間。ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^" +
+                "&*()-=_+[]\\{}|;\':\",./<>?`~\n\n";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox3.Controls.Add(this.chkStrikeout);
+            this.groupBox3.Controls.Add(this.chkUnderline);
+            this.groupBox3.Controls.Add(this.chkItalic);
+            this.groupBox3.Controls.Add(this.chkBold);
+            this.groupBox3.Controls.Add(this.txtSize);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Location = new System.Drawing.Point(999, 51);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox3.Size = new System.Drawing.Size(103, 316);
+            this.groupBox3.TabIndex = 53;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Properties";
+            // 
+            // chkStrikeout
+            // 
+            this.chkStrikeout.Location = new System.Drawing.Point(27, 114);
+            this.chkStrikeout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkStrikeout.Name = "chkStrikeout";
+            this.chkStrikeout.Size = new System.Drawing.Size(88, 14);
+            this.chkStrikeout.TabIndex = 11;
+            this.chkStrikeout.Text = "Strikeout";
+            this.chkStrikeout.CheckedChanged += new System.EventHandler(this.DisPlaySelectedFont);
+            // 
+            // chkUnderline
+            // 
+            this.chkUnderline.Location = new System.Drawing.Point(27, 91);
+            this.chkUnderline.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkUnderline.Name = "chkUnderline";
+            this.chkUnderline.Size = new System.Drawing.Size(88, 14);
+            this.chkUnderline.TabIndex = 10;
+            this.chkUnderline.Text = "Underline";
+            this.chkUnderline.CheckedChanged += new System.EventHandler(this.DisPlaySelectedFont);
+            // 
+            // chkItalic
+            // 
+            this.chkItalic.Location = new System.Drawing.Point(27, 70);
+            this.chkItalic.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkItalic.Name = "chkItalic";
+            this.chkItalic.Size = new System.Drawing.Size(88, 14);
+            this.chkItalic.TabIndex = 9;
+            this.chkItalic.Text = "Italic";
+            this.chkItalic.CheckedChanged += new System.EventHandler(this.DisPlaySelectedFont);
+            // 
+            // chkBold
+            // 
+            this.chkBold.Location = new System.Drawing.Point(27, 47);
+            this.chkBold.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkBold.Name = "chkBold";
+            this.chkBold.Size = new System.Drawing.Size(88, 14);
+            this.chkBold.TabIndex = 8;
+            this.chkBold.Text = "Bold";
+            this.chkBold.CheckedChanged += new System.EventHandler(this.DisPlaySelectedFont);
+            // 
+            // txtSize
+            // 
+            this.txtSize.Location = new System.Drawing.Point(59, 18);
+            this.txtSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSize.Name = "txtSize";
+            this.txtSize.Size = new System.Drawing.Size(32, 22);
+            this.txtSize.TabIndex = 7;
+            this.txtSize.Text = "30";
+            this.txtSize.TextChanged += new System.EventHandler(this.DisPlaySelectedFont);
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(19, 18);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 14);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Size";
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(999, 383);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(103, 65);
+            this.button13.TabIndex = 54;
+            this.button13.Text = "指明使用特定字型檔";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1101, 699);
+            this.ClientSize = new System.Drawing.Size(1343, 699);
+            this.Controls.Add(this.button13);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.richTextBox2);
+            this.Controls.Add(this.listBox2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.comboBox_font);
@@ -372,6 +493,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -405,6 +528,16 @@
         private System.Windows.Forms.ComboBox comboBox_font;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        internal System.Windows.Forms.CheckBox chkStrikeout;
+        internal System.Windows.Forms.CheckBox chkUnderline;
+        internal System.Windows.Forms.CheckBox chkItalic;
+        internal System.Windows.Forms.CheckBox chkBold;
+        internal System.Windows.Forms.TextBox txtSize;
+        internal System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button13;
     }
 }
 

@@ -13,36 +13,21 @@ namespace vcs_Draw_Path
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         private Dictionary<int, PathSNode> Nodes = null;
         private Dictionary<string, PathSLink> Links = null;
         private PathSNode Root = null;
         private bool GotPathTree = false;
         private PathSNode Destination = null;
-
         private const float RADIUS = 10;
         private const float RADIUS_SQUARED = RADIUS * RADIUS;
 
-        // Exit.
-        private void mnuFileExit_Click(object sender, EventArgs e)
+        public Form1()
         {
-            this.Close();
+            InitializeComponent();
         }
 
-        // Load a network file.
-        private void mnuFileOpen_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            if (dlgNet.ShowDialog() == DialogResult.OK)
-            {
-                LoadNetwork(dlgNet.FileName);
-
-                // Display the network.
-                this.Refresh();
-            }
         }
 
         // Load the network data from a file with format:
@@ -407,5 +392,44 @@ namespace vcs_Draw_Path
             // Redraw the network.
             this.Refresh();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string net_filename = @"../../net/net1.net";
+            LoadNetwork(net_filename);
+
+            // Display the network.
+            this.Refresh();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string net_filename = @"../../net/net1a.net";
+            LoadNetwork(net_filename);
+
+            // Display the network.
+            this.Refresh();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string net_filename = @"../../net/net2.net";
+            LoadNetwork(net_filename);
+
+            // Display the network.
+            this.Refresh();
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string net_filename = @"../../net/net3.net";
+            LoadNetwork(net_filename);
+
+            // Display the network.
+            this.Refresh();
+
+        }
+
     }
 }

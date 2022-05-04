@@ -404,6 +404,32 @@ namespace vcs_FFMPEG
         private void button7_Click(object sender, EventArgs e)
         {
             //test 3
+            //
+
+            string filename1 = @"D:\vcs\_烏龍派出所\_烏龍派出所151~200\烏龍派出所181(日語).mp4";
+            string filename2 = @"D:\vcs\_烏龍派出所\_烏龍派出所151~200\烏龍派出所181(日語)aaaaaaaaaaaa.mp4";
+
+            //要將視頻升級到1080p，請輸入：
+
+
+            string cmdParams = String.Format("-i {0} -vf scale = 1920x1080:flags = lanczos {1}",filename1, filename2);
+
+            //ffmpeg -i {0} -vf scale = 1920x1080：flags = lanczos {1}
+
+
+            //要升級到4K視頻，請輸入：
+            //ffmpeg -i input.mp4 -vf scale = 3840x2560：flags = lanczos -c：v libx264 -preset slow -crf 21 output_compress_4k.mp4
+
+
+
+
+
+            // Execute command to let FFMPEG extract the frame
+            Execute(ffmpeg, cmdParams);
+
+
+
+
 
         }
 

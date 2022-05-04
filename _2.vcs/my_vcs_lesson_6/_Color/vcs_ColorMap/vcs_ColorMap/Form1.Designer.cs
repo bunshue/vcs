@@ -42,15 +42,15 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(262, 680);
+            this.pictureBox1.Size = new System.Drawing.Size(600, 700);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(404, 12);
+            this.button1.Location = new System.Drawing.Point(729, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 93);
+            this.button1.Size = new System.Drawing.Size(97, 93);
             this.button1.TabIndex = 2;
             this.button1.Text = "DrawColorMap";
             this.button1.UseVisualStyleBackColor = true;
@@ -58,9 +58,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(404, 138);
+            this.button2.Location = new System.Drawing.Point(729, 111);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 93);
+            this.button2.Size = new System.Drawing.Size(97, 93);
             this.button2.TabIndex = 3;
             this.button2.Text = "DrawColorMap";
             this.button2.UseVisualStyleBackColor = true;
@@ -68,9 +68,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(404, 258);
+            this.button3.Location = new System.Drawing.Point(729, 210);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 93);
+            this.button3.Size = new System.Drawing.Size(97, 93);
             this.button3.TabIndex = 4;
             this.button3.Text = "列舉系統的所有Color並以ComboBox顯示";
             this.button3.UseVisualStyleBackColor = true;
@@ -81,7 +81,7 @@
             this.comboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBox1.Font = new System.Drawing.Font("新細明體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(534, 12);
+            this.comboBox1.Location = new System.Drawing.Point(841, 12);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(290, 50);
             this.comboBox1.TabIndex = 5;
@@ -89,9 +89,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(404, 382);
+            this.button4.Location = new System.Drawing.Point(729, 309);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 93);
+            this.button4.Size = new System.Drawing.Size(97, 93);
             this.button4.TabIndex = 6;
             this.button4.Text = "System Color";
             this.button4.UseVisualStyleBackColor = true;
@@ -99,7 +99,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(534, 102);
+            this.richTextBox1.Location = new System.Drawing.Point(841, 102);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(290, 590);
             this.richTextBox1.TabIndex = 7;
@@ -109,7 +109,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(895, 739);
+            this.ClientSize = new System.Drawing.Size(1143, 739);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.comboBox1);
