@@ -174,10 +174,60 @@ namespace vcs_Draw_GraphicsPath
         private void button5_Click(object sender, EventArgs e)
         {
 
+            //畫圖形路徑
+            //繪制圖形路徑
+            //路徑是通過組合直線、矩形和簡單的曲線而形成的。
+            //在GDI+中，GraphicsPath對象允許將基本構造塊收集到一個單元中，調用一次Graphics類的DrawPath方法，就可以繪制出整個單元的直線、矩形、多邊形和曲線。
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            GraphicsPath gp = new GraphicsPath();
+            Pen p = new Pen(Color.Blue, 1);
+            Point[] myPoints = { new Point(15, 30), new Point(30, 40), new Point(50, 30) };
+            gp.AddArc(15, 20, 80, 50, 210, 120);
+            gp.StartFigure();
+            gp.AddCurve(myPoints);
+            gp.AddString("圖形路徑", new FontFamily("標楷體"), (int)FontStyle.Underline, 50, new PointF(20, 50), new StringFormat());
+            gp.AddPie(180, 20, 80, 50, 210, 120);
+            g.DrawPath(p, gp);
+
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            Graphics g = pictureBox1.CreateGraphics();
+
+            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+
+            Point p1 = new Point(10, 20); // 直線的兩端
+            Point p2 = new Point(100, 20);
+
+            //GraphicsPath - AddLine() 頭尾相連的兩條直線
+            gp.AddLine(p1, p2); // 將 直線 加入到 GraphicsPath物件
+            //gp.AddLine(10, 20, 100, 20);  same
+
+            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
+
+            //gp.CloseFigure(); // 先封閉 第一條直線
+
+            Point p3 = new Point(10, 50); // 直線的兩端
+            Point p4 = new Point(100, 50);
+            gp.AddLine(p3, p4); // 將第二條直線 加入到 GraphicsPath物件
+
+            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
+
+            /*
+            //GraphicsPath - AddLines() 一系列的直線
+            //GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+            Point[] pt = new Point[3];  // 點陣列
+            pt[0] = new Point(20, 120);
+            pt[1] = new Point(120, 20);
+            pt[2] = new Point(220, 120);
+
+            gp.AddLines(pt); // 將 一系列的直線 加入到 GraphicsPath物件
+            //gp.CloseFigure(); // 封閉 該形狀
+
+            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
+            */
 
         }
 

@@ -116,12 +116,12 @@
             this.button71 = new System.Windows.Forms.Button();
             this.bt_reset = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bt_long0 = new System.Windows.Forms.Button();
-            this.bt_long1 = new System.Windows.Forms.Button();
-            this.bt_long2 = new System.Windows.Forms.Button();
-            this.bt_long3 = new System.Windows.Forms.Button();
-            this.bt_long4 = new System.Windows.Forms.Button();
             this.bt_long5 = new System.Windows.Forms.Button();
+            this.bt_long4 = new System.Windows.Forms.Button();
+            this.bt_long3 = new System.Windows.Forms.Button();
+            this.bt_long2 = new System.Windows.Forms.Button();
+            this.bt_long1 = new System.Windows.Forms.Button();
+            this.bt_long0 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -517,6 +517,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(135, 45);
             this.button30.TabIndex = 60;
+            this.button30.Text = "柱狀圖";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -527,6 +528,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(135, 45);
             this.button31.TabIndex = 61;
+            this.button31.Text = "折線圖";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -537,6 +539,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(135, 45);
             this.button32.TabIndex = 62;
+            this.button32.Text = "使用GDI畫坐標圖(支持負值)";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -1052,49 +1055,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "耗時久";
             // 
-            // bt_long0
+            // bt_long5
             // 
-            this.bt_long0.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_long0.Location = new System.Drawing.Point(6, 32);
-            this.bt_long0.Name = "bt_long0";
-            this.bt_long0.Size = new System.Drawing.Size(135, 45);
-            this.bt_long0.TabIndex = 108;
-            this.bt_long0.Text = "百葉窗效果";
-            this.bt_long0.UseVisualStyleBackColor = true;
-            this.bt_long0.Click += new System.EventHandler(this.bt_long0_Click);
-            // 
-            // bt_long1
-            // 
-            this.bt_long1.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_long1.Location = new System.Drawing.Point(147, 32);
-            this.bt_long1.Name = "bt_long1";
-            this.bt_long1.Size = new System.Drawing.Size(135, 45);
-            this.bt_long1.TabIndex = 109;
-            this.bt_long1.Text = "任意角度旋轉圖片";
-            this.bt_long1.UseVisualStyleBackColor = true;
-            this.bt_long1.Click += new System.EventHandler(this.bt_long1_Click);
-            // 
-            // bt_long2
-            // 
-            this.bt_long2.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_long2.Location = new System.Drawing.Point(288, 32);
-            this.bt_long2.Name = "bt_long2";
-            this.bt_long2.Size = new System.Drawing.Size(135, 45);
-            this.bt_long2.TabIndex = 110;
-            this.bt_long2.Text = "以四周擴散形式顯示圖片";
-            this.bt_long2.UseVisualStyleBackColor = true;
-            this.bt_long2.Click += new System.EventHandler(this.bt_long2_Click);
-            // 
-            // bt_long3
-            // 
-            this.bt_long3.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_long3.Location = new System.Drawing.Point(429, 32);
-            this.bt_long3.Name = "bt_long3";
-            this.bt_long3.Size = new System.Drawing.Size(135, 45);
-            this.bt_long3.TabIndex = 111;
-            this.bt_long3.Text = "圖片的上下對接顯示";
-            this.bt_long3.UseVisualStyleBackColor = true;
-            this.bt_long3.Click += new System.EventHandler(this.bt_long3_Click);
+            this.bt_long5.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long5.Location = new System.Drawing.Point(711, 32);
+            this.bt_long5.Name = "bt_long5";
+            this.bt_long5.Size = new System.Drawing.Size(135, 45);
+            this.bt_long5.TabIndex = 113;
+            this.bt_long5.UseVisualStyleBackColor = true;
+            this.bt_long5.Click += new System.EventHandler(this.bt_long5_Click);
             // 
             // bt_long4
             // 
@@ -1107,15 +1076,49 @@
             this.bt_long4.UseVisualStyleBackColor = true;
             this.bt_long4.Click += new System.EventHandler(this.bt_long4_Click);
             // 
-            // bt_long5
+            // bt_long3
             // 
-            this.bt_long5.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_long5.Location = new System.Drawing.Point(711, 32);
-            this.bt_long5.Name = "bt_long5";
-            this.bt_long5.Size = new System.Drawing.Size(135, 45);
-            this.bt_long5.TabIndex = 113;
-            this.bt_long5.UseVisualStyleBackColor = true;
-            this.bt_long5.Click += new System.EventHandler(this.bt_long5_Click);
+            this.bt_long3.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long3.Location = new System.Drawing.Point(429, 32);
+            this.bt_long3.Name = "bt_long3";
+            this.bt_long3.Size = new System.Drawing.Size(135, 45);
+            this.bt_long3.TabIndex = 111;
+            this.bt_long3.Text = "圖片的上下對接顯示";
+            this.bt_long3.UseVisualStyleBackColor = true;
+            this.bt_long3.Click += new System.EventHandler(this.bt_long3_Click);
+            // 
+            // bt_long2
+            // 
+            this.bt_long2.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long2.Location = new System.Drawing.Point(288, 32);
+            this.bt_long2.Name = "bt_long2";
+            this.bt_long2.Size = new System.Drawing.Size(135, 45);
+            this.bt_long2.TabIndex = 110;
+            this.bt_long2.Text = "以四周擴散形式顯示圖片";
+            this.bt_long2.UseVisualStyleBackColor = true;
+            this.bt_long2.Click += new System.EventHandler(this.bt_long2_Click);
+            // 
+            // bt_long1
+            // 
+            this.bt_long1.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long1.Location = new System.Drawing.Point(147, 32);
+            this.bt_long1.Name = "bt_long1";
+            this.bt_long1.Size = new System.Drawing.Size(135, 45);
+            this.bt_long1.TabIndex = 109;
+            this.bt_long1.Text = "任意角度旋轉圖片";
+            this.bt_long1.UseVisualStyleBackColor = true;
+            this.bt_long1.Click += new System.EventHandler(this.bt_long1_Click);
+            // 
+            // bt_long0
+            // 
+            this.bt_long0.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long0.Location = new System.Drawing.Point(6, 32);
+            this.bt_long0.Name = "bt_long0";
+            this.bt_long0.Size = new System.Drawing.Size(135, 45);
+            this.bt_long0.TabIndex = 108;
+            this.bt_long0.Text = "百葉窗效果";
+            this.bt_long0.UseVisualStyleBackColor = true;
+            this.bt_long0.Click += new System.EventHandler(this.bt_long0_Click);
             // 
             // Form1
             // 

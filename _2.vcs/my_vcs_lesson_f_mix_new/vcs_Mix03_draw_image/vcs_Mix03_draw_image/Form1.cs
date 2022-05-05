@@ -301,84 +301,11 @@ namespace vcs_Mix03_draw_image
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format24bppRgb);
-            Graphics g = Graphics.FromImage(bitmap1);
-            //Graphics g = this.CreateGraphics();
-            g.Clear(Color.White);
-            Font font = new Font(Font.Name, 11);
-            SolidBrush brush = new SolidBrush(Color.Black);
-            Pen pen = new Pen(Color.Black);
-            pen.EndCap = LineCap.ArrowAnchor;
-            pen.DashStyle = DashStyle.Solid;
-            //坐标轴
-            Point pCenter = new Point(300, 260);
-            g.DrawLine(pen, new Point(pCenter.X - 200, pCenter.Y), new Point(pCenter.X + 200, pCenter.Y));//x
-            g.DrawLine(pen, new Point(pCenter.X, pCenter.Y + 200), new Point(pCenter.X, pCenter.Y - 200));//y            
-            int iX = 30;
-            //轴标格
-            for (int i = 0; i < 5; i++)
-            {
-                g.DrawLine(Pens.Black, new Point(pCenter.X - iX * i, pCenter.Y), new Point(pCenter.X - iX * i, pCenter.Y - 4));//x
-                g.DrawString((-i).ToString(), font, brush, new PointF(pCenter.X - iX * i, pCenter.Y));
-                g.DrawLine(Pens.Black, new Point(pCenter.X + iX * i, pCenter.Y), new Point(pCenter.X + iX * i, pCenter.Y - 4));//x
-                g.DrawString(i.ToString(), font, brush, new PointF(pCenter.X + iX * i, pCenter.Y));
-                g.DrawLine(Pens.Black, new Point(pCenter.X, pCenter.Y - iX * i), new Point(pCenter.X + 4, pCenter.Y - iX * i));//y
-                g.DrawString(i.ToString(), font, brush, new PointF(pCenter.X, pCenter.Y - iX * i));
-                g.DrawLine(Pens.Black, new Point(pCenter.X, pCenter.Y + iX * i), new Point(pCenter.X + 4, pCenter.Y + iX * i));//y
-                g.DrawString((-i).ToString(), font, brush, new PointF(pCenter.X, pCenter.Y + iX * i));
-            }
-
-            StringFormat sf = new StringFormat();
-            sf.Alignment = StringAlignment.Far;
-            g.DrawString("x", font, brush, new PointF(pCenter.X + 200, pCenter.Y));
-            g.DrawString("y", font, brush, new PointF(pCenter.X, pCenter.Y - 200));
-            g.DrawString("0", font, brush, new PointF(pCenter.X, pCenter.Y));
-            //定义比例尺
-            int BX = 4;
-            int BY = 4;
-            Point new1 = getNewPoint(new Point(200, 300), pCenter, BX, BY);
-            Point new2 = getNewPoint(new Point(-300, 400), pCenter, BX, BY);
-            Point new3 = getNewPoint(new Point(-400, -500), pCenter, BX, BY);
-            Point new4 = getNewPoint(new Point(500, -300), pCenter, BX, BY);
-            //g.DrawLine(Pens.Black, pCenter, new1);
-            g.DrawArc(Pens.Black, new1.X, new1.Y, 1, 1, 45.0F, 360.0F);
-            g.DrawString("p1", font, brush, new PointF(new1.X, new1.Y));
-            g.DrawArc(Pens.Black, new2.X, new2.Y, 1, 1, 45.0F, 360.0F);
-            g.DrawString("p2", font, brush, new PointF(new2.X, new2.Y));
-            g.DrawArc(Pens.Black, new3.X, new3.Y, 1, 1, 45.0F, 360.0F);
-            g.DrawString("p3", font, brush, new PointF(new3.X, new3.Y));
-            g.DrawArc(Pens.Black, new4.X, new4.Y, 1, 1, 45.0F, 360.0F);
-            g.DrawString("p4", font, brush, new PointF(new4.X, new4.Y));
-            g.DrawLine(Pens.Black, new1, new2);
-            g.DrawLine(Pens.Black, new2, new3);
-            g.DrawLine(Pens.Black, new3, new4);
-            g.DrawLine(Pens.Black, new4, new1);
-            bitmap1.Save("aaa.bmp");
-
-            pictureBox1.Image = bitmap1;
-            g.Dispose();
-
-        }
-
-
-
-        Point getNewPoint(Point p, Point pZero, int bx, int by)
-        {
-            Point myp = new Point();
-            myp.X = pZero.X + p.X / bx;
-            if (p.Y > 0)
-                myp.Y = pZero.Y - Math.Abs(p.Y / by);
-            else
-                myp.Y = pZero.Y + Math.Abs(p.Y / by);
-            return myp;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -809,293 +736,16 @@ namespace vcs_Mix03_draw_image
             //g.Dispose();
 
             //Response.Write("<br>" + MyDc.intData.ToString());
-
-
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format24bppRgb);
-           Graphics g = Graphics.FromImage(bitmap1);
-            //Graphics g = this.CreateGraphics();
-            g.Clear(Color.White);
-
-
-
-
-            //畫柱狀圖
-
-
-            Font f = new Font("宋體", 24, FontStyle.Regular);
-            Pen p = new Pen(Color.Blue);
-            g.DrawString("報名及考試統計柱狀圖", f, p.Brush, 200, 20);
-
-            //畫表格
-            for (int i = 0; i <= 9; i++)
-            {
-                g.DrawLine(p, 30, 90 + 31 * i, 620, 90 + 31 * i);
-            }
-            for (int i = 1; i <= 14; i++)
-            {
-                g.DrawLine(p, 30 + 42 * i, 60, 30 + 42 * i, 370);
-            }
-
-            Pen MyPen = new Pen(Color.Blue, 2);
-            Point p1 = new Point(30, 60);
-            Point p2 = new Point(30, 370);
-            Point p3 = new Point(30, 370);
-            Point p4 = new Point(620, 370);
-            g.DrawLine(MyPen, p1, p2);
-            g.DrawLine(MyPen, p3, p4);
-
-            //紅色圖形部分
-            Pen drawPen = new Pen(Color.Red, 1);
-            SolidBrush mybrush = new SolidBrush(Color.Red);
-
-            g.DrawRectangle(drawPen, 30 + 21, 370 - 41, 21, 41);
-            g.FillRectangle(mybrush, 30 + 21, 370 - 41, 21, 41);
-
-            g.DrawRectangle(drawPen, 30 + 42 * 2 + 21, 370 - 31 * 4 - 10, 21, 31 * 4 + 10);
-            g.FillRectangle(mybrush, 30 + 42 * 2 + 21, 370 - 31 * 4 - 10, 21, 31 * 4 + 10);
-
-            g.DrawRectangle(drawPen, 30 + 42 * 4 + 21, 370 - 31 * 2 - 20, 21, 31 * 2 + 20);
-            g.FillRectangle(mybrush, 30 + 42 * 4 + 21, 370 - 31 * 2 - 20, 21, 31 * 2 + 20);
-
-            g.DrawRectangle(drawPen, 30 + 42 * 6 + 21, 370 - 31 * 1 - 20, 21, 31 * 1 + 20);
-            g.FillRectangle(mybrush, 30 + 42 * 6 + 21, 370 - 31 * 1 - 20, 21, 31 * 1 + 20);
-
-            g.DrawRectangle(drawPen, 30 + 42 * 8 + 21, 370 - 31 * 5 - 25, 21, 31 * 5 + 25);
-            g.FillRectangle(mybrush, 30 + 42 * 8 + 21, 370 - 31 * 5 - 25, 21, 31 * 5 + 25);
-
-            g.DrawRectangle(drawPen, 30 + 42 * 10 + 21, 370 - 31 * 4 - 7, 21, 31 * 4 + 7);
-            g.FillRectangle(mybrush, 30 + 42 * 10 + 21, 370 - 31 * 4 - 7, 21, 31 * 4 + 7);
-
-            g.DrawRectangle(drawPen, 30 + 42 * 12 + 21, 60, 21, 370 - 60);
-            g.FillRectangle(mybrush, 30 + 42 * 12 + 21, 60, 21, 370 - 60);
-
-
-            //綠色圖形部分
-            Pen drawPen2 = new Pen(Color.Green, 1);
-            SolidBrush brush = new SolidBrush(Color.Green);
-            g.DrawRectangle(drawPen2, 30 + 42, 370 - 31, 21, 31);
-            g.FillRectangle(brush, 30 + 42, 370 - 31, 21, 31);
-
-            g.DrawRectangle(drawPen2, 30 + 42 * 3, 370 - 31 * 2 - 15, 21, 31 * 2 + 15);
-            g.FillRectangle(brush, 30 + 42 * 3, 370 - 31 * 2 - 15, 21, 31 * 2 + 15);
-
-            g.DrawRectangle(drawPen2, 30 + 42 * 5, 370 - 31 - 10, 21, 41);
-            g.FillRectangle(brush, 30 + 42 * 5, 370 - 31 - 10, 21, 41);
-
-            g.DrawRectangle(drawPen2, 30 + 42 * 7, 370 - 16, 21, 16);
-            g.FillRectangle(brush, 30 + 42 * 7, 370 - 16, 21, 16);
-
-            g.DrawRectangle(drawPen2, 30 + 42 * 9, 370 - 31 * 3 - 20, 21, 31 * 3 + 20);
-            g.FillRectangle(brush, 30 + 42 * 9, 370 - 31 * 3 - 20, 21, 31 * 3 + 20);
-
-            g.DrawRectangle(drawPen2, 30 + 42 * 11, 370 - 31 * 1 - 28, 21, 31 * 1 + 28);
-            g.FillRectangle(brush, 30 + 42 * 11, 370 - 31 * 1 - 28, 21, 31 * 1 + 28);
-
-            g.DrawRectangle(drawPen2, 30 + 42 * 13, 370 - 31 * 5 - 15, 21, 31 * 5 + 15);
-            g.FillRectangle(brush, 30 + 42 * 13, 370 - 31 * 5 - 15, 21, 31 * 5 + 15);
-
-            //圖上的文字部分
-            Font font2 = new Font("宋體", 10, FontStyle.Regular);
-            g.DrawString("第一期", font2, p.Brush, 30 + 21, 375);
-            g.DrawString("第二期", font2, p.Brush, 30 + 42 * 2 + 21, 375);
-            g.DrawString("第三期", font2, p.Brush, 30 + 42 * 4 + 21, 375);
-            g.DrawString("第四期", font2, p.Brush, 30 + 42 * 6 + 21, 375);
-            g.DrawString("上半年", font2, p.Brush, 30 + 42 * 8 + 21, 375);
-            g.DrawString("下半年", font2, p.Brush, 30 + 42 * 10 + 21, 375);
-            g.DrawString("全年統計", font2, p.Brush, 30 + 42 * 12 + 21, 375);
-
-            //圖上數位部分
-            g.DrawString("25", font2, p.Brush, 10, 370 - 35);
-            g.DrawString("50", font2, p.Brush, 10, 370 - 35 * 2);
-            g.DrawString("75", font2, p.Brush, 10, 370 - 34 * 3);
-            g.DrawString("100", font2, p.Brush, 5, 370 - 33 * 4);
-            g.DrawString("125", font2, p.Brush, 5, 370 - 33 * 5);
-            g.DrawString("150", font2, p.Brush, 5, 370 - 32 * 6);
-            g.DrawString("175", font2, p.Brush, 5, 370 - 32 * 7);
-            g.DrawString("200", font2, p.Brush, 5, 370 - 32 * 8);
-            g.DrawString("225", font2, p.Brush, 5, 370 - 32 * 9);
-            g.DrawString("250", font2, p.Brush, 5, 370 - 32 * 10);
-
-            //紅色數
-            Pen pen2 = new Pen(Color.Red);
-            g.DrawString("39", font2, pen2.Brush, 30 + 21, 370 - 41 - 15);
-            g.DrawString("111", font2, pen2.Brush, 30 + 42 * 2 + 21, 370 - 31 * 4 - 10 - 15);
-            g.DrawString("71", font2, pen2.Brush, 30 + 42 * 4 + 21, 370 - 31 * 2 - 20 - 15);
-            g.DrawString("40", font2, pen2.Brush, 30 + 42 * 6 + 21, 370 - 31 * 1 - 20 - 15);
-            g.DrawString("150", font2, pen2.Brush, 30 + 42 * 8 + 21, 370 - 31 * 5 - 25 - 15);
-            g.DrawString("111", font2, pen2.Brush, 30 + 42 * 10 + 21, 370 - 31 * 4 - 7 - 15);
-            g.DrawString("261", font2, pen2.Brush, 30 + 42 * 12 + 21, 60 - 15);
-
-
-            //綠色數
-            Pen pen3 = new Pen(Color.Green);
-            g.DrawString("39", font2, pen2.Brush, 30 + 21, 370 - 41 - 15);
-            g.DrawString("111", font2, pen2.Brush, 30 + 42 * 2 + 21, 370 - 31 * 4 - 10 - 15);
-            g.DrawString("71", font2, pen2.Brush, 30 + 42 * 4 + 21, 370 - 31 * 2 - 20 - 15);
-            g.DrawString("40", font2, pen2.Brush, 30 + 42 * 6 + 21, 370 - 31 * 1 - 20 - 15);
-            g.DrawString("150", font2, pen2.Brush, 30 + 42 * 8 + 21, 370 - 31 * 5 - 25 - 15);
-            g.DrawString("111", font2, pen2.Brush, 30 + 42 * 10 + 21, 370 - 31 * 4 - 7 - 15);
-            g.DrawString("261", font2, pen2.Brush, 30 + 42 * 12 + 21, 60 - 15);
-
-
-            //最下面的矩形框
-            g.DrawRectangle(p, 30 + 42 * 2 + 30, 400, 42 * 7, 31 * 2);
-
-            g.DrawRectangle(drawPen, 30 + 42 * 5, 410, 21, 10);
-            g.FillRectangle(mybrush, 30 + 42 * 5, 410, 21, 10);
-            g.DrawString("報名人數", font2, pen2.Brush, 30 + 42 * 6, 410);
-
-            g.DrawRectangle(drawPen2, 30 + 42 * 5, 440, 21, 10);
-            g.FillRectangle(brush, 30 + 42 * 5, 440, 21, 10);
-            g.DrawString("通過人數", font2, pen3.Brush, 30 + 42 * 6, 440);
-
-
-
-
-
-
-
-
-            pictureBox1.Image = bitmap1;
-            g.Dispose();
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format24bppRgb);
-            Graphics g = Graphics.FromImage(bitmap1);
-            //Graphics g = this.CreateGraphics();
-            g.Clear(Color.White);
-
-
-
-
-            //畫折線圖
-
-
-            Font f = new Font("宋體", 24, FontStyle.Regular);
-            Pen p = new Pen(Color.Blue);
-            g.DrawString("報名及考試統計折線圖", f, p.Brush, 200, 20);
-
-            //畫表格
-            for (int i = 0; i <= 9; i++)
-            {
-                g.DrawLine(p, 30, 90 + 31 * i, 620, 90 + 31 * i);
-            }
-            for (int i = 1; i <= 7; i++)
-            {
-                g.DrawLine(p, 30 + 84 * i, 60, 30 + 84 * i, 370);
-            }
-            Pen MyPen = new Pen(Color.Blue, 2);
-            Point p1 = new Point(30, 60);
-            Point p2 = new Point(30, 370);
-            Point p3 = new Point(30, 370);
-            Point p4 = new Point(620, 370);
-            g.DrawLine(MyPen, p1, p2);
-            g.DrawLine(MyPen, p3, p4);
-
-
-            //繪製折線
-            Pen pen1 = new Pen(Color.Red, 2);
-            Pen pen2 = new Pen(Color.Green, 2);
-
-            //紅色折線
-            Point a1, a2, a3, a4, a5, a6, a7;
-            a1 = new Point(30, 370 - 31 - 20);
-            a2 = new Point(30 + 84 * 1, 370 - (31 * 4 + 9));
-            a3 = new Point(30 + 84 * 2, 370 - (31 * 2 + 28));
-            a4 = new Point(30 + 84 * 3, 370 - (31 * 1 + 20));
-            a5 = new Point(30 + 84 * 4, 370 - (31 * 5 + 21));
-            a6 = new Point(30 + 84 * 5, 370 - (31 * 4 + 10));
-            a7 = new Point(30 + 84 * 6, 60);
-            Point[] points = { a1, a2, a3, a4, a5, a6, a7 };
-            g.DrawLines(pen1, points);
-
-            //綠色折線
-            Point b1, b2, b3, b4, b5, b6, b7;
-            b1 = new Point(30, 370 - (31 * 1 + 1));
-            b2 = new Point(30 + 84 * 1, 370 - (31 * 2 + 15));
-            b3 = new Point(30 + 84 * 2, 370 - (31 * 1 + 10));
-            b4 = new Point(30 + 84 * 3, 370 - (31 * 0 + 15));
-            b5 = new Point(30 + 84 * 4, 370 - (31 * 3 + 15));
-            b6 = new Point(30 + 84 * 5, 370 - (31 * 1 + 29));
-            b7 = new Point(30 + 84 * 6, 370 - (31 * 5 + 14));
-            Point[] points2 = { b1, b2, b3, b4, b5, b6, b7 };
-            g.DrawLines(pen2, points2);
-
-            //圖上數位部分
-            Font font2 = new Font("宋體", 10, FontStyle.Regular);
-            g.DrawString("25", font2, pen1.Brush, 10, 370 - 35);
-            g.DrawString("50", font2, pen1.Brush, 10, 370 - 35 * 2);
-            g.DrawString("75", font2, pen1.Brush, 10, 370 - 34 * 3);
-            g.DrawString("100", font2, pen1.Brush, 5, 370 - 33 * 4);
-            g.DrawString("125", font2, pen1.Brush, 5, 370 - 33 * 5);
-            g.DrawString("150", font2, pen1.Brush, 5, 370 - 32 * 6);
-            g.DrawString("175", font2, pen1.Brush, 5, 370 - 32 * 7);
-            g.DrawString("200", font2, pen1.Brush, 5, 370 - 32 * 8);
-            g.DrawString("225", font2, pen1.Brush, 5, 370 - 32 * 9);
-            g.DrawString("250", font2, pen1.Brush, 5, 370 - 32 * 10);
-
-            //文字
-            g.DrawString("第一期", font2, pen1.Brush, 15, 375);
-            g.DrawString("第二期", font2, pen1.Brush, 15 + 84 * 1, 375);
-            g.DrawString("第三期", font2, pen1.Brush, 15 + 84 * 2, 375);
-            g.DrawString("第四期", font2, pen1.Brush, 15 + 84 * 3, 375);
-            g.DrawString("上半年", font2, pen1.Brush, 15 + 84 * 4, 375);
-            g.DrawString("下半年", font2, pen1.Brush, 15 + 84 * 5, 375);
-            g.DrawString("全年統計", font2, pen1.Brush, 15 + 84 * 6, 375);
-
-
-            //折線圖上的數位
-            g.DrawString("39", font2, pen1.Brush, 30, 370 - 31 - 20 - 15);
-            g.DrawString("111", font2, pen1.Brush, 30 + 84 * 1, 370 - (31 * 4 + 9) - 15);
-            g.DrawString("71", font2, pen1.Brush, 30 + 84 * 2, 370 - (31 * 2 + 28) - 15);
-            g.DrawString("40", font2, pen1.Brush, 30 + 84 * 3, 370 - (31 * 1 + 20) - 15);
-            g.DrawString("150", font2, pen1.Brush, 30 + 84 * 4, 370 - (31 * 5 + 21) - 15);
-            g.DrawString("111", font2, pen1.Brush, 30 + 84 * 5, 370 - (31 * 4 + 10) - 15);
-            g.DrawString("261", font2, pen1.Brush, 30 + 84 * 6, 60 - 15);
-
-            g.DrawString("26", font2, pen2.Brush, 30, 370 - (31 * 1 + 1) - 15);
-            g.DrawString("68", font2, pen2.Brush, 30 + 84 * 1, 370 - (31 * 2 + 15) - 15);
-            g.DrawString("35", font2, pen2.Brush, 30 + 84 * 2, 370 - (31 * 1 + 10) - 15);
-            g.DrawString("14", font2, pen2.Brush, 30 + 84 * 3, 370 - (31 * 0 + 15) - 15);
-            g.DrawString("94", font2, pen2.Brush, 30 + 84 * 4, 370 - (31 * 3 + 15) - 15);
-            g.DrawString("49", font2, pen2.Brush, 30 + 84 * 5, 370 - (31 * 1 + 29) - 15);
-            g.DrawString("143", font2, pen2.Brush, 30 + 84 * 6, 370 - (31 * 5 + 14) - 15);
-
-            //最下面的矩形框
-
-            SolidBrush mybrush = new SolidBrush(Color.Red);
-            SolidBrush brush = new SolidBrush(Color.Green);
-
-            g.DrawRectangle(pen1, 30 + 42 * 2 + 30, 400, 42 * 7, 31 * 2);
-
-            g.DrawRectangle(pen1, 30 + 42 * 5, 410, 21, 10);
-            g.FillRectangle(mybrush, 30 + 42 * 5, 410, 21, 10);
-            g.DrawString("報名人數", font2, pen1.Brush, 30 + 42 * 6, 410);
-
-            g.DrawRectangle(pen2, 30 + 42 * 5, 440, 21, 10);
-            g.FillRectangle(brush, 30 + 42 * 5, 440, 21, 10);
-            g.DrawString("通過人數", font2, pen2.Brush, 30 + 42 * 6, 440);
-            
-
-
-
-
-
-
-            pictureBox1.Image = bitmap1;
-            g.Dispose();
-
-
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1187,33 +837,11 @@ namespace vcs_Mix03_draw_image
             g.DrawBezier(p, startX, startY, controlX1, controlY1, controlX2, controlY2, endX, endY);
             //4個Point點分別表示起始點、第一個控制點、第二個控制點和結束點。
 
-
-
-
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-
-            //畫圖形路徑
-            //繪制圖形路徑
-            //路徑是通過組合直線、矩形和簡單的曲線而形成的。
-            //在GDI+中，GraphicsPath對象允許將基本構造塊收集到一個單元中，調用一次Graphics類的DrawPath方法，就可以繪制出整個單元的直線、矩形、多邊形和曲線。
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            GraphicsPath gp = new GraphicsPath();
-            Pen p = new Pen(Color.Blue, 1);
-            Point[] myPoints = { new Point(15, 30), new Point(30, 40), new Point(50, 30) };
-            gp.AddArc(15, 20, 80, 50, 210, 120);
-            gp.StartFigure();
-            gp.AddCurve(myPoints);
-            gp.AddString("圖形路徑", new FontFamily("標楷體"), (int)FontStyle.Underline, 50, new PointF(20, 50), new StringFormat());
-            gp.AddPie(180, 20, 80, 50, 210, 120);
-            g.DrawPath(p, gp);
-
-
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1254,48 +882,11 @@ namespace vcs_Mix03_draw_image
                 }
                 richTextBox1.Text += "\n";
             }
-
-
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
-
-            Point p1 = new Point(10, 20); // 直線的兩端
-            Point p2 = new Point(100, 20);
-
-            //GraphicsPath - AddLine() 頭尾相連的兩條直線
-            gp.AddLine(p1, p2); // 將 直線 加入到 GraphicsPath物件
-            //gp.AddLine(10, 20, 100, 20);  same
-
-            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
-
-            //gp.CloseFigure(); // 先封閉 第一條直線
-
-            Point p3 = new Point(10, 50); // 直線的兩端
-            Point p4 = new Point(100, 50);
-            gp.AddLine(p3, p4); // 將第二條直線 加入到 GraphicsPath物件
-
-            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
-
-            /*
-            //GraphicsPath - AddLines() 一系列的直線
-            //GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
-            Point[] pt = new Point[3];  // 點陣列
-            pt[0] = new Point(20, 120);
-            pt[1] = new Point(120, 20);
-            pt[2] = new Point(220, 120);
-
-            gp.AddLines(pt); // 將 一系列的直線 加入到 GraphicsPath物件
-            //gp.CloseFigure(); // 封閉 該形狀
-
-            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
-            */
         }
 
         private void button24_Click(object sender, EventArgs e)

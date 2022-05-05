@@ -1873,10 +1873,17 @@ namespace vcs_GMap
             }
             else if (rb_location6.Checked == true)
             {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+
                 //北京中華書局
                 //北京市豐臺區太平橋西里38號
                 //39.88244693415653, 116.31404671396393
+                latitude = 39.88244693415653;   //緯度
+                longitude = 116.31404671396393; //經度
+                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+                gMapControl1.Zoom = 12; //當前比例
 
+                update_controls_info();
 
             }
             else if (rb_location7.Checked == true)
@@ -1896,46 +1903,54 @@ namespace vcs_GMap
             else if (rb_location8.Checked == true)
             {
                 //徐蚌會戰
-                //徐蚌會戰
-                //徐州	34.205, 117.283
-                //蚌埠	32.917625, 117.382417
-                //蚌埠市位於東經116°45′-118°04′，北緯32°43′至33°30′之間，其中市區位於東經117°31′-117°11′、北緯33°01′-32°49′之間
-                //海州 = 連雲港市	34.597, 119.222
-                
-
-
-//新安街道	34.36775, 118.34638（转换） 
-
-//碾莊鎮	34.29887, 117.77576（转换） 
-
-//碾莊鎮	34.29887, 117.77576（转换） 
-
-//雙堆集鎮	33.42498, 116.89588
-
-
-
                 string[,] station = null;
 
                 station = new string[,] {
             { "徐州", "34.205", "117.283"},
             { "蚌埠", "32.917625", "117.382417"},
             { "海州", "34.597", "119.222"},
+            { "新安鎮", "34.36775", "118.34638"},
+            { "碾莊", "34.29887", "117.77576"},
+            { "雙堆集", "33.42498", "116.89588"},
             };
 
                 int total_station = station.GetUpperBound(0) + 1;
                 richTextBox1.Text += "total_station = " + total_station.ToString() + "\n";
 
+                double lat_north = -90;
+                double lat_south = 90;
+                double lng_east = -180;
+                double lng_west = 180;
+
+                int i;
+                for (i = 0; i < total_station; i++)
+                {
+                    double lat = double.Parse(station[i, 1]);
+                    double lng = double.Parse(station[i, 2]);
+
+                    if (lat > lat_north)
+                        lat_north = lat;
+                    if (lat < lat_south)
+                        lat_south = lat;
+                    if (lng > lng_east)
+                        lng_east = lng;
+                    if (lng < lng_west)
+                        lng_west = lng;
+                }
+
+                double lat_center = (lat_south + lat_north) / 2;
+                double lng_center = (lng_east + lng_west) / 2;
+
                 gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
 
-                latitude = double.Parse(station[0, 1]);
-                longitude = double.Parse(station[0, 2]);
+                latitude = lat_center;   //緯度
+                longitude = lng_center; //經度
 
                 gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-                gMapControl1.Zoom = 7; //當前比例
+                gMapControl1.Zoom = 8; //當前比例
 
                 update_controls_info();
 
-                int i;
                 for (i = 0; i < total_station; i++)
                 {
                     latitude = double.Parse(station[i, 1]);
@@ -2464,7 +2479,7 @@ namespace vcs_GMap
         {
             //地址解析
             string currentCenterCityName = "南京市";
-            GMapAreaPolygon currentAreaPolygon;
+            //GMapAreaPolygon currentAreaPolygon;
 
             string address = "雨花台";
 
