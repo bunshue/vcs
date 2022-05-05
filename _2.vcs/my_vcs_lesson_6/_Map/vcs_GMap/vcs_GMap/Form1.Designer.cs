@@ -99,6 +99,12 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectMapProvider1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectMapProvider2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectMapProvider3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectMapProvider4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectMapProvider5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectMapProvider6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.rb_km = new System.Windows.Forms.RadioButton();
@@ -116,12 +122,6 @@
             this.bt_test02 = new System.Windows.Forms.Button();
             this.bt_test01 = new System.Windows.Forms.Button();
             this.bt_test00 = new System.Windows.Forms.Button();
-            this.selectMapProvider1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectMapProvider2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectMapProvider3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectMapProvider4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectMapProvider5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectMapProvider6 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -689,7 +689,7 @@
             // rb_location13
             // 
             this.rb_location13.AutoSize = true;
-            this.rb_location13.Location = new System.Drawing.Point(112, 112);
+            this.rb_location13.Location = new System.Drawing.Point(104, 112);
             this.rb_location13.Name = "rb_location13";
             this.rb_location13.Size = new System.Drawing.Size(14, 13);
             this.rb_location13.TabIndex = 12;
@@ -699,7 +699,7 @@
             // rb_location12
             // 
             this.rb_location12.AutoSize = true;
-            this.rb_location12.Location = new System.Drawing.Point(112, 97);
+            this.rb_location12.Location = new System.Drawing.Point(104, 97);
             this.rb_location12.Name = "rb_location12";
             this.rb_location12.Size = new System.Drawing.Size(14, 13);
             this.rb_location12.TabIndex = 11;
@@ -709,7 +709,7 @@
             // rb_location11
             // 
             this.rb_location11.AutoSize = true;
-            this.rb_location11.Location = new System.Drawing.Point(112, 83);
+            this.rb_location11.Location = new System.Drawing.Point(104, 83);
             this.rb_location11.Name = "rb_location11";
             this.rb_location11.Size = new System.Drawing.Size(14, 13);
             this.rb_location11.TabIndex = 10;
@@ -719,27 +719,29 @@
             // rb_location10
             // 
             this.rb_location10.AutoSize = true;
-            this.rb_location10.Location = new System.Drawing.Point(112, 68);
+            this.rb_location10.Location = new System.Drawing.Point(104, 68);
             this.rb_location10.Name = "rb_location10";
-            this.rb_location10.Size = new System.Drawing.Size(14, 13);
+            this.rb_location10.Size = new System.Drawing.Size(83, 16);
             this.rb_location10.TabIndex = 9;
+            this.rb_location10.Text = "烏龍派出所";
             this.rb_location10.UseVisualStyleBackColor = true;
             this.rb_location10.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
             // 
             // rb_location9
             // 
             this.rb_location9.AutoSize = true;
-            this.rb_location9.Location = new System.Drawing.Point(112, 53);
+            this.rb_location9.Location = new System.Drawing.Point(104, 53);
             this.rb_location9.Name = "rb_location9";
-            this.rb_location9.Size = new System.Drawing.Size(14, 13);
+            this.rb_location9.Size = new System.Drawing.Size(59, 16);
             this.rb_location9.TabIndex = 8;
+            this.rb_location9.Text = "盧溝橋";
             this.rb_location9.UseVisualStyleBackColor = true;
             this.rb_location9.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
             // 
             // rb_location8
             // 
             this.rb_location8.AutoSize = true;
-            this.rb_location8.Location = new System.Drawing.Point(112, 37);
+            this.rb_location8.Location = new System.Drawing.Point(104, 37);
             this.rb_location8.Name = "rb_location8";
             this.rb_location8.Size = new System.Drawing.Size(71, 16);
             this.rb_location8.TabIndex = 7;
@@ -750,7 +752,7 @@
             // rb_location7
             // 
             this.rb_location7.AutoSize = true;
-            this.rb_location7.Location = new System.Drawing.Point(112, 19);
+            this.rb_location7.Location = new System.Drawing.Point(104, 19);
             this.rb_location7.Name = "rb_location7";
             this.rb_location7.Size = new System.Drawing.Size(59, 16);
             this.rb_location7.TabIndex = 6;
@@ -761,7 +763,7 @@
             // rb_location6
             // 
             this.rb_location6.AutoSize = true;
-            this.rb_location6.Location = new System.Drawing.Point(20, 112);
+            this.rb_location6.Location = new System.Drawing.Point(13, 112);
             this.rb_location6.Name = "rb_location6";
             this.rb_location6.Size = new System.Drawing.Size(14, 13);
             this.rb_location6.TabIndex = 5;
@@ -771,7 +773,7 @@
             // rb_location5
             // 
             this.rb_location5.AutoSize = true;
-            this.rb_location5.Location = new System.Drawing.Point(20, 98);
+            this.rb_location5.Location = new System.Drawing.Point(13, 98);
             this.rb_location5.Name = "rb_location5";
             this.rb_location5.Size = new System.Drawing.Size(47, 16);
             this.rb_location5.TabIndex = 4;
@@ -782,7 +784,7 @@
             // rb_location4
             // 
             this.rb_location4.AutoSize = true;
-            this.rb_location4.Location = new System.Drawing.Point(20, 85);
+            this.rb_location4.Location = new System.Drawing.Point(13, 85);
             this.rb_location4.Name = "rb_location4";
             this.rb_location4.Size = new System.Drawing.Size(59, 16);
             this.rb_location4.TabIndex = 3;
@@ -793,7 +795,7 @@
             // rb_location3
             // 
             this.rb_location3.AutoSize = true;
-            this.rb_location3.Location = new System.Drawing.Point(20, 68);
+            this.rb_location3.Location = new System.Drawing.Point(13, 68);
             this.rb_location3.Name = "rb_location3";
             this.rb_location3.Size = new System.Drawing.Size(59, 16);
             this.rb_location3.TabIndex = 2;
@@ -804,7 +806,7 @@
             // rb_location2
             // 
             this.rb_location2.AutoSize = true;
-            this.rb_location2.Location = new System.Drawing.Point(20, 51);
+            this.rb_location2.Location = new System.Drawing.Point(13, 51);
             this.rb_location2.Name = "rb_location2";
             this.rb_location2.Size = new System.Drawing.Size(71, 16);
             this.rb_location2.TabIndex = 2;
@@ -815,7 +817,7 @@
             // rb_location1
             // 
             this.rb_location1.AutoSize = true;
-            this.rb_location1.Location = new System.Drawing.Point(20, 34);
+            this.rb_location1.Location = new System.Drawing.Point(13, 34);
             this.rb_location1.Name = "rb_location1";
             this.rb_location1.Size = new System.Drawing.Size(83, 16);
             this.rb_location1.TabIndex = 1;
@@ -827,7 +829,7 @@
             // 
             this.rb_location0.AutoSize = true;
             this.rb_location0.Checked = true;
-            this.rb_location0.Location = new System.Drawing.Point(20, 17);
+            this.rb_location0.Location = new System.Drawing.Point(13, 17);
             this.rb_location0.Name = "rb_location0";
             this.rb_location0.Size = new System.Drawing.Size(47, 16);
             this.rb_location0.TabIndex = 0;
@@ -852,28 +854,28 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem1.Text = "全螢幕";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem2.Text = "量測距離 單程";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem3.Text = "量測距離 連續";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem4.Text = "讀取座標";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
@@ -887,20 +889,62 @@
             this.selectMapProvider5,
             this.selectMapProvider6});
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem5.Text = "地圖種類";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            // 
+            // selectMapProvider1
+            // 
+            this.selectMapProvider1.Name = "selectMapProvider1";
+            this.selectMapProvider1.Size = new System.Drawing.Size(158, 22);
+            this.selectMapProvider1.Text = "正中地圖";
+            this.selectMapProvider1.Click += new System.EventHandler(this.selectMapProvider);
+            // 
+            // selectMapProvider2
+            // 
+            this.selectMapProvider2.Name = "selectMapProvider2";
+            this.selectMapProvider2.Size = new System.Drawing.Size(158, 22);
+            this.selectMapProvider2.Text = "簡中地圖";
+            this.selectMapProvider2.Click += new System.EventHandler(this.selectMapProvider);
+            // 
+            // selectMapProvider3
+            // 
+            this.selectMapProvider3.Name = "selectMapProvider3";
+            this.selectMapProvider3.Size = new System.Drawing.Size(158, 22);
+            this.selectMapProvider3.Text = "地形圖";
+            this.selectMapProvider3.Click += new System.EventHandler(this.selectMapProvider);
+            // 
+            // selectMapProvider4
+            // 
+            this.selectMapProvider4.Name = "selectMapProvider4";
+            this.selectMapProvider4.Size = new System.Drawing.Size(158, 22);
+            this.selectMapProvider4.Text = "衛星地圖";
+            this.selectMapProvider4.Click += new System.EventHandler(this.selectMapProvider);
+            // 
+            // selectMapProvider5
+            // 
+            this.selectMapProvider5.Name = "selectMapProvider5";
+            this.selectMapProvider5.Size = new System.Drawing.Size(158, 22);
+            this.selectMapProvider5.Text = "混合地圖";
+            this.selectMapProvider5.Click += new System.EventHandler(this.selectMapProvider);
+            // 
+            // selectMapProvider6
+            // 
+            this.selectMapProvider6.Name = "selectMapProvider6";
+            this.selectMapProvider6.Size = new System.Drawing.Size(158, 22);
+            this.selectMapProvider6.Text = "腳踏車專用地圖";
+            this.selectMapProvider6.Click += new System.EventHandler(this.selectMapProvider);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem7.Text = "離開";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
@@ -1059,48 +1103,6 @@
             this.bt_test00.Text = "列出省市界資料";
             this.bt_test00.UseVisualStyleBackColor = true;
             this.bt_test00.Click += new System.EventHandler(this.bt_test00_Click);
-            // 
-            // selectMapProvider1
-            // 
-            this.selectMapProvider1.Name = "selectMapProvider1";
-            this.selectMapProvider1.Size = new System.Drawing.Size(158, 22);
-            this.selectMapProvider1.Text = "正中地圖";
-            this.selectMapProvider1.Click += new System.EventHandler(this.selectMapProvider);
-            // 
-            // selectMapProvider2
-            // 
-            this.selectMapProvider2.Name = "selectMapProvider2";
-            this.selectMapProvider2.Size = new System.Drawing.Size(158, 22);
-            this.selectMapProvider2.Text = "簡中地圖";
-            this.selectMapProvider2.Click += new System.EventHandler(this.selectMapProvider);
-            // 
-            // selectMapProvider3
-            // 
-            this.selectMapProvider3.Name = "selectMapProvider3";
-            this.selectMapProvider3.Size = new System.Drawing.Size(158, 22);
-            this.selectMapProvider3.Text = "地形圖";
-            this.selectMapProvider3.Click += new System.EventHandler(this.selectMapProvider);
-            // 
-            // selectMapProvider4
-            // 
-            this.selectMapProvider4.Name = "selectMapProvider4";
-            this.selectMapProvider4.Size = new System.Drawing.Size(158, 22);
-            this.selectMapProvider4.Text = "衛星地圖";
-            this.selectMapProvider4.Click += new System.EventHandler(this.selectMapProvider);
-            // 
-            // selectMapProvider5
-            // 
-            this.selectMapProvider5.Name = "selectMapProvider5";
-            this.selectMapProvider5.Size = new System.Drawing.Size(158, 22);
-            this.selectMapProvider5.Text = "混合地圖";
-            this.selectMapProvider5.Click += new System.EventHandler(this.selectMapProvider);
-            // 
-            // selectMapProvider6
-            // 
-            this.selectMapProvider6.Name = "selectMapProvider6";
-            this.selectMapProvider6.Size = new System.Drawing.Size(158, 22);
-            this.selectMapProvider6.Text = "腳踏車專用地圖";
-            this.selectMapProvider6.Click += new System.EventHandler(this.selectMapProvider);
             // 
             // Form1
             // 

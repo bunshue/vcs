@@ -43,58 +43,6 @@ namespace vcs_PictureObscure
 
         }
 
-        // Open an image file.
-        private void mnuFileOpen_Click(object sender, EventArgs e)
-        {
-            if (ofdFile.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    // Load the image without locking its file.
-                    OriginalImage = LoadBitmapUnlocked(ofdFile.FileName);
-                }
-                catch (Exception ex)
-                {
-                    OriginalImage = null;
-                    picImage.Visible = false;
-                    MessageBox.Show("Error opening file " +
-                        ofdFile.FileName + "\n" + ex.Message);
-                    return;
-                }
-
-                // Make the fuzzy version of the image.
-                MakeFuzzyImage();
-
-                // Display the current image.
-                VisibleImage = new Bitmap(OriginalImage);
-                picImage.Image = VisibleImage;
-                picImage.Visible = true;
-                picImage.Refresh();
-            }
-        }
-
-        // Save the current image.
-        private void mnuFileSaveAs_Click(object sender, EventArgs e)
-        {
-            if (sfdFile.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    SaveImage(VisibleImage, sfdFile.FileName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error saving file " +
-                        sfdFile.FileName + "\n" + ex.Message);
-                }
-            }
-        }
-
-        private void mnuFileExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         // Load a bitmap without locking it.
         private Bitmap LoadBitmapUnlocked(string file_name)
         {
@@ -141,7 +89,7 @@ namespace vcs_PictureObscure
         private bool Selecting = false;
 
         // Start selecting.
-        private void picImage_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             Selecting = true;
             Point1 = e.Location;
@@ -149,21 +97,21 @@ namespace vcs_PictureObscure
         }
 
         // Continue selecting.
-        private void picImage_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             Point2 = e.Location;
-            picImage.Refresh();
+            pictureBox1.Refresh();
         }
 
         // Finish selecting.
-        private void picImage_MouseUp(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             Selecting = false;
             FuzzImagePart();
         }
 
         // Draw the selection rectangle.
-        private void picImage_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             if (!Selecting) return;
             Rectangle rect = new Rectangle(
@@ -195,33 +143,10 @@ namespace vcs_PictureObscure
                     gr.FillRectangle(Brushes.Black, rect);
                 else
                     gr.DrawImage(ObscuredImage, rect, rect, GraphicsUnit.Pixel);
-                picImage.Refresh();
+                pictureBox1.Refresh();
             }
         }
-
-        // Revert to the original image.
-        private void mnuToolsRevert_Click(object sender, EventArgs e)
-        {
-            VisibleImage = new Bitmap(OriginalImage);
-            picImage.Image = VisibleImage;
-        }
-
-        private void mnuToolsParameters_Click(object sender, EventArgs e)
-        {
-            ParametersForm dlg = new ParametersForm();
-            dlg.KernelSize = KernelSize;
-            dlg.lblKernelSize.Text = KernelSize.ToString();
-            dlg.cboStyle.Text = FuzzStyle;
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                KernelSize = dlg.KernelSize;
-                FuzzStyle = dlg.cboStyle.Text;
-
-                // Make the fuzzy version of the image.
-                MakeFuzzyImage();
-            }
-        }
-
+        
         // Make the fuzzy version of the image.
         private void MakeFuzzyImage()
         {
@@ -306,6 +231,84 @@ namespace vcs_PictureObscure
             {
                 MessageBox.Show("Error applying filter\n" + ex.Message);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Open
+            if (ofdFile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // Load the image without locking its file.
+                    OriginalImage = LoadBitmapUnlocked(ofdFile.FileName);
+                }
+                catch (Exception ex)
+                {
+                    OriginalImage = null;
+                    pictureBox1.Visible = false;
+                    MessageBox.Show("Error opening file " +
+                        ofdFile.FileName + "\n" + ex.Message);
+                    return;
+                }
+
+                // Make the fuzzy version of the image.
+                MakeFuzzyImage();
+
+                // Display the current image.
+                VisibleImage = new Bitmap(OriginalImage);
+                pictureBox1.Image = VisibleImage;
+                pictureBox1.Visible = true;
+                pictureBox1.Refresh();
+            }
+
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Save
+            if (sfdFile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    SaveImage(VisibleImage, sfdFile.FileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error saving file " +
+                        sfdFile.FileName + "\n" + ex.Message);
+                }
+            }
+
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //Revert
+            // Revert to the original image.
+            VisibleImage = new Bitmap(OriginalImage);
+            pictureBox1.Image = VisibleImage;
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //Parameter
+            ParametersForm dlg = new ParametersForm();
+            dlg.KernelSize = KernelSize;
+            dlg.lblKernelSize.Text = KernelSize.ToString();
+            dlg.cboStyle.Text = FuzzStyle;
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                KernelSize = dlg.KernelSize;
+                FuzzStyle = dlg.cboStyle.Text;
+
+                // Make the fuzzy version of the image.
+                MakeFuzzyImage();
+            }
+
         }
 
     }

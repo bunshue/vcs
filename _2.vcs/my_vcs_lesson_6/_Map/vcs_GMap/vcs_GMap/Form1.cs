@@ -1939,10 +1939,35 @@ namespace vcs_GMap
             }
             else if (rb_location9.Checked == true)
             {
+                richTextBox1.Text += "盧溝橋\n";
+
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+
+                //盧溝橋
+                latitude = 39.85025;    //緯度
+                longitude = 116.219066; //經度
+                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+                gMapControl1.Zoom = 11; //當前比例
+
+                update_controls_info();
 
             }
             else if (rb_location10.Checked == true)
             {
+                //烏龍派出所
+                //勝鬨橋
+                //勝鬨橋35.661944, 139.775
+                richTextBox1.Text += "烏龍派出所\n";
+
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+
+                //勝鬨橋35.661944, 139.775
+                latitude = 35.661944;   //緯度
+                longitude = 139.775;    //經度
+                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+                gMapControl1.Zoom = 14; //當前比例
+
+                update_controls_info();
 
             }
             else if (rb_location11.Checked == true)

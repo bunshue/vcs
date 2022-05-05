@@ -1,4 +1,90 @@
 
+
+
+
+將一個資料夾中的所有圖片檔案撈出來編號 每隔1分鐘更換一張桌面底圖 寫上時間 循環播放
+
+
+
+
+
+將一個資料夾中的所有圖片檔案撈出來編號 每隔1分鐘更換一張桌面底圖 寫上時間 循環播放
+
+
+
+記住上次程式關閉時的中心位置 及顯示圖片狀態 給下次程式啟動實用
+
+
+
+
+
+
+//要將視頻升級到1080p，請輸入：
+//ffmpeg -i input.mp4 -vf scale = 1920x1080：flags = lanczos output_1080p.mp4
+
+//要升級到4K視頻，請輸入：
+//ffmpeg -i input.mp4 -vf scale = 3840x2560：flags = lanczos -c：v libx264 -preset slow -crf 21 output_compress_4k.mp4
+
+pie.mp4
+
+
+
+
+ffmpeg -i pie.mp4 -vf scale = 1920x1080：flags = lanczos pie222.mp4
+
+
+
+
+C:\______test_files\_exe\ffmpeg>
+C:\______test_files\_exe\ffmpeg>ffmpeg.exe -i pie.mp4 -vf scale=1920x1080 pie222.mp4
+C:\______test_files\_exe\ffmpeg>
+
+
+
+
+北京中華書局
+中華人民共和國北京市豐臺區太平橋西里38號
+北京市豐臺區太平橋西里38號
+39.88244693415653, 116.31404671396393
+
+
+白鬚橋
+東経 	139.0+48.0/60+45.6/3600
+北緯 	35.0+43.0/60+29.4/3600
+
+35.72483333
+139.81266667
+
+
+警視庁	35.677028, 139.752306 
+
+
+
+最小最小化
+            this.WindowState = FormWindowState.Minimized;
+
+
+            this.ShowInTaskbar = false;
+
+
+
+
+
+
+
+
+
+新安街道	34.36775, 118.34638（转换） 
+
+碾莊鎮	34.29887, 117.77576（转换） 
+
+碾莊鎮	34.29887, 117.77576（转换） 
+
+雙堆集鎮	33.42498, 116.89588
+
+
+
+
 灰階 與 亮度 的差異
 
 黑白圖片 講 灰階, 最黑是0, 最亮是255, 只有黑白兩色

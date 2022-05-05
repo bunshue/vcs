@@ -35,10 +35,12 @@ namespace vcs_ImageProcessing2
             PictureToGray5();
             PictureToMonochrome();
             PictureToNegative();
+            PictureToBlur();
             PictureToMirror();
             PictureToRainbow();
             PictureToBinary();
             PictureTo8BitGrayScale();
+            PictureToFakeColor();
 
             // Convert the image into red, green, and blue monochrome.
             pictureBox7.Image = ScaleColorComponents(pictureBox1.Image, 1, 0, 0, 1);
@@ -115,7 +117,8 @@ namespace vcs_ImageProcessing2
             pictureBox17.Size = new Size(W, H);
             pictureBox18.Size = new Size(W, H);
             pictureBox19.Size = new Size(W, H);
-            pictureBox20.Size = new Size(W, H);
+            pictureBox20.Size = new Size(W+110, H+100);
+            pictureBox20.BackColor = Color.Pink;
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -138,7 +141,7 @@ namespace vcs_ImageProcessing2
             pictureBox17.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             pictureBox18.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             pictureBox19.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            pictureBox20.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+            pictureBox20.Location = new Point(x_st + dx * 5-30, y_st + dy * 2);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
             label2.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);
@@ -176,13 +179,13 @@ namespace vcs_ImageProcessing2
             label11.Text = "原圖";
             label12.Text = "灰階 Grayscale";
             label13.Text = "灰階 Average";
-            label14.Text = "";
+            label14.Text = "模糊處理";
             label15.Text = "鏡像圖片";
             label16.Text = "";
             label17.Text = "彩虹化圖片";
             label18.Text = "二值化圖片";
             label19.Text = "8位灰度影像";
-            label20.Text = "";
+            label20.Text = "偽色彩處理";
         }
 
         void bt_exit_setup()
@@ -825,6 +828,103 @@ namespace vcs_ImageProcessing2
 
         }
 
+        private void PictureToBlur()
+        {
+            richTextBox1.Text += "PictureToBlur\n";
+            pictureBox14.Image = ToBlur(pictureBox1.Image);
+        }
+
+        private Bitmap ToBlur(Image image)
+        {
+            Bitmap bitmap1 = (Bitmap)image;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+
+
+            for (int j = 0; j < H; j++)
+            {
+                for (int i = 0; i < W; i++)
+                {
+                    int ok_cnt = 0;
+                    int R = 0;
+                    int G = 0;
+                    int B = 0;
+
+                    // 檢查相鄰像素, 每個點的鄰居不一樣多, 所以要做不同的平均
+
+                    //自己
+                    R += bitmap1.GetPixel(i, j).R;
+                    G += bitmap1.GetPixel(i, j).G;
+                    B += bitmap1.GetPixel(i, j).B;
+
+                    ok_cnt++;
+
+                    if (j - 1 > 0)       //上
+                    {
+                        R += bitmap1.GetPixel(i, j - 1).R;
+                        G += bitmap1.GetPixel(i, j - 1).G;
+                        B += bitmap1.GetPixel(i, j - 1).B;
+
+                        ok_cnt++;
+                    }
+                    if (j + 1 < H)      //下
+                    {
+                        R += bitmap1.GetPixel(i, j + 1).R;
+                        G += bitmap1.GetPixel(i, j + 1).G;
+                        B += bitmap1.GetPixel(i, j + 1).B;
+                        ok_cnt++;
+                    }
+                    if (i - 1 > 0)       //左
+                    {
+                        R += bitmap1.GetPixel(i - 1, j).R;
+                        G += bitmap1.GetPixel(i - 1, j).G;
+                        B += bitmap1.GetPixel(i - 1, j).B;
+                        ok_cnt++;
+                    }
+                    if (i + 1 < W)       //右
+                    {
+                        R += bitmap1.GetPixel(i + 1, j).R;
+                        G += bitmap1.GetPixel(i + 1, j).G;
+                        B += bitmap1.GetPixel(i + 1, j).B;
+                        ok_cnt++;
+                    }
+                    if ((i - 1 > 0) && (j - 1 > 0))     //左上
+                    {
+                        R += bitmap1.GetPixel(i - 1, j - 1).R;
+                        G += bitmap1.GetPixel(i - 1, j - 1).G;
+                        B += bitmap1.GetPixel(i - 1, j - 1).B;
+                        ok_cnt++;
+                    }
+                    if ((i - 1 > 0) && (j + 1 < H)) //左下
+                    {
+                        R += bitmap1.GetPixel(i - 1, j + 1).R;
+                        G += bitmap1.GetPixel(i - 1, j + 1).G;
+                        B += bitmap1.GetPixel(i - 1, j + 1).B;
+                        ok_cnt++;
+                    }
+                    if ((i + 1 < W) && (j - 1 > 0))      //右上
+                    {
+                        R += bitmap1.GetPixel(i + 1, j - 1).R;
+                        G += bitmap1.GetPixel(i + 1, j - 1).G;
+                        B += bitmap1.GetPixel(i + 1, j - 1).B;
+                        ok_cnt++;
+                    }
+                    if ((i + 1 < W) && (j + 1 < H)) //右下
+                    {
+                        R += bitmap1.GetPixel(i + 1, j + 1).R;
+                        G += bitmap1.GetPixel(i + 1, j + 1).G;
+                        B += bitmap1.GetPixel(i + 1, j + 1).B;
+                        ok_cnt++;
+                    }
+
+                    //平均, 設定個點的像素值
+                    bitmap2.SetPixel(i, j, Color.FromArgb((R / ok_cnt), (G / ok_cnt), (B / ok_cnt)));
+                }
+            }
+            return bitmap2;
+        }
+
         private void PictureToMirror()
         {
             richTextBox1.Text += "PictureToMirror\n";
@@ -855,7 +955,6 @@ namespace vcs_ImageProcessing2
                     mimg.SetPixel(rx, y, p);
                 }
             }
-            // Return the result.
             return mimg;
         }
 
@@ -1237,5 +1336,123 @@ namespace vcs_ImageProcessing2
             return dstBitmap;
         }
         //建立8位灰度影像 SP
+
+        private void PictureToFakeColor()
+        {
+            //偽彩色處理
+            /*
+            //從pictureBox取得Bitmap
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+            bitmap1 = gcTrans(bitmap1, true, 5);
+            pictureBox2.Image = bitmap1;
+            */
+
+            string filename = @"C:\______test_files\fakecolor.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            Bitmap bitmap2 = gcTrans(bitmap1, true, 255 / 10);
+            pictureBox20.Image = bitmap2;
+
+            //考慮把 bitmap1 和 bitmap2 同時畫在 pictureBox 裏
+
+
+        }
+
+        //偽彩色圖像處理 ST
+
+        /// <summary>
+        /// 偽彩色圖像處理
+        /// 博客園-初行 http://www.cnblogs.com/zxlovenet
+        /// 日期：2014.2.14
+        /// </summary>
+        /// <param name="bmp">傳入的灰度圖像</param>
+        /// <param name="method">使用何種方法，false強度分層法,true灰度級-彩色變換法</param>
+        /// <param name="seg">強度分層中的分層數</param>
+        /// <returns>返回偽彩色圖像</returns>
+        private Bitmap gcTrans(Bitmap bmp, bool method, byte seg)
+        {
+            if (bmp != null)
+            {
+                if (System.Drawing.Imaging.PixelFormat.Format24bppRgb == bmp.PixelFormat)
+                {
+                    Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+                    System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
+                    IntPtr ptr = bmpData.Scan0;
+                    int bytes = bmp.Width * bmp.Height * 3;
+                    byte[] grayValues = new byte[bytes];
+                    System.Runtime.InteropServices.Marshal.Copy(ptr, grayValues, 0, bytes);
+                    bmp.UnlockBits(bmpData);
+
+                    byte[] rgbValues = new byte[bytes];
+                    //清零
+                    Array.Clear(rgbValues, 0, bytes);
+                    byte tempB;
+
+                    if (method == false)
+                    {
+                        //強度分層法
+                        for (int i = 0; i < bytes; i += 3)
+                        {
+                            byte ser = (byte)(256 / seg);
+                            tempB = (byte)(grayValues[i] / ser);
+                            //分配任意一種顏色
+                            rgbValues[i + 1] = (byte)(tempB * ser);
+                            rgbValues[i] = (byte)((seg - 1 - tempB) * ser);
+                            rgbValues[i + 2] = 0;
+                        }
+                    }
+                    else
+                    {
+                        //灰度級-彩色變換法
+                        for (int i = 0; i < bytes; i += 3)
+                        {
+                            if (grayValues[i] < 64)
+                            {
+                                rgbValues[i + 2] = 0;
+                                rgbValues[i + 1] = (byte)(4 * grayValues[i]);
+                                rgbValues[i] = 255;
+                            }
+                            else if (grayValues[i] < 128)
+                            {
+                                rgbValues[i + 2] = 0;
+                                rgbValues[i + 1] = 255;
+                                rgbValues[i] = (byte)(-4 * grayValues[i] + 2 * 255);
+                            }
+                            else if (grayValues[i] < 192)
+                            {
+                                rgbValues[i + 2] = (byte)(4 * grayValues[i] - 2 * 255);
+                                rgbValues[i + 1] = 255;
+                                rgbValues[i] = 0;
+                            }
+                            else
+                            {
+                                rgbValues[i + 2] = 255;
+                                rgbValues[i + 1] = (byte)(-4 * grayValues[i] + 4 * 255);
+                                rgbValues[i] = 0;
+                            }
+                        }
+
+                    }
+                    bmp = new Bitmap(bmp.Width, bmp.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                    bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
+                    ptr = bmpData.Scan0;
+
+                    System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, bytes);
+                    bmp.UnlockBits(bmpData);
+
+                    return bmp;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        //偽彩色圖像處理 SP
+
+
     }
 }
