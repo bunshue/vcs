@@ -875,7 +875,7 @@ namespace vcs_PictureColor
             int hh2 = 256;
             Bitmap bitmap2 = new Bitmap(ww, hh1);
             Graphics g2 = Graphics.FromImage(bitmap2);
-            g2.Clear(Color.Pink);
+            g2.Clear(Color.Black);
 
             Pen p = new Pen(Color.Red, 2);
 
@@ -909,6 +909,8 @@ namespace vcs_PictureColor
 
             //richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
+            /*
+            // 畫柱狀圖
             Brush b = new SolidBrush(Color.FromArgb(150, c.R, c.G, c.B));
 
             for (i = 0; i < 256; i++)
@@ -916,9 +918,22 @@ namespace vcs_PictureColor
                 //g2.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(r_data[i] * ratio));
                 g.FillRectangle(b, i * 2, hh2 - (float)(rgb_data[i] * ratio), 2, (float)(rgb_data[i] * ratio));
             }
+            */
 
+            // 畫曲線圖
+            Pen p = new Pen(c, 1);
 
+            Point[] curvePoints = new Point[256];    //一維陣列內有 8 個Point
+            for (i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = i * 2;
+                curvePoints[i].Y = (int)(hh2 - (float)(rgb_data[i] * ratio));
+            }
 
+            // Draw lines between original points to screen.
+            g.DrawLines(p, curvePoints);   //畫直線
+            // Draw curve to screen.
+            //g.DrawCurve(redPen, curvePoints); //畫曲線
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -948,3 +963,4 @@ namespace vcs_PictureColor
         }
     }
 }
+

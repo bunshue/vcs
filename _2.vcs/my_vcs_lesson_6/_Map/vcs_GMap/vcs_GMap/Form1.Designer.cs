@@ -765,8 +765,9 @@
             this.rb_location6.AutoSize = true;
             this.rb_location6.Location = new System.Drawing.Point(13, 112);
             this.rb_location6.Name = "rb_location6";
-            this.rb_location6.Size = new System.Drawing.Size(14, 13);
+            this.rb_location6.Size = new System.Drawing.Size(71, 16);
             this.rb_location6.TabIndex = 5;
+            this.rb_location6.Text = "中華書局";
             this.rb_location6.UseVisualStyleBackColor = true;
             this.rb_location6.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
             // 
