@@ -116,12 +116,18 @@
             this.button71 = new System.Windows.Forms.Button();
             this.bt_reset = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_long6 = new System.Windows.Forms.Button();
             this.bt_long5 = new System.Windows.Forms.Button();
             this.bt_long4 = new System.Windows.Forms.Button();
             this.bt_long3 = new System.Windows.Forms.Button();
             this.bt_long2 = new System.Windows.Forms.Button();
             this.bt_long1 = new System.Windows.Forms.Button();
             this.bt_long0 = new System.Windows.Forms.Button();
+            this.bt_long7 = new System.Windows.Forms.Button();
+            this.bt_long8 = new System.Windows.Forms.Button();
+            this.bt_long9 = new System.Windows.Forms.Button();
+            this.bt_long10 = new System.Windows.Forms.Button();
+            this.bt_long11 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -676,7 +682,7 @@
             // cb_magnifying
             // 
             this.cb_magnifying.AutoSize = true;
-            this.cb_magnifying.Location = new System.Drawing.Point(1107, 632);
+            this.cb_magnifying.Location = new System.Drawing.Point(1107, 648);
             this.cb_magnifying.Name = "cb_magnifying";
             this.cb_magnifying.Size = new System.Drawing.Size(60, 16);
             this.cb_magnifying.TabIndex = 52;
@@ -687,7 +693,7 @@
             // cb_snake
             // 
             this.cb_snake.AutoSize = true;
-            this.cb_snake.Location = new System.Drawing.Point(993, 632);
+            this.cb_snake.Location = new System.Drawing.Point(993, 648);
             this.cb_snake.Name = "cb_snake";
             this.cb_snake.Size = new System.Drawing.Size(48, 16);
             this.cb_snake.TabIndex = 49;
@@ -698,7 +704,7 @@
             // cb_manual
             // 
             this.cb_manual.AutoSize = true;
-            this.cb_manual.Location = new System.Drawing.Point(887, 632);
+            this.cb_manual.Location = new System.Drawing.Point(887, 648);
             this.cb_manual.Name = "cb_manual";
             this.cb_manual.Size = new System.Drawing.Size(58, 16);
             this.cb_manual.TabIndex = 44;
@@ -1042,6 +1048,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_long11);
+            this.groupBox1.Controls.Add(this.bt_long10);
+            this.groupBox1.Controls.Add(this.bt_long9);
+            this.groupBox1.Controls.Add(this.bt_long8);
+            this.groupBox1.Controls.Add(this.bt_long7);
+            this.groupBox1.Controls.Add(this.bt_long6);
             this.groupBox1.Controls.Add(this.bt_long5);
             this.groupBox1.Controls.Add(this.bt_long4);
             this.groupBox1.Controls.Add(this.bt_long3);
@@ -1050,25 +1062,37 @@
             this.groupBox1.Controls.Add(this.bt_long0);
             this.groupBox1.Location = new System.Drawing.Point(22, 705);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(861, 100);
+            this.groupBox1.Size = new System.Drawing.Size(861, 125);
             this.groupBox1.TabIndex = 107;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "耗時久";
             // 
+            // bt_long6
+            // 
+            this.bt_long6.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long6.Location = new System.Drawing.Point(10, 69);
+            this.bt_long6.Name = "bt_long6";
+            this.bt_long6.Size = new System.Drawing.Size(135, 45);
+            this.bt_long6.TabIndex = 114;
+            this.bt_long6.Text = "以任意角度旋轉圖像";
+            this.bt_long6.UseVisualStyleBackColor = true;
+            this.bt_long6.Click += new System.EventHandler(this.bt_long6_Click);
+            // 
             // bt_long5
             // 
             this.bt_long5.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_long5.Location = new System.Drawing.Point(711, 32);
+            this.bt_long5.Location = new System.Drawing.Point(715, 18);
             this.bt_long5.Name = "bt_long5";
             this.bt_long5.Size = new System.Drawing.Size(135, 45);
             this.bt_long5.TabIndex = 113;
+            this.bt_long5.Text = "動態旋轉文字";
             this.bt_long5.UseVisualStyleBackColor = true;
             this.bt_long5.Click += new System.EventHandler(this.bt_long5_Click);
             // 
             // bt_long4
             // 
             this.bt_long4.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_long4.Location = new System.Drawing.Point(570, 32);
+            this.bt_long4.Location = new System.Drawing.Point(574, 18);
             this.bt_long4.Name = "bt_long4";
             this.bt_long4.Size = new System.Drawing.Size(135, 45);
             this.bt_long4.TabIndex = 112;
@@ -1079,7 +1103,7 @@
             // bt_long3
             // 
             this.bt_long3.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_long3.Location = new System.Drawing.Point(429, 32);
+            this.bt_long3.Location = new System.Drawing.Point(433, 18);
             this.bt_long3.Name = "bt_long3";
             this.bt_long3.Size = new System.Drawing.Size(135, 45);
             this.bt_long3.TabIndex = 111;
@@ -1090,7 +1114,7 @@
             // bt_long2
             // 
             this.bt_long2.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_long2.Location = new System.Drawing.Point(288, 32);
+            this.bt_long2.Location = new System.Drawing.Point(292, 18);
             this.bt_long2.Name = "bt_long2";
             this.bt_long2.Size = new System.Drawing.Size(135, 45);
             this.bt_long2.TabIndex = 110;
@@ -1101,7 +1125,7 @@
             // bt_long1
             // 
             this.bt_long1.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_long1.Location = new System.Drawing.Point(147, 32);
+            this.bt_long1.Location = new System.Drawing.Point(151, 18);
             this.bt_long1.Name = "bt_long1";
             this.bt_long1.Size = new System.Drawing.Size(135, 45);
             this.bt_long1.TabIndex = 109;
@@ -1112,7 +1136,7 @@
             // bt_long0
             // 
             this.bt_long0.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_long0.Location = new System.Drawing.Point(6, 32);
+            this.bt_long0.Location = new System.Drawing.Point(10, 18);
             this.bt_long0.Name = "bt_long0";
             this.bt_long0.Size = new System.Drawing.Size(135, 45);
             this.bt_long0.TabIndex = 108;
@@ -1120,11 +1144,62 @@
             this.bt_long0.UseVisualStyleBackColor = true;
             this.bt_long0.Click += new System.EventHandler(this.bt_long0_Click);
             // 
+            // bt_long7
+            // 
+            this.bt_long7.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long7.Location = new System.Drawing.Point(151, 69);
+            this.bt_long7.Name = "bt_long7";
+            this.bt_long7.Size = new System.Drawing.Size(135, 45);
+            this.bt_long7.TabIndex = 115;
+            this.bt_long7.Text = "實現任意角度旋轉圖片";
+            this.bt_long7.UseVisualStyleBackColor = true;
+            this.bt_long7.Click += new System.EventHandler(this.bt_long7_Click);
+            // 
+            // bt_long8
+            // 
+            this.bt_long8.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long8.Location = new System.Drawing.Point(292, 69);
+            this.bt_long8.Name = "bt_long8";
+            this.bt_long8.Size = new System.Drawing.Size(135, 45);
+            this.bt_long8.TabIndex = 116;
+            this.bt_long8.UseVisualStyleBackColor = true;
+            this.bt_long8.Click += new System.EventHandler(this.bt_long8_Click);
+            // 
+            // bt_long9
+            // 
+            this.bt_long9.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long9.Location = new System.Drawing.Point(433, 69);
+            this.bt_long9.Name = "bt_long9";
+            this.bt_long9.Size = new System.Drawing.Size(135, 45);
+            this.bt_long9.TabIndex = 117;
+            this.bt_long9.UseVisualStyleBackColor = true;
+            this.bt_long9.Click += new System.EventHandler(this.bt_long9_Click);
+            // 
+            // bt_long10
+            // 
+            this.bt_long10.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long10.Location = new System.Drawing.Point(574, 69);
+            this.bt_long10.Name = "bt_long10";
+            this.bt_long10.Size = new System.Drawing.Size(135, 45);
+            this.bt_long10.TabIndex = 118;
+            this.bt_long10.UseVisualStyleBackColor = true;
+            this.bt_long10.Click += new System.EventHandler(this.bt_long10_Click);
+            // 
+            // bt_long11
+            // 
+            this.bt_long11.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_long11.Location = new System.Drawing.Point(715, 69);
+            this.bt_long11.Name = "bt_long11";
+            this.bt_long11.Size = new System.Drawing.Size(135, 45);
+            this.bt_long11.TabIndex = 119;
+            this.bt_long11.UseVisualStyleBackColor = true;
+            this.bt_long11.Click += new System.EventHandler(this.bt_long11_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1475, 830);
+            this.ClientSize = new System.Drawing.Size(1475, 842);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.button71);
@@ -1310,12 +1385,18 @@
         private System.Windows.Forms.Button button71;
         private System.Windows.Forms.Button bt_reset;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button bt_long6;
+        private System.Windows.Forms.Button bt_long5;
+        private System.Windows.Forms.Button bt_long4;
         private System.Windows.Forms.Button bt_long3;
         private System.Windows.Forms.Button bt_long2;
         private System.Windows.Forms.Button bt_long1;
         private System.Windows.Forms.Button bt_long0;
-        private System.Windows.Forms.Button bt_long5;
-        private System.Windows.Forms.Button bt_long4;
+        private System.Windows.Forms.Button bt_long11;
+        private System.Windows.Forms.Button bt_long10;
+        private System.Windows.Forms.Button bt_long9;
+        private System.Windows.Forms.Button bt_long8;
+        private System.Windows.Forms.Button bt_long7;
     }
 }
 

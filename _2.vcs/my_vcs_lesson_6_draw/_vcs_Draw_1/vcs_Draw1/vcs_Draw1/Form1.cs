@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
-using System.Drawing.Drawing2D; //for LinearGradientBrush, GraphicsPath
+using System.Drawing.Drawing2D; //for LinearGradientBrush, GraphicsPath, GraphicsState
 using System.Drawing.Text;      //for TextRenderingHint
 
 namespace vcs_Draw1
@@ -20,9 +20,6 @@ namespace vcs_Draw1
         SolidBrush sb;
         Bitmap bitmap1;
         Font f;
-
-        Color color_st = Color.White;
-        Color color_sp = Color.Green;
 
         bool flag_print_mouse_cursor = false;
 
@@ -45,9 +42,6 @@ namespace vcs_Draw1
             UacStuff.AddShieldToButton(button29);
 
             DrawPictureBoxText();
-            color_st = pictureBox_gradient_color_st.BackColor;
-            color_sp = pictureBox_gradient_color_sp.BackColor;
-            draw_gradient_color();
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -160,9 +154,6 @@ namespace vcs_Draw1
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y + 80);
 
-            groupBox1.Location = new Point(x_st - dx * 4, y_st + dy * 14);
-            groupBox1.Size = new Size(450, 170);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             pictureBox1.Location = new Point(20, 20);
@@ -172,12 +163,7 @@ namespace vcs_Draw1
             panel1.Location = new Point(850, y_st);
             //panel1.BackColor = Color.Lime;
 
-            panel2.Size = new Size(650, 100);
-            panel2.Location = new Point(50, y_st);
-
             pictureBox_text.Location = new Point(50, y_st + 150 - 30);
-            groupBox2.Location = new Point(50, y_st + 150 + 30);
-            groupBox2.Size = new Size(600, 60);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -966,7 +952,7 @@ namespace vcs_Draw1
             //讀檔 至 Image 影像
             Image img = Image.FromFile(filename); // 產生一個Image物件
             //畫出來
-            g.DrawImage(img, 300, 380, img.Width/2, img.Height/2);
+            g.DrawImage(img, 300, 380, img.Width / 2, img.Height / 2);
 
             pictureBox1.Image = bitmap1;
         }
@@ -1580,33 +1566,6 @@ namespace vcs_Draw1
             return;
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-            GradientColor(e);
-        }
-
-        //抽取成一個方法實現漸變色,在Paint中引用
-        private void GradientColor(PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            Color FColor = Color.Green;
-            Color TColor = Color.Yellow;
-
-            Brush b = new LinearGradientBrush(this.ClientRectangle, FColor, TColor, LinearGradientMode.ForwardDiagonal);
-
-            g.FillRectangle(b, this.ClientRectangle);
-
-            /*
-             * Horizontal = 0　　　　　　摘要:指定從左到右的漸變。
-             * 
-             * Vertical = 1　　　　　　　摘要: 指定從上到下的漸變。
-             * 
-             * ForwardDiagonal = 2　　  摘要:指定從左上到右下的漸變。
-             * 
-             * BackwardDiagonal = 3　　 摘要:指定從右上到左下的漸變。
-             */
-        }
-
         //The Paint Event Handler
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
@@ -1887,22 +1846,6 @@ namespace vcs_Draw1
 
         private void button30_Click(object sender, EventArgs e)
         {
-            //漸層色
-            this.pictureBox1.Size = new Size(400, 400);
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-
-            LinearGradientBrush lgb = new LinearGradientBrush(new Point(0, 0), new Point(0, 400), Color.Red, Color.Green);
-            g.FillRectangle(lgb, 0, 0, 400, 400);
-
-
-            //另法
-            LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, Color.White, Color.Red, LinearGradientMode.Horizontal);
-            brush.SetSigmaBellShape(0.5f);
-            //Graphics g = this.CreateGraphics();
-            g.FillRectangle(brush, 50, 150, 300, 100);
-            f = new Font("Times New Roman", 60);
-            g.DrawString("文字漸層色", f, brush, 1, 1);
 
         }
 
@@ -2094,80 +2037,6 @@ namespace vcs_Draw1
 
         private void button35_Click(object sender, EventArgs e)
         {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            //漸層色1
-            // Define a brush with two points and their colors.
-            using (LinearGradientBrush br = new LinearGradientBrush(new Point(10, 10), new Point(140, 50), Color.Red, Color.White))
-            {
-                g.FillRectangle(br, 10, 10, 125, 50);
-                g.DrawRectangle(Pens.Black, 10, 10, 125, 50);
-            }
-
-            // Define a brush with a Rectangle, colors, and gradient mode.
-            Rectangle rect = new Rectangle(145, 10, 125, 50);
-            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Blue, Color.White, LinearGradientMode.ForwardDiagonal))
-            {
-                g.FillRectangle(br, rect);
-                g.DrawRectangle(Pens.Black, rect);
-            }
-
-            // Define a gradient with more than 2 colors.
-            rect = new Rectangle(10, 70, 260, 50);
-            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Blue, Color.White, 0f))
-            {
-                // Create a ColorBlend object. Note that you
-                // must initialize it before you save it in the
-                // brush's InterpolationColors property.
-                ColorBlend colorBlend = new ColorBlend();
-                colorBlend.Colors = new Color[] 
-                {
-                    Color.Red,
-                    Color.Orange,
-                    Color.Yellow,
-                    Color.Lime,
-                    Color.Blue,
-                    Color.Indigo,
-                    Color.Violet,
-                };
-                colorBlend.Positions = new float[]
-                {
-                    0f, 1/6f, 2/6f, 3/6f, 4/6f, 5/6f, 1f
-                };
-                br.InterpolationColors = colorBlend;
-
-                g.FillRectangle(br, rect);
-                g.DrawRectangle(Pens.Black, rect);
-            }
-
-            //漸層色2
-            //用漸變色填充
-            //LinearGradientBrush：使用沿漸變混合的兩種顏色進行繪制
-            rect = new Rectangle(0, 0, 500, 100);//定義矩形,參數為起點橫縱坐標以及其長和寬
-            rect.Location = new Point(50, 300);
-            LinearGradientBrush b = new LinearGradientBrush(rect, Color.Red, Color.Black, LinearGradientMode.Horizontal);
-            g.FillRectangle(b, rect);
-
-            //漸層色3
-            int intLocation, intHeight;//定义两个int型的变量intLocation、intHeight 
-            intLocation = this.ClientRectangle.Location.Y;//为变量intLocation赋值
-            intHeight = this.ClientRectangle.Height / 200;//为变量intHeight赋值
-
-            for (int i = 255; i >= 0; i--)
-            {
-                Color color = new Color();
-                color = Color.FromArgb(1, i, 100);
-                SolidBrush SBrush = new SolidBrush(color);
-                Pen p = new Pen(SBrush, 1);
-                g.DrawLine(p, 400, 30 + i, 500, 30 + i);
-            }
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button36_Click(object sender, EventArgs e)
@@ -2265,103 +2134,8 @@ namespace vcs_Draw1
             start_point = new PointF(start_point.X + dx * text_width, start_point.Y + dy * text_width);
         }
 
-        //在曲線的上下畫字
         private void button33_Click(object sender, EventArgs e)
         {
-            Graphics g = pictureBox1.CreateGraphics();
-
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.InterpolationMode = InterpolationMode.High;
-
-            // Draw some text along some paths.
-            GraphicsPath path = new GraphicsPath();
-            path.AddArc(new RectangleF(40, 40, 320, 220), 180, 180);
-            g.DrawPath(Pens.Green, path);
-            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, true);
-            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, false);
-
-            path = new GraphicsPath();
-            path.AddArc(new RectangleF(40, 50, 320, 220), 0, 180);
-            g.DrawPath(Pens.Red, path);
-            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, true);
-            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, false);
-        }
-
-        // Draw some text along a GraphicsPath.
-        private void DrawTextOnPath(Graphics gr, Brush brush, Font font, string txt, GraphicsPath path, bool text_above_path)
-        {
-            // Make a copy so we don't mess up the original.
-            path = (GraphicsPath)path.Clone();
-
-            // Flatten the path into segments.
-            path.Flatten();
-
-            // Draw characters.
-            int start_ch = 0;
-            PointF start_point = path.PathPoints[0];
-            for (int i = 1; i < path.PointCount; i++)
-            {
-                PointF end_point = path.PathPoints[i];
-                DrawTextOnSegment2(gr, brush, font, txt, ref start_ch,
-                    ref start_point, end_point, text_above_path);
-                if (start_ch >= txt.Length) break;
-            }
-        }
-
-        // Draw some text along a line segment.
-        // Leave char_num pointing to the next character to be drawn.
-        // Leave start_point holding the coordinates of the last point used.
-        private void DrawTextOnSegment2(Graphics gr, Brush brush, Font font, string txt, ref int first_ch, ref PointF start_point, PointF end_point, bool text_above_segment)
-        {
-            float dx = end_point.X - start_point.X;
-            float dy = end_point.Y - start_point.Y;
-            float dist = (float)Math.Sqrt(dx * dx + dy * dy);
-            dx /= dist;
-            dy /= dist;
-
-            // See how many characters will fit.
-            int last_ch = first_ch;
-            while (last_ch < txt.Length)
-            {
-                string test_string = txt.Substring(first_ch, last_ch - first_ch + 1);
-                if (gr.MeasureString(test_string, font).Width > dist)
-                {
-                    // This is one too many characters.
-                    last_ch--;
-                    break;
-                }
-                last_ch++;
-            }
-            if (last_ch < first_ch) return;
-            if (last_ch >= txt.Length) last_ch = txt.Length - 1;
-            string chars_that_fit = txt.Substring(first_ch, last_ch - first_ch + 1);
-
-            // Rotate and translate to position the characters.
-            GraphicsState state = gr.Save();
-            if (text_above_segment)
-            {
-                gr.TranslateTransform(0,
-                    -gr.MeasureString(chars_that_fit, font).Height,
-                    MatrixOrder.Append);
-            }
-            float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
-            gr.RotateTransform(angle, MatrixOrder.Append);
-            gr.TranslateTransform(start_point.X, start_point.Y, MatrixOrder.Append);
-
-            // Draw the characters that fit.
-            gr.DrawString(chars_that_fit, font, brush, 0, 0);
-
-            // Restore the saved state.
-            gr.Restore(state);
-
-            // Update first_ch and start_point.
-            first_ch = last_ch + 1;
-            float text_width = gr.MeasureString(chars_that_fit, font).Width;
-            start_point = new PointF(
-                start_point.X + dx * text_width,
-                start_point.Y + dy * text_width);
-
         }
 
         //基本畫圖1
@@ -2790,8 +2564,8 @@ namespace vcs_Draw1
             sb = new SolidBrush(Color.Blue);
             f = new Font("Times New Roman", 14);
 
-            Rectangle rec;
-            Rectangle[] recs;
+            //Rectangle rec;
+            //Rectangle[] recs;
 
             int x_st = 20;
             int y_st = 20;
@@ -2957,137 +2731,6 @@ namespace vcs_Draw1
 
         private void button48_Click(object sender, EventArgs e)
         {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            //連接繪圖物件
-            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
-            int Cx = this.pictureBox1.ClientSize.Width * 1 / 4;   // 找到視窗客戶區中心點
-            int Cy = this.pictureBox1.ClientSize.Height / 4;
-
-            Point p1 = new Point(Cx - 100, Cy); // 計算出 直線的兩端
-            Point p2 = new Point(Cx + 100, Cy);
-            gp.AddLine(p1, p2); // 將 直線 加入到 GraphicsPath物件
-
-            Rectangle rect1 = new Rectangle(Cx - 100 - 20, Cy - 20, 40, 40);
-            Rectangle rect2 = new Rectangle(Cx + 100 - 20, Cy - 20, 40, 40);
-            gp.AddRectangle(rect1);  // 將 兩個矩形 加入到 GraphicsPath物件
-            gp.AddRectangle(rect2);
-
-            g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
-
-            GraphicsPath gp2 = new GraphicsPath(); // GraphicsPath圖形軌跡物件
-            Region rgn; // 宣告一個 Region區域表面 物件
-
-            Cx = this.pictureBox1.ClientSize.Width * 1 / 4; // 視窗客戶區的中心點
-            Cy = this.pictureBox1.ClientSize.Height * 3 / 4;
-            int W = this.pictureBox1.ClientSize.Width / 3;  // 矩形的寬
-            int H = this.pictureBox1.ClientSize.Height / 3; // 矩形的高
-
-            Rectangle rect3 = new Rectangle(Cx - W / 2, Cy - H / 2, W, H);
-            gp2.AddRectangle(rect3); // 圖形軌跡物件 加入一個矩形形狀
-
-            rgn = new Region(gp2); // 新增一個 Region 區域表面物件，以 gp2 為參數
-            // rgn = new Region(rect3);  // 或是直接以 rect3 為參數
-
-            g.FillRegion(Brushes.Cyan, rgn); // 區域表面 繪出
-            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
-
-
-            GraphicsPath gp3 = new GraphicsPath(); // GraphicsPath圖形軌跡物件
-
-            int x = this.pictureBox1.ClientSize.Width * 3 / 4; // 視窗客戶區的正中央
-            int y = this.pictureBox1.ClientSize.Height * 3 / 4;
-            // 圓形的  半徑
-            int D = Math.Min(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height) / 8;
-
-            gp3.AddPolygon(new Point[]{
-                 new Point(x - 2 * D,y - 3*D),
-                 new Point(x + 2 * D,y - 3*D),
-                 new Point(x + 5 * D,y ),
-                 new Point(x + 2 * D,y + 3*D),
-                 new Point(x - 2 * D,y + 3*D),
-                 new Point(x - 5 * D,y),
-               });  // 多邊形
-            gp3.AddEllipse(x - D, y - D, 2 * D, 2 * D);  // 在 多邊形 正中的 圓形
-
-            Region rgn2 = new Region(gp3); // 區域表面 物件
-            LinearGradientBrush brush = new LinearGradientBrush(
-                             new Point(x - 2 * D, y - 3 * D), // 線形漸層的開始點。
-                             new Point(x + 2 * D, y + 3 * D), // 線形漸層的結束點。
-                             Color.White,
-                             Color.Red); // 線形漸層塗刷
-
-            g.FillRegion(brush, rgn2); // 區域表面 繪出
-            g.DrawPath(Pens.Black, gp3); // 圖形軌跡 繪出
-
-
-
-
-
-            GraphicsPath gp4 = new GraphicsPath(); // GraphicsPath物件
-
-            int Cx4 = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區的正中央
-            int Cy4 = this.pictureBox1.ClientSize.Height / 3;
-            // 第一個矩形的 寬高是取自視窗客戶區寬高最小者的一半
-            int D4 = Math.Min(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height) / 4;
-
-            // 第一個矩形
-            Rectangle rect1a = new Rectangle(Cx4 - D4, Cy4 - D4, 2 * D4, 2 * D4);
-            gp4.AddRectangle(rect1a); // 將 矩形 加入到 GraphicsPath物件
-
-            // 第二個矩形
-            Rectangle rect2a = new Rectangle(Cx4 - D4 - 20, Cy4 - D4 - 20, 40, 40);
-            gp4.AddRectangle(rect2a); // 將 矩形 加入到 GraphicsPath物件
-
-            // 第三個矩形
-            Rectangle rect3a = new Rectangle(Cx4 - D4 + 2 * D4 - 20, Cy4 - D4 - 20, 40, 40);
-            gp4.AddRectangle(rect3a); // 將 矩形 加入到 GraphicsPath物件
-
-            // 第四個矩形
-            Rectangle rect4a = new Rectangle(Cx4 - D4 - 20, Cy4 - D4 + 2 * D4 - 20, 40, 40);
-            gp4.AddRectangle(rect4a); // 將 矩形 加入到 GraphicsPath物件
-
-            // 第五個矩形
-            Rectangle rect5a = new Rectangle(Cx4 - D4 + 2 * D4 - 20, Cy4 - D4 + 2 * D4 - 20, 40, 40);
-            gp4.AddRectangle(rect5a); // 將 矩形 加入到 GraphicsPath物件
-
-            // 將 gp 內的形狀 繪出
-            g.DrawPath(Pens.Black, gp4); // 繪出GraphicsPath物件
-
-
-
-            GraphicsPath gp5 = new GraphicsPath(); // GraphicsPath物件
-
-            int Cx5 = this.pictureBox1.ClientSize.Width / 2 + 50; // 視窗客戶區的正中央
-            int Cy5 = this.pictureBox1.ClientSize.Height / 2 + 50;
-            // 第一個矩形的 寬高是取自視窗客戶區寬高最小者的一半
-            int D5 = Math.Min(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height) / 4;
-
-            Rectangle[] rects = new Rectangle[5];
-            // 第一個矩形
-            rects[0] = new Rectangle(Cx5 - D5, Cy5 - D5, 2 * D5, 2 * D5);
-
-            // 第二個矩形
-            rects[1] = new Rectangle(Cx5 - D5 - 20, Cy5 - D5 - 20, 40, 40);
-
-            // 第三個矩形
-            rects[2] = new Rectangle(Cx5 - D5 + 2 * D5 - 20, Cy5 - D5 - 20, 40, 40);
-
-            // 第四個矩形
-            rects[3] = new Rectangle(Cx5 - D5 - 20, Cy5 - D5 + 2 * D5 - 20, 40, 40);
-
-            // 第五個矩形
-            rects[4] = new Rectangle(Cx5 - D5 + 2 * D5 - 20, Cy5 - D5 + 2 * D5 - 20, 40, 40);
-
-            gp5.AddRectangles(rects); // 將 矩形陣列 加入到 GraphicsPath物件
-
-            // 將 gp5 內的形狀 繪出
-            g.DrawPath(Pens.Red, gp5); // 繪出GraphicsPath物件
-
-
         }
 
         bool flag_eraser = false;
@@ -3125,58 +2768,6 @@ namespace vcs_Draw1
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             flag_mouse_down = 0;
-        }
-
-        private void pictureBox_gradient_color_st_Click(object sender, EventArgs e)
-        {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                color_st = colorDialog1.Color;
-                pictureBox_gradient_color_st.BackColor = color_st;
-                draw_gradient_color();
-            }
-        }
-
-        private void pictureBox_gradient_color_sp_Click(object sender, EventArgs e)
-        {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                color_sp = colorDialog1.Color;
-                pictureBox_gradient_color_sp.BackColor = color_sp;
-                draw_gradient_color();
-            }
-        }
-
-        void draw_gradient_color()
-        {
-            int W = pictureBox_gradient_color.ClientSize.Width;
-            int H = pictureBox_gradient_color.ClientSize.Height;
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-
-            int i;
-            int j;
-
-            byte r_st = color_st.R;
-            byte g_st = color_st.G;
-            byte b_st = color_st.B;
-
-            byte r_sp = color_sp.R;
-            byte g_sp = color_sp.G;
-            byte b_sp = color_sp.B;
-
-            int r_diff = r_sp - r_st;
-            int g_diff = g_sp - g_st;
-            int b_diff = b_sp - b_st;
-
-            for (j = 0; j < H; j++)
-            {
-                for (i = 0; i < W; i++)
-                {
-                    bitmap1.SetPixel(i, j, Color.FromArgb(255, r_st + i * r_diff / W, g_st + i * g_diff / W, b_st + i * b_diff / W));
-                }
-            }
-            pictureBox_gradient_color.Image = bitmap1;
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -3222,75 +2813,22 @@ namespace vcs_Draw1
 
         private void button50_Click(object sender, EventArgs e)
         {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            //GraphicsPath - AddString() 加入字串路徑
-
-            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
-
-            string text = "天若有情天亦老"; // 文字字串
-
-            FontFamily family = new FontFamily("標楷體");
-            StringFormat format = StringFormat.GenericDefault;
-            // format.FormatFlags = StringFormatFlags.DirectionVertical;　// 垂直
-
-            gp.AddString(text,  // 繪出文字字串
-                family,
-                (int)FontStyle.Regular,
-                70,
-                new Point(30, 30),
-                format);
-
-            // 將 gp 內的形狀 繪出
-            g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
         }
 
         private void button51_Click(object sender, EventArgs e)
         {
-            //使用Brush類繪製圖像
-            Image theimage;
-            Image smallimage;
-
-            this.pictureBox1.Size = new Size(600, 600);
-            SetStyle(ControlStyles.Opaque, true);
-            //Bounds = new Rectangle(0, 0, 600, 600);
-            string filename = @"C:\______test_files\_icon\唐.ico";
-            theimage = new Bitmap(filename);
-            smallimage = new Bitmap(theimage, new Size(theimage.Width / 2, theimage.Height / 2));
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);
-
-            Brush brush = new TextureBrush(smallimage, new Rectangle(0, 0, smallimage.Width, smallimage.Height));
-            //用圖像創建畫筆,來繪制圖像
-            g.FillEllipse(brush, new Rectangle(0, 200, 200, 200));
-            //用圖像創建剛筆,來繪制圖像
-            Pen pen = new Pen(brush, 40);
-            g.DrawRectangle(pen, new Rectangle(250, 200, 200, 200));
-            //用圖像繪製文本
-            Font font = new Font("Times New Roman", 60, FontStyle.Bold | FontStyle.Italic);
-            g.DrawString("Hello Image !!", font, brush, new Rectangle(0, 0, 500, font.Height));
-
-            brush.Dispose();
-            font.Dispose();
         }
 
         private void button52_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button53_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button54_Click(object sender, EventArgs e)
         {
-
         }
 
         int show_position = 1;
@@ -3437,7 +2975,7 @@ namespace vcs_Draw1
 
             pictureBox1.BackColor = Color.Pink;
 
-            string filename = @"C:\______test_files\_game\thumb-1920-283652.jpg";
+            string filename = @"C:\______test_files\__pic\_angry_bird\thumb-1920-283652.jpg";
 
             GraphicsUnit units = GraphicsUnit.Pixel;
 
@@ -3515,61 +3053,6 @@ namespace vcs_Draw1
         private void button59_Click(object sender, EventArgs e)
         {
         }
-
-        int percentageValues = 0;
-        private void timer_progressbar_Tick(object sender, EventArgs e)
-        {
-            this.pictureBox_progressbar.Invalidate();
-            percentageValues++;
-            if (percentageValues > 100)
-            {
-                percentageValues = 0;
-            }
-        }
-
-        private GraphicsPath CreateRound(Rectangle rectangle, int r)
-        {
-            int l = 2 * r;
-            // 把圆角矩形分成八段直线、弧的组合，依次加到路径中 
-            GraphicsPath gp = new GraphicsPath();
-            gp.AddLine(new Point(rectangle.X + r, rectangle.Y), new Point(rectangle.Right - r, rectangle.Y));
-            gp.AddArc(new Rectangle(rectangle.Right - l, rectangle.Y, l, l), 270F, 90F);
-            gp.AddLine(new Point(rectangle.Right, rectangle.Y + r), new Point(rectangle.Right, rectangle.Bottom - r));
-            gp.AddArc(new Rectangle(rectangle.Right - l, rectangle.Bottom - l, l, l), 0F, 90F);
-            gp.AddLine(new Point(rectangle.Right - r, rectangle.Bottom), new Point(rectangle.X + r, rectangle.Bottom));
-            gp.AddArc(new Rectangle(rectangle.X, rectangle.Bottom - l, l, l), 90F, 90F);
-            gp.AddLine(new Point(rectangle.X, rectangle.Bottom - r), new Point(rectangle.X, rectangle.Y + r));
-            gp.AddArc(new Rectangle(rectangle.X, rectangle.Y, l, l), 180F, 90F);
-            return gp;
-        }
-
-        private void pictureBox_progressbar_Paint(object sender, PaintEventArgs e)
-        {
-            //畫背景
-            Rectangle rect = e.ClipRectangle;
-            int x_st = 0;
-            int y_st = 0;
-            int w = 530;
-            int h = 12;
-            rect = new Rectangle(x_st, y_st, w - 1, h);
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;//消除锯齿
-            GraphicsPath round = CreateRound(rect, 5);
-            e.Graphics.FillPath(new SolidBrush(Color.FromArgb(217, 218, 219)), round);
-
-            //畫前景進度
-            rect = new Rectangle(x_st, y_st, ((w * percentageValues) / 100) - 1, h);
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;//消除锯齿
-            round = CreateRound(rect, 5);
-            if (percentageValues <= 70)
-            {
-                e.Graphics.FillPath(new SolidBrush(Color.FromArgb(25, 176, 132)), round);
-            }
-            else
-            {
-                e.Graphics.FillPath(new SolidBrush(Color.Red), round);
-            }
-        }
     }
 }
-
 

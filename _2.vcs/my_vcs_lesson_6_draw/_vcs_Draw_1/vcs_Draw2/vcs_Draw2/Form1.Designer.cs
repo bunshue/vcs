@@ -318,7 +318,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(102, 42);
             this.button26.TabIndex = 42;
-            this.button26.Text = "漸層色2";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -329,7 +328,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(102, 42);
             this.button25.TabIndex = 41;
-            this.button25.Text = "漸層色1";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -554,7 +552,6 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(102, 42);
             this.button30.TabIndex = 56;
-            this.button30.Text = "TextureBrush 有圖形的塗刷1";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -565,7 +562,6 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(102, 42);
             this.button31.TabIndex = 57;
-            this.button31.Text = "TextureBrush 有圖形的塗刷2";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 

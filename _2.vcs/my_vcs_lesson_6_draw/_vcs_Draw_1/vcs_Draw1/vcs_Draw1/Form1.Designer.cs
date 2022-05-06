@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button9 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -64,7 +63,6 @@
             this.button27 = new System.Windows.Forms.Button();
             this.bt_save = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
             this.button30 = new System.Windows.Forms.Button();
@@ -90,11 +88,6 @@
             this.button48 = new System.Windows.Forms.Button();
             this.button49 = new System.Windows.Forms.Button();
             this.bt_eraser = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pictureBox_gradient_color_sp = new System.Windows.Forms.PictureBox();
-            this.pictureBox_gradient_color_st = new System.Windows.Forms.PictureBox();
-            this.pictureBox_gradient_color = new System.Windows.Forms.PictureBox();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.button50 = new System.Windows.Forms.Button();
             this.button51 = new System.Windows.Forms.Button();
             this.button52 = new System.Windows.Forms.Button();
@@ -105,18 +98,9 @@
             this.button57 = new System.Windows.Forms.Button();
             this.button58 = new System.Windows.Forms.Button();
             this.button59 = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
-            this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_sp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_st)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -504,14 +488,6 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // panel2
-            // 
-            this.panel2.Location = new System.Drawing.Point(410, 561);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 100);
-            this.panel2.TabIndex = 52;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
             // button28
             // 
             this.button28.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -540,7 +516,6 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(120, 42);
             this.button30.TabIndex = 55;
-            this.button30.Text = "漸層色";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -613,7 +588,6 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(120, 42);
             this.button35.TabIndex = 62;
-            this.button35.Text = "漸層色 3種";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
@@ -756,7 +730,6 @@
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(120, 42);
             this.button48.TabIndex = 75;
-            this.button48.Text = "連接繪圖物件";
             this.button48.UseVisualStyleBackColor = true;
             this.button48.Click += new System.EventHandler(this.button48_Click);
             // 
@@ -782,56 +755,6 @@
             this.bt_eraser.UseVisualStyleBackColor = true;
             this.bt_eraser.Click += new System.EventHandler(this.bt_eraser_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.pictureBox_gradient_color_sp);
-            this.groupBox1.Controls.Add(this.pictureBox_gradient_color_st);
-            this.groupBox1.Controls.Add(this.pictureBox_gradient_color);
-            this.groupBox1.Location = new System.Drawing.Point(363, 248);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(387, 172);
-            this.groupBox1.TabIndex = 78;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "漸層色";
-            // 
-            // pictureBox_gradient_color_sp
-            // 
-            this.pictureBox_gradient_color_sp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox_gradient_color_sp.BackColor = System.Drawing.Color.Lime;
-            this.pictureBox_gradient_color_sp.Location = new System.Drawing.Point(351, 94);
-            this.pictureBox_gradient_color_sp.Name = "pictureBox_gradient_color_sp";
-            this.pictureBox_gradient_color_sp.Size = new System.Drawing.Size(30, 67);
-            this.pictureBox_gradient_color_sp.TabIndex = 2;
-            this.pictureBox_gradient_color_sp.TabStop = false;
-            this.pictureBox_gradient_color_sp.Click += new System.EventHandler(this.pictureBox_gradient_color_sp_Click);
-            // 
-            // pictureBox_gradient_color_st
-            // 
-            this.pictureBox_gradient_color_st.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox_gradient_color_st.BackColor = System.Drawing.Color.Red;
-            this.pictureBox_gradient_color_st.Location = new System.Drawing.Point(6, 94);
-            this.pictureBox_gradient_color_st.Name = "pictureBox_gradient_color_st";
-            this.pictureBox_gradient_color_st.Size = new System.Drawing.Size(30, 67);
-            this.pictureBox_gradient_color_st.TabIndex = 1;
-            this.pictureBox_gradient_color_st.TabStop = false;
-            this.pictureBox_gradient_color_st.Click += new System.EventHandler(this.pictureBox_gradient_color_st_Click);
-            // 
-            // pictureBox_gradient_color
-            // 
-            this.pictureBox_gradient_color.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox_gradient_color.BackColor = System.Drawing.Color.White;
-            this.pictureBox_gradient_color.Location = new System.Drawing.Point(6, 21);
-            this.pictureBox_gradient_color.Name = "pictureBox_gradient_color";
-            this.pictureBox_gradient_color.Size = new System.Drawing.Size(375, 67);
-            this.pictureBox_gradient_color.TabIndex = 0;
-            this.pictureBox_gradient_color.TabStop = false;
-            // 
             // button50
             // 
             this.button50.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -839,7 +762,6 @@
             this.button50.Name = "button50";
             this.button50.Size = new System.Drawing.Size(120, 42);
             this.button50.TabIndex = 79;
-            this.button50.Text = "AddString()";
             this.button50.UseVisualStyleBackColor = true;
             this.button50.Click += new System.EventHandler(this.button50_Click);
             // 
@@ -850,7 +772,6 @@
             this.button51.Name = "button51";
             this.button51.Size = new System.Drawing.Size(120, 42);
             this.button51.TabIndex = 80;
-            this.button51.Text = "使用Brush類繪製圖像";
             this.button51.UseVisualStyleBackColor = true;
             this.button51.Click += new System.EventHandler(this.button51_Click);
             // 
@@ -937,37 +858,11 @@
             this.button59.UseVisualStyleBackColor = true;
             this.button59.Click += new System.EventHandler(this.button59_Click);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.pictureBox_progressbar);
-            this.groupBox2.Location = new System.Drawing.Point(659, 138);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(85, 95);
-            this.groupBox2.TabIndex = 88;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "自製進度條";
-            // 
-            // pictureBox_progressbar
-            // 
-            this.pictureBox_progressbar.Location = new System.Drawing.Point(24, 22);
-            this.pictureBox_progressbar.Name = "pictureBox_progressbar";
-            this.pictureBox_progressbar.Size = new System.Drawing.Size(566, 63);
-            this.pictureBox_progressbar.TabIndex = 0;
-            this.pictureBox_progressbar.TabStop = false;
-            this.pictureBox_progressbar.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_progressbar_Paint);
-            // 
-            // timer_progressbar
-            // 
-            this.timer_progressbar.Enabled = true;
-            this.timer_progressbar.Interval = 10;
-            this.timer_progressbar.Tick += new System.EventHandler(this.timer_progressbar_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1443, 917);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button59);
             this.Controls.Add(this.button58);
             this.Controls.Add(this.button57);
@@ -978,7 +873,6 @@
             this.Controls.Add(this.button52);
             this.Controls.Add(this.button51);
             this.Controls.Add(this.button50);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_eraser);
             this.Controls.Add(this.button49);
             this.Controls.Add(this.button48);
@@ -1004,7 +898,6 @@
             this.Controls.Add(this.button30);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button27);
@@ -1050,12 +943,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_sp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_st)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1098,7 +985,6 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.Button button30;
@@ -1124,11 +1010,6 @@
         private System.Windows.Forms.Button button48;
         private System.Windows.Forms.Button button49;
         private System.Windows.Forms.Button bt_eraser;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.PictureBox pictureBox_gradient_color_sp;
-        private System.Windows.Forms.PictureBox pictureBox_gradient_color_st;
-        private System.Windows.Forms.PictureBox pictureBox_gradient_color;
-        private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button button50;
         private System.Windows.Forms.Button button51;
         private System.Windows.Forms.Button button52;
@@ -1139,9 +1020,6 @@
         private System.Windows.Forms.Button button57;
         private System.Windows.Forms.Button button58;
         private System.Windows.Forms.Button button59;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.PictureBox pictureBox_progressbar;
-        private System.Windows.Forms.Timer timer_progressbar;
     }
 }
 

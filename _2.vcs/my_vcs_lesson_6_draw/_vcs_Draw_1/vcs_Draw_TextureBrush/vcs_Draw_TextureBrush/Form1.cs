@@ -65,19 +65,20 @@ namespace vcs_Draw_TextureBrush
 
             Image theimage;
             Image smallimage;
+
             SetStyle(ControlStyles.Opaque, true);
-            Bounds = new Rectangle(0, 0, 1300, 850);
+            //Bounds = new Rectangle(0, 0, 600, 600);
             theimage = new Bitmap(filename);
-            smallimage = new Bitmap(theimage, new Size(theimage.Width, theimage.Height));
+            smallimage = new Bitmap(theimage, new Size(theimage.Width / 2, theimage.Height / 2));
 
             Graphics g = this.pictureBox1.CreateGraphics();
-            g.FillRectangle(Brushes.White, ClientRectangle);
+            g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);
 
             Brush brush = new TextureBrush(smallimage, new Rectangle(0, 0, smallimage.Width, smallimage.Height));
             //用圖像創建畫筆,來繪制圖像
             g.FillEllipse(brush, new Rectangle(0, 200, 200, 200));
             //用圖像創建剛筆,來繪制圖像
-            Pen pen = new Pen(brush, 20);
+            Pen pen = new Pen(brush, 40);
             g.DrawRectangle(pen, new Rectangle(250, 200, 200, 200));
             //用圖像繪製文本
             Font font = new Font("Times New Roman", 60, FontStyle.Bold | FontStyle.Italic);
@@ -115,12 +116,27 @@ namespace vcs_Draw_TextureBrush
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //TextureBrush 有圖形的塗刷1
 
+            Graphics g = pictureBox1.CreateGraphics();
+
+            Bitmap bmp = new Bitmap(Properties.Resources.Butterfly);
+            TextureBrush Mybrush = new TextureBrush(bmp);  // 使用的影像
+            g.FillEllipse(Mybrush, 20, 20, 400, 200); //塗刷填滿橢圓形區域
+            g.DrawEllipse(Pens.Black, 20, 20, 400, 200);  //畫出橢圓形外框
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //TextureBrush 有圖形的塗刷2
 
+            Graphics g = pictureBox1.CreateGraphics();
+
+            Bitmap bmp = new Bitmap(Properties.Resources.Butterfly);
+            Rectangle rect = new Rectangle(0, 0, 50, 50);
+            TextureBrush Mybrush = new TextureBrush(bmp, rect);  // 使用的影像
+            g.FillEllipse(Mybrush, 20, 20, 400, 200); //塗刷填滿橢圓形區域
+            g.DrawEllipse(Pens.Black, 20, 20, 400, 200);  //畫出橢圓形外框
         }
 
         private void button4_Click(object sender, EventArgs e)

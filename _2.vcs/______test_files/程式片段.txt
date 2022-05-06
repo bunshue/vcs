@@ -1,5 +1,21 @@
 
 
+
+
+車諾比核事故
+
+
+車諾比核電廠	51.389167, 30.099444（转换） 
+
+，是烏克蘭的一座已經停止使用的核電廠；1986年4月26日四號機因核事故而停止使用，從2015年4月開始1至3號機組已陸續進入退役狀態[1]。而1986年電站的四號機組發生爆炸，引發車諾比核事故。 
+
+
+
+
+
+
+
+
 將一個資料夾中的所有圖片檔案撈出來編號 每隔1分鐘更換一張桌面底圖 寫上時間 循環播放
 
 記住上次程式關閉時的中心位置 及顯示圖片狀態 給下次程式啟動實用
@@ -5555,5 +5571,33 @@ ffmpeg64.exe -i null.ape -ar 44100 -ac 2 -ab 16k -vol 50 -f mp3 null.mp3
 
 
 
+
+
+
+
+
+        //DrawHelper的创建圆角矩形函数
+        /// <summary>
+        /// 创建圆角矩形
+        /// </summary>
+        /// <param name="rectangle">圆角矩形的边界矩形</param>
+        /// <param name="radius">圆角大小</param>
+        /// <returns>返回圆角矩形的路径</returns>
+
+        public static GraphicsPath CreateRoundRectangle(Rectangle rectangle, int radius)
+        {
+            GraphicsPath path = new GraphicsPath(FillMode.Winding);
+            int l = rectangle.Left;
+            int t = rectangle.Top;
+            int w = rectangle.Width;
+            int h = rectangle.Height;
+            int d = radius << 1;
+            path.AddArc(l, t, d, d, 180, 90); // topleft
+            path.AddArc(l + w - d, t, d, d, 270, 90); // topright
+            path.AddArc(l + w - d, t + h - d, d, d, 0, 90); // bottomright
+            path.AddArc(l, t + h - d, d, d, 90, 90); // bottomleft
+            path.CloseFigure();
+            return path;
+        }
 
 

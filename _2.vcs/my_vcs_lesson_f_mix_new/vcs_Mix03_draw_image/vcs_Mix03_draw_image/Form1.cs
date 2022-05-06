@@ -107,97 +107,16 @@ namespace vcs_Mix03_draw_image
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            Bitmap bitmap1 = new Bitmap(300, 200);
-            Graphics g = Graphics.FromImage(bitmap1);
-            Font f = new Font("arial", 11f);
-            Brush b = Brushes.Blue;
-
-            string txt = "Rotate text animation!";
-            SizeF sz = g.MeasureString(txt, f);
-            g.Clear(Color.WhiteSmoke);
-            g.DrawString(txt, f, b, 50 - sz.Width / 2, 50 - sz.Height / 2);
-            g.Flush();
-
-            for (int i = 1; i < 36; ++i)
-            {
-                g.Clear(Color.WhiteSmoke);
-                g.TranslateTransform(50, 50);
-                g.RotateTransform(10f * i);
-                g.DrawString(txt, f, b, sz.Width / -2, sz.Height / -2);
-                g.ResetTransform();
-                g.DrawString("Hello", f, Brushes.Red, -50 + i * 4, 20);
-                g.DrawString("Yeah", f, Brushes.Orange, 60, -20 + i * 4);
-
-                g.Flush();
-
-                pictureBox1.Image = bitmap1;
-                Application.DoEvents();
-                delay(300);
-            }
-
-            f.Dispose();
-            g.Dispose();
-            bitmap1.Dispose();
-
-        }
-
-        //delay 10000 約 10秒
-        //C# 不lag的延遲時間
-        private void delay(int delay_milliseconds)
-        {
-            delay_milliseconds *= 2;
-            DateTime time_before = DateTime.Now;
-            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
-            {
-                Application.DoEvents();
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //實現任意角度旋轉圖像主要使用Graphics類提供的RotateTransform()方法
-
-            string filename = @"C:\______test_files\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            //pictureBox1.Image = bitmap1;
-
-            //以任意角度旋轉顯示圖像
-            Graphics g = this.pictureBox1.CreateGraphics();
-            float MyAngle = 0;//旋轉的角度
-            while (MyAngle < 360)
-            {
-                TextureBrush MyBrush = new TextureBrush(bitmap1);
-                this.pictureBox1.Refresh();
-                MyBrush.RotateTransform(MyAngle);
-                g.FillRectangle(MyBrush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
-                MyAngle += 0.5f;
-                System.Threading.Thread.Sleep(50);
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //實現任意角度旋轉圖片
-            string filename = @"C:\______test_files\picture1.jpg";
-            Image image = Image.FromFile(filename);
-
-            //以任意角度旋轉顯示圖像
-            Graphics g = this.pictureBox1.CreateGraphics();
-            float angle = 0;//旋轉的角度
-            while (angle < 360)
-            {
-                TextureBrush tb = new TextureBrush(image);
-                this.pictureBox1.Refresh();
-                tb.RotateTransform(angle);
-                g.FillRectangle(tb, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
-                angle += 0.5f;
-                System.Threading.Thread.Sleep(50);
-            }
-
-
-
         }
 
         private void button4_Click(object sender, EventArgs e)

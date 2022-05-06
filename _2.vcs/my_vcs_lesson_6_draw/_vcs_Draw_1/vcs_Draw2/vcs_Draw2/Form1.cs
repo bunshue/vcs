@@ -1658,7 +1658,7 @@ namespace vcs_Draw2
             //DrawPicture
             //在指定位置畫上一圖
             // Create image.
-            Image newImage = Image.FromFile(@"C:\______test_files\cat\cat2.png");
+            Image newImage = Image.FromFile(@"C:\______test_files\__pic\_cat\cat2.png");
             //Image newImage = Resource1.doraemon;
 
             // Create coordinates for upper-left corner of image.
@@ -1676,36 +1676,10 @@ namespace vcs_Draw2
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //漸層色1
-            //LinearGradientBrush線形漸層塗刷
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            LinearGradientBrush lbrush = new LinearGradientBrush(
-       new Point(0, 0),  // 開始的位置
-       new Point(400, 200),// 結束的位置
-       Color.White, // 第一種顏色
-       Color.Blue); // 第二種顏色
-
-            g.FillRectangle(lbrush, 0, 0, 400, 200);
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            //漸層色2
-            //PathGradientBrush 路徑漸層塗刷
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            Point[] pt = new Point[3];  // 路徑
-            pt[0] = new Point(0, 0);
-            pt[1] = new Point(200, 200);
-            pt[2] = new Point(400, 0);
-            PathGradientBrush lbrush = new PathGradientBrush(pt);  // 中央顏色 
-            lbrush.CenterColor = Color.Blue;
-            Color[] colorArray = new Color[] { Color.Red, Color.Green, Color.Yellow };
-            lbrush.SurroundColors = colorArray; // 路徑中點的顏色
-            g.FillRectangle(lbrush, 0, 0, 400, 200);
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1862,27 +1836,10 @@ namespace vcs_Draw2
 
         private void button30_Click(object sender, EventArgs e)
         {
-            //TextureBrush 有圖形的塗刷2
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            Bitmap bmp = new Bitmap(Properties.Resources.Butterfly);
-            TextureBrush Mybrush = new TextureBrush(bmp);  // 使用的影像
-            g.FillEllipse(Mybrush, 20, 20, 400, 200); //塗刷填滿橢圓形區域
-            g.DrawEllipse(Pens.Black, 20, 20, 400, 200);  //畫出橢圓形外框
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
-            //TextureBrush 有圖形的塗刷2
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            Bitmap bmp = new Bitmap(Properties.Resources.Butterfly);
-            Rectangle rect = new Rectangle(0, 0, 50, 50);
-            TextureBrush Mybrush = new TextureBrush(bmp, rect);  // 使用的影像
-            g.FillEllipse(Mybrush, 20, 20, 400, 200); //塗刷填滿橢圓形區域
-            g.DrawEllipse(Pens.Black, 20, 20, 400, 200);  //畫出橢圓形外框
         }
 
         //畫筆的設定

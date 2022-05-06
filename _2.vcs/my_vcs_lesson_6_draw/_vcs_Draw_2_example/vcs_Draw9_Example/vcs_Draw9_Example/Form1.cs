@@ -165,17 +165,17 @@ namespace vcs_Draw9_Example
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
 
-            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 14);
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 14 + 20);
 
             bt_reset.Location = new Point(x_st + dx * 4, y_st + dy * 15);
             bt_save.Location = new Point(x_st + dx * 5, y_st + dy * 15);
 
-            cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 14);
-            cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 14);
-            cb_magnifying.Location = new Point(x_st + dx * 2, y_st + dy * 14 + dy / 2);
+            cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 14 + 30);
+            cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 14 + 30);
+            cb_magnifying.Location = new Point(x_st + dx * 2, y_st + dy * 14 + dy / 2 + 30);
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 16);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width+200, 250);
+            richTextBox1.Size = new Size(richTextBox1.Size.Width + 200, 250);
 
             pictureBox1.Location = new Point(10, 10);
             pictureBox1.Size = new Size(900, 600);
@@ -381,7 +381,7 @@ namespace vcs_Draw9_Example
             KnownColor[] allColors = new KnownColor[colorsArray.Length];
             Array.Copy(colorsArray, allColors, colorsArray.Length);
 
-            richTextBox1.Text +="共有 " + allColors.Length.ToString() +" 種顏色\n";
+            richTextBox1.Text += "共有 " + allColors.Length.ToString() + " 種顏色\n";
             // Loop through printing out the values' names in the colors 
             // they represent.
             float y = -20;
@@ -5572,7 +5572,7 @@ namespace vcs_Draw9_Example
             pictureBox1.Location = new Point(10, 10);
             pictureBox1.Size = new Size(900, 600);
             pictureBox1.BackColor = Color.White;
-
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
 
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
@@ -5586,8 +5586,6 @@ namespace vcs_Draw9_Example
             sb = new SolidBrush(Color.Blue);
             g.Clear(Color.White);
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void bt_save_Click(object sender, EventArgs e)
@@ -6019,7 +6017,6 @@ namespace vcs_Draw9_Example
         {
             //使用GDI畫坐標圖(支持負值)
 
-
             Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format24bppRgb);
             Graphics g = Graphics.FromImage(bitmap1);
             //Graphics g = this.CreateGraphics();
@@ -6076,8 +6073,6 @@ namespace vcs_Draw9_Example
 
             pictureBox1.Image = bitmap1;
             g.Dispose();
-
-
         }
 
         private void button33_Click(object sender, EventArgs e)
@@ -6494,9 +6489,13 @@ namespace vcs_Draw9_Example
             int tem_Line = 0;//記錄圓的直徑
             int circularity_W = 4;//設置圓畫筆的粗細
             if (pictureBox1.Width >= pictureBox1.Height)//如果pictureBox1控件的寬度大於等於高度
+            {
                 tem_Line = pictureBox1.Height;//設置高度為圓的直徑
+            }
             else
+            {
                 tem_Line = pictureBox1.Width;//設置寬度為圓的直徑
+            }
             rect = new Rectangle(circularity_W, circularity_W, tem_Line - circularity_W * 2, tem_Line - circularity_W * 2);//設置圓的繪製區域
             Font star_Font = new Font("Arial", 30, FontStyle.Regular);//設置星號的字體樣式
             string star_Str = "★";
@@ -7024,7 +7023,6 @@ namespace vcs_Draw9_Example
             int width = 15 * dd;
             int height = 15 * dd;
 
-            pictureBox1.Size = new Size(width, height);
             bitmap1 = new Bitmap(width, height);
 
             byte aa = 255;
@@ -7073,13 +7071,13 @@ namespace vcs_Draw9_Example
 
         private void button45_Click(object sender, EventArgs e)
         {
-            int width = 640;
-            int height = 480;
+            int W = 640;
+            int H = 480;
 
-            pictureBox1.Size = new Size(width, height);
-            bitmap1 = new Bitmap(width, height);
+            bitmap1 = new Bitmap(W, H);
 
             Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
             Pen p = new Pen(Color.Red, 5);
 
             int i;
@@ -7096,13 +7094,8 @@ namespace vcs_Draw9_Example
             int ww = awb_block;
             int hh = awb_block;
 
-            int w;
-            int h;
-            w = bitmap1.Width;
-            h = bitmap1.Height;
-
-            x_st = w / 2 - awb_window_size / 2;
-            y_st = h / 2 - awb_window_size / 2;
+            x_st = W / 2 - awb_window_size / 2;
+            y_st = H / 2 - awb_window_size / 2;
 
             Pen p1 = new Pen(Color.Silver, 1);  //一般情況 中間大框框 為銀色
 
@@ -7131,15 +7124,8 @@ namespace vcs_Draw9_Example
                     delay(10);
                 }
             }
-
-
-
-
             richTextBox1.Text += "\n";
             pictureBox1.Image = bitmap1;
-
-
-
         }
 
         //delay 10000 約 10秒
@@ -7157,7 +7143,7 @@ namespace vcs_Draw9_Example
         private void button46_Click(object sender, EventArgs e)
         {
             //畫圓角矩形
-            Bitmap bitmap1 = new Bitmap(600, 400);
+            //Bitmap bitmap1 = new Bitmap(640, 480);
             Graphics g = Graphics.FromImage(bitmap1);
             g.FillRectangle(Brushes.Pink, new Rectangle(0, 0, 600, 400));
             FillRoundRectangle(g, Brushes.Plum, new Rectangle(100, 100, 100, 100), 8);
@@ -7474,7 +7460,7 @@ namespace vcs_Draw9_Example
         {
             //繪製螞蟻線, 目前只能畫在表單上
             graphicsPath.ClearMarkers();
-            graphicsPath.AddRectangle(new Rectangle(900, 100, 200, 200));
+            graphicsPath.AddRectangle(new Rectangle(10, 620, 900, 200));
             timer_dot_line.Interval = 100;
             timer_dot_line.Enabled = true;
         }
@@ -8689,6 +8675,104 @@ namespace vcs_Draw9_Example
 
         private void bt_long5_Click(object sender, EventArgs e)
         {
+            //動態旋轉文字
+
+            Bitmap bitmap1 = new Bitmap(300, 200);
+            Graphics g = Graphics.FromImage(bitmap1);
+            Font f = new Font("arial", 11f);
+            Brush b = Brushes.Blue;
+
+            string txt = "Rotate text animation!";
+            SizeF sz = g.MeasureString(txt, f);
+            g.Clear(Color.WhiteSmoke);
+            g.DrawString(txt, f, b, 50 - sz.Width / 2, 50 - sz.Height / 2);
+            g.Flush();
+
+            for (int i = 1; i < 36; ++i)
+            {
+                g.Clear(Color.WhiteSmoke);
+                g.TranslateTransform(50, 50);
+                g.RotateTransform(10f * i);
+                g.DrawString(txt, f, b, sz.Width / -2, sz.Height / -2);
+                g.ResetTransform();
+                g.DrawString("Hello", f, Brushes.Red, -50 + i * 4, 20);
+                g.DrawString("Yeah", f, Brushes.Orange, 60, -20 + i * 4);
+
+                g.Flush();
+
+                pictureBox1.Image = bitmap1;
+                Application.DoEvents();
+                delay(300);
+            }
+
+            f.Dispose();
+            g.Dispose();
+            bitmap1.Dispose();
+
+
+        }
+
+        private void bt_long6_Click(object sender, EventArgs e)
+        {
+            //以任意角度旋轉圖像
+            //實現任意角度旋轉圖像主要使用Graphics類提供的RotateTransform()方法
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            //pictureBox1.Image = bitmap1;
+
+            //以任意角度旋轉顯示圖像
+            Graphics g = this.pictureBox1.CreateGraphics();
+            float MyAngle = 0;//旋轉的角度
+            while (MyAngle < 360)
+            {
+                TextureBrush MyBrush = new TextureBrush(bitmap1);
+                this.pictureBox1.Refresh();
+                MyBrush.RotateTransform(MyAngle);
+                g.FillRectangle(MyBrush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
+                MyAngle += 0.5f;
+                Thread.Sleep(50);
+            }
+
+        }
+
+        private void bt_long7_Click(object sender, EventArgs e)
+        {
+            //實現任意角度旋轉圖片
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image = Image.FromFile(filename);
+
+            //以任意角度旋轉顯示圖像
+            Graphics g = this.pictureBox1.CreateGraphics();
+            float angle = 0;//旋轉的角度
+            while (angle < 360)
+            {
+                TextureBrush tb = new TextureBrush(image);
+                this.pictureBox1.Refresh();
+                tb.RotateTransform(angle);
+                g.FillRectangle(tb, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
+                angle += 0.5f;
+                Thread.Sleep(50);
+            }
+        }
+
+        private void bt_long8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_long9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_long10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_long11_Click(object sender, EventArgs e)
+        {
 
         }
 
@@ -9025,6 +9109,3 @@ namespace vcs_Draw9_Example
         }
     }
 }
-
-
-
