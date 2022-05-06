@@ -789,7 +789,7 @@
             this.rb_location4.Name = "rb_location4";
             this.rb_location4.Size = new System.Drawing.Size(59, 16);
             this.rb_location4.TabIndex = 3;
-            this.rb_location4.Text = "馬立波";
+            this.rb_location4.Text = "烏克蘭";
             this.rb_location4.UseVisualStyleBackColor = true;
             this.rb_location4.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
             // 
@@ -829,12 +829,10 @@
             // rb_location0
             // 
             this.rb_location0.AutoSize = true;
-            this.rb_location0.Checked = true;
             this.rb_location0.Location = new System.Drawing.Point(13, 17);
             this.rb_location0.Name = "rb_location0";
             this.rb_location0.Size = new System.Drawing.Size(47, 16);
             this.rb_location0.TabIndex = 0;
-            this.rb_location0.TabStop = true;
             this.rb_location0.Text = "竹北";
             this.rb_location0.UseVisualStyleBackColor = true;
             this.rb_location0.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);

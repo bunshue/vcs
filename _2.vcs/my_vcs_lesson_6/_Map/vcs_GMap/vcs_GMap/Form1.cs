@@ -57,6 +57,7 @@ namespace vcs_GMap
         bool flag_measure_first_point = false;
         PointLatLng pt1 = new PointLatLng(0, 0);
         PointLatLng pt2 = new PointLatLng(0, 0);
+        PointLatLng pt1_tmp = new PointLatLng(0, 0);
         double total_distance = 0;
 
         //讀取座標資料
@@ -971,6 +972,7 @@ namespace vcs_GMap
 
             if (e.Button == MouseButtons.Right) //檢查滑鼠右鍵
             {
+                pt1_tmp = gMapControl1.FromLocalToLatLng(e.X, e.Y);
                 contextMenuStrip1.Show(gMapControl1, e.Location);   //顯示ContextMenu
                 return;
             }
@@ -1056,6 +1058,12 @@ namespace vcs_GMap
         private void button6_Click(object sender, EventArgs e)
         {
             markersOverlay.Clear();
+
+            //量測距離
+            flag_measure_first_point = false;
+            total_distance = 0;
+            line_point.Clear();
+            draw_line_point();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -1855,8 +1863,14 @@ namespace vcs_GMap
                 //馬立波
                 latitude = 47.095833;   //緯度
                 longitude = 37.549444; //經度
+
+
+                //車諾比核電廠	51.389167, 30.099444
+                latitude = 51.389167;   //緯度
+                longitude = 30.099444; //經度
+
                 gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-                gMapControl1.Zoom = 6; //當前比例
+                gMapControl1.Zoom = 12; //當前比例
 
                 update_controls_info();
             }
@@ -2047,6 +2061,17 @@ namespace vcs_GMap
             line_point.Clear();
             draw_line_point();
             markersOverlay.Clear();
+
+            pt1 = pt1_tmp;
+            if ((flag_measure_distance == 1) || (flag_measure_distance == 2))  //0 : 無量測, 1 : 量測距離 單程, 2 : 量測距離 連續
+            {
+                line_point.Add(pt1);
+                draw_line_point();
+                if (flag_measure_first_point == false)
+                {
+                    flag_measure_first_point = true;
+                }
+            }
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -2058,6 +2083,17 @@ namespace vcs_GMap
             line_point.Clear();
             draw_line_point();
             markersOverlay.Clear();
+
+            pt1 = pt1_tmp;
+            if ((flag_measure_distance == 1) || (flag_measure_distance == 2))  //0 : 無量測, 1 : 量測距離 單程, 2 : 量測距離 連續
+            {
+                line_point.Add(pt1);
+                draw_line_point();
+                if (flag_measure_first_point == false)
+                {
+                    flag_measure_first_point = true;
+                }
+            }
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
