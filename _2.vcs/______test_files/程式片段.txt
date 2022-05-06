@@ -1,4 +1,16 @@
 
+參考
+C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_StackOrder
+
+讀一個資料夾內的圖片檔
+用controls add 造出幾個 picturebox 顯示這些圖 zoom模式
+Randomly任意位置顯示 及方向
+
+圖片按左鍵把圖片拉到最上層
+圖片按右鍵把圖片推到最下層
+也可以無邊框移動圖片
+
+
 
 
 

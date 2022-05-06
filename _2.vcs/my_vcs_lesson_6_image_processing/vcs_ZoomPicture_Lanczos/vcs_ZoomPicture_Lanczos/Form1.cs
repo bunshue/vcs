@@ -22,15 +22,15 @@ namespace vcs_ZoomPicture_Lanczos
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\ims01.bmp";
+            string filename = @"C:\______test_files\ims02.bmp";
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
 
             int x_st;
             int y_st;
-            int dx;
-            int dy;
+            //int dx;
+            //int dy;
 
             //button
             x_st = 0;
@@ -57,16 +57,12 @@ namespace vcs_ZoomPicture_Lanczos
         {
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
 
-            string filename = @"C:\______test_files\ims01.bmp";
+            string filename = @"C:\______test_files\ims02.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             double k = 2.0;
             Bitmap bitmap2 = ZoomLanczos2Apply(bitmap1, k);
             pictureBox2.Image = bitmap2;
-
-
-
         }
-
 
         private Bitmap ZoomLanczos2Apply(Bitmap srcBitmap, double k)
         {
@@ -200,22 +196,12 @@ namespace vcs_ZoomPicture_Lanczos
         {
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            string filename = @"C:\______test_files\ims01.bmp";
+            string filename = @"C:\______test_files\ims02.bmp";
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox2.Image = bitmap1;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
-
-            string filename = @"C:\______test_files\ims01.bmp";
-            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            pictureBox2.Image = bitmap1;
-
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -224,5 +210,59 @@ namespace vcs_ZoomPicture_Lanczos
             f2.Show();
 
         }
+
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
+
+            string filename = @"C:\______test_files\ims02.bmp";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            Bitmap bitmap2 = Zoom2_copy(bitmap1);
+            pictureBox2.Image = bitmap2;
+        }
+
+        private Bitmap Zoom2_copy(Bitmap srcBitmap)
+        {
+            int k = 2;
+            Bitmap src = new Bitmap(srcBitmap);
+            int w = src.Width;
+            int h = src.Height;
+            //BitmapData srcData = src.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+            int W = w * k;
+            int H = h * k;
+            Bitmap dst = new Bitmap(W, H, PixelFormat.Format32bppArgb);
+            Color p;
+
+            for (int j = 0; j < h; j++)
+            {
+                for (int i = 0; i < w; i++)
+                {
+                    p = src.GetPixel(i, j);
+                    dst.SetPixel(i * 2, j*2, p);
+                    dst.SetPixel(i * 2, j * 2 + 1, p);
+                    dst.SetPixel(i * 2 + 1, j*2, p);
+                    dst.SetPixel(i * 2 + 1, j * 2+1, p);
+                }
+            }
+            return dst;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
+
+            string filename = @"C:\______test_files\ims02.bmp";
+            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox2.Image = bitmap1;
+
+        }
+
+
+
+
+
     }
 }
+
