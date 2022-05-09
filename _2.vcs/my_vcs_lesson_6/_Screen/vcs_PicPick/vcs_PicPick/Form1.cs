@@ -178,8 +178,8 @@ namespace vcs_PicPick
             using (Bitmap bitmap1 = GetScreenImage())
             {
                 //存成bmp檔
-                string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-                bitmap1.Save(filename, ImageFormat.Jpeg);
+                string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                bitmap1.Save(filename, ImageFormat.Bmp);
                 //richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
                 label1.Text = "存檔成功";
                 timer1.Enabled = true;

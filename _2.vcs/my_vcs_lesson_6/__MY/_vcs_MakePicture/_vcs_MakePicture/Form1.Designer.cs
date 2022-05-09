@@ -95,6 +95,14 @@
             this.bt0 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button52 = new System.Windows.Forms.Button();
+            this.button53 = new System.Windows.Forms.Button();
+            this.button54 = new System.Windows.Forms.Button();
+            this.button55 = new System.Windows.Forms.Button();
+            this.button56 = new System.Windows.Forms.Button();
+            this.button57 = new System.Windows.Forms.Button();
+            this.button58 = new System.Windows.Forms.Button();
+            this.button59 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -801,11 +809,100 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button52
+            // 
+            this.button52.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button52.Location = new System.Drawing.Point(687, 452);
+            this.button52.Name = "button52";
+            this.button52.Size = new System.Drawing.Size(60, 60);
+            this.button52.TabIndex = 56;
+            this.button52.Text = "製作pattern";
+            this.button52.UseVisualStyleBackColor = true;
+            this.button52.Click += new System.EventHandler(this.button52_Click);
+            // 
+            // button53
+            // 
+            this.button53.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button53.Location = new System.Drawing.Point(754, 452);
+            this.button53.Name = "button53";
+            this.button53.Size = new System.Drawing.Size(60, 60);
+            this.button53.TabIndex = 57;
+            this.button53.UseVisualStyleBackColor = true;
+            this.button53.Click += new System.EventHandler(this.button53_Click);
+            // 
+            // button54
+            // 
+            this.button54.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button54.Location = new System.Drawing.Point(820, 452);
+            this.button54.Name = "button54";
+            this.button54.Size = new System.Drawing.Size(60, 60);
+            this.button54.TabIndex = 58;
+            this.button54.UseVisualStyleBackColor = true;
+            this.button54.Click += new System.EventHandler(this.button54_Click);
+            // 
+            // button55
+            // 
+            this.button55.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button55.Location = new System.Drawing.Point(887, 452);
+            this.button55.Name = "button55";
+            this.button55.Size = new System.Drawing.Size(60, 60);
+            this.button55.TabIndex = 59;
+            this.button55.UseVisualStyleBackColor = true;
+            this.button55.Click += new System.EventHandler(this.button55_Click);
+            // 
+            // button56
+            // 
+            this.button56.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button56.Location = new System.Drawing.Point(952, 452);
+            this.button56.Name = "button56";
+            this.button56.Size = new System.Drawing.Size(60, 60);
+            this.button56.TabIndex = 60;
+            this.button56.UseVisualStyleBackColor = true;
+            this.button56.Click += new System.EventHandler(this.button56_Click);
+            // 
+            // button57
+            // 
+            this.button57.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button57.Location = new System.Drawing.Point(1019, 452);
+            this.button57.Name = "button57";
+            this.button57.Size = new System.Drawing.Size(60, 60);
+            this.button57.TabIndex = 61;
+            this.button57.UseVisualStyleBackColor = true;
+            this.button57.Click += new System.EventHandler(this.button57_Click);
+            // 
+            // button58
+            // 
+            this.button58.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button58.Location = new System.Drawing.Point(1085, 452);
+            this.button58.Name = "button58";
+            this.button58.Size = new System.Drawing.Size(60, 60);
+            this.button58.TabIndex = 62;
+            this.button58.UseVisualStyleBackColor = true;
+            this.button58.Click += new System.EventHandler(this.button58_Click);
+            // 
+            // button59
+            // 
+            this.button59.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button59.Location = new System.Drawing.Point(1151, 452);
+            this.button59.Name = "button59";
+            this.button59.Size = new System.Drawing.Size(60, 60);
+            this.button59.TabIndex = 63;
+            this.button59.UseVisualStyleBackColor = true;
+            this.button59.Click += new System.EventHandler(this.button59_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1485, 848);
+            this.Controls.Add(this.button59);
+            this.Controls.Add(this.button58);
+            this.Controls.Add(this.button57);
+            this.Controls.Add(this.button56);
+            this.Controls.Add(this.button55);
+            this.Controls.Add(this.button54);
+            this.Controls.Add(this.button53);
+            this.Controls.Add(this.button52);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.groupBox1);
@@ -939,6 +1036,14 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button bt7;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button52;
+        private System.Windows.Forms.Button button53;
+        private System.Windows.Forms.Button button54;
+        private System.Windows.Forms.Button button55;
+        private System.Windows.Forms.Button button56;
+        private System.Windows.Forms.Button button57;
+        private System.Windows.Forms.Button button58;
+        private System.Windows.Forms.Button button59;
     }
 }
 

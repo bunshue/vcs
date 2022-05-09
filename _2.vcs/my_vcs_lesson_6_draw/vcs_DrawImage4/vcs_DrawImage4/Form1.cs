@@ -13,9 +13,6 @@ namespace vcs_DrawImage4
 {
     public partial class Form1 : Form
     {
-        int W;
-        int H;
-
         public Form1()
         {
             InitializeComponent();
@@ -50,75 +47,88 @@ namespace vcs_DrawImage4
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            /*
-            Graphics g = this.CreateGraphics();
-            Image img = Image.FromFile("c:\\______test_files\\picture1.jpg"); //載入圖檔，由檔案
-            //Bitmap bmp = Bitmap.FromFile("c:\\______test_files\\picture1.jpg"); //載入圖檔，由檔案
-            Pen p = new Pen(Color.Red, 3);
-            //g.DrawImage(img, 100, 100);
-            g.DrawImage(img, 450, 450);
+            string filename = @"C:\______test_files\picture1.jpg";
 
-            richTextBox1.Text += "轉變坐標軸角度\n";
+            int W = this.pictureBox1.Width;
+            int H = this.pictureBox1.Height;
 
-            for (int i = 0; i <= 20; i += 3)
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            Pen p = new Pen(Color.Gray, 1);
+
+            int i;
+            for (i = 0; i <= W; i += 100)
             {
-                g.RotateTransform(i);//旋轉指定的角度
-                g.TranslateTransform(500, 500);
-                //g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
-                g.DrawImage(img, 0, 0);
-                g.ResetTransform();//恢復坐標軸坐標 回 0 度
+                g.DrawLine(p, i, 0, i, H);
             }
-            */
+            for (i = 0; i <= H; i += 100)
+            {
+                g.DrawLine(p, 0, i, W, i);
+            }
 
-            string filename = "C:\\______test_files\\picture1.jpg";
-            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
-            Bitmap bitmap1 = new Bitmap(this.Width, this.Height);
-
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-
-            Graphics g = this.CreateGraphics();
             Rectangle srcRect = new Rectangle(0, 0, W, H);   //擷取部分區域
             GraphicsUnit units = GraphicsUnit.Pixel;
+            Image img = Image.FromFile(filename);
 
-            Point ulCorner = new Point(0, 0);
-            Point urCorner = new Point(0 + W, 0);
-            Point llCorner = new Point(0, 0 + H);
-            Point[] destRect1 = { ulCorner, urCorner, llCorner };
-
-            g.DrawRectangle(new Pen(Color.Red, 30), 0, 0, W, H);
-
-            Image img = Image.FromFile("c:\\______test_files\\picture1.jpg");
-
-            g.DrawImage(img, destRect1, srcRect, units);
-
-
-            richTextBox1.Text += "轉變坐標軸角度\n";
 
             int x_st = 0;
             int y_st = 0;
+            int angle = 0;
 
-            ulCorner = new Point(x_st + 0, y_st + 0);
-            urCorner = new Point(x_st + 0 + W, y_st + 0);
-            llCorner = new Point(x_st + 0, y_st + 0 + H);
-            Point[] destRect2 = { ulCorner, urCorner, llCorner };
-            
-            for (int i = 0; i <= 20; i += 3)
-            {
-                g.DrawRectangle(new Pen(Color.Red, 5), 0, 0, 200, 200);
-                g.RotateTransform(i);//旋轉指定的角度
-                g.TranslateTransform(600, 0);
-                //g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
-                g.DrawImage(img, destRect2, srcRect, units);
+            Point ulCorner = new Point(0, 0);
+            Point urCorner = new Point(W, 0);
+            Point llCorner = new Point(0, H);
+            Point[] destRect = { ulCorner, urCorner, llCorner };
+
+            x_st = 350 * 0;
+            y_st = 200;
+            angle = -10;
+            ulCorner = new Point(0, 0);
+            urCorner = new Point(W, 0);
+            llCorner = new Point(0, H);
+            destRect = new Point[] { ulCorner, urCorner, llCorner };
+
+            g.TranslateTransform(x_st, y_st);
+            g.RotateTransform(angle);//旋轉指定的角度
+            g.DrawImage(img, destRect, srcRect, units);
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+
+            x_st = 350 * 1;
+            y_st = 200;
+            angle = 0;
+            ulCorner = new Point(0, 0);
+            urCorner = new Point(W, 0);
+            llCorner = new Point(0, H);
+            destRect = new Point[] { ulCorner, urCorner, llCorner };
+
+            g.TranslateTransform(x_st, y_st);
+            g.RotateTransform(angle);//旋轉指定的角度
+            g.DrawImage(img, destRect, srcRect, units);
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+
+            x_st = 350 * 2;
+            y_st = 200;
+            angle = 10;
+            ulCorner = new Point(0, 0);
+            urCorner = new Point(W, 0);
+            llCorner = new Point(0, H);
+            destRect = new Point[] { ulCorner, urCorner, llCorner };
+
+            g.TranslateTransform(x_st, y_st);
+            g.RotateTransform(angle);//旋轉指定的角度
+            g.DrawImage(img, destRect, srcRect, units);
                 g.ResetTransform();//恢復坐標軸坐標 回 0 度
-            }
 
 
 
 
 
-
+            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)

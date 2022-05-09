@@ -62,6 +62,7 @@ namespace vcs_ZoomPicture_Lanczos
             double k = 2.0;
             Bitmap bitmap2 = ZoomLanczos2Apply(bitmap1, k);
             pictureBox2.Image = bitmap2;
+            bitmap2.Save("ims02.lanczos.bmp", ImageFormat.Bmp);
         }
 
         private Bitmap ZoomLanczos2Apply(Bitmap srcBitmap, double k)
@@ -220,6 +221,7 @@ namespace vcs_ZoomPicture_Lanczos
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             Bitmap bitmap2 = Zoom2_copy(bitmap1);
             pictureBox2.Image = bitmap2;
+            bitmap2.Save("ims02.duplicate.bmp", ImageFormat.Bmp);
         }
 
         private Bitmap Zoom2_copy(Bitmap srcBitmap)

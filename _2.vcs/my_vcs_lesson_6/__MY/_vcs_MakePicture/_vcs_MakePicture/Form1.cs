@@ -125,11 +125,16 @@ namespace _vcs_MakePicture
 
             button50.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button51.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            //button52.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            //button53.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button52.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button53.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button54.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            button55.Location = new Point(x_st + dx * 5, y_st + dy * 5);
+            button56.Location = new Point(x_st + dx * 6, y_st + dy * 5);
+            button57.Location = new Point(x_st + dx * 7, y_st + dy * 5);
+            button58.Location = new Point(x_st + dx * 8, y_st + dy * 5);
+            button59.Location = new Point(x_st + dx * 9, y_st + dy * 5);
 
             button9.Text = word;
-
 
             pictureBox1.Location = new Point(10, 10);
 
@@ -2025,6 +2030,69 @@ namespace _vcs_MakePicture
             pictureBox1.Image = bitmap1;
         }
 
+        private void button52_Click(object sender, EventArgs e)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 200;
+            height = 200;
+            bitmap1 = new Bitmap(width, height);
+
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    if (((xx + yy) % 5) == 0)
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 255, 255, 255));
+                    else
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
+                }
+            }
+            g = Graphics.FromImage(bitmap1);
+
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        private void button53_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button54_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button55_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button56_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button57_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button58_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button59_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void bt0_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "圖片(*.bmp,*.jpg,*.png)|*.bmp;*.jpg;*.png";
@@ -2784,9 +2852,6 @@ namespace _vcs_MakePicture
             {
                 g.FillEllipse(sb, new Rectangle(x_st + width / 4, y_st + height / 4, width / 2, height / 2));
             }
-
-
         }
     }
 }
-
