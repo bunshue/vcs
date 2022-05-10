@@ -69,6 +69,10 @@ namespace vcs_GMap
         private const int ICON_W = 50; //設定按鈕大小 W
         private const int ICON_H = 50; //設定按鈕大小 H
 
+        Country china;
+        private GMapOverlay regionOverlay = new GMapOverlay("region");
+        private GMapAreaPolygon currentAreaPolygon;
+
         public Form1()
         {
             InitializeComponent();
@@ -132,6 +136,8 @@ namespace vcs_GMap
             richTextBox1.Location = new Point(x_st + 960 + 70, y_st);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            treeView1.Location = new Point(x_st + 1220 + 70, y_st);
+
             x_st = 940;
             y_st = 30;
             btn_north.Location = new Point(x_st, y_st);
@@ -157,7 +163,7 @@ namespace vcs_GMap
             comboBox1.Location = new Point(x_st, y_st + dy * 3);
             btn_draw_profile.Location = new Point(x_st, y_st + dy * 4);
             btn_draw_profile2.Location = new Point(x_st + 85, y_st + dy * 4);
-            groupBox3.Location = new Point(x_st, y_st + dy * 5 + 20);
+            groupBox3.Location = new Point(x_st+40, y_st + dy * 5 + 20);
 
             x_st = 20;
             y_st = 15;
@@ -2588,7 +2594,169 @@ namespace vcs_GMap
 
         private void bt_test06_Click(object sender, EventArgs e)
         {
+            gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+
+            richTextBox1.Text += "call InitChinaRegion initial\n";
+            InitChinaRegion();
+
+            try
+            {
+                //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City;
+                byte[] buffer = Properties.Resources.ChinaBoundary;
+                china = ChinaMapRegion.GetChinaRegionFromJsonBinaryBytes(buffer);
+
+
+                if (china == null)
+                {
+                    //log.Error("加载中国省市边界失败！");
+                    return;
+                }
+
+                //InitPOICountrySearchCondition();
+
+                if (china != null)
+                {
+                    foreach (var provice in china.Province)
+                    {
+                        //this.comboBoxProvince.Items.Add(provice);
+                    }
+                }
+
+
+                richTextBox1.Text += "call InitCountryTree\n";
+                InitCountryTree();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                //log.Error(ex);
+            }
+
+
+
+
+
+
+
+
         }
+
+        private void InitChinaRegion()
+        {
+            TreeNode rootNode = new TreeNode("中国aaaaa");
+            this.treeView1.Nodes.Add(rootNode);
+            rootNode.Expand();
+
+            //异步加载中国省市边界
+            //BackgroundWorker loadChinaWorker = new BackgroundWorker();
+            //loadChinaWorker.DoWork += new DoWorkEventHandler(loadChinaWorker_DoWork);
+            //loadChinaWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(loadChinaWorker_RunWorkerCompleted);
+            //loadChinaWorker.RunWorkerAsync();
+        }
+
+
+        private void InitCountryTree()
+        {
+            richTextBox1.Text += "InitCountryTree ST\n";
+            try
+            {
+                if (china.Province != null)
+                {
+                    foreach (var provice in china.Province)
+                    {
+                        TreeNode pNode = new TreeNode(provice.name);
+                        pNode.Tag = provice;
+                        if (provice.City != null)
+                        {
+                            foreach (var city in provice.City)
+                            {
+                                TreeNode cNode = new TreeNode(city.name);
+                                cNode.Tag = city;
+                                if (city.Piecearea != null)
+                                {
+                                    foreach (var piecearea in city.Piecearea)
+                                    {
+                                        TreeNode areaNode = new TreeNode(piecearea.name);
+                                        areaNode.Tag = piecearea;
+                                        //richTextBox1.Text += "add cnode : " + areaNode.Tag + "\n";
+                                        cNode.Nodes.Add(areaNode);
+        }
+                                }
+                                pNode.Nodes.Add(cNode);
+                            }
+                        }
+
+                        TreeNode rootNode = this.treeView1.Nodes[0];
+                        //richTextBox1.Text += "add pNode : " + pNode + "\n";
+                        richTextBox1.Text += "add pNode text : " + pNode.Text + "\n";
+                        //richTextBox1.Text += "add pNode name : " + pNode.Name + "\n";
+                        //richTextBox1.Text += "add pNode tag : " + pNode.Tag + "\n";
+                        rootNode.Nodes.Add(pNode);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //log.Error(ex);
+            }
+
+            this.treeView1.NodeMouseClick += new TreeNodeMouseClickEventHandler(advTreeChina_NodeMouseClick);
+        }
+
+        void advTreeChina_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            //richTextBox1.Text += "advTreeChina_NodeMouseClick\n";
+            this.treeView1.SelectedNode = sender as TreeNode;
+            if (e.Button == MouseButtons.Left || e.Button == MouseButtons.Right)
+            {
+                string name = e.Node.Text;
+                string rings = null;
+                richTextBox1.Text += "name = " + name + ", level = " + e.Node.Level.ToString() + "\n";
+                switch (e.Node.Level)
+                {
+                    case 0:
+                        richTextBox1.Text += "XXXXXX, name = " + name + "\n";
+                        break;
+                    case 1:
+                        Province province = e.Node.Tag as Province;
+                        name = province.name;
+                        rings = province.rings;
+                        richTextBox1.Text += "Province, name = " + name + "\n";
+                        break;
+                    case 2:
+                        City city = e.Node.Tag as City;
+                        name = city.name;
+                        rings = city.rings;
+                        richTextBox1.Text += "City, name = " + name + "\n";
+                        break;
+                    case 3:
+                        Piecearea piecearea = e.Node.Tag as Piecearea;
+                        name = piecearea.name;
+                        rings = piecearea.rings;
+                        richTextBox1.Text += "Piecearea, name = " + name + "\n";
+                        break;
+                }
+                if (rings != null && !string.IsNullOrEmpty(rings))
+                {
+                    GMapPolygon polygon = GetRegionPolygon(name, rings);
+                    if (polygon != null)
+                    {
+                        richTextBox1.Text += "draw polygon\n";
+                        GMapAreaPolygon areaPolygon = new GMapAreaPolygon(polygon.Points, name);
+                        currentAreaPolygon = areaPolygon;
+                        RectLatLng rect = GMapChinaRegion.MapRegion.GetRegionMaxRect(polygon);
+                        GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
+                        regionOverlay.Clear();
+                        regionOverlay.Polygons.Add(areaPolygon);
+                        regionOverlay.Markers.Add(textMarker);
+                        this.gMapControl1.SetZoomToFitRect(rect);
+                    }
+                }
+            }
+        }
+
 
         private void bt_test07_Click(object sender, EventArgs e)
         {

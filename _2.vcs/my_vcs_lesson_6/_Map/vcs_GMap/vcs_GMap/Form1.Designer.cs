@@ -122,6 +122,7 @@
             this.bt_test02 = new System.Windows.Forms.Button();
             this.bt_test01 = new System.Windows.Forms.Button();
             this.bt_test00 = new System.Windows.Forms.Button();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -178,7 +179,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(978, 153);
+            this.richTextBox1.Location = new System.Drawing.Point(982, 154);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(250, 540);
             this.richTextBox1.TabIndex = 3;
@@ -571,7 +572,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(1136, 502);
+            this.bt_clear.Location = new System.Drawing.Point(1140, 503);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(71, 30);
             this.bt_clear.TabIndex = 29;
@@ -1001,7 +1002,7 @@
             this.groupBox3.Controls.Add(this.bt_test02);
             this.groupBox3.Controls.Add(this.bt_test01);
             this.groupBox3.Controls.Add(this.bt_test00);
-            this.groupBox3.Location = new System.Drawing.Point(1382, 170);
+            this.groupBox3.Location = new System.Drawing.Point(1494, 154);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(218, 258);
             this.groupBox3.TabIndex = 41;
@@ -1041,6 +1042,7 @@
             this.bt_test06.Name = "bt_test06";
             this.bt_test06.Size = new System.Drawing.Size(90, 40);
             this.bt_test06.TabIndex = 48;
+            this.bt_test06.Text = "全國地圖";
             this.bt_test06.UseVisualStyleBackColor = true;
             this.bt_test06.Click += new System.EventHandler(this.bt_test06_Click);
             // 
@@ -1103,11 +1105,19 @@
             this.bt_test00.UseVisualStyleBackColor = true;
             this.bt_test00.Click += new System.EventHandler(this.bt_test00_Click);
             // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(1238, 154);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(238, 539);
+            this.treeView1.TabIndex = 42;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1724, 712);
+            this.ClientSize = new System.Drawing.Size(1793, 712);
+            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btn_draw_profile2);
             this.Controls.Add(this.lb_distance);
@@ -1256,6 +1266,7 @@
         private System.Windows.Forms.ToolStripMenuItem selectMapProvider4;
         private System.Windows.Forms.ToolStripMenuItem selectMapProvider5;
         private System.Windows.Forms.ToolStripMenuItem selectMapProvider6;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
 
