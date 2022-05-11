@@ -1,3 +1,29 @@
+AcdSee2.4 Serial: 
+Name:Unregistered 
+Code:422301873421327 
+
+
+
+
+
+PictureBox 好像不能旋轉方向～～～～～～～～～～～～
+ 
+若做成Picasa效果 可能不行
+
+
+
+search pattern to change
+string filename = @"C:\______test_files\__pic\_pic_combine\poster_04.jpg";
+
+
+加到cccc
+			//最大化螢幕
+			this.FormBorderStyle = FormBorderStyle.None;
+			this.WindowState = FormWindowState.Maximized;
+
+
+
+
 
 參考
 C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_StackOrder
