@@ -107,6 +107,37 @@ namespace vcs_Mix03_draw_image
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            string filename = @"C:\______test_files\ims01.bmp";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            Color p;
+
+            int i = 10;
+            int j = 10;
+            bitmap1.SetPixel(i, j, Color.White);
+
+            i = 30; j = 10;
+            bitmap1.SetPixel(i, j, Color.White);
+            i = 10; j = 30;
+            bitmap1.SetPixel(i, j, Color.White);
+            i = 30; j = 30;
+            bitmap1.SetPixel(i, j, Color.White);
+            i = 50; j = 10;
+            bitmap1.SetPixel(i, j, Color.White);
+            i = 10; j = 50;
+            bitmap1.SetPixel(i, j, Color.White);
+
+            i = 20;
+            for (j = 0; j < 100; j++)
+            {
+                bitmap1.SetPixel(i, j, Color.White);
+
+            }
+
+            bitmap1.Save("aaaaa.bmp", ImageFormat.Bmp);
+
+
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
