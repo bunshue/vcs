@@ -826,15 +826,13 @@ namespace vcs_GMap
             Brush fill = null;
 
             //畫圓
+            //圓心
             PointLatLng center = new PointLatLng(latitude, longitude);
 
-            int x_st = 0;
-            int y_st = 0;
-            PointLatLng currentPos = new PointLatLng(latitude, longitude);
-
-            x_st = 480;
-            y_st = 0;
-            currentPos = gMapControl1.FromLocalToLatLng(x_st, y_st);
+            //圓邊
+            int edge_x_st = 480;
+            int edge_y_st = 0;
+            PointLatLng currentPos = gMapControl1.FromLocalToLatLng(edge_x_st, edge_y_st);
             //currentPos = new PointLatLng(latitude + 0.01, longitude + 0.01);
 
             //Circle = new GMapDrawCircle(center, currentPos);  //多載
@@ -842,8 +840,13 @@ namespace vcs_GMap
             //                          圓心    圓邊
             markersOverlay.Markers.Add(Circle);
 
-            PointLatLng p1 = gMapControl1.FromLocalToLatLng(100, 100);  //圓心
-            PointLatLng p2 = gMapControl1.FromLocalToLatLng(0, 100);      //圓邊
+            //畫圓
+            //圓心
+            int cx = 100;
+            int cy = 100;
+            int r = 100;
+            PointLatLng p1 = gMapControl1.FromLocalToLatLng(cx, cy);  //圓心
+            PointLatLng p2 = gMapControl1.FromLocalToLatLng(cx, cx + r);      //圓邊
             Circle = new GMapDrawCircle(p1, p2, stroke, fill);  //多載, 使用畫筆色
             markersOverlay.Markers.Add(Circle);
 
@@ -1310,11 +1313,6 @@ namespace vcs_GMap
             setup_marker_tooltip(marker, "12345");  //設置marker訊息
 
             markersOverlay.Markers.Add(marker);
-
-
-
-
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -1735,9 +1733,9 @@ namespace vcs_GMap
             }
             else if (rb_location1.Checked == true)
             {
-                string[,] station = null;
+                string[,] location = null;
 
-                station = new string[,] {
+                location = new string[,] {
             { "台北", "25.047778", "121.517222"},
             { "新竹", "24.80205", "120.971817"},
             { "台中", "24.136944", "120.684722"},
@@ -1748,13 +1746,13 @@ namespace vcs_GMap
             { "宜蘭", "24.750278", "121.7625"},
             };
 
-                int total_station = station.GetUpperBound(0) + 1;
-                richTextBox1.Text += "total_station = " + total_station.ToString() + "\n";
+                int total_location = location.GetUpperBound(0) + 1;
+                richTextBox1.Text += "total_location = " + total_location.ToString() + "\n";
 
                 gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
-                latitude = double.Parse(station[0, 1]);
-                longitude = double.Parse(station[0, 2]);
+                latitude = double.Parse(location[0, 1]);
+                longitude = double.Parse(location[0, 2]);
 
                 gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
                 gMapControl1.Zoom = 10; //當前比例
@@ -1762,21 +1760,22 @@ namespace vcs_GMap
                 update_controls_info();
 
                 int i;
-                for (i = 0; i < total_station; i++)
+                for (i = 0; i < total_location; i++)
                 {
-                    latitude = double.Parse(station[i, 1]);
-                    longitude = double.Parse(station[i, 2]);
+                    latitude = double.Parse(location[i, 1]);
+                    longitude = double.Parse(location[i, 2]);
 
-                    AddMarker(latitude, longitude, GMarkerGoogleType.blue_dot, station[i, 0]);
+                    //AddMarker(latitude, longitude, GMarkerGoogleType.blue_dot, location[i, 0]);
+                    draw_circle_text(latitude, longitude, location[i, 0]);
                 }
 
                 richTextBox1.Text += "畫範圍 GMapPolygon 1\n";
                 List<PointLatLng> points = new List<PointLatLng>();
 
-                for (i = 0; i < total_station; i++)
+                for (i = 0; i < total_location; i++)
                 {
-                    latitude = double.Parse(station[i, 1]);
-                    longitude = double.Parse(station[i, 2]);
+                    latitude = double.Parse(location[i, 1]);
+                    longitude = double.Parse(location[i, 2]);
 
                     points.Add(new PointLatLng(latitude, longitude));
                 }
@@ -1791,10 +1790,10 @@ namespace vcs_GMap
                 richTextBox1.Text += "畫範圍 GMapPolygon 2\n";
                 //List<PointLatLng> points = new List<PointLatLng>();
                 points.Clear();
-                for (i = 0; i < total_station; i++)
+                for (i = 0; i < total_location; i++)
                 {
-                    latitude = double.Parse(station[i, 1]);
-                    longitude = double.Parse(station[i, 2]);
+                    latitude = double.Parse(location[i, 1]);
+                    longitude = double.Parse(location[i, 2]);
 
                     points.Add(new PointLatLng(latitude, longitude));
                 }
@@ -1810,13 +1809,13 @@ namespace vcs_GMap
                 double distance;
                 string dist;
 
-                for (i = 0; i < (total_station - 1); i++)
+                for (i = 0; i < (total_location - 1); i++)
                 {
-                    latitude = double.Parse(station[i, 1]);
-                    longitude = double.Parse(station[i, 2]);
+                    latitude = double.Parse(location[i, 1]);
+                    longitude = double.Parse(location[i, 2]);
 
-                    pt1 = new PointLatLng(double.Parse(station[i, 1]), double.Parse(station[i, 2]));
-                    pt2 = new PointLatLng(double.Parse(station[i + 1, 1]), double.Parse(station[i + 1, 2]));
+                    pt1 = new PointLatLng(double.Parse(location[i, 1]), double.Parse(location[i, 2]));
+                    pt2 = new PointLatLng(double.Parse(location[i + 1, 1]), double.Parse(location[i + 1, 2]));
                     distance = getDistance(pt1, pt2);
 
                     //算距離
@@ -1828,7 +1827,7 @@ namespace vcs_GMap
                     {
                         dist = ((float)distance * 1000f).ToString("0.##") + " 公尺";
                     }
-                    richTextBox1.Text += station[i, 0] + " 到 " + station[i + 1, 0] + " 直線距離 : " + dist + "\n";
+                    richTextBox1.Text += location[i, 0] + " 到 " + location[i + 1, 0] + " 直線距離 : " + dist + "\n";
                     lb_distance.Text = dist;
                 }
             }
@@ -1923,9 +1922,9 @@ namespace vcs_GMap
             else if (rb_location8.Checked == true)
             {
                 //徐蚌會戰
-                string[,] station = null;
+                string[,] location = null;
 
-                station = new string[,] {
+                location = new string[,] {
             { "徐州", "34.205", "117.283"},
             { "蚌埠", "32.917625", "117.382417"},
             { "海州", "34.597", "119.222"},
@@ -1934,8 +1933,8 @@ namespace vcs_GMap
             { "雙堆集", "33.42498", "116.89588"},
             };
 
-                int total_station = station.GetUpperBound(0) + 1;
-                richTextBox1.Text += "total_station = " + total_station.ToString() + "\n";
+                int total_location = location.GetUpperBound(0) + 1;
+                richTextBox1.Text += "total_location = " + total_location.ToString() + "\n";
 
                 double lat_north = -90;
                 double lat_south = 90;
@@ -1943,10 +1942,10 @@ namespace vcs_GMap
                 double lng_west = 180;
 
                 int i;
-                for (i = 0; i < total_station; i++)
+                for (i = 0; i < total_location; i++)
                 {
-                    double lat = double.Parse(station[i, 1]);
-                    double lng = double.Parse(station[i, 2]);
+                    double lat = double.Parse(location[i, 1]);
+                    double lng = double.Parse(location[i, 2]);
 
                     if (lat > lat_north)
                         lat_north = lat;
@@ -1971,21 +1970,14 @@ namespace vcs_GMap
 
                 update_controls_info();
 
-                for (i = 0; i < total_station; i++)
+                for (i = 0; i < total_location; i++)
                 {
-                    latitude = double.Parse(station[i, 1]);
-                    longitude = double.Parse(station[i, 2]);
+                    latitude = double.Parse(location[i, 1]);
+                    longitude = double.Parse(location[i, 2]);
 
-                    AddMarker(latitude, longitude, GMarkerGoogleType.blue_dot, station[i, 0]);
+                    //AddMarker(latitude, longitude, GMarkerGoogleType.blue_dot, location[i, 0]);
+                    draw_circle_text(latitude, longitude, location[i, 0]);
                 }
-
-
-
-
-
-
-
-
             }
             else if (rb_location9.Checked == true)
             {
@@ -2046,11 +2038,53 @@ namespace vcs_GMap
             {
 
             }
+        }
 
+        void draw_circle_text(double latitude, double longitude, string text)
+        {
+            markersOverlay = new GMapOverlay("markersOverlay");
 
+            GMapDrawCircle Circle = null;
+            Pen stroke = new Pen(Color.Red, 5);
+            Brush fill = null;
 
+            //畫圓
+            PointLatLng center = new PointLatLng(latitude, longitude);
+            int r = 30;
 
+            GPoint gp = gMapControl1.FromLatLngToLocal(center); // markersOverlay.Control.FromLatLngToLocal(center);
+            //richTextBox1.Text += "地理座標" + center.Lat.ToString() + "\t" + center.Lng.ToString() + "\t控件座標(" + gp.X.ToString() + ", " + gp.Y.ToString() + ")\n";
 
+            PointLatLng p1 = gMapControl1.FromLocalToLatLng((int)gp.X, (int)gp.Y);      //圓心
+            PointLatLng p2 = gMapControl1.FromLocalToLatLng((int)gp.X, (int)gp.Y + r);  //圓邊
+            Circle = new GMapDrawCircle(p1, p2, stroke, fill);  //多載, 使用畫筆色
+            //                        圓心    圓邊
+            markersOverlay.Markers.Add(Circle);
+
+            gMapControl1.Overlays.Add(markersOverlay);
+            gMapControl1.Refresh();
+
+            //寫字
+            //在地圖上寫字, 寫在markersOverlay上
+            PointLatLng position = new PointLatLng(latitude, longitude);
+            GMapTextMarker textMarker = new GMapTextMarker(position, text);
+            textMarker.TipFont = new Font("標楷體", 20);
+            textMarker.TipBrush = new SolidBrush(Color.Blue);
+            markersOverlay.Markers.Add(textMarker);
+
+            GMapDrawLine Line = null;
+
+            List<PointLatLng> points = new List<PointLatLng>();
+            points.Add(new PointLatLng(latitude - 0.05, longitude));
+            points.Add(new PointLatLng(latitude + 0.05, longitude));
+            Line = new GMapDrawLine(points, "");
+            markersOverlay.Routes.Add(Line);
+
+            points.Clear();
+            points.Add(new PointLatLng(latitude, longitude - 0.05));
+            points.Add(new PointLatLng(latitude, longitude + 0.05));
+            Line = new GMapDrawLine(points, "");
+            markersOverlay.Routes.Add(Line);
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2631,7 +2665,7 @@ namespace vcs_GMap
             }
             catch (Exception ex)
             {
-                //log.Error(ex);
+                richTextBox1.Text += "錯誤訊息 : " + ex.ToString() + "\n";
             }
 
 
@@ -2699,7 +2733,7 @@ namespace vcs_GMap
             }
             catch (Exception ex)
             {
-                //log.Error(ex);
+                richTextBox1.Text += "錯誤訊息 : " + ex.ToString() + "\n";
             }
 
             this.treeView1.NodeMouseClick += new TreeNodeMouseClickEventHandler(advTreeChina_NodeMouseClick);
