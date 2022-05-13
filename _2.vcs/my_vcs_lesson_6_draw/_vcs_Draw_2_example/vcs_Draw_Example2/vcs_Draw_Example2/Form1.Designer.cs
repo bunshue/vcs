@@ -121,6 +121,7 @@
             this.bt_long0 = new System.Windows.Forms.Button();
             this.pictureBox_wave = new System.Windows.Forms.PictureBox();
             this.timer_wave = new System.Windows.Forms.Timer(this.components);
+            this.ucOscilloscope1 = new vcs_Draw_Example2.UCOscilloscope();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_wave)).BeginInit();
@@ -141,6 +142,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(135, 45);
             this.button9.TabIndex = 18;
+            this.button9.Text = "畫OV曲線 4";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -214,6 +216,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(135, 45);
             this.button6.TabIndex = 22;
+            this.button6.Text = "畫OV曲線 1";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -224,6 +227,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(135, 45);
             this.button7.TabIndex = 25;
+            this.button7.Text = "畫OV曲線 2";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -234,6 +238,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(135, 45);
             this.button8.TabIndex = 24;
+            this.button8.Text = "畫OV曲線 3";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -264,6 +269,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(135, 45);
             this.button12.TabIndex = 28;
+            this.button12.Text = "wave轉txt";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -285,6 +291,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(135, 45);
             this.button13.TabIndex = 31;
+            this.button13.Text = "顯示wave 1";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -295,6 +302,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(135, 45);
             this.button14.TabIndex = 32;
+            this.button14.Text = "顯示wave 2";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -365,6 +373,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(135, 45);
             this.button18.TabIndex = 45;
+            this.button18.Text = "畫 Oscilloscope 1";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -375,6 +384,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(135, 45);
             this.button19.TabIndex = 46;
+            this.button19.Text = "畫 Oscilloscope 2";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -1058,11 +1068,24 @@
             this.timer_wave.Interval = 50;
             this.timer_wave.Tick += new System.EventHandler(this.timer_wave_Tick);
             // 
+            // ucOscilloscope1
+            // 
+            this.ucOscilloscope1.LineColor = System.Drawing.Color.BlueViolet;
+            this.ucOscilloscope1.LineWidth = 2;
+            this.ucOscilloscope1.Location = new System.Drawing.Point(10, 341);
+            this.ucOscilloscope1.MappingDatas = null;
+            this.ucOscilloscope1.MaxValue = 0;
+            this.ucOscilloscope1.Name = "ucOscilloscope1";
+            this.ucOscilloscope1.Ratio = 50;
+            this.ucOscilloscope1.Size = new System.Drawing.Size(100, 100);
+            this.ucOscilloscope1.TabIndex = 109;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1475, 842);
+            this.Controls.Add(this.ucOscilloscope1);
             this.Controls.Add(this.pictureBox_wave);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_reset);
@@ -1246,6 +1269,7 @@
         private System.Windows.Forms.Button bt_long7;
         private System.Windows.Forms.PictureBox pictureBox_wave;
         private System.Windows.Forms.Timer timer_wave;
+        private UCOscilloscope ucOscilloscope1;
     }
 }
 

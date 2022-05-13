@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.btnLoad = new System.Windows.Forms.Button();
-            this.UCOscilloscope1 = new vcs_Oscilloscope.UCOscilloscope();
+            this.button1 = new System.Windows.Forms.Button();
+            this.ucOscilloscope1 = new vcs_Oscilloscope.UCOscilloscope();
             this.SuspendLayout();
             // 
             // btnLoad
@@ -38,28 +39,39 @@
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(75, 23);
             this.btnLoad.TabIndex = 0;
-            this.btnLoad.Text = "Load";
+            this.btnLoad.Text = "Load 1";
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
-            // UCOscilloscope1
+            // button1
             // 
-            this.UCOscilloscope1.LineColor = System.Drawing.Color.BlueViolet;
-            this.UCOscilloscope1.LineWidth = 2;
-            this.UCOscilloscope1.Location = new System.Drawing.Point(7, 34);
-            this.UCOscilloscope1.MappingDatas = null;
-            this.UCOscilloscope1.MaxValue = 0;
-            this.UCOscilloscope1.Name = "UCOscilloscope1";
-            this.UCOscilloscope1.Ratio = 50;
-            this.UCOscilloscope1.Size = new System.Drawing.Size(650, 200);
-            this.UCOscilloscope1.TabIndex = 2;
+            this.button1.Location = new System.Drawing.Point(93, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Load 2";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // ucOscilloscope1
+            // 
+            this.ucOscilloscope1.LineColor = System.Drawing.Color.BlueViolet;
+            this.ucOscilloscope1.LineWidth = 2;
+            this.ucOscilloscope1.Location = new System.Drawing.Point(7, 34);
+            this.ucOscilloscope1.MappingDatas = null;
+            this.ucOscilloscope1.MaxValue = 0;
+            this.ucOscilloscope1.Name = "ucOscilloscope1";
+            this.ucOscilloscope1.Ratio = 50;
+            this.ucOscilloscope1.Size = new System.Drawing.Size(650, 200);
+            this.ucOscilloscope1.TabIndex = 2;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(665, 268);
-            this.Controls.Add(this.UCOscilloscope1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ucOscilloscope1);
             this.Controls.Add(this.btnLoad);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -72,7 +84,8 @@
         #endregion
 
         private System.Windows.Forms.Button btnLoad;
-        private UCOscilloscope UCOscilloscope1;
+        private UCOscilloscope ucOscilloscope1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

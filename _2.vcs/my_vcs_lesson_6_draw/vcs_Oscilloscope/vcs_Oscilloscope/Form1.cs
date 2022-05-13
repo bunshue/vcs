@@ -25,40 +25,61 @@ namespace vcs_Oscilloscope
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.InitialDirectory = Path.Combine(Application.StartupPath, @"..\..\data");
+            string filename = @"..\..\data\MappingData1.txt";
 
-            if (fd.ShowDialog() == DialogResult.OK && File.Exists(fd.FileName))
+            string data;
+            string[] splitData;
+            using (TextReader reader = File.OpenText(filename))
             {
-                string data;
-                string[] splitData;
-                using (TextReader reader = File.OpenText(fd.FileName))
+                data = reader.ReadToEnd();
+                splitData = data.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            List<int> mapData = new List<int>();
+            foreach (string info in splitData)
+            {
+                try
                 {
-                    data = reader.ReadToEnd();
-                    splitData = data.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                }
-                List<int> mapData = new List<int>();
-                foreach (string info in splitData)
-                {
-                    try
+                    int xxx = Convert.ToInt32(info);
+                    if (xxx > 0)
                     {
-                        int xxx = Convert.ToInt32(info);
-                        if (xxx > 0)
-                        {
-                            mapData.Add(xxx);
-                        }
-                    }
-                    catch (System.Exception ex)
-                    {
+                        mapData.Add(xxx);
                     }
                 }
-                UCOscilloscope1.MappingDatas = mapData;
-                //Console.WriteLine("Read end");
+                catch (System.Exception ex)
+                {
+                }
             }
-            else
+            ucOscilloscope1.MappingDatas = mapData;
+            //Console.WriteLine("Read end");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string filename = @"..\..\data\MappingData2.txt";
+
+            string data;
+            string[] splitData;
+            using (TextReader reader = File.OpenText(filename))
             {
-                MessageBox.Show("Please open a file.");
+                data = reader.ReadToEnd();
+                splitData = data.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             }
+            List<int> mapData = new List<int>();
+            foreach (string info in splitData)
+            {
+                try
+                {
+                    int xxx = Convert.ToInt32(info);
+                    if (xxx > 0)
+                    {
+                        mapData.Add(xxx);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                }
+            }
+            ucOscilloscope1.MappingDatas = mapData;
         }
     }
 }
