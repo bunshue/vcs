@@ -1,4 +1,4 @@
-﻿namespace draw_rotate_string
+﻿namespace vcs_Draw6_String2
 {
     partial class Form1
     {

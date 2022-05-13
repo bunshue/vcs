@@ -8,8 +8,8 @@
     <ProjectGuid>{B7F57C42-3B27-46C3-A668-114ECB58B8E3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>draw_rotate_string</RootNamespace>
-    <AssemblyName>draw_rotate_string</AssemblyName>
+    <RootNamespace>vcs_Draw6_String2</RootNamespace>
+    <AssemblyName>vcs_Draw6_String2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

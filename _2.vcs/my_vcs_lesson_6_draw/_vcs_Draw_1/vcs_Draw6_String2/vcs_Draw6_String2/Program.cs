@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace draw_rotate_string
+namespace vcs_Draw6_String2
 {
     static class Program
     {

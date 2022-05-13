@@ -15,7 +15,7 @@ C#利用GDI+繪制旋轉文字等效果，
 C#中利用GDI+繪制旋轉文本的文字，網上有很多資料，基本都使用矩陣旋轉的方式實現。但基本都只提及按點旋轉，若要實現在矩形范圍內旋轉文本，資料較少。經過琢磨，可以將矩形內旋轉轉化為按點旋轉，不過需要經過不少的計算過程。利用下面的類可以實現該功能。
 */
 
-namespace draw_rotate_string
+namespace vcs_Draw6_String2
 {
     public partial class Form1 : Form
     {

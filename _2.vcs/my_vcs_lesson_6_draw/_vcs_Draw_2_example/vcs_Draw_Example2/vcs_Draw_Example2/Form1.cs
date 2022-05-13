@@ -2072,49 +2072,48 @@ namespace vcs_Draw_Example2
         {
         }
 
+        void draw_Oscilloscope(string filename)
+        {
+            ucOscilloscope1.LineColor = Color.Red;
+
+            string data;
+            string[] splitData;
+            using (TextReader reader = File.OpenText(filename))
+            {
+                data = reader.ReadToEnd();
+                splitData = data.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            List<int> mapData = new List<int>();
+            foreach (string info in splitData)
+            {
+                try
+                {
+                    int xxx = Convert.ToInt32(info);
+                    if (xxx > 0)
+                    {
+                        mapData.Add(xxx);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                }
+            }
+            ucOscilloscope1.MappingDatas = mapData;
+        }
+
+
         private void button18_Click(object sender, EventArgs e)
         {
             //畫 Oscilloscope 1
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.InitialDirectory = Path.Combine(Application.StartupPath, @"..\..\data");
-
-            if (fd.ShowDialog() == DialogResult.OK && File.Exists(fd.FileName))
-            {
-                string data;
-                string[] splitData;
-                using (TextReader reader = File.OpenText(fd.FileName))
-                {
-                    data = reader.ReadToEnd();
-                    splitData = data.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                }
-                List<int> mapData = new List<int>();
-                foreach (string info in splitData)
-                {
-                    try
-                    {
-                        int xxx = Convert.ToInt32(info);
-                        if (xxx > 0)
-                        {
-                            mapData.Add(xxx);
-                        }
-                    }
-                    catch (System.Exception ex)
-                    {
-                    }
-                }
-                ucOscilloscope1.MappingDatas = mapData;
-                //Console.WriteLine("Read end");
-            }
-            else
-            {
-                MessageBox.Show("Please open a file.");
-            }
+            string filename = @"..\..\data\MappingData1.txt";
+            draw_Oscilloscope(filename);
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
             //畫 Oscilloscope 2
-
+            string filename = @"..\..\data\MappingData2.txt";
+            draw_Oscilloscope(filename);
         }
 
         private void button20_Click(object sender, EventArgs e)
