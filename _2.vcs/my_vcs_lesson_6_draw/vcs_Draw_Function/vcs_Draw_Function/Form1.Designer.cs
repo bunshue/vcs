@@ -28,11 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.txtDevs = new System.Windows.Forms.TextBox();
@@ -41,7 +38,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtMean = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button6 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
@@ -69,21 +65,11 @@
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 43);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "畫多項式";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 467);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 266);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(442, 256);
+            this.richTextBox1.Size = new System.Drawing.Size(442, 457);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -91,31 +77,11 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(596, 11);
+            this.pictureBox1.Location = new System.Drawing.Point(490, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(600, 300);
+            this.pictureBox1.Size = new System.Drawing.Size(706, 343);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(12, 83);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 43);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "畫sinc";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(125, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(107, 43);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "XY平面";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // groupBox1
             // 
@@ -126,7 +92,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtMean);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 155);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(220, 106);
             this.groupBox1.TabIndex = 5;
@@ -197,16 +163,6 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Mean:";
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(125, 83);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(107, 43);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "畫愛心";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button6);
@@ -223,7 +179,7 @@
             this.groupBox2.Controls.Add(this.label21);
             this.groupBox2.Controls.Add(this.txtYmin);
             this.groupBox2.Controls.Add(this.label20);
-            this.groupBox2.Location = new System.Drawing.Point(12, 277);
+            this.groupBox2.Location = new System.Drawing.Point(12, 134);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(223, 126);
             this.groupBox2.TabIndex = 106;
@@ -374,7 +330,7 @@
             this.groupBox3.Controls.Add(this.label25);
             this.groupBox3.Controls.Add(this.textBox2);
             this.groupBox3.Controls.Add(this.label26);
-            this.groupBox3.Location = new System.Drawing.Point(258, 170);
+            this.groupBox3.Location = new System.Drawing.Point(247, 21);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(223, 81);
             this.groupBox3.TabIndex = 107;
@@ -434,13 +390,9 @@
             this.ClientSize = new System.Drawing.Size(1208, 735);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -457,11 +409,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtDevs;
         private System.Windows.Forms.Label label3;
@@ -470,7 +419,6 @@
         private System.Windows.Forms.TextBox txtMean;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label16;

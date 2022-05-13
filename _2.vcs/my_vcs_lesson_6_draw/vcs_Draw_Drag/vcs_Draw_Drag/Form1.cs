@@ -47,6 +47,17 @@ namespace vcs_Draw_Drag
             }
         }
 
+        private void FillCircle(Graphics g, PointF center, int radius, Color c)
+        {
+            SolidBrush sb = new SolidBrush(c);
+
+            // Fill the circle
+            g.FillEllipse(sb, new RectangleF(center.X - radius, center.Y - radius, radius * 2, radius * 2));
+
+            //Dispose of the brush
+            sb.Dispose();
+        }
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -54,13 +65,18 @@ namespace vcs_Draw_Drag
             int radius = 10;
 
             if (flag_dragging == true)
+            {
                 e.Graphics.DrawPolygon(p1, pts);
+            }
             else
+            {
                 e.Graphics.DrawPolygon(p2, pts);
+            }
 
             for (int i = 0; i < N; i++)
             {
                 FillCircle(e.Graphics, pts[i], radius, Color.Red);
+                e.Graphics.DrawString(i.ToString(), new Font("標楷體", 15), new SolidBrush(Color.Blue), new PointF(pts[i].X + 10, pts[i].Y));
             }
             e.Graphics.DrawString("移動圓點", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(10, 370));
         }
@@ -76,7 +92,7 @@ namespace vcs_Draw_Drag
                     flag_dragging = true;
                     pts[pt_selected].X = e.X;
                     pts[pt_selected].Y = e.Y;
-                    //richTextBox1.Text += "選中 " + i.ToString() + "\n";
+                    richTextBox1.Text += "選中 " + i.ToString() + "\n";
                     break;
                 }
                 else
@@ -111,8 +127,8 @@ namespace vcs_Draw_Drag
         // 檢查是否選到這個點
         bool CheckSelected(Point pt1, Point pt2)
         {
-            int dist = (pt1.X - pt2.X) * (pt1.X - pt2.X) + (pt1.Y - pt2.Y) * (pt1.Y - pt2.Y);
-            if (dist <= Epsilon) // dis 是尚未開根號 的距離
+            int distance = (pt1.X - pt2.X) * (pt1.X - pt2.X) + (pt1.Y - pt2.Y) * (pt1.Y - pt2.Y);
+            if (distance <= Epsilon) // dis 是尚未開根號 的距離
             {
                 return true;
             }
@@ -121,17 +137,5 @@ namespace vcs_Draw_Drag
                 return false;
             }
         }
-
-        private void FillCircle(Graphics g, PointF center, int radius, Color c)
-        {
-            SolidBrush sb = new SolidBrush(c);
-
-            // Fill the circle
-            g.FillEllipse(sb, new RectangleF(center.X - radius, center.Y - radius, radius * 2, radius * 2));
-
-            //Dispose of the brush
-            sb.Dispose();
-        }
     }
 }
-
