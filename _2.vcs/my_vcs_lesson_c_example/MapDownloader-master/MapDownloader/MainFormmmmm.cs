@@ -81,7 +81,6 @@ namespace MapDownloader
             InitializeComponent();
         }
 
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             gMapControl1.Size = new Size(1300, 900);
