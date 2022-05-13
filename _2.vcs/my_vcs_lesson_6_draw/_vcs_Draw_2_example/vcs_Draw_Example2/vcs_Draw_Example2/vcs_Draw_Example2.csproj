@@ -8,8 +8,8 @@
     <ProjectGuid>{F070782F-6655-4160-995F-95534730900F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Draw9_Example</RootNamespace>
-    <AssemblyName>vcs_Draw9_Example</AssemblyName>
+    <RootNamespace>vcs_Draw_Example2</RootNamespace>
+    <AssemblyName>vcs_Draw_Example2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

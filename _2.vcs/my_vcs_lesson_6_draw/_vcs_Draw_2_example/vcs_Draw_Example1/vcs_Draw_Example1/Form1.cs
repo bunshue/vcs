@@ -20,7 +20,7 @@ using System.Diagnostics;       //for Debug
 using System.Reflection;    //PropertyInfo
 using System.Threading;
 
-namespace vcs_Draw9_Example
+namespace vcs_Draw_Example1
 {
     public partial class Form1 : Form
     {
@@ -5593,6 +5593,7 @@ namespace vcs_Draw9_Example
             save_image_to_drive();
         }
 
+        //沒用到????
         void open_new_file()
         {
             richTextBox1.Text += "開啟一個 640 X 480 的空畫布\n";

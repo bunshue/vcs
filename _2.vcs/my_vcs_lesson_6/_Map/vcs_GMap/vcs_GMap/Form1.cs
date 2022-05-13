@@ -1993,6 +1993,7 @@ namespace vcs_GMap
 
                 update_controls_info();
 
+                draw_circle_text(latitude, longitude, "盧溝橋");
             }
             else if (rb_location10.Checked == true)
             {
