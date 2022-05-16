@@ -23,10 +23,14 @@ using GMap.NET.WindowsForms;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms.Markers;
 
+using GMapDrawTools;
+
 using GMapChinaRegion;
 
 using GMapDownload;
 using GMapDrawTools;
+
+
 
 
 //需要GMap.NET.Core.dll 和 GMap.NET.WindowsForms.dll這兩個檔案。
@@ -39,7 +43,8 @@ namespace vcs_GMap
 {
     public partial class Form1 : Form
     {
-        GMapOverlay markersOverlay = new GMapOverlay("markers"); //放置marker的图层
+        private GMapOverlay markersOverlay = new GMapOverlay("markers"); //放置marker的图层
+        private GMapOverlay polygonsOverlay = new GMapOverlay("polygonsOverlay");
 
         //按滑鼠左鍵連線
         //需要绘制的经纬度点集
@@ -73,6 +78,9 @@ namespace vcs_GMap
         private GMapOverlay regionOverlay = new GMapOverlay("region");
         private GMapAreaPolygon currentAreaPolygon;
 
+        private Draw draw;
+        //private DrawDistance drawDistance;  // Draw distane tool
+
         public Form1()
         {
             InitializeComponent();
@@ -86,6 +94,9 @@ namespace vcs_GMap
             update_controls_info();
 
             update_region_info();
+
+            draw = new Draw(this.gMapControl1);
+            draw.DrawComplete += new EventHandler<DrawEventArgs>(draw_DrawComplete);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -271,6 +282,7 @@ namespace vcs_GMap
             this.ActiveControl = this.gMapControl1;//选中pictureBox1，不然没法触发事件
 
             gMapControl1.Overlays.Add(markersOverlay);  //添加 圖標 Markers 的圖層
+            gMapControl1.Overlays.Add(polygonsOverlay);
 
             //gMapControl1.Dock = DockStyle.Fill;   //將控件全屏顯示
             gMapControl1.CanDragMap = true; //滑鼠右鍵拖動地圖
@@ -498,7 +510,7 @@ namespace vcs_GMap
                 }
                 else
                 {
-                    CommonTools.MessageBox.ShowTipMessage("请先用画图工具画下载的区域多边形或选择省市区域！");
+                    MessageBox.Show("请先用画图工具画下载的区域多边形或选择省市区域！");
                 }
             }
             */
@@ -2431,13 +2443,15 @@ namespace vcs_GMap
             }
             else
             {
-                //CommonTools.MessageBox.ShowTipMessage("请先用画图工具画下载的区域多边形或选择省市区域！");
+                //MessageBox.Show("请先用画图工具画下载的区域多边形或选择省市区域！");
             }
             */
         }
 
         private void bt_test04_Click(object sender, EventArgs e)
         {
+            //測試JSON 1
+
             Country china;
             try
             {
@@ -2795,14 +2809,179 @@ namespace vcs_GMap
 
         private void bt_test07_Click(object sender, EventArgs e)
         {
+            //測試地址解析查詢
+
+            //尚待破解AMapProvider
+
+            /*
+
+            string address = "广东省深圳市福田区华强北路1002号";
+
+            if (!string.IsNullOrEmpty(address))
+            {
+                richTextBox1.Text += "你按了 地址解析 之 查詢\t地址 : " + address + "\n";
+
+                //this.routeOverlay.Markers.Clear();
+                Placemark placemark = new Placemark(address);
+
+                richTextBox1.Text += "初始化就給值 Text : " + placemark.Address + "\n";
+
+                //placemark.CityName = currentCenterCityName;
+
+                //richTextBox1.Text += "currentCenterCityName : " + currentCenterCityName + "\n";   尚未給值
+
+                if (currentAreaPolygon != null)
+                {
+                    placemark.CityName = currentAreaPolygon.Name;
+                }
+
+                //richTextBox1.Text += "placemark.CityName : " + placemark.CityName + "\n"; 無資料
+
+                List<PointLatLng> points = new List<PointLatLng>();
+                //GeoCoderStatusCode statusCode = SoSoMapProvider.Instance.GetPoints(placemark, out points);
+                GeoCoderStatusCode statusCode = AMapProvider.Instance.GetPoints(placemark, out points);
+
+                //richTextBox1.Text += "Text : " + placemark.Address + "\n";
+
+                if (statusCode == GeoCoderStatusCode.G_GEO_SUCCESS)
+                {
+                    richTextBox1.Text += "查詢資料成功, 共有" + points.Count.ToString() + " 筆資料\n";
+                    foreach (PointLatLng point in points)
+                    {
+                        richTextBox1.Text += "取得地圖資料 地理座標 " + point.ToString() + "\n";
+                        GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
+
+                        marker.ToolTipText = placemark.Address;
+                        //this.routeOverlay.Markers.Add(marker);
+                        this.gMapControl1.Position = point;
+
+                        richTextBox1.Text += "Text1 : " + placemark.Address + "\n";
+            */
+                        /*  除了第一項，全無資料
+                        richTextBox1.Text += "Text2 : " + placemark.AdministrativeAreaName + "\n";
+                        richTextBox1.Text += "Text3 : " + placemark.CityName.ToString() + "\n";
+                        richTextBox1.Text += "Text4 : " + placemark.CountryName + "\n";
+                        richTextBox1.Text += "Text5 : " + placemark.DistrictName + "\n";
+                        richTextBox1.Text += "Text6 : " + placemark.HouseNo.ToString() + "\n";
+                        richTextBox1.Text += "Text7 : " + placemark.LocalityName + "\n";
+                        richTextBox1.Text += "Text8 : " + placemark.Name.ToString() + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.Neighborhood + "\n";
+                        richTextBox1.Text += "Text10 : " + placemark.ProvinceName.ToString() + "\n";
+
+                        richTextBox1.Text += "Text9 : " + placemark.StreetNumber.ToString() + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.SubAdministrativeAreaName + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.Tel.ToString() + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.ThoroughfareName + "\n";
+                        */
+            /*
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text += "查詢資料失敗\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "地址無資料\n";
+            }
+            */
         }
 
         private void bt_test08_Click(object sender, EventArgs e)
         {
+            //richTextBox1.Text += "你按了繪圖工具 圓形\n";
+
+            /*
+            //圓形
+            draw.DrawingMode = DrawingMode.Circle;
+            draw.IsEnable = true;
+            */
+
+            /*
+            //矩形
+            draw.DrawingMode = DrawingMode.Rectangle;
+            draw.IsEnable = true;
+            */
+
+            /*
+            //多邊形
+            draw.DrawingMode = DrawingMode.Polygon;
+            draw.IsEnable = true;
+            */
+
+            /*
+            //線段
+            draw.DrawingMode = DrawingMode.Line;
+            draw.IsEnable = true;
+            */
+
+            /*
+            //折線段
+            draw.DrawingMode = DrawingMode.Route;
+            draw.IsEnable = true;
+            */
+
+            //地圖截屏, 應該要加到右鍵選單裡面
+            Image img = this.gMapControl1.ToImage();
+            SaveFileDialog openDialog = new SaveFileDialog();
+            openDialog.Filter = "(*.png)|*.png|(*.jpg)|*.jpg|(*.bmp)|*.bmp";
+            if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string fileName = openDialog.FileName;
+                img.Save(fileName);
+            }
+
+
+
         }
 
         private void bt_test09_Click(object sender, EventArgs e)
         {
+            //測試JSON 2
+            GenerateNewFile();
+        }
+
+        private static void GenerateNewFile()
+        {
+            string filePath = @"../../json/ChinaBoundary_Province_City";
+            Country china = JsonHelper.JsonDeserializeFromFile<Country>(filePath, Encoding.UTF8);
+            foreach (var provice in china.Province)
+            {
+                if (provice.name == "海南省")
+                {
+                    string newRings = GetMapRegionInfo();
+                    provice.rings = newRings;
+                    break;
+                }
+            }
+            JsonHelper.JsonSerializeToBinaryFile(china, @"../../json/ChinaBoundary_Province_City.xml");
+        }
+
+        static string GetMapRegionInfo()
+        {
+            string region = null;
+            string newValue = "";
+            bool success = MapRegion.regionDictionary.TryGetValue("海南", out region);
+            if (success)
+            {
+
+                string[] points = region.Split(';');
+                for (int i = 0; i < points.Length; ++i)
+                {
+                    string[] lnglat = points[i].Split(',');
+                    newValue += lnglat[0];
+                    newValue += " ";
+                    newValue += lnglat[1];
+                    if (i != points.Length - 1)
+                    {
+                        newValue += ",";
+                    }
+                }
+                Console.WriteLine(newValue);
+            }
+
+            return newValue;
         }
 
         private void selectMapProvider(object sender, EventArgs e)
@@ -2838,6 +3017,58 @@ namespace vcs_GMap
             }
 
         }
+
+        //画图完成函数
+        void draw_DrawComplete(object sender, DrawEventArgs e)
+        {
+            try
+            {
+                if (e != null && (e.Polygon != null || e.Rectangle != null || e.Circle != null || e.Line != null || e.Route != null))
+                {
+                    GMapPolygon drawPolygon = null;
+                    switch (e.DrawingMode)
+                    {
+                        case DrawingMode.Polygon:
+                            drawPolygon = e.Polygon;
+                            break;
+                        case DrawingMode.Rectangle:
+                            drawPolygon = e.Rectangle;
+                            break;
+                        case DrawingMode.Circle:
+                            polygonsOverlay.Markers.Add(e.Circle);
+                            break;
+                        case DrawingMode.Line:
+                            polygonsOverlay.Routes.Add(e.Line);
+                            break;
+                        case DrawingMode.Route:
+                            polygonsOverlay.Routes.Add(e.Route);
+                            break;
+                        default:
+                            draw.IsEnable = false;
+                            break;
+                    }
+
+                    if (drawPolygon != null)
+                    {
+                        GMapAreaPolygon areaPolygon = new GMapAreaPolygon(drawPolygon.Points, "下载区域");
+                        currentAreaPolygon = areaPolygon;
+                        //RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
+                        RectLatLng rect = GMapChinaRegion.MapRegion.GetRegionMaxRect(currentAreaPolygon);
+
+                        GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
+                        regionOverlay.Clear();
+                        regionOverlay.Polygons.Add(areaPolygon);
+                        regionOverlay.Markers.Add(textMarker);
+                        this.gMapControl1.SetZoomToFitRect(rect);
+                    }
+                }
+            }
+            finally
+            {
+                draw.IsEnable = false;
+            }
+        }
+
     }
 
     public class Piecearea
