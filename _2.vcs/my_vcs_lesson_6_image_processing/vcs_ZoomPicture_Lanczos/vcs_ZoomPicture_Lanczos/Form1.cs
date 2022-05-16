@@ -203,16 +203,6 @@ namespace vcs_ZoomPicture_Lanczos
             pictureBox2.Image = bitmap1;
         }
 
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            string filename = @"C:\______test_files\picture1.jpg";
-            Form2 f2 = new Form2(filename);
-            f2.Show();
-
-        }
-
-
         private void button3_Click(object sender, EventArgs e)
         {
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;

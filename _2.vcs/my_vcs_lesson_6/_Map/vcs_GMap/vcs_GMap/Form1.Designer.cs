@@ -133,6 +133,7 @@
             this.bt_test01 = new System.Windows.Forms.Button();
             this.bt_test00 = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -364,7 +365,7 @@
             this.bt_save.Name = "bt_save";
             this.bt_save.Size = new System.Drawing.Size(50, 35);
             this.bt_save.TabIndex = 27;
-            this.bt_save.Text = "Save";
+            this.bt_save.Text = "地圖 存圖";
             this.bt_save.UseVisualStyleBackColor = true;
             this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
             // 
@@ -855,37 +856,38 @@
             this.toolStripMenuItem2,
             this.toolStripMenuItem3,
             this.toolStripMenuItem4,
+            this.toolStripMenuItem8,
             this.toolStripMenuItem5,
             this.toolStripMenuItem6,
             this.toolStripMenuItem7});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 158);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 180);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(188, 22);
             this.toolStripMenuItem1.Text = "全螢幕";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(188, 22);
             this.toolStripMenuItem2.Text = "量測距離 單程";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(188, 22);
             this.toolStripMenuItem3.Text = "量測距離 連續";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(188, 22);
             this.toolStripMenuItem4.Text = "讀取座標";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
@@ -899,7 +901,7 @@
             this.selectMapProvider5,
             this.selectMapProvider6});
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(188, 22);
             this.toolStripMenuItem5.Text = "地圖種類";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
@@ -948,13 +950,13 @@
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(188, 22);
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(188, 22);
             this.toolStripMenuItem7.Text = "離開";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
@@ -1116,6 +1118,7 @@
             this.bt_test10.Name = "bt_test10";
             this.bt_test10.Size = new System.Drawing.Size(90, 40);
             this.bt_test10.TabIndex = 52;
+            this.bt_test10.Text = "地址解析";
             this.bt_test10.UseVisualStyleBackColor = true;
             this.bt_test10.Click += new System.EventHandler(this.bt_test10_Click);
             // 
@@ -1125,7 +1128,6 @@
             this.bt_test09.Name = "bt_test09";
             this.bt_test09.Size = new System.Drawing.Size(90, 40);
             this.bt_test09.TabIndex = 51;
-            this.bt_test09.Text = "測試JSON 2";
             this.bt_test09.UseVisualStyleBackColor = true;
             this.bt_test09.Click += new System.EventHandler(this.bt_test09_Click);
             // 
@@ -1135,7 +1137,7 @@
             this.bt_test08.Name = "bt_test08";
             this.bt_test08.Size = new System.Drawing.Size(90, 40);
             this.bt_test08.TabIndex = 50;
-            this.bt_test08.Text = "draw test";
+            this.bt_test08.Text = "繪圖工具 測試";
             this.bt_test08.UseVisualStyleBackColor = true;
             this.bt_test08.Click += new System.EventHandler(this.bt_test08_Click);
             // 
@@ -1165,6 +1167,7 @@
             this.bt_test05.Name = "bt_test05";
             this.bt_test05.Size = new System.Drawing.Size(90, 40);
             this.bt_test05.TabIndex = 47;
+            this.bt_test05.Text = "測試JSON 2";
             this.bt_test05.UseVisualStyleBackColor = true;
             this.bt_test05.Click += new System.EventHandler(this.bt_test05_Click);
             // 
@@ -1224,6 +1227,13 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(238, 539);
             this.treeView1.TabIndex = 42;
+            // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem8.Text = "地圖存圖";
+            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
             // Form1
             // 
@@ -1390,6 +1400,7 @@
         private System.Windows.Forms.Button bt_test12;
         private System.Windows.Forms.Button bt_test11;
         private System.Windows.Forms.Button bt_test10;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
     }
 }
 

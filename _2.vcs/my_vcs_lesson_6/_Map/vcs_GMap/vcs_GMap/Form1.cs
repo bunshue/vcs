@@ -984,6 +984,7 @@ namespace vcs_GMap
         {
             //拼接地圖
 
+            //TBD
 
             int x = 0;
             int y = 0;
@@ -1170,6 +1171,7 @@ namespace vcs_GMap
 
         private void bt_save_Click(object sender, EventArgs e)
         {
+            //地圖存圖
             try
             {
                 string filename = Application.StartupPath + "\\map_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
@@ -1354,6 +1356,15 @@ namespace vcs_GMap
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //tmp
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
+            latitude = 24.839;   //緯度
+            longitude = 121.004; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 14; //當前比例
+
+            update_controls_info();
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1439,6 +1450,16 @@ namespace vcs_GMap
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //tmp
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
+            latitude = 24.839;   //緯度
+            longitude = 121.004; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 14; //當前比例
+
+            update_controls_info();
+
         }
 
         public static GMapRoute GetRouteFromKml(string fileName)
@@ -1568,6 +1589,7 @@ namespace vcs_GMap
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //tmp
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
             //竹北座標 義民中學 24.83907276107702, 121.00421169156141
             latitude = 24.839;   //緯度
@@ -1580,6 +1602,15 @@ namespace vcs_GMap
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //tmp
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
+            latitude = 24.839;   //緯度
+            longitude = 121.004; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 14; //當前比例
+
+            update_controls_info();
         }
 
         private void btn_draw_profile_Click(object sender, EventArgs e)
@@ -2204,6 +2235,26 @@ namespace vcs_GMap
             this.Close();
         }
 
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            //地圖存圖
+            try
+            {
+                string filename = Application.StartupPath + "\\map_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
+
+                Image image = gMapControl1.ToImage();
+                if (image != null)
+                {
+                    image.Save(filename);
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+        }
+
         void do_toggle_fullscreen()
         {
             if (flag_fullscreen == false)
@@ -2470,6 +2521,8 @@ namespace vcs_GMap
         private void bt_test03_Click(object sender, EventArgs e)
         {
             //test DownloadMap
+
+            //TBD
         }
 
         private void DownloadMap(GMapPolygon polygon)
@@ -2573,23 +2626,13 @@ namespace vcs_GMap
                                                 this.gMapControl1.SetZoomToFitRect(rect);
                                             }
                                         }
-
-
-
-
-
-
                                     }
-
-
                                 }
                             }
                         }
                         //this.comboBoxCity.DisplayMember = "name";
                         //this.comboBoxCity.SelectedIndex = 0;
                     }
-
-
                 }
             }
             catch (Exception ex)
@@ -2626,77 +2669,51 @@ namespace vcs_GMap
 
         private void bt_test05_Click(object sender, EventArgs e)
         {
-            //地址解析
-            string currentCenterCityName = "南京市";
-            //GMapAreaPolygon currentAreaPolygon;
+            //測試JSON 2
+            GenerateNewFile();
+        }
 
-            string address = "雨花台";
-
-            if (!string.IsNullOrEmpty(address))
+        private static void GenerateNewFile()
+        {
+            string filename_json = @"C:\______test_files\_json\ChinaBoundary_Province_City";
+            Country china = JsonHelper.JsonDeserializeFromFile<Country>(filename_json, Encoding.UTF8);
+            foreach (var provice in china.Province)
             {
-                this.markersOverlay.Markers.Clear();
-                Placemark placemark = new Placemark(address);
-                placemark.CityName = currentCenterCityName;
-                //if (currentAreaPolygon != null)
+                if (provice.name == "海南省")
                 {
-                    placemark.CityName = "AAAAA";
+                    string newRings = GetMapRegionInfo();
+                    provice.rings = newRings;
+                    break;
                 }
-                List<PointLatLng> points = new List<PointLatLng>();
-                //GeoCoderStatusCode statusCode = SoSoMapProvider.Instance.GetPoints(placemark, out points);
+            }
 
-                /*
-                GeoCoderStatusCode statusCode = AMapProvider.Instance.GetPoints(placemark, out points);
+            string filename_xml = @"ChinaBoundary_Province_City.xml";
+            JsonHelper.JsonSerializeToBinaryFile(china, filename_xml);
+        }
 
-                if (statusCode == GeoCoderStatusCode.G_GEO_SUCCESS)
+        static string GetMapRegionInfo()
+        {
+            string region = null;
+            string newValue = "";
+            bool success = MapRegion.regionDictionary.TryGetValue("海南", out region);
+            if (success)
+            {
+
+                string[] points = region.Split(';');
+                for (int i = 0; i < points.Length; ++i)
                 {
-                    foreach (PointLatLng p in points)
+                    string[] lnglat = points[i].Split(',');
+                    newValue += lnglat[0];
+                    newValue += " ";
+                    newValue += lnglat[1];
+                    if (i != points.Length - 1)
                     {
-                        GMarkerGoogle marker = new GMarkerGoogle(p, GMarkerGoogleType.blue_dot);
-                        marker.ToolTipText = placemark.Address;
-                        this.markersOverlay.Markers.Add(marker);
-                        this.gMapControl1.Position = p;
+                        newValue += ",";
                     }
                 }
-                */
-
+                Console.WriteLine(newValue);
             }
-
-
-            /*
-            GMapPolygon polygon = ChinaMapRegion.GetRegionPolygon(name, rings);
-            if (polygon != null)
-            {
-                GMapAreaPolygon areaPolygon = new GMapAreaPolygon(polygon.Points, name);
-                currentAreaPolygon = areaPolygon;
-                RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
-                GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
-                regionOverlay.Clear();
-                regionOverlay.Polygons.Add(areaPolygon);
-                regionOverlay.Markers.Add(textMarker);
-                this.mapControl.SetZoomToFitRect(rect);
-            }
-            */
-            /*
-            GMapAreaPolygon areaPolygon = new GMapAreaPolygon(drawPolygon.Points, "下载区域");
-            currentAreaPolygon = areaPolygon;
-            RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
-            GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
-            regionOverlay.Clear();
-            regionOverlay.Polygons.Add(areaPolygon);
-            regionOverlay.Markers.Add(textMarker);
-            this.mapControl.SetZoomToFitRect(rect);
-*/
-
-            /*
-            if (currentAreaPolygon != null)
-            {
-                RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
-                argument.Rectangle = string.Format("{0},{1},{2},{3}",
-                    new object[] { rect.LocationRightBottom.Lat, rect.LocationTopLeft.Lng, rect.LocationTopLeft.Lat, rect.LocationRightBottom.Lng });
-            }
-            */
-
-
+            return newValue;
         }
 
         private void bt_test06_Click(object sender, EventArgs e)
@@ -2732,22 +2749,11 @@ namespace vcs_GMap
 
                 richTextBox1.Text += "call InitCountryTree\n";
                 InitCountryTree();
-
-
-
             }
             catch (Exception ex)
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.ToString() + "\n";
             }
-
-
-
-
-
-
-
-
         }
 
         private void InitChinaRegion()
@@ -2762,7 +2768,6 @@ namespace vcs_GMap
             //loadChinaWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(loadChinaWorker_RunWorkerCompleted);
             //loadChinaWorker.RunWorkerAsync();
         }
-
 
         private void InitCountryTree()
         {
@@ -2979,74 +2984,86 @@ namespace vcs_GMap
             draw.DrawingMode = DrawingMode.Route;
             draw.IsEnable = true;
             */
-
-            //地圖截屏, 應該要加到右鍵選單裡面
-            Image img = this.gMapControl1.ToImage();
-            SaveFileDialog openDialog = new SaveFileDialog();
-            openDialog.Filter = "(*.png)|*.png|(*.jpg)|*.jpg|(*.bmp)|*.bmp";
-            if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                string fileName = openDialog.FileName;
-                img.Save(fileName);
-            }
-
-
-
         }
 
         private void bt_test09_Click(object sender, EventArgs e)
         {
-            //測試JSON 2
-            GenerateNewFile();
         }
-
-        private static void GenerateNewFile()
-        {
-            string filePath = @"../../json/ChinaBoundary_Province_City";
-            Country china = JsonHelper.JsonDeserializeFromFile<Country>(filePath, Encoding.UTF8);
-            foreach (var provice in china.Province)
-            {
-                if (provice.name == "海南省")
-                {
-                    string newRings = GetMapRegionInfo();
-                    provice.rings = newRings;
-                    break;
-                }
-            }
-            JsonHelper.JsonSerializeToBinaryFile(china, @"../../json/ChinaBoundary_Province_City.xml");
-        }
-
-        static string GetMapRegionInfo()
-        {
-            string region = null;
-            string newValue = "";
-            bool success = MapRegion.regionDictionary.TryGetValue("海南", out region);
-            if (success)
-            {
-
-                string[] points = region.Split(';');
-                for (int i = 0; i < points.Length; ++i)
-                {
-                    string[] lnglat = points[i].Split(',');
-                    newValue += lnglat[0];
-                    newValue += " ";
-                    newValue += lnglat[1];
-                    if (i != points.Length - 1)
-                    {
-                        newValue += ",";
-                    }
-                }
-                Console.WriteLine(newValue);
-            }
-
-            return newValue;
-        }
-
-
 
         private void bt_test10_Click(object sender, EventArgs e)
         {
+            //地址解析
 
+            //TBD
+
+            string currentCenterCityName = "南京市";
+            //GMapAreaPolygon currentAreaPolygon;
+
+            string address = "雨花台";
+
+            if (!string.IsNullOrEmpty(address))
+            {
+                this.markersOverlay.Markers.Clear();
+                Placemark placemark = new Placemark(address);
+                placemark.CityName = currentCenterCityName;
+                //if (currentAreaPolygon != null)
+                {
+                    placemark.CityName = "AAAAA";
+                }
+                List<PointLatLng> points = new List<PointLatLng>();
+                //GeoCoderStatusCode statusCode = SoSoMapProvider.Instance.GetPoints(placemark, out points);
+
+                /*
+                GeoCoderStatusCode statusCode = AMapProvider.Instance.GetPoints(placemark, out points);
+
+                if (statusCode == GeoCoderStatusCode.G_GEO_SUCCESS)
+                {
+                    foreach (PointLatLng p in points)
+                    {
+                        GMarkerGoogle marker = new GMarkerGoogle(p, GMarkerGoogleType.blue_dot);
+                        marker.ToolTipText = placemark.Address;
+                        this.markersOverlay.Markers.Add(marker);
+                        this.gMapControl1.Position = p;
+                    }
+                }
+                */
+
+            }
+
+
+            /*
+            GMapPolygon polygon = ChinaMapRegion.GetRegionPolygon(name, rings);
+            if (polygon != null)
+            {
+                GMapAreaPolygon areaPolygon = new GMapAreaPolygon(polygon.Points, name);
+                currentAreaPolygon = areaPolygon;
+                RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
+                GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
+                regionOverlay.Clear();
+                regionOverlay.Polygons.Add(areaPolygon);
+                regionOverlay.Markers.Add(textMarker);
+                this.mapControl.SetZoomToFitRect(rect);
+            }
+            */
+            /*
+            GMapAreaPolygon areaPolygon = new GMapAreaPolygon(drawPolygon.Points, "下载区域");
+            currentAreaPolygon = areaPolygon;
+            RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
+            GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
+            regionOverlay.Clear();
+            regionOverlay.Polygons.Add(areaPolygon);
+            regionOverlay.Markers.Add(textMarker);
+            this.mapControl.SetZoomToFitRect(rect);
+*/
+
+            /*
+            if (currentAreaPolygon != null)
+            {
+                RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
+                argument.Rectangle = string.Format("{0},{1},{2},{3}",
+                    new object[] { rect.LocationRightBottom.Lat, rect.LocationTopLeft.Lng, rect.LocationTopLeft.Lat, rect.LocationRightBottom.Lng });
+            }
+            */
         }
 
         private void bt_test11_Click(object sender, EventArgs e)
@@ -3093,34 +3110,6 @@ namespace vcs_GMap
         {
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //画图完成函数
         void draw_DrawComplete(object sender, DrawEventArgs e)

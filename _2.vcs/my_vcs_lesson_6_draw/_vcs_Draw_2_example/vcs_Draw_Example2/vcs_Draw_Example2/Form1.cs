@@ -757,7 +757,51 @@ namespace vcs_Draw_Example2
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //按鍵樣橢圓
+            pictureBox1.Size = new Size(300, 200);
+            Graphics g = pictureBox1.CreateGraphics();
+            Brush sb = new SolidBrush(Color.Blue);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int W = this.pictureBox1.Width;
+            int H = this.pictureBox1.Height;
+
+            // Get the area we will fill.
+            Rectangle rect = new Rectangle(30, 30, W - 60, H - 60);
+
+            // Fill the ellipse.
+            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Lime, Color.DarkGreen, 225f))
+            {
+                g.FillEllipse(br, rect);
+            }
+            // Outline the ellipse.
+            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Lime, Color.DarkGreen, 45f))
+            {
+                using (Pen pen = new Pen(br, 20f))
+                {
+                    // g.DrawRectangle(Pens.Red, rect);
+                    rect.X += 10;
+                    rect.Y += 10;
+                    rect.Width -= 20;
+                    rect.Height -= 20;
+
+                    g.DrawEllipse(pen, rect);
+                }
+            }
+
+
+            //g.FillEllipse(sb, 100, 100, 200, 100);
+
+
+
+
+            sb.Dispose();
+
+
         }
+
+
+
 
         void plotXY(int[] x, int[] y)
         {
