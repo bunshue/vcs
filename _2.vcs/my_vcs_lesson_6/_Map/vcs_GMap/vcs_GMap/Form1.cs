@@ -28,8 +28,6 @@ using GMapDrawTools;
 using GMapChinaRegion;
 
 using GMapDownload;
-using GMapDrawTools;
-
 
 
 
@@ -174,7 +172,7 @@ namespace vcs_GMap
             comboBox1.Location = new Point(x_st, y_st + dy * 3);
             btn_draw_profile.Location = new Point(x_st, y_st + dy * 4);
             btn_draw_profile2.Location = new Point(x_st + 85, y_st + dy * 4);
-            groupBox3.Location = new Point(x_st+40, y_st + dy * 5 + 20);
+            groupBox3.Location = new Point(x_st + 40, y_st + dy * 5 + 20);
 
             x_st = 20;
             y_st = 15;
@@ -206,6 +204,33 @@ namespace vcs_GMap
             radioButton16.Text = "中國地形地圖";
             radioButton17.Text = "其他";
             lb_distance.Text = "";
+
+            x_st = 10;
+            y_st = 20;
+            dx = 100;
+            dy = 50;
+
+            bt_test00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_test01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_test02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_test03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_test04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_test05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_test06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_test07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_test08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_test09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            bt_test10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_test11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_test12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_test13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            bt_test14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            bt_test15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            bt_test16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            bt_test17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            bt_test18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            bt_test19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -2237,6 +2262,39 @@ namespace vcs_GMap
             }
         }
 
+        private void selectMapProvider(object sender, EventArgs e)
+        {
+            //richTextBox1.Text += "你選擇了 : " + ((ToolStripMenuItem)sender).Name + "\n";
+            if (((ToolStripMenuItem)sender).Name == "selectMapProvider1")
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            }
+            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider2")
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+            }
+            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider3")
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleTerrainMap; //地形圖
+            }
+            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider4")
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
+            }
+            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider5")
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
+            }
+            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider6")
+            {
+                gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
+            }
+            else
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            }
+        }
+
         private void bt_test00_Click(object sender, EventArgs e)
         {
             //列出省市界資料
@@ -2731,7 +2789,7 @@ namespace vcs_GMap
                                         areaNode.Tag = piecearea;
                                         //richTextBox1.Text += "add cnode : " + areaNode.Tag + "\n";
                                         cNode.Nodes.Add(areaNode);
-        }
+                                    }
                                 }
                                 pNode.Nodes.Add(cNode);
                             }
@@ -2857,22 +2915,22 @@ namespace vcs_GMap
 
                         richTextBox1.Text += "Text1 : " + placemark.Address + "\n";
             */
-                        /*  除了第一項，全無資料
-                        richTextBox1.Text += "Text2 : " + placemark.AdministrativeAreaName + "\n";
-                        richTextBox1.Text += "Text3 : " + placemark.CityName.ToString() + "\n";
-                        richTextBox1.Text += "Text4 : " + placemark.CountryName + "\n";
-                        richTextBox1.Text += "Text5 : " + placemark.DistrictName + "\n";
-                        richTextBox1.Text += "Text6 : " + placemark.HouseNo.ToString() + "\n";
-                        richTextBox1.Text += "Text7 : " + placemark.LocalityName + "\n";
-                        richTextBox1.Text += "Text8 : " + placemark.Name.ToString() + "\n";
-                        richTextBox1.Text += "Text9 : " + placemark.Neighborhood + "\n";
-                        richTextBox1.Text += "Text10 : " + placemark.ProvinceName.ToString() + "\n";
+            /*  除了第一項，全無資料
+            richTextBox1.Text += "Text2 : " + placemark.AdministrativeAreaName + "\n";
+            richTextBox1.Text += "Text3 : " + placemark.CityName.ToString() + "\n";
+            richTextBox1.Text += "Text4 : " + placemark.CountryName + "\n";
+            richTextBox1.Text += "Text5 : " + placemark.DistrictName + "\n";
+            richTextBox1.Text += "Text6 : " + placemark.HouseNo.ToString() + "\n";
+            richTextBox1.Text += "Text7 : " + placemark.LocalityName + "\n";
+            richTextBox1.Text += "Text8 : " + placemark.Name.ToString() + "\n";
+            richTextBox1.Text += "Text9 : " + placemark.Neighborhood + "\n";
+            richTextBox1.Text += "Text10 : " + placemark.ProvinceName.ToString() + "\n";
 
-                        richTextBox1.Text += "Text9 : " + placemark.StreetNumber.ToString() + "\n";
-                        richTextBox1.Text += "Text9 : " + placemark.SubAdministrativeAreaName + "\n";
-                        richTextBox1.Text += "Text9 : " + placemark.Tel.ToString() + "\n";
-                        richTextBox1.Text += "Text9 : " + placemark.ThoroughfareName + "\n";
-                        */
+            richTextBox1.Text += "Text9 : " + placemark.StreetNumber.ToString() + "\n";
+            richTextBox1.Text += "Text9 : " + placemark.SubAdministrativeAreaName + "\n";
+            richTextBox1.Text += "Text9 : " + placemark.Tel.ToString() + "\n";
+            richTextBox1.Text += "Text9 : " + placemark.ThoroughfareName + "\n";
+            */
             /*
                     }
                 }
@@ -2984,39 +3042,85 @@ namespace vcs_GMap
             return newValue;
         }
 
-        private void selectMapProvider(object sender, EventArgs e)
+
+
+        private void bt_test10_Click(object sender, EventArgs e)
         {
-            //richTextBox1.Text += "你選擇了 : " + ((ToolStripMenuItem)sender).Name + "\n";
-            if (((ToolStripMenuItem)sender).Name == "selectMapProvider1")
-            {
-                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            }
-            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider2")
-            {
-                gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-            }
-            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider3")
-            {
-                gMapControl1.MapProvider = GMapProviders.GoogleTerrainMap; //地形圖
-            }
-            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider4")
-            {
-                gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;    //衛星地圖
-            }
-            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider5")
-            {
-                gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;  //混合地圖
-            }
-            else if (((ToolStripMenuItem)sender).Name == "selectMapProvider6")
-            {
-                gMapControl1.MapProvider = OpenCycleMapProvider.Instance; //腳踏車專用地圖
-            }
-            else
-            {
-                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            }
 
         }
+
+        private void bt_test11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //画图完成函数
         void draw_DrawComplete(object sender, DrawEventArgs e)
@@ -3068,7 +3172,6 @@ namespace vcs_GMap
                 draw.IsEnable = false;
             }
         }
-
     }
 
     public class Piecearea
