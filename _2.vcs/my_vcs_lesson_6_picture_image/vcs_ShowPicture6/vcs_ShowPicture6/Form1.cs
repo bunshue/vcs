@@ -13,11 +13,10 @@ namespace vcs_ShowPicture6
 {
     public partial class Form1 : Form
     {
-        string dir_name = @"C:\______test_files\__pic\_peony1";
+        string foldername = @"C:\______test_files\__pic\_peony1";
 
         // The list of files we will pick from.
         private List<string> FileNames = new List<string>();
-
 
         public Form1()
         {
@@ -26,17 +25,16 @@ namespace vcs_ShowPicture6
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (Directory.Exists(foldername) == false)
+            {
+                richTextBox1.Text += "圖片資料夾不存在, 離開\n";
+                return;
+            }
+
             this.WindowState = FormWindowState.Maximized;
 
             // Load the list of files.
-            if (Directory.Exists(dir_name))
-            {
-                FileNames = FindFiles(dir_name, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
-            }
-            else
-            {
-                FileNames = new List<string>();
-            }
+            FileNames = FindFiles(foldername, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
 
             for (int i = 0; i < FileNames.Count; i++)
             {
@@ -53,7 +51,7 @@ namespace vcs_ShowPicture6
             const int xmax = num_columns * (wid + margin);
 
             // Find the images.
-            foreach (string filename in Directory.GetFiles(dir_name, "*.jpg"))
+            foreach (string filename in Directory.GetFiles(foldername, "*.jpg"))
             {
                 Bitmap bitmap1 = new Bitmap(filename);
                 int W = bitmap1.Width;
@@ -127,7 +125,7 @@ namespace vcs_ShowPicture6
         // See: Search for files that match multiple patterns in C#
         //      http://csharphelper.com/blog/2015/06/find-files-that-match-multiple-patterns-in-c/
         // Search for files matching the patterns.
-        private List<string> FindFiles(string dir_name, string patterns, bool search_subdirectories)
+        private List<string> FindFiles(string fname, string patterns, bool search_subdirectories)
         {
             // Make the result list.
             List<string> files = new List<string>();
@@ -140,7 +138,7 @@ namespace vcs_ShowPicture6
             if (search_subdirectories) search_option = SearchOption.AllDirectories;
             foreach (string pattern in pattern_array)
             {
-                foreach (string filename in Directory.GetFiles(dir_name, pattern, search_option))
+                foreach (string filename in Directory.GetFiles(fname, pattern, search_option))
                 {
                     if (!files.Contains(filename)) files.Add(filename);
                 }

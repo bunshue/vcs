@@ -27,19 +27,44 @@ namespace vcs_ShowPicture7
             int W = bitmap1.Width;
             int H = bitmap1.Height;
 
+            float ratio = 1.0f;
+
+            int WW = Screen.PrimaryScreen.Bounds.Width / 2;
+            int HH = Screen.PrimaryScreen.Bounds.Height / 2;
+
+            for (ratio = 1.0f; ratio < 10; ratio += 0.1f)
+            {
+                if (((W / ratio) < WW) && ((H / ratio) < HH))
+                {
+                    break;
+                }
+
+            }
+            //this.Text = "ratio = " + ratio.ToString();
+
+            W = (int)(W / ratio);
+            H = (int)(H / ratio);
+
             pictureBox1.Image = bitmap1;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.ClientSize = new Size(W, H);
             this.ClientSize = new Size(W, H);
-            this.Text = "W = " + W.ToString() + ", H = " + H.ToString();
+            //this.Text = "W = " + W.ToString() + ", H = " + H.ToString();
 
-            this.FormBorderStyle = FormBorderStyle.None;
+            //this.FormBorderStyle = FormBorderStyle.None;
             this.ShowInTaskbar = false;
 
+            //限制新圖出現的地方
+            Random r = new Random();
+            int dd = 200;
+            WW = Screen.PrimaryScreen.Bounds.Width;
+            HH = Screen.PrimaryScreen.Bounds.Height;
+            int x_st = dd + r.Next(WW - W - dd);
+            int y_st = r.Next(HH - H);
+            this.Location = new Point(x_st, y_st);
 
-
-
+            this.Text = "W = " + W.ToString() + ", H = " + H.ToString() + ", x = " + x_st.ToString() + ", y = " + y_st.ToString();
         }
 
         bool flag_pictureBox1_mouse_down = false;
