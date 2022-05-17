@@ -73,6 +73,9 @@ namespace vcs_PicPick
             bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
             bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
 
+            rb_filetype1.Location = new Point(button2.Location.X + button2.Size.Width - 5, 80);
+            rb_filetype2.Location = new Point(button2.Location.X + button2.Size.Width - 5, 105);
+
             label1.Location = new Point(10, button2.Location.Y + button2.Size.Height + button3.Size.Height + 15);
 
             this.Size = new Size(205 + 50, 110 + 35);
@@ -113,10 +116,26 @@ namespace vcs_PicPick
                 Bitmap bitmap1 = (Bitmap)dataObject.GetData(DataFormats.Bitmap);  //取得Bitmap資料
                 if (bitmap1 != null)
                 {
-                    string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                    string filename = string.Empty;
+                    if (rb_filetype1.Checked == true)
+                    {
+                        filename = @"C:\dddddddddd\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                    }
+                    else
+                    {
+                        filename = @"C:\dddddddddd\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                    }
+
                     try
                     {
-                        bitmap1.Save(@filename, ImageFormat.Jpeg);
+                        if (rb_filetype1.Checked == true)
+                        {
+                            bitmap1.Save(filename, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            bitmap1.Save(filename, ImageFormat.Bmp);
+                        }
 
                         //richTextBox1.Text += "存檔成功\n";
                         //richTextBox1.Text += "已存檔 : " + filename + "\n";
@@ -159,10 +178,10 @@ namespace vcs_PicPick
             g.ReleaseHdc(dc1);
 
             //將裁切出的矩形存成JPG圖檔。
-            string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            string filename = @"C:\dddddddddd\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             try
             {
-                bitmap1.Save(@filename, ImageFormat.Jpeg);
+                bitmap1.Save(filename, ImageFormat.Jpeg);
                 //richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
                 label1.Text = "存檔成功";
                 timer1.Enabled = true;
@@ -177,15 +196,39 @@ namespace vcs_PicPick
             // Get the screen's image.
             using (Bitmap bitmap1 = GetScreenImage())
             {
-                //存成bmp檔
-                string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-                bitmap1.Save(filename, ImageFormat.Bmp);
-                //richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
-                label1.Text = "存檔成功";
-                timer1.Enabled = true;
+                string filename = string.Empty;
+                if (rb_filetype1.Checked == true)
+                {
+                    filename = @"C:\dddddddddd\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                }
+                else
+                {
+                    filename = @"C:\dddddddddd\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                }
+
+                try
+                {
+                    if (rb_filetype1.Checked == true)
+                    {
+                        bitmap1.Save(filename, ImageFormat.Jpeg);
+                    }
+                    else
+                    {
+                        bitmap1.Save(filename, ImageFormat.Bmp);
+                    }
+
+                    //richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + filename + "\n";
+                    //richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
+                    label1.Text = "存檔成功";
+                    timer1.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
             }
             this.Show();    // Show this form again.
-
         }
 
         // Get the screen's image.
@@ -302,10 +345,38 @@ namespace vcs_PicPick
                 }
 
                 // Save the selected area.
-                //存成bmp檔
-                string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-                selection.Save(filename, ImageFormat.Jpeg);
-                //richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
+                // 部分截圖存檔
+
+                string filename = string.Empty;
+                if (rb_filetype1.Checked == true)
+                {
+                    filename = @"C:\dddddddddd\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                }
+                else
+                {
+                    filename = @"C:\dddddddddd\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                }
+
+                try
+                {
+                    if (rb_filetype1.Checked == true)
+                    {
+                        selection.Save(filename, ImageFormat.Jpeg);
+                    }
+                    else
+                    {
+                        selection.Save(filename, ImageFormat.Bmp);
+                    }
+
+                    //richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + filename + "\n";
+                    label1.Text = "存檔成功";
+                    timer1.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
                 Form1_Load(sender, e);
                 label1.Text = "存檔成功";
                 timer1.Enabled = true;

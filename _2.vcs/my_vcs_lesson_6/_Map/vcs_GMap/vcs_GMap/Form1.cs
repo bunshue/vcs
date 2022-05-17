@@ -141,11 +141,14 @@ namespace vcs_GMap
 
             x_st = 10;
             y_st = 150;
+            gMapControl1.Size = new Size(1250, 850);
             gMapControl1.Location = new Point(x_st, y_st);
-            richTextBox1.Location = new Point(x_st + 960 + 70, y_st);
+            richTextBox1.Size = new Size(250, 700);
+            richTextBox1.Location = new Point(x_st + 960 + 60 + 300, y_st);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            treeView1.Location = new Point(x_st + 1220 + 70, y_st);
+            treeView1.Size = new Size(180, 700);
+            treeView1.Location = new Point(x_st + 1220 + 60 + 300, y_st);
 
             x_st = 940;
             y_st = 30;
@@ -172,7 +175,8 @@ namespace vcs_GMap
             comboBox1.Location = new Point(x_st, y_st + dy * 3);
             btn_draw_profile.Location = new Point(x_st, y_st + dy * 4);
             btn_draw_profile2.Location = new Point(x_st + 85, y_st + dy * 4);
-            groupBox3.Location = new Point(x_st + 40, y_st + dy * 5 + 20);
+            groupBox3.Size = new Size(120, 840);
+            groupBox3.Location = new Point(x_st + 270, y_st + dy * 0 + 0);
 
             x_st = 20;
             y_st = 15;
@@ -206,9 +210,9 @@ namespace vcs_GMap
             lb_distance.Text = "";
 
             x_st = 10;
-            y_st = 20;
+            y_st = 30;
             dx = 100;
-            dy = 50;
+            dy = 40;
 
             bt_test00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_test01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -220,17 +224,18 @@ namespace vcs_GMap
             bt_test07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             bt_test08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             bt_test09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_test10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_test11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_test12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            bt_test13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            bt_test14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
+            bt_test15.Location = new Point(x_st + dx * 0, y_st + dy * 15);
+            bt_test16.Location = new Point(x_st + dx * 0, y_st + dy * 16);
+            bt_test17.Location = new Point(x_st + dx * 0, y_st + dy * 17);
+            bt_test18.Location = new Point(x_st + dx * 0, y_st + dy * 18);
+            bt_test19.Location = new Point(x_st + dx * 0, y_st + dy * 19);
 
-            bt_test10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_test11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_test12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            bt_test13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            bt_test14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            bt_test15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            bt_test16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            bt_test17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            bt_test18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            bt_test19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

@@ -424,10 +424,129 @@ namespace vcs_Mix00
             show_button_text(sender);
         }
 
+
+        string strCode;
+        ArrayList alLinks;
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //抓取網頁裡面的所有鏈接
+
+            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190697.html";
+            if (url.Substring(0, 7) != @"http://")
+            {
+                url = @"http://" + url;
+            }
+            MessageBox.Show("正在獲取頁面代碼，請稍後...");
+            strCode = GetPageSource(url);
+            MessageBox.Show("正在提取超鏈接，請稍侯...");
+            alLinks = GetHyperLinks(strCode);
+            MessageBox.Show("正在寫入文件，請稍侯...");
+            WriteToXml(url, alLinks);
         }
+
+        // 獲取指定網頁的HTML代碼
+        public static string GetPageSource(string URL)
+        {
+            Uri uri = new Uri(URL);
+
+            HttpWebRequest hwReq = (HttpWebRequest)WebRequest.Create(uri);
+            HttpWebResponse hwRes = (HttpWebResponse)hwReq.GetResponse();
+
+            hwReq.Method = "Get";
+
+            hwReq.KeepAlive = false;
+
+            StreamReader reader = new StreamReader(hwRes.GetResponseStream(), System.Text.Encoding.GetEncoding("GB2312"));
+
+            return reader.ReadToEnd();
+        }
+
+        // 提取HTML代碼中的網址
+        public static ArrayList GetHyperLinks(string htmlCode)
+        {
+            ArrayList al = new ArrayList();
+
+            string strRegex = @"http://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?";
+
+            Regex r = new Regex(strRegex, RegexOptions.IgnoreCase);
+            MatchCollection m = r.Matches(htmlCode);
+
+            for (int i = 0; i <= m.Count - 1; i++)
+            {
+                bool rep = false;
+                string strNew = m[i].ToString();
+
+                // 過濾重復的URL
+                foreach (string str in al)
+                {
+                    if (strNew == str)
+                    {
+                        rep = true;
+                        break;
+                    }
+                }
+
+                if (!rep) al.Add(strNew);
+            }
+
+            al.Sort();
+
+            return al;
+        }
+
+        // 把網址寫入xml文件
+        static void WriteToXml(string strURL, ArrayList alHyperLinks)
+        {
+            XmlTextWriter writer = new XmlTextWriter("HyperLinks.xml", Encoding.UTF8);
+
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartDocument(false);
+            writer.WriteDocType("HyperLinks", null, "urls.dtd", null);
+            writer.WriteComment("提取自" + strURL + "的超鏈接");
+            writer.WriteStartElement("HyperLinks");
+            writer.WriteStartElement("HyperLinks", null);
+            writer.WriteAttributeString("DateTime", DateTime.Now.ToString());
+
+
+            foreach (string str in alHyperLinks)
+            {
+                string title = GetDomain(str);
+                string body = str;
+                writer.WriteElementString(title, null, body);
+            }
+
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+
+            writer.Flush();
+            writer.Close();
+        }
+
+        // 獲取網址的域名後綴
+        static string GetDomain(string strURL)
+        {
+            string retVal;
+
+            string strRegex = @"(\.com/|\.net/|\.cn/|\.org/|\.gov/)";
+
+            Regex r = new Regex(strRegex, RegexOptions.IgnoreCase);
+            Match m = r.Match(strURL);
+            retVal = m.ToString();
+
+            strRegex = @"\.|/$";
+            retVal = Regex.Replace(retVal, strRegex, "").ToString();
+
+            if (retVal == "")
+                retVal = "other";
+
+            return retVal;
+        }
+        
+
+
+
+
 
         private void button8_Click(object sender, EventArgs e)
         {

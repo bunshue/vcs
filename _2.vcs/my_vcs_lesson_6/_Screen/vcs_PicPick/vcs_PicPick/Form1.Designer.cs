@@ -37,6 +37,8 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.bt_open_folder = new System.Windows.Forms.Button();
+            this.rb_filetype1 = new System.Windows.Forms.RadioButton();
+            this.rb_filetype2 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // button2
@@ -104,11 +106,37 @@
             this.bt_open_folder.UseVisualStyleBackColor = true;
             this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
             // 
+            // rb_filetype1
+            // 
+            this.rb_filetype1.AutoSize = true;
+            this.rb_filetype1.Checked = true;
+            this.rb_filetype1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_filetype1.Location = new System.Drawing.Point(46, 307);
+            this.rb_filetype1.Name = "rb_filetype1";
+            this.rb_filetype1.Size = new System.Drawing.Size(46, 20);
+            this.rb_filetype1.TabIndex = 9;
+            this.rb_filetype1.TabStop = true;
+            this.rb_filetype1.Text = "jpg";
+            this.rb_filetype1.UseVisualStyleBackColor = true;
+            // 
+            // rb_filetype2
+            // 
+            this.rb_filetype2.AutoSize = true;
+            this.rb_filetype2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_filetype2.Location = new System.Drawing.Point(46, 329);
+            this.rb_filetype2.Name = "rb_filetype2";
+            this.rb_filetype2.Size = new System.Drawing.Size(54, 20);
+            this.rb_filetype2.TabIndex = 10;
+            this.rb_filetype2.Text = "bmp";
+            this.rb_filetype2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 435);
+            this.Controls.Add(this.rb_filetype2);
+            this.Controls.Add(this.rb_filetype1);
             this.Controls.Add(this.bt_open_folder);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.richTextBox1);
@@ -134,6 +162,8 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button bt_open_folder;
+        private System.Windows.Forms.RadioButton rb_filetype1;
+        private System.Windows.Forms.RadioButton rb_filetype2;
     }
 }
 
