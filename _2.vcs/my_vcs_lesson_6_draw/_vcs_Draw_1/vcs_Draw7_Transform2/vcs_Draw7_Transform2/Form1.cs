@@ -89,5 +89,54 @@ namespace vcs_Draw7_Transform2
             p.Dispose();
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //字串旋轉列印
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawString("字串旋轉列印", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(20, 20));
+
+            Font f = new Font("標楷體", 50);
+            RotateDeawString(g, f, 35, "字串旋轉列印", 20, 20);
+
+
+        }
+
+        /// <summary>
+        /// 旋轉列印字串
+        /// </summary>
+        /// <param name="e">PrintPageEventArgs</param>
+        /// <param name="font">字型</param>
+        /// <param name="degree">旋轉角度</param>
+        /// <param name="msg">列印訊息</param>
+        /// <param name="x">重設原點 X 位置</param>
+        /// <param name="y">重設原點 Y 位置</param>
+        private void RotateDeawString(Graphics g, Font font, int degree, string msg, int x, int y)
+        {
+            // 原點位置重設
+            g.TranslateTransform(mmTo100InchX(x), mmTo100InchY(y));
+            // 設定旋轉角度
+            g.RotateTransform(degree);
+            // 標題
+            g.DrawString(msg, font, Brushes.Black, mmTo100InchX(0), mmTo100InchY(0));
+            //繪圖畫布還原
+            g.ResetTransform();
+        }
+
+        private int mmTo100InchX(int mm)
+        {
+            int times = 100;
+            double result = (mm * times / 25.4);
+            return (int)Math.Floor(result);
+        }
+
+        private int mmTo100InchY(int mm)
+        {
+            int times = 100;
+            double result = (mm * times / 25.4);
+            return (int)Math.Floor(result);
+        }
+
+
     }
 }

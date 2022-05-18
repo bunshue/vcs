@@ -354,6 +354,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(135, 45);
             this.button25.TabIndex = 41;
+            this.button25.Text = "畫OV亮度圖2";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -364,6 +365,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(135, 45);
             this.button24.TabIndex = 43;
+            this.button24.Text = "畫OV亮度圖1";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

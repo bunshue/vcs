@@ -175,39 +175,7 @@ namespace vcs_Mix06
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //調用系統IPCONFIG獲取本機局域網IP以及其他相關信息
-
-            string result = GetIPConfigReturns();
-            richTextBox1.Text += "  " + result + "\n";
-
         }
-
-        /// <summary> 
-        /// 獲取IPCONFIG返回值 
-        /// </summary> 
-        /// <returns>返回 IPCONFIG輸出</returns> 
-        public static string GetIPConfigReturns()
-        {
-            string version = Environment.OSVersion.VersionString;
-
-            if (version.Contains("Windows"))
-            {
-                //調用ipconfig ,並傳入參數: /all 
-                ProcessStartInfo psi = new ProcessStartInfo("ipconfig", "/all");
-
-                psi.CreateNoWindow = true; //若為false，則會出現cmd的黑窗體 
-                psi.RedirectStandardOutput = true;
-                psi.UseShellExecute = false;
-
-                Process p = Process.Start(psi);
-
-                return p.StandardOutput.ReadToEnd();
-            }
-
-            return string.Empty;
-        }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -640,37 +608,11 @@ namespace vcs_Mix06
         private void button27_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //抓取網頁資料 1
-            string url = @"http://140.129.118.16/~richwang/";
-
-            string rl;
-            WebRequest Request = WebRequest.Create(url.Trim());
-
-            WebResponse Response = Request.GetResponse();
-
-            Stream resStream = Response.GetResponseStream();
-
-            StreamReader sr = new StreamReader(resStream, Encoding.Default);
-            StringBuilder sb = new StringBuilder();
-            while ((rl = sr.ReadLine()) != null)
-            {
-                sb.Append(rl);
-            }
-
-            richTextBox1.Text += sb + "\n";
-
-            richTextBox1.Text += "完成\n";
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //抓取網頁資料 2
-            WebClient wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            string html = wc.DownloadString("http://www.lagou.com/");
-
-            richTextBox1.Text += html + "\n";
         }
 
         private void button29_Click(object sender, EventArgs e)

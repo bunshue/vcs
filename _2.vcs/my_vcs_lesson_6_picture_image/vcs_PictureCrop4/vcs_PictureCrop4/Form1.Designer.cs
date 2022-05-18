@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.picSource = new System.Windows.Forms.PictureBox();
-            this.ofdOriginal = new System.Windows.Forms.OpenFileDialog();
-            this.sfdResult = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,13 +60,9 @@
             this.picSource.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picSource_MouseMove);
             this.picSource.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picSource_MouseUp);
             // 
-            // ofdOriginal
+            // openFileDialog1
             // 
-            this.ofdOriginal.Filter = "Image Files|*.bmp;*.jpg;*.gif;*.tif;*.png|All Files|*.*";
-            // 
-            // sfdResult
-            // 
-            this.sfdResult.Filter = "Image Files|*.bmp;*.jpg;*.gif;*.tif;*.png|All Files|*.*";
+            this.openFileDialog1.Filter = "Image Files|*.bmp;*.jpg;*.gif;*.tif;*.png|All Files|*.*";
             // 
             // menuStrip1
             // 
@@ -176,8 +171,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox picSource;
-        private System.Windows.Forms.OpenFileDialog ofdOriginal;
-        private System.Windows.Forms.SaveFileDialog sfdResult;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuFileOpen;

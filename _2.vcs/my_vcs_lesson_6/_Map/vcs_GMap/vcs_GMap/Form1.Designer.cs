@@ -131,6 +131,11 @@
             this.bt_zoom_in = new System.Windows.Forms.Button();
             this.bt_zoom_out = new System.Windows.Forms.Button();
             this.groupBox_map_control1 = new System.Windows.Forms.GroupBox();
+            this.bt_draw4 = new System.Windows.Forms.Button();
+            this.bt_draw3 = new System.Windows.Forms.Button();
+            this.bt_draw2 = new System.Windows.Forms.Button();
+            this.bt_draw1 = new System.Windows.Forms.Button();
+            this.bt_draw0 = new System.Windows.Forms.Button();
             this.groupBox_map_control2 = new System.Windows.Forms.GroupBox();
             this.groupBox_map2 = new System.Windows.Forms.GroupBox();
             this.rb_map41 = new System.Windows.Forms.RadioButton();
@@ -175,11 +180,7 @@
             this.rb_map02 = new System.Windows.Forms.RadioButton();
             this.rb_map01 = new System.Windows.Forms.RadioButton();
             this.rb_map00 = new System.Windows.Forms.RadioButton();
-            this.bt_draw0 = new System.Windows.Forms.Button();
-            this.bt_draw1 = new System.Windows.Forms.Button();
-            this.bt_draw2 = new System.Windows.Forms.Button();
-            this.bt_draw3 = new System.Windows.Forms.Button();
-            this.bt_draw4 = new System.Windows.Forms.Button();
+            this.bt_draw5 = new System.Windows.Forms.Button();
             this.groupBox_map.SuspendLayout();
             this.groupBox_location.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -1263,6 +1264,7 @@
             // 
             // groupBox_map_control1
             // 
+            this.groupBox_map_control1.Controls.Add(this.bt_draw5);
             this.groupBox_map_control1.Controls.Add(this.bt_draw4);
             this.groupBox_map_control1.Controls.Add(this.bt_draw3);
             this.groupBox_map_control1.Controls.Add(this.bt_draw2);
@@ -1281,6 +1283,56 @@
             this.groupBox_map_control1.TabIndex = 46;
             this.groupBox_map_control1.TabStop = false;
             this.groupBox_map_control1.Text = "Control";
+            // 
+            // bt_draw4
+            // 
+            this.bt_draw4.Location = new System.Drawing.Point(212, 57);
+            this.bt_draw4.Name = "bt_draw4";
+            this.bt_draw4.Size = new System.Drawing.Size(50, 28);
+            this.bt_draw4.TabIndex = 50;
+            this.bt_draw4.Text = "折線段";
+            this.bt_draw4.UseVisualStyleBackColor = true;
+            this.bt_draw4.Click += new System.EventHandler(this.bt_draw4_Click);
+            // 
+            // bt_draw3
+            // 
+            this.bt_draw3.Location = new System.Drawing.Point(212, 21);
+            this.bt_draw3.Name = "bt_draw3";
+            this.bt_draw3.Size = new System.Drawing.Size(50, 28);
+            this.bt_draw3.TabIndex = 49;
+            this.bt_draw3.Text = "線段";
+            this.bt_draw3.UseVisualStyleBackColor = true;
+            this.bt_draw3.Click += new System.EventHandler(this.bt_draw3_Click);
+            // 
+            // bt_draw2
+            // 
+            this.bt_draw2.Location = new System.Drawing.Point(153, 95);
+            this.bt_draw2.Name = "bt_draw2";
+            this.bt_draw2.Size = new System.Drawing.Size(50, 28);
+            this.bt_draw2.TabIndex = 48;
+            this.bt_draw2.Text = "多邊形";
+            this.bt_draw2.UseVisualStyleBackColor = true;
+            this.bt_draw2.Click += new System.EventHandler(this.bt_draw2_Click);
+            // 
+            // bt_draw1
+            // 
+            this.bt_draw1.Location = new System.Drawing.Point(153, 57);
+            this.bt_draw1.Name = "bt_draw1";
+            this.bt_draw1.Size = new System.Drawing.Size(50, 28);
+            this.bt_draw1.TabIndex = 47;
+            this.bt_draw1.Text = "矩形";
+            this.bt_draw1.UseVisualStyleBackColor = true;
+            this.bt_draw1.Click += new System.EventHandler(this.bt_draw1_Click);
+            // 
+            // bt_draw0
+            // 
+            this.bt_draw0.Location = new System.Drawing.Point(153, 21);
+            this.bt_draw0.Name = "bt_draw0";
+            this.bt_draw0.Size = new System.Drawing.Size(50, 28);
+            this.bt_draw0.TabIndex = 46;
+            this.bt_draw0.Text = "圓形";
+            this.bt_draw0.UseVisualStyleBackColor = true;
+            this.bt_draw0.Click += new System.EventHandler(this.bt_draw0_Click);
             // 
             // groupBox_map_control2
             // 
@@ -1772,55 +1824,15 @@
             this.rb_map00.Text = "正中";
             this.rb_map00.UseVisualStyleBackColor = true;
             // 
-            // bt_draw0
+            // bt_draw5
             // 
-            this.bt_draw0.Location = new System.Drawing.Point(153, 21);
-            this.bt_draw0.Name = "bt_draw0";
-            this.bt_draw0.Size = new System.Drawing.Size(50, 28);
-            this.bt_draw0.TabIndex = 46;
-            this.bt_draw0.Text = "圓形";
-            this.bt_draw0.UseVisualStyleBackColor = true;
-            this.bt_draw0.Click += new System.EventHandler(this.bt_draw0_Click);
-            // 
-            // bt_draw1
-            // 
-            this.bt_draw1.Location = new System.Drawing.Point(153, 57);
-            this.bt_draw1.Name = "bt_draw1";
-            this.bt_draw1.Size = new System.Drawing.Size(50, 28);
-            this.bt_draw1.TabIndex = 47;
-            this.bt_draw1.Text = "矩形";
-            this.bt_draw1.UseVisualStyleBackColor = true;
-            this.bt_draw1.Click += new System.EventHandler(this.bt_draw1_Click);
-            // 
-            // bt_draw2
-            // 
-            this.bt_draw2.Location = new System.Drawing.Point(153, 95);
-            this.bt_draw2.Name = "bt_draw2";
-            this.bt_draw2.Size = new System.Drawing.Size(50, 28);
-            this.bt_draw2.TabIndex = 48;
-            this.bt_draw2.Text = "多邊形";
-            this.bt_draw2.UseVisualStyleBackColor = true;
-            this.bt_draw2.Click += new System.EventHandler(this.bt_draw2_Click);
-            // 
-            // bt_draw3
-            // 
-            this.bt_draw3.Location = new System.Drawing.Point(212, 21);
-            this.bt_draw3.Name = "bt_draw3";
-            this.bt_draw3.Size = new System.Drawing.Size(50, 28);
-            this.bt_draw3.TabIndex = 49;
-            this.bt_draw3.Text = "線段";
-            this.bt_draw3.UseVisualStyleBackColor = true;
-            this.bt_draw3.Click += new System.EventHandler(this.bt_draw3_Click);
-            // 
-            // bt_draw4
-            // 
-            this.bt_draw4.Location = new System.Drawing.Point(212, 57);
-            this.bt_draw4.Name = "bt_draw4";
-            this.bt_draw4.Size = new System.Drawing.Size(50, 28);
-            this.bt_draw4.TabIndex = 50;
-            this.bt_draw4.Text = "折線段";
-            this.bt_draw4.UseVisualStyleBackColor = true;
-            this.bt_draw4.Click += new System.EventHandler(this.bt_draw4_Click);
+            this.bt_draw5.Location = new System.Drawing.Point(212, 95);
+            this.bt_draw5.Name = "bt_draw5";
+            this.bt_draw5.Size = new System.Drawing.Size(50, 28);
+            this.bt_draw5.TabIndex = 51;
+            this.bt_draw5.Text = "測距";
+            this.bt_draw5.UseVisualStyleBackColor = true;
+            this.bt_draw5.Click += new System.EventHandler(this.bt_draw5_Click);
             // 
             // Form1
             // 
@@ -2012,6 +2024,7 @@
         private System.Windows.Forms.Button bt_draw3;
         private System.Windows.Forms.Button bt_draw2;
         private System.Windows.Forms.Button bt_draw1;
+        private System.Windows.Forms.Button bt_draw5;
     }
 }
 

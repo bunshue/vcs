@@ -51,6 +51,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.picImage = new System.Windows.Forms.PictureBox();
             this.txtAspectRatio = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +64,7 @@
             this.rectangleToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(854, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1142, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -253,11 +254,21 @@
             this.txtAspectRatio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAspectRatio.TextChanged += new System.EventHandler(this.txtAspectRatio_TextChanged);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.richTextBox1.Location = new System.Drawing.Point(935, 24);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(207, 575);
+            this.richTextBox1.TabIndex = 6;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 599);
+            this.ClientSize = new System.Drawing.Size(1142, 599);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.txtAspectRatio);
             this.Controls.Add(this.picImage);
             this.Controls.Add(this.txtHeight);
@@ -302,6 +313,7 @@
         private System.Windows.Forms.TextBox txtAspectRatio;
         private System.Windows.Forms.ToolStripMenuItem rectangleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuRectangleReset;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

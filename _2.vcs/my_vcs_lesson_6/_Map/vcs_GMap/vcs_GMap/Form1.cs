@@ -424,8 +424,10 @@ namespace vcs_GMap
             bt_draw2.Location = new Point(x_st + 70 + 70, y_st - 10 + dy * 2);
             bt_draw3.Location = new Point(x_st + 70 + 70, y_st - 10 + dy * 3);
             bt_draw4.Location = new Point(x_st + 70 + 70, y_st - 10 + dy * 4);
+            bt_draw5.Location = new Point(x_st + 70 + 0, y_st - 10 + dy * 4);
             bt_draw1.Enabled = false;
             bt_draw2.Enabled = false;
+            bt_draw5.Enabled = false;
 
             x_st = 20;
             y_st = 20;
@@ -614,7 +616,6 @@ namespace vcs_GMap
             trackBar1.Value = 10;
             trackBar1.Height = gMapControl1.Height * 9 / 10;
             trackBar1.Width = 10;
-            trackBar1.BackColor = Color.Pink;
             trackBar1.Location = new Point(gMapControl1.Location.X + gMapControl1.Width + 10, gMapControl1.Location.Y + gMapControl1.Height / 20);
             trackBar1.ValueChanged += trackBar1_ValueChanged;
             Controls.Add(trackBar1);
@@ -1466,6 +1467,9 @@ namespace vcs_GMap
                 }
             }
             richTextBox1.Text += "Zoom :\t" + gMapControl1.Zoom.ToString() + "\n";
+
+
+            richTextBox1.Text += "此時的地圖中心位置 :\t" + gMapControl1.Position.ToString() + "\n";
         }
 
         private void btn_north_Click(object sender, EventArgs e)
@@ -3648,6 +3652,7 @@ namespace vcs_GMap
 
         private void bt_draw3_Click(object sender, EventArgs e)
         {
+            //線段, 一段線
             richTextBox1.Text += "你按了繪圖工具 線段\n";
             draw.DrawingMode = DrawingMode.Line;
             draw.IsEnable = true;
@@ -3655,9 +3660,16 @@ namespace vcs_GMap
 
         private void bt_draw4_Click(object sender, EventArgs e)
         {
+            //折線段 = 線條, 多段連線
             richTextBox1.Text += "你按了繪圖工具 折線段\n";
             draw.DrawingMode = DrawingMode.Route;
             draw.IsEnable = true;
+        }
+
+        private void bt_draw5_Click(object sender, EventArgs e)
+        {
+            //測距
+            //drawDistance.IsEnable = true;
         }
 
         //画图完成函数

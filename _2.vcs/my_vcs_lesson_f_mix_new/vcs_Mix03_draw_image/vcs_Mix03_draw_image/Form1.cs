@@ -261,47 +261,6 @@ namespace vcs_Mix03_draw_image
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //字串旋轉列印
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.DrawString("字串旋轉列印", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(20, 20));
-
-            Font f = new Font("標楷體", 50);
-            RotateDeawString(g, f, 35, "字串旋轉列印", 20, 20);
-        }
-
-        /// <summary>
-        /// 旋轉列印字串
-        /// </summary>
-        /// <param name="e">PrintPageEventArgs</param>
-        /// <param name="font">字型</param>
-        /// <param name="degree">旋轉角度</param>
-        /// <param name="msg">列印訊息</param>
-        /// <param name="x">重設原點 X 位置</param>
-        /// <param name="y">重設原點 Y 位置</param>
-        private void RotateDeawString(Graphics g, Font font, int degree, string msg, int x, int y)
-        {
-            // 原點位置重設
-            g.TranslateTransform(mmTo100InchX(x), mmTo100InchY(y));
-            // 設定旋轉角度
-            g.RotateTransform(degree);
-            // 標題
-            g.DrawString(msg, font, Brushes.Black, mmTo100InchX(0), mmTo100InchY(0));
-            //繪圖畫布還原
-            g.ResetTransform();
-        }
-
-        private int mmTo100InchX(int mm)
-        {
-            int times = 100;
-            double result = (mm * times / 25.4);
-            return (int)Math.Floor(result);
-        }
-
-        private int mmTo100InchY(int mm)
-        {
-            int times = 100;
-            double result = (mm * times / 25.4);
-            return (int)Math.Floor(result);
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -312,19 +271,6 @@ namespace vcs_Mix03_draw_image
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            Bitmap bitmap1 = new Bitmap(350, 200);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-            Rectangle outline = new Rectangle(10, 5, 300, 100);
-            g.DrawEllipse(new Pen(Color.Black, 8.0f), outline);
-            g.FillPie(new SolidBrush(Color.Red), outline, -20f, 120f);
-            //這些角度的大小可以由數據庫中的對比數據計算決定
-            g.FillPie(new SolidBrush(Color.Yellow), outline, 100f, 120f);
-            g.FillPie(new SolidBrush(Color.Blue), outline, 220f, 100f);
-            g.FillPie(new SolidBrush(Color.Green), outline, 320f, 40f);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -701,73 +647,6 @@ namespace vcs_Mix03_draw_image
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //文本轉成圖片
-
-            //讀取純文字檔到richTextBox裏
-            try
-            {
-                richTextBox1.LoadFile(@"C:\______test_files\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
-            }
-            catch (FileNotFoundException)
-            {
-                richTextBox1.Text += "找不到檔案\n";
-                return;
-            }
-
-            //獲取文本
-            string text = richTextBox1.Text;
-
-            //得到Bitmap(傳入Rectangle.Empty自動計算寬高)
-            Bitmap bitmap1 = TextToBitmap(text, this.richTextBox1.Font, Rectangle.Empty, this.richTextBox1.ForeColor, this.richTextBox1.BackColor);
-
-            //用PictureBox顯示
-            this.pictureBox1.Image = bitmap1;
-
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            bitmap1.Save(filename, ImageFormat.Bmp);
-        }
-
-        //通過系統Graphics繪圖把文字繪制到位圖上，然後顯示或保存起來，這裡用定義該函數
-        /// <summary>
-        /// 把文字轉換才Bitmap
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="font"></param>
-        /// <param name="rect">用於輸出的矩形，文字在這個矩形內顯示，為空時自動計算</param>
-        /// <param name="fontcolor">字體顏色</param>
-        /// <param name="backColor">背景顏色</param>
-        /// <returns></returns>
-        private Bitmap TextToBitmap(string text, Font font, Rectangle rect, Color fontcolor, Color backColor)
-        {
-            Graphics g;
-            Bitmap bitmap1;
-            StringFormat format = new StringFormat(StringFormatFlags.NoClip);
-            if (rect == Rectangle.Empty)
-            {
-                bitmap1 = new Bitmap(1, 1);
-                g = Graphics.FromImage(bitmap1);
-                //計算繪制文字所需的區域大小（根據寬度計算長度），重新創建矩形區域繪圖
-                SizeF sizef = g.MeasureString(text, font, PointF.Empty, format);
-
-                int width = (int)(sizef.Width + 1);
-                int height = (int)(sizef.Height + 1);
-                rect = new Rectangle(0, 0, width, height);
-                bitmap1.Dispose();
-
-                bitmap1 = new Bitmap(width, height);
-            }
-            else
-            {
-                bitmap1 = new Bitmap(rect.Width, rect.Height);
-            }
-
-            g = Graphics.FromImage(bitmap1);
-
-            //使用ClearType字體功能
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            g.FillRectangle(new SolidBrush(backColor), rect);
-            g.DrawString(text, font, Brushes.Black, rect, format);
-            return bitmap1;
         }
 
         private void button20_Click(object sender, EventArgs e)

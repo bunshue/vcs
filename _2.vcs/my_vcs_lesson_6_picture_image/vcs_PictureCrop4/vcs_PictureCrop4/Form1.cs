@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D;
+using System.Drawing.Drawing2D; //for GraphicsPath
 using System.Drawing.Imaging;
 using System.IO;
 
@@ -22,11 +22,12 @@ namespace vcs_PictureCrop4
 
         private void mnuFileOpen_Click(object sender, EventArgs e)
         {
-            if (ofdOriginal.ShowDialog() == DialogResult.OK)
+            openFileDialog1.InitialDirectory = @"C:\______test_files\";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 try
                 {
                     // Load the image.
-                    picSource.Image = LoadUnlocked(ofdOriginal.FileName);
+                    picSource.Image = LoadUnlocked(openFileDialog1.FileName);
                     picSource.Visible = true;
                     picArea.Image = null;
                     picWithoutArea.Image = null;
@@ -101,7 +102,7 @@ namespace vcs_PictureCrop4
         {
             // Copy the image.
             Bitmap bm = new Bitmap(source_bm.Width, source_bm.Height);
-            
+
             // Clear the selected area.
             using (Graphics gr = Graphics.FromImage(bm))
             {
@@ -182,19 +183,34 @@ namespace vcs_PictureCrop4
 
         private void mnuFileSaveArea_Click(object sender, EventArgs e)
         {
-            if (sfdResult.ShowDialog() == DialogResult.OK)
+            //自動檔名 與 存檔語法
+            string filename = Application.StartupPath + "\\bmp_area_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            try
             {
-                SaveBitmapUsingExtension((Bitmap)picArea.Image,
-                    sfdResult.FileName);
+                ((Bitmap)picArea.Image).Save(filename, ImageFormat.Bmp);
+
+                //richTextBox1.Text += "已存檔 : " + filename + "\n";
+            }
+            catch (Exception ex)
+            {
+                //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
         }
 
         private void mnuFileSaveWithoutArea_Click(object sender, EventArgs e)
         {
-            if (sfdResult.ShowDialog() == DialogResult.OK)
+            //自動檔名 與 存檔語法
+            string filename = Application.StartupPath + "\\bmp_wo_area_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            try
             {
-                SaveBitmapUsingExtension((Bitmap)picWithoutArea.Image,
-                    sfdResult.FileName);
+                ((Bitmap)picWithoutArea.Image).Save(filename, ImageFormat.Bmp);
+                //richTextBox1.Text += "已存檔 : " + filename + "\n";
+            }
+            catch (Exception ex)
+            {
+                //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
         }
 
@@ -203,39 +219,6 @@ namespace vcs_PictureCrop4
             Close();
         }
 
-        // Save the file with the appropriate format.
-        // Throw a NotSupportedException if the file
-        // has an unknown extension.
-        public void SaveBitmapUsingExtension(Bitmap bm, string filename)
-        {
-            string extension = Path.GetExtension(filename);
-            switch (extension.ToLower())
-            {
-                case ".bmp":
-                    bm.Save(filename, ImageFormat.Bmp);
-                    break;
-                case ".exif":
-                    bm.Save(filename, ImageFormat.Exif);
-                    break;
-                case ".gif":
-                    bm.Save(filename, ImageFormat.Gif);
-                    break;
-                case ".jpg":
-                case ".jpeg":
-                    bm.Save(filename, ImageFormat.Jpeg);
-                    break;
-                case ".png":
-                    bm.Save(filename, ImageFormat.Png);
-                    break;
-                case ".tif":
-                case ".tiff":
-                    bm.Save(filename, ImageFormat.Tiff);
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        "Unknown file extension " + extension);
-            }
-        }
         // Return a bitmap without locking its file.
         private Bitmap LoadUnlocked(string file_name)
         {
@@ -246,3 +229,4 @@ namespace vcs_PictureCrop4
         }
     }
 }
+
