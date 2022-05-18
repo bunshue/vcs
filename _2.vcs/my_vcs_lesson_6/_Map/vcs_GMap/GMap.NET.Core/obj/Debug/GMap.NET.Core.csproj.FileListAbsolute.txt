@@ -1,0 +1,7 @@
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMap.NET.Core\bin\Debug\GMap.NET.Core.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMap.NET.Core\bin\Debug\GMap.NET.Core.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.csprojResolveAssemblyReference.cache
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMap.NET.Core\obj\Debug\GMap.NET.Properties.Resources.resources
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.csproj.GenerateResource.Cache
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.pdb

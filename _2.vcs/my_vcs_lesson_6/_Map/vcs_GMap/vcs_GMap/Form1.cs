@@ -2960,11 +2960,9 @@ namespace vcs_GMap
         {
             //richTextBox1.Text += "你按了繪圖工具 圓形\n";
 
-            /*
             //圓形
             draw.DrawingMode = DrawingMode.Circle;
             draw.IsEnable = true;
-            */
 
             /*
             //矩形

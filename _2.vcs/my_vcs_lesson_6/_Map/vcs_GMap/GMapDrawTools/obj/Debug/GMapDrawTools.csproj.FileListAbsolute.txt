@@ -1,0 +1,17 @@
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMapDrawTools\bin\Debug\GMapDrawTools.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMapDrawTools\bin\Debug\GMapDrawTools.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMapDrawTools\bin\Debug\GMap.NET.Core.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMapDrawTools\bin\Debug\GMap.NET.WindowsForms.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMapDrawTools\bin\Debug\GMap.NET.Core.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMapDrawTools\bin\Debug\GMap.NET.WindowsForms.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMapDrawTools\obj\Debug\GMapDrawTools.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMapDrawTools\obj\Debug\GMapDrawTools.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMapDrawTools\bin\Debug\GMapDrawTools.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMapDrawTools\bin\Debug\GMapDrawTools.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMapDrawTools\bin\Debug\GMap.NET.Core.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMapDrawTools\bin\Debug\GMap.NET.WindowsForms.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMapDrawTools\bin\Debug\GMap.NET.Core.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMapDrawTools\bin\Debug\GMap.NET.WindowsForms.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMapDrawTools\obj\Debug\GMapDrawTools.csprojResolveAssemblyReference.cache
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMapDrawTools\obj\Debug\GMapDrawTools.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMapDrawTools\obj\Debug\GMapDrawTools.pdb
