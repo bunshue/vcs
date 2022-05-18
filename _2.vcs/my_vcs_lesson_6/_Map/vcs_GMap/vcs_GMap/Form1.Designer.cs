@@ -131,6 +131,7 @@
             this.bt_zoom_in = new System.Windows.Forms.Button();
             this.bt_zoom_out = new System.Windows.Forms.Button();
             this.groupBox_map_control1 = new System.Windows.Forms.GroupBox();
+            this.bt_draw5 = new System.Windows.Forms.Button();
             this.bt_draw4 = new System.Windows.Forms.Button();
             this.bt_draw3 = new System.Windows.Forms.Button();
             this.bt_draw2 = new System.Windows.Forms.Button();
@@ -180,7 +181,6 @@
             this.rb_map02 = new System.Windows.Forms.RadioButton();
             this.rb_map01 = new System.Windows.Forms.RadioButton();
             this.rb_map00 = new System.Windows.Forms.RadioButton();
-            this.bt_draw5 = new System.Windows.Forms.Button();
             this.groupBox_map.SuspendLayout();
             this.groupBox_location.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -821,9 +821,9 @@
             this.rb_location4.AutoSize = true;
             this.rb_location4.Location = new System.Drawing.Point(13, 85);
             this.rb_location4.Name = "rb_location4";
-            this.rb_location4.Size = new System.Drawing.Size(59, 16);
+            this.rb_location4.Size = new System.Drawing.Size(95, 16);
             this.rb_location4.TabIndex = 3;
-            this.rb_location4.Text = "烏克蘭";
+            this.rb_location4.Text = "烏克蘭俄羅斯";
             this.rb_location4.UseVisualStyleBackColor = true;
             this.rb_location4.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
             // 
@@ -1283,6 +1283,16 @@
             this.groupBox_map_control1.TabIndex = 46;
             this.groupBox_map_control1.TabStop = false;
             this.groupBox_map_control1.Text = "Control";
+            // 
+            // bt_draw5
+            // 
+            this.bt_draw5.Location = new System.Drawing.Point(212, 95);
+            this.bt_draw5.Name = "bt_draw5";
+            this.bt_draw5.Size = new System.Drawing.Size(50, 28);
+            this.bt_draw5.TabIndex = 51;
+            this.bt_draw5.Text = "測距";
+            this.bt_draw5.UseVisualStyleBackColor = true;
+            this.bt_draw5.Click += new System.EventHandler(this.bt_draw5_Click);
             // 
             // bt_draw4
             // 
@@ -1823,16 +1833,6 @@
             this.rb_map00.TabStop = true;
             this.rb_map00.Text = "正中";
             this.rb_map00.UseVisualStyleBackColor = true;
-            // 
-            // bt_draw5
-            // 
-            this.bt_draw5.Location = new System.Drawing.Point(212, 95);
-            this.bt_draw5.Name = "bt_draw5";
-            this.bt_draw5.Size = new System.Drawing.Size(50, 28);
-            this.bt_draw5.TabIndex = 51;
-            this.bt_draw5.Text = "測距";
-            this.bt_draw5.UseVisualStyleBackColor = true;
-            this.bt_draw5.Click += new System.EventHandler(this.bt_draw5_Click);
             // 
             // Form1
             // 

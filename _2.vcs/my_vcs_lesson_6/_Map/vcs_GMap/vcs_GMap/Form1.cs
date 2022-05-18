@@ -2489,21 +2489,21 @@ namespace vcs_GMap
             }
             else if (rb_location4.Checked == true)
             {
-                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+                //烏克蘭 俄羅斯
+                string[,] location = null;
 
-                //馬立波
-                latitude = 47.095833;   //緯度
-                longitude = 37.549444; //經度
-
-
-                //車諾比核電廠	51.389167, 30.099444
-                latitude = 51.389167;   //緯度
-                longitude = 30.099444; //經度
-
-                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-                gMapControl1.Zoom = 12; //當前比例
-
-                update_controls_info();
+                location = new string[,] {
+            { "基輔", "50.4513678157106", "30.55059860621383"},
+            { "賽瓦斯托波爾", "44.60672245398692", "33.52507514600167"},
+            { "雅爾達", "44.49163293411768", "34.154514168194616"},
+            { "伏爾加格勒(史達林格勒)", "48.71041949593781", "44.51688003466866"},
+            { "莫斯科", "55.75541452385479", "37.61935290354823"},
+            { "聖彼得堡(列寧格勒)", "59.9250247131024", "30.332144315364747"},
+            { "馬立波", "47.095833", "37.549444"},
+            { "車諾比核電廠", "51.389167", "30.099444"},
+            };
+                show_locations(location);
+                gMapControl1.Zoom = 5; //當前比例
             }
             else if (rb_location5.Checked == true)
             {
@@ -2556,54 +2556,15 @@ namespace vcs_GMap
             { "海州", "34.597", "119.222"},
             { "新安鎮", "34.36775", "118.34638"},
             { "碾莊", "34.29887", "117.77576"},
+            { "宿縣", "33.64242", "116.9721"},
             { "雙堆集", "33.42498", "116.89588"},
+            { "台兒莊", "34.5608", "117.7382"},
+            { "運河鎮", "34.30807", "117.96176"},
+            { "陳官莊", "34.00683", "116.57751"},
             };
+                show_locations(location);
+                gMapControl1.Zoom = 9; //當前比例
 
-                int total_location = location.GetUpperBound(0) + 1;
-                richTextBox1.Text += "total_location = " + total_location.ToString() + "\n";
-
-                double lat_north = -90;
-                double lat_south = 90;
-                double lng_east = -180;
-                double lng_west = 180;
-
-                int i;
-                for (i = 0; i < total_location; i++)
-                {
-                    double lat = double.Parse(location[i, 1]);
-                    double lng = double.Parse(location[i, 2]);
-
-                    if (lat > lat_north)
-                        lat_north = lat;
-                    if (lat < lat_south)
-                        lat_south = lat;
-                    if (lng > lng_east)
-                        lng_east = lng;
-                    if (lng < lng_west)
-                        lng_west = lng;
-                }
-
-                double lat_center = (lat_south + lat_north) / 2;
-                double lng_center = (lng_east + lng_west) / 2;
-
-                gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
-
-                latitude = lat_center;   //緯度
-                longitude = lng_center; //經度
-
-                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-                gMapControl1.Zoom = 8; //當前比例
-
-                update_controls_info();
-
-                for (i = 0; i < total_location; i++)
-                {
-                    latitude = double.Parse(location[i, 1]);
-                    longitude = double.Parse(location[i, 2]);
-
-                    //AddMarker(latitude, longitude, GMarkerGoogleType.blue_dot, location[i, 0]);
-                    draw_circle_text(latitude, longitude, location[i, 0]);
-                }
             }
             else if (rb_location9.Checked == true)
             {
@@ -3670,6 +3631,55 @@ namespace vcs_GMap
         {
             //測距
             //drawDistance.IsEnable = true;
+        }
+
+        void show_locations(string[,] location)
+        {
+
+            int total_location = location.GetUpperBound(0) + 1;
+            richTextBox1.Text += "total_location = " + total_location.ToString() + "\n";
+
+            double lat_north = -90;
+            double lat_south = 90;
+            double lng_east = -180;
+            double lng_west = 180;
+
+            int i;
+            for (i = 0; i < total_location; i++)
+            {
+                double lat = double.Parse(location[i, 1]);
+                double lng = double.Parse(location[i, 2]);
+
+                if (lat > lat_north)
+                    lat_north = lat;
+                if (lat < lat_south)
+                    lat_south = lat;
+                if (lng > lng_east)
+                    lng_east = lng;
+                if (lng < lng_west)
+                    lng_west = lng;
+            }
+
+            double lat_center = (lat_south + lat_north) / 2;
+            double lng_center = (lng_east + lng_west) / 2;
+
+            gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+
+            latitude = lat_center;   //緯度
+            longitude = lng_center; //經度
+
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+
+            update_controls_info();
+
+            for (i = 0; i < total_location; i++)
+            {
+                latitude = double.Parse(location[i, 1]);
+                longitude = double.Parse(location[i, 2]);
+
+                //AddMarker(latitude, longitude, GMarkerGoogleType.blue_dot, location[i, 0]);
+                draw_circle_text(latitude, longitude, location[i, 0]);
+            }
         }
 
         //画图完成函数
