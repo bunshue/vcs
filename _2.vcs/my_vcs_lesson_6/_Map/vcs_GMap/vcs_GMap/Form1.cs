@@ -8,34 +8,25 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Drawing2D;
-
 using System.IO;
 using System.Net;
 using System.Diagnostics;
 using System.Threading;
-
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+
+using Newtonsoft.Json;
 
 using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms.Markers;
-
 using GMapDrawTools;
-
 using GMapChinaRegion;
-
 using GMapDownload;
 
-
-
 //需要GMap.NET.Core.dll 和 GMap.NET.WindowsForms.dll這兩個檔案。
-
-
-using Newtonsoft.Json;
-
 
 namespace vcs_GMap
 {
@@ -113,7 +104,7 @@ namespace vcs_GMap
             x_st = 10;
             y_st = 10;
 
-            gMapControl1.Size = new Size(1130, 1000);
+            gMapControl1.Size = new Size(1130, 1060);
             gMapControl1.Location = new Point(x_st, y_st);
 
             int W = 250;
@@ -124,7 +115,7 @@ namespace vcs_GMap
             groupBox_map_control1.Size = new Size(W, H);
             groupBox_map_control2.Size = new Size(W, H);
             groupBox_map.Size = new Size(W, H);
-            groupBox_map2.Size = new Size(W*2-10, H+60);
+            groupBox_map2.Size = new Size(W * 2 - 10, H + 60);
             groupBox_location.Size = new Size(W, H);
 
             x_st = 1210;
@@ -427,6 +418,15 @@ namespace vcs_GMap
             bt_zoom_in.Location = new Point(x_st + 70, y_st + 30);
             bt_zoom_out.Location = new Point(x_st + 70, y_st + 65);
 
+            dy = 33;
+            bt_draw0.Location = new Point(x_st + 70 + 70, y_st - 10 + dy * 0);
+            bt_draw1.Location = new Point(x_st + 70 + 70, y_st - 10 + dy * 1);
+            bt_draw2.Location = new Point(x_st + 70 + 70, y_st - 10 + dy * 2);
+            bt_draw3.Location = new Point(x_st + 70 + 70, y_st - 10 + dy * 3);
+            bt_draw4.Location = new Point(x_st + 70 + 70, y_st - 10 + dy * 4);
+            bt_draw1.Enabled = false;
+            bt_draw2.Enabled = false;
+
             x_st = 20;
             y_st = 20;
             dy = 25;
@@ -441,7 +441,76 @@ namespace vcs_GMap
             btn_draw_profile.Location = new Point(x_st, y_st + dy * 4);
             btn_draw_profile2.Location = new Point(x_st + 85, y_st + dy * 4);
 
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
+
+            //離開按鈕的寫法
+            bt_exit_setup();
+
+            //最小化按鈕的寫法
+            bt_minimize_setup();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        void bt_minimize_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_minimize = new Button();  // 實例化按鈕
+            bt_minimize.Size = new Size(w, h);
+            bt_minimize.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            //g.DrawLine(p, 0, 0, w - 1, h - 1);
+            //g.DrawLine(p, w - 1, 0, 0, h - 1);
+            g.DrawLine(p, w / 4, h / 2 - 1, w * 3 / 4, h / 2 - 1);
+            bt_minimize.Image = bmp;
+
+            bt_minimize.Location = new Point(this.ClientSize.Width - bt_minimize.Width * 2 - 2, 0);
+            bt_minimize.Click += bt_minimize_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_minimize); // 將按鈕加入表單
+            bt_minimize.BringToFront();     //移到最上層
+        }
+
+        private void bt_minimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;   //設定表單最小化
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -537,12 +606,15 @@ namespace vcs_GMap
         {
             trackBar1.Orientation = Orientation.Vertical;
             trackBar1.TickStyle = TickStyle.Both;
-            trackBar1.TickFrequency = 10;
+            trackBar1.TickFrequency = 1;
+            trackBar1.SmallChange = 1;
+            trackBar1.LargeChange = 1;
             trackBar1.Maximum = 100;
             trackBar1.Minimum = 1;
             trackBar1.Value = 10;
             trackBar1.Height = gMapControl1.Height * 9 / 10;
-            trackBar1.Width = 30;
+            trackBar1.Width = 10;
+            trackBar1.BackColor = Color.Pink;
             trackBar1.Location = new Point(gMapControl1.Location.X + gMapControl1.Width + 10, gMapControl1.Location.Y + gMapControl1.Height / 20);
             trackBar1.ValueChanged += trackBar1_ValueChanged;
             Controls.Add(trackBar1);
@@ -755,7 +827,9 @@ namespace vcs_GMap
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            //richTextBox1.Text += trackBar1.Value.ToString() + "  ";
+            gMapControl1.Zoom = trackBar1.Value;
+            tb_zoom.Text = gMapControl1.Zoom.ToString();
+            update_MapProvider_info();
         }
 
         void update_controls_info()
@@ -1392,10 +1466,6 @@ namespace vcs_GMap
                 }
             }
             richTextBox1.Text += "Zoom :\t" + gMapControl1.Zoom.ToString() + "\n";
-        }
-
-        private void bt_save_Click(object sender, EventArgs e)
-        {
         }
 
         private void btn_north_Click(object sender, EventArgs e)
@@ -2843,97 +2913,6 @@ namespace vcs_GMap
 
         private void bt_test01_Click(object sender, EventArgs e)
         {
-            //讀取GPX檔案
-
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-
-            string filename = @"C:\______test_files\__RW\_xml\gps_bicycle.gpx";
-
-            try
-            {
-                string objectXml = File.ReadAllText(filename);
-                gpxType type = this.gMapControl1.Manager.DeserializeGPX(objectXml);
-                if (type != null)
-                {
-                    if ((type.trk != null) && (type.trk.Length > 0))
-                    {
-                        List<PointLatLng> points = new List<PointLatLng>();
-                        foreach (trkType trk in type.trk)
-                        {
-                            foreach (trksegType seg in trk.trkseg)
-                            {
-                                foreach (wptType p in seg.trkpt)
-                                {
-                                    points.Add(new PointLatLng((double)p.lat, (double)p.lon));
-                                }
-                            }
-                            string name = string.IsNullOrEmpty(trk.name) ? string.Empty : trk.name;
-                            GMapRoute item = new GMapRoute(points, name)
-                            {
-                                Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
-                            };
-                            item.Stroke.Width = 5f;
-                            item.Stroke.DashStyle = DashStyle.DashDot;
-                            this.markersOverlay.Routes.Add(item);
-                        }
-                    }
-                    if ((type.rte != null) && (type.rte.Length > 0))
-                    {
-                        List<PointLatLng> points = new List<PointLatLng>();
-                        foreach (rteType rte in type.rte)
-                        {
-                            foreach (wptType p in rte.rtept)
-                            {
-                                points.Add(new PointLatLng((double)p.lat, (double)p.lon));
-                            }
-                            string str3 = string.IsNullOrEmpty(rte.name) ? string.Empty : rte.name;
-                            GMapRoute route2 = new GMapRoute(points, str3)
-                            {
-                                Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
-                            };
-                            route2.Stroke.Width = 5f;
-                            route2.Stroke.DashStyle = DashStyle.DashDot;
-                            this.markersOverlay.Routes.Add(route2);
-                        }
-                    }
-                    if (type.wpt != null && type.wpt.Length > 0)
-                    {
-                        foreach (wptType p in type.wpt)
-                        {
-                            PointLatLng point = new PointLatLng((double)p.lat, (double)p.lon);
-                            GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
-                            this.markersOverlay.Markers.Add(marker);
-                        }
-                    }
-                    this.gMapControl1.ZoomAndCenterRoutes(null);
-                }
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
-
-            /*old
-            string filename = @"C:\______test_files\__RW\_xml\gps_bicycle.gpx";
-
-            GMapRoute playRoute = GetRouteFromKml(filename);
-
-            if (playRoute == null)
-            {
-                richTextBox1.Text += "無法開啟檔案\n";
-                return;
-
-            }
-            //playRoute.Stroke.Color = Color.Red;
-            playRoute.Stroke = new Pen(Color.FromArgb(144, Color.Red)); //半透明
-            playRoute.Stroke.Width = 5;
-            playRoute.Stroke.DashStyle = DashStyle.Solid;
-            //playRoute.Stroke.DashStyle = DashStyle.Dash;
-
-            markersOverlay.Routes.Add(playRoute);
-            */
-
-
         }
 
         private void bt_test02_Click(object sender, EventArgs e)
@@ -3437,35 +3416,6 @@ namespace vcs_GMap
 
         private void bt_test08_Click(object sender, EventArgs e)
         {
-            //richTextBox1.Text += "你按了繪圖工具 圓形\n";
-
-            //圓形
-            draw.DrawingMode = DrawingMode.Circle;
-            draw.IsEnable = true;
-
-            /*
-            //矩形
-            draw.DrawingMode = DrawingMode.Rectangle;
-            draw.IsEnable = true;
-            */
-
-            /*
-            //多邊形
-            draw.DrawingMode = DrawingMode.Polygon;
-            draw.IsEnable = true;
-            */
-
-            /*
-            //線段
-            draw.DrawingMode = DrawingMode.Line;
-            draw.IsEnable = true;
-            */
-
-            /*
-            //折線段
-            draw.DrawingMode = DrawingMode.Route;
-            draw.IsEnable = true;
-            */
         }
 
         private void bt_test09_Click(object sender, EventArgs e)
@@ -3565,7 +3515,95 @@ namespace vcs_GMap
 
         private void bt_test14_Click(object sender, EventArgs e)
         {
+            //讀取GPX檔案
 
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
+            string filename = @"C:\______test_files\__RW\_xml\gps_bicycle.gpx";
+
+            try
+            {
+                string objectXml = File.ReadAllText(filename);
+                gpxType type = this.gMapControl1.Manager.DeserializeGPX(objectXml);
+                if (type != null)
+                {
+                    if ((type.trk != null) && (type.trk.Length > 0))
+                    {
+                        List<PointLatLng> points = new List<PointLatLng>();
+                        foreach (trkType trk in type.trk)
+                        {
+                            foreach (trksegType seg in trk.trkseg)
+                            {
+                                foreach (wptType p in seg.trkpt)
+                                {
+                                    points.Add(new PointLatLng((double)p.lat, (double)p.lon));
+                                }
+                            }
+                            string name = string.IsNullOrEmpty(trk.name) ? string.Empty : trk.name;
+                            GMapRoute item = new GMapRoute(points, name)
+                            {
+                                Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
+                            };
+                            item.Stroke.Width = 5f;
+                            item.Stroke.DashStyle = DashStyle.DashDot;
+                            this.markersOverlay.Routes.Add(item);
+                        }
+                    }
+                    if ((type.rte != null) && (type.rte.Length > 0))
+                    {
+                        List<PointLatLng> points = new List<PointLatLng>();
+                        foreach (rteType rte in type.rte)
+                        {
+                            foreach (wptType p in rte.rtept)
+                            {
+                                points.Add(new PointLatLng((double)p.lat, (double)p.lon));
+                            }
+                            string str3 = string.IsNullOrEmpty(rte.name) ? string.Empty : rte.name;
+                            GMapRoute route2 = new GMapRoute(points, str3)
+                            {
+                                Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
+                            };
+                            route2.Stroke.Width = 5f;
+                            route2.Stroke.DashStyle = DashStyle.DashDot;
+                            this.markersOverlay.Routes.Add(route2);
+                        }
+                    }
+                    if (type.wpt != null && type.wpt.Length > 0)
+                    {
+                        foreach (wptType p in type.wpt)
+                        {
+                            PointLatLng point = new PointLatLng((double)p.lat, (double)p.lon);
+                            GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
+                            this.markersOverlay.Markers.Add(marker);
+                        }
+                    }
+                    this.gMapControl1.ZoomAndCenterRoutes(null);
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+
+            /*old
+            string filename = @"C:\______test_files\__RW\_xml\gps_bicycle.gpx";
+
+            GMapRoute playRoute = GetRouteFromKml(filename);
+
+            if (playRoute == null)
+            {
+                richTextBox1.Text += "無法開啟檔案\n";
+                return;
+
+            }
+            //playRoute.Stroke.Color = Color.Red;
+            playRoute.Stroke = new Pen(Color.FromArgb(144, Color.Red)); //半透明
+            playRoute.Stroke.Width = 5;
+            playRoute.Stroke.DashStyle = DashStyle.Solid;
+            //playRoute.Stroke.DashStyle = DashStyle.Dash;
+
+            markersOverlay.Routes.Add(playRoute);
+            */
         }
 
         private void bt_test15_Click(object sender, EventArgs e)
@@ -3585,6 +3623,41 @@ namespace vcs_GMap
             //縮小
             gMapControl1.Zoom -= 1; //當前比例
             update_controls_info();
+        }
+
+        private void bt_draw0_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了繪圖工具 圓形\n";
+            draw.DrawingMode = DrawingMode.Circle;
+            draw.IsEnable = true;
+        }
+
+        private void bt_draw1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了繪圖工具 矩形\n";
+            draw.DrawingMode = DrawingMode.Rectangle;
+            draw.IsEnable = true;
+        }
+
+        private void bt_draw2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了繪圖工具 多邊形\n";
+            draw.DrawingMode = DrawingMode.Polygon;
+            draw.IsEnable = true;
+        }
+
+        private void bt_draw3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了繪圖工具 線段\n";
+            draw.DrawingMode = DrawingMode.Line;
+            draw.IsEnable = true;
+        }
+
+        private void bt_draw4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了繪圖工具 折線段\n";
+            draw.DrawingMode = DrawingMode.Route;
+            draw.IsEnable = true;
         }
 
         //画图完成函数
