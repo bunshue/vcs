@@ -1,6 +1,230 @@
 
 
 
+
+
+
+最新版
+
+
+kilo	同 tango
+
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap	不可用
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\MapDownloader-master1	可用
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\MapDownloader-master2	可用
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master	可用
+
+
+
+romeo	同 tango
+
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap	不可用
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\MapDownloader-master1	可用
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\MapDownloader-master2	可用
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master	可用
+
+
+
+
+tango
+
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap	不可用
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\MapDownloader-master1	可用
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\MapDownloader-master2	可用
+C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master	可用
+
+
+
+
+讀取GPX 讀取KML
+
+        private void 读取GPXToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FileDialog dialog = new OpenFileDialog())
+            {
+                //dialog.InitialDirectory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "gpx";
+                dialog.InitialDirectory = @"C:\______test_files\__RW\_xml";
+                dialog.CheckPathExists = true;
+                dialog.CheckFileExists = false;
+                dialog.AddExtension = true;
+                dialog.DefaultExt = "gpx";
+                dialog.ValidateNames = true;
+                dialog.Title = "选择GPX文件";
+                dialog.Filter = "GPX文件 (*.gpx)|*.gpx|所有文件 (*.*)|*.*";
+                dialog.FilterIndex = 1;
+                dialog.RestoreDirectory = true;
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string objectXml = File.ReadAllText(dialog.FileName);
+                        gpxType type = this.gMapControl1.Manager.DeserializeGPX(objectXml);
+                        if (type != null)
+                        {
+                            if ((type.trk != null) && (type.trk.Length > 0))
+                            {
+                                List<PointLatLng> points = new List<PointLatLng>();
+                                foreach (trkType trk in type.trk)
+                                {
+                                    foreach (trksegType seg in trk.trkseg)
+                                    {
+                                        foreach (wptType p in seg.trkpt)
+                                        {
+                                            points.Add(new PointLatLng((double)p.lat, (double)p.lon));
+                                        }
+                                    }
+                                    string name = string.IsNullOrEmpty(trk.name) ? string.Empty : trk.name;
+                                    GMapRoute item = new GMapRoute(points, name)
+                                    {
+                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
+                                    };
+                                    item.Stroke.Width = 5f;
+                                    item.Stroke.DashStyle = DashStyle.DashDot;
+                                    this.polygonsOverlay.Routes.Add(item);
+                                }
+                            }
+                            if ((type.rte != null) && (type.rte.Length > 0))
+                            {
+                                List<PointLatLng> points = new List<PointLatLng>();
+                                foreach (rteType rte in type.rte)
+                                {
+                                    foreach (wptType p in rte.rtept)
+                                    {
+                                        points.Add(new PointLatLng((double)p.lat, (double)p.lon));
+                                    }
+                                    string str3 = string.IsNullOrEmpty(rte.name) ? string.Empty : rte.name;
+                                    GMapRoute route2 = new GMapRoute(points, str3)
+                                    {
+                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
+                                    };
+                                    route2.Stroke.Width = 5f;
+                                    route2.Stroke.DashStyle = DashStyle.DashDot;
+                                    this.polygonsOverlay.Routes.Add(route2);
+                                }
+                            }
+                            if (type.wpt != null && type.wpt.Length > 0)
+                            {
+                                foreach (wptType p in type.wpt)
+                                {
+                                    PointLatLng point = new PointLatLng((double)p.lat, (double)p.lon);
+                                    GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
+                                    this.polygonsOverlay.Markers.Add(marker);
+                                }
+                            }
+                            this.gMapControl1.ZoomAndCenterRoutes(null);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        richTextBox1.Text += "Error : " + ex.ToString() + "\n";
+
+                        MessageBox.Show("读取GPX文件错误");
+                    }
+                }
+            }
+        }
+
+        private void 读取KMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (FileDialog dialog = new OpenFileDialog())
+                {
+                    dialog.CheckPathExists = true;
+                    dialog.CheckFileExists = false;
+                    dialog.AddExtension = true;
+                    dialog.ValidateNames = true;
+                    dialog.Title = "选择KML文件";
+                    dialog.FilterIndex = 1;
+                    dialog.RestoreDirectory = true;
+                    dialog.Filter = "KML文件 (*.kml)|*.kml|所有文件 (*.*)|*.*";
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        this.polygonsOverlay.Clear();
+                        InitKMLPlaceMarks(KmlUtil.GetPlaceMarksFromKmlFile(dialog.FileName));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error : " + ex.ToString() + "\n";
+                MessageBox.Show("读取KML文件时出现异常");
+            }
+        }
+
+
+
+地址解析  逆解析
+
+
+        private void 搜索该点的地址ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PointLatLng p = this.gMapControl1.FromLocalToLatLng((int)leftClickPoint.X, (int)leftClickPoint.Y);
+            GeoCoderStatusCode statusCode;
+            //Placemark? place = SoSoMapProvider.Instance.GetPlacemark(p, out statusCode);
+            Placemark? place = AMapProvider.Instance.GetPlacemark(p, out statusCode);
+            if (place.HasValue)
+            {
+                GMapImageMarker placeMarker = new GMapImageMarker(p, Properties.Resources.MapMarker_Bubble_Azure, place.Value.Address);
+                this.routeOverlay.Markers.Add(placeMarker);
+            }
+        }
+
+
+
+
+        #region 画图工具
+
+//矩形 fail
+        private void 矩形ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            draw.DrawingMode = DrawingMode.Rectangle;
+            draw.IsEnable = true;
+        }
+        
+//圓形 OK
+        private void 圆形ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            draw.DrawingMode = DrawingMode.Circle;
+            draw.IsEnable = true;
+        }
+
+//多边形 fail
+        private void 多边形ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            draw.DrawingMode = DrawingMode.Polygon;
+            draw.IsEnable = true;
+        }
+
+//線段 OK 一段線
+        private void 线段ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            draw.DrawingMode = DrawingMode.Line;
+            draw.IsEnable = true;
+        }
+
+//折線段 = 線條	多段連線 OK
+        private void 折线段ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            draw.DrawingMode = DrawingMode.Route;
+            draw.IsEnable = true;
+        }
+
+
+//測距 OK
+        private void 测距ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            drawDistance.IsEnable = true;
+        }
+
+
+
+
+
+
+
+
 盡量要把dropbox的文件 搬到 git 裏
 
 

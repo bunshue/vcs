@@ -49,8 +49,7 @@
             this.btn_south = new System.Windows.Forms.Button();
             this.btn_east = new System.Windows.Forms.Button();
             this.btn_west = new System.Windows.Forms.Button();
-            this.bt_save = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox_map = new System.Windows.Forms.GroupBox();
             this.radioButton17 = new System.Windows.Forms.RadioButton();
             this.radioButton16 = new System.Windows.Forms.RadioButton();
             this.radioButton15 = new System.Windows.Forms.RadioButton();
@@ -74,11 +73,9 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btn_draw_profile = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox_location = new System.Windows.Forms.GroupBox();
             this.rb_location13 = new System.Windows.Forms.RadioButton();
             this.rb_location12 = new System.Windows.Forms.RadioButton();
             this.rb_location11 = new System.Windows.Forms.RadioButton();
@@ -112,11 +109,7 @@
             this.rb_m = new System.Windows.Forms.RadioButton();
             this.lb_distance = new System.Windows.Forms.Label();
             this.btn_draw_profile2 = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.bt_test19 = new System.Windows.Forms.Button();
-            this.bt_test18 = new System.Windows.Forms.Button();
-            this.bt_test17 = new System.Windows.Forms.Button();
-            this.bt_test16 = new System.Windows.Forms.Button();
+            this.groupBox_map_downloader = new System.Windows.Forms.GroupBox();
             this.bt_test15 = new System.Windows.Forms.Button();
             this.bt_test14 = new System.Windows.Forms.Button();
             this.bt_test13 = new System.Windows.Forms.Button();
@@ -134,10 +127,62 @@
             this.bt_test01 = new System.Windows.Forms.Button();
             this.bt_test00 = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupBox_basic = new System.Windows.Forms.GroupBox();
+            this.bt_zoom_in = new System.Windows.Forms.Button();
+            this.bt_zoom_out = new System.Windows.Forms.Button();
+            this.groupBox_map_control1 = new System.Windows.Forms.GroupBox();
+            this.groupBox_map_control2 = new System.Windows.Forms.GroupBox();
+            this.groupBox_map2 = new System.Windows.Forms.GroupBox();
+            this.rb_map13 = new System.Windows.Forms.RadioButton();
+            this.rb_map12 = new System.Windows.Forms.RadioButton();
+            this.rb_map11 = new System.Windows.Forms.RadioButton();
+            this.rb_map10 = new System.Windows.Forms.RadioButton();
+            this.rb_map09 = new System.Windows.Forms.RadioButton();
+            this.rb_map08 = new System.Windows.Forms.RadioButton();
+            this.rb_map07 = new System.Windows.Forms.RadioButton();
+            this.rb_map06 = new System.Windows.Forms.RadioButton();
+            this.rb_map05 = new System.Windows.Forms.RadioButton();
+            this.rb_map04 = new System.Windows.Forms.RadioButton();
+            this.rb_map03 = new System.Windows.Forms.RadioButton();
+            this.rb_map02 = new System.Windows.Forms.RadioButton();
+            this.rb_map01 = new System.Windows.Forms.RadioButton();
+            this.rb_map00 = new System.Windows.Forms.RadioButton();
+            this.rb_map20 = new System.Windows.Forms.RadioButton();
+            this.rb_map19 = new System.Windows.Forms.RadioButton();
+            this.rb_map18 = new System.Windows.Forms.RadioButton();
+            this.rb_map17 = new System.Windows.Forms.RadioButton();
+            this.rb_map16 = new System.Windows.Forms.RadioButton();
+            this.rb_map15 = new System.Windows.Forms.RadioButton();
+            this.rb_map14 = new System.Windows.Forms.RadioButton();
+            this.rb_map27 = new System.Windows.Forms.RadioButton();
+            this.rb_map26 = new System.Windows.Forms.RadioButton();
+            this.rb_map25 = new System.Windows.Forms.RadioButton();
+            this.rb_map24 = new System.Windows.Forms.RadioButton();
+            this.rb_map23 = new System.Windows.Forms.RadioButton();
+            this.rb_map22 = new System.Windows.Forms.RadioButton();
+            this.rb_map21 = new System.Windows.Forms.RadioButton();
+            this.rb_map41 = new System.Windows.Forms.RadioButton();
+            this.rb_map40 = new System.Windows.Forms.RadioButton();
+            this.rb_map39 = new System.Windows.Forms.RadioButton();
+            this.rb_map38 = new System.Windows.Forms.RadioButton();
+            this.rb_map37 = new System.Windows.Forms.RadioButton();
+            this.rb_map36 = new System.Windows.Forms.RadioButton();
+            this.rb_map35 = new System.Windows.Forms.RadioButton();
+            this.rb_map34 = new System.Windows.Forms.RadioButton();
+            this.rb_map33 = new System.Windows.Forms.RadioButton();
+            this.rb_map32 = new System.Windows.Forms.RadioButton();
+            this.rb_map31 = new System.Windows.Forms.RadioButton();
+            this.rb_map30 = new System.Windows.Forms.RadioButton();
+            this.rb_map29 = new System.Windows.Forms.RadioButton();
+            this.rb_map28 = new System.Windows.Forms.RadioButton();
+            this.groupBox_map.SuspendLayout();
+            this.groupBox_location.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.groupBox_map_downloader.SuspendLayout();
+            this.groupBox_basic.SuspendLayout();
+            this.groupBox_map_control1.SuspendLayout();
+            this.groupBox_map_control2.SuspendLayout();
+            this.groupBox_map2.SuspendLayout();
             this.SuspendLayout();
             // 
             // gMapControl1
@@ -149,7 +194,7 @@
             this.gMapControl1.GrayScaleMode = false;
             this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gMapControl1.LevelsKeepInMemmory = 5;
-            this.gMapControl1.Location = new System.Drawing.Point(12, 153);
+            this.gMapControl1.Location = new System.Drawing.Point(12, 14);
             this.gMapControl1.MarkersEnabled = true;
             this.gMapControl1.MaxZoom = 2;
             this.gMapControl1.MinZoom = 2;
@@ -170,9 +215,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(115, 12);
+            this.button1.Location = new System.Drawing.Point(19, 70);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 40);
+            this.button1.Size = new System.Drawing.Size(100, 45);
             this.button1.TabIndex = 1;
             this.button1.Text = "竹北 加圖標";
             this.button1.UseVisualStyleBackColor = true;
@@ -180,9 +225,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(218, 12);
+            this.button2.Location = new System.Drawing.Point(19, 119);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 40);
+            this.button2.Size = new System.Drawing.Size(100, 45);
             this.button2.TabIndex = 2;
             this.button2.Text = "竹北 畫範圍";
             this.button2.UseVisualStyleBackColor = true;
@@ -190,7 +235,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 266);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 127);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 3;
@@ -198,9 +243,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(321, 12);
+            this.button3.Location = new System.Drawing.Point(19, 170);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 40);
+            this.button3.Size = new System.Drawing.Size(100, 45);
             this.button3.TabIndex = 4;
             this.button3.Text = "在gMap上畫圖";
             this.button3.UseVisualStyleBackColor = true;
@@ -208,9 +253,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(424, 12);
+            this.button4.Location = new System.Drawing.Point(19, 222);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(90, 40);
+            this.button4.Size = new System.Drawing.Size(100, 45);
             this.button4.TabIndex = 5;
             this.button4.Text = "在gMap上畫圖";
             this.button4.UseVisualStyleBackColor = true;
@@ -218,9 +263,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(527, 12);
+            this.button5.Location = new System.Drawing.Point(19, 274);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(90, 40);
+            this.button5.Size = new System.Drawing.Size(100, 45);
             this.button5.TabIndex = 6;
             this.button5.Text = "拼接地圖";
             this.button5.UseVisualStyleBackColor = true;
@@ -228,9 +273,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(630, 12);
+            this.button6.Location = new System.Drawing.Point(19, 324);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(90, 40);
+            this.button6.Size = new System.Drawing.Size(100, 45);
             this.button6.TabIndex = 7;
             this.button6.Text = "Clear";
             this.button6.UseVisualStyleBackColor = true;
@@ -238,29 +283,27 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(748, 7);
+            this.button7.Location = new System.Drawing.Point(19, 374);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(50, 35);
+            this.button7.Size = new System.Drawing.Size(100, 45);
             this.button7.TabIndex = 8;
-            this.button7.Text = "+";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(748, 48);
+            this.button8.Location = new System.Drawing.Point(129, 21);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(50, 35);
+            this.button8.Size = new System.Drawing.Size(100, 45);
             this.button8.TabIndex = 9;
-            this.button8.Text = "-";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(748, 89);
+            this.button9.Location = new System.Drawing.Point(129, 73);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(50, 35);
+            this.button9.Size = new System.Drawing.Size(100, 45);
             this.button9.TabIndex = 10;
             this.button9.Text = "Reload";
             this.button9.UseVisualStyleBackColor = true;
@@ -268,9 +311,9 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(804, 48);
+            this.button10.Location = new System.Drawing.Point(129, 124);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(50, 35);
+            this.button10.Size = new System.Drawing.Size(100, 45);
             this.button10.TabIndex = 11;
             this.button10.Text = "info";
             this.button10.UseVisualStyleBackColor = true;
@@ -279,7 +322,7 @@
             // tb_zoom
             // 
             this.tb_zoom.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_zoom.Location = new System.Drawing.Point(803, 5);
+            this.tb_zoom.Location = new System.Drawing.Point(62, 25);
             this.tb_zoom.Name = "tb_zoom";
             this.tb_zoom.Size = new System.Drawing.Size(50, 33);
             this.tb_zoom.TabIndex = 12;
@@ -289,7 +332,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox1.Location = new System.Drawing.Point(1444, 10);
+            this.checkBox1.Location = new System.Drawing.Point(33, 15);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(142, 23);
             this.checkBox1.TabIndex = 13;
@@ -301,7 +344,7 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox2.Location = new System.Drawing.Point(1444, 30);
+            this.checkBox2.Location = new System.Drawing.Point(33, 35);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(161, 23);
             this.checkBox2.TabIndex = 14;
@@ -311,9 +354,9 @@
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(9, 12);
+            this.button0.Location = new System.Drawing.Point(19, 21);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(90, 40);
+            this.button0.Size = new System.Drawing.Size(100, 45);
             this.button0.TabIndex = 15;
             this.button0.Text = "載入地圖 竹北";
             this.button0.UseVisualStyleBackColor = true;
@@ -321,7 +364,7 @@
             // 
             // btn_north
             // 
-            this.btn_north.Location = new System.Drawing.Point(898, 9);
+            this.btn_north.Location = new System.Drawing.Point(157, 29);
             this.btn_north.Name = "btn_north";
             this.btn_north.Size = new System.Drawing.Size(32, 32);
             this.btn_north.TabIndex = 23;
@@ -331,7 +374,7 @@
             // 
             // btn_south
             // 
-            this.btn_south.Location = new System.Drawing.Point(898, 75);
+            this.btn_south.Location = new System.Drawing.Point(157, 95);
             this.btn_south.Name = "btn_south";
             this.btn_south.Size = new System.Drawing.Size(32, 32);
             this.btn_south.TabIndex = 24;
@@ -341,7 +384,7 @@
             // 
             // btn_east
             // 
-            this.btn_east.Location = new System.Drawing.Point(933, 41);
+            this.btn_east.Location = new System.Drawing.Point(192, 61);
             this.btn_east.Name = "btn_east";
             this.btn_east.Size = new System.Drawing.Size(32, 32);
             this.btn_east.TabIndex = 25;
@@ -351,7 +394,7 @@
             // 
             // btn_west
             // 
-            this.btn_west.Location = new System.Drawing.Point(869, 39);
+            this.btn_west.Location = new System.Drawing.Point(128, 59);
             this.btn_west.Name = "btn_west";
             this.btn_west.Size = new System.Drawing.Size(32, 32);
             this.btn_west.TabIndex = 26;
@@ -359,46 +402,36 @@
             this.btn_west.UseVisualStyleBackColor = true;
             this.btn_west.Click += new System.EventHandler(this.btn_west_Click);
             // 
-            // bt_save
+            // groupBox_map
             // 
-            this.bt_save.Location = new System.Drawing.Point(804, 89);
-            this.bt_save.Name = "bt_save";
-            this.bt_save.Size = new System.Drawing.Size(50, 35);
-            this.bt_save.TabIndex = 27;
-            this.bt_save.Text = "地圖 存圖";
-            this.bt_save.UseVisualStyleBackColor = true;
-            this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.radioButton17);
-            this.groupBox1.Controls.Add(this.radioButton16);
-            this.groupBox1.Controls.Add(this.radioButton15);
-            this.groupBox1.Controls.Add(this.radioButton14);
-            this.groupBox1.Controls.Add(this.radioButton13);
-            this.groupBox1.Controls.Add(this.radioButton12);
-            this.groupBox1.Controls.Add(this.radioButton11);
-            this.groupBox1.Controls.Add(this.radioButton10);
-            this.groupBox1.Controls.Add(this.radioButton9);
-            this.groupBox1.Controls.Add(this.radioButton8);
-            this.groupBox1.Controls.Add(this.radioButton7);
-            this.groupBox1.Controls.Add(this.radioButton6);
-            this.groupBox1.Controls.Add(this.radioButton5);
-            this.groupBox1.Controls.Add(this.radioButton4);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(970, 10);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(295, 134);
-            this.groupBox1.TabIndex = 28;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "MapProvider";
+            this.groupBox_map.Controls.Add(this.radioButton17);
+            this.groupBox_map.Controls.Add(this.radioButton16);
+            this.groupBox_map.Controls.Add(this.radioButton15);
+            this.groupBox_map.Controls.Add(this.radioButton14);
+            this.groupBox_map.Controls.Add(this.radioButton13);
+            this.groupBox_map.Controls.Add(this.radioButton12);
+            this.groupBox_map.Controls.Add(this.radioButton11);
+            this.groupBox_map.Controls.Add(this.radioButton10);
+            this.groupBox_map.Controls.Add(this.radioButton9);
+            this.groupBox_map.Controls.Add(this.radioButton8);
+            this.groupBox_map.Controls.Add(this.radioButton7);
+            this.groupBox_map.Controls.Add(this.radioButton6);
+            this.groupBox_map.Controls.Add(this.radioButton5);
+            this.groupBox_map.Controls.Add(this.radioButton4);
+            this.groupBox_map.Controls.Add(this.radioButton3);
+            this.groupBox_map.Controls.Add(this.radioButton2);
+            this.groupBox_map.Controls.Add(this.radioButton1);
+            this.groupBox_map.Location = new System.Drawing.Point(641, 354);
+            this.groupBox_map.Name = "groupBox_map";
+            this.groupBox_map.Size = new System.Drawing.Size(244, 134);
+            this.groupBox_map.TabIndex = 28;
+            this.groupBox_map.TabStop = false;
+            this.groupBox_map.Text = "MapProvider";
             // 
             // radioButton17
             // 
             this.radioButton17.AutoSize = true;
-            this.radioButton17.Location = new System.Drawing.Point(194, 51);
+            this.radioButton17.Location = new System.Drawing.Point(168, 53);
             this.radioButton17.Name = "radioButton17";
             this.radioButton17.Size = new System.Drawing.Size(47, 16);
             this.radioButton17.TabIndex = 15;
@@ -408,7 +441,7 @@
             // radioButton16
             // 
             this.radioButton16.AutoSize = true;
-            this.radioButton16.Location = new System.Drawing.Point(194, 34);
+            this.radioButton16.Location = new System.Drawing.Point(168, 36);
             this.radioButton16.Name = "radioButton16";
             this.radioButton16.Size = new System.Drawing.Size(47, 16);
             this.radioButton16.TabIndex = 14;
@@ -418,7 +451,7 @@
             // radioButton15
             // 
             this.radioButton15.AutoSize = true;
-            this.radioButton15.Location = new System.Drawing.Point(194, 15);
+            this.radioButton15.Location = new System.Drawing.Point(168, 17);
             this.radioButton15.Name = "radioButton15";
             this.radioButton15.Size = new System.Drawing.Size(47, 16);
             this.radioButton15.TabIndex = 13;
@@ -583,7 +616,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(28, 291);
+            this.bt_clear.Location = new System.Drawing.Point(28, 152);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(71, 30);
             this.bt_clear.TabIndex = 29;
@@ -593,9 +626,9 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(9, 66);
+            this.button11.Location = new System.Drawing.Point(129, 175);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(90, 40);
+            this.button11.Size = new System.Drawing.Size(100, 45);
             this.button11.TabIndex = 30;
             this.button11.Text = "各種marker";
             this.button11.UseVisualStyleBackColor = true;
@@ -603,18 +636,18 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(115, 66);
+            this.button12.Location = new System.Drawing.Point(129, 227);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(90, 40);
+            this.button12.Size = new System.Drawing.Size(100, 45);
             this.button12.TabIndex = 31;
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(218, 66);
+            this.button13.Location = new System.Drawing.Point(129, 279);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(90, 40);
+            this.button13.Size = new System.Drawing.Size(100, 45);
             this.button13.TabIndex = 32;
             this.button13.Text = "量測距離";
             this.button13.UseVisualStyleBackColor = true;
@@ -622,52 +655,35 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(321, 66);
+            this.button14.Location = new System.Drawing.Point(129, 324);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(90, 40);
+            this.button14.Size = new System.Drawing.Size(100, 45);
             this.button14.TabIndex = 32;
+            this.button14.Text = "地圖存圖";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(424, 67);
+            this.button15.Location = new System.Drawing.Point(129, 374);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(90, 40);
+            this.button15.Size = new System.Drawing.Size(100, 45);
             this.button15.TabIndex = 33;
             this.button15.Text = "更新顯示Route";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(527, 67);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(90, 40);
-            this.button16.TabIndex = 34;
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
-            // 
-            // button17
-            // 
-            this.button17.Location = new System.Drawing.Point(630, 66);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(90, 40);
-            this.button17.TabIndex = 35;
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
-            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(1439, 83);
+            this.comboBox1.Location = new System.Drawing.Point(28, 88);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(166, 20);
             this.comboBox1.TabIndex = 36;
             // 
             // btn_draw_profile
             // 
-            this.btn_draw_profile.Location = new System.Drawing.Point(1439, 114);
+            this.btn_draw_profile.Location = new System.Drawing.Point(28, 119);
             this.btn_draw_profile.Name = "btn_draw_profile";
             this.btn_draw_profile.Size = new System.Drawing.Size(80, 34);
             this.btn_draw_profile.TabIndex = 37;
@@ -675,28 +691,28 @@
             this.btn_draw_profile.UseVisualStyleBackColor = true;
             this.btn_draw_profile.Click += new System.EventHandler(this.btn_draw_profile_Click);
             // 
-            // groupBox2
+            // groupBox_location
             // 
-            this.groupBox2.Controls.Add(this.rb_location13);
-            this.groupBox2.Controls.Add(this.rb_location12);
-            this.groupBox2.Controls.Add(this.rb_location11);
-            this.groupBox2.Controls.Add(this.rb_location10);
-            this.groupBox2.Controls.Add(this.rb_location9);
-            this.groupBox2.Controls.Add(this.rb_location8);
-            this.groupBox2.Controls.Add(this.rb_location7);
-            this.groupBox2.Controls.Add(this.rb_location6);
-            this.groupBox2.Controls.Add(this.rb_location5);
-            this.groupBox2.Controls.Add(this.rb_location4);
-            this.groupBox2.Controls.Add(this.rb_location3);
-            this.groupBox2.Controls.Add(this.rb_location2);
-            this.groupBox2.Controls.Add(this.rb_location1);
-            this.groupBox2.Controls.Add(this.rb_location0);
-            this.groupBox2.Location = new System.Drawing.Point(1210, 13);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(190, 134);
-            this.groupBox2.TabIndex = 29;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Location";
+            this.groupBox_location.Controls.Add(this.rb_location13);
+            this.groupBox_location.Controls.Add(this.rb_location12);
+            this.groupBox_location.Controls.Add(this.rb_location11);
+            this.groupBox_location.Controls.Add(this.rb_location10);
+            this.groupBox_location.Controls.Add(this.rb_location9);
+            this.groupBox_location.Controls.Add(this.rb_location8);
+            this.groupBox_location.Controls.Add(this.rb_location7);
+            this.groupBox_location.Controls.Add(this.rb_location6);
+            this.groupBox_location.Controls.Add(this.rb_location5);
+            this.groupBox_location.Controls.Add(this.rb_location4);
+            this.groupBox_location.Controls.Add(this.rb_location3);
+            this.groupBox_location.Controls.Add(this.rb_location2);
+            this.groupBox_location.Controls.Add(this.rb_location1);
+            this.groupBox_location.Controls.Add(this.rb_location0);
+            this.groupBox_location.Location = new System.Drawing.Point(641, 495);
+            this.groupBox_location.Name = "groupBox_location";
+            this.groupBox_location.Size = new System.Drawing.Size(244, 134);
+            this.groupBox_location.TabIndex = 29;
+            this.groupBox_location.TabStop = false;
+            this.groupBox_location.Text = "Location";
             // 
             // rb_location13
             // 
@@ -971,7 +987,7 @@
             // 
             this.rb_km.AutoSize = true;
             this.rb_km.Checked = true;
-            this.rb_km.Location = new System.Drawing.Point(1444, 59);
+            this.rb_km.Location = new System.Drawing.Point(33, 64);
             this.rb_km.Name = "rb_km";
             this.rb_km.Size = new System.Drawing.Size(47, 16);
             this.rb_km.TabIndex = 6;
@@ -982,7 +998,7 @@
             // rb_m
             // 
             this.rb_m.AutoSize = true;
-            this.rb_m.Location = new System.Drawing.Point(1497, 59);
+            this.rb_m.Location = new System.Drawing.Point(86, 64);
             this.rb_m.Name = "rb_m";
             this.rb_m.Size = new System.Drawing.Size(47, 16);
             this.rb_m.TabIndex = 38;
@@ -993,7 +1009,7 @@
             // 
             this.lb_distance.AutoSize = true;
             this.lb_distance.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_distance.Location = new System.Drawing.Point(1547, 57);
+            this.lb_distance.Location = new System.Drawing.Point(136, 62);
             this.lb_distance.Name = "lb_distance";
             this.lb_distance.Size = new System.Drawing.Size(53, 19);
             this.lb_distance.TabIndex = 39;
@@ -1001,7 +1017,7 @@
             // 
             // btn_draw_profile2
             // 
-            this.btn_draw_profile2.Location = new System.Drawing.Point(1525, 114);
+            this.btn_draw_profile2.Location = new System.Drawing.Point(114, 119);
             this.btn_draw_profile2.Name = "btn_draw_profile2";
             this.btn_draw_profile2.Size = new System.Drawing.Size(80, 34);
             this.btn_draw_profile2.TabIndex = 40;
@@ -1009,121 +1025,81 @@
             this.btn_draw_profile2.UseVisualStyleBackColor = true;
             this.btn_draw_profile2.Click += new System.EventHandler(this.btn_draw_profile2_Click);
             // 
-            // groupBox3
+            // groupBox_map_downloader
             // 
-            this.groupBox3.Controls.Add(this.bt_test19);
-            this.groupBox3.Controls.Add(this.bt_test18);
-            this.groupBox3.Controls.Add(this.bt_test17);
-            this.groupBox3.Controls.Add(this.bt_test16);
-            this.groupBox3.Controls.Add(this.bt_test15);
-            this.groupBox3.Controls.Add(this.bt_test14);
-            this.groupBox3.Controls.Add(this.bt_test13);
-            this.groupBox3.Controls.Add(this.bt_test12);
-            this.groupBox3.Controls.Add(this.bt_test11);
-            this.groupBox3.Controls.Add(this.bt_test10);
-            this.groupBox3.Controls.Add(this.bt_test09);
-            this.groupBox3.Controls.Add(this.bt_test08);
-            this.groupBox3.Controls.Add(this.bt_test07);
-            this.groupBox3.Controls.Add(this.bt_test06);
-            this.groupBox3.Controls.Add(this.bt_test05);
-            this.groupBox3.Controls.Add(this.bt_test04);
-            this.groupBox3.Controls.Add(this.bt_test03);
-            this.groupBox3.Controls.Add(this.bt_test02);
-            this.groupBox3.Controls.Add(this.bt_test01);
-            this.groupBox3.Controls.Add(this.bt_test00);
-            this.groupBox3.Location = new System.Drawing.Point(452, 153);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(243, 526);
-            this.groupBox3.TabIndex = 41;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "測試MapDownloader";
-            // 
-            // bt_test19
-            // 
-            this.bt_test19.Location = new System.Drawing.Point(124, 436);
-            this.bt_test19.Name = "bt_test19";
-            this.bt_test19.Size = new System.Drawing.Size(100, 35);
-            this.bt_test19.TabIndex = 61;
-            this.bt_test19.UseVisualStyleBackColor = true;
-            this.bt_test19.Click += new System.EventHandler(this.bt_test19_Click);
-            // 
-            // bt_test18
-            // 
-            this.bt_test18.Location = new System.Drawing.Point(124, 390);
-            this.bt_test18.Name = "bt_test18";
-            this.bt_test18.Size = new System.Drawing.Size(100, 35);
-            this.bt_test18.TabIndex = 60;
-            this.bt_test18.UseVisualStyleBackColor = true;
-            this.bt_test18.Click += new System.EventHandler(this.bt_test18_Click);
-            // 
-            // bt_test17
-            // 
-            this.bt_test17.Location = new System.Drawing.Point(122, 339);
-            this.bt_test17.Name = "bt_test17";
-            this.bt_test17.Size = new System.Drawing.Size(100, 35);
-            this.bt_test17.TabIndex = 59;
-            this.bt_test17.UseVisualStyleBackColor = true;
-            this.bt_test17.Click += new System.EventHandler(this.bt_test17_Click);
-            // 
-            // bt_test16
-            // 
-            this.bt_test16.Location = new System.Drawing.Point(122, 297);
-            this.bt_test16.Name = "bt_test16";
-            this.bt_test16.Size = new System.Drawing.Size(100, 35);
-            this.bt_test16.TabIndex = 58;
-            this.bt_test16.UseVisualStyleBackColor = true;
-            this.bt_test16.Click += new System.EventHandler(this.bt_test16_Click);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test15);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test14);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test13);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test12);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test11);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test10);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test09);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test08);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test07);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test06);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test05);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test04);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test03);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test02);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test01);
+            this.groupBox_map_downloader.Controls.Add(this.bt_test00);
+            this.groupBox_map_downloader.Location = new System.Drawing.Point(382, 14);
+            this.groupBox_map_downloader.Name = "groupBox_map_downloader";
+            this.groupBox_map_downloader.Size = new System.Drawing.Size(243, 526);
+            this.groupBox_map_downloader.TabIndex = 41;
+            this.groupBox_map_downloader.TabStop = false;
+            this.groupBox_map_downloader.Text = "MapDownloader";
             // 
             // bt_test15
             // 
-            this.bt_test15.Location = new System.Drawing.Point(124, 251);
+            this.bt_test15.Location = new System.Drawing.Point(124, 376);
             this.bt_test15.Name = "bt_test15";
-            this.bt_test15.Size = new System.Drawing.Size(100, 35);
+            this.bt_test15.Size = new System.Drawing.Size(100, 45);
             this.bt_test15.TabIndex = 57;
             this.bt_test15.UseVisualStyleBackColor = true;
             this.bt_test15.Click += new System.EventHandler(this.bt_test15_Click);
             // 
             // bt_test14
             // 
-            this.bt_test14.Location = new System.Drawing.Point(124, 205);
+            this.bt_test14.Location = new System.Drawing.Point(124, 326);
             this.bt_test14.Name = "bt_test14";
-            this.bt_test14.Size = new System.Drawing.Size(100, 35);
+            this.bt_test14.Size = new System.Drawing.Size(100, 45);
             this.bt_test14.TabIndex = 56;
             this.bt_test14.UseVisualStyleBackColor = true;
             this.bt_test14.Click += new System.EventHandler(this.bt_test14_Click);
             // 
             // bt_test13
             // 
-            this.bt_test13.Location = new System.Drawing.Point(124, 159);
+            this.bt_test13.Location = new System.Drawing.Point(124, 275);
             this.bt_test13.Name = "bt_test13";
-            this.bt_test13.Size = new System.Drawing.Size(100, 35);
+            this.bt_test13.Size = new System.Drawing.Size(100, 45);
             this.bt_test13.TabIndex = 55;
             this.bt_test13.UseVisualStyleBackColor = true;
             this.bt_test13.Click += new System.EventHandler(this.bt_test13_Click);
             // 
             // bt_test12
             // 
-            this.bt_test12.Location = new System.Drawing.Point(124, 113);
+            this.bt_test12.Location = new System.Drawing.Point(124, 224);
             this.bt_test12.Name = "bt_test12";
-            this.bt_test12.Size = new System.Drawing.Size(100, 35);
+            this.bt_test12.Size = new System.Drawing.Size(100, 45);
             this.bt_test12.TabIndex = 54;
             this.bt_test12.UseVisualStyleBackColor = true;
             this.bt_test12.Click += new System.EventHandler(this.bt_test12_Click);
             // 
             // bt_test11
             // 
-            this.bt_test11.Location = new System.Drawing.Point(124, 67);
+            this.bt_test11.Location = new System.Drawing.Point(124, 174);
             this.bt_test11.Name = "bt_test11";
-            this.bt_test11.Size = new System.Drawing.Size(100, 35);
+            this.bt_test11.Size = new System.Drawing.Size(100, 45);
             this.bt_test11.TabIndex = 53;
             this.bt_test11.UseVisualStyleBackColor = true;
             this.bt_test11.Click += new System.EventHandler(this.bt_test11_Click);
             // 
             // bt_test10
             // 
-            this.bt_test10.Location = new System.Drawing.Point(124, 21);
+            this.bt_test10.Location = new System.Drawing.Point(124, 123);
             this.bt_test10.Name = "bt_test10";
-            this.bt_test10.Size = new System.Drawing.Size(100, 35);
+            this.bt_test10.Size = new System.Drawing.Size(100, 45);
             this.bt_test10.TabIndex = 52;
             this.bt_test10.Text = "地址解析";
             this.bt_test10.UseVisualStyleBackColor = true;
@@ -1131,18 +1107,18 @@
             // 
             // bt_test09
             // 
-            this.bt_test09.Location = new System.Drawing.Point(18, 436);
+            this.bt_test09.Location = new System.Drawing.Point(124, 72);
             this.bt_test09.Name = "bt_test09";
-            this.bt_test09.Size = new System.Drawing.Size(100, 35);
+            this.bt_test09.Size = new System.Drawing.Size(100, 45);
             this.bt_test09.TabIndex = 51;
             this.bt_test09.UseVisualStyleBackColor = true;
             this.bt_test09.Click += new System.EventHandler(this.bt_test09_Click);
             // 
             // bt_test08
             // 
-            this.bt_test08.Location = new System.Drawing.Point(18, 390);
+            this.bt_test08.Location = new System.Drawing.Point(124, 21);
             this.bt_test08.Name = "bt_test08";
-            this.bt_test08.Size = new System.Drawing.Size(100, 35);
+            this.bt_test08.Size = new System.Drawing.Size(100, 45);
             this.bt_test08.TabIndex = 50;
             this.bt_test08.Text = "繪圖工具 測試";
             this.bt_test08.UseVisualStyleBackColor = true;
@@ -1150,9 +1126,9 @@
             // 
             // bt_test07
             // 
-            this.bt_test07.Location = new System.Drawing.Point(16, 344);
+            this.bt_test07.Location = new System.Drawing.Point(16, 377);
             this.bt_test07.Name = "bt_test07";
-            this.bt_test07.Size = new System.Drawing.Size(100, 35);
+            this.bt_test07.Size = new System.Drawing.Size(100, 45);
             this.bt_test07.TabIndex = 49;
             this.bt_test07.Text = "測試地址解析查詢";
             this.bt_test07.UseVisualStyleBackColor = true;
@@ -1160,9 +1136,9 @@
             // 
             // bt_test06
             // 
-            this.bt_test06.Location = new System.Drawing.Point(16, 297);
+            this.bt_test06.Location = new System.Drawing.Point(16, 326);
             this.bt_test06.Name = "bt_test06";
-            this.bt_test06.Size = new System.Drawing.Size(100, 35);
+            this.bt_test06.Size = new System.Drawing.Size(100, 45);
             this.bt_test06.TabIndex = 48;
             this.bt_test06.Text = "全國地圖";
             this.bt_test06.UseVisualStyleBackColor = true;
@@ -1170,9 +1146,9 @@
             // 
             // bt_test05
             // 
-            this.bt_test05.Location = new System.Drawing.Point(18, 251);
+            this.bt_test05.Location = new System.Drawing.Point(18, 275);
             this.bt_test05.Name = "bt_test05";
-            this.bt_test05.Size = new System.Drawing.Size(100, 35);
+            this.bt_test05.Size = new System.Drawing.Size(100, 45);
             this.bt_test05.TabIndex = 47;
             this.bt_test05.Text = "測試JSON 2";
             this.bt_test05.UseVisualStyleBackColor = true;
@@ -1180,9 +1156,9 @@
             // 
             // bt_test04
             // 
-            this.bt_test04.Location = new System.Drawing.Point(18, 205);
+            this.bt_test04.Location = new System.Drawing.Point(18, 224);
             this.bt_test04.Name = "bt_test04";
-            this.bt_test04.Size = new System.Drawing.Size(100, 35);
+            this.bt_test04.Size = new System.Drawing.Size(100, 45);
             this.bt_test04.TabIndex = 46;
             this.bt_test04.Text = "測試JSON 1";
             this.bt_test04.UseVisualStyleBackColor = true;
@@ -1190,9 +1166,9 @@
             // 
             // bt_test03
             // 
-            this.bt_test03.Location = new System.Drawing.Point(18, 159);
+            this.bt_test03.Location = new System.Drawing.Point(18, 174);
             this.bt_test03.Name = "bt_test03";
-            this.bt_test03.Size = new System.Drawing.Size(100, 35);
+            this.bt_test03.Size = new System.Drawing.Size(100, 45);
             this.bt_test03.TabIndex = 45;
             this.bt_test03.Text = "test DownloadMap";
             this.bt_test03.UseVisualStyleBackColor = true;
@@ -1200,9 +1176,9 @@
             // 
             // bt_test02
             // 
-            this.bt_test02.Location = new System.Drawing.Point(18, 113);
+            this.bt_test02.Location = new System.Drawing.Point(18, 123);
             this.bt_test02.Name = "bt_test02";
-            this.bt_test02.Size = new System.Drawing.Size(100, 35);
+            this.bt_test02.Size = new System.Drawing.Size(100, 45);
             this.bt_test02.TabIndex = 44;
             this.bt_test02.Text = "座標轉換";
             this.bt_test02.UseVisualStyleBackColor = true;
@@ -1210,9 +1186,9 @@
             // 
             // bt_test01
             // 
-            this.bt_test01.Location = new System.Drawing.Point(18, 67);
+            this.bt_test01.Location = new System.Drawing.Point(18, 72);
             this.bt_test01.Name = "bt_test01";
-            this.bt_test01.Size = new System.Drawing.Size(100, 35);
+            this.bt_test01.Size = new System.Drawing.Size(100, 45);
             this.bt_test01.TabIndex = 43;
             this.bt_test01.Text = "讀取GPX檔案";
             this.bt_test01.UseVisualStyleBackColor = true;
@@ -1222,7 +1198,7 @@
             // 
             this.bt_test00.Location = new System.Drawing.Point(18, 21);
             this.bt_test00.Name = "bt_test00";
-            this.bt_test00.Size = new System.Drawing.Size(100, 35);
+            this.bt_test00.Size = new System.Drawing.Size(100, 45);
             this.bt_test00.TabIndex = 42;
             this.bt_test00.Text = "列出省市界資料";
             this.bt_test00.UseVisualStyleBackColor = true;
@@ -1230,67 +1206,596 @@
             // 
             // treeView1
             // 
-            this.treeView1.Location = new System.Drawing.Point(12, 372);
+            this.treeView1.Location = new System.Drawing.Point(12, 233);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(100, 100);
             this.treeView1.TabIndex = 42;
+            // 
+            // groupBox_basic
+            // 
+            this.groupBox_basic.Controls.Add(this.button0);
+            this.groupBox_basic.Controls.Add(this.button1);
+            this.groupBox_basic.Controls.Add(this.button2);
+            this.groupBox_basic.Controls.Add(this.button3);
+            this.groupBox_basic.Controls.Add(this.button4);
+            this.groupBox_basic.Controls.Add(this.button5);
+            this.groupBox_basic.Controls.Add(this.button6);
+            this.groupBox_basic.Controls.Add(this.button7);
+            this.groupBox_basic.Controls.Add(this.button8);
+            this.groupBox_basic.Controls.Add(this.button9);
+            this.groupBox_basic.Controls.Add(this.button11);
+            this.groupBox_basic.Controls.Add(this.button10);
+            this.groupBox_basic.Controls.Add(this.button12);
+            this.groupBox_basic.Controls.Add(this.button15);
+            this.groupBox_basic.Controls.Add(this.button13);
+            this.groupBox_basic.Controls.Add(this.button14);
+            this.groupBox_basic.Location = new System.Drawing.Point(127, 14);
+            this.groupBox_basic.Name = "groupBox_basic";
+            this.groupBox_basic.Size = new System.Drawing.Size(249, 526);
+            this.groupBox_basic.TabIndex = 43;
+            this.groupBox_basic.TabStop = false;
+            this.groupBox_basic.Text = "基本";
+            // 
+            // bt_zoom_in
+            // 
+            this.bt_zoom_in.Location = new System.Drawing.Point(13, 25);
+            this.bt_zoom_in.Name = "bt_zoom_in";
+            this.bt_zoom_in.Size = new System.Drawing.Size(32, 32);
+            this.bt_zoom_in.TabIndex = 44;
+            this.bt_zoom_in.Text = "+";
+            this.bt_zoom_in.UseVisualStyleBackColor = true;
+            this.bt_zoom_in.Click += new System.EventHandler(this.bt_zoom_in_Click);
+            // 
+            // bt_zoom_out
+            // 
+            this.bt_zoom_out.Location = new System.Drawing.Point(13, 65);
+            this.bt_zoom_out.Name = "bt_zoom_out";
+            this.bt_zoom_out.Size = new System.Drawing.Size(32, 32);
+            this.bt_zoom_out.TabIndex = 45;
+            this.bt_zoom_out.Text = "-";
+            this.bt_zoom_out.UseVisualStyleBackColor = true;
+            this.bt_zoom_out.Click += new System.EventHandler(this.bt_zoom_out_Click);
+            // 
+            // groupBox_map_control1
+            // 
+            this.groupBox_map_control1.Controls.Add(this.bt_zoom_in);
+            this.groupBox_map_control1.Controls.Add(this.tb_zoom);
+            this.groupBox_map_control1.Controls.Add(this.bt_zoom_out);
+            this.groupBox_map_control1.Controls.Add(this.btn_north);
+            this.groupBox_map_control1.Controls.Add(this.btn_south);
+            this.groupBox_map_control1.Controls.Add(this.btn_east);
+            this.groupBox_map_control1.Controls.Add(this.btn_west);
+            this.groupBox_map_control1.Location = new System.Drawing.Point(641, 25);
+            this.groupBox_map_control1.Name = "groupBox_map_control1";
+            this.groupBox_map_control1.Size = new System.Drawing.Size(244, 158);
+            this.groupBox_map_control1.TabIndex = 46;
+            this.groupBox_map_control1.TabStop = false;
+            this.groupBox_map_control1.Text = "Control";
+            // 
+            // groupBox_map_control2
+            // 
+            this.groupBox_map_control2.Controls.Add(this.checkBox1);
+            this.groupBox_map_control2.Controls.Add(this.checkBox2);
+            this.groupBox_map_control2.Controls.Add(this.comboBox1);
+            this.groupBox_map_control2.Controls.Add(this.btn_draw_profile);
+            this.groupBox_map_control2.Controls.Add(this.rb_km);
+            this.groupBox_map_control2.Controls.Add(this.rb_m);
+            this.groupBox_map_control2.Controls.Add(this.btn_draw_profile2);
+            this.groupBox_map_control2.Controls.Add(this.lb_distance);
+            this.groupBox_map_control2.Location = new System.Drawing.Point(641, 188);
+            this.groupBox_map_control2.Name = "groupBox_map_control2";
+            this.groupBox_map_control2.Size = new System.Drawing.Size(244, 158);
+            this.groupBox_map_control2.TabIndex = 47;
+            this.groupBox_map_control2.TabStop = false;
+            this.groupBox_map_control2.Text = "Control";
+            // 
+            // groupBox_map2
+            // 
+            this.groupBox_map2.Controls.Add(this.rb_map41);
+            this.groupBox_map2.Controls.Add(this.rb_map40);
+            this.groupBox_map2.Controls.Add(this.rb_map39);
+            this.groupBox_map2.Controls.Add(this.rb_map38);
+            this.groupBox_map2.Controls.Add(this.rb_map37);
+            this.groupBox_map2.Controls.Add(this.rb_map36);
+            this.groupBox_map2.Controls.Add(this.rb_map35);
+            this.groupBox_map2.Controls.Add(this.rb_map34);
+            this.groupBox_map2.Controls.Add(this.rb_map33);
+            this.groupBox_map2.Controls.Add(this.rb_map32);
+            this.groupBox_map2.Controls.Add(this.rb_map31);
+            this.groupBox_map2.Controls.Add(this.rb_map30);
+            this.groupBox_map2.Controls.Add(this.rb_map29);
+            this.groupBox_map2.Controls.Add(this.rb_map28);
+            this.groupBox_map2.Controls.Add(this.rb_map27);
+            this.groupBox_map2.Controls.Add(this.rb_map26);
+            this.groupBox_map2.Controls.Add(this.rb_map25);
+            this.groupBox_map2.Controls.Add(this.rb_map24);
+            this.groupBox_map2.Controls.Add(this.rb_map23);
+            this.groupBox_map2.Controls.Add(this.rb_map22);
+            this.groupBox_map2.Controls.Add(this.rb_map21);
+            this.groupBox_map2.Controls.Add(this.rb_map20);
+            this.groupBox_map2.Controls.Add(this.rb_map19);
+            this.groupBox_map2.Controls.Add(this.rb_map18);
+            this.groupBox_map2.Controls.Add(this.rb_map17);
+            this.groupBox_map2.Controls.Add(this.rb_map16);
+            this.groupBox_map2.Controls.Add(this.rb_map15);
+            this.groupBox_map2.Controls.Add(this.rb_map14);
+            this.groupBox_map2.Controls.Add(this.rb_map13);
+            this.groupBox_map2.Controls.Add(this.rb_map12);
+            this.groupBox_map2.Controls.Add(this.rb_map11);
+            this.groupBox_map2.Controls.Add(this.rb_map10);
+            this.groupBox_map2.Controls.Add(this.rb_map09);
+            this.groupBox_map2.Controls.Add(this.rb_map08);
+            this.groupBox_map2.Controls.Add(this.rb_map07);
+            this.groupBox_map2.Controls.Add(this.rb_map06);
+            this.groupBox_map2.Controls.Add(this.rb_map05);
+            this.groupBox_map2.Controls.Add(this.rb_map04);
+            this.groupBox_map2.Controls.Add(this.rb_map03);
+            this.groupBox_map2.Controls.Add(this.rb_map02);
+            this.groupBox_map2.Controls.Add(this.rb_map01);
+            this.groupBox_map2.Controls.Add(this.rb_map00);
+            this.groupBox_map2.Location = new System.Drawing.Point(891, 354);
+            this.groupBox_map2.Name = "groupBox_map2";
+            this.groupBox_map2.Size = new System.Drawing.Size(244, 269);
+            this.groupBox_map2.TabIndex = 29;
+            this.groupBox_map2.TabStop = false;
+            this.groupBox_map2.Text = "地圖切換";
+            // 
+            // rb_map13
+            // 
+            this.rb_map13.AutoSize = true;
+            this.rb_map13.Location = new System.Drawing.Point(20, 230);
+            this.rb_map13.Name = "rb_map13";
+            this.rb_map13.Size = new System.Drawing.Size(47, 16);
+            this.rb_map13.TabIndex = 12;
+            this.rb_map13.Text = "其他";
+            this.rb_map13.UseVisualStyleBackColor = true;
+            // 
+            // rb_map12
+            // 
+            this.rb_map12.AutoSize = true;
+            this.rb_map12.Location = new System.Drawing.Point(20, 214);
+            this.rb_map12.Name = "rb_map12";
+            this.rb_map12.Size = new System.Drawing.Size(47, 16);
+            this.rb_map12.TabIndex = 11;
+            this.rb_map12.Text = "其他";
+            this.rb_map12.UseVisualStyleBackColor = true;
+            // 
+            // rb_map11
+            // 
+            this.rb_map11.AutoSize = true;
+            this.rb_map11.Location = new System.Drawing.Point(20, 198);
+            this.rb_map11.Name = "rb_map11";
+            this.rb_map11.Size = new System.Drawing.Size(47, 16);
+            this.rb_map11.TabIndex = 10;
+            this.rb_map11.Text = "其他";
+            this.rb_map11.UseVisualStyleBackColor = true;
+            // 
+            // rb_map10
+            // 
+            this.rb_map10.AutoSize = true;
+            this.rb_map10.Location = new System.Drawing.Point(20, 182);
+            this.rb_map10.Name = "rb_map10";
+            this.rb_map10.Size = new System.Drawing.Size(47, 16);
+            this.rb_map10.TabIndex = 9;
+            this.rb_map10.Text = "其他";
+            this.rb_map10.UseVisualStyleBackColor = true;
+            // 
+            // rb_map09
+            // 
+            this.rb_map09.AutoSize = true;
+            this.rb_map09.Location = new System.Drawing.Point(20, 167);
+            this.rb_map09.Name = "rb_map09";
+            this.rb_map09.Size = new System.Drawing.Size(47, 16);
+            this.rb_map09.TabIndex = 8;
+            this.rb_map09.Text = "其他";
+            this.rb_map09.UseVisualStyleBackColor = true;
+            // 
+            // rb_map08
+            // 
+            this.rb_map08.AutoSize = true;
+            this.rb_map08.Location = new System.Drawing.Point(20, 150);
+            this.rb_map08.Name = "rb_map08";
+            this.rb_map08.Size = new System.Drawing.Size(47, 16);
+            this.rb_map08.TabIndex = 7;
+            this.rb_map08.Text = "其他";
+            this.rb_map08.UseVisualStyleBackColor = true;
+            // 
+            // rb_map07
+            // 
+            this.rb_map07.AutoSize = true;
+            this.rb_map07.Location = new System.Drawing.Point(20, 134);
+            this.rb_map07.Name = "rb_map07";
+            this.rb_map07.Size = new System.Drawing.Size(47, 16);
+            this.rb_map07.TabIndex = 6;
+            this.rb_map07.Text = "其他";
+            this.rb_map07.UseVisualStyleBackColor = true;
+            // 
+            // rb_map06
+            // 
+            this.rb_map06.AutoSize = true;
+            this.rb_map06.Location = new System.Drawing.Point(20, 112);
+            this.rb_map06.Name = "rb_map06";
+            this.rb_map06.Size = new System.Drawing.Size(47, 16);
+            this.rb_map06.TabIndex = 5;
+            this.rb_map06.Text = "其他";
+            this.rb_map06.UseVisualStyleBackColor = true;
+            // 
+            // rb_map05
+            // 
+            this.rb_map05.AutoSize = true;
+            this.rb_map05.Location = new System.Drawing.Point(20, 98);
+            this.rb_map05.Name = "rb_map05";
+            this.rb_map05.Size = new System.Drawing.Size(59, 16);
+            this.rb_map05.TabIndex = 4;
+            this.rb_map05.Text = "腳踏車";
+            this.rb_map05.UseVisualStyleBackColor = true;
+            // 
+            // rb_map04
+            // 
+            this.rb_map04.AutoSize = true;
+            this.rb_map04.Location = new System.Drawing.Point(20, 85);
+            this.rb_map04.Name = "rb_map04";
+            this.rb_map04.Size = new System.Drawing.Size(47, 16);
+            this.rb_map04.TabIndex = 3;
+            this.rb_map04.Text = "混合";
+            this.rb_map04.UseVisualStyleBackColor = true;
+            // 
+            // rb_map03
+            // 
+            this.rb_map03.AutoSize = true;
+            this.rb_map03.Location = new System.Drawing.Point(20, 68);
+            this.rb_map03.Name = "rb_map03";
+            this.rb_map03.Size = new System.Drawing.Size(59, 16);
+            this.rb_map03.TabIndex = 2;
+            this.rb_map03.Text = "衛星圖";
+            this.rb_map03.UseVisualStyleBackColor = true;
+            // 
+            // rb_map02
+            // 
+            this.rb_map02.AutoSize = true;
+            this.rb_map02.Location = new System.Drawing.Point(20, 51);
+            this.rb_map02.Name = "rb_map02";
+            this.rb_map02.Size = new System.Drawing.Size(59, 16);
+            this.rb_map02.TabIndex = 2;
+            this.rb_map02.Text = "地形圖";
+            this.rb_map02.UseVisualStyleBackColor = true;
+            // 
+            // rb_map01
+            // 
+            this.rb_map01.AutoSize = true;
+            this.rb_map01.Location = new System.Drawing.Point(20, 34);
+            this.rb_map01.Name = "rb_map01";
+            this.rb_map01.Size = new System.Drawing.Size(47, 16);
+            this.rb_map01.TabIndex = 1;
+            this.rb_map01.Text = "簡中";
+            this.rb_map01.UseVisualStyleBackColor = true;
+            // 
+            // rb_map00
+            // 
+            this.rb_map00.AutoSize = true;
+            this.rb_map00.Checked = true;
+            this.rb_map00.Location = new System.Drawing.Point(20, 17);
+            this.rb_map00.Name = "rb_map00";
+            this.rb_map00.Size = new System.Drawing.Size(47, 16);
+            this.rb_map00.TabIndex = 0;
+            this.rb_map00.TabStop = true;
+            this.rb_map00.Text = "正中";
+            this.rb_map00.UseVisualStyleBackColor = true;
+            // 
+            // rb_map20
+            // 
+            this.rb_map20.AutoSize = true;
+            this.rb_map20.Location = new System.Drawing.Point(85, 113);
+            this.rb_map20.Name = "rb_map20";
+            this.rb_map20.Size = new System.Drawing.Size(47, 16);
+            this.rb_map20.TabIndex = 19;
+            this.rb_map20.Text = "其他";
+            this.rb_map20.UseVisualStyleBackColor = true;
+            // 
+            // rb_map19
+            // 
+            this.rb_map19.AutoSize = true;
+            this.rb_map19.Location = new System.Drawing.Point(85, 97);
+            this.rb_map19.Name = "rb_map19";
+            this.rb_map19.Size = new System.Drawing.Size(47, 16);
+            this.rb_map19.TabIndex = 18;
+            this.rb_map19.Text = "其他";
+            this.rb_map19.UseVisualStyleBackColor = true;
+            // 
+            // rb_map18
+            // 
+            this.rb_map18.AutoSize = true;
+            this.rb_map18.Location = new System.Drawing.Point(85, 81);
+            this.rb_map18.Name = "rb_map18";
+            this.rb_map18.Size = new System.Drawing.Size(47, 16);
+            this.rb_map18.TabIndex = 17;
+            this.rb_map18.Text = "其他";
+            this.rb_map18.UseVisualStyleBackColor = true;
+            // 
+            // rb_map17
+            // 
+            this.rb_map17.AutoSize = true;
+            this.rb_map17.Location = new System.Drawing.Point(85, 65);
+            this.rb_map17.Name = "rb_map17";
+            this.rb_map17.Size = new System.Drawing.Size(47, 16);
+            this.rb_map17.TabIndex = 16;
+            this.rb_map17.Text = "其他";
+            this.rb_map17.UseVisualStyleBackColor = true;
+            // 
+            // rb_map16
+            // 
+            this.rb_map16.AutoSize = true;
+            this.rb_map16.Location = new System.Drawing.Point(85, 50);
+            this.rb_map16.Name = "rb_map16";
+            this.rb_map16.Size = new System.Drawing.Size(47, 16);
+            this.rb_map16.TabIndex = 15;
+            this.rb_map16.Text = "其他";
+            this.rb_map16.UseVisualStyleBackColor = true;
+            // 
+            // rb_map15
+            // 
+            this.rb_map15.AutoSize = true;
+            this.rb_map15.Location = new System.Drawing.Point(85, 33);
+            this.rb_map15.Name = "rb_map15";
+            this.rb_map15.Size = new System.Drawing.Size(47, 16);
+            this.rb_map15.TabIndex = 14;
+            this.rb_map15.Text = "其他";
+            this.rb_map15.UseVisualStyleBackColor = true;
+            // 
+            // rb_map14
+            // 
+            this.rb_map14.AutoSize = true;
+            this.rb_map14.Location = new System.Drawing.Point(85, 17);
+            this.rb_map14.Name = "rb_map14";
+            this.rb_map14.Size = new System.Drawing.Size(47, 16);
+            this.rb_map14.TabIndex = 13;
+            this.rb_map14.Text = "其他";
+            this.rb_map14.UseVisualStyleBackColor = true;
+            // 
+            // rb_map27
+            // 
+            this.rb_map27.AutoSize = true;
+            this.rb_map27.Location = new System.Drawing.Point(85, 230);
+            this.rb_map27.Name = "rb_map27";
+            this.rb_map27.Size = new System.Drawing.Size(47, 16);
+            this.rb_map27.TabIndex = 26;
+            this.rb_map27.Text = "其他";
+            this.rb_map27.UseVisualStyleBackColor = true;
+            // 
+            // rb_map26
+            // 
+            this.rb_map26.AutoSize = true;
+            this.rb_map26.Location = new System.Drawing.Point(85, 214);
+            this.rb_map26.Name = "rb_map26";
+            this.rb_map26.Size = new System.Drawing.Size(47, 16);
+            this.rb_map26.TabIndex = 25;
+            this.rb_map26.Text = "其他";
+            this.rb_map26.UseVisualStyleBackColor = true;
+            // 
+            // rb_map25
+            // 
+            this.rb_map25.AutoSize = true;
+            this.rb_map25.Location = new System.Drawing.Point(85, 198);
+            this.rb_map25.Name = "rb_map25";
+            this.rb_map25.Size = new System.Drawing.Size(47, 16);
+            this.rb_map25.TabIndex = 24;
+            this.rb_map25.Text = "其他";
+            this.rb_map25.UseVisualStyleBackColor = true;
+            // 
+            // rb_map24
+            // 
+            this.rb_map24.AutoSize = true;
+            this.rb_map24.Location = new System.Drawing.Point(85, 182);
+            this.rb_map24.Name = "rb_map24";
+            this.rb_map24.Size = new System.Drawing.Size(47, 16);
+            this.rb_map24.TabIndex = 23;
+            this.rb_map24.Text = "其他";
+            this.rb_map24.UseVisualStyleBackColor = true;
+            // 
+            // rb_map23
+            // 
+            this.rb_map23.AutoSize = true;
+            this.rb_map23.Location = new System.Drawing.Point(85, 167);
+            this.rb_map23.Name = "rb_map23";
+            this.rb_map23.Size = new System.Drawing.Size(47, 16);
+            this.rb_map23.TabIndex = 22;
+            this.rb_map23.Text = "其他";
+            this.rb_map23.UseVisualStyleBackColor = true;
+            // 
+            // rb_map22
+            // 
+            this.rb_map22.AutoSize = true;
+            this.rb_map22.Location = new System.Drawing.Point(85, 150);
+            this.rb_map22.Name = "rb_map22";
+            this.rb_map22.Size = new System.Drawing.Size(47, 16);
+            this.rb_map22.TabIndex = 21;
+            this.rb_map22.Text = "其他";
+            this.rb_map22.UseVisualStyleBackColor = true;
+            // 
+            // rb_map21
+            // 
+            this.rb_map21.AutoSize = true;
+            this.rb_map21.Location = new System.Drawing.Point(85, 134);
+            this.rb_map21.Name = "rb_map21";
+            this.rb_map21.Size = new System.Drawing.Size(47, 16);
+            this.rb_map21.TabIndex = 20;
+            this.rb_map21.Text = "其他";
+            this.rb_map21.UseVisualStyleBackColor = true;
+            // 
+            // rb_map41
+            // 
+            this.rb_map41.AutoSize = true;
+            this.rb_map41.Location = new System.Drawing.Point(147, 230);
+            this.rb_map41.Name = "rb_map41";
+            this.rb_map41.Size = new System.Drawing.Size(47, 16);
+            this.rb_map41.TabIndex = 40;
+            this.rb_map41.Text = "其他";
+            this.rb_map41.UseVisualStyleBackColor = true;
+            // 
+            // rb_map40
+            // 
+            this.rb_map40.AutoSize = true;
+            this.rb_map40.Location = new System.Drawing.Point(147, 214);
+            this.rb_map40.Name = "rb_map40";
+            this.rb_map40.Size = new System.Drawing.Size(47, 16);
+            this.rb_map40.TabIndex = 39;
+            this.rb_map40.Text = "其他";
+            this.rb_map40.UseVisualStyleBackColor = true;
+            // 
+            // rb_map39
+            // 
+            this.rb_map39.AutoSize = true;
+            this.rb_map39.Location = new System.Drawing.Point(147, 198);
+            this.rb_map39.Name = "rb_map39";
+            this.rb_map39.Size = new System.Drawing.Size(47, 16);
+            this.rb_map39.TabIndex = 38;
+            this.rb_map39.Text = "其他";
+            this.rb_map39.UseVisualStyleBackColor = true;
+            // 
+            // rb_map38
+            // 
+            this.rb_map38.AutoSize = true;
+            this.rb_map38.Location = new System.Drawing.Point(147, 182);
+            this.rb_map38.Name = "rb_map38";
+            this.rb_map38.Size = new System.Drawing.Size(47, 16);
+            this.rb_map38.TabIndex = 37;
+            this.rb_map38.Text = "其他";
+            this.rb_map38.UseVisualStyleBackColor = true;
+            // 
+            // rb_map37
+            // 
+            this.rb_map37.AutoSize = true;
+            this.rb_map37.Location = new System.Drawing.Point(147, 167);
+            this.rb_map37.Name = "rb_map37";
+            this.rb_map37.Size = new System.Drawing.Size(47, 16);
+            this.rb_map37.TabIndex = 36;
+            this.rb_map37.Text = "其他";
+            this.rb_map37.UseVisualStyleBackColor = true;
+            // 
+            // rb_map36
+            // 
+            this.rb_map36.AutoSize = true;
+            this.rb_map36.Location = new System.Drawing.Point(147, 150);
+            this.rb_map36.Name = "rb_map36";
+            this.rb_map36.Size = new System.Drawing.Size(47, 16);
+            this.rb_map36.TabIndex = 35;
+            this.rb_map36.Text = "其他";
+            this.rb_map36.UseVisualStyleBackColor = true;
+            // 
+            // rb_map35
+            // 
+            this.rb_map35.AutoSize = true;
+            this.rb_map35.Location = new System.Drawing.Point(147, 134);
+            this.rb_map35.Name = "rb_map35";
+            this.rb_map35.Size = new System.Drawing.Size(47, 16);
+            this.rb_map35.TabIndex = 34;
+            this.rb_map35.Text = "其他";
+            this.rb_map35.UseVisualStyleBackColor = true;
+            // 
+            // rb_map34
+            // 
+            this.rb_map34.AutoSize = true;
+            this.rb_map34.Location = new System.Drawing.Point(147, 113);
+            this.rb_map34.Name = "rb_map34";
+            this.rb_map34.Size = new System.Drawing.Size(47, 16);
+            this.rb_map34.TabIndex = 33;
+            this.rb_map34.Text = "其他";
+            this.rb_map34.UseVisualStyleBackColor = true;
+            // 
+            // rb_map33
+            // 
+            this.rb_map33.AutoSize = true;
+            this.rb_map33.Location = new System.Drawing.Point(147, 97);
+            this.rb_map33.Name = "rb_map33";
+            this.rb_map33.Size = new System.Drawing.Size(47, 16);
+            this.rb_map33.TabIndex = 32;
+            this.rb_map33.Text = "其他";
+            this.rb_map33.UseVisualStyleBackColor = true;
+            // 
+            // rb_map32
+            // 
+            this.rb_map32.AutoSize = true;
+            this.rb_map32.Location = new System.Drawing.Point(147, 81);
+            this.rb_map32.Name = "rb_map32";
+            this.rb_map32.Size = new System.Drawing.Size(47, 16);
+            this.rb_map32.TabIndex = 31;
+            this.rb_map32.Text = "其他";
+            this.rb_map32.UseVisualStyleBackColor = true;
+            // 
+            // rb_map31
+            // 
+            this.rb_map31.AutoSize = true;
+            this.rb_map31.Location = new System.Drawing.Point(147, 65);
+            this.rb_map31.Name = "rb_map31";
+            this.rb_map31.Size = new System.Drawing.Size(47, 16);
+            this.rb_map31.TabIndex = 30;
+            this.rb_map31.Text = "其他";
+            this.rb_map31.UseVisualStyleBackColor = true;
+            // 
+            // rb_map30
+            // 
+            this.rb_map30.AutoSize = true;
+            this.rb_map30.Location = new System.Drawing.Point(147, 50);
+            this.rb_map30.Name = "rb_map30";
+            this.rb_map30.Size = new System.Drawing.Size(47, 16);
+            this.rb_map30.TabIndex = 29;
+            this.rb_map30.Text = "其他";
+            this.rb_map30.UseVisualStyleBackColor = true;
+            // 
+            // rb_map29
+            // 
+            this.rb_map29.AutoSize = true;
+            this.rb_map29.Location = new System.Drawing.Point(147, 33);
+            this.rb_map29.Name = "rb_map29";
+            this.rb_map29.Size = new System.Drawing.Size(47, 16);
+            this.rb_map29.TabIndex = 28;
+            this.rb_map29.Text = "其他";
+            this.rb_map29.UseVisualStyleBackColor = true;
+            // 
+            // rb_map28
+            // 
+            this.rb_map28.AutoSize = true;
+            this.rb_map28.Location = new System.Drawing.Point(147, 17);
+            this.rb_map28.Name = "rb_map28";
+            this.rb_map28.Size = new System.Drawing.Size(47, 16);
+            this.rb_map28.TabIndex = 27;
+            this.rb_map28.Text = "其他";
+            this.rb_map28.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1793, 712);
+            this.ClientSize = new System.Drawing.Size(1157, 657);
+            this.Controls.Add(this.groupBox_map2);
+            this.Controls.Add(this.groupBox_map_control2);
+            this.Controls.Add(this.groupBox_map_control1);
+            this.Controls.Add(this.groupBox_basic);
             this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.btn_draw_profile2);
-            this.Controls.Add(this.lb_distance);
-            this.Controls.Add(this.rb_m);
-            this.Controls.Add(this.rb_km);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.btn_draw_profile);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button17);
-            this.Controls.Add(this.button16);
-            this.Controls.Add(this.button15);
-            this.Controls.Add(this.button14);
-            this.Controls.Add(this.button13);
-            this.Controls.Add(this.button12);
-            this.Controls.Add(this.button11);
+            this.Controls.Add(this.groupBox_map_downloader);
+            this.Controls.Add(this.groupBox_location);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.bt_save);
-            this.Controls.Add(this.btn_west);
-            this.Controls.Add(this.btn_east);
-            this.Controls.Add(this.btn_south);
-            this.Controls.Add(this.btn_north);
-            this.Controls.Add(this.button0);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.tb_zoom);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.groupBox_map);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.gMapControl1);
             this.Name = "Form1";
             this.Text = "GMap";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupBox_map.ResumeLayout(false);
+            this.groupBox_map.PerformLayout();
+            this.groupBox_location.ResumeLayout(false);
+            this.groupBox_location.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
+            this.groupBox_map_downloader.ResumeLayout(false);
+            this.groupBox_basic.ResumeLayout(false);
+            this.groupBox_map_control1.ResumeLayout(false);
+            this.groupBox_map_control1.PerformLayout();
+            this.groupBox_map_control2.ResumeLayout(false);
+            this.groupBox_map_control2.PerformLayout();
+            this.groupBox_map2.ResumeLayout(false);
+            this.groupBox_map2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1316,8 +1821,7 @@
         private System.Windows.Forms.Button btn_south;
         private System.Windows.Forms.Button btn_east;
         private System.Windows.Forms.Button btn_west;
-        private System.Windows.Forms.Button bt_save;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox_map;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
@@ -1329,13 +1833,11 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button17;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button btn_draw_profile;
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox_location;
         private System.Windows.Forms.RadioButton rb_location6;
         private System.Windows.Forms.RadioButton rb_location5;
         private System.Windows.Forms.RadioButton rb_location4;
@@ -1362,7 +1864,7 @@
         private System.Windows.Forms.RadioButton rb_m;
         private System.Windows.Forms.Label lb_distance;
         private System.Windows.Forms.Button btn_draw_profile2;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox_map_downloader;
         private System.Windows.Forms.Button bt_test09;
         private System.Windows.Forms.Button bt_test08;
         private System.Windows.Forms.Button bt_test07;
@@ -1390,10 +1892,6 @@
         private System.Windows.Forms.ToolStripMenuItem selectMapProvider5;
         private System.Windows.Forms.ToolStripMenuItem selectMapProvider6;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Button bt_test19;
-        private System.Windows.Forms.Button bt_test18;
-        private System.Windows.Forms.Button bt_test17;
-        private System.Windows.Forms.Button bt_test16;
         private System.Windows.Forms.Button bt_test15;
         private System.Windows.Forms.Button bt_test14;
         private System.Windows.Forms.Button bt_test13;
@@ -1401,6 +1899,54 @@
         private System.Windows.Forms.Button bt_test11;
         private System.Windows.Forms.Button bt_test10;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
+        private System.Windows.Forms.GroupBox groupBox_basic;
+        private System.Windows.Forms.Button bt_zoom_in;
+        private System.Windows.Forms.Button bt_zoom_out;
+        private System.Windows.Forms.GroupBox groupBox_map_control1;
+        private System.Windows.Forms.GroupBox groupBox_map_control2;
+        private System.Windows.Forms.GroupBox groupBox_map2;
+        private System.Windows.Forms.RadioButton rb_map13;
+        private System.Windows.Forms.RadioButton rb_map12;
+        private System.Windows.Forms.RadioButton rb_map11;
+        private System.Windows.Forms.RadioButton rb_map10;
+        private System.Windows.Forms.RadioButton rb_map09;
+        private System.Windows.Forms.RadioButton rb_map08;
+        private System.Windows.Forms.RadioButton rb_map07;
+        private System.Windows.Forms.RadioButton rb_map06;
+        private System.Windows.Forms.RadioButton rb_map05;
+        private System.Windows.Forms.RadioButton rb_map04;
+        private System.Windows.Forms.RadioButton rb_map03;
+        private System.Windows.Forms.RadioButton rb_map02;
+        private System.Windows.Forms.RadioButton rb_map01;
+        private System.Windows.Forms.RadioButton rb_map00;
+        private System.Windows.Forms.RadioButton rb_map27;
+        private System.Windows.Forms.RadioButton rb_map26;
+        private System.Windows.Forms.RadioButton rb_map25;
+        private System.Windows.Forms.RadioButton rb_map24;
+        private System.Windows.Forms.RadioButton rb_map23;
+        private System.Windows.Forms.RadioButton rb_map22;
+        private System.Windows.Forms.RadioButton rb_map21;
+        private System.Windows.Forms.RadioButton rb_map20;
+        private System.Windows.Forms.RadioButton rb_map19;
+        private System.Windows.Forms.RadioButton rb_map18;
+        private System.Windows.Forms.RadioButton rb_map17;
+        private System.Windows.Forms.RadioButton rb_map16;
+        private System.Windows.Forms.RadioButton rb_map15;
+        private System.Windows.Forms.RadioButton rb_map14;
+        private System.Windows.Forms.RadioButton rb_map41;
+        private System.Windows.Forms.RadioButton rb_map40;
+        private System.Windows.Forms.RadioButton rb_map39;
+        private System.Windows.Forms.RadioButton rb_map38;
+        private System.Windows.Forms.RadioButton rb_map37;
+        private System.Windows.Forms.RadioButton rb_map36;
+        private System.Windows.Forms.RadioButton rb_map35;
+        private System.Windows.Forms.RadioButton rb_map34;
+        private System.Windows.Forms.RadioButton rb_map33;
+        private System.Windows.Forms.RadioButton rb_map32;
+        private System.Windows.Forms.RadioButton rb_map31;
+        private System.Windows.Forms.RadioButton rb_map30;
+        private System.Windows.Forms.RadioButton rb_map29;
+        private System.Windows.Forms.RadioButton rb_map28;
     }
 }
 

@@ -110,76 +110,52 @@ namespace vcs_GMap
             int dx;
             int dy;
 
-            //button
             x_st = 10;
             y_st = 10;
-            dx = 100;
-            dy = 50;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            button5.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            button6.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button15.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            button16.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-            button17.Location = new Point(x_st + dx * 6, y_st + dy * 1);
-
-            button7.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-            button8.Location = new Point(x_st + dx * 7, y_st + dy * 1 - 10);
-            button9.Location = new Point(x_st + dx * 7, y_st + dy * 2 - 20);
-            button10.Location = new Point(x_st + dx * 7 + 60, y_st + dy * 1 - 10);
-            tb_zoom.Location = new Point(x_st + dx * 7 + 60, y_st + dy * 0);
-            bt_save.Location = new Point(x_st + dx * 7 + 60, y_st + dy * 2 - 20);
-
-            x_st = 10;
-            y_st = 150;
-            gMapControl1.Size = new Size(1250, 850);
+            gMapControl1.Size = new Size(1130, 1000);
             gMapControl1.Location = new Point(x_st, y_st);
-            richTextBox1.Size = new Size(250, 700);
-            richTextBox1.Location = new Point(x_st + 960 + 60 + 300, y_st);
+
+            int W = 250;
+            int H = 180;
+            dx = W + 10;
+            dy = H + 10;
+
+            groupBox_map_control1.Size = new Size(W, H);
+            groupBox_map_control2.Size = new Size(W, H);
+            groupBox_map.Size = new Size(W, H);
+            groupBox_map2.Size = new Size(W*2-10, H+60);
+            groupBox_location.Size = new Size(W, H);
+
+            x_st = 1210;
+            groupBox_map_control1.Location = new Point(x_st, y_st + dy * 0);
+            groupBox_map_control2.Location = new Point(x_st, y_st + dy * 1);
+            groupBox_map.Location = new Point(x_st, y_st + dy * 2);
+            groupBox_location.Location = new Point(x_st, y_st + dy * 3);
+            groupBox_map2.Location = new Point(x_st, y_st + dy * 4);
+
+            W = 120;
+            H = 750;
+            groupBox_basic.Size = new Size(W, H);
+            groupBox_basic.Location = new Point(x_st + dx, y_st);
+
+            groupBox_map_downloader.Size = new Size(W, H);
+            groupBox_map_downloader.Location = new Point(x_st + dx + W, y_st);
+
+            dx += W * 2;
+            y_st = 0;
+            W = 200;
+            H = 500;
+            treeView1.Size = new Size(W, H);
+            treeView1.Location = new Point(x_st + dx, y_st);
+
+            richTextBox1.Size = new Size(W, H);
+            richTextBox1.Location = new Point(x_st + dx, y_st + H);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            treeView1.Size = new Size(180, 700);
-            treeView1.Location = new Point(x_st + 1220 + 60 + 300, y_st);
-
-            x_st = 940;
-            y_st = 30;
-            btn_north.Location = new Point(x_st, y_st);
-            btn_east.Location = new Point(x_st + 32, y_st + 32);
-            btn_west.Location = new Point(x_st - 32, y_st + 32);
-            btn_south.Location = new Point(x_st, y_st + 64);
-
-            x_st = 1010;
-            y_st = 10;
-            groupBox1.Location = new Point(x_st, y_st);
-            groupBox2.Location = new Point(x_st + 300, y_st);
-
-            x_st = 1370 + 50 + 80 + 10;
-            y_st = 12;
-            dy = 25;
-            checkBox1.Location = new Point(x_st, y_st + dy * 0);
-            checkBox2.Location = new Point(x_st, y_st + dy * 1);
-
-            rb_km.Location = new Point(x_st, y_st + dy * 2);
-            rb_m.Location = new Point(x_st + 45, y_st + dy * 2);
-            lb_distance.Location = new Point(x_st + 90, y_st + dy * 2);
-
-            comboBox1.Location = new Point(x_st, y_st + dy * 3);
-            btn_draw_profile.Location = new Point(x_st, y_st + dy * 4);
-            btn_draw_profile2.Location = new Point(x_st + 85, y_st + dy * 4);
-            groupBox3.Size = new Size(120, 840);
-            groupBox3.Location = new Point(x_st + 270, y_st + dy * 0 + 0);
 
             x_st = 20;
             y_st = 15;
+            dx = 100;
             dy = 16;
 
             radioButton1.Location = new Point(x_st, y_st + dy * 0);
@@ -189,6 +165,17 @@ namespace vcs_GMap
             radioButton5.Location = new Point(x_st, y_st + dy * 4);
             radioButton6.Location = new Point(x_st, y_st + dy * 5);
             radioButton7.Location = new Point(x_st, y_st + dy * 6);
+            radioButton8.Location = new Point(x_st, y_st + dy * 7);
+            radioButton9.Location = new Point(x_st, y_st + dy * 8);
+            radioButton10.Location = new Point(x_st, y_st + dy * 9);
+            radioButton11.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            radioButton12.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            radioButton13.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            radioButton14.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            radioButton15.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            radioButton16.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            radioButton17.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+
 
             radioButton1.Text = "正中地圖";
             radioButton2.Text = "簡中地圖";
@@ -209,10 +196,190 @@ namespace vcs_GMap
             radioButton17.Text = "其他";
             lb_distance.Text = "";
 
+            rb_location0.Location = new Point(x_st, y_st + dy * 0);
+            rb_location1.Location = new Point(x_st, y_st + dy * 1);
+            rb_location2.Location = new Point(x_st, y_st + dy * 2);
+            rb_location3.Location = new Point(x_st, y_st + dy * 3);
+            rb_location4.Location = new Point(x_st, y_st + dy * 4);
+            rb_location5.Location = new Point(x_st, y_st + dy * 5);
+            rb_location6.Location = new Point(x_st, y_st + dy * 6);
+            rb_location7.Location = new Point(x_st, y_st + dy * 7);
+            rb_location8.Location = new Point(x_st, y_st + dy * 8);
+            rb_location9.Location = new Point(x_st, y_st + dy * 9);
+            rb_location10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            rb_location11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            rb_location12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            rb_location13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+
+            dx = 150;
+            dy = 14;
+            rb_map00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            rb_map01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            rb_map02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            rb_map03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            rb_map04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            rb_map05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            rb_map06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            rb_map07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            rb_map08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            rb_map09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            rb_map10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            rb_map11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            rb_map12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            rb_map13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+
+            rb_map14.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            rb_map15.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            rb_map16.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            rb_map17.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            rb_map18.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            rb_map19.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            rb_map20.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            rb_map21.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            rb_map22.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            rb_map23.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            rb_map24.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            rb_map25.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            rb_map26.Location = new Point(x_st + dx * 1, y_st + dy * 12);
+            rb_map27.Location = new Point(x_st + dx * 1, y_st + dy * 13);
+
+            rb_map28.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            rb_map29.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            rb_map30.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            rb_map31.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            rb_map32.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            rb_map33.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            rb_map34.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            rb_map35.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            rb_map36.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            rb_map37.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            rb_map38.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            rb_map39.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            rb_map40.Location = new Point(x_st + dx * 2, y_st + dy * 12);
+            rb_map41.Location = new Point(x_st + dx * 2, y_st + dy * 13);
+
+            rb_map00.Text = "Google普通地图";
+            rb_map01.Text = "Google卫星地图";
+            rb_map02.Text = "Google混合地图";
+            rb_map03.Text = "Google中国普通地图";
+            rb_map04.Text = "Google中国卫星地图";
+            rb_map05.Text = "Google中国混合地图";
+            rb_map06.Text = "Google中国地形地图";
+            rb_map07.Text = "百度地圖 普通";
+            rb_map08.Text = "百度地圖 衛星";
+            rb_map09.Text = "百度地圖 混合";
+            rb_map10.Text = "高德地图 普通地图";
+            rb_map11.Text = "高德地图 卫星地图";
+            rb_map12.Text = "高德地图 混合地图";
+            rb_map13.Text = "騰迅地圖 普通地图";
+            rb_map14.Text = "騰迅地圖 卫星地图";
+            rb_map15.Text = "騰迅地圖 混合地图";
+            rb_map16.Text = "騰迅地圖 地形地图";
+            rb_map17.Text = "Here地图 普通地图";
+            rb_map18.Text = "Here地图 卫星地图";
+            rb_map19.Text = "Here地图 混合地图";
+            rb_map20.Text = "Bing地图 普通地图";
+            rb_map21.Text = "Bing地图 卫星地图";
+            rb_map22.Text = "Bing地图 混合地图";
+            rb_map23.Text = "Bing地图 普通地图中文";
+            rb_map24.Text = "天地图 街道地图(球面墨卡托)";
+            rb_map25.Text = "天地图 卫星地图(球面墨卡托)";
+            rb_map26.Text = "天地图 混合地图(球面墨卡托)";
+            rb_map27.Text = "天地图 街道地图(WGS84)";
+            rb_map28.Text = "天地图 卫星地图(WGS84)";
+            rb_map29.Text = "天地图 混合地图(WGS84)";
+            rb_map30.Text = "天地图 福建街道地图";
+            rb_map31.Text = "天地图 福建卫星地图";
+            rb_map32.Text = "天地图 福建混合地图";
+            rb_map33.Text = "ArcGIS地图 arcGIS街道地图";
+            rb_map34.Text = "ArcGIS地图 arcGIS街道地图(无POI)";
+            rb_map35.Text = "ArcGIS地图 arcGIS街道地图(冷色版)";
+            rb_map36.Text = "ArcGIS地图 arcGIS街道地图(灰色版)";
+            rb_map37.Text = "ArcGIS地图 arcGIS街道地图(暖色版)";
+            rb_map38.Text = "ArcGIS地图 arcGIS卫星地图(无偏移)";
+            rb_map39.Text = "搜狗地图 普通地图";
+            rb_map40.Text = "船舶地图 船舶";
+            rb_map41.Text = "";
+
+            rb_map07.Enabled = false;
+            rb_map08.Enabled = false;
+            rb_map09.Enabled = false;
+            rb_map10.Enabled = false;
+            rb_map11.Enabled = false;
+            rb_map12.Enabled = false;
+            rb_map13.Enabled = false;
+            rb_map14.Enabled = false;
+            rb_map15.Enabled = false;
+            rb_map16.Enabled = false;
+            rb_map17.Enabled = false;
+            rb_map18.Enabled = false;
+            rb_map19.Enabled = false;
+            rb_map23.Enabled = false;
+            rb_map24.Enabled = false;
+            rb_map25.Enabled = false;
+            rb_map26.Enabled = false;
+            rb_map27.Enabled = false;
+            rb_map28.Enabled = false;
+            rb_map29.Enabled = false;
+            rb_map30.Enabled = false;
+            rb_map31.Enabled = false;
+            rb_map32.Enabled = false;
+            rb_map33.Enabled = false;
+            rb_map34.Enabled = false;
+            rb_map35.Enabled = false;
+            rb_map36.Enabled = false;
+            rb_map37.Enabled = false;
+            rb_map38.Enabled = false;
+            rb_map39.Enabled = false;
+            rb_map40.Enabled = false;
+
+            rb_map00.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map01.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map02.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map03.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map04.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map05.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map06.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map07.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map08.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map09.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map10.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map11.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map12.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map13.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map14.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map15.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map16.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map17.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map18.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map19.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map20.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map21.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map22.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map23.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map24.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map25.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map26.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map27.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map28.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map29.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map30.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map31.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map32.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map33.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map34.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map35.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map36.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map37.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map38.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map39.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map40.CheckedChanged += radioButton_CheckedChanged2;
+            rb_map41.CheckedChanged += radioButton_CheckedChanged2;
+
             x_st = 10;
-            y_st = 30;
+            y_st = 20;
             dx = 100;
-            dy = 40;
+            dy = 45;
 
             bt_test00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_test01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -230,10 +397,49 @@ namespace vcs_GMap
             bt_test13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
             bt_test14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
             bt_test15.Location = new Point(x_st + dx * 0, y_st + dy * 15);
-            bt_test16.Location = new Point(x_st + dx * 0, y_st + dy * 16);
-            bt_test17.Location = new Point(x_st + dx * 0, y_st + dy * 17);
-            bt_test18.Location = new Point(x_st + dx * 0, y_st + dy * 18);
-            bt_test19.Location = new Point(x_st + dx * 0, y_st + dy * 19);
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            button14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 15);
+
+
+            x_st = 50;
+            y_st = 20;
+            btn_north.Location = new Point(x_st, y_st);
+            btn_east.Location = new Point(x_st + 32, y_st + 32);
+            btn_west.Location = new Point(x_st - 32, y_st + 32);
+            btn_south.Location = new Point(x_st, y_st + 64);
+
+            tb_zoom.Location = new Point(x_st + 70, y_st - 10);
+            bt_zoom_in.Location = new Point(x_st + 70, y_st + 30);
+            bt_zoom_out.Location = new Point(x_st + 70, y_st + 65);
+
+            x_st = 20;
+            y_st = 20;
+            dy = 25;
+            checkBox1.Location = new Point(x_st, y_st + dy * 0);
+            checkBox2.Location = new Point(x_st, y_st + dy * 1);
+
+            rb_km.Location = new Point(x_st, y_st + dy * 2);
+            rb_m.Location = new Point(x_st + 50, y_st + dy * 2);
+            lb_distance.Location = new Point(x_st + 100, y_st + dy * 2);
+
+            comboBox1.Location = new Point(x_st, y_st + dy * 3);
+            btn_draw_profile.Location = new Point(x_st, y_st + dy * 4);
+            btn_draw_profile2.Location = new Point(x_st + 85, y_st + dy * 4);
 
             this.WindowState = FormWindowState.Maximized;
         }
@@ -1120,16 +1326,30 @@ namespace vcs_GMap
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //放大
-            gMapControl1.Zoom += 1; //當前比例
+            //tmp
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
+            latitude = 24.839;   //緯度
+            longitude = 121.004; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 14; //當前比例
+
             update_controls_info();
+
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //縮小
-            gMapControl1.Zoom -= 1; //當前比例
+            //tmp
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
+            latitude = 24.839;   //緯度
+            longitude = 121.004; //經度
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+            gMapControl1.Zoom = 14; //當前比例
+
             update_controls_info();
+
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1176,22 +1396,6 @@ namespace vcs_GMap
 
         private void bt_save_Click(object sender, EventArgs e)
         {
-            //地圖存圖
-            try
-            {
-                string filename = Application.StartupPath + "\\map_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
-
-                Image image = gMapControl1.ToImage();
-                if (image != null)
-                {
-                    image.Save(filename);
-                    richTextBox1.Text += "已存檔 : " + filename + "\n";
-                }
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
         }
 
         private void btn_north_Click(object sender, EventArgs e)
@@ -1307,6 +1511,301 @@ namespace vcs_GMap
             {
                 //其他
                 gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+            }
+            else
+            {
+                richTextBox1.Text += "XXXXX";
+
+            }
+        }
+
+        //地圖切換
+        private void radioButton_CheckedChanged2(object sender, EventArgs e)
+        {
+            if (rb_map00.Checked == true)
+            {
+                this.gMapControl1.MapProvider = GMapProviders.GoogleMap;
+                richTextBox1.Text += "Google普通地图\n";
+
+            }
+            else if (rb_map01.Checked == true)
+            {
+                this.gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;
+                richTextBox1.Text += "Google卫星地图\n";
+
+            }
+            else if (rb_map02.Checked == true)
+            {
+                this.gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;
+                richTextBox1.Text += "Google混合地图\n";
+
+            }
+            else if (rb_map03.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaMap;
+                richTextBox1.Text += "Google中国普通地图\n";
+
+            }
+            else if (rb_map04.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaSatelliteMap;
+                richTextBox1.Text += "Google中国卫星地图\n";
+
+            }
+            else if (rb_map05.Checked == true)
+            {
+                gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;
+                richTextBox1.Text += "Google中国混合地图\n";
+
+            }
+            else if (rb_map06.Checked == true)
+            {
+                this.gMapControl1.MapProvider = GMapProviders.GoogleChinaTerrainMap;
+                richTextBox1.Text += "Google中国地形地图\n";
+
+            }
+            else if (rb_map07.Checked == true)
+            {
+                //百度地圖 普通
+                //this.gMapControl1.MapProvider = GMapProvidersExt.Baidu.BaiduMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Baidu.BaiduMapProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map08.Checked == true)
+            {
+                //百度地圖 衛星
+                //this.gMapControl1.MapProvider = GMapProvidersExt.Baidu.BaiduSatelliteMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Baidu.BaiduSatelliteMapProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map09.Checked == true)
+            {
+                //百度地圖 混合
+                //this.gMapControl1.MapProvider = GMapProvidersExt.Baidu.BaiduHybridMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Baidu.BaiduHybridMapProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map10.Checked == true)
+            {
+                //高德地图 普通地图
+                //this.gMapControl1.MapProvider = GMapProvidersExt.AMap.AMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.AMap.AMapProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map11.Checked == true)
+            {
+                //高德地图 卫星地图
+                //this.gMapControl1.MapProvider = GMapProvidersExt.AMap.AMapSateliteProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.AMap.AMapSateliteProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map12.Checked == true)
+            {
+                //高德地图 混合地图
+                //this.gMapControl1.MapProvider = GMapProvidersExt.AMap.AMapHybirdProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.AMap.AMapHybirdProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map13.Checked == true)
+            {
+                //騰迅地圖 普通地图
+                //this.gMapControl1.MapProvider = GMapProvidersExt.Tencent.TencentMapProvider.Instance;
+                //this.mapControl.MapProvider = GMapProvidersExt.SoSo.SosoMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Tencent.TencentMapProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map14.Checked == true)
+            {
+                //騰迅地圖 卫星地图
+                //this.gMapControl1.MapProvider = GMapProvidersExt.Tencent.TencentMapSateliteProvider.Instance;
+                //this.mapControl.MapProvider = GMapProvidersExt.SoSo.SosoMapSateliteProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Tencent.TencentMapSateliteProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map15.Checked == true)
+            {
+                //騰迅地圖 混合地图
+                //this.gMapControl1.MapProvider = GMapProvidersExt.Tencent.TencentMapHybridProvider.Instance;
+                //this.mapControl.MapProvider = GMapProvidersExt.SoSo.SosoMapHybridProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Tencent.TencentMapHybridProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map16.Checked == true)
+            {
+                //騰迅地圖 地形地图
+                //this.gMapControl1.MapProvider = TencentTerrainMapAnnoProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Tencent.TencentTerrainMapAnnoProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map17.Checked == true)
+            {
+                //Here地图 普通地图
+                //gMapControl1.MapProvider = GMapProvidersExt.Here.NokiaMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Here.NokiaMapProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map18.Checked == true)
+            {
+                //Here地图 卫星地图
+                //gMapControl1.MapProvider = GMapProvidersExt.Here.NokiaSatelliteMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Here.NokiaSatelliteMapProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map19.Checked == true)
+            {
+                //Here地图 混合地图
+                //gMapControl1.MapProvider = GMapProvidersExt.Here.NokiaHybridMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Here.NokiaHybridMapProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map20.Checked == true)
+            {
+                //Bing地图 普通地图
+                this.gMapControl1.MapProvider = GMapProviders.BingMap;
+                richTextBox1.Text += "Bing普通地图\n";
+
+            }
+            else if (rb_map21.Checked == true)
+            {
+                //Bing地图 卫星地图
+                this.gMapControl1.MapProvider = GMapProviders.BingSatelliteMap;
+                richTextBox1.Text += "Bing卫星地图\n";
+
+            }
+            else if (rb_map22.Checked == true)
+            {
+                //Bing地图 混合地图
+                this.gMapControl1.MapProvider = GMapProviders.BingHybridMap;
+                richTextBox1.Text += "Bing混合地图\n";
+
+            }
+            else if (rb_map23.Checked == true)
+            {
+                //Bing地图 普通地图中文
+                //this.gMapControl1.MapProvider = GMapProvidersExt.Bing.BingChinaMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Bing.BingChinaMapProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map24.Checked == true)
+            {
+                //天地图 街道地图(球面墨卡托)
+                //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno.Instance;
+                richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno.Instance.CnName\n";
+
+            }
+            else if (rb_map25.Checked == true)
+            {
+                //天地图 卫星地图(球面墨卡托)
+                //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider.Instance.CnName\n";
+
+            }
+            else if (rb_map26.Checked == true)
+            {
+                //天地图 混合地图(球面墨卡托)
+                //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno.Instance;
+                richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno.Instance.CnName\n";
+
+            }
+            else if (rb_map27.Checked == true)
+            {
+                //天地图 街道地图(WGS84)
+                //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno4326.Instance;
+                richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno4326.Instance.CnName\n";
+
+            }
+            else if (rb_map28.Checked == true)
+            {
+                //天地图 卫星地图(WGS84)
+                //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider4326.Instance;
+                richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider4326.Instance.CnName\n";
+
+            }
+            else if (rb_map29.Checked == true)
+            {
+                //天地图 混合地图(WGS84)
+                //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno4326.Instance;
+                richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno4326.Instance.CnName\n";
+
+            }
+            else if (rb_map30.Checked == true)
+            {
+                //天地图 福建街道地图
+                //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianMapProviderWithAnno.Instance;
+                richTextBox1.Text += "GMapProvidersExt.TianDitu.Fujian.TiandituFujianMapProviderWithAnno.Instance.CnName\n";
+                this.gMapControl1.Position = new PointLatLng(26.0651, 119.2786);
+
+            }
+            else if (rb_map31.Checked == true)
+            {
+
+                //天地图 福建卫星地图
+                //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProvider.Instance.CnName\n";
+                this.gMapControl1.Position = new PointLatLng(26.0651, 119.2786);
+            }
+            else if (rb_map32.Checked == true)
+            {
+                //天地图 福建混合地图
+                //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProviderWithAnno.Instance;
+                richTextBox1.Text += "GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProviderWithAnno.Instance.CnName\n";
+                this.gMapControl1.Position = new PointLatLng(26.0651, 119.2786);
+            }
+            else if (rb_map33.Checked == true)
+            {
+                //ArcGIS地图 arcGIS街道地图
+                //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISMapProvider.Instance.CnName\n";
+            }
+            else if (rb_map34.Checked == true)
+            {
+                //ArcGIS地图 arcGIS街道地图(无POI)
+                //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISMapProviderNoPoi.Instance;
+                richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISMapProviderNoPoi.Instance.CnName\n";
+            }
+            else if (rb_map35.Checked == true)
+            {
+                //ArcGIS地图 arcGIS街道地图(冷色版)
+                //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISColdMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISColdMapProvider.Instance.CnName\n";
+            }
+            else if (rb_map36.Checked == true)
+            {
+                //ArcGIS地图 arcGIS街道地图(灰色版)
+                //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISGrayMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISGrayMapProvider.Instance.CnName\n";
+            }
+            else if (rb_map37.Checked == true)
+            {
+                //ArcGIS地图 arcGIS街道地图(暖色版)
+                //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISWarmMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISWarmMapProvider.Instance.CnName\n";
+            }
+            else if (rb_map38.Checked == true)
+            {
+                //ArcGIS地图 arcGIS卫星地图(无偏移)
+                //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISSatelliteMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISSatelliteMapProvider.Instance.CnName\n";
+            }
+            else if (rb_map39.Checked == true)
+            {
+                //搜狗地图 普通地图
+                //this.gMapControl1.MapProvider = GMapProvidersExt.Sogou.SogouMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Sogou.SogouMapProvider.Instance.CnName\n";
+            }
+            else if (rb_map40.Checked == true)
+            {
+                //船舶地图 船舶
+                //this.gMapControl1.MapProvider = GMapProvidersExt.Ship.ShipMapProvider.Instance;
+                richTextBox1.Text += "GMapProvidersExt.Ship.ShipMapProvider.Instance.CnName\n";
+            }
+            else if (rb_map41.Checked == true)
+            {
+
+            }
+            else
+            {
+                richTextBox1.Text += "XXXXX";
             }
         }
 
@@ -1455,16 +1954,22 @@ namespace vcs_GMap
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //tmp
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
-            latitude = 24.839;   //緯度
-            longitude = 121.004; //經度
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-            gMapControl1.Zoom = 14; //當前比例
+            //地圖存圖
+            try
+            {
+                string filename = Application.StartupPath + "\\map_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
 
-            update_controls_info();
-
+                Image image = gMapControl1.ToImage();
+                if (image != null)
+                {
+                    image.Save(filename);
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
         }
 
         public static GMapRoute GetRouteFromKml(string fileName)
@@ -1590,32 +2095,6 @@ namespace vcs_GMap
 
             //更新显示route
             gMapControl1.UpdateRouteLocalPosition(route1);
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            //tmp
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
-            latitude = 24.839;   //緯度
-            longitude = 121.004; //經度
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-            gMapControl1.Zoom = 14; //當前比例
-
-            update_controls_info();
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-            //tmp
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
-            latitude = 24.839;   //緯度
-            longitude = 121.004; //經度
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-            gMapControl1.Zoom = 14; //當前比例
-
-            update_controls_info();
         }
 
         private void btn_draw_profile_Click(object sender, EventArgs e)
@@ -3094,24 +3573,18 @@ namespace vcs_GMap
 
         }
 
-        private void bt_test16_Click(object sender, EventArgs e)
+        private void bt_zoom_in_Click(object sender, EventArgs e)
         {
-
+            //放大
+            gMapControl1.Zoom += 1; //當前比例
+            update_controls_info();
         }
 
-        private void bt_test17_Click(object sender, EventArgs e)
+        private void bt_zoom_out_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void bt_test18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_test19_Click(object sender, EventArgs e)
-        {
-
+            //縮小
+            gMapControl1.Zoom -= 1; //當前比例
+            update_controls_info();
         }
 
         //画图完成函数
