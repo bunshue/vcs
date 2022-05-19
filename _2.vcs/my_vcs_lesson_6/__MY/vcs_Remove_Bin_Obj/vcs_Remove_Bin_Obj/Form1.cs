@@ -240,10 +240,6 @@ namespace vcs_Remove_Bin_Obj
                     {
                         continue;
                     }
-                    else if (folder_name[i].Contains("GMapDrawTools"))
-                    {
-                        continue;
-                    }
                 }
 
                 if (folder_name[i].Contains("obj"))
@@ -254,10 +250,6 @@ namespace vcs_Remove_Bin_Obj
                         continue;
                     }
                     else if (folder_name[i].Contains("GMap.NET.WindowsForms"))
-                    {
-                        continue;
-                    }
-                    else if (folder_name[i].Contains("GMapDrawTools"))
                     {
                         continue;
                     }
