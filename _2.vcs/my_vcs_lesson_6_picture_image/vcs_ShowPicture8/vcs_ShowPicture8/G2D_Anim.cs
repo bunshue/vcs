@@ -17,7 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace vcs_PictureFadeInFadeOut
+namespace vcs_ShowPicture8
 {
     enum AnimType { AT_Step, AT_Linear} ; // 動畫種類  階層、線性
     class G2D_Anim  

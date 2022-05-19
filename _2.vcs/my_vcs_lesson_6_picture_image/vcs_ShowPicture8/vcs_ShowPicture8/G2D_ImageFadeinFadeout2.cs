@@ -24,7 +24,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace vcs_PictureFadeInFadeOut
+namespace vcs_ShowPicture8
 {
     class G2D_ImageFadeinFadeout2
     {

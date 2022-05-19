@@ -52,38 +52,6 @@ namespace vcs_PictureObscure
             }
         }
 
-        // Save the file with the appropriate format.
-        public void SaveImage(Image image, string filename)
-        {
-            string extension = Path.GetExtension(filename);
-            switch (extension.ToLower())
-            {
-                case ".bmp":
-                    image.Save(filename, ImageFormat.Bmp);
-                    break;
-                case ".exif":
-                    image.Save(filename, ImageFormat.Exif);
-                    break;
-                case ".gif":
-                    image.Save(filename, ImageFormat.Gif);
-                    break;
-                case ".jpg":
-                case ".jpeg":
-                    image.Save(filename, ImageFormat.Jpeg);
-                    break;
-                case ".png":
-                    image.Save(filename, ImageFormat.Png);
-                    break;
-                case ".tif":
-                case ".tiff":
-                    image.Save(filename, ImageFormat.Tiff);
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        "Unknown file extension " + extension);
-            }
-        }
-
         // The rectangle being selected.
         private Point Point1, Point2;
         private bool Selecting = false;
@@ -235,53 +203,28 @@ namespace vcs_PictureObscure
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Open
-            if (ofdFile.ShowDialog() == DialogResult.OK)
+            string filename = @"C:\______test_files\elephant.jpg";
+            try
             {
-                try
-                {
-                    // Load the image without locking its file.
-                    OriginalImage = LoadBitmapUnlocked(ofdFile.FileName);
-                }
-                catch (Exception ex)
-                {
-                    OriginalImage = null;
-                    pictureBox1.Visible = false;
-                    MessageBox.Show("Error opening file " +
-                        ofdFile.FileName + "\n" + ex.Message);
-                    return;
-                }
-
-                // Make the fuzzy version of the image.
-                MakeFuzzyImage();
-
-                // Display the current image.
-                VisibleImage = new Bitmap(OriginalImage);
-                pictureBox1.Image = VisibleImage;
-                pictureBox1.Visible = true;
-                pictureBox1.Refresh();
+                // Load the image without locking its file.
+                OriginalImage = LoadBitmapUnlocked(filename);
+            }
+            catch (Exception ex)
+            {
+                OriginalImage = null;
+                pictureBox1.Visible = false;
+                MessageBox.Show("Error opening file " + filename + "\n" + ex.Message);
+                return;
             }
 
+            // Make the fuzzy version of the image.
+            MakeFuzzyImage();
 
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //Save
-            if (sfdFile.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    SaveImage(VisibleImage, sfdFile.FileName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error saving file " +
-                        sfdFile.FileName + "\n" + ex.Message);
-                }
-            }
-
-
+            // Display the current image.
+            VisibleImage = new Bitmap(OriginalImage);
+            pictureBox1.Image = VisibleImage;
+            pictureBox1.Visible = true;
+            pictureBox1.Refresh();
         }
 
         private void button3_Click(object sender, EventArgs e)

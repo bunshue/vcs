@@ -34,7 +34,6 @@ C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master	可用
 
 
 sugar
-
 C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap	可用
 C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\MapDownloader-master1	不可用
 C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\MapDownloader-master2	不可用

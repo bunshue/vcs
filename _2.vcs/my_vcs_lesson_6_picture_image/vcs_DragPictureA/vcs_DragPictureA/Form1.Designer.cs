@@ -1,4 +1,4 @@
-﻿namespace vcs_PictureListDrag
+﻿namespace vcs_DragPictureA
 {
     partial class Form1
     {
@@ -112,7 +112,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "vcs_PictureListDrag";
+            this.Text = "vcs_DragPictureA";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
