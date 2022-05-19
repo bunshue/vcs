@@ -83,7 +83,7 @@ namespace vcs_ShowPicture7
             this.Location = new Point(0, 50);
             if (debug_mode == false)
             {
-                this.Size = new Size(200, 200);
+                this.Size = new Size(200, 280);
                 richTextBox1.Visible = false;
             }
 
@@ -122,6 +122,20 @@ namespace vcs_ShowPicture7
 
             }
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            int cnt = 50;
+            int i;
+            for (i = 0; i < cnt; i++)
+            {
+                button1_Click(sender, e);
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(50);
+
+
+            }
         }
     }
 }

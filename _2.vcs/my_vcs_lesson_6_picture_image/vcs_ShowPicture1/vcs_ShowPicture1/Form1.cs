@@ -30,6 +30,8 @@ namespace vcs_ShowPicture1
             {
                 this.comboBox1.Items.Add(de.Key);
             }
+            if (comboBox1.Items.Count > 0)
+                comboBox1.SelectedIndex = 0;
         }
 
         public void GetAllFiles(DirectoryInfo dir)

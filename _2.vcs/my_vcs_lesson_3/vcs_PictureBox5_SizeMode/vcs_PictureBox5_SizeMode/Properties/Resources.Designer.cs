@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_PictureBox4b_Orient.Properties {
+namespace vcs_PictureBox5_SizeMode.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace vcs_PictureBox4b_Orient.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_PictureBox4b_Orient.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_PictureBox5_SizeMode.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,16 +57,6 @@ namespace vcs_PictureBox4b_Orient.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap Ellipsis {
-            get {
-                object obj = ResourceManager.GetObject("Ellipsis", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_PictureBox7_SizeMode
+namespace vcs_PictureBox5_SizeMode
 {
     public partial class Form1 : Form
     {

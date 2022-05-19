@@ -1,4 +1,4 @@
-﻿namespace vcs_PictureBox7_SizeMode
+﻿namespace vcs_PictureBox5_SizeMode
 {
     partial class Form1
     {

@@ -34,8 +34,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.picOriginal = new System.Windows.Forms.PictureBox();
+            this.picOrientation = new System.Windows.Forms.PictureBox();
+            this.lblOrientation = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOriginal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOrientation)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -88,11 +95,63 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "取得圖片內的方向值, 自動轉換圖片方向";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(637, 15);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(136, 57);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "檢查圖片的方向";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(637, 211);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(364, 423);
+            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.Text = "";
+            // 
+            // picOriginal
+            // 
+            this.picOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picOriginal.Location = new System.Drawing.Point(758, 88);
+            this.picOriginal.Name = "picOriginal";
+            this.picOriginal.Size = new System.Drawing.Size(114, 97);
+            this.picOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picOriginal.TabIndex = 23;
+            this.picOriginal.TabStop = false;
+            // 
+            // picOrientation
+            // 
+            this.picOrientation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picOrientation.Location = new System.Drawing.Point(878, 88);
+            this.picOrientation.Name = "picOrientation";
+            this.picOrientation.Size = new System.Drawing.Size(121, 97);
+            this.picOrientation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picOrientation.TabIndex = 22;
+            this.picOrientation.TabStop = false;
+            // 
+            // lblOrientation
+            // 
+            this.lblOrientation.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrientation.Location = new System.Drawing.Point(632, 104);
+            this.lblOrientation.Name = "lblOrientation";
+            this.lblOrientation.Size = new System.Drawing.Size(120, 59);
+            this.lblOrientation.TabIndex = 21;
+            this.lblOrientation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1013, 764);
+            this.Controls.Add(this.picOriginal);
+            this.Controls.Add(this.picOrientation);
+            this.Controls.Add(this.lblOrientation);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -103,6 +162,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOriginal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOrientation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,6 +176,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.PictureBox picOriginal;
+        private System.Windows.Forms.PictureBox picOrientation;
+        private System.Windows.Forms.Label lblOrientation;
     }
 }
 

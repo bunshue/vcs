@@ -38,6 +38,26 @@ namespace vcs_PictureOrient
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\orient1.jpg";
+
+
+            // Open the file.
+            Bitmap bm = new Bitmap(filename);
+            picOriginal.Image = bm;
+
+            // Get the PropertyItems property from image.
+            ExifStuff.ExifOrientations orientation = ExifStuff.ImageOrientation(bm);
+            lblOrientation.Text = orientation.ToString();
+            richTextBox1.Text += orientation.ToString() + "\n";
+            picOrientation.Image = ExifStuff.OrientationImage(orientation);
+
+
+
+
+        }
+
 
     }
 }
