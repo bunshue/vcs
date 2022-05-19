@@ -646,6 +646,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(100, 45);
             this.button12.TabIndex = 31;
+            this.button12.Text = "計算兩點之間的距離";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

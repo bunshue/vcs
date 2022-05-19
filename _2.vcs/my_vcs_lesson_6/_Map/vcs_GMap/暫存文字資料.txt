@@ -218,3 +218,210 @@ gMapControl1.Refresh();
 
 
 
+
+        /*
+        void mapControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point clickPoint = e.GetPosition(mapControl);
+            PointLatLng point = mapControl.FromLocalToLatLng((int)clickPoint.X, (int)clickPoint.Y);
+            GMapMarker marker = new GMapMarker(point);
+            gMapControl1.Markers.Add(marker);
+        }
+        */
+        
+
+        public class MyLatLng
+        {
+            public double Rc = 6378137;     //赤道半?
+            public double Rj = 6356725;     //极半?
+            public double m_LoDeg, m_LoMin, m_LoSec;
+            public double m_LaDeg, m_LaMin, m_LaSec;
+            public double m_Longitude, m_Latitude;
+            public double m_RadLo, m_RadLa;
+            public double Ec;
+            public double Ed;
+            public MyLatLng(double longitude, double latitude)
+            {
+                m_LoDeg = (int)longitude;
+                m_LoMin = (int)((longitude - m_LoDeg) * 60);
+                m_LoSec = (longitude - m_LoDeg - m_LoMin / 60) * 3600;
+
+                m_LaDeg = (int)latitude;
+                m_LaMin = (int)((latitude - m_LaDeg) * 60);
+                m_LaSec = (latitude - m_LaDeg - m_LaMin / 60) * 3600;
+
+                m_Longitude = longitude;
+                m_Latitude = latitude;
+                m_RadLo = longitude * Math.PI / 180;
+                m_RadLa = latitude * Math.PI / 180;
+                Ec = Rj + (Rc - Rj) * (90 - m_Latitude) / 90;
+                Ed = Ec * Math.Cos(m_RadLa);
+            }
+        }
+
+        //度 ??成 弧度
+        public static double DegreesToRadians(double degrees)
+        {
+            const double degToRadFactor = Math.PI / 180;
+            return degrees * degToRadFactor;
+        }
+
+        //弧度 ??成 度
+        public static double RadiansToDegrees(double radians)
+        {
+            const double radToDegFactor = 180 / Math.PI;
+            return radians * radToDegFactor;
+        }
+
+        /**
+* 求B???度
+* @param A 已知?的??度，
+* @param distance   AB?地的距离  ?位km
+* @param angle  AB??与正北方向的?角（0~360）
+* @return  B?的??度
+*/
+        public static MyLatLng getMyLatLng(MyLatLng A, double distance, double angle)
+        {
+            double dx = distance * 1000 * Math.Sin(DegreesToRadians(angle));
+            double dy = distance * 1000 * Math.Cos(DegreesToRadians(angle));
+
+            double bjd = (dx / A.Ed + A.m_RadLo) * 180 / Math.PI;
+            double bwd = (dy / A.Ec + A.m_RadLa) * 180 / Math.PI;
+            return new MyLatLng(bjd, bwd);
+        }
+
+
+        //?里，?制到Gmap??的方式有三种。
+
+        //1、添加marker方式
+
+        //描述：以centerP??心，?制半??radius的?
+        //gMapControl：Gmap控制器		overlay：??
+        //centerP：?心?	 radius：?半?(?位: km)
+        public static void DrawEllipse1(GMapControl gMapControl, GMapOverlay overlay, PointLatLng centerP, int radius)
+        {
+            try
+            {
+                if (radius <= 0)
+                    return;
+
+                List<PointLatLng> latLngs = new List<PointLatLng>();
+                MyLatLng centerLatLng = new MyLatLng(centerP.Lng, centerP.Lat);
+
+                // 0 - 360度 ?找半??radius，?心?centerP的?上?的??度
+                for (int i = 0; i < 360; i++)
+                {
+                    //?取目???度
+                    MyLatLng tempLatLng = getMyLatLng(centerLatLng, radius, i);
+                    //?自定?的??度? ??成 ?准??度?
+                    PointLatLng p = new PointLatLng(tempLatLng.m_Latitude, tempLatLng.m_Longitude);
+
+                    //通??制???的方式?制?
+                    GMapMarker gMapMarker = new GMarkerGoogle(p, GMarkerGoogleType.red);
+                    overlay.Markers.Add(gMapMarker);
+                }
+            }
+            catch (Exception ex)
+            {
+                //Dialog.Error(ex);
+            }
+        }
+
+        //2、添加路?方式
+
+        //描述：以centerP??心，?制半??radius的?
+        //gMapControl：Gmap控制器		overlay：??
+        //centerP：?心?	 radius：?半?(?位: km)  name:路?id
+        public static void DrawEllipse2(GMapControl gMapControl, GMapOverlay overlay, PointLatLng centerP, int radius, string name)
+        {
+            try
+            {
+                if (radius <= 0)
+                    return;
+
+                List<PointLatLng> latLngs = new List<PointLatLng>();
+                MyLatLng centerLatLng = new MyLatLng(centerP.Lng, centerP.Lat);
+
+                // 0 - 360度 ?找半??radius，?心?centerP的?上?的??度
+                for (int i = 0; i < 360; i++)
+                {
+                    //?取目???度
+                    MyLatLng tempLatLng = getMyLatLng(centerLatLng, radius, i);
+                    //?自定?的??度? ??成 ?准??度?
+                    PointLatLng p = new PointLatLng(tempLatLng.m_Latitude, tempLatLng.m_Longitude);
+                    latLngs.Add(p);
+                }
+
+                //安全性?查
+                if (latLngs.Count < 20)
+                {
+                    return;
+                }
+
+                //通??制路?的方式?制?
+                GMapRoute route = new GMapRoute(latLngs, name);
+                if (route == null)
+                {
+                    return;
+                }
+                route.Stroke = new Pen(Color.Red, 2.5f);
+                overlay.Routes.Add(route);
+            }
+            catch (Exception ex)
+            {
+                //Dialog.Error(ex);
+            }
+        }
+
+        //3、添加多?形方式（推荐使用，便于?展功能）
+
+        //描述：以centerP??心，?制半??radius的?
+        //gMapControl：Gmap控制器		overlay：??
+        //centerP：?心?	 radius：?半?(?位: km)  name:多?形id
+        public static void DrawEllipse3(GMapControl gMapControl, GMapOverlay overlay, PointLatLng centerP, int radius, string name)
+        {
+            try
+            {
+                if (radius <= 0)
+                    return;
+
+                List<PointLatLng> latLngs = new List<PointLatLng>();
+                MyLatLng centerLatLng = new MyLatLng(centerP.Lng, centerP.Lat);
+
+                // 0 - 360度 ?找半??radius，?心?centerP的?上?的??度
+                for (int i = 0; i < 360; i++)
+                {
+                    //?取目???度
+                    MyLatLng tempLatLng = getMyLatLng(centerLatLng, radius, i);
+                    //?自定?的??度? ??成 ?准??度?
+                    PointLatLng p = new PointLatLng(tempLatLng.m_Latitude, tempLatLng.m_Longitude);
+                    latLngs.Add(p);
+                }
+
+                //安全性?查
+                if (latLngs.Count < 20)
+                {
+                    return;
+                }
+
+                //通??制多?形的方式?制?
+                GMapPolygon gpol = new GMapPolygon(latLngs, name);
+                gpol.Stroke = new Pen(Color.Red, 1.0f);
+                gpol.Fill = new SolidBrush(Color.FromArgb(20, Color.Red));
+                gpol.IsHitTestVisible = true;
+                overlay.Polygons.Add(gpol);
+            }
+            catch (Exception ex)
+            {
+                //Dialog.Error(ex);
+            }
+        }
+
+
+
+
+
+
+
+
+

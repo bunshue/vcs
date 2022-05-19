@@ -1938,15 +1938,46 @@ namespace vcs_GMap
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //tmp
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
-            latitude = 24.839;   //緯度
-            longitude = 121.004; //經度
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-            gMapControl1.Zoom = 14; //當前比例
+            richTextBox1.Text += "計算兩點之間的距離\n";
 
-            update_controls_info();
+            //義民中學 24.83907276107702, 121.00421169156141
+            double latitude1 = 24.839;   //緯度
+            double longitude1 = 121.004; //經度
+
+            //竹北大遠百 24.822075898681902, 121.02319618273027
+            double latitude2 = 24.822075898681902;   //緯度
+            double longitude2 = 121.02319618273027; //經度
+
+
+            //方法一
+            double distance1 = getDistance(new PointLatLng(latitude1, longitude1), new PointLatLng(latitude2, longitude2));
+            richTextBox1.Text += "方法一, 距離 : " + distance1.ToString() + "\n";
+
+
+            //方法二
+            double distance2 = getDistance2(latitude1, longitude1, latitude2, longitude2);
+            richTextBox1.Text += "方法二, 距離 : " + distance2.ToString() + "\n";
+        }
+
+        //计算地图上两点之间的距离--扩展功能
+        private const double EARTH_RADIUS = 6378.137;//地球半径
+        private static double radius(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        public double getDistance2(double lat1, double lng1, double lat2, double lng2)
+        {
+            double radLat1 = radius(lat1);
+            double radLat2 = radius(lat2);
+            double a = radLat1 - radLat2;
+            double b = radius(lng1) - radius(lng2);
+
+            double s = 2 * Math.Asin(Math.Sqrt(Math.Pow(Math.Sin(a / 2), 2) +
+             Math.Cos(radLat1) * Math.Cos(radLat2) * Math.Pow(Math.Sin(b / 2), 2)));
+            s = s * EARTH_RADIUS;
+            s = Math.Round(s * 10000) / 10000;
+            return s;
         }
 
         private void button13_Click(object sender, EventArgs e)
