@@ -49,14 +49,14 @@
             this.btnBlur2 = new System.Windows.Forms.Button();
             this.btnBlur1 = new System.Windows.Forms.Button();
             this.btnEmboss1 = new System.Windows.Forms.Button();
-            this.lblElapsed = new System.Windows.Forms.Label();
+            this.lb_elapsed = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
-            this.picHidden = new System.Windows.Forms.PictureBox();
-            this.picVisible = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.picHidden)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picVisible)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDoubleWave
@@ -248,13 +248,14 @@
             this.btnEmboss1.Text = "Emboss 1";
             this.btnEmboss1.Click += new System.EventHandler(this.btnEmboss1_Click);
             // 
-            // lblElapsed
+            // lb_elapsed
             // 
-            this.lblElapsed.AutoSize = true;
-            this.lblElapsed.Location = new System.Drawing.Point(12, 574);
-            this.lblElapsed.Name = "lblElapsed";
-            this.lblElapsed.Size = new System.Drawing.Size(0, 12);
-            this.lblElapsed.TabIndex = 31;
+            this.lb_elapsed.AutoSize = true;
+            this.lb_elapsed.Location = new System.Drawing.Point(12, 574);
+            this.lb_elapsed.Name = "lb_elapsed";
+            this.lb_elapsed.Size = new System.Drawing.Size(53, 12);
+            this.lb_elapsed.TabIndex = 31;
+            this.lb_elapsed.Text = "處理時間";
             // 
             // btnReset
             // 
@@ -265,25 +266,25 @@
             this.btnReset.Text = "Reset";
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
-            // picHidden
+            // pictureBox1
             // 
-            this.picHidden.Image = global::vcs_ImageProcessing5.Properties.Resources.JackOLanterns;
-            this.picHidden.Location = new System.Drawing.Point(529, 54);
-            this.picHidden.Name = "picHidden";
-            this.picHidden.Size = new System.Drawing.Size(300, 400);
-            this.picHidden.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.picHidden.TabIndex = 24;
-            this.picHidden.TabStop = false;
-            this.picHidden.Visible = false;
+            this.pictureBox1.Image = global::vcs_ImageProcessing5.Properties.Resources.JackOLanterns;
+            this.pictureBox1.Location = new System.Drawing.Point(529, 54);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(300, 400);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 24;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             // 
-            // picVisible
+            // pictureBox2
             // 
-            this.picVisible.Location = new System.Drawing.Point(451, 11);
-            this.picVisible.Name = "picVisible";
-            this.picVisible.Size = new System.Drawing.Size(300, 400);
-            this.picVisible.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.picVisible.TabIndex = 29;
-            this.picVisible.TabStop = false;
+            this.pictureBox2.Location = new System.Drawing.Point(451, 11);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(300, 400);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 29;
+            this.pictureBox2.TabStop = false;
             // 
             // richTextBox1
             // 
@@ -329,15 +330,15 @@
             this.Controls.Add(this.btnBlur2);
             this.Controls.Add(this.btnBlur1);
             this.Controls.Add(this.btnEmboss1);
-            this.Controls.Add(this.lblElapsed);
+            this.Controls.Add(this.lb_elapsed);
             this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.picHidden);
-            this.Controls.Add(this.picVisible);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBox2);
             this.Name = "Form1";
             this.Text = "vcs_ImageProcessing5";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picHidden)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picVisible)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -366,10 +367,10 @@
         internal System.Windows.Forms.Button btnBlur2;
         internal System.Windows.Forms.Button btnBlur1;
         internal System.Windows.Forms.Button btnEmboss1;
-        private System.Windows.Forms.Label lblElapsed;
+        private System.Windows.Forms.Label lb_elapsed;
         internal System.Windows.Forms.Button btnReset;
-        internal System.Windows.Forms.PictureBox picHidden;
-        internal System.Windows.Forms.PictureBox picVisible;
+        internal System.Windows.Forms.PictureBox pictureBox1;
+        internal System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         internal System.Windows.Forms.Button bt_clear;
     }

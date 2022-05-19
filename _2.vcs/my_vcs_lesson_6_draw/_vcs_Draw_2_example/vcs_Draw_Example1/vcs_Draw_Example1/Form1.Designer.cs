@@ -1106,6 +1106,7 @@
             this.bt_long8.Name = "bt_long8";
             this.bt_long8.Size = new System.Drawing.Size(135, 45);
             this.bt_long8.TabIndex = 116;
+            this.bt_long8.Text = "任意角度旋轉圖片";
             this.bt_long8.UseVisualStyleBackColor = true;
             this.bt_long8.Click += new System.EventHandler(this.bt_long8_Click);
             // 
@@ -1182,7 +1183,7 @@
             this.bt_long1.Name = "bt_long1";
             this.bt_long1.Size = new System.Drawing.Size(135, 45);
             this.bt_long1.TabIndex = 109;
-            this.bt_long1.Text = "任意角度旋轉圖片";
+            this.bt_long1.Text = "垂直百葉窗效果";
             this.bt_long1.UseVisualStyleBackColor = true;
             this.bt_long1.Click += new System.EventHandler(this.bt_long1_Click);
             // 
@@ -1193,7 +1194,7 @@
             this.bt_long0.Name = "bt_long0";
             this.bt_long0.Size = new System.Drawing.Size(135, 45);
             this.bt_long0.TabIndex = 108;
-            this.bt_long0.Text = "百葉窗效果";
+            this.bt_long0.Text = "水平百葉窗效果";
             this.bt_long0.UseVisualStyleBackColor = true;
             this.bt_long0.Click += new System.EventHandler(this.bt_long0_Click);
             // 

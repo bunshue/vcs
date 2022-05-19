@@ -808,7 +808,7 @@ namespace vcs_ImageProcessing1
         private void button15_Click(object sender, EventArgs e)
         {
             //string filename = "C:\\______test_files\\ims_image.bmp";
-            string filename = @"C:\______test_files\ims1.bmp";
+            string filename = @"C:\______test_files\ims01.bmp";
 
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 

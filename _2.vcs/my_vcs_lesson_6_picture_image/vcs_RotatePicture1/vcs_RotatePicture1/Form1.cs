@@ -47,22 +47,6 @@ namespace vcs_RotatePicture1
             //pictureBox1.Size = new Size(width, height);
         }
 
-        // Rotate the image.
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // Get the angle.
-            float angle = (float)numericUpDown1.Value;
-
-            // Rotate.
-            bitmap2 = RotateBitmap(bitmap1, angle);
-
-            // Display the result.
-            pictureBox1.Image = bitmap2;
-
-            // Size the form to fit.
-            SizeForm();
-        }
-
         // Return a bitmap rotated around its center.
         private Bitmap RotateBitmap(Bitmap bm, float angle)
         {
@@ -90,8 +74,7 @@ namespace vcs_RotatePicture1
 
             // Create the real rotation transformation.
             Matrix rotate_at_center = new Matrix();
-            rotate_at_center.RotateAt(angle,
-                new PointF(wid / 2f, hgt / 2f));
+            rotate_at_center.RotateAt(angle, new PointF(wid / 2f, hgt / 2f));
 
             // Draw the image onto the new bitmap rotated.
             using (Graphics gr = Graphics.FromImage(result))
@@ -139,47 +122,24 @@ namespace vcs_RotatePicture1
         {
             int wid = pictureBox1.Right + pictureBox1.Left;
             int hgt = pictureBox1.Bottom + pictureBox1.Left;
-            this.ClientSize = new Size(
-                Math.Max(wid, this.ClientSize.Width),
-                Math.Max(hgt, this.ClientSize.Height));
+            this.ClientSize = new Size(Math.Max(wid, this.ClientSize.Width), Math.Max(hgt, this.ClientSize.Height));
         }
 
-
-        private void button2_Click(object sender, EventArgs e)
+        float angle = 0;
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            save_image_to_drive();
+            angle += 15;
+
+            numericUpDown1.Value = (decimal)(angle % 360);
+
+            // Rotate.
+            bitmap2 = RotateBitmap(bitmap1, angle);
+
+            // Display the result.
+            pictureBox1.Image = bitmap2;
+
+            // Size the form to fit.
+            SizeForm();
         }
-
-        void save_image_to_drive()
-        {
-            if (bitmap2 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                string filename1 = filename + ".jpg";
-                string filename2 = filename + ".bmp";
-                string filename3 = filename + ".png";
-
-                try
-                {
-                    bitmap2.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap2.Save(@filename2, ImageFormat.Bmp);
-                    bitmap2.Save(@filename3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
-
-
     }
 }

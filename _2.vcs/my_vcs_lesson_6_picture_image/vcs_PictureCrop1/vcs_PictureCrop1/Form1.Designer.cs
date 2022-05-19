@@ -46,6 +46,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.groupBox_selection = new System.Windows.Forms.GroupBox();
+            this.lb_x_st = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.lb_h = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.lb_y_st = new System.Windows.Forms.Label();
+            this.lb_w = new System.Windows.Forms.Label();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -54,6 +63,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.groupBox_selection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox2
@@ -266,11 +280,105 @@
             this.pictureBox3.TabIndex = 10;
             this.pictureBox3.TabStop = false;
             // 
+            // groupBox_selection
+            // 
+            this.groupBox_selection.Controls.Add(this.lb_x_st);
+            this.groupBox_selection.Controls.Add(this.numericUpDown1);
+            this.groupBox_selection.Controls.Add(this.lb_h);
+            this.groupBox_selection.Controls.Add(this.numericUpDown2);
+            this.groupBox_selection.Controls.Add(this.numericUpDown3);
+            this.groupBox_selection.Controls.Add(this.lb_y_st);
+            this.groupBox_selection.Controls.Add(this.lb_w);
+            this.groupBox_selection.Controls.Add(this.numericUpDown4);
+            this.groupBox_selection.Location = new System.Drawing.Point(318, 483);
+            this.groupBox_selection.Name = "groupBox_selection";
+            this.groupBox_selection.Size = new System.Drawing.Size(230, 192);
+            this.groupBox_selection.TabIndex = 15;
+            this.groupBox_selection.TabStop = false;
+            this.groupBox_selection.Text = "選取區域";
+            // 
+            // lb_x_st
+            // 
+            this.lb_x_st.AutoSize = true;
+            this.lb_x_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_x_st.Location = new System.Drawing.Point(47, 18);
+            this.lb_x_st.Name = "lb_x_st";
+            this.lb_x_st.Size = new System.Drawing.Size(47, 24);
+            this.lb_x_st.TabIndex = 6;
+            this.lb_x_st.Text = "x_st";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.numericUpDown1.Location = new System.Drawing.Point(97, 16);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(89, 36);
+            this.numericUpDown1.TabIndex = 5;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_h
+            // 
+            this.lb_h.AutoSize = true;
+            this.lb_h.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_h.Location = new System.Drawing.Point(59, 144);
+            this.lb_h.Name = "lb_h";
+            this.lb_h.Size = new System.Drawing.Size(21, 24);
+            this.lb_h.TabIndex = 12;
+            this.lb_h.Text = "h";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.numericUpDown2.Location = new System.Drawing.Point(97, 58);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(89, 36);
+            this.numericUpDown2.TabIndex = 7;
+            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.numericUpDown3.Location = new System.Drawing.Point(97, 142);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(89, 36);
+            this.numericUpDown3.TabIndex = 11;
+            this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_y_st
+            // 
+            this.lb_y_st.AutoSize = true;
+            this.lb_y_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_y_st.Location = new System.Drawing.Point(47, 60);
+            this.lb_y_st.Name = "lb_y_st";
+            this.lb_y_st.Size = new System.Drawing.Size(47, 24);
+            this.lb_y_st.TabIndex = 8;
+            this.lb_y_st.Text = "y_st";
+            // 
+            // lb_w
+            // 
+            this.lb_w.AutoSize = true;
+            this.lb_w.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_w.Location = new System.Drawing.Point(59, 102);
+            this.lb_w.Name = "lb_w";
+            this.lb_w.Size = new System.Drawing.Size(26, 24);
+            this.lb_w.TabIndex = 10;
+            this.lb_w.Text = "w";
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.numericUpDown4.Location = new System.Drawing.Point(97, 100);
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(89, 36);
+            this.numericUpDown4.TabIndex = 9;
+            this.numericUpDown4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1359, 698);
+            this.Controls.Add(this.groupBox_selection);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
@@ -296,6 +404,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.groupBox_selection.ResumeLayout(false);
+            this.groupBox_selection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,6 +435,15 @@
         private System.Windows.Forms.NumericUpDown nud_h;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.GroupBox groupBox_selection;
+        private System.Windows.Forms.Label lb_x_st;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label lb_h;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.Label lb_y_st;
+        private System.Windows.Forms.Label lb_w;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
     }
 }
 

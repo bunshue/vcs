@@ -19,21 +19,21 @@ namespace vcs_ImageProcessing5
         // Display the initial image.
         private void Form1_Load(object sender, EventArgs e)
         {
-            picVisible.Image = picHidden.Image.Clone() as Image;
+            pictureBox2.Image = pictureBox1.Image.Clone() as Image;
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         // Display the original image.
         private void btnReset_Click(object sender, EventArgs e)
         {
-            picVisible.Image = picHidden.Image.Clone() as Image;
-            lblElapsed.Text = "";
+            pictureBox2.Image = pictureBox1.Image.Clone() as Image;
+            lb_elapsed.Text = "";
         }
 
         // Apply a filter.
         private void ApplyFilter(Bitmap32.Filter filter)
         {
-            Bitmap bm = new Bitmap(picVisible.Image);
+            Bitmap bm = new Bitmap(pictureBox2.Image);
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
@@ -44,13 +44,13 @@ namespace vcs_ImageProcessing5
             Bitmap32 new_bm32 = bm32.ApplyFilter(filter, false);
 
             // Display the result.
-            picVisible.Image = new_bm32.Bitmap;
+            pictureBox2.Image = new_bm32.Bitmap;
 
             DateTime stop_time = DateTime.Now;
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Apply an embossing filter.
@@ -110,7 +110,7 @@ namespace vcs_ImageProcessing5
         // Average the colors.
         private void btnAverage_Click(object sender, EventArgs e)
         {
-            Bitmap bm = new Bitmap(picVisible.Image);
+            Bitmap bm = new Bitmap(pictureBox2.Image);
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
@@ -121,19 +121,19 @@ namespace vcs_ImageProcessing5
             bm32.Average();
 
             // Display the result.
-            picVisible.Image = bm;
+            pictureBox2.Image = bm;
 
             DateTime stop_time = DateTime.Now;
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Convert to grayscale.
         private void btnGrayscale_Click(object sender, EventArgs e)
         {
-            Bitmap bm = new Bitmap(picVisible.Image);
+            Bitmap bm = new Bitmap(pictureBox2.Image);
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
@@ -144,19 +144,19 @@ namespace vcs_ImageProcessing5
             bm32.Grayscale();
 
             // Display the result.
-            picVisible.Image = bm;
+            pictureBox2.Image = bm;
 
             DateTime stop_time = DateTime.Now;
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Convert to a red scale.
         private void btnRed_Click(object sender, EventArgs e)
         {
-            Bitmap bm = new Bitmap(picVisible.Image);
+            Bitmap bm = new Bitmap(pictureBox2.Image);
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
@@ -168,19 +168,19 @@ namespace vcs_ImageProcessing5
             bm32.ClearBlue();
 
             // Display the result.
-            picVisible.Image = bm;
+            pictureBox2.Image = bm;
 
             DateTime stop_time = DateTime.Now;
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Convert to a green scale.
         private void btnGreen_Click(object sender, EventArgs e)
         {
-            Bitmap bm = new Bitmap(picVisible.Image);
+            Bitmap bm = new Bitmap(pictureBox2.Image);
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
@@ -192,19 +192,19 @@ namespace vcs_ImageProcessing5
             bm32.ClearBlue();
 
             // Display the result.
-            picVisible.Image = bm;
+            pictureBox2.Image = bm;
 
             DateTime stop_time = DateTime.Now;
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Convert to a blue scale.
         private void btnBlue_Click(object sender, EventArgs e)
         {
-            Bitmap bm = new Bitmap(picVisible.Image);
+            Bitmap bm = new Bitmap(pictureBox2.Image);
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
@@ -216,19 +216,19 @@ namespace vcs_ImageProcessing5
             bm32.ClearGreen();
 
             // Display the result.
-            picVisible.Image = bm;
+            pictureBox2.Image = bm;
 
             DateTime stop_time = DateTime.Now;
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Invert the image.
         private void btnInvert_Click(object sender, EventArgs e)
         {
-            Bitmap bm = new Bitmap(picVisible.Image);
+            Bitmap bm = new Bitmap(pictureBox2.Image);
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
@@ -239,18 +239,18 @@ namespace vcs_ImageProcessing5
             bm32.Invert();
 
             // Display the result.
-            picVisible.Image = bm;
+            pictureBox2.Image = bm;
 
             DateTime stop_time = DateTime.Now;
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         private void DisplayWarpedImage(Bitmap32.WarpOperations warp_op)
         {
-            Bitmap bm = new Bitmap(picVisible.Image);
+            Bitmap bm = new Bitmap(pictureBox2.Image);
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
@@ -261,13 +261,13 @@ namespace vcs_ImageProcessing5
             Bitmap32 new_bm32 = bm32.Warp(warp_op, false);
 
             // Display the result.
-            picVisible.Image = new_bm32.Bitmap;
+            pictureBox2.Image = new_bm32.Bitmap;
 
             DateTime stop_time = DateTime.Now;
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
         private void btnFishEye_Click(object sender, EventArgs e)
         {

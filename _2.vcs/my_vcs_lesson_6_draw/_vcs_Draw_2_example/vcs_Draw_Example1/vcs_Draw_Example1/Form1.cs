@@ -8570,63 +8570,100 @@ namespace vcs_Draw_Example1
 
         private void bt_long0_Click(object sender, EventArgs e)
         {
-            //百葉窗效果
+            //水平百葉窗效果
 
             string filename = @"C:\______test_files\picture1.jpg";
             try
             {
                 Bitmap bitmap1 = new Bitmap(filename);
-                int W = bitmap1.Width;
-                int H = bitmap1.Height / 20;
-                Graphics g = this.CreateGraphics();
-                g.Clear(Color.WhiteSmoke);
-                Point[] myPoint = new Point[30];
-                for (int i = 0; i < 30; i++)
+                int W = bitmap1.Width;							//记录图片的宽度
+                int H = bitmap1.Height / 20;					//记录图片的指定高度
+                //Graphics g = this.CreateGraphics();				//创建窗体的Graphics类
+                //g.Clear(Color.WhiteSmoke);						//用指定的颜色清除窗体背景
+                Point[] myPoint = new Point[20];				//定义数组
+                for (int i = 0; i < 20; i++)					//记录百叶窗各节点的位置
                 {
                     myPoint[i].X = 0;
                     myPoint[i].Y = i * H;
                 }
-                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);	//实例化Bitmap类
+                //通过调用Bitmap对象的SetPixel方法重新设置图像的像素点颜色，从而实现百叶窗效果
                 for (int m = 0; m < H; m++)
                 {
                     for (int n = 0; n < 20; n++)
                     {
                         for (int j = 0; j < W; j++)
                         {
-                            bitmap2.SetPixel(myPoint[n].X + j, myPoint[n].Y + m, bitmap1.GetPixel(myPoint[n].X + j, myPoint[n].Y + m));
+                            bitmap2.SetPixel(myPoint[n].X + j, myPoint[n].Y + m, bitmap1.GetPixel(myPoint[n].X + j, myPoint[n].Y + m));//获取当前象素颜色值
+                        }
+                    }
+                    this.pictureBox1.Refresh();                 //绘制无效
+                    this.pictureBox1.Image = bitmap2;           //显示百叶窗体的效果
+                    Thread.Sleep(100);         //线程挂起
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "信息提示");
+            }
+        }
+
+
+        /*
+        八.百葉窗效果
+
+        原理:(1).垂直百葉窗效果:
+
+        根據窗口或圖像的高度或寬度和定制的百葉窗顯示條寬度計算百葉窗顯示的條數量；
+
+        根據窗口或圖像的高度或寬度定制百葉窗顯示條數量計算百窗顯示的條寬度.
+
+        (2).水平百葉窗效果: 原理同上,只是繪制像素點開始的坐標不同.
+        */
+        private void bt_long1_Click(object sender, EventArgs e)
+        {
+            //垂直百葉窗效果
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            //垂直百葉窗顯示圖像
+            try
+            {
+                Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+                Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+                int W = bitmap1.Width;
+                int H = bitmap1.Height;
+                //Bitmap bitmap2 = new Bitmap(W, H);
+
+                //bitmap2 = bitmap1.Clone();
+                int dw = bitmap2.Width / 30;
+                int dh = bitmap2.Height;
+                Graphics g = this.pictureBox1.CreateGraphics();
+                g.Clear(Color.Gray);
+                Point[] MyPoint = new Point[30];
+                for (int x = 0; x < 30; x++)
+                {
+                    MyPoint[x].Y = 0;
+                    MyPoint[x].X = x * dw;
+                }
+                Bitmap bitmap = new Bitmap(bitmap2.Width, bitmap2.Height);
+                for (int i = 0; i < dw; i++)
+                {
+                    for (int j = 0; j < 30; j++)
+                    {
+                        for (int k = 0; k < dh; k++)
+                        {
+                            bitmap.SetPixel(MyPoint[j].X + i, MyPoint[j].Y + k,
+                            bitmap2.GetPixel(MyPoint[j].X + i, MyPoint[j].Y + k));
                         }
                     }
                     this.pictureBox1.Refresh();
-                    this.pictureBox1.Image = bitmap2;
-                    Thread.Sleep(100);
+                    this.pictureBox1.Image = bitmap;
+                    System.Threading.Thread.Sleep(100);
                 }
             }
-            catch { }
-        }
-
-        private void bt_long1_Click(object sender, EventArgs e)
-        {
-            //任意角度旋轉圖片
-            string filename = @"C:\______test_files\picture1.jpg";
-            CircumgyrateEffect(filename.Trim(), pictureBox1);//呼叫自定義方法
-        }
-
-        public void CircumgyrateEffect(string Str, PictureBox pictureBox1)
-        {
-            Bitmap tem_Bitmap = new Bitmap(Str);//透過字串實例化Bitmap類
-            Bitmap Var_Bitmap = new Bitmap(tem_Bitmap, pictureBox1.Width, pictureBox1.Height);//透過panel按件的大小實例化Bitmap類
-
-            Graphics g = pictureBox1.CreateGraphics();//實例化panel控制元件的Graphics類
-            float Var_Angle = 0;//設定圖片的旋轉角度
-            while (Var_Angle <= 360)//使圖片旋轉360度
+            catch (Exception ex)
             {
-                TextureBrush Var_Brush = new TextureBrush(Var_Bitmap);//實例化TextureBrush類
-                pictureBox1.Refresh();//使工作區無效
-                Var_Brush.RotateTransform(Var_Angle);//以指定角度旋轉圖片
-                //繪製旋轉後的圖片
-                g.FillRectangle(Var_Brush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
-                Var_Angle += 2f;//增加旋轉的角度
-                Thread.Sleep(30);//掛掉目前線程
+                MessageBox.Show(ex.Message, "信息提示");
             }
         }
 
@@ -8844,7 +8881,28 @@ namespace vcs_Draw_Example1
 
         private void bt_long8_Click(object sender, EventArgs e)
         {
+            //任意角度旋轉圖片
+            string filename = @"C:\______test_files\picture1.jpg";
+            CircumgyrateEffect(filename.Trim(), pictureBox1);//呼叫自定義方法
+        }
 
+        public void CircumgyrateEffect(string Str, PictureBox pictureBox1)
+        {
+            Bitmap tem_Bitmap = new Bitmap(Str);//透過字串實例化Bitmap類
+            Bitmap Var_Bitmap = new Bitmap(tem_Bitmap, pictureBox1.Width, pictureBox1.Height);//透過panel按件的大小實例化Bitmap類
+
+            Graphics g = pictureBox1.CreateGraphics();//實例化panel控制元件的Graphics類
+            float Var_Angle = 0;//設定圖片的旋轉角度
+            while (Var_Angle <= 360)//使圖片旋轉360度
+            {
+                TextureBrush Var_Brush = new TextureBrush(Var_Bitmap);//實例化TextureBrush類
+                pictureBox1.Refresh();//使工作區無效
+                Var_Brush.RotateTransform(Var_Angle);//以指定角度旋轉圖片
+                //繪製旋轉後的圖片
+                g.FillRectangle(Var_Brush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
+                Var_Angle += 2f;//增加旋轉的角度
+                Thread.Sleep(30);//掛掉目前線程
+            }
         }
 
         private void bt_long9_Click(object sender, EventArgs e)

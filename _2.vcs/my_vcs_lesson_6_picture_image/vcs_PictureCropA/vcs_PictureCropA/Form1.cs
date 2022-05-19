@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
 
-namespace vcs_PictureCrop
+namespace vcs_PictureCropA
 {
     public partial class Form1 : Form
     {

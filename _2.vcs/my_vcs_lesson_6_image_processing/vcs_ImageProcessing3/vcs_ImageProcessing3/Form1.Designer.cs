@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnReset = new System.Windows.Forms.Button();
-            this.lblElapsed = new System.Windows.Forms.Label();
+            this.lb_elapsed = new System.Windows.Forms.Label();
             this.btnEmboss1 = new System.Windows.Forms.Button();
             this.btnBlur1 = new System.Windows.Forms.Button();
             this.btnBlur2 = new System.Windows.Forms.Button();
@@ -79,13 +79,14 @@
             this.btnReset.Text = "Reset";
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
-            // lblElapsed
+            // lb_elapsed
             // 
-            this.lblElapsed.AutoSize = true;
-            this.lblElapsed.Location = new System.Drawing.Point(12, 574);
-            this.lblElapsed.Name = "lblElapsed";
-            this.lblElapsed.Size = new System.Drawing.Size(0, 12);
-            this.lblElapsed.TabIndex = 7;
+            this.lb_elapsed.AutoSize = true;
+            this.lb_elapsed.Location = new System.Drawing.Point(12, 574);
+            this.lb_elapsed.Name = "lb_elapsed";
+            this.lb_elapsed.Size = new System.Drawing.Size(53, 12);
+            this.lb_elapsed.TabIndex = 7;
+            this.lb_elapsed.Text = "處理時間";
             // 
             // btnEmboss1
             // 
@@ -305,14 +306,14 @@
             this.toolStripMenuItem1,
             this.mnuFileExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // mnuFileOpen
             // 
             this.mnuFileOpen.Name = "mnuFileOpen";
             this.mnuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuFileOpen.Size = new System.Drawing.Size(172, 22);
+            this.mnuFileOpen.Size = new System.Drawing.Size(169, 22);
             this.mnuFileOpen.Text = "&Open...";
             this.mnuFileOpen.Click += new System.EventHandler(this.mnuFileOpen_Click);
             // 
@@ -320,19 +321,19 @@
             // 
             this.mnuFileSaveAs.Name = "mnuFileSaveAs";
             this.mnuFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.mnuFileSaveAs.Size = new System.Drawing.Size(172, 22);
+            this.mnuFileSaveAs.Size = new System.Drawing.Size(169, 22);
             this.mnuFileSaveAs.Text = "Save &As...";
             this.mnuFileSaveAs.Click += new System.EventHandler(this.mnuFileSaveAs_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(169, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(166, 6);
             // 
             // mnuFileExit
             // 
             this.mnuFileExit.Name = "mnuFileExit";
-            this.mnuFileExit.Size = new System.Drawing.Size(172, 22);
+            this.mnuFileExit.Size = new System.Drawing.Size(169, 22);
             this.mnuFileExit.Text = "E&xit";
             this.mnuFileExit.Click += new System.EventHandler(this.mnuFileExit_Click);
             // 
@@ -383,7 +384,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1057, 589);
+            this.ClientSize = new System.Drawing.Size(1057, 655);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnEmboss3);
@@ -408,7 +409,7 @@
             this.Controls.Add(this.btnBlur2);
             this.Controls.Add(this.btnBlur1);
             this.Controls.Add(this.btnEmboss1);
-            this.Controls.Add(this.lblElapsed);
+            this.Controls.Add(this.lb_elapsed);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
@@ -431,7 +432,7 @@
         internal System.Windows.Forms.PictureBox pictureBox1;
         internal System.Windows.Forms.Button btnReset;
         internal System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label lblElapsed;
+        private System.Windows.Forms.Label lb_elapsed;
         internal System.Windows.Forms.Button btnEmboss1;
         internal System.Windows.Forms.Button btnBlur1;
         internal System.Windows.Forms.Button btnBlur2;

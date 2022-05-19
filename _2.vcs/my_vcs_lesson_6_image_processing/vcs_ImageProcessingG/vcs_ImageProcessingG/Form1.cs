@@ -70,8 +70,6 @@ namespace vcs_ImageProcessingG
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
-            image_processing8a(filename);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -88,8 +86,6 @@ namespace vcs_ImageProcessingG
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
-            image_processing8b(filename);
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -408,108 +404,6 @@ namespace vcs_ImageProcessingG
                 g.DrawImage(bitmap2, new Rectangle(0, 0, W, H));
             }
             return bitmap2;
-        }
-
-        /*
-        八.百葉窗效果
-
-        原理:(1).垂直百葉窗效果:
-
-        根據窗口或圖像的高度或寬度和定制的百葉窗顯示條寬度計算百葉窗顯示的條數量；
-
-        根據窗口或圖像的高度或寬度定制百葉窗顯示條數量計算百窗顯示的條寬度.
-
-        (2).水平百葉窗效果: 原理同上,只是繪制像素點開始的坐標不同.
-        */
-
-        //垂直百葉窗
-        private void image_processing8a(string filename)
-        {
-            //垂直百葉窗顯示圖像
-            try
-            {
-                Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-                Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-                int W = bitmap1.Width;
-                int H = bitmap1.Height;
-                //Bitmap bitmap2 = new Bitmap(W, H);
-
-                //bitmap2 = bitmap1.Clone();
-                int dw = bitmap2.Width / 30;
-                int dh = bitmap2.Height;
-                Graphics g = this.pictureBox1.CreateGraphics();
-                g.Clear(Color.Gray);
-                Point[] MyPoint = new Point[30];
-                for (int x = 0; x < 30; x++)
-                {
-                    MyPoint[x].Y = 0;
-                    MyPoint[x].X = x * dw;
-                }
-                Bitmap bitmap = new Bitmap(bitmap2.Width, bitmap2.Height);
-                for (int i = 0; i < dw; i++)
-                {
-                    for (int j = 0; j < 30; j++)
-                    {
-                        for (int k = 0; k < dh; k++)
-                        {
-                            bitmap.SetPixel(MyPoint[j].X + i, MyPoint[j].Y + k,
-                            bitmap2.GetPixel(MyPoint[j].X + i, MyPoint[j].Y + k));
-                        }
-                    }
-                    this.pictureBox1.Refresh();
-                    this.pictureBox1.Image = bitmap;
-                    System.Threading.Thread.Sleep(100);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "信息提示");
-            }
-        }
-
-        //水平百葉窗
-        private void image_processing8b(string filename)
-        {
-            //水平百葉窗顯示圖像
-            try
-            {
-                Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-                Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-                int W = bitmap1.Width;
-                int H = bitmap1.Height;
-                //Bitmap bitmap2 = new Bitmap(W, H);
-
-                //bitmap2 = bitmap1.Clone();
-
-                int dh = bitmap2.Height / 20;
-                int dw = bitmap2.Width;
-                Graphics g = this.pictureBox1.CreateGraphics();
-                g.Clear(Color.Gray);
-                Point[] MyPoint = new Point[20];
-                for (int y = 0; y < 20; y++)
-                {
-                    MyPoint[y].X = 0;
-                    MyPoint[y].Y = y * dh;
-                }
-                Bitmap bitmap = new Bitmap(bitmap2.Width, bitmap2.Height);
-                for (int i = 0; i < dh; i++)
-                {
-                    for (int j = 0; j < 20; j++)
-                    {
-                        for (int k = 0; k < dw; k++)
-                        {
-                            bitmap.SetPixel(MyPoint[j].X + k, MyPoint[j].Y + i, bitmap2.GetPixel(MyPoint[j].X + k, MyPoint[j].Y + i));
-                        }
-                    }
-                    this.pictureBox1.Refresh();
-                    this.pictureBox1.Image = bitmap;
-                    System.Threading.Thread.Sleep(100);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "信息提示");
-            }
         }
 
         /*

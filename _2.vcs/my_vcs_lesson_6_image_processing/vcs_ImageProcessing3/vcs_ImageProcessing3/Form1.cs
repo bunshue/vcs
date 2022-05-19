@@ -24,13 +24,14 @@ namespace vcs_ImageProcessing3
         {
             pictureBox2.Image = pictureBox1.Image.Clone() as Image;
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            //lblElapsed.Location = new Point(12, 520);
         }
 
         // Display the original image.
         private void btnReset_Click(object sender, EventArgs e)
         {
             pictureBox2.Image = pictureBox1.Image.Clone() as Image;
-            lblElapsed.Text = "";
+            lb_elapsed.Text = "";
         }
 
         // Apply a filter.
@@ -53,7 +54,7 @@ namespace vcs_ImageProcessing3
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Apply an embossing filter.
@@ -136,7 +137,7 @@ namespace vcs_ImageProcessing3
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Convert to grayscale.
@@ -159,7 +160,7 @@ namespace vcs_ImageProcessing3
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Convert to a red scale.
@@ -183,7 +184,7 @@ namespace vcs_ImageProcessing3
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Convert to a green scale.
@@ -207,7 +208,7 @@ namespace vcs_ImageProcessing3
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Convert to a blue scale.
@@ -231,7 +232,7 @@ namespace vcs_ImageProcessing3
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Invert the image.
@@ -254,7 +255,7 @@ namespace vcs_ImageProcessing3
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Pick the maximum brightness for pixels in areas.
@@ -277,7 +278,7 @@ namespace vcs_ImageProcessing3
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Pick the minimum brightness for pixels in areas.
@@ -300,7 +301,7 @@ namespace vcs_ImageProcessing3
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         // Pixellate the image.
@@ -323,7 +324,7 @@ namespace vcs_ImageProcessing3
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
         private void mnuFileOpen_Click(object sender, EventArgs e)
@@ -332,7 +333,7 @@ namespace vcs_ImageProcessing3
             {
                 pictureBox1.Image = new Bitmap(ofdImage.FileName);
                 pictureBox2.Image = pictureBox1.Image.Clone() as Image;
-                lblElapsed.Text = "";
+                lb_elapsed.Text = "";
             }
         }
 
@@ -405,7 +406,7 @@ namespace vcs_ImageProcessing3
             this.Cursor = Cursors.Default;
 
             TimeSpan elapsed_time = stop_time - start_time;
-            lblElapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+            lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
     }
 }
