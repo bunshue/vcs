@@ -232,7 +232,15 @@ namespace vcs_Remove_Bin_Obj
                     {
                         continue;
                     }
-                    else if (folder_name[i].Contains("_Map"))
+                    else if (folder_name[i].Contains("GMap.NET.Core"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("GMap.NET.WindowsForms"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("GMapDrawTools"))
                     {
                         continue;
                     }
@@ -241,7 +249,15 @@ namespace vcs_Remove_Bin_Obj
                 if (folder_name[i].Contains("obj"))
                 {
                     //需要跳過的資料夾
-                    if (folder_name[i].Contains("_Map"))
+                    if (folder_name[i].Contains("GMap.NET.Core"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("GMap.NET.WindowsForms"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("GMapDrawTools"))
                     {
                         continue;
                     }
