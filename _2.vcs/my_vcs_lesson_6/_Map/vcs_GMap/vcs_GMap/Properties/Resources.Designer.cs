@@ -13,7 +13,7 @@ namespace vcs_GMap.Properties {
     
     
     /// <summary>
-    ///   用於查詢當地語系化字串等的強型別資源類別。
+    ///   用於查詢當地語系化字串等的強類型資源類別。
     /// </summary>
     // 這個類別是自動產生的，是利用 StronglyTypedResourceBuilder
     // 類別透過 ResGen 或 Visual Studio 這類工具。
@@ -48,7 +48,7 @@ namespace vcs_GMap.Properties {
         
         /// <summary>
         ///   覆寫目前執行緒的 CurrentUICulture 屬性，對象是所有
-        ///   使用這個強型別資源類別的資源查閱。
+        ///   使用這個強類型資源類別的資源查閱。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture {
@@ -57,16 +57,6 @@ namespace vcs_GMap.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   查詢型別 System.Byte[] 的當地語系化資源。
-        /// </summary>
-        internal static byte[] ChinaBoundary {
-            get {
-                object obj = ResourceManager.GetObject("ChinaBoundary", resourceCulture);
-                return ((byte[])(obj));
             }
         }
     }

@@ -25,6 +25,7 @@ using GMap.NET.WindowsForms.Markers;
 using GMapDrawTools;
 using GMapChinaRegion;
 using GMapDownload;
+using GMapTools;
 
 //需要GMap.NET.Core.dll 和 GMap.NET.WindowsForms.dll這兩個檔案。
 
@@ -68,7 +69,7 @@ namespace vcs_GMap
         private GMapAreaPolygon currentAreaPolygon;
 
         private Draw draw;
-        //private DrawDistance drawDistance;  // Draw distane tool
+        private DrawDistance drawDistance;  // Draw distane tool
 
         public Form1()
         {
@@ -86,6 +87,9 @@ namespace vcs_GMap
 
             draw = new Draw(this.gMapControl1);
             draw.DrawComplete += new EventHandler<DrawEventArgs>(draw_DrawComplete);
+
+            drawDistance = new DrawDistance(this.gMapControl1);
+            drawDistance.DrawComplete += new EventHandler<DrawDistanceEventArgs>(drawDistance_DrawComplete);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -427,7 +431,7 @@ namespace vcs_GMap
             bt_draw5.Location = new Point(x_st + 70 + 0, y_st - 10 + dy * 4);
             bt_draw1.Enabled = false;
             bt_draw2.Enabled = false;
-            bt_draw5.Enabled = false;
+            //bt_draw5.Enabled = false;
 
             x_st = 20;
             y_st = 20;
@@ -2994,8 +2998,12 @@ namespace vcs_GMap
             Country china;
             try
             {
-                //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City;
-                byte[] buffer = Properties.Resources.ChinaBoundary;
+                string filename_json = @"C:\______test_files\_json\ChinaBoundary";
+                byte[] buffer = File.ReadAllBytes(filename_json);
+
+                //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City; //另種讀取資料的方式
+                //byte[] buffer = Properties.Resources.ChinaBoundary;               //另種讀取資料的方式
+
                 china = ChinaMapRegion.GetChinaRegionFromJsonBinaryBytes(buffer);
 
                 if (china != null)
@@ -3153,10 +3161,13 @@ namespace vcs_GMap
 
             try
             {
-                //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City;
-                byte[] buffer = Properties.Resources.ChinaBoundary;
-                china = ChinaMapRegion.GetChinaRegionFromJsonBinaryBytes(buffer);
+                string filename_json = @"C:\______test_files\_json\ChinaBoundary";
+                byte[] buffer = File.ReadAllBytes(filename_json);
+            
+                //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City; //另種讀取資料的方式
+                //byte[] buffer = Properties.Resources.ChinaBoundary;               //另種讀取資料的方式
 
+                china = ChinaMapRegion.GetChinaRegionFromJsonBinaryBytes(buffer);
 
                 if (china == null)
                 {
@@ -3630,7 +3641,7 @@ namespace vcs_GMap
         private void bt_draw5_Click(object sender, EventArgs e)
         {
             //測距
-            //drawDistance.IsEnable = true;
+            drawDistance.IsEnable = true;
         }
 
         void show_locations(string[,] location)
@@ -3732,6 +3743,26 @@ namespace vcs_GMap
                 draw.IsEnable = false;
             }
         }
+
+        void drawDistance_DrawComplete(object sender, DrawDistanceEventArgs e)
+        {
+            if (e != null)
+            {
+                GMapOverlay distanceOverlay = new GMapOverlay();
+                this.gMapControl1.Overlays.Add(distanceOverlay);
+                foreach (LineMarker line in e.LineMarkers)
+                {
+                    distanceOverlay.Markers.Add(line);
+                }
+                foreach (DrawDistanceMarker marker in e.DistanceMarkers)
+                {
+                    distanceOverlay.Markers.Add(marker);
+                }
+                distanceOverlay.Markers.Add(e.DistanceDeleteMarker);
+            }
+            drawDistance.IsEnable = false;
+        }
+
     }
 
     public class Piecearea

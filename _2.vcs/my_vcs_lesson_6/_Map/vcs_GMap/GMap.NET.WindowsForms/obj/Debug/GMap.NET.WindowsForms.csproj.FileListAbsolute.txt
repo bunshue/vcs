@@ -8,3 +8,13 @@ C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMap.NET.Windows
 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMap.NET.WindowsForms\obj\Debug\GMap.NET.WindowsForms.csproj.GenerateResource.Cache
 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMap.NET.WindowsForms\obj\Debug\GMap.NET.WindowsForms.dll
 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master\GMap.NET.WindowsForms\obj\Debug\GMap.NET.WindowsForms.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMap.NET.WindowsForms\bin\Debug\GMap.NET.WindowsForms.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMap.NET.WindowsForms\bin\Debug\GMap.NET.WindowsForms.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMap.NET.WindowsForms\bin\Debug\GMap.NET.Core.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMap.NET.WindowsForms\bin\Debug\GMap.NET.Core.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMap.NET.WindowsForms\obj\Debug\GMap.NET.WindowsForms.csprojResolveAssemblyReference.cache
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMap.NET.WindowsForms\obj\Debug\GMap.NET.TilePrefetcher.resources
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMap.NET.WindowsForms\obj\Debug\System.Windows.Forms.Properties.Resources.resources
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMap.NET.WindowsForms\obj\Debug\GMap.NET.WindowsForms.csproj.GenerateResource.Cache
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMap.NET.WindowsForms\obj\Debug\GMap.NET.WindowsForms.dll
+C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\vcs_GMap\GMap.NET.WindowsForms\obj\Debug\GMap.NET.WindowsForms.pdb

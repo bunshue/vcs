@@ -63,7 +63,6 @@ namespace GMap.NET
       public bool UseMemoryCache = true;
 
       /// <summary>
-      /// primary cache provider, by default: ultra fast SQLite!
       /// </summary>
       public PureImageCache PrimaryCache
       {
@@ -222,16 +221,9 @@ namespace GMap.NET
 
 #if !PocketPC
       /// <summary>
-      /// triggers dynamic sqlite loading, 
-      /// call this before you use sqlite for other reasons than caching maps
       /// </summary>
       public void SQLitePing()
       {
-#if SQLite
-#if !MONO
-         SQLitePureImageCache.Ping();
-#endif
-#endif
       }
 #endif
 

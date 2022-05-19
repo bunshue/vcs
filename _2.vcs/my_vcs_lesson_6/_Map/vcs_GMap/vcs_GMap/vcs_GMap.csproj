@@ -97,12 +97,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Resources\ChinaBoundary" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GMapDrawTools\GMapDrawTools.csproj">
       <Project>{A846C026-69E9-4A27-A40C-6237E3D0BFB2}</Project>
       <Name>GMapDrawTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GMapTools\GMapTools.csproj">
+      <Project>{ED39E8DA-A8F3-4906-BA24-90D09D0AF7CD}</Project>
+      <Name>GMapTools</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
