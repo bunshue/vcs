@@ -87,6 +87,7 @@
             this.bt_find_empty_folders = new System.Windows.Forms.Button();
             this.bt_test2 = new System.Windows.Forms.Button();
             this.bt_save_file_data = new System.Windows.Forms.Button();
+            this.bt_clear3 = new System.Windows.Forms.Button();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
@@ -751,11 +752,23 @@
             this.bt_save_file_data.UseVisualStyleBackColor = true;
             this.bt_save_file_data.Click += new System.EventHandler(this.bt_save_file_data_Click);
             // 
+            // bt_clear3
+            // 
+            this.bt_clear3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear3.Location = new System.Drawing.Point(1577, 548);
+            this.bt_clear3.Name = "bt_clear3";
+            this.bt_clear3.Size = new System.Drawing.Size(63, 30);
+            this.bt_clear3.TabIndex = 57;
+            this.bt_clear3.Text = "清除";
+            this.bt_clear3.UseVisualStyleBackColor = true;
+            this.bt_clear3.Click += new System.EventHandler(this.bt_clear3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.bt_clear3);
             this.Controls.Add(this.bt_save_file_data);
             this.Controls.Add(this.bt_test2);
             this.Controls.Add(this.bt_find_empty_folders);
@@ -877,6 +890,7 @@
         private System.Windows.Forms.Button bt_find_empty_folders;
         private System.Windows.Forms.Button bt_test2;
         private System.Windows.Forms.Button bt_save_file_data;
+        private System.Windows.Forms.Button bt_clear3;
     }
 }
 

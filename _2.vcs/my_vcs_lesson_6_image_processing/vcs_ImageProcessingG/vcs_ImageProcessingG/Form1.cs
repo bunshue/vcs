@@ -608,6 +608,12 @@ namespace vcs_ImageProcessingG
             }
 
         }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //讀取圖檔
+            pictureBox1.Image = Image.FromFile(filename);
+        }
     }
 }
 

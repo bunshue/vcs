@@ -25,7 +25,7 @@ namespace vcs_Screensaver4
         string filename = @"C:\______test_files\picture1.jpg";
         //string filename = @"C:\______test_files\_material\ims1.bmp";
 
-        Label lb_mesg = new Label();
+        Label label1 = new Label();
         Timer timer1 = new Timer();
 
         public Form1()
@@ -76,12 +76,12 @@ namespace vcs_Screensaver4
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
 
-            lb_mesg.Location = new Point((this.Size.Width / 10), this.Size.Height / 5 * 4);
-            lb_mesg.AutoSize = true;
-            lb_mesg.Font = new Font("Arial", 36);
-            lb_mesg.BackColor = Color.Transparent;
-            lb_mesg.BringToFront();
-            this.Controls.Add(lb_mesg);
+            label1.Location = new Point((this.Size.Width / 10), this.Size.Height / 5 * 4);
+            label1.AutoSize = true;
+            label1.Font = new Font("Arial", 36);
+            label1.BackColor = Color.Transparent;
+            label1.BringToFront();
+            this.Controls.Add(label1);
 
             timer1.Interval = 10;
             timer1.Tick += new System.EventHandler(LableTimeText);
@@ -95,7 +95,7 @@ namespace vcs_Screensaver4
 
         private void LableTimeText(object sender, EventArgs e)
         {
-            lb_mesg.Text = DateTime.Now.ToString();
+            label1.Text = DateTime.Now.ToString();
         }
 
         private void Form1_Deactivate(object sender, EventArgs e)

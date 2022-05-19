@@ -241,6 +241,8 @@ namespace vcs_DrAP
 
             bt_setup.Location = new Point(this.ClientSize.Width - bt_setup.Width, 55);
 
+            bt_clear3.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear3.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear3.Size.Height);
+
             /*
             richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
             richTextBox2.Text += "Form1 W2 " + this.ClientSize.Width.ToString() + "\n";
@@ -3033,6 +3035,11 @@ namespace vcs_DrAP
         private void bt_save_file_data_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void bt_clear3_Click(object sender, EventArgs e)
+        {
+            listView1.Clear();
         }
     }
 }

@@ -232,6 +232,19 @@ namespace vcs_Remove_Bin_Obj
                     {
                         continue;
                     }
+                    else if (folder_name[i].Contains("_Map"))
+                    {
+                        continue;
+                    }
+                }
+
+                if (folder_name[i].Contains("obj"))
+                {
+                    //需要跳過的資料夾
+                    if (folder_name[i].Contains("_Map"))
+                    {
+                        continue;
+                    }
                 }
 
                 if (folder_name[i].Contains("tmptmptmptmp"))
