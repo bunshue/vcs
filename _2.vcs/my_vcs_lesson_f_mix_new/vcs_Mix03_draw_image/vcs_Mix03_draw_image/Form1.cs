@@ -19,8 +19,6 @@ namespace vcs_Mix03_draw_image
 {
     public partial class Form1 : Form
     {
-        DateTime start_time = DateTime.Now;
-
         public Form1()
         {
             InitializeComponent();
@@ -84,7 +82,6 @@ namespace vcs_Mix03_draw_image
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            pictureBox_time.Location = new Point(x_st + dx * 3, y_st + dy * 6);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7 + 25);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -448,53 +445,11 @@ namespace vcs_Mix03_draw_image
             {
                 MessageBox.Show(ex.Message, "信息提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-
-
-
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //依字體大小調整圖片大小
-            string show_word = "群曜醫電";
-            Bitmap newBitmap = null;
-            Graphics g = null;
-
-            try
-            {
-                Font fontCounter = new Font("Lucida Sans Unicode", 70);
-
-                // calculate size of the string.
-                newBitmap = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
-                g = Graphics.FromImage(newBitmap);
-                SizeF stringSize = g.MeasureString(show_word, fontCounter);
-                int nWidth = (int)stringSize.Width;
-                int nHeight = (int)stringSize.Height;
-                g.Dispose();
-                newBitmap.Dispose();
-
-                newBitmap = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppArgb);
-                g = Graphics.FromImage(newBitmap);
-                g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, nWidth, nHeight));
-
-                g.DrawString(show_word, fontCounter, new SolidBrush(Color.Black), 0, 0);
-
-                newBitmap.Save("test.png", ImageFormat.Png);
-                pictureBox1.Image = newBitmap;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            finally
-            {
-                if (null != g) g.Dispose();
-                //if (null != newBitmap) newBitmap.Dispose();
-            }
-
-
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -1029,32 +984,6 @@ namespace vcs_Mix03_draw_image
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            this.pictureBox_time.Invalidate();
-        }
-
-        private void pictureBox_time_Paint(object sender, PaintEventArgs e)
-        {
-            Font f = new Font("arial", 26f);
-
-            DateTime current_time = DateTime.Now;
-
-            TimeSpan use_time = current_time - start_time;
-
-            string text = "空心字體 " + DateTime.Now + "    " + use_time.ToString(@"hh\:mm\:ss");
-
-            for (var i = -1; i <= 1; ++i)
-            {
-                for (var j = -1; j <= 1; ++j)
-                {
-                    e.Graphics.DrawString(text, f, Brushes.Black, 2 + i, 2 + j);
-                }
-            }
-            e.Graphics.DrawString(text, f, Brushes.White, 2, 2);
         }
     }
 

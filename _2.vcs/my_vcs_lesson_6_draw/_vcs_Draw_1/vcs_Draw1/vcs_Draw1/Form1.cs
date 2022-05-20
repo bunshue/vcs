@@ -355,26 +355,33 @@ namespace vcs_Draw1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //顯示豎排文字
-
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
+            //繪圖圖形的Contains功能
             Graphics g = this.pictureBox1.CreateGraphics();
-            g.DrawString("顯示橫排", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
-            //設置旋轉中心點
-            g.TranslateTransform(W / 2, H / 2);
-            //設置旋轉角度
-            g.RotateTransform(90);
-            //畫文字
-            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
-            //平移
-            g.TranslateTransform(100, 100);
-            //畫文字
-            g.DrawString("平移後顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
-            //恢復為默認場景
-            g.ResetTransform();
+            g.DrawRectangle(Pens.Red, 100, 100, 150, 150);
+            Rectangle rec = new Rectangle(100, 100, 150, 150);
+            Point pt1 = new Point(180, 180);
+            Point pt2 = new Point(280, 280);
+            g.FillEllipse(Brushes.Green, pt1.X, pt1.Y, 20, 20);
+            g.FillEllipse(Brushes.Red, pt2.X, pt2.Y, 20, 20);
 
-            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
+            if (rec.Contains(pt1))
+            {
+                richTextBox1.Text += "pt1 在 rec 之內\n";
+            }
+            else
+            {
+                richTextBox1.Text += "pt1 在 rec 之外\n";
+            }
+
+            if (rec.Contains(pt2))
+            {
+                richTextBox1.Text += "pt2 在 rec 之內\n";
+            }
+            else
+            {
+                richTextBox1.Text += "pt2 在 rec 之外\n";
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1242,34 +1249,6 @@ namespace vcs_Draw1
 
         private void button25_Click(object sender, EventArgs e)
         {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            p = new Pen(Color.Red, 5);
-
-            g.DrawRectangle(p, 0 + p.Width / 2, 0 + p.Width / 2, bitmap1.Width - p.Width, bitmap1.Height - p.Width);
-
-            pictureBox1.Image = bitmap1;
-
-
-            richTextBox1.Text += "平移坐標軸至指定座標(100, 100) 然後畫一線\n";
-            g.TranslateTransform(100, 100);
-            g.DrawLine(p, 0, 0, 100, 0);
-            g.ResetTransform();
-
-            richTextBox1.Text += "平移坐標軸至指定座標(200, 200) 然後再進行旋轉座標畫線\n";
-            g.TranslateTransform(200, 200);
-            for (int i = 0; i < 8; i++)
-            {
-                //g.RotateTransform(45);
-                g.RotateTransform(10);//旋轉指定的角度
-                g.DrawLine(p, 0, 0, 100, 0);
-            }
-            g.Dispose();
         }
 
         private void button26_Click(object sender, EventArgs e)

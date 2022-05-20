@@ -1416,11 +1416,37 @@ namespace vcs_GMap
 
             update_controls_info();
 
-
             //畫方圓3公里
 
+            double longitude_new = longitude;
 
+            for (double dd = 0; dd < 0.04; dd += 0.002)
+            {
+                longitude_new = longitude + dd; //經度
+                double distance = getDistance(new PointLatLng(latitude, longitude), new PointLatLng(latitude, longitude_new));
+                //richTextBox1.Text += "方法一, 距離 : " + distance.ToString() + "\n";
+                if (distance > 3)
+                    break;
+            }
 
+            markersOverlay = new GMapOverlay("markersOverlay");
+
+            GMapDrawCircle Circle = null;
+            Pen stroke = new Pen(Color.Red, 5);
+            Brush fill = null;
+
+            //畫圓
+            //圓心
+            PointLatLng center = new PointLatLng(latitude, longitude);
+            PointLatLng edge = new PointLatLng(latitude, longitude_new);
+
+            //Circle = new GMapDrawCircle(center, edge);  //多載
+            Circle = new GMapDrawCircle(center, edge, stroke, fill);  //多載, 使用畫筆色
+            //                          圓心    圓邊
+            markersOverlay.Markers.Add(Circle);
+
+            gMapControl1.Overlays.Add(markersOverlay);
+            gMapControl1.Refresh();
         }
 
         private void button8_Click(object sender, EventArgs e)

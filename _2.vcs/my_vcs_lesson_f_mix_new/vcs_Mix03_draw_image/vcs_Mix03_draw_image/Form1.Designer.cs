@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.button29 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
@@ -62,10 +61,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_time = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_time)).BeginInit();
             this.SuspendLayout();
             // 
             // button29
@@ -201,7 +197,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 70);
             this.button14.TabIndex = 104;
-            this.button14.Text = "依字體大小調整圖片大小";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -412,28 +407,11 @@
             this.pictureBox1.TabIndex = 117;
             this.pictureBox1.TabStop = false;
             // 
-            // pictureBox_time
-            // 
-            this.pictureBox_time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox_time.Location = new System.Drawing.Point(547, 499);
-            this.pictureBox_time.Name = "pictureBox_time";
-            this.pictureBox_time.Size = new System.Drawing.Size(780, 104);
-            this.pictureBox_time.TabIndex = 118;
-            this.pictureBox_time.TabStop = false;
-            this.pictureBox_time.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_time_Paint);
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1343, 807);
-            this.Controls.Add(this.pictureBox_time);
+            this.ClientSize = new System.Drawing.Size(1343, 666);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
@@ -471,7 +449,6 @@
             this.Text = "無法分類之單項和 vcs_Mix03_draw image";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_time)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -511,8 +488,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox_time;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 

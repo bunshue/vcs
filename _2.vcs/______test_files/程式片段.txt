@@ -40,26 +40,6 @@ C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Map\MapDownloader-master2	不可用
 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\MapDownloader-master	不可用
 
 
-地址解析  逆解析
-
-
-        private void 搜索该点的地址ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PointLatLng p = this.gMapControl1.FromLocalToLatLng((int)leftClickPoint.X, (int)leftClickPoint.Y);
-            GeoCoderStatusCode statusCode;
-            //Placemark? place = SoSoMapProvider.Instance.GetPlacemark(p, out statusCode);
-            Placemark? place = AMapProvider.Instance.GetPlacemark(p, out statusCode);
-            if (place.HasValue)
-            {
-                GMapImageMarker placeMarker = new GMapImageMarker(p, Properties.Resources.MapMarker_Bubble_Azure, place.Value.Address);
-                this.routeOverlay.Markers.Add(placeMarker);
-            }
-        }
-
-
-
-
-
 
 
 
@@ -204,14 +184,6 @@ C:\______test_files\_exe\ffmpeg>
 
 
 
-
-gmap+
-
-方圓百里 畫圖
-
-戰役主要戰場 標示出來
-
-
 C# 播放 wav 或音樂檔方式
 
 在 C# 內播放 wav或音樂檔案方式，可使用下面範例實現
@@ -226,8 +198,7 @@ sp.Play(); // 撥放
 sp.Stop(); // 停止
 
  
-要做成的範例
-1. 正中簡中 互換 範例
+
 
 
 獲取遠端圖片 這樣可以節省抓取衛星雲圖的程式碼

@@ -20,6 +20,8 @@ namespace vcs_Draw6_String
         SolidBrush sb;
         Bitmap bitmap1;
 
+        DateTime start_time = DateTime.Now;
+
         public Form1()
         {
             InitializeComponent();
@@ -47,7 +49,7 @@ namespace vcs_Draw6_String
             x_st = 1100;
             y_st = 40;
             dx = 150;
-            dy = 50;
+            dy = 60;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -105,12 +107,15 @@ namespace vcs_Draw6_String
             pictureBox2.BackColor = Color.Red;
 
             x_st = 20;
-            y_st = 600;
+            y_st = 620;
 
             dx = 450;
             dy = 150;
             int W = 440;
             int H = 150;
+
+            pictureBox_time.Location = new Point(x_st + dx * 0, y_st - 70);
+            pictureBox_time.Size = new Size(700, 60);
 
             pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox3.BackColor = Color.Pink;
@@ -784,10 +789,68 @@ namespace vcs_Draw6_String
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //顯示豎排文字
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawString("顯示橫排", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
+            //設置旋轉中心點
+            g.TranslateTransform(W / 2, H / 2);
+            //設置旋轉角度
+            g.RotateTransform(90);
+            //畫文字
+            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
+            //平移
+            g.TranslateTransform(100, 100);
+            //畫文字
+            g.DrawString("平移後顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
+            //恢復為默認場景
+            g.ResetTransform();
+
+            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //依字體大小調整圖片大小
+
+            //依字體大小調整圖片大小
+            string show_word = "群曜醫電";
+            Bitmap newBitmap = null;
+            Graphics g = null;
+
+            try
+            {
+                Font fontCounter = new Font("Lucida Sans Unicode", 70);
+
+                // calculate size of the string.
+                newBitmap = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
+                g = Graphics.FromImage(newBitmap);
+                SizeF stringSize = g.MeasureString(show_word, fontCounter);
+                int nWidth = (int)stringSize.Width;
+                int nHeight = (int)stringSize.Height;
+                g.Dispose();
+                newBitmap.Dispose();
+
+                newBitmap = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppArgb);
+                g = Graphics.FromImage(newBitmap);
+                g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, nWidth, nHeight));
+
+                g.DrawString(show_word, fontCounter, new SolidBrush(Color.Black), 0, 0);
+
+                newBitmap.Save("test.png", ImageFormat.Png);
+                pictureBox1.Image = newBitmap;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                if (null != g) g.Dispose();
+                //if (null != newBitmap) newBitmap.Dispose();
+            }
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1213,6 +1276,31 @@ namespace vcs_Draw6_String
             e.Graphics.DrawString(Var_Str, Var_Font, Var_Brush_1, new PointF(0, 60));//繪製投影
             e.Graphics.ResetTransform();//變換矩陣重置為單位矩陣
             e.Graphics.DrawString(Var_Str, Var_Font, Var_Brush_2, new PointF(0, 60));//繪製文字
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox_time.Invalidate();
+        }
+
+        private void pictureBox_time_Paint(object sender, PaintEventArgs e)
+        {
+            Font f = new Font("arial", 26f);
+
+            DateTime current_time = DateTime.Now;
+
+            TimeSpan use_time = current_time - start_time;
+
+            string text = "空心字體 " + DateTime.Now + "    " + use_time.ToString(@"hh\:mm\:ss");
+
+            for (var i = -1; i <= 1; ++i)
+            {
+                for (var j = -1; j <= 1; ++j)
+                {
+                    e.Graphics.DrawString(text, f, Brushes.Black, 2 + i, 2 + j);
+                }
+            }
+            e.Graphics.DrawString(text, f, Brushes.White, 2, 2);
 
         }
     }

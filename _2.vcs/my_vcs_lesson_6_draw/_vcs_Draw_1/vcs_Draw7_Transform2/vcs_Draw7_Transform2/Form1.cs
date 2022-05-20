@@ -20,7 +20,62 @@ namespace vcs_Draw7_Transform2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
 
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 140+10;
+            dy = 50+10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            pictureBox1.Location = new Point(160, 10);
+            richTextBox1.Location = new Point(820, 10);
+
+
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //平移 旋轉 座標軸
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.White);
+            Pen p = new Pen(Color.Red, 5);
+            Rectangle rect = new Rectangle(0, 0, 200, 50);
+
+            richTextBox1.Text += "平移坐標軸至指定座標(100, 100) 然後畫一線\n";
+            g.TranslateTransform(100, 100);
+            g.DrawLine(p, 0, 0, 100, 0);
+            g.ResetTransform();
+
+            richTextBox1.Text += "平移坐標軸至指定座標(200, 200) 然後再進行旋轉座標畫線\n";
+            g.TranslateTransform(200, 200);
+            for (int i = 0; i < 8; i++)
+            {
+                //g.RotateTransform(45);
+                g.RotateTransform(10);//旋轉指定的角度
+                g.DrawLine(p, 0, 0, 100, 0);
+            }
+            g.Dispose();
         }
 
         //平移
@@ -135,6 +190,30 @@ namespace vcs_Draw7_Transform2
             int times = 100;
             double result = (mm * times / 25.4);
             return (int)Math.Floor(result);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
         }
 
 

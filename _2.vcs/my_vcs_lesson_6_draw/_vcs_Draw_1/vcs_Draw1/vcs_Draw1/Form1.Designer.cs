@@ -278,7 +278,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(120, 42);
             this.button0.TabIndex = 30;
-            this.button0.Text = "顯示豎排文字";
+            this.button0.Text = "繪圖圖形的Contains功能";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -421,7 +421,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(120, 42);
             this.button25.TabIndex = 41;
-            this.button25.Text = "平移坐標軸";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
