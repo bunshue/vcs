@@ -120,7 +120,6 @@
             this.toolStripStatusExport = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelMap = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.gMapControl1 = new MapDownloader.MapControl();
             this.contextMenuStripSelectedArea = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.下载地图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.下载KMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -153,15 +152,11 @@
             this.textBoxPOIkeyword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBoxAddress = new System.Windows.Forms.GroupBox();
-            this.buttonAddressSearch = new System.Windows.Forms.Button();
-            this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.gbMapImage = new System.Windows.Forms.GroupBox();
             this.buttonMapImage = new System.Windows.Forms.Button();
             this.textBoxImageZoom = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.gbMapDownloader = new System.Windows.Forms.GroupBox();
-            this.comboBoxStore = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.xPanderPanel2 = new BSE.Windows.Forms.XPanderPanel();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -173,6 +168,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.gMapControl1 = new MapDownloader.MapControl();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panelMap.SuspendLayout();
@@ -186,9 +182,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.poiDataBindingSource)).BeginInit();
             this.panelPOI.SuspendLayout();
-            this.groupBoxAddress.SuspendLayout();
             this.gbMapImage.SuspendLayout();
-            this.gbMapDownloader.SuspendLayout();
             this.xPanderPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -207,7 +201,7 @@
             this.下载设置ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(576, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(484, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -235,7 +229,7 @@
             this.卫星地图ToolStripMenuItem6,
             this.混合地图ToolStripMenuItem6});
             this.谷歌国外ToolStripMenuItem.Name = "谷歌国外ToolStripMenuItem";
-            this.谷歌国外ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.谷歌国外ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.谷歌国外ToolStripMenuItem.Text = "谷歌";
             // 
             // 普通地图ToolStripMenuItem6
@@ -267,7 +261,7 @@
             this.混合地图ToolStripMenuItem,
             this.地形图ToolStripMenuItem});
             this.谷歌ToolStripMenuItem.Name = "谷歌ToolStripMenuItem";
-            this.谷歌ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.谷歌ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.谷歌ToolStripMenuItem.Text = "谷歌（中国）";
             // 
             // 普通地图ToolStripMenuItem
@@ -305,7 +299,7 @@
             this.卫星地图ToolStripMenuItem1,
             this.混合地图ToolStripMenuItem1});
             this.百度ToolStripMenuItem.Name = "百度ToolStripMenuItem";
-            this.百度ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.百度ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.百度ToolStripMenuItem.Text = "百度";
             // 
             // 普通地图ToolStripMenuItem1
@@ -336,7 +330,7 @@
             this.卫星地图ToolStripMenuItem2,
             this.混合地图ToolStripMenuItem2});
             this.高德ToolStripMenuItem.Name = "高德ToolStripMenuItem";
-            this.高德ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.高德ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.高德ToolStripMenuItem.Text = "高德";
             // 
             // 普通地图ToolStripMenuItem2
@@ -368,7 +362,7 @@
             this.混合地图ToolStripMenuItem3,
             this.地形地图ToolStripMenuItem});
             this.腾讯ToolStripMenuItem.Name = "腾讯ToolStripMenuItem";
-            this.腾讯ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.腾讯ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.腾讯ToolStripMenuItem.Text = "腾讯";
             // 
             // 普通地图ToolStripMenuItem3
@@ -406,7 +400,7 @@
             this.卫星地图ToolStripMenuItem4,
             this.混合地图ToolStripMenuItem4});
             this.hereToolStripMenuItem.Name = "hereToolStripMenuItem";
-            this.hereToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hereToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.hereToolStripMenuItem.Text = "Here";
             // 
             // 普通地图ToolStripMenuItem4
@@ -438,7 +432,7 @@
             this.混合地图ToolStripMenuItem5,
             this.普通地图中文ToolStripMenuItem});
             this.必应ToolStripMenuItem.Name = "必应ToolStripMenuItem";
-            this.必应ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.必应ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.必应ToolStripMenuItem.Text = "必应";
             // 
             // 普通地图ToolStripMenuItem5
@@ -482,7 +476,7 @@
             this.福建卫星地图ToolStripMenuItem,
             this.福建混合地图ToolStripMenuItem});
             this.天地图ToolStripMenuItem.Name = "天地图ToolStripMenuItem";
-            this.天地图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.天地图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.天地图ToolStripMenuItem.Text = "天地图";
             // 
             // 街道地图球面墨卡托ToolStripMenuItem
@@ -558,7 +552,7 @@
             this.arcGIS街道地图暖色版ToolStripMenuItem,
             this.arcGIS卫星地图无偏移ToolStripMenuItem});
             this.arcGISToolStripMenuItem.Name = "arcGISToolStripMenuItem";
-            this.arcGISToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.arcGISToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.arcGISToolStripMenuItem.Text = "ArcGIS";
             // 
             // arcGIS街道地图ToolStripMenuItem
@@ -608,7 +602,7 @@
             this.船舶信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.船舶ToolStripMenuItem});
             this.船舶信息ToolStripMenuItem.Name = "船舶信息ToolStripMenuItem";
-            this.船舶信息ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.船舶信息ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.船舶信息ToolStripMenuItem.Text = "船舶信息";
             // 
             // 船舶ToolStripMenuItem
@@ -634,42 +628,42 @@
             // 矩形ToolStripMenuItem
             // 
             this.矩形ToolStripMenuItem.Name = "矩形ToolStripMenuItem";
-            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.矩形ToolStripMenuItem.Text = "矩形";
             this.矩形ToolStripMenuItem.Click += new System.EventHandler(this.矩形ToolStripMenuItem_Click);
             // 
             // 圆形ToolStripMenuItem
             // 
             this.圆形ToolStripMenuItem.Name = "圆形ToolStripMenuItem";
-            this.圆形ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.圆形ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.圆形ToolStripMenuItem.Text = "圆形";
             this.圆形ToolStripMenuItem.Click += new System.EventHandler(this.圆形ToolStripMenuItem_Click);
             // 
             // 多边形ToolStripMenuItem
             // 
             this.多边形ToolStripMenuItem.Name = "多边形ToolStripMenuItem";
-            this.多边形ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.多边形ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.多边形ToolStripMenuItem.Text = "多边形";
             this.多边形ToolStripMenuItem.Click += new System.EventHandler(this.多边形ToolStripMenuItem_Click);
             // 
             // 线段ToolStripMenuItem
             // 
             this.线段ToolStripMenuItem.Name = "线段ToolStripMenuItem";
-            this.线段ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.线段ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.线段ToolStripMenuItem.Text = "线段";
             this.线段ToolStripMenuItem.Click += new System.EventHandler(this.线段ToolStripMenuItem_Click);
             // 
             // 折线段ToolStripMenuItem
             // 
             this.折线段ToolStripMenuItem.Name = "折线段ToolStripMenuItem";
-            this.折线段ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.折线段ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.折线段ToolStripMenuItem.Text = "线条";
             this.折线段ToolStripMenuItem.Click += new System.EventHandler(this.折线段ToolStripMenuItem_Click);
             // 
             // 测距ToolStripMenuItem
             // 
             this.测距ToolStripMenuItem.Name = "测距ToolStripMenuItem";
-            this.测距ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.测距ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.测距ToolStripMenuItem.Text = "测距";
             this.测距ToolStripMenuItem.Click += new System.EventHandler(this.测距ToolStripMenuItem_Click);
             // 
@@ -687,28 +681,28 @@
             // serverAndCacheToolStripMenuItem
             // 
             this.serverAndCacheToolStripMenuItem.Name = "serverAndCacheToolStripMenuItem";
-            this.serverAndCacheToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.serverAndCacheToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.serverAndCacheToolStripMenuItem.Text = "服务和缓存";
             this.serverAndCacheToolStripMenuItem.Click += new System.EventHandler(this.serverAndCacheToolStripMenuItem_Click);
             // 
             // 在线服务ToolStripMenuItem
             // 
             this.在线服务ToolStripMenuItem.Name = "在线服务ToolStripMenuItem";
-            this.在线服务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.在线服务ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.在线服务ToolStripMenuItem.Text = "在线服务";
             this.在线服务ToolStripMenuItem.Click += new System.EventHandler(this.在线服务ToolStripMenuItem_Click);
             // 
             // 本地缓存ToolStripMenuItem
             // 
             this.本地缓存ToolStripMenuItem.Name = "本地缓存ToolStripMenuItem";
-            this.本地缓存ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.本地缓存ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.本地缓存ToolStripMenuItem.Text = "本地缓存";
             this.本地缓存ToolStripMenuItem.Click += new System.EventHandler(this.本地缓存ToolStripMenuItem_Click);
             // 
             // 显示网格ToolStripMenuItem
             // 
             this.显示网格ToolStripMenuItem.Name = "显示网格ToolStripMenuItem";
-            this.显示网格ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.显示网格ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.显示网格ToolStripMenuItem.Text = "显示网格";
             this.显示网格ToolStripMenuItem.Click += new System.EventHandler(this.显示网格ToolStripMenuItem_Click);
             // 
@@ -726,28 +720,28 @@
             // 清除画图ToolStripMenuItem
             // 
             this.清除画图ToolStripMenuItem.Name = "清除画图ToolStripMenuItem";
-            this.清除画图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.清除画图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.清除画图ToolStripMenuItem.Text = "清除画图";
             this.清除画图ToolStripMenuItem.Click += new System.EventHandler(this.清除画图ToolStripMenuItem_Click);
             // 
             // 清楚边界ToolStripMenuItem
             // 
             this.清楚边界ToolStripMenuItem.Name = "清楚边界ToolStripMenuItem";
-            this.清楚边界ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.清楚边界ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.清楚边界ToolStripMenuItem.Text = "清除下载边界";
             this.清楚边界ToolStripMenuItem.Click += new System.EventHandler(this.清楚边界ToolStripMenuItem_Click);
             // 
             // 清楚路径ToolStripMenuItem
             // 
             this.清楚路径ToolStripMenuItem.Name = "清楚路径ToolStripMenuItem";
-            this.清楚路径ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.清楚路径ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.清楚路径ToolStripMenuItem.Text = "清除路径";
             this.清楚路径ToolStripMenuItem.Click += new System.EventHandler(this.清楚路径ToolStripMenuItem_Click);
             // 
             // 清除POIToolStripMenuItem
             // 
             this.清除POIToolStripMenuItem.Name = "清除POIToolStripMenuItem";
-            this.清除POIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.清除POIToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.清除POIToolStripMenuItem.Text = "清除POI";
             this.清除POIToolStripMenuItem.Click += new System.EventHandler(this.清除POIToolStripMenuItem_Click);
             // 
@@ -766,35 +760,35 @@
             // 导入路径ToolStripMenuItem
             // 
             this.导入路径ToolStripMenuItem.Name = "导入路径ToolStripMenuItem";
-            this.导入路径ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.导入路径ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.导入路径ToolStripMenuItem.Text = "导入路径";
             this.导入路径ToolStripMenuItem.Click += new System.EventHandler(this.导入路径ToolStripMenuItem_Click);
             // 
             // 读取GPXToolStripMenuItem
             // 
             this.读取GPXToolStripMenuItem.Name = "读取GPXToolStripMenuItem";
-            this.读取GPXToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.读取GPXToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.读取GPXToolStripMenuItem.Text = "读取GPX";
             this.读取GPXToolStripMenuItem.Click += new System.EventHandler(this.读取GPXToolStripMenuItem_Click);
             // 
             // 读取KMLToolStripMenuItem
             // 
             this.读取KMLToolStripMenuItem.Name = "读取KMLToolStripMenuItem";
-            this.读取KMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.读取KMLToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.读取KMLToolStripMenuItem.Text = "读取KML";
             this.读取KMLToolStripMenuItem.Click += new System.EventHandler(this.读取KMLToolStripMenuItem_Click);
             // 
             // 热力图ToolStripMenuItem
             // 
             this.热力图ToolStripMenuItem.Name = "热力图ToolStripMenuItem";
-            this.热力图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.热力图ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.热力图ToolStripMenuItem.Text = "热力图";
             this.热力图ToolStripMenuItem.Click += new System.EventHandler(this.热力图ToolStripMenuItem_Click);
             // 
             // 地图截屏ToolStripMenuItem
             // 
             this.地图截屏ToolStripMenuItem.Name = "地图截屏ToolStripMenuItem";
-            this.地图截屏ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.地图截屏ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.地图截屏ToolStripMenuItem.Text = "地图截屏";
             this.地图截屏ToolStripMenuItem.Click += new System.EventHandler(this.地图截屏ToolStripMenuItem_Click);
             // 
@@ -840,7 +834,7 @@
             // 代理设置ToolStripMenuItem
             // 
             this.代理设置ToolStripMenuItem.Name = "代理设置ToolStripMenuItem";
-            this.代理设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.代理设置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.代理设置ToolStripMenuItem.Text = "代理设置";
             this.代理设置ToolStripMenuItem.Click += new System.EventHandler(this.代理设置ToolStripMenuItem_Click);
             // 
@@ -912,34 +906,6 @@
             this.splitter1.Size = new System.Drawing.Size(3, 653);
             this.splitter1.TabIndex = 1;
             this.splitter1.TabStop = false;
-            // 
-            // gMapControl1
-            // 
-            this.gMapControl1.Bearing = 0F;
-            this.gMapControl1.CanDragMap = true;
-            this.gMapControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gMapControl1.EmptyTileColor = System.Drawing.Color.Navy;
-            this.gMapControl1.GrayScaleMode = false;
-            this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
-            this.gMapControl1.LevelsKeepInMemmory = 5;
-            this.gMapControl1.Location = new System.Drawing.Point(0, 0);
-            this.gMapControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.gMapControl1.MarkersEnabled = true;
-            this.gMapControl1.MaxZoom = 2;
-            this.gMapControl1.MinZoom = 2;
-            this.gMapControl1.MouseWheelZoomEnabled = true;
-            this.gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
-            this.gMapControl1.Name = "gMapControl1";
-            this.gMapControl1.NegativeMode = false;
-            this.gMapControl1.PolygonsEnabled = true;
-            this.gMapControl1.RetryLoadTile = 0;
-            this.gMapControl1.RoutesEnabled = true;
-            this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
-            this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
-            this.gMapControl1.ShowTileGridLines = false;
-            this.gMapControl1.Size = new System.Drawing.Size(949, 653);
-            this.gMapControl1.TabIndex = 0;
-            this.gMapControl1.Zoom = 0D;
             // 
             // contextMenuStripSelectedArea
             // 
@@ -1270,8 +1236,6 @@
             // 
             // groupBoxAddress
             // 
-            this.groupBoxAddress.Controls.Add(this.buttonAddressSearch);
-            this.groupBoxAddress.Controls.Add(this.textBoxAddress);
             this.groupBoxAddress.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxAddress.Location = new System.Drawing.Point(0, 107);
             this.groupBoxAddress.Name = "groupBoxAddress";
@@ -1279,24 +1243,6 @@
             this.groupBoxAddress.TabIndex = 7;
             this.groupBoxAddress.TabStop = false;
             this.groupBoxAddress.Text = "地址解析";
-            // 
-            // buttonAddressSearch
-            // 
-            this.buttonAddressSearch.Location = new System.Drawing.Point(168, 20);
-            this.buttonAddressSearch.Name = "buttonAddressSearch";
-            this.buttonAddressSearch.Size = new System.Drawing.Size(70, 23);
-            this.buttonAddressSearch.TabIndex = 4;
-            this.buttonAddressSearch.Text = "查询";
-            this.buttonAddressSearch.UseVisualStyleBackColor = true;
-            this.buttonAddressSearch.Click += new System.EventHandler(this.buttonAddressSearch_Click);
-            // 
-            // textBoxAddress
-            // 
-            this.textBoxAddress.Location = new System.Drawing.Point(15, 20);
-            this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(142, 22);
-            this.textBoxAddress.TabIndex = 3;
-            this.textBoxAddress.Text = "广东省深圳市福田区华强北路1002号";
             // 
             // gbMapImage
             // 
@@ -1339,36 +1285,12 @@
             // 
             // gbMapDownloader
             // 
-            this.gbMapDownloader.Controls.Add(this.comboBoxStore);
-            this.gbMapDownloader.Controls.Add(this.label9);
             this.gbMapDownloader.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbMapDownloader.Location = new System.Drawing.Point(0, 0);
             this.gbMapDownloader.Name = "gbMapDownloader";
             this.gbMapDownloader.Size = new System.Drawing.Size(255, 46);
             this.gbMapDownloader.TabIndex = 4;
             this.gbMapDownloader.TabStop = false;
-            // 
-            // comboBoxStore
-            // 
-            this.comboBoxStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxStore.FormattingEnabled = true;
-            this.comboBoxStore.Items.AddRange(new object[] {
-            "SQLite数据库",
-            "MySQL数据库",
-            "本地磁盘（切片）"});
-            this.comboBoxStore.Location = new System.Drawing.Point(72, 15);
-            this.comboBoxStore.Name = "comboBoxStore";
-            this.comboBoxStore.Size = new System.Drawing.Size(121, 20);
-            this.comboBoxStore.TabIndex = 12;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 18);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 12);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "存储方式：";
             // 
             // xPanderPanel2
             // 
@@ -1497,9 +1419,37 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 21;
-            this.button5.Text = "button5";
+            this.button5.Text = "地址解析";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // gMapControl1
+            // 
+            this.gMapControl1.Bearing = 0F;
+            this.gMapControl1.CanDragMap = true;
+            this.gMapControl1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.gMapControl1.EmptyTileColor = System.Drawing.Color.Navy;
+            this.gMapControl1.GrayScaleMode = false;
+            this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.gMapControl1.LevelsKeepInMemmory = 5;
+            this.gMapControl1.Location = new System.Drawing.Point(0, 0);
+            this.gMapControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.gMapControl1.MarkersEnabled = true;
+            this.gMapControl1.MaxZoom = 2;
+            this.gMapControl1.MinZoom = 2;
+            this.gMapControl1.MouseWheelZoomEnabled = true;
+            this.gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.gMapControl1.Name = "gMapControl1";
+            this.gMapControl1.NegativeMode = false;
+            this.gMapControl1.PolygonsEnabled = true;
+            this.gMapControl1.RetryLoadTile = 0;
+            this.gMapControl1.RoutesEnabled = true;
+            this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.gMapControl1.ShowTileGridLines = false;
+            this.gMapControl1.Size = new System.Drawing.Size(949, 653);
+            this.gMapControl1.TabIndex = 0;
+            this.gMapControl1.Zoom = 0D;
             // 
             // MainForm
             // 
@@ -1544,12 +1494,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.poiDataBindingSource)).EndInit();
             this.panelPOI.ResumeLayout(false);
             this.panelPOI.PerformLayout();
-            this.groupBoxAddress.ResumeLayout(false);
-            this.groupBoxAddress.PerformLayout();
             this.gbMapImage.ResumeLayout(false);
             this.gbMapImage.PerformLayout();
-            this.gbMapDownloader.ResumeLayout(false);
-            this.gbMapDownloader.PerformLayout();
             this.xPanderPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1624,7 +1570,6 @@
         private System.Windows.Forms.ToolStripMenuItem 卫星地图WGS84ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 混合地图WGS84ToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBoxAddress;
-        private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.GroupBox groupBoxPOI;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripLocation;
         private System.Windows.Forms.ToolStripMenuItem 搜索该点的地址ToolStripMenuItem;
@@ -1671,8 +1616,6 @@
         private System.Windows.Forms.ToolStripMenuItem 热力图ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 地图截屏ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem arcGISTileToBundleToolStripMenuItem;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboBoxStore;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBarDownload;
         private System.Windows.Forms.ToolStripMenuItem 船舶信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 船舶ToolStripMenuItem;
@@ -1688,7 +1631,6 @@
         private System.Windows.Forms.Button buttonMapImage;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.Button buttonAddressSearch;
         private System.Windows.Forms.Button buttonPOISearch;
         private System.Windows.Forms.Button buttonPoiSave;
         private System.Windows.Forms.ToolStripMenuItem 测距ToolStripMenuItem;

@@ -453,8 +453,7 @@ namespace MapDownloader
             this.serverAndCacheToolStripMenuItem.Checked = true;
             this.xPanderPanel2.ExpandClick += new EventHandler<EventArgs>(xPanderPanel2_ExpandClick);
 
-            this.comboBoxStore.SelectedIndex = 0;
-            this.comboBoxStore.SelectedIndexChanged += new EventHandler(comboBoxStore_SelectedIndexChanged);
+            gMapControl1.Manager.PrimaryCache = sqliteCache;
 
             this.buttonMapImage.Click += new EventHandler(buttonMapImage_Click);
 
@@ -632,27 +631,6 @@ namespace MapDownloader
 
         #endregion
 
-        #region 存储方式
-
-        void comboBoxStore_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int storeType = this.comboBoxStore.SelectedIndex;
-            switch (storeType)
-            {
-                case 0:
-                    gMapControl1.Manager.PrimaryCache = sqliteCache;
-                    break;
-                case 1:
-                    gMapControl1.Manager.PrimaryCache = mysqlCache;
-                    break;
-                default:
-                    gMapControl1.Manager.PrimaryCache = sqliteCache;
-                    break;
-            }
-        }
-
-        #endregion
-
         #region 地图下载
 
         private void ResetToServerAndCacheMode()
@@ -685,10 +663,7 @@ namespace MapDownloader
                             TileDownloaderArgs downloaderArgs = downloadCfgForm.GetDownloadTileGPoints();
                             ResetToServerAndCacheMode();
 
-                            if (this.comboBoxStore.SelectedIndex == 2)
-                            {
-                                tileDownloader.TilePath = this.tilePath;
-                            }
+                            tileDownloader.TilePath = this.tilePath;    //儲存至 本地磁碟
                             tileDownloader.Retry = retryNum;
                             tileDownloader.PrefetchTileStart += new EventHandler<TileDownloadEventArgs>(tileDownloader_PrefetchTileStart);
                             tileDownloader.PrefetchTileProgress += new EventHandler<TileDownloadEventArgs>(tileDownloader_PrefetchTileProgress);
@@ -1681,8 +1656,8 @@ namespace MapDownloader
 
                 richTextBox1.Text += "共有 省/市 " + this.comboBoxProvince.Items.Count.ToString() + " 個\n";
 
-                //if (this.comboBoxProvince.Items.Count > 18)
-                  //  this.comboBoxProvince.SelectedIndex = 18;
+                if (this.comboBoxProvince.Items.Count > 18)
+                    this.comboBoxProvince.SelectedIndex = 18;
 
             }
         }
@@ -1701,89 +1676,14 @@ namespace MapDownloader
 
                 richTextBox1.Text += "共有 縣市區 " + this.comboBoxCity.Items.Count.ToString() + " 個\n";
 
-                //if (this.comboBoxCity.Items.Count > 2)
-                  //  this.comboBoxCity.SelectedIndex = 2;
+                if (this.comboBoxCity.Items.Count > 2)
+                    this.comboBoxCity.SelectedIndex = 2;
             }
         }
 
         #endregion
 
         #region 地址解析与逆解析
-
-        //地址解析
-        private void buttonAddressSearch_Click(object sender, EventArgs e)
-        {
-            string address = this.textBoxAddress.Text.Trim();
-
-            if (!string.IsNullOrEmpty(address))
-            {
-                richTextBox1.Text += "你按了 地址解析 之 查詢\t地址 : " + address + "\n";
-
-                this.routeOverlay.Markers.Clear();
-                Placemark placemark = new Placemark(address);
-
-                richTextBox1.Text += "初始化就給值 Text : " + placemark.Address + "\n";
-
-                //placemark.CityName = currentCenterCityName;   //useless
-
-                //richTextBox1.Text += "currentCenterCityName : " + currentCenterCityName + "\n";   尚未給值
-
-                if (currentAreaPolygon != null)
-                {
-                    placemark.CityName = currentAreaPolygon.Name;
-                }
-
-                //richTextBox1.Text += "placemark.CityName : " + placemark.CityName + "\n"; 無資料
-
-                List<PointLatLng> points = new List<PointLatLng>();
-                //GeoCoderStatusCode statusCode = SoSoMapProvider.Instance.GetPoints(placemark, out points);
-                GeoCoderStatusCode statusCode = AMapProvider.Instance.GetPoints(placemark, out points);
-
-                //richTextBox1.Text += "Text : " + placemark.Address + "\n";
-
-                if (statusCode == GeoCoderStatusCode.G_GEO_SUCCESS)
-                {
-                    richTextBox1.Text += "查詢資料成功, 共有" + points.Count.ToString() + " 筆資料\n";
-                    foreach (PointLatLng point in points)
-                    {
-                        richTextBox1.Text += "取得地圖資料 地理座標 " + point.ToString() + "\n";
-                        GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
-
-                        marker.ToolTipText = placemark.Address;
-                        this.routeOverlay.Markers.Add(marker);
-                        this.gMapControl1.Position = point;
-
-                        richTextBox1.Text += "Text1 : " + placemark.Address + "\n";
-
-                        /*  除了第一項，全無資料
-                        richTextBox1.Text += "Text2 : " + placemark.AdministrativeAreaName + "\n";
-                        richTextBox1.Text += "Text3 : " + placemark.CityName.ToString() + "\n";
-                        richTextBox1.Text += "Text4 : " + placemark.CountryName + "\n";
-                        richTextBox1.Text += "Text5 : " + placemark.DistrictName + "\n";
-                        richTextBox1.Text += "Text6 : " + placemark.HouseNo.ToString() + "\n";
-                        richTextBox1.Text += "Text7 : " + placemark.LocalityName + "\n";
-                        richTextBox1.Text += "Text8 : " + placemark.Name.ToString() + "\n";
-                        richTextBox1.Text += "Text9 : " + placemark.Neighborhood + "\n";
-                        richTextBox1.Text += "Text10 : " + placemark.ProvinceName.ToString() + "\n";
-
-                        richTextBox1.Text += "Text9 : " + placemark.StreetNumber.ToString() + "\n";
-                        richTextBox1.Text += "Text9 : " + placemark.SubAdministrativeAreaName + "\n";
-                        richTextBox1.Text += "Text9 : " + placemark.Tel.ToString() + "\n";
-                        richTextBox1.Text += "Text9 : " + placemark.ThoroughfareName + "\n";
-                        */
-                    }
-                }
-                else
-                {
-                    richTextBox1.Text += "查詢資料失敗\n";
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "地址無資料\n";
-
-            }
-        }
 
         private void 搜索该点的地址ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2294,10 +2194,6 @@ namespace MapDownloader
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "你按了繪圖工具 圓形\n";
-            draw.DrawingMode = DrawingMode.Circle;
-            draw.IsEnable = true;
-
         }
 
         private void button2_Click(object sender, EventArgs e)
