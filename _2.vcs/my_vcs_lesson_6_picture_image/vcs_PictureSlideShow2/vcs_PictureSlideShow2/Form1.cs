@@ -16,6 +16,29 @@ namespace vcs_PictureSlideShow2
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(1920 - 800, 100);
+
+            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+            this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Location = new System.Drawing.Point(0, 0);
+            timer1_Tick(sender, e);
+        }
+
+        void pictureBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == Keys.Escape) || (e.KeyCode == Keys.X))
+            {
+                Application.Exit();
+            }
+        }
+
         bool flag_no_fix_position = false;
         int cnt = 0;
         private void timer1_Tick(object sender, EventArgs e)
@@ -44,18 +67,6 @@ namespace vcs_PictureSlideShow2
             if(flag_no_fix_position == false)
                 this.Location = new System.Drawing.Point(1920 - pictureBox1.Width, 100);
 
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //設定執行後的表單起始位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(1920 - 800, 100);
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Location = new System.Drawing.Point(0, 0);
-            timer1_Tick(sender, e);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

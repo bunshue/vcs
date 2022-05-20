@@ -432,7 +432,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(120, 42);
             this.button24.TabIndex = 43;
-            this.button24.Text = "轉變坐標軸角度";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

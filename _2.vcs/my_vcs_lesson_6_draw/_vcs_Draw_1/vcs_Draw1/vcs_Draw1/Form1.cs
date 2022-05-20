@@ -1351,7 +1351,6 @@ namespace vcs_Draw1
 
         private void DrawTest(Graphics g, int w, int h)
         {
-
             g.DrawRectangle(p, 0, 0, w - 1, h - 1);
             Rectangle rect = new Rectangle(0, 0, w - 1, h - 1);
             g.DrawEllipse(p, rect);
@@ -1387,39 +1386,6 @@ namespace vcs_Draw1
 
         private void button24_Click(object sender, EventArgs e)
         {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            p = new Pen(Color.Red, 5);
-
-            g.DrawRectangle(p, 0 + p.Width / 2, 0 + p.Width / 2, bitmap1.Width - p.Width, bitmap1.Height - p.Width);
-
-            pictureBox1.Image = bitmap1;
-
-
-            richTextBox1.Text += "轉變坐標軸角度\n";
-
-            for (int i = 0; i <= 90; i += 10)
-            {
-                g.RotateTransform(i);//旋轉指定的角度
-                g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
-                g.ResetTransform();//恢復坐標軸坐標 回 0 度
-            }
-
-            p = new Pen(Color.Blue, 2);
-            g.RotateTransform(20);//旋轉指定的角度
-            g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
-            g.ResetTransform();//恢復坐標軸坐標 回 0 度
-
-            g.RotateTransform(30);//旋轉指定的角度
-            g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
-            g.ResetTransform();//恢復坐標軸坐標 回 0 度
-
-            g.Dispose();
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1690,7 +1656,6 @@ namespace vcs_Draw1
         // Draw samples.
         private const int column_width = 150;
         private const int row_height = 50;
-
         private void button28_Click(object sender, EventArgs e)
         {
             Graphics g = this.CreateGraphics();
@@ -1719,21 +1684,19 @@ namespace vcs_Draw1
         void DrawPictureBoxText()
         {
             // Make a Bitmap to hold the text.
-            Bitmap bm = new Bitmap(
-                pictureBox_text.ClientSize.Width,
-                pictureBox_text.ClientSize.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Bitmap bm = new Bitmap(pictureBox_text.ClientSize.Width, pictureBox_text.ClientSize.Height);
+            using (Graphics g = Graphics.FromImage(bm))
             {
-                gr.Clear(Color.White);
+                g.Clear(Color.White);
 
                 // Don't use TextRenderingHint.AntiAliasGridFit.
-                gr.TextRenderingHint = TextRenderingHint.AntiAlias;
+                g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
                 // Make a font to use.
                 using (Font font = new Font("Times New Roman", 16, FontStyle.Regular))
                 {
                     // Draw the text.
-                    DrawTextInBoxes(gr, font, 4, 4,
+                    DrawTextInBoxes(g, font, 4, 4,
                         "When in the course of human events it " +
                         "becomes necessary for the quick brown " +
                         "fox to jump over the lazy dog...");

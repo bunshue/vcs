@@ -1096,6 +1096,7 @@
             this.bt_long9.Name = "bt_long9";
             this.bt_long9.Size = new System.Drawing.Size(135, 45);
             this.bt_long9.TabIndex = 117;
+            this.bt_long9.Text = "畫筆測試";
             this.bt_long9.UseVisualStyleBackColor = true;
             this.bt_long9.Click += new System.EventHandler(this.bt_long9_Click);
             // 

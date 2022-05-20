@@ -11,11 +11,6 @@ namespace vcs_PictureSlideShow3
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         Image bmp;
         bool flag_no_fix_position = false;
         bool flag_pause = false;
@@ -23,6 +18,44 @@ namespace vcs_PictureSlideShow3
         int total = 100;
         int W;
         int H;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(1920 - 250, 200);
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            pictureBox1.Size = new Size(200, 600);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Location = new System.Drawing.Point(0, 0);
+
+            pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+            this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
+
+            bmp = vcs_PictureSlideShow3.Properties.Resources.chingming;
+
+            W = bmp.Width;
+            H = bmp.Height;
+
+            pictureBox1.Image = cropImage(bmp, new Rectangle(bmp.Width - 100, 0, 100, 300));
+            this.Size = new Size(pictureBox1.Width, pictureBox1.Height);
+
+            this.pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
+        }
+
+        void pictureBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == Keys.Escape) || (e.KeyCode == Keys.X))
+            {
+                Application.Exit();
+            }
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -56,26 +89,6 @@ namespace vcs_PictureSlideShow3
             return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //設定執行後的表單起始位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(1920 - 250, 200);
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Location = new System.Drawing.Point(0, 0);
-
-            bmp = vcs_PictureSlideShow3.Properties.Resources.chingming;
-
-            W = bmp.Width;
-            H = bmp.Height;
-
-            pictureBox1.Image = cropImage(bmp, new Rectangle(bmp.Width - 100, 0, 100, 300));
-            this.Size = new Size(pictureBox1.Width, pictureBox1.Height);
-
-            this.pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
-        }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {

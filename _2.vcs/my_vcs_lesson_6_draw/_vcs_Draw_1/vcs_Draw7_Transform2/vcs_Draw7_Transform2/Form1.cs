@@ -194,6 +194,32 @@ namespace vcs_Draw7_Transform2
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //轉變座標軸角度
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.White);
+            Pen p = new Pen(Color.Red, 5);
+            Rectangle rect = new Rectangle(0, 0, 200, 50);
+
+            richTextBox1.Text += "轉變坐標軸角度\n";
+
+            for (int i = 0; i <= 90; i += 10)
+            {
+                g.RotateTransform(i);//旋轉指定的角度
+                g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
+                g.ResetTransform();//恢復坐標軸坐標 回 0 度
+            }
+
+            p = new Pen(Color.Blue, 2);
+            g.RotateTransform(20);//旋轉指定的角度
+            g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+            g.RotateTransform(30);//旋轉指定的角度
+            g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+            g.Dispose();
         }
 
         private void button6_Click(object sender, EventArgs e)

@@ -8907,7 +8907,136 @@ namespace vcs_Draw_Example1
 
         private void bt_long9_Click(object sender, EventArgs e)
         {
+            int NNN = 1000;
+            Random r = new Random();
+            Graphics g = this.pictureBox1.CreateGraphics();
 
+
+            /*         while(true)
+                      {
+                          int x1 = r.Next(0, 1366);
+                          int y1 = r.Next(0, 200);
+                          int x2 = x1;
+                          int y2 = y1 + r.Next(0, 400);
+                          for(int i=y1;i<=y2;i++)
+                          {
+                              Pen greenPen = new Pen(Color.Green, r.Next(1, 15));
+                              g.DrawLine(greenPen, x1, y1, x2, y2);
+                          }
+                      }
+           */
+
+            int W = 150;
+            int H = 300;
+            int dx = 50;
+            int dy = 50;
+            int x_st = dx;
+            int y_st = dy;
+
+            for (int i = 0; i < NNN; i++)
+            {
+                Pen whitePen = new Pen(Color.FromArgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255)), 8);
+                int x1 = r.Next(x_st, x_st + W);
+                int y1 = r.Next(y_st, y_st + H);
+                int x2 = r.Next(x_st, x_st + W);
+                int y2 = r.Next(y_st, y_st + H);
+                // int x1 = 500;
+                // int y1 = 500;
+                // int x2 = i;
+                // int y2 = 1000 * 1000 - i * i;
+                g.DrawLine(whitePen, x1, y1, x2, y2);
+
+            }
+
+            x_st = dx + W + dx;
+            int cx = x_st + W / 2;
+            int cy = y_st + H / 2;
+
+            for (int i = 0; i < NNN; i++)
+            {
+                Pen whitePen = new Pen(Color.FromArgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255)), 9);
+                int x1 = cx;
+                int y1 = cy;
+                int x2 = r.Next(x_st, x_st + W);
+                int y2 = r.Next(y_st, y_st + H);
+                // int x1 = 500;
+                // int y1 = 500;
+                // int x2 = i;
+                // int y2 = 1000 * 1000 - i * i;
+                g.DrawLine(whitePen, x1, y1, x2, y2);
+
+            }
+
+            x_st = dx + W + dx + W + dx;
+            cx = x_st + W;
+            cy = y_st;
+            for (int i = 0; i < NNN; i++)
+            {
+                Pen whitePen = new Pen(Color.FromArgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255)), 10);
+                int x1 = cx;
+                int y1 = cy;
+                int x2 = r.Next(x_st, x_st + W);
+                int y2 = r.Next(y_st, y_st + H);
+                // int x1 = 500;
+                // int y1 = 500;
+                // int x2 = i;
+                // int y2 = 1000 * 1000 - i * i;
+                g.DrawLine(whitePen, x1, y1, x2, y2);
+
+            }
+
+            x_st = dx + W + dx + W + dx + W + dx;
+            cx = x_st;
+            cy = y_st + H;
+            for (int i = 0; i < NNN; i++)
+            {
+                Pen whitePen = new Pen(Color.FromArgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255)), 11);
+                int x1 = cx;
+                int y1 = cy;
+                int x2 = r.Next(x_st, x_st + W);
+                int y2 = r.Next(y_st, y_st + H);
+                // int x1 = 500;
+                // int y1 = 500;
+                // int x2 = i;
+                // int y2 = 1000 * 1000 - i * i;
+                g.DrawLine(whitePen, x1, y1, x2, y2);
+
+            }
+
+            x_st = dx;
+            y_st = dy + H + dy;
+            //cx = x_st;
+            //cy = y_st + H;
+            W = dx * 3 + W * 4; ;
+            H = 100;
+
+            for (int i = 0; i < NNN; i++)
+            {
+                Pen whitePen = new Pen(Color.FromArgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255)), 12);
+                int x1 = r.Next(x_st, x_st + W);
+                int y1 = r.Next(y_st, y_st + H);
+                int x2 = r.Next(x_st, x_st + W);
+                int y2 = r.Next(y_st, y_st + H);
+                // int x1 = 500;
+                // int y1 = 500;
+                // int x2 = i;
+                // int y2 = 1000 * 1000 - i * i;
+                g.DrawLine(whitePen, x1, y1, x2, y2);
+
+            }
+            for (int i = 0; i < NNN; i++)
+            {
+                Pen whitePen = new Pen(Color.FromArgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255)), r.Next(1, 15));
+                int x1 = r.Next(x_st, x_st + W); ; //650-900
+                int y1 = r.Next(y_st, y_st + H); ; //100-500
+                int x2 = r.Next(x_st, x_st + W);
+                int y2 = r.Next(y_st, y_st + H);
+                // int x1 = 500;
+                // int y1 = 500;
+                // int x2 = i;
+                // int y2 = 1000 * 1000 - i * i;
+                g.DrawLine(whitePen, x1, y1, x2, y2);
+            }
         }
 
         private void bt_long10_Click(object sender, EventArgs e)
