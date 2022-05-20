@@ -1395,6 +1395,7 @@ namespace vcs_GMap
         private void button6_Click(object sender, EventArgs e)
         {
             markersOverlay.Clear();
+            polygonsOverlay.Clear();
 
             //量測距離
             flag_measure_first_point = false;
@@ -1414,6 +1415,11 @@ namespace vcs_GMap
             gMapControl1.Zoom = 14; //當前比例
 
             update_controls_info();
+
+
+            //畫方圓3公里
+
+
 
         }
 
@@ -2079,40 +2085,6 @@ namespace vcs_GMap
             {
                 richTextBox1.Text += ex.Message + "\n";
             }
-        }
-
-        public static GMapRoute GetRouteFromKml(string fileName)
-        {
-            try
-            {
-                //XDocument root = XDocument.Load(new StreamReader(fileName));
-                XElement root = XElement.Load(new StreamReader(fileName));
-                IEnumerable<string> coordinates = from c in root.Descendants(XName.Get("coordinates", root.Name.NamespaceName))
-                                                  select (string)c;
-                foreach (string c in coordinates)
-                {
-                    List<PointLatLng> points = new List<PointLatLng>();
-                    string[] ss = c.Split(new char[] { ' ', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string sss in ss)
-                    {
-                        string[] ss2 = sss.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                        points.Add(new PointLatLng(Convert.ToDouble(ss2[1]), Convert.ToDouble(ss2[0])));
-                    }
-
-                    GMapRoute rt = new GMapRoute(points, string.Empty);
-                    {
-                        rt.Stroke = new Pen(Color.FromArgb(144, Color.Red));
-                        rt.Stroke.Width = 5;
-                        rt.Stroke.DashStyle = DashStyle.Solid;
-                    }
-                    return rt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return null;
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -3517,7 +3489,105 @@ namespace vcs_GMap
 
         private void bt_test13_Click(object sender, EventArgs e)
         {
+            //讀取KML檔案
 
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
+            string filename = @"C:\______test_files\__RW\_xml\kml_mountain.kml";
+
+            GMapRoute playRoute = GetRouteFromKml(filename);
+
+            if (playRoute == null)
+            {
+                richTextBox1.Text += "無法開啟檔案\n";
+                return;
+
+            }
+            //playRoute.Stroke.Color = Color.Red;
+            playRoute.Stroke = new Pen(Color.FromArgb(144, Color.Red)); //半透明
+            playRoute.Stroke.Width = 5;
+            playRoute.Stroke.DashStyle = DashStyle.Solid;
+            //playRoute.Stroke.DashStyle = DashStyle.Dash;
+
+            markersOverlay.Routes.Add(playRoute);
+
+            richTextBox1.Text += "cnt = " + playRoute.Points.Count.ToString() + "\n";
+
+            //找中心
+            List<PointLatLng> points = playRoute.Points;
+            richTextBox1.Text += "cnt = " + points.Count.ToString() + "\n";
+
+            int total_location = points.Count;
+            richTextBox1.Text += "total_location = " + total_location.ToString() + "\n";
+
+            double lat_north = -90;
+            double lat_south = 90;
+            double lng_east = -180;
+            double lng_west = 180;
+
+            int i;
+            for (i = 0; i < total_location; i++)
+            {
+                double lat = points[i].Lat;
+                double lng = points[i].Lng;
+
+                if (lat > lat_north)
+                    lat_north = lat;
+                if (lat < lat_south)
+                    lat_south = lat;
+                if (lng > lng_east)
+                    lng_east = lng;
+                if (lng < lng_west)
+                    lng_west = lng;
+            }
+
+            double lat_center = (lat_south + lat_north) / 2;
+            double lng_center = (lng_east + lng_west) / 2;
+
+            gMapControl1.MapProvider = GMapProviders.GoogleChinaMap; //簡中地圖
+
+            latitude = lat_center;   //緯度
+            longitude = lng_center; //經度
+
+            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
+
+            update_controls_info();
+
+            gMapControl1.Zoom = 15; //當前比例
+        }
+
+        public static GMapRoute GetRouteFromKml(string fileName)
+        {
+            try
+            {
+                //XDocument root = XDocument.Load(new StreamReader(fileName));
+                XElement root = XElement.Load(new StreamReader(fileName));
+                IEnumerable<string> coordinates = from c in root.Descendants(XName.Get("coordinates", root.Name.NamespaceName))
+                                                  select (string)c;
+                foreach (string c in coordinates)
+                {
+                    List<PointLatLng> points = new List<PointLatLng>();
+                    string[] ss = c.Split(new char[] { ' ', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string sss in ss)
+                    {
+                        string[] ss2 = sss.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                        points.Add(new PointLatLng(Convert.ToDouble(ss2[1]), Convert.ToDouble(ss2[0])));
+                    }
+
+                    GMapRoute rt = new GMapRoute(points, string.Empty);
+                    {
+                        rt.Stroke = new Pen(Color.FromArgb(144, Color.Red));
+                        rt.Stroke.Width = 5;
+                        rt.Stroke.DashStyle = DashStyle.Solid;
+                    }
+                    return rt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("XXXXX " + ex.Message);
+            }
+            return null;
         }
 
         private void bt_test14_Click(object sender, EventArgs e)
@@ -3553,7 +3623,7 @@ namespace vcs_GMap
                             };
                             item.Stroke.Width = 5f;
                             item.Stroke.DashStyle = DashStyle.DashDot;
-                            this.markersOverlay.Routes.Add(item);
+                            this.polygonsOverlay.Routes.Add(item);
                         }
                     }
                     if ((type.rte != null) && (type.rte.Length > 0))
@@ -3572,7 +3642,7 @@ namespace vcs_GMap
                             };
                             route2.Stroke.Width = 5f;
                             route2.Stroke.DashStyle = DashStyle.DashDot;
-                            this.markersOverlay.Routes.Add(route2);
+                            this.polygonsOverlay.Routes.Add(route2);
                         }
                     }
                     if (type.wpt != null && type.wpt.Length > 0)
@@ -3581,7 +3651,7 @@ namespace vcs_GMap
                         {
                             PointLatLng point = new PointLatLng((double)p.lat, (double)p.lon);
                             GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
-                            this.markersOverlay.Markers.Add(marker);
+                            this.polygonsOverlay.Markers.Add(marker);
                         }
                     }
                     this.gMapControl1.ZoomAndCenterRoutes(null);
@@ -3591,31 +3661,30 @@ namespace vcs_GMap
             {
                 richTextBox1.Text += ex.Message + "\n";
             }
-
-            /*old
-            string filename = @"C:\______test_files\__RW\_xml\gps_bicycle.gpx";
-
-            GMapRoute playRoute = GetRouteFromKml(filename);
-
-            if (playRoute == null)
-            {
-                richTextBox1.Text += "無法開啟檔案\n";
-                return;
-
-            }
-            //playRoute.Stroke.Color = Color.Red;
-            playRoute.Stroke = new Pen(Color.FromArgb(144, Color.Red)); //半透明
-            playRoute.Stroke.Width = 5;
-            playRoute.Stroke.DashStyle = DashStyle.Solid;
-            //playRoute.Stroke.DashStyle = DashStyle.Dash;
-
-            markersOverlay.Routes.Add(playRoute);
-            */
         }
 
         private void bt_test15_Click(object sender, EventArgs e)
         {
+            //讀取KML檔案
 
+            return;
+
+            /*
+            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+
+            string filename = @"C:\______test_files\__RW\_xml\kml_mountain.kml";
+
+            try
+            {
+                this.polygonsOverlay.Clear();
+                InitKMLPlaceMarks(KmlUtil.GetPlaceMarksFromKmlFile(filename));
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error : " + ex.ToString() + "\n";
+                MessageBox.Show("读取KML文件时出现异常");
+            }
+            */
         }
 
         private void bt_zoom_in_Click(object sender, EventArgs e)

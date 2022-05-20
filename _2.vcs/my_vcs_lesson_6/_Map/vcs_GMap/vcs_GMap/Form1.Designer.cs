@@ -293,6 +293,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(100, 45);
             this.button7.TabIndex = 8;
+            this.button7.Text = "畫方圓3公里";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -1083,6 +1084,7 @@
             this.bt_test13.Name = "bt_test13";
             this.bt_test13.Size = new System.Drawing.Size(100, 45);
             this.bt_test13.TabIndex = 55;
+            this.bt_test13.Text = "讀取KML檔案";
             this.bt_test13.UseVisualStyleBackColor = true;
             this.bt_test13.Click += new System.EventHandler(this.bt_test13_Click);
             // 

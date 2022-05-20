@@ -1237,89 +1237,6 @@ namespace MapDownloader
 
         private void 读取GPXToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FileDialog dialog = new OpenFileDialog())
-            {
-                //dialog.InitialDirectory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "gpx";
-                dialog.InitialDirectory = @"C:\______test_files\__RW\_xml";
-                dialog.CheckPathExists = true;
-                dialog.CheckFileExists = false;
-                dialog.AddExtension = true;
-                dialog.DefaultExt = "gpx";
-                dialog.ValidateNames = true;
-                dialog.Title = "选择GPX文件";
-                dialog.Filter = "GPX文件 (*.gpx)|*.gpx|所有文件 (*.*)|*.*";
-                dialog.FilterIndex = 1;
-                dialog.RestoreDirectory = true;
-
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        string objectXml = File.ReadAllText(dialog.FileName);
-                        gpxType type = this.gMapControl1.Manager.DeserializeGPX(objectXml);
-                        if (type != null)
-                        {
-                            if ((type.trk != null) && (type.trk.Length > 0))
-                            {
-                                List<PointLatLng> points = new List<PointLatLng>();
-                                foreach (trkType trk in type.trk)
-                                {
-                                    foreach (trksegType seg in trk.trkseg)
-                                    {
-                                        foreach (wptType p in seg.trkpt)
-                                        {
-                                            points.Add(new PointLatLng((double)p.lat, (double)p.lon));
-                                        }
-                                    }
-                                    string name = string.IsNullOrEmpty(trk.name) ? string.Empty : trk.name;
-                                    GMapRoute item = new GMapRoute(points, name)
-                                    {
-                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
-                                    };
-                                    item.Stroke.Width = 5f;
-                                    item.Stroke.DashStyle = DashStyle.DashDot;
-                                    this.polygonsOverlay.Routes.Add(item);
-                                }
-                            }
-                            if ((type.rte != null) && (type.rte.Length > 0))
-                            {
-                                List<PointLatLng> points = new List<PointLatLng>();
-                                foreach (rteType rte in type.rte)
-                                {
-                                    foreach (wptType p in rte.rtept)
-                                    {
-                                        points.Add(new PointLatLng((double)p.lat, (double)p.lon));
-                                    }
-                                    string str3 = string.IsNullOrEmpty(rte.name) ? string.Empty : rte.name;
-                                    GMapRoute route2 = new GMapRoute(points, str3)
-                                    {
-                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
-                                    };
-                                    route2.Stroke.Width = 5f;
-                                    route2.Stroke.DashStyle = DashStyle.DashDot;
-                                    this.polygonsOverlay.Routes.Add(route2);
-                                }
-                            }
-                            if (type.wpt != null && type.wpt.Length > 0)
-                            {
-                                foreach (wptType p in type.wpt)
-                                {
-                                    PointLatLng point = new PointLatLng((double)p.lat, (double)p.lon);
-                                    GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
-                                    this.polygonsOverlay.Markers.Add(marker);
-                                }
-                            }
-                            this.gMapControl1.ZoomAndCenterRoutes(null);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        richTextBox1.Text += "Error : " + ex.ToString() + "\n";
-
-                        MessageBox.Show("读取GPX文件错误");
-                    }
-                }
-            }
         }
 
         private void 读取KMLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1328,6 +1245,7 @@ namespace MapDownloader
             {
                 using (FileDialog dialog = new OpenFileDialog())
                 {
+                    dialog.InitialDirectory = @"C:\______test_files\__RW\_xml";
                     dialog.CheckPathExists = true;
                     dialog.CheckFileExists = false;
                     dialog.AddExtension = true;
