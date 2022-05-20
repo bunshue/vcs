@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DragPicture5", "vcs_DragPicture5\vcs_DragPicture5.csproj", "{E15FE0B7-92DE-4FC0-99EE-519E46D72DC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DragPicture3b", "vcs_DragPicture3b\vcs_DragPicture3b.csproj", "{E15FE0B7-92DE-4FC0-99EE-519E46D72DC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_DragPicture4
+namespace vcs_DragPicture3b
 {
     static class Program
     {

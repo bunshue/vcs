@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+//實現在Label上按下滑鼠左鍵拖曳的功能
+
 namespace vcs_DragPicture2
 {
     public partial class Form1 : Form
@@ -17,11 +19,16 @@ namespace vcs_DragPicture2
         public Form1()
         {
             InitializeComponent();
-            Image image = Image.FromFile("C:\\______test_files\\bear.jpg");
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image = Image.FromFile(filename);
             int width = image.Width;
             int height = image.Height;
 
-            this.ClientSize = new Size(width + 200, height + 200);
+            this.ClientSize = new Size(1200, 700);
             //要在Properties.Resources放入圖片
             label1.Text = "";
             label1.AutoSize = false;
@@ -41,7 +48,6 @@ namespace vcs_DragPicture2
                 oldX = e.X;
                 oldY = e.Y;
             }
-
         }
 
         private void label1_MouseMove(object sender, MouseEventArgs e)
@@ -59,6 +65,7 @@ namespace vcs_DragPicture2
         private void label1_MouseUp(object sender, MouseEventArgs e)
         {
             isPress = false;
+            label1.Cursor = Cursors.Cross;    //移到控件上，改變鼠標
         }
 
         private void label1_MouseEnter(object sender, EventArgs e)
@@ -70,5 +77,6 @@ namespace vcs_DragPicture2
         {
             label1.Cursor = Cursors.Cross;    //移到控件上，改變鼠標
         }
+
     }
 }

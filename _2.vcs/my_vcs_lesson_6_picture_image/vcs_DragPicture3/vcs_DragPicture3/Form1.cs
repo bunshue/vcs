@@ -21,15 +21,13 @@ namespace vcs_DragPicture3
             InitializeComponent();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
             Image image = Image.FromFile(filename);
             int width = image.Width;
             int height = image.Height;
 
-            //this.ClientSize = new Size(width + 200, height + 200);
-            this.ClientSize = new Size(width, height);
+            this.ClientSize = new Size(width, height + 150);
             //要在Properties.Resources放入圖片
             label1.Text = "";
             label1.AutoSize = false;
@@ -71,6 +69,7 @@ namespace vcs_DragPicture3
         private void label1_MouseUp(object sender, MouseEventArgs e)
         {
             isPress = false;
+            label1.Cursor = Cursors.Cross;    //移到控件上，改變鼠標
         }
 
         private void label1_MouseEnter(object sender, EventArgs e)

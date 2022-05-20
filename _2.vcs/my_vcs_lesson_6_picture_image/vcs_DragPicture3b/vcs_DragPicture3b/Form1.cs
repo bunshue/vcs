@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Drawing2D; //for InterpolationMode
 
-namespace vcs_DragPicture5
+namespace vcs_DragPicture3b
 {
     public partial class Form1 : Form
     {

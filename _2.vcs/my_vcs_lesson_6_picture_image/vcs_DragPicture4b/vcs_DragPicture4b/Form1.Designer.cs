@@ -35,9 +35,9 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(302, 124);
+            this.pictureBox1.Location = new System.Drawing.Point(39, 78);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(305, 400);
+            this.pictureBox1.Size = new System.Drawing.Size(168, 186);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -51,7 +51,7 @@
             this.ClientSize = new System.Drawing.Size(909, 649);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
-            this.Text = "PictureBox跟隨鼠標移動";
+            this.Text = "PictureBox 用滑鼠移動";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

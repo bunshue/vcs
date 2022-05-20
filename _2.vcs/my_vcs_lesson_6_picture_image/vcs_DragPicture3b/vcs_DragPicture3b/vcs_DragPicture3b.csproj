@@ -8,8 +8,8 @@
     <ProjectGuid>{E15FE0B7-92DE-4FC0-99EE-519E46D72DC1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_DragPicture5</RootNamespace>
-    <AssemblyName>vcs_DragPicture5</AssemblyName>
+    <RootNamespace>vcs_DragPicture3b</RootNamespace>
+    <AssemblyName>vcs_DragPicture3b</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

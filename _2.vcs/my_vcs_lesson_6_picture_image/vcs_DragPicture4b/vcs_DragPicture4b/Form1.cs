@@ -11,8 +11,7 @@ namespace vcs_DragPicture4b
 {
     public partial class Form1 : Form
     {
-        private bool flag_mouse_down = false;
-        private Point mouseOffset; //記錄鼠標指針的坐標
+        
 
         public Form1()
         {
@@ -23,27 +22,35 @@ namespace vcs_DragPicture4b
         {
             //讀取圖檔
             string filename = @"C:\______test_files\picture1.jpg";
-            pictureBox1.Image = Image.FromFile(filename);
-
+            Image image = System.Drawing.Image.FromFile(filename);
+            pictureBox1.Image = image;
+            pictureBox1.Height = image.Height;
+            pictureBox1.Width = image.Width;
         }
 
+        private Point pictureBox1_position_old; //記錄鼠標指針的坐標
+        private bool flag_pictureBox1_mouse_down = false;
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                mouseOffset.X = e.X;
-                mouseOffset.Y = e.Y;
-                flag_mouse_down = true;
+                pictureBox1_position_old.X = e.X;
+                pictureBox1_position_old.Y = e.Y;
+                flag_pictureBox1_mouse_down = true;
+                //richTextBox1.Text += "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
             }
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (flag_mouse_down == true)
+            if (flag_pictureBox1_mouse_down == true)
             {
-                int left = pictureBox1.Left + e.X - mouseOffset.X;
-                int top = pictureBox1.Top + e.Y - mouseOffset.Y;
-                pictureBox1.Location = new Point(left, top);
+                //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+                int dx = e.X - pictureBox1_position_old.X;
+                int dy = e.Y - pictureBox1_position_old.Y;
+
+                //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+                pictureBox1.Location = new Point(pictureBox1.Location.X + dx, pictureBox1.Location.Y + dy);
             }
         }
 
@@ -51,9 +58,10 @@ namespace vcs_DragPicture4b
         {
             if (e.Button == MouseButtons.Left)
             {
-                flag_mouse_down = false;
+                flag_pictureBox1_mouse_down = false;
             }
         }
+
     }
 }
 
