@@ -1249,6 +1249,28 @@ namespace vcs_Draw1
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //DrawCurve
+
+            pictureBox1.Size = new Size(500, 500);
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Pen p1 = new Pen(Color.Red, 2);
+            Pen p2 = new Pen(Color.Green, 2);
+            Pen p3 = new Pen(Color.Blue, 2);
+            Pen p4 = new Pen(Color.Gold, 2);
+            Pen p5 = new Pen(Color.Black, 2);
+            Point pt1 = new Point(200, 100);
+            Point pt2 = new Point(300, 100);
+            Point pt3 = new Point(400, 200);
+            Point pt4 = new Point(300, 300);
+            Point pt5 = new Point(200, 300);
+            Point pt6 = new Point(100, 200);
+            Point[] pts = { pt1, pt2, pt3, pt4, pt5, pt6 };
+            g.DrawCurve(p1, pts, 1.0F); //使用tension
+            g.DrawCurve(p2, pts);   //不使用tension
+            g.DrawPolygon(p3, pts);
+
+            g.DrawLines(p4, pts);
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -3034,4 +3056,3 @@ namespace vcs_Draw1
         }
     }
 }
-

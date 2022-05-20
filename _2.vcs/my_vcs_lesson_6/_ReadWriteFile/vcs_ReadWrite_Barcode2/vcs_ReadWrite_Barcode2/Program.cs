@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace EX30
+namespace vcs_ReadWrite_Barcode2
 {
     static class Program
     {
         /// <summary>
-        /// 应用程序的主入口点。
+        /// 應用程式的主要進入點。
         /// </summary>
         [STAThread]
         static void Main()

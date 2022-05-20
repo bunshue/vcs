@@ -716,6 +716,62 @@ namespace vcs_Draw6_String
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //做一個跟字串一樣大的圖檔
+            string str = "做一個跟字串一樣大的圖檔";
+            Bitmap bitmap1 = null;
+            Graphics g = null;
+
+            try
+            {
+                Font fontCounter = new Font("Lucida Sans Unicode", 50);
+
+                // calculate size of the string.
+                bitmap1 = new Bitmap(1, 1, PixelFormat.Format32bppPArgb);
+                g = Graphics.FromImage(bitmap1);
+                SizeF stringSize = g.MeasureString(str, fontCounter);
+                int nWidth = (int)stringSize.Width;
+                int nHeight = (int)stringSize.Height;
+                g.Dispose();
+                bitmap1.Dispose();
+
+                bitmap1 = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppPArgb);
+                g = Graphics.FromImage(bitmap1);
+                g.FillRectangle(new SolidBrush(Color.Pink),
+                new Rectangle(0, 0, nWidth, nHeight));
+
+                g.DrawString(str, fontCounter, new SolidBrush(Color.Black), 0, 0);
+
+                string filename = Application.StartupPath + "\\png_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename, ImageFormat.Png);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                if (g != null)
+                {
+                    g.Dispose();
+                }
+                if (bitmap1 != null)
+                {
+                    bitmap1.Dispose();
+                }
+            }
         }
 
         private void button18_Click(object sender, EventArgs e)

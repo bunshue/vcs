@@ -302,6 +302,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(140, 50);
             this.button17.TabIndex = 34;
+            this.button17.Text = "做一個跟字串一樣大的圖檔";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

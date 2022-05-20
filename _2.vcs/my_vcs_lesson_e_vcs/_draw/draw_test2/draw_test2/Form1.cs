@@ -53,78 +53,6 @@ namespace draw_test2
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //調用生成縮略圖方法
-            string filename = @"C:\______test_files\picture1.jpg";
-            ToThumbnailImages(filename, 200);
-        }
-
-        /// <summary>
-        /// 生成縮略圖
-        /// </summary>
-        /// <param name="filename1">原圖片路徑(相對路徑)</param>
-        /// <param name="thumbnailImageWidth">縮略圖的寬度（高度與按源圖片比例自動生成）</param>
-        public void ToThumbnailImages(string filename1, int thumbnailImageWidth)
-        {
-            int ThumbnailImageWidth = thumbnailImageWidth;
-            string sExt = filename1.Substring(filename1.LastIndexOf(".")).ToLower();
-
-            //從 原圖片 創建 Image 對象
-            System.Drawing.Image image = System.Drawing.Image.FromFile(filename1);
-
-            int num = ((ThumbnailImageWidth / 4) * 3);
-            int width = image.Width;
-            int height = image.Height;
-            //計算圖片的比例
-            if ((((double)width) / ((double)height)) >= 1.3333333333333333f)
-            {
-                num = ((height * ThumbnailImageWidth) / width);
-            }
-            else
-            {
-                ThumbnailImageWidth = ((width * num) / height);
-            }
-            if ((ThumbnailImageWidth < 1) || (num < 1))
-            {
-                return;
-            }
-            //用指定的大小和格式初始化 Bitmap 類的新實例
-            Bitmap bitmap1 = new Bitmap(ThumbnailImageWidth, num, PixelFormat.Format32bppArgb);
-            //從指定的 Image 對象創建新 Graphics 對象
-            Graphics graphics = Graphics.FromImage(bitmap1);
-            //清除整個繪圖面並以透明背景色填充
-            graphics.Clear(Color.Transparent);
-            //在指定位置並且按指定大小繪制 原圖片 對象
-            graphics.DrawImage(image, new Rectangle(0, 0, ThumbnailImageWidth, num));
-            image.Dispose();
-            try
-            {
-                //將此 原圖片 以指定格式並用指定的編解碼參數保存到指定文件
-                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-                try
-                {
-                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                    bitmap1.Save(filename, ImageFormat.Bmp);
-                    //bitmap1.Save(@file3, ImageFormat.Png);
-
-                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename + "\n";
-                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-
-            catch (System.Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                bitmap1.Dispose();
-                graphics.Dispose();
-            }
         }
 
         //C#獲取圖片的指定部分
@@ -180,90 +108,14 @@ namespace draw_test2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //做一個跟字串一樣大的圖檔
-            string str = "做一個跟字串一樣大的圖檔";
-            Bitmap bitmap1 = null;
-            Graphics g = null;
-
-            try
-            {
-                Font fontCounter = new Font("Lucida Sans Unicode", 50);
-
-                // calculate size of the string.
-                bitmap1 = new Bitmap(1, 1, PixelFormat.Format32bppPArgb);
-                g = Graphics.FromImage(bitmap1);
-                SizeF stringSize = g.MeasureString(str, fontCounter);
-                int nWidth = (int)stringSize.Width;
-                int nHeight = (int)stringSize.Height;
-                g.Dispose();
-                bitmap1.Dispose();
-
-                bitmap1 = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppPArgb);
-                g = Graphics.FromImage(bitmap1);
-                g.FillRectangle(new SolidBrush(Color.Pink),
-                new Rectangle(0, 0, nWidth, nHeight));
-
-                g.DrawString(str, fontCounter, new SolidBrush(Color.Black), 0, 0);
-
-                string filename = Application.StartupPath + "\\png_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
-                try
-                {
-                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                    bitmap1.Save(filename, ImageFormat.Png);
-                    //bitmap1.Save(@file3, ImageFormat.Png);
-
-                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename + "\n";
-                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            finally
-            {
-                if (g != null)
-                {
-                    g.Dispose();
-                }
-                if (bitmap1 != null)
-                {
-                    bitmap1.Dispose();
-                }
-            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Pen p1 = new Pen(Color.Red, 2);
-            Pen p2 = new Pen(Color.Green, 2);
-            Pen p3 = new Pen(Color.Blue, 2);
-            Pen p4 = new Pen(Color.Gold, 2);
-            Pen p5 = new Pen(Color.Black, 2);
-            Point pt1 = new Point(200, 100);
-            Point pt2 = new Point(300, 100);
-            Point pt3 = new Point(400, 200);
-            Point pt4 = new Point(300, 300);
-            Point pt5 = new Point(200, 300);
-            Point pt6 = new Point(100, 200);
-            Point[] pts = { pt1, pt2, pt3, pt4, pt5, pt6 };
-            g.DrawCurve(p1, pts, 1.0F); //使用tension
-            g.DrawCurve(p2, pts);   //不使用tension
-            g.DrawPolygon(p3, pts);
-
-            g.DrawLines(p4, pts);
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button6_Click(object sender, EventArgs e)
