@@ -102,7 +102,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(500, 453);
+            this.button1.Location = new System.Drawing.Point(84, 127);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(81, 45);
             this.button1.TabIndex = 5;
@@ -114,6 +114,7 @@
             // 
             this.groupBox1.Controls.Add(this.tb_h);
             this.groupBox1.Controls.Add(this.tb_w);
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.tb_y_st);
             this.groupBox1.Controls.Add(this.tb_x_st);
             this.groupBox1.Controls.Add(this.label1);
@@ -208,6 +209,11 @@
             // 
             this.nud_x_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.nud_x_st.Location = new System.Drawing.Point(97, 16);
+            this.nud_x_st.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nud_x_st.Name = "nud_x_st";
             this.nud_x_st.Size = new System.Drawing.Size(89, 36);
             this.nud_x_st.TabIndex = 5;
@@ -227,6 +233,11 @@
             // 
             this.nud_y_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.nud_y_st.Location = new System.Drawing.Point(97, 58);
+            this.nud_y_st.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nud_y_st.Name = "nud_y_st";
             this.nud_y_st.Size = new System.Drawing.Size(89, 36);
             this.nud_y_st.TabIndex = 7;
@@ -236,6 +247,11 @@
             // 
             this.nud_h.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.nud_h.Location = new System.Drawing.Point(97, 142);
+            this.nud_h.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nud_h.Name = "nud_h";
             this.nud_h.Size = new System.Drawing.Size(89, 36);
             this.nud_h.TabIndex = 11;
@@ -265,6 +281,11 @@
             // 
             this.nud_w.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.nud_w.Location = new System.Drawing.Point(97, 100);
+            this.nud_w.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nud_w.Name = "nud_w";
             this.nud_w.Size = new System.Drawing.Size(89, 36);
             this.nud_w.TabIndex = 9;
@@ -277,7 +298,6 @@
             this.ClientSize = new System.Drawing.Size(1108, 716);
             this.Controls.Add(this.groupBox_selection);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.richTextBox1);

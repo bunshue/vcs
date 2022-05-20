@@ -63,33 +63,33 @@
             this.mnuDeletePicture,
             this.mnuInsertPicture});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(164, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(162, 114);
             // 
             // mnuMoveLeft
             // 
             this.mnuMoveLeft.Name = "mnuMoveLeft";
-            this.mnuMoveLeft.Size = new System.Drawing.Size(163, 22);
+            this.mnuMoveLeft.Size = new System.Drawing.Size(161, 22);
             this.mnuMoveLeft.Text = "Move &Left";
             this.mnuMoveLeft.Click += new System.EventHandler(this.mnuMoveLeft_Click);
             // 
             // mnuMoveRight
             // 
             this.mnuMoveRight.Name = "mnuMoveRight";
-            this.mnuMoveRight.Size = new System.Drawing.Size(163, 22);
+            this.mnuMoveRight.Size = new System.Drawing.Size(161, 22);
             this.mnuMoveRight.Text = "Move &Right";
             this.mnuMoveRight.Click += new System.EventHandler(this.mnuMoveRight_Click);
             // 
             // mnuDeletePicture
             // 
             this.mnuDeletePicture.Name = "mnuDeletePicture";
-            this.mnuDeletePicture.Size = new System.Drawing.Size(163, 22);
+            this.mnuDeletePicture.Size = new System.Drawing.Size(161, 22);
             this.mnuDeletePicture.Text = "&Delete Picture...";
             this.mnuDeletePicture.Click += new System.EventHandler(this.mnuDeletePicture_Click);
             // 
             // mnuInsertPicture
             // 
             this.mnuInsertPicture.Name = "mnuInsertPicture";
-            this.mnuInsertPicture.Size = new System.Drawing.Size(163, 22);
+            this.mnuInsertPicture.Size = new System.Drawing.Size(161, 22);
             this.mnuInsertPicture.Text = "&Insert Picture...";
             this.mnuInsertPicture.Click += new System.EventHandler(this.mnuInsertPicture_Click);
             // 

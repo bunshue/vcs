@@ -454,7 +454,7 @@ namespace vcs_SelectionRectangle
             }
         }
 
-        public Pen RectView;
+        //public Pen RectView;
 
         //InvalidateRectangle //获得无效区域，用来刷新时防止闪烁
         public Rectangle InvalidateRectangle()

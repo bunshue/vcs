@@ -119,6 +119,12 @@ namespace vcs_PictureCrop8
 
                 Graphics g = pictureBox1.CreateGraphics();
                 g.DrawRectangle(new Pen(Color.Red, 1), x_st2, y_st2, w, h);
+
+
+                nud_x_st.Value = (decimal)x_st2;
+                nud_y_st.Value = (decimal)y_st2;
+                nud_w.Value = (decimal)w;
+                nud_h.Value = (decimal)h;
             }
         }
 

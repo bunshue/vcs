@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Drawing2D; // for GraphicsPath
 
-namespace vcs_PictureMagnify
+namespace vcs_PictureMagnify1
 {
     public partial class Form1 : Form
     {

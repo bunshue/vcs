@@ -115,6 +115,17 @@ namespace vcs_PictureCrop7
                 //這個也可以屬於二次緩沖技術，如果直接將矩形畫在窗體上，會造成圖片抖動並且會有無數個矩形．
                 g1.Dispose();
                 destBmp.Dispose();//要及時釋放，不然內存將會被大量消耗
+
+
+                nud_x_st.Value = (decimal)select_rectangle.X;
+                nud_y_st.Value = (decimal)select_rectangle.Y;
+                nud_w.Value = (decimal)select_rectangle.Width;
+                nud_h.Value = (decimal)select_rectangle.Height;
+
+
+
+
+
             }
         }
 

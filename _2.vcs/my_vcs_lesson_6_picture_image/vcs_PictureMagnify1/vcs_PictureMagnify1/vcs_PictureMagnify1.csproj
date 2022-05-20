@@ -8,8 +8,8 @@
     <ProjectGuid>{5FA3C831-CA88-4CC0-B675-F2F44E25BA25}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_PictureMagnify</RootNamespace>
-    <AssemblyName>vcs_PictureMagnify</AssemblyName>
+    <RootNamespace>vcs_PictureMagnify1</RootNamespace>
+    <AssemblyName>vcs_PictureMagnify1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

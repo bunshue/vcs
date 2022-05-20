@@ -393,6 +393,11 @@ namespace vcs_PictureCrop2
             txtWidth.Text = SelectionRectangle.Width.ToString();
             txtHeight.Text = SelectionRectangle.Height.ToString();
             IgnoreTextChanged = false;
+
+            nud_x_st.Value = (decimal)SelectionRectangle.X;
+            nud_y_st.Value = (decimal)SelectionRectangle.Y;
+            nud_w.Value = (decimal)SelectionRectangle.Width;
+            nud_h.Value = (decimal)SelectionRectangle.Height;
         }
 
         private SizeF GetEnlargedSize(float new_width, float new_height)

@@ -79,6 +79,11 @@ namespace vcs_PictureCrop5
             g.DrawRectangle(p, x_st, y_st, W, H);   //畫上臨時框
 
             pictureBox1.Refresh();
+
+            nud_x_st.Value = (decimal)x_st;
+            nud_y_st.Value = (decimal)y_st;
+            nud_w.Value = (decimal)W;
+            nud_h.Value = (decimal)H;
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)

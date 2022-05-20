@@ -9,12 +9,17 @@ using System.Windows.Forms;
 
 using System.IO;
 
-// 全屏隨機位置顯示圖片
+/*
+全屏隨機位置顯示圖片
+*/
 
 namespace vcs_ShowPicture3
 {
     public partial class Form1 : Form
     {
+        string foldername = @"C:\______test_files\__pic\_MU\";
+        string filename = string.Empty;
+
         int flag_operation_mode = MODE_0;
         private const int MODE_0 = 0x00;   //全屏隨機位置顯示圖片
         private const int MODE_1 = 0x01;   //全屏單圖置中顯示圖片
@@ -27,8 +32,6 @@ namespace vcs_ShowPicture3
         Rectangle bounds = Screen.PrimaryScreen.Bounds;
         //Rectangle bounds = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
-        string foldername = @"C:\______test_files\__pic\_MU\";
-        string filename;
         int total_picture_count = 0;
         int sel_picture = -1;
         bool random_sel_picture = true;

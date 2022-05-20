@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
+
 /*
 全屏隨機位置顯示圖片
 
@@ -29,6 +31,12 @@ namespace vcs_ShowPicture5
 {
     public partial class Form1 : Form
     {
+        string foldername = @"C:\______test_files\__pic\_MU\";
+        string filename = string.Empty;
+        int total_picture_count = 0;
+        int sel_picture = -1;
+        bool random_sel_picture = true;
+
         Rectangle bounds = Screen.GetBounds(Screen.GetBounds(Point.Empty));
 
         public Form1()
@@ -38,7 +46,7 @@ namespace vcs_ShowPicture5
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;
             this.BackgroundImage = GetNoCursor();
 
             timer1.Interval = 500;
@@ -65,7 +73,29 @@ namespace vcs_ShowPicture5
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            //固定一張圖
+            //string filename = @"C:\______test_files\picture1.jpg";
+
+            //任選一張圖
+            DirectoryInfo DInfo = new DirectoryInfo(foldername);
+            FileInfo[] FInfo = DInfo.GetFiles();
+
+            total_picture_count = FInfo.Length;
+
+            if (random_sel_picture == true)
+            {
+                Random rand = new Random();
+                sel_picture = rand.Next(FInfo.Length);
+            }
+            else
+            {
+                sel_picture++;
+                if (sel_picture >= total_picture_count)
+                    sel_picture = 0;
+            }
+
+            filename = foldername + FInfo[sel_picture].Name;
+
             Image image = Image.FromFile(filename);
             if (image != null)
             {

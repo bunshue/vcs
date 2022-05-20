@@ -308,6 +308,11 @@
             // 
             this.nud_x_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.nud_x_st.Location = new System.Drawing.Point(97, 16);
+            this.nud_x_st.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nud_x_st.Name = "nud_x_st";
             this.nud_x_st.Size = new System.Drawing.Size(89, 36);
             this.nud_x_st.TabIndex = 5;
@@ -327,6 +332,11 @@
             // 
             this.nud_y_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.nud_y_st.Location = new System.Drawing.Point(97, 58);
+            this.nud_y_st.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nud_y_st.Name = "nud_y_st";
             this.nud_y_st.Size = new System.Drawing.Size(89, 36);
             this.nud_y_st.TabIndex = 7;
@@ -336,6 +346,11 @@
             // 
             this.nud_h.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.nud_h.Location = new System.Drawing.Point(97, 142);
+            this.nud_h.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nud_h.Name = "nud_h";
             this.nud_h.Size = new System.Drawing.Size(89, 36);
             this.nud_h.TabIndex = 11;
@@ -365,6 +380,11 @@
             // 
             this.nud_w.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.nud_w.Location = new System.Drawing.Point(97, 100);
+            this.nud_w.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nud_w.Name = "nud_w";
             this.nud_w.Size = new System.Drawing.Size(89, 36);
             this.nud_w.TabIndex = 9;

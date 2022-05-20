@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_PictureMagnify
+namespace vcs_PictureMagnify1
 {
     static class Program
     {
