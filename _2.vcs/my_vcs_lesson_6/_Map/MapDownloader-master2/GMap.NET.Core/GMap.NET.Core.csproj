@@ -171,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GMap.NET.CacheProviders\MemoryCache.cs" />
+    <Compile Include="GMap.NET.CacheProviders\MySQLPureImageCacheMulti.cs" />
     <Compile Include="GMap.NET.Internals\SocksProxySocket\SocksHttpWebRequest.cs" />
     <Compile Include="GMap.NET.Internals\DrawTile.cs" />
     <Compile Include="GMap.NET.Internals\FastResourceLock.cs" />
@@ -271,6 +272,9 @@
     <Compile Include="GMap.NET\RoutingProvider.cs" />
     <Compile Include="GMap.NET\ZipStorer.cs" />
     <Compile Include="Properties\VersionInfo.cs" />
+    <Compile Include="GMap.NET.CacheProviders\MsSQLCePureImageCache.cs" />
+    <Compile Include="GMap.NET.CacheProviders\PostgreSQLPureImageCache.cs" />
+    <Compile Include="GMap.NET.CacheProviders\SQLitePureImageCache.cs" />
     <Compile Include="GMap.NET.Internals\CacheQueueItem.cs" />
     <Compile Include="GMap.NET.Internals\FastReaderWriterLock.cs" />
     <Compile Include="GMap.NET.Internals\KiberTileCache.cs" />
@@ -288,6 +292,7 @@
     <Compile Include="GMap.NET.Projections\PlateCarreeProjection.cs" />
     <Compile Include="GMap.NET\Extensions.cs" />
     <Compile Include="GMap.NET\StatusCodes.cs" />
+    <Compile Include="GMap.NET.CacheProviders\MySQLPureImageCache.cs" />
     <Compile Include="GMap.NET\GpsLog.cs" />
     <Compile Include="GMap.NET\gpx.cs" />
     <Compile Include="GMap.NET\LanguageType.cs" />
@@ -297,6 +302,7 @@
     <Compile Include="GMap.NET\Delegates.cs" />
     <Compile Include="GMap.NET\MapRoute.cs" />
     <None Include="GMap.NET\MapType.cs" />
+    <Compile Include="GMap.NET.CacheProviders\MsSQLPureImageCache.cs" />
     <Compile Include="GMap.NET\GPoint.cs" />
     <Compile Include="GMap.NET\PureImageCache.cs" />
     <Compile Include="GMap.NET\GRect.cs" />

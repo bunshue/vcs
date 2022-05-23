@@ -79,6 +79,7 @@ namespace GMap.NET.Internals
          }
          catch(Exception ex)
          {
+            Trace.WriteLine("SQLitePureImageCache, WindowsIdentity.GetCurrent: " + ex);
          }
 
          string path = string.Empty;
@@ -136,6 +137,17 @@ namespace GMap.NET.Internals
          set
          {
             cache = value;
+#if SQLite
+            if(ImageCache is SQLitePureImageCache)
+            {
+               (ImageCache as SQLitePureImageCache).CacheLocation = value;
+            }
+#else
+            if(ImageCache is MsSQLCePureImageCache)
+            {
+               (ImageCache as MsSQLCePureImageCache).CacheLocation = value;
+            }
+#endif
             CacheLocator.Delay = true;
          }
       }
@@ -149,6 +161,12 @@ namespace GMap.NET.Internals
          }
          #endregion
 
+#if SQLite
+         ImageCache = new SQLitePureImageCache();
+#else
+         // you can use $ms stuff if you like too ;}
+         ImageCache = new MsSQLCePureImageCache();
+#endif
 
 #if PocketPC
          // use sd card if exist for cache
@@ -170,6 +188,23 @@ namespace GMap.NET.Internals
             // move database to non-roaming user directory
             if(Directory.Exists(oldCache))
             {
+               try
+               {
+                  if(Directory.Exists(newCache))
+                  {
+                     Directory.Delete(oldCache, true);
+                  }
+                  else
+                  {
+                     Directory.Move(oldCache, newCache);
+                  }
+                  CacheLocation = newCache;
+               }
+               catch(Exception ex)
+               {
+                  CacheLocation = oldCache;
+                  Trace.WriteLine("SQLitePureImageCache, moving data: " + ex.ToString());
+               }
             }
             else
             {

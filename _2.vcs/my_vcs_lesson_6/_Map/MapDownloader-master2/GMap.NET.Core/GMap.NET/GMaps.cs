@@ -240,6 +240,15 @@ namespace GMap.NET
       /// <returns></returns>
       public bool ExportToGMDB(string file)
       {
+#if SQLite
+         if(PrimaryCache is SQLitePureImageCache)
+         {
+            StringBuilder db = new StringBuilder((PrimaryCache as SQLitePureImageCache).GtileCache);
+            db.AppendFormat(CultureInfo.InvariantCulture, "{0}{1}Data.gmdb", GMapProvider.LanguageStr, Path.DirectorySeparatorChar);
+
+            return SQLitePureImageCache.ExportMapDataToDB(db.ToString(), file);
+         }
+#endif
          return false;
       }
 
@@ -251,6 +260,15 @@ namespace GMap.NET
       /// <returns></returns>
       public bool ImportFromGMDB(string file)
       {
+#if SQLite
+         if(PrimaryCache is GMap.NET.CacheProviders.SQLitePureImageCache)
+         {
+            StringBuilder db = new StringBuilder((PrimaryCache as SQLitePureImageCache).GtileCache);
+            db.AppendFormat(CultureInfo.InvariantCulture, "{0}{1}Data.gmdb", GMapProvider.LanguageStr, Path.DirectorySeparatorChar);
+
+            return SQLitePureImageCache.ExportMapDataToDB(file, db.ToString());
+         }
+#endif
          return false;
       }
 
@@ -263,6 +281,21 @@ namespace GMap.NET
       /// <returns></returns>
       public bool OptimizeMapDb(string file)
       {
+         if(PrimaryCache is GMap.NET.CacheProviders.SQLitePureImageCache)
+         {
+            if(string.IsNullOrEmpty(file))
+            {
+               StringBuilder db = new StringBuilder((PrimaryCache as SQLitePureImageCache).GtileCache);
+               db.AppendFormat(CultureInfo.InvariantCulture, "{0}{1}Data.gmdb", GMapProvider.LanguageStr, Path.DirectorySeparatorChar);
+
+               return SQLitePureImageCache.VacuumDb(db.ToString());
+            }
+            else
+            {
+               return SQLitePureImageCache.VacuumDb(file);
+            }
+         }
+
          return false;
       }
 #endif

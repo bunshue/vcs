@@ -72,6 +72,8 @@ namespace MapDownloader
         // Tile Downloader, init 5 threads
         private TileDownloader tileDownloader = new TileDownloader(5);
 
+        string gMapCacheLocation = "GMapCache"; //緩存位置
+
         public MainForm()
         {
             InitializeComponent();
@@ -79,7 +81,7 @@ namespace MapDownloader
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            gMapControl1.Size = new Size(1500, 900);
+            //gMapControl1.Size = new Size(1500, 900);
 
             richTextBox1.Text += "1111 InitMap()\n";
             InitMap();
@@ -108,9 +110,21 @@ namespace MapDownloader
         // Init map
         private void InitMap()
         {
+            gMapControl1.Location = new Point(10, 30);
+            gMapControl1.Size = new Size(1200, 900);
+
             gMapControl1.ShowCenter = false;
             gMapControl1.DragButton = System.Windows.Forms.MouseButtons.Left;
-            gMapControl1.CacheLocation = Environment.CurrentDirectory + "\\MapCache\\"; // Map cache location
+
+            //gMapControl1.CacheLocation = Environment.CurrentDirectory + "\\MapCache\\"; // Map cache location
+            //gMapControl1.Manager.Mode = AccessMode.CacheOnly;
+            //gMapControl1.CacheLocation = gMapCacheLocation; //緩存位置
+            //gMapControl1.Manager.ImportFromGMDB(@"gMapCacheLocation\Data.gmdb");
+
+
+            //gMapControl1.CacheLocation = gMapCacheLocation; //緩存位置
+            //gMapControl1.Manager.ImportFromGMDB(@"gMapCacheLocation\mapdata.gmdb");
+
             //mapControl.MapProvider = GMapProviders.GoogleChinaMap;
             //mapControl.MapProvider = GMapProvidersExt.AMap.AMapProvider.Instance;
             //mapControl.Position = new PointLatLng(32.043, 118.773);

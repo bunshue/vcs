@@ -118,9 +118,6 @@
             this.toolStripProgressBarDownload = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusPOIDownload = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusExport = new System.Windows.Forms.ToolStripStatusLabel();
-            this.panelMap = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.gMapControl1 = new MapDownloader.MapControl();
             this.contextMenuStripSelectedArea = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.下载地图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.下载KMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -162,9 +159,9 @@
             this.xPanderPanel2 = new BSE.Windows.Forms.XPanderPanel();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.gMapControl1 = new MapDownloader.MapControl();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.panelMap.SuspendLayout();
             this.contextMenuStripSelectedArea.SuspendLayout();
             this.contextMenuStripLocation.SuspendLayout();
             this.xPanderPanelList1.SuspendLayout();
@@ -195,7 +192,7 @@
             this.下载设置ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(484, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(477, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -213,7 +210,7 @@
             this.arcGISToolStripMenuItem,
             this.船舶信息ToolStripMenuItem});
             this.地图切换ToolStripMenuItem.Name = "地图切换ToolStripMenuItem";
-            this.地图切换ToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.地图切换ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.地图切换ToolStripMenuItem.Text = "地图切换";
             // 
             // 谷歌国外ToolStripMenuItem
@@ -223,27 +220,27 @@
             this.卫星地图ToolStripMenuItem6,
             this.混合地图ToolStripMenuItem6});
             this.谷歌国外ToolStripMenuItem.Name = "谷歌国外ToolStripMenuItem";
-            this.谷歌国外ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.谷歌国外ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.谷歌国外ToolStripMenuItem.Text = "谷歌";
             // 
             // 普通地图ToolStripMenuItem6
             // 
             this.普通地图ToolStripMenuItem6.Name = "普通地图ToolStripMenuItem6";
-            this.普通地图ToolStripMenuItem6.Size = new System.Drawing.Size(124, 22);
+            this.普通地图ToolStripMenuItem6.Size = new System.Drawing.Size(122, 22);
             this.普通地图ToolStripMenuItem6.Text = "普通地图";
             this.普通地图ToolStripMenuItem6.Click += new System.EventHandler(this.普通地图ToolStripMenuItem6_Click_1);
             // 
             // 卫星地图ToolStripMenuItem6
             // 
             this.卫星地图ToolStripMenuItem6.Name = "卫星地图ToolStripMenuItem6";
-            this.卫星地图ToolStripMenuItem6.Size = new System.Drawing.Size(124, 22);
+            this.卫星地图ToolStripMenuItem6.Size = new System.Drawing.Size(122, 22);
             this.卫星地图ToolStripMenuItem6.Text = "卫星地图";
             this.卫星地图ToolStripMenuItem6.Click += new System.EventHandler(this.卫星地图ToolStripMenuItem6_Click);
             // 
             // 混合地图ToolStripMenuItem6
             // 
             this.混合地图ToolStripMenuItem6.Name = "混合地图ToolStripMenuItem6";
-            this.混合地图ToolStripMenuItem6.Size = new System.Drawing.Size(124, 22);
+            this.混合地图ToolStripMenuItem6.Size = new System.Drawing.Size(122, 22);
             this.混合地图ToolStripMenuItem6.Text = "混合地图";
             this.混合地图ToolStripMenuItem6.Click += new System.EventHandler(this.混合地图ToolStripMenuItem6_Click);
             // 
@@ -255,34 +252,34 @@
             this.混合地图ToolStripMenuItem,
             this.地形图ToolStripMenuItem});
             this.谷歌ToolStripMenuItem.Name = "谷歌ToolStripMenuItem";
-            this.谷歌ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.谷歌ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.谷歌ToolStripMenuItem.Text = "谷歌（中国）";
             // 
             // 普通地图ToolStripMenuItem
             // 
             this.普通地图ToolStripMenuItem.Name = "普通地图ToolStripMenuItem";
-            this.普通地图ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.普通地图ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.普通地图ToolStripMenuItem.Text = "普通地图";
             this.普通地图ToolStripMenuItem.Click += new System.EventHandler(this.普通地图ToolStripMenuItem_Click);
             // 
             // 卫星地图ToolStripMenuItem
             // 
             this.卫星地图ToolStripMenuItem.Name = "卫星地图ToolStripMenuItem";
-            this.卫星地图ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.卫星地图ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.卫星地图ToolStripMenuItem.Text = "卫星地图";
             this.卫星地图ToolStripMenuItem.Click += new System.EventHandler(this.卫星地图ToolStripMenuItem_Click);
             // 
             // 混合地图ToolStripMenuItem
             // 
             this.混合地图ToolStripMenuItem.Name = "混合地图ToolStripMenuItem";
-            this.混合地图ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.混合地图ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.混合地图ToolStripMenuItem.Text = "混合地图";
             this.混合地图ToolStripMenuItem.Click += new System.EventHandler(this.混合地图ToolStripMenuItem_Click);
             // 
             // 地形图ToolStripMenuItem
             // 
             this.地形图ToolStripMenuItem.Name = "地形图ToolStripMenuItem";
-            this.地形图ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.地形图ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.地形图ToolStripMenuItem.Text = "地形地图";
             this.地形图ToolStripMenuItem.Click += new System.EventHandler(this.地形图ToolStripMenuItem_Click);
             // 
@@ -293,27 +290,27 @@
             this.卫星地图ToolStripMenuItem1,
             this.混合地图ToolStripMenuItem1});
             this.百度ToolStripMenuItem.Name = "百度ToolStripMenuItem";
-            this.百度ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.百度ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.百度ToolStripMenuItem.Text = "百度";
             // 
             // 普通地图ToolStripMenuItem1
             // 
             this.普通地图ToolStripMenuItem1.Name = "普通地图ToolStripMenuItem1";
-            this.普通地图ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.普通地图ToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.普通地图ToolStripMenuItem1.Text = "普通地图";
             this.普通地图ToolStripMenuItem1.Click += new System.EventHandler(this.普通地图ToolStripMenuItem1_Click);
             // 
             // 卫星地图ToolStripMenuItem1
             // 
             this.卫星地图ToolStripMenuItem1.Name = "卫星地图ToolStripMenuItem1";
-            this.卫星地图ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.卫星地图ToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.卫星地图ToolStripMenuItem1.Text = "卫星地图";
             this.卫星地图ToolStripMenuItem1.Click += new System.EventHandler(this.卫星地图ToolStripMenuItem1_Click);
             // 
             // 混合地图ToolStripMenuItem1
             // 
             this.混合地图ToolStripMenuItem1.Name = "混合地图ToolStripMenuItem1";
-            this.混合地图ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.混合地图ToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.混合地图ToolStripMenuItem1.Text = "混合地图";
             this.混合地图ToolStripMenuItem1.Click += new System.EventHandler(this.混合地图ToolStripMenuItem1_Click);
             // 
@@ -324,27 +321,27 @@
             this.卫星地图ToolStripMenuItem2,
             this.混合地图ToolStripMenuItem2});
             this.高德ToolStripMenuItem.Name = "高德ToolStripMenuItem";
-            this.高德ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.高德ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.高德ToolStripMenuItem.Text = "高德";
             // 
             // 普通地图ToolStripMenuItem2
             // 
             this.普通地图ToolStripMenuItem2.Name = "普通地图ToolStripMenuItem2";
-            this.普通地图ToolStripMenuItem2.Size = new System.Drawing.Size(124, 22);
+            this.普通地图ToolStripMenuItem2.Size = new System.Drawing.Size(122, 22);
             this.普通地图ToolStripMenuItem2.Text = "普通地图";
             this.普通地图ToolStripMenuItem2.Click += new System.EventHandler(this.普通地图ToolStripMenuItem2_Click);
             // 
             // 卫星地图ToolStripMenuItem2
             // 
             this.卫星地图ToolStripMenuItem2.Name = "卫星地图ToolStripMenuItem2";
-            this.卫星地图ToolStripMenuItem2.Size = new System.Drawing.Size(124, 22);
+            this.卫星地图ToolStripMenuItem2.Size = new System.Drawing.Size(122, 22);
             this.卫星地图ToolStripMenuItem2.Text = "卫星地图";
             this.卫星地图ToolStripMenuItem2.Click += new System.EventHandler(this.卫星地图ToolStripMenuItem2_Click);
             // 
             // 混合地图ToolStripMenuItem2
             // 
             this.混合地图ToolStripMenuItem2.Name = "混合地图ToolStripMenuItem2";
-            this.混合地图ToolStripMenuItem2.Size = new System.Drawing.Size(124, 22);
+            this.混合地图ToolStripMenuItem2.Size = new System.Drawing.Size(122, 22);
             this.混合地图ToolStripMenuItem2.Text = "混合地图";
             this.混合地图ToolStripMenuItem2.Click += new System.EventHandler(this.混合地图ToolStripMenuItem2_Click);
             // 
@@ -356,34 +353,34 @@
             this.混合地图ToolStripMenuItem3,
             this.地形地图ToolStripMenuItem});
             this.腾讯ToolStripMenuItem.Name = "腾讯ToolStripMenuItem";
-            this.腾讯ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.腾讯ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.腾讯ToolStripMenuItem.Text = "腾讯";
             // 
             // 普通地图ToolStripMenuItem3
             // 
             this.普通地图ToolStripMenuItem3.Name = "普通地图ToolStripMenuItem3";
-            this.普通地图ToolStripMenuItem3.Size = new System.Drawing.Size(124, 22);
+            this.普通地图ToolStripMenuItem3.Size = new System.Drawing.Size(122, 22);
             this.普通地图ToolStripMenuItem3.Text = "普通地图";
             this.普通地图ToolStripMenuItem3.Click += new System.EventHandler(this.普通地图ToolStripMenuItem3_Click);
             // 
             // 卫星地图ToolStripMenuItem3
             // 
             this.卫星地图ToolStripMenuItem3.Name = "卫星地图ToolStripMenuItem3";
-            this.卫星地图ToolStripMenuItem3.Size = new System.Drawing.Size(124, 22);
+            this.卫星地图ToolStripMenuItem3.Size = new System.Drawing.Size(122, 22);
             this.卫星地图ToolStripMenuItem3.Text = "卫星地图";
             this.卫星地图ToolStripMenuItem3.Click += new System.EventHandler(this.卫星地图ToolStripMenuItem3_Click);
             // 
             // 混合地图ToolStripMenuItem3
             // 
             this.混合地图ToolStripMenuItem3.Name = "混合地图ToolStripMenuItem3";
-            this.混合地图ToolStripMenuItem3.Size = new System.Drawing.Size(124, 22);
+            this.混合地图ToolStripMenuItem3.Size = new System.Drawing.Size(122, 22);
             this.混合地图ToolStripMenuItem3.Text = "混合地图";
             this.混合地图ToolStripMenuItem3.Click += new System.EventHandler(this.混合地图ToolStripMenuItem3_Click);
             // 
             // 地形地图ToolStripMenuItem
             // 
             this.地形地图ToolStripMenuItem.Name = "地形地图ToolStripMenuItem";
-            this.地形地图ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.地形地图ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.地形地图ToolStripMenuItem.Text = "地形地图";
             this.地形地图ToolStripMenuItem.Click += new System.EventHandler(this.地形地图ToolStripMenuItem_Click);
             // 
@@ -394,27 +391,27 @@
             this.卫星地图ToolStripMenuItem4,
             this.混合地图ToolStripMenuItem4});
             this.hereToolStripMenuItem.Name = "hereToolStripMenuItem";
-            this.hereToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.hereToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.hereToolStripMenuItem.Text = "Here";
             // 
             // 普通地图ToolStripMenuItem4
             // 
             this.普通地图ToolStripMenuItem4.Name = "普通地图ToolStripMenuItem4";
-            this.普通地图ToolStripMenuItem4.Size = new System.Drawing.Size(124, 22);
+            this.普通地图ToolStripMenuItem4.Size = new System.Drawing.Size(122, 22);
             this.普通地图ToolStripMenuItem4.Text = "普通地图";
             this.普通地图ToolStripMenuItem4.Click += new System.EventHandler(this.普通地图ToolStripMenuItem4_Click);
             // 
             // 卫星地图ToolStripMenuItem4
             // 
             this.卫星地图ToolStripMenuItem4.Name = "卫星地图ToolStripMenuItem4";
-            this.卫星地图ToolStripMenuItem4.Size = new System.Drawing.Size(124, 22);
+            this.卫星地图ToolStripMenuItem4.Size = new System.Drawing.Size(122, 22);
             this.卫星地图ToolStripMenuItem4.Text = "卫星地图";
             this.卫星地图ToolStripMenuItem4.Click += new System.EventHandler(this.卫星地图ToolStripMenuItem4_Click);
             // 
             // 混合地图ToolStripMenuItem4
             // 
             this.混合地图ToolStripMenuItem4.Name = "混合地图ToolStripMenuItem4";
-            this.混合地图ToolStripMenuItem4.Size = new System.Drawing.Size(124, 22);
+            this.混合地图ToolStripMenuItem4.Size = new System.Drawing.Size(122, 22);
             this.混合地图ToolStripMenuItem4.Text = "混合地图";
             this.混合地图ToolStripMenuItem4.Click += new System.EventHandler(this.混合地图ToolStripMenuItem4_Click);
             // 
@@ -426,34 +423,34 @@
             this.混合地图ToolStripMenuItem5,
             this.普通地图中文ToolStripMenuItem});
             this.必应ToolStripMenuItem.Name = "必应ToolStripMenuItem";
-            this.必应ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.必应ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.必应ToolStripMenuItem.Text = "必应";
             // 
             // 普通地图ToolStripMenuItem5
             // 
             this.普通地图ToolStripMenuItem5.Name = "普通地图ToolStripMenuItem5";
-            this.普通地图ToolStripMenuItem5.Size = new System.Drawing.Size(172, 22);
+            this.普通地图ToolStripMenuItem5.Size = new System.Drawing.Size(170, 22);
             this.普通地图ToolStripMenuItem5.Text = "普通地图";
             this.普通地图ToolStripMenuItem5.Click += new System.EventHandler(this.普通地图ToolStripMenuItem5_Click);
             // 
             // 卫星地图ToolStripMenuItem5
             // 
             this.卫星地图ToolStripMenuItem5.Name = "卫星地图ToolStripMenuItem5";
-            this.卫星地图ToolStripMenuItem5.Size = new System.Drawing.Size(172, 22);
+            this.卫星地图ToolStripMenuItem5.Size = new System.Drawing.Size(170, 22);
             this.卫星地图ToolStripMenuItem5.Text = "卫星地图";
             this.卫星地图ToolStripMenuItem5.Click += new System.EventHandler(this.卫星地图ToolStripMenuItem5_Click);
             // 
             // 混合地图ToolStripMenuItem5
             // 
             this.混合地图ToolStripMenuItem5.Name = "混合地图ToolStripMenuItem5";
-            this.混合地图ToolStripMenuItem5.Size = new System.Drawing.Size(172, 22);
+            this.混合地图ToolStripMenuItem5.Size = new System.Drawing.Size(170, 22);
             this.混合地图ToolStripMenuItem5.Text = "混合地图";
             this.混合地图ToolStripMenuItem5.Click += new System.EventHandler(this.混合地图ToolStripMenuItem5_Click);
             // 
             // 普通地图中文ToolStripMenuItem
             // 
             this.普通地图中文ToolStripMenuItem.Name = "普通地图中文ToolStripMenuItem";
-            this.普通地图中文ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.普通地图中文ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.普通地图中文ToolStripMenuItem.Text = "普通地图（中文）";
             this.普通地图中文ToolStripMenuItem.Click += new System.EventHandler(this.普通地图中文ToolStripMenuItem_Click);
             // 
@@ -470,69 +467,69 @@
             this.福建卫星地图ToolStripMenuItem,
             this.福建混合地图ToolStripMenuItem});
             this.天地图ToolStripMenuItem.Name = "天地图ToolStripMenuItem";
-            this.天地图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.天地图ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.天地图ToolStripMenuItem.Text = "天地图";
             // 
             // 街道地图球面墨卡托ToolStripMenuItem
             // 
             this.街道地图球面墨卡托ToolStripMenuItem.Name = "街道地图球面墨卡托ToolStripMenuItem";
-            this.街道地图球面墨卡托ToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.街道地图球面墨卡托ToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.街道地图球面墨卡托ToolStripMenuItem.Text = "街道地图(球面墨卡托)";
             this.街道地图球面墨卡托ToolStripMenuItem.Click += new System.EventHandler(this.街道地图球面墨卡托ToolStripMenuItem_Click);
             // 
             // 卫星地图球面墨卡托ToolStripMenuItem
             // 
             this.卫星地图球面墨卡托ToolStripMenuItem.Name = "卫星地图球面墨卡托ToolStripMenuItem";
-            this.卫星地图球面墨卡托ToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.卫星地图球面墨卡托ToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.卫星地图球面墨卡托ToolStripMenuItem.Text = "卫星地图(球面墨卡托)";
             this.卫星地图球面墨卡托ToolStripMenuItem.Click += new System.EventHandler(this.卫星地图球面墨卡托ToolStripMenuItem_Click);
             // 
             // 混合地图球面墨卡托ToolStripMenuItem
             // 
             this.混合地图球面墨卡托ToolStripMenuItem.Name = "混合地图球面墨卡托ToolStripMenuItem";
-            this.混合地图球面墨卡托ToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.混合地图球面墨卡托ToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.混合地图球面墨卡托ToolStripMenuItem.Text = "混合地图(球面墨卡托)";
             this.混合地图球面墨卡托ToolStripMenuItem.Click += new System.EventHandler(this.混合地图球面墨卡托ToolStripMenuItem_Click);
             // 
             // 街道地图WGS84ToolStripMenuItem
             // 
             this.街道地图WGS84ToolStripMenuItem.Name = "街道地图WGS84ToolStripMenuItem";
-            this.街道地图WGS84ToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.街道地图WGS84ToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.街道地图WGS84ToolStripMenuItem.Text = "街道地图(WGS84)";
             this.街道地图WGS84ToolStripMenuItem.Click += new System.EventHandler(this.街道地图WGS84ToolStripMenuItem_Click);
             // 
             // 卫星地图WGS84ToolStripMenuItem
             // 
             this.卫星地图WGS84ToolStripMenuItem.Name = "卫星地图WGS84ToolStripMenuItem";
-            this.卫星地图WGS84ToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.卫星地图WGS84ToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.卫星地图WGS84ToolStripMenuItem.Text = "卫星地图(WGS84)";
             this.卫星地图WGS84ToolStripMenuItem.Click += new System.EventHandler(this.卫星地图WGS84ToolStripMenuItem_Click);
             // 
             // 混合地图WGS84ToolStripMenuItem
             // 
             this.混合地图WGS84ToolStripMenuItem.Name = "混合地图WGS84ToolStripMenuItem";
-            this.混合地图WGS84ToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.混合地图WGS84ToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.混合地图WGS84ToolStripMenuItem.Text = "混合地图(WGS84)";
             this.混合地图WGS84ToolStripMenuItem.Click += new System.EventHandler(this.混合地图WGS84ToolStripMenuItem_Click);
             // 
             // 福建街道地图ToolStripMenuItem
             // 
             this.福建街道地图ToolStripMenuItem.Name = "福建街道地图ToolStripMenuItem";
-            this.福建街道地图ToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.福建街道地图ToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.福建街道地图ToolStripMenuItem.Text = "福建街道地图";
             this.福建街道地图ToolStripMenuItem.Click += new System.EventHandler(this.福建街道地图ToolStripMenuItem_Click);
             // 
             // 福建卫星地图ToolStripMenuItem
             // 
             this.福建卫星地图ToolStripMenuItem.Name = "福建卫星地图ToolStripMenuItem";
-            this.福建卫星地图ToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.福建卫星地图ToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.福建卫星地图ToolStripMenuItem.Text = "福建卫星地图";
             this.福建卫星地图ToolStripMenuItem.Click += new System.EventHandler(this.福建卫星地图ToolStripMenuItem_Click);
             // 
             // 福建混合地图ToolStripMenuItem
             // 
             this.福建混合地图ToolStripMenuItem.Name = "福建混合地图ToolStripMenuItem";
-            this.福建混合地图ToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.福建混合地图ToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.福建混合地图ToolStripMenuItem.Text = "福建混合地图";
             this.福建混合地图ToolStripMenuItem.Click += new System.EventHandler(this.福建混合地图ToolStripMenuItem_Click);
             // 
@@ -546,48 +543,48 @@
             this.arcGIS街道地图暖色版ToolStripMenuItem,
             this.arcGIS卫星地图无偏移ToolStripMenuItem});
             this.arcGISToolStripMenuItem.Name = "arcGISToolStripMenuItem";
-            this.arcGISToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.arcGISToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.arcGISToolStripMenuItem.Text = "ArcGIS";
             // 
             // arcGIS街道地图ToolStripMenuItem
             // 
             this.arcGIS街道地图ToolStripMenuItem.Name = "arcGIS街道地图ToolStripMenuItem";
-            this.arcGIS街道地图ToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.arcGIS街道地图ToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.arcGIS街道地图ToolStripMenuItem.Text = "ArcGIS街道地图";
             this.arcGIS街道地图ToolStripMenuItem.Click += new System.EventHandler(this.arcGIS街道地图ToolStripMenuItem_Click);
             // 
             // arcGIS街道地图无POIToolStripMenuItem
             // 
             this.arcGIS街道地图无POIToolStripMenuItem.Name = "arcGIS街道地图无POIToolStripMenuItem";
-            this.arcGIS街道地图无POIToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.arcGIS街道地图无POIToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.arcGIS街道地图无POIToolStripMenuItem.Text = "ArcGIS街道地图(无POI)";
             this.arcGIS街道地图无POIToolStripMenuItem.Click += new System.EventHandler(this.arcGIS街道地图无POIToolStripMenuItem_Click);
             // 
             // arcGIS街道地图灰色版ToolStripMenuItem
             // 
             this.arcGIS街道地图灰色版ToolStripMenuItem.Name = "arcGIS街道地图灰色版ToolStripMenuItem";
-            this.arcGIS街道地图灰色版ToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.arcGIS街道地图灰色版ToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.arcGIS街道地图灰色版ToolStripMenuItem.Text = "ArcGIS街道地图(灰色版)";
             this.arcGIS街道地图灰色版ToolStripMenuItem.Click += new System.EventHandler(this.arcGIS街道地图灰色版ToolStripMenuItem_Click);
             // 
             // arcGIS街道地图冷色版ToolStripMenuItem
             // 
             this.arcGIS街道地图冷色版ToolStripMenuItem.Name = "arcGIS街道地图冷色版ToolStripMenuItem";
-            this.arcGIS街道地图冷色版ToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.arcGIS街道地图冷色版ToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.arcGIS街道地图冷色版ToolStripMenuItem.Text = "ArcGIS街道地图(冷色版)";
             this.arcGIS街道地图冷色版ToolStripMenuItem.Click += new System.EventHandler(this.arcGIS街道地图冷色版ToolStripMenuItem_Click);
             // 
             // arcGIS街道地图暖色版ToolStripMenuItem
             // 
             this.arcGIS街道地图暖色版ToolStripMenuItem.Name = "arcGIS街道地图暖色版ToolStripMenuItem";
-            this.arcGIS街道地图暖色版ToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.arcGIS街道地图暖色版ToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.arcGIS街道地图暖色版ToolStripMenuItem.Text = "ArcGIS街道地图(暖色版)";
             this.arcGIS街道地图暖色版ToolStripMenuItem.Click += new System.EventHandler(this.arcGIS街道地图暖色版ToolStripMenuItem_Click);
             // 
             // arcGIS卫星地图无偏移ToolStripMenuItem
             // 
             this.arcGIS卫星地图无偏移ToolStripMenuItem.Name = "arcGIS卫星地图无偏移ToolStripMenuItem";
-            this.arcGIS卫星地图无偏移ToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.arcGIS卫星地图无偏移ToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.arcGIS卫星地图无偏移ToolStripMenuItem.Text = "ArcGIS卫星地图(无偏移)";
             this.arcGIS卫星地图无偏移ToolStripMenuItem.Click += new System.EventHandler(this.arcGIS卫星地图无偏移ToolStripMenuItem_Click);
             // 
@@ -596,13 +593,13 @@
             this.船舶信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.船舶ToolStripMenuItem});
             this.船舶信息ToolStripMenuItem.Name = "船舶信息ToolStripMenuItem";
-            this.船舶信息ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.船舶信息ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.船舶信息ToolStripMenuItem.Text = "船舶信息";
             // 
             // 船舶ToolStripMenuItem
             // 
             this.船舶ToolStripMenuItem.Name = "船舶ToolStripMenuItem";
-            this.船舶ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.船舶ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.船舶ToolStripMenuItem.Text = "船舶地图";
             this.船舶ToolStripMenuItem.Click += new System.EventHandler(this.船舶ToolStripMenuItem_Click);
             // 
@@ -616,48 +613,48 @@
             this.折线段ToolStripMenuItem,
             this.测距ToolStripMenuItem});
             this.画图工具ToolStripMenuItem.Name = "画图工具ToolStripMenuItem";
-            this.画图工具ToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.画图工具ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.画图工具ToolStripMenuItem.Text = "画图工具";
             // 
             // 矩形ToolStripMenuItem
             // 
             this.矩形ToolStripMenuItem.Name = "矩形ToolStripMenuItem";
-            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.矩形ToolStripMenuItem.Text = "矩形";
             this.矩形ToolStripMenuItem.Click += new System.EventHandler(this.矩形ToolStripMenuItem_Click);
             // 
             // 圆形ToolStripMenuItem
             // 
             this.圆形ToolStripMenuItem.Name = "圆形ToolStripMenuItem";
-            this.圆形ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.圆形ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.圆形ToolStripMenuItem.Text = "圆形";
             this.圆形ToolStripMenuItem.Click += new System.EventHandler(this.圆形ToolStripMenuItem_Click);
             // 
             // 多边形ToolStripMenuItem
             // 
             this.多边形ToolStripMenuItem.Name = "多边形ToolStripMenuItem";
-            this.多边形ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.多边形ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.多边形ToolStripMenuItem.Text = "多边形";
             this.多边形ToolStripMenuItem.Click += new System.EventHandler(this.多边形ToolStripMenuItem_Click);
             // 
             // 线段ToolStripMenuItem
             // 
             this.线段ToolStripMenuItem.Name = "线段ToolStripMenuItem";
-            this.线段ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.线段ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.线段ToolStripMenuItem.Text = "线段";
             this.线段ToolStripMenuItem.Click += new System.EventHandler(this.线段ToolStripMenuItem_Click);
             // 
             // 折线段ToolStripMenuItem
             // 
             this.折线段ToolStripMenuItem.Name = "折线段ToolStripMenuItem";
-            this.折线段ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.折线段ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.折线段ToolStripMenuItem.Text = "线条";
             this.折线段ToolStripMenuItem.Click += new System.EventHandler(this.折线段ToolStripMenuItem_Click);
             // 
             // 测距ToolStripMenuItem
             // 
             this.测距ToolStripMenuItem.Name = "测距ToolStripMenuItem";
-            this.测距ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.测距ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.测距ToolStripMenuItem.Text = "测距";
             this.测距ToolStripMenuItem.Click += new System.EventHandler(this.测距ToolStripMenuItem_Click);
             // 
@@ -669,34 +666,34 @@
             this.本地缓存ToolStripMenuItem,
             this.显示网格ToolStripMenuItem});
             this.地图访问ToolStripMenuItem.Name = "地图访问ToolStripMenuItem";
-            this.地图访问ToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.地图访问ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.地图访问ToolStripMenuItem.Text = "地图访问";
             // 
             // serverAndCacheToolStripMenuItem
             // 
             this.serverAndCacheToolStripMenuItem.Name = "serverAndCacheToolStripMenuItem";
-            this.serverAndCacheToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.serverAndCacheToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.serverAndCacheToolStripMenuItem.Text = "服务和缓存";
             this.serverAndCacheToolStripMenuItem.Click += new System.EventHandler(this.serverAndCacheToolStripMenuItem_Click);
             // 
             // 在线服务ToolStripMenuItem
             // 
             this.在线服务ToolStripMenuItem.Name = "在线服务ToolStripMenuItem";
-            this.在线服务ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.在线服务ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.在线服务ToolStripMenuItem.Text = "在线服务";
             this.在线服务ToolStripMenuItem.Click += new System.EventHandler(this.在线服务ToolStripMenuItem_Click);
             // 
             // 本地缓存ToolStripMenuItem
             // 
             this.本地缓存ToolStripMenuItem.Name = "本地缓存ToolStripMenuItem";
-            this.本地缓存ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.本地缓存ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.本地缓存ToolStripMenuItem.Text = "本地缓存";
             this.本地缓存ToolStripMenuItem.Click += new System.EventHandler(this.本地缓存ToolStripMenuItem_Click);
             // 
             // 显示网格ToolStripMenuItem
             // 
             this.显示网格ToolStripMenuItem.Name = "显示网格ToolStripMenuItem";
-            this.显示网格ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.显示网格ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.显示网格ToolStripMenuItem.Text = "显示网格";
             this.显示网格ToolStripMenuItem.Click += new System.EventHandler(this.显示网格ToolStripMenuItem_Click);
             // 
@@ -708,34 +705,34 @@
             this.清楚路径ToolStripMenuItem,
             this.清除POIToolStripMenuItem});
             this.图层管理ToolStripMenuItem.Name = "图层管理ToolStripMenuItem";
-            this.图层管理ToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.图层管理ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.图层管理ToolStripMenuItem.Text = "图层清理";
             // 
             // 清除画图ToolStripMenuItem
             // 
             this.清除画图ToolStripMenuItem.Name = "清除画图ToolStripMenuItem";
-            this.清除画图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.清除画图ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.清除画图ToolStripMenuItem.Text = "清除画图";
             this.清除画图ToolStripMenuItem.Click += new System.EventHandler(this.清除画图ToolStripMenuItem_Click);
             // 
             // 清楚边界ToolStripMenuItem
             // 
             this.清楚边界ToolStripMenuItem.Name = "清楚边界ToolStripMenuItem";
-            this.清楚边界ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.清楚边界ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.清楚边界ToolStripMenuItem.Text = "清除下载边界";
             this.清楚边界ToolStripMenuItem.Click += new System.EventHandler(this.清楚边界ToolStripMenuItem_Click);
             // 
             // 清楚路径ToolStripMenuItem
             // 
             this.清楚路径ToolStripMenuItem.Name = "清楚路径ToolStripMenuItem";
-            this.清楚路径ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.清楚路径ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.清楚路径ToolStripMenuItem.Text = "清除路径";
             this.清楚路径ToolStripMenuItem.Click += new System.EventHandler(this.清楚路径ToolStripMenuItem_Click);
             // 
             // 清除POIToolStripMenuItem
             // 
             this.清除POIToolStripMenuItem.Name = "清除POIToolStripMenuItem";
-            this.清除POIToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.清除POIToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.清除POIToolStripMenuItem.Text = "清除POI";
             this.清除POIToolStripMenuItem.Click += new System.EventHandler(this.清除POIToolStripMenuItem_Click);
             // 
@@ -748,41 +745,41 @@
             this.热力图ToolStripMenuItem,
             this.地图截屏ToolStripMenuItem});
             this.数据操作ToolStripMenuItem.Name = "数据操作ToolStripMenuItem";
-            this.数据操作ToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.数据操作ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.数据操作ToolStripMenuItem.Text = "数据操作";
             // 
             // 导入路径ToolStripMenuItem
             // 
             this.导入路径ToolStripMenuItem.Name = "导入路径ToolStripMenuItem";
-            this.导入路径ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.导入路径ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.导入路径ToolStripMenuItem.Text = "导入路径";
             this.导入路径ToolStripMenuItem.Click += new System.EventHandler(this.导入路径ToolStripMenuItem_Click);
             // 
             // 读取GPXToolStripMenuItem
             // 
             this.读取GPXToolStripMenuItem.Name = "读取GPXToolStripMenuItem";
-            this.读取GPXToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.读取GPXToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.读取GPXToolStripMenuItem.Text = "读取GPX";
             this.读取GPXToolStripMenuItem.Click += new System.EventHandler(this.读取GPXToolStripMenuItem_Click);
             // 
             // 读取KMLToolStripMenuItem
             // 
             this.读取KMLToolStripMenuItem.Name = "读取KMLToolStripMenuItem";
-            this.读取KMLToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.读取KMLToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.读取KMLToolStripMenuItem.Text = "读取KML";
             this.读取KMLToolStripMenuItem.Click += new System.EventHandler(this.读取KMLToolStripMenuItem_Click);
             // 
             // 热力图ToolStripMenuItem
             // 
             this.热力图ToolStripMenuItem.Name = "热力图ToolStripMenuItem";
-            this.热力图ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.热力图ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.热力图ToolStripMenuItem.Text = "热力图";
             this.热力图ToolStripMenuItem.Click += new System.EventHandler(this.热力图ToolStripMenuItem_Click);
             // 
             // 地图截屏ToolStripMenuItem
             // 
             this.地图截屏ToolStripMenuItem.Name = "地图截屏ToolStripMenuItem";
-            this.地图截屏ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.地图截屏ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.地图截屏ToolStripMenuItem.Text = "地图截屏";
             this.地图截屏ToolStripMenuItem.Click += new System.EventHandler(this.地图截屏ToolStripMenuItem_Click);
             // 
@@ -793,27 +790,27 @@
             this.导出地图切片ToolStripMenuItem,
             this.arcGISTileToBundleToolStripMenuItem});
             this.服务发布ToolStripMenuItem.Name = "服务发布ToolStripMenuItem";
-            this.服务发布ToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.服务发布ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.服务发布ToolStripMenuItem.Text = "服务发布";
             // 
             // 离线Web服务ToolStripMenuItem
             // 
             this.离线Web服务ToolStripMenuItem.Name = "离线Web服务ToolStripMenuItem";
-            this.离线Web服务ToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.离线Web服务ToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.离线Web服务ToolStripMenuItem.Text = "离线Web服务";
             this.离线Web服务ToolStripMenuItem.Click += new System.EventHandler(this.离线Web服务ToolStripMenuItem_Click);
             // 
             // 导出地图切片ToolStripMenuItem
             // 
             this.导出地图切片ToolStripMenuItem.Name = "导出地图切片ToolStripMenuItem";
-            this.导出地图切片ToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.导出地图切片ToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.导出地图切片ToolStripMenuItem.Text = "导出地图切片";
             this.导出地图切片ToolStripMenuItem.Click += new System.EventHandler(this.导出地图切片ToolStripMenuItem_Click);
             // 
             // arcGISTileToBundleToolStripMenuItem
             // 
             this.arcGISTileToBundleToolStripMenuItem.Name = "arcGISTileToBundleToolStripMenuItem";
-            this.arcGISTileToBundleToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.arcGISTileToBundleToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.arcGISTileToBundleToolStripMenuItem.Text = "ArcGISTileToBundle";
             this.arcGISTileToBundleToolStripMenuItem.Click += new System.EventHandler(this.arcGISTileToBundleToolStripMenuItem_Click);
             // 
@@ -822,13 +819,13 @@
             this.下载设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.代理设置ToolStripMenuItem});
             this.下载设置ToolStripMenuItem.Name = "下载设置ToolStripMenuItem";
-            this.下载设置ToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.下载设置ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.下载设置ToolStripMenuItem.Text = "下载设置";
             // 
             // 代理设置ToolStripMenuItem
             // 
             this.代理设置ToolStripMenuItem.Name = "代理设置ToolStripMenuItem";
-            this.代理设置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.代理设置ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.代理设置ToolStripMenuItem.Text = "代理设置";
             this.代理设置ToolStripMenuItem.Click += new System.EventHandler(this.代理设置ToolStripMenuItem_Click);
             // 
@@ -844,26 +841,26 @@
             this.toolStripStatusExport});
             this.statusStrip1.Location = new System.Drawing.Point(0, 678);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1408, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1479, 22);
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusTip
             // 
             this.toolStripStatusTip.Name = "toolStripStatusTip";
-            this.toolStripStatusTip.Size = new System.Drawing.Size(32, 17);
+            this.toolStripStatusTip.Size = new System.Drawing.Size(31, 17);
             this.toolStripStatusTip.Text = "显示";
             // 
             // toolStripStatusCenter
             // 
             this.toolStripStatusCenter.Name = "toolStripStatusCenter";
-            this.toolStripStatusCenter.Size = new System.Drawing.Size(68, 17);
+            this.toolStripStatusCenter.Size = new System.Drawing.Size(67, 17);
             this.toolStripStatusCenter.Text = "地图中心：";
             // 
             // toolStripStatusDownload
             // 
             this.toolStripStatusDownload.Name = "toolStripStatusDownload";
-            this.toolStripStatusDownload.Size = new System.Drawing.Size(68, 17);
+            this.toolStripStatusDownload.Size = new System.Drawing.Size(67, 17);
             this.toolStripStatusDownload.Text = "下载进度：";
             // 
             // toolStripProgressBarDownload
@@ -874,60 +871,14 @@
             // toolStripStatusPOIDownload
             // 
             this.toolStripStatusPOIDownload.Name = "toolStripStatusPOIDownload";
-            this.toolStripStatusPOIDownload.Size = new System.Drawing.Size(88, 17);
+            this.toolStripStatusPOIDownload.Size = new System.Drawing.Size(87, 17);
             this.toolStripStatusPOIDownload.Text = "POI下载进度：";
             // 
             // toolStripStatusExport
             // 
             this.toolStripStatusExport.Name = "toolStripStatusExport";
-            this.toolStripStatusExport.Size = new System.Drawing.Size(89, 17);
+            this.toolStripStatusExport.Size = new System.Drawing.Size(88, 17);
             this.toolStripStatusExport.Text = "正在导出切片...";
-            // 
-            // panelMap
-            // 
-            this.panelMap.Controls.Add(this.splitter1);
-            this.panelMap.Controls.Add(this.gMapControl1);
-            this.panelMap.Location = new System.Drawing.Point(0, 25);
-            this.panelMap.Name = "panelMap";
-            this.panelMap.Size = new System.Drawing.Size(949, 653);
-            this.panelMap.TabIndex = 12;
-            // 
-            // splitter1
-            // 
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(-3, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 653);
-            this.splitter1.TabIndex = 1;
-            this.splitter1.TabStop = false;
-            // 
-            // gMapControl1
-            // 
-            this.gMapControl1.Bearing = 0F;
-            this.gMapControl1.CanDragMap = true;
-            this.gMapControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gMapControl1.EmptyTileColor = System.Drawing.Color.Navy;
-            this.gMapControl1.GrayScaleMode = false;
-            this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
-            this.gMapControl1.LevelsKeepInMemmory = 5;
-            this.gMapControl1.Location = new System.Drawing.Point(0, 0);
-            this.gMapControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.gMapControl1.MarkersEnabled = true;
-            this.gMapControl1.MaxZoom = 2;
-            this.gMapControl1.MinZoom = 2;
-            this.gMapControl1.MouseWheelZoomEnabled = true;
-            this.gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
-            this.gMapControl1.Name = "gMapControl1";
-            this.gMapControl1.NegativeMode = false;
-            this.gMapControl1.PolygonsEnabled = true;
-            this.gMapControl1.RetryLoadTile = 0;
-            this.gMapControl1.RoutesEnabled = true;
-            this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
-            this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
-            this.gMapControl1.ShowTileGridLines = false;
-            this.gMapControl1.Size = new System.Drawing.Size(949, 653);
-            this.gMapControl1.TabIndex = 0;
-            this.gMapControl1.Zoom = 0D;
             // 
             // contextMenuStripSelectedArea
             // 
@@ -938,33 +889,33 @@
             this.允许编辑ToolStripMenuItem,
             this.停止编辑ToolStripMenuItem});
             this.contextMenuStripSelectedArea.Name = "contextMenuStripSelectedArea";
-            this.contextMenuStripSelectedArea.Size = new System.Drawing.Size(126, 92);
+            this.contextMenuStripSelectedArea.Size = new System.Drawing.Size(124, 92);
             // 
             // 下载地图ToolStripMenuItem
             // 
             this.下载地图ToolStripMenuItem.Name = "下载地图ToolStripMenuItem";
-            this.下载地图ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.下载地图ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.下载地图ToolStripMenuItem.Text = "下载地图";
             this.下载地图ToolStripMenuItem.Click += new System.EventHandler(this.下载地图ToolStripMenuItem_Click);
             // 
             // 下载KMLToolStripMenuItem
             // 
             this.下载KMLToolStripMenuItem.Name = "下载KMLToolStripMenuItem";
-            this.下载KMLToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.下载KMLToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.下载KMLToolStripMenuItem.Text = "下载KML";
             this.下载KMLToolStripMenuItem.Click += new System.EventHandler(this.下载KMLToolStripMenuItem_Click);
             // 
             // 允许编辑ToolStripMenuItem
             // 
             this.允许编辑ToolStripMenuItem.Name = "允许编辑ToolStripMenuItem";
-            this.允许编辑ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.允许编辑ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.允许编辑ToolStripMenuItem.Text = "允许编辑";
             this.允许编辑ToolStripMenuItem.Click += new System.EventHandler(this.允许编辑ToolStripMenuItem_Click);
             // 
             // 停止编辑ToolStripMenuItem
             // 
             this.停止编辑ToolStripMenuItem.Name = "停止编辑ToolStripMenuItem";
-            this.停止编辑ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.停止编辑ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.停止编辑ToolStripMenuItem.Text = "停止编辑";
             this.停止编辑ToolStripMenuItem.Click += new System.EventHandler(this.停止编辑ToolStripMenuItem_Click);
             // 
@@ -976,26 +927,26 @@
             this.以此为起点ToolStripMenuItem,
             this.以此为终点ToolStripMenuItem});
             this.contextMenuStripLocation.Name = "contextMenuStripLocation";
-            this.contextMenuStripLocation.Size = new System.Drawing.Size(161, 70);
+            this.contextMenuStripLocation.Size = new System.Drawing.Size(159, 70);
             // 
             // 搜索该点的地址ToolStripMenuItem
             // 
             this.搜索该点的地址ToolStripMenuItem.Name = "搜索该点的地址ToolStripMenuItem";
-            this.搜索该点的地址ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.搜索该点的地址ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.搜索该点的地址ToolStripMenuItem.Text = "搜索该点的地址";
             this.搜索该点的地址ToolStripMenuItem.Click += new System.EventHandler(this.搜索该点的地址ToolStripMenuItem_Click);
             // 
             // 以此为起点ToolStripMenuItem
             // 
             this.以此为起点ToolStripMenuItem.Name = "以此为起点ToolStripMenuItem";
-            this.以此为起点ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.以此为起点ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.以此为起点ToolStripMenuItem.Text = "以此为起点";
             this.以此为起点ToolStripMenuItem.Click += new System.EventHandler(this.以此为起点ToolStripMenuItem_Click);
             // 
             // 以此为终点ToolStripMenuItem
             // 
             this.以此为终点ToolStripMenuItem.Name = "以此为终点ToolStripMenuItem";
-            this.以此为终点ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.以此为终点ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.以此为终点ToolStripMenuItem.Text = "以此为终点";
             this.以此为终点ToolStripMenuItem.Click += new System.EventHandler(this.以此为终点ToolStripMenuItem_Click);
             // 
@@ -1006,7 +957,7 @@
             this.xPanderPanelList1.Controls.Add(this.xPanderPanel2);
             this.xPanderPanelList1.Dock = System.Windows.Forms.DockStyle.Right;
             this.xPanderPanelList1.GradientBackground = System.Drawing.Color.Empty;
-            this.xPanderPanelList1.Location = new System.Drawing.Point(1151, 0);
+            this.xPanderPanelList1.Location = new System.Drawing.Point(1222, 0);
             this.xPanderPanelList1.Name = "xPanderPanelList1";
             this.xPanderPanelList1.PanelColors = null;
             this.xPanderPanelList1.PanelStyle = BSE.Windows.Forms.PanelStyle.Office2007;
@@ -1016,7 +967,7 @@
             // 
             // xPanderPanel1
             // 
-            this.xPanderPanel1.CaptionFont = new System.Drawing.Font("Microsoft YaHei", 8F, System.Drawing.FontStyle.Bold);
+            this.xPanderPanel1.CaptionFont = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Bold);
             this.xPanderPanel1.Controls.Add(this.panelTool);
             this.xPanderPanel1.CustomColors.BackColor = System.Drawing.SystemColors.Control;
             this.xPanderPanel1.CustomColors.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(184)))), ((int)(((byte)(184)))));
@@ -1321,7 +1272,7 @@
             // 
             // xPanderPanel2
             // 
-            this.xPanderPanel2.CaptionFont = new System.Drawing.Font("Microsoft YaHei", 8F, System.Drawing.FontStyle.Bold);
+            this.xPanderPanel2.CaptionFont = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Bold);
             this.xPanderPanel2.Controls.Add(this.treeView1);
             this.xPanderPanel2.CustomColors.BackColor = System.Drawing.SystemColors.Control;
             this.xPanderPanel2.CustomColors.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(184)))), ((int)(((byte)(184)))));
@@ -1366,20 +1317,48 @@
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.richTextBox1.Location = new System.Drawing.Point(970, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(1118, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(181, 678);
+            this.richTextBox1.Size = new System.Drawing.Size(104, 678);
             this.richTextBox1.TabIndex = 13;
             this.richTextBox1.Text = "";
+            // 
+            // gMapControl1
+            // 
+            this.gMapControl1.BackColor = System.Drawing.Color.Pink;
+            this.gMapControl1.Bearing = 0F;
+            this.gMapControl1.CanDragMap = true;
+            this.gMapControl1.EmptyTileColor = System.Drawing.Color.Navy;
+            this.gMapControl1.GrayScaleMode = false;
+            this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.gMapControl1.LevelsKeepInMemmory = 5;
+            this.gMapControl1.Location = new System.Drawing.Point(0, 34);
+            this.gMapControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.gMapControl1.MarkersEnabled = true;
+            this.gMapControl1.MaxZoom = 2;
+            this.gMapControl1.MinZoom = 2;
+            this.gMapControl1.MouseWheelZoomEnabled = true;
+            this.gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.gMapControl1.Name = "gMapControl1";
+            this.gMapControl1.NegativeMode = false;
+            this.gMapControl1.PolygonsEnabled = true;
+            this.gMapControl1.RetryLoadTile = 0;
+            this.gMapControl1.RoutesEnabled = true;
+            this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.gMapControl1.ShowTileGridLines = false;
+            this.gMapControl1.Size = new System.Drawing.Size(216, 300);
+            this.gMapControl1.TabIndex = 0;
+            this.gMapControl1.Zoom = 0D;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1408, 700);
+            this.ClientSize = new System.Drawing.Size(1479, 700);
+            this.Controls.Add(this.gMapControl1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.panelMap);
             this.Controls.Add(this.xPanderPanelList1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -1395,7 +1374,6 @@
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.panelMap.ResumeLayout(false);
             this.contextMenuStripSelectedArea.ResumeLayout(false);
             this.contextMenuStripLocation.ResumeLayout(false);
             this.xPanderPanelList1.ResumeLayout(false);
@@ -1457,7 +1435,6 @@
         private System.Windows.Forms.ToolStripMenuItem 在线服务ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 本地缓存ToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusDownload;
-        private System.Windows.Forms.Panel panelMap;
         private MapControl gMapControl1;
         private BSE.Windows.Forms.XPanderPanel xPanderPanel2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripSelectedArea;
@@ -1545,7 +1522,6 @@
         private System.Windows.Forms.ToolStripMenuItem 福建混合地图ToolStripMenuItem;
         private System.Windows.Forms.Button buttonMapImage;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Button buttonAddressSearch;
         private System.Windows.Forms.Button buttonPOISearch;
         private System.Windows.Forms.Button buttonPoiSave;

@@ -602,6 +602,7 @@ namespace GMap.NET.WindowsForms
             {
                 GMapImageProxy.Enable();
 #if !PocketPC
+                GMaps.Instance.SQLitePing();
 #endif
             }
         }
