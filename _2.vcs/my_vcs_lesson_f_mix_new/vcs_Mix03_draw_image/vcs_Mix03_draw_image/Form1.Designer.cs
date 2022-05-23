@@ -197,6 +197,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 70);
             this.button14.TabIndex = 104;
+            this.button14.Text = "取得圖片的一部分";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -259,6 +260,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(170, 70);
             this.button1.TabIndex = 98;
+            this.button1.Text = "本程式截圖";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

@@ -1,4 +1,4 @@
-﻿namespace vcs_ScreenMagnify
+﻿namespace vcs_PictureMagnify7
 {
     partial class Form1
     {

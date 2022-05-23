@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace draw_test2
+namespace vcs_PictureMagnify7
 {
     static class Program
     {

@@ -63,55 +63,9 @@ namespace draw_test1
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
         }
 
-        [DllImportAttribute("gdi32.dll")]
-
-        private static extern bool BitBlt(
-        IntPtr hdcDest, //目的DC的句柄
-        int nXDest, //目的圖形的左上角的x坐標
-        int nYDest, //目的圖形的左上角的y坐標
-        int nWidth, //目的圖形的矩形寬度
-        int nHeight, //目的圖形的矩形高度
-        IntPtr hdcSrc, //源DC的句柄
-        int nXSrc, //源圖形的左上角的x坐標
-        int nYSrc, //源圖形的左上角的x坐標
-        System.Int32 dwRop //光柵操作代碼
-        );
-
         private void button0_Click(object sender, EventArgs e)
         {
-            //本程式截圖
-            Graphics g1 = this.CreateGraphics();//獲得窗體圖形對象
-
-            Image image = new Bitmap(this.ClientRectangle.Width, this.ClientRectangle.Height, g1);
-
-            Graphics g2 = Graphics.FromImage(image);//創建位圖圖形對象
-
-            IntPtr dc1 = g1.GetHdc();//獲得窗體的上下文設備
-
-            IntPtr dc2 = g2.GetHdc();//獲得位圖文件的上下文設備
-
-            BitBlt(dc2, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height, dc1, 0, 0, 13369376);//寫入到位圖
-
-            g1.ReleaseHdc(dc1);//釋放窗體的上下文設備
-
-            g2.ReleaseHdc(dc2);//釋放位圖文件的上下文設備
-
-
-            //自動檔名 與 存檔語法
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            try
-            {
-                image.Save(filename, ImageFormat.Bmp);
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-
-
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {

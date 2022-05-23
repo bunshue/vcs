@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace draw_test2.Properties {
+namespace vcs_PictureMagnify7.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

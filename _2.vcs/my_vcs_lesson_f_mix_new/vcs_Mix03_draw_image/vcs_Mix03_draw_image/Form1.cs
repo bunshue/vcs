@@ -15,10 +15,28 @@ using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
 
+using System.Runtime.InteropServices;
+
 namespace vcs_Mix03_draw_image
 {
     public partial class Form1 : Form
     {
+        //本程式截圖 ST
+        [DllImportAttribute("gdi32.dll")]
+
+        private static extern bool BitBlt(
+        IntPtr hdcDest, //目的DC的句柄
+        int nXDest, //目的圖形的左上角的x坐標
+        int nYDest, //目的圖形的左上角的y坐標
+        int nWidth, //目的圖形的矩形寬度
+        int nHeight, //目的圖形的矩形高度
+        IntPtr hdcSrc, //源DC的句柄
+        int nXSrc, //源圖形的左上角的x坐標
+        int nYSrc, //源圖形的左上角的x坐標
+        System.Int32 dwRop //光柵操作代碼
+        );
+        //本程式截圖 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -104,37 +122,36 @@ namespace vcs_Mix03_draw_image
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            string filename = @"C:\______test_files\ims01.bmp";
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            Color p;
 
-            int i = 10;
-            int j = 10;
-            bitmap1.SetPixel(i, j, Color.White);
+            //本程式截圖
+            Graphics g1 = this.CreateGraphics();//獲得窗體圖形對象
 
-            i = 30; j = 10;
-            bitmap1.SetPixel(i, j, Color.White);
-            i = 10; j = 30;
-            bitmap1.SetPixel(i, j, Color.White);
-            i = 30; j = 30;
-            bitmap1.SetPixel(i, j, Color.White);
-            i = 50; j = 10;
-            bitmap1.SetPixel(i, j, Color.White);
-            i = 10; j = 50;
-            bitmap1.SetPixel(i, j, Color.White);
+            Image image = new Bitmap(this.ClientRectangle.Width, this.ClientRectangle.Height, g1);
 
-            i = 20;
-            for (j = 0; j < 100; j++)
+            Graphics g2 = Graphics.FromImage(image);//創建位圖圖形對象
+
+            IntPtr dc1 = g1.GetHdc();//獲得窗體的上下文設備
+
+            IntPtr dc2 = g2.GetHdc();//獲得位圖文件的上下文設備
+
+            BitBlt(dc2, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height, dc1, 0, 0, 13369376);//寫入到位圖
+
+            g1.ReleaseHdc(dc1);//釋放窗體的上下文設備
+
+            g2.ReleaseHdc(dc2);//釋放位圖文件的上下文設備
+
+
+            //自動檔名 與 存檔語法
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            try
             {
-                bitmap1.SetPixel(i, j, Color.White);
-
+                image.Save(filename, ImageFormat.Bmp);
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
             }
-
-            bitmap1.Save("aaaaa.bmp", ImageFormat.Bmp);
-
-
-
-
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -447,9 +464,56 @@ namespace vcs_Mix03_draw_image
             }
         }
 
+        //C#獲取圖片的指定部分
+        /// <summary>
+        /// 獲取圖片指定部分
+        /// </summary>
+        /// <param name="filename">圖片路徑</param>
+        /// <param name="sx">原始圖片開始截取處的坐標X值</param>
+        /// <param name="sy">原始圖片開始截取處的坐標Y值</param>
+        /// <param name="sWidth">原始圖片的寬度</param>
+        /// <param name="sHeight">原始圖片的高度</param>
+        /// <param name="dx">目標圖片開始繪制處的坐標X值(通常為0)</param>
+        /// <param name="dy">目標圖片開始繪制處的坐標Y值(通常為0)</param>
+        /// <param name="dWidth">目標圖片的寬度</param>
+        /// <param name="dHeight">目標圖片的高度</param>
+        static Bitmap GetPart(string filename, int sx, int sy, int sWidth, int sHeight, int dx, int dy, int dWidth, int dHeight)
+        {
+            Image image = Image.FromFile(filename);
+
+            Bitmap bitmap1 = new Bitmap(dWidth, dHeight);
+            Graphics g = Graphics.FromImage(bitmap1);
+            Rectangle rec1 = new Rectangle(new Point(sx, sy), new Size(sWidth, sHeight));//原圖位置
+            Rectangle rec2 = new Rectangle(new Point(dx, dy), new Size(dWidth, dHeight));//目標位置
+
+            g.DrawImage(image, rec2, rec1, GraphicsUnit.Pixel);
+
+            return bitmap1;
+        }
+
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //取得圖片的一部分
+
+
+            //取得圖片的一部分
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            int sx = 0;
+            int sy = 0;
+            int sWidth = 305 / 2;
+            int sHeight = 400 / 2;
+            int dx = 0;
+            int dy = 0;
+            int dWidth = 305 / 1;
+            int dHeight = 400 / 1;
+
+            Bitmap bitmap1 = GetPart(filename, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+            pictureBox1.Image = bitmap1;
+
+
         }
 
         private void button15_Click(object sender, EventArgs e)

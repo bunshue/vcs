@@ -81,20 +81,19 @@ namespace vcs_FFMPEG
         {
             //音頻轉換與音頻切割
 
+            //音頻轉換
+            //string filename1 = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            string filename1 = @"C:\______test_files\_wav\WindowsShutdown.wav";
+            string filename2 = @"aaaaa.wav";
 
-            //音频转换
-            //string fromMusic = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
-            string fromMusic = @"C:\______test_files\_wav\WindowsShutdown.wav";
-            string toMusic = @"aaaaa.wav";
-
-            int bitrate = 12 * 1000;//恒定码率
-            int Hz = 3000;//采样频率  
+            int bitrate = 12 * 1000;//恒定碼率
+            int Hz = 3000;//采樣頻率  
 
             try
             {
-                ExcuteProcess(ffmpeg, "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + fromMusic + "\" \"" + toMusic + "\"");
+                ExcuteProcess(ffmpeg, "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"");
 
-                richTextBox1.Text += "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + fromMusic + "\" \"" + toMusic + "\"";
+                richTextBox1.Text += "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"";
                 richTextBox1.Text += "轉換完成\n";
             }
             catch (Exception ex)
@@ -132,24 +131,24 @@ namespace vcs_FFMPEG
         }
 
         /// <summary>
-        /// 转换函数
+        /// 轉換函數
         /// </summary>
         /// <param name="exe">ffmpeg程序</param>
-        /// <param name="arg">执行参数</param>
+        /// <param name="arg">執行參數</param>
         public static void ExcuteProcess(string exe, string arg)
         {
             using (var p = new Process())
             {
                 p.StartInfo.FileName = exe;
                 p.StartInfo.Arguments = arg;
-                p.StartInfo.UseShellExecute = false;    //输出信息重定向  
+                p.StartInfo.UseShellExecute = false;    //輸出信息重定向  
                 p.StartInfo.CreateNoWindow = true;
                 p.StartInfo.RedirectStandardError = true;
                 p.StartInfo.RedirectStandardOutput = true;
-                p.Start();                    //启动线程  
+                p.Start();                    //啟動線程  
                 p.BeginOutputReadLine();
                 p.BeginErrorReadLine();
-                p.WaitForExit();//等待进程结束                                        
+                p.WaitForExit();//等待進程結束                                        
             }
         }
 
@@ -173,18 +172,18 @@ namespace vcs_FFMPEG
 
 
         /// <summary>  
-        /// 获得音乐长度  
+        /// 獲得音樂長度  
         /// </summary>  
-        /// <param name="filePath">文件的完整路径</param>
+        /// <param name="filePath">文件的完整路徑</param>
         public static string[] GetMP3Time(string filePath)
         {
             string dirName = Path.GetDirectoryName(filePath);
-            string SongName = Path.GetFileName(filePath);//获得歌曲名称             
+            string SongName = Path.GetFileName(filePath);//獲得歌曲名稱             
             Shell sh = new Shell();
             //ShellClass sh = new ShellClass();  or
             Folder dir = sh.NameSpace(dirName);
             FolderItem item = dir.ParseName(SongName);
-            string SongTime = dir.GetDetailsOf(item, 27);//27为获得歌曲持续时间 ，28为获得音乐速率，1为获得音乐文件大小      
+            string SongTime = dir.GetDetailsOf(item, 27);//27為獲得歌曲持續時間 ，28為獲得音樂速率，1為獲得音樂文件大小      
             string[] time = Regex.Split(SongTime, ":");
             return time;
 
@@ -391,10 +390,10 @@ namespace vcs_FFMPEG
             //影片轉mp3
             //ffmpeg -i test.mp4 -f mp3 -vn test.mp3
             /*
-            参数解释：
-            -i 表示input，即输入文件
-            -f 表示format，即输出格式
-            -vn表示vedio not，即输出不包含视频
+            參數解釋：
+            -i 表示input，即輸入文件
+            -f 表示format，即輸出格式
+            -vn表示vedio not，即輸出不包含視頻
             */
 
 
@@ -412,7 +411,7 @@ namespace vcs_FFMPEG
             //要將視頻升級到1080p，請輸入：
 
 
-            string cmdParams = String.Format("-i {0} -vf scale = 1920x1080:flags = lanczos {1}",filename1, filename2);
+            string cmdParams = String.Format("-i {0} -vf scale = 1920x1080:flags = lanczos {1}", filename1, filename2);
 
             //ffmpeg -i {0} -vf scale = 1920x1080：flags = lanczos {1}
 
@@ -786,7 +785,6 @@ namespace vcs_FFMPEG
         }
         //FFMPEG的使用 SP
 
-    
     }
 }
 

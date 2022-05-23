@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_ScreenMagnify
+namespace vcs_PictureMagnify7
 {
     public partial class Form1 : Form
     {
