@@ -108,6 +108,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(170, 70);
             this.button26.TabIndex = 113;
+            this.button26.Text = "List測試";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -129,6 +130,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(170, 70);
             this.button24.TabIndex = 111;
+            this.button24.Text = "下載HTML";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -139,6 +141,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(170, 70);
             this.button23.TabIndex = 110;
+            this.button23.Text = "取得資料夾下所有圖片檔資訊";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -149,6 +152,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(170, 70);
             this.button22.TabIndex = 109;
+            this.button22.Text = "將純文字檔拆成一行一行的字串陣列";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 

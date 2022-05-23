@@ -795,6 +795,7 @@
             this.button49.Name = "button49";
             this.button49.Size = new System.Drawing.Size(135, 45);
             this.button49.TabIndex = 83;
+            this.button49.Text = "畫曲線圖";
             this.button49.UseVisualStyleBackColor = true;
             this.button49.Click += new System.EventHandler(this.button49_Click);
             // 

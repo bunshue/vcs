@@ -747,8 +747,9 @@
             this.rb_location11.AutoSize = true;
             this.rb_location11.Location = new System.Drawing.Point(104, 83);
             this.rb_location11.Name = "rb_location11";
-            this.rb_location11.Size = new System.Drawing.Size(14, 13);
+            this.rb_location11.Size = new System.Drawing.Size(71, 16);
             this.rb_location11.TabIndex = 10;
+            this.rb_location11.Text = "三國地圖";
             this.rb_location11.UseVisualStyleBackColor = true;
             this.rb_location11.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
             // 

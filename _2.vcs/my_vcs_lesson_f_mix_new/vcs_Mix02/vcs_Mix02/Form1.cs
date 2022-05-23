@@ -788,16 +788,82 @@ namespace vcs_Mix02
         private void button22_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //將純文字檔拆成一行一行的字串陣列, 可以去除前後空白
+            string filename = @"C:\______test_files\__RW\_txt\poem.txt";
+            string[] patterns;
+            patterns = File.ReadAllLines(filename).Select(i => i.Trim()).Where(i => i != string.Empty).ToArray();
+            int len = patterns.Length;
+            //richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int ii;
+            for (ii = 0; ii < len; ii++)
+            {
+                richTextBox1.Text += patterns[ii] + "\n";
+            }
+
+
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            string foldername = @"C:\______test_files\__pic";
+
+            IEnumerable<FileInfo> images = null;
+            if (Directory.Exists(foldername) == true)
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo(foldername);
+                images = dirInfo.EnumerateFiles("*.jpg").OrderBy(i => i.Name[0]).ThenBy(i => i.Name.Length).ThenBy(i => i.Name);
+
+                int len = images.Count();
+                richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+                if (images != null && images.Count() > 0)
+                {
+
+                }
+
+                foreach (var image in images)
+                {
+                    richTextBox1.Text += image.Name + "\n";
+                    richTextBox1.Text += image.FullName + "\n";
+                    richTextBox1.Text += image.Extension + "\n";
+                    richTextBox1.Text += image.Length.ToString() + "\n";
+                }
+            }
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            string url = @"C:/_git/vcs/_1.data/_html/朱冶蕙老師的電腦教室.html";
+            //foreach (var fileName in fileNameList)
+            {
+                MemoryStream ms = GetResponse(url);
+                File.WriteAllBytes("aaaaa.html", ms.ToArray());
+            }
+        }
+
+        private MemoryStream GetResponse(string url)
+        {
+            while (true)
+            {
+                try
+                {
+                    HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+                    //request.Headers.Add("Cookie", cookie);
+                    request.Method = "GET";
+                    request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko";
+                    HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+
+                    MemoryStream ms = new MemoryStream();
+                    response.GetResponseStream().CopyTo(ms);
+
+                }
+                catch (Exception ex)
+                {
+                }
+            }
         }
 
         //计算两点GPS坐标距离 
@@ -827,6 +893,35 @@ namespace vcs_Mix02
         private void button26_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            int i;
+            int j;
+            List<string[]> fileNameList = new List<string[]>();
+
+            richTextBox1.Text += "len = " + fileNameList.Count.ToString() + "\n";
+            for (i = 0; i < 10; i++)
+            {
+                fileNameList.Add(new string[] { i.ToString(), "aaaaaaa", "bbbbb", "cccccc" });
+            }
+            richTextBox1.Text += "len = " + fileNameList.Count.ToString() + "\n";
+
+            for (i = 0; i < fileNameList.Count; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t";
+                for (j = 0; j < 4; j++)
+                {
+                    richTextBox1.Text += fileNameList[i][j] + "\t";
+                }
+                richTextBox1.Text += "\n";
+
+            }
+
+            foreach (var fileName in fileNameList)
+            {
+                string imgURL = fileName[0];
+                richTextBox1.Text += imgURL + "\n";
+            }
+
         }
 
         private void button27_Click(object sender, EventArgs e)

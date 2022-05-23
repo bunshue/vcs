@@ -33,6 +33,8 @@ namespace OperateCamera
 
         string fileFullPath = string.Empty;
 
+        bool flag_recording = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -172,21 +174,30 @@ namespace OperateCamera
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //开始录像
-            if (button1.Text == "开始录像")
+            if (flag_recording == false)
             {
+                flag_recording = true;
                 stopREC = false;
                 createNewFile = true;
-                button1.Text = "停止录像";
+                button1.Text = "停止錄影";
             }
-            else if (button1.Text == "停止录像")
+            else
             {
+                flag_recording = false;
                 stopREC = true;
-                button1.Text = "开始录像";
+                button1.Text = "開始錄影";
+
+
+                flag_recording = false;
+                if (videoWriter != null)
+                {
+                    videoWriter.Close();
+                    videoWriter.Dispose();
+                }
+
+
             }
         }
-
-        bool flag_recording = false;
 
         public Bitmap bmp = null;
         //自定義函數, 捕獲每一幀圖像並顯示
@@ -273,28 +284,6 @@ namespace OperateCamera
 
             //videoWriter.Close();
             //videoWriter.Dispose();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //ST
-            flag_recording = true;
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //SP
-            flag_recording = false;
-            if (videoWriter != null)
-            {
-                videoWriter.Close();
-                videoWriter.Dispose();
-            }
         }
     }
 }

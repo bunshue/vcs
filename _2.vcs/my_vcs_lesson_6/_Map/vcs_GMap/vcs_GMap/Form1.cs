@@ -90,6 +90,8 @@ namespace vcs_GMap
 
             drawDistance = new DrawDistance(this.gMapControl1);
             drawDistance.DrawComplete += new EventHandler<DrawDistanceEventArgs>(drawDistance_DrawComplete);
+
+            rb_location0.Checked =true;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -2645,6 +2647,19 @@ namespace vcs_GMap
             }
             else if (rb_location11.Checked == true)
             {
+                //三國地圖
+
+                string[,] location = null;
+
+                location = new string[,] {
+            { "街亭", "34.99874", "105.9806"},
+            { "五丈原", "34.44482", "107.62093"},
+            };
+                show_locations(location);
+                gMapControl1.Zoom = 7; //當前比例
+
+
+
 
             }
             else if (rb_location12.Checked == true)
@@ -2846,8 +2861,15 @@ namespace vcs_GMap
 
                 //離開全螢幕
                 this.FormBorderStyle = FormBorderStyle.Sizable;
-                this.WindowState = FormWindowState.Normal;
+                //this.WindowState = FormWindowState.Normal;
                 gMapControl1.Dock = DockStyle.None;
+
+                int x_st = 10;
+                int y_st = 10;
+
+                gMapControl1.Size = new Size(1130, 1060);
+                gMapControl1.Location = new Point(x_st, y_st);
+
                 for (int i = 0; i < this.Controls.Count; i++)
                 {
                     //richTextBox1.Text += "Name: " + this.Controls[i].Name + "\t";
@@ -2858,8 +2880,8 @@ namespace vcs_GMap
                         this.Controls[i].Visible = true;
                     }
                 }
-                int x_st = 1370;
-                int y_st = 12;
+                x_st = 1370;
+                y_st = 12;
                 int dy = 25;
                 lb_distance.Location = new Point(x_st + 90, y_st + dy * 2);
             }

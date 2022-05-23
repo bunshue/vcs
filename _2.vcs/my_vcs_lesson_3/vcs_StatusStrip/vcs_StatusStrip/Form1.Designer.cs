@@ -43,6 +43,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.statusStrip1.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +51,6 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // statusStrip1
@@ -59,7 +59,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 466);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(680, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(960, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -96,7 +96,7 @@
             this.toolStripProgressBar1});
             this.statusStrip2.Location = new System.Drawing.Point(0, 444);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(680, 22);
+            this.statusStrip2.Size = new System.Drawing.Size(960, 22);
             this.statusStrip2.TabIndex = 12;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -110,7 +110,8 @@
             // toolStripProgressBar1
             // 
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(500, 16);
+            this.toolStripProgressBar1.Step = 1;
             // 
             // label1
             // 
@@ -162,11 +163,20 @@
             this.label7.TabIndex = 17;
             this.label7.Text = "加timer程式";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(700, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(248, 429);
+            this.richTextBox1.TabIndex = 18;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 488);
+            this.ClientSize = new System.Drawing.Size(960, 488);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
@@ -178,6 +188,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Name = "Form1";
             this.Text = "ToolStripStatusLabel使用";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.statusStrip2.ResumeLayout(false);
@@ -202,6 +213,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
