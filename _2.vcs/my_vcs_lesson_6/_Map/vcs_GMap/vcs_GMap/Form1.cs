@@ -3192,7 +3192,7 @@ namespace vcs_GMap
             {
                 string filename_json = @"C:\______test_files\_json\ChinaBoundary";
                 byte[] buffer = File.ReadAllBytes(filename_json);
-            
+
                 //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City; //另種讀取資料的方式
                 //byte[] buffer = Properties.Resources.ChinaBoundary;               //另種讀取資料的方式
 

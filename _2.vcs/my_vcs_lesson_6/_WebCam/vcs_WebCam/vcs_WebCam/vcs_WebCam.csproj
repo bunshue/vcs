@@ -34,6 +34,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge">
+      <HintPath>dll\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.2.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\AForge.Imaging.dll</HintPath>
+    </Reference>
     <Reference Include="AForge.Video">
       <HintPath>dll\AForge.Video.dll</HintPath>
     </Reference>
@@ -42,6 +49,9 @@
     </Reference>
     <Reference Include="AForge.Video.FFMPEG">
       <HintPath>dll\AForge.Video.FFMPEG.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Vision">
+      <HintPath>dll\AForge.Vision.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
