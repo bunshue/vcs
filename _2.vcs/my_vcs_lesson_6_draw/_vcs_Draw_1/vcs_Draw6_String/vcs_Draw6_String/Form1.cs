@@ -911,10 +911,71 @@ namespace vcs_Draw6_String
 
         private void button27_Click(object sender, EventArgs e)
         {
+            //量測字的大小 MeasureString
+
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            int X = 100;
+            int Y = 100;
+
+            //量測字的大小 MeasureString
+            Font f = new Font("標楷體", 48); // 字型
+            string text1 = "車如流水馬如龍"; // 文字字串
+            SizeF stringSize1 = g.MeasureString(text1, f); // 文字字串的寬高
+            g.DrawString(text1, f, Brushes.Red, X, Y);   // 繪出文字字串
+            g.DrawRectangle(Pens.Red, X, Y, stringSize1.Width, stringSize1.Height);
+            richTextBox1.Text += "字串寬高 : " + stringSize1.ToSize() + "\n";
+
+            int dy = 100;
+            string text2 = "標楷體,48"; // 文字字串
+            SizeF stringSize2 = g.MeasureString(text2, f); // 文字字串的寬高
+            g.DrawString(text2, f, Brushes.Red, X, Y + dy);   // 繪出文字字串
+            g.DrawRectangle(Pens.Red, X, Y + dy, stringSize2.Width, stringSize2.Height);
+            richTextBox1.Text += "字串寬高 : " + stringSize2.ToSize() + "\n";
+
+            richTextBox1.Text += "其實量得也不準\n";
+
+
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            //寫出直排的字串
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            Font f = new Font("標楷體", 24); // 字型
+            string text = "用 VC# 寫出直排的字串"; // 文字字串
+            StringFormat stringFormat = new StringFormat();　// 字串 繪出格式
+            stringFormat.FormatFlags = StringFormatFlags.DirectionVertical;　// 垂直
+
+            int stringWidth = 100; // 字串　最大的寬度
+
+            SizeF stringSize = g.MeasureString(text, f, stringWidth, stringFormat); // 文字字串的寬高
+            float X = 100; // 左上角的座標
+            float Y = 100;
+
+            g.DrawString(text, f, Brushes.Red, X, Y, stringFormat);  // 繪出文字字串
+
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
         }
 
         void save_image_to_drive()
@@ -1359,5 +1420,7 @@ namespace vcs_Draw6_String
             e.Graphics.DrawString(text, f, Brushes.White, 2, 2);
 
         }
+
+
     }
 }

@@ -55,7 +55,7 @@ namespace vcs_Draw1
 
             e.Graphics.DrawEllipse(new Pen(Color.Green, 10), x_st + W - 500, y_st + H - 150, 300, 100);
 
-            e.Graphics.DrawString("OnPaintBackground", new Font("標楷體", 30), new SolidBrush(Color.Red), x_st + W - 530, y_st + H - 120);
+            e.Graphics.DrawString("OnPaintBackground", new Font("標楷體", 30), new SolidBrush(Color.Red), 50, y_st + H - 90);
         }
 
         void show_item_location()
@@ -1819,30 +1819,6 @@ namespace vcs_Draw1
 
         private void button37_Click(object sender, EventArgs e)
         {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            int X = 100;
-            int Y = 100;
-
-            //量測字的大小 MeasureString
-            Font f = new Font("標楷體", 48); // 字型
-            string text1 = "車如流水馬如龍"; // 文字字串
-            SizeF stringSize1 = g.MeasureString(text1, f); // 文字字串的寬高
-            g.DrawString(text1, f, Brushes.Red, X, Y);   // 繪出文字字串
-            g.DrawRectangle(Pens.Red, X, Y, stringSize1.Width, stringSize1.Height);
-            richTextBox1.Text += "字串寬高 : " + stringSize1.ToSize() + "\n";
-
-            int dy = 100;
-            string text2 = "標楷體,48"; // 文字字串
-            SizeF stringSize2 = g.MeasureString(text2, f); // 文字字串的寬高
-            g.DrawString(text2, f, Brushes.Red, X, Y + dy);   // 繪出文字字串
-            g.DrawRectangle(Pens.Red, X, Y + dy, stringSize2.Width, stringSize2.Height);
-            richTextBox1.Text += "字串寬高 : " + stringSize2.ToSize() + "\n";
-
-            richTextBox1.Text += "其實量得也不準\n";
         }
 
         private void button38_Click(object sender, EventArgs e)
@@ -2760,19 +2736,6 @@ namespace vcs_Draw1
                 open_new_file();
             }
 
-            //寫出直排的字串
-            Font f = new Font("標楷體", 24); // 字型
-            string text = "用 VC# 寫出直排的字串"; // 文字字串
-            StringFormat stringFormat = new StringFormat();　// 字串 繪出格式
-            stringFormat.FormatFlags = StringFormatFlags.DirectionVertical;　// 垂直
-
-            int stringWidth = 100; // 字串　最大的寬度
-
-            SizeF stringSize = g.MeasureString(text, f, stringWidth, stringFormat); // 文字字串的寬高
-            float X = 100; // 左上角的座標
-            float Y = 100;
-
-            g.DrawString(text, f, Brushes.Red, X, Y, stringFormat);  // 繪出文字字串
         }
 
         private void button50_Click(object sender, EventArgs e)

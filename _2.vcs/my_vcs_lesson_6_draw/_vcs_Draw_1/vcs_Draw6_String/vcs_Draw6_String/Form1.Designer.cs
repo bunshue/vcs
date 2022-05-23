@@ -406,6 +406,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(140, 50);
             this.button27.TabIndex = 46;
+            this.button27.Text = "量測字的大小 MeasureString";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -460,6 +461,7 @@
             this.button29.Size = new System.Drawing.Size(140, 50);
             this.button29.TabIndex = 54;
             this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // button30
             // 
@@ -468,7 +470,9 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(140, 50);
             this.button30.TabIndex = 55;
+            this.button30.Text = "寫出直排的字串";
             this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
             // button31
             // 
@@ -478,6 +482,7 @@
             this.button31.Size = new System.Drawing.Size(140, 50);
             this.button31.TabIndex = 56;
             this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
             // pictureBox2
             // 
