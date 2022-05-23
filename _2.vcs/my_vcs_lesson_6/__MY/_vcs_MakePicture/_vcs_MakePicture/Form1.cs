@@ -2060,7 +2060,45 @@ namespace _vcs_MakePicture
 
         private void button53_Click(object sender, EventArgs e)
         {
+            //正中簡中
 
+            //寫字畫框
+
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 128;
+            height = 128;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+
+
+            int dd = 5;
+            p = new Pen(Color.SkyBlue, 20);
+            g.DrawRectangle(p, new Rectangle(width / 6 + dd, height / 6 + dd, width * 4 / 6 - dd * 2, height * 4 / 6 - dd * 2));
+
+            Font f;
+            f = new Font("標楷體", 45);
+            sb = new SolidBrush(Color.Red);
+            g.DrawString("正中", f, sb, new PointF(-5, 0));
+            g.DrawString("簡中", f, sb, new PointF(-5, 128 / 2));
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button54_Click(object sender, EventArgs e)

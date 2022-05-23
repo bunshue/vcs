@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Security.Cryptography;
+
+//using System.Security.Cryptography;
 using WinFormCharpWebCam;
 
 namespace NewWinFormCsharpWebCam
@@ -15,6 +16,7 @@ namespace NewWinFormCsharpWebCam
     public partial class Form1 : Form
     {
         WebCam webcam;
+
         public Form1()
         {
             InitializeComponent();
@@ -44,11 +46,6 @@ namespace NewWinFormCsharpWebCam
         private void bntCapture_Click(object sender, EventArgs e)
         {
             imgCapture.Image = imgVideo.Image;
-        }
-
-        private void bntSave_Click(object sender, EventArgs e)
-        {
-            Helper.SaveImageCapture(imgCapture.Image);
         }
 
         private void bntVideoFormat_Click(object sender, EventArgs e)

@@ -30,7 +30,6 @@
         {
             this.bntVideoSource = new System.Windows.Forms.Button();
             this.bntVideoFormat = new System.Windows.Forms.Button();
-            this.bntSave = new System.Windows.Forms.Button();
             this.bntCapture = new System.Windows.Forms.Button();
             this.bntContinue = new System.Windows.Forms.Button();
             this.bntStop = new System.Windows.Forms.Button();
@@ -44,10 +43,9 @@
             // 
             // bntVideoSource
             // 
-            this.bntVideoSource.Location = new System.Drawing.Point(566, 164);
-            this.bntVideoSource.Margin = new System.Windows.Forms.Padding(4);
+            this.bntVideoSource.Location = new System.Drawing.Point(640, 534);
             this.bntVideoSource.Name = "bntVideoSource";
-            this.bntVideoSource.Size = new System.Drawing.Size(196, 28);
+            this.bntVideoSource.Size = new System.Drawing.Size(147, 28);
             this.bntVideoSource.TabIndex = 17;
             this.bntVideoSource.Text = "Video Source";
             this.bntVideoSource.UseVisualStyleBackColor = true;
@@ -55,32 +53,19 @@
             // 
             // bntVideoFormat
             // 
-            this.bntVideoFormat.Location = new System.Drawing.Point(566, 128);
-            this.bntVideoFormat.Margin = new System.Windows.Forms.Padding(4);
+            this.bntVideoFormat.Location = new System.Drawing.Point(640, 502);
             this.bntVideoFormat.Name = "bntVideoFormat";
-            this.bntVideoFormat.Size = new System.Drawing.Size(196, 28);
+            this.bntVideoFormat.Size = new System.Drawing.Size(147, 28);
             this.bntVideoFormat.TabIndex = 16;
             this.bntVideoFormat.Text = "Video Format";
             this.bntVideoFormat.UseVisualStyleBackColor = true;
             this.bntVideoFormat.Click += new System.EventHandler(this.bntVideoFormat_Click);
             // 
-            // bntSave
-            // 
-            this.bntSave.Location = new System.Drawing.Point(434, 271);
-            this.bntSave.Margin = new System.Windows.Forms.Padding(4);
-            this.bntSave.Name = "bntSave";
-            this.bntSave.Size = new System.Drawing.Size(105, 28);
-            this.bntSave.TabIndex = 15;
-            this.bntSave.Text = "Save Image";
-            this.bntSave.UseVisualStyleBackColor = true;
-            this.bntSave.Click += new System.EventHandler(this.bntSave_Click);
-            // 
             // bntCapture
             // 
-            this.bntCapture.Location = new System.Drawing.Point(322, 271);
-            this.bntCapture.Margin = new System.Windows.Forms.Padding(4);
+            this.bntCapture.Location = new System.Drawing.Point(302, 514);
             this.bntCapture.Name = "bntCapture";
-            this.bntCapture.Size = new System.Drawing.Size(113, 28);
+            this.bntCapture.Size = new System.Drawing.Size(116, 36);
             this.bntCapture.TabIndex = 14;
             this.bntCapture.Text = "Capture Image";
             this.bntCapture.UseVisualStyleBackColor = true;
@@ -88,10 +73,9 @@
             // 
             // bntContinue
             // 
-            this.bntContinue.Location = new System.Drawing.Point(208, 271);
-            this.bntContinue.Margin = new System.Windows.Forms.Padding(4);
+            this.bntContinue.Location = new System.Drawing.Point(195, 514);
             this.bntContinue.Name = "bntContinue";
-            this.bntContinue.Size = new System.Drawing.Size(81, 28);
+            this.bntContinue.Size = new System.Drawing.Size(92, 36);
             this.bntContinue.TabIndex = 13;
             this.bntContinue.Text = "Continue";
             this.bntContinue.UseVisualStyleBackColor = true;
@@ -99,10 +83,9 @@
             // 
             // bntStop
             // 
-            this.bntStop.Location = new System.Drawing.Point(135, 271);
-            this.bntStop.Margin = new System.Windows.Forms.Padding(4);
+            this.bntStop.Location = new System.Drawing.Point(103, 514);
             this.bntStop.Name = "bntStop";
-            this.bntStop.Size = new System.Drawing.Size(65, 28);
+            this.bntStop.Size = new System.Drawing.Size(80, 36);
             this.bntStop.TabIndex = 12;
             this.bntStop.Text = "Stop";
             this.bntStop.UseVisualStyleBackColor = true;
@@ -110,10 +93,9 @@
             // 
             // bntStart
             // 
-            this.bntStart.Location = new System.Drawing.Point(72, 271);
-            this.bntStart.Margin = new System.Windows.Forms.Padding(4);
+            this.bntStart.Location = new System.Drawing.Point(19, 514);
             this.bntStart.Name = "bntStart";
-            this.bntStart.Size = new System.Drawing.Size(55, 28);
+            this.bntStart.Size = new System.Drawing.Size(72, 36);
             this.bntStart.TabIndex = 11;
             this.bntStart.Text = "Start";
             this.bntStart.UseVisualStyleBackColor = true;
@@ -122,28 +104,27 @@
             // imgCapture
             // 
             this.imgCapture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imgCapture.Location = new System.Drawing.Point(322, 55);
-            this.imgCapture.Margin = new System.Windows.Forms.Padding(4);
+            this.imgCapture.Location = new System.Drawing.Point(640, 0);
             this.imgCapture.Name = "imgCapture";
-            this.imgCapture.Size = new System.Drawing.Size(217, 197);
+            this.imgCapture.Size = new System.Drawing.Size(640, 480);
             this.imgCapture.TabIndex = 10;
             this.imgCapture.TabStop = false;
             // 
             // imgVideo
             // 
             this.imgVideo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imgVideo.Location = new System.Drawing.Point(72, 55);
-            this.imgVideo.Margin = new System.Windows.Forms.Padding(4);
+            this.imgVideo.Location = new System.Drawing.Point(0, 0);
             this.imgVideo.Name = "imgVideo";
-            this.imgVideo.Size = new System.Drawing.Size(217, 197);
+            this.imgVideo.Size = new System.Drawing.Size(640, 480);
             this.imgVideo.TabIndex = 9;
             this.imgVideo.TabStop = false;
             // 
             // exit
             // 
-            this.exit.Location = new System.Drawing.Point(664, 381);
+            this.exit.Location = new System.Drawing.Point(640, 580);
+            this.exit.Margin = new System.Windows.Forms.Padding(2);
             this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(75, 23);
+            this.exit.Size = new System.Drawing.Size(89, 37);
             this.exit.TabIndex = 18;
             this.exit.Text = "EXİT";
             this.exit.UseVisualStyleBackColor = true;
@@ -151,21 +132,20 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1351, 724);
             this.Controls.Add(this.exit);
             this.Controls.Add(this.bntVideoSource);
             this.Controls.Add(this.bntVideoFormat);
-            this.Controls.Add(this.bntSave);
             this.Controls.Add(this.bntCapture);
             this.Controls.Add(this.bntContinue);
             this.Controls.Add(this.bntStop);
             this.Controls.Add(this.bntStart);
             this.Controls.Add(this.imgCapture);
             this.Controls.Add(this.imgVideo);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "NEW CAMERA PROJET VS2017";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).EndInit();
@@ -177,7 +157,6 @@
 
         private System.Windows.Forms.Button bntVideoSource;
         private System.Windows.Forms.Button bntVideoFormat;
-        private System.Windows.Forms.Button bntSave;
         private System.Windows.Forms.Button bntCapture;
         private System.Windows.Forms.Button bntContinue;
         private System.Windows.Forms.Button bntStop;

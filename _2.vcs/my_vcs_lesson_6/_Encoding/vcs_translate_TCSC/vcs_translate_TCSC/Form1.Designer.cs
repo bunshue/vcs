@@ -168,6 +168,7 @@
             this.Controls.Add(this.lb_tc);
             this.Controls.Add(this.richTextBox_sc);
             this.Controls.Add(this.richTextBox_tc);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "正中簡中轉換程式";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -334,5 +334,498 @@ namespace vcs_ColorMap
             gr.DrawString(clr_name, this.Font, Brushes.Black, 110, y);
             y += 20;
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int width = pictureBox1.Size.Width;
+            int height = pictureBox1.Size.Height;
+
+            Bitmap bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            int i;
+            int j;
+            int w = 120;
+            int h = 100;
+            Color c = new Color();
+
+            i = 0; j = 0; c = Color.Red;
+            drawBox(i, j, w, h, c);
+
+            i = 1; j = 0; c = Color.Green;
+            drawBox(i, j, w, h, c);
+
+            i = 2; j = 0; c = Color.Blue;
+            drawBox(i, j, w, h, c);
+
+            i = 0; j = 1; c = Color.Cyan;
+            drawBox(i, j, w, h, c);
+
+            i = 1; j = 1; c = Color.Magenta;
+            drawBox(i, j, w, h, c);
+
+            i = 2; j = 1; c = Color.Yellow;
+            drawBox(i, j, w, h, c);
+
+            i = 3; j = 1; c = Color.Black;
+            drawBox(i, j, w, h, c);
+
+            i = 4; j = 1; c = Color.White;
+            drawBox(i, j, w, h, c);
+
+            i = 0; j = 2; c = Color.Orange;
+            drawBox(i, j, w, h, c);
+
+            i = 1; j = 2; c = Color.OrangeRed;
+            drawBox(i, j, w, h, c);
+
+            i = 2; j = 2; c = Color.Olive;
+            drawBox(i, j, w, h, c);
+
+            i = 3; j = 2; c = Color.Navy;
+            drawBox(i, j, w, h, c);
+
+            i = 4; j = 2; c = Color.Orchid;
+            drawBox(i, j, w, h, c);
+
+            i = 0; j = 3; c = Color.Wheat;
+            drawBox(i, j, w, h, c);
+
+            i = 1; j = 3; c = Color.Peru;
+            drawBox(i, j, w, h, c);
+
+            i = 2; j = 3; c = Color.Pink;
+            drawBox(i, j, w, h, c);
+
+            i = 3; j = 3; c = Color.HotPink;
+            drawBox(i, j, w, h, c);
+
+            i = 4; j = 3; c = Color.Honeydew;
+            drawBox(i, j, w, h, c);
+
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        void drawBox(int i, int j, int w, int h, Color c)
+        {
+            Font f;
+            SolidBrush sb = new SolidBrush(c);
+            g.FillRectangle(sb, w * i, h * j, w - 1, h - 1);
+
+            //sb = new SolidBrush(Color.Black);
+            sb = new SolidBrush(Color.FromArgb(255 - c.R, 255 - c.G, 255 - c.B));
+
+            f = new Font("標楷體", 12);
+            g.DrawString(c.Name, f, sb, new PointF(w * i, h * j + h / 3));
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+            int j = 0;
+            int w = 100;
+            int h = 35;
+
+            int width = w * 7;
+            int height = h * 20;
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
+
+            Bitmap bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.Pink);
+
+            Color c = new Color();
+
+            i = 0; c = Color.AliceBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.AntiqueWhite; drawBox(i, j, w, h, c);
+            i++; c = Color.Aqua; drawBox(i, j, w, h, c);
+            i++; c = Color.Aquamarine; drawBox(i, j, w, h, c);
+            i++; c = Color.Azure; drawBox(i, j, w, h, c);
+            i++; c = Color.Beige; drawBox(i, j, w, h, c);
+            i++; c = Color.Bisque; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.Black; drawBox(i, j, w, h, c);
+            i++; c = Color.BlanchedAlmond; drawBox(i, j, w, h, c);
+            i++; c = Color.Blue; drawBox(i, j, w, h, c);
+            i++; c = Color.BlueViolet; drawBox(i, j, w, h, c);
+            i++; c = Color.Brown; drawBox(i, j, w, h, c);
+            i++; c = Color.BurlyWood; drawBox(i, j, w, h, c);
+            i++; c = Color.CadetBlue; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.Chartreuse; drawBox(i, j, w, h, c);
+            i++; c = Color.Chocolate; drawBox(i, j, w, h, c);
+            i++; c = Color.Coral; drawBox(i, j, w, h, c);
+            i++; c = Color.CornflowerBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.Cornsilk; drawBox(i, j, w, h, c);
+            i++; c = Color.Crimson; drawBox(i, j, w, h, c);
+            i++; c = Color.Cyan; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.DarkBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkCyan; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkGoldenrod; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkGray; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkGreen; drawBox(i, j, w, h, c); drawBox(i, j, w, h, c);
+            i++; c = Color.DarkKhaki; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkMagenta; drawBox(i, j, w, h, c);
+
+
+            j++;
+            i = 0; c = Color.DarkOliveGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkOrange; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkOrchid; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkRed; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkSalmon; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkSeaGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkSlateBlue; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.DarkSlateGray; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkTurquoise; drawBox(i, j, w, h, c);
+            i++; c = Color.DarkViolet; drawBox(i, j, w, h, c);
+            i++; c = Color.DeepPink; drawBox(i, j, w, h, c);
+            i++; c = Color.DeepSkyBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.DimGray; drawBox(i, j, w, h, c);
+            i++; c = Color.DodgerBlue; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.Firebrick; drawBox(i, j, w, h, c);
+            i++; c = Color.FloralWhite; drawBox(i, j, w, h, c);
+            i++; c = Color.ForestGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.Fuchsia; drawBox(i, j, w, h, c);
+            i++; c = Color.Gainsboro; drawBox(i, j, w, h, c);
+            i++; c = Color.GhostWhite; drawBox(i, j, w, h, c);
+            i++; c = Color.Gold; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.Goldenrod; drawBox(i, j, w, h, c);
+            i++; c = Color.Gray; drawBox(i, j, w, h, c);
+            i++; c = Color.Green; drawBox(i, j, w, h, c);
+            i++; c = Color.GreenYellow; drawBox(i, j, w, h, c);
+            i++; c = Color.Honeydew; drawBox(i, j, w, h, c);
+            i++; c = Color.HotPink; drawBox(i, j, w, h, c);
+            i++; c = Color.IndianRed; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.Indigo; drawBox(i, j, w, h, c);
+            i++; c = Color.Ivory; drawBox(i, j, w, h, c);
+            i++; c = Color.Khaki; drawBox(i, j, w, h, c);
+            i++; c = Color.Lavender; drawBox(i, j, w, h, c);
+            i++; c = Color.LavenderBlush; drawBox(i, j, w, h, c);
+            i++; c = Color.LawnGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.LemonChiffon; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.LightBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.LightCoral; drawBox(i, j, w, h, c);
+            i++; c = Color.LightCyan; drawBox(i, j, w, h, c);
+            i++; c = Color.LightGoldenrodYellow; drawBox(i, j, w, h, c);
+            i++; c = Color.LightGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.LightGray; drawBox(i, j, w, h, c);
+            i++; c = Color.LightPink; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.LightSalmon; drawBox(i, j, w, h, c);
+            i++; c = Color.LightSeaGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.LightSkyBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.LightSlateGray; drawBox(i, j, w, h, c);
+            i++; c = Color.LightSteelBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.LightYellow; drawBox(i, j, w, h, c);
+            i++; c = Color.Lime; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.LimeGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.Linen; drawBox(i, j, w, h, c);
+            i++; c = Color.Magenta; drawBox(i, j, w, h, c);
+            i++; c = Color.Maroon; drawBox(i, j, w, h, c);
+            i++; c = Color.MediumAquamarine; drawBox(i, j, w, h, c);
+            i++; c = Color.MediumBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.MediumOrchid; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.MediumPurple; drawBox(i, j, w, h, c);
+            i++; c = Color.MediumSeaGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.MediumSlateBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.MediumSpringGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.MediumTurquoise; drawBox(i, j, w, h, c);
+            i++; c = Color.MediumVioletRed; drawBox(i, j, w, h, c);
+            i++; c = Color.MidnightBlue; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.MintCream; drawBox(i, j, w, h, c);
+            i++; c = Color.MistyRose; drawBox(i, j, w, h, c);
+            i++; c = Color.Moccasin; drawBox(i, j, w, h, c);
+            i++; c = Color.NavajoWhite; drawBox(i, j, w, h, c);
+            i++; c = Color.Navy; drawBox(i, j, w, h, c);
+            i++; c = Color.OldLace; drawBox(i, j, w, h, c);
+            i++; c = Color.Olive; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.OliveDrab; drawBox(i, j, w, h, c);
+            i++; c = Color.Orange; drawBox(i, j, w, h, c);
+            i++; c = Color.OrangeRed; drawBox(i, j, w, h, c);
+            i++; c = Color.Orchid; drawBox(i, j, w, h, c);
+            i++; c = Color.PaleGoldenrod; drawBox(i, j, w, h, c);
+            i++; c = Color.PaleGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.PaleTurquoise; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.PaleVioletRed; drawBox(i, j, w, h, c);
+            i++; c = Color.PapayaWhip; drawBox(i, j, w, h, c);
+            i++; c = Color.PeachPuff; drawBox(i, j, w, h, c);
+            i++; c = Color.Peru; drawBox(i, j, w, h, c);
+            i++; c = Color.Pink; drawBox(i, j, w, h, c);
+            i++; c = Color.Plum; drawBox(i, j, w, h, c);
+            i++; c = Color.PowderBlue; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.Purple; drawBox(i, j, w, h, c);
+            i++; c = Color.Red; drawBox(i, j, w, h, c);
+            i++; c = Color.RosyBrown; drawBox(i, j, w, h, c);
+            i++; c = Color.RoyalBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.SaddleBrown; drawBox(i, j, w, h, c);
+            i++; c = Color.Salmon; drawBox(i, j, w, h, c);
+            i++; c = Color.SandyBrown; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.SeaGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.SeaShell; drawBox(i, j, w, h, c);
+            i++; c = Color.Sienna; drawBox(i, j, w, h, c);
+            i++; c = Color.Silver; drawBox(i, j, w, h, c);
+            i++; c = Color.SkyBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.SlateBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.SlateGray; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.Snow; drawBox(i, j, w, h, c);
+            i++; c = Color.SpringGreen; drawBox(i, j, w, h, c);
+            i++; c = Color.SteelBlue; drawBox(i, j, w, h, c);
+            i++; c = Color.Tan; drawBox(i, j, w, h, c);
+            i++; c = Color.Teal; drawBox(i, j, w, h, c);
+            i++; c = Color.Thistle; drawBox(i, j, w, h, c);
+            i++; c = Color.Tomato; drawBox(i, j, w, h, c);
+
+            j++;
+            i = 0; c = Color.Turquoise; drawBox(i, j, w, h, c);
+            i++; c = Color.Violet; drawBox(i, j, w, h, c);
+            i++; c = Color.Wheat; drawBox(i, j, w, h, c);
+            i++; c = Color.White; drawBox(i, j, w, h, c);
+            i++; c = Color.WhiteSmoke; drawBox(i, j, w, h, c);
+            i++; c = Color.Yellow; drawBox(i, j, w, h, c);
+            i++; c = Color.YellowGreen; drawBox(i, j, w, h, c);
+
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        private Color[] Colors = new Color[]
+        {
+            Color.AliceBlue,
+            Color.AntiqueWhite,
+            Color.Aqua,
+            Color.Aquamarine,
+            Color.Azure,
+            Color.Beige,
+            Color.Bisque,
+
+            Color.Black,
+            Color.BlanchedAlmond,
+            Color.Blue,
+            Color.BlueViolet,
+            Color.Brown,
+            Color.BurlyWood,
+            Color.CadetBlue,
+
+            Color.Chartreuse,
+            Color.Chocolate,
+            Color.Coral,
+            Color.CornflowerBlue,
+            Color.Cornsilk,
+            Color.Crimson,
+            Color.Cyan,
+
+            Color.DarkBlue,
+            Color.DarkCyan,
+            Color.DarkGoldenrod,
+            Color.DarkGray,
+            Color.DarkGreen,
+            Color.DarkKhaki,
+            Color.DarkMagenta,
+
+
+            Color.DarkOliveGreen,
+            Color.DarkOrange,
+            Color.DarkOrchid,
+            Color.DarkRed,
+            Color.DarkSalmon,
+            Color.DarkSeaGreen,
+            Color.DarkSlateBlue,
+
+            Color.DarkSlateGray,
+            Color.DarkTurquoise,
+            Color.DarkViolet,
+            Color.DeepPink,
+            Color.DeepSkyBlue,
+            Color.DimGray,
+            Color.DodgerBlue,
+
+            Color.Firebrick,
+            Color.FloralWhite,
+            Color.ForestGreen,
+            Color.Fuchsia,
+            Color.Gainsboro,
+            Color.GhostWhite,
+            Color.Gold,
+
+            Color.Goldenrod,
+            Color.Gray,
+            Color.Green,
+            Color.GreenYellow,
+            Color.Honeydew,
+            Color.HotPink,
+            Color.IndianRed,
+
+            Color.Indigo,
+            Color.Ivory,
+            Color.Khaki,
+            Color.Lavender,
+            Color.LavenderBlush,
+            Color.LawnGreen,
+            Color.LemonChiffon,
+
+            Color.LightBlue,
+            Color.LightCoral,
+            Color.LightCyan,
+            Color.LightGoldenrodYellow,
+            Color.LightGreen,
+            Color.LightGray,
+            Color.LightPink,
+
+            Color.LightSalmon,
+            Color.LightSeaGreen,
+            Color.LightSkyBlue,
+            Color.LightSlateGray,
+            Color.LightSteelBlue,
+            Color.LightYellow,
+            Color.Lime,
+
+            Color.LimeGreen,
+            Color.Linen,
+            Color.Magenta,
+            Color.Maroon,
+            Color.MediumAquamarine,
+            Color.MediumBlue,
+            Color.MediumOrchid,
+
+            Color.MediumPurple,
+            Color.MediumSeaGreen,
+            Color.MediumSlateBlue,
+            Color.MediumSpringGreen,
+            Color.MediumTurquoise,
+            Color.MediumVioletRed,
+            Color.MidnightBlue,
+
+            Color.MintCream,
+            Color.MistyRose,
+            Color.Moccasin,
+            Color.NavajoWhite,
+            Color.Navy,
+            Color.OldLace,
+            Color.Olive,
+
+            Color.OliveDrab,
+            Color.Orange,
+            Color.OrangeRed,
+            Color.Orchid,
+            Color.PaleGoldenrod,
+            Color.PaleGreen,
+            Color.PaleTurquoise,
+
+            Color.PaleVioletRed,
+            Color.PapayaWhip,
+            Color.PeachPuff,
+            Color.Peru,
+            Color.Pink,
+            Color.Plum,
+            Color.PowderBlue,
+
+            Color.Purple,
+            Color.Red,
+            Color.RosyBrown,
+            Color.RoyalBlue,
+            Color.SaddleBrown,
+            Color.Salmon,
+            Color.SandyBrown,
+
+            Color.SeaGreen,
+            Color.SeaShell,
+            Color.Sienna,
+            Color.Silver,
+            Color.SkyBlue,
+            Color.SlateBlue,
+            Color.SlateGray,
+
+            Color.Snow,
+            Color.SpringGreen,
+            Color.SteelBlue,
+            Color.Tan,
+            Color.Teal,
+            Color.Thistle,
+            Color.Tomato,
+
+            Color.Turquoise,
+            Color.Violet,
+            Color.Wheat,
+            Color.White,
+            Color.WhiteSmoke,
+            Color.Yellow,
+            Color.YellowGreen,
+        };
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+            //int j = 0;
+            int w = 100;
+            int h = 35;
+
+            int width = w * 7;
+            int height = h * 20;
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
+
+            Bitmap bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.Pink);
+
+            int len;
+            len = Colors.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int x_st = 0;
+            int y_st = 0;
+            for (i = 0; i < len; i++)
+            {
+                SolidBrush sb = new SolidBrush(Colors[i % len]);
+                g.FillRectangle(sb, x_st + w * (i / 20), y_st + h * (i % 20), w, h);
+                richTextBox1.Text += Colors[i % len].Name + "\n";
+
+                Font f = new Font("標楷體", 12);
+                sb = new SolidBrush(Color.FromArgb(255 - Colors[i % len].R, 255 - Colors[i % len].G, 255 - Colors[i % len].B));
+                g.DrawString(Colors[i % len].Name.ToString(), f, sb, new PointF(x_st + w * (i / 20), y_st + h * (i % 20) + 12));
+
+            }
+            pictureBox1.Image = bitmap1;
+
+
+        }
     }
 }
