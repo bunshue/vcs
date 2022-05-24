@@ -1,6 +1,11 @@
 
 
-
+//本地緩存+在線服務
+            this.gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
+//在線服務
+            this.gMapControl1.Manager.Mode = AccessMode.ServerOnly;
+//本地緩存
+            this.gMapControl1.Manager.Mode = AccessMode.CacheOnly;
 
 
 

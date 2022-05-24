@@ -15,7 +15,6 @@ using GMap.NET.MapProviders;
 using GMap.NET.CacheProviders;
 using NetUtil;
 using GMapUtil;
-using log4net;
 using GMapChinaRegion;
 using GMapPolygonLib;
 using GMapMarkerLib;
@@ -35,8 +34,6 @@ namespace MapDownloader
 {
     public partial class MainForm : Form
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(MainForm));
-
         private string conString;
 
         private Draw draw;
@@ -81,6 +78,7 @@ namespace MapDownloader
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            
             //gMapControl1.Size = new Size(1500, 900);
 
             richTextBox1.Text += "1111 InitMap()\n";
@@ -126,6 +124,7 @@ namespace MapDownloader
             button3.Location = new Point(x_st, y_st + dy * 3);
             button4.Location = new Point(x_st, y_st + dy * 4);
             button5.Location = new Point(x_st, y_st + dy * 5);
+            lb_info.Location = new Point(x_st, y_st + dy * 6);
 
             gMapControl1.ShowCenter = false;
             gMapControl1.DragButton = System.Windows.Forms.MouseButtons.Left;
@@ -192,7 +191,7 @@ namespace MapDownloader
                 }
                 else
                 {
-                    CommonTools.MessageBox.ShowTipMessage("请先用画图工具画下载的区域多边形或选择省市区域！");
+                    MessageBox.Show("请先用画图工具画下载的区域多边形或选择省市区域！");
                 }
             }
         }
@@ -238,11 +237,13 @@ namespace MapDownloader
                 {
                     this.toolStripStatusCenter.Text = "地图中心:" + place.ProvinceName + "," + place.CityName + "," + place.DistrictName;
                     currentCenterCityName = place.CityName;
+
+                    lb_info.Text = place.ProvinceName + "," + place.CityName + "," + place.DistrictName;
                 }
             }
             catch (Exception ex)
             {
-                log.Error("Locate the map center error: " + ex);
+                richTextBox1.Text += "Locate the map center error : " + ex.ToString() + "\n";
             }
         }
 
@@ -359,7 +360,7 @@ namespace MapDownloader
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                richTextBox1.Text += "Error : " + ex.ToString() + "\n";
             }
         }
 
@@ -409,7 +410,6 @@ namespace MapDownloader
             this.toolStripStatusPOIDownload.Visible = false;
             this.toolStripStatusExport.Visible = false;
 
-            this.serverAndCacheToolStripMenuItem.Checked = true;
             this.xPanderPanel2.ExpandClick += new EventHandler<EventArgs>(xPanderPanel2_ExpandClick);
 
             this.buttonMapImage.Click += new EventHandler(buttonMapImage_Click);
@@ -499,7 +499,7 @@ namespace MapDownloader
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                richTextBox1.Text += "Error : " + ex.ToString() + "\n";
             }
 
             this.treeView1.NodeMouseClick += new TreeNodeMouseClickEventHandler(advTreeChina_NodeMouseClick);
@@ -561,7 +561,7 @@ namespace MapDownloader
         {
             if (china == null)
             {
-                log.Error("加载中国省市边界失败！");
+                richTextBox1.Text += "加载中国省市边界失败！\n";
                 return;
             }
 
@@ -579,24 +579,13 @@ namespace MapDownloader
 
         #region 地图下载
 
-        private void ResetToServerAndCacheMode()
-        {
-            if (this.gMapControl1.Manager.Mode != AccessMode.ServerAndCache)
-            {
-                this.gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
-                this.serverAndCacheToolStripMenuItem.Checked = true;
-                this.本地缓存ToolStripMenuItem.Checked = false;
-                this.在线服务ToolStripMenuItem.Checked = false;
-            }
-        }
-
         private void DownloadMap(GMapPolygon polygon)
         {
             if (polygon != null)
             {
                 if (!tileDownloader.IsComplete)
                 {
-                    CommonTools.MessageBox.ShowWarningMessage("正在下载地图，等待下载完成！");
+                    MessageBox.Show("正在下载地图，等待下载完成！");
                 }
                 else
                 {
@@ -607,9 +596,9 @@ namespace MapDownloader
                         if (downloadCfgForm.ShowDialog() == DialogResult.OK)
                         {
                             TileDownloaderArgs downloaderArgs = downloadCfgForm.GetDownloadTileGPoints();
-                            ResetToServerAndCacheMode();
+                            this.gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
                                 
-                            tileDownloader.TilePath = this.tilePath;    //選擇 本地磁盤 (切片)
+                            tileDownloader.TilePath = this.tilePath;    //儲存至 本地磁碟
                             tileDownloader.Retry = retryNum;
                             tileDownloader.PrefetchTileStart += new EventHandler<TileDownloadEventArgs>(tileDownloader_PrefetchTileStart);
                             tileDownloader.PrefetchTileProgress += new EventHandler<TileDownloadEventArgs>(tileDownloader_PrefetchTileProgress);
@@ -620,13 +609,13 @@ namespace MapDownloader
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        log.Error(ex);
+                        richTextBox1.Text += "Error : " + ex.ToString() + "\n";
                     }
                 }
             }
             else
             {
-                CommonTools.MessageBox.ShowTipMessage("请先用画图工具画下载的区域多边形或选择省市区域！");
+                MessageBox.Show("请先用画图工具画下载的区域多边形或选择省市区域！");
             }
         }
 
@@ -728,7 +717,8 @@ namespace MapDownloader
                 RectLatLng area = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
                 try
                 {
-                    ResetToServerAndCacheMode();
+                    this.gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
+
                     int zoom = int.Parse(this.textBoxImageZoom.Text);
                     //int retry = this.mapControl.Manager.Mode == AccessMode.CacheOnly ? 0 : 1; //是否重试
                     TileImageConnector tileImage = new TileImageConnector();
@@ -743,7 +733,7 @@ namespace MapDownloader
             }
             else
             {
-                CommonTools.MessageBox.ShowTipMessage("请先用“矩形”画图工具选择区域");
+                MessageBox.Show("请先用“矩形”画图工具选择区域");
             }
         }
 
@@ -1137,160 +1127,7 @@ namespace MapDownloader
 
         #endregion
 
-        #region 地图访问模式
-
-        private void serverAndCacheToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
-            this.serverAndCacheToolStripMenuItem.Checked = true;
-            this.本地缓存ToolStripMenuItem.Checked = false;
-            this.在线服务ToolStripMenuItem.Checked = false;
-        }
-
-        private void 在线服务ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.gMapControl1.Manager.Mode = AccessMode.ServerOnly;
-            this.serverAndCacheToolStripMenuItem.Checked = false;
-            this.本地缓存ToolStripMenuItem.Checked = false;
-            this.在线服务ToolStripMenuItem.Checked = true;
-        }
-
-        private void 本地缓存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.gMapControl1.Manager.Mode = AccessMode.CacheOnly;
-            this.serverAndCacheToolStripMenuItem.Checked = false;
-            this.本地缓存ToolStripMenuItem.Checked = true;
-            this.在线服务ToolStripMenuItem.Checked = false;
-        }
-
-        private void 显示网格ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.显示网格ToolStripMenuItem.Checked = !this.显示网格ToolStripMenuItem.Checked;
-            if (this.显示网格ToolStripMenuItem.Checked)
-            {
-                this.gMapControl1.ShowTileGridLines = true;
-            }
-            else
-            {
-                this.gMapControl1.ShowTileGridLines = false;
-            }
-        }
-
-        #endregion
-
         #region KML GPX 操作
-
-        private void 读取GPXToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (FileDialog dialog = new OpenFileDialog())
-            {
-                dialog.InitialDirectory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "gpx";
-                dialog.CheckPathExists = true;
-                dialog.CheckFileExists = false;
-                dialog.AddExtension = true;
-                dialog.DefaultExt = "gpx";
-                dialog.ValidateNames = true;
-                dialog.Title = "选择GPX文件";
-                dialog.Filter = "GPX文件 (*.gpx)|*.gpx|所有文件 (*.*)|*.*";
-                dialog.FilterIndex = 1;
-                dialog.RestoreDirectory = true;
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        string objectXml = File.ReadAllText(dialog.FileName);
-                        gpxType type = this.gMapControl1.Manager.DeserializeGPX(objectXml);
-                        if (type != null)
-                        {
-                            if ((type.trk != null) && (type.trk.Length > 0))
-                            {
-                                List<PointLatLng> points = new List<PointLatLng>();
-                                foreach (trkType trk in type.trk)
-                                {
-                                    foreach (trksegType seg in trk.trkseg)
-                                    {
-                                        foreach (wptType p in seg.trkpt)
-                                        {
-                                            points.Add(new PointLatLng((double)p.lat, (double)p.lon));
-                                        }
-                                    }
-                                    string name = string.IsNullOrEmpty(trk.name) ? string.Empty : trk.name;
-                                    GMapRoute item = new GMapRoute(points, name)
-                                    {
-                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
-                                    };
-                                    item.Stroke.Width = 5f;
-                                    item.Stroke.DashStyle = DashStyle.DashDot;
-                                    this.polygonsOverlay.Routes.Add(item);
-                                }
-                            }
-                            if ((type.rte != null) && (type.rte.Length > 0))
-                            {
-                                List<PointLatLng> points = new List<PointLatLng>();
-                                foreach (rteType rte in type.rte)
-                                {
-                                    foreach (wptType p in rte.rtept)
-                                    {
-                                        points.Add(new PointLatLng((double)p.lat, (double)p.lon));
-                                    }
-                                    string str3 = string.IsNullOrEmpty(rte.name) ? string.Empty : rte.name;
-                                    GMapRoute route2 = new GMapRoute(points, str3)
-                                    {
-                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
-                                    };
-                                    route2.Stroke.Width = 5f;
-                                    route2.Stroke.DashStyle = DashStyle.DashDot;
-                                    this.polygonsOverlay.Routes.Add(route2);
-                                }
-                            }
-                            if (type.wpt != null && type.wpt.Length > 0)
-                            {
-                                foreach (wptType p in type.wpt)
-                                {
-                                    PointLatLng point = new PointLatLng((double)p.lat, (double)p.lon);
-                                    GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
-                                    this.polygonsOverlay.Markers.Add(marker);
-                                }
-                            }
-                            this.gMapControl1.ZoomAndCenterRoutes(null);
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        log.Error("Read GPX file error: " + exception);
-                        CommonTools.MessageBox.ShowTipMessage("读取GPX文件错误");
-                    }
-                }
-            }
-        }
-
-        private void 读取KMLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (FileDialog dialog = new OpenFileDialog())
-                {
-                    dialog.CheckPathExists = true;
-                    dialog.CheckFileExists = false;
-                    dialog.AddExtension = true;
-                    dialog.ValidateNames = true;
-                    dialog.Title = "选择KML文件";
-                    dialog.FilterIndex = 1;
-                    dialog.RestoreDirectory = true;
-                    dialog.Filter = "KML文件 (*.kml)|*.kml|所有文件 (*.*)|*.*";
-                    if (dialog.ShowDialog() == DialogResult.OK)
-                    {
-                        this.polygonsOverlay.Clear();
-                        InitKMLPlaceMarks(KmlUtil.GetPlaceMarksFromKmlFile(dialog.FileName));
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                log.Error("Read KML file error: " + exception);
-                CommonTools.MessageBox.ShowTipMessage("读取KML文件时出现异常");
-            }
-        }
 
         private void SaveKmlToFile(MapRoute item, string name, string fileName)
         {
@@ -1521,10 +1358,12 @@ namespace MapDownloader
         //关键字POI查询
         private void buttonPOISearch_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 POI查詢 之 查詢\t地址 : " + "\n";
+
             Province province = this.comboBoxProvince.SelectedItem as Province;
             if (province == null)
             {
-                CommonTools.MessageBox.ShowTipMessage("请选择POI查询的省份！");
+                MessageBox.Show("请选择POI查询的省份！");
                 return;
             }
             searchProvince = province.name;
@@ -1532,7 +1371,7 @@ namespace MapDownloader
             City city = this.comboBoxCity.SelectedItem as City;
             if (city == null)
             {
-                CommonTools.MessageBox.ShowTipMessage("请选择POI查询的城市！");
+                MessageBox.Show("请选择POI查询的城市！");
                 return;
             }
             searchCity = city.name;
@@ -1540,7 +1379,7 @@ namespace MapDownloader
             string keywords = this.textBoxPOIkeyword.Text.Trim();
             if (string.IsNullOrEmpty(keywords))
             {
-                CommonTools.MessageBox.ShowTipMessage("请输入POI查询的关键字！");
+                MessageBox.Show("请输入POI查询的关键字！");
                 return;
             }
 
@@ -1592,8 +1431,13 @@ namespace MapDownloader
                     this.comboBoxProvince.Items.Add(provice);
                 }
                 this.comboBoxProvince.DisplayMember = "name";
-                //this.comboBoxProvince.SelectedIndex = 0;
                 this.comboBoxProvince.SelectedValueChanged += ComboBoxProvince_SelectedValueChanged;
+
+                richTextBox1.Text += "共有 省/市 " + this.comboBoxProvince.Items.Count.ToString() + " 個\n";
+
+                if (this.comboBoxProvince.Items.Count > 18)
+                    this.comboBoxProvince.SelectedIndex = 18;
+
             }
         }
 
@@ -1608,7 +1452,11 @@ namespace MapDownloader
                     this.comboBoxCity.Items.Add(city);
                 }
                 this.comboBoxCity.DisplayMember = "name";
-                this.comboBoxCity.SelectedIndex = 0;
+
+                richTextBox1.Text += "共有 縣市區 " + this.comboBoxCity.Items.Count.ToString() + " 個\n";
+
+                if (this.comboBoxCity.Items.Count > 2)
+                    this.comboBoxCity.SelectedIndex = 2;
             }
         }
 
@@ -1876,7 +1724,7 @@ namespace MapDownloader
             }
             catch (Exception ex)
             {
-                log.Error("TryExtractLeafletjs: " + ex);
+                richTextBox1.Text += "TryExtractLeafletjs : " + ex.ToString() + "\n";
                 return false;
             }
             return true;
@@ -1884,9 +1732,12 @@ namespace MapDownloader
 
         private void 离线Web服务ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "離線Web服務\t";
+
             this.离线Web服务ToolStripMenuItem.Checked = !this.离线Web服务ToolStripMenuItem.Checked;
             if (离线Web服务ToolStripMenuItem.Checked)
             {
+                richTextBox1.Text += "EnableTileHost\n";
                 try
                 {
                     gMapControl1.Manager.EnableTileHost(8899);
@@ -1899,6 +1750,7 @@ namespace MapDownloader
             }
             else
             {
+                richTextBox1.Text += "DisableTileHost\n";
                 gMapControl1.Manager.DisableTileHost();
             }
         }
@@ -1947,11 +1799,12 @@ namespace MapDownloader
 
         private void buttonPoiSave_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 POI查詢 之 保存\n";
             try
             {
                 if (poiDataList.Count <= 0)
                 {
-                    CommonTools.MessageBox.ShowTipMessage("POI数据为空，无法保存！");
+                    MessageBox.Show("POI数据为空，无法保存！");
                     return;
                 }
                 BackgroundWorker poiExportWorker = new BackgroundWorker();
@@ -1996,7 +1849,7 @@ namespace MapDownloader
             }
             catch (Exception ex)
             {
-                log.Error("Save POI data error: " + ex);
+                richTextBox1.Text += "Save POI data error : " + ex.ToString() + "\n";
                 MessageBox.Show("POI保存失败！");
             }
         }
@@ -2087,25 +1940,25 @@ namespace MapDownloader
             this.poiOverlay.Markers.Add(heatMarker);
         }
 
-        private void 地图截屏ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Image img = this.gMapControl1.ToImage();
-            SaveFileDialog openDialog = new SaveFileDialog();
-            openDialog.Filter = "(*.png)|*.png|(*.jpg)|*.jpg|(*.bmp)|*.bmp";
-            if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                string fileName = openDialog.FileName;
-                img.Save(fileName);
-            }
-        }
-
         private void arcGISTileToBundleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ArcGISTileToBundleForm tileToBundleForm = new ArcGISTileToBundleForm();
             tileToBundleForm.ShowDialog();
         }
 
-        private void 代理设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void button0_Click(object sender, EventArgs e)
+        {
+            if (this.gMapControl1.ShowTileGridLines == false)
+            {
+                this.gMapControl1.ShowTileGridLines = true;
+            }
+            else
+            {
+                this.gMapControl1.ShowTileGridLines = false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             ProxyForm proxyForm = new ProxyForm();
             DialogResult diaResult = proxyForm.ShowDialog();
@@ -2125,30 +1978,136 @@ namespace MapDownloader
                     GMapProvider.IsSocksProxy = false;
                 }
             }
-        }
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //讀取GPX檔案
+            using (FileDialog dialog = new OpenFileDialog())
+            {
+                dialog.InitialDirectory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "gpx";
+                dialog.CheckPathExists = true;
+                dialog.CheckFileExists = false;
+                dialog.AddExtension = true;
+                dialog.DefaultExt = "gpx";
+                dialog.ValidateNames = true;
+                dialog.Title = "选择GPX文件";
+                dialog.Filter = "GPX文件 (*.gpx)|*.gpx|所有文件 (*.*)|*.*";
+                dialog.FilterIndex = 1;
+                dialog.RestoreDirectory = true;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string objectXml = File.ReadAllText(dialog.FileName);
+                        gpxType type = this.gMapControl1.Manager.DeserializeGPX(objectXml);
+                        if (type != null)
+                        {
+                            if ((type.trk != null) && (type.trk.Length > 0))
+                            {
+                                List<PointLatLng> points = new List<PointLatLng>();
+                                foreach (trkType trk in type.trk)
+                                {
+                                    foreach (trksegType seg in trk.trkseg)
+                                    {
+                                        foreach (wptType p in seg.trkpt)
+                                        {
+                                            points.Add(new PointLatLng((double)p.lat, (double)p.lon));
+                                        }
+                                    }
+                                    string name = string.IsNullOrEmpty(trk.name) ? string.Empty : trk.name;
+                                    GMapRoute item = new GMapRoute(points, name)
+                                    {
+                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
+                                    };
+                                    item.Stroke.Width = 5f;
+                                    item.Stroke.DashStyle = DashStyle.DashDot;
+                                    this.polygonsOverlay.Routes.Add(item);
+                                }
+                            }
+                            if ((type.rte != null) && (type.rte.Length > 0))
+                            {
+                                List<PointLatLng> points = new List<PointLatLng>();
+                                foreach (rteType rte in type.rte)
+                                {
+                                    foreach (wptType p in rte.rtept)
+                                    {
+                                        points.Add(new PointLatLng((double)p.lat, (double)p.lon));
+                                    }
+                                    string str3 = string.IsNullOrEmpty(rte.name) ? string.Empty : rte.name;
+                                    GMapRoute route2 = new GMapRoute(points, str3)
+                                    {
+                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
+                                    };
+                                    route2.Stroke.Width = 5f;
+                                    route2.Stroke.DashStyle = DashStyle.DashDot;
+                                    this.polygonsOverlay.Routes.Add(route2);
+                                }
+                            }
+                            if (type.wpt != null && type.wpt.Length > 0)
+                            {
+                                foreach (wptType p in type.wpt)
+                                {
+                                    PointLatLng point = new PointLatLng((double)p.lat, (double)p.lon);
+                                    GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
+                                    this.polygonsOverlay.Markers.Add(marker);
+                                }
+                            }
+                            this.gMapControl1.ZoomAndCenterRoutes(null);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        //log.Error("Read GPX file error: " + exception);
+                        MessageBox.Show("读取GPX文件错误");
+                    }
+                }
+            }
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //讀取KML檔案
+            try
+            {
+                using (FileDialog dialog = new OpenFileDialog())
+                {
+                    dialog.CheckPathExists = true;
+                    dialog.CheckFileExists = false;
+                    dialog.AddExtension = true;
+                    dialog.ValidateNames = true;
+                    dialog.Title = "选择KML文件";
+                    dialog.FilterIndex = 1;
+                    dialog.RestoreDirectory = true;
+                    dialog.Filter = "KML文件 (*.kml)|*.kml|所有文件 (*.*)|*.*";
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        this.polygonsOverlay.Clear();
+                        InitKMLPlaceMarks(KmlUtil.GetPlaceMarksFromKmlFile(dialog.FileName));
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                //log.Error("Read KML file error: " + exception);
+                MessageBox.Show("读取KML文件时出现异常");
+            }
 
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //地圖存圖
+            Image img = this.gMapControl1.ToImage();
+            SaveFileDialog openDialog = new SaveFileDialog();
+            openDialog.Filter = "(*.png)|*.png|(*.jpg)|*.jpg|(*.bmp)|*.bmp";
+            if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string fileName = openDialog.FileName;
+                img.Save(fileName);
+            }
 
         }
 
