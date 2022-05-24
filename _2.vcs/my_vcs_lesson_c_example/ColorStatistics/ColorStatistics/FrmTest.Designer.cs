@@ -41,6 +41,7 @@
             this.SliderDelta = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PicR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Thumb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SliderColorAmount)).BeginInit();
@@ -159,11 +160,20 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(1010, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(336, 561);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = "";
+            // 
             // FrmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1080, 585);
+            this.ClientSize = new System.Drawing.Size(1358, 585);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.LblDelta);
             this.Controls.Add(this.SliderDelta);
             this.Controls.Add(this.label2);
@@ -203,6 +213,7 @@
         private System.Windows.Forms.TrackBar SliderDelta;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
