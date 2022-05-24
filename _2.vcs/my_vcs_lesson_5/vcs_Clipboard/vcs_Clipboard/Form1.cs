@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;                //for Directory
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Threading;
 
 namespace vcs_Clipboard
 {
@@ -55,6 +56,7 @@ namespace vcs_Clipboard
             button21.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 11);
             button22.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 12);
             button26.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 13);
+            button27.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 14);
 
             groupBox1.Location = new Point(12, 350);
             y_st = 18;
@@ -74,9 +76,9 @@ namespace vcs_Clipboard
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "\n取得系統剪貼簿裏的資料類型:\n";
-            IDataObject data_object = Clipboard.GetDataObject();    //讀取數據 
+            IDataObject dataObject1 = Clipboard.GetDataObject();    //讀取數據 
             int i = 1;
-            foreach (string format in data_object.GetFormats())
+            foreach (string format in dataObject1.GetFormats())
             {
                 richTextBox1.Text += (i++).ToString() + "\t" + format + "\n";
             }
@@ -85,30 +87,30 @@ namespace vcs_Clipboard
             if (Clipboard.ContainsData(DataFormats.UnicodeText) == true)
             {
                 richTextBox1.Text += "取得 UnicodeText\n";
-                IDataObject clipobj = Clipboard.GetDataObject();    //讀取數據 
-                string str = clipobj.GetData(DataFormats.UnicodeText) as string;
+                IDataObject dataObject2 = Clipboard.GetDataObject();    //讀取數據 
+                string str = dataObject2.GetData(DataFormats.UnicodeText) as string;
                 MessageBox.Show(str);
             }
 
             richTextBox1.Text += "\n把系統剪貼簿裏的資料拿出來, 區分資料類型:\n";
-            IDataObject dataObject = Clipboard.GetDataObject();   //GetDataObject() 讀取當前剪貼簿中的數據內容
-            if (dataObject.GetDataPresent(DataFormats.Text))  //GetDataPresent()檢測剪貼簿存放的資料類型   //Text純文字類
+            IDataObject dataObject3 = Clipboard.GetDataObject();   //GetDataObject() 讀取當前剪貼簿中的數據內容
+            if (dataObject3.GetDataPresent(DataFormats.Text))  //GetDataPresent()檢測剪貼簿存放的資料類型   //Text純文字類
             {
                 richTextBox1.Text += "取得文字, 內容：\n";
-                //richTextBox1.Text += dataObject.GetData(DataFormats.Text).ToString();   //直接顯示在richTextBox裏
+                //richTextBox1.Text += dataObject3.GetData(DataFormats.Text).ToString();   //直接顯示在richTextBox裏
 
                 //取出Text資料, 可做處理
-                String str = (String)dataObject.GetData(DataFormats.Text);
+                String str = (String)dataObject3.GetData(DataFormats.Text);
                 richTextBox1.Text += str + "\n";
             }
 
-            if (dataObject.GetDataPresent(DataFormats.Bitmap))  //圖片類
+            if (dataObject3.GetDataPresent(DataFormats.Bitmap))  //圖片類
             {
                 richTextBox1.Text += "取得圖片\n";
-                //pictureBox1.Image = (System.Drawing.Image)dataObject.GetData(DataFormats.Bitmap); //直接顯示在pictureBox裏
+                //pictureBox1.Image = (System.Drawing.Image)dataObject3.GetData(DataFormats.Bitmap); //直接顯示在pictureBox裏
 
                 //取出Bitmap資料, 可做處理
-                Bitmap bitmap1 = (Bitmap)dataObject.GetData(DataFormats.Bitmap);  //取得Bitmap資料
+                Bitmap bitmap1 = (Bitmap)dataObject3.GetData(DataFormats.Bitmap);  //取得Bitmap資料
                 pictureBox1.Image = bitmap1;
                 pictureBox1.Visible = true;
                 if (bitmap1 != null)
@@ -138,20 +140,20 @@ namespace vcs_Clipboard
                     richTextBox1.Text += "無圖可存\n";
             }
 
-            if (dataObject.GetDataPresent(DataFormats.Rtf))  //RTF類
+            if (dataObject3.GetDataPresent(DataFormats.Rtf))  //RTF類
             {
                 richTextBox1.Text += "取得RTF, 內容：\n";
                 //取出Text資料, 可做處理
-                String str = (String)dataObject.GetData(DataFormats.Rtf);
+                String str = (String)dataObject3.GetData(DataFormats.Rtf);
                 richTextBox2.Rtf = Clipboard.GetText(TextDataFormat.Rtf);
                 richTextBox2.Visible = true;
             }
 
-            if (dataObject.GetDataPresent(DataFormats.Html))  //HTML類
+            if (dataObject3.GetDataPresent(DataFormats.Html))  //HTML類
             {
                 richTextBox1.Text += "取得HTML, 內容：\n";
                 //取出Text資料, 可做處理
-                String str = (String)dataObject.GetData(DataFormats.Html);
+                String str = (String)dataObject3.GetData(DataFormats.Html);
                 richTextBox1.Text += str + "\n";
             }
         }
@@ -205,8 +207,7 @@ namespace vcs_Clipboard
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //C# – 清除剪貼簿
-            Clipboard.Clear();
+            Clipboard.Clear();  //清除剪貼板中的對象
         }
 
         //Read text from clipboard
@@ -256,10 +257,10 @@ namespace vcs_Clipboard
         private void button13_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "貼上類別\t";
-            IDataObject data_object = Clipboard.GetDataObject();
-            if (data_object.GetDataPresent("vcs_Clipboard.Person"))
+            IDataObject dataObject = Clipboard.GetDataObject();
+            if (dataObject.GetDataPresent("vcs_Clipboard.Person"))
             {
-                Person person = (Person)data_object.GetData("vcs_Clipboard.Person");
+                Person person = (Person)dataObject.GetData("vcs_Clipboard.Person");
                 //txtDropFirstName.Text = person.FirstName;
                 //txtDropLastName.Text = person.LastName;
                 richTextBox1.Text += "取得類別資料 First Name = " + person.FirstName + ", Last Name = " + person.LastName + "\n";
@@ -275,9 +276,9 @@ namespace vcs_Clipboard
         private void button14_Click(object sender, EventArgs e)
         {
             // List the available formats.
-            IDataObject data_object = Clipboard.GetDataObject();
+            IDataObject dataObject = Clipboard.GetDataObject();
 
-            foreach (string format in data_object.GetFormats())
+            foreach (string format in dataObject.GetFormats())
             {
                 richTextBox1.Text += "取得剪貼簿內的資料格式 : " + format + "\n";
             }
@@ -497,11 +498,11 @@ namespace vcs_Clipboard
             //讀出剪貼簿內的資料
             try
             {
-                IDataObject iData = Clipboard.GetDataObject();
-                if (iData.GetDataPresent(DataFormats.Text))
+                IDataObject dataObject = Clipboard.GetDataObject();
+                if (dataObject.GetDataPresent(DataFormats.Text))
                 {
-                    //richTextBox1.Text += (string)iData.GetData(DataFormats.Text) + "\n";
-                    richTextBox1.Text += (string)iData.GetData(DataFormats.UnicodeText) + "\n";
+                    //richTextBox1.Text += (string)dataObject.GetData(DataFormats.Text) + "\n";
+                    richTextBox1.Text += (string)dataObject.GetData(DataFormats.UnicodeText) + "\n";
                 }
                 else
                 {
@@ -540,8 +541,8 @@ namespace vcs_Clipboard
         {
             //從剪貼板取出圖片然後寫上字保存到文件
 
-            IDataObject data = Clipboard.GetDataObject();
-            Image image = (Image)(data.GetData(typeof(Bitmap)));
+            IDataObject dataObject = Clipboard.GetDataObject();
+            Image image = (Image)(dataObject.GetData(typeof(Bitmap)));
             if (image == null)
             {
                 richTextBox1.Text += "無圖片, 不儲存\n";
@@ -553,7 +554,7 @@ namespace vcs_Clipboard
             int x_st = image.Height - (image.Height - 25);
             int y_st = 3;
 
-            g.DrawString("剪貼簿上的圖片存檔"+DateTime.Now.ToString(), f, sb, x_st, y_st);
+            g.DrawString("剪貼簿上的圖片存檔" + DateTime.Now.ToString(), f, sb, x_st, y_st);
 
             Image small_image;
 
@@ -570,9 +571,26 @@ namespace vcs_Clipboard
             richTextBox1.Text += "已存檔 : " + filename_small + "\n";
         }
 
+        private void button27_Click(object sender, EventArgs e)
+        {
+            //全屏截圖放置到Clipboard中
+            this.Hide();//隱藏當前窗體
 
+            Thread.Sleep(500);//讓線程睡眠一段時間，窗體消失需要一點時間
 
+            //全屏截圖
+            Bitmap bitmap1 = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);//新建一個和屏幕大小相同的圖片
+            pictureBox1.Image = bitmap1;
 
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height));//保存全屏圖片
+
+            g.DrawRectangle(new Pen(Color.Red, 10), 100, 100, 200, 200);//畫個東西
+
+            //片資料放置到Clipboard中
+            Clipboard.SetImage(bitmap1);
+            this.Show();//重新顯示窗體
+        }
     }
 
     [Serializable()]    //必要的一行
@@ -581,5 +599,5 @@ namespace vcs_Clipboard
         public string FirstName;
         public string LastName;
     }
-
 }
+
