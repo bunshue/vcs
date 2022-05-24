@@ -27,6 +27,15 @@ namespace vcs_FormSendData2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //子表單關閉時 回傳給父表單訊息
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //子表單關閉時 回傳給父表單訊息
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }

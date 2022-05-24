@@ -555,7 +555,12 @@ namespace SoundCalculator
             Form2 f2 = new Form2();
             if (f2.ShowDialog() == DialogResult.OK)
             {
+                richTextBox1.Text += "設定頁回傳 OK";
                 GetVox();
+            }
+            else
+            {
+                richTextBox1.Text += "設定頁回傳 Cancel";
             }
         }
 

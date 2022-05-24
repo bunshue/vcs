@@ -37,9 +37,19 @@ namespace vcs_FormSendData2
             }
 
 
-            Form2 fm = new Form2(data);
-            fm.Show();
+            Form2 f2 = new Form2(data);
+            //f2.Show();
             //this.Hide();//隱藏窗體
+
+            //子表單關閉時 回傳給父表單訊息
+            if (f2.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "子表單回傳 OK\n";
+            }
+            else
+            {
+                richTextBox1.Text += "子表單回傳 Cancel\n";
+            }
         }
     }
 }

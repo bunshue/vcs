@@ -62,11 +62,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GMapDrawCircle.cs" />
-    <Compile Include="GMapDrawLine.cs" />
-    <Compile Include="GMapDrawPolygon.cs" />
-    <Compile Include="GMapDrawRectangle.cs" />
-    <Compile Include="GMapDrawRoute.cs" />
     <Compile Include="GMapTextMarker.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MapRegion.cs" />

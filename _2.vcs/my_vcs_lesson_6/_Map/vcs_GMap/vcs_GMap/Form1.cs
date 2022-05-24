@@ -42,7 +42,7 @@ namespace vcs_GMap
 
         TrackBar trackBar1 = new TrackBar();
 
-        string gMapCacheLocation = "GMapCache"; //緩存位置
+        string gMapCacheLocation = @"C:\______test_files\GMapCache1"; //緩存位置
 
         double latitude = 24.838;   //緯度
         double longitude = 121.003; //經度

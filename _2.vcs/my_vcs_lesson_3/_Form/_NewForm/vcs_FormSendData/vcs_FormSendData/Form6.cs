@@ -7,19 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace draw_test1
+namespace vcs_FormSendData
 {
-    public partial class Catch : Form
+    public partial class Form6 : Form
     {
-        public Catch()
+        public Form6()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
         }
     }
 }

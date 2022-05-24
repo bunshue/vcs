@@ -72,7 +72,7 @@ namespace MapDownloader
         // Tile Downloader, init 5 threads
         private TileDownloader tileDownloader = new TileDownloader(5);
 
-        string gMapCacheLocation = "GMapCache"; //緩存位置
+        string gMapCacheLocation = @"C:\______test_files\GMapCache2"; //緩存位置
 
         public MainForm()
         {
@@ -110,11 +110,29 @@ namespace MapDownloader
         // Init map
         private void InitMap()
         {
-            gMapControl1.Location = new Point(10, 30);
-            gMapControl1.Size = new Size(1200, 900);
+            int border = 10;
+            int x_st = border;
+            int y_st = 30;
+            int W = 1400;
+            int H = 900;
+            gMapControl1.Location = new Point(x_st, y_st);
+            gMapControl1.Size = new Size(W, H);
+
+            x_st = border + W + border;
+            int dy = 50;
+            button0.Location = new Point(x_st, y_st + dy * 0);
+            button1.Location = new Point(x_st, y_st + dy * 1);
+            button2.Location = new Point(x_st, y_st + dy * 2);
+            button3.Location = new Point(x_st, y_st + dy * 3);
+            button4.Location = new Point(x_st, y_st + dy * 4);
+            button5.Location = new Point(x_st, y_st + dy * 5);
 
             gMapControl1.ShowCenter = false;
             gMapControl1.DragButton = System.Windows.Forms.MouseButtons.Left;
+
+            gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
+            gMapControl1.CacheLocation = gMapCacheLocation; //緩存位置
+            //gMapControl1.Manager.ImportFromGMDB(@"gMapCacheLocation\Data.gmdb");
 
             //gMapControl1.CacheLocation = Environment.CurrentDirectory + "\\MapCache\\"; // Map cache location
             //gMapControl1.Manager.Mode = AccessMode.CacheOnly;
@@ -2107,6 +2125,36 @@ namespace MapDownloader
                     GMapProvider.IsSocksProxy = false;
                 }
             }
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

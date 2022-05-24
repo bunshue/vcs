@@ -93,13 +93,18 @@ namespace draw_test1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //this.Hide();//隱藏當前窗體
+            this.Hide();//隱藏當前窗體
             Thread.Sleep(50);//讓線程睡眠一段時間，窗體消失需要一點時間
             Catch CatchForm = new Catch();
-            Bitmap CatchBmp = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);//新建一個和屏幕大小相同的圖片
-            Graphics g = Graphics.FromImage(CatchBmp);
+
+            //全屏截圖
+            Bitmap bitmap1 = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);//新建一個和屏幕大小相同的圖片
+            pictureBox1.Image = bitmap1;
+
+            Graphics g = Graphics.FromImage(bitmap1);
             g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height));//保存全屏圖片
-            CatchForm.BackgroundImage = CatchBmp;//將Catch窗體的背景設為全屏時的圖片
+            CatchForm.BackgroundImage = bitmap1;//將Catch窗體的背景設為全屏時的圖片
+
             if (CatchForm.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "CatchForm OK\n";
@@ -112,12 +117,12 @@ namespace draw_test1
                     Clipboard.Clear();//清除剪貼板中的對象
                 }
 
-                //this.Show();//重新顯示窗體
             }
             else
             {
                 richTextBox1.Text += "CatchForm Cancel\n";
             }
+            this.Show();//重新顯示窗體
         }
 
         /// <summary>

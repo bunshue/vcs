@@ -177,5 +177,19 @@ namespace vcs_FormSendData
             Form4 form4 = new Form4(histoData); //開啟表單 並把資料傳送進去
             form4.Show();
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //開啟子表單並傳一張圖過去
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            Form6 f6 = new Form6();
+            f6.BackgroundImage = bitmap1;
+            f6.ClientSize = new Size(bitmap1.Width, bitmap1.Height);
+            f6.Show();
+        }
     }
 }
+

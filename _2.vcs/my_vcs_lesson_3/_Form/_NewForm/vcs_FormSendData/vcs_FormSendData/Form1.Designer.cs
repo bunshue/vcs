@@ -37,6 +37,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -127,11 +128,22 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(12, 466);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(100, 52);
+            this.button8.TabIndex = 10;
+            this.button8.Text = "開啟子表單並傳一張圖過去";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(687, 607);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
@@ -159,6 +171,7 @@
         public System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button bt_clear;
         public System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button8;
     }
 }
 
