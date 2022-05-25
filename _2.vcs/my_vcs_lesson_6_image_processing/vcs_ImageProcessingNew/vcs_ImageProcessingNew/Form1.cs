@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;   //for BitmapData
 
-namespace vcs_ImageProcessingI
+namespace vcs_ImageProcessingNew
 {
     public partial class Form1 : Form
     {

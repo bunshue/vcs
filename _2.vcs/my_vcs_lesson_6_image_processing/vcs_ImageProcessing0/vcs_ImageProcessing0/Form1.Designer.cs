@@ -1,4 +1,4 @@
-﻿namespace vcs_BitmapData
+﻿namespace vcs_ImageProcessing0
 {
     partial class Form1
     {
@@ -207,6 +207,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(130, 60);
             this.button11.TabIndex = 14;
+            this.button11.Text = "LockBitmap內存法";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -217,6 +218,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(130, 60);
             this.button12.TabIndex = 15;
+            this.button12.Text = "LockBitmap指針法";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

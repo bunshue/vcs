@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ImageProcessingI
+namespace vcs_ImageProcessing0
 {
     static class Program
     {

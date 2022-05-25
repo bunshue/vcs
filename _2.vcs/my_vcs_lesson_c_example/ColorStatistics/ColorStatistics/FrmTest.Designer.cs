@@ -60,9 +60,10 @@
             // 
             // PicR
             // 
+            this.PicR.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.PicR.Location = new System.Drawing.Point(485, 12);
             this.PicR.Name = "PicR";
-            this.PicR.Size = new System.Drawing.Size(519, 561);
+            this.PicR.Size = new System.Drawing.Size(500, 500);
             this.PicR.TabIndex = 2;
             this.PicR.TabStop = false;
             this.PicR.Click += new System.EventHandler(this.PicR_Click);
@@ -70,11 +71,11 @@
             // 
             // Thumb
             // 
+            this.Thumb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Thumb.Image = ((System.Drawing.Image)(resources.GetObject("Thumb.Image")));
             this.Thumb.Location = new System.Drawing.Point(12, 133);
             this.Thumb.Name = "Thumb";
-            this.Thumb.Size = new System.Drawing.Size(453, 300);
-            this.Thumb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.Thumb.Size = new System.Drawing.Size(450, 450);
             this.Thumb.TabIndex = 3;
             this.Thumb.TabStop = false;
             // 
@@ -172,7 +173,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1358, 585);
+            this.ClientSize = new System.Drawing.Size(1358, 596);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.LblDelta);
             this.Controls.Add(this.SliderDelta);
