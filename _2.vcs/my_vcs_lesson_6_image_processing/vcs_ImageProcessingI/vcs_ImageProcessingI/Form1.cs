@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;   //for BitmapData
 
 namespace vcs_ImageProcessingI
 {
@@ -37,8 +37,8 @@ namespace vcs_ImageProcessingI
             //button
             x_st = 10;
             y_st = 10;
-            dx = 180;
-            dy = 90;
+            dx = 170;
+            dy = 80;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -48,6 +48,18 @@ namespace vcs_ImageProcessingI
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
         }
 
@@ -264,19 +276,360 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
         }
 
+        int borderwidth = 1;
+        int mosaicwidth = 3;
+        Color bordercolor = Color.FromArgb(211, 172, 158);
         private void button5_Click(object sender, EventArgs e)
         {
+            //馬賽克效果1
+            string filename = @"C:\______test_files\naruto.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = CreateMosaicImage(bitmap1);
+            pictureBox1.Image = bitmap1;
+            pictureBox2.Image = bitmap2;
+        }
 
+        //重設大小
+        public Bitmap Resize(Bitmap source, Size size)
+        {
+            int widthskip = source.Width / size.Width;
+            int heightskip = source.Height / size.Height;
+
+            Bitmap bmp = new Bitmap(size.Width, size.Height);
+
+            PointBitmap pbmp = new PointBitmap(source);
+            PointBitmap newpbmp = new PointBitmap(bmp);
+
+            pbmp.LockBits();
+            newpbmp.LockBits();
+
+            for (int height = 0; height < newpbmp.Height; height++)
+            {
+                for (int width = 0; width < newpbmp.Width; width++)
+                {
+                    int x = width > 0 ? 1 + (width - 1) * widthskip : 0;
+                    int y = height > 0 ? 1 + (height - 1) * heightskip : 0;
+                    Color c = pbmp.GetPixel(x, y);
+                    newpbmp.SetPixel(width, height, c);
+                }
+            }
+
+            pbmp.UnlockBits();
+            newpbmp.UnlockBits();
+
+            return bmp;
+        }
+
+        //生成马赛克图像
+        public Bitmap CreateMosaicImage(Bitmap source)
+        {
+            //计算新图像需要的尺寸
+            int widthcount = source.Width / mosaicwidth;
+            int heightcount = source.Height / mosaicwidth;
+
+            int newwidth = widthcount * mosaicwidth + (widthcount + 1) * borderwidth;
+            int newheight = heightcount * mosaicwidth + (heightcount + 1) * borderwidth;
+
+            Bitmap bmp = new Bitmap(newwidth, newheight);
+            source = Resize(source, new Size(widthcount, heightcount));
+
+            PointBitmap sourcepbmp = new PointBitmap(source);
+            PointBitmap newpbmp = new PointBitmap(bmp);
+            sourcepbmp.LockBits();
+            newpbmp.LockBits();
+
+            //绘制背景
+            for (int height = 0; height < newpbmp.Height; height++)
+            {
+                for (int width = 0; width < newpbmp.Width; width++)
+                {
+                    newpbmp.SetPixel(width, height, bordercolor);
+                }
+            }
+
+            for (int height = 0; height < sourcepbmp.Height; height++)
+            {
+                for (int width = 0; width < sourcepbmp.Width; width++)
+                {
+                    int x = borderwidth * (width + 1) + mosaicwidth * width;
+                    int y = borderwidth * (height + 1) + mosaicwidth * height;
+
+                    Color c = sourcepbmp.GetPixel(width, height);
+
+                    for (int k = 0; k < mosaicwidth; k++, y++, x -= mosaicwidth)
+                    {
+                        for (int l = 0; l < mosaicwidth; l++, x++)
+                        {
+                            newpbmp.SetPixel(x, y, c);
+                        }
+                    }
+                }
+            }
+            sourcepbmp.UnlockBits();
+            newpbmp.UnlockBits();
+            return bmp;
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //馬賽克效果2
+            //C#處理數碼相片之馬賽克的實現
+            string filename = @"C:\______test_files\elephant.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
+            int val = 10;
+            Bitmap bitmap2 = KiMosaic(bitmap1, val);
+            pictureBox2.Image = bitmap2;
 
+
+            //讀取圖檔
+            pictureBox1.Image = Image.FromFile(filename);
+        }
+
+        //馬賽克算法很簡單，說白了就是把一張圖片分割成若干個val * val像素的小區塊（可能在邊緣有零星的小塊，但不影響整體算法），每個小區塊的顏色都是相同的。
+        public static Bitmap KiMosaic(Bitmap b, int val)
+        {
+            if (b.Equals(null))
+            {
+                return null;
+            }
+            int w = b.Width;
+            int h = b.Height;
+            int stdR, stdG, stdB;
+            stdR = 0;
+            stdG = 0;
+            stdB = 0;
+            BitmapData srcData = b.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            unsafe
+            {
+                byte* p = (byte*)srcData.Scan0.ToPointer();
+                for (int y = 0; y < h; y++)
+                {
+                    for (int x = 0; x < w; x++)
+                    {
+                        if (y % val == 0)
+                        {
+                            if (x % val == 0)
+                            {
+                                stdR = p[2]; stdG = p[1]; stdB = p[0];
+                            }
+                            else
+                            {
+                                p[0] = (byte)stdB;
+                                p[1] = (byte)stdG;
+                                p[2] = (byte)stdR;
+                            }
+                        }
+                        else
+                        {
+                            // 復制上一行
+                            byte* pTemp = p - srcData.Stride;
+                            p[0] = (byte)pTemp[0];
+                            p[1] = (byte)pTemp[1];
+                            p[2] = (byte)pTemp[2];
+                        }
+                        p += 3;
+                    } // end of x
+                    p += srcData.Stride - w * 3;
+                } // end of y
+                b.UnlockBits(srcData);
+            }
+            return b;
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+    //指針法
+    public class PointBitmap
+    {
+        Bitmap source = null;
+        IntPtr Iptr = IntPtr.Zero;
+        BitmapData bitmapData = null;
+
+        public int Depth { get; private set; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+
+        public PointBitmap(Bitmap source)
+        {
+            this.source = source;
+        }
+
+        public void LockBits()
+        {
+            try
+            {
+                // Get width and height of bitmap
+                Width = source.Width;
+                Height = source.Height;
+
+                // get total locked pixels count
+                int PixelCount = Width * Height;
+
+                // Create rectangle to lock
+                Rectangle rect = new Rectangle(0, 0, Width, Height);
+
+                // get source bitmap pixel format size
+                Depth = System.Drawing.Bitmap.GetPixelFormatSize(source.PixelFormat);
+
+                // Check if bpp (Bits Per Pixel) is 8, 24, or 32
+                if (Depth != 8 && Depth != 24 && Depth != 32)
+                {
+                    throw new ArgumentException("Only 8, 24 and 32 bpp images are supported.");
+                }
+
+                // Lock bitmap and return bitmap data
+                bitmapData = source.LockBits(rect, ImageLockMode.ReadWrite,
+                                             source.PixelFormat);
+
+                //得到首地址
+                unsafe
+                {
+                    Iptr = bitmapData.Scan0;
+                    //二维图像循环
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void UnlockBits()
+        {
+            try
+            {
+                source.UnlockBits(bitmapData);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Color GetPixel(int x, int y)
+        {
+            unsafe
+            {
+                byte* ptr = (byte*)Iptr;
+                ptr = ptr + bitmapData.Stride * y;
+                ptr += Depth * x / 8;
+                Color c = Color.Empty;
+                if (Depth == 32)
+                {
+                    int a = ptr[3];
+                    int r = ptr[2];
+                    int g = ptr[1];
+                    int b = ptr[0];
+                    c = Color.FromArgb(a, r, g, b);
+                }
+                else if (Depth == 24)
+                {
+                    int r = ptr[2];
+                    int g = ptr[1];
+                    int b = ptr[0];
+                    c = Color.FromArgb(r, g, b);
+                }
+                else if (Depth == 8)
+                {
+                    int r = ptr[0];
+                    c = Color.FromArgb(r, r, r);
+                }
+                return c;
+            }
+        }
+
+        public void SetPixel(int x, int y, Color c)
+        {
+            unsafe
+            {
+                byte* ptr = (byte*)Iptr;
+                ptr = ptr + bitmapData.Stride * y;
+                ptr += Depth * x / 8;
+                if (Depth == 32)
+                {
+                    ptr[3] = c.A;
+                    ptr[2] = c.R;
+                    ptr[1] = c.G;
+                    ptr[0] = c.B;
+                }
+                else if (Depth == 24)
+                {
+                    ptr[2] = c.R;
+                    ptr[1] = c.G;
+                    ptr[0] = c.B;
+                }
+                else if (Depth == 8)
+                {
+                    ptr[2] = c.R;
+                    ptr[1] = c.G;
+                    ptr[0] = c.B;
+                }
+            }
         }
     }
 }

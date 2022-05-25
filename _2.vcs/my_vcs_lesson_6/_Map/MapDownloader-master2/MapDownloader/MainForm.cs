@@ -131,7 +131,7 @@ namespace MapDownloader
 
 
             gMapControl1.ShowCenter = false;
-            gMapControl1.DragButton = System.Windows.Forms.MouseButtons.Left;
+            gMapControl1.DragButton = MouseButtons.Left;
 
             gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
             gMapControl1.CacheLocation = gMapCacheLocation; //緩存位置
@@ -261,7 +261,7 @@ namespace MapDownloader
 
         void mapControl_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 leftClickPoint = new GPoint(e.X, e.Y);
                 if (allowRouting)
@@ -1166,15 +1166,15 @@ namespace MapDownloader
             if (currentAreaPolygon != null)
             {
                 string name = "KmlFile.kml";
-                SaveFileDialog dialog = new SaveFileDialog
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog
                 {
                     FileName = name,
                     Title = "选择Kml文件位置",
                     Filter = "Kml文件|*.kml"
                 };
-                if (dialog.ShowDialog() == DialogResult.OK)
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    SaveKmlToFile(currentAreaPolygon, name, dialog.FileName);
+                    SaveKmlToFile(currentAreaPolygon, name, saveFileDialog1.FileName);
                 }
             }
         }
@@ -1592,17 +1592,17 @@ namespace MapDownloader
         {
             try
             {
-                OpenFileDialog openDlg = new OpenFileDialog();
-                openDlg.Filter = "Excel File (*.xls)|*.xls|(*.xlsx)|*.xlsx";
-                openDlg.FilterIndex = 1;
-                openDlg.RestoreDirectory = true;
-                if (openDlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "Excel File (*.xls)|*.xls|(*.xlsx)|*.xlsx";
+                openFileDialog1.FilterIndex = 1;
+                openFileDialog1.RestoreDirectory = true;
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    DataTable dt = ExcelHelper.ExcelToDataTable(openDlg.FileName, null, true);
+                    DataTable dt = ExcelHelper.ExcelToDataTable(openFileDialog1.FileName, null, true);
                     List<RouteMapData> signalMapdatas = GetRouteMapData(dt);
                     if (signalMapdatas != null && signalMapdatas.Count > 0)
                     {
-                        GMapOverlay overlay = new GMapOverlay(openDlg.SafeFileName);
+                        GMapOverlay overlay = new GMapOverlay(openFileDialog1.SafeFileName);
                         foreach (RouteMapData signalMapdata in signalMapdatas)
                         {
                             double x;
@@ -1776,7 +1776,7 @@ namespace MapDownloader
         {
             ArcGISLayerConfigForm form = new ArcGISLayerConfigForm();
             DialogResult res = form.ShowDialog();
-            if (res == System.Windows.Forms.DialogResult.OK)
+            if (res == DialogResult.OK)
             {
                 ExportParameter exportParameter = form.GetExportParameter();
                 TileExport tileExport = new TileExport();
@@ -1826,13 +1826,13 @@ namespace MapDownloader
 
                 //Excel存储
                 richTextBox1.Text += "你選了 Excel存儲\n";
-                SaveFileDialog saveDlg = new SaveFileDialog();
-                saveDlg.Filter = "Excel File (*.xls)|*.xls|(*.xlsx)|*.xlsx";
-                saveDlg.FilterIndex = 1;
-                saveDlg.RestoreDirectory = true;
-                if (saveDlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = "Excel File (*.xls)|*.xls|(*.xlsx)|*.xlsx";
+                saveFileDialog1.FilterIndex = 1;
+                saveFileDialog1.RestoreDirectory = true;
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    string file = saveDlg.FileName;
+                    string filename = saveFileDialog1.FileName;
 
                     DataTable dt = new DataTable();
                     dt.Columns.Add("名称", typeof(string));
@@ -1854,7 +1854,7 @@ namespace MapDownloader
                         dt.Rows.Add(dr);
                     }
                     PoiExportParameter para = new PoiExportParameter();
-                    para.Path = file;
+                    para.Path = filename;
                     para.Data = dt;
                     para.ExportType = 0;    //0: Excel, 1: MySQL
                     poiExportWorker.RunWorkerAsync(para);
@@ -1862,14 +1862,13 @@ namespace MapDownloader
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "Save POI data error : " + ex.ToString() + "\n";
-                MessageBox.Show("POI保存失败！");
+                richTextBox1.Text += "POI 保存失敗, Save POI data error : " + ex.ToString() + "\n";
             }
         }
 
         void poiExportWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            MessageBox.Show("POI保存完成！");
+            richTextBox1.Text += "POI 保存完成\n";
         }
 
         void poiExportWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -1975,7 +1974,7 @@ namespace MapDownloader
         {
             ProxyForm proxyForm = new ProxyForm();
             DialogResult diaResult = proxyForm.ShowDialog();
-            if (diaResult == System.Windows.Forms.DialogResult.OK)
+            if (diaResult == DialogResult.OK)
             {
                 bool isProxyOn = proxyForm.CheckProxyOn();
                 if (isProxyOn)
@@ -1997,131 +1996,22 @@ namespace MapDownloader
         private void button2_Click(object sender, EventArgs e)
         {
             //讀取GPX檔案
-            using (FileDialog dialog = new OpenFileDialog())
-            {
-                dialog.InitialDirectory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "gpx";
-                dialog.CheckPathExists = true;
-                dialog.CheckFileExists = false;
-                dialog.AddExtension = true;
-                dialog.DefaultExt = "gpx";
-                dialog.ValidateNames = true;
-                dialog.Title = "选择GPX文件";
-                dialog.Filter = "GPX文件 (*.gpx)|*.gpx|所有文件 (*.*)|*.*";
-                dialog.FilterIndex = 1;
-                dialog.RestoreDirectory = true;
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        string objectXml = File.ReadAllText(dialog.FileName);
-                        gpxType type = this.gMapControl1.Manager.DeserializeGPX(objectXml);
-                        if (type != null)
-                        {
-                            if ((type.trk != null) && (type.trk.Length > 0))
-                            {
-                                List<PointLatLng> points = new List<PointLatLng>();
-                                foreach (trkType trk in type.trk)
-                                {
-                                    foreach (trksegType seg in trk.trkseg)
-                                    {
-                                        foreach (wptType p in seg.trkpt)
-                                        {
-                                            points.Add(new PointLatLng((double)p.lat, (double)p.lon));
-                                        }
-                                    }
-                                    string name = string.IsNullOrEmpty(trk.name) ? string.Empty : trk.name;
-                                    GMapRoute item = new GMapRoute(points, name)
-                                    {
-                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
-                                    };
-                                    item.Stroke.Width = 5f;
-                                    item.Stroke.DashStyle = DashStyle.DashDot;
-                                    this.polygonsOverlay.Routes.Add(item);
-                                }
-                            }
-                            if ((type.rte != null) && (type.rte.Length > 0))
-                            {
-                                List<PointLatLng> points = new List<PointLatLng>();
-                                foreach (rteType rte in type.rte)
-                                {
-                                    foreach (wptType p in rte.rtept)
-                                    {
-                                        points.Add(new PointLatLng((double)p.lat, (double)p.lon));
-                                    }
-                                    string str3 = string.IsNullOrEmpty(rte.name) ? string.Empty : rte.name;
-                                    GMapRoute route2 = new GMapRoute(points, str3)
-                                    {
-                                        Stroke = new Pen(Color.FromArgb(0x90, Color.Red))
-                                    };
-                                    route2.Stroke.Width = 5f;
-                                    route2.Stroke.DashStyle = DashStyle.DashDot;
-                                    this.polygonsOverlay.Routes.Add(route2);
-                                }
-                            }
-                            if (type.wpt != null && type.wpt.Length > 0)
-                            {
-                                foreach (wptType p in type.wpt)
-                                {
-                                    PointLatLng point = new PointLatLng((double)p.lat, (double)p.lon);
-                                    GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
-                                    this.polygonsOverlay.Markers.Add(marker);
-                                }
-                            }
-                            this.gMapControl1.ZoomAndCenterRoutes(null);
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        //log.Error("Read GPX file error: " + exception);
-                        MessageBox.Show("读取GPX文件错误");
-                    }
-                }
-            }
-
+            //已搬走
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             //讀取KML檔案
-            try
-            {
-                using (FileDialog dialog = new OpenFileDialog())
-                {
-                    dialog.CheckPathExists = true;
-                    dialog.CheckFileExists = false;
-                    dialog.AddExtension = true;
-                    dialog.ValidateNames = true;
-                    dialog.Title = "选择KML文件";
-                    dialog.FilterIndex = 1;
-                    dialog.RestoreDirectory = true;
-                    dialog.Filter = "KML文件 (*.kml)|*.kml|所有文件 (*.*)|*.*";
-                    if (dialog.ShowDialog() == DialogResult.OK)
-                    {
-                        this.polygonsOverlay.Clear();
-                        InitKMLPlaceMarks(KmlUtil.GetPlaceMarksFromKmlFile(dialog.FileName));
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                //log.Error("Read KML file error: " + exception);
-                MessageBox.Show("读取KML文件时出现异常");
-            }
+            string filename = @"C:\______test_files\__RW\_xml\kml_mountain.kml";
 
+            this.polygonsOverlay.Clear();
+            InitKMLPlaceMarks(KmlUtil.GetPlaceMarksFromKmlFile(filename));
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             //地圖存圖
-            Image img = this.gMapControl1.ToImage();
-            SaveFileDialog openDialog = new SaveFileDialog();
-            openDialog.Filter = "(*.png)|*.png|(*.jpg)|*.jpg|(*.bmp)|*.bmp";
-            if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                string fileName = openDialog.FileName;
-                img.Save(fileName);
-            }
-
+            //已搬走
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -2200,3 +2090,4 @@ namespace MapDownloader
         }
     }
 }
+
