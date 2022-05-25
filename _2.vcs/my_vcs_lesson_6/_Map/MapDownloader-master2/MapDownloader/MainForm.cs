@@ -4,16 +4,17 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Drawing.Drawing2D;
 using System.Reflection;
 using System.Net;
+
 using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.MapProviders;
 using GMap.NET.CacheProviders;
-using NetUtil;
 using GMapUtil;
 using GMapChinaRegion;
 using GMapPolygonLib;
@@ -29,6 +30,8 @@ using GMapHeat;
 using GMapDownload;
 using GMapPOI;
 using GMapTools;
+
+using NetUtil;
 
 namespace MapDownloader
 {
@@ -78,8 +81,7 @@ namespace MapDownloader
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
-            //gMapControl1.Size = new Size(1500, 900);
+            show_item_location();
 
             richTextBox1.Text += "1111 InitMap()\n";
             InitMap();
@@ -105,8 +107,7 @@ namespace MapDownloader
             tilePath = ConfigHelper.GetAppConfig("TilePath");
         }
 
-        // Init map
-        private void InitMap()
+        void show_item_location()
         {
             int border = 10;
             int x_st = border;
@@ -124,12 +125,22 @@ namespace MapDownloader
             button3.Location = new Point(x_st, y_st + dy * 3);
             button4.Location = new Point(x_st, y_st + dy * 4);
             button5.Location = new Point(x_st, y_st + dy * 5);
-            lb_draw.Location = new Point(x_st, y_st + dy * 6);
-            lb_info.Location = new Point(x_st, y_st + dy * 7);
+            button6.Location = new Point(x_st, y_st + dy * 6);
+            button7.Location = new Point(x_st, y_st + dy * 7);
+            button8.Location = new Point(x_st, y_st + dy * 8);
+            button9.Location = new Point(x_st, y_st + dy * 9);
+
+            lb_draw.Location = new Point(x_st, y_st + dy * 10);
+            lb_info1.Location = new Point(x_st, y_st + dy * 11);
+            lb_info2.Location = new Point(x_st, y_st + dy * 12);
             lb_draw.Text = "";
-            lb_info.Text = "";
+            lb_info1.Text = "";
+            lb_info2.Text = "";
+        }
 
-
+        // Init map
+        private void InitMap()
+        {
             gMapControl1.ShowCenter = false;
             gMapControl1.DragButton = MouseButtons.Left;
 
@@ -239,10 +250,8 @@ namespace MapDownloader
                 Placemark place = (Placemark)e.Result;
                 if (!place.Equals(Placemark.Empty))
                 {
-                    this.toolStripStatusCenter.Text = "地图中心:" + place.ProvinceName + "," + place.CityName + "," + place.DistrictName;
+                    lb_info2.Text = "地圖中心 : " + place.ProvinceName + "," + place.CityName + "," + place.DistrictName;
                     currentCenterCityName = place.CityName;
-
-                    lb_info.Text = place.ProvinceName + "," + place.CityName + "," + place.DistrictName;
                 }
             }
             catch (Exception ex)
@@ -347,9 +356,8 @@ namespace MapDownloader
 
                 int zoom = (int)this.gMapControl1.Zoom;
                 double resolution = this.gMapControl1.MapProvider.Projection.GetLevelResolution(zoom);
-                this.toolStripStatusTip.Text = string.Format("显示级别：{0} 分辨率：{1:F3}米/像素 坐标：{2:F4},{3:F4}", zoom, resolution, p.Lng, p.Lat);
 
-                lb_draw.Text = string.Format("目前位置{0:F4},{1:F4}", p.Lng, p.Lat);
+                lb_info1.Text = string.Format("显示级别：{0} 分辨率：{1:F3}米/像素 坐标：{2:F4},{3:F4}", zoom, resolution, p.Lng, p.Lat);
 
                 if (isLeftButtonDown && currentDragableNode != null)
                 {
@@ -423,8 +431,6 @@ namespace MapDownloader
             this.toolStripStatusExport.Visible = false;
 
             this.xPanderPanel2.ExpandClick += new EventHandler<EventArgs>(xPanderPanel2_ExpandClick);
-
-            this.buttonMapImage.Click += new EventHandler(buttonMapImage_Click);
 
             this.dataGridView1.AutoSize = true;
             this.dataGridView1.RowPostPaint += new DataGridViewRowPostPaintEventHandler(dataGridViewPOI_RowPostPaint);
@@ -722,7 +728,7 @@ namespace MapDownloader
 
         #region 拼接大图
 
-        void buttonMapImage_Click(object sender, EventArgs e)
+        private void buttonMapImage_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "你按了 拼接大圖 之 拼接圖\n";
             if (currentAreaPolygon != null)
@@ -1477,35 +1483,6 @@ namespace MapDownloader
 
         #region 地址解析与逆解析
 
-        //地址解析
-        private void buttonAddressSearch_Click(object sender, EventArgs e)
-        {
-            string address = this.textBoxAddress.Text.Trim();
-            if (!string.IsNullOrEmpty(address))
-            {
-                this.routeOverlay.Markers.Clear();
-                Placemark placemark = new Placemark(address);
-                placemark.CityName = currentCenterCityName;
-                if (currentAreaPolygon != null)
-                {
-                    placemark.CityName = currentAreaPolygon.Name;
-                }
-                List<PointLatLng> points = new List<PointLatLng>();
-                //GeoCoderStatusCode statusCode = SoSoMapProvider.Instance.GetPoints(placemark, out points);
-                GeoCoderStatusCode statusCode = AMapProvider.Instance.GetPoints(placemark, out points);
-                if (statusCode == GeoCoderStatusCode.G_GEO_SUCCESS)
-                {
-                    foreach (PointLatLng p in points)
-                    {
-                        GMarkerGoogle marker = new GMarkerGoogle(p, GMarkerGoogleType.blue_dot);
-                        marker.ToolTipText = placemark.Address;
-                        this.routeOverlay.Markers.Add(marker);
-                        this.gMapControl1.Position = p;
-                    }
-                }
-            }
-        }
-
         private void 搜索该点的地址ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PointLatLng p = this.gMapControl1.FromLocalToLatLng((int)leftClickPoint.X, (int)leftClickPoint.Y);
@@ -1997,6 +1974,7 @@ namespace MapDownloader
         {
             //讀取GPX檔案
             //已搬走
+            richTextBox1.Text += "已搬走\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -2012,6 +1990,7 @@ namespace MapDownloader
         {
             //地圖存圖
             //已搬走
+            richTextBox1.Text += "已搬走\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -2088,6 +2067,27 @@ namespace MapDownloader
                 richTextBox1.Text += "地址無資料\n";
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
 

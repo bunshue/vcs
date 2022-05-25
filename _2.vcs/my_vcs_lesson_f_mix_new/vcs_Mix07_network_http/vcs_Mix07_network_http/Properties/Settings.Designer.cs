@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace network_test1.Properties {
+namespace vcs_Mix07_network_http.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

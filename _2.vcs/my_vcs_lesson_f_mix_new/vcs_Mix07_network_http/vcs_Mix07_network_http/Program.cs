@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace network_test1
+namespace vcs_Mix07_network_http
 {
     static class Program
     {

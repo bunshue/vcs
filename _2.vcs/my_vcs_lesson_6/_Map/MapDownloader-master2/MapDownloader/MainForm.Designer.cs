@@ -102,8 +102,6 @@
             this.导出地图切片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arcGISTileToBundleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusTip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusCenter = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusDownload = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBarDownload = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusPOIDownload = new System.Windows.Forms.ToolStripStatusLabel();
@@ -123,6 +121,9 @@
             this.groupBoxPOI = new System.Windows.Forms.GroupBox();
             this.panelPOIResult = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.poiDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelPOI = new System.Windows.Forms.Panel();
             this.buttonPoiSave = new System.Windows.Forms.Button();
             this.buttonPOISearch = new System.Windows.Forms.Button();
@@ -135,14 +136,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxPOIkeyword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBoxAddress = new System.Windows.Forms.GroupBox();
-            this.buttonAddressSearch = new System.Windows.Forms.Button();
-            this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.gbMapImage = new System.Windows.Forms.GroupBox();
             this.buttonMapImage = new System.Windows.Forms.Button();
             this.textBoxImageZoom = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.gbMapDownloader = new System.Windows.Forms.GroupBox();
             this.xPanderPanel2 = new BSE.Windows.Forms.XPanderPanel();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -152,11 +149,13 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            this.lb_info = new System.Windows.Forms.Label();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.poiDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lb_info2 = new System.Windows.Forms.Label();
             this.lb_draw = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.lb_info1 = new System.Windows.Forms.Label();
             this.gMapControl1 = new MapDownloader.MapControl();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -168,11 +167,10 @@
             this.groupBoxPOI.SuspendLayout();
             this.panelPOIResult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.poiDataBindingSource)).BeginInit();
             this.panelPOI.SuspendLayout();
-            this.groupBoxAddress.SuspendLayout();
             this.gbMapImage.SuspendLayout();
             this.xPanderPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.poiDataBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -751,8 +749,6 @@
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusTip,
-            this.toolStripStatusCenter,
             this.toolStripStatusDownload,
             this.toolStripProgressBarDownload,
             this.toolStripStatusPOIDownload,
@@ -762,18 +758,6 @@
             this.statusStrip1.Size = new System.Drawing.Size(1479, 22);
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusTip
-            // 
-            this.toolStripStatusTip.Name = "toolStripStatusTip";
-            this.toolStripStatusTip.Size = new System.Drawing.Size(31, 17);
-            this.toolStripStatusTip.Text = "显示";
-            // 
-            // toolStripStatusCenter
-            // 
-            this.toolStripStatusCenter.Name = "toolStripStatusCenter";
-            this.toolStripStatusCenter.Size = new System.Drawing.Size(67, 17);
-            this.toolStripStatusCenter.Text = "地图中心：";
             // 
             // toolStripStatusDownload
             // 
@@ -924,9 +908,7 @@
             // 
             this.panelTool.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panelTool.Controls.Add(this.groupBoxPOI);
-            this.panelTool.Controls.Add(this.groupBoxAddress);
             this.panelTool.Controls.Add(this.gbMapImage);
-            this.panelTool.Controls.Add(this.gbMapDownloader);
             this.panelTool.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTool.Location = new System.Drawing.Point(1, 25);
             this.panelTool.Name = "panelTool";
@@ -938,9 +920,9 @@
             this.groupBoxPOI.Controls.Add(this.panelPOIResult);
             this.groupBoxPOI.Controls.Add(this.panelPOI);
             this.groupBoxPOI.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxPOI.Location = new System.Drawing.Point(0, 164);
+            this.groupBoxPOI.Location = new System.Drawing.Point(0, 61);
             this.groupBoxPOI.Name = "groupBoxPOI";
-            this.groupBoxPOI.Size = new System.Drawing.Size(255, 464);
+            this.groupBoxPOI.Size = new System.Drawing.Size(255, 567);
             this.groupBoxPOI.TabIndex = 8;
             this.groupBoxPOI.TabStop = false;
             this.groupBoxPOI.Text = "POI查询";
@@ -951,7 +933,7 @@
             this.panelPOIResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPOIResult.Location = new System.Drawing.Point(3, 145);
             this.panelPOIResult.Name = "panelPOIResult";
-            this.panelPOIResult.Size = new System.Drawing.Size(249, 316);
+            this.panelPOIResult.Size = new System.Drawing.Size(249, 419);
             this.panelPOIResult.TabIndex = 11;
             // 
             // dataGridView1
@@ -968,8 +950,26 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(249, 316);
+            this.dataGridView1.Size = new System.Drawing.Size(249, 419);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "名称";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // addressDataGridViewTextBoxColumn
+            // 
+            this.addressDataGridViewTextBoxColumn.DataPropertyName = "Address";
+            this.addressDataGridViewTextBoxColumn.HeaderText = "地址";
+            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
+            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // poiDataBindingSource
+            // 
+            this.poiDataBindingSource.DataSource = typeof(GMapPOI.PoiData);
             // 
             // panelPOI
             // 
@@ -1093,42 +1093,13 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "关键字：";
             // 
-            // groupBoxAddress
-            // 
-            this.groupBoxAddress.Controls.Add(this.buttonAddressSearch);
-            this.groupBoxAddress.Controls.Add(this.textBoxAddress);
-            this.groupBoxAddress.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxAddress.Location = new System.Drawing.Point(0, 107);
-            this.groupBoxAddress.Name = "groupBoxAddress";
-            this.groupBoxAddress.Size = new System.Drawing.Size(255, 57);
-            this.groupBoxAddress.TabIndex = 7;
-            this.groupBoxAddress.TabStop = false;
-            this.groupBoxAddress.Text = "地址解析";
-            // 
-            // buttonAddressSearch
-            // 
-            this.buttonAddressSearch.Location = new System.Drawing.Point(168, 20);
-            this.buttonAddressSearch.Name = "buttonAddressSearch";
-            this.buttonAddressSearch.Size = new System.Drawing.Size(70, 23);
-            this.buttonAddressSearch.TabIndex = 4;
-            this.buttonAddressSearch.Text = "查询";
-            this.buttonAddressSearch.UseVisualStyleBackColor = true;
-            this.buttonAddressSearch.Click += new System.EventHandler(this.buttonAddressSearch_Click);
-            // 
-            // textBoxAddress
-            // 
-            this.textBoxAddress.Location = new System.Drawing.Point(15, 20);
-            this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(142, 22);
-            this.textBoxAddress.TabIndex = 3;
-            // 
             // gbMapImage
             // 
             this.gbMapImage.Controls.Add(this.buttonMapImage);
             this.gbMapImage.Controls.Add(this.textBoxImageZoom);
             this.gbMapImage.Controls.Add(this.label4);
             this.gbMapImage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbMapImage.Location = new System.Drawing.Point(0, 46);
+            this.gbMapImage.Location = new System.Drawing.Point(0, 0);
             this.gbMapImage.Name = "gbMapImage";
             this.gbMapImage.Size = new System.Drawing.Size(255, 61);
             this.gbMapImage.TabIndex = 5;
@@ -1143,6 +1114,7 @@
             this.buttonMapImage.TabIndex = 4;
             this.buttonMapImage.Text = "拼接图";
             this.buttonMapImage.UseVisualStyleBackColor = true;
+            this.buttonMapImage.Click += new System.EventHandler(this.buttonMapImage_Click);
             // 
             // textBoxImageZoom
             // 
@@ -1160,15 +1132,6 @@
             this.label4.Size = new System.Drawing.Size(45, 12);
             this.label4.TabIndex = 2;
             this.label4.Text = "Zoom：";
-            // 
-            // gbMapDownloader
-            // 
-            this.gbMapDownloader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbMapDownloader.Location = new System.Drawing.Point(0, 0);
-            this.gbMapDownloader.Name = "gbMapDownloader";
-            this.gbMapDownloader.Size = new System.Drawing.Size(255, 46);
-            this.gbMapDownloader.TabIndex = 4;
-            this.gbMapDownloader.TabStop = false;
             // 
             // xPanderPanel2
             // 
@@ -1283,41 +1246,68 @@
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
-            // lb_info
+            // lb_info2
             // 
-            this.lb_info.AutoSize = true;
-            this.lb_info.Location = new System.Drawing.Point(974, 357);
-            this.lb_info.Name = "lb_info";
-            this.lb_info.Size = new System.Drawing.Size(33, 12);
-            this.lb_info.TabIndex = 20;
-            this.lb_info.Text = "label2";
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "名称";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // addressDataGridViewTextBoxColumn
-            // 
-            this.addressDataGridViewTextBoxColumn.DataPropertyName = "Address";
-            this.addressDataGridViewTextBoxColumn.HeaderText = "地址";
-            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
-            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // poiDataBindingSource
-            // 
-            this.poiDataBindingSource.DataSource = typeof(GMapPOI.PoiData);
+            this.lb_info2.AutoSize = true;
+            this.lb_info2.Location = new System.Drawing.Point(974, 590);
+            this.lb_info2.Name = "lb_info2";
+            this.lb_info2.Size = new System.Drawing.Size(33, 12);
+            this.lb_info2.TabIndex = 20;
+            this.lb_info2.Text = "label2";
             // 
             // lb_draw
             // 
             this.lb_draw.AutoSize = true;
-            this.lb_draw.Location = new System.Drawing.Point(976, 334);
+            this.lb_draw.Location = new System.Drawing.Point(974, 537);
             this.lb_draw.Name = "lb_draw";
             this.lb_draw.Size = new System.Drawing.Size(33, 12);
             this.lb_draw.TabIndex = 21;
             this.lb_draw.Text = "label2";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(976, 324);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(110, 45);
+            this.button6.TabIndex = 22;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(976, 375);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(110, 45);
+            this.button7.TabIndex = 23;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(976, 426);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(110, 45);
+            this.button8.TabIndex = 24;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(976, 475);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(110, 45);
+            this.button9.TabIndex = 25;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // lb_info1
+            // 
+            this.lb_info1.AutoSize = true;
+            this.lb_info1.Location = new System.Drawing.Point(974, 561);
+            this.lb_info1.Name = "lb_info1";
+            this.lb_info1.Size = new System.Drawing.Size(33, 12);
+            this.lb_info1.TabIndex = 26;
+            this.lb_info1.Text = "label2";
             // 
             // gMapControl1
             // 
@@ -1353,8 +1343,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1479, 700);
+            this.Controls.Add(this.lb_info1);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.lb_draw);
-            this.Controls.Add(this.lb_info);
+            this.Controls.Add(this.lb_info2);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -1386,14 +1381,12 @@
             this.groupBoxPOI.ResumeLayout(false);
             this.panelPOIResult.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.poiDataBindingSource)).EndInit();
             this.panelPOI.ResumeLayout(false);
             this.panelPOI.PerformLayout();
-            this.groupBoxAddress.ResumeLayout(false);
-            this.groupBoxAddress.PerformLayout();
             this.gbMapImage.ResumeLayout(false);
             this.gbMapImage.PerformLayout();
             this.xPanderPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.poiDataBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1420,14 +1413,12 @@
         private System.Windows.Forms.ToolStripMenuItem 卫星地图ToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem 混合地图ToolStripMenuItem3;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusTip;
         private BSE.Windows.Forms.XPanderPanelList xPanderPanelList1;
         private BSE.Windows.Forms.XPanderPanel xPanderPanel1;
         private System.Windows.Forms.Panel panelTool;
         private System.Windows.Forms.GroupBox gbMapImage;
         private System.Windows.Forms.TextBox textBoxImageZoom;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox gbMapDownloader;
         private System.Windows.Forms.ToolStripMenuItem 画图工具ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 矩形ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 圆形ToolStripMenuItem;
@@ -1461,12 +1452,9 @@
         private System.Windows.Forms.ToolStripMenuItem 街道地图WGS84ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 卫星地图WGS84ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 混合地图WGS84ToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBoxAddress;
-        private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.GroupBox groupBoxPOI;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripLocation;
         private System.Windows.Forms.ToolStripMenuItem 搜索该点的地址ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusCenter;
         private System.Windows.Forms.ToolStripMenuItem 数据操作ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 导入路径ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem arcGISToolStripMenuItem;
@@ -1516,7 +1504,6 @@
         private System.Windows.Forms.ToolStripMenuItem 福建混合地图ToolStripMenuItem;
         private System.Windows.Forms.Button buttonMapImage;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Button buttonAddressSearch;
         private System.Windows.Forms.Button buttonPOISearch;
         private System.Windows.Forms.Button buttonPoiSave;
         private System.Windows.Forms.ToolStripMenuItem 测距ToolStripMenuItem;
@@ -1527,8 +1514,13 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.Label lb_info;
+        private System.Windows.Forms.Label lb_info2;
         private System.Windows.Forms.Label lb_draw;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Label lb_info1;
     }
 }
 

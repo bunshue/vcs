@@ -8,8 +8,8 @@
     <ProjectGuid>{E38AD5AE-BFB7-4088-BD5B-1D085DE7D135}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>network_test1</RootNamespace>
-    <AssemblyName>network_test1</AssemblyName>
+    <RootNamespace>vcs_Mix07_network_http</RootNamespace>
+    <AssemblyName>vcs_Mix07_network_http</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

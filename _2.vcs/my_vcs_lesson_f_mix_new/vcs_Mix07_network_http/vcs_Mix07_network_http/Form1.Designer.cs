@@ -1,4 +1,4 @@
-﻿namespace network_test2_http
+﻿namespace vcs_Mix07_network_http
 {
     partial class Form1
     {

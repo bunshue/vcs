@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMapMarkerLib", "GMapMarkerLib\GMapMarkerLib.csproj", "{E25D9C8F-534F-4D86-BD45-9469AD9727E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapDownloader", "MapDownloader\MapDownloader.csproj", "{FC90F9EA-0578-4DE6-AAF9-102F6032E730}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMapProvidersExt", "GMapProvidersExt\GMapProvidersExt.csproj", "{E873E646-BE34-4060-A997-5087E9B7021C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMapMarkerLib", "GMapMarkerLib\GMapMarkerLib.csproj", "{E25D9C8F-534F-4D86-BD45-9469AD9727E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMapChinaRegion", "GMapChinaRegion\GMapChinaRegion.csproj", "{01B49280-D6F4-467C-8337-CEA9824F36CE}"
 EndProject
@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQTool", "RabbitMQToo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMapDrawTools", "GMapDrawTools\GMapDrawTools.csproj", "{A846C026-69E9-4A27-A40C-6237E3D0BFB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapDownloader", "MapDownloader\MapDownloader.csproj", "{FC90F9EA-0578-4DE6-AAF9-102F6032E730}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMapProvidersExt", "GMapProvidersExt\GMapProvidersExt.csproj", "{E873E646-BE34-4060-A997-5087E9B7021C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMapUtil", "GMapUtil\GMapUtil.csproj", "{DB4076E6-AB5B-48E1-B674-391CCFAD9B4F}"
 EndProject

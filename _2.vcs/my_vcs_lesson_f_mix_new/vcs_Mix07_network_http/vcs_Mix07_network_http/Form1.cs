@@ -20,7 +20,7 @@ using System.Security.Cryptography.X509Certificates;
 
 using Shell32;
 
-namespace network_test2_http
+namespace vcs_Mix07_network_http
 {
     public partial class Form1 : Form
     {

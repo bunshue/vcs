@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Net;
+using System.Net;   //for HttpWebRequest, WebClient
 using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
@@ -18,6 +18,15 @@ using System.Threading;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using System.Collections;   //for Stack
+using System.Text.RegularExpressions;
+
+
+//using System.Xml;
+//using System.Management;
+//using System.Runtime.InteropServices;
+
+using Microsoft.Win32;
+
 
 namespace vcs_Mix07_network
 {
@@ -30,6 +39,7 @@ namespace vcs_Mix07_network
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
             show_item_location();
         }
 
@@ -149,6 +159,17 @@ namespace vcs_Mix07_network
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //讀取局域網路由的IP地址
+
+            //讀取局域網路由的IP地址
+            WebClient wc = new WebClient(); // 建立 WebClient
+            wc.Encoding = Encoding.Default; // 指定 WebClient 的編碼
+            string lip = wc.DownloadString("http://www.ip138.com/ip2city.asp");
+            //string sip = reply.Substring(reply.IndexOf("您的IP地址是"), reply.IndexOf("</center>") - reply.IndexOf("您的IP地址是"));
+            //MessageBox.Show(sip);
+
+            //TBD
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -191,11 +212,149 @@ namespace vcs_Mix07_network
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //檢測網絡連接（主要是局域網）
+
+            //檢測網絡連接（主要是局域網）
+            string ip;
+            ip = "10.1.148.1";
+            // string ip = "192.192.132.229";
+
+            //  string strRst = CmdPing(ip);
+
+            //   MessageBox.Show(strRst);
+            string str = CmdPingh(ip);
+            MessageBox.Show(str);
+        }
+
+        private static string CmdPing(string strIp)//方法1
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.CreateNoWindow = true;
+            string pingrst;
+            p.Start();
+            p.StandardInput.WriteLine("ping -n 1 " + strIp);
+            p.StandardInput.WriteLine("exit");
+            string strRst = p.StandardOutput.ReadToEnd();
+            if (strRst.IndexOf("(0% loss)") != -1)
+                pingrst = "連接";
+            else if (strRst.IndexOf("Destination host unreachable.") != -1)
+                pingrst = "無法到達目的主機";
+            else if (strRst.IndexOf("Request timed out.") != -1)
+                pingrst = "超時";
+            else if (strRst.IndexOf("Unknown host") != -1)
+                pingrst = "無法解析主機";
+            else
+                pingrst = strRst;
+            p.Close();
+            return pingrst;
+        }
+
+        public static string CmdPingh(string _strHost)   //與上面的方法一樣，不同寫法而已
+        {
+            string m_strHost = _strHost;
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardInput = true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.CreateNoWindow = true;
+            string pingrst = string.Empty;
+            process.StartInfo.Arguments = "ping   " + m_strHost + "   -n   1";
+            process.Start();
+            process.StandardInput.AutoFlush = true;
+            string temp = "ping   " + m_strHost + "   -n   1";
+            process.StandardInput.WriteLine(temp);
+            process.StandardInput.WriteLine("exit");
+            string strRst = process.StandardOutput.ReadToEnd();
+            if (strRst.IndexOf("(0%   loss)") != -1)
+                pingrst = "連接";
+            else if (strRst.IndexOf("Destination   host   unreachable.") != -1)
+                pingrst = "無法到達目的主機";
+            else if (strRst.IndexOf("Request   timed   out.") != -1)
+                pingrst = "超時";
+            else if (strRst.IndexOf("Unknown   host") != -1)
+                pingrst = "無法解析主機";
+            else
+                pingrst = strRst;
+            process.Close();
+            return pingrst;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //獲取gateway和IP
+
+            //獲取gateway和IP
+            getxx();
+        }
+
+        private void getxx()
+        {
+            RegistryKey start = Registry.LocalMachine;
+            RegistryKey cardServiceName, networkKey;
+            string networkcardKey = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkCards";
+            string serviceKey = @"SYSTEM\CurrentControlSet\Services\";
+            string networkcardKeyName, deviceName;
+            string deviceServiceName, serviceName;
+            RegistryKey serviceNames = start.OpenSubKey(networkcardKey);
+            if (serviceNames == null)
+            {
+                MessageBox.Show("Bad registry key");
+                return;
+            }
+            string[] networkCards = serviceNames.GetSubKeyNames();
+            serviceNames.Close();
+            foreach (string keyName in networkCards)
+            {
+                richTextBox1.Text += "get keyName : " + keyName + "\n";
+                networkcardKeyName = networkcardKey + "\\" + keyName;
+                cardServiceName = start.OpenSubKey(networkcardKeyName);
+                if (cardServiceName == null)
+                {
+                    MessageBox.Show(networkcardKeyName);
+                    return;
+                }
+                deviceServiceName = (string)cardServiceName.GetValue("ServiceName");
+                richTextBox1.Text += "deviceServiceName : " + deviceServiceName + "\n";
+                deviceName = (string)cardServiceName.GetValue("Description");
+                richTextBox1.Text += "deviceName : " + deviceName + "\n";
+                MessageBox.Show(deviceName);
+                serviceName = serviceKey + deviceServiceName + "\\Parameters\\Tcpip";
+                richTextBox1.Text += "serviceName : " + serviceName + "\n";
+                networkKey = start.OpenSubKey(serviceName);
+                if (networkKey == null)
+                {
+                    //。。。。。。
+                }
+                else
+                {
+                    string[] ipaddresses = (string[])networkKey.GetValue("IPAddress");
+                    string[] defaultGateways = (string[])networkKey.GetValue("DefaultGateway");
+                    string[] subnetmasks = (string[])networkKey.GetValue("SubnetMask");
+                    foreach (string ipaddress in ipaddresses)
+                    {
+                        MessageBox.Show(ipaddress);
+                    }
+
+                    foreach (string subnetmask in subnetmasks)
+                    {
+                        //。。。。。。
+                    }
+                    foreach (string defaultGateway in defaultGateways)
+                    {
+                        MessageBox.Show(defaultGateway);
+                    }
+                    networkKey.Close();
+                }
+            }
+            start.Close();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -384,5 +543,16 @@ namespace vcs_Mix07_network
             show_button_text(sender);
         }
     }
+
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
+    }
+
 }
 

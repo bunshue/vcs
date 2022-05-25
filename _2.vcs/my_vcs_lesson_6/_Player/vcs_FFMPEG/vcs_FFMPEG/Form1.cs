@@ -20,12 +20,13 @@ namespace vcs_FFMPEG
 {
     public partial class Form1 : Form
     {
-        string ffmpeg = @"C:\______test_files\_exe\ffmpeg\ffmpeg.exe";
+        string ffmpeg_filename = @"C:\______test_files\_exe\ffmpeg\ffmpeg.exe";
+        string mp3_filename = string.Empty;
+
         AxWindowsMediaPlayer axWindowsMediaPlayer1;
         int flag_play_mode = 0;    //0: stop, 1: play, 2:  pause
         int mp3_position = 0;
         int mp3_length = 0;
-        string mp3_filename = string.Empty;
 
         public Form1()
         {
@@ -164,9 +165,9 @@ namespace vcs_FFMPEG
                 //-vcodec copy : 影像編碼格式和來源檔案相同
                 string command_arg = "-y -i \"" + mp3_filename + "\" -ss " + startTime + " -t " + cutTime + " -acodec copy \"" + mp3_cut_filename + "\"";
 
-                ExcuteProcess(ffmpeg, command_arg);
+                ExcuteProcess(ffmpeg_filename, command_arg);
 
-                richTextBox1.Text += "命令 : " + ffmpeg + "\n";
+                richTextBox1.Text += "命令 : " + ffmpeg_filename + "\n";
                 richTextBox1.Text += "參數 : " + command_arg + "\n";
                 richTextBox1.Text += "已切割完成\t檔案 : " + mp3_cut_filename + "\n";
             }
@@ -242,13 +243,7 @@ namespace vcs_FFMPEG
 
 
             // Execute command to let FFMPEG extract the frame
-            Execute(ffmpeg, cmdParams);
-
-
-
-
-
-
+            Execute(ffmpeg_filename, cmdParams);
         }
 
         private static string Execute(string exePath, string parameters)
@@ -267,18 +262,13 @@ namespace vcs_FFMPEG
 
                 result = p.StandardOutput.ReadToEnd();
             }
-
             return result;
         }
-
 
         private void button6_Click(object sender, EventArgs e)
         {
             //test 2
             //影片轉mp3
-
-
-
 
             //影片轉mp3
             //ffmpeg -i test.mp4 -f mp3 -vn test.mp3
@@ -288,9 +278,6 @@ namespace vcs_FFMPEG
             -f 表示format，即輸出格式
             -vn表示vedio not，即輸出不包含視頻
             */
-
-
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -303,7 +290,6 @@ namespace vcs_FFMPEG
 
             //要將視頻升級到1080p，請輸入：
 
-
             string cmdParams = String.Format("-i {0} -vf scale = 1920x1080:flags = lanczos {1}", filename1, filename2);
 
             //ffmpeg -i {0} -vf scale = 1920x1080：flags = lanczos {1}
@@ -312,17 +298,8 @@ namespace vcs_FFMPEG
             //要升級到4K視頻，請輸入：
             //ffmpeg -i input.mp4 -vf scale = 3840x2560：flags = lanczos -c：v libx264 -preset slow -crf 21 output_compress_4k.mp4
 
-
-
-
-
             // Execute command to let FFMPEG extract the frame
-            Execute(ffmpeg, cmdParams);
-
-
-
-
-
+            Execute(ffmpeg_filename, cmdParams);
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -348,7 +325,7 @@ namespace vcs_FFMPEG
 
         public string CatchImg(string vFileName)
         {
-            if ((!File.Exists(ffmpeg)) || (!File.Exists(vFileName)))
+            if ((File.Exists(ffmpeg_filename) == false) || (File.Exists(vFileName) == false))
             {
                 return "";
             }
@@ -363,7 +340,7 @@ namespace vcs_FFMPEG
             //截圖的尺寸大小,配置在Web.Config中,如:<add key="CatchFlvImgSize" value="240x180" />
             //string FlvImgSize = System.Configuration.ConfigurationSettings.APPSettings["CatchFlvImgSize"];
 
-            ProcessStartInfo startInfo = new ProcessStartInfo(ffmpeg);
+            ProcessStartInfo startInfo = new ProcessStartInfo(ffmpeg_filename);
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
             //此處組合成ffmpeg.exe文件需要的參數即可,此處命令在ffmpeg 0.4.9調試通過
@@ -383,14 +360,13 @@ namespace vcs_FFMPEG
             ///注意:圖片截取成功後,數據由內存緩存寫到磁盤需要時間較長,大概在3,4秒甚至更長;
             ///這兒需要延時後再檢測,我服務器延時8秒,即如果超過8秒圖片仍不存在,認為截圖失敗;
             ///此處略去延時代碼.如有那位知道如何捕捉ffmpeg.exe截圖失敗消息,請告知,先謝過!
-            if (File.Exists(flv_img_p))
+            if (File.Exists(flv_img_p) == true)
             {
                 return flv_img;
             }
 
             return "";
         }
-
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -447,7 +423,7 @@ namespace vcs_FFMPEG
 
             try
             {
-                ExcuteProcess(ffmpeg, "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"");
+                ExcuteProcess(ffmpeg_filename, "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"");
 
                 richTextBox1.Text += "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"";
                 richTextBox1.Text += "轉換完成\n";
@@ -474,9 +450,9 @@ namespace vcs_FFMPEG
                 //-vcodec copy : 影像編碼格式和來源檔案相同
                 string command_arg = "-y -i \"" + mp3_filename + "\" -ss " + startTime + " -t " + cutTime + " -acodec copy \"" + mp3_cut_filename + "\"";
 
-                ExcuteProcess(ffmpeg, command_arg);
+                ExcuteProcess(ffmpeg_filename, command_arg);
 
-                richTextBox1.Text += "命令 : " + ffmpeg + "\n";
+                richTextBox1.Text += "命令 : " + ffmpeg_filename + "\n";
                 richTextBox1.Text += "參數 : " + command_arg + "\n";
                 richTextBox1.Text += "已切割完成\t檔案 : " + mp3_cut_filename + "\n";
             }
@@ -541,11 +517,10 @@ namespace vcs_FFMPEG
 
             int? width, height;
 
-            GetMovWidthAndHeight(video_filename1, out width, out height);
+            GetVideoFormatSize(video_filename1, out width, out height);
             richTextBox1.Text += "影片 : " + video_filename1 + "\tW = " + width.ToString() + ", H = " + height.ToString() + "\n";
 
-
-            GetMovWidthAndHeight(video_filename2, out width, out height);
+            GetVideoFormatSize(video_filename2, out width, out height);
             richTextBox1.Text += "影片 : " + video_filename2 + "\tW = " + width.ToString() + ", H = " + height.ToString() + "\n";
         }
 
@@ -578,26 +553,23 @@ namespace vcs_FFMPEG
         /// <summary>
         /// 獲取視頻的幀寬度和幀高度
         /// </summary>
-        /// <param name="videoFilePath">mov文件的路徑</param>
+        /// <param name="video_filename">mov文件的路徑</param>
         /// <returns>null表示獲取寬度或高度失敗</returns>
-        public static void GetMovWidthAndHeight(string videoFilePath, out int? width, out int? height)
+        public void GetVideoFormatSize(string video_filename, out int? width, out int? height)
         {
             try
             {
                 //判斷文件是否存在
-                if (!File.Exists(videoFilePath))
+                if (File.Exists(video_filename) == false)
                 {
                     width = null;
                     height = null;
                 }
 
                 //執行命令獲取該文件的一些信息 
-                //string ffmpegPath = new FileInfo(Process.GetCurrentProcess().MainModule.FileName).DirectoryName + @"\ffmpeg.exe";
-                string ffmpegPath = @"C:\______test_files\_exe\ffmpeg.exe";
-
                 string output;
                 string error;
-                ExecuteCommand("\"" + ffmpegPath + "\"" + " -i " + "\"" + videoFilePath + "\"", out output, out error);
+                ExecuteCommand("\"" + ffmpeg_filename + "\"" + " -i " + "\"" + video_filename + "\"", out output, out error);
                 if (string.IsNullOrEmpty(error))
                 {
                     width = null;
@@ -638,37 +610,37 @@ namespace vcs_FFMPEG
             try
             {
                 //創建一個進程
-                Process pc = new Process();
-                pc.StartInfo.FileName = command;
-                pc.StartInfo.UseShellExecute = false;
-                pc.StartInfo.RedirectStandardOutput = true;
-                pc.StartInfo.RedirectStandardError = true;
-                pc.StartInfo.CreateNoWindow = true;
+                Process p = new Process();
+                p.StartInfo.FileName = command;
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.RedirectStandardError = true;
+                p.StartInfo.CreateNoWindow = true;
 
                 //啓動進程
-                pc.Start();
+                p.Start();
 
                 //準備讀出輸出流和錯誤流
                 string outputData = string.Empty;
                 string errorData = string.Empty;
-                pc.BeginOutputReadLine();
-                pc.BeginErrorReadLine();
+                p.BeginOutputReadLine();
+                p.BeginErrorReadLine();
 
-                pc.OutputDataReceived += (ss, ee) =>
+                p.OutputDataReceived += (ss, ee) =>
                 {
                     outputData += ee.Data;
                 };
 
-                pc.ErrorDataReceived += (ss, ee) =>
+                p.ErrorDataReceived += (ss, ee) =>
                 {
                     errorData += ee.Data;
                 };
 
                 //等待退出
-                pc.WaitForExit();
+                p.WaitForExit();
 
                 //關閉進程
-                pc.Close();
+                p.Close();
 
                 //返回流結果
                 output = outputData;
@@ -688,17 +660,18 @@ namespace vcs_FFMPEG
             string imgpath = @"C:\dddddddddd\";
             //string trueimgpath = "";
             //trueimgpath = "InfoReleaseResources/Image/" + GroupId + "/";
-            if (!Directory.Exists(imgpath))
+            if (Directory.Exists(imgpath)==false)
             {
                 Directory.CreateDirectory(imgpath);
             }
             //取得ffmpeg.exe的路徑
             string ffmpeg = @"C:\______test_files\_exe\ffmpeg.exe";
             string vFileName = FileName;
-            if ((!System.IO.File.Exists(ffmpeg)) || (!System.IO.File.Exists(vFileName)))
+            if ((System.IO.File.Exists(ffmpeg) == false) || (System.IO.File.Exists(vFileName) == false))
             {
                 return "";
             }
+            
             //獲得圖片相對路徑/最後存儲到數據庫的路徑,如:/InfoReleaseResources/Image/分組/圖片.jpg
 
             richTextBox1.Text += "3333333\n";
@@ -708,7 +681,7 @@ namespace vcs_FFMPEG
             string flv_img_p = flv_img;
             //截圖的尺寸大小
             int? width, height;
-            GetMovWidthAndHeight(vFileName, out width, out height);
+            GetVideoFormatSize(vFileName, out width, out height);
             string FlvImgSize = width + "x" + height;
             ProcessStartInfo startInfo = new ProcessStartInfo(ffmpeg);
             startInfo.UseShellExecute = false; // 要獲取輸出，此值必須爲 false。
@@ -769,16 +742,14 @@ namespace vcs_FFMPEG
                 pro.WaitForExit(1000);
 
                 string result = errorreader.ReadToEnd();
-                if (!string.IsNullOrEmpty(result))
+                if (string.IsNullOrEmpty(result) == false)
                 {
                     result = result.Substring(result.IndexOf("Duration: ") + ("Duration: ").Length, ("00:00:00").Length);
                     duration = result;
                 }
                 return duration;
-
             }
         }
-
         //FFMPEG的使用 SP
 
         private void timer1_Tick(object sender, EventArgs e)
