@@ -7,28 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Diagnostics;
+using System.Diagnostics;   //for Stopwatch
 
 namespace vcs_ImageProcessing6
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\picture1.jpg";
+        Stopwatch sw = new Stopwatch();
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        // Display the initial image.
         private void Form1_Load(object sender, EventArgs e)
         {
-            picVisible.Image = picHidden.Image.Clone() as Image;
+            pictureBox1.Image = Image.FromFile(filename);
         }
 
-        // Display the original image.
         private void btnReset_Click(object sender, EventArgs e)
         {
-            picVisible.Image = picHidden.Image.Clone() as Image;
-            lblElapsed.Text = "";
+            pictureBox1.Image = Image.FromFile(filename);
         }
 
         private const int NUM_TRIALS = 5;
@@ -37,44 +37,50 @@ namespace vcs_ImageProcessing6
         private void btnNoLockBits_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
 
-            Bitmap bm = new Bitmap(picHidden.Image);
+            sw.Reset();
+            sw.Start();
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
             for (int trial = 0; trial < NUM_TRIALS; trial++)
             {
-                for (int Y = 0; Y < bm.Height; Y++)
+                for (int Y = 0; Y < bitmap1.Height; Y++)
                 {
-                    for (int X = 0; X < bm.Width; X++)
+                    for (int X = 0; X < bitmap1.Width; X++)
                     {
-                        Color clr = bm.GetPixel(X, Y);
+                        Color clr = bitmap1.GetPixel(X, Y);
                         clr = Color.FromArgb(
                             255 - clr.R,
                             255 - clr.G,
                             255 - clr.B);
-                        bm.SetPixel(X, Y, clr);
+                        bitmap1.SetPixel(X, Y, clr);
                     }
                 }
             }
-            picVisible.Image = bm;
-            watch.Stop();
+            pictureBox1.Image = bitmap1;
+
             Cursor = Cursors.Default;
-            lblElapsed.Text = watch.Elapsed.TotalSeconds.ToString("0.000000") + " seconds";
+            sw.Stop();
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
 
         // Invert the image using Lockbits.
         private void btnLockBits_Click(object sender, EventArgs e)
         {
             const byte BYTE_255 = 255;
-            Bitmap bm = new Bitmap(picHidden.Image);
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
             Cursor = Cursors.WaitCursor;
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
-            
+
+            sw.Reset();
+            sw.Start();
+
             for (int trial = 0; trial < NUM_TRIALS; trial++)
             {
                 // Make a Bitmap24 object.
-                Bitmap24 bm24 = new Bitmap24(bm);
+                Bitmap24 bm24 = new Bitmap24(bitmap1);
 
                 // Lock the bitmap.
                 bm24.LockBitmap();
@@ -106,22 +112,24 @@ namespace vcs_ImageProcessing6
                 // Unlock the bitmap.
                 bm24.UnlockBitmap();
             }
-            picVisible.Image = bm;
+            pictureBox1.Image = bitmap1;
 
-            watch.Stop();
             Cursor = Cursors.Default;
-            lblElapsed.Text = watch.Elapsed.TotalSeconds.ToString("0.000000") + " seconds";
+            sw.Stop();
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
 
         private void btnQuarter_Click(object sender, EventArgs e)
         {
-            Bitmap bm = new Bitmap(picHidden.Image);
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
             Cursor = Cursors.WaitCursor;
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
+
+            sw.Reset();
+            sw.Start();
 
             // Make a Bitmap24 object.
-            Bitmap24 bm24 = new Bitmap24(bm);
+            Bitmap24 bm24 = new Bitmap24(bitmap1);
 
             // Lock the bitmap.
             bm24.LockBitmap();
@@ -167,13 +175,12 @@ namespace vcs_ImageProcessing6
 
             // Unlock the bitmap.
             bm24.UnlockBitmap();
-            picVisible.Image = bm;
+            pictureBox1.Image = bitmap1;
 
-            watch.Stop();
             Cursor = Cursors.Default;
-            lblElapsed.Text =
-                watch.Elapsed.TotalSeconds.ToString("0.000000") +
-                " seconds";
+            sw.Stop();
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
         }
     }
 }
+

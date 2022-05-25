@@ -28,28 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.picHidden = new System.Windows.Forms.PictureBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnLockBits = new System.Windows.Forms.Button();
             this.btnNoLockBits = new System.Windows.Forms.Button();
-            this.picVisible = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblElapsed = new System.Windows.Forms.Label();
             this.btnQuarter = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.picHidden)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picVisible)).BeginInit();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // picHidden
-            // 
-            this.picHidden.Image = ((System.Drawing.Image)(resources.GetObject("picHidden.Image")));
-            this.picHidden.Location = new System.Drawing.Point(184, 104);
-            this.picHidden.Name = "picHidden";
-            this.picHidden.Size = new System.Drawing.Size(305, 400);
-            this.picHidden.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.picHidden.TabIndex = 1;
-            this.picHidden.TabStop = false;
-            this.picHidden.Visible = false;
             // 
             // btnReset
             // 
@@ -78,14 +65,14 @@
             this.btnNoLockBits.Text = "No Lock Bits";
             this.btnNoLockBits.Click += new System.EventHandler(this.btnNoLockBits_Click);
             // 
-            // picVisible
+            // pictureBox1
             // 
-            this.picVisible.Location = new System.Drawing.Point(12, 39);
-            this.picVisible.Name = "picVisible";
-            this.picVisible.Size = new System.Drawing.Size(446, 577);
-            this.picVisible.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.picVisible.TabIndex = 6;
-            this.picVisible.TabStop = false;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 39);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(446, 577);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
             // 
             // lblElapsed
             // 
@@ -104,23 +91,30 @@
             this.btnQuarter.Text = "Quarter";
             this.btnQuarter.Click += new System.EventHandler(this.btnQuarter_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(533, 39);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(325, 572);
+            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(471, 597);
+            this.ClientSize = new System.Drawing.Size(939, 648);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnQuarter);
             this.Controls.Add(this.lblElapsed);
-            this.Controls.Add(this.picVisible);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnLockBits);
             this.Controls.Add(this.btnNoLockBits);
-            this.Controls.Add(this.picHidden);
             this.Name = "Form1";
             this.Text = "vcs_ImageProcessing6";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picHidden)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picVisible)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,13 +122,13 @@
 
         #endregion
 
-        internal System.Windows.Forms.PictureBox picHidden;
         internal System.Windows.Forms.Button btnReset;
         internal System.Windows.Forms.Button btnLockBits;
         internal System.Windows.Forms.Button btnNoLockBits;
-        internal System.Windows.Forms.PictureBox picVisible;
+        internal System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblElapsed;
         internal System.Windows.Forms.Button btnQuarter;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

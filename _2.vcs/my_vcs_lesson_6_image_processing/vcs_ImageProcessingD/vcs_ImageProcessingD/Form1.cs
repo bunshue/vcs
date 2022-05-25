@@ -55,7 +55,7 @@ namespace vcs_ImageProcessingD
             //圖片的扭曲（Twist）作法
 
             //從pictureBox取得Bitmap
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image.Clone();   //用pictureBox背景的复本实例化Bitmap类
 
             //參數設定
             System.Random oRandom = new System.Random();
