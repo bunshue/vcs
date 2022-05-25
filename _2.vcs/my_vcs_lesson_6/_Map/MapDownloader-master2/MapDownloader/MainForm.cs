@@ -78,7 +78,7 @@ namespace MapDownloader
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+
             //gMapControl1.Size = new Size(1500, 900);
 
             richTextBox1.Text += "1111 InitMap()\n";
@@ -124,7 +124,11 @@ namespace MapDownloader
             button3.Location = new Point(x_st, y_st + dy * 3);
             button4.Location = new Point(x_st, y_st + dy * 4);
             button5.Location = new Point(x_st, y_st + dy * 5);
-            lb_info.Location = new Point(x_st, y_st + dy * 6);
+            lb_draw.Location = new Point(x_st, y_st + dy * 6);
+            lb_info.Location = new Point(x_st, y_st + dy * 7);
+            lb_draw.Text = "";
+            lb_info.Text = "";
+
 
             gMapControl1.ShowCenter = false;
             gMapControl1.DragButton = System.Windows.Forms.MouseButtons.Left;
@@ -313,6 +317,7 @@ namespace MapDownloader
 
         void mapControl_MouseUp(object sender, MouseEventArgs e)
         {
+            richTextBox1.Text += "MouseUp\n";
             if (e.Button == MouseButtons.Left)
             {
                 isLeftButtonDown = false;
@@ -325,6 +330,11 @@ namespace MapDownloader
             if (e.Button == MouseButtons.Left)
             {
                 isLeftButtonDown = true;
+                richTextBox1.Text += "MouseDown 你按了滑鼠左鍵\n";
+                lb_draw.Text += "滑鼠左鍵";
+
+
+
             }
         }
 
@@ -338,6 +348,8 @@ namespace MapDownloader
                 int zoom = (int)this.gMapControl1.Zoom;
                 double resolution = this.gMapControl1.MapProvider.Projection.GetLevelResolution(zoom);
                 this.toolStripStatusTip.Text = string.Format("显示级别：{0} 分辨率：{1:F3}米/像素 坐标：{2:F4},{3:F4}", zoom, resolution, p.Lng, p.Lat);
+
+                lb_draw.Text = string.Format("目前位置{0:F4},{1:F4}", p.Lng, p.Lat);
 
                 if (isLeftButtonDown && currentDragableNode != null)
                 {
@@ -597,7 +609,7 @@ namespace MapDownloader
                         {
                             TileDownloaderArgs downloaderArgs = downloadCfgForm.GetDownloadTileGPoints();
                             this.gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
-                                
+
                             tileDownloader.TilePath = this.tilePath;    //儲存至 本地磁碟
                             tileDownloader.Retry = retryNum;
                             tileDownloader.PrefetchTileStart += new EventHandler<TileDownloadEventArgs>(tileDownloader_PrefetchTileStart);
@@ -712,6 +724,7 @@ namespace MapDownloader
 
         void buttonMapImage_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 拼接大圖 之 拼接圖\n";
             if (currentAreaPolygon != null)
             {
                 RectLatLng area = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
@@ -2113,7 +2126,77 @@ namespace MapDownloader
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //广东省深圳市福田区华强北路1002号
 
+            string address = "广东省深圳市福田区华强北路1002号";
+
+            if (!string.IsNullOrEmpty(address))
+            {
+                richTextBox1.Text += "你按了 地址解析 之 查詢\t地址 : " + address + "\n";
+
+                this.routeOverlay.Markers.Clear();
+                Placemark placemark = new Placemark(address);
+
+                richTextBox1.Text += "初始化就給值 Text : " + placemark.Address + "\n";
+
+                //placemark.CityName = currentCenterCityName;   //useless
+
+                //richTextBox1.Text += "currentCenterCityName : " + currentCenterCityName + "\n";   尚未給值
+
+                if (currentAreaPolygon != null)
+                {
+                    placemark.CityName = currentAreaPolygon.Name;
+                }
+
+                //richTextBox1.Text += "placemark.CityName : " + placemark.CityName + "\n"; 無資料
+
+                List<PointLatLng> points = new List<PointLatLng>();
+                //GeoCoderStatusCode statusCode = SoSoMapProvider.Instance.GetPoints(placemark, out points);
+                GeoCoderStatusCode statusCode = AMapProvider.Instance.GetPoints(placemark, out points);
+
+                //richTextBox1.Text += "Text : " + placemark.Address + "\n";
+
+                if (statusCode == GeoCoderStatusCode.G_GEO_SUCCESS)
+                {
+                    richTextBox1.Text += "查詢資料成功, 共有" + points.Count.ToString() + " 筆資料\n";
+                    foreach (PointLatLng point in points)
+                    {
+                        richTextBox1.Text += "取得地圖資料 地理座標 " + point.ToString() + "\n";
+                        GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
+
+                        marker.ToolTipText = placemark.Address;
+                        this.routeOverlay.Markers.Add(marker);
+                        this.gMapControl1.Position = point;
+
+                        richTextBox1.Text += "Text1 : " + placemark.Address + "\n";
+
+                        /*  除了第一項，全無資料
+                        richTextBox1.Text += "Text2 : " + placemark.AdministrativeAreaName + "\n";
+                        richTextBox1.Text += "Text3 : " + placemark.CityName.ToString() + "\n";
+                        richTextBox1.Text += "Text4 : " + placemark.CountryName + "\n";
+                        richTextBox1.Text += "Text5 : " + placemark.DistrictName + "\n";
+                        richTextBox1.Text += "Text6 : " + placemark.HouseNo.ToString() + "\n";
+                        richTextBox1.Text += "Text7 : " + placemark.LocalityName + "\n";
+                        richTextBox1.Text += "Text8 : " + placemark.Name.ToString() + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.Neighborhood + "\n";
+                        richTextBox1.Text += "Text10 : " + placemark.ProvinceName.ToString() + "\n";
+
+                        richTextBox1.Text += "Text9 : " + placemark.StreetNumber.ToString() + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.SubAdministrativeAreaName + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.Tel.ToString() + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.ThoroughfareName + "\n";
+                        */
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text += "查詢資料失敗\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "地址無資料\n";
+            }
         }
     }
 }

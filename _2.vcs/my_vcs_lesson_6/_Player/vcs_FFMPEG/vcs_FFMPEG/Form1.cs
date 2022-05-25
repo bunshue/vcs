@@ -24,6 +24,7 @@ namespace vcs_FFMPEG
         AxWindowsMediaPlayer axWindowsMediaPlayer1;
         int flag_play_mode = 0;    //0: stop, 1: play, 2:  pause
         int mp3_position = 0;
+        int mp3_length = 0;
         string mp3_filename = string.Empty;
 
         public Form1()
@@ -39,6 +40,7 @@ namespace vcs_FFMPEG
             lb_st.Text = "起始 : ";
             lb_sp.Text = "結束 : ";
             lb_cut.Text = "選取 : ";
+            tb_filename.Text = "";
             trackBar_st.Maximum = 100;
             trackBar_st.Minimum = 0;
             trackBar_st.Value = 0;
@@ -51,6 +53,8 @@ namespace vcs_FFMPEG
             this.axWindowsMediaPlayer1.Enabled = true;
             this.Controls.Add(this.axWindowsMediaPlayer1);
             axWindowsMediaPlayer1.Visible = false;
+
+            bt_open_file_Click(sender, e);
         }
 
         void show_item_location()
@@ -77,118 +81,6 @@ namespace vcs_FFMPEG
             richTextBox1.Clear();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //音頻轉換與音頻切割
-
-            //音頻轉換
-            //string filename1 = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
-            string filename1 = @"C:\______test_files\_wav\WindowsShutdown.wav";
-            string filename2 = @"aaaaa.wav";
-
-            int bitrate = 12 * 1000;//恒定碼率
-            int Hz = 3000;//采樣頻率  
-
-            try
-            {
-                ExcuteProcess(ffmpeg, "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"");
-
-                richTextBox1.Text += "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"";
-                richTextBox1.Text += "轉換完成\n";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-            //音頻切割
-            string mp3_filename = @"C:\______test_files\_wav\harumi99.wav";
-            string mp3_cut_filename = Application.StartupPath + "\\cut_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
-
-            string startTime = "0:0:30";
-            string cutTime = "0:0:30";
-
-            try
-            {
-                //-y : 強制覆蓋檔案
-                //-i : 要擷取的原始檔案
-                //-ss : 起始時間
-                //-t : 擷取長度, -t sec 或 -t hh:mm:ss
-                //-acodec copy : 音訊編碼格式和來源檔案相同
-                //-vcodec copy : 影像編碼格式和來源檔案相同
-                string command_arg = "-y -i \"" + mp3_filename + "\" -ss " + startTime + " -t " + cutTime + " -acodec copy \"" + mp3_cut_filename + "\"";
-
-                ExcuteProcess(ffmpeg, command_arg);
-
-                richTextBox1.Text += "命令 : " + ffmpeg + "\n";
-                richTextBox1.Text += "參數 : " + command_arg + "\n";
-                richTextBox1.Text += "已切割完成\t檔案 : " + mp3_cut_filename + "\n";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
-        /// <summary>
-        /// 轉換函數
-        /// </summary>
-        /// <param name="exe">ffmpeg程序</param>
-        /// <param name="arg">執行參數</param>
-        public static void ExcuteProcess(string exe, string arg)
-        {
-            using (var p = new Process())
-            {
-                p.StartInfo.FileName = exe;
-                p.StartInfo.Arguments = arg;
-                p.StartInfo.UseShellExecute = false;    //輸出信息重定向  
-                p.StartInfo.CreateNoWindow = true;
-                p.StartInfo.RedirectStandardError = true;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.Start();                    //啟動線程  
-                p.BeginOutputReadLine();
-                p.BeginErrorReadLine();
-                p.WaitForExit();//等待進程結束                                        
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //取得mp3音樂長度
-
-            richTextBox1.Text += "取得音樂檔案長度 :\n";
-
-            string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
-
-            richTextBox1.Text += "檔案 : " + filename + "\n";
-            richTextBox1.Text += "音樂長度 : ";
-            string[] result = GetMP3Time(filename);
-            foreach (string str in result)
-            {
-                richTextBox1.Text += str + " ";
-            }
-            richTextBox1.Text += "\n";
-        }
-
-
-        /// <summary>  
-        /// 獲得音樂長度  
-        /// </summary>  
-        /// <param name="filePath">文件的完整路徑</param>
-        public static string[] GetMP3Time(string filePath)
-        {
-            string dirName = Path.GetDirectoryName(filePath);
-            string SongName = Path.GetFileName(filePath);//獲得歌曲名稱             
-            Shell sh = new Shell();
-            //ShellClass sh = new ShellClass();  or
-            Folder dir = sh.NameSpace(dirName);
-            FolderItem item = dir.ParseName(SongName);
-            string SongTime = dir.GetDetailsOf(item, 27);//27為獲得歌曲持續時間 ，28為獲得音樂速率，1為獲得音樂文件大小      
-            string[] time = Regex.Split(SongTime, ":");
-            return time;
-
-        }
-
         private void bt_open_file_Click(object sender, EventArgs e)
         {
             //取得mp3音樂長度
@@ -211,6 +103,7 @@ namespace vcs_FFMPEG
             total_length = int.Parse(result[0]) * 60 * 60 + int.Parse(result[1]) * 60 + int.Parse(result[2]);
             lb_total.Text = "全長 : " + (total_length / 3600).ToString("D2") + " : " + ((total_length / 60) % 60).ToString("D2") + " : " + (total_length % 60).ToString("D2") + "    " + total_length.ToString();
             richTextBox1.Text += "total_length = " + total_length.ToString() + "\n";
+            mp3_length = total_length;
 
             trackBar_st.Maximum = total_length;
             trackBar_st.Minimum = 0;
@@ -225,6 +118,8 @@ namespace vcs_FFMPEG
             axWindowsMediaPlayer1.Ctlcontrols.stop();
             mp3_position = 0;
             mp3_filename = filename;
+            tb_filename.Text = filename;
+            lb_time.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
 
             lb_st.Text = "起始 : " + (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
             lb_sp.Text = "結束 : " + (total_length / 3600).ToString("D2") + " : " + ((total_length / 60) % 60).ToString("D2") + " : " + (total_length % 60).ToString("D2") + "    " + total_length.ToString();
@@ -279,11 +174,7 @@ namespace vcs_FFMPEG
             {
                 MessageBox.Show(ex.ToString());
             }
-
-
-
         }
-
 
         private void bt_play_pause_Click(object sender, EventArgs e)
         {
@@ -292,6 +183,7 @@ namespace vcs_FFMPEG
             {
                 flag_play_mode = 1;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
+                //richTextBox1.Text += "start at : " + axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
             }
             else if (flag_play_mode == 1)
             {
@@ -306,14 +198,17 @@ namespace vcs_FFMPEG
         {
             flag_play_mode = 0;
             axWindowsMediaPlayer1.Ctlcontrols.stop();
+            lb_time.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
             mp3_position = 0;
             trackBar_st.Value = mp3_position;
+            trackBar_sp.Value = mp3_length;
         }
 
         private void trackBar_st_Scroll(object sender, EventArgs e)
         {
             mp3_position = trackBar_st.Value;
             axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
+            lb_time.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
             lb_st.Text = "起始 : " + (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
 
             if (trackBar_st.Value < trackBar_sp.Value)
@@ -325,8 +220,6 @@ namespace vcs_FFMPEG
 
         private void trackBar_sp_Scroll(object sender, EventArgs e)
         {
-            mp3_position = trackBar_sp.Value;
-            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
             lb_sp.Text = "結束 : " + (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
 
             if (trackBar_st.Value < trackBar_sp.Value)
@@ -501,16 +394,118 @@ namespace vcs_FFMPEG
 
         private void button9_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //取得mp3音樂長度
 
+            richTextBox1.Text += "取得音樂檔案長度 :\n";
+
+            //string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            string filename = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_日本演歌\__石川さゆり\Ishikawa Sayuri 【アルバム】[演歌] 石川さゆり ‐ 全曲集 Super Best.mp3";
+
+            richTextBox1.Text += "檔案 : " + filename + "\n";
+            richTextBox1.Text += "音樂長度 : ";
+            string[] result = GetMP3Time(filename);
+            foreach (string str in result)
+            {
+                richTextBox1.Text += str + " ";
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        /// <summary>  
+        /// 獲得音樂長度  
+        /// </summary>  
+        /// <param name="filePath">文件的完整路徑</param>
+        public static string[] GetMP3Time(string filePath)
+        {
+            string dirName = Path.GetDirectoryName(filePath);
+            string SongName = Path.GetFileName(filePath);//獲得歌曲名稱             
+            Shell sh = new Shell();
+            //ShellClass sh = new ShellClass();  or
+            Folder dir = sh.NameSpace(dirName);
+            FolderItem item = dir.ParseName(SongName);
+            string SongTime = dir.GetDetailsOf(item, 27);//27為獲得歌曲持續時間 ，28為獲得音樂速率，1為獲得音樂文件大小      
+            string[] time = Regex.Split(SongTime, ":");
+            return time;
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //音頻轉換與音頻切割
+
+            //音頻轉換
+            //string filename1 = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            string filename1 = @"C:\______test_files\_wav\WindowsShutdown.wav";
+            string filename2 = @"aaaaa.wav";
+
+            int bitrate = 12 * 1000;//恒定碼率
+            int Hz = 3000;//采樣頻率  
+
+            try
+            {
+                ExcuteProcess(ffmpeg, "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"");
+
+                richTextBox1.Text += "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"";
+                richTextBox1.Text += "轉換完成\n";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            //音頻切割
+            string mp3_filename = @"C:\______test_files\_wav\harumi99.wav";
+            string mp3_cut_filename = Application.StartupPath + "\\cut_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
+
+            string startTime = "0:0:30";
+            string cutTime = "0:0:30";
+
+            try
+            {
+                //-y : 強制覆蓋檔案
+                //-i : 要擷取的原始檔案
+                //-ss : 起始時間
+                //-t : 擷取長度, -t sec 或 -t hh:mm:ss
+                //-acodec copy : 音訊編碼格式和來源檔案相同
+                //-vcodec copy : 影像編碼格式和來源檔案相同
+                string command_arg = "-y -i \"" + mp3_filename + "\" -ss " + startTime + " -t " + cutTime + " -acodec copy \"" + mp3_cut_filename + "\"";
+
+                ExcuteProcess(ffmpeg, command_arg);
+
+                richTextBox1.Text += "命令 : " + ffmpeg + "\n";
+                richTextBox1.Text += "參數 : " + command_arg + "\n";
+                richTextBox1.Text += "已切割完成\t檔案 : " + mp3_cut_filename + "\n";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// 轉換函數
+        /// </summary>
+        /// <param name="exe">ffmpeg程序</param>
+        /// <param name="arg">執行參數</param>
+        public static void ExcuteProcess(string exe, string arg)
+        {
+            using (var p = new Process())
+            {
+                p.StartInfo.FileName = exe;
+                p.StartInfo.Arguments = arg;
+                p.StartInfo.UseShellExecute = false;    //輸出信息重定向  
+                p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.RedirectStandardError = true;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.Start();                    //啟動線程  
+                p.BeginOutputReadLine();
+                p.BeginErrorReadLine();
+                p.WaitForExit();//等待進程結束                                        
+            }
 
         }
 
@@ -783,8 +778,20 @@ namespace vcs_FFMPEG
 
             }
         }
+
         //FFMPEG的使用 SP
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (flag_play_mode == 1)
+            {
+                lb_time.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 }
 

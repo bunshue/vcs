@@ -123,9 +123,6 @@
             this.groupBoxPOI = new System.Windows.Forms.GroupBox();
             this.panelPOIResult = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.poiDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelPOI = new System.Windows.Forms.Panel();
             this.buttonPoiSave = new System.Windows.Forms.Button();
             this.buttonPOISearch = new System.Windows.Forms.Button();
@@ -155,8 +152,12 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            this.gMapControl1 = new MapDownloader.MapControl();
             this.lb_info = new System.Windows.Forms.Label();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.poiDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lb_draw = new System.Windows.Forms.Label();
+            this.gMapControl1 = new MapDownloader.MapControl();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.contextMenuStripSelectedArea.SuspendLayout();
@@ -167,11 +168,11 @@
             this.groupBoxPOI.SuspendLayout();
             this.panelPOIResult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.poiDataBindingSource)).BeginInit();
             this.panelPOI.SuspendLayout();
             this.groupBoxAddress.SuspendLayout();
             this.gbMapImage.SuspendLayout();
             this.xPanderPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.poiDataBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -970,24 +971,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(249, 316);
             this.dataGridView1.TabIndex = 0;
             // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "名称";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // addressDataGridViewTextBoxColumn
-            // 
-            this.addressDataGridViewTextBoxColumn.DataPropertyName = "Address";
-            this.addressDataGridViewTextBoxColumn.HeaderText = "地址";
-            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
-            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // poiDataBindingSource
-            // 
-            this.poiDataBindingSource.DataSource = typeof(GMapPOI.PoiData);
-            // 
             // panelPOI
             // 
             this.panelPOI.Controls.Add(this.buttonPoiSave);
@@ -1286,7 +1269,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(110, 45);
             this.button5.TabIndex = 18;
-            this.button5.Text = "button5";
+            this.button5.Text = "地址解析 之 查詢";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -1299,6 +1282,42 @@
             this.button0.Text = "顯示網格";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // lb_info
+            // 
+            this.lb_info.AutoSize = true;
+            this.lb_info.Location = new System.Drawing.Point(974, 357);
+            this.lb_info.Name = "lb_info";
+            this.lb_info.Size = new System.Drawing.Size(33, 12);
+            this.lb_info.TabIndex = 20;
+            this.lb_info.Text = "label2";
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "名称";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // addressDataGridViewTextBoxColumn
+            // 
+            this.addressDataGridViewTextBoxColumn.DataPropertyName = "Address";
+            this.addressDataGridViewTextBoxColumn.HeaderText = "地址";
+            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
+            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // poiDataBindingSource
+            // 
+            this.poiDataBindingSource.DataSource = typeof(GMapPOI.PoiData);
+            // 
+            // lb_draw
+            // 
+            this.lb_draw.AutoSize = true;
+            this.lb_draw.Location = new System.Drawing.Point(976, 334);
+            this.lb_draw.Name = "lb_draw";
+            this.lb_draw.Size = new System.Drawing.Size(33, 12);
+            this.lb_draw.TabIndex = 21;
+            this.lb_draw.Text = "label2";
             // 
             // gMapControl1
             // 
@@ -1328,21 +1347,13 @@
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
             // 
-            // lb_info
-            // 
-            this.lb_info.AutoSize = true;
-            this.lb_info.Location = new System.Drawing.Point(974, 357);
-            this.lb_info.Name = "lb_info";
-            this.lb_info.Size = new System.Drawing.Size(33, 12);
-            this.lb_info.TabIndex = 20;
-            this.lb_info.Text = "label2";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1479, 700);
+            this.Controls.Add(this.lb_draw);
             this.Controls.Add(this.lb_info);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button5);
@@ -1375,7 +1386,6 @@
             this.groupBoxPOI.ResumeLayout(false);
             this.panelPOIResult.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.poiDataBindingSource)).EndInit();
             this.panelPOI.ResumeLayout(false);
             this.panelPOI.PerformLayout();
             this.groupBoxAddress.ResumeLayout(false);
@@ -1383,6 +1393,7 @@
             this.gbMapImage.ResumeLayout(false);
             this.gbMapImage.PerformLayout();
             this.xPanderPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.poiDataBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1517,6 +1528,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Label lb_info;
+        private System.Windows.Forms.Label lb_draw;
     }
 }
 
