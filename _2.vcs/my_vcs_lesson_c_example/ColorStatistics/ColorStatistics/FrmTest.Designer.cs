@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTest));
             this.CmdOpen = new System.Windows.Forms.Button();
             this.PicR = new System.Windows.Forms.PictureBox();
-            this.Thumb = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LblStatus = new System.Windows.Forms.Label();
             this.CmdDeal = new System.Windows.Forms.Button();
             this.Label = new System.Windows.Forms.Label();
@@ -43,7 +42,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PicR)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Thumb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SliderColorAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SliderDelta)).BeginInit();
             this.SuspendLayout();
@@ -61,23 +60,22 @@
             // PicR
             // 
             this.PicR.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PicR.Location = new System.Drawing.Point(485, 12);
+            this.PicR.Location = new System.Drawing.Point(658, 12);
             this.PicR.Name = "PicR";
-            this.PicR.Size = new System.Drawing.Size(500, 500);
+            this.PicR.Size = new System.Drawing.Size(436, 601);
             this.PicR.TabIndex = 2;
             this.PicR.TabStop = false;
             this.PicR.Click += new System.EventHandler(this.PicR_Click);
             this.PicR.Paint += new System.Windows.Forms.PaintEventHandler(this.PicR_Paint);
             // 
-            // Thumb
+            // pictureBox1
             // 
-            this.Thumb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Thumb.Image = ((System.Drawing.Image)(resources.GetObject("Thumb.Image")));
-            this.Thumb.Location = new System.Drawing.Point(12, 133);
-            this.Thumb.Name = "Thumb";
-            this.Thumb.Size = new System.Drawing.Size(450, 450);
-            this.Thumb.TabIndex = 3;
-            this.Thumb.TabStop = false;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 133);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // LblStatus
             // 
@@ -163,9 +161,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1010, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(1100, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(336, 561);
+            this.richTextBox1.Size = new System.Drawing.Size(336, 601);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = "";
             // 
@@ -173,7 +171,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1358, 596);
+            this.ClientSize = new System.Drawing.Size(1448, 667);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.LblDelta);
             this.Controls.Add(this.SliderDelta);
@@ -183,7 +181,7 @@
             this.Controls.Add(this.Label);
             this.Controls.Add(this.CmdDeal);
             this.Controls.Add(this.LblStatus);
-            this.Controls.Add(this.Thumb);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.PicR);
             this.Controls.Add(this.CmdOpen);
             this.MaximizeBox = false;
@@ -192,7 +190,7 @@
             this.Text = "测试窗口";
             this.Load += new System.EventHandler(this.FrmTest_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PicR)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Thumb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SliderColorAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SliderDelta)).EndInit();
             this.ResumeLayout(false);
@@ -204,7 +202,7 @@
 
         private System.Windows.Forms.Button CmdOpen;
         private System.Windows.Forms.PictureBox PicR;
-        private System.Windows.Forms.PictureBox Thumb;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LblStatus;
         private System.Windows.Forms.Button CmdDeal;
         private System.Windows.Forms.Label Label;

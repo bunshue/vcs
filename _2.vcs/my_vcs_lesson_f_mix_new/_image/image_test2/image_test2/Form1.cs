@@ -4,12 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-//using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
+using System.Drawing.Imaging;   //for Encoder
 
 namespace image_test2
 {
@@ -60,14 +59,14 @@ namespace image_test2
 
 
         #region imageCut
-        /// 图片切割函数
+        /// 圖片切割函數
         /// </summary>
-        /// <param name="sourceFile">原始图片文件</param>
-        /// <param name="xNum">在Ｘ轴上的切割数量</param>
-        /// <param name="yNum">在Ｙ轴上的切割数量</param>
-        /// <param name="quality">质量压缩比</param>
-        /// <param name="outputFile">输出文件名，不带后缀</param>
-        /// <returns>成功返回true，失败则返回false</returns>
+        /// <param name="sourceFile">原始圖片文件</param>
+        /// <param name="xNum">在Ｘ軸上的切割數量</param>
+        /// <param name="yNum">在Ｙ軸上的切割數量</param>
+        /// <param name="quality">質量壓縮比</param>
+        /// <param name="outputFile">輸出文件名，不帶后綴</param>
+        /// <returns>成功返回true，失敗則返回false</returns>
         public static bool imageCut(String sourceFile, int xNum, int yNum, long quality, String outputFile)
         {
             try
@@ -107,12 +106,12 @@ namespace image_test2
         #region imageCompress
         /**/
         /// <summary>
-        /// 图片压缩函数
+        /// 圖片壓縮函數
         /// </summary>
-        /// <param name="sourceFile">原始图片文件</param>
-        /// <param name="quality">质量压缩比</param>
-        /// <param name="ouputFile">输出文件名,请用 .jpg 后缀 </param>
-        /// <returns>成功返回true，失败则返回false</returns>
+        /// <param name="sourceFile">原始圖片文件</param>
+        /// <param name="quality">質量壓縮比</param>
+        /// <param name="ouputFile">輸出文件名,請用 .jpg 后綴 </param>
+        /// <returns>成功返回true，失敗則返回false</returns>
         public static bool imageCompress(String sourceFile, long quality, String outputFile)
         {
             try
@@ -140,13 +139,13 @@ namespace image_test2
         #region getThumImage
         /**/
         /// <summary>
-        /// 生成缩略图
+        /// 生成縮略圖
         /// </summary>
-        /// <param name="sourceFile">原始图片文件</param>
-        /// <param name="quality">质量压缩比</param>
-        /// <param name="multiple">收缩倍数</param>
-        /// <param name="outputFile">输出文件名</param>
-        /// <returns>成功返回true,失败则返回false</returns>
+        /// <param name="sourceFile">原始圖片文件</param>
+        /// <param name="quality">質量壓縮比</param>
+        /// <param name="multiple">收縮倍數</param>
+        /// <param name="outputFile">輸出文件名</param>
+        /// <returns>成功返回true,失敗則返回false</returns>
         public static bool getThumImage(String sourceFile, long quality, int multiple, String outputFile)
         {
             try
@@ -179,7 +178,7 @@ namespace image_test2
         #region ImageCodecInfo
         /**/
         /// <summary>
-        /// 获取图片编码信息
+        /// 獲取圖片編碼信息
         /// </summary>
         private static ImageCodecInfo GetEncoderInfo(String mimeType)
         {
@@ -207,7 +206,13 @@ namespace image_test2
         private void button0_Click(object sender, EventArgs e)
         {
             //圖片切割
-
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename2 = Application.StartupPath + "\\cut_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            bool result = imageCut(filename1, 2, 2, 100, filename2);
+            if (result == true)
+                richTextBox1.Text += "OK\n";
+            else
+                richTextBox1.Text += "FAIL\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -397,6 +402,62 @@ namespace image_test2
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //改變圖片品質
+
+
+            VaryQualityLevel();
+
+        }
+
+        private void VaryQualityLevel()
+        {
+            string filename = @"C:\______test_files\elephant.jpg";
+
+            // Get a bitmap.
+            Bitmap bitmap1 = new Bitmap(filename);
+            bitmap1.Save(@"picture_old.jpg", ImageFormat.Jpeg);
+
+            ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+
+            // Create an Encoder object based on the GUID
+            // for the Quality parameter category.
+            Encoder myEncoder = Encoder.Quality;
+
+            // Create an EncoderParameters object.
+            // An EncoderParameters object has an array of EncoderParameter
+            // objects. In this case, there is only one
+            // EncoderParameter object in the array.
+            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+
+            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 50L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            bitmap1.Save(@"TestPhotoQuality050.jpg", jpgEncoder, myEncoderParameters);
+
+            myEncoderParameter = new EncoderParameter(myEncoder, 100L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            bitmap1.Save(@"TestPhotoQuality100.jpg", jpgEncoder, myEncoderParameters);
+
+            // Save the bitmap as a JPG file with zero quality level compression.
+            myEncoderParameter = new EncoderParameter(myEncoder, 0L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            bitmap1.Save(@"TestPhotoQuality000.jpg", jpgEncoder, myEncoderParameters);
+
+            richTextBox1.Text += "完成\n";
+        }
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+
+            return null;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -405,4 +466,3 @@ namespace image_test2
         }
     }
 }
-

@@ -121,9 +121,10 @@ namespace vcs_PictureColor
             pictureBox2.Size = new Size(W, H);
             pictureBox3.Size = new Size(512, 300);
             pictureBox4.Size = new Size(512, 300);
-            pictureBox5.Size = new Size(512, 300);
+            int tt = 290;
+            pictureBox5.Size = new Size(512, 300 - tt);
             groupBox1.Size = new Size(W * 2 - 20, 1080 - 480 - 200 - 150);
-            richTextBox1.Size = new Size(W, 1080 - 480 - 200);
+            richTextBox1.Size = new Size(W, 1080 - 480 - 200 + tt - 140);
 
             x_st = 0;
             y_st = 00;
@@ -137,7 +138,8 @@ namespace vcs_PictureColor
             pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             groupBox1.Location = new Point(x_st + dx * 0 + 10, y_st + dy * 1 + 330);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 330);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 330 - tt);
+            richTextBox1.BringToFront();
 
             //button
             x_st = 20;
@@ -207,6 +209,7 @@ namespace vcs_PictureColor
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_clear.BringToFront();
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -474,6 +477,7 @@ namespace vcs_PictureColor
 
         void measure_brightness(PictureBox pbox1, PictureBox pbox2)
         {
+            richTextBox1.Text += "\n\n圖片 : " + filename + "\n";
             if (pbox1.Image == null)
             {
                 richTextBox1.Text += pbox1.Name + " 無影像, 離開\n";
@@ -902,7 +906,7 @@ namespace vcs_PictureColor
             draw_rgb_data(g2, b_data, Color.Blue);
             draw_rgb_data(g2, g_data, Color.Green);
 
-            pictureBox5.Image = bitmap2;
+            pictureBox2.Image = bitmap2;
         }
 
         void draw_rgb_data(Graphics g, int[] rgb_data, Color c)
@@ -980,7 +984,11 @@ namespace vcs_PictureColor
 
         private void radioButton_CheckedChanged(object sender, EventArgs e)
         {
-            Form1_Load(sender, e);
+            if (((RadioButton)sender).Checked == true)
+            {
+                Form1_Load(sender, e);
+            }
         }
     }
 }
+

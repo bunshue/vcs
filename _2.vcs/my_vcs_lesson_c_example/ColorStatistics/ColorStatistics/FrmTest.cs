@@ -21,6 +21,8 @@ namespace ColorStatistics
 {
     public partial class FrmTest : Form
     {
+        string filename = @"C:\______test_files\ims01.bmp";
+
         List<Statistics.MajorColor> MC;
         int PixelAmount = 0;
 
@@ -31,6 +33,8 @@ namespace ColorStatistics
 
         private void FrmTest_Load(object sender, EventArgs e)
         {
+            pictureBox1.Image = Image.FromFile(filename);
+
             CmdDeal_Click(sender, e);
         }
 
@@ -39,7 +43,7 @@ namespace ColorStatistics
             openFileDialog1.InitialDirectory = @"C:\______test_files\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Thumb.Image = (Bitmap)Bitmap.FromFile(openFileDialog1.FileName);
+                pictureBox1.Image = (Bitmap)Bitmap.FromFile(openFileDialog1.FileName);
             }
         }
 
@@ -62,11 +66,11 @@ namespace ColorStatistics
             {
                 double total = 0;
                 e.Graphics.Clear(PicR.BackColor);
-                Font font = new Font("宋体", 9f);
+                Font font = new Font("宋體", 9f);
                 SolidBrush B = new SolidBrush(Color.Black);
-                e.Graphics.DrawString("      颜色        ", font, B, new PointF(0, 0));
+                e.Graphics.DrawString("      顏色        ", font, B, new PointF(0, 0));
                 e.Graphics.DrawString("     百分比      ", font, B, new PointF(120, 0));
-                e.Graphics.DrawString("数量", font, B, new PointF(250, 0));
+                e.Graphics.DrawString("數量", font, B, new PointF(250, 0));
                 B.Dispose();
                 for (int i = 0; i < MC.Count; i++)
                 {
@@ -86,14 +90,14 @@ namespace ColorStatistics
         private void CmdDeal_Click(object sender, EventArgs e)
         {
 
-            if (Thumb.Image != null)
+            if (pictureBox1.Image != null)
             {
                 Stopwatch Sw = new Stopwatch();
                 Sw.Start();
-                MC = Statistics.PrincipalColorAnalysis((Bitmap)Thumb.Image, SliderColorAmount.Value, SliderDelta.Value);
+                MC = Statistics.PrincipalColorAnalysis((Bitmap)pictureBox1.Image, SliderColorAmount.Value, SliderDelta.Value);
                 Sw.Stop();
-                LblStatus.Text = "计算主成分用时: " + Sw.ElapsedMilliseconds.ToString() + " 毫秒";
-                PixelAmount = Thumb.Image.Width * Thumb.Image.Height;
+                LblStatus.Text = "計算主成分用時: " + Sw.ElapsedMilliseconds.ToString() + " 毫秒";
+                PixelAmount = pictureBox1.Image.Width * pictureBox1.Image.Height;
                 PicR.Refresh();
             }
         }

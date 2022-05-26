@@ -55,6 +55,10 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton0 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button10 = new System.Windows.Forms.Button();
             this.trackBar4 = new System.Windows.Forms.TrackBar();
@@ -71,10 +75,6 @@
             this.lb_v2 = new System.Windows.Forms.Label();
             this.lb_v1 = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton0 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
@@ -337,7 +337,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(1066, 841);
+            this.bt_clear.Location = new System.Drawing.Point(1068, 818);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(69, 32);
             this.bt_clear.TabIndex = 26;
@@ -391,6 +391,52 @@
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             // 
+            // radioButton0
+            // 
+            this.radioButton0.AutoSize = true;
+            this.radioButton0.Checked = true;
+            this.radioButton0.Location = new System.Drawing.Point(340, 163);
+            this.radioButton0.Name = "radioButton0";
+            this.radioButton0.Size = new System.Drawing.Size(61, 16);
+            this.radioButton0.TabIndex = 51;
+            this.radioButton0.TabStop = true;
+            this.radioButton0.Text = "picture0";
+            this.radioButton0.UseVisualStyleBackColor = true;
+            this.radioButton0.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(340, 229);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(61, 16);
+            this.radioButton3.TabIndex = 50;
+            this.radioButton3.Text = "picture3";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(340, 207);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(61, 16);
+            this.radioButton2.TabIndex = 49;
+            this.radioButton2.Text = "picture2";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(340, 185);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(61, 16);
+            this.radioButton1.TabIndex = 48;
+            this.radioButton1.Text = "picture1";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
@@ -408,7 +454,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(80, 40);
             this.button10.TabIndex = 46;
-            this.button10.Text = "顏色統計 pbx1";
+            this.button10.Text = "顏色統計 1->2";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -563,52 +609,6 @@
             this.button8.Text = "恢復";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(340, 185);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(61, 16);
-            this.radioButton1.TabIndex = 48;
-            this.radioButton1.Text = "picture1";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(340, 207);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(61, 16);
-            this.radioButton2.TabIndex = 49;
-            this.radioButton2.Text = "picture2";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(340, 229);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(61, 16);
-            this.radioButton3.TabIndex = 50;
-            this.radioButton3.Text = "picture3";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // radioButton0
-            // 
-            this.radioButton0.AutoSize = true;
-            this.radioButton0.Checked = true;
-            this.radioButton0.Location = new System.Drawing.Point(340, 163);
-            this.radioButton0.Name = "radioButton0";
-            this.radioButton0.Size = new System.Drawing.Size(61, 16);
-            this.radioButton0.TabIndex = 51;
-            this.radioButton0.TabStop = true;
-            this.radioButton0.Text = "picture0";
-            this.radioButton0.UseVisualStyleBackColor = true;
-            this.radioButton0.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // Form1
             // 
