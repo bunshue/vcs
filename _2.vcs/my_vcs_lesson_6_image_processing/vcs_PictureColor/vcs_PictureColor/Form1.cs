@@ -13,6 +13,8 @@ namespace vcs_PictureColor
 {
     public partial class Form1 : Form
     {
+        string filename = string.Empty;
+
         public Point firstPoint = new Point(0, 0);  //鼠標第一點 
         public Point secondPoint = new Point(0, 0);  //鼠標第二點 
         public bool begin = false;   //是否開始畫矩形 
@@ -47,6 +49,17 @@ namespace vcs_PictureColor
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (radioButton0.Checked == true)
+                filename = @"C:\______test_files\ims01.bmp"; //stomach
+            else if (radioButton1.Checked == true)
+                filename = @"C:\______test_files\ims04.bmp"; //normal
+            else if (radioButton2.Checked == true)
+                filename = @"C:\______test_files\ims05.bmp"; //black
+            else if (radioButton3.Checked == true)
+                filename = @"C:\______test_files\ims06.bmp"; //color bar
+            else
+                filename = @"C:\______test_files\ims01.bmp"; //stomach
+
             show_item_location();
 
             if (checkBox1.Checked == true)
@@ -64,7 +77,6 @@ namespace vcs_PictureColor
                 h = 480 - 100;
             }
 
-            string filename = @"C:\______test_files\ims01.bmp";
             pictureBox0.Image = Image.FromFile(filename);
 
             g1 = this.pictureBox0.CreateGraphics();
@@ -155,6 +167,12 @@ namespace vcs_PictureColor
             button8.Location = new Point(x_st + dx * 1 - 20, y_st + dy * 3 + 30);
             button8.BringToFront();
 
+
+            //button6
+            radioButton0.Location = new Point(button6.Location.X, button6.Location.Y + 45);
+            radioButton1.Location = new Point(button6.Location.X, button6.Location.Y + 45 + 18);
+            radioButton2.Location = new Point(button6.Location.X, button6.Location.Y + 45 + 18 * 2);
+            radioButton3.Location = new Point(button6.Location.X, button6.Location.Y + 45 + 18 * 3);
 
             button10.Location = new Point(button7.Location.X + 500, button7.Location.Y);
 
@@ -351,7 +369,7 @@ namespace vcs_PictureColor
                 bitmap1.Clone(cropArea, PixelFormat.Format32bppArgb).Save(filename, ImageFormat.Bmp);
 
                 //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                //bitmap1.Save(filename, ImageFormat.Bmp);
+                bitmap1.Save(filename, ImageFormat.Bmp);
                 //bitmap1.Save(@file3, ImageFormat.Png);
 
                 //richTextBox1.Text += "已存檔 : " + file1 + "\n";
@@ -397,7 +415,6 @@ namespace vcs_PictureColor
         private void button5_Click(object sender, EventArgs e)
         {
             //SetPixel 彩色轉灰階
-            string filename = @"C:\______test_files\ims01.bmp";
             color_to_gray_1(filename);
 
             draw_brightness(pictureBox3);
@@ -516,7 +533,7 @@ namespace vcs_PictureColor
                 if (brightness_data[i] == 0)
                     brightness_data[i] = 5;
             }
-            //richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
+            richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
 
             int ww = 512;
             int hh1 = 300;
@@ -529,7 +546,7 @@ namespace vcs_PictureColor
             double ratio = 0;
             ratio = (double)hh2 / most;
 
-            //richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
+            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
             for (i = 0; i < 256; i++)
             {
@@ -841,7 +858,6 @@ namespace vcs_PictureColor
             }
 
             //顏色統計
-            //string filename = @"C:\______test_files\ims01.bmp";
             richTextBox1.Text += "顏色統計\n";
 
             int[] r_data = new int[256];
@@ -961,6 +977,10 @@ namespace vcs_PictureColor
             nud_h.Value = h;
             flag_no_update_crop_picture = false;
         }
+
+        private void radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            Form1_Load(sender, e);
+        }
     }
 }
-

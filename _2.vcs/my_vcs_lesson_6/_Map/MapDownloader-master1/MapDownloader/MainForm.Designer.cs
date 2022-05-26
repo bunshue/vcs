@@ -152,12 +152,17 @@
             this.button2 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.lb_draw = new System.Windows.Forms.Label();
-            this.lb_info = new System.Windows.Forms.Label();
+            this.lb_info2 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.gMapControl1 = new MapDownloader.MapControl();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.lb_info1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.contextMenuStripSelectedArea.SuspendLayout();
@@ -187,7 +192,7 @@
             this.服务发布ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(440, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(348, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -215,7 +220,7 @@
             this.卫星地图ToolStripMenuItem6,
             this.混合地图ToolStripMenuItem6});
             this.谷歌国外ToolStripMenuItem.Name = "谷歌国外ToolStripMenuItem";
-            this.谷歌国外ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.谷歌国外ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.谷歌国外ToolStripMenuItem.Text = "谷歌";
             // 
             // 普通地图ToolStripMenuItem6
@@ -247,7 +252,7 @@
             this.混合地图ToolStripMenuItem,
             this.地形图ToolStripMenuItem});
             this.谷歌ToolStripMenuItem.Name = "谷歌ToolStripMenuItem";
-            this.谷歌ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.谷歌ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.谷歌ToolStripMenuItem.Text = "谷歌（中国）";
             // 
             // 普通地图ToolStripMenuItem
@@ -285,7 +290,7 @@
             this.卫星地图ToolStripMenuItem1,
             this.混合地图ToolStripMenuItem1});
             this.百度ToolStripMenuItem.Name = "百度ToolStripMenuItem";
-            this.百度ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.百度ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.百度ToolStripMenuItem.Text = "百度";
             // 
             // 普通地图ToolStripMenuItem1
@@ -316,7 +321,7 @@
             this.卫星地图ToolStripMenuItem2,
             this.混合地图ToolStripMenuItem2});
             this.高德ToolStripMenuItem.Name = "高德ToolStripMenuItem";
-            this.高德ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.高德ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.高德ToolStripMenuItem.Text = "高德";
             // 
             // 普通地图ToolStripMenuItem2
@@ -348,7 +353,7 @@
             this.混合地图ToolStripMenuItem3,
             this.地形地图ToolStripMenuItem});
             this.腾讯ToolStripMenuItem.Name = "腾讯ToolStripMenuItem";
-            this.腾讯ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.腾讯ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.腾讯ToolStripMenuItem.Text = "腾讯";
             // 
             // 普通地图ToolStripMenuItem3
@@ -386,7 +391,7 @@
             this.卫星地图ToolStripMenuItem4,
             this.混合地图ToolStripMenuItem4});
             this.hereToolStripMenuItem.Name = "hereToolStripMenuItem";
-            this.hereToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hereToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.hereToolStripMenuItem.Text = "Here";
             // 
             // 普通地图ToolStripMenuItem4
@@ -418,7 +423,7 @@
             this.混合地图ToolStripMenuItem5,
             this.普通地图中文ToolStripMenuItem});
             this.必应ToolStripMenuItem.Name = "必应ToolStripMenuItem";
-            this.必应ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.必应ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.必应ToolStripMenuItem.Text = "必应";
             // 
             // 普通地图ToolStripMenuItem5
@@ -462,7 +467,7 @@
             this.福建卫星地图ToolStripMenuItem,
             this.福建混合地图ToolStripMenuItem});
             this.天地图ToolStripMenuItem.Name = "天地图ToolStripMenuItem";
-            this.天地图ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.天地图ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.天地图ToolStripMenuItem.Text = "天地图";
             // 
             // 街道地图球面墨卡托ToolStripMenuItem
@@ -538,7 +543,7 @@
             this.arcGIS街道地图暖色版ToolStripMenuItem,
             this.arcGIS卫星地图无偏移ToolStripMenuItem});
             this.arcGISToolStripMenuItem.Name = "arcGISToolStripMenuItem";
-            this.arcGISToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.arcGISToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.arcGISToolStripMenuItem.Text = "ArcGIS";
             // 
             // arcGIS街道地图ToolStripMenuItem
@@ -588,7 +593,7 @@
             this.船舶信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.船舶ToolStripMenuItem});
             this.船舶信息ToolStripMenuItem.Name = "船舶信息ToolStripMenuItem";
-            this.船舶信息ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.船舶信息ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.船舶信息ToolStripMenuItem.Text = "船舶信息";
             // 
             // 船舶ToolStripMenuItem
@@ -1155,6 +1160,7 @@
             this.buttonMapImage.TabIndex = 4;
             this.buttonMapImage.Text = "拼接图";
             this.buttonMapImage.UseVisualStyleBackColor = true;
+            this.buttonMapImage.Click += new System.EventHandler(this.buttonMapImage_Click);
             // 
             // textBoxImageZoom
             // 
@@ -1237,9 +1243,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(935, 156);
+            this.button1.Location = new System.Drawing.Point(911, 74);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(120, 40);
             this.button1.TabIndex = 14;
             this.button1.Text = "代理設置";
             this.button1.UseVisualStyleBackColor = true;
@@ -1247,9 +1253,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(935, 185);
+            this.button2.Location = new System.Drawing.Point(911, 118);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(120, 40);
             this.button2.TabIndex = 15;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
@@ -1268,26 +1274,26 @@
             // lb_draw
             // 
             this.lb_draw.AutoSize = true;
-            this.lb_draw.Location = new System.Drawing.Point(933, 308);
+            this.lb_draw.Location = new System.Drawing.Point(933, 462);
             this.lb_draw.Name = "lb_draw";
             this.lb_draw.Size = new System.Drawing.Size(33, 12);
             this.lb_draw.TabIndex = 17;
             this.lb_draw.Text = "label2";
             // 
-            // lb_info
+            // lb_info2
             // 
-            this.lb_info.AutoSize = true;
-            this.lb_info.Location = new System.Drawing.Point(933, 333);
-            this.lb_info.Name = "lb_info";
-            this.lb_info.Size = new System.Drawing.Size(33, 12);
-            this.lb_info.TabIndex = 18;
-            this.lb_info.Text = "label2";
+            this.lb_info2.AutoSize = true;
+            this.lb_info2.Location = new System.Drawing.Point(933, 535);
+            this.lb_info2.Name = "lb_info2";
+            this.lb_info2.Size = new System.Drawing.Size(33, 12);
+            this.lb_info2.TabIndex = 18;
+            this.lb_info2.Text = "label2";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(935, 214);
+            this.button3.Location = new System.Drawing.Point(911, 160);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(120, 40);
             this.button3.TabIndex = 19;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
@@ -1295,9 +1301,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(935, 240);
+            this.button4.Location = new System.Drawing.Point(911, 199);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(120, 40);
             this.button4.TabIndex = 20;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
@@ -1305,9 +1311,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(935, 269);
+            this.button5.Location = new System.Drawing.Point(911, 239);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(120, 40);
             this.button5.TabIndex = 21;
             this.button5.Text = "地址解析";
             this.button5.UseVisualStyleBackColor = true;
@@ -1315,9 +1321,9 @@
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(935, 127);
+            this.button0.Location = new System.Drawing.Point(911, 32);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(75, 23);
+            this.button0.Size = new System.Drawing.Size(120, 40);
             this.button0.TabIndex = 22;
             this.button0.Text = "button0";
             this.button0.UseVisualStyleBackColor = true;
@@ -1350,18 +1356,68 @@
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(911, 279);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(120, 40);
+            this.button6.TabIndex = 23;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(911, 319);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(120, 40);
+            this.button7.TabIndex = 24;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(911, 364);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(120, 40);
+            this.button8.TabIndex = 25;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(911, 407);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(120, 40);
+            this.button9.TabIndex = 25;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // lb_info1
+            // 
+            this.lb_info1.AutoSize = true;
+            this.lb_info1.Location = new System.Drawing.Point(933, 496);
+            this.lb_info1.Name = "lb_info1";
+            this.lb_info1.Size = new System.Drawing.Size(33, 12);
+            this.lb_info1.TabIndex = 26;
+            this.lb_info1.Text = "label2";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1408, 700);
+            this.Controls.Add(this.lb_info1);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.gMapControl1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.lb_info);
+            this.Controls.Add(this.lb_info2);
             this.Controls.Add(this.lb_draw);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button2);
@@ -1526,11 +1582,16 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Label lb_draw;
-        private System.Windows.Forms.Label lb_info;
+        private System.Windows.Forms.Label lb_info2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Label lb_info1;
     }
 }
 
