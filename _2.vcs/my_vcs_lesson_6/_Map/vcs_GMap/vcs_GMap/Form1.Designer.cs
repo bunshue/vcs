@@ -303,6 +303,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(100, 45);
             this.button8.TabIndex = 9;
+            this.button8.Text = "經緯度度分秒轉換";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 

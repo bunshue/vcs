@@ -1270,6 +1270,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(110, 45);
             this.button6.TabIndex = 22;
+            this.button6.Text = "從 恭王府 天安門 1";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -1279,6 +1280,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(110, 45);
             this.button7.TabIndex = 23;
+            this.button7.Text = "從 恭王府 天安門 2";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 

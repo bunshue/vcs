@@ -1451,17 +1451,39 @@ namespace vcs_GMap
             gMapControl1.Refresh();
         }
 
+
+
         private void button8_Click(object sender, EventArgs e)
         {
-            //tmp
-            gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
-            //竹北座標 義民中學 24.83907276107702, 121.00421169156141
-            latitude = 24.839;   //緯度
-            longitude = 121.004; //經度
-            gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-            gMapControl1.Zoom = 14; //當前比例
+            //經緯度度分秒轉換
+            //由X度Y分Z秒換成a.bcde度
 
-            update_controls_info();
+            double lat_degrees = 0;
+            double lat_minutes = 0;
+            double lat_seconds = 0;
+            double long_degrees = 0;
+            double long_minutes = 0;
+            double long_seconds = 0;
+
+            //新竹火車站 24°48′7.38″N 120°58′18.54″E
+            //新竹火車站 24.80205, 120.971817
+
+            lat_degrees = 24;
+            lat_minutes = 48;
+            lat_seconds = 7.38;
+            long_degrees = 120;
+            long_minutes = 58;
+            long_seconds = 18.54;
+
+            double Latitude = lat_degrees + lat_minutes / 60 + lat_seconds / 3600;
+            double Longitude = long_degrees + long_minutes / 60 + long_seconds / 3600;
+
+            //小數點語法
+            richTextBox1.Text += "北緯 : " + Latitude.ToString("0.0000") + "\t東經 : " + Longitude.ToString("0.0000") + "\n";
+
+           
+            //txtLatitudeFrom.Text = city.Latitude.ToString("0.0000");
+            //txtLongitudeFrom.Text = city.Longitude.ToString("0.0000");
 
         }
 
@@ -4143,5 +4165,6 @@ namespace vcs_GMap
             this.StreetNumber = oth.StreetNumber;
         }
     }
+
 }
 

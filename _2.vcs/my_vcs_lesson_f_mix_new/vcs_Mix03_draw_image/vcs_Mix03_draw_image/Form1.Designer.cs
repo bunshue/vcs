@@ -156,6 +156,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(170, 70);
             this.button21.TabIndex = 108;
+            this.button21.Text = "檢視圖片的像素";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -378,6 +379,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(170, 70);
             this.button3.TabIndex = 87;
+            this.button3.Text = "圖片剪下一塊存檔 另法";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -388,6 +390,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(170, 70);
             this.button2.TabIndex = 86;
+            this.button2.Text = "圖片剪下一塊存檔";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

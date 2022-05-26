@@ -2070,11 +2070,74 @@ namespace MapDownloader
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //從 恭王府 天安門
+
+            PointLatLng p1 = new PointLatLng(39.9422, 116.3927);    //恭王府
+            PointLatLng p2 = new PointLatLng(39.9142, 116.4039);    //天安門
+
+            /* 從地圖坐標找起
+            int x = 200;
+            int y = 200;
+
+            routeStartPoint = this.gMapControl1.FromLocalToLatLng(x, y);
+
+            x = 400;
+            y = 400;
+            routeEndPoint = this.gMapControl1.FromLocalToLatLng(x, y);
+            */
+
+            routeStartPoint = p1;
+            routeEndPoint = p2;
+
+            GMapImageMarker marker = new GMapImageMarker(routeEndPoint, Properties.Resources.MapMarker_Bubble_Chartreuse);
+            this.routeOverlay.Markers.Add(marker);
+
+            if (routeStartPoint != PointLatLng.Empty)
+            {
+                MapRoute route = GMapProvidersExt.AMap.AMapProvider.Instance.GetRoute(routeStartPoint, routeEndPoint, currentCenterCityName);
+
+                GMapRoute mapRoute = new GMapRoute(route.Points, "");
+                if (mapRoute != null)
+                {
+                    this.routeOverlay.Routes.Add(mapRoute);
+                    this.gMapControl1.ZoomAndCenterRoute(mapRoute);
+                }
+            }
 
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            PointLatLng p1 = new PointLatLng(39.9422, 116.3927);    //恭王府
+            PointLatLng p2 = new PointLatLng(39.9142, 116.4039);    //天安門
+
+            RoutingProvider rp = gMapControl1.MapProvider as RoutingProvider;
+            //獲取路徑
+            //根據起止點經緯度查找路徑
+            //MapRoute GetRoute(PointLatLng start, PointLatLng end, bool avoidHighways, bool walkingMode, int Zoom);
+            //根據起止點地址查找路徑
+            //MapRoute GetRoute(string start, string end, bool avoidHighways, bool walkingMode, int Zoom);
+            //avoidHighways：是否避免走高速公路
+            //walkingMode：是否步行
+            //zoom：查找路徑時的zoom
+
+            //MapRoute route = rp.GetRoute(p1, p2, false, false, (int)gMapControl1.Zoom);
+            MapRoute route = GMapProvidersExt.AMap.AMapProvider.Instance.GetRoute(p1, p2, currentCenterCityName);
+            if (route != null)
+            {
+                //添加routes圖層
+                GMapOverlay routes = new GMapOverlay("routes");
+                GMapRoute r = new GMapRoute(route.Points, route.Name);
+                r.Stroke = new Pen(Color.Red, 3);   //連線顏色與大小
+                routes.Routes.Add(r);
+                //添加到地圖
+                gMapControl1.Overlays.Add(routes);
+                gMapControl1.ZoomAndCenterRoute(r);
+            }
+            else
+            {
+                MessageBox.Show("未能找到路線");
+            }
 
         }
 

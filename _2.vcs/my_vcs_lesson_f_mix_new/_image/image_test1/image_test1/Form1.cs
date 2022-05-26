@@ -76,119 +76,11 @@ namespace image_test1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //圖片剪下一塊存檔
-            string filename1 = @"C:\______test_files\picture1.jpg";
-            string filename2 = @"C:\______test_files\picture1_cut.jpg";
-
-            ImgReduceCutOut(200, 200, filename1, filename2);
         }
 
-        //C# 圖片裁剪代碼，
-        /// <summary>
-        /// 縮小裁剪圖片
-        /// </summary>
-        /// <param name="int_Width">要縮小裁剪圖片寬度</param>
-        /// <param name="int_Height">要縮小裁剪圖片長度</param>
-        /// <param name="filename_old">要處理圖片路徑</param>
-        /// <param name="filename_new">處理完畢圖片路徑</param>
-        public void ImgReduceCutOut(int int_Width, int int_Height, string filename_old, string filename_new)
-        {
-            // ＝＝＝上傳標准圖大小＝＝＝
-            int int_Standard_Width = 160;
-            int int_Standard_Height = 160;
-
-            int Reduce_Width = 0; // 縮小的寬度
-            int Reduce_Height = 0; // 縮小的高度
-            int CutOut_Width = 0; // 裁剪的寬度
-            int CutOut_Height = 0; // 裁剪的高度
-            int level = 100; //縮略圖的質量 1-100的范圍
-
-            // ＝＝＝獲得縮小，裁剪大小＝＝＝
-            if (int_Standard_Height * int_Width / int_Standard_Width > int_Height)
-            {
-                Reduce_Width = int_Width;
-                Reduce_Height = int_Standard_Height * int_Width / int_Standard_Width;
-                CutOut_Width = int_Width;
-                CutOut_Height = int_Height;
-            }
-            else if (int_Standard_Height * int_Width / int_Standard_Width < int_Height)
-            {
-                Reduce_Width = int_Standard_Width * int_Height / int_Standard_Height;
-                Reduce_Height = int_Height;
-                CutOut_Width = int_Width;
-                CutOut_Height = int_Height;
-            }
-            else
-            {
-                Reduce_Width = int_Width;
-                Reduce_Height = int_Height;
-                CutOut_Width = int_Width;
-                CutOut_Height = int_Height;
-            }
-
-            // ＝＝＝通過連接創建Image對象＝＝＝
-            Image oldimage = Image.FromFile(filename_old);
-
-            // ＝＝＝縮小圖片＝＝＝
-            Image thumbnailImage = oldimage.GetThumbnailImage(Reduce_Width, Reduce_Height, new Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
-            Bitmap bm = new Bitmap(thumbnailImage);
-
-            // ＝＝＝處理JPG質量的函數＝＝＝
-            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
-            ImageCodecInfo ici = null;
-            foreach (ImageCodecInfo codec in codecs)
-            {
-                if (codec.MimeType == "image/jpeg")
-                    ici = codec;
-            }
-            EncoderParameters ep = new EncoderParameters();
-
-            //Encoder myEncoder = Encoder.Quality;
-
-            // Create an Encoder object based on the GUID  
-            // for the Quality parameter category.  
-            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-
-            ep.Param[0] = new EncoderParameter(myEncoder, (long)level);
-
-            //bm.Save(Server.MapPath("2.jpg"), ici, ep);
-
-            // ＝＝＝裁剪圖片＝＝＝
-            Rectangle cloneRect = new Rectangle(0, 0, CutOut_Width, CutOut_Height);
-            PixelFormat format = bm.PixelFormat;
-            Bitmap cloneBitmap = bm.Clone(cloneRect, format);
-
-            // ＝＝＝保存圖片＝＝＝
-            cloneBitmap.Save(filename_new, ici, ep);
-        }
-
-        public bool ThumbnailCallback()
-        {
-            return true;
-        }
-
-        private void GetThumbnail(PaintEventArgs e)
-        {
-            Image.GetThumbnailImageAbort callback =
-                new Image.GetThumbnailImageAbort(ThumbnailCallback);
-            Image image = new Bitmap(@"c:\dddddddddd\FakePhoto.jpg");
-            Image pThumbnail = image.GetThumbnailImage(100, 100, callback, new
-               IntPtr());
-            e.Graphics.DrawImage(
-               pThumbnail,
-               10,
-               10,
-               pThumbnail.Width,
-               pThumbnail.Height);
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //檢視圖片的像素
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            Image image = Image.FromFile(filename);
-            richTextBox1.Text += "檔案 : " + filename + ",\t" + "圖片像素：[" + image.Width + "*" + image.Height + "]" + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -369,38 +261,8 @@ namespace image_test1
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //圖片剪下一塊存檔 另法
-            string filename1 = @"C:\______test_files\picture1.jpg";
-            string filename2 = @"C:\______test_files\picture1_cut.jpg";
 
-            pictureBox1.Image = CutForCustomx(filename1, 150, 150);
-            pictureBox1.Image.Save(filename2);
         }
-
-        public static Image CutForCustomx(string imgPath, int top, int height)
-        {
-            FileStream fs = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
-            //從文件獲取原始圖片，並使用流中嵌入的顏色管理信息
-            System.Drawing.Image initImage = System.Drawing.Image.FromStream(fs, true);
-
-            Bitmap b = new Bitmap(initImage);
-
-            Bitmap img = b.Clone(new Rectangle(0, top, initImage.Width, height), System.Drawing.Imaging.PixelFormat.DontCare);
-            return (Image)(img);
-        }
-
-        public static Image CutForCustomx(string imgPath, Rectangle rec)
-        {
-            FileStream fs = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
-            //從文件獲取原始圖片，並使用流中嵌入的顏色管理信息
-            System.Drawing.Image initImage = System.Drawing.Image.FromStream(fs, true);
-
-            Bitmap b = new Bitmap(initImage);
-
-            Bitmap img = b.Clone(rec, System.Drawing.Imaging.PixelFormat.DontCare);
-            return (Image)(img);
-        }
-
         private void button14_Click(object sender, EventArgs e)
         {
 
