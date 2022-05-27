@@ -3564,6 +3564,7 @@ namespace vcs_GMap
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
             string filename = @"C:\______test_files\__RW\_xml\kml_mountain.kml";
+            //string filename = @"C:\______test_files\__RW\_xml\kml_shangxi.kml"; //陝西省
 
             GMapRoute playRoute = GetRouteFromKml(filename);
 
